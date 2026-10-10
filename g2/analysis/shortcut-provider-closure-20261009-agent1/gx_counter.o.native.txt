@@ -1,0 +1,435 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/gx_counter.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_timer_us_isr:
+
+00000000 <gx_timer_us_isr>:
+   0:	14d0      	push      	r15
+   2:	1068      	lrw      	r3, 0x0	// 20 <gx_timer_us_isr+0x20>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e9030004 	bez      	r3, 0xe	// e <gx_timer_us_isr+0xe>
+   a:	3000      	movi      	r0, 0
+   c:	7bcd      	jsr      	r3
+   e:	ea22a040 	movih      	r2, 41024
+  12:	3aa7      	bseti      	r2, 7
+  14:	3000      	movi      	r0, 0
+  16:	9270      	ld.w      	r3, (r2, 0x40)
+  18:	ec630001 	ori      	r3, r3, 1
+  1c:	b270      	st.w      	r3, (r2, 0x40)
+  1e:	1490      	pop      	r15
+  20:	00000000 	.long	0x00000000
+			20: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text._delay_init:
+
+00000000 <_delay_init>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	ea24a040 	movih      	r4, 41024
+   6:	3301      	movi      	r3, 1
+   8:	3500      	movi      	r5, 0
+   a:	b474      	st.w      	r3, (r4, 0x50)
+   c:	3017      	movi      	r0, 23
+   e:	b4b4      	st.w      	r5, (r4, 0x50)
+  10:	b478      	st.w      	r3, (r4, 0x60)
+  12:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			12: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+  16:	ea03f424 	movi      	r3, 62500
+  1a:	c4834903 	rotli      	r3, r3, 4
+  1e:	c4608020 	divu      	r0, r0, r3
+  22:	2800      	subi      	r0, 1
+  24:	3302      	movi      	r3, 2
+  26:	b419      	st.w      	r0, (r4, 0x64)
+  28:	b4ba      	st.w      	r5, (r4, 0x68)
+  2a:	b474      	st.w      	r3, (r4, 0x50)
+  2c:	1492      	pop      	r4-r5, r15
+
+Disassembly of section .text.gx_timer_unregister:
+
+00000000 <gx_timer_unregister>:
+   0:	380a      	cmphsi      	r0, 11
+   2:	0808      	bt      	0x12	// 12 <gx_timer_unregister+0x12>
+   4:	3324      	movi      	r3, 36
+   6:	7c0c      	mult      	r0, r3
+   8:	1064      	lrw      	r3, 0x0	// 18 <gx_timer_unregister+0x18>
+   a:	60c0      	addu      	r3, r0
+   c:	3000      	movi      	r0, 0
+   e:	b307      	st.w      	r0, (r3, 0x1c)
+  10:	783c      	jmp      	r15
+  12:	3000      	movi      	r0, 0
+  14:	2800      	subi      	r0, 1
+  16:	07fd      	br      	0x10	// 10 <gx_timer_unregister+0x10>
+  18:	00000000 	.long	0x00000000
+			18: R_CKCORE_ADDR32	.bss+0x4
+
+Disassembly of section .text.gx_get_cpu_cycles:
+
+00000000 <gx_get_cpu_cycles>:
+   0:	1423      	subi      	r14, r14, 12
+   2:	ea23a040 	movih      	r3, 41024
+   6:	3ba7      	bseti      	r3, 7
+   8:	9341      	ld.w      	r2, (r3, 0x4)
+   a:	b840      	st.w      	r2, (r14, 0x0)
+   c:	9322      	ld.w      	r1, (r3, 0x8)
+   e:	6c87      	mov      	r2, r1
+  10:	3300      	movi      	r3, 0
+  12:	b841      	st.w      	r2, (r14, 0x4)
+  14:	b862      	st.w      	r3, (r14, 0x8)
+  16:	9801      	ld.w      	r0, (r14, 0x4)
+  18:	9822      	ld.w      	r1, (r14, 0x8)
+  1a:	9840      	ld.w      	r2, (r14, 0x0)
+  1c:	6f43      	mov      	r13, r0
+  1e:	6f0f      	mov      	r12, r3
+  20:	6c0b      	mov      	r0, r2
+  22:	6c4f      	mov      	r1, r3
+  24:	6c30      	or      	r0, r12
+  26:	6c74      	or      	r1, r13
+  28:	1403      	addi      	r14, r14, 12
+  2a:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_timer_init:
+
+00000000 <gx_timer_init>:
+   0:	14d4      	push      	r4-r7, r15
+   2:	ea25a040 	movih      	r5, 41024
+   6:	3101      	movi      	r1, 1
+   8:	3017      	movi      	r0, 23
+   a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   e:	3400      	movi      	r4, 0
+  10:	3601      	movi      	r6, 1
+  12:	3303      	movi      	r3, 3
+  14:	b5c4      	st.w      	r6, (r5, 0x10)
+  16:	3017      	movi      	r0, 23
+  18:	b584      	st.w      	r4, (r5, 0x10)
+  1a:	b568      	st.w      	r3, (r5, 0x20)
+  1c:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			1c: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+  20:	ea03f424 	movi      	r3, 62500
+  24:	c4834903 	rotli      	r3, r3, 4
+  28:	c4608020 	divu      	r0, r0, r3
+  2c:	3702      	movi      	r7, 2
+  2e:	ea0303e7 	movi      	r3, 999
+  32:	6cce      	nor      	r3, r3
+  34:	2800      	subi      	r0, 1
+  36:	32b4      	movi      	r2, 180
+  38:	b509      	st.w      	r0, (r5, 0x24)
+  3a:	7098      	lsl      	r2, r6
+  3c:	b56a      	st.w      	r3, (r5, 0x28)
+  3e:	6c53      	mov      	r1, r4
+  40:	b5e4      	st.w      	r7, (r5, 0x10)
+  42:	100b      	lrw      	r0, 0x0	// 6c <gx_timer_init+0x6c>
+  44:	e0000000 	bsr      	0x0	// 0 <memset>
+			44: R_CKCORE_PCREL_IMM26BY2	memset
+  48:	6c93      	mov      	r2, r4
+  4a:	102a      	lrw      	r1, 0x0	// 70 <gx_timer_init+0x70>
+  4c:	300e      	movi      	r0, 14
+  4e:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			4e: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  52:	e0000000 	bsr      	0x0	// 0 <gx_timer_init>
+			52: R_CKCORE_PCREL_IMM26BY2	_delay_init
+  56:	ea23a040 	movih      	r3, 41024
+  5a:	3ba7      	bseti      	r3, 7
+  5c:	b3c4      	st.w      	r6, (r3, 0x10)
+  5e:	b384      	st.w      	r4, (r3, 0x10)
+  60:	b3c8      	st.w      	r6, (r3, 0x20)
+  62:	b389      	st.w      	r4, (r3, 0x24)
+  64:	b38a      	st.w      	r4, (r3, 0x28)
+  66:	b3e4      	st.w      	r7, (r3, 0x10)
+  68:	1494      	pop      	r4-r7, r15
+	...
+			6c: R_CKCORE_ADDR32	.bss+0x4
+			70: R_CKCORE_ADDR32	.text.gx_timer_isr
+
+Disassembly of section .text.gx_delay_init:
+
+00000000 <gx_delay_init>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_delay_init>
+			2: R_CKCORE_PCREL_IMM26BY2	_delay_init
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.gx_get_time_us:
+
+00000000 <gx_get_time_us>:
+   0:	14d0      	push      	r15
+   2:	1425      	subi      	r14, r14, 20
+   4:	ea23a040 	movih      	r3, 41024
+   8:	ea0d0000 	movi      	r13, 0
+   c:	9351      	ld.w      	r2, (r3, 0x44)
+   e:	b840      	st.w      	r2, (r14, 0x0)
+  10:	9372      	ld.w      	r3, (r3, 0x48)
+  12:	6f0f      	mov      	r12, r3
+  14:	dd8e2003 	st.w      	r12, (r14, 0xc)
+  18:	ddae2004 	st.w      	r13, (r14, 0x10)
+  1c:	9803      	ld.w      	r0, (r14, 0xc)
+  1e:	9824      	ld.w      	r1, (r14, 0x10)
+  20:	d98e2000 	ld.w      	r12, (r14, 0x0)
+  24:	6cc3      	mov      	r3, r0
+  26:	6cb7      	mov      	r2, r13
+  28:	6c33      	mov      	r0, r12
+  2a:	6c77      	mov      	r1, r13
+  2c:	ea0c00fa 	movi      	r12, 250
+  30:	6c08      	or      	r0, r2
+  32:	6c4c      	or      	r1, r3
+  34:	c44c482c 	lsli      	r12, r12, 2
+  38:	f9808002 	mul.u32      	r2, r0, r12
+  3c:	6f4f      	mov      	r13, r3
+  3e:	f82c844d 	mula.32.l      	r13, r12, r1
+  42:	6cf7      	mov      	r3, r13
+  44:	b841      	st.w      	r2, (r14, 0x4)
+  46:	b862      	st.w      	r3, (r14, 0x8)
+  48:	e92d000a 	bnez      	r13, 0x5c	// 5c <gx_get_time_us+0x5c>
+  4c:	4a4a      	lsri      	r2, r2, 10
+  4e:	b841      	st.w      	r2, (r14, 0x4)
+  50:	ddae2002 	st.w      	r13, (r14, 0x8)
+  54:	9801      	ld.w      	r0, (r14, 0x4)
+  56:	9822      	ld.w      	r1, (r14, 0x8)
+  58:	1405      	addi      	r14, r14, 20
+  5a:	1490      	pop      	r15
+  5c:	3180      	movi      	r1, 128
+  5e:	4123      	lsli      	r1, r1, 3
+  60:	1801      	addi      	r0, r14, 4
+  62:	e0000000 	bsr      	0x0	// 0 <__div64_32>
+			62: R_CKCORE_PCREL_IMM26BY2	__div64_32
+  66:	07f7      	br      	0x54	// 54 <gx_get_time_us+0x54>
+
+Disassembly of section .text.gx_timer_register:
+
+00000000 <gx_timer_register>:
+   0:	14d5      	push      	r4-r8, r15
+   2:	6d87      	mov      	r6, r1
+   4:	3100      	movi      	r1, 0
+   6:	6dcb      	mov      	r7, r2
+   8:	6e0f      	mov      	r8, r3
+   a:	6d47      	mov      	r5, r1
+   c:	1099      	lrw      	r4, 0x0	// 70 <gx_timer_register+0x70>
+   e:	ea0c000a 	movi      	r12, 10
+  12:	5c64      	addu      	r3, r4, r1
+  14:	9367      	ld.w      	r3, (r3, 0x1c)
+  16:	e9230023 	bnez      	r3, 0x5c	// 5c <gx_timer_register+0x5c>
+  1a:	3124      	movi      	r1, 36
+  1c:	7c54      	mult      	r1, r5
+  1e:	d4810820 	str.w      	r0, (r1, r4 << 0)
+  22:	6104      	addu      	r4, r1
+  24:	b4c2      	st.w      	r6, (r4, 0x8)
+  26:	e0000000 	bsr      	0x0	// 0 <gx_timer_register>
+			26: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+  2a:	c4004832 	lsli      	r18, r0, 0
+  2e:	c4014833 	lsli      	r19, r1, 0
+  32:	b403      	st.w      	r0, (r4, 0xc)
+  34:	b424      	st.w      	r1, (r4, 0x10)
+  36:	31fa      	movi      	r1, 250
+  38:	4122      	lsli      	r1, r1, 2
+  3a:	c426842c 	mult      	r12, r6, r1
+  3e:	c7ec488d 	asri      	r13, r12, 31
+  42:	fa4cc06c 	add.64      	r12, r12, r18
+  46:	3301      	movi      	r3, 1
+  48:	dd842005 	st.w      	r12, (r4, 0x14)
+  4c:	dda42006 	st.w      	r13, (r4, 0x18)
+  50:	b4e1      	st.w      	r7, (r4, 0x4)
+  52:	dd042008 	st.w      	r8, (r4, 0x20)
+  56:	b467      	st.w      	r3, (r4, 0x1c)
+  58:	6c17      	mov      	r0, r5
+  5a:	1495      	pop      	r4-r8, r15
+  5c:	2500      	addi      	r5, 1
+  5e:	2123      	addi      	r1, 36
+  60:	e82cffd9 	bnezad      	r12, 0x12	// 12 <gx_timer_register+0x12>
+  64:	1004      	lrw      	r0, 0x0	// 74 <gx_timer_register+0x74>
+  66:	3500      	movi      	r5, 0
+  68:	e0000000 	bsr      	0x0	// 0 <printf_>
+			68: R_CKCORE_PCREL_IMM26BY2	printf_
+  6c:	2d00      	subi      	r5, 1
+  6e:	07f5      	br      	0x58	// 58 <gx_timer_register+0x58>
+	...
+			70: R_CKCORE_ADDR32	.bss+0x4
+			74: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_timer_isr:
+
+00000000 <gx_timer_isr>:
+   0:	14d7      	push      	r4-r10, r15
+   2:	ea0a00fa 	movi      	r10, 250
+   6:	1099      	lrw      	r4, 0x0	// 68 <gx_timer_isr+0x68>
+   8:	3500      	movi      	r5, 0
+   a:	c44a482a 	lsli      	r10, r10, 2
+   e:	9467      	ld.w      	r3, (r4, 0x1c)
+  10:	e9030020 	bez      	r3, 0x50	// 50 <gx_timer_isr+0x50>
+  14:	e0000000 	bsr      	0x0	// 0 <gx_timer_isr>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+  18:	6d83      	mov      	r6, r0
+  1a:	6dc7      	mov      	r7, r1
+  1c:	9466      	ld.w      	r3, (r4, 0x18)
+  1e:	64dc      	cmphs      	r7, r3
+  20:	0c18      	bf      	0x50	// 50 <gx_timer_isr+0x50>
+  22:	65ce      	cmpne      	r3, r7
+  24:	0804      	bt      	0x2c	// 2c <gx_timer_isr+0x2c>
+  26:	9465      	ld.w      	r3, (r4, 0x14)
+  28:	64c0      	cmphs      	r0, r3
+  2a:	0c13      	bf      	0x50	// 50 <gx_timer_isr+0x50>
+  2c:	9460      	ld.w      	r3, (r4, 0x0)
+  2e:	9401      	ld.w      	r0, (r4, 0x4)
+  30:	7bcd      	jsr      	r3
+  32:	9462      	ld.w      	r3, (r4, 0x8)
+  34:	c5438428 	mult      	r8, r3, r10
+  38:	c7e84889 	asri      	r9, r8, 31
+  3c:	9468      	ld.w      	r3, (r4, 0x20)
+  3e:	b4c3      	st.w      	r6, (r4, 0xc)
+  40:	b4e4      	st.w      	r7, (r4, 0x10)
+  42:	f8c8c066 	add.64      	r6, r8, r6
+  46:	b4c5      	st.w      	r6, (r4, 0x14)
+  48:	b4e6      	st.w      	r7, (r4, 0x18)
+  4a:	e9230003 	bnez      	r3, 0x50	// 50 <gx_timer_isr+0x50>
+  4e:	b467      	st.w      	r3, (r4, 0x1c)
+  50:	2500      	addi      	r5, 1
+  52:	3d4a      	cmpnei      	r5, 10
+  54:	2423      	addi      	r4, 36
+  56:	0bdc      	bt      	0xe	// e <gx_timer_isr+0xe>
+  58:	ea22a040 	movih      	r2, 41024
+  5c:	3000      	movi      	r0, 0
+  5e:	9260      	ld.w      	r3, (r2, 0x0)
+  60:	ec630001 	ori      	r3, r3, 1
+  64:	b260      	st.w      	r3, (r2, 0x0)
+  66:	1497      	pop      	r4-r10, r15
+  68:	0000      	.short	0x0000
+			68: R_CKCORE_ADDR32	.bss+0x4
+	...
+
+Disassembly of section .text.gx_get_time_ms:
+
+00000000 <gx_get_time_ms>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_get_time_ms>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+   6:	32fa      	movi      	r2, 250
+   8:	4242      	lsli      	r2, r2, 2
+   a:	3300      	movi      	r3, 0
+   c:	e0000000 	bsr      	0x0	// 0 <__udivdi3>
+			c: R_CKCORE_PCREL_IMM26BY2	__udivdi3
+  10:	1490      	pop      	r15
+
+Disassembly of section .text.gx_get_timer:
+
+00000000 <gx_get_timer>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	e0000000 	bsr      	0x0	// 0 <gx_get_timer>
+			4: R_CKCORE_PCREL_IMM26BY2	gx_get_time_ms
+   8:	6012      	subu      	r0, r4
+   a:	1491      	pop      	r4, r15
+
+Disassembly of section .text.gx_udelay:
+
+00000000 <gx_udelay>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	1422      	subi      	r14, r14, 8
+   4:	6d83      	mov      	r6, r0
+   6:	e0000000 	bsr      	0x0	// 0 <gx_udelay>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+   a:	b800      	st.w      	r0, (r14, 0x0)
+   c:	b821      	st.w      	r1, (r14, 0x4)
+   e:	9840      	ld.w      	r2, (r14, 0x0)
+  10:	9861      	ld.w      	r3, (r14, 0x4)
+  12:	6d1b      	mov      	r4, r6
+  14:	3500      	movi      	r5, 0
+  16:	f844c064 	add.64      	r4, r4, r2
+  1a:	2400      	addi      	r4, 1
+  1c:	3c40      	cmpnei      	r4, 0
+  1e:	c4a50c21 	incf      	r5, r5, 1
+  22:	9840      	ld.w      	r2, (r14, 0x0)
+  24:	9861      	ld.w      	r3, (r14, 0x4)
+  26:	654c      	cmphs      	r3, r5
+  28:	0c07      	bf      	0x36	// 36 <gx_udelay+0x36>
+  2a:	64d6      	cmpne      	r5, r3
+  2c:	0803      	bt      	0x32	// 32 <gx_udelay+0x32>
+  2e:	6508      	cmphs      	r2, r4
+  30:	0c03      	bf      	0x36	// 36 <gx_udelay+0x36>
+  32:	1402      	addi      	r14, r14, 8
+  34:	1493      	pop      	r4-r6, r15
+  36:	3332      	movi      	r3, 50
+  38:	6c03      	mov      	r0, r0
+  3a:	e823ffff 	bnezad      	r3, 0x38	// 38 <gx_udelay+0x38>
+  3e:	e0000000 	bsr      	0x0	// 0 <gx_udelay>
+			3e: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+  42:	b800      	st.w      	r0, (r14, 0x0)
+  44:	b821      	st.w      	r1, (r14, 0x4)
+  46:	07ee      	br      	0x22	// 22 <gx_udelay+0x22>
+
+Disassembly of section .text.gx_mdelay:
+
+00000000 <gx_mdelay>:
+   0:	14d0      	push      	r15
+   2:	33fa      	movi      	r3, 250
+   4:	4362      	lsli      	r3, r3, 2
+   6:	7c0c      	mult      	r0, r3
+   8:	e0000000 	bsr      	0x0	// 0 <gx_mdelay>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_udelay
+   c:	1490      	pop      	r15
+
+Disassembly of section .text.get_ticks:
+
+00000000 <get_ticks>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <get_ticks>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.get_tbclk:
+
+00000000 <get_tbclk>:
+   0:	ea00f424 	movi      	r0, 62500
+   4:	c4804900 	rotli      	r0, r0, 4
+   8:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_timer_us_init:
+
+00000000 <gx_timer_us_init>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	6d03      	mov      	r4, r0
+   4:	3017      	movi      	r0, 23
+   6:	6d47      	mov      	r5, r1
+   8:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+   c:	32fa      	movi      	r2, 250
+   e:	4242      	lsli      	r2, r2, 2
+  10:	e4600009 	addi      	r3, r0, 10
+  14:	c4438023 	divu      	r3, r3, r2
+  18:	7d08      	mult      	r4, r2
+  1a:	7cc8      	mult      	r3, r2
+  1c:	ea02f424 	movi      	r2, 62500
+  20:	c4448041 	divs      	r1, r4, r2
+  24:	30fa      	movi      	r0, 250
+  26:	400c      	lsli      	r0, r0, 12
+  28:	7c84      	mult      	r2, r1
+  2a:	c4038043 	divs      	r3, r3, r0
+  2e:	610a      	subu      	r4, r2
+  30:	4366      	lsli      	r3, r3, 6
+  32:	e9240019 	bnez      	r4, 0x64	// 64 <gx_timer_us_init+0x64>
+  36:	ea22a040 	movih      	r2, 41024
+  3a:	3aa7      	bseti      	r2, 7
+  3c:	3001      	movi      	r0, 1
+  3e:	7cc4      	mult      	r3, r1
+  40:	b214      	st.w      	r0, (r2, 0x50)
+  42:	5c6d      	subu      	r3, r4, r3
+  44:	3003      	movi      	r0, 3
+  46:	b294      	st.w      	r4, (r2, 0x50)
+  48:	b218      	st.w      	r0, (r2, 0x60)
+  4a:	b299      	st.w      	r4, (r2, 0x64)
+  4c:	b27a      	st.w      	r3, (r2, 0x68)
+  4e:	3302      	movi      	r3, 2
+  50:	b274      	st.w      	r3, (r2, 0x50)
+  52:	300e      	movi      	r0, 14
+  54:	6c93      	mov      	r2, r4
+  56:	1026      	lrw      	r1, 0x0	// 6c <gx_timer_us_init+0x6c>
+  58:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			58: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  5c:	1065      	lrw      	r3, 0x0	// 70 <gx_timer_us_init+0x70>
+  5e:	b3a0      	st.w      	r5, (r3, 0x0)
+  60:	6c13      	mov      	r0, r4
+  62:	1492      	pop      	r4-r5, r15
+  64:	3400      	movi      	r4, 0
+  66:	2c00      	subi      	r4, 1
+  68:	07fc      	br      	0x60	// 60 <gx_timer_us_init+0x60>
+	...
+			6c: R_CKCORE_ADDR32	.text.gx_timer_us_isr
+			70: R_CKCORE_ADDR32	.bss

@@ -1,0 +1,97 @@
+
+g2/analysis/ambiq-520-iar-nema-acquisition-2026-10-09-source-track/stock-sectored-envelope.bin:     file format binary
+
+
+Disassembly of section .data:
+
+005143d4 <.data>:
+  5143d4:	b5f0      	push	{r4, r5, r6, r7, lr}
+  5143d6:	b081      	sub	sp, #4
+  5143d8:	0004      	movs	r4, r0
+  5143da:	460d      	mov	r5, r1
+  5143dc:	bf08      	it	eq
+  5143de:	f44f 5000 	moveq.w	r0, #8192	@ 0x2000
+  5143e2:	d02b      	beq.n	0x51443c
+  5143e4:	7b20      	ldrb	r0, [r4, #12]
+  5143e6:	f010 0f07 	tst.w	r0, #7
+  5143ea:	d10c      	bne.n	0x514406
+  5143ec:	6a60      	ldr	r0, [r4, #36]	@ 0x24
+  5143ee:	b100      	cbz	r0, 0x5143f2
+  5143f0:	4604      	mov	r4, r0
+  5143f2:	2d02      	cmp	r5, #2
+  5143f4:	da0a      	bge.n	0x51440c
+  5143f6:	2502      	movs	r5, #2
+  5143f8:	6920      	ldr	r0, [r4, #16]
+  5143fa:	0080      	lsls	r0, r0, #2
+  5143fc:	fb90 f1f5 	sdiv	r1, r0, r5
+  514400:	fb05 0011 	mls	r0, r5, r1, r0
+  514404:	b1f8      	cbz	r0, 0x514446
+  514406:	f44f 4080 	mov.w	r0, #16384	@ 0x4000
+  51440a:	e017      	b.n	0x51443c
+  51440c:	ddf4      	ble.n	0x5143f8
+  51440e:	6920      	ldr	r0, [r4, #16]
+  514410:	0080      	lsls	r0, r0, #2
+  514412:	fb90 f1f5 	sdiv	r1, r0, r5
+  514416:	f5b1 7f00 	cmp.w	r1, #512	@ 0x200
+  51441a:	daed      	bge.n	0x5143f8
+  51441c:	07ea      	lsls	r2, r5, #31
+  51441e:	bf48      	it	mi
+  514420:	1c6d      	addmi	r5, r5, #1
+  514422:	2d04      	cmp	r5, #4
+  514424:	db05      	blt.n	0x514432
+  514426:	1ead      	subs	r5, r5, #2
+  514428:	fb90 f1f5 	sdiv	r1, r0, r5
+  51442c:	f5b1 7f00 	cmp.w	r1, #512	@ 0x200
+  514430:	dbf7      	blt.n	0x514422
+  514432:	f5b1 7f00 	cmp.w	r1, #512	@ 0x200
+  514436:	dadf      	bge.n	0x5143f8
+  514438:	f44f 3080 	mov.w	r0, #65536	@ 0x10000
+  51443c:	b001      	add	sp, #4
+  51443e:	e8bd 40f0 	ldmia.w	sp!, {r4, r5, r6, r7, lr}
+  514442:	f79c bf1b 	b.w	0x4b127c
+  514446:	f8df 6730 	ldr.w	r6, [pc, #1840]	@ 0x514b78
+  51444a:	6831      	ldr	r1, [r6, #0]
+  51444c:	6848      	ldr	r0, [r1, #4]
+  51444e:	b1c0      	cbz	r0, 0x514482
+  514450:	6942      	ldr	r2, [r0, #20]
+  514452:	6903      	ldr	r3, [r0, #16]
+  514454:	1c97      	adds	r7, r2, #2
+  514456:	42bb      	cmp	r3, r7
+  514458:	db0d      	blt.n	0x514476
+  51445a:	6883      	ldr	r3, [r0, #8]
+  51445c:	f44f 27a0 	mov.w	r7, #327680	@ 0x50000
+  514460:	f04f 0c00 	mov.w	ip, #0
+  514464:	f843 7022 	str.w	r7, [r3, r2, lsl #2]
+  514468:	1d1b      	adds	r3, r3, #4
+  51446a:	f843 c022 	str.w	ip, [r3, r2, lsl #2]
+  51446e:	6982      	ldr	r2, [r0, #24]
+  514470:	f022 0208 	bic.w	r2, r2, #8
+  514474:	6182      	str	r2, [r0, #24]
+  514476:	6982      	ldr	r2, [r0, #24]
+  514478:	f022 0220 	bic.w	r2, r2, #32
+  51447c:	6182      	str	r2, [r0, #24]
+  51447e:	2000      	movs	r0, #0
+  514480:	6048      	str	r0, [r1, #4]
+  514482:	b924      	cbnz	r4, 0x51448e
+  514484:	f44f 5000 	mov.w	r0, #8192	@ 0x2000
+  514488:	f79c fef8 	bl	0x4b127c
+  51448c:	e003      	b.n	0x514496
+  51448e:	69a0      	ldr	r0, [r4, #24]
+  514490:	f040 0020 	orr.w	r0, r0, #32
+  514494:	61a0      	str	r0, [r4, #24]
+  514496:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
+  51449a:	6360      	str	r0, [r4, #52]	@ 0x34
+  51449c:	63a0      	str	r0, [r4, #56]	@ 0x38
+  51449e:	6920      	ldr	r0, [r4, #16]
+  5144a0:	fb90 f0f5 	sdiv	r0, r0, r5
+  5144a4:	07c1      	lsls	r1, r0, #31
+  5144a6:	bf48      	it	mi
+  5144a8:	1e40      	submi	r0, r0, #1
+  5144aa:	62e0      	str	r0, [r4, #44]	@ 0x2c
+  5144ac:	2000      	movs	r0, #0
+  5144ae:	62a5      	str	r5, [r4, #40]	@ 0x28
+  5144b0:	6320      	str	r0, [r4, #48]	@ 0x30
+  5144b2:	6831      	ldr	r1, [r6, #0]
+  5144b4:	604c      	str	r4, [r1, #4]
+  5144b6:	b001      	add	sp, #4
+  5144b8:	bdf0      	pop	{r4, r5, r6, r7, pc}

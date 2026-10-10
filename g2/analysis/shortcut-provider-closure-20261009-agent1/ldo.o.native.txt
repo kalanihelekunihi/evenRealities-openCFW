@@ -1,0 +1,299 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/ldo.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_analog_set_ldo_fla_enbale:
+
+00000000 <gx_analog_set_ldo_fla_enbale>:
+   0:	1026      	lrw      	r1, 0xa0005000	// 18 <gx_analog_set_ldo_fla_enbale+0x18>
+   2:	3840      	cmpnei      	r0, 0
+   4:	9174      	ld.w      	r3, (r1, 0x50)
+   6:	e44320ef 	andi      	r2, r3, 239
+   a:	64c3      	mvcv      	r3
+   c:	4364      	lsli      	r3, r3, 4
+   e:	6cc8      	or      	r3, r2
+  10:	74cc      	zextb      	r3, r3
+  12:	3000      	movi      	r0, 0
+  14:	b174      	st.w      	r3, (r1, 0x50)
+  16:	783c      	jmp      	r15
+  18:	5000      	.short	0x5000
+  1a:	a000      	.short	0xa000
+
+Disassembly of section .text.gx_analog_set_ldo_fla_voltage:
+
+00000000 <gx_analog_set_ldo_fla_voltage>:
+   0:	3300      	movi      	r3, 0
+   2:	2b00      	subi      	r3, 1
+   4:	64c2      	cmpne      	r0, r3
+   6:	0c09      	bf      	0x18	// 18 <gx_analog_set_ldo_fla_voltage+0x18>
+   8:	1045      	lrw      	r2, 0xa0005000	// 1c <gx_analog_set_ldo_fla_voltage+0x1c>
+   a:	9274      	ld.w      	r3, (r2, 0x50)
+   c:	e46320f0 	andi      	r3, r3, 240
+  10:	6c0c      	or      	r0, r3
+  12:	7400      	zextb      	r0, r0
+  14:	b214      	st.w      	r0, (r2, 0x50)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	0000      	.short	0x0000
+  1c:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_set_ldo_ana_exbypass:
+
+00000000 <gx_analog_set_ldo_ana_exbypass>:
+   0:	1045      	lrw      	r2, 0xa0005000	// 14 <gx_analog_set_ldo_ana_exbypass+0x14>
+   2:	4005      	lsli      	r0, r0, 5
+   4:	9275      	ld.w      	r3, (r2, 0x54)
+   6:	e46320df 	andi      	r3, r3, 223
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b275      	st.w      	r3, (r2, 0x54)
+  12:	783c      	jmp      	r15
+  14:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_set_ldo_ana_bypass:
+
+00000000 <gx_analog_set_ldo_ana_bypass>:
+   0:	1045      	lrw      	r2, 0xa0005000	// 14 <gx_analog_set_ldo_ana_bypass+0x14>
+   2:	4004      	lsli      	r0, r0, 4
+   4:	9275      	ld.w      	r3, (r2, 0x54)
+   6:	e46320ef 	andi      	r3, r3, 239
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b275      	st.w      	r3, (r2, 0x54)
+  12:	783c      	jmp      	r15
+  14:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_set_ldo_ana_ctrl:
+
+00000000 <gx_analog_set_ldo_ana_ctrl>:
+   0:	104e      	lrw      	r2, 0xa0005000	// 38 <gx_analog_set_ldo_ana_ctrl+0x38>
+   2:	9275      	ld.w      	r3, (r2, 0x54)
+   4:	74cc      	zextb      	r3, r3
+   6:	e9200006 	bnez      	r0, 0x12	// 12 <gx_analog_set_ldo_ana_ctrl+0x12>
+   a:	e46320df 	andi      	r3, r3, 223
+   e:	b275      	st.w      	r3, (r2, 0x54)
+  10:	783c      	jmp      	r15
+  12:	3841      	cmpnei      	r0, 1
+  14:	0808      	bt      	0x24	// 24 <gx_analog_set_ldo_ana_ctrl+0x24>
+  16:	e46320cf 	andi      	r3, r3, 207
+  1a:	ec630020 	ori      	r3, r3, 32
+  1e:	b275      	st.w      	r3, (r2, 0x54)
+  20:	3000      	movi      	r0, 0
+  22:	07f7      	br      	0x10	// 10 <gx_analog_set_ldo_ana_ctrl+0x10>
+  24:	3842      	cmpnei      	r0, 2
+  26:	0806      	bt      	0x32	// 32 <gx_analog_set_ldo_ana_ctrl+0x32>
+  28:	e46320df 	andi      	r3, r3, 223
+  2c:	ec630030 	ori      	r3, r3, 48
+  30:	07f7      	br      	0x1e	// 1e <gx_analog_set_ldo_ana_ctrl+0x1e>
+  32:	3000      	movi      	r0, 0
+  34:	2800      	subi      	r0, 1
+  36:	07ed      	br      	0x10	// 10 <gx_analog_set_ldo_ana_ctrl+0x10>
+  38:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_set_ldo_ana_voltage:
+
+00000000 <gx_analog_set_ldo_ana_voltage>:
+   0:	3300      	movi      	r3, 0
+   2:	2b00      	subi      	r3, 1
+   4:	64c2      	cmpne      	r0, r3
+   6:	0c09      	bf      	0x18	// 18 <gx_analog_set_ldo_ana_voltage+0x18>
+   8:	1045      	lrw      	r2, 0xa0005000	// 1c <gx_analog_set_ldo_ana_voltage+0x1c>
+   a:	9275      	ld.w      	r3, (r2, 0x54)
+   c:	e46320f0 	andi      	r3, r3, 240
+  10:	6c0c      	or      	r0, r3
+  12:	7400      	zextb      	r0, r0
+  14:	b215      	st.w      	r0, (r2, 0x54)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	0000      	.short	0x0000
+  1c:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_set_ldo_dig_exbypass:
+
+00000000 <gx_analog_set_ldo_dig_exbypass>:
+   0:	1045      	lrw      	r2, 0xa0005000	// 14 <gx_analog_set_ldo_dig_exbypass+0x14>
+   2:	4002      	lsli      	r0, r0, 2
+   4:	9276      	ld.w      	r3, (r2, 0x58)
+   6:	e46320fb 	andi      	r3, r3, 251
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b276      	st.w      	r3, (r2, 0x58)
+  12:	783c      	jmp      	r15
+  14:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_set_ldo_dig_bypass:
+
+00000000 <gx_analog_set_ldo_dig_bypass>:
+   0:	1045      	lrw      	r2, 0xa0005000	// 14 <gx_analog_set_ldo_dig_bypass+0x14>
+   2:	4001      	lsli      	r0, r0, 1
+   4:	9276      	ld.w      	r3, (r2, 0x58)
+   6:	e46320fd 	andi      	r3, r3, 253
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b276      	st.w      	r3, (r2, 0x58)
+  12:	783c      	jmp      	r15
+  14:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_set_ldo_dig_ctrl:
+
+00000000 <gx_analog_set_ldo_dig_ctrl>:
+   0:	104e      	lrw      	r2, 0xa0005000	// 38 <gx_analog_set_ldo_dig_ctrl+0x38>
+   2:	9276      	ld.w      	r3, (r2, 0x58)
+   4:	74cc      	zextb      	r3, r3
+   6:	e9200006 	bnez      	r0, 0x12	// 12 <gx_analog_set_ldo_dig_ctrl+0x12>
+   a:	e46320fb 	andi      	r3, r3, 251
+   e:	b276      	st.w      	r3, (r2, 0x58)
+  10:	783c      	jmp      	r15
+  12:	3841      	cmpnei      	r0, 1
+  14:	0808      	bt      	0x24	// 24 <gx_analog_set_ldo_dig_ctrl+0x24>
+  16:	e46320f9 	andi      	r3, r3, 249
+  1a:	ec630004 	ori      	r3, r3, 4
+  1e:	b276      	st.w      	r3, (r2, 0x58)
+  20:	3000      	movi      	r0, 0
+  22:	07f7      	br      	0x10	// 10 <gx_analog_set_ldo_dig_ctrl+0x10>
+  24:	3842      	cmpnei      	r0, 2
+  26:	0806      	bt      	0x32	// 32 <gx_analog_set_ldo_dig_ctrl+0x32>
+  28:	e46320fb 	andi      	r3, r3, 251
+  2c:	ec630006 	ori      	r3, r3, 6
+  30:	07f7      	br      	0x1e	// 1e <gx_analog_set_ldo_dig_ctrl+0x1e>
+  32:	3000      	movi      	r0, 0
+  34:	2800      	subi      	r0, 1
+  36:	07ed      	br      	0x10	// 10 <gx_analog_set_ldo_dig_ctrl+0x10>
+  38:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_get_ldo_dig_ctrl:
+
+00000000 <gx_analog_get_ldo_dig_ctrl>:
+   0:	1067      	lrw      	r3, 0xa0005000	// 1c <gx_analog_get_ldo_dig_ctrl+0x1c>
+   2:	9376      	ld.w      	r3, (r3, 0x58)
+   4:	74cc      	zextb      	r3, r3
+   6:	c4435440 	zext      	r0, r3, 2, 2
+   a:	e9000008 	bez      	r0, 0x1a	// 1a <gx_analog_get_ldo_dig_ctrl+0x1a>
+   e:	c4235423 	zext      	r3, r3, 1, 1
+  12:	3b40      	cmpnei      	r3, 0
+  14:	c4000500 	mvc      	r0
+  18:	2000      	addi      	r0, 1
+  1a:	783c      	jmp      	r15
+  1c:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_set_ldo_dig_dummyload:
+
+00000000 <gx_analog_set_ldo_dig_dummyload>:
+   0:	1045      	lrw      	r2, 0xa0005000	// 14 <gx_analog_set_ldo_dig_dummyload+0x14>
+   2:	9276      	ld.w      	r3, (r2, 0x58)
+   4:	e46320fe 	andi      	r3, r3, 254
+   8:	6c0c      	or      	r0, r3
+   a:	7400      	zextb      	r0, r0
+   c:	b216      	st.w      	r0, (r2, 0x58)
+   e:	3000      	movi      	r0, 0
+  10:	783c      	jmp      	r15
+  12:	0000      	.short	0x0000
+  14:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_analog_set_ldo_dig_voltage:
+
+00000000 <gx_analog_set_ldo_dig_voltage>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	3300      	movi      	r3, 0
+   6:	2b00      	subi      	r3, 1
+   8:	64c2      	cmpne      	r0, r3
+   a:	0c0f      	bf      	0x28	// 28 <gx_analog_set_ldo_dig_voltage+0x28>
+   c:	d86e0000 	ld.b      	r3, (r14, 0x0)
+  10:	c4605c60 	ins      	r3, r0, 3, 0
+  14:	3201      	movi      	r2, 1
+  16:	c4625c04 	ins      	r3, r2, 4, 4
+  1a:	6c7b      	mov      	r1, r14
+  1c:	3008      	movi      	r0, 8
+  1e:	dc6e0000 	st.b      	r3, (r14, 0x0)
+  22:	e0000000 	bsr      	0x0	// 0 <gx_pmu_ctrl_set>
+			22: R_CKCORE_PCREL_IMM26BY2	gx_pmu_ctrl_set
+  26:	3000      	movi      	r0, 0
+  28:	1401      	addi      	r14, r14, 4
+  2a:	1490      	pop      	r15
+
+Disassembly of section .text.gx_analog_get_ldo_dig_voltage:
+
+00000000 <gx_analog_get_ldo_dig_voltage>:
+   0:	14d1      	push      	r4, r15
+   2:	1422      	subi      	r14, r14, 8
+   4:	3400      	movi      	r4, 0
+   6:	e0000000 	bsr      	0x0	// 0 <gx_analog_get_ldo_dig_voltage>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_analog_get_ldo_dig_ctrl
+   a:	2c00      	subi      	r4, 1
+   c:	6502      	cmpne      	r0, r4
+   e:	0c0f      	bf      	0x2c	// 2c <gx_analog_get_ldo_dig_voltage+0x2c>
+  10:	3842      	cmpnei      	r0, 2
+  12:	0c1c      	bf      	0x4a	// 4a <gx_analog_get_ldo_dig_voltage+0x4a>
+  14:	6c7b      	mov      	r1, r14
+  16:	3008      	movi      	r0, 8
+  18:	e0000000 	bsr      	0x0	// 0 <gx_pmu_ctrl_get>
+			18: R_CKCORE_PCREL_IMM26BY2	gx_pmu_ctrl_get
+  1c:	d80e0000 	ld.b      	r0, (r14, 0x0)
+  20:	e4602010 	andi      	r3, r0, 16
+  24:	e9030006 	bez      	r3, 0x30	// 30 <gx_analog_get_ldo_dig_voltage+0x30>
+  28:	e400200f 	andi      	r0, r0, 15
+  2c:	1402      	addi      	r14, r14, 8
+  2e:	1491      	pop      	r4, r15
+  30:	1901      	addi      	r1, r14, 4
+  32:	3002      	movi      	r0, 2
+  34:	e0000000 	bsr      	0x0	// 0 <gx_pmu_ctrl_get>
+			34: R_CKCORE_PCREL_IMM26BY2	gx_pmu_ctrl_get
+  38:	d86e0005 	ld.b      	r3, (r14, 0x5)
+  3c:	e4632020 	andi      	r3, r3, 32
+  40:	3b40      	cmpnei      	r3, 0
+  42:	3002      	movi      	r0, 2
+  44:	c4040c20 	incf      	r0, r4, 0
+  48:	07f2      	br      	0x2c	// 2c <gx_analog_get_ldo_dig_voltage+0x2c>
+  4a:	6c13      	mov      	r0, r4
+  4c:	07f0      	br      	0x2c	// 2c <gx_analog_get_ldo_dig_voltage+0x2c>
+
+Disassembly of section .text.gx_analog_get_ldo_fla_bypass:
+
+00000000 <gx_analog_get_ldo_fla_bypass>:
+   0:	1063      	lrw      	r3, 0xa0005080	// c <gx_analog_get_ldo_fla_bypass+0xc>
+   2:	9306      	ld.w      	r0, (r3, 0x18)
+   4:	e4002001 	andi      	r0, r0, 1
+   8:	783c      	jmp      	r15
+   a:	0000      	.short	0x0000
+   c:	5080      	.short	0x5080
+   e:	a000      	.short	0xa000
+
+Disassembly of section .text.gx_analog_get_ldo_core_bypass:
+
+00000000 <gx_analog_get_ldo_core_bypass>:
+   0:	1063      	lrw      	r3, 0xa0005080	// c <gx_analog_get_ldo_core_bypass+0xc>
+   2:	9306      	ld.w      	r0, (r3, 0x18)
+   4:	c4205420 	zext      	r0, r0, 1, 1
+   8:	783c      	jmp      	r15
+   a:	0000      	.short	0x0000
+   c:	5080      	.short	0x5080
+   e:	a000      	.short	0xa000
+
+Disassembly of section .text.gx_analog_get_ldo_dig_bypass:
+
+00000000 <gx_analog_get_ldo_dig_bypass>:
+   0:	1064      	lrw      	r3, 0xa0005000	// 10 <gx_analog_get_ldo_dig_bypass+0x10>
+   2:	9376      	ld.w      	r3, (r3, 0x58)
+   4:	c4235443 	zext      	r3, r3, 2, 1
+   8:	3b43      	cmpnei      	r3, 3
+   a:	6403      	mvcv      	r0
+   c:	783c      	jmp      	r15
+   e:	0000      	.short	0x0000
+  10:	5000      	.short	0x5000
+  12:	a000      	.short	0xa000
+
+Disassembly of section .text.gx_analog_get_ldo_vdd12_ov10:
+
+00000000 <gx_analog_get_ldo_vdd12_ov10>:
+   0:	1063      	lrw      	r3, 0xa0005080	// c <gx_analog_get_ldo_vdd12_ov10+0xc>
+   2:	9306      	ld.w      	r0, (r3, 0x18)
+   4:	c4405440 	zext      	r0, r0, 2, 2
+   8:	783c      	jmp      	r15
+   a:	0000      	.short	0x0000
+   c:	5080      	.short	0x5080
+   e:	a000      	.short	0xa000

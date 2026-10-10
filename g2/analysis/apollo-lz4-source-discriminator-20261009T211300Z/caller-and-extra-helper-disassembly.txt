@@ -1,0 +1,40 @@
+
+read-alignment helper
+0054ee18: 81b0 sub sp, #4
+0054ee1a: dff87000 ldr.w r0, [pc, #0x70]
+0054ee1e: 0068 ldr r0, [r0]
+0054ee20: 0090 str r0, [sp]
+0054ee22: 9df80000 ldrb.w r0, [sp]
+0054ee26: 01b0 add sp, #4
+0054ee28: 7047 bx lr
+
+aligned 16bit read helper
+0054ee2a: 1cb5 push {r2, r3, r4, lr}
+0054ee2c: 0100 movs r1, r0
+0054ee2e: 0222 movs r2, #2
+0054ee30: 6c46 mov r4, sp
+0054ee32: 2000 movs r0, r4
+0054ee34: eaf6d6fe bl #0x439be4
+0054ee38: bdf80000 ldrh.w r0, [sp]
+0054ee3c: 16bd pop {r1, r2, r4, pc}
+
+locked caller wrapper
+004e0c0c: 10b5 push {r4, lr}
+004e0c0e: 1400 movs r4, r2
+004e0c10: 0028 cmp r0, #0
+004e0c12: 05d0 beq #0x4e0c20
+004e0c14: 002c cmp r4, #0
+004e0c16: 03d0 beq #0x4e0c20
+004e0c18: 0029 cmp r1, #0
+004e0c1a: 01d0 beq #0x4e0c20
+004e0c1c: 002b cmp r3, #0
+004e0c1e: 01d1 bne #0x4e0c24
+004e0c20: 0020 movs r0, #0
+004e0c22: 06e0 b #0x4e0c32
+004e0c24: 0a00 movs r2, r1
+004e0c26: 2100 movs r1, r4
+004e0c28: 6ef086fb bl #0x54f338
+004e0c2c: 0128 cmp r0, #1
+004e0c2e: 00da bge #0x4e0c32
+004e0c30: 0020 movs r0, #0
+004e0c32: 10bd pop {r4, pc}

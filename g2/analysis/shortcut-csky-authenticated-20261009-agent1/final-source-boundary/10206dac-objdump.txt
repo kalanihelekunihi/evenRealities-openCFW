@@ -1,0 +1,141 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10206dac <.data+0x3da8>:
+10206dac:	d014      	push      	r15
+10206dae:	c9f7ffe3 	bsr      	0x10205d40	// 0x10205d40
+10206db2:	6310      	lrw      	r3, 0x20027b50	// 0x10206dbc
+10206db4:	0030      	movi      	r0, 0
+10206db6:	00b3      	st.w      	r0, (r3, 0x0)
+10206db8:	9014      	pop      	r15
+10206dba:	0000      	bkpt
+10206dbc:	507b      	.long: 0x00007b50
+10206dbe:	0220      	addi      	r0, 3
+10206dc0:	d214      	push      	r4-r5, r15
+10206dc2:	8611      	lrw      	r4, 0x20027b60	// 0x10206e58
+10206dc4:	7f00a4e4 	addi      	r5, r4, 128
+10206dc8:	7832      	movi      	r2, 120
+10206dca:	0031      	movi      	r1, 0
+10206dcc:	136c      	mov      	r0, r4
+10206dce:	ff1500e0 	bsr      	0x102099cc	// 0x102099cc
+10206dd2:	c06302ea 	movi      	r2, 25536
+10206dd6:	0031      	movi      	r1, 0
+10206dd8:	176c      	mov      	r0, r5
+10206dda:	f91500e0 	bsr      	0x102099cc	// 0x102099cc
+10206dde:	8232      	movi      	r2, 130
+10206de0:	4342      	lsli      	r2, r2, 3
+10206de2:	0031      	movi      	r1, 0
+10206de4:	1e10      	lrw      	r0, 0x20030000	// 0x10206e5c
+10206de6:	f31500e0 	bsr      	0x102099cc	// 0x102099cc
+10206dea:	5e10      	lrw      	r2, 0x20032210	// 0x10206e60
+10206dec:	5cb4      	st.w      	r2, (r4, 0x70)
+10206dee:	f032      	movi      	r2, 240
+10206df0:	4442      	lsli      	r2, r2, 4
+10206df2:	5db4      	st.w      	r2, (r4, 0x74)
+10206df4:	3032      	movi      	r2, 48
+10206df6:	4cb4      	st.w      	r2, (r4, 0x30)
+10206df8:	0a32      	movi      	r2, 10
+10206dfa:	47b4      	st.w      	r2, (r4, 0x1c)
+10206dfc:	fa32      	movi      	r2, 250
+10206dfe:	4642      	lsli      	r2, r2, 6
+10206e00:	48b4      	st.w      	r2, (r4, 0x20)
+10206e02:	0432      	movi      	r2, 4
+10206e04:	49b4      	st.w      	r2, (r4, 0x24)
+10206e06:	0c32      	movi      	r2, 12
+10206e08:	4ab4      	st.w      	r2, (r4, 0x28)
+10206e0a:	2832      	movi      	r2, 40
+10206e0c:	7610      	lrw      	r3, 0x20191222	// 0x10206e64
+10206e0e:	5bb4      	st.w      	r2, (r4, 0x6c)
+10206e10:	8032      	movi      	r2, 128
+10206e12:	60b4      	st.w      	r3, (r4, 0x0)
+10206e14:	4142      	lsli      	r2, r2, 1
+10206e16:	0233      	movi      	r3, 2
+10206e18:	62b4      	st.w      	r3, (r4, 0x8)
+10206e1a:	58b4      	st.w      	r2, (r4, 0x60)
+10206e1c:	7310      	lrw      	r3, 0x20030410	// 0x10206e68
+10206e1e:	202102ea 	movi      	r2, 8480
+10206e22:	74b4      	st.w      	r3, (r4, 0x50)
+10206e24:	51b4      	st.w      	r2, (r4, 0x44)
+10206e26:	f033      	movi      	r3, 240
+10206e28:	8532      	movi      	r2, 133
+10206e2a:	6543      	lsli      	r3, r3, 5
+10206e2c:	4642      	lsli      	r2, r2, 6
+10206e2e:	0030      	movi      	r0, 0
+10206e30:	75b4      	st.w      	r3, (r4, 0x54)
+10206e32:	50b4      	st.w      	r2, (r4, 0x40)
+10206e34:	0133      	movi      	r3, 1
+10206e36:	0332      	movi      	r2, 3
+10206e38:	03b4      	st.w      	r0, (r4, 0xc)
+10206e3a:	16b4      	st.w      	r0, (r4, 0x58)
+10206e3c:	17b4      	st.w      	r0, (r4, 0x5c)
+10206e3e:	04b4      	st.w      	r0, (r4, 0x10)
+10206e40:	19b4      	st.w      	r0, (r4, 0x64)
+10206e42:	1ab4      	st.w      	r0, (r4, 0x68)
+10206e44:	0bb4      	st.w      	r0, (r4, 0x2c)
+10206e46:	65b4      	st.w      	r3, (r4, 0x14)
+10206e48:	06b4      	st.w      	r0, (r4, 0x18)
+10206e4a:	12b4      	st.w      	r0, (r4, 0x48)
+10206e4c:	13b4      	st.w      	r0, (r4, 0x4c)
+10206e4e:	0db4      	st.w      	r0, (r4, 0x34)
+10206e50:	aeb4      	st.w      	r5, (r4, 0x38)
+10206e52:	4fb4      	st.w      	r2, (r4, 0x3c)
+10206e54:	61b4      	st.w      	r3, (r4, 0x4)
+10206e56:	9214      	pop      	r4-r5, r15
+10206e58:	607b      	.long: 0x00007b60
+10206e5a:	0220      	addi      	r0, 3
+10206e5c:	0000      	bkpt
+10206e5e:	0320      	addi      	r0, 4
+10206e60:	1022      	addi      	r2, 17
+10206e62:	0320      	addi      	r0, 4
+10206e64:	2212      	lrw      	r1, 0x783c	// 0x10206f6c
+10206e66:	1920      	addi      	r0, 26
+10206e68:	1004      	br      	0x10206e88	// 0x10206e88
+10206e6a:	0320      	addi      	r0, 4
+10206e6c:	6210      	lrw      	r3, 0x20027b60	// 0x10206e74
+10206e6e:	1493      	ld.w      	r0, (r3, 0x50)
+10206e70:	3c78      	jmp      	r15
+10206e72:	0000      	bkpt
+10206e74:	607b      	.long: 0x00007b60
+10206e76:	0220      	addi      	r0, 3
+10206e78:	6210      	lrw      	r3, 0x20027b60	// 0x10206e80
+10206e7a:	1593      	ld.w      	r0, (r3, 0x54)
+10206e7c:	3c78      	jmp      	r15
+10206e7e:	0000      	bkpt
+10206e80:	607b      	.long: 0x00007b60
+10206e82:	0220      	addi      	r0, 3
+10206e84:	6210      	lrw      	r3, 0x20027b60	// 0x10206e8c
+10206e86:	1c93      	ld.w      	r0, (r3, 0x70)
+10206e88:	3c78      	jmp      	r15
+10206e8a:	0000      	bkpt
+10206e8c:	607b      	.long: 0x00007b60
+10206e8e:	0220      	addi      	r0, 3
+10206e90:	6210      	lrw      	r3, 0x20027b60	// 0x10206e98
+10206e92:	1d93      	ld.w      	r0, (r3, 0x74)
+10206e94:	3c78      	jmp      	r15
+10206e96:	0000      	bkpt
+10206e98:	607b      	.long: 0x00007b60
+10206e9a:	0220      	addi      	r0, 3
+10206e9c:	0110      	lrw      	r0, 0x20027b60	// 0x10206ea0
+10206e9e:	3c78      	jmp      	r15
+10206ea0:	607b      	.long: 0x00007b60
+10206ea2:	0220      	addi      	r0, 3
+10206ea4:	0110      	lrw      	r0, 0x20030000	// 0x10206ea8
+10206ea6:	3c78      	jmp      	r15
+10206ea8:	0000      	bkpt
+10206eaa:	0320      	addi      	r0, 4
+10206eac:	4090      	ld.w      	r2, (r0, 0x0)
+10206eae:	6992      	ld.w      	r3, (r2, 0x24)
+10206eb0:	0c92      	ld.w      	r0, (r2, 0x30)
+10206eb2:	4c7c      	mult      	r1, r3
+10206eb4:	238001c4 	divu      	r3, r1, r0
+10206eb8:	c07c      	mult      	r3, r0
+10206eba:	4e60      	subu      	r1, r3
+10206ebc:	7b92      	ld.w      	r3, (r2, 0x6c)
+10206ebe:	cc60      	addu      	r3, r3
+10206ec0:	1c92      	ld.w      	r0, (r2, 0x70)
+10206ec2:	408461f8 	mula.32.l      	r0, r1, r3
+10206ec6:	3c78      	jmp      	r15
+10206ec8:	03000cea 	movi      	r12, 3

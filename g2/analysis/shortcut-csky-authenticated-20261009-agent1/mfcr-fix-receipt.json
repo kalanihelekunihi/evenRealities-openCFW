@@ -1,0 +1,67 @@
+{
+  "status": "private_mfcr_destination_fix_verified",
+  "scope": "authenticated reset and system-init instructions, semantics checked against GNU decoder and SDK mfcr output constraint",
+  "commands": [
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/support/sleigh",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Processors/CSKY/data/languages/csky_v2.slaspec"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/support/analyzeHeadless",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1",
+        "ResetMfcrFixedReplay2",
+        "-import",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin",
+        "-loader",
+        "BinaryLoader",
+        "-loader-baseAddr",
+        "0x10023400",
+        "-processor",
+        "CSKY_V2:LE:32:default",
+        "-noanalysis",
+        "-scriptPath",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1",
+        "-postScript",
+        "ExportStartup.java",
+        "0x10023500",
+        "0x1002351e"
+      ],
+      "exit_code": 0,
+      "output": "ResetMfcrFixed.txt"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/support/analyzeHeadless",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1",
+        "SystemMfcrFixedReplay2",
+        "-import",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin",
+        "-loader",
+        "BinaryLoader",
+        "-loader-baseAddr",
+        "0x10023400",
+        "-processor",
+        "CSKY_V2:LE:32:default",
+        "-noanalysis",
+        "-scriptPath",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1",
+        "-postScript",
+        "ExportStartup.java",
+        "0x1002354c",
+        "0x100235e2"
+      ],
+      "exit_code": 0,
+      "output": "SystemMfcrFixed.txt"
+    }
+  ],
+  "hashes": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Processors/CSKY/data/languages/32b_priv.sinc": "1c1d2d692e272f77c3ebd1cce59d56f03f472f6c9d9e18d848126b08c8a76f3b",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Processors/CSKY/data/languages/csky_v2.sla": "de5f20867e5d818dba5f45577c3a14b94bcdaae0bb2fed24f5a7f025a7e1f91d",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/ExportStartup.java": "c0fdce58fd21ccabcab8e9a089b2b2626ee5671d371385661bb892e7903af1a8"
+  }
+}

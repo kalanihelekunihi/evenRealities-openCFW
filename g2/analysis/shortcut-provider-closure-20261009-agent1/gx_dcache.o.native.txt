@@ -1,0 +1,251 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/gx_dcache.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_dcache_get_status:
+
+00000000 <gx_dcache_get_status>:
+   0:	3000      	movi      	r0, 0
+   2:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_dcache_enable:
+
+00000000 <gx_dcache_enable>:
+   0:	c0000420 	sync
+   4:	c0000420 	sync
+   8:	1065      	lrw      	r3, 0xe000f000	// 1c <gx_dcache_get_status+0x1c>
+   a:	3201      	movi      	r2, 1
+   c:	b341      	st.w      	r2, (r3, 0x4)
+   e:	3215      	movi      	r2, 21
+  10:	b340      	st.w      	r2, (r3, 0x0)
+  12:	c0000420 	sync
+  16:	c0000420 	sync
+  1a:	783c      	jmp      	r15
+  1c:	f000      	.short	0xf000
+  1e:	e000      	.short	0xe000
+
+Disassembly of section .text.gx_dcache_disable:
+
+00000000 <gx_dcache_disable>:
+   0:	c0000420 	sync
+   4:	c0000420 	sync
+   8:	1066      	lrw      	r3, 0xe000f000	// 20 <gx_dcache_get_status+0x20>
+   a:	9340      	ld.w      	r2, (r3, 0x0)
+   c:	3a80      	bclri      	r2, 0
+   e:	b340      	st.w      	r2, (r3, 0x0)
+  10:	3201      	movi      	r2, 1
+  12:	b341      	st.w      	r2, (r3, 0x4)
+  14:	c0000420 	sync
+  18:	c0000420 	sync
+  1c:	783c      	jmp      	r15
+  1e:	0000      	.short	0x0000
+  20:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_clean:
+
+00000000 <gx_dcache_clean>:
+   0:	c0000420 	sync
+   4:	c0000420 	sync
+   8:	1064      	lrw      	r3, 0xe000f000	// 18 <gx_dcache_get_status+0x18>
+   a:	3204      	movi      	r2, 4
+   c:	b341      	st.w      	r2, (r3, 0x4)
+   e:	c0000420 	sync
+  12:	c0000420 	sync
+  16:	783c      	jmp      	r15
+  18:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_invalid:
+
+00000000 <gx_dcache_invalid>:
+   0:	c0000420 	sync
+   4:	c0000420 	sync
+   8:	1064      	lrw      	r3, 0xe000f000	// 18 <gx_dcache_get_status+0x18>
+   a:	3201      	movi      	r2, 1
+   c:	b341      	st.w      	r2, (r3, 0x4)
+   e:	c0000420 	sync
+  12:	c0000420 	sync
+  16:	783c      	jmp      	r15
+  18:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_clean_invalid:
+
+00000000 <gx_dcache_clean_invalid>:
+   0:	c0000420 	sync
+   4:	c0000420 	sync
+   8:	1064      	lrw      	r3, 0xe000f000	// 18 <gx_dcache_get_status+0x18>
+   a:	3205      	movi      	r2, 5
+   c:	b341      	st.w      	r2, (r3, 0x4)
+   e:	c0000420 	sync
+  12:	c0000420 	sync
+  16:	783c      	jmp      	r15
+  18:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_invalid_range:
+
+00000000 <gx_dcache_invalid_range>:
+   0:	3300      	movi      	r3, 0
+   2:	2b0f      	subi      	r3, 16
+   4:	680c      	and      	r0, r3
+   6:	ec000002 	ori      	r0, r0, 2
+   a:	1074      	lrw      	r3, 0xe000f000	// 58 <gx_dcache_get_status+0x58>
+   c:	eb21007f 	cmplti      	r1, 128
+  10:	0c07      	bf      	0x1e	// 1e <gx_dcache_get_status+0x1e>
+  12:	6004      	addu      	r0, r1
+  14:	1051      	lrw      	r2, 0xe000f000	// 58 <gx_dcache_get_status+0x58>
+  16:	5865      	subu      	r3, r0, r1
+  18:	e941001c 	bhz      	r1, 0x50	// 50 <gx_dcache_get_status+0x50>
+  1c:	783c      	jmp      	r15
+  1e:	e440000f 	addi      	r2, r0, 16
+  22:	b301      	st.w      	r0, (r3, 0x4)
+  24:	b341      	st.w      	r2, (r3, 0x4)
+  26:	e440001f 	addi      	r2, r0, 32
+  2a:	b341      	st.w      	r2, (r3, 0x4)
+  2c:	e440002f 	addi      	r2, r0, 48
+  30:	b341      	st.w      	r2, (r3, 0x4)
+  32:	e440003f 	addi      	r2, r0, 64
+  36:	b341      	st.w      	r2, (r3, 0x4)
+  38:	e440004f 	addi      	r2, r0, 80
+  3c:	b341      	st.w      	r2, (r3, 0x4)
+  3e:	e440005f 	addi      	r2, r0, 96
+  42:	b341      	st.w      	r2, (r3, 0x4)
+  44:	e440006f 	addi      	r2, r0, 112
+  48:	b341      	st.w      	r2, (r3, 0x4)
+  4a:	207f      	addi      	r0, 128
+  4c:	297f      	subi      	r1, 128
+  4e:	07df      	br      	0xc	// c <gx_dcache_get_status+0xc>
+  50:	b261      	st.w      	r3, (r2, 0x4)
+  52:	290f      	subi      	r1, 16
+  54:	07e1      	br      	0x16	// 16 <gx_dcache_get_status+0x16>
+  56:	0000      	.short	0x0000
+  58:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_clean_range:
+
+00000000 <gx_dcache_clean_range>:
+   0:	3300      	movi      	r3, 0
+   2:	2b0f      	subi      	r3, 16
+   4:	680c      	and      	r0, r3
+   6:	ec000008 	ori      	r0, r0, 8
+   a:	1074      	lrw      	r3, 0xe000f000	// 58 <gx_dcache_get_status+0x58>
+   c:	eb21007f 	cmplti      	r1, 128
+  10:	0c07      	bf      	0x1e	// 1e <gx_dcache_get_status+0x1e>
+  12:	6004      	addu      	r0, r1
+  14:	1051      	lrw      	r2, 0xe000f000	// 58 <gx_dcache_get_status+0x58>
+  16:	5865      	subu      	r3, r0, r1
+  18:	e941001c 	bhz      	r1, 0x50	// 50 <gx_dcache_get_status+0x50>
+  1c:	783c      	jmp      	r15
+  1e:	e440000f 	addi      	r2, r0, 16
+  22:	b301      	st.w      	r0, (r3, 0x4)
+  24:	b341      	st.w      	r2, (r3, 0x4)
+  26:	e440001f 	addi      	r2, r0, 32
+  2a:	b341      	st.w      	r2, (r3, 0x4)
+  2c:	e440002f 	addi      	r2, r0, 48
+  30:	b341      	st.w      	r2, (r3, 0x4)
+  32:	e440003f 	addi      	r2, r0, 64
+  36:	b341      	st.w      	r2, (r3, 0x4)
+  38:	e440004f 	addi      	r2, r0, 80
+  3c:	b341      	st.w      	r2, (r3, 0x4)
+  3e:	e440005f 	addi      	r2, r0, 96
+  42:	b341      	st.w      	r2, (r3, 0x4)
+  44:	e440006f 	addi      	r2, r0, 112
+  48:	b341      	st.w      	r2, (r3, 0x4)
+  4a:	207f      	addi      	r0, 128
+  4c:	297f      	subi      	r1, 128
+  4e:	07df      	br      	0xc	// c <gx_dcache_get_status+0xc>
+  50:	b261      	st.w      	r3, (r2, 0x4)
+  52:	290f      	subi      	r1, 16
+  54:	07e1      	br      	0x16	// 16 <gx_dcache_get_status+0x16>
+  56:	0000      	.short	0x0000
+  58:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_clean_invalid_range:
+
+00000000 <gx_dcache_clean_invalid_range>:
+   0:	3300      	movi      	r3, 0
+   2:	2b0f      	subi      	r3, 16
+   4:	680c      	and      	r0, r3
+   6:	ec00000a 	ori      	r0, r0, 10
+   a:	1074      	lrw      	r3, 0xe000f000	// 58 <gx_dcache_get_status+0x58>
+   c:	eb21007f 	cmplti      	r1, 128
+  10:	0c07      	bf      	0x1e	// 1e <gx_dcache_get_status+0x1e>
+  12:	6004      	addu      	r0, r1
+  14:	1051      	lrw      	r2, 0xe000f000	// 58 <gx_dcache_get_status+0x58>
+  16:	5865      	subu      	r3, r0, r1
+  18:	e941001c 	bhz      	r1, 0x50	// 50 <gx_dcache_get_status+0x50>
+  1c:	783c      	jmp      	r15
+  1e:	e440000f 	addi      	r2, r0, 16
+  22:	b301      	st.w      	r0, (r3, 0x4)
+  24:	b341      	st.w      	r2, (r3, 0x4)
+  26:	e440001f 	addi      	r2, r0, 32
+  2a:	b341      	st.w      	r2, (r3, 0x4)
+  2c:	e440002f 	addi      	r2, r0, 48
+  30:	b341      	st.w      	r2, (r3, 0x4)
+  32:	e440003f 	addi      	r2, r0, 64
+  36:	b341      	st.w      	r2, (r3, 0x4)
+  38:	e440004f 	addi      	r2, r0, 80
+  3c:	b341      	st.w      	r2, (r3, 0x4)
+  3e:	e440005f 	addi      	r2, r0, 96
+  42:	b341      	st.w      	r2, (r3, 0x4)
+  44:	e440006f 	addi      	r2, r0, 112
+  48:	b341      	st.w      	r2, (r3, 0x4)
+  4a:	207f      	addi      	r0, 128
+  4c:	297f      	subi      	r1, 128
+  4e:	07df      	br      	0xc	// c <gx_dcache_get_status+0xc>
+  50:	b261      	st.w      	r3, (r2, 0x4)
+  52:	290f      	subi      	r1, 16
+  54:	07e1      	br      	0x16	// 16 <gx_dcache_get_status+0x16>
+  56:	0000      	.short	0x0000
+  58:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_enable_profile:
+
+00000000 <gx_dcache_enable_profile>:
+   0:	1044      	lrw      	r2, 0xe000f000	// 10 <gx_dcache_get_status+0x10>
+   2:	d86223fd 	ld.w      	r3, (r2, 0xff4)
+   6:	ec630001 	ori      	r3, r3, 1
+   a:	dc6223fd 	st.w      	r3, (r2, 0xff4)
+   e:	783c      	jmp      	r15
+  10:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_disable_profile:
+
+00000000 <gx_dcache_disable_profile>:
+   0:	1044      	lrw      	r2, 0xe000f000	// 10 <gx_dcache_get_status+0x10>
+   2:	d86223fd 	ld.w      	r3, (r2, 0xff4)
+   6:	3b80      	bclri      	r3, 0
+   8:	dc6223fd 	st.w      	r3, (r2, 0xff4)
+   c:	783c      	jmp      	r15
+   e:	0000      	.short	0x0000
+  10:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_reset_profile:
+
+00000000 <gx_dcache_reset_profile>:
+   0:	1044      	lrw      	r2, 0xe000f000	// 10 <gx_dcache_get_status+0x10>
+   2:	d86223fd 	ld.w      	r3, (r2, 0xff4)
+   6:	ec630002 	ori      	r3, r3, 2
+   a:	dc6223fd 	st.w      	r3, (r2, 0xff4)
+   e:	783c      	jmp      	r15
+  10:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_dcache_get_access_time:
+
+00000000 <gx_dcache_get_access_time>:
+   0:	1063      	lrw      	r3, 0xe000f000	// c <gx_dcache_get_status+0xc>
+   2:	d80323fe 	ld.w      	r0, (r3, 0xff8)
+   6:	4008      	lsli      	r0, r0, 8
+   8:	783c      	jmp      	r15
+   a:	0000      	.short	0x0000
+   c:	f000      	.short	0xf000
+   e:	e000      	.short	0xe000
+
+Disassembly of section .text.gx_dcache_get_miss_time:
+
+00000000 <gx_dcache_get_miss_time>:
+   0:	1063      	lrw      	r3, 0xe000f000	// c <gx_dcache_get_status+0xc>
+   2:	d80323ff 	ld.w      	r0, (r3, 0xffc)
+   6:	4008      	lsli      	r0, r0, 8
+   8:	783c      	jmp      	r15
+   a:	0000      	.short	0x0000
+   c:	f000      	.short	0xf000
+   e:	e000      	.short	0xe000

@@ -1,0 +1,9 @@
+--- a/32b_priv.sinc
++++ b/32b_priv.sinc
+@@ -4,7 +4,7 @@
+     }
+ 
+     :mfcr i32_r_rz, "cr"^<i32_c_crx, i32_c_sel> is i32_r_sop = 0b011000 & i32_r_pcode = 0b00001 & i32_r_rz & i32_c_crx & i32_c_sel {
+-        i32_c_rz = i32_c_crx;
++        i32_r_rz = i32_c_crx;
+     }

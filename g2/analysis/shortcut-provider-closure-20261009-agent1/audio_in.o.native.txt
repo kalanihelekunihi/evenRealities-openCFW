@@ -1,0 +1,1887 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/audio_in.o:     file format elf32-csky-little
+
+
+Disassembly of section .text._ain_reset:
+
+00000000 <_ain_reset>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	3200      	movi      	r2, 0
+   6:	ea010700 	movi      	r1, 1792
+   a:	6c46      	nor      	r1, r1
+   c:	dc432040 	st.w      	r2, (r3, 0x100)
+  10:	dc232041 	st.w      	r1, (r3, 0x104)
+  14:	9320      	ld.w      	r1, (r3, 0x0)
+  16:	c4225c1f 	ins      	r1, r2, 31, 31
+  1a:	b320      	st.w      	r1, (r3, 0x0)
+  1c:	9300      	ld.w      	r0, (r3, 0x0)
+  1e:	3101      	movi      	r1, 1
+  20:	c4015c0f 	ins      	r0, r1, 15, 15
+  24:	b300      	st.w      	r0, (r3, 0x0)
+  26:	9300      	ld.w      	r0, (r3, 0x0)
+  28:	c4025c0e 	ins      	r0, r2, 14, 14
+  2c:	b300      	st.w      	r0, (r3, 0x0)
+  2e:	9300      	ld.w      	r0, (r3, 0x0)
+  30:	c4015c07 	ins      	r0, r1, 7, 7
+  34:	b300      	st.w      	r0, (r3, 0x0)
+  36:	9300      	ld.w      	r0, (r3, 0x0)
+  38:	c4025c06 	ins      	r0, r2, 6, 6
+  3c:	b300      	st.w      	r0, (r3, 0x0)
+  3e:	9301      	ld.w      	r0, (r3, 0x4)
+  40:	c4015c1f 	ins      	r0, r1, 31, 31
+  44:	b301      	st.w      	r0, (r3, 0x4)
+  46:	9301      	ld.w      	r0, (r3, 0x4)
+  48:	c4025c1e 	ins      	r0, r2, 30, 30
+  4c:	b301      	st.w      	r0, (r3, 0x4)
+  4e:	9302      	ld.w      	r0, (r3, 0x8)
+  50:	c4015c1f 	ins      	r0, r1, 31, 31
+  54:	b302      	st.w      	r0, (r3, 0x8)
+  56:	9322      	ld.w      	r1, (r3, 0x8)
+  58:	c4225c1e 	ins      	r1, r2, 30, 30
+  5c:	b322      	st.w      	r1, (r3, 0x8)
+  5e:	9323      	ld.w      	r1, (r3, 0xc)
+  60:	c4225c09 	ins      	r1, r2, 9, 9
+  64:	b323      	st.w      	r1, (r3, 0xc)
+  66:	932a      	ld.w      	r1, (r3, 0x28)
+  68:	c4225c09 	ins      	r1, r2, 9, 9
+  6c:	b32a      	st.w      	r1, (r3, 0x28)
+  6e:	932b      	ld.w      	r1, (r3, 0x2c)
+  70:	c4225c09 	ins      	r1, r2, 9, 9
+  74:	b32b      	st.w      	r1, (r3, 0x2c)
+  76:	9332      	ld.w      	r1, (r3, 0x48)
+  78:	c4225c09 	ins      	r1, r2, 9, 9
+  7c:	b332      	st.w      	r1, (r3, 0x48)
+  7e:	9333      	ld.w      	r1, (r3, 0x4c)
+  80:	c4225c09 	ins      	r1, r2, 9, 9
+  84:	b333      	st.w      	r1, (r3, 0x4c)
+  86:	3180      	movi      	r1, 128
+  88:	4122      	lsli      	r1, r1, 2
+  8a:	dc232041 	st.w      	r1, (r3, 0x104)
+  8e:	d8232041 	ld.w      	r1, (r3, 0x104)
+  92:	c5015501 	zext      	r1, r1, 8, 8
+  96:	e901fffc 	bez      	r1, 0x8e	// 8e <_ain_reset+0x8e>
+  9a:	3180      	movi      	r1, 128
+  9c:	4121      	lsli      	r1, r1, 1
+  9e:	dc232041 	st.w      	r1, (r3, 0x104)
+  a2:	3180      	movi      	r1, 128
+  a4:	4123      	lsli      	r1, r1, 3
+  a6:	dc232041 	st.w      	r1, (r3, 0x104)
+  aa:	1125      	lrw      	r1, 0x71f003f	// 13c <_ain_reset+0x13c>
+  ac:	dc232041 	st.w      	r1, (r3, 0x104)
+  b0:	d8032042 	ld.w      	r0, (r3, 0x108)
+  b4:	3101      	movi      	r1, 1
+  b6:	c4015c0f 	ins      	r0, r1, 15, 15
+  ba:	dc032042 	st.w      	r0, (r3, 0x108)
+  be:	d8032042 	ld.w      	r0, (r3, 0x108)
+  c2:	c4025c0e 	ins      	r0, r2, 14, 14
+  c6:	dc032042 	st.w      	r0, (r3, 0x108)
+  ca:	d8032042 	ld.w      	r0, (r3, 0x108)
+  ce:	c4015c07 	ins      	r0, r1, 7, 7
+  d2:	dc032042 	st.w      	r0, (r3, 0x108)
+  d6:	d8032042 	ld.w      	r0, (r3, 0x108)
+  da:	c4025c06 	ins      	r0, r2, 6, 6
+  de:	dc032042 	st.w      	r0, (r3, 0x108)
+  e2:	d8032042 	ld.w      	r0, (r3, 0x108)
+  e6:	c4015c17 	ins      	r0, r1, 23, 23
+  ea:	dc032042 	st.w      	r0, (r3, 0x108)
+  ee:	d8032042 	ld.w      	r0, (r3, 0x108)
+  f2:	c4025c16 	ins      	r0, r2, 22, 22
+  f6:	dc032042 	st.w      	r0, (r3, 0x108)
+  fa:	d8032056 	ld.w      	r0, (r3, 0x158)
+  fe:	c4015c1f 	ins      	r0, r1, 31, 31
+ 102:	dc032056 	st.w      	r0, (r3, 0x158)
+ 106:	d8032056 	ld.w      	r0, (r3, 0x158)
+ 10a:	c4025c1e 	ins      	r0, r2, 30, 30
+ 10e:	dc032056 	st.w      	r0, (r3, 0x158)
+ 112:	d8032060 	ld.w      	r0, (r3, 0x180)
+ 116:	c4015c1f 	ins      	r0, r1, 31, 31
+ 11a:	dc032060 	st.w      	r0, (r3, 0x180)
+ 11e:	d8232060 	ld.w      	r1, (r3, 0x180)
+ 122:	c4225c1e 	ins      	r1, r2, 30, 30
+ 126:	dc232060 	st.w      	r1, (r3, 0x180)
+ 12a:	d8232060 	ld.w      	r1, (r3, 0x180)
+ 12e:	c4225c1d 	ins      	r1, r2, 29, 29
+ 132:	3000      	movi      	r0, 0
+ 134:	dc232060 	st.w      	r1, (r3, 0x180)
+ 138:	783c      	jmp      	r15
+ 13a:	0000      	.short	0x0000
+ 13c:	071f003f 	.long	0x071f003f
+
+Disassembly of section .sram_text:
+
+00000000 <_AudioInISR>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	1423      	subi      	r14, r14, 12
+   4:	ea23a0a0 	movih      	r3, 41120
+   8:	d8432041 	ld.w      	r2, (r3, 0x104)
+   c:	c7025702 	zext      	r2, r2, 24, 24
+  10:	e922000a 	bnez      	r2, 0x24	// 24 <_AudioInISR+0x24>
+  14:	d8432041 	ld.w      	r2, (r3, 0x104)
+  18:	c7025702 	zext      	r2, r2, 24, 24
+  1c:	e9220004 	bnez      	r2, 0x24	// 24 <_AudioInISR+0x24>
+  20:	d8632041 	ld.w      	r3, (r3, 0x104)
+  24:	ea23a0a0 	movih      	r3, 41120
+  28:	d8032040 	ld.w      	r0, (r3, 0x100)
+  2c:	c6405640 	zext      	r0, r0, 18, 18
+  30:	e900000d 	bez      	r0, 0x4a	// 4a <_AudioInISR+0x4a>
+  34:	d8032041 	ld.w      	r0, (r3, 0x104)
+  38:	c6405640 	zext      	r0, r0, 18, 18
+  3c:	e9000007 	bez      	r0, 0x4a	// 4a <_AudioInISR+0x4a>
+  40:	3280      	movi      	r2, 128
+  42:	424b      	lsli      	r2, r2, 11
+  44:	dc432041 	st.w      	r2, (r3, 0x104)
+  48:	3001      	movi      	r0, 1
+  4a:	ea23a0a0 	movih      	r3, 41120
+  4e:	d8432040 	ld.w      	r2, (r3, 0x100)
+  52:	c6625662 	zext      	r2, r2, 19, 19
+  56:	e902000e 	bez      	r2, 0x72	// 72 <_AudioInISR+0x72>
+  5a:	d8432041 	ld.w      	r2, (r3, 0x104)
+  5e:	c6625662 	zext      	r2, r2, 19, 19
+  62:	e9020008 	bez      	r2, 0x72	// 72 <_AudioInISR+0x72>
+  66:	3280      	movi      	r2, 128
+  68:	424c      	lsli      	r2, r2, 12
+  6a:	ec000002 	ori      	r0, r0, 2
+  6e:	dc432041 	st.w      	r2, (r3, 0x104)
+  72:	ea23a0a0 	movih      	r3, 41120
+  76:	03bb      	lrw      	r5, 0x0	// 284 <_AudioInISR+0x284>
+  78:	d8432040 	ld.w      	r2, (r3, 0x100)
+  7c:	c6825682 	zext      	r2, r2, 20, 20
+  80:	e9020013 	bez      	r2, 0xa6	// a6 <_AudioInISR+0xa6>
+  84:	d8432041 	ld.w      	r2, (r3, 0x104)
+  88:	c6825682 	zext      	r2, r2, 20, 20
+  8c:	e902000d 	bez      	r2, 0xa6	// a6 <_AudioInISR+0xa6>
+  90:	3280      	movi      	r2, 128
+  92:	424d      	lsli      	r2, r2, 13
+  94:	ec000004 	ori      	r0, r0, 4
+  98:	dc432041 	st.w      	r2, (r3, 0x104)
+  9c:	9565      	ld.w      	r3, (r5, 0x14)
+  9e:	e9030006 	bez      	r3, 0xaa	// aa <_AudioInISR+0xaa>
+  a2:	7bcd      	jsr      	r3
+  a4:	0403      	br      	0xaa	// aa <_AudioInISR+0xaa>
+  a6:	e920fffb 	bnez      	r0, 0x9c	// 9c <_AudioInISR+0x9c>
+  aa:	320c      	movi      	r2, 12
+  ac:	3100      	movi      	r1, 0
+  ae:	6c3b      	mov      	r0, r14
+  b0:	e0000000 	bsr      	0x0	// 0 <memset>
+			b0: R_CKCORE_PCREL_IMM26BY2	memset
+  b4:	ea23a0a0 	movih      	r3, 41120
+  b8:	d8832040 	ld.w      	r4, (r3, 0x100)
+  bc:	e4842001 	andi      	r4, r4, 1
+  c0:	e9040006 	bez      	r4, 0xcc	// cc <_AudioInISR+0xcc>
+  c4:	d8832041 	ld.w      	r4, (r3, 0x104)
+  c8:	e4842001 	andi      	r4, r4, 1
+  cc:	ea23a0a0 	movih      	r3, 41120
+  d0:	d8432049 	ld.w      	r2, (r3, 0x124)
+  d4:	b840      	st.w      	r2, (r14, 0x0)
+  d6:	d8432040 	ld.w      	r2, (r3, 0x100)
+  da:	c4225422 	zext      	r2, r2, 1, 1
+  de:	e902000a 	bez      	r2, 0xf2	// f2 <_AudioInISR+0xf2>
+  e2:	d8632041 	ld.w      	r3, (r3, 0x104)
+  e6:	c4235423 	zext      	r3, r3, 1, 1
+  ea:	e9030004 	bez      	r3, 0xf2	// f2 <_AudioInISR+0xf2>
+  ee:	ec840002 	ori      	r4, r4, 2
+  f2:	ea23a0a0 	movih      	r3, 41120
+  f6:	d8432052 	ld.w      	r2, (r3, 0x148)
+  fa:	b841      	st.w      	r2, (r14, 0x4)
+  fc:	d8432040 	ld.w      	r2, (r3, 0x100)
+ 100:	c4425442 	zext      	r2, r2, 2, 2
+ 104:	e902000a 	bez      	r2, 0x118	// 118 <_AudioInISR+0x118>
+ 108:	d8632041 	ld.w      	r3, (r3, 0x104)
+ 10c:	c4435443 	zext      	r3, r3, 2, 2
+ 110:	e9030004 	bez      	r3, 0x118	// 118 <_AudioInISR+0x118>
+ 114:	ec840004 	ori      	r4, r4, 4
+ 118:	ea23a0a0 	movih      	r3, 41120
+ 11c:	e4c42001 	andi      	r6, r4, 1
+ 120:	d863205a 	ld.w      	r3, (r3, 0x168)
+ 124:	b862      	st.w      	r3, (r14, 0x8)
+ 126:	e9040021 	bez      	r4, 0x168	// 168 <_AudioInISR+0x168>
+ 12a:	9563      	ld.w      	r3, (r5, 0xc)
+ 12c:	e9030005 	bez      	r3, 0x136	// 136 <_AudioInISR+0x136>
+ 130:	6c7b      	mov      	r1, r14
+ 132:	6c13      	mov      	r0, r4
+ 134:	7bcd      	jsr      	r3
+ 136:	e9060007 	bez      	r6, 0x144	// 144 <_AudioInISR+0x144>
+ 13a:	ea23a0a0 	movih      	r3, 41120
+ 13e:	3201      	movi      	r2, 1
+ 140:	dc432041 	st.w      	r2, (r3, 0x104)
+ 144:	e4642002 	andi      	r3, r4, 2
+ 148:	e9030007 	bez      	r3, 0x156	// 156 <_AudioInISR+0x156>
+ 14c:	ea23a0a0 	movih      	r3, 41120
+ 150:	3202      	movi      	r2, 2
+ 152:	dc432041 	st.w      	r2, (r3, 0x104)
+ 156:	e4842004 	andi      	r4, r4, 4
+ 15a:	e9040007 	bez      	r4, 0x168	// 168 <_AudioInISR+0x168>
+ 15e:	ea23a0a0 	movih      	r3, 41120
+ 162:	3204      	movi      	r2, 4
+ 164:	dc432041 	st.w      	r2, (r3, 0x104)
+ 168:	320c      	movi      	r2, 12
+ 16a:	3100      	movi      	r1, 0
+ 16c:	6c3b      	mov      	r0, r14
+ 16e:	e0000000 	bsr      	0x0	// 0 <memset>
+			16e: R_CKCORE_PCREL_IMM26BY2	memset
+ 172:	ea23a0a0 	movih      	r3, 41120
+ 176:	d8832040 	ld.w      	r4, (r3, 0x100)
+ 17a:	c4645464 	zext      	r4, r4, 3, 3
+ 17e:	e904000c 	bez      	r4, 0x196	// 196 <_AudioInISR+0x196>
+ 182:	d8832041 	ld.w      	r4, (r3, 0x104)
+ 186:	c4645464 	zext      	r4, r4, 3, 3
+ 18a:	e9040006 	bez      	r4, 0x196	// 196 <_AudioInISR+0x196>
+ 18e:	d863204a 	ld.w      	r3, (r3, 0x128)
+ 192:	b860      	st.w      	r3, (r14, 0x0)
+ 194:	3401      	movi      	r4, 1
+ 196:	ea23a0a0 	movih      	r3, 41120
+ 19a:	d8432040 	ld.w      	r2, (r3, 0x100)
+ 19e:	c4825482 	zext      	r2, r2, 4, 4
+ 1a2:	e902000d 	bez      	r2, 0x1bc	// 1bc <_AudioInISR+0x1bc>
+ 1a6:	d8432041 	ld.w      	r2, (r3, 0x104)
+ 1aa:	c4825482 	zext      	r2, r2, 4, 4
+ 1ae:	e9020007 	bez      	r2, 0x1bc	// 1bc <_AudioInISR+0x1bc>
+ 1b2:	d8632053 	ld.w      	r3, (r3, 0x14c)
+ 1b6:	ec840002 	ori      	r4, r4, 2
+ 1ba:	b861      	st.w      	r3, (r14, 0x4)
+ 1bc:	ea23a0a0 	movih      	r3, 41120
+ 1c0:	d8432040 	ld.w      	r2, (r3, 0x100)
+ 1c4:	c4a254a2 	zext      	r2, r2, 5, 5
+ 1c8:	e9020026 	bez      	r2, 0x214	// 214 <_AudioInISR+0x214>
+ 1cc:	d8432041 	ld.w      	r2, (r3, 0x104)
+ 1d0:	c4a254a2 	zext      	r2, r2, 5, 5
+ 1d4:	e9020020 	bez      	r2, 0x214	// 214 <_AudioInISR+0x214>
+ 1d8:	d863205b 	ld.w      	r3, (r3, 0x16c)
+ 1dc:	ec840004 	ori      	r4, r4, 4
+ 1e0:	b862      	st.w      	r3, (r14, 0x8)
+ 1e2:	9564      	ld.w      	r3, (r5, 0x10)
+ 1e4:	e9030005 	bez      	r3, 0x1ee	// 1ee <_AudioInISR+0x1ee>
+ 1e8:	6c7b      	mov      	r1, r14
+ 1ea:	6c13      	mov      	r0, r4
+ 1ec:	7bcd      	jsr      	r3
+ 1ee:	e4642001 	andi      	r3, r4, 1
+ 1f2:	e9030007 	bez      	r3, 0x200	// 200 <_AudioInISR+0x200>
+ 1f6:	ea23a0a0 	movih      	r3, 41120
+ 1fa:	3208      	movi      	r2, 8
+ 1fc:	dc432041 	st.w      	r2, (r3, 0x104)
+ 200:	e4642002 	andi      	r3, r4, 2
+ 204:	e903000a 	bez      	r3, 0x218	// 218 <_AudioInISR+0x218>
+ 208:	ea23a0a0 	movih      	r3, 41120
+ 20c:	3210      	movi      	r2, 16
+ 20e:	dc432041 	st.w      	r2, (r3, 0x104)
+ 212:	0403      	br      	0x218	// 218 <_AudioInISR+0x218>
+ 214:	e924ffe7 	bnez      	r4, 0x1e2	// 1e2 <_AudioInISR+0x1e2>
+ 218:	e4842004 	andi      	r4, r4, 4
+ 21c:	ea23a0a0 	movih      	r3, 41120
+ 220:	e9040005 	bez      	r4, 0x22a	// 22a <_AudioInISR+0x22a>
+ 224:	3220      	movi      	r2, 32
+ 226:	dc432041 	st.w      	r2, (r3, 0x104)
+ 22a:	d8032040 	ld.w      	r0, (r3, 0x100)
+ 22e:	c6005600 	zext      	r0, r0, 16, 16
+ 232:	e900000d 	bez      	r0, 0x24c	// 24c <_AudioInISR+0x24c>
+ 236:	d8032041 	ld.w      	r0, (r3, 0x104)
+ 23a:	c6005600 	zext      	r0, r0, 16, 16
+ 23e:	e9000007 	bez      	r0, 0x24c	// 24c <_AudioInISR+0x24c>
+ 242:	3280      	movi      	r2, 128
+ 244:	4249      	lsli      	r2, r2, 9
+ 246:	dc432041 	st.w      	r2, (r3, 0x104)
+ 24a:	3001      	movi      	r0, 1
+ 24c:	ea23a0a0 	movih      	r3, 41120
+ 250:	d8432040 	ld.w      	r2, (r3, 0x100)
+ 254:	c6225622 	zext      	r2, r2, 17, 17
+ 258:	e902000e 	bez      	r2, 0x274	// 274 <_AudioInISR+0x274>
+ 25c:	d8432041 	ld.w      	r2, (r3, 0x104)
+ 260:	c6225622 	zext      	r2, r2, 17, 17
+ 264:	e9020008 	bez      	r2, 0x274	// 274 <_AudioInISR+0x274>
+ 268:	3280      	movi      	r2, 128
+ 26a:	424a      	lsli      	r2, r2, 10
+ 26c:	ec000002 	ori      	r0, r0, 2
+ 270:	dc432041 	st.w      	r2, (r3, 0x104)
+ 274:	9566      	ld.w      	r3, (r5, 0x18)
+ 276:	e9030003 	bez      	r3, 0x27c	// 27c <_AudioInISR+0x27c>
+ 27a:	7bcd      	jsr      	r3
+ 27c:	3000      	movi      	r0, 0
+ 27e:	1403      	addi      	r14, r14, 12
+ 280:	1493      	pop      	r4-r6, r15
+ 282:	0000      	.short	0x0000
+ 284:	00000000 	.long	0x00000000
+			284: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text._pcm_channel_setting.isra.0:
+
+00000000 <_pcm_channel_setting.isra.0>:
+   0:	e583207f 	andi      	r12, r3, 127
+   4:	da6e2000 	ld.w      	r19, (r14, 0x0)
+   8:	e92c0020 	bnez      	r12, 0x48	// 48 <_pcm_channel_setting.isra.0+0x48>
+   c:	c441242c 	or      	r12, r1, r2
+  10:	e58c2007 	andi      	r12, r12, 7
+  14:	e92c001a 	bnez      	r12, 0x48	// 48 <_pcm_channel_setting.isra.0+0x48>
+  18:	ea32a0a0 	movih      	r18, 41120
+  1c:	ea0d0024 	movi      	r13, 36
+  20:	c4124834 	lsli      	r20, r18, 0
+  24:	f9a08454 	mula.32.l      	r20, r0, r13
+  28:	200a      	addi      	r0, 11
+  2a:	de742044 	st.w      	r19, (r20, 0x110)
+  2e:	dc342045 	st.w      	r1, (r20, 0x114)
+  32:	dc542047 	st.w      	r2, (r20, 0x11c)
+  36:	dc742048 	st.w      	r3, (r20, 0x120)
+  3a:	3301      	movi      	r3, 1
+  3c:	c4034020 	lsl      	r0, r3, r0
+  40:	dc122041 	st.w      	r0, (r18, 0x104)
+  44:	6c33      	mov      	r0, r12
+  46:	783c      	jmp      	r15
+  48:	3000      	movi      	r0, 0
+  4a:	2800      	subi      	r0, 1
+  4c:	07fd      	br      	0x46	// 46 <_pcm_channel_setting.isra.0+0x46>
+
+Disassembly of section .text.gx_audio_in_set_input_sadc:
+
+00000000 <gx_audio_in_set_input_sadc>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	3101      	movi      	r1, 1
+   6:	3007      	movi      	r0, 7
+   8:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   c:	3000      	movi      	r0, 0
+   e:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_adc_rstn>
+			e: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_adc_rstn
+  12:	3c40      	cmpnei      	r4, 0
+  14:	6403      	mvcv      	r0
+  16:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_pga_bypass>
+			16: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_pga_bypass
+  1a:	6c13      	mov      	r0, r4
+  1c:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_pga_enable>
+			1c: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_pga_enable
+  20:	3001      	movi      	r0, 1
+  22:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_adc_sample_clk_sel>
+			22: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_adc_sample_clk_sel
+  26:	3000      	movi      	r0, 0
+  28:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_adc_out_at_clk>
+			28: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_adc_out_at_clk
+  2c:	e9040018 	bez      	r4, 0x5c	// 5c <gx_audio_in_set_input_sadc+0x5c>
+  30:	3000      	movi      	r0, 0
+  32:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_adc_in_sel>
+			32: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_adc_in_sel
+  36:	3000      	movi      	r0, 0
+  38:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_pga_itrim>
+			38: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_pga_itrim
+  3c:	3001      	movi      	r0, 1
+  3e:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_adc_rstn>
+			3e: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_adc_rstn
+  42:	ea23a0a0 	movih      	r3, 41120
+  46:	3101      	movi      	r1, 1
+  48:	9340      	ld.w      	r2, (r3, 0x0)
+  4a:	c4415c06 	ins      	r2, r1, 6, 6
+  4e:	b340      	st.w      	r2, (r3, 0x0)
+  50:	3000      	movi      	r0, 0
+  52:	1044      	lrw      	r2, 0x0	// 60 <gx_audio_in_set_input_sadc+0x60>
+  54:	9260      	ld.w      	r3, (r2, 0x0)
+  56:	6cc4      	or      	r3, r1
+  58:	b260      	st.w      	r3, (r2, 0x0)
+  5a:	1491      	pop      	r4, r15
+  5c:	3001      	movi      	r0, 1
+  5e:	07ea      	br      	0x32	// 32 <gx_audio_in_set_input_sadc+0x32>
+  60:	00000000 	.long	0x00000000
+			60: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_audio_in_set_input_pdm:
+
+00000000 <gx_audio_in_set_input_pdm>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	6d43      	mov      	r5, r0
+   4:	3101      	movi      	r1, 1
+   6:	3008      	movi      	r0, 8
+   8:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   c:	ea23a0a0 	movih      	r3, 41120
+  10:	3400      	movi      	r4, 0
+  12:	934a      	ld.w      	r2, (r3, 0x28)
+  14:	c4445caa 	ins      	r2, r4, 15, 10
+  18:	b34a      	st.w      	r2, (r3, 0x28)
+  1a:	934b      	ld.w      	r2, (r3, 0x2c)
+  1c:	c4445caa 	ins      	r2, r4, 15, 10
+  20:	b34b      	st.w      	r2, (r3, 0x2c)
+  22:	9340      	ld.w      	r2, (r3, 0x0)
+  24:	c4455c09 	ins      	r2, r5, 9, 9
+  28:	b340      	st.w      	r2, (r3, 0x0)
+  2a:	9340      	ld.w      	r2, (r3, 0x0)
+  2c:	3101      	movi      	r1, 1
+  2e:	c4415c0e 	ins      	r2, r1, 14, 14
+  32:	b340      	st.w      	r2, (r3, 0x0)
+  34:	300a      	movi      	r0, 10
+  36:	1045      	lrw      	r2, 0x0	// 48 <gx_audio_in_set_input_pdm+0x48>
+  38:	9260      	ld.w      	r3, (r2, 0x0)
+  3a:	ec630002 	ori      	r3, r3, 2
+  3e:	b260      	st.w      	r3, (r2, 0x0)
+  40:	e0000000 	bsr      	0x0	// 0 <gx_mdelay>
+			40: R_CKCORE_PCREL_IMM26BY2	gx_mdelay
+  44:	6c13      	mov      	r0, r4
+  46:	1492      	pop      	r4-r5, r15
+  48:	00000000 	.long	0x00000000
+			48: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_audio_in_set_input_i2s:
+
+00000000 <gx_audio_in_set_input_i2s>:
+   0:	1424      	subi      	r14, r14, 16
+   2:	14d1      	push      	r4, r15
+   4:	6d07      	mov      	r4, r1
+   6:	b802      	st.w      	r0, (r14, 0x8)
+   8:	b823      	st.w      	r1, (r14, 0xc)
+   a:	3002      	movi      	r0, 2
+   c:	3101      	movi      	r1, 1
+   e:	b844      	st.w      	r2, (r14, 0x10)
+  10:	b865      	st.w      	r3, (r14, 0x14)
+  12:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			12: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  16:	ea23a0a0 	movih      	r3, 41120
+  1a:	9822      	ld.w      	r1, (r14, 0x8)
+  1c:	9341      	ld.w      	r2, (r3, 0x4)
+  1e:	c4415c64 	ins      	r2, r1, 7, 4
+  22:	b341      	st.w      	r2, (r3, 0x4)
+  24:	9341      	ld.w      	r2, (r3, 0x4)
+  26:	c4445c48 	ins      	r2, r4, 10, 8
+  2a:	b341      	st.w      	r2, (r3, 0x4)
+  2c:	9341      	ld.w      	r2, (r3, 0x4)
+  2e:	9824      	ld.w      	r1, (r14, 0x10)
+  30:	c4415c10 	ins      	r2, r1, 16, 16
+  34:	b341      	st.w      	r2, (r3, 0x4)
+  36:	9341      	ld.w      	r2, (r3, 0x4)
+  38:	9825      	ld.w      	r1, (r14, 0x14)
+  3a:	c4415c32 	ins      	r2, r1, 19, 18
+  3e:	b341      	st.w      	r2, (r3, 0x4)
+  40:	9341      	ld.w      	r2, (r3, 0x4)
+  42:	9826      	ld.w      	r1, (r14, 0x18)
+  44:	c4415c35 	ins      	r2, r1, 22, 21
+  48:	3c02      	cmphsi      	r4, 3
+  4a:	b341      	st.w      	r2, (r3, 0x4)
+  4c:	9341      	ld.w      	r2, (r3, 0x4)
+  4e:	0c28      	bf      	0x9e	// 9e <gx_audio_in_set_input_i2s+0x9e>
+  50:	3101      	movi      	r1, 1
+  52:	c4415c11 	ins      	r2, r1, 17, 17
+  56:	b341      	st.w      	r2, (r3, 0x4)
+  58:	ea23a0a0 	movih      	r3, 41120
+  5c:	9827      	ld.w      	r1, (r14, 0x1c)
+  5e:	9341      	ld.w      	r2, (r3, 0x4)
+  60:	c4415c0b 	ins      	r2, r1, 11, 11
+  64:	b341      	st.w      	r2, (r3, 0x4)
+  66:	9341      	ld.w      	r2, (r3, 0x4)
+  68:	3000      	movi      	r0, 0
+  6a:	c4405c14 	ins      	r2, r0, 20, 20
+  6e:	b341      	st.w      	r2, (r3, 0x4)
+  70:	9341      	ld.w      	r2, (r3, 0x4)
+  72:	c4405c02 	ins      	r2, r0, 2, 2
+  76:	b341      	st.w      	r2, (r3, 0x4)
+  78:	9341      	ld.w      	r2, (r3, 0x4)
+  7a:	c4405c03 	ins      	r2, r0, 3, 3
+  7e:	b341      	st.w      	r2, (r3, 0x4)
+  80:	9341      	ld.w      	r2, (r3, 0x4)
+  82:	3101      	movi      	r1, 1
+  84:	c4415c1e 	ins      	r2, r1, 30, 30
+  88:	b341      	st.w      	r2, (r3, 0x4)
+  8a:	1047      	lrw      	r2, 0x0	// a4 <gx_audio_in_set_input_i2s+0xa4>
+  8c:	9260      	ld.w      	r3, (r2, 0x0)
+  8e:	ec630004 	ori      	r3, r3, 4
+  92:	b260      	st.w      	r3, (r2, 0x0)
+  94:	d9ee2001 	ld.w      	r15, (r14, 0x4)
+  98:	9880      	ld.w      	r4, (r14, 0x0)
+  9a:	1406      	addi      	r14, r14, 24
+  9c:	783c      	jmp      	r15
+  9e:	3100      	movi      	r1, 0
+  a0:	07d9      	br      	0x52	// 52 <gx_audio_in_set_input_i2s+0x52>
+  a2:	0000      	.short	0x0000
+  a4:	0000      	.short	0x0000
+			a4: R_CKCORE_ADDR32	.bss
+	...
+
+Disassembly of section .text.gx_audio_in_set_input_channel:
+
+00000000 <gx_audio_in_set_input_channel>:
+   0:	3844      	cmpnei      	r0, 4
+   2:	080d      	bt      	0x1c	// 1c <gx_audio_in_set_input_channel+0x1c>
+   4:	ea23a0a0 	movih      	r3, 41120
+   8:	9312      	ld.w      	r0, (r3, 0x48)
+   a:	c4015c60 	ins      	r0, r1, 3, 0
+   e:	b312      	st.w      	r0, (r3, 0x48)
+  10:	9333      	ld.w      	r1, (r3, 0x4c)
+  12:	c4225c60 	ins      	r1, r2, 3, 0
+  16:	b333      	st.w      	r1, (r3, 0x4c)
+  18:	3000      	movi      	r0, 0
+  1a:	783c      	jmp      	r15
+  1c:	3842      	cmpnei      	r0, 2
+  1e:	0bfd      	bt      	0x18	// 18 <gx_audio_in_set_input_channel+0x18>
+  20:	ea23a0a0 	movih      	r3, 41120
+  24:	930a      	ld.w      	r0, (r3, 0x28)
+  26:	c4015c60 	ins      	r0, r1, 3, 0
+  2a:	b30a      	st.w      	r0, (r3, 0x28)
+  2c:	932b      	ld.w      	r1, (r3, 0x2c)
+  2e:	c4225c60 	ins      	r1, r2, 3, 0
+  32:	b32b      	st.w      	r1, (r3, 0x2c)
+  34:	07f2      	br      	0x18	// 18 <gx_audio_in_set_input_channel+0x18>
+
+Disassembly of section .text.gx_audio_in_set_output_pcm:
+
+00000000 <gx_audio_in_set_output_pcm>:
+   0:	1423      	subi      	r14, r14, 12
+   2:	14d3      	push      	r4-r6, r15
+   4:	1421      	subi      	r14, r14, 4
+   6:	6d03      	mov      	r4, r0
+   8:	3c41      	cmpnei      	r4, 1
+   a:	b825      	st.w      	r1, (r14, 0x14)
+   c:	b846      	st.w      	r2, (r14, 0x18)
+   e:	b867      	st.w      	r3, (r14, 0x1c)
+  10:	9808      	ld.w      	r0, (r14, 0x20)
+  12:	98a9      	ld.w      	r5, (r14, 0x24)
+  14:	98ca      	ld.w      	r6, (r14, 0x28)
+  16:	0837      	bt      	0x84	// 84 <gx_audio_in_set_output_pcm+0x84>
+  18:	b800      	st.w      	r0, (r14, 0x0)
+  1a:	3000      	movi      	r0, 0
+  1c:	e0000000 	bsr      	0x0	// 0 <gx_audio_in_set_output_pcm>
+			1c: R_CKCORE_PCREL_IMM26BY2	_pcm_channel_setting.isra.0
+  20:	e900000c 	bez      	r0, 0x38	// 38 <gx_audio_in_set_output_pcm+0x38>
+  24:	3000      	movi      	r0, 0
+  26:	2800      	subi      	r0, 1
+  28:	1401      	addi      	r14, r14, 4
+  2a:	d9ee2003 	ld.w      	r15, (r14, 0xc)
+  2e:	98c2      	ld.w      	r6, (r14, 0x8)
+  30:	98a1      	ld.w      	r5, (r14, 0x4)
+  32:	9880      	ld.w      	r4, (r14, 0x0)
+  34:	1407      	addi      	r14, r14, 28
+  36:	783c      	jmp      	r15
+  38:	ea23a0a0 	movih      	r3, 41120
+  3c:	d8432042 	ld.w      	r2, (r3, 0x108)
+  40:	c4465c20 	ins      	r2, r6, 1, 0
+  44:	dc432042 	st.w      	r2, (r3, 0x108)
+  48:	d8432042 	ld.w      	r2, (r3, 0x108)
+  4c:	c4455c22 	ins      	r2, r5, 3, 2
+  50:	dc432042 	st.w      	r2, (r3, 0x108)
+  54:	d8432042 	ld.w      	r2, (r3, 0x108)
+  58:	c4445c06 	ins      	r2, r4, 6, 6
+  5c:	dc432042 	st.w      	r2, (r3, 0x108)
+  60:	d8432042 	ld.w      	r2, (r3, 0x108)
+  64:	c4405c07 	ins      	r2, r0, 7, 7
+  68:	dc432042 	st.w      	r2, (r3, 0x108)
+  6c:	d8432042 	ld.w      	r2, (r3, 0x108)
+  70:	c4445c05 	ins      	r2, r4, 5, 5
+  74:	dc432042 	st.w      	r2, (r3, 0x108)
+  78:	3000      	movi      	r0, 0
+  7a:	1057      	lrw      	r2, 0x0	// d4 <gx_audio_in_set_output_pcm+0xd4>
+  7c:	9261      	ld.w      	r3, (r2, 0x4)
+  7e:	6d0c      	or      	r4, r3
+  80:	b281      	st.w      	r4, (r2, 0x4)
+  82:	07d3      	br      	0x28	// 28 <gx_audio_in_set_output_pcm+0x28>
+  84:	3c42      	cmpnei      	r4, 2
+  86:	0bcf      	bt      	0x24	// 24 <gx_audio_in_set_output_pcm+0x24>
+  88:	b800      	st.w      	r0, (r14, 0x0)
+  8a:	3001      	movi      	r0, 1
+  8c:	e0000000 	bsr      	0x0	// 0 <gx_audio_in_set_output_pcm>
+			8c: R_CKCORE_PCREL_IMM26BY2	_pcm_channel_setting.isra.0
+  90:	e920ffca 	bnez      	r0, 0x24	// 24 <gx_audio_in_set_output_pcm+0x24>
+  94:	ea23a0a0 	movih      	r3, 41120
+  98:	3101      	movi      	r1, 1
+  9a:	d8432042 	ld.w      	r2, (r3, 0x108)
+  9e:	c4465c28 	ins      	r2, r6, 9, 8
+  a2:	dc432042 	st.w      	r2, (r3, 0x108)
+  a6:	d8432042 	ld.w      	r2, (r3, 0x108)
+  aa:	c4455c2a 	ins      	r2, r5, 11, 10
+  ae:	dc432042 	st.w      	r2, (r3, 0x108)
+  b2:	d8432042 	ld.w      	r2, (r3, 0x108)
+  b6:	c4415c0e 	ins      	r2, r1, 14, 14
+  ba:	dc432042 	st.w      	r2, (r3, 0x108)
+  be:	d8432042 	ld.w      	r2, (r3, 0x108)
+  c2:	c4405c0f 	ins      	r2, r0, 15, 15
+  c6:	dc432042 	st.w      	r2, (r3, 0x108)
+  ca:	d8432042 	ld.w      	r2, (r3, 0x108)
+  ce:	c4415c0d 	ins      	r2, r1, 13, 13
+  d2:	07d1      	br      	0x74	// 74 <gx_audio_in_set_output_pcm+0x74>
+  d4:	00000000 	.long	0x00000000
+			d4: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_audio_in_set_output_pcm_stop:
+
+00000000 <gx_audio_in_set_output_pcm_stop>:
+   0:	3841      	cmpnei      	r0, 1
+   2:	0818      	bt      	0x32	// 32 <gx_audio_in_set_output_pcm_stop+0x32>
+   4:	ea22a0a0 	movih      	r2, 41120
+   8:	3300      	movi      	r3, 0
+   a:	d8222042 	ld.w      	r1, (r2, 0x108)
+   e:	c4235c06 	ins      	r1, r3, 6, 6
+  12:	dc222042 	st.w      	r1, (r2, 0x108)
+  16:	d8222042 	ld.w      	r1, (r2, 0x108)
+  1a:	c4205c07 	ins      	r1, r0, 7, 7
+  1e:	dc222042 	st.w      	r1, (r2, 0x108)
+  22:	d8222042 	ld.w      	r1, (r2, 0x108)
+  26:	c4235c05 	ins      	r1, r3, 5, 5
+  2a:	dc222042 	st.w      	r1, (r2, 0x108)
+  2e:	6c0f      	mov      	r0, r3
+  30:	783c      	jmp      	r15
+  32:	3842      	cmpnei      	r0, 2
+  34:	3000      	movi      	r0, 0
+  36:	0817      	bt      	0x64	// 64 <gx_audio_in_set_output_pcm_stop+0x64>
+  38:	ea23a0a0 	movih      	r3, 41120
+  3c:	3101      	movi      	r1, 1
+  3e:	d8432042 	ld.w      	r2, (r3, 0x108)
+  42:	c4405c0e 	ins      	r2, r0, 14, 14
+  46:	dc432042 	st.w      	r2, (r3, 0x108)
+  4a:	d8432042 	ld.w      	r2, (r3, 0x108)
+  4e:	c4415c0f 	ins      	r2, r1, 15, 15
+  52:	dc432042 	st.w      	r2, (r3, 0x108)
+  56:	d8432042 	ld.w      	r2, (r3, 0x108)
+  5a:	c4405c0d 	ins      	r2, r0, 13, 13
+  5e:	dc432042 	st.w      	r2, (r3, 0x108)
+  62:	07e7      	br      	0x30	// 30 <gx_audio_in_set_output_pcm_stop+0x30>
+  64:	2800      	subi      	r0, 1
+  66:	07e5      	br      	0x30	// 30 <gx_audio_in_set_output_pcm_stop+0x30>
+
+Disassembly of section .text.gx_audio_in_set_output_logfbank:
+
+00000000 <gx_audio_in_set_output_logfbank>:
+   0:	1424      	subi      	r14, r14, 16
+   2:	e5802007 	andi      	r12, r0, 7
+   6:	b800      	st.w      	r0, (r14, 0x0)
+   8:	b821      	st.w      	r1, (r14, 0x4)
+   a:	b842      	st.w      	r2, (r14, 0x8)
+   c:	b863      	st.w      	r3, (r14, 0xc)
+   e:	e92c0049 	bnez      	r12, 0xa0	// a0 <gx_audio_in_set_output_logfbank+0xa0>
+  12:	ea0c0050 	movi      	r12, 80
+  16:	c581802d 	divu      	r13, r1, r12
+  1a:	7f70      	mult      	r13, r12
+  1c:	c5a1008c 	subu      	r12, r1, r13
+  20:	e92c0040 	bnez      	r12, 0xa0	// a0 <gx_audio_in_set_output_logfbank+0xa0>
+  24:	c441802c 	divu      	r12, r1, r2
+  28:	7f08      	mult      	r12, r2
+  2a:	6072      	subu      	r1, r12
+  2c:	e921003a 	bnez      	r1, 0xa0	// a0 <gx_audio_in_set_output_logfbank+0xa0>
+  30:	ea2ca0a0 	movih      	r12, 41120
+  34:	da4c2042 	ld.w      	r18, (r12, 0x108)
+  38:	c6435c33 	ins      	r18, r3, 20, 19
+  3c:	de4c2042 	st.w      	r18, (r12, 0x108)
+  40:	d86c2042 	ld.w      	r3, (r12, 0x108)
+  44:	da4e2004 	ld.w      	r18, (r14, 0x10)
+  48:	c4725c50 	ins      	r3, r18, 18, 16
+  4c:	dc6c2042 	st.w      	r3, (r12, 0x108)
+  50:	3300      	movi      	r3, 0
+  52:	2b07      	subi      	r3, 8
+  54:	680c      	and      	r0, r3
+  56:	3380      	movi      	r3, 128
+  58:	4366      	lsli      	r3, r3, 6
+  5a:	dc4c2057 	st.w      	r2, (r12, 0x15c)
+  5e:	dc0c2058 	st.w      	r0, (r12, 0x160)
+  62:	ddac2059 	st.w      	r13, (r12, 0x164)
+  66:	dc6c2041 	st.w      	r3, (r12, 0x104)
+  6a:	d86c2042 	ld.w      	r3, (r12, 0x108)
+  6e:	3201      	movi      	r2, 1
+  70:	c4625c16 	ins      	r3, r2, 22, 22
+  74:	dc6c2042 	st.w      	r3, (r12, 0x108)
+  78:	d86c2042 	ld.w      	r3, (r12, 0x108)
+  7c:	c4615c17 	ins      	r3, r1, 23, 23
+  80:	dc6c2042 	st.w      	r3, (r12, 0x108)
+  84:	d86c2042 	ld.w      	r3, (r12, 0x108)
+  88:	c4625c15 	ins      	r3, r2, 21, 21
+  8c:	1047      	lrw      	r2, 0x0	// a8 <gx_audio_in_set_output_logfbank+0xa8>
+  8e:	6c07      	mov      	r0, r1
+  90:	dc6c2042 	st.w      	r3, (r12, 0x108)
+  94:	9261      	ld.w      	r3, (r2, 0x4)
+  96:	ec630004 	ori      	r3, r3, 4
+  9a:	b261      	st.w      	r3, (r2, 0x4)
+  9c:	1404      	addi      	r14, r14, 16
+  9e:	783c      	jmp      	r15
+  a0:	3000      	movi      	r0, 0
+  a2:	2800      	subi      	r0, 1
+  a4:	07fc      	br      	0x9c	// 9c <gx_audio_in_set_output_logfbank+0x9c>
+  a6:	0000      	.short	0x0000
+  a8:	00000000 	.long	0x00000000
+			a8: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_audio_in_set_output_spectrum:
+
+00000000 <gx_audio_in_set_output_spectrum>:
+   0:	1423      	subi      	r14, r14, 12
+   2:	14d4      	push      	r4-r7, r15
+   4:	1421      	subi      	r14, r14, 4
+   6:	ea24a0a0 	movih      	r4, 41120
+   a:	b826      	st.w      	r1, (r14, 0x18)
+   c:	b847      	st.w      	r2, (r14, 0x1c)
+   e:	b868      	st.w      	r3, (r14, 0x20)
+  10:	d98e200a 	ld.w      	r12, (r14, 0x28)
+  14:	6d83      	mov      	r6, r0
+  16:	d8042042 	ld.w      	r0, (r4, 0x108)
+  1a:	c40c5c50 	ins      	r0, r12, 18, 16
+  1e:	98e9      	ld.w      	r7, (r14, 0x24)
+  20:	dc042042 	st.w      	r0, (r4, 0x108)
+  24:	e402207f 	andi      	r0, r2, 127
+  28:	e9200064 	bnez      	r0, 0xf0	// f0 <gx_audio_in_set_output_spectrum+0xf0>
+  2c:	e4a12007 	andi      	r5, r1, 7
+  30:	e9250060 	bnez      	r5, 0xf0	// f0 <gx_audio_in_set_output_spectrum+0xf0>
+  34:	3e41      	cmpnei      	r6, 1
+  36:	0835      	bt      	0xa0	// a0 <gx_audio_in_set_output_spectrum+0xa0>
+  38:	60cc      	addu      	r3, r3
+  3a:	b860      	st.w      	r3, (r14, 0x0)
+  3c:	6c17      	mov      	r0, r5
+  3e:	6ccb      	mov      	r3, r2
+  40:	6c97      	mov      	r2, r5
+  42:	e0000000 	bsr      	0x0	// 0 <gx_audio_in_set_output_spectrum>
+			42: R_CKCORE_PCREL_IMM26BY2	_pcm_channel_setting.isra.0
+  46:	d8642042 	ld.w      	r3, (r4, 0x108)
+  4a:	3203      	movi      	r2, 3
+  4c:	c4625c20 	ins      	r3, r2, 1, 0
+  50:	dc642042 	st.w      	r3, (r4, 0x108)
+  54:	d8642042 	ld.w      	r3, (r4, 0x108)
+  58:	c4675c22 	ins      	r3, r7, 3, 2
+  5c:	dc642042 	st.w      	r3, (r4, 0x108)
+  60:	d8642042 	ld.w      	r3, (r4, 0x108)
+  64:	c4665c06 	ins      	r3, r6, 6, 6
+  68:	dc642042 	st.w      	r3, (r4, 0x108)
+  6c:	d8642042 	ld.w      	r3, (r4, 0x108)
+  70:	c4655c07 	ins      	r3, r5, 7, 7
+  74:	dc642042 	st.w      	r3, (r4, 0x108)
+  78:	d8642042 	ld.w      	r3, (r4, 0x108)
+  7c:	c4665c05 	ins      	r3, r6, 5, 5
+  80:	105e      	lrw      	r2, 0x0	// f8 <gx_audio_in_set_output_spectrum+0xf8>
+  82:	3000      	movi      	r0, 0
+  84:	dc642042 	st.w      	r3, (r4, 0x108)
+  88:	9261      	ld.w      	r3, (r2, 0x4)
+  8a:	6d8c      	or      	r6, r3
+  8c:	b2c1      	st.w      	r6, (r2, 0x4)
+  8e:	1401      	addi      	r14, r14, 4
+  90:	d9ee2004 	ld.w      	r15, (r14, 0x10)
+  94:	98e3      	ld.w      	r7, (r14, 0xc)
+  96:	98c2      	ld.w      	r6, (r14, 0x8)
+  98:	98a1      	ld.w      	r5, (r14, 0x4)
+  9a:	9880      	ld.w      	r4, (r14, 0x0)
+  9c:	1408      	addi      	r14, r14, 32
+  9e:	783c      	jmp      	r15
+  a0:	3e42      	cmpnei      	r6, 2
+  a2:	0827      	bt      	0xf0	// f0 <gx_audio_in_set_output_spectrum+0xf0>
+  a4:	60cc      	addu      	r3, r3
+  a6:	b860      	st.w      	r3, (r14, 0x0)
+  a8:	3001      	movi      	r0, 1
+  aa:	6ccb      	mov      	r3, r2
+  ac:	6c97      	mov      	r2, r5
+  ae:	e0000000 	bsr      	0x0	// 0 <gx_audio_in_set_output_spectrum>
+			ae: R_CKCORE_PCREL_IMM26BY2	_pcm_channel_setting.isra.0
+  b2:	d8642042 	ld.w      	r3, (r4, 0x108)
+  b6:	3203      	movi      	r2, 3
+  b8:	c4625c28 	ins      	r3, r2, 9, 8
+  bc:	dc642042 	st.w      	r3, (r4, 0x108)
+  c0:	d8642042 	ld.w      	r3, (r4, 0x108)
+  c4:	c4675c2a 	ins      	r3, r7, 11, 10
+  c8:	dc642042 	st.w      	r3, (r4, 0x108)
+  cc:	d8642042 	ld.w      	r3, (r4, 0x108)
+  d0:	3201      	movi      	r2, 1
+  d2:	c4625c0e 	ins      	r3, r2, 14, 14
+  d6:	dc642042 	st.w      	r3, (r4, 0x108)
+  da:	d8642042 	ld.w      	r3, (r4, 0x108)
+  de:	c4655c0f 	ins      	r3, r5, 15, 15
+  e2:	dc642042 	st.w      	r3, (r4, 0x108)
+  e6:	d8642042 	ld.w      	r3, (r4, 0x108)
+  ea:	c4625c0d 	ins      	r3, r2, 13, 13
+  ee:	07c9      	br      	0x80	// 80 <gx_audio_in_set_output_spectrum+0x80>
+  f0:	3000      	movi      	r0, 0
+  f2:	2800      	subi      	r0, 1
+  f4:	07cd      	br      	0x8e	// 8e <gx_audio_in_set_output_spectrum+0x8e>
+  f6:	0000      	.short	0x0000
+  f8:	00000000 	.long	0x00000000
+			f8: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_audio_in_set_output_i2s:
+
+00000000 <gx_audio_in_set_output_i2s>:
+   0:	1424      	subi      	r14, r14, 16
+   2:	14d3      	push      	r4-r6, r15
+   4:	b804      	st.w      	r0, (r14, 0x10)
+   6:	b825      	st.w      	r1, (r14, 0x14)
+   8:	6d0f      	mov      	r4, r3
+   a:	6d83      	mov      	r6, r0
+   c:	6d47      	mov      	r5, r1
+   e:	3002      	movi      	r0, 2
+  10:	3101      	movi      	r1, 1
+  12:	b846      	st.w      	r2, (r14, 0x18)
+  14:	b867      	st.w      	r3, (r14, 0x1c)
+  16:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			16: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  1a:	3c01      	cmphsi      	r4, 2
+  1c:	3000      	movi      	r0, 0
+  1e:	0843      	bt      	0xa4	// a4 <gx_audio_in_set_output_i2s+0xa4>
+  20:	3d02      	cmphsi      	r5, 3
+  22:	0841      	bt      	0xa4	// a4 <gx_audio_in_set_output_i2s+0xa4>
+  24:	3e48      	cmpnei      	r6, 8
+  26:	0c3f      	bf      	0xa4	// a4 <gx_audio_in_set_output_i2s+0xa4>
+  28:	ea22a0a0 	movih      	r2, 41120
+  2c:	ea8c001f 	lrw      	r12, 0x0	// a8 <gx_audio_in_set_output_i2s+0xa8>
+  30:	9262      	ld.w      	r3, (r2, 0x8)
+  32:	c4665c20 	ins      	r3, r6, 1, 0
+  36:	b262      	st.w      	r3, (r2, 0x8)
+  38:	9262      	ld.w      	r3, (r2, 0x8)
+  3a:	c4655c22 	ins      	r3, r5, 3, 2
+  3e:	b262      	st.w      	r3, (r2, 0x8)
+  40:	9262      	ld.w      	r3, (r2, 0x8)
+  42:	9826      	ld.w      	r1, (r14, 0x18)
+  44:	c4615c04 	ins      	r3, r1, 4, 4
+  48:	b262      	st.w      	r3, (r2, 0x8)
+  4a:	9222      	ld.w      	r1, (r2, 0x8)
+  4c:	c4245c05 	ins      	r1, r4, 5, 5
+  50:	b222      	st.w      	r1, (r2, 0x8)
+  52:	9262      	ld.w      	r3, (r2, 0x8)
+  54:	9828      	ld.w      	r1, (r14, 0x20)
+  56:	c4615c26 	ins      	r3, r1, 7, 6
+  5a:	b262      	st.w      	r3, (r2, 0x8)
+  5c:	9262      	ld.w      	r3, (r2, 0x8)
+  5e:	9829      	ld.w      	r1, (r14, 0x24)
+  60:	c4615c68 	ins      	r3, r1, 11, 8
+  64:	b262      	st.w      	r3, (r2, 0x8)
+  66:	9262      	ld.w      	r3, (r2, 0x8)
+  68:	982a      	ld.w      	r1, (r14, 0x28)
+  6a:	c4615c6c 	ins      	r3, r1, 15, 12
+  6e:	b262      	st.w      	r3, (r2, 0x8)
+  70:	9262      	ld.w      	r3, (r2, 0x8)
+  72:	c4605c1f 	ins      	r3, r0, 31, 31
+  76:	b262      	st.w      	r3, (r2, 0x8)
+  78:	9262      	ld.w      	r3, (r2, 0x8)
+  7a:	3101      	movi      	r1, 1
+  7c:	c4615c1e 	ins      	r3, r1, 30, 30
+  80:	b262      	st.w      	r3, (r2, 0x8)
+  82:	d86c2001 	ld.w      	r3, (r12, 0x4)
+  86:	ec630008 	ori      	r3, r3, 8
+  8a:	dc6c2001 	st.w      	r3, (r12, 0x4)
+  8e:	9262      	ld.w      	r3, (r2, 0x8)
+  90:	c4615c10 	ins      	r3, r1, 16, 16
+  94:	b262      	st.w      	r3, (r2, 0x8)
+  96:	d9ee2003 	ld.w      	r15, (r14, 0xc)
+  9a:	98c2      	ld.w      	r6, (r14, 0x8)
+  9c:	98a1      	ld.w      	r5, (r14, 0x4)
+  9e:	9880      	ld.w      	r4, (r14, 0x0)
+  a0:	1408      	addi      	r14, r14, 32
+  a2:	783c      	jmp      	r15
+  a4:	2800      	subi      	r0, 1
+  a6:	07f8      	br      	0x96	// 96 <gx_audio_in_set_output_i2s+0x96>
+  a8:	00000000 	.long	0x00000000
+			a8: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_audio_in_set_update_addr:
+
+00000000 <gx_audio_in_set_update_addr>:
+   0:	3841      	cmpnei      	r0, 1
+   2:	0828      	bt      	0x52	// 52 <gx_audio_in_set_update_addr+0x52>
+   4:	d9812002 	ld.w      	r12, (r1, 0x8)
+   8:	e46c207f 	andi      	r3, r12, 127
+   c:	e923006a 	bnez      	r3, 0xe0	// e0 <gx_audio_in_set_update_addr+0xe0>
+  10:	da412000 	ld.w      	r18, (r1, 0x0)
+  14:	e4722007 	andi      	r3, r18, 7
+  18:	e9230064 	bnez      	r3, 0xe0	// e0 <gx_audio_in_set_update_addr+0xe0>
+  1c:	d9a12001 	ld.w      	r13, (r1, 0x4)
+  20:	e46d2007 	andi      	r3, r13, 7
+  24:	e923005e 	bnez      	r3, 0xe0	// e0 <gx_audio_in_set_update_addr+0xe0>
+  28:	1130      	lrw      	r1, 0xa0a00110	// e8 <gx_audio_in_set_update_addr+0xe8>
+  2a:	ea22a0a0 	movih      	r2, 41120
+  2e:	de412001 	st.w      	r18, (r1, 0x4)
+  32:	dda12003 	st.w      	r13, (r1, 0xc)
+  36:	dd812004 	st.w      	r12, (r1, 0x10)
+  3a:	3180      	movi      	r1, 128
+  3c:	4124      	lsli      	r1, r1, 4
+  3e:	dc222041 	st.w      	r1, (r2, 0x104)
+  42:	d8222040 	ld.w      	r1, (r2, 0x100)
+  46:	c4205c03 	ins      	r1, r0, 3, 3
+  4a:	dc222040 	st.w      	r1, (r2, 0x100)
+  4e:	3000      	movi      	r0, 0
+  50:	0427      	br      	0x9e	// 9e <gx_audio_in_set_update_addr+0x9e>
+  52:	3842      	cmpnei      	r0, 2
+  54:	0826      	bt      	0xa0	// a0 <gx_audio_in_set_update_addr+0xa0>
+  56:	d9812002 	ld.w      	r12, (r1, 0x8)
+  5a:	e46c207f 	andi      	r3, r12, 127
+  5e:	e9230041 	bnez      	r3, 0xe0	// e0 <gx_audio_in_set_update_addr+0xe0>
+  62:	d9a12000 	ld.w      	r13, (r1, 0x0)
+  66:	e46d2007 	andi      	r3, r13, 7
+  6a:	e923003b 	bnez      	r3, 0xe0	// e0 <gx_audio_in_set_update_addr+0xe0>
+  6e:	9121      	ld.w      	r1, (r1, 0x4)
+  70:	e4012007 	andi      	r0, r1, 7
+  74:	e9200036 	bnez      	r0, 0xe0	// e0 <gx_audio_in_set_update_addr+0xe0>
+  78:	105d      	lrw      	r2, 0xa0a00134	// ec <gx_audio_in_set_update_addr+0xec>
+  7a:	ea23a0a0 	movih      	r3, 41120
+  7e:	dda22001 	st.w      	r13, (r2, 0x4)
+  82:	b223      	st.w      	r1, (r2, 0xc)
+  84:	dd822004 	st.w      	r12, (r2, 0x10)
+  88:	3280      	movi      	r2, 128
+  8a:	4245      	lsli      	r2, r2, 5
+  8c:	dc432041 	st.w      	r2, (r3, 0x104)
+  90:	d8432040 	ld.w      	r2, (r3, 0x100)
+  94:	3101      	movi      	r1, 1
+  96:	c4415c04 	ins      	r2, r1, 4, 4
+  9a:	dc432040 	st.w      	r2, (r3, 0x100)
+  9e:	783c      	jmp      	r15
+  a0:	3844      	cmpnei      	r0, 4
+  a2:	0bd6      	bt      	0x4e	// 4e <gx_audio_in_set_update_addr+0x4e>
+  a4:	d9812000 	ld.w      	r12, (r1, 0x0)
+  a8:	e46c2007 	andi      	r3, r12, 7
+  ac:	e923001a 	bnez      	r3, 0xe0	// e0 <gx_audio_in_set_update_addr+0xe0>
+  b0:	9141      	ld.w      	r2, (r1, 0x4)
+  b2:	3350      	movi      	r3, 80
+  b4:	c4628020 	divu      	r0, r2, r3
+  b8:	7c0c      	mult      	r0, r3
+  ba:	5a01      	subu      	r0, r2, r0
+  bc:	e9200012 	bnez      	r0, 0xe0	// e0 <gx_audio_in_set_update_addr+0xe0>
+  c0:	102c      	lrw      	r1, 0xa0a0015c	// f0 <gx_audio_in_set_update_addr+0xf0>
+  c2:	ea23a0a0 	movih      	r3, 41120
+  c6:	dd812001 	st.w      	r12, (r1, 0x4)
+  ca:	b142      	st.w      	r2, (r1, 0x8)
+  cc:	3280      	movi      	r2, 128
+  ce:	4246      	lsli      	r2, r2, 6
+  d0:	dc432041 	st.w      	r2, (r3, 0x104)
+  d4:	d8432040 	ld.w      	r2, (r3, 0x100)
+  d8:	3101      	movi      	r1, 1
+  da:	c4415c05 	ins      	r2, r1, 5, 5
+  de:	07de      	br      	0x9a	// 9a <gx_audio_in_set_update_addr+0x9a>
+  e0:	3000      	movi      	r0, 0
+  e2:	2800      	subi      	r0, 1
+  e4:	07dd      	br      	0x9e	// 9e <gx_audio_in_set_update_addr+0x9e>
+  e6:	0000      	.short	0x0000
+  e8:	a0a00110 	.long	0xa0a00110
+  ec:	a0a00134 	.long	0xa0a00134
+  f0:	a0a0015c 	.long	0xa0a0015c
+
+Disassembly of section .text.gx_audio_in_set_pga_gain:
+
+00000000 <gx_audio_in_set_pga_gain>:
+   0:	3306      	movi      	r3, 6
+   2:	c460802c 	divu      	r12, r0, r3
+   6:	e44c1003 	subi      	r2, r12, 4
+   a:	3a04      	cmphsi      	r2, 5
+   c:	081b      	bt      	0x42	// 42 <gx_audio_in_set_pga_gain+0x42>
+   e:	102f      	lrw      	r1, 0x0	// 48 <gx_audio_in_set_pga_gain+0x48>
+  10:	d0410022 	ldr.b      	r2, (r1, r2 << 0)
+  14:	c4608021 	divu      	r1, r0, r3
+  18:	7cc4      	mult      	r3, r1
+  1a:	600e      	subu      	r0, r3
+  1c:	ea23a0a0 	movih      	r3, 41120
+  20:	6030      	addu      	r0, r12
+  22:	6008      	addu      	r0, r2
+  24:	d8432069 	ld.w      	r2, (r3, 0x1a4)
+  28:	c4405ca0 	ins      	r2, r0, 5, 0
+  2c:	dc432069 	st.w      	r2, (r3, 0x1a4)
+  30:	d8432068 	ld.w      	r2, (r3, 0x1a0)
+  34:	3101      	movi      	r1, 1
+  36:	c4415c1f 	ins      	r2, r1, 31, 31
+  3a:	3000      	movi      	r0, 0
+  3c:	dc432068 	st.w      	r2, (r3, 0x1a0)
+  40:	783c      	jmp      	r15
+  42:	3200      	movi      	r2, 0
+  44:	07e8      	br      	0x14	// 14 <gx_audio_in_set_pga_gain+0x14>
+  46:	0000      	.short	0x0000
+  48:	00000000 	.long	0x00000000
+			48: R_CKCORE_ADDR32	.rodata
+
+Disassembly of section .text.gx_audio_in_set_adc_in:
+
+00000000 <gx_audio_in_set_adc_in>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_adc_in_sel>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_adc_in_sel
+   6:	3000      	movi      	r0, 0
+   8:	1490      	pop      	r15
+
+Disassembly of section .text.gx_audio_in_set_pga_enable:
+
+00000000 <gx_audio_in_set_pga_enable>:
+   0:	14d1      	push      	r4, r15
+   2:	3840      	cmpnei      	r0, 0
+   4:	6d03      	mov      	r4, r0
+   6:	6403      	mvcv      	r0
+   8:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_pga_bypass>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_pga_bypass
+   c:	6c13      	mov      	r0, r4
+   e:	e0000000 	bsr      	0x0	// 0 <gx_analog_set_pga_enable>
+			e: R_CKCORE_PCREL_IMM26BY2	gx_analog_set_pga_enable
+  12:	3000      	movi      	r0, 0
+  14:	1491      	pop      	r4, r15
+
+Disassembly of section .text.gx_audio_in_set_i2s_clock:
+
+00000000 <gx_audio_in_set_i2s_clock>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	9340      	ld.w      	r2, (r3, 0x0)
+   6:	c4405c58 	ins      	r2, r0, 26, 24
+   a:	3000      	movi      	r0, 0
+   c:	b340      	st.w      	r2, (r3, 0x0)
+   e:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_i2sin_mode:
+
+00000000 <gx_audio_in_set_i2sin_mode>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	9341      	ld.w      	r2, (r3, 0x4)
+   6:	c4405c10 	ins      	r2, r0, 16, 16
+   a:	3000      	movi      	r0, 0
+   c:	b341      	st.w      	r2, (r3, 0x4)
+   e:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_i2sout_mode:
+
+00000000 <gx_audio_in_set_i2sout_mode>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	9342      	ld.w      	r2, (r3, 0x8)
+   6:	c4405c04 	ins      	r2, r0, 4, 4
+   a:	3000      	movi      	r0, 0
+   c:	b342      	st.w      	r2, (r3, 0x8)
+   e:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_dc_enable:
+
+00000000 <gx_audio_in_set_dc_enable>:
+   0:	3841      	cmpnei      	r0, 1
+   2:	080c      	bt      	0x1a	// 1a <gx_audio_in_set_dc_enable+0x1a>
+   4:	3940      	cmpnei      	r1, 0
+   6:	ea22a0a0 	movih      	r2, 41120
+   a:	64c3      	mvcv      	r3
+   c:	9223      	ld.w      	r1, (r2, 0xc)
+   e:	74cc      	zextb      	r3, r3
+  10:	c4235c08 	ins      	r1, r3, 8, 8
+  14:	b223      	st.w      	r1, (r2, 0xc)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	3842      	cmpnei      	r0, 2
+  1c:	080f      	bt      	0x3a	// 3a <gx_audio_in_set_dc_enable+0x3a>
+  1e:	ea23a0a0 	movih      	r3, 41120
+  22:	3940      	cmpnei      	r1, 0
+  24:	6483      	mvcv      	r2
+  26:	932a      	ld.w      	r1, (r3, 0x28)
+  28:	7488      	zextb      	r2, r2
+  2a:	c4225c08 	ins      	r1, r2, 8, 8
+  2e:	b32a      	st.w      	r1, (r3, 0x28)
+  30:	932b      	ld.w      	r1, (r3, 0x2c)
+  32:	c4225c08 	ins      	r1, r2, 8, 8
+  36:	b32b      	st.w      	r1, (r3, 0x2c)
+  38:	07ef      	br      	0x16	// 16 <gx_audio_in_set_dc_enable+0x16>
+  3a:	3844      	cmpnei      	r0, 4
+  3c:	0bed      	bt      	0x16	// 16 <gx_audio_in_set_dc_enable+0x16>
+  3e:	ea23a0a0 	movih      	r3, 41120
+  42:	3940      	cmpnei      	r1, 0
+  44:	6483      	mvcv      	r2
+  46:	9332      	ld.w      	r1, (r3, 0x48)
+  48:	7488      	zextb      	r2, r2
+  4a:	c4225c08 	ins      	r1, r2, 8, 8
+  4e:	b332      	st.w      	r1, (r3, 0x48)
+  50:	9333      	ld.w      	r1, (r3, 0x4c)
+  52:	c4225c08 	ins      	r1, r2, 8, 8
+  56:	b333      	st.w      	r1, (r3, 0x4c)
+  58:	07df      	br      	0x16	// 16 <gx_audio_in_set_dc_enable+0x16>
+
+Disassembly of section .text.gx_audio_in_set_rough_gain:
+
+00000000 <gx_audio_in_set_rough_gain>:
+   0:	3841      	cmpnei      	r0, 1
+   2:	0809      	bt      	0x14	// 14 <gx_audio_in_set_rough_gain+0x14>
+   4:	ea23a0a0 	movih      	r3, 41120
+   8:	9343      	ld.w      	r2, (r3, 0xc)
+   a:	c4415c64 	ins      	r2, r1, 7, 4
+   e:	b343      	st.w      	r2, (r3, 0xc)
+  10:	3000      	movi      	r0, 0
+  12:	783c      	jmp      	r15
+  14:	3842      	cmpnei      	r0, 2
+  16:	080e      	bt      	0x32	// 32 <gx_audio_in_set_rough_gain+0x32>
+  18:	ea23a0a0 	movih      	r3, 41120
+  1c:	e421200f 	andi      	r1, r1, 15
+  20:	934a      	ld.w      	r2, (r3, 0x28)
+  22:	c4415c64 	ins      	r2, r1, 7, 4
+  26:	b34a      	st.w      	r2, (r3, 0x28)
+  28:	934b      	ld.w      	r2, (r3, 0x2c)
+  2a:	c4415c64 	ins      	r2, r1, 7, 4
+  2e:	b34b      	st.w      	r2, (r3, 0x2c)
+  30:	07f0      	br      	0x10	// 10 <gx_audio_in_set_rough_gain+0x10>
+  32:	3844      	cmpnei      	r0, 4
+  34:	0bee      	bt      	0x10	// 10 <gx_audio_in_set_rough_gain+0x10>
+  36:	ea23a0a0 	movih      	r3, 41120
+  3a:	e421200f 	andi      	r1, r1, 15
+  3e:	9352      	ld.w      	r2, (r3, 0x48)
+  40:	c4415c64 	ins      	r2, r1, 7, 4
+  44:	b352      	st.w      	r2, (r3, 0x48)
+  46:	9353      	ld.w      	r2, (r3, 0x4c)
+  48:	c4415c64 	ins      	r2, r1, 7, 4
+  4c:	b353      	st.w      	r2, (r3, 0x4c)
+  4e:	07e1      	br      	0x10	// 10 <gx_audio_in_set_rough_gain+0x10>
+
+Disassembly of section .text.gx_audio_in_get_rough_gain:
+
+00000000 <gx_audio_in_get_rough_gain>:
+   0:	3841      	cmpnei      	r0, 1
+   2:	0807      	bt      	0x10	// 10 <gx_audio_in_get_rough_gain+0x10>
+   4:	ea23a0a0 	movih      	r3, 41120
+   8:	9303      	ld.w      	r0, (r3, 0xc)
+   a:	c48054e0 	zext      	r0, r0, 7, 4
+   e:	783c      	jmp      	r15
+  10:	3842      	cmpnei      	r0, 2
+  12:	0805      	bt      	0x1c	// 1c <gx_audio_in_get_rough_gain+0x1c>
+  14:	ea23a0a0 	movih      	r3, 41120
+  18:	930a      	ld.w      	r0, (r3, 0x28)
+  1a:	07f8      	br      	0xa	// a <gx_audio_in_get_rough_gain+0xa>
+  1c:	3844      	cmpnei      	r0, 4
+  1e:	0805      	bt      	0x28	// 28 <gx_audio_in_get_rough_gain+0x28>
+  20:	ea23a0a0 	movih      	r3, 41120
+  24:	9312      	ld.w      	r0, (r3, 0x48)
+  26:	07f2      	br      	0xa	// a <gx_audio_in_get_rough_gain+0xa>
+  28:	3000      	movi      	r0, 0
+  2a:	2800      	subi      	r0, 1
+  2c:	07f1      	br      	0xe	// e <gx_audio_in_get_rough_gain+0xe>
+
+Disassembly of section .text.gx_audio_in_get_frame_rough_gain:
+
+00000000 <gx_audio_in_get_frame_rough_gain>:
+   0:	3841      	cmpnei      	r0, 1
+   2:	0808      	bt      	0x12	// 12 <gx_audio_in_get_frame_rough_gain+0x12>
+   4:	ea23a0a0 	movih      	r3, 41120
+   8:	d8032043 	ld.w      	r0, (r3, 0x10c)
+   c:	e400200f 	andi      	r0, r0, 15
+  10:	783c      	jmp      	r15
+  12:	3842      	cmpnei      	r0, 2
+  14:	0808      	bt      	0x24	// 24 <gx_audio_in_get_frame_rough_gain+0x24>
+  16:	ea23a0a0 	movih      	r3, 41120
+  1a:	d8032043 	ld.w      	r0, (r3, 0x10c)
+  1e:	c5005560 	zext      	r0, r0, 11, 8
+  22:	07f7      	br      	0x10	// 10 <gx_audio_in_get_frame_rough_gain+0x10>
+  24:	3000      	movi      	r0, 0
+  26:	2800      	subi      	r0, 1
+  28:	07f4      	br      	0x10	// 10 <gx_audio_in_get_frame_rough_gain+0x10>
+
+Disassembly of section .text.gx_audio_in_set_refined_gain:
+
+00000000 <gx_audio_in_set_refined_gain>:
+   0:	3841      	cmpnei      	r0, 1
+   2:	0809      	bt      	0x14	// 14 <gx_audio_in_set_refined_gain+0x14>
+   4:	ea23a0a0 	movih      	r3, 41120
+   8:	9343      	ld.w      	r2, (r3, 0xc)
+   a:	c4415dd0 	ins      	r2, r1, 30, 16
+   e:	b343      	st.w      	r2, (r3, 0xc)
+  10:	3000      	movi      	r0, 0
+  12:	783c      	jmp      	r15
+  14:	3842      	cmpnei      	r0, 2
+  16:	080f      	bt      	0x34	// 34 <gx_audio_in_set_refined_gain+0x34>
+  18:	ea037fff 	movi      	r3, 32767
+  1c:	684c      	and      	r1, r3
+  1e:	ea23a0a0 	movih      	r3, 41120
+  22:	934a      	ld.w      	r2, (r3, 0x28)
+  24:	c4415dd0 	ins      	r2, r1, 30, 16
+  28:	b34a      	st.w      	r2, (r3, 0x28)
+  2a:	934b      	ld.w      	r2, (r3, 0x2c)
+  2c:	c4415dd0 	ins      	r2, r1, 30, 16
+  30:	b34b      	st.w      	r2, (r3, 0x2c)
+  32:	07ef      	br      	0x10	// 10 <gx_audio_in_set_refined_gain+0x10>
+  34:	3844      	cmpnei      	r0, 4
+  36:	0bed      	bt      	0x10	// 10 <gx_audio_in_set_refined_gain+0x10>
+  38:	ea037fff 	movi      	r3, 32767
+  3c:	684c      	and      	r1, r3
+  3e:	ea23a0a0 	movih      	r3, 41120
+  42:	9352      	ld.w      	r2, (r3, 0x48)
+  44:	c4415dd0 	ins      	r2, r1, 30, 16
+  48:	b352      	st.w      	r2, (r3, 0x48)
+  4a:	9353      	ld.w      	r2, (r3, 0x4c)
+  4c:	c4415dd0 	ins      	r2, r1, 30, 16
+  50:	b353      	st.w      	r2, (r3, 0x4c)
+  52:	07df      	br      	0x10	// 10 <gx_audio_in_set_refined_gain+0x10>
+
+Disassembly of section .text.gx_audio_in_set_evad_enable:
+
+00000000 <gx_audio_in_set_evad_enable>:
+   0:	1423      	subi      	r14, r14, 12
+   2:	3841      	cmpnei      	r0, 1
+   4:	b820      	st.w      	r1, (r14, 0x0)
+   6:	b841      	st.w      	r2, (r14, 0x4)
+   8:	b862      	st.w      	r3, (r14, 0x8)
+   a:	0843      	bt      	0x90	// 90 <gx_audio_in_set_evad_enable+0x90>
+   c:	ea22a0a0 	movih      	r2, 41120
+  10:	ea038505 	movi      	r3, 34053
+  14:	c6a34903 	rotli      	r3, r3, 21
+  18:	d8022040 	ld.w      	r0, (r2, 0x100)
+  1c:	c4015c12 	ins      	r0, r1, 18, 18
+  20:	dc022040 	st.w      	r0, (r2, 0x100)
+  24:	9340      	ld.w      	r2, (r3, 0x0)
+  26:	3001      	movi      	r0, 1
+  28:	c4405c1a 	ins      	r2, r0, 26, 26
+  2c:	b340      	st.w      	r2, (r3, 0x0)
+  2e:	9305      	ld.w      	r0, (r3, 0x14)
+  30:	e920ffff 	bnez      	r0, 0x2e	// 2e <gx_audio_in_set_evad_enable+0x2e>
+  34:	9340      	ld.w      	r2, (r3, 0x0)
+  36:	c4405c1a 	ins      	r2, r0, 26, 26
+  3a:	3940      	cmpnei      	r1, 0
+  3c:	b340      	st.w      	r2, (r3, 0x0)
+  3e:	6483      	mvcv      	r2
+  40:	9320      	ld.w      	r1, (r3, 0x0)
+  42:	7488      	zextb      	r2, r2
+  44:	c4225c1b 	ins      	r1, r2, 27, 27
+  48:	9841      	ld.w      	r2, (r14, 0x4)
+  4a:	3a40      	cmpnei      	r2, 0
+  4c:	b320      	st.w      	r1, (r3, 0x0)
+  4e:	6483      	mvcv      	r2
+  50:	9320      	ld.w      	r1, (r3, 0x0)
+  52:	7488      	zextb      	r2, r2
+  54:	c4225c19 	ins      	r1, r2, 25, 25
+  58:	b320      	st.w      	r1, (r3, 0x0)
+  5a:	9340      	ld.w      	r2, (r3, 0x0)
+  5c:	3101      	movi      	r1, 1
+  5e:	c4415c18 	ins      	r2, r1, 24, 24
+  62:	b340      	st.w      	r2, (r3, 0x0)
+  64:	32c0      	movi      	r2, 192
+  66:	9320      	ld.w      	r1, (r3, 0x0)
+  68:	4247      	lsli      	r2, r2, 7
+  6a:	c4225de0 	ins      	r1, r2, 15, 0
+  6e:	b320      	st.w      	r1, (r3, 0x0)
+  70:	9340      	ld.w      	r2, (r3, 0x0)
+  72:	9822      	ld.w      	r1, (r14, 0x8)
+  74:	c4415c1f 	ins      	r2, r1, 31, 31
+  78:	b340      	st.w      	r2, (r3, 0x0)
+  7a:	9341      	ld.w      	r2, (r3, 0x4)
+  7c:	c4405cf0 	ins      	r2, r0, 23, 16
+  80:	b341      	st.w      	r2, (r3, 0x4)
+  82:	9341      	ld.w      	r2, (r3, 0x4)
+  84:	3110      	movi      	r1, 16
+  86:	c4415de0 	ins      	r2, r1, 15, 0
+  8a:	b341      	st.w      	r2, (r3, 0x4)
+  8c:	1403      	addi      	r14, r14, 12
+  8e:	783c      	jmp      	r15
+  90:	3842      	cmpnei      	r0, 2
+  92:	3200      	movi      	r2, 0
+  94:	0811      	bt      	0xb6	// b6 <gx_audio_in_set_evad_enable+0xb6>
+  96:	1072      	lrw      	r3, 0xa0a00030	// dc <gx_audio_in_set_evad_enable+0xdc>
+  98:	ea20a0a0 	movih      	r0, 41120
+  9c:	d9832000 	ld.w      	r12, (r3, 0x0)
+  a0:	c5825c1c 	ins      	r12, r2, 28, 28
+  a4:	dd832000 	st.w      	r12, (r3, 0x0)
+  a8:	d8402040 	ld.w      	r2, (r0, 0x100)
+  ac:	c4415c13 	ins      	r2, r1, 19, 19
+  b0:	dc402040 	st.w      	r2, (r0, 0x100)
+  b4:	07b8      	br      	0x24	// 24 <gx_audio_in_set_evad_enable+0x24>
+  b6:	3844      	cmpnei      	r0, 4
+  b8:	080f      	bt      	0xd6	// d6 <gx_audio_in_set_evad_enable+0xd6>
+  ba:	106a      	lrw      	r3, 0xa0a00050	// e0 <gx_audio_in_set_evad_enable+0xe0>
+  bc:	ea20a0a0 	movih      	r0, 41120
+  c0:	d9832000 	ld.w      	r12, (r3, 0x0)
+  c4:	c5825c1c 	ins      	r12, r2, 28, 28
+  c8:	dd832000 	st.w      	r12, (r3, 0x0)
+  cc:	d8402040 	ld.w      	r2, (r0, 0x100)
+  d0:	c4415c14 	ins      	r2, r1, 20, 20
+  d4:	07ee      	br      	0xb0	// b0 <gx_audio_in_set_evad_enable+0xb0>
+  d6:	6ccb      	mov      	r3, r2
+  d8:	07a6      	br      	0x24	// 24 <gx_audio_in_set_evad_enable+0x24>
+  da:	0000      	.short	0x0000
+  dc:	a0a00030 	.long	0xa0a00030
+  e0:	a0a00050 	.long	0xa0a00050
+
+Disassembly of section .text.gx_audio_in_set_evad_threshold:
+
+00000000 <gx_audio_in_set_evad_threshold>:
+   0:	1423      	subi      	r14, r14, 12
+   2:	3841      	cmpnei      	r0, 1
+   4:	b820      	st.w      	r1, (r14, 0x0)
+   6:	b841      	st.w      	r2, (r14, 0x4)
+   8:	b862      	st.w      	r3, (r14, 0x8)
+   a:	080e      	bt      	0x26	// 26 <gx_audio_in_set_evad_threshold+0x26>
+   c:	ea038505 	movi      	r3, 34053
+  10:	c6a34903 	rotli      	r3, r3, 21
+  14:	9840      	ld.w      	r2, (r14, 0x0)
+  16:	b342      	st.w      	r2, (r3, 0x8)
+  18:	9841      	ld.w      	r2, (r14, 0x4)
+  1a:	b343      	st.w      	r2, (r3, 0xc)
+  1c:	3000      	movi      	r0, 0
+  1e:	9842      	ld.w      	r2, (r14, 0x8)
+  20:	b344      	st.w      	r2, (r3, 0x10)
+  22:	1403      	addi      	r14, r14, 12
+  24:	783c      	jmp      	r15
+  26:	3842      	cmpnei      	r0, 2
+  28:	3200      	movi      	r2, 0
+  2a:	0807      	bt      	0x38	// 38 <gx_audio_in_set_evad_threshold+0x38>
+  2c:	1066      	lrw      	r3, 0xa0a00030	// 44 <gx_audio_in_set_evad_threshold+0x44>
+  2e:	9320      	ld.w      	r1, (r3, 0x0)
+  30:	c4225c1c 	ins      	r1, r2, 28, 28
+  34:	b320      	st.w      	r1, (r3, 0x0)
+  36:	07ef      	br      	0x14	// 14 <gx_audio_in_set_evad_threshold+0x14>
+  38:	3844      	cmpnei      	r0, 4
+  3a:	0803      	bt      	0x40	// 40 <gx_audio_in_set_evad_threshold+0x40>
+  3c:	1063      	lrw      	r3, 0xa0a00050	// 48 <gx_audio_in_set_evad_threshold+0x48>
+  3e:	07f8      	br      	0x2e	// 2e <gx_audio_in_set_evad_threshold+0x2e>
+  40:	6ccb      	mov      	r3, r2
+  42:	07e9      	br      	0x14	// 14 <gx_audio_in_set_evad_threshold+0x14>
+  44:	0030      	.short	0x0030
+  46:	a0a0      	.short	0xa0a0
+  48:	a0a00050 	.long	0xa0a00050
+
+Disassembly of section .text.gx_audio_in_get_logfbank_status:
+
+00000000 <gx_audio_in_get_logfbank_status>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	d8032060 	ld.w      	r0, (r3, 0x180)
+   8:	c7a057a0 	zext      	r0, r0, 29, 29
+   c:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_logfbank_enable:
+
+00000000 <gx_audio_in_set_logfbank_enable>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	3840      	cmpnei      	r0, 0
+   6:	d8432060 	ld.w      	r2, (r3, 0x180)
+   a:	c4415c1c 	ins      	r2, r1, 28, 28
+   e:	dc432060 	st.w      	r2, (r3, 0x180)
+  12:	d8432060 	ld.w      	r2, (r3, 0x180)
+  16:	e4202001 	andi      	r1, r0, 1
+  1a:	c4415c1d 	ins      	r2, r1, 29, 29
+  1e:	dc432060 	st.w      	r2, (r3, 0x180)
+  22:	d8432060 	ld.w      	r2, (r3, 0x180)
+  26:	c4415c1e 	ins      	r2, r1, 30, 30
+  2a:	dc432060 	st.w      	r2, (r3, 0x180)
+  2e:	6483      	mvcv      	r2
+  30:	d8232060 	ld.w      	r1, (r3, 0x180)
+  34:	7488      	zextb      	r2, r2
+  36:	c4225c1f 	ins      	r1, r2, 31, 31
+  3a:	3000      	movi      	r0, 0
+  3c:	dc232060 	st.w      	r1, (r3, 0x180)
+  40:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_fftvad_enable:
+
+00000000 <gx_audio_in_set_fftvad_enable>:
+   0:	e9020004 	bez      	r2, 0x8	// 8 <gx_audio_in_set_fftvad_enable+0x8>
+   4:	2a00      	subi      	r2, 1
+   6:	7488      	zextb      	r2, r2
+   8:	ea23a0a0 	movih      	r3, 41120
+   c:	3940      	cmpnei      	r1, 0
+   e:	d9832056 	ld.w      	r12, (r3, 0x158)
+  12:	c5825cc0 	ins      	r12, r2, 6, 0
+  16:	dd832056 	st.w      	r12, (r3, 0x158)
+  1a:	6483      	mvcv      	r2
+  1c:	d8232056 	ld.w      	r1, (r3, 0x158)
+  20:	7488      	zextb      	r2, r2
+  22:	c4225c18 	ins      	r1, r2, 24, 24
+  26:	3280      	movi      	r2, 128
+  28:	4249      	lsli      	r2, r2, 9
+  2a:	dc232056 	st.w      	r1, (r3, 0x158)
+  2e:	dc432041 	st.w      	r2, (r3, 0x104)
+  32:	3280      	movi      	r2, 128
+  34:	424a      	lsli      	r2, r2, 10
+  36:	dc432041 	st.w      	r2, (r3, 0x104)
+  3a:	d8432040 	ld.w      	r2, (r3, 0x100)
+  3e:	3101      	movi      	r1, 1
+  40:	c4415c10 	ins      	r2, r1, 16, 16
+  44:	dc432040 	st.w      	r2, (r3, 0x100)
+  48:	d8432040 	ld.w      	r2, (r3, 0x100)
+  4c:	c4415c11 	ins      	r2, r1, 17, 17
+  50:	dc432040 	st.w      	r2, (r3, 0x100)
+  54:	d8432056 	ld.w      	r2, (r3, 0x158)
+  58:	6840      	and      	r1, r0
+  5a:	c4415c19 	ins      	r2, r1, 25, 25
+  5e:	dc432056 	st.w      	r2, (r3, 0x158)
+  62:	d8432056 	ld.w      	r2, (r3, 0x158)
+  66:	c4415c1e 	ins      	r2, r1, 30, 30
+  6a:	3840      	cmpnei      	r0, 0
+  6c:	dc432056 	st.w      	r2, (r3, 0x158)
+  70:	6483      	mvcv      	r2
+  72:	d8232056 	ld.w      	r1, (r3, 0x158)
+  76:	7488      	zextb      	r2, r2
+  78:	c4225c1f 	ins      	r1, r2, 31, 31
+  7c:	3000      	movi      	r0, 0
+  7e:	dc232056 	st.w      	r1, (r3, 0x158)
+  82:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_fftvad_w:
+
+00000000 <gx_audio_in_set_fftvad_w>:
+   0:	1421      	subi      	r14, r14, 4
+   2:	ea23a0a0 	movih      	r3, 41120
+   6:	b800      	st.w      	r0, (r14, 0x0)
+   8:	d8432056 	ld.w      	r2, (r3, 0x158)
+   c:	c4405c68 	ins      	r2, r0, 11, 8
+  10:	dc432056 	st.w      	r2, (r3, 0x158)
+  14:	d82e0001 	ld.b      	r1, (r14, 0x1)
+  18:	d8432056 	ld.w      	r2, (r3, 0x158)
+  1c:	c4415c6c 	ins      	r2, r1, 15, 12
+  20:	dc432056 	st.w      	r2, (r3, 0x158)
+  24:	d82e0002 	ld.b      	r1, (r14, 0x2)
+  28:	d8432056 	ld.w      	r2, (r3, 0x158)
+  2c:	c4415c70 	ins      	r2, r1, 19, 16
+  30:	3000      	movi      	r0, 0
+  32:	dc432056 	st.w      	r2, (r3, 0x158)
+  36:	1401      	addi      	r14, r14, 4
+  38:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_fftvad_start_num:
+
+00000000 <gx_audio_in_set_fftvad_start_num>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	d8432056 	ld.w      	r2, (r3, 0x158)
+   8:	c4405c74 	ins      	r2, r0, 23, 20
+   c:	3000      	movi      	r0, 0
+   e:	dc432056 	st.w      	r2, (r3, 0x158)
+  12:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_fftvad_curve_1:
+
+00000000 <gx_audio_in_set_fftvad_curve_1>:
+   0:	eb000c00 	cmphsi      	r0, 3073
+   4:	0814      	bt      	0x2c	// 2c <gx_audio_in_set_fftvad_curve_1+0x2c>
+   6:	eb014600 	cmphsi      	r1, 17921
+   a:	0811      	bt      	0x2c	// 2c <gx_audio_in_set_fftvad_curve_1+0x2c>
+   c:	ea23a0a0 	movih      	r3, 41120
+  10:	d8432061 	ld.w      	r2, (r3, 0x184)
+  14:	c4405de0 	ins      	r2, r0, 15, 0
+  18:	dc432061 	st.w      	r2, (r3, 0x184)
+  1c:	d8432061 	ld.w      	r2, (r3, 0x184)
+  20:	c4415df0 	ins      	r2, r1, 31, 16
+  24:	dc432061 	st.w      	r2, (r3, 0x184)
+  28:	3000      	movi      	r0, 0
+  2a:	783c      	jmp      	r15
+  2c:	3000      	movi      	r0, 0
+  2e:	2800      	subi      	r0, 1
+  30:	07fd      	br      	0x2a	// 2a <gx_audio_in_set_fftvad_curve_1+0x2a>
+
+Disassembly of section .text.gx_audio_in_set_fftvad_curve_2:
+
+00000000 <gx_audio_in_set_fftvad_curve_2>:
+   0:	eb000c00 	cmphsi      	r0, 3073
+   4:	0814      	bt      	0x2c	// 2c <gx_audio_in_set_fftvad_curve_2+0x2c>
+   6:	eb011e00 	cmphsi      	r1, 7681
+   a:	0811      	bt      	0x2c	// 2c <gx_audio_in_set_fftvad_curve_2+0x2c>
+   c:	ea23a0a0 	movih      	r3, 41120
+  10:	d8432062 	ld.w      	r2, (r3, 0x188)
+  14:	c4405de0 	ins      	r2, r0, 15, 0
+  18:	dc432062 	st.w      	r2, (r3, 0x188)
+  1c:	d8432062 	ld.w      	r2, (r3, 0x188)
+  20:	c4415df0 	ins      	r2, r1, 31, 16
+  24:	dc432062 	st.w      	r2, (r3, 0x188)
+  28:	3000      	movi      	r0, 0
+  2a:	783c      	jmp      	r15
+  2c:	3000      	movi      	r0, 0
+  2e:	2800      	subi      	r0, 1
+  30:	07fd      	br      	0x2a	// 2a <gx_audio_in_set_fftvad_curve_2+0x2a>
+
+Disassembly of section .text.gx_audio_in_set_fftvad_curve_3:
+
+00000000 <gx_audio_in_set_fftvad_curve_3>:
+   0:	7401      	zexth      	r0, r0
+   2:	eb001000 	cmphsi      	r0, 4097
+   6:	0819      	bt      	0x38	// 38 <gx_audio_in_set_fftvad_curve_3+0x38>
+   8:	33a0      	movi      	r3, 160
+   a:	4365      	lsli      	r3, r3, 5
+   c:	60c4      	addu      	r3, r1
+   e:	74cd      	zexth      	r3, r3
+  10:	eb032800 	cmphsi      	r3, 10241
+  14:	0812      	bt      	0x38	// 38 <gx_audio_in_set_fftvad_curve_3+0x38>
+  16:	ea23a0a0 	movih      	r3, 41120
+  1a:	7445      	zexth      	r1, r1
+  1c:	d8432063 	ld.w      	r2, (r3, 0x18c)
+  20:	c4405de0 	ins      	r2, r0, 15, 0
+  24:	dc432063 	st.w      	r2, (r3, 0x18c)
+  28:	d8432063 	ld.w      	r2, (r3, 0x18c)
+  2c:	c4415df0 	ins      	r2, r1, 31, 16
+  30:	dc432063 	st.w      	r2, (r3, 0x18c)
+  34:	3000      	movi      	r0, 0
+  36:	783c      	jmp      	r15
+  38:	3000      	movi      	r0, 0
+  3a:	2800      	subi      	r0, 1
+  3c:	07fd      	br      	0x36	// 36 <gx_audio_in_set_fftvad_curve_3+0x36>
+
+Disassembly of section .text.gx_audio_in_set_fftvad_curve_4:
+
+00000000 <gx_audio_in_set_fftvad_curve_4>:
+   0:	eb001400 	cmphsi      	r0, 5121
+   4:	0814      	bt      	0x2c	// 2c <gx_audio_in_set_fftvad_curve_4+0x2c>
+   6:	eb011400 	cmphsi      	r1, 5121
+   a:	0811      	bt      	0x2c	// 2c <gx_audio_in_set_fftvad_curve_4+0x2c>
+   c:	ea23a0a0 	movih      	r3, 41120
+  10:	d8432064 	ld.w      	r2, (r3, 0x190)
+  14:	c4405de0 	ins      	r2, r0, 15, 0
+  18:	dc432064 	st.w      	r2, (r3, 0x190)
+  1c:	d8432064 	ld.w      	r2, (r3, 0x190)
+  20:	c4415df0 	ins      	r2, r1, 31, 16
+  24:	dc432064 	st.w      	r2, (r3, 0x190)
+  28:	3000      	movi      	r0, 0
+  2a:	783c      	jmp      	r15
+  2c:	3000      	movi      	r0, 0
+  2e:	2800      	subi      	r0, 1
+  30:	07fd      	br      	0x2a	// 2a <gx_audio_in_set_fftvad_curve_4+0x2a>
+
+Disassembly of section .text.gx_audio_in_set_fftvad_curve_5:
+
+00000000 <gx_audio_in_set_fftvad_curve_5>:
+   0:	eb002000 	cmphsi      	r0, 8193
+   4:	080b      	bt      	0x1a	// 1a <gx_audio_in_set_fftvad_curve_5+0x1a>
+   6:	ea23a0a0 	movih      	r3, 41120
+   a:	d8432065 	ld.w      	r2, (r3, 0x194)
+   e:	c4405de0 	ins      	r2, r0, 15, 0
+  12:	dc432065 	st.w      	r2, (r3, 0x194)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	3000      	movi      	r0, 0
+  1c:	2800      	subi      	r0, 1
+  1e:	07fd      	br      	0x18	// 18 <gx_audio_in_set_fftvad_curve_5+0x18>
+
+Disassembly of section .text.gx_audio_in_set_fftvad_silence_num:
+
+00000000 <gx_audio_in_set_fftvad_silence_num>:
+   0:	eb000032 	cmphsi      	r0, 51
+   4:	080b      	bt      	0x1a	// 1a <gx_audio_in_set_fftvad_silence_num+0x1a>
+   6:	ea23a0a0 	movih      	r3, 41120
+   a:	d8432065 	ld.w      	r2, (r3, 0x194)
+   e:	c4405cf0 	ins      	r2, r0, 23, 16
+  12:	dc432065 	st.w      	r2, (r3, 0x194)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	3000      	movi      	r0, 0
+  1c:	2800      	subi      	r0, 1
+  1e:	07fd      	br      	0x18	// 18 <gx_audio_in_set_fftvad_silence_num+0x18>
+
+Disassembly of section .text.gx_audio_in_set_fftvad_count_num:
+
+00000000 <gx_audio_in_set_fftvad_count_num>:
+   0:	eb000050 	cmphsi      	r0, 81
+   4:	080b      	bt      	0x1a	// 1a <gx_audio_in_set_fftvad_count_num+0x1a>
+   6:	ea23a0a0 	movih      	r3, 41120
+   a:	d8432065 	ld.w      	r2, (r3, 0x194)
+   e:	c4405cf8 	ins      	r2, r0, 31, 24
+  12:	dc432065 	st.w      	r2, (r3, 0x194)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	3000      	movi      	r0, 0
+  1c:	2800      	subi      	r0, 1
+  1e:	07fd      	br      	0x18	// 18 <gx_audio_in_set_fftvad_count_num+0x18>
+
+Disassembly of section .text.gx_audio_in_set_fftvad_chipping:
+
+00000000 <gx_audio_in_set_fftvad_chipping>:
+   0:	1422      	subi      	r14, r14, 8
+   2:	ea23a0a0 	movih      	r3, 41120
+   6:	b821      	st.w      	r1, (r14, 0x4)
+   8:	b800      	st.w      	r0, (r14, 0x0)
+   a:	d8432066 	ld.w      	r2, (r3, 0x198)
+   e:	7401      	zexth      	r0, r0
+  10:	c4405de0 	ins      	r2, r0, 15, 0
+  14:	dc432066 	st.w      	r2, (r3, 0x198)
+  18:	d8432066 	ld.w      	r2, (r3, 0x198)
+  1c:	d82e1001 	ld.h      	r1, (r14, 0x2)
+  20:	c4415df0 	ins      	r2, r1, 31, 16
+  24:	dc432066 	st.w      	r2, (r3, 0x198)
+  28:	d82e1002 	ld.h      	r1, (r14, 0x4)
+  2c:	d8432067 	ld.w      	r2, (r3, 0x19c)
+  30:	c4415de0 	ins      	r2, r1, 15, 0
+  34:	dc432067 	st.w      	r2, (r3, 0x19c)
+  38:	d82e1003 	ld.h      	r1, (r14, 0x6)
+  3c:	d8432067 	ld.w      	r2, (r3, 0x19c)
+  40:	c4415df0 	ins      	r2, r1, 31, 16
+  44:	3000      	movi      	r0, 0
+  46:	dc432067 	st.w      	r2, (r3, 0x19c)
+  4a:	1402      	addi      	r14, r14, 8
+  4c:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_get_fftvad_state:
+
+00000000 <gx_audio_in_get_fftvad_state>:
+   0:	e9000014 	bez      	r0, 0x28	// 28 <gx_audio_in_get_fftvad_state+0x28>
+   4:	ea23a0a0 	movih      	r3, 41120
+   8:	d843205d 	ld.w      	r2, (r3, 0x174)
+   c:	b042      	st.w      	r2, (r0, 0x8)
+   e:	d843205e 	ld.w      	r2, (r3, 0x178)
+  12:	b041      	st.w      	r2, (r0, 0x4)
+  14:	d843205f 	ld.w      	r2, (r3, 0x17c)
+  18:	b040      	st.w      	r2, (r0, 0x0)
+  1a:	d8632043 	ld.w      	r3, (r3, 0x10c)
+  1e:	c60356c3 	zext      	r3, r3, 22, 16
+  22:	a866      	st.h      	r3, (r0, 0xc)
+  24:	3000      	movi      	r0, 0
+  26:	783c      	jmp      	r15
+  28:	3000      	movi      	r0, 0
+  2a:	2800      	subi      	r0, 1
+  2c:	07fd      	br      	0x26	// 26 <gx_audio_in_get_fftvad_state+0x26>
+
+Disassembly of section .text.gx_audio_in_get_distance_city:
+
+00000000 <gx_audio_in_get_distance_city>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	d803206d 	ld.w      	r0, (r3, 0x1b4)
+   8:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_get_distance_noise_smooth:
+
+00000000 <gx_audio_in_get_distance_noise_smooth>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	d803206e 	ld.w      	r0, (r3, 0x1b8)
+   8:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_get_fftvad_zcr_reg:
+
+00000000 <gx_audio_in_get_fftvad_zcr_reg>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	d803206f 	ld.w      	r0, (r3, 0x1bc)
+   8:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_data_auto_produce_enable:
+
+00000000 <gx_audio_in_set_data_auto_produce_enable>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	9340      	ld.w      	r2, (r3, 0x0)
+   6:	c4405c1e 	ins      	r2, r0, 30, 30
+   a:	3000      	movi      	r0, 0
+   c:	b340      	st.w      	r2, (r3, 0x0)
+   e:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_set_interrupt_enable:
+
+00000000 <gx_audio_in_set_interrupt_enable>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	e901000b 	bez      	r1, 0x1a	// 1a <gx_audio_in_set_interrupt_enable+0x1a>
+   8:	dc032041 	st.w      	r0, (r3, 0x104)
+   c:	d8432040 	ld.w      	r2, (r3, 0x100)
+  10:	6c08      	or      	r0, r2
+  12:	dc032040 	st.w      	r0, (r3, 0x100)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	d8432040 	ld.w      	r2, (r3, 0x100)
+  1e:	6881      	andn      	r2, r0
+  20:	dc432040 	st.w      	r2, (r3, 0x100)
+  24:	dc032041 	st.w      	r0, (r3, 0x104)
+  28:	07f7      	br      	0x16	// 16 <gx_audio_in_set_interrupt_enable+0x16>
+
+Disassembly of section .text.gx_audio_in_get_interrupt_enable_state:
+
+00000000 <gx_audio_in_get_interrupt_enable_state>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	d8032040 	ld.w      	r0, (r3, 0x100)
+   8:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_audio_in_get_sdc_addr:
+
+00000000 <gx_audio_in_get_sdc_addr>:
+   0:	3841      	cmpnei      	r0, 1
+   2:	0808      	bt      	0x12	// 12 <gx_audio_in_get_sdc_addr+0x12>
+   4:	ea23a0a0 	movih      	r3, 41120
+   8:	d8632049 	ld.w      	r3, (r3, 0x124)
+   c:	b160      	st.w      	r3, (r1, 0x0)
+   e:	3000      	movi      	r0, 0
+  10:	783c      	jmp      	r15
+  12:	3842      	cmpnei      	r0, 2
+  14:	0806      	bt      	0x20	// 20 <gx_audio_in_get_sdc_addr+0x20>
+  16:	ea23a0a0 	movih      	r3, 41120
+  1a:	d8632052 	ld.w      	r3, (r3, 0x148)
+  1e:	07f7      	br      	0xc	// c <gx_audio_in_get_sdc_addr+0xc>
+  20:	3844      	cmpnei      	r0, 4
+  22:	0806      	bt      	0x2e	// 2e <gx_audio_in_get_sdc_addr+0x2e>
+  24:	ea23a0a0 	movih      	r3, 41120
+  28:	d863205a 	ld.w      	r3, (r3, 0x168)
+  2c:	07f0      	br      	0xc	// c <gx_audio_in_get_sdc_addr+0xc>
+  2e:	3000      	movi      	r0, 0
+  30:	2800      	subi      	r0, 1
+  32:	07ef      	br      	0x10	// 10 <gx_audio_in_get_sdc_addr+0x10>
+
+Disassembly of section .text.gx_audio_in_suspend:
+
+00000000 <gx_audio_in_suspend>:
+   0:	14d0      	push      	r15
+   2:	3100      	movi      	r1, 0
+   4:	3003      	movi      	r0, 3
+   6:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   a:	3100      	movi      	r1, 0
+   c:	3002      	movi      	r0, 2
+   e:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			e: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  12:	3100      	movi      	r1, 0
+  14:	3008      	movi      	r0, 8
+  16:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			16: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  1a:	3100      	movi      	r1, 0
+  1c:	3007      	movi      	r0, 7
+  1e:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			1e: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  22:	3000      	movi      	r0, 0
+  24:	1490      	pop      	r15
+
+Disassembly of section .text.gx_audio_in_resume:
+
+00000000 <gx_audio_in_resume>:
+   0:	14d0      	push      	r15
+   2:	3101      	movi      	r1, 1
+   4:	3003      	movi      	r0, 3
+   6:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   a:	3101      	movi      	r1, 1
+   c:	3002      	movi      	r0, 2
+   e:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			e: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  12:	3101      	movi      	r1, 1
+  14:	3008      	movi      	r0, 8
+  16:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			16: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  1a:	3101      	movi      	r1, 1
+  1c:	3007      	movi      	r0, 7
+  1e:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			1e: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  22:	3000      	movi      	r0, 0
+  24:	1490      	pop      	r15
+
+Disassembly of section .text.gx_audio_in_init:
+
+00000000 <gx_audio_in_init>:
+   0:	1424      	subi      	r14, r14, 16
+   2:	14d6      	push      	r4-r9, r15
+   4:	b807      	st.w      	r0, (r14, 0x1c)
+   6:	b828      	st.w      	r1, (r14, 0x20)
+   8:	6d43      	mov      	r5, r0
+   a:	6d87      	mov      	r6, r1
+   c:	3003      	movi      	r0, 3
+   e:	3101      	movi      	r1, 1
+  10:	1382      	lrw      	r4, 0x0	// 198 <gx_audio_in_init+0x198>
+  12:	6e0f      	mov      	r8, r3
+  14:	b86a      	st.w      	r3, (r14, 0x28)
+  16:	b849      	st.w      	r2, (r14, 0x24)
+  18:	6e4b      	mov      	r9, r2
+  1a:	98eb      	ld.w      	r7, (r14, 0x2c)
+  1c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			1c: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  20:	321c      	movi      	r2, 28
+  22:	3100      	movi      	r1, 0
+  24:	6c13      	mov      	r0, r4
+  26:	e0000000 	bsr      	0x0	// 0 <memset>
+			26: R_CKCORE_PCREL_IMM26BY2	memset
+  2a:	e0000000 	bsr      	0x0	// 0 <gx_audio_in_init>
+			2a: R_CKCORE_PCREL_IMM26BY2	_ain_reset
+  2e:	ea22a0a0 	movih      	r2, 41120
+  32:	3101      	movi      	r1, 1
+  34:	9260      	ld.w      	r3, (r2, 0x0)
+  36:	c4615c1f 	ins      	r3, r1, 31, 31
+  3a:	b260      	st.w      	r3, (r2, 0x0)
+  3c:	9260      	ld.w      	r3, (r2, 0x0)
+  3e:	c4615c1d 	ins      	r3, r1, 29, 29
+  42:	b260      	st.w      	r3, (r2, 0x0)
+  44:	3300      	movi      	r3, 0
+  46:	dc622043 	st.w      	r3, (r2, 0x10c)
+  4a:	e90600a4 	bez      	r6, 0x192	// 192 <gx_audio_in_init+0x192>
+  4e:	b4c2      	st.w      	r6, (r4, 0x8)
+  50:	e9090004 	bez      	r9, 0x58	// 58 <gx_audio_in_init+0x58>
+  54:	dd242004 	st.w      	r9, (r4, 0x10)
+  58:	e9050003 	bez      	r5, 0x5e	// 5e <gx_audio_in_init+0x5e>
+  5c:	b4a3      	st.w      	r5, (r4, 0xc)
+  5e:	e9080004 	bez      	r8, 0x66	// 66 <gx_audio_in_init+0x66>
+  62:	dd042005 	st.w      	r8, (r4, 0x14)
+  66:	e9070003 	bez      	r7, 0x6c	// 6c <gx_audio_in_init+0x6c>
+  6a:	b4e6      	st.w      	r7, (r4, 0x18)
+  6c:	7bd9      	jsr      	r6
+  6e:	3200      	movi      	r2, 0
+  70:	122b      	lrw      	r1, 0x0	// 19c <gx_audio_in_init+0x19c>
+  72:	3002      	movi      	r0, 2
+  74:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			74: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  78:	e905002a 	bez      	r5, 0xcc	// cc <gx_audio_in_init+0xcc>
+  7c:	9461      	ld.w      	r3, (r4, 0x4)
+  7e:	e4432001 	andi      	r2, r3, 1
+  82:	e902000b 	bez      	r2, 0x98	// 98 <gx_audio_in_init+0x98>
+  86:	ea22a0a0 	movih      	r2, 41120
+  8a:	3001      	movi      	r0, 1
+  8c:	d8222040 	ld.w      	r1, (r2, 0x100)
+  90:	c4205c00 	ins      	r1, r0, 0, 0
+  94:	dc222040 	st.w      	r1, (r2, 0x100)
+  98:	e4432002 	andi      	r2, r3, 2
+  9c:	e902000b 	bez      	r2, 0xb2	// b2 <gx_audio_in_init+0xb2>
+  a0:	ea22a0a0 	movih      	r2, 41120
+  a4:	3001      	movi      	r0, 1
+  a6:	d8222040 	ld.w      	r1, (r2, 0x100)
+  aa:	c4205c01 	ins      	r1, r0, 1, 1
+  ae:	dc222040 	st.w      	r1, (r2, 0x100)
+  b2:	e4632004 	andi      	r3, r3, 4
+  b6:	e903000b 	bez      	r3, 0xcc	// cc <gx_audio_in_init+0xcc>
+  ba:	ea23a0a0 	movih      	r3, 41120
+  be:	3101      	movi      	r1, 1
+  c0:	d8432040 	ld.w      	r2, (r3, 0x100)
+  c4:	c4415c02 	ins      	r2, r1, 2, 2
+  c8:	dc432040 	st.w      	r2, (r3, 0x100)
+  cc:	9400      	ld.w      	r0, (r4, 0x0)
+  ce:	e4602001 	andi      	r3, r0, 1
+  d2:	e903000e 	bez      	r3, 0xee	// ee <gx_audio_in_init+0xee>
+  d6:	ea23a0a0 	movih      	r3, 41120
+  da:	3101      	movi      	r1, 1
+  dc:	9343      	ld.w      	r2, (r3, 0xc)
+  de:	c4415c09 	ins      	r2, r1, 9, 9
+  e2:	b343      	st.w      	r2, (r3, 0xc)
+  e4:	9340      	ld.w      	r2, (r3, 0x0)
+  e6:	3100      	movi      	r1, 0
+  e8:	c4415c07 	ins      	r2, r1, 7, 7
+  ec:	b340      	st.w      	r2, (r3, 0x0)
+  ee:	e4602002 	andi      	r3, r0, 2
+  f2:	e9030021 	bez      	r3, 0x134	// 134 <gx_audio_in_init+0x134>
+  f6:	ea23a0a0 	movih      	r3, 41120
+  fa:	934a      	ld.w      	r2, (r3, 0x28)
+  fc:	e442200f 	andi      	r2, r2, 15
+ 100:	3a21      	cmplti      	r2, 2
+ 102:	0c06      	bf      	0x10e	// 10e <gx_audio_in_init+0x10e>
+ 104:	934a      	ld.w      	r2, (r3, 0x28)
+ 106:	3101      	movi      	r1, 1
+ 108:	c4415c09 	ins      	r2, r1, 9, 9
+ 10c:	b34a      	st.w      	r2, (r3, 0x28)
+ 10e:	ea23a0a0 	movih      	r3, 41120
+ 112:	934b      	ld.w      	r2, (r3, 0x2c)
+ 114:	e442200f 	andi      	r2, r2, 15
+ 118:	3a21      	cmplti      	r2, 2
+ 11a:	0c06      	bf      	0x126	// 126 <gx_audio_in_init+0x126>
+ 11c:	934b      	ld.w      	r2, (r3, 0x2c)
+ 11e:	3101      	movi      	r1, 1
+ 120:	c4415c09 	ins      	r2, r1, 9, 9
+ 124:	b34b      	st.w      	r2, (r3, 0x2c)
+ 126:	ea23a0a0 	movih      	r3, 41120
+ 12a:	3100      	movi      	r1, 0
+ 12c:	9340      	ld.w      	r2, (r3, 0x0)
+ 12e:	c4415c0f 	ins      	r2, r1, 15, 15
+ 132:	b340      	st.w      	r2, (r3, 0x0)
+ 134:	e4002004 	andi      	r0, r0, 4
+ 138:	e9000021 	bez      	r0, 0x17a	// 17a <gx_audio_in_init+0x17a>
+ 13c:	ea23a0a0 	movih      	r3, 41120
+ 140:	9352      	ld.w      	r2, (r3, 0x48)
+ 142:	e442200f 	andi      	r2, r2, 15
+ 146:	3a27      	cmplti      	r2, 8
+ 148:	0c06      	bf      	0x154	// 154 <gx_audio_in_init+0x154>
+ 14a:	9352      	ld.w      	r2, (r3, 0x48)
+ 14c:	3101      	movi      	r1, 1
+ 14e:	c4415c09 	ins      	r2, r1, 9, 9
+ 152:	b352      	st.w      	r2, (r3, 0x48)
+ 154:	ea23a0a0 	movih      	r3, 41120
+ 158:	9353      	ld.w      	r2, (r3, 0x4c)
+ 15a:	e442200f 	andi      	r2, r2, 15
+ 15e:	3a27      	cmplti      	r2, 8
+ 160:	0c06      	bf      	0x16c	// 16c <gx_audio_in_init+0x16c>
+ 162:	9353      	ld.w      	r2, (r3, 0x4c)
+ 164:	3101      	movi      	r1, 1
+ 166:	c4415c09 	ins      	r2, r1, 9, 9
+ 16a:	b353      	st.w      	r2, (r3, 0x4c)
+ 16c:	ea23a0a0 	movih      	r3, 41120
+ 170:	3000      	movi      	r0, 0
+ 172:	9341      	ld.w      	r2, (r3, 0x4)
+ 174:	c4405c1f 	ins      	r2, r0, 31, 31
+ 178:	b341      	st.w      	r2, (r3, 0x4)
+ 17a:	d9ee2006 	ld.w      	r15, (r14, 0x18)
+ 17e:	d92e2005 	ld.w      	r9, (r14, 0x14)
+ 182:	d90e2004 	ld.w      	r8, (r14, 0x10)
+ 186:	98e3      	ld.w      	r7, (r14, 0xc)
+ 188:	98c2      	ld.w      	r6, (r14, 0x8)
+ 18a:	98a1      	ld.w      	r5, (r14, 0x4)
+ 18c:	9880      	ld.w      	r4, (r14, 0x0)
+ 18e:	140b      	addi      	r14, r14, 44
+ 190:	783c      	jmp      	r15
+ 192:	3000      	movi      	r0, 0
+ 194:	2800      	subi      	r0, 1
+ 196:	07f2      	br      	0x17a	// 17a <gx_audio_in_init+0x17a>
+	...
+			198: R_CKCORE_ADDR32	.bss
+			19c: R_CKCORE_ADDR32	.sram_text
+
+Disassembly of section .text.gx_audio_in_exit:
+
+00000000 <gx_audio_in_exit>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_audio_in_exit>
+			2: R_CKCORE_PCREL_IMM26BY2	_ain_reset
+   6:	3100      	movi      	r1, 0
+   8:	3003      	movi      	r0, 3
+   a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   e:	3100      	movi      	r1, 0
+  10:	3002      	movi      	r0, 2
+  12:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			12: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  16:	3100      	movi      	r1, 0
+  18:	3008      	movi      	r0, 8
+  1a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			1a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  1e:	3100      	movi      	r1, 0
+  20:	3007      	movi      	r0, 7
+  22:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			22: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  26:	3000      	movi      	r0, 0
+  28:	1490      	pop      	r15

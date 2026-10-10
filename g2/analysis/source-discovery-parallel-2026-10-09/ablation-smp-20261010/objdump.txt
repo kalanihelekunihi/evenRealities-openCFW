@@ -1,0 +1,168 @@
+
+g2/analysis/source-discovery-parallel-2026-10-09/ablation-smp-20261010/stock-function.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00537d0c <.data>:
+  537d0c:	b530      	push	{r4, r5, lr}
+  537d0e:	b085      	sub	sp, #20
+  537d10:	000c      	movs	r4, r1
+  537d12:	2c00      	cmp	r4, #0
+  537d14:	f000 80c1 	beq.w	0x537e9a
+  537d18:	78a0      	ldrb	r0, [r4, #2]
+  537d1a:	2820      	cmp	r0, #32
+  537d1c:	d102      	bne.n	0x537d24
+  537d1e:	f00a fe1f 	bl	0x542960
+  537d22:	e0ba      	b.n	0x537e9a
+  537d24:	78a0      	ldrb	r0, [r4, #2]
+  537d26:	281c      	cmp	r0, #28
+  537d28:	d106      	bne.n	0x537d38
+  537d2a:	0021      	movs	r1, r4
+  537d2c:	6888      	ldr	r0, [r1, #8]
+  537d2e:	2800      	cmp	r0, #0
+  537d30:	d002      	beq.n	0x537d38
+  537d32:	6888      	ldr	r0, [r1, #8]
+  537d34:	f7f8 fbce 	bl	0x5304d4
+  537d38:	8820      	ldrh	r0, [r4, #0]
+  537d3a:	b2c0      	uxtb	r0, r0
+  537d3c:	f7ff fc5e 	bl	0x5375fc
+  537d40:	0005      	movs	r5, r0
+  537d42:	f895 003d 	ldrb.w	r0, [r5, #61]	@ 0x3d
+  537d46:	2800      	cmp	r0, #0
+  537d48:	f000 80a7 	beq.w	0x537e9a
+  537d4c:	78a0      	ldrb	r0, [r4, #2]
+  537d4e:	280b      	cmp	r0, #11
+  537d50:	f040 809e 	bne.w	0x537e90
+  537d54:	f895 0041 	ldrb.w	r0, [r5, #65]	@ 0x41
+  537d58:	78e1      	ldrb	r1, [r4, #3]
+  537d5a:	4288      	cmp	r0, r1
+  537d5c:	f000 8098 	beq.w	0x537e90
+  537d60:	2000      	movs	r0, #0
+  537d62:	f88d 0010 	strb.w	r0, [sp, #16]
+  537d66:	2000      	movs	r0, #0
+  537d68:	f791 ff72 	bl	0x4c9c50
+  537d6c:	2800      	cmp	r0, #0
+  537d6e:	d01b      	beq.n	0x537da8
+  537d70:	2203      	movs	r2, #3
+  537d72:	a150      	add	r1, pc, #320	@ (adr r1, 0x537eb4)
+  537d74:	484a      	ldr	r0, [pc, #296]	@ (0x537ea0)
+  537d76:	f713 fc4b 	bl	0x44b610
+  537d7a:	2800      	cmp	r0, #0
+  537d7c:	d114      	bne.n	0x537da8
+  537d7e:	f705 f9a6 	bl	0x43d0ce
+  537d82:	0780      	lsls	r0, r0, #30
+  537d84:	d50f      	bpl.n	0x537da6
+  537d86:	78e0      	ldrb	r0, [r4, #3]
+  537d88:	9003      	str	r0, [sp, #12]
+  537d8a:	f895 0041 	ldrb.w	r0, [r5, #65]	@ 0x41
+  537d8e:	9002      	str	r0, [sp, #8]
+  537d90:	4853      	ldr	r0, [pc, #332]	@ (0x537ee0)
+  537d92:	9001      	str	r0, [sp, #4]
+  537d94:	f240 3075 	movw	r0, #885	@ 0x375
+  537d98:	9000      	str	r0, [sp, #0]
+  537d9a:	4b52      	ldr	r3, [pc, #328]	@ (0x537ee4)
+  537d9c:	4a43      	ldr	r2, [pc, #268]	@ (0x537eac)
+  537d9e:	a146      	add	r1, pc, #280	@ (adr r1, 0x537eb8)
+  537da0:	2001      	movs	r0, #1
+  537da2:	f705 fbe7 	bl	0x43d574
+  537da6:	e06a      	b.n	0x537e7e
+  537da8:	f791 ff52 	bl	0x4c9c50
+  537dac:	2800      	cmp	r0, #0
+  537dae:	d01b      	beq.n	0x537de8
+  537db0:	483b      	ldr	r0, [pc, #236]	@ (0x537ea0)
+  537db2:	2204      	movs	r2, #4
+  537db4:	0001      	movs	r1, r0
+  537db6:	f713 fc2b 	bl	0x44b610
+  537dba:	2800      	cmp	r0, #0
+  537dbc:	d114      	bne.n	0x537de8
+  537dbe:	f705 f986 	bl	0x43d0ce
+  537dc2:	0780      	lsls	r0, r0, #30
+  537dc4:	d50f      	bpl.n	0x537de6
+  537dc6:	78e0      	ldrb	r0, [r4, #3]
+  537dc8:	9003      	str	r0, [sp, #12]
+  537dca:	f895 0041 	ldrb.w	r0, [r5, #65]	@ 0x41
+  537dce:	9002      	str	r0, [sp, #8]
+  537dd0:	4843      	ldr	r0, [pc, #268]	@ (0x537ee0)
+  537dd2:	9001      	str	r0, [sp, #4]
+  537dd4:	f240 3075 	movw	r0, #885	@ 0x375
+  537dd8:	9000      	str	r0, [sp, #0]
+  537dda:	4b42      	ldr	r3, [pc, #264]	@ (0x537ee4)
+  537ddc:	4a33      	ldr	r2, [pc, #204]	@ (0x537eac)
+  537dde:	a136      	add	r1, pc, #216	@ (adr r1, 0x537eb8)
+  537de0:	2002      	movs	r0, #2
+  537de2:	f705 fbc7 	bl	0x43d574
+  537de6:	e04a      	b.n	0x537e7e
+  537de8:	f791 ff32 	bl	0x4c9c50
+  537dec:	2800      	cmp	r0, #0
+  537dee:	d01b      	beq.n	0x537e28
+  537df0:	2204      	movs	r2, #4
+  537df2:	492f      	ldr	r1, [pc, #188]	@ (0x537eb0)
+  537df4:	482a      	ldr	r0, [pc, #168]	@ (0x537ea0)
+  537df6:	f713 fc0b 	bl	0x44b610
+  537dfa:	2800      	cmp	r0, #0
+  537dfc:	d114      	bne.n	0x537e28
+  537dfe:	f705 f966 	bl	0x43d0ce
+  537e02:	0780      	lsls	r0, r0, #30
+  537e04:	d50f      	bpl.n	0x537e26
+  537e06:	78e0      	ldrb	r0, [r4, #3]
+  537e08:	9003      	str	r0, [sp, #12]
+  537e0a:	f895 0041 	ldrb.w	r0, [r5, #65]	@ 0x41
+  537e0e:	9002      	str	r0, [sp, #8]
+  537e10:	4833      	ldr	r0, [pc, #204]	@ (0x537ee0)
+  537e12:	9001      	str	r0, [sp, #4]
+  537e14:	f240 3075 	movw	r0, #885	@ 0x375
+  537e18:	9000      	str	r0, [sp, #0]
+  537e1a:	4b32      	ldr	r3, [pc, #200]	@ (0x537ee4)
+  537e1c:	4a23      	ldr	r2, [pc, #140]	@ (0x537eac)
+  537e1e:	a126      	add	r1, pc, #152	@ (adr r1, 0x537eb8)
+  537e20:	2003      	movs	r0, #3
+  537e22:	f705 fba7 	bl	0x43d574
+  537e26:	e02a      	b.n	0x537e7e
+  537e28:	f791 ff12 	bl	0x4c9c50
+  537e2c:	2800      	cmp	r0, #0
+  537e2e:	d014      	beq.n	0x537e5a
+  537e30:	f705 f94d 	bl	0x43d0ce
+  537e34:	0780      	lsls	r0, r0, #30
+  537e36:	d50f      	bpl.n	0x537e58
+  537e38:	78e0      	ldrb	r0, [r4, #3]
+  537e3a:	9003      	str	r0, [sp, #12]
+  537e3c:	f895 0041 	ldrb.w	r0, [r5, #65]	@ 0x41
+  537e40:	9002      	str	r0, [sp, #8]
+  537e42:	4827      	ldr	r0, [pc, #156]	@ (0x537ee0)
+  537e44:	9001      	str	r0, [sp, #4]
+  537e46:	f240 3075 	movw	r0, #885	@ 0x375
+  537e4a:	9000      	str	r0, [sp, #0]
+  537e4c:	4b25      	ldr	r3, [pc, #148]	@ (0x537ee4)
+  537e4e:	4a17      	ldr	r2, [pc, #92]	@ (0x537eac)
+  537e50:	a119      	add	r1, pc, #100	@ (adr r1, 0x537eb8)
+  537e52:	2004      	movs	r0, #4
+  537e54:	f705 fb8e 	bl	0x43d574
+  537e58:	e011      	b.n	0x537e7e
+  537e5a:	f791 fef9 	bl	0x4c9c50
+  537e5e:	2800      	cmp	r0, #0
+  537e60:	d006      	beq.n	0x537e70
+  537e62:	2203      	movs	r2, #3
+  537e64:	a116      	add	r1, pc, #88	@ (adr r1, 0x537ec0)
+  537e66:	a014      	add	r0, pc, #80	@ (adr r0, 0x537eb8)
+  537e68:	f713 fbd2 	bl	0x44b610
+  537e6c:	2800      	cmp	r0, #0
+  537e6e:	d006      	beq.n	0x537e7e
+  537e70:	78e3      	ldrb	r3, [r4, #3]
+  537e72:	f895 2041 	ldrb.w	r2, [r5, #65]	@ 0x41
+  537e76:	491a      	ldr	r1, [pc, #104]	@ (0x537ee0)
+  537e78:	4809      	ldr	r0, [pc, #36]	@ (0x537ea0)
+  537e7a:	f7f2 fbdf 	bl	0x52a63c
+  537e7e:	a904      	add	r1, sp, #16
+  537e80:	4819      	ldr	r0, [pc, #100]	@ (0x537ee8)
+  537e82:	f787 fdb3 	bl	0x4bf9ec
+  537e86:	2800      	cmp	r0, #0
+  537e88:	d007      	beq.n	0x537e9a
+  537e8a:	f787 fd91 	bl	0x4bf9b0
+  537e8e:	e7f6      	b.n	0x537e7e
+  537e90:	0021      	movs	r1, r4
+  537e92:	0028      	movs	r0, r5
+  537e94:	f036 ffe5 	bl	0x56ee62
+  537e98:	e7ff      	b.n	0x537e9a
+  537e9a:	b005      	add	sp, #20
+  537e9c:	bd30      	pop	{r4, r5, pc}

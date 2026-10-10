@@ -1,0 +1,16 @@
+# Cordio ATT response guard binding
+
+Finite finding: authenticated stock attcProcRsp contains the newer SDK 5.2 guard behavior rather than the unguarded public r20.05c variant, for the three selected guards. This is behavioral source-lineage evidence, not a complete function or library source identity claim. The independently retained source diff is ../cordio-sdk520-parser-lead-2026-10-09-source-track/attc_proc.c.diff (public commit 3656312d6b73e2a2c1c8b33ee0385bc199dd97e6). Locally extracted Apache-licensed SDK source is sdk-attc_proc.c; its SHA256 is 90cf6edcc0642cad67dc147d3cdd58b1fe7c75a439820eb92e965cea441d3c18.
+
+Original function [0x4b5448,0x4b557a), 306 bytes, SHA256 f8256375f5cad966c0c74be78977523bce416b3fdeb41f06c9b98537cd9edd18. Official raw main SHA256 36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863. Every extracted extent has VA, raw file offset, length and SHA256 in original-byte-receipts.json. stock.disasm.txt derives only from those original bytes.
+
+- 0x4b546e/0x4b5470: method >=18 exits, matching SDK >SIGNED_WRITE_CMD(17). Method is (opcode & ~1)/2, extracted at packet+8 before this guard.
+- 0x4b54ae loads authentic processor table at 0x700964; 0x4b54b6 skips dispatch for a zero function pointer. Method10 table entry is zero.
+- 0x4b54c2 loads the authentic minimum-length table at 0x785270; 0x4b54ca exits if unsigned len is below its byte entry. Method1=3, method9=1; complete selected 13-byte table: 05 03 02 01 02 01 01 01 02 01 03 05 01.
+- 0x4b548a calls WsfTimerStop at 0x52a4d2 before the minimum-length check. Short WRITE and MTU fixtures observe that ordering.
+
+Eight original-byte executions PASS in results.json: no outstanding request, mismatched response, short/minimum WRITE, short/minimum MTU, invalid method18, null handler method10. run.py ran with existing Linux Unicorn2.1.4 backend in container opencfw-lz4-20261009t211300 using /tmp/lz4env/bin/python. No backend installation or prior output changes. All original main code/data bytes were loaded; timer and selected processor calls were explicitly mocked and logged. An independent simple expected-count oracle checks timer/dispatch boundaries; this is not a compiled old/new C comparator. The publicly retained old-source diff lacks all three guards; static binding supplies that source distinction.
+
+Fixture limits: readable backing packet even for len0, synthetic CCB (event+6,status+7,pPkt+8,handle+12,timer+24,slot+40,connId+41); flow-disabled bit2 suppresses later send/onDeck; application callback zero; continuing status1 prevents free; processor mocks leave success unchanged. These constrain the receipt to routing/guard ordering. No downstream parser behavior, zero-readable-memory safety, signed-write minimum-table indexing, onDeck indexing, callers, malformed live BLE traffic, or physical behavior established. No complete byte-identical rebuild or new coverage census claim. No production edits, device writes, index operations, commits, pushes or submodule pin changes.
+
+preservation.json checks prior seals, 110 audit inputs, four checkpoints and index stability during verification. Earlier session index sample differs owing to concurrent external work; this report claims only the recorded verification interval.

@@ -1,0 +1,100 @@
+--- public-r20.05c/attc_proc.c
++++ sdk5.2/attc_proc.c
+@@ -60,6 +60,24 @@
+   attcProcReadMultVarRsp        /* ATT_METHOD_READ_MULT_VAR */
+ };
+ 
++/* Minimum PDU lengths, indexed by method */
++static const uint8_t attcMinPduLen[] =
++{
++  ATT_ERR_RSP_LEN,              /* ATT_METHOD_ERR */
++  ATT_MTU_RSP_LEN,              /* ATT_METHOD_MTU */
++  ATT_FIND_INFO_RSP_LEN,        /* ATT_METHOD_FIND_INFO */
++  ATT_FIND_TYPE_RSP_LEN,        /* ATT_METHOD_FIND_TYPE */
++  ATT_READ_TYPE_RSP_LEN,        /* ATT_METHOD_READ_TYPE */
++  ATT_READ_RSP_LEN,             /* ATT_METHOD_READ */
++  ATT_READ_BLOB_RSP_LEN,        /* ATT_METHOD_READ_BLOB */
++  ATT_READ_MULT_RSP_LEN,        /* ATT_METHOD_READ_MULTIPLE */
++  ATT_READ_GROUP_TYPE_RSP_LEN,  /* ATT_METHOD_READ_GROUP_TYPE */
++  ATT_WRITE_RSP_LEN,            /* ATT_METHOD_WRITE */
++  ATT_WRITE_CMD_LEN,            /* ATT_METHOD_WRITE_CMD */
++  ATT_PREP_WRITE_RSP_LEN,       /* ATT_METHOD_PREPARE_WRITE */
++  ATT_EXEC_WRITE_RSP_LEN        /* ATT_METHOD_EXECUTE_WRITE */
++};
++
+ /*************************************************************************************************/
+ /*!
+  *  \brief  Process received Error response packet.
+@@ -355,7 +373,8 @@
+ /*************************************************************************************************/
+ void attcProcRsp(attcCcb_t *pCcb, uint16_t len, uint8_t *pPacket)
+ {
+-  attEvt_t    evt;
++  attEvt_t      evt;
++  attcProcRsp_t procFcn;
+ 
+   /* if no request in progress ignore response */
+   if (pCcb->outReq.hdr.event == ATTC_MSG_API_NONE)
+@@ -365,6 +384,12 @@
+ 
+   /* get method */
+   evt.hdr.event = ATT_OPCODE_2_METHOD(*(pPacket + L2C_PAYLOAD_START));
++
++  /* check the validity of event */
++  if (evt.hdr.event > ATT_METHOD_SIGNED_WRITE_CMD)
++  {
++    return;
++  }
+ 
+   /* if response method is not error and does not match stored method ignore response */
+   if ((evt.hdr.event != ATT_METHOD_ERR) && (evt.hdr.event != pCcb->outReq.hdr.event))
+@@ -380,7 +405,21 @@
+   evt.valueLen = len - ATT_HDR_LEN;
+   evt.handle = pCcb->outReq.handle;
+   evt.hdr.status = ATT_SUCCESS;
+-  (*attcProcRspTbl[evt.hdr.event])(pCcb, len, pPacket, &evt);
++
++  /* look up processing function */
++  procFcn = attcProcRspTbl[evt.hdr.event];
++
++  /* if method is supported */
++  if (procFcn != NULL)
++  {
++    /* check the validity of data length */
++    ATT_CHECK_DATA_LENGTH(len, attcMinPduLen[evt.hdr.event]);
++
++    /* execute processing function */
++    (*procFcn)(pCcb, len, pPacket, &evt);
++
++    procFcn = NULL;
++  }
+ 
+   /* if not continuing or status is not success */
+   if ((pCcb->outReq.hdr.status == ATTC_NOT_CONTINUING) || (evt.hdr.status != ATT_SUCCESS))
+@@ -410,13 +449,13 @@
+     }
+     /* else if api is on deck */
+     else if ((pCcb->slot == ATT_BEARER_SLOT_ID) &&
+-             (attcCb.onDeck[pCcb->connId].hdr.event != ATTC_MSG_API_NONE))
++             (attcCb.onDeck[pCcb->connId-1].hdr.event != ATTC_MSG_API_NONE))
+     {
+       /* set up and send request */
+-      attcSetupReq(pCcb, &attcCb.onDeck[pCcb->connId]);
++      attcSetupReq(pCcb, &attcCb.onDeck[pCcb->connId-1]);
+ 
+       /* clear on deck */
+-      attcCb.onDeck[pCcb->connId].hdr.event = ATTC_MSG_API_NONE;
++      attcCb.onDeck[pCcb->connId-1].hdr.event = ATTC_MSG_API_NONE;
+     }
+   }
+ }
+@@ -437,6 +476,9 @@
+   attEvt_t    evt;
+   uint8_t     *p;
+   uint8_t     *pPkt;
++
++  /* check the validity of data length */
++  ATT_CHECK_DATA_LENGTH(len, ATT_VALUE_IND_LEN);
+ 
+   p = pPacket + L2C_PAYLOAD_START;
+ 

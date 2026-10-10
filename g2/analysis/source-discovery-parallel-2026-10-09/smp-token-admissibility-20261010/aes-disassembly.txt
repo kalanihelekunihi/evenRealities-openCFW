@@ -1,0 +1,36 @@
+
+g2/analysis/source-discovery-parallel-2026-10-09/smp-token-admissibility-20261010/aes.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00536426 <.data>:
+  536426:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
+  53642a:	0006      	movs	r6, r0
+  53642c:	000f      	movs	r7, r1
+  53642e:	4690      	mov	r8, r2
+  536430:	4699      	mov	r9, r3
+  536432:	2038      	movs	r0, #56	@ 0x38
+  536434:	f789 fab3 	bl	0x4bf99e
+  536438:	0004      	movs	r4, r0
+  53643a:	2c00      	cmp	r4, #0
+  53643c:	d015      	beq.n	0x53646a
+  53643e:	9d08      	ldr	r5, [sp, #32]
+  536440:	f7ff ffdc 	bl	0x5363fc
+  536444:	70e0      	strb	r0, [r4, #3]
+  536446:	f8a4 9000 	strh.w	r9, [r4]
+  53644a:	70a5      	strb	r5, [r4, #2]
+  53644c:	2000      	movs	r0, #0
+  53644e:	f884 0034 	strb.w	r0, [r4, #52]	@ 0x34
+  536452:	0022      	movs	r2, r4
+  536454:	4641      	mov	r1, r8
+  536456:	b2c9      	uxtb	r1, r1
+  536458:	4810      	ldr	r0, [pc, #64]	@ (0x53649c)
+  53645a:	f789 fac0 	bl	0x4bf9de
+  53645e:	0039      	movs	r1, r7
+  536460:	0030      	movs	r0, r6
+  536462:	f7f4 ff00 	bl	0x52b266
+  536466:	78e0      	ldrb	r0, [r4, #3]
+  536468:	e000      	b.n	0x53646c
+  53646a:	20ff      	movs	r0, #255	@ 0xff
+  53646c:	e8bd 83f2 	ldmia.w	sp!, {r1, r4, r5, r6, r7, r8, r9, pc}

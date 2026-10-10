@@ -1,0 +1,829 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/spi_slave.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.dw_spi_dma_complete_cb:
+
+00000000 <dw_spi_dma_complete_cb>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	9083      	ld.w      	r4, (r0, 0xc)
+   4:	3100      	movi      	r1, 0
+   6:	9463      	ld.w      	r3, (r4, 0xc)
+   8:	6d43      	mov      	r5, r0
+   a:	9340      	ld.w      	r2, (r3, 0x0)
+   c:	b233      	st.w      	r1, (r2, 0x4c)
+   e:	9442      	ld.w      	r2, (r4, 0x8)
+  10:	e9220006 	bnez      	r2, 0x1c	// 1c <dw_spi_dma_complete_cb+0x1c>
+  14:	9360      	ld.w      	r3, (r3, 0x0)
+  16:	324b      	movi      	r2, 75
+  18:	b34b      	st.w      	r2, (r3, 0x2c)
+  1a:	1492      	pop      	r4-r5, r15
+  1c:	300e      	movi      	r0, 14
+  1e:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			1e: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  22:	9464      	ld.w      	r3, (r4, 0x10)
+  24:	e903fffb 	bez      	r3, 0x1a	// 1a <dw_spi_dma_complete_cb+0x1a>
+  28:	3202      	movi      	r2, 2
+  2a:	b445      	st.w      	r2, (r4, 0x14)
+  2c:	6c17      	mov      	r0, r5
+  2e:	7bcd      	jsr      	r3
+  30:	07f5      	br      	0x1a	// 1a <dw_spi_dma_complete_cb+0x1a>
+
+Disassembly of section .text.dw_half_duplex_dma_transfer:
+
+00000000 <dw_half_duplex_dma_transfer>:
+   0:	ebe00058 	push      	r4-r11, r15, r16-r17
+   4:	1431      	subi      	r14, r14, 68
+   6:	8078      	ld.b      	r3, (r0, 0x18)
+   8:	da002005 	ld.w      	r16, (r0, 0x14)
+   c:	c4708046 	divs      	r6, r16, r3
+  10:	9043      	ld.w      	r2, (r0, 0xc)
+  12:	7d8c      	mult      	r6, r3
+  14:	c4d00086 	subu      	r6, r16, r6
+  18:	6d43      	mov      	r5, r0
+  1a:	90e4      	ld.w      	r7, (r0, 0x10)
+  1c:	d9022003 	ld.w      	r8, (r2, 0xc)
+  20:	e9260166 	bnez      	r6, 0x2ec	// 2ec <dw_half_duplex_dma_transfer+0x2ec>
+  24:	c4678024 	divu      	r4, r7, r3
+  28:	7d0c      	mult      	r4, r3
+  2a:	5f91      	subu      	r4, r7, r4
+  2c:	e9240160 	bnez      	r4, 0x2ec	// 2ec <dw_half_duplex_dma_transfer+0x2ec>
+  30:	3101      	movi      	r1, 1
+  32:	300e      	movi      	r0, 14
+  34:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			34: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  38:	9560      	ld.w      	r3, (r5, 0x0)
+  3a:	ea0a0001 	movi      	r10, 1
+  3e:	b382      	st.w      	r4, (r3, 0x8)
+  40:	9560      	ld.w      	r3, (r5, 0x0)
+  42:	3207      	movi      	r2, 7
+  44:	dd432004 	st.w      	r10, (r3, 0x10)
+  48:	9560      	ld.w      	r3, (r5, 0x0)
+  4a:	6c53      	mov      	r1, r4
+  4c:	b393      	st.w      	r4, (r3, 0x4c)
+  4e:	9560      	ld.w      	r3, (r5, 0x0)
+  50:	300e      	movi      	r0, 14
+  52:	b355      	st.w      	r2, (r3, 0x54)
+  54:	9560      	ld.w      	r3, (r5, 0x0)
+  56:	3208      	movi      	r2, 8
+  58:	b354      	st.w      	r2, (r3, 0x50)
+  5a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			5a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  5e:	d9282002 	ld.w      	r9, (r8, 0x8)
+  62:	d9652003 	ld.w      	r11, (r5, 0xc)
+  66:	d9050018 	ld.b      	r8, (r5, 0x18)
+  6a:	1c05      	addi      	r4, r14, 20
+  6c:	7620      	zextb      	r8, r8
+  6e:	da2b2003 	ld.w      	r17, (r11, 0xc)
+  72:	6c6b      	mov      	r1, r10
+  74:	300e      	movi      	r0, 14
+  76:	e929009d 	bnez      	r9, 0x1b0	// 1b0 <dw_half_duplex_dma_transfer+0x1b0>
+  7a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			7a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  7e:	9560      	ld.w      	r3, (r5, 0x0)
+  80:	324a      	movi      	r2, 74
+  82:	b34b      	st.w      	r2, (r3, 0x2c)
+  84:	9560      	ld.w      	r3, (r5, 0x0)
+  86:	eb480001 	cmpnei      	r8, 1
+  8a:	dd432002 	st.w      	r10, (r3, 0x8)
+  8e:	083b      	bt      	0x104	// 104 <dw_half_duplex_dma_transfer+0x104>
+  90:	dd242000 	st.w      	r9, (r4, 0x0)
+  94:	3300      	movi      	r3, 0
+  96:	b462      	st.w      	r3, (r4, 0x8)
+  98:	b465      	st.w      	r3, (r4, 0x14)
+  9a:	b464      	st.w      	r3, (r4, 0x10)
+  9c:	b463      	st.w      	r3, (r4, 0xc)
+  9e:	b46a      	st.w      	r3, (r4, 0x28)
+  a0:	3302      	movi      	r3, 2
+  a2:	ea0a0001 	movi      	r10, 1
+  a6:	3204      	movi      	r2, 4
+  a8:	b466      	st.w      	r3, (r4, 0x18)
+  aa:	b861      	st.w      	r3, (r14, 0x4)
+  ac:	c4104821 	lsli      	r1, r16, 0
+  b0:	3309      	movi      	r3, 9
+  b2:	c5108046 	divs      	r6, r16, r8
+  b6:	6c1f      	mov      	r0, r7
+  b8:	ea100080 	movi      	r16, 128
+  bc:	b441      	st.w      	r2, (r4, 0x4)
+  be:	dd442007 	st.w      	r10, (r4, 0x1c)
+  c2:	dd442009 	st.w      	r10, (r4, 0x24)
+  c6:	b468      	st.w      	r3, (r4, 0x20)
+  c8:	dd44200b 	st.w      	r10, (r4, 0x2c)
+  cc:	c5304830 	lsli      	r16, r16, 9
+  d0:	e0000000 	bsr      	0x0	// 0 <gx_dcache_clean_range>
+			d0: R_CKCORE_PCREL_IMM26BY2	gx_dcache_clean_range
+  d4:	dd4e2002 	st.w      	r10, (r14, 0x8)
+  d8:	e9260022 	bnez      	r6, 0x11c	// 11c <dw_half_duplex_dma_transfer+0x11c>
+  dc:	9540      	ld.w      	r2, (r5, 0x0)
+  de:	e422001f 	addi      	r1, r2, 32
+  e2:	9160      	ld.w      	r3, (r1, 0x0)
+  e4:	e923ffff 	bnez      	r3, 0xe2	// e2 <dw_half_duplex_dma_transfer+0xe2>
+  e8:	e4220027 	addi      	r1, r2, 40
+  ec:	9160      	ld.w      	r3, (r1, 0x0)
+  ee:	e4632001 	andi      	r3, r3, 1
+  f2:	e923fffd 	bnez      	r3, 0xec	// ec <dw_half_duplex_dma_transfer+0xec>
+  f6:	b262      	st.w      	r3, (r2, 0x8)
+  f8:	3100      	movi      	r1, 0
+  fa:	300e      	movi      	r0, 14
+  fc:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			fc: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+ 100:	6e5b      	mov      	r9, r6
+ 102:	042f      	br      	0x160	// 160 <dw_half_duplex_dma_transfer+0x160>
+ 104:	eb480002 	cmpnei      	r8, 2
+ 108:	0804      	bt      	0x110	// 110 <dw_half_duplex_dma_transfer+0x110>
+ 10a:	dd442000 	st.w      	r10, (r4, 0x0)
+ 10e:	07c3      	br      	0x94	// 94 <dw_half_duplex_dma_transfer+0x94>
+ 110:	eb480004 	cmpnei      	r8, 4
+ 114:	0bc0      	bt      	0x94	// 94 <dw_half_duplex_dma_transfer+0x94>
+ 116:	3302      	movi      	r3, 2
+ 118:	b460      	st.w      	r3, (r4, 0x0)
+ 11a:	07bd      	br      	0x94	// 94 <dw_half_duplex_dma_transfer+0x94>
+ 11c:	e0000000 	bsr      	0x0	// 0 <gx_dma_select_channel>
+			11c: R_CKCORE_PCREL_IMM26BY2	gx_dma_select_channel
+ 120:	6f03      	mov      	r12, r0
+ 122:	e9800044 	blz      	r0, 0x1aa	// 1aa <dw_half_duplex_dma_transfer+0x1aa>
+ 126:	da712004 	ld.w      	r19, (r17, 0x10)
+ 12a:	9862      	ld.w      	r3, (r14, 0x8)
+ 12c:	fa06cdaa 	min.s32      	r10, r6, r16
+ 130:	dc712005 	st.w      	r3, (r17, 0x14)
+ 134:	dc112006 	st.w      	r0, (r17, 0x18)
+ 138:	e9130019 	bez      	r19, 0x16a	// 16a <dw_half_duplex_dma_transfer+0x16a>
+ 13c:	6caf      	mov      	r2, r11
+ 13e:	132e      	lrw      	r1, 0x0	// 2f4 <dw_half_duplex_dma_transfer+0x2f4>
+ 140:	b801      	st.w      	r0, (r14, 0x4)
+ 142:	e0000000 	bsr      	0x0	// 0 <gx_dma_register_complete_callback>
+			142: R_CKCORE_PCREL_IMM26BY2	gx_dma_register_complete_callback
+ 146:	9500      	ld.w      	r0, (r5, 0x0)
+ 148:	d98e2001 	ld.w      	r12, (r14, 0x4)
+ 14c:	6cf3      	mov      	r3, r12
+ 14e:	6cab      	mov      	r2, r10
+ 150:	b880      	st.w      	r4, (r14, 0x0)
+ 152:	6c5f      	mov      	r1, r7
+ 154:	205f      	addi      	r0, 96
+ 156:	e0000000 	bsr      	0x0	// 0 <gx_dma_xfer_int>
+			156: R_CKCORE_PCREL_IMM26BY2	gx_dma_xfer_int
+ 15a:	9560      	ld.w      	r3, (r5, 0x0)
+ 15c:	3202      	movi      	r2, 2
+ 15e:	b353      	st.w      	r2, (r3, 0x4c)
+ 160:	6da7      	mov      	r6, r9
+ 162:	6c1b      	mov      	r0, r6
+ 164:	1411      	addi      	r14, r14, 68
+ 166:	ebc00058 	pop      	r4-r11, r15, r16-r17
+ 16a:	9500      	ld.w      	r0, (r5, 0x0)
+ 16c:	6cf3      	mov      	r3, r12
+ 16e:	6c5f      	mov      	r1, r7
+ 170:	6cab      	mov      	r2, r10
+ 172:	b880      	st.w      	r4, (r14, 0x0)
+ 174:	205f      	addi      	r0, 96
+ 176:	de6e2004 	st.w      	r19, (r14, 0x10)
+ 17a:	dd8e2003 	st.w      	r12, (r14, 0xc)
+ 17e:	e0000000 	bsr      	0x0	// 0 <gx_dma_xfer>
+			17e: R_CKCORE_PCREL_IMM26BY2	gx_dma_xfer
+ 182:	9560      	ld.w      	r3, (r5, 0x0)
+ 184:	9841      	ld.w      	r2, (r14, 0x4)
+ 186:	d98e2003 	ld.w      	r12, (r14, 0xc)
+ 18a:	b353      	st.w      	r2, (r3, 0x4c)
+ 18c:	6c33      	mov      	r0, r12
+ 18e:	e0000000 	bsr      	0x0	// 0 <gx_dma_wait_complete>
+			18e: R_CKCORE_PCREL_IMM26BY2	gx_dma_wait_complete
+ 192:	9560      	ld.w      	r3, (r5, 0x0)
+ 194:	da6e2004 	ld.w      	r19, (r14, 0x10)
+ 198:	de632013 	st.w      	r19, (r3, 0x4c)
+ 19c:	9861      	ld.w      	r3, (r14, 0x4)
+ 19e:	dc712005 	st.w      	r3, (r17, 0x14)
+ 1a2:	61aa      	subu      	r6, r10
+ 1a4:	f9488447 	mula.32.l      	r7, r8, r10
+ 1a8:	0798      	br      	0xd8	// d8 <dw_half_duplex_dma_transfer+0xd8>
+ 1aa:	3600      	movi      	r6, 0
+ 1ac:	2e00      	subi      	r6, 1
+ 1ae:	07a5      	br      	0xf8	// f8 <dw_half_duplex_dma_transfer+0xf8>
+ 1b0:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			1b0: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+ 1b4:	9560      	ld.w      	r3, (r5, 0x0)
+ 1b6:	eb480001 	cmpnei      	r8, 1
+ 1ba:	324a      	movi      	r2, 74
+ 1bc:	b34b      	st.w      	r2, (r3, 0x2c)
+ 1be:	0829      	bt      	0x210	// 210 <dw_half_duplex_dma_transfer+0x210>
+ 1c0:	b4c0      	st.w      	r6, (r4, 0x0)
+ 1c2:	3108      	movi      	r1, 8
+ 1c4:	b423      	st.w      	r1, (r4, 0xc)
+ 1c6:	3104      	movi      	r1, 4
+ 1c8:	3300      	movi      	r3, 0
+ 1ca:	3202      	movi      	r2, 2
+ 1cc:	ea090001 	movi      	r9, 1
+ 1d0:	b426      	st.w      	r1, (r4, 0x18)
+ 1d2:	c510804a 	divs      	r10, r16, r8
+ 1d6:	c4104821 	lsli      	r1, r16, 0
+ 1da:	6c1f      	mov      	r0, r7
+ 1dc:	ea100080 	movi      	r16, 128
+ 1e0:	dd242002 	st.w      	r9, (r4, 0x8)
+ 1e4:	b465      	st.w      	r3, (r4, 0x14)
+ 1e6:	dd242004 	st.w      	r9, (r4, 0x10)
+ 1ea:	b441      	st.w      	r2, (r4, 0x4)
+ 1ec:	b467      	st.w      	r3, (r4, 0x1c)
+ 1ee:	b46a      	st.w      	r3, (r4, 0x28)
+ 1f0:	b469      	st.w      	r3, (r4, 0x24)
+ 1f2:	b468      	st.w      	r3, (r4, 0x20)
+ 1f4:	b44b      	st.w      	r2, (r4, 0x2c)
+ 1f6:	b841      	st.w      	r2, (r14, 0x4)
+ 1f8:	c5304830 	lsli      	r16, r16, 9
+ 1fc:	e0000000 	bsr      	0x0	// 0 <gx_dcache_invalid_range>
+			1fc: R_CKCORE_PCREL_IMM26BY2	gx_dcache_invalid_range
+ 200:	e92a0014 	bnez      	r10, 0x228	// 228 <dw_half_duplex_dma_transfer+0x228>
+ 204:	3100      	movi      	r1, 0
+ 206:	300e      	movi      	r0, 14
+ 208:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			208: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+ 20c:	6dab      	mov      	r6, r10
+ 20e:	07aa      	br      	0x162	// 162 <dw_half_duplex_dma_transfer+0x162>
+ 210:	eb480002 	cmpnei      	r8, 2
+ 214:	0804      	bt      	0x21c	// 21c <dw_half_duplex_dma_transfer+0x21c>
+ 216:	dd442000 	st.w      	r10, (r4, 0x0)
+ 21a:	07d4      	br      	0x1c2	// 1c2 <dw_half_duplex_dma_transfer+0x1c2>
+ 21c:	eb480004 	cmpnei      	r8, 4
+ 220:	0bd1      	bt      	0x1c2	// 1c2 <dw_half_duplex_dma_transfer+0x1c2>
+ 222:	3302      	movi      	r3, 2
+ 224:	b460      	st.w      	r3, (r4, 0x0)
+ 226:	07ce      	br      	0x1c2	// 1c2 <dw_half_duplex_dma_transfer+0x1c2>
+ 228:	e0000000 	bsr      	0x0	// 0 <gx_dma_select_channel>
+			228: R_CKCORE_PCREL_IMM26BY2	gx_dma_select_channel
+ 22c:	e980005b 	blz      	r0, 0x2e2	// 2e2 <dw_half_duplex_dma_transfer+0x2e2>
+ 230:	9560      	ld.w      	r3, (r5, 0x0)
+ 232:	fa0acdac 	min.s32      	r12, r10, r16
+ 236:	da512004 	ld.w      	r18, (r17, 0x10)
+ 23a:	e44c1000 	subi      	r2, r12, 1
+ 23e:	b341      	st.w      	r2, (r3, 0x4)
+ 240:	dd312005 	st.w      	r9, (r17, 0x14)
+ 244:	dc112006 	st.w      	r0, (r17, 0x18)
+ 248:	e912001f 	bez      	r18, 0x286	// 286 <dw_half_duplex_dma_transfer+0x286>
+ 24c:	6caf      	mov      	r2, r11
+ 24e:	112a      	lrw      	r1, 0x0	// 2f4 <dw_half_duplex_dma_transfer+0x2f4>
+ 250:	dd8e2002 	st.w      	r12, (r14, 0x8)
+ 254:	b801      	st.w      	r0, (r14, 0x4)
+ 256:	e0000000 	bsr      	0x0	// 0 <gx_dma_register_complete_callback>
+			256: R_CKCORE_PCREL_IMM26BY2	gx_dma_register_complete_callback
+ 25a:	9520      	ld.w      	r1, (r5, 0x0)
+ 25c:	d9ae2001 	ld.w      	r13, (r14, 0x4)
+ 260:	d98e2002 	ld.w      	r12, (r14, 0x8)
+ 264:	6cf7      	mov      	r3, r13
+ 266:	6cb3      	mov      	r2, r12
+ 268:	b880      	st.w      	r4, (r14, 0x0)
+ 26a:	215f      	addi      	r1, 96
+ 26c:	6c1f      	mov      	r0, r7
+ 26e:	e0000000 	bsr      	0x0	// 0 <gx_dma_xfer_int>
+			26e: R_CKCORE_PCREL_IMM26BY2	gx_dma_xfer_int
+ 272:	9560      	ld.w      	r3, (r5, 0x0)
+ 274:	3200      	movi      	r2, 0
+ 276:	dd232002 	st.w      	r9, (r3, 0x8)
+ 27a:	9560      	ld.w      	r3, (r5, 0x0)
+ 27c:	dd232013 	st.w      	r9, (r3, 0x4c)
+ 280:	9560      	ld.w      	r3, (r5, 0x0)
+ 282:	b358      	st.w      	r2, (r3, 0x60)
+ 284:	076f      	br      	0x162	// 162 <dw_half_duplex_dma_transfer+0x162>
+ 286:	9520      	ld.w      	r1, (r5, 0x0)
+ 288:	6cc3      	mov      	r3, r0
+ 28a:	6cb3      	mov      	r2, r12
+ 28c:	b804      	st.w      	r0, (r14, 0x10)
+ 28e:	215f      	addi      	r1, 96
+ 290:	6c1f      	mov      	r0, r7
+ 292:	b880      	st.w      	r4, (r14, 0x0)
+ 294:	dd8e2003 	st.w      	r12, (r14, 0xc)
+ 298:	de4e2002 	st.w      	r18, (r14, 0x8)
+ 29c:	e0000000 	bsr      	0x0	// 0 <gx_dma_xfer>
+			29c: R_CKCORE_PCREL_IMM26BY2	gx_dma_xfer
+ 2a0:	9560      	ld.w      	r3, (r5, 0x0)
+ 2a2:	da4e2002 	ld.w      	r18, (r14, 0x8)
+ 2a6:	dd232002 	st.w      	r9, (r3, 0x8)
+ 2aa:	9560      	ld.w      	r3, (r5, 0x0)
+ 2ac:	d9ae2004 	ld.w      	r13, (r14, 0x10)
+ 2b0:	dd232013 	st.w      	r9, (r3, 0x4c)
+ 2b4:	9560      	ld.w      	r3, (r5, 0x0)
+ 2b6:	6c37      	mov      	r0, r13
+ 2b8:	de432018 	st.w      	r18, (r3, 0x60)
+ 2bc:	e0000000 	bsr      	0x0	// 0 <gx_dma_wait_complete>
+			2bc: R_CKCORE_PCREL_IMM26BY2	gx_dma_wait_complete
+ 2c0:	9560      	ld.w      	r3, (r5, 0x0)
+ 2c2:	da4e2002 	ld.w      	r18, (r14, 0x8)
+ 2c6:	de432013 	st.w      	r18, (r3, 0x4c)
+ 2ca:	9560      	ld.w      	r3, (r5, 0x0)
+ 2cc:	d98e2003 	ld.w      	r12, (r14, 0xc)
+ 2d0:	de432002 	st.w      	r18, (r3, 0x8)
+ 2d4:	9861      	ld.w      	r3, (r14, 0x4)
+ 2d6:	dc712005 	st.w      	r3, (r17, 0x14)
+ 2da:	62b2      	subu      	r10, r12
+ 2dc:	f9888447 	mula.32.l      	r7, r8, r12
+ 2e0:	0790      	br      	0x200	// 200 <dw_half_duplex_dma_transfer+0x200>
+ 2e2:	ea0a0000 	movi      	r10, 0
+ 2e6:	e54a1000 	subi      	r10, r10, 1
+ 2ea:	078d      	br      	0x204	// 204 <dw_half_duplex_dma_transfer+0x204>
+ 2ec:	3600      	movi      	r6, 0
+ 2ee:	2e15      	subi      	r6, 22
+ 2f0:	0739      	br      	0x162	// 162 <dw_half_duplex_dma_transfer+0x162>
+ 2f2:	0000      	.short	0x0000
+ 2f4:	00000000 	.long	0x00000000
+			2f4: R_CKCORE_ADDR32	.text.dw_spi_dma_complete_cb
+
+Disassembly of section .text.spi_master_irq_handler:
+
+00000000 <spi_master_irq_handler>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	d9812000 	ld.w      	r12, (r1, 0x0)
+   6:	d88c200c 	ld.w      	r4, (r12, 0x30)
+   a:	e4642001 	andi      	r3, r4, 1
+   e:	e9030017 	bez      	r3, 0x3c	// 3c <spi_master_irq_handler+0x3c>
+  12:	9103      	ld.w      	r0, (r1, 0xc)
+  14:	9063      	ld.w      	r3, (r0, 0xc)
+  16:	9345      	ld.w      	r2, (r3, 0x14)
+  18:	3a41      	cmpnei      	r2, 1
+  1a:	0841      	bt      	0x9c	// 9c <spi_master_irq_handler+0x9c>
+  1c:	93a2      	ld.w      	r5, (r3, 0x8)
+  1e:	e925003f 	bnez      	r5, 0x9c	// 9c <spi_master_irq_handler+0x9c>
+  22:	9344      	ld.w      	r2, (r3, 0x10)
+  24:	e902003c 	bez      	r2, 0x9c	// 9c <spi_master_irq_handler+0x9c>
+  28:	314a      	movi      	r1, 74
+  2a:	dc2c200b 	st.w      	r1, (r12, 0x2c)
+  2e:	3102      	movi      	r1, 2
+  30:	b325      	st.w      	r1, (r3, 0x14)
+  32:	7bc9      	jsr      	r2
+  34:	6c57      	mov      	r1, r5
+  36:	300e      	movi      	r0, 14
+  38:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			38: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  3c:	e4642002 	andi      	r3, r4, 2
+  40:	e9030007 	bez      	r3, 0x4e	// 4e <spi_master_irq_handler+0x4e>
+  44:	1018      	lrw      	r0, 0x0	// a4 <printf_+0xa4>
+  46:	e0000000 	bsr      	0x0	// 0 <printf_>
+			46: R_CKCORE_PCREL_IMM26BY2	printf_
+  4a:	3300      	movi      	r3, 0
+  4c:	936e      	ld.w      	r3, (r3, 0x38)
+  4e:	e4642004 	andi      	r3, r4, 4
+  52:	e9030005 	bez      	r3, 0x5c	// 5c <spi_master_irq_handler+0x5c>
+  56:	1015      	lrw      	r0, 0x0	// a8 <printf_+0xa8>
+  58:	e0000000 	bsr      	0x0	// 0 <printf_>
+			58: R_CKCORE_PCREL_IMM26BY2	printf_
+  5c:	e4642008 	andi      	r3, r4, 8
+  60:	e9030007 	bez      	r3, 0x6e	// 6e <spi_master_irq_handler+0x6e>
+  64:	1012      	lrw      	r0, 0x0	// ac <printf_+0xac>
+  66:	e0000000 	bsr      	0x0	// 0 <printf_>
+			66: R_CKCORE_PCREL_IMM26BY2	printf_
+  6a:	3300      	movi      	r3, 0
+  6c:	936f      	ld.w      	r3, (r3, 0x3c)
+  6e:	e4642010 	andi      	r3, r4, 16
+  72:	e9030005 	bez      	r3, 0x7c	// 7c <spi_master_irq_handler+0x7c>
+  76:	100f      	lrw      	r0, 0x0	// b0 <printf_+0xb0>
+  78:	e0000000 	bsr      	0x0	// 0 <printf_>
+			78: R_CKCORE_PCREL_IMM26BY2	printf_
+  7c:	e4642020 	andi      	r3, r4, 32
+  80:	e9030005 	bez      	r3, 0x8a	// 8a <spi_master_irq_handler+0x8a>
+  84:	100c      	lrw      	r0, 0x0	// b4 <printf_+0xb4>
+  86:	e0000000 	bsr      	0x0	// 0 <printf_>
+			86: R_CKCORE_PCREL_IMM26BY2	printf_
+  8a:	e4842040 	andi      	r4, r4, 64
+  8e:	e9040005 	bez      	r4, 0x98	// 98 <spi_master_irq_handler+0x98>
+  92:	100a      	lrw      	r0, 0x0	// b8 <printf_+0xb8>
+  94:	e0000000 	bsr      	0x0	// 0 <printf_>
+			94: R_CKCORE_PCREL_IMM26BY2	printf_
+  98:	3000      	movi      	r0, 0
+  9a:	1492      	pop      	r4-r5, r15
+  9c:	1008      	lrw      	r0, 0x0	// bc <spi_master_irq_handler+0xbc>
+  9e:	e0000000 	bsr      	0x0	// 0 <printf_>
+			9e: R_CKCORE_PCREL_IMM26BY2	printf_
+  a2:	07cd      	br      	0x3c	// 3c <spi_master_irq_handler+0x3c>
+	...
+			a4: R_CKCORE_ADDR32	.rodata.str1.1+0x15
+			a8: R_CKCORE_ADDR32	.rodata.str1.1+0x2d
+			ac: R_CKCORE_ADDR32	.rodata.str1.1+0x45
+			b0: R_CKCORE_ADDR32	.rodata.str1.1+0x5c
+			b4: R_CKCORE_ADDR32	.rodata.str1.1+0x6f
+			b8: R_CKCORE_ADDR32	.rodata.str1.1+0x88
+			bc: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.dw_half_duplex_poll_transfer:
+
+00000000 <dw_half_duplex_poll_transfer>:
+   0:	14d7      	push      	r4-r10, r15
+   2:	80b8      	ld.b      	r5, (r0, 0x18)
+   4:	90c5      	ld.w      	r6, (r0, 0x14)
+   6:	9063      	ld.w      	r3, (r0, 0xc)
+   8:	c4a68048 	divs      	r8, r6, r5
+   c:	d9202002 	ld.w      	r9, (r0, 0x8)
+  10:	d9432003 	ld.w      	r10, (r3, 0xc)
+  14:	c4a88423 	mult      	r3, r8, r5
+  18:	6264      	addu      	r9, r9
+  1a:	618e      	subu      	r6, r3
+  1c:	6d03      	mov      	r4, r0
+  1e:	90e4      	ld.w      	r7, (r0, 0x10)
+  20:	e5291000 	subi      	r9, r9, 1
+  24:	e926009f 	bnez      	r6, 0x162	// 162 <dw_half_duplex_poll_transfer+0x162>
+  28:	c4a78023 	divu      	r3, r7, r5
+  2c:	7cd4      	mult      	r3, r5
+  2e:	5f6d      	subu      	r3, r7, r3
+  30:	e9230099 	bnez      	r3, 0x162	// 162 <dw_half_duplex_poll_transfer+0x162>
+  34:	3101      	movi      	r1, 1
+  36:	300e      	movi      	r0, 14
+  38:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			38: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  3c:	9460      	ld.w      	r3, (r4, 0x0)
+  3e:	b3d3      	st.w      	r6, (r3, 0x4c)
+  40:	9440      	ld.w      	r2, (r4, 0x0)
+  42:	3301      	movi      	r3, 1
+  44:	b262      	st.w      	r3, (r2, 0x8)
+  46:	d84a2002 	ld.w      	r2, (r10, 0x8)
+  4a:	dc6a2005 	st.w      	r3, (r10, 0x14)
+  4e:	e9020013 	bez      	r2, 0x74	// 74 <dw_half_duplex_poll_transfer+0x74>
+  52:	6c1f      	mov      	r0, r7
+  54:	6c5f      	mov      	r1, r7
+  56:	e9080021 	bez      	r8, 0x98	// 98 <dw_half_duplex_poll_transfer+0x98>
+  5a:	9460      	ld.w      	r3, (r4, 0x0)
+  5c:	3200      	movi      	r2, 0
+  5e:	9369      	ld.w      	r3, (r3, 0x24)
+  60:	68e4      	and      	r3, r9
+  62:	f903cda3 	min.s32      	r3, r3, r8
+  66:	64c9      	cmplt      	r2, r3
+  68:	0857      	bt      	0x116	// 116 <dw_half_duplex_poll_transfer+0x116>
+  6a:	3d41      	cmpnei      	r5, 1
+  6c:	0871      	bt      	0x14e	// 14e <dw_half_duplex_poll_transfer+0x14e>
+  6e:	61cc      	addu      	r7, r3
+  70:	620e      	subu      	r8, r3
+  72:	07f2      	br      	0x56	// 56 <dw_half_duplex_poll_transfer+0x56>
+  74:	9440      	ld.w      	r2, (r4, 0x0)
+  76:	6c1f      	mov      	r0, r7
+  78:	b262      	st.w      	r3, (r2, 0x8)
+  7a:	6c5f      	mov      	r1, r7
+  7c:	9460      	ld.w      	r3, (r4, 0x0)
+  7e:	e9280018 	bnez      	r8, 0xae	// ae <dw_half_duplex_poll_transfer+0xae>
+  82:	2327      	addi      	r3, 40
+  84:	8b40      	ld.h      	r2, (r3, 0x0)
+  86:	e4422004 	andi      	r2, r2, 4
+  8a:	e902fffd 	bez      	r2, 0x84	// 84 <dw_half_duplex_poll_transfer+0x84>
+  8e:	8b40      	ld.h      	r2, (r3, 0x0)
+  90:	e4422001 	andi      	r2, r2, 1
+  94:	e922fffd 	bnez      	r2, 0x8e	// 8e <dw_half_duplex_poll_transfer+0x8e>
+  98:	9460      	ld.w      	r3, (r4, 0x0)
+  9a:	3100      	movi      	r1, 0
+  9c:	b322      	st.w      	r1, (r3, 0x8)
+  9e:	300e      	movi      	r0, 14
+  a0:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			a0: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  a4:	3302      	movi      	r3, 2
+  a6:	dc6a2005 	st.w      	r3, (r10, 0x14)
+  aa:	6c1b      	mov      	r0, r6
+  ac:	1497      	pop      	r4-r10, r15
+  ae:	9368      	ld.w      	r3, (r3, 0x20)
+  b0:	c4692022 	and      	r2, r9, r3
+  b4:	9461      	ld.w      	r3, (r4, 0x4)
+  b6:	60ca      	subu      	r3, r2
+  b8:	f903cda3 	min.s32      	r3, r3, r8
+  bc:	3200      	movi      	r2, 0
+  be:	64c9      	cmplt      	r2, r3
+  c0:	0806      	bt      	0xcc	// cc <dw_half_duplex_poll_transfer+0xcc>
+  c2:	3d41      	cmpnei      	r5, 1
+  c4:	081f      	bt      	0x102	// 102 <dw_half_duplex_poll_transfer+0x102>
+  c6:	61cc      	addu      	r7, r3
+  c8:	620e      	subu      	r8, r3
+  ca:	07d9      	br      	0x7c	// 7c <dw_half_duplex_poll_transfer+0x7c>
+  cc:	3d41      	cmpnei      	r5, 1
+  ce:	0808      	bt      	0xde	// de <dw_half_duplex_poll_transfer+0xde>
+  d0:	d9842000 	ld.w      	r12, (r4, 0x0)
+  d4:	d047002d 	ldr.b      	r13, (r7, r2 << 0)
+  d8:	ddac2018 	st.w      	r13, (r12, 0x60)
+  dc:	040a      	br      	0xf0	// f0 <dw_half_duplex_poll_transfer+0xf0>
+  de:	3d42      	cmpnei      	r5, 2
+  e0:	080a      	bt      	0xf4	// f4 <dw_half_duplex_poll_transfer+0xf4>
+  e2:	d041044c 	ldr.h      	r12, (r1, r2 << 1)
+  e6:	d9a42000 	ld.w      	r13, (r4, 0x0)
+  ea:	7731      	zexth      	r12, r12
+  ec:	dd8d2018 	st.w      	r12, (r13, 0x60)
+  f0:	2200      	addi      	r2, 1
+  f2:	07e6      	br      	0xbe	// be <dw_half_duplex_poll_transfer+0xbe>
+  f4:	3d44      	cmpnei      	r5, 4
+  f6:	0bfd      	bt      	0xf0	// f0 <dw_half_duplex_poll_transfer+0xf0>
+  f8:	d9842000 	ld.w      	r12, (r4, 0x0)
+  fc:	d040088d 	ldr.w      	r13, (r0, r2 << 2)
+ 100:	07ec      	br      	0xd8	// d8 <dw_half_duplex_poll_transfer+0xd8>
+ 102:	3d42      	cmpnei      	r5, 2
+ 104:	0804      	bt      	0x10c	// 10c <dw_half_duplex_poll_transfer+0x10c>
+ 106:	5b4c      	addu      	r2, r3, r3
+ 108:	6048      	addu      	r1, r2
+ 10a:	07df      	br      	0xc8	// c8 <dw_half_duplex_poll_transfer+0xc8>
+ 10c:	3d44      	cmpnei      	r5, 4
+ 10e:	0bdd      	bt      	0xc8	// c8 <dw_half_duplex_poll_transfer+0xc8>
+ 110:	4342      	lsli      	r2, r3, 2
+ 112:	6008      	addu      	r0, r2
+ 114:	07da      	br      	0xc8	// c8 <dw_half_duplex_poll_transfer+0xc8>
+ 116:	3d41      	cmpnei      	r5, 1
+ 118:	0809      	bt      	0x12a	// 12a <dw_half_duplex_poll_transfer+0x12a>
+ 11a:	d9842000 	ld.w      	r12, (r4, 0x0)
+ 11e:	d98c2018 	ld.w      	r12, (r12, 0x60)
+ 122:	d447002c 	str.b      	r12, (r7, r2 << 0)
+ 126:	2200      	addi      	r2, 1
+ 128:	079f      	br      	0x66	// 66 <dw_half_duplex_poll_transfer+0x66>
+ 12a:	3d42      	cmpnei      	r5, 2
+ 12c:	0808      	bt      	0x13c	// 13c <dw_half_duplex_poll_transfer+0x13c>
+ 12e:	d9842000 	ld.w      	r12, (r4, 0x0)
+ 132:	d98c2018 	ld.w      	r12, (r12, 0x60)
+ 136:	d441044c 	str.h      	r12, (r1, r2 << 1)
+ 13a:	07f6      	br      	0x126	// 126 <dw_half_duplex_poll_transfer+0x126>
+ 13c:	3d44      	cmpnei      	r5, 4
+ 13e:	0bf4      	bt      	0x126	// 126 <dw_half_duplex_poll_transfer+0x126>
+ 140:	d9842000 	ld.w      	r12, (r4, 0x0)
+ 144:	d98c2018 	ld.w      	r12, (r12, 0x60)
+ 148:	d440088c 	str.w      	r12, (r0, r2 << 2)
+ 14c:	07ed      	br      	0x126	// 126 <dw_half_duplex_poll_transfer+0x126>
+ 14e:	3d42      	cmpnei      	r5, 2
+ 150:	0804      	bt      	0x158	// 158 <dw_half_duplex_poll_transfer+0x158>
+ 152:	5b4c      	addu      	r2, r3, r3
+ 154:	6048      	addu      	r1, r2
+ 156:	078d      	br      	0x70	// 70 <dw_half_duplex_poll_transfer+0x70>
+ 158:	3d44      	cmpnei      	r5, 4
+ 15a:	0b8b      	bt      	0x70	// 70 <dw_half_duplex_poll_transfer+0x70>
+ 15c:	4342      	lsli      	r2, r3, 2
+ 15e:	6008      	addu      	r0, r2
+ 160:	0788      	br      	0x70	// 70 <dw_half_duplex_poll_transfer+0x70>
+ 162:	3600      	movi      	r6, 0
+ 164:	2e15      	subi      	r6, 22
+ 166:	07a2      	br      	0xaa	// aa <dw_half_duplex_poll_transfer+0xaa>
+
+Disassembly of section .text.spi_cs_init:
+
+00000000 <spi_cs_init>:
+   0:	ea23a030 	movih      	r3, 41008
+   4:	3ba7      	bseti      	r3, 7
+   6:	3000      	movi      	r0, 0
+   8:	b303      	st.w      	r0, (r3, 0xc)
+   a:	783c      	jmp      	r15
+
+Disassembly of section .text.spi_slave_tx:
+
+00000000 <spi_slave_tx>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	d9802003 	ld.w      	r12, (r0, 0xc)
+   6:	6d8f      	mov      	r6, r3
+   8:	d88c2003 	ld.w      	r4, (r12, 0xc)
+   c:	3300      	movi      	r3, 0
+   e:	dc6c2002 	st.w      	r3, (r12, 0x8)
+  12:	dccc2004 	st.w      	r6, (r12, 0x10)
+  16:	b424      	st.w      	r1, (r4, 0x10)
+  18:	b445      	st.w      	r2, (r4, 0x14)
+  1a:	b403      	st.w      	r0, (r4, 0xc)
+  1c:	8049      	ld.b      	r2, (r0, 0x9)
+  1e:	e9020034 	bez      	r2, 0x86	// 86 <spi_slave_tx+0x86>
+  22:	2206      	addi      	r2, 7
+  24:	e44220f8 	andi      	r2, r2, 248
+  28:	3a58      	cmpnei      	r2, 24
+  2a:	3320      	movi      	r3, 32
+  2c:	c4430c20 	incf      	r2, r3, 0
+  30:	4a43      	lsri      	r2, r2, 3
+  32:	a458      	st.b      	r2, (r4, 0x18)
+  34:	88a5      	ld.h      	r5, (r0, 0xa)
+  36:	8049      	ld.b      	r2, (r0, 0x9)
+  38:	45a8      	lsli      	r5, r5, 8
+  3a:	2a00      	subi      	r2, 1
+  3c:	ec420400 	ori      	r2, r2, 1024
+  40:	e4a52300 	andi      	r5, r5, 768
+  44:	6d48      	or      	r5, r2
+  46:	33c0      	movi      	r3, 192
+  48:	8050      	ld.b      	r2, (r0, 0x10)
+  4a:	4370      	lsli      	r3, r3, 16
+  4c:	4256      	lsli      	r2, r2, 22
+  4e:	688c      	and      	r2, r3
+  50:	3101      	movi      	r1, 1
+  52:	300e      	movi      	r0, 14
+  54:	6d48      	or      	r5, r2
+  56:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			56: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  5a:	9460      	ld.w      	r3, (r4, 0x0)
+  5c:	3100      	movi      	r1, 0
+  5e:	b322      	st.w      	r1, (r3, 0x8)
+  60:	9460      	ld.w      	r3, (r4, 0x0)
+  62:	300e      	movi      	r0, 14
+  64:	b3a0      	st.w      	r5, (r3, 0x0)
+  66:	9460      	ld.w      	r3, (r4, 0x0)
+  68:	b333      	st.w      	r1, (r3, 0x4c)
+  6a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			6a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  6e:	e9260014 	bnez      	r6, 0x96	// 96 <spi_slave_tx+0x96>
+  72:	9441      	ld.w      	r2, (r4, 0x4)
+  74:	8478      	ld.b      	r3, (r4, 0x18)
+  76:	7cc8      	mult      	r3, r2
+  78:	9445      	ld.w      	r2, (r4, 0x14)
+  7a:	648c      	cmphs      	r3, r2
+  7c:	6c13      	mov      	r0, r4
+  7e:	0809      	bt      	0x90	// 90 <spi_slave_tx+0x90>
+  80:	e0000000 	bsr      	0x0	// 0 <spi_slave_tx>
+			80: R_CKCORE_PCREL_IMM26BY2	dw_half_duplex_dma_transfer
+  84:	0408      	br      	0x94	// 94 <spi_slave_tx+0x94>
+  86:	3308      	movi      	r3, 8
+  88:	a069      	st.b      	r3, (r0, 0x9)
+  8a:	3301      	movi      	r3, 1
+  8c:	a478      	st.b      	r3, (r4, 0x18)
+  8e:	07d3      	br      	0x34	// 34 <spi_slave_tx+0x34>
+  90:	e0000000 	bsr      	0x0	// 0 <spi_slave_tx>
+			90: R_CKCORE_PCREL_IMM26BY2	dw_half_duplex_poll_transfer
+  94:	1493      	pop      	r4-r6, r15
+  96:	6c13      	mov      	r0, r4
+  98:	07f4      	br      	0x80	// 80 <spi_slave_tx+0x80>
+
+Disassembly of section .text.spi_slave_rx:
+
+00000000 <spi_slave_rx>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	d9802003 	ld.w      	r12, (r0, 0xc)
+   6:	6d8f      	mov      	r6, r3
+   8:	d88c2003 	ld.w      	r4, (r12, 0xc)
+   c:	3301      	movi      	r3, 1
+   e:	dc6c2002 	st.w      	r3, (r12, 0x8)
+  12:	dccc2004 	st.w      	r6, (r12, 0x10)
+  16:	b424      	st.w      	r1, (r4, 0x10)
+  18:	b445      	st.w      	r2, (r4, 0x14)
+  1a:	b403      	st.w      	r0, (r4, 0xc)
+  1c:	8049      	ld.b      	r2, (r0, 0x9)
+  1e:	e9020034 	bez      	r2, 0x86	// 86 <spi_slave_rx+0x86>
+  22:	2206      	addi      	r2, 7
+  24:	e44220f8 	andi      	r2, r2, 248
+  28:	3a58      	cmpnei      	r2, 24
+  2a:	3320      	movi      	r3, 32
+  2c:	c4430c20 	incf      	r2, r3, 0
+  30:	4a43      	lsri      	r2, r2, 3
+  32:	a458      	st.b      	r2, (r4, 0x18)
+  34:	88a5      	ld.h      	r5, (r0, 0xa)
+  36:	8049      	ld.b      	r2, (r0, 0x9)
+  38:	45a8      	lsli      	r5, r5, 8
+  3a:	2a00      	subi      	r2, 1
+  3c:	ec420800 	ori      	r2, r2, 2048
+  40:	e4a52300 	andi      	r5, r5, 768
+  44:	6d48      	or      	r5, r2
+  46:	33c0      	movi      	r3, 192
+  48:	8050      	ld.b      	r2, (r0, 0x10)
+  4a:	4370      	lsli      	r3, r3, 16
+  4c:	4256      	lsli      	r2, r2, 22
+  4e:	688c      	and      	r2, r3
+  50:	3101      	movi      	r1, 1
+  52:	300e      	movi      	r0, 14
+  54:	6d48      	or      	r5, r2
+  56:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			56: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  5a:	9460      	ld.w      	r3, (r4, 0x0)
+  5c:	3100      	movi      	r1, 0
+  5e:	b322      	st.w      	r1, (r3, 0x8)
+  60:	9460      	ld.w      	r3, (r4, 0x0)
+  62:	300e      	movi      	r0, 14
+  64:	b3a0      	st.w      	r5, (r3, 0x0)
+  66:	9460      	ld.w      	r3, (r4, 0x0)
+  68:	b333      	st.w      	r1, (r3, 0x4c)
+  6a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			6a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  6e:	e9260013 	bnez      	r6, 0x94	// 94 <spi_slave_rx+0x94>
+  72:	9441      	ld.w      	r2, (r4, 0x4)
+  74:	8478      	ld.b      	r3, (r4, 0x18)
+  76:	7cc8      	mult      	r3, r2
+  78:	9445      	ld.w      	r2, (r4, 0x14)
+  7a:	648c      	cmphs      	r3, r2
+  7c:	6c13      	mov      	r0, r4
+  7e:	0808      	bt      	0x8e	// 8e <spi_slave_rx+0x8e>
+  80:	e0000000 	bsr      	0x0	// 0 <spi_slave_rx>
+			80: R_CKCORE_PCREL_IMM26BY2	dw_half_duplex_dma_transfer
+  84:	0407      	br      	0x92	// 92 <spi_slave_rx+0x92>
+  86:	3208      	movi      	r2, 8
+  88:	a049      	st.b      	r2, (r0, 0x9)
+  8a:	a478      	st.b      	r3, (r4, 0x18)
+  8c:	07d4      	br      	0x34	// 34 <spi_slave_rx+0x34>
+  8e:	e0000000 	bsr      	0x0	// 0 <spi_slave_rx>
+			8e: R_CKCORE_PCREL_IMM26BY2	dw_half_duplex_poll_transfer
+  92:	1493      	pop      	r4-r6, r15
+  94:	6c13      	mov      	r0, r4
+  96:	07f5      	br      	0x80	// 80 <spi_slave_rx+0x80>
+
+Disassembly of section .text.spi_slave_get_status:
+
+00000000 <spi_slave_get_status>:
+   0:	9063      	ld.w      	r3, (r0, 0xc)
+   2:	9305      	ld.w      	r0, (r3, 0x14)
+   4:	783c      	jmp      	r15
+
+Disassembly of section .text.spi_slave_abort:
+
+00000000 <spi_slave_abort>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	9083      	ld.w      	r4, (r0, 0xc)
+   4:	9462      	ld.w      	r3, (r4, 0x8)
+   6:	3b41      	cmpnei      	r3, 1
+   8:	0813      	bt      	0x2e	// 2e <spi_slave_abort+0x2e>
+   a:	9443      	ld.w      	r2, (r4, 0xc)
+   c:	3300      	movi      	r3, 0
+   e:	9220      	ld.w      	r1, (r2, 0x0)
+  10:	b162      	st.w      	r3, (r1, 0x8)
+  12:	9220      	ld.w      	r1, (r2, 0x0)
+  14:	b164      	st.w      	r3, (r1, 0x10)
+  16:	9240      	ld.w      	r2, (r2, 0x0)
+  18:	b273      	st.w      	r3, (r2, 0x4c)
+  1a:	9406      	ld.w      	r0, (r4, 0x18)
+  1c:	e0000000 	bsr      	0x0	// 0 <gx_dma_channel_abort>
+			1c: R_CKCORE_PCREL_IMM26BY2	gx_dma_channel_abort
+  20:	6d43      	mov      	r5, r0
+  22:	3100      	movi      	r1, 0
+  24:	300e      	movi      	r0, 14
+  26:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			26: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  2a:	6c17      	mov      	r0, r5
+  2c:	1492      	pop      	r4-r5, r15
+  2e:	9406      	ld.w      	r0, (r4, 0x18)
+  30:	e0000000 	bsr      	0x0	// 0 <gx_dma_channel_abort>
+			30: R_CKCORE_PCREL_IMM26BY2	gx_dma_channel_abort
+  34:	9443      	ld.w      	r2, (r4, 0xc)
+  36:	3300      	movi      	r3, 0
+  38:	9220      	ld.w      	r1, (r2, 0x0)
+  3a:	6d43      	mov      	r5, r0
+  3c:	b162      	st.w      	r3, (r1, 0x8)
+  3e:	9220      	ld.w      	r1, (r2, 0x0)
+  40:	b164      	st.w      	r3, (r1, 0x10)
+  42:	9240      	ld.w      	r2, (r2, 0x0)
+  44:	b273      	st.w      	r3, (r2, 0x4c)
+  46:	07ee      	br      	0x22	// 22 <spi_slave_abort+0x22>
+
+Disassembly of section .text.spi_slave_init:
+
+00000000 <spi_slave_init>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	118d      	lrw      	r4, 0x0	// b4 <spi_slave_init+0xb4>
+   4:	33a3      	movi      	r3, 163
+   6:	4378      	lsli      	r3, r3, 24
+   8:	6d83      	mov      	r6, r0
+   a:	3101      	movi      	r1, 1
+   c:	300e      	movi      	r0, 14
+   e:	b460      	st.w      	r3, (r4, 0x0)
+  10:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			10: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  14:	9460      	ld.w      	r3, (r4, 0x0)
+  16:	3200      	movi      	r2, 0
+  18:	b342      	st.w      	r2, (r3, 0x8)
+  1a:	9460      	ld.w      	r3, (r4, 0x0)
+  1c:	324a      	movi      	r2, 74
+  1e:	b34b      	st.w      	r2, (r3, 0x2c)
+  20:	9460      	ld.w      	r3, (r4, 0x0)
+  22:	3201      	movi      	r2, 1
+  24:	dc43203c 	st.w      	r2, (r3, 0xf0)
+  28:	9461      	ld.w      	r3, (r4, 0x4)
+  2a:	e9230013 	bnez      	r3, 0x50	// 50 <spi_slave_init+0x50>
+  2e:	3280      	movi      	r2, 128
+  30:	3302      	movi      	r3, 2
+  32:	4241      	lsli      	r2, r2, 1
+  34:	9420      	ld.w      	r1, (r4, 0x0)
+  36:	b166      	st.w      	r3, (r1, 0x18)
+  38:	9420      	ld.w      	r1, (r4, 0x0)
+  3a:	e4010017 	addi      	r0, r1, 24
+  3e:	9126      	ld.w      	r1, (r1, 0x18)
+  40:	64c6      	cmpne      	r1, r3
+  42:	082d      	bt      	0x9c	// 9c <spi_slave_init+0x9c>
+  44:	2300      	addi      	r3, 1
+  46:	e822fff7 	bnezad      	r2, 0x34	// 34 <spi_slave_init+0x34>
+  4a:	b461      	st.w      	r3, (r4, 0x4)
+  4c:	3300      	movi      	r3, 0
+  4e:	b060      	st.w      	r3, (r0, 0x0)
+  50:	9462      	ld.w      	r3, (r4, 0x8)
+  52:	e9230011 	bnez      	r3, 0x74	// 74 <spi_slave_init+0x74>
+  56:	3280      	movi      	r2, 128
+  58:	3302      	movi      	r3, 2
+  5a:	4241      	lsli      	r2, r2, 1
+  5c:	9420      	ld.w      	r1, (r4, 0x0)
+  5e:	b167      	st.w      	r3, (r1, 0x1c)
+  60:	9420      	ld.w      	r1, (r4, 0x0)
+  62:	9107      	ld.w      	r0, (r1, 0x1c)
+  64:	64c2      	cmpne      	r0, r3
+  66:	0821      	bt      	0xa8	// a8 <spi_slave_init+0xa8>
+  68:	2300      	addi      	r3, 1
+  6a:	e822fff9 	bnezad      	r2, 0x5c	// 5c <spi_slave_init+0x5c>
+  6e:	b462      	st.w      	r3, (r4, 0x8)
+  70:	3300      	movi      	r3, 0
+  72:	b166      	st.w      	r3, (r1, 0x18)
+  74:	ea23a030 	movih      	r3, 41008
+  78:	3ba7      	bseti      	r3, 7
+  7a:	3500      	movi      	r5, 0
+  7c:	b3a3      	st.w      	r5, (r3, 0xc)
+  7e:	6c57      	mov      	r1, r5
+  80:	300e      	movi      	r0, 14
+  82:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			82: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  86:	104d      	lrw      	r2, 0x0	// b8 <spi_slave_init+0xb8>
+  88:	b4c3      	st.w      	r6, (r4, 0xc)
+  8a:	b283      	st.w      	r4, (r2, 0xc)
+  8c:	3010      	movi      	r0, 16
+  8e:	b643      	st.w      	r2, (r6, 0xc)
+  90:	2a1b      	subi      	r2, 28
+  92:	102b      	lrw      	r1, 0x0	// bc <spi_slave_init+0xbc>
+  94:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			94: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  98:	6c17      	mov      	r0, r5
+  9a:	1493      	pop      	r4-r6, r15
+  9c:	eb430101 	cmpnei      	r3, 257
+  a0:	3200      	movi      	r2, 0
+  a2:	c4620c20 	incf      	r3, r2, 0
+  a6:	07d2      	br      	0x4a	// 4a <spi_slave_init+0x4a>
+  a8:	eb430101 	cmpnei      	r3, 257
+  ac:	3200      	movi      	r2, 0
+  ae:	c4620c20 	incf      	r3, r2, 0
+  b2:	07de      	br      	0x6e	// 6e <spi_slave_init+0x6e>
+	...
+			b4: R_CKCORE_ADDR32	.bss
+			b8: R_CKCORE_ADDR32	.bss+0x1c
+			bc: R_CKCORE_ADDR32	.text.spi_master_irq_handler

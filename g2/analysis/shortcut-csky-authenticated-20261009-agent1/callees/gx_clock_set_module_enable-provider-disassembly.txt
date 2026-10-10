@@ -1,0 +1,112 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/clock.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_clock_set_module_enable:
+
+00000000 <gx_clock_set_module_enable>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	587b      	subi      	r3, r0, 7
+   6:	3b11      	cmphsi      	r3, 18
+   8:	6d03      	mov      	r4, r0
+   a:	6d47      	mov      	r5, r1
+   c:	0808      	bt      	0x1c	// 1c <gx_clock_set_module_enable+0x1c>
+   e:	1043      	lrw      	r2, 0x0	// 18 <gx_clock_set_module_enable+0x18>
+  10:	d0620883 	ldr.w      	r3, (r2, r3 << 2)
+  14:	780c      	jmp      	r3
+  16:	0000      	.short	0x0000
+  18:	00000000 	.long	0x00000000
+			18: R_CKCORE_ADDR32	.rodata
+  1c:	6d93      	mov      	r6, r4
+  1e:	6c7b      	mov      	r1, r14
+  20:	6c1b      	mov      	r0, r6
+  22:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			22: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+  26:	e920002c 	bnez      	r0, 0x7e	// 7e <gx_clock_set_module_enable+0x7e>
+  2a:	d98e2000 	ld.w      	r12, (r14, 0x0)
+  2e:	3300      	movi      	r3, 0
+  30:	d82c4006 	ld.bs      	r1, (r12, 0x6)
+  34:	2b00      	subi      	r3, 1
+  36:	64c6      	cmpne      	r1, r3
+  38:	0c23      	bf      	0x7e	// 7e <gx_clock_set_module_enable+0x7e>
+  3a:	3e09      	cmphsi      	r6, 10
+  3c:	0808      	bt      	0x4c	// 4c <gx_clock_set_module_enable+0x4c>
+  3e:	3001      	movi      	r0, 1
+  40:	7018      	lsl      	r0, r6
+  42:	e4002243 	andi      	r0, r0, 579
+  46:	e9000003 	bez      	r0, 0x4c	// 4c <gx_clock_set_module_enable+0x4c>
+  4a:	5902      	addi      	r0, r1, 1
+  4c:	9862      	ld.w      	r3, (r14, 0x8)
+  4e:	9340      	ld.w      	r2, (r3, 0x0)
+  50:	d86c0004 	ld.b      	r3, (r12, 0x4)
+  54:	e9000008 	bez      	r0, 0x64	// 64 <gx_clock_set_module_enable+0x64>
+  58:	c4024040 	lsr      	r0, r2, r0
+  5c:	e4002001 	andi      	r0, r0, 1
+  60:	e920002c 	bnez      	r0, 0xb8	// b8 <gx_clock_set_module_enable+0xb8>
+  64:	7085      	lsr      	r2, r1
+  66:	e4422001 	andi      	r2, r2, 1
+  6a:	e9020027 	bez      	r2, 0xb8	// b8 <gx_clock_set_module_enable+0xb8>
+  6e:	e9050025 	bez      	r5, 0xb8	// b8 <gx_clock_set_module_enable+0xb8>
+  72:	9825      	ld.w      	r1, (r14, 0x14)
+  74:	74ce      	sextb      	r3, r3
+  76:	3201      	movi      	r2, 1
+  78:	c4624023 	lsl      	r3, r2, r3
+  7c:	b160      	st.w      	r3, (r1, 0x0)
+  7e:	6c7b      	mov      	r1, r14
+  80:	6c13      	mov      	r0, r4
+  82:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			82: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+  86:	e9200039 	bnez      	r0, 0xf8	// f8 <gx_clock_set_module_enable+0xf8>
+  8a:	9860      	ld.w      	r3, (r14, 0x0)
+  8c:	d8434005 	ld.bs      	r2, (r3, 0x5)
+  90:	3301      	movi      	r3, 1
+  92:	70c8      	lsl      	r3, r2
+  94:	5c57      	subi      	r2, r4, 6
+  96:	3a12      	cmphsi      	r2, 19
+  98:	082b      	bt      	0xee	// ee <gx_clock_set_module_enable+0xee>
+  9a:	1023      	lrw      	r1, 0x0	// a4 <gx_clock_set_module_enable+0xa4>
+  9c:	d0410882 	ldr.w      	r2, (r1, r2 << 2)
+  a0:	7808      	jmp      	r2
+  a2:	0000      	.short	0x0000
+  a4:	00000000 	.long	0x00000000
+			a4: R_CKCORE_ADDR32	.rodata+0x48
+  a8:	3610      	movi      	r6, 16
+  aa:	07ba      	br      	0x1e	// 1e <gx_clock_set_module_enable+0x1e>
+  ac:	3613      	movi      	r6, 19
+  ae:	07b8      	br      	0x1e	// 1e <gx_clock_set_module_enable+0x1e>
+  b0:	3616      	movi      	r6, 22
+  b2:	07b6      	br      	0x1e	// 1e <gx_clock_set_module_enable+0x1e>
+  b4:	3602      	movi      	r6, 2
+  b6:	07b4      	br      	0x1e	// 1e <gx_clock_set_module_enable+0x1e>
+  b8:	9824      	ld.w      	r1, (r14, 0x10)
+  ba:	07dd      	br      	0x74	// 74 <gx_clock_set_module_enable+0x74>
+  bc:	3bb0      	bseti      	r3, 16
+  be:	e905001f 	bez      	r5, 0xfc	// fc <gx_clock_set_module_enable+0xfc>
+  c2:	9845      	ld.w      	r2, (r14, 0x14)
+  c4:	b260      	st.w      	r3, (r2, 0x0)
+  c6:	0419      	br      	0xf8	// f8 <gx_clock_set_module_enable+0xf8>
+  c8:	3bb1      	bseti      	r3, 17
+  ca:	07fa      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  cc:	ec630008 	ori      	r3, r3, 8
+  d0:	07f7      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  d2:	3bb2      	bseti      	r3, 18
+  d4:	07f5      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  d6:	3bb3      	bseti      	r3, 19
+  d8:	07f3      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  da:	ec632000 	ori      	r3, r3, 8192
+  de:	07f0      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  e0:	ec638000 	ori      	r3, r3, 32768
+  e4:	07ed      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  e6:	3bb4      	bseti      	r3, 20
+  e8:	07eb      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  ea:	3bb5      	bseti      	r3, 21
+  ec:	07e9      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  ee:	3c82      	bclri      	r4, 2
+  f0:	3c41      	cmpnei      	r4, 1
+  f2:	0c03      	bf      	0xf8	// f8 <gx_clock_set_module_enable+0xf8>
+  f4:	e923ffe5 	bnez      	r3, 0xbe	// be <gx_clock_set_module_enable+0xbe>
+  f8:	1406      	addi      	r14, r14, 24
+  fa:	1493      	pop      	r4-r6, r15
+  fc:	9844      	ld.w      	r2, (r14, 0x10)
+  fe:	07e3      	br      	0xc4	// c4 <gx_clock_set_module_enable+0xc4>

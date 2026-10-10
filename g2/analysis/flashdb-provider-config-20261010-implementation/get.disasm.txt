@@ -1,0 +1,50 @@
+
+g2/analysis/flashdb-provider-config-20261010-implementation/get-blob.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0054454a <.data>:
+  54454a:	b57c      	push	{r2, r3, r4, r5, r6, lr}
+  54454c:	0004      	movs	r4, r0
+  54454e:	000d      	movs	r5, r1
+  544550:	0016      	movs	r6, r2
+  544552:	2000      	movs	r0, #0
+  544554:	7e20      	ldrb	r0, [r4, #24]
+  544556:	2800      	cmp	r0, #0
+  544558:	d113      	bne.n	0x544582
+  54455a:	f8df 0610 	ldr.w	r0, [pc, #1552]	@ 0x544b6c
+  54455e:	f72e ff46 	bl	0x4733ee
+  544562:	0020      	movs	r0, r4
+  544564:	f041 fb96 	bl	0x585c94
+  544568:	0002      	movs	r2, r0
+  54456a:	6821      	ldr	r1, [r4, #0]
+  54456c:	f8df 0600 	ldr.w	r0, [pc, #1536]	@ 0x544b70
+  544570:	f72e ff3d 	bl	0x4733ee
+  544574:	6821      	ldr	r1, [r4, #0]
+  544576:	f8df 0b28 	ldr.w	r0, [pc, #2856]	@ 0x5450a0
+  54457a:	f72e ff38 	bl	0x4733ee
+  54457e:	2000      	movs	r0, #0
+  544580:	e016      	b.n	0x5445b0
+  544582:	69e0      	ldr	r0, [r4, #28]
+  544584:	2800      	cmp	r0, #0
+  544586:	d002      	beq.n	0x54458e
+  544588:	0020      	movs	r0, r4
+  54458a:	69e1      	ldr	r1, [r4, #28]
+  54458c:	4788      	blx	r1
+  54458e:	f116 0010 	adds.w	r0, r6, #16
+  544592:	9000      	str	r0, [sp, #0]
+  544594:	6873      	ldr	r3, [r6, #4]
+  544596:	6832      	ldr	r2, [r6, #0]
+  544598:	0029      	movs	r1, r5
+  54459a:	0020      	movs	r0, r4
+  54459c:	f7ff ffaa 	bl	0x5444f4
+  5445a0:	0005      	movs	r5, r0
+  5445a2:	6a20      	ldr	r0, [r4, #32]
+  5445a4:	2800      	cmp	r0, #0
+  5445a6:	d002      	beq.n	0x5445ae
+  5445a8:	0020      	movs	r0, r4
+  5445aa:	6a21      	ldr	r1, [r4, #32]
+  5445ac:	4788      	blx	r1
+  5445ae:	0028      	movs	r0, r5
+  5445b0:	bd76      	pop	{r1, r2, r4, r5, r6, pc}

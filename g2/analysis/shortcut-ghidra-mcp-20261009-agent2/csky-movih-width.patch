@@ -1,0 +1,7 @@
+--- a/32b_data.sinc
++++ b/32b_data.sinc
+@@ -96,3 +96,3 @@
+ :movih i32_imm16_rx, i32_imm16_imm is i32_op = 0b1010 & i32_imm16_sop = 0b10001 & i32_imm16_rx & i32_imm16_imm {
+-    i32_imm16_rx = zext( i32_imm16_imm:2 << 16 );
++    i32_imm16_rx = zext( i32_imm16_imm:2 ) << 16;
+ }

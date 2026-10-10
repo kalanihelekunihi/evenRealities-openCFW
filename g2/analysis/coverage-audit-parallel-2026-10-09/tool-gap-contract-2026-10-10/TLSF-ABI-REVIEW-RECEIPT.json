@@ -1,0 +1,73 @@
+{
+  "checks": {
+    "source_identity_tlsf.c": true,
+    "source_identity_tlsf.h": true,
+    "source_identity_README.md": true,
+    "source_identity_LICENSE.md": true,
+    "source_identity_host_fixture.c": true,
+    "source_identity_layout_arm_assert.c": true,
+    "stock_0x4d0524": true,
+    "stock_0x4d0608": true,
+    "stock_0x4d06b4": true,
+    "stock_0x4d0716": true,
+    "control_geometry": true,
+    "list_head_offset": true
+  },
+  "passed": 12,
+  "additional_main_extents": [
+    {
+      "entry": "0x4d0524",
+      "bytes": 48,
+      "sha256": "fe8b87ca377d49c0c78ca4d30f04a9ba0fcfafa76757f8044ab4689959e454df",
+      "callees": []
+    },
+    {
+      "entry": "0x4d0608",
+      "bytes": 164,
+      "sha256": "a383735dedc429f082e8b1f26c87e57089f165bc209dfade1b3c727f3a9ab639",
+      "callees": [
+        "004733ee",
+        "004cfd84",
+        "004cfdc0",
+        "004cfdce",
+        "004cfde8",
+        "004cfdf6",
+        "004cfe1a",
+        "004cfe88",
+        "004cfeee",
+        "004d019a",
+        "004d05fa"
+      ]
+    },
+    {
+      "entry": "0x4d06b4",
+      "bytes": 34,
+      "sha256": "2847a68f388ab99195397a78a6ce47d608c433c908b78d228294639a42bb3df0",
+      "callees": [
+        "004733ee",
+        "004d0524"
+      ]
+    },
+    {
+      "entry": "0x4d0716",
+      "bytes": 12,
+      "sha256": "2bad574e98282d970beea89187dd75da869c499cf0202dce0ccf4a94b9c5cf55",
+      "callees": []
+    }
+  ],
+  "ABI": {
+    "pointer_bytes": 4,
+    "size_t_bytes": 4,
+    "unsigned_int_bytes": 4,
+    "alignment": 4,
+    "FL_count": 24,
+    "SL_count": 32,
+    "block_header_size": 16,
+    "user_start_offset": 8,
+    "allocated_overhead": 4,
+    "minimum_payload": 12,
+    "pool_overhead": 8,
+    "control_bytes": 3188
+  },
+  "compilation_or_execution_repeated": false
+}

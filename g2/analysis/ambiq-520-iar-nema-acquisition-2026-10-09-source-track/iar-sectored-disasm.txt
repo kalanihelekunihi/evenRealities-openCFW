@@ -1,0 +1,121 @@
+
+g2/analysis/ambiq-520-iar-nema-acquisition-2026-10-09-source-track/nema_cmdlist.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000374 <nema_cl_bind_sectored_circular>:
+     374:	b5f0      	push	{r4, r5, r6, r7, lr}
+     376:	b081      	sub	sp, #4
+     378:	0004      	movs	r4, r0
+     37a:	460d      	mov	r5, r1
+     37c:	bf08      	it	eq
+     37e:	f44f 5000 	moveq.w	r0, #8192	@ 0x2000
+     382:	d02b      	beq.n	3dc <??nema_cl_bind_sectored_circular_0>
+     384:	7b20      	ldrb	r0, [r4, #12]
+     386:	f010 0f07 	tst.w	r0, #7
+     38a:	d10c      	bne.n	3a6 <??nema_cl_bind_sectored_circular_1>
+     38c:	6a60      	ldr	r0, [r4, #36]	@ 0x24
+     38e:	b100      	cbz	r0, 392 <??nema_cl_bind_sectored_circular_2>
+     390:	4604      	mov	r4, r0
+
+00000392 <??nema_cl_bind_sectored_circular_2>:
+     392:	2d02      	cmp	r5, #2
+     394:	da0a      	bge.n	3ac <??nema_cl_bind_sectored_circular_3>
+     396:	2502      	movs	r5, #2
+
+00000398 <??nema_cl_bind_sectored_circular_4>:
+     398:	6920      	ldr	r0, [r4, #16]
+     39a:	0080      	lsls	r0, r0, #2
+     39c:	fb90 f1f5 	sdiv	r1, r0, r5
+     3a0:	fb05 0011 	mls	r0, r5, r1, r0
+     3a4:	b1f8      	cbz	r0, 3e6 <??nema_cl_bind_sectored_circular_5>
+
+000003a6 <??nema_cl_bind_sectored_circular_1>:
+     3a6:	f44f 4080 	mov.w	r0, #16384	@ 0x4000
+     3aa:	e017      	b.n	3dc <??nema_cl_bind_sectored_circular_0>
+
+000003ac <??nema_cl_bind_sectored_circular_3>:
+     3ac:	ddf4      	ble.n	398 <??nema_cl_bind_sectored_circular_4>
+     3ae:	6920      	ldr	r0, [r4, #16]
+     3b0:	0080      	lsls	r0, r0, #2
+     3b2:	fb90 f1f5 	sdiv	r1, r0, r5
+     3b6:	f5b1 7f00 	cmp.w	r1, #512	@ 0x200
+     3ba:	daed      	bge.n	398 <??nema_cl_bind_sectored_circular_4>
+     3bc:	07ea      	lsls	r2, r5, #31
+     3be:	bf48      	it	mi
+     3c0:	1c6d      	addmi	r5, r5, #1
+
+000003c2 <??nema_cl_bind_sectored_circular_6>:
+     3c2:	2d04      	cmp	r5, #4
+     3c4:	db05      	blt.n	3d2 <??nema_cl_bind_sectored_circular_7>
+     3c6:	1ead      	subs	r5, r5, #2
+     3c8:	fb90 f1f5 	sdiv	r1, r0, r5
+     3cc:	f5b1 7f00 	cmp.w	r1, #512	@ 0x200
+     3d0:	dbf7      	blt.n	3c2 <??nema_cl_bind_sectored_circular_6>
+
+000003d2 <??nema_cl_bind_sectored_circular_7>:
+     3d2:	f5b1 7f00 	cmp.w	r1, #512	@ 0x200
+     3d6:	dadf      	bge.n	398 <??nema_cl_bind_sectored_circular_4>
+     3d8:	f44f 3080 	mov.w	r0, #65536	@ 0x10000
+
+000003dc <??nema_cl_bind_sectored_circular_0>:
+     3dc:	b001      	add	sp, #4
+     3de:	e8bd 40f0 	ldmia.w	sp!, {r4, r5, r6, r7, lr}
+     3e2:	f7ff bffe 	b.w	0 <nema_set_error>
+			3e2: R_ARM_THM_JUMP24	nema_set_error
+
+000003e6 <??nema_cl_bind_sectored_circular_5>:
+     3e6:	f85f 6004 	ldr.w	r6, [pc, #-4]	@ d98 <??DataTable12>
+			3e6: R_ARM_THM_PC12	??DataTable12
+     3ea:	6831      	ldr	r1, [r6, #0]
+     3ec:	6848      	ldr	r0, [r1, #4]
+     3ee:	b1a0      	cbz	r0, 41a <??nema_cl_bind_sectored_circular_8>
+     3f0:	6942      	ldr	r2, [r0, #20]
+     3f2:	6903      	ldr	r3, [r0, #16]
+     3f4:	1c97      	adds	r7, r2, #2
+     3f6:	42bb      	cmp	r3, r7
+     3f8:	db0d      	blt.n	416 <??nema_cl_bind_sectored_circular_9>
+     3fa:	6883      	ldr	r3, [r0, #8]
+     3fc:	f44f 27a0 	mov.w	r7, #327680	@ 0x50000
+     400:	f04f 0c00 	mov.w	ip, #0
+     404:	f843 7022 	str.w	r7, [r3, r2, lsl #2]
+     408:	1d1b      	adds	r3, r3, #4
+     40a:	f843 c022 	str.w	ip, [r3, r2, lsl #2]
+     40e:	6982      	ldr	r2, [r0, #24]
+     410:	f022 0208 	bic.w	r2, r2, #8
+     414:	6182      	str	r2, [r0, #24]
+
+00000416 <??nema_cl_bind_sectored_circular_9>:
+     416:	2000      	movs	r0, #0
+     418:	6048      	str	r0, [r1, #4]
+
+0000041a <??nema_cl_bind_sectored_circular_8>:
+     41a:	b924      	cbnz	r4, 426 <??nema_cl_bind_sectored_circular_10>
+     41c:	f44f 5000 	mov.w	r0, #8192	@ 0x2000
+     420:	f7ff fffe 	bl	0 <nema_set_error>
+			420: R_ARM_THM_CALL	nema_set_error
+     424:	e003      	b.n	42e <??nema_cl_bind_sectored_circular_11>
+
+00000426 <??nema_cl_bind_sectored_circular_10>:
+     426:	69a0      	ldr	r0, [r4, #24]
+     428:	f040 0020 	orr.w	r0, r0, #32
+     42c:	61a0      	str	r0, [r4, #24]
+
+0000042e <??nema_cl_bind_sectored_circular_11>:
+     42e:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
+     432:	6360      	str	r0, [r4, #52]	@ 0x34
+     434:	63a0      	str	r0, [r4, #56]	@ 0x38
+     436:	6920      	ldr	r0, [r4, #16]
+     438:	fb90 f0f5 	sdiv	r0, r0, r5
+     43c:	07c1      	lsls	r1, r0, #31
+     43e:	bf48      	it	mi
+     440:	1e40      	submi	r0, r0, #1
+     442:	62e0      	str	r0, [r4, #44]	@ 0x2c
+     444:	2000      	movs	r0, #0
+     446:	62a5      	str	r5, [r4, #40]	@ 0x28
+     448:	6320      	str	r0, [r4, #48]	@ 0x30
+     44a:	6831      	ldr	r1, [r6, #0]
+     44c:	604c      	str	r4, [r1, #4]
+     44e:	b001      	add	sp, #4
+     450:	bdf0      	pop	{r4, r5, r6, r7, pc}

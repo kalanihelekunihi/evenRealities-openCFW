@@ -1,0 +1,108 @@
+[
+  {
+    "symbol": "gx_audio_in_exit",
+    "entry": 270551428,
+    "section_bytes": 42,
+    "relocations": [
+      [
+        2,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "_ain_reset"
+      ],
+      [
+        10,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "gx_clock_set_module_enable"
+      ],
+      [
+        18,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "gx_clock_set_module_enable"
+      ],
+      [
+        26,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "gx_clock_set_module_enable"
+      ],
+      [
+        34,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "gx_clock_set_module_enable"
+      ]
+    ],
+    "equal_outside_named_relocations": true,
+    "sha256": "871a45c326e98fabcb79f6c1640b6f473e54be6e9e7e2040b3abb9b3d3b99379"
+  },
+  {
+    "symbol": "gx_audio_in_set_interrupt_enable",
+    "entry": 270550968,
+    "section_bytes": 42,
+    "relocations": [],
+    "equal_outside_named_relocations": true,
+    "sha256": "c3ea9199db2f46874acbfe6917638206513b50c47618b59adbc41a1e9cb59a7a"
+  },
+  {
+    "symbol": "gx_snpu_init",
+    "entry": 270556404,
+    "section_offset": 1032,
+    "section_bytes": 64,
+    "relocations": [
+      [
+        8,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "snpu_device_init"
+      ],
+      [
+        44,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "snpu_tcb_init"
+      ],
+      [
+        52,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "snpu_request_irq"
+      ]
+    ],
+    "equal_outside_named_relocations": false,
+    "unexcluded_differences": [
+      2,
+      3,
+      30,
+      31,
+      50,
+      51
+    ],
+    "sha256": "63d8aea0c9812110181cf895d576bb0fda1603f012a47a8d49ad20ba662a626f"
+  },
+  {
+    "symbol": "gx_snpu_exit",
+    "entry": 270556480,
+    "section_offset": 1096,
+    "section_bytes": 32,
+    "relocations": [
+      [
+        4,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "gx_mask_irq"
+      ],
+      [
+        8,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "suspend"
+      ],
+      [
+        16,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "gx_unmask_irq"
+      ],
+      [
+        24,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "snpu_device_exit"
+      ]
+    ],
+    "equal_outside_named_relocations": true,
+    "unexcluded_differences": [],
+    "sha256": "a7f7c94f28d44b6fcc84c56d02f91b3a4842efabaa67d92acd709aff81afc449"
+  }
+]

@@ -1,0 +1,89 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/gx_icache.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_icache_get_status:
+
+00000000 <gx_icache_get_status>:
+   0:	3000      	movi      	r0, 0
+   2:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_icache_enable:
+
+00000000 <gx_icache_enable>:
+   0:	33b0      	movi      	r3, 176
+   2:	4378      	lsli      	r3, r3, 24
+   4:	3200      	movi      	r2, 0
+   6:	b340      	st.w      	r2, (r3, 0x0)
+   8:	9340      	ld.w      	r2, (r3, 0x0)
+   a:	ec420001 	ori      	r2, r2, 1
+   e:	b340      	st.w      	r2, (r3, 0x0)
+  10:	9341      	ld.w      	r2, (r3, 0x4)
+  12:	e4422003 	andi      	r2, r2, 3
+  16:	3a42      	cmpnei      	r2, 2
+  18:	0bfc      	bt      	0x10	// 10 <gx_icache_enable+0x10>
+  1a:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_icache_disable:
+
+00000000 <gx_icache_disable>:
+   0:	33b0      	movi      	r3, 176
+   2:	4378      	lsli      	r3, r3, 24
+   4:	9340      	ld.w      	r2, (r3, 0x0)
+   6:	3a80      	bclri      	r2, 0
+   8:	b340      	st.w      	r2, (r3, 0x0)
+   a:	9341      	ld.w      	r2, (r3, 0x4)
+   c:	e4422003 	andi      	r2, r2, 3
+  10:	e922fffd 	bnez      	r2, 0xa	// a <gx_icache_disable+0xa>
+  14:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_icache_enable_profile:
+
+00000000 <gx_icache_enable_profile>:
+   0:	33b0      	movi      	r3, 176
+   2:	4378      	lsli      	r3, r3, 24
+   4:	9340      	ld.w      	r2, (r3, 0x0)
+   6:	ec420040 	ori      	r2, r2, 64
+   a:	b340      	st.w      	r2, (r3, 0x0)
+   c:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_icache_disable_profile:
+
+00000000 <gx_icache_disable_profile>:
+   0:	33b0      	movi      	r3, 176
+   2:	4378      	lsli      	r3, r3, 24
+   4:	9340      	ld.w      	r2, (r3, 0x0)
+   6:	3a86      	bclri      	r2, 6
+   8:	b340      	st.w      	r2, (r3, 0x0)
+   a:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_icache_reset_profile:
+
+00000000 <gx_icache_reset_profile>:
+   0:	33b0      	movi      	r3, 176
+   2:	4378      	lsli      	r3, r3, 24
+   4:	3200      	movi      	r2, 0
+   6:	b345      	st.w      	r2, (r3, 0x14)
+   8:	b346      	st.w      	r2, (r3, 0x18)
+   a:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_icache_get_access_time:
+
+00000000 <gx_icache_get_access_time>:
+   0:	33b0      	movi      	r3, 176
+   2:	4378      	lsli      	r3, r3, 24
+   4:	9305      	ld.w      	r0, (r3, 0x14)
+   6:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_icache_get_miss_time:
+
+00000000 <gx_icache_get_miss_time>:
+   0:	33b0      	movi      	r3, 176
+   2:	4378      	lsli      	r3, r3, 24
+   4:	9306      	ld.w      	r0, (r3, 0x18)
+   6:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_icache_init:
+
+00000000 <gx_icache_init>:
+   0:	783c      	jmp      	r15

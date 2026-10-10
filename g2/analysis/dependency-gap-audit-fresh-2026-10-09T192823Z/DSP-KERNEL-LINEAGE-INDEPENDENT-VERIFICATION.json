@@ -1,0 +1,126 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "label": "hash split-history.json",
+      "pass": true
+    },
+    {
+      "label": "hash butterfly-history.json",
+      "pass": true
+    },
+    {
+      "label": "hash makefile-history.json",
+      "pass": true
+    },
+    {
+      "label": "hash Makefile-a47076981e6c1ac3b9b1073c3e3e9466d8de7ea8",
+      "pass": true
+    },
+    {
+      "label": "hash third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_radix4_butterfly_q15.c",
+      "pass": true
+    },
+    {
+      "label": "hash third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_split_rfft_q15.c",
+      "pass": true
+    },
+    {
+      "label": "registered SDK pin",
+      "pass": true
+    },
+    {
+      "label": "pinned content utility/libdsp/Source/TransformFunctions/csky_radix4_butterfly_q15.c",
+      "pass": true
+    },
+    {
+      "label": "C definition csky_radix4_butterfly_q15",
+      "pass": true
+    },
+    {
+      "label": "C definition csky_radix4_butterfly_inverse_q15",
+      "pass": true
+    },
+    {
+      "label": "CMSIS/Apache notice utility/libdsp/Source/TransformFunctions/csky_radix4_butterfly_q15.c",
+      "pass": true
+    },
+    {
+      "label": "pinned content utility/libdsp/Source/TransformFunctions/csky_split_rfft_q15.c",
+      "pass": true
+    },
+    {
+      "label": "C definition csky_split_rfft_q15",
+      "pass": true
+    },
+    {
+      "label": "C definition csky_split_rifft_q15",
+      "pass": true
+    },
+    {
+      "label": "CMSIS/Apache notice utility/libdsp/Source/TransformFunctions/csky_split_rfft_q15.c",
+      "pass": true
+    },
+    {
+      "label": "immutable import Makefile equality",
+      "pass": true
+    },
+    {
+      "label": "C object disabled utility/libdsp/Source/TransformFunctions/csky_radix4_butterfly_q15.o",
+      "pass": true
+    },
+    {
+      "label": "C object disabled utility/libdsp/Source/TransformFunctions/csky_split_rfft_q15.o",
+      "pass": true
+    },
+    {
+      "label": "selected object utility/libdsp/Source.asm/TransformFunctions/csky_cfft_radix4_q15.o",
+      "pass": true
+    },
+    {
+      "label": "selected object utility/libdsp/Source.asm/TransformFunctions/csky_rfft_q15.o",
+      "pass": true
+    },
+    {
+      "label": "selected object utility/libdsp/Source/TransformFunctions/csky_cfft_radix4_q15.o",
+      "pass": true
+    },
+    {
+      "label": "selected object utility/libdsp/Source/TransformFunctions/csky_rfft_q15.o",
+      "pass": true
+    },
+    {
+      "label": "retained public import butterfly-history.json",
+      "pass": true,
+      "date": "2025-04-27T12:59:51Z"
+    },
+    {
+      "label": "retained public import split-history.json",
+      "pass": true,
+      "date": "2025-04-27T12:59:51Z"
+    },
+    {
+      "label": "retained public import makefile-history.json",
+      "pass": true,
+      "date": "2025-04-27T12:59:51Z"
+    },
+    {
+      "label": "literal macro distinction",
+      "pass": true
+    },
+    {
+      "label": "remaining pinned C definition csky_cfft_q15",
+      "pass": true,
+      "path": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_cfft_q15.c",
+      "sha256": "660b3e614d4c1b60f3818a236d321e0c40fb6108a2c8dcb9ec14d11ba37fce39"
+    },
+    {
+      "label": "remaining pinned C definition csky_bitreversal_q15",
+      "pass": true,
+      "path": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_bitreversal.c",
+      "sha256": "94a14626d8b395191120609ef4d8bea9dfc37d4f0fc8a96683a0177df330df9f"
+    }
+  ],
+  "correction": "All six prior wrapper undefined symbols have C definitions in the registered SDK; four butterfly/split symbols are in two separately selected-out units. Undefined references establish incomplete linking in prior experiment, not unavailable source.",
+  "limitations": "Read-only source/history receipt review; public endpoints not independently refetched. No C build, link, numerical or byte identity inferred."
+}

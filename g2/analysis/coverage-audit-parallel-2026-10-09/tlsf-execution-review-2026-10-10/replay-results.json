@@ -1,0 +1,2386 @@
+{
+  "pass_": true,
+  "sequences": [
+    {
+      "sequence": "small",
+      "steps": [
+        {
+          "operation": "create",
+          "size": 65536,
+          "slot": 0,
+          "returns": {
+            "stock": 0,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 0,
+          "slot": 0,
+          "returns": {
+            "stock": null,
+            "source": null
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 1,
+          "slot": 1,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "e749b6d772367a23554f5221516c8ce40d1a7c2113cb67229540e27b2478fba7",
+            "source": "e749b6d772367a23554f5221516c8ce40d1a7c2113cb67229540e27b2478fba7"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 3,
+          "slot": 2,
+          "returns": {
+            "stock": 3208,
+            "source": 3208
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "0dc1aa62de2361d659634fad468c0919297ee47adbd0c8f85e843e105b2cec66",
+            "source": "0dc1aa62de2361d659634fad468c0919297ee47adbd0c8f85e843e105b2cec66"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 4,
+          "slot": 3,
+          "returns": {
+            "stock": 3224,
+            "source": 3224
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 4,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 4,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "f41c97717a1d49183f74ae2228b506039b0a95d66766c1d8c76219dae480b319",
+            "source": "f41c97717a1d49183f74ae2228b506039b0a95d66766c1d8c76219dae480b319"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 5,
+          "slot": 4,
+          "returns": {
+            "stock": 3240,
+            "source": 3240
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 5,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 5,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "bad4e2aa48368ac11bd52677279467a8da21dc9a821b8d29c941e63c025ed1a8",
+            "source": "bad4e2aa48368ac11bd52677279467a8da21dc9a821b8d29c941e63c025ed1a8"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 1,
+          "returns": {
+            "stock": -537395172,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 5,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 5,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "866e25b68e3b6bb372c798bf2a3480b1bd47598bc95edde9c7ff2952813099a5",
+            "source": "866e25b68e3b6bb372c798bf2a3480b1bd47598bc95edde9c7ff2952813099a5"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 2,
+          "returns": {
+            "stock": -537395197,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 4,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 4,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "f6fec63ab3e74dc2c6a8d7ddbff9d14f0110d6a3404f67369d535201c5878614",
+            "source": "f6fec63ab3e74dc2c6a8d7ddbff9d14f0110d6a3404f67369d535201c5878614"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 3,
+          "returns": {
+            "stock": -537395193,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 3,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 3,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "c581762623ea2bd87cc6f0ab934d205f80110ab94c9a836d5b5c26b7dd5a7a7f",
+            "source": "c581762623ea2bd87cc6f0ab934d205f80110ab94c9a836d5b5c26b7dd5a7a7f"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 4,
+          "returns": {
+            "stock": -537395189,
+            "source": 36
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "73346e3487716119101bb656bd9b1026d861cce119b2455376cff478d31fd37c",
+            "source": "73346e3487716119101bb656bd9b1026d861cce119b2455376cff478d31fd37c"
+          }
+        }
+      ],
+      "retention_checks": []
+    },
+    {
+      "sequence": "coalesce-forward",
+      "steps": [
+        {
+          "operation": "create",
+          "size": 65536,
+          "slot": 0,
+          "returns": {
+            "stock": 0,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 64,
+          "slot": 0,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "cc59f0cc84d83540d5bb3bf6fe78b63f01027d0e5eb487d3053977dece87ca20",
+            "source": "cc59f0cc84d83540d5bb3bf6fe78b63f01027d0e5eb487d3053977dece87ca20"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 64,
+          "slot": 1,
+          "returns": {
+            "stock": 3260,
+            "source": 3260
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "c6a4d17e08076e2f34992e77ec569233fb636bb506023c09cbf108568f018316",
+            "source": "c6a4d17e08076e2f34992e77ec569233fb636bb506023c09cbf108568f018316"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 0,
+          "returns": {
+            "stock": -537395172,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 3,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 3,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "2aab264d380da8539013faf536f8348ca914ba96e5474fba1885463e929f2050",
+            "source": "2aab264d380da8539013faf536f8348ca914ba96e5474fba1885463e929f2050"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 1,
+          "returns": {
+            "stock": -537395184,
+            "source": 36
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "68743f591d22dd5275f28975bef7f43481e5a2cac24e07bc436f329c77b04785",
+            "source": "68743f591d22dd5275f28975bef7f43481e5a2cac24e07bc436f329c77b04785"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 128,
+          "slot": 2,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "88fbe78ae19b756dfea0046c78e02ae48506d2e28a8a4ca1822445ffc01e15f7",
+            "source": "88fbe78ae19b756dfea0046c78e02ae48506d2e28a8a4ca1822445ffc01e15f7"
+          }
+        }
+      ],
+      "retention_checks": []
+    },
+    {
+      "sequence": "coalesce-reverse",
+      "steps": [
+        {
+          "operation": "create",
+          "size": 65536,
+          "slot": 0,
+          "returns": {
+            "stock": 0,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 64,
+          "slot": 0,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "cc59f0cc84d83540d5bb3bf6fe78b63f01027d0e5eb487d3053977dece87ca20",
+            "source": "cc59f0cc84d83540d5bb3bf6fe78b63f01027d0e5eb487d3053977dece87ca20"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 64,
+          "slot": 1,
+          "returns": {
+            "stock": 3260,
+            "source": 3260
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "c6a4d17e08076e2f34992e77ec569233fb636bb506023c09cbf108568f018316",
+            "source": "c6a4d17e08076e2f34992e77ec569233fb636bb506023c09cbf108568f018316"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 1,
+          "returns": {
+            "stock": -537395172,
+            "source": 36
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "8b84797c447ab72ea36cd4a2080f9f8904282a5f0d504f798ea31a4241a28e35",
+            "source": "8b84797c447ab72ea36cd4a2080f9f8904282a5f0d504f798ea31a4241a28e35"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 0,
+          "returns": {
+            "stock": -537395172,
+            "source": 36
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "ca32da4342521d6e48027ad52dfcf243d8fcc420142370bbe9ebbb857d015a12",
+            "source": "ca32da4342521d6e48027ad52dfcf243d8fcc420142370bbe9ebbb857d015a12"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 128,
+          "slot": 2,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "88fbe78ae19b756dfea0046c78e02ae48506d2e28a8a4ca1822445ffc01e15f7",
+            "source": "88fbe78ae19b756dfea0046c78e02ae48506d2e28a8a4ca1822445ffc01e15f7"
+          }
+        }
+      ],
+      "retention_checks": []
+    },
+    {
+      "sequence": "failure",
+      "steps": [
+        {
+          "operation": "create",
+          "size": 65536,
+          "slot": 0,
+          "returns": {
+            "stock": 0,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 100000,
+          "slot": 0,
+          "returns": {
+            "stock": null,
+            "source": null
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        }
+      ],
+      "retention_checks": []
+    },
+    {
+      "sequence": "realloc",
+      "steps": [
+        {
+          "operation": "create",
+          "size": 65536,
+          "slot": 0,
+          "returns": {
+            "stock": 0,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 64,
+          "slot": 0,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "cc59f0cc84d83540d5bb3bf6fe78b63f01027d0e5eb487d3053977dece87ca20",
+            "source": "cc59f0cc84d83540d5bb3bf6fe78b63f01027d0e5eb487d3053977dece87ca20"
+          }
+        },
+        {
+          "operation": "realloc",
+          "size": 16,
+          "slot": 0,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "8e0a8aa9001fba667675d13ca423ddea63848e510427d6678a9ddf3810280c39",
+            "source": "8e0a8aa9001fba667675d13ca423ddea63848e510427d6678a9ddf3810280c39"
+          }
+        },
+        {
+          "operation": "realloc",
+          "size": 128,
+          "slot": 0,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "00bb83b5f93a22d637d65dc80c6e2c7886eca2333761cf4eb4ef4285914145e6",
+            "source": "00bb83b5f93a22d637d65dc80c6e2c7886eca2333761cf4eb4ef4285914145e6"
+          }
+        },
+        {
+          "operation": "realloc",
+          "size": 100000,
+          "slot": 0,
+          "returns": {
+            "stock": null,
+            "source": null
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "00bb83b5f93a22d637d65dc80c6e2c7886eca2333761cf4eb4ef4285914145e6",
+            "source": "00bb83b5f93a22d637d65dc80c6e2c7886eca2333761cf4eb4ef4285914145e6"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 0,
+          "returns": {
+            "stock": -537395172,
+            "source": 36
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "7c8b20dd9261658a1880a7a29f267c5afe3e860e3324da3321428b12c01874aa",
+            "source": "7c8b20dd9261658a1880a7a29f267c5afe3e860e3324da3321428b12c01874aa"
+          }
+        }
+      ],
+      "retention_checks": [
+        {
+          "step": 2,
+          "prefix_retained": true,
+          "failed_realloc_retained": false
+        },
+        {
+          "step": 3,
+          "prefix_retained": true,
+          "failed_realloc_retained": false
+        },
+        {
+          "step": 4,
+          "prefix_retained": true,
+          "failed_realloc_retained": true
+        }
+      ]
+    },
+    {
+      "sequence": "realloc-move",
+      "steps": [
+        {
+          "operation": "create",
+          "size": 65536,
+          "slot": 0,
+          "returns": {
+            "stock": 0,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 64,
+          "slot": 0,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "cc59f0cc84d83540d5bb3bf6fe78b63f01027d0e5eb487d3053977dece87ca20",
+            "source": "cc59f0cc84d83540d5bb3bf6fe78b63f01027d0e5eb487d3053977dece87ca20"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 64,
+          "slot": 1,
+          "returns": {
+            "stock": 3260,
+            "source": 3260
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "c6a4d17e08076e2f34992e77ec569233fb636bb506023c09cbf108568f018316",
+            "source": "c6a4d17e08076e2f34992e77ec569233fb636bb506023c09cbf108568f018316"
+          }
+        },
+        {
+          "operation": "realloc",
+          "size": 512,
+          "slot": 0,
+          "returns": {
+            "stock": 3328,
+            "source": 3328
+          },
+          "copy_provider_entries": {
+            "stock": 1,
+            "source": 1
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 4,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 4,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "ca6fbccc43679a24fff5b0c31f97bd2abc80a200d1fd96b397090bfdefb765dc",
+            "source": "ca6fbccc43679a24fff5b0c31f97bd2abc80a200d1fd96b397090bfdefb765dc"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 0,
+          "returns": {
+            "stock": -537395184,
+            "source": 36
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 3,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 3,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "c7ceebf8791840062cd398e4eb923df5392d9d664fafec8fc80c321a1d30bf00",
+            "source": "c7ceebf8791840062cd398e4eb923df5392d9d664fafec8fc80c321a1d30bf00"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 1,
+          "returns": {
+            "stock": -537395172,
+            "source": 36
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "41695ee197f8ae46b64558e34dfe43fedd96e0ecd7067884a6a4330ed79e4012",
+            "source": "41695ee197f8ae46b64558e34dfe43fedd96e0ecd7067884a6a4330ed79e4012"
+          }
+        }
+      ],
+      "retention_checks": [
+        {
+          "step": 3,
+          "prefix_retained": true,
+          "failed_realloc_retained": false
+        }
+      ]
+    },
+    {
+      "sequence": "size-boundaries",
+      "steps": [
+        {
+          "operation": "create",
+          "size": 65536,
+          "slot": 0,
+          "returns": {
+            "stock": 0,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 11,
+          "slot": 0,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "c9522ce7d3dd6e7c03331977e3f9c1e76dd3cea89d506d84999e818090f6cc0a",
+            "source": "c9522ce7d3dd6e7c03331977e3f9c1e76dd3cea89d506d84999e818090f6cc0a"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 12,
+          "slot": 1,
+          "returns": {
+            "stock": 3208,
+            "source": 3208
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 3,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "82cd28e971487969cbb0d413a526d736deac885b16adedbcac8d525d3dbebd43",
+            "source": "82cd28e971487969cbb0d413a526d736deac885b16adedbcac8d525d3dbebd43"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 13,
+          "slot": 2,
+          "returns": {
+            "stock": 3224,
+            "source": 3224
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 4,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 4,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6321efd30826baf4dcde39d68a180267835d8dbe314019d4ca0ad4aaf68fdc89",
+            "source": "6321efd30826baf4dcde39d68a180267835d8dbe314019d4ca0ad4aaf68fdc89"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 15,
+          "slot": 3,
+          "returns": {
+            "stock": 3244,
+            "source": 3244
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 5,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 5,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "daa57e52e49c27a6a86efe79659df87833acc5838f093cba15c49fcb0ea49855",
+            "source": "daa57e52e49c27a6a86efe79659df87833acc5838f093cba15c49fcb0ea49855"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 16,
+          "slot": 4,
+          "returns": {
+            "stock": 3264,
+            "source": 3264
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 6,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 6,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "feded052e63eda6a0ff87d0ffe52ac8afab0096d8217237d68ea14be1d2fcb2d",
+            "source": "feded052e63eda6a0ff87d0ffe52ac8afab0096d8217237d68ea14be1d2fcb2d"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 17,
+          "slot": 5,
+          "returns": {
+            "stock": 3284,
+            "source": 3284
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 7,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 7,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "8fc473dc4183d9bd6562f3fbdf09e17e63a286e3f3e1a22ccea1443ed68bf666",
+            "source": "8fc473dc4183d9bd6562f3fbdf09e17e63a286e3f3e1a22ccea1443ed68bf666"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 127,
+          "slot": 6,
+          "returns": {
+            "stock": 3308,
+            "source": 3308
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 8,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 8,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "8ef330d4d614be46aab8088e9be7fcf8cf66f2713f124174d6e26531b5d471ce",
+            "source": "8ef330d4d614be46aab8088e9be7fcf8cf66f2713f124174d6e26531b5d471ce"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 128,
+          "slot": 7,
+          "returns": {
+            "stock": 3440,
+            "source": 3440
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 9,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 9,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "183d8c93e5a7dffa99697b550dfe266d9658911b86a97598d4ad93633b025caf",
+            "source": "183d8c93e5a7dffa99697b550dfe266d9658911b86a97598d4ad93633b025caf"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 129,
+          "slot": 8,
+          "returns": {
+            "stock": 3572,
+            "source": 3572
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 10,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 10,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "ab0666c15449b6cca9e46e565cc4bb62dc16e9fbe9087f3035e17469a6f25fd9",
+            "source": "ab0666c15449b6cca9e46e565cc4bb62dc16e9fbe9087f3035e17469a6f25fd9"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 255,
+          "slot": 9,
+          "returns": {
+            "stock": 3708,
+            "source": 3708
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 11,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 11,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "8a67881cb4e073ce80643aa7def5332a53e98c071678a5cf11b66fd545b38461",
+            "source": "8a67881cb4e073ce80643aa7def5332a53e98c071678a5cf11b66fd545b38461"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 256,
+          "slot": 10,
+          "returns": {
+            "stock": 3968,
+            "source": 3968
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 12,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 12,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "67a252446e5dbced32488a5f4de5881684d267af42f1b1ef8ee6bd3cbc7ad122",
+            "source": "67a252446e5dbced32488a5f4de5881684d267af42f1b1ef8ee6bd3cbc7ad122"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 257,
+          "slot": 11,
+          "returns": {
+            "stock": 4228,
+            "source": 4228
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 13,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 13,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "2779add289a59f8fd0ef02300f677e62f9773e6083eda8106b86933c6e48097a",
+            "source": "2779add289a59f8fd0ef02300f677e62f9773e6083eda8106b86933c6e48097a"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 511,
+          "slot": 12,
+          "returns": {
+            "stock": 4492,
+            "source": 4492
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 14,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 14,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "1c95dd03a39e3a933d0d252331c67201e70e292077396baff818a086172ed846",
+            "source": "1c95dd03a39e3a933d0d252331c67201e70e292077396baff818a086172ed846"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 512,
+          "slot": 13,
+          "returns": {
+            "stock": 5008,
+            "source": 5008
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 15,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 15,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "ea75cf6d3769ddcbbbaf20272fdd999b10399c54afe2dff247ca73d1a6723216",
+            "source": "ea75cf6d3769ddcbbbaf20272fdd999b10399c54afe2dff247ca73d1a6723216"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 513,
+          "slot": 14,
+          "returns": {
+            "stock": 5524,
+            "source": 5524
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 16,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 16,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "9e2847c99f61cfa52167c962a4a69d5104012e7c11a3e52669ef70b84646e7a4",
+            "source": "9e2847c99f61cfa52167c962a4a69d5104012e7c11a3e52669ef70b84646e7a4"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 0,
+          "returns": {
+            "stock": -537395174,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 16,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 16,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "eb23ea4b883e021b9be6904c058963e4d126568ad7f5a974f69eda424b03b03f",
+            "source": "eb23ea4b883e021b9be6904c058963e4d126568ad7f5a974f69eda424b03b03f"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 1,
+          "returns": {
+            "stock": -537395197,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 15,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 15,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "84aac4790870d708552f375cb02f3b116983d72474bc6fce0de6a807b8244547",
+            "source": "84aac4790870d708552f375cb02f3b116983d72474bc6fce0de6a807b8244547"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 2,
+          "returns": {
+            "stock": -537395193,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 14,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 14,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "8b9e54e11ed7619b19a7e3b37633edb4b164f947c4760edf00dc632e1c7a2661",
+            "source": "8b9e54e11ed7619b19a7e3b37633edb4b164f947c4760edf00dc632e1c7a2661"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 3,
+          "returns": {
+            "stock": -537395188,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 13,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 13,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "368e8d2f4164ca999c0b5b2f90adf88eb481df743e0c7faea1c7a76f141ba128",
+            "source": "368e8d2f4164ca999c0b5b2f90adf88eb481df743e0c7faea1c7a76f141ba128"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 4,
+          "returns": {
+            "stock": -537395183,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 12,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 12,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "1977c09df028ca8fc6f5bc300c26b50860ea2d9089433d3068755f57c9eaae2d",
+            "source": "1977c09df028ca8fc6f5bc300c26b50860ea2d9089433d3068755f57c9eaae2d"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 5,
+          "returns": {
+            "stock": -537395178,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 11,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 11,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "80f183088f6dec958523af546137ee6e9da8db4c6ff7d07ca72a8539efa9bbbf",
+            "source": "80f183088f6dec958523af546137ee6e9da8db4c6ff7d07ca72a8539efa9bbbf"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 6,
+          "returns": {
+            "stock": -537395172,
+            "source": 4
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 10,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 10,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "fb1458e1c4ba4df2f76b68b2c5f51af1ecf99d7c216b5886d20d63ea543893a3",
+            "source": "fb1458e1c4ba4df2f76b68b2c5f51af1ecf99d7c216b5886d20d63ea543893a3"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 7,
+          "returns": {
+            "stock": -537395171,
+            "source": 8
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 9,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 9,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "cf9e5355004e24d5b5361666c7d404e0117587128b4885b429d5aa4c1428726b",
+            "source": "cf9e5355004e24d5b5361666c7d404e0117587128b4885b429d5aa4c1428726b"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 8,
+          "returns": {
+            "stock": -537395185,
+            "source": 12
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 8,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 8,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "5482372a7e949a94fb3de9f3a067161d7a034c51f05e464b6b3f3a9dd275a357",
+            "source": "5482372a7e949a94fb3de9f3a067161d7a034c51f05e464b6b3f3a9dd275a357"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 9,
+          "returns": {
+            "stock": null,
+            "source": 12
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 7,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 7,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "ecd5e4d04eb3affb80984cc4c309f24451bcd6d80a0fd9cc2c9ca17b16eebc8f",
+            "source": "ecd5e4d04eb3affb80984cc4c309f24451bcd6d80a0fd9cc2c9ca17b16eebc8f"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 10,
+          "returns": {
+            "stock": -537395184,
+            "source": 16
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 6,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 6,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "a2b2dff118fa7d1e8c26ad1e15948f58e8383777d7e9029faf72ca8a97a1ec13",
+            "source": "a2b2dff118fa7d1e8c26ad1e15948f58e8383777d7e9029faf72ca8a97a1ec13"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 11,
+          "returns": {
+            "stock": null,
+            "source": 16
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 5,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 5,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "0d45f8aa8d824c79d22ec74b80020cee33eeb668f8bebdff401725afd54a78e3",
+            "source": "0d45f8aa8d824c79d22ec74b80020cee33eeb668f8bebdff401725afd54a78e3"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 12,
+          "returns": {
+            "stock": -537395192,
+            "source": 16
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 4,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 4,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "789ae2240dc5f4b343403b3ff05c7705134a83efa8fa71c8d91e3b160195dacd",
+            "source": "789ae2240dc5f4b343403b3ff05c7705134a83efa8fa71c8d91e3b160195dacd"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 13,
+          "returns": {
+            "stock": -537395176,
+            "source": 20
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 3,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 3,
+              "free_blocks": 2,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "77e9fb3dedf15a9d38cf51fa0e7abe42a48ddfab7bde7a9aa2278d8ef90b8337",
+            "source": "77e9fb3dedf15a9d38cf51fa0e7abe42a48ddfab7bde7a9aa2278d8ef90b8337"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 14,
+          "returns": {
+            "stock": -537395196,
+            "source": 36
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "ca53078c156b7380e31ebbd5f635a8b391b1181f571543d1b0c25b8380c0be77",
+            "source": "ca53078c156b7380e31ebbd5f635a8b391b1181f571543d1b0c25b8380c0be77"
+          }
+        }
+      ],
+      "retention_checks": []
+    },
+    {
+      "sequence": "null-zero",
+      "steps": [
+        {
+          "operation": "create",
+          "size": 65536,
+          "slot": 0,
+          "returns": {
+            "stock": 0,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 0,
+          "returns": {
+            "stock": null,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f",
+            "source": "6aa09ffbacc90050b01b6a2a62d811c74d55e5ae92edf8109bb53ccfd0af938f"
+          }
+        },
+        {
+          "operation": "realloc",
+          "size": 32,
+          "slot": 0,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "0cbe2c8e431efff1a2153011d9c18d037bd26144e5c96c2392871826b1aa595b",
+            "source": "0cbe2c8e431efff1a2153011d9c18d037bd26144e5c96c2392871826b1aa595b"
+          }
+        },
+        {
+          "operation": "realloc",
+          "size": 0,
+          "slot": 0,
+          "returns": {
+            "stock": null,
+            "source": null
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "4dd060b5428317f383a679f15ce1a10dc6965c39207b0750ecf32e2788a05c5d",
+            "source": "4dd060b5428317f383a679f15ce1a10dc6965c39207b0750ecf32e2788a05c5d"
+          }
+        }
+      ],
+      "retention_checks": [
+        {
+          "step": 2,
+          "prefix_retained": true,
+          "failed_realloc_retained": false
+        },
+        {
+          "step": 3,
+          "prefix_retained": true,
+          "failed_realloc_retained": true
+        }
+      ]
+    },
+    {
+      "sequence": "sentinel-init",
+      "steps": [
+        {
+          "operation": "create",
+          "size": 65536,
+          "slot": 0,
+          "returns": {
+            "stock": 0,
+            "source": 0
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "e1dee2bc982c1903342bf077efee87b41fa1b6819723fd065c6c421f1ee5374b",
+            "source": "e1dee2bc982c1903342bf077efee87b41fa1b6819723fd065c6c421f1ee5374b"
+          }
+        },
+        {
+          "operation": "malloc",
+          "size": 12,
+          "slot": 0,
+          "returns": {
+            "stock": 3192,
+            "source": 3192
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 2,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "e960cafa5d652d7dbd9a0f81ff72b989c30b61e5cea99adaca6bd5f7cd350af5",
+            "source": "e960cafa5d652d7dbd9a0f81ff72b989c30b61e5cea99adaca6bd5f7cd350af5"
+          }
+        },
+        {
+          "operation": "free",
+          "size": 0,
+          "slot": 0,
+          "returns": {
+            "stock": -537395172,
+            "source": 36
+          },
+          "copy_provider_entries": {
+            "stock": 0,
+            "source": 0
+          },
+          "invariants": {
+            "stock": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            },
+            "source": {
+              "physical_blocks": 1,
+              "free_blocks": 1,
+              "free_lists_and_bitmaps_valid": true
+            }
+          },
+          "full_arena_equal": true,
+          "difference_offsets": [],
+          "arena_sha256": {
+            "stock": "5490bb428e4c90ce258132f728e2fdd00d199469629fb1c23f0fe270e60ac830",
+            "source": "5490bb428e4c90ce258132f728e2fdd00d199469629fb1c23f0fe270e60ac830"
+          }
+        }
+      ],
+      "retention_checks": []
+    }
+  ]
+}

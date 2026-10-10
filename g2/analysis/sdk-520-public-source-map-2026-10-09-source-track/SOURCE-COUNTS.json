@@ -1,0 +1,59 @@
+[
+  {
+    "prefix": "CMSIS/ARM/",
+    "files": 67,
+    "implementation_source_files": 0,
+    "sample_sources": []
+  },
+  {
+    "prefix": "third_party/open-amp/",
+    "files": 115,
+    "implementation_source_files": 38,
+    "sample_sources": [
+      "third_party/open-amp/apps/ipc_service/backends/ipc_rpmsg_static_vrings.c",
+      "third_party/open-amp/apps/ipc_service/ipc_service.c",
+      "third_party/open-amp/apps/ipc_service/lib/ipc_rpmsg.c",
+      "third_party/open-amp/apps/ipc_service/lib/ipc_static_vrings.c",
+      "third_party/open-amp/libmetal/lib/device.c",
+      "third_party/open-amp/libmetal/lib/dma.c",
+      "third_party/open-amp/libmetal/lib/init.c",
+      "third_party/open-amp/libmetal/lib/io.c",
+      "third_party/open-amp/libmetal/lib/irq.c",
+      "third_party/open-amp/libmetal/lib/log.c"
+    ]
+  },
+  {
+    "prefix": "third_party/tinyusb/",
+    "files": 121,
+    "implementation_source_files": 26,
+    "sample_sources": [
+      "third_party/tinyusb/ambiq_port/apollo5/dcd_apollo5.c",
+      "third_party/tinyusb/source/src/class/audio/audio_device.c",
+      "third_party/tinyusb/source/src/class/bth/bth_device.c",
+      "third_party/tinyusb/source/src/class/cdc/cdc_device.c",
+      "third_party/tinyusb/source/src/class/cdc/cdc_host.c",
+      "third_party/tinyusb/source/src/class/cdc/cdc_rndis_host.c",
+      "third_party/tinyusb/source/src/class/dfu/dfu_device.c",
+      "third_party/tinyusb/source/src/class/dfu/dfu_rt_device.c",
+      "third_party/tinyusb/source/src/class/hid/hid_device.c",
+      "third_party/tinyusb/source/src/class/hid/hid_host.c"
+    ]
+  },
+  {
+    "prefix": "third_party/crypto/",
+    "files": 352,
+    "implementation_source_files": 16,
+    "sample_sources": [
+      "third_party/crypto/host/src/hal/cc3x/cc_hal.c",
+      "third_party/crypto/host/src/pal/cc_pal_trng.c",
+      "third_party/crypto/host/src/pal/no_os/cc_pal.c",
+      "third_party/crypto/host/src/pal/no_os/cc_pal_abort_plat.c",
+      "third_party/crypto/host/src/pal/no_os/cc_pal_apbc.c",
+      "third_party/crypto/host/src/pal/no_os/cc_pal_barrier.c",
+      "third_party/crypto/host/src/pal/no_os/cc_pal_buff_attr.c",
+      "third_party/crypto/host/src/pal/no_os/cc_pal_dma.c",
+      "third_party/crypto/host/src/pal/no_os/cc_pal_fips.c",
+      "third_party/crypto/host/src/pal/no_os/cc_pal_interrupt_ctrl.c"
+    ]
+  }
+]

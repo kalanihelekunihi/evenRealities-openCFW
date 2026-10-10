@@ -1,0 +1,336 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-archive-20261009-agent1/pmu_ctrl.o:     file format elf32-csky-little
+
+
+Disassembly of section .sram_text:
+
+00000000 <gx_pmu_ctrl_get_chipid>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	1422      	subi      	r14, r14, 8
+   4:	ea038002 	movi      	r3, 32770
+   8:	b060      	st.w      	r3, (r0, 0x0)
+   a:	6d43      	mov      	r5, r0
+   c:	300d      	movi      	r0, 13
+   e:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			e: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+  12:	107b      	lrw      	r3, 0x0	// 7c <gx_pmu_ctrl_set+0xc>
+  14:	3100      	movi      	r1, 0
+  16:	d9832000 	ld.w      	r12, (r3, 0x0)
+  1a:	3380      	movi      	r3, 128
+  1c:	4841      	lsri      	r2, r0, 1
+  1e:	4364      	lsli      	r3, r3, 4
+  20:	6c07      	mov      	r0, r1
+  22:	7bf1      	jsr      	r12
+  24:	e9000010 	bez      	r0, 0x44	// 44 <gx_pmu_ctrl_get_chipid+0x44>
+  28:	3400      	movi      	r4, 0
+  2a:	3305      	movi      	r3, 5
+  2c:	6cbb      	mov      	r2, r14
+  2e:	6c53      	mov      	r1, r4
+  30:	b880      	st.w      	r4, (r14, 0x0)
+  32:	dc8e0004 	st.b      	r4, (r14, 0x4)
+  36:	e0000000 	bsr      	0x0	// 0 <gx_spi_flash_otp_read>
+			36: R_CKCORE_PCREL_IMM26BY2	gx_spi_flash_otp_read
+  3a:	e9a00008 	bhsz      	r0, 0x4a	// 4a <gx_pmu_ctrl_get_chipid+0x4a>
+  3e:	1011      	lrw      	r0, 0x0	// 80 <printf_+0x80>
+  40:	e0000000 	bsr      	0x0	// 0 <printf_>
+			40: R_CKCORE_PCREL_IMM26BY2	printf_
+  44:	3000      	movi      	r0, 0
+  46:	2800      	subi      	r0, 1
+  48:	040f      	br      	0x66	// 66 <gx_pmu_ctrl_get_chipid+0x66>
+  4a:	100f      	lrw      	r0, 0x0	// 84 <gx_pmu_ctrl_set+0x14>
+  4c:	e0000000 	bsr      	0x0	// 0 <strlen>
+			4c: R_CKCORE_PCREL_IMM26BY2	strlen
+  50:	6c83      	mov      	r2, r0
+  52:	102d      	lrw      	r1, 0x0	// 84 <gx_pmu_ctrl_set+0x14>
+  54:	6c3b      	mov      	r0, r14
+  56:	e0000000 	bsr      	0x0	// 0 <strncmp>
+			56: R_CKCORE_PCREL_IMM26BY2	strncmp
+  5a:	e9200008 	bnez      	r0, 0x6a	// 6a <gx_pmu_ctrl_get_chipid+0x6a>
+  5e:	ea230008 	movih      	r3, 8
+  62:	2339      	addi      	r3, 58
+  64:	b560      	st.w      	r3, (r5, 0x0)
+  66:	1402      	addi      	r14, r14, 8
+  68:	1492      	pop      	r4-r5, r15
+  6a:	6c13      	mov      	r0, r4
+  6c:	07fd      	br      	0x66	// 66 <gx_pmu_ctrl_get_chipid+0x66>
+	...
+
+00000070 <gx_pmu_ctrl_set>:
+  70:	3809      	cmphsi      	r0, 10
+  72:	0863      	bt      	0x138	// 138 <gx_pmu_ctrl_set+0xc8>
+  74:	1065      	lrw      	r3, 0x0	// 88 <gx_pmu_ctrl_set+0x18>
+  76:	d0030883 	ldr.w      	r3, (r3, r0 << 2)
+  7a:	780c      	jmp      	r3
+	...
+			7c: R_CKCORE_ADDR32	flash_spi_dev
+			80: R_CKCORE_ADDR32	.rodata.str1.1
+			84: R_CKCORE_ADDR32	.rodata.str1.1+0x16
+			88: R_CKCORE_ADDR32	.rodata
+  8c:	33a0      	movi      	r3, 160
+  8e:	4378      	lsli      	r3, r3, 24
+  90:	8940      	ld.h      	r2, (r1, 0x0)
+  92:	b341      	st.w      	r2, (r3, 0x4)
+  94:	8941      	ld.h      	r2, (r1, 0x2)
+  96:	b342      	st.w      	r2, (r3, 0x8)
+  98:	8942      	ld.h      	r2, (r1, 0x4)
+  9a:	b343      	st.w      	r2, (r3, 0xc)
+  9c:	8943      	ld.h      	r2, (r1, 0x6)
+  9e:	b344      	st.w      	r2, (r3, 0x10)
+  a0:	8944      	ld.h      	r2, (r1, 0x8)
+  a2:	b345      	st.w      	r2, (r3, 0x14)
+  a4:	8945      	ld.h      	r2, (r1, 0xa)
+  a6:	b346      	st.w      	r2, (r3, 0x18)
+  a8:	8946      	ld.h      	r2, (r1, 0xc)
+  aa:	b347      	st.w      	r2, (r3, 0x1c)
+  ac:	8947      	ld.h      	r2, (r1, 0xe)
+  ae:	b348      	st.w      	r2, (r3, 0x20)
+  b0:	783c      	jmp      	r15
+  b2:	33a0      	movi      	r3, 160
+  b4:	4378      	lsli      	r3, r3, 24
+  b6:	9140      	ld.w      	r2, (r1, 0x0)
+  b8:	b349      	st.w      	r2, (r3, 0x24)
+  ba:	3000      	movi      	r0, 0
+  bc:	07fa      	br      	0xb0	// b0 <gx_pmu_ctrl_set+0x40>
+  be:	33a0      	movi      	r3, 160
+  c0:	4378      	lsli      	r3, r3, 24
+  c2:	9140      	ld.w      	r2, (r1, 0x0)
+  c4:	b34a      	st.w      	r2, (r3, 0x28)
+  c6:	07fa      	br      	0xba	// ba <gx_pmu_ctrl_set+0x4a>
+  c8:	33a0      	movi      	r3, 160
+  ca:	4378      	lsli      	r3, r3, 24
+  cc:	9140      	ld.w      	r2, (r1, 0x0)
+  ce:	b34b      	st.w      	r2, (r3, 0x2c)
+  d0:	07f5      	br      	0xba	// ba <gx_pmu_ctrl_set+0x4a>
+  d2:	8160      	ld.b      	r3, (r1, 0x0)
+  d4:	ea22a001 	movih      	r2, 40961
+  d8:	e4632001 	andi      	r3, r3, 1
+  dc:	b276      	st.w      	r3, (r2, 0x58)
+  de:	9161      	ld.w      	r3, (r1, 0x4)
+  e0:	b277      	st.w      	r3, (r2, 0x5c)
+  e2:	07ec      	br      	0xba	// ba <gx_pmu_ctrl_set+0x4a>
+  e4:	33a0      	movi      	r3, 160
+  e6:	4378      	lsli      	r3, r3, 24
+  e8:	9140      	ld.w      	r2, (r1, 0x0)
+  ea:	b34d      	st.w      	r2, (r3, 0x34)
+  ec:	07e7      	br      	0xba	// ba <gx_pmu_ctrl_set+0x4a>
+  ee:	8143      	ld.b      	r2, (r1, 0x3)
+  f0:	8162      	ld.b      	r3, (r1, 0x2)
+  f2:	4244      	lsli      	r2, r2, 4
+  f4:	6c8c      	or      	r2, r3
+  f6:	33a0      	movi      	r3, 160
+  f8:	4378      	lsli      	r3, r3, 24
+  fa:	8902      	ld.h      	r0, (r1, 0x4)
+  fc:	b313      	st.w      	r0, (r3, 0x4c)
+  fe:	b352      	st.w      	r2, (r3, 0x48)
+ 100:	8141      	ld.b      	r2, (r1, 0x1)
+ 102:	3a40      	cmpnei      	r2, 0
+ 104:	c4000502 	mvc      	r2
+ 108:	b351      	st.w      	r2, (r3, 0x44)
+ 10a:	8140      	ld.b      	r2, (r1, 0x0)
+ 10c:	3a40      	cmpnei      	r2, 0
+ 10e:	c4000502 	mvc      	r2
+ 112:	b350      	st.w      	r2, (r3, 0x40)
+ 114:	07d3      	br      	0xba	// ba <gx_pmu_ctrl_set+0x4a>
+ 116:	33a0      	movi      	r3, 160
+ 118:	4378      	lsli      	r3, r3, 24
+ 11a:	9140      	ld.w      	r2, (r1, 0x0)
+ 11c:	b34e      	st.w      	r2, (r3, 0x38)
+ 11e:	07ce      	br      	0xba	// ba <gx_pmu_ctrl_set+0x4a>
+ 120:	33a0      	movi      	r3, 160
+ 122:	9140      	ld.w      	r2, (r1, 0x0)
+ 124:	4378      	lsli      	r3, r3, 24
+ 126:	e4422001 	andi      	r2, r2, 1
+ 12a:	b34f      	st.w      	r2, (r3, 0x3c)
+ 12c:	9160      	ld.w      	r3, (r1, 0x0)
+ 12e:	e4632001 	andi      	r3, r3, 1
+ 132:	1044      	lrw      	r2, 0x0	// 140 <gx_pmu_ctrl_set+0xd0>
+ 134:	b260      	st.w      	r3, (r2, 0x0)
+ 136:	07c2      	br      	0xba	// ba <gx_pmu_ctrl_set+0x4a>
+ 138:	3000      	movi      	r0, 0
+ 13a:	2800      	subi      	r0, 1
+ 13c:	07ba      	br      	0xb0	// b0 <gx_pmu_ctrl_set+0x40>
+ 13e:	0000      	.short	0x0000
+ 140:	00000000 	.long	0x00000000
+			140: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_pmu_ctrl_get:
+
+00000000 <gx_pmu_ctrl_get>:
+   0:	3809      	cmphsi      	r0, 10
+   2:	0858      	bt      	0xb2	// b2 <gx_pmu_ctrl_get+0xb2>
+   4:	1062      	lrw      	r3, 0x0	// c <gx_pmu_ctrl_get+0xc>
+   6:	d0030883 	ldr.w      	r3, (r3, r0 << 2)
+   a:	780c      	jmp      	r3
+   c:	00000000 	.long	0x00000000
+			c: R_CKCORE_ADDR32	.rodata+0x28
+  10:	33a0      	movi      	r3, 160
+  12:	4378      	lsli      	r3, r3, 24
+  14:	9341      	ld.w      	r2, (r3, 0x4)
+  16:	a940      	st.h      	r2, (r1, 0x0)
+  18:	9342      	ld.w      	r2, (r3, 0x8)
+  1a:	a941      	st.h      	r2, (r1, 0x2)
+  1c:	9343      	ld.w      	r2, (r3, 0xc)
+  1e:	a942      	st.h      	r2, (r1, 0x4)
+  20:	9344      	ld.w      	r2, (r3, 0x10)
+  22:	a943      	st.h      	r2, (r1, 0x6)
+  24:	9345      	ld.w      	r2, (r3, 0x14)
+  26:	a944      	st.h      	r2, (r1, 0x8)
+  28:	9346      	ld.w      	r2, (r3, 0x18)
+  2a:	a945      	st.h      	r2, (r1, 0xa)
+  2c:	9347      	ld.w      	r2, (r3, 0x1c)
+  2e:	9368      	ld.w      	r3, (r3, 0x20)
+  30:	a946      	st.h      	r2, (r1, 0xc)
+  32:	a967      	st.h      	r3, (r1, 0xe)
+  34:	783c      	jmp      	r15
+  36:	33a0      	movi      	r3, 160
+  38:	4378      	lsli      	r3, r3, 24
+  3a:	9369      	ld.w      	r3, (r3, 0x24)
+  3c:	b160      	st.w      	r3, (r1, 0x0)
+  3e:	0417      	br      	0x6c	// 6c <gx_pmu_ctrl_get+0x6c>
+  40:	33a0      	movi      	r3, 160
+  42:	4378      	lsli      	r3, r3, 24
+  44:	936a      	ld.w      	r3, (r3, 0x28)
+  46:	07fb      	br      	0x3c	// 3c <gx_pmu_ctrl_get+0x3c>
+  48:	33a0      	movi      	r3, 160
+  4a:	4378      	lsli      	r3, r3, 24
+  4c:	936b      	ld.w      	r3, (r3, 0x2c)
+  4e:	e463200f 	andi      	r3, r3, 15
+  52:	07f5      	br      	0x3c	// 3c <gx_pmu_ctrl_get+0x3c>
+  54:	33a0      	movi      	r3, 160
+  56:	4378      	lsli      	r3, r3, 24
+  58:	936d      	ld.w      	r3, (r3, 0x34)
+  5a:	07fa      	br      	0x4e	// 4e <gx_pmu_ctrl_get+0x4e>
+  5c:	ea22a001 	movih      	r2, 40961
+  60:	9276      	ld.w      	r3, (r2, 0x58)
+  62:	e4632001 	andi      	r3, r3, 1
+  66:	a160      	st.b      	r3, (r1, 0x0)
+  68:	9277      	ld.w      	r3, (r2, 0x5c)
+  6a:	b161      	st.w      	r3, (r1, 0x4)
+  6c:	3000      	movi      	r0, 0
+  6e:	07e3      	br      	0x34	// 34 <gx_pmu_ctrl_get+0x34>
+  70:	33a0      	movi      	r3, 160
+  72:	4378      	lsli      	r3, r3, 24
+  74:	9352      	ld.w      	r2, (r3, 0x48)
+  76:	9310      	ld.w      	r0, (r3, 0x40)
+  78:	e4002001 	andi      	r0, r0, 1
+  7c:	a100      	st.b      	r0, (r1, 0x0)
+  7e:	9311      	ld.w      	r0, (r3, 0x44)
+  80:	a101      	st.b      	r0, (r1, 0x1)
+  82:	9313      	ld.w      	r0, (r3, 0x4c)
+  84:	a902      	st.h      	r0, (r1, 0x4)
+  86:	e402200f 	andi      	r0, r2, 15
+  8a:	c48254e2 	zext      	r2, r2, 7, 4
+  8e:	a102      	st.b      	r0, (r1, 0x2)
+  90:	a143      	st.b      	r2, (r1, 0x3)
+  92:	9354      	ld.w      	r2, (r3, 0x50)
+  94:	a146      	st.b      	r2, (r1, 0x6)
+  96:	9375      	ld.w      	r3, (r3, 0x54)
+  98:	a167      	st.b      	r3, (r1, 0x7)
+  9a:	07e9      	br      	0x6c	// 6c <gx_pmu_ctrl_get+0x6c>
+  9c:	33a0      	movi      	r3, 160
+  9e:	4378      	lsli      	r3, r3, 24
+  a0:	936e      	ld.w      	r3, (r3, 0x38)
+  a2:	07cd      	br      	0x3c	// 3c <gx_pmu_ctrl_get+0x3c>
+  a4:	1065      	lrw      	r3, 0x0	// b8 <gx_pmu_ctrl_get+0xb8>
+  a6:	9360      	ld.w      	r3, (r3, 0x0)
+  a8:	07ca      	br      	0x3c	// 3c <gx_pmu_ctrl_get+0x3c>
+  aa:	33a0      	movi      	r3, 160
+  ac:	4378      	lsli      	r3, r3, 24
+  ae:	936c      	ld.w      	r3, (r3, 0x30)
+  b0:	07c6      	br      	0x3c	// 3c <gx_pmu_ctrl_get+0x3c>
+  b2:	3000      	movi      	r0, 0
+  b4:	2800      	subi      	r0, 1
+  b6:	07bf      	br      	0x34	// 34 <gx_pmu_ctrl_get+0x34>
+  b8:	00000000 	.long	0x00000000
+			b8: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_pmu_ctrl_enable:
+
+00000000 <gx_pmu_ctrl_enable>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	6c3b      	mov      	r0, r14
+   6:	3600      	movi      	r6, 0
+   8:	b8c0      	st.w      	r6, (r14, 0x0)
+   a:	e0000000 	bsr      	0x0	// 0 <gx_pmu_ctrl_enable>
+			a: R_CKCORE_PCREL_IMM26BY2	gx_pmu_ctrl_get_chipid
+   e:	9860      	ld.w      	r3, (r14, 0x0)
+  10:	eb438002 	cmpnei      	r3, 32770
+  14:	082c      	bt      	0x6c	// 6c <gx_pmu_ctrl_enable+0x6c>
+  16:	34a0      	movi      	r4, 160
+  18:	4498      	lsli      	r4, r4, 24
+  1a:	3501      	movi      	r5, 1
+  1c:	9469      	ld.w      	r3, (r4, 0x24)
+  1e:	c4655c0d 	ins      	r3, r5, 13, 13
+  22:	c4655c6e 	ins      	r3, r5, 17, 14
+  26:	c4665c08 	ins      	r3, r6, 8, 8
+  2a:	c4655c0b 	ins      	r3, r5, 11, 11
+  2e:	b469      	st.w      	r3, (r4, 0x24)
+  30:	946a      	ld.w      	r3, (r4, 0x28)
+  32:	c4655c0d 	ins      	r3, r5, 13, 13
+  36:	c4655c6e 	ins      	r3, r5, 17, 14
+  3a:	c4665c08 	ins      	r3, r6, 8, 8
+  3e:	b46a      	st.w      	r3, (r4, 0x28)
+  40:	946e      	ld.w      	r3, (r4, 0x38)
+  42:	c4665c04 	ins      	r3, r6, 4, 4
+  46:	b46e      	st.w      	r3, (r4, 0x38)
+  48:	330f      	movi      	r3, 15
+  4a:	b46d      	st.w      	r3, (r4, 0x34)
+  4c:	e0000000 	bsr      	0x0	// 0 <clk_switch_1m>
+			4c: R_CKCORE_PCREL_IMM26BY2	clk_switch_1m
+  50:	c0000420 	sync
+  54:	c0000420 	sync
+  58:	1066      	lrw      	r3, 0xe000f000	// 70 <gx_pmu_ctrl_enable+0x70>
+  5a:	3205      	movi      	r2, 5
+  5c:	b341      	st.w      	r2, (r3, 0x4)
+  5e:	c0000420 	sync
+  62:	c0000420 	sync
+  66:	b4a0      	st.w      	r5, (r4, 0x0)
+  68:	c0005020 	doze
+  6c:	1401      	addi      	r14, r14, 4
+  6e:	1493      	pop      	r4-r6, r15
+  70:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.gx_pmu_get_wakeup_source:
+
+00000000 <gx_pmu_get_wakeup_source>:
+   0:	33a0      	movi      	r3, 160
+   2:	4378      	lsli      	r3, r3, 24
+   4:	936d      	ld.w      	r3, (r3, 0x34)
+   6:	e4432001 	andi      	r2, r3, 1
+   a:	e9220014 	bnez      	r2, 0x32	// 32 <gx_pmu_get_wakeup_source+0x32>
+   e:	e4432004 	andi      	r2, r3, 4
+  12:	e9220012 	bnez      	r2, 0x36	// 36 <gx_pmu_get_wakeup_source+0x36>
+  16:	e4432008 	andi      	r2, r3, 8
+  1a:	e9220010 	bnez      	r2, 0x3a	// 3a <gx_pmu_get_wakeup_source+0x3a>
+  1e:	e4632002 	andi      	r3, r3, 2
+  22:	e923000e 	bnez      	r3, 0x3e	// 3e <gx_pmu_get_wakeup_source+0x3e>
+  26:	ea23a001 	movih      	r3, 40961
+  2a:	930b      	ld.w      	r0, (r3, 0x2c)
+  2c:	e4002001 	andi      	r0, r0, 1
+  30:	783c      	jmp      	r15
+  32:	3002      	movi      	r0, 2
+  34:	07fe      	br      	0x30	// 30 <gx_pmu_get_wakeup_source+0x30>
+  36:	3003      	movi      	r0, 3
+  38:	07fc      	br      	0x30	// 30 <gx_pmu_get_wakeup_source+0x30>
+  3a:	3005      	movi      	r0, 5
+  3c:	07fa      	br      	0x30	// 30 <gx_pmu_get_wakeup_source+0x30>
+  3e:	3004      	movi      	r0, 4
+  40:	07f8      	br      	0x30	// 30 <gx_pmu_get_wakeup_source+0x30>
+
+Disassembly of section .text.gx_pmu_get_start_mode:
+
+00000000 <gx_pmu_get_start_mode>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_pmu_get_start_mode>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_pmu_get_wakeup_source
+   6:	2801      	subi      	r0, 2
+   8:	3803      	cmphsi      	r0, 4
+   a:	0808      	bt      	0x1a	// 1a <gx_pmu_get_start_mode+0x1a>
+   c:	ea23a001 	movih      	r3, 40961
+  10:	9316      	ld.w      	r0, (r3, 0x58)
+  12:	e4002001 	andi      	r0, r0, 1
+  16:	9377      	ld.w      	r3, (r3, 0x5c)
+  18:	1490      	pop      	r15
+  1a:	3000      	movi      	r0, 0
+  1c:	07fe      	br      	0x18	// 18 <gx_pmu_get_start_mode+0x18>

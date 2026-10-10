@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-O1",
+    "-fshort-enums",
+    "-fno-inline",
+    "-Ig2/analysis/flashdb-provider-execution-20261010-implementation",
+    "-isystem",
+    "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include",
+    "-c",
+    "g2/analysis/flashdb-provider-execution-20261010-implementation/candidate.c",
+    "-o",
+    "g2/analysis/flashdb-provider-execution-20261010-implementation/candidate-O1.o"
+  ],
+  "exit": 0,
+  "stderr": ""
+}

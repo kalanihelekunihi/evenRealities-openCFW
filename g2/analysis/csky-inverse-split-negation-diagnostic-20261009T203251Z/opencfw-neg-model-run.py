@@ -1,0 +1,6 @@
+from pathlib import Path
+import json,subprocess,hashlib
+r=Path('/Users/kalani/Repo/evenRealities-openCFW');d=Path(Path('/tmp/opencfw-neg-model-path').read_text());binary=r/'g2/build/offline-xuantie-csky-dsp-20261009T201800Z/qemu-system-cskyv2';rows=[]
+for label,file in [('remaining-fft-diagnostic','diagnostic.elf'),('stage-diagnostic','diagnostic-stages.elf')]:
+ sub=d/label;sub.mkdir();cmd=['/opt/homebrew/bin/docker','run','--rm','--network=none','--read-only','--platform','linux/arm64','--mount',f'type=bind,src={binary},dst=/qemu,readonly','--mount',f'type=bind,src={d},dst=/out','--workdir','/out/'+label,'opencfw/qemu-csky-builddeps:20261009t201800','timeout','25s','/qemu','-M','smartl','-cpu','ck804ef','-nographic','-monitor','none','-kernel','/out/'+file,'-d','in_asm,int,guest_errors','-D','/out/'+label+'/qemu.log'];q=subprocess.run(cmd,capture_output=True,text=True,timeout=35);m=sub/'mem.log';row={'label':label,'command':cmd,'elf_sha256':hashlib.sha256((d/file).read_bytes()).hexdigest(),'returncode':q.returncode,'stdout':q.stdout,'stderr':q.stderr,'memlog':m.read_text() if m.exists() else None};rows.append(row);print(label,q.returncode,row['memlog'],flush=True)
+(d/'diagnostic-executions.json').write_text(json.dumps(rows,indent=2)+'\n')

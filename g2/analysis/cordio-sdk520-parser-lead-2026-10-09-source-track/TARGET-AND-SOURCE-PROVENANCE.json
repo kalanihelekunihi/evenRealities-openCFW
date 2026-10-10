@@ -1,0 +1,53 @@
+{
+  "sdk_package_sha256": "d9751350ef593b306838792a64a5620e4912c84ddf32dc9ff6aacd5cca049cad",
+  "stock_package_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "sources": [
+    {
+      "zip_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/sources/stack/l2c/l2c_main.c",
+      "sha256": "16de435673010a4de3c1b182012981f53684703c4a0a982df9e117f8a0d8284f",
+      "license": "Apache-2.0 explicit per-file notice retained"
+    },
+    {
+      "zip_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/sources/stack/l2c/l2c_main.h",
+      "sha256": "17c62f04867511ace8c6822924d858d0921a57922c25a11d6ce5aeeb2abb9185",
+      "license": "Apache-2.0 explicit per-file notice retained"
+    }
+  ],
+  "constants": [
+    {
+      "zip_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/include/l2c_defs.h",
+      "sha256": "a4a4fe60bd07c83bcd6a7cb285e48940e1d0e66062fb6788617fe93c5780a4ab",
+      "line": 45,
+      "definition": "#define L2C_SIG_HDR_LEN               4         /*!< \\brief L2CAP signaling command header length */"
+    }
+  ],
+  "stock_targets": [
+    {
+      "name": "attcProcRsp",
+      "start": "0x004B5448",
+      "end": "0x004B557A",
+      "size": 306,
+      "sha256": "f8256375f5cad966c0c74be78977523bce416b3fdeb41f06c9b98537cd9edd18",
+      "canonical_confidence": "Strong",
+      "canonical_module": "packetcraft-cordio-attc-proc"
+    },
+    {
+      "name": "l2cRxSignalingPkt",
+      "start": "0x0053076E",
+      "end": "0x005308E6",
+      "size": 376,
+      "sha256": "c26ae1510d3d56ca5de518313cd89389c877a3f1047c4512ab0a547e05db9f7d",
+      "canonical_confidence": "Strong",
+      "canonical_module": "packetcraft-cordio-l2c-main"
+    },
+    {
+      "name": "l2cHciAclCback",
+      "start": "0x005308E6",
+      "end": "0x00530A9C",
+      "size": 438,
+      "sha256": "11f76d172ff57564eb7a1581fd078cf32ca57644e4dd2980ba9c29bd19717a39",
+      "canonical_confidence": "Strong",
+      "canonical_module": "packetcraft-cordio-l2c-main"
+    }
+  ]
+}

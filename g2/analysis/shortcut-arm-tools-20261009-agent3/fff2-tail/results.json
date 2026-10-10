@@ -1,0 +1,561 @@
+{
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "ledger_sha256": "650df454aee30960abe88b70a531e9f2acca65d023ed0fb30da43dcbcb7b015a",
+  "function_count": 8853,
+  "decoded_instruction_count": 610412,
+  "pointer_literal_scan_stride": 2,
+  "nearby_pointer_literals": [
+    {
+      "address": "0x43c794",
+      "value": "0x2007411c"
+    },
+    {
+      "address": "0x448fb8",
+      "value": "0x20074138"
+    },
+    {
+      "address": "0x448fc0",
+      "value": "0x2007413c"
+    },
+    {
+      "address": "0x456344",
+      "value": "0x20074158"
+    },
+    {
+      "address": "0x4acdd0",
+      "value": "0x20074188"
+    },
+    {
+      "address": "0x4b4d98",
+      "value": "0x20074148"
+    },
+    {
+      "address": "0x4b4dc0",
+      "value": "0x20074150"
+    },
+    {
+      "address": "0x4d2540",
+      "value": "0x20074114"
+    },
+    {
+      "address": "0x502ca8",
+      "value": "0x20074120"
+    },
+    {
+      "address": "0x502d48",
+      "value": "0x20074128"
+    },
+    {
+      "address": "0x546820",
+      "value": "0x20074160"
+    },
+    {
+      "address": "0x549978",
+      "value": "0x20074160"
+    },
+    {
+      "address": "0x54e5dc",
+      "value": "0x20074160"
+    },
+    {
+      "address": "0x54f978",
+      "value": "0x20074180"
+    },
+    {
+      "address": "0x58101c",
+      "value": "0x20074180"
+    },
+    {
+      "address": "0x591cb0",
+      "value": "0x20074168"
+    },
+    {
+      "address": "0x591cc0",
+      "value": "0x20074170"
+    },
+    {
+      "address": "0x591d00",
+      "value": "0x20074178"
+    },
+    {
+      "address": "0x597d28",
+      "value": "0x20074140"
+    },
+    {
+      "address": "0x5bd350",
+      "value": "0x20074130"
+    },
+    {
+      "address": "0x76b194",
+      "value": "0x20074130"
+    }
+  ],
+  "corpus_pc_relative_refs": [
+    {
+      "function": "0043c496",
+      "name": "FUN_0043c496",
+      "site": "0x43c524",
+      "literal": "0x43c794",
+      "value": "0x2007411c",
+      "instruction": "ldr r1, [pc, #0x26c]"
+    },
+    {
+      "function": "0043c5f6",
+      "name": "FUN_0043c5f6",
+      "site": "0x43c642",
+      "literal": "0x43c794",
+      "value": "0x2007411c",
+      "instruction": "ldr r6, [pc, #0x150]"
+    },
+    {
+      "function": "0043c6ce",
+      "name": "FUN_0043c6ce",
+      "site": "0x43c6e0",
+      "literal": "0x43c794",
+      "value": "0x2007411c",
+      "instruction": "ldr r3, [pc, #0xb0]"
+    },
+    {
+      "function": "004489e8",
+      "name": "FUN_004489e8",
+      "site": "0x4489f6",
+      "literal": "0x448fb8",
+      "value": "0x20074138",
+      "instruction": "ldr.w r5, [pc, #0x5c0]"
+    },
+    {
+      "function": "00448af0",
+      "name": "FUN_00448af0",
+      "site": "0x448b1a",
+      "literal": "0x448fc0",
+      "value": "0x2007413c",
+      "instruction": "ldr.w r6, [pc, #0x4a4]"
+    },
+    {
+      "function": "00448b96",
+      "name": "FUN_00448b96",
+      "site": "0x448b9c",
+      "literal": "0x448fb8",
+      "value": "0x20074138",
+      "instruction": "ldr.w r6, [pc, #0x418]"
+    },
+    {
+      "function": "00456110",
+      "name": "pvPortMalloc",
+      "site": "0x45615c",
+      "literal": "0x456344",
+      "value": "0x20074158",
+      "instruction": "ldr r0, [pc, #0x1e4]"
+    },
+    {
+      "function": "00456280",
+      "name": "prvHeapInit",
+      "site": "0x45629e",
+      "literal": "0x456344",
+      "value": "0x20074158",
+      "instruction": "ldr r0, [pc, #0xa4]"
+    },
+    {
+      "function": "004562da",
+      "name": "prvInsertBlockIntoFreeList",
+      "site": "0x4562dc",
+      "literal": "0x456344",
+      "value": "0x20074158",
+      "instruction": "ldr r2, [pc, #0x64]"
+    },
+    {
+      "function": "004ac890",
+      "name": "FUN_004ac890",
+      "site": "0x4ac94e",
+      "literal": "0x4acdd0",
+      "value": "0x20074188",
+      "instruction": "ldr.w r5, [pc, #0x480]"
+    },
+    {
+      "function": "004acaa0",
+      "name": "FUN_004acaa0",
+      "site": "0x4acaa0",
+      "literal": "0x4acdd0",
+      "value": "0x20074188",
+      "instruction": "ldr.w r0, [pc, #0x32c]"
+    },
+    {
+      "function": "004acaac",
+      "name": "FUN_004acaac",
+      "site": "0x4acaac",
+      "literal": "0x4acdd0",
+      "value": "0x20074188",
+      "instruction": "ldr.w r0, [pc, #0x320]"
+    },
+    {
+      "function": "004acab4",
+      "name": "FUN_004acab4",
+      "site": "0x4acab4",
+      "literal": "0x4acdd0",
+      "value": "0x20074188",
+      "instruction": "ldr.w r0, [pc, #0x318]"
+    },
+    {
+      "function": "004acac0",
+      "name": "FUN_004acac0",
+      "site": "0x4acac0",
+      "literal": "0x4acdd0",
+      "value": "0x20074188",
+      "instruction": "ldr r0, [pc, #0x30c]"
+    },
+    {
+      "function": "004b48a6",
+      "name": "HciDrvRadioBoot",
+      "site": "0x4b4988",
+      "literal": "0x4b4d98",
+      "value": "0x20074148",
+      "instruction": "ldr.w r4, [pc, #0x40c]"
+    },
+    {
+      "function": "004b4c8a",
+      "name": "HciVscUpdateNvdsParam",
+      "site": "0x4b4c8c",
+      "literal": "0x4b4dc0",
+      "value": "0x20074150",
+      "instruction": "ldr r2, [pc, #0x130]"
+    },
+    {
+      "function": "004b4cd2",
+      "name": "HciVscSetCustom_BDAddr",
+      "site": "0x4b4cfa",
+      "literal": "0x4b4d98",
+      "value": "0x20074148",
+      "instruction": "ldr r5, [pc, #0x9c]"
+    },
+    {
+      "function": "004b4d08",
+      "name": "HciVscUpdateBDAddress",
+      "site": "0x4b4d0a",
+      "literal": "0x4b4d98",
+      "value": "0x20074148",
+      "instruction": "ldr r2, [pc, #0x8c]"
+    },
+    {
+      "function": "004d250c",
+      "name": "DmSecInit",
+      "site": "0x4d2512",
+      "literal": "0x4d2540",
+      "value": "0x20074114",
+      "instruction": "ldr r0, [pc, #0x2c]"
+    },
+    {
+      "function": "004d251e",
+      "name": "DmSecGetLocalCsrk",
+      "site": "0x4d251e",
+      "literal": "0x4d2540",
+      "value": "0x20074114",
+      "instruction": "ldr r0, [pc, #0x20]"
+    },
+    {
+      "function": "004d2524",
+      "name": "DmSecGetLocalIrk",
+      "site": "0x4d2524",
+      "literal": "0x4d2540",
+      "value": "0x20074114",
+      "instruction": "ldr r0, [pc, #0x18]"
+    },
+    {
+      "function": "005026bc",
+      "name": "buzzer_pwm_config",
+      "site": "0x5026f4",
+      "literal": "0x502ca8",
+      "value": "0x20074120",
+      "instruction": "ldr.w r5, [pc, #0x5b0]"
+    },
+    {
+      "function": "00502790",
+      "name": "buzzer_pwm_update",
+      "site": "0x502796",
+      "literal": "0x502ca8",
+      "value": "0x20074120",
+      "instruction": "ldr.w r0, [pc, #0x510]"
+    },
+    {
+      "function": "00502bf8",
+      "name": "DRV_BuzzerPlayNote",
+      "site": "0x502c5e",
+      "literal": "0x502d48",
+      "value": "0x20074128",
+      "instruction": "ldr r7, [pc, #0xe8]"
+    },
+    {
+      "function": "00545d18",
+      "name": "FUN_00545d18",
+      "site": "0x545df6",
+      "literal": "0x546820",
+      "value": "0x20074160",
+      "instruction": "ldr.w r6, [pc, #0xa28]"
+    },
+    {
+      "function": "00548b98",
+      "name": "FUN_00548b98",
+      "site": "0x548d3e",
+      "literal": "0x549978",
+      "value": "0x20074160",
+      "instruction": "ldr.w r8, [pc, #0xc38]"
+    },
+    {
+      "function": "00548b98",
+      "name": "FUN_00548b98",
+      "site": "0x548ea6",
+      "literal": "0x549978",
+      "value": "0x20074160",
+      "instruction": "ldr.w r4, [pc, #0xad0]"
+    },
+    {
+      "function": "0054daf4",
+      "name": "FUN_0054daf4",
+      "site": "0x54db00",
+      "literal": "0x54e5dc",
+      "value": "0x20074160",
+      "instruction": "ldr.w r4, [pc, #0xad8]"
+    },
+    {
+      "function": "0054db30",
+      "name": "FUN_0054db30",
+      "site": "0x54dbec",
+      "literal": "0x54e5dc",
+      "value": "0x20074160",
+      "instruction": "ldr.w r6, [pc, #0x9ec]"
+    },
+    {
+      "function": "0054f364",
+      "name": "AUDM_activeAppCount",
+      "site": "0x54f36a",
+      "literal": "0x54f978",
+      "value": "0x20074180",
+      "instruction": "ldr.w r2, [pc, #0x60c]"
+    },
+    {
+      "function": "0054f380",
+      "name": "AUDM_appAcquire",
+      "site": "0x54f3e8",
+      "literal": "0x54f978",
+      "value": "0x20074180",
+      "instruction": "ldr.w r0, [pc, #0x58c]"
+    },
+    {
+      "function": "0054f50e",
+      "name": "AUDM_appRelease",
+      "site": "0x54f576",
+      "literal": "0x54f978",
+      "value": "0x20074180",
+      "instruction": "ldr.w r1, [pc, #0x400]"
+    },
+    {
+      "function": "0054f88e",
+      "name": "AUDM_Init",
+      "site": "0x54f894",
+      "literal": "0x54f978",
+      "value": "0x20074180",
+      "instruction": "ldr r4, [pc, #0xe0]"
+    },
+    {
+      "function": "005915ea",
+      "name": "algo_front_data_preprocess",
+      "site": "0x591686",
+      "literal": "0x591cb0",
+      "value": "0x20074168",
+      "instruction": "ldr.w r6, [pc, #0x628]"
+    },
+    {
+      "function": "005915ea",
+      "name": "algo_front_data_preprocess",
+      "site": "0x591692",
+      "literal": "0x591cc0",
+      "value": "0x20074170",
+      "instruction": "ldr.w r7, [pc, #0x62c]"
+    },
+    {
+      "function": "0059173a",
+      "name": "SVC_SSRProcess",
+      "site": "0x591798",
+      "literal": "0x591cb0",
+      "value": "0x20074168",
+      "instruction": "ldr.w r4, [pc, #0x514]"
+    },
+    {
+      "function": "0059173a",
+      "name": "SVC_SSRProcess",
+      "site": "0x5917a8",
+      "literal": "0x591cc0",
+      "value": "0x20074170",
+      "instruction": "ldr.w r0, [pc, #0x514]"
+    },
+    {
+      "function": "0059173a",
+      "name": "SVC_SSRProcess",
+      "site": "0x5917c0",
+      "literal": "0x591cc0",
+      "value": "0x20074170",
+      "instruction": "ldr.w r0, [pc, #0x4fc]"
+    },
+    {
+      "function": "0059173a",
+      "name": "SVC_SSRProcess",
+      "site": "0x591804",
+      "literal": "0x591cc0",
+      "value": "0x20074170",
+      "instruction": "ldr.w r0, [pc, #0x4b8]"
+    },
+    {
+      "function": "00591c26",
+      "name": "service_algo_energy_window_update",
+      "site": "0x591c5c",
+      "literal": "0x591d00",
+      "value": "0x20074178",
+      "instruction": "ldr r4, [pc, #0xa0]"
+    },
+    {
+      "function": "00597c6c",
+      "name": "FUN_00597c6c",
+      "site": "0x597c78",
+      "literal": "0x597d28",
+      "value": "0x20074140",
+      "instruction": "ldr r1, [pc, #0xac]"
+    },
+    {
+      "function": "00597d10",
+      "name": "FUN_00597d10",
+      "site": "0x597d10",
+      "literal": "0x597d28",
+      "value": "0x20074140",
+      "instruction": "ldr r2, [pc, #0x14]"
+    },
+    {
+      "function": "005bd014",
+      "name": "am_devices_hongshi_status_check_and_recovery",
+      "site": "0x5bd01e",
+      "literal": "0x5bd350",
+      "value": "0x20074130",
+      "instruction": "ldr.w r4, [pc, #0x330]"
+    }
+  ],
+  "candidate_movw_movt": [],
+  "zero_initialized_buffer": "0000000000000000",
+  "command_arguments": [
+    [
+      65522,
+      8,
+      537346384
+    ],
+    [
+      65522,
+      8,
+      537346384
+    ]
+  ],
+  "initialized_payload": "ff7c010fb8190000",
+  "arbitrary_tail_counterexample": "ff7c010fb819a55a",
+  "original_memcpy_outputs": [
+    "ff7c010fb8190000",
+    "ff7c010fb819a55a"
+  ],
+  "buffer_writes": [
+    {
+      "phase": "zero",
+      "pc": "0x5fa034",
+      "address": "0x20074150",
+      "size": 4,
+      "value": "0x0"
+    },
+    {
+      "phase": "zero",
+      "pc": "0x5fa034",
+      "address": "0x20074154",
+      "size": 4,
+      "value": "0x0"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4c90",
+      "address": "0x20074150",
+      "size": 1,
+      "value": "0xff"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4c94",
+      "address": "0x20074151",
+      "size": 1,
+      "value": "0x7c"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4c98",
+      "address": "0x20074152",
+      "size": 1,
+      "value": "0x1"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4c9c",
+      "address": "0x20074153",
+      "size": 1,
+      "value": "0xf"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4ca0",
+      "address": "0x20074154",
+      "size": 1,
+      "value": "0xb8"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4ca4",
+      "address": "0x20074155",
+      "size": 1,
+      "value": "0x19"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4c90",
+      "address": "0x20074150",
+      "size": 1,
+      "value": "0xff"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4c94",
+      "address": "0x20074151",
+      "size": 1,
+      "value": "0x7c"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4c98",
+      "address": "0x20074152",
+      "size": 1,
+      "value": "0x1"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4c9c",
+      "address": "0x20074153",
+      "size": 1,
+      "value": "0xf"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4ca0",
+      "address": "0x20074154",
+      "size": 1,
+      "value": "0xb8"
+    },
+    {
+      "phase": "command",
+      "pc": "0x4b4ca4",
+      "address": "0x20074155",
+      "size": 1,
+      "value": "0x19"
+    }
+  ],
+  "unicorn_version": "2.1.4",
+  "limits": "Known corpus Thumb ranges and two-byte-aligned static pointer literals; indirect/calculated pointers, unknown executable spans, ROM and DMA writers not exhaustively excluded. Zero record, command prefix and authenticated memcpy executed; vendor allocation/send not executed."
+}

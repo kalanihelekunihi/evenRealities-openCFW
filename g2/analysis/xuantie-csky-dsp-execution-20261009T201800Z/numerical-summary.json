@@ -1,0 +1,22 @@
+{
+  "helper_c_assembly_passes": 230,
+  "bitreversal_c_assembly_passes": 3,
+  "fft_c_assembly_passes_before_first_failure": 23,
+  "corpus_passes": 256,
+  "corpus_failures": 1,
+  "fft_cases_not_executed_after_stop": 32,
+  "abs_max_assembly_oracle_passes": 55,
+  "first_difference": {
+    "zero_based_case": 256,
+    "pattern": "constant32767",
+    "direction": "inverse",
+    "family": "real FFT512",
+    "index": 1,
+    "c_signed": -20868,
+    "assembly_signed": -20866
+  },
+  "valid_spectrum_recheck": "Difference persists with DC/Nyquist imaginary0 and conjugate mirrored half-spectrum",
+  "localized_stage": "inverse real split",
+  "minimal_diagnostic_prefix": 8,
+  "model_limit": "complex multiply/accumulate all-min-negative corner differs internally in QEMU and lacks authoritative ISA verification; no hardware claim"
+}

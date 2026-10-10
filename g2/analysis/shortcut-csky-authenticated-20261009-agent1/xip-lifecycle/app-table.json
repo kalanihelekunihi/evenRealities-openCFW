@@ -1,0 +1,31 @@
+{
+  "sram_sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+  "pointer_child_span": [
+    14648,
+    14652
+  ],
+  "pointer_field_runtime_declared": 537029944,
+  "pointer_value": 537029948,
+  "app_record_child_span": [
+    14652,
+    14684
+  ],
+  "app_record_runtime_declared": 537029948,
+  "fields": {
+    "app_name": 270579273,
+    "AppInit": 270569036,
+    "AppEventResponse": 270569220,
+    "AppTaskLoop": 270569916,
+    "AppSuspend": 270568940,
+    "suspend_priv": 270579284,
+    "AppResume": 270568908,
+    "resume_priv": 270579301
+  },
+  "strings": {
+    "app_name": "sample app",
+    "suspend_priv": "SampleAppSuspend",
+    "resume_priv": "SampleAppResume"
+  },
+  "source_struct": "lvp/app_core/lvp_app.h:LVP_APP",
+  "qualification": "Initialized-source coordinates from SDK stage2_sram_data linker region; actual DRAM/IRAM visibility and subsequent writes remain unverified. This static initializer does not establish all future callback targets."
+}

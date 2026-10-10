@@ -1,0 +1,20 @@
+{
+  "literals": {
+    "0x530b90": "0x200737d8",
+    "0x530ba8": "0x53076f",
+    "0x530bb4": "0x530aa5",
+    "0x530bb8": "0x5308e7"
+  },
+  "canonical_callee_names": {
+    "0x004BF9B0": "WsfMsgFree"
+  },
+  "caller_abi": {
+    "r0": "12-bit HCI handle",
+    "r1": "zero-extended 16-bit L2CAP payload length",
+    "r2": "unchanged base HCI ACL packet pointer"
+  },
+  "caller_length_test": "hciLen == zero_extended_l2cLen + 4 using 32-bit comparison; hciLen<4 sets l2cLen=0 and fails comparison",
+  "stock_signaling_callback_offset": 8,
+  "caller_frees_original_packet_after_callback": true,
+  "stock_callback_registration_proof": "L2cInit writes literal 0x530ba8 to control block +8 and registers ACL callback via 0x5367f0"
+}

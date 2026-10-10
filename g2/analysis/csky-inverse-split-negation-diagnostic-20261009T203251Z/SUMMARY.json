@@ -1,0 +1,23 @@
+{
+  "original_corpus": "Immutable predecessor:256passes,first mismatch case256; no corrected retrospective status",
+  "diagnostic_semantic_change": "Inverse split little-endian scalar negation -> independent signed16 lane saturating negation",
+  "diagnostic_targeted_fft_cases": 33,
+  "diagnostic_passes": 33,
+  "new_numerical_discrepancies": 0,
+  "stage_rechecks": "Original,endpoint-valid Hermitian and DC-only fixtures; seven diagnostic prefixes512..8: split/core/double differences removed",
+  "isa_documentation": "Retained E804 manual2.0 section15.79 supports lane semantics; mirrored original/translated evidence, not physical execution",
+  "mac_documented_model_differences": 6,
+  "mac_accumulators": [
+    "0",
+    "-1",
+    "INT32_MIN"
+  ],
+  "specific_mac_corner_exclusion": "Bounded three assembly real-split MAC sites: coefficientA andderivedB cannot80008000 for locked512 table/modifier1",
+  "independent_model_audit": "New artifact pending independent reviewer; documentation reference incorporated; no self-admission",
+  "limits": [
+    "No original C source change",
+    "No universal numeric or hardware equivalence",
+    "First23 FFT cases not rerun under diagnostic model; do not merge mixed implementations into a56-case diagnostic pass",
+    "No corrected QEMU MAC semantics or simulator patch"
+  ]
+}

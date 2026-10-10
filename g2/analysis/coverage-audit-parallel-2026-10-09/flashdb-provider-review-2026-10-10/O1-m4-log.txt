@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/repo/g2/analysis/coverage-audit-parallel-2026-10-09/flashdb-provider-review-2026-10-10/probe-O1-m4.py", line 48, in <module>
+    a=run(kind,c);b=run(kind,c,True);assert a==b,(kind,c,a,b)
+                                            ^^^^
+AssertionError: ('get', {'found': True, 'requested': 8, 'recorded': 8, 'buf': True, 'out': True, 'read_error': 0}, {'return': 8, 'trace': [{'kind': 'find', 'db': 536936448, 'key': 537001984}, {'kind': 'read', 'args': [536936448, 11256832, 537067520, 8]}], 'out': '0800000008000000aaaa0000bbbb0000cccc0000', 'diagnostic_stop': False}, {'return': 8, 'trace': [{'kind': 'find', 'db': 536936448, 'key': 537001984}, {'kind': 'read', 'args': [536936448, 537001984, 537067520, 8]}], 'out': '0800000008000000aaaa0000bbbb0000cccc0000', 'diagnostic_stop': False})

@@ -1,0 +1,141 @@
+[
+  {
+    "name": "none",
+    "out_request_event": 0,
+    "opcode": 19,
+    "length": 1,
+    "expected_counts": [
+      0,
+      0
+    ],
+    "logs": [],
+    "pass_": true
+  },
+  {
+    "name": "mismatch",
+    "out_request_event": 1,
+    "opcode": 19,
+    "length": 1,
+    "expected_counts": [
+      0,
+      0
+    ],
+    "logs": [],
+    "pass_": true
+  },
+  {
+    "name": "write-short",
+    "out_request_event": 9,
+    "opcode": 19,
+    "length": 0,
+    "expected_counts": [
+      1,
+      0
+    ],
+    "logs": [
+      {
+        "kind": "timer",
+        "argument": 537329688
+      }
+    ],
+    "pass_": true
+  },
+  {
+    "name": "write-min",
+    "out_request_event": 9,
+    "opcode": 19,
+    "length": 1,
+    "expected_counts": [
+      1,
+      1
+    ],
+    "logs": [
+      {
+        "kind": "timer",
+        "argument": 537329688
+      },
+      {
+        "kind": "processor",
+        "address": "0x4b53dc",
+        "length": 1,
+        "event": 9,
+        "status": 0,
+        "value_length": 0,
+        "handle": 4660
+      }
+    ],
+    "pass_": true
+  },
+  {
+    "name": "mtu-short",
+    "out_request_event": 1,
+    "opcode": 3,
+    "length": 2,
+    "expected_counts": [
+      1,
+      0
+    ],
+    "logs": [
+      {
+        "kind": "timer",
+        "argument": 537329688
+      }
+    ],
+    "pass_": true
+  },
+  {
+    "name": "mtu-min",
+    "out_request_event": 1,
+    "opcode": 3,
+    "length": 3,
+    "expected_counts": [
+      1,
+      1
+    ],
+    "logs": [
+      {
+        "kind": "timer",
+        "argument": 537329688
+      },
+      {
+        "kind": "processor",
+        "address": "0x4b527a",
+        "length": 3,
+        "event": 1,
+        "status": 0,
+        "value_length": 2,
+        "handle": 4660
+      }
+    ],
+    "pass_": true
+  },
+  {
+    "name": "invalid-method",
+    "out_request_event": 18,
+    "opcode": 37,
+    "length": 1,
+    "expected_counts": [
+      0,
+      0
+    ],
+    "logs": [],
+    "pass_": true
+  },
+  {
+    "name": "null-handler",
+    "out_request_event": 10,
+    "opcode": 21,
+    "length": 1,
+    "expected_counts": [
+      1,
+      0
+    ],
+    "logs": [
+      {
+        "kind": "timer",
+        "argument": 537329688
+      }
+    ],
+    "pass_": true
+  }
+]

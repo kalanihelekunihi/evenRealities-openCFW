@@ -1,0 +1,94 @@
+{
+  "status": "proposed_not_executed",
+  "scope": "Existing authenticated backup 512-real / 256-complex Q15 chain and selected helpers only",
+  "prerequisites": [
+    "Authenticated CK804ef simulator supporting the actual packed DSP/loop/load-store instructions; backend instruction probes must pass before vectors",
+    "Identical locked stock tables and explicit ABI/register/stack/memory fixtures for stock assembly and C ELF",
+    "Four-byte aligned buffers, guarded mapped memory and captured signed-halfword output; all descriptor pointer widths/fields fixed explicitly",
+    "Pin source, tool, output ELF, simulator, fixture/table hashes and C macro configuration"
+  ],
+  "helper_corpus": {
+    "lengths": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      17,
+      512
+    ],
+    "shift_bits": [
+      -15,
+      -8,
+      -1,
+      0,
+      1,
+      8,
+      15
+    ],
+    "edge_samples": [
+      -32768,
+      -32767,
+      -16385,
+      -16384,
+      -1,
+      0,
+      1,
+      16383,
+      16384,
+      32766,
+      32767
+    ],
+    "shift_cases": 140,
+    "shift_case_definition": "10 lengths x 7 shifts x separate/in-place; repeat edge_samples cyclically, starting at index0",
+    "copy_cases": 20,
+    "copy_case_definition": "10 lengths x separate/in-place using cyclic edge_samples; no unsupported overlapping ranges",
+    "fill_cases": 70,
+    "fill_case_definition": "10 lengths x fill values [-32768,-32767,-1,0,1,32766,32767]",
+    "bitreversal_cases": 3,
+    "bitreversal_case_definition": "Authenticated 256-length table; uniquely labelled 32-bit complex samples, alternating extrema, deterministic full-range random. Compare expected permutation independently of FFT arithmetic."
+  },
+  "FFT_vectors": [
+    "all_zero",
+    "impulse_plus1_at0",
+    "impulse_minus1_at0",
+    "impulse_plus32767_at0",
+    "impulse_minus32768_at0",
+    "constant_plus32767",
+    "constant_minus32768",
+    "alternating_extrema",
+    "quarter_period_[16384,0,-16384,0]",
+    "quarter_period_[32767,0,-32768,0]",
+    "two_impulses_at0_and_last_[1,-1]",
+    "signed_ramp_((i*257)%65536)-32768",
+    "LCG_low_amplitude",
+    "LCG_full_range"
+  ],
+  "random_recipe": {
+    "LCG": "s=(1664525*s+1013904223) mod 2^32",
+    "seed": "0x00471512",
+    "full_range": "((s>>16)&65535)-32768",
+    "low_amplitude": "((s>>16)&4095)-2048"
+  },
+  "FFT_cases": 56,
+  "FFT_case_definition": "14 deterministic patterns x forward/inverse x complex256/real512; complex inputs have512 signed halfwords, real forward inputs512; inverse spectra must have explicitly validated descriptor/buffer shapes. bitreverse=1, modifier=1, stock tables. Compare kernels/stages and wrapper endpoints independently.",
+  "risk_hypotheses": [
+    "Q15 saturation boundaries versus lane wraparound",
+    "Arithmetic right shift and negative odd rounding",
+    "Order of packed halving/add/sub and multiply truncation",
+    "Real split endpoint/DC/Nyquist handling, packed lane order and -32768 correction",
+    "Inverse wrapper final doubling with truncating halfword stores",
+    "Compiler treatment of signed left shift/overflow in the authentic C source; no portable-C equivalence inferred"
+  ],
+  "stopping_criteria": [
+    "Stop on unsupported opcode, ABI fault, invalid descriptor shape, unmapped access or guard corruption; classify execution infrastructure before numerical conclusions",
+    "On first numerical mismatch, retain hashes/input/first differing stage/index and bounded minimize the case without changing source/flags/tables; report mismatch rather than sweeping configurations",
+    "If all233 helper cases plus56 FFT cases pass exactly, report finite corpus equality only; no universal semantic equivalence, startup selection, physical audio or full-firmware byte identity",
+    "Do not use forward/inverse roundtrip identity or float tolerance as a substitute for exact assembly-vs-C comparison: documented stage scaling/truncation prevents unqualified identity"
+  ],
+  "helper_cases_total": 233,
+  "total_cases": 289
+}

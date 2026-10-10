@@ -1,0 +1,20 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/final-source-boundary/audio_in.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_audio_in_set_interrupt_enable:
+
+00000000 <gx_audio_in_set_interrupt_enable>:
+   0:	ea23a0a0 	movih      	r3, 41120
+   4:	e901000b 	bez      	r1, 0x1a	// 1a <gx_audio_in_set_interrupt_enable+0x1a>
+   8:	dc032041 	st.w      	r0, (r3, 0x104)
+   c:	d8432040 	ld.w      	r2, (r3, 0x100)
+  10:	6c08      	or      	r0, r2
+  12:	dc032040 	st.w      	r0, (r3, 0x100)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	d8432040 	ld.w      	r2, (r3, 0x100)
+  1e:	6881      	andn      	r2, r0
+  20:	dc432040 	st.w      	r2, (r3, 0x100)
+  24:	dc032041 	st.w      	r0, (r3, 0x104)
+  28:	07f7      	br      	0x16	// 16 <gx_audio_in_set_interrupt_enable+0x16>

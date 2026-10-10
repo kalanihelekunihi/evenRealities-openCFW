@@ -1,0 +1,427 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/spi_master_v3.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.dw_spi_cleanup:
+
+00000000 <dw_spi_cleanup>:
+   0:	9060      	ld.w      	r3, (r0, 0x0)
+   2:	3200      	movi      	r2, 0
+   4:	9366      	ld.w      	r3, (r3, 0x18)
+   6:	9361      	ld.w      	r3, (r3, 0x4)
+   8:	b342      	st.w      	r2, (r3, 0x8)
+   a:	783c      	jmp      	r15
+
+Disassembly of section .text.spi_master_irq_handler:
+
+00000000 <spi_master_irq_handler>:
+   0:	9161      	ld.w      	r3, (r1, 0x4)
+   2:	936c      	ld.w      	r3, (r3, 0x30)
+   4:	e4432002 	andi      	r2, r3, 2
+   8:	e9020004 	bez      	r2, 0x10	// 10 <spi_master_irq_handler+0x10>
+   c:	3200      	movi      	r2, 0
+   e:	924e      	ld.w      	r2, (r2, 0x38)
+  10:	e4632008 	andi      	r3, r3, 8
+  14:	e9030004 	bez      	r3, 0x1c	// 1c <spi_master_irq_handler+0x1c>
+  18:	3300      	movi      	r3, 0
+  1a:	936f      	ld.w      	r3, (r3, 0x3c)
+  1c:	3000      	movi      	r0, 0
+  1e:	783c      	jmp      	r15
+
+Disassembly of section .text.dw_spi_setup:
+
+00000000 <dw_spi_setup>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	3300      	movi      	r3, 0
+   4:	a865      	st.h      	r3, (r0, 0xa)
+   6:	8069      	ld.b      	r3, (r0, 0x9)
+   8:	6d43      	mov      	r5, r0
+   a:	e9230004 	bnez      	r3, 0x12	// 12 <dw_spi_setup+0x12>
+   e:	3308      	movi      	r3, 8
+  10:	a069      	st.b      	r3, (r0, 0x9)
+  12:	9583      	ld.w      	r4, (r5, 0xc)
+  14:	e9240009 	bnez      	r4, 0x26	// 26 <dw_spi_setup+0x26>
+  18:	1095      	lrw      	r4, 0x0	// 6c <dw_spi_setup+0x6c>
+  1a:	9460      	ld.w      	r3, (r4, 0x0)
+  1c:	e9030005 	bez      	r3, 0x26	// 26 <dw_spi_setup+0x26>
+  20:	3000      	movi      	r0, 0
+  22:	280b      	subi      	r0, 12
+  24:	1492      	pop      	r4-r5, r15
+  26:	9561      	ld.w      	r3, (r5, 0x4)
+  28:	e9230004 	bnez      	r3, 0x30	// 30 <dw_spi_setup+0x30>
+  2c:	1071      	lrw      	r3, 0x989680	// 70 <dw_spi_setup+0x70>
+  2e:	b561      	st.w      	r3, (r5, 0x4)
+  30:	300e      	movi      	r0, 14
+  32:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			32: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+  36:	9561      	ld.w      	r3, (r5, 0x4)
+  38:	c4608022 	divu      	r2, r0, r3
+  3c:	3a80      	bclri      	r2, 0
+  3e:	7cc8      	mult      	r3, r2
+  40:	b4a0      	st.w      	r5, (r4, 0x0)
+  42:	8530      	ld.b      	r1, (r5, 0x10)
+  44:	64c2      	cmpne      	r0, r3
+  46:	8d65      	ld.h      	r3, (r5, 0xa)
+  48:	30c0      	movi      	r0, 192
+  4a:	4010      	lsli      	r0, r0, 16
+  4c:	4368      	lsli      	r3, r3, 8
+  4e:	4136      	lsli      	r1, r1, 22
+  50:	6840      	and      	r1, r0
+  52:	e4632300 	andi      	r3, r3, 768
+  56:	6cc4      	or      	r3, r1
+  58:	3bbf      	bseti      	r3, 31
+  5a:	b461      	st.w      	r3, (r4, 0x4)
+  5c:	c4420c42 	inct      	r2, r2, 2
+  60:	3302      	movi      	r3, 2
+  62:	b442      	st.w      	r2, (r4, 0x8)
+  64:	b463      	st.w      	r3, (r4, 0xc)
+  66:	3000      	movi      	r0, 0
+  68:	b583      	st.w      	r4, (r5, 0xc)
+  6a:	07dd      	br      	0x24	// 24 <dw_spi_setup+0x24>
+  6c:	00000000 	.long	0x00000000
+			6c: R_CKCORE_ADDR32	.bss
+  70:	00989680 	.long	0x00989680
+
+Disassembly of section .text.dw_spi_quick_transfer:
+
+00000000 <dw_spi_quick_transfer>:
+   0:	14d6      	push      	r4-r9, r15
+   2:	9060      	ld.w      	r3, (r0, 0x0)
+   4:	3500      	movi      	r5, 0
+   6:	9386      	ld.w      	r4, (r3, 0x18)
+   8:	b1a6      	st.w      	r5, (r1, 0x18)
+   a:	94c4      	ld.w      	r6, (r4, 0x10)
+   c:	b102      	st.w      	r0, (r1, 0x8)
+   e:	e926002d 	bnez      	r6, 0x68	// 68 <dw_spi_quick_transfer+0x68>
+  12:	b424      	st.w      	r1, (r4, 0x10)
+  14:	300e      	movi      	r0, 14
+  16:	3101      	movi      	r1, 1
+  18:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			18: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  1c:	ea23a030 	movih      	r3, 41008
+  20:	3ba7      	bseti      	r3, 7
+  22:	3202      	movi      	r2, 2
+  24:	b343      	st.w      	r2, (r3, 0xc)
+  26:	9464      	ld.w      	r3, (r4, 0x10)
+  28:	ea120080 	movi      	r18, 128
+  2c:	ea130080 	movi      	r19, 128
+  30:	d9a32000 	ld.w      	r13, (r3, 0x0)
+  34:	ea150008 	movi      	r21, 8
+  38:	ea160001 	movi      	r22, 1
+  3c:	ea170020 	movi      	r23, 32
+  40:	c4724832 	lsli      	r18, r18, 3
+  44:	c4934833 	lsli      	r19, r19, 4
+  48:	6c1b      	mov      	r0, r6
+  4a:	ea140001 	movi      	r20, 1
+  4e:	9464      	ld.w      	r3, (r4, 0x10)
+  50:	64f6      	cmpne      	r13, r3
+  52:	0810      	bt      	0x72	// 72 <dw_spi_quick_transfer+0x72>
+  54:	3500      	movi      	r5, 0
+  56:	ea23a030 	movih      	r3, 41008
+  5a:	3ba7      	bseti      	r3, 7
+  5c:	3203      	movi      	r2, 3
+  5e:	b343      	st.w      	r2, (r3, 0xc)
+  60:	3100      	movi      	r1, 0
+  62:	300e      	movi      	r0, 14
+  64:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			64: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  68:	3300      	movi      	r3, 0
+  6a:	6c17      	mov      	r0, r5
+  6c:	b464      	st.w      	r3, (r4, 0x10)
+  6e:	b465      	st.w      	r3, (r4, 0x14)
+  70:	1496      	pop      	r4-r9, r15
+  72:	e42d1017 	subi      	r1, r13, 24
+  76:	9362      	ld.w      	r3, (r3, 0x8)
+  78:	b425      	st.w      	r1, (r4, 0x14)
+  7a:	d9832003 	ld.w      	r12, (r3, 0xc)
+  7e:	9160      	ld.w      	r3, (r1, 0x0)
+  80:	e9230003 	bnez      	r3, 0x86	// 86 <dw_spi_quick_transfer+0x86>
+  84:	9161      	ld.w      	r3, (r1, 0x4)
+  86:	9142      	ld.w      	r2, (r1, 0x8)
+  88:	b466      	st.w      	r3, (r4, 0x18)
+  8a:	b447      	st.w      	r2, (r4, 0x1c)
+  8c:	814d      	ld.b      	r2, (r1, 0xd)
+  8e:	e902006c 	bez      	r2, 0x166	// 166 <dw_spi_quick_transfer+0x166>
+  92:	2206      	addi      	r2, 7
+  94:	e44220f8 	andi      	r2, r2, 248
+  98:	3a58      	cmpnei      	r2, 24
+  9a:	c4570c20 	incf      	r2, r23, 0
+  9e:	4a43      	lsri      	r2, r2, 3
+  a0:	dc440028 	st.b      	r2, (r4, 0x28)
+  a4:	814d      	ld.b      	r2, (r1, 0xd)
+  a6:	db012000 	ld.w      	r24, (r1, 0x0)
+  aa:	2a00      	subi      	r2, 1
+  ac:	d82c2001 	ld.w      	r1, (r12, 0x4)
+  b0:	6c84      	or      	r2, r1
+  b2:	9421      	ld.w      	r1, (r4, 0x4)
+  b4:	eb580000 	cmpnei      	r24, 0
+  b8:	b102      	st.w      	r0, (r1, 0x8)
+  ba:	c4134839 	lsli      	r25, r19, 0
+  be:	c7320c40 	inct      	r25, r18, 0
+  c2:	9421      	ld.w      	r1, (r4, 0x4)
+  c4:	c7222422 	or      	r2, r2, r25
+  c8:	db2c2003 	ld.w      	r25, (r12, 0xc)
+  cc:	df21203c 	st.w      	r25, (r1, 0xf0)
+  d0:	9421      	ld.w      	r1, (r4, 0x4)
+  d2:	b140      	st.w      	r2, (r1, 0x0)
+  d4:	d84c2002 	ld.w      	r2, (r12, 0x8)
+  d8:	7709      	zexth      	r12, r2
+  da:	eb0c0001 	cmphsi      	r12, 2
+  de:	9421      	ld.w      	r1, (r4, 0x4)
+  e0:	0c48      	bf      	0x170	// 170 <dw_spi_quick_transfer+0x170>
+  e2:	c40255e2 	zext      	r2, r2, 15, 0
+  e6:	b145      	st.w      	r2, (r1, 0x14)
+  e8:	9441      	ld.w      	r2, (r4, 0x4)
+  ea:	b201      	st.w      	r0, (r2, 0x4)
+  ec:	9441      	ld.w      	r2, (r4, 0x4)
+  ee:	b213      	st.w      	r0, (r2, 0x4c)
+  f0:	d8440028 	ld.b      	r2, (r4, 0x28)
+  f4:	9427      	ld.w      	r1, (r4, 0x1c)
+  f6:	c441802c 	divu      	r12, r1, r2
+  fa:	db242003 	ld.w      	r25, (r4, 0xc)
+  fe:	c44c8425 	mult      	r5, r12, r2
+ 102:	c7390039 	addu      	r25, r25, r25
+ 106:	6056      	subu      	r1, r5
+ 108:	e7391000 	subi      	r25, r25, 1
+ 10c:	e92100b4 	bnez      	r1, 0x274	// 274 <dw_spi_quick_transfer+0x274>
+ 110:	c4438021 	divu      	r1, r3, r2
+ 114:	7c48      	mult      	r1, r2
+ 116:	5b25      	subu      	r1, r3, r1
+ 118:	e92100ae 	bnez      	r1, 0x274	// 274 <dw_spi_quick_transfer+0x274>
+ 11c:	94a1      	ld.w      	r5, (r4, 0x4)
+ 11e:	b428      	st.w      	r1, (r4, 0x20)
+ 120:	b522      	st.w      	r1, (r5, 0x8)
+ 122:	94a1      	ld.w      	r5, (r4, 0x4)
+ 124:	de852004 	st.w      	r20, (r5, 0x10)
+ 128:	94a1      	ld.w      	r5, (r4, 0x4)
+ 12a:	b533      	st.w      	r1, (r5, 0x4c)
+ 12c:	e9380024 	bnez      	r24, 0x174	// 174 <dw_spi_quick_transfer+0x174>
+ 130:	6e0f      	mov      	r8, r3
+ 132:	6dcf      	mov      	r7, r3
+ 134:	e90c0033 	bez      	r12, 0x19a	// 19a <dw_spi_quick_transfer+0x19a>
+ 138:	9421      	ld.w      	r1, (r4, 0x4)
+ 13a:	b102      	st.w      	r0, (r1, 0x8)
+ 13c:	9423      	ld.w      	r1, (r4, 0xc)
+ 13e:	db042001 	ld.w      	r24, (r4, 0x4)
+ 142:	f82ccd21 	min.u32      	r1, r12, r1
+ 146:	59a3      	subi      	r5, r1, 1
+ 148:	dcb82001 	st.w      	r5, (r24, 0x4)
+ 14c:	db042001 	ld.w      	r24, (r4, 0x4)
+ 150:	6d47      	mov      	r5, r1
+ 152:	de982002 	st.w      	r20, (r24, 0x8)
+ 156:	db042001 	ld.w      	r24, (r4, 0x4)
+ 15a:	dc182018 	st.w      	r0, (r24, 0x60)
+ 15e:	e9250062 	bnez      	r5, 0x222	// 222 <dw_spi_quick_transfer+0x222>
+ 162:	6306      	subu      	r12, r1
+ 164:	07e8      	br      	0x134	// 134 <dw_spi_quick_transfer+0x134>
+ 166:	dea1000d 	st.b      	r21, (r1, 0xd)
+ 16a:	dec40028 	st.b      	r22, (r4, 0x28)
+ 16e:	079b      	br      	0xa4	// a4 <dw_spi_quick_transfer+0xa4>
+ 170:	3202      	movi      	r2, 2
+ 172:	07ba      	br      	0xe6	// e6 <dw_spi_quick_transfer+0xe6>
+ 174:	9421      	ld.w      	r1, (r4, 0x4)
+ 176:	6dcf      	mov      	r7, r3
+ 178:	de812002 	st.w      	r20, (r1, 0x8)
+ 17c:	6d8f      	mov      	r6, r3
+ 17e:	e92c0013 	bnez      	r12, 0x1a4	// 1a4 <dw_spi_quick_transfer+0x1a4>
+ 182:	9461      	ld.w      	r3, (r4, 0x4)
+ 184:	2327      	addi      	r3, 40
+ 186:	9340      	ld.w      	r2, (r3, 0x0)
+ 188:	e4422004 	andi      	r2, r2, 4
+ 18c:	e902fffd 	bez      	r2, 0x186	// 186 <dw_spi_quick_transfer+0x186>
+ 190:	9340      	ld.w      	r2, (r3, 0x0)
+ 192:	e4422001 	andi      	r2, r2, 1
+ 196:	e922fffd 	bnez      	r2, 0x190	// 190 <dw_spi_quick_transfer+0x190>
+ 19a:	9461      	ld.w      	r3, (r4, 0x4)
+ 19c:	d9ad2000 	ld.w      	r13, (r13, 0x0)
+ 1a0:	b302      	st.w      	r0, (r3, 0x8)
+ 1a2:	0756      	br      	0x4e	// 4e <dw_spi_quick_transfer+0x4e>
+ 1a4:	94a1      	ld.w      	r5, (r4, 0x4)
+ 1a6:	9528      	ld.w      	r1, (r5, 0x20)
+ 1a8:	c4392038 	and      	r24, r25, r1
+ 1ac:	9422      	ld.w      	r1, (r4, 0x8)
+ 1ae:	c7010081 	subu      	r1, r1, r24
+ 1b2:	f981cda1 	min.s32      	r1, r1, r12
+ 1b6:	e7011000 	subi      	r24, r1, 1
+ 1ba:	df052001 	st.w      	r24, (r5, 0x4)
+ 1be:	ea180000 	movi      	r24, 0
+ 1c2:	c7010480 	cmpne      	r1, r24
+ 1c6:	0806      	bt      	0x1d2	// 1d2 <dw_spi_quick_transfer+0x1d2>
+ 1c8:	3a41      	cmpnei      	r2, 1
+ 1ca:	081e      	bt      	0x206	// 206 <dw_spi_quick_transfer+0x206>
+ 1cc:	6184      	addu      	r6, r1
+ 1ce:	6306      	subu      	r12, r1
+ 1d0:	07d7      	br      	0x17e	// 17e <dw_spi_quick_transfer+0x17e>
+ 1d2:	3a41      	cmpnei      	r2, 1
+ 1d4:	0807      	bt      	0x1e2	// 1e2 <dw_spi_quick_transfer+0x1e2>
+ 1d6:	94a1      	ld.w      	r5, (r4, 0x4)
+ 1d8:	d3060028 	ldr.b      	r8, (r6, r24 << 0)
+ 1dc:	dd052018 	st.w      	r8, (r5, 0x60)
+ 1e0:	040a      	br      	0x1f4	// 1f4 <dw_spi_quick_transfer+0x1f4>
+ 1e2:	3a42      	cmpnei      	r2, 2
+ 1e4:	080b      	bt      	0x1fa	// 1fa <dw_spi_quick_transfer+0x1fa>
+ 1e6:	d3070445 	ldr.h      	r5, (r7, r24 << 1)
+ 1ea:	d9042001 	ld.w      	r8, (r4, 0x4)
+ 1ee:	7555      	zexth      	r5, r5
+ 1f0:	dca82018 	st.w      	r5, (r8, 0x60)
+ 1f4:	e7180000 	addi      	r24, r24, 1
+ 1f8:	07e5      	br      	0x1c2	// 1c2 <dw_spi_quick_transfer+0x1c2>
+ 1fa:	3a44      	cmpnei      	r2, 4
+ 1fc:	0bfc      	bt      	0x1f4	// 1f4 <dw_spi_quick_transfer+0x1f4>
+ 1fe:	94a1      	ld.w      	r5, (r4, 0x4)
+ 200:	d3030888 	ldr.w      	r8, (r3, r24 << 2)
+ 204:	07ec      	br      	0x1dc	// 1dc <dw_spi_quick_transfer+0x1dc>
+ 206:	3a42      	cmpnei      	r2, 2
+ 208:	0806      	bt      	0x214	// 214 <dw_spi_quick_transfer+0x214>
+ 20a:	c4210038 	addu      	r24, r1, r1
+ 20e:	c7070027 	addu      	r7, r7, r24
+ 212:	07de      	br      	0x1ce	// 1ce <dw_spi_quick_transfer+0x1ce>
+ 214:	3a44      	cmpnei      	r2, 4
+ 216:	0bdc      	bt      	0x1ce	// 1ce <dw_spi_quick_transfer+0x1ce>
+ 218:	c4414838 	lsli      	r24, r1, 2
+ 21c:	c7030023 	addu      	r3, r3, r24
+ 220:	07d7      	br      	0x1ce	// 1ce <dw_spi_quick_transfer+0x1ce>
+ 222:	db042001 	ld.w      	r24, (r4, 0x4)
+ 226:	3600      	movi      	r6, 0
+ 228:	db182009 	ld.w      	r24, (r24, 0x24)
+ 22c:	c7192038 	and      	r24, r25, r24
+ 230:	c7060440 	cmplt      	r6, r24
+ 234:	0804      	bt      	0x23c	// 23c <dw_spi_quick_transfer+0x23c>
+ 236:	c7050085 	subu      	r5, r5, r24
+ 23a:	0792      	br      	0x15e	// 15e <dw_spi_quick_transfer+0x15e>
+ 23c:	3a41      	cmpnei      	r2, 1
+ 23e:	0809      	bt      	0x250	// 250 <dw_spi_quick_transfer+0x250>
+ 240:	d9242001 	ld.w      	r9, (r4, 0x4)
+ 244:	d9292018 	ld.w      	r9, (r9, 0x60)
+ 248:	d4078009 	stbi.b      	r9, (r7)
+ 24c:	2600      	addi      	r6, 1
+ 24e:	07f1      	br      	0x230	// 230 <dw_spi_quick_transfer+0x230>
+ 250:	3a42      	cmpnei      	r2, 2
+ 252:	0808      	bt      	0x262	// 262 <dw_spi_quick_transfer+0x262>
+ 254:	d9242001 	ld.w      	r9, (r4, 0x4)
+ 258:	d9292018 	ld.w      	r9, (r9, 0x60)
+ 25c:	d4088409 	stbi.h      	r9, (r8)
+ 260:	07f6      	br      	0x24c	// 24c <dw_spi_quick_transfer+0x24c>
+ 262:	3a44      	cmpnei      	r2, 4
+ 264:	0bf4      	bt      	0x24c	// 24c <dw_spi_quick_transfer+0x24c>
+ 266:	d9242001 	ld.w      	r9, (r4, 0x4)
+ 26a:	d9292018 	ld.w      	r9, (r9, 0x60)
+ 26e:	d4038809 	stbi.w      	r9, (r3)
+ 272:	07ed      	br      	0x24c	// 24c <dw_spi_quick_transfer+0x24c>
+ 274:	3500      	movi      	r5, 0
+ 276:	2d15      	subi      	r5, 22
+ 278:	06ef      	br      	0x56	// 56 <dw_spi_quick_transfer+0x56>
+
+Disassembly of section .text.spi_master_v3_probe:
+
+00000000 <spi_master_v3_probe>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	115c      	lrw      	r2, 0x0	// f0 <spi_master_v3_probe+0xf0>
+   4:	e4820033 	addi      	r4, r2, 52
+   8:	31a3      	movi      	r1, 163
+   a:	4138      	lsli      	r1, r1, 24
+   c:	e462000f 	addi      	r3, r2, 16
+  10:	b421      	st.w      	r1, (r4, 0x4)
+  12:	3500      	movi      	r5, 0
+  14:	3101      	movi      	r1, 1
+  16:	b26d      	st.w      	r3, (r2, 0x34)
+  18:	b28a      	st.w      	r4, (r2, 0x28)
+  1a:	b2a4      	st.w      	r5, (r2, 0x10)
+  1c:	b225      	st.w      	r1, (r2, 0x14)
+  1e:	300e      	movi      	r0, 14
+  20:	1155      	lrw      	r2, 0x0	// f4 <spi_master_v3_probe+0xf4>
+  22:	b344      	st.w      	r2, (r3, 0x10)
+  24:	1155      	lrw      	r2, 0x0	// f8 <spi_master_v3_probe+0xf8>
+  26:	b342      	st.w      	r2, (r3, 0x8)
+  28:	1155      	lrw      	r2, 0x0	// fc <spi_master_v3_probe+0xfc>
+  2a:	b343      	st.w      	r2, (r3, 0xc)
+  2c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			2c: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  30:	9461      	ld.w      	r3, (r4, 0x4)
+  32:	324e      	movi      	r2, 78
+  34:	b3a2      	st.w      	r5, (r3, 0x8)
+  36:	9461      	ld.w      	r3, (r4, 0x4)
+  38:	b34b      	st.w      	r2, (r3, 0x2c)
+  3a:	9462      	ld.w      	r3, (r4, 0x8)
+  3c:	e9230013 	bnez      	r3, 0x62	// 62 <spi_master_v3_probe+0x62>
+  40:	3280      	movi      	r2, 128
+  42:	3302      	movi      	r3, 2
+  44:	4241      	lsli      	r2, r2, 1
+  46:	9421      	ld.w      	r1, (r4, 0x4)
+  48:	b166      	st.w      	r3, (r1, 0x18)
+  4a:	9421      	ld.w      	r1, (r4, 0x4)
+  4c:	e4010017 	addi      	r0, r1, 24
+  50:	9126      	ld.w      	r1, (r1, 0x18)
+  52:	64c6      	cmpne      	r1, r3
+  54:	0840      	bt      	0xd4	// d4 <spi_master_v3_probe+0xd4>
+  56:	2300      	addi      	r3, 1
+  58:	e822fff7 	bnezad      	r2, 0x46	// 46 <spi_master_v3_probe+0x46>
+  5c:	b462      	st.w      	r3, (r4, 0x8)
+  5e:	3300      	movi      	r3, 0
+  60:	b060      	st.w      	r3, (r0, 0x0)
+  62:	9463      	ld.w      	r3, (r4, 0xc)
+  64:	e9230013 	bnez      	r3, 0x8a	// 8a <spi_master_v3_probe+0x8a>
+  68:	3280      	movi      	r2, 128
+  6a:	3302      	movi      	r3, 2
+  6c:	4241      	lsli      	r2, r2, 1
+  6e:	9421      	ld.w      	r1, (r4, 0x4)
+  70:	b167      	st.w      	r3, (r1, 0x1c)
+  72:	9421      	ld.w      	r1, (r4, 0x4)
+  74:	e401001b 	addi      	r0, r1, 28
+  78:	9127      	ld.w      	r1, (r1, 0x1c)
+  7a:	64c6      	cmpne      	r1, r3
+  7c:	0832      	bt      	0xe0	// e0 <spi_master_v3_probe+0xe0>
+  7e:	2300      	addi      	r3, 1
+  80:	e822fff7 	bnezad      	r2, 0x6e	// 6e <spi_master_v3_probe+0x6e>
+  84:	b463      	st.w      	r3, (r4, 0xc)
+  86:	3300      	movi      	r3, 0
+  88:	b060      	st.w      	r3, (r0, 0x0)
+  8a:	ea23a030 	movih      	r3, 41008
+  8e:	3ba7      	bseti      	r3, 7
+  90:	3203      	movi      	r2, 3
+  92:	b343      	st.w      	r2, (r3, 0xc)
+  94:	9461      	ld.w      	r3, (r4, 0x4)
+  96:	3201      	movi      	r2, 1
+  98:	b342      	st.w      	r2, (r3, 0x8)
+  9a:	9461      	ld.w      	r3, (r4, 0x4)
+  9c:	e4230027 	addi      	r1, r3, 40
+  a0:	235f      	addi      	r3, 96
+  a2:	9140      	ld.w      	r2, (r1, 0x0)
+  a4:	e4422008 	andi      	r2, r2, 8
+  a8:	e9220022 	bnez      	r2, 0xec	// ec <spi_master_v3_probe+0xec>
+  ac:	91a0      	ld.w      	r5, (r1, 0x0)
+  ae:	e4a52001 	andi      	r5, r5, 1
+  b2:	e925fffd 	bnez      	r5, 0xac	// ac <spi_master_v3_probe+0xac>
+  b6:	6c57      	mov      	r1, r5
+  b8:	300e      	movi      	r0, 14
+  ba:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			ba: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  be:	1011      	lrw      	r0, 0x0	// 100 <spi_master_v3_probe+0x100>
+  c0:	b4a4      	st.w      	r5, (r4, 0x10)
+  c2:	b4a5      	st.w      	r5, (r4, 0x14)
+  c4:	e0000000 	bsr      	0x0	// 0 <spi_register_master>
+			c4: R_CKCORE_PCREL_IMM26BY2	spi_register_master
+  c8:	104f      	lrw      	r2, 0x0	// 104 <spi_master_v3_probe+0x104>
+  ca:	1030      	lrw      	r1, 0x0	// 108 <spi_master_v3_probe+0x108>
+  cc:	3010      	movi      	r0, 16
+  ce:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			ce: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  d2:	1492      	pop      	r4-r5, r15
+  d4:	eb430101 	cmpnei      	r3, 257
+  d8:	3200      	movi      	r2, 0
+  da:	c4620c20 	incf      	r3, r2, 0
+  de:	07bf      	br      	0x5c	// 5c <spi_master_v3_probe+0x5c>
+  e0:	eb430101 	cmpnei      	r3, 257
+  e4:	3200      	movi      	r2, 0
+  e6:	c4620c20 	incf      	r3, r2, 0
+  ea:	07cd      	br      	0x84	// 84 <spi_master_v3_probe+0x84>
+  ec:	9340      	ld.w      	r2, (r3, 0x0)
+  ee:	07da      	br      	0xa2	// a2 <spi_master_v3_probe+0xa2>
+	...
+			f0: R_CKCORE_ADDR32	.bss
+			f4: R_CKCORE_ADDR32	.text.dw_spi_cleanup
+			f8: R_CKCORE_ADDR32	.text.dw_spi_setup
+			fc: R_CKCORE_ADDR32	.text.dw_spi_quick_transfer
+			100: R_CKCORE_ADDR32	.bss+0x10
+			104: R_CKCORE_ADDR32	.bss+0x34
+			108: R_CKCORE_ADDR32	.text.spi_master_irq_handler

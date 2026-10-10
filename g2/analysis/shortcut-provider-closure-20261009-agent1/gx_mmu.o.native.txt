@@ -1,0 +1,120 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/gx_mmu.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_mmu_init:
+
+00000000 <gx_mmu_init>:
+   0:	3000      	movi      	r0, 0
+   2:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_mmu_map:
+
+00000000 <gx_mmu_map>:
+   0:	14d5      	push      	r4-r8, r15
+   2:	ea23b010 	movih      	r3, 45072
+   6:	6d8b      	mov      	r6, r2
+   8:	9360      	ld.w      	r3, (r3, 0x0)
+   a:	3400      	movi      	r4, 0
+   c:	ea0c0001 	movi      	r12, 1
+  10:	3206      	movi      	r2, 6
+  12:	c48c4028 	lsl      	r8, r12, r4
+  16:	c503202d 	and      	r13, r3, r8
+  1a:	e90d0024 	bez      	r13, 0x62	// 62 <gx_mmu_map+0x62>
+  1e:	2400      	addi      	r4, 1
+  20:	e822fff9 	bnezad      	r2, 0x12	// 12 <gx_mmu_map+0x12>
+  24:	3000      	movi      	r0, 0
+  26:	2800      	subi      	r0, 1
+  28:	1495      	pop      	r4-r8, r15
+  2a:	ea23ffc0 	movih      	r3, 65472
+  2e:	3280      	movi      	r2, 128
+  30:	68c0      	and      	r3, r0
+  32:	4255      	lsli      	r2, r2, 21
+  34:	648e      	cmpne      	r3, r2
+  36:	0806      	bt      	0x42	// 42 <gx_mmu_map+0x42>
+  38:	e0000000 	bsr      	0x0	// 0 <gx_icache_disable>
+			38: R_CKCORE_PCREL_IMM26BY2	gx_icache_disable
+  3c:	e0000000 	bsr      	0x0	// 0 <gx_icache_enable>
+			3c: R_CKCORE_PCREL_IMM26BY2	gx_icache_enable
+  40:	6c1f      	mov      	r0, r7
+  42:	ea21b010 	movih      	r1, 45072
+  46:	330c      	movi      	r3, 12
+  48:	6c87      	mov      	r2, r1
+  4a:	f8648442 	mula.32.l      	r2, r4, r3
+  4e:	f8648443 	mula.32.l      	r3, r4, r3
+  52:	b201      	st.w      	r0, (r2, 0x4)
+  54:	b2a2      	st.w      	r5, (r2, 0x8)
+  56:	d4230826 	str.w      	r6, (r3, r1 << 0)
+  5a:	9160      	ld.w      	r3, (r1, 0x0)
+  5c:	6ce0      	or      	r3, r8
+  5e:	b160      	st.w      	r3, (r1, 0x0)
+  60:	0410      	br      	0x80	// 80 <gx_mmu_map+0x80>
+  62:	c40056a7 	zext      	r7, r0, 21, 0
+  66:	5f78      	addu      	r3, r7, r6
+  68:	c6a05022 	bmaski      	r2, 22
+  6c:	64c8      	cmphs      	r2, r3
+  6e:	0c06      	bf      	0x7a	// 7a <gx_mmu_map+0x7a>
+  70:	c40156a5 	zext      	r5, r1, 21, 0
+  74:	5e74      	addu      	r3, r6, r5
+  76:	64c8      	cmphs      	r2, r3
+  78:	0bd9      	bt      	0x2a	// 2a <gx_mmu_map+0x2a>
+  7a:	1003      	lrw      	r0, 0x0	// 84 <gx_mmu_map+0x84>
+  7c:	e0000000 	bsr      	0x0	// 0 <printf_>
+			7c: R_CKCORE_PCREL_IMM26BY2	printf_
+  80:	3000      	movi      	r0, 0
+  82:	07d3      	br      	0x28	// 28 <gx_mmu_map+0x28>
+  84:	00000000 	.long	0x00000000
+			84: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_mmu_unmap:
+
+00000000 <gx_mmu_unmap>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	ea23ffc0 	movih      	r3, 65472
+   6:	c4602021 	and      	r1, r0, r3
+   a:	3380      	movi      	r3, 128
+   c:	4375      	lsli      	r3, r3, 21
+   e:	64c6      	cmpne      	r1, r3
+  10:	0803      	bt      	0x16	// 16 <gx_mmu_unmap+0x16>
+  12:	c40056a0 	zext      	r0, r0, 21, 0
+  16:	ea23b010 	movih      	r3, 45072
+  1a:	ea029602 	movi      	r2, 38402
+  1e:	c6624902 	rotli      	r2, r2, 19
+  22:	d9832000 	ld.w      	r12, (r3, 0x0)
+  26:	3500      	movi      	r5, 0
+  28:	ea0d0001 	movi      	r13, 1
+  2c:	3306      	movi      	r3, 6
+  2e:	c4ad4024 	lsl      	r4, r13, r5
+  32:	c5842032 	and      	r18, r4, r12
+  36:	5dc2      	addi      	r6, r5, 1
+  38:	e9120007 	bez      	r18, 0x46	// 46 <gx_mmu_unmap+0x46>
+  3c:	da422000 	ld.w      	r18, (r2, 0x0)
+  40:	c4120480 	cmpne      	r18, r0
+  44:	0c08      	bf      	0x54	// 54 <gx_mmu_unmap+0x54>
+  46:	6d5b      	mov      	r5, r6
+  48:	220b      	addi      	r2, 12
+  4a:	e823fff2 	bnezad      	r3, 0x2e	// 2e <gx_mmu_unmap+0x2e>
+  4e:	3000      	movi      	r0, 0
+  50:	2800      	subi      	r0, 1
+  52:	1493      	pop      	r4-r6, r15
+  54:	3380      	movi      	r3, 128
+  56:	4375      	lsli      	r3, r3, 21
+  58:	64c6      	cmpne      	r1, r3
+  5a:	0805      	bt      	0x64	// 64 <gx_mmu_unmap+0x64>
+  5c:	e0000000 	bsr      	0x0	// 0 <gx_icache_disable>
+			5c: R_CKCORE_PCREL_IMM26BY2	gx_icache_disable
+  60:	e0000000 	bsr      	0x0	// 0 <gx_icache_enable>
+			60: R_CKCORE_PCREL_IMM26BY2	gx_icache_enable
+  64:	ea23b010 	movih      	r3, 45072
+  68:	6c4f      	mov      	r1, r3
+  6a:	9340      	ld.w      	r2, (r3, 0x0)
+  6c:	c4822044 	andn      	r4, r2, r4
+  70:	320c      	movi      	r2, 12
+  72:	f8458441 	mula.32.l      	r1, r5, r2
+  76:	7d88      	mult      	r6, r2
+  78:	3000      	movi      	r0, 0
+  7a:	b380      	st.w      	r4, (r3, 0x0)
+  7c:	b102      	st.w      	r0, (r1, 0x8)
+  7e:	b101      	st.w      	r0, (r1, 0x4)
+  80:	d4660820 	str.w      	r0, (r6, r3 << 0)
+  84:	07e7      	br      	0x52	// 52 <gx_mmu_unmap+0x52>

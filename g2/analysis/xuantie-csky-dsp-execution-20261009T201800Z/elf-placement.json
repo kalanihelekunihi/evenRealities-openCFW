@@ -1,0 +1,67 @@
+{
+  "code_data_region": "smartl RAM0 starts0, length16MiB; harness linked10000",
+  "stack": "20010000 within smartl RAM1; explicit startup",
+  "result_device": "smartl memlog10003000 and exit10002000 virtual MMIO, not firmware RAM",
+  "elfs": {
+    "isa.elf": {
+      "entry": "0x10000",
+      "segments": [
+        {
+          "address": "0x10000",
+          "memory_bytes": 1164
+        }
+      ],
+      "sha256": "90cb6bd43f311641934017c844cbb78b8c04932a573e6053847c38413553ca38"
+    },
+    "smoke.elf": {
+      "entry": "0x10000",
+      "segments": [
+        {
+          "address": "0x10000",
+          "memory_bytes": 22264
+        }
+      ],
+      "sha256": "bd6234b53b500d23410fff4769db001c02f5aacaf58378dc9d6791499c9789bb"
+    },
+    "harness.elf": {
+      "entry": "0x10000",
+      "segments": [
+        {
+          "address": "0x10000",
+          "memory_bytes": 23660
+        }
+      ],
+      "sha256": "7b40b328624e3ae742a6c2488207a5c870096acd091f6b712246a6f50ac98e61"
+    },
+    "abs-oracle.elf": {
+      "entry": "0x10000",
+      "segments": [
+        {
+          "address": "0x10000",
+          "memory_bytes": 14796
+        }
+      ],
+      "sha256": "2cdb94e7953cb9ce7a8dd0b0ba691783b5ed6ef509357eadc89e3aa40d8f9947"
+    },
+    "stages.elf": {
+      "entry": "0x10000",
+      "segments": [
+        {
+          "address": "0x10000",
+          "memory_bytes": 19576
+        }
+      ],
+      "sha256": "ff9337565f46a65f568adea3af99cdd915f53db2096a22d2a7d9da23df949c20"
+    },
+    "pneg.elf": {
+      "entry": "0x10000",
+      "segments": [
+        {
+          "address": "0x10000",
+          "memory_bytes": 512
+        }
+      ],
+      "sha256": "ef6e21484efb8336b091156a9c448509bad21ce398b1f96aade407a715c2b534"
+    }
+  }
+}

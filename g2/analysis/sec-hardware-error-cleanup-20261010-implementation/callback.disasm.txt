@@ -1,0 +1,101 @@
+
+g2/analysis/sec-hardware-error-cleanup-20261010-implementation/callback.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00536234 <.data>:
+  536234:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  536236:	0005      	movs	r5, r0
+  536238:	2400      	movs	r4, #0
+  53623a:	2000      	movs	r0, #0
+  53623c:	f88d 0000 	strb.w	r0, [sp]
+  536240:	78a8      	ldrb	r0, [r5, #2]
+  536242:	2814      	cmp	r0, #20
+  536244:	d042      	beq.n	0x5362cc
+  536246:	281b      	cmp	r0, #27
+  536248:	d01c      	beq.n	0x536284
+  53624a:	281c      	cmp	r0, #28
+  53624c:	d004      	beq.n	0x536258
+  53624e:	2825      	cmp	r0, #37	@ 0x25
+  536250:	d02e      	beq.n	0x5362b0
+  536252:	2826      	cmp	r0, #38	@ 0x26
+  536254:	d032      	beq.n	0x5362bc
+  536256:	e057      	b.n	0x536308
+  536258:	2208      	movs	r2, #8
+  53625a:	1d69      	adds	r1, r5, #5
+  53625c:	4e62      	ldr	r6, [pc, #392]	@ (0x5363e8)
+  53625e:	f896 0039 	ldrb.w	r0, [r6, #57]	@ 0x39
+  536262:	eb06 07c0 	add.w	r7, r6, r0, lsl #3
+  536266:	0038      	movs	r0, r7
+  536268:	f703 fcbc 	bl	0x439be4
+  53626c:	f896 0039 	ldrb.w	r0, [r6, #57]	@ 0x39
+  536270:	2803      	cmp	r0, #3
+  536272:	db01      	blt.n	0x536278
+  536274:	2000      	movs	r0, #0
+  536276:	e002      	b.n	0x53627e
+  536278:	f896 0039 	ldrb.w	r0, [r6, #57]	@ 0x39
+  53627c:	1c40      	adds	r0, r0, #1
+  53627e:	f886 0039 	strb.w	r0, [r6, #57]	@ 0x39
+  536282:	e041      	b.n	0x536308
+  536284:	4669      	mov	r1, sp
+  536286:	4859      	ldr	r0, [pc, #356]	@ (0x5363ec)
+  536288:	f789 fbb0 	bl	0x4bf9ec
+  53628c:	0004      	movs	r4, r0
+  53628e:	f894 0034 	ldrb.w	r0, [r4, #52]	@ 0x34
+  536292:	2803      	cmp	r0, #3
+  536294:	d007      	beq.n	0x5362a6
+  536296:	f894 0034 	ldrb.w	r0, [r4, #52]	@ 0x34
+  53629a:	2801      	cmp	r0, #1
+  53629c:	d003      	beq.n	0x5362a6
+  53629e:	f894 0034 	ldrb.w	r0, [r4, #52]	@ 0x34
+  5362a2:	2804      	cmp	r0, #4
+  5362a4:	d103      	bne.n	0x5362ae
+  5362a6:	2110      	movs	r1, #16
+  5362a8:	1d68      	adds	r0, r5, #5
+  5362aa:	f037 fb21 	bl	0x56d8f0
+  5362ae:	e02b      	b.n	0x536308
+  5362b0:	4669      	mov	r1, sp
+  5362b2:	484f      	ldr	r0, [pc, #316]	@ (0x5363f0)
+  5362b4:	f789 fb9a 	bl	0x4bf9ec
+  5362b8:	0004      	movs	r4, r0
+  5362ba:	e025      	b.n	0x536308
+  5362bc:	4669      	mov	r1, sp
+  5362be:	484d      	ldr	r0, [pc, #308]	@ (0x5363f4)
+  5362c0:	f789 fb94 	bl	0x4bf9ec
+  5362c4:	0004      	movs	r4, r0
+  5362c6:	e01f      	b.n	0x536308
+  5362c8:	f789 fb72 	bl	0x4bf9b0
+  5362cc:	4e46      	ldr	r6, [pc, #280]	@ (0x5363e8)
+  5362ce:	4669      	mov	r1, sp
+  5362d0:	f116 0028 	adds.w	r0, r6, #40	@ 0x28
+  5362d4:	f789 fb8a 	bl	0x4bf9ec
+  5362d8:	2800      	cmp	r0, #0
+  5362da:	d1f5      	bne.n	0x5362c8
+  5362dc:	4669      	mov	r1, sp
+  5362de:	f116 0030 	adds.w	r0, r6, #48	@ 0x30
+  5362e2:	f789 fb83 	bl	0x4bf9ec
+  5362e6:	2800      	cmp	r0, #0
+  5362e8:	d005      	beq.n	0x5362f6
+  5362ea:	f789 fb61 	bl	0x4bf9b0
+  5362ee:	e7f5      	b.n	0x5362dc
+  5362f0:	0020      	movs	r0, r4
+  5362f2:	f789 fb5d 	bl	0x4bf9b0
+  5362f6:	4669      	mov	r1, sp
+  5362f8:	f116 0020 	adds.w	r0, r6, #32
+  5362fc:	f789 fb76 	bl	0x4bf9ec
+  536300:	0004      	movs	r4, r0
+  536302:	2c00      	cmp	r4, #0
+  536304:	d1f4      	bne.n	0x5362f0
+  536306:	e7ff      	b.n	0x536308
+  536308:	2c00      	cmp	r4, #0
+  53630a:	d00a      	beq.n	0x536322
+  53630c:	f89d 2000 	ldrb.w	r2, [sp]
+  536310:	0029      	movs	r1, r5
+  536312:	0020      	movs	r0, r4
+  536314:	4b34      	ldr	r3, [pc, #208]	@ (0x5363e8)
+  536316:	f894 4034 	ldrb.w	r4, [r4, #52]	@ 0x34
+  53631a:	eb03 0384 	add.w	r3, r3, r4, lsl #2
+  53631e:	6bdb      	ldr	r3, [r3, #60]	@ 0x3c
+  536320:	4798      	blx	r3
+  536322:	bdf1      	pop	{r0, r4, r5, r6, r7, pc}

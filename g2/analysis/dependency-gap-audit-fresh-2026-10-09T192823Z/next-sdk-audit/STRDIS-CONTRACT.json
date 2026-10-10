@@ -1,0 +1,181 @@
+{
+  "status": "PASS",
+  "sources": [
+    {
+      "zip_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/mcu/apollo510/hal/mcu/am_hal_iom.c",
+      "sha256": "cb8024be21b6b86171637d9bd33170e720a56944933635b0940939a2fdcc63f2",
+      "bytes": 177446
+    },
+    {
+      "zip_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/CMSIS/AmbiqMicro/Include/apollo510.h",
+      "sha256": "1df01e4044e299c60b1cef7e13e09da6a3942db90d80b769b644dc70d0ea83e6",
+      "bytes": 10450764
+    },
+    {
+      "zip_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/docs/registers/apollo510/pages/iom_regs.html",
+      "sha256": "bcf55dd7a819beebcfc3dcd03de0f882808bc28b7f0a78600ab42f63ec177a7b",
+      "bytes": 378964
+    },
+    {
+      "zip_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/mcu/apollo510/hal/mcu/am_hal_iom.h",
+      "sha256": "491c6a96c1d1464e2a63a389abce4a0651ed5eebafa113d88879fe518767347b",
+      "bytes": 35185
+    }
+  ],
+  "baseline": {
+    "path": "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_iom.c",
+    "sha256": "a75ec905d833aa0c721e1ea7207df2d6a8adccdf57d7d1a42fb47ce0734c6530",
+    "declared_revision": "release_sdk5p1p0-366b80e084"
+  },
+  "sdk_revision": "release_sdk5p2p0-66487dd10",
+  "register": {
+    "name": "MI2CCFG",
+    "iom0_address": "0x400502c0",
+    "offset": "0x2c0",
+    "field": "STRDIS",
+    "position": 24,
+    "mask": "0x01000000",
+    "authoritative_description": "Disable detection of clock stretch events smaller than 1 cycle",
+    "reset_value": 0
+  },
+  "before": [
+    {
+      "rate_selection": "100KHZ",
+      "nominal_argument_hz": 100000,
+      "fields": {
+        "STRDIS": 0,
+        "SMPCNT": 3,
+        "SDAENDLY": 15,
+        "SCLENDLY": 0,
+        "MI2CRST": 1,
+        "SDADLY": 3,
+        "ARBEN": 0,
+        "I2CLSB": 0,
+        "ADDRSZ": 0
+      },
+      "word_hex": "0x0003f070"
+    },
+    {
+      "rate_selection": "400KHZ",
+      "nominal_argument_hz": 400000,
+      "fields": {
+        "STRDIS": 0,
+        "SMPCNT": 3,
+        "SDAENDLY": 15,
+        "SCLENDLY": 2,
+        "MI2CRST": 1,
+        "SDADLY": 3,
+        "ARBEN": 0,
+        "I2CLSB": 0,
+        "ADDRSZ": 0
+      },
+      "word_hex": "0x0003f270"
+    },
+    {
+      "rate_selection": "1MHZ",
+      "nominal_argument_hz": 1000000,
+      "fields": {
+        "STRDIS": 0,
+        "SMPCNT": 2,
+        "SDAENDLY": 3,
+        "SCLENDLY": 0,
+        "MI2CRST": 1,
+        "SDADLY": 0,
+        "ARBEN": 0,
+        "I2CLSB": 0,
+        "ADDRSZ": 0
+      },
+      "word_hex": "0x00023040"
+    }
+  ],
+  "after": [
+    {
+      "rate_selection": "100KHZ",
+      "nominal_argument_hz": 100000,
+      "fields": {
+        "STRDIS": 1,
+        "SMPCNT": 3,
+        "SDAENDLY": 15,
+        "SCLENDLY": 0,
+        "MI2CRST": 1,
+        "SDADLY": 3,
+        "ARBEN": 0,
+        "I2CLSB": 0,
+        "ADDRSZ": 0
+      },
+      "word_hex": "0x0103f070"
+    },
+    {
+      "rate_selection": "400KHZ",
+      "nominal_argument_hz": 400000,
+      "fields": {
+        "STRDIS": 1,
+        "SMPCNT": 3,
+        "SDAENDLY": 15,
+        "SCLENDLY": 2,
+        "MI2CRST": 1,
+        "SDADLY": 3,
+        "ARBEN": 0,
+        "I2CLSB": 0,
+        "ADDRSZ": 0
+      },
+      "word_hex": "0x0103f270"
+    },
+    {
+      "rate_selection": "1MHZ",
+      "nominal_argument_hz": 1000000,
+      "fields": {
+        "STRDIS": 1,
+        "SMPCNT": 2,
+        "SDAENDLY": 3,
+        "SCLENDLY": 0,
+        "MI2CRST": 1,
+        "SDADLY": 0,
+        "ARBEN": 0,
+        "I2CLSB": 0,
+        "ADDRSZ": 0
+      },
+      "word_hex": "0x01023040"
+    }
+  ],
+  "fields": {
+    "STRDIS": {
+      "position": 24,
+      "mask": 16777216
+    },
+    "SMPCNT": {
+      "position": 16,
+      "mask": 16711680
+    },
+    "SDAENDLY": {
+      "position": 12,
+      "mask": 61440
+    },
+    "SCLENDLY": {
+      "position": 8,
+      "mask": 3840
+    },
+    "MI2CRST": {
+      "position": 6,
+      "mask": 64
+    },
+    "SDADLY": {
+      "position": 4,
+      "mask": 48
+    },
+    "ARBEN": {
+      "position": 2,
+      "mask": 4
+    },
+    "I2CLSB": {
+      "position": 1,
+      "mask": 2
+    },
+    "ADDRSZ": {
+      "position": 0,
+      "mask": 1
+    }
+  },
+  "rate_comment_limit": "1MHZ branch source says settings should give approximately860kHz; no physical frequency verified",
+  "scope": "Source/header/document mapping only. Stock extent/producer/physical bus behavior unbound. No extraction or execution."
+}

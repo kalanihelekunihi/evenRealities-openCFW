@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAR Online Help</title>
+    <style>
+	body {
+		font-family: 'Titillium', Arial, sans-serif;
+		background: #fff;
+		color: #333;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
+	header {
+		background: #242424;
+		color: #fff;
+		padding: 10px 0;
+	}
+
+	.header-row1 {
+		text-align: center;
+		margin-bottom: 10px;
+	}
+
+	.header-row2 {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 40px;
+	}
+
+	.header-middle {
+		flex-grow: 14;
+		text-align: center;
+	}
+
+	.stacked-links {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	.my-pages-link {
+		color: #fff;
+		background: transparent;
+		border: 0;
+		padding: 0;
+		font-size: inherit;
+		text-decoration: none;
+		font-weight: 300;
+		font-style: normal;
+		margin: 3px 0;
+	}
+	
+	.section-heading {
+		width: 80%;
+		margin: 40px auto 10px;
+		font-size: 1.6rem;
+		font-weight: bold;
+		color: #333;
+	}
+
+.my-pages-link:hover {
+    text-decoration: underline;
+    background: transparent; /* or any other color you prefer */
+    color: #FFFFFF; /* Uncomment or set to your desired color */
+}
+
+	a {
+		color: #FFFFFF;
+		text-align: center;
+		background: #242424;
+		text-decoration: none;
+		display: inline-block;
+		padding: 40px;
+		border: 0px solid;
+		border-radius: 8px;
+		font-weight: bold;
+		transition: background-color 0.3s, color 0.3s;
+	}
+
+	a:hover {
+		background: #8C231D;
+		color: #FFFFFF;
+	}
+	
+	.logo {
+		max-width: 15%;
+		height: auto;
+		margin: 0px 0 0 30px;
+		display: block;
+	}
+
+	.product-table {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 40px;
+		width: 80%;
+		margin: 40px auto;
+		visibility: hidden;
+	}
+
+	.product-table a {
+		line-height: 1.35;         
+		visibility: visible;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 90px;           /* force same height */
+		padding: 20px 30px;         /* adjust as needed */
+		box-sizing: border-box;
+	}
+
+	@media (max-width: 768px) {
+		.product-table {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.bottom-section {
+		background: #fff;
+		padding: 20px 0;
+		text-align: center;
+		margin-top: auto;
+	}
+
+	.bottom-box {
+		background: #white;
+		padding: 0 20px;
+		display: inline-block;
+		border-radius: 5px;
+	}
+    </style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:MigrationWizIdVersion msdt:dt="string">43c2769b-74d1-43e4-92a9-730368b09428-639072002790000000</mso:MigrationWizIdVersion>
+<mso:MigrationWizId msdt:dt="string">43c2769b-74d1-43e4-92a9-730368b09428</mso:MigrationWizId>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+    <header>
+    <div style="display:flex; align-items:center; padding: 10px 40px; gap: 20px;">
+        <img src="resources/images/portal-logo.svg" alt="Company Logo" class="logo" style="margin:0;">
+        <div style="flex-grow:1; text-align:center; align-self:flex-end;">
+            <h1>IAR User Documentation</h1>
+            <p style="color:#D0D0D0;font-weight:normal">This portal provides user documentation for most IAR releases after June 30, 2025.</p>
+            <p style="color:#D0D0D0;font-weight:normal">Documentation for earlier versions and for products not included here is available from the installed software product.</p>
+        </div>
+        <div class="stacked-links" style="align-self:flex-end;">
+            <a href="https://www.iar.com" class="my-pages-link">IAR.com</a>
+            <a href="https://mypages.iar.com" class="my-pages-link">My Pages</a>
+        </div>
+    </div>
+	</header>
+<h2 class="section-heading">IAR Embedded Workbench documentation</h2>
+	<div class="product-table">
+        <div class="product-item"><a href="ewarm/10.1x/index.html">IAR Embedded Workbench for Arm</a></div>
+        <div class="product-item"><a href="ewrh850/3.2x/index.html">IAR Embedded Workbench for RH850</a></div>
+        <div class="product-item"><a href="ewriscv/3.4x/index.html">IAR Embedded Workbench for RISC-V</a></div>
+        <div class="product-item"><a href="ewrl78/5.2x/index.html">IAR Embedded Workbench for RL78</a></div>
+        <div class="product-item"><a href="ewrx/5.2x/index.html">IAR Embedded Workbench for RX</a></div>
+    </div>
+<h2 class="section-heading">日本語のユーザードキュメント</h2>
+	<div class="product-table">
+		<div class="product-item"><a href="ewarm/9.7x/index.html?lang=ja">Arm 用 IAR Embedded Workbench</a></div>
+	</div>
+<h2 class="section-heading">Debug probes and licensing documentation</h2>
+	<div class="product-table">
+        <div class="product-item"><a href="lmsc/index.html">IAR Cloud Licensing</a></div>
+        <div class="product-item"><a href="probes/index.html">IAR Debug Probes</a></div>
+    </div>
+<h2 class="section-heading">Embedded Security documentation</h2>
+	<div class="product-table">
+        <div class="product-item"><a href="orbit/6.4x/index.html">IAR Embedded Secure IP</a></div>
+        <div class="product-item"><a href="sdp/6.4x/index.html">IAR Secure Deploy – Prototyping</a></div>
+    </div>
+</body>
+</html>

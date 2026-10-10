@@ -1,0 +1,60 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-arm-tools-20261009-agent3/main-analysis-only.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00597c6c <bounded_original_thumb+0xc7d00>:
+  597c6c:	b570      	push	{r4, r5, r6, lr}
+  597c6e:	0004      	movs	r4, r0
+  597c70:	000d      	movs	r5, r1
+  597c72:	2000      	movs	r0, #0
+  597c74:	2600      	movs	r6, #0
+  597c76:	e003      	b.n	597c80 <bounded_original_thumb+0xc7d14>
+  597c78:	492b      	ldr	r1, [pc, #172]	@ (597d28 <bounded_original_thumb+0xc7dbc>)
+  597c7a:	f841 0026 	str.w	r0, [r1, r6, lsl #2]
+  597c7e:	1c76      	adds	r6, r6, #1
+  597c80:	42ae      	cmp	r6, r5
+  597c82:	d212      	bcs.n	597caa <bounded_original_thumb+0xc7d3e>
+  597c84:	01b0      	lsls	r0, r6, #6
+  597c86:	4420      	add	r0, r4
+  597c88:	301c      	adds	r0, #28
+  597c8a:	f000 f8e3 	bl	597e54 <bounded_original_thumb+0xc7ee8>
+  597c8e:	2800      	cmp	r0, #0
+  597c90:	d0f5      	beq.n	597c7e <bounded_original_thumb+0xc7d12>
+  597c92:	01b1      	lsls	r1, r6, #6
+  597c94:	4421      	add	r1, r4
+  597c96:	6b49      	ldr	r1, [r1, #52]	@ 0x34
+  597c98:	69c2      	ldr	r2, [r0, #28]
+  597c9a:	4291      	cmp	r1, r2
+  597c9c:	dbec      	blt.n	597c78 <bounded_original_thumb+0xc7d0c>
+  597c9e:	2000      	movs	r0, #0
+  597ca0:	491f      	ldr	r1, [pc, #124]	@ (597d20 <bounded_original_thumb+0xc7db4>)
+  597ca2:	6008      	str	r0, [r1, #0]
+  597ca4:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  597ca8:	e000      	b.n	597cac <bounded_original_thumb+0xc7d40>
+  597caa:	2000      	movs	r0, #0
+  597cac:	bd70      	pop	{r4, r5, r6, pc}
+  597cae:	b538      	push	{r3, r4, r5, lr}
+  597cb0:	4c1e      	ldr	r4, [pc, #120]	@ (597d2c <bounded_original_thumb+0xc7dc0>)
+  597cb2:	7820      	ldrb	r0, [r4, #0]
+  597cb4:	2800      	cmp	r0, #0
+  597cb6:	d002      	beq.n	597cbe <bounded_original_thumb+0xc7d52>
+  597cb8:	4819      	ldr	r0, [pc, #100]	@ (597d20 <bounded_original_thumb+0xc7db4>)
+  597cba:	6800      	ldr	r0, [r0, #0]
+  597cbc:	e00e      	b.n	597cdc <bounded_original_thumb+0xc7d70>
+  597cbe:	4819      	ldr	r0, [pc, #100]	@ (597d24 <bounded_original_thumb+0xc7db8>)
+  597cc0:	491b      	ldr	r1, [pc, #108]	@ (597d30 <bounded_original_thumb+0xc7dc4>)
+  597cc2:	6001      	str	r1, [r0, #0]
+  597cc4:	4d16      	ldr	r5, [pc, #88]	@ (597d20 <bounded_original_thumb+0xc7db4>)
+  597cc6:	2102      	movs	r1, #2
+  597cc8:	6029      	str	r1, [r5, #0]
+  597cca:	6829      	ldr	r1, [r5, #0]
+  597ccc:	6800      	ldr	r0, [r0, #0]
+  597cce:	f7ff ffcd 	bl	597c6c <bounded_original_thumb+0xc7d00>
+  597cd2:	2800      	cmp	r0, #0
+  597cd4:	d101      	bne.n	597cda <bounded_original_thumb+0xc7d6e>
+  597cd6:	2001      	movs	r0, #1
+  597cd8:	7020      	strb	r0, [r4, #0]
+  597cda:	6828      	ldr	r0, [r5, #0]
+  597cdc:	bd32      	pop	{r1, r4, r5, pc}

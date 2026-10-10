@@ -1,0 +1,28 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/final-source-boundary/audio_in.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_audio_in_exit:
+
+00000000 <gx_audio_in_exit>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_audio_in_exit>
+			2: R_CKCORE_PCREL_IMM26BY2	_ain_reset
+   6:	3100      	movi      	r1, 0
+   8:	3003      	movi      	r0, 3
+   a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   e:	3100      	movi      	r1, 0
+  10:	3002      	movi      	r0, 2
+  12:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			12: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  16:	3100      	movi      	r1, 0
+  18:	3008      	movi      	r0, 8
+  1a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			1a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  1e:	3100      	movi      	r1, 0
+  20:	3007      	movi      	r0, 7
+  22:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			22: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  26:	3000      	movi      	r0, 0
+  28:	1490      	pop      	r15

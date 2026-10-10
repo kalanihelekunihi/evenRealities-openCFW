@@ -1,0 +1,30 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/pmu_ctrl.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_pmu_get_wakeup_source:
+
+00000000 <gx_pmu_get_wakeup_source>:
+   0:	33a0      	movi      	r3, 160
+   2:	4378      	lsli      	r3, r3, 24
+   4:	936d      	ld.w      	r3, (r3, 0x34)
+   6:	e4432001 	andi      	r2, r3, 1
+   a:	e9220014 	bnez      	r2, 0x32	// 32 <gx_pmu_get_wakeup_source+0x32>
+   e:	e4432004 	andi      	r2, r3, 4
+  12:	e9220012 	bnez      	r2, 0x36	// 36 <gx_pmu_get_wakeup_source+0x36>
+  16:	e4432008 	andi      	r2, r3, 8
+  1a:	e9220010 	bnez      	r2, 0x3a	// 3a <gx_pmu_get_wakeup_source+0x3a>
+  1e:	e4632002 	andi      	r3, r3, 2
+  22:	e923000e 	bnez      	r3, 0x3e	// 3e <gx_pmu_get_wakeup_source+0x3e>
+  26:	ea23a001 	movih      	r3, 40961
+  2a:	930b      	ld.w      	r0, (r3, 0x2c)
+  2c:	e4002001 	andi      	r0, r0, 1
+  30:	783c      	jmp      	r15
+  32:	3002      	movi      	r0, 2
+  34:	07fe      	br      	0x30	// 30 <gx_pmu_get_wakeup_source+0x30>
+  36:	3003      	movi      	r0, 3
+  38:	07fc      	br      	0x30	// 30 <gx_pmu_get_wakeup_source+0x30>
+  3a:	3005      	movi      	r0, 5
+  3c:	07fa      	br      	0x30	// 30 <gx_pmu_get_wakeup_source+0x30>
+  3e:	3004      	movi      	r0, 4
+  40:	07f8      	br      	0x30	// 30 <gx_pmu_get_wakeup_source+0x30>

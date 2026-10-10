@@ -1,0 +1,26 @@
+[
+  {
+    "page": 503,
+    "text": "࿉ํ E804൭Ҩ\n15.79 PNEG.S16.S֥16ᆷ਷\nᆷ਷\nمpneg.s16.s rz, rx\nҠቔ Rz[31:16] = Saturate(neg(Rx[31:16]))\nRz[15:0] = Saturate(neg(Rx[15:0]))\nݔࢲթᄝ 32 ໊ᆷ਷b\npneg.s16.s rz, rx\nඪૼğؓRx϶ሳູ 0x8000ູ\n0x7FFF၂ဢb\n႕ ཙ ѓ\nᆽ໊ğ\n໭႕ཙ\nཋᇅğ ໭\nၳӈğ ໭\n32 ໊ᆷ\n਷\nҠቔğ Rz[31:16] = Saturate(neg(Rx[31:16]))\nRz[15:0] = Saturate(neg(Rx[15:0]))\nمğ pneg.s16.s rz, rx\nඪૼğؓRx϶ሳູ 0x8000ູ\n0x7FFF၂ဢb\n႕ ཙ ѓ\nᆽ໊ğ\n໭႕ཙ\nཋᇅğ ໭\nၳӈğ ໭\nൔğ\n๭ 15.79: PNEG.S16.S\nwww.xrvm.cn 486 ©ඳ~ϱಃ෮Ⴕ"
+  },
+  {
+    "page": 570,
+    "text": "࿉ํ E804൭Ҩ\n15.125 MULCA.S16.S֥16ᆷ਷\n߄\nᆷ਷\nمmulca.s16.s rz, rx, ry\nҠቔ if(Rx[31:0] = 32nh80008000 && Ry[31:0] = 32nh80008000)\nRz[31:0] = 32nh7FFF FFFF\nelse\nRz[31:0] = Rx[31:16] X Ry[31:16] + Rx[15:0] X Ry[15:0]\nࢲ\nݔ\nթᄝ 32 ໊ᆷ਷b\nmulca.s16.s rz, rx, ry\nඪૼğ Rx϶ሳა Ry϶ሳཌྷӰđRx϶ሳა Ry֒\nRx=0x80008000 ౏ Ry= 0x80008000ԩ৘ູ 0x7FFF FFFFb\n႕ ཙ\nѓ ᆽ\n໊ğ\n໭႕ཙ\nཋᇅğ ໭\nၳӈğ ໭\n32 ໊\nᆷ਷\nҠቔğ if(Rx[31:0] = 32nh80008000 && Ry[31:0] = 32nh80008000)\nRz[31:0] = 32nh7FFF FFFF\nelse\nRz[31:0] = Rx[31:16] X Ry[31:16] + Rx[15:0] X Ry[15:0]\nمğ mulca.s16.s rz, rx, ry\nඪૼğ Rx϶ሳა Ry϶ሳཌྷӰđRx϶ሳა Ry֒\nRx=0x80008000 ౏ Ry= 0x80008000ԩ৘ູ 0x7FFF FFFFb\n႕ ཙ\nѓ ᆽ\n໊ğ\n໭႕ཙ\nཋᇅğ ໭\nၳӈğ ໭\nൔğ\nwww.xrvm.cn 553 ©ඳ~ϱಃ෮Ⴕ"
+  },
+  {
+    "page": 571,
+    "text": "࿉ํ E804൭Ҩ\n๭ 15.125: MULCA.S16.S\n15.126 MULCAX.S16.S֥16ᆷ\n਷\n߄\nᆷ਷\nمmulcax.s16.s rz, rx, ry\nҠቔ if(Rx[31:0] = 32nh80008000 && Ry[31:0] = 32nh80008000)\nRz[31:0] = 32nh7FFF FFFF\nelse\nRz[31:0] = Rx[31:16] X Ry[15:0] + Rx[15:0] X Ry[31:16]\nࢲ\nݔ\nթᄝ 32 ໊ᆷ਷b\nmulcax.s16.s rz, rx, ry\nඪૼğ Rx϶ሳა Ry϶ሳཌྷӰđRx϶ሳა Ry֒\nRx=0x80008000 ౏ Ry= 0x80008000ԩ৘ູ 0x7FFF FFFFb\n႕ ཙ\nѓ ᆽ\n໊ğ\n໭႕ཙ\nཋᇅğ ໭\nၳӈğ ໭\nᆷ ਷\nൔğ\nwww.xrvm.cn 554 ©ඳ~ϱಃ෮Ⴕ"
+  },
+  {
+    "page": 575,
+    "text": "࿉ํ E804൭Ҩ\n15.130 MULACA.S16.S֥16ᆷ\n਷\nᆷ਷\nمmulaca.s16.s rz, rx, ry\nҠቔ Rz[31:0] = Saturate(Rz[31:0] + Rx[31:16] X Ry[31:16] + Rx[15:0] X Ry[15:0])\nݔࢲթᄝ 32 ໊ᆷ਷b\nmulaca.s16.s rz, rx, ry\nඪ\nૼğ\nRx϶ሳა Ry϶ሳཌྷӰđRx϶ሳა Ryѩა Rz\nթೆ Rzb\nᆴ0x7FFF FFFFཬႿ\nᆴ 0x8000 0000Чദb\n႕\nཙ\nѓ\nᆽ\n໊ğ\n໭႕ཙ\nཋ\nᇅğ\n໭\nၳ\nӈğ\n໭\nwww.xrvm.cn 558 ©ඳ~ϱಃ෮Ⴕ"
+  },
+  {
+    "page": 576,
+    "text": "࿉ํ E804൭Ҩ\n32\n໊\nᆷ\n਷\nҠ\nቔğ\nRz[31:0] = Saturate(Rz[31:0] + Rx[31:16] X Ry[31:16] + Rx[15:0] X Ry[15:0])\nე\nمğ\nmulaca.s16.s rz, rx, ry\nඪ\nૼğ\nRx϶ሳა Ry϶ሳཌྷӰđRx϶ሳა Ryѩა Rz\nթೆ Rzb\nᆴ0x7FFF FFFFཬႿ\nᆴ 0x8000 0000Чദb\n႕\nཙ\nѓ\nᆽ\n໊ğ\n໭႕ཙ\nཋ\nᇅğ\n໭\nၳ\nӈğ\n໭\nൔğ\n๭ 15.130: MULACA.S16.S\n15.131 MULACAX.S16.S֥16ࡆ\nᆷ਷\nᆷ਷\nمmulacax.s16.s rz, rx, ry\nҠቔ Rz[31:0] = Saturate(Rz[31:0] + Rx[31:16] X Ry[15:0] + Rx[15:0] X Ry[31:16])\nݔࢲթᄝ 32 ໊ᆷ਷b\nmulacax.s16.s rz, rx, ry\nwww.xrvm.cn 559 ©ඳ~ϱಃ෮Ⴕ"
+  },
+  {
+    "page": 577,
+    "text": "࿉ํ E804൭Ҩ\nඪ\nૼğ\nRx϶ሳა Ry϶ሳཌྷӰđRx϶ሳა Ryѩა Rz\nթೆ Rzb\nᆴ0x7FFF FFFFཬႿ\nᆴ 0x8000 0000Чദb\n႕\nཙ\nѓ\nᆽ\n໊ğ\n໭႕ཙ\nཋ\nᇅğ\n໭\nၳ\nӈğ\n໭\n32\n໊\nᆷ\n਷\nҠ\nቔğ\nRz[31:0] = Saturate(Rz[31:0] + Rx[31:16] X Ry[15:0] + Rx[15:0] X Ry[31:16])\nე\nمğ\nmulacax.s16.s rz, rx, ry\nඪ\nૼğ\nRx϶ሳა Ry϶ሳཌྷӰđRx϶ሳა Ryѩა Rz\nթೆ Rzb\nᆴ0x7FFF FFFFཬႿ\nᆴ 0x8000 0000Чദb\n႕\nཙ\nѓ\nᆽ\n໊ğ\n໭႕ཙ\nཋ\nᇅğ\n໭\nၳ\nӈğ\n໭\nൔğ\nwww.xrvm.cn 560 ©ඳ~ϱಃ෮Ⴕ"
+  }
+]

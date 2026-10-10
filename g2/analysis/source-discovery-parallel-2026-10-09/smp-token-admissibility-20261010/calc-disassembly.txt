@@ -1,0 +1,42 @@
+
+g2/analysis/source-discovery-parallel-2026-10-09/smp-token-admissibility-20261010/calc.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00537998 <.data>:
+  537998:	b578      	push	{r3, r4, r5, r6, lr}
+  53799a:	b085      	sub	sp, #20
+  53799c:	0004      	movs	r4, r0
+  53799e:	000d      	movs	r5, r1
+  5379a0:	0016      	movs	r6, r2
+  5379a2:	0019      	movs	r1, r3
+  5379a4:	a801      	add	r0, sp, #4
+  5379a6:	f00b f854 	bl	0x542a52
+  5379aa:	0031      	movs	r1, r6
+  5379ac:	a803      	add	r0, sp, #12
+  5379ae:	f00b f850 	bl	0x542a52
+  5379b2:	200b      	movs	r0, #11
+  5379b4:	9000      	str	r0, [sp, #0]
+  5379b6:	f894 303d 	ldrb.w	r3, [r4, #61]	@ 0x3d
+  5379ba:	b29b      	uxth	r3, r3
+  5379bc:	f8df 04fc 	ldr.w	r0, [pc, #1276]	@ 0x537ebc
+  5379c0:	f890 20ec 	ldrb.w	r2, [r0, #236]	@ 0xec
+  5379c4:	a901      	add	r1, sp, #4
+  5379c6:	0028      	movs	r0, r5
+  5379c8:	f7fe fd2d 	bl	0x536426
+  5379cc:	f884 0041 	strb.w	r0, [r4, #65]	@ 0x41
+  5379d0:	f894 0041 	ldrb.w	r0, [r4, #65]	@ 0x41
+  5379d4:	28ff      	cmp	r0, #255	@ 0xff
+  5379d6:	d109      	bne.n	0x5379ec
+  5379d8:	2008      	movs	r0, #8
+  5379da:	f88d 0003 	strb.w	r0, [sp, #3]
+  5379de:	2003      	movs	r0, #3
+  5379e0:	f88d 0002 	strb.w	r0, [sp, #2]
+  5379e4:	4669      	mov	r1, sp
+  5379e6:	0020      	movs	r0, r4
+  5379e8:	f037 fa3b 	bl	0x56ee62
+  5379ec:	b006      	add	sp, #24
+  5379ee:	bd70      	pop	{r4, r5, r6, pc}
+  5379f0:	4348      	muls	r0, r1
+  5379f2:	0049      	lsls	r1, r1, #1

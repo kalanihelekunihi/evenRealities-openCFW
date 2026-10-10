@@ -1,0 +1,216 @@
+{
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "extents": [
+    {
+      "start": "0x4cff9a",
+      "end": "0x4cffc2",
+      "sha256": "28f5a5f4c0ce20ce58272435bbb3791fc904e17324a44792ffd7f127ee9a5ab8"
+    },
+    {
+      "start": "0x4d0484",
+      "end": "0x4d04e6",
+      "sha256": "c799c8e18bdca28b4c52fa8e0ceec563774f219aa7d1f8d6254a5e3857f94995"
+    },
+    {
+      "start": "0x4cff42",
+      "end": "0x4cff6c",
+      "sha256": "e389e5a5f50d7749fe6d0c50b1e40d670ac9cd459739e7af4214dfb37c4e6946"
+    },
+    {
+      "start": "0x4cfec2",
+      "end": "0x4cfeee",
+      "sha256": "f394d056140fedcadb44094bfa210ed5a74f4353c204a797fedc59cb24f05de3"
+    },
+    {
+      "start": "0x4d0722",
+      "end": "0x4d0744",
+      "sha256": "13a5cfb9e7c0787b215d02f411726522b18926adfcbbfaf4e64c0f73526e8539"
+    },
+    {
+      "start": "0x4d0744",
+      "end": "0x4d0802",
+      "sha256": "bf61aff3a89d3499fe24bac533b009e7c24d8e5b6aadf1fed383ef0984f9b94c"
+    }
+  ],
+  "mapping_cases": 3560,
+  "all_passed": true,
+  "unicorn_version": "2.1.4",
+  "locate_prefix": [
+    {
+      "size": "0x0",
+      "mapping": [
+        0,
+        0
+      ],
+      "reached_search_provider": false
+    },
+    {
+      "size": "0x1",
+      "mapping": [
+        0,
+        0
+      ],
+      "reached_search_provider": true
+    },
+    {
+      "size": "0xc",
+      "mapping": [
+        0,
+        3
+      ],
+      "reached_search_provider": true
+    },
+    {
+      "size": "0x7f",
+      "mapping": [
+        0,
+        31
+      ],
+      "reached_search_provider": true
+    },
+    {
+      "size": "0x80",
+      "mapping": [
+        1,
+        0
+      ],
+      "reached_search_provider": true
+    },
+    {
+      "size": "0x3effffff",
+      "mapping": [
+        23,
+        31
+      ],
+      "reached_search_provider": true
+    },
+    {
+      "size": "0x3f000000",
+      "mapping": [
+        23,
+        31
+      ],
+      "reached_search_provider": true
+    },
+    {
+      "size": "0x3f000001",
+      "mapping": [
+        24,
+        0
+      ],
+      "reached_search_provider": false
+    },
+    {
+      "size": "0x3fffffff",
+      "mapping": [
+        24,
+        0
+      ],
+      "reached_search_provider": false
+    },
+    {
+      "size": "0x40000000",
+      "mapping": [
+        24,
+        0
+      ],
+      "reached_search_provider": false
+    },
+    {
+      "size": "0xfc000000",
+      "mapping": [
+        25,
+        31
+      ],
+      "reached_search_provider": false
+    },
+    {
+      "size": "0xfc000001",
+      "mapping": [
+        0,
+        0
+      ],
+      "reached_search_provider": true
+    },
+    {
+      "size": "0xffffffff",
+      "mapping": [
+        19,
+        31
+      ],
+      "reached_search_provider": true
+    }
+  ],
+  "adjust": [
+    {
+      "request": "0x0",
+      "adjusted": "0x0",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0x1",
+      "adjusted": "0xc",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0xb",
+      "adjusted": "0xc",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0xc",
+      "adjusted": "0xc",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0xd",
+      "adjusted": "0x10",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0x3ffffff8",
+      "adjusted": "0x3ffffff8",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0x3ffffffc",
+      "adjusted": "0x3ffffffc",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0x3ffffffd",
+      "adjusted": "0x0",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0x40000000",
+      "adjusted": "0x0",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0xfffffffc",
+      "adjusted": "0x0",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0xfffffffd",
+      "adjusted": "0xc",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0xfffffffe",
+      "adjusted": "0xc",
+      "below_max_or_zero": true
+    },
+    {
+      "request": "0xffffffff",
+      "adjusted": "0xc",
+      "below_max_or_zero": true
+    }
+  ],
+  "constants": {
+    "minimum_block": 12,
+    "block_size_max": 1073741824
+  },
+  "scope": "Original mapping_search and helpers; original block_locate prefix stops before search provider; original adjust_request_size plus align_up. No provider mocks."
+}

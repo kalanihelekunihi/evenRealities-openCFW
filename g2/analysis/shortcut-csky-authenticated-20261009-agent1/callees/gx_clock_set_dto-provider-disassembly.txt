@@ -1,0 +1,88 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/clock.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_clock_set_dto:
+
+00000000 <gx_clock_set_dto>:
+   0:	14d8      	push      	r4-r11, r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	6e07      	mov      	r8, r1
+   6:	6c7b      	mov      	r1, r14
+   8:	6d4b      	mov      	r5, r2
+   a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_dto>
+			a: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+   e:	e9200059 	bnez      	r0, 0xc0	// c0 <gx_clock_set_dto+0xc0>
+  12:	9820      	ld.w      	r1, (r14, 0x0)
+  14:	9163      	ld.w      	r3, (r1, 0xc)
+  16:	e9030055 	bez      	r3, 0xc0	// c0 <gx_clock_set_dto+0xc0>
+  1a:	8380      	ld.b      	r4, (r3, 0x0)
+  1c:	e9040052 	bez      	r4, 0xc0	// c0 <gx_clock_set_dto+0xc0>
+  20:	9861      	ld.w      	r3, (r14, 0x4)
+  22:	610c      	addu      	r4, r3
+  24:	9460      	ld.w      	r3, (r4, 0x0)
+  26:	c4035702 	zext      	r2, r3, 24, 0
+  2a:	64a2      	cmpne      	r8, r2
+  2c:	0808      	bt      	0x3c	// 3c <gx_clock_set_dto+0x3c>
+  2e:	3280      	movi      	r2, 128
+  30:	4254      	lsli      	r2, r2, 20
+  32:	6cc9      	xor      	r3, r2
+  34:	c7635763 	zext      	r3, r3, 27, 27
+  38:	64d6      	cmpne      	r5, r3
+  3a:	0c43      	bf      	0xc0	// c0 <gx_clock_set_dto+0xc0>
+  3c:	d9214004 	ld.bs      	r9, (r1, 0x4)
+  40:	3d40      	cmpnei      	r5, 0
+  42:	6543      	mvcv      	r5
+  44:	d94e2002 	ld.w      	r10, (r14, 0x8)
+  48:	d9614006 	ld.bs      	r11, (r1, 0x6)
+  4c:	e989003c 	blz      	r9, 0xc4	// c4 <gx_clock_set_dto+0xc4>
+  50:	9863      	ld.w      	r3, (r14, 0xc)
+  52:	93c0      	ld.w      	r6, (r3, 0x0)
+  54:	71a5      	lsr      	r6, r9
+  56:	e4c62001 	andi      	r6, r6, 1
+  5a:	e9060006 	bez      	r6, 0x66	// 66 <gx_clock_set_dto+0x66>
+  5e:	9845      	ld.w      	r2, (r14, 0x14)
+  60:	3301      	movi      	r3, 1
+  62:	70e4      	lsl      	r3, r9
+  64:	b260      	st.w      	r3, (r2, 0x0)
+  66:	d8ea2000 	ld.w      	r7, (r10, 0x0)
+  6a:	71ed      	lsr      	r7, r11
+  6c:	e4e72001 	andi      	r7, r7, 1
+  70:	e9070008 	bez      	r7, 0x80	// 80 <gx_clock_set_dto+0x80>
+  74:	3301      	movi      	r3, 1
+  76:	3200      	movi      	r2, 0
+  78:	6c6f      	mov      	r1, r11
+  7a:	6c2b      	mov      	r0, r10
+  7c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_dto>
+			7c: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+  80:	3380      	movi      	r3, 128
+  82:	453b      	lsli      	r1, r5, 27
+  84:	4373      	lsli      	r3, r3, 19
+  86:	6c60      	or      	r1, r8
+  88:	3200      	movi      	r2, 0
+  8a:	b460      	st.w      	r3, (r4, 0x0)
+  8c:	b440      	st.w      	r2, (r4, 0x0)
+  8e:	b460      	st.w      	r3, (r4, 0x0)
+  90:	c7412843 	bseti      	r3, r1, 26
+  94:	39b9      	bseti      	r1, 25
+  96:	39ba      	bseti      	r1, 26
+  98:	b460      	st.w      	r3, (r4, 0x0)
+  9a:	b420      	st.w      	r1, (r4, 0x0)
+  9c:	b420      	st.w      	r1, (r4, 0x0)
+  9e:	b460      	st.w      	r3, (r4, 0x0)
+  a0:	e9070008 	bez      	r7, 0xb0	// b0 <gx_clock_set_dto+0xb0>
+  a4:	3301      	movi      	r3, 1
+  a6:	6c8f      	mov      	r2, r3
+  a8:	6c6f      	mov      	r1, r11
+  aa:	6c2b      	mov      	r0, r10
+  ac:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_dto>
+			ac: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+  b0:	e9060008 	bez      	r6, 0xc0	// c0 <gx_clock_set_dto+0xc0>
+  b4:	9844      	ld.w      	r2, (r14, 0x10)
+  b6:	3301      	movi      	r3, 1
+  b8:	c5234029 	lsl      	r9, r3, r9
+  bc:	dd222000 	st.w      	r9, (r2, 0x0)
+  c0:	1406      	addi      	r14, r14, 24
+  c2:	1498      	pop      	r4-r11, r15
+  c4:	3600      	movi      	r6, 0
+  c6:	07d0      	br      	0x66	// 66 <gx_clock_set_dto+0x66>

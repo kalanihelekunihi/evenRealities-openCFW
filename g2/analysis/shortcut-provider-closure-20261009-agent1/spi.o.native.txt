@@ -1,0 +1,52 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/spi.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.spi_write_then_read:
+
+00000000 <spi_write_then_read>:
+   0:	14d5      	push      	r4-r8, r15
+   2:	143b      	subi      	r14, r14, 108
+   4:	6d8b      	mov      	r6, r2
+   6:	6d03      	mov      	r4, r0
+   8:	322c      	movi      	r2, 44
+   a:	6e07      	mov      	r8, r1
+   c:	6c3b      	mov      	r0, r14
+   e:	3100      	movi      	r1, 0
+  10:	6dcf      	mov      	r7, r3
+  12:	99a1      	ld.w      	r5, (r14, 0x84)
+  14:	e0000000 	bsr      	0x0	// 0 <memset>
+			14: R_CKCORE_PCREL_IMM26BY2	memset
+  18:	3240      	movi      	r2, 64
+  1a:	3100      	movi      	r1, 0
+  1c:	180b      	addi      	r0, r14, 44
+  1e:	ddce2000 	st.w      	r14, (r14, 0x0)
+  22:	ddce2001 	st.w      	r14, (r14, 0x4)
+  26:	e0000000 	bsr      	0x0	// 0 <memset>
+			26: R_CKCORE_PCREL_IMM26BY2	memset
+  2a:	e906000a 	bez      	r6, 0x3e	// 3e <spi_write_then_read+0x3e>
+  2e:	9841      	ld.w      	r2, (r14, 0x4)
+  30:	1911      	addi      	r1, r14, 68
+  32:	b8cd      	st.w      	r6, (r14, 0x34)
+  34:	b821      	st.w      	r1, (r14, 0x4)
+  36:	ddce2011 	st.w      	r14, (r14, 0x44)
+  3a:	b852      	st.w      	r2, (r14, 0x48)
+  3c:	b220      	st.w      	r1, (r2, 0x0)
+  3e:	e905000a 	bez      	r5, 0x52	// 52 <spi_write_then_read+0x52>
+  42:	9841      	ld.w      	r2, (r14, 0x4)
+  44:	1919      	addi      	r1, r14, 100
+  46:	b8b5      	st.w      	r5, (r14, 0x54)
+  48:	b821      	st.w      	r1, (r14, 0x4)
+  4a:	ddce2019 	st.w      	r14, (r14, 0x64)
+  4e:	b85a      	st.w      	r2, (r14, 0x68)
+  50:	b220      	st.w      	r1, (r2, 0x0)
+  52:	9460      	ld.w      	r3, (r4, 0x0)
+  54:	dd0e200b 	st.w      	r8, (r14, 0x2c)
+  58:	b8f4      	st.w      	r7, (r14, 0x50)
+  5a:	b882      	st.w      	r4, (r14, 0x8)
+  5c:	9363      	ld.w      	r3, (r3, 0xc)
+  5e:	6c7b      	mov      	r1, r14
+  60:	6c13      	mov      	r0, r4
+  62:	7bcd      	jsr      	r3
+  64:	141b      	addi      	r14, r14, 108
+  66:	1495      	pop      	r4-r8, r15

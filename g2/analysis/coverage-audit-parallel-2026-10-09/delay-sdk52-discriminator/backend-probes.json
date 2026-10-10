@@ -1,0 +1,29 @@
+{
+  "host": {
+    "exit_code": 132,
+    "last_checkpoints": [
+      "import 2.1.4",
+      "create",
+      "cpu"
+    ],
+    "crash_before_guest_execution": true,
+    "precise_native_cause": "unknown"
+  },
+  "existing_linux_container": {
+    "name": "opencfw-lz4-20261009t211300",
+    "exit_code": 0,
+    "checkpoints": [
+      "import 2.1.4",
+      "create",
+      "cpu",
+      "map",
+      "FPSCR 0",
+      "CPACR memory seeded",
+      "integer 1",
+      "VMOV",
+      "VCVT 0"
+    ]
+  },
+  "packages_installed": false,
+  "host_security_changes": false
+}

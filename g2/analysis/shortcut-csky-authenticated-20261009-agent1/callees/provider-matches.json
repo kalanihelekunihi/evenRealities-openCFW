@@ -1,0 +1,192 @@
+[
+  {
+    "name": "gx_clock_set_source",
+    "target_runtime": 268585932,
+    "object": "clock.o",
+    "section": ".text.gx_clock_set_source",
+    "length": 20,
+    "relocations": [
+      [
+        10,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__reg_set_val"
+      ]
+    ],
+    "equal_outside_named_relocations": true,
+    "candidate_sha256": "ba443698d28c5313753f381c6f1672259ece08b69c786cf796ea7faaa05b28e5",
+    "stock_sha256": "390a8be62e73d098ca9e860d1f5b708fc57d081ce047815c999afe94523054f1"
+  },
+  {
+    "name": "gx_clock_set_module_source",
+    "target_runtime": 268585952,
+    "object": "clock.o",
+    "section": ".text.gx_clock_set_module_source",
+    "length": 400,
+    "relocations": [
+      [
+        50,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__module_get_info"
+      ],
+      [
+        192,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__reg_set_val"
+      ],
+      [
+        250,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__reg_set_val"
+      ],
+      [
+        380,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__reg_set_val"
+      ],
+      [
+        396,
+        "R_CKCORE_ADDR32",
+        ".data"
+      ]
+    ],
+    "equal_outside_named_relocations": true,
+    "candidate_sha256": "677fea065331cb477f307e57b56c9d09f6348cefeeb89ece4e3477470b74808d",
+    "stock_sha256": "cf4ba169713b50cb4649125379797a1fcb7d91ea61a35c7d5eff349aac34058b"
+  },
+  {
+    "name": "gx_clock_set_div",
+    "target_runtime": 268586488,
+    "object": "clock.o",
+    "section": ".text.gx_clock_set_div",
+    "length": 330,
+    "relocations": [
+      [
+        12,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__module_get_info"
+      ],
+      [
+        48,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__module_get_div.isra.1"
+      ],
+      [
+        182,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__reg_set_val"
+      ],
+      [
+        304,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__reg_set_val"
+      ]
+    ],
+    "equal_outside_named_relocations": true,
+    "candidate_sha256": "156f845e493b0d82ee030fdc072a6f6a34b9f5871a8e40cf1c5c70179403224a",
+    "stock_sha256": "ecf3491afe25941efd6e53756c1b08884024781bdedb47bac69b5d122dd79401"
+  },
+  {
+    "name": "gx_clock_set_dto",
+    "target_runtime": 268586820,
+    "object": "clock.o",
+    "section": ".text.gx_clock_set_dto",
+    "length": 200,
+    "relocations": [
+      [
+        10,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__module_get_info"
+      ],
+      [
+        124,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__reg_set_val"
+      ],
+      [
+        172,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__reg_set_val"
+      ]
+    ],
+    "equal_outside_named_relocations": true,
+    "candidate_sha256": "6246ee0028b452e6d35d18c67ffd63cd5149cf2dab50c60ef2fff138b2579c08",
+    "stock_sha256": "23b2fb6dfed6411b2e7a06fc679616588b9f61928213f54b9ccd31613ae19475"
+  },
+  {
+    "name": "gx_clock_set_pll",
+    "target_runtime": 268587104,
+    "object": "clock.o",
+    "section": ".text.gx_clock_set_pll",
+    "length": 32,
+    "relocations": [
+      [
+        4,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "_clk_set_pll"
+      ]
+    ],
+    "equal_outside_named_relocations": true,
+    "candidate_sha256": "301fc64c30f723be197b076bf8ce68e0d325a48c344c3b09b41034ecb7e755ec",
+    "stock_sha256": "9549878966cecacfde5bc722750a38b7b30038195b56fdacc2cd7e06084bcaa7"
+  },
+  {
+    "name": "gx_clock_set_module_enable",
+    "target_runtime": 268587136,
+    "object": "clock.o",
+    "section": ".text.gx_clock_set_module_enable",
+    "length": 256,
+    "relocations": [
+      [
+        24,
+        "R_CKCORE_ADDR32",
+        ".rodata"
+      ],
+      [
+        34,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__module_get_info"
+      ],
+      [
+        130,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "__module_get_info"
+      ],
+      [
+        164,
+        "R_CKCORE_ADDR32",
+        ".rodata+0x48"
+      ]
+    ],
+    "equal_outside_named_relocations": true,
+    "candidate_sha256": "2a9f3e26f6e2394bfe11f5a9182a8146f6ad57bd136b6ec607d509a6e5c5e777",
+    "stock_sha256": "3b7098dbdad7b4aa8a49035c26ce58a6939e6a14c41ea0b6d37370265c6ca6f6"
+  },
+  {
+    "name": "gx_analog_set_ldo_ana_voltage",
+    "target_runtime": 268584688,
+    "object": "ldo.o",
+    "section": ".text.gx_analog_set_ldo_ana_voltage",
+    "length": 32,
+    "relocations": [],
+    "equal_outside_named_relocations": true,
+    "candidate_sha256": "1821e235b0f31e6c05e200cbc729d31394f18e843d259df67fc9baa6d07b936c",
+    "stock_sha256": "1821e235b0f31e6c05e200cbc729d31394f18e843d259df67fc9baa6d07b936c"
+  },
+  {
+    "name": "gx_analog_set_ldo_dig_voltage",
+    "target_runtime": 268584752,
+    "object": "ldo.o",
+    "section": ".text.gx_analog_set_ldo_dig_voltage",
+    "length": 44,
+    "relocations": [
+      [
+        34,
+        "R_CKCORE_PCREL_IMM26BY2",
+        "gx_pmu_ctrl_set"
+      ]
+    ],
+    "equal_outside_named_relocations": true,
+    "candidate_sha256": "1308e9f13d918e5ce105a87befeacc5019a35e2948e33175eb9e43c7e58c54f2",
+    "stock_sha256": "a5c2d9e2bbd1fc60f43afbed620510ccac0546aa4fa3b56b38c216aeb545824f"
+  }
+]

@@ -1,0 +1,221 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/dw_rtc.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.rtc_isr:
+
+00000000 <rtc_isr>:
+   0:	14d0      	push      	r15
+   2:	1046      	lrw      	r2, 0x0	// 18 <rtc_isr+0x18>
+   4:	9260      	ld.w      	r3, (r2, 0x0)
+   6:	e9030007 	bez      	r3, 0x14	// 14 <rtc_isr+0x14>
+   a:	9221      	ld.w      	r1, (r2, 0x4)
+   c:	7bcd      	jsr      	r3
+   e:	1064      	lrw      	r3, 0xa0003000	// 1c <rtc_isr+0x1c>
+  10:	9366      	ld.w      	r3, (r3, 0x18)
+  12:	1490      	pop      	r15
+  14:	6c0f      	mov      	r0, r3
+  16:	07fc      	br      	0xe	// e <rtc_isr+0xe>
+  18:	00000000 	.long	0x00000000
+			18: R_CKCORE_ADDR32	.bss
+  1c:	a0003000 	.long	0xa0003000
+
+Disassembly of section .text.gx_rtc_start_tick:
+
+00000000 <gx_rtc_start_tick>:
+   0:	1043      	lrw      	r2, 0xa0003000	// c <gx_rtc_start_tick+0xc>
+   2:	9263      	ld.w      	r3, (r2, 0xc)
+   4:	ec630004 	ori      	r3, r3, 4
+   8:	b263      	st.w      	r3, (r2, 0xc)
+   a:	783c      	jmp      	r15
+   c:	a0003000 	.long	0xa0003000
+
+Disassembly of section .text.gx_rtc_stop_tick:
+
+00000000 <gx_rtc_stop_tick>:
+   0:	1043      	lrw      	r2, 0xa0003000	// c <gx_rtc_stop_tick+0xc>
+   2:	9263      	ld.w      	r3, (r2, 0xc)
+   4:	3b82      	bclri      	r3, 2
+   6:	b263      	st.w      	r3, (r2, 0xc)
+   8:	783c      	jmp      	r15
+   a:	0000      	.short	0x0000
+   c:	a0003000 	.long	0xa0003000
+
+Disassembly of section .text.gx_rtc_set_tick:
+
+00000000 <gx_rtc_set_tick>:
+   0:	1062      	lrw      	r3, 0xa0003000	// 8 <gx_rtc_set_tick+0x8>
+   2:	b302      	st.w      	r0, (r3, 0x8)
+   4:	783c      	jmp      	r15
+   6:	0000      	.short	0x0000
+   8:	3000      	.short	0x3000
+   a:	a000      	.short	0xa000
+
+Disassembly of section .text.gx_rtc_get_tick:
+
+00000000 <gx_rtc_get_tick>:
+   0:	1062      	lrw      	r3, 0xa0003000	// 8 <gx_rtc_get_tick+0x8>
+   2:	9360      	ld.w      	r3, (r3, 0x0)
+   4:	b060      	st.w      	r3, (r0, 0x0)
+   6:	783c      	jmp      	r15
+   8:	3000      	.short	0x3000
+   a:	a000      	.short	0xa000
+
+Disassembly of section .text.gx_rtc_init:
+
+00000000 <gx_rtc_init>:
+   0:	14d1      	push      	r4, r15
+   2:	108f      	lrw      	r4, 0xa0003000	// 3c <gx_rtc_init+0x3c>
+   4:	3101      	movi      	r1, 1
+   6:	3000      	movi      	r0, 0
+   8:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   c:	9463      	ld.w      	r3, (r4, 0xc)
+   e:	ec630010 	ori      	r3, r3, 16
+  12:	b463      	st.w      	r3, (r4, 0xc)
+  14:	3000      	movi      	r0, 0
+  16:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			16: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+  1a:	eb00ffff 	cmphsi      	r0, 65536
+  1e:	0c05      	bf      	0x28	// 28 <gx_rtc_init+0x28>
+  20:	1008      	lrw      	r0, 0x0	// 40 <gx_rtc_init+0x40>
+  22:	e0000000 	bsr      	0x0	// 0 <printf_>
+			22: R_CKCORE_PCREL_IMM26BY2	printf_
+  26:	1491      	pop      	r4, r15
+  28:	b408      	st.w      	r0, (r4, 0x20)
+  2a:	3200      	movi      	r2, 0
+  2c:	1026      	lrw      	r1, 0x0	// 44 <gx_rtc_init+0x44>
+  2e:	3004      	movi      	r0, 4
+  30:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			30: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  34:	e0000000 	bsr      	0x0	// 0 <gx_rtc_init>
+			34: R_CKCORE_PCREL_IMM26BY2	gx_rtc_start_tick
+  38:	07f7      	br      	0x26	// 26 <gx_rtc_init+0x26>
+  3a:	0000      	.short	0x0000
+  3c:	a0003000 	.long	0xa0003000
+	...
+			40: R_CKCORE_ADDR32	.rodata.str1.1
+			44: R_CKCORE_ADDR32	.text.rtc_isr
+
+Disassembly of section .text.gx_rtc_set_interrupt:
+
+00000000 <gx_rtc_set_interrupt>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	6d43      	mov      	r5, r0
+   4:	3004      	movi      	r0, 4
+   6:	6d07      	mov      	r4, r1
+   8:	e0000000 	bsr      	0x0	// 0 <gx_mask_irq>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_mask_irq
+   c:	1064      	lrw      	r3, 0x0	// 1c <gx_rtc_set_interrupt+0x1c>
+   e:	3004      	movi      	r0, 4
+  10:	b3a0      	st.w      	r5, (r3, 0x0)
+  12:	b381      	st.w      	r4, (r3, 0x4)
+  14:	e0000000 	bsr      	0x0	// 0 <gx_unmask_irq>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_unmask_irq
+  18:	3000      	movi      	r0, 0
+  1a:	1492      	pop      	r4-r5, r15
+  1c:	00000000 	.long	0x00000000
+			1c: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_rtc_set_alarm_time_s:
+
+00000000 <gx_rtc_set_alarm_time_s>:
+   0:	1065      	lrw      	r3, 0xa0003000	// 14 <gx_rtc_set_alarm_time_s+0x14>
+   2:	9340      	ld.w      	r2, (r3, 0x0)
+   4:	6008      	addu      	r0, r2
+   6:	b301      	st.w      	r0, (r3, 0x4)
+   8:	9343      	ld.w      	r2, (r3, 0xc)
+   a:	ec420001 	ori      	r2, r2, 1
+   e:	3000      	movi      	r0, 0
+  10:	b343      	st.w      	r2, (r3, 0xc)
+  12:	783c      	jmp      	r15
+  14:	a0003000 	.long	0xa0003000
+
+Disassembly of section .text.gx_rtc_exit:
+
+00000000 <gx_rtc_exit>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_rtc_exit>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_rtc_stop_tick
+   6:	3100      	movi      	r1, 0
+   8:	6c07      	mov      	r0, r1
+   a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   e:	3000      	movi      	r0, 0
+  10:	1490      	pop      	r15
+
+Disassembly of section .text.gx_rtc_suspend:
+
+00000000 <gx_rtc_suspend>:
+   0:	3000      	movi      	r0, 0
+   2:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_resume:
+
+00000000 <gx_rtc_resume>:
+   0:	3000      	movi      	r0, 0
+   2:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_start_time:
+
+00000000 <gx_rtc_start_time>:
+   0:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_stop_time:
+
+00000000 <gx_rtc_stop_time>:
+   0:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_get_time:
+
+00000000 <gx_rtc_get_time>:
+   0:	3000      	movi      	r0, 0
+   2:	2800      	subi      	r0, 1
+   4:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_set_time:
+
+00000000 <gx_rtc_set_time>:
+   0:	3000      	movi      	r0, 0
+   2:	2800      	subi      	r0, 1
+   4:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_start_alarm:
+
+00000000 <gx_rtc_start_alarm>:
+   0:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_stop_alarm:
+
+00000000 <gx_rtc_stop_alarm>:
+   0:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_get_alarm:
+
+00000000 <gx_rtc_get_alarm>:
+   0:	3000      	movi      	r0, 0
+   2:	2800      	subi      	r0, 1
+   4:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_set_alarm:
+
+00000000 <gx_rtc_set_alarm>:
+   0:	3000      	movi      	r0, 0
+   2:	2800      	subi      	r0, 1
+   4:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_mask_alarm:
+
+00000000 <gx_rtc_mask_alarm>:
+   0:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_rtc_print_time:
+
+00000000 <gx_rtc_print_time>:
+   0:	1424      	subi      	r14, r14, 16
+   2:	b800      	st.w      	r0, (r14, 0x0)
+   4:	b821      	st.w      	r1, (r14, 0x4)
+   6:	b842      	st.w      	r2, (r14, 0x8)
+   8:	b863      	st.w      	r3, (r14, 0xc)
+   a:	1404      	addi      	r14, r14, 16
+   c:	783c      	jmp      	r15

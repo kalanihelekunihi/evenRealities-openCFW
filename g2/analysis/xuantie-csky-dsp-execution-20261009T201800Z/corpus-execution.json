@@ -1,0 +1,31 @@
+{
+  "command": [
+    "/opt/homebrew/bin/docker",
+    "exec",
+    "--workdir",
+    "/out/corpus",
+    "opencfw-qemu-csky-resume-20261009t201800",
+    "timeout",
+    "25s",
+    "/tmp/qbuild2/qemu-system-cskyv2",
+    "-M",
+    "smartl",
+    "-cpu",
+    "ck804ef",
+    "-nographic",
+    "-monitor",
+    "none",
+    "-kernel",
+    "/out/harness.elf",
+    "-d",
+    "in_asm,int,guest_errors",
+    "-D",
+    "/out/corpus/qemu.log"
+  ],
+  "elf_sha256": "7b40b328624e3ae742a6c2488207a5c870096acd091f6b712246a6f50ac98e61",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "",
+  "memlog": "START ck804ef\nSMOKE copy-loop PASS\nSMOKE selected-DSP-kernels PASS\nHELPERS230 PASS\nDIFF rfft case=256 index=1 c=44668 asm=44670\n",
+  "interpretation_limit": "Finite emulator comparison with complex multiply/accumulate min-negative corner ISA-unverified; no hardware-equivalence claim"
+}

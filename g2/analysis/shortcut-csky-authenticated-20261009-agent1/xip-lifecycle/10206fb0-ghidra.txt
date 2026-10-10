@@ -1,0 +1,168 @@
+openjdk version "21.0.12.1" 2026-08-18
+OpenJDK Runtime Environment Homebrew (build 21.0.12.1)
+OpenJDK 64-Bit Server VM Homebrew (build 21.0.12.1, mixed mode)
+INFO  Using log config file: jar:file:/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /Users/kalani/Library/ghidra/ghidra_12.1.4_PUBLIC/application.log (LoggingInitialization)  
+INFO  Loading user preferences: /Users/kalani/Library/ghidra/ghidra_12.1.4_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1058 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (2765 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 93 extension points (46 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/FunctionID/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/BSim/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/Decompiler/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/PyGhidra/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Debug/Debugger/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Processors/8051/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Processors/Atmel/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Processors/JVM/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Processors/PIC/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Processors/DATA/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/SwiftDemangler/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/VersionTracking/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/BytePatterns/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/FileFormats/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/Base/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/PDB/ghidra_scripts
+    /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/Ghidra/Features/SystemEmulation/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/Xip_10206fb0 (HeadlessAnalyzer)  
+INFO  Creating project: /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/Xip_10206fb0 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/Xip_10206fb0 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin (HeadlessAnalyzer)  
+INFO  Successfully applied "-loader-baseAddr" to "Base Address" (old: "null", new: "0x10203004") (ProgramLoader)  
+INFO  Using Loader: Raw Binary (ProgramLoader)  
+INFO  Using Language/Compiler: CSKY_V2:LE:32:default:default (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/kalani/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: ExportCallee.java '0x10206fb0'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/ExportCallee.java (HeadlessAnalyzer)  
+INFO  ExportCallee.java> BODY [[10206fb0, 10206ff9]] (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fb0 ld.w r2,(r0,0x4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xb800, 4) INT_ADD (register, 0x0, 4) , (const, 0x4, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x8, 4) LOAD (const, 0x1a1, 8) , (unique, 0xb800, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fb2 ld.w r3,(r0,0x0) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xb800, 4) INT_ADD (register, 0x0, 4) , (const, 0x0, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0xc, 4) LOAD (const, 0x1a1, 8) , (unique, 0xb800, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fb4 cmpne r2,r3 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x7e00, 4) INT_AND (register, 0x200, 4) , (const, 0xfffffffe, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x7d00, 1) INT_NOTEQUAL (register, 0x8, 4) , (register, 0xc, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x7f00, 4) INT_ZEXT (unique, 0x7d00, 1) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x200, 4) INT_OR (unique, 0x7e00, 4) , (unique, 0x7f00, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fb6 bf 0x10206ff6 (GhidraScript)  
+INFO  ExportCallee.java> REF 10206fb6 CONDITIONAL_JUMP 10206ff6 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xa900, 1) SUBPIECE (register, 0x200, 4) , (const, 0x0, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xaa00, 1) INT_AND (unique, 0xa900, 1) , (const, 0x1, 1) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xab00, 1) BOOL_NEGATE (unique, 0xaa00, 1) (GhidraScript)  
+INFO  ExportCallee.java> PCODE  ---  CBRANCH (ram, 0x10206ff6, 4) , (unique, 0xab00, 1) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fb8 mov r13,r1 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x34, 4) COPY (register, 0x4, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fba subu r2,r13,r1 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x8, 4) INT_SUB (register, 0x34, 4) , (register, 0x4, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fbe ld.w r3,(r0,0x10) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xb800, 4) INT_ADD (register, 0x0, 4) , (const, 0x10, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0xc, 4) LOAD (const, 0x1a1, 8) , (unique, 0xb800, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fc0 cmplt r2,r3 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x8100, 4) INT_AND (register, 0x200, 4) , (const, 0xfffffffe, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x8000, 1) INT_SLESS (register, 0x8, 4) , (register, 0xc, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x8200, 4) INT_ZEXT (unique, 0x8000, 1) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x200, 4) INT_OR (unique, 0x8100, 4) , (unique, 0x8200, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fc2 ld.w r18,(r0,0x4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x25700, 4) INT_ADD (register, 0x0, 4) , (const, 0x4, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x48, 4) LOAD (const, 0x1a1, 8) , (unique, 0x25700, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fc6 ld.w r12,(r0,0xc) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x25700, 4) INT_ADD (register, 0x0, 4) , (const, 0xc, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x30, 4) LOAD (const, 0x1a1, 8) , (unique, 0x25700, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fca bt 0x10206fde (GhidraScript)  
+INFO  ExportCallee.java> REF 10206fca CONDITIONAL_JUMP 10206fde (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xa700, 1) SUBPIECE (register, 0x200, 4) , (const, 0x0, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xa800, 1) INT_AND (unique, 0xa700, 1) , (const, 0x1, 1) (GhidraScript)  
+INFO  ExportCallee.java> PCODE  ---  CBRANCH (ram, 0x10206fde, 4) , (unique, 0xa800, 1) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fcc addu r3,r3,r18 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0xc, 4) INT_ADD (register, 0xc, 4) , (register, 0x48, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fd0 divs r2,r3,r12 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x8, 4) INT_SDIV (register, 0xc, 4) , (register, 0x30, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fd4 mult r12,r2 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x30, 4) INT_MULT (register, 0x8, 4) , (register, 0x30, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fd6 subu r3,r12 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0xc, 4) INT_SUB (register, 0xc, 4) , (register, 0x30, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fd8 st.w r3,(r0,0x4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xbe00, 4) INT_ADD (register, 0x0, 4) , (const, 0x4, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE  ---  STORE (const, 0x1a1, 8) , (unique, 0xbe00, 4) , (register, 0xc, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fda movi r0,0x1 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x0, 4) INT_ZEXT (const, 0x1, 1) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fdc rts (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xaf00, 4) INT_AND (register, 0x3c, 4) , (const, 0xfffffffe, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE  ---  RETURN (unique, 0xaf00, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fde addu r2,r2,r18 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x8, 4) INT_ADD (register, 0x8, 4) , (register, 0x48, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fe2 divs r3,r2,r12 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0xc, 4) INT_SDIV (register, 0x8, 4) , (register, 0x30, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fe6 mult r12,r3 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x30, 4) INT_MULT (register, 0xc, 4) , (register, 0x30, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fe8 ld.w r3,(r0,0x8) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0xb800, 4) INT_ADD (register, 0x0, 4) , (const, 0x8, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0xc, 4) LOAD (const, 0x1a1, 8) , (unique, 0xb800, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fea subu r2,r12 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x8, 4) INT_SUB (register, 0x8, 4) , (register, 0x30, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206fec ldr.b r3,(r3,r2<<0) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x26400, 4) INT_LEFT (register, 0x8, 4) , (const, 0x0, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x26600, 4) INT_ADD (register, 0xc, 4) , (unique, 0x26400, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (unique, 0x26700, 1) LOAD (const, 0x1a1, 8) , (unique, 0x26600, 4) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0xc, 4) INT_ZEXT (unique, 0x26700, 1) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206ff0 stbi.b r3 (r13) (GhidraScript)  
+INFO  ExportCallee.java> PCODE  ---  STORE (const, 0x1a1, 8) , (register, 0x34, 4) , (register, 0xc, 1) (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x34, 4) INT_ADD (register, 0x34, 4) , (const, 0x1, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206ff4 br 0x10206fba (GhidraScript)  
+INFO  ExportCallee.java> REF 10206ff4 UNCONDITIONAL_JUMP 10206fba (GhidraScript)  
+INFO  ExportCallee.java> PCODE  ---  BRANCH (ram, 0x10206fba, 4) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206ff6 movi r0,0x0 (GhidraScript)  
+INFO  ExportCallee.java> PCODE (register, 0x0, 4) INT_ZEXT (const, 0x0, 1) (GhidraScript)  
+INFO  ExportCallee.java> INSN 10206ff8 br 0x10206fdc (GhidraScript)  
+INFO  ExportCallee.java> REF 10206ff8 UNCONDITIONAL_JUMP 10206fdc (GhidraScript)  
+INFO  ExportCallee.java> PCODE  ---  BRANCH (ram, 0x10206fdc, 4) (GhidraScript)  
+INFO  ExportCallee.java> DECOMPILE_COMPLETE true ERROR  (GhidraScript)  
+INFO  ExportCallee.java> 
+undefined4 callee_10206fb0(int *param_1,undefined1 *param_2)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  int iVar3;
+  undefined1 *puVar4;
+  
+  puVar4 = param_2;
+  if (param_1[1] == *param_1) {
+    uVar1 = 0;
+  }
+  else {
+    while( true ) {
+      iVar3 = param_1[3];
+      if (param_1[4] <= (int)puVar4 - (int)param_2) break;
+      iVar2 = ((int)puVar4 - (int)param_2) + param_1[1];
+      *puVar4 = *(undefined1 *)(param_1[2] + (iVar2 - (iVar2 / iVar3) * iVar3));
+      puVar4 = puVar4 + 1;
+    }
+    iVar2 = param_1[4] + param_1[1];
+    param_1[1] = iVar2 - (iVar2 / iVar3) * iVar3;
+    uVar1 = 1;
+  }
+  return uVar1;
+}
+
+ (GhidraScript)  
+INFO  /binh_a_stage2_xip.bin: file created (kalani) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /binh_a_stage2_xip.bin (Xip_10206fb0:/binh_a_stage2_xip.bin) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

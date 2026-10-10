@@ -1,0 +1,30 @@
+{
+  "error": "Analysis failed",
+  "code": "execution_failure",
+  "category": "execution_failure",
+  "message": "Analysis could not complete. Retry once; if it continues, run `rea doctor`.",
+  "retryable": false,
+  "remediation": {
+    "action": "Analysis could not complete. Retry once; if it continues, run `rea doctor`."
+  },
+  "details": {
+    "provider_id": "ghidra",
+    "operation": "read_function_instructions",
+    "diagnostics": {
+      "target_path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/source-discovery-parallel-2026-10-09/ablation-smp-20261010/smp-analysis-only.elf",
+      "target_sha256": "1facc82af2b53a328fdcb3726ef0d4fb3b370fc8ddc808e57c95180c8d9d6cc5",
+      "transport": "unix-socket",
+      "provider_version": "12.1.4",
+      "profile_digest": "d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26",
+      "run_id": "be785925-fb85-4c0b-ba1f-5604d258f712",
+      "runtime_root": "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/rea-ghidra-03HntL",
+      "endpoint_path": "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/rea-ghidra-03HntL/bridge.sock",
+      "failure_cause": {
+        "name": "GhidraLaunchError",
+        "message": "Ghidra headless launch failed"
+      },
+      "failure_kind": "start",
+      "failure_message": "Ghidra headless launch failed"
+    }
+  }
+}

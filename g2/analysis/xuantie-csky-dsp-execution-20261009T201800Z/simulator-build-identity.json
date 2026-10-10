@@ -1,0 +1,18 @@
+{
+  "source": "third-party/tools/xuantie-qemu-csky",
+  "pin": "3287d345c7f5d60d5c8774d90752f5f710744f85",
+  "binary": "g2/build/offline-xuantie-csky-dsp-20261009T201800Z/qemu-system-cskyv2",
+  "sha256": "9fbb51168ef087533e8436a3e020962214a6145b33c7398903d08025b753e304",
+  "version": "8.2.94",
+  "build_host": "official Ubuntu24.04 arm64 container",
+  "cpu": "ck804ef",
+  "machine": "smartl",
+  "parallel_jobs": 2,
+  "subprojects": {
+    "berkeley-softfloat-3": "b64af41c3276f97f0e181920400ee056b9c88037",
+    "berkeley-testfloat-3": "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab",
+    "keycodemapdb": "f5772a62ec52591ff6870b7e8ef32482371f22c6"
+  },
+  "container": "opencfw-qemu-csky-resume-20261009t201800",
+  "active_processes": "build and guest executions completed; container idle sleep only"
+}

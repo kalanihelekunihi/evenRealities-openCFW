@@ -1,0 +1,136 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/console.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_console_init:
+
+00000000 <gx_console_init>:
+   0:	14d0      	push      	r15
+   2:	1063      	lrw      	r3, 0x0	// c <gx_console_init+0xc>
+   4:	b300      	st.w      	r0, (r3, 0x0)
+   6:	e0000000 	bsr      	0x0	// 0 <gx_uart_init>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_uart_init
+   a:	1490      	pop      	r15
+   c:	0000      	.short	0x0000
+			c: R_CKCORE_ADDR32	.bss
+	...
+
+Disassembly of section .text.gx_console_exit:
+
+00000000 <gx_console_exit>:
+   0:	14d0      	push      	r15
+   2:	1063      	lrw      	r3, 0x0	// c <gx_console_exit+0xc>
+   4:	9300      	ld.w      	r0, (r3, 0x0)
+   6:	e0000000 	bsr      	0x0	// 0 <gx_uart_exit>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_uart_exit
+   a:	1490      	pop      	r15
+   c:	0000      	.short	0x0000
+			c: R_CKCORE_ADDR32	.bss
+	...
+
+Disassembly of section .text.gx_console_putc:
+
+00000000 <gx_console_putc>:
+   0:	14d0      	push      	r15
+   2:	1064      	lrw      	r3, 0x0	// 10 <gx_console_putc+0x10>
+   4:	6c43      	mov      	r1, r0
+   6:	9300      	ld.w      	r0, (r3, 0x0)
+   8:	e0000000 	bsr      	0x0	// 0 <gx_uart_putc>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_uart_putc
+   c:	1490      	pop      	r15
+   e:	0000      	.short	0x0000
+  10:	00000000 	.long	0x00000000
+			10: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_console_getc:
+
+00000000 <gx_console_getc>:
+   0:	14d0      	push      	r15
+   2:	1063      	lrw      	r3, 0x0	// c <gx_console_getc+0xc>
+   4:	9300      	ld.w      	r0, (r3, 0x0)
+   6:	e0000000 	bsr      	0x0	// 0 <gx_uart_getc>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_uart_getc
+   a:	1490      	pop      	r15
+   c:	0000      	.short	0x0000
+			c: R_CKCORE_ADDR32	.bss
+	...
+
+Disassembly of section .text.gx_console_compatible_putc:
+
+00000000 <gx_console_compatible_putc>:
+   0:	14d0      	push      	r15
+   2:	1064      	lrw      	r3, 0x0	// 10 <gx_console_compatible_putc+0x10>
+   4:	6c43      	mov      	r1, r0
+   6:	9300      	ld.w      	r0, (r3, 0x0)
+   8:	e0000000 	bsr      	0x0	// 0 <gx_uart_compatible_putc>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_uart_compatible_putc
+   c:	1490      	pop      	r15
+   e:	0000      	.short	0x0000
+  10:	00000000 	.long	0x00000000
+			10: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_console_try_getc:
+
+00000000 <gx_console_try_getc>:
+   0:	14d0      	push      	r15
+   2:	1064      	lrw      	r3, 0x0	// 10 <gx_console_try_getc+0x10>
+   4:	6c43      	mov      	r1, r0
+   6:	9300      	ld.w      	r0, (r3, 0x0)
+   8:	e0000000 	bsr      	0x0	// 0 <gx_uart_try_getc>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_uart_try_getc
+   c:	1490      	pop      	r15
+   e:	0000      	.short	0x0000
+  10:	00000000 	.long	0x00000000
+			10: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_console_can_read:
+
+00000000 <gx_console_can_read>:
+   0:	14d0      	push      	r15
+   2:	1063      	lrw      	r3, 0x0	// c <gx_console_can_read+0xc>
+   4:	9300      	ld.w      	r0, (r3, 0x0)
+   6:	e0000000 	bsr      	0x0	// 0 <gx_uart_can_read>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_uart_can_read
+   a:	1490      	pop      	r15
+   c:	0000      	.short	0x0000
+			c: R_CKCORE_ADDR32	.bss
+	...
+
+Disassembly of section .text.gx_console_empty_fifo:
+
+00000000 <gx_console_empty_fifo>:
+   0:	14d0      	push      	r15
+   2:	1063      	lrw      	r3, 0x0	// c <gx_console_empty_fifo+0xc>
+   4:	9300      	ld.w      	r0, (r3, 0x0)
+   6:	e0000000 	bsr      	0x0	// 0 <gx_uart_empty_fifo>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_uart_empty_fifo
+   a:	1490      	pop      	r15
+   c:	0000      	.short	0x0000
+			c: R_CKCORE_ADDR32	.bss
+	...
+
+Disassembly of section .text.gx_console_suspend:
+
+00000000 <gx_console_suspend>:
+   0:	14d0      	push      	r15
+   2:	1063      	lrw      	r3, 0x0	// c <gx_console_suspend+0xc>
+   4:	9300      	ld.w      	r0, (r3, 0x0)
+   6:	e0000000 	bsr      	0x0	// 0 <gx_uart_suspend>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_uart_suspend
+   a:	1490      	pop      	r15
+   c:	0000      	.short	0x0000
+			c: R_CKCORE_ADDR32	.bss
+	...
+
+Disassembly of section .text.gx_console_resume:
+
+00000000 <gx_console_resume>:
+   0:	14d0      	push      	r15
+   2:	1063      	lrw      	r3, 0x0	// c <gx_console_resume+0xc>
+   4:	9300      	ld.w      	r0, (r3, 0x0)
+   6:	e0000000 	bsr      	0x0	// 0 <gx_uart_resume>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_uart_resume
+   a:	1490      	pop      	r15
+   c:	0000      	.short	0x0000
+			c: R_CKCORE_ADDR32	.bss
+	...

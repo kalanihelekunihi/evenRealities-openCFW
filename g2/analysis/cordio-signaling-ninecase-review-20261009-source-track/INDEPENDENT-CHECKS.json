@@ -1,0 +1,121 @@
+{
+  "independent_replay_count": 9,
+  "sdk_matches": 9,
+  "old_public_differences": 4,
+  "whole_original_376_bytes_verified": true,
+  "memory_checks": [
+    {
+      "case": "short-0",
+      "read_count": 8,
+      "write_count": 8,
+      "writes_confined_to_saved_register_stack": true,
+      "packet_reads_or_writes": 0
+    },
+    {
+      "case": "short-1",
+      "read_count": 8,
+      "write_count": 8,
+      "writes_confined_to_saved_register_stack": true,
+      "packet_reads_or_writes": 0
+    },
+    {
+      "case": "short-2",
+      "read_count": 8,
+      "write_count": 8,
+      "writes_confined_to_saved_register_stack": true,
+      "packet_reads_or_writes": 0
+    },
+    {
+      "case": "short-3",
+      "read_count": 8,
+      "write_count": 8,
+      "writes_confined_to_saved_register_stack": true,
+      "packet_reads_or_writes": 0
+    },
+    {
+      "case": "no-connection",
+      "read_count": 8,
+      "write_count": 8,
+      "writes_confined_to_saved_register_stack": true,
+      "packet_reads_or_writes": 0
+    },
+    {
+      "case": "master",
+      "read_count": 11,
+      "write_count": 8,
+      "writes_confined_to_saved_register_stack": true,
+      "packet_reads_or_writes": 0
+    },
+    {
+      "case": "slave",
+      "read_count": 11,
+      "write_count": 8,
+      "writes_confined_to_saved_register_stack": true,
+      "packet_reads_or_writes": 0
+    },
+    {
+      "case": "null-callback",
+      "read_count": 11,
+      "write_count": 8,
+      "writes_confined_to_saved_register_stack": true,
+      "packet_reads_or_writes": 0
+    },
+    {
+      "case": "uint16-max",
+      "read_count": 11,
+      "write_count": 8,
+      "writes_confined_to_saved_register_stack": true,
+      "packet_reads_or_writes": 0
+    }
+  ],
+  "dependency_definitions": [
+    {
+      "member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/include/dm_api.h",
+      "sha256": "e5583b2222c8a63de3e71be61707c76cb82542a6b4ff87167215f3d32ff99878",
+      "definition": "#define DM_ROLE_MASTER              HCI_ROLE_MASTER  /*!< \\brief Role is master */"
+    },
+    {
+      "member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/include/dm_api.h",
+      "sha256": "e5583b2222c8a63de3e71be61707c76cb82542a6b4ff87167215f3d32ff99878",
+      "definition": "#define DM_ROLE_SLAVE               HCI_ROLE_SLAVE   /*!< \\brief Role is slave */"
+    },
+    {
+      "member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/include/dm_api.h",
+      "sha256": "e5583b2222c8a63de3e71be61707c76cb82542a6b4ff87167215f3d32ff99878",
+      "definition": "#define DM_CONN_ID_NONE             0"
+    },
+    {
+      "member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/include/dm_api.h",
+      "sha256": "e5583b2222c8a63de3e71be61707c76cb82542a6b4ff87167215f3d32ff99878",
+      "definition": "typedef uint8_t dmConnId_t;"
+    },
+    {
+      "member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/wsf/include/hci_defs.h",
+      "sha256": "45344f5e3e93471d4f8ff860fa4873bb4547a5e85ee4dd607c77da87bdb17db1",
+      "definition": "#define HCI_ROLE_MASTER                              0       /*!< \\brief Role is master */"
+    },
+    {
+      "member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/wsf/include/hci_defs.h",
+      "sha256": "45344f5e3e93471d4f8ff860fa4873bb4547a5e85ee4dd607c77da87bdb17db1",
+      "definition": "#define HCI_ROLE_SLAVE                               1       /*!< \\brief Role is slave */"
+    },
+    {
+      "member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/wsf/include/hci_defs.h",
+      "sha256": "45344f5e3e93471d4f8ff860fa4873bb4547a5e85ee4dd607c77da87bdb17db1",
+      "definition": "#define HCI_ROLE_MASTER                              0       /*!< \\brief Role is master */"
+    },
+    {
+      "member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/wsf/include/hci_defs.h",
+      "sha256": "45344f5e3e93471d4f8ff860fa4873bb4547a5e85ee4dd607c77da87bdb17db1",
+      "definition": "#define HCI_ROLE_SLAVE                               1       /*!< \\brief Role is slave */"
+    }
+  ],
+  "index_unchanged_during_replay": true,
+  "limits": [
+    "source projection not full module",
+    "trace semantic projection, trace query disabled",
+    "no caller execution",
+    "65535 is direct ABI only",
+    "no downstream or live delivery inference"
+  ]
+}

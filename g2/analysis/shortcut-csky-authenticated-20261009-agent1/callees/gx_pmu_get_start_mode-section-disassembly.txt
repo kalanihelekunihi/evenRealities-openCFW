@@ -1,0 +1,20 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/pmu_ctrl.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_pmu_get_start_mode:
+
+00000000 <gx_pmu_get_start_mode>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_pmu_get_start_mode>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_pmu_get_wakeup_source
+   6:	2801      	subi      	r0, 2
+   8:	3803      	cmphsi      	r0, 4
+   a:	0808      	bt      	0x1a	// 1a <gx_pmu_get_start_mode+0x1a>
+   c:	ea23a001 	movih      	r3, 40961
+  10:	9316      	ld.w      	r0, (r3, 0x58)
+  12:	e4002001 	andi      	r0, r0, 1
+  16:	9377      	ld.w      	r3, (r3, 0x5c)
+  18:	1490      	pop      	r15
+  1a:	3000      	movi      	r0, 0
+  1c:	07fe      	br      	0x18	// 18 <gx_pmu_get_start_mode+0x18>

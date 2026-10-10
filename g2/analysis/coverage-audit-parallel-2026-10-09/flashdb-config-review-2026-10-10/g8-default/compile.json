@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Ig2/analysis/coverage-audit-parallel-2026-10-09/flashdb-config-review-2026-10-10/g8-default",
+    "-Ig2/analysis/coverage-audit-parallel-2026-10-09/flashdb-config-review-2026-10-10",
+    "-isystem",
+    "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include",
+    "-c",
+    "g2/analysis/coverage-audit-parallel-2026-10-09/flashdb-config-review-2026-10-10/probe.c",
+    "-o",
+    "g2/analysis/coverage-audit-parallel-2026-10-09/flashdb-config-review-2026-10-10/g8-default/probe.o"
+  ],
+  "exit": 0,
+  "stderr": ""
+}

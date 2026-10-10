@@ -1,0 +1,27 @@
+{
+  "scope": "Three MAC instructions in authentic real-split assembly with real512/modifier1 table; not a universal C/compiler/other-callsite proof",
+  "table_sha256": "f02ad5cfc640d3484d44ba4366dd3f20b2883d83600db65dd32bdd8b049434e1",
+  "coefficient_pairs": 256,
+  "A_all_min_pair_indices": [],
+  "derived_B_all_min_pair_indices": [],
+  "B_rule": "psub.16(Correction00008000,A), saturated-abs low signed16, pkg lowabs/highoriginal",
+  "B_low_lane_range_max": 32767,
+  "source_mac_bindings": [
+    {
+      "source_line": 65,
+      "instruction": "mulaca.s16.s l0,t6,l2",
+      "coefficient_operand": "derivedB l2"
+    },
+    {
+      "source_line": 66,
+      "instruction": "mulacax.s16.s l1,t4,t5",
+      "coefficient_operand": "tableA t5"
+    },
+    {
+      "source_line": 122,
+      "instruction": "mulaca.s16.s t6,t1,t4",
+      "coefficient_operand": "tableA t4"
+    }
+  ],
+  "deduction": "Documented/QEMU extreme pair requires BOTH product operands80008000. At least one coefficient operand here cannot equal it. The specific all-min-pair corner is excluded for these table-bound paths, not all arithmetic model errors."
+}

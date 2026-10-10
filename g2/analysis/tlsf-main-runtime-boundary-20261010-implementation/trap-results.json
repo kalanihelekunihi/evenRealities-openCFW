@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "name": "misaligned-create",
+      "entry": "0x1005f1",
+      "events": [
+        {
+          "interrupt": 7,
+          "pc": "0x101028",
+          "r0": "0x1013e3",
+          "r1": 4,
+          "r2": "0x0",
+          "r3": "0x0"
+        }
+      ],
+      "trap_observed": true
+    },
+    {
+      "name": "direct-assert",
+      "entry": "0x101025",
+      "events": [
+        {
+          "interrupt": 7,
+          "pc": "0x101024",
+          "r0": "0x20081000",
+          "r1": 1233,
+          "r2": "0x20081010",
+          "r3": "0x20081020"
+        }
+      ],
+      "trap_observed": true
+    }
+  ],
+  "elf_sha256": "f5c91d81169478fb482056dba0dbc5e8245e7e43c28c1611a905e2c278512cf5",
+  "no_stock_diagnostic_equivalence_claim": true
+}

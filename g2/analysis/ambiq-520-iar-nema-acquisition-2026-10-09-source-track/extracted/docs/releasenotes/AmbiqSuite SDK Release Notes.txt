@@ -1,0 +1,150 @@
+**********************************************************************************************************
+AmbiqSuite SDK5.2.0 released on July 24, 2026. (GIT SHA release_sdk5p2p0_66487dd10)
+
+This is a combined release of the AmbiqSuite SDK targeting Apollo510, Apollo510B, Apollo330 Plus, and Apollo510 Lite.
+
+Please note that this is the AmbiqSuite Release base version of SDK without CEVA assets. 
+If looking for the version of SDK which includes the CEVA Bluetooth host library and associated
+software for Apollo510 Lite and Apollo330 Plus, this requires explicit acceptance of the Ambiq EULA.
+
+**********************************************************************************************************
+
+SDK includes a set of examples.  See /boards/*/examples.
+
+IDE/ToolChain Support:
+----------------------
+AmbiqSuite SDK supports GCC, IAR EWARM, and Keil MDK.
+- GCC: 13.2r1
+- Keil6: ARMCC 6230001 (MDK version 5.42a)
+- IAR EWARM 9.70.2 
+- The release contains a directory at the top level /debugger_updates
+    * For Segger J-Link debuggers, Apollo330P/Apollo510L is supported by installing J-Link v8.40 or later along with the provided J-Link debugger update
+      - Please see Apollo330P_510L_README.txt in the zip file for installation instructions.
+    * For Keil MDK, Apollo330P/Apollo510L is supported by installing the CMSIS Ambiq Pack AmbiqMicro.Apollo_DFP.1.6.0. 
+    * For IAR, update your installation for Apollo330P/Apollo510L with the batch file provided in the IAR_Apollo330P_510L_20260720 folder.
+    * By default, Apollo330P projects in this release select the AP330MPA-CBR device, and Apollo510L projects select the AP510DLA-CBR device.
+    * For Apollo510/B users using this SDK with a pack older than 1.5.6, Apollo510/B projects will not find Apollo330P_510L.FLM and will fail to program.
+      - To fix, go to Options->Debug tab->Settings->Flash Download tab, click Add and select Apollo510.
+
+Important notes applicable to all products:
+-------------------------------------------
+- AmbiqSuite HAL reserves couple of timers for internal usage, as defined by AM_HAL_INTERNAL_TIMER_NUM_A and AM_HAL_INTERNAL_TIMER_NUM_B.
+  * Applications are expected to always keep this interrupt enabled and at a high priority to ensure the
+  interrupt service latency is kept to a minimum.
+- Temperature Compensation (TempCo): It is required for the application to have active periodic temperature monitoring integrated for
+  proper power regulation & for optimal active power consumption using HAL interface am_hal_pwrctrl_temp_update().
+  Applications will be required to have periodic temp sense – and make a call to this API with following guidelines:
+  - Call this API at initialization based on the first temperature reading.
+    --- This API returns a structure – notifying of thresholds when application should make this call again
+  - Monitor temperature periodically, and call the API when supplied thresholds are breached in either direction.
+  Application could use the SoC ADC based temp sensing, or have other means to do temp monitoring.
+  Sampling frequency can be optimized based on usage, as long as it is fast enough to detect a temp diff of 10C
+  An example application is provided with SDK using on-chip ADC (\boards\<evb_bsp>\examples\power\tempco)
+- Low Power Initialization Sequence requirements:
+  Applications are required to follow the below sequence for initialization:
+  am_hal_pwrctrl_low_power_init -> am_hal_pwrctrl_control (AM_HAL_PWRCTRL_CONTROL_SIMOBUCK_INIT) -> am_hal_pwrctrl_temp_update()
+- Multi-image transition requirements
+  For multi-image situations, application must call am_hal_pwrctrl_settings_restore() before exiting one application to transition to other
+
+Important notes specific to Apollo510, Apollo510B:
+--------------------------------------------------
+- AmbiqSuite HAL manages the SoC power consumption to always operate in the most optimal conditions, using a
+  number of internal power states. Transitions from one state to another may require some sequences which
+  are not instantaneous. For some of these transitions, HAL implements an internal state machine to let normal
+  operations continue to work while the power management transition is happening in the background. To manage
+  this internal state machine, HAL uses an internal Timer.
+  * Option AM_HAL_SPOTMANAGER_USE_TIMER_OR_BLOCKING_DELAY can used to override the default implementation, and instead 
+  use blocking delay.
+  * Applications are expected to always keep this interrupt enabled and at a high priority to ensure the
+  interrupt service latency is kept to a minimum.
+  ==> If guaranteeing low latency for HAL internal timer interrupt is not possible, AM_HAL_SPOTMANAGER_TIMER_DOUBLEBOOST should
+  be disabled.
+
+Important notes specific to Apollo330 Plus and Apollo510 Lite:
+--------------------------------------------------------------
+- System design requires on chip CM4 (a.k.a. Radio Subsystem, or RSS) firmware to control high speed crystal (XTAL_HS) or radio functions. 
+  - If application intends to use XTAL_HS or Radio, it is required to call am_hal_pwrctrl_rss_bootup() to turn on the Radio Subsystem.
+    - am_devices_510L_radio_init() in turn makes this call implicitly, if RSS is not turned on already.
+- Factory parts are shipped with default XTAL_HS-only image for RSS. 
+  - Separate Update images for Radio firmware are provided in \tools\<apollo510L or apollo330P>_scripts\firmware_updates 
+    - Depending on particular Radio SKU, one or more of these updates can be installed to update the RSS capabilities
+    - Included in each directory with the released update file is a Jlink script for loading and processing the OTA update.
+    - Please see respective history.txt for release notes corresponding to individual firmware updates
+- External pSRAM bandwidth limitations — whether caused by insufficient interface frequency or contention from concurrent memory access
+  activities such as XIP may result in display image corruption. As a mitigation, the MANUALLY_CONTROL_DBIB_CSX option may be enabled.
+  This can avoid the risk of display corruption but comes at the cost of increased CPU load.
+- Buck LP support is included in the Bluetooth examples:
+  Enable AM_RSS_LP_ENABLED for Buck LP testing. Do not enable AM_DEBUG_PRINTF: when SWO is active, CM55 will not allow entry into LP mode. 
+
+Known Issues for Apollo510/B:
+-----------------------------
+- MRAM Recovery: The use of an external 1.8V USB->UART adapter connected to Apollo510 UART1 is required 
+  when using the supplied "uart_recovery_host.py" script with the Apollo510 EVB.
+    * Please see the example info0 configuration file "info0_Recovery_UART1.ini" in the 
+      \tools\apollo510_scripts\mram_recovery\example_info0_configs directory for setup instructions.
+
+Known Issues for Apollo330 Plus and Apollo510 Lite:
+---------------------------------------------------
+- MSPI: MSPI example support will be added at a later date. For more information, contact Ambiq Sales.
+
+Top Level Directory Structure:
+------------------------------
+.
++---ambiq_ble <BLE apps/profiles/services used on top of Cordio>
++---boards
+|   +---apollo330mP_evb
+|   |   +---bsp <Board Specific code>
+|   |   ∟---examples
+|   +---apollo510_evb
+|   |   +---bsp <Board Specific code>
+|   |   ∟---examples
+|   +---apollo510b_evb
+|   |   +---bsp <Board Specific code>
+|   |   ∟---examples
+|   +---apollo330dL_evb
+|   |   +---bsp <Board Specific code>
+|   |   ∟---examples
++---CMSIS <ARM CMSIS definitions and functions>
++---debugger_updates <Updates for Segger J-Link, IAR, and Keil to support Apollo330P/Apollo510L part numbers>
++---devices <Device drivers>
++---docs
+|   +---licenses
+|   +---registers <Register Documentation>
+|   +---releasenotes <Release Notes and Change History>
+|   +---example_guide <Doxygen Example Guide>
+|   ∟---user_guide <Doxygen User Guide>
++---makedefs <Part of build infrastructure>
++---mcu <HAL and Register definitions>
+|   +---apollo330P
+|   +---apollo510
+|   ∟---apollo510L 
++---pack
+|   ∟---SVD
++---third_party <Third Party Code/Documents>
+|   +---cordio <BLE Stack>
+|   +---crypto <Crypto library from ARM>
+|   +---FatFs <Generic FatFS implementation from open source>
+|   +---FreeRTOSv10.5.1 <Reference FreeRTOS implementation>
+|   +---open-amp <Open Asymmetric Multi Processing framework>
+|   +---SEGGER <Segger RTT implementation>
+|   +---ThinkSi <ThinkSilicon NemaGFX Graphics Library assets>
+|   +---tinyusb <TinyUSB USB stack implementation>
+|   ∟---uecc <small and fast ECDH and ECDSA implementation>
++---tools
+|   +---amota_application
+|   +---apollo5
+|   +---apollo330P_amota <Tools to interact with Ambiq's BLE Reference Application for image download and updates>
+|   +---apollo330P_scripts <Apollo330P Provisioning and Image generation/update tools, along with SBL & Radio image updates>
+|   +---apollo510_scripts <Apollo510 Provisioning and Image generation/update tools
+|   +---apollo510b_amota <Tools to interact with Ambiq's BLE Reference Application for image download and updates>
+|   +---apollo330L_scripts
+|   +---apollo510L_amota <Tools to interact with Ambiq's BLE Reference Application for image download and updates>
+|   +---apollo510L_scripts <Apollo510L Provisioning and Image generation/update tools, along with SBL & Radio image updates>
+|   +---ble_throughput_app 
+|   +---bootloader_scripts
+|   +---bsp_generator <Tools for automated BSP generation>
+|   +---config <Part of build infrastructure>
+|   +---linker_config <Part of build infrastructure>
+|   +---register_maps
+|   ∟---syspll-cfg <Spreadsheet tool to configure PLL for audio peripherals>
+∟---utils <General utilities and functions>

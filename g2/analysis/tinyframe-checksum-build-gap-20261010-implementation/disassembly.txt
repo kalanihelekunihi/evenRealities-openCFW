@@ -1,0 +1,59 @@
+
+g2/analysis/tinyframe-checksum-build-gap-20261010-implementation/candidate-window.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004916c8 <.data>:
+  4916c8:	b5e0      	push	{r5, r6, r7, lr}
+  4916ca:	f246 422e 	movw	r2, #25646	@ 0x642e
+  4916ce:	5c81      	ldrb	r1, [r0, r2]
+  4916d0:	2900      	cmp	r1, #0
+  4916d2:	d022      	beq.n	0x49171a
+  4916d4:	f7ab fcfb 	bl	0x43d0ce
+  4916d8:	0780      	lsls	r0, r0, #30
+  4916da:	d50d      	bpl.n	0x4916f8
+  4916dc:	f8df 07fc 	ldr.w	r0, [pc, #2044]	@ 0x491edc
+  4916e0:	9001      	str	r0, [sp, #4]
+  4916e2:	2023      	movs	r0, #35	@ 0x23
+  4916e4:	9000      	str	r0, [sp, #0]
+  4916e6:	f8df 37f8 	ldr.w	r3, [pc, #2040]	@ 0x491ee0
+  4916ea:	f8df 27f8 	ldr.w	r2, [pc, #2040]	@ 0x491ee4
+  4916ee:	f8df 17f8 	ldr.w	r1, [pc, #2040]	@ 0x491ee8
+  4916f2:	2001      	movs	r0, #1
+  4916f4:	f7ab ff3e 	bl	0x43d574
+  4916f8:	f7ab fce9 	bl	0x43d0ce
+  4916fc:	07c0      	lsls	r0, r0, #31
+  4916fe:	d403      	bmi.n	0x491708
+  491700:	f7ab fce5 	bl	0x43d0ce
+  491704:	0740      	lsls	r0, r0, #29
+  491706:	d506      	bpl.n	0x491716
+  491708:	f8df 17e0 	ldr.w	r1, [pc, #2016]	@ 0x491eec
+  49170c:	000a      	movs	r2, r1
+  49170e:	f05f 6080 	movs.w	r0, #67108864	@ 0x4000000
+  491712:	f7ab fbc4 	bl	0x43ce9e
+  491716:	2000      	movs	r0, #0
+  491718:	e002      	b.n	0x491720
+  49171a:	2101      	movs	r1, #1
+  49171c:	5481      	strb	r1, [r0, r2]
+  49171e:	2001      	movs	r0, #1
+  491720:	bd0e      	pop	{r1, r2, r3, pc}
+  491722:	2100      	movs	r1, #0
+  491724:	f246 422e 	movw	r2, #25646	@ 0x642e
+  491728:	5481      	strb	r1, [r0, r2]
+  49172a:	4770      	bx	lr
+  49172c:	2000      	movs	r0, #0
+  49172e:	4770      	bx	lr
+  491730:	0002      	movs	r2, r0
+  491732:	b292      	uxth	r2, r2
+  491734:	f8df 37b8 	ldr.w	r3, [pc, #1976]	@ 0x491ef0
+  491738:	b280      	uxth	r0, r0
+  49173a:	b2c9      	uxtb	r1, r1
+  49173c:	4048      	eors	r0, r1
+  49173e:	f000 00ff 	and.w	r0, r0, #255	@ 0xff
+  491742:	f833 0010 	ldrh.w	r0, [r3, r0, lsl #1]
+  491746:	ea90 2012 	eors.w	r0, r0, r2, lsr #8
+  49174a:	b280      	uxth	r0, r0
+  49174c:	4770      	bx	lr
+  49174e:	b280      	uxth	r0, r0
+  491750:	4770      	bx	lr

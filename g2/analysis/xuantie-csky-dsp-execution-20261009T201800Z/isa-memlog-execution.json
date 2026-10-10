@@ -1,0 +1,29 @@
+{
+  "command": [
+    "/opt/homebrew/bin/docker",
+    "exec",
+    "--workdir",
+    "/out/isa-memlog-run",
+    "opencfw-qemu-csky-resume-20261009t201800",
+    "timeout",
+    "15s",
+    "/tmp/qbuild2/qemu-system-cskyv2",
+    "-M",
+    "smartl",
+    "-cpu",
+    "ck804ef",
+    "-nographic",
+    "-monitor",
+    "none",
+    "-kernel",
+    "/out/isa.elf",
+    "-d",
+    "in_asm,int,guest_errors",
+    "-D",
+    "/out/isa-memlog-run/qemu.log"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "",
+  "memlog": "ISA START\npaddh-negative-odd ffff0005 expected ffff0005\npaddsat 7fff8000 expected 7fff8000\npabs-min 7fff0001 expected 7fff0001\npmax-unsigned-lanes ffff7fff expected ffff7fff\nmulca-unequal-lanes 00000017 expected 00000017\nmulcax-unequal-lanes 00000016 expected 00000016\nmulaca-saturate 7fffffff expected 7fffffff\nCORNER mulca=7fffffff mulcax=7fffffff mulaca=80000000 mulacax=80000000\nISA baseline PASS; corner remains ISA-unverified\n"
+}

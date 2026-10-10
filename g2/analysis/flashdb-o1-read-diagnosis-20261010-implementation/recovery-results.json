@@ -1,0 +1,453 @@
+{
+  "count": 14,
+  "all_pass": true,
+  "scope": "new O1 execution; no valid memory-write hook; full RAM final-state checks; original baseline not rerun",
+  "cases": [
+    {
+      "kind": "get",
+      "input": {
+        "found": true,
+        "requested": 3,
+        "recorded": 8,
+        "buf": true,
+        "out": true,
+        "read_error": 0
+      },
+      "O1_source": {
+        "return": 3,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          },
+          {
+            "kind": "read",
+            "args": [
+              536936448,
+              11256832,
+              537067520,
+              3
+            ]
+          }
+        ],
+        "out": "0800000003000000aaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "get",
+      "input": {
+        "found": true,
+        "requested": 8,
+        "recorded": 8,
+        "buf": true,
+        "out": true,
+        "read_error": 0
+      },
+      "O1_source": {
+        "return": 8,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          },
+          {
+            "kind": "read",
+            "args": [
+              536936448,
+              11256832,
+              537067520,
+              8
+            ]
+          }
+        ],
+        "out": "0800000008000000aaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "get",
+      "input": {
+        "found": true,
+        "requested": 12,
+        "recorded": 8,
+        "buf": true,
+        "out": true,
+        "read_error": 6
+      },
+      "O1_source": {
+        "return": 8,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          },
+          {
+            "kind": "read",
+            "args": [
+              536936448,
+              11256832,
+              537067520,
+              8
+            ]
+          }
+        ],
+        "out": "080000000c000000aaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "get",
+      "input": {
+        "found": true,
+        "requested": 0,
+        "recorded": 8,
+        "buf": true,
+        "out": true,
+        "read_error": 0
+      },
+      "O1_source": {
+        "return": 0,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          },
+          {
+            "kind": "read",
+            "args": [
+              536936448,
+              11256832,
+              537067520,
+              0
+            ]
+          }
+        ],
+        "out": "0800000000000000aaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "get",
+      "input": {
+        "found": true,
+        "requested": 8,
+        "recorded": 0,
+        "buf": true,
+        "out": true,
+        "read_error": 0
+      },
+      "O1_source": {
+        "return": 0,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          },
+          {
+            "kind": "read",
+            "args": [
+              536936448,
+              11256832,
+              537067520,
+              0
+            ]
+          }
+        ],
+        "out": "0000000008000000aaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "get",
+      "input": {
+        "found": false,
+        "requested": 8,
+        "recorded": 8,
+        "buf": true,
+        "out": true,
+        "read_error": 0
+      },
+      "O1_source": {
+        "return": 0,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          }
+        ],
+        "out": "0000000008000000aaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "get",
+      "input": {
+        "found": false,
+        "requested": 8,
+        "recorded": 8,
+        "buf": false,
+        "out": false,
+        "read_error": 0
+      },
+      "O1_source": {
+        "return": 0,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          }
+        ],
+        "out": "0000000008000000aaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "get",
+      "input": {
+        "found": true,
+        "requested": 8,
+        "recorded": 8,
+        "buf": false,
+        "out": true,
+        "read_error": 0
+      },
+      "O1_source": {
+        "return": 8,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          }
+        ],
+        "out": "0800000008000000aaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "get",
+      "input": {
+        "found": true,
+        "requested": 8,
+        "recorded": 8,
+        "buf": true,
+        "out": false,
+        "read_error": 6
+      },
+      "O1_source": {
+        "return": 8,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          },
+          {
+            "kind": "read",
+            "args": [
+              536936448,
+              11256832,
+              537067520,
+              8
+            ]
+          }
+        ],
+        "out": "0000032008000000aaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "get",
+      "input": {
+        "found": true,
+        "requested": 4294967295,
+        "recorded": 4294967294,
+        "buf": false,
+        "out": true,
+        "read_error": 6
+      },
+      "O1_source": {
+        "return": 4294967294,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          }
+        ],
+        "out": "feffffffffffffffaaaa0000bbbb0000cccc0000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "blob",
+      "input": {
+        "found": true,
+        "requested": 3,
+        "recorded": 8,
+        "buf": true,
+        "out": true,
+        "read_error": 0,
+        "lock": true,
+        "unlock": true
+      },
+      "O1_source": {
+        "return": 3,
+        "trace": [
+          {
+            "kind": "lock",
+            "db": 536936448
+          },
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          },
+          {
+            "kind": "read",
+            "args": [
+              536936448,
+              11256832,
+              537067520,
+              3
+            ]
+          },
+          {
+            "kind": "unlock",
+            "db": 536936448
+          }
+        ],
+        "out": "0000032003000000aaaa0000bbbb000008000000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "blob",
+      "input": {
+        "found": true,
+        "requested": 12,
+        "recorded": 8,
+        "buf": true,
+        "out": true,
+        "read_error": 6,
+        "lock": true,
+        "unlock": false
+      },
+      "O1_source": {
+        "return": 8,
+        "trace": [
+          {
+            "kind": "lock",
+            "db": 536936448
+          },
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          },
+          {
+            "kind": "read",
+            "args": [
+              536936448,
+              11256832,
+              537067520,
+              8
+            ]
+          }
+        ],
+        "out": "000003200c000000aaaa0000bbbb000008000000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "blob",
+      "input": {
+        "found": false,
+        "requested": 8,
+        "recorded": 8,
+        "buf": true,
+        "out": true,
+        "read_error": 0,
+        "lock": false,
+        "unlock": true
+      },
+      "O1_source": {
+        "return": 0,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          },
+          {
+            "kind": "unlock",
+            "db": 536936448
+          }
+        ],
+        "out": "0000032008000000aaaa0000bbbb000000000000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    },
+    {
+      "kind": "blob",
+      "input": {
+        "found": true,
+        "requested": 8,
+        "recorded": 8,
+        "buf": false,
+        "out": true,
+        "read_error": 0,
+        "lock": false,
+        "unlock": false
+      },
+      "O1_source": {
+        "return": 8,
+        "trace": [
+          {
+            "kind": "find",
+            "db": 536936448,
+            "key": 537001984
+          }
+        ],
+        "out": "0000000008000000aaaa0000bbbb000008000000",
+        "diagnostic_stop": false
+      },
+      "equal_to_sealed_stock": true,
+      "final_ram_outside_stack_and_output_unchanged": true
+    }
+  ]
+}

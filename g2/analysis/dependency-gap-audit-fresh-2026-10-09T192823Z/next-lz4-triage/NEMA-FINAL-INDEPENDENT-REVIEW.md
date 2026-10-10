@@ -1,0 +1,23 @@
+# IAR Nema finite comparison: independent final review
+
+Access resumed only after a read-only command succeeded on the reattached authorized Mac. All15 independent static checks PASS in NEMA-FINAL-INDEPENDENT-VERIFICATION.json; verifier verify_nema_final.py preserves reproducible arithmetic/byte checks. No archive re-extraction, downloaded-code/firmware execution, redistribution, source/index/pin/device mutation or canonical admission occurred.
+
+Previously authenticated archive/member/compiler metadata remains unchanged. Reauthenticated the complete locked230byte extent SHA1b72806af461fbd44dc0a8928e9a4b4493d124242f8f89f7d5820d0c8c692b6d and candidate222byte symbol SHAe8b0d7c0bc4363c4f2d266fced1ff65764b59e4ec84346ffd8570f191616ddca. Every parsed stock/candidate disassembly halfword agrees with underlying bytes. Candidate resides in shared5644byte .text, not a separately named222byte section.
+
+## Exact semantic difference and control flow
+
+At locked51444C, r0 loads the pointer at[r1+4]; null skips to514482. For nonnull r0, stock compares object fields+16 and+20 plus2. The signed-less-than branch at514458 enters514476. Otherwise the code may write two words through object+8, then clears bit0x8 of object+24 at51446E–514476. The next block514476–51447E always performs LDR r2,[r0,#24]; BIC.W r2,r2,#32; STR r2,[r0,#24]. It is reached either through that branch or fall-through. Thus it clears0x20 in that pointer's+24word, including the path skipping the earlier write/bit0x8clear. No global/object semantic name is needed for this conclusion.
+
+Corresponding candidate offset0x416 (function+162) is MOVS r0,#0 followed by STR r0,[r1,#4], with no0x20clear. Candidate's branch enters that MOVS; stock's branch enters its extra block. Stock's final8bytes are LDR r1,[r6]; STR r4,[r1,#4]; ADD SP,#4; POP{r4-r7,pc}, confirming the230byte envelope has executable epilogue rather than8byte trailing padding. No dynamic reachability or hardware behavior was tested.
+
+Three relocations were independently re-encoded at candidate placement5143D4: function+110 THM_JUMP24 to numeric4B127C; +114 THM_PC12 to literal514B78; +172 THM_CALL to numeric4B127C. Original in-place bytes match retained REL records. Patched222byte hash40a8179d46fc3b662501879fcb79f79c3ffe5fb2336c6c09d52f1eff64649261 agrees with discovery and is unequal to complete stock. Stock's tail call sits+180, eight bytes later, and decodes to the same numeric target. Literal514B78 contains20074EFC. Candidate names nema_set_error/nema_context remain inferred bindings; neither global's semantic identity is independently certified here.
+
+Normal relocation resolution cannot supply the missing read/modify/write state update. Internal branches also reflect the insertion. Linker relaxation was not simulated, so avoid a universal statement excluding every imaginable producing transformation. The concrete result is: this authenticated complete candidate function, with the explicit retained linkage, is not an exact producer of the locked complete text, and its instruction-level field update differs. One function is excluded; the entire5.2SDK, API1.4.12family, other members, exact stock revision/compiler and runtime equivalence remain undecided.
+
+## Finite stopping and next evidence
+
+This named-function comparator is complete; no further flags, archive/member sweep or repeated5.2download is justified by its result. No identified newly available public C source revision currently supplies the exact0x20field-clear discriminator. Public API/header/version matches cannot select its implementation. A concrete future producer discriminator would be an authenticated licensed older/alternate Apollo510 IAR archive containing this exact named symbol, with full text/relocations and provenance, whose function performs the same extra update. Authentic corresponding implementation source/build would be stronger. Acquisition should wait for an identified artifact, rather than guessed URLs or generic compiler-family downloads.
+
+Independently binding the numeric global/table and callers from locked image could refine the software role of the changed bit; that is target pseudocode work, not additional public-source producer identification and not prerequisite to this byte exclusion. Physical graphics behavior requires separate evidence. Source completeness, legal scope, exact producing configuration and whole-artifact gates remain open.
+
+Discovery's final license review closes its PDF text-extraction blocker, while reporting component restrictions and no unrestricted grant. This audit does not certify redistribution or implementation-source availability, and creates only metadata/review artifacts.

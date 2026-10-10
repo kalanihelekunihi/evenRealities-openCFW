@@ -1,0 +1,191 @@
+GNU objdump (GNU Binutils) 2.47.20260726
+Literal pool sections are data; objdump instructions there are not code claims.
+
+/tmp/iom-strdis-main.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0055ca94 <.data+0x124a94>:
+  55ca94:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+  55ca98:	0005      	movs	r5, r0
+  55ca9a:	f05f 0800 	movs.w	r8, #0
+  55ca9e:	2800      	cmp	r0, #0
+  55caa0:	d005      	beq.n	0x55caae
+  55caa2:	6802      	ldr	r2, [r0, #0]
+  55caa4:	f022 427e 	bic.w	r2, r2, #4261412864	@ 0xfe000000
+  55caa8:	4b5a      	ldr	r3, [pc, #360]	@ (0x55cc14)
+  55caaa:	429a      	cmp	r2, r3
+  55caac:	d001      	beq.n	0x55cab2
+  55caae:	2002      	movs	r0, #2
+  55cab0:	e0ac      	b.n	0x55cc0c
+  55cab2:	2800      	cmp	r0, #0
+  55cab4:	d005      	beq.n	0x55cac2
+  55cab6:	000c      	movs	r4, r1
+  55cab8:	2c00      	cmp	r4, #0
+  55caba:	d002      	beq.n	0x55cac2
+  55cabc:	6868      	ldr	r0, [r5, #4]
+  55cabe:	2808      	cmp	r0, #8
+  55cac0:	d301      	bcc.n	0x55cac6
+  55cac2:	2006      	movs	r0, #6
+  55cac4:	e0a2      	b.n	0x55cc0c
+  55cac6:	6828      	ldr	r0, [r5, #0]
+  55cac8:	f3c0 6040 	ubfx	r0, r0, #25, #1
+  55cacc:	2800      	cmp	r0, #0
+  55cace:	d001      	beq.n	0x55cad4
+  55cad0:	2007      	movs	r0, #7
+  55cad2:	e09b      	b.n	0x55cc0c
+  55cad4:	686e      	ldr	r6, [r5, #4]
+  55cad6:	7820      	ldrb	r0, [r4, #0]
+  55cad8:	7228      	strb	r0, [r5, #8]
+  55cada:	f8df 745c 	ldr.w	r7, [pc, #1116]	@ 0x55cf38
+  55cade:	f241 0010 	movw	r0, #4112	@ 0x1010
+  55cae2:	eb17 3106 	adds.w	r1, r7, r6, lsl #12
+  55cae6:	f8c1 0104 	str.w	r0, [r1, #260]	@ 0x104
+  55caea:	7820      	ldrb	r0, [r4, #0]
+  55caec:	2800      	cmp	r0, #0
+  55caee:	d13a      	bne.n	0x55cb66
+  55caf0:	7a20      	ldrb	r0, [r4, #8]
+  55caf2:	2804      	cmp	r0, #4
+  55caf4:	db01      	blt.n	0x55cafa
+  55caf6:	2006      	movs	r0, #6
+  55caf8:	e088      	b.n	0x55cc0c
+  55cafa:	6860      	ldr	r0, [r4, #4]
+  55cafc:	f8df 174c 	ldr.w	r1, [pc, #1868]	@ 0x55d24c
+  55cb00:	4288      	cmp	r0, r1
+  55cb02:	d301      	bcc.n	0x55cb08
+  55cb04:	2006      	movs	r0, #6
+  55cb06:	e081      	b.n	0x55cc0c
+  55cb08:	7a20      	ldrb	r0, [r4, #8]
+  55cb0a:	f3c0 0140 	ubfx	r1, r0, #1, #1
+  55cb0e:	6860      	ldr	r0, [r4, #4]
+  55cb10:	f7ff fa28 	bl	0x55bf64
+  55cb14:	7a21      	ldrb	r1, [r4, #8]
+  55cb16:	f011 0103 	ands.w	r1, r1, #3
+  55cb1a:	eb17 3206 	adds.w	r2, r7, r6, lsl #12
+  55cb1e:	f8c2 1280 	str.w	r1, [r2, #640]	@ 0x280
+  55cb22:	f050 0001 	orrs.w	r0, r0, #1
+  55cb26:	eb17 3706 	adds.w	r7, r7, r6, lsl #12
+  55cb2a:	f8c7 0118 	str.w	r0, [r7, #280]	@ 0x118
+  55cb2e:	f8df 0720 	ldr.w	r0, [pc, #1824]	@ 0x55d250
+  55cb32:	6861      	ldr	r1, [r4, #4]
+  55cb34:	fbb0 f0f1 	udiv	r0, r0, r1
+  55cb38:	f8c5 0864 	str.w	r0, [r5, #2148]	@ 0x864
+  55cb3c:	f44f 707a 	mov.w	r0, #1000	@ 0x3e8
+  55cb40:	f8c5 0860 	str.w	r0, [r5, #2144]	@ 0x860
+  55cb44:	68e0      	ldr	r0, [r4, #12]
+  55cb46:	60e8      	str	r0, [r5, #12]
+  55cb48:	6920      	ldr	r0, [r4, #16]
+  55cb4a:	6128      	str	r0, [r5, #16]
+  55cb4c:	68e8      	ldr	r0, [r5, #12]
+  55cb4e:	2800      	cmp	r0, #0
+  55cb50:	d04e      	beq.n	0x55cbf0
+  55cb52:	68e8      	ldr	r0, [r5, #12]
+  55cb54:	6929      	ldr	r1, [r5, #16]
+  55cb56:	eb10 0081 	adds.w	r0, r0, r1, lsl #2
+  55cb5a:	f8df 16f8 	ldr.w	r1, [pc, #1784]	@ 0x55d254
+  55cb5e:	4288      	cmp	r0, r1
+  55cb60:	d231      	bcs.n	0x55cbc6
+  55cb62:	2001      	movs	r0, #1
+  55cb64:	e030      	b.n	0x55cbc8
+  55cb66:	7820      	ldrb	r0, [r4, #0]
+  55cb68:	2801      	cmp	r0, #1
+  55cb6a:	d12a      	bne.n	0x55cbc2
+  55cb6c:	6860      	ldr	r0, [r4, #4]
+  55cb6e:	f8df 16e8 	ldr.w	r1, [pc, #1768]	@ 0x55d258
+  55cb72:	4288      	cmp	r0, r1
+  55cb74:	d008      	beq.n	0x55cb88
+  55cb76:	f8df 16e4 	ldr.w	r1, [pc, #1764]	@ 0x55d25c
+  55cb7a:	4288      	cmp	r0, r1
+  55cb7c:	d00d      	beq.n	0x55cb9a
+  55cb7e:	f8df 16d0 	ldr.w	r1, [pc, #1744]	@ 0x55d250
+  55cb82:	4288      	cmp	r0, r1
+  55cb84:	d012      	beq.n	0x55cbac
+  55cb86:	e01a      	b.n	0x55cbbe
+  55cb88:	f8df 06d4 	ldr.w	r0, [pc, #1748]	@ 0x55d260
+  55cb8c:	f8df 16d4 	ldr.w	r1, [pc, #1748]	@ 0x55d264
+  55cb90:	eb17 3206 	adds.w	r2, r7, r6, lsl #12
+  55cb94:	f8c2 12c0 	str.w	r1, [r2, #704]	@ 0x2c0
+  55cb98:	e7c3      	b.n	0x55cb22
+  55cb9a:	f8df 06cc 	ldr.w	r0, [pc, #1740]	@ 0x55d268
+  55cb9e:	f8df 16cc 	ldr.w	r1, [pc, #1740]	@ 0x55d26c
+  55cba2:	eb17 3206 	adds.w	r2, r7, r6, lsl #12
+  55cba6:	f8c2 12c0 	str.w	r1, [r2, #704]	@ 0x2c0
+  55cbaa:	e7ba      	b.n	0x55cb22
+  55cbac:	f8df 06c0 	ldr.w	r0, [pc, #1728]	@ 0x55d270
+  55cbb0:	f8df 16c0 	ldr.w	r1, [pc, #1728]	@ 0x55d274
+  55cbb4:	eb17 3206 	adds.w	r2, r7, r6, lsl #12
+  55cbb8:	f8c2 12c0 	str.w	r1, [r2, #704]	@ 0x2c0
+  55cbbc:	e7b1      	b.n	0x55cb22
+  55cbbe:	2006      	movs	r0, #6
+  55cbc0:	e024      	b.n	0x55cc0c
+  55cbc2:	2005      	movs	r0, #5
+  55cbc4:	e022      	b.n	0x55cc0c
+  55cbc6:	2000      	movs	r0, #0
+  55cbc8:	f885 08a4 	strb.w	r0, [r5, #2212]	@ 0x8a4
+  55cbcc:	6928      	ldr	r0, [r5, #16]
+  55cbce:	3808      	subs	r0, #8
+  55cbd0:	0080      	lsls	r0, r0, #2
+  55cbd2:	2160      	movs	r1, #96	@ 0x60
+  55cbd4:	fbb0 f0f1 	udiv	r0, r0, r1
+  55cbd8:	f8c5 0858 	str.w	r0, [r5, #2136]	@ 0x858
+  55cbdc:	f8d5 0858 	ldr.w	r0, [r5, #2136]	@ 0x858
+  55cbe0:	f240 1101 	movw	r1, #257	@ 0x101
+  55cbe4:	4288      	cmp	r0, r1
+  55cbe6:	d303      	bcc.n	0x55cbf0
+  55cbe8:	f44f 7080 	mov.w	r0, #256	@ 0x100
+  55cbec:	f8c5 0858 	str.w	r0, [r5, #2136]	@ 0x858
+  55cbf0:	2000      	movs	r0, #0
+  55cbf2:	e006      	b.n	0x55cc02
+  55cbf4:	2100      	movs	r1, #0
+  55cbf6:	0002      	movs	r2, r0
+  55cbf8:	b2d2      	uxtb	r2, r2
+  55cbfa:	442a      	add	r2, r5
+  55cbfc:	f882 18a0 	strb.w	r1, [r2, #2208]	@ 0x8a0
+  55cc00:	1c40      	adds	r0, r0, #1
+  55cc02:	0001      	movs	r1, r0
+  55cc04:	b2c9      	uxtb	r1, r1
+  55cc06:	2904      	cmp	r1, #4
+  55cc08:	dbf4      	blt.n	0x55cbf4
+  55cc0a:	4640      	mov	r0, r8
+  55cc0c:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+
+
+/tmp/iom-strdis-main.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0055cf38 <.data+0x124f38>:
+  55cf38:	0000      	movs	r0, r0
+  55cf3a:	4005      	ands	r5, r0
+
+
+/tmp/iom-strdis-main.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0055d248 <.data+0x125248>:
+  55d248:	0000      	movs	r0, r0
+  55d24a:	4005      	ands	r5, r0
+  55d24c:	6c01      	ldr	r1, [r0, #64]	@ 0x40
+  55d24e:	02dc      	lsls	r4, r3, #11
+  55d250:	4240      	negs	r0, r0
+  55d252:	000f      	movs	r7, r1
+  55d254:	0000      	movs	r0, r0
+  55d256:	2008      	movs	r0, #8
+  55d258:	86a0      	strh	r0, [r4, #52]	@ 0x34
+  55d25a:	0001      	movs	r1, r0
+  55d25c:	1a80      	subs	r0, r0, r2
+  55d25e:	0006      	movs	r6, r0
+  55d260:	2301      	movs	r3, #1
+  55d262:	773b      	strb	r3, [r7, #28]
+  55d264:	f070 0003 	orns	r0, r0, #3
+  55d268:	2301      	movs	r3, #1
+  55d26a:	1d0e      	adds	r6, r1, #4
+  55d26c:	f270 0003 			@ <UNDEFINED> instruction: 0xf2700003
+  55d270:	2301      	movs	r3, #1
+  55d272:	0b05      	lsrs	r5, r0, #12
+  55d274:	3040      	adds	r0, #64	@ 0x40
+  55d276:	0002      	movs	r2, r0

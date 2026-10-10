@@ -1,0 +1,82 @@
+
+g2/analysis/source-discovery-parallel-2026-10-09/smp-token-admissibility-20261010/close.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00537502 <.data>:
+  537502:	b538      	push	{r3, r4, r5, lr}
+  537504:	0005      	movs	r5, r0
+  537506:	8828      	ldrh	r0, [r5, #0]
+  537508:	b2c0      	uxtb	r0, r0
+  53750a:	f000 f877 	bl	0x5375fc
+  53750e:	0004      	movs	r4, r0
+  537510:	78a8      	ldrb	r0, [r5, #2]
+  537512:	2827      	cmp	r0, #39	@ 0x27
+  537514:	d131      	bne.n	0x53757a
+  537516:	8828      	ldrh	r0, [r5, #0]
+  537518:	b2c0      	uxtb	r0, r0
+  53751a:	f77f ff53 	bl	0x4b73c4
+  53751e:	2800      	cmp	r0, #0
+  537520:	d106      	bne.n	0x537530
+  537522:	2001      	movs	r0, #1
+  537524:	f884 003a 	strb.w	r0, [r4, #58]	@ 0x3a
+  537528:	200b      	movs	r0, #11
+  53752a:	f884 003f 	strb.w	r0, [r4, #63]	@ 0x3f
+  53752e:	e005      	b.n	0x53753c
+  537530:	2000      	movs	r0, #0
+  537532:	f884 003a 	strb.w	r0, [r4, #58]	@ 0x3a
+  537536:	2001      	movs	r0, #1
+  537538:	f884 003f 	strb.w	r0, [r4, #63]	@ 0x3f
+  53753c:	88e8      	ldrh	r0, [r5, #6]
+  53753e:	8720      	strh	r0, [r4, #56]	@ 0x38
+  537540:	8828      	ldrh	r0, [r5, #0]
+  537542:	f884 003d 	strb.w	r0, [r4, #61]	@ 0x3d
+  537546:	2000      	movs	r0, #0
+  537548:	f884 003b 	strb.w	r0, [r4, #59]	@ 0x3b
+  53754c:	2000      	movs	r0, #0
+  53754e:	f884 003c 	strb.w	r0, [r4, #60]	@ 0x3c
+  537552:	8828      	ldrh	r0, [r5, #0]
+  537554:	b2c0      	uxtb	r0, r0
+  537556:	f00b f811 	bl	0x54257c
+  53755a:	f884 0042 	strb.w	r0, [r4, #66]	@ 0x42
+  53755e:	2000      	movs	r0, #0
+  537560:	f884 0043 	strb.w	r0, [r4, #67]	@ 0x43
+  537564:	2000      	movs	r0, #0
+  537566:	f884 003e 	strb.w	r0, [r4, #62]	@ 0x3e
+  53756a:	2000      	movs	r0, #0
+  53756c:	f884 0044 	strb.w	r0, [r4, #68]	@ 0x44
+  537570:	8828      	ldrh	r0, [r5, #0]
+  537572:	b2c0      	uxtb	r0, r0
+  537574:	f7ff ff92 	bl	0x53749c
+  537578:	e025      	b.n	0x5375c6
+  53757a:	f894 003d 	ldrb.w	r0, [r4, #61]	@ 0x3d
+  53757e:	2800      	cmp	r0, #0
+  537580:	d021      	beq.n	0x5375c6
+  537582:	78a8      	ldrb	r0, [r5, #2]
+  537584:	2828      	cmp	r0, #40	@ 0x28
+  537586:	d11e      	bne.n	0x5375c6
+  537588:	f894 1042 	ldrb.w	r1, [r4, #66]	@ 0x42
+  53758c:	8828      	ldrh	r0, [r5, #0]
+  53758e:	b2c0      	uxtb	r0, r0
+  537590:	f00a ff42 	bl	0x542418
+  537594:	8828      	ldrh	r0, [r5, #0]
+  537596:	f8ad 0000 	strh.w	r0, [sp]
+  53759a:	200a      	movs	r0, #10
+  53759c:	f88d 0002 	strb.w	r0, [sp, #2]
+  5375a0:	7a28      	ldrb	r0, [r5, #8]
+  5375a2:	3020      	adds	r0, #32
+  5375a4:	f88d 0003 	strb.w	r0, [sp, #3]
+  5375a8:	4669      	mov	r1, sp
+  5375aa:	0020      	movs	r0, r4
+  5375ac:	f037 fc59 	bl	0x56ee62
+  5375b0:	2000      	movs	r0, #0
+  5375b2:	f884 003d 	strb.w	r0, [r4, #61]	@ 0x3d
+  5375b6:	6b60      	ldr	r0, [r4, #52]	@ 0x34
+  5375b8:	2800      	cmp	r0, #0
+  5375ba:	d004      	beq.n	0x5375c6
+  5375bc:	6b60      	ldr	r0, [r4, #52]	@ 0x34
+  5375be:	f788 f9f7 	bl	0x4bf9b0
+  5375c2:	2000      	movs	r0, #0
+  5375c4:	6360      	str	r0, [r4, #52]	@ 0x34
+  5375c6:	bd31      	pop	{r0, r4, r5, pc}

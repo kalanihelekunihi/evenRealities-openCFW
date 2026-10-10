@@ -1,0 +1,52 @@
+{
+  "image_sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+  "conditional_base": 270544900,
+  "mode_list_runtime": 270578108,
+  "mode_list_child_span": [
+    33208,
+    33216
+  ],
+  "mode_list_words": [
+    270578116,
+    270578180
+  ],
+  "mode_records": [
+    {
+      "record_runtime": 270578116,
+      "record_child_span": [
+        33216,
+        33236
+      ],
+      "fields": {
+        "type": 0,
+        "init": 270566964,
+        "done": 270566948,
+        "tick": 270566940,
+        "buffer_init": 270566944
+      },
+      "bytes_sha256": "228a928f037258249c3d0f3b644392f50a7c4f70beba0d929660eb35528b3cf3"
+    },
+    {
+      "record_runtime": 270578180,
+      "record_child_span": [
+        33280,
+        33300
+      ],
+      "fields": {
+        "type": 1,
+        "init": 270567024,
+        "done": 270566988,
+        "tick": 268591960,
+        "buffer_init": 270566980
+      },
+      "bytes_sha256": "f1cd07b5125d22d5909ea15d43382e6dfe5212e201b45fff2fb8c7a8b86cdf36"
+    }
+  ],
+  "state_runtime": 537061092,
+  "state_words": [
+    "s_lvp_loop",
+    "s_current_index"
+  ],
+  "source_struct": "lvp/lvp_mode.h:LVP_MODE_INFO",
+  "qualification": "static table inference exact; runtime state may change and physical XIP/DRAM visibility remains conditional"
+}

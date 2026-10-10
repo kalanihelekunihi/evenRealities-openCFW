@@ -1,0 +1,1209 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "label": "official QEMU pinned checkout",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout COPYING",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout LICENSE",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout target/csky/cpu.c",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout target/csky/cpu.h",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout target/csky/translate_v2.c",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout target/csky/op_dspv2.c",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout target/csky/op_helper_v2.c",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout target/csky/meson.build",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout hw/csky/smartl.c",
+      "pass": true
+    },
+    {
+      "label": "acquired/full-checkout hw/csky/virt.c",
+      "pass": true
+    },
+    {
+      "label": "ck804ef maps DSP2/FPU single E804 init",
+      "pass": true
+    }
+  ],
+  "sections": [
+    {
+      "symbol": "csky_radix4_butterfly_q15",
+      "section_bytes": 530,
+      "preprocessed_source": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_cfft_radix4_q15.preprocessed.s",
+      "preprocessed_sha256": "ca42eac966261375beadd0a688226ef67f6b41188274c52a6b85140077da3cbf",
+      "mnemonics": [
+        "addi",
+        "addu",
+        "asri",
+        "bf",
+        "bloop",
+        "br",
+        "cmphsi",
+        "cmplt",
+        "ld.w",
+        "lsli",
+        "lsri",
+        "mov",
+        "movi",
+        "mulca.s16.s",
+        "mulcsx.s16",
+        "mult",
+        "padd.s16.s",
+        "paddh.s16",
+        "pasri.s16",
+        "pasx.s16.s",
+        "pasxh.s16",
+        "pkghh",
+        "pldbi.d",
+        "pop",
+        "psax.s16.s",
+        "psaxh.s16",
+        "psub.s16.s",
+        "psubh.s16",
+        "push",
+        "st.w",
+        "stbi.w",
+        "subi"
+      ]
+    },
+    {
+      "symbol": "csky_radix4_butterfly_inverse_q15",
+      "section_bytes": 530,
+      "preprocessed_source": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_cfft_radix4_q15.preprocessed.s",
+      "preprocessed_sha256": "ca42eac966261375beadd0a688226ef67f6b41188274c52a6b85140077da3cbf",
+      "mnemonics": [
+        "addi",
+        "addu",
+        "asri",
+        "bf",
+        "bloop",
+        "br",
+        "cmphsi",
+        "cmplt",
+        "ld.w",
+        "lsli",
+        "lsri",
+        "mov",
+        "movi",
+        "mulcax.s16.s",
+        "mulcs.s16",
+        "mult",
+        "padd.s16.s",
+        "paddh.s16",
+        "pasri.s16",
+        "pasx.s16.s",
+        "pasxh.s16",
+        "pkghh",
+        "pldbi.d",
+        "pop",
+        "psax.s16.s",
+        "psaxh.s16",
+        "psub.s16.s",
+        "psubh.s16",
+        "push",
+        "st.w",
+        "stbi.w",
+        "subi"
+      ]
+    },
+    {
+      "symbol": "csky_split_rfft_q15",
+      "section_bytes": 146,
+      "preprocessed_source": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_rfft_q15.preprocessed.s",
+      "preprocessed_sha256": "8865f94309323192747d7eb7e95e142dab2b895dd9218aa5b36a854aafa2d5b2",
+      "mnemonics": [
+        "addh.s32",
+        "addi",
+        "addu",
+        "bez",
+        "bgeni",
+        "bloop",
+        "ld.hs",
+        "ld.w",
+        "ldbi.w",
+        "ldbir.w",
+        "lsli",
+        "movi",
+        "mulaca.s16.s",
+        "mulacax.s16.s",
+        "mulcs.s16",
+        "mulcsx.s16",
+        "pabs.s16.s",
+        "pkg",
+        "pkghh",
+        "pop",
+        "psub.16",
+        "push",
+        "st.h",
+        "stbi.w",
+        "subh.s32",
+        "subi"
+      ]
+    },
+    {
+      "symbol": "csky_split_rifft_q15",
+      "section_bytes": 86,
+      "preprocessed_source": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_rfft_q15.preprocessed.s",
+      "preprocessed_sha256": "8865f94309323192747d7eb7e95e142dab2b895dd9218aa5b36a854aafa2d5b2",
+      "mnemonics": [
+        "addu",
+        "bez",
+        "bgeni",
+        "bloop",
+        "ld.w",
+        "ldbi.w",
+        "ldbir.w",
+        "lsli",
+        "mulaca.s16.s",
+        "mulacsx.s16.s",
+        "mulcax.s16.s",
+        "mulcs.s16",
+        "pabs.s16.s",
+        "pkg",
+        "pkghh",
+        "pneg.s16.s",
+        "pop",
+        "psub.16",
+        "push",
+        "stbi.w",
+        "subi"
+      ]
+    },
+    {
+      "symbol": "csky_shift_q15",
+      "section_bytes": 116,
+      "preprocessed_source": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_shift_q15.preprocessed.s",
+      "preprocessed_sha256": "75d1b64ba96a3fd2d564c1556bb82bff9de3bfbac8823feaebb1e697f6c5ce0d",
+      "mnemonics": [
+        "andi",
+        "bez",
+        "bloop",
+        "blz",
+        "br",
+        "ldbi.hs",
+        "lsri",
+        "neg.s32.s",
+        "pasr.s16",
+        "pldbi.d",
+        "plsl.s16.s",
+        "rts",
+        "stbi.h",
+        "stbi.w"
+      ]
+    },
+    {
+      "symbol": "csky_abs_max_q15",
+      "section_bytes": 76,
+      "preprocessed_source": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_abs_max_q15.preprocessed.s",
+      "preprocessed_sha256": "fcc883da5a0b9f25b485a3ef14751aa1228e074c321d6c5ef8404d90330dd8b8",
+      "mnemonics": [
+        "andi",
+        "bez",
+        "bloop",
+        "dup.16",
+        "ldbi.h",
+        "lsri",
+        "movi",
+        "pabs.s16.s",
+        "pldbi.d",
+        "pmax.u16",
+        "rts",
+        "stbi.h"
+      ]
+    },
+    {
+      "symbol": "csky_copy_q15",
+      "section_bytes": 44,
+      "preprocessed_source": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_copy_q15.preprocessed.s",
+      "preprocessed_sha256": "a556183243e4607d4ee558b11d89ca266a66e4e62cf344eddca416b6c130ee57",
+      "mnemonics": [
+        "andi",
+        "bez",
+        "bloop",
+        "ldbi.h",
+        "lsri",
+        "pldbi.d",
+        "rts",
+        "stbi.h",
+        "stbi.w"
+      ]
+    },
+    {
+      "symbol": "csky_fill_q15",
+      "section_bytes": 40,
+      "preprocessed_source": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_fill_q15.preprocessed.s",
+      "preprocessed_sha256": "3dad045a3d3eed5e75e9815e70fc190652ede08c086574c9ad8f60cded55f018",
+      "mnemonics": [
+        "andi",
+        "bez",
+        "bloop",
+        "dup.16",
+        "lsri",
+        "rts",
+        "stbi.h",
+        "stbi.w"
+      ]
+    },
+    {
+      "symbol": "csky_bitreversal_16",
+      "section_bytes": 38,
+      "preprocessed_source": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_bitreversal2.preprocessed.s",
+      "preprocessed_sha256": "3ec8ec45479747820e39d3a18c56d3dd0640e0d8bdeaa0efea98575df1686f87",
+      "mnemonics": [
+        "addi",
+        "addu",
+        "bloop",
+        "jmp",
+        "ldh",
+        "ldw",
+        "lsri",
+        "mov",
+        "pop",
+        "push",
+        "stw"
+      ]
+    }
+  ],
+  "unique_source_mnemonics": 64,
+  "mnemonics": [
+    "addh.s32",
+    "addi",
+    "addu",
+    "andi",
+    "asri",
+    "bez",
+    "bf",
+    "bgeni",
+    "bloop",
+    "blz",
+    "br",
+    "cmphsi",
+    "cmplt",
+    "dup.16",
+    "jmp",
+    "ld.hs",
+    "ld.w",
+    "ldbi.h",
+    "ldbi.hs",
+    "ldbi.w",
+    "ldbir.w",
+    "ldh",
+    "ldw",
+    "lsli",
+    "lsri",
+    "mov",
+    "movi",
+    "mulaca.s16.s",
+    "mulacax.s16.s",
+    "mulacsx.s16.s",
+    "mulca.s16.s",
+    "mulcax.s16.s",
+    "mulcs.s16",
+    "mulcsx.s16",
+    "mult",
+    "neg.s32.s",
+    "pabs.s16.s",
+    "padd.s16.s",
+    "paddh.s16",
+    "pasr.s16",
+    "pasri.s16",
+    "pasx.s16.s",
+    "pasxh.s16",
+    "pkg",
+    "pkghh",
+    "pldbi.d",
+    "plsl.s16.s",
+    "pmax.u16",
+    "pneg.s16.s",
+    "pop",
+    "psax.s16.s",
+    "psaxh.s16",
+    "psub.16",
+    "psub.s16.s",
+    "psubh.s16",
+    "push",
+    "rts",
+    "st.h",
+    "st.w",
+    "stbi.h",
+    "stbi.w",
+    "stw",
+    "subh.s32",
+    "subi"
+  ],
+  "source_presence_candidates": {
+    "addh.s32": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8189,
+        "text": "static inline void dspv2_insn_addh_s32(int rz, int rx, int ry)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8374,
+        "text": "dspv2_insn_addh_s32(rz, rx, ry);"
+      }
+    ],
+    "addi": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 385,
+        "text": "tcg_gen_addi_tl(t0, cpu_R[rx], imm);                       \\"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 394,
+        "text": "tcg_gen_addi_tl(t0, cpu_R[rx], imm);                       \\"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 638,
+        "text": "tcg_gen_addi_tl(t1, t1, 1);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 641,
+        "text": "tcg_gen_addi_tl(t1, t1, imm & 0xf);"
+      }
+    ],
+    "addu": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1262,
+        "text": "/*addu16(2)*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1290,
+        "text": "/*addu16(1)*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3441,
+        "text": "/* addu */"
+      }
+    ],
+    "andi": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 513,
+        "text": "tcg_gen_andi_tl(t0, cpu_R[rx], 0xff000000);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 516,
+        "text": "tcg_gen_andi_tl(t0, cpu_R[rx], 0x00ff0000);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 519,
+        "text": "tcg_gen_andi_tl(t0, cpu_R[rx], 0x0000ff00);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 522,
+        "text": "tcg_gen_andi_tl(t0, cpu_R[rx], 0x000000ff);"
+      }
+    ],
+    "asri": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1248,
+        "text": "/*asri16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3679,
+        "text": "/* asri */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8880,
+        "text": "static inline void dspv2_insn_asri_s32_r(int rz, int rx, int imm)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8926,
+        "text": "static inline void dspv2_insn_pasri_s16(int rz, int rx, int imm)"
+      }
+    ],
+    "bez": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 4157,
+        "text": "case 0x8: /* bez */"
+      }
+    ],
+    "bf": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 491,
+        "text": "tcg_gen_subfi_tl(t0, 1, cpu_c);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 727,
+        "text": "tcg_gen_subfi_tl(cpu_R[rz], 1, cpu_c);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 986,
+        "text": "/*bf16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3489,
+        "text": "tcg_gen_subfi_tl(cpu_R[rz], 1, cpu_c);"
+      }
+    ],
+    "bloop": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 4181,
+        "text": "case 0xe: /* bloop */"
+      }
+    ],
+    "blz": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 4173,
+        "text": "case 0xc: /* blz */"
+      }
+    ],
+    "br": [
+      {
+        "file": "target/csky/cpu.c",
+        "line": 6,
+        "text": "* This library is free software; you can redistribute it and/or"
+      },
+      {
+        "file": "target/csky/cpu.c",
+        "line": 11,
+        "text": "* This library is distributed in the hope that it will be useful,"
+      },
+      {
+        "file": "target/csky/cpu.c",
+        "line": 17,
+        "text": "* License along with this library; if not, see <http://www.gnu.org/licenses/>."
+      },
+      {
+        "file": "target/csky/cpu.c",
+        "line": 46,
+        "text": "if (cpu->env.hbreak) {"
+      }
+    ],
+    "cmphsi": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1162,
+        "text": "/*cmphsi16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 4295,
+        "text": "case 0x18: /* cmphsi */"
+      }
+    ],
+    "cmplt": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 718,
+        "text": "/* cmplt */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1166,
+        "text": "/*cmplti16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3475,
+        "text": "/* cmplt */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 4299,
+        "text": "case 0x19:  /* cmplti */"
+      }
+    ],
+    "dup.16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9447,
+        "text": "gen_helper_dspv2_dup_16(cpu_R[rz], cpu_R[rx], t0);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 1106,
+        "text": "uint32_t DSPV2_HELPER(dup_16)(uint32_t x, uint32_t index)"
+      }
+    ],
+    "jmp": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 51,
+        "text": "/* is_jmp field values */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 334,
+        "text": "ctx->base.is_jmp = DISAS_NORETURN;"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 392,
+        "text": "ctx->base.is_jmp = DISAS_TB_JUMP;                          \\"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 421,
+        "text": "ctx->base.is_jmp = DISAS_TB_JUMP;                          \\"
+      }
+    ],
+    "ld.hs": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 2908,
+        "text": "/* ld.hs */"
+      }
+    ],
+    "ld.w": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1354,
+        "text": "/*ld.w16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 2891,
+        "text": "/* ld.w */"
+      }
+    ],
+    "ldh": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 6383,
+        "text": "case 0x23: /* fldh */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 6384,
+        "text": "gen_helper_fpu3_fldh(tcg_env, fpu3_insn);"
+      }
+    ],
+    "ldw": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3048,
+        "text": "/* pldw */    /*ignore this instruction*/"
+      }
+    ],
+    "lsli": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1238,
+        "text": "/*lsli16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3673,
+        "text": "/* lsli */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9092,
+        "text": "static inline void dspv2_insn_plsli_u16(int rz, int rx, int imm)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9146,
+        "text": "gen_helper_dspv2_lsli_u32_s(cpu_R[rz], cpu_R[rx], t0);"
+      }
+    ],
+    "lsri": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1243,
+        "text": "/*lsri16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3676,
+        "text": "/* lsri */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8903,
+        "text": "static inline void dspv2_insn_lsri_u32_r(int rz, int rx, int imm)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9000,
+        "text": "static inline void dspv2_insn_plsri_u16(int rz, int rx, int imm)"
+      }
+    ],
+    "mov": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 122,
+        "text": "tcg_gen_movi_i32(cpu_v, 0);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 125,
+        "text": "tcg_gen_movi_i32(cpu_v, 1);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 148,
+        "text": "tcg_gen_movi_i32(cpu_v, 0);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 151,
+        "text": "tcg_gen_movi_i32(cpu_v, 1);"
+      }
+    ],
+    "movi": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 122,
+        "text": "tcg_gen_movi_i32(cpu_v, 0);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 125,
+        "text": "tcg_gen_movi_i32(cpu_v, 1);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 148,
+        "text": "tcg_gen_movi_i32(cpu_v, 0);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 151,
+        "text": "tcg_gen_movi_i32(cpu_v, 1);"
+      }
+    ],
+    "mulaca.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 10245,
+        "text": "gen_helper_dspv2_mulaca_s16_s(cpu_R[rz], cpu_R[rz],"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 1597,
+        "text": "uint32_t DSPV2_HELPER(mulaca_s16_s)(uint32_t z, uint32_t x, uint32_t y)"
+      }
+    ],
+    "mulacax.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 10249,
+        "text": "gen_helper_dspv2_mulacax_s16_s(cpu_R[rz], cpu_R[rz],"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 1609,
+        "text": "uint32_t DSPV2_HELPER(mulacax_s16_s)(uint32_t z, uint32_t x, uint32_t y)"
+      }
+    ],
+    "mulacsx.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 10261,
+        "text": "gen_helper_dspv2_mulacsx_s16_s(cpu_R[rz], cpu_R[rz],"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 1645,
+        "text": "uint32_t DSPV2_HELPER(mulacsx_s16_s)(uint32_t z, uint32_t x, uint32_t y)"
+      }
+    ],
+    "mulca.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 10230,
+        "text": "gen_helper_dspv2_mulca_s16_s(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 1565,
+        "text": "uint32_t DSPV2_HELPER(mulca_s16_s)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "mulcax.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 10233,
+        "text": "gen_helper_dspv2_mulcax_s16_s(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 1581,
+        "text": "uint32_t DSPV2_HELPER(mulcax_s16_s)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "mulcs.s16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9961,
+        "text": "static inline void dspv2_insn_mulcs_s16(int rz, int rx, int ry)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 10236,
+        "text": "dspv2_insn_mulcs_s16(rz, rx, ry);"
+      }
+    ],
+    "mulcsx.s16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9995,
+        "text": "static inline void dspv2_insn_mulcsx_s16(int rz, int rx, int ry)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 10242,
+        "text": "dspv2_insn_mulcsx_s16(rz, rx, ry);"
+      }
+    ],
+    "mult": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 912,
+        "text": "/* mult */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3846,
+        "text": "/* mult */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 11057,
+        "text": "/* not multiply instructions. */"
+      }
+    ],
+    "neg.s32.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9429,
+        "text": "gen_helper_dspv2_neg_s32_s(cpu_R[rz], cpu_R[rx]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 1088,
+        "text": "uint32_t DSPV2_HELPER(neg_s32_s)(uint32_t x)"
+      }
+    ],
+    "pabs.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9401,
+        "text": "gen_helper_dspv2_pabs_s16_s(cpu_R[rz], cpu_R[rx]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 1020,
+        "text": "uint32_t DSPV2_HELPER(pabs_s16_s)(uint32_t x)"
+      }
+    ],
+    "padd.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8324,
+        "text": "gen_helper_dspv2_padd_s16_s(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 118,
+        "text": "uint32_t DSPV2_HELPER(padd_s16_s)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "paddh.s16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8368,
+        "text": "gen_helper_dspv2_paddh_s16(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 238,
+        "text": "uint32_t DSPV2_HELPER(paddh_s16)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "pasr.s16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8940,
+        "text": "static inline void dspv2_insn_pasr_s16(int rz, int rx, int ry)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8976,
+        "text": "static inline void dspv2_insn_pasr_s16_r(int rz, int rx, int ry)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9162,
+        "text": "dspv2_insn_pasr_s16(rz, rx, ry);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9168,
+        "text": "dspv2_insn_pasr_s16_r(rz, rx, ry);"
+      }
+    ],
+    "pasri.s16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8926,
+        "text": "static inline void dspv2_insn_pasri_s16(int rz, int rx, int imm)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8956,
+        "text": "static inline void dspv2_insn_pasri_s16_r(int rz, int rx, int imm)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9159,
+        "text": "dspv2_insn_pasri_s16(rz, rx, imm);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9165,
+        "text": "dspv2_insn_pasri_s16_r(rz, rx, imm);"
+      }
+    ],
+    "pasx.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8624,
+        "text": "gen_helper_dspv2_pasx_s16_s(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 310,
+        "text": "uint32_t DSPV2_HELPER(pasx_s16_s)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "pasxh.s16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8636,
+        "text": "gen_helper_dspv2_pasxh_s16(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 350,
+        "text": "uint32_t DSPV2_HELPER(pasxh_s16)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "pkg": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9211,
+        "text": "static inline void dspv2_insn_pkg(int rz, int rx, int imm4a, int ry, int imm4b)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9223,
+        "text": "static inline void dspv2_sop_pkg(DisasContext *s, uint32_t insn)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9231,
+        "text": "dspv2_insn_pkg(rz, rx, imm4a, ry, imm4b);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9275,
+        "text": "static inline void dspv2_insn_pkgll(int rz, int rx, int ry)"
+      }
+    ],
+    "pkghh": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9286,
+        "text": "static inline void dspv2_insn_pkghh(int rz, int rx, int ry)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9314,
+        "text": "dspv2_insn_pkghh(rz, rx, ry);"
+      }
+    ],
+    "pldbi.d": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 2488,
+        "text": "static inline void dspv2_insn_pldbi_d(DisasContext *s, int rz, int rx)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 2645,
+        "text": "dspv2_insn_pldbi_d(ctx, rz, rx);"
+      }
+    ],
+    "plsl.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9200,
+        "text": "gen_helper_dspv2_plsl_s16_s(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 545,
+        "text": "uint32_t DSPV2_HELPER(plsl_s16_s)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "pmax.u16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8487,
+        "text": "static inline void dspv2_insn_pmax_u16(int rz, int rx, int ry)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8683,
+        "text": "dspv2_insn_pmax_u16(rz, rx, ry);"
+      }
+    ],
+    "pneg.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 9422,
+        "text": "gen_helper_dspv2_pneg_s16_s(cpu_R[rz], cpu_R[rx]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 1071,
+        "text": "uint32_t DSPV2_HELPER(pneg_s16_s)(uint32_t x)"
+      }
+    ],
+    "pop": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 626,
+        "text": "static inline void pop16(DisasContext *ctx, int imm)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1053,
+        "text": "/* ipop */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1087,
+        "text": "/*pop16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1097,
+        "text": "pop16(ctx, imm & 0x1f);"
+      }
+    ],
+    "psax.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8630,
+        "text": "gen_helper_dspv2_psax_s16_s(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 330,
+        "text": "uint32_t DSPV2_HELPER(psax_s16_s)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "psaxh.s16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8642,
+        "text": "gen_helper_dspv2_psaxh_s16(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 370,
+        "text": "uint32_t DSPV2_HELPER(psaxh_s16)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "psub.16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8173,
+        "text": "static inline void dspv2_insn_psub_16(int rz, int rx, int ry)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8338,
+        "text": "dspv2_insn_psub_16(rz, rx, ry);"
+      }
+    ],
+    "psub.s16.s": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8350,
+        "text": "gen_helper_dspv2_psub_s16_s(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 184,
+        "text": "uint32_t DSPV2_HELPER(psub_s16_s)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "psubh.s16": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8386,
+        "text": "gen_helper_dspv2_psubh_s16(cpu_R[rz], cpu_R[rx], cpu_R[ry]);"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 290,
+        "text": "uint32_t DSPV2_HELPER(psubh_s16)(uint32_t x, uint32_t y)"
+      }
+    ],
+    "push": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 669,
+        "text": "static inline void push16(DisasContext *ctx, int imm)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1041,
+        "text": "/* ipush */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1104,
+        "text": "/*push16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1114,
+        "text": "push16(ctx, imm & 0x1f);"
+      }
+    ],
+    "rts": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 4526,
+        "text": "gen_helper_vfp_sqrts(cpu_F0s, cpu_F0s, tcg_env);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 4941,
+        "text": "case 0x4:/* fsqrts  */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 5966,
+        "text": "case 0x2: /* fsqrts  */"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 5967,
+        "text": "gen_helper_fpu3_fsqrts(tcg_env, fpu3_insn);"
+      }
+    ],
+    "st.h": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 26,
+        "text": "#include \"exec/cpu_ldst.h\""
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1364,
+        "text": "/*st.h16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3032,
+        "text": "/* st.h */"
+      },
+      {
+        "file": "target/csky/op_dspv2.c",
+        "line": 23,
+        "text": "#include \"exec/cpu_ldst.h\""
+      }
+    ],
+    "st.w": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 1369,
+        "text": "/*st.w16*/"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 3036,
+        "text": "/* st.w */"
+      }
+    ],
+    "subh.s32": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8213,
+        "text": "static inline void dspv2_insn_subh_s32(int rz, int rx, int ry)"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 8392,
+        "text": "dspv2_insn_subh_s32(rz, rx, ry);"
+      }
+    ],
+    "subi": [
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 381,
+        "text": "tcg_gen_subi_tl(t0, cpu_R[SVBR], 4);                       \\"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 409,
+        "text": "tcg_gen_subi_tl(t0, cpu_R[SVBR], 4);                       \\"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 691,
+        "text": "tcg_gen_subi_i32(t0, t0, 4);"
+      },
+      {
+        "file": "target/csky/translate_v2.c",
+        "line": 700,
+        "text": "tcg_gen_subi_i32(t0, t0, 4);"
+      }
+    ]
+  },
+  "limits": "Exact-reproduced assembly source mnemonic inventory; translator/helper presence is a source-level candidate, not opcode execution validation or hardware semantics. No build/run repeated."
+}

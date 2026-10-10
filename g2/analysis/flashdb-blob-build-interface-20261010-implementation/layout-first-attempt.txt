@@ -1,0 +1,446 @@
+
+*** Dumping AST Record Layout
+         0 | struct __sbuf
+         0 |   unsigned char * _base
+         4 |   int _size
+           | [sizeof=8, align=4]
+
+*** Dumping AST Record Layout
+         0 | union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3)
+         0 |   wint_t __wch
+         0 |   unsigned char[4] __wchb
+           | [sizeof=4, align=4]
+
+*** Dumping AST Record Layout
+         0 | _mbstate_t
+         0 |   int __count
+         4 |   union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+         4 |     wint_t __wch
+         4 |     unsigned char[4] __wchb
+           | [sizeof=8, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct __sFILE
+         0 |   unsigned char * _p
+         4 |   int _r
+         8 |   int _w
+        12 |   short _flags
+        14 |   short _file
+        16 |   struct __sbuf _bf
+        16 |     unsigned char * _base
+        20 |     int _size
+        24 |   int _lbfsize
+        28 |   void * _cookie
+        32 |   int (*)(struct _reent *, void *, char *, int) _read
+        36 |   int (*)(struct _reent *, void *, const char *, int) _write
+        40 |   _fpos_t (*)(struct _reent *, void *, _fpos_t, int) _seek
+        44 |   int (*)(struct _reent *, void *) _close
+        48 |   struct __sbuf _ub
+        48 |     unsigned char * _base
+        52 |     int _size
+        56 |   unsigned char * _up
+        60 |   int _ur
+        64 |   unsigned char[3] _ubuf
+        67 |   unsigned char[1] _nbuf
+        68 |   struct __sbuf _lb
+        68 |     unsigned char * _base
+        72 |     int _size
+        76 |   int _blksize
+        80 |   _off_t _offset
+        84 |   struct _reent * _data
+        88 |   _flock_t _lock
+        92 |   _mbstate_t _mbstate
+        92 |     int __count
+        96 |     union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+        96 |       wint_t __wch
+        96 |       unsigned char[4] __wchb
+       100 |   int _flags2
+           | [sizeof=104, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct __tm
+         0 |   int __tm_sec
+         4 |   int __tm_min
+         8 |   int __tm_hour
+        12 |   int __tm_mday
+        16 |   int __tm_mon
+        20 |   int __tm_year
+        24 |   int __tm_wday
+        28 |   int __tm_yday
+        32 |   int __tm_isdst
+           | [sizeof=36, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct _rand48
+         0 |   unsigned short[3] _seed
+         6 |   unsigned short[3] _mult
+        12 |   unsigned short _add
+           | [sizeof=14, align=2]
+
+*** Dumping AST Record Layout
+         0 | struct _reent::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/reent.h:613:7)
+         0 |   char * _strtok_last
+         4 |   char[26] _asctime_buf
+        32 |   struct __tm _localtime_buf
+        32 |     int __tm_sec
+        36 |     int __tm_min
+        40 |     int __tm_hour
+        44 |     int __tm_mday
+        48 |     int __tm_mon
+        52 |     int __tm_year
+        56 |     int __tm_wday
+        60 |     int __tm_yday
+        64 |     int __tm_isdst
+        68 |   int _gamma_signgam
+        72 |   unsigned long long _rand_next
+        80 |   struct _rand48 _r48
+        80 |     unsigned short[3] _seed
+        86 |     unsigned short[3] _mult
+        92 |     unsigned short _add
+        96 |   _mbstate_t _mblen_state
+        96 |     int __count
+       100 |     union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       100 |       wint_t __wch
+       100 |       unsigned char[4] __wchb
+       104 |   _mbstate_t _mbtowc_state
+       104 |     int __count
+       108 |     union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       108 |       wint_t __wch
+       108 |       unsigned char[4] __wchb
+       112 |   _mbstate_t _wctomb_state
+       112 |     int __count
+       116 |     union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       116 |       wint_t __wch
+       116 |       unsigned char[4] __wchb
+       120 |   char[8] _l64a_buf
+       128 |   char[24] _signal_buf
+       152 |   int _getdate_err
+       156 |   _mbstate_t _mbrlen_state
+       156 |     int __count
+       160 |     union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       160 |       wint_t __wch
+       160 |       unsigned char[4] __wchb
+       164 |   _mbstate_t _mbrtowc_state
+       164 |     int __count
+       168 |     union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       168 |       wint_t __wch
+       168 |       unsigned char[4] __wchb
+       172 |   _mbstate_t _mbsrtowcs_state
+       172 |     int __count
+       176 |     union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       176 |       wint_t __wch
+       176 |       unsigned char[4] __wchb
+       180 |   _mbstate_t _wcrtomb_state
+       180 |     int __count
+       184 |     union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       184 |       wint_t __wch
+       184 |       unsigned char[4] __wchb
+       188 |   _mbstate_t _wcsrtombs_state
+       188 |     int __count
+       192 |     union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       192 |       wint_t __wch
+       192 |       unsigned char[4] __wchb
+       196 |   int _h_errno
+       200 |   char[32] _getlocalename_l_buf
+           | [sizeof=232, align=8]
+
+*** Dumping AST Record Layout
+         0 | union _reent::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/reent.h:611:3)
+         0 |   struct _reent::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/reent.h:613:7) _reent
+         0 |     char * _strtok_last
+         4 |     char[26] _asctime_buf
+        32 |     struct __tm _localtime_buf
+        32 |       int __tm_sec
+        36 |       int __tm_min
+        40 |       int __tm_hour
+        44 |       int __tm_mday
+        48 |       int __tm_mon
+        52 |       int __tm_year
+        56 |       int __tm_wday
+        60 |       int __tm_yday
+        64 |       int __tm_isdst
+        68 |     int _gamma_signgam
+        72 |     unsigned long long _rand_next
+        80 |     struct _rand48 _r48
+        80 |       unsigned short[3] _seed
+        86 |       unsigned short[3] _mult
+        92 |       unsigned short _add
+        96 |     _mbstate_t _mblen_state
+        96 |       int __count
+       100 |       union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       100 |         wint_t __wch
+       100 |         unsigned char[4] __wchb
+       104 |     _mbstate_t _mbtowc_state
+       104 |       int __count
+       108 |       union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       108 |         wint_t __wch
+       108 |         unsigned char[4] __wchb
+       112 |     _mbstate_t _wctomb_state
+       112 |       int __count
+       116 |       union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       116 |         wint_t __wch
+       116 |         unsigned char[4] __wchb
+       120 |     char[8] _l64a_buf
+       128 |     char[24] _signal_buf
+       152 |     int _getdate_err
+       156 |     _mbstate_t _mbrlen_state
+       156 |       int __count
+       160 |       union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       160 |         wint_t __wch
+       160 |         unsigned char[4] __wchb
+       164 |     _mbstate_t _mbrtowc_state
+       164 |       int __count
+       168 |       union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       168 |         wint_t __wch
+       168 |         unsigned char[4] __wchb
+       172 |     _mbstate_t _mbsrtowcs_state
+       172 |       int __count
+       176 |       union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       176 |         wint_t __wch
+       176 |         unsigned char[4] __wchb
+       180 |     _mbstate_t _wcrtomb_state
+       180 |       int __count
+       184 |       union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       184 |         wint_t __wch
+       184 |         unsigned char[4] __wchb
+       188 |     _mbstate_t _wcsrtombs_state
+       188 |       int __count
+       192 |       union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       192 |         wint_t __wch
+       192 |         unsigned char[4] __wchb
+       196 |     int _h_errno
+       200 |     char[32] _getlocalename_l_buf
+           | [sizeof=232, align=8]
+
+*** Dumping AST Record Layout
+         0 | struct _reent
+         0 |   int _errno
+         4 |   __FILE * _stdin
+         8 |   __FILE * _stdout
+        12 |   __FILE * _stderr
+        16 |   int _inc
+        20 |   char[25] _emergency
+        48 |   struct __locale_t * _locale
+        52 |   void (*)(struct _reent *) __cleanup
+        56 |   struct _Bigint * _result
+        60 |   int _result_k
+        64 |   struct _Bigint * _p5s
+        68 |   struct _Bigint ** _freelist
+        72 |   int _cvtlen
+        76 |   char * _cvtbuf
+        80 |   union _reent::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/reent.h:611:3) _new
+        80 |     struct _reent::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/reent.h:613:7) _reent
+        80 |       char * _strtok_last
+        84 |       char[26] _asctime_buf
+       112 |       struct __tm _localtime_buf
+       112 |         int __tm_sec
+       116 |         int __tm_min
+       120 |         int __tm_hour
+       124 |         int __tm_mday
+       128 |         int __tm_mon
+       132 |         int __tm_year
+       136 |         int __tm_wday
+       140 |         int __tm_yday
+       144 |         int __tm_isdst
+       148 |       int _gamma_signgam
+       152 |       unsigned long long _rand_next
+       160 |       struct _rand48 _r48
+       160 |         unsigned short[3] _seed
+       166 |         unsigned short[3] _mult
+       172 |         unsigned short _add
+       176 |       _mbstate_t _mblen_state
+       176 |         int __count
+       180 |         union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       180 |           wint_t __wch
+       180 |           unsigned char[4] __wchb
+       184 |       _mbstate_t _mbtowc_state
+       184 |         int __count
+       188 |         union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       188 |           wint_t __wch
+       188 |           unsigned char[4] __wchb
+       192 |       _mbstate_t _wctomb_state
+       192 |         int __count
+       196 |         union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       196 |           wint_t __wch
+       196 |           unsigned char[4] __wchb
+       200 |       char[8] _l64a_buf
+       208 |       char[24] _signal_buf
+       232 |       int _getdate_err
+       236 |       _mbstate_t _mbrlen_state
+       236 |         int __count
+       240 |         union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       240 |           wint_t __wch
+       240 |           unsigned char[4] __wchb
+       244 |       _mbstate_t _mbrtowc_state
+       244 |         int __count
+       248 |         union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       248 |           wint_t __wch
+       248 |           unsigned char[4] __wchb
+       252 |       _mbstate_t _mbsrtowcs_state
+       252 |         int __count
+       256 |         union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       256 |           wint_t __wch
+       256 |           unsigned char[4] __wchb
+       260 |       _mbstate_t _wcrtomb_state
+       260 |         int __count
+       264 |         union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       264 |           wint_t __wch
+       264 |           unsigned char[4] __wchb
+       268 |       _mbstate_t _wcsrtombs_state
+       268 |         int __count
+       272 |         union _mbstate_t::(unnamed at g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h:165:3) __value
+       272 |           wint_t __wch
+       272 |           unsigned char[4] __wchb
+       276 |       int _h_errno
+       280 |       char[32] _getlocalename_l_buf
+       312 |   void (**)(int) _sig_func
+           | [sizeof=320, align=8]
+
+*** Dumping AST Record Layout
+         0 | struct timespec
+         0 |   time_t tv_sec
+         8 |   long tv_nsec
+           | [sizeof=16, align=8]
+
+*** Dumping AST Record Layout
+         0 | struct fdb_kv::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:169:5)
+         0 |   uint32_t start
+         4 |   uint32_t value
+           | [sizeof=8, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct fdb_kv
+         0 |   fdb_kv_status_t status
+         4 |   _Bool crc_is_ok
+         5 |   uint8_t name_len
+         8 |   uint32_t magic
+        12 |   uint32_t len
+        16 |   uint32_t value_len
+        20 |   char[64] name
+        84 |   struct fdb_kv::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:169:5) addr
+        84 |     uint32_t start
+        88 |     uint32_t value
+           | [sizeof=92, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct kv_cache_node
+         0 |   uint16_t name_crc
+         2 |   uint16_t active
+         4 |   uint32_t addr
+           | [sizeof=8, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct kvdb_sec_info::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:227:5)
+         0 |   fdb_sector_store_status_t store
+         4 |   fdb_sector_dirty_status_t dirty
+           | [sizeof=8, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct kvdb_sec_info
+         0 |   _Bool check_ok
+         4 |   struct kvdb_sec_info::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:227:5) status
+         4 |     fdb_sector_store_status_t store
+         8 |     fdb_sector_dirty_status_t dirty
+        12 |   uint32_t addr
+        16 |   uint32_t magic
+        20 |   uint32_t combined
+        24 |   size_t remain
+        28 |   uint32_t empty_kv
+           | [sizeof=32, align=4]
+
+*** Dumping AST Record Layout
+         0 | union fdb_db::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:267:5)
+         0 |   const struct fal_partition * part
+           | [sizeof=4, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct fdb_db
+         0 |   const char * name
+         4 |   fdb_db_type type
+         8 |   union fdb_db::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:267:5) storage
+         8 |     const struct fal_partition * part
+        12 |   uint32_t sec_size
+        16 |   uint32_t max_size
+        20 |   uint32_t oldest_addr
+        24 |   _Bool init_ok
+        25 |   _Bool file_mode
+        26 |   _Bool not_formatable
+        28 |   void (*)(fdb_db_t) lock
+        32 |   void (*)(fdb_db_t) unlock
+        36 |   void * user_data
+           | [sizeof=40, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct fdb_blob::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:338:5)
+         0 |   uint32_t meta_addr
+         4 |   uint32_t addr
+         8 |   size_t len
+           | [sizeof=12, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct fdb_blob
+         0 |   void * buf
+         4 |   size_t size
+         8 |   struct fdb_blob::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:338:5) saved
+         8 |     uint32_t meta_addr
+        12 |     uint32_t addr
+        16 |     size_t len
+           | [sizeof=20, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct fdb_default_kv
+         0 |   struct fdb_default_kv_node * kvs
+         4 |   size_t num
+           | [sizeof=8, align=4]
+
+*** Dumping AST Record Layout
+         0 | struct fdb_kvdb
+         0 |   struct fdb_db parent
+         0 |     const char * name
+         4 |     fdb_db_type type
+         8 |     union fdb_db::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:267:5) storage
+         8 |       const struct fal_partition * part
+        12 |     uint32_t sec_size
+        16 |     uint32_t max_size
+        20 |     uint32_t oldest_addr
+        24 |     _Bool init_ok
+        25 |     _Bool file_mode
+        26 |     _Bool not_formatable
+        28 |     void (*)(fdb_db_t) lock
+        32 |     void (*)(fdb_db_t) unlock
+        36 |     void * user_data
+        40 |   struct fdb_default_kv default_kvs
+        40 |     struct fdb_default_kv_node * kvs
+        44 |     size_t num
+        48 |   _Bool gc_request
+        49 |   _Bool in_g2/analysis/flashdb-blob-build-interface-20261010-implementation/layout.c:10:26: error: 'kvdb_stride' declared as an array with a negative size
+   10 | typedef char kvdb_stride[(sizeof(struct fdb_kvdb)==0x8ac)?1:-1];
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+recovery_check
+        52 |   struct fdb_kv cur_kv
+        52 |     fdb_kv_status_t status
+        56 |     _Bool crc_is_ok
+        57 |     uint8_t name_len
+        60 |     uint32_t magic
+        64 |     uint32_t len
+        68 |     uint32_t value_len
+        72 |     char[64] name
+       136 |     struct fdb_kv::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:169:5) addr
+       136 |       uint32_t start
+       140 |       uint32_t value
+       144 |   struct kvdb_sec_info cur_sector
+       144 |     _Bool check_ok
+       148 |     struct kvdb_sec_info::(unnamed at g2/analysis/flashdb-blob-build-interface-20261010-implementation/fdb_def.h:227:5) status
+       148 |       fdb_sector_store_status_t store
+       152 |       fdb_sector_dirty_status_t dirty
+       156 |     uint32_t addr
+       160 |     uint32_t magic
+       164 |     uint32_t combined
+       168 |     size_t remain
+       172 |     uint32_t empty_kv
+       176 |   _Bool last_is_complete_del
+       180 |   struct kv_cache_node[64] kv_cache_table
+       692 |   struct kvdb_sec_info[64] sector_cache_table
+      2740 |   void * user_data
+           | [sizeof=2744, align=4]

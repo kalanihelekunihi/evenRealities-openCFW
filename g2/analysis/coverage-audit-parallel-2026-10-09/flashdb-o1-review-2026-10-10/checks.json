@@ -1,0 +1,30 @@
+{
+  "count": 25,
+  "passed": [
+    "exact replay isolate-results.json",
+    "exact replay provider-owned-results.json",
+    "exact replay recovery-results.json",
+    "unchanged candidate-O1.elf",
+    "unchanged candidate-O1.o",
+    "unchanged sealed stock baseline",
+    "slice causal 3 none",
+    "slice causal 3 code",
+    "slice causal 3 memory-write",
+    "slice causal 3 both",
+    "slice causal 8 none",
+    "slice causal 8 code",
+    "slice causal 8 memory-write",
+    "slice causal 8 both",
+    "slice causal 12 none",
+    "slice causal 12 code",
+    "slice causal 12 memory-write",
+    "slice causal 12 both",
+    "synthetic providers causal 3 False",
+    "synthetic providers causal 3 True",
+    "synthetic providers causal 8 False",
+    "synthetic providers causal 8 True",
+    "synthetic providers causal 12 False",
+    "synthetic providers causal 12 True",
+    "14 recovered O1 projections"
+  ]
+}

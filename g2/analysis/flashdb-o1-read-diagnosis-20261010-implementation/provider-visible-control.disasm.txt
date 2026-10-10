@@ -1,0 +1,112 @@
+
+g2/analysis/flashdb-o1-read-diagnosis-20261010-implementation/provider-owned.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00100000 <fdb_kv_get_blob>:
+  100000:	b570      	push	{r4, r5, r6, lr}
+  100002:	b082      	sub	sp, #8
+  100004:	4604      	mov	r4, r0
+  100006:	7e00      	ldrb	r0, [r0, #24]
+  100008:	b1c8      	cbz	r0, 10003e <fdb_kv_get_blob+0x3e>
+  10000a:	69e3      	ldr	r3, [r4, #28]
+  10000c:	b12b      	cbz	r3, 10001a <fdb_kv_get_blob+0x1a>
+  10000e:	4620      	mov	r0, r4
+  100010:	460d      	mov	r5, r1
+  100012:	4616      	mov	r6, r2
+  100014:	4798      	blx	r3
+  100016:	4632      	mov	r2, r6
+  100018:	4629      	mov	r1, r5
+  10001a:	f8d2 c000 	ldr.w	ip, [r2]
+  10001e:	6853      	ldr	r3, [r2, #4]
+  100020:	f102 0610 	add.w	r6, r2, #16
+  100024:	4620      	mov	r0, r4
+  100026:	4662      	mov	r2, ip
+  100028:	9600      	str	r6, [sp, #0]
+  10002a:	f000 f80f 	bl	10004c <get_kv>
+  10002e:	6a21      	ldr	r1, [r4, #32]
+  100030:	b119      	cbz	r1, 10003a <fdb_kv_get_blob+0x3a>
+  100032:	4605      	mov	r5, r0
+  100034:	4620      	mov	r0, r4
+  100036:	4788      	blx	r1
+  100038:	4628      	mov	r0, r5
+  10003a:	b002      	add	sp, #8
+  10003c:	bd70      	pop	{r4, r5, r6, pc}
+  10003e:	f000 f803 	bl	100048 <diagnostic>
+  100042:	2000      	movs	r0, #0
+  100044:	b002      	add	sp, #8
+  100046:	bd70      	pop	{r4, r5, r6, pc}
+
+00100048 <diagnostic>:
+  100048:	be00      	bkpt	0x0000
+  10004a:	4770      	bx	lr
+
+0010004c <get_kv>:
+  10004c:	b570      	push	{r4, r5, r6, lr}
+  10004e:	b096      	sub	sp, #88	@ 0x58
+  100050:	9e1a      	ldr	r6, [sp, #104]	@ 0x68
+  100052:	4615      	mov	r5, r2
+  100054:	466a      	mov	r2, sp
+  100056:	461c      	mov	r4, r3
+  100058:	f000 f818 	bl	10008c <find_kv>
+  10005c:	2e00      	cmp	r6, #0
+  10005e:	bf1c      	itt	ne
+  100060:	9803      	ldrne	r0, [sp, #12]
+  100062:	6030      	strne	r0, [r6, #0]
+  100064:	9e03      	ldr	r6, [sp, #12]
+  100066:	42b4      	cmp	r4, r6
+  100068:	bf38      	it	cc
+  10006a:	4626      	movcc	r6, r4
+  10006c:	b11d      	cbz	r5, 100076 <get_kv+0x2a>
+  10006e:	9915      	ldr	r1, [sp, #84]	@ 0x54
+  100070:	4633      	mov	r3, r6
+  100072:	f000 f81d 	bl	1000b0 <_fdb_flash_read>
+  100076:	4630      	mov	r0, r6
+  100078:	b016      	add	sp, #88	@ 0x58
+  10007a:	bd70      	pop	{r4, r5, r6, pc}
+
+0010007c <test_get>:
+  10007c:	f8dd c000 	ldr.w	ip, [sp]
+  100080:	f8cd c000 	str.w	ip, [sp]
+  100084:	e7e2      	b.n	10004c <get_kv>
+  100086:	bf00      	nop
+
+00100088 <test_write>:
+  100088:	2000      	movs	r0, #0
+  10008a:	4770      	bx	lr
+
+0010008c <find_kv>:
+  10008c:	1e50      	subs	r0, r2, #1
+  10008e:	2158      	movs	r1, #88	@ 0x58
+  100090:	23a7      	movs	r3, #167	@ 0xa7
+  100092:	bf00      	nop
+  100094:	3901      	subs	r1, #1
+  100096:	f800 3f01 	strb.w	r3, [r0, #1]!
+  10009a:	d1fb      	bne.n	100094 <find_kv+0x8>
+  10009c:	2008      	movs	r0, #8
+  10009e:	f24c 4100 	movw	r1, #50176	@ 0xc400
+  1000a2:	60d0      	str	r0, [r2, #12]
+  1000a4:	f2c0 01ab 	movt	r1, #171	@ 0xab
+  1000a8:	2001      	movs	r0, #1
+  1000aa:	6551      	str	r1, [r2, #84]	@ 0x54
+  1000ac:	4770      	bx	lr
+  1000ae:	bf00      	nop
+
+001000b0 <_fdb_flash_read>:
+  1000b0:	f241 00d8 	movw	r0, #4312	@ 0x10d8
+  1000b4:	f2c0 0010 	movt	r0, #16
+  1000b8:	6001      	str	r1, [r0, #0]
+  1000ba:	f241 01dc 	movw	r1, #4316	@ 0x10dc
+  1000be:	f2c0 0110 	movt	r1, #16
+  1000c2:	2002      	movs	r0, #2
+  1000c4:	600b      	str	r3, [r1, #0]
+  1000c6:	4770      	bx	lr
+
+001000c8 <_fdb_flash_write>:
+  1000c8:	2000      	movs	r0, #0
+  1000ca:	4770      	bx	lr
+
+001000cc <_fdb_write_status>:
+  1000cc:	2000      	movs	r0, #0
+  1000ce:	4770      	bx	lr

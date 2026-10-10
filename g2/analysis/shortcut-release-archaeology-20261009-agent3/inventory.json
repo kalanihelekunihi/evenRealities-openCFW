@@ -1,0 +1,1756 @@
+{
+  "apollo-pdsc.xml": {
+    "package": "AmbiqMicro.Apollo_DFP",
+    "repository": null,
+    "releases": [
+      {
+        "version": "1.6.0",
+        "date": "2026-07-20",
+        "notes": "- Apollo330P and Apollo510L RTM."
+      },
+      {
+        "version": "1.5.6",
+        "date": "2025-10-15",
+        "notes": "- Official support for Apollo330P and Apollo510L using product names."
+      },
+      {
+        "version": "1.5.4",
+        "date": "2025-06-22",
+        "notes": "- Support for Apollo330P and Apollo510L."
+      },
+      {
+        "version": "1.5.2",
+        "date": "2025-05-01",
+        "notes": "- Suppress multiple SVD errors/warnings from SVDConv."
+      },
+      {
+        "version": "1.5.0",
+        "date": "2025-04-02",
+        "notes": "- Release To Market support for Apollo510 devices, AP510NFA-CBR and AP510NFA-CCR."
+      },
+      {
+        "version": "1.4.1",
+        "date": "2023-08-18",
+        "notes": "- Updated Support for Apollo4 Lite devices AMAP42KL-KBR and AMA4B2KL-KBR."
+      },
+      {
+        "version": "1.3.0",
+        "date": "2022-08-05",
+        "notes": "- Support for Apollo4 Plus and Apollo4 Blue Plus devices including AMAP42KK-KBR and AMA4B2KP-KBR. - New secure URL site for packs downloads."
+      },
+      {
+        "version": "1.2.9",
+        "date": "2020-12-10",
+        "notes": "- Support for Apollo4 secure bootloader/AMAP42KK-KBR. - Add support for AMAP42KK-KCR and AMA4B2KK-KBR (SiP). - Remove support for Apollo4 Rev A (use Pack v1.2.8 for these devices)."
+      },
+      {
+        "version": "1.2.8",
+        "date": "2020-11-10",
+        "notes": "- Support for Apollo4 secure bootloader and AMAP42KK-KBR. - Still supports nbl and sblA."
+      },
+      {
+        "version": "1.2.6",
+        "date": "2020-06-05",
+        "notes": "- Support for Apollo4nbl (non-bootloader) AMAP42KK-KBR-nbl, AMAP42KK-KBR-sblA."
+      },
+      {
+        "version": "1.2.0",
+        "date": "2020-01-02",
+        "notes": "- Support for Apollo3 Blue Plus."
+      },
+      {
+        "version": "1.1.0",
+        "date": "2018-08-10",
+        "notes": "- Full support for Apollo3 Blue."
+      },
+      {
+        "version": "1.0.0",
+        "date": "2017-03-10",
+        "notes": "- Update device names to correspond to their official part numbers. - Update both Apollo and Apollo2 SVD files, particularly update vector table in Apollo2.svd. Also make sure svd files are schema compliant."
+      },
+      {
+        "version": "0.9.2",
+        "date": "2016-10-04",
+        "notes": "Ambiq Micro Apollo Device Family Keil Pack supporting the Apollo device. - Adds additional Apollo2 support."
+      },
+      {
+        "version": "0.9.1",
+        "date": "2016-07-01",
+        "notes": "- Update the Apollo2.svd file."
+      },
+      {
+        "version": "0.9.0",
+        "date": "2016-03-07",
+        "notes": "- Initial release of the Keil Pack for the Ambiq Micro Apollo2 Device supporting the FPGA emulator."
+      },
+      {
+        "version": "0.8.2",
+        "date": "2015-09-27",
+        "notes": "> - Rename the devices using underscores per Keil requirements. - Updates the PDSC file with other minor corrections suggested by the Keil team."
+      },
+      {
+        "version": "0.8.1",
+        "date": "2015-08-09",
+        "notes": "- Update of the Apollo.svd file."
+      },
+      {
+        "version": "0.8.0",
+        "date": "2015-06-14",
+        "notes": "- Release Keil Pack containing support for the Ambiq Micro the Apollo device."
+      },
+      {
+        "version": "0.6.0",
+        "date": "2015-05-05",
+        "notes": "- Beta Keil Pack containing support for the Ambiq Micro Apollo device."
+      }
+    ],
+    "files": [
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo510L.h",
+        "version": "1.5.6"
+      },
+      {
+        "category": "sourceC",
+        "name": "Device/Source/system_apollo330P.c",
+        "attr": "config",
+        "version": "1.5.6",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo330P.c",
+        "attr": "config",
+        "version": "1.5.6",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo510L.h",
+        "version": "1.5.6"
+      },
+      {
+        "category": "sourceC",
+        "name": "Device/Source/system_apollo510L.c",
+        "attr": "config",
+        "version": "1.5.6",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo510L.c",
+        "attr": "config",
+        "version": "1.5.6",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo510L.h",
+        "version": "1.5.6"
+      },
+      {
+        "category": "sourceC",
+        "name": "Device/Source/system_apollo510L.c",
+        "attr": "config",
+        "version": "1.5.6",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo510L.c",
+        "attr": "config",
+        "version": "1.5.6",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo510L.h",
+        "version": "1.5.6"
+      },
+      {
+        "category": "sourceC",
+        "name": "Device/Source/system_apollo510L.c",
+        "attr": "config",
+        "version": "1.5.6",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo510L.c",
+        "attr": "config",
+        "version": "1.5.6",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo510.h",
+        "version": "1.5.2"
+      },
+      {
+        "category": "sourceC",
+        "name": "Device/Source/system_apollo510.c",
+        "attr": "config",
+        "version": "1.5.2",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo510.c",
+        "attr": "config",
+        "version": "1.5.2",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo510.h",
+        "version": "1.5.2"
+      },
+      {
+        "category": "sourceC",
+        "name": "Device/Source/system_apollo510.c",
+        "attr": "config",
+        "version": "1.5.2",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo510.c",
+        "attr": "config",
+        "version": "1.5.2",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo4l.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo4l.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo4l.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo4l.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo4l.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo4l.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo4l.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo4l.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo4p.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo4p.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo4p.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo4p.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo4p.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo4p.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo4p.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo4p.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo4b.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo4b.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo4b.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo4b.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo4b.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo4b.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo4b.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo4b.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo3p.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo3p.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo3p.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo3p.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo3.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo3.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo3.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo3.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo2.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo2.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo2.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo2.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "include",
+        "name": "Device/Include/"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/apollo1.h",
+        "version": "1.4.1"
+      },
+      {
+        "category": "header",
+        "name": "Device/Include/system_apollo1.h",
+        "attr": "config",
+        "version": "1.4.1"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/system_apollo1.c",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_apollo1.s",
+        "attr": "config",
+        "version": "1.4.1",
+        "condition": "Compiler ARMCC"
+      }
+    ],
+    "components": [
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.5.6",
+        "condition": "Apollo330P CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.5.6",
+        "condition": "Apollo510L CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.5.6",
+        "condition": "Apollo510L Dual Mode CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.5.6",
+        "condition": "Apollo510 Blue Lite CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.5.2",
+        "condition": "Apollo510 CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.5.2",
+        "condition": "Apollo510 Blue CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo4 Lite CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo4 Blue Lite CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo4 Plus CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo4 Blue Plus CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo4 CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo4 Blue CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo3 Blue Plus CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo3 Blue CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo2 CMSIS Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.4.1",
+        "condition": "Apollo CMSIS Device"
+      }
+    ]
+  },
+  "arm-compiler-pdsc.xml": {
+    "package": "Keil.ARM_Compiler",
+    "repository": null,
+    "releases": [
+      {
+        "version": "1.7.2",
+        "date": "2022-04-26",
+        "notes": "Added support for Arm Cortex-M85 processor based devices. Added support for Arm China Star-MC1 processor based devices. Updated documentation appearance."
+      },
+      {
+        "version": "1.7.1",
+        "date": "2022-03-31",
+        "notes": "Added clock frequency to internal Event Recorder Initialization message."
+      },
+      {
+        "version": "1.7.0",
+        "date": "2022-02-25",
+        "notes": "Added Event Recorder logging via Semihosting."
+      },
+      {
+        "version": "1.6.3",
+        "date": "2020-04-22",
+        "notes": "Updated SCVD examples to Arm Compiler 6. Added Dcore Cortex-M55 to list of supported processors. Updated Event Recorder documentation describing the concept of heart beat events."
+      },
+      {
+        "version": "1.6.2",
+        "date": "2019-11-12",
+        "notes": "Added ARMV81MML to list of supported processors. Updated EventRecorder.scvd: - using level 'Detail' for start/stop A event group. - adding prefix attribute to enable linking the event property to the doxygen documentation."
+      },
+      {
+        "version": "1.6.1",
+        "date": "2018-12-12",
+        "notes": "Event Recorder examples - reset in simulation restarts CYCCNT. Updated documentation clarifying that the Event Recorder RAM location must not overlap with RAM area used for Flash Programming."
+      },
+      {
+        "version": "1.6.0",
+        "date": "2018-09-06",
+        "notes": "Added Cortex-M35P device support Event Recorder: - extended SCVD file format with state information - changed protocol version to 1.1 - added example projects for Cortex-M0 and state information"
+      },
+      {
+        "version": "1.5.0",
+        "date": "2018-07-31",
+        "notes": "Added Cortex-M1 to the list of support processors Event Recorder: - added CMSIS RTOS2 as Time Stamp Source - extended Time Stamp Timer interface - added EventRecorderClockUpdate function - enhanced MISRA Compliance - improved robustness Fixed version numbers Updated documentation"
+      },
+      {
+        "version": "1.4.0",
+        "date": "2018-03-15",
+        "notes": "Added Event Statistics feature to Event Recorder: - added EventStart and EventStop events to Event Recorder component. - added Example demonstrating Event Statistic. - updated EventRecorder.scvd file adding 'Event Statistics' group and 'Start/Stop' event descriptions. - updated Event Recorder documentation for Event Statistics."
+      },
+      {
+        "version": "1.3.3",
+        "date": "2017-10-15",
+        "notes": "Incrementing Compiler Bundle Cversion to 1.2.1 to fix inconsistencies between components' version in the RTE Dialog."
+      },
+      {
+        "version": "1.3.2",
+        "date": "2017-10-02",
+        "notes": "Event Recorder: - added support for Cortex-M23 - updated documentation"
+      },
+      {
+        "version": "1.3.1",
+        "date": "2017-04-21",
+        "notes": "Updated SCVD documentation for Event Recording Updated SCVD examples to build without warnings using ARM Compiler 6"
+      },
+      {
+        "version": "1.3.0",
+        "date": "2017-02-06",
+        "notes": "Updated documentation for Event Recorder component Added support for STDOUT using the Event Recorder"
+      },
+      {
+        "version": "1.2.0",
+        "date": "2016-11-11",
+        "notes": "Added Event Recorder component"
+      },
+      {
+        "version": "1.1.1",
+        "date": "2016-05-25",
+        "notes": "Fixing condition for supporting MDK-Middleware Variant MDK-Plus"
+      },
+      {
+        "version": "1.1.0",
+        "date": "2016-05-09",
+        "notes": "Added support for MDK-Plus Added \"Event Messaging\" component Added support for ARM Compiler 6 Enabled support for Dcore ARMV8MBL and ARMV8MML"
+      },
+      {
+        "version": "1.0.0",
+        "date": "2015-03-18",
+        "notes": "Initial release"
+      }
+    ],
+    "files": [
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Template/stdin_user.c",
+        "attr": "template",
+        "select": "STDIN User Template"
+      },
+      {
+        "category": "source",
+        "name": "Template/stdin_USART.c",
+        "attr": "template",
+        "select": "STDIN via USART"
+      },
+      {
+        "category": "source",
+        "name": "Template/stdin_keyboard.c",
+        "attr": "template",
+        "select": "STDIN via Keyboard"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Template/stdout_user.c",
+        "attr": "template",
+        "select": "STDOUT User Template"
+      },
+      {
+        "category": "source",
+        "name": "Template/stdout_USART.c",
+        "attr": "template",
+        "select": "STDOUT via USART"
+      },
+      {
+        "category": "source",
+        "name": "Template/stdout_display.c",
+        "attr": "template",
+        "select": "STDOUT via Display"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Template/stderr_user.c",
+        "attr": "template",
+        "select": "STDERR User Template"
+      },
+      {
+        "category": "source",
+        "name": "Template/stderr_USART.c",
+        "attr": "template",
+        "select": "STDERR via USART"
+      },
+      {
+        "category": "source",
+        "name": "Template/stderr_display.c",
+        "attr": "template",
+        "select": "STDERR via Display"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "source",
+        "name": "Template/tty_user.c",
+        "attr": "template",
+        "select": "TTY User Template"
+      },
+      {
+        "category": "source",
+        "name": "Source/retarget_io.c"
+      },
+      {
+        "category": "header",
+        "name": "Config/EventRecorderConf.h",
+        "attr": "config",
+        "version": "1.1.0"
+      },
+      {
+        "category": "header",
+        "name": "Include/EventRecorder.h"
+      },
+      {
+        "category": "source",
+        "name": "Source/EventRecorder.c"
+      },
+      {
+        "category": "doc",
+        "name": "Doc/EventRecorder/html/index.html"
+      },
+      {
+        "category": "other",
+        "name": "EventRecorder.scvd"
+      },
+      {
+        "category": "header",
+        "name": "Config/EventRecorderConf.h",
+        "attr": "config",
+        "version": "1.1.0"
+      },
+      {
+        "category": "header",
+        "name": "Include/EventRecorder.h"
+      },
+      {
+        "category": "source",
+        "name": "Source/EventRecorder.c"
+      },
+      {
+        "category": "doc",
+        "name": "Doc/EventRecorder/html/index.html"
+      },
+      {
+        "category": "other",
+        "name": "EventRecorder.scvd"
+      }
+    ],
+    "components": []
+  },
+  "cat2-pdsc.xml": {
+    "package": "Infineon.CAT2_DFP",
+    "repository": null,
+    "releases": [
+      {
+        "version": "1.6.0",
+        "date": "2026-01-08",
+        "notes": "- Supported product lines: PSOC4, CCG, PMG, WLC - Changes: - Added new devices: - PSOC4 HVPA SPM 1.0 - PSOC 4100T Plus 256KB - New CCG6_CFP MPNs - New CCG8_CFP MPNs - New PSOC 4 HV MS 128K MPNs - New PSOC 4100S Plus MPNs - New PSOC 4000T MPNs - New PSOC 4100T Plus MPNs"
+      },
+      {
+        "version": "1.5.0",
+        "date": "2025-04-10",
+        "notes": "- Supported product lines: PSOC4, CCG, PMG, WLC - Changes: - Added new devices: - PSOC 4100T Plus - New PMG1 MPNs"
+      },
+      {
+        "version": "1.4.0",
+        "date": "2024-11-25",
+        "notes": "- Supported product lines: PSOC4, CCG, PMG, WLC - Changes: - Added new devices: - New CCG7S MPNs - New CCG6_CFP MPNs - New CCG8_CFP MPNs - New PSOC 4 HV MS 64K MPNs - New PSOC 4 HV MS 128K MPNs - New PSOC 4 HV PA 144K MPNs - New PSOC 4000S MPNs - New PSOC 4100S Plus MPNs - New PSOC 4000T MPNs - Updated CAT2 CMSIS Flash Loaders to v2.1.0.205: bugfixes, performance and stability improvements. - Rehosted the pack to https://itools.infineon.com/cmsis_packs/CAT2_DFP/ URL."
+      },
+      {
+        "version": "1.3.0",
+        "date": "2023-09-20",
+        "notes": "- Supported product lines: PSOC4, CCG, PMG, WLC - Changes: - Added new devices: - New PSOC4A MC MPNs - New WLC1 MPNs - New PSOC4AS4 MPNs - Updated CAT2 CMSIS Flash Loaders to v2.1.0.197: bugfixes, performance and stability improvements."
+      },
+      {
+        "version": "1.2.0",
+        "date": "2023-03-01",
+        "notes": "- Supported product lines: PSOC4, CCG, PMG, WLC - Changes: - The vendor name and DeviceVendorEnum is changed from Cypress to Infineon. - Added new devices: - EZ-PD\u2122 CCGx - EZ-PD\u2122 PMGx - PSOC\u2122 4000T - PSOC\u2122 4500H - PSOC\u2122 4700S - WLCx - Added read and print of target device information. - Updated CAT2 CMSIS Flash Loaders to v2.1.0.194: bugfixes, performance and stability improvements."
+      }
+    ],
+    "files": [
+      {
+        "category": "doc",
+        "name": "README.txt"
+      },
+      {
+        "category": "source",
+        "name": "Device/Source/startup_error.c",
+        "version": "1.0.0"
+      }
+    ],
+    "components": [
+      {
+        "Cclass": "Device",
+        "Cgroup": "Startup",
+        "Cversion": "1.0.0",
+        "condition": "CAT2"
+      }
+    ]
+  },
+  "cmsis-pdsc.xml": {
+    "package": "ARM.CMSIS",
+    "repository": "https://github.com/ARM-software/CMSIS_6.git",
+    "releases": [
+      {
+        "version": "6.3.0",
+        "date": "2026-01-12",
+        "tag": "v6.3.0",
+        "notes": "CMSIS-Core: 6.2.0 - Added support for ArmChina STAR-MC3 - Minor fixes and enhancements: - Added missing CPPWR definitions for Armv8-M Mainline cores - Added support for picolibc startup mechanism to GCC compiler - Fixed GCC FPSCR intrinsics for AArch64 - Fixed MPU Normal Memory Attributes for Armv8-M MPU - Added ERRBNK definition for Cortex-M7 - Fixed function prototype warnings for IAR compiler - Reworked __NVIC_SystemReset for Armv8.1-M devices CMSIS-CMSIS-RTOS2: 2.3.0 - (unchanged) CMSIS-Driver: 2.11.0 - (unchanged)"
+      },
+      {
+        "version": "6.2.0",
+        "date": "2025-06-18",
+        "tag": "v6.2.0",
+        "notes": "- CMSIS-Core: 6.1.1 - Minor fixes and enhancements - Fixed CMSIS_DEPRECATED for IAR - Added LAR, LSR register to DWT - Add CMSIS-R for IAR - Added BPU for Star-MC1 - Add CPPWR SU10/11 for Cortex-M55/-M85 - CMSIS-RTOS2: 2.3.0 - (unchanged) - CMSIS-Driver: 2.11.0 - Added vStream Driver API 1.0.0"
+      },
+      {
+        "version": "6.1.0",
+        "date": "2024-05-16",
+        "tag": "v6.1.0",
+        "notes": "- CMSIS-Core: 6.1.0 - Added support for Cortex-M52 - Added deprecated CoreDebug symbols for CMSIS 5 compatibility - Added define CMSIS_DISABLE_DEPRECATED to hide deprecated symbols - CMSIS-Driver: 2.10.0 - Updated USB Host API 2.4.0"
+      },
+      {
+        "version": "6.0.0",
+        "date": "2023-12-18",
+        "tag": "v6.0.0",
+        "notes": "- CMSIS-Core: 6.0.0 - Core(M) and Core(A) joined into single Core component - Core header files reworked, aligned with TRMs - Previously deprecated features removed - Dropped support for Arm Compiler 5 - CMSIS-DSP: moved into separate pack - CMSIS-NN: moved into separate pack - CMSIS-RTOS: deprecated and removed - RTX4 is deprecated and removed - CMSIS-RTOS2: 2.3.0 - OS Tick API moved from Device to CMSIS class - Added provisional support for processor affinity in SMP systems - RTX5 is moved into separate CMSIS-RTX pack - CMSIS-Driver: 2.9.0 - Updated VIO API 1.0.0 - Added GPIO Driver API 1.0.0 - CMSIS-Pack: moved into Open-CMSIS-Pack project - CMSIS-SVD: moved into Open-CMSIS-Pack project - CMSIS-DAP: moved into separate repository - Devices: moved into separate Cortex_DFP pack - Utilities: moved into CMSIS-Toolbox project"
+      },
+      {
+        "version": "5.9.0",
+        "date": "2022-05-02",
+        "notes": "CMSIS-Core(M): 5.6.0 - Arm Cortex-M85 cpu support - Arm China STAR-MC1 cpu support - Updated system_ARMCM55.c CMSIS-DSP: 1.10.0 (see revision history for details) CMSIS-NN: 3.1.0 (see revision history for details) - Support for int16 convolution and fully connected for reference implementation - Support for DSP extension optimization for int16 convolution and fully connected - Support dilation for int8 convolution - Support dilation for int8 depthwise convolution - Support for int16 depthwise conv for reference implementation including dilation - Support for int16 average and max pooling for reference implementation - Support for elementwise add and mul int16 scalar version - Support for softmax int16 scalar version - Support for SVDF with 8 bit state tensor CMSIS-RTOS2: 2.1.3 (unchanged) - RTX 5.5.4 (see revision history for details) CMSIS-Pack: deprecated (moved to Open-CMSIS-Pack) CMSIS-SVD: 1.3.9 (see revision history for details) CMSIS-DAP: 2.1.1 (see revision history for details) - Allow default clock frequency to use fast clock mode Devices - Support for Cortex-M85 Utilities - SVDConv 3.3.42 - PackChk 1.3.95"
+      },
+      {
+        "version": "5.8.0",
+        "date": "2021-06-24",
+        "notes": "CMSIS-Core(M): 5.5.0 (see revision history for details) - Updated GCC LinkerDescription, GCC Assembler startup - Added Armv8-M Stack Sealing (to linker, startup) for toolchain ARM, GCC - Changed C-Startup to default Startup. - Updated Armv8-M Assembler startup to use GAS syntax Note: Updating existing projects may need manual user interaction! CMSIS-Core(A): 1.2.1 (see revision history for details) - Bugfixes for Cortex-A32 CMSIS-DAP: 2.1.0 (see revision history for details) - Enhanced DAP_Info - Added extra UART support CMSIS-DSP: 1.9.0 (see revision history for details) - Purged pre-built libs from Git - Enhanced support for f16 datatype - Fixed couple of GCC issues CMSIS-NN: 3.0.0 (see revision history for details including version 2.0.0) - Major interface change for functions compatible with TensorFlow Lite for Microcontroller - Added optimization for SVDF kernel - Improved MVE performance for fully Connected and max pool operator - NULL bias support for fully connected operator in non-MVE case(Can affect performance) - Expanded existing unit test suite along with support for FVP - Removed Examples folder CMSIS-RTOS2: - RTX 5.5.3 (see revision history for details) - CVE-2021-27431 vulnerability mitigation. - Enhanced stack overrun checking. - Various bug fixes and improvements. CMSIS-Pack: 1.7.2 (see revision history for details) - Support for Microchip XC32 compiler - Support for Custom Datapath Extension"
+      },
+      {
+        "version": "5.7.0",
+        "date": "2020-04-09",
+        "notes": "CMSIS-Build: 0.9.0 (beta) - Draft for CMSIS Project description (CPRJ) CMSIS-Core(M): 5.4.0 (see revision history for details) - Cortex-M55 cpu support - Enhanced MVE support for Armv8.1-MML - Fixed device config define checks. - L1 Cache functions for Armv7-M and later CMSIS-Core(A): 1.2.0 (see revision history for details) - Fixed GIC_SetPendingIRQ to use GICD_SGIR - Added missing DSP intrinsics - Reworked assembly intrinsics: volatile, barriers and clobber CMSIS-DSP: 1.8.0 (see revision history for details) - Added new functions and function groups - Added MVE support CMSIS-NN: 1.3.0 (see revision history for details) - Added MVE support - Further optimizations for kernels using DSP extension CMSIS-RTOS2: - RTX 5.5.2 (see revision history for details) CMSIS-Driver: 2.8.0 - Added VIO API 0.1.0 (Preview) - removed volatile from status related typedefs in APIs - enhanced WiFi Interface API with support for polling Socket Receive/Send CMSIS-Pack: 1.6.3 (see revision history for details) - deprecating all types specific to cpdsc format. Cpdsc is replaced by Cprj with dedicated schema. Devices: - ARMCM55 device - ARMv81MML startup code recognizing __MVE_USED macro - Refactored vector table references for all Cortex-M devices - Reworked ARMCM* C-StartUp files. - Include L1 Cache functions in ARMv8MML/ARMv81MML devices Utilities: Attention: Linux binaries moved to Linux64 folder! - SVDConv 3.3.35 - PackChk 1.3.89"
+      },
+      {
+        "version": "5.6.0",
+        "date": "2019-07-10",
+        "notes": "CMSIS-Core(M): 5.3.0 (see revision history for details) - Added provisions for compiler-independent C startup code. CMSIS-Core(A): 1.1.4 (see revision history for details) - Fixed __FPU_Enable. CMSIS-DSP: 1.7.0 (see revision history for details) - New Neon versions of f32 functions - Python wrapper - Preliminary cmake build - Compilation flags for FFTs - Changes to arm_math.h CMSIS-NN: 1.2.0 (see revision history for details) - New function for depthwise convolution with asymmetric quantization. - New support functions for requantization. CMSIS-RTOS: - RTX 4.82.0 (updated provisions for Arm Compiler 6 when using Cortex-M0/M0+) CMSIS-RTOS2: - RTX 5.5.1 (see revision history for details) CMSIS-Driver: 2.7.1 - WiFi Interface API 1.0.0 Devices: - Generalized C startup code for all Cortex-M family devices. - Updated Cortex-A default memory regions and MMU configurations - Moved Cortex-A memory and system config files to avoid include path issues"
+      },
+      {
+        "version": "5.5.1",
+        "date": "2019-03-20",
+        "notes": "The following folders are deprecated - CMSIS/Include/ (superseded by CMSIS/DSP/Include/ and CMSIS/Core/Include/) CMSIS-Core(M): 5.2.1 (see revision history for details) - Fixed compilation issue in cmsis_armclang_ltm.h"
+      },
+      {
+        "version": "5.5.0",
+        "date": "2019-03-18",
+        "notes": "The following folders have been removed: - CMSIS/Lib/ (superseded by CMSIS/DSP/Lib/) - CMSIS/DSP_Lib/ (superseded by CMSIS/DSP/) The following folders are deprecated - CMSIS/Include/ (superseded by CMSIS/DSP/Include/ and CMSIS/Core/Include/) CMSIS-Core(M): 5.2.0 (see revision history for details) - Reworked Stack/Heap configuration for ARM startup files. - Added Cortex-M35P device support. - Added generic Armv8.1-M Mainline device support. CMSIS-Core(A): 1.1.3 (see revision history for details) CMSIS-DSP: 1.6.0 (see revision history for details) - reworked DSP library source files - reworked DSP library documentation - Changed DSP folder structure - moved DSP libraries to folder ./DSP/Lib - ARM DSP Libraries are built with ARMCLANG - Added DSP Libraries Source variant CMSIS-RTOS2: - RTX 5.5.0 (see revision history for details) CMSIS-Driver: 2.7.0 - Added WiFi Interface API 1.0.0-beta - Added components for project specific driver implementations CMSIS-Pack: 1.6.0 (see revision history for details) Devices: - Added Cortex-M35P and ARMv81MML device templates. - Fixed C-Startup Code for GCC (aligned with other compilers) Utilities: - SVDConv 3.3.25 - PackChk 1.3.82"
+      },
+      {
+        "version": "5.4.0",
+        "date": "2018-08-01",
+        "notes": "Aligned pack structure with repository. The following folders are deprecated: - CMSIS/Include/ - CMSIS/DSP_Lib/ CMSIS-Core(M): 5.1.2 (see revision history for details) - Added Cortex-M1 support (beta). CMSIS-Core(A): 1.1.2 (see revision history for details) CMSIS-NN: 1.1.0 - Added new math functions. CMSIS-RTOS2: - API 2.1.3 (see revision history for details) - RTX 5.4.0 (see revision history for details) * Updated exception handling on Cortex-A CMSIS-Driver: - Flash Driver API V2.2.0 Utilities: - SVDConv 3.3.21 - PackChk 1.3.71"
+      },
+      {
+        "version": "5.3.0",
+        "date": "2018-02-22",
+        "notes": "Updated Arm company brand. CMSIS-Core(M): 5.1.1 (see revision history for details) CMSIS-Core(A): 1.1.1 (see revision history for details) CMSIS-DAP: 2.0.0 (see revision history for details) CMSIS-NN: 1.0.0 - Initial contribution of the bare metal Neural Network Library. CMSIS-RTOS2: - RTX 5.3.0 (see revision history for details) - OS Tick API 1.0.1"
+      },
+      {
+        "version": "5.2.0",
+        "date": "2017-11-16",
+        "notes": "CMSIS-Core(M): 5.1.0 (see revision history for details) - Added MPU Functions for ARMv8-M for Cortex-M23/M33. - Added compiler_iccarm.h to replace compiler_iar.h shipped with the compiler. CMSIS-Core(A): 1.1.0 (see revision history for details) - Added compiler_iccarm.h. - Added additional access functions for physical timer. CMSIS-DAP: 1.2.0 (see revision history for details) CMSIS-DSP: 1.5.2 (see revision history for details) CMSIS-Driver: 2.6.0 (see revision history for details) - CAN Driver API V1.2.0 - NAND Driver API V2.3.0 CMSIS-RTOS: - RTX: added variant for Infineon XMC4 series affected by PMU_CM.001 errata. CMSIS-RTOS2: - API 2.1.2 (see revision history for details) - RTX 5.2.3 (see revision history for details) Devices: - Added GCC startup and linker script for Cortex-A9. - Added device ARMCM0plus_MPU for Cortex-M0+ with MPU. - Added IAR startup code for Cortex-A9"
+      },
+      {
+        "version": "5.1.1",
+        "date": "2017-09-19",
+        "notes": "CMSIS-RTOS2: - RTX 5.2.1 (see revision history for details)"
+      },
+      {
+        "version": "5.1.0",
+        "date": "2017-08-04",
+        "notes": "CMSIS-Core(M): 5.0.2 (see revision history for details) - Changed Version Control macros to be core agnostic. - Added MPU Functions for ARMv7-M for Cortex-M0+/M3/M4/M7. CMSIS-Core(A): 1.0.0 (see revision history for details) - Initial release - IRQ Controller API 1.0.0 CMSIS-Driver: 2.05 (see revision history for details) - All typedefs related to status have been made volatile. CMSIS-RTOS2: - API 2.1.1 (see revision history for details) - RTX 5.2.0 (see revision history for details) - OS Tick API 1.0.0 CMSIS-DSP: 1.5.2 (see revision history for details) - Fixed GNU Compiler specific diagnostics. CMSIS-Pack: 1.5.0 (see revision history for details) - added System Description File (*.SDF) Format CMSIS-Zone: 0.0.1 (Preview) - Initial specification draft"
+      },
+      {
+        "version": "5.0.1",
+        "date": "2017-02-03",
+        "notes": "Package Description: - added taxonomy for Cclass RTOS CMSIS-RTOS2: - API 2.1 (see revision history for details) - RTX 5.1.0 (see revision history for details) CMSIS-Core: 5.0.1 (see revision history for details) - Added __PACKED_STRUCT macro - Added uVisior support - Updated cmsis_armcc.h: corrected macro __ARM_ARCH_6M__ - Updated template for secure main function (main_s.c) - Updated template for Context Management for ARMv8-M TrustZone (tz_context.c) CMSIS-DSP: 1.5.1 (see revision history for details) - added ARMv8M DSP libraries. CMSIS-Pack:1.4.9 (see revision history for details) - added Pack Index File specification and schema file"
+      },
+      {
+        "version": "5.0.0",
+        "date": "2016-11-11",
+        "notes": "Changed open source license to Apache 2.0 CMSIS_Core: - Added support for Cortex-M23 and Cortex-M33. - Added ARMv8-M device configurations for mainline and baseline. - Added CMSE support and thread context management for TrustZone for ARMv8-M - Added cmsis_compiler.h to unify compiler behaviour. - Updated function SCB_EnableICache (for Cortex-M7). - Added functions: NVIC_GetEnableIRQ, SCB_GetFPUType CMSIS-RTOS: - bug fix in RTX 4.82 (see revision history for details) CMSIS-RTOS2: - new API including compatibility layer to CMSIS-RTOS - reference implementation based on RTX5 - supports all Cortex-M variants including TrustZone for ARMv8-M CMSIS-SVD: - reworked SVD format documentation - removed SVD file database documentation as SVD files are distributed in packs - updated SVDConv for Win32 and Linux CMSIS-DSP: - Moved DSP libraries from CMSIS/DSP/Lib to CMSIS/Lib. - Added DSP libraries build projects to CMSIS pack."
+      },
+      {
+        "version": "4.5.0",
+        "date": "2015-10-28",
+        "notes": "- CMSIS-Core 4.30.0 (see revision history for details) - CMSIS-DAP 1.1.0 (unchanged) - CMSIS-Driver 2.04.0 (see revision history for details) - CMSIS-DSP 1.4.7 (no source code change [still labeled 1.4.5], see revision history for details) - CMSIS-Pack 1.4.1 (see revision history for details) - CMSIS-RTOS 4.80.0 Restored time delay parameter 'millisec' old behavior (prior V4.79) for software compatibility. (see revision history for details) - CMSIS-SVD 1.3.1 (see revision history for details)"
+      },
+      {
+        "version": "4.4.0",
+        "date": "2015-09-11",
+        "notes": "- CMSIS-Core 4.20 (see revision history for details) - CMSIS-DSP 1.4.6 (no source code change [still labeled 1.4.5], see revision history for details) - CMSIS-Pack 1.4.0 (adding memory attributes, algorithm style) - CMSIS-Driver 2.03.0 (adding CAN [Controller Area Network] API) - CMSIS-RTOS -- API 1.02 (unchanged) -- RTX 4.79 (see revision history for details) - CMSIS-SVD 1.3.0 (see revision history for details) - CMSIS-DAP 1.1.0 (extended with SWO support)"
+      },
+      {
+        "version": "4.3.0",
+        "date": "2015-03-20",
+        "notes": "- CMSIS-Core 4.10 (Cortex-M7 extended Cache Maintenance functions) - CMSIS-DSP 1.4.5 (see revision history for details) - CMSIS-Driver 2.02 (adding SAI (Serial Audio Interface) API) - CMSIS-Pack 1.3.3 (Semantic Versioning, Generator extensions) - CMSIS-RTOS -- API 1.02 (unchanged) -- RTX 4.78 (see revision history for details) - CMSIS-SVD 1.2 (unchanged)"
+      },
+      {
+        "version": "4.2.0",
+        "date": "2014-09-24",
+        "notes": "Adding Cortex-M7 support - CMSIS-Core 4.00 (Cortex-M7 support, corrected C++ include guards in core header files) - CMSIS-DSP 1.4.4 (Cortex-M7 support and corrected out of bound issues) - CMSIS-Pack 1.3.1 (Cortex-M7 updates, clarification, corrected batch files in Tutorial) - CMSIS-SVD 1.2 (Cortex-M7 extensions) - CMSIS-RTOS RTX 4.75 (see revision history for details)"
+      },
+      {
+        "version": "4.1.1",
+        "date": "2014-06-30",
+        "notes": "- fixed conditions preventing the inclusion of the DSP library in projects for Infineon XMC4000 series devices"
+      },
+      {
+        "version": "4.1.0",
+        "date": "2014-06-12",
+        "notes": "- CMSIS-Driver 2.02 (incompatible update) - CMSIS-Pack 1.3 (see revision history for details) - CMSIS-DSP 1.4.2 (unchanged) - CMSIS-Core 3.30 (unchanged) - CMSIS-RTOS RTX 4.74 (unchanged) - CMSIS-RTOS API 1.02 (unchanged) - CMSIS-SVD 1.10 (unchanged) PACK: - removed G++ specific files from PACK - added Component Startup variant \"C Startup\" - added Pack Checking Utility - updated conditions to reflect tool-chain dependency - added Taxonomy for Graphics - updated Taxonomy for unified drivers from \"Drivers\" to \"CMSIS Drivers\""
+      },
+      {
+        "version": "3.20.4",
+        "date": "2014-02-20",
+        "notes": "- CMSIS-RTOS 4.74 (see revision history for details) - PACK Extensions (Boards, Device Features, Flash Programming, Generators, Configuration Wizard). Schema version 1.1."
+      }
+    ],
+    "files": [
+      {
+        "category": "header",
+        "name": "CMSIS/Core/Include/a-profile/irq_ctrl.h"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/RTOS2/Include/os_tick.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/RTOS2/group__CMSIS__RTOS__TickAPI.html"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/RTOS2/group__CMSIS__RTOS.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/RTOS2/Include/cmsis_os2.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__usart__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_USART.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__spi__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_SPI.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__sai__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_SAI.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__i2c__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_I2C.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__can__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_CAN.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__flash__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_Flash.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__mci__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_MCI.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__nand__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_NAND.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__eth__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_ETH_MAC.h"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_ETH_PHY.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__eth__mac__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_ETH_MAC.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__eth__phy__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_ETH_PHY.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__usbd__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_USBD.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__usbh__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_USBH.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__gpio__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_GPIO.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__wifi__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/Include/Driver_WiFi.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__vio__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/VIO/Include/cmsis_vio.h"
+      },
+      {
+        "category": "other",
+        "name": "CMSIS/Driver/VIO/cmsis_vio.scvd"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Driver/group__vstream__interface__gr.html"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Driver/vStream/Include/cmsis_vstream.h"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Core/index.html"
+      },
+      {
+        "category": "include",
+        "name": "CMSIS/Core/Include/"
+      },
+      {
+        "category": "header",
+        "name": "CMSIS/Core/Include/tz_context.h",
+        "condition": "TrustZone"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "condition": "TZ Secure",
+        "name": "CMSIS/Core/Template/ARMv8-M/main_s.c",
+        "version": "1.1.1",
+        "select": "Secure mode 'main' module for ARMv8-M"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "condition": "TZ Secure",
+        "name": "CMSIS/Core/Template/ARMv8-M/tz_context.c",
+        "version": "1.1.1",
+        "select": "RTOS Context Management (TrustZone for ARMv8-M)"
+      },
+      {
+        "category": "doc",
+        "name": "CMSIS/Documentation/html/Core_A/index.html"
+      },
+      {
+        "category": "include",
+        "name": "CMSIS/Core/Include/"
+      },
+      {
+        "category": "sourceC",
+        "name": "CMSIS/Core/Source/irq_ctrl_gic.c"
+      },
+      {
+        "category": "sourceC",
+        "name": "CMSIS/RTOS2/Source/os_systick.c"
+      },
+      {
+        "category": "sourceC",
+        "name": "CMSIS/RTOS2/Source/os_tick_ptim.c"
+      },
+      {
+        "category": "sourceC",
+        "name": "CMSIS/RTOS2/Source/os_tick_gtim.c"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_USART.c",
+        "select": "USART Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_SPI.c",
+        "select": "SPI Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_SAI.c",
+        "select": "SAI Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_I2C.c",
+        "select": "I2C Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_CAN.c",
+        "select": "CAN Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_Flash.c",
+        "select": "Flash Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_MCI.c",
+        "select": "MCI Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_NAND.c",
+        "select": "NAND Flash Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_ETH_PHY.c",
+        "select": "Ethernet PHY and MAC Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_ETH_MAC.c",
+        "select": "Ethernet PHY and MAC Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_ETH_MAC.c",
+        "select": "Ethernet MAC Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_ETH_PHY.c",
+        "select": "Ethernet PHY Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_USBD.c",
+        "select": "USB Device Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_USBH.c",
+        "select": "USB Host Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_GPIO.c",
+        "select": "GPIO Driver"
+      },
+      {
+        "category": "sourceC",
+        "attr": "template",
+        "name": "CMSIS/Driver/DriverTemplates/Driver_WiFi.c",
+        "select": "WiFi Driver"
+      },
+      {
+        "category": "sourceC",
+        "name": "CMSIS/Driver/VIO/Source/vio.c",
+        "attr": "template",
+        "select": "Virtual I/O"
+      },
+      {
+        "category": "sourceC",
+        "name": "CMSIS/Driver/VIO/Source/vio_memory.c"
+      },
+      {
+        "category": "sourceC",
+        "name": "CMSIS/Driver/vStream/Template/vstream.c",
+        "attr": "template",
+        "select": "vStream Driver"
+      }
+    ],
+    "components": [
+      {
+        "Cclass": "CMSIS",
+        "Cgroup": "CORE",
+        "Cversion": "6.2.0",
+        "condition": "ARMv6_7_8-M Device"
+      },
+      {
+        "Cclass": "CMSIS",
+        "Cgroup": "CORE",
+        "Cversion": "6.2.0",
+        "condition": "ARMv7-A Device"
+      },
+      {
+        "Cclass": "Device",
+        "Cgroup": "IRQ Controller",
+        "Csub": "GIC",
+        "Capiversion": "1.0.0",
+        "Cversion": "1.2.0",
+        "condition": "ARMv7-A Device"
+      },
+      {
+        "Cclass": "CMSIS",
+        "Cgroup": "OS Tick",
+        "Csub": "SysTick",
+        "Capiversion": "1.0.1",
+        "Cversion": "1.0.5",
+        "condition": "OS Tick SysTick"
+      },
+      {
+        "Cclass": "CMSIS",
+        "Cgroup": "OS Tick",
+        "Csub": "Private Timer",
+        "Capiversion": "1.0.1",
+        "Cversion": "1.0.2",
+        "condition": "OS Tick PTIM"
+      },
+      {
+        "Cclass": "CMSIS",
+        "Cgroup": "OS Tick",
+        "Csub": "Generic Physical Timer",
+        "Capiversion": "1.0.1",
+        "Cversion": "1.0.1",
+        "condition": "OS Tick GTIM"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "USART",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.4.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "SPI",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.3.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "SAI",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "1.2.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "I2C",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.4.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "CAN",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "1.3.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "Flash",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.3.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "MCI",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.4.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "NAND",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.4.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "Ethernet",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.2.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "Ethernet MAC",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.2.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "Ethernet PHY",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.2.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "USB Device",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.3.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "USB Host",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "2.4.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "GPIO",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "1.0.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "WiFi",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "1.1.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "VIO",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "1.0.0",
+        "custom": "1"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "VIO",
+        "Csub": "Virtual",
+        "Cversion": "1.0.0",
+        "Capiversion": "1.0.0"
+      },
+      {
+        "Cclass": "CMSIS Driver",
+        "Cgroup": "vStream",
+        "Csub": "Custom",
+        "Cversion": "1.0.0",
+        "Capiversion": "1.0.0",
+        "custom": "1"
+      }
+    ]
+  },
+  "stm32g0-pdsc.xml": {
+    "package": "Keil.STM32G0xx_DFP",
+    "repository": "https://github.com/Open-CMSIS-Pack/STM32G0xx_DFP.git",
+    "releases": [
+      {
+        "version": "2.1.0",
+        "date": "2025-08-18",
+        "tag": "v2.1.0",
+        "notes": "Updated SVD files (version 2.0 from STMicroelectronics) Updated Templates: - Added DWARF-5 debug information - Added generated output files Package Description (pdsc): - Updated debug configuration files - Shortened device family description - Added Ddsp processor attribute"
+      },
+      {
+        "version": "2.0.0",
+        "date": "2025-03-20",
+        "tag": "v2.0.0",
+        "notes": "Updated for new CMSIS-Toolbox CubeMX integration Removed STM32CubeMX_FW_G0 Removed previous generator (gpdsc) Added new global generator Package Description (pdsc): - Removed Device:Startup component - Removed Device:STM32Cube HAL components - Removed Device:STM32Cube LL components - Removed compile device header from device description - Removed unused conditions - Replaced documentation files with permalinks"
+      },
+      {
+        "version": "1.5.0",
+        "date": "2024-02-02",
+        "notes": "Updated STM32Cube FW to STM32Cube_FW_G0_V1.6.0 (HAL V1.4.5). Package Description (pdsc): - Added condition (STM32G0) to api device class group STM32Cube Framework. - Added LICENSE file."
+      },
+      {
+        "version": "1.4.0",
+        "date": "2021-12-16",
+        "notes": "Updated STM32Cube FW to STM32Cube_FW_G0_V1.5.0 (HAL V1.4.2). STM32CubeMX integration: - Synchronized versions of generated component ::Device:STM32Cube Framework:STM32CubeMX (in gpdsc) and its bootstrap (in pdsc). Package Description (pdsc): - Updated schemaVersion (1.7.2). - Added RAMstart and RAMsize attributes to Flash Algorithm elements. Device support: - Updated SVD files. - Reworked Option Byte Flash programming Algorithm. - Reworked DualBank Flash Programming Algorithms. - Replaced STM32G05x_32.FLM with STM32G0xx_32.FLM and STM32G05x_64.FLM with STM32G0xx_64.FLM - Added emptycheck for STM32G0xx16/32/64/128k flashloader, disable interrupts while programming and fix programming while IWDG in SW mode. - Added devices: -- STM32G050F6Px, -- STM32G051C6Ux, STM32G051F6Px, STM32G051G6Ux, STM32G051K6Ux, STM32G051K8Ux, STM32G051C8Ux, STM32G051G8Ux, STM32G051F8Px -- STM32G061C6Ux, STM32G061G6Ux, STM32G061K6Ux, STM32G061C8Ux, STM32G061F8Px, STM32G061G8Ux, STM32G061K8Ux -- STM32G0B1CBUxN, STM32G0B1CBTxN, STM32G0B1KBTxN, STM32G0B1KBUxN, STM32G0B1RBTxN, STM32G0B1RBIxN, STM32G0B1CCUxN, STM32G0B1CCTxN, STM32G0B1RCTxN, STM32G0B1CEUxN, STM32G0B1CETxN, STM32G0B1REIxN, STM32G0B1RETxN, STM32G0B1NEYx, -- STM32G0C1CCUxN, STM32G0C1CCTxN, STM32G0C1RCIxN, STM32G0C1RCTxN, STM32G0C1CEUxN, STM32G0C1CETxN, STM32G0C1RETxN, STM32G0C1REIxN, STM32G0C1NEYx. - Removed devices: -- STM32G071C6Tx, STM32G071C6Ux, STM32G071G6Ux, STM32G071K6Tx, STM32G071K6Ux, STM32G071R6Tx -- STM32G050x4, STM32G051x4, STM32G061x4."
+      },
+      {
+        "version": "1.3.0",
+        "date": "2021-02-17",
+        "notes": "Updated STM32Cube Firmware G0 library to version V1.4.0. Added device support for: - STM32G050, STM32G051, STM32G061 devices. - STM32G0B0, STM32G0B1, STM32G0C1 devices. - Updated device documentation. - Updated SVD files. - Added flash programming algorithms."
+      },
+      {
+        "version": "1.2.0",
+        "date": "2019-07-19",
+        "notes": "Updated STM32Cube Firmware G0 library to version V1.3.0. Added CubeMX support. Added device support for: - STM32G030, STM32G031, STM32G041 devices. - Updated device documentation. - Updated SVD files for each STM32G0xx subfamily."
+      },
+      {
+        "version": "1.1.0",
+        "date": "2019-04-01",
+        "notes": "Updated documentation Updated CubeMX FW pack to STM32Cube_FW_G0_V1.1.0"
+      },
+      {
+        "version": "1.0.0",
+        "date": "2018-12-04",
+        "notes": "Initial version of STM32G0 Device Family Pack for use with: - STM32CubeMX 5.0 - STM32Cube G0 Firmware Package V1.0.0"
+      }
+    ],
+    "files": [
+      {
+        "category": "doc",
+        "name": "https://open-cmsis-pack.github.io/cmsis-toolbox/CubeMX"
+      }
+    ],
+    "components": [
+      {
+        "generator": "CubeMX",
+        "Cclass": "Device",
+        "Cgroup": "CubeMX",
+        "Cversion": "1.0.0",
+        "condition": "STM32G0 CMSIS"
+      }
+    ]
+  },
+  "pack-index": {
+    "count": 1822,
+    "em9305_entries": [],
+    "relevant_entries": [
+      {
+        "url": "https://www.keil.com/pack/",
+        "vendor": "Keil",
+        "name": "ARM_Compiler",
+        "version": "1.7.2"
+      },
+      {
+        "url": "https://github.com/Infineon/cmsis-packs/raw/master/PSoC4_DFP/",
+        "vendor": "Cypress",
+        "name": "PSoC4_DFP",
+        "version": "1.1.1",
+        "deprecated": "2024-11-12",
+        "replacement": "Infineon.CAT2_DFP"
+      },
+      {
+        "url": "https://github.com/Infineon/cmsis-packs/raw/master/PMG1_DFP/",
+        "vendor": "Cypress",
+        "name": "PMG1_DFP",
+        "version": "1.0.1",
+        "deprecated": "2024-11-12",
+        "replacement": "Infineon.CAT2_DFP"
+      },
+      {
+        "url": "https://www.keil.com/pack/",
+        "vendor": "Keil",
+        "name": "STM32G0xx_DFP",
+        "version": "2.1.0"
+      },
+      {
+        "url": "https://www.keil.com/pack/",
+        "vendor": "Keil",
+        "name": "STM32G071B-DISCO_BSP",
+        "version": "2.1.0"
+      },
+      {
+        "url": "https://itools.infineon.com/cmsis_packs/CAT2_DFP/",
+        "vendor": "Infineon",
+        "name": "CAT2_DFP",
+        "version": "1.6.0"
+      },
+      {
+        "url": "https://download.ambiq.com/packs/",
+        "vendor": "AmbiqMicro",
+        "name": "Apollo_DFP",
+        "version": "1.6.0"
+      }
+    ]
+  },
+  "apollo-pack": {
+    "total_members": 103,
+    "crc_failure": null,
+    "selected": [
+      {
+        "member": "AmbiqMicro.Apollo_DFP.pdsc",
+        "size": 51624,
+        "sha256": "6690105ce297debe446c64ce835d9e03784319f20714cdc04967a23ee4d499a3"
+      },
+      {
+        "member": "Boards/Apollo510_EVB/blinky/blinky.c",
+        "size": 13106,
+        "sha256": "fb4201b1b784f2ac046b1ed4ad2ab60fb36d320d7025d04957ba75197c71833e"
+      },
+      {
+        "member": "Boards/Apollo510_EVB/blinky/linker_script.sct",
+        "size": 1200,
+        "sha256": "3eeb945dae4525ba2ae61969680c741e66497a5f0477583ae31ecb976ddfa631"
+      },
+      {
+        "member": "Boards/Apollo510_EVB/blinky/startup_keil6.c",
+        "size": 24962,
+        "sha256": "029eff513b0a0011ec58bce35cdca1d7583b7359adb45f92912fd240ecdb799c"
+      },
+      {
+        "member": "Device/Include/apollo510.h",
+        "size": 10442040,
+        "sha256": "2b1a6c0eb9d69f3fd9d6ab8b80911b10f68061373a66b80bebe1cdbf5d151b71"
+      },
+      {
+        "member": "Device/Include/system_apollo510.h",
+        "size": 3047,
+        "sha256": "134eebe31df85c024b8974f51002367d7442022ef96df1633f2a0ce13f951c9d"
+      },
+      {
+        "member": "Device/Source/ARM/apollo510_ac6.sct",
+        "size": 4378,
+        "sha256": "2f109fbcb49d15b0d2459229cbba3deb9d6e2199ee0e77290e5f444751adf450"
+      },
+      {
+        "member": "Device/Source/startup_apollo510.c",
+        "size": 26656,
+        "sha256": "f380d275fcf58651af536f1f58f5502127fcd720ced0670eef51d77ea6104313"
+      },
+      {
+        "member": "Device/Source/system_apollo510.c",
+        "size": 6426,
+        "sha256": "5b9475f8433333d11a579ce9da86a81f6785c0c2f863a69d6b25bf8ecd4fb7c6"
+      }
+    ]
+  }
+}

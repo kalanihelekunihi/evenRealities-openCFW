@@ -1,0 +1,40 @@
+[
+  {
+    "sdk_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/include/l2c_api.h",
+    "sha256": "23a45635fefae9815c22d9644536515d81b609959920aaa8f9a1cf911ebbfac9",
+    "contract_definitions": [
+      {
+        "line": 233,
+        "text": "typedef void (*l2cDataCback_t)(uint16_t handle, uint16_t len, uint8_t *pPacket);"
+      }
+    ]
+  },
+  {
+    "sdk_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/include/l2c_defs.h",
+    "sha256": "a4a4fe60bd07c83bcd6a7cb285e48940e1d0e66062fb6788617fe93c5780a4ab",
+    "contract_definitions": [
+      {
+        "line": 42,
+        "text": "#define L2C_HDR_LEN                   4         /*!< \\brief L2CAP packet header length */"
+      },
+      {
+        "line": 45,
+        "text": "#define L2C_SIG_HDR_LEN               4         /*!< \\brief L2CAP signaling command header length */"
+      },
+      {
+        "line": 53,
+        "text": "#define L2C_PAYLOAD_START             (HCI_ACL_HDR_LEN + L2C_HDR_LEN)"
+      }
+    ]
+  },
+  {
+    "sdk_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/sources/stack/l2c/l2c_master.c",
+    "sha256": "bc7fec24f7c4ee751735f30e521cb62a952600836716920f017681a646219220",
+    "contract_definitions": []
+  },
+  {
+    "sdk_member": "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/third_party/cordio/ble-host/sources/stack/l2c/l2c_slave.c",
+    "sha256": "2f350e0fd27cdc205736df065099da356b9fa8be6e2ce4df014435cde53cbf73",
+    "contract_definitions": []
+  }
+]

@@ -1,0 +1,2092 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/flash_spi.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.wait_bus_ready:
+
+00000000 <wait_bus_ready>:
+   0:	33a2      	movi      	r3, 162
+   2:	4378      	lsli      	r3, r3, 24
+   4:	930a      	ld.w      	r0, (r3, 0x28)
+   6:	e4002001 	andi      	r0, r0, 1
+   a:	e920fffd 	bnez      	r0, 0x4	// 4 <wait_bus_ready+0x4>
+   e:	783c      	jmp      	r15
+
+Disassembly of section .text.wait_rx_done:
+
+00000000 <wait_rx_done>:
+   0:	14d1      	push      	r4, r15
+   2:	33a2      	movi      	r3, 162
+   4:	4378      	lsli      	r3, r3, 24
+   6:	9389      	ld.w      	r4, (r3, 0x24)
+   8:	e924ffff 	bnez      	r4, 0x6	// 6 <wait_rx_done+0x6>
+   c:	e0000000 	bsr      	0x0	// 0 <wait_rx_done>
+			c: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+  10:	6c13      	mov      	r0, r4
+  12:	1491      	pop      	r4, r15
+
+Disassembly of section .text.wait_tx_done:
+
+00000000 <wait_tx_done>:
+   0:	14d1      	push      	r4, r15
+   2:	33a2      	movi      	r3, 162
+   4:	4378      	lsli      	r3, r3, 24
+   6:	9388      	ld.w      	r4, (r3, 0x20)
+   8:	e924ffff 	bnez      	r4, 0x6	// 6 <wait_tx_done+0x6>
+   c:	e0000000 	bsr      	0x0	// 0 <wait_tx_done>
+			c: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+  10:	6c13      	mov      	r0, r4
+  12:	1491      	pop      	r4, r15
+
+Disassembly of section .text.sflash_read_reg:
+
+00000000 <sflash_read_reg>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	6d07      	mov      	r4, r1
+   4:	6d4b      	mov      	r5, r2
+   6:	6d83      	mov      	r6, r0
+   8:	e0000000 	bsr      	0x0	// 0 <sflash_read_reg>
+			8: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+   c:	33a2      	movi      	r3, 162
+   e:	4378      	lsli      	r3, r3, 24
+  10:	3200      	movi      	r2, 0
+  12:	ea010c07 	movi      	r1, 3079
+  16:	b342      	st.w      	r2, (r3, 0x8)
+  18:	ea0080a2 	movi      	r0, 32930
+  1c:	c7004900 	rotli      	r0, r0, 24
+  20:	b353      	st.w      	r2, (r3, 0x4c)
+  22:	b320      	st.w      	r1, (r3, 0x0)
+  24:	5d23      	subi      	r1, r5, 1
+  26:	b321      	st.w      	r1, (r3, 0x4)
+  28:	3101      	movi      	r1, 1
+  2a:	b324      	st.w      	r1, (r3, 0x10)
+  2c:	6150      	addu      	r5, r4
+  2e:	b346      	st.w      	r2, (r3, 0x18)
+  30:	b05d      	st.w      	r2, (r0, 0x74)
+  32:	b322      	st.w      	r1, (r3, 0x8)
+  34:	b3d8      	st.w      	r6, (r3, 0x60)
+  36:	6c53      	mov      	r1, r4
+  38:	6546      	cmpne      	r1, r5
+  3a:	0805      	bt      	0x44	// 44 <sflash_read_reg+0x44>
+  3c:	e0000000 	bsr      	0x0	// 0 <sflash_read_reg>
+			3c: R_CKCORE_PCREL_IMM26BY2	wait_rx_done
+  40:	3000      	movi      	r0, 0
+  42:	1493      	pop      	r4-r6, r15
+  44:	934a      	ld.w      	r2, (r3, 0x28)
+  46:	e4422008 	andi      	r2, r2, 8
+  4a:	e902fffd 	bez      	r2, 0x44	// 44 <sflash_read_reg+0x44>
+  4e:	9358      	ld.w      	r2, (r3, 0x60)
+  50:	d4018002 	stbi.b      	r2, (r1)
+  54:	07f2      	br      	0x38	// 38 <sflash_read_reg+0x38>
+
+Disassembly of section .text.sflash_write_reg:
+
+00000000 <sflash_write_reg>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	6d4b      	mov      	r5, r2
+   4:	6d07      	mov      	r4, r1
+   6:	6d83      	mov      	r6, r0
+   8:	e0000000 	bsr      	0x0	// 0 <sflash_write_reg>
+			8: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+   c:	33a2      	movi      	r3, 162
+   e:	4378      	lsli      	r3, r3, 24
+  10:	3200      	movi      	r2, 0
+  12:	ea010407 	movi      	r1, 1031
+  16:	b342      	st.w      	r2, (r3, 0x8)
+  18:	4510      	lsli      	r0, r5, 16
+  1a:	b344      	st.w      	r2, (r3, 0x10)
+  1c:	b353      	st.w      	r2, (r3, 0x4c)
+  1e:	b320      	st.w      	r1, (r3, 0x0)
+  20:	3101      	movi      	r1, 1
+  22:	b3a1      	st.w      	r5, (r3, 0x4)
+  24:	b324      	st.w      	r1, (r3, 0x10)
+  26:	b306      	st.w      	r0, (r3, 0x18)
+  28:	ea0080a2 	movi      	r0, 32930
+  2c:	c7004900 	rotli      	r0, r0, 24
+  30:	6150      	addu      	r5, r4
+  32:	b05d      	st.w      	r2, (r0, 0x74)
+  34:	b322      	st.w      	r1, (r3, 0x8)
+  36:	b3d8      	st.w      	r6, (r3, 0x60)
+  38:	6c53      	mov      	r1, r4
+  3a:	6546      	cmpne      	r1, r5
+  3c:	0805      	bt      	0x46	// 46 <sflash_write_reg+0x46>
+  3e:	e0000000 	bsr      	0x0	// 0 <sflash_write_reg>
+			3e: R_CKCORE_PCREL_IMM26BY2	wait_tx_done
+  42:	3000      	movi      	r0, 0
+  44:	1493      	pop      	r4-r6, r15
+  46:	934a      	ld.w      	r2, (r3, 0x28)
+  48:	e4422002 	andi      	r2, r2, 2
+  4c:	e902fffd 	bez      	r2, 0x46	// 46 <sflash_write_reg+0x46>
+  50:	d0018002 	ldbi.b      	r2, (r1)
+  54:	b358      	st.w      	r2, (r3, 0x60)
+  56:	07f2      	br      	0x3a	// 3a <sflash_write_reg+0x3a>
+
+Disassembly of section .text.read_sr1:
+
+00000000 <read_sr1>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	e42e0002 	addi      	r1, r14, 3
+   8:	3201      	movi      	r2, 1
+   a:	3005      	movi      	r0, 5
+   c:	e0000000 	bsr      	0x0	// 0 <read_sr1>
+			c: R_CKCORE_PCREL_IMM26BY2	sflash_read_reg
+  10:	d80e0003 	ld.b      	r0, (r14, 0x3)
+  14:	1401      	addi      	r14, r14, 4
+  16:	1490      	pop      	r15
+
+Disassembly of section .text.write_enable:
+
+00000000 <write_enable>:
+   0:	14d0      	push      	r15
+   2:	3200      	movi      	r2, 0
+   4:	6c4b      	mov      	r1, r2
+   6:	3006      	movi      	r0, 6
+   8:	e0000000 	bsr      	0x0	// 0 <write_enable>
+			8: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+   c:	3000      	movi      	r0, 0
+   e:	1490      	pop      	r15
+
+Disassembly of section .text.wait_till_ready:
+
+00000000 <wait_till_ready>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <wait_till_ready>
+			2: R_CKCORE_PCREL_IMM26BY2	read_sr1
+   6:	e4002001 	andi      	r0, r0, 1
+   a:	e920fffc 	bnez      	r0, 0x2	// 2 <wait_till_ready+0x2>
+   e:	3001      	movi      	r0, 1
+  10:	1490      	pop      	r15
+
+Disassembly of section .text.read_sr2:
+
+00000000 <read_sr2>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	e42e0002 	addi      	r1, r14, 3
+   8:	3201      	movi      	r2, 1
+   a:	3035      	movi      	r0, 53
+   c:	e0000000 	bsr      	0x0	// 0 <read_sr2>
+			c: R_CKCORE_PCREL_IMM26BY2	sflash_read_reg
+  10:	d80e0003 	ld.b      	r0, (r14, 0x3)
+  14:	1401      	addi      	r14, r14, 4
+  16:	1490      	pop      	r15
+
+Disassembly of section .text.sflash_quad_1pageprogram:
+
+00000000 <sflash_quad_1pageprogram>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	6d0b      	mov      	r4, r2
+   4:	6d83      	mov      	r6, r0
+   6:	6d47      	mov      	r5, r1
+   8:	e0000000 	bsr      	0x0	// 0 <sflash_quad_1pageprogram>
+			8: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+   c:	33a2      	movi      	r3, 162
+   e:	4378      	lsli      	r3, r3, 24
+  10:	3000      	movi      	r0, 0
+  12:	ea220080 	movih      	r2, 128
+  16:	e442041e 	addi      	r2, r2, 1055
+  1a:	b302      	st.w      	r0, (r3, 0x8)
+  1c:	b304      	st.w      	r0, (r3, 0x10)
+  1e:	b313      	st.w      	r0, (r3, 0x4c)
+  20:	b340      	st.w      	r2, (r3, 0x0)
+  22:	4c42      	lsri      	r2, r4, 2
+  24:	5a23      	subi      	r1, r2, 1
+  26:	ea0c0080 	movi      	r12, 128
+  2a:	b321      	st.w      	r1, (r3, 0x4)
+  2c:	ea0d0001 	movi      	r13, 1
+  30:	c54c482c 	lsli      	r12, r12, 10
+  34:	ea0180a2 	movi      	r1, 32930
+  38:	c7014901 	rotli      	r1, r1, 24
+  3c:	dda32004 	st.w      	r13, (r3, 0x10)
+  40:	dd832006 	st.w      	r12, (r3, 0x18)
+  44:	ea2c4000 	movih      	r12, 16384
+  48:	e58c0217 	addi      	r12, r12, 536
+  4c:	dd81201d 	st.w      	r12, (r1, 0x74)
+  50:	3108      	movi      	r1, 8
+  52:	b334      	st.w      	r1, (r3, 0x50)
+  54:	3102      	movi      	r1, 2
+  56:	b333      	st.w      	r1, (r3, 0x4c)
+  58:	3132      	movi      	r1, 50
+  5a:	dda32002 	st.w      	r13, (r3, 0x8)
+  5e:	b339      	st.w      	r1, (r3, 0x64)
+  60:	b3d9      	st.w      	r6, (r3, 0x64)
+  62:	6482      	cmpne      	r0, r2
+  64:	080d      	bt      	0x7e	// 7e <sflash_quad_1pageprogram+0x7e>
+  66:	e0000000 	bsr      	0x0	// 0 <sflash_quad_1pageprogram>
+			66: R_CKCORE_PCREL_IMM26BY2	wait_tx_done
+  6a:	e0000000 	bsr      	0x0	// 0 <sflash_quad_1pageprogram>
+			6a: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  6e:	33a2      	movi      	r3, 162
+  70:	4378      	lsli      	r3, r3, 24
+  72:	3000      	movi      	r0, 0
+  74:	3201      	movi      	r2, 1
+  76:	b302      	st.w      	r0, (r3, 0x8)
+  78:	b313      	st.w      	r0, (r3, 0x4c)
+  7a:	b342      	st.w      	r2, (r3, 0x8)
+  7c:	1493      	pop      	r4-r6, r15
+  7e:	d983200a 	ld.w      	r12, (r3, 0x28)
+  82:	e58c2002 	andi      	r12, r12, 2
+  86:	e90cfffc 	bez      	r12, 0x7e	// 7e <sflash_quad_1pageprogram+0x7e>
+  8a:	d0050881 	ldr.w      	r1, (r5, r0 << 2)
+  8e:	b338      	st.w      	r1, (r3, 0x60)
+  90:	2000      	addi      	r0, 1
+  92:	07e8      	br      	0x62	// 62 <sflash_quad_1pageprogram+0x62>
+
+Disassembly of section .text.sflash_readdata:
+
+00000000 <sflash_readdata>:
+   0:	14d6      	push      	r4-r9, r15
+   2:	ea080080 	movi      	r8, 128
+   6:	6d83      	mov      	r6, r0
+   8:	6dc7      	mov      	r7, r1
+   a:	6d0b      	mov      	r4, r2
+   c:	c5284828 	lsli      	r8, r8, 9
+  10:	e0000000 	bsr      	0x0	// 0 <sflash_readdata>
+			10: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  14:	ea890009 	lrw      	r9, 0x0	// 38 <sflash_readdata+0x38>
+  18:	e9240004 	bnez      	r4, 0x20	// 20 <sflash_readdata+0x20>
+  1c:	6c13      	mov      	r0, r4
+  1e:	1496      	pop      	r4-r9, r15
+  20:	f904cda5 	min.s32      	r5, r4, r8
+  24:	6c5f      	mov      	r1, r7
+  26:	6c1b      	mov      	r0, r6
+  28:	6c97      	mov      	r2, r5
+  2a:	d8692007 	ld.w      	r3, (r9, 0x1c)
+  2e:	7bcd      	jsr      	r3
+  30:	6116      	subu      	r4, r5
+  32:	6194      	addu      	r6, r5
+  34:	61d4      	addu      	r7, r5
+  36:	07f1      	br      	0x18	// 18 <sflash_readdata+0x18>
+  38:	00000000 	.long	0x00000000
+			38: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_getinfo:
+
+00000000 <sflash_getinfo>:
+   0:	380d      	cmphsi      	r0, 14
+   2:	081d      	bt      	0x3c	// 3c <sflash_getinfo+0x3c>
+   4:	1062      	lrw      	r3, 0x0	// c <sflash_getinfo+0xc>
+   6:	d0030883 	ldr.w      	r3, (r3, r0 << 2)
+   a:	780c      	jmp      	r3
+   c:	0000      	.short	0x0000
+			c: R_CKCORE_ADDR32	.rodata
+   e:	0000      	.short	0x0000
+  10:	3080      	movi      	r0, 128
+  12:	4005      	lsli      	r0, r0, 5
+  14:	783c      	jmp      	r15
+  16:	106d      	lrw      	r3, 0x0	// 48 <sflash_getinfo+0x48>
+  18:	9363      	ld.w      	r3, (r3, 0xc)
+  1a:	9300      	ld.w      	r0, (r3, 0x0)
+  1c:	07fc      	br      	0x14	// 14 <sflash_getinfo+0x14>
+  1e:	106b      	lrw      	r3, 0x0	// 48 <sflash_getinfo+0x48>
+  20:	9363      	ld.w      	r3, (r3, 0xc)
+  22:	9301      	ld.w      	r0, (r3, 0x4)
+  24:	07f8      	br      	0x14	// 14 <sflash_getinfo+0x14>
+  26:	1069      	lrw      	r3, 0x0	// 48 <sflash_getinfo+0x48>
+  28:	07fd      	br      	0x22	// 22 <sflash_getinfo+0x22>
+  2a:	3080      	movi      	r0, 128
+  2c:	4001      	lsli      	r0, r0, 1
+  2e:	07f3      	br      	0x14	// 14 <sflash_getinfo+0x14>
+  30:	1066      	lrw      	r3, 0x0	// 48 <sflash_getinfo+0x48>
+  32:	9301      	ld.w      	r0, (r3, 0x4)
+  34:	480c      	lsri      	r0, r0, 12
+  36:	07ef      	br      	0x14	// 14 <sflash_getinfo+0x14>
+  38:	3001      	movi      	r0, 1
+  3a:	07ed      	br      	0x14	// 14 <sflash_getinfo+0x14>
+  3c:	3000      	movi      	r0, 0
+  3e:	2800      	subi      	r0, 1
+  40:	07ea      	br      	0x14	// 14 <sflash_getinfo+0x14>
+  42:	3000      	movi      	r0, 0
+  44:	07e8      	br      	0x14	// 14 <sflash_getinfo+0x14>
+  46:	0000      	.short	0x0000
+  48:	00000000 	.long	0x00000000
+			48: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_calcblock:
+
+00000000 <sflash_calcblock>:
+   0:	3300      	movi      	r3, 0
+   2:	ea8c0011 	lrw      	r12, 0x0	// 44 <sflash_calcblock+0x44>
+   6:	b260      	st.w      	r3, (r2, 0x0)
+   8:	b160      	st.w      	r3, (r1, 0x0)
+   a:	d9ac2000 	ld.w      	r13, (r12, 0x0)
+   e:	e98d000a 	blz      	r13, 0x22	// 22 <sflash_calcblock+0x22>
+  12:	d98c2001 	ld.w      	r12, (r12, 0x4)
+  16:	ea0d0fff 	movi      	r13, 4095
+  1a:	6f76      	nor      	r13, r13
+  1c:	6b34      	and      	r12, r13
+  1e:	670e      	cmpne      	r3, r12
+  20:	0804      	bt      	0x28	// 28 <sflash_calcblock+0x28>
+  22:	3000      	movi      	r0, 0
+  24:	2800      	subi      	r0, 1
+  26:	040b      	br      	0x3c	// 3c <sflash_calcblock+0x3c>
+  28:	64c0      	cmphs      	r0, r3
+  2a:	e5a30fff 	addi      	r13, r3, 4096
+  2e:	0c08      	bf      	0x3e	// 3e <sflash_calcblock+0x3e>
+  30:	6740      	cmphs      	r0, r13
+  32:	0806      	bt      	0x3e	// 3e <sflash_calcblock+0x3e>
+  34:	b160      	st.w      	r3, (r1, 0x0)
+  36:	3000      	movi      	r0, 0
+  38:	dda22000 	st.w      	r13, (r2, 0x0)
+  3c:	783c      	jmp      	r15
+  3e:	6cf7      	mov      	r3, r13
+  40:	07ef      	br      	0x1e	// 1e <sflash_calcblock+0x1e>
+  42:	0000      	.short	0x0000
+  44:	0000      	.short	0x0000
+			44: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.sflash_write_protect_status:
+
+00000000 <sflash_write_protect_status>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	11a4      	lrw      	r5, 0x0	// 90 <sflash_write_protect_status+0x90>
+   4:	3300      	movi      	r3, 0
+   6:	b060      	st.w      	r3, (r0, 0x0)
+   8:	9563      	ld.w      	r3, (r5, 0xc)
+   a:	6d03      	mov      	r4, r0
+   c:	9364      	ld.w      	r3, (r3, 0x10)
+   e:	6d97      	mov      	r6, r5
+  10:	e903001d 	bez      	r3, 0x4a	// 4a <sflash_write_protect_status+0x4a>
+  14:	9360      	ld.w      	r3, (r3, 0x0)
+  16:	e903001a 	bez      	r3, 0x4a	// 4a <sflash_write_protect_status+0x4a>
+  1a:	e0000000 	bsr      	0x0	// 0 <sflash_write_protect_status>
+			1a: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  1e:	9563      	ld.w      	r3, (r5, 0xc)
+  20:	8b63      	ld.h      	r3, (r3, 0x6)
+  22:	eb43005e 	cmpnei      	r3, 94
+  26:	0c04      	bf      	0x2e	// 2e <sflash_write_protect_status+0x2e>
+  28:	eb430085 	cmpnei      	r3, 133
+  2c:	080f      	bt      	0x4a	// 4a <sflash_write_protect_status+0x4a>
+  2e:	e0000000 	bsr      	0x0	// 0 <sflash_write_protect_status>
+			2e: R_CKCORE_PCREL_IMM26BY2	read_sr1
+  32:	6d43      	mov      	r5, r0
+  34:	e0000000 	bsr      	0x0	// 0 <sflash_write_protect_status>
+			34: R_CKCORE_PCREL_IMM26BY2	read_sr2
+  38:	9663      	ld.w      	r3, (r6, 0xc)
+  3a:	3100      	movi      	r1, 0
+  3c:	da432004 	ld.w      	r18, (r3, 0x10)
+  40:	da722001 	ld.w      	r19, (r18, 0x4)
+  44:	c6610480 	cmpne      	r1, r19
+  48:	080b      	bt      	0x5e	// 5e <sflash_write_protect_status+0x5e>
+  4a:	3300      	movi      	r3, 0
+  4c:	2b00      	subi      	r3, 1
+  4e:	3200      	movi      	r2, 0
+  50:	2a00      	subi      	r2, 1
+  52:	648e      	cmpne      	r3, r2
+  54:	b460      	st.w      	r3, (r4, 0x0)
+  56:	3000      	movi      	r0, 0
+  58:	64c3      	mvcv      	r3
+  5a:	600e      	subu      	r0, r3
+  5c:	1493      	pop      	r4-r6, r15
+  5e:	d8722000 	ld.w      	r3, (r18, 0x0)
+  62:	4143      	lsli      	r2, r1, 3
+  64:	608c      	addu      	r2, r3
+  66:	d9a20001 	ld.b      	r13, (r2, 0x1)
+  6a:	daa20000 	ld.b      	r21, (r2, 0x0)
+  6e:	da820002 	ld.b      	r20, (r2, 0x2)
+  72:	d9820003 	ld.b      	r12, (r2, 0x3)
+  76:	9261      	ld.w      	r3, (r2, 0x4)
+  78:	c5a52022 	and      	r2, r5, r13
+  7c:	c4550480 	cmpne      	r21, r2
+  80:	0806      	bt      	0x8c	// 8c <sflash_write_protect_status+0x8c>
+  82:	c5802022 	and      	r2, r0, r12
+  86:	c4540480 	cmpne      	r20, r2
+  8a:	0fe2      	bf      	0x4e	// 4e <sflash_write_protect_status+0x4e>
+  8c:	2100      	addi      	r1, 1
+  8e:	07db      	br      	0x44	// 44 <sflash_write_protect_status+0x44>
+  90:	00000000 	.long	0x00000000
+			90: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_write_protect_mode:
+
+00000000 <sflash_write_protect_mode>:
+   0:	1068      	lrw      	r3, 0x0	// 20 <sflash_write_protect_mode+0x20>
+   2:	9363      	ld.w      	r3, (r3, 0xc)
+   4:	9364      	ld.w      	r3, (r3, 0x10)
+   6:	e903000a 	bez      	r3, 0x1a	// 1a <sflash_write_protect_mode+0x1a>
+   a:	9360      	ld.w      	r3, (r3, 0x0)
+   c:	3000      	movi      	r0, 0
+   e:	3b40      	cmpnei      	r3, 0
+  10:	2800      	subi      	r0, 1
+  12:	3301      	movi      	r3, 1
+  14:	c4030c40 	inct      	r0, r3, 0
+  18:	783c      	jmp      	r15
+  1a:	3000      	movi      	r0, 0
+  1c:	2800      	subi      	r0, 1
+  1e:	07fd      	br      	0x18	// 18 <sflash_write_protect_mode+0x18>
+  20:	0000      	.short	0x0000
+			20: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.sflash_wp_lock:
+
+00000000 <sflash_wp_lock>:
+   0:	14d7      	push      	r4-r10, r15
+   2:	1422      	subi      	r14, r14, 8
+   4:	11b1      	lrw      	r5, 0x0	// c8 <sflash_wp_lock+0xc8>
+   6:	3300      	movi      	r3, 0
+   8:	dc6e0000 	st.b      	r3, (r14, 0x0)
+   c:	dc6e0001 	st.b      	r3, (r14, 0x1)
+  10:	9563      	ld.w      	r3, (r5, 0xc)
+  12:	3400      	movi      	r4, 0
+  14:	9344      	ld.w      	r2, (r3, 0x10)
+  16:	6e83      	mov      	r10, r0
+  18:	6e07      	mov      	r8, r1
+  1a:	b180      	st.w      	r4, (r1, 0x0)
+  1c:	e9020005 	bez      	r2, 0x26	// 26 <sflash_wp_lock+0x26>
+  20:	9240      	ld.w      	r2, (r2, 0x0)
+  22:	e922000a 	bnez      	r2, 0x36	// 36 <sflash_wp_lock+0x36>
+  26:	eb4a0000 	cmpnei      	r10, 0
+  2a:	c4000503 	mvc      	r3
+  2e:	3000      	movi      	r0, 0
+  30:	600e      	subu      	r0, r3
+  32:	1402      	addi      	r14, r14, 8
+  34:	1497      	pop      	r4-r10, r15
+  36:	d9232001 	ld.w      	r9, (r3, 0x4)
+  3a:	e0000000 	bsr      	0x0	// 0 <sflash_wp_lock>
+			3a: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  3e:	9563      	ld.w      	r3, (r5, 0xc)
+  40:	6dd3      	mov      	r7, r4
+  42:	9344      	ld.w      	r2, (r3, 0x10)
+  44:	6d53      	mov      	r5, r4
+  46:	9260      	ld.w      	r3, (r2, 0x0)
+  48:	9201      	ld.w      	r0, (r2, 0x4)
+  4a:	6d93      	mov      	r6, r4
+  4c:	6c53      	mov      	r1, r4
+  4e:	6406      	cmpne      	r1, r0
+  50:	0c06      	bf      	0x5c	// 5c <sflash_wp_lock+0x5c>
+  52:	d9832001 	ld.w      	r12, (r3, 0x4)
+  56:	6728      	cmphs      	r10, r12
+  58:	6c8f      	mov      	r2, r3
+  5a:	080c      	bt      	0x72	// 72 <sflash_wp_lock+0x72>
+  5c:	c6094843 	lsri      	r3, r9, 16
+  60:	eb43005e 	cmpnei      	r3, 94
+  64:	0c0e      	bf      	0x80	// 80 <sflash_wp_lock+0x80>
+  66:	eb430085 	cmpnei      	r3, 133
+  6a:	0c0b      	bf      	0x80	// 80 <sflash_wp_lock+0x80>
+  6c:	3000      	movi      	r0, 0
+  6e:	2800      	subi      	r0, 1
+  70:	07e1      	br      	0x32	// 32 <sflash_wp_lock+0x32>
+  72:	2100      	addi      	r1, 1
+  74:	2307      	addi      	r3, 8
+  76:	82c0      	ld.b      	r6, (r2, 0x0)
+  78:	82a2      	ld.b      	r5, (r2, 0x2)
+  7a:	82e1      	ld.b      	r7, (r2, 0x1)
+  7c:	8283      	ld.b      	r4, (r2, 0x3)
+  7e:	07e8      	br      	0x4e	// 4e <sflash_wp_lock+0x4e>
+  80:	e0000000 	bsr      	0x0	// 0 <sflash_wp_lock>
+			80: R_CKCORE_PCREL_IMM26BY2	read_sr1
+  84:	681d      	andn      	r0, r7
+  86:	6d80      	or      	r6, r0
+  88:	dcce0000 	st.b      	r6, (r14, 0x0)
+  8c:	e0000000 	bsr      	0x0	// 0 <sflash_wp_lock>
+			8c: R_CKCORE_PCREL_IMM26BY2	read_sr2
+  90:	6811      	andn      	r0, r4
+  92:	6c14      	or      	r0, r5
+  94:	dc0e0001 	st.b      	r0, (r14, 0x1)
+  98:	e0000000 	bsr      	0x0	// 0 <sflash_wp_lock>
+			98: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  9c:	e0000000 	bsr      	0x0	// 0 <sflash_wp_lock>
+			9c: R_CKCORE_PCREL_IMM26BY2	write_enable
+  a0:	3202      	movi      	r2, 2
+  a2:	6c7b      	mov      	r1, r14
+  a4:	3001      	movi      	r0, 1
+  a6:	e0000000 	bsr      	0x0	// 0 <sflash_wp_lock>
+			a6: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+  aa:	e0000000 	bsr      	0x0	// 0 <sflash_wp_lock>
+			aa: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  ae:	1801      	addi      	r0, r14, 4
+  b0:	e0000000 	bsr      	0x0	// 0 <sflash_wp_lock>
+			b0: R_CKCORE_PCREL_IMM26BY2	sflash_write_protect_status
+  b4:	3300      	movi      	r3, 0
+  b6:	2b00      	subi      	r3, 1
+  b8:	64c2      	cmpne      	r0, r3
+  ba:	0fbc      	bf      	0x32	// 32 <sflash_wp_lock+0x32>
+  bc:	9861      	ld.w      	r3, (r14, 0x4)
+  be:	dc682000 	st.w      	r3, (r8, 0x0)
+  c2:	3000      	movi      	r0, 0
+  c4:	07b7      	br      	0x32	// 32 <sflash_wp_lock+0x32>
+  c6:	0000      	.short	0x0000
+  c8:	00000000 	.long	0x00000000
+			c8: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_write_protect_lock:
+
+00000000 <sflash_write_protect_lock>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	6c7b      	mov      	r1, r14
+   6:	e0000000 	bsr      	0x0	// 0 <sflash_write_protect_lock>
+			6: R_CKCORE_PCREL_IMM26BY2	sflash_wp_lock
+   a:	1401      	addi      	r14, r14, 4
+   c:	1490      	pop      	r15
+
+Disassembly of section .text.sflash_write_protect_unlock:
+
+00000000 <sflash_write_protect_unlock>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	6c7b      	mov      	r1, r14
+   6:	3000      	movi      	r0, 0
+   8:	e0000000 	bsr      	0x0	// 0 <sflash_write_protect_unlock>
+			8: R_CKCORE_PCREL_IMM26BY2	sflash_wp_lock
+   c:	1401      	addi      	r14, r14, 4
+   e:	1490      	pop      	r15
+
+Disassembly of section .text.sflash_calcblockrange:
+
+00000000 <sflash_calcblockrange>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	6d07      	mov      	r4, r1
+   6:	6c4b      	mov      	r1, r2
+   8:	6cbb      	mov      	r2, r14
+   a:	6d43      	mov      	r5, r0
+   c:	6d8f      	mov      	r6, r3
+   e:	e0000000 	bsr      	0x0	// 0 <sflash_calcblockrange>
+			e: R_CKCORE_PCREL_IMM26BY2	sflash_calcblock
+  12:	e9200008 	bnez      	r0, 0x22	// 22 <sflash_calcblockrange+0x22>
+  16:	5c03      	subi      	r0, r4, 1
+  18:	6c9b      	mov      	r2, r6
+  1a:	6c7b      	mov      	r1, r14
+  1c:	6014      	addu      	r0, r5
+  1e:	e0000000 	bsr      	0x0	// 0 <sflash_calcblockrange>
+			1e: R_CKCORE_PCREL_IMM26BY2	sflash_calcblock
+  22:	1401      	addi      	r14, r14, 4
+  24:	1493      	pop      	r4-r6, r15
+
+Disassembly of section .text.sflash_sync:
+
+00000000 <sflash_sync>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <sflash_sync>
+			2: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.flash_spi_irq_handler:
+
+00000000 <flash_spi_irq_handler>:
+   0:	33a2      	movi      	r3, 162
+   2:	4378      	lsli      	r3, r3, 24
+   4:	934c      	ld.w      	r2, (r3, 0x30)
+   6:	e4222002 	andi      	r1, r2, 2
+   a:	e9010003 	bez      	r1, 0x10	// 10 <flash_spi_irq_handler+0x10>
+   e:	932e      	ld.w      	r1, (r3, 0x38)
+  10:	e4422008 	andi      	r2, r2, 8
+  14:	e9020003 	bez      	r2, 0x1a	// 1a <flash_spi_irq_handler+0x1a>
+  18:	936f      	ld.w      	r3, (r3, 0x3c)
+  1a:	3000      	movi      	r0, 0
+  1c:	783c      	jmp      	r15
+
+Disassembly of section .text.sflash_otp_status:
+
+00000000 <sflash_otp_status>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	10b0      	lrw      	r5, 0x0	// 40 <sflash_otp_status+0x40>
+   4:	6d83      	mov      	r6, r0
+   6:	9563      	ld.w      	r3, (r5, 0xc)
+   8:	9365      	ld.w      	r3, (r3, 0x14)
+   a:	9384      	ld.w      	r4, (r3, 0x10)
+   c:	e0000000 	bsr      	0x0	// 0 <sflash_otp_status>
+			c: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  10:	9563      	ld.w      	r3, (r5, 0xc)
+  12:	e4842007 	andi      	r4, r4, 7
+  16:	d8635003 	ld.hs      	r3, (r3, 0x6)
+  1a:	eb43005e 	cmpnei      	r3, 94
+  1e:	0c04      	bf      	0x26	// 26 <sflash_otp_status+0x26>
+  20:	eb430085 	cmpnei      	r3, 133
+  24:	080b      	bt      	0x3a	// 3a <sflash_otp_status+0x3a>
+  26:	e0000000 	bsr      	0x0	// 0 <sflash_otp_status>
+			26: R_CKCORE_PCREL_IMM26BY2	read_sr2
+  2a:	2402      	addi      	r4, 3
+  2c:	c4804084 	asr      	r4, r0, r4
+  30:	e4842001 	andi      	r4, r4, 1
+  34:	a680      	st.b      	r4, (r6, 0x0)
+  36:	3000      	movi      	r0, 0
+  38:	1493      	pop      	r4-r6, r15
+  3a:	3000      	movi      	r0, 0
+  3c:	2800      	subi      	r0, 1
+  3e:	07fd      	br      	0x38	// 38 <sflash_otp_status+0x38>
+  40:	0000      	.short	0x0000
+			40: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.sflash_otp_get_region:
+
+00000000 <sflash_otp_get_region>:
+   0:	1064      	lrw      	r3, 0x0	// 10 <sflash_otp_get_region+0x10>
+   2:	9363      	ld.w      	r3, (r3, 0xc)
+   4:	9365      	ld.w      	r3, (r3, 0x14)
+   6:	9363      	ld.w      	r3, (r3, 0xc)
+   8:	b060      	st.w      	r3, (r0, 0x0)
+   a:	3000      	movi      	r0, 0
+   c:	783c      	jmp      	r15
+   e:	0000      	.short	0x0000
+  10:	0000      	.short	0x0000
+			10: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.sflash_otp_set_region:
+
+00000000 <sflash_otp_set_region>:
+   0:	1069      	lrw      	r3, 0x0	// 24 <sflash_otp_set_region+0x24>
+   2:	9363      	ld.w      	r3, (r3, 0xc)
+   4:	9345      	ld.w      	r2, (r3, 0x14)
+   6:	9263      	ld.w      	r3, (r2, 0xc)
+   8:	64c0      	cmphs      	r0, r3
+   a:	0809      	bt      	0x1c	// 1c <sflash_otp_set_region+0x1c>
+   c:	3100      	movi      	r1, 0
+   e:	9264      	ld.w      	r3, (r2, 0x10)
+  10:	2907      	subi      	r1, 8
+  12:	68c4      	and      	r3, r1
+  14:	6c0c      	or      	r0, r3
+  16:	b204      	st.w      	r0, (r2, 0x10)
+  18:	3000      	movi      	r0, 0
+  1a:	783c      	jmp      	r15
+  1c:	3000      	movi      	r0, 0
+  1e:	2800      	subi      	r0, 1
+  20:	07fd      	br      	0x1a	// 1a <sflash_otp_set_region+0x1a>
+  22:	0000      	.short	0x0000
+  24:	00000000 	.long	0x00000000
+			24: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_otp_get_current_region:
+
+00000000 <sflash_otp_get_current_region>:
+   0:	1065      	lrw      	r3, 0x0	// 14 <sflash_otp_get_current_region+0x14>
+   2:	9363      	ld.w      	r3, (r3, 0xc)
+   4:	9365      	ld.w      	r3, (r3, 0x14)
+   6:	9364      	ld.w      	r3, (r3, 0x10)
+   8:	e4632007 	andi      	r3, r3, 7
+   c:	b060      	st.w      	r3, (r0, 0x0)
+   e:	3000      	movi      	r0, 0
+  10:	783c      	jmp      	r15
+  12:	0000      	.short	0x0000
+  14:	00000000 	.long	0x00000000
+			14: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_otp_get_region_size:
+
+00000000 <sflash_otp_get_region_size>:
+   0:	1064      	lrw      	r3, 0x0	// 10 <sflash_otp_get_region_size+0x10>
+   2:	9363      	ld.w      	r3, (r3, 0xc)
+   4:	9365      	ld.w      	r3, (r3, 0x14)
+   6:	9362      	ld.w      	r3, (r3, 0x8)
+   8:	b060      	st.w      	r3, (r0, 0x0)
+   a:	3000      	movi      	r0, 0
+   c:	783c      	jmp      	r15
+   e:	0000      	.short	0x0000
+  10:	0000      	.short	0x0000
+			10: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.sflash_addr2cmd.isra.0:
+
+00000000 <sflash_addr2cmd.isra.0>:
+   0:	9060      	ld.w      	r3, (r0, 0x0)
+   2:	c780502c 	bmaski      	r12, 29
+   6:	60f0      	addu      	r3, r12
+   8:	4363      	lsli      	r3, r3, 3
+   a:	c4614043 	lsr      	r3, r1, r3
+   e:	a261      	st.b      	r3, (r2, 0x1)
+  10:	c780502c 	bmaski      	r12, 29
+  14:	9060      	ld.w      	r3, (r0, 0x0)
+  16:	e58c1000 	subi      	r12, r12, 1
+  1a:	60f0      	addu      	r3, r12
+  1c:	4363      	lsli      	r3, r3, 3
+  1e:	c4614043 	lsr      	r3, r1, r3
+  22:	a262      	st.b      	r3, (r2, 0x2)
+  24:	c780502c 	bmaski      	r12, 29
+  28:	9060      	ld.w      	r3, (r0, 0x0)
+  2a:	e58c1001 	subi      	r12, r12, 2
+  2e:	60f0      	addu      	r3, r12
+  30:	4363      	lsli      	r3, r3, 3
+  32:	c4614043 	lsr      	r3, r1, r3
+  36:	a263      	st.b      	r3, (r2, 0x3)
+  38:	9060      	ld.w      	r3, (r0, 0x0)
+  3a:	c7805020 	bmaski      	r0, 29
+  3e:	2802      	subi      	r0, 3
+  40:	60c0      	addu      	r3, r0
+  42:	4363      	lsli      	r3, r3, 3
+  44:	704d      	lsr      	r1, r3
+  46:	a224      	st.b      	r1, (r2, 0x4)
+  48:	783c      	jmp      	r15
+
+Disassembly of section .text.sflash_otp_erase:
+
+00000000 <sflash_otp_erase>:
+   0:	14d4      	push      	r4-r7, r15
+   2:	1094      	lrw      	r4, 0x0	// 50 <sflash_otp_erase+0x50>
+   4:	9463      	ld.w      	r3, (r4, 0xc)
+   6:	d8435003 	ld.hs      	r2, (r3, 0x6)
+   a:	eb42005e 	cmpnei      	r2, 94
+   e:	0c04      	bf      	0x16	// 16 <sflash_otp_erase+0x16>
+  10:	eb420085 	cmpnei      	r2, 133
+  14:	081b      	bt      	0x4a	// 4a <sflash_otp_erase+0x4a>
+  16:	9365      	ld.w      	r3, (r3, 0x14)
+  18:	93a4      	ld.w      	r5, (r3, 0x10)
+  1a:	93c0      	ld.w      	r6, (r3, 0x0)
+  1c:	93e1      	ld.w      	r7, (r3, 0x4)
+  1e:	3344      	movi      	r3, 68
+  20:	a470      	st.b      	r3, (r4, 0x10)
+  22:	e0000000 	bsr      	0x0	// 0 <sflash_otp_erase>
+			22: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  26:	e0000000 	bsr      	0x0	// 0 <sflash_otp_erase>
+			26: R_CKCORE_PCREL_IMM26BY2	write_enable
+  2a:	e4652007 	andi      	r3, r5, 7
+  2e:	104a      	lrw      	r2, 0x0	// 54 <sflash_otp_erase+0x54>
+  30:	6c5b      	mov      	r1, r6
+  32:	f8e38441 	mula.32.l      	r1, r3, r7
+  36:	5a1f      	subi      	r0, r2, 8
+  38:	e0000000 	bsr      	0x0	// 0 <sflash_otp_erase>
+			38: R_CKCORE_PCREL_IMM26BY2	sflash_addr2cmd.isra.0
+  3c:	3203      	movi      	r2, 3
+  3e:	1027      	lrw      	r1, 0x0	// 58 <sflash_otp_erase+0x58>
+  40:	8410      	ld.b      	r0, (r4, 0x10)
+  42:	e0000000 	bsr      	0x0	// 0 <sflash_otp_erase>
+			42: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+  46:	e0000000 	bsr      	0x0	// 0 <sflash_otp_erase>
+			46: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  4a:	3000      	movi      	r0, 0
+  4c:	1494      	pop      	r4-r7, r15
+	...
+			50: R_CKCORE_ADDR32	.data
+			54: R_CKCORE_ADDR32	.data+0x10
+			58: R_CKCORE_ADDR32	.data+0x11
+
+Disassembly of section .text.sflash_pageprogram:
+
+00000000 <sflash_pageprogram>:
+   0:	14d7      	push      	r4-r10, r15
+   2:	6dc3      	mov      	r7, r0
+   4:	6e47      	mov      	r9, r1
+   6:	6d4b      	mov      	r5, r2
+   8:	e9220004 	bnez      	r2, 0x10	// 10 <sflash_pageprogram+0x10>
+   c:	3000      	movi      	r0, 0
+   e:	1497      	pop      	r4-r10, r15
+  10:	10d9      	lrw      	r6, 0x0	// 74 <sflash_pageprogram+0x74>
+  12:	5a60      	addu      	r3, r2, r0
+  14:	9641      	ld.w      	r2, (r6, 0x4)
+  16:	64c8      	cmphs      	r2, r3
+  18:	6e9b      	mov      	r10, r6
+  1a:	0c29      	bf      	0x6c	// 6c <sflash_pageprogram+0x6c>
+  1c:	e0000000 	bsr      	0x0	// 0 <sflash_pageprogram>
+			1c: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  20:	e48720ff 	andi      	r4, r7, 255
+  24:	e0000000 	bsr      	0x0	// 0 <sflash_pageprogram>
+			24: R_CKCORE_PCREL_IMM26BY2	write_enable
+  28:	5d70      	addu      	r3, r5, r4
+  2a:	eb030100 	cmphsi      	r3, 257
+  2e:	9666      	ld.w      	r3, (r6, 0x18)
+  30:	0806      	bt      	0x3c	// 3c <sflash_pageprogram+0x3c>
+  32:	6c97      	mov      	r2, r5
+  34:	6c67      	mov      	r1, r9
+  36:	6c1f      	mov      	r0, r7
+  38:	7bcd      	jsr      	r3
+  3a:	07e9      	br      	0xc	// c <sflash_pageprogram+0xc>
+  3c:	3680      	movi      	r6, 128
+  3e:	46c1      	lsli      	r6, r6, 1
+  40:	5e91      	subu      	r4, r6, r4
+  42:	6c93      	mov      	r2, r4
+  44:	6c67      	mov      	r1, r9
+  46:	6c1f      	mov      	r0, r7
+  48:	7bcd      	jsr      	r3
+  4a:	6550      	cmphs      	r4, r5
+  4c:	0be0      	bt      	0xc	// c <sflash_pageprogram+0xc>
+  4e:	c4850088 	subu      	r8, r5, r4
+  52:	f8c8cd28 	min.u32      	r8, r8, r6
+  56:	e0000000 	bsr      	0x0	// 0 <sflash_pageprogram>
+			56: R_CKCORE_PCREL_IMM26BY2	write_enable
+  5a:	c4890021 	addu      	r1, r9, r4
+  5e:	5f10      	addu      	r0, r7, r4
+  60:	d86a2006 	ld.w      	r3, (r10, 0x18)
+  64:	6ca3      	mov      	r2, r8
+  66:	7bcd      	jsr      	r3
+  68:	6120      	addu      	r4, r8
+  6a:	07f0      	br      	0x4a	// 4a <sflash_pageprogram+0x4a>
+  6c:	3000      	movi      	r0, 0
+  6e:	2815      	subi      	r0, 22
+  70:	07cf      	br      	0xe	// e <sflash_pageprogram+0xe>
+  72:	0000      	.short	0x0000
+  74:	00000000 	.long	0x00000000
+			74: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_quad_read:
+
+00000000 <sflash_quad_read>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	6d83      	mov      	r6, r0
+   4:	6d47      	mov      	r5, r1
+   6:	6d0b      	mov      	r4, r2
+   8:	e902003a 	bez      	r2, 0x7c	// 7c <sflash_quad_read+0x7c>
+   c:	e0000000 	bsr      	0x0	// 0 <sflash_quad_read>
+			c: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+  10:	33a2      	movi      	r3, 162
+  12:	4378      	lsli      	r3, r3, 24
+  14:	3200      	movi      	r2, 0
+  16:	ea210080 	movih      	r1, 128
+  1a:	e421081e 	addi      	r1, r1, 2079
+  1e:	4c82      	lsri      	r4, r4, 2
+  20:	b342      	st.w      	r2, (r3, 0x8)
+  22:	b353      	st.w      	r2, (r3, 0x4c)
+  24:	b344      	st.w      	r2, (r3, 0x10)
+  26:	b320      	st.w      	r1, (r3, 0x0)
+  28:	5c23      	subi      	r1, r4, 1
+  2a:	b321      	st.w      	r1, (r3, 0x4)
+  2c:	b346      	st.w      	r2, (r3, 0x18)
+  2e:	3207      	movi      	r2, 7
+  30:	103d      	lrw      	r1, 0x0	// a4 <sflash_quad_read+0xa4>
+  32:	b355      	st.w      	r2, (r3, 0x54)
+  34:	9123      	ld.w      	r1, (r1, 0xc)
+  36:	3201      	movi      	r2, 1
+  38:	b353      	st.w      	r2, (r3, 0x4c)
+  3a:	9101      	ld.w      	r0, (r1, 0x4)
+  3c:	103b      	lrw      	r1, 0xffe3c7ee	// a8 <sflash_quad_read+0xa8>
+  3e:	6004      	addu      	r0, r1
+  40:	3801      	cmphsi      	r0, 2
+  42:	ea0080a2 	movi      	r0, 32930
+  46:	c7004900 	rotli      	r0, r0, 24
+  4a:	081b      	bt      	0x80	// 80 <sflash_quad_read+0x80>
+  4c:	ea013219 	movi      	r1, 12825
+  50:	39be      	bseti      	r1, 30
+  52:	b03d      	st.w      	r1, (r0, 0x74)
+  54:	b342      	st.w      	r2, (r3, 0x8)
+  56:	32eb      	movi      	r2, 235
+  58:	b359      	st.w      	r2, (r3, 0x64)
+  5a:	33a2      	movi      	r3, 162
+  5c:	4378      	lsli      	r3, r3, 24
+  5e:	3201      	movi      	r2, 1
+  60:	b3d9      	st.w      	r6, (r3, 0x64)
+  62:	b344      	st.w      	r2, (r3, 0x10)
+  64:	3200      	movi      	r2, 0
+  66:	6492      	cmpne      	r4, r2
+  68:	0813      	bt      	0x8e	// 8e <sflash_quad_read+0x8e>
+  6a:	e0000000 	bsr      	0x0	// 0 <sflash_quad_read>
+			6a: R_CKCORE_PCREL_IMM26BY2	wait_rx_done
+  6e:	33a2      	movi      	r3, 162
+  70:	4378      	lsli      	r3, r3, 24
+  72:	3200      	movi      	r2, 0
+  74:	b342      	st.w      	r2, (r3, 0x8)
+  76:	b353      	st.w      	r2, (r3, 0x4c)
+  78:	3201      	movi      	r2, 1
+  7a:	b342      	st.w      	r2, (r3, 0x8)
+  7c:	3000      	movi      	r0, 0
+  7e:	1493      	pop      	r4-r6, r15
+  80:	ea014218 	movi      	r1, 16920
+  84:	39be      	bseti      	r1, 30
+  86:	b03d      	st.w      	r1, (r0, 0x74)
+  88:	b342      	st.w      	r2, (r3, 0x8)
+  8a:	326b      	movi      	r2, 107
+  8c:	07e6      	br      	0x58	// 58 <sflash_quad_read+0x58>
+  8e:	930a      	ld.w      	r0, (r3, 0x28)
+  90:	e4002008 	andi      	r0, r0, 8
+  94:	e900fffd 	bez      	r0, 0x8e	// 8e <sflash_quad_read+0x8e>
+  98:	9338      	ld.w      	r1, (r3, 0x60)
+  9a:	d4450881 	str.w      	r1, (r5, r2 << 2)
+  9e:	2200      	addi      	r2, 1
+  a0:	07e3      	br      	0x66	// 66 <sflash_quad_read+0x66>
+  a2:	0000      	.short	0x0000
+  a4:	00000000 	.long	0x00000000
+			a4: R_CKCORE_ADDR32	.data
+  a8:	ffe3c7ee 	.long	0xffe3c7ee
+
+Disassembly of section .text.sflash_erasedata:
+
+00000000 <sflash_erasedata>:
+   0:	14d5      	push      	r4-r8, r15
+   2:	1148      	lrw      	r2, 0x0	// a0 <sflash_erasedata+0xa0>
+   4:	9261      	ld.w      	r3, (r2, 0x4)
+   6:	64c0      	cmphs      	r0, r3
+   8:	0848      	bt      	0x98	// 98 <sflash_erasedata+0x98>
+   a:	6040      	addu      	r1, r0
+   c:	ea0c0fff 	movi      	r12, 4095
+  10:	6f32      	nor      	r12, r12
+  12:	c5802025 	and      	r5, r0, r12
+  16:	3780      	movi      	r7, 128
+  18:	f823cd20 	min.u32      	r0, r3, r1
+  1c:	6016      	subu      	r0, r5
+  1e:	47e5      	lsli      	r7, r7, 5
+  20:	e502000f 	addi      	r8, r2, 16
+  24:	e4c20010 	addi      	r6, r2, 17
+  28:	e9200003 	bnez      	r0, 0x2e	// 2e <sflash_erasedata+0x2e>
+  2c:	1495      	pop      	r4-r8, r15
+  2e:	c40555e3 	zext      	r3, r5, 15, 0
+  32:	f8e0cc24 	max.u32      	r4, r0, r7
+  36:	e923001c 	bnez      	r3, 0x6e	// 6e <sflash_erasedata+0x6e>
+  3a:	eb04ffff 	cmphsi      	r4, 65536
+  3e:	0c18      	bf      	0x6e	// 6e <sflash_erasedata+0x6e>
+  40:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			40: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  44:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			44: R_CKCORE_PCREL_IMM26BY2	write_enable
+  48:	6c57      	mov      	r1, r5
+  4a:	6ca3      	mov      	r2, r8
+  4c:	1016      	lrw      	r0, 0x0	// a4 <sflash_erasedata+0xa4>
+  4e:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			4e: R_CKCORE_PCREL_IMM26BY2	sflash_addr2cmd.isra.0
+  52:	3203      	movi      	r2, 3
+  54:	6c5b      	mov      	r1, r6
+  56:	30d8      	movi      	r0, 216
+  58:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			58: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+  5c:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			5c: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  60:	3380      	movi      	r3, 128
+  62:	4369      	lsli      	r3, r3, 9
+  64:	614c      	addu      	r5, r3
+  66:	ea23ffff 	movih      	r3, 65535
+  6a:	5c0c      	addu      	r0, r4, r3
+  6c:	07de      	br      	0x28	// 28 <sflash_erasedata+0x28>
+  6e:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			6e: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  72:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			72: R_CKCORE_PCREL_IMM26BY2	write_enable
+  76:	6c57      	mov      	r1, r5
+  78:	6ca3      	mov      	r2, r8
+  7a:	100b      	lrw      	r0, 0x0	// a4 <sflash_erasedata+0xa4>
+  7c:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			7c: R_CKCORE_PCREL_IMM26BY2	sflash_addr2cmd.isra.0
+  80:	3203      	movi      	r2, 3
+  82:	6c5b      	mov      	r1, r6
+  84:	3020      	movi      	r0, 32
+  86:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			86: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+  8a:	e0000000 	bsr      	0x0	// 0 <sflash_erasedata>
+			8a: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  8e:	e4a50fff 	addi      	r5, r5, 4096
+  92:	e4041fff 	subi      	r0, r4, 4096
+  96:	07c9      	br      	0x28	// 28 <sflash_erasedata+0x28>
+  98:	3000      	movi      	r0, 0
+  9a:	2815      	subi      	r0, 22
+  9c:	07c8      	br      	0x2c	// 2c <sflash_erasedata+0x2c>
+	...
+			a0: R_CKCORE_ADDR32	.data
+			a4: R_CKCORE_ADDR32	.data+0x8
+
+Disassembly of section .text.sflash_chiperase:
+
+00000000 <sflash_chiperase>:
+   0:	14d0      	push      	r15
+   2:	1064      	lrw      	r3, 0x0	// 10 <sflash_chiperase+0x10>
+   4:	3000      	movi      	r0, 0
+   6:	9321      	ld.w      	r1, (r3, 0x4)
+   8:	e0000000 	bsr      	0x0	// 0 <sflash_chiperase>
+			8: R_CKCORE_PCREL_IMM26BY2	sflash_erasedata
+   c:	1490      	pop      	r15
+   e:	0000      	.short	0x0000
+  10:	0000      	.short	0x0000
+			10: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.sflash_otpwrite_transfer.constprop.10:
+
+00000000 <sflash_otpwrite_transfer.constprop.10>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	6d4b      	mov      	r5, r2
+   4:	6d07      	mov      	r4, r1
+   6:	6d83      	mov      	r6, r0
+   8:	e0000000 	bsr      	0x0	// 0 <sflash_otpwrite_transfer.constprop.10>
+			8: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+   c:	33a2      	movi      	r3, 162
+   e:	4378      	lsli      	r3, r3, 24
+  10:	ea22a030 	movih      	r2, 41008
+  14:	3aa7      	bseti      	r2, 7
+  16:	3000      	movi      	r0, 0
+  18:	3102      	movi      	r1, 2
+  1a:	b302      	st.w      	r0, (r3, 0x8)
+  1c:	b224      	st.w      	r1, (r2, 0x10)
+  1e:	ea020407 	movi      	r2, 1031
+  22:	b313      	st.w      	r0, (r3, 0x4c)
+  24:	b304      	st.w      	r0, (r3, 0x10)
+  26:	b340      	st.w      	r2, (r3, 0x0)
+  28:	5d43      	subi      	r2, r5, 1
+  2a:	b341      	st.w      	r2, (r3, 0x4)
+  2c:	ea0280a2 	movi      	r2, 32930
+  30:	c7024902 	rotli      	r2, r2, 24
+  34:	b306      	st.w      	r0, (r3, 0x18)
+  36:	b21d      	st.w      	r0, (r2, 0x74)
+  38:	3208      	movi      	r2, 8
+  3a:	b354      	st.w      	r2, (r3, 0x50)
+  3c:	3201      	movi      	r2, 1
+  3e:	b342      	st.w      	r2, (r3, 0x8)
+  40:	1038      	lrw      	r1, 0x0	// a0 <sflash_otpwrite_transfer.constprop.10+0xa0>
+  42:	6582      	cmpne      	r0, r6
+  44:	081b      	bt      	0x7a	// 7a <sflash_otpwrite_transfer.constprop.10+0x7a>
+  46:	33a2      	movi      	r3, 162
+  48:	4378      	lsli      	r3, r3, 24
+  4a:	3201      	movi      	r2, 1
+  4c:	b344      	st.w      	r2, (r3, 0x10)
+  4e:	6c53      	mov      	r1, r4
+  50:	6150      	addu      	r5, r4
+  52:	6546      	cmpne      	r1, r5
+  54:	081d      	bt      	0x8e	// 8e <sflash_otpwrite_transfer.constprop.10+0x8e>
+  56:	e0000000 	bsr      	0x0	// 0 <sflash_otpwrite_transfer.constprop.10>
+			56: R_CKCORE_PCREL_IMM26BY2	wait_tx_done
+  5a:	33a2      	movi      	r3, 162
+  5c:	4378      	lsli      	r3, r3, 24
+  5e:	ea21a030 	movih      	r1, 41008
+  62:	39a7      	bseti      	r1, 7
+  64:	3400      	movi      	r4, 0
+  66:	3203      	movi      	r2, 3
+  68:	b382      	st.w      	r4, (r3, 0x8)
+  6a:	b144      	st.w      	r2, (r1, 0x10)
+  6c:	3201      	movi      	r2, 1
+  6e:	b144      	st.w      	r2, (r1, 0x10)
+  70:	b342      	st.w      	r2, (r3, 0x8)
+  72:	e0000000 	bsr      	0x0	// 0 <sflash_otpwrite_transfer.constprop.10>
+			72: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  76:	6c13      	mov      	r0, r4
+  78:	1493      	pop      	r4-r6, r15
+  7a:	934a      	ld.w      	r2, (r3, 0x28)
+  7c:	e4422002 	andi      	r2, r2, 2
+  80:	e902fffd 	bez      	r2, 0x7a	// 7a <sflash_otpwrite_transfer.constprop.10+0x7a>
+  84:	5940      	addu      	r2, r1, r0
+  86:	2000      	addi      	r0, 1
+  88:	8250      	ld.b      	r2, (r2, 0x10)
+  8a:	b358      	st.w      	r2, (r3, 0x60)
+  8c:	07db      	br      	0x42	// 42 <sflash_otpwrite_transfer.constprop.10+0x42>
+  8e:	934a      	ld.w      	r2, (r3, 0x28)
+  90:	e4422002 	andi      	r2, r2, 2
+  94:	e902fffd 	bez      	r2, 0x8e	// 8e <sflash_otpwrite_transfer.constprop.10+0x8e>
+  98:	d0018002 	ldbi.b      	r2, (r1)
+  9c:	b358      	st.w      	r2, (r3, 0x60)
+  9e:	07da      	br      	0x52	// 52 <sflash_otpwrite_transfer.constprop.10+0x52>
+  a0:	0000      	.short	0x0000
+			a0: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.sflash_otp_write:
+
+00000000 <sflash_otp_write>:
+   0:	ebe00038 	push      	r4-r11, r15, r16
+   4:	ea880037 	lrw      	r8, 0x0	// e0 <sflash_otp_write+0xe0>
+   8:	6d8b      	mov      	r6, r2
+   a:	d9882003 	ld.w      	r12, (r8, 0xc)
+   e:	6ec7      	mov      	r11, r1
+  10:	d86c2005 	ld.w      	r3, (r12, 0x14)
+  14:	9344      	ld.w      	r2, (r3, 0x10)
+  16:	e4422007 	andi      	r2, r2, 7
+  1a:	e9060060 	bez      	r6, 0xda	// da <sflash_otp_write+0xda>
+  1e:	5e20      	addu      	r1, r6, r0
+  20:	d9a32002 	ld.w      	r13, (r3, 0x8)
+  24:	6474      	cmphs      	r13, r1
+  26:	0c5a      	bf      	0xda	// da <sflash_otp_write+0xda>
+  28:	93a0      	ld.w      	r5, (r3, 0x0)
+  2a:	6140      	addu      	r5, r0
+  2c:	9361      	ld.w      	r3, (r3, 0x4)
+  2e:	f8628445 	mula.32.l      	r5, r2, r3
+  32:	d86c5003 	ld.hs      	r3, (r12, 0x6)
+  36:	eb43005e 	cmpnei      	r3, 94
+  3a:	0c04      	bf      	0x42	// 42 <sflash_otp_write+0x42>
+  3c:	eb430085 	cmpnei      	r3, 133
+  40:	084d      	bt      	0xda	// da <sflash_otp_write+0xda>
+  42:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			42: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  46:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			46: R_CKCORE_PCREL_IMM26BY2	write_enable
+  4a:	1147      	lrw      	r2, 0x0	// e4 <sflash_otp_write+0xe4>
+  4c:	3342      	movi      	r3, 66
+  4e:	5a1f      	subi      	r0, r2, 8
+  50:	6c57      	mov      	r1, r5
+  52:	e48520ff 	andi      	r4, r5, 255
+  56:	dc680010 	st.b      	r3, (r8, 0x10)
+  5a:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			5a: R_CKCORE_PCREL_IMM26BY2	sflash_addr2cmd.isra.0
+  5e:	5e70      	addu      	r3, r6, r4
+  60:	eb030100 	cmphsi      	r3, 257
+  64:	d8082002 	ld.w      	r0, (r8, 0x8)
+  68:	080c      	bt      	0x80	// 80 <sflash_otp_write+0x80>
+  6a:	6c9b      	mov      	r2, r6
+  6c:	6c6f      	mov      	r1, r11
+  6e:	2000      	addi      	r0, 1
+  70:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			70: R_CKCORE_PCREL_IMM26BY2	sflash_otpwrite_transfer.constprop.10
+  74:	6d1b      	mov      	r4, r6
+  76:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			76: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  7a:	6c13      	mov      	r0, r4
+  7c:	ebc00038 	pop      	r4-r11, r15, r16
+  80:	ea090080 	movi      	r9, 128
+  84:	c4294829 	lsli      	r9, r9, 1
+  88:	c4890084 	subu      	r4, r9, r4
+  8c:	6c93      	mov      	r2, r4
+  8e:	6c6f      	mov      	r1, r11
+  90:	2000      	addi      	r0, 1
+  92:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			92: R_CKCORE_PCREL_IMM26BY2	sflash_otpwrite_transfer.constprop.10
+  96:	6dd3      	mov      	r7, r4
+  98:	ea900013 	lrw      	r16, 0x0	// e4 <sflash_otp_write+0xe4>
+  9c:	659c      	cmphs      	r7, r6
+  9e:	0bec      	bt      	0x76	// 76 <sflash_otp_write+0x76>
+  a0:	5f34      	addu      	r1, r7, r5
+  a2:	c4104822 	lsli      	r2, r16, 0
+  a6:	1011      	lrw      	r0, 0x0	// e8 <sflash_otp_write+0xe8>
+  a8:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			a8: R_CKCORE_PCREL_IMM26BY2	sflash_addr2cmd.isra.0
+  ac:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			ac: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  b0:	c4e6008a 	subu      	r10, r6, r7
+  b4:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			b4: R_CKCORE_PCREL_IMM26BY2	write_enable
+  b8:	f92acd2a 	min.u32      	r10, r10, r9
+  bc:	d8082002 	ld.w      	r0, (r8, 0x8)
+  c0:	c4eb0021 	addu      	r1, r11, r7
+  c4:	6cab      	mov      	r2, r10
+  c6:	2000      	addi      	r0, 1
+  c8:	e0000000 	bsr      	0x0	// 0 <sflash_otp_write>
+			c8: R_CKCORE_PCREL_IMM26BY2	sflash_otpwrite_transfer.constprop.10
+  cc:	c5440023 	addu      	r3, r4, r10
+  d0:	3c40      	cmpnei      	r4, 0
+  d2:	c4830c40 	inct      	r4, r3, 0
+  d6:	61e8      	addu      	r7, r10
+  d8:	07e2      	br      	0x9c	// 9c <sflash_otp_write+0x9c>
+  da:	3000      	movi      	r0, 0
+  dc:	2800      	subi      	r0, 1
+  de:	07cf      	br      	0x7c	// 7c <sflash_otp_write+0x7c>
+	...
+			e0: R_CKCORE_ADDR32	.data
+			e4: R_CKCORE_ADDR32	.data+0x10
+			e8: R_CKCORE_ADDR32	.data+0x8
+
+Disassembly of section .text.sflash_otp_read:
+
+00000000 <sflash_otp_read>:
+   0:	ebe00058 	push      	r4-r11, r15, r16-r17
+   4:	1422      	subi      	r14, r14, 8
+   6:	ea8a0054 	lrw      	r10, 0x0	// 154 <sflash_otp_read+0x154>
+   a:	6e4b      	mov      	r9, r2
+   c:	d98a2003 	ld.w      	r12, (r10, 0xc)
+  10:	6ec7      	mov      	r11, r1
+  12:	d86c2005 	ld.w      	r3, (r12, 0x14)
+  16:	9344      	ld.w      	r2, (r3, 0x10)
+  18:	e4422007 	andi      	r2, r2, 7
+  1c:	e9090098 	bez      	r9, 0x14c	// 14c <sflash_otp_read+0x14c>
+  20:	c4090021 	addu      	r1, r9, r0
+  24:	d9a32002 	ld.w      	r13, (r3, 0x8)
+  28:	6474      	cmphs      	r13, r1
+  2a:	0c91      	bf      	0x14c	// 14c <sflash_otp_read+0x14c>
+  2c:	93e0      	ld.w      	r7, (r3, 0x0)
+  2e:	61c0      	addu      	r7, r0
+  30:	9361      	ld.w      	r3, (r3, 0x4)
+  32:	f8628447 	mula.32.l      	r7, r2, r3
+  36:	d86c5003 	ld.hs      	r3, (r12, 0x6)
+  3a:	eb43005e 	cmpnei      	r3, 94
+  3e:	0c04      	bf      	0x46	// 46 <sflash_otp_read+0x46>
+  40:	eb430085 	cmpnei      	r3, 133
+  44:	0884      	bt      	0x14c	// 14c <sflash_otp_read+0x14c>
+  46:	e0000000 	bsr      	0x0	// 0 <sflash_otp_read>
+			46: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  4a:	1244      	lrw      	r2, 0x0	// 158 <sflash_otp_read+0x158>
+  4c:	3348      	movi      	r3, 72
+  4e:	6c5f      	mov      	r1, r7
+  50:	5a1f      	subi      	r0, r2, 8
+  52:	3500      	movi      	r5, 0
+  54:	34a2      	movi      	r4, 162
+  56:	dc6a0010 	st.b      	r3, (r10, 0x10)
+  5a:	ea110020 	movi      	r17, 32
+  5e:	e0000000 	bsr      	0x0	// 0 <sflash_otp_read>
+			5e: R_CKCORE_PCREL_IMM26BY2	sflash_addr2cmd.isra.0
+  62:	4498      	lsli      	r4, r4, 24
+  64:	6d97      	mov      	r6, r5
+  66:	ea90003d 	lrw      	r16, 0x0	// 158 <sflash_otp_read+0x158>
+  6a:	fa29cda8 	min.s32      	r8, r9, r17
+  6e:	e9080049 	bez      	r8, 0x100	// 100 <sflash_otp_read+0x100>
+  72:	d86a2002 	ld.w      	r3, (r10, 0x8)
+  76:	5b26      	addi      	r1, r3, 2
+  78:	2300      	addi      	r3, 1
+  7a:	b861      	st.w      	r3, (r14, 0x4)
+  7c:	b820      	st.w      	r1, (r14, 0x0)
+  7e:	e0000000 	bsr      	0x0	// 0 <sflash_otp_read>
+			7e: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+  82:	ea22a030 	movih      	r2, 41008
+  86:	3aa7      	bseti      	r2, 7
+  88:	3302      	movi      	r3, 2
+  8a:	b4c2      	st.w      	r6, (r4, 0x8)
+  8c:	b264      	st.w      	r3, (r2, 0x10)
+  8e:	ea030407 	movi      	r3, 1031
+  92:	b4d3      	st.w      	r6, (r4, 0x4c)
+  94:	b4c4      	st.w      	r6, (r4, 0x10)
+  96:	b460      	st.w      	r3, (r4, 0x0)
+  98:	9861      	ld.w      	r3, (r14, 0x4)
+  9a:	b461      	st.w      	r3, (r4, 0x4)
+  9c:	ea0380a2 	movi      	r3, 32930
+  a0:	c7034903 	rotli      	r3, r3, 24
+  a4:	b4c6      	st.w      	r6, (r4, 0x18)
+  a6:	b3dd      	st.w      	r6, (r3, 0x74)
+  a8:	3301      	movi      	r3, 1
+  aa:	b462      	st.w      	r3, (r4, 0x8)
+  ac:	9820      	ld.w      	r1, (r14, 0x0)
+  ae:	3300      	movi      	r3, 0
+  b0:	644c      	cmphs      	r3, r1
+  b2:	0c39      	bf      	0x124	// 124 <sflash_otp_read+0x124>
+  b4:	3301      	movi      	r3, 1
+  b6:	b464      	st.w      	r3, (r4, 0x10)
+  b8:	b860      	st.w      	r3, (r14, 0x0)
+  ba:	e0000000 	bsr      	0x0	// 0 <sflash_otp_read>
+			ba: R_CKCORE_PCREL_IMM26BY2	wait_tx_done
+  be:	ea030807 	movi      	r3, 2055
+  c2:	b4c2      	st.w      	r6, (r4, 0x8)
+  c4:	e4481000 	subi      	r2, r8, 1
+  c8:	b4c4      	st.w      	r6, (r4, 0x10)
+  ca:	b460      	st.w      	r3, (r4, 0x0)
+  cc:	3307      	movi      	r3, 7
+  ce:	b441      	st.w      	r2, (r4, 0x4)
+  d0:	b4c6      	st.w      	r6, (r4, 0x18)
+  d2:	b475      	st.w      	r3, (r4, 0x54)
+  d4:	9860      	ld.w      	r3, (r14, 0x0)
+  d6:	b473      	st.w      	r3, (r4, 0x4c)
+  d8:	c50b0021 	addu      	r1, r11, r8
+  dc:	b462      	st.w      	r3, (r4, 0x8)
+  de:	b464      	st.w      	r3, (r4, 0x10)
+  e0:	b4d8      	st.w      	r6, (r4, 0x60)
+  e2:	6cef      	mov      	r3, r11
+  e4:	64c6      	cmpne      	r1, r3
+  e6:	082a      	bt      	0x13a	// 13a <sflash_otp_read+0x13a>
+  e8:	e0000000 	bsr      	0x0	// 0 <sflash_otp_read>
+			e8: R_CKCORE_PCREL_IMM26BY2	wait_rx_done
+  ec:	ea22a030 	movih      	r2, 41008
+  f0:	3aa7      	bseti      	r2, 7
+  f2:	3303      	movi      	r3, 3
+  f4:	b4c2      	st.w      	r6, (r4, 0x8)
+  f6:	b4d3      	st.w      	r6, (r4, 0x4c)
+  f8:	b264      	st.w      	r3, (r2, 0x10)
+  fa:	3301      	movi      	r3, 1
+  fc:	b264      	st.w      	r3, (r2, 0x10)
+  fe:	b462      	st.w      	r3, (r4, 0x8)
+ 100:	61e0      	addu      	r7, r8
+ 102:	6262      	subu      	r9, r8
+ 104:	c4104822 	lsli      	r2, r16, 0
+ 108:	6c5f      	mov      	r1, r7
+ 10a:	1015      	lrw      	r0, 0x0	// 15c <sflash_otp_read+0x15c>
+ 10c:	62e0      	addu      	r11, r8
+ 10e:	6160      	addu      	r5, r8
+ 110:	e0000000 	bsr      	0x0	// 0 <sflash_otp_read>
+			110: R_CKCORE_PCREL_IMM26BY2	sflash_addr2cmd.isra.0
+ 114:	e929ffab 	bnez      	r9, 0x6a	// 6a <sflash_otp_read+0x6a>
+ 118:	e0000000 	bsr      	0x0	// 0 <sflash_otp_read>
+			118: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+ 11c:	6c17      	mov      	r0, r5
+ 11e:	1402      	addi      	r14, r14, 8
+ 120:	ebc00058 	pop      	r4-r11, r15, r16-r17
+ 124:	944a      	ld.w      	r2, (r4, 0x28)
+ 126:	e4422002 	andi      	r2, r2, 2
+ 12a:	e902fffd 	bez      	r2, 0x124	// 124 <sflash_otp_read+0x124>
+ 12e:	c46a0022 	addu      	r2, r10, r3
+ 132:	2300      	addi      	r3, 1
+ 134:	8250      	ld.b      	r2, (r2, 0x10)
+ 136:	b458      	st.w      	r2, (r4, 0x60)
+ 138:	07bc      	br      	0xb0	// b0 <sflash_otp_read+0xb0>
+ 13a:	944a      	ld.w      	r2, (r4, 0x28)
+ 13c:	e4422008 	andi      	r2, r2, 8
+ 140:	e902fffd 	bez      	r2, 0x13a	// 13a <sflash_otp_read+0x13a>
+ 144:	9458      	ld.w      	r2, (r4, 0x60)
+ 146:	d4038002 	stbi.b      	r2, (r3)
+ 14a:	07cd      	br      	0xe4	// e4 <sflash_otp_read+0xe4>
+ 14c:	3000      	movi      	r0, 0
+ 14e:	2800      	subi      	r0, 1
+ 150:	07e7      	br      	0x11e	// 11e <sflash_otp_read+0x11e>
+	...
+			154: R_CKCORE_ADDR32	.data
+			158: R_CKCORE_ADDR32	.data+0x10
+			15c: R_CKCORE_ADDR32	.data+0x8
+
+Disassembly of section .text.gx_spinor_flash_getuid:
+
+00000000 <gx_spinor_flash_getuid>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	1162      	lrw      	r3, 0x0	// 88 <gx_spinor_flash_getuid+0x88>
+   4:	6d03      	mov      	r4, r0
+   6:	9363      	ld.w      	r3, (r3, 0xc)
+   8:	8366      	ld.b      	r3, (r3, 0x6)
+   a:	eb430085 	cmpnei      	r3, 133
+   e:	0c04      	bf      	0x16	// 16 <gx_spinor_flash_getuid+0x16>
+  10:	eb43005e 	cmpnei      	r3, 94
+  14:	0834      	bt      	0x7c	// 7c <gx_spinor_flash_getuid+0x7c>
+  16:	3310      	movi      	r3, 16
+  18:	f861cda1 	min.s32      	r1, r1, r3
+  1c:	b220      	st.w      	r1, (r2, 0x0)
+  1e:	6d47      	mov      	r5, r1
+  20:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_getuid>
+			20: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+  24:	33a2      	movi      	r3, 162
+  26:	4378      	lsli      	r3, r3, 24
+  28:	3200      	movi      	r2, 0
+  2a:	ea010c07 	movi      	r1, 3079
+  2e:	b342      	st.w      	r2, (r3, 0x8)
+  30:	b353      	st.w      	r2, (r3, 0x4c)
+  32:	b320      	st.w      	r1, (r3, 0x0)
+  34:	5d23      	subi      	r1, r5, 1
+  36:	b321      	st.w      	r1, (r3, 0x4)
+  38:	3180      	movi      	r1, 128
+  3a:	3001      	movi      	r0, 1
+  3c:	412b      	lsli      	r1, r1, 11
+  3e:	b304      	st.w      	r0, (r3, 0x10)
+  40:	b326      	st.w      	r1, (r3, 0x18)
+  42:	ea0180a2 	movi      	r1, 32930
+  46:	c7014901 	rotli      	r1, r1, 24
+  4a:	6150      	addu      	r5, r4
+  4c:	b15d      	st.w      	r2, (r1, 0x74)
+  4e:	314b      	movi      	r1, 75
+  50:	b302      	st.w      	r0, (r3, 0x8)
+  52:	b338      	st.w      	r1, (r3, 0x60)
+  54:	6c13      	mov      	r0, r4
+  56:	b358      	st.w      	r2, (r3, 0x60)
+  58:	b358      	st.w      	r2, (r3, 0x60)
+  5a:	b358      	st.w      	r2, (r3, 0x60)
+  5c:	b358      	st.w      	r2, (r3, 0x60)
+  5e:	6416      	cmpne      	r5, r0
+  60:	0805      	bt      	0x6a	// 6a <gx_spinor_flash_getuid+0x6a>
+  62:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_getuid>
+			62: R_CKCORE_PCREL_IMM26BY2	wait_rx_done
+  66:	3000      	movi      	r0, 0
+  68:	1492      	pop      	r4-r5, r15
+  6a:	934a      	ld.w      	r2, (r3, 0x28)
+  6c:	e4422008 	andi      	r2, r2, 8
+  70:	e902fffd 	bez      	r2, 0x6a	// 6a <gx_spinor_flash_getuid+0x6a>
+  74:	9358      	ld.w      	r2, (r3, 0x60)
+  76:	d4008002 	stbi.b      	r2, (r0)
+  7a:	07f2      	br      	0x5e	// 5e <gx_spinor_flash_getuid+0x5e>
+  7c:	3300      	movi      	r3, 0
+  7e:	6c0f      	mov      	r0, r3
+  80:	b260      	st.w      	r3, (r2, 0x0)
+  82:	2800      	subi      	r0, 1
+  84:	07f2      	br      	0x68	// 68 <gx_spinor_flash_getuid+0x68>
+  86:	0000      	.short	0x0000
+  88:	00000000 	.long	0x00000000
+			88: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_detect.constprop.8:
+
+00000000 <sflash_detect.constprop.8>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	11a9      	lrw      	r5, 0x0	// a8 <sflash_detect.constprop.8+0xa8>
+   6:	3400      	movi      	r4, 0
+   8:	2c00      	subi      	r4, 1
+   a:	3203      	movi      	r2, 3
+   c:	6c7b      	mov      	r1, r14
+   e:	309f      	movi      	r0, 159
+  10:	b580      	st.w      	r4, (r5, 0x0)
+  12:	e0000000 	bsr      	0x0	// 0 <sflash_detect.constprop.8>
+			12: R_CKCORE_PCREL_IMM26BY2	sflash_read_reg
+  16:	6cd7      	mov      	r3, r5
+  18:	e9800046 	blz      	r0, 0xa4	// a4 <sflash_detect.constprop.8+0xa4>
+  1c:	d82e1000 	ld.h      	r1, (r14, 0x0)
+  20:	4148      	lsli      	r2, r1, 8
+  22:	c50155e1 	zext      	r1, r1, 15, 8
+  26:	6c84      	or      	r2, r1
+  28:	7489      	zexth      	r2, r2
+  2a:	d82e0002 	ld.b      	r1, (r14, 0x2)
+  2e:	4248      	lsli      	r2, r2, 8
+  30:	3000      	movi      	r0, 0
+  32:	6c84      	or      	r2, r1
+  34:	6c43      	mov      	r1, r0
+  36:	ea8c001e 	lrw      	r12, 0x0	// ac <sflash_detect.constprop.8+0xac>
+  3a:	6300      	addu      	r12, r0
+  3c:	d98c2001 	ld.w      	r12, (r12, 0x4)
+  40:	e90c000f 	bez      	r12, 0x5e	// 5e <sflash_detect.constprop.8+0x5e>
+  44:	64b2      	cmpne      	r12, r2
+  46:	2017      	addi      	r0, 24
+  48:	0828      	bt      	0x98	// 98 <sflash_detect.constprop.8+0x98>
+  4a:	3218      	movi      	r2, 24
+  4c:	b320      	st.w      	r1, (r3, 0x0)
+  4e:	7c48      	mult      	r1, r2
+  50:	1057      	lrw      	r2, 0x0	// ac <sflash_detect.constprop.8+0xac>
+  52:	6048      	addu      	r1, r2
+  54:	9142      	ld.w      	r2, (r1, 0x8)
+  56:	b341      	st.w      	r2, (r3, 0x4)
+  58:	3203      	movi      	r2, 3
+  5a:	b342      	st.w      	r2, (r3, 0x8)
+  5c:	b323      	st.w      	r1, (r3, 0xc)
+  5e:	9340      	ld.w      	r2, (r3, 0x0)
+  60:	e9a20020 	bhsz      	r2, 0xa0	// a0 <sflash_detect.constprop.8+0xa0>
+  64:	3100      	movi      	r1, 0
+  66:	6c87      	mov      	r2, r1
+  68:	ea8c0012 	lrw      	r12, 0xc22016	// b0 <sflash_detect.constprop.8+0xb0>
+  6c:	1010      	lrw      	r0, 0x0	// ac <sflash_detect.constprop.8+0xac>
+  6e:	6004      	addu      	r0, r1
+  70:	9001      	ld.w      	r0, (r0, 0x4)
+  72:	e9000010 	bez      	r0, 0x92	// 92 <sflash_detect.constprop.8+0x92>
+  76:	6702      	cmpne      	r0, r12
+  78:	2117      	addi      	r1, 24
+  7a:	0811      	bt      	0x9c	// 9c <sflash_detect.constprop.8+0x9c>
+  7c:	3118      	movi      	r1, 24
+  7e:	b340      	st.w      	r2, (r3, 0x0)
+  80:	7c84      	mult      	r2, r1
+  82:	102b      	lrw      	r1, 0x0	// ac <sflash_detect.constprop.8+0xac>
+  84:	6084      	addu      	r2, r1
+  86:	3000      	movi      	r0, 0
+  88:	9222      	ld.w      	r1, (r2, 0x8)
+  8a:	b321      	st.w      	r1, (r3, 0x4)
+  8c:	3103      	movi      	r1, 3
+  8e:	b322      	st.w      	r1, (r3, 0x8)
+  90:	b343      	st.w      	r2, (r3, 0xc)
+  92:	2801      	subi      	r0, 2
+  94:	1401      	addi      	r14, r14, 4
+  96:	1492      	pop      	r4-r5, r15
+  98:	2100      	addi      	r1, 1
+  9a:	07ce      	br      	0x36	// 36 <sflash_detect.constprop.8+0x36>
+  9c:	2200      	addi      	r2, 1
+  9e:	07e7      	br      	0x6c	// 6c <sflash_detect.constprop.8+0x6c>
+  a0:	3000      	movi      	r0, 0
+  a2:	07f9      	br      	0x94	// 94 <sflash_detect.constprop.8+0x94>
+  a4:	6c13      	mov      	r0, r4
+  a6:	07f7      	br      	0x94	// 94 <sflash_detect.constprop.8+0x94>
+	...
+			a8: R_CKCORE_ADDR32	.data
+			ac: R_CKCORE_ADDR32	spinor_list
+  b0:	00c22016 	.long	0x00c22016
+
+Disassembly of section .text.sflash_gettype:
+
+00000000 <sflash_gettype>:
+   0:	1062      	lrw      	r3, 0x0	// 8 <sflash_gettype+0x8>
+   2:	9363      	ld.w      	r3, (r3, 0xc)
+   4:	9300      	ld.w      	r0, (r3, 0x0)
+   6:	783c      	jmp      	r15
+   8:	00000000 	.long	0x00000000
+			8: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_otp_lock:
+
+00000000 <sflash_otp_lock>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	10b7      	lrw      	r5, 0x0	// 60 <sflash_otp_lock+0x60>
+   6:	9563      	ld.w      	r3, (r5, 0xc)
+   8:	9365      	ld.w      	r3, (r3, 0x14)
+   a:	9384      	ld.w      	r4, (r3, 0x10)
+   c:	e0000000 	bsr      	0x0	// 0 <sflash_otp_lock>
+			c: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  10:	9563      	ld.w      	r3, (r5, 0xc)
+  12:	e4842007 	andi      	r4, r4, 7
+  16:	d8635003 	ld.hs      	r3, (r3, 0x6)
+  1a:	eb43005e 	cmpnei      	r3, 94
+  1e:	0c04      	bf      	0x26	// 26 <sflash_otp_lock+0x26>
+  20:	eb430085 	cmpnei      	r3, 133
+  24:	081a      	bt      	0x58	// 58 <sflash_otp_lock+0x58>
+  26:	e0000000 	bsr      	0x0	// 0 <sflash_otp_lock>
+			26: R_CKCORE_PCREL_IMM26BY2	read_sr1
+  2a:	3501      	movi      	r5, 1
+  2c:	2402      	addi      	r4, 3
+  2e:	dc0e0000 	st.b      	r0, (r14, 0x0)
+  32:	c4854024 	lsl      	r4, r5, r4
+  36:	e0000000 	bsr      	0x0	// 0 <sflash_otp_lock>
+			36: R_CKCORE_PCREL_IMM26BY2	read_sr2
+  3a:	6d00      	or      	r4, r0
+  3c:	dc8e0001 	st.b      	r4, (r14, 0x1)
+  40:	e0000000 	bsr      	0x0	// 0 <sflash_otp_lock>
+			40: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  44:	e0000000 	bsr      	0x0	// 0 <sflash_otp_lock>
+			44: R_CKCORE_PCREL_IMM26BY2	write_enable
+  48:	3202      	movi      	r2, 2
+  4a:	6c7b      	mov      	r1, r14
+  4c:	6c17      	mov      	r0, r5
+  4e:	e0000000 	bsr      	0x0	// 0 <sflash_otp_lock>
+			4e: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+  52:	3000      	movi      	r0, 0
+  54:	1401      	addi      	r14, r14, 4
+  56:	1492      	pop      	r4-r5, r15
+  58:	3000      	movi      	r0, 0
+  5a:	2800      	subi      	r0, 1
+  5c:	07fc      	br      	0x54	// 54 <sflash_otp_lock+0x54>
+  5e:	0000      	.short	0x0000
+  60:	00000000 	.long	0x00000000
+			60: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.sflash_enable_quad_0:
+
+00000000 <sflash_enable_quad_0>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_0>
+			4: R_CKCORE_PCREL_IMM26BY2	read_sr2
+   8:	e4602002 	andi      	r3, r0, 2
+   c:	e9230012 	bnez      	r3, 0x30	// 30 <sflash_enable_quad_0+0x30>
+  10:	ec000002 	ori      	r0, r0, 2
+  14:	dc0e0003 	st.b      	r0, (r14, 0x3)
+  18:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_0>
+			18: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  1c:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_0>
+			1c: R_CKCORE_PCREL_IMM26BY2	write_enable
+  20:	3201      	movi      	r2, 1
+  22:	e42e0002 	addi      	r1, r14, 3
+  26:	3031      	movi      	r0, 49
+  28:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_0>
+			28: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+  2c:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_0>
+			2c: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  30:	3000      	movi      	r0, 0
+  32:	1401      	addi      	r14, r14, 4
+  34:	1490      	pop      	r15
+
+Disassembly of section .text.sflash_enable_hfm:
+
+00000000 <sflash_enable_hfm>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	e42e0002 	addi      	r1, r14, 3
+   8:	3201      	movi      	r2, 1
+   a:	3015      	movi      	r0, 21
+   c:	e0000000 	bsr      	0x0	// 0 <sflash_enable_hfm>
+			c: R_CKCORE_PCREL_IMM26BY2	sflash_read_reg
+  10:	d86e0003 	ld.b      	r3, (r14, 0x3)
+  14:	e4432010 	andi      	r2, r3, 16
+  18:	e9220012 	bnez      	r2, 0x3c	// 3c <sflash_enable_hfm+0x3c>
+  1c:	ec630010 	ori      	r3, r3, 16
+  20:	dc6e0003 	st.b      	r3, (r14, 0x3)
+  24:	e0000000 	bsr      	0x0	// 0 <sflash_enable_hfm>
+			24: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  28:	e0000000 	bsr      	0x0	// 0 <sflash_enable_hfm>
+			28: R_CKCORE_PCREL_IMM26BY2	write_enable
+  2c:	3201      	movi      	r2, 1
+  2e:	e42e0002 	addi      	r1, r14, 3
+  32:	3011      	movi      	r0, 17
+  34:	e0000000 	bsr      	0x0	// 0 <sflash_enable_hfm>
+			34: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+  38:	e0000000 	bsr      	0x0	// 0 <sflash_enable_hfm>
+			38: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  3c:	3000      	movi      	r0, 0
+  3e:	1401      	addi      	r14, r14, 4
+  40:	1490      	pop      	r15
+
+Disassembly of section .text.sflash_enable_quad_1:
+
+00000000 <sflash_enable_quad_1>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_1>
+			4: R_CKCORE_PCREL_IMM26BY2	read_sr1
+   8:	dc0e0000 	st.b      	r0, (r14, 0x0)
+   c:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_1>
+			c: R_CKCORE_PCREL_IMM26BY2	read_sr2
+  10:	e4602002 	andi      	r3, r0, 2
+  14:	e9230011 	bnez      	r3, 0x36	// 36 <sflash_enable_quad_1+0x36>
+  18:	ec000002 	ori      	r0, r0, 2
+  1c:	dc0e0001 	st.b      	r0, (r14, 0x1)
+  20:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_1>
+			20: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  24:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_1>
+			24: R_CKCORE_PCREL_IMM26BY2	write_enable
+  28:	3202      	movi      	r2, 2
+  2a:	6c7b      	mov      	r1, r14
+  2c:	3001      	movi      	r0, 1
+  2e:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_1>
+			2e: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+  32:	e0000000 	bsr      	0x0	// 0 <sflash_enable_quad_1>
+			32: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  36:	3000      	movi      	r0, 0
+  38:	1401      	addi      	r14, r14, 4
+  3a:	1490      	pop      	r15
+
+Disassembly of section .text.gx_xip_init:
+
+00000000 <gx_xip_init>:
+   0:	ea1300a2 	movi      	r19, 162
+   4:	c7134833 	lsli      	r19, r19, 24
+   8:	d98e2000 	ld.w      	r12, (r14, 0x0)
+   c:	da4e2004 	ld.w      	r18, (r14, 0x10)
+  10:	ea150000 	movi      	r21, 0
+  14:	da8e2002 	ld.w      	r20, (r14, 0x8)
+  18:	d9ae2003 	ld.w      	r13, (r14, 0xc)
+  1c:	4a41      	lsri      	r2, r2, 1
+  1e:	deb32002 	st.w      	r21, (r19, 0x8)
+  22:	c42c484c 	lsri      	r12, r12, 1
+  26:	c4324852 	lsri      	r18, r18, 1
+  2a:	e9010009 	bez      	r1, 0x3c	// 3c <gx_xip_init+0x3c>
+  2e:	3944      	cmpnei      	r1, 4
+  30:	0c10      	bf      	0x50	// 50 <gx_xip_init+0x50>
+  32:	3948      	cmpnei      	r1, 8
+  34:	0c10      	bf      	0x54	// 54 <gx_xip_init+0x54>
+  36:	3950      	cmpnei      	r1, 16
+  38:	0809      	bt      	0x4a	// 4a <gx_xip_init+0x4a>
+  3a:	3103      	movi      	r1, 3
+  3c:	e922000e 	bnez      	r2, 0x58	// 58 <gx_xip_init+0x58>
+  40:	e90c0014 	bez      	r12, 0x68	// 68 <gx_xip_init+0x68>
+  44:	c64c0480 	cmpne      	r12, r18
+  48:	0c40      	bf      	0xc8	// c8 <gx_xip_init+0xc8>
+  4a:	3000      	movi      	r0, 0
+  4c:	2800      	subi      	r0, 1
+  4e:	043c      	br      	0xc6	// c6 <gx_xip_init+0xc6>
+  50:	3101      	movi      	r1, 1
+  52:	07f5      	br      	0x3c	// 3c <gx_xip_init+0x3c>
+  54:	3102      	movi      	r1, 2
+  56:	07f3      	br      	0x3c	// 3c <gx_xip_init+0x3c>
+  58:	c6420480 	cmpne      	r2, r18
+  5c:	0bf7      	bt      	0x4a	// 4a <gx_xip_init+0x4a>
+  5e:	c64c0480 	cmpne      	r12, r18
+  62:	0bf4      	bt      	0x4a	// 4a <gx_xip_init+0x4a>
+  64:	ea0c0002 	movi      	r12, 2
+  68:	e4432003 	andi      	r2, r3, 3
+  6c:	e922ffef 	bnez      	r2, 0x4a	// 4a <gx_xip_init+0x4a>
+  70:	c5ad482d 	lsli      	r13, r13, 13
+  74:	4b62      	lsri      	r3, r3, 2
+  76:	c6cd284d 	bseti      	r13, r13, 22
+  7a:	c6ed284d 	bseti      	r13, r13, 23
+  7e:	4364      	lsli      	r3, r3, 4
+  80:	6f4c      	or      	r13, r3
+  82:	c64d242d 	or      	r13, r13, r18
+  86:	4129      	lsli      	r1, r1, 9
+  88:	eb540001 	cmpnei      	r20, 1
+  8c:	6c74      	or      	r1, r13
+  8e:	c44c482c 	lsli      	r12, r12, 2
+  92:	6f04      	or      	r12, r1
+  94:	0805      	bt      	0x9e	// 9e <gx_xip_init+0x9e>
+  96:	c58c284c 	bseti      	r12, r12, 12
+  9a:	c76c284c 	bseti      	r12, r12, 27
+  9e:	ea038051 	movi      	r3, 32849
+  a2:	c7234903 	rotli      	r3, r3, 25
+  a6:	32ff      	movi      	r2, 255
+  a8:	b345      	st.w      	r2, (r3, 0x14)
+  aa:	3201      	movi      	r2, 1
+  ac:	dd832002 	st.w      	r12, (r3, 0x8)
+  b0:	b343      	st.w      	r2, (r3, 0xc)
+  b2:	b300      	st.w      	r0, (r3, 0x0)
+  b4:	b301      	st.w      	r0, (r3, 0x4)
+  b6:	ea23a030 	movih      	r3, 41008
+  ba:	3ba7      	bseti      	r3, 7
+  bc:	3000      	movi      	r0, 0
+  be:	b304      	st.w      	r0, (r3, 0x10)
+  c0:	33a2      	movi      	r3, 162
+  c2:	4378      	lsli      	r3, r3, 24
+  c4:	b342      	st.w      	r2, (r3, 0x8)
+  c6:	783c      	jmp      	r15
+  c8:	ea0c0001 	movi      	r12, 1
+  cc:	07ce      	br      	0x68	// 68 <gx_xip_init+0x68>
+
+Disassembly of section .text.sflash_init:
+
+00000000 <sflash_init>:
+   0:	14d4      	push      	r4-r7, r15
+   2:	1427      	subi      	r14, r14, 28
+   4:	1906      	addi      	r1, r14, 24
+   6:	3500      	movi      	r5, 0
+   8:	3009      	movi      	r0, 9
+   a:	b8a6      	st.w      	r5, (r14, 0x18)
+   c:	e0000000 	bsr      	0x0	// 0 <gx_pmu_ctrl_set>
+			c: R_CKCORE_PCREL_IMM26BY2	gx_pmu_ctrl_set
+  10:	3101      	movi      	r1, 1
+  12:	300d      	movi      	r0, 13
+  14:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  18:	34a2      	movi      	r4, 162
+  1a:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			1a: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+  1e:	4498      	lsli      	r4, r4, 24
+  20:	ea23a030 	movih      	r3, 41008
+  24:	3ba7      	bseti      	r3, 7
+  26:	3601      	movi      	r6, 1
+  28:	b4a2      	st.w      	r5, (r4, 0x8)
+  2a:	b3c4      	st.w      	r6, (r3, 0x10)
+  2c:	334e      	movi      	r3, 78
+  2e:	b46b      	st.w      	r3, (r4, 0x2c)
+  30:	ea0380a2 	movi      	r3, 32930
+  34:	c7034903 	rotli      	r3, r3, 24
+  38:	6c97      	mov      	r2, r5
+  3a:	b3dc      	st.w      	r6, (r3, 0x70)
+  3c:	3304      	movi      	r3, 4
+  3e:	b465      	st.w      	r3, (r4, 0x14)
+  40:	331f      	movi      	r3, 31
+  42:	b467      	st.w      	r3, (r4, 0x1c)
+  44:	300f      	movi      	r0, 15
+  46:	1226      	lrw      	r1, 0x0	// 15c <sflash_init+0x15c>
+  48:	b4c2      	st.w      	r6, (r4, 0x8)
+  4a:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			4a: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  4e:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			4e: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  52:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			52: R_CKCORE_PCREL_IMM26BY2	sflash_detect.constprop.8
+  56:	6dc3      	mov      	r7, r0
+  58:	e920007f 	bnez      	r0, 0x156	// 156 <sflash_init+0x156>
+  5c:	12a1      	lrw      	r5, 0x0	// 160 <gx_spi_nor_protect_init+0x160>
+  5e:	e0000000 	bsr      	0x0	// 0 <gx_spi_nor_protect_init>
+			5e: R_CKCORE_PCREL_IMM26BY2	gx_spi_nor_protect_init
+  62:	3302      	movi      	r3, 2
+  64:	b4e2      	st.w      	r7, (r4, 0x8)
+  66:	b465      	st.w      	r3, (r4, 0x14)
+  68:	9563      	ld.w      	r3, (r5, 0xc)
+  6a:	9381      	ld.w      	r4, (r3, 0x4)
+  6c:	117e      	lrw      	r3, 0x856014	// 164 <sflash_init+0x164>
+  6e:	650d      	cmplt      	r3, r4
+  70:	0829      	bt      	0xc2	// c2 <sflash_init+0xc2>
+  72:	117e      	lrw      	r3, 0x856013	// 168 <sflash_init+0x168>
+  74:	64d1      	cmplt      	r4, r3
+  76:	0c10      	bf      	0x96	// 96 <sflash_init+0x96>
+  78:	117d      	lrw      	r3, 0x1c3813	// 16c <sflash_init+0x16c>
+  7a:	650d      	cmplt      	r3, r4
+  7c:	0817      	bt      	0xaa	// aa <sflash_init+0xaa>
+  7e:	117d      	lrw      	r3, 0x1c3812	// 170 <sflash_init+0x170>
+  80:	64d1      	cmplt      	r4, r3
+  82:	0c0c      	bf      	0x9a	// 9a <sflash_init+0x9a>
+  84:	117c      	lrw      	r3, 0xb4014	// 174 <sflash_init+0x174>
+  86:	64d2      	cmpne      	r4, r3
+  88:	0c07      	bf      	0x96	// 96 <sflash_init+0x96>
+  8a:	64d1      	cmplt      	r4, r3
+  8c:	0818      	bt      	0xbc	// bc <sflash_init+0xbc>
+  8e:	117b      	lrw      	r3, 0xfff4bfea	// 178 <sflash_init+0x178>
+  90:	60d0      	addu      	r3, r4
+  92:	3b01      	cmphsi      	r3, 2
+  94:	0814      	bt      	0xbc	// bc <sflash_init+0xbc>
+  96:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			96: R_CKCORE_PCREL_IMM26BY2	sflash_enable_quad_1
+  9a:	ea034016 	movi      	r3, 16406
+  9e:	3bb5      	bseti      	r3, 21
+  a0:	64d2      	cmpne      	r4, r3
+  a2:	082f      	bt      	0x100	// 100 <sflash_init+0x100>
+  a4:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			a4: R_CKCORE_PCREL_IMM26BY2	sflash_enable_hfm
+  a8:	042c      	br      	0x100	// 100 <sflash_init+0x100>
+  aa:	1175      	lrw      	r3, 0x684015	// 17c <sflash_init+0x17c>
+  ac:	64d2      	cmpne      	r4, r3
+  ae:	0c25      	bf      	0xf8	// f8 <sflash_init+0xf8>
+  b0:	1174      	lrw      	r3, 0x854012	// 180 <sflash_init+0x180>
+  b2:	64d2      	cmpne      	r4, r3
+  b4:	0ff1      	bf      	0x96	// 96 <sflash_init+0x96>
+  b6:	1174      	lrw      	r3, 0x1c7017	// 184 <sflash_init+0x184>
+  b8:	64d2      	cmpne      	r4, r3
+  ba:	0ff0      	bf      	0x9a	// 9a <sflash_init+0x9a>
+  bc:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			bc: R_CKCORE_PCREL_IMM26BY2	sflash_enable_quad_0
+  c0:	07ed      	br      	0x9a	// 9a <sflash_init+0x9a>
+  c2:	1172      	lrw      	r3, 0xc84215	// 188 <sflash_init+0x188>
+  c4:	64d2      	cmpne      	r4, r3
+  c6:	0fe8      	bf      	0x96	// 96 <sflash_init+0x96>
+  c8:	650d      	cmplt      	r3, r4
+  ca:	080e      	bt      	0xe6	// e6 <sflash_init+0xe6>
+  cc:	1170      	lrw      	r3, 0xba6015	// 18c <sflash_init+0x18c>
+  ce:	64d2      	cmpne      	r4, r3
+  d0:	0fe3      	bf      	0x96	// 96 <sflash_init+0x96>
+  d2:	650d      	cmplt      	r3, r4
+  d4:	0804      	bt      	0xdc	// dc <sflash_init+0xdc>
+  d6:	116f      	lrw      	r3, 0xb36014	// 190 <sflash_init+0x190>
+  d8:	64d2      	cmpne      	r4, r3
+  da:	07dd      	br      	0x94	// 94 <sflash_init+0x94>
+  dc:	116e      	lrw      	r3, 0xc22017	// 194 <sflash_init+0x194>
+  de:	64d2      	cmpne      	r4, r3
+  e0:	0c24      	bf      	0x128	// 128 <sflash_init+0x128>
+  e2:	116e      	lrw      	r3, 0xc84015	// 198 <sflash_init+0x198>
+  e4:	07fa      	br      	0xd8	// d8 <sflash_init+0xd8>
+  e6:	116e      	lrw      	r3, 0xcd7015	// 19c <sflash_init+0x19c>
+  e8:	64d2      	cmpne      	r4, r3
+  ea:	0fd6      	bf      	0x96	// 96 <sflash_init+0x96>
+  ec:	650d      	cmplt      	r3, r4
+  ee:	0803      	bt      	0xf4	// f4 <sflash_init+0xf4>
+  f0:	116c      	lrw      	r3, 0xff379feb	// 1a0 <sflash_init+0x1a0>
+  f2:	07cf      	br      	0x90	// 90 <sflash_init+0x90>
+  f4:	116c      	lrw      	r3, 0xef4015	// 1a4 <sflash_init+0x1a4>
+  f6:	07f1      	br      	0xd8	// d8 <sflash_init+0xd8>
+  f8:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			f8: R_CKCORE_PCREL_IMM26BY2	sflash_enable_quad_0
+  fc:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			fc: R_CKCORE_PCREL_IMM26BY2	sflash_enable_quad_1
+ 100:	116a      	lrw      	r3, 0x0	// 1a8 <sflash_init+0x1a8>
+ 102:	3201      	movi      	r2, 1
+ 104:	b566      	st.w      	r3, (r5, 0x18)
+ 106:	3100      	movi      	r1, 0
+ 108:	1169      	lrw      	r3, 0x0	// 1ac <sflash_init+0x1ac>
+ 10a:	30eb      	movi      	r0, 235
+ 10c:	b567      	st.w      	r3, (r5, 0x1c)
+ 10e:	3304      	movi      	r3, 4
+ 110:	b864      	st.w      	r3, (r14, 0x10)
+ 112:	b863      	st.w      	r3, (r14, 0xc)
+ 114:	b821      	st.w      	r1, (r14, 0x4)
+ 116:	b860      	st.w      	r3, (r14, 0x0)
+ 118:	b842      	st.w      	r2, (r14, 0x8)
+ 11a:	3318      	movi      	r3, 24
+ 11c:	3108      	movi      	r1, 8
+ 11e:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			11e: R_CKCORE_PCREL_IMM26BY2	gx_xip_init
+ 122:	1104      	lrw      	r0, 0x0	// 1b0 <sflash_init+0x1b0>
+ 124:	1407      	addi      	r14, r14, 28
+ 126:	1494      	pop      	r4-r7, r15
+ 128:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			128: R_CKCORE_PCREL_IMM26BY2	read_sr1
+ 12c:	e4602040 	andi      	r3, r0, 64
+ 130:	e923ffe8 	bnez      	r3, 0x100	// 100 <sflash_init+0x100>
+ 134:	ec000040 	ori      	r0, r0, 64
+ 138:	dc0e0017 	st.b      	r0, (r14, 0x17)
+ 13c:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			13c: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+ 140:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			140: R_CKCORE_PCREL_IMM26BY2	write_enable
+ 144:	6c9b      	mov      	r2, r6
+ 146:	e42e0016 	addi      	r1, r14, 23
+ 14a:	6c1b      	mov      	r0, r6
+ 14c:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			14c: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+ 150:	e0000000 	bsr      	0x0	// 0 <sflash_init>
+			150: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+ 154:	07d6      	br      	0x100	// 100 <sflash_init+0x100>
+ 156:	6c17      	mov      	r0, r5
+ 158:	07e6      	br      	0x124	// 124 <sflash_init+0x124>
+	...
+			15c: R_CKCORE_ADDR32	.text.flash_spi_irq_handler
+			160: R_CKCORE_ADDR32	.data
+ 162:	0000      	.short	0x0000
+ 164:	00856014 	.long	0x00856014
+ 168:	00856013 	.long	0x00856013
+ 16c:	001c3813 	.long	0x001c3813
+ 170:	001c3812 	.long	0x001c3812
+ 174:	000b4014 	.long	0x000b4014
+ 178:	fff4bfea 	.long	0xfff4bfea
+ 17c:	00684015 	.long	0x00684015
+ 180:	00854012 	.long	0x00854012
+ 184:	001c7017 	.long	0x001c7017
+ 188:	00c84215 	.long	0x00c84215
+ 18c:	00ba6015 	.long	0x00ba6015
+ 190:	00b36014 	.long	0x00b36014
+ 194:	00c22017 	.long	0x00c22017
+ 198:	00c84015 	.long	0x00c84015
+ 19c:	00cd7015 	.long	0x00cd7015
+ 1a0:	ff379feb 	.long	0xff379feb
+ 1a4:	00ef4015 	.long	0x00ef4015
+	...
+			1a8: R_CKCORE_ADDR32	.text.sflash_quad_1pageprogram
+			1ac: R_CKCORE_ADDR32	.text.sflash_quad_read
+			1b0: R_CKCORE_ADDR32	.data+0x20
+
+Disassembly of section .text.xip_sflash_init:
+
+00000000 <xip_sflash_init>:
+   0:	14d1      	push      	r4, r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	1905      	addi      	r1, r14, 20
+   6:	3400      	movi      	r4, 0
+   8:	3009      	movi      	r0, 9
+   a:	b885      	st.w      	r4, (r14, 0x14)
+   c:	e0000000 	bsr      	0x0	// 0 <gx_pmu_ctrl_set>
+			c: R_CKCORE_PCREL_IMM26BY2	gx_pmu_ctrl_set
+  10:	3101      	movi      	r1, 1
+  12:	300d      	movi      	r0, 13
+  14:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  18:	e0000000 	bsr      	0x0	// 0 <xip_sflash_init>
+			18: R_CKCORE_PCREL_IMM26BY2	wait_bus_ready
+  1c:	ea23a030 	movih      	r3, 41008
+  20:	3ba7      	bseti      	r3, 7
+  22:	3201      	movi      	r2, 1
+  24:	b344      	st.w      	r2, (r3, 0x10)
+  26:	33a2      	movi      	r3, 162
+  28:	4378      	lsli      	r3, r3, 24
+  2a:	314e      	movi      	r1, 78
+  2c:	b382      	st.w      	r4, (r3, 0x8)
+  2e:	b32b      	st.w      	r1, (r3, 0x2c)
+  30:	ea0180a2 	movi      	r1, 32930
+  34:	c7014901 	rotli      	r1, r1, 24
+  38:	b15c      	st.w      	r2, (r1, 0x70)
+  3a:	3102      	movi      	r1, 2
+  3c:	b325      	st.w      	r1, (r3, 0x14)
+  3e:	311f      	movi      	r1, 31
+  40:	b327      	st.w      	r1, (r3, 0x1c)
+  42:	b342      	st.w      	r2, (r3, 0x8)
+  44:	e0000000 	bsr      	0x0	// 0 <xip_sflash_init>
+			44: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  48:	e0000000 	bsr      	0x0	// 0 <xip_sflash_init>
+			48: R_CKCORE_PCREL_IMM26BY2	sflash_detect.constprop.8
+  4c:	e9200033 	bnez      	r0, 0xb2	// b2 <xip_sflash_init+0xb2>
+  50:	109a      	lrw      	r4, 0x0	// b8 <xip_sflash_init+0xb8>
+  52:	105b      	lrw      	r2, 0x854012	// bc <xip_sflash_init+0xbc>
+  54:	9463      	ld.w      	r3, (r4, 0xc)
+  56:	9361      	ld.w      	r3, (r3, 0x4)
+  58:	648e      	cmpne      	r3, r2
+  5a:	0c0d      	bf      	0x74	// 74 <xip_sflash_init+0x74>
+  5c:	64c9      	cmplt      	r2, r3
+  5e:	0808      	bt      	0x6e	// 6e <xip_sflash_init+0x6e>
+  60:	1058      	lrw      	r2, 0xffe3c7ee	// c0 <xip_sflash_init+0xc0>
+  62:	60c8      	addu      	r3, r2
+  64:	3b01      	cmphsi      	r3, 2
+  66:	0c09      	bf      	0x78	// 78 <xip_sflash_init+0x78>
+  68:	e0000000 	bsr      	0x0	// 0 <xip_sflash_init>
+			68: R_CKCORE_PCREL_IMM26BY2	sflash_enable_quad_0
+  6c:	0406      	br      	0x78	// 78 <xip_sflash_init+0x78>
+  6e:	1056      	lrw      	r2, 0x856013	// c4 <xip_sflash_init+0xc4>
+  70:	648e      	cmpne      	r3, r2
+  72:	0bfb      	bt      	0x68	// 68 <xip_sflash_init+0x68>
+  74:	e0000000 	bsr      	0x0	// 0 <xip_sflash_init>
+			74: R_CKCORE_PCREL_IMM26BY2	sflash_enable_quad_1
+  78:	9463      	ld.w      	r3, (r4, 0xc)
+  7a:	9341      	ld.w      	r2, (r3, 0x4)
+  7c:	ea034016 	movi      	r3, 16406
+  80:	3bb5      	bseti      	r3, 21
+  82:	64ca      	cmpne      	r2, r3
+  84:	0803      	bt      	0x8a	// 8a <xip_sflash_init+0x8a>
+  86:	e0000000 	bsr      	0x0	// 0 <xip_sflash_init>
+			86: R_CKCORE_PCREL_IMM26BY2	sflash_enable_hfm
+  8a:	1070      	lrw      	r3, 0x0	// c8 <xip_sflash_init+0xc8>
+  8c:	3201      	movi      	r2, 1
+  8e:	b466      	st.w      	r3, (r4, 0x18)
+  90:	3100      	movi      	r1, 0
+  92:	106f      	lrw      	r3, 0x0	// cc <xip_sflash_init+0xcc>
+  94:	30eb      	movi      	r0, 235
+  96:	b467      	st.w      	r3, (r4, 0x1c)
+  98:	3304      	movi      	r3, 4
+  9a:	b864      	st.w      	r3, (r14, 0x10)
+  9c:	b863      	st.w      	r3, (r14, 0xc)
+  9e:	b821      	st.w      	r1, (r14, 0x4)
+  a0:	b860      	st.w      	r3, (r14, 0x0)
+  a2:	b842      	st.w      	r2, (r14, 0x8)
+  a4:	3318      	movi      	r3, 24
+  a6:	3108      	movi      	r1, 8
+  a8:	e0000000 	bsr      	0x0	// 0 <xip_sflash_init>
+			a8: R_CKCORE_PCREL_IMM26BY2	gx_xip_init
+  ac:	1009      	lrw      	r0, 0x0	// d0 <xip_sflash_init+0xd0>
+  ae:	1406      	addi      	r14, r14, 24
+  b0:	1491      	pop      	r4, r15
+  b2:	6c13      	mov      	r0, r4
+  b4:	07fd      	br      	0xae	// ae <xip_sflash_init+0xae>
+  b6:	0000      	.short	0x0000
+  b8:	00000000 	.long	0x00000000
+			b8: R_CKCORE_ADDR32	.data
+  bc:	00854012 	.long	0x00854012
+  c0:	ffe3c7ee 	.long	0xffe3c7ee
+  c4:	6013      	.short	0x6013
+  c6:	0085      	.short	0x0085
+	...
+			c8: R_CKCORE_ADDR32	.text.sflash_quad_1pageprogram
+			cc: R_CKCORE_ADDR32	.text.sflash_quad_read
+			d0: R_CKCORE_ADDR32	.data+0x20
+
+Disassembly of section .text.gx_spinor_flash_init:
+
+00000000 <gx_spinor_flash_init>:
+   0:	14d0      	push      	r15
+   2:	300d      	movi      	r0, 13
+   4:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			4: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+   8:	3100      	movi      	r1, 0
+   a:	3380      	movi      	r3, 128
+   c:	4841      	lsri      	r2, r0, 1
+   e:	4364      	lsli      	r3, r3, 4
+  10:	6c07      	mov      	r0, r1
+  12:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_init>
+			12: R_CKCORE_PCREL_IMM26BY2	sflash_init
+  16:	3840      	cmpnei      	r0, 0
+  18:	64c3      	mvcv      	r3
+  1a:	3000      	movi      	r0, 0
+  1c:	600e      	subu      	r0, r3
+  1e:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spinor_flash_readdata:
+
+00000000 <gx_spinor_flash_readdata>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_readdata>
+			2: R_CKCORE_PCREL_IMM26BY2	sflash_readdata
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spinor_flash_gettype:
+
+00000000 <gx_spinor_flash_gettype>:
+   0:	1062      	lrw      	r3, 0x0	// 8 <gx_spinor_flash_gettype+0x8>
+   2:	9363      	ld.w      	r3, (r3, 0xc)
+   4:	9300      	ld.w      	r0, (r3, 0x0)
+   6:	783c      	jmp      	r15
+   8:	00000000 	.long	0x00000000
+			8: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_spinor_flash_getinfo:
+
+00000000 <gx_spinor_flash_getinfo>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_getinfo>
+			2: R_CKCORE_PCREL_IMM26BY2	sflash_getinfo
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spinor_flash_chiperase:
+
+00000000 <gx_spinor_flash_chiperase>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_chiperase>
+			2: R_CKCORE_PCREL_IMM26BY2	sflash_chiperase
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spinor_flash_erasedata:
+
+00000000 <gx_spinor_flash_erasedata>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_erasedata>
+			2: R_CKCORE_PCREL_IMM26BY2	sflash_erasedata
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spinor_flash_pageprogram:
+
+00000000 <gx_spinor_flash_pageprogram>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_pageprogram>
+			2: R_CKCORE_PCREL_IMM26BY2	sflash_pageprogram
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spinor_flash_suspend:
+
+00000000 <gx_spinor_flash_suspend>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	3301      	movi      	r3, 1
+   6:	3100      	movi      	r1, 0
+   8:	300d      	movi      	r0, 13
+   a:	b860      	st.w      	r3, (r14, 0x0)
+   c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			c: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  10:	6c7b      	mov      	r1, r14
+  12:	3009      	movi      	r0, 9
+  14:	e0000000 	bsr      	0x0	// 0 <gx_pmu_ctrl_set>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_pmu_ctrl_set
+  18:	3000      	movi      	r0, 0
+  1a:	1401      	addi      	r14, r14, 4
+  1c:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spinor_flash_exit:
+
+00000000 <gx_spinor_flash_exit>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_exit>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_spinor_flash_suspend
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spinor_flash_resume:
+
+00000000 <gx_spinor_flash_resume>:
+   0:	14d1      	push      	r4, r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	3400      	movi      	r4, 0
+   6:	3101      	movi      	r1, 1
+   8:	300d      	movi      	r0, 13
+   a:	b880      	st.w      	r4, (r14, 0x0)
+   c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			c: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  10:	6c7b      	mov      	r1, r14
+  12:	3009      	movi      	r0, 9
+  14:	e0000000 	bsr      	0x0	// 0 <gx_pmu_ctrl_set>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_pmu_ctrl_set
+  18:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_resume>
+			18: R_CKCORE_PCREL_IMM26BY2	wait_till_ready
+  1c:	6c13      	mov      	r0, r4
+  1e:	1401      	addi      	r14, r14, 4
+  20:	1491      	pop      	r4, r15
+
+Disassembly of section .text.gx_spinor_flash_deep_powerdown:
+
+00000000 <gx_spinor_flash_deep_powerdown>:
+   0:	14d0      	push      	r15
+   2:	3200      	movi      	r2, 0
+   4:	6c4b      	mov      	r1, r2
+   6:	30b9      	movi      	r0, 185
+   8:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_deep_powerdown>
+			8: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+   c:	3000      	movi      	r0, 0
+   e:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spinor_flash_release_powerdown:
+
+00000000 <gx_spinor_flash_release_powerdown>:
+   0:	14d0      	push      	r15
+   2:	3200      	movi      	r2, 0
+   4:	6c4b      	mov      	r1, r2
+   6:	30ab      	movi      	r0, 171
+   8:	e0000000 	bsr      	0x0	// 0 <gx_spinor_flash_release_powerdown>
+			8: R_CKCORE_PCREL_IMM26BY2	sflash_write_reg
+   c:	3000      	movi      	r0, 0
+   e:	1490      	pop      	r15

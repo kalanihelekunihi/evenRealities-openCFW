@@ -1,0 +1,90 @@
+[
+  {
+    "case": "empty",
+    "explicit_fifo_expected_events": [
+      100,
+      101,
+      102
+    ],
+    "pass_": true
+  },
+  {
+    "case": "one-each",
+    "explicit_fifo_expected_events": [
+      100,
+      200,
+      100,
+      101,
+      210,
+      101,
+      102,
+      220,
+      102
+    ],
+    "pass_": true
+  },
+  {
+    "case": "mixed",
+    "explicit_fifo_expected_events": [
+      100,
+      200,
+      100,
+      201,
+      100,
+      101,
+      210,
+      101,
+      211,
+      101,
+      212,
+      101,
+      102,
+      220,
+      102
+    ],
+    "pass_": true
+  },
+  {
+    "case": "dh-only",
+    "explicit_fifo_expected_events": [
+      100,
+      101,
+      210,
+      101,
+      211,
+      101,
+      102
+    ],
+    "pass_": true
+  },
+  {
+    "case": "pub-aes",
+    "explicit_fifo_expected_events": [
+      100,
+      200,
+      100,
+      201,
+      100,
+      101,
+      102,
+      220,
+      102
+    ],
+    "pass_": true
+  },
+  {
+    "case": "aes-only",
+    "explicit_fifo_expected_events": [
+      100,
+      101,
+      102,
+      220,
+      102,
+      221,
+      102,
+      222,
+      102
+    ],
+    "pass_": true
+  }
+]

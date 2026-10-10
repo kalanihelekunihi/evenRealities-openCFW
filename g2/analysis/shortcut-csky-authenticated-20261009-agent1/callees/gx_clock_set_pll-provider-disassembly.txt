@@ -1,0 +1,20 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/clock.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_clock_set_pll:
+
+00000000 <gx_clock_set_pll>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_pll>
+			4: R_CKCORE_PCREL_IMM26BY2	_clk_set_pll
+   8:	9460      	ld.w      	r3, (r4, 0x0)
+   a:	3b41      	cmpnei      	r3, 1
+   c:	0807      	bt      	0x1a	// 1a <gx_clock_set_pll+0x1a>
+   e:	1044      	lrw      	r2, 0xa0005080	// 1c <gx_clock_set_pll+0x1c>
+  10:	9266      	ld.w      	r3, (r2, 0x18)
+  12:	e4632008 	andi      	r3, r3, 8
+  16:	e903fffd 	bez      	r3, 0x10	// 10 <gx_clock_set_pll+0x10>
+  1a:	1491      	pop      	r4, r15
+  1c:	a0005080 	.long	0xa0005080

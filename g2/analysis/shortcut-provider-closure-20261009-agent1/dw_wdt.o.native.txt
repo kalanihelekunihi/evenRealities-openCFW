@@ -1,0 +1,116 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/dw_wdt.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.wdt_isr:
+
+00000000 <wdt_isr>:
+   0:	14d0      	push      	r15
+   2:	1066      	lrw      	r3, 0x0	// 18 <wdt_isr+0x18>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e9030007 	bez      	r3, 0x14	// 14 <wdt_isr+0x14>
+   a:	7bcd      	jsr      	r3
+   c:	ea23a070 	movih      	r3, 41072
+  10:	9365      	ld.w      	r3, (r3, 0x14)
+  12:	1490      	pop      	r15
+  14:	6c0f      	mov      	r0, r3
+  16:	07fb      	br      	0xc	// c <wdt_isr+0xc>
+  18:	00000000 	.long	0x00000000
+			18: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_watchdog_init:
+
+00000000 <gx_watchdog_init>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	eb0103e7 	cmphsi      	r1, 1000
+   6:	6d07      	mov      	r4, r1
+   8:	6d8b      	mov      	r6, r2
+   a:	6d4f      	mov      	r5, r3
+   c:	0805      	bt      	0x16	// 16 <gx_watchdog_init+0x16>
+   e:	101a      	lrw      	r0, 0x0	// 74 <gx_watchdog_init+0x74>
+  10:	e0000000 	bsr      	0x0	// 0 <printf_>
+			10: R_CKCORE_PCREL_IMM26BY2	printf_
+  14:	1493      	pop      	r4-r6, r15
+  16:	3101      	movi      	r1, 1
+  18:	3018      	movi      	r0, 24
+  1a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			1a: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  1e:	31fa      	movi      	r1, 250
+  20:	4122      	lsli      	r1, r1, 2
+  22:	c4248024 	divu      	r4, r4, r1
+  26:	3000      	movi      	r0, 0
+  28:	3301      	movi      	r3, 1
+  2a:	ea02f424 	movi      	r2, 62500
+  2e:	c4824902 	rotli      	r2, r2, 4
+  32:	3110      	movi      	r1, 16
+  34:	e580000f 	addi      	r12, r0, 16
+  38:	c583402c 	lsl      	r12, r3, r12
+  3c:	c44c804c 	divs      	r12, r12, r2
+  40:	6530      	cmphs      	r12, r4
+  42:	0805      	bt      	0x4c	// 4c <gx_watchdog_init+0x4c>
+  44:	2000      	addi      	r0, 1
+  46:	e821fff7 	bnezad      	r1, 0x34	// 34 <gx_watchdog_init+0x34>
+  4a:	300f      	movi      	r0, 15
+  4c:	ea24a070 	movih      	r4, 41072
+  50:	4024      	lsli      	r1, r0, 4
+  52:	6c04      	or      	r0, r1
+  54:	3376      	movi      	r3, 118
+  56:	b401      	st.w      	r0, (r4, 0x4)
+  58:	b463      	st.w      	r3, (r4, 0xc)
+  5a:	6c97      	mov      	r2, r5
+  5c:	1067      	lrw      	r3, 0x0	// 78 <gx_watchdog_init+0x78>
+  5e:	1028      	lrw      	r1, 0x0	// 7c <gx_watchdog_init+0x7c>
+  60:	300b      	movi      	r0, 11
+  62:	b3c0      	st.w      	r6, (r3, 0x0)
+  64:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			64: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  68:	9460      	ld.w      	r3, (r4, 0x0)
+  6a:	ec630001 	ori      	r3, r3, 1
+  6e:	b460      	st.w      	r3, (r4, 0x0)
+  70:	07d2      	br      	0x14	// 14 <gx_watchdog_init+0x14>
+	...
+			74: R_CKCORE_ADDR32	.rodata.str1.1
+			78: R_CKCORE_ADDR32	.bss
+			7c: R_CKCORE_ADDR32	.text.wdt_isr
+
+Disassembly of section .text.gx_watchdog_ping:
+
+00000000 <gx_watchdog_ping>:
+   0:	ea23a070 	movih      	r3, 41072
+   4:	3276      	movi      	r2, 118
+   6:	b343      	st.w      	r2, (r3, 0xc)
+   8:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_watchdog_stop:
+
+00000000 <gx_watchdog_stop>:
+   0:	ea22a070 	movih      	r2, 41072
+   4:	9260      	ld.w      	r3, (r2, 0x0)
+   6:	3b80      	bclri      	r3, 0
+   8:	b260      	st.w      	r3, (r2, 0x0)
+   a:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_reboot:
+
+00000000 <gx_reboot>:
+   0:	14d0      	push      	r15
+   2:	3101      	movi      	r1, 1
+   4:	3018      	movi      	r0, 24
+   6:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   a:	ea23a001 	movih      	r3, 40961
+   e:	3201      	movi      	r2, 1
+  10:	b34b      	st.w      	r2, (r3, 0x2c)
+  12:	ea23a070 	movih      	r3, 41072
+  16:	3100      	movi      	r1, 0
+  18:	b320      	st.w      	r1, (r3, 0x0)
+  1a:	b321      	st.w      	r1, (r3, 0x4)
+  1c:	3176      	movi      	r1, 118
+  1e:	b323      	st.w      	r1, (r3, 0xc)
+  20:	b340      	st.w      	r2, (r3, 0x0)
+  22:	0400      	br      	0x22	// 22 <gx_reboot+0x22>
+
+Disassembly of section .text.gx_a7_wdt_init:
+
+00000000 <gx_a7_wdt_init>:
+   0:	783c      	jmp      	r15

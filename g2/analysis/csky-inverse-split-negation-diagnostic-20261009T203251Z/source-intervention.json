@@ -1,0 +1,15 @@
+{
+  "original_source": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_split_rfft_q15.c",
+  "original_source_sha256": "fb46f5b2d01ee75da5bf8d25d58dc2e697485197e4543b3869f0b6e242311f3c",
+  "diagnostic_source_sha256": "2eca8fa4a341c0d4c290e814a6a18464ec66ff75009f9b39e95a48058d36467a",
+  "semantic_changes": [
+    {
+      "branch": "little endian inverse split only",
+      "original": "outI = __SMLSDX(*__SIMD32(pCoefA), *__SIMD32(pSrc1)++, -outI);",
+      "diagnostic": "outI = __SMLSDX(*__SIMD32(pCoefA), *__SIMD32(pSrc1)++, diagnostic_packed_neg16((uint32_t)outI));"
+    }
+  ],
+  "symbol_namespace": "diagnostic_* exports, original authentic functions retained in original objects",
+  "rest_of_authentic_C": "unchanged; original signed-arithmetic limitations are not claimed repaired",
+  "cases": "original failing zero-based case256 plus remaining32 FFT cases; no bypass of a new first discrepancy"
+}

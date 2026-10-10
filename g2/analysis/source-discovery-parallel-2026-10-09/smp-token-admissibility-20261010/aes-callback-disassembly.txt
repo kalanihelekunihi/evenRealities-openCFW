@@ -1,0 +1,20 @@
+
+g2/analysis/source-discovery-parallel-2026-10-09/smp-token-admissibility-20261010/aes-callback.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00536470 <.data>:
+  536470:	b538      	push	{r3, r4, r5, lr}
+  536472:	0014      	movs	r4, r2
+  536474:	0005      	movs	r5, r0
+  536476:	3010      	adds	r0, #16
+  536478:	6068      	str	r0, [r5, #4]
+  53647a:	1d49      	adds	r1, r1, #5
+  53647c:	6868      	ldr	r0, [r5, #4]
+  53647e:	f00c fae1 	bl	0x542a44
+  536482:	0029      	movs	r1, r5
+  536484:	0020      	movs	r0, r4
+  536486:	b2c0      	uxtb	r0, r0
+  536488:	f789 fa97 	bl	0x4bf9ba
+  53648c:	bd31      	pop	{r0, r4, r5, pc}

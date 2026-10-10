@@ -1,0 +1,1101 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/hw.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.aout_set_r1_frame_over_int_enable:
+
+00000000 <aout_set_r1_frame_over_int_enable>:
+   0:	9062      	ld.w      	r3, (r0, 0x8)
+   2:	4121      	lsli      	r1, r1, 1
+   4:	3b81      	bclri      	r3, 1
+   6:	e4212002 	andi      	r1, r1, 2
+   a:	6c4c      	or      	r1, r3
+   c:	b022      	st.w      	r1, (r0, 0x8)
+   e:	783c      	jmp      	r15
+
+Disassembly of section .text.aout_play_check_idle:
+
+00000000 <aout_play_check_idle>:
+   0:	9060      	ld.w      	r3, (r0, 0x0)
+   2:	4121      	lsli      	r1, r1, 1
+   4:	3b81      	bclri      	r3, 1
+   6:	e4212002 	andi      	r1, r1, 2
+   a:	6c4c      	or      	r1, r3
+   c:	b020      	st.w      	r1, (r0, 0x0)
+   e:	783c      	jmp      	r15
+
+Disassembly of section .text.aout_dac_config:
+
+00000000 <aout_dac_config>:
+   0:	9066      	ld.w      	r3, (r0, 0x18)
+   2:	c40357c2 	zext      	r2, r3, 30, 0
+   6:	9160      	ld.w      	r3, (r1, 0x0)
+   8:	437f      	lsli      	r3, r3, 31
+   a:	6cc8      	or      	r3, r2
+   c:	b066      	st.w      	r3, (r0, 0x18)
+   e:	ea22ff01 	movih      	r2, 65281
+  12:	9066      	ld.w      	r3, (r0, 0x18)
+  14:	2a00      	subi      	r2, 1
+  16:	688c      	and      	r2, r3
+  18:	8164      	ld.b      	r3, (r1, 0x4)
+  1a:	4370      	lsli      	r3, r3, 16
+  1c:	6cc8      	or      	r3, r2
+  1e:	b066      	st.w      	r3, (r0, 0x18)
+  20:	9066      	ld.w      	r3, (r0, 0x18)
+  22:	ea22ffff 	movih      	r2, 65535
+  26:	688c      	and      	r2, r3
+  28:	8963      	ld.h      	r3, (r1, 0x6)
+  2a:	6cc8      	or      	r3, r2
+  2c:	b066      	st.w      	r3, (r0, 0x18)
+  2e:	9066      	ld.w      	r3, (r0, 0x18)
+  30:	c7032822 	bclri      	r2, r3, 24
+  34:	3a99      	bclri      	r2, 25
+  36:	8964      	ld.h      	r3, (r1, 0x8)
+  38:	e4632003 	andi      	r3, r3, 3
+  3c:	4378      	lsli      	r3, r3, 24
+  3e:	6cc8      	or      	r3, r2
+  40:	b066      	st.w      	r3, (r0, 0x18)
+  42:	9067      	ld.w      	r3, (r0, 0x1c)
+  44:	c40357c2 	zext      	r2, r3, 30, 0
+  48:	9163      	ld.w      	r3, (r1, 0xc)
+  4a:	437f      	lsli      	r3, r3, 31
+  4c:	6cc8      	or      	r3, r2
+  4e:	b067      	st.w      	r3, (r0, 0x1c)
+  50:	ea22ff01 	movih      	r2, 65281
+  54:	9067      	ld.w      	r3, (r0, 0x1c)
+  56:	2a00      	subi      	r2, 1
+  58:	688c      	and      	r2, r3
+  5a:	8170      	ld.b      	r3, (r1, 0x10)
+  5c:	4370      	lsli      	r3, r3, 16
+  5e:	6cc8      	or      	r3, r2
+  60:	b067      	st.w      	r3, (r0, 0x1c)
+  62:	9067      	ld.w      	r3, (r0, 0x1c)
+  64:	ea22ffff 	movih      	r2, 65535
+  68:	688c      	and      	r2, r3
+  6a:	8969      	ld.h      	r3, (r1, 0x12)
+  6c:	6cc8      	or      	r3, r2
+  6e:	b067      	st.w      	r3, (r0, 0x1c)
+  70:	9067      	ld.w      	r3, (r0, 0x1c)
+  72:	c7032822 	bclri      	r2, r3, 24
+  76:	3a99      	bclri      	r2, 25
+  78:	896a      	ld.h      	r3, (r1, 0x14)
+  7a:	e4632003 	andi      	r3, r3, 3
+  7e:	4378      	lsli      	r3, r3, 24
+  80:	6cc8      	or      	r3, r2
+  82:	b067      	st.w      	r3, (r0, 0x1c)
+  84:	906b      	ld.w      	r3, (r0, 0x2c)
+  86:	c40357c2 	zext      	r2, r3, 30, 0
+  8a:	9166      	ld.w      	r3, (r1, 0x18)
+  8c:	437f      	lsli      	r3, r3, 31
+  8e:	6cc8      	or      	r3, r2
+  90:	b06b      	st.w      	r3, (r0, 0x2c)
+  92:	ea22fc80 	movih      	r2, 64640
+  96:	906b      	ld.w      	r3, (r0, 0x2c)
+  98:	2a00      	subi      	r2, 1
+  9a:	688c      	and      	r2, r3
+  9c:	ea0c00e0 	movi      	r12, 224
+  a0:	9167      	ld.w      	r3, (r1, 0x1c)
+  a2:	c64c482c 	lsli      	r12, r12, 18
+  a6:	4377      	lsli      	r3, r3, 23
+  a8:	68f0      	and      	r3, r12
+  aa:	6cc8      	or      	r3, r2
+  ac:	b06b      	st.w      	r3, (r0, 0x2c)
+  ae:	ea22fff9 	movih      	r2, 65529
+  b2:	906b      	ld.w      	r3, (r0, 0x2c)
+  b4:	2a00      	subi      	r2, 1
+  b6:	688c      	and      	r2, r3
+  b8:	9168      	ld.w      	r3, (r1, 0x20)
+  ba:	31e0      	movi      	r1, 224
+  bc:	412b      	lsli      	r1, r1, 11
+  be:	4370      	lsli      	r3, r3, 16
+  c0:	68c4      	and      	r3, r1
+  c2:	6cc8      	or      	r3, r2
+  c4:	b06b      	st.w      	r3, (r0, 0x2c)
+  c6:	783c      	jmp      	r15
+
+Disassembly of section .text.aout_i2s_config:
+
+00000000 <aout_i2s_config>:
+   0:	9061      	ld.w      	r3, (r0, 0x4)
+   2:	c6032822 	bclri      	r2, r3, 16
+   6:	ea0c0080 	movi      	r12, 128
+   a:	9166      	ld.w      	r3, (r1, 0x18)
+   c:	c52c482c 	lsli      	r12, r12, 9
+  10:	4370      	lsli      	r3, r3, 16
+  12:	68f0      	and      	r3, r12
+  14:	6cc8      	or      	r3, r2
+  16:	b061      	st.w      	r3, (r0, 0x4)
+  18:	9061      	ld.w      	r3, (r0, 0x4)
+  1a:	c5e32822 	bclri      	r2, r3, 15
+  1e:	9167      	ld.w      	r3, (r1, 0x1c)
+  20:	436f      	lsli      	r3, r3, 15
+  22:	c40355e3 	zext      	r3, r3, 15, 0
+  26:	6cc8      	or      	r3, r2
+  28:	b061      	st.w      	r3, (r0, 0x4)
+  2a:	9061      	ld.w      	r3, (r0, 0x4)
+  2c:	c5c32822 	bclri      	r2, r3, 14
+  30:	ea0c0080 	movi      	r12, 128
+  34:	9168      	ld.w      	r3, (r1, 0x20)
+  36:	c4ec482c 	lsli      	r12, r12, 7
+  3a:	436e      	lsli      	r3, r3, 14
+  3c:	68f0      	and      	r3, r12
+  3e:	6cc8      	or      	r3, r2
+  40:	b061      	st.w      	r3, (r0, 0x4)
+  42:	9061      	ld.w      	r3, (r0, 0x4)
+  44:	c5232822 	bclri      	r2, r3, 9
+  48:	9161      	ld.w      	r3, (r1, 0x4)
+  4a:	4369      	lsli      	r3, r3, 9
+  4c:	e4632200 	andi      	r3, r3, 512
+  50:	6cc8      	or      	r3, r2
+  52:	b061      	st.w      	r3, (r0, 0x4)
+  54:	3200      	movi      	r2, 0
+  56:	9061      	ld.w      	r3, (r0, 0x4)
+  58:	2a70      	subi      	r2, 113
+  5a:	688c      	and      	r2, r3
+  5c:	9162      	ld.w      	r3, (r1, 0x8)
+  5e:	4364      	lsli      	r3, r3, 4
+  60:	e4632070 	andi      	r3, r3, 112
+  64:	6cc8      	or      	r3, r2
+  66:	b061      	st.w      	r3, (r0, 0x4)
+  68:	9061      	ld.w      	r3, (r0, 0x4)
+  6a:	c4432822 	bclri      	r2, r3, 2
+  6e:	3a83      	bclri      	r2, 3
+  70:	9163      	ld.w      	r3, (r1, 0xc)
+  72:	4362      	lsli      	r3, r3, 2
+  74:	e463200c 	andi      	r3, r3, 12
+  78:	6cc8      	or      	r3, r2
+  7a:	b061      	st.w      	r3, (r0, 0x4)
+  7c:	9061      	ld.w      	r3, (r0, 0x4)
+  7e:	c4032822 	bclri      	r2, r3, 0
+  82:	3a81      	bclri      	r2, 1
+  84:	9164      	ld.w      	r3, (r1, 0x10)
+  86:	e4632003 	andi      	r3, r3, 3
+  8a:	6cc8      	or      	r3, r2
+  8c:	b061      	st.w      	r3, (r0, 0x4)
+  8e:	9064      	ld.w      	r3, (r0, 0x10)
+  90:	c40357c2 	zext      	r2, r3, 30, 0
+  94:	9169      	ld.w      	r3, (r1, 0x24)
+  96:	437f      	lsli      	r3, r3, 31
+  98:	6cc8      	or      	r3, r2
+  9a:	b064      	st.w      	r3, (r0, 0x10)
+  9c:	32ff      	movi      	r2, 255
+  9e:	9064      	ld.w      	r3, (r0, 0x10)
+  a0:	4258      	lsli      	r2, r2, 24
+  a2:	68c8      	and      	r3, r2
+  a4:	ec630400 	ori      	r3, r3, 1024
+  a8:	b064      	st.w      	r3, (r0, 0x10)
+  aa:	783c      	jmp      	r15
+
+Disassembly of section .text._aout_reset:
+
+00000000 <_aout_reset>:
+   0:	ea23a0b0 	movih      	r3, 41136
+   4:	9343      	ld.w      	r2, (r3, 0xc)
+   6:	3ab6      	bseti      	r2, 22
+   8:	b343      	st.w      	r2, (r3, 0xc)
+   a:	3280      	movi      	r2, 128
+   c:	424d      	lsli      	r2, r2, 13
+   e:	9323      	ld.w      	r1, (r3, 0xc)
+  10:	6848      	and      	r1, r2
+  12:	e901fffe 	bez      	r1, 0xe	// e <_aout_reset+0xe>
+  16:	9323      	ld.w      	r1, (r3, 0xc)
+  18:	6884      	and      	r2, r1
+  1a:	b343      	st.w      	r2, (r3, 0xc)
+  1c:	9340      	ld.w      	r2, (r3, 0x0)
+  1e:	3abf      	bseti      	r2, 31
+  20:	b340      	st.w      	r2, (r3, 0x0)
+  22:	783c      	jmp      	r15
+
+Disassembly of section .text._set_lodac:
+
+00000000 <_set_lodac>:
+   0:	ea23a0b0 	movih      	r3, 41136
+   4:	934a      	ld.w      	r2, (r3, 0x28)
+   6:	ec420001 	ori      	r2, r2, 1
+   a:	b34a      	st.w      	r2, (r3, 0x28)
+   c:	934a      	ld.w      	r2, (r3, 0x28)
+   e:	ec420002 	ori      	r2, r2, 2
+  12:	b34a      	st.w      	r2, (r3, 0x28)
+  14:	934a      	ld.w      	r2, (r3, 0x28)
+  16:	3a81      	bclri      	r2, 1
+  18:	b34a      	st.w      	r2, (r3, 0x28)
+  1a:	934a      	ld.w      	r2, (r3, 0x28)
+  1c:	ec420002 	ori      	r2, r2, 2
+  20:	b34a      	st.w      	r2, (r3, 0x28)
+  22:	934a      	ld.w      	r2, (r3, 0x28)
+  24:	3a81      	bclri      	r2, 1
+  26:	b34a      	st.w      	r2, (r3, 0x28)
+  28:	9321      	ld.w      	r1, (r3, 0x4)
+  2a:	c48154c1 	zext      	r1, r1, 6, 4
+  2e:	2900      	subi      	r1, 1
+  30:	3906      	cmphsi      	r1, 7
+  32:	6c8f      	mov      	r2, r3
+  34:	080c      	bt      	0x4c	// 4c <_set_lodac+0x4c>
+  36:	1063      	lrw      	r3, 0x0	// 40 <_set_lodac+0x40>
+  38:	d0230883 	ldr.w      	r3, (r3, r1 << 2)
+  3c:	780c      	jmp      	r3
+  3e:	0000      	.short	0x0000
+  40:	00000000 	.long	0x00000000
+			40: R_CKCORE_ADDR32	.rodata
+  44:	ea030b85 	movi      	r3, 2949
+  48:	b26a      	st.w      	r3, (r2, 0x28)
+  4a:	0404      	br      	0x52	// 52 <_set_lodac+0x52>
+  4c:	ea020a85 	movi      	r2, 2693
+  50:	b34a      	st.w      	r2, (r3, 0x28)
+  52:	ea23a0b0 	movih      	r3, 41136
+  56:	3100      	movi      	r1, 0
+  58:	934a      	ld.w      	r2, (r3, 0x28)
+  5a:	ec420002 	ori      	r2, r2, 2
+  5e:	b34a      	st.w      	r2, (r3, 0x28)
+  60:	934a      	ld.w      	r2, (r3, 0x28)
+  62:	3a81      	bclri      	r2, 1
+  64:	b34a      	st.w      	r2, (r3, 0x28)
+  66:	3209      	movi      	r2, 9
+  68:	b34a      	st.w      	r2, (r3, 0x28)
+  6a:	934a      	ld.w      	r2, (r3, 0x28)
+  6c:	ec420002 	ori      	r2, r2, 2
+  70:	b34a      	st.w      	r2, (r3, 0x28)
+  72:	934a      	ld.w      	r2, (r3, 0x28)
+  74:	3a81      	bclri      	r2, 1
+  76:	b34a      	st.w      	r2, (r3, 0x28)
+  78:	9349      	ld.w      	r2, (r3, 0x24)
+  7a:	291f      	subi      	r1, 32
+  7c:	4244      	lsli      	r2, r2, 4
+  7e:	6884      	and      	r2, r1
+  80:	ec220005 	ori      	r1, r2, 5
+  84:	b32a      	st.w      	r1, (r3, 0x28)
+  86:	932a      	ld.w      	r1, (r3, 0x28)
+  88:	ec210002 	ori      	r1, r1, 2
+  8c:	b32a      	st.w      	r1, (r3, 0x28)
+  8e:	932a      	ld.w      	r1, (r3, 0x28)
+  90:	ea003765 	movi      	r0, 14181
+  94:	3981      	bclri      	r1, 1
+  96:	b32a      	st.w      	r1, (r3, 0x28)
+  98:	b30a      	st.w      	r0, (r3, 0x28)
+  9a:	932a      	ld.w      	r1, (r3, 0x28)
+  9c:	ec210002 	ori      	r1, r1, 2
+  a0:	b32a      	st.w      	r1, (r3, 0x28)
+  a2:	932a      	ld.w      	r1, (r3, 0x28)
+  a4:	3981      	bclri      	r1, 1
+  a6:	ec420015 	ori      	r2, r2, 21
+  aa:	b32a      	st.w      	r1, (r3, 0x28)
+  ac:	b34a      	st.w      	r2, (r3, 0x28)
+  ae:	934a      	ld.w      	r2, (r3, 0x28)
+  b0:	ec420002 	ori      	r2, r2, 2
+  b4:	b34a      	st.w      	r2, (r3, 0x28)
+  b6:	934a      	ld.w      	r2, (r3, 0x28)
+  b8:	3a81      	bclri      	r2, 1
+  ba:	b34a      	st.w      	r2, (r3, 0x28)
+  bc:	b30a      	st.w      	r0, (r3, 0x28)
+  be:	934a      	ld.w      	r2, (r3, 0x28)
+  c0:	ec420002 	ori      	r2, r2, 2
+  c4:	b34a      	st.w      	r2, (r3, 0x28)
+  c6:	934a      	ld.w      	r2, (r3, 0x28)
+  c8:	3a81      	bclri      	r2, 1
+  ca:	b34a      	st.w      	r2, (r3, 0x28)
+  cc:	ea022385 	movi      	r2, 9093
+  d0:	b34a      	st.w      	r2, (r3, 0x28)
+  d2:	934a      	ld.w      	r2, (r3, 0x28)
+  d4:	ec420002 	ori      	r2, r2, 2
+  d8:	b34a      	st.w      	r2, (r3, 0x28)
+  da:	934a      	ld.w      	r2, (r3, 0x28)
+  dc:	3a81      	bclri      	r2, 1
+  de:	b34a      	st.w      	r2, (r3, 0x28)
+  e0:	783c      	jmp      	r15
+  e2:	ea030985 	movi      	r3, 2437
+  e6:	07b1      	br      	0x48	// 48 <_set_lodac+0x48>
+  e8:	ea030885 	movi      	r3, 2181
+  ec:	07ae      	br      	0x48	// 48 <_set_lodac+0x48>
+  ee:	ea030a05 	movi      	r3, 2565
+  f2:	07ab      	br      	0x48	// 48 <_set_lodac+0x48>
+  f4:	ea030905 	movi      	r3, 2309
+  f8:	07a8      	br      	0x48	// 48 <_set_lodac+0x48>
+  fa:	ea030805 	movi      	r3, 2053
+  fe:	07a5      	br      	0x48	// 48 <_set_lodac+0x48>
+ 100:	ea030e05 	movi      	r3, 3589
+ 104:	07a2      	br      	0x48	// 48 <_set_lodac+0x48>
+
+Disassembly of section .text.aout_config_i2s:
+
+00000000 <aout_config_i2s>:
+   0:	14d0      	push      	r15
+   2:	e9010012 	bez      	r1, 0x26	// 26 <aout_config_i2s+0x26>
+   6:	906c      	ld.w      	r3, (r0, 0x30)
+   8:	9141      	ld.w      	r2, (r1, 0x4)
+   a:	b345      	st.w      	r2, (r3, 0x14)
+   c:	9142      	ld.w      	r2, (r1, 0x8)
+   e:	b346      	st.w      	r2, (r3, 0x18)
+  10:	9140      	ld.w      	r2, (r1, 0x0)
+  12:	ea20a0b0 	movih      	r0, 41136
+  16:	b348      	st.w      	r2, (r3, 0x20)
+  18:	5b3e      	addi      	r1, r3, 8
+  1a:	e0000000 	bsr      	0x0	// 0 <aout_config_i2s>
+			1a: R_CKCORE_PCREL_IMM26BY2	aout_i2s_config
+  1e:	e0000000 	bsr      	0x0	// 0 <aout_config_i2s>
+			1e: R_CKCORE_PCREL_IMM26BY2	_set_lodac
+  22:	3000      	movi      	r0, 0
+  24:	1490      	pop      	r15
+  26:	3000      	movi      	r0, 0
+  28:	2800      	subi      	r0, 1
+  2a:	07fd      	br      	0x24	// 24 <aout_config_i2s+0x24>
+
+Disassembly of section .text.aout_config_dac:
+
+00000000 <aout_config_dac>:
+   0:	14d0      	push      	r15
+   2:	e901001e 	bez      	r1, 0x3e	// 3e <aout_config_dac+0x3e>
+   6:	906c      	ld.w      	r3, (r0, 0x30)
+   8:	9140      	ld.w      	r2, (r1, 0x0)
+   a:	b34c      	st.w      	r2, (r3, 0x30)
+   c:	8942      	ld.h      	r2, (r1, 0x4)
+   e:	ab5a      	st.h      	r2, (r3, 0x34)
+  10:	8943      	ld.h      	r2, (r1, 0x6)
+  12:	ab5b      	st.h      	r2, (r3, 0x36)
+  14:	8944      	ld.h      	r2, (r1, 0x8)
+  16:	ab5c      	st.h      	r2, (r3, 0x38)
+  18:	9143      	ld.w      	r2, (r1, 0xc)
+  1a:	b34f      	st.w      	r2, (r3, 0x3c)
+  1c:	8948      	ld.h      	r2, (r1, 0x10)
+  1e:	dc431020 	st.h      	r2, (r3, 0x40)
+  22:	8949      	ld.h      	r2, (r1, 0x12)
+  24:	dc431021 	st.h      	r2, (r3, 0x42)
+  28:	894a      	ld.h      	r2, (r1, 0x14)
+  2a:	ea20a0b0 	movih      	r0, 41136
+  2e:	dc431022 	st.h      	r2, (r3, 0x44)
+  32:	e423002f 	addi      	r1, r3, 48
+  36:	e0000000 	bsr      	0x0	// 0 <aout_config_dac>
+			36: R_CKCORE_PCREL_IMM26BY2	aout_dac_config
+  3a:	3000      	movi      	r0, 0
+  3c:	1490      	pop      	r15
+  3e:	3000      	movi      	r0, 0
+  40:	2800      	subi      	r0, 1
+  42:	07fd      	br      	0x3c	// 3c <aout_config_dac+0x3c>
+
+Disassembly of section .text.aout_get_mute:
+
+00000000 <aout_get_mute>:
+   0:	d8005008 	ld.hs      	r0, (r0, 0x10)
+   4:	783c      	jmp      	r15
+
+Disassembly of section .text.aout_set_fixed_src:
+
+00000000 <aout_set_fixed_src>:
+   0:	ea23a0b0 	movih      	r3, 41136
+   4:	30ff      	movi      	r0, 255
+   6:	9344      	ld.w      	r2, (r3, 0x10)
+   8:	3abf      	bseti      	r2, 31
+   a:	b344      	st.w      	r2, (r3, 0x10)
+   c:	9344      	ld.w      	r2, (r3, 0x10)
+   e:	4018      	lsli      	r0, r0, 24
+  10:	4128      	lsli      	r1, r1, 8
+  12:	6880      	and      	r2, r0
+  14:	c40156e1 	zext      	r1, r1, 23, 0
+  18:	6c48      	or      	r1, r2
+  1a:	3000      	movi      	r0, 0
+  1c:	b324      	st.w      	r1, (r3, 0x10)
+  1e:	783c      	jmp      	r15
+
+Disassembly of section .text.aout_get_sdc_addr:
+
+00000000 <aout_get_sdc_addr>:
+   0:	ea23a0b8 	movih      	r3, 41144
+   4:	9304      	ld.w      	r0, (r3, 0x10)
+   6:	783c      	jmp      	r15
+
+Disassembly of section .text.aout_drain_frame:
+
+00000000 <aout_drain_frame>:
+   0:	14d1      	push      	r4, r15
+   2:	e480000f 	addi      	r4, r0, 16
+   6:	3300      	movi      	r3, 0
+   8:	a46c      	st.b      	r3, (r4, 0xc)
+   a:	3301      	movi      	r3, 1
+   c:	3101      	movi      	r1, 1
+   e:	ea20a0b0 	movih      	r0, 41136
+  12:	a46a      	st.b      	r3, (r4, 0xa)
+  14:	e0000000 	bsr      	0x0	// 0 <aout_drain_frame>
+			14: R_CKCORE_PCREL_IMM26BY2	aout_play_check_idle
+  18:	3101      	movi      	r1, 1
+  1a:	ea20a0b0 	movih      	r0, 41136
+  1e:	e0000000 	bsr      	0x0	// 0 <aout_drain_frame>
+			1e: R_CKCORE_PCREL_IMM26BY2	aout_set_r1_frame_over_int_enable
+  22:	846c      	ld.b      	r3, (r4, 0xc)
+  24:	e9030004 	bez      	r3, 0x2c	// 2c <aout_drain_frame+0x2c>
+  28:	3000      	movi      	r0, 0
+  2a:	1491      	pop      	r4, r15
+  2c:	3001      	movi      	r0, 1
+  2e:	e0000000 	bsr      	0x0	// 0 <gx_mdelay>
+			2e: R_CKCORE_PCREL_IMM26BY2	gx_mdelay
+  32:	07f8      	br      	0x22	// 22 <aout_drain_frame+0x22>
+
+Disassembly of section .text.aout_config_pcm:
+
+00000000 <aout_config_pcm>:
+   0:	14d1      	push      	r4, r15
+   2:	d9810005 	ld.b      	r12, (r1, 0x5)
+   6:	eb4c0010 	cmpnei      	r12, 16
+   a:	0c19      	bf      	0x3c	// 3c <aout_config_pcm+0x3c>
+   c:	eb4c0020 	cmpnei      	r12, 32
+  10:	0813      	bt      	0x36	// 36 <aout_config_pcm+0x36>
+  12:	ea0d0000 	movi      	r13, 0
+  16:	9142      	ld.w      	r2, (r1, 0x8)
+  18:	e902000c 	bez      	r2, 0x30	// 30 <aout_config_pcm+0x30>
+  1c:	da412000 	ld.w      	r18, (r1, 0x0)
+  20:	c6428023 	divu      	r3, r2, r18
+  24:	c6438432 	mult      	r18, r3, r18
+  28:	c6420082 	subu      	r2, r2, r18
+  2c:	e902000b 	bez      	r2, 0x42	// 42 <aout_config_pcm+0x42>
+  30:	1200      	lrw      	r0, 0x0	// 130 <printf_+0x130>
+  32:	e0000000 	bsr      	0x0	// 0 <printf_>
+			32: R_CKCORE_PCREL_IMM26BY2	printf_
+  36:	3000      	movi      	r0, 0
+  38:	2800      	subi      	r0, 1
+  3a:	0457      	br      	0xe8	// e8 <aout_config_pcm+0xe8>
+  3c:	ea0d0008 	movi      	r13, 8
+  40:	07eb      	br      	0x16	// 16 <aout_config_pcm+0x16>
+  42:	eb430180 	cmpnei      	r3, 384
+  46:	0c6c      	bf      	0x11e	// 11e <aout_config_pcm+0x11e>
+  48:	eb030180 	cmphsi      	r3, 385
+  4c:	084f      	bt      	0xea	// ea <aout_config_pcm+0xea>
+  4e:	eb4300c0 	cmpnei      	r3, 192
+  52:	0c61      	bf      	0x114	// 114 <aout_config_pcm+0x114>
+  54:	eb430100 	cmpnei      	r3, 256
+  58:	0c61      	bf      	0x11a	// 11a <aout_config_pcm+0x11a>
+  5a:	eb430080 	cmpnei      	r3, 128
+  5e:	0bec      	bt      	0x36	// 36 <aout_config_pcm+0x36>
+  60:	906c      	ld.w      	r3, (r0, 0x30)
+  62:	3203      	movi      	r2, 3
+  64:	c46c484c 	lsri      	r12, r12, 3
+  68:	b344      	st.w      	r2, (r3, 0x10)
+  6a:	dd800019 	st.b      	r12, (r0, 0x19)
+  6e:	8164      	ld.b      	r3, (r1, 0x4)
+  70:	3b41      	cmpnei      	r3, 1
+  72:	ea23a0b8 	movih      	r3, 41144
+  76:	ea0c0000 	movi      	r12, 0
+  7a:	e58c100f 	subi      	r12, r12, 16
+  7e:	e480000f 	addi      	r4, r0, 16
+  82:	9300      	ld.w      	r0, (r3, 0x0)
+  84:	6830      	and      	r0, r12
+  86:	6f40      	or      	r13, r0
+  88:	dda32000 	st.w      	r13, (r3, 0x0)
+  8c:	c4000502 	mvc      	r2
+  90:	9300      	ld.w      	r0, (r3, 0x0)
+  92:	7488      	zextb      	r2, r2
+  94:	3886      	bclri      	r0, 6
+  96:	4246      	lsli      	r2, r2, 6
+  98:	6c80      	or      	r2, r0
+  9a:	b340      	st.w      	r2, (r3, 0x0)
+  9c:	9340      	ld.w      	r2, (r3, 0x0)
+  9e:	c4e22820 	bclri      	r0, r2, 7
+  a2:	8146      	ld.b      	r2, (r1, 0x6)
+  a4:	3a40      	cmpnei      	r2, 0
+  a6:	c4000502 	mvc      	r2
+  aa:	4247      	lsli      	r2, r2, 7
+  ac:	6c80      	or      	r2, r0
+  ae:	b340      	st.w      	r2, (r3, 0x0)
+  b0:	9340      	ld.w      	r2, (r3, 0x0)
+  b2:	c4822820 	bclri      	r0, r2, 4
+  b6:	3885      	bclri      	r0, 5
+  b8:	8147      	ld.b      	r2, (r1, 0x7)
+  ba:	3a40      	cmpnei      	r2, 0
+  bc:	c4000502 	mvc      	r2
+  c0:	4244      	lsli      	r2, r2, 4
+  c2:	e4422030 	andi      	r2, r2, 48
+  c6:	6c80      	or      	r2, r0
+  c8:	9428      	ld.w      	r1, (r4, 0x20)
+  ca:	b340      	st.w      	r2, (r3, 0x0)
+  cc:	2107      	addi      	r1, 8
+  ce:	ea20a0b0 	movih      	r0, 41136
+  d2:	e0000000 	bsr      	0x0	// 0 <aout_config_pcm>
+			d2: R_CKCORE_PCREL_IMM26BY2	aout_i2s_config
+  d6:	9428      	ld.w      	r1, (r4, 0x20)
+  d8:	ea20a0b0 	movih      	r0, 41136
+  dc:	212f      	addi      	r1, 48
+  de:	e0000000 	bsr      	0x0	// 0 <aout_config_pcm>
+			de: R_CKCORE_PCREL_IMM26BY2	aout_dac_config
+  e2:	e0000000 	bsr      	0x0	// 0 <aout_config_pcm>
+			e2: R_CKCORE_PCREL_IMM26BY2	_set_lodac
+  e6:	3000      	movi      	r0, 0
+  e8:	1491      	pop      	r4, r15
+  ea:	eb430300 	cmpnei      	r3, 768
+  ee:	0c1b      	bf      	0x124	// 124 <aout_config_pcm+0x124>
+  f0:	eb030300 	cmphsi      	r3, 769
+  f4:	0807      	bt      	0x102	// 102 <aout_config_pcm+0x102>
+  f6:	eb430200 	cmpnei      	r3, 512
+  fa:	0b9e      	bt      	0x36	// 36 <aout_config_pcm+0x36>
+  fc:	906c      	ld.w      	r3, (r0, 0x30)
+  fe:	3201      	movi      	r2, 1
+ 100:	07b2      	br      	0x64	// 64 <aout_config_pcm+0x64>
+ 102:	eb430400 	cmpnei      	r3, 1024
+ 106:	0c12      	bf      	0x12a	// 12a <aout_config_pcm+0x12a>
+ 108:	eb430600 	cmpnei      	r3, 1536
+ 10c:	0b95      	bt      	0x36	// 36 <aout_config_pcm+0x36>
+ 10e:	906c      	ld.w      	r3, (r0, 0x30)
+ 110:	3206      	movi      	r2, 6
+ 112:	07a9      	br      	0x64	// 64 <aout_config_pcm+0x64>
+ 114:	906c      	ld.w      	r3, (r0, 0x30)
+ 116:	3207      	movi      	r2, 7
+ 118:	07a6      	br      	0x64	// 64 <aout_config_pcm+0x64>
+ 11a:	906c      	ld.w      	r3, (r0, 0x30)
+ 11c:	07a4      	br      	0x64	// 64 <aout_config_pcm+0x64>
+ 11e:	906c      	ld.w      	r3, (r0, 0x30)
+ 120:	3204      	movi      	r2, 4
+ 122:	07a1      	br      	0x64	// 64 <aout_config_pcm+0x64>
+ 124:	906c      	ld.w      	r3, (r0, 0x30)
+ 126:	3205      	movi      	r2, 5
+ 128:	079e      	br      	0x64	// 64 <aout_config_pcm+0x64>
+ 12a:	906c      	ld.w      	r3, (r0, 0x30)
+ 12c:	3202      	movi      	r2, 2
+ 12e:	079b      	br      	0x64	// 64 <aout_config_pcm+0x64>
+ 130:	00000000 	.long	0x00000000
+			130: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.aout_config_buffer:
+
+00000000 <aout_config_buffer>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	9100      	ld.w      	r0, (r1, 0x0)
+   4:	6d07      	mov      	r4, r1
+   6:	e9200005 	bnez      	r0, 0x10	// 10 <aout_config_buffer+0x10>
+   a:	3000      	movi      	r0, 0
+   c:	2800      	subi      	r0, 1
+   e:	1492      	pop      	r4-r5, r15
+  10:	e460200f 	andi      	r3, r0, 15
+  14:	e923fffb 	bnez      	r3, 0xa	// a <aout_config_buffer+0xa>
+  18:	33e0      	movi      	r3, 224
+  1a:	4378      	lsli      	r3, r3, 24
+  1c:	ea25a0b8 	movih      	r5, 41144
+  20:	60c0      	addu      	r3, r0
+  22:	b561      	st.w      	r3, (r5, 0x4)
+  24:	9122      	ld.w      	r1, (r1, 0x8)
+  26:	e0000000 	bsr      	0x0	// 0 <gx_dcache_clean_range>
+			26: R_CKCORE_PCREL_IMM26BY2	gx_dcache_clean_range
+  2a:	9401      	ld.w      	r0, (r4, 0x4)
+  2c:	e900000d 	bez      	r0, 0x46	// 46 <aout_config_buffer+0x46>
+  30:	e460200f 	andi      	r3, r0, 15
+  34:	e923ffeb 	bnez      	r3, 0xa	// a <aout_config_buffer+0xa>
+  38:	33e0      	movi      	r3, 224
+  3a:	4378      	lsli      	r3, r3, 24
+  3c:	60c0      	addu      	r3, r0
+  3e:	b562      	st.w      	r3, (r5, 0x8)
+  40:	9422      	ld.w      	r1, (r4, 0x8)
+  42:	e0000000 	bsr      	0x0	// 0 <gx_dcache_clean_range>
+			42: R_CKCORE_PCREL_IMM26BY2	gx_dcache_clean_range
+  46:	ea23a0b8 	movih      	r3, 41144
+  4a:	9442      	ld.w      	r2, (r4, 0x8)
+  4c:	b343      	st.w      	r2, (r3, 0xc)
+  4e:	3000      	movi      	r0, 0
+  50:	07df      	br      	0xe	// e <aout_config_buffer+0xe>
+
+Disassembly of section .text.aout_suspend:
+
+00000000 <aout_suspend>:
+   0:	14d0      	push      	r15
+   2:	200f      	addi      	r0, 16
+   4:	806b      	ld.b      	r3, (r0, 0xb)
+   6:	e903000b 	bez      	r3, 0x1c	// 1c <aout_suspend+0x1c>
+   a:	ea23a0b0 	movih      	r3, 41136
+   e:	9342      	ld.w      	r2, (r3, 0x8)
+  10:	3a80      	bclri      	r2, 0
+  12:	b342      	st.w      	r2, (r3, 0x8)
+  14:	9343      	ld.w      	r2, (r3, 0xc)
+  16:	e4422001 	andi      	r2, r2, 1
+  1a:	b343      	st.w      	r2, (r3, 0xc)
+  1c:	806a      	ld.b      	r3, (r0, 0xa)
+  1e:	e9030012 	bez      	r3, 0x42	// 42 <aout_suspend+0x42>
+  22:	3100      	movi      	r1, 0
+  24:	ea20a0b0 	movih      	r0, 41136
+  28:	e0000000 	bsr      	0x0	// 0 <aout_suspend>
+			28: R_CKCORE_PCREL_IMM26BY2	aout_play_check_idle
+  2c:	3100      	movi      	r1, 0
+  2e:	ea20a0b0 	movih      	r0, 41136
+  32:	e0000000 	bsr      	0x0	// 0 <aout_suspend>
+			32: R_CKCORE_PCREL_IMM26BY2	aout_set_r1_frame_over_int_enable
+  36:	ea22a0b0 	movih      	r2, 41136
+  3a:	9263      	ld.w      	r3, (r2, 0xc)
+  3c:	e4632002 	andi      	r3, r3, 2
+  40:	b263      	st.w      	r3, (r2, 0xc)
+  42:	3100      	movi      	r1, 0
+  44:	300b      	movi      	r0, 11
+  46:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			46: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  4a:	3100      	movi      	r1, 0
+  4c:	300f      	movi      	r0, 15
+  4e:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			4e: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  52:	3000      	movi      	r0, 0
+  54:	1490      	pop      	r15
+
+Disassembly of section .text.aout_init:
+
+00000000 <aout_init>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	3101      	movi      	r1, 1
+   6:	300b      	movi      	r0, 11
+   8:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   c:	3101      	movi      	r1, 1
+   e:	300f      	movi      	r0, 15
+  10:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			10: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  14:	ea23a0b0 	movih      	r3, 41136
+  18:	3c42      	cmpnei      	r4, 2
+  1a:	9348      	ld.w      	r2, (r3, 0x20)
+  1c:	ec420002 	ori      	r2, r2, 2
+  20:	b348      	st.w      	r2, (r3, 0x20)
+  22:	9348      	ld.w      	r2, (r3, 0x20)
+  24:	ec420004 	ori      	r2, r2, 4
+  28:	b348      	st.w      	r2, (r3, 0x20)
+  2a:	9348      	ld.w      	r2, (r3, 0x20)
+  2c:	ec420008 	ori      	r2, r2, 8
+  30:	b348      	st.w      	r2, (r3, 0x20)
+  32:	9341      	ld.w      	r2, (r3, 0x4)
+  34:	3a8a      	bclri      	r2, 10
+  36:	3a8b      	bclri      	r2, 11
+  38:	080b      	bt      	0x4e	// 4e <aout_init+0x4e>
+  3a:	ec420400 	ori      	r2, r2, 1024
+  3e:	b341      	st.w      	r2, (r3, 0x4)
+  40:	9341      	ld.w      	r2, (r3, 0x4)
+  42:	3a87      	bclri      	r2, 7
+  44:	b341      	st.w      	r2, (r3, 0x4)
+  46:	e0000000 	bsr      	0x0	// 0 <aout_init>
+			46: R_CKCORE_PCREL_IMM26BY2	_aout_reset
+  4a:	3000      	movi      	r0, 0
+  4c:	1491      	pop      	r4, r15
+  4e:	448a      	lsli      	r4, r4, 10
+  50:	e4842c00 	andi      	r4, r4, 3072
+  54:	6d08      	or      	r4, r2
+  56:	b381      	st.w      	r4, (r3, 0x4)
+  58:	07f7      	br      	0x46	// 46 <aout_init+0x46>
+
+Disassembly of section .text.aout_set_db:
+
+00000000 <aout_set_db>:
+   0:	3312      	movi      	r3, 18
+   2:	3200      	movi      	r2, 0
+   4:	2a11      	subi      	r2, 18
+   6:	f861cda3 	min.s32      	r3, r1, r3
+   a:	ea920015 	lrw      	r18, 0x0	// 5c <aout_set_db+0x5c>
+   e:	f843cca3 	max.s32      	r3, r3, r2
+  12:	c4124833 	lsli      	r19, r18, 0
+  16:	3200      	movi      	r2, 0
+  18:	ea0c0025 	movi      	r12, 37
+  1c:	c442482d 	lsli      	r13, r2, 2
+  20:	c5b2002d 	addu      	r13, r18, r13
+  24:	d9ad5001 	ld.hs      	r13, (r13, 0x2)
+  28:	674e      	cmpne      	r3, r13
+  2a:	0c04      	bf      	0x32	// 32 <aout_set_db+0x32>
+  2c:	2200      	addi      	r2, 1
+  2e:	e82cfff7 	bnezad      	r12, 0x1c	// 1c <aout_set_db+0x1c>
+  32:	ea2da0b0 	movih      	r13, 41136
+  36:	ea2cfc01 	movih      	r12, 64513
+  3a:	d86d2005 	ld.w      	r3, (r13, 0x14)
+  3e:	e58c1000 	subi      	r12, r12, 1
+  42:	6b0c      	and      	r12, r3
+  44:	d0530483 	ldr.h      	r3, (r19, r2 << 2)
+  48:	e46323ff 	andi      	r3, r3, 1023
+  4c:	4370      	lsli      	r3, r3, 16
+  4e:	6cf0      	or      	r3, r12
+  50:	dc6d2005 	st.w      	r3, (r13, 0x14)
+  54:	a829      	st.h      	r1, (r0, 0x12)
+  56:	3000      	movi      	r0, 0
+  58:	783c      	jmp      	r15
+  5a:	0000      	.short	0x0000
+  5c:	00000000 	.long	0x00000000
+			5c: R_CKCORE_ADDR32	.rodata+0x1c
+
+Disassembly of section .text.aout_get_db:
+
+00000000 <aout_get_db>:
+   0:	ea23a0b0 	movih      	r3, 41136
+   4:	ea92000d 	lrw      	r18, 0x0	// 38 <aout_get_db+0x38>
+   8:	c4124822 	lsli      	r2, r18, 0
+   c:	d9a32005 	ld.w      	r13, (r3, 0x14)
+  10:	c60d572d 	zext      	r13, r13, 25, 16
+  14:	3300      	movi      	r3, 0
+  16:	ea0c0025 	movi      	r12, 37
+  1a:	d0721493 	ldr.hs      	r19, (r18, r3 << 2)
+  1e:	c5b30480 	cmpne      	r19, r13
+  22:	0c04      	bf      	0x2a	// 2a <aout_get_db+0x2a>
+  24:	2300      	addi      	r3, 1
+  26:	e82cfffa 	bnezad      	r12, 0x1a	// 1a <aout_get_db+0x1a>
+  2a:	4362      	lsli      	r3, r3, 2
+  2c:	60c8      	addu      	r3, r2
+  2e:	8b61      	ld.h      	r3, (r3, 0x2)
+  30:	a960      	st.h      	r3, (r1, 0x0)
+  32:	d8005009 	ld.hs      	r0, (r0, 0x12)
+  36:	783c      	jmp      	r15
+  38:	00000000 	.long	0x00000000
+			38: R_CKCORE_ADDR32	.rodata+0x1c
+
+Disassembly of section .text.aout_set_channel:
+
+00000000 <aout_set_channel>:
+   0:	3903      	cmphsi      	r1, 4
+   2:	0829      	bt      	0x54	// 54 <aout_set_channel+0x54>
+   4:	1076      	lrw      	r3, 0x0	// 5c <aout_set_channel+0x5c>
+   6:	5b4e      	addi      	r2, r3, 4
+   8:	d0230020 	ldr.b      	r0, (r3, r1 << 0)
+   c:	2307      	addi      	r3, 8
+   e:	d0220022 	ldr.b      	r2, (r2, r1 << 0)
+  12:	d0230023 	ldr.b      	r3, (r3, r1 << 0)
+  16:	ea21a0b0 	movih      	r1, 41136
+  1a:	ea0d0f00 	movi      	r13, 3840
+  1e:	6f76      	nor      	r13, r13
+  20:	d9812005 	ld.w      	r12, (r1, 0x14)
+  24:	4008      	lsli      	r0, r0, 8
+  26:	6b34      	and      	r12, r13
+  28:	e4002f00 	andi      	r0, r0, 3840
+  2c:	6c30      	or      	r0, r12
+  2e:	b105      	st.w      	r0, (r1, 0x14)
+  30:	9105      	ld.w      	r0, (r1, 0x14)
+  32:	ea0cf000 	movi      	r12, 61440
+  36:	6f32      	nor      	r12, r12
+  38:	424c      	lsli      	r2, r2, 12
+  3a:	6830      	and      	r0, r12
+  3c:	c40255e2 	zext      	r2, r2, 15, 0
+  40:	6c80      	or      	r2, r0
+  42:	b145      	st.w      	r2, (r1, 0x14)
+  44:	9145      	ld.w      	r2, (r1, 0x14)
+  46:	3a80      	bclri      	r2, 0
+  48:	e4632001 	andi      	r3, r3, 1
+  4c:	6cc8      	or      	r3, r2
+  4e:	3000      	movi      	r0, 0
+  50:	b165      	st.w      	r3, (r1, 0x14)
+  52:	783c      	jmp      	r15
+  54:	3300      	movi      	r3, 0
+  56:	6c8f      	mov      	r2, r3
+  58:	6c0f      	mov      	r0, r3
+  5a:	07de      	br      	0x16	// 16 <aout_set_channel+0x16>
+  5c:	00000000 	.long	0x00000000
+			5c: R_CKCORE_ADDR32	.rodata+0xb0
+
+Disassembly of section .text.aout_set_mute:
+
+00000000 <aout_set_mute>:
+   0:	3940      	cmpnei      	r1, 0
+   2:	ea22a0b0 	movih      	r2, 41136
+   6:	c4000503 	mvc      	r3
+   a:	d9822001 	ld.w      	r12, (r2, 0x4)
+   e:	4329      	lsli      	r1, r3, 9
+  10:	c52c282c 	bclri      	r12, r12, 9
+  14:	e4212200 	andi      	r1, r1, 512
+  18:	6c70      	or      	r1, r12
+  1a:	b221      	st.w      	r1, (r2, 0x4)
+  1c:	9225      	ld.w      	r1, (r2, 0x14)
+  1e:	c561282c 	bclri      	r12, r1, 11
+  22:	432b      	lsli      	r1, r3, 11
+  24:	e4212800 	andi      	r1, r1, 2048
+  28:	6c70      	or      	r1, r12
+  2a:	b225      	st.w      	r1, (r2, 0x14)
+  2c:	9225      	ld.w      	r1, (r2, 0x14)
+  2e:	398f      	bclri      	r1, 15
+  30:	436f      	lsli      	r3, r3, 15
+  32:	6cc4      	or      	r3, r1
+  34:	b265      	st.w      	r3, (r2, 0x14)
+  36:	3301      	movi      	r3, 1
+  38:	a868      	st.h      	r3, (r0, 0x10)
+  3a:	3000      	movi      	r0, 0
+  3c:	783c      	jmp      	r15
+
+Disassembly of section .text.handle_isr:
+
+00000000 <handle_isr>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	384d      	cmpnei      	r0, 13
+   4:	6d47      	mov      	r5, r1
+   6:	0868      	bt      	0xd6	// d6 <handle_isr+0xd6>
+   8:	ea23a0b0 	movih      	r3, 41136
+   c:	9383      	ld.w      	r4, (r3, 0xc)
+   e:	9342      	ld.w      	r2, (r3, 0x8)
+  10:	6908      	and      	r4, r2
+  12:	e4442004 	andi      	r2, r4, 4
+  16:	e902000d 	bez      	r2, 0x30	// 30 <handle_isr+0x30>
+  1a:	9346      	ld.w      	r2, (r3, 0x18)
+  1c:	c40257c2 	zext      	r2, r2, 30, 0
+  20:	b346      	st.w      	r2, (r3, 0x18)
+  22:	9343      	ld.w      	r2, (r3, 0xc)
+  24:	e4422004 	andi      	r2, r2, 4
+  28:	b343      	st.w      	r2, (r3, 0xc)
+  2a:	9342      	ld.w      	r2, (r3, 0x8)
+  2c:	3a82      	bclri      	r2, 2
+  2e:	b342      	st.w      	r2, (r3, 0x8)
+  30:	e4642008 	andi      	r3, r4, 8
+  34:	e903000f 	bez      	r3, 0x52	// 52 <handle_isr+0x52>
+  38:	ea23a0b0 	movih      	r3, 41136
+  3c:	9347      	ld.w      	r2, (r3, 0x1c)
+  3e:	c40257c2 	zext      	r2, r2, 30, 0
+  42:	b347      	st.w      	r2, (r3, 0x1c)
+  44:	9343      	ld.w      	r2, (r3, 0xc)
+  46:	e4422008 	andi      	r2, r2, 8
+  4a:	b343      	st.w      	r2, (r3, 0xc)
+  4c:	9342      	ld.w      	r2, (r3, 0x8)
+  4e:	3a83      	bclri      	r2, 3
+  50:	b342      	st.w      	r2, (r3, 0x8)
+  52:	e4642040 	andi      	r3, r4, 64
+  56:	e9030008 	bez      	r3, 0x66	// 66 <handle_isr+0x66>
+  5a:	ea22a0b0 	movih      	r2, 41136
+  5e:	9263      	ld.w      	r3, (r2, 0xc)
+  60:	e4632040 	andi      	r3, r3, 64
+  64:	b263      	st.w      	r3, (r2, 0xc)
+  66:	e4642001 	andi      	r3, r4, 1
+  6a:	e903000e 	bez      	r3, 0x86	// 86 <handle_isr+0x86>
+  6e:	ea22a0b0 	movih      	r2, 41136
+  72:	9263      	ld.w      	r3, (r2, 0xc)
+  74:	e4632001 	andi      	r3, r3, 1
+  78:	b263      	st.w      	r3, (r2, 0xc)
+  7a:	956a      	ld.w      	r3, (r5, 0x28)
+  7c:	e9030005 	bez      	r3, 0x86	// 86 <handle_isr+0x86>
+  80:	9529      	ld.w      	r1, (r5, 0x24)
+  82:	9508      	ld.w      	r0, (r5, 0x20)
+  84:	7bcd      	jsr      	r3
+  86:	e4842002 	andi      	r4, r4, 2
+  8a:	e9040026 	bez      	r4, 0xd6	// d6 <handle_isr+0xd6>
+  8e:	ea24a0b0 	movih      	r4, 41136
+  92:	3100      	movi      	r1, 0
+  94:	9463      	ld.w      	r3, (r4, 0xc)
+  96:	e4632004 	andi      	r3, r3, 4
+  9a:	b463      	st.w      	r3, (r4, 0xc)
+  9c:	9463      	ld.w      	r3, (r4, 0xc)
+  9e:	e4632008 	andi      	r3, r3, 8
+  a2:	b463      	st.w      	r3, (r4, 0xc)
+  a4:	9463      	ld.w      	r3, (r4, 0xc)
+  a6:	e4632040 	andi      	r3, r3, 64
+  aa:	b463      	st.w      	r3, (r4, 0xc)
+  ac:	9463      	ld.w      	r3, (r4, 0xc)
+  ae:	e4632001 	andi      	r3, r3, 1
+  b2:	b463      	st.w      	r3, (r4, 0xc)
+  b4:	6c13      	mov      	r0, r4
+  b6:	e0000000 	bsr      	0x0	// 0 <handle_isr>
+			b6: R_CKCORE_PCREL_IMM26BY2	aout_play_check_idle
+  ba:	3100      	movi      	r1, 0
+  bc:	6c13      	mov      	r0, r4
+  be:	e0000000 	bsr      	0x0	// 0 <handle_isr>
+			be: R_CKCORE_PCREL_IMM26BY2	aout_set_r1_frame_over_int_enable
+  c2:	9463      	ld.w      	r3, (r4, 0xc)
+  c4:	e4632002 	andi      	r3, r3, 2
+  c8:	b463      	st.w      	r3, (r4, 0xc)
+  ca:	3301      	movi      	r3, 1
+  cc:	a57c      	st.b      	r3, (r5, 0x1c)
+  ce:	956b      	ld.w      	r3, (r5, 0x2c)
+  d0:	e9030003 	bez      	r3, 0xd6	// d6 <handle_isr+0xd6>
+  d4:	7bcd      	jsr      	r3
+  d6:	3000      	movi      	r0, 0
+  d8:	1492      	pop      	r4-r5, r15
+
+Disassembly of section .text.aout_push_frame:
+
+00000000 <aout_push_frame>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	e9010036 	bez      	r1, 0x6e	// 6e <aout_push_frame+0x6e>
+   6:	e480000f 	addi      	r4, r0, 16
+   a:	3208      	movi      	r2, 8
+   c:	201f      	addi      	r0, 32
+   e:	e0000000 	bsr      	0x0	// 0 <memcpy>
+			e: R_CKCORE_PCREL_IMM26BY2	memcpy
+  12:	9465      	ld.w      	r3, (r4, 0x14)
+  14:	9424      	ld.w      	r1, (r4, 0x10)
+  16:	2300      	addi      	r3, 1
+  18:	8449      	ld.b      	r2, (r4, 0x9)
+  1a:	60c6      	subu      	r3, r1
+  1c:	c4438043 	divs      	r3, r3, r2
+  20:	ea22a0b8 	movih      	r2, 41144
+  24:	c40356e3 	zext      	r3, r3, 23, 0
+  28:	9205      	ld.w      	r0, (r2, 0x14)
+  2a:	b225      	st.w      	r1, (r2, 0x14)
+  2c:	9425      	ld.w      	r1, (r4, 0x14)
+  2e:	9206      	ld.w      	r0, (r2, 0x18)
+  30:	b226      	st.w      	r1, (r2, 0x18)
+  32:	30ff      	movi      	r0, 255
+  34:	9229      	ld.w      	r1, (r2, 0x24)
+  36:	4018      	lsli      	r0, r0, 24
+  38:	6840      	and      	r1, r0
+  3a:	6cc4      	or      	r3, r1
+  3c:	b269      	st.w      	r3, (r2, 0x24)
+  3e:	926b      	ld.w      	r3, (r2, 0x2c)
+  40:	ec630002 	ori      	r3, r3, 2
+  44:	b26b      	st.w      	r3, (r2, 0x2c)
+  46:	84aa      	ld.b      	r5, (r4, 0xa)
+  48:	e9250011 	bnez      	r5, 0x6a	// 6a <aout_push_frame+0x6a>
+  4c:	9407      	ld.w      	r0, (r4, 0x1c)
+  4e:	e9000012 	bez      	r0, 0x72	// 72 <aout_push_frame+0x72>
+  52:	3301      	movi      	r3, 1
+  54:	3101      	movi      	r1, 1
+  56:	ea20a0b0 	movih      	r0, 41136
+  5a:	a46a      	st.b      	r3, (r4, 0xa)
+  5c:	e0000000 	bsr      	0x0	// 0 <aout_push_frame>
+			5c: R_CKCORE_PCREL_IMM26BY2	aout_play_check_idle
+  60:	3101      	movi      	r1, 1
+  62:	ea20a0b0 	movih      	r0, 41136
+  66:	e0000000 	bsr      	0x0	// 0 <aout_push_frame>
+			66: R_CKCORE_PCREL_IMM26BY2	aout_set_r1_frame_over_int_enable
+  6a:	3000      	movi      	r0, 0
+  6c:	0403      	br      	0x72	// 72 <aout_push_frame+0x72>
+  6e:	3000      	movi      	r0, 0
+  70:	2800      	subi      	r0, 1
+  72:	1492      	pop      	r4-r5, r15
+
+Disassembly of section .text.aout_resume:
+
+00000000 <aout_resume>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	3101      	movi      	r1, 1
+   6:	300b      	movi      	r0, 11
+   8:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   c:	300f      	movi      	r0, 15
+   e:	3101      	movi      	r1, 1
+  10:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			10: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  14:	e404000f 	addi      	r0, r4, 16
+  18:	806b      	ld.b      	r3, (r0, 0xb)
+  1a:	e9030008 	bez      	r3, 0x2a	// 2a <aout_resume+0x2a>
+  1e:	ea22a0b0 	movih      	r2, 41136
+  22:	9262      	ld.w      	r3, (r2, 0x8)
+  24:	ec630001 	ori      	r3, r3, 1
+  28:	b262      	st.w      	r3, (r2, 0x8)
+  2a:	806a      	ld.b      	r3, (r0, 0xa)
+  2c:	e9030004 	bez      	r3, 0x34	// 34 <aout_resume+0x34>
+  30:	3300      	movi      	r3, 0
+  32:	a06a      	st.b      	r3, (r0, 0xa)
+  34:	3000      	movi      	r0, 0
+  36:	1491      	pop      	r4, r15
+
+Disassembly of section .text.aout_alloc_playback:
+
+00000000 <aout_alloc_playback>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	1181      	lrw      	r4, 0x0	// 84 <aout_alloc_playback+0x84>
+   4:	6d83      	mov      	r6, r0
+   6:	8464      	ld.b      	r3, (r4, 0x4)
+   8:	e9230008 	bnez      	r3, 0x18	// 18 <aout_alloc_playback+0x18>
+   c:	9422      	ld.w      	r1, (r4, 0x8)
+   e:	e9210005 	bnez      	r1, 0x18	// 18 <aout_alloc_playback+0x18>
+  12:	846c      	ld.b      	r3, (r4, 0xc)
+  14:	640e      	cmpne      	r3, r0
+  16:	0c2e      	bf      	0x72	// 72 <aout_alloc_playback+0x72>
+  18:	3400      	movi      	r4, 0
+  1a:	3000      	movi      	r0, 0
+  1c:	b405      	st.w      	r0, (r4, 0x14)
+  1e:	a4d8      	st.b      	r6, (r4, 0x18)
+  20:	e0000000 	bsr      	0x0	// 0 <aout_select_hw_config>
+			20: R_CKCORE_PCREL_IMM26BY2	aout_select_hw_config
+  24:	ea23a0b0 	movih      	r3, 41136
+  28:	b40c      	st.w      	r0, (r4, 0x30)
+  2a:	9343      	ld.w      	r2, (r3, 0xc)
+  2c:	3ab5      	bseti      	r2, 21
+  2e:	b343      	st.w      	r2, (r3, 0xc)
+  30:	9340      	ld.w      	r2, (r3, 0x0)
+  32:	c40257c2 	zext      	r2, r2, 30, 0
+  36:	b340      	st.w      	r2, (r3, 0x0)
+  38:	9340      	ld.w      	r2, (r3, 0x0)
+  3a:	c4222821 	bclri      	r1, r2, 1
+  3e:	9040      	ld.w      	r2, (r0, 0x0)
+  40:	6088      	addu      	r2, r2
+  42:	e4422002 	andi      	r2, r2, 2
+  46:	6c84      	or      	r2, r1
+  48:	b340      	st.w      	r2, (r3, 0x0)
+  4a:	9340      	ld.w      	r2, (r3, 0x0)
+  4c:	c4022821 	bclri      	r1, r2, 0
+  50:	9041      	ld.w      	r2, (r0, 0x4)
+  52:	e4422001 	andi      	r2, r2, 1
+  56:	6c84      	or      	r2, r1
+  58:	b340      	st.w      	r2, (r3, 0x0)
+  5a:	9341      	ld.w      	r2, (r3, 0x4)
+  5c:	3a88      	bclri      	r2, 8
+  5e:	b341      	st.w      	r2, (r3, 0x4)
+  60:	300d      	movi      	r0, 13
+  62:	6c93      	mov      	r2, r4
+  64:	1029      	lrw      	r1, 0x0	// 88 <aout_alloc_playback+0x88>
+  66:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			66: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  6a:	e4a4000f 	addi      	r5, r4, 16
+  6e:	6c13      	mov      	r0, r4
+  70:	1493      	pop      	r4-r6, r15
+  72:	3224      	movi      	r2, 36
+  74:	e404000f 	addi      	r0, r4, 16
+  78:	e0000000 	bsr      	0x0	// 0 <memset>
+			78: R_CKCORE_PCREL_IMM26BY2	memset
+  7c:	3301      	movi      	r3, 1
+  7e:	a464      	st.b      	r3, (r4, 0x4)
+  80:	07cd      	br      	0x1a	// 1a <aout_alloc_playback+0x1a>
+	...
+			84: R_CKCORE_ADDR32	.data
+			88: R_CKCORE_ADDR32	.text.handle_isr
+
+Disassembly of section .text.aout_free:
+
+00000000 <aout_free>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	ea22a0b0 	movih      	r2, 41136
+   6:	3500      	movi      	r5, 0
+   8:	9262      	ld.w      	r3, (r2, 0x8)
+   a:	3b80      	bclri      	r3, 0
+   c:	b262      	st.w      	r3, (r2, 0x8)
+   e:	ea23a0b8 	movih      	r3, 41144
+  12:	6d03      	mov      	r4, r0
+  14:	9345      	ld.w      	r2, (r3, 0x14)
+  16:	b3a5      	st.w      	r5, (r3, 0x14)
+  18:	9346      	ld.w      	r2, (r3, 0x18)
+  1a:	b3a6      	st.w      	r5, (r3, 0x18)
+  1c:	e0000000 	bsr      	0x0	// 0 <aout_free>
+			1c: R_CKCORE_PCREL_IMM26BY2	_aout_reset
+  20:	3224      	movi      	r2, 36
+  22:	6c57      	mov      	r1, r5
+  24:	e404000f 	addi      	r0, r4, 16
+  28:	e0000000 	bsr      	0x0	// 0 <memset>
+			28: R_CKCORE_PCREL_IMM26BY2	memset
+  2c:	e9040006 	bez      	r4, 0x38	// 38 <aout_free+0x38>
+  30:	8464      	ld.b      	r3, (r4, 0x4)
+  32:	e9030003 	bez      	r3, 0x38	// 38 <aout_free+0x38>
+  36:	a4a4      	st.b      	r5, (r4, 0x4)
+  38:	3000      	movi      	r0, 0
+  3a:	1492      	pop      	r4-r5, r15
+
+Disassembly of section .text.aout_config_cb:
+
+00000000 <aout_config_cb>:
+   0:	9140      	ld.w      	r2, (r1, 0x0)
+   2:	e902000d 	bez      	r2, 0x1c	// 1c <aout_config_cb+0x1c>
+   6:	ea2ca0b0 	movih      	r12, 41136
+   a:	d86c2002 	ld.w      	r3, (r12, 0x8)
+   e:	ec630001 	ori      	r3, r3, 1
+  12:	dc6c2002 	st.w      	r3, (r12, 0x8)
+  16:	b04a      	st.w      	r2, (r0, 0x28)
+  18:	3201      	movi      	r2, 1
+  1a:	a05b      	st.b      	r2, (r0, 0x1b)
+  1c:	9161      	ld.w      	r3, (r1, 0x4)
+  1e:	e9030005 	bez      	r3, 0x28	// 28 <aout_config_cb+0x28>
+  22:	b06b      	st.w      	r3, (r0, 0x2c)
+  24:	3300      	movi      	r3, 0
+  26:	a07a      	st.b      	r3, (r0, 0x1a)
+  28:	3000      	movi      	r0, 0
+  2a:	783c      	jmp      	r15
+
+Disassembly of section .text.aout_exit:
+
+00000000 <aout_exit>:
+   0:	14d1      	push      	r4, r15
+   2:	ea23a0b0 	movih      	r3, 41136
+   6:	3400      	movi      	r4, 0
+   8:	9348      	ld.w      	r2, (r3, 0x20)
+   a:	3a81      	bclri      	r2, 1
+   c:	b348      	st.w      	r2, (r3, 0x20)
+   e:	9348      	ld.w      	r2, (r3, 0x20)
+  10:	3a82      	bclri      	r2, 2
+  12:	b348      	st.w      	r2, (r3, 0x20)
+  14:	9348      	ld.w      	r2, (r3, 0x20)
+  16:	3a83      	bclri      	r2, 3
+  18:	b348      	st.w      	r2, (r3, 0x20)
+  1a:	6c53      	mov      	r1, r4
+  1c:	300b      	movi      	r0, 11
+  1e:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			1e: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  22:	6c53      	mov      	r1, r4
+  24:	300f      	movi      	r0, 15
+  26:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			26: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  2a:	6c13      	mov      	r0, r4
+  2c:	1491      	pop      	r4, r15

@@ -1,0 +1,19 @@
+{
+  "status": 200,
+  "response": {
+    "success": true,
+    "project": "FlashDBBlobScratch",
+    "headless": false,
+    "program_launch_result": {
+      "success": false,
+      "error": "Program not found in project: /ghidra-view.elf",
+      "requested_path": "/ghidra-view.elf",
+      "diagnostics": {
+        "project_name": "SyntheticSmoke",
+        "project_server_bound": false,
+        "available_program_paths": [],
+        "suggestion": "Project is local-only (not bound to a Ghidra Server). A file checked out on a separate server connection does not appear here: open a shared project via /open_project with a ghidra://host[:port]/repo URL instead."
+      }
+    }
+  }
+}

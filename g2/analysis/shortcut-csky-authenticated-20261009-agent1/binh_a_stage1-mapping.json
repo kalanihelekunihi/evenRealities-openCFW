@@ -1,0 +1,76 @@
+{
+  "image": "binh_a_stage1",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage1.bin",
+  "source_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "source_size": 12288,
+  "file_to_conditional_runtime_addend": 268435432,
+  "analyzed_runtime_span": [
+    268438220,
+    268438280
+  ],
+  "analyzed_child_span": [
+    2788,
+    2848
+  ],
+  "component_span": [
+    38284,
+    50572
+  ],
+  "route": {
+    "device_pointer": null,
+    "evidence": [
+      {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-binh-stage1-header-contract-057/001/proposal.json",
+        "role": "header_bytes",
+        "sha256": "3ecfd2fb67c22d7942277ad1cce0e3abbd67b0fb8a0d5762f2a0095af9590556"
+      },
+      {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-binh-stage1-header-contract-058/review.json",
+        "role": "other_bytes",
+        "sha256": "af60187f9963ae00a94ff9bfe6bdf6d122c6d7dde64967950f1d330669df2261"
+      }
+    ],
+    "expected_execution": {
+      "entry_address": 268435712,
+      "entry_offset": 256,
+      "image_span": [
+        0,
+        12288
+      ],
+      "space": "IRAM",
+      "span": [
+        268435456,
+        268447744
+      ]
+    },
+    "external_refs": [
+      "external_select_binh_a_stage1",
+      "binh-a_stage1_delivery",
+      "binh-a_dram_iram_visibility"
+    ],
+    "loader_context": null,
+    "p2_unresolved": [
+      "The header and vector support the expected tuple only; which image the resident loader selects and the actual DRAM-to-IRAM delivery remain external.",
+      "Other vector entries and full stage1 root closure remain P2."
+    ],
+    "route_id": "binh_a_stage1-external-binh-header-delivery",
+    "selection": {
+      "dependency_id": "external_select_binh_a_stage1",
+      "kind": "external_selected_image",
+      "selected_image_id": "binh_a_stage1",
+      "source_origin": {
+        "image_id": "codec",
+        "kind": "locked_payload",
+        "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+        "span": [
+          0,
+          326092
+        ]
+      },
+      "status": "external_unverified"
+    },
+    "transfer_kind": "external_delivery",
+    "write": null
+  },
+  "qualification": "Stage1 header subtraction is intended coordinate hypothesis, resident delivery unverified. Stage2 normal route remains conditional."
+}

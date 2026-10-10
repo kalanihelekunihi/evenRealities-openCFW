@@ -1,0 +1,21 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/ldo.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_analog_set_ldo_ana_voltage:
+
+00000000 <gx_analog_set_ldo_ana_voltage>:
+   0:	3300      	movi      	r3, 0
+   2:	2b00      	subi      	r3, 1
+   4:	64c2      	cmpne      	r0, r3
+   6:	0c09      	bf      	0x18	// 18 <gx_analog_set_ldo_ana_voltage+0x18>
+   8:	1045      	lrw      	r2, 0xa0005000	// 1c <gx_analog_set_ldo_ana_voltage+0x1c>
+   a:	9275      	ld.w      	r3, (r2, 0x54)
+   c:	e46320f0 	andi      	r3, r3, 240
+  10:	6c0c      	or      	r0, r3
+  12:	7400      	zextb      	r0, r0
+  14:	b215      	st.w      	r0, (r2, 0x54)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	0000      	.short	0x0000
+  1c:	a0005000 	.long	0xa0005000

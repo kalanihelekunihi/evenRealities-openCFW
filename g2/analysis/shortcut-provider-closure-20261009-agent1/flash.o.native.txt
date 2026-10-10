@@ -1,0 +1,533 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/flash.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_spi_flash_probe:
+
+00000000 <gx_spi_flash_probe>:
+   0:	ebe00038 	push      	r4-r11, r15, r16
+   4:	6e03      	mov      	r8, r0
+   6:	6e47      	mov      	r9, r1
+   8:	6e8b      	mov      	r10, r2
+   a:	6ecf      	mov      	r11, r3
+   c:	e0000000 	bsr      	0x0	// 0 <gx_get_time_us>
+			c: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+  10:	6d83      	mov      	r6, r0
+  12:	6dc7      	mov      	r7, r1
+  14:	108f      	lrw      	r4, 0x0	// 50 <gx_spi_flash_probe+0x50>
+  16:	ea900010 	lrw      	r16, 0x0	// 54 <gx_spi_flash_probe+0x54>
+  1a:	10b0      	lrw      	r5, 0x4c4b3f	// 58 <gx_spi_flash_probe+0x58>
+  1c:	8460      	ld.b      	r3, (r4, 0x0)
+  1e:	3b01      	cmphsi      	r3, 2
+  20:	080e      	bt      	0x3c	// 3c <gx_spi_flash_probe+0x3c>
+  22:	6cef      	mov      	r3, r11
+  24:	6cab      	mov      	r2, r10
+  26:	6c67      	mov      	r1, r9
+  28:	6c23      	mov      	r0, r8
+  2a:	d9902000 	ld.w      	r12, (r16, 0x0)
+  2e:	7bf1      	jsr      	r12
+  30:	e9000006 	bez      	r0, 0x3c	// 3c <gx_spi_flash_probe+0x3c>
+  34:	3301      	movi      	r3, 1
+  36:	a460      	st.b      	r3, (r4, 0x0)
+  38:	ebc00038 	pop      	r4-r11, r15, r16
+  3c:	e0000000 	bsr      	0x0	// 0 <gx_get_time_us>
+			3c: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+  40:	f8c0c460 	sub.64      	r0, r0, r6
+  44:	e9210004 	bnez      	r1, 0x4c	// 4c <gx_spi_flash_probe+0x4c>
+  48:	6414      	cmphs      	r5, r0
+  4a:	0be9      	bt      	0x1c	// 1c <gx_spi_flash_probe+0x1c>
+  4c:	3000      	movi      	r0, 0
+  4e:	07f5      	br      	0x38	// 38 <gx_spi_flash_probe+0x38>
+	...
+			50: R_CKCORE_ADDR32	.bss
+			54: R_CKCORE_ADDR32	flash_spi_dev
+  58:	004c4b3f 	.long	0x004c4b3f
+
+Disassembly of section .text.gx_spi_flash_readdata:
+
+00000000 <gx_spi_flash_readdata>:
+   0:	14d0      	push      	r15
+   2:	d9802001 	ld.w      	r12, (r0, 0x4)
+   6:	6f47      	mov      	r13, r1
+   8:	6c4b      	mov      	r1, r2
+   a:	e90c0006 	bez      	r12, 0x16	// 16 <gx_spi_flash_readdata+0x16>
+   e:	6c8f      	mov      	r2, r3
+  10:	6c37      	mov      	r0, r13
+  12:	7bf1      	jsr      	r12
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_spi_flash_readdata+0x14>
+
+Disassembly of section .text.gx_spi_flash_chiperase:
+
+00000000 <gx_spi_flash_chiperase>:
+   0:	14d0      	push      	r15
+   2:	9002      	ld.w      	r0, (r0, 0x8)
+   4:	e9000004 	bez      	r0, 0xc	// c <gx_spi_flash_chiperase+0xc>
+   8:	7bc1      	jsr      	r0
+   a:	1490      	pop      	r15
+   c:	3000      	movi      	r0, 0
+   e:	2800      	subi      	r0, 1
+  10:	07fd      	br      	0xa	// a <gx_spi_flash_chiperase+0xa>
+
+Disassembly of section .text.gx_spi_flash_erasedata:
+
+00000000 <gx_spi_flash_erasedata>:
+   0:	14d0      	push      	r15
+   2:	9063      	ld.w      	r3, (r0, 0xc)
+   4:	6f07      	mov      	r12, r1
+   6:	e9030006 	bez      	r3, 0x12	// 12 <gx_spi_flash_erasedata+0x12>
+   a:	6c4b      	mov      	r1, r2
+   c:	6c33      	mov      	r0, r12
+   e:	7bcd      	jsr      	r3
+  10:	1490      	pop      	r15
+  12:	3000      	movi      	r0, 0
+  14:	2800      	subi      	r0, 1
+  16:	07fd      	br      	0x10	// 10 <gx_spi_flash_erasedata+0x10>
+
+Disassembly of section .text.gx_spi_flash_pageprogram:
+
+00000000 <gx_spi_flash_pageprogram>:
+   0:	14d0      	push      	r15
+   2:	d9802004 	ld.w      	r12, (r0, 0x10)
+   6:	6f47      	mov      	r13, r1
+   8:	6c4b      	mov      	r1, r2
+   a:	e90c0006 	bez      	r12, 0x16	// 16 <gx_spi_flash_pageprogram+0x16>
+   e:	6c8f      	mov      	r2, r3
+  10:	6c37      	mov      	r0, r13
+  12:	7bf1      	jsr      	r12
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_spi_flash_pageprogram+0x14>
+
+Disassembly of section .text.gx_spi_flash_sync:
+
+00000000 <gx_spi_flash_sync>:
+   0:	14d0      	push      	r15
+   2:	9065      	ld.w      	r3, (r0, 0x14)
+   4:	e9030003 	bez      	r3, 0xa	// a <gx_spi_flash_sync+0xa>
+   8:	7bcd      	jsr      	r3
+   a:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spi_flash_test:
+
+00000000 <gx_spi_flash_test>:
+   0:	14d0      	push      	r15
+   2:	9066      	ld.w      	r3, (r0, 0x18)
+   4:	6f07      	mov      	r12, r1
+   6:	e9030005 	bez      	r3, 0x10	// 10 <gx_spi_flash_test+0x10>
+   a:	6c4b      	mov      	r1, r2
+   c:	6c33      	mov      	r0, r12
+   e:	7bcd      	jsr      	r3
+  10:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spi_flash_calcblockrange:
+
+00000000 <gx_spi_flash_calcblockrange>:
+   0:	14d0      	push      	r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	d9802007 	ld.w      	r12, (r0, 0x1c)
+   8:	6f47      	mov      	r13, r1
+   a:	6c4b      	mov      	r1, r2
+   c:	6c8f      	mov      	r2, r3
+   e:	9862      	ld.w      	r3, (r14, 0x8)
+  10:	b860      	st.w      	r3, (r14, 0x0)
+  12:	e90c0004 	bez      	r12, 0x1a	// 1a <gx_spi_flash_calcblockrange+0x1a>
+  16:	6c37      	mov      	r0, r13
+  18:	7bf1      	jsr      	r12
+  1a:	1401      	addi      	r14, r14, 4
+  1c:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spi_flash_badinfo:
+
+00000000 <gx_spi_flash_badinfo>:
+   0:	14d0      	push      	r15
+   2:	9008      	ld.w      	r0, (r0, 0x20)
+   4:	e9000004 	bez      	r0, 0xc	// c <gx_spi_flash_badinfo+0xc>
+   8:	7bc1      	jsr      	r0
+   a:	1490      	pop      	r15
+   c:	3000      	movi      	r0, 0
+   e:	2800      	subi      	r0, 1
+  10:	07fd      	br      	0xa	// a <gx_spi_flash_badinfo+0xa>
+
+Disassembly of section .text.gx_spi_flash_pageprogram_yaffs2:
+
+00000000 <gx_spi_flash_pageprogram_yaffs2>:
+   0:	14d0      	push      	r15
+   2:	d9802009 	ld.w      	r12, (r0, 0x24)
+   6:	6f47      	mov      	r13, r1
+   8:	6c4b      	mov      	r1, r2
+   a:	e90c0006 	bez      	r12, 0x16	// 16 <gx_spi_flash_pageprogram_yaffs2+0x16>
+   e:	6c8f      	mov      	r2, r3
+  10:	6c37      	mov      	r0, r13
+  12:	7bf1      	jsr      	r12
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_spi_flash_pageprogram_yaffs2+0x14>
+
+Disassembly of section .text.gx_spi_flash_readoob:
+
+00000000 <gx_spi_flash_readoob>:
+   0:	14d0      	push      	r15
+   2:	d980200a 	ld.w      	r12, (r0, 0x28)
+   6:	6f47      	mov      	r13, r1
+   8:	6c4b      	mov      	r1, r2
+   a:	e90c0006 	bez      	r12, 0x16	// 16 <gx_spi_flash_readoob+0x16>
+   e:	6c8f      	mov      	r2, r3
+  10:	6c37      	mov      	r0, r13
+  12:	7bf1      	jsr      	r12
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_spi_flash_readoob+0x14>
+
+Disassembly of section .text.gx_spi_flash_writeoob:
+
+00000000 <gx_spi_flash_writeoob>:
+   0:	14d0      	push      	r15
+   2:	d980200b 	ld.w      	r12, (r0, 0x2c)
+   6:	6f47      	mov      	r13, r1
+   8:	6c4b      	mov      	r1, r2
+   a:	e90c0006 	bez      	r12, 0x16	// 16 <gx_spi_flash_writeoob+0x16>
+   e:	6c8f      	mov      	r2, r3
+  10:	6c37      	mov      	r0, r13
+  12:	7bf1      	jsr      	r12
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_spi_flash_writeoob+0x14>
+
+Disassembly of section .text.gx_spi_flash_gettype:
+
+00000000 <gx_spi_flash_gettype>:
+   0:	14d0      	push      	r15
+   2:	900c      	ld.w      	r0, (r0, 0x30)
+   4:	e9000003 	bez      	r0, 0xa	// a <gx_spi_flash_gettype+0xa>
+   8:	7bc1      	jsr      	r0
+   a:	1490      	pop      	r15
+
+Disassembly of section .text.gx_spi_flash_getinfo:
+
+00000000 <gx_spi_flash_getinfo>:
+   0:	14d0      	push      	r15
+   2:	906d      	ld.w      	r3, (r0, 0x34)
+   4:	e9030005 	bez      	r3, 0xe	// e <gx_spi_flash_getinfo+0xe>
+   8:	6c07      	mov      	r0, r1
+   a:	7bcd      	jsr      	r3
+   c:	1490      	pop      	r15
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	07fd      	br      	0xc	// c <gx_spi_flash_getinfo+0xc>
+
+Disassembly of section .text.gx_spi_flash_getuid:
+
+00000000 <gx_spi_flash_getuid>:
+   0:	14d0      	push      	r15
+   2:	d980201d 	ld.w      	r12, (r0, 0x74)
+   6:	6f47      	mov      	r13, r1
+   8:	6c4b      	mov      	r1, r2
+   a:	e90c0006 	bez      	r12, 0x16	// 16 <gx_spi_flash_getuid+0x16>
+   e:	6c8f      	mov      	r2, r3
+  10:	6c37      	mov      	r0, r13
+  12:	7bf1      	jsr      	r12
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_spi_flash_getuid+0x14>
+
+Disassembly of section .text.gx_spi_flash_write_protect_mode:
+
+00000000 <gx_spi_flash_write_protect_mode>:
+   0:	14d0      	push      	r15
+   2:	900e      	ld.w      	r0, (r0, 0x38)
+   4:	e9000004 	bez      	r0, 0xc	// c <gx_spi_flash_write_protect_mode+0xc>
+   8:	7bc1      	jsr      	r0
+   a:	1490      	pop      	r15
+   c:	3000      	movi      	r0, 0
+   e:	2800      	subi      	r0, 1
+  10:	07fd      	br      	0xa	// a <gx_spi_flash_write_protect_mode+0xa>
+
+Disassembly of section .text.gx_spi_flash_write_protect_status:
+
+00000000 <gx_spi_flash_write_protect_status>:
+   0:	14d0      	push      	r15
+   2:	906f      	ld.w      	r3, (r0, 0x3c)
+   4:	e9030005 	bez      	r3, 0xe	// e <gx_spi_flash_write_protect_status+0xe>
+   8:	6c07      	mov      	r0, r1
+   a:	7bcd      	jsr      	r3
+   c:	1490      	pop      	r15
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	07fd      	br      	0xc	// c <gx_spi_flash_write_protect_status+0xc>
+
+Disassembly of section .text.gx_spi_flash_write_protect_lock:
+
+00000000 <gx_spi_flash_write_protect_lock>:
+   0:	14d0      	push      	r15
+   2:	9070      	ld.w      	r3, (r0, 0x40)
+   4:	e9030005 	bez      	r3, 0xe	// e <gx_spi_flash_write_protect_lock+0xe>
+   8:	6c07      	mov      	r0, r1
+   a:	7bcd      	jsr      	r3
+   c:	1490      	pop      	r15
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	07fd      	br      	0xc	// c <gx_spi_flash_write_protect_lock+0xc>
+
+Disassembly of section .text.gx_spi_flash_write_protect_unlock:
+
+00000000 <gx_spi_flash_write_protect_unlock>:
+   0:	14d0      	push      	r15
+   2:	9011      	ld.w      	r0, (r0, 0x44)
+   4:	e9000004 	bez      	r0, 0xc	// c <gx_spi_flash_write_protect_unlock+0xc>
+   8:	7bc1      	jsr      	r0
+   a:	1490      	pop      	r15
+   c:	3000      	movi      	r0, 0
+   e:	2800      	subi      	r0, 1
+  10:	07fd      	br      	0xa	// a <gx_spi_flash_write_protect_unlock+0xa>
+
+Disassembly of section .text.gx_spi_flash_block_isbad:
+
+00000000 <gx_spi_flash_block_isbad>:
+   0:	14d0      	push      	r15
+   2:	907b      	ld.w      	r3, (r0, 0x6c)
+   4:	e9030005 	bez      	r3, 0xe	// e <gx_spi_flash_block_isbad+0xe>
+   8:	6c07      	mov      	r0, r1
+   a:	7bcd      	jsr      	r3
+   c:	1490      	pop      	r15
+   e:	6c0f      	mov      	r0, r3
+  10:	07fe      	br      	0xc	// c <gx_spi_flash_block_isbad+0xc>
+
+Disassembly of section .text.gx_spi_flash_otp_lock:
+
+00000000 <gx_spi_flash_otp_lock>:
+   0:	14d0      	push      	r15
+   2:	9012      	ld.w      	r0, (r0, 0x48)
+   4:	e9000004 	bez      	r0, 0xc	// c <gx_spi_flash_otp_lock+0xc>
+   8:	7bc1      	jsr      	r0
+   a:	1490      	pop      	r15
+   c:	3000      	movi      	r0, 0
+   e:	2800      	subi      	r0, 1
+  10:	07fd      	br      	0xa	// a <gx_spi_flash_otp_lock+0xa>
+
+Disassembly of section .text.gx_spi_flash_otp_status:
+
+00000000 <gx_spi_flash_otp_status>:
+   0:	14d0      	push      	r15
+   2:	9073      	ld.w      	r3, (r0, 0x4c)
+   4:	e9030005 	bez      	r3, 0xe	// e <gx_spi_flash_otp_status+0xe>
+   8:	6c07      	mov      	r0, r1
+   a:	7bcd      	jsr      	r3
+   c:	1490      	pop      	r15
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	07fd      	br      	0xc	// c <gx_spi_flash_otp_status+0xc>
+
+Disassembly of section .text.gx_spi_flash_otp_erase:
+
+00000000 <gx_spi_flash_otp_erase>:
+   0:	14d0      	push      	r15
+   2:	9014      	ld.w      	r0, (r0, 0x50)
+   4:	e9000004 	bez      	r0, 0xc	// c <gx_spi_flash_otp_erase+0xc>
+   8:	7bc1      	jsr      	r0
+   a:	1490      	pop      	r15
+   c:	3000      	movi      	r0, 0
+   e:	2800      	subi      	r0, 1
+  10:	07fd      	br      	0xa	// a <gx_spi_flash_otp_erase+0xa>
+
+Disassembly of section .text.gx_spi_flash_otp_write:
+
+00000000 <gx_spi_flash_otp_write>:
+   0:	14d0      	push      	r15
+   2:	d9802015 	ld.w      	r12, (r0, 0x54)
+   6:	6f47      	mov      	r13, r1
+   8:	6c4b      	mov      	r1, r2
+   a:	e90c0006 	bez      	r12, 0x16	// 16 <gx_spi_flash_otp_write+0x16>
+   e:	6c8f      	mov      	r2, r3
+  10:	6c37      	mov      	r0, r13
+  12:	7bf1      	jsr      	r12
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_spi_flash_otp_write+0x14>
+
+Disassembly of section .text.gx_spi_flash_otp_read:
+
+00000000 <gx_spi_flash_otp_read>:
+   0:	14d0      	push      	r15
+   2:	d9802016 	ld.w      	r12, (r0, 0x58)
+   6:	6f47      	mov      	r13, r1
+   8:	6c4b      	mov      	r1, r2
+   a:	e90c0006 	bez      	r12, 0x16	// 16 <gx_spi_flash_otp_read+0x16>
+   e:	6c8f      	mov      	r2, r3
+  10:	6c37      	mov      	r0, r13
+  12:	7bf1      	jsr      	r12
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_spi_flash_otp_read+0x14>
+
+Disassembly of section .text.gx_spi_flash_otp_get_region:
+
+00000000 <gx_spi_flash_otp_get_region>:
+   0:	14d0      	push      	r15
+   2:	9077      	ld.w      	r3, (r0, 0x5c)
+   4:	e9030005 	bez      	r3, 0xe	// e <gx_spi_flash_otp_get_region+0xe>
+   8:	6c07      	mov      	r0, r1
+   a:	7bcd      	jsr      	r3
+   c:	1490      	pop      	r15
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	07fd      	br      	0xc	// c <gx_spi_flash_otp_get_region+0xc>
+
+Disassembly of section .text.gx_spi_flash_otp_set_region:
+
+00000000 <gx_spi_flash_otp_set_region>:
+   0:	14d0      	push      	r15
+   2:	9078      	ld.w      	r3, (r0, 0x60)
+   4:	e9030005 	bez      	r3, 0xe	// e <gx_spi_flash_otp_set_region+0xe>
+   8:	6c07      	mov      	r0, r1
+   a:	7bcd      	jsr      	r3
+   c:	1490      	pop      	r15
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	07fd      	br      	0xc	// c <gx_spi_flash_otp_set_region+0xc>
+
+Disassembly of section .text.gx_spi_flash_otp_get_current_region:
+
+00000000 <gx_spi_flash_otp_get_current_region>:
+   0:	14d0      	push      	r15
+   2:	9079      	ld.w      	r3, (r0, 0x64)
+   4:	e9030005 	bez      	r3, 0xe	// e <gx_spi_flash_otp_get_current_region+0xe>
+   8:	6c07      	mov      	r0, r1
+   a:	7bcd      	jsr      	r3
+   c:	1490      	pop      	r15
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	07fd      	br      	0xc	// c <gx_spi_flash_otp_get_current_region+0xc>
+
+Disassembly of section .text.gx_spi_flash_otp_get_region_size:
+
+00000000 <gx_spi_flash_otp_get_region_size>:
+   0:	14d0      	push      	r15
+   2:	907a      	ld.w      	r3, (r0, 0x68)
+   4:	e9030005 	bez      	r3, 0xe	// e <gx_spi_flash_otp_get_region_size+0xe>
+   8:	6c07      	mov      	r0, r1
+   a:	7bcd      	jsr      	r3
+   c:	1490      	pop      	r15
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	07fd      	br      	0xc	// c <gx_spi_flash_otp_get_region_size+0xc>
+
+Disassembly of section .text.gx_spi_flash_calc_phy_offset:
+
+00000000 <gx_spi_flash_calc_phy_offset>:
+   0:	14d0      	push      	r15
+   2:	d980201c 	ld.w      	r12, (r0, 0x70)
+   6:	6f47      	mov      	r13, r1
+   8:	6c4b      	mov      	r1, r2
+   a:	e90c0006 	bez      	r12, 0x16	// 16 <gx_spi_flash_calc_phy_offset+0x16>
+   e:	6c8f      	mov      	r2, r3
+  10:	6c37      	mov      	r0, r13
+  12:	7bf1      	jsr      	r12
+  14:	1490      	pop      	r15
+  16:	b340      	st.w      	r2, (r3, 0x0)
+  18:	6c33      	mov      	r0, r12
+  1a:	07fd      	br      	0x14	// 14 <gx_spi_flash_calc_phy_offset+0x14>
+
+Disassembly of section .text.gx_spi_flash_logic_read:
+
+00000000 <gx_spi_flash_logic_read>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	1422      	subi      	r14, r14, 8
+   4:	6d8f      	mov      	r6, r3
+   6:	9866      	ld.w      	r3, (r14, 0x18)
+   8:	b860      	st.w      	r3, (r14, 0x0)
+   a:	3300      	movi      	r3, 0
+   c:	b861      	st.w      	r3, (r14, 0x4)
+   e:	1b01      	addi      	r3, r14, 4
+  10:	6d03      	mov      	r4, r0
+  12:	6d47      	mov      	r5, r1
+  14:	e0000000 	bsr      	0x0	// 0 <gx_spi_flash_logic_read>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_spi_flash_calc_phy_offset
+  18:	e980000a 	blz      	r0, 0x2c	// 2c <gx_spi_flash_logic_read+0x2c>
+  1c:	9821      	ld.w      	r1, (r14, 0x4)
+  1e:	9860      	ld.w      	r3, (r14, 0x0)
+  20:	6c9b      	mov      	r2, r6
+  22:	6054      	addu      	r1, r5
+  24:	6c13      	mov      	r0, r4
+  26:	e0000000 	bsr      	0x0	// 0 <gx_spi_flash_logic_read>
+			26: R_CKCORE_PCREL_IMM26BY2	gx_spi_flash_readdata
+  2a:	501f      	asri      	r0, r0, 31
+  2c:	1402      	addi      	r14, r14, 8
+  2e:	1493      	pop      	r4-r6, r15
+
+Disassembly of section .text.gx_spi_flash_logic_program:
+
+00000000 <gx_spi_flash_logic_program>:
+   0:	14d4      	push      	r4-r7, r15
+   2:	1422      	subi      	r14, r14, 8
+   4:	6dcf      	mov      	r7, r3
+   6:	9867      	ld.w      	r3, (r14, 0x1c)
+   8:	b860      	st.w      	r3, (r14, 0x0)
+   a:	3300      	movi      	r3, 0
+   c:	b861      	st.w      	r3, (r14, 0x4)
+   e:	1b01      	addi      	r3, r14, 4
+  10:	6d43      	mov      	r5, r0
+  12:	6d87      	mov      	r6, r1
+  14:	e0000000 	bsr      	0x0	// 0 <gx_spi_flash_logic_program>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_spi_flash_calc_phy_offset
+  18:	6d03      	mov      	r4, r0
+  1a:	e920000d 	bnez      	r0, 0x34	// 34 <gx_spi_flash_logic_program+0x34>
+  1e:	9821      	ld.w      	r1, (r14, 0x4)
+  20:	9860      	ld.w      	r3, (r14, 0x0)
+  22:	6c9f      	mov      	r2, r7
+  24:	6058      	addu      	r1, r6
+  26:	6c17      	mov      	r0, r5
+  28:	e0000000 	bsr      	0x0	// 0 <gx_spi_flash_logic_program>
+			28: R_CKCORE_PCREL_IMM26BY2	gx_spi_flash_pageprogram
+  2c:	481f      	lsri      	r0, r0, 31
+  2e:	5c01      	subu      	r0, r4, r0
+  30:	1402      	addi      	r14, r14, 8
+  32:	1494      	pop      	r4-r7, r15
+  34:	3000      	movi      	r0, 0
+  36:	2800      	subi      	r0, 1
+  38:	07fc      	br      	0x30	// 30 <gx_spi_flash_logic_program+0x30>
+
+Disassembly of section .text.gx_spi_flash_area_erase:
+
+00000000 <gx_spi_flash_area_erase>:
+   0:	14d4      	push      	r4-r7, r15
+   2:	906d      	ld.w      	r3, (r0, 0x34)
+   4:	6d43      	mov      	r5, r0
+   6:	6d07      	mov      	r4, r1
+   8:	6dcb      	mov      	r7, r2
+   a:	e9230005 	bnez      	r3, 0x14	// 14 <gx_spi_flash_area_erase+0x14>
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	1494      	pop      	r4-r7, r15
+  14:	9043      	ld.w      	r2, (r0, 0xc)
+  16:	e902fffc 	bez      	r2, 0xe	// e <gx_spi_flash_area_erase+0xe>
+  1a:	3004      	movi      	r0, 4
+  1c:	7bcd      	jsr      	r3
+  1e:	5843      	subi      	r2, r0, 1
+  20:	5c7c      	addu      	r3, r4, r7
+  22:	68c8      	and      	r3, r2
+  24:	6d83      	mov      	r6, r0
+  26:	e923fff4 	bnez      	r3, 0xe	// e <gx_spi_flash_area_erase+0xe>
+  2a:	65d0      	cmphs      	r4, r7
+  2c:	0c03      	bf      	0x32	// 32 <gx_spi_flash_area_erase+0x32>
+  2e:	3000      	movi      	r0, 0
+  30:	07f1      	br      	0x12	// 12 <gx_spi_flash_area_erase+0x12>
+  32:	957b      	ld.w      	r3, (r5, 0x6c)
+  34:	6c13      	mov      	r0, r4
+  36:	7bcd      	jsr      	r3
+  38:	e9200006 	bnez      	r0, 0x44	// 44 <gx_spi_flash_area_erase+0x44>
+  3c:	9563      	ld.w      	r3, (r5, 0xc)
+  3e:	6c5b      	mov      	r1, r6
+  40:	6c13      	mov      	r0, r4
+  42:	7bcd      	jsr      	r3
+  44:	6118      	addu      	r4, r6
+  46:	07f2      	br      	0x2a	// 2a <gx_spi_flash_area_erase+0x2a>

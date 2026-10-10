@@ -1,0 +1,140 @@
+{
+  "count": 6,
+  "all_pass": true,
+  "database_base": "0x2005dffc",
+  "cases": [
+    {
+      "database_input": 0,
+      "length_input": 0,
+      "provider_return": 0,
+      "saved_len": 0,
+      "trace": [
+        "tick",
+        {
+          "kind": "get-blob-boundary",
+          "database": "0x2005dffc",
+          "key": "0x20080000",
+          "blob": "0x200fefd8",
+          "blob_fields": "0010082000000000a7a7a7a7a7a7a7a7a7a7a7a7",
+          "public_blob_make_equal": true
+        },
+        "flags-zero",
+        "flags-zero",
+        "flags-zero",
+        "tick"
+      ],
+      "return_unchanged": true,
+      "output_key_unchanged": true,
+      "pass_": true
+    },
+    {
+      "database_input": 1,
+      "length_input": 1,
+      "provider_return": 1,
+      "saved_len": 1,
+      "trace": [
+        "tick",
+        {
+          "kind": "get-blob-boundary",
+          "database": "0x2005e8a8",
+          "key": "0x20080000",
+          "blob": "0x200fefd8",
+          "blob_fields": "0010082001000000a7a7a7a7a7a7a7a7a7a7a7a7",
+          "public_blob_make_equal": true
+        },
+        "tick"
+      ],
+      "return_unchanged": true,
+      "output_key_unchanged": true,
+      "pass_": true
+    },
+    {
+      "database_input": 2,
+      "length_input": 65535,
+      "provider_return": 16,
+      "saved_len": 16,
+      "trace": [
+        "tick",
+        {
+          "kind": "get-blob-boundary",
+          "database": "0x2005f154",
+          "key": "0x20080000",
+          "blob": "0x200fefd8",
+          "blob_fields": "00100820ffff0000a7a7a7a7a7a7a7a7a7a7a7a7",
+          "public_blob_make_equal": true
+        },
+        "tick"
+      ],
+      "return_unchanged": true,
+      "output_key_unchanged": true,
+      "pass_": true
+    },
+    {
+      "database_input": 257,
+      "length_input": 65537,
+      "provider_return": 0,
+      "saved_len": 7,
+      "trace": [
+        "tick",
+        {
+          "kind": "get-blob-boundary",
+          "database": "0x2005e8a8",
+          "key": "0x20080000",
+          "blob": "0x200fefd8",
+          "blob_fields": "0010082001000000a7a7a7a7a7a7a7a7a7a7a7a7",
+          "public_blob_make_equal": true
+        },
+        "tick"
+      ],
+      "return_unchanged": true,
+      "output_key_unchanged": true,
+      "pass_": true
+    },
+    {
+      "database_input": 0,
+      "length_input": 5,
+      "provider_return": 3,
+      "saved_len": 0,
+      "trace": [
+        "tick",
+        {
+          "kind": "get-blob-boundary",
+          "database": "0x2005dffc",
+          "key": "0x20080000",
+          "blob": "0x200fefd8",
+          "blob_fields": "0010082005000000a7a7a7a7a7a7a7a7a7a7a7a7",
+          "public_blob_make_equal": true
+        },
+        "flags-zero",
+        "flags-zero",
+        "flags-zero",
+        "tick"
+      ],
+      "return_unchanged": true,
+      "output_key_unchanged": true,
+      "pass_": true
+    },
+    {
+      "database_input": 255,
+      "length_input": 4294967295,
+      "provider_return": 9,
+      "saved_len": 3,
+      "trace": [
+        "tick",
+        {
+          "kind": "get-blob-boundary",
+          "database": "0x200e8350",
+          "key": "0x20080000",
+          "blob": "0x200fefd8",
+          "blob_fields": "00100820ffff0000a7a7a7a7a7a7a7a7a7a7a7a7",
+          "public_blob_make_equal": true
+        },
+        "tick"
+      ],
+      "return_unchanged": true,
+      "output_key_unchanged": true,
+      "pass_": true
+    }
+  ],
+  "scope": "stock adapter vs genuine public ARM blob_make; get-blob/tick/flags mocked, no flash I/O"
+}

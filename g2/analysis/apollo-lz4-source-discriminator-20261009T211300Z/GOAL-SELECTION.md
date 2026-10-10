@@ -1,0 +1,7 @@
+# Selected finite middleware opportunity
+
+Closed DSP/negation, audio/UART/power and HCI probes were excluded. Current consolidated library/source ledger and both repository instructions were inspected; emulator buzzer prohibition honored. LZ4 was selected because three exact hash-bound decoder extents and an independent host decoder exist, but no retained original-instruction malformed-block comparator was found. Prior lineages alone did not establish acceptance/error semantics. Public version endpoints were already catalogued; no new library-family discovery is claimed.
+
+Official LZ4v1.9.4 C/header/license was missing from selected registered paths; dedicated lz4 module was empty. Existing LVGL already had an adapted1.10.0 source, so retained official1.10.0 is an upstream comparator copy, not a claimed new dependency. The new block-format specification distinguishes corrupt zero-offset acceptance from protocol validity. No submodule/index/pin was initialized or changed. Tag commits and hashes bind the acquisitions.
+
+Other inspected candidates remain separate: touch/case fixed compiler experiments have producing recipe/runtime gaps; EM4.2 timer/IRQ and custom extension semantics need exact compatible inputs; private runtime/controller/GSC sources and platform states remain unavailable. Discovery independently owns the newly recovered Ambiq5.2 IAR Nema oracle; owner did not download or test it. These are local finite boundaries, not proof all public source opportunities are exhausted.

@@ -1,0 +1,163 @@
+
+/tmp/iom-strdis-main.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0053076e <.data+0xf876e>:
+  53076e:	b5fe      	push	{r1, r2, r3, r4, r5, r6, r7, lr}
+  530770:	0005      	movs	r5, r0
+  530772:	000c      	movs	r4, r1
+  530774:	0016      	movs	r6, r2
+  530776:	0020      	movs	r0, r4
+  530778:	b280      	uxth	r0, r0
+  53077a:	2804      	cmp	r0, #4
+  53077c:	f2c0 80b2 	blt.w	0x5308e4
+  530780:	0028      	movs	r0, r5
+  530782:	b280      	uxth	r0, r0
+  530784:	f786 fb87 	bl	0x4b6e96
+  530788:	0001      	movs	r1, r0
+  53078a:	b2c0      	uxtb	r0, r0
+  53078c:	2800      	cmp	r0, #0
+  53078e:	f000 80a9 	beq.w	0x5308e4
+  530792:	0008      	movs	r0, r1
+  530794:	b2c0      	uxtb	r0, r0
+  530796:	f786 fe15 	bl	0x4b73c4
+  53079a:	0007      	movs	r7, r0
+  53079c:	0038      	movs	r0, r7
+  53079e:	b2c0      	uxtb	r0, r0
+  5307a0:	2800      	cmp	r0, #0
+  5307a2:	d10c      	bne.n	0x5307be
+  5307a4:	f8df 33e8 	ldr.w	r3, [pc, #1000]	@ 0x530b90
+  5307a8:	6998      	ldr	r0, [r3, #24]
+  5307aa:	2800      	cmp	r0, #0
+  5307ac:	d007      	beq.n	0x5307be
+  5307ae:	0032      	movs	r2, r6
+  5307b0:	0021      	movs	r1, r4
+  5307b2:	b289      	uxth	r1, r1
+  5307b4:	0028      	movs	r0, r5
+  5307b6:	b280      	uxth	r0, r0
+  5307b8:	699b      	ldr	r3, [r3, #24]
+  5307ba:	4798      	blx	r3
+  5307bc:	e092      	b.n	0x5308e4
+  5307be:	0038      	movs	r0, r7
+  5307c0:	b2c0      	uxtb	r0, r0
+  5307c2:	2801      	cmp	r0, #1
+  5307c4:	d10c      	bne.n	0x5307e0
+  5307c6:	f8df 33c8 	ldr.w	r3, [pc, #968]	@ 0x530b90
+  5307ca:	69d8      	ldr	r0, [r3, #28]
+  5307cc:	2800      	cmp	r0, #0
+  5307ce:	d007      	beq.n	0x5307e0
+  5307d0:	0032      	movs	r2, r6
+  5307d2:	0021      	movs	r1, r4
+  5307d4:	b289      	uxth	r1, r1
+  5307d6:	0028      	movs	r0, r5
+  5307d8:	b280      	uxth	r0, r0
+  5307da:	69db      	ldr	r3, [r3, #28]
+  5307dc:	4798      	blx	r3
+  5307de:	e081      	b.n	0x5308e4
+  5307e0:	f799 fa36 	bl	0x4c9c50
+  5307e4:	2800      	cmp	r0, #0
+  5307e6:	d01a      	beq.n	0x53081e
+  5307e8:	a0ac      	add	r0, pc, #688	@ (adr r0, 0x530a9c)
+  5307ea:	2203      	movs	r2, #3
+  5307ec:	0001      	movs	r1, r0
+  5307ee:	f71a ff0f 	bl	0x44b610
+  5307f2:	2800      	cmp	r0, #0
+  5307f4:	d113      	bne.n	0x53081e
+  5307f6:	f70c fc6a 	bl	0x43d0ce
+  5307fa:	0780      	lsls	r0, r0, #30
+  5307fc:	d50e      	bpl.n	0x53081c
+  5307fe:	b2ff      	uxtb	r7, r7
+  530800:	9702      	str	r7, [sp, #8]
+  530802:	f8df 0390 	ldr.w	r0, [pc, #912]	@ 0x530b94
+  530806:	9001      	str	r0, [sp, #4]
+  530808:	2080      	movs	r0, #128	@ 0x80
+  53080a:	9000      	str	r0, [sp, #0]
+  53080c:	f8df 3388 	ldr.w	r3, [pc, #904]	@ 0x530b98
+  530810:	f8df 236c 	ldr.w	r2, [pc, #876]	@ 0x530b80
+  530814:	a1a2      	add	r1, pc, #648	@ (adr r1, 0x530aa0)
+  530816:	2001      	movs	r0, #1
+  530818:	f70c feac 	bl	0x43d574
+  53081c:	e062      	b.n	0x5308e4
+  53081e:	f799 fa17 	bl	0x4c9c50
+  530822:	2800      	cmp	r0, #0
+  530824:	d01b      	beq.n	0x53085e
+  530826:	2204      	movs	r2, #4
+  530828:	f8df 1348 	ldr.w	r1, [pc, #840]	@ 0x530b74
+  53082c:	a09b      	add	r0, pc, #620	@ (adr r0, 0x530a9c)
+  53082e:	f71a feef 	bl	0x44b610
+  530832:	2800      	cmp	r0, #0
+  530834:	d113      	bne.n	0x53085e
+  530836:	f70c fc4a 	bl	0x43d0ce
+  53083a:	0780      	lsls	r0, r0, #30
+  53083c:	d50e      	bpl.n	0x53085c
+  53083e:	b2ff      	uxtb	r7, r7
+  530840:	9702      	str	r7, [sp, #8]
+  530842:	f8df 0350 	ldr.w	r0, [pc, #848]	@ 0x530b94
+  530846:	9001      	str	r0, [sp, #4]
+  530848:	2080      	movs	r0, #128	@ 0x80
+  53084a:	9000      	str	r0, [sp, #0]
+  53084c:	f8df 3348 	ldr.w	r3, [pc, #840]	@ 0x530b98
+  530850:	f8df 232c 	ldr.w	r2, [pc, #812]	@ 0x530b80
+  530854:	a192      	add	r1, pc, #584	@ (adr r1, 0x530aa0)
+  530856:	2002      	movs	r0, #2
+  530858:	f70c fe8c 	bl	0x43d574
+  53085c:	e042      	b.n	0x5308e4
+  53085e:	f799 f9f7 	bl	0x4c9c50
+  530862:	2800      	cmp	r0, #0
+  530864:	d018      	beq.n	0x530898
+  530866:	2204      	movs	r2, #4
+  530868:	f8df 1318 	ldr.w	r1, [pc, #792]	@ 0x530b84
+  53086c:	a08b      	add	r0, pc, #556	@ (adr r0, 0x530a9c)
+  53086e:	f71a fecf 	bl	0x44b610
+  530872:	2800      	cmp	r0, #0
+  530874:	d110      	bne.n	0x530898
+  530876:	f70c fc2a 	bl	0x43d0ce
+  53087a:	0780      	lsls	r0, r0, #30
+  53087c:	d50b      	bpl.n	0x530896
+  53087e:	b2ff      	uxtb	r7, r7
+  530880:	9702      	str	r7, [sp, #8]
+  530882:	48c4      	ldr	r0, [pc, #784]	@ (0x530b94)
+  530884:	9001      	str	r0, [sp, #4]
+  530886:	2080      	movs	r0, #128	@ 0x80
+  530888:	9000      	str	r0, [sp, #0]
+  53088a:	4bc3      	ldr	r3, [pc, #780]	@ (0x530b98)
+  53088c:	4abc      	ldr	r2, [pc, #752]	@ (0x530b80)
+  53088e:	a184      	add	r1, pc, #528	@ (adr r1, 0x530aa0)
+  530890:	2003      	movs	r0, #3
+  530892:	f70c fe6f 	bl	0x43d574
+  530896:	e025      	b.n	0x5308e4
+  530898:	f799 f9da 	bl	0x4c9c50
+  53089c:	2800      	cmp	r0, #0
+  53089e:	d010      	beq.n	0x5308c2
+  5308a0:	f70c fc15 	bl	0x43d0ce
+  5308a4:	0780      	lsls	r0, r0, #30
+  5308a6:	d50b      	bpl.n	0x5308c0
+  5308a8:	b2ff      	uxtb	r7, r7
+  5308aa:	9702      	str	r7, [sp, #8]
+  5308ac:	48b9      	ldr	r0, [pc, #740]	@ (0x530b94)
+  5308ae:	9001      	str	r0, [sp, #4]
+  5308b0:	2080      	movs	r0, #128	@ 0x80
+  5308b2:	9000      	str	r0, [sp, #0]
+  5308b4:	4bb8      	ldr	r3, [pc, #736]	@ (0x530b98)
+  5308b6:	4ab2      	ldr	r2, [pc, #712]	@ (0x530b80)
+  5308b8:	a179      	add	r1, pc, #484	@ (adr r1, 0x530aa0)
+  5308ba:	2004      	movs	r0, #4
+  5308bc:	f70c fe5a 	bl	0x43d574
+  5308c0:	e010      	b.n	0x5308e4
+  5308c2:	f799 f9c5 	bl	0x4c9c50
+  5308c6:	2800      	cmp	r0, #0
+  5308c8:	d006      	beq.n	0x5308d8
+  5308ca:	2203      	movs	r2, #3
+  5308cc:	a183      	add	r1, pc, #524	@ (adr r1, 0x530adc)
+  5308ce:	a074      	add	r0, pc, #464	@ (adr r0, 0x530aa0)
+  5308d0:	f71a fe9e 	bl	0x44b610
+  5308d4:	2800      	cmp	r0, #0
+  5308d6:	d005      	beq.n	0x5308e4
+  5308d8:	b2ff      	uxtb	r7, r7
+  5308da:	003a      	movs	r2, r7
+  5308dc:	49ad      	ldr	r1, [pc, #692]	@ (0x530b94)
+  5308de:	a06f      	add	r0, pc, #444	@ (adr r0, 0x530a9c)
+  5308e0:	f7f9 feac 	bl	0x52a63c
+  5308e4:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}

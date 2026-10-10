@@ -1,0 +1,21 @@
+--- public-r20.05c/ble-host/sources/stack/l2c/l2c_main.c
++++ sdk5.2/ble-host/sources/stack/l2c/l2c_main.c
+@@ -105,6 +105,9 @@
+   uint8_t role;
+   dmConnId_t connId;
+ 
++  /* check the validity of data length */
++  L2C_CHECK_DATA_LENGTH(len, L2C_SIG_HDR_LEN);
++
+   if ((connId = DmConnIdByHandle(handle)) == DM_CONN_ID_NONE)
+   {
+     return;
+@@ -206,8 +209,6 @@
+ static void l2cHciFlowCback(uint16_t handle, bool_t flowDisabled)
+ {
+   wsfMsgHdr_t hdr;
+-
+-  L2C_TRACE_INFO2("flowDisabled=%u handle=%u", flowDisabled, handle);
+ 
+   /* get conn ID for handle */
+   if ((hdr.param = DmConnIdByHandle(handle)) != DM_CONN_ID_NONE)

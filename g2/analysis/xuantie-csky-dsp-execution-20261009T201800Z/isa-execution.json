@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/opt/homebrew/bin/docker",
+    "exec",
+    "opencfw-qemu-csky-resume-20261009t201800",
+    "timeout",
+    "15s",
+    "/tmp/qbuild2/qemu-system-cskyv2",
+    "-M",
+    "smartl",
+    "-cpu",
+    "ck804ef",
+    "-nographic",
+    "-monitor",
+    "none",
+    "-kernel",
+    "/out/isa.elf",
+    "-d",
+    "in_asm,int,guest_errors",
+    "-D",
+    "/out/isa-qemu.log"
+  ],
+  "returncode": 139,
+  "stdout": "",
+  "stderr": "timeout: the monitored command dumped core\n"
+}

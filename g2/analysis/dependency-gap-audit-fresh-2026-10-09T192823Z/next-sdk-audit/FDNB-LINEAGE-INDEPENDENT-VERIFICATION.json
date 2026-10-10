@@ -1,0 +1,76 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "check": "locked package",
+      "pass": true
+    },
+    {
+      "check": "extent stock blocking SPI full-duplex provider",
+      "pass": true
+    },
+    {
+      "check": "extent stock interrupt service",
+      "pass": true
+    },
+    {
+      "check": "extent service prefix discriminator",
+      "pass": true
+    },
+    {
+      "check": "extent shared IOM base literal",
+      "pass": true
+    },
+    {
+      "check": "extent blocking literal dependencies",
+      "pass": true
+    },
+    {
+      "check": "all serialized listing original bytes",
+      "pass": true
+    },
+    {
+      "check": "HP byte load/compare",
+      "pass": true
+    },
+    {
+      "check": "HP zero dispatch target",
+      "pass": true
+    },
+    {
+      "check": "service begins ordinary validation then HP",
+      "pass": true
+    },
+    {
+      "check": "interrupt accumulation",
+      "pass": true
+    },
+    {
+      "check": "blocking direction validation",
+      "pass": true
+    },
+    {
+      "check": "complete blocking source definition identical",
+      "pass": true
+    },
+    {
+      "check": "blocking validation callee",
+      "pass": true
+    },
+    {
+      "check": "validation extent hash",
+      "pass": true
+    }
+  ],
+  "validation_extent": {
+    "start": "0x55c1e0",
+    "end": "0x55c286",
+    "bytes": 166,
+    "sha256": "f0fa087eaffd371b53145fb705ff4cedc7974c95e955b3a89b051ce1bd64c408"
+  },
+  "bounded_direct_BL_candidates_to_validation": [
+    "0x55cc68",
+    "0x55cf80"
+  ],
+  "scope": "Static source/body/hash/controlflow audit; candidate BL encodings need enclosing code/root classification. No new function admission or execution."
+}

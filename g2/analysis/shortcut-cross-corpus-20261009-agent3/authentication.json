@@ -1,0 +1,495 @@
+{
+  "target": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "payloads": [
+    {
+      "id": "codec",
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "size": 326092
+    },
+    {
+      "id": "ble_em9305",
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "size": 211948
+    },
+    {
+      "id": "touch",
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "size": 34464
+    },
+    {
+      "id": "case",
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "size": 55784
+    },
+    {
+      "id": "apollo_bootloader",
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "size": 148599
+    },
+    {
+      "id": "apollo_main",
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "size": 3523396
+    }
+  ],
+  "images": [
+    {
+      "id": "apollo_main:flash",
+      "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+      "size": 3523364,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin",
+      "mappings": [
+        {
+          "id": "loaded",
+          "mappings": [
+            {
+              "image_end": 3523364,
+              "image_start": 0,
+              "loaded_end": 7947044,
+              "loaded_start": 4423680
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apollo_bootloader:flash",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "size": 148599,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_bootloader-flash.bin",
+      "mappings": [
+        {
+          "id": "loaded",
+          "mappings": [
+            {
+              "image_end": 148599,
+              "image_start": 0,
+              "loaded_end": 4408439,
+              "loaded_start": 4259840
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "touch:flash",
+      "sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+      "size": 34432,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/touch-flash.bin",
+      "mappings": [
+        {
+          "id": "loaded",
+          "mappings": [
+            {
+              "image_end": 34432,
+              "image_start": 0,
+              "loaded_end": 47488,
+              "loaded_start": 13056
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "case:flash",
+      "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+      "size": 55752,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/case-flash.bin",
+      "mappings": [
+        {
+          "id": "loaded",
+          "mappings": [
+            {
+              "image_end": 55752,
+              "image_start": 0,
+              "loaded_end": 134273480,
+              "loaded_start": 134217728
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ble_em9305:record-0",
+      "sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+      "size": 224,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/ble_em9305-record-0.bin",
+      "mappings": [
+        {
+          "id": "loaded",
+          "mappings": [
+            {
+              "image_end": 224,
+              "image_start": 0,
+              "loaded_end": 3145952,
+              "loaded_start": 3145728
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ble_em9305:record-1",
+      "sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+      "size": 656,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/ble_em9305-record-1.bin",
+      "mappings": [
+        {
+          "id": "loaded",
+          "mappings": [
+            {
+              "image_end": 656,
+              "image_start": 0,
+              "loaded_end": 3147408,
+              "loaded_start": 3146752
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ble_em9305:record-2",
+      "sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+      "size": 56,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/ble_em9305-record-2.bin",
+      "mappings": [
+        {
+          "id": "loaded",
+          "mappings": [
+            {
+              "image_end": 56,
+              "image_start": 0,
+              "loaded_end": 3153976,
+              "loaded_start": 3153920
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ble_em9305:record-3",
+      "sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+      "size": 210888,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/ble_em9305-record-3.bin",
+      "mappings": [
+        {
+          "id": "loaded",
+          "mappings": [
+            {
+              "image_end": 210888,
+              "image_start": 0,
+              "loaded_end": 3365832,
+              "loaded_start": 3154944
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "touch:ram-vectors",
+      "sha256": "62575e83fb7b4718742d51d7b5e007ef00a51604b7ed801f4e59a748956e8261",
+      "size": 192,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/003/ram-vectors.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 192,
+              "image_start": 0,
+              "loaded_end": 536872128,
+              "loaded_start": 536871936
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "touch:ram-initialized",
+      "sha256": "201d8c71916eb1169ef32e05464ea73b4dd535f018f97b84441919ba4091233d",
+      "size": 964,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/003/ram-initialized.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 964,
+              "image_start": 0,
+              "loaded_end": 536873092,
+              "loaded_start": 536872128
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ble_em9305:ram-initialized-0",
+      "sha256": "72c72af0f2727ed0b2188fca6de6668e9c90c27a8eace1126a4307c9a8fb223d",
+      "size": 69,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/003/ram-initialized-0.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 69,
+              "image_start": 0,
+              "loaded_end": 8393469,
+              "loaded_start": 8393400
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ble_em9305:ram-initialized-1",
+      "sha256": "b0d0e122e43221e514b847df46b7f18eb08f3f0e94757e574d24486b39c3746b",
+      "size": 776,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/003/ram-initialized-1.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 776,
+              "image_start": 0,
+              "loaded_end": 8453620,
+              "loaded_start": 8452844
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ble_em9305:ram-initialized-2",
+      "sha256": "1a2dad76dc9de4334783462ea0b99870ad504ddfe3f7033c2ec2635d0e9a9b9d",
+      "size": 44,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/003/ram-initialized-2.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 44,
+              "image_start": 0,
+              "loaded_end": 8453664,
+              "loaded_start": 8453620
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apollo_main:decoded:00000040",
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+      "size": 24,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-itcm-canonical-replay-011/001/decoded-00000040.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 24,
+              "image_start": 0,
+              "loaded_end": 88,
+              "loaded_start": 64
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apollo_main:decoded:20000000",
+      "sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+      "size": 17752,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-main-canonical-replay-009/001/decoded-20000000.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 17752,
+              "image_start": 0,
+              "loaded_end": 536888664,
+              "loaded_start": 536870912
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apollo_main:decoded:20080000",
+      "sha256": "a5be949c41cf1e9a7d4a6b4aa6e3a6cb2f9c9bcb3a04a866d15e49e3976a7d0c",
+      "size": 769646,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-main-canonical-replay-009/001/decoded-20080000.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 769646,
+              "image_start": 0,
+              "loaded_end": 538164846,
+              "loaded_start": 537395200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "case:decoded:20000000",
+      "sha256": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a",
+      "size": 420,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-canonical-replay-014/001/ram-initialized-0x20000000.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 420,
+              "image_start": 0,
+              "loaded_end": 536871332,
+              "loaded_start": 536870912
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apollo_bootloader:decoded:20000000",
+      "sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+      "size": 1371,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/decoded-20000000.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 1371,
+              "image_start": 0,
+              "loaded_end": 536872283,
+              "loaded_start": 536870912
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apollo_bootloader:decoded:20080000",
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "size": 4096,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/decoded-20080000.bin",
+      "mappings": [
+        {
+          "id": "initialized-ram",
+          "mappings": [
+            {
+              "image_end": 4096,
+              "image_start": 0,
+              "loaded_end": 537399296,
+              "loaded_start": 537395200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "codec_payload",
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "size": 326092,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/codec_payload.bin",
+      "mappings": []
+    },
+    {
+      "id": "uart_type1_container",
+      "sha256": "393d2ae1f10ed1382f3eec6e3f9f9ac99d744b7ab41d0c89a003f96588afe391",
+      "size": 38236,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/uart_type1_container.bin",
+      "mappings": []
+    },
+    {
+      "id": "uart_stage1",
+      "sha256": "cbbe85a2d60f5bb805dddb45fa2eac1632bdf0ab80665c040c0892c64074133f",
+      "size": 10240,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/uart_stage1.bin",
+      "mappings": []
+    },
+    {
+      "id": "uart_stage2",
+      "sha256": "4aacc9e5bf45001bef99785b62302e88bd0b5e6bf4d6186fd7033b1eaeb05b0d",
+      "size": 27964,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/uart_stage2.bin",
+      "mappings": []
+    },
+    {
+      "id": "main_type2_container",
+      "sha256": "60adadb83f3cc544c4f80729b01c20d5f94dc54dcbca254f7e7ca3f45b1b115f",
+      "size": 287808,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/main_type2_container.bin",
+      "mappings": []
+    },
+    {
+      "id": "binh_a_stage1",
+      "sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+      "size": 12288,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage1.bin",
+      "mappings": []
+    },
+    {
+      "id": "binh_a_stage2_container",
+      "sha256": "2515d7201f82c612cfba7f0c61bb014a0af9fe8b7e9037959f0705b7267850ee",
+      "size": 51200,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_container.bin",
+      "mappings": []
+    },
+    {
+      "id": "binh_a_stage2_xip",
+      "sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+      "size": 36484,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "mappings": []
+    },
+    {
+      "id": "binh_a_stage2_sram",
+      "sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+      "size": 14716,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin",
+      "mappings": []
+    },
+    {
+      "id": "binh_b_stage1",
+      "sha256": "a80924ccf78205ef1761c4f568d4ce31f909635bf3ad7eecfaed250ad801626c",
+      "size": 12288,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_b_stage1.bin",
+      "mappings": []
+    },
+    {
+      "id": "binh_b_stage2",
+      "sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+      "size": 82060,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_b_stage2.bin",
+      "mappings": []
+    },
+    {
+      "id": "npu_kws_command",
+      "sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+      "size": 9164,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/npu_kws_command.bin",
+      "mappings": []
+    },
+    {
+      "id": "npu_kws_weights",
+      "sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+      "size": 120800,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/npu_kws_weights.bin",
+      "mappings": []
+    }
+  ]
+}

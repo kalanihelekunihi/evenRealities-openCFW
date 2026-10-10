@@ -1,0 +1,25 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10023500 <.data+0x100>:
+10023500:	0810      	lrw      	r0, 0x80000200	// 0x10023520
+10023502:	206400c0 	mtcr      	r0, cr<0, 0>
+10023506:	21601fc0 	mfcr      	r1, cr<31, 0>
+1002350a:	8339      	bclri      	r1, 3
+1002350c:	3f6401c0 	mtcr      	r1, cr<31, 0>
+10023510:	6510      	lrw      	r3, 0x2002f7fc	// 0x10023524
+10023512:	8f6f      	mov      	r14, r3
+10023514:	1c0000e0 	bsr      	0x1002354c	// 0x1002354c
+10023518:	fe1600e0 	bsr      	0x10026314	// 0x10026314
+1002351c:	0004      	br      	0x1002351c	// 0x1002351c
+1002351e:	0000      	bkpt
+10023520:	0002      	lrw      	r0, 0xea0814d6	// 0x1002381c
+10023522:	0080      	ld.b      	r0, (r0, 0x0)
+10023524:	0220fcf7 	fld.32      	fr18, (r28, 0x3c0)
+10023528:	c314      	push      	r4-r6
+1002352a:	a710      	lrw      	r5, 0x2002ecec	// 0x10023544
+1002352c:	c710      	lrw      	r6, 0x20026d80	// 0x10023548
+1002352e:	5865      	cmphs      	r6, r5

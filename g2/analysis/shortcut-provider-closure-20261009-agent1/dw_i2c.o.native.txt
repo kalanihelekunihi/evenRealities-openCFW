@@ -1,0 +1,247 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/dw_i2c.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.i2c_dw_handle_tx_abort:
+
+00000000 <i2c_dw_handle_tx_abort>:
+   0:	3000      	movi      	r0, 0
+   2:	2804      	subi      	r0, 5
+   4:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_i2c_get_dev:
+
+00000000 <gx_i2c_get_dev>:
+   0:	14d0      	push      	r15
+   2:	3801      	cmphsi      	r0, 2
+   4:	0c06      	bf      	0x10	// 10 <gx_i2c_get_dev+0x10>
+   6:	1008      	lrw      	r0, 0x0	// 24 <gx_i2c_get_dev+0x24>
+   8:	e0000000 	bsr      	0x0	// 0 <printf_>
+			8: R_CKCORE_PCREL_IMM26BY2	printf_
+   c:	3000      	movi      	r0, 0
+   e:	1490      	pop      	r15
+  10:	7403      	sexth      	r0, r0
+  12:	4062      	lsli      	r3, r0, 2
+  14:	60c0      	addu      	r3, r0
+  16:	4303      	lsli      	r0, r3, 3
+  18:	600e      	subu      	r0, r3
+  1a:	4002      	lsli      	r0, r0, 2
+  1c:	1063      	lrw      	r3, 0x0	// 28 <gx_i2c_get_dev+0x28>
+  1e:	600c      	addu      	r0, r3
+  20:	07f7      	br      	0xe	// e <gx_i2c_get_dev+0xe>
+	...
+			24: R_CKCORE_ADDR32	.rodata.str1.1
+			28: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.i2c_dw_probe:
+
+00000000 <i2c_dw_probe>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	10ba      	lrw      	r5, 0x0	// 68 <i2c_dw_probe+0x68>
+   4:	41c5      	lsli      	r6, r1, 5
+   6:	d0c50823 	ldr.w      	r3, (r5, r6 << 0)
+   a:	6d03      	mov      	r4, r0
+   c:	dc200064 	st.b      	r1, (r0, 0x64)
+  10:	b066      	st.w      	r3, (r0, 0x18)
+  12:	3013      	movi      	r0, 19
+  14:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+  18:	5d38      	addu      	r1, r5, r6
+  1a:	b400      	st.w      	r0, (r4, 0x0)
+  1c:	9163      	ld.w      	r3, (r1, 0xc)
+  1e:	b462      	st.w      	r3, (r4, 0x8)
+  20:	9164      	ld.w      	r3, (r1, 0x10)
+  22:	b463      	st.w      	r3, (r4, 0xc)
+  24:	9165      	ld.w      	r3, (r1, 0x14)
+  26:	b464      	st.w      	r3, (r4, 0x10)
+  28:	9166      	ld.w      	r3, (r1, 0x18)
+  2a:	b465      	st.w      	r3, (r4, 0x14)
+  2c:	9162      	ld.w      	r3, (r1, 0x8)
+  2e:	b461      	st.w      	r3, (r4, 0x4)
+  30:	9167      	ld.w      	r3, (r1, 0x1c)
+  32:	b473      	st.w      	r3, (r4, 0x4c)
+  34:	3300      	movi      	r3, 0
+  36:	dc642021 	st.w      	r3, (r4, 0x84)
+  3a:	3302      	movi      	r3, 2
+  3c:	b47b      	st.w      	r3, (r4, 0x6c)
+  3e:	3300      	movi      	r3, 0
+  40:	2b00      	subi      	r3, 1
+  42:	dc642022 	st.w      	r3, (r4, 0x88)
+  46:	947a      	ld.w      	r3, (r4, 0x68)
+  48:	2300      	addi      	r3, 1
+  4a:	b47a      	st.w      	r3, (r4, 0x68)
+  4c:	9466      	ld.w      	r3, (r4, 0x18)
+  4e:	b101      	st.w      	r0, (r1, 0x4)
+  50:	d863203d 	ld.w      	r3, (r3, 0xf4)
+  54:	c60356e2 	zext      	r2, r3, 23, 16
+  58:	c50355e3 	zext      	r3, r3, 15, 8
+  5c:	2200      	addi      	r2, 1
+  5e:	2300      	addi      	r3, 1
+  60:	b455      	st.w      	r2, (r4, 0x54)
+  62:	b476      	st.w      	r3, (r4, 0x58)
+  64:	1493      	pop      	r4-r6, r15
+  66:	0000      	.short	0x0000
+  68:	00000000 	.long	0x00000000
+			68: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.i2c_dw_set_sda_hold:
+
+00000000 <i2c_dw_set_sda_hold>:
+   0:	9046      	ld.w      	r2, (r0, 0x18)
+   2:	106b      	lrw      	r3, 0x31313129	// 2c <i2c_dw_set_sda_hold+0x2c>
+   4:	d822203e 	ld.w      	r1, (r2, 0xf8)
+   8:	644c      	cmphs      	r3, r1
+   a:	080e      	bt      	0x26	// 26 <i2c_dw_set_sda_hold+0x26>
+   c:	9078      	ld.w      	r3, (r0, 0x60)
+   e:	e9230004 	bnez      	r3, 0x16	// 16 <i2c_dw_set_sda_hold+0x16>
+  12:	927f      	ld.w      	r3, (r2, 0x7c)
+  14:	b078      	st.w      	r3, (r0, 0x60)
+  16:	9078      	ld.w      	r3, (r0, 0x60)
+  18:	4b30      	lsri      	r1, r3, 16
+  1a:	e9210004 	bnez      	r1, 0x22	// 22 <i2c_dw_set_sda_hold+0x22>
+  1e:	3bb0      	bseti      	r3, 16
+  20:	b078      	st.w      	r3, (r0, 0x60)
+  22:	9078      	ld.w      	r3, (r0, 0x60)
+  24:	b27f      	st.w      	r3, (r2, 0x7c)
+  26:	3000      	movi      	r0, 0
+  28:	783c      	jmp      	r15
+  2a:	0000      	.short	0x0000
+  2c:	31313129 	.long	0x31313129
+
+Disassembly of section .text.i2c_dw_enable:
+
+00000000 <i2c_dw_enable>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	6d83      	mov      	r6, r0
+   4:	6d07      	mov      	r4, r1
+   6:	3565      	movi      	r5, 101
+   8:	9666      	ld.w      	r3, (r6, 0x18)
+   a:	b39b      	st.w      	r4, (r3, 0x6c)
+   c:	9666      	ld.w      	r3, (r6, 0x18)
+   e:	d8632027 	ld.w      	r3, (r3, 0x9c)
+  12:	e4632001 	andi      	r3, r3, 1
+  16:	64d2      	cmpne      	r4, r3
+  18:	0c0f      	bf      	0x36	// 36 <i2c_dw_enable+0x36>
+  1a:	3001      	movi      	r0, 1
+  1c:	2d00      	subi      	r5, 1
+  1e:	e0000000 	bsr      	0x0	// 0 <gx_mdelay>
+			1e: R_CKCORE_PCREL_IMM26BY2	gx_mdelay
+  22:	e925fff3 	bnez      	r5, 0x8	// 8 <i2c_dw_enable+0x8>
+  26:	3c40      	cmpnei      	r4, 0
+  28:	1064      	lrw      	r3, 0x0	// 38 <i2c_dw_enable+0x38>
+  2a:	1025      	lrw      	r1, 0x0	// 3c <i2c_dw_enable+0x3c>
+  2c:	c4230c20 	incf      	r1, r3, 0
+  30:	1004      	lrw      	r0, 0x0	// 40 <printf_+0x40>
+  32:	e0000000 	bsr      	0x0	// 0 <printf_>
+			32: R_CKCORE_PCREL_IMM26BY2	printf_
+  36:	1493      	pop      	r4-r6, r15
+	...
+			38: R_CKCORE_ADDR32	.rodata.str1.1+0x19
+			3c: R_CKCORE_ADDR32	.rodata.str1.1+0x16
+			40: R_CKCORE_ADDR32	.rodata.str1.1+0x1d
+
+Disassembly of section .text.i2c_dw_disable:
+
+00000000 <i2c_dw_disable>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	3100      	movi      	r1, 0
+   6:	e0000000 	bsr      	0x0	// 0 <i2c_dw_disable>
+			6: R_CKCORE_PCREL_IMM26BY2	i2c_dw_enable
+   a:	9466      	ld.w      	r3, (r4, 0x18)
+   c:	3200      	movi      	r2, 0
+   e:	b34c      	st.w      	r2, (r3, 0x30)
+  10:	9466      	ld.w      	r3, (r4, 0x18)
+  12:	9370      	ld.w      	r3, (r3, 0x40)
+  14:	1491      	pop      	r4, r15
+
+Disassembly of section .text.gx_i2c_set_speed:
+
+00000000 <gx_i2c_set_speed>:
+   0:	14d0      	push      	r15
+   2:	33fa      	movi      	r3, 250
+   4:	4362      	lsli      	r3, r3, 2
+   6:	7c4c      	mult      	r1, r3
+   8:	4005      	lsli      	r0, r0, 5
+   a:	1077      	lrw      	r3, 0x0	// 64 <gx_i2c_set_speed+0x64>
+   c:	600c      	addu      	r0, r3
+   e:	ea03c350 	movi      	r3, 50000
+  12:	c4634903 	rotli      	r3, r3, 3
+  16:	64c6      	cmpne      	r1, r3
+  18:	b022      	st.w      	r1, (r0, 0x8)
+  1a:	0c12      	bf      	0x3e	// 3e <gx_i2c_set_speed+0x3e>
+  1c:	ea03f424 	movi      	r3, 62500
+  20:	c4834903 	rotli      	r3, r3, 4
+  24:	64c6      	cmpne      	r1, r3
+  26:	0c12      	bf      	0x4a	// 4a <gx_i2c_set_speed+0x4a>
+  28:	ea0386a0 	movi      	r3, 34464
+  2c:	3bb0      	bseti      	r3, 16
+  2e:	64c6      	cmpne      	r1, r3
+  30:	0813      	bt      	0x56	// 56 <gx_i2c_set_speed+0x56>
+  32:	ea03125c 	movi      	r3, 4700
+  36:	b063      	st.w      	r3, (r0, 0xc)
+  38:	b064      	st.w      	r3, (r0, 0x10)
+  3a:	3000      	movi      	r0, 0
+  3c:	1490      	pop      	r15
+  3e:	3396      	movi      	r3, 150
+  40:	4362      	lsli      	r3, r3, 2
+  42:	b063      	st.w      	r3, (r0, 0xc)
+  44:	ea030514 	movi      	r3, 1300
+  48:	07f8      	br      	0x38	// 38 <gx_i2c_set_speed+0x38>
+  4a:	3396      	movi      	r3, 150
+  4c:	4361      	lsli      	r3, r3, 1
+  4e:	b063      	st.w      	r3, (r0, 0xc)
+  50:	33fa      	movi      	r3, 250
+  52:	4361      	lsli      	r3, r3, 1
+  54:	07f2      	br      	0x38	// 38 <gx_i2c_set_speed+0x38>
+  56:	1005      	lrw      	r0, 0x0	// 68 <gx_i2c_set_speed+0x68>
+  58:	e0000000 	bsr      	0x0	// 0 <printf_>
+			58: R_CKCORE_PCREL_IMM26BY2	printf_
+  5c:	3000      	movi      	r0, 0
+  5e:	2800      	subi      	r0, 1
+  60:	07ee      	br      	0x3c	// 3c <gx_i2c_set_speed+0x3c>
+	...
+			64: R_CKCORE_ADDR32	.data
+			68: R_CKCORE_ADDR32	.rodata.str1.1+0x3a
+
+Disassembly of section .text.gx_i2c_suspend:
+
+00000000 <gx_i2c_suspend>:
+   0:	14d0      	push      	r15
+   2:	3840      	cmpnei      	r0, 0
+   4:	c4000500 	mvc      	r0
+   8:	3100      	movi      	r1, 0
+   a:	2013      	addi      	r0, 20
+   c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			c: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  10:	3000      	movi      	r0, 0
+  12:	1490      	pop      	r15
+
+Disassembly of section .text.gx_i2c_exit:
+
+00000000 <gx_i2c_exit>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_i2c_exit>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_i2c_suspend
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.gx_i2c_resume:
+
+00000000 <gx_i2c_resume>:
+   0:	14d0      	push      	r15
+   2:	3840      	cmpnei      	r0, 0
+   4:	c4000500 	mvc      	r0
+   8:	3101      	movi      	r1, 1
+   a:	2013      	addi      	r0, 20
+   c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			c: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  10:	3000      	movi      	r0, 0
+  12:	1490      	pop      	r15
+
+Disassembly of section .text.gx_i2c_init:
+
+00000000 <gx_i2c_init>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_i2c_init>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_i2c_resume
+   6:	1490      	pop      	r15

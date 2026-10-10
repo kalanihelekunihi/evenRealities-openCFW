@@ -1,0 +1,37 @@
+
+g2/analysis/flashdb-provider-config-20261010-implementation/to-blob.bin:     file format binary
+
+
+Disassembly of section .data:
+
+005445b2 <.data>:
+  5445b2:	b57c      	push	{r2, r3, r4, r5, r6, lr}
+  5445b4:	0004      	movs	r4, r0
+  5445b6:	000d      	movs	r5, r1
+  5445b8:	0016      	movs	r6, r2
+  5445ba:	2000      	movs	r0, #0
+  5445bc:	2000      	movs	r0, #0
+  5445be:	9001      	str	r0, [sp, #4]
+  5445c0:	2001      	movs	r0, #1
+  5445c2:	9000      	str	r0, [sp, #0]
+  5445c4:	2306      	movs	r3, #6
+  5445c6:	0032      	movs	r2, r6
+  5445c8:	0029      	movs	r1, r5
+  5445ca:	0020      	movs	r0, r4
+  5445cc:	f041 f984 	bl	0x5858d8
+  5445d0:	0001      	movs	r1, r0
+  5445d2:	b2c9      	uxtb	r1, r1
+  5445d4:	2900      	cmp	r1, #0
+  5445d6:	d001      	beq.n	0x5445dc
+  5445d8:	b2c0      	uxtb	r0, r0
+  5445da:	e009      	b.n	0x5445f0
+  5445dc:	2000      	movs	r0, #0
+  5445de:	9000      	str	r0, [sp, #0]
+  5445e0:	2314      	movs	r3, #20
+  5445e2:	1d32      	adds	r2, r6, #4
+  5445e4:	1d2d      	adds	r5, r5, #4
+  5445e6:	0029      	movs	r1, r5
+  5445e8:	0020      	movs	r0, r4
+  5445ea:	f041 fa32 	bl	0x585a52
+  5445ee:	b2c0      	uxtb	r0, r0
+  5445f0:	bd76      	pop	{r1, r2, r4, r5, r6, pc}

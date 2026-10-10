@@ -1,0 +1,21 @@
+# Main TLSF: enumerated production-link gaps
+
+The accepted TLSF replacement is an offline comparator, not a production image component. Its retained object allows a concrete gap list without global percentages. [Independent ELF32 section/symbol receipt](object-section-receipt.json) confirms three undefined symbols and allocated .text4130bytes, .rodata.str1.1 2422bytes, .ARM.exidx216bytes. TLSF arena/control storage is supplied by the caller, not object .bss. Existing link.ld places all code at100000 and merges strings; it discards ARM exception sections. That is a comparator recipe, not the original main IAR image link contract.
+
+| Concrete item | Comparator closure | Remaining authentic main obligation |
+|---|---|---|
+| memcpy | Real separately compiled byte-loop C provider | Original local439BE4 copy ABI/ranges and genuine producing runtime object/link handling; preserved IAR relocation rejection is unresolved |
+| printf | Explicit stopping/trap provider |4733EE variadic front end,473036 formatter, buffer2006B930 and callback slot200742F0; callback/output composition and original strings/layout |
+| __assert_func | GNU-header four-argument terminal provider | Stock4D09B4 three-argument expression/file/line ABI, BKPT0xAB and conditional541B74 continuation; actual header/assert override and debugger/abort contract |
+| .text/function placements | Clang ARM32 behavioral object, all external symbols resolved | IAR producing version/options/portable bit-scan branch, inlining/outlining/order/alignment and all transitive original functions; four selected entry bodies currently unequal |
+| .rodata.str1.1 | Merged candidate diagnostic strings/filenames/functions | Original literals/string bytes and placement, compiler/header path/macro history and fragment relocations; no arbitrary string removal/normalization |
+| .ARM.exidx216bytes | Discarded explicitly by comparator script | Evidence whether original module has corresponding unwind/metadata or genuine producer option omits it; discarded candidate section is not an exact-original reconstruction result |
+| Arena/control pointer | Supplied synthetic64KiB same-address arena | Actual application heap init/caller contexts, placement/lifetime and ownership; main 0xC74 geometry is proven locally but heap-wide initialization is separate |
+| Heap serialization | Direct single-thread allocator calls | Actual wrapper/mutex/current-task/ISR contracts, including heap mutex200748F8 and handle20074ABC where used; offline allocator equivalence cannot remove them |
+| Image container/startup | Not part of comparator | Original main sections/scatter/ITCM/data initialization, outer payload/container bytes and whole-bundle composition after corpus gate |
+
+Three undefined symbols are independently decoded from comparator.o, not inferred from nm text alone. Final no-undefined ELF is only a link with supplied fixtures; it cannot be called authentic runtime closure. Call-site/helper/static receipts and reviewed file-close evidence can populate this gap list, but must retain original provider versus reconstructed-source distinctions. The file-close comparison shares stock heap providers, so does not solve mutex/heap source composition.
+
+Useful next build-oriented hypothesis: select a single genuine IAR runtime/header/fragment comparator anchored to one existing original ABI and record complete object relocation/link diagnostics before extending to the entire module. GNU relocation failure cannot be treated as opcode mismatch. An exact-source header/provider candidate could reduce the __assert_func ABI gap without changing allocator C. The generic portable bit-scan constraint is already known and should not be counted as a new discovery.
+
+No complete original main .icf is established by these records; IAR files under acquired development-board sources are not stock linker provenance. Ghidra/REA can map calls/literals/section evidence in isolated hash-bound projects, while ELF inspection/object link receipts remain the compiler/link oracle. No canonical manifest, linker, source admission or source-completeness counter was changed. Original-producing inputs and whole-image corpus gates remain precise independent obligations.

@@ -1,0 +1,3 @@
+from pathlib import Path
+import subprocess,json
+p=Path('/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/xuantie-csky-dsp-execution-20261009T201800Z');cmd=['/opt/homebrew/bin/docker','exec','opencfw-qemu-csky-resume-20261009t201800','timeout','15s','/tmp/qbuild2/qemu-system-cskyv2','-M','smartl','-cpu','ck804ef','-nographic','-monitor','none','-kernel','/out/isa.elf','-d','in_asm,int,guest_errors','-D','/out/isa-qemu.log'];q=subprocess.run(cmd,capture_output=True,text=True,timeout=25);(p/'isa-execution.json').write_text(json.dumps({'command':cmd,'returncode':q.returncode,'stdout':q.stdout,'stderr':q.stderr},indent=2)+'\n');print(q.returncode);print(q.stdout);print(q.stderr)

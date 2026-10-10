@@ -1,0 +1,81 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-arm-tools-20261009-agent3/main-analysis-only.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004d0744 <bounded_original_thumb+0x7d8>:
+  4d0744:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+  4d0748:	4680      	mov	r8, r0
+  4d074a:	000f      	movs	r7, r1
+  4d074c:	2104      	movs	r1, #4
+  4d074e:	0010      	movs	r0, r2
+  4d0750:	f7ff fbf7 	bl	4cff42 <bounded_original_thumb-0x2a>
+  4d0754:	0005      	movs	r5, r0
+  4d0756:	f05f 0910 	movs.w	r9, #16
+  4d075a:	0039      	movs	r1, r7
+  4d075c:	1978      	adds	r0, r7, r5
+  4d075e:	eb19 0000 	adds.w	r0, r9, r0
+  4d0762:	f7ff fbee 	bl	4cff42 <bounded_original_thumb-0x2a>
+  4d0766:	2d00      	cmp	r5, #0
+  4d0768:	d001      	beq.n	4d076e <bounded_original_thumb+0x802>
+  4d076a:	2f05      	cmp	r7, #5
+  4d076c:	d200      	bcs.n	4d0770 <bounded_original_thumb+0x804>
+  4d076e:	0028      	movs	r0, r5
+  4d0770:	0001      	movs	r1, r0
+  4d0772:	4640      	mov	r0, r8
+  4d0774:	f7ff fe86 	bl	4d0484 <bounded_original_thumb+0x518>
+  4d0778:	0006      	movs	r6, r0
+  4d077a:	4836      	ldr	r0, [pc, #216]	@ (4d0854 <bounded_original_thumb+0x8e8>)
+  4d077c:	6801      	ldr	r1, [r0, #0]
+  4d077e:	4879      	ldr	r0, [pc, #484]	@ (4d0964 <bounded_original_thumb+0x9f8>)
+  4d0780:	6800      	ldr	r0, [r0, #0]
+  4d0782:	1841      	adds	r1, r0, r1
+  4d0784:	2910      	cmp	r1, #16
+  4d0786:	d007      	beq.n	4d0798 <bounded_original_thumb+0x82c>
+  4d0788:	f240 427d 	movw	r2, #1149	@ 0x47d
+  4d078c:	4984      	ldr	r1, [pc, #528]	@ (4d09a0 <bounded_original_thumb+0xa34>)
+  4d078e:	4886      	ldr	r0, [pc, #536]	@ (4d09a8 <bounded_original_thumb+0xa3c>)
+  4d0790:	f000 f910 	bl	4d09b4 <bounded_original_thumb+0xa48>
+  4d0794:	f3af 8000 	nop.w
+  4d0798:	2e00      	cmp	r6, #0
+  4d079a:	d02b      	beq.n	4d07f4 <bounded_original_thumb+0x888>
+  4d079c:	0030      	movs	r0, r6
+  4d079e:	f7ff fb37 	bl	4cfe10 <bounded_original_thumb-0x15c>
+  4d07a2:	4682      	mov	sl, r0
+  4d07a4:	0039      	movs	r1, r7
+  4d07a6:	4650      	mov	r0, sl
+  4d07a8:	f7ff fbb6 	bl	4cff18 <bounded_original_thumb-0x54>
+  4d07ac:	ebb0 040a 	subs.w	r4, r0, sl
+  4d07b0:	2c00      	cmp	r4, #0
+  4d07b2:	d00d      	beq.n	4d07d0 <bounded_original_thumb+0x864>
+  4d07b4:	454c      	cmp	r4, r9
+  4d07b6:	d20b      	bcs.n	4d07d0 <bounded_original_thumb+0x864>
+  4d07b8:	ebb9 0404 	subs.w	r4, r9, r4
+  4d07bc:	42a7      	cmp	r7, r4
+  4d07be:	d300      	bcc.n	4d07c2 <bounded_original_thumb+0x856>
+  4d07c0:	003c      	movs	r4, r7
+  4d07c2:	1820      	adds	r0, r4, r0
+  4d07c4:	0039      	movs	r1, r7
+  4d07c6:	f7ff fba7 	bl	4cff18 <bounded_original_thumb-0x54>
+  4d07ca:	ebb0 0a0a 	subs.w	sl, r0, sl
+  4d07ce:	4654      	mov	r4, sl
+  4d07d0:	2c00      	cmp	r4, #0
+  4d07d2:	d00f      	beq.n	4d07f4 <bounded_original_thumb+0x888>
+  4d07d4:	454c      	cmp	r4, r9
+  4d07d6:	d207      	bcs.n	4d07e8 <bounded_original_thumb+0x87c>
+  4d07d8:	f240 4295 	movw	r2, #1173	@ 0x495
+  4d07dc:	4970      	ldr	r1, [pc, #448]	@ (4d09a0 <bounded_original_thumb+0xa34>)
+  4d07de:	4873      	ldr	r0, [pc, #460]	@ (4d09ac <bounded_original_thumb+0xa40>)
+  4d07e0:	f000 f8e8 	bl	4d09b4 <bounded_original_thumb+0xa48>
+  4d07e4:	f3af 8000 	nop.w
+  4d07e8:	0022      	movs	r2, r4
+  4d07ea:	0031      	movs	r1, r6
+  4d07ec:	4640      	mov	r0, r8
+  4d07ee:	f7ff fe29 	bl	4d0444 <bounded_original_thumb+0x4d8>
+  4d07f2:	0006      	movs	r6, r0
+  4d07f4:	002a      	movs	r2, r5
+  4d07f6:	0031      	movs	r1, r6
+  4d07f8:	4640      	mov	r0, r8
+  4d07fa:	f7ff fe74 	bl	4d04e6 <bounded_original_thumb+0x57a>
+  4d07fe:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}

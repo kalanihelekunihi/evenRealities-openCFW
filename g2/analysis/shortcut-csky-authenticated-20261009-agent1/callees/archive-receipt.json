@@ -1,0 +1,114 @@
+{
+  "archive_path": "third-party/upstream/nationalchip-lvp-kws/lib/libdriver_release_v1.0.6.a",
+  "archive_sha256": "58f6edd604161762b4c2fd5c53dbd75ebbc71c6324fd98c85506f78118ad3ec2",
+  "commands": [
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-nm",
+        "-A",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/lib/libdriver_release_v1.0.6.a"
+      ],
+      "exit_code": 0,
+      "output": "driver-symbols.txt"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-ar",
+        "x",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/lib/libdriver_release_v1.0.6.a",
+        "pmu_ctrl.o",
+        "misc.o"
+      ],
+      "exit_code": 0,
+      "output": "extract-provider-objects.txt"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-dr",
+        "-j",
+        ".text.gx_pmu_get_start_mode",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/pmu_ctrl.o"
+      ],
+      "exit_code": 0,
+      "output": "gx_pmu_get_start_mode-section-disassembly.txt"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objcopy",
+        "-O",
+        "binary",
+        "-j",
+        ".text.gx_pmu_get_start_mode",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/pmu_ctrl.o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/gx_pmu_get_start_mode.bin"
+      ],
+      "exit_code": 0,
+      "output": "gx_pmu_get_start_mode-section.txt"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-dr",
+        "-j",
+        ".text.gx_pmu_get_wakeup_source",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/pmu_ctrl.o"
+      ],
+      "exit_code": 0,
+      "output": "gx_pmu_get_wakeup_source-section-disassembly.txt"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objcopy",
+        "-O",
+        "binary",
+        "-j",
+        ".text.gx_pmu_get_wakeup_source",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/pmu_ctrl.o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/gx_pmu_get_wakeup_source.bin"
+      ],
+      "exit_code": 0,
+      "output": "gx_pmu_get_wakeup_source-section.txt"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-dr",
+        "-j",
+        ".text.gx_analog_config_update_enable",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/misc.o"
+      ],
+      "exit_code": 0,
+      "output": "gx_analog_config_update_enable-section-disassembly.txt"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objcopy",
+        "-O",
+        "binary",
+        "-j",
+        ".text.gx_analog_config_update_enable",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/misc.o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/gx_analog_config_update_enable.bin"
+      ],
+      "exit_code": 0,
+      "output": "gx_analog_config_update_enable-section.txt"
+    }
+  ],
+  "start_mode_body_equal_except_call_relocation": true,
+  "stock_body_length": 30,
+  "candidate_length": 30,
+  "excluded_relocation_span": [
+    2,
+    6
+  ],
+  "candidate_sha256": "2a66b988752ed48e2401ce6afb805125b6e5f162c42ddda009d0ac329f2538ee",
+  "wakeup_source_exact_match": true,
+  "wakeup_source_runtime": 268585280,
+  "wakeup_source_section_bytes": 66,
+  "analog_update_exact_match": true,
+  "analog_runtime": 270548084,
+  "analog_xip_child_offset": 3184,
+  "analog_section_bytes": 20,
+  "xip_sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584"
+}

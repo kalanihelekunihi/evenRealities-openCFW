@@ -1,0 +1,209 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "label": "archive SHA256",
+      "pass": true
+    },
+    {
+      "label": "extracted compiler SHA256",
+      "pass": true
+    },
+    {
+      "label": "archive-extraction bin/csky-elfabiv2-as",
+      "pass": true,
+      "archive_member": "./bin/csky-elfabiv2-as",
+      "sha256": "5f20107ef85384d4566d0a5f0904e17a3bca6368e9cedf3565ad184bcd7a73f1"
+    },
+    {
+      "label": "archive-extraction bin/csky-elfabiv2-gcc",
+      "pass": true,
+      "archive_member": "./bin/csky-elfabiv2-gcc",
+      "sha256": "d39414b37d4d47c044254b1f91844d63be586ce913005c2330061f490d1d899f"
+    },
+    {
+      "label": "archive-extraction libexec/gcc/csky-elfabiv2/6.3.0/cc1",
+      "pass": true,
+      "archive_member": "./libexec/gcc/csky-elfabiv2/6.3.0/cc1",
+      "sha256": "1aaa21eb625ebce3e3d44e7a36df802aa058c8cc9cb2d7263abbf6c8482e731b"
+    },
+    {
+      "label": "all three compiler tool members found",
+      "pass": true
+    },
+    {
+      "label": "retained SDK header snapshot",
+      "pass": true,
+      "files": 452,
+      "mismatches": []
+    },
+    {
+      "label": "source/object csky_cfft_radix4_q15.c",
+      "pass": true,
+      "source_sha256": "74ee0267a27882d079560997942520a9473bc7f7fc4d3949275947358b3f317b",
+      "object_sha256": "9dbd1a56419377a944d2dbeca7fb78fea83fddf6e4f536e209d65c9057d840da"
+    },
+    {
+      "label": "fixed command/mount recipe csky_cfft_radix4_q15.c",
+      "pass": true
+    },
+    {
+      "label": "text-section summary csky_cfft_radix4_q15.c.o",
+      "pass": true
+    },
+    {
+      "label": "source/object csky_rfft_q15.c",
+      "pass": true,
+      "source_sha256": "be185b5d6c09133b0ba3e445a7bcf8f86ab1249030a63d534c6ca4b2bef48992",
+      "object_sha256": "4d45e7e0126c736327cdab5e2481cc668ccc369db01655c2426e76cf7c55ddce"
+    },
+    {
+      "label": "fixed command/mount recipe csky_rfft_q15.c",
+      "pass": true
+    },
+    {
+      "label": "text-section summary csky_rfft_q15.c.o",
+      "pass": true
+    },
+    {
+      "label": "source/object csky_shift_q15.c",
+      "pass": true,
+      "source_sha256": "3bf8526ee5b2ae85395490501100d67d4e7b4d9c5b5fb8c0b10a38df9bda7030",
+      "object_sha256": "bfa85c9fa84e38bf1dd3752e2e62870850f4bc4dd2b8ee401cc4ff6f617406e6"
+    },
+    {
+      "label": "fixed command/mount recipe csky_shift_q15.c",
+      "pass": true
+    },
+    {
+      "label": "text-section summary csky_shift_q15.c.o",
+      "pass": true
+    },
+    {
+      "label": "whole-section mismatch .text.csky_shift_q15",
+      "pass": true
+    },
+    {
+      "label": "source/object csky_copy_q15.c",
+      "pass": true,
+      "source_sha256": "ab6342d4ac41056800860fa9226e456d1363448183d7168d82cb416354d1da04",
+      "object_sha256": "4334a7ab9964521f15fda16c4b58bbc5e97526f83b10fd5d346f6162bf116b69"
+    },
+    {
+      "label": "fixed command/mount recipe csky_copy_q15.c",
+      "pass": true
+    },
+    {
+      "label": "text-section summary csky_copy_q15.c.o",
+      "pass": true
+    },
+    {
+      "label": "whole-section mismatch .text.csky_copy_q15",
+      "pass": true
+    },
+    {
+      "label": "source/object csky_fill_q15.c",
+      "pass": true,
+      "source_sha256": "d5e7645ca8ea8ca9341a8ded689ccd1fe4f2f7a8c14d599c98864de87ccb5fcf",
+      "object_sha256": "cf3ed43d9565074b99afc2f8ebaf2f8a1dd7d57d9afb303d724c55c8e5173caf"
+    },
+    {
+      "label": "fixed command/mount recipe csky_fill_q15.c",
+      "pass": true
+    },
+    {
+      "label": "text-section summary csky_fill_q15.c.o",
+      "pass": true
+    },
+    {
+      "label": "whole-section mismatch .text.csky_fill_q15",
+      "pass": true
+    },
+    {
+      "label": "summary counts/undefined kernels",
+      "pass": true
+    }
+  ],
+  "objects": [
+    {
+      "object": "csky_cfft_radix4_q15.c.o",
+      "text_sections": [
+        {
+          "section": ".text.csky_cfft_radix4_q15",
+          "bytes": 56
+        }
+      ],
+      "undefined_symbols": [
+        "csky_radix4_butterfly_q15",
+        "csky_radix4_butterfly_inverse_q15",
+        "csky_bitreversal_q15"
+      ]
+    },
+    {
+      "object": "csky_rfft_q15.c.o",
+      "text_sections": [
+        {
+          "section": ".text.csky_rfft_q15",
+          "bytes": 110
+        }
+      ],
+      "undefined_symbols": [
+        "csky_cfft_q15",
+        "csky_split_rfft_q15",
+        "csky_split_rifft_q15"
+      ]
+    },
+    {
+      "object": "csky_shift_q15.c.o",
+      "text_sections": [
+        {
+          "section": ".text.csky_shift_q15",
+          "bytes": 368
+        }
+      ],
+      "undefined_symbols": []
+    },
+    {
+      "object": "csky_copy_q15.c.o",
+      "text_sections": [
+        {
+          "section": ".text.csky_copy_q15",
+          "bytes": 84
+        }
+      ],
+      "undefined_symbols": []
+    },
+    {
+      "object": "csky_fill_q15.c.o",
+      "text_sections": [
+        {
+          "section": ".text.csky_fill_q15",
+          "bytes": 70
+        }
+      ],
+      "undefined_symbols": []
+    }
+  ],
+  "different_sections": [
+    {
+      "section": ".text.csky_shift_q15",
+      "compiled_bytes": 368,
+      "stock_bytes": 116,
+      "full_equal": false
+    },
+    {
+      "section": ".text.csky_copy_q15",
+      "compiled_bytes": 84,
+      "stock_bytes": 44,
+      "full_equal": false
+    },
+    {
+      "section": ".text.csky_fill_q15",
+      "compiled_bytes": 70,
+      "stock_bytes": 40,
+      "full_equal": false
+    }
+  ],
+  "compile_rerun": false,
+  "limits": "Retained commands and outputs independently verified. Successful C compilation does not establish numerical equivalence, stock producer recipe, final linking or byte identity. Archive verifies selected GCC/as/cc1 extraction; no live Docker image inspection repeated."
+}

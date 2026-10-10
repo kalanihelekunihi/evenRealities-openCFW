@@ -1,0 +1,26 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/spi_nor_ids.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_spi_nor_protect_init:
+
+00000000 <gx_spi_nor_protect_init>:
+   0:	1067      	lrw      	r3, 0x0	// 1c <gx_spi_nor_protect_init+0x1c>
+   2:	1048      	lrw      	r2, 0x0	// 20 <gx_spi_nor_protect_init+0x20>
+   4:	b340      	st.w      	r2, (r3, 0x0)
+   6:	3205      	movi      	r2, 5
+   8:	b341      	st.w      	r2, (r3, 0x4)
+   a:	1047      	lrw      	r2, 0x0	// 24 <gx_spi_nor_protect_init+0x24>
+   c:	b342      	st.w      	r2, (r3, 0x8)
+   e:	3207      	movi      	r2, 7
+  10:	b343      	st.w      	r2, (r3, 0xc)
+  12:	1046      	lrw      	r2, 0x0	// 28 <gx_spi_nor_protect_init+0x28>
+  14:	b344      	st.w      	r2, (r3, 0x10)
+  16:	3209      	movi      	r2, 9
+  18:	b345      	st.w      	r2, (r3, 0x14)
+  1a:	783c      	jmp      	r15
+	...
+			1c: R_CKCORE_ADDR32	.bss
+			20: R_CKCORE_ADDR32	.data
+			24: R_CKCORE_ADDR32	.data+0x28
+			28: R_CKCORE_ADDR32	.data+0x60

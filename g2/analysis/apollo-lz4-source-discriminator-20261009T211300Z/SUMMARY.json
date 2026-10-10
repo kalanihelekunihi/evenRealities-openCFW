@@ -1,0 +1,108 @@
+{
+  "status": "PASS finite discriminator; no source-version separation",
+  "fixtures": 12,
+  "stock_safe_invocations": 12,
+  "locked_caller_invocations": 12,
+  "sources": [
+    "LZ4v1.9.4",
+    "LZ4v1.10.0"
+  ],
+  "source_return_matches": 24,
+  "source_capacity_buffer_matches": 24,
+  "all_stock_and_caller_guards_pass": true,
+  "decoder_selected_bytes": 1220,
+  "no_external_call_stubs": true,
+  "profile": "Linux Unicorn2.1.4 instruction-by-instruction; continuous default/M4/M33 profile failed a bounded memmove/IT-state test",
+  "policy_differences": [
+    "zero compressed bytes accepted as empty by host Python; stock safe returns-1",
+    "zero-offset corrupted fixture rejected by Python; stock/both official C return26 with zero-filled match"
+  ],
+  "caller": "4E0C0C..4E0C34: reorders src,len,dst,cap; prechecksnonzero; maps returns<1to0; navigationrootunbound",
+  "table": [
+    {
+      "fixture": "empty-input",
+      "safe_return": -1,
+      "locked_caller_return": 0,
+      "python_policy": "accepted",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "encoded-empty",
+      "safe_return": 0,
+      "locked_caller_return": 0,
+      "python_policy": "accepted",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "literal-exact",
+      "safe_return": 5,
+      "locked_caller_return": 5,
+      "python_policy": "accepted",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "literal-short-cap",
+      "safe_return": -2,
+      "locked_caller_return": 0,
+      "python_policy": "rejected",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "truncated-literal-extension",
+      "safe_return": -2,
+      "locked_caller_return": 0,
+      "python_policy": "rejected",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "truncated-literal-payload",
+      "safe_return": -2,
+      "locked_caller_return": 0,
+      "python_policy": "rejected",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "truncated-offset",
+      "safe_return": -2,
+      "locked_caller_return": 0,
+      "python_policy": "rejected",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "zero-offset",
+      "safe_return": 26,
+      "locked_caller_return": 26,
+      "python_policy": "rejected",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "offset-past-history",
+      "safe_return": -6,
+      "locked_caller_return": 0,
+      "python_policy": "rejected",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "truncated-match-extension",
+      "safe_return": -2,
+      "locked_caller_return": 0,
+      "python_policy": "rejected",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "overlap-valid",
+      "safe_return": 26,
+      "locked_caller_return": 26,
+      "python_policy": "accepted",
+      "both_source_versions_match": true
+    },
+    {
+      "fixture": "overlap-short-cap",
+      "safe_return": -6,
+      "locked_caller_return": 0,
+      "python_policy": "rejected",
+      "both_source_versions_match": true
+    }
+  ],
+  "Nema": "Separate discovery/audit ownership; no duplicate acquisition/comparison"
+}

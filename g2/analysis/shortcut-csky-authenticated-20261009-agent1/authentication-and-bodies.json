@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20260930T190500Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "authenticated_artifacts": [
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/e28738432d7b612d625331b00383149b.bin",
+      "size": 4301227,
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "size": 326092,
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+    }
+  ],
+  "bodies": [
+    {
+      "image_id": "binh_a_stage1",
+      "name": "spl_board_init_r_candidate",
+      "runtime_span_conditional": [
+        268438220,
+        268438260
+      ],
+      "child_span": [
+        2788,
+        2828
+      ],
+      "codec_span": [
+        41072,
+        41112
+      ],
+      "bytes": 40,
+      "sha256": "7699ce0aabe5b438cbe667e71499b4af9c45acf7bee49d663cc4754d748dc1ce",
+      "state": "partial_callee_effects_or_external_premises",
+      "file_to_runtime_addend": 268435432
+    },
+    {
+      "image_id": "binh_a_stage2_sram",
+      "name": "reset_handler_candidate",
+      "runtime_span_conditional": [
+        268580096,
+        268580126
+      ],
+      "child_span": [
+        256,
+        286
+      ],
+      "codec_span": [
+        87316,
+        87346
+      ],
+      "bytes": 30,
+      "sha256": "a8793b5e6dcb352b6e15371184865f21415f19a55fb911947bd135d17dc3239d",
+      "state": "partial_callee_effects_or_external_premises",
+      "file_to_runtime_addend": 268579840
+    },
+    {
+      "image_id": "binh_a_stage2_sram",
+      "name": "clear_bss_candidate",
+      "runtime_span_conditional": [
+        268580136,
+        268580160
+      ],
+      "child_span": [
+        296,
+        320
+      ],
+      "codec_span": [
+        87356,
+        87380
+      ],
+      "bytes": 24,
+      "sha256": "3737180606f78b640c311f73be62a057efbc06a79a5bfc7f2cb558da49141be7",
+      "state": "partial_callee_effects_or_external_premises",
+      "file_to_runtime_addend": 268579840
+    },
+    {
+      "image_id": "binh_a_stage2_sram",
+      "name": "system_init_candidate",
+      "runtime_span_conditional": [
+        268580172,
+        268580322
+      ],
+      "child_span": [
+        332,
+        482
+      ],
+      "codec_span": [
+        87392,
+        87542
+      ],
+      "bytes": 150,
+      "sha256": "d7fc56aa502ffd476bcf9c8f2e99551d07ba7b1b254d8596457e19075cebb3a3",
+      "state": "partial_callee_effects_or_external_premises",
+      "file_to_runtime_addend": 268579840
+    }
+  ],
+  "input_hashes": {
+    "g2/build/pseudocode-first/20260930T190500Z/identity.json": "80c5a47f0e01b14e654fb54d43b7ad1744e631da3d43b16719ee632fe09235b6",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+    "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json": "fe17aa5a4e7456a81f342c3ca6d67233b065c42dd5c5a09917bb8e603e4d6610",
+    "third-party/upstream/nationalchip-lvp-kws/arch/cpu/csky/ck804/start.S": "c3ad818c3264f2784be67c0e65b946ba561468d9e6edf5ea2d8e0ca56f0a975a",
+    "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/system.c": "dd7b839ad6e60f43f18fb41aaab02779eba069f4d4a7609c53415327fbe21ecb",
+    "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/spl/spl.c": "f3690694fff309c0118579baedb860b1d47c6de3cfb227a977242249568bb56b",
+    "third-party/upstream/nationalchip-lvp-kws/include/spl/spl.h": "7cee364f316392f9f3eb9c75ddf7b2876a862f3efbff258a943c5ca2a065667e",
+    "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/include/csi_gcc.h": "638e1bf91b9d7cbba877d943132e83db37c75c97ee852ccce256c99a7dcfb530",
+    "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/include/core_ck804.h": "f967c3201c24ceb417f83f915669c74f7182bf23784a7464f450ef6564f6f20a",
+    "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_priv.sinc": "a84e1cedee13aa6d99c86f2ddd849c1367cb831b6fadd9b9d5c3ef87f2991ee2",
+    "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382",
+    "g2/analysis/shortcut-csky-authenticated-20261009-agent1/ExportStartup.java": "c0fdce58fd21ccabcab8e9a089b2b2626ee5671d371385661bb892e7903af1a8",
+    "g2/analysis/shortcut-csky-authenticated-20261009-agent1/run.py": "636d9ed9a05a8821ffbe2145fc7790336ddb027f6433c3b39fb4af6e3ea346d4",
+    "g2/analysis/shortcut-csky-authenticated-20261009-agent1/validate_mfcr.py": "1b5b02e4cc9379e196bd40571e765949cd75ee1254732ea9f2e29bfeafad3d02"
+  },
+  "unique_scoped_instruction_bytes": 244,
+  "qualification": "Local analysis only; independent review and full effects remain outstanding; canonical mapping/gates unchanged."
+}

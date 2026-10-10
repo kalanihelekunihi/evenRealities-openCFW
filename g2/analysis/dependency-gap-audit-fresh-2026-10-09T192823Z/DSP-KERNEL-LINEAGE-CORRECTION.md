@@ -1,0 +1,11 @@
+# Kernel lineage correction
+
+## Additive correction — kernel source availability
+
+The earlier “authentic definitions for absent kernels” boundary was too broad. Discovery identified four definitions already present in the pinned registered SDK: forward/inverse butterfly in `utility/libdsp/Source/TransformFunctions/csky_radix4_butterfly_q15.c`, and forward/inverse real split in `csky_split_rfft_q15.c`. Independent verification passes 26 checks; see [receipt](DSP-KERNEL-LINEAGE-INDEPENDENT-VERIFICATION.json). The prior undefined ELF references prove that these units were not linked in that experiment, not that their source is unavailable.
+
+The DSP Makefile explicitly disables the two C kernel objects and selects their assembly alternatives while retaining C wrappers. The retained immutable public import `a47076981e6c1ac3b9b1073c3e3e9466d8de7ea8` Makefile is byte-identical to the current pinned Makefile. The three retained history responses contain that single import and reference upstream-mainline `ec66ba4f101fb8dccf0dfed92a3b0b15402dd44c`; this private/historical identifier is not acquired source. No public endpoint refetch was needed for this receipt review. Literal Makefile `CSKY_SIMID` and C conditional `CSKY_SIMD` remain distinct.
+
+Revised boundary: the four kernel sources are available; compiling and resolving the complete C alternative is owner work now in progress. Complete C build/link receipts, numerical equivalence and exact stock identity remain separate unverified claims. Searching for source that is already registered, or assuming flag changes will make portable C reproduce hand-written assembly, is not justified. The original five-unit compile/mismatch measurements and exact source-assembly results remain valid. No coverage percentage changes.
+
+Additional direct pinned-source check: `csky_cfft_q15.c` defines `csky_cfft_q15`, and `csky_bitreversal.c` defines `csky_bitreversal_q15`. Both source bytes match the registered pin; the receipt now passes **28 checks**. All six earlier undefined wrapper symbols therefore have available C definitions. This does not establish that compiling those units produces a fully resolved transform object: they may introduce further dependencies, and owner build/link receipts must settle that.

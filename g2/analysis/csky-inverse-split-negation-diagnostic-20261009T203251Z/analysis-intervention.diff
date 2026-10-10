@@ -1,0 +1,47 @@
+--- third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_split_rfft_q15.c
++++ analysis-only/inverse_split_diagnostic.c
+@@ -92,7 +92,25 @@
+ * The function implements a Real FFT
+ */
+ 
+-void csky_split_rfft_q15(
++/* ANALYSIS DIAGNOSTIC ONLY. Original source retained unchanged elsewhere.
++ * One semantic intervention: negate the Q31 cross product as two signed
++ * saturating 16-bit lanes, matching the observed pneg.s16.s backend result.
++ * This helper has no signed overflow, negative shifts or implementation-defined
++ * unsigned-to-signed conversion. The rest of the authentic algorithm is retained.
++ */
++#include <stdint.h>
++static uint32_t diagnostic_packed_neg16(uint32_t value)
++{
++    uint32_t lo_bits = value & UINT32_C(0xffff);
++    uint32_t hi_bits = value >> 16;
++    int32_t lo = lo_bits < UINT32_C(0x8000) ? (int32_t)lo_bits : (int32_t)lo_bits - INT32_C(65536);
++    int32_t hi = hi_bits < UINT32_C(0x8000) ? (int32_t)hi_bits : (int32_t)hi_bits - INT32_C(65536);
++    lo = lo == -INT32_C(32768) ? INT32_C(32767) : -lo;
++    hi = hi == -INT32_C(32768) ? INT32_C(32767) : -hi;
++    return ((uint32_t)lo & UINT32_C(0xffff)) | (((uint32_t)hi & UINT32_C(0xffff)) << 16);
++}
++
++void diagnostic_csky_split_rfft_q15(
+     q15_t * pSrc,
+     uint32_t fftLen,
+     q15_t * pATable,
+@@ -258,7 +276,7 @@
+ * @return none.
+ * The function implements a Real IFFT
+ */
+-void csky_split_rifft_q15(
++void diagnostic_csky_split_rifft_q15(
+     q15_t * pSrc,
+     uint32_t fftLen,
+     q15_t * pATable,
+@@ -339,7 +357,7 @@
+ 
+ #ifndef CSKY_MATH_BIG_ENDIAN
+ 
+-        outI = __SMLSDX(*__SIMD32(pCoefA), *__SIMD32(pSrc1)++, -outI);
++        outI = __SMLSDX(*__SIMD32(pCoefA), *__SIMD32(pSrc1)++, diagnostic_packed_neg16((uint32_t)outI));
+ 
+ #else
+ 

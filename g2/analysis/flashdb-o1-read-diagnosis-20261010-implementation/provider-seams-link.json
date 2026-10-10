@@ -1,0 +1,14 @@
+{
+  "command": [
+    "arm-none-eabi-ld",
+    "-Ttext=0x100000",
+    "-e",
+    "test_get",
+    "g2/analysis/flashdb-o1-read-diagnosis-20261010-implementation/candidate-O1.o",
+    "g2/analysis/flashdb-o1-read-diagnosis-20261010-implementation/provider-seams.o",
+    "-o",
+    "g2/analysis/flashdb-o1-read-diagnosis-20261010-implementation/provider-owned.elf"
+  ],
+  "exit": 0,
+  "stderr": ""
+}

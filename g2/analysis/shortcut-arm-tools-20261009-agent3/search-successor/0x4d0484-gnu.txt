@@ -1,0 +1,47 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-arm-tools-20261009-agent3/main-analysis-only.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004d0484 <bounded_original_thumb+0x518>:
+  4d0484:	b57c      	push	{r2, r3, r4, r5, r6, lr}
+  4d0486:	0006      	movs	r6, r0
+  4d0488:	000d      	movs	r5, r1
+  4d048a:	2000      	movs	r0, #0
+  4d048c:	9000      	str	r0, [sp, #0]
+  4d048e:	2000      	movs	r0, #0
+  4d0490:	9001      	str	r0, [sp, #4]
+  4d0492:	2400      	movs	r4, #0
+  4d0494:	2d00      	cmp	r5, #0
+  4d0496:	d00d      	beq.n	4d04b4 <bounded_original_thumb+0x548>
+  4d0498:	aa01      	add	r2, sp, #4
+  4d049a:	4669      	mov	r1, sp
+  4d049c:	0028      	movs	r0, r5
+  4d049e:	f7ff fd7c 	bl	4cff9a <bounded_original_thumb+0x2e>
+  4d04a2:	9800      	ldr	r0, [sp, #0]
+  4d04a4:	2818      	cmp	r0, #24
+  4d04a6:	da05      	bge.n	4d04b4 <bounded_original_thumb+0x548>
+  4d04a8:	aa01      	add	r2, sp, #4
+  4d04aa:	4669      	mov	r1, sp
+  4d04ac:	0030      	movs	r0, r6
+  4d04ae:	f7ff fd88 	bl	4cffc2 <bounded_original_thumb+0x56>
+  4d04b2:	0004      	movs	r4, r0
+  4d04b4:	2c00      	cmp	r4, #0
+  4d04b6:	d014      	beq.n	4d04e2 <bounded_original_thumb+0x576>
+  4d04b8:	0020      	movs	r0, r4
+  4d04ba:	f7ff fc59 	bl	4cfd70 <bounded_original_thumb-0x1fc>
+  4d04be:	42a8      	cmp	r0, r5
+  4d04c0:	d209      	bcs.n	4d04d6 <bounded_original_thumb+0x56a>
+  4d04c2:	f240 3209 	movw	r2, #777	@ 0x309
+  4d04c6:	f8df 11e4 	ldr.w	r1, [pc, #484]	@ 4d06ac <bounded_original_thumb+0x740>
+  4d04ca:	f8df 04b4 	ldr.w	r0, [pc, #1204]	@ 4d0980 <bounded_original_thumb+0xa14>
+  4d04ce:	f000 fa71 	bl	4d09b4 <bounded_original_thumb+0xa48>
+  4d04d2:	f3af 8000 	nop.w
+  4d04d6:	9b01      	ldr	r3, [sp, #4]
+  4d04d8:	9a00      	ldr	r2, [sp, #0]
+  4d04da:	0021      	movs	r1, r4
+  4d04dc:	0030      	movs	r0, r6
+  4d04de:	f7ff fdac 	bl	4d003a <bounded_original_thumb+0xce>
+  4d04e2:	0020      	movs	r0, r4
+  4d04e4:	bd76      	pop	{r1, r2, r4, r5, r6, pc}

@@ -1,0 +1,28 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10205cf4 <.data+0x2cf0>:
+10205cf4:	d214      	push      	r4-r5, r15
+10205cf6:	9010      	lrw      	r4, 0x20027350	// 0x10205d34
+10205cf8:	c0a020ea 	movih      	r0, 41152
+10205cfc:	56fcffe3 	bsr      	0x102055a8	// 0x102055a8
+10205d00:	c0a023ea 	movih      	r3, 41152
+10205d04:	712164dc 	st.w      	r3, (r4, 0x5c4)
+10205d08:	30a023ea 	movih      	r3, 41008
+10205d0c:	0035      	movi      	r5, 0
+10205d0e:	722164dc 	st.w      	r3, (r4, 0x5c8)
+10205d12:	6a10      	lrw      	r3, 0xa0c00190	// 0x10205d38
+10205d14:	732164dc 	st.w      	r3, (r4, 0x5cc)
+10205d18:	6d21a4dc 	st.w      	r5, (r4, 0x5b4)
+10205d1c:	6c21a4dc 	st.w      	r5, (r4, 0x5b0)
+10205d20:	dafdffe3 	bsr      	0x102058d4	// 0x102058d4
+10205d24:	576c      	mov      	r1, r5
+10205d26:	0610      	lrw      	r0, 0x10205ce0	// 0x10205d3c
+10205d28:	44fcffe3 	bsr      	0x102055b0	// 0x102055b0
+10205d2c:	0233      	movi      	r3, 2
+10205d2e:	176c      	mov      	r0, r5
+10205d30:	60b4      	st.w      	r3, (r4, 0x0)
+10205d32:	9214      	pop      	r4-r5, r15

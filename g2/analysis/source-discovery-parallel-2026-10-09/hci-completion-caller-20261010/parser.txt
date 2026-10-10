@@ -1,0 +1,19 @@
+
+g2/analysis/source-discovery-parallel-2026-10-09/hci-completion-caller-20261010/parser.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0056a0d0 <.data>:
+  56a0d0:	b538      	push	{r3, r4, r5, lr}
+  56a0d2:	0004      	movs	r4, r0
+  56a0d4:	7808      	ldrb	r0, [r1, #0]
+  56a0d6:	7120      	strb	r0, [r4, #4]
+  56a0d8:	1c49      	adds	r1, r1, #1
+  56a0da:	2210      	movs	r2, #16
+  56a0dc:	1d65      	adds	r5, r4, #5
+  56a0de:	0028      	movs	r0, r5
+  56a0e0:	f6cf fd80 	bl	0x439be4
+  56a0e4:	7920      	ldrb	r0, [r4, #4]
+  56a0e6:	70e0      	strb	r0, [r4, #3]
+  56a0e8:	bd31      	pop	{r0, r4, r5, pc}

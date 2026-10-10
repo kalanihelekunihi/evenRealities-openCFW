@@ -1,0 +1,40 @@
+{
+  "payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "address_mapping": "file offset=virtual address-0x3300+32",
+  "ranges": [
+    {
+      "name": "code",
+      "start": "0xa9e4",
+      "end_exclusive": "0xaa1c",
+      "payload_offset": "0x7704",
+      "size": 56,
+      "sha256": "af3f65a359e82cdfb692ebd2ae063f2a27b25dd3d90365d05624aaa7d319ef27",
+      "original_bytes_hex": "70b500260c4c0d4d641ba410a64209d1002600f025f80a4c0a4d641ba410a64205d170bdb300eb5898470136eee7b300eb5898470136f2e7"
+    },
+    {
+      "name": "four literal dependencies",
+      "start": "0xaa1c",
+      "end_exclusive": "0xaa2c",
+      "payload_offset": "0x773c",
+      "size": 16,
+      "sha256": "a5d8c3a26dd0e33aadd0a92505d68e560eba12fc7bbecb0ecb4c03d9d33a6634",
+      "original_bytes_hex": "7c0800207c080020800800207c080020"
+    },
+    {
+      "name": "actual _init callback wrapper",
+      "start": "0xaa44",
+      "end_exclusive": "0xaa50",
+      "payload_offset": "0x7764",
+      "size": 12,
+      "sha256": "2034bae0c12b24c25cc89225f45f5e09ac7564f739f03f71b96fc5e1aecc0000",
+      "original_bytes_hex": "f8b5c046f8bc08bc9e467047"
+    }
+  ],
+  "literal_words": {
+    "0xaa1c": "0x2000087c",
+    "0xaa20": "0x2000087c",
+    "0xaa24": "0x20000880",
+    "0xaa28": "0x2000087c"
+  },
+  "index_start": "2e544d8673c8f3728157aece7cad9a3077c810706c8f45377e436a7db2690f6c"
+}

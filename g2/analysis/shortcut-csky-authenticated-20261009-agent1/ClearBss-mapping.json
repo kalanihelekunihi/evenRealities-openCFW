@@ -1,0 +1,120 @@
+{
+  "image": "binh_a_stage2_sram",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin",
+  "source_sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+  "source_size": 14716,
+  "file_to_conditional_runtime_addend": 268579840,
+  "analyzed_runtime_span": [
+    268580136,
+    268580172
+  ],
+  "analyzed_child_span": [
+    296,
+    332
+  ],
+  "component_span": [
+    87060,
+    101776
+  ],
+  "route": {
+    "device_pointer": null,
+    "evidence": [
+      {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-flash-loader-mappings-001/002/loader-a.objdump.txt",
+        "role": "instruction_bytes",
+        "sha256": "8887040f99ca177e1c18b21a3287c0fd8e9533999227ab39d6e59eb52a2dd0bd"
+      },
+      {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-execution-route-inventory-028/routes.json",
+        "role": "other_bytes",
+        "sha256": "7fbd04ab6077db1d1c1e85a57fdcab9b6d97f2cc4a56148b6816c5131a70fa32"
+      },
+      {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-flash-loader-startup-001/review-002.json",
+        "role": "other_bytes",
+        "sha256": "96936139137e6b6dd7a3b0fbd087620c01f08df8f4af56edce899baab6381d57"
+      }
+    ],
+    "expected_execution": {
+      "entry_address": 268580096,
+      "entry_offset": 256,
+      "image_span": [
+        0,
+        14716
+      ],
+      "space": "IRAM",
+      "span": [
+        268579840,
+        268594556
+      ]
+    },
+    "external_refs": [
+      "a_loader_sampled_pmu_base",
+      "a_sram_spi_helper_success",
+      "a_stage2_selected"
+    ],
+    "loader_context": {
+      "loader_component_origin": 38284,
+      "loader_content_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+      "loader_image_id": "binh_a_stage1",
+      "source_base_parameter": "a_loader_sampled_pmu_base",
+      "source_offset": 48776
+    },
+    "p2_unresolved": [
+      "Entry 0x10023500 is the reviewed known direct BSR target, offset 0x100; it is not claimed as the sole reset/entry root.",
+      "Live PMU NOR base and helper success remain external; complete function/root and semantics closure are P2."
+    ],
+    "route_id": "binh-a-sram-normal-nor-read",
+    "selection": {
+      "ast": {
+        "op": "and",
+        "terms": [
+          {
+            "expected": 2,
+            "mask": 15,
+            "op": "masked_eq",
+            "value": {
+              "address": 2684420200,
+              "endianness": "little",
+              "kind": "memory_u32"
+            }
+          },
+          {
+            "left": {
+              "address": 537083900,
+              "endianness": "little",
+              "kind": "memory_u32"
+            },
+            "op": "ne",
+            "right": {
+              "kind": "constant",
+              "value": 2864434397
+            }
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-flash-loader-mappings-001/002/loader-a.objdump.txt",
+          "role": "instruction_bytes",
+          "sha256": "8887040f99ca177e1c18b21a3287c0fd8e9533999227ab39d6e59eb52a2dd0bd"
+        }
+      ],
+      "kind": "guard_ast"
+    },
+    "transfer_kind": "software_copy",
+    "write": {
+      "image_span": [
+        0,
+        14716
+      ],
+      "size": 14716,
+      "space": "IRAM",
+      "span": [
+        268579840,
+        268594556
+      ]
+    }
+  },
+  "qualification": "Stage1 header subtraction is intended coordinate hypothesis, resident delivery unverified. Stage2 normal route remains conditional."
+}

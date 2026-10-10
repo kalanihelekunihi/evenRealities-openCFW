@@ -1,0 +1,45 @@
+{
+  "status": "private_fix_verified",
+  "scope": "one synthetic movih instruction, no firmware recovery",
+  "independent_expected": "0xa0a00000",
+  "commands": [
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-ghidra-mcp-20261009-agent2/private-install/support/sleigh",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-ghidra-mcp-20261009-agent2/private-install/Ghidra/Processors/CSKY/data/languages/csky_v2.slaspec"
+      ],
+      "exit_code": 0,
+      "log": "fixed-sleigh.log",
+      "log_sha256": "b7468580e2e98f41f39b4fb8630f887024a0898da7055d2464359f42ecaa3beb"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-ghidra-mcp-20261009-agent2/private-install/support/analyzeHeadless",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-ghidra-mcp-20261009-agent2",
+        "PrivateCskyFixedProbeFull",
+        "-process",
+        "synthetic-movih.bin",
+        "-noanalysis",
+        "-scriptPath",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-ghidra-mcp-20261009-agent2",
+        "-postScript",
+        "ProbeCskyMovih.java"
+      ],
+      "exit_code": 0,
+      "log": "fixed-evaluated-probe.log",
+      "log_sha256": "767247e304813293b89d15f0aa85229c93a06227c4137c14c51354b541fd5b00"
+    }
+  ],
+  "hashes": {
+    "/opt/homebrew/Cellar/ghidra/12.1.4/libexec/Ghidra/Processors/CSKY/data/languages/32b_data.sinc": "3dde82aa3bc3bfbb70dc8950705cd0c2a59173e924ee6f92f9005ed880d5210b",
+    "/opt/homebrew/Cellar/ghidra/12.1.4/libexec/Ghidra/Processors/CSKY/data/languages/csky_v2.sla": "ffd3dee2b2bdfe3586c1f7362a7cca079ba2fc2a6ab28b5cc5107bfd68187755",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-ghidra-mcp-20261009-agent2/private-install/Ghidra/Processors/CSKY/data/languages/32b_data.sinc": "0135b93175df811b7b97484d1c6ddb3df0120c35089d4e60c86a061de28fe68f",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-ghidra-mcp-20261009-agent2/private-install/Ghidra/Processors/CSKY/data/languages/csky_v2.sla": "6b970f3c8630fb4eb9457f449e07c898feba292b2b642b2c87c05dd5ddd287ff",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-ghidra-mcp-20261009-agent2/synthetic-movih.bin": "45c57d227a2f573f2df7d1b97994c0d7c5522b805ea9d9c2ce87a12a555db750",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-ghidra-mcp-20261009-agent2/ProbeCskyMovih.java": "ac8966611fce2f61b94c6f49ffd21d56586f1aacab4d7822494f33ed5cbefc37"
+  },
+  "limits": [
+    "No authenticated full-image probe or campaign admission",
+    "All remaining CSKY instructions and ABI assumptions unvalidated"
+  ]
+}

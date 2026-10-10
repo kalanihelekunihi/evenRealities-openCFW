@@ -1,0 +1,130 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/misc.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_cache_init:
+
+00000000 <gx_cache_init>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_icache_enable>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_icache_enable
+   6:	e0000000 	bsr      	0x0	// 0 <gx_dcache_disable>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_dcache_disable
+   a:	1065      	lrw      	r3, 0xe000f000	// 1c <gx_cache_init+0x1c>
+   c:	ea222000 	movih      	r2, 8192
+  10:	2222      	addi      	r2, 35
+  12:	b345      	st.w      	r2, (r3, 0x14)
+  14:	e0000000 	bsr      	0x0	// 0 <gx_dcache_enable>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_dcache_enable
+  18:	1490      	pop      	r15
+  1a:	0000      	.short	0x0000
+  1c:	e000f000 	.long	0xe000f000
+
+Disassembly of section .text.virt_to_dma:
+
+00000000 <virt_to_dma>:
+   0:	33f0      	movi      	r3, 240
+   2:	4378      	lsli      	r3, r3, 24
+   4:	584c      	addu      	r2, r0, r3
+   6:	c7805023 	bmaski      	r3, 29
+   a:	648c      	cmphs      	r3, r2
+   c:	0c03      	bf      	0x12	// 12 <virt_to_dma+0x12>
+   e:	c4005760 	zext      	r0, r0, 27, 0
+  12:	783c      	jmp      	r15
+
+Disassembly of section .text.bootinfo_init:
+
+00000000 <bootinfo_init>:
+   0:	ea22a001 	movih      	r2, 40961
+   4:	927a      	ld.w      	r3, (r2, 0x68)
+   6:	e463200f 	andi      	r3, r3, 15
+   a:	3b41      	cmpnei      	r3, 1
+   c:	0c0d      	bf      	0x26	// 26 <bootinfo_init+0x26>
+   e:	3b40      	cmpnei      	r3, 0
+  10:	0c04      	bf      	0x18	// 18 <bootinfo_init+0x18>
+  12:	3b42      	cmpnei      	r3, 2
+  14:	0c11      	bf      	0x36	// 36 <bootinfo_init+0x36>
+  16:	783c      	jmp      	r15
+  18:	925a      	ld.w      	r2, (r2, 0x68)
+  1a:	c48254e2 	zext      	r2, r2, 7, 4
+  1e:	102a      	lrw      	r1, 0x0	// 44 <bootinfo_init+0x44>
+  20:	b141      	st.w      	r2, (r1, 0x4)
+  22:	b160      	st.w      	r3, (r1, 0x0)
+  24:	07f9      	br      	0x16	// 16 <bootinfo_init+0x16>
+  26:	927a      	ld.w      	r3, (r2, 0x68)
+  28:	c48354e3 	zext      	r3, r3, 7, 4
+  2c:	1046      	lrw      	r2, 0x0	// 44 <bootinfo_init+0x44>
+  2e:	b261      	st.w      	r3, (r2, 0x4)
+  30:	3307      	movi      	r3, 7
+  32:	b260      	st.w      	r3, (r2, 0x0)
+  34:	07f1      	br      	0x16	// 16 <bootinfo_init+0x16>
+  36:	3000      	movi      	r0, 0
+  38:	925a      	ld.w      	r2, (r2, 0x68)
+  3a:	28ff      	subi      	r0, 256
+  3c:	1022      	lrw      	r1, 0x0	// 44 <bootinfo_init+0x44>
+  3e:	6880      	and      	r2, r0
+  40:	07f0      	br      	0x20	// 20 <bootinfo_init+0x20>
+  42:	0000      	.short	0x0000
+  44:	00000000 	.long	0x00000000
+			44: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.get_baudrate_in_boot_mode:
+
+00000000 <get_baudrate_in_boot_mode>:
+   0:	3000      	movi      	r0, 0
+   2:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_analog_config_update_enable:
+
+00000000 <gx_analog_config_update_enable>:
+   0:	1064      	lrw      	r3, 0xa0005000	// 10 <gx_analog_config_update_enable+0x10>
+   2:	3259      	movi      	r2, 89
+   4:	b350      	st.w      	r2, (r3, 0x40)
+   6:	b351      	st.w      	r2, (r3, 0x44)
+   8:	b352      	st.w      	r2, (r3, 0x48)
+   a:	b353      	st.w      	r2, (r3, 0x4c)
+   c:	783c      	jmp      	r15
+   e:	0000      	.short	0x0000
+  10:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_mcu_set_wakeup_source:
+
+00000000 <gx_mcu_set_wakeup_source>:
+   0:	c4a054c3 	zext      	r3, r0, 6, 5
+   4:	3201      	movi      	r2, 1
+   6:	e400201f 	andi      	r0, r0, 31
+   a:	c4024020 	lsl      	r0, r2, r0
+   e:	230f      	addi      	r3, 16
+  10:	1042      	lrw      	r2, 0xe000e100	// 18 <gx_mcu_set_wakeup_source+0x18>
+  12:	d4620880 	str.w      	r0, (r2, r3 << 2)
+  16:	783c      	jmp      	r15
+  18:	e100      	.short	0xe100
+  1a:	e000      	.short	0xe000
+
+Disassembly of section .text.gx_mcu_clr_wakeup_source:
+
+00000000 <gx_mcu_clr_wakeup_source>:
+   0:	c4a054c3 	zext      	r3, r0, 6, 5
+   4:	3201      	movi      	r2, 1
+   6:	e400201f 	andi      	r0, r0, 31
+   a:	c4024020 	lsl      	r0, r2, r0
+   e:	232f      	addi      	r3, 48
+  10:	1042      	lrw      	r2, 0xe000e100	// 18 <gx_mcu_clr_wakeup_source+0x18>
+  12:	d4620880 	str.w      	r0, (r2, r3 << 2)
+  16:	783c      	jmp      	r15
+  18:	e100      	.short	0xe100
+  1a:	e000      	.short	0xe000
+
+Disassembly of section .text.gx_mcu_idle:
+
+00000000 <gx_mcu_idle>:
+   0:	c0000420 	sync
+   4:	c0000420 	sync
+   8:	1065      	lrw      	r3, 0xe000f000	// 1c <gx_mcu_idle+0x1c>
+   a:	3205      	movi      	r2, 5
+   c:	b341      	st.w      	r2, (r3, 0x4)
+   e:	c0000420 	sync
+  12:	c0000420 	sync
+  16:	c0005020 	doze
+  1a:	783c      	jmp      	r15
+  1c:	e000f000 	.long	0xe000f000

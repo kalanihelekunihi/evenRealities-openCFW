@@ -1,0 +1,7 @@
+static void hciEvtParseLeEncryptCmdCmpl(hciEvt_t *pMsg, uint8_t *p, uint8_t len)
+{
+  BSTREAM_TO_UINT8(pMsg->leEncryptCmdCmpl.status, p);
+  memcpy(pMsg->leEncryptCmdCmpl.data, p, HCI_ENCRYPT_DATA_LEN);
+
+  pMsg->hdr.status = pMsg->leEncryptCmdCmpl.status;
+}

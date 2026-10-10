@@ -1,0 +1,202 @@
+{
+  "evidence": [
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "role": "source_bytes",
+      "sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "role": "other_bytes",
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-flash-loader-mappings-001/002/loader-a.objdump.txt",
+      "role": "instruction_bytes",
+      "sha256": "8887040f99ca177e1c18b21a3287c0fd8e9533999227ab39d6e59eb52a2dd0bd"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-execution-route-inventory-028/routes.json",
+      "role": "other_bytes",
+      "sha256": "7fbd04ab6077db1d1c1e85a57fdcab9b6d97f2cc4a56148b6816c5131a70fa32"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-xip-linked-address-review-068/review.json",
+      "role": "other_bytes",
+      "sha256": "d9cdf1da4e0e0ec3341f96dcb0b8c43c4c1c37a7a598148137c1e7e056d74eff"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-xip-linked-address-review-068/verification.json",
+      "role": "linked_layout",
+      "sha256": "e87959e99d3c4467bb4259ef904a6fbb72ceed3360256a4ecf3352d431011a77"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-xip-linked-address-review-068/sram-disassembly.txt",
+      "role": "instruction_bytes",
+      "sha256": "e41ed65a4733843fcf3397e7d9579a9b1a732400544fadb1c6c20eb5865275a5"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-xip-linked-address-review-068/verification.json",
+      "role": "target_bytes",
+      "sha256": "e87959e99d3c4467bb4259ef904a6fbb72ceed3360256a4ecf3352d431011a77"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-execution-tuple-index-076/001/tuples.json",
+      "role": "other_bytes",
+      "sha256": "b07a51d674049a7dd8d9ca65422a3e58a9d490ea8d661b84181f2083190afb40"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-stage2-container-ancestry-050/002/review.json",
+      "role": "other_bytes",
+      "sha256": "faa4eb495fb7c613ac9ccdec9f529c318a1f8f5a8e0512942f2cc13eb379b535"
+    }
+  ],
+  "execution_class": "cpu_image",
+  "external_premises": [
+    {
+      "id": "a_loader_sampled_pmu_base",
+      "kind": "external_parameter",
+      "statement": "NOR base sampled by BINH-A from PMU_CFG_BOOT_MODE at 0xA0010068, masked with 0xffffff00; live value is unmeasured.",
+      "status": "external_unmeasured"
+    },
+    {
+      "id": "a_xip_aperture_enable",
+      "kind": "xip_aperture",
+      "statement": "The external XIP aperture/enable maps selected BINH-A source bytes to the reviewed SDK linked addresses; live mapping is not measured.",
+      "status": "external_unverified"
+    },
+    {
+      "id": "a_xip_selected",
+      "kind": "external_selected_image",
+      "statement": "The BINH-A normal route selects the stage2 XIP child; route selection is represented by the artifact guard and remains conditional on external boot state.",
+      "status": "external_unverified"
+    }
+  ],
+  "kind": "execution_contract",
+  "p2_unresolved": [
+    "Full vector/entry and caller closure, all startup alternatives, and executable function completeness remain P2 obligations. This model only records the exact conditional inventory mapping tuple."
+  ],
+  "review_id": "execution-contract-review-083-binh_a_stage2_xip",
+  "route_set_scope": "known_inventory_transfer_alternatives",
+  "routes": [
+    {
+      "device_pointer": null,
+      "evidence": [
+        {
+          "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-flash-loader-mappings-001/002/loader-a.objdump.txt",
+          "role": "instruction_bytes",
+          "sha256": "8887040f99ca177e1c18b21a3287c0fd8e9533999227ab39d6e59eb52a2dd0bd"
+        },
+        {
+          "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-xip-linked-address-review-068/review.json",
+          "role": "other_bytes",
+          "sha256": "d9cdf1da4e0e0ec3341f96dcb0b8c43c4c1c37a7a598148137c1e7e056d74eff"
+        },
+        {
+          "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-xip-linked-address-review-068/verification.json",
+          "role": "linked_layout",
+          "sha256": "e87959e99d3c4467bb4259ef904a6fbb72ceed3360256a4ecf3352d431011a77"
+        },
+        {
+          "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-xip-linked-address-review-068/sram-disassembly.txt",
+          "role": "instruction_bytes",
+          "sha256": "e41ed65a4733843fcf3397e7d9579a9b1a732400544fadb1c6c20eb5865275a5"
+        },
+        {
+          "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-xip-linked-address-review-068/verification.json",
+          "role": "target_bytes",
+          "sha256": "e87959e99d3c4467bb4259ef904a6fbb72ceed3360256a4ecf3352d431011a77"
+        }
+      ],
+      "expected_execution": {
+        "entry_address": 270548084,
+        "entry_offset": 3184,
+        "image_span": [
+          0,
+          36484
+        ],
+        "space": "IRAM",
+        "span": [
+          270544900,
+          270581384
+        ]
+      },
+      "external_refs": [
+        "a_loader_sampled_pmu_base",
+        "a_xip_aperture_enable",
+        "a_xip_selected"
+      ],
+      "loader_context": {
+        "loader_component_origin": 38284,
+        "loader_content_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+        "loader_image_id": "binh_a_stage1",
+        "source_base_parameter": "a_loader_sampled_pmu_base",
+        "source_offset": 12292
+      },
+      "p2_unresolved": [
+        "0x10203c74 (image offset 0x0c70) is one reviewed byte-backed direct-call target among the 37-address set; it is not an invented reset entry or complete entry inventory.",
+        "XIP aperture/enable, live NOR parameter, route success, and complete P2 function/root closure remain unverified."
+      ],
+      "route_id": "binh-a-stage2-direct-xip-normal-route",
+      "selection": {
+        "ast": {
+          "op": "and",
+          "terms": [
+            {
+              "expected": 2,
+              "mask": 15,
+              "op": "masked_eq",
+              "value": {
+                "address": 2684420200,
+                "endianness": "little",
+                "kind": "memory_u32"
+              }
+            },
+            {
+              "left": {
+                "address": 537083900,
+                "endianness": "little",
+                "kind": "memory_u32"
+              },
+              "op": "ne",
+              "right": {
+                "kind": "constant",
+                "value": 2864434397
+              }
+            }
+          ]
+        },
+        "evidence": [
+          {
+            "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-flash-loader-mappings-001/002/loader-a.objdump.txt",
+            "role": "instruction_bytes",
+            "sha256": "8887040f99ca177e1c18b21a3287c0fd8e9533999227ab39d6e59eb52a2dd0bd"
+          }
+        ],
+        "kind": "guard_ast"
+      },
+      "transfer_kind": "direct_xip",
+      "write": null
+    }
+  ],
+  "schema_version": 1,
+  "source": {
+    "component_span": [
+      50576,
+      87060
+    ],
+    "content_sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+    "image_id": "binh_a_stage2_xip",
+    "image_span": [
+      0,
+      36484
+    ],
+    "parent_image_id": "binh_a_stage2_container",
+    "parent_sha256": "2515d7201f82c612cfba7f0c61bb014a0af9fe8b7e9037959f0705b7267850ee",
+    "parent_span": [
+      0,
+      36484
+    ],
+    "size": 36484
+  }
+}

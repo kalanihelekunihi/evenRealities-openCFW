@@ -1,0 +1,56 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin:     file format binary
+
+
+Disassembly of section .data:
+
+1002354c <.data+0x14c>:
+1002354c:	d014      	push      	r15
+1002354e:	226013c0 	mfcr      	r2, cr<19, 0>
+10023552:	236014c0 	mfcr      	r3, cr<20, 0>
+10023556:	216015c0 	mfcr      	r1, cr<21, 0>
+1002355a:	0030      	movi      	r0, 0
+1002355c:	6c5e60c4 	ins      	r3, r0, 31, 12
+10023560:	405c20c4 	ins      	r1, r0, 2, 0
+10023564:	356401c0 	mtcr      	r1, cr<21, 0>
+10023568:	1f31      	movi      	r1, 31
+1002356a:	ff2f63e4 	andi      	r3, r3, 4095
+1002356e:	815c61c4 	ins      	r3, r1, 5, 1
+10023572:	3d10      	lrw      	r1, 0xfefffcfe	// 0x100235e4
+10023574:	8468      	and      	r2, r1
+10023576:	000342ec 	ori      	r2, r2, 768
+1002357a:	336402c0 	mtcr      	r2, cr<19, 0>
+1002357e:	0132      	movi      	r2, 1
+10023580:	005c62c4 	ins      	r3, r2, 0, 0
+10023584:	346403c0 	mtcr      	r3, cr<20, 0>
+10023588:	236012c0 	mfcr      	r3, cr<18, 0>
+1002358c:	030063ec 	ori      	r3, r3, 3
+10023590:	326403c0 	mtcr      	r3, cr<18, 0>
+10023594:	7a1200e0 	bsr      	0x10025a88	// 0x10025a88
+10023598:	f60900e0 	bsr      	0x10024984	// 0x10024984
+1002359c:	040020e9 	bnez      	r0, 0x100235a4	// 0x100235a4
+100235a0:	c4ffffe3 	bsr      	0x10023528	// 0x10023528
+100235a4:	8c1300e0 	bsr      	0x10025cbc	// 0x10025cbc
+100235a8:	7010      	lrw      	r3, 0x10023400	// 0x100235e8
+100235aa:	216403c0 	mtcr      	r3, cr<1, 0>
+100235ae:	7010      	lrw      	r3, 0xe000e100	// 0x100235ec
+100235b0:	0031      	movi      	r1, 0
+100235b2:	ff32      	movi      	r2, 255
+100235b4:	c42243dc 	st.w      	r2, (r3, 0xb10)
+100235b8:	876c      	mov      	r2, r1
+100235ba:	002a      	subi      	r2, 1
+100235bc:	802023dc 	st.w      	r1, (r3, 0x200)
+100235c0:	602043dc 	st.w      	r2, (r3, 0x180)
+100235c4:	812023dc 	st.w      	r1, (r3, 0x204)
+100235c8:	612043dc 	st.w      	r2, (r3, 0x184)
+100235cc:	822023dc 	st.w      	r1, (r3, 0x208)
+100235d0:	622043dc 	st.w      	r2, (r3, 0x188)
+100235d4:	832023dc 	st.w      	r1, (r3, 0x20c)
+100235d8:	632043dc 	st.w      	r2, (r3, 0x18c)
+100235dc:	207480c1 	psrset      	ee, ie
+100235e0:	9014      	pop      	r15
+100235e2:	0000      	bkpt
+100235e4:	fffefefc 	cpop      	<7, 1015551>
+100235e8:	0034      	movi      	r4, 0
+100235ea:	0210      	lrw      	r0, 0x6023c000	// 0x100235f0
+100235ec:	00e000e1 	bsr      	0x1203f5ec	// 0x1203f5ec

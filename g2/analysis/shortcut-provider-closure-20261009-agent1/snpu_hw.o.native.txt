@@ -1,0 +1,56 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/snpu_hw.o:     file format elf32-csky-little
+
+
+Disassembly of section .sram_text:
+
+00000000 <snpu_device_init>:
+   0:	783c      	jmp      	r15
+	...
+
+00000004 <snpu_device_exit>:
+   4:	783c      	jmp      	r15
+	...
+
+00000008 <snpu_request_irq>:
+   8:	14d0      	push      	r15
+   a:	6c87      	mov      	r2, r1
+   c:	6c43      	mov      	r1, r0
+   e:	300c      	movi      	r0, 12
+  10:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			10: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  14:	1490      	pop      	r15
+	...
+
+00000018 <reg_get_bit>:
+  18:	9000      	ld.w      	r0, (r0, 0x0)
+  1a:	7005      	lsr      	r0, r1
+  1c:	e4002001 	andi      	r0, r0, 1
+  20:	783c      	jmp      	r15
+	...
+
+00000024 <reg_set_bit>:
+  24:	3301      	movi      	r3, 1
+  26:	9040      	ld.w      	r2, (r0, 0x0)
+  28:	c4234021 	lsl      	r1, r3, r1
+  2c:	6c48      	or      	r1, r2
+  2e:	b020      	st.w      	r1, (r0, 0x0)
+  30:	783c      	jmp      	r15
+	...
+
+00000034 <reg_clr_bit>:
+  34:	3300      	movi      	r3, 0
+  36:	2b01      	subi      	r3, 2
+  38:	9040      	ld.w      	r2, (r0, 0x0)
+  3a:	c4234101 	rotl      	r1, r3, r1
+  3e:	6848      	and      	r1, r2
+  40:	b020      	st.w      	r1, (r0, 0x0)
+  42:	783c      	jmp      	r15
+
+00000044 <reg_get_val>:
+  44:	9000      	ld.w      	r0, (r0, 0x0)
+  46:	783c      	jmp      	r15
+
+00000048 <reg_set_val>:
+  48:	b020      	st.w      	r1, (r0, 0x0)
+  4a:	783c      	jmp      	r15

@@ -1,0 +1,1150 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <package schemaVersion="1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+    <vendor>AmbiqMicro</vendor>
+    <url>https://download.ambiq.com/packs/</url>
+    <name>Apollo_DFP</name>
+    <description>Ambiq Apollo Series Device Support</description>
+
+    <releases>
+      <release version="1.6.0" date="2026-07-20">
+        - Apollo330P and Apollo510L RTM.
+      </release>
+
+      <release version="1.5.6" date="2025-10-15">
+        - Official support for Apollo330P and Apollo510L using product names.
+      </release>
+
+      <release version="1.5.4" date="2025-06-22">
+        - Support for Apollo330P and Apollo510L.
+      </release>
+
+      <release version="1.5.2" date="2025-05-01">
+        - Suppress multiple SVD errors/warnings from SVDConv.
+      </release>
+
+      <release version="1.5.0" date="2025-04-02">
+        - Release To Market support for Apollo510 devices, AP510NFA-CBR and AP510NFA-CCR.
+      </release>
+
+      <release version="1.4.1" date="2023-08-18">
+        - Updated Support for Apollo4 Lite devices AMAP42KL-KBR and AMA4B2KL-KBR.
+      </release>
+
+      <release version="1.3.0" date="2022-08-05">
+        - Support for Apollo4 Plus and Apollo4 Blue Plus devices including AMAP42KK-KBR and AMA4B2KP-KBR.
+        - New secure URL site for packs downloads.
+      </release>
+
+      <release version="1.2.9" date="2020-12-10">
+        - Support for Apollo4 secure bootloader/AMAP42KK-KBR.
+        - Add support for AMAP42KK-KCR and AMA4B2KK-KBR (SiP).
+        - Remove support for Apollo4 Rev A (use Pack v1.2.8 for these devices).
+      </release>
+
+      <release version="1.2.8" date="2020-11-10">
+        - Support for Apollo4 secure bootloader and AMAP42KK-KBR.
+        - Still supports nbl and sblA.
+      </release>
+
+      <release version="1.2.6" date="2020-06-05">
+        - Support for Apollo4nbl (non-bootloader) AMAP42KK-KBR-nbl, AMAP42KK-KBR-sblA.
+      </release>
+
+      <release version="1.2.0" date="2020-01-02">
+        - Support for Apollo3 Blue Plus.
+      </release>
+
+      <release version="1.1.0" date="2018-08-10">
+        - Full support for Apollo3 Blue.
+      </release>
+
+      <release version="1.0.0" date="2017-03-10">
+        - Update device names to correspond to their official part numbers.
+        - Update both Apollo and Apollo2 SVD files, particularly update vector table in Apollo2.svd.  Also make sure svd files are schema compliant.
+      </release>
+
+      <release version="0.9.2" date="2016-10-04">
+        Ambiq Micro Apollo Device Family Keil Pack supporting the Apollo device.
+        - Adds additional Apollo2 support.
+      </release>
+
+      <release version="0.9.1" date="2016-07-01">
+        - Update the Apollo2.svd file.
+      </release>
+
+      <release version="0.9.0" date="2016-03-07">
+        - Initial release of the Keil Pack for the Ambiq Micro Apollo2 Device supporting the FPGA emulator.
+      </release>
+
+    <release version="0.8.2" date="2015-09-27">>
+        - Rename the devices using underscores per Keil requirements.
+        - Updates the PDSC file with other minor corrections suggested by the Keil team.
+      </release>
+
+      <release version="0.8.1" date="2015-08-09">
+      - Update of the Apollo.svd file.
+      </release>
+
+      <release version="0.8.0" date="2015-06-14">
+        - Release Keil Pack containing support for the Ambiq Micro the Apollo device.
+      </release>
+
+      <release version="0.6.0" date="2015-05-05">
+        - Beta Keil Pack containing support for the Ambiq Micro Apollo device.
+      </release>
+
+    </releases>
+
+    <keywords>
+      <!-- keywords for indexing -->
+      <keyword>Ambiq</keyword>
+      <keyword>AmbiqMicro</keyword>
+      <keyword>Ambiq Micro</keyword>
+      <keyword>Apollo</keyword>
+      <keyword>Device Support</keyword>
+      <keyword>Device Family Package</keyword>
+    </keywords>
+
+  <devices>
+    <family Dfamily="Apollo Series" Dvendor="Ambiq Micro:120">
+
+      <!-- TODO: Investigate inclusion of more description detail in newly introduced 'overview' element. -->
+      <description>
+The Apollo MCU family is ultra-low power, Arm Cortex-based microcontrollers using Ambiq's patented SPOT technology.
+      </description>
+
+      <!-- 1.5.2 Deprecate most of the "features", which were applicable only to the original Apollo.
+      <feature type="VCC"               n="1.8"     m="3.8"/>
+      <feature type="Temp"              n="-40"     m="85"/>
+      <feature type="IOs"               n="50"              name="GPIOs"/>
+      <feature type="SPI"               n="2"               name="Up to 2x master, 1.2 kHz up to 8 MHz"/>
+      <feature type="SPI"               n="1"               name="Up to 1x slave, 1.2 kHz up to 10 MHz"/>
+      <feature type="I2C"               n="2"               name="Up to 2x master, 1.2 kHz up to 1.2 MHz"/>
+      <feature type="I2C"               n="2"               name="Up to 1x slave, 1.2 kHz up to 1.2 MHz"/>
+      <feature type="UART"              n="1"               name="Ultra-low power UART"/>
+      <feature type="WDT"               n="1"/>
+      <feature type="Timer"             n="4"       m="16"  name="Timer/Counter module"/>
+      <feature type="ADC"               n="13"      m="10"  name="Up to 1 MS/s"/>
+      <feature type="TempSens"          n="1"               name="+/- 2 Deg C"/>
+      <feature type="RTC"               n="32768"           name="32 kHz ultra-low power RTC"/>
+      Deprecate Apollo specific "features"  -->
+
+      <!-- 1.5.2 Instead, for now present some generic features of the Apollo family.                     -->
+      <!--       TODO Features need to be better fleshed out on a device-by-device basic.                 -->
+      <!--       See https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/pdsc_family_pg.html -->
+      <feature type="VCC"               n="1.8"/>
+      <feature type="SPI"               n="1"    name="Includes SPI and MSPI modules"/>
+      <feature type="I2C"               n="1"/>
+      <feature type="UART"              n="1"/>
+      <feature type="WDT"               n="1"/>
+      <feature type="Timer"             n="1"    name="Timer and System Timer modules"/>
+      <feature type="ADC"               n="1"/>
+      <feature type="TempSens"          n="1"/>
+      <feature type="RTC"               n="1"/>
+
+
+
+
+      <!-- ************************  Subfamily 'Apollo330P'  **************************** -->
+      <!-- <subFamily DsubFamily="Apollo330P"> -->
+
+        <!-- *************************  Device 'Apollo330P 2MB+1.768M' *************** -->
+        <!-- <description>Apollo330D Plus BGA</description> -->
+        <device Dname="AP330MPA-CBR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo330P.h"        define="APOLLO330P_2048"/>
+          <compile header="Device/Include/system_apollo330P.h" define="APOLLO330P_2048"/>
+          <debug      svd="SVD/apollo330P.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="223"/>
+        </device>
+
+        <!-- <description>Apollo330D Plus CSP</description> -->
+        <device Dname="AP330MPA-CCR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo330P.h"        define="APOLLO330P_2048"/>
+          <compile header="Device/Include/system_apollo330P.h" define="APOLLO330P_2048"/>
+          <debug      svd="SVD/apollo330P.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="CSP" n="223"/>
+        </device>
+
+        <!-- <description>Apollo330 Plus BGA</description> -->
+        <device Dname="AP330NPA-CBR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo330P.h"        define="APOLLO330P_2048"/>
+          <compile header="Device/Include/system_apollo330P.h" define="APOLLO330P_2048"/>
+          <debug      svd="SVD/apollo330P.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="223"/>
+        </device>
+
+        <!-- <description>Apollo330D Plus CSP</description> -->
+        <device Dname="AP330NPA-CCR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo330P.h"        define="APOLLO330P_2048"/>
+          <compile header="Device/Include/system_apollo330P.h" define="APOLLO330P_2048"/>
+          <debug      svd="SVD/apollo330P.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="CSP" n="223"/>
+        </device>
+
+        <!-- <description>Apollo330B Plus BTLE BGA</description> -->
+        <device Dname="AP330BPA-CBR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo330P.h"        define="APOLLO330P_2048"/>
+          <compile header="Device/Include/system_apollo330P.h" define="APOLLO330P_2048"/>
+          <debug      svd="SVD/apollo330P.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="223"/>
+        </device>
+
+        <!-- <description>Apollo330B Plus BTLE CSP</description> -->
+        <device Dname="AP330BPA-CCR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo330P.h"        define="APOLLO330P_2048"/>
+          <compile header="Device/Include/system_apollo330P.h" define="APOLLO330P_2048"/>
+          <debug      svd="SVD/apollo330P.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="CSP" n="223"/>
+        </device>
+
+      <!-- ************************  Subfamily 'Apollo510L'  **************************** -->
+      <!-- <subFamily DsubFamily="Apollo510L"> -->
+        <!-- <description>Apollo510 Lite BGA</description> -->
+        <device Dname="AP510NLA-CBR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo510L.h"        define="APOLLO510L_2048"/>
+          <compile header="Device/Include/system_apollo510L.h" define="APOLLO510L_2048"/>
+          <debug      svd="SVD/apollo510L.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="223"/>
+        </device>
+
+        <!-- <description>Apollo510 Lite CSP</description> -->
+        <device Dname="AP510NLA-CCR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo510L.h"        define="APOLLO510L_2048"/>
+          <compile header="Device/Include/system_apollo510L.h" define="APOLLO510L_2048"/>
+          <debug      svd="SVD/apollo510L.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="CSP" n="223"/>
+        </device>
+
+        <!-- <description>Apollo510B Lite BTLE BGA</description> -->
+        <device Dname="AP510BLA-CBR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo510L.h"        define="APOLLO510L_2048"/>
+          <compile header="Device/Include/system_apollo510L.h" define="APOLLO510L_2048"/>
+          <debug      svd="SVD/apollo510L.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <!-- NONE   <memory     name="ITCM"  start="0x00000000"  size="0x00040000"   access="rwxn" startup="0" default="1"/> -->
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="223"/>
+        </device>
+
+        <!-- <description>Apollo510B Lite BTLE CSP</description> -->
+        <device Dname="AP510BLA-CCR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo510L.h"        define="APOLLO510L_2048"/>
+          <compile header="Device/Include/system_apollo510L.h" define="APOLLO510L_2048"/>
+          <debug      svd="SVD/apollo510L.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <!-- NONE   <memory     name="ITCM"  start="0x00000000"  size="0x00040000"   access="rwxn" startup="0" default="1"/> -->
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="CSP" n="223"/>
+        </device>
+
+        <!-- <description>Apollo510D Lite Dual-Mode Blutetooth BGA</description> -->
+        <device Dname="AP510DLA-CBR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo510L.h"        define="APOLLO510L_2048"/>
+          <compile header="Device/Include/system_apollo510L.h" define="APOLLO510L_2048"/>
+          <debug      svd="SVD/apollo510L.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <!-- NONE   <memory     name="ITCM"  start="0x00000000"  size="0x00040000"   access="rwxn" startup="0" default="1"/> -->
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="223"/>
+        </device>
+
+        <!-- <description>Apollo510D Lite Dual-Mode Blutetooth CSP</description> -->
+        <device Dname="AP510DLA-CCR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo510L.h"        define="APOLLO510L_2048"/>
+          <compile header="Device/Include/system_apollo510L.h" define="APOLLO510L_2048"/>
+          <debug      svd="SVD/apollo510L.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x001F0000"   access="rxn"  startup="1" default="1"/>
+          <!-- NONE   <memory     name="ITCM"  start="0x00000000"  size="0x00040000"   access="rwxn" startup="0" default="1"/> -->
+          <memory     name="DTCM"  start="0x20000000"  size="0x00040000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x001C0000"   access="rwn"  startup="0" default="1"/>
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x001F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="CSP" n="223"/>
+        </device>
+
+
+
+      <!-- ************************  Subfamily 'Apollo510'  **************************** -->
+      <!-- <subFamily DsubFamily="Apollo510 "> -->
+
+        <!-- *************************  Device 'Apollo510 4MB+3M' ***************************** -->
+        <device Dname="AP510NFA-CBR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo510.h"        define="APOLLO5_4096"/>
+          <compile header="Device/Include/system_apollo510.h" define="APOLLO5_4096"/>
+          <debug      svd="SVD/apollo510.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x003F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="ITCM"  start="0x00000000"  size="0x00040000"   access="rwxn" startup="0" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00080000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x00300000"   access="rwn"  startup="0" default="1"/>
+          <!-- <algorithm name="Flash/Apollo510.FLM"        start="0x00410000"  size="0x003F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/> -->
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x003F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="223"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo510 4MB+3M' Non-Bootloader*************** -->
+        <device Dname="AP510NFA-CCR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo510.h"        define="APOLLO5_4096"/>
+          <compile header="Device/Include/system_apollo510.h" define="APOLLO5_4096"/>
+          <debug      svd="SVD/apollo510.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x003F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="ITCM"  start="0x00000000"  size="0x00040000"   access="rwxn" startup="0" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00080000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x00300000"   access="rwn"  startup="0" default="1"/>
+          <!-- <algorithm name="Flash/Apollo510.FLM"        start="0x00410000"  size="0x003F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/> -->
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x003F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="223"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo510BFA 4MB+3M' Non-Bootloader*************** -->
+        <device Dname="AP510BFA-CBR">
+          <processor Dcore="Cortex-M55" DcoreVersion="r1p1" Dfpu="DP_FPU" Dmpu="MPU" Ddsp="DSP" Dmve="FP_MVE" Dtz="NO_TZ" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo510.h"        define="APOLLO5_4096"/>
+          <compile header="Device/Include/system_apollo510.h" define="APOLLO5_4096"/>
+          <debug      svd="SVD/apollo510.svd"/>
+          <memory     name="MRAM"  start="0x00410000"  size="0x003F0000"   access="rxn"  startup="1" default="1"/>
+          <memory     name="ITCM"  start="0x00000000"  size="0x00040000"   access="rwxn" startup="0" default="1"/>
+          <memory     name="DTCM"  start="0x20000000"  size="0x00080000"   access="rwn"  startup="0" default="1"/>
+          <memory     name="SSRAM" start="0x20080000"  size="0x00300000"   access="rwn"  startup="0" default="1"/>
+          <!-- <algorithm name="Flash/Apollo510.FLM"        start="0x00410000"  size="0x003F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/> -->
+          <algorithm name="Flash/Apollo330P_510L.FLM"  start="0x00410000"  size="0x003F0000"   RAMstart="0x20000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="223"/>
+        </device>
+
+      <!-- </subFamily> -->
+
+      <!-- <subFamily DsubFamily="Apollo4 "> -->
+        <!-- *************************  Device 'Apollo4 2MB/384KB+1M+shared BGA' ***************************** -->
+        <device Dname="AMAP42KK-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo4b.h"        define="APOLLO4b_2048"/>
+          <compile header="Device/Include/system_apollo4b.h" define="APOLLO4b_2048"/>
+          <debug      svd="SVD/apollo4b.svd"/>
+          <memory     id="IROM1"                      start="0x00018000"  size="0x001E8000"   startup="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x001D8000"                  default="1"/>
+          <algorithm name="Flash/Apollo4.FLM"         start="0x00018000"  size="0x001E8000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="81"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo4 Blue 2MB/384KB+1M+480K'  ***************************** -->
+        <device Dname="AMA4B2KK-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo4b.h"        define="APOLLO4b_2048"/>
+          <compile header="Device/Include/system_apollo4b.h" define="APOLLO4b_2048"/>
+          <debug      svd="SVD/apollo4b.svd"/>
+          <memory     id="IROM1"                      start="0x00018000"  size="0x001E8000"   startup="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x001D8000"                  default="1"/>
+          <algorithm name="Flash/Apollo4.FLM"         start="0x00018000"  size="0x001E8000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="81"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo4 Plus 2MB/384KB+2M+384K' ***************************** -->
+        <device Dname="AMAP42KP-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo4p.h"        define="APOLLO4p_2048"/>
+          <compile header="Device/Include/system_apollo4p.h" define="APOLLO4p_2048"/>
+          <debug      svd="SVD/apollo4p.svd"/>
+          <memory     id="IROM1"                     start="0x00018000"  size="0x001E8000"   startup="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x002C0000"                  default="1"/>
+          <algorithm name="Flash/Apollo4.FLM"         start="0x00018000"  size="0x001E8000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="81"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo4 Blue Plus 2MB/384KB+2M+384K' ***************************** -->
+        <device Dname="AMA4B2KP-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo4p.h"        define="APOLLO4p_2048"/>
+          <compile header="Device/Include/system_apollo4p.h" define="APOLLO4p_2048"/>
+          <debug      svd="SVD/apollo4p.svd"/>
+          <memory     id="IROM1"                      start="0x00018000"  size="0x001E8000"   startup="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x002C0000"                  default="1"/>
+          <algorithm name="Flash/Apollo4.FLM"         start="0x00018000"  size="0x001E8000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="81"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo4 Lite 2MB/384KB+2M+384K' ***************************** -->
+        <device Dname="AMAP42KL-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo4l.h"        define="APOLLO4p_2048"/>
+          <compile header="Device/Include/system_apollo4l.h" define="APOLLO4p_2048"/>
+          <debug      svd="SVD/apollo4p.svd"/>
+          <memory     id="IROM1"                      start="0x00018000"  size="0x001E8000"   startup="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x002C0000"                  default="1"/>
+          <algorithm name="Flash/Apollo4.FLM"         start="0x00018000"  size="0x001E8000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="81"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo4 Blue Lite 2MB/384KB+2M+384K' ***************************** -->
+        <device Dname="AMA4B2KL-KXR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="96000000"/>
+          <compile header="Device/Include/apollo4l.h"        define="APOLLO4p_2048"/>
+          <compile header="Device/Include/system_apollo4l.h" define="APOLLO4p_2048"/>
+          <debug      svd="SVD/apollo4p.svd"/>
+          <memory     id="IROM1"                      start="0x00018000"  size="0x001E8000"   startup="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x002C0000"                  default="1"/>
+          <algorithm name="Flash/Apollo4.FLM"         start="0x00018000"  size="0x001E8000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="81"/>
+        </device>
+      <!-- <subFamily DsubFamily="Apollo4 "> -->
+
+
+      <!-- ************************  Subfamily 'Apollo3p'  **************************** -->
+      <!-- <subFamily DsubFamily="Apollo3p"> -->
+
+        <!-- *************************  Device 'Apollo3 Blue Plus 2MB/768KB BGA'  ***************************** -->
+        <device Dname="AMA3B2KK-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="48000000"/>
+          <compile header="Device/Include/apollo3p.h"        define="APOLLO3P_2048"/>
+          <compile header="Device/Include/system_apollo3p.h" define="APOLLO3P_2048"/>
+          <debug      svd="SVD/apollo3p.svd"/>
+          <memory     id="IROM1"                      start="0x0000C000"  size="0x001F4000"   startup="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x000C0000"                  default="1"/>
+          <algorithm name="Flash/Apollo3p.FLM"        start="0x0000C000"  size="0x001F4000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="81"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo3 Blue Plus 2MB/768KB CSP'  ***************************** -->
+        <device Dname="AMA3B2KK-KCR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="48000000"/>
+          <compile header="Device/Include/apollo3p.h"        define="APOLLO3P_2048"/>
+          <compile header="Device/Include/system_apollo3p.h" define="APOLLO3P_2048"/>
+          <debug      svd="SVD/apollo3p.svd"/>
+          <memory     id="IROM1"                      start="0x0000C000"  size="0x001F4000"   startup="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x000C0000"                  default="1"/>
+          <algorithm name="Flash/Apollo3p.FLM"        start="0x0000C000"  size="0x001F4000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="81"/>
+        </device>
+      <!-- </subFamily> -->
+
+
+      <!-- ************************  Subfamily 'Apollo3'  **************************** -->
+      <!-- <subFamily DsubFamily="Apollo3"> -->
+
+        <!-- *************************  Device 'Apollo3 Blue 1MB/384KB BGA'  ***************************** -->
+        <device Dname="AMA3B1KK-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="48000000"/>
+          <compile header="Device/Include/apollo3.h"         define="APOLLO3_1024"/>
+          <compile header="Device/Include/system_apollo3.h"  define="APOLLO3_1024"/>
+          <debug      svd="SVD/apollo3.svd"/>
+          <memory     id="IROM1"                      start="0x0000C000"  size="0x000F4000"   startup="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x00060000"                  default="1"/>
+          <algorithm name="Flash/Apollo3.FLM"         start="0x0000C000"  size="0x000F4000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="81"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo3 Blue 1MB/384KB CSP'  ***************************** -->
+        <device Dname="AMA3B1KK-KCR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="48000000"/>
+          <compile header="Device/Include/apollo3.h"         define="APOLLO3_1024"/>
+          <compile header="Device/Include/system_apollo3.h"  define="APOLLO3_1024"/>
+          <debug      svd="SVD/apollo3.svd"/>
+          <memory     id="IROM1"                      start="0x0000C000"  size="0x000F4000"   startup="1"    default="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x00060000"                  default="1"/>
+          <algorithm name="Flash/Apollo3.FLM"         start="0x0000C000"  size="0x000F4000"   RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="CSP" n="65"/>
+        </device>
+      <!-- <subFamily DsubFamily="Apollo3p "> -->
+
+      <!-- ************************  Subfamily 'Apollo2'  **************************** -->
+      <!-- <subFamily DsubFamily="Apollo2"> -->
+
+        <!-- *************************  Device 'Apollo2 1MB BGA'  ***************************** -->
+        <device Dname="AMAPH1KK-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="48000000"/>
+          <compile header="Device/Include/apollo2.h"         define="APOLLO2_1024"/>
+          <compile header="Device/Include/system_apollo2.h"  define="APOLLO2_1024"/>
+          <debug      svd="SVD/apollo2.svd"/>
+          <memory     id="IROM1"                      start="0x00000000"  size="0x100000"   startup="1"    default="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x40000"                   default="1"/>
+          <algorithm name="Flash/Apollo2.FLM"         start="0x00000000"  size="0x10000"    RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="BGA" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo2 1MB CSP'  ***************************** -->
+        <device Dname="AMAPH1KK-KCR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="48000000"/>
+          <compile header="Device/Include/apollo2.h"         define="APOLLO2_1024"/>
+          <compile header="Device/Include/system_apollo2.h"  define="APOLLO2_1024"/>
+          <debug      svd="SVD/apollo2.svd"/>
+          <memory     id="IROM1"                      start="0x00000000"  size="0x100000"   startup="1"    default="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x40000"                   default="1"/>
+          <algorithm name="Flash/Apollo2.FLM"         start="0x00000000"  size="0x10000"    RAMstart="0x10000000" RAMsize="0x4000" default="1"/>
+          <feature type="CSP" n="49"/>
+        </device>
+      <!-- </subFamily> -->
+
+
+      <!-- ************************  Subfamily 'Apollo'  **************************** -->
+      <!-- <subFamily DsubFamily="Apollo "> -->
+
+        <!-- *************************  Device 'Apollo 512 BGA'  ***************************** -->
+        <device Dname="APOLLO512-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="24000000"/>
+          <compile header="Device/Include/apollo1.h"         define="APOLLO_512"/>
+          <compile header="Device/Include/system_apollo1.h"  define="APOLLO_512"/>
+          <debug      svd="SVD/apollo1.svd"/>
+          <memory     id="IROM1"                      start="0x00000000"  size="0x80000"    startup="1"    default="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x10000"                   default="1"/>
+          <algorithm name="Flash/Apollo.FLM"          start="0x00000000"  size="0x10000"    RAMstart="0x10000000" RAMsize="0x2000" default="1"/>
+          <feature type="BGA" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo 256 BGA'  ***************************** -->
+        <device Dname="APOLLO256-KBR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="24000000"/>
+          <compile header="Device/Include/apollo1.h"        define="APOLLO_256"/>
+          <compile header="Device/Include/system_apollo1.h" define="APOLLO_256"/>
+          <debug      svd="SVD/apollo1.svd"/>
+          <memory     id="IROM1"                      start="0x00000000"  size="0x40000"    startup="1"    default="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x08000"                   default="1"/>
+          <algorithm name="Flash/Apollo.FLM"          start="0x00000000"  size="0x10000"    RAMstart="0x10000000" RAMsize="0x2000" default="1"/>
+          <feature type="BGA" n="64"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo 512 WLCSP'  ***************************** -->
+        <device Dname="APOLLO512-KCR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="24000000"/>
+          <compile header="Device/Include/apollo1.h"        define="APOLLO_512"/>
+          <compile header="Device/Include/system_apollo1.h" define="APOLLO_512"/>
+          <debug      svd="SVD/apollo1.svd"/>
+          <memory     id="IROM1"                      start="0x00000000"  size="0x80000"    startup="1"    default="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x10000"                   default="1"/>
+          <algorithm name="Flash/Apollo.FLM"          start="0x00000000"  size="0x10000"    RAMstart="0x10000000" RAMsize="0x2000" default="1"/>
+          <feature type="CSP" n="41"/>
+        </device>
+
+        <!-- *************************  Device 'Apollo 256 WLCSP'  ***************************** -->
+        <device Dname="APOLLO256-KCR">
+          <processor Dcore="Cortex-M4" DcoreVersion="r0p1" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dendian="Little-endian" Dclock="24000000"/>
+          <compile header="Device/Include/apollo1.h"        define="APOLLO_256"/>
+          <compile header="Device/Include/system_apollo1.h" define="APOLLO_256"/>
+          <debug      svd="SVD/apollo1.svd"/>
+          <memory     id="IROM1"                      start="0x00000000"  size="0x40000"    startup="1"    default="1"/>
+          <memory     id="IRAM1"                      start="0x10000000"  size="0x08000"                   default="1"/>
+          <algorithm name="Flash/Apollo.FLM"          start="0x00000000"  size="0x10000"    RAMstart="0x10000000" RAMsize="0x2000" default="1"/>
+          <feature type="CSP" n="41"/>
+        </device>
+
+      <!-- </subFamily> -->
+
+    </family>
+  </devices>
+
+  <boards>
+    <!-- Apollo510 EVB -->
+    <board vendor="Ambiq Micro" name="Apollo510 EVB" revision="Ver 1.0" salesContact="sales@ambiq.com" orderForm="https://www.ambiq.com/contact">
+      <description>Ambiq Apollo510 EVB</description>
+      <mountedDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dname="AP510*"/>
+      <compatibleDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dfamily="Apollo Series"/>
+    </board>
+
+    <!-- Apollo4 Plus EVB -->
+    <board vendor="Ambiq Micro" name="Apollo4 Plus EVB" revision="Ver 1.0" salesContact="sales@ambiq.com" orderForm="https://www.ambiq.com/contact">
+      <description>Ambiq Apollo4 Plus EVB</description>
+      <mountedDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dname="AMAP42KP-KBR"/>
+      <compatibleDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dfamily="Apollo Series"/>
+    </board>
+
+    <!-- Apollo3 Blue Plus Evaluation Board (EVB)  -->
+    <board vendor="Ambiq Micro" name="Apollo3 Blue Plus EVB" revision="Ver 0.1" salesContact="sales@ambiq.com" orderForm="https://www.ambiq.com/contact">
+      <description>Ambiq Apollo3 Blue Plus EVB</description>
+      <mountedDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dname="AMA3B2KK-KBR"/>
+      <compatibleDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dfamily="Apollo Series"/>
+    </board>
+
+    <!-- Apollo3 Evaluation Board (EVB)  -->
+    <board vendor="Ambiq Micro" name="Apollo3 Blue EVB" revision="Ver 1.0" salesContact="sales@ambiq.com" orderForm="https://www.ambiq.com/contact">
+      <description>Ambiq Apollo3 Blue EVB</description>
+      <mountedDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dname="AMA3B1KK-KCR"/>
+      <compatibleDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dfamily="Apollo Series"/>
+    </board>
+
+    <!-- Apollo2 Evaluation Board (EVB)  -->
+    <board vendor="Ambiq Micro" name="Apollo2 EVB" revision="Ver 1.0" salesContact="sales@ambiq.com" orderForm="https://www.ambiq.com/contact">
+      <description>Ambiq Apollo2 EVB</description>
+      <image small="Images/apollo2_evb.jpg" large="Images/apollo2_evb.jpg" public="true"/>
+      <mountedDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dname="AMAPH1KK-KBR"/>
+      <compatibleDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dfamily="Apollo Series"/>
+    </board>
+
+    <!-- Apollo Evaluation Board (EVB)  -->
+    <board vendor="Ambiq Micro" name="Apollo1 EVB" revision="Ver 1.0" salesContact="sales@ambiq.com" orderForm="https://www.ambiq.com/contact">
+      <description>Ambiq Apollo MCU EVB</description>
+      <image small="Images/apollo1_evb.jpg" large="Images/apollo1_evb.jpg" public="true"/>
+      <mountedDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dname="APOLLO512-KBR"/>
+      <compatibleDevice deviceIndex="0" Dvendor="Ambiq Micro:120" Dfamily="Apollo Series"/>
+    </board>
+
+  </boards>
+
+  <conditions>
+
+    <!-- Compiler Conditions -->
+    <condition id="Compiler ARMCC">
+      <require Tcompiler="ARMCC"/>
+    </condition>
+
+    <condition id="Apollo CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="APOLLO*"/>
+    </condition>
+
+    <condition id="Apollo2 CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo2 and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AMAPH1KK*"/>
+    </condition>
+
+    <condition id="Apollo3 Blue CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo3 Blue and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AMA3B1KK*"/>
+    </condition>
+
+    <condition id="Apollo3 Blue Plus CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo3 Blue Plus and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AMA3B2KK*"/>
+    </condition>
+
+    <condition id="Apollo4 CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo4 and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AMAP42KK*"/>
+    </condition>
+
+    <condition id="Apollo4 Blue CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo4 Blue and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AMA4B2KK*"/>
+    </condition>
+
+    <condition id="Apollo4 Plus CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo4 Plus and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AMAP42KP*"/>
+    </condition>
+
+    <condition id="Apollo4 Blue Plus CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo4 Blue Plus and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AMA4B2KP*"/>
+    </condition>
+
+    <condition id="Apollo4 Lite CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo4 Lite and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AMAP42KL*"/>
+    </condition>
+
+    <condition id="Apollo4 Blue Lite CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo4 Lite Plus and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AMA4B2KL*"/>
+    </condition>
+
+    <condition id="Apollo330P CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo330P and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AP330*"/>
+    </condition>
+
+    <condition id="Apollo510L CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo510L and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AP510NLA*"/>
+    </condition>
+
+    <condition id="Apollo510L Dual Mode CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo510L and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AP510DLA*"/>
+    </condition>
+
+    <condition id="Apollo510 Blue Lite CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo510 Blue Lite and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AP510BLA*"/>
+      <!-- The Dsecure condition may be needed in future AP510 updates.
+      <require Dsecure="TZ-disabled"/>
+      -->
+    </condition>
+
+    <condition id="Apollo510 CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo5 and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AP510NFA*"/>
+      <!-- The Dsecure condition may be needed in future AP510 updates.
+      <require Dsecure="TZ-disabled"/>
+      -->
+    </condition>
+
+    <condition id="Apollo510 Blue CMSIS Device">
+      <!-- defines the condition with the ID "CMSIS-CORE" -->
+      <description>Ambiq Apollo5 and CMSIS Core</description>
+      <require Dvendor="Ambiq Micro:120" Dname="AP510BFA*"/>
+      <!-- The Dsecure condition may be needed in future AP510 updates.
+      <require Dsecure="TZ-disabled"/>
+      -->
+    </condition>
+
+  </conditions>
+
+  <components>
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.5.6" condition="Apollo330P CMSIS Device">
+      <description>System startup for Ambiq Apollo330P</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"       name="Device/Include/apollo510L.h"                      version="1.5.6"/>
+        <file category="sourceC"      name="Device/Source/system_apollo330P.c"  attr="config" version="1.5.6"   condition="Compiler ARMCC"/>
+        <file category="source"       name="Device/Source/startup_apollo330P.c" attr="config" version="1.5.6"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.5.6" condition="Apollo510L CMSIS Device">
+      <description>System startup for Ambiq Apollo510L</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"       name="Device/Include/apollo510L.h"                      version="1.5.6"/>
+        <file category="sourceC"      name="Device/Source/system_apollo510L.c"  attr="config" version="1.5.6"   condition="Compiler ARMCC"/>
+        <file category="source"       name="Device/Source/startup_apollo510L.c" attr="config" version="1.5.6"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.5.6" condition="Apollo510L Dual Mode CMSIS Device">
+      <description>System startup for Ambiq Apollo510L</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"       name="Device/Include/apollo510L.h"                      version="1.5.6"/>
+        <file category="sourceC"      name="Device/Source/system_apollo510L.c"  attr="config" version="1.5.6"   condition="Compiler ARMCC"/>
+        <file category="source"       name="Device/Source/startup_apollo510L.c" attr="config" version="1.5.6"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.5.6" condition="Apollo510 Blue Lite CMSIS Device">
+      <description>System startup for Ambiq Apollo510 Blue Lite</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"       name="Device/Include/apollo510L.h"                      version="1.5.6"/>
+        <file category="sourceC"      name="Device/Source/system_apollo510L.c"  attr="config" version="1.5.6"   condition="Compiler ARMCC"/>
+        <file category="source"       name="Device/Source/startup_apollo510L.c" attr="config" version="1.5.6"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.5.2" condition="Apollo510 CMSIS Device">
+      <description>System startup for Ambiq Apollo510</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"       name="Device/Include/apollo510.h"                      version="1.5.2"/>
+        <file category="sourceC"      name="Device/Source/system_apollo510.c"  attr="config" version="1.5.2"   condition="Compiler ARMCC"/>
+        <file category="source"       name="Device/Source/startup_apollo510.c" attr="config" version="1.5.2"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.5.2" condition="Apollo510 Blue CMSIS Device">
+      <description>System startup for Ambiq Apollo510 Blue</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"       name="Device/Include/apollo510.h"                      version="1.5.2"/>
+        <file category="sourceC"      name="Device/Source/system_apollo510.c"  attr="config" version="1.5.2"   condition="Compiler ARMCC"/>
+        <file category="source"       name="Device/Source/startup_apollo510.c" attr="config" version="1.5.2"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo4 Lite CMSIS Device">
+      <description>System startup for Ambiq Apollo4 Lite</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo4l.h"                      version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo4l.h" attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo4l.c"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo4l.s" attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo4 Blue Lite CMSIS Device">
+      <description>System startup for Ambiq Apollo4 Blue Lite</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo4l.h"                      version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo4l.h" attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo4l.c"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo4l.s" attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo4 Plus CMSIS Device">
+      <description>System startup for Ambiq Apollo4 Plus</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo4p.h"                      version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo4p.h" attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo4p.c"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo4p.s" attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo4 Blue Plus CMSIS Device">
+      <description>System startup for Ambiq Apollo4 Blue Plus</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo4p.h"                      version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo4p.h" attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo4p.c"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo4p.s" attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo4 CMSIS Device">
+      <description>System startup for Ambiq Apollo4 secure device</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo4b.h"                      version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo4b.h" attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo4b.c"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo4b.s" attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo4 Blue CMSIS Device">
+      <description>System startup for Ambiq Apollo4 Blue device</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo4b.h"                      version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo4b.h" attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo4b.c"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo4b.s" attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo3 Blue Plus CMSIS Device">
+      <description>System startup for Ambiq Apollo3 Blue Plus device</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo3p.h"                      version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo3p.h" attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo3p.c"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo3p.s" attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo3 Blue CMSIS Device">
+      <description>System startup for Ambiq Apollo3 Blue device</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo3.h"                       version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo3.h"  attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo3.c"   attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo3.s"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo2 CMSIS Device">
+      <description>System startup for Ambiq Apollo2 device</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo2.h"                       version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo2.h"  attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo2.c"   attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo2.s"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+        <!-- header files -->
+      </files>
+    </component>
+
+    <component Cclass="Device" Cgroup="Startup" Cversion="1.4.1" condition="Apollo CMSIS Device">
+      <description>System startup for Ambiq Apollo1 device</description>
+
+      <RTE_Components_h>
+        <!--  the following content goes into file 'RTE_Components.h' -->
+      </RTE_Components_h>
+
+      <files>
+        <file category="include" name="Device/Include/"/>
+
+        <!-- startup/system files -->
+        <file category="header"    name="Device/Include/apollo1.h"                       version="1.4.1"/>
+        <file category="header"    name="Device/Include/system_apollo1.h"  attr="config" version="1.4.1"/>
+        <file category="source"    name="Device/Source/system_apollo1.c"   attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+        <file category="source"    name="Device/Source/startup_apollo1.s"  attr="config" version="1.4.1"   condition="Compiler ARMCC"/>
+
+         <!-- header files -->
+       </files>
+    </component>
+
+  </components>
+
+  <examples>
+    <!-- Apollo510 Evaluation Board (EVB)  -->
+    <example name="Blinky" folder="Boards/Apollo510_EVB/blinky" doc="Abstract.txt" version="1.0">
+      <description>This is a basic example of the Ambiq Apollo510 demonstrating the development flow and blinking the 3 LEDs on the Apollo510 EVB.</description>
+      <board vendor="Ambiq Micro" name="Apollo510 EVB"/>
+      <project>
+        <environment name="uv"  load="blinky.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <keyword>Blinky</keyword>
+        <keyword>Getting Started</keyword>
+      </attributes>
+    </example>
+
+    <!-- Apollo4 Plus Evaluation Board (EVB)  -->
+    <example name="Blinky" folder="Boards/Apollo4p_EVB/blinky" doc="Abstract.txt" version="1.0">
+      <description>This is a basic example of the Ambiq Apollo4 Plus demonstrating the development flow and blinking the 4 LEDs on the EVB.</description>
+      <board vendor="Ambiq Micro" name="Apollo4 Plus EVB"/>
+      <project>
+        <environment name="uv"  load="blinky.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <keyword>Blinky</keyword>
+        <keyword>Getting Started</keyword>
+      </attributes>
+    </example>
+
+    <!-- Apollo3 Blue Plus Evaluation Board (EVB)  -->
+    <example name="Blinky" folder="Boards/Apollo3_EVB/blinky" doc="Abstract.txt" version="1.0">
+      <description>This is a basic example of the Ambiq Apollo3 Blue demonstrating the development flow and blinking the 4 LEDs on the EVB.</description>
+      <board vendor="Ambiq Micro" name="Apollo3 Blue Plus EVB"/>
+      <project>
+        <environment name="uv"  load="blinky.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <keyword>Blinky</keyword>
+        <keyword>Getting Started</keyword>
+      </attributes>
+    </example>
+
+    <!-- Apollo3 Blue Evaluation Board (EVB)  -->
+    <example name="Blinky" folder="Boards/Apollo3_EVB/blinky" doc="Abstract.txt" version="1.0">
+      <description>This is a basic example of the Ambiq Apollo3 Blue demonstrating the development flow and blinking the 4 LEDs on the EVB.</description>
+      <board vendor="Ambiq Micro" name="Apollo3 Blue EVB"/>
+      <project>
+        <environment name="uv"  load="blinky.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <keyword>Blinky</keyword>
+        <keyword>Getting Started</keyword>
+      </attributes>
+    </example>
+
+    <!-- Apollo2 Evaluation Board (EVB)  -->
+    <example name="Blinky" folder="Boards/Apollo2_EVB/blinky" doc="Abstract.txt" version="1.0">
+      <description>This is a basic example of the Ambiq Apollo2 demonstrating the development flow and blinking the 4 LEDs on the EVK.</description>
+      <board vendor="Ambiq Micro" name="Apollo2 EVB"/>
+      <project>
+        <environment name="uv"  load="blinky.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <keyword>Blinky</keyword>
+        <keyword>Getting Started</keyword>
+      </attributes>
+    </example>
+
+    <!-- Apollo1 Evaluation Board (EVB)  -->
+    <example name="Blinky" folder="Boards/Apollo_EVK/blinky" doc="Abstract.txt" version="1.0">
+      <description>This is a basic example of the Ambiq Apollo demonstrating the development flow and blinking the 4 LEDs on the EVK.</description>
+      <board vendor="Ambiq Micro" name="Apollo1 EVB"/>
+      <project>
+        <environment name="uv"  load="blinky.uvprojx"/>
+      </project>
+      <attributes>
+        <component Cclass="Device" Cgroup="Startup"/>
+        <keyword>Blinky</keyword>
+        <keyword>Getting Started</keyword>
+      </attributes>
+    </example>
+
+  </examples>
+
+</package>

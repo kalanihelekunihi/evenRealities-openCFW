@@ -1,0 +1,66 @@
+{
+  "cases": [
+    {
+      "name": "empty-input",
+      "compressed_hex": "",
+      "capacity": 16
+    },
+    {
+      "name": "encoded-empty",
+      "compressed_hex": "00",
+      "capacity": 0
+    },
+    {
+      "name": "literal-exact",
+      "compressed_hex": "5048454c4c4f",
+      "capacity": 5
+    },
+    {
+      "name": "literal-short-cap",
+      "compressed_hex": "5048454c4c4f",
+      "capacity": 4
+    },
+    {
+      "name": "truncated-literal-extension",
+      "compressed_hex": "f0",
+      "capacity": 16
+    },
+    {
+      "name": "truncated-literal-payload",
+      "compressed_hex": "6048454c4c4f",
+      "capacity": 6
+    },
+    {
+      "name": "truncated-offset",
+      "compressed_hex": "1f4101",
+      "capacity": 26
+    },
+    {
+      "name": "zero-offset",
+      "compressed_hex": "1f41000001506162636465",
+      "capacity": 26
+    },
+    {
+      "name": "offset-past-history",
+      "compressed_hex": "1f41020001506162636465",
+      "capacity": 26
+    },
+    {
+      "name": "truncated-match-extension",
+      "compressed_hex": "1f410100",
+      "capacity": 26
+    },
+    {
+      "name": "overlap-valid",
+      "compressed_hex": "1f41010001506162636465",
+      "capacity": 26
+    },
+    {
+      "name": "overlap-short-cap",
+      "compressed_hex": "1f41010001506162636465",
+      "capacity": 25
+    }
+  ],
+  "scope": "12 reviewed semantic branch cases; safe API and separately locked caller; input/output guards at capacity",
+  "extra_exploratory_fixture_set": "not resumed after execution-profile failure; no result count claimed"
+}

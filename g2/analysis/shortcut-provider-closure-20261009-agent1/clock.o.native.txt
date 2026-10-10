@@ -1,0 +1,1124 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/clock.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.__reg_set_val:
+
+00000000 <__reg_set_val>:
+   0:	d9802000 	ld.w      	r12, (r0, 0x0)
+   4:	70c4      	lsl      	r3, r1
+   6:	c46c2043 	andn      	r3, r12, r3
+   a:	7084      	lsl      	r2, r1
+   c:	6c8c      	or      	r2, r3
+   e:	b040      	st.w      	r2, (r0, 0x0)
+  10:	783c      	jmp      	r15
+
+Disassembly of section .text.__module_get_info:
+
+00000000 <__module_get_info>:
+   0:	3819      	cmphsi      	r0, 26
+   2:	0c04      	bf      	0xa	// a <__module_get_info+0xa>
+   4:	3000      	movi      	r0, 0
+   6:	2800      	subi      	r0, 1
+   8:	783c      	jmp      	r15
+   a:	e901fffd 	bez      	r1, 0x4	// 4 <__module_get_info+0x4>
+   e:	c480482d 	lsli      	r13, r0, 4
+  12:	1142      	lrw      	r2, 0x0	// 98 <__module_get_info+0x98>
+  14:	3300      	movi      	r3, 0
+  16:	d04d082c 	ldr.w      	r12, (r13, r2 << 0)
+  1a:	6702      	cmpne      	r0, r12
+  1c:	b160      	st.w      	r3, (r1, 0x0)
+  1e:	6f0b      	mov      	r12, r2
+  20:	081b      	bt      	0x56	// 56 <__module_get_info+0x56>
+  22:	60b4      	addu      	r2, r13
+  24:	b140      	st.w      	r2, (r1, 0x0)
+  26:	9160      	ld.w      	r3, (r1, 0x0)
+  28:	e903ffee 	bez      	r3, 0x4	// 4 <__module_get_info+0x4>
+  2c:	3809      	cmphsi      	r0, 10
+  2e:	0824      	bt      	0x76	// 76 <__module_get_info+0x76>
+  30:	ea23a001 	movih      	r3, 40961
+  34:	b161      	st.w      	r3, (r1, 0x4)
+  36:	107a      	lrw      	r3, 0xa001008c	// 9c <__module_get_info+0x9c>
+  38:	b162      	st.w      	r3, (r1, 0x8)
+  3a:	ea23a001 	movih      	r3, 40961
+  3e:	2317      	addi      	r3, 24
+  40:	b163      	st.w      	r3, (r1, 0xc)
+  42:	ea23a001 	movih      	r3, 40961
+  46:	231b      	addi      	r3, 28
+  48:	b164      	st.w      	r3, (r1, 0x10)
+  4a:	ea23a001 	movih      	r3, 40961
+  4e:	3ba5      	bseti      	r3, 5
+  50:	b165      	st.w      	r3, (r1, 0x14)
+  52:	3000      	movi      	r0, 0
+  54:	07da      	br      	0x8	// 8 <__module_get_info+0x8>
+  56:	321a      	movi      	r2, 26
+  58:	c483482d 	lsli      	r13, r3, 4
+  5c:	d1ac0832 	ldr.w      	r18, (r12, r13 << 0)
+  60:	c6400480 	cmpne      	r0, r18
+  64:	0805      	bt      	0x6e	// 6e <__module_get_info+0x6e>
+  66:	6334      	addu      	r12, r13
+  68:	dd812000 	st.w      	r12, (r1, 0x0)
+  6c:	07dd      	br      	0x26	// 26 <__module_get_info+0x26>
+  6e:	2300      	addi      	r3, 1
+  70:	e822fff4 	bnezad      	r2, 0x58	// 58 <__module_get_info+0x58>
+  74:	07d9      	br      	0x26	// 26 <__module_get_info+0x26>
+  76:	ea23a030 	movih      	r3, 41008
+  7a:	b161      	st.w      	r3, (r1, 0x4)
+  7c:	1069      	lrw      	r3, 0xa0300088	// a0 <__module_get_info+0xa0>
+  7e:	b162      	st.w      	r3, (r1, 0x8)
+  80:	ea23a030 	movih      	r3, 41008
+  84:	2317      	addi      	r3, 24
+  86:	b163      	st.w      	r3, (r1, 0xc)
+  88:	ea23a030 	movih      	r3, 41008
+  8c:	231b      	addi      	r3, 28
+  8e:	b164      	st.w      	r3, (r1, 0x10)
+  90:	ea23a030 	movih      	r3, 41008
+  94:	3ba5      	bseti      	r3, 5
+  96:	07dd      	br      	0x50	// 50 <__module_get_info+0x50>
+  98:	00000000 	.long	0x00000000
+			98: R_CKCORE_ADDR32	.data
+  9c:	a001008c 	.long	0xa001008c
+  a0:	0088      	.short	0x0088
+  a2:	a030      	.short	0xa030
+
+Disassembly of section .text.__module_get_div.isra.1:
+
+00000000 <__module_get_div.isra.1>:
+   0:	9002      	ld.w      	r0, (r0, 0x8)
+   2:	e900000c 	bez      	r0, 0x1a	// 1a <__module_get_div.isra.1+0x1a>
+   6:	8060      	ld.b      	r3, (r0, 0x0)
+   8:	604c      	addu      	r1, r3
+   a:	8041      	ld.b      	r2, (r0, 0x1)
+   c:	9160      	ld.w      	r3, (r1, 0x0)
+   e:	70c9      	lsr      	r3, r2
+  10:	8801      	ld.h      	r0, (r0, 0x2)
+  12:	680c      	and      	r0, r3
+  14:	3840      	cmpnei      	r0, 0
+  16:	c4000c41 	inct      	r0, r0, 1
+  1a:	783c      	jmp      	r15
+
+Disassembly of section .text._clk_set_pll:
+
+00000000 <_clk_set_pll>:
+   0:	e9000061 	bez      	r0, 0xc2	// c2 <_clk_set_pll+0xc2>
+   4:	1170      	lrw      	r3, 0xa0005000	// c4 <_clk_set_pll+0xc4>
+   6:	934f      	ld.w      	r2, (r3, 0x3c)
+   8:	3a81      	bclri      	r2, 1
+   a:	b34f      	st.w      	r2, (r3, 0x3c)
+   c:	934f      	ld.w      	r2, (r3, 0x3c)
+   e:	3a80      	bclri      	r2, 0
+  10:	b34f      	st.w      	r2, (r3, 0x3c)
+  12:	9040      	ld.w      	r2, (r0, 0x0)
+  14:	e9020057 	bez      	r2, 0xc2	// c2 <_clk_set_pll+0xc2>
+  18:	3100      	movi      	r1, 0
+  1a:	9347      	ld.w      	r2, (r3, 0x1c)
+  1c:	293f      	subi      	r1, 64
+  1e:	6884      	and      	r2, r1
+  20:	b347      	st.w      	r2, (r3, 0x1c)
+  22:	9347      	ld.w      	r2, (r3, 0x1c)
+  24:	9024      	ld.w      	r1, (r0, 0x10)
+  26:	6c84      	or      	r2, r1
+  28:	b347      	st.w      	r2, (r3, 0x1c)
+  2a:	3100      	movi      	r1, 0
+  2c:	9348      	ld.w      	r2, (r3, 0x20)
+  2e:	29ff      	subi      	r1, 256
+  30:	6884      	and      	r2, r1
+  32:	b348      	st.w      	r2, (r3, 0x20)
+  34:	3100      	movi      	r1, 0
+  36:	9349      	ld.w      	r2, (r3, 0x24)
+  38:	291f      	subi      	r1, 32
+  3a:	6884      	and      	r2, r1
+  3c:	b349      	st.w      	r2, (r3, 0x24)
+  3e:	9328      	ld.w      	r1, (r3, 0x20)
+  40:	8054      	ld.b      	r2, (r0, 0x14)
+  42:	6c84      	or      	r2, r1
+  44:	b348      	st.w      	r2, (r3, 0x20)
+  46:	9045      	ld.w      	r2, (r0, 0x14)
+  48:	9329      	ld.w      	r1, (r3, 0x24)
+  4a:	c5025582 	zext      	r2, r2, 12, 8
+  4e:	6c84      	or      	r2, r1
+  50:	b349      	st.w      	r2, (r3, 0x24)
+  52:	3100      	movi      	r1, 0
+  54:	934a      	ld.w      	r2, (r3, 0x28)
+  56:	2907      	subi      	r1, 8
+  58:	6884      	and      	r2, r1
+  5a:	b34a      	st.w      	r2, (r3, 0x28)
+  5c:	934a      	ld.w      	r2, (r3, 0x28)
+  5e:	9029      	ld.w      	r1, (r0, 0x24)
+  60:	6c84      	or      	r2, r1
+  62:	b34a      	st.w      	r2, (r3, 0x28)
+  64:	3100      	movi      	r1, 0
+  66:	934b      	ld.w      	r2, (r3, 0x2c)
+  68:	297f      	subi      	r1, 128
+  6a:	6884      	and      	r2, r1
+  6c:	b34b      	st.w      	r2, (r3, 0x2c)
+  6e:	934b      	ld.w      	r2, (r3, 0x2c)
+  70:	9026      	ld.w      	r1, (r0, 0x18)
+  72:	6c84      	or      	r2, r1
+  74:	b34b      	st.w      	r2, (r3, 0x2c)
+  76:	3100      	movi      	r1, 0
+  78:	934c      	ld.w      	r2, (r3, 0x30)
+  7a:	2907      	subi      	r1, 8
+  7c:	6884      	and      	r2, r1
+  7e:	b34c      	st.w      	r2, (r3, 0x30)
+  80:	904b      	ld.w      	r2, (r0, 0x2c)
+  82:	932c      	ld.w      	r1, (r3, 0x30)
+  84:	e4422007 	andi      	r2, r2, 7
+  88:	6c84      	or      	r2, r1
+  8a:	b34c      	st.w      	r2, (r3, 0x30)
+  8c:	934c      	ld.w      	r2, (r3, 0x30)
+  8e:	3a84      	bclri      	r2, 4
+  90:	3a85      	bclri      	r2, 5
+  92:	b34c      	st.w      	r2, (r3, 0x30)
+  94:	932c      	ld.w      	r1, (r3, 0x30)
+  96:	9048      	ld.w      	r2, (r0, 0x20)
+  98:	4244      	lsli      	r2, r2, 4
+  9a:	6c84      	or      	r2, r1
+  9c:	b34c      	st.w      	r2, (r3, 0x30)
+  9e:	934f      	ld.w      	r2, (r3, 0x3c)
+  a0:	3a82      	bclri      	r2, 2
+  a2:	b34f      	st.w      	r2, (r3, 0x3c)
+  a4:	9047      	ld.w      	r2, (r0, 0x1c)
+  a6:	4242      	lsli      	r2, r2, 2
+  a8:	932f      	ld.w      	r1, (r3, 0x3c)
+  aa:	e4422004 	andi      	r2, r2, 4
+  ae:	6c84      	or      	r2, r1
+  b0:	b34f      	st.w      	r2, (r3, 0x3c)
+  b2:	934f      	ld.w      	r2, (r3, 0x3c)
+  b4:	ec420002 	ori      	r2, r2, 2
+  b8:	b34f      	st.w      	r2, (r3, 0x3c)
+  ba:	934f      	ld.w      	r2, (r3, 0x3c)
+  bc:	ec420001 	ori      	r2, r2, 1
+  c0:	b34f      	st.w      	r2, (r3, 0x3c)
+  c2:	783c      	jmp      	r15
+  c4:	a0005000 	.long	0xa0005000
+
+Disassembly of section .text.gx_clock_set_source:
+
+00000000 <gx_clock_set_source>:
+   0:	14d0      	push      	r15
+   2:	8044      	ld.b      	r2, (r0, 0x4)
+   4:	9020      	ld.w      	r1, (r0, 0x0)
+   6:	3301      	movi      	r3, 1
+   8:	1002      	lrw      	r0, 0xa001008c	// 10 <gx_clock_set_source+0x10>
+   a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_source>
+			a: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+   e:	1490      	pop      	r15
+  10:	a001008c 	.long	0xa001008c
+
+Disassembly of section .text.gx_clock_get_source:
+
+00000000 <gx_clock_get_source>:
+   0:	ea23a001 	movih      	r3, 40961
+   4:	3ba7      	bseti      	r3, 7
+   6:	9363      	ld.w      	r3, (r3, 0xc)
+   8:	c4034040 	lsr      	r0, r3, r0
+   c:	e4002001 	andi      	r0, r0, 1
+  10:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_clock_set_module_source:
+
+00000000 <gx_clock_set_module_source>:
+   0:	14d4      	push      	r4-r7, r15
+   2:	1427      	subi      	r14, r14, 28
+   4:	3819      	cmphsi      	r0, 26
+   6:	6d83      	mov      	r6, r0
+   8:	6d47      	mov      	r5, r1
+   a:	0c06      	bf      	0x16	// 16 <gx_clock_set_module_source+0x16>
+   c:	3400      	movi      	r4, 0
+   e:	2c00      	subi      	r4, 1
+  10:	6c13      	mov      	r0, r4
+  12:	1407      	addi      	r14, r14, 28
+  14:	1494      	pop      	r4-r7, r15
+  16:	3942      	cmpnei      	r1, 2
+  18:	0857      	bt      	0xc6	// c6 <gx_clock_set_module_source+0xc6>
+  1a:	3809      	cmphsi      	r0, 10
+  1c:	0bf8      	bt      	0xc	// c <gx_clock_set_module_source+0xc>
+  1e:	3301      	movi      	r3, 1
+  20:	c4034022 	lsl      	r2, r3, r0
+  24:	e4422247 	andi      	r2, r2, 583
+  28:	e902fff2 	bez      	r2, 0xc	// c <gx_clock_set_module_source+0xc>
+  2c:	1901      	addi      	r1, r14, 4
+  2e:	6c1b      	mov      	r0, r6
+  30:	b860      	st.w      	r3, (r14, 0x0)
+  32:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_source>
+			32: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+  36:	6d03      	mov      	r4, r0
+  38:	e920ffea 	bnez      	r0, 0xc	// c <gx_clock_set_module_source+0xc>
+  3c:	d9ae2001 	ld.w      	r13, (r14, 0x4)
+  40:	3200      	movi      	r2, 0
+  42:	d82d4006 	ld.bs      	r1, (r13, 0x6)
+  46:	2a00      	subi      	r2, 1
+  48:	6486      	cmpne      	r1, r2
+  4a:	0fe1      	bf      	0xc	// c <gx_clock_set_module_source+0xc>
+  4c:	3d42      	cmpnei      	r5, 2
+  4e:	6c97      	mov      	r2, r5
+  50:	98e3      	ld.w      	r7, (r14, 0xc)
+  52:	9860      	ld.w      	r3, (r14, 0x0)
+  54:	0806      	bt      	0x60	// 60 <gx_clock_set_module_source+0x60>
+  56:	3e48      	cmpnei      	r6, 8
+  58:	0c04      	bf      	0x60	// 60 <gx_clock_set_module_source+0x60>
+  5a:	2100      	addi      	r1, 1
+  5c:	7446      	sextb      	r1, r1
+  5e:	3201      	movi      	r2, 1
+  60:	9700      	ld.w      	r0, (r7, 0x0)
+  62:	7005      	lsr      	r0, r1
+  64:	680c      	and      	r0, r3
+  66:	6482      	cmpne      	r0, r2
+  68:	0fd4      	bf      	0x10	// 10 <gx_clock_set_module_source+0x10>
+  6a:	3e16      	cmphsi      	r6, 23
+  6c:	0839      	bt      	0xde	// de <gx_clock_set_module_source+0xde>
+  6e:	3092      	movi      	r0, 146
+  70:	400f      	lsli      	r0, r0, 15
+  72:	7019      	lsr      	r0, r6
+  74:	6c02      	nor      	r0, r0
+  76:	e4002001 	andi      	r0, r0, 1
+  7a:	e9200034 	bnez      	r0, 0xe2	// e2 <gx_clock_set_module_source+0xe2>
+  7e:	e5860000 	addi      	r12, r6, 1
+  82:	ea930043 	lrw      	r19, 0x0	// 18c <gx_clock_set_module_source+0x18c>
+  86:	c48c482c 	lsli      	r12, r12, 4
+  8a:	c593002c 	addu      	r12, r19, r12
+  8e:	9804      	ld.w      	r0, (r14, 0x10)
+  90:	da402000 	ld.w      	r18, (r0, 0x0)
+  94:	d80c4005 	ld.bs      	r0, (r12, 0x5)
+  98:	e5860001 	addi      	r12, r6, 2
+  9c:	c48c482c 	lsli      	r12, r12, 4
+  a0:	c5930033 	addu      	r19, r19, r12
+  a4:	c4124040 	lsr      	r0, r18, r0
+  a8:	d9934005 	ld.bs      	r12, (r19, 0x5)
+  ac:	c5924052 	lsr      	r18, r18, r12
+  b0:	c6402020 	and      	r0, r0, r18
+  b4:	6c02      	nor      	r0, r0
+  b6:	e4002001 	andi      	r0, r0, 1
+  ba:	e920001a 	bnez      	r0, 0xee	// ee <gx_clock_set_module_source+0xee>
+  be:	6c1f      	mov      	r0, r7
+  c0:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_source>
+			c0: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+  c4:	07a6      	br      	0x10	// 10 <gx_clock_set_module_source+0x10>
+  c6:	3922      	cmplti      	r1, 3
+  c8:	0804      	bt      	0xd0	// d0 <gx_clock_set_module_source+0xd0>
+  ca:	3847      	cmpnei      	r0, 7
+  cc:	0804      	bt      	0xd4	// d4 <gx_clock_set_module_source+0xd4>
+  ce:	51a2      	asri      	r5, r1, 2
+  d0:	3301      	movi      	r3, 1
+  d2:	07ad      	br      	0x2c	// 2c <gx_clock_set_module_source+0x2c>
+  d4:	3848      	cmpnei      	r0, 8
+  d6:	0b9b      	bt      	0xc	// c <gx_clock_set_module_source+0xc>
+  d8:	2d04      	subi      	r5, 5
+  da:	3303      	movi      	r3, 3
+  dc:	07a8      	br      	0x2c	// 2c <gx_clock_set_module_source+0x2c>
+  de:	3001      	movi      	r0, 1
+  e0:	07cb      	br      	0x76	// 76 <gx_clock_set_module_source+0x76>
+  e2:	9804      	ld.w      	r0, (r14, 0x10)
+  e4:	d98d4005 	ld.bs      	r12, (r13, 0x5)
+  e8:	9000      	ld.w      	r0, (r0, 0x0)
+  ea:	7031      	lsr      	r0, r12
+  ec:	07e4      	br      	0xb4	// b4 <gx_clock_set_module_source+0xb4>
+  ee:	5e1b      	subi      	r0, r6, 7
+  f0:	3801      	cmphsi      	r0, 2
+  f2:	d8ad4004 	ld.bs      	r5, (r13, 0x4)
+  f6:	083b      	bt      	0x16c	// 16c <gx_clock_set_module_source+0x16c>
+  f8:	6c1f      	mov      	r0, r7
+  fa:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_source>
+			fa: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+  fe:	9865      	ld.w      	r3, (r14, 0x14)
+ 100:	3201      	movi      	r2, 1
+ 102:	c4a24025 	lsl      	r5, r2, r5
+ 106:	b3a0      	st.w      	r5, (r3, 0x0)
+ 108:	9864      	ld.w      	r3, (r14, 0x10)
+ 10a:	1141      	lrw      	r2, 0x0	// 18c <gx_clock_set_module_source+0x18c>
+ 10c:	9320      	ld.w      	r1, (r3, 0x0)
+ 10e:	d8024026 	ld.bs      	r0, (r2, 0x26)
+ 112:	9760      	ld.w      	r3, (r7, 0x0)
+ 114:	c4034040 	lsr      	r0, r3, r0
+ 118:	e4002001 	andi      	r0, r0, 1
+ 11c:	e900ff7a 	bez      	r0, 0x10	// 10 <gx_clock_set_module_source+0x10>
+ 120:	d8024025 	ld.bs      	r0, (r2, 0x25)
+ 124:	c4014040 	lsr      	r0, r1, r0
+ 128:	e4002001 	andi      	r0, r0, 1
+ 12c:	e900ff72 	bez      	r0, 0x10	// 10 <gx_clock_set_module_source+0x10>
+ 130:	d9824086 	ld.bs      	r12, (r2, 0x86)
+ 134:	c583404c 	lsr      	r12, r3, r12
+ 138:	e58c2003 	andi      	r12, r12, 3
+ 13c:	d8024085 	ld.bs      	r0, (r2, 0x85)
+ 140:	e92c0008 	bnez      	r12, 0x150	// 150 <gx_clock_set_module_source+0x150>
+ 144:	c4014040 	lsr      	r0, r1, r0
+ 148:	e4002001 	andi      	r0, r0, 1
+ 14c:	e900000d 	bez      	r0, 0x166	// 166 <gx_clock_set_module_source+0x166>
+ 150:	d8024076 	ld.bs      	r0, (r2, 0x76)
+ 154:	d8424075 	ld.bs      	r2, (r2, 0x75)
+ 158:	70c1      	lsr      	r3, r0
+ 15a:	7049      	lsr      	r1, r2
+ 15c:	6cc4      	or      	r3, r1
+ 15e:	e4632001 	andi      	r3, r3, 1
+ 162:	e923ff57 	bnez      	r3, 0x10	// 10 <gx_clock_set_module_source+0x10>
+ 166:	9866      	ld.w      	r3, (r14, 0x18)
+ 168:	b3a0      	st.w      	r5, (r3, 0x0)
+ 16a:	0753      	br      	0x10	// 10 <gx_clock_set_module_source+0x10>
+ 16c:	3a41      	cmpnei      	r2, 1
+ 16e:	0806      	bt      	0x17a	// 17a <gx_clock_set_module_source+0x17a>
+ 170:	9806      	ld.w      	r0, (r14, 0x18)
+ 172:	c4a24025 	lsl      	r5, r2, r5
+ 176:	b0a0      	st.w      	r5, (r0, 0x0)
+ 178:	07a3      	br      	0xbe	// be <gx_clock_set_module_source+0xbe>
+ 17a:	6c1f      	mov      	r0, r7
+ 17c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_source>
+			17c: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+ 180:	9845      	ld.w      	r2, (r14, 0x14)
+ 182:	3301      	movi      	r3, 1
+ 184:	c4a34025 	lsl      	r5, r3, r5
+ 188:	b2a0      	st.w      	r5, (r2, 0x0)
+ 18a:	0743      	br      	0x10	// 10 <gx_clock_set_module_source+0x10>
+ 18c:	00000000 	.long	0x00000000
+			18c: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_clock_get_module_source:
+
+00000000 <gx_clock_get_module_source>:
+   0:	14d1      	push      	r4, r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	6c7b      	mov      	r1, r14
+   6:	6d03      	mov      	r4, r0
+   8:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_source>
+			8: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+   c:	3200      	movi      	r2, 0
+   e:	2a00      	subi      	r2, 1
+  10:	e920002d 	bnez      	r0, 0x6a	// 6a <gx_clock_get_module_source+0x6a>
+  14:	9860      	ld.w      	r3, (r14, 0x0)
+  16:	d8634006 	ld.bs      	r3, (r3, 0x6)
+  1a:	648e      	cmpne      	r3, r2
+  1c:	0c29      	bf      	0x6e	// 6e <gx_clock_get_module_source+0x6e>
+  1e:	3c09      	cmphsi      	r4, 10
+  20:	0808      	bt      	0x30	// 30 <gx_clock_get_module_source+0x30>
+  22:	3201      	movi      	r2, 1
+  24:	7090      	lsl      	r2, r4
+  26:	e4422243 	andi      	r2, r2, 579
+  2a:	e9020003 	bez      	r2, 0x30	// 30 <gx_clock_get_module_source+0x30>
+  2e:	5b02      	addi      	r0, r3, 1
+  30:	9842      	ld.w      	r2, (r14, 0x8)
+  32:	9220      	ld.w      	r1, (r2, 0x0)
+  34:	e9000008 	bez      	r0, 0x44	// 44 <gx_clock_get_module_source+0x44>
+  38:	c4014040 	lsr      	r0, r1, r0
+  3c:	e4402001 	andi      	r2, r0, 1
+  40:	e9220019 	bnez      	r2, 0x72	// 72 <gx_clock_get_module_source+0x72>
+  44:	3c47      	cmpnei      	r4, 7
+  46:	c4614040 	lsr      	r0, r1, r3
+  4a:	e4002001 	andi      	r0, r0, 1
+  4e:	0807      	bt      	0x5c	// 5c <gx_clock_get_module_source+0x5c>
+  50:	3840      	cmpnei      	r0, 0
+  52:	c4000500 	mvc      	r0
+  56:	2002      	addi      	r0, 3
+  58:	1406      	addi      	r14, r14, 24
+  5a:	1491      	pop      	r4, r15
+  5c:	3c48      	cmpnei      	r4, 8
+  5e:	0bfd      	bt      	0x58	// 58 <gx_clock_get_module_source+0x58>
+  60:	3840      	cmpnei      	r0, 0
+  62:	c4000500 	mvc      	r0
+  66:	2004      	addi      	r0, 5
+  68:	07f8      	br      	0x58	// 58 <gx_clock_get_module_source+0x58>
+  6a:	6c0b      	mov      	r0, r2
+  6c:	07f6      	br      	0x58	// 58 <gx_clock_get_module_source+0x58>
+  6e:	6c0f      	mov      	r0, r3
+  70:	07f4      	br      	0x58	// 58 <gx_clock_get_module_source+0x58>
+  72:	3c47      	cmpnei      	r4, 7
+  74:	0803      	bt      	0x7a	// 7a <gx_clock_get_module_source+0x7a>
+  76:	3004      	movi      	r0, 4
+  78:	07f0      	br      	0x58	// 58 <gx_clock_get_module_source+0x58>
+  7a:	3c48      	cmpnei      	r4, 8
+  7c:	3302      	movi      	r3, 2
+  7e:	3006      	movi      	r0, 6
+  80:	c4030c40 	inct      	r0, r3, 0
+  84:	07ea      	br      	0x58	// 58 <gx_clock_get_module_source+0x58>
+
+Disassembly of section .text.gx_clock_set_div:
+
+00000000 <gx_clock_set_div>:
+   0:	ebe00058 	push      	r4-r11, r15, r16-r17
+   4:	142a      	subi      	r14, r14, 40
+   6:	6e87      	mov      	r10, r1
+   8:	1904      	addi      	r1, r14, 16
+   a:	6e03      	mov      	r8, r0
+   c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_div>
+			c: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+  10:	6d43      	mov      	r5, r0
+  12:	e9200099 	bnez      	r0, 0x144	// 144 <gx_clock_set_div+0x144>
+  16:	9804      	ld.w      	r0, (r14, 0x10)
+  18:	d9602002 	ld.w      	r11, (r0, 0x8)
+  1c:	e90b0094 	bez      	r11, 0x144	// 144 <gx_clock_set_div+0x144>
+  20:	d86b0000 	ld.b      	r3, (r11, 0x0)
+  24:	e9030090 	bez      	r3, 0x144	// 144 <gx_clock_set_div+0x144>
+  28:	c40a55e3 	zext      	r3, r10, 15, 0
+  2c:	9825      	ld.w      	r1, (r14, 0x14)
+  2e:	b860      	st.w      	r3, (r14, 0x0)
+  30:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_div>
+			30: R_CKCORE_PCREL_IMM26BY2	__module_get_div.isra.1
+  34:	c40a55e3 	zext      	r3, r10, 15, 0
+  38:	640e      	cmpne      	r3, r0
+  3a:	0c85      	bf      	0x144	// 144 <gx_clock_set_div+0x144>
+  3c:	da4b0001 	ld.b      	r18, (r11, 0x1)
+  40:	d92b1001 	ld.h      	r9, (r11, 0x2)
+  44:	6d97      	mov      	r6, r5
+  46:	c4c94044 	lsr      	r4, r9, r6
+  4a:	e9040004 	bez      	r4, 0x52	// 52 <gx_clock_set_div+0x52>
+  4e:	2600      	addi      	r6, 1
+  50:	07fb      	br      	0x46	// 46 <gx_clock_set_div+0x46>
+  52:	9864      	ld.w      	r3, (r14, 0x10)
+  54:	c6460026 	addu      	r6, r6, r18
+  58:	da034004 	ld.bs      	r16, (r3, 0x4)
+  5c:	e6660000 	addi      	r19, r6, 1
+  60:	d9834006 	ld.bs      	r12, (r3, 0x6)
+  64:	da2e2006 	ld.w      	r17, (r14, 0x18)
+  68:	e990000f 	blz      	r16, 0x86	// 86 <gx_clock_set_div+0x86>
+  6c:	9867      	ld.w      	r3, (r14, 0x1c)
+  6e:	9380      	ld.w      	r4, (r3, 0x0)
+  70:	c6044044 	lsr      	r4, r4, r16
+  74:	e4842001 	andi      	r4, r4, 1
+  78:	e9040007 	bez      	r4, 0x86	// 86 <gx_clock_set_div+0x86>
+  7c:	9849      	ld.w      	r2, (r14, 0x24)
+  7e:	3301      	movi      	r3, 1
+  80:	c6034023 	lsl      	r3, r3, r16
+  84:	b260      	st.w      	r3, (r2, 0x0)
+  86:	d8f12000 	ld.w      	r7, (r17, 0x0)
+  8a:	71f1      	lsr      	r7, r12
+  8c:	e4e72001 	andi      	r7, r7, 1
+  90:	e907001b 	bez      	r7, 0xc6	// c6 <gx_clock_set_div+0xc6>
+  94:	eb480006 	cmpnei      	r8, 6
+  98:	0c04      	bf      	0xa0	// a0 <gx_clock_set_div+0xa0>
+  9a:	eb080009 	cmphsi      	r8, 10
+  9e:	0c14      	bf      	0xc6	// c6 <gx_clock_set_div+0xc6>
+  a0:	6c73      	mov      	r1, r12
+  a2:	3301      	movi      	r3, 1
+  a4:	3200      	movi      	r2, 0
+  a6:	c4114820 	lsli      	r0, r17, 0
+  aa:	de6e2003 	st.w      	r19, (r14, 0xc)
+  ae:	de4e2002 	st.w      	r18, (r14, 0x8)
+  b2:	dd8e2001 	st.w      	r12, (r14, 0x4)
+  b6:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_div>
+			b6: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+  ba:	da6e2003 	ld.w      	r19, (r14, 0xc)
+  be:	da4e2002 	ld.w      	r18, (r14, 0x8)
+  c2:	d98e2001 	ld.w      	r12, (r14, 0x4)
+  c6:	d84b0000 	ld.b      	r2, (r11, 0x0)
+  ca:	9865      	ld.w      	r3, (r14, 0x14)
+  cc:	60c8      	addu      	r3, r2
+  ce:	3201      	movi      	r2, 1
+  d0:	9320      	ld.w      	r1, (r3, 0x0)
+  d2:	c6624022 	lsl      	r2, r2, r19
+  d6:	6849      	andn      	r1, r2
+  d8:	b320      	st.w      	r1, (r3, 0x0)
+  da:	9320      	ld.w      	r1, (r3, 0x0)
+  dc:	6c84      	or      	r2, r1
+  de:	b340      	st.w      	r2, (r3, 0x0)
+  e0:	9340      	ld.w      	r2, (r3, 0x0)
+  e2:	c6494029 	lsl      	r9, r9, r18
+  e6:	c5222049 	andn      	r9, r2, r9
+  ea:	76a9      	zexth      	r10, r10
+  ec:	dd232000 	st.w      	r9, (r3, 0x0)
+  f0:	9340      	ld.w      	r2, (r3, 0x0)
+  f2:	e90a0004 	bez      	r10, 0xfa	// fa <gx_clock_set_div+0xfa>
+  f6:	98a0      	ld.w      	r5, (r14, 0x0)
+  f8:	2d00      	subi      	r5, 1
+  fa:	c6454025 	lsl      	r5, r5, r18
+  fe:	6d48      	or      	r5, r2
+ 100:	b3a0      	st.w      	r5, (r3, 0x0)
+ 102:	3201      	movi      	r2, 1
+ 104:	9320      	ld.w      	r1, (r3, 0x0)
+ 106:	c4c24026 	lsl      	r6, r2, r6
+ 10a:	c4c12042 	andn      	r2, r1, r6
+ 10e:	b340      	st.w      	r2, (r3, 0x0)
+ 110:	9340      	ld.w      	r2, (r3, 0x0)
+ 112:	6d88      	or      	r6, r2
+ 114:	b3c0      	st.w      	r6, (r3, 0x0)
+ 116:	e907000f 	bez      	r7, 0x134	// 134 <gx_clock_set_div+0x134>
+ 11a:	eb480006 	cmpnei      	r8, 6
+ 11e:	0c04      	bf      	0x126	// 126 <gx_clock_set_div+0x126>
+ 120:	eb080009 	cmphsi      	r8, 10
+ 124:	0c08      	bf      	0x134	// 134 <gx_clock_set_div+0x134>
+ 126:	3301      	movi      	r3, 1
+ 128:	6c8f      	mov      	r2, r3
+ 12a:	6c73      	mov      	r1, r12
+ 12c:	c4114820 	lsli      	r0, r17, 0
+ 130:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_div>
+			130: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+ 134:	e9040008 	bez      	r4, 0x144	// 144 <gx_clock_set_div+0x144>
+ 138:	9848      	ld.w      	r2, (r14, 0x20)
+ 13a:	3301      	movi      	r3, 1
+ 13c:	c6034030 	lsl      	r16, r3, r16
+ 140:	de022000 	st.w      	r16, (r2, 0x0)
+ 144:	140a      	addi      	r14, r14, 40
+ 146:	ebc00058 	pop      	r4-r11, r15, r16-r17
+
+Disassembly of section .text.gx_clock_get_div:
+
+00000000 <gx_clock_get_div>:
+   0:	14d0      	push      	r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	6c7b      	mov      	r1, r14
+   6:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_div>
+			6: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+   a:	e920000d 	bnez      	r0, 0x24	// 24 <gx_clock_get_div+0x24>
+   e:	9800      	ld.w      	r0, (r14, 0x0)
+  10:	e900000a 	bez      	r0, 0x24	// 24 <gx_clock_get_div+0x24>
+  14:	9062      	ld.w      	r3, (r0, 0x8)
+  16:	e9030007 	bez      	r3, 0x24	// 24 <gx_clock_get_div+0x24>
+  1a:	9821      	ld.w      	r1, (r14, 0x4)
+  1c:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_div>
+			1c: R_CKCORE_PCREL_IMM26BY2	__module_get_div.isra.1
+  20:	1406      	addi      	r14, r14, 24
+  22:	1490      	pop      	r15
+  24:	3000      	movi      	r0, 0
+  26:	2800      	subi      	r0, 1
+  28:	07fc      	br      	0x20	// 20 <gx_clock_get_div+0x20>
+
+Disassembly of section .text.gx_clock_set_dto:
+
+00000000 <gx_clock_set_dto>:
+   0:	14d8      	push      	r4-r11, r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	6e07      	mov      	r8, r1
+   6:	6c7b      	mov      	r1, r14
+   8:	6d4b      	mov      	r5, r2
+   a:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_dto>
+			a: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+   e:	e9200059 	bnez      	r0, 0xc0	// c0 <gx_clock_set_dto+0xc0>
+  12:	9820      	ld.w      	r1, (r14, 0x0)
+  14:	9163      	ld.w      	r3, (r1, 0xc)
+  16:	e9030055 	bez      	r3, 0xc0	// c0 <gx_clock_set_dto+0xc0>
+  1a:	8380      	ld.b      	r4, (r3, 0x0)
+  1c:	e9040052 	bez      	r4, 0xc0	// c0 <gx_clock_set_dto+0xc0>
+  20:	9861      	ld.w      	r3, (r14, 0x4)
+  22:	610c      	addu      	r4, r3
+  24:	9460      	ld.w      	r3, (r4, 0x0)
+  26:	c4035702 	zext      	r2, r3, 24, 0
+  2a:	64a2      	cmpne      	r8, r2
+  2c:	0808      	bt      	0x3c	// 3c <gx_clock_set_dto+0x3c>
+  2e:	3280      	movi      	r2, 128
+  30:	4254      	lsli      	r2, r2, 20
+  32:	6cc9      	xor      	r3, r2
+  34:	c7635763 	zext      	r3, r3, 27, 27
+  38:	64d6      	cmpne      	r5, r3
+  3a:	0c43      	bf      	0xc0	// c0 <gx_clock_set_dto+0xc0>
+  3c:	d9214004 	ld.bs      	r9, (r1, 0x4)
+  40:	3d40      	cmpnei      	r5, 0
+  42:	6543      	mvcv      	r5
+  44:	d94e2002 	ld.w      	r10, (r14, 0x8)
+  48:	d9614006 	ld.bs      	r11, (r1, 0x6)
+  4c:	e989003c 	blz      	r9, 0xc4	// c4 <gx_clock_set_dto+0xc4>
+  50:	9863      	ld.w      	r3, (r14, 0xc)
+  52:	93c0      	ld.w      	r6, (r3, 0x0)
+  54:	71a5      	lsr      	r6, r9
+  56:	e4c62001 	andi      	r6, r6, 1
+  5a:	e9060006 	bez      	r6, 0x66	// 66 <gx_clock_set_dto+0x66>
+  5e:	9845      	ld.w      	r2, (r14, 0x14)
+  60:	3301      	movi      	r3, 1
+  62:	70e4      	lsl      	r3, r9
+  64:	b260      	st.w      	r3, (r2, 0x0)
+  66:	d8ea2000 	ld.w      	r7, (r10, 0x0)
+  6a:	71ed      	lsr      	r7, r11
+  6c:	e4e72001 	andi      	r7, r7, 1
+  70:	e9070008 	bez      	r7, 0x80	// 80 <gx_clock_set_dto+0x80>
+  74:	3301      	movi      	r3, 1
+  76:	3200      	movi      	r2, 0
+  78:	6c6f      	mov      	r1, r11
+  7a:	6c2b      	mov      	r0, r10
+  7c:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_dto>
+			7c: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+  80:	3380      	movi      	r3, 128
+  82:	453b      	lsli      	r1, r5, 27
+  84:	4373      	lsli      	r3, r3, 19
+  86:	6c60      	or      	r1, r8
+  88:	3200      	movi      	r2, 0
+  8a:	b460      	st.w      	r3, (r4, 0x0)
+  8c:	b440      	st.w      	r2, (r4, 0x0)
+  8e:	b460      	st.w      	r3, (r4, 0x0)
+  90:	c7412843 	bseti      	r3, r1, 26
+  94:	39b9      	bseti      	r1, 25
+  96:	39ba      	bseti      	r1, 26
+  98:	b460      	st.w      	r3, (r4, 0x0)
+  9a:	b420      	st.w      	r1, (r4, 0x0)
+  9c:	b420      	st.w      	r1, (r4, 0x0)
+  9e:	b460      	st.w      	r3, (r4, 0x0)
+  a0:	e9070008 	bez      	r7, 0xb0	// b0 <gx_clock_set_dto+0xb0>
+  a4:	3301      	movi      	r3, 1
+  a6:	6c8f      	mov      	r2, r3
+  a8:	6c6f      	mov      	r1, r11
+  aa:	6c2b      	mov      	r0, r10
+  ac:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_dto>
+			ac: R_CKCORE_PCREL_IMM26BY2	__reg_set_val
+  b0:	e9060008 	bez      	r6, 0xc0	// c0 <gx_clock_set_dto+0xc0>
+  b4:	9844      	ld.w      	r2, (r14, 0x10)
+  b6:	3301      	movi      	r3, 1
+  b8:	c5234029 	lsl      	r9, r3, r9
+  bc:	dd222000 	st.w      	r9, (r2, 0x0)
+  c0:	1406      	addi      	r14, r14, 24
+  c2:	1498      	pop      	r4-r11, r15
+  c4:	3600      	movi      	r6, 0
+  c6:	07d0      	br      	0x66	// 66 <gx_clock_set_dto+0x66>
+
+Disassembly of section .text.gx_clock_adjust_dto:
+
+00000000 <gx_clock_adjust_dto>:
+   0:	14d1      	push      	r4, r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	6d07      	mov      	r4, r1
+   6:	6c7b      	mov      	r1, r14
+   8:	e0000000 	bsr      	0x0	// 0 <gx_clock_adjust_dto>
+			8: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+   c:	e920001c 	bnez      	r0, 0x44	// 44 <gx_clock_adjust_dto+0x44>
+  10:	9860      	ld.w      	r3, (r14, 0x0)
+  12:	9363      	ld.w      	r3, (r3, 0xc)
+  14:	e9030018 	bez      	r3, 0x44	// 44 <gx_clock_adjust_dto+0x44>
+  18:	8360      	ld.b      	r3, (r3, 0x0)
+  1a:	e9030015 	bez      	r3, 0x44	// 44 <gx_clock_adjust_dto+0x44>
+  1e:	9841      	ld.w      	r2, (r14, 0x4)
+  20:	60c8      	addu      	r3, r2
+  22:	9340      	ld.w      	r2, (r3, 0x0)
+  24:	c4025701 	zext      	r1, r2, 24, 0
+  28:	6452      	cmpne      	r4, r1
+  2a:	0c0d      	bf      	0x44	// 44 <gx_clock_adjust_dto+0x44>
+  2c:	3180      	movi      	r1, 128
+  2e:	4134      	lsli      	r1, r1, 20
+  30:	6884      	and      	r2, r1
+  32:	e9220009 	bnez      	r2, 0x44	// 44 <gx_clock_adjust_dto+0x44>
+  36:	c7442842 	bseti      	r2, r4, 26
+  3a:	3cb9      	bseti      	r4, 25
+  3c:	3cba      	bseti      	r4, 26
+  3e:	b340      	st.w      	r2, (r3, 0x0)
+  40:	b380      	st.w      	r4, (r3, 0x0)
+  42:	b340      	st.w      	r2, (r3, 0x0)
+  44:	1406      	addi      	r14, r14, 24
+  46:	1491      	pop      	r4, r15
+
+Disassembly of section .text.gx_clock_get_dto:
+
+00000000 <gx_clock_get_dto>:
+   0:	14d0      	push      	r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	6c7b      	mov      	r1, r14
+   6:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_dto>
+			6: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+   a:	e9200010 	bnez      	r0, 0x2a	// 2a <gx_clock_get_dto+0x2a>
+   e:	9860      	ld.w      	r3, (r14, 0x0)
+  10:	e903000d 	bez      	r3, 0x2a	// 2a <gx_clock_get_dto+0x2a>
+  14:	9363      	ld.w      	r3, (r3, 0xc)
+  16:	e903000a 	bez      	r3, 0x2a	// 2a <gx_clock_get_dto+0x2a>
+  1a:	8360      	ld.b      	r3, (r3, 0x0)
+  1c:	9841      	ld.w      	r2, (r14, 0x4)
+  1e:	60c8      	addu      	r3, r2
+  20:	9300      	ld.w      	r0, (r3, 0x0)
+  22:	c4005700 	zext      	r0, r0, 24, 0
+  26:	1406      	addi      	r14, r14, 24
+  28:	1490      	pop      	r15
+  2a:	3000      	movi      	r0, 0
+  2c:	2800      	subi      	r0, 1
+  2e:	07fc      	br      	0x26	// 26 <gx_clock_get_dto+0x26>
+
+Disassembly of section .text.gx_clock_set_pll_no_block:
+
+00000000 <gx_clock_set_pll_no_block>:
+   0:	14d5      	push      	r4-r8, r15
+   2:	6d43      	mov      	r5, r0
+   4:	6d07      	mov      	r4, r1
+   6:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_pll_no_block>
+			6: R_CKCORE_PCREL_IMM26BY2	_clk_set_pll
+   a:	9560      	ld.w      	r3, (r5, 0x0)
+   c:	3b41      	cmpnei      	r3, 1
+   e:	0c03      	bf      	0x14	// 14 <gx_clock_set_pll_no_block+0x14>
+  10:	3000      	movi      	r0, 0
+  12:	1495      	pop      	r4-r8, r15
+  14:	e0000000 	bsr      	0x0	// 0 <gx_get_time_us>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+  18:	33fa      	movi      	r3, 250
+  1a:	4362      	lsli      	r3, r3, 2
+  1c:	6d83      	mov      	r6, r0
+  1e:	6dc7      	mov      	r7, r1
+  20:	7d0c      	mult      	r4, r3
+  22:	3500      	movi      	r5, 0
+  24:	ea88000b 	lrw      	r8, 0xa0005080	// 50 <gx_clock_set_pll_no_block+0x50>
+  28:	d8682006 	ld.w      	r3, (r8, 0x18)
+  2c:	e4632008 	andi      	r3, r3, 8
+  30:	e923fff0 	bnez      	r3, 0x10	// 10 <gx_clock_set_pll_no_block+0x10>
+  34:	e0000000 	bsr      	0x0	// 0 <gx_get_time_us>
+			34: R_CKCORE_PCREL_IMM26BY2	gx_get_time_us
+  38:	f8c0c460 	sub.64      	r0, r0, r6
+  3c:	6454      	cmphs      	r5, r1
+  3e:	0c05      	bf      	0x48	// 48 <gx_clock_set_pll_no_block+0x48>
+  40:	6546      	cmpne      	r1, r5
+  42:	0bf3      	bt      	0x28	// 28 <gx_clock_set_pll_no_block+0x28>
+  44:	6410      	cmphs      	r4, r0
+  46:	0bf1      	bt      	0x28	// 28 <gx_clock_set_pll_no_block+0x28>
+  48:	3000      	movi      	r0, 0
+  4a:	2800      	subi      	r0, 1
+  4c:	07e3      	br      	0x12	// 12 <gx_clock_set_pll_no_block+0x12>
+  4e:	0000      	.short	0x0000
+  50:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_clock_set_pll:
+
+00000000 <gx_clock_set_pll>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_pll>
+			4: R_CKCORE_PCREL_IMM26BY2	_clk_set_pll
+   8:	9460      	ld.w      	r3, (r4, 0x0)
+   a:	3b41      	cmpnei      	r3, 1
+   c:	0807      	bt      	0x1a	// 1a <gx_clock_set_pll+0x1a>
+   e:	1044      	lrw      	r2, 0xa0005080	// 1c <gx_clock_set_pll+0x1c>
+  10:	9266      	ld.w      	r3, (r2, 0x18)
+  12:	e4632008 	andi      	r3, r3, 8
+  16:	e903fffd 	bez      	r3, 0x10	// 10 <gx_clock_set_pll+0x10>
+  1a:	1491      	pop      	r4, r15
+  1c:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_clock_set_module_enable:
+
+00000000 <gx_clock_set_module_enable>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	587b      	subi      	r3, r0, 7
+   6:	3b11      	cmphsi      	r3, 18
+   8:	6d03      	mov      	r4, r0
+   a:	6d47      	mov      	r5, r1
+   c:	0808      	bt      	0x1c	// 1c <gx_clock_set_module_enable+0x1c>
+   e:	1043      	lrw      	r2, 0x0	// 18 <gx_clock_set_module_enable+0x18>
+  10:	d0620883 	ldr.w      	r3, (r2, r3 << 2)
+  14:	780c      	jmp      	r3
+  16:	0000      	.short	0x0000
+  18:	00000000 	.long	0x00000000
+			18: R_CKCORE_ADDR32	.rodata
+  1c:	6d93      	mov      	r6, r4
+  1e:	6c7b      	mov      	r1, r14
+  20:	6c1b      	mov      	r0, r6
+  22:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			22: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+  26:	e920002c 	bnez      	r0, 0x7e	// 7e <gx_clock_set_module_enable+0x7e>
+  2a:	d98e2000 	ld.w      	r12, (r14, 0x0)
+  2e:	3300      	movi      	r3, 0
+  30:	d82c4006 	ld.bs      	r1, (r12, 0x6)
+  34:	2b00      	subi      	r3, 1
+  36:	64c6      	cmpne      	r1, r3
+  38:	0c23      	bf      	0x7e	// 7e <gx_clock_set_module_enable+0x7e>
+  3a:	3e09      	cmphsi      	r6, 10
+  3c:	0808      	bt      	0x4c	// 4c <gx_clock_set_module_enable+0x4c>
+  3e:	3001      	movi      	r0, 1
+  40:	7018      	lsl      	r0, r6
+  42:	e4002243 	andi      	r0, r0, 579
+  46:	e9000003 	bez      	r0, 0x4c	// 4c <gx_clock_set_module_enable+0x4c>
+  4a:	5902      	addi      	r0, r1, 1
+  4c:	9862      	ld.w      	r3, (r14, 0x8)
+  4e:	9340      	ld.w      	r2, (r3, 0x0)
+  50:	d86c0004 	ld.b      	r3, (r12, 0x4)
+  54:	e9000008 	bez      	r0, 0x64	// 64 <gx_clock_set_module_enable+0x64>
+  58:	c4024040 	lsr      	r0, r2, r0
+  5c:	e4002001 	andi      	r0, r0, 1
+  60:	e920002c 	bnez      	r0, 0xb8	// b8 <gx_clock_set_module_enable+0xb8>
+  64:	7085      	lsr      	r2, r1
+  66:	e4422001 	andi      	r2, r2, 1
+  6a:	e9020027 	bez      	r2, 0xb8	// b8 <gx_clock_set_module_enable+0xb8>
+  6e:	e9050025 	bez      	r5, 0xb8	// b8 <gx_clock_set_module_enable+0xb8>
+  72:	9825      	ld.w      	r1, (r14, 0x14)
+  74:	74ce      	sextb      	r3, r3
+  76:	3201      	movi      	r2, 1
+  78:	c4624023 	lsl      	r3, r2, r3
+  7c:	b160      	st.w      	r3, (r1, 0x0)
+  7e:	6c7b      	mov      	r1, r14
+  80:	6c13      	mov      	r0, r4
+  82:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			82: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+  86:	e9200039 	bnez      	r0, 0xf8	// f8 <gx_clock_set_module_enable+0xf8>
+  8a:	9860      	ld.w      	r3, (r14, 0x0)
+  8c:	d8434005 	ld.bs      	r2, (r3, 0x5)
+  90:	3301      	movi      	r3, 1
+  92:	70c8      	lsl      	r3, r2
+  94:	5c57      	subi      	r2, r4, 6
+  96:	3a12      	cmphsi      	r2, 19
+  98:	082b      	bt      	0xee	// ee <gx_clock_set_module_enable+0xee>
+  9a:	1023      	lrw      	r1, 0x0	// a4 <gx_clock_set_module_enable+0xa4>
+  9c:	d0410882 	ldr.w      	r2, (r1, r2 << 2)
+  a0:	7808      	jmp      	r2
+  a2:	0000      	.short	0x0000
+  a4:	00000000 	.long	0x00000000
+			a4: R_CKCORE_ADDR32	.rodata+0x48
+  a8:	3610      	movi      	r6, 16
+  aa:	07ba      	br      	0x1e	// 1e <gx_clock_set_module_enable+0x1e>
+  ac:	3613      	movi      	r6, 19
+  ae:	07b8      	br      	0x1e	// 1e <gx_clock_set_module_enable+0x1e>
+  b0:	3616      	movi      	r6, 22
+  b2:	07b6      	br      	0x1e	// 1e <gx_clock_set_module_enable+0x1e>
+  b4:	3602      	movi      	r6, 2
+  b6:	07b4      	br      	0x1e	// 1e <gx_clock_set_module_enable+0x1e>
+  b8:	9824      	ld.w      	r1, (r14, 0x10)
+  ba:	07dd      	br      	0x74	// 74 <gx_clock_set_module_enable+0x74>
+  bc:	3bb0      	bseti      	r3, 16
+  be:	e905001f 	bez      	r5, 0xfc	// fc <gx_clock_set_module_enable+0xfc>
+  c2:	9845      	ld.w      	r2, (r14, 0x14)
+  c4:	b260      	st.w      	r3, (r2, 0x0)
+  c6:	0419      	br      	0xf8	// f8 <gx_clock_set_module_enable+0xf8>
+  c8:	3bb1      	bseti      	r3, 17
+  ca:	07fa      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  cc:	ec630008 	ori      	r3, r3, 8
+  d0:	07f7      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  d2:	3bb2      	bseti      	r3, 18
+  d4:	07f5      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  d6:	3bb3      	bseti      	r3, 19
+  d8:	07f3      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  da:	ec632000 	ori      	r3, r3, 8192
+  de:	07f0      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  e0:	ec638000 	ori      	r3, r3, 32768
+  e4:	07ed      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  e6:	3bb4      	bseti      	r3, 20
+  e8:	07eb      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  ea:	3bb5      	bseti      	r3, 21
+  ec:	07e9      	br      	0xbe	// be <gx_clock_set_module_enable+0xbe>
+  ee:	3c82      	bclri      	r4, 2
+  f0:	3c41      	cmpnei      	r4, 1
+  f2:	0c03      	bf      	0xf8	// f8 <gx_clock_set_module_enable+0xf8>
+  f4:	e923ffe5 	bnez      	r3, 0xbe	// be <gx_clock_set_module_enable+0xbe>
+  f8:	1406      	addi      	r14, r14, 24
+  fa:	1493      	pop      	r4-r6, r15
+  fc:	9844      	ld.w      	r2, (r14, 0x10)
+  fe:	07e3      	br      	0xc4	// c4 <gx_clock_set_module_enable+0xc4>
+
+Disassembly of section .text.gx_clock_get_module_enable:
+
+00000000 <gx_clock_get_module_enable>:
+   0:	14d1      	push      	r4, r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	6c7b      	mov      	r1, r14
+   6:	6d03      	mov      	r4, r0
+   8:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_enable>
+			8: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+   c:	e920002a 	bnez      	r0, 0x60	// 60 <gx_clock_get_module_enable+0x60>
+  10:	9860      	ld.w      	r3, (r14, 0x0)
+  12:	d8434005 	ld.bs      	r2, (r3, 0x5)
+  16:	e9020025 	bez      	r2, 0x60	// 60 <gx_clock_get_module_enable+0x60>
+  1a:	3c16      	cmphsi      	r4, 23
+  1c:	081e      	bt      	0x58	// 58 <gx_clock_get_module_enable+0x58>
+  1e:	3301      	movi      	r3, 1
+  20:	3192      	movi      	r1, 146
+  22:	70d0      	lsl      	r3, r4
+  24:	412f      	lsli      	r1, r1, 15
+  26:	68c4      	and      	r3, r1
+  28:	e9030018 	bez      	r3, 0x58	// 58 <gx_clock_get_module_enable+0x58>
+  2c:	9863      	ld.w      	r3, (r14, 0xc)
+  2e:	102f      	lrw      	r1, 0x0	// 68 <gx_clock_get_module_enable+0x68>
+  30:	9340      	ld.w      	r2, (r3, 0x0)
+  32:	5c62      	addi      	r3, r4, 1
+  34:	2401      	addi      	r4, 2
+  36:	4364      	lsli      	r3, r3, 4
+  38:	4484      	lsli      	r4, r4, 4
+  3a:	60c4      	addu      	r3, r1
+  3c:	6104      	addu      	r4, r1
+  3e:	d8034005 	ld.bs      	r0, (r3, 0x5)
+  42:	d8644005 	ld.bs      	r3, (r4, 0x5)
+  46:	c4024040 	lsr      	r0, r2, r0
+  4a:	708d      	lsr      	r2, r3
+  4c:	6808      	and      	r0, r2
+  4e:	6c02      	nor      	r0, r0
+  50:	e4002001 	andi      	r0, r0, 1
+  54:	1406      	addi      	r14, r14, 24
+  56:	1491      	pop      	r4, r15
+  58:	9863      	ld.w      	r3, (r14, 0xc)
+  5a:	9300      	ld.w      	r0, (r3, 0x0)
+  5c:	700a      	asr      	r0, r2
+  5e:	07f8      	br      	0x4e	// 4e <gx_clock_get_module_enable+0x4e>
+  60:	3000      	movi      	r0, 0
+  62:	2800      	subi      	r0, 1
+  64:	07f8      	br      	0x54	// 54 <gx_clock_get_module_enable+0x54>
+  66:	0000      	.short	0x0000
+  68:	00000000 	.long	0x00000000
+			68: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_clock_set_module_snpu_enable:
+
+00000000 <gx_clock_set_module_snpu_enable>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	e0000000 	bsr      	0x0	// 0 <gx_lock_irq_save>
+			4: R_CKCORE_PCREL_IMM26BY2	gx_lock_irq_save
+   8:	ea23a030 	movih      	r3, 41008
+   c:	9346      	ld.w      	r2, (r3, 0x18)
+   e:	e9040007 	bez      	r4, 0x1c	// 1c <gx_clock_set_module_snpu_enable+0x1c>
+  12:	3a88      	bclri      	r2, 8
+  14:	b346      	st.w      	r2, (r3, 0x18)
+  16:	e0000000 	bsr      	0x0	// 0 <gx_unlock_irq_restore>
+			16: R_CKCORE_PCREL_IMM26BY2	gx_unlock_irq_restore
+  1a:	1491      	pop      	r4, r15
+  1c:	ec420100 	ori      	r2, r2, 256
+  20:	07fa      	br      	0x14	// 14 <gx_clock_set_module_snpu_enable+0x14>
+
+Disassembly of section .text.gx_clock_get_module_frequence:
+
+00000000 <gx_clock_get_module_frequence>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	1426      	subi      	r14, r14, 24
+   4:	587b      	subi      	r3, r0, 7
+   6:	3b12      	cmphsi      	r3, 19
+   8:	6d43      	mov      	r5, r0
+   a:	0808      	bt      	0x1a	// 1a <gx_clock_get_module_frequence+0x1a>
+   c:	1042      	lrw      	r2, 0x0	// 14 <gx_clock_get_module_frequence+0x14>
+   e:	d0620883 	ldr.w      	r3, (r2, r3 << 2)
+  12:	780c      	jmp      	r3
+  14:	0000      	.short	0x0000
+			14: R_CKCORE_ADDR32	.rodata+0x94
+  16:	0000      	.short	0x0000
+  18:	3510      	movi      	r5, 16
+  1a:	6c7b      	mov      	r1, r14
+  1c:	6c17      	mov      	r0, r5
+  1e:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			1e: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+  22:	6d03      	mov      	r4, r0
+  24:	e92000ba 	bnez      	r0, 0x198	// 198 <gx_clock_get_module_frequence+0x198>
+  28:	9800      	ld.w      	r0, (r14, 0x0)
+  2a:	3300      	movi      	r3, 0
+  2c:	d8204006 	ld.bs      	r1, (r0, 0x6)
+  30:	2b00      	subi      	r3, 1
+  32:	64c6      	cmpne      	r1, r3
+  34:	0c93      	bf      	0x15a	// 15a <gx_clock_get_module_frequence+0x15a>
+  36:	3d09      	cmphsi      	r5, 10
+  38:	0808      	bt      	0x48	// 48 <gx_clock_get_module_frequence+0x48>
+  3a:	3301      	movi      	r3, 1
+  3c:	70d4      	lsl      	r3, r5
+  3e:	e4632243 	andi      	r3, r3, 579
+  42:	e9030003 	bez      	r3, 0x48	// 48 <gx_clock_get_module_frequence+0x48>
+  46:	5982      	addi      	r4, r1, 1
+  48:	ea23a001 	movih      	r3, 40961
+  4c:	3ba7      	bseti      	r3, 7
+  4e:	9363      	ld.w      	r3, (r3, 0xc)
+  50:	e904000a 	bez      	r4, 0x64	// 64 <gx_clock_get_module_frequence+0x64>
+  54:	9842      	ld.w      	r2, (r14, 0x8)
+  56:	9240      	ld.w      	r2, (r2, 0x0)
+  58:	c4824044 	lsr      	r4, r2, r4
+  5c:	e4842001 	andi      	r4, r4, 1
+  60:	e92400a1 	bnez      	r4, 0x1a2	// 1a2 <gx_clock_get_module_frequence+0x1a2>
+  64:	d98e2002 	ld.w      	r12, (r14, 0x8)
+  68:	d84c2000 	ld.w      	r2, (r12, 0x0)
+  6c:	7085      	lsr      	r2, r1
+  6e:	e4422001 	andi      	r2, r2, 1
+  72:	e9020066 	bez      	r2, 0x13e	// 13e <gx_clock_get_module_frequence+0x13e>
+  76:	d88c2000 	ld.w      	r4, (r12, 0x0)
+  7a:	7105      	lsr      	r4, r1
+  7c:	e4842001 	andi      	r4, r4, 1
+  80:	e9040073 	bez      	r4, 0x166	// 166 <gx_clock_get_module_frequence+0x166>
+  84:	e4632001 	andi      	r3, r3, 1
+  88:	e9030085 	bez      	r3, 0x192	// 192 <gx_clock_get_module_frequence+0x192>
+  8c:	1247      	lrw      	r2, 0xa0005000	// 1a8 <gx_clock_get_module_frequence+0x1a8>
+  8e:	31f8      	movi      	r1, 248
+  90:	9267      	ld.w      	r3, (r2, 0x1c)
+  92:	e463203f 	andi      	r3, r3, 63
+  96:	e5830000 	addi      	r12, r3, 1
+  9a:	9268      	ld.w      	r3, (r2, 0x20)
+  9c:	9289      	ld.w      	r4, (r2, 0x24)
+  9e:	4125      	lsli      	r1, r1, 5
+  a0:	4488      	lsli      	r4, r4, 8
+  a2:	6904      	and      	r4, r1
+  a4:	6d0c      	or      	r4, r3
+  a6:	922a      	ld.w      	r1, (r2, 0x28)
+  a8:	926c      	ld.w      	r3, (r2, 0x30)
+  aa:	c48354a3 	zext      	r3, r3, 5, 4
+  ae:	3b42      	cmpnei      	r3, 2
+  b0:	2400      	addi      	r4, 1
+  b2:	0c62      	bf      	0x176	// 176 <gx_clock_get_module_frequence+0x176>
+  b4:	3b43      	cmpnei      	r3, 3
+  b6:	0c65      	bf      	0x180	// 180 <gx_clock_get_module_frequence+0x180>
+  b8:	3b41      	cmpnei      	r3, 1
+  ba:	ea220465 	movih      	r2, 1125
+  be:	ea03ea60 	movi      	r3, 60000
+  c2:	c5434903 	rotli      	r3, r3, 10
+  c6:	c4430c40 	inct      	r2, r3, 0
+  ca:	7cb0      	mult      	r2, r12
+  cc:	c4828022 	divu      	r2, r2, r4
+  d0:	ea033e7f 	movi      	r3, 15999
+  d4:	6cce      	nor      	r3, r3
+  d6:	60c8      	addu      	r3, r2
+  d8:	eb037cff 	cmphsi      	r3, 32000
+  dc:	0c55      	bf      	0x186	// 186 <gx_clock_get_module_frequence+0x186>
+  de:	1174      	lrw      	r3, 0xfff83000	// 1ac <gx_clock_get_module_frequence+0x1ac>
+  e0:	c462002d 	addu      	r13, r2, r3
+  e4:	1173      	lrw      	r3, 0xf9fff	// 1b0 <gx_clock_get_module_frequence+0x1b0>
+  e6:	674c      	cmphs      	r3, r13
+  e8:	0852      	bt      	0x18c	// 18c <gx_clock_get_module_frequence+0x18c>
+  ea:	1173      	lrw      	r3, 0xfffda800	// 1b4 <gx_clock_get_module_frequence+0x1b4>
+  ec:	608c      	addu      	r2, r3
+  ee:	1173      	lrw      	r3, 0x2c87ff	// 1b8 <gx_clock_get_module_frequence+0x1b8>
+  f0:	648c      	cmphs      	r3, r2
+  f2:	0c55      	bf      	0x19c	// 19c <gx_clock_get_module_frequence+0x19c>
+  f4:	33fa      	movi      	r3, 250
+  f6:	436d      	lsli      	r3, r3, 13
+  f8:	c5838023 	divu      	r3, r3, r12
+  fc:	7cd0      	mult      	r3, r4
+  fe:	e4812007 	andi      	r4, r1, 7
+ 102:	2400      	addi      	r4, 1
+ 104:	6110      	addu      	r4, r4
+ 106:	c4838024 	divu      	r4, r3, r4
+ 10a:	9043      	ld.w      	r2, (r0, 0xc)
+ 10c:	9821      	ld.w      	r1, (r14, 0x4)
+ 10e:	e902002c 	bez      	r2, 0x166	// 166 <gx_clock_get_module_frequence+0x166>
+ 112:	8260      	ld.b      	r3, (r2, 0x0)
+ 114:	60c4      	addu      	r3, r1
+ 116:	3280      	movi      	r2, 128
+ 118:	9360      	ld.w      	r3, (r3, 0x0)
+ 11a:	4254      	lsli      	r2, r2, 20
+ 11c:	688c      	and      	r2, r3
+ 11e:	e9220024 	bnez      	r2, 0x166	// 166 <gx_clock_get_module_frequence+0x166>
+ 122:	c4035703 	zext      	r3, r3, 24, 0
+ 126:	f8838004 	mul.u32      	r4, r3, r4
+ 12a:	4567      	lsli      	r3, r5, 7
+ 12c:	4c99      	lsri      	r4, r4, 25
+ 12e:	6d0c      	or      	r4, r3
+ 130:	041b      	br      	0x166	// 166 <gx_clock_get_module_frequence+0x166>
+ 132:	3516      	movi      	r5, 22
+ 134:	0773      	br      	0x1a	// 1a <gx_clock_get_module_frequence+0x1a>
+ 136:	350a      	movi      	r5, 10
+ 138:	0771      	br      	0x1a	// 1a <gx_clock_get_module_frequence+0x1a>
+ 13a:	3513      	movi      	r5, 19
+ 13c:	076f      	br      	0x1a	// 1a <gx_clock_get_module_frequence+0x1a>
+ 13e:	3280      	movi      	r2, 128
+ 140:	424b      	lsli      	r2, r2, 11
+ 142:	68c8      	and      	r3, r2
+ 144:	32fa      	movi      	r2, 250
+ 146:	3b40      	cmpnei      	r3, 0
+ 148:	424c      	lsli      	r2, r2, 12
+ 14a:	ea04bb80 	movi      	r4, 48000
+ 14e:	c5044904 	rotli      	r4, r4, 8
+ 152:	c4820c40 	inct      	r4, r2, 0
+ 156:	3d08      	cmphsi      	r5, 9
+ 158:	0c04      	bf      	0x160	// 160 <gx_clock_get_module_frequence+0x160>
+ 15a:	6c13      	mov      	r0, r4
+ 15c:	1406      	addi      	r14, r14, 24
+ 15e:	1492      	pop      	r4-r5, r15
+ 160:	3d82      	bclri      	r5, 2
+ 162:	3d42      	cmpnei      	r5, 2
+ 164:	0ffb      	bf      	0x15a	// 15a <gx_clock_get_module_frequence+0x15a>
+ 166:	9821      	ld.w      	r1, (r14, 0x4)
+ 168:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			168: R_CKCORE_PCREL_IMM26BY2	__module_get_div.isra.1
+ 16c:	e900fff7 	bez      	r0, 0x15a	// 15a <gx_clock_get_module_frequence+0x15a>
+ 170:	c4048024 	divu      	r4, r4, r0
+ 174:	07f3      	br      	0x15a	// 15a <gx_clock_get_module_frequence+0x15a>
+ 176:	ea02a410 	movi      	r2, 42000
+ 17a:	c5624902 	rotli      	r2, r2, 11
+ 17e:	07a6      	br      	0xca	// ca <gx_clock_get_module_frequence+0xca>
+ 180:	ea2205dc 	movih      	r2, 1500
+ 184:	07a3      	br      	0xca	// ca <gx_clock_get_module_frequence+0xca>
+ 186:	33fa      	movi      	r3, 250
+ 188:	4367      	lsli      	r3, r3, 7
+ 18a:	07b7      	br      	0xf8	// f8 <gx_clock_get_module_frequence+0xf8>
+ 18c:	33fa      	movi      	r3, 250
+ 18e:	436c      	lsli      	r3, r3, 12
+ 190:	07b4      	br      	0xf8	// f8 <gx_clock_get_module_frequence+0xf8>
+ 192:	ea240177 	movih      	r4, 375
+ 196:	07ba      	br      	0x10a	// 10a <gx_clock_get_module_frequence+0x10a>
+ 198:	3400      	movi      	r4, 0
+ 19a:	07e0      	br      	0x15a	// 15a <gx_clock_get_module_frequence+0x15a>
+ 19c:	3400      	movi      	r4, 0
+ 19e:	2c00      	subi      	r4, 1
+ 1a0:	07dd      	br      	0x15a	// 15a <gx_clock_get_module_frequence+0x15a>
+ 1a2:	34fa      	movi      	r4, 250
+ 1a4:	4487      	lsli      	r4, r4, 7
+ 1a6:	07e0      	br      	0x166	// 166 <gx_clock_get_module_frequence+0x166>
+ 1a8:	a0005000 	.long	0xa0005000
+ 1ac:	fff83000 	.long	0xfff83000
+ 1b0:	000f9fff 	.long	0x000f9fff
+ 1b4:	fffda800 	.long	0xfffda800
+ 1b8:	002c87ff 	.long	0x002c87ff

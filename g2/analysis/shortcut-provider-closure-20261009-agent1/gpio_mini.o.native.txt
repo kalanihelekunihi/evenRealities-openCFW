@@ -1,0 +1,558 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/gpio_mini.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gpio_isr:
+
+00000000 <gpio_isr>:
+   0:	14d6      	push      	r4-r9, r15
+   2:	ea038005 	movi      	r3, 32773
+   6:	c7a34903 	rotli      	r3, r3, 29
+   a:	108e      	lrw      	r4, 0x0	// 40 <gpio_isr+0x40>
+   c:	3500      	movi      	r5, 0
+   e:	d903200c 	ld.w      	r8, (r3, 0x30)
+  12:	ea090001 	movi      	r9, 1
+  16:	6d8f      	mov      	r6, r3
+  18:	c4a94027 	lsl      	r7, r9, r5
+  1c:	c4e82023 	and      	r3, r8, r7
+  20:	e9030009 	bez      	r3, 0x32	// 32 <gpio_isr+0x32>
+  24:	9461      	ld.w      	r3, (r4, 0x4)
+  26:	e9030005 	bez      	r3, 0x30	// 30 <gpio_isr+0x30>
+  2a:	9422      	ld.w      	r1, (r4, 0x8)
+  2c:	9400      	ld.w      	r0, (r4, 0x0)
+  2e:	7bcd      	jsr      	r3
+  30:	b6ec      	st.w      	r7, (r6, 0x30)
+  32:	2500      	addi      	r5, 1
+  34:	eb450020 	cmpnei      	r5, 32
+  38:	240b      	addi      	r4, 12
+  3a:	0bef      	bt      	0x18	// 18 <gpio_isr+0x18>
+  3c:	3000      	movi      	r0, 0
+  3e:	1496      	pop      	r4-r9, r15
+  40:	00000000 	.long	0x00000000
+			40: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gpio_pwm_get_channel:
+
+00000000 <gpio_pwm_get_channel>:
+   0:	1070      	lrw      	r3, 0x0	// 40 <gpio_pwm_get_channel+0x40>
+   2:	e443017f 	addi      	r2, r3, 384
+   6:	d8632060 	ld.w      	r3, (r3, 0x180)
+   a:	6c4b      	mov      	r1, r2
+   c:	e9030005 	bez      	r3, 0x16	// 16 <gpio_pwm_get_channel+0x16>
+  10:	9241      	ld.w      	r2, (r2, 0x4)
+  12:	6482      	cmpne      	r0, r2
+  14:	0c11      	bf      	0x36	// 36 <gpio_pwm_get_channel+0x36>
+  16:	9144      	ld.w      	r2, (r1, 0x10)
+  18:	e9020005 	bez      	r2, 0x22	// 22 <gpio_pwm_get_channel+0x22>
+  1c:	9125      	ld.w      	r1, (r1, 0x14)
+  1e:	6442      	cmpne      	r0, r1
+  20:	0c0d      	bf      	0x3a	// 3a <gpio_pwm_get_channel+0x3a>
+  22:	e9030008 	bez      	r3, 0x32	// 32 <gpio_pwm_get_channel+0x32>
+  26:	3000      	movi      	r0, 0
+  28:	2800      	subi      	r0, 1
+  2a:	3a40      	cmpnei      	r2, 0
+  2c:	3301      	movi      	r3, 1
+  2e:	c4600c40 	inct      	r3, r0, 0
+  32:	6c0f      	mov      	r0, r3
+  34:	783c      	jmp      	r15
+  36:	3300      	movi      	r3, 0
+  38:	07fd      	br      	0x32	// 32 <gpio_pwm_get_channel+0x32>
+  3a:	3301      	movi      	r3, 1
+  3c:	07fb      	br      	0x32	// 32 <gpio_pwm_get_channel+0x32>
+  3e:	0000      	.short	0x0000
+  40:	00000000 	.long	0x00000000
+			40: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_gpio_get_direction:
+
+00000000 <gx_gpio_get_direction>:
+   0:	ea018005 	movi      	r1, 32773
+   4:	c7a14901 	rotli      	r1, r1, 29
+   8:	3301      	movi      	r3, 1
+   a:	e400201f 	andi      	r0, r0, 31
+   e:	c4034020 	lsl      	r0, r3, r0
+  12:	9142      	ld.w      	r2, (r1, 0x8)
+  14:	9160      	ld.w      	r3, (r1, 0x0)
+  16:	68c0      	and      	r3, r0
+  18:	6808      	and      	r0, r2
+  1a:	3b40      	cmpnei      	r3, 0
+  1c:	e9000007 	bez      	r0, 0x2a	// 2a <gx_gpio_get_direction+0x2a>
+  20:	c4000503 	mvc      	r3
+  24:	3000      	movi      	r0, 0
+  26:	600e      	subu      	r0, r3
+  28:	783c      	jmp      	r15
+  2a:	6403      	mvcv      	r0
+  2c:	2000      	addi      	r0, 1
+  2e:	07fd      	br      	0x28	// 28 <gx_gpio_get_direction+0x28>
+
+Disassembly of section .text.gx_gpio_set_direction:
+
+00000000 <gx_gpio_set_direction>:
+   0:	3941      	cmpnei      	r1, 1
+   2:	e400201f 	andi      	r0, r0, 31
+   6:	080e      	bt      	0x22	// 22 <gx_gpio_set_direction+0x22>
+   8:	ea028005 	movi      	r2, 32773
+   c:	c7a24902 	rotli      	r2, r2, 29
+  10:	7040      	lsl      	r1, r0
+  12:	9262      	ld.w      	r3, (r2, 0x8)
+  14:	68c5      	andn      	r3, r1
+  16:	b262      	st.w      	r3, (r2, 0x8)
+  18:	9200      	ld.w      	r0, (r2, 0x0)
+  1a:	6c40      	or      	r1, r0
+  1c:	b220      	st.w      	r1, (r2, 0x0)
+  1e:	3000      	movi      	r0, 0
+  20:	783c      	jmp      	r15
+  22:	e921000f 	bnez      	r1, 0x40	// 40 <gx_gpio_set_direction+0x40>
+  26:	ea028005 	movi      	r2, 32773
+  2a:	c7a24902 	rotli      	r2, r2, 29
+  2e:	3101      	movi      	r1, 1
+  30:	9260      	ld.w      	r3, (r2, 0x0)
+  32:	7040      	lsl      	r1, r0
+  34:	68c5      	andn      	r3, r1
+  36:	b260      	st.w      	r3, (r2, 0x0)
+  38:	9262      	ld.w      	r3, (r2, 0x8)
+  3a:	6c4c      	or      	r1, r3
+  3c:	b222      	st.w      	r1, (r2, 0x8)
+  3e:	07f0      	br      	0x1e	// 1e <gx_gpio_set_direction+0x1e>
+  40:	3942      	cmpnei      	r1, 2
+  42:	0bee      	bt      	0x1e	// 1e <gx_gpio_set_direction+0x1e>
+  44:	ea028005 	movi      	r2, 32773
+  48:	c7a24902 	rotli      	r2, r2, 29
+  4c:	3300      	movi      	r3, 0
+  4e:	2b01      	subi      	r3, 2
+  50:	d9822002 	ld.w      	r12, (r2, 0x8)
+  54:	70c3      	rotl      	r3, r0
+  56:	c46c2021 	and      	r1, r12, r3
+  5a:	b222      	st.w      	r1, (r2, 0x8)
+  5c:	9220      	ld.w      	r1, (r2, 0x0)
+  5e:	68c4      	and      	r3, r1
+  60:	b260      	st.w      	r3, (r2, 0x0)
+  62:	07de      	br      	0x1e	// 1e <gx_gpio_set_direction+0x1e>
+
+Disassembly of section .text.gx_gpio_get_level:
+
+00000000 <gx_gpio_get_level>:
+   0:	ea038005 	movi      	r3, 32773
+   4:	c7a34903 	rotli      	r3, r3, 29
+   8:	e440201f 	andi      	r2, r0, 31
+   c:	3001      	movi      	r0, 1
+   e:	9363      	ld.w      	r3, (r3, 0xc)
+  10:	7008      	lsl      	r0, r2
+  12:	680c      	and      	r0, r3
+  14:	3840      	cmpnei      	r0, 0
+  16:	c4000500 	mvc      	r0
+  1a:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_gpio_set_level:
+
+00000000 <gx_gpio_set_level>:
+   0:	ea038005 	movi      	r3, 32773
+   4:	c7a34903 	rotli      	r3, r3, 29
+   8:	e400201f 	andi      	r0, r0, 31
+   c:	9341      	ld.w      	r2, (r3, 0x4)
+   e:	3301      	movi      	r3, 1
+  10:	70c0      	lsl      	r3, r0
+  12:	e921000b 	bnez      	r1, 0x28	// 28 <gx_gpio_set_level+0x28>
+  16:	c4622043 	andn      	r3, r2, r3
+  1a:	ea028005 	movi      	r2, 32773
+  1e:	c7a24902 	rotli      	r2, r2, 29
+  22:	3000      	movi      	r0, 0
+  24:	b261      	st.w      	r3, (r2, 0x4)
+  26:	783c      	jmp      	r15
+  28:	6cc8      	or      	r3, r2
+  2a:	07f8      	br      	0x1a	// 1a <gx_gpio_set_level+0x1a>
+
+Disassembly of section .text.gx_gpio_enable_trigger:
+
+00000000 <gx_gpio_enable_trigger>:
+   0:	14d4      	push      	r4-r7, r15
+   2:	381f      	cmphsi      	r0, 32
+   4:	6d03      	mov      	r4, r0
+   6:	6d47      	mov      	r5, r1
+   8:	6dcb      	mov      	r7, r2
+   a:	6d8f      	mov      	r6, r3
+   c:	0855      	bt      	0xb6	// b6 <gx_gpio_enable_trigger+0xb6>
+   e:	3100      	movi      	r1, 0
+  10:	e0000000 	bsr      	0x0	// 0 <gx_gpio_enable_trigger>
+			10: R_CKCORE_PCREL_IMM26BY2	gx_gpio_set_direction
+  14:	300c      	movi      	r0, 12
+  16:	7c10      	mult      	r0, r4
+  18:	1027      	lrw      	r1, 0x0	// 34 <gx_gpio_enable_trigger+0x34>
+  1a:	d4200824 	str.w      	r4, (r0, r1 << 0)
+  1e:	6040      	addu      	r1, r0
+  20:	b1e1      	st.w      	r7, (r1, 0x4)
+  22:	b1c2      	st.w      	r6, (r1, 0x8)
+  24:	5d23      	subi      	r1, r5, 1
+  26:	3907      	cmphsi      	r1, 8
+  28:	0814      	bt      	0x50	// 50 <gx_gpio_enable_trigger+0x50>
+  2a:	1064      	lrw      	r3, 0x0	// 38 <gx_gpio_enable_trigger+0x38>
+  2c:	d0230883 	ldr.w      	r3, (r3, r1 << 2)
+  30:	780c      	jmp      	r3
+	...
+			34: R_CKCORE_ADDR32	.bss
+			38: R_CKCORE_ADDR32	.rodata
+  3a:	0000      	.short	0x0000
+  3c:	ea028005 	movi      	r2, 32773
+  40:	c7a24902 	rotli      	r2, r2, 29
+  44:	3301      	movi      	r3, 1
+  46:	9225      	ld.w      	r1, (r2, 0x14)
+  48:	c4834024 	lsl      	r4, r3, r4
+  4c:	6d04      	or      	r4, r1
+  4e:	b285      	st.w      	r4, (r2, 0x14)
+  50:	3001      	movi      	r0, 1
+  52:	3200      	movi      	r2, 0
+  54:	103a      	lrw      	r1, 0x0	// bc <gx_gpio_enable_trigger+0xbc>
+  56:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			56: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  5a:	3000      	movi      	r0, 0
+  5c:	1494      	pop      	r4-r7, r15
+  5e:	ea028005 	movi      	r2, 32773
+  62:	c7a24902 	rotli      	r2, r2, 29
+  66:	3301      	movi      	r3, 1
+  68:	9226      	ld.w      	r1, (r2, 0x18)
+  6a:	c4834024 	lsl      	r4, r3, r4
+  6e:	6d04      	or      	r4, r1
+  70:	b286      	st.w      	r4, (r2, 0x18)
+  72:	07ef      	br      	0x50	// 50 <gx_gpio_enable_trigger+0x50>
+  74:	ea028005 	movi      	r2, 32773
+  78:	c7a24902 	rotli      	r2, r2, 29
+  7c:	3301      	movi      	r3, 1
+  7e:	922a      	ld.w      	r1, (r2, 0x28)
+  80:	c4834024 	lsl      	r4, r3, r4
+  84:	6d04      	or      	r4, r1
+  86:	b28a      	st.w      	r4, (r2, 0x28)
+  88:	07e4      	br      	0x50	// 50 <gx_gpio_enable_trigger+0x50>
+  8a:	ea028005 	movi      	r2, 32773
+  8e:	c7a24902 	rotli      	r2, r2, 29
+  92:	3301      	movi      	r3, 1
+  94:	922b      	ld.w      	r1, (r2, 0x2c)
+  96:	c4834024 	lsl      	r4, r3, r4
+  9a:	6d04      	or      	r4, r1
+  9c:	b28b      	st.w      	r4, (r2, 0x2c)
+  9e:	07d9      	br      	0x50	// 50 <gx_gpio_enable_trigger+0x50>
+  a0:	ea028005 	movi      	r2, 32773
+  a4:	c7a24902 	rotli      	r2, r2, 29
+  a8:	3301      	movi      	r3, 1
+  aa:	9229      	ld.w      	r1, (r2, 0x24)
+  ac:	c4834024 	lsl      	r4, r3, r4
+  b0:	6d04      	or      	r4, r1
+  b2:	b289      	st.w      	r4, (r2, 0x24)
+  b4:	07ce      	br      	0x50	// 50 <gx_gpio_enable_trigger+0x50>
+  b6:	3000      	movi      	r0, 0
+  b8:	2800      	subi      	r0, 1
+  ba:	07d1      	br      	0x5c	// 5c <gx_gpio_enable_trigger+0x5c>
+  bc:	00000000 	.long	0x00000000
+			bc: R_CKCORE_ADDR32	.text.gpio_isr
+
+Disassembly of section .text.gx_gpio_disable_trigger:
+
+00000000 <gx_gpio_disable_trigger>:
+   0:	14d1      	push      	r4, r15
+   2:	381f      	cmphsi      	r0, 32
+   4:	6d03      	mov      	r4, r0
+   6:	0825      	bt      	0x50	// 50 <gx_gpio_disable_trigger+0x50>
+   8:	3102      	movi      	r1, 2
+   a:	e0000000 	bsr      	0x0	// 0 <gx_gpio_disable_trigger>
+			a: R_CKCORE_PCREL_IMM26BY2	gx_gpio_set_direction
+   e:	ea028005 	movi      	r2, 32773
+  12:	c7a24902 	rotli      	r2, r2, 29
+  16:	3300      	movi      	r3, 0
+  18:	2b01      	subi      	r3, 2
+  1a:	9225      	ld.w      	r1, (r2, 0x14)
+  1c:	70d3      	rotl      	r3, r4
+  1e:	684c      	and      	r1, r3
+  20:	b225      	st.w      	r1, (r2, 0x14)
+  22:	9226      	ld.w      	r1, (r2, 0x18)
+  24:	684c      	and      	r1, r3
+  26:	b226      	st.w      	r1, (r2, 0x18)
+  28:	922a      	ld.w      	r1, (r2, 0x28)
+  2a:	684c      	and      	r1, r3
+  2c:	b22a      	st.w      	r1, (r2, 0x28)
+  2e:	922b      	ld.w      	r1, (r2, 0x2c)
+  30:	684c      	and      	r1, r3
+  32:	b22b      	st.w      	r1, (r2, 0x2c)
+  34:	9229      	ld.w      	r1, (r2, 0x24)
+  36:	68c4      	and      	r3, r1
+  38:	b269      	st.w      	r3, (r2, 0x24)
+  3a:	320c      	movi      	r2, 12
+  3c:	1067      	lrw      	r3, 0x0	// 58 <gx_gpio_disable_trigger+0x58>
+  3e:	7d08      	mult      	r4, r2
+  40:	32ff      	movi      	r2, 255
+  42:	d4830822 	str.w      	r2, (r3, r4 << 0)
+  46:	610c      	addu      	r4, r3
+  48:	3000      	movi      	r0, 0
+  4a:	b401      	st.w      	r0, (r4, 0x4)
+  4c:	b402      	st.w      	r0, (r4, 0x8)
+  4e:	1491      	pop      	r4, r15
+  50:	3000      	movi      	r0, 0
+  52:	2800      	subi      	r0, 1
+  54:	07fd      	br      	0x4e	// 4e <gx_gpio_disable_trigger+0x4e>
+  56:	0000      	.short	0x0000
+  58:	0000      	.short	0x0000
+			58: R_CKCORE_ADDR32	.bss
+	...
+
+Disassembly of section .text.gx_gpio_enable_pwm:
+
+00000000 <gx_gpio_enable_pwm>:
+   0:	14d7      	push      	r4-r10, r15
+   2:	1422      	subi      	r14, r14, 8
+   4:	381f      	cmphsi      	r0, 32
+   6:	6d83      	mov      	r6, r0
+   8:	6d47      	mov      	r5, r1
+   a:	6e4b      	mov      	r9, r2
+   c:	0c05      	bf      	0x16	// 16 <gx_gpio_enable_pwm+0x16>
+   e:	3000      	movi      	r0, 0
+  10:	2800      	subi      	r0, 1
+  12:	1402      	addi      	r14, r14, 8
+  14:	1497      	pop      	r4-r10, r15
+  16:	e0000000 	bsr      	0x0	// 0 <gx_gpio_enable_pwm>
+			16: R_CKCORE_PCREL_IMM26BY2	gpio_pwm_get_channel
+  1a:	6dc3      	mov      	r7, r0
+  1c:	e980fff9 	blz      	r0, 0xe	// e <gx_gpio_enable_pwm+0xe>
+  20:	c480482a 	lsli      	r10, r0, 4
+  24:	119d      	lrw      	r4, 0x0	// 118 <gx_gpio_enable_pwm+0x118>
+  26:	c5440023 	addu      	r3, r4, r10
+  2a:	3004      	movi      	r0, 4
+  2c:	b3c1      	st.w      	r6, (r3, 0x4)
+  2e:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			2e: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+  32:	f8058002 	mul.u32      	r2, r5, r0
+  36:	6e03      	mov      	r8, r0
+  38:	b840      	st.w      	r2, (r14, 0x0)
+  3a:	b861      	st.w      	r3, (r14, 0x4)
+  3c:	e9230005 	bnez      	r3, 0x46	// 46 <gx_gpio_enable_pwm+0x46>
+  40:	1137      	lrw      	r1, 0x3b9ac9ff	// 11c <gx_gpio_enable_pwm+0x11c>
+  42:	6484      	cmphs      	r1, r2
+  44:	0be5      	bt      	0xe	// e <gx_gpio_enable_pwm+0xe>
+  46:	e923005f 	bnez      	r3, 0x104	// 104 <gx_gpio_enable_pwm+0x104>
+  4a:	1176      	lrw      	r3, 0x3b9aca00	// 120 <gx_gpio_enable_pwm+0x120>
+  4c:	c4628022 	divu      	r2, r2, r3
+  50:	b840      	st.w      	r2, (r14, 0x0)
+  52:	c5440023 	addu      	r3, r4, r10
+  56:	f9288008 	mul.u32      	r8, r8, r9
+  5a:	9840      	ld.w      	r2, (r14, 0x0)
+  5c:	b342      	st.w      	r2, (r3, 0x8)
+  5e:	dd0e2000 	st.w      	r8, (r14, 0x0)
+  62:	dd2e2001 	st.w      	r9, (r14, 0x4)
+  66:	112f      	lrw      	r1, 0x3b9aca00	// 120 <gx_gpio_enable_pwm+0x120>
+  68:	e9290053 	bnez      	r9, 0x10e	// 10e <gx_gpio_enable_pwm+0x10e>
+  6c:	c4288022 	divu      	r2, r8, r1
+  70:	b840      	st.w      	r2, (r14, 0x0)
+  72:	dd2e2001 	st.w      	r9, (r14, 0x4)
+  76:	c5440022 	addu      	r2, r4, r10
+  7a:	9860      	ld.w      	r3, (r14, 0x0)
+  7c:	9222      	ld.w      	r1, (r2, 0x8)
+  7e:	eb01ffff 	cmphsi      	r1, 65536
+  82:	b263      	st.w      	r3, (r2, 0xc)
+  84:	0bc5      	bt      	0xe	// e <gx_gpio_enable_pwm+0xe>
+  86:	eb03ffff 	cmphsi      	r3, 65536
+  8a:	0bc2      	bt      	0xe	// e <gx_gpio_enable_pwm+0xe>
+  8c:	64c4      	cmphs      	r1, r3
+  8e:	0fc0      	bf      	0xe	// e <gx_gpio_enable_pwm+0xe>
+  90:	644e      	cmpne      	r3, r1
+  92:	0803      	bt      	0x98	// 98 <gx_gpio_enable_pwm+0x98>
+  94:	2300      	addi      	r3, 1
+  96:	b263      	st.w      	r3, (r2, 0xc)
+  98:	ea038005 	movi      	r3, 32773
+  9c:	c7a34903 	rotli      	r3, r3, 29
+  a0:	3001      	movi      	r0, 1
+  a2:	d5440820 	str.w      	r0, (r4, r10 << 0)
+  a6:	1140      	lrw      	r2, 0xa0002040	// 124 <gx_gpio_enable_pwm+0x124>
+  a8:	b30d      	st.w      	r0, (r3, 0x34)
+  aa:	6128      	addu      	r4, r10
+  ac:	4762      	lsli      	r3, r7, 2
+  ae:	608c      	addu      	r2, r3
+  b0:	9422      	ld.w      	r1, (r4, 0x8)
+  b2:	b220      	st.w      	r1, (r2, 0x0)
+  b4:	ea22a000 	movih      	r2, 40960
+  b8:	3aad      	bseti      	r2, 13
+  ba:	60c8      	addu      	r3, r2
+  bc:	9443      	ld.w      	r2, (r4, 0xc)
+  be:	b340      	st.w      	r2, (r3, 0x0)
+  c0:	ea028485 	movi      	r2, 33925
+  c4:	c7624902 	rotli      	r2, r2, 27
+  c8:	4e63      	lsri      	r3, r6, 3
+  ca:	60c8      	addu      	r3, r2
+  cc:	4362      	lsli      	r3, r3, 2
+  ce:	e4462007 	andi      	r2, r6, 7
+  d2:	4242      	lsli      	r2, r2, 2
+  d4:	9320      	ld.w      	r1, (r3, 0x0)
+  d6:	c4474022 	lsl      	r2, r7, r2
+  da:	6c84      	or      	r2, r1
+  dc:	b340      	st.w      	r2, (r3, 0x0)
+  de:	ea22a000 	movih      	r2, 40960
+  e2:	3aad      	bseti      	r2, 13
+  e4:	c4e04023 	lsl      	r3, r0, r7
+  e8:	9239      	ld.w      	r1, (r2, 0x64)
+  ea:	6cc4      	or      	r3, r1
+  ec:	ea018405 	movi      	r1, 33797
+  f0:	c7a14901 	rotli      	r1, r1, 29
+  f4:	7018      	lsl      	r0, r6
+  f6:	d9812000 	ld.w      	r12, (r1, 0x0)
+  fa:	6c30      	or      	r0, r12
+  fc:	b100      	st.w      	r0, (r1, 0x0)
+  fe:	b279      	st.w      	r3, (r2, 0x64)
+ 100:	3000      	movi      	r0, 0
+ 102:	0788      	br      	0x12	// 12 <gx_gpio_enable_pwm+0x12>
+ 104:	1027      	lrw      	r1, 0x3b9aca00	// 120 <gx_gpio_enable_pwm+0x120>
+ 106:	6c3b      	mov      	r0, r14
+ 108:	e0000000 	bsr      	0x0	// 0 <__div64_32>
+			108: R_CKCORE_PCREL_IMM26BY2	__div64_32
+ 10c:	07a3      	br      	0x52	// 52 <gx_gpio_enable_pwm+0x52>
+ 10e:	6c3b      	mov      	r0, r14
+ 110:	e0000000 	bsr      	0x0	// 0 <__div64_32>
+			110: R_CKCORE_PCREL_IMM26BY2	__div64_32
+ 114:	07b1      	br      	0x76	// 76 <gx_gpio_enable_pwm+0x76>
+ 116:	0000      	.short	0x0000
+ 118:	00000000 	.long	0x00000000
+			118: R_CKCORE_ADDR32	.bss+0x180
+ 11c:	3b9ac9ff 	.long	0x3b9ac9ff
+ 120:	3b9aca00 	.long	0x3b9aca00
+ 124:	a0002040 	.long	0xa0002040
+
+Disassembly of section .text.gx_gpio_disable_pwm:
+
+00000000 <gx_gpio_disable_pwm>:
+   0:	381f      	cmphsi      	r0, 32
+   2:	084f      	bt      	0xa0	// a0 <gx_gpio_disable_pwm+0xa0>
+   4:	ea92002a 	lrw      	r18, 0x0	// ac <gx_gpio_disable_pwm+0xac>
+   8:	e472017f 	addi      	r3, r18, 384
+   c:	9341      	ld.w      	r2, (r3, 0x4)
+   e:	6482      	cmpne      	r0, r2
+  10:	0805      	bt      	0x1a	// 1a <gx_gpio_disable_pwm+0x1a>
+  12:	d8522060 	ld.w      	r2, (r18, 0x180)
+  16:	e9220043 	bnez      	r2, 0x9c	// 9c <gx_gpio_disable_pwm+0x9c>
+  1a:	9345      	ld.w      	r2, (r3, 0x14)
+  1c:	6482      	cmpne      	r0, r2
+  1e:	0832      	bt      	0x82	// 82 <gx_gpio_disable_pwm+0x82>
+  20:	9344      	ld.w      	r2, (r3, 0x10)
+  22:	e9020030 	bez      	r2, 0x82	// 82 <gx_gpio_disable_pwm+0x82>
+  26:	3201      	movi      	r2, 1
+  28:	ea2da000 	movih      	r13, 40960
+  2c:	c5ad284d 	bseti      	r13, r13, 13
+  30:	3101      	movi      	r1, 1
+  32:	da6d2019 	ld.w      	r19, (r13, 0x64)
+  36:	c441402c 	lsl      	r12, r1, r2
+  3a:	c593204c 	andn      	r12, r19, r12
+  3e:	dd8d2019 	st.w      	r12, (r13, 0x64)
+  42:	ea0c8405 	movi      	r12, 33797
+  46:	c7ac490c 	rotli      	r12, r12, 29
+  4a:	7040      	lsl      	r1, r0
+  4c:	d9ac2000 	ld.w      	r13, (r12, 0x0)
+  50:	c42d2041 	andn      	r1, r13, r1
+  54:	dc2c2000 	st.w      	r1, (r12, 0x0)
+  58:	4823      	lsri      	r1, r0, 3
+  5a:	ea0c8485 	movi      	r12, 33925
+  5e:	c76c490c 	rotli      	r12, r12, 27
+  62:	6070      	addu      	r1, r12
+  64:	4122      	lsli      	r1, r1, 2
+  66:	e4002007 	andi      	r0, r0, 7
+  6a:	4002      	lsli      	r0, r0, 2
+  6c:	d9812000 	ld.w      	r12, (r1, 0x0)
+  70:	c4024020 	lsl      	r0, r2, r0
+  74:	c40c2040 	andn      	r0, r12, r0
+  78:	b100      	st.w      	r0, (r1, 0x0)
+  7a:	4244      	lsli      	r2, r2, 4
+  7c:	3100      	movi      	r1, 0
+  7e:	d4430821 	str.w      	r1, (r3, r2 << 0)
+  82:	d8122060 	ld.w      	r0, (r18, 0x180)
+  86:	e9200010 	bnez      	r0, 0xa6	// a6 <gx_gpio_disable_pwm+0xa6>
+  8a:	9364      	ld.w      	r3, (r3, 0x10)
+  8c:	e9230007 	bnez      	r3, 0x9a	// 9a <gx_gpio_disable_pwm+0x9a>
+  90:	ea038005 	movi      	r3, 32773
+  94:	c7a34903 	rotli      	r3, r3, 29
+  98:	b30d      	st.w      	r0, (r3, 0x34)
+  9a:	783c      	jmp      	r15
+  9c:	3200      	movi      	r2, 0
+  9e:	07c5      	br      	0x28	// 28 <gx_gpio_disable_pwm+0x28>
+  a0:	3000      	movi      	r0, 0
+  a2:	2800      	subi      	r0, 1
+  a4:	07fb      	br      	0x9a	// 9a <gx_gpio_disable_pwm+0x9a>
+  a6:	3000      	movi      	r0, 0
+  a8:	07f9      	br      	0x9a	// 9a <gx_gpio_disable_pwm+0x9a>
+  aa:	0000      	.short	0x0000
+  ac:	00000000 	.long	0x00000000
+			ac: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_gpio_clock_test:
+
+00000000 <gx_gpio_clock_test>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	381f      	cmphsi      	r0, 32
+   4:	6d03      	mov      	r4, r0
+   6:	6d47      	mov      	r5, r1
+   8:	0826      	bt      	0x54	// 54 <gx_gpio_clock_test+0x54>
+   a:	e0000000 	bsr      	0x0	// 0 <gx_gpio_clock_test>
+			a: R_CKCORE_PCREL_IMM26BY2	gpio_pwm_get_channel
+   e:	e9800023 	blz      	r0, 0x54	// 54 <gx_gpio_clock_test+0x54>
+  12:	1073      	lrw      	r3, 0x0	// 5c <gx_gpio_clock_test+0x5c>
+  14:	4004      	lsli      	r0, r0, 4
+  16:	600c      	addu      	r0, r3
+  18:	ea028485 	movi      	r2, 33925
+  1c:	c7624902 	rotli      	r2, r2, 27
+  20:	4c63      	lsri      	r3, r4, 3
+  22:	60c8      	addu      	r3, r2
+  24:	4362      	lsli      	r3, r3, 2
+  26:	e4242007 	andi      	r1, r4, 7
+  2a:	4122      	lsli      	r1, r1, 2
+  2c:	320f      	movi      	r2, 15
+  2e:	b081      	st.w      	r4, (r0, 0x4)
+  30:	7084      	lsl      	r2, r1
+  32:	9300      	ld.w      	r0, (r3, 0x0)
+  34:	c4402042 	andn      	r2, r0, r2
+  38:	7144      	lsl      	r5, r1
+  3a:	6d48      	or      	r5, r2
+  3c:	b3a0      	st.w      	r5, (r3, 0x0)
+  3e:	ea038405 	movi      	r3, 33797
+  42:	c7a34903 	rotli      	r3, r3, 29
+  46:	3001      	movi      	r0, 1
+  48:	9340      	ld.w      	r2, (r3, 0x0)
+  4a:	7010      	lsl      	r0, r4
+  4c:	6c08      	or      	r0, r2
+  4e:	b300      	st.w      	r0, (r3, 0x0)
+  50:	3000      	movi      	r0, 0
+  52:	1492      	pop      	r4-r5, r15
+  54:	3000      	movi      	r0, 0
+  56:	2800      	subi      	r0, 1
+  58:	07fd      	br      	0x52	// 52 <gx_gpio_clock_test+0x52>
+  5a:	0000      	.short	0x0000
+  5c:	00000000 	.long	0x00000000
+			5c: R_CKCORE_ADDR32	.bss+0x180
+
+Disassembly of section .text.gx_gpio_init:
+
+00000000 <gx_gpio_init>:
+   0:	14d0      	push      	r15
+   2:	3101      	movi      	r1, 1
+   4:	3004      	movi      	r0, 4
+   6:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   a:	ea038005 	movi      	r3, 32773
+   e:	c7a34903 	rotli      	r3, r3, 29
+  12:	3000      	movi      	r0, 0
+  14:	b30d      	st.w      	r0, (r3, 0x34)
+  16:	1490      	pop      	r15
+
+Disassembly of section .text.gx_gpio_exit:
+
+00000000 <gx_gpio_exit>:
+   0:	14d0      	push      	r15
+   2:	3100      	movi      	r1, 0
+   4:	3004      	movi      	r0, 4
+   6:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   a:	3000      	movi      	r0, 0
+   c:	1490      	pop      	r15
+
+Disassembly of section .text.gx_gpio_suspend:
+
+00000000 <gx_gpio_suspend>:
+   0:	3000      	movi      	r0, 0
+   2:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_gpio_resume:
+
+00000000 <gx_gpio_resume>:
+   0:	3000      	movi      	r0, 0
+   2:	783c      	jmp      	r15

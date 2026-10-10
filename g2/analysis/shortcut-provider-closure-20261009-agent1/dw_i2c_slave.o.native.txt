@@ -1,0 +1,207 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/dw_i2c_slave.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.i2c_dw_irq_handler_slave:
+
+00000000 <i2c_dw_irq_handler_slave>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	1421      	subi      	r14, r14, 4
+   4:	9166      	ld.w      	r3, (r1, 0x18)
+   6:	d8412022 	ld.w      	r2, (r1, 0x88)
+   a:	6d07      	mov      	r4, r1
+   c:	93ab      	ld.w      	r5, (r3, 0x2c)
+   e:	e9820006 	blz      	r2, 0x1a	// 1a <i2c_dw_irq_handler_slave+0x1a>
+  12:	9370      	ld.w      	r3, (r3, 0x40)
+  14:	3000      	movi      	r0, 0
+  16:	1401      	addi      	r14, r14, 4
+  18:	1492      	pop      	r4-r5, r15
+  1a:	e4452020 	andi      	r2, r5, 32
+  1e:	e902001e 	bez      	r2, 0x5a	// 5a <i2c_dw_irq_handler_slave+0x5a>
+  22:	e4a52004 	andi      	r5, r5, 4
+  26:	9354      	ld.w      	r2, (r3, 0x50)
+  28:	e905000b 	bez      	r5, 0x3e	// 3e <i2c_dw_irq_handler_slave+0x3e>
+  2c:	9364      	ld.w      	r3, (r3, 0x10)
+  2e:	dc6e0003 	st.b      	r3, (r14, 0x3)
+  32:	915e      	ld.w      	r2, (r1, 0x78)
+  34:	917d      	ld.w      	r3, (r1, 0x74)
+  36:	3000      	movi      	r0, 0
+  38:	e42e0002 	addi      	r1, r14, 3
+  3c:	7bcd      	jsr      	r3
+  3e:	947d      	ld.w      	r3, (r4, 0x74)
+  40:	945e      	ld.w      	r2, (r4, 0x78)
+  42:	e42e0002 	addi      	r1, r14, 3
+  46:	3001      	movi      	r0, 1
+  48:	7bcd      	jsr      	r3
+  4a:	e920003a 	bnez      	r0, 0xbe	// be <i2c_dw_irq_handler_slave+0xbe>
+  4e:	9466      	ld.w      	r3, (r4, 0x18)
+  50:	d84e0003 	ld.b      	r2, (r14, 0x3)
+  54:	b344      	st.w      	r2, (r3, 0x10)
+  56:	9466      	ld.w      	r3, (r4, 0x18)
+  58:	93ab      	ld.w      	r5, (r3, 0x2c)
+  5a:	e4652004 	andi      	r3, r5, 4
+  5e:	e903000c 	bez      	r3, 0x76	// 76 <i2c_dw_irq_handler_slave+0x76>
+  62:	9466      	ld.w      	r3, (r4, 0x18)
+  64:	945e      	ld.w      	r2, (r4, 0x78)
+  66:	9364      	ld.w      	r3, (r3, 0x10)
+  68:	dc6e0003 	st.b      	r3, (r14, 0x3)
+  6c:	e42e0002 	addi      	r1, r14, 3
+  70:	947d      	ld.w      	r3, (r4, 0x74)
+  72:	3000      	movi      	r0, 0
+  74:	7bcd      	jsr      	r3
+  76:	e4652204 	andi      	r3, r5, 516
+  7a:	eb430200 	cmpnei      	r3, 512
+  7e:	0813      	bt      	0xa4	// a4 <i2c_dw_irq_handler_slave+0xa4>
+  80:	9466      	ld.w      	r3, (r4, 0x18)
+  82:	945e      	ld.w      	r2, (r4, 0x78)
+  84:	9378      	ld.w      	r3, (r3, 0x60)
+  86:	3100      	movi      	r1, 0
+  88:	947d      	ld.w      	r3, (r4, 0x74)
+  8a:	3002      	movi      	r0, 2
+  8c:	7bcd      	jsr      	r3
+  8e:	9471      	ld.w      	r3, (r4, 0x44)
+  90:	3b45      	cmpnei      	r3, 5
+  92:	0809      	bt      	0xa4	// a4 <i2c_dw_irq_handler_slave+0xa4>
+  94:	9413      	ld.w      	r0, (r4, 0x4c)
+  96:	e0000000 	bsr      	0x0	// 0 <gx_free_irq>
+			96: R_CKCORE_PCREL_IMM26BY2	gx_free_irq
+  9a:	6c13      	mov      	r0, r4
+  9c:	e0000000 	bsr      	0x0	// 0 <i2c_dw_disable>
+			9c: R_CKCORE_PCREL_IMM26BY2	i2c_dw_disable
+  a0:	3304      	movi      	r3, 4
+  a2:	b471      	st.w      	r3, (r4, 0x44)
+  a4:	e4052040 	andi      	r0, r5, 64
+  a8:	e900ffb7 	bez      	r0, 0x16	// 16 <i2c_dw_irq_handler_slave+0x16>
+  ac:	9466      	ld.w      	r3, (r4, 0x18)
+  ae:	6c13      	mov      	r0, r4
+  b0:	d8432020 	ld.w      	r2, (r3, 0x80)
+  b4:	b452      	st.w      	r2, (r4, 0x48)
+  b6:	9375      	ld.w      	r3, (r3, 0x54)
+  b8:	e0000000 	bsr      	0x0	// 0 <i2c_dw_handle_tx_abort>
+			b8: R_CKCORE_PCREL_IMM26BY2	i2c_dw_handle_tx_abort
+  bc:	07ad      	br      	0x16	// 16 <i2c_dw_irq_handler_slave+0x16>
+  be:	3000      	movi      	r0, 0
+  c0:	2800      	subi      	r0, 1
+  c2:	07aa      	br      	0x16	// 16 <i2c_dw_irq_handler_slave+0x16>
+
+Disassembly of section .text.gx_i2c_slave_open:
+
+00000000 <gx_i2c_slave_open>:
+   0:	14d6      	push      	r4-r9, r15
+   2:	6e03      	mov      	r8, r0
+   4:	6dc7      	mov      	r7, r1
+   6:	6d4b      	mov      	r5, r2
+   8:	6e4f      	mov      	r9, r3
+   a:	e0000000 	bsr      	0x0	// 0 <gx_i2c_get_dev>
+			a: R_CKCORE_PCREL_IMM26BY2	gx_i2c_get_dev
+   e:	6d03      	mov      	r4, r0
+  10:	e9000041 	bez      	r0, 0x92	// 92 <gx_i2c_slave_open+0x92>
+  14:	90da      	ld.w      	r6, (r0, 0x68)
+  16:	e926003e 	bnez      	r6, 0x92	// 92 <gx_i2c_slave_open+0x92>
+  1a:	e905003e 	bez      	r5, 0x96	// 96 <gx_i2c_slave_open+0x96>
+  1e:	3303      	movi      	r3, 3
+  20:	b071      	st.w      	r3, (r0, 0x44)
+  22:	dd20201e 	st.w      	r9, (r0, 0x78)
+  26:	b0bd      	st.w      	r5, (r0, 0x74)
+  28:	6c23      	mov      	r0, r8
+  2a:	e0000000 	bsr      	0x0	// 0 <gx_i2c_init>
+			2a: R_CKCORE_PCREL_IMM26BY2	gx_i2c_init
+  2e:	6c63      	mov      	r1, r8
+  30:	6c13      	mov      	r0, r4
+  32:	e0000000 	bsr      	0x0	// 0 <i2c_dw_probe>
+			32: R_CKCORE_PCREL_IMM26BY2	i2c_dw_probe
+  36:	6c5b      	mov      	r1, r6
+  38:	6c13      	mov      	r0, r4
+  3a:	e0000000 	bsr      	0x0	// 0 <i2c_dw_enable>
+			3a: R_CKCORE_PCREL_IMM26BY2	i2c_dw_enable
+  3e:	6c13      	mov      	r0, r4
+  40:	e0000000 	bsr      	0x0	// 0 <i2c_dw_set_sda_hold>
+			40: R_CKCORE_PCREL_IMM26BY2	i2c_dw_set_sda_hold
+  44:	9440      	ld.w      	r2, (r4, 0x0)
+  46:	1076      	lrw      	r3, 0x3b9aca00	// 9c <gx_i2c_slave_open+0x9c>
+  48:	c4438022 	divu      	r2, r3, r2
+  4c:	33fa      	movi      	r3, 250
+  4e:	4362      	lsli      	r3, r3, 2
+  50:	9426      	ld.w      	r1, (r4, 0x18)
+  52:	c4438023 	divu      	r3, r3, r2
+  56:	2b13      	subi      	r3, 20
+  58:	dc612025 	st.w      	r3, (r1, 0x94)
+  5c:	9466      	ld.w      	r3, (r4, 0x18)
+  5e:	3101      	movi      	r1, 1
+  60:	b3cf      	st.w      	r6, (r3, 0x3c)
+  62:	9466      	ld.w      	r3, (r4, 0x18)
+  64:	6c13      	mov      	r0, r4
+  66:	b3ce      	st.w      	r6, (r3, 0x38)
+  68:	9446      	ld.w      	r2, (r4, 0x18)
+  6a:	33a0      	movi      	r3, 160
+  6c:	4362      	lsli      	r3, r3, 2
+  6e:	b260      	st.w      	r3, (r2, 0x0)
+  70:	9466      	ld.w      	r3, (r4, 0x18)
+  72:	b3e2      	st.w      	r7, (r3, 0x8)
+  74:	9446      	ld.w      	r2, (r4, 0x18)
+  76:	3399      	movi      	r3, 153
+  78:	4362      	lsli      	r3, r3, 2
+  7a:	b26c      	st.w      	r3, (r2, 0x30)
+  7c:	9466      	ld.w      	r3, (r4, 0x18)
+  7e:	9370      	ld.w      	r3, (r3, 0x40)
+  80:	e0000000 	bsr      	0x0	// 0 <i2c_dw_enable>
+			80: R_CKCORE_PCREL_IMM26BY2	i2c_dw_enable
+  84:	9413      	ld.w      	r0, (r4, 0x4c)
+  86:	6c93      	mov      	r2, r4
+  88:	1026      	lrw      	r1, 0x0	// a0 <gx_i2c_slave_open+0xa0>
+  8a:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			8a: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  8e:	6c13      	mov      	r0, r4
+  90:	1496      	pop      	r4-r9, r15
+  92:	3000      	movi      	r0, 0
+  94:	07fe      	br      	0x90	// 90 <gx_i2c_slave_open+0x90>
+  96:	6c17      	mov      	r0, r5
+  98:	07fc      	br      	0x90	// 90 <gx_i2c_slave_open+0x90>
+  9a:	0000      	.short	0x0000
+  9c:	3b9aca00 	.long	0x3b9aca00
+  a0:	00000000 	.long	0x00000000
+			a0: R_CKCORE_ADDR32	.text.i2c_dw_irq_handler_slave
+
+Disassembly of section .text.gx_i2c_slave_enable_fast_dma_tx:
+
+00000000 <gx_i2c_slave_enable_fast_dma_tx>:
+   0:	3000      	movi      	r0, 0
+   2:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_i2c_slave_close:
+
+00000000 <gx_i2c_slave_close>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	9066      	ld.w      	r3, (r0, 0x18)
+   4:	6d03      	mov      	r4, r0
+   6:	937c      	ld.w      	r3, (r3, 0x70)
+   8:	e4632040 	andi      	r3, r3, 64
+   c:	e9230013 	bnez      	r3, 0x32	// 32 <gx_i2c_slave_close+0x32>
+  10:	9013      	ld.w      	r0, (r0, 0x4c)
+  12:	e0000000 	bsr      	0x0	// 0 <gx_free_irq>
+			12: R_CKCORE_PCREL_IMM26BY2	gx_free_irq
+  16:	6c13      	mov      	r0, r4
+  18:	e0000000 	bsr      	0x0	// 0 <i2c_dw_disable>
+			18: R_CKCORE_PCREL_IMM26BY2	i2c_dw_disable
+  1c:	3304      	movi      	r3, 4
+  1e:	b471      	st.w      	r3, (r4, 0x44)
+  20:	947a      	ld.w      	r3, (r4, 0x68)
+  22:	2b00      	subi      	r3, 1
+  24:	b47a      	st.w      	r3, (r4, 0x68)
+  26:	d8040064 	ld.b      	r0, (r4, 0x64)
+  2a:	e0000000 	bsr      	0x0	// 0 <gx_i2c_exit>
+			2a: R_CKCORE_PCREL_IMM26BY2	gx_i2c_exit
+  2e:	3000      	movi      	r0, 0
+  30:	1492      	pop      	r4-r5, r15
+  32:	3305      	movi      	r3, 5
+  34:	b071      	st.w      	r3, (r0, 0x44)
+  36:	ea0503e9 	movi      	r5, 1001
+  3a:	2d00      	subi      	r5, 1
+  3c:	e905fff2 	bez      	r5, 0x20	// 20 <gx_i2c_slave_close+0x20>
+  40:	3019      	movi      	r0, 25
+  42:	e0000000 	bsr      	0x0	// 0 <gx_udelay>
+			42: R_CKCORE_PCREL_IMM26BY2	gx_udelay
+  46:	9471      	ld.w      	r3, (r4, 0x44)
+  48:	3b44      	cmpnei      	r3, 4
+  4a:	0bf8      	bt      	0x3a	// 3a <gx_i2c_slave_close+0x3a>
+  4c:	07ea      	br      	0x20	// 20 <gx_i2c_slave_close+0x20>

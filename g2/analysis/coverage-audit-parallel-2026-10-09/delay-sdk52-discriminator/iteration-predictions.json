@@ -1,0 +1,619 @@
+{
+  "preconditions": [
+    "IEEE binary32 round-to-nearest ties-to-even for arithmetic; integer conversions truncate",
+    "HP means extracted performance status equals 2",
+    "inputs restricted to selected nonoverflow range; initialized ITCM not assumed"
+  ],
+  "count": 38,
+  "rows": [
+    {
+      "us": 0,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 0,
+        "adjustment": 15,
+        "calls_loop": false,
+        "loop_argument": null
+      },
+      "sdk52": {
+        "raw": 0,
+        "adjustment": 15,
+        "calls_loop": false,
+        "loop_argument": null
+      }
+    },
+    {
+      "us": 0,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 0,
+        "adjustment": 24,
+        "calls_loop": false,
+        "loop_argument": null
+      },
+      "sdk52": {
+        "raw": 0,
+        "adjustment": 25,
+        "calls_loop": false,
+        "loop_argument": null
+      }
+    },
+    {
+      "us": 1,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 32,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 17
+      },
+      "sdk52": {
+        "raw": 32,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 17
+      }
+    },
+    {
+      "us": 1,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 83,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 59
+      },
+      "sdk52": {
+        "raw": 83,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 58
+      }
+    },
+    {
+      "us": 2,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 64,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 49
+      },
+      "sdk52": {
+        "raw": 64,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 49
+      }
+    },
+    {
+      "us": 2,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 166,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 142
+      },
+      "sdk52": {
+        "raw": 167,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 142
+      }
+    },
+    {
+      "us": 3,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 96,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 81
+      },
+      "sdk52": {
+        "raw": 96,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 81
+      }
+    },
+    {
+      "us": 3,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 250,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 226
+      },
+      "sdk52": {
+        "raw": 250,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 225
+      }
+    },
+    {
+      "us": 4,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 128,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 113
+      },
+      "sdk52": {
+        "raw": 128,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 113
+      }
+    },
+    {
+      "us": 4,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 333,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 309
+      },
+      "sdk52": {
+        "raw": 333,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 308
+      }
+    },
+    {
+      "us": 5,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 160,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 145
+      },
+      "sdk52": {
+        "raw": 160,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 145
+      }
+    },
+    {
+      "us": 5,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 416,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 392
+      },
+      "sdk52": {
+        "raw": 417,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 392
+      }
+    },
+    {
+      "us": 10,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 320,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 305
+      },
+      "sdk52": {
+        "raw": 320,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 305
+      }
+    },
+    {
+      "us": 10,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 833,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 809
+      },
+      "sdk52": {
+        "raw": 833,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 808
+      }
+    },
+    {
+      "us": 100,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 3200,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 3185
+      },
+      "sdk52": {
+        "raw": 3200,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 3185
+      }
+    },
+    {
+      "us": 100,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 8333,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 8309
+      },
+      "sdk52": {
+        "raw": 8333,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 8308
+      }
+    },
+    {
+      "us": 2096,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 67072,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67057
+      },
+      "sdk52": {
+        "raw": 67072,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67057
+      }
+    },
+    {
+      "us": 2096,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 174666,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 174642
+      },
+      "sdk52": {
+        "raw": 174667,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 174642
+      }
+    },
+    {
+      "us": 2097,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 67104,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67089
+      },
+      "sdk52": {
+        "raw": 67104,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67089
+      }
+    },
+    {
+      "us": 2097,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 174750,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 174726
+      },
+      "sdk52": {
+        "raw": 174750,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 174725
+      }
+    },
+    {
+      "us": 2098,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 67136,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67121
+      },
+      "sdk52": {
+        "raw": 67136,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67121
+      }
+    },
+    {
+      "us": 2098,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 174833,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 174809
+      },
+      "sdk52": {
+        "raw": 174833,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 174808
+      }
+    },
+    {
+      "us": 2099,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 67168,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67153
+      },
+      "sdk52": {
+        "raw": 67168,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67153
+      }
+    },
+    {
+      "us": 2099,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 174916,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 174892
+      },
+      "sdk52": {
+        "raw": 174917,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 174892
+      }
+    },
+    {
+      "us": 2100,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 67200,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67185
+      },
+      "sdk52": {
+        "raw": 67200,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 67185
+      }
+    },
+    {
+      "us": 2100,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 175000,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 174976
+      },
+      "sdk52": {
+        "raw": 175000,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 174975
+      }
+    },
+    {
+      "us": 65535,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 2097120,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 2097105
+      },
+      "sdk52": {
+        "raw": 2097120,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 2097105
+      }
+    },
+    {
+      "us": 65535,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 5461250,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 5461226
+      },
+      "sdk52": {
+        "raw": 5461250,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 5461225
+      }
+    },
+    {
+      "us": 65536,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 2097152,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 2097137
+      },
+      "sdk52": {
+        "raw": 2097152,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 2097137
+      }
+    },
+    {
+      "us": 65536,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 5461333,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 5461309
+      },
+      "sdk52": {
+        "raw": 5461333,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 5461308
+      }
+    },
+    {
+      "us": 65537,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 2097184,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 2097169
+      },
+      "sdk52": {
+        "raw": 2097184,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 2097169
+      }
+    },
+    {
+      "us": 65537,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 5461416,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 5461392
+      },
+      "sdk52": {
+        "raw": 5461417,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 5461392
+      }
+    },
+    {
+      "us": 16777215,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 536870880,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 536870865
+      },
+      "sdk52": {
+        "raw": 536870880,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 536870865
+      }
+    },
+    {
+      "us": 16777215,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 1398101248,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 1398101224
+      },
+      "sdk52": {
+        "raw": 1398101250,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 1398101225
+      }
+    },
+    {
+      "us": 16777216,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 536870912,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 536870897
+      },
+      "sdk52": {
+        "raw": 536870912,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 536870897
+      }
+    },
+    {
+      "us": 16777216,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 1398101376,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 1398101352
+      },
+      "sdk52": {
+        "raw": 1398101333,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 1398101308
+      }
+    },
+    {
+      "us": 16777217,
+      "hp": false,
+      "stock_pinned": {
+        "raw": 536870912,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 536870897
+      },
+      "sdk52": {
+        "raw": 536870944,
+        "adjustment": 15,
+        "calls_loop": true,
+        "loop_argument": 536870929
+      }
+    },
+    {
+      "us": 16777217,
+      "hp": true,
+      "stock_pinned": {
+        "raw": 1398101376,
+        "adjustment": 24,
+        "calls_loop": true,
+        "loop_argument": 1398101352
+      },
+      "sdk52": {
+        "raw": 1398101417,
+        "adjustment": 25,
+        "calls_loop": true,
+        "loop_argument": 1398101392
+      }
+    }
+  ],
+  "executed_firmware": false
+}

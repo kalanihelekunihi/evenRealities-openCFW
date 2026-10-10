@@ -1,0 +1,224 @@
+void hciEvtProcessCmdCmpl(uint8_t *p, uint8_t len)
+{
+  uint8_t       numPkts;
+  uint16_t      opcode;
+  hciEvt_t      *pMsg;
+  uint8_t       cbackEvt = 0;
+  hciEvtCback_t cback = hciCb.evtCback;
+
+  /*
+   * CVE-2024-48982: Validate minimum length before reading numPkts and opcode.
+   * Command Complete event requires at least HCI_CMD_CMPL_MIN_PARAM_LEN bytes.
+   */
+  if (len < HCI_CMD_CMPL_MIN_PARAM_LEN)
+  {
+    HCI_TRACE_WARN1("HCI cmd cmpl too short: len=%d", len);
+    return;
+  }
+
+  BSTREAM_TO_UINT8(numPkts, p);
+  BSTREAM_TO_UINT16(opcode, p);
+
+  /* convert opcode to internal event code and perform special handling */
+  switch (opcode)
+  {
+  case HCI_OPCODE_LE_CREATE_CONN_CANCEL:
+    cbackEvt = HCI_LE_CREATE_CONN_CANCEL_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_ENCRYPT:
+    cbackEvt = HCI_LE_ENCRYPT_CMD_CMPL_CBACK_EVT;
+    cback = hciCb.secCback;
+    break;
+
+  case HCI_OPCODE_LE_REM_CONN_PARAM_REP:
+    cbackEvt = HCI_LE_REM_CONN_PARAM_REP_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_REM_CONN_PARAM_NEG_REP:
+    cbackEvt = HCI_LE_REM_CONN_PARAM_NEG_REP_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_READ_DEF_DATA_LEN:
+    cbackEvt = HCI_LE_READ_DEF_DATA_LEN_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_WRITE_DEF_DATA_LEN:
+    cbackEvt = HCI_LE_WRITE_DEF_DATA_LEN_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_DATA_LEN:
+    cbackEvt = HCI_LE_SET_DATA_LEN_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_READ_MAX_DATA_LEN:
+    cbackEvt = HCI_LE_READ_MAX_DATA_LEN_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_LTK_REQ_REPL:
+    cbackEvt = HCI_LE_LTK_REQ_REPL_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_LTK_REQ_NEG_REPL:
+    cbackEvt = HCI_LE_LTK_REQ_NEG_REPL_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_RAND:
+    cbackEvt = HCI_LE_RAND_CMD_CMPL_CBACK_EVT;
+    cback = hciCb.secCback;
+    break;
+
+  case HCI_OPCODE_LE_READ_CHAN_MAP:
+    cbackEvt = HCI_LE_READ_CHAN_MAP_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_READ_RSSI:
+    cbackEvt = HCI_READ_RSSI_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_READ_TX_PWR_LVL:
+    cbackEvt = HCI_READ_TX_PWR_LVL_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_ADD_DEV_RES_LIST:
+    cbackEvt = HCI_LE_ADD_DEV_TO_RES_LIST_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_REMOVE_DEV_RES_LIST:
+    cbackEvt = HCI_LE_REM_DEV_FROM_RES_LIST_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_CLEAR_RES_LIST:
+    cbackEvt = HCI_LE_CLEAR_RES_LIST_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_READ_PEER_RES_ADDR:
+    cbackEvt = HCI_LE_READ_PEER_RES_ADDR_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_READ_LOCAL_RES_ADDR:
+    cbackEvt = HCI_LE_READ_LOCAL_RES_ADDR_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_ADDR_RES_ENABLE:
+    cbackEvt = HCI_LE_SET_ADDR_RES_ENABLE_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_WRITE_AUTH_PAYLOAD_TO:
+    cbackEvt = HCI_WRITE_AUTH_PAYLOAD_TO_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_READ_PHY:
+    cbackEvt = HCI_LE_READ_PHY_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_DEF_PHY:
+    cbackEvt = HCI_LE_SET_DEF_PHY_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_SCAN_ENABLE:
+    cbackEvt = HCI_LE_SCAN_ENABLE_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_ADV_ENABLE:
+    cbackEvt = HCI_LE_ADV_ENABLE_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_EXT_SCAN_ENABLE:
+    cbackEvt = HCI_LE_EXT_SCAN_ENABLE_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_EXT_ADV_ENABLE:
+    cbackEvt = HCI_LE_EXT_ADV_ENABLE_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_PER_ADV_ENABLE:
+    cbackEvt = HCI_LE_PER_ADV_ENABLE_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_CONN_CTE_RX_PARAMS:
+    cbackEvt = HCI_LE_SET_CONN_CTE_RX_PARAMS_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SET_CONN_CTE_TX_PARAMS:
+    cbackEvt = HCI_LE_SET_CONN_CTE_TX_PARAMS_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_CONN_CTE_REQ_ENABLE:
+    cbackEvt = HCI_LE_CONN_CTE_REQ_ENABLE_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_CONN_CTE_RSP_ENABLE:
+    cbackEvt = HCI_LE_CONN_CTE_RSP_ENABLE_CMD_CMPL_CBACK_EVT;
+    break;
+
+
+  case HCI_OPCODE_LE_SET_CIG_PARAMS:
+    cbackEvt = HCI_LE_SET_CIG_PARAMS_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_REMOVE_CIG:
+    cbackEvt = HCI_LE_REMOVE_CIG_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_BIG_TERMINATE_SYNC:
+    cbackEvt = HCI_LE_BIG_TERM_SYNC_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_SETUP_ISO_DATA_PATH:
+    cbackEvt = HCI_LE_SETUP_ISO_DATA_PATH_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_LE_REMOVE_ISO_DATA_PATH:
+    cbackEvt = HCI_LE_REMOVE_ISO_DATA_PATH_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_CONFIG_DATA_PATH:
+    cbackEvt = HCI_CONFIG_DATA_PATH_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_READ_LOCAL_SUP_CODECS:
+    cbackEvt = HCI_READ_LOCAL_SUP_CODECS_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_READ_LOCAL_SUP_CODEC_CAP:
+    cbackEvt = HCI_READ_LOCAL_SUP_CODEC_CAP_CMD_CMPL_CBACK_EVT;
+    break;
+
+  case HCI_OPCODE_READ_LOCAL_SUP_CONTROLLER_DLY:
+    cbackEvt = HCI_READ_LOCAL_SUP_CTR_DLY_CMD_CMPL_CBACK_EVT;
+    break;
+
+  default:
+    /* test for vendor specific command completion OGF. */
+    if (HCI_OGF(opcode) == HCI_OGF_VENDOR_SPEC)
+    {
+      cbackEvt = hciCoreVsCmdCmplRcvd(opcode, p, len);
+    }
+    break;
+  }
+
+  /* if callback is executed for this event */
+  if (cbackEvt != 0)
+  {
+    /* allocate temp buffer */
+    if ((pMsg = WsfBufAlloc(hciEvtCbackLen[cbackEvt])) != NULL)
+    {
+      /* initialize message header */
+      pMsg->hdr.param = 0;
+      pMsg->hdr.event = cbackEvt;
+      pMsg->hdr.status = 0;
+
+      /* execute parsing function for the event */
+      (*hciEvtParseFcnTbl[cbackEvt])(pMsg, p, len);
+
+      /* execute callback */
+      (*cback)(pMsg);
+
+      /* free buffer */
+      WsfBufFree(pMsg);
+    }
+  }
+
+  hciCmdRecvCmpl(numPkts);
+}

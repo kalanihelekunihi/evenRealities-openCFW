@@ -1,0 +1,152 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/adc.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_analog_set_pga_itrim:
+
+00000000 <gx_analog_set_pga_itrim>:
+   0:	1026      	lrw      	r1, 0xa0005080	// 18 <gx_analog_set_pga_itrim+0x18>
+   2:	323f      	movi      	r2, 63
+   4:	9162      	ld.w      	r3, (r1, 0x8)
+   6:	f840cd20 	min.u32      	r0, r0, r2
+   a:	e46320c0 	andi      	r3, r3, 192
+   e:	6cc0      	or      	r3, r0
+  10:	74cc      	zextb      	r3, r3
+  12:	3000      	movi      	r0, 0
+  14:	b162      	st.w      	r3, (r1, 0x8)
+  16:	783c      	jmp      	r15
+  18:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_analog_set_pga_bypass:
+
+00000000 <gx_analog_set_pga_bypass>:
+   0:	1045      	lrw      	r2, 0xa0005080	// 14 <gx_analog_set_pga_itrim+0x14>
+   2:	4006      	lsli      	r0, r0, 6
+   4:	9262      	ld.w      	r3, (r2, 0x8)
+   6:	e46320bf 	andi      	r3, r3, 191
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b262      	st.w      	r3, (r2, 0x8)
+  12:	783c      	jmp      	r15
+  14:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_analog_set_pga_enable:
+
+00000000 <gx_analog_set_pga_enable>:
+   0:	1045      	lrw      	r2, 0xa0005080	// 14 <gx_analog_set_pga_itrim+0x14>
+   2:	4006      	lsli      	r0, r0, 6
+   4:	9264      	ld.w      	r3, (r2, 0x10)
+   6:	e46320bf 	andi      	r3, r3, 191
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b264      	st.w      	r3, (r2, 0x10)
+  12:	783c      	jmp      	r15
+  14:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_analog_set_pga_cmr_sel:
+
+00000000 <gx_analog_set_pga_cmr_sel>:
+   0:	1045      	lrw      	r2, 0xa0005080	// 14 <gx_analog_set_pga_itrim+0x14>
+   2:	4007      	lsli      	r0, r0, 7
+   4:	9262      	ld.w      	r3, (r2, 0x8)
+   6:	e463207f 	andi      	r3, r3, 127
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b262      	st.w      	r3, (r2, 0x8)
+  12:	783c      	jmp      	r15
+  14:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_analog_set_pga_dcc:
+
+00000000 <gx_analog_set_pga_dcc>:
+   0:	1062      	lrw      	r3, 0xa0005080	// 8 <gx_analog_set_pga_itrim+0x8>
+   2:	b303      	st.w      	r0, (r3, 0xc)
+   4:	3000      	movi      	r0, 0
+   6:	783c      	jmp      	r15
+   8:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_analog_set_pga_gain:
+
+00000000 <gx_analog_set_pga_gain>:
+   0:	1044      	lrw      	r2, 0xa0005080	// 10 <gx_analog_set_pga_itrim+0x10>
+   2:	9264      	ld.w      	r3, (r2, 0x10)
+   4:	e46320c0 	andi      	r3, r3, 192
+   8:	6c0c      	or      	r0, r3
+   a:	b204      	st.w      	r0, (r2, 0x10)
+   c:	3000      	movi      	r0, 0
+   e:	783c      	jmp      	r15
+  10:	5080      	.short	0x5080
+  12:	a000      	.short	0xa000
+
+Disassembly of section .text.gx_analog_set_pga_tstbuf:
+
+00000000 <gx_analog_set_pga_tstbuf>:
+   0:	1045      	lrw      	r2, 0xa0005080	// 14 <gx_analog_set_pga_itrim+0x14>
+   2:	4007      	lsli      	r0, r0, 7
+   4:	9264      	ld.w      	r3, (r2, 0x10)
+   6:	e463207f 	andi      	r3, r3, 127
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b264      	st.w      	r3, (r2, 0x10)
+  12:	783c      	jmp      	r15
+  14:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_analog_set_adc_sample_clk_sel:
+
+00000000 <gx_analog_set_adc_sample_clk_sel>:
+   0:	1045      	lrw      	r2, 0xa0005080	// 14 <gx_analog_set_pga_itrim+0x14>
+   2:	9265      	ld.w      	r3, (r2, 0x14)
+   4:	e46320fe 	andi      	r3, r3, 254
+   8:	6c0c      	or      	r0, r3
+   a:	7400      	zextb      	r0, r0
+   c:	b205      	st.w      	r0, (r2, 0x14)
+   e:	3000      	movi      	r0, 0
+  10:	783c      	jmp      	r15
+  12:	0000      	.short	0x0000
+  14:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_analog_set_adc_out_at_clk:
+
+00000000 <gx_analog_set_adc_out_at_clk>:
+   0:	1045      	lrw      	r2, 0xa0005080	// 14 <gx_analog_set_pga_itrim+0x14>
+   2:	4001      	lsli      	r0, r0, 1
+   4:	9265      	ld.w      	r3, (r2, 0x14)
+   6:	e46320fd 	andi      	r3, r3, 253
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b265      	st.w      	r3, (r2, 0x14)
+  12:	783c      	jmp      	r15
+  14:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_analog_set_adc_in_sel:
+
+00000000 <gx_analog_set_adc_in_sel>:
+   0:	1045      	lrw      	r2, 0xa0005080	// 14 <gx_analog_set_pga_itrim+0x14>
+   2:	4002      	lsli      	r0, r0, 2
+   4:	9265      	ld.w      	r3, (r2, 0x14)
+   6:	e46320fb 	andi      	r3, r3, 251
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b265      	st.w      	r3, (r2, 0x14)
+  12:	783c      	jmp      	r15
+  14:	a0005080 	.long	0xa0005080
+
+Disassembly of section .text.gx_analog_set_adc_rstn:
+
+00000000 <gx_analog_set_adc_rstn>:
+   0:	1045      	lrw      	r2, 0xa0005080	// 14 <gx_analog_set_pga_itrim+0x14>
+   2:	4003      	lsli      	r0, r0, 3
+   4:	9265      	ld.w      	r3, (r2, 0x14)
+   6:	e46320f7 	andi      	r3, r3, 247
+   a:	6cc0      	or      	r3, r0
+   c:	74cc      	zextb      	r3, r3
+   e:	3000      	movi      	r0, 0
+  10:	b265      	st.w      	r3, (r2, 0x14)
+  12:	783c      	jmp      	r15
+  14:	a0005080 	.long	0xa0005080

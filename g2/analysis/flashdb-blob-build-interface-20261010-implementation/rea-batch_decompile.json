@@ -1,0 +1,115 @@
+{
+  "arguments": {
+    "addresses": [
+      "0054116e"
+    ]
+  },
+  "result": {
+    "meta": null,
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"evidence_id\":\"ev_b75d5e4b12ec4d839fce131b77592f2e34c37955ac8be131bfe57525f08aa202\",\"subject\":{\"name\":\"rea-thumb-view.elf\",\"digest\":{\"sha256\":\"58c0bb8177a62a930fceff4ea5e423fb1f37bcc200a6f4576d54706b44e5bfc5\"},\"format\":\"elf\",\"architecture\":\"arm\",\"local_path\":\"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/flashdb-blob-build-interface-20261010-implementation/rea-thumb-view.elf\"},\"provider\":{\"id\":\"rea-workflow\",\"name\":\"REA composed investigation workflow\",\"version\":\"1\"},\"analysis_profile\":{\"provider\":{\"id\":\"rea-workflow\",\"name\":\"REA composed investigation workflow\",\"version\":\"1\"},\"parameters\":{\"upstream_analysis_profile\":{\"provider\":{\"id\":\"ghidra\",\"name\":\"Ghidra\",\"version\":\"12.1.4\"},\"parameters\":{\"target_kind\":\"executable\",\"target_format\":\"elf\",\"architecture\":\"arm\",\"available_architectures\":[\"arm\"],\"import_mode\":\"ephemeral-source-immutable\",\"annotation_policy\":\"atomic-function-entry-metadata-v1\",\"load_image_observations\":\"source-mappings-entry-context-v2\",\"function_body_evidence\":\"complete-inclusive-ranges-v1\",\"function_references\":\"complete-body-and-entry-reference-manager-v2\",\"location_resolution\":\"explicit-address-exact-entry-symbol-first-v3\",\"instruction_flow_evidence\":\"decoded-return-pcode-v1\",\"process_launch\":\"inspected-jvm-launch-support-v1\",\"jump_table_evidence\":\"typed-case-default-blocks-v1\",\"decompiler_jump_loads\":true,\"loader\":\"auto-from-header\",\"language_id\":\"auto-from-header\",\"compiler_spec_id\":\"auto-default\",\"analyzer_preset\":\"ghidra-default\"},\"digest\":\"d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26\"},\"workflow_revision\":2},\"digest\":\"539ae87a089f8e9cc48d8dfe6045113a342d9c0b239d427d77365e4fe1d5cf26\"},\"predicate_type\":\"rea.analysis\",\"operation\":\"batch_decompile\",\"parameters\":{\"addresses\":[\"0054116e\"]},\"raw_result\":null,\"normalized_result\":{\"items\":[{\"address\":\"0054116e\",\"procedure\":{\"status\":\"resolved\",\"address\":\"0x54116e\",\"name\":\"stock_blob_read\"},\"status\":\"ok\",\"pseudocode\":\"\\nundefined4 stock_blob_read(uint param_1,undefined4 param_2,undefined4 param_3,uint param_4)\\n\\n{\\n  undefined4 uVar1;\\n  int iVar2;\\n  undefined4 local_28;\\n  uint local_24;\\n  int local_18;\\n  \\n  func_0x004490cc();\\n  local_24 = param_4 & 0xffff;\\n  local_28 = param_3;\\n  uVar1 = func_0x0054454a((param_1 & 0xff) * 0x8ac + 0x2005dffc,param_2,&local_28);\\n  if (local_18 == 0) {\\n    iVar2 = func_0x0043d0ce();\\n    if (iVar2 << 0x1e < 0) {\\n      func_0x0043d574(1,0x78e54c,0x6e4cc8,0x783190,0xf1,0x75996c,param_2,uVar1);\\n    }\\n    iVar2 = func_0x0043d0ce();\\n    if (-1 < iVar2 << 0x1f) {\\n      iVar2 = func_0x0043d0ce();\\n      if (-1 < iVar2 << 0x1d) goto LAB_005411e8;\\n    }\\n    func_0x0043ce9e(0x4800000,0x743150,0x743150,param_2,uVar1);\\n  }\\nLAB_005411e8:\\n  func_0x004490cc();\\n  return uVar1;\\n}\\n\\n\"}],\"total\":1,\"succeeded\":1,\"failed\":0},\"confidence\":\"derived\",\"authority\":\"shipped-artifact\",\"environment\":null,\"limitations\":[\"Derived by an REA composed workflow.\"],\"locations\":[{\"kind\":\"address\",\"address\":\"0x54116e\"}],\"evidence_links\":[]}",
+        "annotations": null,
+        "meta": null
+      }
+    ],
+    "structuredContent": {
+      "evidence_id": "ev_b75d5e4b12ec4d839fce131b77592f2e34c37955ac8be131bfe57525f08aa202",
+      "subject": {
+        "name": "rea-thumb-view.elf",
+        "digest": {
+          "sha256": "58c0bb8177a62a930fceff4ea5e423fb1f37bcc200a6f4576d54706b44e5bfc5"
+        },
+        "format": "elf",
+        "architecture": "arm",
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/flashdb-blob-build-interface-20261010-implementation/rea-thumb-view.elf"
+      },
+      "provider": {
+        "id": "rea-workflow",
+        "name": "REA composed investigation workflow",
+        "version": "1"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "rea-workflow",
+          "name": "REA composed investigation workflow",
+          "version": "1"
+        },
+        "parameters": {
+          "upstream_analysis_profile": {
+            "provider": {
+              "id": "ghidra",
+              "name": "Ghidra",
+              "version": "12.1.4"
+            },
+            "parameters": {
+              "target_kind": "executable",
+              "target_format": "elf",
+              "architecture": "arm",
+              "available_architectures": [
+                "arm"
+              ],
+              "import_mode": "ephemeral-source-immutable",
+              "annotation_policy": "atomic-function-entry-metadata-v1",
+              "load_image_observations": "source-mappings-entry-context-v2",
+              "function_body_evidence": "complete-inclusive-ranges-v1",
+              "function_references": "complete-body-and-entry-reference-manager-v2",
+              "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+              "instruction_flow_evidence": "decoded-return-pcode-v1",
+              "process_launch": "inspected-jvm-launch-support-v1",
+              "jump_table_evidence": "typed-case-default-blocks-v1",
+              "decompiler_jump_loads": true,
+              "loader": "auto-from-header",
+              "language_id": "auto-from-header",
+              "compiler_spec_id": "auto-default",
+              "analyzer_preset": "ghidra-default"
+            },
+            "digest": "d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26"
+          },
+          "workflow_revision": 2
+        },
+        "digest": "539ae87a089f8e9cc48d8dfe6045113a342d9c0b239d427d77365e4fe1d5cf26"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "batch_decompile",
+      "parameters": {
+        "addresses": [
+          "0054116e"
+        ]
+      },
+      "raw_result": null,
+      "normalized_result": {
+        "items": [
+          {
+            "address": "0054116e",
+            "procedure": {
+              "status": "resolved",
+              "address": "0x54116e",
+              "name": "stock_blob_read"
+            },
+            "status": "ok",
+            "pseudocode": "\nundefined4 stock_blob_read(uint param_1,undefined4 param_2,undefined4 param_3,uint param_4)\n\n{\n  undefined4 uVar1;\n  int iVar2;\n  undefined4 local_28;\n  uint local_24;\n  int local_18;\n  \n  func_0x004490cc();\n  local_24 = param_4 & 0xffff;\n  local_28 = param_3;\n  uVar1 = func_0x0054454a((param_1 & 0xff) * 0x8ac + 0x2005dffc,param_2,&local_28);\n  if (local_18 == 0) {\n    iVar2 = func_0x0043d0ce();\n    if (iVar2 << 0x1e < 0) {\n      func_0x0043d574(1,0x78e54c,0x6e4cc8,0x783190,0xf1,0x75996c,param_2,uVar1);\n    }\n    iVar2 = func_0x0043d0ce();\n    if (-1 < iVar2 << 0x1f) {\n      iVar2 = func_0x0043d0ce();\n      if (-1 < iVar2 << 0x1d) goto LAB_005411e8;\n    }\n    func_0x0043ce9e(0x4800000,0x743150,0x743150,param_2,uVar1);\n  }\nLAB_005411e8:\n  func_0x004490cc();\n  return uVar1;\n}\n\n"
+          }
+        ],
+        "total": 1,
+        "succeeded": 1,
+        "failed": 0
+      },
+      "confidence": "derived",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Derived by an REA composed workflow."
+      ],
+      "locations": [
+        {
+          "kind": "address",
+          "address": "0x54116e"
+        }
+      ],
+      "evidence_links": []
+    },
+    "isError": false
+  }
+}

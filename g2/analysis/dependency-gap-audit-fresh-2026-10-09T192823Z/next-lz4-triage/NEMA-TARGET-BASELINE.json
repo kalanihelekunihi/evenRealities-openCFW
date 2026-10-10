@@ -1,0 +1,153 @@
+{
+  "archive_sha256": "8c6204496ab53860241db9236487a0eb93badf9627be4eea55249847813827e7",
+  "member": "nema_cmdlist.o",
+  "member_sha256": "2bbb07808e3e2aca417829dc3edc9a6e78d17c8df69fdce3341088af5e7c2e70",
+  "elf_type": 1,
+  "elf_machine": 40,
+  "compiler_strings": [
+    "IAR ANSI C/C++ Compiler V9.70.1.475/W64 for ARM"
+  ],
+  "targets": [
+    {
+      "name": "nema_cl_bind_circular",
+      "value": 717,
+      "size": 168,
+      "section": 8,
+      "section_name": ".text",
+      "section_bytes": 5644,
+      "section_sha256": "51f3b98557d957b556c2bdb4629e1807170dfee35d9cb04d629aaeaa91199153",
+      "function_sha256": "5939a2ec5a15bcb86a962dba87bddd94b56c1653f6ddbe151128766fba8526b6",
+      "relocations": [
+        {
+          "offset": 760,
+          "function_offset": 44,
+          "type": 54,
+          "symbol": "??DataTable12"
+        },
+        {
+          "offset": 816,
+          "function_offset": 100,
+          "type": 10,
+          "symbol": "nema_set_error"
+        },
+        {
+          "offset": 880,
+          "function_offset": 164,
+          "type": 30,
+          "symbol": "nema_set_error"
+        }
+      ]
+    },
+    {
+      "name": "nema_cl_bind_sectored_circular",
+      "value": 885,
+      "size": 222,
+      "section": 8,
+      "section_name": ".text",
+      "section_bytes": 5644,
+      "section_sha256": "51f3b98557d957b556c2bdb4629e1807170dfee35d9cb04d629aaeaa91199153",
+      "function_sha256": "e8b0d7c0bc4363c4f2d266fced1ff65764b59e4ec84346ffd8570f191616ddca",
+      "relocations": [
+        {
+          "offset": 994,
+          "function_offset": 110,
+          "type": 30,
+          "symbol": "nema_set_error"
+        },
+        {
+          "offset": 998,
+          "function_offset": 114,
+          "type": 54,
+          "symbol": "??DataTable12"
+        },
+        {
+          "offset": 1056,
+          "function_offset": 172,
+          "type": 10,
+          "symbol": "nema_set_error"
+        }
+      ]
+    },
+    {
+      "name": "nema_cl_get_bound",
+      "value": 1163,
+      "size": 10,
+      "section": 8,
+      "section_name": ".text",
+      "section_bytes": 5644,
+      "section_sha256": "51f3b98557d957b556c2bdb4629e1807170dfee35d9cb04d629aaeaa91199153",
+      "function_sha256": "9a2d050c469b8f6a489b65b6b66c319accafb778947186452b1f8f4cd2b469c2",
+      "relocations": [
+        {
+          "offset": 1162,
+          "function_offset": 0,
+          "type": 54,
+          "symbol": "??DataTable12"
+        }
+      ]
+    },
+    {
+      "name": "nema_cl_rewind",
+      "value": 497,
+      "size": 80,
+      "section": 8,
+      "section_name": ".text",
+      "section_bytes": 5644,
+      "section_sha256": "51f3b98557d957b556c2bdb4629e1807170dfee35d9cb04d629aaeaa91199153",
+      "function_sha256": "97a11da7e22ce7c84c272e212f316ecded8b9f45b4bde0688c182259e6620f7d",
+      "relocations": [
+        {
+          "offset": 510,
+          "function_offset": 14,
+          "type": 30,
+          "symbol": "nema_set_error"
+        },
+        {
+          "offset": 524,
+          "function_offset": 28,
+          "type": 54,
+          "symbol": "??DataTable12"
+        },
+        {
+          "offset": 564,
+          "function_offset": 68,
+          "type": 10,
+          "symbol": "nema_set_error"
+        }
+      ]
+    }
+  ],
+  "locked_stock": [
+    {
+      "start": "0x00514384",
+      "end": "0x005143D4",
+      "bytes": 80,
+      "sha256": "b0733ab3843dc9140923a56f1b4578c87c2ab80483c22d2d42449bc00201c1a6",
+      "canonical_classification": [
+        "g2-freetype-engine-census",
+        "Unverified"
+      ]
+    },
+    {
+      "start": "0x005143D4",
+      "end": "0x005144BA",
+      "bytes": 230,
+      "sha256": "1b72806af461fbd44dc0a8928e9a4b4493d124242f8f89f7d5820d0c8c692b6d",
+      "canonical_classification": [
+        "g2-freetype-engine-census",
+        "Unverified"
+      ]
+    },
+    {
+      "start": "0x005144FA",
+      "end": "0x00514504",
+      "bytes": 10,
+      "sha256": "856d4a249ba795e296531efb875294d949d28902aee69f35217679085b09b0e1",
+      "canonical_classification": [
+        "g2-freetype-engine-census",
+        "Unverified"
+      ]
+    }
+  ],
+  "scope": "In-memory static parsing only; no extraction/execution or archive-byte redistribution. Stock names are historical attribution, extent hashes independently checked."
+}

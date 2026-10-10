@@ -1,0 +1,701 @@
+{
+  "count": 22,
+  "executed": false,
+  "fields": [
+    "read_error",
+    "weekday",
+    "century",
+    "year",
+    "month",
+    "day",
+    "hour",
+    "minute",
+    "second",
+    "hundredths"
+  ],
+  "fixtures": [
+    {
+      "name": "hundredths_99",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 99
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419929
+          ],
+          [
+            1073760292,
+            19136769
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "hundredths_100",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 100
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 1,
+        "writes": []
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "second_59",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 59,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305420664
+          ],
+          [
+            1073760292,
+            19136769
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "second_60",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 60,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 1,
+        "writes": []
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "minute_59",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 59,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            307844728
+          ],
+          [
+            1073760292,
+            19136769
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "minute_60",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 60,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 1,
+        "writes": []
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "hour_23",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 23,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            590632568
+          ],
+          [
+            1073760292,
+            19136769
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "hour_24",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 24,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 1,
+        "writes": []
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "day_0",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 0,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 1,
+        "writes": []
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "day_31",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 31,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419896
+          ],
+          [
+            1073760292,
+            19136817
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "day_32",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 32,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 1,
+        "writes": []
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "month_0",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 0,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 1,
+        "writes": []
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "month_12",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 12,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419896
+          ],
+          [
+            1073760292,
+            19141121
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "month_13",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 13,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 1,
+        "writes": []
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "year_99",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 99,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419896
+          ],
+          [
+            1073760292,
+            26804481
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "year_100",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 100,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419896
+          ],
+          [
+            1073760292,
+            27263233
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "year_101",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 101,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 1,
+        "writes": []
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "century_1",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 1,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419896
+          ],
+          [
+            1073760292,
+            287572225
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "century_2",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 2,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419896
+          ],
+          [
+            1073760292,
+            19136769
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "century_4294967295",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 4294967295,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419896
+          ],
+          [
+            1073760292,
+            287572225
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "read_error_4294967295",
+      "time": {
+        "read_error": 4294967295,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054096,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419896
+          ],
+          [
+            1073760292,
+            19136769
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "boundary not present in inspected weekday-focused prior producer tests"
+    },
+    {
+      "name": "february31_software_acceptance",
+      "time": {
+        "read_error": 0,
+        "weekday": 1,
+        "century": 0,
+        "year": 24,
+        "month": 2,
+        "day": 31,
+        "hour": 12,
+        "minute": 34,
+        "second": 56,
+        "hundredths": 78
+      },
+      "control": 2779054097,
+      "expected": {
+        "status": 0,
+        "writes": [
+          [
+            1073760256,
+            2779054097
+          ],
+          [
+            1073760288,
+            305419896
+          ],
+          [
+            1073760292,
+            19137073
+          ],
+          [
+            1073760256,
+            2779054096
+          ]
+        ]
+      },
+      "novelty": "calendar consistency absent from validator; WRTC initially set"
+    }
+  ]
+}

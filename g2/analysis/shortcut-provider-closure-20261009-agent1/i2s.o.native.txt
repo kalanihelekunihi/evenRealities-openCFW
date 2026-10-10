@@ -1,0 +1,553 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/i2s.o:     file format elf32-csky-little
+
+
+Disassembly of section .text._recout_set_mclk.part.3:
+
+00000000 <_i2sin_set_mclk.part.0>:
+   0:	ea23a001 	movih      	r3, 40961
+   4:	3ba7      	bseti      	r3, 7
+   6:	3000      	movi      	r0, 0
+   8:	9343      	ld.w      	r2, (r3, 0xc)
+   a:	ec420100 	ori      	r2, r2, 256
+   e:	b343      	st.w      	r2, (r3, 0xc)
+  10:	9343      	ld.w      	r2, (r3, 0xc)
+  12:	3a96      	bclri      	r2, 22
+  14:	b343      	st.w      	r2, (r3, 0xc)
+  16:	9343      	ld.w      	r2, (r3, 0xc)
+  18:	ec420020 	ori      	r2, r2, 32
+  1c:	b343      	st.w      	r2, (r3, 0xc)
+  1e:	9343      	ld.w      	r2, (r3, 0xc)
+  20:	ec420040 	ori      	r2, r2, 64
+  24:	b343      	st.w      	r2, (r3, 0xc)
+  26:	783c      	jmp      	r15
+
+Disassembly of section .text._i2sin_set_mclk:
+
+00000000 <_i2sin_set_mclk>:
+   0:	14d0      	push      	r15
+   2:	e9200014 	bnez      	r0, 0x2a	// 2a <_i2sin_set_mclk+0x2a>
+   6:	ea23a001 	movih      	r3, 40961
+   a:	3ba7      	bseti      	r3, 7
+   c:	9343      	ld.w      	r2, (r3, 0xc)
+   e:	3a88      	bclri      	r2, 8
+  10:	b343      	st.w      	r2, (r3, 0xc)
+  12:	9343      	ld.w      	r2, (r3, 0xc)
+  14:	3a96      	bclri      	r2, 22
+  16:	b343      	st.w      	r2, (r3, 0xc)
+  18:	9343      	ld.w      	r2, (r3, 0xc)
+  1a:	ec420020 	ori      	r2, r2, 32
+  1e:	b343      	st.w      	r2, (r3, 0xc)
+  20:	9343      	ld.w      	r2, (r3, 0xc)
+  22:	ec420040 	ori      	r2, r2, 64
+  26:	b343      	st.w      	r2, (r3, 0xc)
+  28:	1490      	pop      	r15
+  2a:	3842      	cmpnei      	r0, 2
+  2c:	0804      	bt      	0x34	// 34 <_i2sin_set_mclk+0x34>
+  2e:	e0000000 	bsr      	0x0	// 0 <_i2sin_set_mclk>
+			2e: R_CKCORE_PCREL_IMM26BY2	_i2sin_set_mclk.part.0
+  32:	07fb      	br      	0x28	// 28 <_i2sin_set_mclk+0x28>
+  34:	3844      	cmpnei      	r0, 4
+  36:	0811      	bt      	0x58	// 58 <_i2sin_set_mclk+0x58>
+  38:	ea23a001 	movih      	r3, 40961
+  3c:	3ba7      	bseti      	r3, 7
+  3e:	3000      	movi      	r0, 0
+  40:	9343      	ld.w      	r2, (r3, 0xc)
+  42:	3ab6      	bseti      	r2, 22
+  44:	b343      	st.w      	r2, (r3, 0xc)
+  46:	9343      	ld.w      	r2, (r3, 0xc)
+  48:	ec420020 	ori      	r2, r2, 32
+  4c:	b343      	st.w      	r2, (r3, 0xc)
+  4e:	9343      	ld.w      	r2, (r3, 0xc)
+  50:	ec420040 	ori      	r2, r2, 64
+  54:	b343      	st.w      	r2, (r3, 0xc)
+  56:	07e9      	br      	0x28	// 28 <_i2sin_set_mclk+0x28>
+  58:	3000      	movi      	r0, 0
+  5a:	2800      	subi      	r0, 1
+  5c:	07e6      	br      	0x28	// 28 <_i2sin_set_mclk+0x28>
+
+Disassembly of section .text._i2sout_set_mclk.part.6:
+
+00000000 <_i2sout_set_mclk.part.6>:
+   0:	3844      	cmpnei      	r0, 4
+   2:	0815      	bt      	0x2c	// 2c <_i2sout_set_mclk.part.6+0x2c>
+   4:	ea23a030 	movih      	r3, 41008
+   8:	3ba7      	bseti      	r3, 7
+   a:	9342      	ld.w      	r2, (r3, 0x8)
+   c:	3a8c      	bclri      	r2, 12
+   e:	b342      	st.w      	r2, (r3, 0x8)
+  10:	9342      	ld.w      	r2, (r3, 0x8)
+  12:	ec420200 	ori      	r2, r2, 512
+  16:	b342      	st.w      	r2, (r3, 0x8)
+  18:	9342      	ld.w      	r2, (r3, 0x8)
+  1a:	ec420400 	ori      	r2, r2, 1024
+  1e:	b342      	st.w      	r2, (r3, 0x8)
+  20:	9342      	ld.w      	r2, (r3, 0x8)
+  22:	ec420004 	ori      	r2, r2, 4
+  26:	b342      	st.w      	r2, (r3, 0x8)
+  28:	3000      	movi      	r0, 0
+  2a:	783c      	jmp      	r15
+  2c:	3881      	bclri      	r0, 1
+  2e:	3841      	cmpnei      	r0, 1
+  30:	0808      	bt      	0x40	// 40 <_i2sout_set_mclk.part.6+0x40>
+  32:	ea23a030 	movih      	r3, 41008
+  36:	3ba7      	bseti      	r3, 7
+  38:	9342      	ld.w      	r2, (r3, 0x8)
+  3a:	ec421000 	ori      	r2, r2, 4096
+  3e:	07e8      	br      	0xe	// e <_i2sout_set_mclk.part.6+0xe>
+  40:	3000      	movi      	r0, 0
+  42:	2800      	subi      	r0, 1
+  44:	07f3      	br      	0x2a	// 2a <_i2sout_set_mclk.part.6+0x2a>
+
+Disassembly of section .text.gx_i2s_set_single_mode:
+
+00000000 <gx_i2s_set_single_mode>:
+   0:	14d1      	push      	r4, r15
+   2:	3942      	cmpnei      	r1, 2
+   4:	6d07      	mov      	r4, r1
+   6:	0804      	bt      	0xe	// e <gx_i2s_set_single_mode+0xe>
+   8:	3400      	movi      	r4, 0
+   a:	6c13      	mov      	r0, r4
+   c:	1491      	pop      	r4, r15
+   e:	3841      	cmpnei      	r0, 1
+  10:	0c1c      	bf      	0x48	// 48 <gx_i2s_set_single_mode+0x48>
+  12:	3840      	cmpnei      	r0, 0
+  14:	0c06      	bf      	0x20	// 20 <gx_i2s_set_single_mode+0x20>
+  16:	3842      	cmpnei      	r0, 2
+  18:	0c2e      	bf      	0x74	// 74 <gx_i2s_set_single_mode+0x74>
+  1a:	3400      	movi      	r4, 0
+  1c:	2c00      	subi      	r4, 1
+  1e:	07f6      	br      	0xa	// a <gx_i2s_set_single_mode+0xa>
+  20:	ea23a001 	movih      	r3, 40961
+  24:	3ba8      	bseti      	r3, 8
+  26:	9342      	ld.w      	r2, (r3, 0x8)
+  28:	3a80      	bclri      	r2, 0
+  2a:	b342      	st.w      	r2, (r3, 0x8)
+  2c:	9342      	ld.w      	r2, (r3, 0x8)
+  2e:	3a82      	bclri      	r2, 2
+  30:	b342      	st.w      	r2, (r3, 0x8)
+  32:	9342      	ld.w      	r2, (r3, 0x8)
+  34:	3a89      	bclri      	r2, 9
+  36:	b342      	st.w      	r2, (r3, 0x8)
+  38:	9342      	ld.w      	r2, (r3, 0x8)
+  3a:	3a8b      	bclri      	r2, 11
+  3c:	b342      	st.w      	r2, (r3, 0x8)
+  3e:	e921ffe5 	bnez      	r1, 0x8	// 8 <gx_i2s_set_single_mode+0x8>
+  42:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_single_mode>
+			42: R_CKCORE_PCREL_IMM26BY2	_i2sin_set_mclk
+  46:	07e2      	br      	0xa	// a <gx_i2s_set_single_mode+0xa>
+  48:	ea23a001 	movih      	r3, 40961
+  4c:	3ba8      	bseti      	r3, 8
+  4e:	9342      	ld.w      	r2, (r3, 0x8)
+  50:	ec420008 	ori      	r2, r2, 8
+  54:	b342      	st.w      	r2, (r3, 0x8)
+  56:	9342      	ld.w      	r2, (r3, 0x8)
+  58:	3a85      	bclri      	r2, 5
+  5a:	b342      	st.w      	r2, (r3, 0x8)
+  5c:	9342      	ld.w      	r2, (r3, 0x8)
+  5e:	ec421000 	ori      	r2, r2, 4096
+  62:	b342      	st.w      	r2, (r3, 0x8)
+  64:	9342      	ld.w      	r2, (r3, 0x8)
+  66:	3a8e      	bclri      	r2, 14
+  68:	b342      	st.w      	r2, (r3, 0x8)
+  6a:	e921ffcf 	bnez      	r1, 0x8	// 8 <gx_i2s_set_single_mode+0x8>
+  6e:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_single_mode>
+			6e: R_CKCORE_PCREL_IMM26BY2	_recout_set_mclk.part.3
+  72:	07cc      	br      	0xa	// a <gx_i2s_set_single_mode+0xa>
+  74:	ea23a001 	movih      	r3, 40961
+  78:	3ba8      	bseti      	r3, 8
+  7a:	9342      	ld.w      	r2, (r3, 0x8)
+  7c:	3a87      	bclri      	r2, 7
+  7e:	b342      	st.w      	r2, (r3, 0x8)
+  80:	9342      	ld.w      	r2, (r3, 0x8)
+  82:	3a94      	bclri      	r2, 20
+  84:	b342      	st.w      	r2, (r3, 0x8)
+  86:	9342      	ld.w      	r2, (r3, 0x8)
+  88:	ec420100 	ori      	r2, r2, 256
+  8c:	b342      	st.w      	r2, (r3, 0x8)
+  8e:	9342      	ld.w      	r2, (r3, 0x8)
+  90:	3a90      	bclri      	r2, 16
+  92:	b342      	st.w      	r2, (r3, 0x8)
+  94:	9342      	ld.w      	r2, (r3, 0x8)
+  96:	3a97      	bclri      	r2, 23
+  98:	b342      	st.w      	r2, (r3, 0x8)
+  9a:	9342      	ld.w      	r2, (r3, 0x8)
+  9c:	3ab1      	bseti      	r2, 17
+  9e:	b342      	st.w      	r2, (r3, 0x8)
+  a0:	e921ffb4 	bnez      	r1, 0x8	// 8 <gx_i2s_set_single_mode+0x8>
+  a4:	3004      	movi      	r0, 4
+  a6:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_single_mode>
+			a6: R_CKCORE_PCREL_IMM26BY2	_i2sout_set_mclk.part.6
+  aa:	07b0      	br      	0xa	// a <gx_i2s_set_single_mode+0xa>
+
+Disassembly of section .text.gx_i2s_set_five_wire_mode:
+
+00000000 <gx_i2s_set_five_wire_mode>:
+   0:	14d1      	push      	r4, r15
+   2:	3803      	cmphsi      	r0, 4
+   4:	087a      	bt      	0xf8	// f8 <gx_i2s_set_five_wire_mode+0xf8>
+   6:	ea24a001 	movih      	r4, 40961
+   a:	3ca8      	bseti      	r4, 8
+   c:	e9200019 	bnez      	r0, 0x3e	// 3e <gx_i2s_set_five_wire_mode+0x3e>
+  10:	9462      	ld.w      	r3, (r4, 0x8)
+  12:	ec632000 	ori      	r3, r3, 8192
+  16:	b462      	st.w      	r3, (r4, 0x8)
+  18:	9462      	ld.w      	r3, (r4, 0x8)
+  1a:	3b96      	bclri      	r3, 22
+  1c:	b462      	st.w      	r3, (r4, 0x8)
+  1e:	9462      	ld.w      	r3, (r4, 0x8)
+  20:	ec634000 	ori      	r3, r3, 16384
+  24:	b462      	st.w      	r3, (r4, 0x8)
+  26:	9462      	ld.w      	r3, (r4, 0x8)
+  28:	ec630010 	ori      	r3, r3, 16
+  2c:	b462      	st.w      	r3, (r4, 0x8)
+  2e:	9462      	ld.w      	r3, (r4, 0x8)
+  30:	3b93      	bclri      	r3, 19
+  32:	b462      	st.w      	r3, (r4, 0x8)
+  34:	9462      	ld.w      	r3, (r4, 0x8)
+  36:	ec630020 	ori      	r3, r3, 32
+  3a:	b462      	st.w      	r3, (r4, 0x8)
+  3c:	1491      	pop      	r4, r15
+  3e:	3841      	cmpnei      	r0, 1
+  40:	0811      	bt      	0x62	// 62 <gx_i2s_set_five_wire_mode+0x62>
+  42:	9462      	ld.w      	r3, (r4, 0x8)
+  44:	3bb5      	bseti      	r3, 21
+  46:	b462      	st.w      	r3, (r4, 0x8)
+  48:	9462      	ld.w      	r3, (r4, 0x8)
+  4a:	ec630800 	ori      	r3, r3, 2048
+  4e:	b462      	st.w      	r3, (r4, 0x8)
+  50:	9462      	ld.w      	r3, (r4, 0x8)
+  52:	3bb2      	bseti      	r3, 18
+  54:	b462      	st.w      	r3, (r4, 0x8)
+  56:	9462      	ld.w      	r3, (r4, 0x8)
+  58:	ec630004 	ori      	r3, r3, 4
+  5c:	b462      	st.w      	r3, (r4, 0x8)
+  5e:	3000      	movi      	r0, 0
+  60:	07ee      	br      	0x3c	// 3c <gx_i2s_set_five_wire_mode+0x3c>
+  62:	3842      	cmpnei      	r0, 2
+  64:	082d      	bt      	0xbe	// be <gx_i2s_set_five_wire_mode+0xbe>
+  66:	3000      	movi      	r0, 0
+  68:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			68: R_CKCORE_PCREL_IMM26BY2	_i2sin_set_mclk
+  6c:	9462      	ld.w      	r3, (r4, 0x8)
+  6e:	3b89      	bclri      	r3, 9
+  70:	b462      	st.w      	r3, (r4, 0x8)
+  72:	9462      	ld.w      	r3, (r4, 0x8)
+  74:	3b8b      	bclri      	r3, 11
+  76:	b462      	st.w      	r3, (r4, 0x8)
+  78:	9462      	ld.w      	r3, (r4, 0x8)
+  7a:	3b80      	bclri      	r3, 0
+  7c:	b462      	st.w      	r3, (r4, 0x8)
+  7e:	9462      	ld.w      	r3, (r4, 0x8)
+  80:	3b82      	bclri      	r3, 2
+  82:	b462      	st.w      	r3, (r4, 0x8)
+  84:	ea23a001 	movih      	r3, 40961
+  88:	3ba7      	bseti      	r3, 7
+  8a:	9343      	ld.w      	r2, (r3, 0xc)
+  8c:	3a88      	bclri      	r2, 8
+  8e:	b343      	st.w      	r2, (r3, 0xc)
+  90:	9343      	ld.w      	r2, (r3, 0xc)
+  92:	3a96      	bclri      	r2, 22
+  94:	b343      	st.w      	r2, (r3, 0xc)
+  96:	9343      	ld.w      	r2, (r3, 0xc)
+  98:	ec420020 	ori      	r2, r2, 32
+  9c:	b343      	st.w      	r2, (r3, 0xc)
+  9e:	9343      	ld.w      	r2, (r3, 0xc)
+  a0:	ec420040 	ori      	r2, r2, 64
+  a4:	b343      	st.w      	r2, (r3, 0xc)
+  a6:	9462      	ld.w      	r3, (r4, 0x8)
+  a8:	3b8c      	bclri      	r3, 12
+  aa:	b462      	st.w      	r3, (r4, 0x8)
+  ac:	9462      	ld.w      	r3, (r4, 0x8)
+  ae:	3b8e      	bclri      	r3, 14
+  b0:	b462      	st.w      	r3, (r4, 0x8)
+  b2:	9462      	ld.w      	r3, (r4, 0x8)
+  b4:	3b83      	bclri      	r3, 3
+  b6:	b462      	st.w      	r3, (r4, 0x8)
+  b8:	9462      	ld.w      	r3, (r4, 0x8)
+  ba:	3b85      	bclri      	r3, 5
+  bc:	07d0      	br      	0x5c	// 5c <gx_i2s_set_five_wire_mode+0x5c>
+  be:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			be: R_CKCORE_PCREL_IMM26BY2	_i2sin_set_mclk.part.0
+  c2:	9462      	ld.w      	r3, (r4, 0x8)
+  c4:	ec630200 	ori      	r3, r3, 512
+  c8:	b462      	st.w      	r3, (r4, 0x8)
+  ca:	9462      	ld.w      	r3, (r4, 0x8)
+  cc:	3b8b      	bclri      	r3, 11
+  ce:	b462      	st.w      	r3, (r4, 0x8)
+  d0:	9462      	ld.w      	r3, (r4, 0x8)
+  d2:	ec630001 	ori      	r3, r3, 1
+  d6:	b462      	st.w      	r3, (r4, 0x8)
+  d8:	9462      	ld.w      	r3, (r4, 0x8)
+  da:	3b82      	bclri      	r3, 2
+  dc:	b462      	st.w      	r3, (r4, 0x8)
+  de:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			de: R_CKCORE_PCREL_IMM26BY2	_recout_set_mclk.part.3
+  e2:	9462      	ld.w      	r3, (r4, 0x8)
+  e4:	ec631000 	ori      	r3, r3, 4096
+  e8:	b462      	st.w      	r3, (r4, 0x8)
+  ea:	9462      	ld.w      	r3, (r4, 0x8)
+  ec:	3b8e      	bclri      	r3, 14
+  ee:	b462      	st.w      	r3, (r4, 0x8)
+  f0:	9462      	ld.w      	r3, (r4, 0x8)
+  f2:	ec630008 	ori      	r3, r3, 8
+  f6:	07e0      	br      	0xb6	// b6 <gx_i2s_set_five_wire_mode+0xb6>
+  f8:	3807      	cmphsi      	r0, 8
+  fa:	089a      	bt      	0x22e	// 22e <gx_i2s_set_five_wire_mode+0x22e>
+  fc:	3844      	cmpnei      	r0, 4
+  fe:	081b      	bt      	0x134	// 134 <gx_i2s_set_five_wire_mode+0x134>
+ 100:	3001      	movi      	r0, 1
+ 102:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			102: R_CKCORE_PCREL_IMM26BY2	_i2sout_set_mclk.part.6
+ 106:	ea23a001 	movih      	r3, 40961
+ 10a:	3ba8      	bseti      	r3, 8
+ 10c:	9342      	ld.w      	r2, (r3, 0x8)
+ 10e:	3ab0      	bseti      	r2, 16
+ 110:	b342      	st.w      	r2, (r3, 0x8)
+ 112:	9342      	ld.w      	r2, (r3, 0x8)
+ 114:	3a97      	bclri      	r2, 23
+ 116:	b342      	st.w      	r2, (r3, 0x8)
+ 118:	9342      	ld.w      	r2, (r3, 0x8)
+ 11a:	3ab1      	bseti      	r2, 17
+ 11c:	b342      	st.w      	r2, (r3, 0x8)
+ 11e:	9342      	ld.w      	r2, (r3, 0x8)
+ 120:	ec420080 	ori      	r2, r2, 128
+ 124:	b342      	st.w      	r2, (r3, 0x8)
+ 126:	9342      	ld.w      	r2, (r3, 0x8)
+ 128:	3a94      	bclri      	r2, 20
+ 12a:	b342      	st.w      	r2, (r3, 0x8)
+ 12c:	9342      	ld.w      	r2, (r3, 0x8)
+ 12e:	ec420100 	ori      	r2, r2, 256
+ 132:	041e      	br      	0x16e	// 16e <gx_i2s_set_five_wire_mode+0x16e>
+ 134:	3845      	cmpnei      	r0, 5
+ 136:	081e      	bt      	0x172	// 172 <gx_i2s_set_five_wire_mode+0x172>
+ 138:	3001      	movi      	r0, 1
+ 13a:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			13a: R_CKCORE_PCREL_IMM26BY2	_i2sout_set_mclk.part.6
+ 13e:	ea23a001 	movih      	r3, 40961
+ 142:	3ba8      	bseti      	r3, 8
+ 144:	9342      	ld.w      	r2, (r3, 0x8)
+ 146:	ec420400 	ori      	r2, r2, 1024
+ 14a:	b342      	st.w      	r2, (r3, 0x8)
+ 14c:	9342      	ld.w      	r2, (r3, 0x8)
+ 14e:	3a95      	bclri      	r2, 21
+ 150:	b342      	st.w      	r2, (r3, 0x8)
+ 152:	9342      	ld.w      	r2, (r3, 0x8)
+ 154:	ec420800 	ori      	r2, r2, 2048
+ 158:	b342      	st.w      	r2, (r3, 0x8)
+ 15a:	9342      	ld.w      	r2, (r3, 0x8)
+ 15c:	ec420002 	ori      	r2, r2, 2
+ 160:	b342      	st.w      	r2, (r3, 0x8)
+ 162:	9342      	ld.w      	r2, (r3, 0x8)
+ 164:	3a92      	bclri      	r2, 18
+ 166:	b342      	st.w      	r2, (r3, 0x8)
+ 168:	9342      	ld.w      	r2, (r3, 0x8)
+ 16a:	ec420004 	ori      	r2, r2, 4
+ 16e:	b342      	st.w      	r2, (r3, 0x8)
+ 170:	0777      	br      	0x5e	// 5e <gx_i2s_set_five_wire_mode+0x5e>
+ 172:	3846      	cmpnei      	r0, 6
+ 174:	ea24a001 	movih      	r4, 40961
+ 178:	3ca8      	bseti      	r4, 8
+ 17a:	082d      	bt      	0x1d4	// 1d4 <gx_i2s_set_five_wire_mode+0x1d4>
+ 17c:	3000      	movi      	r0, 0
+ 17e:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			17e: R_CKCORE_PCREL_IMM26BY2	_i2sin_set_mclk
+ 182:	9462      	ld.w      	r3, (r4, 0x8)
+ 184:	3b89      	bclri      	r3, 9
+ 186:	b462      	st.w      	r3, (r4, 0x8)
+ 188:	9462      	ld.w      	r3, (r4, 0x8)
+ 18a:	3b8b      	bclri      	r3, 11
+ 18c:	b462      	st.w      	r3, (r4, 0x8)
+ 18e:	9462      	ld.w      	r3, (r4, 0x8)
+ 190:	3b80      	bclri      	r3, 0
+ 192:	b462      	st.w      	r3, (r4, 0x8)
+ 194:	9462      	ld.w      	r3, (r4, 0x8)
+ 196:	3b82      	bclri      	r3, 2
+ 198:	b462      	st.w      	r3, (r4, 0x8)
+ 19a:	ea23a030 	movih      	r3, 41008
+ 19e:	3ba7      	bseti      	r3, 7
+ 1a0:	9342      	ld.w      	r2, (r3, 0x8)
+ 1a2:	3a88      	bclri      	r2, 8
+ 1a4:	b342      	st.w      	r2, (r3, 0x8)
+ 1a6:	9342      	ld.w      	r2, (r3, 0x8)
+ 1a8:	3a89      	bclri      	r2, 9
+ 1aa:	b342      	st.w      	r2, (r3, 0x8)
+ 1ac:	9342      	ld.w      	r2, (r3, 0x8)
+ 1ae:	ec420400 	ori      	r2, r2, 1024
+ 1b2:	b342      	st.w      	r2, (r3, 0x8)
+ 1b4:	9342      	ld.w      	r2, (r3, 0x8)
+ 1b6:	ec420004 	ori      	r2, r2, 4
+ 1ba:	b342      	st.w      	r2, (r3, 0x8)
+ 1bc:	9462      	ld.w      	r3, (r4, 0x8)
+ 1be:	3b8f      	bclri      	r3, 15
+ 1c0:	b462      	st.w      	r3, (r4, 0x8)
+ 1c2:	9462      	ld.w      	r3, (r4, 0x8)
+ 1c4:	3b91      	bclri      	r3, 17
+ 1c6:	b462      	st.w      	r3, (r4, 0x8)
+ 1c8:	9462      	ld.w      	r3, (r4, 0x8)
+ 1ca:	3b86      	bclri      	r3, 6
+ 1cc:	b462      	st.w      	r3, (r4, 0x8)
+ 1ce:	9462      	ld.w      	r3, (r4, 0x8)
+ 1d0:	3b88      	bclri      	r3, 8
+ 1d2:	0745      	br      	0x5c	// 5c <gx_i2s_set_five_wire_mode+0x5c>
+ 1d4:	3004      	movi      	r0, 4
+ 1d6:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			1d6: R_CKCORE_PCREL_IMM26BY2	_i2sin_set_mclk
+ 1da:	9462      	ld.w      	r3, (r4, 0x8)
+ 1dc:	3b8a      	bclri      	r3, 10
+ 1de:	b462      	st.w      	r3, (r4, 0x8)
+ 1e0:	9462      	ld.w      	r3, (r4, 0x8)
+ 1e2:	3b95      	bclri      	r3, 21
+ 1e4:	b462      	st.w      	r3, (r4, 0x8)
+ 1e6:	9462      	ld.w      	r3, (r4, 0x8)
+ 1e8:	ec630800 	ori      	r3, r3, 2048
+ 1ec:	b462      	st.w      	r3, (r4, 0x8)
+ 1ee:	9462      	ld.w      	r3, (r4, 0x8)
+ 1f0:	3b81      	bclri      	r3, 1
+ 1f2:	b462      	st.w      	r3, (r4, 0x8)
+ 1f4:	9462      	ld.w      	r3, (r4, 0x8)
+ 1f6:	3b92      	bclri      	r3, 18
+ 1f8:	b462      	st.w      	r3, (r4, 0x8)
+ 1fa:	9462      	ld.w      	r3, (r4, 0x8)
+ 1fc:	ec630004 	ori      	r3, r3, 4
+ 200:	b462      	st.w      	r3, (r4, 0x8)
+ 202:	3004      	movi      	r0, 4
+ 204:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			204: R_CKCORE_PCREL_IMM26BY2	_i2sout_set_mclk.part.6
+ 208:	9462      	ld.w      	r3, (r4, 0x8)
+ 20a:	3b90      	bclri      	r3, 16
+ 20c:	b462      	st.w      	r3, (r4, 0x8)
+ 20e:	9462      	ld.w      	r3, (r4, 0x8)
+ 210:	3b97      	bclri      	r3, 23
+ 212:	b462      	st.w      	r3, (r4, 0x8)
+ 214:	9462      	ld.w      	r3, (r4, 0x8)
+ 216:	3bb1      	bseti      	r3, 17
+ 218:	b462      	st.w      	r3, (r4, 0x8)
+ 21a:	9462      	ld.w      	r3, (r4, 0x8)
+ 21c:	3b87      	bclri      	r3, 7
+ 21e:	b462      	st.w      	r3, (r4, 0x8)
+ 220:	9462      	ld.w      	r3, (r4, 0x8)
+ 222:	3b94      	bclri      	r3, 20
+ 224:	b462      	st.w      	r3, (r4, 0x8)
+ 226:	9462      	ld.w      	r3, (r4, 0x8)
+ 228:	ec630100 	ori      	r3, r3, 256
+ 22c:	0718      	br      	0x5c	// 5c <gx_i2s_set_five_wire_mode+0x5c>
+ 22e:	380b      	cmphsi      	r0, 12
+ 230:	0884      	bt      	0x338	// 338 <gx_i2s_set_five_wire_mode+0x338>
+ 232:	3848      	cmpnei      	r0, 8
+ 234:	0810      	bt      	0x254	// 254 <gx_i2s_set_five_wire_mode+0x254>
+ 236:	3003      	movi      	r0, 3
+ 238:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			238: R_CKCORE_PCREL_IMM26BY2	_i2sout_set_mclk.part.6
+ 23c:	ea23a001 	movih      	r3, 40961
+ 240:	3ba8      	bseti      	r3, 8
+ 242:	9342      	ld.w      	r2, (r3, 0x8)
+ 244:	3ab7      	bseti      	r2, 23
+ 246:	b342      	st.w      	r2, (r3, 0x8)
+ 248:	9342      	ld.w      	r2, (r3, 0x8)
+ 24a:	3ab1      	bseti      	r2, 17
+ 24c:	b342      	st.w      	r2, (r3, 0x8)
+ 24e:	9342      	ld.w      	r2, (r3, 0x8)
+ 250:	3ab4      	bseti      	r2, 20
+ 252:	076c      	br      	0x12a	// 12a <gx_i2s_set_five_wire_mode+0x12a>
+ 254:	3849      	cmpnei      	r0, 9
+ 256:	0815      	bt      	0x280	// 280 <gx_i2s_set_five_wire_mode+0x280>
+ 258:	3003      	movi      	r0, 3
+ 25a:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			25a: R_CKCORE_PCREL_IMM26BY2	_i2sout_set_mclk.part.6
+ 25e:	ea23a001 	movih      	r3, 40961
+ 262:	3ba8      	bseti      	r3, 8
+ 264:	9342      	ld.w      	r2, (r3, 0x8)
+ 266:	3ab6      	bseti      	r2, 22
+ 268:	b342      	st.w      	r2, (r3, 0x8)
+ 26a:	9342      	ld.w      	r2, (r3, 0x8)
+ 26c:	ec424000 	ori      	r2, r2, 16384
+ 270:	b342      	st.w      	r2, (r3, 0x8)
+ 272:	9342      	ld.w      	r2, (r3, 0x8)
+ 274:	3ab3      	bseti      	r2, 19
+ 276:	b342      	st.w      	r2, (r3, 0x8)
+ 278:	9342      	ld.w      	r2, (r3, 0x8)
+ 27a:	ec420020 	ori      	r2, r2, 32
+ 27e:	0778      	br      	0x16e	// 16e <gx_i2s_set_five_wire_mode+0x16e>
+ 280:	384a      	cmpnei      	r0, 10
+ 282:	0824      	bt      	0x2ca	// 2ca <gx_i2s_set_five_wire_mode+0x2ca>
+ 284:	ea23a030 	movih      	r3, 41008
+ 288:	3ba7      	bseti      	r3, 7
+ 28a:	ea24a001 	movih      	r4, 40961
+ 28e:	3ca8      	bseti      	r4, 8
+ 290:	9342      	ld.w      	r2, (r3, 0x8)
+ 292:	ec420100 	ori      	r2, r2, 256
+ 296:	b342      	st.w      	r2, (r3, 0x8)
+ 298:	9342      	ld.w      	r2, (r3, 0x8)
+ 29a:	3a89      	bclri      	r2, 9
+ 29c:	b342      	st.w      	r2, (r3, 0x8)
+ 29e:	9342      	ld.w      	r2, (r3, 0x8)
+ 2a0:	ec420400 	ori      	r2, r2, 1024
+ 2a4:	b342      	st.w      	r2, (r3, 0x8)
+ 2a6:	9342      	ld.w      	r2, (r3, 0x8)
+ 2a8:	ec420004 	ori      	r2, r2, 4
+ 2ac:	b342      	st.w      	r2, (r3, 0x8)
+ 2ae:	9462      	ld.w      	r3, (r4, 0x8)
+ 2b0:	ec638000 	ori      	r3, r3, 32768
+ 2b4:	b462      	st.w      	r3, (r4, 0x8)
+ 2b6:	9462      	ld.w      	r3, (r4, 0x8)
+ 2b8:	3b91      	bclri      	r3, 17
+ 2ba:	b462      	st.w      	r3, (r4, 0x8)
+ 2bc:	9462      	ld.w      	r3, (r4, 0x8)
+ 2be:	ec630040 	ori      	r3, r3, 64
+ 2c2:	b462      	st.w      	r3, (r4, 0x8)
+ 2c4:	9462      	ld.w      	r3, (r4, 0x8)
+ 2c6:	3b88      	bclri      	r3, 8
+ 2c8:	070a      	br      	0xdc	// dc <gx_i2s_set_five_wire_mode+0xdc>
+ 2ca:	3004      	movi      	r0, 4
+ 2cc:	e0000000 	bsr      	0x0	// 0 <gx_i2s_set_five_wire_mode>
+			2cc: R_CKCORE_PCREL_IMM26BY2	_i2sout_set_mclk.part.6
+ 2d0:	ea23a001 	movih      	r3, 40961
+ 2d4:	3ba8      	bseti      	r3, 8
+ 2d6:	9342      	ld.w      	r2, (r3, 0x8)
+ 2d8:	3a90      	bclri      	r2, 16
+ 2da:	b342      	st.w      	r2, (r3, 0x8)
+ 2dc:	9342      	ld.w      	r2, (r3, 0x8)
+ 2de:	3a97      	bclri      	r2, 23
+ 2e0:	b342      	st.w      	r2, (r3, 0x8)
+ 2e2:	9342      	ld.w      	r2, (r3, 0x8)
+ 2e4:	3ab1      	bseti      	r2, 17
+ 2e6:	b342      	st.w      	r2, (r3, 0x8)
+ 2e8:	9342      	ld.w      	r2, (r3, 0x8)
+ 2ea:	3a87      	bclri      	r2, 7
+ 2ec:	b342      	st.w      	r2, (r3, 0x8)
+ 2ee:	9342      	ld.w      	r2, (r3, 0x8)
+ 2f0:	3a94      	bclri      	r2, 20
+ 2f2:	b342      	st.w      	r2, (r3, 0x8)
+ 2f4:	9342      	ld.w      	r2, (r3, 0x8)
+ 2f6:	ec420100 	ori      	r2, r2, 256
+ 2fa:	b342      	st.w      	r2, (r3, 0x8)
+ 2fc:	ea22a001 	movih      	r2, 40961
+ 300:	3aa7      	bseti      	r2, 7
+ 302:	9223      	ld.w      	r1, (r2, 0xc)
+ 304:	39b6      	bseti      	r1, 22
+ 306:	b223      	st.w      	r1, (r2, 0xc)
+ 308:	9223      	ld.w      	r1, (r2, 0xc)
+ 30a:	ec210020 	ori      	r1, r1, 32
+ 30e:	b223      	st.w      	r1, (r2, 0xc)
+ 310:	9223      	ld.w      	r1, (r2, 0xc)
+ 312:	ec210040 	ori      	r1, r1, 64
+ 316:	b223      	st.w      	r1, (r2, 0xc)
+ 318:	9342      	ld.w      	r2, (r3, 0x8)
+ 31a:	3a8d      	bclri      	r2, 13
+ 31c:	b342      	st.w      	r2, (r3, 0x8)
+ 31e:	9342      	ld.w      	r2, (r3, 0x8)
+ 320:	3a96      	bclri      	r2, 22
+ 322:	b342      	st.w      	r2, (r3, 0x8)
+ 324:	9342      	ld.w      	r2, (r3, 0x8)
+ 326:	ec424000 	ori      	r2, r2, 16384
+ 32a:	b342      	st.w      	r2, (r3, 0x8)
+ 32c:	9342      	ld.w      	r2, (r3, 0x8)
+ 32e:	3a84      	bclri      	r2, 4
+ 330:	b342      	st.w      	r2, (r3, 0x8)
+ 332:	9342      	ld.w      	r2, (r3, 0x8)
+ 334:	3a93      	bclri      	r2, 19
+ 336:	07a0      	br      	0x276	// 276 <gx_i2s_set_five_wire_mode+0x276>
+ 338:	3000      	movi      	r0, 0
+ 33a:	2800      	subi      	r0, 1
+ 33c:	0680      	br      	0x3c	// 3c <gx_i2s_set_five_wire_mode+0x3c>

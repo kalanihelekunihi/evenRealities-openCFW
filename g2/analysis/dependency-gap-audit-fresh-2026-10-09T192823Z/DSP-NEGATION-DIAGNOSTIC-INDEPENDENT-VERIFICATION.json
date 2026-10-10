@@ -1,0 +1,117 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "label": "original source identity",
+      "pass": true
+    },
+    {
+      "label": "diagnostic source identity",
+      "pass": true
+    },
+    {
+      "label": "only helper/namespace/declared one semantic intervention",
+      "pass": true
+    },
+    {
+      "label": "fixed-width helper safe sign decode and unsigned packing",
+      "pass": true
+    },
+    {
+      "label": "all65536 lane encodings agree with documented saturating negation",
+      "pass": true
+    },
+    {
+      "label": "exact33 vector selection and independent counter",
+      "pass": true
+    },
+    {
+      "label": "unchanged vector data/call/comparison bodies",
+      "pass": true
+    },
+    {
+      "label": "original failure retained and no mixed56-case claim",
+      "pass": true
+    },
+    {
+      "label": "diagnostic build commands succeeded",
+      "pass": true
+    },
+    {
+      "label": "diagnostic run receipt remaining-fft-diagnostic",
+      "pass": true,
+      "memlog_sha256": "616aafecc92f06b53eab2a92751caa9982a2671b488ddaac48c2aa3231131850",
+      "elf_sha256": "da5671387d7ba7a463e5aea59af1c9e201c8395cb490846ec87837fd16448236"
+    },
+    {
+      "label": "diagnostic ELF valid RAM placement diagnostic.elf",
+      "pass": true
+    },
+    {
+      "label": "reported33passes log",
+      "pass": true
+    },
+    {
+      "label": "diagnostic run receipt stage-diagnostic",
+      "pass": true,
+      "memlog_sha256": "392e317dc4d4a7c7e5b108bd44b2a07f12cc1b97299249654c00b398db47c464",
+      "elf_sha256": "08f149e9a9117d6a470a56e063de7a7dcdf5241f5817ed05e8147a6282b49d25"
+    },
+    {
+      "label": "diagnostic ELF valid RAM placement diagnostic-stages.elf",
+      "pass": true
+    },
+    {
+      "label": "stage rechecks same and all prefix reductions present",
+      "pass": true
+    },
+    {
+      "label": "same unchanged stock table fixture",
+      "pass": true
+    },
+    {
+      "label": "table-bound exact256 pairs and corner exclusion",
+      "pass": true
+    },
+    {
+      "label": "MAC coefficient source binding 65",
+      "pass": true
+    },
+    {
+      "label": "MAC coefficient source binding 66",
+      "pass": true
+    },
+    {
+      "label": "MAC coefficient source binding 122",
+      "pass": true
+    },
+    {
+      "label": "documented full-expression arithmetic 00000000",
+      "pass": true
+    },
+    {
+      "label": "documented full-expression arithmetic ffffffff",
+      "pass": true
+    },
+    {
+      "label": "documented full-expression arithmetic 80000000",
+      "pass": true
+    },
+    {
+      "label": "six MAC observations are documented differences not passes",
+      "pass": true
+    },
+    {
+      "label": "wrapper text preserved during symbol redirection",
+      "pass": true
+    }
+  ],
+  "accounting": {
+    "authentic_C_original_FFT_passes": 23,
+    "authentic_C_original_FFT_failures": 1,
+    "authentic_C_original_FFT_unrun": 32,
+    "separate_diagnostic_FFT_passes": 33,
+    "MAC_documented_model_discrepancies": 6
+  },
+  "limits": "No replay, production change or canonical admission. Helper mathematical-formula check is not firmware execution. Coefficient exclusion concerns only one MAC intermediate-overflow corner at three selected real-split assembly sites."
+}

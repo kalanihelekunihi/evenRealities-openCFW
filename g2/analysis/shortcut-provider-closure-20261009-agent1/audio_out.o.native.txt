@@ -1,0 +1,528 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/audio_out.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_audio_out_alloc_playback:
+
+00000000 <gx_audio_out_alloc_playback>:
+   0:	14d0      	push      	r15
+   2:	106a      	lrw      	r3, 0x0	// 28 <gx_audio_out_alloc_playback+0x28>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000a 	bnez      	r3, 0x1a	// 1a <gx_audio_out_alloc_playback+0x1a>
+   a:	32ea      	movi      	r2, 234
+   c:	1028      	lrw      	r1, 0x0	// 2c <gx_audio_out_alloc_playback+0x2c>
+   e:	1009      	lrw      	r0, 0x0	// 30 <gx_audio_out_alloc_playback+0x30>
+  10:	e0000000 	bsr      	0x0	// 0 <printf_>
+			10: R_CKCORE_PCREL_IMM26BY2	printf_
+  14:	3000      	movi      	r0, 0
+  16:	2800      	subi      	r0, 1
+  18:	1490      	pop      	r15
+  1a:	9360      	ld.w      	r3, (r3, 0x0)
+  1c:	e9030004 	bez      	r3, 0x24	// 24 <gx_audio_out_alloc_playback+0x24>
+  20:	7bcd      	jsr      	r3
+  22:	07fb      	br      	0x18	// 18 <gx_audio_out_alloc_playback+0x18>
+  24:	6c0f      	mov      	r0, r3
+  26:	07f9      	br      	0x18	// 18 <gx_audio_out_alloc_playback+0x18>
+	...
+			28: R_CKCORE_ADDR32	.bss
+			2c: R_CKCORE_ADDR32	.rodata
+			30: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_free:
+
+00000000 <gx_audio_out_free>:
+   0:	14d0      	push      	r15
+   2:	106a      	lrw      	r3, 0x0	// 28 <gx_audio_out_free+0x28>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000a 	bnez      	r3, 0x1a	// 1a <gx_audio_out_free+0x1a>
+   a:	32f5      	movi      	r2, 245
+   c:	1028      	lrw      	r1, 0x0	// 2c <gx_audio_out_free+0x2c>
+   e:	1009      	lrw      	r0, 0x0	// 30 <gx_audio_out_free+0x30>
+  10:	e0000000 	bsr      	0x0	// 0 <printf_>
+			10: R_CKCORE_PCREL_IMM26BY2	printf_
+  14:	3000      	movi      	r0, 0
+  16:	2800      	subi      	r0, 1
+  18:	1490      	pop      	r15
+  1a:	9365      	ld.w      	r3, (r3, 0x14)
+  1c:	e9030004 	bez      	r3, 0x24	// 24 <gx_audio_out_free+0x24>
+  20:	7bcd      	jsr      	r3
+  22:	07fb      	br      	0x18	// 18 <gx_audio_out_free+0x18>
+  24:	6c0f      	mov      	r0, r3
+  26:	07f9      	br      	0x18	// 18 <gx_audio_out_free+0x18>
+	...
+			28: R_CKCORE_ADDR32	.bss
+			2c: R_CKCORE_ADDR32	.rodata+0x1c
+			30: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_config_buffer:
+
+00000000 <gx_audio_out_config_buffer>:
+   0:	14d0      	push      	r15
+   2:	106a      	lrw      	r3, 0x0	// 28 <gx_audio_out_config_buffer+0x28>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000a 	bnez      	r3, 0x1a	// 1a <gx_audio_out_config_buffer+0x1a>
+   a:	32ff      	movi      	r2, 255
+   c:	1028      	lrw      	r1, 0x0	// 2c <gx_audio_out_config_buffer+0x2c>
+   e:	1009      	lrw      	r0, 0x0	// 30 <gx_audio_out_config_buffer+0x30>
+  10:	e0000000 	bsr      	0x0	// 0 <printf_>
+			10: R_CKCORE_PCREL_IMM26BY2	printf_
+  14:	3000      	movi      	r0, 0
+  16:	2800      	subi      	r0, 1
+  18:	1490      	pop      	r15
+  1a:	9366      	ld.w      	r3, (r3, 0x18)
+  1c:	e9030004 	bez      	r3, 0x24	// 24 <gx_audio_out_config_buffer+0x24>
+  20:	7bcd      	jsr      	r3
+  22:	07fb      	br      	0x18	// 18 <gx_audio_out_config_buffer+0x18>
+  24:	6c0f      	mov      	r0, r3
+  26:	07f9      	br      	0x18	// 18 <gx_audio_out_config_buffer+0x18>
+	...
+			28: R_CKCORE_ADDR32	.bss
+			2c: R_CKCORE_ADDR32	.rodata+0x2e
+			30: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_config_pcm:
+
+00000000 <gx_audio_out_config_pcm>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_config_pcm+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_config_pcm+0x1c>
+   a:	ea020109 	movi      	r2, 265
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_config_pcm+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_config_pcm+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9367      	ld.w      	r3, (r3, 0x1c)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_config_pcm+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_config_pcm+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_config_pcm+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x49
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_config_i2s:
+
+00000000 <gx_audio_out_config_i2s>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_config_i2s+0x2c>
+   4:	9340      	ld.w      	r2, (r3, 0x0)
+   6:	e922000b 	bnez      	r2, 0x1c	// 1c <gx_audio_out_config_i2s+0x1c>
+   a:	ea020113 	movi      	r2, 275
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_config_i2s+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_config_i2s+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9267      	ld.w      	r3, (r2, 0x1c)
+  1e:	e9030005 	bez      	r3, 0x28	// 28 <gx_audio_out_config_i2s+0x28>
+  22:	9268      	ld.w      	r3, (r2, 0x20)
+  24:	7bcd      	jsr      	r3
+  26:	07fa      	br      	0x1a	// 1a <gx_audio_out_config_i2s+0x1a>
+  28:	6c0f      	mov      	r0, r3
+  2a:	07f8      	br      	0x1a	// 1a <gx_audio_out_config_i2s+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x61
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_config_dac:
+
+00000000 <gx_audio_out_config_dac>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_config_dac+0x2c>
+   4:	9340      	ld.w      	r2, (r3, 0x0)
+   6:	e922000b 	bnez      	r2, 0x1c	// 1c <gx_audio_out_config_dac+0x1c>
+   a:	ea02011d 	movi      	r2, 285
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_config_dac+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_config_dac+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9267      	ld.w      	r3, (r2, 0x1c)
+  1e:	e9030005 	bez      	r3, 0x28	// 28 <gx_audio_out_config_dac+0x28>
+  22:	9269      	ld.w      	r3, (r2, 0x24)
+  24:	7bcd      	jsr      	r3
+  26:	07fa      	br      	0x1a	// 1a <gx_audio_out_config_dac+0x1a>
+  28:	6c0f      	mov      	r0, r3
+  2a:	07f8      	br      	0x1a	// 1a <gx_audio_out_config_dac+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x79
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_config_cb:
+
+00000000 <gx_audio_out_config_cb>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_config_cb+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_config_cb+0x1c>
+   a:	ea020127 	movi      	r2, 295
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_config_cb+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_config_cb+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	936a      	ld.w      	r3, (r3, 0x28)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_config_cb+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_config_cb+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_config_cb+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x91
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_push_frame:
+
+00000000 <gx_audio_out_push_frame>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_push_frame+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_push_frame+0x1c>
+   a:	ea020131 	movi      	r2, 305
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_push_frame+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_push_frame+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	936b      	ld.w      	r3, (r3, 0x2c)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_push_frame+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_push_frame+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_push_frame+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0xa8
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_drain_frame:
+
+00000000 <gx_audio_out_drain_frame>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_drain_frame+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_drain_frame+0x1c>
+   a:	ea02013b 	movi      	r2, 315
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_drain_frame+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_drain_frame+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	936d      	ld.w      	r3, (r3, 0x34)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_drain_frame+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_drain_frame+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_drain_frame+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0xc0
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_set_db:
+
+00000000 <gx_audio_out_set_db>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_set_db+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_set_db+0x1c>
+   a:	ea020145 	movi      	r2, 325
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_set_db+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_set_db+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	936e      	ld.w      	r3, (r3, 0x38)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_set_db+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_set_db+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_set_db+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0xd9
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_get_db:
+
+00000000 <gx_audio_out_get_db>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_get_db+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_get_db+0x1c>
+   a:	ea02014f 	movi      	r2, 335
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_get_db+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_get_db+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	936f      	ld.w      	r3, (r3, 0x3c)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_get_db+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_get_db+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_get_db+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0xed
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_set_mute:
+
+00000000 <gx_audio_out_set_mute>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_set_mute+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_set_mute+0x1c>
+   a:	ea020159 	movi      	r2, 345
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_set_mute+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_set_mute+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9370      	ld.w      	r3, (r3, 0x40)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_set_mute+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_set_mute+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_set_mute+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x101
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_get_mute:
+
+00000000 <gx_audio_out_get_mute>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_get_mute+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_get_mute+0x1c>
+   a:	ea020163 	movi      	r2, 355
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_get_mute+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_get_mute+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9371      	ld.w      	r3, (r3, 0x44)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_get_mute+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_get_mute+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_get_mute+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x117
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_set_channel:
+
+00000000 <gx_audio_out_set_channel>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_set_channel+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_set_channel+0x1c>
+   a:	ea02016d 	movi      	r2, 365
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_set_channel+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_set_channel+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9372      	ld.w      	r3, (r3, 0x48)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_set_channel+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_set_channel+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_set_channel+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x12d
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_init:
+
+00000000 <gx_audio_out_init>:
+   0:	14d0      	push      	r15
+   2:	106d      	lrw      	r3, 0x0	// 34 <gx_audio_out_init+0x34>
+   4:	9340      	ld.w      	r2, (r3, 0x0)
+   6:	e9220004 	bnez      	r2, 0xe	// e <gx_audio_out_init+0xe>
+   a:	104c      	lrw      	r2, 0x0	// 38 <gx_audio_out_init+0x38>
+   c:	b340      	st.w      	r2, (r3, 0x0)
+   e:	9360      	ld.w      	r3, (r3, 0x0)
+  10:	e923000b 	bnez      	r3, 0x26	// 26 <gx_audio_out_init+0x26>
+  14:	ea020179 	movi      	r2, 377
+  18:	1029      	lrw      	r1, 0x0	// 3c <gx_audio_out_init+0x3c>
+  1a:	100a      	lrw      	r0, 0x0	// 40 <gx_audio_out_init+0x40>
+  1c:	e0000000 	bsr      	0x0	// 0 <printf_>
+			1c: R_CKCORE_PCREL_IMM26BY2	printf_
+  20:	3000      	movi      	r0, 0
+  22:	2800      	subi      	r0, 1
+  24:	1490      	pop      	r15
+  26:	9361      	ld.w      	r3, (r3, 0x4)
+  28:	e9030004 	bez      	r3, 0x30	// 30 <gx_audio_out_init+0x30>
+  2c:	7bcd      	jsr      	r3
+  2e:	07fb      	br      	0x24	// 24 <gx_audio_out_init+0x24>
+  30:	6c0f      	mov      	r0, r3
+  32:	07f9      	br      	0x24	// 24 <gx_audio_out_init+0x24>
+	...
+			34: R_CKCORE_ADDR32	.bss
+			38: R_CKCORE_ADDR32	g_aout_v2
+			3c: R_CKCORE_ADDR32	.rodata+0x146
+			40: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_exit:
+
+00000000 <gx_audio_out_exit>:
+   0:	14d0      	push      	r15
+   2:	106a      	lrw      	r3, 0x0	// 28 <gx_audio_out_exit+0x28>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_exit+0x1c>
+   a:	ea020183 	movi      	r2, 387
+   e:	1028      	lrw      	r1, 0x0	// 2c <gx_audio_out_exit+0x2c>
+  10:	1008      	lrw      	r0, 0x0	// 30 <gx_audio_out_exit+0x30>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9302      	ld.w      	r0, (r3, 0x8)
+  1e:	e900fffe 	bez      	r0, 0x1a	// 1a <gx_audio_out_exit+0x1a>
+  22:	7bc1      	jsr      	r0
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_exit+0x1a>
+	...
+			28: R_CKCORE_ADDR32	.bss
+			2c: R_CKCORE_ADDR32	.rodata+0x158
+			30: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_suspend:
+
+00000000 <gx_audio_out_suspend>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_suspend+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_suspend+0x1c>
+   a:	ea02018d 	movi      	r2, 397
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_suspend+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_suspend+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9363      	ld.w      	r3, (r3, 0xc)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_suspend+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_suspend+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_suspend+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x16a
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_resume:
+
+00000000 <gx_audio_out_resume>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_resume+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_resume+0x1c>
+   a:	ea020197 	movi      	r2, 407
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_resume+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_resume+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9364      	ld.w      	r3, (r3, 0x10)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_resume+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_resume+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_resume+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x17f
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_set_fixed_src:
+
+00000000 <gx_audio_out_set_fixed_src>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_set_fixed_src+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_set_fixed_src+0x1c>
+   a:	ea0201a1 	movi      	r2, 417
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_set_fixed_src+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_set_fixed_src+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9373      	ld.w      	r3, (r3, 0x4c)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_set_fixed_src+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_set_fixed_src+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_set_fixed_src+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x193
+			34: R_CKCORE_ADDR32	.rodata.str1.1
+
+Disassembly of section .text.gx_audio_out_get_sdc_src:
+
+00000000 <gx_audio_out_get_sdc_src>:
+   0:	14d0      	push      	r15
+   2:	106b      	lrw      	r3, 0x0	// 2c <gx_audio_out_get_sdc_src+0x2c>
+   4:	9360      	ld.w      	r3, (r3, 0x0)
+   6:	e923000b 	bnez      	r3, 0x1c	// 1c <gx_audio_out_get_sdc_src+0x1c>
+   a:	ea0201ab 	movi      	r2, 427
+   e:	1029      	lrw      	r1, 0x0	// 30 <gx_audio_out_get_sdc_src+0x30>
+  10:	1009      	lrw      	r0, 0x0	// 34 <gx_audio_out_get_sdc_src+0x34>
+  12:	e0000000 	bsr      	0x0	// 0 <printf_>
+			12: R_CKCORE_PCREL_IMM26BY2	printf_
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	1490      	pop      	r15
+  1c:	9374      	ld.w      	r3, (r3, 0x50)
+  1e:	e9030004 	bez      	r3, 0x26	// 26 <gx_audio_out_get_sdc_src+0x26>
+  22:	7bcd      	jsr      	r3
+  24:	07fb      	br      	0x1a	// 1a <gx_audio_out_get_sdc_src+0x1a>
+  26:	6c0f      	mov      	r0, r3
+  28:	07f9      	br      	0x1a	// 1a <gx_audio_out_get_sdc_src+0x1a>
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.rodata+0x1ae
+			34: R_CKCORE_ADDR32	.rodata.str1.1

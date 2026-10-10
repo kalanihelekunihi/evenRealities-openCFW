@@ -1,0 +1,50 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-arm-tools-20261009-agent3/main-analysis-only.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00456280 <bounded_original_thumb-0x79cec>:
+  456280:	b410      	push	{r4}
+  456282:	f45f 323c 	movs.w	r2, #192512	@ 0x2f000
+  456286:	4833      	ldr	r0, [pc, #204]	@ (456354 <bounded_original_thumb-0x79c18>)
+  456288:	0001      	movs	r1, r0
+  45628a:	f011 0f07 	tst.w	r1, #7
+  45628e:	d006      	beq.n	45629e <bounded_original_thumb-0x79cce>
+  456290:	1dc9      	adds	r1, r1, #7
+  456292:	08c9      	lsrs	r1, r1, #3
+  456294:	00c9      	lsls	r1, r1, #3
+  456296:	1a52      	subs	r2, r2, r1
+  456298:	0013      	movs	r3, r2
+  45629a:	0002      	movs	r2, r0
+  45629c:	18d2      	adds	r2, r2, r3
+  45629e:	4829      	ldr	r0, [pc, #164]	@ (456344 <bounded_original_thumb-0x79c28>)
+  4562a0:	6001      	str	r1, [r0, #0]
+  4562a2:	2300      	movs	r3, #0
+  4562a4:	6043      	str	r3, [r0, #4]
+  4562a6:	1852      	adds	r2, r2, r1
+  4562a8:	4824      	ldr	r0, [pc, #144]	@ (45633c <bounded_original_thumb-0x79c30>)
+  4562aa:	6800      	ldr	r0, [r0, #0]
+  4562ac:	1a12      	subs	r2, r2, r0
+  4562ae:	08d2      	lsrs	r2, r2, #3
+  4562b0:	00d2      	lsls	r2, r2, #3
+  4562b2:	4821      	ldr	r0, [pc, #132]	@ (456338 <bounded_original_thumb-0x79c34>)
+  4562b4:	6002      	str	r2, [r0, #0]
+  4562b6:	2300      	movs	r3, #0
+  4562b8:	6804      	ldr	r4, [r0, #0]
+  4562ba:	6063      	str	r3, [r4, #4]
+  4562bc:	2300      	movs	r3, #0
+  4562be:	6804      	ldr	r4, [r0, #0]
+  4562c0:	6023      	str	r3, [r4, #0]
+  4562c2:	1a52      	subs	r2, r2, r1
+  4562c4:	604a      	str	r2, [r1, #4]
+  4562c6:	6800      	ldr	r0, [r0, #0]
+  4562c8:	6008      	str	r0, [r1, #0]
+  4562ca:	6848      	ldr	r0, [r1, #4]
+  4562cc:	4a1e      	ldr	r2, [pc, #120]	@ (456348 <bounded_original_thumb-0x79c24>)
+  4562ce:	6010      	str	r0, [r2, #0]
+  4562d0:	6848      	ldr	r0, [r1, #4]
+  4562d2:	491b      	ldr	r1, [pc, #108]	@ (456340 <bounded_original_thumb-0x79c2c>)
+  4562d4:	6008      	str	r0, [r1, #0]
+  4562d6:	bc10      	pop	{r4}
+  4562d8:	4770      	bx	lr

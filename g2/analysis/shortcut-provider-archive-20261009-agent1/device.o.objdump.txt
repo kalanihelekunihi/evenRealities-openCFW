@@ -1,0 +1,101 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-archive-20261009-agent1/device.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.device_list_init:
+
+00000000 <device_list_init>:
+   0:	1064      	lrw      	r3, 0x0	// 10 <device_list_init+0x10>
+   2:	5b5e      	addi      	r2, r3, 8
+   4:	b360      	st.w      	r3, (r3, 0x0)
+   6:	b361      	st.w      	r3, (r3, 0x4)
+   8:	b342      	st.w      	r2, (r3, 0x8)
+   a:	b343      	st.w      	r2, (r3, 0xc)
+   c:	783c      	jmp      	r15
+   e:	0000      	.short	0x0000
+  10:	00000000 	.long	0x00000000
+			10: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.spi_register_master:
+
+00000000 <spi_register_master>:
+   0:	e900002c 	bez      	r0, 0x58	// 58 <spi_register_master+0x58>
+   4:	9021      	ld.w      	r1, (r0, 0x4)
+   6:	e901002c 	bez      	r1, 0x5e	// 5e <spi_register_master+0x5e>
+   a:	d9802000 	ld.w      	r12, (r0, 0x0)
+   e:	e98c0028 	blz      	r12, 0x5e	// 5e <spi_register_master+0x5e>
+  12:	1055      	lrw      	r2, 0x0	// 64 <spi_register_master+0x64>
+  14:	e460001b 	addi      	r3, r0, 28
+  18:	d9a22001 	ld.w      	r13, (r2, 0x4)
+  1c:	b047      	st.w      	r2, (r0, 0x1c)
+  1e:	b261      	st.w      	r3, (r2, 0x4)
+  20:	dda02008 	st.w      	r13, (r0, 0x20)
+  24:	dc6d2000 	st.w      	r3, (r13, 0x0)
+  28:	9262      	ld.w      	r3, (r2, 0x8)
+  2a:	2207      	addi      	r2, 8
+  2c:	648e      	cmpne      	r3, r2
+  2e:	d9a32000 	ld.w      	r13, (r3, 0x0)
+  32:	0c0f      	bf      	0x50	// 50 <spi_register_master+0x50>
+  34:	e6431017 	subi      	r18, r3, 24
+  38:	da522000 	ld.w      	r18, (r18, 0x0)
+  3c:	c64c0480 	cmpne      	r12, r18
+  40:	080a      	bt      	0x54	// 54 <spi_register_master+0x54>
+  42:	2b13      	subi      	r3, 20
+  44:	da430008 	ld.b      	r18, (r3, 0x8)
+  48:	c4320420 	cmphs      	r18, r1
+  4c:	0804      	bt      	0x54	// 54 <spi_register_master+0x54>
+  4e:	b300      	st.w      	r0, (r3, 0x0)
+  50:	3000      	movi      	r0, 0
+  52:	783c      	jmp      	r15
+  54:	6cf7      	mov      	r3, r13
+  56:	07eb      	br      	0x2c	// 2c <spi_register_master+0x2c>
+  58:	3000      	movi      	r0, 0
+  5a:	2812      	subi      	r0, 19
+  5c:	07fb      	br      	0x52	// 52 <spi_register_master+0x52>
+  5e:	3000      	movi      	r0, 0
+  60:	2815      	subi      	r0, 22
+  62:	07f8      	br      	0x52	// 52 <spi_register_master+0x52>
+  64:	00000000 	.long	0x00000000
+			64: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.spi_flash_register_master:
+
+00000000 <spi_flash_register_master>:
+   0:	e9000029 	bez      	r0, 0x52	// 52 <spi_flash_register_master+0x52>
+   4:	9020      	ld.w      	r1, (r0, 0x0)
+   6:	e9810029 	blz      	r1, 0x58	// 58 <spi_flash_register_master+0x58>
+   a:	1056      	lrw      	r2, 0x0	// 60 <spi_flash_register_master+0x60>
+   c:	e5800017 	addi      	r12, r0, 24
+  10:	9263      	ld.w      	r3, (r2, 0xc)
+  12:	e5a20007 	addi      	r13, r2, 8
+  16:	b067      	st.w      	r3, (r0, 0x1c)
+  18:	dda02006 	st.w      	r13, (r0, 0x18)
+  1c:	dd822003 	st.w      	r12, (r2, 0xc)
+  20:	dd832000 	st.w      	r12, (r3, 0x0)
+  24:	9260      	ld.w      	r3, (r2, 0x0)
+  26:	2003      	addi      	r0, 4
+  28:	648e      	cmpne      	r3, r2
+  2a:	d9832000 	ld.w      	r12, (r3, 0x0)
+  2e:	0c0e      	bf      	0x4a	// 4a <spi_flash_register_master+0x4a>
+  30:	2b1b      	subi      	r3, 28
+  32:	d9a32000 	ld.w      	r13, (r3, 0x0)
+  36:	6746      	cmpne      	r1, r13
+  38:	080b      	bt      	0x4e	// 4e <spi_flash_register_master+0x4e>
+  3a:	da400008 	ld.b      	r18, (r0, 0x8)
+  3e:	d9a32001 	ld.w      	r13, (r3, 0x4)
+  42:	c5b20420 	cmphs      	r18, r13
+  46:	0804      	bt      	0x4e	// 4e <spi_flash_register_master+0x4e>
+  48:	b060      	st.w      	r3, (r0, 0x0)
+  4a:	3000      	movi      	r0, 0
+  4c:	783c      	jmp      	r15
+  4e:	6cf3      	mov      	r3, r12
+  50:	07ec      	br      	0x28	// 28 <spi_flash_register_master+0x28>
+  52:	3000      	movi      	r0, 0
+  54:	2812      	subi      	r0, 19
+  56:	07fb      	br      	0x4c	// 4c <spi_flash_register_master+0x4c>
+  58:	3000      	movi      	r0, 0
+  5a:	2815      	subi      	r0, 22
+  5c:	07f8      	br      	0x4c	// 4c <spi_flash_register_master+0x4c>
+  5e:	0000      	.short	0x0000
+  60:	00000000 	.long	0x00000000
+			60: R_CKCORE_ADDR32	.bss

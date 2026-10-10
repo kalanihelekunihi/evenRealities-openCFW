@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "check": "range 0x54ee90",
+      "pass": true
+    },
+    {
+      "check": "range 0x54ef08",
+      "pass": true
+    },
+    {
+      "check": "range 0x54f338",
+      "pass": true
+    },
+    {
+      "check": "range 0x439710",
+      "pass": true
+    },
+    {
+      "check": "range 0x439be4",
+      "pass": true
+    },
+    {
+      "check": "range 0x54ee3e",
+      "pass": true
+    },
+    {
+      "check": "range 0x54ee4e",
+      "pass": true
+    },
+    {
+      "check": "range 0x54ee6e",
+      "pass": true
+    },
+    {
+      "check": "all listing bytes original-disassembly.txt",
+      "pass": true
+    },
+    {
+      "check": "all listing bytes helper-disassembly.txt",
+      "pass": true
+    },
+    {
+      "check": "safe wrapper branch",
+      "pass": true
+    }
+  ],
+  "all_pass": true,
+  "direct_BL_encoding_candidates": [
+    {
+      "address": "0x4e0c28",
+      "target": "0x54f338",
+      "context_start": "0x4e0c10",
+      "context_hex": "002805d0002c03d0002901d0002b01d1002006e00a0021006ef086fb012800da002010bd80b500f001f802bd"
+    },
+    {
+      "address": "0x54f046",
+      "target": "0x54ee90",
+      "context_start": "0x54f02e",
+      "context_hex": "b1d0b245afd275e0baf10f0f17d101220198b0f10f016846fff723ffdff80c13096888422dd010eb0a0a1aeb"
+    },
+    {
+      "address": "0x54f12e",
+      "target": "0x54ee90",
+      "context_start": "0x54f116",
+      "context_hex": "d9f1000008eb000a14f00f040f2c0fd100220198011f6846fff7affedff82412096888422bd0041914eb0800"
+    },
+    {
+      "address": "0x54f34e",
+      "target": "0x54ef08",
+      "context_start": "0x54f336",
+      "context_hex": "47e618b585b0002404940024039402910024019400240094fff7dbfd06b010bd0000bcf27800102176003021"
+    }
+  ],
+  "listing_sha256": {
+    "original-disassembly.txt": "a7d595b5c9ef5568cfc835a34ee12b8f62fc7ba3d591a49580fd2de767599baa",
+    "helper-disassembly.txt": "9d6fad08b76491ab8cf3ecd3e5706a6dd21bfdb5eca765752490fa3e23c5ba4e"
+  },
+  "scope": "Static raw Thumb BL encoding scan. Candidate callsites require containing-function classification; not every matched encoding is executable."
+}

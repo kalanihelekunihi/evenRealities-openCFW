@@ -1,0 +1,122 @@
+{
+  "status": "PASS",
+  "image": {
+    "accounting_review_id": "fixed-image-027:apollo_main:flash",
+    "address_spaces": [
+      {
+        "id": "loaded",
+        "mappings": [
+          {
+            "image_end": 3523364,
+            "image_start": 0,
+            "loaded_end": 7947044,
+            "loaded_start": 4423680
+          }
+        ]
+      }
+    ],
+    "admission_status": "pending independent canonical record review",
+    "architecture": {
+      "endianness": "little",
+      "isa_mode": "Thumb",
+      "name": "Arm Cortex-M55"
+    },
+    "campaign_id": "20260930T190500Z",
+    "container_status": "resolved",
+    "content_path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin",
+    "content_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "entry_facts": {
+      "initial_sp": 537393920,
+      "isa_mode": "Thumb",
+      "reset_entry": 6177330,
+      "reset_vector_word": 6177331,
+      "scope": "Encoded vector words only; subsequent startup behavior separately reviewed",
+      "vector_source_image_span": [
+        0,
+        8
+      ]
+    },
+    "evidence": [
+      {
+        "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+        "path": "g2/docs/reference/memory-map.md",
+        "sha256": "3779e487c2bd94985dd8a4b053a610902b2a8b326e9c9c893f7f4f5612dab94a"
+      }
+    ],
+    "id": "apollo_main:flash",
+    "mapping_status": "resolved",
+    "parent_image_id": null,
+    "payload_id": "apollo_main",
+    "schema_version": 2,
+    "size": 3523364,
+    "source_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "source_size": 3523364,
+    "source_span": [
+      32,
+      3523396
+    ],
+    "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "transform": {
+      "kind": "identity"
+    }
+  },
+  "image_bytes_hash_verified": true,
+  "selected_extents": [
+    {
+      "start": "0x54ee90",
+      "end_exclusive": "0x54ef06",
+      "bytes": 118,
+      "sha256": "da4166db86faec5fd8406f962f758eaca8d7d7d23ed4ddf18e02b3fd3e002a54",
+      "symbol_classification": [
+        "lz4",
+        "Strong"
+      ]
+    },
+    {
+      "start": "0x54ef08",
+      "end_exclusive": "0x54f338",
+      "bytes": 1072,
+      "sha256": "8d8e6a9598ea565a6ca9b7fa1a41a67a2b1756b8fb43e84e684ed5b11de990ae",
+      "symbol_classification": [
+        "lz4",
+        "Strong"
+      ]
+    },
+    {
+      "start": "0x54f338",
+      "end_exclusive": "0x54f356",
+      "bytes": 30,
+      "sha256": "d824bb067efb6bac662409f00f466631da69272c25c9bea6134c658e713eaef1",
+      "symbol_classification": [
+        "lz4",
+        "Strong"
+      ]
+    }
+  ],
+  "selected_bytes": 1220,
+  "navigation_call": {
+    "address": "0x56192e",
+    "locked_bytes_hex": "90ed053ad0ed022a43ee002a",
+    "emulator_expected_bytes_hex": "92f7f1f804003868e1f65efb",
+    "matches_emulator_profile": false
+  },
+  "input_hashes": {
+    "/Users/kalani/Repo/evenRealities-openCFW/AGENTS.md": "c4aaee34baae3e2f601d146ee528e28f0f9493d0a14a14a4b5f2e24715583d46",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/workflow/README.md": "c715de303825203510c8b009bbcb58ba7682f449170031fb095e2171c7340e6f",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/workflow/state.json": "4362dd4098292cf59ea2e4b45e056987f531392a0d2cb3b455549ba7699a1cc5",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/workflow/target.json": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/docs/reference/libraries.md": "519d198fad79bcae5cb1f3f5da7da93133f94198bff3c8765a75d84bba640289",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/symbols/apollo_main.tsv": "647539b78f5524c24714db425ceb12ccba9b92903f4b3c8a92c4a01841b91253",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/source-opportunity-boundaries-successor-2026-10-09/REPORT.md": "5111487dc1df98a84a839d2410fdc57a9b7424ed82d57ecd56bdc871540f323b",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/source-dependency-next-ledger-2026-10-09/SOURCE-OPPORTUNITIES.md": "1dac01c8bc915408807534b04b1052c44cf2b7d1f1c2d3059c3397b952b1d0b2",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/repository-goal-source-reconciliation-2026-10-09/REPORT.md": "2160bf4e9ebc5c12d074b2121593ad9f8a07a37a97629358f03f2730f639f913",
+    "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/lvgl/src/libs/lz4/lz4.c": "dde3a9c6bbef76d82040fc1baa66debe539472cbd7c532108aa443cfb57ad0c6",
+    "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/lvgl/src/libs/lz4/lz4.h": "7797c082c6b10de6aa2ef0d0671c205c4067db848612fd39fabc5e71f168984d",
+    "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/lvgl/src/libs/lz4/LICENSE.txt": "8b58c446121a109ccf32edc094bba3010a3d85e4ee3702950db55e4d3e87736c",
+    "/Users/kalani/Repo/jimrandomh/g2-firmware-emulator/AGENTS.md": "bf11d17defb091b1d79de32665cadcf8b31588388e90a57e1e13a5f0b7af50da",
+    "/Users/kalani/Repo/jimrandomh/g2-firmware-emulator/src/g2emu/device.py": "d5984866cebd5160cb57a90c39232bd1f1e7618c3815fb3015f5caf9658600c9",
+    "/Users/kalani/Repo/jimrandomh/g2-firmware-emulator/src/g2emu/stock_navigation_core.py": "d62a7a65dc01260103c88bfaf9dd8f168dc17a6013bd744ec700db124350aaf2",
+    "/Users/kalani/Repo/jimrandomh/g2-firmware-emulator/docs/stock-text-recipes.md": "86673938d8609220da794a6053d85fdeaaf7de148e501aa6adadd0db6d01cfcd"
+  },
+  "scope": "Static baseline only; no function/source equivalence, executable coverage increment, execution or current ownership vacancy established."
+}

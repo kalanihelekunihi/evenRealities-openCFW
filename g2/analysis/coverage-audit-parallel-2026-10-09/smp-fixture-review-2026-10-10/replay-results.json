@@ -1,0 +1,776 @@
+{
+  "count": 5,
+  "cases": [
+    {
+      "case": "empty-stale",
+      "token": 7,
+      "status": 6,
+      "connection": 1,
+      "node_tokens": [],
+      "events": [
+        100
+      ],
+      "source_events": [
+        100
+      ],
+      "queue_after": [
+        "0x0",
+        "0x0"
+      ],
+      "remaining": 0,
+      "provider_trace": [
+        {
+          "kind": "dequeue",
+          "queue": "0x20072cd8",
+          "handler_output": "0x200feff0"
+        }
+      ],
+      "critical_section_events": [
+        "enter",
+        "exit"
+      ],
+      "writes": [
+        {
+          "address": "0x200feff4",
+          "size": 4,
+          "value": 305397760
+        },
+        {
+          "address": "0x200feff8",
+          "size": 4,
+          "value": 305397761
+        },
+        {
+          "address": "0x200feffc",
+          "size": 4,
+          "value": 1048577
+        },
+        {
+          "address": "0x200feff0",
+          "size": 1,
+          "value": 0
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 537399296
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471879
+        },
+        {
+          "address": "0x200fefc8",
+          "size": 4,
+          "value": 6
+        },
+        {
+          "address": "0x200fefcc",
+          "size": 4,
+          "value": 537915376
+        },
+        {
+          "address": "0x200fefd0",
+          "size": 4,
+          "value": 537395200
+        },
+        {
+          "address": "0x200fefd4",
+          "size": 4,
+          "value": 4979189
+        }
+      ],
+      "node_reads": [],
+      "inputs_unchanged": true,
+      "ABI_preserved": true
+    },
+    {
+      "case": "stale-only",
+      "token": 7,
+      "status": 6,
+      "connection": 1,
+      "node_tokens": [
+        6,
+        6
+      ],
+      "events": [
+        100,
+        200,
+        100,
+        201,
+        100
+      ],
+      "source_events": [
+        100,
+        200,
+        100,
+        201,
+        100
+      ],
+      "queue_after": [
+        "0x0",
+        "0x0"
+      ],
+      "remaining": 0,
+      "provider_trace": [
+        {
+          "kind": "dequeue",
+          "queue": "0x20072cd8",
+          "handler_output": "0x200feff0"
+        },
+        {
+          "kind": "message-free",
+          "message": "0x20082008"
+        },
+        {
+          "kind": "buffer-free",
+          "header": "0x20082000",
+          "id": 0
+        },
+        {
+          "kind": "dequeue",
+          "queue": "0x20072cd8",
+          "handler_output": "0x200feff0"
+        },
+        {
+          "kind": "message-free",
+          "message": "0x20082048"
+        },
+        {
+          "kind": "buffer-free",
+          "header": "0x20082040",
+          "id": 1
+        },
+        {
+          "kind": "dequeue",
+          "queue": "0x20072cd8",
+          "handler_output": "0x200feff0"
+        }
+      ],
+      "critical_section_events": [
+        "enter",
+        "exit",
+        "enter",
+        "exit",
+        "enter",
+        "exit"
+      ],
+      "writes": [
+        {
+          "address": "0x200feff4",
+          "size": 4,
+          "value": 305397760
+        },
+        {
+          "address": "0x200feff8",
+          "size": 4,
+          "value": 305397761
+        },
+        {
+          "address": "0x200feffc",
+          "size": 4,
+          "value": 1048577
+        },
+        {
+          "address": "0x200feff0",
+          "size": 1,
+          "value": 0
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 537399296
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471879
+        },
+        {
+          "address": "0x200fefc8",
+          "size": 4,
+          "value": 6
+        },
+        {
+          "address": "0x200fefcc",
+          "size": 4,
+          "value": 537915376
+        },
+        {
+          "address": "0x200fefd0",
+          "size": 4,
+          "value": 537395200
+        },
+        {
+          "address": "0x200fefd4",
+          "size": 4,
+          "value": 4979189
+        },
+        {
+          "address": "0x20072cd8",
+          "size": 4,
+          "value": 537403456
+        },
+        {
+          "address": "0x200feff0",
+          "size": 1,
+          "value": 0
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 305397763
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471887
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 537399296
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471879
+        },
+        {
+          "address": "0x200fefc8",
+          "size": 4,
+          "value": 6
+        },
+        {
+          "address": "0x200fefcc",
+          "size": 4,
+          "value": 537915376
+        },
+        {
+          "address": "0x200fefd0",
+          "size": 4,
+          "value": 537395200
+        },
+        {
+          "address": "0x200fefd4",
+          "size": 4,
+          "value": 4979189
+        },
+        {
+          "address": "0x20072cd8",
+          "size": 4,
+          "value": 0
+        },
+        {
+          "address": "0x20072cdc",
+          "size": 4,
+          "value": 0
+        },
+        {
+          "address": "0x200feff0",
+          "size": 1,
+          "value": 1
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 305397763
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471887
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 537399296
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471879
+        },
+        {
+          "address": "0x200fefc8",
+          "size": 4,
+          "value": 6
+        },
+        {
+          "address": "0x200fefcc",
+          "size": 4,
+          "value": 537915376
+        },
+        {
+          "address": "0x200fefd0",
+          "size": 4,
+          "value": 537395200
+        },
+        {
+          "address": "0x200fefd4",
+          "size": 4,
+          "value": 4979189
+        }
+      ],
+      "node_reads": [
+        {
+          "address": "0x20082000",
+          "size": 4
+        },
+        {
+          "address": "0x20082004",
+          "size": 1
+        },
+        {
+          "address": "0x20082040",
+          "size": 4
+        },
+        {
+          "address": "0x20082044",
+          "size": 1
+        }
+      ],
+      "inputs_unchanged": true,
+      "ABI_preserved": true
+    },
+    {
+      "case": "current-token",
+      "token": 7,
+      "status": 7,
+      "connection": 1,
+      "node_tokens": [
+        7,
+        7
+      ],
+      "events": [
+        500
+      ],
+      "source_events": [
+        500
+      ],
+      "queue_after": [
+        "0x20082000",
+        "0x20082040"
+      ],
+      "remaining": 2,
+      "provider_trace": [],
+      "critical_section_events": [],
+      "writes": [
+        {
+          "address": "0x200feff4",
+          "size": 4,
+          "value": 305397760
+        },
+        {
+          "address": "0x200feff8",
+          "size": 4,
+          "value": 305397761
+        },
+        {
+          "address": "0x200feffc",
+          "size": 4,
+          "value": 1048577
+        }
+      ],
+      "node_reads": [],
+      "inputs_unchanged": true,
+      "ABI_preserved": true
+    },
+    {
+      "case": "mixed-queue-stale-trigger",
+      "token": 7,
+      "status": 6,
+      "connection": 1,
+      "node_tokens": [
+        6,
+        7,
+        8
+      ],
+      "events": [
+        100,
+        200,
+        100,
+        201,
+        100,
+        202,
+        100
+      ],
+      "source_events": [
+        100,
+        200,
+        100,
+        201,
+        100,
+        202,
+        100
+      ],
+      "queue_after": [
+        "0x0",
+        "0x0"
+      ],
+      "remaining": 0,
+      "provider_trace": [
+        {
+          "kind": "dequeue",
+          "queue": "0x20072cd8",
+          "handler_output": "0x200feff0"
+        },
+        {
+          "kind": "message-free",
+          "message": "0x20082008"
+        },
+        {
+          "kind": "buffer-free",
+          "header": "0x20082000",
+          "id": 0
+        },
+        {
+          "kind": "dequeue",
+          "queue": "0x20072cd8",
+          "handler_output": "0x200feff0"
+        },
+        {
+          "kind": "message-free",
+          "message": "0x20082048"
+        },
+        {
+          "kind": "buffer-free",
+          "header": "0x20082040",
+          "id": 1
+        },
+        {
+          "kind": "dequeue",
+          "queue": "0x20072cd8",
+          "handler_output": "0x200feff0"
+        },
+        {
+          "kind": "message-free",
+          "message": "0x20082088"
+        },
+        {
+          "kind": "buffer-free",
+          "header": "0x20082080",
+          "id": 2
+        },
+        {
+          "kind": "dequeue",
+          "queue": "0x20072cd8",
+          "handler_output": "0x200feff0"
+        }
+      ],
+      "critical_section_events": [
+        "enter",
+        "exit",
+        "enter",
+        "exit",
+        "enter",
+        "exit",
+        "enter",
+        "exit"
+      ],
+      "writes": [
+        {
+          "address": "0x200feff4",
+          "size": 4,
+          "value": 305397760
+        },
+        {
+          "address": "0x200feff8",
+          "size": 4,
+          "value": 305397761
+        },
+        {
+          "address": "0x200feffc",
+          "size": 4,
+          "value": 1048577
+        },
+        {
+          "address": "0x200feff0",
+          "size": 1,
+          "value": 0
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 537399296
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471879
+        },
+        {
+          "address": "0x200fefc8",
+          "size": 4,
+          "value": 6
+        },
+        {
+          "address": "0x200fefcc",
+          "size": 4,
+          "value": 537915376
+        },
+        {
+          "address": "0x200fefd0",
+          "size": 4,
+          "value": 537395200
+        },
+        {
+          "address": "0x200fefd4",
+          "size": 4,
+          "value": 4979189
+        },
+        {
+          "address": "0x20072cd8",
+          "size": 4,
+          "value": 537403456
+        },
+        {
+          "address": "0x200feff0",
+          "size": 1,
+          "value": 0
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 305397763
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471887
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 537399296
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471879
+        },
+        {
+          "address": "0x200fefc8",
+          "size": 4,
+          "value": 6
+        },
+        {
+          "address": "0x200fefcc",
+          "size": 4,
+          "value": 537915376
+        },
+        {
+          "address": "0x200fefd0",
+          "size": 4,
+          "value": 537395200
+        },
+        {
+          "address": "0x200fefd4",
+          "size": 4,
+          "value": 4979189
+        },
+        {
+          "address": "0x20072cd8",
+          "size": 4,
+          "value": 537403520
+        },
+        {
+          "address": "0x200feff0",
+          "size": 1,
+          "value": 1
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 305397763
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471887
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 537399296
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471879
+        },
+        {
+          "address": "0x200fefc8",
+          "size": 4,
+          "value": 6
+        },
+        {
+          "address": "0x200fefcc",
+          "size": 4,
+          "value": 537915376
+        },
+        {
+          "address": "0x200fefd0",
+          "size": 4,
+          "value": 537395200
+        },
+        {
+          "address": "0x200fefd4",
+          "size": 4,
+          "value": 4979189
+        },
+        {
+          "address": "0x20072cd8",
+          "size": 4,
+          "value": 0
+        },
+        {
+          "address": "0x20072cdc",
+          "size": 4,
+          "value": 0
+        },
+        {
+          "address": "0x200feff0",
+          "size": 1,
+          "value": 2
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 305397763
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471887
+        },
+        {
+          "address": "0x200fefd8",
+          "size": 4,
+          "value": 537399296
+        },
+        {
+          "address": "0x200fefdc",
+          "size": 4,
+          "value": 5471879
+        },
+        {
+          "address": "0x200fefc8",
+          "size": 4,
+          "value": 6
+        },
+        {
+          "address": "0x200fefcc",
+          "size": 4,
+          "value": 537915376
+        },
+        {
+          "address": "0x200fefd0",
+          "size": 4,
+          "value": 537395200
+        },
+        {
+          "address": "0x200fefd4",
+          "size": 4,
+          "value": 4979189
+        }
+      ],
+      "node_reads": [
+        {
+          "address": "0x20082000",
+          "size": 4
+        },
+        {
+          "address": "0x20082004",
+          "size": 1
+        },
+        {
+          "address": "0x20082040",
+          "size": 4
+        },
+        {
+          "address": "0x20082044",
+          "size": 1
+        },
+        {
+          "address": "0x20082080",
+          "size": 4
+        },
+        {
+          "address": "0x20082084",
+          "size": 1
+        }
+      ],
+      "inputs_unchanged": true,
+      "ABI_preserved": true
+    },
+    {
+      "case": "closed-connection",
+      "token": 7,
+      "status": 6,
+      "connection": 0,
+      "node_tokens": [
+        6,
+        7
+      ],
+      "events": [],
+      "source_events": [],
+      "queue_after": [
+        "0x20082000",
+        "0x20082040"
+      ],
+      "remaining": 2,
+      "provider_trace": [],
+      "critical_section_events": [],
+      "writes": [
+        {
+          "address": "0x200feff4",
+          "size": 4,
+          "value": 305397760
+        },
+        {
+          "address": "0x200feff8",
+          "size": 4,
+          "value": 305397761
+        },
+        {
+          "address": "0x200feffc",
+          "size": 4,
+          "value": 1048577
+        }
+      ],
+      "node_reads": [],
+      "inputs_unchanged": true,
+      "ABI_preserved": true
+    }
+  ],
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "executed_extents": [
+    {
+      "start": "0x537d0c",
+      "end": "0x537e9e",
+      "sha256": "c6c182f8937a91efc42995289820d0589b5ae839960cde0d83aec3f40ba0dbba"
+    },
+    {
+      "start": "0x4bf9ec",
+      "end": "0x4bfa00",
+      "sha256": "a0a7fa1b14bb01ca88fa84046451d92d37a5df0e01effffeb5c3cbe4c87a152d"
+    },
+    {
+      "start": "0x4bf9b0",
+      "end": "0x4bf9ba",
+      "sha256": "52a3c4e96bd27c58ae08a64f5ecf63cd67877de12306fbeb9245865fe9e2fead"
+    },
+    {
+      "start": "0x538c4a",
+      "end": "0x538c6e",
+      "sha256": "b89add9a6f39622dc9277b91669b4978b136cf95d4c09bff5a8f65d02c3a7080"
+    }
+  ],
+  "queue_literal_address": "0x537ee8",
+  "queue_address": "0x20072cd8",
+  "literal_sha256": "c71a8d243701f3bf010400a171e2b5e90f4e66a24814961a6443356a8855bd4a",
+  "source_body_sha256": "eb27e41de7bb17aafd964915cec9a8aefed2c92a2f576686703266bf61892735",
+  "scope": "original handler/dequeue/queue-dequeue/message-free; lookup, logging gates, critical section, buffer-free and state-machine mocked"
+}

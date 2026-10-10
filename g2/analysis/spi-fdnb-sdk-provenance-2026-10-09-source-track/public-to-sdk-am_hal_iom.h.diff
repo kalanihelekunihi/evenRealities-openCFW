@@ -1,0 +1,86 @@
+--- public-ef488e3/am_hal_iom.h
++++ sdk5.2/am_hal_iom.h
+@@ -12,7 +12,7 @@
+ 
+ //*****************************************************************************
+ //
+-// Copyright (c) 2025, Ambiq Micro, Inc.
++// Copyright (c) 2026, Ambiq Micro, Inc.
+ // All rights reserved.
+ //
+ // Redistribution and use in source and binary forms, with or without
+@@ -28,6 +28,9 @@
+ // 3. Neither the name of the copyright holder nor the names of its
+ // contributors may be used to endorse or promote products derived from this
+ // software without specific prior written permission.
++//
++// Third party software included in this distribution is subject to the
++// additional license terms as defined in the /docs/licenses directory.
+ //
+ // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+@@ -41,7 +44,7 @@
+ // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ // POSSIBILITY OF SUCH DAMAGE.
+ //
+-// This is part of revision release_sdk5p1p0-366b80e084 of the AmbiqSuite Development Package.
++// This is part of revision release_sdk5p2p0-66487dd10 of the AmbiqSuite Development Package.
+ //
+ //*****************************************************************************
+ 
+@@ -181,6 +184,16 @@
+   AM_HAL_IOM_RX,
+   AM_HAL_IOM_FULLDUPLEX,
+ } am_hal_iom_dir_e;
++
++//
++//! Hybrid non-blocking full-duplex DMA mode.
++//! Only one DMA direction can be active at a time.
++//
++typedef enum
++{
++  AM_HAL_IOM_FDNB_RX_DMA_TX_IRQ = 0,
++  AM_HAL_IOM_FDNB_TX_DMA_RX_IRQ,
++} am_hal_iom_fdnb_mode_e;
+ 
+ //
+ //! Enumerate the SPI modes.  Note that these are arranged per the ordering of
+@@ -378,6 +391,10 @@
+     //! DMA: Priority 0 = Low (best effort); 1 = High (service immediately)
+     //
+     uint8_t  ui8Priority;
++
++    //! Hybrid non-blocking full-duplex DMA direction.
++    //! Default 0 selects RX DMA / TX IRQ behavior.
++    am_hal_iom_fdnb_mode_e eFdnbMode;
+ 
+     //! Command Queue Advanced control on gating conditions for transaction to start
+     //
+@@ -906,6 +923,22 @@
+                                                    am_hal_iom_transfer_t *psTransaction);
+ //*****************************************************************************
+ //
++//! @brief Perform a non-blocking Full Duplex SPI transaction using TX DMA and RX FIFO+IRQ.
++//!
++//! @param pHandle       - handle for the interface.
++//! @param psTransaction - pointer to the uniform transaction control structure.
++//! @param pfnCallback   - callback function invoked when transfer is complete.
++//! @param pCallbackCtxt - callback context passed to pfnCallback.
++//!
++//! @return HAL status of the operation.
++//
++//*****************************************************************************
++extern uint32_t am_hal_iom_spi_nonblocking_fullduplex(void *pHandle,
++                                                       am_hal_iom_transfer_t *psTransaction,
++                                                       am_hal_iom_callback_t pfnCallback,
++                                                       void *pCallbackCtxt);
++//*****************************************************************************
++//
+ //! @brief IOM High Priority transfer function
+ //!
+ //! @param pHandle       - the handle for the IOM instance
+@@ -940,4 +973,3 @@
+ //! @}
+ //
+ //*****************************************************************************
+-

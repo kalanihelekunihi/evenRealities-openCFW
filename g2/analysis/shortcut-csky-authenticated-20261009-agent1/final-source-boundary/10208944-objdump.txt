@@ -1,0 +1,102 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10208944 <.data+0x5940>:
+10208944:	d014      	push      	r15
+10208946:	6610      	lrw      	r3, 0x2002e744	// 0x1020895c
+10208948:	7693      	ld.w      	r3, (r3, 0x58)
+1020894a:	423b      	cmpnei      	r3, 2
+1020894c:	040c      	bf      	0x10208954	// 0x10208954
+1020894e:	0510      	lrw      	r0, 0x1020b30d	// 0x10208960
+10208950:	6af1ffe3 	bsr      	0x10206c24	// 0x10206c24
+10208954:	120000e0 	bsr      	0x10208978	// 0x10208978
+10208958:	9014      	pop      	r15
+1020895a:	0000      	bkpt
+1020895c:	022044e7 	andi      	r26, r4, 2
+10208960:	0db3      	st.w      	r0, (r3, 0x34)
+10208962:	2010      	lrw      	r1, 0x1020b30d	// 0x10208960
+10208964:	d014      	push      	r15
+10208966:	a432      	movi      	r2, 164
+10208968:	0031      	movi      	r1, 0
+1020896a:	0310      	lrw      	r0, 0x2002e7a8	// 0x10208974
+1020896c:	300800e0 	bsr      	0x102099cc	// 0x102099cc
+10208970:	9014      	pop      	r15
+10208972:	0000      	bkpt
+10208974:	0220a8e7 	andi      	r29, r8, 2
+10208978:	d014      	push      	r15
+1020897a:	f5ffffe3 	bsr      	0x10208964	// 0x10208964
+1020897e:	9014      	pop      	r15
+10208980:	d014      	push      	r15
+10208982:	22008cea 	lrw      	r12, 0x2002e7a8	// 0x10208a08
+10208986:	32480cc4 	lsli      	r18, r12, 0
+1020898a:	0d8812d0 	ldbi.w      	r13, (r18)
+1020898e:	000013ea 	movi      	r19, 0
+10208992:	4004b3c5 	cmplt      	r19, r13
+10208996:	0808      	bt      	0x102089a6	// 0x102089a6
+10208998:	07000deb 	cmphsi      	r13, 8
+1020899c:	1f0c      	bf      	0x102089da	// 0x102089da
+1020899e:	1c10      	lrw      	r0, 0x1020b34f	// 0x10208a0c
+102089a0:	42f1ffe3 	bsr      	0x10206c24	// 0x10206c24
+102089a4:	1504      	br      	0x102089ce	// 0x102089ce
+102089a6:	012092da 	ld.w      	r20, (r18, 0x4)
+102089aa:	800434c4 	cmpne      	r20, r1
+102089ae:	1108      	bt      	0x102089d0	// 0x102089d0
+102089b0:	002092da 	ld.w      	r20, (r18, 0x0)
+102089b4:	800414c4 	cmpne      	r20, r0
+102089b8:	0c08      	bt      	0x102089d0	// 0x102089d0
+102089ba:	1433      	movi      	r3, 20
+102089bc:	4c8473f8 	mula.32.l      	r12, r19, r3
+102089c0:	31200cf4 	flds      	fr1, (r12, 0xc)
+102089c4:	a00101f4 	fcmplts      	fr1, fr0
+102089c8:	030c      	bf      	0x102089ce	// 0x102089ce
+102089ca:	30240cf4 	fsts      	fr0, (r12, 0xc)
+102089ce:	9014      	pop      	r15
+102089d0:	000073e6 	addi      	r19, r19, 1
+102089d4:	130052e6 	addi      	r18, r18, 20
+102089d8:	dd07      	br      	0x10208992	// 0x10208992
+102089da:	140012ea 	movi      	r18, 20
+102089de:	33480cc4 	lsli      	r19, r12, 0
+102089e2:	53844dfa 	mula.32.l      	r19, r13, r18
+102089e6:	0000ade5 	addi      	r13, r13, 1
+102089ea:	32844dc6 	mult      	r18, r13, r18
+102089ee:	012013dc 	st.w      	r0, (r19, 0x4)
+102089f2:	022033dc 	st.w      	r1, (r19, 0x8)
+102089f6:	302413f4 	fsts      	fr0, (r19, 0xc)
+102089fa:	042053dc 	st.w      	r2, (r19, 0x10)
+102089fe:	23084cd6 	str.w      	r3, (r12, r18 << 0)
+10208a02:	0020acdd 	st.w      	r13, (r12, 0x0)
+10208a06:	e407      	br      	0x102089ce	// 0x102089ce
+10208a08:	0220a8e7 	andi      	r29, r8, 2
+10208a0c:	4fb3      	st.w      	r2, (r3, 0x3c)
+10208a0e:	2010      	lrw      	r1, 0x1020b34f	// 0x10208a0c
+10208a10:	d814      	push      	r4-r11, r15
+10208a12:	2414      	subi      	r14, r14, 16
+10208a14:	08240ef4 	fsts      	fr8, (r14, 0x0)
+10208a18:	19240ef4 	fsts      	fr9, (r14, 0x4)
+10208a1c:	2a240ef4 	fsts      	fr10, (r14, 0x8)
+10208a20:	3b240ef4 	fsts      	fr11, (r14, 0xc)
+10208a24:	2214      	subi      	r14, r14, 8
+10208a26:	c912      	lrw      	r6, 0x2002e7a8	// 0x10208b48
+10208a28:	c36d      	mov      	r7, r0
+10208a2a:	8096      	ld.w      	r4, (r6, 0x0)
+10208a2c:	3a0004e9 	bez      	r4, 0x10208aa0	// 0x10208aa0
+10208a30:	0033      	movi      	r3, 0
+10208a32:	681b03f4 	fmtvrl      	fr8, r3
+10208a36:	204123ea 	movih      	r3, 16672
+10208a3a:	ae5e      	addi      	r5, r6, 4
+10208a3c:	6a1b03f4 	fmtvrl      	fr10, r3
+10208a40:	003f23ea 	movih      	r3, 16128
+10208a44:	000008ea 	movi      	r8, 0
+10208a48:	176d      	mov      	r4, r5
+10208a4a:	691b03f4 	fmtvrl      	fr9, r3
+10208a4e:	400089ea 	lrw      	r9, 0x3dcccccd	// 0x10208b4c
+10208a52:	40008aea 	lrw      	r10, 0x1020b37e	// 0x10208b50
+10208a56:	6096      	ld.w      	r3, (r6, 0x0)
+10208a58:	e164      	cmplt      	r8, r3
+10208a5a:	2f08      	bt      	0x10208ab8	// 0x10208ab8
+10208a5c:	a094      	ld.w      	r5, (r4, 0x0)
+10208a5e:	3fedf0e3 	bsr      	0x100264dc	// 0x100264dc
+10208a62:	700000e9 	bez      	r0, 0x10208b42	// 0x10208b42

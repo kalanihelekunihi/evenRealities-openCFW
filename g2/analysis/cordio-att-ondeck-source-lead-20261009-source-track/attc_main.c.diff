@@ -1,0 +1,86 @@
+--- public-r20.05c/attc_main.c
++++ sdk5.2/attc_main.c
+@@ -52,8 +52,6 @@
+ static void attcCtrlCback(wsfMsgHdr_t *pMsg);
+ static void attcConnCback(attCcb_t *pCcb, dmEvt_t *pDmEvt);
+ 
+-extern void attcMsgCback(attcApiMsg_t *pMsg);
+-extern void attcWriteCmdCallback(dmConnId_t connId, attcCcb_t *pCcb, uint8_t status);
+ 
+ static void attcSendSimpleReq(attcCcb_t *pCcb);
+ static void attcSendContinuingReq(attcCcb_t *pCcb);
+@@ -301,6 +299,11 @@
+ /*************************************************************************************************/
+ static void attcSendMtuReq(attcCcb_t *pCcb)
+ {
++  // The Bluetooth Core Specification (Version 5.1 | Vol 3, Part F, Chapter 3.4.2.1 Exchange MTU request)
++  // mentions the MTU exchange request shall only be sent once during a connection by the client.
++  // The bit of ATT_CCB_STATUS_MTU_SENT will set if the MTU exchange request had been executed during the connection,
++  // it will only be cleared when the current connection closes.
++
+   /* if MTU already exchanged */
+   if (pCcb->pMainCcb->sccb[pCcb->outReq.slot].control & ATT_CCB_STATUS_MTU_SENT)
+   {
+@@ -494,6 +497,9 @@
+   {
+     return;
+   }
++
++  /* check the validity of data length */
++  ATT_CHECK_DATA_LENGTH(len, ATT_HDR_LEN);
+ 
+   /* parse opcode */
+   opcode = *(pPacket + L2C_PAYLOAD_START);
+@@ -591,9 +597,9 @@
+     }
+ 
+     /* free any req on deck */
+-    if (attcCb.onDeck[pCcb->connId].hdr.event != ATTC_MSG_API_NONE)
+-    {
+-      attcReqClear(pCcb->connId, &attcCb.onDeck[pCcb->connId], status);
++    if (attcCb.onDeck[pCcb->connId-1].hdr.event != ATTC_MSG_API_NONE)
++    {
++      attcReqClear(pCcb->connId, &attcCb.onDeck[pCcb->connId-1], status);
+     }
+ 
+     for (i = 0; i < ATT_BEARER_MAX; i++)
+@@ -637,7 +643,7 @@
+ {
+   attcCcb_t   *pCcb;
+ 
+-  ATT_TRACE_INFO2("attcMsgCback: msg: %#x slot: %#x", pMsg->hdr.event, pMsg->slot);
++  ATT_TRACE_INFO2("attcMsgCback: msg: %x slot: %x", pMsg->hdr.event, pMsg->slot);
+ 
+   /* if signed data event */
+   if ((pMsg->hdr.event >= ATTC_MSG_API_SIGNED_WRITE_CMD) && (pMsg->hdr.event <= ATTC_MSG_CMAC_CMPL))
+@@ -672,7 +678,7 @@
+     /* verify no API request already waiting on deck, in progress, or no pending write command
+        already for this handle */
+     if (((pCcb->slot == ATT_BEARER_SLOT_ID) &&
+-         (attcCb.onDeck[pCcb->connId].hdr.event != ATTC_MSG_API_NONE)) ||
++         (attcCb.onDeck[pCcb->connId-1].hdr.event != ATTC_MSG_API_NONE)) ||
+         (pCcb->outReq.hdr.event > ATTC_MSG_API_MTU)   ||
+         ((pMsg->hdr.event == ATTC_MSG_API_WRITE_CMD)  &&
+          attcPendWriteCmd(pCcb, pMsg->handle)))
+@@ -686,7 +692,7 @@
+     if ((pCcb->slot == ATT_BEARER_SLOT_ID) && (pCcb->outReq.hdr.event == ATTC_MSG_API_MTU))
+     {
+       /* put request "on deck" for processing later */
+-      attcCb.onDeck[pCcb->connId] = *pMsg;
++      attcCb.onDeck[pCcb->connId-1] = *pMsg;
+     }
+     /* otherwise ready to send; set up request */
+     else
+@@ -706,9 +712,9 @@
+     }
+     /* else free any req on deck */
+     else if ((pCcb->slot == ATT_BEARER_SLOT_ID) &
+-             (attcCb.onDeck[pCcb->connId].hdr.event != ATTC_MSG_API_NONE))
+-    {
+-      attcReqClear(pCcb->connId, &attcCb.onDeck[pCcb->connId], ATT_ERR_CANCELLED);
++             (attcCb.onDeck[pCcb->connId-1].hdr.event != ATTC_MSG_API_NONE))
++    {
++      attcReqClear(pCcb->connId, &attcCb.onDeck[pCcb->connId-1], ATT_ERR_CANCELLED);
+     }
+   }
+   /* else if timeout */

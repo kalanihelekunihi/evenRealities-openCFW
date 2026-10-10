@@ -1,0 +1,1087 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/dw_uart.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.dw_uart_set_fcr_rx_thres:
+
+00000000 <dw_uart_set_fcr_rx_thres>:
+   0:	9041      	ld.w      	r2, (r0, 0x4)
+   2:	9262      	ld.w      	r3, (r2, 0x8)
+   4:	3b86      	bclri      	r3, 6
+   6:	3b87      	bclri      	r3, 7
+   8:	6c4c      	or      	r1, r3
+   a:	b222      	st.w      	r1, (r2, 0x8)
+   c:	783c      	jmp      	r15
+
+Disassembly of section .text.dw_uart_set_fcr_tx_thres:
+
+00000000 <dw_uart_set_fcr_tx_thres>:
+   0:	9041      	ld.w      	r2, (r0, 0x4)
+   2:	9262      	ld.w      	r3, (r2, 0x8)
+   4:	3b84      	bclri      	r3, 4
+   6:	3b85      	bclri      	r3, 5
+   8:	6c4c      	or      	r1, r3
+   a:	b222      	st.w      	r1, (r2, 0x8)
+   c:	783c      	jmp      	r15
+
+Disassembly of section .text.dw_uart_putc:
+
+00000000 <dw_uart_putc>:
+   0:	9041      	ld.w      	r2, (r0, 0x4)
+   2:	e4020013 	addi      	r0, r2, 20
+   6:	9060      	ld.w      	r3, (r0, 0x0)
+   8:	e4632020 	andi      	r3, r3, 32
+   c:	e903fffd 	bez      	r3, 0x6	// 6 <dw_uart_putc+0x6>
+  10:	b220      	st.w      	r1, (r2, 0x0)
+  12:	783c      	jmp      	r15
+
+Disassembly of section .text.dw_uart_getc:
+
+00000000 <dw_uart_getc>:
+   0:	9041      	ld.w      	r2, (r0, 0x4)
+   2:	e4220013 	addi      	r1, r2, 20
+   6:	9160      	ld.w      	r3, (r1, 0x0)
+   8:	e4632001 	andi      	r3, r3, 1
+   c:	e903fffd 	bez      	r3, 0x6	// 6 <dw_uart_getc+0x6>
+  10:	9200      	ld.w      	r0, (r2, 0x0)
+  12:	7400      	zextb      	r0, r0
+  14:	783c      	jmp      	r15
+
+Disassembly of section .text.dw_uart_isr:
+
+00000000 <dw_uart_isr>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	9161      	ld.w      	r3, (r1, 0x4)
+   4:	6d07      	mov      	r4, r1
+   6:	93a2      	ld.w      	r5, (r3, 0x8)
+   8:	e4452004 	andi      	r2, r5, 4
+   c:	e902000b 	bez      	r2, 0x22	// 22 <dw_uart_isr+0x22>
+  10:	d8232021 	ld.w      	r1, (r3, 0x84)
+  14:	9470      	ld.w      	r3, (r4, 0x40)
+  16:	3b41      	cmpnei      	r3, 1
+  18:	081b      	bt      	0x4e	// 4e <dw_uart_isr+0x4e>
+  1a:	9474      	ld.w      	r3, (r4, 0x50)
+  1c:	9455      	ld.w      	r2, (r4, 0x54)
+  1e:	9400      	ld.w      	r0, (r4, 0x0)
+  20:	7bcd      	jsr      	r3
+  22:	e4a52002 	andi      	r5, r5, 2
+  26:	e9050012 	bez      	r5, 0x4a	// 4a <dw_uart_isr+0x4a>
+  2a:	9461      	ld.w      	r3, (r4, 0x4)
+  2c:	d8432020 	ld.w      	r2, (r3, 0x80)
+  30:	d823203d 	ld.w      	r1, (r3, 0xf4)
+  34:	c60156e1 	zext      	r1, r1, 23, 16
+  38:	4124      	lsli      	r1, r1, 4
+  3a:	604a      	subu      	r1, r2
+  3c:	9451      	ld.w      	r2, (r4, 0x44)
+  3e:	3a41      	cmpnei      	r2, 1
+  40:	082a      	bt      	0x94	// 94 <dw_uart_isr+0x94>
+  42:	9472      	ld.w      	r3, (r4, 0x48)
+  44:	9453      	ld.w      	r2, (r4, 0x4c)
+  46:	9400      	ld.w      	r0, (r4, 0x0)
+  48:	7bcd      	jsr      	r3
+  4a:	3000      	movi      	r0, 0
+  4c:	1492      	pop      	r4-r5, r15
+  4e:	944b      	ld.w      	r2, (r4, 0x2c)
+  50:	e922ffe9 	bnez      	r2, 0x22	// 22 <dw_uart_isr+0x22>
+  54:	3b42      	cmpnei      	r3, 2
+  56:	0be6      	bt      	0x22	// 22 <dw_uart_isr+0x22>
+  58:	9479      	ld.w      	r3, (r4, 0x64)
+  5a:	9458      	ld.w      	r2, (r4, 0x60)
+  5c:	f861cd21 	min.u32      	r1, r1, r3
+  60:	6ccb      	mov      	r3, r2
+  62:	5b09      	subu      	r0, r3, r2
+  64:	6441      	cmplt      	r0, r1
+  66:	0812      	bt      	0x8a	// 8a <dw_uart_isr+0x8a>
+  68:	9478      	ld.w      	r3, (r4, 0x60)
+  6a:	60c4      	addu      	r3, r1
+  6c:	b478      	st.w      	r3, (r4, 0x60)
+  6e:	9479      	ld.w      	r3, (r4, 0x64)
+  70:	5b25      	subu      	r1, r3, r1
+  72:	b439      	st.w      	r1, (r4, 0x64)
+  74:	e921ffd7 	bnez      	r1, 0x22	// 22 <dw_uart_isr+0x22>
+  78:	9441      	ld.w      	r2, (r4, 0x4)
+  7a:	9437      	ld.w      	r1, (r4, 0x5c)
+  7c:	9261      	ld.w      	r3, (r2, 0x4)
+  7e:	3b80      	bclri      	r3, 0
+  80:	b261      	st.w      	r3, (r2, 0x4)
+  82:	9400      	ld.w      	r0, (r4, 0x0)
+  84:	9476      	ld.w      	r3, (r4, 0x58)
+  86:	7bcd      	jsr      	r3
+  88:	07cd      	br      	0x22	// 22 <dw_uart_isr+0x22>
+  8a:	9401      	ld.w      	r0, (r4, 0x4)
+  8c:	9000      	ld.w      	r0, (r0, 0x0)
+  8e:	d4038000 	stbi.b      	r0, (r3)
+  92:	07e8      	br      	0x62	// 62 <dw_uart_isr+0x62>
+  94:	940b      	ld.w      	r0, (r4, 0x2c)
+  96:	e920ffda 	bnez      	r0, 0x4a	// 4a <dw_uart_isr+0x4a>
+  9a:	3a42      	cmpnei      	r2, 2
+  9c:	0bd7      	bt      	0x4a	// 4a <dw_uart_isr+0x4a>
+  9e:	945e      	ld.w      	r2, (r4, 0x78)
+  a0:	f841cd21 	min.u32      	r1, r1, r2
+  a4:	945d      	ld.w      	r2, (r4, 0x74)
+  a6:	6c0b      	mov      	r0, r2
+  a8:	c440008c 	subu      	r12, r0, r2
+  ac:	6471      	cmplt      	r12, r1
+  ae:	0817      	bt      	0xdc	// dc <dw_uart_isr+0xdc>
+  b0:	6084      	addu      	r2, r1
+  b2:	b45d      	st.w      	r2, (r4, 0x74)
+  b4:	945e      	ld.w      	r2, (r4, 0x78)
+  b6:	5a25      	subu      	r1, r2, r1
+  b8:	b43e      	st.w      	r1, (r4, 0x78)
+  ba:	e921ffc8 	bnez      	r1, 0x4a	// 4a <dw_uart_isr+0x4a>
+  be:	e4230013 	addi      	r1, r3, 20
+  c2:	9140      	ld.w      	r2, (r1, 0x0)
+  c4:	e4422040 	andi      	r2, r2, 64
+  c8:	e902fffd 	bez      	r2, 0xc2	// c2 <dw_uart_isr+0xc2>
+  cc:	9341      	ld.w      	r2, (r3, 0x4)
+  ce:	3a81      	bclri      	r2, 1
+  d0:	b341      	st.w      	r2, (r3, 0x4)
+  d2:	943c      	ld.w      	r1, (r4, 0x70)
+  d4:	947b      	ld.w      	r3, (r4, 0x6c)
+  d6:	9400      	ld.w      	r0, (r4, 0x0)
+  d8:	7bcd      	jsr      	r3
+  da:	07b8      	br      	0x4a	// 4a <dw_uart_isr+0x4a>
+  dc:	d000800c 	ldbi.b      	r12, (r0)
+  e0:	dd832000 	st.w      	r12, (r3, 0x0)
+  e4:	07e2      	br      	0xa8	// a8 <dw_uart_isr+0xa8>
+
+Disassembly of section .text.dw_uart_get_fifo_depth:
+
+00000000 <dw_uart_get_fifo_depth>:
+   0:	9061      	ld.w      	r3, (r0, 0x4)
+   2:	d863203d 	ld.w      	r3, (r3, 0xf4)
+   6:	c60356e3 	zext      	r3, r3, 23, 16
+   a:	3b48      	cmpnei      	r3, 8
+   c:	0c22      	bf      	0x50	// 50 <dw_uart_get_fifo_depth+0x50>
+   e:	3b28      	cmplti      	r3, 9
+  10:	0c09      	bf      	0x22	// 22 <dw_uart_get_fifo_depth+0x22>
+  12:	3b42      	cmpnei      	r3, 2
+  14:	0c1a      	bf      	0x48	// 48 <dw_uart_get_fifo_depth+0x48>
+  16:	3b44      	cmpnei      	r3, 4
+  18:	0c1a      	bf      	0x4c	// 4c <dw_uart_get_fifo_depth+0x4c>
+  1a:	3b41      	cmpnei      	r3, 1
+  1c:	080b      	bt      	0x32	// 32 <dw_uart_get_fifo_depth+0x32>
+  1e:	3010      	movi      	r0, 16
+  20:	783c      	jmp      	r15
+  22:	eb430020 	cmpnei      	r3, 32
+  26:	0c1a      	bf      	0x5a	// 5a <dw_uart_get_fifo_depth+0x5a>
+  28:	eb230020 	cmplti      	r3, 33
+  2c:	0c05      	bf      	0x36	// 36 <dw_uart_get_fifo_depth+0x36>
+  2e:	3b50      	cmpnei      	r3, 16
+  30:	0c12      	bf      	0x54	// 54 <dw_uart_get_fifo_depth+0x54>
+  32:	3000      	movi      	r0, 0
+  34:	07f6      	br      	0x20	// 20 <dw_uart_get_fifo_depth+0x20>
+  36:	eb430040 	cmpnei      	r3, 64
+  3a:	0c13      	bf      	0x60	// 60 <dw_uart_get_fifo_depth+0x60>
+  3c:	eb430080 	cmpnei      	r3, 128
+  40:	0bf9      	bt      	0x32	// 32 <dw_uart_get_fifo_depth+0x32>
+  42:	3080      	movi      	r0, 128
+  44:	4004      	lsli      	r0, r0, 4
+  46:	07ed      	br      	0x20	// 20 <dw_uart_get_fifo_depth+0x20>
+  48:	3020      	movi      	r0, 32
+  4a:	07eb      	br      	0x20	// 20 <dw_uart_get_fifo_depth+0x20>
+  4c:	3040      	movi      	r0, 64
+  4e:	07e9      	br      	0x20	// 20 <dw_uart_get_fifo_depth+0x20>
+  50:	3080      	movi      	r0, 128
+  52:	07e7      	br      	0x20	// 20 <dw_uart_get_fifo_depth+0x20>
+  54:	3080      	movi      	r0, 128
+  56:	4001      	lsli      	r0, r0, 1
+  58:	07e4      	br      	0x20	// 20 <dw_uart_get_fifo_depth+0x20>
+  5a:	3080      	movi      	r0, 128
+  5c:	4002      	lsli      	r0, r0, 2
+  5e:	07e1      	br      	0x20	// 20 <dw_uart_get_fifo_depth+0x20>
+  60:	3080      	movi      	r0, 128
+  62:	4003      	lsli      	r0, r0, 3
+  64:	07de      	br      	0x20	// 20 <dw_uart_get_fifo_depth+0x20>
+
+Disassembly of section .text.dw_uart_init:
+
+00000000 <dw_uart_init>:
+   0:	ebe00038 	push      	r4-r11, r15, r16
+   4:	9067      	ld.w      	r3, (r0, 0x1c)
+   6:	6d03      	mov      	r4, r0
+   8:	e9230004 	bnez      	r3, 0x10	// 10 <dw_uart_init+0x10>
+   c:	3308      	movi      	r3, 8
+   e:	b067      	st.w      	r3, (r0, 0x1c)
+  10:	9468      	ld.w      	r3, (r4, 0x20)
+  12:	e9230004 	bnez      	r3, 0x1a	// 1a <dw_uart_init+0x1a>
+  16:	3301      	movi      	r3, 1
+  18:	b468      	st.w      	r3, (r4, 0x20)
+  1a:	94a1      	ld.w      	r5, (r4, 0x4)
+  1c:	ea100000 	movi      	r16, 0
+  20:	de052001 	st.w      	r16, (r5, 0x4)
+  24:	9469      	ld.w      	r3, (r4, 0x24)
+  26:	3b40      	cmpnei      	r3, 0
+  28:	3203      	movi      	r2, 3
+  2a:	3322      	movi      	r3, 34
+  2c:	c4620c20 	incf      	r3, r2, 0
+  30:	b564      	st.w      	r3, (r5, 0x10)
+  32:	9469      	ld.w      	r3, (r4, 0x24)
+  34:	ea09006f 	movi      	r9, 111
+  38:	3b40      	cmpnei      	r3, 0
+  3a:	ea08007f 	movi      	r8, 127
+  3e:	6ce7      	mov      	r3, r9
+  40:	c4680c40 	inct      	r3, r8, 0
+  44:	b562      	st.w      	r3, (r5, 0x8)
+  46:	94e4      	ld.w      	r7, (r4, 0x10)
+  48:	e907003a 	bez      	r7, 0xbc	// bc <dw_uart_init+0xbc>
+  4c:	9463      	ld.w      	r3, (r4, 0xc)
+  4e:	47e4      	lsli      	r7, r7, 4
+  50:	c4e38026 	divu      	r6, r3, r7
+  54:	c4e68420 	mult      	r0, r6, r7
+  58:	5b01      	subu      	r0, r3, r0
+  5a:	b4c5      	st.w      	r6, (r4, 0x14)
+  5c:	e0000000 	bsr      	0x0	// 0 <__floatunsidf>
+			5c: R_CKCORE_PCREL_IMM26BY2	__floatunsidf
+  60:	6e83      	mov      	r10, r0
+  62:	6c1f      	mov      	r0, r7
+  64:	6ec7      	mov      	r11, r1
+  66:	e0000000 	bsr      	0x0	// 0 <__floatunsidf>
+			66: R_CKCORE_PCREL_IMM26BY2	__floatunsidf
+  6a:	6c83      	mov      	r2, r0
+  6c:	6cc7      	mov      	r3, r1
+  6e:	6c2b      	mov      	r0, r10
+  70:	6c6f      	mov      	r1, r11
+  72:	e0000000 	bsr      	0x0	// 0 <__divdf3>
+			72: R_CKCORE_PCREL_IMM26BY2	__divdf3
+  76:	3200      	movi      	r2, 0
+  78:	ea234030 	movih      	r3, 16432
+  7c:	e0000000 	bsr      	0x0	// 0 <__muldf3>
+			7c: R_CKCORE_PCREL_IMM26BY2	__muldf3
+  80:	3200      	movi      	r2, 0
+  82:	ea233fe0 	movih      	r3, 16352
+  86:	e0000000 	bsr      	0x0	// 0 <__adddf3>
+			86: R_CKCORE_PCREL_IMM26BY2	__adddf3
+  8a:	e0000000 	bsr      	0x0	// 0 <__fixunsdfsi>
+			8a: R_CKCORE_PCREL_IMM26BY2	__fixunsdfsi
+  8e:	b406      	st.w      	r0, (r4, 0x18)
+  90:	de052002 	st.w      	r16, (r5, 0x8)
+  94:	9563      	ld.w      	r3, (r5, 0xc)
+  96:	ec430080 	ori      	r2, r3, 128
+  9a:	b543      	st.w      	r2, (r5, 0xc)
+  9c:	e44620ff 	andi      	r2, r6, 255
+  a0:	c50655e6 	zext      	r6, r6, 15, 8
+  a4:	b540      	st.w      	r2, (r5, 0x0)
+  a6:	b5c1      	st.w      	r6, (r5, 0x4)
+  a8:	8458      	ld.b      	r2, (r4, 0x18)
+  aa:	dc452030 	st.w      	r2, (r5, 0xc0)
+  ae:	b563      	st.w      	r3, (r5, 0xc)
+  b0:	9469      	ld.w      	r3, (r4, 0x24)
+  b2:	3b40      	cmpnei      	r3, 0
+  b4:	c5090c20 	incf      	r8, r9, 0
+  b8:	dd052002 	st.w      	r8, (r5, 0x8)
+  bc:	3300      	movi      	r3, 0
+  be:	b562      	st.w      	r3, (r5, 0x8)
+  c0:	3200      	movi      	r2, 0
+  c2:	9563      	ld.w      	r3, (r5, 0xc)
+  c4:	2a1f      	subi      	r2, 32
+  c6:	68c8      	and      	r3, r2
+  c8:	ec630003 	ori      	r3, r3, 3
+  cc:	b563      	st.w      	r3, (r5, 0xc)
+  ce:	9469      	ld.w      	r3, (r4, 0x24)
+  d0:	3b40      	cmpnei      	r3, 0
+  d2:	326f      	movi      	r2, 111
+  d4:	337f      	movi      	r3, 127
+  d6:	c4620c20 	incf      	r3, r2, 0
+  da:	b562      	st.w      	r3, (r5, 0x8)
+  dc:	6c13      	mov      	r0, r4
+  de:	e0000000 	bsr      	0x0	// 0 <dw_uart_init>
+			de: R_CKCORE_PCREL_IMM26BY2	dw_uart_get_fifo_depth
+  e2:	9461      	ld.w      	r3, (r4, 0x4)
+  e4:	b40c      	st.w      	r0, (r4, 0x30)
+  e6:	d8432027 	ld.w      	r2, (r3, 0x9c)
+  ea:	3a41      	cmpnei      	r2, 1
+  ec:	d8632028 	ld.w      	r3, (r3, 0xa0)
+  f0:	0c20      	bf      	0x130	// 130 <dw_uart_init+0x130>
+  f2:	3a40      	cmpnei      	r2, 0
+  f4:	0c1b      	bf      	0x12a	// 12a <dw_uart_init+0x12a>
+  f6:	3a42      	cmpnei      	r2, 2
+  f8:	0c23      	bf      	0x13e	// 13e <dw_uart_init+0x13e>
+  fa:	3a43      	cmpnei      	r2, 3
+  fc:	0c25      	bf      	0x146	// 146 <dw_uart_init+0x146>
+  fe:	3b41      	cmpnei      	r3, 1
+ 100:	0c25      	bf      	0x14a	// 14a <dw_uart_init+0x14a>
+ 102:	3b40      	cmpnei      	r3, 0
+ 104:	0c24      	bf      	0x14c	// 14c <dw_uart_init+0x14c>
+ 106:	3b42      	cmpnei      	r3, 2
+ 108:	0c24      	bf      	0x150	// 150 <dw_uart_init+0x150>
+ 10a:	3b43      	cmpnei      	r3, 3
+ 10c:	0c28      	bf      	0x15c	// 15c <dw_uart_init+0x15c>
+ 10e:	3301      	movi      	r3, 1
+ 110:	b46b      	st.w      	r3, (r4, 0x2c)
+ 112:	3300      	movi      	r3, 0
+ 114:	2b00      	subi      	r3, 1
+ 116:	940f      	ld.w      	r0, (r4, 0x3c)
+ 118:	b47a      	st.w      	r3, (r4, 0x68)
+ 11a:	b47f      	st.w      	r3, (r4, 0x7c)
+ 11c:	6c93      	mov      	r2, r4
+ 11e:	1032      	lrw      	r1, 0x0	// 164 <dw_uart_init+0x164>
+ 120:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			120: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+ 124:	3000      	movi      	r0, 0
+ 126:	ebc00038 	pop      	r4-r11, r15, r16
+ 12a:	3201      	movi      	r2, 1
+ 12c:	b44e      	st.w      	r2, (r4, 0x38)
+ 12e:	07e8      	br      	0xfe	// fe <dw_uart_init+0xfe>
+ 130:	38df      	btsti      	r0, 31
+ 132:	c4400c20 	incf      	r2, r0, 0
+ 136:	c4400c43 	inct      	r2, r0, 3
+ 13a:	5242      	asri      	r2, r2, 2
+ 13c:	07f8      	br      	0x12c	// 12c <dw_uart_init+0x12c>
+ 13e:	485f      	lsri      	r2, r0, 31
+ 140:	6080      	addu      	r2, r0
+ 142:	5241      	asri      	r2, r2, 1
+ 144:	07f4      	br      	0x12c	// 12c <dw_uart_init+0x12c>
+ 146:	5847      	subi      	r2, r0, 2
+ 148:	07f2      	br      	0x12c	// 12c <dw_uart_init+0x12c>
+ 14a:	3302      	movi      	r3, 2
+ 14c:	b46d      	st.w      	r3, (r4, 0x34)
+ 14e:	07e0      	br      	0x10e	// 10e <dw_uart_init+0x10e>
+ 150:	38df      	btsti      	r0, 31
+ 152:	c4000c43 	inct      	r0, r0, 3
+ 156:	5002      	asri      	r0, r0, 2
+ 158:	b40d      	st.w      	r0, (r4, 0x34)
+ 15a:	07da      	br      	0x10e	// 10e <dw_uart_init+0x10e>
+ 15c:	487f      	lsri      	r3, r0, 31
+ 15e:	600c      	addu      	r0, r3
+ 160:	5001      	asri      	r0, r0, 1
+ 162:	07fb      	br      	0x158	// 158 <dw_uart_init+0x158>
+ 164:	00000000 	.long	0x00000000
+			164: R_CKCORE_ADDR32	.text.dw_uart_isr
+
+Disassembly of section .text.gx_uart_init:
+
+00000000 <gx_uart_init>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	3801      	cmphsi      	r0, 2
+   4:	6d03      	mov      	r4, r0
+   6:	6d47      	mov      	r5, r1
+   8:	082a      	bt      	0x5c	// 5c <gx_uart_init+0x5c>
+   a:	3840      	cmpnei      	r0, 0
+   c:	c4000500 	mvc      	r0
+  10:	3101      	movi      	r1, 1
+  12:	2010      	addi      	r0, 17
+  14:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  18:	3010      	movi      	r0, 16
+  1a:	e0000000 	bsr      	0x0	// 0 <gx_clock_get_module_frequence>
+			1a: R_CKCORE_PCREL_IMM26BY2	gx_clock_get_module_frequence
+  1e:	ea02f424 	movi      	r2, 62500
+  22:	c4824902 	rotli      	r2, r2, 4
+  26:	c4408023 	divu      	r3, r0, r2
+  2a:	7cc8      	mult      	r3, r2
+  2c:	586d      	subu      	r3, r0, r3
+  2e:	eb030064 	cmphsi      	r3, 101
+  32:	080b      	bt      	0x48	// 48 <gx_uart_init+0x48>
+  34:	600e      	subu      	r0, r3
+  36:	4487      	lsli      	r4, r4, 7
+  38:	106b      	lrw      	r3, 0x0	// 64 <gx_uart_init+0x64>
+  3a:	610c      	addu      	r4, r3
+  3c:	b403      	st.w      	r0, (r4, 0xc)
+  3e:	b4a4      	st.w      	r5, (r4, 0x10)
+  40:	6c13      	mov      	r0, r4
+  42:	e0000000 	bsr      	0x0	// 0 <gx_uart_init>
+			42: R_CKCORE_PCREL_IMM26BY2	dw_uart_init
+  46:	1492      	pop      	r4-r5, r15
+  48:	608e      	subu      	r2, r3
+  4a:	eb220064 	cmplti      	r2, 101
+  4e:	0ff4      	bf      	0x36	// 36 <gx_uart_init+0x36>
+  50:	ea02f424 	movi      	r2, 62500
+  54:	c4824902 	rotli      	r2, r2, 4
+  58:	6008      	addu      	r0, r2
+  5a:	07ed      	br      	0x34	// 34 <gx_uart_init+0x34>
+  5c:	3000      	movi      	r0, 0
+  5e:	2800      	subi      	r0, 1
+  60:	07f3      	br      	0x46	// 46 <gx_uart_init+0x46>
+  62:	0000      	.short	0x0000
+  64:	00000000 	.long	0x00000000
+			64: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_flow_on:
+
+00000000 <gx_uart_flow_on>:
+   0:	14d0      	push      	r15
+   2:	3801      	cmphsi      	r0, 2
+   4:	0809      	bt      	0x16	// 16 <gx_uart_flow_on+0x16>
+   6:	1066      	lrw      	r3, 0x0	// 1c <gx_uart_flow_on+0x1c>
+   8:	4007      	lsli      	r0, r0, 7
+   a:	600c      	addu      	r0, r3
+   c:	3301      	movi      	r3, 1
+   e:	b069      	st.w      	r3, (r0, 0x24)
+  10:	e0000000 	bsr      	0x0	// 0 <gx_uart_flow_on>
+			10: R_CKCORE_PCREL_IMM26BY2	dw_uart_init
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_uart_flow_on+0x14>
+  1c:	0000      	.short	0x0000
+			1c: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_flow_off:
+
+00000000 <gx_uart_flow_off>:
+   0:	14d0      	push      	r15
+   2:	3801      	cmphsi      	r0, 2
+   4:	0809      	bt      	0x16	// 16 <gx_uart_flow_off+0x16>
+   6:	1066      	lrw      	r3, 0x0	// 1c <gx_uart_flow_off+0x1c>
+   8:	4007      	lsli      	r0, r0, 7
+   a:	600c      	addu      	r0, r3
+   c:	3300      	movi      	r3, 0
+   e:	b069      	st.w      	r3, (r0, 0x24)
+  10:	e0000000 	bsr      	0x0	// 0 <gx_uart_flow_off>
+			10: R_CKCORE_PCREL_IMM26BY2	dw_uart_init
+  14:	1490      	pop      	r15
+  16:	3000      	movi      	r0, 0
+  18:	2800      	subi      	r0, 1
+  1a:	07fd      	br      	0x14	// 14 <gx_uart_flow_off+0x14>
+  1c:	0000      	.short	0x0000
+			1c: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_suspend:
+
+00000000 <gx_uart_suspend>:
+   0:	14d0      	push      	r15
+   2:	3801      	cmphsi      	r0, 2
+   4:	080a      	bt      	0x18	// 18 <gx_uart_suspend+0x18>
+   6:	3840      	cmpnei      	r0, 0
+   8:	c4000500 	mvc      	r0
+   c:	2010      	addi      	r0, 17
+   e:	3100      	movi      	r1, 0
+  10:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			10: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  14:	3000      	movi      	r0, 0
+  16:	1490      	pop      	r15
+  18:	3000      	movi      	r0, 0
+  1a:	2800      	subi      	r0, 1
+  1c:	07fd      	br      	0x16	// 16 <gx_uart_suspend+0x16>
+
+Disassembly of section .text.gx_uart_exit:
+
+00000000 <gx_uart_exit>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_uart_exit>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_uart_suspend
+   6:	1490      	pop      	r15
+
+Disassembly of section .text.gx_uart_resume:
+
+00000000 <gx_uart_resume>:
+   0:	14d0      	push      	r15
+   2:	3801      	cmphsi      	r0, 2
+   4:	080a      	bt      	0x18	// 18 <gx_uart_resume+0x18>
+   6:	3840      	cmpnei      	r0, 0
+   8:	c4000500 	mvc      	r0
+   c:	2010      	addi      	r0, 17
+   e:	3101      	movi      	r1, 1
+  10:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			10: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+  14:	3000      	movi      	r0, 0
+  16:	1490      	pop      	r15
+  18:	3000      	movi      	r0, 0
+  1a:	2800      	subi      	r0, 1
+  1c:	07fd      	br      	0x16	// 16 <gx_uart_resume+0x16>
+
+Disassembly of section .text.gx_uart_set_freq:
+
+00000000 <gx_uart_set_freq>:
+   0:	4007      	lsli      	r0, r0, 7
+   2:	1063      	lrw      	r3, 0x0	// c <gx_uart_set_freq+0xc>
+   4:	600c      	addu      	r0, r3
+   6:	b023      	st.w      	r1, (r0, 0xc)
+   8:	3000      	movi      	r0, 0
+   a:	783c      	jmp      	r15
+   c:	0000      	.short	0x0000
+			c: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_putc:
+
+00000000 <gx_uart_putc>:
+   0:	14d0      	push      	r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1063      	lrw      	r3, 0x0	// 10 <gx_uart_putc+0x10>
+   6:	7444      	zextb      	r1, r1
+   8:	600c      	addu      	r0, r3
+   a:	e0000000 	bsr      	0x0	// 0 <gx_uart_putc>
+			a: R_CKCORE_PCREL_IMM26BY2	dw_uart_putc
+   e:	1490      	pop      	r15
+  10:	00000000 	.long	0x00000000
+			10: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_set_send_fifo_threshold:
+
+00000000 <gx_uart_set_send_fifo_threshold>:
+   0:	14d1      	push      	r4, r15
+   2:	3941      	cmpnei      	r1, 1
+   4:	4007      	lsli      	r0, r0, 7
+   6:	106b      	lrw      	r3, 0x0	// 30 <gx_uart_set_send_fifo_threshold+0x30>
+   8:	600c      	addu      	r0, r3
+   a:	0c0a      	bf      	0x1e	// 1e <gx_uart_set_send_fifo_threshold+0x1e>
+   c:	3940      	cmpnei      	r1, 0
+   e:	0c09      	bf      	0x20	// 20 <gx_uart_set_send_fifo_threshold+0x20>
+  10:	3942      	cmpnei      	r1, 2
+  12:	0c0b      	bf      	0x28	// 28 <gx_uart_set_send_fifo_threshold+0x28>
+  14:	3943      	cmpnei      	r1, 3
+  16:	0c0b      	bf      	0x2c	// 2c <gx_uart_set_send_fifo_threshold+0x2c>
+  18:	3000      	movi      	r0, 0
+  1a:	2800      	subi      	r0, 1
+  1c:	0405      	br      	0x26	// 26 <gx_uart_set_send_fifo_threshold+0x26>
+  1e:	3110      	movi      	r1, 16
+  20:	e0000000 	bsr      	0x0	// 0 <gx_uart_set_send_fifo_threshold>
+			20: R_CKCORE_PCREL_IMM26BY2	dw_uart_set_fcr_tx_thres
+  24:	3000      	movi      	r0, 0
+  26:	1491      	pop      	r4, r15
+  28:	3120      	movi      	r1, 32
+  2a:	07fb      	br      	0x20	// 20 <gx_uart_set_send_fifo_threshold+0x20>
+  2c:	3130      	movi      	r1, 48
+  2e:	07f9      	br      	0x20	// 20 <gx_uart_set_send_fifo_threshold+0x20>
+  30:	00000000 	.long	0x00000000
+			30: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_set_recv_fifo_threshold:
+
+00000000 <gx_uart_set_recv_fifo_threshold>:
+   0:	14d1      	push      	r4, r15
+   2:	3941      	cmpnei      	r1, 1
+   4:	4007      	lsli      	r0, r0, 7
+   6:	106b      	lrw      	r3, 0x0	// 30 <gx_uart_set_recv_fifo_threshold+0x30>
+   8:	600c      	addu      	r0, r3
+   a:	0c0a      	bf      	0x1e	// 1e <gx_uart_set_recv_fifo_threshold+0x1e>
+   c:	3940      	cmpnei      	r1, 0
+   e:	0c09      	bf      	0x20	// 20 <gx_uart_set_recv_fifo_threshold+0x20>
+  10:	3942      	cmpnei      	r1, 2
+  12:	0c0b      	bf      	0x28	// 28 <gx_uart_set_recv_fifo_threshold+0x28>
+  14:	3943      	cmpnei      	r1, 3
+  16:	0c0b      	bf      	0x2c	// 2c <gx_uart_set_recv_fifo_threshold+0x2c>
+  18:	3000      	movi      	r0, 0
+  1a:	2800      	subi      	r0, 1
+  1c:	0405      	br      	0x26	// 26 <gx_uart_set_recv_fifo_threshold+0x26>
+  1e:	3140      	movi      	r1, 64
+  20:	e0000000 	bsr      	0x0	// 0 <gx_uart_set_recv_fifo_threshold>
+			20: R_CKCORE_PCREL_IMM26BY2	dw_uart_set_fcr_rx_thres
+  24:	3000      	movi      	r0, 0
+  26:	1491      	pop      	r4, r15
+  28:	3180      	movi      	r1, 128
+  2a:	07fb      	br      	0x20	// 20 <gx_uart_set_recv_fifo_threshold+0x20>
+  2c:	31c0      	movi      	r1, 192
+  2e:	07f9      	br      	0x20	// 20 <gx_uart_set_recv_fifo_threshold+0x20>
+  30:	00000000 	.long	0x00000000
+			30: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_flush_send_fifo:
+
+00000000 <gx_uart_flush_send_fifo>:
+   0:	4007      	lsli      	r0, r0, 7
+   2:	1066      	lrw      	r3, 0x0	// 18 <gx_uart_flush_send_fifo+0x18>
+   4:	600c      	addu      	r0, r3
+   6:	9041      	ld.w      	r2, (r0, 0x4)
+   8:	2213      	addi      	r2, 20
+   a:	9260      	ld.w      	r3, (r2, 0x0)
+   c:	e4632040 	andi      	r3, r3, 64
+  10:	e903fffd 	bez      	r3, 0xa	// a <gx_uart_flush_send_fifo+0xa>
+  14:	783c      	jmp      	r15
+  16:	0000      	.short	0x0000
+  18:	0000      	.short	0x0000
+			18: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_flush_recv_fifo:
+
+00000000 <gx_uart_flush_recv_fifo>:
+   0:	4007      	lsli      	r0, r0, 7
+   2:	1067      	lrw      	r3, 0x0	// 1c <gx_uart_flush_recv_fifo+0x1c>
+   4:	600c      	addu      	r0, r3
+   6:	3300      	movi      	r3, 0
+   8:	9041      	ld.w      	r2, (r0, 0x4)
+   a:	d8222021 	ld.w      	r1, (r2, 0x84)
+   e:	644e      	cmpne      	r3, r1
+  10:	0802      	bt      	0x14	// 14 <gx_uart_flush_recv_fifo+0x14>
+  12:	783c      	jmp      	r15
+  14:	9200      	ld.w      	r0, (r2, 0x0)
+  16:	2300      	addi      	r3, 1
+  18:	07fb      	br      	0xe	// e <gx_uart_flush_recv_fifo+0xe>
+  1a:	0000      	.short	0x0000
+  1c:	0000      	.short	0x0000
+			1c: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_getc:
+
+00000000 <gx_uart_getc>:
+   0:	14d0      	push      	r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1063      	lrw      	r3, 0x0	// 10 <gx_uart_getc+0x10>
+   6:	600c      	addu      	r0, r3
+   8:	e0000000 	bsr      	0x0	// 0 <gx_uart_getc>
+			8: R_CKCORE_PCREL_IMM26BY2	dw_uart_getc
+   c:	1490      	pop      	r15
+   e:	0000      	.short	0x0000
+  10:	00000000 	.long	0x00000000
+			10: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_compatible_putc:
+
+00000000 <gx_uart_compatible_putc>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	394a      	cmpnei      	r1, 10
+   4:	6d87      	mov      	r6, r1
+   6:	10a7      	lrw      	r5, 0x0	// 20 <gx_uart_compatible_putc+0x20>
+   8:	4087      	lsli      	r4, r0, 7
+   a:	0805      	bt      	0x14	// 14 <gx_uart_compatible_putc+0x14>
+   c:	310d      	movi      	r1, 13
+   e:	5d10      	addu      	r0, r5, r4
+  10:	e0000000 	bsr      	0x0	// 0 <gx_uart_compatible_putc>
+			10: R_CKCORE_PCREL_IMM26BY2	dw_uart_putc
+  14:	7458      	zextb      	r1, r6
+  16:	5d10      	addu      	r0, r5, r4
+  18:	e0000000 	bsr      	0x0	// 0 <gx_uart_compatible_putc>
+			18: R_CKCORE_PCREL_IMM26BY2	dw_uart_putc
+  1c:	1493      	pop      	r4-r6, r15
+  1e:	0000      	.short	0x0000
+  20:	0000      	.short	0x0000
+			20: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_try_getc:
+
+00000000 <gx_uart_try_getc>:
+   0:	4007      	lsli      	r0, r0, 7
+   2:	1068      	lrw      	r3, 0x0	// 20 <gx_uart_try_getc+0x20>
+   4:	600c      	addu      	r0, r3
+   6:	9041      	ld.w      	r2, (r0, 0x4)
+   8:	9265      	ld.w      	r3, (r2, 0x14)
+   a:	e4632001 	andi      	r3, r3, 1
+   e:	e9030006 	bez      	r3, 0x1a	// 1a <gx_uart_try_getc+0x1a>
+  12:	9260      	ld.w      	r3, (r2, 0x0)
+  14:	a160      	st.b      	r3, (r1, 0x0)
+  16:	3000      	movi      	r0, 0
+  18:	783c      	jmp      	r15
+  1a:	3000      	movi      	r0, 0
+  1c:	2800      	subi      	r0, 1
+  1e:	07fd      	br      	0x18	// 18 <gx_uart_try_getc+0x18>
+  20:	0000      	.short	0x0000
+			20: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_can_read:
+
+00000000 <gx_uart_can_read>:
+   0:	4007      	lsli      	r0, r0, 7
+   2:	1064      	lrw      	r3, 0x0	// 10 <gx_uart_can_read+0x10>
+   4:	600c      	addu      	r0, r3
+   6:	9061      	ld.w      	r3, (r0, 0x4)
+   8:	9305      	ld.w      	r0, (r3, 0x14)
+   a:	e4002001 	andi      	r0, r0, 1
+   e:	783c      	jmp      	r15
+  10:	00000000 	.long	0x00000000
+			10: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_empty_fifo:
+
+00000000 <gx_uart_empty_fifo>:
+   0:	14d1      	push      	r4, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1067      	lrw      	r3, 0x0	// 20 <gx_uart_empty_fifo+0x20>
+   6:	588c      	addu      	r4, r0, r3
+   8:	9441      	ld.w      	r2, (r4, 0x4)
+   a:	9265      	ld.w      	r3, (r2, 0x14)
+   c:	e4632001 	andi      	r3, r3, 1
+  10:	e9230004 	bnez      	r3, 0x18	// 18 <gx_uart_empty_fifo+0x18>
+  14:	9260      	ld.w      	r3, (r2, 0x0)
+  16:	1491      	pop      	r4, r15
+  18:	6c13      	mov      	r0, r4
+  1a:	e0000000 	bsr      	0x0	// 0 <gx_uart_empty_fifo>
+			1a: R_CKCORE_PCREL_IMM26BY2	dw_uart_getc
+  1e:	07f5      	br      	0x8	// 8 <gx_uart_empty_fifo+0x8>
+  20:	0000      	.short	0x0000
+			20: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_get_fifo_depth:
+
+00000000 <gx_uart_get_fifo_depth>:
+   0:	14d0      	push      	r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1063      	lrw      	r3, 0x0	// 10 <gx_uart_get_fifo_depth+0x10>
+   6:	600c      	addu      	r0, r3
+   8:	e0000000 	bsr      	0x0	// 0 <gx_uart_get_fifo_depth>
+			8: R_CKCORE_PCREL_IMM26BY2	dw_uart_get_fifo_depth
+   c:	1490      	pop      	r15
+   e:	0000      	.short	0x0000
+  10:	00000000 	.long	0x00000000
+			10: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_get_dlf_size:
+
+00000000 <gx_uart_get_dlf_size>:
+   0:	3004      	movi      	r0, 4
+   2:	783c      	jmp      	r15
+
+Disassembly of section .text.gx_uart_get_ip_version:
+
+00000000 <gx_uart_get_ip_version>:
+   0:	4007      	lsli      	r0, r0, 7
+   2:	1064      	lrw      	r3, 0x0	// 10 <gx_uart_get_ip_version+0x10>
+   4:	600c      	addu      	r0, r3
+   6:	9061      	ld.w      	r3, (r0, 0x4)
+   8:	d8032045 	ld.w      	r0, (r3, 0x114)
+   c:	783c      	jmp      	r15
+   e:	0000      	.short	0x0000
+  10:	00000000 	.long	0x00000000
+			10: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_read:
+
+00000000 <gx_uart_read>:
+   0:	14d4      	push      	r4-r7, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1069      	lrw      	r3, 0x0	// 28 <gx_uart_read+0x28>
+   6:	6dc7      	mov      	r7, r1
+   8:	6d8b      	mov      	r6, r2
+   a:	58ac      	addu      	r5, r0, r3
+   c:	6d07      	mov      	r4, r1
+   e:	5c7d      	subu      	r3, r4, r7
+  10:	658d      	cmplt      	r3, r6
+  12:	0805      	bt      	0x1c	// 1c <gx_uart_read+0x1c>
+  14:	3000      	movi      	r0, 0
+  16:	f806cca0 	max.s32      	r0, r6, r0
+  1a:	1494      	pop      	r4-r7, r15
+  1c:	6c17      	mov      	r0, r5
+  1e:	e0000000 	bsr      	0x0	// 0 <gx_uart_read>
+			1e: R_CKCORE_PCREL_IMM26BY2	dw_uart_getc
+  22:	d4048000 	stbi.b      	r0, (r4)
+  26:	07f4      	br      	0xe	// e <gx_uart_read+0xe>
+  28:	00000000 	.long	0x00000000
+			28: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_read_non_block:
+
+00000000 <gx_uart_read_non_block>:
+   0:	14d7      	push      	r4-r10, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	6e4f      	mov      	r9, r3
+   6:	1070      	lrw      	r3, 0x0	// 44 <gx_uart_read_non_block+0x44>
+   8:	6e07      	mov      	r8, r1
+   a:	6d8b      	mov      	r6, r2
+   c:	58ac      	addu      	r5, r0, r3
+   e:	e0000000 	bsr      	0x0	// 0 <gx_get_time_ms>
+			e: R_CKCORE_PCREL_IMM26BY2	gx_get_time_ms
+  12:	6dc3      	mov      	r7, r0
+  14:	3400      	movi      	r4, 0
+  16:	6591      	cmplt      	r4, r6
+  18:	0c14      	bf      	0x40	// 40 <gx_uart_read_non_block+0x40>
+  1a:	9561      	ld.w      	r3, (r5, 0x4)
+  1c:	9365      	ld.w      	r3, (r3, 0x14)
+  1e:	e4632001 	andi      	r3, r3, 1
+  22:	e903000a 	bez      	r3, 0x36	// 36 <gx_uart_read_non_block+0x36>
+  26:	c488002a 	addu      	r10, r8, r4
+  2a:	6c17      	mov      	r0, r5
+  2c:	e0000000 	bsr      	0x0	// 0 <gx_uart_read_non_block>
+			2c: R_CKCORE_PCREL_IMM26BY2	dw_uart_getc
+  30:	dc0a0000 	st.b      	r0, (r10, 0x0)
+  34:	2400      	addi      	r4, 1
+  36:	e0000000 	bsr      	0x0	// 0 <gx_get_time_ms>
+			36: R_CKCORE_PCREL_IMM26BY2	gx_get_time_ms
+  3a:	601e      	subu      	r0, r7
+  3c:	6424      	cmphs      	r9, r0
+  3e:	0bec      	bt      	0x16	// 16 <gx_uart_read_non_block+0x16>
+  40:	6c13      	mov      	r0, r4
+  42:	1497      	pop      	r4-r10, r15
+  44:	00000000 	.long	0x00000000
+			44: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_write:
+
+00000000 <gx_uart_write>:
+   0:	14d4      	push      	r4-r7, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1069      	lrw      	r3, 0x0	// 28 <gx_uart_write+0x28>
+   6:	6dc7      	mov      	r7, r1
+   8:	6d8b      	mov      	r6, r2
+   a:	58ac      	addu      	r5, r0, r3
+   c:	6d07      	mov      	r4, r1
+   e:	5c7d      	subu      	r3, r4, r7
+  10:	658d      	cmplt      	r3, r6
+  12:	0805      	bt      	0x1c	// 1c <gx_uart_write+0x1c>
+  14:	3000      	movi      	r0, 0
+  16:	f806cca0 	max.s32      	r0, r6, r0
+  1a:	1494      	pop      	r4-r7, r15
+  1c:	d0048001 	ldbi.b      	r1, (r4)
+  20:	6c17      	mov      	r0, r5
+  22:	e0000000 	bsr      	0x0	// 0 <gx_uart_write>
+			22: R_CKCORE_PCREL_IMM26BY2	dw_uart_putc
+  26:	07f4      	br      	0xe	// e <gx_uart_write+0xe>
+  28:	00000000 	.long	0x00000000
+			28: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_start_async_send:
+
+00000000 <gx_uart_start_async_send>:
+   0:	14d1      	push      	r4, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	106b      	lrw      	r3, 0x0	// 30 <gx_uart_start_async_send+0x30>
+   6:	588c      	addu      	r4, r0, r3
+   8:	e9010011 	bez      	r1, 0x2a	// 2a <gx_uart_start_async_send+0x2a>
+   c:	3301      	movi      	r3, 1
+   e:	b471      	st.w      	r3, (r4, 0x44)
+  10:	b432      	st.w      	r1, (r4, 0x48)
+  12:	b453      	st.w      	r2, (r4, 0x4c)
+  14:	e0000000 	bsr      	0x0	// 0 <gx_lock_irq_save>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_lock_irq_save
+  18:	9441      	ld.w      	r2, (r4, 0x4)
+  1a:	9261      	ld.w      	r3, (r2, 0x4)
+  1c:	ec630002 	ori      	r3, r3, 2
+  20:	b261      	st.w      	r3, (r2, 0x4)
+  22:	e0000000 	bsr      	0x0	// 0 <gx_unlock_irq_restore>
+			22: R_CKCORE_PCREL_IMM26BY2	gx_unlock_irq_restore
+  26:	3000      	movi      	r0, 0
+  28:	1491      	pop      	r4, r15
+  2a:	3000      	movi      	r0, 0
+  2c:	2800      	subi      	r0, 1
+  2e:	07fd      	br      	0x28	// 28 <gx_uart_start_async_send+0x28>
+  30:	00000000 	.long	0x00000000
+			30: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_stop_async_send:
+
+00000000 <gx_uart_stop_async_send>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1068      	lrw      	r3, 0x0	// 24 <gx_uart_stop_async_send+0x24>
+   6:	588c      	addu      	r4, r0, r3
+   8:	3500      	movi      	r5, 0
+   a:	b4b2      	st.w      	r5, (r4, 0x48)
+   c:	b4b3      	st.w      	r5, (r4, 0x4c)
+   e:	e0000000 	bsr      	0x0	// 0 <gx_lock_irq_save>
+			e: R_CKCORE_PCREL_IMM26BY2	gx_lock_irq_save
+  12:	9441      	ld.w      	r2, (r4, 0x4)
+  14:	9261      	ld.w      	r3, (r2, 0x4)
+  16:	3b81      	bclri      	r3, 1
+  18:	b261      	st.w      	r3, (r2, 0x4)
+  1a:	e0000000 	bsr      	0x0	// 0 <gx_unlock_irq_restore>
+			1a: R_CKCORE_PCREL_IMM26BY2	gx_unlock_irq_restore
+  1e:	6c17      	mov      	r0, r5
+  20:	1492      	pop      	r4-r5, r15
+  22:	0000      	.short	0x0000
+  24:	00000000 	.long	0x00000000
+			24: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_start_async_recv:
+
+00000000 <gx_uart_start_async_recv>:
+   0:	14d1      	push      	r4, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	106b      	lrw      	r3, 0x0	// 30 <gx_uart_start_async_recv+0x30>
+   6:	588c      	addu      	r4, r0, r3
+   8:	e9010011 	bez      	r1, 0x2a	// 2a <gx_uart_start_async_recv+0x2a>
+   c:	3301      	movi      	r3, 1
+   e:	b470      	st.w      	r3, (r4, 0x40)
+  10:	b434      	st.w      	r1, (r4, 0x50)
+  12:	b455      	st.w      	r2, (r4, 0x54)
+  14:	e0000000 	bsr      	0x0	// 0 <gx_lock_irq_save>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_lock_irq_save
+  18:	9441      	ld.w      	r2, (r4, 0x4)
+  1a:	9261      	ld.w      	r3, (r2, 0x4)
+  1c:	ec630001 	ori      	r3, r3, 1
+  20:	b261      	st.w      	r3, (r2, 0x4)
+  22:	e0000000 	bsr      	0x0	// 0 <gx_unlock_irq_restore>
+			22: R_CKCORE_PCREL_IMM26BY2	gx_unlock_irq_restore
+  26:	3000      	movi      	r0, 0
+  28:	1491      	pop      	r4, r15
+  2a:	3000      	movi      	r0, 0
+  2c:	2800      	subi      	r0, 1
+  2e:	07fd      	br      	0x28	// 28 <gx_uart_start_async_recv+0x28>
+  30:	00000000 	.long	0x00000000
+			30: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_stop_async_recv:
+
+00000000 <gx_uart_stop_async_recv>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1068      	lrw      	r3, 0x0	// 24 <gx_uart_stop_async_recv+0x24>
+   6:	588c      	addu      	r4, r0, r3
+   8:	3500      	movi      	r5, 0
+   a:	b4b4      	st.w      	r5, (r4, 0x50)
+   c:	b4b5      	st.w      	r5, (r4, 0x54)
+   e:	e0000000 	bsr      	0x0	// 0 <gx_lock_irq_save>
+			e: R_CKCORE_PCREL_IMM26BY2	gx_lock_irq_save
+  12:	9441      	ld.w      	r2, (r4, 0x4)
+  14:	9261      	ld.w      	r3, (r2, 0x4)
+  16:	3b80      	bclri      	r3, 0
+  18:	b261      	st.w      	r3, (r2, 0x4)
+  1a:	e0000000 	bsr      	0x0	// 0 <gx_unlock_irq_restore>
+			1a: R_CKCORE_PCREL_IMM26BY2	gx_unlock_irq_restore
+  1e:	6c17      	mov      	r0, r5
+  20:	1492      	pop      	r4-r5, r15
+  22:	0000      	.short	0x0000
+  24:	00000000 	.long	0x00000000
+			24: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_send_buffer:
+
+00000000 <gx_uart_send_buffer>:
+   0:	4007      	lsli      	r0, r0, 7
+   2:	1069      	lrw      	r3, 0x0	// 24 <gx_uart_send_buffer+0x24>
+   4:	600c      	addu      	r0, r3
+   6:	6cc7      	mov      	r3, r1
+   8:	c423008c 	subu      	r12, r3, r1
+   c:	64b1      	cmplt      	r12, r2
+   e:	0803      	bt      	0x14	// 14 <gx_uart_send_buffer+0x14>
+  10:	6c0b      	mov      	r0, r2
+  12:	783c      	jmp      	r15
+  14:	d9802001 	ld.w      	r12, (r0, 0x4)
+  18:	d003800d 	ldbi.b      	r13, (r3)
+  1c:	ddac2000 	st.w      	r13, (r12, 0x0)
+  20:	07f4      	br      	0x8	// 8 <gx_uart_send_buffer+0x8>
+  22:	0000      	.short	0x0000
+  24:	00000000 	.long	0x00000000
+			24: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_recv_buffer:
+
+00000000 <gx_uart_recv_buffer>:
+   0:	4007      	lsli      	r0, r0, 7
+   2:	1069      	lrw      	r3, 0x0	// 24 <gx_uart_recv_buffer+0x24>
+   4:	600c      	addu      	r0, r3
+   6:	6cc7      	mov      	r3, r1
+   8:	c423008c 	subu      	r12, r3, r1
+   c:	64b1      	cmplt      	r12, r2
+   e:	0803      	bt      	0x14	// 14 <gx_uart_recv_buffer+0x14>
+  10:	6c0b      	mov      	r0, r2
+  12:	783c      	jmp      	r15
+  14:	d9802001 	ld.w      	r12, (r0, 0x4)
+  18:	d98c2000 	ld.w      	r12, (r12, 0x0)
+  1c:	d403800c 	stbi.b      	r12, (r3)
+  20:	07f4      	br      	0x8	// 8 <gx_uart_recv_buffer+0x8>
+  22:	0000      	.short	0x0000
+  24:	00000000 	.long	0x00000000
+			24: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_async_send_buffer_stop:
+
+00000000 <gx_uart_async_send_buffer_stop>:
+   0:	14d0      	push      	r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1065      	lrw      	r3, 0x0	// 18 <gx_uart_async_send_buffer_stop+0x18>
+   6:	600c      	addu      	r0, r3
+   8:	906b      	ld.w      	r3, (r0, 0x2c)
+   a:	e9030004 	bez      	r3, 0x12	// 12 <gx_uart_async_send_buffer_stop+0x12>
+   e:	e0000000 	bsr      	0x0	// 0 <dw_uart_dma_transfer_stop>
+			e: R_CKCORE_PCREL_IMM26BY2	dw_uart_dma_transfer_stop
+  12:	3000      	movi      	r0, 0
+  14:	1490      	pop      	r15
+  16:	0000      	.short	0x0000
+  18:	0000      	.short	0x0000
+			18: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_async_recv_buffer_stop:
+
+00000000 <gx_uart_async_recv_buffer_stop>:
+   0:	14d0      	push      	r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1065      	lrw      	r3, 0x0	// 18 <gx_uart_async_recv_buffer_stop+0x18>
+   6:	600c      	addu      	r0, r3
+   8:	906b      	ld.w      	r3, (r0, 0x2c)
+   a:	e9030004 	bez      	r3, 0x12	// 12 <gx_uart_async_recv_buffer_stop+0x12>
+   e:	e0000000 	bsr      	0x0	// 0 <dw_uart_dma_receive_stop>
+			e: R_CKCORE_PCREL_IMM26BY2	dw_uart_dma_receive_stop
+  12:	3000      	movi      	r0, 0
+  14:	1490      	pop      	r15
+  16:	0000      	.short	0x0000
+  18:	0000      	.short	0x0000
+			18: R_CKCORE_ADDR32	.data
+	...
+
+Disassembly of section .text.gx_uart_async_send_buffer:
+
+00000000 <gx_uart_async_send_buffer>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1096      	lrw      	r4, 0x0	// 5c <gx_uart_async_send_buffer+0x5c>
+   6:	6100      	addu      	r4, r0
+   8:	d9ae2003 	ld.w      	r13, (r14, 0xc)
+   c:	e9010025 	bez      	r1, 0x56	// 56 <gx_uart_async_send_buffer+0x56>
+  10:	e9030023 	bez      	r3, 0x56	// 56 <gx_uart_async_send_buffer+0x56>
+  14:	b47b      	st.w      	r3, (r4, 0x6c)
+  16:	94ab      	ld.w      	r5, (r4, 0x2c)
+  18:	3300      	movi      	r3, 0
+  1a:	3002      	movi      	r0, 2
+  1c:	2b00      	subi      	r3, 1
+  1e:	b411      	st.w      	r0, (r4, 0x44)
+  20:	b43d      	st.w      	r1, (r4, 0x74)
+  22:	b45e      	st.w      	r2, (r4, 0x78)
+  24:	dda4201c 	st.w      	r13, (r4, 0x70)
+  28:	b47f      	st.w      	r3, (r4, 0x7c)
+  2a:	e905000c 	bez      	r5, 0x42	// 42 <gx_uart_async_send_buffer+0x42>
+  2e:	9461      	ld.w      	r3, (r4, 0x4)
+  30:	3001      	movi      	r0, 1
+  32:	dc03202a 	st.w      	r0, (r3, 0xa8)
+  36:	6c13      	mov      	r0, r4
+  38:	e0000000 	bsr      	0x0	// 0 <dw_uart_dma_transfer>
+			38: R_CKCORE_PCREL_IMM26BY2	dw_uart_dma_transfer
+  3c:	6d43      	mov      	r5, r0
+  3e:	6c17      	mov      	r0, r5
+  40:	1492      	pop      	r4-r5, r15
+  42:	e0000000 	bsr      	0x0	// 0 <gx_lock_irq_save>
+			42: R_CKCORE_PCREL_IMM26BY2	gx_lock_irq_save
+  46:	9441      	ld.w      	r2, (r4, 0x4)
+  48:	9261      	ld.w      	r3, (r2, 0x4)
+  4a:	ec630002 	ori      	r3, r3, 2
+  4e:	b261      	st.w      	r3, (r2, 0x4)
+  50:	e0000000 	bsr      	0x0	// 0 <gx_unlock_irq_restore>
+			50: R_CKCORE_PCREL_IMM26BY2	gx_unlock_irq_restore
+  54:	07f5      	br      	0x3e	// 3e <gx_uart_async_send_buffer+0x3e>
+  56:	3500      	movi      	r5, 0
+  58:	2d00      	subi      	r5, 1
+  5a:	07f2      	br      	0x3e	// 3e <gx_uart_async_send_buffer+0x3e>
+  5c:	00000000 	.long	0x00000000
+			5c: R_CKCORE_ADDR32	.data
+
+Disassembly of section .text.gx_uart_async_recv_buffer:
+
+00000000 <gx_uart_async_recv_buffer>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	4007      	lsli      	r0, r0, 7
+   4:	1096      	lrw      	r4, 0x0	// 5c <gx_uart_async_recv_buffer+0x5c>
+   6:	6100      	addu      	r4, r0
+   8:	d9ae2003 	ld.w      	r13, (r14, 0xc)
+   c:	e9010025 	bez      	r1, 0x56	// 56 <gx_uart_async_recv_buffer+0x56>
+  10:	e9030023 	bez      	r3, 0x56	// 56 <gx_uart_async_recv_buffer+0x56>
+  14:	b476      	st.w      	r3, (r4, 0x58)
+  16:	94ab      	ld.w      	r5, (r4, 0x2c)
+  18:	3300      	movi      	r3, 0
+  1a:	3002      	movi      	r0, 2
+  1c:	2b00      	subi      	r3, 1
+  1e:	b410      	st.w      	r0, (r4, 0x40)
+  20:	b438      	st.w      	r1, (r4, 0x60)
+  22:	b459      	st.w      	r2, (r4, 0x64)
+  24:	dda42017 	st.w      	r13, (r4, 0x5c)
+  28:	b47a      	st.w      	r3, (r4, 0x68)
+  2a:	e905000c 	bez      	r5, 0x42	// 42 <gx_uart_async_recv_buffer+0x42>
+  2e:	9461      	ld.w      	r3, (r4, 0x4)
+  30:	3001      	movi      	r0, 1
+  32:	dc03202a 	st.w      	r0, (r3, 0xa8)
+  36:	6c13      	mov      	r0, r4
+  38:	e0000000 	bsr      	0x0	// 0 <dw_uart_dma_receive>
+			38: R_CKCORE_PCREL_IMM26BY2	dw_uart_dma_receive
+  3c:	6d43      	mov      	r5, r0
+  3e:	6c17      	mov      	r0, r5
+  40:	1492      	pop      	r4-r5, r15
+  42:	e0000000 	bsr      	0x0	// 0 <gx_lock_irq_save>
+			42: R_CKCORE_PCREL_IMM26BY2	gx_lock_irq_save
+  46:	9441      	ld.w      	r2, (r4, 0x4)
+  48:	9261      	ld.w      	r3, (r2, 0x4)
+  4a:	ec630001 	ori      	r3, r3, 1
+  4e:	b261      	st.w      	r3, (r2, 0x4)
+  50:	e0000000 	bsr      	0x0	// 0 <gx_unlock_irq_restore>
+			50: R_CKCORE_PCREL_IMM26BY2	gx_unlock_irq_restore
+  54:	07f5      	br      	0x3e	// 3e <gx_uart_async_recv_buffer+0x3e>
+  56:	3500      	movi      	r5, 0
+  58:	2d00      	subi      	r5, 1
+  5a:	07f2      	br      	0x3e	// 3e <gx_uart_async_recv_buffer+0x3e>
+  5c:	00000000 	.long	0x00000000
+			5c: R_CKCORE_ADDR32	.data

@@ -1,0 +1,113 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "base": "0x438000",
+  "functions": [
+    {
+      "name": "read_variable_length",
+      "start": "0x54ee90",
+      "end": "0x54ef06",
+      "bytes": 118,
+      "sha256": "da4166db86faec5fd8406f962f758eaca8d7d7d23ed4ddf18e02b3fd3e002a54"
+    },
+    {
+      "name": "LZ4_decompress_generic",
+      "start": "0x54ef08",
+      "end": "0x54f338",
+      "bytes": 1072,
+      "sha256": "8d8e6a9598ea565a6ca9b7fa1a41a67a2b1756b8fb43e84e684ed5b11de990ae"
+    },
+    {
+      "name": "LZ4_decompress_safe",
+      "start": "0x54f338",
+      "end": "0x54f356",
+      "bytes": 30,
+      "sha256": "d824bb067efb6bac662409f00f466631da69272c25c9bea6134c658e713eaef1"
+    }
+  ],
+  "calls": [
+    {
+      "caller": "0x54ef9c",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54efac",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54efbc",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54eff8",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54f00a",
+      "instruction": "bl #0x54ee4e"
+    },
+    {
+      "caller": "0x54f046",
+      "instruction": "bl #0x54ee90"
+    },
+    {
+      "caller": "0x54f0e6",
+      "instruction": "bl #0x439710"
+    },
+    {
+      "caller": "0x54f10a",
+      "instruction": "bl #0x54ee4e"
+    },
+    {
+      "caller": "0x54f12e",
+      "instruction": "bl #0x54ee90"
+    },
+    {
+      "caller": "0x54f186",
+      "instruction": "bl #0x54ee6e"
+    },
+    {
+      "caller": "0x54f1ba",
+      "instruction": "bl #0x439710"
+    },
+    {
+      "caller": "0x54f1da",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54f208",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54f25a",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54f272",
+      "instruction": "bl #0x54ee3e"
+    },
+    {
+      "caller": "0x54f2ae",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54f2ca",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54f2f0",
+      "instruction": "bl #0x54ee6e"
+    },
+    {
+      "caller": "0x54f31e",
+      "instruction": "bl #0x439be4"
+    },
+    {
+      "caller": "0x54f330",
+      "instruction": "bl #0x54ee6e"
+    },
+    {
+      "caller": "0x54f34e",
+      "instruction": "bl #0x54ef08"
+    }
+  ]
+}

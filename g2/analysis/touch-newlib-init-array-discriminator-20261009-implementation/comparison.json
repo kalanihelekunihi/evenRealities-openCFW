@@ -1,0 +1,54 @@
+{
+  "stock_size": 72,
+  "stock_sha256": "658aa248574049c50b246ca9a858759a02660b57667b39bede014d5e978df7e7",
+  "rows": [
+    {
+      "name": "libc.a.init",
+      "bytes": 72,
+      "sha256": "7eede674c70893eed7d24cf974e5076d09681498e5bebe72b9384e244837e234",
+      "matches_all_72_stock_bytes": false,
+      "ld_argv": [
+        "arm-none-eabi-ld",
+        "-T",
+        "g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/bind.ld",
+        "g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/libc.a.init.o",
+        "-o",
+        "g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/libc.a.init.elf"
+      ]
+    },
+    {
+      "name": "libc_nano.a.init",
+      "bytes": 72,
+      "sha256": "658aa248574049c50b246ca9a858759a02660b57667b39bede014d5e978df7e7",
+      "matches_all_72_stock_bytes": true,
+      "ld_argv": [
+        "arm-none-eabi-ld",
+        "-T",
+        "g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/bind.ld",
+        "g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/libc_nano.a.init.o",
+        "-o",
+        "g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/libc_nano.a.init.elf"
+      ]
+    },
+    {
+      "name": "source-init",
+      "bytes": 68,
+      "sha256": "2b4cb82517eb535b59a2767b7b9a9678f43444511a6231f7a5f21d15e4bd2f30",
+      "matches_all_72_stock_bytes": false,
+      "ld_argv": [
+        "arm-none-eabi-ld",
+        "-T",
+        "g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/bind.ld",
+        "g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/source-init.o",
+        "-o",
+        "g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/source-init.elf"
+      ]
+    },
+    {
+      "name": "source-init-with-fini",
+      "bytes": 72,
+      "sha256": "658aa248574049c50b246ca9a858759a02660b57667b39bede014d5e978df7e7",
+      "matches_all_72_stock_bytes": true
+    }
+  ]
+}

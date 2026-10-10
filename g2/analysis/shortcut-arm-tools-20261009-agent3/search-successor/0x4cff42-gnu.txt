@@ -1,0 +1,25 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-arm-tools-20261009-agent3/main-analysis-only.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004cff42 <bounded_original_thumb-0x2a>:
+  4cff42:	b510      	push	{r4, lr}
+  4cff44:	2400      	movs	r4, #0
+  4cff46:	2800      	cmp	r0, #0
+  4cff48:	d00e      	beq.n	4cff68 <bounded_original_thumb-0x4>
+  4cff4a:	f7ff ffba 	bl	4cfec2 <bounded_original_thumb-0xaa>
+  4cff4e:	f8df 1798 	ldr.w	r1, [pc, #1944]	@ 4d06e8 <bounded_original_thumb+0x77c>
+  4cff52:	6809      	ldr	r1, [r1, #0]
+  4cff54:	4288      	cmp	r0, r1
+  4cff56:	d207      	bcs.n	4cff68 <bounded_original_thumb-0x4>
+  4cff58:	f8df 18f8 	ldr.w	r1, [pc, #2296]	@ 4d0854 <bounded_original_thumb+0x8e8>
+  4cff5c:	680a      	ldr	r2, [r1, #0]
+  4cff5e:	4282      	cmp	r2, r0
+  4cff60:	d201      	bcs.n	4cff66 <bounded_original_thumb-0x6>
+  4cff62:	0004      	movs	r4, r0
+  4cff64:	e000      	b.n	4cff68 <bounded_original_thumb-0x4>
+  4cff66:	680c      	ldr	r4, [r1, #0]
+  4cff68:	0020      	movs	r0, r4
+  4cff6a:	bd10      	pop	{r4, pc}

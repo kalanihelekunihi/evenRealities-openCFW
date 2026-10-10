@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"></meta><meta name="format-detection" content="telephone=no"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><meta name="search" content="default"></meta><meta name="use.ic" content="no"></meta><meta name="tocstandalone" content="yes"></meta><meta name="theme" content="1"></meta><meta name="search.placeholder" content="Search"></meta><meta name="search.results" content="Search results"></meta><meta name="no.search.results" content="No results found"></meta><script type="text/javascript">
+var theme = '1';
+
+			
+			window.versionsfile = '/ewarm/resources/versions.html';
+
+
+			window.indexDict = new Array();
+			window.store = {};
+			window.portalLanguage = 'en';
+			window.enterKey = 'select';
+			
+			
+				var fuse_threshold = 0.2;
+			
+					var local_csh = false;
+				
+					var anchoroption = false;
+					var instantsearch_minlength = 1;
+						var enter_advanced_search = false;
+					
+			var useanchorlinks = false;
+			
+					var collapseTocSectionOnLinkTitleClick = false;
+				</script><title>The DLIB runtime environment</title><link rel="stylesheet" type="text/css" href="../../css/docbook.css"></link><link rel="stylesheet" type="text/css" href="../../css/font-awesome.css"></link><link rel="stylesheet" type="text/css" href="../../css/roboto.font.css"></link><link rel="stylesheet" type="text/css" href="../../css/theme1.css"></link><link rel="stylesheet" type="text/css" href="../../css/theme1-colors.css"></link><link rel="stylesheet" type="text/css" href="../../css/content-theme2.css"></link><link rel="stylesheet" type="text/css" href="../../css/sm-core-css.css"></link><link rel="stylesheet" type="text/css" href="../../css/sm-simple.css"></link><link rel="stylesheet" type="text/css" href="../../css/style-print.css"></link><link rel="stylesheet" type="text/css" href="../../css/style-common.css"></link><link rel="stylesheet" type="text/css" href="../../css/style-modern-tables.css"></link><link rel="stylesheet" type="text/css" href="../../css/graphical-lists.css"></link><link rel="stylesheet" type="text/css" href="../../css/custom-css-source-6a96843a8fe1e.css"></link><script src="../../js/jquery-3/jquery-3.4.1.min.js" type="text/javascript"></script><script src="../../js/jquery-migrate-3.4.1.min.js" type="text/javascript"></script><script src="../../js/materialize.min.js" type="text/javascript"></script><script src="../../js/bootstrap.min.js" type="text/javascript"></script><script src="../../js/purl.js" type="text/javascript"></script><script src="../../js/jquery.smartmenus.js" type="text/javascript"></script><script src="../js/toc.js" type="text/javascript"></script><script src="../../js/create-toc.js" type="text/javascript"></script><script src="../../js/html5-2-mp-common.js" type="text/javascript"></script><script src="../../js/html5-2.js" type="text/javascript"></script><script src="../../js/checklist.js" type="text/javascript"></script><script src="../../js/clipboard.min.js" type="text/javascript"></script><script src="../../js/langSwitchIndex.js" type="text/javascript"></script><script src="../../js/fuse.min.js" type="text/javascript"></script><script src="../../js/jquery.mark.min.js" type="text/javascript"></script><script src="../../js/html5.fuse.search.js" type="text/javascript"></script><script src="../js/fuzzydata.js" type="text/javascript"></script><script src="../../js/csh.js" type="text/javascript"></script><script src="../../js/jquery.paligocode.js" type="text/javascript"></script><script src="../../js/highlight-mergehtml-plugin.js" type="text/javascript"></script><script src="../../js/layout-custom-script.js" type="text/javascript"></script><meta name="generator" content="Paligo"></meta><link rel="prev" href="linking-your-application/linker-optimizations.html#duplicate-section-merging" title="Duplicate section merging"></link><link rel="next" href="the-dlib-runtime-environment/introduction-to-the-runtime-environment.html" title="Introduction to the runtime environment"></link><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-MML-AM_CHTML" crossorigin="anonymous" referrerpolicy="no-referrer" async="async"></script><link rel="icon" href="/favicon.ico" type="image/x-icon"></link><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"></link><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script type="text/javascript">var privacypolicy = 'https://www.iar.com/privacy-policy';
+var consenttype = 'opt-out';
+</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-188RPRDB6V"></script><script type="text/javascript">const measurementId = 'G-188RPRDB6V';
+
+						$(document).on('cookies.consented', () => {
+							window.dataLayer = window.dataLayer || [];
+							function gtag(){dataLayer.push(arguments)};
+
+							gtag('js', new Date());
+							gtag('config', measurementId);
+						});
+					</script><script type="text/javascript" src="../../js/cookie-consent.js"></script><script type="text/javascript">
+				$(document).ready(function () {
+				$(".mediaobject img").addClass('materialboxed');
+				//Exclude images with links
+				$(".mediaobject a img").removeClass('materialboxed');
+				if (!document.documentMode) {
+				$('.materialboxed').materialbox();
+				}});
+			</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"></link><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script type="text/javascript">
+			$(document).on('ready ajaxComplete', function() {
+				
+				hljs.addPlugin(mergeHTMLPlugin);
+				hljs.configure({'ignoreUnescapedHTML': true});
+				
+				$('pre:not(.embedcode)').each(function() {
+					/**
+					 * @type {string}
+					 */
+					var language = $(this).data('language');
+
+					if (language === 'plaintext' || language === 'text') {
+						$(this).addClass(language).addClass('hljs');
+						return true;
+					}
+					else {
+						var clone = this.cloneNode(true);
+						hljs.highlightElement(clone);
+						$(this).empty().append($(clone).contents());
+						$(this).attr("class", $(clone).attr("class"));
+					}
+				});
+			});
+			</script><script type="text/javascript" src="../../js/languageSwitch.js"></script></head><body class="theme1 current-toc-section-focus" data-link-prefix="../"><style type="text/css">
+            div.skipnav {
+            }
+            div.skipnav a {
+                position: fixed;
+                left: -10000px;
+                top: 1.5em;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+            }
+            div.skipnav a:focus, div.skipnav a:active, div.skipnav a:hover {
+                background: white;
+                color: black;
+                box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+                position: fixed;
+                left: 2em;
+                top: 1.5em;
+                width: auto;
+                height: auto;
+                overflow: visible;
+                text-decoration: underline;
+                z-index: 99999; /* has to be higher than the side panel */
+    }
+          </style><div class="skipnav"><a href="#content-wrapper">Skip to main content</a></div><header class="site-header"><nav class="site-header-navbar navbar navbar-fixed-top"><div class="navbar-container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".site-sidebar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><div id="logotype-container" class="pull-left"><a class="navbar-brand" href="https://docs.iar.com/" target="_blank" rel="noopener"><img id="logotype-pageheader" src="../../css/image/corporate-logo.svg" alt="Corporate logotype" data-role="logotype" class="logo"></img></a></div></div><div class="navbar-collapse collapse" id="navbar"><ul class="top-nav-menu sm sm-simple"><li><a href="https://www.iar.com/" class="external-top-nav-link" target="_blank">iar.com</a></li></ul><ul class="version-menu sm sm-simple"><li class="version-dropdown"><a><span class="caret"></span>Select version</a><ul class="version-dropdown"><li><a href="https://docs.iar.com/ewarm/10.1x/">10.10.x</a></li><li><a href="https://docs.iar.com/ewarm/9.7x/">9.70.x</a></li></ul></li></ul></div></div></nav></header><div class="site-body"><div class="site-body-container"><div class="site-body-row"><aside class="site-sidebar"><div class="site-sidebar-header"><button type="button" class="navbar-toggle" aria-controls="nav-site-sidebar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="https://docs.iar.com/" target="_blank" rel="noopener"><img id="logotype-pageheader" src="../../css/image/corporate-logo.svg" alt="Corporate logotype" data-role="logotype" class="logo"></img></a></div><form class="site-sidebar-search" autocomplete="off"><input type="text" placeholder="Search" class="form-control search-field" id="aa-search-input"></input></form><div id="toc-standalone-placeholder"></div></aside><div class="site-content"><h2 class="publication-title">IAR Embedded Workbench for Arm 10.10.x</h2><div class="toolbar top-nav-on"><div class="toolbar-tools"><div id="navbar" class="navbar-collapse collapse"><ul class="top-nav-menu sm sm-simple"><li><a href="https://www.iar.com/" class="external-top-nav-link" target="_blank">iar.com</a></li></ul><ul class="version-menu sm sm-simple"><li class="version-dropdown"><a><span class="caret"></span>Select version</a><ul class="version-dropdown"><li><a href="https://docs.iar.com/ewarm/10.1x/">10.10.x</a></li><li><a href="https://docs.iar.com/ewarm/9.7x/">9.70.x</a></li></ul></li></ul></div><div class="tool-print"><i class="fa fa-print" aria-hidden="true">print</i></div><div class="tool-search"><i class="fa fa-search" aria-hidden="true"></i></div><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".site-sidebar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div></div><main><div id="top-pager"><ul class="pager"><li class="previous"><a accesskey="p" class="prev pull-left prev visible-lg visible-md" id="header-navigation-prev" href="linking-your-application/linker-optimizations.html#duplicate-section-merging">Prev</a></li><li class="next"><a accesskey="n" class="pull-right next visible-lg visible-md" id="header-navigation-next" href="the-dlib-runtime-environment/introduction-to-the-runtime-environment.html">Next</a></li></ul></div><article class="topic content-container" id="content-wrapper"><div id="topic-content" class="topic-content"><div class="breadcrumb-container"><ul class="breadcrumb"><li class="breadcrumb-link"><a href="../index-en.html">IAR Embedded Workbench for Arm 10.10.x</a></li><li class="breadcrumb-link"><a>IAR C/C++ Development</a></li><li class="breadcrumb-node">The DLIB runtime environment</li></ul></div><section xml:lang="en" lang="en" dir="ltr" class="section taxonomy-subjects-runtime-environment" data-origin-id="UUID-ad7364c4-d208-186f-7a67-a21726703e39" data-legacy-id="UUID-4c6743ce-ce8a-ca0c-711f-5900785ddeaf" data-permalink="iar-c-c---development/the-dlib-runtime-environment.html" data-topic-level="2" data-relative-prefix="../" data-time-modified="May 28, 2026" data-publication-date="" id="the-dlib-runtime-environment"><div class="titlepage"><div><div class="title"><h2 class="title" style="clear: both">The DLIB runtime environment</h2></div></div></div><div class="section-toc section-toc-before"><div class="section-toc-title">In this section<span class="section-toc-title-delimiter">: </span></div></div><p>This section describes the DLIB runtime environment in which an application executes. It covers how you can modify it by setting options, overriding default library modules, or building your own library. The chapter also describes system initialization introducing the file <code class="code">cstartup.<span class="phrase">s</span></code>, how to use modules for locale, and file I/O.</p></section><div class="footer-content"><div class="glossary-definitions"></div></div><footer></footer></div></article><article id="search-result-wrapper"><div class="search-container" style="display: none;"><h2>Search results</h2><ul class="searchresults"></ul><p class="noresults">No results found</p></div></article><div class="feedback-panel"><div id="email-feedback" class="no-voting toggle-feedback"><p><a href="mailto:documentation@iar.com?subject=Feedback%20for%20help%20topic%20%22The%20DLIB%20runtime%20environment%22&amp;body=%0A%09%09%09%09%0A%09%09%09%09%0A%09%09%09%09_______________________%0A%09%09%09%09%0A%09%09%09Please%20add%20your%20feedback%20above%20for%20topic%20%22The%20DLIB%20runtime%20environment%22%20in%20the%20publication%20%22IAR%20Embedded%20Workbench%20for%20Arm%2010.10.x%22."><i aria-hidden="true" class="fa fa-pencil-square-o feedbackicon"></i>Would you like to provide feedback? Just click here to suggest edits.</a></p></div></div></main><div id="bottom-pager"><ul class="pager"><li class="previous"><a accesskey="p" class="prev pull-left prev visible-lg visible-md" id="header-navigation-prev" href="linking-your-application/linker-optimizations.html#duplicate-section-merging">Prev</a></li><li class="next"><a accesskey="n" class="pull-right next visible-lg visible-md" id="header-navigation-next" href="the-dlib-runtime-environment/introduction-to-the-runtime-environment.html">Next</a></li></ul></div><footer class="site-footer"><div class="inner"><div class="copyright"> © 2026 IAR Systems AB </div><div class="date-modified"><span class="date-modified-text">Last modified: </span><span class="formatted-date">May 28, 2026</span></div><div class="publication-date"><span class="publication-date-text">Publication date</span><span class="pubdate-delimiter">: </span><span class="formatted-date"></span></div></div></footer></div></div></div></div></body></html>

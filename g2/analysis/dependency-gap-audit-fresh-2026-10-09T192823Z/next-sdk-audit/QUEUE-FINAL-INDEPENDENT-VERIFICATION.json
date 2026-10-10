@@ -1,0 +1,78 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "check": "locked payload",
+      "pass": true
+    },
+    {
+      "check": "full range 0052df50",
+      "pass": true
+    },
+    {
+      "check": "full range 0055c1e0",
+      "pass": true
+    },
+    {
+      "check": "full range 0055cc1c",
+      "pass": true
+    },
+    {
+      "check": "full range 0055cf40",
+      "pass": true
+    },
+    {
+      "check": "transaction/blocking arguments",
+      "pass": true
+    },
+    {
+      "check": "byte pause at36",
+      "pass": true
+    },
+    {
+      "check": "word status at40",
+      "pass": true
+    },
+    {
+      "check": "queue guard truncation/zero compare",
+      "pass": true
+    },
+    {
+      "check": "nonzero blocking skips queue checks",
+      "pass": true
+    },
+    {
+      "check": "status mask literal",
+      "pass": true
+    },
+    {
+      "check": "both direct callers blocking=true",
+      "pass": true
+    },
+    {
+      "check": "three direct BL targets",
+      "pass": true
+    },
+    {
+      "check": "application queue slot stores",
+      "pass": true
+    },
+    {
+      "check": "application transaction pointer/handle",
+      "pass": true
+    },
+    {
+      "check": "metadata hash/count",
+      "pass": true
+    },
+    {
+      "check": "metadata direct validator callers",
+      "pass": true
+    },
+    {
+      "check": "listing original halfwords",
+      "pass": true
+    }
+  ],
+  "scope": "Static instruction/hash/metadata verification, not execution or closed-world graph. Conditional source layout is not producer ABI proof."
+}

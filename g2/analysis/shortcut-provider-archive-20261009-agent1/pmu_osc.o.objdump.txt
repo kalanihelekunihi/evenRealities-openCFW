@@ -1,0 +1,487 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-archive-20261009-agent1/pmu_osc.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.osc_isr:
+
+00000000 <osc_isr>:
+   0:	14d3      	push      	r4-r6, r15
+   2:	ea21a000 	movih      	r1, 40960
+   6:	39ae      	bseti      	r1, 14
+   8:	6d83      	mov      	r6, r0
+   a:	91ad      	ld.w      	r5, (r1, 0x34)
+   c:	e4652009 	andi      	r3, r5, 9
+  10:	e903002f 	bez      	r3, 0x6e	// 6e <osc_isr+0x6e>
+  14:	1058      	lrw      	r2, 0x0	// 74 <osc_isr+0x74>
+  16:	9280      	ld.w      	r4, (r2, 0x0)
+  18:	e9040007 	bez      	r4, 0x26	// 26 <osc_isr+0x26>
+  1c:	b16d      	st.w      	r3, (r1, 0x34)
+  1e:	9221      	ld.w      	r1, (r2, 0x4)
+  20:	b165      	st.w      	r3, (r1, 0x14)
+  22:	7bd1      	jsr      	r4
+  24:	6d03      	mov      	r4, r0
+  26:	e4652012 	andi      	r3, r5, 18
+  2a:	e903000f 	bez      	r3, 0x48	// 48 <osc_isr+0x48>
+  2e:	1032      	lrw      	r1, 0x0	// 74 <osc_isr+0x74>
+  30:	9142      	ld.w      	r2, (r1, 0x8)
+  32:	e902000b 	bez      	r2, 0x48	// 48 <osc_isr+0x48>
+  36:	ea20a000 	movih      	r0, 40960
+  3a:	38ae      	bseti      	r0, 14
+  3c:	9123      	ld.w      	r1, (r1, 0xc)
+  3e:	b06d      	st.w      	r3, (r0, 0x34)
+  40:	b165      	st.w      	r3, (r1, 0x14)
+  42:	6c1b      	mov      	r0, r6
+  44:	7bc9      	jsr      	r2
+  46:	6d00      	or      	r4, r0
+  48:	e4a52024 	andi      	r5, r5, 36
+  4c:	e905000f 	bez      	r5, 0x6a	// 6a <osc_isr+0x6a>
+  50:	1049      	lrw      	r2, 0x0	// 74 <osc_isr+0x74>
+  52:	9264      	ld.w      	r3, (r2, 0x10)
+  54:	e903000b 	bez      	r3, 0x6a	// 6a <osc_isr+0x6a>
+  58:	ea21a000 	movih      	r1, 40960
+  5c:	39ae      	bseti      	r1, 14
+  5e:	6c1b      	mov      	r0, r6
+  60:	b1ad      	st.w      	r5, (r1, 0x34)
+  62:	9225      	ld.w      	r1, (r2, 0x14)
+  64:	b1a5      	st.w      	r5, (r1, 0x14)
+  66:	7bcd      	jsr      	r3
+  68:	6d00      	or      	r4, r0
+  6a:	6c13      	mov      	r0, r4
+  6c:	1493      	pop      	r4-r6, r15
+  6e:	6d0f      	mov      	r4, r3
+  70:	07db      	br      	0x26	// 26 <osc_isr+0x26>
+  72:	0000      	.short	0x0000
+  74:	00000000 	.long	0x00000000
+			74: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_pmu_osc_clock_ref_enable:
+
+00000000 <gx_pmu_osc_clock_ref_enable>:
+   0:	14d0      	push      	r15
+   2:	3101      	movi      	r1, 1
+   4:	3009      	movi      	r0, 9
+   6:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_enable>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_enable
+   a:	1490      	pop      	r15
+
+Disassembly of section .text.gx_pmu_osc_get:
+
+00000000 <gx_pmu_osc_get>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	6d03      	mov      	r4, r0
+   4:	6d47      	mov      	r5, r1
+   6:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_get>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   a:	3c41      	cmpnei      	r4, 1
+   c:	0c45      	bf      	0x96	// 96 <gx_pmu_osc_get+0x96>
+   e:	3c40      	cmpnei      	r4, 0
+  10:	0c08      	bf      	0x20	// 20 <gx_pmu_osc_get+0x20>
+  12:	3c42      	cmpnei      	r4, 2
+  14:	0c59      	bf      	0xc6	// c6 <gx_pmu_osc_get+0xc6>
+  16:	3c43      	cmpnei      	r4, 3
+  18:	0c6d      	bf      	0xf2	// f2 <gx_pmu_osc_get+0xf2>
+  1a:	3000      	movi      	r0, 0
+  1c:	2800      	subi      	r0, 1
+  1e:	041a      	br      	0x52	// 52 <gx_pmu_osc_get+0x52>
+  20:	3001      	movi      	r0, 1
+  22:	9540      	ld.w      	r2, (r5, 0x0)
+  24:	8060      	ld.b      	r3, (r0, 0x0)
+  26:	8021      	ld.b      	r1, (r0, 0x1)
+  28:	4128      	lsli      	r1, r1, 8
+  2a:	6c4c      	or      	r1, r3
+  2c:	8062      	ld.b      	r3, (r0, 0x2)
+  2e:	4370      	lsli      	r3, r3, 16
+  30:	6c4c      	or      	r1, r3
+  32:	3a41      	cmpnei      	r2, 1
+  34:	8063      	ld.b      	r3, (r0, 0x3)
+  36:	4378      	lsli      	r3, r3, 24
+  38:	6cc4      	or      	r3, r1
+  3a:	0c18      	bf      	0x6a	// 6a <gx_pmu_osc_get+0x6a>
+  3c:	3a40      	cmpnei      	r2, 0
+  3e:	0c0b      	bf      	0x54	// 54 <gx_pmu_osc_get+0x54>
+  40:	3a42      	cmpnei      	r2, 2
+  42:	0c1f      	bf      	0x80	// 80 <gx_pmu_osc_get+0x80>
+  44:	3a41      	cmpnei      	r2, 1
+  46:	0c18      	bf      	0x76	// 76 <gx_pmu_osc_get+0x76>
+  48:	3a40      	cmpnei      	r2, 0
+  4a:	0c08      	bf      	0x5a	// 5a <gx_pmu_osc_get+0x5a>
+  4c:	3a42      	cmpnei      	r2, 2
+  4e:	0c1f      	bf      	0x8c	// 8c <gx_pmu_osc_get+0x8c>
+  50:	3000      	movi      	r0, 0
+  52:	1492      	pop      	r4-r5, r15
+  54:	3b80      	bclri      	r3, 0
+  56:	3b81      	bclri      	r3, 1
+  58:	b561      	st.w      	r3, (r5, 0x4)
+  5a:	ea23a000 	movih      	r3, 40960
+  5e:	3bae      	bseti      	r3, 14
+  60:	9363      	ld.w      	r3, (r3, 0xc)
+  62:	ad64      	st.h      	r3, (r5, 0x8)
+  64:	4b70      	lsri      	r3, r3, 16
+  66:	ad65      	st.h      	r3, (r5, 0xa)
+  68:	07f4      	br      	0x50	// 50 <gx_pmu_osc_get+0x50>
+  6a:	c7a05022 	bmaski      	r2, 30
+  6e:	4b62      	lsri      	r3, r3, 2
+  70:	2a02      	subi      	r2, 3
+  72:	68c8      	and      	r3, r2
+  74:	b561      	st.w      	r3, (r5, 0x4)
+  76:	ea23a000 	movih      	r3, 40960
+  7a:	3bae      	bseti      	r3, 14
+  7c:	9364      	ld.w      	r3, (r3, 0x10)
+  7e:	07f2      	br      	0x62	// 62 <gx_pmu_osc_get+0x62>
+  80:	c7605022 	bmaski      	r2, 28
+  84:	4b64      	lsri      	r3, r3, 4
+  86:	2a02      	subi      	r2, 3
+  88:	68c8      	and      	r3, r2
+  8a:	b561      	st.w      	r3, (r5, 0x4)
+  8c:	ea23a000 	movih      	r3, 40960
+  90:	3bae      	bseti      	r3, 14
+  92:	9365      	ld.w      	r3, (r3, 0x14)
+  94:	07e7      	br      	0x62	// 62 <gx_pmu_osc_get+0x62>
+  96:	9500      	ld.w      	r0, (r5, 0x0)
+  98:	3841      	cmpnei      	r0, 1
+  9a:	0c10      	bf      	0xba	// ba <gx_pmu_osc_get+0xba>
+  9c:	3840      	cmpnei      	r0, 0
+  9e:	0c08      	bf      	0xae	// ae <gx_pmu_osc_get+0xae>
+  a0:	3842      	cmpnei      	r0, 2
+  a2:	0bbc      	bt      	0x1a	// 1a <gx_pmu_osc_get+0x1a>
+  a4:	ea23a000 	movih      	r3, 40960
+  a8:	3bae      	bseti      	r3, 14
+  aa:	9368      	ld.w      	r3, (r3, 0x20)
+  ac:	040b      	br      	0xc2	// c2 <gx_pmu_osc_get+0xc2>
+  ae:	ea23a000 	movih      	r3, 40960
+  b2:	3bae      	bseti      	r3, 14
+  b4:	9366      	ld.w      	r3, (r3, 0x18)
+  b6:	b561      	st.w      	r3, (r5, 0x4)
+  b8:	07cd      	br      	0x52	// 52 <gx_pmu_osc_get+0x52>
+  ba:	ea23a000 	movih      	r3, 40960
+  be:	3bae      	bseti      	r3, 14
+  c0:	9367      	ld.w      	r3, (r3, 0x1c)
+  c2:	b561      	st.w      	r3, (r5, 0x4)
+  c4:	07c6      	br      	0x50	// 50 <gx_pmu_osc_get+0x50>
+  c6:	9500      	ld.w      	r0, (r5, 0x0)
+  c8:	3841      	cmpnei      	r0, 1
+  ca:	0c0f      	bf      	0xe8	// e8 <gx_pmu_osc_get+0xe8>
+  cc:	3840      	cmpnei      	r0, 0
+  ce:	0c08      	bf      	0xde	// de <gx_pmu_osc_get+0xde>
+  d0:	3842      	cmpnei      	r0, 2
+  d2:	0ba4      	bt      	0x1a	// 1a <gx_pmu_osc_get+0x1a>
+  d4:	ea23a000 	movih      	r3, 40960
+  d8:	3bae      	bseti      	r3, 14
+  da:	936b      	ld.w      	r3, (r3, 0x2c)
+  dc:	07f3      	br      	0xc2	// c2 <gx_pmu_osc_get+0xc2>
+  de:	ea23a000 	movih      	r3, 40960
+  e2:	3bae      	bseti      	r3, 14
+  e4:	9369      	ld.w      	r3, (r3, 0x24)
+  e6:	07e8      	br      	0xb6	// b6 <gx_pmu_osc_get+0xb6>
+  e8:	ea23a000 	movih      	r3, 40960
+  ec:	3bae      	bseti      	r3, 14
+  ee:	936a      	ld.w      	r3, (r3, 0x28)
+  f0:	07e9      	br      	0xc2	// c2 <gx_pmu_osc_get+0xc2>
+  f2:	ea23a000 	movih      	r3, 40960
+  f6:	3bae      	bseti      	r3, 14
+  f8:	936e      	ld.w      	r3, (r3, 0x38)
+  fa:	b560      	st.w      	r3, (r5, 0x0)
+  fc:	078f      	br      	0x1a	// 1a <gx_pmu_osc_get+0x1a>
+
+Disassembly of section .text.gx_pmu_osc_set:
+
+00000000 <gx_pmu_osc_set>:
+   0:	14d2      	push      	r4-r5, r15
+   2:	6d43      	mov      	r5, r0
+   4:	6d07      	mov      	r4, r1
+   6:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_set>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   a:	3d42      	cmpnei      	r5, 2
+   c:	0c44      	bf      	0x94	// 94 <gx_pmu_osc_set+0x94>
+   e:	3d43      	cmpnei      	r5, 3
+  10:	0c5e      	bf      	0xcc	// cc <gx_pmu_osc_set+0xcc>
+  12:	e9250048 	bnez      	r5, 0xa2	// a2 <gx_pmu_osc_set+0xa2>
+  16:	9420      	ld.w      	r1, (r4, 0x0)
+  18:	ea23a000 	movih      	r3, 40960
+  1c:	3bae      	bseti      	r3, 14
+  1e:	3941      	cmpnei      	r1, 1
+  20:	9441      	ld.w      	r2, (r4, 0x4)
+  22:	9362      	ld.w      	r3, (r3, 0x8)
+  24:	0c1e      	bf      	0x60	// 60 <gx_pmu_osc_set+0x60>
+  26:	3940      	cmpnei      	r1, 0
+  28:	0c14      	bf      	0x50	// 50 <gx_pmu_osc_set+0x50>
+  2a:	3942      	cmpnei      	r1, 2
+  2c:	0c20      	bf      	0x6c	// 6c <gx_pmu_osc_set+0x6c>
+  2e:	3941      	cmpnei      	r1, 1
+  30:	9462      	ld.w      	r3, (r4, 0x8)
+  32:	0c27      	bf      	0x80	// 80 <gx_pmu_osc_set+0x80>
+  34:	3940      	cmpnei      	r1, 0
+  36:	0c20      	bf      	0x76	// 76 <gx_pmu_osc_set+0x76>
+  38:	3942      	cmpnei      	r1, 2
+  3a:	0c28      	bf      	0x8a	// 8a <gx_pmu_osc_set+0x8a>
+  3c:	1167      	lrw      	r3, 0x0	// d8 <gx_pmu_osc_set+0xd8>
+  3e:	9403      	ld.w      	r0, (r4, 0xc)
+  40:	9444      	ld.w      	r2, (r4, 0x10)
+  42:	d4230900 	str.w      	r0, (r3, r1 << 3)
+  46:	4123      	lsli      	r1, r1, 3
+  48:	604c      	addu      	r1, r3
+  4a:	b141      	st.w      	r2, (r1, 0x4)
+  4c:	3000      	movi      	r0, 0
+  4e:	0432      	br      	0xb2	// b2 <gx_pmu_osc_set+0xb2>
+  50:	3b80      	bclri      	r3, 0
+  52:	3b81      	bclri      	r3, 1
+  54:	6cc8      	or      	r3, r2
+  56:	ea22a000 	movih      	r2, 40960
+  5a:	3aae      	bseti      	r2, 14
+  5c:	b262      	st.w      	r3, (r2, 0x8)
+  5e:	07e8      	br      	0x2e	// 2e <gx_pmu_osc_set+0x2e>
+  60:	c4432820 	bclri      	r0, r3, 2
+  64:	3883      	bclri      	r0, 3
+  66:	4262      	lsli      	r3, r2, 2
+  68:	6cc0      	or      	r3, r0
+  6a:	07f6      	br      	0x56	// 56 <gx_pmu_osc_set+0x56>
+  6c:	c4832820 	bclri      	r0, r3, 4
+  70:	3885      	bclri      	r0, 5
+  72:	4264      	lsli      	r3, r2, 4
+  74:	07fa      	br      	0x68	// 68 <gx_pmu_osc_set+0x68>
+  76:	ea22a000 	movih      	r2, 40960
+  7a:	3aae      	bseti      	r2, 14
+  7c:	b263      	st.w      	r3, (r2, 0xc)
+  7e:	07df      	br      	0x3c	// 3c <gx_pmu_osc_set+0x3c>
+  80:	ea22a000 	movih      	r2, 40960
+  84:	3aae      	bseti      	r2, 14
+  86:	b264      	st.w      	r3, (r2, 0x10)
+  88:	07da      	br      	0x3c	// 3c <gx_pmu_osc_set+0x3c>
+  8a:	ea22a000 	movih      	r2, 40960
+  8e:	3aae      	bseti      	r2, 14
+  90:	b265      	st.w      	r3, (r2, 0x14)
+  92:	07d5      	br      	0x3c	// 3c <gx_pmu_osc_set+0x3c>
+  94:	9400      	ld.w      	r0, (r4, 0x0)
+  96:	3841      	cmpnei      	r0, 1
+  98:	0c0e      	bf      	0xb4	// b4 <gx_pmu_osc_set+0xb4>
+  9a:	3840      	cmpnei      	r0, 0
+  9c:	0c06      	bf      	0xa8	// a8 <gx_pmu_osc_set+0xa8>
+  9e:	3842      	cmpnei      	r0, 2
+  a0:	0c10      	bf      	0xc0	// c0 <gx_pmu_osc_set+0xc0>
+  a2:	3000      	movi      	r0, 0
+  a4:	2800      	subi      	r0, 1
+  a6:	0406      	br      	0xb2	// b2 <gx_pmu_osc_set+0xb2>
+  a8:	ea23a000 	movih      	r3, 40960
+  ac:	3bae      	bseti      	r3, 14
+  ae:	9441      	ld.w      	r2, (r4, 0x4)
+  b0:	b349      	st.w      	r2, (r3, 0x24)
+  b2:	1492      	pop      	r4-r5, r15
+  b4:	ea23a000 	movih      	r3, 40960
+  b8:	3bae      	bseti      	r3, 14
+  ba:	9441      	ld.w      	r2, (r4, 0x4)
+  bc:	b34a      	st.w      	r2, (r3, 0x28)
+  be:	07c7      	br      	0x4c	// 4c <gx_pmu_osc_set+0x4c>
+  c0:	ea23a000 	movih      	r3, 40960
+  c4:	3bae      	bseti      	r3, 14
+  c6:	9441      	ld.w      	r2, (r4, 0x4)
+  c8:	b34b      	st.w      	r2, (r3, 0x2c)
+  ca:	07c1      	br      	0x4c	// 4c <gx_pmu_osc_set+0x4c>
+  cc:	ea23a000 	movih      	r3, 40960
+  d0:	3bae      	bseti      	r3, 14
+  d2:	9440      	ld.w      	r2, (r4, 0x0)
+  d4:	b34e      	st.w      	r2, (r3, 0x38)
+  d6:	07bb      	br      	0x4c	// 4c <gx_pmu_osc_set+0x4c>
+  d8:	00000000 	.long	0x00000000
+			d8: R_CKCORE_ADDR32	.bss
+
+Disassembly of section .text.gx_osc_cycles_compare:
+
+00000000 <gx_osc_cycles_compare>:
+   0:	6442      	cmpne      	r0, r1
+   2:	0c11      	bf      	0x24	// 24 <gx_osc_cycles_compare+0x24>
+   4:	6404      	cmphs      	r1, r0
+   6:	0806      	bt      	0x12	// 12 <gx_osc_cycles_compare+0x12>
+   8:	5825      	subu      	r1, r0, r1
+   a:	6449      	cmplt      	r2, r1
+   c:	c4000500 	mvc      	r0
+  10:	783c      	jmp      	r15
+  12:	6440      	cmphs      	r0, r1
+  14:	3300      	movi      	r3, 0
+  16:	0809      	bt      	0x28	// 28 <gx_osc_cycles_compare+0x28>
+  18:	6042      	subu      	r1, r0
+  1a:	6449      	cmplt      	r2, r1
+  1c:	c4000500 	mvc      	r0
+  20:	5b01      	subu      	r0, r3, r0
+  22:	07f7      	br      	0x10	// 10 <gx_osc_cycles_compare+0x10>
+  24:	3000      	movi      	r0, 0
+  26:	07f5      	br      	0x10	// 10 <gx_osc_cycles_compare+0x10>
+  28:	6c0f      	mov      	r0, r3
+  2a:	07f3      	br      	0x10	// 10 <gx_osc_cycles_compare+0x10>
+
+Disassembly of section .text.gx_pmu_osc_enable:
+
+00000000 <gx_pmu_osc_enable>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_enable>
+			4: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   8:	ea22a000 	movih      	r2, 40960
+   c:	3aae      	bseti      	r2, 14
+   e:	3c41      	cmpnei      	r4, 1
+  10:	9260      	ld.w      	r3, (r2, 0x0)
+  12:	0806      	bt      	0x1e	// 1e <gx_pmu_osc_enable+0x1e>
+  14:	ec630001 	ori      	r3, r3, 1
+  18:	b260      	st.w      	r3, (r2, 0x0)
+  1a:	3000      	movi      	r0, 0
+  1c:	1491      	pop      	r4, r15
+  1e:	3c42      	cmpnei      	r4, 2
+  20:	0804      	bt      	0x28	// 28 <gx_pmu_osc_enable+0x28>
+  22:	ec630002 	ori      	r3, r3, 2
+  26:	07f9      	br      	0x18	// 18 <gx_pmu_osc_enable+0x18>
+  28:	3000      	movi      	r0, 0
+  2a:	2800      	subi      	r0, 1
+  2c:	07f8      	br      	0x1c	// 1c <gx_pmu_osc_enable+0x1c>
+
+Disassembly of section .text.gx_pmu_osc_disable:
+
+00000000 <gx_pmu_osc_disable>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_disable>
+			4: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   8:	ea22a000 	movih      	r2, 40960
+   c:	3aae      	bseti      	r2, 14
+   e:	3c41      	cmpnei      	r4, 1
+  10:	9260      	ld.w      	r3, (r2, 0x0)
+  12:	0805      	bt      	0x1c	// 1c <gx_pmu_osc_disable+0x1c>
+  14:	3b80      	bclri      	r3, 0
+  16:	b260      	st.w      	r3, (r2, 0x0)
+  18:	3000      	movi      	r0, 0
+  1a:	1491      	pop      	r4, r15
+  1c:	3c42      	cmpnei      	r4, 2
+  1e:	0803      	bt      	0x24	// 24 <gx_pmu_osc_disable+0x24>
+  20:	3b81      	bclri      	r3, 1
+  22:	07fa      	br      	0x16	// 16 <gx_pmu_osc_disable+0x16>
+  24:	3000      	movi      	r0, 0
+  26:	2800      	subi      	r0, 1
+  28:	07f9      	br      	0x1a	// 1a <gx_pmu_osc_disable+0x1a>
+
+Disassembly of section .text.gx_pmu_osc_trim_enable:
+
+00000000 <gx_pmu_osc_trim_enable>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_trim_enable>
+			4: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   8:	e9240009 	bnez      	r4, 0x1a	// 1a <gx_pmu_osc_trim_enable+0x1a>
+   c:	ea23a000 	movih      	r3, 40960
+  10:	3bae      	bseti      	r3, 14
+  12:	3201      	movi      	r2, 1
+  14:	b34f      	st.w      	r2, (r3, 0x3c)
+  16:	3000      	movi      	r0, 0
+  18:	1491      	pop      	r4, r15
+  1a:	3c41      	cmpnei      	r4, 1
+  1c:	0806      	bt      	0x28	// 28 <gx_pmu_osc_trim_enable+0x28>
+  1e:	ea23a000 	movih      	r3, 40960
+  22:	3bae      	bseti      	r3, 14
+  24:	b390      	st.w      	r4, (r3, 0x40)
+  26:	07f8      	br      	0x16	// 16 <gx_pmu_osc_trim_enable+0x16>
+  28:	3c42      	cmpnei      	r4, 2
+  2a:	0807      	bt      	0x38	// 38 <gx_pmu_osc_trim_enable+0x38>
+  2c:	ea23a000 	movih      	r3, 40960
+  30:	3bae      	bseti      	r3, 14
+  32:	3201      	movi      	r2, 1
+  34:	b351      	st.w      	r2, (r3, 0x44)
+  36:	07f0      	br      	0x16	// 16 <gx_pmu_osc_trim_enable+0x16>
+  38:	3000      	movi      	r0, 0
+  3a:	2800      	subi      	r0, 1
+  3c:	07ee      	br      	0x18	// 18 <gx_pmu_osc_trim_enable+0x18>
+
+Disassembly of section .text.gx_pmu_osc_init:
+
+00000000 <gx_pmu_osc_init>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_init>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   6:	ea23a000 	movih      	r3, 40960
+   a:	3bae      	bseti      	r3, 14
+   c:	3000      	movi      	r0, 0
+   e:	b301      	st.w      	r0, (r3, 0x4)
+  10:	1490      	pop      	r15
+
+Disassembly of section .text.gx_pmu_osc_trim_init:
+
+00000000 <gx_pmu_osc_trim_init>:
+   0:	14d1      	push      	r4, r15
+   2:	ea24a000 	movih      	r4, 40960
+   6:	3cae      	bseti      	r4, 14
+   8:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_trim_init>
+			8: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   c:	3307      	movi      	r3, 7
+   e:	b461      	st.w      	r3, (r4, 0x4)
+  10:	3218      	movi      	r2, 24
+  12:	3100      	movi      	r1, 0
+  14:	1006      	lrw      	r0, 0x0	// 2c <gx_pmu_osc_trim_init+0x2c>
+  16:	e0000000 	bsr      	0x0	// 0 <memset>
+			16: R_CKCORE_PCREL_IMM26BY2	memset
+  1a:	3200      	movi      	r2, 0
+  1c:	1025      	lrw      	r1, 0x0	// 30 <gx_pmu_osc_trim_init+0x30>
+  1e:	3005      	movi      	r0, 5
+  20:	e0000000 	bsr      	0x0	// 0 <gx_request_irq>
+			20: R_CKCORE_PCREL_IMM26BY2	gx_request_irq
+  24:	333f      	movi      	r3, 63
+  26:	3000      	movi      	r0, 0
+  28:	b46c      	st.w      	r3, (r4, 0x30)
+  2a:	1491      	pop      	r4, r15
+	...
+			2c: R_CKCORE_ADDR32	.bss
+			30: R_CKCORE_ADDR32	.text.osc_isr
+
+Disassembly of section .text.gx_pmu_osc_set_all_trim_state:
+
+00000000 <gx_pmu_osc_set_all_trim_state>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_set_all_trim_state>
+			4: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   8:	ea23a001 	movih      	r3, 40961
+   c:	e4042001 	andi      	r0, r4, 1
+  10:	934c      	ld.w      	r2, (r3, 0x30)
+  12:	3a80      	bclri      	r2, 0
+  14:	b34c      	st.w      	r2, (r3, 0x30)
+  16:	934c      	ld.w      	r2, (r3, 0x30)
+  18:	6c08      	or      	r0, r2
+  1a:	b30c      	st.w      	r0, (r3, 0x30)
+  1c:	3000      	movi      	r0, 0
+  1e:	1491      	pop      	r4, r15
+
+Disassembly of section .text.gx_pmu_osc_get_all_trim_state:
+
+00000000 <gx_pmu_osc_get_all_trim_state>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_get_all_trim_state>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   6:	ea23a001 	movih      	r3, 40961
+   a:	930c      	ld.w      	r0, (r3, 0x30)
+   c:	e4002001 	andi      	r0, r0, 1
+  10:	1490      	pop      	r15
+
+Disassembly of section .text.gx_pmu_osc_set_32k_trim_state:
+
+00000000 <gx_pmu_osc_set_32k_trim_state>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_set_32k_trim_state>
+			4: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   8:	ea23a001 	movih      	r3, 40961
+   c:	6110      	addu      	r4, r4
+   e:	934c      	ld.w      	r2, (r3, 0x30)
+  10:	3a81      	bclri      	r2, 1
+  12:	b34c      	st.w      	r2, (r3, 0x30)
+  14:	930c      	ld.w      	r0, (r3, 0x30)
+  16:	e4842002 	andi      	r4, r4, 2
+  1a:	6d00      	or      	r4, r0
+  1c:	3000      	movi      	r0, 0
+  1e:	b38c      	st.w      	r4, (r3, 0x30)
+  20:	1491      	pop      	r4, r15
+
+Disassembly of section .text.gx_pmu_osc_get_32k_trim_state:
+
+00000000 <gx_pmu_osc_get_32k_trim_state>:
+   0:	14d0      	push      	r15
+   2:	e0000000 	bsr      	0x0	// 0 <gx_pmu_osc_get_32k_trim_state>
+			2: R_CKCORE_PCREL_IMM26BY2	gx_pmu_osc_clock_ref_enable
+   6:	ea23a001 	movih      	r3, 40961
+   a:	930c      	ld.w      	r0, (r3, 0x30)
+   c:	c4205420 	zext      	r0, r0, 1, 1
+  10:	1490      	pop      	r15

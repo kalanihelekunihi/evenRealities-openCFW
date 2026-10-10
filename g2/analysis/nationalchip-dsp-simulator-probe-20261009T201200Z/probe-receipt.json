@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/opt/homebrew/bin/docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--mount",
+    "type=bind,src=/Users/kalani/Repo/evenRealities-openCFW/g2/build/offline-nationalchip-dsp-c-compiler-successor-20261009T195245Z/toolchain,dst=/tool,readonly",
+    "--mount",
+    "type=bind,src=/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-simulator-probe-20261009T201200Z,dst=/out",
+    "ubuntu:22.04",
+    "/bin/sh",
+    "-c",
+    "apt-get update > /out/apt-update.log 2>&1 && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libncurses5 libtinfo5 > /out/apt-install.log 2>&1 && dpkg-query -W libncurses5 libtinfo5 > /out/package-versions.txt && cat /etc/apt/sources.list > /out/official-package-sources.txt && ldd /tool/bin/csky-abiv2-elf-gdb > /out/gdb-ldd.txt && /tool/bin/csky-abiv2-elf-gdb -q -nx -batch -ex 'show version' -ex 'help target' -ex 'target sim' > /out/gdb-simulator-probe.txt 2>&1"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "",
+  "image_manifest_digest": "sha256:5ec03bb3441e8b0bf3b4f9cd4629a1ae763010dc3035bb8da3ae6cf026486401"
+}

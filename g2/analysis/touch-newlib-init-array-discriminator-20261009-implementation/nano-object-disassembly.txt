@@ -1,0 +1,40 @@
+
+g2/analysis/touch-newlib-init-array-discriminator-20261009-implementation/libc_nano.a.init.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.__libc_init_array:
+
+00000000 <__libc_init_array>:
+   0:	b570      	push	{r4, r5, r6, lr}
+   2:	2600      	movs	r6, #0
+   4:	4c0c      	ldr	r4, [pc, #48]	@ (38 <__libc_init_array+0x38>)
+   6:	4d0d      	ldr	r5, [pc, #52]	@ (3c <__libc_init_array+0x3c>)
+   8:	1b64      	subs	r4, r4, r5
+   a:	10a4      	asrs	r4, r4, #2
+   c:	42a6      	cmp	r6, r4
+   e:	d109      	bne.n	24 <__libc_init_array+0x24>
+  10:	2600      	movs	r6, #0
+  12:	f7ff fffe 	bl	0 <_init>
+			12: R_ARM_THM_CALL	_init
+  16:	4c0a      	ldr	r4, [pc, #40]	@ (40 <__libc_init_array+0x40>)
+  18:	4d0a      	ldr	r5, [pc, #40]	@ (44 <__libc_init_array+0x44>)
+  1a:	1b64      	subs	r4, r4, r5
+  1c:	10a4      	asrs	r4, r4, #2
+  1e:	42a6      	cmp	r6, r4
+  20:	d105      	bne.n	2e <__libc_init_array+0x2e>
+  22:	bd70      	pop	{r4, r5, r6, pc}
+  24:	00b3      	lsls	r3, r6, #2
+  26:	58eb      	ldr	r3, [r5, r3]
+  28:	4798      	blx	r3
+  2a:	3601      	adds	r6, #1
+  2c:	e7ee      	b.n	c <__libc_init_array+0xc>
+  2e:	00b3      	lsls	r3, r6, #2
+  30:	58eb      	ldr	r3, [r5, r3]
+  32:	4798      	blx	r3
+  34:	3601      	adds	r6, #1
+  36:	e7f2      	b.n	1e <__libc_init_array+0x1e>
+	...
+			38: R_ARM_ABS32	__preinit_array_end
+			3c: R_ARM_ABS32	__preinit_array_start
+			40: R_ARM_ABS32	__init_array_end
+			44: R_ARM_ABS32	__init_array_start

@@ -1,0 +1,154 @@
+{
+  "authenticated_inputs": [
+    {
+      "path": "g2/build/reference/package/g2-openCFW-s200_v2.2.6.10.evenota.bin",
+      "size": 4301227,
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "size": 326092,
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "size": 211948,
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "size": 34464,
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "size": 55784,
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "size": 148599,
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "size": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    }
+  ],
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "address_mapping": "main payload file offset = virtual address - 0x438000 + 32",
+  "configuration_entry": "0x55ca94",
+  "code_end_exclusive": "0x55cc10",
+  "ranges": [
+    {
+      "label": "configuration code extent; literal dependencies separate",
+      "start": "0x55ca94",
+      "end_exclusive": "0x55cc10",
+      "payload_offset": "0x124ab4",
+      "size": 380,
+      "sha256": "9e46d712c2698eb0d353efbcf61c26b89c4531c705f0d4a357cc368287001c7d",
+      "original_bytes_hex": "2de9f04105005ff00008002805d0026822f07e425a4b9a4201d00220ace0002805d00c00002c02d06868082801d30620a2e02868c0f34060002801d007209be06e6820782872dff85c7441f2100017eb0631c1f80401207800283ad1207a042801db062088e06068dff84c17884201d3062081e0207ac0f340016068fff728fa217a11f0030117eb0632c2f8801250f0010017eb0637c7f81801dff820076168b0fbf1f0c5f864084ff47a70c5f86008e068e86020692861e86800284ed0e868296910eb8100dff8f816884231d2012030e0207801282ad16068dff8e816884208d0dff8e41688420dd0dff8d016884212d01ae0dff8d406dff8d41617eb0632c2f8c012c3e7dff8cc06dff8cc1617eb0632c2f8c012bae7dff8c006dff8c01617eb0632c2f8c012b1e7062024e0052022e0002085f8a4082869083880006021b0fbf1f0c5f85808d5f8580840f20111884203d34ff48070c5f85808002006e000210200d2b22a4482f8a018401c0100c9b20429f4db4046bde8f081"
+    },
+    {
+      "label": "adjacent configuration literals",
+      "start": "0x55cc10",
+      "end_exclusive": "0x55cc18",
+      "payload_offset": "0x124c30",
+      "size": 8,
+      "sha256": "2db330e658761234b83dee1bd0618b398e2692428d0c2a41816ac63ea4fb5a1f",
+      "original_bytes_hex": "e0e0e00056341201"
+    },
+    {
+      "label": "IOM base literal",
+      "start": "0x55cf38",
+      "end_exclusive": "0x55cf3c",
+      "payload_offset": "0x124f58",
+      "size": 4,
+      "sha256": "215bdcaa34cf468c1a3d15e5f9adbf6d9565df261937899a5c88a3b40be8d96f",
+      "original_bytes_hex": "00000540"
+    },
+    {
+      "label": "shared configuration literal pool subset",
+      "start": "0x55d248",
+      "end_exclusive": "0x55d278",
+      "payload_offset": "0x125268",
+      "size": 48,
+      "sha256": "452b15907cf66ed4576aa54a69259c7e5fced2c98cf2e7e04f37b2b87b058ef6",
+      "original_bytes_hex": "00000540016cdc0240420f0000000820a0860100801a060001233b7770f0030001230e1d70f203000123050b40300200"
+    }
+  ],
+  "branches": [
+    {
+      "rate_argument": 100000,
+      "branch_entry": "0x55cb88",
+      "literal_load": "0x55cb8c",
+      "store": "0x55cb94",
+      "literal_address": "0x55d264",
+      "old_word": "0x3f070",
+      "new_default_word": "0x103f070",
+      "stock_word": "0x3f070",
+      "stock_STRDIS": 0,
+      "CLKCFG": "0x773b2301",
+      "receipt": {
+        "label": "branch instructions",
+        "start": "0x55cb88",
+        "end_exclusive": "0x55cb9a",
+        "payload_offset": "0x124ba8",
+        "size": 18,
+        "sha256": "11715b63b82582a9fe6803c8de2262776d0e78efba9fb1c5ea78965360e0f9a8",
+        "original_bytes_hex": "dff8d406dff8d41617eb0632c2f8c012c3e7"
+      }
+    },
+    {
+      "rate_argument": 400000,
+      "branch_entry": "0x55cb9a",
+      "literal_load": "0x55cb9e",
+      "store": "0x55cba6",
+      "literal_address": "0x55d26c",
+      "old_word": "0x3f270",
+      "new_default_word": "0x103f270",
+      "stock_word": "0x3f270",
+      "stock_STRDIS": 0,
+      "CLKCFG": "0x1d0e2301",
+      "receipt": {
+        "label": "branch instructions",
+        "start": "0x55cb9a",
+        "end_exclusive": "0x55cbac",
+        "payload_offset": "0x124bba",
+        "size": 18,
+        "sha256": "2628b963de5ff933534102ff5b15bd9c9f8dd9089e6360790db4a551362f86c2",
+        "original_bytes_hex": "dff8cc06dff8cc1617eb0632c2f8c012bae7"
+      }
+    },
+    {
+      "rate_argument": 1000000,
+      "branch_entry": "0x55cbac",
+      "literal_load": "0x55cbb0",
+      "store": "0x55cbb8",
+      "literal_address": "0x55d274",
+      "old_word": "0x23040",
+      "new_default_word": "0x1023040",
+      "stock_word": "0x23040",
+      "stock_STRDIS": 0,
+      "CLKCFG": "0xb052301",
+      "receipt": {
+        "label": "branch instructions",
+        "start": "0x55cbac",
+        "end_exclusive": "0x55cbbe",
+        "payload_offset": "0x124bcc",
+        "size": 18,
+        "sha256": "5a82b809c879b3ff33ee9fd9ccca6de2ce4c4b7345f5ca1958a7e4a374614e13",
+        "original_bytes_hex": "dff8c006dff8c01617eb0632c2f8c012b1e7"
+      }
+    }
+  ],
+  "MMIO_address": "0x400502c0 + module*0x1000; module 0..7",
+  "result": "OLD for all three stock configuration writes",
+  "zip_sha256": "d9751350ef593b306838792a64a5620e4912c84ddf32dc9ff6aacd5cca049cad",
+  "source_members": {
+    "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/mcu/apollo510/hal/mcu/am_hal_iom.c": "cb8024be21b6b86171637d9bd33170e720a56944933635b0940939a2fdcc63f2",
+    "AmbiqSuite_5.2.0/AmbiqSuite_5.2.0/CMSIS/AmbiqMicro/Include/apollo510.h": "1df01e4044e299c60b1cef7e13e09da6a3942db90d80b769b644dc70d0ea83e6"
+  },
+  "baseline_sha256": "a75ec905d833aa0c721e1ea7207df2d6a8adccdf57d7d1a42fb47ce0734c6530"
+}

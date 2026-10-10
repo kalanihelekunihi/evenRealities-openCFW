@@ -1,0 +1,29 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-tool-automation-20261009-agent2/private-main-analysis-only.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004d0524 <bounded_original_thumb+0x5b8>:
+  4d0524:	6080      	str	r0, [r0, #8]
+  4d0526:	60c0      	str	r0, [r0, #12]
+  4d0528:	2100      	movs	r1, #0
+  4d052a:	6101      	str	r1, [r0, #16]
+  4d052c:	2100      	movs	r1, #0
+  4d052e:	e008      	b.n	4d0542 <bounded_original_thumb+0x5d6>
+  4d0530:	01cb      	lsls	r3, r1, #7
+  4d0532:	4403      	add	r3, r0
+  4d0534:	eb03 0382 	add.w	r3, r3, r2, lsl #2
+  4d0538:	6758      	str	r0, [r3, #116]	@ 0x74
+  4d053a:	1c52      	adds	r2, r2, #1
+  4d053c:	2a20      	cmp	r2, #32
+  4d053e:	dbf7      	blt.n	4d0530 <bounded_original_thumb+0x5c4>
+  4d0540:	1c49      	adds	r1, r1, #1
+  4d0542:	2918      	cmp	r1, #24
+  4d0544:	da05      	bge.n	4d0552 <bounded_original_thumb+0x5e6>
+  4d0546:	2200      	movs	r2, #0
+  4d0548:	eb00 0381 	add.w	r3, r0, r1, lsl #2
+  4d054c:	615a      	str	r2, [r3, #20]
+  4d054e:	2200      	movs	r2, #0
+  4d0550:	e7f4      	b.n	4d053c <bounded_original_thumb+0x5d0>
+  4d0552:	4770      	bx	lr

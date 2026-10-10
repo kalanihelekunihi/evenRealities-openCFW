@@ -1,0 +1,49 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-tool-automation-20261009-agent2/private-main-analysis-only.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004cffc2 <bounded_original_thumb+0x56>:
+  4cffc2:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+  4cffc6:	0006      	movs	r6, r0
+  4cffc8:	4688      	mov	r8, r1
+  4cffca:	0017      	movs	r7, r2
+  4cffcc:	f8d8 5000 	ldr.w	r5, [r8]
+  4cffd0:	683c      	ldr	r4, [r7, #0]
+  4cffd2:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  4cffd6:	eb06 0185 	add.w	r1, r6, r5, lsl #2
+  4cffda:	6949      	ldr	r1, [r1, #20]
+  4cffdc:	fa10 f404 	lsls.w	r4, r0, r4
+  4cffe0:	400c      	ands	r4, r1
+  4cffe2:	2c00      	cmp	r4, #0
+  4cffe4:	d111      	bne.n	4d000a <bounded_original_thumb+0x9e>
+  4cffe6:	6931      	ldr	r1, [r6, #16]
+  4cffe8:	1c6d      	adds	r5, r5, #1
+  4cffea:	fa10 f505 	lsls.w	r5, r0, r5
+  4cffee:	400d      	ands	r5, r1
+  4cfff0:	2d00      	cmp	r5, #0
+  4cfff2:	d101      	bne.n	4cfff8 <bounded_original_thumb+0x8c>
+  4cfff4:	2000      	movs	r0, #0
+  4cfff6:	e01e      	b.n	4d0036 <bounded_original_thumb+0xca>
+  4cfff8:	0028      	movs	r0, r5
+  4cfffa:	f7ff feac 	bl	4cfd56 <bounded_original_thumb-0x216>
+  4cfffe:	0005      	movs	r5, r0
+  4d0000:	f8c8 5000 	str.w	r5, [r8]
+  4d0004:	eb06 0085 	add.w	r0, r6, r5, lsl #2
+  4d0008:	6944      	ldr	r4, [r0, #20]
+  4d000a:	2c00      	cmp	r4, #0
+  4d000c:	d109      	bne.n	4d0022 <bounded_original_thumb+0xb6>
+  4d000e:	f44f 720e 	mov.w	r2, #568	@ 0x238
+  4d0012:	f8df 1698 	ldr.w	r1, [pc, #1688]	@ 4d06ac <bounded_original_thumb+0x740>
+  4d0016:	f8df 0840 	ldr.w	r0, [pc, #2112]	@ 4d0858 <bounded_original_thumb+0x8ec>
+  4d001a:	f000 fccb 	bl	4d09b4 <bounded_original_thumb+0xa48>
+  4d001e:	f3af 8000 	nop.w
+  4d0022:	0020      	movs	r0, r4
+  4d0024:	f7ff fe97 	bl	4cfd56 <bounded_original_thumb-0x216>
+  4d0028:	6038      	str	r0, [r7, #0]
+  4d002a:	01ed      	lsls	r5, r5, #7
+  4d002c:	eb06 0105 	add.w	r1, r6, r5
+  4d0030:	eb01 0080 	add.w	r0, r1, r0, lsl #2
+  4d0034:	6f40      	ldr	r0, [r0, #116]	@ 0x74
+  4d0036:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}

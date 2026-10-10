@@ -1,0 +1,121 @@
+
+g2/analysis/cordio-att-guard-binding-20261009-implementation/attcProcRsp.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004b5448 <.data>:
+  4b5448:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  4b544a:	b084      	sub	sp, #16
+  4b544c:	0004      	movs	r4, r0
+  4b544e:	000d      	movs	r5, r1
+  4b5450:	0016      	movs	r6, r2
+  4b5452:	79a0      	ldrb	r0, [r4, #6]
+  4b5454:	2800      	cmp	r0, #0
+  4b5456:	f000 808e 	beq.w	0x4b5576
+  4b545a:	7a30      	ldrb	r0, [r6, #8]
+  4b545c:	f030 0001 	bics.w	r0, r0, #1
+  4b5460:	2102      	movs	r1, #2
+  4b5462:	fb90 f0f1 	sdiv	r0, r0, r1
+  4b5466:	f88d 0002 	strb.w	r0, [sp, #2]
+  4b546a:	f89d 0002 	ldrb.w	r0, [sp, #2]
+  4b546e:	2812      	cmp	r0, #18
+  4b5470:	f280 8081 	bge.w	0x4b5576
+  4b5474:	f89d 0002 	ldrb.w	r0, [sp, #2]
+  4b5478:	2800      	cmp	r0, #0
+  4b547a:	d004      	beq.n	0x4b5486
+  4b547c:	f89d 0002 	ldrb.w	r0, [sp, #2]
+  4b5480:	79a1      	ldrb	r1, [r4, #6]
+  4b5482:	4288      	cmp	r0, r1
+  4b5484:	d177      	bne.n	0x4b5576
+  4b5486:	f114 0018 	adds.w	r0, r4, #24
+  4b548a:	f075 f822 	bl	0x52a4d2
+  4b548e:	f116 0009 	adds.w	r0, r6, #9
+  4b5492:	9001      	str	r0, [sp, #4]
+  4b5494:	1e68      	subs	r0, r5, #1
+  4b5496:	f8ad 0008 	strh.w	r0, [sp, #8]
+  4b549a:	89a0      	ldrh	r0, [r4, #12]
+  4b549c:	f8ad 000a 	strh.w	r0, [sp, #10]
+  4b54a0:	2000      	movs	r0, #0
+  4b54a2:	f88d 0003 	strb.w	r0, [sp, #3]
+  4b54a6:	f8df 04f8 	ldr.w	r0, [pc, #1272]	@ 0x4b59a0
+  4b54aa:	f89d 1002 	ldrb.w	r1, [sp, #2]
+  4b54ae:	f850 7021 	ldr.w	r7, [r0, r1, lsl #2]
+  4b54b2:	0038      	movs	r0, r7
+  4b54b4:	2800      	cmp	r0, #0
+  4b54b6:	d010      	beq.n	0x4b54da
+  4b54b8:	0028      	movs	r0, r5
+  4b54ba:	f8df 14e8 	ldr.w	r1, [pc, #1256]	@ 0x4b59a4
+  4b54be:	f89d 2002 	ldrb.w	r2, [sp, #2]
+  4b54c2:	5c89      	ldrb	r1, [r1, r2]
+  4b54c4:	b280      	uxth	r0, r0
+  4b54c6:	b289      	uxth	r1, r1
+  4b54c8:	4288      	cmp	r0, r1
+  4b54ca:	d354      	bcc.n	0x4b5576
+  4b54cc:	466b      	mov	r3, sp
+  4b54ce:	0032      	movs	r2, r6
+  4b54d0:	0029      	movs	r1, r5
+  4b54d2:	b289      	uxth	r1, r1
+  4b54d4:	0020      	movs	r0, r4
+  4b54d6:	47b8      	blx	r7
+  4b54d8:	2000      	movs	r0, #0
+  4b54da:	79e0      	ldrb	r0, [r4, #7]
+  4b54dc:	2800      	cmp	r0, #0
+  4b54de:	d003      	beq.n	0x4b54e8
+  4b54e0:	f89d 0003 	ldrb.w	r0, [sp, #3]
+  4b54e4:	2800      	cmp	r0, #0
+  4b54e6:	d004      	beq.n	0x4b54f2
+  4b54e8:	2000      	movs	r0, #0
+  4b54ea:	71a0      	strb	r0, [r4, #6]
+  4b54ec:	1d20      	adds	r0, r4, #4
+  4b54ee:	f07c fae7 	bl	0x531ac0
+  4b54f2:	f89d 0002 	ldrb.w	r0, [sp, #2]
+  4b54f6:	2801      	cmp	r0, #1
+  4b54f8:	d00d      	beq.n	0x4b5516
+  4b54fa:	f8df 14a0 	ldr.w	r1, [pc, #1184]	@ 0x4b599c
+  4b54fe:	6d88      	ldr	r0, [r1, #88]	@ 0x58
+  4b5500:	2800      	cmp	r0, #0
+  4b5502:	d008      	beq.n	0x4b5516
+  4b5504:	79e0      	ldrb	r0, [r4, #7]
+  4b5506:	f88d 000c 	strb.w	r0, [sp, #12]
+  4b550a:	88a0      	ldrh	r0, [r4, #4]
+  4b550c:	f8ad 0000 	strh.w	r0, [sp]
+  4b5510:	4668      	mov	r0, sp
+  4b5512:	6d89      	ldr	r1, [r1, #88]	@ 0x58
+  4b5514:	4788      	blx	r1
+  4b5516:	6820      	ldr	r0, [r4, #0]
+  4b5518:	f894 1028 	ldrb.w	r1, [r4, #40]	@ 0x28
+  4b551c:	eb00 0081 	add.w	r0, r0, r1, lsl #2
+  4b5520:	7880      	ldrb	r0, [r0, #2]
+  4b5522:	0780      	lsls	r0, r0, #30
+  4b5524:	d427      	bmi.n	0x4b5576
+  4b5526:	68a0      	ldr	r0, [r4, #8]
+  4b5528:	2800      	cmp	r0, #0
+  4b552a:	d003      	beq.n	0x4b5534
+  4b552c:	0020      	movs	r0, r4
+  4b552e:	f07b fe09 	bl	0x531144
+  4b5532:	e020      	b.n	0x4b5576
+  4b5534:	f894 0028 	ldrb.w	r0, [r4, #40]	@ 0x28
+  4b5538:	2800      	cmp	r0, #0
+  4b553a:	d11c      	bne.n	0x4b5576
+  4b553c:	f8df 6468 	ldr.w	r6, [pc, #1128]	@ 0x4b59a8
+  4b5540:	250c      	movs	r5, #12
+  4b5542:	f894 0029 	ldrb.w	r0, [r4, #41]	@ 0x29
+  4b5546:	4368      	muls	r0, r5
+  4b5548:	4430      	add	r0, r6
+  4b554a:	f890 0182 	ldrb.w	r0, [r0, #386]	@ 0x182
+  4b554e:	2800      	cmp	r0, #0
+  4b5550:	d011      	beq.n	0x4b5576
+  4b5552:	f894 0029 	ldrb.w	r0, [r4, #41]	@ 0x29
+  4b5556:	4368      	muls	r0, r5
+  4b5558:	4430      	add	r0, r6
+  4b555a:	f510 71c0 	adds.w	r1, r0, #384	@ 0x180
+  4b555e:	0020      	movs	r0, r4
+  4b5560:	f07b fdfe 	bl	0x531160
+  4b5564:	f894 0029 	ldrb.w	r0, [r4, #41]	@ 0x29
+  4b5568:	fb05 f500 	mul.w	r5, r5, r0
+  4b556c:	eb06 0005 	add.w	r0, r6, r5
+  4b5570:	2100      	movs	r1, #0
+  4b5572:	f880 1182 	strb.w	r1, [r0, #386]	@ 0x182
+  4b5576:	b005      	add	sp, #20
+  4b5578:	bdf0      	pop	{r4, r5, r6, r7, pc}

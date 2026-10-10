@@ -1,0 +1,44 @@
+
+g2/analysis/flashdb-provider-config-20261010-implementation/get-kv.bin:     file format binary
+
+
+Disassembly of section .data:
+
+005444f4 <.data>:
+  5444f4:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+  5444f8:	b096      	sub	sp, #88	@ 0x58
+  5444fa:	0006      	movs	r6, r0
+  5444fc:	0015      	movs	r5, r2
+  5444fe:	001f      	movs	r7, r3
+  544500:	9c1c      	ldr	r4, [sp, #112]	@ 0x70
+  544502:	f05f 0800 	movs.w	r8, #0
+  544506:	466a      	mov	r2, sp
+  544508:	0030      	movs	r0, r6
+  54450a:	f7ff ffc6 	bl	0x54449a
+  54450e:	2800      	cmp	r0, #0
+  544510:	d013      	beq.n	0x54453a
+  544512:	2c00      	cmp	r4, #0
+  544514:	d001      	beq.n	0x54451a
+  544516:	9803      	ldr	r0, [sp, #12]
+  544518:	6020      	str	r0, [r4, #0]
+  54451a:	9803      	ldr	r0, [sp, #12]
+  54451c:	42b8      	cmp	r0, r7
+  54451e:	d202      	bcs.n	0x544526
+  544520:	f8dd 800c 	ldr.w	r8, [sp, #12]
+  544524:	e000      	b.n	0x544528
+  544526:	46b8      	mov	r8, r7
+  544528:	2d00      	cmp	r5, #0
+  54452a:	d00a      	beq.n	0x544542
+  54452c:	4643      	mov	r3, r8
+  54452e:	002a      	movs	r2, r5
+  544530:	9915      	ldr	r1, [sp, #84]	@ 0x54
+  544532:	0030      	movs	r0, r6
+  544534:	f041 fa6d 	bl	0x585a12
+  544538:	e003      	b.n	0x544542
+  54453a:	2c00      	cmp	r4, #0
+  54453c:	d001      	beq.n	0x544542
+  54453e:	2000      	movs	r0, #0
+  544540:	6020      	str	r0, [r4, #0]
+  544542:	4640      	mov	r0, r8
+  544544:	b016      	add	sp, #88	@ 0x58
+  544546:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}

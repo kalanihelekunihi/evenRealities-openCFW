@@ -1,0 +1,100 @@
+{
+  "status": "analytical_plan_not_executed",
+  "cases": [
+    {
+      "amplitude": -32768,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 0,
+      "packed_plus_next_product_accumulator_expected_hex": "0x0",
+      "first_real_expected": -16384
+    },
+    {
+      "amplitude": -4,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 0,
+      "packed_plus_next_product_accumulator_expected_hex": "0x0",
+      "first_real_expected": -2
+    },
+    {
+      "amplitude": -3,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 1,
+      "packed_plus_next_product_accumulator_expected_hex": "0x10000",
+      "first_real_expected": -2
+    },
+    {
+      "amplitude": -2,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 0,
+      "packed_plus_next_product_accumulator_expected_hex": "0xffff",
+      "first_real_expected": -1
+    },
+    {
+      "amplitude": -1,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 1,
+      "packed_plus_next_product_accumulator_expected_hex": "0x10000",
+      "first_real_expected": -1
+    },
+    {
+      "amplitude": 0,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 0,
+      "packed_plus_next_product_accumulator_expected_hex": "0x0",
+      "first_real_expected": 0
+    },
+    {
+      "amplitude": 1,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 1,
+      "packed_plus_next_product_accumulator_expected_hex": "0x10000",
+      "first_real_expected": 0
+    },
+    {
+      "amplitude": 2,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 0,
+      "packed_plus_next_product_accumulator_expected_hex": "0xffff",
+      "first_real_expected": 1
+    },
+    {
+      "amplitude": 3,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 1,
+      "packed_plus_next_product_accumulator_expected_hex": "0x10000",
+      "first_real_expected": 1
+    },
+    {
+      "amplitude": 4,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 0,
+      "packed_plus_next_product_accumulator_expected_hex": "0x0",
+      "first_real_expected": 2
+    },
+    {
+      "amplitude": 32766,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 0,
+      "packed_plus_next_product_accumulator_expected_hex": "0xffff",
+      "first_real_expected": 16383
+    },
+    {
+      "amplitude": 32767,
+      "original_C_first_imaginary_expected": 0,
+      "packed_first_imaginary_expected": 1,
+      "packed_plus_next_product_accumulator_expected_hex": "0x10000",
+      "first_real_expected": 16383
+    }
+  ],
+  "case_count": 12,
+  "fixture": "1024 halfwords zero;src[0]=src[512]=amplitude; DC/Nyquist imaginary0, all other frequency pairszero: Hermitian endpoint-valid",
+  "configuration": "fftLen256 split for real512; original locked real coefficient table; modifier1; separate4-byte aligned guarded buffers",
+  "compare_implementations": [
+    "authentic C inverse split",
+    "separate packed-negation diagnostic C inverse split",
+    "exact-reproduced stock assembly inverse split"
+  ],
+  "expected_scope": "Predictions from documented PNEG lane semantics and first locked coefficient pair A=(16384,-16384),B=(16384,16384). Not new execution or physical validation.",
+  "MAC_corner_exclusion": "Every nonzero source pair is(amplitude,0); coefficient operand has +/-16384 lanes. No product operand pair is80008000. All remaining input pairszero.",
+  "stopping": "Check all canaries/untouched output tails before numerical comparison; retain first differing lane/accumulator. Stop on unsupported opcode/ABI/mapping/guard issue or prediction mismatch. No firmware/source/simulator patches or flag sweep."
+}

@@ -1,0 +1,16 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees/misc.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.gx_analog_config_update_enable:
+
+00000000 <gx_analog_config_update_enable>:
+   0:	1064      	lrw      	r3, 0xa0005000	// 10 <gx_analog_config_update_enable+0x10>
+   2:	3259      	movi      	r2, 89
+   4:	b350      	st.w      	r2, (r3, 0x40)
+   6:	b351      	st.w      	r2, (r3, 0x44)
+   8:	b352      	st.w      	r2, (r3, 0x48)
+   a:	b353      	st.w      	r2, (r3, 0x4c)
+   c:	783c      	jmp      	r15
+   e:	0000      	.short	0x0000
+  10:	a0005000 	.long	0xa0005000

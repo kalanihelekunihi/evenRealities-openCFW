@@ -1,0 +1,46 @@
+{
+  "status": "proposed_not_executed",
+  "base_plan": "DSP-NUMERICAL-TEST-PLAN.json",
+  "base_cases": 289,
+  "coverage_gap": "abs_max missing from original corpus and ten-unit C alternative",
+  "additional_absmax_oracle_cases": 55,
+  "absmax_case_recipe": "Lengths1/2/3/4/5/7/8/17/512 x six patterns (zero, all -32768, alternating extrema, negative small cycle, mixed magnitudes, unique maximum last) plus one zero-length case. Expected saturated absolute maximum from documented source contract; no C alternative comparison claimed.",
+  "critical_preflight": {
+    "instructions": [
+      "mulca.s16.s",
+      "mulcax.s16.s",
+      "mulaca.s16.s",
+      "mulacax.s16.s"
+    ],
+    "operands": {
+      "x": "0x80008000",
+      "y": "0x80008000",
+      "z": "0x00000000"
+    },
+    "static_QEMU_source_predictions": {
+      "mulca": "0x7fffffff",
+      "mulcax": "0x7fffffff",
+      "mulaca": "0x80000000",
+      "mulacax": "0x80000000"
+    },
+    "qualification": "Source arithmetic under QEMU -fwrapv, not executed or authoritative hardware expectations. Verify exact ISA semantics/reachability before interpreting FFT equality."
+  },
+  "preflight_families": [
+    "signed saturation and cross-lane add/sub",
+    "packed halving negative odd values",
+    "packed abs/neg minimum negative",
+    "signed lane shifts and bounded count handling",
+    "complex direct/cross multiply and saturated accumulate",
+    "packing/dup lane selection",
+    "unsigned lane maximum",
+    "bloop target/count/tails/nested iteration",
+    "postincrement and reverse-step load/store, push/pop/call-return",
+    "mapped aligned guarded memory and C-only instruction inventory"
+  ],
+  "required_reporting": [
+    "Per-section execution coverage and exact first mismatch, not just case counts",
+    "Backend build pin/config/binary hashes and supported opcode probes",
+    "Existing library10003000 is not smartl RAM; link separate harness to declared RAM",
+    "No hardware/alias/timing/universal equivalence claims"
+  ]
+}

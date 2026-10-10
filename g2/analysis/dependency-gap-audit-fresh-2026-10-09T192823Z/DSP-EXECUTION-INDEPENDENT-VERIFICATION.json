@@ -1,0 +1,201 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "label": "retained built QEMU binary hash",
+      "pass": true
+    },
+    {
+      "label": "ELF identity/placement isa.elf",
+      "pass": true,
+      "bss_zero_fill_bytes": 0
+    },
+    {
+      "label": "ELF identity/placement smoke.elf",
+      "pass": true,
+      "bss_zero_fill_bytes": 8228
+    },
+    {
+      "label": "ELF identity/placement harness.elf",
+      "pass": true,
+      "bss_zero_fill_bytes": 8228
+    },
+    {
+      "label": "ELF identity/placement abs-oracle.elf",
+      "pass": true,
+      "bss_zero_fill_bytes": 4116
+    },
+    {
+      "label": "ELF identity/placement stages.elf",
+      "pass": true,
+      "bss_zero_fill_bytes": 6144
+    },
+    {
+      "label": "ELF identity/placement pneg.elf",
+      "pass": true,
+      "bss_zero_fill_bytes": 0
+    },
+    {
+      "label": "raw memlog/target command corpus",
+      "pass": true,
+      "memlog_sha256": "d5e55d07e9c0c55ac875d7b847258afb3d2899c4f0d987bc6c93e947483603aa"
+    },
+    {
+      "label": "raw memlog/target command stages",
+      "pass": true,
+      "memlog_sha256": "649ddf0cabb8c4d9facfe39c93941b80bbcc6de40c864fecedeb0e1900905113"
+    },
+    {
+      "label": "raw memlog/target command pneg",
+      "pass": true,
+      "memlog_sha256": "87b9f6e1c5578b3d74976bc7e2da5d1d617bdb15e3166a5599156472b041e207"
+    },
+    {
+      "label": "raw memlog/target command isa-memlog-run",
+      "pass": true,
+      "memlog_sha256": "2ff563a32204e5736040339584a40fbb2b5c27e1c3b9ae6a09093033dc9e5fa4"
+    },
+    {
+      "label": "raw memlog/target command kernel-smoke",
+      "pass": true,
+      "memlog_sha256": "f936e77c8f35b4bedd784264d08b4fe87b86e383fcb6fdf1ea59b25ab4e46e53"
+    },
+    {
+      "label": "raw memlog/target command abs-oracle",
+      "pass": true,
+      "memlog_sha256": "a9249b92068822f8f86e4cc12fa4bd70bc6e015e0edc2bc0d0b8e53721187e85"
+    },
+    {
+      "label": "corpus arithmetic/sign conversion",
+      "pass": true
+    },
+    {
+      "label": "first failing vector loop ordinal",
+      "pass": true
+    },
+    {
+      "label": "abs oracle actual55 cases",
+      "pass": true
+    },
+    {
+      "label": "generated exact table bitrev",
+      "pass": true
+    },
+    {
+      "label": "generated exact table twiddle",
+      "pass": true
+    },
+    {
+      "label": "generated exact table realcoef",
+      "pass": true
+    },
+    {
+      "label": "linked exact table bitrev",
+      "pass": true
+    },
+    {
+      "label": "linked exact table twiddle",
+      "pass": true
+    },
+    {
+      "label": "linked exact table realcoef",
+      "pass": true
+    },
+    {
+      "label": "renamed exact assembly .text.csky_radix4_butterfly_q15",
+      "pass": true
+    },
+    {
+      "label": "renamed exact assembly .text.csky_radix4_butterfly_inverse_q15",
+      "pass": true
+    },
+    {
+      "label": "renamed exact assembly .text.csky_split_rfft_q15",
+      "pass": true
+    },
+    {
+      "label": "renamed exact assembly .text.csky_split_rifft_q15",
+      "pass": true
+    },
+    {
+      "label": "renamed exact assembly .text.csky_shift_q15",
+      "pass": true
+    },
+    {
+      "label": "renamed exact assembly .text.csky_abs_max_q15",
+      "pass": true
+    },
+    {
+      "label": "renamed exact assembly .text.csky_copy_q15",
+      "pass": true
+    },
+    {
+      "label": "renamed exact assembly .text.csky_fill_q15",
+      "pass": true
+    },
+    {
+      "label": "renamed exact assembly .text.csky_bitreversal_16",
+      "pass": true
+    },
+    {
+      "label": "retained manual identity Xuantie E804 User Manual 2.0 (2024) CN.pdf",
+      "pass": true
+    },
+    {
+      "label": "retained manual identity Xuantie E804 User Manual 2.0 (2024) EN-Google.pdf",
+      "pass": true
+    },
+    {
+      "label": "original ASCII lane/full-accumulator formulas",
+      "pass": true
+    },
+    {
+      "label": "valid Hermitian fixture shape",
+      "pass": true
+    },
+    {
+      "label": "localized split and opcode logs",
+      "pass": true
+    }
+  ],
+  "input_hashes": {
+    "isa.elf": "90cb6bd43f311641934017c844cbb78b8c04932a573e6053847c38413553ca38",
+    "smoke.elf": "bd6234b53b500d23410fff4769db001c02f5aacaf58378dc9d6791499c9789bb",
+    "harness.elf": "7b40b328624e3ae742a6c2488207a5c870096acd091f6b712246a6f50ac98e61",
+    "abs-oracle.elf": "2cdb94e7953cb9ce7a8dd0b0ba691783b5ed6ef509357eadc89e3aa40d8f9947",
+    "stages.elf": "ff9337565f46a65f568adea3af99cdd915f53db2096a22d2a7d9da23df949c20",
+    "pneg.elf": "ef6e21484efb8336b091156a9c448509bad21ce398b1f96aade407a715c2b534",
+    "corpus/mem.log": "d5e55d07e9c0c55ac875d7b847258afb3d2899c4f0d987bc6c93e947483603aa",
+    "stages/mem.log": "649ddf0cabb8c4d9facfe39c93941b80bbcc6de40c864fecedeb0e1900905113",
+    "pneg/mem.log": "87b9f6e1c5578b3d74976bc7e2da5d1d617bdb15e3166a5599156472b041e207",
+    "isa-memlog-run/mem.log": "2ff563a32204e5736040339584a40fbb2b5c27e1c3b9ae6a09093033dc9e5fa4",
+    "kernel-smoke/mem.log": "f936e77c8f35b4bedd784264d08b4fe87b86e383fcb6fdf1ea59b25ab4e46e53",
+    "abs-oracle/mem.log": "a9249b92068822f8f86e4cc12fa4bd70bc6e015e0edc2bc0d0b8e53721187e85",
+    "harness.c": "aaa8d5c1052c2403e90f0e378084dc60990fc37ba4ea0cbf2f9524eb1a3c8b72",
+    "stage-main.c": "757d5dad030c587eca4cf0125a3a392f72cda57b6202385dd3cce375cb1f4fa3",
+    "startup.S": "5df398f4aec61b41d8a1740ff3fb4432752d57245501dec5e85bd27b0799f4df",
+    "harness.ld": "84070d6860aaf89010d296a671ce3c819731c8afece8b84c56c2c077beb6f840",
+    "pneg-main.c": "b26ab44e65e38a0a48609510675430d71cda7fc33086851489b73ed5308f919c",
+    "pneg-probe.S": "1a0b2a3aa2c009129754e61760f099fdbac8eeb449d905915307a81ed696bf45",
+    "rename-symbols.txt": "2c80b711c60799139de45903967f29e6b63a538cc85a8535478d8fc5fab3b4d0",
+    "tables.h": "41a0982457686d14c96d1d6a94fdd8bcb25b475c9fc86d9639c3a4e105309be7",
+    "numerical-summary.json": "2c1d102f54bafdb7b2c641ea59039d712ccc5fa719e5fb5e9b853df28a273bc0"
+  },
+  "counting": {
+    "helper_pass": 230,
+    "bitrev_pass": 3,
+    "FFT_pass": 23,
+    "FFT_fail": 1,
+    "FFT_unrun": 32,
+    "total_planned": 289,
+    "abs_oracle_separate": 55
+  },
+  "limits": [
+    "Receipt/static review only, no replay or hardware execution",
+    "Successful helper comparisons check outer canaries, not an independent logical-length oracle",
+    "First numerical mismatch returns before outer-canary checks; failure-path guard state not logged",
+    "Stage arrays lack outer canaries",
+    "Actual abs55 uses5 lengths x11 rotations, not proposed9 lengths x6 patterns pluszero",
+    "Ramp/LCG full-range patterns differ from proposed plan; constant32767 failing vector is unchanged"
+  ]
+}

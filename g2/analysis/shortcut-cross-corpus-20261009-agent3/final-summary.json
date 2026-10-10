@@ -1,0 +1,43 @@
+{
+  "counts": {
+    "elf_members": 287285,
+    "sized_functions": 570457,
+    "duplicate_functions": 474276,
+    "short_anchor_rejected": 1505,
+    "low_entropy_rejected": 2,
+    "source_files": 34282
+  },
+  "images": 32,
+  "matches": 1007,
+  "match_classes": {
+    "relocation_mask_candidate": 462,
+    "exact_bytes": 545
+  },
+  "string_anchors": 247,
+  "elapsed_seconds": 254.67964816093445,
+  "scope": "current default unified replay across ARM, older ARC, ARCv2 and C-SKY",
+  "historical_arc2_supplement": {
+    "counts": {
+      "elf_members": 287285,
+      "sized_functions": 93498,
+      "duplicate_functions": 83081
+    },
+    "matches": 61,
+    "match_classes": {
+      "exact_bytes": 61
+    },
+    "elapsed_seconds": 33.16455078125,
+    "scope": "historical ARCv2-only supplement; counts and matches exclude other architectures",
+    "combined_matches_after_supplement": 1007,
+    "combined_match_classes_after_supplement": {
+      "relocation_mask_candidate": 462,
+      "exact_bytes": 545
+    }
+  },
+  "final_match_classes": {
+    "relocation_mask_candidate": 462,
+    "exact_bytes": 545
+  },
+  "native_unique_exact_functions": 168,
+  "historical_catalogue_without_scoped_pass_exact_occurrences": 10
+}

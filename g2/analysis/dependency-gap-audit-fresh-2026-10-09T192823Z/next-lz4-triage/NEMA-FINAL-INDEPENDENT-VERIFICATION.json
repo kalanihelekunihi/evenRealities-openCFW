@@ -1,0 +1,66 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "check": "locked extent hash",
+      "pass": true
+    },
+    {
+      "check": "candidate symbol full hash",
+      "pass": true
+    },
+    {
+      "check": "listing bytes stock-sectored-disasm.txt",
+      "pass": true
+    },
+    {
+      "check": "listing bytes iar-sectored-disasm.txt",
+      "pass": true
+    },
+    {
+      "check": "extra eight bytes exact",
+      "pass": true
+    },
+    {
+      "check": "last eight executable epilogue",
+      "pass": true
+    },
+    {
+      "check": "candidate corresponding MOVS",
+      "pass": true
+    },
+    {
+      "check": "stock branch into extra update",
+      "pass": true
+    },
+    {
+      "check": "explicit relocation 110",
+      "pass": true
+    },
+    {
+      "check": "explicit relocation 114",
+      "pass": true
+    },
+    {
+      "check": "explicit relocation 172",
+      "pass": true
+    },
+    {
+      "check": "patched hash and full inequality",
+      "pass": true
+    },
+    {
+      "check": "stock exact error branch target",
+      "pass": true
+    },
+    {
+      "check": "stock shifted tail call target",
+      "pass": true
+    },
+    {
+      "check": "literal cell numeric binding",
+      "pass": true
+    }
+  ],
+  "scope": "Independent static byte/hash and relocation arithmetic audit; no ISA execution, SDK execution, binary extraction/redistribution, canonical admission or global name certification."
+}

@@ -1,0 +1,254 @@
+[
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+      "-D",
+      "-z",
+      "-b",
+      "binary",
+      "-m",
+      "csky",
+      "--adjust-vma=0x10203004",
+      "--start-address=0x102078a4",
+      "--stop-address=0x10208ca4",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/102078a4-objdump.txt",
+    "sha256": "5dd88e006dd6f2e06f3d8b613b642be9b94761e8687bab2abad40fcce96bd8ad"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/support/analyzeHeadless",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle",
+      "Xip_102078a4",
+      "-import",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "-loader",
+      "BinaryLoader",
+      "-loader-baseAddr",
+      "0x10203004",
+      "-processor",
+      "CSKY_V2:LE:32:default",
+      "-noanalysis",
+      "-scriptPath",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees",
+      "-postScript",
+      "ExportCallee.java",
+      "0x102078a4"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/102078a4-ghidra.txt",
+    "sha256": "6a2b501f86771bed9ce7d984e38cb8a142019f41111deec8cff009f2f3c17246"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+      "-D",
+      "-z",
+      "-b",
+      "binary",
+      "-m",
+      "csky",
+      "--adjust-vma=0x10203004",
+      "--start-address=0x102085a4",
+      "--stop-address=0x102099a4",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/102085a4-objdump.txt",
+    "sha256": "f6b734770ea029db270a0f17afdf399b1cd38066638b44b978876d6908a9ed7b"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/support/analyzeHeadless",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle",
+      "Xip_102085a4",
+      "-import",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "-loader",
+      "BinaryLoader",
+      "-loader-baseAddr",
+      "0x10203004",
+      "-processor",
+      "CSKY_V2:LE:32:default",
+      "-noanalysis",
+      "-scriptPath",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees",
+      "-postScript",
+      "ExportCallee.java",
+      "0x102085a4"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/102085a4-ghidra.txt",
+    "sha256": "deefb1e4dcdbc2e243a9011222a679dc2a3a791b999259657f9e1466c128b71b"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+      "-D",
+      "-z",
+      "-b",
+      "binary",
+      "-m",
+      "csky",
+      "--adjust-vma=0x10203004",
+      "--start-address=0x10208cd4",
+      "--stop-address=0x1020a0d4",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/10208cd4-objdump.txt",
+    "sha256": "bc9a7ddc05d7c57266f3dbc29408315af40830d72ed62460d03e9b7b150fb71e"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/support/analyzeHeadless",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle",
+      "Xip_10208cd4",
+      "-import",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "-loader",
+      "BinaryLoader",
+      "-loader-baseAddr",
+      "0x10203004",
+      "-processor",
+      "CSKY_V2:LE:32:default",
+      "-noanalysis",
+      "-scriptPath",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees",
+      "-postScript",
+      "ExportCallee.java",
+      "0x10208cd4"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/10208cd4-ghidra.txt",
+    "sha256": "df04249b407b0c7a618e0438fa696f1c080bbd73479146edcb7943d842551920"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+      "-D",
+      "-z",
+      "-b",
+      "binary",
+      "-m",
+      "csky",
+      "--adjust-vma=0x10203004",
+      "--start-address=0x102085f8",
+      "--stop-address=0x102099f8",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/102085f8-objdump.txt",
+    "sha256": "ec77bfe3684860346f38b6508afb4f5472e0a1f517c798c3ee2e8ae7ad58b8c3"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/support/analyzeHeadless",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle",
+      "Xip_102085f8",
+      "-import",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "-loader",
+      "BinaryLoader",
+      "-loader-baseAddr",
+      "0x10203004",
+      "-processor",
+      "CSKY_V2:LE:32:default",
+      "-noanalysis",
+      "-scriptPath",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees",
+      "-postScript",
+      "ExportCallee.java",
+      "0x102085f8"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/102085f8-ghidra.txt",
+    "sha256": "bd58af98e9d11760f45b625fdb2fcfb1c99950b8a43e400ac77cd3856787a7a7"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+      "-D",
+      "-z",
+      "-b",
+      "binary",
+      "-m",
+      "csky",
+      "--adjust-vma=0x10203004",
+      "--start-address=0x10208d48",
+      "--stop-address=0x1020a148",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/10208d48-objdump.txt",
+    "sha256": "a21f2d5517178c1e160c7d48654ec24bfd4787fbf5d835844497402f6fc7321d"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/support/analyzeHeadless",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle",
+      "Xip_10208d48",
+      "-import",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "-loader",
+      "BinaryLoader",
+      "-loader-baseAddr",
+      "0x10203004",
+      "-processor",
+      "CSKY_V2:LE:32:default",
+      "-noanalysis",
+      "-scriptPath",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees",
+      "-postScript",
+      "ExportCallee.java",
+      "0x10208d48"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/10208d48-ghidra.txt",
+    "sha256": "23cd42e7093e15914320afd93e23a7b39f0e03bbddde5a42f4bc8f2686747e6d"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+      "-D",
+      "-z",
+      "-b",
+      "binary",
+      "-m",
+      "csky",
+      "--adjust-vma=0x10203004",
+      "--start-address=0x10207a7c",
+      "--stop-address=0x10208e7c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/10207a7c-objdump.txt",
+    "sha256": "027212a9ba3f74c9b63f0cc6e5114359a70ad53e806e3aae950fb0a9a8a348c2"
+  },
+  {
+    "argv": [
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/private-install/support/analyzeHeadless",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle",
+      "Xip_10207a7c",
+      "-import",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "-loader",
+      "BinaryLoader",
+      "-loader-baseAddr",
+      "0x10203004",
+      "-processor",
+      "CSKY_V2:LE:32:default",
+      "-noanalysis",
+      "-scriptPath",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/callees",
+      "-postScript",
+      "ExportCallee.java",
+      "0x10207a7c"
+    ],
+    "exit_code": 0,
+    "output": "g2/analysis/shortcut-csky-authenticated-20261009-agent1/xip-lifecycle/10207a7c-ghidra.txt",
+    "sha256": "c2896b754c570d5635d6372f9a24c0ceca6c774afe4a5058c9eb551d06e5e8d7"
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "bindings": [
+    {
+      "type": "R_ARM_THM_JUMP24",
+      "offset": 110,
+      "original": "fff7febf",
+      "inplace_addend": -4,
+      "P": "0x514442",
+      "S": "0x4b127c",
+      "displacement_from_PC_plus4": -405962,
+      "resolved": "9cf71bbf"
+    },
+    {
+      "type": "R_ARM_THM_PC12",
+      "offset": 114,
+      "original": "5ff80460",
+      "inplace_addend": -4,
+      "P": "0x514446",
+      "aligned_architectural_PC": "0x514448",
+      "DataTable12_binding": "0x514b78",
+      "displacement": 1840,
+      "resolved": "dff83067",
+      "table_R_ARM_ABS32_symbol": "nema_context",
+      "table_original_addend": 0,
+      "stock_cell_value": "0x20074efc"
+    },
+    {
+      "type": "R_ARM_THM_CALL",
+      "offset": 172,
+      "original": "fff7feff",
+      "inplace_addend": -4,
+      "P": "0x514480",
+      "S": "0x4b127c",
+      "displacement_from_PC_plus4": -406024,
+      "resolved": "9cf7fcfe"
+    }
+  ],
+  "linked_candidate_length": 222,
+  "linked_candidate_sha256": "40a8179d46fc3b662501879fcb79f79c3ffe5fb2336c6c09d52f1eff64649261",
+  "stock_extent_length": 230,
+  "exact_linked_equality": false,
+  "stock_extra_block": {
+    "address": "0x514476",
+    "size": 8,
+    "instructions": [
+      "ldr r2,[r0,#24]",
+      "bic.w r2,r2,#32",
+      "str r2,[r0,#24]"
+    ],
+    "candidate_corresponding_point": "object .text+0x416: movs r0,#0; no flags-bit-clear block"
+  },
+  "stock_last8_are_executable": true,
+  "canonical_target_names_status": "historical Nema provenance; canonical symbol seed Unverified",
+  "remaining_binding_limit": "nema_set_error and nema_context names are inferred candidate bindings from agreeing stock branch/literal sites, not independently closed global-symbol identity",
+  "linker_relaxation_not_simulated": true
+}

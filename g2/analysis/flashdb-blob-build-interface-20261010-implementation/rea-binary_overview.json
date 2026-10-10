@@ -1,0 +1,135 @@
+{
+  "arguments": {},
+  "result": {
+    "meta": null,
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"evidence_id\":\"ev_1996a330080e8260b6f77606210a28d4007b69c47cbe58b31bdac4df449f07c0\",\"subject\":{\"name\":\"rea-thumb-view.elf\",\"digest\":{\"sha256\":\"58c0bb8177a62a930fceff4ea5e423fb1f37bcc200a6f4576d54706b44e5bfc5\"},\"format\":\"elf\",\"architecture\":\"arm\",\"local_path\":\"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/flashdb-blob-build-interface-20261010-implementation/rea-thumb-view.elf\"},\"provider\":{\"id\":\"rea-workflow\",\"name\":\"REA composed investigation workflow\",\"version\":\"1\"},\"analysis_profile\":{\"provider\":{\"id\":\"rea-workflow\",\"name\":\"REA composed investigation workflow\",\"version\":\"1\"},\"parameters\":{\"upstream_analysis_profile\":{\"provider\":{\"id\":\"ghidra\",\"name\":\"Ghidra\",\"version\":\"12.1.4\"},\"parameters\":{\"target_kind\":\"executable\",\"target_format\":\"elf\",\"architecture\":\"arm\",\"available_architectures\":[\"arm\"],\"import_mode\":\"ephemeral-source-immutable\",\"annotation_policy\":\"atomic-function-entry-metadata-v1\",\"load_image_observations\":\"source-mappings-entry-context-v2\",\"function_body_evidence\":\"complete-inclusive-ranges-v1\",\"function_references\":\"complete-body-and-entry-reference-manager-v2\",\"location_resolution\":\"explicit-address-exact-entry-symbol-first-v3\",\"instruction_flow_evidence\":\"decoded-return-pcode-v1\",\"process_launch\":\"inspected-jvm-launch-support-v1\",\"jump_table_evidence\":\"typed-case-default-blocks-v1\",\"decompiler_jump_loads\":true,\"loader\":\"auto-from-header\",\"language_id\":\"auto-from-header\",\"compiler_spec_id\":\"auto-default\",\"analyzer_preset\":\"ghidra-default\"},\"digest\":\"d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26\"},\"workflow_revision\":2},\"digest\":\"539ae87a089f8e9cc48d8dfe6045113a342d9c0b239d427d77365e4fe1d5cf26\"},\"predicate_type\":\"rea.analysis\",\"operation\":\"binary_overview\",\"parameters\":{},\"raw_result\":null,\"normalized_result\":{\"document\":\"target-58c0bb8177a6.elf\",\"segments\":[{\"name\":\"segment_0.1\",\"start\":\"0x541000\",\"end\":\"0x54116e\",\"length\":366},{\"name\":\".text\",\"start\":\"0x54116e\",\"end\":\"0x541350\",\"length\":482},{\"name\":\".ARM.attributes\",\"start\":\".ARM.attributes:0x0\",\"end\":\".ARM.attributes:0x26\",\"length\":38},{\"name\":\".shstrtab\",\"start\":\".shstrtab:0x0\",\"end\":\".shstrtab:0x31\",\"length\":49},{\"name\":\".strtab\",\"start\":\".strtab:0x0\",\"end\":\".strtab:0x18\",\"length\":24},{\"name\":\".symtab\",\"start\":\".symtab:0x0\",\"end\":\".symtab:0x50\",\"length\":80},{\"name\":\"_elfSectionHeaders\",\"start\":\"_elfSectionHeaders:0x0\",\"end\":\"_elfSectionHeaders:0xf0\",\"length\":240}],\"segment_count\":7,\"procedure_count\":2,\"string_count\":7},\"confidence\":\"derived\",\"authority\":\"shipped-artifact\",\"environment\":null,\"limitations\":[\"Derived by an REA composed workflow.\"],\"locations\":[],\"evidence_links\":[]}",
+        "annotations": null,
+        "meta": null
+      }
+    ],
+    "structuredContent": {
+      "evidence_id": "ev_1996a330080e8260b6f77606210a28d4007b69c47cbe58b31bdac4df449f07c0",
+      "subject": {
+        "name": "rea-thumb-view.elf",
+        "digest": {
+          "sha256": "58c0bb8177a62a930fceff4ea5e423fb1f37bcc200a6f4576d54706b44e5bfc5"
+        },
+        "format": "elf",
+        "architecture": "arm",
+        "local_path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/flashdb-blob-build-interface-20261010-implementation/rea-thumb-view.elf"
+      },
+      "provider": {
+        "id": "rea-workflow",
+        "name": "REA composed investigation workflow",
+        "version": "1"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "rea-workflow",
+          "name": "REA composed investigation workflow",
+          "version": "1"
+        },
+        "parameters": {
+          "upstream_analysis_profile": {
+            "provider": {
+              "id": "ghidra",
+              "name": "Ghidra",
+              "version": "12.1.4"
+            },
+            "parameters": {
+              "target_kind": "executable",
+              "target_format": "elf",
+              "architecture": "arm",
+              "available_architectures": [
+                "arm"
+              ],
+              "import_mode": "ephemeral-source-immutable",
+              "annotation_policy": "atomic-function-entry-metadata-v1",
+              "load_image_observations": "source-mappings-entry-context-v2",
+              "function_body_evidence": "complete-inclusive-ranges-v1",
+              "function_references": "complete-body-and-entry-reference-manager-v2",
+              "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+              "instruction_flow_evidence": "decoded-return-pcode-v1",
+              "process_launch": "inspected-jvm-launch-support-v1",
+              "jump_table_evidence": "typed-case-default-blocks-v1",
+              "decompiler_jump_loads": true,
+              "loader": "auto-from-header",
+              "language_id": "auto-from-header",
+              "compiler_spec_id": "auto-default",
+              "analyzer_preset": "ghidra-default"
+            },
+            "digest": "d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26"
+          },
+          "workflow_revision": 2
+        },
+        "digest": "539ae87a089f8e9cc48d8dfe6045113a342d9c0b239d427d77365e4fe1d5cf26"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "binary_overview",
+      "parameters": {},
+      "raw_result": null,
+      "normalized_result": {
+        "document": "target-58c0bb8177a6.elf",
+        "segments": [
+          {
+            "name": "segment_0.1",
+            "start": "0x541000",
+            "end": "0x54116e",
+            "length": 366
+          },
+          {
+            "name": ".text",
+            "start": "0x54116e",
+            "end": "0x541350",
+            "length": 482
+          },
+          {
+            "name": ".ARM.attributes",
+            "start": ".ARM.attributes:0x0",
+            "end": ".ARM.attributes:0x26",
+            "length": 38
+          },
+          {
+            "name": ".shstrtab",
+            "start": ".shstrtab:0x0",
+            "end": ".shstrtab:0x31",
+            "length": 49
+          },
+          {
+            "name": ".strtab",
+            "start": ".strtab:0x0",
+            "end": ".strtab:0x18",
+            "length": 24
+          },
+          {
+            "name": ".symtab",
+            "start": ".symtab:0x0",
+            "end": ".symtab:0x50",
+            "length": 80
+          },
+          {
+            "name": "_elfSectionHeaders",
+            "start": "_elfSectionHeaders:0x0",
+            "end": "_elfSectionHeaders:0xf0",
+            "length": 240
+          }
+        ],
+        "segment_count": 7,
+        "procedure_count": 2,
+        "string_count": 7
+      },
+      "confidence": "derived",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Derived by an REA composed workflow."
+      ],
+      "locations": [],
+      "evidence_links": []
+    },
+    "isError": false
+  }
+}

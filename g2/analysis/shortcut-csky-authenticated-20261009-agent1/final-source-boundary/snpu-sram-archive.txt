@@ -1,0 +1,694 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-csky-authenticated-20261009-agent1/final-source-boundary/snpu.o:     file format elf32-csky-little
+
+
+Disassembly of section .sram_text:
+
+00000000 <snpu_tcb_init>:
+   0:	ea0c0000 	movi      	r12, 0
+   4:	ea9400e0 	lrw      	r20, 0x0	// 384 <snpu_process_status+0xb4>
+   8:	6c73      	mov      	r1, r12
+   a:	c4144835 	lsli      	r21, r20, 0
+   e:	ea17000c 	movi      	r23, 12
+  12:	ea160090 	movi      	r22, 144
+  16:	ea380001 	movih      	r24, 1
+  1a:	e7180087 	addi      	r24, r24, 136
+  1e:	ea9900db 	lrw      	r25, 0x4100ff	// 388 <snpu_process_status+0xb8>
+  22:	e44c002b 	addi      	r2, r12, 44
+  26:	c4540022 	addu      	r2, r20, r2
+  2a:	3000      	movi      	r0, 0
+  2c:	c6c18423 	mult      	r3, r1, r22
+  30:	ea120008 	movi      	r18, 8
+  34:	6f4f      	mov      	r13, r3
+  36:	fae0844d 	mula.32.l      	r13, r0, r23
+  3a:	e660007f 	addi      	r19, r0, 128
+  3e:	c5b5002d 	addu      	r13, r21, r13
+  42:	c6132853 	bseti      	r19, r19, 16
+  46:	de6d2008 	st.w      	r19, (r13, 0x20)
+  4a:	c4025773 	zext      	r19, r2, 27, 0
+  4e:	de6d2009 	st.w      	r19, (r13, 0x24)
+  52:	220b      	addi      	r2, 12
+  54:	2000      	addi      	r0, 1
+  56:	e832ffef 	bnezad      	r18, 0x34	// 34 <snpu_tcb_init+0x34>
+  5a:	2100      	addi      	r1, 1
+  5c:	c4750023 	addu      	r3, r21, r3
+  60:	394a      	cmpnei      	r1, 10
+  62:	df032020 	st.w      	r24, (r3, 0x80)
+  66:	e58c008f 	addi      	r12, r12, 144
+  6a:	df232004 	st.w      	r25, (r3, 0x10)
+  6e:	0bda      	bt      	0x22	// 22 <snpu_tcb_init+0x22>
+  70:	783c      	jmp      	r15
+	...
+
+00000074 <npu_regs_init>:
+  74:	14d1      	push      	r4, r15
+  76:	019b      	lrw      	r4, 0x0	// 384 <snpu_process_status+0xb4>
+  78:	3101      	movi      	r1, 1
+  7a:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+  7e:	e0000000 	bsr      	0x0	// 0 <npu_set_clock_gate>
+			7e: R_CKCORE_PCREL_IMM26BY2	npu_set_clock_gate
+  82:	31fa      	movi      	r1, 250
+  84:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+  88:	4123      	lsli      	r1, r1, 3
+  8a:	e0000000 	bsr      	0x0	// 0 <npu_set_idle_cycle>
+			8a: R_CKCORE_PCREL_IMM26BY2	npu_set_idle_cycle
+  8e:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+  92:	3100      	movi      	r1, 0
+  94:	e0000000 	bsr      	0x0	// 0 <npu_set_idle_mode>
+			94: R_CKCORE_PCREL_IMM26BY2	npu_set_idle_mode
+  98:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+  9c:	316f      	movi      	r1, 111
+  9e:	e0000000 	bsr      	0x0	// 0 <npu_clr_interrupt>
+			9e: R_CKCORE_PCREL_IMM26BY2	npu_clr_interrupt
+  a2:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+  a6:	316d      	movi      	r1, 109
+  a8:	e0000000 	bsr      	0x0	// 0 <npu_en_interrupt>
+			a8: R_CKCORE_PCREL_IMM26BY2	npu_en_interrupt
+  ac:	3180      	movi      	r1, 128
+  ae:	412d      	lsli      	r1, r1, 13
+  b0:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+  b4:	e0000000 	bsr      	0x0	// 0 <npu_set_overtime_thr>
+			b4: R_CKCORE_PCREL_IMM26BY2	npu_set_overtime_thr
+  b8:	1491      	pop      	r4, r15
+	...
+
+000000bc <resume>:
+  bc:	14d1      	push      	r4, r15
+  be:	028d      	lrw      	r4, 0x0	// 384 <snpu_process_status+0xb4>
+  c0:	3300      	movi      	r3, 0
+  c2:	3001      	movi      	r0, 1
+  c4:	b460      	st.w      	r3, (r4, 0x0)
+  c6:	dc642170 	st.w      	r3, (r4, 0x5c0)
+  ca:	dc642174 	st.w      	r3, (r4, 0x5d0)
+  ce:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_snpu_enable>
+			ce: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_snpu_enable
+  d2:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+  d6:	e0000000 	bsr      	0x0	// 0 <npu_is_enabled>
+			d6: R_CKCORE_PCREL_IMM26BY2	npu_is_enabled
+  da:	e900000c 	bez      	r0, 0xf2	// f2 <resume+0x36>
+  de:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+  e2:	e0000000 	bsr      	0x0	// 0 <npu_disable>
+			e2: R_CKCORE_PCREL_IMM26BY2	npu_disable
+  e6:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+  ea:	e0000000 	bsr      	0x0	// 0 <npu_get_all_idle_status>
+			ea: R_CKCORE_PCREL_IMM26BY2	npu_get_all_idle_status
+  ee:	e900fffc 	bez      	r0, 0xe6	// e6 <resume+0x2a>
+  f2:	d8042172 	ld.w      	r0, (r4, 0x5c8)
+  f6:	e0000000 	bsr      	0x0	// 0 <npu_reset>
+			f6: R_CKCORE_PCREL_IMM26BY2	npu_reset
+  fa:	e0000000 	bsr      	0x0	// 74 <npu_regs_init>
+			fa: R_CKCORE_PCREL_IMM26BY2	npu_regs_init
+  fe:	3000      	movi      	r0, 0
+ 100:	1491      	pop      	r4, r15
+	...
+
+00000104 <task_cmd_cache_flush>:
+ 104:	14d1      	push      	r4, r15
+ 106:	6d03      	mov      	r4, r0
+ 108:	3108      	movi      	r1, 8
+ 10a:	e0000000 	bsr      	0x0	// 0 <gx_dcache_clean_range>
+			10a: R_CKCORE_PCREL_IMM26BY2	gx_dcache_clean_range
+ 10e:	316c      	movi      	r1, 108
+ 110:	e404000f 	addi      	r0, r4, 16
+ 114:	e0000000 	bsr      	0x0	// 0 <gx_dcache_clean_range>
+			114: R_CKCORE_PCREL_IMM26BY2	gx_dcache_clean_range
+ 118:	1491      	pop      	r4, r15
+	...
+
+0000011c <submit_task>:
+ 11c:	14d3      	push      	r4-r6, r15
+ 11e:	1421      	subi      	r14, r14, 4
+ 120:	0386      	lrw      	r4, 0x0	// 384 <snpu_process_status+0xb4>
+ 122:	6d83      	mov      	r6, r0
+ 124:	d8642170 	ld.w      	r3, (r4, 0x5c0)
+ 128:	e4a0000f 	addi      	r5, r0, 16
+ 12c:	e9230017 	bnez      	r3, 0x15a	// 15a <submit_task+0x3e>
+ 130:	3301      	movi      	r3, 1
+ 132:	b460      	st.w      	r3, (r4, 0x0)
+ 134:	c7605023 	bmaski      	r3, 28
+ 138:	c4652021 	and      	r1, r5, r3
+ 13c:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 140:	e0000000 	bsr      	0x0	// 0 <npu_set_task_head>
+			140: R_CKCORE_PCREL_IMM26BY2	npu_set_task_head
+ 144:	6c1b      	mov      	r0, r6
+ 146:	e0000000 	bsr      	0x0	// 104 <task_cmd_cache_flush>
+			146: R_CKCORE_PCREL_IMM26BY2	task_cmd_cache_flush
+ 14a:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 14e:	e0000000 	bsr      	0x0	// 0 <npu_enable>
+			14e: R_CKCORE_PCREL_IMM26BY2	npu_enable
+ 152:	dcc42170 	st.w      	r6, (r4, 0x5c0)
+ 156:	1401      	addi      	r14, r14, 4
+ 158:	1493      	pop      	r4-r6, r15
+ 15a:	9460      	ld.w      	r3, (r4, 0x0)
+ 15c:	3b42      	cmpnei      	r3, 2
+ 15e:	0819      	bt      	0x190	// 190 <submit_task+0x74>
+ 160:	6c7b      	mov      	r1, r14
+ 162:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 166:	e0000000 	bsr      	0x0	// 0 <npu_get_over_cmd_addr>
+			166: R_CKCORE_PCREL_IMM26BY2	npu_get_over_cmd_addr
+ 16a:	9860      	ld.w      	r3, (r14, 0x0)
+ 16c:	e9230007 	bnez      	r3, 0x17a	// 17a <submit_task+0x5e>
+ 170:	c4055761 	zext      	r1, r5, 27, 0
+ 174:	3301      	movi      	r3, 1
+ 176:	b460      	st.w      	r3, (r4, 0x0)
+ 178:	07e2      	br      	0x13c	// 13c <submit_task+0x20>
+ 17a:	d8442170 	ld.w      	r2, (r4, 0x5c0)
+ 17e:	c4055765 	zext      	r5, r5, 27, 0
+ 182:	b2a1      	st.w      	r5, (r2, 0x4)
+ 184:	3280      	movi      	r2, 128
+ 186:	4256      	lsli      	r2, r2, 22
+ 188:	60c8      	addu      	r3, r2
+ 18a:	b860      	st.w      	r3, (r14, 0x0)
+ 18c:	9321      	ld.w      	r1, (r3, 0x4)
+ 18e:	07f3      	br      	0x174	// 174 <submit_task+0x58>
+ 190:	e0000000 	bsr      	0x0	// 104 <task_cmd_cache_flush>
+			190: R_CKCORE_PCREL_IMM26BY2	task_cmd_cache_flush
+ 194:	d8042170 	ld.w      	r0, (r4, 0x5c0)
+ 198:	c4055765 	zext      	r5, r5, 27, 0
+ 19c:	b0a1      	st.w      	r5, (r0, 0x4)
+ 19e:	3108      	movi      	r1, 8
+ 1a0:	e0000000 	bsr      	0x0	// 0 <gx_dcache_clean_range>
+			1a0: R_CKCORE_PCREL_IMM26BY2	gx_dcache_clean_range
+ 1a4:	07d7      	br      	0x152	// 152 <submit_task+0x36>
+	...
+
+000001a8 <suspend>:
+ 1a8:	14d1      	push      	r4, r15
+ 1aa:	1397      	lrw      	r4, 0x0	// 384 <snpu_process_status+0xb4>
+ 1ac:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 1b0:	e900001b 	bez      	r0, 0x1e6	// 1e6 <suspend+0x3e>
+ 1b4:	9460      	ld.w      	r3, (r4, 0x0)
+ 1b6:	3b42      	cmpnei      	r3, 2
+ 1b8:	0c0a      	bf      	0x1cc	// 1cc <suspend+0x24>
+ 1ba:	e0000000 	bsr      	0x0	// 0 <npu_is_enabled>
+			1ba: R_CKCORE_PCREL_IMM26BY2	npu_is_enabled
+ 1be:	e9200009 	bnez      	r0, 0x1d0	// 1d0 <suspend+0x28>
+ 1c2:	3000      	movi      	r0, 0
+ 1c4:	e0000000 	bsr      	0x0	// 0 <gx_clock_set_module_snpu_enable>
+			1c4: R_CKCORE_PCREL_IMM26BY2	gx_clock_set_module_snpu_enable
+ 1c8:	3302      	movi      	r3, 2
+ 1ca:	b460      	st.w      	r3, (r4, 0x0)
+ 1cc:	3000      	movi      	r0, 0
+ 1ce:	040e      	br      	0x1ea	// 1ea <suspend+0x42>
+ 1d0:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 1d4:	e0000000 	bsr      	0x0	// 0 <npu_disable>
+			1d4: R_CKCORE_PCREL_IMM26BY2	npu_disable
+ 1d8:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 1dc:	e0000000 	bsr      	0x0	// 0 <npu_get_all_idle_status>
+			1dc: R_CKCORE_PCREL_IMM26BY2	npu_get_all_idle_status
+ 1e0:	e900fffc 	bez      	r0, 0x1d8	// 1d8 <suspend+0x30>
+ 1e4:	07ef      	br      	0x1c2	// 1c2 <suspend+0x1a>
+ 1e6:	3000      	movi      	r0, 0
+ 1e8:	2800      	subi      	r0, 1
+ 1ea:	1491      	pop      	r4, r15
+
+000001ec <print_addr_value.constprop.1>:
+ 1ec:	14d5      	push      	r4-r8, r15
+ 1ee:	6d43      	mov      	r5, r0
+ 1f0:	3400      	movi      	r4, 0
+ 1f2:	13e7      	lrw      	r7, 0x0	// 38c <snpu_process_status+0xbc>
+ 1f4:	360a      	movi      	r6, 10
+ 1f6:	ea880067 	lrw      	r8, 0x0	// 390 <snpu_process_status+0xc0>
+ 1fa:	2400      	addi      	r4, 1
+ 1fc:	9520      	ld.w      	r1, (r5, 0x0)
+ 1fe:	6c1f      	mov      	r0, r7
+ 200:	e0000000 	bsr      	0x0	// 0 <printf_>
+			200: R_CKCORE_PCREL_IMM26BY2	printf_
+ 204:	c4c48043 	divs      	r3, r4, r6
+ 208:	7cd8      	mult      	r3, r6
+ 20a:	5c6d      	subu      	r3, r4, r3
+ 20c:	e9230005 	bnez      	r3, 0x216	// 216 <print_addr_value.constprop.1+0x2a>
+ 210:	6c23      	mov      	r0, r8
+ 212:	e0000000 	bsr      	0x0	// 0 <printf_>
+			212: R_CKCORE_PCREL_IMM26BY2	printf_
+ 216:	eb440020 	cmpnei      	r4, 32
+ 21a:	2503      	addi      	r5, 4
+ 21c:	0bef      	bt      	0x1fa	// 1fa <print_addr_value.constprop.1+0xe>
+ 21e:	121d      	lrw      	r0, 0x0	// 390 <snpu_process_status+0xc0>
+ 220:	e0000000 	bsr      	0x0	// 0 <printf_>
+			220: R_CKCORE_PCREL_IMM26BY2	printf_
+ 224:	1495      	pop      	r4-r8, r15
+	...
+
+00000228 <snpu_overtime_reset>:
+ 228:	14d3      	push      	r4-r6, r15
+ 22a:	1424      	subi      	r14, r14, 16
+ 22c:	1296      	lrw      	r4, 0x0	// 384 <snpu_process_status+0xb4>
+ 22e:	6cbb      	mov      	r2, r14
+ 230:	3102      	movi      	r1, 2
+ 232:	d8042173 	ld.w      	r0, (r4, 0x5cc)
+ 236:	e0000000 	bsr      	0x0	// 0 <npu_get_base_addr>
+			236: R_CKCORE_PCREL_IMM26BY2	npu_get_base_addr
+ 23a:	1901      	addi      	r1, r14, 4
+ 23c:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 240:	e0000000 	bsr      	0x0	// 0 <npu_get_cur_cmd_addr>
+			240: R_CKCORE_PCREL_IMM26BY2	npu_get_cur_cmd_addr
+ 244:	1902      	addi      	r1, r14, 8
+ 246:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 24a:	e0000000 	bsr      	0x0	// 0 <npu_get_over_cmd_addr>
+			24a: R_CKCORE_PCREL_IMM26BY2	npu_get_over_cmd_addr
+ 24e:	3380      	movi      	r3, 128
+ 250:	98a1      	ld.w      	r5, (r14, 0x4)
+ 252:	4376      	lsli      	r3, r3, 22
+ 254:	9840      	ld.w      	r2, (r14, 0x0)
+ 256:	6c57      	mov      	r1, r5
+ 258:	5dcc      	addu      	r6, r5, r3
+ 25a:	120f      	lrw      	r0, 0x0	// 394 <snpu_process_status+0xc4>
+ 25c:	9862      	ld.w      	r3, (r14, 0x8)
+ 25e:	e0000000 	bsr      	0x0	// 0 <printf_>
+			25e: R_CKCORE_PCREL_IMM26BY2	printf_
+ 262:	120e      	lrw      	r0, 0x0	// 398 <printf_+0x398>
+ 264:	e0000000 	bsr      	0x0	// 0 <printf_>
+			264: R_CKCORE_PCREL_IMM26BY2	printf_
+ 268:	ea232000 	movih      	r3, 8192
+ 26c:	2b7f      	subi      	r3, 128
+ 26e:	5d0c      	addu      	r0, r5, r3
+ 270:	e0000000 	bsr      	0x0	// 1ec <print_addr_value.constprop.1>
+			270: R_CKCORE_PCREL_IMM26BY2	print_addr_value.constprop.1
+ 274:	120a      	lrw      	r0, 0x0	// 39c <printf_+0x39c>
+ 276:	e0000000 	bsr      	0x0	// 0 <printf_>
+			276: R_CKCORE_PCREL_IMM26BY2	printf_
+ 27a:	6c1b      	mov      	r0, r6
+ 27c:	e0000000 	bsr      	0x0	// 1ec <print_addr_value.constprop.1>
+			27c: R_CKCORE_PCREL_IMM26BY2	print_addr_value.constprop.1
+ 280:	8620      	ld.b      	r1, (r6, 0x0)
+ 282:	1208      	lrw      	r0, 0x0	// 3a0 <snpu_process_status+0xd0>
+ 284:	e0000000 	bsr      	0x0	// 0 <printf_>
+			284: R_CKCORE_PCREL_IMM26BY2	printf_
+ 288:	9862      	ld.w      	r3, (r14, 0x8)
+ 28a:	e923001c 	bnez      	r3, 0x2c2	// 2c2 <snpu_overtime_reset+0x9a>
+ 28e:	1903      	addi      	r1, r14, 12
+ 290:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 294:	e0000000 	bsr      	0x0	// 0 <npu_get_task_head>
+			294: R_CKCORE_PCREL_IMM26BY2	npu_get_task_head
+ 298:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 29c:	e0000000 	bsr      	0x0	// 0 <npu_disable>
+			29c: R_CKCORE_PCREL_IMM26BY2	npu_disable
+ 2a0:	d8042172 	ld.w      	r0, (r4, 0x5c8)
+ 2a4:	e0000000 	bsr      	0x0	// 0 <npu_reset>
+			2a4: R_CKCORE_PCREL_IMM26BY2	npu_reset
+ 2a8:	e0000000 	bsr      	0x0	// 74 <npu_regs_init>
+			2a8: R_CKCORE_PCREL_IMM26BY2	npu_regs_init
+ 2ac:	9823      	ld.w      	r1, (r14, 0xc)
+ 2ae:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 2b2:	e0000000 	bsr      	0x0	// 0 <npu_set_task_head>
+			2b2: R_CKCORE_PCREL_IMM26BY2	npu_set_task_head
+ 2b6:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 2ba:	e0000000 	bsr      	0x0	// 0 <npu_enable>
+			2ba: R_CKCORE_PCREL_IMM26BY2	npu_enable
+ 2be:	1404      	addi      	r14, r14, 16
+ 2c0:	1493      	pop      	r4-r6, r15
+ 2c2:	3280      	movi      	r2, 128
+ 2c4:	4256      	lsli      	r2, r2, 22
+ 2c6:	60c8      	addu      	r3, r2
+ 2c8:	9361      	ld.w      	r3, (r3, 0x4)
+ 2ca:	b863      	st.w      	r3, (r14, 0xc)
+ 2cc:	07e6      	br      	0x298	// 298 <snpu_overtime_reset+0x70>
+	...
+
+000002d0 <snpu_process_status>:
+ 2d0:	ebe00058 	push      	r4-r11, r15, r16-r17
+ 2d4:	1423      	subi      	r14, r14, 12
+ 2d6:	11ac      	lrw      	r5, 0x0	// 384 <snpu_process_status+0xb4>
+ 2d8:	1901      	addi      	r1, r14, 4
+ 2da:	d8052171 	ld.w      	r0, (r5, 0x5c4)
+ 2de:	e0000000 	bsr      	0x0	// 0 <npu_get_interrupt>
+			2de: R_CKCORE_PCREL_IMM26BY2	npu_get_interrupt
+ 2e2:	9821      	ld.w      	r1, (r14, 0x4)
+ 2e4:	d8052171 	ld.w      	r0, (r5, 0x5c4)
+ 2e8:	e0000000 	bsr      	0x0	// 0 <npu_clr_interrupt_without_overflow>
+			2e8: R_CKCORE_PCREL_IMM26BY2	npu_clr_interrupt_without_overflow
+ 2ec:	9861      	ld.w      	r3, (r14, 0x4)
+ 2ee:	e4432001 	andi      	r2, r3, 1
+ 2f2:	6d17      	mov      	r4, r5
+ 2f4:	e902005f 	bez      	r2, 0x3b2	// 3b2 <snpu_process_status+0xe2>
+ 2f8:	1902      	addi      	r1, r14, 8
+ 2fa:	d8052171 	ld.w      	r0, (r5, 0x5c4)
+ 2fe:	e0000000 	bsr      	0x0	// 0 <npu_get_over_cmd_addr>
+			2fe: R_CKCORE_PCREL_IMM26BY2	npu_get_over_cmd_addr
+ 302:	9862      	ld.w      	r3, (r14, 0x8)
+ 304:	d8452174 	ld.w      	r2, (r5, 0x5d0)
+ 308:	64ca      	cmpne      	r2, r3
+ 30a:	0c38      	bf      	0x37a	// 37a <snpu_process_status+0xaa>
+ 30c:	dc652174 	st.w      	r3, (r5, 0x5d0)
+ 310:	3701      	movi      	r7, 1
+ 312:	d8a5216c 	ld.w      	r5, (r5, 0x5b0)
+ 316:	ea080090 	movi      	r8, 144
+ 31a:	d944216d 	ld.w      	r10, (r4, 0x5b4)
+ 31e:	ea09000a 	movi      	r9, 10
+ 322:	c5058423 	mult      	r3, r5, r8
+ 326:	3280      	movi      	r2, 128
+ 328:	2500      	addi      	r5, 1
+ 32a:	e603000f 	addi      	r16, r3, 16
+ 32e:	4256      	lsli      	r2, r2, 22
+ 330:	60d0      	addu      	r3, r4
+ 332:	d96e2002 	ld.w      	r11, (r14, 0x8)
+ 336:	62c8      	addu      	r11, r2
+ 338:	c5058422 	mult      	r2, r5, r8
+ 33c:	d0440826 	ldr.w      	r6, (r4, r2 << 0)
+ 340:	da232025 	ld.w      	r17, (r3, 0x94)
+ 344:	d8432026 	ld.w      	r2, (r3, 0x98)
+ 348:	c5258043 	divs      	r3, r5, r9
+ 34c:	7ce4      	mult      	r3, r9
+ 34e:	614e      	subu      	r5, r3
+ 350:	656a      	cmpne      	r10, r5
+ 352:	c6040030 	addu      	r16, r4, r16
+ 356:	0806      	bt      	0x362	// 362 <snpu_process_status+0x92>
+ 358:	b840      	st.w      	r2, (r14, 0x0)
+ 35a:	3702      	movi      	r7, 2
+ 35c:	e0000000 	bsr      	0x0	// 1a8 <suspend>
+			35c: R_CKCORE_PCREL_IMM26BY2	suspend
+ 360:	9840      	ld.w      	r2, (r14, 0x0)
+ 362:	c5700480 	cmpne      	r16, r11
+ 366:	081f      	bt      	0x3a4	// 3a4 <snpu_process_status+0xd4>
+ 368:	b4e0      	st.w      	r7, (r4, 0x0)
+ 36a:	dca4216c 	st.w      	r5, (r4, 0x5b0)
+ 36e:	e9060006 	bez      	r6, 0x37a	// 37a <snpu_process_status+0xaa>
+ 372:	6c5f      	mov      	r1, r7
+ 374:	c4114820 	lsli      	r0, r17, 0
+ 378:	7bd9      	jsr      	r6
+ 37a:	3000      	movi      	r0, 0
+ 37c:	1403      	addi      	r14, r14, 12
+ 37e:	ebc00058 	pop      	r4-r11, r15, r16-r17
+ 382:	0000      	.short	0x0000
+ 384:	00000000 	.long	0x00000000
+			384: R_CKCORE_ADDR32	.bss
+ 388:	004100ff 	.long	0x004100ff
+	...
+			38c: R_CKCORE_ADDR32	.rodata.str1.1
+			390: R_CKCORE_ADDR32	.rodata.str1.1+0x8
+			394: R_CKCORE_ADDR32	.rodata.str1.1+0xa
+			398: R_CKCORE_ADDR32	.rodata.str1.1+0x50
+			39c: R_CKCORE_ADDR32	.rodata.str1.1+0x6e
+			3a0: R_CKCORE_ADDR32	.rodata.str1.1+0x85
+ 3a4:	e906ffbf 	bez      	r6, 0x322	// 54a <gx_snpu_run_task_sync+0x22>
+ 3a8:	6c5f      	mov      	r1, r7
+ 3aa:	c4114820 	lsli      	r0, r17, 0
+ 3ae:	7bd9      	jsr      	r6
+ 3b0:	07b9      	br      	0x322	// 322 <snpu_process_status+0x52>
+ 3b2:	e4432008 	andi      	r2, r3, 8
+ 3b6:	e9020005 	bez      	r2, 0x3c0	// 3c0 <snpu_process_status+0xf0>
+ 3ba:	e0000000 	bsr      	0x0	// 228 <snpu_overtime_reset>
+			3ba: R_CKCORE_PCREL_IMM26BY2	snpu_overtime_reset
+ 3be:	07de      	br      	0x37a	// 37a <snpu_process_status+0xaa>
+ 3c0:	e4832004 	andi      	r4, r3, 4
+ 3c4:	e924fffb 	bnez      	r4, 0x3ba	// 3ba <snpu_process_status+0xea>
+ 3c8:	e4432020 	andi      	r2, r3, 32
+ 3cc:	e902000f 	bez      	r2, 0x3ea	// 3ea <snpu_process_status+0x11a>
+ 3d0:	1902      	addi      	r1, r14, 8
+ 3d2:	d8052171 	ld.w      	r0, (r5, 0x5c4)
+ 3d6:	e0000000 	bsr      	0x0	// 0 <npu_get_op_overflow_cmd_addr>
+			3d6: R_CKCORE_PCREL_IMM26BY2	npu_get_op_overflow_cmd_addr
+ 3da:	9821      	ld.w      	r1, (r14, 0x4)
+ 3dc:	d8052171 	ld.w      	r0, (r5, 0x5c4)
+ 3e0:	d865216c 	ld.w      	r3, (r5, 0x5b0)
+ 3e4:	e0000000 	bsr      	0x0	// 0 <npu_clr_overflow_interrupt>
+			3e4: R_CKCORE_PCREL_IMM26BY2	npu_clr_overflow_interrupt
+ 3e8:	07c9      	br      	0x37a	// 37a <snpu_process_status+0xaa>
+ 3ea:	e4632040 	andi      	r3, r3, 64
+ 3ee:	3b40      	cmpnei      	r3, 0
+ 3f0:	6403      	mvcv      	r0
+ 3f2:	2000      	addi      	r0, 1
+ 3f4:	07c4      	br      	0x37c	// 37c <snpu_process_status+0xac>
+	...
+
+000003f8 <snpu_isr>:
+ 3f8:	14d0      	push      	r15
+ 3fa:	027b      	lrw      	r3, 0x0	// 688 <gx_snpu_resume+0x50>
+ 3fc:	9300      	ld.w      	r0, (r3, 0x0)
+ 3fe:	3842      	cmpnei      	r0, 2
+ 400:	0c03      	bf      	0x406	// 406 <snpu_isr+0xe>
+ 402:	e0000000 	bsr      	0x0	// 2d0 <snpu_process_status>
+			402: R_CKCORE_PCREL_IMM26BY2	snpu_process_status
+ 406:	1490      	pop      	r15
+
+00000408 <gx_snpu_init>:
+ 408:	14d2      	push      	r4-r5, r15
+ 40a:	029f      	lrw      	r4, 0x0	// 688 <gx_snpu_resume+0x50>
+ 40c:	ea20a0c0 	movih      	r0, 41152
+ 410:	e0000000 	bsr      	0x0	// 0 <snpu_device_init>
+			410: R_CKCORE_PCREL_IMM26BY2	snpu_device_init
+ 414:	ea23a0c0 	movih      	r3, 41152
+ 418:	dc642171 	st.w      	r3, (r4, 0x5c4)
+ 41c:	ea23a030 	movih      	r3, 41008
+ 420:	3500      	movi      	r5, 0
+ 422:	dc642172 	st.w      	r3, (r4, 0x5c8)
+ 426:	0365      	lrw      	r3, 0xa0c00190	// 68c <gx_snpu_resume+0x54>
+ 428:	dc642173 	st.w      	r3, (r4, 0x5cc)
+ 42c:	dca4216d 	st.w      	r5, (r4, 0x5b4)
+ 430:	dca4216c 	st.w      	r5, (r4, 0x5b0)
+ 434:	e0000000 	bsr      	0x0	// 0 <snpu_tcb_init>
+			434: R_CKCORE_PCREL_IMM26BY2	snpu_tcb_init
+ 438:	6c57      	mov      	r1, r5
+ 43a:	0309      	lrw      	r0, 0x0	// 690 <gx_snpu_resume+0x58>
+ 43c:	e0000000 	bsr      	0x0	// 0 <snpu_request_irq>
+			43c: R_CKCORE_PCREL_IMM26BY2	snpu_request_irq
+ 440:	3302      	movi      	r3, 2
+ 442:	6c17      	mov      	r0, r5
+ 444:	b460      	st.w      	r3, (r4, 0x0)
+ 446:	1492      	pop      	r4-r5, r15
+
+00000448 <gx_snpu_exit>:
+ 448:	14d1      	push      	r4, r15
+ 44a:	300c      	movi      	r0, 12
+ 44c:	e0000000 	bsr      	0x0	// 0 <gx_mask_irq>
+			44c: R_CKCORE_PCREL_IMM26BY2	gx_mask_irq
+ 450:	e0000000 	bsr      	0x0	// 1a8 <suspend>
+			450: R_CKCORE_PCREL_IMM26BY2	suspend
+ 454:	6d03      	mov      	r4, r0
+ 456:	300c      	movi      	r0, 12
+ 458:	e0000000 	bsr      	0x0	// 0 <gx_unmask_irq>
+			458: R_CKCORE_PCREL_IMM26BY2	gx_unmask_irq
+ 45c:	e9240004 	bnez      	r4, 0x464	// 464 <gx_snpu_exit+0x1c>
+ 460:	e0000000 	bsr      	0x0	// 0 <snpu_device_exit>
+			460: R_CKCORE_PCREL_IMM26BY2	snpu_device_exit
+ 464:	6c13      	mov      	r0, r4
+ 466:	1491      	pop      	r4, r15
+
+00000468 <gx_snpu_run_task>:
+ 468:	14d1      	push      	r4, r15
+ 46a:	e900005b 	bez      	r0, 0x520	// 520 <gx_snpu_run_task+0xb8>
+ 46e:	ea8c0087 	lrw      	r12, 0x0	// 688 <gx_snpu_resume+0x50>
+ 472:	d86c2171 	ld.w      	r3, (r12, 0x5c4)
+ 476:	e9030055 	bez      	r3, 0x520	// 520 <gx_snpu_run_task+0xb8>
+ 47a:	d9ac216d 	ld.w      	r13, (r12, 0x5b4)
+ 47e:	e5ad0000 	addi      	r13, r13, 1
+ 482:	ea12000a 	movi      	r18, 10
+ 486:	c64d8043 	divs      	r3, r13, r18
+ 48a:	c6438423 	mult      	r3, r3, r18
+ 48e:	da6c216c 	ld.w      	r19, (r12, 0x5b0)
+ 492:	634e      	subu      	r13, r3
+ 494:	c66d0480 	cmpne      	r13, r19
+ 498:	0c44      	bf      	0x520	// 520 <gx_snpu_run_task+0xb8>
+ 49a:	da6c216d 	ld.w      	r19, (r12, 0x5b4)
+ 49e:	ea0d0090 	movi      	r13, 144
+ 4a2:	c5b38423 	mult      	r3, r19, r13
+ 4a6:	e483000f 	addi      	r4, r3, 16
+ 4aa:	f9b3844d 	mula.32.l      	r13, r19, r13
+ 4ae:	60f0      	addu      	r3, r12
+ 4b0:	d58d0821 	str.w      	r1, (r13, r12 << 0)
+ 4b4:	9020      	ld.w      	r1, (r0, 0x0)
+ 4b6:	dc432026 	st.w      	r2, (r3, 0x98)
+ 4ba:	9041      	ld.w      	r2, (r0, 0x4)
+ 4bc:	b34a      	st.w      	r2, (r3, 0x28)
+ 4be:	9042      	ld.w      	r2, (r0, 0x8)
+ 4c0:	b34d      	st.w      	r2, (r3, 0x34)
+ 4c2:	dc232025 	st.w      	r1, (r3, 0x94)
+ 4c6:	9043      	ld.w      	r2, (r0, 0xc)
+ 4c8:	9025      	ld.w      	r1, (r0, 0x14)
+ 4ca:	b330      	st.w      	r1, (r3, 0x40)
+ 4cc:	b353      	st.w      	r2, (r3, 0x4c)
+ 4ce:	9044      	ld.w      	r2, (r0, 0x10)
+ 4d0:	b356      	st.w      	r2, (r3, 0x58)
+ 4d2:	9046      	ld.w      	r2, (r0, 0x18)
+ 4d4:	b359      	st.w      	r2, (r3, 0x64)
+ 4d6:	9047      	ld.w      	r2, (r0, 0x1c)
+ 4d8:	b35c      	st.w      	r2, (r3, 0x70)
+ 4da:	6130      	addu      	r4, r12
+ 4dc:	3200      	movi      	r2, 0
+ 4de:	c4045760 	zext      	r0, r4, 27, 0
+ 4e2:	2a01      	subi      	r2, 2
+ 4e4:	b31f      	st.w      	r0, (r3, 0x7c)
+ 4e6:	dc432022 	st.w      	r2, (r3, 0x88)
+ 4ea:	134b      	lrw      	r2, 0x4100ff	// 694 <gx_snpu_resume+0x5c>
+ 4ec:	b344      	st.w      	r2, (r3, 0x10)
+ 4ee:	b305      	st.w      	r0, (r3, 0x14)
+ 4f0:	dc232021 	st.w      	r1, (r3, 0x84)
+ 4f4:	d86c216d 	ld.w      	r3, (r12, 0x5b4)
+ 4f8:	2300      	addi      	r3, 1
+ 4fa:	c6438042 	divs      	r2, r3, r18
+ 4fe:	c6428432 	mult      	r18, r2, r18
+ 502:	c6430083 	subu      	r3, r3, r18
+ 506:	dc6c216d 	st.w      	r3, (r12, 0x5b4)
+ 50a:	d86c2000 	ld.w      	r3, (r12, 0x0)
+ 50e:	3b42      	cmpnei      	r3, 2
+ 510:	0803      	bt      	0x516	// 516 <gx_snpu_run_task+0xae>
+ 512:	e0000000 	bsr      	0x0	// bc <resume>
+			512: R_CKCORE_PCREL_IMM26BY2	resume
+ 516:	6c13      	mov      	r0, r4
+ 518:	e0000000 	bsr      	0x0	// 11c <submit_task>
+			518: R_CKCORE_PCREL_IMM26BY2	submit_task
+ 51c:	3000      	movi      	r0, 0
+ 51e:	1491      	pop      	r4, r15
+ 520:	3000      	movi      	r0, 0
+ 522:	2800      	subi      	r0, 1
+ 524:	07fd      	br      	0x51e	// 51e <gx_snpu_run_task+0xb6>
+	...
+
+00000528 <gx_snpu_run_task_sync>:
+ 528:	14d2      	push      	r4-r5, r15
+ 52a:	e900005f 	bez      	r0, 0x5e8	// 5e8 <gx_snpu_run_task_sync+0xc0>
+ 52e:	1297      	lrw      	r4, 0x0	// 688 <gx_snpu_resume+0x50>
+ 530:	d8642171 	ld.w      	r3, (r4, 0x5c4)
+ 534:	e903005a 	bez      	r3, 0x5e8	// 5e8 <gx_snpu_run_task_sync+0xc0>
+ 538:	d844216d 	ld.w      	r2, (r4, 0x5b4)
+ 53c:	2200      	addi      	r2, 1
+ 53e:	310a      	movi      	r1, 10
+ 540:	c4228043 	divs      	r3, r2, r1
+ 544:	7cc4      	mult      	r3, r1
+ 546:	d984216c 	ld.w      	r12, (r4, 0x5b0)
+ 54a:	608e      	subu      	r2, r3
+ 54c:	670a      	cmpne      	r2, r12
+ 54e:	0c4d      	bf      	0x5e8	// 5e8 <gx_snpu_run_task_sync+0xc0>
+ 550:	d984216d 	ld.w      	r12, (r4, 0x5b4)
+ 554:	3290      	movi      	r2, 144
+ 556:	c44c8423 	mult      	r3, r12, r2
+ 55a:	f84c8442 	mula.32.l      	r2, r12, r2
+ 55e:	e4a3000f 	addi      	r5, r3, 16
+ 562:	ea0c0000 	movi      	r12, 0
+ 566:	60d0      	addu      	r3, r4
+ 568:	d482082c 	str.w      	r12, (r2, r4 << 0)
+ 56c:	9040      	ld.w      	r2, (r0, 0x0)
+ 56e:	dc432025 	st.w      	r2, (r3, 0x94)
+ 572:	9041      	ld.w      	r2, (r0, 0x4)
+ 574:	b34a      	st.w      	r2, (r3, 0x28)
+ 576:	9042      	ld.w      	r2, (r0, 0x8)
+ 578:	b34d      	st.w      	r2, (r3, 0x34)
+ 57a:	dd832026 	st.w      	r12, (r3, 0x98)
+ 57e:	9043      	ld.w      	r2, (r0, 0xc)
+ 580:	d9802005 	ld.w      	r12, (r0, 0x14)
+ 584:	dd832010 	st.w      	r12, (r3, 0x40)
+ 588:	b353      	st.w      	r2, (r3, 0x4c)
+ 58a:	9044      	ld.w      	r2, (r0, 0x10)
+ 58c:	b356      	st.w      	r2, (r3, 0x58)
+ 58e:	9046      	ld.w      	r2, (r0, 0x18)
+ 590:	b359      	st.w      	r2, (r3, 0x64)
+ 592:	9047      	ld.w      	r2, (r0, 0x1c)
+ 594:	b35c      	st.w      	r2, (r3, 0x70)
+ 596:	6150      	addu      	r5, r4
+ 598:	3200      	movi      	r2, 0
+ 59a:	c4055760 	zext      	r0, r5, 27, 0
+ 59e:	2a01      	subi      	r2, 2
+ 5a0:	b31f      	st.w      	r0, (r3, 0x7c)
+ 5a2:	dc432022 	st.w      	r2, (r3, 0x88)
+ 5a6:	115c      	lrw      	r2, 0x4100ff	// 694 <gx_snpu_resume+0x5c>
+ 5a8:	b344      	st.w      	r2, (r3, 0x10)
+ 5aa:	b305      	st.w      	r0, (r3, 0x14)
+ 5ac:	dd832021 	st.w      	r12, (r3, 0x84)
+ 5b0:	d864216d 	ld.w      	r3, (r4, 0x5b4)
+ 5b4:	2300      	addi      	r3, 1
+ 5b6:	c4238042 	divs      	r2, r3, r1
+ 5ba:	7c48      	mult      	r1, r2
+ 5bc:	60c6      	subu      	r3, r1
+ 5be:	dc64216d 	st.w      	r3, (r4, 0x5b4)
+ 5c2:	9460      	ld.w      	r3, (r4, 0x0)
+ 5c4:	3b42      	cmpnei      	r3, 2
+ 5c6:	0803      	bt      	0x5cc	// 5cc <gx_snpu_run_task_sync+0xa4>
+ 5c8:	e0000000 	bsr      	0x0	// bc <resume>
+			5c8: R_CKCORE_PCREL_IMM26BY2	resume
+ 5cc:	d8042171 	ld.w      	r0, (r4, 0x5c4)
+ 5d0:	316d      	movi      	r1, 109
+ 5d2:	e0000000 	bsr      	0x0	// 0 <npu_dis_interrupt>
+			5d2: R_CKCORE_PCREL_IMM26BY2	npu_dis_interrupt
+ 5d6:	6c17      	mov      	r0, r5
+ 5d8:	e0000000 	bsr      	0x0	// 11c <submit_task>
+			5d8: R_CKCORE_PCREL_IMM26BY2	submit_task
+ 5dc:	e0000000 	bsr      	0x0	// 2d0 <snpu_process_status>
+			5dc: R_CKCORE_PCREL_IMM26BY2	snpu_process_status
+ 5e0:	3842      	cmpnei      	r0, 2
+ 5e2:	0ffd      	bf      	0x5dc	// 5dc <gx_snpu_run_task_sync+0xb4>
+ 5e4:	3000      	movi      	r0, 0
+ 5e6:	1492      	pop      	r4-r5, r15
+ 5e8:	3000      	movi      	r0, 0
+ 5ea:	2800      	subi      	r0, 1
+ 5ec:	07fd      	br      	0x5e6	// 5e6 <gx_snpu_run_task_sync+0xbe>
+	...
+
+000005f0 <gx_snpu_get_state>:
+ 5f0:	1166      	lrw      	r3, 0x0	// 688 <gx_snpu_resume+0x50>
+ 5f2:	9300      	ld.w      	r0, (r3, 0x0)
+ 5f4:	783c      	jmp      	r15
+	...
+
+000005f8 <gx_snpu_stop>:
+ 5f8:	14d1      	push      	r4, r15
+ 5fa:	300c      	movi      	r0, 12
+ 5fc:	e0000000 	bsr      	0x0	// 0 <gx_mask_irq>
+			5fc: R_CKCORE_PCREL_IMM26BY2	gx_mask_irq
+ 600:	e0000000 	bsr      	0x0	// 1a8 <suspend>
+			600: R_CKCORE_PCREL_IMM26BY2	suspend
+ 604:	300c      	movi      	r0, 12
+ 606:	e0000000 	bsr      	0x0	// 0 <gx_unmask_irq>
+			606: R_CKCORE_PCREL_IMM26BY2	gx_unmask_irq
+ 60a:	1160      	lrw      	r3, 0x0	// 688 <gx_snpu_resume+0x50>
+ 60c:	3400      	movi      	r4, 0
+ 60e:	dc83216d 	st.w      	r4, (r3, 0x5b4)
+ 612:	dc83216c 	st.w      	r4, (r3, 0x5b0)
+ 616:	e0000000 	bsr      	0x0	// 0 <snpu_tcb_init>
+			616: R_CKCORE_PCREL_IMM26BY2	snpu_tcb_init
+ 61a:	6c13      	mov      	r0, r4
+ 61c:	1491      	pop      	r4, r15
+	...
+
+00000620 <gx_snpu_pause>:
+ 620:	14d0      	push      	r15
+ 622:	300c      	movi      	r0, 12
+ 624:	e0000000 	bsr      	0x0	// 0 <gx_mask_irq>
+			624: R_CKCORE_PCREL_IMM26BY2	gx_mask_irq
+ 628:	e0000000 	bsr      	0x0	// 1a8 <suspend>
+			628: R_CKCORE_PCREL_IMM26BY2	suspend
+ 62c:	300c      	movi      	r0, 12
+ 62e:	e0000000 	bsr      	0x0	// 0 <gx_unmask_irq>
+			62e: R_CKCORE_PCREL_IMM26BY2	gx_unmask_irq
+ 632:	3000      	movi      	r0, 0
+ 634:	1490      	pop      	r15
+	...
+
+00000638 <gx_snpu_resume>:
+ 638:	14d3      	push      	r4-r6, r15
+ 63a:	1094      	lrw      	r4, 0x0	// 688 <gx_snpu_resume+0x50>
+ 63c:	d844216d 	ld.w      	r2, (r4, 0x5b4)
+ 640:	d864216c 	ld.w      	r3, (r4, 0x5b0)
+ 644:	64ca      	cmpne      	r2, r3
+ 646:	0c1c      	bf      	0x67e	// 67e <gx_snpu_resume+0x46>
+ 648:	9460      	ld.w      	r3, (r4, 0x0)
+ 64a:	3b42      	cmpnei      	r3, 2
+ 64c:	0803      	bt      	0x652	// 652 <gx_snpu_resume+0x1a>
+ 64e:	e0000000 	bsr      	0x0	// bc <resume>
+			64e: R_CKCORE_PCREL_IMM26BY2	resume
+ 652:	d864216d 	ld.w      	r3, (r4, 0x5b4)
+ 656:	e9030016 	bez      	r3, 0x682	// 682 <gx_snpu_resume+0x4a>
+ 65a:	d8a4216d 	ld.w      	r5, (r4, 0x5b4)
+ 65e:	2d00      	subi      	r5, 1
+ 660:	d864216c 	ld.w      	r3, (r4, 0x5b0)
+ 664:	3690      	movi      	r6, 144
+ 666:	6c13      	mov      	r0, r4
+ 668:	f8c38440 	mula.32.l      	r0, r3, r6
+ 66c:	200f      	addi      	r0, 16
+ 66e:	e0000000 	bsr      	0x0	// 11c <submit_task>
+			66e: R_CKCORE_PCREL_IMM26BY2	submit_task
+ 672:	6cd3      	mov      	r3, r4
+ 674:	f8c58443 	mula.32.l      	r3, r5, r6
+ 678:	230f      	addi      	r3, 16
+ 67a:	dc642170 	st.w      	r3, (r4, 0x5c0)
+ 67e:	3000      	movi      	r0, 0
+ 680:	1493      	pop      	r4-r6, r15
+ 682:	3509      	movi      	r5, 9
+ 684:	07ee      	br      	0x660	// 660 <gx_snpu_resume+0x28>
+ 686:	0000      	.short	0x0000
+ 688:	00000000 	.long	0x00000000
+			688: R_CKCORE_ADDR32	.bss
+ 68c:	a0c00190 	.long	0xa0c00190
+ 690:	00000000 	.long	0x00000000
+			690: R_CKCORE_ADDR32	.sram_text+0x3f8
+ 694:	004100ff 	.long	0x004100ff

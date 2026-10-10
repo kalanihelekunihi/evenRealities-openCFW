@@ -1,0 +1,102 @@
+{
+  "stock_body_sha256": "f8256375f5cad966c0c74be78977523bce416b3fdeb41f06c9b98537cd9edd18",
+  "stock_body_original_hex": "f8b584b004000d001600a079002800f08e80307a30f00100022190fbf1f08df802009df80200122880f281809df80200002804d09df80200a179884277d114f1180075f022f816f109000190681eadf80800a089adf80a0000208df80300dff8f8049df8021050f821703800002810d02800dff8e8149df80220895c80b289b2884254d36b463200290089b22000b8470020e079002803d09df80300002804d00020a071201d7cf0e7fa9df8020001280dd0dff8a014886d002808d0e0798df80c00a088adf800006846896d8847206894f8281000eb81008078800727d4a068002803d020007bf009fe20e094f8280000281cd1dff868640c2594f829006843304490f88201002811d094f829006843304410f5c07120007bf0fefd94f8290005fb00f506eb0500002180f8821105b0f0bd",
+  "initializer_sha256": "c1be6b3ada20c1c70cb53db7b6ae8600f68c4c936d9f21f81f1817c92fc1ca48",
+  "initializer_original_hex": "70b423490020c1f8b001012081f8b401002324e01c00e4b2842044430c441500edb22c2045432c44214d1e00f6b21420464305eb0600206095f8600084f824001800c0b2401c208484f82820581c84f82900521c1000c0b20328dbdb5b1c1800c0b2032801da0022f4e712481049c86370bc7047",
+  "literals": {
+    "0x4b599c": "0x200610ac",
+    "0x4b59a0": "0x700964",
+    "0x4b59a4": "0x785270",
+    "0x4b59a8": "0x2006f904",
+    "0x531bac": "0x2006f904",
+    "0x531bcc": "0x200610ac"
+  },
+  "stock_layout": {
+    "attcCb": "0x2006f904",
+    "ccb_stride": 44,
+    "connections": 3,
+    "bearers_per_connection": 3,
+    "onDeck_offset": 396,
+    "onDeck_stride": 12,
+    "pSign_offset": 432,
+    "autoCnf_offset": 436,
+    "ccb_connId_offset": 41,
+    "ccb_slot_offset": 40,
+    "connId_initialization": "connection_index+1",
+    "queue_address_formula": "G+384+12*connId == G+396+12*(connId-1)"
+  },
+  "fixture_checks": [
+    {
+      "case": "both-ready",
+      "events": [
+        1,
+        2,
+        3,
+        100
+      ],
+      "selected": [
+        {
+          "index": 0,
+          "pointer": "0x2006fa90",
+          "event": 10
+        }
+      ],
+      "remaining": [
+        0,
+        11
+      ],
+      "changed_offsets": [
+        6,
+        398
+      ],
+      "memory_write_scope_verified": true,
+      "packet_read_scope": "only opcode byte at +8"
+    },
+    {
+      "case": "only-entry0",
+      "events": [
+        1,
+        2,
+        3,
+        100
+      ],
+      "selected": [
+        {
+          "index": 0,
+          "pointer": "0x2006fa90",
+          "event": 10
+        }
+      ],
+      "remaining": [
+        0,
+        0
+      ],
+      "changed_offsets": [
+        6,
+        398
+      ],
+      "memory_write_scope_verified": true,
+      "packet_read_scope": "only opcode byte at +8"
+    },
+    {
+      "case": "only-entry1",
+      "events": [
+        1,
+        2,
+        3
+      ],
+      "selected": [],
+      "remaining": [
+        0,
+        11
+      ],
+      "changed_offsets": [
+        6
+      ],
+      "memory_write_scope_verified": true,
+      "packet_read_scope": "only opcode byte at +8"
+    }
+  ],
+  "no_firmware_source_edits": true,
+  "no_git_mutations": true
+}

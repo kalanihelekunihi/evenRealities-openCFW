@@ -1,0 +1,65 @@
+{
+  "compiled_files": 5,
+  "failed_files": 0,
+  "exact_selected_sections": 0,
+  "different_selected_sections": [
+    {
+      "section": ".text.csky_shift_q15",
+      "compiled_bytes": 368,
+      "stock_bytes": 116,
+      "full_equal": false
+    },
+    {
+      "section": ".text.csky_copy_q15",
+      "compiled_bytes": 84,
+      "stock_bytes": 44,
+      "full_equal": false
+    },
+    {
+      "section": ".text.csky_fill_q15",
+      "compiled_bytes": 70,
+      "stock_bytes": 40,
+      "full_equal": false
+    }
+  ],
+  "unprovided_kernel_symbols": [
+    "csky_radix4_butterfly_q15",
+    "csky_radix4_butterfly_inverse_q15",
+    "csky_bitreversal_q15",
+    "csky_cfft_q15",
+    "csky_split_rfft_q15",
+    "csky_split_rifft_q15"
+  ],
+  "compiled_text_sections": {
+    "csky_cfft_radix4_q15.c.o": [
+      {
+        "section": ".text.csky_cfft_radix4_q15",
+        "bytes": 56
+      }
+    ],
+    "csky_rfft_q15.c.o": [
+      {
+        "section": ".text.csky_rfft_q15",
+        "bytes": 110
+      }
+    ],
+    "csky_shift_q15.c.o": [
+      {
+        "section": ".text.csky_shift_q15",
+        "bytes": 368
+      }
+    ],
+    "csky_copy_q15.c.o": [
+      {
+        "section": ".text.csky_copy_q15",
+        "bytes": 84
+      }
+    ],
+    "csky_fill_q15.c.o": [
+      {
+        "section": ".text.csky_fill_q15",
+        "bytes": 70
+      }
+    ]
+  }
+}

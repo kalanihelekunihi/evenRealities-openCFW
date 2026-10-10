@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "/opt/homebrew/Cellar/ghidra/12.1.4/libexec/support/analyzeHeadless",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-tool-automation-20261009-agent2",
+    "PrivateTlsf",
+    "-process",
+    "private-main-analysis-only.elf",
+    "-noanalysis",
+    "-scriptPath",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-tool-automation-20261009-agent2",
+    "-postScript",
+    "BoundedTlsf.java",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-tool-automation-20261009-agent2"
+  ],
+  "exit_code": 0,
+  "version": "12.1.4",
+  "language": "ARM:LE:32:v8",
+  "cspec": "default",
+  "thumb_context": "TMode=1 on exact bounded ranges",
+  "hashes": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-tool-automation-20261009-agent2/BoundedTlsf.java": "b0a0d0434edd202ede19a6c874808a2027eff6d40c986d7feae896385e8a35b8",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-tool-automation-20261009-agent2/private-main-analysis-only.elf": "36c9b79de3b961d36ad343a1402a112298603111cbe1d5875e1b471694159d1a",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-tool-automation-20261009-agent2/4d0524-ghidra-raw.c": "111f7d491b3710a0b0fd78d2bd102b7ce78069ef5f9a32ffe6417aa872de0041",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-tool-automation-20261009-agent2/4cffc2-ghidra-raw.c": "7e94184c7ff64dfa8520cda1da00597ab4e95757d24138fa801f1570f5b1e41e",
+    "/opt/homebrew/Cellar/ghidra/12.1.4/libexec/Ghidra/Processors/ARM/data/languages/ARM8_le.sla": "3275cd18e743f2bff01e7cf34d068fa8fdbe37857e354da96e3d54945ea89781",
+    "/opt/homebrew/Cellar/ghidra/12.1.4/libexec/Ghidra/Processors/ARM/data/languages/ARM.cspec": "428cff0d02aa903b634d295a20bcc653672630e29fcb348ece400c19131def3d",
+    "/opt/homebrew/Cellar/ghidra/12.1.4/libexec/Ghidra/Processors/ARM/data/languages/ARM.ldefs": "7882fd4210f4987835c9eddaf1ae00c0391ed11cd5968081965f37490228612f",
+    "/opt/homebrew/Cellar/ghidra/12.1.4/libexec/Ghidra/Processors/ARM/data/languages/ARMt.pspec": "592c84aba3ac416ad6689248e53f2b135a033a71c8398b9ddfe9cb10fdcd70dd"
+  },
+  "options": "noanalysis; bounded DisassembleCommand; private project only",
+  "note": "ARM v8 is chosen by the analysis ELF importer, not evidence of firmware hardware architecture."
+}

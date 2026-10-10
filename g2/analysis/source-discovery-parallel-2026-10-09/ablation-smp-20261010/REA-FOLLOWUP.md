@@ -1,0 +1,13 @@
+# Disposable REA firmware-input acceptance check
+
+Provider-byte verification returned all 402 bytes exactly equal to the authenticated original slice, SHA256 c6c182f8937a91efc42995289820d0589b5ae839960cde0d83aec3f40ba0dbba (`rea-read-bytes.json`, equality in `rea-validation.json`).
+
+Read the verified local-tools-handoff.md. No REA tools were discoverable in this session's callable MCP metadata, so used the verified standalone CLI with REA_ANALYSIS_PROVIDER=ghidra, GHIDRA_INSTALL_DIR=/opt/homebrew/opt/ghidra/libexec and JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home. No MCP reload, token access, registrations or shared GUI project switch occurred.
+
+`instructions <absolute smp-analysis-only.elf> 0x537d0c --provider ghidra --format json` initially returned execution_failure/GhidraLaunchError under the workspace sandbox. The single permitted local execution retry succeeded with Ghidra12.1.4. This distinguishes an execution-environment launch boundary from an import rejection; the first error did not establish its precise underlying cause.
+
+`rea-instructions-retry.json` binds ELF SHA256 1facc82af2b53a328fdcb3726ef0d4fb3b370fc8ddc808e57c95180c8d9d6cc5 and Ghidra's contiguous inclusive body 537D0C..537E9D, 402 bytes. `rea-validation.json` independently verifies all 161 instruction start addresses and all 24 direct BL sites/targets against GNU force-Thumb decoding and the prior Ablation receipt. The Thumb import succeeded using the ELF's authored function symbol/entry and PT_LOAD; REA required no explicit post-import Thumb patch in this check.
+
+Only read-function-instructions and provider-byte verification were requested. No decompilation, recovered pseudocode admission, function annotation, target execution or provider identity assertion. REA's automatic authority label `shipped-artifact` describes its tool envelope; the actual subject is our synthetic ELF wrapper around authenticated bytes, not a shipped ELF or recovered producer metadata. Its body/source mappings therefore require the independent original-byte receipt. External literals/providers are absent from this 402-byte view, so argument/global/type conclusions remain unsupported. The CLI's disposable project/session is documented as ephemeral-source-immutable and deleted on close; no persistent evidence/user project was selected.
+
+This provides a reproducible finite acceptance pattern for TLSF entry views: preserve authentic bytes and VA, supply explicit analysis-container load/symbol metadata, verify provider-loaded bytes, instruction addresses and direct calls before extending to control fields or transitive source/provider comparisons. It does not establish raw OTA, M55-specific extensions, ARC or C-SKY support.

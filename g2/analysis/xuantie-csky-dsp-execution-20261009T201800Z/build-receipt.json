@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/opt/homebrew/bin/docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/arm64",
+    "--mount",
+    "type=bind,src=/Users/kalani/Repo/evenRealities-openCFW/g2/build/offline-xuantie-csky-dsp-20261009T201800Z,dst=/work",
+    "--mount",
+    "type=bind,src=/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/xuantie-csky-dsp-execution-20261009T201800Z,dst=/out",
+    "ubuntu:24.04",
+    "/bin/sh",
+    "/out/build-container.sh"
+  ],
+  "returncode": 2,
+  "stdout": "",
+  "stderr": "Unable to find image 'ubuntu:24.04' locally\n24.04: Pulling from library/ubuntu\n90812e242c93: Pulling fs layer\nd840120f5ea1: Download complete\n90812e242c93: Download complete\n90812e242c93: Pull complete\nDigest: sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55\nStatus: Image is up to date for ubuntu:24.04\ntar: subprojects/libvduse/include/atomic.h: Cannot open: Permission denied\ntar: subprojects/libvduse/include/compiler.h: Cannot open: Permission denied\ntar: subprojects/libvduse/linux-headers/linux: Cannot open: Permission denied\ntar: subprojects/libvduse/standard-headers/linux: Cannot open: Permission denied\ntar: subprojects/libvhost-user/include/atomic.h: Cannot open: Permission denied\ntar: subprojects/libvhost-user/include/compiler.h: Cannot open: Permission denied\ntar: subprojects/libvhost-user/standard-headers/linux: Cannot open: Permission denied\ntar: Exiting with failure status due to previous errors\n",
+  "source_pin": "3287d345c7f5d60d5c8774d90752f5f710744f85"
+}

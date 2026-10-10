@@ -1,0 +1,22 @@
+
+g2/analysis/source-discovery-parallel-2026-10-09/smp-token-admissibility-20261010/next-token.bin:     file format binary
+
+
+Disassembly of section .data:
+
+005363fc <.data>:
+  5363fc:	4926      	ldr	r1, [pc, #152]	@ (0x536498)
+  5363fe:	f891 0038 	ldrb.w	r0, [r1, #56]	@ 0x38
+  536402:	f891 2038 	ldrb.w	r2, [r1, #56]	@ 0x38
+  536406:	1c52      	adds	r2, r2, #1
+  536408:	f881 2038 	strb.w	r2, [r1, #56]	@ 0x38
+  53640c:	0002      	movs	r2, r0
+  53640e:	b2d2      	uxtb	r2, r2
+  536410:	2aff      	cmp	r2, #255	@ 0xff
+  536412:	d106      	bne.n	0x536422
+  536414:	f891 0038 	ldrb.w	r0, [r1, #56]	@ 0x38
+  536418:	f891 2038 	ldrb.w	r2, [r1, #56]	@ 0x38
+  53641c:	1c52      	adds	r2, r2, #1
+  53641e:	f881 2038 	strb.w	r2, [r1, #56]	@ 0x38
+  536422:	b2c0      	uxtb	r0, r0
+  536424:	4770      	bx	lr

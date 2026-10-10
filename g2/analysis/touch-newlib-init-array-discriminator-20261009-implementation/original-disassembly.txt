@@ -1,0 +1,42 @@
+
+/tmp/touch-init-image.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000a9e4 <.data+0x76e4>:
+    a9e4:	b570      	push	{r4, r5, r6, lr}
+    a9e6:	2600      	movs	r6, #0
+    a9e8:	4c0c      	ldr	r4, [pc, #48]	@ (0xaa1c)
+    a9ea:	4d0d      	ldr	r5, [pc, #52]	@ (0xaa20)
+    a9ec:	1b64      	subs	r4, r4, r5
+    a9ee:	10a4      	asrs	r4, r4, #2
+    a9f0:	42a6      	cmp	r6, r4
+    a9f2:	d109      	bne.n	0xaa08
+    a9f4:	2600      	movs	r6, #0
+    a9f6:	f000 f825 	bl	0xaa44
+    a9fa:	4c0a      	ldr	r4, [pc, #40]	@ (0xaa24)
+    a9fc:	4d0a      	ldr	r5, [pc, #40]	@ (0xaa28)
+    a9fe:	1b64      	subs	r4, r4, r5
+    aa00:	10a4      	asrs	r4, r4, #2
+    aa02:	42a6      	cmp	r6, r4
+    aa04:	d105      	bne.n	0xaa12
+    aa06:	bd70      	pop	{r4, r5, r6, pc}
+    aa08:	00b3      	lsls	r3, r6, #2
+    aa0a:	58eb      	ldr	r3, [r5, r3]
+    aa0c:	4798      	blx	r3
+    aa0e:	3601      	adds	r6, #1
+    aa10:	e7ee      	b.n	0xa9f0
+    aa12:	00b3      	lsls	r3, r6, #2
+    aa14:	58eb      	ldr	r3, [r5, r3]
+    aa16:	4798      	blx	r3
+    aa18:	3601      	adds	r6, #1
+    aa1a:	e7f2      	b.n	0xaa02
+    aa1c:	087c      	lsrs	r4, r7, #1
+    aa1e:	2000      	movs	r0, #0
+    aa20:	087c      	lsrs	r4, r7, #1
+    aa22:	2000      	movs	r0, #0
+    aa24:	0880      	lsrs	r0, r0, #2
+    aa26:	2000      	movs	r0, #0
+    aa28:	087c      	lsrs	r4, r7, #1
+    aa2a:	2000      	movs	r0, #0

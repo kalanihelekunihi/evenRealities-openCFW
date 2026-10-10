@@ -1,0 +1,476 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/snpu_regs.o:     file format elf32-csky-little
+
+
+Disassembly of section .sram_text:
+
+00000000 <npu_enable>:
+   0:	14d0      	push      	r15
+   2:	3100      	movi      	r1, 0
+   4:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			4: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+   8:	1490      	pop      	r15
+	...
+
+0000000c <npu_disable>:
+   c:	14d0      	push      	r15
+   e:	3100      	movi      	r1, 0
+  10:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			10: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+  14:	1490      	pop      	r15
+	...
+
+00000018 <npu_is_enabled>:
+  18:	14d0      	push      	r15
+  1a:	3100      	movi      	r1, 0
+  1c:	e0000000 	bsr      	0x0	// 0 <reg_get_bit>
+			1c: R_CKCORE_PCREL_IMM26BY2	reg_get_bit
+  20:	1490      	pop      	r15
+	...
+
+00000024 <npu_debug_time_enable>:
+  24:	14d0      	push      	r15
+  26:	2023      	addi      	r0, 36
+  28:	311f      	movi      	r1, 31
+  2a:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			2a: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+  2e:	1490      	pop      	r15
+
+00000030 <npu_debug_time_disable>:
+  30:	14d0      	push      	r15
+  32:	2023      	addi      	r0, 36
+  34:	311f      	movi      	r1, 31
+  36:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			36: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+  3a:	1490      	pop      	r15
+
+0000003c <npu_set_debug_time_addr>:
+  3c:	14d0      	push      	r15
+  3e:	201f      	addi      	r0, 32
+  40:	e0000000 	bsr      	0x0	// 0 <reg_set_val>
+			40: R_CKCORE_PCREL_IMM26BY2	reg_set_val
+  44:	1490      	pop      	r15
+	...
+
+00000048 <npu_set_debug_time_len>:
+  48:	14d2      	push      	r4-r5, r15
+  4a:	6d03      	mov      	r4, r0
+  4c:	6d47      	mov      	r5, r1
+  4e:	201f      	addi      	r0, 32
+  50:	311f      	movi      	r1, 31
+  52:	e0000000 	bsr      	0x0	// 0 <reg_get_bit>
+			52: R_CKCORE_PCREL_IMM26BY2	reg_get_bit
+  56:	403c      	lsli      	r1, r0, 28
+  58:	6c54      	or      	r1, r5
+  5a:	e4040023 	addi      	r0, r4, 36
+  5e:	e0000000 	bsr      	0x0	// 0 <reg_set_val>
+			5e: R_CKCORE_PCREL_IMM26BY2	reg_set_val
+  62:	1492      	pop      	r4-r5, r15
+
+00000064 <npu_set_clock_gate>:
+  64:	14d0      	push      	r15
+  66:	e9010006 	bez      	r1, 0x72	// 72 <npu_set_clock_gate+0xe>
+  6a:	310c      	movi      	r1, 12
+  6c:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			6c: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+  70:	1490      	pop      	r15
+  72:	310c      	movi      	r1, 12
+  74:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			74: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+  78:	07fc      	br      	0x70	// 70 <npu_set_clock_gate+0xc>
+	...
+
+0000007c <npu_set_idle_mode>:
+  7c:	14d0      	push      	r15
+  7e:	e9210006 	bnez      	r1, 0x8a	// 8a <npu_set_idle_mode+0xe>
+  82:	3104      	movi      	r1, 4
+  84:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			84: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+  88:	1490      	pop      	r15
+  8a:	3104      	movi      	r1, 4
+  8c:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			8c: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+  90:	07fc      	br      	0x88	// 88 <npu_set_idle_mode+0xc>
+	...
+
+00000094 <npu_set_idle_cycle>:
+  94:	14d2      	push      	r4-r5, r15
+  96:	6d43      	mov      	r5, r0
+  98:	6d07      	mov      	r4, r1
+  9a:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			9a: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+  9e:	7441      	zexth      	r1, r0
+  a0:	4490      	lsli      	r4, r4, 16
+  a2:	6c50      	or      	r1, r4
+  a4:	6c17      	mov      	r0, r5
+  a6:	e0000000 	bsr      	0x0	// 0 <reg_set_val>
+			a6: R_CKCORE_PCREL_IMM26BY2	reg_set_val
+  aa:	1492      	pop      	r4-r5, r15
+
+000000ac <npu_set_overtime_thr>:
+  ac:	14d0      	push      	r15
+  ae:	2013      	addi      	r0, 20
+  b0:	e0000000 	bsr      	0x0	// 0 <reg_set_val>
+			b0: R_CKCORE_PCREL_IMM26BY2	reg_set_val
+  b4:	1490      	pop      	r15
+	...
+
+000000b8 <npu_en_interrupt>:
+  b8:	14d2      	push      	r4-r5, r15
+  ba:	e4612001 	andi      	r3, r1, 1
+  be:	6d43      	mov      	r5, r0
+  c0:	6d07      	mov      	r4, r1
+  c2:	e9030006 	bez      	r3, 0xce	// ce <npu_en_interrupt+0x16>
+  c6:	3100      	movi      	r1, 0
+  c8:	2003      	addi      	r0, 4
+  ca:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			ca: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+  ce:	e4642002 	andi      	r3, r4, 2
+  d2:	e9030006 	bez      	r3, 0xde	// de <npu_en_interrupt+0x26>
+  d6:	3104      	movi      	r1, 4
+  d8:	5d04      	addu      	r0, r5, r1
+  da:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			da: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+  de:	e4642004 	andi      	r3, r4, 4
+  e2:	e9030006 	bez      	r3, 0xee	// ee <npu_en_interrupt+0x36>
+  e6:	3108      	movi      	r1, 8
+  e8:	5d0e      	addi      	r0, r5, 4
+  ea:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			ea: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+  ee:	e4642008 	andi      	r3, r4, 8
+  f2:	e9030006 	bez      	r3, 0xfe	// fe <npu_en_interrupt+0x46>
+  f6:	310c      	movi      	r1, 12
+  f8:	5d0e      	addi      	r0, r5, 4
+  fa:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			fa: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+  fe:	e4642010 	andi      	r3, r4, 16
+ 102:	e9030006 	bez      	r3, 0x10e	// 10e <npu_en_interrupt+0x56>
+ 106:	310d      	movi      	r1, 13
+ 108:	5d0e      	addi      	r0, r5, 4
+ 10a:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			10a: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 10e:	e4642020 	andi      	r3, r4, 32
+ 112:	e9030006 	bez      	r3, 0x11e	// 11e <npu_en_interrupt+0x66>
+ 116:	310e      	movi      	r1, 14
+ 118:	5d0e      	addi      	r0, r5, 4
+ 11a:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			11a: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 11e:	e4842040 	andi      	r4, r4, 64
+ 122:	e9040006 	bez      	r4, 0x12e	// 12e <npu_en_interrupt+0x76>
+ 126:	3110      	movi      	r1, 16
+ 128:	5d0e      	addi      	r0, r5, 4
+ 12a:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			12a: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 12e:	1492      	pop      	r4-r5, r15
+
+00000130 <npu_dis_interrupt>:
+ 130:	14d2      	push      	r4-r5, r15
+ 132:	e4612001 	andi      	r3, r1, 1
+ 136:	6d43      	mov      	r5, r0
+ 138:	6d07      	mov      	r4, r1
+ 13a:	e9030006 	bez      	r3, 0x146	// 146 <npu_dis_interrupt+0x16>
+ 13e:	3100      	movi      	r1, 0
+ 140:	2003      	addi      	r0, 4
+ 142:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			142: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+ 146:	e4642002 	andi      	r3, r4, 2
+ 14a:	e9030006 	bez      	r3, 0x156	// 156 <npu_dis_interrupt+0x26>
+ 14e:	3104      	movi      	r1, 4
+ 150:	5d04      	addu      	r0, r5, r1
+ 152:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			152: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+ 156:	e4642004 	andi      	r3, r4, 4
+ 15a:	e9030006 	bez      	r3, 0x166	// 166 <npu_dis_interrupt+0x36>
+ 15e:	3108      	movi      	r1, 8
+ 160:	5d0e      	addi      	r0, r5, 4
+ 162:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			162: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+ 166:	e4642008 	andi      	r3, r4, 8
+ 16a:	e9030006 	bez      	r3, 0x176	// 176 <npu_dis_interrupt+0x46>
+ 16e:	310c      	movi      	r1, 12
+ 170:	5d0e      	addi      	r0, r5, 4
+ 172:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			172: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+ 176:	e4642010 	andi      	r3, r4, 16
+ 17a:	e9030006 	bez      	r3, 0x186	// 186 <npu_dis_interrupt+0x56>
+ 17e:	310d      	movi      	r1, 13
+ 180:	5d0e      	addi      	r0, r5, 4
+ 182:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			182: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+ 186:	e4642020 	andi      	r3, r4, 32
+ 18a:	e9030006 	bez      	r3, 0x196	// 196 <npu_dis_interrupt+0x66>
+ 18e:	310e      	movi      	r1, 14
+ 190:	5d0e      	addi      	r0, r5, 4
+ 192:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			192: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+ 196:	e4842040 	andi      	r4, r4, 64
+ 19a:	e9040006 	bez      	r4, 0x1a6	// 1a6 <npu_dis_interrupt+0x76>
+ 19e:	3110      	movi      	r1, 16
+ 1a0:	5d0e      	addi      	r0, r5, 4
+ 1a2:	e0000000 	bsr      	0x0	// 0 <reg_clr_bit>
+			1a2: R_CKCORE_PCREL_IMM26BY2	reg_clr_bit
+ 1a6:	1492      	pop      	r4-r5, r15
+
+000001a8 <npu_get_all_idle_status>:
+ 1a8:	14d0      	push      	r15
+ 1aa:	200b      	addi      	r0, 12
+ 1ac:	311f      	movi      	r1, 31
+ 1ae:	e0000000 	bsr      	0x0	// 0 <reg_get_bit>
+			1ae: R_CKCORE_PCREL_IMM26BY2	reg_get_bit
+ 1b2:	1490      	pop      	r15
+
+000001b4 <npu_get_interrupt>:
+ 1b4:	14d1      	push      	r4, r15
+ 1b6:	200b      	addi      	r0, 12
+ 1b8:	6d07      	mov      	r4, r1
+ 1ba:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			1ba: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+ 1be:	e4402010 	andi      	r2, r0, 16
+ 1c2:	e4602001 	andi      	r3, r0, 1
+ 1c6:	e9220030 	bnez      	r2, 0x226	// 226 <npu_get_interrupt+0x72>
+ 1ca:	b460      	st.w      	r3, (r4, 0x0)
+ 1cc:	e4602100 	andi      	r3, r0, 256
+ 1d0:	e9030006 	bez      	r3, 0x1dc	// 1dc <npu_get_interrupt+0x28>
+ 1d4:	9460      	ld.w      	r3, (r4, 0x0)
+ 1d6:	ec630004 	ori      	r3, r3, 4
+ 1da:	b460      	st.w      	r3, (r4, 0x0)
+ 1dc:	3380      	movi      	r3, 128
+ 1de:	4365      	lsli      	r3, r3, 5
+ 1e0:	68c0      	and      	r3, r0
+ 1e2:	e9030006 	bez      	r3, 0x1ee	// 1ee <npu_get_interrupt+0x3a>
+ 1e6:	9460      	ld.w      	r3, (r4, 0x0)
+ 1e8:	ec630008 	ori      	r3, r3, 8
+ 1ec:	b460      	st.w      	r3, (r4, 0x0)
+ 1ee:	3380      	movi      	r3, 128
+ 1f0:	4366      	lsli      	r3, r3, 6
+ 1f2:	68c0      	and      	r3, r0
+ 1f4:	e9030006 	bez      	r3, 0x200	// 200 <npu_get_interrupt+0x4c>
+ 1f8:	9460      	ld.w      	r3, (r4, 0x0)
+ 1fa:	ec630010 	ori      	r3, r3, 16
+ 1fe:	b460      	st.w      	r3, (r4, 0x0)
+ 200:	3380      	movi      	r3, 128
+ 202:	4367      	lsli      	r3, r3, 7
+ 204:	68c0      	and      	r3, r0
+ 206:	e9030006 	bez      	r3, 0x212	// 212 <npu_get_interrupt+0x5e>
+ 20a:	9460      	ld.w      	r3, (r4, 0x0)
+ 20c:	ec630020 	ori      	r3, r3, 32
+ 210:	b460      	st.w      	r3, (r4, 0x0)
+ 212:	3380      	movi      	r3, 128
+ 214:	4369      	lsli      	r3, r3, 9
+ 216:	680c      	and      	r0, r3
+ 218:	e9000006 	bez      	r0, 0x224	// 224 <npu_get_interrupt+0x70>
+ 21c:	9460      	ld.w      	r3, (r4, 0x0)
+ 21e:	ec630040 	ori      	r3, r3, 64
+ 222:	b460      	st.w      	r3, (r4, 0x0)
+ 224:	1491      	pop      	r4, r15
+ 226:	ec630002 	ori      	r3, r3, 2
+ 22a:	07d0      	br      	0x1ca	// 1ca <npu_get_interrupt+0x16>
+
+0000022c <npu_clr_interrupt>:
+ 22c:	14d2      	push      	r4-r5, r15
+ 22e:	e4612001 	andi      	r3, r1, 1
+ 232:	6d43      	mov      	r5, r0
+ 234:	6d07      	mov      	r4, r1
+ 236:	e9030006 	bez      	r3, 0x242	// 242 <npu_clr_interrupt+0x16>
+ 23a:	3100      	movi      	r1, 0
+ 23c:	2007      	addi      	r0, 8
+ 23e:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			23e: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 242:	e4642002 	andi      	r3, r4, 2
+ 246:	e9030006 	bez      	r3, 0x252	// 252 <npu_clr_interrupt+0x26>
+ 24a:	3104      	movi      	r1, 4
+ 24c:	5d1e      	addi      	r0, r5, 8
+ 24e:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			24e: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 252:	e4642004 	andi      	r3, r4, 4
+ 256:	e9030006 	bez      	r3, 0x262	// 262 <npu_clr_interrupt+0x36>
+ 25a:	3108      	movi      	r1, 8
+ 25c:	5d04      	addu      	r0, r5, r1
+ 25e:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			25e: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 262:	e4642008 	andi      	r3, r4, 8
+ 266:	e9030006 	bez      	r3, 0x272	// 272 <npu_clr_interrupt+0x46>
+ 26a:	310c      	movi      	r1, 12
+ 26c:	5d1e      	addi      	r0, r5, 8
+ 26e:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			26e: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 272:	e4642010 	andi      	r3, r4, 16
+ 276:	e9030006 	bez      	r3, 0x282	// 282 <npu_clr_interrupt+0x56>
+ 27a:	310d      	movi      	r1, 13
+ 27c:	5d1e      	addi      	r0, r5, 8
+ 27e:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			27e: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 282:	e4642020 	andi      	r3, r4, 32
+ 286:	e9030006 	bez      	r3, 0x292	// 292 <npu_clr_interrupt+0x66>
+ 28a:	310e      	movi      	r1, 14
+ 28c:	5d1e      	addi      	r0, r5, 8
+ 28e:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			28e: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 292:	e4842040 	andi      	r4, r4, 64
+ 296:	e9040006 	bez      	r4, 0x2a2	// 2a2 <npu_clr_interrupt+0x76>
+ 29a:	3110      	movi      	r1, 16
+ 29c:	5d1e      	addi      	r0, r5, 8
+ 29e:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			29e: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 2a2:	1492      	pop      	r4-r5, r15
+
+000002a4 <npu_clr_interrupt_without_overflow>:
+ 2a4:	14d2      	push      	r4-r5, r15
+ 2a6:	e4612001 	andi      	r3, r1, 1
+ 2aa:	6d43      	mov      	r5, r0
+ 2ac:	6d07      	mov      	r4, r1
+ 2ae:	e9030006 	bez      	r3, 0x2ba	// 2ba <npu_clr_interrupt_without_overflow+0x16>
+ 2b2:	3100      	movi      	r1, 0
+ 2b4:	2007      	addi      	r0, 8
+ 2b6:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			2b6: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 2ba:	e4642002 	andi      	r3, r4, 2
+ 2be:	e9030006 	bez      	r3, 0x2ca	// 2ca <npu_clr_interrupt_without_overflow+0x26>
+ 2c2:	3104      	movi      	r1, 4
+ 2c4:	5d1e      	addi      	r0, r5, 8
+ 2c6:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			2c6: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 2ca:	e4642004 	andi      	r3, r4, 4
+ 2ce:	e9030006 	bez      	r3, 0x2da	// 2da <npu_clr_interrupt_without_overflow+0x36>
+ 2d2:	3108      	movi      	r1, 8
+ 2d4:	5d04      	addu      	r0, r5, r1
+ 2d6:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			2d6: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 2da:	e4642008 	andi      	r3, r4, 8
+ 2de:	e9030006 	bez      	r3, 0x2ea	// 2ea <npu_clr_interrupt_without_overflow+0x46>
+ 2e2:	310c      	movi      	r1, 12
+ 2e4:	5d1e      	addi      	r0, r5, 8
+ 2e6:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			2e6: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 2ea:	e4842040 	andi      	r4, r4, 64
+ 2ee:	e9040006 	bez      	r4, 0x2fa	// 2fa <npu_clr_interrupt_without_overflow+0x56>
+ 2f2:	3110      	movi      	r1, 16
+ 2f4:	5d1e      	addi      	r0, r5, 8
+ 2f6:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			2f6: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 2fa:	1492      	pop      	r4-r5, r15
+
+000002fc <npu_clr_overflow_interrupt>:
+ 2fc:	14d2      	push      	r4-r5, r15
+ 2fe:	e4612010 	andi      	r3, r1, 16
+ 302:	6d43      	mov      	r5, r0
+ 304:	6d07      	mov      	r4, r1
+ 306:	e9030006 	bez      	r3, 0x312	// 312 <npu_clr_overflow_interrupt+0x16>
+ 30a:	310d      	movi      	r1, 13
+ 30c:	2007      	addi      	r0, 8
+ 30e:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			30e: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 312:	e4842020 	andi      	r4, r4, 32
+ 316:	e9040006 	bez      	r4, 0x322	// 322 <npu_clr_overflow_interrupt+0x26>
+ 31a:	310e      	movi      	r1, 14
+ 31c:	5d1e      	addi      	r0, r5, 8
+ 31e:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			31e: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 322:	1492      	pop      	r4-r5, r15
+
+00000324 <npu_get_over_cmd_addr>:
+ 324:	14d1      	push      	r4, r15
+ 326:	6d07      	mov      	r4, r1
+ 328:	e4000103 	addi      	r0, r0, 260
+ 32c:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			32c: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+ 330:	b400      	st.w      	r0, (r4, 0x0)
+ 332:	1491      	pop      	r4, r15
+
+00000334 <npu_get_mac_overflow_cmd_addr>:
+ 334:	14d1      	push      	r4, r15
+ 336:	6d07      	mov      	r4, r1
+ 338:	e400011f 	addi      	r0, r0, 288
+ 33c:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			33c: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+ 340:	b400      	st.w      	r0, (r4, 0x0)
+ 342:	1491      	pop      	r4, r15
+
+00000344 <npu_get_op_overflow_cmd_addr>:
+ 344:	14d1      	push      	r4, r15
+ 346:	6d07      	mov      	r4, r1
+ 348:	e4000123 	addi      	r0, r0, 292
+ 34c:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			34c: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+ 350:	b400      	st.w      	r0, (r4, 0x0)
+ 352:	1491      	pop      	r4, r15
+
+00000354 <npu_get_mcu_id>:
+ 354:	14d1      	push      	r4, r15
+ 356:	e400010f 	addi      	r0, r0, 272
+ 35a:	6d07      	mov      	r4, r1
+ 35c:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			35c: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+ 360:	7401      	zexth      	r0, r0
+ 362:	b400      	st.w      	r0, (r4, 0x0)
+ 364:	1491      	pop      	r4, r15
+	...
+
+00000368 <npu_get_mcu_struct_addr>:
+ 368:	14d1      	push      	r4, r15
+ 36a:	6d07      	mov      	r4, r1
+ 36c:	e4000113 	addi      	r0, r0, 276
+ 370:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			370: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+ 374:	b400      	st.w      	r0, (r4, 0x0)
+ 376:	1491      	pop      	r4, r15
+
+00000378 <npu_set_mcu_done>:
+ 378:	14d0      	push      	r15
+ 37a:	e4000117 	addi      	r0, r0, 280
+ 37e:	311f      	movi      	r1, 31
+ 380:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			380: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 384:	1490      	pop      	r15
+	...
+
+00000388 <npu_reset>:
+ 388:	14d1      	push      	r4, r15
+ 38a:	6d03      	mov      	r4, r0
+ 38c:	3103      	movi      	r1, 3
+ 38e:	2003      	addi      	r0, 4
+ 390:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			390: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 394:	3103      	movi      	r1, 3
+ 396:	5c1e      	addi      	r0, r4, 8
+ 398:	e0000000 	bsr      	0x0	// 0 <reg_set_bit>
+			398: R_CKCORE_PCREL_IMM26BY2	reg_set_bit
+ 39c:	1491      	pop      	r4, r15
+	...
+
+000003a0 <npu_set_task_head>:
+ 3a0:	14d0      	push      	r15
+ 3a2:	200f      	addi      	r0, 16
+ 3a4:	e0000000 	bsr      	0x0	// 0 <reg_set_val>
+			3a4: R_CKCORE_PCREL_IMM26BY2	reg_set_val
+ 3a8:	1490      	pop      	r15
+	...
+
+000003ac <npu_get_task_head>:
+ 3ac:	14d1      	push      	r4, r15
+ 3ae:	6d07      	mov      	r4, r1
+ 3b0:	200f      	addi      	r0, 16
+ 3b2:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			3b2: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+ 3b6:	b400      	st.w      	r0, (r4, 0x0)
+ 3b8:	1491      	pop      	r4, r15
+	...
+
+000003bc <npu_get_base_addr>:
+ 3bc:	14d1      	push      	r4, r15
+ 3be:	4122      	lsli      	r1, r1, 2
+ 3c0:	6d0b      	mov      	r4, r2
+ 3c2:	6004      	addu      	r0, r1
+ 3c4:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			3c4: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+ 3c8:	b400      	st.w      	r0, (r4, 0x0)
+ 3ca:	1491      	pop      	r4, r15
+
+000003cc <npu_get_cur_cmd_addr>:
+ 3cc:	14d1      	push      	r4, r15
+ 3ce:	6d07      	mov      	r4, r1
+ 3d0:	20ff      	addi      	r0, 256
+ 3d2:	e0000000 	bsr      	0x0	// 0 <reg_get_val>
+			3d2: R_CKCORE_PCREL_IMM26BY2	reg_get_val
+ 3d6:	b400      	st.w      	r0, (r4, 0x0)
+ 3d8:	1491      	pop      	r4, r15

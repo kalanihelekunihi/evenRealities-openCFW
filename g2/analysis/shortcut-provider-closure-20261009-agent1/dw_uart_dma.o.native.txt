@@ -1,0 +1,267 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/shortcut-provider-closure-20261009-agent1/dw_uart_dma.o:     file format elf32-csky-little
+
+
+Disassembly of section .text.dw_uart_get_dma_burst_size:
+
+00000000 <dw_uart_get_dma_burst_size>:
+   0:	3940      	cmpnei      	r1, 0
+   2:	906d      	ld.w      	r3, (r0, 0x34)
+   4:	904e      	ld.w      	r2, (r0, 0x38)
+   6:	c4620c20 	incf      	r3, r2, 0
+   a:	eb430040 	cmpnei      	r3, 64
+   e:	0c2c      	bf      	0x66	// 66 <dw_uart_get_dma_burst_size+0x66>
+  10:	eb230040 	cmplti      	r3, 65
+  14:	0c10      	bf      	0x34	// 34 <dw_uart_get_dma_burst_size+0x34>
+  16:	3b48      	cmpnei      	r3, 8
+  18:	0c23      	bf      	0x5e	// 5e <dw_uart_get_dma_burst_size+0x5e>
+  1a:	3b28      	cmplti      	r3, 9
+  1c:	0c05      	bf      	0x26	// 26 <dw_uart_get_dma_burst_size+0x26>
+  1e:	3b44      	cmpnei      	r3, 4
+  20:	0c1d      	bf      	0x5a	// 5a <dw_uart_get_dma_burst_size+0x5a>
+  22:	3000      	movi      	r0, 0
+  24:	041c      	br      	0x5c	// 5c <dw_uart_get_dma_burst_size+0x5c>
+  26:	3b50      	cmpnei      	r3, 16
+  28:	0c1d      	bf      	0x62	// 62 <dw_uart_get_dma_burst_size+0x62>
+  2a:	eb430020 	cmpnei      	r3, 32
+  2e:	0bfa      	bt      	0x22	// 22 <dw_uart_get_dma_burst_size+0x22>
+  30:	3004      	movi      	r0, 4
+  32:	0415      	br      	0x5c	// 5c <dw_uart_get_dma_burst_size+0x5c>
+  34:	eb430100 	cmpnei      	r3, 256
+  38:	0c19      	bf      	0x6a	// 6a <dw_uart_get_dma_burst_size+0x6a>
+  3a:	eb230100 	cmplti      	r3, 257
+  3e:	0c06      	bf      	0x4a	// 4a <dw_uart_get_dma_burst_size+0x4a>
+  40:	eb430080 	cmpnei      	r3, 128
+  44:	0bef      	bt      	0x22	// 22 <dw_uart_get_dma_burst_size+0x22>
+  46:	3006      	movi      	r0, 6
+  48:	040a      	br      	0x5c	// 5c <dw_uart_get_dma_burst_size+0x5c>
+  4a:	eb430200 	cmpnei      	r3, 512
+  4e:	0c10      	bf      	0x6e	// 6e <dw_uart_get_dma_burst_size+0x6e>
+  50:	eb430400 	cmpnei      	r3, 1024
+  54:	0be7      	bt      	0x22	// 22 <dw_uart_get_dma_burst_size+0x22>
+  56:	3009      	movi      	r0, 9
+  58:	0402      	br      	0x5c	// 5c <dw_uart_get_dma_burst_size+0x5c>
+  5a:	3001      	movi      	r0, 1
+  5c:	783c      	jmp      	r15
+  5e:	3002      	movi      	r0, 2
+  60:	07fe      	br      	0x5c	// 5c <dw_uart_get_dma_burst_size+0x5c>
+  62:	3003      	movi      	r0, 3
+  64:	07fc      	br      	0x5c	// 5c <dw_uart_get_dma_burst_size+0x5c>
+  66:	3005      	movi      	r0, 5
+  68:	07fa      	br      	0x5c	// 5c <dw_uart_get_dma_burst_size+0x5c>
+  6a:	3007      	movi      	r0, 7
+  6c:	07f8      	br      	0x5c	// 5c <dw_uart_get_dma_burst_size+0x5c>
+  6e:	3008      	movi      	r0, 8
+  70:	07f6      	br      	0x5c	// 5c <dw_uart_get_dma_burst_size+0x5c>
+
+Disassembly of section .text.dw_uart_dma_transfer_callback:
+
+00000000 <dw_uart_dma_transfer_callback>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	901f      	ld.w      	r0, (r0, 0x7c)
+   6:	e0000000 	bsr      	0x0	// 0 <gx_dma_release_channel>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_dma_release_channel
+   a:	3300      	movi      	r3, 0
+   c:	2b00      	subi      	r3, 1
+   e:	b47f      	st.w      	r3, (r4, 0x7c)
+  10:	9400      	ld.w      	r0, (r4, 0x0)
+  12:	e0000000 	bsr      	0x0	// 0 <gx_uart_flush_send_fifo>
+			12: R_CKCORE_PCREL_IMM26BY2	gx_uart_flush_send_fifo
+  16:	947b      	ld.w      	r3, (r4, 0x6c)
+  18:	943c      	ld.w      	r1, (r4, 0x70)
+  1a:	9400      	ld.w      	r0, (r4, 0x0)
+  1c:	7bcd      	jsr      	r3
+  1e:	1491      	pop      	r4, r15
+
+Disassembly of section .text.dw_uart_dma_recv_callback:
+
+00000000 <dw_uart_dma_recv_callback>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	901a      	ld.w      	r0, (r0, 0x68)
+   6:	e0000000 	bsr      	0x0	// 0 <gx_dma_release_channel>
+			6: R_CKCORE_PCREL_IMM26BY2	gx_dma_release_channel
+   a:	3300      	movi      	r3, 0
+   c:	2b00      	subi      	r3, 1
+   e:	b47a      	st.w      	r3, (r4, 0x68)
+  10:	9439      	ld.w      	r1, (r4, 0x64)
+  12:	9418      	ld.w      	r0, (r4, 0x60)
+  14:	e0000000 	bsr      	0x0	// 0 <gx_dcache_clean_invalid_range>
+			14: R_CKCORE_PCREL_IMM26BY2	gx_dcache_clean_invalid_range
+  18:	9476      	ld.w      	r3, (r4, 0x58)
+  1a:	9437      	ld.w      	r1, (r4, 0x5c)
+  1c:	9400      	ld.w      	r0, (r4, 0x0)
+  1e:	7bcd      	jsr      	r3
+  20:	1491      	pop      	r4, r15
+
+Disassembly of section .text.dw_uart_dma_transfer:
+
+00000000 <dw_uart_dma_transfer>:
+   0:	14d8      	push      	r4-r11, r15
+   2:	142d      	subi      	r14, r14, 52
+   4:	6e47      	mov      	r9, r1
+   6:	d9602001 	ld.w      	r11, (r0, 0x4)
+   a:	6c4b      	mov      	r1, r2
+   c:	6d43      	mov      	r5, r0
+   e:	6c27      	mov      	r0, r9
+  10:	6e8b      	mov      	r10, r2
+  12:	e0000000 	bsr      	0x0	// 0 <gx_dcache_clean_range>
+			12: R_CKCORE_PCREL_IMM26BY2	gx_dcache_clean_range
+  16:	e0000000 	bsr      	0x0	// 0 <gx_dma_select_channel>
+			16: R_CKCORE_PCREL_IMM26BY2	gx_dma_select_channel
+  1a:	6e03      	mov      	r8, r0
+  1c:	e9800031 	blz      	r0, 0x7e	// 7e <dw_uart_dma_transfer+0x7e>
+  20:	1c01      	addi      	r4, r14, 4
+  22:	3700      	movi      	r7, 0
+  24:	b51f      	st.w      	r0, (r5, 0x7c)
+  26:	3101      	movi      	r1, 1
+  28:	6c17      	mov      	r0, r5
+  2a:	3601      	movi      	r6, 1
+  2c:	b4e0      	st.w      	r7, (r4, 0x0)
+  2e:	b4e2      	st.w      	r7, (r4, 0x8)
+  30:	b4e5      	st.w      	r7, (r4, 0x14)
+  32:	b4e4      	st.w      	r7, (r4, 0x10)
+  34:	e0000000 	bsr      	0x0	// 0 <dw_uart_dma_transfer>
+			34: R_CKCORE_PCREL_IMM26BY2	dw_uart_get_dma_burst_size
+  38:	b401      	st.w      	r0, (r4, 0x4)
+  3a:	6c5b      	mov      	r1, r6
+  3c:	6c17      	mov      	r0, r5
+  3e:	b4e3      	st.w      	r7, (r4, 0xc)
+  40:	b4c7      	st.w      	r6, (r4, 0x1c)
+  42:	b4ea      	st.w      	r7, (r4, 0x28)
+  44:	b4c9      	st.w      	r6, (r4, 0x24)
+  46:	e0000000 	bsr      	0x0	// 0 <dw_uart_dma_transfer>
+			46: R_CKCORE_PCREL_IMM26BY2	dw_uart_get_dma_burst_size
+  4a:	9560      	ld.w      	r3, (r5, 0x0)
+  4c:	b406      	st.w      	r0, (r4, 0x18)
+  4e:	e9230014 	bnez      	r3, 0x76	// 76 <dw_uart_dma_transfer+0x76>
+  52:	3307      	movi      	r3, 7
+  54:	b468      	st.w      	r3, (r4, 0x20)
+  56:	6c97      	mov      	r2, r5
+  58:	102b      	lrw      	r1, 0x0	// 84 <dw_uart_dma_transfer+0x84>
+  5a:	6c23      	mov      	r0, r8
+  5c:	b4cb      	st.w      	r6, (r4, 0x2c)
+  5e:	e0000000 	bsr      	0x0	// 0 <gx_dma_register_complete_callback>
+			5e: R_CKCORE_PCREL_IMM26BY2	gx_dma_register_complete_callback
+  62:	b880      	st.w      	r4, (r14, 0x0)
+  64:	6ce3      	mov      	r3, r8
+  66:	6cab      	mov      	r2, r10
+  68:	6c67      	mov      	r1, r9
+  6a:	6c2f      	mov      	r0, r11
+  6c:	e0000000 	bsr      	0x0	// 0 <gx_dma_xfer_int>
+			6c: R_CKCORE_PCREL_IMM26BY2	gx_dma_xfer_int
+  70:	3000      	movi      	r0, 0
+  72:	140d      	addi      	r14, r14, 52
+  74:	1498      	pop      	r4-r11, r15
+  76:	3b41      	cmpnei      	r3, 1
+  78:	0bef      	bt      	0x56	// 56 <dw_uart_dma_transfer+0x56>
+  7a:	3305      	movi      	r3, 5
+  7c:	07ec      	br      	0x54	// 54 <dw_uart_dma_transfer+0x54>
+  7e:	3000      	movi      	r0, 0
+  80:	2800      	subi      	r0, 1
+  82:	07f8      	br      	0x72	// 72 <dw_uart_dma_transfer+0x72>
+  84:	0000      	.short	0x0000
+			84: R_CKCORE_ADDR32	.text.dw_uart_dma_transfer_callback
+	...
+
+Disassembly of section .text.dw_uart_dma_receive:
+
+00000000 <dw_uart_dma_receive>:
+   0:	14d7      	push      	r4-r10, r15
+   2:	142d      	subi      	r14, r14, 52
+   4:	d9202001 	ld.w      	r9, (r0, 0x4)
+   8:	6d83      	mov      	r6, r0
+   a:	6e07      	mov      	r8, r1
+   c:	9039      	ld.w      	r1, (r0, 0x64)
+   e:	9018      	ld.w      	r0, (r0, 0x60)
+  10:	6e8b      	mov      	r10, r2
+  12:	e0000000 	bsr      	0x0	// 0 <gx_dcache_invalid_range>
+			12: R_CKCORE_PCREL_IMM26BY2	gx_dcache_invalid_range
+  16:	e0000000 	bsr      	0x0	// 0 <gx_dma_select_channel>
+			16: R_CKCORE_PCREL_IMM26BY2	gx_dma_select_channel
+  1a:	6dc3      	mov      	r7, r0
+  1c:	e9a00006 	bhsz      	r0, 0x28	// 28 <dw_uart_dma_receive+0x28>
+  20:	3000      	movi      	r0, 0
+  22:	2800      	subi      	r0, 1
+  24:	140d      	addi      	r14, r14, 52
+  26:	1497      	pop      	r4-r10, r15
+  28:	1c01      	addi      	r4, r14, 4
+  2a:	3301      	movi      	r3, 1
+  2c:	3100      	movi      	r1, 0
+  2e:	b61a      	st.w      	r0, (r6, 0x68)
+  30:	6c1b      	mov      	r0, r6
+  32:	b462      	st.w      	r3, (r4, 0x8)
+  34:	b464      	st.w      	r3, (r4, 0x10)
+  36:	b420      	st.w      	r1, (r4, 0x0)
+  38:	b425      	st.w      	r1, (r4, 0x14)
+  3a:	e0000000 	bsr      	0x0	// 0 <dw_uart_dma_receive>
+			3a: R_CKCORE_PCREL_IMM26BY2	dw_uart_get_dma_burst_size
+  3e:	9660      	ld.w      	r3, (r6, 0x0)
+  40:	b401      	st.w      	r0, (r4, 0x4)
+  42:	e923001e 	bnez      	r3, 0x7e	// 7e <dw_uart_dma_receive+0x7e>
+  46:	3306      	movi      	r3, 6
+  48:	3500      	movi      	r5, 0
+  4a:	6c57      	mov      	r1, r5
+  4c:	6c1b      	mov      	r0, r6
+  4e:	b463      	st.w      	r3, (r4, 0xc)
+  50:	b4a7      	st.w      	r5, (r4, 0x1c)
+  52:	b4aa      	st.w      	r5, (r4, 0x28)
+  54:	b4a9      	st.w      	r5, (r4, 0x24)
+  56:	e0000000 	bsr      	0x0	// 0 <dw_uart_dma_receive>
+			56: R_CKCORE_PCREL_IMM26BY2	dw_uart_get_dma_burst_size
+  5a:	b406      	st.w      	r0, (r4, 0x18)
+  5c:	3302      	movi      	r3, 2
+  5e:	6c9b      	mov      	r2, r6
+  60:	102a      	lrw      	r1, 0x0	// 88 <dw_uart_dma_receive+0x88>
+  62:	6c1f      	mov      	r0, r7
+  64:	b46b      	st.w      	r3, (r4, 0x2c)
+  66:	b4a8      	st.w      	r5, (r4, 0x20)
+  68:	e0000000 	bsr      	0x0	// 0 <gx_dma_register_complete_callback>
+			68: R_CKCORE_PCREL_IMM26BY2	gx_dma_register_complete_callback
+  6c:	b880      	st.w      	r4, (r14, 0x0)
+  6e:	6cdf      	mov      	r3, r7
+  70:	6cab      	mov      	r2, r10
+  72:	6c67      	mov      	r1, r9
+  74:	6c23      	mov      	r0, r8
+  76:	e0000000 	bsr      	0x0	// 0 <gx_dma_xfer_int>
+			76: R_CKCORE_PCREL_IMM26BY2	gx_dma_xfer_int
+  7a:	6c17      	mov      	r0, r5
+  7c:	07d4      	br      	0x24	// 24 <dw_uart_dma_receive+0x24>
+  7e:	3b41      	cmpnei      	r3, 1
+  80:	0bd0      	bt      	0x20	// 20 <dw_uart_dma_receive+0x20>
+  82:	3304      	movi      	r3, 4
+  84:	07e2      	br      	0x48	// 48 <dw_uart_dma_receive+0x48>
+  86:	0000      	.short	0x0000
+  88:	00000000 	.long	0x00000000
+			88: R_CKCORE_ADDR32	.text.dw_uart_dma_recv_callback
+
+Disassembly of section .text.dw_uart_dma_transfer_stop:
+
+00000000 <dw_uart_dma_transfer_stop>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	901f      	ld.w      	r0, (r0, 0x7c)
+   6:	e9800007 	blz      	r0, 0x14	// 14 <dw_uart_dma_transfer_stop+0x14>
+   a:	e0000000 	bsr      	0x0	// 0 <gx_dma_channel_abort>
+			a: R_CKCORE_PCREL_IMM26BY2	gx_dma_channel_abort
+   e:	3300      	movi      	r3, 0
+  10:	2b00      	subi      	r3, 1
+  12:	b47f      	st.w      	r3, (r4, 0x7c)
+  14:	3000      	movi      	r0, 0
+  16:	1491      	pop      	r4, r15
+
+Disassembly of section .text.dw_uart_dma_receive_stop:
+
+00000000 <dw_uart_dma_receive_stop>:
+   0:	14d1      	push      	r4, r15
+   2:	6d03      	mov      	r4, r0
+   4:	901a      	ld.w      	r0, (r0, 0x68)
+   6:	e9800007 	blz      	r0, 0x14	// 14 <dw_uart_dma_receive_stop+0x14>
+   a:	e0000000 	bsr      	0x0	// 0 <gx_dma_channel_abort>
+			a: R_CKCORE_PCREL_IMM26BY2	gx_dma_channel_abort
+   e:	3300      	movi      	r3, 0
+  10:	2b00      	subi      	r3, 1
+  12:	b47a      	st.w      	r3, (r4, 0x68)
+  14:	3000      	movi      	r0, 0
+  16:	1491      	pop      	r4, r15
