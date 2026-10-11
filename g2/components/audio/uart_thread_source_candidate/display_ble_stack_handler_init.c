@@ -3,7 +3,7 @@
 #include <stdint.h>
 uint8_t audio_ble_dm_handler_state[0x18u]; /* RAM 0x20073b78 */
 uint8_t audio_ble_l2c_slave_state[0x18u]; /* RAM 0x20073bd8, init writes through +0x16 */
-uint8_t audio_ble_smp_handler_state[0xf0u]; /* RAM 0x20070aec */
+uint8_t audio_ble_smp_handler_state[0xfcu]; /* RAM 0x20070aec; SC writes through +0xf8 */
 uint8_t audio_ble_hci_state[0x80u]; /* RAM 0x20071478 */
 extern void audio_ble_dm_handler_lower_5367e4(void (*)(void));
 extern void audio_ble_dm_handler_4d299c(void); /* stock callback 0x4d299d */

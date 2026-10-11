@@ -1,0 +1,133 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0030fdb8 <.data+0xd9b8>:
+  30fdb8:	c3e8                	enter_s	[r13-r16,fp,blink]
+  30fdba:	c1bc                	sub_s	sp,sp,0x70
+  30fdbc:	4568                	mov_s	r13,r3
+  30fdbe:	0b1f 0431           	brne.d.nt	r3,0x10,30	;0x30fdda
+  30fdc2:	4030                	mov_s	r16,r1
+  30fdc4:	244a 7400           	mov	lp_count,0x10
+  30fdc8:	e20f                	add_s	r2,r2,0xf
+  30fdca:	c190                	add_s	r1,sp,0x40
+  30fdcc:	20a8 0180           	lp	12	;0x30fdd8
+  30fdd0:	12ff 8483           	ldb.ab	r3,[r2,-1]
+  30fdd4:	1901 00d2           	stb.ab	r3,[r1,1]
+  30fdd8:	f00c                	b_s	24	;0x30fdf0
+  30fdda:	244a 7100           	mov	lp_count,0x4
+  30fdde:	6a23                	add_s	r1,r2,0x3
+  30fde0:	c290                	add_s	r2,sp,0x40
+  30fde2:	78e0                	nop_s
+  30fde4:	20a8 0180           	lp	12	;0x30fdf0
+  30fde8:	11ff 8483           	ldb.ab	r3,[r1,-1]
+  30fdec:	1a01 00d2           	stb.ab	r3,[r2,1]
+  30fdf0:	244a 7400           	mov	lp_count,0x10
+  30fdf4:	489f                	add_s	r1,r0,0xf
+  30fdf6:	c094                	add_s	r0,sp,0x50
+  30fdf8:	20a8 0180           	lp	12	;0x30fe04
+  30fdfc:	11ff 8482           	ldb.ab	r2,[r1,-1]
+  30fe00:	1801 0092           	stb.ab	r2,[r0,1]
+  30fe04:	700c                	mov_s	r0,0
+  30fe06:	c043                	st_s	r0,[sp,0xc]
+  30fe08:	c042                	st_s	r0,[sp,0x8]
+  30fe0a:	c041                	st_s	r0,[sp,0x4]
+  30fe0c:	086e 0060           	bl.d	2156	;0x310678
+  30fe10:	c040                	st_s	r0,[sp,0]
+  30fe12:	c080                	add_s	r0,sp,0
+  30fe14:	c188                	add_s	r1,sp,0x20
+  30fe16:	0afa f86e           	bl.d	-2159880	;0x10090c
+  30fe1a:	704c                	mov_s	r2,0
+  30fe1c:	0882 0040           	bl	2176	;0x31069c
+  30fe20:	1420 30c0           	ldb.x	r0,[sp,32]
+  30fe24:	44cb 0033 57c0      	mov_s	r12,0x3357c0
+  30fe2a:	7014                	cmp_s	r0,0
+  30fe2c:	c088                	add_s	r0,sp,0x20
+  30fe2e:	f686                	blt_s	12	;0x30fe38
+  30fe30:	0f56 11a0           	bl.d	145236	;0x333584
+  30fe34:	c184                	add_s	r1,sp,0x10
+  30fe36:	f00a                	b_s	20	;0x30fe48
+  30fe38:	0f4e 11a0           	bl.d	145228	;0x333584
+  30fe3c:	c198                	add_s	r1,sp,0x60
+  30fe3e:	c098                	add_s	r0,sp,0x60
+  30fe40:	c284                	add_s	r2,sp,0x10
+  30fe42:	0f9a 11a0           	bl.d	145304	;0x3335d8
+  30fe46:	4181                	mov_s	r1,r12
+  30fe48:	1410 30c0           	ldb.x	r0,[sp,16]
+  30fe4c:	080f 0032           	brlt.d.nt	r0,0,14	;0x30fe5a
+  30fe50:	c084                	add_s	r0,sp,0x10
+  30fe52:	0f36 11a0           	bl.d	145204	;0x333584
+  30fe56:	c18c                	add_s	r1,sp,0x30
+  30fe58:	f00a                	b_s	20	;0x30fe6c
+  30fe5a:	c084                	add_s	r0,sp,0x10
+  30fe5c:	0f2a 11a0           	bl.d	145192	;0x333584
+  30fe60:	c198                	add_s	r1,sp,0x60
+  30fe62:	c098                	add_s	r0,sp,0x60
+  30fe64:	c28c                	add_s	r2,sp,0x30
+  30fe66:	0f76 11a0           	bl.d	145268	;0x3335d8
+  30fe6a:	4181                	mov_s	r1,r12
+  30fe6c:	0d27 1431           	brne.d.nt	r13,0x10,38	;0x30fe92
+  30fe70:	244a 7400           	mov	lp_count,0x10
+  30fe74:	c413                	ld_s	r12,[sp,0x4c]
+  30fe76:	c007                	ld_s	r0,[sp,0x1c]
+  30fe78:	c112                	ld_s	r1,[sp,0x48]
+  30fe7a:	c206                	ld_s	r2,[sp,0x18]
+  30fe7c:	c311                	ld_s	r3,[sp,0x44]
+  30fe7e:	c705                	ld_s	r15,[sp,0x14]
+  30fe80:	c510                	ld_s	r13,[sp,0x40]
+  30fe82:	c604                	ld_s	r14,[sp,0x10]
+  30fe84:	7c07                	xor_s	r12,r12,r0
+  30fe86:	7a27                	xor_s	r2,r2,r1
+  30fe88:	2707 10c1           	xor	r1,r15,r3
+  30fe8c:	2607 1340           	xor	r0,r14,r13
+  30fe90:	f021                	b_s	66	;0x30fed2
+  30fe92:	7baf                	extb_s	r3,r13
+  30fe94:	214a 0000           	mov	r1,0
+  30fe98:	20a8 0400           	lp	32	;0x30feb8
+  30fe9c:	c088                	add_s	r0,sp,0x20
+  30fe9e:	7170                	cmp_s	r1,r3
+  30fea0:	6038                	add_s	r0,r0,r1
+  30fea2:	f745                	bhs_s	10	;0x30feaa
+  30fea4:	c290                	add_s	r2,sp,0x40
+  30fea6:	622a                	ldb_s	r2,[r2,r1]
+  30fea8:	f003                	b_s	6	;0x30feae
+  30feaa:	f405                	bne_s	10	;0x30feb2
+  30feac:	da80                	mov_s	r2,0x80
+  30feae:	a840                	stb_s	r2,[r0,0]
+  30feb0:	f003                	b_s	6	;0x30feb6
+  30feb2:	1800 0003           	stb	0,[r0]
+  30feb6:	7124                	add_s	r1,r1,1
+  30feb8:	c70b                	ld_s	r15,[sp,0x2c]
+  30feba:	c40f                	ld_s	r12,[sp,0x3c]
+  30febc:	c00a                	ld_s	r0,[sp,0x28]
+  30febe:	c20e                	ld_s	r2,[sp,0x38]
+  30fec0:	c109                	ld_s	r1,[sp,0x24]
+  30fec2:	c60d                	ld_s	r14,[sp,0x34]
+  30fec4:	c308                	ld_s	r3,[sp,0x20]
+  30fec6:	c50c                	ld_s	r13,[sp,0x30]
+  30fec8:	7ce7                	xor_s	r12,r12,r15
+  30feca:	7a07                	xor_s	r2,r2,r0
+  30fecc:	79c7                	xor_s	r1,r1,r14
+  30fece:	2507 10c0           	xor	r0,r13,r3
+  30fed2:	c443                	st_s	r12,[sp,0xc]
+  30fed4:	c242                	st_s	r2,[sp,0x8]
+  30fed6:	c141                	st_s	r1,[sp,0x4]
+  30fed8:	0fa2 0020           	bl.d	1952	;0x310678
+  30fedc:	c040                	st_s	r0,[sp,0]
+  30fede:	c094                	add_s	r0,sp,0x50
+  30fee0:	0ae2 f86e           	bl.d	-2159904	;0x1009c0
+  30fee4:	702c                	mov_s	r1,0
+  30fee6:	c080                	add_s	r0,sp,0
+  30fee8:	c188                	add_s	r1,sp,0x20
+  30feea:	0a26 f86e           	bl.d	-2160092	;0x10090c
+  30feee:	704c                	mov_s	r2,0
+  30fef0:	0fae 0000           	bl	1964	;0x31069c
+  30fef4:	244a 7400           	mov	lp_count,0x10
+  30fef8:	2440 3bc0           	add	r0,sp,0x2f
+  30fefc:	20a8 0180           	lp	12	;0x30ff08
+  30ff00:	10ff 8481           	ldb.ab	r1,[r0,-1]
+  30ff04:	1801 2052           	stb.ab	r1,[r16,1]
+  30ff08:	c7c8                	leave_s	[r13-r16,fp,blink,pcl]
+  30ff0a:	78e0                	nop_s

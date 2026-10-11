@@ -1,0 +1,9 @@
+{
+  "native_entry": "0x1000a080",
+  "image_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "source_sha256": "19f8531a0a1ddc865cd4cc90df6b763c6c34332caab81ffa83da4e825363abe1",
+  "bounded_cases": 7,
+  "result": "PASS",
+  "native_evidence": "Instruction span 0x1000a080..0x1000a29c, four channel cases, 7th stack argument at 0xa100/0xa168, logfbank r0=r1=1 at 0xa18c and 0xa262.",
+  "limit": "Host relocated SRAM state and stubbed child calls; actual MMIO, runtime pointer placement and physical audio unqualified."
+}

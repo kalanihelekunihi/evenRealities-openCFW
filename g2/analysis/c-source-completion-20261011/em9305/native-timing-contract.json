@@ -1,0 +1,10 @@
+{
+  "binary_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "body": "0x30c3a4..0x30c40c",
+  "wrapper": "0x30c40c..0x30c414",
+  "scale": "two-word unsigned divisor shifts left; 32bit quotient mask wraps; stop when high nonzero or low exceeds numerator",
+  "zero_divisor": "native shift loop does not terminate; compiler barrier retains this control path",
+  "mask_overflow": "returns0 when wrapped mask0, even for some nonzero divisors; max32 numerator/divisor1 preserved0",
+  "wrapper_overflow": "numerator = length+unit-1 modulo2^32 before division",
+  "scope": "Instruction-backed C reconstruction. Boundary model checks do not prove live native execution."
+}

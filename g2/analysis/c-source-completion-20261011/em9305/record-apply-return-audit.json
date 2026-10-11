@@ -1,0 +1,11 @@
+{
+  "native_addresses": [
+    "309dc4 R18=record+410",
+    "309de6 calls327718",
+    "309df8 reads associated+2518 intoR0",
+    "309e00 storesR0 byte viaR18"
+  ],
+  "finding": "Native caller discards327718 incidental return. Both mode branches target record410; previous experimental C erroneously dereferenced return in modebit6 branch. Corrected current source and40case fixture. Earlier apply receipt did not qualify this destination and is superseded for it.",
+  "native_source": "g2/build/c-firmware/20261011/em-inspection-full.arcem.txt",
+  "scope": "Native instruction audit and bounded C regression; no hardware proof."
+}

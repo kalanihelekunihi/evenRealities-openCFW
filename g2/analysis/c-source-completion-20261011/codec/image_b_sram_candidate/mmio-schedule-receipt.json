@@ -1,9 +1,44 @@
 {
   "stock_image_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
   "scope": "per-body store count only; addresses, values, order, timing and hardware effects not proved",
-  "checked": 18,
+  "checked": 24,
   "all_store_counts_match": true,
   "functions": [
+    {
+      "native_entry": "10005e9c",
+      "compiled_suffix": "audio_start_10005e9c",
+      "native_stores": 3,
+      "candidate_stores": 3,
+      "match": true
+    },
+    {
+      "native_entry": "1000588c",
+      "compiled_suffix": "audio_i2s_clock_1000588c",
+      "native_stores": 1,
+      "candidate_stores": 1,
+      "match": true
+    },
+    {
+      "native_entry": "1000589c",
+      "compiled_suffix": "audio_i2s_input_mode_1000589c",
+      "native_stores": 1,
+      "candidate_stores": 1,
+      "match": true
+    },
+    {
+      "native_entry": "100058ac",
+      "compiled_suffix": "audio_i2s_output_mode_100058ac",
+      "native_stores": 1,
+      "candidate_stores": 1,
+      "match": true
+    },
+    {
+      "native_entry": "100051d8",
+      "compiled_suffix": "analog_config_update_100051d8",
+      "native_stores": 4,
+      "candidate_stores": 4,
+      "match": true
+    },
     {
       "native_entry": "100051ec",
       "compiled_suffix": "audio_prepare_100051ec",
@@ -128,6 +163,13 @@
       "compiled_suffix": "analog_adc_reset_100080dc",
       "native_stores": 1,
       "candidate_stores": 1,
+      "match": true
+    },
+    {
+      "native_entry": "10008134",
+      "compiled_suffix": "analog_ldo_digital_control_10008134",
+      "native_stores": 0,
+      "candidate_stores": 0,
       "match": true
     }
   ]

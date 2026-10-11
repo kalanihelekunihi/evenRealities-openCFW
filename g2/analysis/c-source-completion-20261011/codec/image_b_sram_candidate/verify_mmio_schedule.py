@@ -11,6 +11,11 @@ OUT = HERE / "build"
 TOOL = ROOT / "g2/build/offline-nationalchip-dsp-c-compiler-successor-20261009T195245Z/toolchain"
 STOCK = ROOT / "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_b_stage2.bin"
 PAIRS = [
+    ("10005e9c", "audio_start_10005e9c", "backup_audio_start.o"),
+    ("1000588c", "audio_i2s_clock_1000588c", "backup_audio_i2s.o"),
+    ("1000589c", "audio_i2s_input_mode_1000589c", "backup_audio_i2s.o"),
+    ("100058ac", "audio_i2s_output_mode_100058ac", "backup_audio_i2s.o"),
+    ("100051d8", "analog_config_update_100051d8", "backup_analog_controls.o"),
     ("100051ec", "audio_prepare_100051ec", "backup_audio_prepare.o"),
     ("10005ab4", "set_logfbank_enable_10005ab4", "backup_audio_state.o"),
     ("10005af8", "set_fftvad_w_10005af8", "backup_audio_state.o"),
@@ -29,6 +34,7 @@ PAIRS = [
     ("100080ac", "analog_adc_out_clock_100080ac", "backup_analog_controls.o"),
     ("100080c4", "analog_adc_input_100080c4", "backup_analog_controls.o"),
     ("100080dc", "analog_adc_reset_100080dc", "backup_analog_controls.o"),
+    ("10008134", "analog_ldo_digital_control_10008134", "backup_analog_controls.o"),
 ]
 
 

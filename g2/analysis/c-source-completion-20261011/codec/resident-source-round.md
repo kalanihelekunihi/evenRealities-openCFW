@@ -1359,3 +1359,242 @@ and a 28-bit command-address mask confirmed from `zext ... 27,0`
 Its resume/submit descendants remain real typed lower contracts. The
 existing selected SRAM callback declaration was corrected to the same
 pointer/function-pointer/return ABI. Target receipt pending.
+
+## SPI master and pinned compiler runtime, 2026-10-11
+
+The selected image-A candidate now includes native XIP SPI probe 0x10206480
+and exact pinned LLVM compiler-rt 20.1.8 C sources for `__adddf3`,
+`__divdf3`, `__fixunsdfsi`, `__floatunsidf`, and `__muldf3`. The downloaded
+`fixunsdfsi.c` and `fp_fixuint_impl.inc` are exact revision-pinned with hashes
+in the upstream provenance record. Their runtime FENV lowers
+`__fe_getround` and `__fe_raise_inexact` remain explicit unresolved contracts;
+no generic no-op exception provider was selected.
+
+`codec-spi-compiler-rt-round/receipt.json` records 162 coherent image-A
+sources and target compile/link PASS (SHA-256
+`605c24a6823007bc0a565fca285360c41808b937d34353fa8d2b2d663affc177`).
+Direct native C-SKY disassembly and pinned NationalChip `driver/spi.h`
+then yielded four SPI register/list/setup/IRQ children in
+`resident_xip_spi_leaves.c`. `codec-spi-leaves-round/receipt.json` records
+163 coherent sources, target PASS, SHA-256
+`5ee314fb92ecd9d2ab6c5b54bd936be4e14b09b25c0ed0a2d089941c0f81b5e7`,
+and eight genuine image-A imports.
+
+The 0x10206204 quick-transfer body is selected as the next 164th C source.
+Direct native listing corrected the retained decompiler's truncated MMIO
+addresses: the transfer gate writes 2 then 3 at `0xa030008c`. It also shows
+RX chunks use `min(remaining, FIFO capacity)`. The full target receipt and
+bounded hardware runtime oracle remain pending. XIP raw label bindings are
+207/362; this is an attribution count over mixed code and data, not a
+whole-image source-completion percentage. Image-A SRAM remains 123/124 true
+bodies, with compact IRQ assembler/ISA qualification open. Stage2 96/96
+retained seeded bodies are C candidates. Image-B is a separate loaded-stage
+candidate. Full source-owned product data, layout/scatter, hardware runtime,
+and native numerical equivalence remain open.
+
+## UART receive and DMA descriptor graph, 2026-10-11
+
+The selected image-A XIP sources now cover the direct-native UART receive
+callback at 0x10208098, body probe at 0x10207cec, receive DMA dispatch and
+completion, DMA channel selection/registration, transfer, and the complete
+0x10203828/0x102038f4/0x10203c60 descriptor construction graph. The
+descriptor source preserves the 4095-byte segment count, 24-byte descriptor
+stride, source/target DMA translation, bitfield validation, and exact
+0x2002e93c state literal. Pinned NationalChip layouts and direct C-SKY
+disassembly were checked against the retained decompiler bodies. Hardware
+runtime equality and final SRAM state ownership remain open.
+
+`codec-uart-rx-round/receipt.json`: 173 coherent image-A source inputs,
+target compile/link PASS, SHA-256
+`f1d7c89d9baa0f7637c9a051d87f4035e7810e25e027a54158a5a4e1dab3f3d8`.
+`codec-uart-dma-chain-round/receipt.json`: 177 coherent inputs, PASS,
+SHA-256 `bfbf8cb269a00d1c139fbf766f297bfd728130ff1087e08734f58c3c678da544`.
+`codec-dma-configure-round/receipt.json`: 178 coherent inputs, PASS,
+SHA-256 `4c11b2b9c097d78f858bebe975c6e26e1ef7db0abb452c83828112ff6b2b4e85`.
+The selected graph has six genuine imports: two floating-environment
+services, the compact SRAM IRQ entry, console port product state, KWS ambient
+task words, and UART channel product storage. These are not substitute
+providers. XIP raw-label crosswalk is 245/362 bound, with 117 unbound mixed
+code/data labels. This count is an attribution queue, not a true missing-body
+count. Image-A SRAM remains 123/124 true bodies; stage2 has 96/96 retained
+seeded C candidates. Image-B, source-owned initialized data, linker scatter,
+and native execution gates are independent incomplete work.
+
+The follow-on native UART transmit callback/message-body/body-done functions
+at 0x10207f08/0x10207b38/0x10207c50 are selected in
+`resident_xip_uart_send_path.c`. The callback uses the authenticated
+0x2002e050 runtime state and 0x2002e578 six-row callback table. The source
+preserves header/body/CRC/final phases, 14-byte header, 4-byte CRC, and
+aligned DMA handoff. The UART transmit/CRC/message-start children remain
+explicit genuine imports pending their own source reduction, and runtime
+state/table initialization is still unowned. `codec-uart-send-round/receipt.json`
+records 179 coherent image-A inputs, target PASS, SHA-256
+`1fdc455abc6f1b2f71f2da26327dd4966945d0abae6c0c0ac9f5bbab6fb70e1c`.
+The mixed raw XIP crosswalk is 248/362 bound, 114 unbound.
+
+The next selected UART transmit lower source covers native 0x10203604 write
+and 0x10203720 buffer setup, with typed 0x10203630/0x10203664 start/stop
+providers. The latter two native addresses were already counted under
+`channel_runtime.c` and are not counted twice. Native 0x102030c4 completion
+and 0x10203108 DMA entry are selected, including the 12-word descriptor
+and the authenticated two UART burst lookups. Existing 0x10207adc
+message-start source now relocates to the selected C send callback; its
+historical absolute callback literal was removed. Unsupported UART port
+values at DMA descriptor word 8 remain a stated input precondition.
+
+`codec-uart-tx-lowers-round/receipt.json` records 180 coherent image-A
+sources and target PASS; `codec-uart-tx-dma-round/receipt.json` records 181
+coherent sources and target PASS. The pinned NationalChip `base/src/crc32.c`
+already selected for this image owns native CRC32 and crc32_no_comp
+algorithms. A new three-register ABI binding for 0x102098a8 connects the
+UART path to that source, correcting the decompiler's one-argument wrapper
+signature. `codec-uart-crc-bound-round/receipt.json` is the latest coherent
+target PASS: 182 image-A sources, SHA-256
+`4a2a91dc563dd297dea583bd9f6f97f4838d98aa48a5c94e64311b3e03fff2a0`,
+six genuine imports. The XIP raw-label crosswalk is 253/362, with 109 mixed
+code/data labels unbound. The pinned CRC lower 0x102097f4 is source-owned
+but not separately counted by the component-file crosswalk. Runtime/state
+initialization, full image layout, and native execution remain open.
+
+## Audio output IRQ and bounded XIP tail census, 2026-10-11
+
+Direct C-SKY listing for native 0x102050cc proves the AOUT MMIO base is
+`0xa0b00000`; the retained decompiler displayed zero-address accesses.
+`resident_xip_audio_output_isr.c` now sources its full pending-bit and
+callback control flow plus the two native register helpers at 0x102049c8
+and 0x102049d8. `codec-aout-isr-round/receipt.json` records 183 coherent
+image-A sources, target compile/link PASS, SHA-256
+`f09e6293bf755d2c7ccb7e9165decbf903bf7d8337db703598ce68af8ee06a47`,
+and the same six genuine imports. Hardware interrupt behavior remains
+unqualified by execution.
+
+The raw XIP crosswalk is 256/362. Of 106 unbound Ghidra labels, 23 labels
+at and after 0x1020a8aa are in the native literal/data tail (408 bytes of
+Ghidra envelopes): gain/correction tables, selector/default values, CRC
+table, dispatch/name data, and short strings. The other 83 labels (9,806
+envelope bytes) are an upper bound on unbound code bodies; selected pinned
+`crc32_no_comp` at 0x102097f4 is already source-owned but omitted from the
+component-file crosswalk, and compiler runtime bodies need individual ABI
+attribution. The remaining main code clusters are AOUT, NPU/SNPU, GPIO,
+sample-app command/audio, and softfloat/arithmetic. Exact initialized data
+placement, SRAM aliasing, and runtime equality remain independent gates.
+
+Five further true AOUT bodies are selected in
+`resident_xip_audio_output_controls.c`: fixed SRC, SDC address read, frame
+drain, aligned sample-buffer configuration, and mute. Direct native
+instruction reads distinguish playback MMIO `0xa0b00000` from SDC/sample
+buffer MMIO `0xa0b80000`, which the retained decompiler conflated as
+zero-address globals. The frame drain uses the selected real millisecond
+delay provider. `codec-aout-controls-round/receipt.json` records 184
+coherent image-A source inputs, target PASS, SHA-256
+`00c2d8a0ddeaed9276c6900914389a5c5f271e1476e4b5348e386c4295bedca4`,
+and six genuine imports. The XIP raw crosswalk is 261/362. Remaining 101
+labels comprise 23 native literal/data tail labels and at most 78 code
+labels, including the already selected pinned CRC lower. Hardware behavior
+and product memory placement remain unqualified.
+
+The AOUT I2S/DAC configuration wrappers (0x10204c64/0x10204c90) and
+ordered register lowers (0x10204ab0/0x102049e8) are source candidates.
+The native seven-entry Lodac jump table at 0x1020a8f4 was decoded into
+seven semantic C cases with exact strobe order. Full 0x10204d38 PCM
+configuration includes all eight native clock ratios, A0B80000 SDC flags,
+and an exact 118-byte mismatch format string from 0x1020a9b0.
+
+A same-name edit briefly replaced the earlier tracked
+`resident_xip_audio_output_pcm.c`, which owns 0x10203dc8/0x10203fa8.
+The in-progress build was interrupted, that original file was restored
+byte-for-byte from the unchanged Git index, and the new 0x10204d38 source
+was placed in distinct `resident_xip_aout_config_pcm.c`. The restored file
+SHA-256 `96ff5c401415e5982f4e9ada0fc06f58410150abf70b6c6202e0599949eab177`
+matches its last pre-edit coherent source snapshot. Lodac's earlier
+`codec-aout-lodac-round` receipt is superseded for graph/source coverage.
+
+`codec-aout-pcm-corrected-round/receipt.json` is the authoritative current
+candidate: 188 distinct coherent image-A inputs, target PASS, SHA-256
+`275a858dadb304ad936c2e813f401b5a586056a7be4b224e08e28b6cad89a3f3`,
+six genuine imports. Both PCM source paths and their distinct hashes are
+recorded in that receipt. XIP raw-label bindings are 267/362; 23 unbound
+labels are data-tail labels and at most 72 are possible code labels.
+
+The direct-native AOUT lifecycle functions at 0x102052e0, 0x10205318,
+and 0x10205344 are now distinct C source in
+`resident_xip_audio_output_lifecycle.c`. The free path preserves the
+native non-null context precondition (its field is cleared before the
+later null test), ordered playback/sample register accesses, and the
+selected memset lower. The callback path retains both callback pointer
+fields and the playback-enable write. Exit clears the three native
+control bits in order and gates modules 11 and 15 through the selected
+platform provider. `codec-aout-lifecycle-round/receipt.json` records
+189 distinct source inputs, a coherent target compile/link PASS, SHA-256
+`d1344ebd6a374a925e7bf67e62d4e22f00780076e30677738d80772648a974c9`,
+and the same six genuine imports. The native raw-label crosswalk is
+270/362; 23 remaining labels are in the literal/data tail and 69 are
+an upper bound on possible missing code. Native execution, full data
+placement, and stage composition remain unqualified.
+
+The next selected AOUT source reconstructs the channel-field register
+update at 0x102049b0 and suspend/resume at 0x10204ec0/0x1020521c.
+It retains the native context flag branches, ordered volatile register
+operations, and module 11/15 clock-gate calls. The retained pseudocode
+for suspend uses a narrow AND mask on the pending register; the C
+candidate preserves that operation instead of inferring a generic clear.
+`codec-aout-suspend-resume-round/receipt.json` is a coherent target PASS
+with 190 distinct image-A inputs, SHA-256
+`7165f12960f1aca14935bcd93fd104264719a35cd7231aa066e1f2ae52eef551`,
+and six genuine imports unchanged. Raw XIP bindings are 273/362;
+23 native labels are in the literal/data tail and 66 are an upper
+bound on remaining possible code labels. Hardware execution and full
+source-owned data/layout still require independent proof.
+
+Seven further NPU XIP bodies now use the selected exact register-read
+and set-bit lowers: interrupt-bit decoding at 0x102056f0, ordered
+non-overflow and overflow clears at 0x102057e0/0x10205838, and the
+four address/task-head register queries at 0x10205870/0x102058a4/
+0x102058b4/0x102058c4. The source preserves each decoded output bit
+and field address; it does not manufacture a register backend.
+`codec-npu-queries-round/receipt.json` is a coherent target PASS with
+191 distinct image-A inputs, SHA-256
+`4553ff14ed895021f9ebcd8615869856b4165c72da946d75e64fb94641c121ca`,
+and the same six genuine imports. The image-A XIP crosswalk is
+280/362: 23 unbound data-tail labels and at most 59 possible code labels.
+The pinned CRC lower is already selected but outside this component-file
+crosswalk. Native execution and source-owned data/scatter layout remain
+separate whole-image gates.
+
+The SNPU interrupt chain now includes native 0x10205ce0 ISR state gate,
+0x10205bd8 status dispatch and callback queue walk, 0x10205b1c
+overtime reset, and 0x10205ad8 32-word diagnostic dump. The queue
+indices and callback fields are bound to the already selected native
+0x10205d60 task constructor. The diagnostic format literals were
+verified byte-for-byte in the official Codec payload at offsets
+82330, 82338, 82408, 82438, and 82461. The status function's
+bit-6 return expression follows the retained decompiler's explicit
+byte cast; native execution qualification is still needed for that
+edge and callback paths.
+
+`codec-snpu-overtime-round/receipt.json` is a coherent target PASS with
+194 distinct image-A source inputs, SHA-256
+`6f83123f9db1236d3c5b18616c9c2c28a02213c67b8a3d875ad9dbf300f88ce4`,
+and the original six genuine imports. It closes the temporary overtime
+reset import exposed by the preceding 193-input status snapshot.
+The XIP crosswalk now binds 284/362 raw labels; 23 remaining labels
+are in the literal/data tail and at most 55 are possible code labels,
+including pinned CRC lower outside the component-file crosswalk.
+
+The GPIO XIP interrupt service (0x10205ee0) and disable-trigger
+(0x10206074) are now selected C. Stock literal-pool words at package
+offsets 0x0f4ac, 0x0f574, and 0x0f658 all resolve the 32-entry,
+12-byte callback table to SRAM 0x20027930. The ISR preserves the
+32-pin pending snapshot, per-pin callback and acknowledgment order.
+Disable-trigger clears the five native configuration registers and
+resets that pin's three callback words. Its direction helper is already
+selected source. The remaining enable-trigger function at 0x10205fb4
+has an eight-way native jump table at 0x1020aca4, whose entries have
+been extracted but need branch-body decoding before source selection.
+`codec-gpio-irq-disable-round/receipt.json` is a coherent target PASS
+with 195 distinct image-A source inputs, SHA-256
+`df33e11020ea65f4803f2242db485c25b68f26380f534d082b316329ff34bb59`,
+and six genuine imports. XIP raw-label bindings are 286/362;
+23 labels remain in the literal/data tail and at most 53 are possible
+code labels. Hardware IRQ execution and full SRAM initialization/
+placement remain unqualified.

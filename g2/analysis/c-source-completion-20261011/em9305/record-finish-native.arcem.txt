@@ -1,0 +1,88 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0032c2b0 <.data+0x29eb0>:
+  32c2b0:	c2e8                	enter_s	[r13-r16,blink]
+  32c2b2:	4608                	mov_s	r14,r0
+  32c2b4:	4508                	mov_s	r13,r0
+  32c2b6:	0f1a f62f           	bl.d	-80104	;0x3189cc
+  32c2ba:	2680 1386           	add	r14,r14,398
+  32c2be:	1d56 1018           	st.as	r0,[r13,86]
+  32c2c2:	0ea2 f62f           	bl.d	-80224	;0x318960
+  32c2c6:	2556 1ccf           	add3	r15,r13,0x33
+  32c2ca:	2841 0201           	lsr	r1,r0,0x8
+  32c2ce:	1556 1600           	ld.as	r0,[r13,86]
+  32c2d2:	1dae 105c           	sth.as	r1,[r13,174]
+  32c2d6:	702c                	mov_s	r1,0
+  32c2d8:	0de2 f62f           	bl.d	-80416	;0x3188b8
+  32c2dc:	1f00 1343           	stb	13,[r15]
+  32c2e0:	47cb 0080 5a9c      	mov_s	r15,0x805a9c
+  32c2e6:	2841 0401           	lsr	r1,r0,0x10
+  32c2ea:	1d67 1018           	st.as	r0,[r13,103]
+  32c2ee:	7827                	xor_s	r0,r0,r1
+  32c2f0:	8742                	ld_s	r2,[r15,0x8]
+  32c2f2:	8721                	ld_s	r1,[r15,0x4]
+  32c2f4:	1dc8 101c           	sth.as	r0,[r13,200]
+  32c2f8:	2556 1b00           	add3	r0,r13,0x2c
+  32c2fc:	1e00 1043           	stb	1,[r14]
+  32c300:	1d59 1098           	st.as	r2,[r13,89]
+  32c304:	08fa f12f           	bl.d	-122632	;0x30e3fc
+  32c308:	1d58 1058           	st.as	r1,[r13,88]
+  32c30c:	15ae 1700           	ldh.as	r0,[r13,174]
+  32c310:	1656 1083           	ldb	r3,[r14,86]
+  32c314:	8f40                	ldb_s	r2,[r15,0]
+  32c316:	1696 9081           	ldb	r1,[r14,-106]
+  32c31a:	b808                	asl_s	r0,r0,0x8
+  32c31c:	1dd3 101d           	sth.as	0,[r13,211]
+  32c320:	ae4c                	stb_s	r2,[r14,0xc]
+  32c322:	ae36                	stb_s	r1,[r14,0x16]
+  32c324:	0b95 0030           	breq.d.nt	r3,0,148	;0x32c3b8
+  32c328:	1d68 1018           	st.as	r0,[r13,104]
+  32c32c:	40a1                	mov_s	r0,r13
+  32c32e:	41a1                	mov_s	r1,r13
+  32c330:	208a 2048           	mov	r16,513
+  32c334:	2080 0f06           	add	r0,r0,444
+  32c338:	2180 0947           	add	r1,r1,485
+  32c33c:	da08                	mov_s	r2,0x8
+  32c33e:	1e36 1043           	stb	1,[r14,54]
+  32c342:	0c86 0360           	bl.d	27780	;0x332fc4
+  32c346:	1de3 141c           	sth.as	r16,[r13,227]
+  32c34a:	162e 1082           	ldb	r2,[r14,46]
+  32c34e:	1567 1600           	ld.as	r0,[r13,103]
+  32c352:	162f 108c           	ldb	r12,[r14,47]
+  32c356:	1630 108f           	ldb	r15,[r14,48]
+  32c35a:	1631 108b           	ldb	r11,[r14,49]
+  32c35e:	7a07                	xor_s	r2,r2,r0
+  32c360:	2841 0201           	lsr	r1,r0,0x8
+  32c364:	2841 0403           	lsr	r3,r0,0x10
+  32c368:	b838                	lsr_s	r0,r0,0x18
+  32c36a:	7987                	xor_s	r1,r1,r12
+  32c36c:	7be7                	xor_s	r3,r3,r15
+  32c36e:	2007 02c0           	xor	r0,r0,r11
+  32c372:	1e2e 1082           	stb	r2,[r14,46]
+  32c376:	1e2f 1042           	stb	r1,[r14,47]
+  32c37a:	1e30 10c2           	stb	r3,[r14,48]
+  32c37e:	1e31 1002           	stb	r0,[r14,49]
+  32c382:	46a9                	mov_s	r14,r13
+  32c384:	2680 1b06           	add	r14,r14,428
+  32c388:	2554 1b81           	add1	r1,r13,0x2e
+  32c38c:	da10                	mov_s	r2,0x10
+  32c38e:	0c3a 0360           	bl.d	27704	;0x332fc4
+  32c392:	40c1                	mov_s	r0,r14
+  32c394:	1600 7003 0080 28c0 	ld	r3,[0x8028c0]
+  32c39c:	1dea 141c           	sth.as	r16,[r13,234]
+  32c3a0:	eb0c                	breq_s	r3,0,24	;0x32c3b8
+  32c3a2:	40c3 0080 5c3c      	mov_s	r0,0x805c3c
+  32c3a8:	8000                	ld_s	r0,[r0,0]
+  32c3aa:	714c                	mov_s	r2,1
+  32c3ac:	4d10                	sub_s	r0,r13,r0
+  32c3ae:	b829                	lsr_s	r0,r0,0x9
+  32c3b0:	7604                	add_s	r0,r0,6
+  32c3b2:	790f                	extb_s	r1,r0
+  32c3b4:	7b60                	jl_s.d	[r3]
+  32c3b6:	40c1                	mov_s	r0,r14
+  32c3b8:	c6c8                	leave_s	[r13-r16,blink,pcl]
+  32c3ba:	78e0                	nop_s

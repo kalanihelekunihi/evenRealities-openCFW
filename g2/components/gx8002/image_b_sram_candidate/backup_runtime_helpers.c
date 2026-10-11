@@ -38,7 +38,7 @@ void gx8002_image_b_zero_100113c4(
 }
 
 void gx8002_image_b_request_irq_10004844(
-    uint32_t line, void (*handler)(void), uint32_t argument)
+    uint32_t line, int32_t (*handler)(int32_t, void *), uint32_t argument)
 {
     if (line >= 32u || handler == 0) return;
     volatile uint32_t *descriptor =

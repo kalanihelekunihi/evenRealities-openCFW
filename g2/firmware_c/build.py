@@ -361,6 +361,46 @@ def codec_image(out: Path, experimental: bool = False) -> dict:
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_dma_isr.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_dma_leaves.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_configure.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_fifo_depth.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_isr.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_spi_master_probe.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_spi_leaves.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_spi_quick_transfer.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_max_score.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_max_score_lowers.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_async_register.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_async_initialize.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_async_lowers.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_dma_abort.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_misc_native_leaves.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_read.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_receive_callback.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_body_probe.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_receive_dma_dispatch.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_dma_receive.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_dma_transfer.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_dma_configure.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_send_path.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_transmit_lowers.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_transmit_dma.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_crc32_binding.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_isr.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_controls.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_config_wrappers.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_register_config.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_lodac.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_config_pcm.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_lifecycle.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_suspend_resume.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_npu_interrupt_queries.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_snpu_isr.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_snpu_process_status.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_snpu_overtime.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_gpio_irq_disable.c")
+        source_paths.extend(
+            f"third-party/upstream/llvm-compiler-rt-format-20.1.8/{name}.c"
+            for name in ("adddf3", "divdf3", "fixunsdfsi", "floatunsidf", "muldf3")
+        )
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_app_ticks.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_async_tick.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_clock_boot_literals.c")
@@ -592,6 +632,36 @@ def codec_image(out: Path, experimental: bool = False) -> dict:
             "compiled": all(c["returncode"] == 0 for c in stage2_commands),
             "separate_loaded_stage": True, "stock_entry": "0x10002900",
         }
+        # Image-B SRAM is a separate loaded program. Its C-SKY source and
+        # unresolved contracts must not be linked into image-A candidate.o.
+        image_b_builder = (ROOT / "g2/analysis/c-source-completion-20261011/codec/"
+                           "image_b_sram_candidate/build.py")
+        image_b_folder = folder / "image-b-sram"
+        image_b_command = command([sys.executable, str(image_b_builder),
+                                   "--output", str(image_b_folder)],
+                                  folder / "image-b-sram-build.log")
+        image_b = {"separate_loaded_stage": True,
+                   "selected_firmware_image": False,
+                   "source_complete": False,
+                   "data_and_final_layout_complete": False,
+                   "builder": str(image_b_builder.relative_to(ROOT)),
+                   "builder_sha256": digest(image_b_builder),
+                   "build_command": image_b_command,
+                   "compiled": image_b_command["returncode"] == 0}
+        image_b_receipt = image_b_folder / "receipt.json"
+        if image_b["compiled"] and image_b_receipt.is_file():
+            subreceipt = json.loads(image_b_receipt.read_text())
+            stable = all(digest(ROOT / unit["source"]) == unit["source_sha256"]
+                         for unit in subreceipt["units"])
+            image_b.update(receipt=str(image_b_receipt.relative_to(ROOT)),
+                           receipt_sha256=digest(image_b_receipt),
+                           source_snapshot_coherent=stable,
+                           source_inputs={unit["source"]: unit["source_sha256"]
+                                          for unit in subreceipt["units"]},
+                           linked_output_sha256=subreceipt["linked_object_sha256"],
+                           undefined_symbols=subreceipt["undefined_symbols"])
+            image_b["compiled"] &= stable
+        result["image_b_sram_candidate"] = image_b
     return result
 
 

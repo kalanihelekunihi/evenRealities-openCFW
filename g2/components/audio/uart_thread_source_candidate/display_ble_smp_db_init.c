@@ -5,7 +5,7 @@ uint8_t audio_ble_smp_database[0x100u]; /* RAM 0x200708ec */
 extern uint8_t audio_ble_smp_handler_state[]; /* RAM 0x20070aec */
 extern void WsfTaskLock(void);
 extern void WsfTaskUnlock(void);
-extern void WsfTimerStop(void *); /* native 0x52a4e6 */
+extern void WsfTimerStop(void *); /* native 0x52a4d2 */
 extern void audio_uart_buffer_zero(void *,uint32_t,uint32_t); /* selected 0x43c0e4 */
 void DmConnRegister(uint32_t event,void (*handler)(void)) {
     WsfTaskLock();

@@ -21,8 +21,8 @@ extern void gx8002_image_b_platform_gate_10003be8(uint32_t module, uint32_t enab
 extern void gx8002_image_b_zero_100113c4(void *destination, uint32_t value, uint32_t bytes);
 extern void gx8002_image_b_audio_prepare_100051ec(void);
 extern void gx8002_image_b_request_irq_10004844(
-    uint32_t line, void (*handler)(void), uint32_t argument);
-extern void gx8002_image_b_audio_irq_10015830(void);
+    uint32_t line, int32_t (*handler)(int32_t, void *), uint32_t argument);
+extern int32_t gx8002_image_b_audio_irq_10015830(int32_t irq, void *private_data);
 
 #define AUDIO_WORD(offset) (*(volatile uint32_t *)(uintptr_t)(UINT32_C(0xa0a00000) + (offset)))
 #define AUDIO_CONFIG ((volatile uint32_t *)(uintptr_t)UINT32_C(0x20017624))

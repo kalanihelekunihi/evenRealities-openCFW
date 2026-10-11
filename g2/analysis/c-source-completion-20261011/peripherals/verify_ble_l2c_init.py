@@ -18,7 +18,7 @@ void audio_ble_l2c_hci_register(void (*a)(void),void (*b)(void)){(void)a;(void)b
  elf=Path(td)/'a.elf';subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,L2cInit',str(ROOT/'components/audio/uart_thread_source_candidate/display_ble_l2c_init.c'),str(shim),'-o',str(elf)],check=True)
  syms={p[2]:int(p[0],16) for line in subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True).splitlines() if len(p:=line.split())==3}
  with elf.open('rb') as f:segs=[(s['p_vaddr'],s.data()) for s in ELFFile(f).iter_segments() if s['p_type']=='PT_LOAD']
- translate={syms[k]:v for k,v in callbacks.items()}
+ translate={(syms[k]|1):v for k,v in callbacks.items()}
  for name,native,cid in cases:
   out=[]
   for c in [False,True]:

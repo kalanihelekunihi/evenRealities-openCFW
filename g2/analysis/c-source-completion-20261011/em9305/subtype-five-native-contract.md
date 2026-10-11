@@ -1,0 +1,3 @@
+# Native subtype-five copy ABI
+
+Native3319bc calls304604 at331a00 with sourcepacket+10. Native304604 tail-calls332fc4 with length6. All returning paths of332fc4 consume source using LDB.AB(+1) and LD.AB(+4), with the remaining-byte loop until R2=0; its caller-visible R1 advances by6. Native331a08 does not initializeR1 again, so its second source ispacket+16. The C explicitly suppliespacket+16, avoiding dependence on a C ABI caller-saved register. Third sourcepacket+29 is assigned in the331a14 delay slot. Final seven single-byte reads usepacket+16..22 after the third child. Controlled fixture tests mutation ofpacket+16 by the third child. Target ARC execution remains unqualified.

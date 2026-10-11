@@ -1,0 +1,66 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00331100 <.data+0x2ed00>:
+  331100:	c2e4                	enter_s	[r13-r14,blink]
+  331102:	4508                	mov_s	r13,r0
+  331104:	8802                	ldb_s	r0,[r0,0x2]
+  331106:	41c3 0080 56e8      	mov_s	r1,0x8056e8
+  33110c:	0849 0c30           	breq.d.nt	r0,0x30,72	;0x331154
+  331110:	70cd                	mov_s	r14,0
+  331112:	0879 0bd1           	brne.nt	r0,0x2f,120	;0x331188
+  331116:	8914                	ldb_s	r0,[r1,0x14]
+  331118:	0871 001e           	bbit0.t	r0,0,112	;0x331188
+  33111c:	8907                	ldb_s	r0,[r1,0x7]
+  33111e:	086d 017e           	bbit0.d.t	r0,0x5,108	;0x331188
+  331122:	d83e                	mov_s	r0,0x3e
+  331124:	0b32 feaf           	bl.d	-11472	;0x32e454
+  331128:	d909                	mov_s	r1,0x9
+  33112a:	4100                	mov_s	r1,r0
+  33112c:	e82e                	breq_s	r0,0,92	;0x331188
+  33112e:	d821                	mov_s	r0,0x21
+  331130:	a900                	stb_s	r0,[r1,0]
+  331132:	8d04                	ldb_s	r0,[r13,0x4]
+  331134:	a901                	stb_s	r0,[r1,0x1]
+  331136:	8d06                	ldb_s	r0,[r13,0x6]
+  331138:	a902                	stb_s	r0,[r1,0x2]
+  33113a:	8d07                	ldb_s	r0,[r13,0x7]
+  33113c:	a903                	stb_s	r0,[r1,0x3]
+  33113e:	8d08                	ldb_s	r0,[r13,0x8]
+  331140:	a904                	stb_s	r0,[r1,0x4]
+  331142:	8d09                	ldb_s	r0,[r13,0x9]
+  331144:	a905                	stb_s	r0,[r1,0x5]
+  331146:	8d0a                	ldb_s	r0,[r13,0xa]
+  331148:	a906                	stb_s	r0,[r1,0x6]
+  33114a:	8d0b                	ldb_s	r0,[r13,0xb]
+  33114c:	a907                	stb_s	r0,[r1,0x7]
+  33114e:	8d0c                	ldb_s	r0,[r13,0xc]
+  331150:	a908                	stb_s	r0,[r1,0x8]
+  331152:	f018                	b_s	48	;0x331180
+  331154:	8913                	ldb_s	r0,[r1,0x13]
+  331156:	0835 01de           	bbit0.t	r0,0x7,52	;0x331188
+  33115a:	8907                	ldb_s	r0,[r1,0x7]
+  33115c:	082d 017e           	bbit0.d.t	r0,0x5,44	;0x331188
+  331160:	d83e                	mov_s	r0,0x3e
+  331162:	0af6 feaf           	bl.d	-11532	;0x32e454
+  331166:	752c                	mov_s	r1,5
+  331168:	4100                	mov_s	r1,r0
+  33116a:	e810                	breq_s	r0,0,32	;0x331188
+  33116c:	d820                	mov_s	r0,0x20
+  33116e:	a900                	stb_s	r0,[r1,0]
+  331170:	8d04                	ldb_s	r0,[r13,0x4]
+  331172:	a901                	stb_s	r0,[r1,0x1]
+  331174:	8d05                	ldb_s	r0,[r13,0x5]
+  331176:	a902                	stb_s	r0,[r1,0x2]
+  331178:	8d06                	ldb_s	r0,[r13,0x6]
+  33117a:	a903                	stb_s	r0,[r1,0x3]
+  33117c:	8d07                	ldb_s	r0,[r13,0x7]
+  33117e:	a904                	stb_s	r0,[r1,0x4]
+  331180:	0d12 ecef           	bl.d	-156400	;0x30ae90
+  331184:	690a                	sub_s	r0,r1,0x2
+  331186:	71cd                	mov_s	r14,1
+  331188:	40c1                	mov_s	r0,r14
+  33118a:	c6c4                	leave_s	[r13-r14,blink,pcl]

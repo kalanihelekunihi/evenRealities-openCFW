@@ -114,6 +114,58 @@ sources = {
     'resident_xip_dma_isr.c': ['10203adc'],
     'resident_xip_dma_leaves.c': ['10203804', '10203a98'],
     'resident_xip_uart_configure.c': ['102033c8'],
+    'resident_xip_uart_fifo_depth.c': ['10203360'],
+    'resident_xip_uart_isr.c': ['10203278'],
+    'resident_xip_spi_master_probe.c': ['10206480'],
+    'resident_xip_spi_leaves.c': ['102060fc', '10206164',
+                                   '10206170', '10206190'],
+    'resident_xip_spi_quick_transfer.c': ['10206204'],
+    'resident_xip_max_score.c': ['102086dc'],
+    'resident_xip_max_score_lowers.c': ['10208980', '10208b58',
+                                         '10208b68', '10208b78'],
+    'resident_xip_uart_async_register.c': ['102082ac'],
+    'resident_xip_uart_async_initialize.c': ['10208458'],
+    'resident_xip_uart_async_lowers.c': ['1020321c', '10203234',
+                                           '1020368c', '102036c0',
+                                           '102036e8', '10203704',
+                                           '10207770', '10207ac0',
+                                           '10207c74', '10207c9c'],
+    'resident_xip_dma_abort.c': ['10203b40'],
+    'resident_xip_misc_native_leaves.c': ['10203b38', '10204cd4',
+                                            '102055c0', '10206908',
+                                            '10208c60', '10203598',
+                                            '102077d4'],
+    'resident_xip_uart_read.c': ['102035d8'],
+    'resident_xip_uart_receive_callback.c': ['10208098'],
+    'resident_xip_uart_body_probe.c': ['10207cec'],
+    'resident_xip_uart_receive_dma_dispatch.c': ['10203780', '10207ee0'],
+    'resident_xip_uart_dma_receive.c': ['102030e4', '10203190', '10203a4c', '10203b64'],
+    'resident_xip_dma_transfer.c': ['10203b78'],
+    'resident_xip_dma_configure.c': ['10203828', '102038f4', '10203c60'],
+    'resident_xip_uart_send_path.c': ['10207b38', '10207c50', '10207f08'],
+    # 0x10203630/64 are already counted under channel_runtime.c; this newer
+    # typed provider shares their stock identities without double-counting.
+    'resident_xip_uart_transmit_lowers.c': ['10203604', '10203720'],
+    'resident_xip_uart_transmit_dma.c': ['102030c4', '10203108'],
+    'resident_xip_crc32_binding.c': ['102098a8'],
+    'resident_xip_audio_output_isr.c': ['102049c8', '102049d8', '102050cc'],
+    'resident_xip_audio_output_controls.c': ['10204cdc', '10204cfc',
+                                             '10204d04', '10204e6c',
+                                             '1020508c'],
+    'resident_xip_audio_output_config_wrappers.c': ['10204c64', '10204c90'],
+    'resident_xip_audio_output_register_config.c': ['102049e8', '10204ab0'],
+    'resident_xip_audio_output_lodac.c': ['10204b5c'],
+    'resident_xip_aout_config_pcm.c': ['10204d38'],
+    'resident_xip_audio_output_lifecycle.c': ['102052e0', '10205318', '10205344'],
+    'resident_xip_aout_suspend_resume.c': ['102049b0', '10204ec0', '1020521c'],
+    'resident_xip_npu_interrupt_queries.c': ['102056f0', '102057e0',
+                                             '10205838', '10205870',
+                                             '102058a4', '102058b4',
+                                             '102058c4'],
+    'resident_xip_snpu_isr.c': ['10205ce0'],
+    'resident_xip_snpu_process_status.c': ['10205bd8'],
+    'resident_xip_snpu_overtime.c': ['10205ad8', '10205b1c'],
+    'resident_xip_gpio_irq_disable.c': ['10205ee0', '10205fb4', '10206074'],
 }
 seed_a = {x['entry']: x for x in map(json.loads, (base/'image_a_xip/functions-000.jsonl').open())}
 seed_b = {x['entry']: x for x in map(json.loads, (base/'image_b_sram/functions-000.jsonl').open())}
@@ -127,13 +179,26 @@ for source, addresses in sources.items():
                          'body_bytes': seed_a[address]['body_bytes'],
                          'candidate_source': str(path.relative_to(root))})
 assert len({x['entry'] for x in bindings}) == len(bindings)
+bound_addresses = {x['entry'] for x in bindings}
+unbound_entries = [x for x in seed_a.values() if x['entry'] not in bound_addresses]
+# Native image-A XIP's post-code region begins at 0x1020a8aa. These Ghidra
+# function labels point into initialized literals/tables, not executable C.
+data_tail = [x for x in unbound_entries if int(x['entry'], 16) >= 0x1020a8aa]
+possible_code = [x for x in unbound_entries if int(x['entry'], 16) < 0x1020a8aa]
 result = {
     'image_a_xip': {'raw_seed_labels': len(seed_a), 'explicit_candidate_bindings': len(bindings),
                     'unbound_raw_labels': len(seed_a)-len(bindings),
+                    'unbound_data_tail_labels': [x['entry'] for x in data_tail],
+                    'possible_unbound_code_labels': [x['entry'] for x in possible_code],
+                    'possible_unbound_code_count_upper_bound': len(possible_code),
+                    'known_pinned_source_body_outside_component_crosswalk': ['102097f4'],
                     'bindings': sorted(bindings, key=lambda x: x['entry'])},
     'image_b_sram': {'raw_seed_labels': len(seed_b), 'explicit_candidate_bindings_in_this_crosswalk': 0,
                      'unreviewed_raw_labels': len(seed_b)},
     'scope': 'C candidate/source-address mapping only. No stock execution, complete code/data partition, or full-image linkage claim.'
 }
 Path(__file__).with_name('resident-other-regions-census.json').write_text(json.dumps(result, indent=2)+'\n')
-print(json.dumps({'xip_raw': len(seed_a), 'xip_bound': len(bindings), 'image_b_raw': len(seed_b)}))
+print(json.dumps({'xip_raw': len(seed_a), 'xip_bound': len(bindings),
+                  'xip_unbound_data_tail': len(data_tail),
+                  'xip_possible_code_upper_bound': len(possible_code),
+                  'image_b_raw': len(seed_b)}))

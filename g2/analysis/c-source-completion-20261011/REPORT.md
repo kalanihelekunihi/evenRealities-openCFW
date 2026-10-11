@@ -1226,3 +1226,233 @@ Latest continuation: EMsubmit+second schedulertargetPASS 649/65;CodecA150inputsp
 Latest EM continuation targetPASS 652/64 afterthreefirst-rolechainbodies; threeboundedCcheckreceiptsPASS. Mainworker1526/538handlerstagePASS;CodecA196/362rawcrosswalkpendinglatestbuild;CodecBauthenticMMIO21bodiesandnewaudioinitfrontier. Fullcomponentscomplete0/6;threeworkersandgoalactive.
 
 Latestcontinuation: EM5dispatch/routerbodies targetPASS657/59 andboundedCchecksPASS;CodecA153inputsDMAleavesPASS7imports;Main1539/545DMinitPASS;CodecB25candidateswith2genuinecodeimports/unseededIRQ. Componentcountsfull0/6;sourcegraphcountsnotwholeimagecoverage. Goalactive.
+
+Latest continuation: EMgateddataeventsC targetPASS658/58,524542controlledCcasesPASS. CodecB26candidateentriesandattributedplatformgate,26/26clocktablerowsmatch;wholeimageBunseededIRQ/source/data/layoutopen. Main1539/545lastsettledDMstage;CodecAUARTconfigurationbuildlive43685. Fullcomponents0/6;goalactive.
+
+Latestcontinuation: EMreceive-releaseC targetPASS659/57,3932160controlledcasesPASS;Main1547/550L2CAPSMPstagePASS;CodecB32retainedCcandidatebodiesand24/24MMIOstorecountsqualifiedboundedgraph;wholecatalogue/unseededIRQ/layoutremain. Fullcomponents0/6;goalactive.
+
+Latestcontinuation: EMqueuebridgeCtargetPASS660/56,32768controlledCcasesPASS;Main1551/553SMPstateinitPASS;CodecAUARTnumericdependencyrecoveryauthorized;CodecB33candidatebodiesandactualbuilderintegrationcoordinationrequested. Fullcomponents0/6;goalactive.
+
+Latestcontinuation: EMfourvendordispatchbodies targetPASS664/58,336128controlledCcasesPASS;Main1558/558ATTinitstagePASS;CodecB36candidatebodies integrationauthorizedafterCodecAUARTISRtargetterminal. Fullcomponents0/6;goalactive.
+
+Latestcontinuation: EMfivevendorapplication/query/wakebodies targetPASS669/57,18688controlledcasesPASS. CodecBseparateactualbuilderregistrationimplemented/integratedbuildlive3181;CodecApinnedLLVMsourcefetchdone;Main1562/564lastsettledconnHCIscstage. Fullcomponents0/6;goalactive.
+
+## Vendor defaults and point validation
+
+Completed four native C bodies:306d7c defaults,3333d0 word conversion,3100c8 point wrapper,32e328 validation/event wrapper. Authenticated nonexecutable32/64B default data is attributed to native memcpy consumers. Original input pointer is preserved through the dead volatile reversal scratch, with explicit resident ROM108260 dependency. Actual C5632 controlled cases PASS, including overlap, busy bytes, ROM returns and fresh handler reload. Repaired target build `g2/build/c-firmware/20261011/em-vendor-validation-repair-round/receipt.json` PASS673 definitions/56 genuine imports; compile snapshot stable and matches current source. Whole image, resident ROM body, ISA equality, final layout and hardware qualification remain open.
+
+## Packet subtype3 dispatcher
+
+Completed native331ec0..331efe C with ordered two genuine gate calls, subtype3 check, event14/length4 allocation, native prefix/header writes and fresh input byte after allocation. Actual C2048 controlled cases PASS. `g2/build/c-firmware/20261011/em-packet-subtype-round/receipt.json` target compile/link PASS 674 definitions/57 genuine imports; source snapshot coherent. New3329b0/304ac4 children remain explicit. Native ISA, full image, data/layout/runtime/hardware gates remain open.
+
+## Vendor packet serializer
+
+Completed3329b0..332a78 with three authenticated subtype branches21/34/49,255 event allocations15/15/10, exact ordered reads/stores, two6B address serializers and untouched event gap for subtype49. Actual C8192 controlled cases PASS including allocator subtype mutation and fresh payload reads. `g2/build/c-firmware/20261011/em-vendor-packet-round/receipt.json` target PASS 675 definitions/56 imports; current source snapshot coherent. Full source/layout/ISA/runtime/hardware gates remain open.
+
+## Status event packet gate
+
+Completed304ac4..304af8 subtype64 gate, event255/length3 allocation, FE82 halfword pack and true returned offset, fresh byte after pack child, send at event-2. Actual C2048 controlled cases PASS with allocation misses and offset propagation. `g2/build/c-firmware/20261011/em-status-event-round/receipt.json` target PASS 676 definitions/55 genuine imports; current source snapshot coherent. Full source/layout/ISA/runtime/hardware gates remain open.
+
+## Product-gated packet events39/40
+
+Completed332200..332278 with exact product mask bits at8056fb/8056ef, lengths29/7 and event62, explicit genuine fill330e78 and ordered type40 six-byte reads/stores. Actual C262144 controlled cases PASS. `g2/build/c-firmware/20261011/em-product-event-round/receipt.json` target PASS 677 definitions/55 genuine imports; current compile snapshot coherent. Fullsource/data/layout/ISA/runtime/hardware gates remain open.
+
+## Native event projection
+
+Completed330e78..330f08 real29-byte field projection retaining repeated volatile word/halfword reads, skipped input31 and returned29. Actual C12288 field/overlap cases PASS; consumer262144 controlled cases remain PASS after corrected uint32 return ABI. `g2/build/c-firmware/20261011/em-event-projection-round/receipt.json` target PASS 678 definitions/54 imports; current snapshot coherent. Native ISA/read timing, fullsource/data/layout/runtime/hardware remain unqualified.
+
+## Link query/mode command dispatcher
+
+Completed332194..332200 commands2066/2067, exact low/high input loads, preserved full query status, mode/status response layout and fresh command reloads after provider/allocator. Actual C393216 controlled cases PASS. `g2/build/c-firmware/20261011/em-link-command-round/receipt.json` target PASS 679 definitions/55 genuine imports; current source snapshot coherent. Real30aec4->306a20 and30c940->308308 tail providers remain explicit. Fullsource/data/layout/ISA/runtime/hardware gates remain open.
+
+## Link query/mode providers
+
+Completed native306a20/308308 with existing lookup, nativeMPYUW offset, fullword status2/12/0, allocation-miss success0, fresh id/handler reads and event2501/2601. Actual C32768 controlled cases PASS (normalized arithmetic and globals), consumer393216casesPASS. Target em-link-provider-round PASS681definitions/53imports; source snapshot stable and current. ISA/runtime/fullsource/layout/hardware gates open.
+
+## Subtype-five event dispatcher
+
+Completed3319bc..331a40 native gated event62/31bytes. Preserved three6Bcopy order and explicit nativeR1 advancement for secondsourcepacket+16; final seven input bytes reload after children. Actual C262144 controlled cases PASS. `g2/build/c-firmware/20261011/em-subtype-five-round/receipt.json` target PASS 682 definitions/52 genuine imports; current snapshot coherent. Native ABI trace atsubtype-five-native-contract.md. Fullsource/data/layout/ISA/runtime/hardware gates remain open.
+
+## Subtype22 event dispatcher
+
+Completed331814..331868 real gated event62/6Bpayload, maskbit3, native post-update finalstore/sendpointer preserved. Actual C262144 controlledcasesPASS. `g2/build/c-firmware/20261011/em-subtype-twenty-two-round/receipt.json` targetPASS 683definitions/51 genuineimports; current source snapshot coherent. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Address command dispatcher
+
+Completed33194c..3319bc native202b/202c scratch six-byte response and fallback331868. Preserves child input postincrement, zero scratch, status byte beforecopy, fresh command rechecks, sendresponse-5 and fullfallbackreturn. Actual C393216 controlledcasesPASS. `g2/build/c-firmware/20261011/em-address-dispatch-round/receipt.json` targetPASS 684definitions/52 imports; current source snapshot coherent. Genuine30c7d0/30c72c address providers remain explicit. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Address pair providers
+
+Completed30c72c/30c7d0 wrappers through authentic pack304624, peer/identity pair303a40/303a60, serializer3045e8. Fullword selector>1return18; zero lookup2; success0; zeroed pair scratch retained. Actual C1536 controlledcases and393216consumercasesPASS. `g2/build/c-firmware/20261011/em-address-provider-round/receipt.json` targetPASS 686definitions/50 imports; current snapshot coherent. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Generic link command dispatcher
+
+Completed331868..33194c eight native commands2027/2028/2029/202a/202d/202e/204e/207c, explicit8genuinechildren, length2specialresponse, freshcommand bitmaskc7 and specialoutputbyte. Actual C262144 controlledcasesPASS. `g2/build/c-firmware/20261011/em-generic-link-dispatch-round/receipt.json` targetPASS 687definitions/57 imports; current snapshotcoherent. Importincrease reflects realchildgraph. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Busy-gated mode/reset providers
+
+Completed30cd94/30b150 preserving fourorderedflags, installedcallback withnativeR0forwarded, modevalidation18, busy12, resetonlynativebranch. Actual C130560controlledcasesPASS;genericconsumer262144PASS. `g2/build/c-firmware/20261011/em-command-busy-round/receipt.json` targetPASS 689definitions/56 imports/currenthashcoherent. Genuine30390cresetremains. Fullsource/layout/ISA/runtime/hardwaregatesopen.
+
+## Radio reset leaf
+
+Completed30390c..303918 native bytezero at801610 and retainedR0address return; corrected precedingvoid declaration. Consumer130560controlledcasesPASS. `g2/build/c-firmware/20261011/em-radio-reset-round/receipt.json` targetPASS 690definitions/55 imports/currenthashcoherent. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Identity status output wrapper
+
+Completed30c918..30c928 original pointer preserved through nativeBLdelay slot, selected30396cgetter byte store andreturn0. Actual C512controlledcases and262144consumercasesPASS. `g2/build/c-firmware/20261011/em-status-output-round/receipt.json` targetPASS 691definitions/54 imports/currenthashcoherent. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Time-setting command chain
+
+Completed30deec/308198/325268 native wrappinghalfword validation, fullwordtimecell store, freshhandler/time read, timerhandlerbyte then secondsstart tail. Actual C196608 controlledcasesPASS. `g2/build/c-firmware/20261011/em-command-time-round/receipt.json` targetPASS 694definitions/53 imports/currenthashcoherent. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Mode command provider
+
+Completed30d45c/306a90 with fullwordmode>=4return18, authenticconnectiongate, localbytestore0 or installedtwoargprovider fullreturn. Actual C393216controlledcasesPASS. `g2/build/c-firmware/20261011/em-mode-provider-round/receipt.json` targetPASS 696definitions/52 imports/currenthashcoherent. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Identity-setting command provider
+
+Completed30ddd4..30de38 BooleanselectorORvalidation, nativebusy/modegate, packedaddress and selected303ca8setter, lookup0->2/nonzero->0. Actual C524288controlledcasesPASS. `g2/build/c-firmware/20261011/em-identity-command-round/receipt.json` targetPASS 697definitions/51 imports/currenthashcoherent. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Address-update adapter
+
+Completed30ca68..30cac4 fullwordkindvalidation, nativebusy/modegate, packedaddress and genuine303b40update, zeroresult18/nonzero0. Actual C2048distinctcontrolledcasesPASS. `g2/build/c-firmware/20261011/em-address-update-command-round/receipt.json` targetPASS 698definitions/51 imports/currenthashcoherent. Genuine303b40remains. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Address record removal
+
+Completed303b40..303b7c authenticidentitylookup, last72Brow replacementforcount>=2, capturedcountdecrementbyte(includingzero wrap), Booleanmatchedreturn. NativeMPYUWretained. Actual C512controlledcases and2048consumercasesPASS. `g2/build/c-firmware/20261011/em-address-record-round/receipt.json` targetPASS 699definitions/50 imports/currenthashcoherent. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Identity insertion command adapter
+
+Completed30af30..30af98 with fullkindvalidation,busy/modegate, packedaddress and explicitfivearg303788child, zeroresult7/nonzero0. Actual C2048controlledcasesPASS. `g2/build/c-firmware/20261011/em-identity-add-adapter-round/receipt.json` targetPASS 700definitions/50 imports/currenthashcoherent. Real303788providerremains. Fullsource/data/layout/ISA/runtime/hardwaregatesopen.
+
+## Identity row insertion
+
+Completed native303788..303844 record insertion/update: capacity and null-base ordering,72B stride, key-zero flags, cleared projection state and conditional private-address projection. Actual selected C passed4624 controlled cases; adapter2048 cases passed. Initial target receipt `g2/build/c-firmware/20261011/em-identity-insertion-round/receipt.json` passed701 definitions/50 imports with coherent source hash. Connected31467c to the previously reconstructed private-address C provider; binding build settled PASS: 701 definitions/49 genuine imports, current source hash coherent (`g2/build/c-firmware/20261011/em-identity-provider-binding-round/receipt.json`). Host fixtures normalize RAM, children and MPYUW and do not establish native ISA/hardware execution. Full component remains incomplete.
+
+## Variable pair event dispatcher
+
+Completed native331f5c..332036 event41/42 as C, replacing the unqualified void import with its packet/Boolean ABI. Retained mask gates, byte-truncated allocation length, repeated wide packet reads and fresh pair-count reads. Actual C65536 controlled cases PASS, including count255/wrapped allocation length; fixtures provide enough storage to observe native writes without asserting allocator safety. Target receipt `g2/build/c-firmware/20261011/em-variable-pair-event-round/receipt.json` PASS: 702 definitions/48 genuine imports, current source hash coherent. Full-source, placement, native execution and hardware qualification remain open. Next3327f4 event26..29 native body inspected, not yet implemented.
+
+## Quota and status event dispatcher
+
+Completed native3327f4..3328c6 event26 quota/address payload, event27/29 ungated status payloads and event28 gated fields. Corrected callback declaration to packet/Boolean ABI. Preserved native state-pointer dereference before masks and fresh count reread after address-copy child. Actual C32768 controlled cases PASS; variable-pair consumer regression65536 cases PASS. Target `g2/build/c-firmware/20261011/em-quota-event-round/receipt.json` PASS 703 definitions/47 genuine imports/currenthash coherent. Remaining imports are not a full missing-body count; full source/data/layout/native execution/hardware gates remain open.
+
+## Packed command dispatcher
+
+Completed native332038..332192 for2068/2069 native stack records and206a two-byte command. Explicit native input read order, padding left unwritten,16B copy and full status forwarding retained.262144 actualC command/input cases PASS, prior quota32768 regression cases PASS. Target `g2/build/c-firmware/20261011/em-packed-command-round/receipt.json` PASS 704 definitions/49 genuine imports/current source hash coherent. Three exposed real children30b230/30b2d8/30e0e4 remain imports; lower implementation, full source/data/layout/ISA/runtime/hardware gates remain open.
+
+## Record option command child
+
+Completed30e0e4 tail30a100..30a132 using selected31aa98 record lookup. Native byte3/byte1 state guards, flags read before option290 write, bit1 update at273 and66/12/0 statuses retained.1179648 actualC cases and262144 dispatcher regression cases PASS. Target `g2/build/c-firmware/20261011/em-record-option-round/receipt.json` PASS 705 definitions/48 genuine imports/currenthash coherent.30b230 and30b2d8 validation/lower chains remain, alongside fullsource/data/layout/native/runtime/hardware gates.
+
+## Packed parameter validation child
+
+Completed native30b230..30b2d8 with native ordered state capability reads, unsigned/wrapped bounds, requested capability mask, parameter guards and real existence/apply children3072d0/309cfc. Actual C327680 capability/timing cases and1179648 option regression cases PASS. Target `g2/build/c-firmware/20261011/em-packed-validation-round/receipt.json` PASS 706 definitions/49 genuine imports/currenthash coherent. Other bounds source-inspected; native ISA/hardware unproved. Next3072d0/31aa64 lookup chain and309cfc apply, then30b2d8; full component gates remain open.
+
+## Record existence lookup chain
+
+Completed native31aa64..31aa98 and3072d0..3072e0 as C: count fromconfig12,2824Bstride, fullwidth id compare before active byte and Boolean wrapper.132096 actualC count/id/active cases and327680 validation regression cases PASS. Target `g2/build/c-firmware/20261011/em-record-existence-round/receipt.json` PASS 708 definitions/48 genuine imports/currenthash.309cfc apply native body inspected throughallocation/callback/queue paths but not yet reduced. Full component gates remain open.
+
+## Extended packed validation
+
+Completed native30b2d8..30b3f8 with48/17/66 error precedence, native multiply/remainder instructions and real307410/309e60 children. Actual C71168 byte/interval boundary cases PASS; arithmetic normalized in host fixtures, native ISA/hardware remain unproved. Target `g2/build/c-firmware/20261011/em-extended-validation-round/receipt.json` PASS 709 definitions/49 genuine imports/currenthash coherent. Both packed adapters now have validation bodies; their apply chains remain genuine imports. Fullsource/data/layout/runtime/hardware gates remain.
+
+## Record availability provider
+
+Completed307410..307434 native lookup/byte369nonzero/byte368equals1 predicates using real selected31aa64 C. Actual C131072 allbytepair/lookup cases plus71168 extended validation regression cases PASS. Target `g2/build/c-firmware/20261011/em-record-availability-round/receipt.json` PASS 710 definitions/48 genuine imports/currenthash coherent. Native309cfc direct call and callback frontier recorded in `record-apply-native-frontier.json`; source mentions only discovery cues.309cfc/309e60 apply bodies and full image gates remain open.
+
+## Active association scan
+
+Completed317280..3172c8 native active512Brow/state3equals1/nonnullassociation/id scan as C.528384 actualC count/id/flag/pointer cases and131072 availability regression cases PASS. Target `g2/build/c-firmware/20261011/em-association-scan-round/receipt.json` PASS 711 definitions/48 genuine imports/currenthash coherent. Extended apply309e60..30a0a8 native listing regenerated with explicit EM/DSP decode in `extended-apply-native.arcem.txt`; arithmetic/control graph remains to reduce. Fullcomponent/source/data/layout/runtime/hardware gates open.
+
+## Full record apply body
+
+Completed native309cfc..309e60 as C: capacity/free slots/existing association checks, allocate/configure, input maximum clamp, native MPYUW timing guard, timing child return validation, stream allocations/cleanup, association flags and callback installation, optional message allocation and submission. Forty actualC controlled scenarios PASS across tenfailure/success cuts and association/mode branches. Target `g2/build/c-firmware/20261011/em-record-apply-round/receipt.json` PASS 712 definitions/56 genuine imports/currenthash; timing-return correction included in coherent snapshot. Genuine configure/release/finish/timing/stream/callback children remain; full source/data/layout/native/runtime/hardware gates open.
+
+## Stream allocation child
+
+Completed316ad4..316b5c native firstfree256B stream search, clear/init, record-slot publication and mode defaults.36864 actualC cases plus40 apply regression cases PASS. Target `g2/build/c-firmware/20261011/em-stream-allocation-round/receipt.json` PASS 713 definitions/55 genuine imports/currenthash coherent. Native no invented base guard preserved. Timing30c40c tails unsigned division30c3a4; exact native arithmetic still to reduce, alongside release/setup/configure children and fullimage gates.
+
+## Record cleanup provider
+
+Completed native31ac84..31ace0 as void C (native no defined result; selected callers discard it). Deactivates record, rereads slot count each iteration, invokes native30843c via selected30cb24 tail, releases each nonnull stream and drains mode1 queue with genuine317320 child.49152 actualC cases and40 apply regression cases PASS. Target `g2/build/c-firmware/20261011/em-record-cleanup-round/receipt.json` PASS 714 definitions/56 genuine imports/currenthash. Stream release31ace0/queue317320 still real imports, alongside other apply children and full component gates.
+
+## Stream cleanup and record queue step
+
+Completed native31ace0..31ad64 and317320..317334 as void C: parent-mode drains, receive release, tx release/counter byte increment under critical enter/exit, mode1 event queue cleanup, flush and raw queued-node pool release.770 actualC controlled cases and49152 record cleanup regression cases PASS. Target `g2/build/c-firmware/20261011/em-stream-cleanup-round/receipt.json` PASS 716 definitions/57 genuine imports/currenthash coherent. New real317508 receive-take/317980 queue-step/31bd48 flush bodies remain, alongside configure/setup/timing/extendedapply and fullimage gates.
+
+## Receive take and stream flush
+
+Completed native317508..317524 and31bd48..31bd78 C: event removal/private ten-byte prefix, nonzero-mode buffered-event release/clear and zero-mode queue drain, halfwordcount reset.4096 actualC cases and770 streamcleanup regression cases PASS. Target `g2/build/c-firmware/20261011/em-receive-flush-round/receipt.json` PASS 718 definitions/55 genuine imports/currenthash coherent.317980 nativebody fully inspected; timing child return and post-release packet reads remain exact contracts to preserve when reducing it. Other applychildren/extendedapply and fullimage gates remain.
+
+## Stream queue step
+
+Completed native317980..317a10 as C with byte-budget gate, full timing return, fresh progress/unit/length reads, native MPYUW, progress store before branch, event removal/release/completion and counter critical region.262144 actualC budget/length/flags/childmutation cases and4096 receiveflush regression cases PASS. Target `g2/build/c-firmware/20261011/em-stream-queue-step-round/receipt.json` PASS 719 definitions/55 genuine imports/currenthash coherent.31ae74 completion remains real child; arithmetic normalized only in host fixtures. Fullsource/data/layout/native/runtime/hardware gates remain open.
+
+## Packet recycle completion
+
+Completed native31ae74..31ae84 using selected31416c queueappend with authentic8028c8 queue and packetminus8.1024 actualC forwarding cases and262144 queue-step regression cases PASS. Target `g2/build/c-firmware/20261011/em-packet-recycle-round/receipt.json` PASS 720 definitions/54 genuine imports/currenthash. Authenticated seven-byte334488 data table [2,1,3,1,1,1,4] from exact indexed consumers recorded in `phy-projection-data.json` with binarySHA; not yet source-selected.3183d4 bit-priority native helper inspected for configuration reduction. Fullimage gates remain open.
+
+## Configuration PHY projection and data
+
+Completed native3183d4..3183ec bitpriority helper and selected exact seven nonexecutable334488 bytes [2,1,3,1,1,1,4].262144 actualC projection cases and7 exact stockdata comparisons PASS,1024 recycle regression cases PASS. Target `g2/build/c-firmware/20261011/em-phy-projection-round/receipt.json` PASS 722 definitions/54 genuine imports/currenthash. Full32c3bc..32c4fc configure body native listing regenerated with EM/DSP decode in `record-configure-native.arcem.txt`; still to reduce, preserving MPYWHL and flags. Fullimage gates remain open.
+
+## Full record configuration body
+
+Completed native32c3bc..32c4fc as void C using selected3183d4 projection and authenticated334488 data, native MPYWHL inlineassembly, encryption/random/seed children, period alignment and size adjustment, timing-return fields, repeated native writes, mode-dependent span/total branches.288 actualC controlled scenarios plus40 apply and262144 projection regression cases PASS. Host MPYWHL fixture scalar replacement only qualifies the small-operand branch model, not native DSP semantics. Target `g2/build/c-firmware/20261011/em-record-configuration-round/receipt.json` PASS 723 definitions/55 genuine imports/currenthash coherent.317334 encryptionseed/31737c duration remain real children; finish/setup/timing/extendedapply and fullimage gates remain.
+
+## PHY duration and ordered seed projection
+
+Completed31737c..3173ac and317334..31737c as C, with fullword encrypted addition, PHY duration branches and four ordered keyedmessage30fdb8 calls using48B scratch. Selected24 authenticated nonexecutable key/message bytes334b80..334b98.2097152 actualC duration cases, four ordered childcall checks and24 exactdata byte comparisons PASS;288 configure regression cases PASS. Target `g2/build/c-firmware/20261011/em-duration-seed-round/receipt.json` PASS 725 definitions/54 genuine imports/currenthash coherent.30fdb8 native body inspected throughinput/key reversal andcipher setup; not yet reduced. Crypto/nativeexecution/fullimage gates remain open.
+
+### Keyed-message round
+
+EM complete native keyedmessage and two subkey helpers now selected: targetPASS728 definitions/53 genuine imports/current source hash,1536 controlled actualC cases plus duration/seed/configuration regressions. Codec A lifecycle189 distinct inputs/six imports; XIP270/362 rawlabels with23 data-tail and at most69 possible code labels. Codec B135/288 catalogued bodies,153 outside. Main1649/643 with bounded version-scanner path; fullscanner unresolved. Full components complete0/6; counts are candidate scope, not native equality/layout or hardware completion.
+
+### Record finalization round
+
+EM32c2b0 complete native body selected, targetPASS729/56 and stable/current sourceSHA.512 bounded actualC cases,1536 keyedmessage and40 apply regressions PASS. Four newly exposed genuine native child imports preserve remaining source frontier. Three workers continue separately; whole components complete0/6.
+
+### Access seed round
+
+EM five native child bodies and64 authenticated data bytes now source-selected. TargetPASS734/52, stable/current snapshot; bounded seed/mix/channel checks and finish/apply regressions PASS. Main1662/665 with five profile event bodies,32 native comparisons. Full components complete0/6; three workers remain active.
+
+### Stream setup round
+
+EM full327718 C targetPASS735/51, stable/currentsnapshot,1536 bounded setupchecks and corrected40case parentregression. Native parentassociation destination fixed torecord410. CodecA190distinct inputs/siximports,<=66possibleXIPcode; Main1667/660 fiveCCCcallbacks with25nativecases. Whole components0/6; workers continue.
+
+### Native timing round
+
+EM native division/timing bodies now C, targetPASS737/50,1044570 bounded checks. Native mask overflow and zero-divisor nontermination preserved; static/runtime qualification separated. Main1670/659 eventchildren stagePASS. Whole components complete0/6; three workers continue.
+
+### Extended apply round
+
+EM full309e60 extendedapply C targetPASS738/49, stable/current sourcehash.384 bounded configuration/errorcases and validator/apply/timing regressions PASS. Genuine native ISA retained, no layout/hardware proof. CodecB141/288 before active heap build; Main1672/658 OTAroute settled. Fullcomponents complete0/6; threeworkers active.
+
+### Association cleanup round
+
+EM two full associationcleanup callbacks/clearhelper C, targetPASS741/47 stable/currenthash;2048scan/96extent andapply/extended regressions PASS. CodecA191inputs/<=59possibleXIPcode; CodecB143/288 genuineheap source;Main1673/661 ATTwrite. Fullcomponents complete0/6; threeworkers continue.
+
+### Association update round
+
+EM full3290c4 C targetPASS742/46, sourcehash stable/current,4096 bounded field/carry cases. Target native multiply instructions verified present; hardware/native equality unproved. CodecB145/288 andpinnedformatter3exactoutputcases,14genuine numericimports;Main1675/660 ATTerror. Fullcomponents complete0/6;threeworkers continue.
+
+### Stream-processing round
+
+EM full317680 C targetPASS743/45,2080 bounded segmentcases/exhaustioncase;callbackpresent comparisons pending. Sourcehash stable/current. CodecB pinned LLVMnumericproviders lower14imports to2truefpenvironmentcontracts;Main1678/663 ATTvalidrecords22nativecases. Wholecomponents0/6;threeworkers continue.
+
+### Stream callback verification round
+
+Closed pending bounded317680 callback-present comparison:64 timing/address/status cases andtwo exhaustionnotification casesPASS, unchangedselectedsource743/45 receipt hashverified current. No nativeISA/hardware or callbackmutation claims. Threeworkers continue; fullcomponents complete0/6.
+
+### Event47/48 round
+
+EM complete331100 dispatcher C targetPASS744/44,262144 boundedchecks and streamregressions, stable/currentsource. CodecB146/288;Main1682/661 validCCBlookup; fullassertpaths still genuine. Wholecomponents complete0/6, threeworkers continue.
+
+### Command208x round
+
+EM full331204 C targetPASS745/46 stable/currenthash,6144 bounded cases andeventregression. Three genuinechildimports exposed, target seventhargR6 confirmed. Wholecomponents complete0/6;threeworkers continue.
+
+### Command child round
+
+EM three fullnativevalidation wrappers C targetPASS748/46,1124210 boundedcases and6144 parentregression;trueapplychildgraph remains. Main1687/660 ATTfailurefull settled. Fullcomponents complete0/6;threeworkers continue.

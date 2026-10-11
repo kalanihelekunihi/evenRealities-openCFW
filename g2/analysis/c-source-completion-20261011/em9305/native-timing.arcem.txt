@@ -1,0 +1,50 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0030c3a4 <.data+0x9fa4>:
+  30c3a4:	c0e4                	enter_s	[r13-r14]
+  30c3a6:	0865 0064           	brlo.d.nt	r0,r1,100	;0x30c408
+  30c3aa:	4308                	mov_s	r11,r0
+  30c3ac:	708d                	mov_s	r12,0
+  30c3ae:	71ad                	mov_s	r13,1
+  30c3b0:	224a 0000           	mov	r2,0
+  30c3b4:	7e3b                	asl_s	r14,r1
+  30c3b6:	2941 07c0           	lsr	r0,r1,0x1f
+  30c3ba:	795b                	asl_s	r1,r2
+  30c3bc:	2105 8002           	or.f	r2,r1,r0
+  30c3c0:	233d 1383           	seths	r3,r11,r14
+  30c3c4:	2278 0001           	seteq	r1,r2,0
+  30c3c8:	21ca 00c1           	mov.eq	r1,r3
+  30c3cc:	7034                	cmp_s	r1,0
+  30c3ce:	7dbb                	asl_s	r13,r13
+  30c3d0:	41c1                	mov_s	r1,r14
+  30c3d2:	f5f2                	bne_s	-28	;0x30c3b4
+  30c3d4:	ed1a                	breq_s	r13,0,52	;0x30c408
+  30c3d6:	700c                	mov_s	r0,0
+  30c3d8:	7b5d                	lsr_s	r3,r2
+  30c3da:	7edd                	lsr_s	r14,r14
+  30c3dc:	ba1f                	asl_s	r2,r2,0x1f
+  30c3de:	7e45                	or_s	r14,r14,r2
+  30c3e0:	243c 10c1           	setlo	r1,r12,r3
+  30c3e4:	7470                	cmp_s	r12,r3
+  30c3e6:	233c 1382           	setlo	r2,r11,r14
+  30c3ea:	21ca 0081           	mov.eq	r1,r2
+  30c3ee:	7034                	cmp_s	r1,0
+  30c3f0:	79bd                	lsr_s	r1,r13
+  30c3f2:	f407                	bne_s	14	;0x30c3fe
+  30c3f4:	2302 938b           	sub.f	r11,r11,r14
+  30c3f8:	6038                	add_s	r0,r0,r1
+  30c3fa:	2403 90cc           	sbc.f	r12,r12,r3
+  30c3fe:	73b5                	cmp_s	r13,3
+  30c400:	4260                	mov_s	r2,r3
+  30c402:	4528                	mov_s	r13,r1
+  30c404:	f72a                	bhi_s	-44	;0x30c3d8
+  30c406:	c4c4                	leave_s	[r13-r14,pcl]
+  30c408:	700c                	mov_s	r0,0
+  30c40a:	c4c4                	leave_s	[r13-r14,pcl]
+  30c40c:	6038                	add_s	r0,r0,r1
+  30c40e:	0799 ffef           	b.d	-104	;0x30c3a4
+  30c412:	7704                	add_s	r0,r0,-1

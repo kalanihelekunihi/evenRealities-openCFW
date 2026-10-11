@@ -1,0 +1,17 @@
+{
+  "stock_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "candidate_object_sha256": "5e56951e3f356b82fba791573332ac646d15152af20f8d23b9646c0469ca2fcd",
+  "checks": [
+    {
+      "body": "pcm_path",
+      "native_nonstack_stores": 22,
+      "candidate_nonstack_stores": 22
+    },
+    {
+      "body": "i2s_input",
+      "native_nonstack_stores": 11,
+      "candidate_nonstack_stores": 11
+    }
+  ],
+  "scope": "static peripheral/SRAM store-site counts; no original C-SKY execution or live hardware proof"
+}
