@@ -1,0 +1,128 @@
+{
+  "status": "PASS",
+  "cases": 10,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "stock_entry": "0x41d90f",
+  "distinct_original_trace_bytes": 30,
+  "original_body_bytes": 30,
+  "alias_sha256": "ab6025c5310d1c37e8cf95d8864380f0fd7f92b56daea081e704348cedfb5633",
+  "source_sha256": "e0066524e6ba58ea07ad7e813d60feeb5c505348d05b046841b71267dfe13b84",
+  "source_elf_sha256": "6dc5ab0ee40965222dfb9781072244aed391d975ef4822c8bb248732f420c698",
+  "comparisons": [
+    {
+      "register_id": 0,
+      "output_nonnull": true,
+      "primask": 0,
+      "seed": 0,
+      "result": {
+        "status": 0,
+        "output": 0,
+        "primask": 0
+      }
+    },
+    {
+      "register_id": 15,
+      "output_nonnull": true,
+      "primask": 1,
+      "seed": 305419896,
+      "result": {
+        "status": 0,
+        "output": 1467250607,
+        "primask": 1
+      }
+    },
+    {
+      "register_id": 223,
+      "output_nonnull": true,
+      "primask": 1,
+      "seed": 4294967295,
+      "result": {
+        "status": 0,
+        "output": 766310360,
+        "primask": 1
+      }
+    },
+    {
+      "register_id": 0,
+      "output_nonnull": false,
+      "primask": 0,
+      "seed": 0,
+      "result": {
+        "status": 6,
+        "output": 2779096485,
+        "primask": 0
+      }
+    },
+    {
+      "register_id": 15,
+      "output_nonnull": false,
+      "primask": 1,
+      "seed": 2882400001,
+      "result": {
+        "status": 6,
+        "output": 2779096485,
+        "primask": 1
+      }
+    },
+    {
+      "register_id": 223,
+      "output_nonnull": false,
+      "primask": 0,
+      "seed": 1985229328,
+      "result": {
+        "status": 6,
+        "output": 2779096485,
+        "primask": 0
+      }
+    },
+    {
+      "register_id": 224,
+      "output_nonnull": true,
+      "primask": 0,
+      "seed": 305419896,
+      "result": {
+        "status": 5,
+        "output": 2779096485,
+        "primask": 0
+      }
+    },
+    {
+      "register_id": 255,
+      "output_nonnull": true,
+      "primask": 1,
+      "seed": 4294967295,
+      "result": {
+        "status": 5,
+        "output": 2779096485,
+        "primask": 1
+      }
+    },
+    {
+      "register_id": 224,
+      "output_nonnull": false,
+      "primask": 1,
+      "seed": 0,
+      "result": {
+        "status": 5,
+        "output": 2779096485,
+        "primask": 1
+      }
+    },
+    {
+      "register_id": 4294967295,
+      "output_nonnull": true,
+      "primask": 0,
+      "seed": 1515870810,
+      "result": {
+        "status": 5,
+        "output": 2779096485,
+        "primask": 0
+      }
+    }
+  ],
+  "limits": [
+    "Selected startup_clockmux calls ID 15 with a valid output pointer.",
+    "MMIO is synthetic RAM; no physical power register behavior is established.",
+    "Compatible M33 execution is compared; M55 archive compilation is separate."
+  ]
+}

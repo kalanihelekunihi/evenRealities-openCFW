@@ -1,0 +1,30 @@
+{
+  "status": "PASS_BOUNDED_TYPED_CONTEXT",
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "source_sha256": "3342c899fbe6acfaab6ef43e94ca5eb71b54032f13b605b968511383ac15075c",
+  "context_bytes": 60,
+  "natural_alignment_bytes": 2,
+  "newly_attributed_pointer_bytes": 52,
+  "existing_selected_slot_pointer_bytes": 8,
+  "external_pointees": {
+    "touch_generated_common_config": 45736,
+    "touch_reset_common": 536872232,
+    "touch_generated_internal_context": 536874064,
+    "touch_generated_widget_config": 45304,
+    "touch_reset_widgets": 536872264,
+    "touch_generated_pin_config": 45900,
+    "touch_shield_pins_rom_b33c": 45884,
+    "touch_generated_active_scan_sns": 536874040,
+    "touch_generated_base_frame_context": 536873784,
+    "touch_generated_sensor_frame_context": 536873644,
+    "touch_generated_lp_sensor_frame_context": 536873468,
+    "touch_reset_active_descriptors": 536872984,
+    "touch_reset_lp_descriptors": 536872968,
+    "touch_generated_lp_history": 536872542
+  },
+  "limits": [
+    "Pointer values and 15-field layout match stock using authenticated fixed-address fixture symbols. Pointee bodies/configuration and final relocation are not source-owned by this test.",
+    "Two padding bytes at RAM0x200004ea are produced by natural four-byte alignment after the already selected threshold; the 426-byte history allocation extent remains unowned.",
+    "This experimental whole-table unit overlaps two selected slot-link definitions and is not integrated into the current Touch candidate."
+  ]
+}

@@ -20,7 +20,7 @@ uint32_t opencfw_boot_nor_prog(uint32_t at,const void *data,uint32_t n) {
  const uint8_t *p=data;for(uint32_t i=0;i<n;i++){assert((flash[at-START+i]&p[i])==p[i]);flash[at-START+i]&=p[i];}return 0;
 }
 uint32_t opencfw_boot_nor_erase(uint32_t at) {++erases;if(fail_nor)return fail_nor;assert(at>=START && at+4096<=START+SIZE);memset(flash+at-START,255,4096);return 0;}
-void opencfw_boot_fs_error(uintptr_t format,...) {(void)format;++fs_errors;}
+void opencfw_boot_fs_printf(uintptr_t format,...) {(void)format;++fs_errors;}
 void *opencfw_boot_fs_alloc(uint32_t n) {++allocs;if(fail_alloc)return NULL;return calloc(1,n+64);/* Host64 struct larger; extra capacity is fixture only. */}
 void opencfw_boot_fs_free(void *p) {++frees;free(p);}
 uint32_t opencfw_boot_fs_mutex_acquire(uintptr_t m,uint32_t timeout) {assert(m==0x51 && timeout==1000);++locks;return fail_lock;}

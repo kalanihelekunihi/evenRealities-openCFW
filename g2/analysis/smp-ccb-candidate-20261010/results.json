@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "comparisons": 1035,
+  "distinct_provider_traces": 54,
+  "original": "0x5375fc..0x537742",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_sha256": "b18ed61018140e950e36d9dc73eb07647cc2c7378ceb4aecfc369a41a60214d6",
+  "arm_compile_command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/smp_ccb_candidates_20261010/ccb_lookup.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/smp-ccb-candidate-20261010/ccb_lookup.o"
+  ],
+  "limits": [
+    "Original Thumb vs native compiled C with identical scripted provider callbacks.",
+    "Logging providers, initialized CCB state, and valid connection ID lifecycle remain separate.",
+    "Cortex-M55 source compile only; no compiled-byte equality or device behavior."
+  ]
+}

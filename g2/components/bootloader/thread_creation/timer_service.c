@@ -8,6 +8,7 @@ extern void opencfw_boot_list_initialize(uint32_t *);
 extern uint32_t opencfw_bl_mask_interrupts(void);
 extern uint32_t opencfw_bl_kernel_static_thread(uintptr_t,uintptr_t,uint32_t,
  uintptr_t,uint32_t,uintptr_t,uintptr_t);
+extern void opencfw_boot_timer_task(void *);
 #define WORD(a) (*(volatile uint32_t *)(uintptr_t)(a))
 __attribute__((section(".boot_timer_name"),used))
 const char opencfw_boot_timer_name[]="Tmr Svc";
@@ -43,7 +44,7 @@ void opencfw_boot_timer_initialize(void) {
 uint32_t opencfw_bl_timer_service_start(void) {
     opencfw_boot_timer_initialize();
     if (!WORD(0x20027180))fail();
-    WORD(0x20027184)=opencfw_bl_kernel_static_thread(0x419445,
+    WORD(0x20027184)=opencfw_bl_kernel_static_thread((uintptr_t)opencfw_boot_timer_task,
        (uintptr_t)opencfw_boot_timer_name,256,0,54,0x200254d0,0x200269e0);
     if (!WORD(0x20027184))fail();
     return 1;

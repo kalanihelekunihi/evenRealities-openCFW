@@ -1,0 +1,43 @@
+{
+  "aliases": {
+    "stock_timer_init": {
+      "original_entry": "0x4801fc",
+      "object_offset": "0x0",
+      "abi": "void(void)",
+      "caller": "g2/components/audio/pcm21_completion_offline/lifecycle.c",
+      "reused_cases": 40
+    },
+    "stock_timer_start": {
+      "original_entry": "0x480240",
+      "object_offset": "0x44",
+      "abi": "void(uint32_t)",
+      "caller": "g2/components/audio/pcm21_children_offline/apply.c",
+      "reused_cases": 40
+    },
+    "stock_timer_restart": {
+      "original_entry": "0x48028a",
+      "object_offset": "0x98",
+      "abi": "void(uint32_t)",
+      "caller": "g2/components/audio/pcm21_children_offline/apply.c",
+      "reused_cases": 40
+    }
+  },
+  "numeric_receipt": "g2/analysis/audio-pcm21-children-closure-2026-10-08/reproduction-receipt.json",
+  "source_sha256": "54385094f53aa7c33458dfe45c5d88953825a8fc50a86bce8a7205e8e38664fb",
+  "old_object_sha256": "6e9556b32f96666b8a4e54faa37e85d5764acc8ca772441fc1e5e8cf1d4774c0",
+  "alias_source_sha256": "21ed99e5484418f808489778a10d80b10e24ab6d017d5d0be28f3caace71ed45",
+  "alias_object_sha256": "988375d3317a5f895a25b6b9ec311c539a0f3f01df173d61420d9d1e7d54ec35",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/spot_timer_aliases.c": "21ed99e5484418f808489778a10d80b10e24ab6d017d5d0be28f3caace71ed45",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../platform_callbacks_offline/timer.c": "54385094f53aa7c33458dfe45c5d88953825a8fc50a86bce8a7205e8e38664fb",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "old_new_text_sha256": "21a994a9746c79c99174af3c1bd226276b2b72909bd5d75a5e1f3f25a797f54a",
+  "prior_suite": "g2/analysis/audio-platform-callbacks-closure-2026-10-08/timer-results.json",
+  "reused_original_source_cases": 120,
+  "fresh_cases": 0,
+  "limits": [
+    "Prior suite executes actual clock acquisition with synthetic timer/NVIC MMIO.",
+    "Real clock frequency, IRQ delivery and timing unmeasured."
+  ]
+}

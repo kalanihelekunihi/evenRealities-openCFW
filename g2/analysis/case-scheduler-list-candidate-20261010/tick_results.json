@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "cases": 352,
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "88cc1ec3e79478f2356e357806fe227ec553e51e10bdb2b2f3070f5fa97d16d0",
+  "object_sha256": {
+    "waiter.tick.o": "f14f6203ff4b1b9005cf9132e76ec22f271da90fabababaf73a12d11421fa81a",
+    "resume.tick.o": "f0ecbdc0a3e582da231299f36d8ca3dc6e616b885ebe37eece5438fae9abf762",
+    "tick.tick.o": "c68cd542b32f20bc08b3e5aa9f324bb0d3783f59721d9f9f27c3e9a9482590fd",
+    "critical_providers.tick.o": "ce60d5fd39e064cb7553a91af181a1fbcd3906cdd88451e0a1b70f9102d32d73",
+    "yield_request.tick.o": "c14031d4c36f0508c190ebb077c1b2cffca8373b3ed04ecbdae1b97b335a406a"
+  },
+  "archive_sha256": null,
+  "families": [
+    "running normal delayed wake",
+    "tick wrap/overflow delayed swap",
+    "scheduler-suspended pending tick"
+  ],
+  "fatal_wrap_active": "Both versions IRQ-mask and remain nonreturning at 100-instruction bound.",
+  "limits": [
+    "Synthetic coherent list/TCB state; no production scheduler or allocation proof.",
+    "No actual interrupt-driven tick cadence or hardware scheduling claim."
+  ]
+}

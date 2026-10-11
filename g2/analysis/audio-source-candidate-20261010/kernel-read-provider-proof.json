@@ -1,0 +1,39 @@
+{
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source": "g2/components/audio/source_candidate_20261010/kernel_read_providers.c",
+  "source_sha256": "2dafb65f0cabb204ce17eb7169a97f7766f2b071fd4a2be2687a95e89ceea40a",
+  "object_sha256": "09435ca5efd0deec7244949ac39abecb36c7436a558d1c8e0ab645bec00c9826",
+  "cases": [
+    {
+      "name": "audio_tick",
+      "original_address": "0x454efe",
+      "original_hex": "dff8ac0800687047",
+      "literal_pool_address": "0x4557ac",
+      "literal_hex": "344a0720",
+      "literal_value": "0x20074a34",
+      "expected_ram_address": "0x20074a34",
+      "compiled_text_hex": "44f63420c2f2070000687047",
+      "exact_text_match": false,
+      "source_semantics": "single volatile 32-bit load from decoded original RAM address",
+      "original_symbol": "xTaskGetTickCount",
+      "aliases": [
+        "audio_timer_wrap_get_tick",
+        "stock_tick_count"
+      ]
+    },
+    {
+      "name": "receiver_current_task",
+      "original_address": "0x45589c",
+      "original_hex": "dff8bc0700687047",
+      "literal_pool_address": "0x45605c",
+      "literal_hex": "204a0720",
+      "literal_value": "0x20074a20",
+      "expected_ram_address": "0x20074a20",
+      "compiled_text_hex": "44f62020c2f2070000687047",
+      "exact_text_match": false,
+      "source_semantics": "single volatile 32-bit load from decoded original RAM address",
+      "original_symbol": "xTaskGetCurrentTaskHandle",
+      "aliases": []
+    }
+  ]
+}

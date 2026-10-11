@@ -3,6 +3,7 @@
  * Their platform leaf routines remain named external APIs in this profile.
  */
 #include "initializer_callbacks.h"
+#include "startup_diagnostics.h"
 
 #include "gpio_descriptors.h"
 extern uint32_t opencfw_bl_mode_register_update(uint32_t register_id,
@@ -80,7 +81,7 @@ __attribute__((naked)) static void mode_apply_wrapper(void)
 
 uint32_t opencfw_boot_init_callback_platform_sequence(void)
 {
-    opencfw_bl_descriptor_register((const void *)(uintptr_t)0x42f674u, 0x61u);
+    opencfw_bl_descriptor_register(opencfw_boot_gpio_descriptors, 0x61u);
     mode_apply_wrapper();
     opencfw_bl_platform_bringup();
     opencfw_bl_post_bringup_setup();
@@ -178,11 +179,11 @@ void opencfw_boot_services_finalize(void)
 
     services_set_mode(1u);
     opencfw_bl_logger_output(3,
-        (const char *)(uintptr_t)0x43406cu,
-        (const char *)(uintptr_t)0x430ec0u,
-        (const char *)(uintptr_t)0x433f38u, 0xf7,
-        (const char *)(uintptr_t)0x432ac4u,
-        (const char *)(uintptr_t)0x434074u);
+        opencfw_boot_elog_module,
+        opencfw_boot_elog_source_file,
+        opencfw_boot_elog_start_function, 0xf7,
+        opencfw_boot_elog_started_format,
+        opencfw_boot_elog_version);
 }
 
 uint32_t opencfw_boot_init_callback_redirect(void)
@@ -198,16 +199,16 @@ uint32_t opencfw_boot_init_callback_redirect(void)
 
     if (redirect == 0u || protection == 0u) {
         opencfw_bl_logger_output(1,
-            (const char *)(uintptr_t)0x433fd4u,
-            (const char *)(uintptr_t)0x431258u,
-            (const char *)(uintptr_t)0x433e68u, 0x271,
-            (const char *)(uintptr_t)0x432808u);
+            opencfw_boot_redirect_module,
+            opencfw_boot_redirect_source_file,
+            opencfw_boot_redirect_init_function, 0x271,
+            opencfw_boot_redirect_mutex_failed);
         return UINT32_MAX;
     }
     opencfw_bl_logger_output(3,
-        (const char *)(uintptr_t)0x433fd4u,
-        (const char *)(uintptr_t)0x431258u,
-        (const char *)(uintptr_t)0x433e68u, 0x275,
-        (const char *)(uintptr_t)0x432bdcu);
+        opencfw_boot_redirect_module,
+        opencfw_boot_redirect_source_file,
+        opencfw_boot_redirect_init_function, 0x275,
+        opencfw_boot_redirect_mutex_ready);
     return 0u;
 }

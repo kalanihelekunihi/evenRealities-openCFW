@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "cases": 4192,
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "71660734fa7fbd1ab3313079908cfdb7c38ff5bf3dfc9e8cf2c8cfb8d5ac5a68",
+  "object_sha256": {
+    "frame_callback_offline__frame.c.o": "b817b18451fde797b862876b86411aac7d4a075f80a905067f17270ff97e49b6",
+    "uart_start_offline__start.c.o": "8981e1d1f77bf1eb0ff63f3913e59f06cf48827c79940d206c1e3eb0da97c4ed",
+    "source_candidate_20261010__uart_read_provider.c.o": "128933ef4795e591303b9768cfc4eefabd0b672030529a6f9f3b0da03b092dec",
+    "source_candidate_20261010__uart_wait_provider.c.o": "eed4534c9e157b0129110251083ae50d50f69b65778ceed91c5df36589dedbbc",
+    "source_candidate_20261010__tick_word_provider.c.o": "63c1409b6991e39a8717aef362a544cf5fc9d68ad9e8fdd42b8fafa2296db68d",
+    "source_candidate_20261010__uart_rx_complete_callback.c.o": "4e1f781c3ed4f39cfcb651d24816f46afd40cadfada04ccaef4c5e55f3ef3fe4"
+  },
+  "archive_sha256": null,
+  "boundary": "Original/source bulk receive, tick, wait and rearm execute; event post calls intercepted with argument comparison.",
+  "limits": [
+    "Synthetic coherent frame/UART state; event-group side effects are excluded.",
+    "No physical UART, real scheduler, allocation or buffer lifetime proof."
+  ]
+}

@@ -11,7 +11,6 @@
 #define MSPI_STATE_STRIDE        UINT32_C(0x8d0)
 #define MSPI_QUEUE_HANDLE_OFFSET UINT32_C(0x828)
 #define CMDQ_STATE_BASE          UINT32_C(0x200262f0)
-#define CMDQ_OPS_BASE            UINT32_C(0x00430880)
 #define CMDQ_STATE_STRIDE        UINT32_C(0x2c)
 #define CMDQ_OPS_STRIDE          UINT32_C(0x28)
 #define CMDQ_INTERFACE_COUNT     UINT32_C(12)
@@ -55,12 +54,22 @@ typedef struct {
     uint32_t unused_24;
 } cmdq_ops_t;
 
+typedef struct {
+    uint32_t last_idx_processed;
+    uint32_t last_idx_posted;
+    uint32_t last_idx_allocated;
+    uint8_t tip, paused, error, pad;
+} boot_cmdq_status_t;
+
 _Static_assert(sizeof(void *) == 4, "locked bootloader uses 32-bit pointers");
 _Static_assert(sizeof(cmdq_config_t) == 12, "CMDQ config ABI");
 _Static_assert(sizeof(cmdq_state_t) == CMDQ_STATE_STRIDE, "CMDQ state stride");
 _Static_assert(sizeof(cmdq_ops_t) == CMDQ_OPS_STRIDE, "CMDQ ops stride");
 _Static_assert(offsetof(cmdq_state_t, interface_ops_address) == 0x24,
                "CMDQ ops pointer offset");
+_Static_assert(sizeof(boot_cmdq_status_t) == 16, "CMDQ status ABI");
+/* The 12 source-owned register rows are defined in resources.c. */
+extern const cmdq_ops_t opencfw_bl_cmdq_resources[CMDQ_INTERFACE_COUNT];
 
 static volatile cmdq_state_t *cmdq_state(uint32_t interface_id)
 {
@@ -71,7 +80,7 @@ static volatile cmdq_state_t *cmdq_state(uint32_t interface_id)
 static volatile cmdq_ops_t *cmdq_ops(uint32_t interface_id)
 {
     return (volatile cmdq_ops_t *)(uintptr_t)
-        (CMDQ_OPS_BASE + interface_id * CMDQ_OPS_STRIDE);
+        &opencfw_bl_cmdq_resources[interface_id];
 }
 
 static uint32_t queue_is_valid(const uint32_t *queue)
@@ -159,6 +168,20 @@ void opencfw_bl_mspi_cq_enable(uint32_t mspi_state_address)
     }
 }
 
+/* The stock 0x423f8e caller consumes residual R0 after this void-shaped
+ * helper. Return the last called status explicitly for the service root. */
+uint32_t opencfw_boot_mspi_cq_enable(uint32_t mspi_state_address)
+{
+    const uint32_t module = *(const volatile uint32_t *)(uintptr_t)
+        (mspi_state_address + 4u);
+    const uint32_t status = opencfw_bl_clock_request(
+        4u, (module + 0x10u) & 0xffu);
+    if (status != 0u) return status;
+    const uintptr_t queue = *(const volatile uint32_t *)(uintptr_t)
+        (mspi_state_address + MSPI_QUEUE_HANDLE_OFFSET);
+    return opencfw_provider_427878((uint32_t *)queue);
+}
+
 uint32_t opencfw_hal_mspi_cq_disable(uint32_t mspi_state_address)
 {
     const uintptr_t queue = *(const volatile uint32_t *)(uintptr_t)
@@ -211,8 +234,8 @@ uint32_t opencfw_provider_427794(uint32_t interface_id,
     state->flags |= 0x01000000u;
     state->flags &= ~0x02000000u;
     state->flags = (state->flags & 0xff000000u) | CMDQ_MAGIC;
-    state->interface_ops_address = CMDQ_OPS_BASE +
-        interface_id * CMDQ_OPS_STRIDE;
+    state->interface_ops_address =
+        (uintptr_t)&opencfw_bl_cmdq_resources[interface_id];
     state->current_index = 0u;
     state->end_index = 0u;
 
@@ -295,4 +318,49 @@ uint32_t am_hal_cmdq_disable(void *queue)
 uint32_t am_hal_cmdq_term(void *queue, uint32_t force)
 {
     return opencfw_provider_427ad6((uint32_t *)queue, force);
+}
+
+/* Locked 0x427a56: status is a 16-byte output record; the three flag bytes
+ * come from the target interface registers described by the ops row. */
+uint32_t opencfw_boot_mspi_cmdq_get_status(void *handle, boot_cmdq_status_t *status)
+{
+    uint32_t *const queue = (uint32_t *)handle;
+    if (!queue_is_valid(queue)) return 2u;
+    if (status == NULL) return 6u;
+    update_indices(queue);
+    status->last_idx_processed = queue[7];
+    status->last_idx_allocated = queue[8];
+    status->last_idx_posted = queue[8] - (queue[5] != queue[4]);
+    const volatile uint32_t *const ops =
+        (const volatile uint32_t *)(uintptr_t)queue[9];
+    const uint32_t flags = *(const volatile uint32_t *)(uintptr_t)ops[6];
+    status->tip = (flags & ops[7]) != 0u;
+    status->paused = (flags & ops[9]) != 0u;
+    status->error = (flags & ops[8]) != 0u;
+    status->pad = 0u;
+    return 0u;
+}
+
+/* Locked 0x427b38: preserve the target command-list repair path. */
+uint32_t opencfw_boot_mspi_cmdq_error_resume(void *handle)
+{
+    uint32_t *const queue = (uint32_t *)handle;
+    if (!queue_is_valid(queue)) return 2u;
+    if ((queue[0] & 0x02000000u) == 0u) return 0u;
+    const volatile uint32_t *const ops =
+        (const volatile uint32_t *)(uintptr_t)queue[9];
+    volatile uint32_t *const option = (volatile uint32_t *)(uintptr_t)ops[0];
+    *option &= ~1u;
+    volatile uint32_t *const head = (volatile uint32_t *)(uintptr_t)ops[1];
+    volatile uint32_t *entry = (volatile uint32_t *)(uintptr_t)*head;
+    while ((entry[0] & ~1u) != ops[2]) {
+        if (entry[0] == ops[1])
+            entry = (volatile uint32_t *)(uintptr_t)entry[1];
+        else
+            entry += 2;
+    }
+    entry[0] = ops[2];
+    *head = (uint32_t)(uintptr_t)entry;
+    queue[0] &= ~0x02000000u;
+    return 0u;
 }

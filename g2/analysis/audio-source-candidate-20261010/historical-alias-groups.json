@@ -1,0 +1,1833 @@
+{
+  "historical_alias_names": 64,
+  "candidate_pairs": 64,
+  "admitted_now": 59,
+  "deferred": 5,
+  "groups": [
+    {
+      "original_entry_lead": "0x43a5a0",
+      "selected_archive_member": "193-source_candidate_20261010-soft_float_math_aliases.o",
+      "candidate_provider": "audio_floorf",
+      "abi_review": "archive soft-float R0/R1 matched; stock S0/S1 oracle",
+      "aliases": [
+        "stock_floorf"
+      ]
+    },
+    {
+      "original_entry_lead": "0x441f88",
+      "selected_archive_member": "135-source_candidate_20261010-timer_queue_unlock_alias.o",
+      "candidate_provider": "audio_public_queue_unlock",
+      "abi_review": "void(Queue_t*) matched",
+      "aliases": [
+        "audio_timer_wait_unlock"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4420d0",
+      "selected_archive_member": "126-source_candidate_20261010-critical_entry_aliases.o",
+      "candidate_provider": "stock_enter_critical",
+      "abi_review": "void(void) matched",
+      "aliases": [
+        "audio_resume_enter",
+        "audio_timer_wait_enter"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4420e8",
+      "selected_archive_member": "126-source_candidate_20261010-critical_entry_aliases.o",
+      "candidate_provider": "stock_exit_critical",
+      "abi_review": "void(void) matched",
+      "aliases": [
+        "audio_resume_exit",
+        "audio_timer_wait_exit"
+      ]
+    },
+    {
+      "original_entry_lead": "0x454dcc",
+      "selected_archive_member": "137-source_candidate_20261010-scheduler_resume_alias.o",
+      "candidate_provider": "audio_resume_pending_ticks_selected",
+      "abi_review": "int32_t(void) matched",
+      "aliases": [
+        "stock_scheduler_resume"
+      ]
+    },
+    {
+      "original_entry_lead": "0x455876",
+      "selected_archive_member": "130-source_candidate_20261010-next_unblock_alias.o",
+      "candidate_provider": "audio_queue_next_unblock",
+      "abi_review": "void(void) matched",
+      "aliases": [
+        "audio_resume_next_unblock"
+      ]
+    },
+    {
+      "original_entry_lead": "0x45596e",
+      "selected_archive_member": "136-source_candidate_20261010-mutex_disinherit_alias.o",
+      "candidate_provider": "xTaskPriorityDisinherit",
+      "abi_review": "int32_t(void*) matched",
+      "aliases": [
+        "stock_priority_disinherit"
+      ]
+    },
+    {
+      "original_entry_lead": "0x455dc0",
+      "selected_archive_member": "138-source_candidate_20261010-uart_notify_alias.o",
+      "candidate_provider": "uart_notify_isr",
+      "abi_review": "int32_t(void*,u32,u32,u32,u32*,i32*) matched",
+      "aliases": [
+        "offline_notify"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4560b2",
+      "selected_archive_member": "132-source_candidate_20261010-sorted_insert_alias.o",
+      "candidate_provider": "audio_public_list_insert",
+      "abi_review": "void(List_t*,ListItem_t*) matched",
+      "aliases": [
+        "audio_block_sorted_insert"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4560e8",
+      "selected_archive_member": "131-source_candidate_20261010-list_remove_alias.o",
+      "candidate_provider": "uxListRemove",
+      "abi_review": "uint32_t(ListItem_t*) matched",
+      "aliases": [
+        "audio_block_remove"
+      ]
+    },
+    {
+      "original_entry_lead": "0x473940",
+      "selected_archive_member": "133-source_candidate_20261010-callback_irq_alias.o",
+      "candidate_provider": "uart_save_irq",
+      "abi_review": "uint32_t(void) matched",
+      "aliases": [
+        "callback_save_disable_irq"
+      ]
+    },
+    {
+      "original_entry_lead": "0x47f204",
+      "selected_archive_member": "139-source_candidate_20261010-memory_config_aliases.o",
+      "candidate_provider": "audio_mcu_memory_config",
+      "abi_review": "uint32_t(config*) matched",
+      "aliases": [
+        "stock_mcu_memory_config"
+      ]
+    },
+    {
+      "original_entry_lead": "0x47f46a",
+      "selected_archive_member": "139-source_candidate_20261010-memory_config_aliases.o",
+      "candidate_provider": "audio_sram_config",
+      "abi_review": "uint32_t(config*) matched",
+      "aliases": [
+        "stock_sram_config"
+      ]
+    },
+    {
+      "original_entry_lead": "0x47f954",
+      "selected_archive_member": "141-source_candidate_20261010-info_populate_alias.o",
+      "candidate_provider": "audio_info1_populate",
+      "abi_review": "void(void), return ignored",
+      "aliases": [
+        "stock_info_populate"
+      ]
+    },
+    {
+      "original_entry_lead": "0x480058",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "candidate_provider": "audio_pll_power_enable",
+      "abi_review": "uint32_t(void) matched",
+      "aliases": [
+        "stock_pll_power_enable"
+      ]
+    },
+    {
+      "original_entry_lead": "0x48009e",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "candidate_provider": "audio_pll_power_disable",
+      "abi_review": "uint32_t(void) matched",
+      "aliases": [
+        "stock_pll_power_disable"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4800e4",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "candidate_provider": "audio_pll_power_enabled",
+      "abi_review": "uint32_t(uint8_t*) matched",
+      "aliases": [
+        "stock_pll_power_enabled"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4803c2",
+      "selected_archive_member": "144-source_candidate_20261010-ton_update_alias.o",
+      "candidate_provider": "pcm_ton_dispatch",
+      "abi_review": "uint32_t(uint32_t,uint32_t) matched; callers ignore return",
+      "aliases": [
+        "stock_ton_update"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4807a0",
+      "selected_archive_member": "154-source_candidate_20261010-wait4_aliases.o",
+      "candidate_provider": "audio_delay_us",
+      "abi_review": "pending",
+      "aliases": [
+        "stock_delay"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4809c4",
+      "selected_archive_member": "142-source_candidate_20261010-oscillator_control_alias.o",
+      "candidate_provider": "audio_oscillator_control",
+      "abi_review": "uint32_t(uint32_t,const void*) matched",
+      "aliases": [
+        "stock_mcuctrl"
+      ]
+    },
+    {
+      "original_entry_lead": "0x480eee",
+      "selected_archive_member": "140-source_candidate_20261010-gpio_pin_aliases.o",
+      "candidate_provider": "audio_gpio_pin_get",
+      "abi_review": "uint32_t(uint32_t,uint32_t*) matched",
+      "aliases": [
+        "stock_pin_get"
+      ]
+    },
+    {
+      "original_entry_lead": "0x480f0c",
+      "selected_archive_member": "140-source_candidate_20261010-gpio_pin_aliases.o",
+      "candidate_provider": "audio_gpio_pin_set",
+      "abi_review": "uint32_t(uint32_t,uint32_t) matched",
+      "aliases": [
+        "stock_pin_set"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4d38ea",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "candidate_provider": "audio_hfrc2_ratio",
+      "abi_review": "uint32_t(uint32_t,uint32_t,uint32_t*) matched",
+      "aliases": [
+        "stock_hfrc2_ratio"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4d3914",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "candidate_provider": "audio_hfrc_target",
+      "abi_review": "uint32_t(uint32_t,uint32_t,uint32_t*) matched",
+      "aliases": [
+        "stock_hfrc_target"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4d391e",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "candidate_provider": "audio_hfrc_force",
+      "abi_review": "uint32_t(uint32_t) matched",
+      "aliases": [
+        "stock_hfrc_force"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4d3944",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "candidate_provider": "audio_hfrc_disable",
+      "abi_review": "uint32_t(void) matched",
+      "aliases": [
+        "stock_hfrc_disable"
+      ]
+    },
+    {
+      "original_entry_lead": "0x4d3952",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "candidate_provider": "audio_hfrc2_force",
+      "abi_review": "uint32_t(uint32_t) matched",
+      "aliases": [
+        "stock_hfrc2_force"
+      ]
+    },
+    {
+      "original_entry_lead": "0x539794",
+      "selected_archive_member": "192-source_candidate_20261010-pll_postdiv_alias.o",
+      "candidate_provider": "audio_pll_postdiv",
+      "abi_review": "uint32_t(config*,uint32_t,uint32_t) matched",
+      "aliases": [
+        "stock_pll_generate"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5398e0",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "candidate_provider": "audio_pll_init",
+      "abi_review": "uint32_t(uint32_t,uint32_t*) matched",
+      "aliases": [
+        "stock_pll_init"
+      ]
+    },
+    {
+      "original_entry_lead": "0x539944",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "candidate_provider": "audio_pll_deinit",
+      "abi_review": "uint32_t(uint32_t) matched",
+      "aliases": [
+        "stock_pll_deinit"
+      ]
+    },
+    {
+      "original_entry_lead": "0x539994",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "candidate_provider": "audio_pll_enable",
+      "abi_review": "uint32_t(uint32_t) matched",
+      "aliases": [
+        "stock_pll_enable"
+      ]
+    },
+    {
+      "original_entry_lead": "0x539a10",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "candidate_provider": "audio_pll_disable",
+      "abi_review": "uint32_t(uint32_t) matched",
+      "aliases": [
+        "stock_pll_disable"
+      ]
+    },
+    {
+      "original_entry_lead": "0x539a40",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "candidate_provider": "audio_pll_configure",
+      "abi_review": "uint32_t(uint32_t,const void*) matched",
+      "aliases": [
+        "stock_pll_config"
+      ]
+    },
+    {
+      "original_entry_lead": "0x539b56",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "candidate_provider": "audio_pll_wait",
+      "abi_review": "uint32_t(uint32_t) matched",
+      "aliases": [
+        "stock_pll_wait"
+      ]
+    },
+    {
+      "original_entry_lead": "0x577c3c",
+      "selected_archive_member": "193-source_candidate_20261010-soft_float_math_aliases.o",
+      "candidate_provider": "audio_fmodf",
+      "abi_review": "archive soft-float R0/R1 matched; stock S0/S1 oracle",
+      "aliases": [
+        "stock_fmodf"
+      ]
+    },
+    {
+      "original_entry_lead": "0x577d08",
+      "selected_archive_member": "193-source_candidate_20261010-soft_float_math_aliases.o",
+      "candidate_provider": "audio_roundf",
+      "abi_review": "archive soft-float R0/R1 matched; stock S0/S1 oracle",
+      "aliases": [
+        "stock_roundf"
+      ]
+    },
+    {
+      "original_entry_lead": "0x577d40",
+      "selected_archive_member": "193-source_candidate_20261010-soft_float_math_aliases.o",
+      "candidate_provider": "audio_ceilf",
+      "abi_review": "archive soft-float R0/R1 matched; stock S0/S1 oracle",
+      "aliases": [
+        "stock_ceilf"
+      ]
+    },
+    {
+      "original_entry_lead": "0x58dbb8",
+      "selected_archive_member": "191-source_candidate_20261010-codec_uart_hal_aliases.o",
+      "candidate_provider": "am_hal_uart_power_control",
+      "abi_review": "uint32_t(void*,uint32_t,bool) matched; caller passes 0/2 and 1",
+      "aliases": [
+        "codec_hal_power"
+      ]
+    },
+    {
+      "original_entry_lead": "0x58e09e",
+      "selected_archive_member": "191-source_candidate_20261010-codec_uart_hal_aliases.o",
+      "candidate_provider": "am_hal_uart_configure",
+      "abi_review": "uint32_t(void*,const config*) matched",
+      "aliases": [
+        "codec_hal_configure"
+      ]
+    },
+    {
+      "original_entry_lead": "0x59fbac",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "candidate_provider": "pcm_early_on",
+      "abi_review": "uint32_t(uint32_t) matched",
+      "aliases": [
+        "early_other"
+      ]
+    },
+    {
+      "original_entry_lead": "0x59fca2",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "candidate_provider": "pcm_early_off",
+      "abi_review": "uint32_t(void); caller R0 ignored",
+      "aliases": [
+        "early_zero"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a001c",
+      "selected_archive_member": "149-source_candidate_20261010-temperature_apply_alias.o",
+      "candidate_provider": "pcm_hardware_temperature",
+      "abi_review": "void(uint32_t) matched",
+      "aliases": [
+        "stock_temperature_apply"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a00fc",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "candidate_provider": "pcm_temperature",
+      "abi_review": "uint32_t(uint32_t*) matched",
+      "aliases": [
+        "middle_action2"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0204",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "candidate_provider": "pcm_sleep",
+      "abi_review": "void(uint32_t) matched",
+      "aliases": [
+        "middle_action0"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0328",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "candidate_provider": "pcm_middle_on",
+      "abi_review": "uint32_t(uint32_t) matched",
+      "aliases": [
+        "middle_other"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a05e0",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "candidate_provider": "pcm_middle_off",
+      "abi_review": "uint32_t(void); caller R0 ignored",
+      "aliases": [
+        "middle_zero"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0a70",
+      "selected_archive_member": "061-platform_callbacks_offline-classify.o",
+      "candidate_provider": "audio_platform_classify",
+      "abi_review": "pending",
+      "aliases": [
+        "pcm21_classify"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0ae8",
+      "selected_archive_member": "152-source_candidate_20261010-pcm21_completion_aliases.o",
+      "candidate_provider": "pcm21_timer_publish",
+      "abi_review": "void(uint32_t) matched",
+      "aliases": [
+        "stock_timer_publish"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0b54",
+      "selected_archive_member": "152-source_candidate_20261010-pcm21_completion_aliases.o",
+      "candidate_provider": "pcm21_boost_remove",
+      "abi_review": "void(uint32_t) matched",
+      "aliases": [
+        "stock_timer_clear"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0b9c",
+      "selected_archive_member": "152-source_candidate_20261010-pcm21_completion_aliases.o",
+      "candidate_provider": "pcm21_buck_complete",
+      "abi_review": "void(void) matched",
+      "aliases": [
+        "stock_completion"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0c20",
+      "selected_archive_member": "150-source_candidate_20261010-pcm21_children_aliases.o",
+      "candidate_provider": "pcm21_prepare",
+      "abi_review": "void(pcm21_power_request*) matched",
+      "aliases": [
+        "stock_prepare"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0d44",
+      "selected_archive_member": "150-source_candidate_20261010-pcm21_children_aliases.o",
+      "candidate_provider": "pcm21_change_state",
+      "abi_review": "void(uint32_t,uint32_t) matched",
+      "aliases": [
+        "stock_change_state"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0d9c",
+      "selected_archive_member": "152-source_candidate_20261010-pcm21_completion_aliases.o",
+      "candidate_provider": "pcm21_ton",
+      "abi_review": "void(uint32_t,uint32_t) matched",
+      "aliases": [
+        "stock_ton"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a0fc4",
+      "selected_archive_member": "151-source_candidate_20261010-pcm21_apply_alias.o",
+      "candidate_provider": "pcm21_apply",
+      "abi_review": "void(uint32_t,uint32_t,uint32_t,uint32_t) matched",
+      "aliases": [
+        "stock_apply"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a13e8",
+      "selected_archive_member": "150-source_candidate_20261010-pcm21_children_aliases.o",
+      "candidate_provider": "pcm21_plan",
+      "abi_review": "uint32_t(pcm21_power_request*,uint32_t*,uint32_t*) matched",
+      "aliases": [
+        "stock_plan"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a1e8c",
+      "selected_archive_member": "061-platform_callbacks_offline-classify.o",
+      "candidate_provider": "audio_platform_classify",
+      "abi_review": "pending",
+      "aliases": [
+        "callback_classify",
+        "pcm21_classify"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a410c",
+      "selected_archive_member": "147-source_candidate_20261010-platform_prepare_alias.o",
+      "candidate_provider": "audio_platform_prepare_state",
+      "abi_review": "void(power_request*) matched",
+      "aliases": [
+        "callback_prepare_state"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a421c",
+      "selected_archive_member": "146-source_candidate_20261010-platform_planner_aliases.o",
+      "candidate_provider": "audio_platform_change_state",
+      "abi_review": "void(uint32_t,uint32_t) matched",
+      "aliases": [
+        "callback_change_state"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a423c",
+      "selected_archive_member": "161-source_candidate_20261010-cache_disable_alias.o",
+      "candidate_provider": "pcm22_ton_adjust",
+      "abi_review": "pending",
+      "aliases": [
+        "callback_voltage",
+        "stock_ton_adjust"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a44ba",
+      "selected_archive_member": "148-source_candidate_20261010-platform_step_alias.o",
+      "candidate_provider": "audio_platform_step",
+      "abi_review": "void(uint32_t,uint32_t,uint32_t,uint32_t) matched; original step entry",
+      "aliases": [
+        "callback_apply"
+      ]
+    },
+    {
+      "original_entry_lead": "0x5a45d0",
+      "selected_archive_member": "146-source_candidate_20261010-platform_planner_aliases.o",
+      "candidate_provider": "audio_platform_plan",
+      "abi_review": "uint32_t(power_request*,uint32_t*,uint32_t*) matched",
+      "aliases": [
+        "callback_plan"
+      ]
+    }
+  ],
+  "aliases": [
+    {
+      "alias": "audio_block_remove",
+      "candidate_provider": "uxListRemove",
+      "selected_archive_member": "131-source_candidate_20261010-list_remove_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/list_remove_alias.c",
+      "selected_source_sha256": "414339485a407d2972f3bfccbb4cb2ab3954284af46217cc46f11076f7f92566",
+      "selected_object_sha256": "254cb2571fd3b19de4634e34c3503ac6e1e28811a80c5f7fbb5bd1e84cc29891",
+      "original_entry_leads": [
+        "0x4560e8"
+      ],
+      "binding_receipts": {
+        "0x4560e9": [
+          "g2/analysis/audio-delayed-block-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(ListItem_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "audio_block_sorted_insert",
+      "candidate_provider": "audio_public_list_insert",
+      "selected_archive_member": "132-source_candidate_20261010-sorted_insert_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/sorted_insert_alias.c",
+      "selected_source_sha256": "20ee8083bc22fbfef6613578863ede5d00b18922c374e2d6a46cfc8c182d2d2d",
+      "selected_object_sha256": "4301e483f17571f7d3f393554cf0b8efea8fc729de159f4fbb14397b40fb9415",
+      "original_entry_leads": [
+        "0x4560b2"
+      ],
+      "binding_receipts": {
+        "0x4560b3": [
+          "g2/analysis/audio-delayed-block-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(List_t*,ListItem_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "audio_resume_enter",
+      "candidate_provider": "stock_enter_critical",
+      "selected_archive_member": "126-source_candidate_20261010-critical_entry_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/critical_entry_aliases.c",
+      "selected_source_sha256": "2fd48d21be62329dce2e84c4f77773ac1e5846ba571dfaa24a01f1c5b4ff81c0",
+      "selected_object_sha256": "5e93a70b1750fd0c0c04ca3501170e892a49c5bcdf75d37a6bae6e0541c007ff",
+      "original_entry_leads": [
+        "0x4420d0"
+      ],
+      "binding_receipts": {
+        "0x4420d1": [
+          "g2/analysis/audio-resume-ticks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "audio_resume_exit",
+      "candidate_provider": "stock_exit_critical",
+      "selected_archive_member": "126-source_candidate_20261010-critical_entry_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/critical_entry_aliases.c",
+      "selected_source_sha256": "2fd48d21be62329dce2e84c4f77773ac1e5846ba571dfaa24a01f1c5b4ff81c0",
+      "selected_object_sha256": "5e93a70b1750fd0c0c04ca3501170e892a49c5bcdf75d37a6bae6e0541c007ff",
+      "original_entry_leads": [
+        "0x4420e8"
+      ],
+      "binding_receipts": {
+        "0x4420e9": [
+          "g2/analysis/audio-resume-ticks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "audio_resume_next_unblock",
+      "candidate_provider": "audio_queue_next_unblock",
+      "selected_archive_member": "130-source_candidate_20261010-next_unblock_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/next_unblock_alias.c",
+      "selected_source_sha256": "0d8dea6a4c04bf86cf54c3460b6ec3c5555e31cf54305ff60e2e183e672fba19",
+      "selected_object_sha256": "403e6bc041a008cc32f4a4129de00f360d2477193c8631b59f43fd6c04e44211",
+      "original_entry_leads": [
+        "0x455876"
+      ],
+      "binding_receipts": {
+        "0x455877": [
+          "g2/analysis/audio-resume-ticks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "audio_timer_wait_enter",
+      "candidate_provider": "stock_enter_critical",
+      "selected_archive_member": "126-source_candidate_20261010-critical_entry_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/critical_entry_aliases.c",
+      "selected_source_sha256": "2fd48d21be62329dce2e84c4f77773ac1e5846ba571dfaa24a01f1c5b4ff81c0",
+      "selected_object_sha256": "5e93a70b1750fd0c0c04ca3501170e892a49c5bcdf75d37a6bae6e0541c007ff",
+      "original_entry_leads": [
+        "0x4420d0"
+      ],
+      "binding_receipts": {
+        "0x4420d1": [
+          "g2/analysis/audio-timer-queue-wait-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "audio_timer_wait_exit",
+      "candidate_provider": "stock_exit_critical",
+      "selected_archive_member": "126-source_candidate_20261010-critical_entry_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/critical_entry_aliases.c",
+      "selected_source_sha256": "2fd48d21be62329dce2e84c4f77773ac1e5846ba571dfaa24a01f1c5b4ff81c0",
+      "selected_object_sha256": "5e93a70b1750fd0c0c04ca3501170e892a49c5bcdf75d37a6bae6e0541c007ff",
+      "original_entry_leads": [
+        "0x4420e8"
+      ],
+      "binding_receipts": {
+        "0x4420e9": [
+          "g2/analysis/audio-timer-queue-wait-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "audio_timer_wait_unlock",
+      "candidate_provider": "audio_public_queue_unlock",
+      "selected_archive_member": "135-source_candidate_20261010-timer_queue_unlock_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/timer_queue_unlock_alias.c",
+      "selected_source_sha256": "222abcac94e1d4fc885e43818ba1f6708be59f33f6d502d813d0c1927db3d567",
+      "selected_object_sha256": "d6c4cfca6161e3f568b7b403fb4f4553039037a983e31cf460b202b557dbff9e",
+      "original_entry_leads": [
+        "0x441f88"
+      ],
+      "binding_receipts": {
+        "0x441f89": [
+          "g2/analysis/audio-timer-queue-wait-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(Queue_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "callback_apply",
+      "candidate_provider": "audio_platform_step",
+      "selected_archive_member": "148-source_candidate_20261010-platform_step_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/platform_step_alias.c",
+      "selected_source_sha256": "f6820e2626f418f0d8789c531cb7340bf7198eba8f39bc0a74f0feeee357a571",
+      "selected_object_sha256": "d4c98fa8b620f7fd1e9e34ca3a5dd7c6d5bf0ff673a88093e1a8a0472da9cc72",
+      "original_entry_leads": [
+        "0x5a44ba"
+      ],
+      "binding_receipts": {
+        "0x5A44BB": [
+          "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(uint32_t,uint32_t,uint32_t,uint32_t) matched; original step entry",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "callback_change_state",
+      "candidate_provider": "audio_platform_change_state",
+      "selected_archive_member": "146-source_candidate_20261010-platform_planner_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/platform_planner_aliases.c",
+      "selected_source_sha256": "6f36078353670cb2b2a655aa6b5262f29250f4fc9906c99c55ddafa18ebb7073",
+      "selected_object_sha256": "a540d6b7e6e2122f8e4ea2ece5605b6948a2afed7ea562d4268042624738c98e",
+      "original_entry_leads": [
+        "0x5a421c"
+      ],
+      "binding_receipts": {
+        "0x5A421D": [
+          "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(uint32_t,uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "callback_classify",
+      "candidate_provider": "audio_platform_classify",
+      "selected_archive_member": "061-platform_callbacks_offline-classify.o",
+      "selected_source": "g2/components/audio/platform_callbacks_offline/classify.c",
+      "selected_source_sha256": "f4a51f774e0f9741a2e35c8ebe61612f78c2f4e893c31c2a4478a2f52cb69a1c",
+      "selected_object_sha256": "aec6f56876f55792902e7c1f8c0b2090539847a44b468c93a327cb6cc3e16ece",
+      "original_entry_leads": [
+        "0x5a1e8c"
+      ],
+      "binding_receipts": {
+        "audio_platform_classify": [
+          "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+        ],
+        "0x5a1e8d": [
+          "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-newer-planner-composition-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "pending",
+      "status": "deferred",
+      "reason": "selected source entry and caller/provider ABI not jointly verified"
+    },
+    {
+      "alias": "callback_plan",
+      "candidate_provider": "audio_platform_plan",
+      "selected_archive_member": "146-source_candidate_20261010-platform_planner_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/platform_planner_aliases.c",
+      "selected_source_sha256": "6f36078353670cb2b2a655aa6b5262f29250f4fc9906c99c55ddafa18ebb7073",
+      "selected_object_sha256": "a540d6b7e6e2122f8e4ea2ece5605b6948a2afed7ea562d4268042624738c98e",
+      "original_entry_leads": [
+        "0x5a45d0"
+      ],
+      "binding_receipts": {
+        "0x5A45D1": [
+          "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(power_request*,uint32_t*,uint32_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "callback_prepare_state",
+      "candidate_provider": "audio_platform_prepare_state",
+      "selected_archive_member": "147-source_candidate_20261010-platform_prepare_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/platform_prepare_alias.c",
+      "selected_source_sha256": "a290891f507ed3ffef27e06116de60436ba2a9af8d02349bee14c24f54e6bea7",
+      "selected_object_sha256": "aacad0f64dd173148c06924c49a271ea83a9963f80c01e008b7de27eacd95756",
+      "original_entry_leads": [
+        "0x5a410c"
+      ],
+      "binding_receipts": {
+        "0x5A410D": [
+          "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(power_request*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "callback_save_disable_irq",
+      "candidate_provider": "uart_save_irq",
+      "selected_archive_member": "133-source_candidate_20261010-callback_irq_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/callback_irq_alias.c",
+      "selected_source_sha256": "297e6cd3d731a42b3e69f2bd58afb745ec819c30a0b8ef637ac6a083fbc8cdb9",
+      "selected_object_sha256": "3e13663bed8d21be24e93db61ed5b5716598e23833c0047f90ac36172bfba577",
+      "original_entry_leads": [
+        "0x473940"
+      ],
+      "binding_receipts": {
+        "0x473941": [
+          "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "callback_voltage",
+      "candidate_provider": "pcm22_ton_adjust",
+      "selected_archive_member": "161-source_candidate_20261010-cache_disable_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/cache_disable_alias.c",
+      "selected_source_sha256": "341567c6d0f951ee9216992a4fda450fe57d0c1135c902bbd3cb126bf9690fa2",
+      "selected_object_sha256": "ed9f0af09df32a2042b89b74134b6d672a56797f9df137f7de2fc9ded8122aa1",
+      "original_entry_leads": [
+        "0x5a423c"
+      ],
+      "binding_receipts": {
+        "0x5a423d": [
+          "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-uart-newer-planner-composition-2026-10-09/reproduction-receipt.json"
+        ],
+        "pcm22_ton_adjust": [
+          "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "pending",
+      "status": "deferred",
+      "reason": "selected source entry and caller/provider ABI not jointly verified"
+    },
+    {
+      "alias": "codec_hal_configure",
+      "candidate_provider": "am_hal_uart_configure",
+      "selected_archive_member": "191-source_candidate_20261010-codec_uart_hal_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/codec_uart_hal_aliases.c",
+      "selected_source_sha256": "f2afc1ae96c8eb55d8d0acec078125aa88c091d314fc165de1104433d1c35ef7",
+      "selected_object_sha256": "65a4bb3ec3d27600cfbbee70a017e3a79a2082fe43a61aabee43274310e934a0",
+      "original_entry_leads": [
+        "0x58e09e"
+      ],
+      "binding_receipts": {
+        "0x58E09F": [
+          "g2/analysis/audio-codec-uart-lifecycle-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(void*,const config*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "codec_hal_power",
+      "candidate_provider": "am_hal_uart_power_control",
+      "selected_archive_member": "191-source_candidate_20261010-codec_uart_hal_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/codec_uart_hal_aliases.c",
+      "selected_source_sha256": "f2afc1ae96c8eb55d8d0acec078125aa88c091d314fc165de1104433d1c35ef7",
+      "selected_object_sha256": "65a4bb3ec3d27600cfbbee70a017e3a79a2082fe43a61aabee43274310e934a0",
+      "original_entry_leads": [
+        "0x58dbb8"
+      ],
+      "binding_receipts": {
+        "0x58DBB9": [
+          "g2/analysis/audio-codec-uart-lifecycle-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(void*,uint32_t,bool) matched; caller passes 0/2 and 1",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "early_other",
+      "candidate_provider": "pcm_early_on",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/early_pcm_gpu_aliases.c",
+      "selected_source_sha256": "165e01a2e7c9911ebe07838bbcca95a7abb8bc40be1e7d59b093fd6df78d298e",
+      "selected_object_sha256": "4bab5a8e61af2f0e2a846e7abac4e68d0228d46f48d5ce460b0128528b7ed9bc",
+      "original_entry_leads": [
+        "0x59fbac"
+      ],
+      "binding_receipts": {
+        "0x59fbad": [
+          "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "early_zero",
+      "candidate_provider": "pcm_early_off",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/early_pcm_gpu_aliases.c",
+      "selected_source_sha256": "165e01a2e7c9911ebe07838bbcca95a7abb8bc40be1e7d59b093fd6df78d298e",
+      "selected_object_sha256": "4bab5a8e61af2f0e2a846e7abac4e68d0228d46f48d5ce460b0128528b7ed9bc",
+      "original_entry_leads": [
+        "0x59fca2"
+      ],
+      "binding_receipts": {
+        "0x59fca3": [
+          "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(void); caller R0 ignored",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "middle_action0",
+      "candidate_provider": "pcm_sleep",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/early_pcm_gpu_aliases.c",
+      "selected_source_sha256": "165e01a2e7c9911ebe07838bbcca95a7abb8bc40be1e7d59b093fd6df78d298e",
+      "selected_object_sha256": "4bab5a8e61af2f0e2a846e7abac4e68d0228d46f48d5ce460b0128528b7ed9bc",
+      "original_entry_leads": [
+        "0x5a0204"
+      ],
+      "binding_receipts": {
+        "0x5a0205": [
+          "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "middle_action2",
+      "candidate_provider": "pcm_temperature",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/early_pcm_gpu_aliases.c",
+      "selected_source_sha256": "165e01a2e7c9911ebe07838bbcca95a7abb8bc40be1e7d59b093fd6df78d298e",
+      "selected_object_sha256": "4bab5a8e61af2f0e2a846e7abac4e68d0228d46f48d5ce460b0128528b7ed9bc",
+      "original_entry_leads": [
+        "0x5a00fc"
+      ],
+      "binding_receipts": {
+        "0x5a00fd": [
+          "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "middle_other",
+      "candidate_provider": "pcm_middle_on",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/early_pcm_gpu_aliases.c",
+      "selected_source_sha256": "165e01a2e7c9911ebe07838bbcca95a7abb8bc40be1e7d59b093fd6df78d298e",
+      "selected_object_sha256": "4bab5a8e61af2f0e2a846e7abac4e68d0228d46f48d5ce460b0128528b7ed9bc",
+      "original_entry_leads": [
+        "0x5a0328"
+      ],
+      "binding_receipts": {
+        "0x5a0329": [
+          "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "middle_zero",
+      "candidate_provider": "pcm_middle_off",
+      "selected_archive_member": "145-source_candidate_20261010-early_pcm_gpu_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/early_pcm_gpu_aliases.c",
+      "selected_source_sha256": "165e01a2e7c9911ebe07838bbcca95a7abb8bc40be1e7d59b093fd6df78d298e",
+      "selected_object_sha256": "4bab5a8e61af2f0e2a846e7abac4e68d0228d46f48d5ce460b0128528b7ed9bc",
+      "original_entry_leads": [
+        "0x5a05e0"
+      ],
+      "binding_receipts": {
+        "0x5a05e1": [
+          "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(void); caller R0 ignored",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "offline_notify",
+      "candidate_provider": "uart_notify_isr",
+      "selected_archive_member": "138-source_candidate_20261010-uart_notify_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/uart_notify_alias.c",
+      "selected_source_sha256": "ed4593d98dd7171b1f6b5b0397e455eb22f2c3f1e163b4e6bc15d4c3c710726c",
+      "selected_object_sha256": "02d0566c744529cb623de7c196c54f436fb4c7dbb34a8493a62a962bcd780a1d",
+      "original_entry_leads": [
+        "0x455dc0"
+      ],
+      "binding_receipts": {
+        "0x455DC1": [
+          "g2/analysis/audio-uart-rx-stream-ownership-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "int32_t(void*,u32,u32,u32,u32*,i32*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "pcm21_classify",
+      "candidate_provider": "audio_platform_classify",
+      "selected_archive_member": "061-platform_callbacks_offline-classify.o",
+      "selected_source": "g2/components/audio/platform_callbacks_offline/classify.c",
+      "selected_source_sha256": "f4a51f774e0f9741a2e35c8ebe61612f78c2f4e893c31c2a4478a2f52cb69a1c",
+      "selected_object_sha256": "aec6f56876f55792902e7c1f8c0b2090539847a44b468c93a327cb6cc3e16ece",
+      "original_entry_leads": [
+        "0x5a0a70",
+        "0x5a1e8c"
+      ],
+      "binding_receipts": {
+        "audio_platform_classify": [
+          "g2/analysis/audio-pcm21-children-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-pcm21-completion-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-pcm21-control-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-pcm21-reset-closure-2026-10-08/reproduction-receipt.json"
+        ],
+        "0x5a0a71": [
+          "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-newer-planner-composition-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+        ],
+        "0x5a1e8d": [
+          "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "pending",
+      "status": "deferred",
+      "reason": "two conflicting original numeric bindings"
+    },
+    {
+      "alias": "stock_apply",
+      "candidate_provider": "pcm21_apply",
+      "selected_archive_member": "151-source_candidate_20261010-pcm21_apply_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pcm21_apply_alias.c",
+      "selected_source_sha256": "e78ed8bedac79daabadd55d800278645432878bdfab4654ebe82de1d495d1f5b",
+      "selected_object_sha256": "13443fd2643d5a16f9428e9b82ae57840d7b890a172235620fd43ae47a0f3212",
+      "original_entry_leads": [
+        "0x5a0fc4"
+      ],
+      "binding_receipts": {
+        "0x5a0fc5": [
+          "g2/analysis/audio-pcm21-control-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(uint32_t,uint32_t,uint32_t,uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_ceilf",
+      "candidate_provider": "audio_ceilf",
+      "selected_archive_member": "193-source_candidate_20261010-soft_float_math_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/soft_float_math_aliases.c",
+      "selected_source_sha256": "b642ac11f918e592336b0f08e83287cdb918732141f806ba1bafa8a43c7fed74",
+      "selected_object_sha256": "2b08eef2295eae6e3974a3df6d8d5bd069adc51fbc4971d85af67cef3a9b8774",
+      "original_entry_leads": [
+        "0x577d40"
+      ],
+      "binding_receipts": {
+        "0x577d41": [
+          "g2/analysis/audio-syspll-generator-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "archive soft-float R0/R1 matched; stock S0/S1 oracle",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matched archive soft-float caller/provider ABI, independently compared against stock hard-float wrapper"
+    },
+    {
+      "alias": "stock_change_state",
+      "candidate_provider": "pcm21_change_state",
+      "selected_archive_member": "150-source_candidate_20261010-pcm21_children_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pcm21_children_aliases.c",
+      "selected_source_sha256": "1d3cec11abe80b4f24bef462a9c5330412814d1cf6ef866dcdb15796a356111d",
+      "selected_object_sha256": "a44a232975e83dd25b1770333b2ce2086198f7fdf63bfb8d28f0d62ee8ccc927",
+      "original_entry_leads": [
+        "0x5a0d44"
+      ],
+      "binding_receipts": {
+        "0x5a0d45": [
+          "g2/analysis/audio-pcm21-control-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(uint32_t,uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_completion",
+      "candidate_provider": "pcm21_buck_complete",
+      "selected_archive_member": "152-source_candidate_20261010-pcm21_completion_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pcm21_completion_aliases.c",
+      "selected_source_sha256": "5367bb0e068ad313ecb17be932614fcc59bfc5dd056a63d2d801aa9f866ec543",
+      "selected_object_sha256": "20135e1788ee0f4d0a68f72370e1f9bdf4d4ce7f5c5c163100856c38e5083181",
+      "original_entry_leads": [
+        "0x5a0b9c"
+      ],
+      "binding_receipts": {
+        "0x5a0b9d": [
+          "g2/analysis/audio-pcm21-children-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_delay",
+      "candidate_provider": "audio_delay_us",
+      "selected_archive_member": "154-source_candidate_20261010-wait4_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/wait4_aliases.c",
+      "selected_source_sha256": "5c07db7739da3e75851135357114bc9d9527344ac8307561784e813fef6a410e",
+      "selected_object_sha256": "e78d1a6249ad6b5c513bea173581c6a3ae5d8b6f9ea22d3d4cf73df912ea947d",
+      "original_entry_leads": [
+        "0x4807a0"
+      ],
+      "binding_receipts": {
+        "0x4807a1": [
+          "g2/analysis/audio-clock-driver-config-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-clock-leaf-providers-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-clock-public-dispatch-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-common-startup-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-early-pcm-gpu-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-early-pcm-pending-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-float-runtime-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-gpio-providers-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-info-memory-providers-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-pcm21-children-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-pcm21-completion-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-pcm21-reset-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-syspll-generator-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-newer-planner-composition-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-power-composition-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-xtal-request-closure-2026-10-08/reproduction-receipt.json"
+        ],
+        "audio_delay_us": [
+          "g2/analysis/audio-clock-timing-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-early-pcm-dispatch-closure-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-pcm-registry-interface-successor-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "pending",
+      "status": "deferred",
+      "reason": "timing-sensitive delay wrapper would add a call/branch"
+    },
+    {
+      "alias": "stock_floorf",
+      "candidate_provider": "audio_floorf",
+      "selected_archive_member": "193-source_candidate_20261010-soft_float_math_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/soft_float_math_aliases.c",
+      "selected_source_sha256": "b642ac11f918e592336b0f08e83287cdb918732141f806ba1bafa8a43c7fed74",
+      "selected_object_sha256": "2b08eef2295eae6e3974a3df6d8d5bd069adc51fbc4971d85af67cef3a9b8774",
+      "original_entry_leads": [
+        "0x43a5a0"
+      ],
+      "binding_receipts": {
+        "0x43a5a1": [
+          "g2/analysis/audio-syspll-generator-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "archive soft-float R0/R1 matched; stock S0/S1 oracle",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matched archive soft-float caller/provider ABI, independently compared against stock hard-float wrapper"
+    },
+    {
+      "alias": "stock_fmodf",
+      "candidate_provider": "audio_fmodf",
+      "selected_archive_member": "193-source_candidate_20261010-soft_float_math_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/soft_float_math_aliases.c",
+      "selected_source_sha256": "b642ac11f918e592336b0f08e83287cdb918732141f806ba1bafa8a43c7fed74",
+      "selected_object_sha256": "2b08eef2295eae6e3974a3df6d8d5bd069adc51fbc4971d85af67cef3a9b8774",
+      "original_entry_leads": [
+        "0x577c3c"
+      ],
+      "binding_receipts": {
+        "0x577c3d": [
+          "g2/analysis/audio-syspll-generator-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "archive soft-float R0/R1 matched; stock S0/S1 oracle",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matched archive soft-float caller/provider ABI, independently compared against stock hard-float wrapper"
+    },
+    {
+      "alias": "stock_hfrc2_force",
+      "candidate_provider": "audio_hfrc2_force",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c",
+      "selected_source_sha256": "863993f18906ea2039b8ee25c0e3a260b73bcad193e6e96f66766717eaf2f746",
+      "selected_object_sha256": "58740376b5ff7884603046ee4299c9389d270559e1c1acc23ac59133294f9018",
+      "original_entry_leads": [
+        "0x4d3952"
+      ],
+      "binding_receipts": {
+        "0x4d3953": [
+          "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_hfrc2_ratio",
+      "candidate_provider": "audio_hfrc2_ratio",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c",
+      "selected_source_sha256": "863993f18906ea2039b8ee25c0e3a260b73bcad193e6e96f66766717eaf2f746",
+      "selected_object_sha256": "58740376b5ff7884603046ee4299c9389d270559e1c1acc23ac59133294f9018",
+      "original_entry_leads": [
+        "0x4d38ea"
+      ],
+      "binding_receipts": {
+        "0x4d38eb": [
+          "g2/analysis/audio-clock-driver-config-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t,uint32_t,uint32_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_hfrc_disable",
+      "candidate_provider": "audio_hfrc_disable",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c",
+      "selected_source_sha256": "863993f18906ea2039b8ee25c0e3a260b73bcad193e6e96f66766717eaf2f746",
+      "selected_object_sha256": "58740376b5ff7884603046ee4299c9389d270559e1c1acc23ac59133294f9018",
+      "original_entry_leads": [
+        "0x4d3944"
+      ],
+      "binding_receipts": {
+        "0x4d3945": [
+          "g2/analysis/audio-xtal-request-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_hfrc_force",
+      "candidate_provider": "audio_hfrc_force",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c",
+      "selected_source_sha256": "863993f18906ea2039b8ee25c0e3a260b73bcad193e6e96f66766717eaf2f746",
+      "selected_object_sha256": "58740376b5ff7884603046ee4299c9389d270559e1c1acc23ac59133294f9018",
+      "original_entry_leads": [
+        "0x4d391e"
+      ],
+      "binding_receipts": {
+        "0x4d391f": [
+          "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_hfrc_target",
+      "candidate_provider": "audio_hfrc_target",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c",
+      "selected_source_sha256": "863993f18906ea2039b8ee25c0e3a260b73bcad193e6e96f66766717eaf2f746",
+      "selected_object_sha256": "58740376b5ff7884603046ee4299c9389d270559e1c1acc23ac59133294f9018",
+      "original_entry_leads": [
+        "0x4d3914"
+      ],
+      "binding_receipts": {
+        "0x4d3915": [
+          "g2/analysis/audio-xtal-request-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t,uint32_t,uint32_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_info_populate",
+      "candidate_provider": "audio_info1_populate",
+      "selected_archive_member": "141-source_candidate_20261010-info_populate_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/info_populate_alias.c",
+      "selected_source_sha256": "1c18ed362e5101ac2d3738656633718eba22dc6313f557f689460f4350d47d2b",
+      "selected_object_sha256": "e3438d19e71d279197362a4514bf907541b5c505ef5a6c25059ae194bec922e8",
+      "original_entry_leads": [
+        "0x47f954"
+      ],
+      "binding_receipts": {
+        "0x47f955": [
+          "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(void), return ignored",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_mcu_memory_config",
+      "candidate_provider": "audio_mcu_memory_config",
+      "selected_archive_member": "139-source_candidate_20261010-memory_config_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/memory_config_aliases.c",
+      "selected_source_sha256": "5475926cbf0f1d52213f22b42067ec298e9832fc6b0ecca687fffadb8f230bde",
+      "selected_object_sha256": "5fcbd2c01479d83edbc30cf5a57f0397fe5555f9974219bfef2773d9f9ca40c0",
+      "original_entry_leads": [
+        "0x47f204"
+      ],
+      "binding_receipts": {
+        "0x47f205": [
+          "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(config*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_mcuctrl",
+      "candidate_provider": "audio_oscillator_control",
+      "selected_archive_member": "142-source_candidate_20261010-oscillator_control_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/oscillator_control_alias.c",
+      "selected_source_sha256": "b2df8eafa9b57c5c0d0ede2650a025294649df02ed2b04cc8316784596cf6d62",
+      "selected_object_sha256": "4f3c1fc0923aed59b6c69cfd6bcfc0cfbe49ad41ad4d7f9734354b1f2a195dd6",
+      "original_entry_leads": [
+        "0x4809c4"
+      ],
+      "binding_receipts": {
+        "0x4809c5": [
+          "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t,const void*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pin_get",
+      "candidate_provider": "audio_gpio_pin_get",
+      "selected_archive_member": "140-source_candidate_20261010-gpio_pin_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/gpio_pin_aliases.c",
+      "selected_source_sha256": "98050e4915a49cb807258a4793b762820e56cca8da3eae36fd81fb9f12c82240",
+      "selected_object_sha256": "558b8afc18c88a718a2bd99f42ca5f6965d8187e6421f3fa134c1fe020269211",
+      "original_entry_leads": [
+        "0x480eee"
+      ],
+      "binding_receipts": {
+        "0x480eef": [
+          "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t,uint32_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pin_set",
+      "candidate_provider": "audio_gpio_pin_set",
+      "selected_archive_member": "140-source_candidate_20261010-gpio_pin_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/gpio_pin_aliases.c",
+      "selected_source_sha256": "98050e4915a49cb807258a4793b762820e56cca8da3eae36fd81fb9f12c82240",
+      "selected_object_sha256": "558b8afc18c88a718a2bd99f42ca5f6965d8187e6421f3fa134c1fe020269211",
+      "original_entry_leads": [
+        "0x480f0c"
+      ],
+      "binding_receipts": {
+        "0x480f0d": [
+          "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t,uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_plan",
+      "candidate_provider": "pcm21_plan",
+      "selected_archive_member": "150-source_candidate_20261010-pcm21_children_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pcm21_children_aliases.c",
+      "selected_source_sha256": "1d3cec11abe80b4f24bef462a9c5330412814d1cf6ef866dcdb15796a356111d",
+      "selected_object_sha256": "a44a232975e83dd25b1770333b2ce2086198f7fdf63bfb8d28f0d62ee8ccc927",
+      "original_entry_leads": [
+        "0x5a13e8"
+      ],
+      "binding_receipts": {
+        "0x5a13e9": [
+          "g2/analysis/audio-pcm21-control-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(pcm21_power_request*,uint32_t*,uint32_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_config",
+      "candidate_provider": "audio_pll_configure",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pll_driver_aliases.c",
+      "selected_source_sha256": "a8bde55145b4cf915c16dd07bc6ec5da88e10fbf7377d77867fe64a967dbb637",
+      "selected_object_sha256": "760a5f23bef639bf0d4ffc511a8634ef765fd50c9de4e029a0c6237ac4c9f250",
+      "original_entry_leads": [
+        "0x539a40"
+      ],
+      "binding_receipts": {
+        "0x539a41": [
+          "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t,const void*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_deinit",
+      "candidate_provider": "audio_pll_deinit",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pll_driver_aliases.c",
+      "selected_source_sha256": "a8bde55145b4cf915c16dd07bc6ec5da88e10fbf7377d77867fe64a967dbb637",
+      "selected_object_sha256": "760a5f23bef639bf0d4ffc511a8634ef765fd50c9de4e029a0c6237ac4c9f250",
+      "original_entry_leads": [
+        "0x539944"
+      ],
+      "binding_receipts": {
+        "0x539945": [
+          "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_disable",
+      "candidate_provider": "audio_pll_disable",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pll_driver_aliases.c",
+      "selected_source_sha256": "a8bde55145b4cf915c16dd07bc6ec5da88e10fbf7377d77867fe64a967dbb637",
+      "selected_object_sha256": "760a5f23bef639bf0d4ffc511a8634ef765fd50c9de4e029a0c6237ac4c9f250",
+      "original_entry_leads": [
+        "0x539a10"
+      ],
+      "binding_receipts": {
+        "0x539a11": [
+          "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_enable",
+      "candidate_provider": "audio_pll_enable",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pll_driver_aliases.c",
+      "selected_source_sha256": "a8bde55145b4cf915c16dd07bc6ec5da88e10fbf7377d77867fe64a967dbb637",
+      "selected_object_sha256": "760a5f23bef639bf0d4ffc511a8634ef765fd50c9de4e029a0c6237ac4c9f250",
+      "original_entry_leads": [
+        "0x539994"
+      ],
+      "binding_receipts": {
+        "0x539995": [
+          "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_generate",
+      "candidate_provider": "audio_pll_postdiv",
+      "selected_archive_member": "192-source_candidate_20261010-pll_postdiv_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pll_postdiv_alias.c",
+      "selected_source_sha256": "40893d355e9a0f3eaea6d08c038f9c1798f0d8fdaa0ae205debbde1f711032cf",
+      "selected_object_sha256": "1e14d616dc7508f1772be1d624d2ce22e0728149533a9ea053200979bf72e0a1",
+      "original_entry_leads": [
+        "0x539794"
+      ],
+      "binding_receipts": {
+        "0x539795": [
+          "g2/analysis/audio-clock-driver-config-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(config*,uint32_t,uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_init",
+      "candidate_provider": "audio_pll_init",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pll_driver_aliases.c",
+      "selected_source_sha256": "a8bde55145b4cf915c16dd07bc6ec5da88e10fbf7377d77867fe64a967dbb637",
+      "selected_object_sha256": "760a5f23bef639bf0d4ffc511a8634ef765fd50c9de4e029a0c6237ac4c9f250",
+      "original_entry_leads": [
+        "0x5398e0"
+      ],
+      "binding_receipts": {
+        "0x5398e1": [
+          "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t,uint32_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_power_disable",
+      "candidate_provider": "audio_pll_power_disable",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c",
+      "selected_source_sha256": "863993f18906ea2039b8ee25c0e3a260b73bcad193e6e96f66766717eaf2f746",
+      "selected_object_sha256": "58740376b5ff7884603046ee4299c9389d270559e1c1acc23ac59133294f9018",
+      "original_entry_leads": [
+        "0x48009e"
+      ],
+      "binding_receipts": {
+        "0x48009f": [
+          "g2/analysis/audio-clock-driver-config-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_power_enable",
+      "candidate_provider": "audio_pll_power_enable",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c",
+      "selected_source_sha256": "863993f18906ea2039b8ee25c0e3a260b73bcad193e6e96f66766717eaf2f746",
+      "selected_object_sha256": "58740376b5ff7884603046ee4299c9389d270559e1c1acc23ac59133294f9018",
+      "original_entry_leads": [
+        "0x480058"
+      ],
+      "binding_receipts": {
+        "0x480059": [
+          "g2/analysis/audio-clock-driver-config-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_power_enabled",
+      "candidate_provider": "audio_pll_power_enabled",
+      "selected_archive_member": "134-source_candidate_20261010-clock_leaf_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c",
+      "selected_source_sha256": "863993f18906ea2039b8ee25c0e3a260b73bcad193e6e96f66766717eaf2f746",
+      "selected_object_sha256": "58740376b5ff7884603046ee4299c9389d270559e1c1acc23ac59133294f9018",
+      "original_entry_leads": [
+        "0x4800e4"
+      ],
+      "binding_receipts": {
+        "0x4800e5": [
+          "g2/analysis/audio-clock-driver-config-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint8_t*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_pll_wait",
+      "candidate_provider": "audio_pll_wait",
+      "selected_archive_member": "143-source_candidate_20261010-pll_driver_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pll_driver_aliases.c",
+      "selected_source_sha256": "a8bde55145b4cf915c16dd07bc6ec5da88e10fbf7377d77867fe64a967dbb637",
+      "selected_object_sha256": "760a5f23bef639bf0d4ffc511a8634ef765fd50c9de4e029a0c6237ac4c9f250",
+      "original_entry_leads": [
+        "0x539b56"
+      ],
+      "binding_receipts": {
+        "0x539b57": [
+          "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_prepare",
+      "candidate_provider": "pcm21_prepare",
+      "selected_archive_member": "150-source_candidate_20261010-pcm21_children_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pcm21_children_aliases.c",
+      "selected_source_sha256": "1d3cec11abe80b4f24bef462a9c5330412814d1cf6ef866dcdb15796a356111d",
+      "selected_object_sha256": "a44a232975e83dd25b1770333b2ce2086198f7fdf63bfb8d28f0d62ee8ccc927",
+      "original_entry_leads": [
+        "0x5a0c20"
+      ],
+      "binding_receipts": {
+        "0x5a0c21": [
+          "g2/analysis/audio-pcm21-control-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(pcm21_power_request*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_priority_disinherit",
+      "candidate_provider": "xTaskPriorityDisinherit",
+      "selected_archive_member": "136-source_candidate_20261010-mutex_disinherit_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/mutex_disinherit_alias.c",
+      "selected_source_sha256": "db2d34de5679a7f43c876707d07b240d777c2ca56867183f37cf5a9e6aceac8e",
+      "selected_object_sha256": "e8f11e8a12f543fb82a0810efb38a510062142c2a5769a95ebf0fe37784be188",
+      "original_entry_leads": [
+        "0x45596e"
+      ],
+      "binding_receipts": {
+        "0x45596f": [
+          "g2/analysis/audio-queue-cmsis-source-closure-2026-10-09/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "int32_t(void*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_roundf",
+      "candidate_provider": "audio_roundf",
+      "selected_archive_member": "193-source_candidate_20261010-soft_float_math_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/soft_float_math_aliases.c",
+      "selected_source_sha256": "b642ac11f918e592336b0f08e83287cdb918732141f806ba1bafa8a43c7fed74",
+      "selected_object_sha256": "2b08eef2295eae6e3974a3df6d8d5bd069adc51fbc4971d85af67cef3a9b8774",
+      "original_entry_leads": [
+        "0x577d08"
+      ],
+      "binding_receipts": {
+        "0x577d09": [
+          "g2/analysis/audio-syspll-generator-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "archive soft-float R0/R1 matched; stock S0/S1 oracle",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matched archive soft-float caller/provider ABI, independently compared against stock hard-float wrapper"
+    },
+    {
+      "alias": "stock_scheduler_resume",
+      "candidate_provider": "audio_resume_pending_ticks_selected",
+      "selected_archive_member": "137-source_candidate_20261010-scheduler_resume_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/scheduler_resume_alias.c",
+      "selected_source_sha256": "6b3e17dd504512adcdefa7588dc38668c0e7bebfae062eb75de2310f9f3796e6",
+      "selected_object_sha256": "ee2170ba6d322eb68e46fcb61cf15e4269cde587a0947e44740d780f1f26eb95",
+      "original_entry_leads": [
+        "0x454dcc"
+      ],
+      "binding_receipts": {
+        "0x454dcd": [
+          "g2/analysis/audio-timer-daemon-order-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "int32_t(void) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_sram_config",
+      "candidate_provider": "audio_sram_config",
+      "selected_archive_member": "139-source_candidate_20261010-memory_config_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/memory_config_aliases.c",
+      "selected_source_sha256": "5475926cbf0f1d52213f22b42067ec298e9832fc6b0ecca687fffadb8f230bde",
+      "selected_object_sha256": "5fcbd2c01479d83edbc30cf5a57f0397fe5555f9974219bfef2773d9f9ca40c0",
+      "original_entry_leads": [
+        "0x47f46a"
+      ],
+      "binding_receipts": {
+        "0x47f46b": [
+          "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(config*) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_temperature_apply",
+      "candidate_provider": "pcm_hardware_temperature",
+      "selected_archive_member": "149-source_candidate_20261010-temperature_apply_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/temperature_apply_alias.c",
+      "selected_source_sha256": "b7022e32b94c28a294f7837ab276bc38de8378114f6dad4de297a27c83d34b2b",
+      "selected_object_sha256": "79bdd940fe6739bff2e881815750c8d7f9c6d6a32df54fda684d89dba32ed207",
+      "original_entry_leads": [
+        "0x5a001c"
+      ],
+      "binding_receipts": {
+        "0x5a001d": [
+          "g2/analysis/audio-early-pcm-gpu-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_timer_clear",
+      "candidate_provider": "pcm21_boost_remove",
+      "selected_archive_member": "152-source_candidate_20261010-pcm21_completion_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pcm21_completion_aliases.c",
+      "selected_source_sha256": "5367bb0e068ad313ecb17be932614fcc59bfc5dd056a63d2d801aa9f866ec543",
+      "selected_object_sha256": "20135e1788ee0f4d0a68f72370e1f9bdf4d4ce7f5c5c163100856c38e5083181",
+      "original_entry_leads": [
+        "0x5a0b54"
+      ],
+      "binding_receipts": {
+        "0x5a0b55": [
+          "g2/analysis/audio-pcm21-children-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_timer_publish",
+      "candidate_provider": "pcm21_timer_publish",
+      "selected_archive_member": "152-source_candidate_20261010-pcm21_completion_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pcm21_completion_aliases.c",
+      "selected_source_sha256": "5367bb0e068ad313ecb17be932614fcc59bfc5dd056a63d2d801aa9f866ec543",
+      "selected_object_sha256": "20135e1788ee0f4d0a68f72370e1f9bdf4d4ce7f5c5c163100856c38e5083181",
+      "original_entry_leads": [
+        "0x5a0ae8"
+      ],
+      "binding_receipts": {
+        "0x5a0ae9": [
+          "g2/analysis/audio-pcm21-children-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_ton",
+      "candidate_provider": "pcm21_ton",
+      "selected_archive_member": "152-source_candidate_20261010-pcm21_completion_aliases.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/pcm21_completion_aliases.c",
+      "selected_source_sha256": "5367bb0e068ad313ecb17be932614fcc59bfc5dd056a63d2d801aa9f866ec543",
+      "selected_object_sha256": "20135e1788ee0f4d0a68f72370e1f9bdf4d4ce7f5c5c163100856c38e5083181",
+      "original_entry_leads": [
+        "0x5a0d9c"
+      ],
+      "binding_receipts": {
+        "0x5a0d9d": [
+          "g2/analysis/audio-pcm21-children-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "void(uint32_t,uint32_t) matched",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    },
+    {
+      "alias": "stock_ton_adjust",
+      "candidate_provider": "pcm22_ton_adjust",
+      "selected_archive_member": "161-source_candidate_20261010-cache_disable_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/cache_disable_alias.c",
+      "selected_source_sha256": "341567c6d0f951ee9216992a4fda450fe57d0c1135c902bbd3cb126bf9690fa2",
+      "selected_object_sha256": "ed9f0af09df32a2042b89b74134b6d672a56797f9df137f7de2fc9ded8122aa1",
+      "original_entry_leads": [
+        "0x5a423c"
+      ],
+      "binding_receipts": {
+        "pcm22_ton_adjust": [
+          "g2/analysis/audio-transition-producers-closure-2026-10-08/reproduction-receipt.json",
+          "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+          "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+        ],
+        "0x5a423d": [
+          "g2/analysis/audio-transition-timer-closure-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "pending",
+      "status": "deferred",
+      "reason": "selected source entry and caller/provider ABI not jointly verified"
+    },
+    {
+      "alias": "stock_ton_update",
+      "candidate_provider": "pcm_ton_dispatch",
+      "selected_archive_member": "144-source_candidate_20261010-ton_update_alias.o",
+      "selected_source": "g2/components/audio/source_candidate_20261010/ton_update_alias.c",
+      "selected_source_sha256": "fcab63bb829f6db2d5aa12b8b777a5d0f40c39d0830b08cecca0beda5883b2ed",
+      "selected_object_sha256": "551eb696b0bb932c2afbb748ea2910427e9d08fcc3dd1cd836b236f11bbdec4d",
+      "original_entry_leads": [
+        "0x4803c2"
+      ],
+      "binding_receipts": {
+        "0x4803c3": [
+          "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json"
+        ]
+      },
+      "abi_review": "uint32_t(uint32_t,uint32_t) matched; callers ignore return",
+      "status": "admitted_same_object_alias",
+      "reason": "same original entry, matching caller/provider ABI, identical rebuilt source text and original/source execution"
+    }
+  ],
+  "limits": "Numeric receipt binding and source symbol ownership are leads. Only the fifty-one selected same-entry aliases have a joint original/body/ABI proof; other names remain unresolved."
+}

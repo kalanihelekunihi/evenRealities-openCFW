@@ -1,0 +1,24 @@
+{
+  "status": "PASS_TYPED_RESET_CONTEXT_32_BYTES",
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "source": "g2/components/touch/reset_layout_candidate_20261010/reset_common_context.c",
+  "source_sha256": "ccde4c0ed2bcfd3cad562fd83052f03cdc2f8d32690c89647e5340e6a6820a94",
+  "object_sha256": "b2ca804e20e8a789c6641b85984a512e815ccae7bfc1bd0dae02db451df585d0",
+  "data_sha256": "982c800d09581164f3af11c3e99c11fe9094d5257e7472790498a9fa7fbc66fd",
+  "ram_address": "0x20000528",
+  "rom_address": "0xb5f4",
+  "bytes": 32,
+  "vendor_commit": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "vendor_header_sha256": "12402112ee3f37cdd966d758cfcc7c2eee14c1892bbf93674d75a9534bb89cd4",
+  "native_consumers": [
+    "0x7e04 tuner/LP clear offsets2,6,22,28",
+    "ILO status offset8"
+  ],
+  "aggregate_source_owned_reset_bytes": 125,
+  "remaining_reset_bytes": 839,
+  "limits": [
+    "Initializer byte identity only, not full image or physical touch proof.",
+    "32-byte ABI matches v4/v5/v6 LP definitions; producing SDK version not uniquely identified.",
+    "Other product contexts and pointer relocations remain open."
+  ]
+}

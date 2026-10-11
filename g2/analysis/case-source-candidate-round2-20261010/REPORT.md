@@ -1,6 +1,23 @@
 # CASE source candidate: round 2
 
-## Result
+## Current round 14 status
+
+The current `receipt.json` and `provider-census.json` supersede the historical
+round-two counts below. The builder now compiles **25 Cortex-M0+ source objects**,
+defines **48 global symbols**, and leaves **11 provider names unresolved**.
+The deterministic archive rebuild and whole-archive relocatable link pass;
+archive SHA-256 is
+`e580f5d2e67eed25105dd555604750351013d4095238310f622ea8b909d528cd`.
+Round 13 adds the source-defined `case_remove_waiter` and list operations,
+validated against 216 original/coherent-state cases plus a bounded fatal
+path. Round 14 adds `case_resume_scheduler` and next-unblock recalculation,
+validated against 2,304 coherent original/source states for both isolated and
+archive-compiled objects. See `case-scheduler-list-candidate-20261010/REPORT.md`.
+The remaining 11 names are in the refreshed census: the direct resume symbol
+is closed, while its original tick-increment lower provider is explicit.
+This is a source archive and relocatable link, not an executable image.
+
+## Historical round 2 result
 
 Eleven existing independent CASE C modules compile with `/usr/bin/clang` for `arm-none-eabi`, Cortex-M0+, Thumb, soft float, freestanding C11, and `-Os`. `arm-none-eabi-ar` creates `libcase_source_candidate.a` from the eleven objects. The exact command, compiler version, SHA-256 of each source and archive, and all stderr are in [receipt.json](receipt.json). [nm.txt](nm.txt) is the complete object symbol listing. An inspected object is ELF32 little-endian ARM EABI version 5, and its decoded instructions are Thumb. This is a concrete source/object/archive composition, **not a linked or flashable firmware**.
 

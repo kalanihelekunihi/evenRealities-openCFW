@@ -12,8 +12,10 @@ extern void opencfw_provider_4176ce(uint32_t, const char *, const char *,
 #define MUTEX (*(volatile uint32_t *)(uintptr_t)0x200270e0u)
 /* Authenticated 16-byte attributes at 433cf8. The name address is data,
  * not an executable provider; the static CB is 80 bytes at 20026c60. */
+/* Stock name at 0x433f2c; the attribute pointer now relocates with source. */
+const char opencfw_boot_flash_mutex_name[] = "flash_mutex";
 static const uint32_t mutex_attributes[4] = {
-    0x00433f2cu, 0u, 0x20026c60u, 80u
+    (uintptr_t)opencfw_boot_flash_mutex_name, 0u, 0x20026c60u, 80u
 };
 void opencfw_provider_41fe28(void) {
     if (POWERED != 1u) {

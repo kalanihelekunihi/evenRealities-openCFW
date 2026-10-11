@@ -1,0 +1,40 @@
+{
+  "status": "PASS_SAME_ENTRY_REUSED_ORACLE",
+  "aliases": [
+    "am_hal_delay_us",
+    "codec_wrapper_delay",
+    "stock_delay",
+    "stock_delay_us",
+    "uart_delay_boundary"
+  ],
+  "original_entry": "0x4807a0",
+  "selected_source_function": "audio_delay_us",
+  "selected_object": "g2/components/audio/source_candidate_20261010/build/154-source_candidate_20261010-wait4_aliases.o",
+  "archive_sha256": "fa60cc56c674287b966f422ae2031030a5c3b44194bad855c9fdba2195027c1a",
+  "source_sha256": "1523a0e8bfb594ed41c9ba4bedef37d4f7c5e0804194a1499d914c510f85ba74",
+  "prior_oracle": "g2/analysis/audio-clock-timing-closure-2026-10-08/verify.py",
+  "reused_original_source_cases": {
+    "delay_us": 144,
+    "whole_timing_suite": 1598
+  },
+  "fresh_original_source_cases": 0,
+  "same_object_alias_addresses": {
+    "audio_delay_us": "0x10",
+    "am_hal_delay_us": "0x10",
+    "codec_wrapper_delay": "0x10",
+    "stock_delay": "0x10",
+    "stock_delay_us": "0x10",
+    "uart_delay_boundary": "0x10"
+  },
+  "census": {
+    "members": 160,
+    "globals": 586,
+    "unresolved": 54,
+    "duplicates": 0
+  },
+  "limits": [
+    "Original/native instruction comparison uses synthetic performance register and authenticated ITCM loop.",
+    "Huge delay inputs compare spin-entry count/FPSCR only.",
+    "Physical elapsed microseconds, cache/clock and asynchronous interrupt effects are unverified."
+  ]
+}

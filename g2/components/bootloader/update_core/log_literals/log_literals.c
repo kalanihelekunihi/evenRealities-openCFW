@@ -1,6 +1,7 @@
 /* Reconstructed readonly diagnostics used by update_core.c.
  * Fixed source pointer ABI; no original executable bytes. */
 __attribute__((section(".boot_update_log_4310c4"),used)) const char opencfw_update_log_literal_4310c4[]="D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c";
+__attribute__((section(".boot_update_path_4336e4"),used)) const char opencfw_update_path_4336e4[]="ota/s200_firmware_ota.bin";
 __attribute__((section(".boot_update_log_43184c"),used)) const char opencfw_update_log_literal_43184c[]="flash write verify ok. address 0x%x. length %d, remaining = %d";
 __attribute__((section(".boot_update_log_4320ac"),used)) const char opencfw_update_log_literal_4320ac[]="flash write verify failed. address 0x%x. length %d";
 __attribute__((section(".boot_update_log_433700"),used)) const char opencfw_update_log_literal_433700[]="filesize %d desAddr 0x%x\r\n";

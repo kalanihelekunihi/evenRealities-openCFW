@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "exact_functions": 2,
+  "original_bytes": 14,
+  "functions": {
+    "case_mask_save": {
+      "original_address": "0x80000f4",
+      "length": 8,
+      "bytes_hex": "eff3108072b67047"
+    },
+    "case_mask_restore": {
+      "original_address": "0x80000fc",
+      "length": 6,
+      "bytes_hex": "80f310887047"
+    }
+  },
+  "source_sha256": "7bb92fea265dc2de6006764fbdb26ef9094595525dc2b6f5f0606097b7ef9122",
+  "compiler_sha256": "21df4f5520528e31b8632cfb3b4b57a3f2a33126693828bf69d1976f537aaec7",
+  "object_sha256": "aee319d26e0774282cf91715769cecfba4e47fe68dd8b62f6ce210a995b1669b",
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "command": [
+    "/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-mfloat-abi=soft",
+    "-Os",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/mask_providers.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/case-mask-source-candidate-20261010/mask_providers.o"
+  ],
+  "scope": "Exact code-section bytes for two PRIMASK helpers; no whole-image link."
+}

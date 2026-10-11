@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "cases": 240,
+  "stock_constructor_sha256": "38d6d26badde07f29b49fa3d2652695a11fe98769a6bbedd1290c0068aba8948",
+  "stock_initializer_sha256": "a95e0e593a7afb1fbc642b83c9bc54ab0dc6d994ad4e109bf14dc914d3c2add7",
+  "source_sha256": "4112a5fc8e6cb760368473d36712608226e780e8c2e0cc018b900088361d7b5f",
+  "elf_sha256": "8d8649b5eefbb5a177910ec7e219fe90a6bce7c706a748fff102be7d010f2dde",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,opencfw_bl_kernel_queue_create_static",
+    "-Wl,--defsym=opencfw_boot_kernel_queue_reset=0x419be9",
+    "-Wl,--defsym=opencfw_bl_mask_interrupts=0x41b2f9",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/source_candidate_20261010/queue_create_static.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-source-candidate-20261010/queue-create-static-candidate.elf"
+  ],
+  "limits": "Cortex-M4 scalar original/source oracle. Queue reset is a shared synthetic lower callback; separately selected source reset exists. Invalid inputs stop at original/source assertion mask entry; no claimed execution of nonreturning fault loop. Cortex-M55 archive compile independent; no scheduler or hardware behavior."
+}

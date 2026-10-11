@@ -9,13 +9,16 @@ extern uint32_t opencfw_boot_control_delay_status_change(uint32_t,volatile uint3
 extern uint32_t opencfw_hal_status_poll(uint32_t,uintptr_t,uint32_t,uint32_t,uint32_t);
 NI void opencfw_boot_startup_external_mode(uint32_t callback){W(0x200270ccu)=callback;}
 NI uint32_t opencfw_boot_startup_hook_before(void){
- uintptr_t callback=W(0x20026e4cu);return callback?((uint32_t(*)(void))callback)():0;
+ if(!W(0x20026e4cu))return 0;
+ uintptr_t callback=W(0x20026e4cu);return ((uint32_t(*)(void))callback)();
 }
 NI uint32_t opencfw_boot_startup_hook_middle(void){
- uintptr_t callback=W(0x20026e50u);return callback?((uint32_t(*)(void))callback)():0;
+ if(!W(0x20026e50u))return 0;
+ uintptr_t callback=W(0x20026e50u);return ((uint32_t(*)(void))callback)();
 }
 NI uint32_t opencfw_boot_startup_hook_after(void){
- uintptr_t callback=W(0x20026e54u);return callback?((uint32_t(*)(void))callback)():0;
+ if(!W(0x20026e54u))return 0;
+ uintptr_t callback=W(0x20026e54u);return ((uint32_t(*)(void))callback)();
 }
 NI void opencfw_boot_startup_register_setup(void){
  W(0x40020060u)|=0x20000u;W(0x40020060u)|=0x40000u;

@@ -16,7 +16,12 @@ TOOL = ROOT / "third-party/local-vendor/toolchains/csky-linux-x86_64"
 
 
 def run(command):
-    p = subprocess.run(command, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    try:
+        p = subprocess.run(command, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                           timeout=180)
+    except subprocess.TimeoutExpired as e:
+        return {"command": command, "returncode": 124, "stdout": "",
+                "stderr": "execution exceeded 180 seconds"}
     return {"command": command, "returncode": p.returncode,
             "stdout": p.stdout[-4000:], "stderr": p.stderr[-4000:]}
 

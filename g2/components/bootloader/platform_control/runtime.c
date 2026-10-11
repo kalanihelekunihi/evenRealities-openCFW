@@ -15,6 +15,7 @@ extern uint32_t opencfw_boot_control_query(uint32_t selector,
                                             uint8_t *result);
 
 #define BOOT_CONTROL_HOOKS 0x20026e38u
+extern const uint32_t opencfw_boot_mode_values[2];
 
 uint32_t opencfw_boot_control_mode_one(uint32_t mode)
 {
@@ -28,9 +29,9 @@ uint32_t opencfw_boot_control_mode_one(uint32_t mode)
 
     uint32_t *const register_ids = *(uint32_t **)(void *)(record + 8);
     (void)opencfw_bl_power_register_update(register_ids[1],
-                                             WORD(0x434158u));
+                                             opencfw_boot_mode_values[0]);
     (void)opencfw_bl_power_register_update(register_ids[0],
-                                             WORD(0x43415cu));
+                                             opencfw_boot_mode_values[1]);
 
     uint32_t *const object = *(uint32_t **)(void *)(record + 4);
     return opencfw_boot_control_power_apply(object, 2u, 1u);

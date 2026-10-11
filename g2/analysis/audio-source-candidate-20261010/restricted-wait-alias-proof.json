@@ -1,0 +1,26 @@
+{
+  "original_entry": "0x442030",
+  "source_entry": "audio_timer_restricted_wait",
+  "alias_entry": "stock_queue_restricted_wait",
+  "caller_abi": "void(void *queue,uint32_t ticks,uint32_t indefinite); R0-R2",
+  "selected_abi": "same three-register void ABI",
+  "source_same_object_offset": "0x0",
+  "rebuilt_text_sha256": "b1969b6c77bbb98342903cf0ac299edac125745ba01b0cbae6cce02b0802895c",
+  "text_identical_to_selected": true,
+  "alias_source": "g2/components/audio/source_candidate_20261010/restricted_wait_alias.c",
+  "alias_source_sha256": "e17e8f4c6d2d9ddfe8d677bcfaaa87c3403baa0f610885ea77a1999492812430",
+  "alias_object_sha256": "d4fc852eb84e6fd32b7f74020ac21856c27ed99b0a3409f81bd9af4c1caa4b9a",
+  "selected_source": "g2/components/audio/timer_queue_wait_offline/wait.c",
+  "selected_source_sha256": "2533a664b6fdedd4af43e21cedf6345f8e954da3676c844fa4e84ab8d5a8987d",
+  "selected_object_sha256": "dee20cf87a0566648276fa827d037769efb421f47097029aafa924e60795d637",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/restricted_wait_alias.c": "e17e8f4c6d2d9ddfe8d677bcfaaa87c3403baa0f610885ea77a1999492812430",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../timer_queue_wait_offline/wait.c": "2533a664b6fdedd4af43e21cedf6345f8e954da3676c844fa4e84ab8d5a8987d",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "archive_sha256": "644b235822deb46c889cc84c4bee576ba9287a1da1f28803f04cc32732106933",
+  "reused_original_source_cases": 96,
+  "fresh_cases": 0,
+  "reused_suite": "g2/analysis/audio-timer-queue-wait-closure-2026-10-08/results.json",
+  "scope": "Prior 96 cases execute original restricted wait versus selected C, with coherent static queue/current-task/list state and bounded scheduler cuts. No daemon continuation or concurrent producer."
+}

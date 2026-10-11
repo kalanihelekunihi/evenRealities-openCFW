@@ -1,0 +1,72 @@
+{
+  "source": "g2/components/gx8002/app_callback_candidate/board_uart.c",
+  "source_sha256": "7de184f6b86a6bec00ea54d2aa5f4950f84e70687b66625082be50e17bfee91a",
+  "pseudocode_inputs": [
+    {
+      "address": "10203004",
+      "pseudocode": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/decomp/10203004.c",
+      "sha256": "526a2e379882b36587b6007eacf385a37a9316cb7181432d84d185ca765ce252"
+    },
+    {
+      "address": "1020300c",
+      "pseudocode": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/decomp/1020300c.c",
+      "sha256": "1b3fdcd79676c5e411030860c2d39ead5c4f5130196a34b3949b24a02fedef29"
+    },
+    {
+      "address": "10203050",
+      "pseudocode": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/decomp/10203050.c",
+      "sha256": "7433dcbe524ae8f356260cd02b725b3d768ff4d0233c11f0accd7ae0ead10fbd"
+    },
+    {
+      "address": "1020324c",
+      "pseudocode": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/decomp/1020324c.c",
+      "sha256": "70a3ee9a784400e8c168cd5948400482c027fd4a6e8d917c2dd9f589f5b860d7"
+    },
+    {
+      "address": "10203260",
+      "pseudocode": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/decomp/10203260.c",
+      "sha256": "efe0d881c902ae23edf22a346aed5cf68b0e7d8cce2da4a832df8ef0b430df5b"
+    }
+  ],
+  "build_receipt": "g2/build/c-firmware/20261011/codec-board-uart-final-round/receipt.json",
+  "build_receipt_sha256": "28538ef82b6aad1aaa6f71f11744f94152da4512dfa5aec7b5ae51084eeea288",
+  "csky_compilation_passed": true,
+  "defined_symbols": [
+    "csky_bitreversal_16",
+    "csky_bitreversal_32",
+    "csky_bitreversal_f32",
+    "csky_bitreversal_q15",
+    "csky_bitreversal_q31",
+    "csky_cfft_q15",
+    "csky_cfft_radix4_q15",
+    "csky_cfft_radix4by2_inverse_q15",
+    "csky_cfft_radix4by2_q15",
+    "csky_copy_q15",
+    "csky_fill_q15",
+    "csky_radix4_butterfly_inverse_q15",
+    "csky_radix4_butterfly_q15",
+    "csky_rfft_q15",
+    "csky_shift_q15",
+    "csky_split_rfft_q15",
+    "csky_split_rifft_q15",
+    "g2_codec_audio_board_gain",
+    "g2_codec_audio_board_get",
+    "g2_codec_board_constant",
+    "g2_codec_construct_request",
+    "g2_codec_dw_uart_dma_burst",
+    "g2_codec_dw_uart_getc",
+    "g2_codec_dw_uart_putc",
+    "g2_codec_event_91_helper",
+    "g2_codec_gain_table"
+  ],
+  "unresolved_symbols": [
+    "g2_codec_event_dispatch",
+    "g2_codec_event_prepare",
+    "g2_codec_request_cell",
+    "g2_codec_request_consume"
+  ],
+  "stock_source_execution": false,
+  "whole_image_complete": false,
+  "static_native_review": "board-uart-native-review.json",
+  "remaining": "Four callback lower/data imports, whole codec bodies, startup and final placement; board/gain constants now explicitly owned."
+}

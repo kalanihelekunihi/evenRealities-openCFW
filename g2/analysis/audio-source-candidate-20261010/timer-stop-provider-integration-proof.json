@@ -1,0 +1,47 @@
+{
+  "status": "PASS bounded",
+  "archive_sha256": "3f157f7743cccf415379c01d04618afd83b85d0a6465d6d77da889a3a68e6f0c",
+  "compiled_provider": {
+    "source": "g2/components/audio/source_candidate_20261010/timer_stop_provider.c",
+    "source_sha256": "e59e8e7cf1d96a096b03ddb75de72cc1dafe00d31f2db8ad31cda9124f3c5b6c",
+    "object_path": "/private/tmp/g2-audio-arm-inventory/197-source_candidate_20261010-timer_stop_provider.o",
+    "command": [
+      "clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/g2-audio-arm-inventory/197-source_candidate_20261010-timer_stop_provider.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/timer_stop_provider.c",
+      "-o",
+      "/private/tmp/g2-audio-arm-inventory/197-source_candidate_20261010-timer_stop_provider.o"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "object_sha256": "dda039f427ca2bc6e9f0e41b34d8641c6e7b5080000294bc9978127477507788",
+    "dependency_sha256": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/timer_stop_provider.c": "e59e8e7cf1d96a096b03ddb75de72cc1dafe00d31f2db8ad31cda9124f3c5b6c",
+      "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+    }
+  },
+  "original_entries": {
+    "audio_timer_stop": "0x4494d8",
+    "audio_timer_is_active": "0x47eaf6"
+  },
+  "fresh_original_source_cases": 71,
+  "breakdown": {
+    "public_stop": 24,
+    "active_getter": 45,
+    "active_null_prefix": 2
+  },
+  "execution_receipt": "timer-stop-provider-execution.json",
+  "lower_bindings": "audio_cmsis_irq_context = 0x44900f; stock_enter_critical = 0x4420d1; stock_exit_critical = 0x4420e9; audio_mask_save = 0x5fa0a5; audio_aux_command = 0x47e7b1; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "abi": "audio_timer_stop(void*) returns CMSIS status; audio_timer_is_active(void*) returns low status bit",
+  "scope": "M4 source/public-stock comparisons through actual original IRQ-context, critical and timer-command callees. Empty/full synthetic queue, active/inactive/null timer, ISR/task and scheduler flags; null helper stops at attempted invalid write. M55 archive compiled with full dependencies, not composed executed; daemon cancellation untested."
+}

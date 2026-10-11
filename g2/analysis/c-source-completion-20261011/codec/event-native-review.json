@@ -1,0 +1,120 @@
+{
+  "source_sha256": "1ef3939587cc906445e9a43d398eaacd181d83dda41de38cfb66c217398b632d",
+  "image_sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+  "listings": [
+    {
+      "range": [
+        "0x102093dc",
+        "0x10209430"
+      ],
+      "listing": "g2/analysis/c-source-completion-20261011/codec/event-native.txt",
+      "listing_sha256": "ba2c38339a535c217f90b38c348907bfe691c12ae20cdf655999cfe847e5f732",
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-D",
+        "-z",
+        "-b",
+        "binary",
+        "-m",
+        "csky",
+        "--adjust-vma=0x10203004",
+        "--start-address=0x102093dc",
+        "--stop-address=0x10209430",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+      ]
+    },
+    {
+      "range": [
+        "0x10209770",
+        "0x1020979c"
+      ],
+      "listing": "g2/analysis/c-source-completion-20261011/codec/request-native.txt",
+      "listing_sha256": "54b613e9bf002afd7541868b2dd0523c61b5f8dc73232c4fe375b2d13d505232",
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-D",
+        "-z",
+        "-b",
+        "binary",
+        "-m",
+        "csky",
+        "--adjust-vma=0x10203004",
+        "--start-address=0x10209770",
+        "--stop-address=0x1020979c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+      ]
+    },
+    {
+      "range": [
+        "0x10205f88",
+        "0x10205fb4"
+      ],
+      "listing": "g2/analysis/c-source-completion-20261011/codec/gpio-native.txt",
+      "listing_sha256": "0d8609593bba95797a5b6f5ef2af38216a9fcc361a43b0e7599ea37a7da59acf",
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-D",
+        "-z",
+        "-b",
+        "binary",
+        "-m",
+        "csky",
+        "--adjust-vma=0x10203004",
+        "--start-address=0x10205f88",
+        "--stop-address=0x10205fb4",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+      ]
+    }
+  ],
+  "findings": [
+    "Request structure address0x20026d5c is literal, not a global pointer cell",
+    "Timestamp output word at0x2002e910",
+    "Event argument is truncated to16bits at0x2002e914",
+    "Dispatch returns0 after consumer call regardless of child return",
+    "GPIO word0xa0001004 read/modify/write, pin masked to5bits, return0"
+  ],
+  "remaining_lower_contracts": {
+    "g2_codec_timestamp": "0x10025930",
+    "g2_codec_request_consume": "0x102083bc"
+  },
+  "stock_source_execution": false,
+  "whole_codec_source_complete": false,
+  "build_receipt": "g2/build/c-firmware/20261011/codec-gpio-round/receipt.json",
+  "build_receipt_sha256": "26a48b03b266f05f833bbf48ec912590e2021f2d3cb7b620e771fc132cd762d2",
+  "csky_compile_passed": true,
+  "defined_symbols": [
+    "csky_bitreversal_16",
+    "csky_bitreversal_32",
+    "csky_bitreversal_f32",
+    "csky_bitreversal_q15",
+    "csky_bitreversal_q31",
+    "csky_cfft_q15",
+    "csky_cfft_radix4_q15",
+    "csky_cfft_radix4by2_inverse_q15",
+    "csky_cfft_radix4by2_q15",
+    "csky_copy_q15",
+    "csky_fill_q15",
+    "csky_radix4_butterfly_inverse_q15",
+    "csky_radix4_butterfly_q15",
+    "csky_rfft_q15",
+    "csky_shift_q15",
+    "csky_split_rfft_q15",
+    "csky_split_rifft_q15",
+    "g2_codec_audio_board_gain",
+    "g2_codec_audio_board_get",
+    "g2_codec_board_constant",
+    "g2_codec_construct_request",
+    "g2_codec_dw_uart_dma_burst",
+    "g2_codec_dw_uart_getc",
+    "g2_codec_dw_uart_putc",
+    "g2_codec_event_91_helper",
+    "g2_codec_event_dispatch",
+    "g2_codec_event_prepare",
+    "g2_codec_gain_table",
+    "g2_codec_gpio_set_level"
+  ],
+  "unresolved_symbols": [
+    "g2_codec_request_consume",
+    "g2_codec_timestamp"
+  ]
+}

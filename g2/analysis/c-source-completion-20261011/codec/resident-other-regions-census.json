@@ -1,0 +1,1209 @@
+{
+  "image_a_xip": {
+    "raw_seed_labels": 362,
+    "explicit_candidate_bindings": 199,
+    "unbound_raw_labels": 163,
+    "bindings": [
+      {
+        "entry": "10203004",
+        "native_name": "audio_board_get",
+        "body_bytes": 4,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/board_uart.c"
+      },
+      {
+        "entry": "1020300c",
+        "native_name": "audio_board_gain",
+        "body_bytes": 18,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/board_uart.c"
+      },
+      {
+        "entry": "10203024",
+        "native_name": "audio_board_init",
+        "body_bytes": 32,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_board.c"
+      },
+      {
+        "entry": "10203050",
+        "native_name": "dw_uart_get_dma_burst_size",
+        "body_bytes": 114,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/board_uart.c"
+      },
+      {
+        "entry": "1020324c",
+        "native_name": "dw_uart_putc",
+        "body_bytes": 20,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/board_uart.c"
+      },
+      {
+        "entry": "10203260",
+        "native_name": "dw_uart_getc",
+        "body_bytes": 22,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/board_uart.c"
+      },
+      {
+        "entry": "102033c8",
+        "native_name": "gx8002_uart_configure",
+        "body_bytes": 356,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_uart_configure.c"
+      },
+      {
+        "entry": "10203530",
+        "native_name": "gx8002_uart_initialize",
+        "body_bytes": 98,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_uart_initialize.c"
+      },
+      {
+        "entry": "102035b4",
+        "native_name": "gx8002_uart_putc",
+        "body_bytes": 30,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_console_output.c"
+      },
+      {
+        "entry": "10203630",
+        "native_name": "gx8002_uart_transmit_start",
+        "body_bytes": 48,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/channel_runtime.c"
+      },
+      {
+        "entry": "10203664",
+        "native_name": "gx8002_uart_transmit_stop",
+        "body_bytes": 34,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/channel_runtime.c"
+      },
+      {
+        "entry": "102037e0",
+        "native_name": "gx8002_console_initialize",
+        "body_bytes": 12,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_leaves.c"
+      },
+      {
+        "entry": "102037f0",
+        "native_name": "gx8002_console_putc",
+        "body_bytes": 14,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_console_output.c"
+      },
+      {
+        "entry": "10203804",
+        "native_name": "gx8002_dma_clear",
+        "body_bytes": 32,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_dma_leaves.c"
+      },
+      {
+        "entry": "10203a98",
+        "native_name": "gx8002_dma_deallocate",
+        "body_bytes": 62,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_dma_leaves.c"
+      },
+      {
+        "entry": "10203adc",
+        "native_name": "gx8002_dma_irq_handler",
+        "body_bytes": 82,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_dma_isr.c"
+      },
+      {
+        "entry": "10203bc0",
+        "native_name": "gx8002_dma_initialize",
+        "body_bytes": 118,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_dma_board.c"
+      },
+      {
+        "entry": "10203c40",
+        "native_name": "gx8002_cache_initialize",
+        "body_bytes": 26,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_leaves.c"
+      },
+      {
+        "entry": "10203c74",
+        "native_name": "gx_analog_config_update_enable",
+        "body_bytes": 14,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_board_init.c"
+      },
+      {
+        "entry": "10203c88",
+        "native_name": "_ain_reset",
+        "body_bytes": 314,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_ain_reset.c"
+      },
+      {
+        "entry": "10203dc8",
+        "native_name": "_pcm_channel_setting.isra.0",
+        "body_bytes": 78,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_pcm.c"
+      },
+      {
+        "entry": "10203e18",
+        "native_name": "gx8002_audio_input_sadc",
+        "body_bytes": 96,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_sadc.c"
+      },
+      {
+        "entry": "10203e7c",
+        "native_name": "gx8002_audio_input_pdm",
+        "body_bytes": 72,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_digital_inputs.c"
+      },
+      {
+        "entry": "10203ec8",
+        "native_name": "gx8002_audio_input_i2s",
+        "body_bytes": 162,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_digital_inputs.c"
+      },
+      {
+        "entry": "10203f70",
+        "native_name": "gx_audio_in_set_input_channel",
+        "body_bytes": 54,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_config_leaves.c"
+      },
+      {
+        "entry": "10203fa8",
+        "native_name": "gx8002_audio_output_pcm",
+        "body_bytes": 212,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_pcm.c"
+      },
+      {
+        "entry": "10204080",
+        "native_name": "gx8002_audio_output_logfbank",
+        "body_bytes": 166,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_logfbank.c"
+      },
+      {
+        "entry": "1020412c",
+        "native_name": "gx8002_audio_output_spectrum",
+        "body_bytes": 246,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_spectrum.c"
+      },
+      {
+        "entry": "10204228",
+        "native_name": "gx8002_audio_output_i2s",
+        "body_bytes": 168,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_i2s.c"
+      },
+      {
+        "entry": "102042d4",
+        "native_name": "gx8002_audio_pga_gain",
+        "body_bytes": 70,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_config_leaves.c"
+      },
+      {
+        "entry": "10204320",
+        "native_name": "gx_audio_in_set_i2s_clock",
+        "body_bytes": 16,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_register_leaves.c"
+      },
+      {
+        "entry": "10204330",
+        "native_name": "gx_audio_in_set_i2sin_mode",
+        "body_bytes": 16,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_register_leaves.c"
+      },
+      {
+        "entry": "10204340",
+        "native_name": "gx_audio_in_set_i2sout_mode",
+        "body_bytes": 16,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_modes.c"
+      },
+      {
+        "entry": "10204350",
+        "native_name": "gx_audio_in_set_dc_enable",
+        "body_bytes": 90,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_register_leaves.c"
+      },
+      {
+        "entry": "102043ac",
+        "native_name": "gx_audio_in_set_rough_gain",
+        "body_bytes": 80,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_register_leaves.c"
+      },
+      {
+        "entry": "102043fc",
+        "native_name": "gx_audio_in_set_evad_enable",
+        "body_bytes": 218,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_evad.c"
+      },
+      {
+        "entry": "102044e0",
+        "native_name": "gx_audio_in_set_evad_threshold",
+        "body_bytes": 68,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_evad.c"
+      },
+      {
+        "entry": "1020452c",
+        "native_name": "gx_audio_in_set_logfbank_enable",
+        "body_bytes": 66,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_output_modes.c"
+      },
+      {
+        "entry": "10204570",
+        "native_name": "gx_audio_in_set_fftvad_enable",
+        "body_bytes": 132,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_config_leaves.c"
+      },
+      {
+        "entry": "102045f4",
+        "native_name": "gx_audio_in_set_fftvad_w",
+        "body_bytes": 58,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "10204630",
+        "native_name": "gx_audio_in_set_fftvad_curve_1",
+        "body_bytes": 50,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "10204664",
+        "native_name": "gx_audio_in_set_fftvad_curve_2",
+        "body_bytes": 50,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "10204698",
+        "native_name": "gx_audio_in_set_fftvad_curve_3",
+        "body_bytes": 62,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "102046d8",
+        "native_name": "gx_audio_in_set_fftvad_curve_4",
+        "body_bytes": 50,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "1020470c",
+        "native_name": "gx_audio_in_set_fftvad_curve_5",
+        "body_bytes": 32,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "1020472c",
+        "native_name": "gx_audio_in_set_fftvad_chipping",
+        "body_bytes": 78,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "1020477c",
+        "native_name": "gx_audio_in_get_fftvad_state",
+        "body_bytes": 46,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "102047ac",
+        "native_name": "gx8002_distance_noise",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "102047b8",
+        "native_name": "gx_audio_in_set_interrupt_enable",
+        "body_bytes": 42,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_standby.c"
+      },
+      {
+        "entry": "102047e4",
+        "native_name": "gx8002_audio_initialize",
+        "body_bytes": 408,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_initialize.c"
+      },
+      {
+        "entry": "10204984",
+        "native_name": "gx_audio_in_exit",
+        "body_bytes": 42,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_exit.c"
+      },
+      {
+        "entry": "102055a8",
+        "native_name": "gx8002_snpu_device_init",
+        "body_bytes": 2,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_children.c"
+      },
+      {
+        "entry": "102055ac",
+        "native_name": "gx8002_snpu_device_exit",
+        "body_bytes": 2,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_children.c"
+      },
+      {
+        "entry": "102055b0",
+        "native_name": "gx8002_snpu_request_irq",
+        "body_bytes": 14,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_children.c"
+      },
+      {
+        "entry": "102055cc",
+        "native_name": "gx8002_reg_set_bit",
+        "body_bytes": 14,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_reset.c"
+      },
+      {
+        "entry": "102055dc",
+        "native_name": "gx8002_reg_clear_bit",
+        "body_bytes": 16,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_register_helpers.c"
+      },
+      {
+        "entry": "102055ec",
+        "native_name": "gx8002_reg_get_value",
+        "body_bytes": 4,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_register_helpers.c"
+      },
+      {
+        "entry": "102055f0",
+        "native_name": "gx8002_reg_set_value",
+        "body_bytes": 4,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_register_helpers.c"
+      },
+      {
+        "entry": "102055f4",
+        "native_name": "gx8002_npu_enable",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_submit_leaves.c"
+      },
+      {
+        "entry": "10205600",
+        "native_name": "gx8002_npu_disable",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_registers.c"
+      },
+      {
+        "entry": "1020560c",
+        "native_name": "gx8002_npu_is_enabled",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_registers.c"
+      },
+      {
+        "entry": "10205618",
+        "native_name": "gx8002_npu_set_clock_gate",
+        "body_bytes": 22,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_register_helpers.c"
+      },
+      {
+        "entry": "10205630",
+        "native_name": "gx8002_npu_set_idle_mode",
+        "body_bytes": 22,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_register_helpers.c"
+      },
+      {
+        "entry": "10205648",
+        "native_name": "gx8002_npu_set_idle_cycle",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_register_helpers.c"
+      },
+      {
+        "entry": "10205660",
+        "native_name": "gx8002_npu_set_overtime_thr",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_register_helpers.c"
+      },
+      {
+        "entry": "1020566c",
+        "native_name": "gx8002_npu_en_interrupt",
+        "body_bytes": 120,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_register_helpers.c"
+      },
+      {
+        "entry": "102056e4",
+        "native_name": "gx8002_npu_all_idle",
+        "body_bytes": 12,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_registers.c"
+      },
+      {
+        "entry": "10205768",
+        "native_name": "gx8002_npu_clr_interrupt",
+        "body_bytes": 120,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_register_helpers.c"
+      },
+      {
+        "entry": "10205860",
+        "native_name": "gx8002_npu_get_over_cmd_addr",
+        "body_bytes": 16,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_submit_leaves.c"
+      },
+      {
+        "entry": "10205880",
+        "native_name": "gx8002_npu_reset",
+        "body_bytes": 22,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_reset.c"
+      },
+      {
+        "entry": "10205898",
+        "native_name": "gx8002_npu_set_task_head",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_submit_leaves.c"
+      },
+      {
+        "entry": "102058d4",
+        "native_name": "gx8002_snpu_tcb_init",
+        "body_bytes": 114,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_children.c"
+      },
+      {
+        "entry": "10205950",
+        "native_name": "gx8002_npu_regs_init",
+        "body_bytes": 70,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_npu_registers_initialize.c"
+      },
+      {
+        "entry": "1020599c",
+        "native_name": "gx8002_snpu_resume_internal",
+        "body_bytes": 70,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_resume.c"
+      },
+      {
+        "entry": "102059e8",
+        "native_name": "gx8002_snpu_task_cmd_cache_flush",
+        "body_bytes": 22,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_submit_leaves.c"
+      },
+      {
+        "entry": "10205a00",
+        "native_name": "gx8002_snpu_submit_task",
+        "body_bytes": 138,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_submit.c"
+      },
+      {
+        "entry": "10205a90",
+        "native_name": "gx8002_snpu_suspend",
+        "body_bytes": 68,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_children.c"
+      },
+      {
+        "entry": "10205cf4",
+        "native_name": "gx8002_snpu_initialize",
+        "body_bytes": 64,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_lifecycle.c"
+      },
+      {
+        "entry": "10205d40",
+        "native_name": "gx_snpu_exit",
+        "body_bytes": 32,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_lifecycle.c"
+      },
+      {
+        "entry": "10205d60",
+        "native_name": "gx8002_snpu_run_task",
+        "body_bytes": 190,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_snpu_run_task.c"
+      },
+      {
+        "entry": "10205e28",
+        "native_name": "gx8002_snpu_get_state",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_power_suspend.c"
+      },
+      {
+        "entry": "10205e34",
+        "native_name": "gx_analog_set_pga_itrim",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_analog_registers.c"
+      },
+      {
+        "entry": "10205e50",
+        "native_name": "gx_analog_set_pga_bypass",
+        "body_bytes": 20,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_analog_registers.c"
+      },
+      {
+        "entry": "10205e68",
+        "native_name": "gx_analog_set_pga_enable",
+        "body_bytes": 20,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_analog_registers.c"
+      },
+      {
+        "entry": "10205e80",
+        "native_name": "gx_analog_set_adc_sample_clk_sel",
+        "body_bytes": 18,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_analog_registers.c"
+      },
+      {
+        "entry": "10205e98",
+        "native_name": "gx_analog_set_adc_out_at_clk",
+        "body_bytes": 20,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_analog_registers.c"
+      },
+      {
+        "entry": "10205eb0",
+        "native_name": "gx_analog_set_adc_in_sel",
+        "body_bytes": 20,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_analog_registers.c"
+      },
+      {
+        "entry": "10205ec8",
+        "native_name": "gx_analog_set_adc_rstn",
+        "body_bytes": 20,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_analog_registers.c"
+      },
+      {
+        "entry": "10205f24",
+        "native_name": "gx_gpio_set_direction",
+        "body_bytes": 100,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_padmux_gpio.c"
+      },
+      {
+        "entry": "10205f88",
+        "native_name": "gx_gpio_set_level",
+        "body_bytes": 44,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/callbacks.c"
+      },
+      {
+        "entry": "102060d0",
+        "native_name": "gx8002_gpio_initialize",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_leaves.c"
+      },
+      {
+        "entry": "102060e8",
+        "native_name": "gx8002_device_list_init",
+        "body_bytes": 14,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_leaves.c"
+      },
+      {
+        "entry": "1020658c",
+        "native_name": "padmux_get",
+        "body_bytes": 38,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_padmux_gpio.c"
+      },
+      {
+        "entry": "102065b8",
+        "native_name": "gx8002_padmux_check",
+        "body_bytes": 36,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_padmux_gpio.c"
+      },
+      {
+        "entry": "102065dc",
+        "native_name": "gx8002_padmux_set",
+        "body_bytes": 78,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_padmux_gpio.c"
+      },
+      {
+        "entry": "10206630",
+        "native_name": "gx8002_padmux_init",
+        "body_bytes": 76,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_padmux_gpio.c"
+      },
+      {
+        "entry": "10206680",
+        "native_name": "gx8002_rtc_isr",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_leaves.c"
+      },
+      {
+        "entry": "102066a0",
+        "native_name": "gx_rtc_start_tick",
+        "body_bytes": 12,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_leaves.c"
+      },
+      {
+        "entry": "102066b0",
+        "native_name": "gx8002_rtc_set_tick",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_leaves.c"
+      },
+      {
+        "entry": "102066bc",
+        "native_name": "gx8002_rtc_init",
+        "body_bytes": 58,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_leaves.c"
+      },
+      {
+        "entry": "10206704",
+        "native_name": "gx8002_watchdog_interrupt",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_watchdog.c"
+      },
+      {
+        "entry": "10206720",
+        "native_name": "gx8002_watchdog_initialize",
+        "body_bytes": 114,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_watchdog.c"
+      },
+      {
+        "entry": "102067a0",
+        "native_name": "gx8002_watchdog_ping",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_app_ticks.c"
+      },
+      {
+        "entry": "102067ac",
+        "native_name": "gx8002_watchdog_stop",
+        "body_bytes": 12,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_watchdog.c"
+      },
+      {
+        "entry": "102067b8",
+        "native_name": "gx8002_reboot",
+        "body_bytes": 36,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_watchdog.c"
+      },
+      {
+        "entry": "102067dc",
+        "native_name": "gx8002_board_pin_configure",
+        "body_bytes": 54,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_board_pin_configure.c"
+      },
+      {
+        "entry": "1020681c",
+        "native_name": "gx8002_board_pin_setup",
+        "body_bytes": 128,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_board_pin_setup.c"
+      },
+      {
+        "entry": "102068a0",
+        "native_name": "gx8002_board_pin_initialize",
+        "body_bytes": 90,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_dma_board.c"
+      },
+      {
+        "entry": "10206920",
+        "native_name": "ui2a",
+        "body_bytes": 118,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tinyprintf.c"
+      },
+      {
+        "entry": "10206998",
+        "native_name": "putf",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tinyprintf.c"
+      },
+      {
+        "entry": "102069b0",
+        "native_name": "putchw",
+        "body_bytes": 212,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tinyprintf.c"
+      },
+      {
+        "entry": "10206a84",
+        "native_name": "tfp_format",
+        "body_bytes": 416,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tinyprintf.c"
+      },
+      {
+        "entry": "10206c24",
+        "native_name": "gx8002_printf",
+        "body_bytes": 30,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_printf.c"
+      },
+      {
+        "entry": "10206c44",
+        "native_name": "gx8002_memmove",
+        "body_bytes": 42,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_memmove.c"
+      },
+      {
+        "entry": "10206c70",
+        "native_name": "gx8002_fputc",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tinyprintf.c"
+      },
+      {
+        "entry": "10206c7c",
+        "native_name": "gx8002_strncmp",
+        "body_bytes": 36,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_flash_otp_mode.c"
+      },
+      {
+        "entry": "10206ca0",
+        "native_name": "gx8002_stage2_strlen",
+        "body_bytes": 16,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_flash_otp_mode.c"
+      },
+      {
+        "entry": "10206cb0",
+        "native_name": "gx8002_kws_flash_load",
+        "body_bytes": 206,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_kws_flash_load.c"
+      },
+      {
+        "entry": "10206d90",
+        "native_name": "gx8002_kws_initialize",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_kws_lifecycle.c"
+      },
+      {
+        "entry": "10206dac",
+        "native_name": "LvpKwsDone",
+        "body_bytes": 14,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_kws_lifecycle.c"
+      },
+      {
+        "entry": "10206dc0",
+        "native_name": "gx8002_buffer_initialize",
+        "body_bytes": 152,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_buffer_initialize.c"
+      },
+      {
+        "entry": "10206e6c",
+        "native_name": "gx8002_mic_buffer_addr",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_buffer_queries.c"
+      },
+      {
+        "entry": "10206e78",
+        "native_name": "gx8002_mic_buffer_size",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_buffer_queries.c"
+      },
+      {
+        "entry": "10206e84",
+        "native_name": "gx8002_logfbank_buffer_addr",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_buffer_queries.c"
+      },
+      {
+        "entry": "10206e90",
+        "native_name": "gx8002_logfbank_buffer_size",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_buffer_queries.c"
+      },
+      {
+        "entry": "10206e9c",
+        "native_name": "gx8002_context_header",
+        "body_bytes": 4,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_context.c"
+      },
+      {
+        "entry": "10206ea4",
+        "native_name": "gx8002_feats_buffer",
+        "body_bytes": 4,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10206eac",
+        "native_name": "gx8002_logfbank_index",
+        "body_bytes": 28,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10206ec8",
+        "native_name": "gx8002_context_acquire",
+        "body_bytes": 58,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_context.c"
+      },
+      {
+        "entry": "10206f08",
+        "native_name": "gx8002_mic_frame",
+        "body_bytes": 70,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_context.c"
+      },
+      {
+        "entry": "10206f50",
+        "native_name": "gx8002_pcm_frames_per_context",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10206f5c",
+        "native_name": "gx8002_pcm_frame_size",
+        "body_bytes": 18,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_buffer_queries.c"
+      },
+      {
+        "entry": "10206f74",
+        "native_name": "gx8002_logfbank_frames_per_channel",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10206f80",
+        "native_name": "gx8002_context_gap",
+        "body_bytes": 4,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10206f84",
+        "native_name": "gx8002_context_count",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10206f90",
+        "native_name": "gx8002_mic_channel_count",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_buffer_queries.c"
+      },
+      {
+        "entry": "10206f9c",
+        "native_name": "LvpQueueInit",
+        "body_bytes": 20,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_mode_callbacks.c"
+      },
+      {
+        "entry": "10206fb0",
+        "native_name": "LvpQueueGet",
+        "body_bytes": 74,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_queue_get.c"
+      },
+      {
+        "entry": "10206ffc",
+        "native_name": "LvpQueueIsEmpty",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/queue_read.c"
+      },
+      {
+        "entry": "10207008",
+        "native_name": "LvpQueueIsFull",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/queue_full.c"
+      },
+      {
+        "entry": "10207024",
+        "native_name": "gx8002_audio_input_buffer_size",
+        "body_bytes": 38,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_buffer_queries.c"
+      },
+      {
+        "entry": "1020704c",
+        "native_name": "gx8002_audio_input_buffer_addr",
+        "body_bytes": 36,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_buffer_queries.c"
+      },
+      {
+        "entry": "10207070",
+        "native_name": "gx8002_audio_input_output",
+        "body_bytes": 450,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_output.c"
+      },
+      {
+        "entry": "10207234",
+        "native_name": "gx8002_audio_input_config",
+        "body_bytes": 350,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_config.c"
+      },
+      {
+        "entry": "10207394",
+        "native_name": "gx8002_audio_input_delayed_vad",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_context.c"
+      },
+      {
+        "entry": "102073a0",
+        "native_name": "gx8002_audio_input_update_read",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_leaves.c"
+      },
+      {
+        "entry": "102073bc",
+        "native_name": "gx8002_audio_input_init",
+        "body_bytes": 38,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_input.c"
+      },
+      {
+        "entry": "102073f8",
+        "native_name": "LvpAudioInDone",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_input.c"
+      },
+      {
+        "entry": "10207404",
+        "native_name": "gx8002_audio_input_query_vad",
+        "body_bytes": 432,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "102075c8",
+        "native_name": "gx8002_audio_input_env_noise",
+        "body_bytes": 118,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_vad.c"
+      },
+      {
+        "entry": "10207644",
+        "native_name": "gx8002_audio_input_suspend",
+        "body_bytes": 26,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_suspend.c"
+      },
+      {
+        "entry": "10207660",
+        "native_name": "gx8002_audio_input_standby_startup",
+        "body_bytes": 28,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_audio_standby.c"
+      },
+      {
+        "entry": "10207680",
+        "native_name": "gx8002_power_initialize",
+        "body_bytes": 54,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_power_initialize.c"
+      },
+      {
+        "entry": "102076c0",
+        "native_name": "gx8002_register_suspend",
+        "body_bytes": 82,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_register_power.c"
+      },
+      {
+        "entry": "10207718",
+        "native_name": "gx8002_register_resume",
+        "body_bytes": 82,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_register_power.c"
+      },
+      {
+        "entry": "102077a8",
+        "native_name": "gx8002_power_lock",
+        "body_bytes": 38,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/channel_runtime.c"
+      },
+      {
+        "entry": "102077f8",
+        "native_name": "gx8002_power_is_locked",
+        "body_bytes": 12,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_leaves.c"
+      },
+      {
+        "entry": "10207808",
+        "native_name": "gx8002_power_suspend",
+        "body_bytes": 142,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_power_suspend.c"
+      },
+      {
+        "entry": "102078a4",
+        "native_name": "gx8002_lvp_system_initialize",
+        "body_bytes": 354,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_system_initialize.c"
+      },
+      {
+        "entry": "10207adc",
+        "native_name": "gx8002_uart_message_start",
+        "body_bytes": 86,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/uart_message_start.c"
+      },
+      {
+        "entry": "10208334",
+        "native_name": "gx8002_uart_async_tick",
+        "body_bytes": 122,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_uart_async_tick.c"
+      },
+      {
+        "entry": "102083bc",
+        "native_name": "UartMessageAsyncSend",
+        "body_bytes": 156,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/request_send.c"
+      },
+      {
+        "entry": "102085a4",
+        "native_name": "LvpInitMode",
+        "body_bytes": 68,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_mode_initialize.c"
+      },
+      {
+        "entry": "102085f8",
+        "native_name": "LvpModeTick",
+        "body_bytes": 26,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_app_ticks.c"
+      },
+      {
+        "entry": "1020861c",
+        "native_name": "gx8002_idle_tick",
+        "body_bytes": 2,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_idle_leaves.c"
+      },
+      {
+        "entry": "10208620",
+        "native_name": "gx8002_idle_buffer_init",
+        "body_bytes": 4,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_idle_leaves.c"
+      },
+      {
+        "entry": "10208624",
+        "native_name": "gx8002_idle_done",
+        "body_bytes": 10,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_mode_callbacks.c"
+      },
+      {
+        "entry": "10208634",
+        "native_name": "gx8002_idle_init",
+        "body_bytes": 12,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_mode_callbacks.c"
+      },
+      {
+        "entry": "10208644",
+        "native_name": "gx8002_tws_buffer_init",
+        "body_bytes": 8,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_mode_callbacks.c"
+      },
+      {
+        "entry": "1020864c",
+        "native_name": "gx8002_tws_done",
+        "body_bytes": 28,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_mode_callbacks.c"
+      },
+      {
+        "entry": "10208670",
+        "native_name": "gx8002_tws_init",
+        "body_bytes": 86,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_mode_callbacks.c"
+      },
+      {
+        "entry": "10208880",
+        "native_name": "LvpPrintMaxKwsList",
+        "body_bytes": 90,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_print_max_kws.c"
+      },
+      {
+        "entry": "102088f8",
+        "native_name": "LvpDoMaxDecoder",
+        "body_bytes": 66,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_decoder.c"
+      },
+      {
+        "entry": "10208944",
+        "native_name": "LvpInitMaxKws",
+        "body_bytes": 22,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_max_kws_initialize.c"
+      },
+      {
+        "entry": "10208964",
+        "native_name": "KwsStrategyReset",
+        "body_bytes": 14,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_decoder.c"
+      },
+      {
+        "entry": "10208978",
+        "native_name": "KwsStrategyInit",
+        "body_bytes": 8,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_max_kws_initialize.c"
+      },
+      {
+        "entry": "10208a10",
+        "native_name": "gx8002_kws_strategy",
+        "body_bytes": 310,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_kws_strategy.c"
+      },
+      {
+        "entry": "10208b64",
+        "native_name": "gx8002_ctc_offset_clear",
+        "body_bytes": 2,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_ctc_offset_clear.c"
+      },
+      {
+        "entry": "10208bf4",
+        "native_name": "LvpModelGetCmdSize",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_model_sizes.c"
+      },
+      {
+        "entry": "10208bfc",
+        "native_name": "LvpModelGetWeightSize",
+        "body_bytes": 8,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_model_sizes.c"
+      },
+      {
+        "entry": "10208c04",
+        "native_name": "LvpModelGetOpsSize",
+        "body_bytes": 4,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_model_sizes.c"
+      },
+      {
+        "entry": "10208c08",
+        "native_name": "LvpModelGetDataSize",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_model_sizes.c"
+      },
+      {
+        "entry": "10208c10",
+        "native_name": "LvpModelGetTmpSize",
+        "body_bytes": 4,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_model_sizes.c"
+      },
+      {
+        "entry": "10208c14",
+        "native_name": "LvpSetSnpuTask",
+        "body_bytes": 14,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_kws_flash_load.c"
+      },
+      {
+        "entry": "10208c28",
+        "native_name": "LvpCTCModelInitSnpuTask",
+        "body_bytes": 52,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10208c68",
+        "native_name": "LvpCTCModelGetSnpuFeatsBuffer",
+        "body_bytes": 2,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10208c6c",
+        "native_name": "LvpCTCModelGetSnpuStateBuffer",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10208c74",
+        "native_name": "LvpCTCModelGetSnpuFeatsDim",
+        "body_bytes": 6,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_buffer_leaves.c"
+      },
+      {
+        "entry": "10208c7c",
+        "native_name": "gx8002_app_resume",
+        "body_bytes": 24,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_app_initialize.c"
+      },
+      {
+        "entry": "10208c98",
+        "native_name": "gx8002_watchdog_callback",
+        "body_bytes": 8,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_app_initialize.c"
+      },
+      {
+        "entry": "10208ca0",
+        "native_name": "gx8002_app_suspend",
+        "body_bytes": 28,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_app_initialize.c"
+      },
+      {
+        "entry": "10208cc0",
+        "native_name": "LvpTriggerAppEvent",
+        "body_bytes": 14,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_tws_leaves.c"
+      },
+      {
+        "entry": "10208cd4",
+        "native_name": "gx8002_app_initialize",
+        "body_bytes": 82,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_app_initialize.c"
+      },
+      {
+        "entry": "10208d48",
+        "native_name": "LvpAppEventTick",
+        "body_bytes": 70,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_app_ticks.c"
+      },
+      {
+        "entry": "102093dc",
+        "native_name": "gx8002_notification_stamp",
+        "body_bytes": 20,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/callbacks.c"
+      },
+      {
+        "entry": "102093f4",
+        "native_name": "gx8002_app_reply",
+        "body_bytes": 46,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/callbacks.c"
+      },
+      {
+        "entry": "1020975c",
+        "native_name": "gx8002_event_notify",
+        "body_bytes": 20,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/callbacks.c"
+      },
+      {
+        "entry": "10209770",
+        "native_name": "gx8002_i2s_ack",
+        "body_bytes": 38,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/callbacks.c"
+      },
+      {
+        "entry": "102099cc",
+        "native_name": "gx8002_memset",
+        "body_bytes": 160,
+        "candidate_source": "g2/components/gx8002/app_callback_candidate/resident_xip_memset.c"
+      }
+    ]
+  },
+  "image_b_sram": {
+    "raw_seed_labels": 288,
+    "explicit_candidate_bindings_in_this_crosswalk": 0,
+    "unreviewed_raw_labels": 288
+  },
+  "scope": "C candidate/source-address mapping only. No stock execution, complete code/data partition, or full-image linkage claim."
+}

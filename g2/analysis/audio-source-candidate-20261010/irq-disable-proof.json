@@ -1,0 +1,17 @@
+{
+  "name": "audio_irq_disable",
+  "original_entry": "0x57a48a",
+  "caller": "g2/components/audio/control_callbacks_offline/control.c",
+  "caller_abi": "void(int32_t); caller value originates from int16_t",
+  "source_sha256": "f13340bd9151d5167042f51e2f4d59615a78a5a683d500485374faab3086c9ea",
+  "object_sha256": "f2fadb1b590b55b0d42d85430f5b2b7689f2b4e5cadb20d460fd642679dc4ee8",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/irq_disable_provider.c": "f13340bd9151d5167042f51e2f4d59615a78a5a683d500485374faab3086c9ea",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "execution": "irq-disable-execution.json",
+  "fresh_cases": 38,
+  "limits": [
+    "Synthetic NVIC ICER memory; no physical interrupt state/delivery."
+  ]
+}

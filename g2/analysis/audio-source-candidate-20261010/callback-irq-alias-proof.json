@@ -1,0 +1,29 @@
+{
+  "original_entry": "0x473940",
+  "original_body_bytes": 8,
+  "original_body_hex": "eff3108072b67047",
+  "original_body_sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "caller": "g2/components/audio/platform_callbacks_offline/newer.c",
+  "caller_abi": "uint32_t(void)",
+  "source_abi": "uint32_t(void)",
+  "same_entry_object_offset": "0x0",
+  "source": "g2/components/audio/uart_power_composition_offline/power.c",
+  "source_sha256": "1df1d23b59fe8428b04ad5a4d57b2cab7074d82b037bf344b611a8aedc866127",
+  "alias_source_sha256": "297e6cd3d731a42b3e69f2bd58afb745ec819c30a0b8ef637ac6a083fbc8cdb9",
+  "included_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/callback_irq_alias.c": "297e6cd3d731a42b3e69f2bd58afb745ec819c30a0b8ef637ac6a083fbc8cdb9",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../uart_power_composition_offline/power.c": "1df1d23b59fe8428b04ad5a4d57b2cab7074d82b037bf344b611a8aedc866127",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../uart_power_composition_offline/../uart_group_power_offline/providers.h": "cb62ba617e0b63f4820ca5de75af6e28d275824fcfb304694a143e4bd06b421c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../uart_power_composition_offline/../../foundation/power_domain/power_domain.h": "a47aaa61e248c78bd52ec2bc8ee74a5f3504eacf4f290989251eda13207e8057"
+  },
+  "old_object_sha256": "92f26b6fc2cdb7ff672d2af247b5d55814a8ef47d7abfd0f454ec54984a43386",
+  "new_object_sha256": "3e13663bed8d21be24e93db61ed5b5716598e23833c0047f90ac36172bfba577",
+  "old_text_sha256": "c2fc4df18629cf18680d1cd36dbb8ce20319cfcd1a357b54fc8a4416d26ef533",
+  "new_text_sha256": "c2fc4df18629cf18680d1cd36dbb8ce20319cfcd1a357b54fc8a4416d26ef533",
+  "text_equal": true,
+  "original_entry_text_equal": true,
+  "instruction_contract": "mrs r0, PRIMASK; cpsid i; bx lr",
+  "limits": "Exact isolated function bytes at direct entry. Physical interrupt delivery and concurrent callbacks are not modeled."
+}

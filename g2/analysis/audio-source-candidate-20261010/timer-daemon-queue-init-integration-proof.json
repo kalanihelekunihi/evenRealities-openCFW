@@ -1,0 +1,49 @@
+{
+  "status": "PASS bounded",
+  "archive_sha256": "7617d4eb9207903468dcea21744a6950c709c7efdb289ee63750ff9516129a33",
+  "compiled_provider": {
+    "source": "g2/components/audio/source_candidate_20261010/timer_daemon_queue_init_provider.c",
+    "source_sha256": "8f65775c5501de0445816406cf83ff0a7edf76035e8bd4b29e1e447766bb7367",
+    "object_path": "/private/tmp/g2-audio-arm-inventory/196-source_candidate_20261010-timer_daemon_queue_init_provider.o",
+    "command": [
+      "clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/g2-audio-arm-inventory/196-source_candidate_20261010-timer_daemon_queue_init_provider.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/timer_daemon_queue_init_provider.c",
+      "-o",
+      "/private/tmp/g2-audio-arm-inventory/196-source_candidate_20261010-timer_daemon_queue_init_provider.o"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "object_sha256": "c2443cd3d8f334b3dc3ec7d3903793d8dd8e454d34703bb13dbd79b2d99016a5",
+    "dependency_sha256": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/timer_daemon_queue_init_provider.c": "8f65775c5501de0445816406cf83ff0a7edf76035e8bd4b29e1e447766bb7367",
+      "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+    }
+  },
+  "original_entry": "0x47eab8",
+  "original_body_bytes": 62,
+  "fresh_original_source_cases": 36,
+  "execution_receipt": "timer-daemon-queue-init-execution.json",
+  "lower_bindings": "stock_enter_critical = 0x4420d1; stock_exit_critical = 0x4420e9; vListInitialise = 0x45607d; xQueueGenericCreateStatic = 0x4415cb; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "caller_abi": "void(void); caller uses queue pointer after return",
+  "ram_literals": {
+    "queue_pointer": "0x20074ab0",
+    "active_list_pointer": "0x20074aa8",
+    "overflow_list_pointer": "0x20074aac",
+    "active_list": "0x20073d60",
+    "overflow_list": "0x20073d74",
+    "queue_storage": "0x2006d7b4",
+    "queue_control": "0x20072ee8"
+  },
+  "scope": "M4 source/public-stock comparison with actual original critical/list/static-queue callees. Compares call order, list/queue/storage bytes, pointer globals, critical depth/BASEPRI/SP for absent and existing queue. M55 archive compiled, composed archive object not executed; no daemon task/concurrency or live hardware."
+}

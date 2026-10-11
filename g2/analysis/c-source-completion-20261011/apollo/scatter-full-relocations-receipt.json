@@ -1,0 +1,230 @@
+{
+  "status": "PASS_BOUNDED",
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "ef43cc36e873b1398c84066959a11671244b25c6fd7944b5af3c6705713edbef",
+  "source_data_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+  "stock_data_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+  "initialized_bytes_compared": 1371,
+  "callback_relocations_compared": 34,
+  "normalized_bytes": 0,
+  "placed_callback_fragment": {
+    "start": "0x42a030",
+    "bytes": "704770477047",
+    "source_elf_sha256": "03c8c23672e06a143e63f8caade4f58e7ba18e8762159a41db44bfa0f943b699",
+    "native_entries": [
+      "0x42a031",
+      "0x42a033",
+      "0x42a035"
+    ]
+  },
+  "bindings": [
+    {
+      "offset": "0x158",
+      "symbol": "event_a_pcm22_transition_sequence_0",
+      "stock_pointer": "0x427e85",
+      "provider": "g2/components/bootloader/source_candidate_20261010/event_a_sequences_0_2.c"
+    },
+    {
+      "offset": "0x15c",
+      "symbol": "opencfw_spot_pcm22_transition1",
+      "stock_pointer": "0x428069",
+      "provider": "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence1.c"
+    },
+    {
+      "offset": "0x160",
+      "symbol": "event_a_pcm22_transition_sequence_2",
+      "stock_pointer": "0x428241",
+      "provider": "g2/components/bootloader/source_candidate_20261010/event_a_sequences_0_2.c"
+    },
+    {
+      "offset": "0x164",
+      "symbol": "opencfw_spot_pcm22_transition3",
+      "stock_pointer": "0x4283e3",
+      "provider": "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence3.c"
+    },
+    {
+      "offset": "0x168",
+      "symbol": "opencfw_spot_pcm22_transition4",
+      "stock_pointer": "0x428507",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/pcm22_remaining.c"
+    },
+    {
+      "offset": "0x16c",
+      "symbol": "opencfw_spot_pcm22_transition5",
+      "stock_pointer": "0x42863f",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_sequence5.c"
+    },
+    {
+      "offset": "0x170",
+      "symbol": "opencfw_spot_pcm22_transition6",
+      "stock_pointer": "0x428841",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm21_selector6/pcm22_sequence6.c"
+    },
+    {
+      "offset": "0x174",
+      "symbol": "opencfw_spot_pcm22_transition7",
+      "stock_pointer": "0x428921",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/pcm22_remaining.c"
+    },
+    {
+      "offset": "0x178",
+      "symbol": "event_a_transition_sequence_8_timer_native",
+      "stock_pointer": "0x428bb1",
+      "provider": "g2/components/bootloader/source_candidate_20261010/event_a_sequence8_timer.c"
+    },
+    {
+      "offset": "0x17c",
+      "symbol": "opencfw_spot_pcm22_transition9",
+      "stock_pointer": "0x428ca5",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/pcm22_sequence9.c"
+    },
+    {
+      "offset": "0x180",
+      "symbol": "opencfw_spot_pcm22_transition10",
+      "stock_pointer": "0x428d91",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/pcm22_sequence10.c"
+    },
+    {
+      "offset": "0x184",
+      "symbol": "opencfw_spot_pcm22_transition11",
+      "stock_pointer": "0x428e6b",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_hot_transitions.c"
+    },
+    {
+      "offset": "0x188",
+      "symbol": "opencfw_spot_pcm22_transition12",
+      "stock_pointer": "0x4290a3",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_hot_transitions.c"
+    },
+    {
+      "offset": "0x18c",
+      "symbol": "opencfw_spot_pcm22_transition13",
+      "stock_pointer": "0x4291ed",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/pcm22_sequence13.c"
+    },
+    {
+      "offset": "0x190",
+      "symbol": "opencfw_spot_pcm22_transition14",
+      "stock_pointer": "0x42944b",
+      "provider": "g2/components/bootloader/source_candidate_20261010/pcm22_transition14_18.c"
+    },
+    {
+      "offset": "0x194",
+      "symbol": "opencfw_spot_pcm22_transition15",
+      "stock_pointer": "0x429525",
+      "provider": "g2/components/bootloader/source_candidate_20261010/pcm22_transition15.c"
+    },
+    {
+      "offset": "0x198",
+      "symbol": "opencfw_spot_pcm22_transition16",
+      "stock_pointer": "0x42962d",
+      "provider": "g2/components/bootloader/source_candidate_20261010/pcm22_transition16.c"
+    },
+    {
+      "offset": "0x19c",
+      "symbol": "opencfw_spot_pcm22_transition17",
+      "stock_pointer": "0x429719",
+      "provider": "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence17.c"
+    },
+    {
+      "offset": "0x1a0",
+      "symbol": "opencfw_spot_pcm22_transition18",
+      "stock_pointer": "0x42984f",
+      "provider": "g2/components/bootloader/source_candidate_20261010/pcm22_transition14_18.c"
+    },
+    {
+      "offset": "0x1a4",
+      "symbol": "opencfw_spot_pcm22_transition19",
+      "stock_pointer": "0x429a31",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/pcm22_remaining.c"
+    },
+    {
+      "offset": "0x1a8",
+      "symbol": "opencfw_spot_pcm22_transition20",
+      "stock_pointer": "0x429b4d",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/pcm22_sequence20.c"
+    },
+    {
+      "offset": "0x1ac",
+      "symbol": "opencfw_spot_pcm22_transition21",
+      "stock_pointer": "0x429c47",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_hot_transitions.c"
+    },
+    {
+      "offset": "0x1b0",
+      "symbol": "opencfw_spot_pcm22_transition22",
+      "stock_pointer": "0x429e01",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/pcm22_sequence22.c"
+    },
+    {
+      "offset": "0x1b4",
+      "symbol": "opencfw_spot_pcm22_transition23",
+      "stock_pointer": "0x429f69",
+      "provider": "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/pcm22_sequence23.c"
+    },
+    {
+      "offset": "0x1b8",
+      "symbol": "event_a_transition_sequence_24",
+      "stock_pointer": "0x42a031",
+      "provider": "g2/components/bootloader/source_candidate_20261010/event_a_sequence24.c"
+    },
+    {
+      "offset": "0x1bc",
+      "symbol": "event_a_transition_sequence_25",
+      "stock_pointer": "0x42a033",
+      "provider": "g2/components/bootloader/source_candidate_20261010/event_a_sequence24.c"
+    },
+    {
+      "offset": "0x1c0",
+      "symbol": "event_a_transition_sequence_26",
+      "stock_pointer": "0x42a035",
+      "provider": "g2/components/bootloader/source_candidate_20261010/event_a_sequence24.c"
+    },
+    {
+      "offset": "0x200",
+      "symbol": "opencfw_boot_storage_read",
+      "stock_pointer": "0x430a9d",
+      "provider": "g2/components/bootloader/application_storage/storage_callback_veneers.S"
+    },
+    {
+      "offset": "0x204",
+      "symbol": "opencfw_boot_storage_program",
+      "stock_pointer": "0x430ac5",
+      "provider": "g2/components/bootloader/application_storage/storage_callback_veneers.S"
+    },
+    {
+      "offset": "0x208",
+      "symbol": "opencfw_boot_storage_erase_validate",
+      "stock_pointer": "0x430aed",
+      "provider": "g2/components/bootloader/application_storage/storage_callback_veneers.S"
+    },
+    {
+      "offset": "0x4cc",
+      "symbol": "opencfw_boot_dfu_thread_init",
+      "stock_pointer": "0x42ddaf",
+      "provider": "g2/components/bootloader/dfu_task/context.c"
+    },
+    {
+      "offset": "0x4d0",
+      "symbol": "opencfw_boot_dfu_thread_deinit_native",
+      "stock_pointer": "0x42dddb",
+      "provider": "g2/components/bootloader/source_candidate_20261010/thread_deinit.c"
+    },
+    {
+      "offset": "0x4f4",
+      "symbol": "opencfw_boot_main_callback",
+      "stock_pointer": "0x42e39d",
+      "provider": "g2/components/bootloader/main_callback/main_callback.c"
+    },
+    {
+      "offset": "0x4f8",
+      "symbol": "opencfw_boot_manager_thread_deinit",
+      "stock_pointer": "0x42e3cb",
+      "provider": "g2/components/bootloader/source_candidate_20261010/thread_deinit.c"
+    }
+  ],
+  "limits": [
+    "Bounded linker assigns selected provider symbols their authenticated stock addresses. This proves exact source-initialized data bytes under that placement, not final loadable source function placement or callback behavior.",
+    "The direct scatter adapter runs in a Cortex-M4 emulator; the selected firmware archive compiles for Cortex-M55 separately."
+  ]
+}

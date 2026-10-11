@@ -1,0 +1,41 @@
+{
+  "build_receipt": "g2/build/c-firmware/20261011/em-resume-round/receipt.json",
+  "build_receipt_sha256": "5a92b2beccca725ff100459b3f7d950e5c140d706557adc2eed086e2fb754a74",
+  "candidate_compilation_passed": true,
+  "inputs": [
+    {
+      "path": "g2/components/em9305/qpc_scheduler_candidate/resume.c",
+      "sha256": "7e510aebaf00bdcca15ff4d8a2449ca944cfbe9fec1880708772527c2f474a66"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/em9305/resume-hook-native.txt",
+      "sha256": "faae6c059d27ee1aeffb91ced2ff5ddf56edcf7e04522f3fe54b195b1e10f3be"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/em9305/framework-resume-native.txt",
+      "sha256": "1bd7558afe178b5aef9457e9a7c0487057109a679fb8f950950390dbd7658403"
+    }
+  ],
+  "authenticated_original_ranges": [
+    {
+      "start": "0x3110f4",
+      "end_exclusive": "0x31114c",
+      "sha256": "89542bf43e268d69a205340f917cb680faf5060f6ce8f2d3f0624832fb1b0e2f"
+    },
+    {
+      "start": "0x311218",
+      "end_exclusive": "0x311230",
+      "sha256": "79c59ee34198251f4fcbb0108ccc99c05a04e81029ea60e597c7333b997d5146"
+    }
+  ],
+  "defined_symbols": 18,
+  "unresolved_symbols": [
+    "opencfw_em9305_sleep_lower"
+  ],
+  "original_instruction_execution": false,
+  "full_source_complete": false,
+  "limits": [
+    "Native static correspondence and ARC compilation, no original execution or hardware proof.",
+    "Callback product signatures/initial state, producing IRQ configuration, sleep/ROM code and final record layout unresolved."
+  ]
+}

@@ -29,7 +29,8 @@ extern uint32_t opencfw_bl_post_finish(uint32_t context, uint32_t code);
 extern uint32_t opencfw_bl_post_record_initialized(uint32_t index);
 
 #define POST_TABLE ((volatile struct post_bringup_row *)0x20000454u)
-#define SPECIAL_REGISTER_ID (*(volatile const uint32_t *)0x43419cu)
+extern const uint32_t opencfw_boot_post_special_register_value;
+#define SPECIAL_REGISTER_ID opencfw_boot_post_special_register_value
 
 static int32_t signed_kind(uint32_t kind)
 {

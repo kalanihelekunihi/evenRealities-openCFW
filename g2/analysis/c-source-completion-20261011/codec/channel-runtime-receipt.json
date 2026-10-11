@@ -1,0 +1,48 @@
+{
+  "candidate_compilation_passed": true,
+  "build_receipt": "g2/build/c-firmware/20261011/codec-channel-runtime-round/receipt.json",
+  "build_receipt_sha256": "fba7165eb13cb3bba7668d4d2f5444c273baf5bd7c218f2edf1085585c435034",
+  "inputs": [
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584"
+    },
+    {
+      "path": "g2/components/gx8002/app_callback_candidate/channel_runtime.c",
+      "sha256": "51736eb29befcb96e30e3413476486b4dc42d1df597311ba7f235819a0ab6d7e"
+    },
+    {
+      "path": "g2/components/gx8002/app_callback_candidate/uart_message_start.c",
+      "sha256": "28018d703e505d2d738d7e9c36b5e36acc8e838deeaf99c3930d943f5f178a84"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/codec/channel-runtime-native.txt",
+      "sha256": "52f5ee4f0d63b9f3c5147a099c35d86b2a4f5134f6ee75c610eb31a1428505f8"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/codec/timer-start-native.txt",
+      "sha256": "ef8576c38251fe42c93b63868ea6cc9314be593e87feb620e7a6d0f327679830"
+    }
+  ],
+  "defined_symbols": 41,
+  "unresolved_symbols": [
+    "g2_codec_critical_restore",
+    "g2_codec_critical_save",
+    "g2_codec_header_sync",
+    "g2_codec_queue_enqueue",
+    "g2_codec_timestamp"
+  ],
+  "review": [
+    "Callback-set preserves null branch, 0x44/48/4c stores, critical call order and register bit1 set.",
+    "Stop clears callback/argument then bit1 under resident critical calls.",
+    "Timer-start uses actual hardware LSL mnemonic before allowed-bit read and signed less-than33 check.",
+    "All channel address arithmetic wraps32bits before pointer conversion."
+  ],
+  "original_instruction_execution": false,
+  "full_source_complete": false,
+  "limits": [
+    "Resident critical save/restore bodies remain unresolved.",
+    "Recovered fixed SRAM and MMIO storage require producing initialization and layout.",
+    "No hardware concurrency/timing or whole-image equality claim."
+  ]
+}

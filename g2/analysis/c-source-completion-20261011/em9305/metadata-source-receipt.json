@@ -1,0 +1,40 @@
+{
+  "status": "C_SOURCE_REDUCTION",
+  "native_architecture": "ARC EM",
+  "official_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+  "inspection_equals_record_3": true,
+  "native_range": [
+    "0x3125a4",
+    "0x3128e4"
+  ],
+  "source_hashes": {
+    "sleep_metadata": "318d611f6905f57692dc69b699bbb59db3d5b404c7de0f70d04802c18aab9ea0",
+    "sleep_metadata_prepare": "020a5ea482a5fc285006af8aea72dcc511f891495022fd645d4d95c7993dadfa",
+    "sleep_controller_branch": "a6b5be3e594014616a7659702821f47d7d06bc644784773f6d522148c10af736",
+    "sleep_mode_branch": "96cfbebd7fbb96446b780382cb6731c510c05da75bc49ad73970dd4a47191897",
+    "sleep_registered_callback": "20e74957c4bc63b455e99aa4ce19cfa9095c45a3baf0e5454834db73592662fc",
+    "sleep_registry": "d1e808a86dc0c80529fc1f8a33713f62d7866d0c689997af5efc41fdd85e6302",
+    "sleep_metadata_sync": "a74935082de5db889c9f61b2a67bf43d36a3a1bc004f397c34ec3c31bd5ff987",
+    "sleep_sync_query": "c9957c96df1efebcc40cb3c8b3f10a8bc2b537d1ec82d3cbf7f94979daf9e229",
+    "sleep_sync_restore": "dfe5202f0ba99663fd707611e8fb4976781abcf4d6a97acab09caa0b011b05c7",
+    "sleep_sync_update": "61592221cafddbc04d44ffbb3d0891351fd2c21e7597dddce20d33f0e919a562",
+    "sleep_sync_convert": "d9911339da7b9740b23771005a2362e8c72f1a2f28733143232f716594d89442",
+    "sleep_sync_divide": "3c21968a87db19e40aa021cfafd3dc4007b48d7dc16a81d62abfe2c963c24996",
+    "sleep_queries": "b4d1248f075e24575ce3dd1dd69b261c4e5c290ace0709db6e07543e4ebb9e2a",
+    "sleep_clock": "30114c8b34ac44cce277770e03b069f896f365957470d37607523e74d401e90a",
+    "sleep_controller_mode": "b76e3a3f7f314296d29a377e5b1aa9df714fb946c8c50e740a7448fd2d6c95d9",
+    "sleep_mode_ready": "ca5829cde4dbd41a4f37673b8873b95bb866387ecbbba5532ccf07128ef69339",
+    "sleep_slot_update": "1009d719493b365e2c23019db11f675d2900130493667e2a8650b669439cccb4",
+    "sleep_enter_mode": "299bce123f5f498e093baecb43e6f113c67918b3010738fa43ec2af7da7c6aef"
+  },
+  "runtime_equivalence": false,
+  "full_image_complete": false,
+  "remaining": "ROM/controller children, metadata sync and clock bodies, application/data/placement and producing ABI qualification remain open. Clock instruction 0x310910 emits opcode class ambiguity under native objdump and is not guessed.",
+  "compile_receipt": "g2/build/c-firmware/20261011/em-lock-callback-round/receipt.json",
+  "sync_native_range": [
+    "0x310990",
+    "0x310a4c"
+  ],
+  "sync_runtime_equivalence": false,
+  "wide_division_host_cases": 2112
+}

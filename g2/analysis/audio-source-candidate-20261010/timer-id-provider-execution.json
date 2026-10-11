@@ -1,0 +1,1661 @@
+{
+  "status": "PASS",
+  "fresh_cases": 50,
+  "nonnull_cases": 48,
+  "null_fatal_prefix_cases": 2,
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "cd6192c5b6cbe42054a69decd0c89042d687e66500b87edd229bb50f56b367ef",
+  "elf_sha256": "5602d9655a160903b9f96a114f4d492d727c2b99e268b5ba0a6e89f5893123e5",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "link_script": "stock_enter_critical = 0x4420d1; stock_exit_critical = 0x4420e9; audio_port_mask_set = 0x5fa0a5;\nSECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }\n",
+  "cases": [
+    {
+      "id": 0,
+      "critical_depth": 0,
+      "initial_basepri": 0,
+      "state": {
+        "result": 0,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 0,
+      "initial_basepri": 32,
+      "state": {
+        "result": 0,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 0,
+      "initial_basepri": 48,
+      "state": {
+        "result": 0,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 0,
+      "initial_basepri": 128,
+      "state": {
+        "result": 0,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 1,
+      "initial_basepri": 0,
+      "state": {
+        "result": 0,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 1,
+      "initial_basepri": 32,
+      "state": {
+        "result": 0,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 1,
+      "initial_basepri": 48,
+      "state": {
+        "result": 0,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 1,
+      "initial_basepri": 128,
+      "state": {
+        "result": 0,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 2,
+      "initial_basepri": 0,
+      "state": {
+        "result": 0,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 2,
+      "initial_basepri": 32,
+      "state": {
+        "result": 0,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 2,
+      "initial_basepri": 48,
+      "state": {
+        "result": 0,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 0,
+      "critical_depth": 2,
+      "initial_basepri": 128,
+      "state": {
+        "result": 0,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 0,
+      "initial_basepri": 0,
+      "state": {
+        "result": 1,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 0,
+      "initial_basepri": 32,
+      "state": {
+        "result": 1,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 0,
+      "initial_basepri": 48,
+      "state": {
+        "result": 1,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 0,
+      "initial_basepri": 128,
+      "state": {
+        "result": 1,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 1,
+      "initial_basepri": 0,
+      "state": {
+        "result": 1,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 1,
+      "initial_basepri": 32,
+      "state": {
+        "result": 1,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 1,
+      "initial_basepri": 48,
+      "state": {
+        "result": 1,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 1,
+      "initial_basepri": 128,
+      "state": {
+        "result": 1,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 2,
+      "initial_basepri": 0,
+      "state": {
+        "result": 1,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 2,
+      "initial_basepri": 32,
+      "state": {
+        "result": 1,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 2,
+      "initial_basepri": 48,
+      "state": {
+        "result": 1,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 1,
+      "critical_depth": 2,
+      "initial_basepri": 128,
+      "state": {
+        "result": 1,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a501000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 0,
+      "initial_basepri": 0,
+      "state": {
+        "result": 305419896,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 0,
+      "initial_basepri": 32,
+      "state": {
+        "result": 305419896,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 0,
+      "initial_basepri": 48,
+      "state": {
+        "result": 305419896,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 0,
+      "initial_basepri": 128,
+      "state": {
+        "result": 305419896,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 1,
+      "initial_basepri": 0,
+      "state": {
+        "result": 305419896,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 1,
+      "initial_basepri": 32,
+      "state": {
+        "result": 305419896,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 1,
+      "initial_basepri": 48,
+      "state": {
+        "result": 305419896,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 1,
+      "initial_basepri": 128,
+      "state": {
+        "result": 305419896,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 2,
+      "initial_basepri": 0,
+      "state": {
+        "result": 305419896,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 2,
+      "initial_basepri": 32,
+      "state": {
+        "result": 305419896,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 2,
+      "initial_basepri": 48,
+      "state": {
+        "result": 305419896,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 305419896,
+      "critical_depth": 2,
+      "initial_basepri": 128,
+      "state": {
+        "result": 305419896,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a578563412a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 0,
+      "initial_basepri": 0,
+      "state": {
+        "result": 4294967295,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 0,
+      "initial_basepri": 32,
+      "state": {
+        "result": 4294967295,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 0,
+      "initial_basepri": 48,
+      "state": {
+        "result": 4294967295,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 0,
+      "initial_basepri": 128,
+      "state": {
+        "result": 4294967295,
+        "nesting": 0,
+        "basepri": 0,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            0
+          ],
+          [
+            "basepri",
+            0
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 1,
+      "initial_basepri": 0,
+      "state": {
+        "result": 4294967295,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 1,
+      "initial_basepri": 32,
+      "state": {
+        "result": 4294967295,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 1,
+      "initial_basepri": 48,
+      "state": {
+        "result": 4294967295,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 1,
+      "initial_basepri": 128,
+      "state": {
+        "result": 4294967295,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            1
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 2,
+      "initial_basepri": 0,
+      "state": {
+        "result": 4294967295,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 2,
+      "initial_basepri": 32,
+      "state": {
+        "result": 4294967295,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 2,
+      "initial_basepri": 48,
+      "state": {
+        "result": 4294967295,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "id": 4294967295,
+      "critical_depth": 2,
+      "initial_basepri": 128,
+      "state": {
+        "result": 4294967295,
+        "nesting": 2,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5ffffffffa5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387008,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            3
+          ],
+          [
+            "write",
+            536883356,
+            4,
+            2
+          ]
+        ],
+        "end": [],
+        "pc": 1048832
+      }
+    },
+    {
+      "null": true,
+      "initial_basepri": 0,
+      "original": {
+        "result": null,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387000,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "invalid_write",
+            4294967295,
+            4,
+            0
+          ]
+        ],
+        "end": [
+          "invalid_write"
+        ],
+        "pc": 4713272
+      },
+      "source": {
+        "result": null,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387000,
+        "trace": [
+          [
+            "basepri",
+            48
+          ],
+          [
+            "invalid_write",
+            4294967295,
+            4,
+            0
+          ]
+        ],
+        "end": [
+          "invalid_write"
+        ],
+        "pc": 1048604
+      }
+    },
+    {
+      "null": true,
+      "initial_basepri": 48,
+      "original": {
+        "result": null,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387000,
+        "trace": [
+          [
+            "invalid_write",
+            4294967295,
+            4,
+            0
+          ]
+        ],
+        "end": [
+          "invalid_write"
+        ],
+        "pc": 4713272
+      },
+      "source": {
+        "result": null,
+        "nesting": 1,
+        "basepri": 48,
+        "timer_hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a500000000a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537387000,
+        "trace": [
+          [
+            "invalid_write",
+            4294967295,
+            4,
+            0
+          ]
+        ],
+        "end": [
+          "invalid_write"
+        ],
+        "pc": 1048604
+      }
+    }
+  ],
+  "limits": [
+    "Null comparison executes the original mask helper 0x5FA0A4 and compares the attempted invalid-address write, stopping on the unmapped-memory hook before fault delivery/endless loop.",
+    "Synthetic Cortex-M4 critical state; no live interrupt scheduling or physical timer lifetime."
+  ]
+}

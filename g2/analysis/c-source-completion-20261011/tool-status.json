@@ -1,0 +1,119 @@
+{
+  "ghidra": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"instances\": [], \"note\": \"No running Ghidra instances found.\"}"
+      }
+    ],
+    "isError": false
+  },
+  "rea": {
+    "open": false,
+    "providers": [
+      {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": null
+        },
+        "availability": "available",
+        "diagnostics": {
+          "install_dir": "/opt/homebrew/opt/ghidra/libexec",
+          "analyze_headless_path": "/opt/homebrew/opt/ghidra/libexec/support/analyzeHeadless",
+          "native_decompiler_path": "/opt/homebrew/opt/ghidra/libexec/Ghidra/Features/Decompiler/os/mac_arm_64/decompile",
+          "application_properties_path": "/opt/homebrew/opt/ghidra/libexec/Ghidra/application.properties",
+          "provider_version": "12.1.4",
+          "java_command": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home/bin/java",
+          "java_home": "/opt/homebrew/Cellar/openjdk@21/21.0.12.1/libexec/openjdk.jdk/Contents/Home",
+          "java_version": "21.0.12.1",
+          "platform": "darwin",
+          "architecture": "arm64",
+          "checks": [
+            {
+              "name": "configuration",
+              "ok": true,
+              "code": null,
+              "detail": "/opt/homebrew/opt/ghidra/libexec"
+            },
+            {
+              "name": "platform",
+              "ok": true,
+              "code": null,
+              "detail": "darwin"
+            },
+            {
+              "name": "architecture",
+              "ok": true,
+              "code": null,
+              "detail": "arm64"
+            },
+            {
+              "name": "installation",
+              "ok": true,
+              "code": null,
+              "detail": "/opt/homebrew/opt/ghidra/libexec/Ghidra/application.properties"
+            },
+            {
+              "name": "version",
+              "ok": true,
+              "code": null,
+              "detail": "12.1.4"
+            },
+            {
+              "name": "headless",
+              "ok": true,
+              "code": null,
+              "detail": "/opt/homebrew/opt/ghidra/libexec/support/analyzeHeadless"
+            },
+            {
+              "name": "native_decompiler",
+              "ok": true,
+              "code": null,
+              "detail": "/opt/homebrew/opt/ghidra/libexec/Ghidra/Features/Decompiler/os/mac_arm_64/decompile reports mach-o arm64, which matches darwin/arm64"
+            },
+            {
+              "name": "java",
+              "ok": true,
+              "code": null,
+              "detail": "21.0.12.1; 64-bit; JDK; /opt/homebrew/Cellar/openjdk@21/21.0.12.1/libexec/openjdk.jdk/Contents/Home; accepted a 64-bit full JDK 21 or newer"
+            }
+          ]
+        },
+        "selection": false
+      },
+      {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": null
+        },
+        "availability": "unavailable",
+        "diagnostics": {
+          "launcher_path": "/Applications/Hopper Disassembler.app/Contents/MacOS/hopper",
+          "platform": "darwin"
+        },
+        "selection": false
+      },
+      {
+        "provider": {
+          "id": "ida",
+          "name": "IDA Pro MCP adapter",
+          "version": "1"
+        },
+        "availability": "unavailable",
+        "diagnostics": {
+          "configured": false,
+          "live_connection_probed": false
+        },
+        "selection": false
+      }
+    ]
+  },
+  "latest_provider_check": {
+    "utc": "2026-10-11T06:06:44.795434+00:00",
+    "ghidra_mcp": "No running GUI instances",
+    "rea_list_documents": "target_unavailable: no app open",
+    "limits": "Live GUI connections absent. Installed headless Ghidra and authenticated native disassembly remain available; this is not an evidence exhaustion blocker."
+  }
+}

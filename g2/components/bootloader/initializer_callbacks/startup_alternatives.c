@@ -13,12 +13,13 @@ extern void opencfw_boot_startup_power_configure(uint32_t,uint32_t);
 extern void __attribute__((pcs("aapcs-vfp"))) opencfw_boot_startup_temperature(float *,float);
 extern void opencfw_boot_startup_clock_descriptor(const uint32_t *);
 extern uint32_t opencfw_boot_startup_clock_select(uint32_t,uint32_t,uint32_t);
+extern const uint32_t opencfw_boot_conditional_power_value;
 NI void opencfw_boot_startup_conditional(void){
  if(B(0x20027198)!=1)return;
  if(opencfw_boot_startup_shutdown_first())for(;;)__asm__ volatile("nop");
  if(opencfw_boot_startup_shutdown_second())for(;;)__asm__ volatile("nop");
  opencfw_boot_startup_external_mode(0);
- opencfw_boot_power_register_update(0x1c,W(0x434154));
+ opencfw_boot_power_register_update(0x1c,opencfw_boot_conditional_power_value);
  B(0x20027198)=0;
 }
 NI void opencfw_provider_41fa50(void){

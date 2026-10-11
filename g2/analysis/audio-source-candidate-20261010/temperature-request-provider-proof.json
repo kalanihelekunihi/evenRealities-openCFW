@@ -1,0 +1,33 @@
+{
+  "original_entry": "0x480028",
+  "original_abi": "R0 output pointer; S0 IEEE754 binary32 temperature",
+  "archive_abi": "R0 output pointer; R1 same IEEE754 bits through soft-float C caller",
+  "adapter_scope": "The selected archive callers and provider all use R1. Original callers require S0 and cannot link against this as a binary drop-in.",
+  "caller_sources": [
+    {
+      "source": "g2/components/audio/common_startup_offline/startup.c",
+      "source_sha256": "0b5dcfd3010c3642803b4c071165e73437fecfe00b3f6583ddccd1dbcfc6c921",
+      "object_sha256": "21de371c958b623d7c08a1fb7aa83b3474f7fc56b417623705254f1dfe40cb86"
+    },
+    {
+      "source": "g2/components/audio/pcm21_reset_offline/reset.c",
+      "source_sha256": "2926471480ffe48f842940d290ad0deb88694319f44d9b3ffb3212561cdf4620",
+      "object_sha256": "059ac64b26dddc9937e6e1be199fb37b1f0581f216ee49d17f441d5413e6f899"
+    }
+  ],
+  "provider_source": "g2/components/audio/source_candidate_20261010/temperature_request_provider.c",
+  "provider_source_sha256": "07dac1f80e218d975a590175cf3f6ea4c5568bd78113ce998d87c3d3ddcceee0",
+  "provider_object_sha256": "fef274ee44cfb0db0f84bc167dfc2dcd82e8ebfab17d608c094c8c799db5e108",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/temperature_request_provider.c": "07dac1f80e218d975a590175cf3f6ea4c5568bd78113ce998d87c3d3ddcceee0",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "archive_sha256": "aaa08d570b889d7c74f81c8e83fda3e7314720e02b54a28490d70fc90bb27610",
+  "fresh_original_source_cases": 144,
+  "oracle": "g2/analysis/audio-source-candidate-20261010/temperature-request-execution.json",
+  "limits": [
+    "Dispatch 0x480312 intercepted at exact ABI; selected dispatch source independently proven.",
+    "Nonnull output only; null fault prefix and physical temperature hardware not exercised.",
+    "Cortex-M55 archive text contains ARMv8-M CSET, unsupported by current Unicorn M4 oracle; equivalent M4 source build used."
+  ]
+}

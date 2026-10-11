@@ -11,12 +11,12 @@ extern int32_t opencfw_boot_fs_mutex_release(uint32_t handle);
 extern void *memset(void *destination,int value,size_t count);
 /* am/os mutex attributes: pinned name, flags0, supplied static80-byte buffer.
  * The name is source-owned at its stock address; no executable bytes retained. */
-__attribute__((section(".boot_service_mutex_attributes"),used))
-const uint32_t opencfw_boot_service_mutex_attributes[4]={0x433f50,0,0x20026cb0,80};
 __attribute__((section(".boot_service_mutex_name"),used))
 const char opencfw_boot_service_mutex_name[]="elogMutex";
+__attribute__((section(".boot_service_mutex_attributes"),used))
+const uint32_t opencfw_boot_service_mutex_attributes[4]={(uintptr_t)opencfw_boot_service_mutex_name,0,0x20026cb0,80};
 NI void opencfw_boot_service_mutex_initialize(void) {
-    if(!R(0x200270e8))R(0x200270e8)=opencfw_bl_mutex_create(0x433d28);
+    if(!R(0x200270e8))R(0x200270e8)=opencfw_bl_mutex_create((uintptr_t)opencfw_boot_service_mutex_attributes);
 }
 NI uint32_t opencfw_bl_service_guard(void) {
     opencfw_boot_service_mutex_initialize();return 0;

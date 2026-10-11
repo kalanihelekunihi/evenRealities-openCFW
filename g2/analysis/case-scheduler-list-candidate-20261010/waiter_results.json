@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "cases": 216,
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "9b365f7f05efc2dbc6f5b87ec8e959f5cfc0aeed57f51ecfdc817f56dbd0c0f0",
+  "domains": {
+    "suspended": [
+      0,
+      1,
+      2
+    ],
+    "task_priority": [
+      0,
+      1,
+      3,
+      4
+    ],
+    "current_priority": [
+      0,
+      1,
+      3
+    ],
+    "top_ready_priority_seed": [
+      0,
+      2,
+      4
+    ],
+    "yield_seed": [
+      0,
+      1
+    ]
+  },
+  "fatal_null_owner": "Both original and source disable IRQ and remain nonreturning at 100-instruction bound.",
+  "limits": [
+    "Coherent synthetic lists and TCBs; no production scheduler state.",
+    "Fatal paths have bounded stop assertions, not a return comparison.",
+    "No allocation/lifetime or interrupt scheduling proof."
+  ]
+}

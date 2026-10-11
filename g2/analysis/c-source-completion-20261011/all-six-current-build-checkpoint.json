@@ -1,0 +1,73 @@
+{
+  "captured_utc": "2026-10-11T12:36:24.013849+00:00",
+  "target_id": "official-s200-v2.2.6.10",
+  "target_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+  "complete_source_payloads": 0,
+  "limits": [
+    "No official payload bytes are consumed by this coordinator",
+    "Imports and data/layout ownership remain distinct source gates",
+    "Compilation does not establish stock equivalence or hardware operation"
+  ],
+  "receipt": "g2/build/c-firmware/20261011/test-dispatch-snpu-event-loop-round/receipt.json",
+  "images": {
+    "codec": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "full_payload_linked": false,
+      "selected_defined_count": 346,
+      "selected_unresolved_count": 6,
+      "optional_weak_reference_symbols": [],
+      "source_snapshot_coherent_at_link": true
+    },
+    "ble_em9305": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "full_payload_linked": false,
+      "selected_defined_count": 623,
+      "selected_unresolved_count": 77,
+      "optional_weak_reference_symbols": []
+    },
+    "touch": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "full_payload_linked": false,
+      "selected_defined_count": 229,
+      "selected_unresolved_count": 0,
+      "optional_weak_reference_symbols": [
+        "_ITM_deregisterTMCloneTable",
+        "_ITM_registerTMCloneTable",
+        "__deregister_frame_info",
+        "__register_frame_info"
+      ]
+    },
+    "case": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "full_payload_linked": false,
+      "selected_defined_count": 70,
+      "selected_unresolved_count": 3,
+      "optional_weak_reference_symbols": [],
+      "experimental_case": {
+        "path": "g2/build/c-firmware/20261011/test-dispatch-snpu-event-loop-round/case/experimental-case.elf",
+        "sha256": "9186f562086aa99e22ee72d18c2290d255e2bca28ae7056ff28d3b51d6aa6f09",
+        "validation": "Standalone experimental source ELF; stock layout and hardware operation unqualified"
+      }
+    },
+    "apollo_bootloader": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "full_payload_linked": false,
+      "selected_defined_count": 973,
+      "selected_unresolved_count": 3,
+      "optional_weak_reference_symbols": []
+    },
+    "apollo_main": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "full_payload_linked": false,
+      "selected_defined_count": 1455,
+      "selected_unresolved_count": 494,
+      "optional_weak_reference_symbols": []
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "python": "/private/tmp/iar-c-runtime-venv/bin/python",
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "gcc_version": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "command": [
+    "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-T",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/case-source-candidate-round2-20261010/build/behavior.ld",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/evidenced_providers.c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/case/event_flags_offline/events.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/case-source-candidate-round2-20261010/build/behavior.elf"
+  ],
+  "sources": [
+    {
+      "path": "g2/components/case/source_candidate_20261010/evidenced_providers.c",
+      "sha256": "b4a0da90513f4d95b8e81d331be5705d04a3d9740a45bbaa336d3b9ad919599f"
+    },
+    {
+      "path": "g2/components/case/event_flags_offline/events.c",
+      "sha256": "0a6495a5b69b1585b49a03f7360d3d8807c98032630328b395d55da5f8bec5ac"
+    }
+  ],
+  "link_script_sha256": "978e6ff1dd00eabd1dc80b56a33051382e2f55133ec03c3ccbd4faa90585d23c",
+  "elf": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/case-source-candidate-round2-20261010/build/behavior.elf",
+  "elf_sha256": "039865d92c826aab5ab21f0595753954d09a775612e1b0c8a6e63b92c4628335"
+}

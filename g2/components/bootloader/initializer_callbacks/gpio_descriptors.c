@@ -7,6 +7,7 @@ extern uint32_t opencfw_bl_critical_save(void);
 extern uint32_t opencfw_bl_power_register_update(uint32_t,uint32_t);
 extern uint32_t opencfw_bl_mode_register_update(uint32_t,uint32_t,uint32_t);
 extern void opencfw_boot_context_nvic_enable(uint32_t);
+extern const int16_t opencfw_boot_gpio_irqnums[4];
 static void restore(uint32_t token) { __asm__ volatile("msr primask, %0" :: "r"(token) : "memory"); }
 NI uint32_t opencfw_boot_gpio_mask_status(uint32_t channel,uint32_t enabled,uint32_t *mask) {
     uint32_t ch=(uint8_t)channel,en=(uint8_t)enabled;
@@ -73,9 +74,9 @@ NI uint32_t opencfw_bl_descriptor_register(const opencfw_boot_gpio_descriptor *t
                 (void)opencfw_boot_gpio_mask_clear(0,mask);
                 (void)opencfw_boot_gpio_callback_register(0,pin,rows[i].callback,0);
                 (void)opencfw_boot_gpio_interrupt_control(0,1,&pin);
-                uint32_t irq=(uint32_t)(int32_t)((const volatile int16_t *)(uintptr_t)0x43409cu)[rows[i].pin>>5];
+                uint32_t irq=(uint32_t)(int32_t)opencfw_boot_gpio_irqnums[rows[i].pin>>5];
                 opencfw_boot_gpio_priority(irq,4);
-                irq=(uint32_t)(int32_t)((const volatile int16_t *)(uintptr_t)0x43409cu)[rows[i].pin>>5];
+                irq=(uint32_t)(int32_t)opencfw_boot_gpio_irqnums[rows[i].pin>>5];
                 opencfw_boot_context_nvic_enable(irq);
             }
         } else if(rows[i].type==4) (void)opencfw_bl_power_register_update(rows[i].pin,3u);

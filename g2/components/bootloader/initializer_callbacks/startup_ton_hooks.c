@@ -8,6 +8,7 @@
 
 extern uint32_t opencfw_boot_ton_gate_write(uint32_t);
 extern void opencfw_boot_delay_us_math(uint32_t);
+extern const uint8_t opencfw_ton_trim_rows[3][3];
 
 uint32_t opencfw_boot_ton_trim_cache(void) {
     uint32_t revision = W(0x4002000c) & 0xffu;
@@ -47,8 +48,7 @@ uint32_t opencfw_boot_ton_trim_apply(uint32_t gpu_on, uint32_t gpu_mode) {
     if ((uint8_t)gpu_on != 0u)
         row = ((uint8_t)gpu_mode == 0u) ? 1u : 2u;
 
-    const volatile uint8_t *const cfg =
-        (const volatile uint8_t *)(uintptr_t)(0x433f20u + row * 3u);
+    const uint8_t *const cfg = opencfw_ton_trim_rows[row];
     uint32_t use_first = cfg[1] == 1u;
     uint32_t use_second = cfg[2] == 1u;
     W(0x40020340) |= 0x80000000u;

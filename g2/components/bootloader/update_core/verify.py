@@ -72,9 +72,14 @@ class Machine:
   self.finished=False;self.events=[];entry=(self.symbols['opencfw_boot_'+name]&~1) if self.source else ENTRIES[name]
   for reg,value in zip([a.UC_ARM_REG_R0,a.UC_ARM_REG_R1,a.UC_ARM_REG_R2,a.UC_ARM_REG_R3],args+[0]*4):self.cpu.reg_write(reg,value)
   self.cpu.reg_write(a.UC_ARM_REG_SP,SP);self.cpu.reg_write(a.UC_ARM_REG_LR,STOP|1);self.cpu.emu_start(entry|1,STOP+2,count=2000000);assert self.finished,(name,'execution budget')
-  return {'return':self.cpu.reg_read(a.UC_ARM_REG_R0),'events':self.events,'handle':self.u(HANDLE),'crc_buffer_sha':hashlib.sha256(self.cpu.mem_read(0x2001fdf0,4096)).hexdigest(),'program_buffer_sha':hashlib.sha256(self.cpu.mem_read(0x2001ede0,4096)).hexdigest(),'flash_sha':hashlib.sha256(self.cpu.mem_read(FLASH,0x20000)).hexdigest()}
+  result={'return':self.cpu.reg_read(a.UC_ARM_REG_R0),'events':self.events,'handle':self.u(HANDLE),'crc_buffer_sha':hashlib.sha256(self.cpu.mem_read(0x2001fdf0,4096)).hexdigest(),'program_buffer_sha':hashlib.sha256(self.cpu.mem_read(0x2001ede0,4096)).hexdigest(),'flash_sha':hashlib.sha256(self.cpu.mem_read(FLASH,0x20000)).hexdigest()}
+  if name=='stream_mode':
+   pointer=result.pop('return')
+   raw=bytes(self.cpu.mem_read(pointer,3))
+   result['mode_string']=raw.split(b'\0',1)[0].decode('ascii')
+  return result
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--elf',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);args=ap.parse_args();assert sha(BLOB)==SHA;_,segments,symbols=elf.elf_info(args.elf);trace={};cases=[]
+ ap=argparse.ArgumentParser();ap.add_argument('--elf',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--only-stream-mode',action='store_true');args=ap.parse_args();assert sha(BLOB)==SHA;_,segments,symbols=elf.elf_info(args.elf);trace={};cases=[]
  def pair():return [Machine(),Machine(True,segments,symbols)]
  def check(name,ms,params,extra=None):
   try: results=[m.run(name,params) for m in ms]
@@ -87,6 +92,9 @@ def main():
  # on uninitialized allocator/scheduler state.
  ms=pair()
  for flags in list(range(4096))+[0x80000000,0xffffffff,0x10000000]:check('stream_mode',ms,[flags])
+ if args.only_stream_mode:
+  result={'status':'PASS_BOUNDED_MODE','cases':len(cases),'original_sha256':SHA,'elf_sha256':sha(args.elf),'original_trace':trace,'comparisons':cases,'limits':['Compares the pointed-to mode string content after source relocation; pointer addresses are intentionally different.','No filesystem use or hardware execution is qualified.']}
+  args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({'status':result['status'],'cases':result['cases']}));return
  rng=random.Random(20261006)
  for size in [0,1,2,3,4,7,31,32,255,4096]:
   data=rng.randbytes(size)

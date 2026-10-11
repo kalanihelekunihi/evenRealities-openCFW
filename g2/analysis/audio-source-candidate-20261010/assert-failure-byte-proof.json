@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "verified_complete_function_bodies": 3,
+  "body_bytes_per_function": 10,
+  "functions": [
+    {
+      "name": "audio_queue_bad_argument",
+      "original_entry": "0x441800",
+      "object_text_offset": "0x0",
+      "original_bytes": "00205ff0ff310860fee7",
+      "compiled_bytes": "00205ff0ff310860fee7",
+      "original_sha256": "dc2368506c6622bc0b638118aa562b3e643e9087045f6b14ff908b9d20702b95",
+      "compiled_sha256": "dc2368506c6622bc0b638118aa562b3e643e9087045f6b14ff908b9d20702b95"
+    },
+    {
+      "name": "opencfw_event_group_assert_failure",
+      "original_entry": "0x45537e",
+      "object_text_offset": "0xc",
+      "original_bytes": "00205ff0ff310860fee7",
+      "compiled_bytes": "00205ff0ff310860fee7",
+      "original_sha256": "dc2368506c6622bc0b638118aa562b3e643e9087045f6b14ff908b9d20702b95",
+      "compiled_sha256": "dc2368506c6622bc0b638118aa562b3e643e9087045f6b14ff908b9d20702b95"
+    },
+    {
+      "name": "stock_bad_critical_exit",
+      "original_entry": "0x4420f6",
+      "object_text_offset": "0x18",
+      "original_bytes": "00205ff0ff310860fee7",
+      "compiled_bytes": "00205ff0ff310860fee7",
+      "original_sha256": "dc2368506c6622bc0b638118aa562b3e643e9087045f6b14ff908b9d20702b95",
+      "compiled_sha256": "dc2368506c6622bc0b638118aa562b3e643e9087045f6b14ff908b9d20702b95"
+    }
+  ],
+  "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "c8322f4c020007ccd4034bae8ad6d490f0de2a03e1f15eb8c7859eabb3672a0d",
+  "object_sha256": "8717b07d3be67198f5508f5148e2c444514283b247861ad9578ac700f16ad556",
+  "dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/assert_failure_providers.c": "c8322f4c020007ccd4034bae8ad6d490f0de2a03e1f15eb8c7859eabb3672a0d"
+  },
+  "compile_command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-O2",
+    "-MD",
+    "-MF",
+    "/private/tmp/g2-audio-arm-inventory/173-source_candidate_20261010-assert_failure_providers.d",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/assert_failure_providers.c",
+    "-o",
+    "/private/tmp/g2-audio-arm-inventory/173-source_candidate_20261010-assert_failure_providers.o"
+  ],
+  "archive_sha256": "c12643aa2a71822fc3a14adea77eae72bd1e55d58607b14fb8f1497057a05fcf",
+  "caller_abi": "All three C caller declarations are void(void) noreturn; original bodies ignore incoming arguments.",
+  "limit": "Exact direct-entry instruction text. Exception delivery, fault handler, and live device not executed."
+}

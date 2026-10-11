@@ -1,0 +1,24 @@
+{
+  "build_receipt": "g2/build/c-firmware/20261011/em-sleep-outer-round/receipt.json",
+  "build_receipt_sha256": "0da1e972624818688aeb11a73bdf2250a408133fcea54c441bd47d3183d8ead8",
+  "candidate_compilation_passed": true,
+  "inputs": [
+    {
+      "path": "g2/components/em9305/qpc_scheduler_candidate/sleep_outer.c",
+      "sha256": "ad3a2b33b1a237700eefce94aa105adef2693535462392fec4f057b046a8dfe0"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/em9305/sleep-native.txt",
+      "sha256": "f32afead02c1edc73082fb70e25a5b6fd35fb90db0be4bd268f9cb727586fc15"
+    }
+  ],
+  "original_instruction_execution": false,
+  "full_source_complete": false,
+  "scope": "Outer sleep paths and readiness/hardware-sleep branch. Complex controller-state branch remains genuine synthetic child contract.",
+  "limits": [
+    "Actual ROM/query child producing ABIs remain requirements, not proved compiler calls.",
+    "Hardware sleep and IRQ behavior not executed.",
+    "Explicit controller-state helper is not implemented; this does not close full sleep body.",
+    "All controller/reset/product record source/layout remains incomplete."
+  ]
+}

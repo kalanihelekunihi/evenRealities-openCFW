@@ -1,0 +1,7 @@
+# SMP extended-log format contract
+
+The smpSmExecute caller passes exactly two authenticated format literals to the extended logger: `"SMP Exe: evt=%s st=%s"` at `0x77bf14` and `"smpSmExecute event=%d state=%d"` at `0x765710`. `smp_format.c` defines the observable `0x44b76c` formatting contract for these two strings and their two-word argument layout. It is deliberately bounded to those format addresses and does not claim general `printf` semantics.
+
+The fixed main image is official G2 2.2.6.10 OTA stripped 32 bytes, mapped at `0x438000`, SHA-256 `19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701`. The validator confirms both literal bytes in the image, compiles M55 and M4 source with warnings as errors, and executes **801** stock `0x44b76c` versus source Unicorn comparisons. Cases include nine capacities from zero to 1024, 25 string pairs including empty and long values, and 64 integer pairs including signed extremes. Return count, full 2,048-byte destination window, and restored stack match.
+
+The 22-unit main source archive includes this bounded formatter and builds with the same four direct unresolved FlashDB symbols. The complete 1,026-byte extended logger body remains open: source for its accepted prefix has not yet been composed and compared across all branch masks, and this formatter covers only SMP's two literals. Actual logger RAM initialization, fatal callback target, and transport effects remain external boundaries. Direct SMP body tally stays **10/11**.

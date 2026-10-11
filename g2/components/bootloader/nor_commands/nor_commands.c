@@ -11,7 +11,8 @@
 #define OPENCFW_READ_DEVICE_CONFIG UINT32_C(0x2000020c)
 #define OPENCFW_NOR_ADDRESS_LIMIT UINT32_C(0x02000000)
 #define OPENCFW_TRANSFER_TIMEOUT_USEC UINT32_C(1000000)
-#define OPENCFW_TRANSFER_ERROR_MODULE UINT32_C(0x00431468)
+extern const char opencfw_nor_write_transfer_format[];
+#define OPENCFW_TRANSFER_ERROR_MODULE ((uintptr_t)opencfw_nor_write_transfer_format)
 
 enum {
     OPENCFW_STATUS_INVALID_HANDLE = 2,

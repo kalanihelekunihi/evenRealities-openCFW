@@ -1,0 +1,54 @@
+{
+  "captured_utc": "2026-10-11T00:24:01.667645+00:00",
+  "status": "ATTRIBUTABLE_ASSEMBLY_SOURCE_FOUND_C_MISMATCH_EXPLAINED",
+  "files": {
+    "pinned_C": {
+      "path": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/SupportFunctions/csky_copy_q15.c",
+      "sha256": "ab6342d4ac41056800860fa9226e456d1363448183d7168d82cb416354d1da04"
+    },
+    "pinned_assembly": {
+      "path": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/SupportFunctions/csky_copy_q15.S",
+      "sha256": "01416447bad20221064f16598b88336a34ffbc3173e3727ed1f022d813ec42f9"
+    },
+    "dsp_makefile": {
+      "path": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Makefile",
+      "sha256": "85b50e47f227b23501754c674a3af2ec1e2f7ad7e600a9ea2902923d36747b1b"
+    },
+    "prior_C_comparison": {
+      "path": "g2/analysis/nationalchip-dsp-c-compiler-successor-20261009T195245Z/comparison-summary.json",
+      "sha256": "cea1e0b14ab776a155e069098e00e110642349395fde43c3d356e754f817c42a"
+    },
+    "prior_assembly_receipt": {
+      "path": "g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/assembly-results.json",
+      "sha256": "6de0a20304039e273e7f479557cd61da90fa69b220067d2ff67519cae08654cc"
+    },
+    "board_config": {
+      "path": "third-party/upstream/nationalchip-lvp-kws/boards/nationalchip/grus_gx8002b_dev_1v/include/board_config.h",
+      "sha256": "1991dc2ef6f75fbf490a25cccd600e4be4ae00b577fde8323c58c153c7019783"
+    },
+    "alternate_board_config": {
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/boards/nationalchip/grus_gx8002b_dev_1v/include/board_config.h",
+      "sha256": "c905aa9257d0b98651363b8993f0a0a80ade41f40d5b8243a3ab691c6fb47ee0"
+    },
+    "stock_codec": {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+    }
+  },
+  "search_scope": [
+    "pinned NationalChip lvp_kws source and git history for csky_copy_q15",
+    "retained nationalchip-lvp-aiot acquisition for same unit and GX8002B board config",
+    "existing GCC6.3 C comparison and exact-assembly receipt",
+    "symbol ledger for codec address attribution"
+  ],
+  "result": {
+    "C_compiled_bytes": 84,
+    "stock_bytes": 44,
+    "C_exact": false,
+    "SDK_makefile_C_line": 263,
+    "SDK_makefile_assembly_line": 340,
+    "new_C_source_version_found": false,
+    "product_config_found": false,
+    "new_source_admitted": false
+  }
+}

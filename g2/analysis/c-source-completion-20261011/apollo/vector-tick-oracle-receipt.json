@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "31c6f9b86b8ab1b084d6adbdc6c85d6ec60e5988443d4bfb211f52f0272e0d0c",
+  "cases": [
+    {
+      "initial_basepri": 0,
+      "tick_result": 0
+    },
+    {
+      "initial_basepri": 0,
+      "tick_result": 1
+    },
+    {
+      "initial_basepri": 16,
+      "tick_result": 0
+    },
+    {
+      "initial_basepri": 16,
+      "tick_result": 1
+    },
+    {
+      "initial_basepri": 48,
+      "tick_result": 0
+    },
+    {
+      "initial_basepri": 48,
+      "tick_result": 1
+    }
+  ],
+  "stock_entry_bytes_visited": 26,
+  "limits": [
+    "Runs source Cortex-M33 recompilation and locked stock under Unicorn, not selected M55 object.",
+    "Stock BASEPRI save/restore helpers and source MRS/MSR instructions are controlled because Unicorn rejects this M-profile instruction path; this compares outer entry behavior only.",
+    "Tick increment child is controlled; scheduler state changes and hardware interrupt delivery are outside scope."
+  ]
+}

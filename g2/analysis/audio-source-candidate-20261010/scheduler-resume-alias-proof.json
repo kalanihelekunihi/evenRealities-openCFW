@@ -1,0 +1,41 @@
+{
+  "original_entry": "0x454dcc",
+  "original_end_exclusive": "0x454efe",
+  "original_body_bytes": 306,
+  "original_body_sha256": "548e05e1f8a2f498372dd1f4eb7c6536e093dbbfdb82fbe8f9b54231cedc8a09",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "callers": [
+    "g2/components/audio/queue_cmsis_offline/queue.c",
+    "g2/components/audio/timer_daemon_order_offline/daemon.c",
+    "g2/components/audio/cmsis_memory_pool_offline/heap.c"
+  ],
+  "caller_abi": "32-bit BaseType_t(void), return optionally ignored",
+  "source_abi": "int32_t(void)",
+  "same_object_offset": "0x0",
+  "old_source_sha256": "6347104574e63896120a6b490a417390ef6773aa60c5e34c9d640c42df58b9eb",
+  "alias_source_sha256": "daba0fdce5a405a3c585992cdf15e1288dce7453298a7912fb26e5f2c3d72d8c",
+  "included_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/scheduler_resume_alias.c": "daba0fdce5a405a3c585992cdf15e1288dce7453298a7912fb26e5f2c3d72d8c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../resume_ticks_offline/resume.c": "6347104574e63896120a6b490a417390ef6773aa60c5e34c9d640c42df58b9eb",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../resume_ticks_offline/../notification_wake_offline/wake.h": "34ffd5555001498cc6e9dd0b51b4d6f93687001e6314d4a65640575d954b22ac",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+  },
+  "old_object_sha256": "f9ccce0dc93b19f078744ff9335afaa4b6e61385b4087528258688b68652b098",
+  "new_object_sha256": "771f7f1e71fa4283ef164a69f2829f9f82ccf3e86c7411dec35c2394a4249b8e",
+  "old_text_sha256": "3d75c61560c43afaa4aef51fdfba5fa800a0114fb6dfd0dd9924828e4247bcc0",
+  "new_text_sha256": "3d75c61560c43afaa4aef51fdfba5fa800a0114fb6dfd0dd9924828e4247bcc0",
+  "text_equal": true,
+  "prior_suite": "g2/analysis/audio-resume-ticks-closure-2026-10-08/results.json",
+  "prior_suite_status": "PASS",
+  "prior_suite_resume_cases": 432,
+  "fresh_stock_source_cases": 0,
+  "limits": "Prior original/source suite covers coherent positive suspend count, pending-ready lists and pending-tick replay. No live task switch, exception handover, corrupt list, or zero-depth critical exit."
+}

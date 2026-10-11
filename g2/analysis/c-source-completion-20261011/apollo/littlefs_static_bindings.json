@@ -1,0 +1,197 @@
+{
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "selected_source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+  "binding_scope": "Algorithm, argument layout, distinctive control flow, and pinned upstream source identify candidate static bodies. These are attribution leads, not whole-function stock/source equivalence receipts.",
+  "bindings": [
+    {
+      "entry": "0x00410544",
+      "symbol": "lfs_bd_read",
+      "basis": "Eight-argument cache/block/off/buffer/size shape; alignment, cache and backend read branches."
+    },
+    {
+      "entry": "0x00410802",
+      "symbol": "lfs_bd_flush",
+      "basis": "Four-argument cache flush, invalid-block bypass, aligned backend program, optional cache-drop/readback compare, corrupt result and cache-zero sequence match pinned LittleFS source."
+    },
+    {
+      "entry": "0x0041090c",
+      "symbol": "lfs_bd_prog",
+      "basis": "Eight-argument lfs/pcache/rcache/validate/block/off/buffer/size shape; cache alignment, copy, full-cache flush and backend program branches match pinned LittleFS source."
+    },
+    {
+      "entry": "0x004110f8",
+      "symbol": "lfs_dir_getread",
+      "basis": "Ten-argument lfs/dir/pcache/rcache/hint/gmask/gtag/off/buffer/size shape; inline pcache and rcache precedence, read alignment and lfs_dir_getslice child match pinned LittleFS source."
+    },
+    {
+      "entry": "0x00410e8e",
+      "symbol": "lfs_alloc",
+      "basis": "Lookahead start/next/size scan with bitmap bit tests, block modulo and rescan child matches pinned LittleFS allocation body."
+    },
+    {
+      "entry": "0x00410f42",
+      "symbol": "lfs_dir_getslice",
+      "basis": "Seven-argument gmask/gtag/goff/buffer/size shape; synthetic move tag and reverse directory scan."
+    },
+    {
+      "entry": "0x004112b4",
+      "symbol": "lfs_dir_traverse",
+      "basis": "Thirteen-argument tag traversal with bounded recursive stack, tag filtering and callback."
+    },
+    {
+      "entry": "0x00411670",
+      "symbol": "lfs_dir_fetchmatch",
+      "basis": "Eight-argument pair/fmask/ftag/id/callback shape and metadata CRC/tag scan."
+    },
+    {
+      "entry": "0x00411caa",
+      "symbol": "lfs_dir_find",
+      "basis": "Four-argument path pointer and id; root-pair initialization and empty path rejection."
+    },
+    {
+      "entry": "0x00411f52",
+      "symbol": "lfs_dir_commitcrc",
+      "basis": "Two-argument commit pointer; five-word CRC alignment and 0x3fe chunk cap."
+    },
+    {
+      "entry": "0x004122d2",
+      "symbol": "lfs_dir_compact",
+      "basis": "Seven-argument attrs/source/begin/end compact body and commit loop."
+    },
+    {
+      "entry": "0x004125a8",
+      "symbol": "lfs_dir_splittingcompact",
+      "basis": "Seven-argument split compact body, span halving and compact child."
+    },
+    {
+      "entry": "0x00412784",
+      "symbol": "lfs_dir_relocatingcommit",
+      "basis": "Six-argument pair/attrs/count/pdir relocation state and compact/split children."
+    },
+    {
+      "entry": "0x00412b80",
+      "symbol": "lfs_dir_orphaningcommit",
+      "basis": "Four-argument attrs/count; orphan relocation and commit children."
+    },
+    {
+      "entry": "0x00412fae",
+      "symbol": "lfs_mkdir_",
+      "basis": "Two-argument path; find, allocate, parent commit and directory metadata construction."
+    },
+    {
+      "entry": "0x00413322",
+      "symbol": "lfs_ctz_extend",
+      "basis": "Seven-argument caches/head/size/output shape; allocate/erase/CTZ extension loop."
+    },
+    {
+      "entry": "0x004134c4",
+      "symbol": "lfs_ctz_traverse",
+      "basis": "Seven-argument CTZ head/size/callback/data shape; index count from lfs_ctz_index, callback on head and fetched little-endian parent blocks, then decrement by pointer-word count match pinned LittleFS source."
+    },
+    {
+      "entry": "0x0041385e",
+      "symbol": "lfs_file_relocate",
+      "basis": "Two-argument file relocation loop allocates and erases a new block, copies file bytes, then moves cache and block state; matches pinned LittleFS source."
+    },
+    {
+      "entry": "0x004139a4",
+      "symbol": "lfs_file_flush",
+      "basis": "Two-argument file flush clears reading, copies trailing data, flushes program cache with corrupt-block relocation, then updates CTZ and flags; matches pinned LittleFS source."
+    },
+    {
+      "entry": "0x00413ac4",
+      "symbol": "lfs_file_sync_",
+      "basis": "Two-argument sync checks errored/dirty flags, flushes file, syncs block and commits inline or CTZ metadata; matches pinned LittleFS source."
+    },
+    {
+      "entry": "0x00413b92",
+      "symbol": "lfs_file_flushedread",
+      "basis": "Four-argument file read caps at CTZ size, resolves block/inline branches, reads and advances file position; matches pinned LittleFS source."
+    },
+    {
+      "entry": "0x00413586",
+      "symbol": "lfs_file_opencfg_",
+      "basis": "Five-argument lfs/file/path/flags/config shape; initializes file fields and finds path."
+    },
+    {
+      "entry": "0x00413cf0",
+      "symbol": "lfs_file_flushedwrite",
+      "basis": "Four-argument file/buffer/size; inline outline and block extension write loop."
+    },
+    {
+      "entry": "0x00413ff8",
+      "symbol": "lfs_init",
+      "basis": "Configuration validation, cache and lookahead initialization at matching lfs object offsets."
+    },
+    {
+      "entry": "0x0041450e",
+      "symbol": "lfs_format_",
+      "basis": "Two-argument format begins with lfs_init, sets lookahead, allocates root and commits LittleFS superblock; matches pinned upstream source."
+    },
+    {
+      "entry": "0x00414650",
+      "symbol": "lfs_mount_",
+      "basis": "Calls lfs_init and scans root metadata/superblock before mount completion."
+    },
+    {
+      "entry": "0x00414954",
+      "symbol": "lfs_fs_traverse_",
+      "basis": "Four-argument callback/data/includeorphans shape and directory traversal with block callback."
+    },
+    {
+      "entry": "0x00414e7c",
+      "symbol": "lfs_fs_deorphan",
+      "basis": "lfs/bool shape; orphan directory scan, fetch and relocation/commit handling."
+    },
+    {
+      "entry": "0x00413ca8",
+      "symbol": "lfs_file_read_",
+      "basis": "Native private read asserts file flags bit0 at retained upstream line3556 (0xde4), flushes a dirty file through child 0x4139a4 when needed, then calls read body 0x413b92 with lfs/file/buffer/size. Pinned LittleFS lfs_file_read_ has this same entry sequence."
+    },
+    {
+      "entry": "0x00413e58",
+      "symbol": "lfs_file_write_",
+      "basis": "Native private write asserts LFS_O_WRONLY at pinned upstream line3659, flushes pending read state through 0x4139a4, handles append position and file max; pinned LittleFS lfs_file_write_ has the same entry structure and full upstream body."
+    },
+    {
+      "entry": "0x00413818",
+      "symbol": "lfs_file_open_",
+      "basis": "Native private file-open default adapter loads read-only zeroed lfs_file_config at 0x433f98, passes it as fifth argument to pinned lfs_file_opencfg_ at 0x413586, returns status. Pinned upstream lfs_file_open_ defines static zero defaults and calls opencfg_ with the same arguments."
+    },
+    {
+      "entry": "0x00414948",
+      "symbol": "lfs_unmount_",
+      "basis": "Native private unmount adapter calls deinit at 0x4144dc and returns; pinned LittleFS lfs_unmount_ returns lfs_deinit(lfs). Public 0x41513c wrapper calls this adapter."
+    },
+    {
+      "entry": "0x00411e9c",
+      "symbol": "lfs_dir_commitattr",
+      "basis": "Native body starts with lfs_tag_dsize(tag), checks commit->off+dsize against commit->end, writes normalized tag through commitprog, then selects in-memory or disk-byte read/commit loop based on tag high bit. Pinned upstream lfs_dir_commitattr at line1623 has the same argument shape and branch sequence."
+    },
+    {
+      "entry": "0x00414db8",
+      "symbol": "lfs_fs_demove",
+      "basis": "Native body first tests lfs_gstate_hasmove(gdisk) at lfs+0x3c, logs Fixing move using pair/tag at pinned line4961, asserts tag type at line4965, then fetches/deletes moved entry. Pinned LittleFS lfs_fs_demove has this exact source structure."
+    },
+    {
+      "entry": "0x0041315c",
+      "symbol": "lfs_dir_open_",
+      "basis": "Native private directory open receives lfs/dir/path, calls dir_find with dir->m and path cursor, rejects non-directory tag, uses root pair for id0x3ff or fetches parent struct pair, then fetches first pair and initializes directory head. Pinned LittleFS lfs_dir_open_ at line2722 has this sequence."
+    },
+    {
+      "entry": "0x00413278",
+      "symbol": "lfs_ctz_find",
+      "basis": "Native eight-argument lfs/pcache/rcache/head/size/pos/block/off helper handles size0 by writing null block and zero offset, computes current and target CTZ indices through 0x413234, traverses disk links through bd_read, then writes block/off. Pinned LittleFS lfs_ctz_find at line2887 has the same algorithm."
+    },
+    {
+      "entry": "0x00412162",
+      "symbol": "lfs_dir_alloc",
+      "basis": "Native two-block reversed allocation, revision disk read/corrupt acceptance, block-cycle alignment, and directory defaults match pinned selected LittleFS lfs_dir_alloc at lfs.c:1817. Static source attribution; runtime I/O effects and compiler layout not independently oracle-qualified."
+    },
+    {
+      "entry": "0x00413f0c",
+      "symbol": "lfs_file_seek_",
+      "basis": "Native SET/CUR/END position choice, file_max rejection, same-position return, reading cache CTZ shortcut, flush and position update match pinned selected LittleFS lfs_file_seek_ at lfs.c:3701. Static source attribution; I/O effects and compiler layout not independently oracle-qualified."
+    }
+  ]
+}

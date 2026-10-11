@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "original_entry": "0x57c640",
+  "caller_abi": "DMIC/I2S request sources both call void(void*) with 26-byte transaction descriptor.",
+  "source_sha256": "e1c4223d03991c36ad2cbfbf7323e7e74fa7459f1096512daf3e72edf36ae0f3",
+  "archive_object_sha256": "851ee15de01385967076e57a31dfb9548daf6424902d8f5446e2b9a3f6b383b5",
+  "dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/transaction_release_provider.c": "e1c4223d03991c36ad2cbfbf7323e7e74fa7459f1096512daf3e72edf36ae0f3",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "comparison_elf_sha256": "feb60d8df142ce21c86be9991db14cdb69aa6afb9f0d69d036fd8585f320307b",
+  "original_body_sha256": "bcb3bffc1fd22670f2e00f49da3a22810a84f9a49f897bad5731b1a5d4135062",
+  "fresh_original_source_cases": 144,
+  "lower_import": "audio_file_heap_free original 0x474d16 remains unresolved; fixture intercepted its public ABI",
+  "archive_sha256": "7b1e4939fdd3327443c1eeb7ad4e86377a8667fbbb5ed2b9fa3ef62c51c6477a",
+  "scope": "Null, empty packet and nonnull packet path. Ordered word+halfword clearing and full descriptor bytes compared. Actual file heap free/mutex/pool/fault behavior unexecuted."
+}

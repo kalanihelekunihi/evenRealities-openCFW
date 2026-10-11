@@ -1,0 +1,487 @@
+{
+  "status": "PASS",
+  "fresh_stop_cases": 24,
+  "fresh_active_getter_cases": 45,
+  "fresh_active_null_prefix_cases": 2,
+  "total_fresh_cases": 71,
+  "original_entries": {
+    "audio_timer_stop": "0x4494d8",
+    "audio_timer_is_active": "0x47eaf6"
+  },
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "e59e8e7cf1d96a096b03ddb75de72cc1dafe00d31f2db8ad31cda9124f3c5b6c",
+  "elf_sha256": "4f5fe12fb3c8a0362c8860d57a34afa5fd0ff16d3e5762896dd02519e2e29cd6",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "lower_bindings": "audio_cmsis_irq_context = 0x44900f; stock_enter_critical = 0x4420d1; stock_exit_critical = 0x4420e9; audio_mask_save = 0x5fa0a5; audio_aux_command = 0x47e7b1; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "stop_cases": [
+    {
+      "mode": "null",
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967292
+    },
+    {
+      "mode": "null",
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967292
+    },
+    {
+      "mode": "null",
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967292
+    },
+    {
+      "mode": "null",
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967292
+    },
+    {
+      "mode": "null",
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967290
+    },
+    {
+      "mode": "null",
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967290
+    },
+    {
+      "mode": "null",
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967290
+    },
+    {
+      "mode": "null",
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967290
+    },
+    {
+      "mode": "inactive",
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967293
+    },
+    {
+      "mode": "inactive",
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967293
+    },
+    {
+      "mode": "inactive",
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967293
+    },
+    {
+      "mode": "inactive",
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967293
+    },
+    {
+      "mode": "inactive",
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967290
+    },
+    {
+      "mode": "inactive",
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967290
+    },
+    {
+      "mode": "inactive",
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967290
+    },
+    {
+      "mode": "inactive",
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967290
+    },
+    {
+      "mode": "active",
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 0
+    },
+    {
+      "mode": "active",
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 0
+    },
+    {
+      "mode": "active",
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967295
+    },
+    {
+      "mode": "active",
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967295
+    },
+    {
+      "mode": "active",
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967290
+    },
+    {
+      "mode": "active",
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967290
+    },
+    {
+      "mode": "active",
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967290
+    },
+    {
+      "mode": "active",
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967290
+    }
+  ],
+  "active_cases": [
+    {
+      "status": 0,
+      "depth": 0,
+      "basepri": 0,
+      "result": 0
+    },
+    {
+      "status": 0,
+      "depth": 0,
+      "basepri": 32,
+      "result": 0
+    },
+    {
+      "status": 0,
+      "depth": 0,
+      "basepri": 128,
+      "result": 0
+    },
+    {
+      "status": 0,
+      "depth": 1,
+      "basepri": 0,
+      "result": 0
+    },
+    {
+      "status": 0,
+      "depth": 1,
+      "basepri": 32,
+      "result": 0
+    },
+    {
+      "status": 0,
+      "depth": 1,
+      "basepri": 128,
+      "result": 0
+    },
+    {
+      "status": 0,
+      "depth": 2,
+      "basepri": 0,
+      "result": 0
+    },
+    {
+      "status": 0,
+      "depth": 2,
+      "basepri": 32,
+      "result": 0
+    },
+    {
+      "status": 0,
+      "depth": 2,
+      "basepri": 128,
+      "result": 0
+    },
+    {
+      "status": 1,
+      "depth": 0,
+      "basepri": 0,
+      "result": 1
+    },
+    {
+      "status": 1,
+      "depth": 0,
+      "basepri": 32,
+      "result": 1
+    },
+    {
+      "status": 1,
+      "depth": 0,
+      "basepri": 128,
+      "result": 1
+    },
+    {
+      "status": 1,
+      "depth": 1,
+      "basepri": 0,
+      "result": 1
+    },
+    {
+      "status": 1,
+      "depth": 1,
+      "basepri": 32,
+      "result": 1
+    },
+    {
+      "status": 1,
+      "depth": 1,
+      "basepri": 128,
+      "result": 1
+    },
+    {
+      "status": 1,
+      "depth": 2,
+      "basepri": 0,
+      "result": 1
+    },
+    {
+      "status": 1,
+      "depth": 2,
+      "basepri": 32,
+      "result": 1
+    },
+    {
+      "status": 1,
+      "depth": 2,
+      "basepri": 128,
+      "result": 1
+    },
+    {
+      "status": 2,
+      "depth": 0,
+      "basepri": 0,
+      "result": 0
+    },
+    {
+      "status": 2,
+      "depth": 0,
+      "basepri": 32,
+      "result": 0
+    },
+    {
+      "status": 2,
+      "depth": 0,
+      "basepri": 128,
+      "result": 0
+    },
+    {
+      "status": 2,
+      "depth": 1,
+      "basepri": 0,
+      "result": 0
+    },
+    {
+      "status": 2,
+      "depth": 1,
+      "basepri": 32,
+      "result": 0
+    },
+    {
+      "status": 2,
+      "depth": 1,
+      "basepri": 128,
+      "result": 0
+    },
+    {
+      "status": 2,
+      "depth": 2,
+      "basepri": 0,
+      "result": 0
+    },
+    {
+      "status": 2,
+      "depth": 2,
+      "basepri": 32,
+      "result": 0
+    },
+    {
+      "status": 2,
+      "depth": 2,
+      "basepri": 128,
+      "result": 0
+    },
+    {
+      "status": 3,
+      "depth": 0,
+      "basepri": 0,
+      "result": 1
+    },
+    {
+      "status": 3,
+      "depth": 0,
+      "basepri": 32,
+      "result": 1
+    },
+    {
+      "status": 3,
+      "depth": 0,
+      "basepri": 128,
+      "result": 1
+    },
+    {
+      "status": 3,
+      "depth": 1,
+      "basepri": 0,
+      "result": 1
+    },
+    {
+      "status": 3,
+      "depth": 1,
+      "basepri": 32,
+      "result": 1
+    },
+    {
+      "status": 3,
+      "depth": 1,
+      "basepri": 128,
+      "result": 1
+    },
+    {
+      "status": 3,
+      "depth": 2,
+      "basepri": 0,
+      "result": 1
+    },
+    {
+      "status": 3,
+      "depth": 2,
+      "basepri": 32,
+      "result": 1
+    },
+    {
+      "status": 3,
+      "depth": 2,
+      "basepri": 128,
+      "result": 1
+    },
+    {
+      "status": 255,
+      "depth": 0,
+      "basepri": 0,
+      "result": 1
+    },
+    {
+      "status": 255,
+      "depth": 0,
+      "basepri": 32,
+      "result": 1
+    },
+    {
+      "status": 255,
+      "depth": 0,
+      "basepri": 128,
+      "result": 1
+    },
+    {
+      "status": 255,
+      "depth": 1,
+      "basepri": 0,
+      "result": 1
+    },
+    {
+      "status": 255,
+      "depth": 1,
+      "basepri": 32,
+      "result": 1
+    },
+    {
+      "status": 255,
+      "depth": 1,
+      "basepri": 128,
+      "result": 1
+    },
+    {
+      "status": 255,
+      "depth": 2,
+      "basepri": 0,
+      "result": 1
+    },
+    {
+      "status": 255,
+      "depth": 2,
+      "basepri": 32,
+      "result": 1
+    },
+    {
+      "status": 255,
+      "depth": 2,
+      "basepri": 128,
+      "result": 1
+    }
+  ],
+  "active_null_cases": [
+    {
+      "initial_basepri": 0,
+      "final_basepri": 48,
+      "invalid_write": [
+        [
+          "0xffffffff",
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "initial_basepri": 128,
+      "final_basepri": 48,
+      "invalid_write": [
+        [
+          "0xffffffff",
+          4,
+          0
+        ]
+      ]
+    }
+  ],
+  "limits": [
+    "Public stop entry executes original IRQ context and command producer on both sides; active getter is independently source compared.",
+    "Synthetic queue/timer/task state; no timer daemon command consumption or callback cancellation.",
+    "Active getter null path executes original mask helper and compares attempted invalid write; exception delivery and subsequent loop remain untested."
+  ]
+}

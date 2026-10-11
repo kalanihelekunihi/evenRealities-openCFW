@@ -12,7 +12,6 @@
 #define ADDRESS_LIMIT      UINT32_C(0x02000000)
 #define PAGE_SIZE          UINT32_C(0x100)
 #define SECTOR_SIZE        UINT32_C(0x1000)
-#define DRIVER_MODULE      UINT32_C(0x00433cd8)
 
 enum {
     STATUS_INVALID_HANDLE = 2,

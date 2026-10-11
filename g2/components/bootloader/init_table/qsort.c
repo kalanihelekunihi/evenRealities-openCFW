@@ -16,29 +16,57 @@ static unsigned char *at(unsigned char *base, uint32_t index, uint32_t width)
 static void swap_item(unsigned char *left, unsigned char *right,
                       uint32_t width)
 {
-    if (left == right)
-        return;
-    for (uint32_t i = 0; i < width; ++i) {
-        unsigned char byte = left[i];
-        left[i] = right[i];
-        right[i] = byte;
+    if (width < 64u) {
+        for (uint32_t i = 0; i < width; ++i) {
+            unsigned char byte = left[i];
+            left[i] = right[i];
+            right[i] = byte;
+        }
+    } else {
+        unsigned char scratch[128];
+        while (width != 0u) {
+            const uint32_t chunk = width < sizeof(scratch) ? width : sizeof(scratch);
+            for (uint32_t i = 0; i < chunk; ++i)
+                scratch[i] = left[i];
+            for (uint32_t i = 0; i < chunk; ++i)
+                left[i] = right[i];
+            for (uint32_t i = 0; i < chunk; ++i)
+                right[i] = scratch[i];
+            left += chunk;
+            right += chunk;
+            width -= chunk;
+        }
     }
 }
 
 static void rotate3(unsigned char *a, unsigned char *b, unsigned char *c,
                     uint32_t width)
 {
-    unsigned char saved[256];
-    if (width > sizeof(saved) || a == b || b == c || a == c)
-        return;
-    for (uint32_t i = 0; i < width; ++i)
-        saved[i] = a[i];
-    for (uint32_t i = 0; i < width; ++i)
-        a[i] = c[i];
-    for (uint32_t i = 0; i < width; ++i)
-        c[i] = b[i];
-    for (uint32_t i = 0; i < width; ++i)
-        b[i] = saved[i];
+    if (width < 64u) {
+        for (uint32_t i = 0; i < width; ++i) {
+            unsigned char saved = a[i];
+            a[i] = c[i];
+            c[i] = b[i];
+            b[i] = saved;
+        }
+    } else {
+        unsigned char scratch[128];
+        while (width != 0u) {
+            const uint32_t chunk = width < sizeof(scratch) ? width : sizeof(scratch);
+            for (uint32_t i = 0; i < chunk; ++i)
+                scratch[i] = a[i];
+            for (uint32_t i = 0; i < chunk; ++i)
+                a[i] = c[i];
+            for (uint32_t i = 0; i < chunk; ++i)
+                c[i] = b[i];
+            for (uint32_t i = 0; i < chunk; ++i)
+                b[i] = scratch[i];
+            a += chunk;
+            b += chunk;
+            c += chunk;
+            width -= chunk;
+        }
+    }
 }
 
 static void median3(unsigned char *base, uint32_t a, uint32_t b, uint32_t c,
@@ -47,11 +75,11 @@ static void median3(unsigned char *base, uint32_t a, uint32_t b, uint32_t c,
     unsigned char *pa = at(base, a, width);
     unsigned char *pb = at(base, b, width);
     unsigned char *pc = at(base, c, width);
-    if (compare(pa, pb) > 0)
+    if (compare(pb, pa) < 0)
         swap_item(pa, pb, width);
-    if (compare(pb, pc) > 0)
+    if (compare(pc, pb) < 0)
         swap_item(pb, pc, width);
-    if (compare(pa, pb) > 0)
+    if (compare(pb, pa) < 0)
         swap_item(pa, pb, width);
 }
 
@@ -85,12 +113,23 @@ static void insertion_sort(unsigned char *base, uint32_t count,
                            uint32_t width, sort_compare_fn compare)
 {
     for (uint32_t i = 1u; i < count; ++i) {
-        uint32_t j = i;
-        while (j > 0u && compare(at(base, j, width),
-                                at(base, j - 1u, width)) < 0) {
-            swap_item(at(base, j, width), at(base, j - 1u, width), width);
-            --j;
+        unsigned char *const current = at(base, i, width);
+        uint32_t target = i;
+        /* Native small-sort first compares against the first record, then
+         * scans backward. This includes a second comparison at count two
+         * when the first comparison is nonnegative. */
+        if (compare(current, base) < 0)
+            target = 0u;
+        else {
+            for (uint32_t scan = i; scan > 0u; --scan) {
+                if (compare(current, at(base, scan - 1u, width)) < 0)
+                    target = scan - 1u;
+                else
+                    break;
+            }
         }
+        for (uint32_t j = i; j > target; --j)
+            swap_item(at(base, j, width), at(base, j - 1u, width), width);
     }
 }
 
@@ -123,11 +162,9 @@ static void intro_sort(unsigned char *base, uint32_t count, uint32_t width,
             median3(base, 0u, middle, last, width, compare);
         }
 
-        unsigned char pivot[256];
-        if (width > sizeof(pivot))
-            return;
-        for (uint32_t i = 0; i < width; ++i)
-            pivot[i] = at(base, middle, width)[i];
+        /* The native core compares against the live middle record before
+         * partitioning; it does not allocate a width-sized pivot copy. */
+        unsigned char *pivot = at(base, middle, width);
 
         /* The stock code recognizes the all-equal case without permuting it. */
         uint32_t equal_left = middle;
@@ -189,7 +226,9 @@ static void intro_sort(unsigned char *base, uint32_t count, uint32_t width,
                 }
                 if (order == 0) {
                     --partition_pivot;
-                    left_cursor = partition_pivot;
+                    /* Native stores candidate in [sp+4] before the call;
+                     * equal-band swap moves pivot but keeps that cursor. */
+                    left_cursor = candidate;
                     swap_item(at(base, partition_pivot, width),
                               at(base, candidate, width), width);
                     if (left_cursor == 0u) {
@@ -249,7 +288,9 @@ static void intro_sort(unsigned char *base, uint32_t count, uint32_t width,
         uint32_t next_budget = half + (half >> 1);
         uint32_t left_count = partition_pivot;
         uint32_t right_count = count - right_equal;
-        if (left_count < right_count) {
+        /* Native branches to the right-first path only when right<left;
+         * equal partitions recurse left first. */
+        if (left_count <= right_count) {
             intro_sort(base, left_count, width, next_budget, compare);
             base = at(base, right_equal, width);
             count = right_count;
@@ -266,7 +307,9 @@ void opencfw_boot_init_sort(
     void *array, uint32_t count, uint32_t width,
     int32_t (*compare)(const void *, const void *))
 {
-    if (count == 0u || width == 0u || compare == 0)
+    /* Stock 0x423d08 guards only array and comparator pointers. The core
+     * handles count<2; width zero still reaches its comparison path. */
+    if (array == 0 || compare == 0)
         return;
     intro_sort((unsigned char *)array, count, width, count, compare);
 }

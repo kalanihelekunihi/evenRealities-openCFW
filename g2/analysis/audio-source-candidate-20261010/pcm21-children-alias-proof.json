@@ -1,0 +1,71 @@
+{
+  "aliases": {
+    "stock_prepare": {
+      "original_entry": "0x5a0c20",
+      "object_offset": "0x0",
+      "abi": "void(pcm21_power_request*)",
+      "reused_cases": 210
+    },
+    "stock_change_state": {
+      "original_entry": "0x5a0d44",
+      "object_offset": "0xa8",
+      "abi": "void(uint32_t,uint32_t)",
+      "reused_cases": 128
+    },
+    "stock_plan": {
+      "original_entry": "0x5a13e8",
+      "object_offset": "0x104",
+      "abi": "uint32_t(pcm21_power_request*,uint32_t*,uint32_t*)",
+      "reused_cases": 1160
+    },
+    "stock_apply": {
+      "original_entry": "0x5a0fc4",
+      "object_offset": "0x0",
+      "abi": "void(uint32_t,uint32_t,uint32_t,uint32_t)",
+      "reused_cases": 1648
+    }
+  },
+  "caller_source": "g2/components/audio/pcm21_control_offline/control.c",
+  "numeric_receipt": "g2/analysis/audio-pcm21-control-closure-2026-10-08/reproduction-receipt.json",
+  "objects": [
+    {
+      "source": "g2/components/audio/pcm21_children_offline/children.c",
+      "source_sha256": "abcd572b8a52e26203f2dc003afd062d54facd106f64357d440d09396cf91e4d",
+      "old_object_sha256": "04a8131acb90c4f9573969055b519eb0ada19f2bbafdc0a9a13b4b88daeef552",
+      "alias_source": "g2/components/audio/source_candidate_20261010/pcm21_children_aliases.c",
+      "alias_source_sha256": "1d3cec11abe80b4f24bef462a9c5330412814d1cf6ef866dcdb15796a356111d",
+      "alias_object_sha256": "a44a232975e83dd25b1770333b2ce2086198f7fdf63bfb8d28f0d62ee8ccc927",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/pcm21_children_aliases.c": "1d3cec11abe80b4f24bef462a9c5330412814d1cf6ef866dcdb15796a356111d",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../pcm21_children_offline/children.c": "abcd572b8a52e26203f2dc003afd062d54facd106f64357d440d09396cf91e4d",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../pcm21_children_offline/children.h": "29ecec5146544224efcf1afad2998f0a6751f0fab505b82be0649d758c5cc09e",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../pcm21_children_offline/../pcm21_control_offline/control.h": "d04d67c04f76e837fa207663de4d0498206dd84c1e5766dec5f1ca3197d71408",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      },
+      "old_new_text_sha256": "f7be14a71fdb98bca5d8c0d2943b2fea918e2e993f670754109a871302c6e92d"
+    },
+    {
+      "source": "g2/components/audio/pcm21_children_offline/apply.c",
+      "source_sha256": "9a2d625336d1d4fae9b46472949247291e735896895bf68dd182cb8614f98620",
+      "old_object_sha256": "a4c7d2b8f7dc5290b8951b9319b1ef7200035df388bf96073bcb3705af33cd3a",
+      "alias_source": "g2/components/audio/source_candidate_20261010/pcm21_apply_alias.c",
+      "alias_source_sha256": "e78ed8bedac79daabadd55d800278645432878bdfab4654ebe82de1d495d1f5b",
+      "alias_object_sha256": "13443fd2643d5a16f9428e9b82ae57840d7b890a172235620fd43ae47a0f3212",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/pcm21_apply_alias.c": "e78ed8bedac79daabadd55d800278645432878bdfab4654ebe82de1d495d1f5b",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../pcm21_children_offline/apply.c": "9a2d625336d1d4fae9b46472949247291e735896895bf68dd182cb8614f98620",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../pcm21_children_offline/children.h": "29ecec5146544224efcf1afad2998f0a6751f0fab505b82be0649d758c5cc09e",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../pcm21_children_offline/../pcm21_control_offline/control.h": "d04d67c04f76e837fa207663de4d0498206dd84c1e5766dec5f1ca3197d71408",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      },
+      "old_new_text_sha256": "0f78f773f219c6f1b34adaa63fac1500b0fe971f1ff66005f837bd06005c7084"
+    }
+  ],
+  "original_source_suite": "g2/analysis/audio-pcm21-children-closure-2026-10-08/helper-results.json",
+  "reused_comparisons_total": 3146,
+  "fresh_comparisons": 0,
+  "limits": [
+    "Synthetic trim words and initialized SRAM; passive MMIO, no physical calibration/timing.",
+    "Actual original TON/timer/cache/completion provider instructions were executed in prior suite; live exceptions were not."
+  ]
+}

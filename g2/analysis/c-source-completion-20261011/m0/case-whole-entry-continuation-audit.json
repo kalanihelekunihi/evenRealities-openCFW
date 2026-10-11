@@ -1,0 +1,52 @@
+{
+  "status": "BOUNDED_CASE_WHOLE_ENTRY_AUDIT",
+  "selected_case": {
+    "defined_count": 70,
+    "unresolved_count": 3,
+    "source_complete": false
+  },
+  "experimental_case": {
+    "absolute_elf_receipt": "g2/analysis/c-source-completion-20261011/m0/case_absolute_experiment.elf.receipt.json",
+    "undefined_count": 0,
+    "source_complete": false
+  },
+  "policy_source_sha256": "7c323a3af22481356404ec9a2023a52c99d50f2651ff22ceacabeee7d9eaaf4b",
+  "checks": [
+    {
+      "name": "65_entry_idle_reentry",
+      "command": "CASE_POLICY_TURNS=65 /tmp/case-oracle-venv/bin/python g2/analysis/c-source-completion-20261011/m0/verify_case_policy_reentry_two_turns.py",
+      "fixtures": 8,
+      "result": "PASS",
+      "qualification": "Calls, state, tick and native SP/LR entry sequence through 65 visits."
+    },
+    {
+      "name": "two_turn_changed_service",
+      "command": "/tmp/case-oracle-venv/bin/python g2/analysis/c-source-completion-20261011/m0/verify_case_policy_reentry_changed_service.py",
+      "fixtures": 32,
+      "result": "PASS",
+      "qualification": "Vary prior/final left/right and silent; child-call sequence/RAM and native SP/LR recurrence through third entry."
+    }
+  ],
+  "remaining_gates": [
+    "Selected coordinator CASE archive still has three imports; experimental zero-import graph is separate and does not replace it automatically.",
+    "Native task has recursive LR=0x08007edb with stock SP0x20007fc0; C loop uses its own stable frame. Bounded effects agree, exact reentry stack placement is not proven.",
+    "The policy task contains branches and unbounded hardware/scheduler interactions outside these finite fixtures.",
+    "Complete callable/source attribution, initialized-data placement, vector and flash partition packaging, and physical lower behavior remain open."
+  ],
+  "limits": [
+    "No new CASE C body was added because no mismatch appeared in the tested continuation paths.",
+    "Tests cut authenticated lower calls; physical sensor, timing and persistence effects are untested."
+  ],
+  "experimental_layout_bounds": {
+    "vector_bytes": 184,
+    "text_and_rodata_bytes": 64684,
+    "end_exclusive": "0x0800fd64",
+    "stock_payload_bytes": 55752,
+    "stock_occupied_end_if_base_0x08000000": "0x0800d9c8",
+    "hardware_partition_upper_bound_established": false,
+    "notes": [
+      "Source text exceeds stock occupied file length by 9116 bytes; this is not by itself a hardware partition overflow.",
+      "Experimental linker has no authenticated final flash/RAM section placement, packaging metadata, or reserved-page constraint."
+    ]
+  }
+}

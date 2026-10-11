@@ -1,0 +1,33 @@
+{
+  "apollo_delay_entry_0x4807a0": [
+    "stock_delay",
+    "stock_delay_us",
+    "am_hal_delay_us",
+    "uart_delay_boundary"
+  ],
+  "why_apollo_delay": "Source audio_delay_us is reconstructed and prior comparison exercises bounded numerical/spin behavior, but Clang source text differs; elapsed cycles, FPSCR/traps, and caller timing under Cortex-M55 are not proved. Direct same-object names require a dedicated compiler/ABI and timing review.",
+  "scheduler_delay_entry_0x449376": [
+    "audio_delay"
+  ],
+  "why_scheduler_delay": "Original vTaskDelay path updates task/list and yields. A joint scheduler fixture with ready/delayed lists, tick count, and exception boundary is required for full original/source behavior.",
+  "itcm_entry_0x40": [
+    "actual_itcm_delay"
+  ],
+  "why_itcm": "Authenticated ITCM helper is startup-installed; direct alias would change placement/call address, and zero-count/huge spin behavior remains bounded separately.",
+  "timer_daemon_names": [
+    "audio_daemon_create_static",
+    "audio_daemon_drain_commands",
+    "audio_daemon_initialize_queue",
+    "audio_daemon_process_or_block"
+  ],
+  "why_daemon": "Provider bodies require coherent timer command queue, task creation/static memory, command drain, and scheduler wake behavior. Existing wrapper and static-memory source do not implement the daemon loop.",
+  "other_timer_lifecycle": [
+    "audio_timer_delete",
+    "audio_timer_heap_free",
+    "audio_timer_queue_receive",
+    "audio_timer_stop",
+    "audio_timer_wrap_expire"
+  ],
+  "scope": "These names need per-entry original body and caller ABI/source proof; named wrappers/receipts alone do not close daemon processing.",
+  "closed_timer_stop_0x4802ce": "stock_timer_stop now direct source alias to pcm22_timer_stop with 54 reused and 4 fresh original/source cases; daemon processing still open."
+}

@@ -1,0 +1,36 @@
+{
+  "new_aliases": {
+    "audio_aux_free": {
+      "original_entry": "0x456210",
+      "object_offset": "0x2b0",
+      "caller": "g2/components/audio/timer_aux_lifetime_offline/aux.c",
+      "abi": "void(void*)"
+    },
+    "audio_timer_heap_free": {
+      "original_entry": "0x456210",
+      "object_offset": "0x2b0",
+      "caller": "g2/components/audio/timer_commands_offline/timer.c",
+      "abi": "void(void*)"
+    }
+  },
+  "source_sha256": "e5b96c258e570b412a45f294fcd727151fa9611d069fe30276419de698e5d9a6",
+  "object_sha256": "ce7a22ed7ea14616af591347cf1f4cf32710753afe2e234fd033ead2bd421155",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/heap_free_aliases.c": "e5b96c258e570b412a45f294fcd727151fa9611d069fe30276419de698e5d9a6",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../cmsis_memory_pool_offline/heap.c": "ee927dd67518bacf533ccc9f01134d5f49e8df97f1e4c672b4fc0951a1ffd175",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "text_sha256": "215adc8e2d66d469b93c71dcdf2a8ad2ac2f6069478fc1024af53a9e94ef8c95",
+  "numeric_receipts": [
+    "g2/analysis/audio-timer-aux-lifetime-closure-2026-10-08/reproduction-receipt.json",
+    "g2/analysis/audio-timer-wake-provider-closure-2026-10-08/reproduction-receipt.json",
+    "g2/analysis/audio-cmsis-memory-pool-closure-2026-10-09/function-bindings.json"
+  ],
+  "prior_suite": "g2/analysis/audio-cmsis-memory-pool-closure-2026-10-09/heap-results.json",
+  "reused_heap_cases": 106,
+  "fresh_cases": 0,
+  "limits": [
+    "Same original vPortFree entry and unchanged compiled .text; the 106 prior comparisons are reused once, not twice.",
+    "Original/source cases cover synthetic heap allocation and free/coalescing, including a null free and an invalid double-free cut; they do not prove actual task scheduling or physical heap lifetime."
+  ]
+}

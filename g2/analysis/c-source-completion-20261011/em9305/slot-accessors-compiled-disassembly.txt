@@ -1,0 +1,26 @@
+0000e474 <opencfw_em9305_ll_slot_active_30731c>:
+    e474:	1600 7002 0080 5c70 	ld	r2,[0x805c70]
+    e47c:	209f 040e           	mpyuw	r0,r0,912
+    e480:	6208                	ldb_s	r0,[r2,r0]
+    e482:	7fe0                	j_s.d	[blink]
+    e484:	780f                	extb_s	r0,r0
+    e486:	78e0                	nop_s
+
+0000e488 <opencfw_em9305_ll_slot_state_306fdc>:
+    e488:	209f 040e           	mpyuw	r0,r0,912
+    e48c:	1600 7002 0080 5c70 	ld	r2,[0x805c70]
+    e494:	7244                	add_s	r2,r2,2
+    e496:	6208                	ldb_s	r0,[r2,r0]
+    e498:	7fe0                	j_s.d	[blink]
+    e49a:	780f                	extb_s	r0,r0
+
+0000e49c <opencfw_em9305_ll_slot_flag_307480>:
+    e49c:	209f 040e           	mpyuw	r0,r0,912
+    e4a0:	1600 7002 0080 5c70 	ld	r2,[0x805c70]
+    e4a8:	e20d                	add_s	r2,r2,0xd
+    e4aa:	6208                	ldb_s	r0,[r2,r0]
+    e4ac:	780f                	extb_s	r0,r0
+    e4ae:	7824                	and_s	r0,r0,r1
+    e4b0:	7fe0                	j_s.d	[blink]
+    e4b2:	2079 0000           	setne	r0,r0,0
+    e4b6:	78e0                	nop_s

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "cases": 576,
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "b4e8687f86ee302436a4ffae83e6ad963977aaf432758bcf27fcece854a8467c",
+  "object_sha256": {
+    "scheduler_list_candidate_20261010__waiter.c.o": "5931bed93be846290dc89a617e6401329b6c897b4f3de8bbde8d9b9fc1b93f7a",
+    "scheduler_list_candidate_20261010__unblock.c.o": "1a48e1770bc99264bcd3623a8e0358fe8bfd8f4e8ce039415caa9b02f70d1231"
+  },
+  "archive_sha256": "8ab3620ec354e5120967ed46812e8fb6974986aa8cd4ca9b4bcaf31ffad2e683",
+  "fatal": "Unsuspended scheduler and null owner mask IRQ and remain nonreturning at 100 instructions.",
+  "limits": [
+    "Synthetic coherent TCB/list state, not production ownership.",
+    "No actual task switch or hardware execution."
+  ]
+}

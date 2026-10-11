@@ -1,0 +1,347 @@
+{
+  "actual_itcm_delay": {
+    "0x41": [
+      "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "am_hal_delay_us": {
+    "0x4807a1": [
+      "g2/analysis/audio-codec-request-tx-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-logger-stock-provider-closure-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-tx-ownership-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "am_hal_pwrctrl_periph_disable": {
+    "0x47f7af": [
+      "g2/analysis/audio-codec-lifecycle-hal-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-logger-stock-provider-closure-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-power-config-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "am_hal_pwrctrl_periph_enable": {
+    "0x47f5b9": [
+      "g2/analysis/audio-codec-lifecycle-hal-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-logger-stock-provider-closure-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-power-config-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "audio_clock_stop": {
+    "0x4c3139": [
+      "g2/analysis/audio-control-callbacks-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_daemon_create_static": {
+    "0x454821": [
+      "g2/analysis/audio-timer-daemon-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_daemon_drain_commands": {
+    "0x47e97b": [
+      "g2/analysis/audio-timer-daemon-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_delay": {
+    "0x449377": [
+      "g2/analysis/audio-control-callbacks-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-stop-handshake-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_event_wait": {
+    "0x44969d": [
+      "g2/analysis/audio-stop-handshake-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_file_backend_close": {
+    "0x4cfad1": [
+      "g2/analysis/audio-file-close-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_file_heap_free": {
+    "0x474d17": [
+      "g2/analysis/audio-file-close-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_flags_set": {
+    "0x449239": [
+      "g2/analysis/audio-stop-handshake-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_i2s_enable": {
+    "0x57a65d": [
+      "g2/analysis/audio-control-callbacks-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_i2s_reconfigure": {
+    "0x58fdbd": [
+      "g2/analysis/audio-i2s-stop-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_pdm_enable_alternate": {
+    "0x57b771": [
+      "g2/analysis/audio-control-callbacks-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_pdm_enable_primary": {
+    "0x57b4a9": [
+      "g2/analysis/audio-control-callbacks-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_power_peripheral_off": {
+    "0x47f7af": [
+      "g2/analysis/audio-i2s-power-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_power_peripheral_on": {
+    "0x47f5b9": [
+      "g2/analysis/audio-i2s-power-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_power_reconfigure": {
+    "0x58fdbd": [
+      "g2/analysis/audio-i2s-power-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_queue_new": {
+    "0x449a33": [
+      "g2/analysis/audio-task-configuration-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_special_control": {
+    "0x57a817": [
+      "g2/analysis/audio-control-callbacks-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_thread_new": {
+    "0x4490e3": [
+      "g2/analysis/audio-task-configuration-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_thread_terminate_peer": {
+    "0x4491ff": [
+      "g2/analysis/audio-task-configuration-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_unregister": {
+    "0x57acd1": [
+      "g2/analysis/audio-diagnostic-deinit-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "audio_watchdog_start": {
+    "0x53c2bf": [
+      "g2/analysis/audio-control-callbacks-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "callback_classify": {
+    "audio_platform_classify": [
+      "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+    ],
+    "0x5a1e8d": [
+      "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-newer-planner-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "callback_voltage": {
+    "0x5a423d": [
+      "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-uart-newer-planner-composition-2026-10-09/reproduction-receipt.json"
+    ],
+    "pcm22_ton_adjust": [
+      "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "codec_allocate": {
+    "0x474cd3": [
+      "g2/analysis/audio-codec-request-tx-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-codec-response-crc-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "codec_delay": {
+    "0x449377": [
+      "g2/analysis/audio-codec-request-tx-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-codec-response-crc-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "codec_delay_tick": {
+    "0x449377": [
+      "g2/analysis/audio-codec-uart-deadline-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "codec_irq_service": {
+    "0x58e861": [
+      "g2/analysis/audio-codec-uart-irq-delivery-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "codec_release": {
+    "0x474d17": [
+      "g2/analysis/audio-codec-request-tx-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-codec-response-crc-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "codec_wrapper_delay": {
+    "0x4807a1": [
+      "g2/analysis/audio-codec-request-tx-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "compressed_log_output": {
+    "0x43ce9f": [
+      "g2/analysis/audio-uart-instance-closure-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "offline_assert": {
+    "0x10fff1": [
+      "g2/analysis/audio-uart-rx-consumer-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-rx-notifier-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-rx-stream-ownership-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "osThreadNew": {
+    "0x4490e3": [
+      "g2/analysis/audio-uart-instance-closure-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "pcm21_classify": {
+    "audio_platform_classify": [
+      "g2/analysis/audio-pcm21-children-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-pcm21-completion-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-pcm21-control-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-pcm21-reset-closure-2026-10-08/reproduction-receipt.json"
+    ],
+    "0x5a0a71": [
+      "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-newer-planner-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+    ],
+    "0x5a1e8d": [
+      "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "platform_log_error": {
+    "0x43d575": [
+      "g2/analysis/audio-uart-instance-closure-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "receiver_notify": {
+    "0x455c49": [
+      "g2/analysis/audio-uart-rx-consumer-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "receiver_notify_wait": {
+    "0x455b85": [
+      "g2/analysis/audio-uart-rx-consumer-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "stock_audio_submit": {
+    "0x53c639": [
+      "g2/analysis/audio-watchdog-callback-closure-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "stock_clock_mux_reset": {
+    "0x44b159": [
+      "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-common-startup-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-gpio-providers-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-info-memory-providers-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "stock_delay": {
+    "0x4807a1": [
+      "g2/analysis/audio-clock-driver-config-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-clock-leaf-providers-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-clock-public-dispatch-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-common-startup-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-early-pcm-gpu-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-early-pcm-pending-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-float-runtime-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-gpio-providers-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-info-memory-providers-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-pcm21-children-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-pcm21-completion-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-pcm21-reset-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-syspll-generator-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-newer-planner-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-power-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-xtal-request-closure-2026-10-08/reproduction-receipt.json"
+    ],
+    "audio_delay_us": [
+      "g2/analysis/audio-clock-timing-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-early-pcm-dispatch-closure-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-pcm-registry-interface-successor-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "stock_delay_us": {
+    "0x4807a1": [
+      "g2/analysis/audio-transition-producers-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-transition-timer-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "stock_disable": {
+    "0x47f7af": [
+      "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-gpio-providers-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-info-memory-providers-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "stock_enable": {
+    "0x47f5b9": [
+      "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-gpio-providers-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-info-memory-providers-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "stock_peripheral_enable": {
+    "0x47f5b9": [
+      "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-common-startup-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-gpio-providers-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-info-memory-providers-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-pcm21-reset-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "stock_register_callbacks": {
+    "0x480435": [
+      "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-gpio-providers-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-info-memory-providers-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "stock_timer_drain_commands": {
+    "0x47e97b": [
+      "g2/analysis/audio-timer-daemon-order-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "stock_ton_adjust": {
+    "pcm22_ton_adjust": [
+      "g2/analysis/audio-transition-producers-closure-2026-10-08/reproduction-receipt.json",
+      "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+    ],
+    "0x5a423d": [
+      "g2/analysis/audio-transition-timer-closure-2026-10-08/reproduction-receipt.json"
+    ]
+  },
+  "uart_delay_boundary": {
+    "0x4807a1": [
+      "g2/analysis/audio-transition-snapshot-successor-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-group-power-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-newer-planner-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-power-composition-2026-10-09/reproduction-receipt.json",
+      "g2/analysis/audio-uart-transition-provider-composition-2026-10-09/reproduction-receipt.json"
+    ]
+  },
+  "uart_thread_handler": {
+    "0x5417d7": [
+      "g2/analysis/audio-uart-instance-closure-2026-10-09/reproduction-receipt.json"
+    ]
+  }
+}

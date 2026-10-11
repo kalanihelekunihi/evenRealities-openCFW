@@ -1,0 +1,44 @@
+{
+  "entries": {
+    "stock_pin_get": {
+      "source_symbol": "audio_gpio_pin_get",
+      "original_entry": "0x480eee",
+      "original_end_exclusive": "0x480f0c",
+      "original_body_bytes": 30,
+      "original_body_sha256": "f76f64c0dd07b5e162bd23d4cdc87a1e70735b0db5b61da9fa1c3dd7f6ec942e",
+      "same_object_offset": "0x0",
+      "abi": "uint32_t(uint32_t,uint32_t*)",
+      "prior_source_cases": 60
+    },
+    "stock_pin_set": {
+      "source_symbol": "audio_gpio_pin_set",
+      "original_entry": "0x480f0c",
+      "original_end_exclusive": "0x480f8a",
+      "original_body_bytes": 126,
+      "original_body_sha256": "a43394486c7d8da946cf692d6f33ddf66f1ebe63683d3a3fd408afb0fdf5e9e2",
+      "same_object_offset": "0x20",
+      "abi": "uint32_t(uint32_t,uint32_t)",
+      "prior_source_cases": 1300
+    }
+  },
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "caller": "g2/components/audio/clock_reset_active_offline/recovery.c",
+  "old_source_sha256": "b5838a00b945dfad9ef6f8b387dc1201fe883edd0a7d3fd0364a628486254253",
+  "alias_source_sha256": "8222e220353451b9e835a1e0042f811a6acebdec6356668e17c4c0be503dd708",
+  "included_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/gpio_pin_aliases.c": "8222e220353451b9e835a1e0042f811a6acebdec6356668e17c4c0be503dd708",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../gpio_providers_offline/gpio.c": "b5838a00b945dfad9ef6f8b387dc1201fe883edd0a7d3fd0364a628486254253",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../gpio_providers_offline/gpio.h": "af311301606b449cb75c608eb5480a0aa0f49009d0876be9ea7a78b6a2a5d622",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "old_object_sha256": "e8b1bb048309947e1dd84950abc39df0b170fbd3f8f301ee2f279967eda2e79a",
+  "new_object_sha256": "891e78c70604335fd7daef8dae7ca2c4007073d5175c59ea40e616b3ad7ce52b",
+  "old_text_sha256": "c5d6e7205187cb7d3902532e24f1ce85944ebd34c68584e4273a57ef8039dda0",
+  "new_text_sha256": "c5d6e7205187cb7d3902532e24f1ce85944ebd34c68584e4273a57ef8039dda0",
+  "text_equal": true,
+  "prior_suite": "g2/analysis/audio-gpio-providers-2026-10-08/gpio-results.json",
+  "prior_suite_status": "PASS",
+  "prior_suite_cases_total": 1360,
+  "fresh_stock_source_cases": 0,
+  "limits": "Synthetic GPIO MMIO/PADKEY and PRIMASK; no electrical, mux-clock or real exception proof."
+}

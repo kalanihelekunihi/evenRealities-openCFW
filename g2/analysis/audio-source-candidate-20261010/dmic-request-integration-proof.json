@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "original_entry": "0x57ce78",
+  "caller_abi": "dsp_control_provider.c declares int32_t(uint32_t,uint16_t*,uint32_t); copied source defines exact signature and wrapper consumes status/response.",
+  "source_byte_identical_to_dsp_lane": true,
+  "source_sha256": "546488ddb57cbe0fcefd36d1cbc315d044387c63aff16f6cef9a287b73f3f694",
+  "archive_object_sha256": "1e99dd82be127488720ffc3f61f8b2782325ddc107e9105dd378c48ade08f1f7",
+  "dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/dmic_request_provider.c": "546488ddb57cbe0fcefd36d1cbc315d044387c63aff16f6cef9a287b73f3f694",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "stock_body_sha256": "d70ce48ca1daa0b5deb0df9d4b29a5860cded6c964184a112ea84c22fb6d1da3",
+  "dsp_lane_cases_reused": 3604,
+  "fresh_archive_cases": 0,
+  "lower_imports": {
+    "audio_send_transaction": "0x57c512",
+    "audio_release_transaction": "0x57c640",
+    "audio_log_extended": "0x43d574",
+    "audio_log_simple": "0x43ce9e"
+  },
+  "already_selected_lower_provider": "audio_log_flags at 0x43d0ce",
+  "archive_sha256": "a36be108723cbb4ef40b8f6f1272aa936d82920baace55393845c0908c305573",
+  "limit": "Send/release/logger children intercepted in DSP lane; live IPC, scheduling, packet lifetime and physical DSP untested. M55 archive object not independently executed."
+}

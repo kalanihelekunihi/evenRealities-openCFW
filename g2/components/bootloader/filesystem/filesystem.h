@@ -11,5 +11,7 @@ int opencfw_boot_lfs_sync(const struct lfs_config *);
 uint32_t opencfw_boot_nor_read(uint32_t,void *,uint32_t);
 uint32_t opencfw_boot_nor_prog(uint32_t,const void *,uint32_t);
 uint32_t opencfw_boot_nor_erase(uint32_t);
-void opencfw_boot_fs_error(uintptr_t format,...);
+/* Littlefs NOR callbacks use the plain formatter ABI at stock 0x415fae.
+ * Boot-mount diagnostics use the typed EasyLogger call in boot_mount_log.h. */
+void opencfw_boot_fs_printf(uintptr_t format,...);
 #endif

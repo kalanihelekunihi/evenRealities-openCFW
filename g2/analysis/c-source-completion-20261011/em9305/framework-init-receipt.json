@@ -1,0 +1,32 @@
+{
+  "build_receipt": "g2/build/c-firmware/20261011/em-framework-init-round/receipt.json",
+  "build_receipt_sha256": "4dbd623eb821255c5b119ff25a557b08caa4926538e70d50434afc54082528d8",
+  "inputs": [
+    {
+      "path": "g2/components/em9305/qpc_scheduler_candidate/framework_init.c",
+      "sha256": "81442dde74c71bb3977b07c73f43b3f78adc2ff5591686befc46cf7976fa0da6"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/em9305/framework-init-native.txt",
+      "sha256": "c21436aa4cda069c517012a32a59407c9bde86e1256f7dc0590a98ccc44969be"
+    },
+    {
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/qpc-official/src/qk/qk.c",
+      "sha256": "f1b069a535260c1a23d66d3dfe3373259b5068fc94bccef078bd55bf2bdfed0a"
+    }
+  ],
+  "candidate_compilation_passed": true,
+  "original_instruction_execution": false,
+  "full_source_complete": false,
+  "native_findings": [
+    "Decoded zero word/byte/word writes0x801390/0x801360/0x801364.",
+    "Initial bzero count0 is a no-op, not unknown zero initialization.",
+    "Active pointer table68-byte clear and scheduler8-byte clear follow native calls.",
+    "Final active0/lock16 stores are explicit stock writes."
+  ],
+  "limits": [
+    "Real memory-fill lower0x33301c remains unresolved.",
+    "Fixed SRAM operations are semantic source identities, not final linker placement or full product initialization.",
+    "Complete controller code/data/four-record coverage not established."
+  ]
+}

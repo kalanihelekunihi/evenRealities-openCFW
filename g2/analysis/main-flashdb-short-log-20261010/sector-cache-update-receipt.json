@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "cases": 640,
+  "stock_address": "0x543c48..0x543cc0",
+  "stock_body_sha256": "1689d2aae4836b73cf44f14b25abb6eddf38e330f0641798ac1a5610cfc35c01",
+  "source_sha256": "3a74bfdf58105d1f30a5bc73fe8e69185ba32db9bebe93b6c3404a1bd4eb3bd1",
+  "elf_sha256": "41f14e06496eafdfc19d7401ea32ffa582f1a3cbf3db26b24931ec87e8ebe2ec",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_update_sector_cache",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_sector_cache_update_candidates_20261010/sector_cache_update.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-sector-cache-update.elf"
+  ],
+  "limits": "Complete 120-byte local cache update with synthetic initialized 64-row table. M4 scalar oracle because Unicorn rejects M55 instructions; M55 archive compile separate. No production DB initialization or flash-state proof."
+}

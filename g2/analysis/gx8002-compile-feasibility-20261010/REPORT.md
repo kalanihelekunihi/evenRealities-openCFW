@@ -1,0 +1,19 @@
+# GX8002 codec source compile feasibility
+
+`receipt.json` records fresh hashes and time for the locked codec image, pinned SDK Makefile, retained compiler, and existing source-build proofs. This pass changes no codec C, selected source, canonical gate, official blob, or package provider; **zero new source units** and **zero runtime cases** were admitted.
+
+## Target and buildable source
+
+The codec is a separate GX8002 C-SKY ABIv2 image, targeted as `ck804ef` with hard float. NationalChip `lvp_kws` commit `8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5` includes attributable DSP C under `utility/libdsp/Source/`, matching assembly alternatives under `Source.asm/`, headers, and prebuilt driver/speech/DSP libraries. The local authenticated C-SKY Tools V3.10.15 B20190929 GCC 6.3.0 runs offline in the prior Linux/amd64 container recipe; its compiler file hash is in the receipt. A separate pinned GCC 13 candidate exists, but does not identify the stock producer.
+
+Prior retained proof compiled and linked **ten unchanged DSP C translation units** with GCC 6.3, `-mcpu=ck804ef -mhard-float -O2 -g -fno-builtin -fstrict-volatile-bitfields -ffunction-sections -fdata-sections`, SDK include paths, and one explicit `FOR_X86_64=1` switch to expose existing generic C bit reversal while still targeting C-SKY. The resulting standalone ELF has no undefined symbols and SHA-256 `d86634e6c9a11b2f8bb8f3fb5468340d89c547a229ebbb6ae1bd8028c93a572a`. This is a C library link, without startup, product linker placement, or firmware image semantics.
+
+The original-byte comparison is narrower: among 151 eligible SDK object sections, 102 stock matches carry 68 symbols and 5,374 bytes. Independently rebuilt **seven authentic assembly sources** reproduce **nine exact selected sections, 1,606 bytes**. The five initial DSP C comparisons all compiled, but **zero selected C sections byte-matched stock** under the fixed GCC 6.3 recipe; shift/copy/fill sizes differed. Stock SDK Makefile deliberately selects assembly for the corresponding kernels. Source C compilation therefore does not replace those exact assembly receipts or establish numerical equality.
+
+## Product and execution gates
+
+The locked `firmware_codec.bin` is 326,092 bytes; the section and DSP denominators above are not a whole-image source percentage. Missing product inputs include the `grus_gx8002b_dev_1v` application configuration and private caller sources, prebuilt driver and speech implementation source or separately qualified providers, reset/stage selection, ROM/API contracts, initialized tables and absolute placement, libc/libm/libgcc compatibility, and the exact producing per-file flags/toolchain where byte identity is sought. The I2S five-wire header exists but its implementation C is absent from the pinned checkout; its unmatched relocatable SDK section cannot be transplanted as source.
+
+A C-SKY instruction-level simulator capable of CK804 DSP operations and hard-float ABI fixtures is the next executable oracle for the DSP C alternative versus the exact assembly providers. The prior proof ran no Q15 vectors. The first bounded fixture should compare one shift/copy/fill kernel over zero, saturation, alignment, and overlap inputs, observing output and target register state; expand to FFT only after that harness is qualified. The archived GDB simulator and QEMU candidate have separate unresolved setup/CPU validation boundaries. A host-C result would be a semantic model only.
+
+The local source/build frontier is therefore **C compile/link feasible and nine assembly sections byte-exact**, with numerical execution and whole-image source ownership open. Further compilation of the same ten units would repeat established proof. The next progress requires a qualified simulator or new attributable product source/data, not another stock executable section copied into a build.

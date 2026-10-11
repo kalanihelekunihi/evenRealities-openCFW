@@ -1,0 +1,15 @@
+{
+  "native_entry": "0x332394",
+  "native_end": "0x33248e",
+  "actual_contract": "request pointer; incoming r1 overwritten by feature-mask base0x8056e8",
+  "next_reduction": "inspect native30c2e0 genuine fallback controller child",
+  "existing_source_children": [
+    "0x32e454 event allocate",
+    "0x332fc4 memcpy",
+    "0x30ae90 event send"
+  ],
+  "unresolved_child": "0x30c2e0(request halfword+4) in type13 fallback",
+  "proof_caution": "type11 extended path mutates request+9 to1 before payload copy; type13 fallback returns0 regardless of child status; incoming second parameter is unused",
+  "state": "implemented; ARC target compile/link passed;18 controlled C contract cases",
+  "receipt": "g2/build/c-firmware/20261011/em-feature-events-round/receipt.json"
+}

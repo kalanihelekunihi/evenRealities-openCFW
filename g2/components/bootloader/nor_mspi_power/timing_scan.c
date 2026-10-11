@@ -69,9 +69,10 @@ static uint32_t window_center(uint32_t bits)
         }
     }
 
-    if (center < 16u && ((bits >> 31) & 1u) != 0u)
+    /* Native 0x41ffea tests bit 1 (LSL #30); 0x41fff8 tests bit 30. */
+    if (center < 16u && ((bits >> 1) & 1u) != 0u)
         center -= odd;
-    else if (center > 15u && (bits & 1u) != 0u)
+    else if (center > 15u && ((bits >> 30) & 1u) != 0u)
         ++center;
     return center;
 }

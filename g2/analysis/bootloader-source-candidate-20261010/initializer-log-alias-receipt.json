@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "cases": 18,
+  "stock_body_sha256": "b53b1d0eae9d2787d431ae1950d956c54429fb339a67ee7f219ff7c01ffc0cd6",
+  "alias_sha256": "27be211566eeb3fc3ec2fd7768f1f0cb00e9056a06006171693bd94130150824",
+  "caller_sha256": "5dcff904e64dcb3358e6848425bd87c8c53a12a343357dc711919fcb6969c94c",
+  "elf_sha256": "5c907763250a10e134b7f066303e18630b6493a9d901b1eaea577a3de77d9868",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,opencfw_boot_init_callback_redirect",
+    "-Wl,--gc-sections",
+    "-Wl,--defsym=opencfw_boot_elog_output=0x10020001",
+    "-Wl,--defsym=opencfw_bl_mutex_create=0x10030001",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/source_candidate_20261010/initializer_log_alias.c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-source-candidate-20261010/initializer-log-alias-candidate.elf"
+  ],
+  "limits": "Redirect initializer public entry, controlled mutex-create lower returns; semantic logger args, RAM, and return compared. Logger body/output, other initializer callers, and product data placement remain open. Scalar Cortex-M4 execution; M55 archive compile separate."
+}

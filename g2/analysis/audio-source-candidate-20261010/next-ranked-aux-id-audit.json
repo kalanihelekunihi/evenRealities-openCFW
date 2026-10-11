@@ -1,0 +1,14 @@
+{
+  "name": "audio_aux_get_id",
+  "original_entry": "0x47eb26",
+  "original_body_end_exclusive": "0x47eb4a",
+  "body_sha256": "96d0cece3077c403dba66e5d42fb454814d4f61bd4366f78a2ce270da2abfd14",
+  "caller": "g2/components/audio/timer_aux_lifetime_offline/aux.c",
+  "caller_abi": "uint32_t(audio_timer_prefix*)",
+  "nonnull_behavior": "Critical entry 0x4420D0, load timer+0x1C, critical exit0x4420E8, return ID",
+  "null_behavior": "Calls interrupt-mask helper 0x5FA0A4, attempts zero write to 0xFFFFFFFF, then loops; fault delivery not executed",
+  "status": "admitted_bounded_original_source_comparison",
+  "archive_admission": true,
+  "remaining_global_names": 105,
+  "comparison": "timer-id-provider-execution.json"
+}

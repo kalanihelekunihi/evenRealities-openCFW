@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "cases": 768,
+  "unique_original_getters": 2,
+  "original_body_bytes": 12,
+  "source_sha256": "218151c919b090f9cc3145b2636bd9f8367f33e204042225a61fb0128c16903a",
+  "elf_sha256": "77c29084dc25dba1ff8e65bb8c7b9ecc41ed0c4f8c4995a96848717160cbc3a2",
+  "compile_command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/diagnostic_flags_candidates_20261010/flags.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/diagnostic-flags-candidate-20261010/flags.o"
+  ],
+  "limits": [
+    "Scalar Cortex-M4 Unicorn oracle; Cortex-M55 source compilation.",
+    "Initial RAM state is synthetic; writer and firmware placement remain unresolved."
+  ]
+}

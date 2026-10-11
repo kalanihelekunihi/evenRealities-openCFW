@@ -1,0 +1,1037 @@
+{
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "bindings": [
+    {
+      "entry": "0x0041b120",
+      "source": "g2/components/bootloader/filesystem/runtime_memory.c",
+      "symbol": "strlen",
+      "basis": "Native alignment peel and word-at-a-time NUL scan return the byte length; selected freestanding strlen has the same defined NUL-terminated string result, though its byte-loop speed, overread pattern and fault boundary differ."
+    },
+    {
+      "entry": "0x0042330e",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "symbol": "opencfw_boot_uart_tx_fifo",
+      "basis": "Native UART TX loop checks FIFO-full bit at base+0x18, writes source bytes to module-indexed UART data register and optionally reports byte count; selected source has the same loop/status fields."
+    },
+    {
+      "entry": "0x00423700",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_context.c",
+      "symbol": "opencfw_boot_uart_interrupt_clear",
+      "basis": "Authenticated instructions read module at context+0x28 before null/magic check, write mask to UART+0x44 then read UART+0x40, return0/2; selected source preserves that exact guard and side-effect read."
+    },
+    {
+      "entry": "0x00415146",
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "symbol": "lfs_file_open",
+      "basis": "Native wrapper asserts file absent from mlist at pinned LittleFS source line6119 (0x17e7), then calls internal open; selected upstream source supplies the same public wrapper."
+    },
+    {
+      "entry": "0x00415180",
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "symbol": "lfs_file_close",
+      "basis": "Native wrapper asserts file present in mlist at pinned LittleFS source line6155 (0x180b), then calls internal close; selected upstream source supplies the same public wrapper."
+    },
+    {
+      "entry": "0x004151c0",
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "symbol": "lfs_file_read",
+      "basis": "Native wrapper asserts file present in mlist at pinned LittleFS source line6189 (0x182d), then calls internal read; selected upstream source supplies the same public wrapper."
+    },
+    {
+      "entry": "0x00427602",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "symbol": "opencfw_boot_uart_tx_ring_add",
+      "basis": "Native byte-count=element-size*count, PRIMASK save, capacity gate, optional source byte copy, modulo write index, occupied-byte increment and success bit match selected UART TX ring-add source."
+    },
+    {
+      "entry": "0x00427660",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "symbol": "opencfw_boot_uart_tx_ring_get",
+      "basis": "Native ring dequeue mirrors selected UART TX ring-get source: byte-count, occupancy gate, optional destination copy, modulo read index and occupied-byte decrement under PRIMASK critical region."
+    },
+    {
+      "entry": "0x00425066",
+      "source": "g2/components/bootloader/nor_mspi_init/hal_leaves.c",
+      "symbol": "opencfw_hal_mspi_enable",
+      "basis": "Selected HAL leaf owns native MSPI-enable handle validation/register and state transitions; nor_mspi_init/verify_leaves.py explicitly compares this original entry with selected source on bounded cases. Hardware bus effects remain simulator-only."
+    },
+    {
+      "entry": "0x004250f0",
+      "source": "g2/components/bootloader/nor_mspi_init/hal_leaves.c",
+      "symbol": "opencfw_hal_mspi_disable",
+      "basis": "Selected HAL leaf owns native MSPI-disable handle validation/register and state transitions; nor_mspi_init/verify_leaves.py explicitly compares this original entry with selected source on bounded cases. Hardware bus effects remain simulator-only."
+    },
+    {
+      "entry": "0x0042516c",
+      "source": "g2/components/bootloader/nor_mspi_init/hal_leaves.c",
+      "symbol": "opencfw_hal_mspi_deinitialize",
+      "basis": "Selected HAL leaf owns native MSPI-deinitialize transition; nor_mspi_init/verify_leaves.py explicitly compares this original entry with selected source on bounded cases. Hardware bus effects remain simulator-only."
+    },
+    {
+      "entry": "0x0041836c",
+      "source": "g2/components/bootloader/thread_creation/isr_delivery.c",
+      "symbol": "opencfw_boot_queue_isr_task_count",
+      "basis": "Native six-byte getter loads task-count word 0x20027144 and returns it; selected source getter returns that same volatile word."
+    },
+    {
+      "entry": "0x004207a2",
+      "source": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "symbol": "opencfw_bl_nor_wait",
+      "basis": "Native 200 status-poll iterations with 5-unit raw delay, then caller-count iterations with task delay when kernel state2 or 1000-unit raw delay otherwise, status0 on ready/1 on exhaustion, match selected source. Existing NOR helper oracle names and exercises this entry."
+    },
+    {
+      "entry": "0x0041ca2c",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_power_config.c",
+      "symbol": "opencfw_boot_startup_temperature",
+      "basis": "Native float/AAPCS-VFP power-callback request2 writes two response words on success or zeroes both on failure; selected naked source preserves incoming register/stack words and the same output/status branches. Ambient register placement remains bounded by its existing startup oracle."
+    },
+    {
+      "entry": "0x00415758",
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "symbol": "opencfw_boot_memcmp",
+      "basis": "Native IAR comparator handles left misalignment bytewise, aligned right/left words with byte-order-aware -1/+1 return, then remaining bytes; selected update comparator mirrors these branches, unlike generic libc memcmp. Existing update-core oracle addresses this original entry."
+    },
+    {
+      "entry": "0x00417570",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "symbol": "opencfw_boot_elog_lock",
+      "basis": "Native tests logger state byte +0xf2; when set it calls service wake and sets +0xf4, otherwise sets +0xf3. Selected source has the same branch, callbacks and bytes. Function symbol is absent in final ELF because selected compiler inlines it into linked logger output."
+    },
+    {
+      "entry": "0x00417592",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "symbol": "opencfw_boot_elog_unlock",
+      "basis": "Native tests logger state byte +0xf2; when set it calls service sleep and clears +0xf4, otherwise clears +0xf3. Selected source has the same branch, callbacks and bytes. Function symbol is absent in final ELF because selected compiler inlines it into linked logger output."
+    },
+    {
+      "entry": "0x0041ff08",
+      "source": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "symbol": "opencfw_bl_nor_read_before",
+      "basis": "Native lock 0x41fe9c followed by conditional 0x41fe48 unless 0x200271c5 equals 1 matches selected source before-read wrapper; incidental R7 return is not a status contract."
+    },
+    {
+      "entry": "0x0041ff1e",
+      "source": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "symbol": "opencfw_bl_nor_read_after",
+      "basis": "Native conditional 0x41fe28 unless 0x200271c5 equals 1 then 0x41fed4 unlock matches selected source after-read wrapper; incidental R7 return is not a status contract."
+    },
+    {
+      "entry": "0x0041ff34",
+      "source": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "symbol": "opencfw_hal_mspi_control_latency",
+      "basis": "Native writes byte at 0x2000023c+5 to 8 only for enabled==1, else 0, then calls MSPI control 0x10 with handle 0x200270dc; selected source matches the data and call."
+    },
+    {
+      "entry": "0x0042d84c",
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "symbol": "opencfw_boot_stream_mode",
+      "basis": "Selected stream-mode source returns six source-owned strings for native flag cases. The isolated original/source mode oracle compared 4,099 flag values and returned content after pointer relocation; pointer addresses are intentionally relocated."
+    },
+    {
+      "entry": "0x0041a700",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_setters.c",
+      "symbol": "opencfw_boot_elog_reset_request",
+      "basis": "Native DSB, AIRCR read/mask 0x700/or 0x05fa0004, DSB, nonreturning loop matches selected source reset requester. This is an authenticated architectural fault/reset policy, not a substitute trap."
+    },
+    {
+      "entry": "0x0041ac8a",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_setters.c",
+      "symbol": "opencfw_boot_elog_reset_request",
+      "basis": "Native push, call 0x41a700, pop forms an unreachable wrapper around the same nonreturning AIRCR reset requester; selected assertion path calls that requester directly. The Ghidra residual R7 return is unreachable after reset loop."
+    },
+    {
+      "entry": "0x00426c10",
+      "source": "g2/components/bootloader/filesystem/runtime_memory.c",
+      "symbol": "memset",
+      "basis": "Authenticated native wrapper shuffles (out,value,count) to internal fill at 0x41560c then returns original out; selected standard memset provides the same public ABI and byte effects for finite buffers."
+    },
+    {
+      "entry": "0x0041b30e",
+      "source": "g2/components/bootloader/thread_creation/kernel_runtime.c",
+      "symbol": "opencfw_bl_restore_interrupts",
+      "basis": "Authenticated native instructions 0x41b30e..0x41b31a are unconditional MSR BASEPRI,r0; DSB; ISB; BX LR, matching selected source inline assembly. Ghidra's apparent privilege condition is a decompiler artifact, not a source branch."
+    },
+    {
+      "entry": "0x00421b08",
+      "source": "g2/components/bootloader/clock_manager/clock_class_providers.c",
+      "symbol": "opencfw_bl_clock_request_id3",
+      "basis": "Native class-3 enabled gate, user-bit idempotence, critical save, register-15 value ending 0xa, user bit set and critical restore match the selected source provider."
+    },
+    {
+      "entry": "0x00421b5c",
+      "source": "g2/components/bootloader/clock_manager/clock_class_providers.c",
+      "symbol": "opencfw_bl_clock_release_id3",
+      "basis": "Native class-3 user presence, critical clear, two-word remaining-user test and register-15 baseline update match the selected source provider."
+    },
+    {
+      "entry": "0x00421cce",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider2.c",
+      "symbol": "opencfw_bl_clock_release_id2",
+      "basis": "Native class-2 user presence, critical clear, zero-user radio-mode apply, busy and callback clearing match selected source provider."
+    },
+    {
+      "entry": "0x004207f4",
+      "source": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "symbol": "opencfw_bl_nor_read_delay",
+      "basis": "Native wrapper calls wait helper 0x4207a2 with constant 500; selected source returns opencfw_bl_nor_wait(500). Existing NOR helper oracle names and exercises this entry."
+    },
+    {
+      "entry": "0x0041568c",
+      "source": "g2/components/bootloader/filesystem/runtime_memory.c",
+      "symbol": "memcpy",
+      "basis": "Native three-argument forward copy with source-alignment prologue and word/halfword/byte loops has standard nonoverlapping memcpy memory effects; linked selected source owns a functional byte-loop memcpy. This is a memory-effect attribution only; native residual R0, overlapping inputs and exact performance are not qualified."
+    },
+    {
+      "entry": "0x0041b3e4",
+      "source": "g2/components/bootloader/thread_creation/kernel_runtime.c",
+      "symbol": "opencfw_bl_kernel_enter",
+      "basis": "Native calls the BASEPRI save/mask helper 0x41b2f8, increments scheduler nesting word 0x200004c4, then DSB/ISB; selected source expresses this same sequence. This is direct-body attribution, not a scheduler-wide equivalence claim."
+    },
+    {
+      "entry": "0x0041c0be",
+      "source": "g2/components/bootloader/platform_control/power_domains.c",
+      "symbol": "opencfw_boot_power_release_needed",
+      "basis": "Native four-word descriptor lookup followed by group masks 0x1e, 0xc0, 0x1e0, 0x1e00 and 0x30000001, with status/mask return branches, maps to the selected source routine. Attribution is based on native decompilation and source control flow; the existing isolated verifier has not been rerun against the large co-placed ELF reader."
+    },
+    {
+      "entry": "0x00415844",
+      "source": "g2/components/bootloader/runtime_memory/boot_u64_div10.c",
+      "symbol": "opencfw_boot_u64_div10",
+      "basis": "New source helper preserves native R0/R1 unsigned 64-bit decimal quotient ABI; 2,014 boundary and seeded random original/source cases pass R0/R1/SP/control return and mathematical quotient."
+    },
+    {
+      "entry": "0x004276bc",
+      "source": "g2/components/bootloader/runtime_memory/boot_memmove.c",
+      "symbol": "opencfw_boot_memmove",
+      "basis": "New source-owned overlap copy compares exact memory, SP and control return for 2016 native/source destination/source alignment and length cases. Native R0 is incidental for this void routine and is not claimed equivalent."
+    },
+    {
+      "entry": "0x0041760a",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "symbol": "opencfw_boot_elog_tag_level",
+      "basis": "Stock tag-level getter uses default level 5, five slots of stride 0x21, active flag, 30-byte tag compare and lock/unlock; selected elog source owns this body. Whole-body oracle remains scoped."
+    },
+    {
+      "entry": "0x00422e28",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_context.c",
+      "symbol": "opencfw_boot_uart_baud",
+      "basis": "Selected UART baud provider maps stock 0x422e28 and prior UART-context bounded native/source validation covers its register and quotient paths."
+    },
+    {
+      "entry": "0x004216d4",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
+      "symbol": "opencfw_boot_startup_select4",
+      "basis": "Stock class-4 configuration child validates 0/48000000, builds or accepts 12-byte config, checks live users, applies/defaults and caches state; selected startup select4 source and prior clock-config child oracle cover bounded branches."
+    },
+    {
+      "entry": "0x00421bd2",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider2.c",
+      "symbol": "opencfw_bl_clock_request_id2",
+      "basis": "Stock class-2 clock request body and selected provider match bitmap row, radio mode and callback paths; prior clock-manager differential corpus covers bounded request paths."
+    },
+    {
+      "entry": "0x00421d5e",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
+      "symbol": "opencfw_bl_clock_request_id4",
+      "basis": "Stock class-4 clock request and selected provider match clock user bitmap and HF adjust control; prior clock-manager differential corpus covers bounded request paths."
+    },
+    {
+      "entry": "0x00423608",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c",
+      "symbol": "opencfw_boot_uart_rx_pump",
+      "basis": "Stock UART RX pump checks context mode, FIFO and queue destination, sets count/callback state; selected source body already composes these branches, with bounded RX verification only."
+    },
+    {
+      "entry": "0x00428a94",
+      "source": "g2/components/bootloader/source_candidate_20261010/pcm22_timer_service.c",
+      "symbol": "opencfw_pcm22_sequence7b",
+      "basis": "Existing selected source provider for authenticated PCM2.2 timer service chain; verify_spot_sequence_2b.py compares eight bounded original/source cases including ordered MMIO writes, delays, critical/timer cuts and PRIMASK. Hardware wait/timeout remains unqualified."
+    },
+    {
+      "entry": "0x004232c8",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c",
+      "symbol": "opencfw_boot_uart_rx_fifo",
+      "basis": "Four-argument context/destination/count/output-count loop matches stock UART FIFO status and data reads at 0x4232c8; selected UART RX source already owns the body. Full body equivalence remains bounded."
+    },
+    {
+      "entry": "0x0041f558",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_rx.c",
+      "symbol": "opencfw_boot_uart_irq_row",
+      "basis": "Selected source captures enabled UART status, clears and dispatches it, routes RX drain on native bits 4/6 and sets row interrupt flag on bit 0. Six bounded native/source wrapper cases pass with child cuts."
+    },
+    {
+      "entry": "0x0042377c",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_dispatch.c",
+      "symbol": "opencfw_boot_uart_irq_dispatch",
+      "basis": "New selected source preserves native valid-context guard and ordinary/DMA status branches; verify_uart_irq_dispatch.py covers bounded invalid, flag, DMA stop and DMA complete cases, not physical asynchronous IRQ behavior."
+    },
+    {
+      "entry": "0x00422d20",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_dispatch.c",
+      "symbol": "opencfw_boot_uart_dma_disable",
+      "basis": "Selected source writes UART DMA control registers in native order; bounded original/source register-state oracle covers this leaf."
+    },
+    {
+      "entry": "0x00422d4c",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_dispatch.c",
+      "symbol": "opencfw_boot_uart_dma_rx_stop",
+      "basis": "Selected source clears DMA request and length fields at stock MMIO offsets; bounded original/source register-state oracle covers this leaf."
+    },
+    {
+      "entry": "0x00422d7a",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_dispatch.c",
+      "symbol": "opencfw_boot_uart_dma_error",
+      "basis": "Selected source encodes native status-bit priority and error codes; bounded original/source cases cover no bits and bits 6/12."
+    },
+    {
+      "entry": "0x00422fde",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_dispatch.c",
+      "symbol": "opencfw_boot_uart_dma_recover",
+      "basis": "Selected source preserves clock/DMA register ordering and composes existing FIFO/cancel leaves; bounded original/source cases cover timer-inactive paths with FIFO/cancel controlled cuts. Physical wait, timer-active delay and full child behavior remain unproved."
+    },
+    {
+      "entry": "0x0042372a",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_status.c",
+      "symbol": "opencfw_boot_uart_interrupt_status",
+      "basis": "New selected source preserves native module read before null/magic guard, raw/enabled register selection and output write; verify_uart_irq_status.py passes six bounded stock/source cases. MMIO device effects remain outside emulator proof."
+    },
+    {
+      "entry": "0x0041f776",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_rx.c",
+      "symbol": "opencfw_boot_uart_irq_rx_drain",
+      "basis": "New selected source composes the existing UART FIFO child, current row descriptor offset and optional completion callback; verify_uart_irq_rx_drain.py passes six bounded stock/source cases spanning empty, ready, error, zero-limit and notify paths. Physical UART drain and callback side effects remain outside this oracle."
+    },
+    {
+      "entry": "0x00427e84",
+      "source": "g2/components/bootloader/source_candidate_20261010/event_a_sequences_0_2.c",
+      "symbol": "event_a_pcm22_transition_sequence_0",
+      "basis": "Authenticated scatter selector slot 0 points to stock 0x427e85; selected source owns selector 0 and pinned pcm2_2-native comparisons cover its cache, timer and trim branches. Attribution does not imply whole-domain hardware equivalence."
+    },
+    {
+      "entry": "0x0042984e",
+      "source": "g2/components/bootloader/source_candidate_20261010/pcm22_transition14_18.c",
+      "symbol": "opencfw_spot_pcm22_transition18",
+      "basis": "Authenticated scatter selector slot 18 points to stock 0x42984f; selected source and pinned pcm2_2-native transition18 comparison cover the timer and boost/restore sequence."
+    },
+    {
+      "entry": "0x0042a08c",
+      "source": "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/startup_events_a.c",
+      "symbol": "event_a_deepsleep_state",
+      "basis": "Pinned startup-events-a original/source oracle visits the 272-byte stock deep-sleep mutation body at 0x42a08c; selected source owns its state transition."
+    },
+    {
+      "entry": "0x0042aef0",
+      "source": "g2/components/bootloader/source_candidate_20261010/gx_children.c",
+      "symbol": "native_spot_buck_deepsleep_scan",
+      "basis": "Selected GX child source implements the stock buck deep-sleep scan called by the 0x42ba00 power handler; attribution lead pending a current whole-path oracle."
+    },
+    {
+      "entry": "0x0041be36",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_memory_config.c",
+      "symbol": "opencfw_boot_startup_shared_memory",
+      "basis": "Pinned startup runtime report attributes 0x41be36..0x41bf3a SRAM configuration to selected source and records all 256 instruction bytes visited with native polling/callback wrappers."
+    },
+    {
+      "entry": "0x00423524",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "symbol": "opencfw_boot_uart_tx_pump",
+      "basis": "Selected UART TX pump mirrors 0x423524 busy/ring/critical sections and callback completion path; current full-domain equality is not established."
+    },
+    {
+      "entry": "0x00418372",
+      "source": "g2/components/bootloader/thread_creation/thread_name_getter.c",
+      "symbol": "opencfw_boot_thread_name_get",
+      "basis": "New selected C body follows native null-to-current TCB 0x20027134 fallback, fatal null path and TCB+0x34 return; verify_thread_name_getter.py passes three bounded stock/source nonfatal cases."
+    },
+    {
+      "entry": "0x0041b374",
+      "source": "g2/components/bootloader/thread_creation/exception_entry.S",
+      "symbol": "opencfw_boot_svc_entry",
+      "basis": "Selected architectural SVC veneer tests EXC_RETURN bit 2, chooses MSP/PSP and branches to dispatch as locked instructions at 0x41b374..0x41b386. Catalogue 56-byte envelope includes padding and neighboring functions; exception entry/return behavior remains unqualified."
+    },
+    {
+      "entry": "0x0041b3fc",
+      "source": "g2/components/bootloader/thread_creation/kernel_runtime.c",
+      "symbol": "opencfw_bl_kernel_exit",
+      "basis": "Selected kernel exit decrements stock critical nesting at 0x200004c4 and restores BASEPRI on outermost exit; pinned thread_creation README assigns this native entry. Fault loop and interrupt side effects require scoped qualification."
+    },
+    {
+      "entry": "0x00418838",
+      "source": "g2/components/bootloader/thread_creation/event_flags_set.c",
+      "symbol": "opencfw_boot_event_wait_unblock",
+      "basis": "Selected event waiter unblock source has the stock unordered waiter removal and event result publication flow; body attribution lead pending whole-path comparison."
+    },
+    {
+      "entry": "0x00418ccc",
+      "source": "g2/components/bootloader/thread_creation/mutex_kernel.c",
+      "symbol": "opencfw_boot_mutex_disinherit_timeout",
+      "basis": "Selected timeout disinherit source implements the stock max(base, highest waiter), one-held-mutex guard and owner assertion described in the pinned mutex-kernel REPORT; scoped source lead."
+    },
+    {
+      "entry": "0x00419240",
+      "source": "g2/components/bootloader/thread_creation/timer_service.c",
+      "symbol": "opencfw_bl_timer_service_start",
+      "basis": "Selected timer service start initializes the queue and creates the timer task with the stock name, stack, priority and storage addresses; body attribution lead."
+    },
+    {
+      "entry": "0x00419d08",
+      "source": "g2/components/bootloader/thread_creation/queue_receive.c",
+      "symbol": "opencfw_bl_kernel_queue_create_dynamic",
+      "basis": "Selected dynamic queue constructor allocates the stock 80-byte control block and publishes queue count, item size, allocation and type fields; body attribution lead from pinned semaphore receipt."
+    },
+    {
+      "entry": "0x0041a024",
+      "source": "g2/components/bootloader/thread_creation/isr_delivery.c",
+      "symbol": "opencfw_bl_kernel_queue_put_from_isr",
+      "basis": "Pinned isr-delivery REPORT attributes the 240-byte stock ISR queue put body to selected source; body attribution pending current integrated whole-path comparison."
+    },
+    {
+      "entry": "0x0041a3b0",
+      "source": "g2/components/bootloader/thread_creation/isr_delivery.c",
+      "symbol": "opencfw_bl_kernel_queue_get_from_isr",
+      "basis": "Pinned isr-delivery REPORT attributes the 192-byte stock ISR queue get body to selected source; body attribution pending current integrated whole-path comparison."
+    },
+    {
+      "entry": "0x00418394",
+      "source": "g2/components/bootloader/thread_creation/idle_sleep/idle_chain.c",
+      "symbol": "step_ticks",
+      "basis": "Selected tick-step source preserves next-unblock assertions, pending-tick increment and final tick advance; pinned idle-timer-chain REPORT documents 110/116 stock instruction bytes visited in bounded original/source comparisons. Terminal assertion loops and physical timer timing remain outside that proof."
+    },
+    {
+      "entry": "0x0042da1e",
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "symbol": "opencfw_boot_compare",
+      "basis": "Stock 4 KiB chunked storage-read/memcmp loop and 0x10b/0x10e EasyLogger branches match selected update-core compare; candidate attribution."
+    },
+    {
+      "entry": "0x0041c86c",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_power_config.c",
+      "symbol": "opencfw_boot_startup_power_configure",
+      "basis": "Five-operation switch, register masks and power callback/status-poll sequence match stock startup power configure body; selected source is a candidate attribution."
+    },
+    {
+      "entry": "0x0042033e",
+      "source": "g2/components/bootloader/nor_mspi_init/nor_mspi_init.c",
+      "symbol": "opencfw_provider_420254",
+      "basis": "Ghidra split the MSPI init continuation at 0x42033e with ambient R4-R8; selected 0x420254 source includes device configure/enable/interrupt/record/log continuation. This binds the region to one C owner, not a standalone function-equivalence claim."
+    },
+    {
+      "entry": "0x00424af0",
+      "source": "g2/components/bootloader/nor_mspi_init/hal_leaves.c",
+      "symbol": "opencfw_hal_mspi_configure",
+      "basis": "Pinned stock MSPI configure guards, module register offsets 0x90/0x9c/0x80, 0x8d0 state stride, buffer slot formula and state bytes match selected leaf; candidate attribution, not whole-function equality."
+    },
+    {
+      "entry": "0x00423a48",
+      "source": "g2/components/bootloader/init_table/qsort.c",
+      "symbol": "opencfw_boot_init_sort",
+      "basis": "Source qsort implementation and its stock differential qsort cases in init_table/verify_init_table.py; address attribution to catalogue introsort core is a candidate, not byte identity."
+    },
+    {
+      "entry": "0x0042b294",
+      "source": "g2/components/bootloader/source_candidate_20261010/gx_children.c",
+      "symbol": "native_spot_state_transition",
+      "basis": "Four-argument state transition source has the same profile and rank tables and old/new state branch structure as the locked pseudocode; body equivalence is not independently established."
+    },
+    {
+      "entry": "0x0042b6b8",
+      "source": "g2/components/bootloader/source_candidate_20261010/gx_children.c",
+      "symbol": "native_spot_state_decode",
+      "basis": "Three-argument state decoder matches the locked 0x42b6b8 input layout, configuration word, masks, and result table; equivalence remains to be checked by oracle."
+    },
+    {
+      "entry": "0x0042b06c",
+      "source": "g2/components/bootloader/source_candidate_20261010/gx_children.c",
+      "symbol": "native_spot_power_transition_trims",
+      "basis": "Two-argument transition trim source is called by the corresponding native state-transition source; candidate attribution only."
+    },
+    {
+      "entry": "0x0042c6f8",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "symbol": "opencfw_boot_iom_event_service",
+      "basis": "IOM event-service source header identifies stock 0x42c6f8 and source signature matches the event call shape; equivalence remains scoped."
+    },
+    {
+      "entry": "0x0042308e",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_context.c",
+      "symbol": "opencfw_bl_post_validate",
+      "basis": "UART context original/source comparison maps validation at 0x42308e with 0x42308e..0x4232c8 original bytes visited."
+    },
+    {
+      "entry": "0x0041ce52",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_runtime.c",
+      "symbol": "opencfw_boot_startup_spot_dispatch",
+      "basis": "Selected startup root calls the selected SPOT dispatch source at stock 0x41ce52; child attribution is a composed candidate and not a full proof."
+    },
+    {
+      "entry": "0x0042dae8",
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "symbol": "opencfw_boot_program",
+      "basis": "Update-core source program body follows the locked erase/open/chunk-read/program/compare/close flow and update_core/verify.py binds program to 0x42dae8; candidate attribution."
+    },
+    {
+      "entry": "0x00415bf6",
+      "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+      "symbol": "opencfw_boot_plain_vsprintf",
+      "basis": "Selected Ambiq parser source has the stock 0x415bf6 formatter ABI and parser default documented at 0x415c3a; bounded formatter receipts establish scoped behavior, not whole-domain equivalence."
+    },
+    {
+      "entry": "0x0042a2b4",
+      "source": "g2/components/bootloader/source_candidate_20261010/event_a_transition_children.c",
+      "symbol": "event_a_state_transition_sequence",
+      "basis": "Locked table at 0x433498 and 5x5 transition selector with matching three-argument output structure; source README documents table provenance."
+    },
+    {
+      "entry": "0x0042ee70",
+      "source": "g2/components/bootloader/initializer_callbacks/adc_samples.c",
+      "symbol": "opencfw_bl_adc_enumerate",
+      "basis": "ADC sample report records 388/388 original instruction bytes and 988 scoped source comparisons across seven bodies including 0x42ee70; selected source path confirmed."
+    },
+    {
+      "entry": "0x0042c0b2",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "symbol": "opencfw_boot_iom_event_apply",
+      "basis": "Selected IOM event apply source uses two-argument handle/events ABI and matches event apply pseudocode structure; bounded oracle proof remains separate."
+    },
+    {
+      "entry": "0x0041c320",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_runtime.c",
+      "symbol": "opencfw_boot_startup_info_cache",
+      "basis": "Selected startup root binds child_41c320 to startup_info_cache with void argument ABI; selected source route is explicit."
+    },
+    {
+      "entry": "0x0042d890",
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "symbol": "opencfw_boot_verify",
+      "basis": "Update-core verify.py binds stock 0x42d890 image CRC check to selected source verify body; signature and CRC flow match."
+    },
+    {
+      "entry": "0x0042f4b2",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_ton_hooks.c",
+      "symbol": "opencfw_boot_ton_trim_apply",
+      "basis": "Two-byte GPU state arguments, 0x433f20 three-byte table, 0x40020340/44/4c/54/58 registers and gate-delay sequence match stock pseudocode."
+    },
+    {
+      "entry": "0x004217d2",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
+      "symbol": "opencfw_boot_startup_select5",
+      "basis": "Class-5 HF2 configuration uses the same accepted 196608000/250000000 rates, 0x20027034 and 0x20026ff8 state, reference selection, and clock-ID children; verify_clock_select5_entry.py passes seven bounded stock/source entry cases. Hot reconfiguration and physical clock effects remain unproved."
+    },
+    {
+      "entry": "0x00421eba",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
+      "symbol": "opencfw_bl_clock_request_id5",
+      "basis": "Stock clock class 5 user-bit reservation, generator selection and callback state correspond to selected request-id5 source; this is a body attribution lead pending full original/source path proof."
+    },
+    {
+      "entry": "0x004220b2",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "symbol": "opencfw_bl_clock_request_id6",
+      "basis": "Stock clock class 6 user-bit reservation, PLL initialization/configuration/enable and lock wait correspond to selected request-id6 source; this is a body attribution lead pending full original/source path proof."
+    },
+    {
+      "entry": "0x00415734",
+      "source": "g2/components/bootloader/runtime_memory/boot_assert.S",
+      "symbol": "opencfw_boot_assert_report",
+      "basis": "Native 0x415734 reporter and 0x417c28/0x41b298 failure chain are implemented instruction-for-instruction in selected assembly. verify_boot_assert.py compares native/source first semihost stack record, return and repeated failure calls."
+    },
+    {
+      "entry": "0x0041b158",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "symbol": "opencfw_boot_elog_append",
+      "basis": "Native elog_strcpy checks dst/src through EasyLogger assertion policy, copies while source nonzero and offset++<1024 and returns consumed source bytes; selected append source has the same guard, copy loop and result."
+    },
+    {
+      "entry": "0x0041ff74",
+      "source": "g2/components/bootloader/nor_mspi_power/timing_scan.c",
+      "symbol": "opencfw_provider_420002",
+      "basis": "Native longest timing-window center helper is selected static window_center in timing_scan.c. verify_timing_window_center.py compared 268 masks and exposed/corrected bit1/bit30 edge tests. The static helper is inlined into the linked provider."
+    },
+    {
+      "entry": "0x00413834",
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "symbol": "lfs_file_close",
+      "basis": "Native helper calls file_sync_, removes mlist node, frees file cache when cfg->buffer absent and returns sync result; selected pinned upstream lfs_file_close_ has the same source body, likely inlined into public lfs_file_close."
+    },
+    {
+      "entry": "0x0042ee00",
+      "source": "g2/components/bootloader/initializer_callbacks/adc_samples.c",
+      "symbol": "opencfw_boot_adc_correct_sample",
+      "basis": "Native ADC channel correction is selected source; initializer_callbacks/verify_adc_samples.py names and compares this exact native entry with the provider on bounded state."
+    },
+    {
+      "entry": "0x0042e1ec",
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "symbol": "opencfw_boot_crc32",
+      "basis": "Native CRC32 table function is selected source bitwise CRC32 equivalent; update_core/verify.py directly compares this entry across bounded data and seed cases. Algorithm identity does not prove timing/table access identity."
+    },
+    {
+      "entry": "0x00427360",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "symbol": "opencfw_bl_clock_request_id6",
+      "basis": "Native SYSPLL enable helper validates context magic/active flag, checks status upper nibble, sets control0 bit29 and context bit25; selected class6 pll_enable has those branches and is called by linked class6 request provider."
+    },
+    {
+      "entry": "0x00427522",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "symbol": "opencfw_bl_clock_request_id6",
+      "basis": "Native SYSPLL lock helper validates context and enable state, derives scale 0x753 or1000, reference divider and timeout, then polls lock status; selected static pll_lock_wait has this body within class6 request."
+    },
+    {
+      "entry": "0x004272ac",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "symbol": "opencfw_bl_clock_request_id6",
+      "basis": "Native SYSPLL initialize validates mode/output/context, marks context magic, clears state and invokes power initialization; selected static pll_initialize is called by class6 request."
+    },
+    {
+      "entry": "0x0041ff60",
+      "source": "g2/components/bootloader/nor_mspi_power/timing_scan.c",
+      "symbol": "opencfw_provider_420002",
+      "basis": "Native loop repeatedly applies bits &= bits<<1 and increments score until zero; selected static leading_ones in linked timing scan uses identical operations."
+    },
+    {
+      "entry": "0x004215ae",
+      "source": "g2/components/bootloader/clock_manager/clock_class_providers.c",
+      "symbol": "opencfw_bl_clock_release_id3",
+      "basis": "Native 0x4215ae tests the two 32-bit user words at 0x20026e74+clock*8 for any nonzero word; selected class3 release scans both words inline after clearing a user and gates baseline register update on zero. This is a class3 call-path attribution only; generic clock-ID helper is not separately retained."
+    },
+    {
+      "entry": "0x00415128",
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "symbol": "lfs_format",
+      "basis": "Native tiny wrapper sets unused R2 to zero and calls internal 0x41450e; pinned LittleFS public lfs_format wrapper invokes matching internal source body with lock/trace macros compiled out. R2 is not an additional live C argument."
+    },
+    {
+      "entry": "0x00415132",
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "symbol": "lfs_mount",
+      "basis": "Native tiny wrapper sets unused R2 to zero and calls internal 0x414650; pinned LittleFS public lfs_mount wrapper invokes matching internal source body with lock/trace macros compiled out. R2 is not an additional live C argument."
+    },
+    {
+      "entry": "0x0041051a",
+      "source": "g2/components/bootloader/allocator/allocator.c",
+      "symbol": "opencfw_boot_fs_free",
+      "basis": "Native eight-byte LittleFS deallocation adapter calls allocator free at 0x415558 and returns; selected pinned LittleFS maps LFS_FREE directly to linked opencfw_boot_fs_free in allocator.c. Public deallocation effect is represented, while the native adapter function envelope is not emitted."
+    },
+    {
+      "entry": "0x0042d9f0",
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "symbol": "opencfw_boot_erase_visit",
+      "basis": "Native erase visitor loops over remaining length, calls descriptor erase callback at+0x20, subtracts descriptor chunk size and advances address until remaining<=chunk; selected source opencfw_boot_erase_visit has the same loop and update_core/verify.py exercises this entry on bounded cases."
+    },
+    {
+      "entry": "0x0042c076",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "symbol": "opencfw_boot_iom_error_classify",
+      "basis": "Native context-events error classifier ORs registered+incoming events, prioritizes 0x6c, bit9, bit4 and 0x4800; selected source opencfw_boot_iom_error_classify is directly exercised against this native entry by verify_context_events.py."
+    },
+    {
+      "entry": "0x004211b0",
+      "source": "g2/components/bootloader/filesystem/boot_mount.c",
+      "symbol": "opencfw_provider_421210",
+      "basis": "Native format recovery unmounts, formats, mounts, logs/returns9 on mount failure and calls directory creation with analogous log/9 result; selected static format_recover has those branches inside linked boot mount provider."
+    },
+    {
+      "entry": "0x00423f28",
+      "source": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "symbol": "opencfw_hal_mspi_cq_init",
+      "basis": "Native CQ init stores half-unit queue size, buffer address and option1 in stack config, derives module+8 and module*0x8d0+0x828 slot, then calls 0x427794; selected source performs those fields/call."
+    },
+    {
+      "entry": "0x00423f54",
+      "source": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "symbol": "opencfw_hal_mspi_cq_term",
+      "basis": "Native CQ term loads module from state+4, reads queue handle at module*0x8d0+0x828, calls 0x427ad6(queue,1) if present, then clears slot; selected source does the same."
+    },
+    {
+      "entry": "0x00426450",
+      "source": "g2/components/bootloader/nor_mspi_init/hal_leaves.c",
+      "symbol": "opencfw_hal_mspi_interrupt_enable",
+      "basis": "Selected MSPI HAL leaf validates handle and ORs interrupt mask into module register +0x200; native entry 0x426450 has that contract, covered by nor_mspi_init leaf oracle scope."
+    },
+    {
+      "entry": "0x0041fa98",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_alternatives.c",
+      "symbol": "opencfw_boot_startup_conditional",
+      "basis": "Native startup conditional checks byte 0x20027198==1, calls shutdown first/second with failure spins, external-mode0, power register28, then clears flag; selected source has this sequence and verify_startup_alternatives.py names this native/source pair."
+    },
+    {
+      "entry": "0x0041b2ac",
+      "source": "g2/components/bootloader/thread_creation/exception_entry.S",
+      "symbol": "opencfw_boot_first_task_restore",
+      "basis": "Native first-task restore loads 0x20027134 task pointer, restores PSPLIM, CONTROL=2, PSP and BASEPRI=0, then BX task context; selected exception_entry.S reproduces instruction sequence. Actual exception delivery/task stack correctness remains hardware qualification."
+    },
+    {
+      "entry": "0x0041fdc0",
+      "source": "g2/components/bootloader/nor_mspi_init/hal_leaves.c",
+      "symbol": "opencfw_bl_interrupt_enable",
+      "basis": "Native nonnegative IRQ writes bit to NVIC ISER indexed by IRQ/32; selected source leaf and verify_leaves.py pair this native entry."
+    },
+    {
+      "entry": "0x0041fdde",
+      "source": "g2/components/bootloader/nor_mspi_init/hal_leaves.c",
+      "symbol": "opencfw_bl_interrupt_priority",
+      "basis": "Native positive IRQ writes priority<<4 to NVIC byte lane, negative special IRQ selects system-handler priority lane; selected source leaf and verify_leaves.py pair this native entry."
+    },
+    {
+      "entry": "0x00423d08",
+      "source": "g2/components/bootloader/init_table/qsort.c",
+      "symbol": "opencfw_boot_init_sort",
+      "basis": "Native public wrapper guards null array and null comparator, then calls introsort; selected source now has the exact guards and bounded ordered-comparator oracle covers 34 cases."
+    },
+    {
+      "entry": "0x00423972",
+      "source": "g2/components/bootloader/init_table/qsort.c",
+      "symbol": "opencfw_boot_init_sort",
+      "basis": "Native median-of-three compares pb/pa, pc/pb, pb/pa in that order with three conditional swaps; selected static median3 now matches call order and is exercised in 27 wide cases."
+    },
+    {
+      "entry": "0x004239c2",
+      "source": "g2/components/bootloader/init_table/qsort.c",
+      "symbol": "opencfw_boot_init_sort",
+      "basis": "Native heap sift-down helper is represented by selected static sift_down/heap_sort path; 27 qsort oracle matrices include count>32 and exact ordered comparator arguments, but arbitrary heap-mode inputs remain unqualified."
+    },
+    {
+      "entry": "0x00423928",
+      "source": "g2/components/bootloader/init_table/qsort.c",
+      "symbol": "opencfw_boot_init_sort",
+      "basis": "Native fixed128-byte range rotation is semantically represented by selected insertion_sort adjacent swaps for whole-record output. Exact memory write order/stack scratch are different, so this is call-path attribution only, not machine-body equivalence."
+    },
+    {
+      "entry": "0x0041c7de",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_power_config.c",
+      "symbol": "opencfw_boot_startup_register_setup",
+      "basis": "Native ten ordered read-modify-write operations on 0x40020060 with masks 0x20000,0x40000,0x80000,0x10000,~0x10,+0xe,+1,~0x200,+0x1c0,+0x20 match selected startup register setup exactly."
+    },
+    {
+      "entry": "0x0041bf3a",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_power_config.c",
+      "symbol": "opencfw_boot_startup_resource_ready",
+      "basis": "Native first polls 0x40020180/0x100, on timeout polls 0x400c0a7c/1, sets 0x400c0a80 bit0 on ready then retries first poll; selected startup resource-ready source matches these calls/status branches."
+    },
+    {
+      "entry": "0x0042adb8",
+      "source": "g2/components/bootloader/source_candidate_20261010/gx_children.c",
+      "symbol": "native_spot_trim_enable_42adb8",
+      "basis": "Native trim-enable updates FLASH/MCU register 0x400201b0, calibration register 0x40020088, stores bounded low-10-bit correction at 0x200270a4, and applies it to 0x40020080; selected source performs these same operations and is linked. Device effects remain unverified."
+    },
+    {
+      "entry": "0x0042074e",
+      "source": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "symbol": "opencfw_bl_nor_busy",
+      "basis": "Native NOR busy helper submits five-byte status transfer, logs and returns error on transfer failure, otherwise returns status bit0; selected source and existing NOR helper oracle exercise this entry."
+    },
+    {
+      "entry": "0x00423390",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "symbol": "opencfw_boot_uart_tx_drain_ring",
+      "basis": "Native UART drain checks FIFO-full bit, dequeues one byte from TX ring and writes it to UART FIFO under critical mask; selected source and verify_elog_uart_tx.py exercise this original entry on finite synthetic FIFO cases."
+    },
+    {
+      "entry": "0x00423350",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c",
+      "symbol": "opencfw_boot_uart_rx_collect",
+      "basis": "Native RX collection saves PRIMASK, calls 0x4232c8 FIFO receive into 32-byte stack buffer, adds reported count to ring at context+0x4c, returns 0x08000001 when ring add fails, restores PRIMASK; selected rx_collect mirrors the same operations. This is source attribution, not a new hardware receive qualification."
+    },
+    {
+      "entry": "0x004151fc",
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "symbol": "lfs_file_write",
+      "basis": "Authenticated native wrapper checks file membership through 0x410d8a; on false it calls retained LittleFS assert reporter with source line 6207 (0x183f), then passes lfs/file/buffer/size to internal writer 0x413e58. Selected pinned upstream lfs_file_write at line6207 has this same assertion and internal call."
+    },
+    {
+      "entry": "0x00426c4e",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
+      "symbol": "opencfw_boot_startup_select4",
+      "basis": "Native helper takes reference r0, desired value r1 and quotient out pointer r2, performs UDIV r1/r0, stores quotient, returns0; caller 0x4216d4 supplies reference from 0x20000088 and desired value and then folds quotient into local config. Selected startup_select4 expresses this helper inline with identical UDIV operands and output field."
+    },
+    {
+      "entry": "0x00421ba4",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider2.c",
+      "symbol": "opencfw_bl_radio_callback_finish",
+      "basis": "Native class-2 finish checks 0x2002719b active, waits through 0x4216b2 while timeout and active remain, then saves PRIMASK, clears active and 0x20027040 callback pointer, restores PRIMASK; selected provider has this complete sequence."
+    },
+    {
+      "entry": "0x0041d676",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider2.c",
+      "symbol": "opencfw_bl_radio_mode_sample",
+      "basis": "Native reads 0x4002012c, maps bit8 to mode2, else bit0 to mode1, else mode0, writes byte to output and returns0; selected provider matches."
+    },
+    {
+      "entry": "0x0041cd76",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_power_config.c",
+      "symbol": "opencfw_boot_startup_hook_before",
+      "basis": "Native reads optional hook word 0x20026e4c twice, invokes it without arguments if nonnull and returns hook result, otherwise0; selected source has the same hook call contract."
+    },
+    {
+      "entry": "0x0041cd8c",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_power_config.c",
+      "symbol": "opencfw_boot_startup_hook_middle",
+      "basis": "Native reads optional hook word 0x20026e50 twice, invokes it without arguments if nonnull and returns hook result, otherwise0; selected source has the same hook call contract."
+    },
+    {
+      "entry": "0x0041cda2",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_power_config.c",
+      "symbol": "opencfw_boot_startup_hook_after",
+      "basis": "Native reads optional hook word 0x20026e54 twice, invokes it without arguments if nonnull and returns hook result, otherwise0; selected source has the same hook call contract."
+    },
+    {
+      "entry": "0x0041583c",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_power_config.c",
+      "symbol": "opencfw_boot_startup_external_mode",
+      "basis": "Native one-word setter writes incoming callback to 0x200270cc and returns; selected source has same volatile store."
+    },
+    {
+      "entry": "0x0041a692",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "symbol": "opencfw_boot_elog_uart_output",
+      "basis": "Native wrapper calls 0x41b854, which supplies UART module1 to logger TX; selected output adapter calls opencfw_boot_uart_log_send(1,buffer,length). Retained level argument is ignored."
+    },
+    {
+      "entry": "0x0041b83c",
+      "source": "g2/components/bootloader/thread_creation/timer_service.c",
+      "symbol": "opencfw_bl_timer_service_start",
+      "basis": "Native static timer-task memory callback writes control block 0x200269e0, stack 0x200254d0, words256 through three output pointers. Selected timer service passes these same three values directly to static-thread creation; the adapter is folded into its C caller."
+    },
+    {
+      "entry": "0x00417240",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "tlsf_create_with_pool",
+      "basis": "Native allocator initializes TLSF control through child 0x417208 then passes mem+0xc74 and bytes-0xc74 to add_pool child 0x41715c, returning control pointer. Pinned TLSF create_with_pool expresses the same control-size offset and add_pool call."
+    },
+    {
+      "entry": "0x0041b0f4",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "symbol": "opencfw_boot_elog_tag_level",
+      "basis": "Native bounded strcmp with length30 returns sign only; sole identified caller 0x41760a checks equality for active logger tag slot. Selected tag-level source performs that 30-byte equality inline with same NUL early end. Full comparator return ABI is not represented as separately callable source."
+    },
+    {
+      "entry": "0x0041513c",
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "symbol": "lfs_unmount",
+      "basis": "Native public unmount wrapper passes lfs and zero to internal deinit 0x414948 and returns status; pinned LittleFS lfs_unmount source is the same public operation."
+    },
+    {
+      "entry": "0x00415274",
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "symbol": "lfs_file_rewind",
+      "basis": "Native public rewind wrapper passes lfs/file and zero to private rewind 0x413fac; pinned LittleFS public rewind calls the same private operation."
+    },
+    {
+      "entry": "0x0041715c",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "tlsf_add_pool",
+      "basis": "Native TLSF add_pool computes pool overhead/aligned block bytes, checks 4-byte alignment and min/max limits, then initializes free block and zero-size sentinel; pinned TLSF upstream add_pool has those branches and structure."
+    },
+    {
+      "entry": "0x00417208",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "tlsf_create",
+      "basis": "Native TLSF create checks 4-byte memory alignment, logs alignment failure, otherwise initializes control through 0x41711c and returns the original pointer; pinned upstream tlsf_create has the same contract."
+    },
+    {
+      "entry": "0x0041b854",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "symbol": "opencfw_boot_elog_uart_output",
+      "basis": "Native logger adapter moves buffer and length to R1/R2, sets UART module1 in R0 and calls 0x41f918; selected output adapter expresses same call in C and folds this and 0x41a692 native wrappers into one source provider."
+    },
+    {
+      "entry": "0x0042e3ca",
+      "source": "g2/components/bootloader/source_candidate_20261010/thread_deinit.c",
+      "symbol": "opencfw_boot_manager_thread_deinit",
+      "basis": "Initialized Boot callback pointer at RAM payload offset0x4f8 targets native 0x42e3ca. Native reads manager handle from 0x200004fc, rereads it when nonzero, calls terminate 0x416200, clears handle and returns0. Selected thread_deinit.c has these same volatile reads and teardown effects. Callback address is relocated to the selected symbol in full co-placement."
+    },
+    {
+      "entry": "0x0041f5d0",
+      "source": "g2/components/bootloader/initializer_callbacks/external_irq_wrappers.c",
+      "symbol": "opencfw_boot_uart_irq1",
+      "basis": "Native external IRQ vector32 checks UART row1 enabled byte before passing row1 to UART IRQ child0x41f558; selected wrapper matches; verify_external_uart_irq_wrappers.py compares bounded row/flag cases."
+    },
+    {
+      "entry": "0x0041f5e6",
+      "source": "g2/components/bootloader/initializer_callbacks/external_irq_wrappers.c",
+      "symbol": "opencfw_boot_uart_irq2",
+      "basis": "Native external IRQ vector33 checks UART row2 enabled byte before passing row2 to UART IRQ child0x41f558; selected wrapper matches; verify_external_uart_irq_wrappers.py compares bounded row/flag cases."
+    },
+    {
+      "entry": "0x0041f5fc",
+      "source": "g2/components/bootloader/initializer_callbacks/external_irq_wrappers.c",
+      "symbol": "opencfw_boot_uart_irq3",
+      "basis": "Native external IRQ vector34 checks UART row3 enabled byte before passing row3 to UART IRQ child0x41f558; selected wrapper matches; verify_external_uart_irq_wrappers.py compares bounded row/flag cases."
+    },
+    {
+      "entry": "0x0041fe06",
+      "source": "g2/components/bootloader/initializer_callbacks/external_irq_wrappers.c",
+      "symbol": "opencfw_boot_mspi_irq",
+      "basis": "Native vector37 reads MSPI handle at0x200270dc for each call, obtains status into stack word, then clear and service with that status; selected wrapper preserves three reads and order."
+    },
+    {
+      "entry": "0x004303de",
+      "source": "g2/components/bootloader/initializer_callbacks/external_irq_wrappers.c",
+      "symbol": "opencfw_boot_gpio_irq0",
+      "basis": "Native vector72 sign-extends GPIO IRQ table halfword0, passes IRQ,zero,status-out to status getter then clear/service using returned status; selected wrapper uses source-owned table and same child sequence."
+    },
+    {
+      "entry": "0x00430404",
+      "source": "g2/components/bootloader/initializer_callbacks/external_irq_wrappers.c",
+      "symbol": "opencfw_boot_gpio_irq1",
+      "basis": "Native vector73 sign-extends GPIO IRQ table halfword1, passes IRQ,zero,status-out to status getter then clear/service using returned status; selected wrapper uses source-owned table and same child sequence."
+    },
+    {
+      "entry": "0x0043042a",
+      "source": "g2/components/bootloader/initializer_callbacks/external_irq_wrappers.c",
+      "symbol": "opencfw_boot_gpio_irq2",
+      "basis": "Native vector74 sign-extends GPIO IRQ table halfword2, passes IRQ,zero,status-out to status getter then clear/service using returned status; selected wrapper uses source-owned table and same child sequence."
+    },
+    {
+      "entry": "0x00422aca",
+      "source": "g2/components/bootloader/initializer_callbacks/external_irq_wrappers.c",
+      "symbol": "opencfw_boot_spot_timer_irq",
+      "basis": "Stock external vector slot98 points to 0x422aca, an eight-byte wrapper that calls boost_service at 0x41cdb8 and returns. Selected source vector wrapper calls the source boost_service provider. This identifies entry/body call shape; downstream power hardware effects remain separately bounded."
+    },
+    {
+      "entry": "0x00421978",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
+      "symbol": "opencfw_boot_startup_select6",
+      "basis": "Native class-6 selector checks reference mode0/mode1 presence, optionally generates local config through0x427160, enters critical region, rejects owned-user state3, copies 12-byte config to0x20027004 and records rate/enable flag. Selected source expresses this body. New six-case original/source oracle covers explicit-config return, copied bytes, rate, flag and PRIMASK; automatic generator and physical PLL remain unverified."
+    },
+    {
+      "entry": "0x00422700",
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/fp_primitives.c",
+      "symbol": "opencfw_fp_scale2",
+      "basis": "Native raw-word wrapper moves R0/R1 into D0 and R2 to inner scaler; selected opencfw_fp_scale2 presents the same raw-word softfp interface and contains the inner algorithm. Eight bounded stock/source cases pass, but FP multiply/gradual-underflow paths remain unqualified."
+    },
+    {
+      "entry": "0x00422714",
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/fp_primitives.c",
+      "symbol": "opencfw_fp_scale2",
+      "basis": "Native private binary exponent scaler has explicit normal, special, hard-underflow and overflow/errno paths in selected opencfw_fp_scale2. Eight bounded stock/source cases pass; denormal multiplication/FPSCR paths are source-derived but not Unicorn-qualified."
+    },
+    {
+      "entry": "0x0041f358",
+      "source": "g2/components/bootloader/port_timer/port_timer.c",
+      "symbol": "opencfw_bl_port_timer_clock_configure",
+      "basis": "Native reads old STIMER config at 0x40008800, classifies old/new low nibbles through 0x41f340, requests and releases class clock user50 on mode changes, writes new config and ready byte 0x200271bf, returns old config; selected port_timer implementation has this exact state transition."
+    },
+    {
+      "entry": "0x00418b7c",
+      "source": "g2/components/bootloader/thread_creation/mutex_kernel.c",
+      "symbol": "opencfw_boot_mutex_inherit",
+      "basis": "Exact native entry and 0x418c1e envelope identified in existing verify_mutex_kernel.py; selected mutex_kernel.c owns owner-priority inheritance, ready-list removal/reinsert and return flag, with prior bounded native/source mutex kernel comparison."
+    },
+    {
+      "entry": "0x0041f918",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "symbol": "opencfw_boot_uart_log_send",
+      "basis": "Exact entry named in verify_elog_uart_tx.py. Native builds descriptor, checks row initialized, calls UART transfer 0x4233e8, waits up to1000 ten-unit delays for completion flag; selected source owns log-send flow and existing bounded UART oracle."
+    },
+    {
+      "entry": "0x0041b46e",
+      "source": "g2/components/bootloader/thread_creation/kernel_static.c",
+      "symbol": "opencfw_boot_thread_frame",
+      "basis": "Native stack writes xPSR01000000, entry, return hook, 0x12121212..0x04040404 scratch registers, EXC_RETURN fffffffd and base, matching selected thread-frame source; original address is documented in source header."
+    },
+    {
+      "entry": "0x00422040",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
+      "symbol": "opencfw_bl_clock_release_id5",
+      "basis": "Native user-present check class5, critical save, user clear, zero-user clockgen disable and class2/3 user0x36 release, switch0, restore; selected class5 release source has same branches."
+    },
+    {
+      "entry": "0x004224b2",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_shutdown.c",
+      "symbol": "opencfw_boot_shutdown_resource",
+      "basis": "Existing bounded startup-shutdown oracle identifies exact 0x4224b2..0x42252e native range with 124/124 instruction bytes; selected shutdown resource source preserves reference count, active state and PRIMASK restore."
+    },
+    {
+      "entry": "0x00422ee2",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "symbol": "opencfw_boot_uart_tx_claim",
+      "basis": "Exact original 0x422ee2 is bound to selected claim function in verify_elog_uart_tx.py; bounded UART TX oracle exercises the claim branch and its descriptor state."
+    },
+    {
+      "entry": "0x004301d6",
+      "source": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+      "symbol": "opencfw_boot_init_callback_platform_sequence",
+      "basis": "Native descriptor register, mode1 apply, bringup, followup and finish call sequence is exercised by verify_initializer_callbacks.py; source wrapper owns 0x4301d6."
+    },
+    {
+      "entry": "0x0043194c",
+      "source": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+      "symbol": "opencfw_boot_init_callback_services",
+      "basis": "Native six priority writes 0xff/d7 and setup/finalize sequence is exercised by verify_initializer_callbacks.py; source wrapper owns 0x43194c."
+    },
+    {
+      "entry": "0x0042dc90",
+      "source": "g2/components/bootloader/update_core/handoff.S",
+      "symbol": "opencfw_boot_vector_handoff",
+      "basis": "Native writes VTOR, loads MSP from destination vector word0 and branches to reset vector word1; selected handoff.S is the same architectural operation and update_core/verify.py exercises it with bounded synthetic vectors."
+    },
+    {
+      "entry": "0x0041f440",
+      "source": "g2/components/bootloader/port_timer/port_timer.c",
+      "symbol": "opencfw_bl_port_timer_compare_set",
+      "basis": "Native compare_id<8, shadow compare wait, PRIMASK save, elapsed+3/delta decision, hardware compare write, shadow counter update and late status08000000 are expressed by selected compare_set. This is structural source attribution; asynchronous STIMER behavior remains hardware-dependent."
+    },
+    {
+      "entry": "0x00426d48",
+      "source": "g2/components/bootloader/initializer_callbacks/clock_pll_math.c",
+      "symbol": "opencfw_boot_pll_gcd",
+      "basis": "Selected clock_pll_math.c explicitly owns native 0x426d48 floating GCD iteration; native compares min operand, limits16 iterations, floors quotient and subtracts remainder with the pinned threshold. This is source attribution; hardware FP rounding domain remains bounded by existing clock oracle."
+    },
+    {
+      "entry": "0x00428378",
+      "source": "g2/components/bootloader/source_candidate_20261010/pcm22_timer_service.c",
+      "symbol": "opencfw_pcm22_sequence2b",
+      "basis": "Existing selected source provider for authenticated PCM2.2 timer service chain; verify_spot_sequence_2b.py compares eight bounded original/source cases including ordered MMIO writes, delays, critical/timer cuts and PRIMASK. Hardware wait/timeout remains unqualified."
+    },
+    {
+      "entry": "0x0042a04a",
+      "source": "g2/components/bootloader/source_candidate_20261010/pcm22_timer_service.c",
+      "symbol": "opencfw_pcm22_timer_service",
+      "basis": "Existing selected source provider for authenticated PCM2.2 timer service chain; verify_spot_sequence_2b.py compares eight bounded original/source cases including ordered MMIO writes, delays, critical/timer cuts and PRIMASK. Hardware wait/timeout remains unqualified."
+    },
+    {
+      "entry": "0x00428506",
+      "source": "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/pcm22_remaining.c",
+      "symbol": "opencfw_spot_pcm22_transition4",
+      "basis": "Selected provider and selected initialized callback relocation agree on native selector4. verify_spot_selector4.py compares four bounded stock/C cases, including ordered MMIO writes, timer/TON/delay cuts, timeout and returned packed profile. Physical timing and whole-body equivalence outside these fixtures remain unqualified."
+    },
+    {
+      "entry": "0x00422220",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "symbol": "opencfw_bl_clock_release_id6",
+      "basis": "Native clock class6 user-present check, critical section, user clear, last-user PLL disable/deinit, and conditional class2/3 release match selected clock_class_provider6.c release_id6. ABI raw R1 return and asynchronous hardware remain unqualified."
+    },
+    {
+      "entry": "0x00422f4c",
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c",
+      "symbol": "opencfw_boot_uart_rx_claim",
+      "basis": "Native critical section, initialized check, descriptor field copy from offset0x34, seven-word transfer and counter reset match selected UART receive claim. Interrupt timing and full ABI return pair remain unqualified."
+    },
+    {
+      "entry": "0x00422628",
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/fp_primitives.c",
+      "symbol": "opencfw_fp_frexp",
+      "basis": "Stock frexp wrapper forwards input R0:R1 to normalization child 0x422634 and stores returned R2 exponent. Selected opencfw_fp_frexp composes both steps; verify_fp_frexp.py compares 15 native-wrapper/source results and exponent stores using M33-compatible source compilation. M55 LSLL instruction emulation is not qualified."
+    },
+    {
+      "entry": "0x00422634",
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/fp_primitives.c",
+      "symbol": "opencfw_fp_frexp",
+      "basis": "Native no-store normalization child returns binary64 fraction in R0:R1 and exponent in R2. Selected opencfw_fp_frexp integrates equivalent normalization and exponent store; 15 native-wrapper/source cases pass, including subnormals, signed zero, finite extremes, infinities and NaN. This is an inlined source-body attribution, not an independent C entry or all-domain proof."
+    },
+    {
+      "entry": "0x0041b6fa",
+      "source": "g2/components/bootloader/port_timer/port_timer.c",
+      "symbol": "opencfw_bl_port_timer_configure",
+      "basis": "Native startup timer configure sets interval0x20, compare shadow, IRQ and clock dependencies. Selected port_timer.c and its pinned report explicitly reconstruct 0x41b6fa; physical timer/NVIC effects remain outside source verification."
+    },
+    {
+      "entry": "0x00422468",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_shutdown.c",
+      "symbol": "opencfw_boot_shutdown_clock_release",
+      "basis": "Native function is named debug_disable by decompiler, but pointer literals0x422578/7c resolve to reference byte0x200271a1 and register0x40020250. Selected shutdown_clock_release decrements reference, clears clock bits on zero, then calls debug-release and resource-release children. This is structural attribution; full return ABI/MMIO schedule is not independently oracle-qualified."
+    }
+  ]
+}

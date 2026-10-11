@@ -5,6 +5,7 @@
 #include <stdint.h>
 extern void opencfw_bl_thread_register(uint32_t *tcb);
 extern uint32_t opencfw_bl_mask_interrupts(void);
+extern void opencfw_bl_task_return(void);
 static void fail(void) {
     (void)opencfw_bl_mask_interrupts();
     *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0;
@@ -13,7 +14,7 @@ static void fail(void) {
 uintptr_t opencfw_boot_thread_frame(uintptr_t top,uintptr_t base,
                                   uintptr_t entry,uintptr_t arg) {
     uint32_t *p=(uint32_t *)top;
-    *--p=0x01000000;*--p=entry;*--p=0x41b391;
+    *--p=0x01000000;*--p=entry;*--p=(uintptr_t)opencfw_bl_task_return;
     *--p=0x12121212;*--p=0x03030303;*--p=0x02020202;*--p=0x01010101;
     *--p=arg;*--p=0x11111111;*--p=0x10101010;*--p=0x09090909;
     *--p=0x08080808;*--p=0x07070707;*--p=0x06060606;*--p=0x05050505;

@@ -1,0 +1,3523 @@
+{
+  "status": "PASS_A2_BOUNDED_BRANCH",
+  "cases": 108,
+  "image_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "b8ecab42f3d8fb49e0d9dde0b62e6ffa3c8ee4c6729bb30a61f4fb587af667ab",
+  "elf_sha256": "4a9105f1a5feb3397cdcb4a6385b829137af415f72e73c6baae063c349ef9599",
+  "limits": [
+    "Only opcode 0xa2. Fill, hex and logger are controlled lower ABI cuts.",
+    "No public legacy provider, formatter/UART, physical CASE or arbitrary opcode claim."
+  ],
+  "rows": [
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83,
+              82
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83,
+              82
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              170,
+              213,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              170,
+              213,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83,
+              82
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83,
+              82
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              170,
+              213,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              170,
+              213,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85,
+              85
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83,
+              82
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              85,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83,
+              82
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              170,
+              213,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              170,
+              213,
+              84,
+              87,
+              86,
+              81,
+              80,
+              83
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "0000000000000000",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0000000000000000"
+          ],
+          [
+            "hex",
+            8,
+            "0000000000000000"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "0001020304050607",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "0001020304050607"
+          ],
+          [
+            "hex",
+            8,
+            "0001020304050607"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": false,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 305419896,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ],
+          [
+            "log",
+            "%02x%02x%02x%02x%02x%02x%02x%02x",
+            [
+              255,
+              128,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "pattern": "ff80010203040506",
+      "mutate": true,
+      "logger_return": 305419896,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "fill",
+            "ff80010203040506"
+          ],
+          [
+            "hex",
+            8,
+            "ff80010203040506"
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    }
+  ]
+}

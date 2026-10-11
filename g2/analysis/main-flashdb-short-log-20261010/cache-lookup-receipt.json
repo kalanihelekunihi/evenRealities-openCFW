@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "cases": 1200,
+  "stock_address": "0x543e28..0x543ee8",
+  "stock_body_sha256": "af7e11f5c40ea246675275b3279ee3e11a26932f34fe452da0c92a71d0eb22fd",
+  "source_sha256": "e88678ee66f6764bc10a3274ea84254d75b9136484f3db2859c60b7ccddd0199",
+  "elf_sha256": "a84da6f749fee9ff070386935fa4b6bda142e7ead30a89fb43b68cbc90f19f7d",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_cache_lookup",
+    "-Wl,--defsym=g2_flashdb_crc32=0x585841",
+    "-Wl,--defsym=g2_flashdb_flash_read=0x585a13",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_cache_lookup_candidates_20261010/cache_lookup.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-cache-lookup.elf"
+  ],
+  "limits": "Stock CRC32 and stock strncmp execute from fixed image. Flash read is a coherent shared callback writing 64 name bytes. Key lengths 0,1,4,63,64 with zero-padded and 64-byte nonzero names. Cortex-M4 scalar execution; M55 archive compile separately."
+}

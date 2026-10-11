@@ -1,0 +1,31 @@
+{
+  "build_receipt": "g2/build/c-firmware/20261011/em-startup-hook-round/receipt.json",
+  "build_receipt_sha256": "66893fcf247c5aa39d30768612e70da787349cd39b03b18d9a45963712ad9b6e",
+  "candidate_compilation_passed": true,
+  "defined_symbols": 13,
+  "unresolved_symbols": [
+    "opencfw_em9305_startup_lower"
+  ],
+  "inputs": [
+    {
+      "path": "g2/components/em9305/qpc_scheduler_candidate/startup_hook.c",
+      "sha256": "e20d974fcbfd6d462dbb686c8f6ab185498d430bf6fe8b6956847df6c545faa0"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/em9305/startup-hook-native.txt",
+      "sha256": "c96f04ea264181334613c468ca6a143c372f77c3d07c7e0ad2d0acd5afe8ac39"
+    },
+    {
+      "path": "g2/research/corpus/em9305/ghidra/round16-authoritative/logs/qf_on_startup.log",
+      "sha256": "e38c503fdac898ceecf9fac68e2e5b505c82c042774cda992c566aaa4c7097ac"
+    }
+  ],
+  "original_instruction_execution": false,
+  "full_source_complete": false,
+  "limits": [
+    "Retained Ghidra ARCompact startup listing misdecodes ARCEM operations; fresh native ARCEM listing used.",
+    "Initial residual R0 is explicit incoming adapter contract for lower0x302518, not proven public C hook ABI.",
+    "Callbacks preserve actual R0=self address but producing callback signatures and slot initialization remain unqualified.",
+    "Startup peripheral init lower, all record/controller data/layout and reset ownership remain incomplete."
+  ]
+}

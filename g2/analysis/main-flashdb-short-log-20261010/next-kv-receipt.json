@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "cases": 3840,
+  "stock_address": "0x543f8c..0x544000",
+  "stock_body_sha256": "ab9dfe447380017a9028f72bbbd0b8a9cbdfa2eb0595e06a48f41d3763e61bc2",
+  "source_sha256": "5991abd99ee1c3cbf934ba358803dadd3908933afaeb59299c425ceaeed14cef",
+  "elf_sha256": "c485e5bf306ff09cf105746d60c78671652fc2fd919e77580705a9c4b91dad26",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_next_kv_addr",
+    "-Wl,--defsym=g2_flashdb_find_next_kv_addr=0x543ee9",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_next_kv_candidates_20261010/next_kv.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-next-kv.elf"
+  ],
+  "limits": "Complete local 116-byte routing with shared synthetic magic-word scanner. Coherent DB/sector/KV fixtures include uint32 edge cases; no physical flash or scanner proof. M4 scalar oracle, M55 archive compile separate."
+}

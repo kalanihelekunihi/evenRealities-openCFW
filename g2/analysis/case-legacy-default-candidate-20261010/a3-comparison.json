@@ -1,0 +1,5309 @@
+{
+  "status": "PASS_A3_BOUNDED_BRANCH",
+  "cases": 96,
+  "image_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "f466cf7453f99f51891e2cb67639256a78ad447dabeec2fec946553c9db44246",
+  "elf_sha256": "2ecd716c01719f2fe4c774b781c124f60d3b627c8738b21604daf9f80630c5f2",
+  "limits": [
+    "Only opcode 0xa3. Three producers and logger are controlled ABI cuts.",
+    "No public legacy handler, physical CASE, formatter or UART claim."
+  ],
+  "rows": [
+    {
+      "length": 0,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "****** B200 vol:%d pct:%d, open:%d, usb:%d, cur:%d, GLS_L:%d, GLS_R:%d temp:%d",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            0
+          ],
+          [
+            "value",
+            1,
+            0
+          ],
+          [
+            "value",
+            2,
+            0
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              0,
+              11,
+              44,
+              33,
+              0,
+              66,
+              77,
+              0
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": false,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 0,
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "values": [
+        305419896,
+        2271560481,
+        4294967295
+      ],
+      "mutate": true,
+      "logger_return": 2882400001,
+      "comparison": {
+        "return_value": 2882400001,
+        "events": [
+          [
+            "value",
+            0,
+            305419896
+          ],
+          [
+            "value",
+            1,
+            2271560481
+          ],
+          [
+            "value",
+            2,
+            4294967295
+          ],
+          [
+            "log",
+            "{\"vol\":%d,\"pct\":%d,\"open\":%d,\"usb\":%d,\"cur\":%d,\"GLS_L\":%d,\"GLS_R\":%d,\"temp\":%d}",
+            [
+              4294967295,
+              11,
+              44,
+              33,
+              2271560481,
+              66,
+              77,
+              305419896
+            ]
+          ],
+          [
+            "log",
+            "\r\n",
+            []
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    }
+  ]
+}

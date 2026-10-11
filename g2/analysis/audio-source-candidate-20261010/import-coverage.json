@@ -1,0 +1,52 @@
+{
+  "unresolved_global_names": 59,
+  "receipt_files_scanned": 106,
+  "with_direct_numeric_binding": 52,
+  "with_alias_only_binding": 0,
+  "without_receipt_binding": 7,
+  "without_receipt_binding_names": [
+    "audio_log_extended",
+    "audio_log_format",
+    "audio_log_lock_state",
+    "audio_log_policy_byte",
+    "audio_notify_task",
+    "audio_send_transaction",
+    "osEventFlagsSet"
+  ],
+  "conflicting_binding_names": {
+    "stock_delay": [
+      "0x4807a1",
+      "audio_delay_us"
+    ],
+    "pcm21_classify": [
+      "audio_platform_classify",
+      "0x5a0a71",
+      "0x5a1e8d"
+    ],
+    "callback_classify": [
+      "audio_platform_classify",
+      "0x5a1e8d"
+    ],
+    "callback_voltage": [
+      "0x5a423d",
+      "pcm22_ton_adjust"
+    ],
+    "stock_ton_adjust": [
+      "pcm22_ton_adjust",
+      "0x5a423d"
+    ]
+  },
+  "conflicting_numeric_binding_names": {
+    "pcm21_classify": [
+      "0x5a0a71",
+      "0x5a1e8d"
+    ]
+  },
+  "callback_or_handler_named_subset": [
+    "callback_classify",
+    "callback_voltage",
+    "stock_register_callbacks",
+    "uart_thread_handler"
+  ],
+  "callback_or_handler_named_count": 4
+}

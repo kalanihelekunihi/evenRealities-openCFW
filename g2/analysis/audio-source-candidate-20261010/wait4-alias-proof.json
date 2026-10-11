@@ -1,0 +1,39 @@
+{
+  "aliases": [
+    "stock_wait_status",
+    "stock_delay_status"
+  ],
+  "provider": "audio_wait4",
+  "original_entry": "0x4807fc",
+  "object_offset": "0x70",
+  "caller_abi": "uint32_t(uint32_t budget,uint32_t address,uint32_t mask,uint32_t expected); return used or ignored",
+  "caller_sources": [
+    "g2/components/audio/common_startup_offline/startup.c",
+    "g2/components/audio/pcm21_reset_offline/reset.c",
+    "g2/components/audio/transition_timer_offline/transition.c",
+    "g2/components/audio/transition_snapshot_offline/producers.c"
+  ],
+  "numeric_receipts": [
+    "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+    "g2/analysis/audio-transition-producers-closure-2026-10-08/reproduction-receipt.json"
+  ],
+  "source_sha256": "a261d47f16ae0136b6f8e0c37d10f6378590cf04f96e6f08a38275c47b0e0521",
+  "old_object_sha256": "307bf9b57b5131a61d3a4e948beee789429b8fc0e8163847f084dcd83b52a84a",
+  "alias_source_sha256": "5c07db7739da3e75851135357114bc9d9527344ac8307561784e813fef6a410e",
+  "alias_object_sha256": "e78d1a6249ad6b5c513bea173581c6a3ae5d8b6f9ea22d3d4cf73df912ea947d",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/wait4_aliases.c": "5c07db7739da3e75851135357114bc9d9527344ac8307561784e813fef6a410e",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_timing_offline/timing.c": "a261d47f16ae0136b6f8e0c37d10f6378590cf04f96e6f08a38275c47b0e0521",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_timing_offline/timing.h": "7e706ca526b4c1a39cf0658e64ba88b2f6e535780aa73b92de43b6f41c6becb1",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "old_new_text_sha256": "a5926b93cd47d9f7b09f485ef403c8f8070b651c0909212de38de9a65146ecc7",
+  "prior_suite": "g2/analysis/audio-clock-timing-closure-2026-10-08/results.json",
+  "reused_wait4_comparisons": 720,
+  "fresh_comparisons": 0,
+  "limits": [
+    "Synthetic MMIO transitions at selected reads; no asynchronous hardware evidence.",
+    "Prior source comparison uses GCC-built implementation; current Clang text differs from original but matches the previously selected Clang source object.",
+    "Delay timing/cycle accuracy on Cortex-M55 remains unverified."
+  ]
+}

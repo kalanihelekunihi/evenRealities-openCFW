@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: MIT */
 #include <stdint.h>
+#include "startup_diagnostics.h"
 
 struct platform_context_row {
     uint32_t context;
@@ -67,10 +68,10 @@ uint32_t opencfw_bl_platform_finish(void)
     I2C_SEMAPHORE = opencfw_bl_semaphore_create(1u, 0u, 0u);
     if (I2C_SEMAPHORE == 0u) {
         opencfw_bl_logger_output(1,
-            (const char *)(uintptr_t)0x4340a4u,
-            (const char *)(uintptr_t)0x43164cu,
-            (const char *)(uintptr_t)0x433f74u, 0x131,
-            (const char *)(uintptr_t)0x4322c8u);
+            opencfw_boot_i2c_module,
+            opencfw_boot_i2c_source_file,
+            opencfw_boot_i2c_init_function, 0x131,
+            opencfw_boot_i2c_semaphore_failed);
         status = 1u;
     }
     return status;

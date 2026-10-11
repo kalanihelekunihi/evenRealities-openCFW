@@ -1,0 +1,23 @@
+{
+  "entries": {
+    "stock_info_read": "0x4d3f3c",
+    "stock_revision": "0x47ef38"
+  },
+  "caller_abis": {
+    "stock_info_read": "uint32_t(uint32_t,uint32_t,uint32_t,uint32_t*)",
+    "stock_revision": "uint32_t(uint32_t*)"
+  },
+  "source_sha256": "8c0a5082ba9f639184e0ee55dbacdf50b4597272e6eee8af3b0177c1769f526f",
+  "object_sha256": "f26d0049e847a42c9d2ddff2deec566e3f0d3e1e3cf798a904c0a4bd838c1a59",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/info_read_revision_provider.c": "8c0a5082ba9f639184e0ee55dbacdf50b4597272e6eee8af3b0177c1769f526f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "execution": "info-read-revision-execution.json",
+  "fresh_info_cases": 22,
+  "fresh_revision_cases": 32,
+  "new_boundary": "audio_info_space_read -> original0x4d3dda",
+  "limits": [
+    "Original INFO child is a controlled boundary with compared arguments and synthetic destination write; full child implementation remains unresolved."
+  ]
+}

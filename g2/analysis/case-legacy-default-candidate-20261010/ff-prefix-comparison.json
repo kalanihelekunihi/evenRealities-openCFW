@@ -1,0 +1,685 @@
+{
+  "status": "PASS_FF_RESET_PREFIX",
+  "cases": 36,
+  "image_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "88ff65db9bdc3d7f52e4ead4542f5514bebe7be30b3e8c4f5dbf9d395f94bf89",
+  "elf_sha256": "e206f1cd60ab65fb081ae663ad957d96757b5f4dda923e48f6d129e6dc9f4b14",
+  "limits": [
+    "Stops before first 0x0800502c reset lower instruction on both sides.",
+    "No return, reset effect, formatter/UART or public handler claim."
+  ],
+  "rows": [
+    {
+      "length": 0,
+      "flag": 0,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 0,
+      "flag": 0,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            4294967295
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 0,
+      "flag": 1,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 0,
+      "flag": 127,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 1,
+      "flag": 0,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            4294967295
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 1,
+      "flag": 1,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 1,
+      "flag": 127,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 2,
+      "flag": 0,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            4294967295
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 2,
+      "flag": 1,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 2,
+      "flag": 127,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 8,
+      "flag": 0,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "log",
+            "Reset, reason: cmd."
+          ],
+          [
+            "log",
+            "\r\n"
+          ],
+          [
+            "stop_reset_child",
+            4294967295
+          ]
+        ],
+        "writes": [],
+        "flag": "00",
+        "stopped": true
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 8,
+      "flag": 1,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01",
+        "stopped": true
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "logger_return": 0,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "logger_return": 305419896,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    },
+    {
+      "length": 8,
+      "flag": 127,
+      "logger_return": 4294967295,
+      "comparison": {
+        "events": [
+          [
+            "stop_reset_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f",
+        "stopped": true
+      }
+    }
+  ]
+}

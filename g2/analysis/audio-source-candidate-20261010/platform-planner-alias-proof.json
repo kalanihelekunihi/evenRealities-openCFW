@@ -1,0 +1,37 @@
+{
+  "aliases": {
+    "callback_plan": {
+      "original_entry": "0x5a45d0",
+      "object_offset": "0x0",
+      "caller_abi": "uint32_t(power_request*,uint32_t*,uint32_t*)",
+      "reused_original_source_cases": 2880
+    },
+    "callback_change_state": {
+      "original_entry": "0x5a421c",
+      "object_offset": "0x2d4",
+      "caller_abi": "void(uint32_t,uint32_t)",
+      "reused_original_source_cases": 48
+    }
+  },
+  "caller_source": "g2/components/audio/platform_callbacks_offline/newer.c",
+  "numeric_receipt": "g2/analysis/audio-uart-newer-callback-composition-2026-10-09/reproduction-receipt.json",
+  "source": "g2/components/audio/platform_callbacks_offline/planner.c",
+  "source_sha256": "ddf6376400f03e497b070256fbe4645ea7373c7268d2e9f2368080665bc4aeb5",
+  "old_object_sha256": "74caa2b1478ff03c991fec13981824608d9c6e24e3c18d86f4291b914ef3b4de",
+  "alias_source": "g2/components/audio/source_candidate_20261010/platform_planner_aliases.c",
+  "alias_source_sha256": "6f36078353670cb2b2a655aa6b5262f29250f4fc9906c99c55ddafa18ebb7073",
+  "alias_object_sha256": "a540d6b7e6e2122f8e4ea2ece5605b6948a2afed7ea562d4268042624738c98e",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/platform_planner_aliases.c": "6f36078353670cb2b2a655aa6b5262f29250f4fc9906c99c55ddafa18ebb7073",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../platform_callbacks_offline/planner.c": "ddf6376400f03e497b070256fbe4645ea7373c7268d2e9f2368080665bc4aeb5",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "old_new_text_sha256": "72e402b363237a03b0213f3f8f10f093219d1ee484cbbd34c7d4348666aaaa22",
+  "original_source_suite": "g2/analysis/audio-platform-callbacks-closure-2026-10-08/planner-results.json",
+  "reused_comparisons_total": 2928,
+  "fresh_comparisons": 0,
+  "limits": [
+    "Original/source comparisons use synthetic profile and register state.",
+    "No physical power transition, DMA state, or timer daemon behavior is proved."
+  ]
+}

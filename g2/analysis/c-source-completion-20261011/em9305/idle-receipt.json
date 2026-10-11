@@ -1,0 +1,30 @@
+{
+  "build_receipt": "g2/build/c-firmware/20261011/em-idle-round/receipt.json",
+  "build_receipt_sha256": "263a62af051599c58d2e977cd6be5eab10d91f21c0424666c78ae012ee0a72fc",
+  "candidate_compilation_passed": true,
+  "inputs": [
+    {
+      "path": "g2/components/em9305/qpc_scheduler_candidate/idle.c",
+      "sha256": "a400162084ef7bf5bcecbb199971b9e35c9adb51d2e62ec42bebbb0b3a362bb1"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/em9305/idle-native.txt",
+      "sha256": "61710a4569673faa560c83d3766330ee76547cccd696393951e2b1d196bcb597"
+    }
+  ],
+  "defined_symbols": 16,
+  "unresolved_symbols": [
+    "opencfw_em9305_sleep_lower"
+  ],
+  "original_instruction_execution": false,
+  "full_source_complete": false,
+  "native_findings": [
+    "ILINK clear, callback0x80fe18 then0x80fe14, IRQ save/sync and hardware ILINK read retained.",
+    "Sleep0x3126e0 consumes actual IRQ R0/link R1; returned R0 feeds SETI, not guessed preservation."
+  ],
+  "limits": [
+    "Producing IRQ/register profile and actual runtime callbacks remain unqualified.",
+    "Sleep source remains genuine open body with ROM/controller children.",
+    "Full reset/controller/record code/data/layout source coverage unproven."
+  ]
+}

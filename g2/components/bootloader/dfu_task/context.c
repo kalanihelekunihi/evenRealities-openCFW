@@ -23,7 +23,7 @@ extern void opencfw_boot_dfu_terminal(void);
  * or security policy beyond the standard-compatible field positions. */
 __attribute__((section(".boot_thread_name"),used))
 const char opencfw_boot_dfu_thread_name[]="dfu";
-static const uint32_t attributes[9]={0x4341a4u,0,0x20026b30u,0x70u,
+static const uint32_t attributes[9]={(uintptr_t)opencfw_boot_dfu_thread_name,0,0x20026b30u,0x70u,
     0x20020e00u,0x2000u,0x2eu,1u,0};
 static void allocation_failure(void) {
     opencfw_boot_dfu_panic();

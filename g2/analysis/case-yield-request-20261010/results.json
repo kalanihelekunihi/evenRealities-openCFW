@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "cases": 6,
+  "original_extent_bytes": 18,
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "b3af85ef1f584126df212383b7aff8bcd2119c240d8b00b8b3f542c7bf0c072c",
+  "compiler_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "elf_sha256": "2e0f12af90f9b50b2e33b3ad55bad6257302e63830766f379749e878f2d7498c",
+  "command": [
+    "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x100000",
+    "-Wl,-e,case_yield_request",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/yield_request.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/case-yield-request-20261010/yield_request.elf"
+  ],
+  "scope": "ICSR write, return register, PRIMASK and SP; physical PendSV handling unverified."
+}

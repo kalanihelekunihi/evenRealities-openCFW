@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "cases": 4500,
+  "stock_address": "0x544374..0x5443b0",
+  "stock_body_sha256": "2d9ea43cd392450b484a9f3d636a9af7b01f2a4d4ff7c4353d04c42bd02c7426",
+  "source_sha256": "806fa0debb86b030cbc475e7fcaf144fd7d35e40db96a9350837f77a138c570b",
+  "elf_sha256": "8eb2bc899e58c0230585d8acaef235685e4848b032b52a447dda550178a9875b",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_next_sector_addr",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_next_sector_candidates_20261010/next_sector.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-next-sector.elf"
+  ],
+  "limits": "Complete 60-byte local calculation, including uint32 wrap, with synthetic but coherent DB/sector fields. M55 compiled code executes under Unicorn; no live database initialization or flash behavior."
+}

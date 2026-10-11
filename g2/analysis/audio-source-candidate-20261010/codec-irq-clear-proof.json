@@ -1,0 +1,18 @@
+{
+  "name": "codec_irq_clear",
+  "original_entry": "0x58e7e4",
+  "caller": "g2/components/audio/codec_uart_irq_offline/irq.c",
+  "caller_abi": "uint32_t(void*,uint32_t); caller ignores result",
+  "source_sha256": "4a2f17cd08d60e32e923f63cd7240cb67569186882cfb4dffa01971ddc1568c9",
+  "object_sha256": "01372372f4f92e2988ddd952996398f2ced2acb2e59d2c1977802945c7c86a68",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/codec_irq_clear_provider.c": "4a2f17cd08d60e32e923f63cd7240cb67569186882cfb4dffa01971ddc1568c9",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "execution": "codec-irq-clear-execution.json",
+  "fresh_cases": 72,
+  "null_fault_cases": 36,
+  "limits": [
+    "Null case stops at unmapped handle+0x28 read, before exception delivery. Synthetic UART IRQ registers; no physical acknowledgement."
+  ]
+}

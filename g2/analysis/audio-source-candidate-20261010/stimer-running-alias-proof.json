@@ -1,0 +1,26 @@
+{
+  "alias": "stock_stimer_running",
+  "source_symbol": "audio_platform_auxiliary_active",
+  "original_entry": "0x48d620",
+  "same_object_offset": "0x0",
+  "caller_sources": [
+    "g2/components/audio/early_pcm_gpu_offline/gpu.c",
+    "g2/components/audio/pcm21_children_offline/children.c"
+  ],
+  "caller_and_source_abi": "uint32_t(void)",
+  "numeric_receipt": "g2/analysis/audio-early-pcm-pending-closure-2026-10-08/reproduction-receipt.json",
+  "source_sha256": "a290891f507ed3ffef27e06116de60436ba2a9af8d02349bee14c24f54e6bea7",
+  "object_sha256": "aacad0f64dd173148c06924c49a271ea83a9963f80c01e008b7de27eacd95756",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/platform_prepare_alias.c": "a290891f507ed3ffef27e06116de60436ba2a9af8d02349bee14c24f54e6bea7",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../platform_callbacks_offline/prepare.c": "d42f6db857baa76b867e40152a012f1d62ca5daf0a12ccf7e687c83492e1b9b6",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "text_sha256": "9efd3ea5fe4440065fa7e5baf79c5ddd1971e4f315892f75c482df7b71249904",
+  "prior_suite": "g2/analysis/audio-platform-callbacks-closure-2026-10-08/prepare-results.json",
+  "reused_query_comparisons": 27,
+  "fresh_comparisons": 0,
+  "limits": [
+    "Synthetic timer availability and MMIO status; no live timer state or scheduler delivery."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "original_entry": "0x47eb26",
+  "caller_abi": "uint32_t(audio_timer_prefix*)",
+  "caller": "g2/components/audio/timer_aux_lifetime_offline/aux.c",
+  "source_sha256": "cd6192c5b6cbe42054a69decd0c89042d687e66500b87edd229bb50f56b367ef",
+  "object_sha256": "fefe1f02e18b6d2cfac80b7342b0a5c9c29760c5281878f34e8e817d7041f85b",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/timer_id_provider.c": "cd6192c5b6cbe42054a69decd0c89042d687e66500b87edd229bb50f56b367ef",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../timer_commands_offline/timer.h": "b3f894ca2af122ff2623446e3375db0091aa38e74ef62fb1011166d4268d9519"
+  },
+  "fresh_cases": 50,
+  "nonnull_cases": 48,
+  "null_attempted_fault_cases": 2,
+  "execution": "timer-id-provider-execution.json",
+  "limits": [
+    "Null invalid write compared at unmapped-memory boundary; actual exception delivery and loop not run.",
+    "Synthetic BASEPRI and timer RAM."
+  ]
+}

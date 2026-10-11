@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "cases": 324,
+  "compiler": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_candidate_compress",
+    "-Wl,--defsym=audio_log_policy=0x44a9af",
+    "-Wl,--defsym=audio_log_lock=0x441751",
+    "-Wl,--defsym=audio_log_unlock=0x441711",
+    "-Wl,--defsym=audio_log_format=0x43cb85",
+    "-Wl,--defsym=audio_log_lock_state=0x20074388",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_shortlog_adapter_20261010/adapter.c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/simple_log_provider.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/main-adapter-audio-log.elf"
+  ],
+  "adapter_sha256": "1abac3e29b4b9d5d8d9623cb4f260a6a55f7a14157744c21fb14d3dc8812f16b",
+  "audio_provider_sha256": "1804fd452fb56ba1a65d37348af02632560949acd4ee900c381af4359295f680",
+  "elf_sha256": "79ce20309821875fdcf60e9efbfad3c35abd70ca332a4b14747954b87fd492bd",
+  "limits": "Bounded public-entry comparison with synthetic policy/IPSR/lock/formatter providers. Tail branch preserves register and stack arguments; production lower providers remain explicit."
+}

@@ -1,5 +1,5 @@
 /* Independent command reconstruction; bounded sensor counts (widget1<=4,widget2<=1).
- * Reset entry is an explicit test boundary; no reset or flash is performed. */
+ * Native reset is source-defined separately; oracle fixtures stop at its entry. */
 #include "cy_scb_i2c.h"
 #define CTX ((cy_stc_scb_i2c_context_t *)0x200008ecu)
 #define RX ((uint8_t *)0x200009a0u)
@@ -13,7 +13,7 @@ static void sensor_read(unsigned widget,uint8_t *out) {
  unsigned count=*(uint16_t *)(w+0x38u);
  for(unsigned i=0;i<count;i++) { uint16_t v=*(uint16_t *)(sensors+i*10u+4u);out[i*2u]=(uint8_t)v;out[i*2u+1u]=(uint8_t)(v>>8); }
 }
-__attribute__((noinline,noreturn)) void touch_reset_boundary(void) { for(;;)__asm volatile("" ::: "memory"); }
+__attribute__((noreturn)) void touch_reset_boundary(void);
 void app_event(uint32_t events) {
  if(events & 0x20u) {
   uint8_t n=(uint8_t)CTX->slaveRxBufferIdx;

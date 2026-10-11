@@ -48,8 +48,9 @@ static uint32_t mspi_cq_pause(uint32_t *state)
         (uintptr_t)mspi_reg(module, 0x104u), 1u, 0u, 1u);
 }
 
-static uint32_t program_dma(uint32_t *state)
+uint32_t opencfw_boot_mspi_program_dma(uint32_t state_address)
 {
+    uint32_t *const state = (uint32_t *)(uintptr_t)state_address;
     const uint32_t module = state[1];
     const uint32_t next_index = state[0x850u / 4u] + 1u;
     const uint32_t ring_size = state[0x848u / 4u];
@@ -92,5 +93,5 @@ uint32_t opencfw_provider_4240aa(uint32_t *state_address,
     *mspi_reg(state[1], 0x208u) = 0x40u;
     *mspi_reg(state[1], 0x200u) |= 0x40u;
     *(volatile uint8_t *)((uintptr_t)state_address + 0x83cu) = 1u;
-    return program_dma((uint32_t *)state_address);
+    return opencfw_boot_mspi_program_dma((uint32_t)(uintptr_t)state_address);
 }

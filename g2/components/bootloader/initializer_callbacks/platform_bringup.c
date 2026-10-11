@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: MIT */
 #include <stdint.h>
+#include "startup_diagnostics.h"
 
 struct adc_coefficients {
     float first;
@@ -20,8 +21,11 @@ extern void opencfw_bl_generic_log(const char *format, ...);
 
 #define ADC_READY (*(volatile uint32_t *)0x40038038u)
 #define ADC_RESULT ((volatile uint8_t *)0x20027018u)
-#define ADC_POWER_MODE (*(volatile const uint32_t *)0x434170u)
-#define ADC_FINAL_MODE (*(volatile const uint32_t *)0x434174u)
+extern const uint32_t opencfw_boot_adc_descriptor[2];
+extern const uint32_t opencfw_boot_adc_power_initial;
+extern const uint32_t opencfw_boot_adc_power_final;
+#define ADC_POWER_MODE opencfw_boot_adc_power_initial
+#define ADC_FINAL_MODE opencfw_boot_adc_power_final
 
 static float float_from_bits(uint32_t bits)
 {
@@ -82,26 +86,25 @@ void opencfw_bl_platform_bringup(void)
 
     (void)opencfw_bl_power_register_update(0x10u, ADC_POWER_MODE);
     if (opencfw_bl_adc_context_initialize(0u, &context) != 0u)
-        opencfw_bl_generic_log((const char *)(uintptr_t)0x431ea4u);
+        opencfw_bl_generic_log(opencfw_boot_adc_reservation_failed);
 
     opencfw_bl_adc_configure(context, 3u, &coefficients);
-    opencfw_bl_generic_log((const char *)(uintptr_t)0x4325f8u,
+    opencfw_bl_generic_log(opencfw_boot_adc_correction_format,
                            float_to_double_bits(coefficients.first),
                            float_to_double_bits(coefficients.second));
     if (opencfw_bl_adc_profile_transfer(context, 0u, 0u) != 0u)
-        opencfw_bl_generic_log((const char *)(uintptr_t)0x433140u);
+        opencfw_bl_generic_log(opencfw_boot_adc_power_failed);
 
-    const volatile uint32_t *const descriptor_source =
-        (const volatile uint32_t *)0x43402cu;
+    const uint32_t *const descriptor_source = opencfw_boot_adc_descriptor;
     descriptor[0] = descriptor_source[0];
     descriptor[1] = descriptor_source[1];
     opencfw_bl_adc_context_configure(context, descriptor);
     if (opencfw_bl_adc_apply_profile(context, profile) != 0u)
-        opencfw_bl_generic_log((const char *)(uintptr_t)0x432c7cu);
+        opencfw_bl_generic_log(opencfw_boot_adc_config_failed);
     if (opencfw_bl_adc_configure_channel(context, 0u, &channel) != 0u)
-        opencfw_bl_generic_log((const char *)(uintptr_t)0x4329d4u);
+        opencfw_bl_generic_log(opencfw_boot_adc_slot_failed);
     if (opencfw_bl_adc_activate(context) != 0u)
-        opencfw_bl_generic_log((const char *)(uintptr_t)0x433160u);
+        opencfw_bl_generic_log(opencfw_boot_adc_enable_failed);
     opencfw_bl_adc_enable(context);
     opencfw_bl_adc_command(context);
 
@@ -137,7 +140,7 @@ void opencfw_bl_platform_bringup(void)
             }
         }
         *(volatile uint16_t *)(void *)(ADC_RESULT + 4) = (uint16_t)measured;
-        opencfw_bl_generic_log((const char *)(uintptr_t)0x431ab8u,
+        opencfw_bl_generic_log(opencfw_boot_adc_sample_format,
                                sample[0], float_to_double_bits(measured));
     }
 

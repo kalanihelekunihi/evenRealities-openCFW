@@ -1,0 +1,554 @@
+{
+  "status": "PASS",
+  "cases": 24,
+  "source_sha256": "12ac9b2e6d5a6422b7f9e330010a2d3ec37460790cd6f6b097ed5664b9a95e3f",
+  "elf_sha256": "5a989c8c50441183d47e0af7c5da6c827ce90257904c0b5a29136e13bfcddef8",
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "compiler_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "command": [
+    "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x100000",
+    "-Wl,-e,case_control_a",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/control_providers.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/case-control-source-candidate-20261010/control.elf"
+  ],
+  "python": "/private/tmp/iar-c-runtime-venv/bin/python",
+  "cases_detail": [
+    {
+      "entry": "case_control_a",
+      "args": [
+        0,
+        0,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177320,
+            4,
+            64
+          ]
+        ],
+        "registers": [
+          305419896,
+          64
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_a",
+      "args": [
+        1,
+        0,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            64
+          ]
+        ],
+        "registers": [
+          64,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_a",
+      "args": [
+        2,
+        0,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            64
+          ]
+        ],
+        "registers": [
+          64,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_a",
+      "args": [
+        4294967295,
+        0,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            64
+          ]
+        ],
+        "registers": [
+          64,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_b",
+      "args": [
+        0,
+        0,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177320,
+            4,
+            128
+          ]
+        ],
+        "registers": [
+          305419896,
+          128
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_b",
+      "args": [
+        1,
+        0,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            128
+          ]
+        ],
+        "registers": [
+          128,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_b",
+      "args": [
+        2,
+        0,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            128
+          ]
+        ],
+        "registers": [
+          128,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_b",
+      "args": [
+        4294967295,
+        0,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            128
+          ]
+        ],
+        "registers": [
+          128,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        0,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177320,
+            4,
+            0
+          ]
+        ],
+        "registers": [
+          305419896,
+          0
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        0,
+        1
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            0
+          ]
+        ],
+        "registers": [
+          0,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        0,
+        2
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            0
+          ]
+        ],
+        "registers": [
+          0,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        0,
+        4294967295
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            0
+          ]
+        ],
+        "registers": [
+          0,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        64,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177320,
+            4,
+            64
+          ]
+        ],
+        "registers": [
+          305419896,
+          64
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        64,
+        1
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            64
+          ]
+        ],
+        "registers": [
+          64,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        64,
+        2
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            64
+          ]
+        ],
+        "registers": [
+          64,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        64,
+        4294967295
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            64
+          ]
+        ],
+        "registers": [
+          64,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        128,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177320,
+            4,
+            128
+          ]
+        ],
+        "registers": [
+          305419896,
+          128
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        128,
+        1
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            128
+          ]
+        ],
+        "registers": [
+          128,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        128,
+        2
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            128
+          ]
+        ],
+        "registers": [
+          128,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        128,
+        4294967295
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            128
+          ]
+        ],
+        "registers": [
+          128,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        4294967295,
+        0
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177320,
+            4,
+            4294967295
+          ]
+        ],
+        "registers": [
+          305419896,
+          4294967295
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        4294967295,
+        1
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            4294967295
+          ]
+        ],
+        "registers": [
+          4294967295,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        4294967295,
+        2
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            4294967295
+          ]
+        ],
+        "registers": [
+          4294967295,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    },
+    {
+      "entry": "case_control_write",
+      "args": [
+        1342177280,
+        4294967295,
+        4294967295
+      ],
+      "effects": {
+        "writes": [
+          [
+            1342177304,
+            4,
+            4294967295
+          ]
+        ],
+        "registers": [
+          4294967295,
+          2596069104
+        ],
+        "stack": 536903680
+      }
+    }
+  ],
+  "scope": "Register writes and SP in scalar emulator; physical peripheral effect is unverified."
+}

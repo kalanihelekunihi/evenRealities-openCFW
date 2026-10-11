@@ -5,6 +5,8 @@
 .syntax unified
 .thumb
 .section .text.itcm_helpers,"ax",%progbits
+.global opencfw_boot_itcm_image_start
+opencfw_boot_itcm_image_start:
 .global opencfw_boot_itcm_countdown
 .type opencfw_boot_itcm_countdown,%function
 .thumb_func
@@ -35,4 +37,6 @@ opencfw_boot_itcm_word_copy:
 opencfw_boot_itcm_noop_56:
    bx lr
 .size opencfw_boot_itcm_noop_56,.-opencfw_boot_itcm_noop_56
+.global opencfw_boot_itcm_image_end
+opencfw_boot_itcm_image_end:
 .section .note.GNU-stack,"",%progbits

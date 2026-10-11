@@ -1,0 +1,2996 @@
+{
+  "status": "PASS_BOUNDED_POWER_ENTRY_FAMILIES_NOT_PROVIDER",
+  "cases": 96,
+  "groups": {
+    "audio_ready_disable": 8,
+    "audio_ready_enable": 8,
+    "disable": 17,
+    "disable_otp_rev_guard": 4,
+    "disable_ready_success": 8,
+    "disable_shared_last": 8,
+    "disable_shared_nonlast": 8,
+    "enable": 17,
+    "enable_crypto_otp_off": 2,
+    "enable_final_status_fail": 4,
+    "enable_ready_success": 8,
+    "enable_timeout_with_delay_cut": 4
+  },
+  "public_early_return_cases": 40,
+  "ordinary_enable_ready_cases": 8,
+  "audio_enable_ready_cases": 8,
+  "audio_disable_ready_cases": 8,
+  "ordinary_disable_ready_cases": 8,
+  "ordinary_disable_nonlast_cases": 8,
+  "ordinary_disable_last_cases": 8,
+  "otp_revision_guard_cases": 4,
+  "enable_final_status_failure_cases": 4,
+  "enable_timeout_delay_cut_cases": 4,
+  "official_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_sha256": "bddab9e415b2834686c4cac98c2a090a9708a9b72a8ae061498c6f4fb0a3e447",
+  "descriptor_sha256": "29333d2ac5740f0b9e6657a387c23641b0361c441b0628df16aee25171b794c7",
+  "irq_source_sha256": "3cf9897bb7bee7ee2614d94411feb60c8645dc700fed40f52c397a9173a6a74b",
+  "timing_source_sha256": "a261d47f16ae0136b6f8e0c37d10f6378590cf04f96e6f08a38275c47b0e0521",
+  "m55_target_objects": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/audio-source-candidate-20261010/power_entry_prefix_probe.c": {
+      "object_sha256": "a7b67f6853aec61c9e82dfb73668da9ca8a6f3c7081f50a526902f7ee057c56b",
+      "dependency_manifest": "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/g2-power-prefix-e52p6co7/power_entry_prefix_probe-m55.o: \\\n  /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/audio-source-candidate-20261010/power_entry_prefix_probe.c \\\n  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h \\\n  /Users/kalani/Repo/evenRealities-openCFW/g2/analysis/audio-source-candidate-20261010/../../components/foundation/power_domain/power_domain.h\n"
+    },
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/foundation/power_domain/power_domain.c": {
+      "object_sha256": "077896f229ded161a45f2a28f64a55446facbbafbbcbe7f0985060e73e6288b3",
+      "dependency_manifest": "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/g2-power-prefix-e52p6co7/power_domain-m55.o: \\\n  /Users/kalani/Repo/evenRealities-openCFW/g2/components/foundation/power_domain/power_domain.c \\\n  /Users/kalani/Repo/evenRealities-openCFW/g2/components/foundation/power_domain/power_domain.h \\\n  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h\n"
+    },
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/irq_provider.c": {
+      "object_sha256": "8bfed3608a0b42b996ada84bafba1e1a13bb4a1d863377d0cd76e672bef79670",
+      "dependency_manifest": "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/g2-power-prefix-e52p6co7/irq_provider-m55.o: \\\n  /Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/irq_provider.c \\\n  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h\n"
+    },
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/clock_timing_offline/timing.c": {
+      "object_sha256": "20020790f4b612959e593d8ca74edf4cc65c009fcf94ef5567ebca83eb813f3f",
+      "dependency_manifest": "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/g2-power-prefix-e52p6co7/timing-m55.o: \\\n  /Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/clock_timing_offline/timing.c \\\n  /Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/clock_timing_offline/timing.h \\\n  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h\n"
+    }
+  },
+  "elf_sha256": "80f65bedc08af819e119c5556112a93b3ff448647853d5506f217738dd39c194",
+  "rows": [
+    {
+      "entry": "enable",
+      "domain": 0,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 1,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 7,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 11,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 15,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 28,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 29,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 30,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 31,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 32,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 33,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 34,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 34,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 35,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 35,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 255,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable",
+      "domain": 255,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 0,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 1,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 7,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 11,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 15,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 28,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 29,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 30,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 31,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 32,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 33,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 34,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 34,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 35,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 35,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 255,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable",
+      "domain": 255,
+      "enable_register_set": true,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 6,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_crypto_otp_off",
+      "domain": 23,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 1,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_crypto_otp_off",
+      "domain": 279,
+      "enable_register_set": false,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 1,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_ready_success",
+      "domain": 0,
+      "enable_register_set": false,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "01000030",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_ready_success",
+      "domain": 0,
+      "enable_register_set": false,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            1,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "01000030",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_ready_success",
+      "domain": 0,
+      "enable_register_set": false,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "01000030",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_ready_success",
+      "domain": 0,
+      "enable_register_set": false,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            1,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "01000030",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_ready_success",
+      "domain": 256,
+      "enable_register_set": false,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "01000030",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_ready_success",
+      "domain": 256,
+      "enable_register_set": false,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            1,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "01000030",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_ready_success",
+      "domain": 256,
+      "enable_register_set": false,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "01000030",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_ready_success",
+      "domain": 256,
+      "enable_register_set": false,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            1,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "01000030",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_enable",
+      "domain": 30,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "04000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_enable",
+      "domain": 30,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [
+          [
+            4,
+            1,
+            4
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "04000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_enable",
+      "domain": 30,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "04000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_enable",
+      "domain": 30,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [
+          [
+            4,
+            1,
+            4
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "04000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_enable",
+      "domain": 286,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "04000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_enable",
+      "domain": 286,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [
+          [
+            4,
+            1,
+            4
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "04000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_enable",
+      "domain": 286,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "04000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_enable",
+      "domain": 286,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [
+          [
+            4,
+            1,
+            4
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "00000000",
+          "00000000",
+          "04000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_final_status_fail",
+      "domain": 0,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 1,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_final_status_fail",
+      "domain": 0,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            1,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 1,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_final_status_fail",
+      "domain": 0,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 1,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_final_status_fail",
+      "domain": 0,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            1,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 1,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_ready_success",
+      "domain": 0,
+      "enable_register_set": true,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_ready_success",
+      "domain": 0,
+      "enable_register_set": true,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            0,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_ready_success",
+      "domain": 0,
+      "enable_register_set": true,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_ready_success",
+      "domain": 0,
+      "enable_register_set": true,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            0,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_ready_success",
+      "domain": 256,
+      "enable_register_set": true,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_ready_success",
+      "domain": 256,
+      "enable_register_set": true,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            0,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_ready_success",
+      "domain": 256,
+      "enable_register_set": true,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_ready_success",
+      "domain": 256,
+      "enable_register_set": true,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            0,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_disable",
+      "domain": 30,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_disable",
+      "domain": 30,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            4,
+            0,
+            4
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_disable",
+      "domain": 30,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_disable",
+      "domain": 30,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            4,
+            0,
+            4
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_disable",
+      "domain": 286,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_disable",
+      "domain": 286,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            4,
+            0,
+            4
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_disable",
+      "domain": 286,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "audio_ready_disable",
+      "domain": 286,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073877004,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            4,
+            0,
+            4
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [],
+        "regs": [
+          "ffffffff",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_nonlast",
+      "domain": 3,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical"
+        ],
+        "status_reads": [],
+        "regs": [
+          "04000000",
+          "1e000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_nonlast",
+      "domain": 3,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical"
+        ],
+        "status_reads": [],
+        "regs": [
+          "04000000",
+          "1e000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_nonlast",
+      "domain": 3,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical"
+        ],
+        "status_reads": [],
+        "regs": [
+          "04000000",
+          "1e000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_nonlast",
+      "domain": 3,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical"
+        ],
+        "status_reads": [],
+        "regs": [
+          "04000000",
+          "1e000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_nonlast",
+      "domain": 259,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical"
+        ],
+        "status_reads": [],
+        "regs": [
+          "04000000",
+          "1e000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_nonlast",
+      "domain": 259,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical"
+        ],
+        "status_reads": [],
+        "regs": [
+          "04000000",
+          "1e000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_nonlast",
+      "domain": 259,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical"
+        ],
+        "status_reads": [],
+        "regs": [
+          "04000000",
+          "1e000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_nonlast",
+      "domain": 259,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            4
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical"
+        ],
+        "status_reads": [],
+        "regs": [
+          "04000000",
+          "1e000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_last",
+      "domain": 3,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_last",
+      "domain": 3,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            0,
+            30
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_last",
+      "domain": 3,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_last",
+      "domain": 3,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            0,
+            30
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_last",
+      "domain": 259,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_last",
+      "domain": 259,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            0,
+            30
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_last",
+      "domain": 259,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_shared_last",
+      "domain": 259,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            0
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            0,
+            30
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5"
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "00000000",
+          "00000000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 0,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_otp_rev_guard",
+      "domain": 29,
+      "initial_mask": 0,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "ffffffff",
+          "00002000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 3,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_otp_rev_guard",
+      "domain": 29,
+      "initial_mask": 1,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "ffffffff",
+          "00002000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 3,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_otp_rev_guard",
+      "domain": 285,
+      "initial_mask": 0,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "ffffffff",
+          "00002000",
+          "ffffffff"
+        ],
+        "primask": 0,
+        "ret": 3,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "disable_otp_rev_guard",
+      "domain": 285,
+      "initial_mask": 1,
+      "result": {
+        "writes": [],
+        "callbacks": [],
+        "entered": [],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "ffffffff",
+          "00002000",
+          "ffffffff"
+        ],
+        "primask": 1,
+        "ret": 3,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_timeout_with_delay_cut",
+      "domain": 0,
+      "initial_mask": 0,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5",
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ]
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 4,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_timeout_with_delay_cut",
+      "domain": 0,
+      "initial_mask": 0,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            1,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5",
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ]
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 0,
+        "ret": 4,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_timeout_with_delay_cut",
+      "domain": 0,
+      "initial_mask": 1,
+      "spot_failure": false,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [],
+        "entered": [
+          "critical",
+          "wait5",
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ]
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 4,
+        "pc": 1052416
+      }
+    },
+    {
+      "entry": "enable_timeout_with_delay_cut",
+      "domain": 0,
+      "initial_mask": 1,
+      "spot_failure": true,
+      "result": {
+        "writes": [
+          [
+            1073876996,
+            4,
+            1
+          ]
+        ],
+        "callbacks": [
+          [
+            3,
+            1,
+            805306369
+          ]
+        ],
+        "entered": [
+          "critical",
+          "wait5",
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ],
+          [
+            "delay_us",
+            1
+          ]
+        ],
+        "status_reads": [
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ],
+          [
+            1073877000,
+            4
+          ]
+        ],
+        "regs": [
+          "01000000",
+          "00000000",
+          "00000000"
+        ],
+        "primask": 1,
+        "ret": 4,
+        "pc": 1052416
+      }
+    }
+  ],
+  "limits": [
+    "40 complete public-entry early returns: invalid mapping, already-on/off, stock-corrected CRYPTO OTP-off, and pre-B1 OTP-in-use guard.",
+    "8 ordinary domain-0 ready-enable and 8 ready-disable full public-entry cases use a synthetic status register that changes on the MMIO power write.",
+    "4 enable timeout cases return 4 after five original/source wait5 delay calls; delay_us is an explicit call-argument cut in this joint suite, with separate prior timing provider proof.",
+    "4 full ordinary enable final-status failure cases, 8 non-last shared-domain disables, and 8 last-member shared-domain ready-off disables use synthetic status and enable-register state.",
+    "8 audio domain-30 ready enables and 8 audio domain-30 ready disables use synthetic audio MMIO and SPOT stimulus 4; other audio domains remain open.",
+    "Fixture-only source sentinel excludes other active domains, GPU/clock, OTP/CRYPTO, timeout delay body and physical power behavior; no archive admission."
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "scope": "Prior original/source linker bindings, not new whole-image or hardware proof",
+  "bindings": [
+    {
+      "imports": [
+        "audio_irq_context",
+        "audio_aux_irq_context"
+      ],
+      "original_thumb_entry": "0x44900f",
+      "source_contract": "foundation/audio_pcm_consumer/consumer.c opencfw_audio_irq_context",
+      "evidence": [
+        "g2/analysis/audio-notification-pcm-2026-10-06/original-provenance.json",
+        "g2/analysis/audio-queue-delete-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-timer-aux-lifetime-closure-2026-10-08/reproduction-receipt.json"
+      ]
+    },
+    {
+      "imports": [
+        "audio_resume_yield"
+      ],
+      "original_thumb_entry": "0x4420bd",
+      "source_contract": "foundation/freertos_resume/yield_request.c opencfw_resume_yield_request",
+      "evidence": [
+        "g2/analysis/audio-resume-yield-composition-2026-10-09/reproduction-receipt.json"
+      ]
+    },
+    {
+      "imports": [
+        "callback_select",
+        "platform_finish_init"
+      ],
+      "source_contract": "platform_callbacks_offline/select.c and timer.c",
+      "evidence": [
+        "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+      ]
+    },
+    {
+      "imports": [
+        "audio_block_ticks"
+      ],
+      "source_contract": "notification_block_offline/block.c audio_block_current",
+      "evidence": [
+        "g2/analysis/audio-notification-block-insertion-2026-10-09/reproduction-receipt.json"
+      ]
+    },
+    {
+      "imports": [
+        "audio_heap_mask_interrupts"
+      ],
+      "source_contract": "timer_wake_providers_offline/port.c audio_port_mask_set",
+      "evidence": [
+        "g2/analysis/audio-cmsis-memory-pool-closure-2026-10-09/reproduction-receipt.json"
+      ]
+    },
+    {
+      "imports": [
+        "stock_wait5"
+      ],
+      "original_thumb_entry": "0x480827",
+      "source_contract": "clock_timing_offline/timing.c audio_wait5",
+      "evidence": [
+        "g2/analysis/audio-clock-timing-closure-2026-10-08/REPORT.md",
+        "g2/analysis/audio-clock-leaf-providers-2026-10-08/REPORT.md"
+      ]
+    },
+    {
+      "imports": [
+        "stock_ext_request",
+        "stock_ext_release"
+      ],
+      "original_thumb_entries": [
+        "0x4c3cd5",
+        "0x4c3d29"
+      ],
+      "source_contract": "clock_leaf_providers_offline/providers.c audio_ext_request/release",
+      "evidence": [
+        "g2/analysis/audio-clock-leaf-providers-2026-10-08/REPORT.md"
+      ]
+    },
+    {
+      "imports": [
+        "stock_buck_enable"
+      ],
+      "original_thumb_entry_for_current_callers": "0x47fe6d",
+      "source_contract": "early_pcm_dispatch_offline/dispatch.c pcm_buck_control",
+      "evidence": [
+        "g2/analysis/audio-early-pcm-dispatch-closure-2026-10-09/REPORT.md",
+        "g2/analysis/audio-early-pcm-pending-closure-2026-10-08/reproduction-receipt.json"
+      ],
+      "boundary": "Only current early PCM pending/GPU callers; historical transition receipt alias 0x47f11d is not treated as equivalent"
+    },
+    {
+      "imports": [
+        "stock_clock_release"
+      ],
+      "original_thumb_entry": "0x4c4531",
+      "source_contract": "clock_public_dispatch_offline/dispatch.c audio_clock_release",
+      "evidence": [
+        "g2/analysis/audio-clock-public-dispatch-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-transition-timer-closure-2026-10-08/reproduction-receipt.json"
+      ]
+    },
+    {
+      "imports": [
+        "stock_hfrc2_apply",
+        "stock_hfrc2_disable"
+      ],
+      "original_thumb_entries": [
+        "0x4d3993",
+        "0x4d39e5"
+      ],
+      "source_contract": "clock_leaf_providers_offline/providers.c audio_hfrc2_apply/disable",
+      "evidence": [
+        "g2/analysis/audio-hfrc-syspll-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-clock-leaf-providers-2026-10-08/REPORT.md"
+      ],
+      "boundary": "Source behavior previously compared; short disable function is not byte-identical under this clang build"
+    },
+    {
+      "imports": [
+        "stock_clock_request"
+      ],
+      "original_thumb_entry": "0x4c44bd",
+      "source_contract": "clock_public_dispatch_offline/dispatch.c audio_clock_request",
+      "evidence": [
+        "g2/analysis/audio-clock-timing-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-source-candidate-20261010/clock-alias-abi-proof.json"
+      ]
+    },
+    {
+      "imports": [
+        "stock_hfrc_apply"
+      ],
+      "original_thumb_entry": "0x4d3939",
+      "source_contract": "clock_leaf_providers_offline/providers.c audio_hfrc_apply",
+      "evidence": [
+        "g2/analysis/audio-clock-timing-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-source-candidate-20261010/clock-alias-abi-proof.json"
+      ]
+    },
+    {
+      "imports": [
+        "stock_oscillator"
+      ],
+      "original_thumb_entry": "0x4809c5",
+      "source_contract": "info_memory_offline/oscillator.c audio_oscillator_control",
+      "evidence": [
+        "g2/analysis/audio-clock-timing-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-source-candidate-20261010/clock-alias-abi-proof.json"
+      ]
+    }
+  ],
+  "byte_match_claim": "Only stock_save_irq has a new exact text match; these adapters preserve selected source contracts but add call instructions"
+}

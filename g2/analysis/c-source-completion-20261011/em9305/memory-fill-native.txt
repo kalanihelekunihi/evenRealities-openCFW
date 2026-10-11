@@ -1,0 +1,33 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0033301c <.data+0x30c1c>:
+  33301c:	c5e1                	push_s	r13
+  33301e:	2053 807e           	bmsk.f	0,r0,0x1
+  333022:	f20d                	beq_s	26	;0x33303a
+  333024:	736c                	mov_s	r3,3
+  333026:	7b06                	bic_s	r3,r3,r0
+  333028:	4408                	mov_s	r12,r0
+  33302a:	7164                	add_s	r3,r3,1
+  33302c:	ea1a                	breq_s	r2,0,52	;0x333060
+  33302e:	1c01 1052           	stb.ab	r1,[r12,1]
+  333032:	238d 0fbf           	dbnz.d	r3,-4	;0x33302c
+  333036:	7744                	add_s	r2,r2,-1
+  333038:	f002                	b_s	4	;0x33303c
+  33303a:	4408                	mov_s	r12,r0
+  33303c:	0a1b 0134           	brlo.d.nt	r2,0x4,26	;0x333056
+  333040:	2940 0203           	asl	r3,r1,0x8
+  333044:	7b25                	or_s	r3,r3,r1
+  333046:	2b40 040d           	asl	r13,r3,0x10
+  33304a:	7ba5                	or_s	r3,r3,r13
+  33304c:	ba64                	sub_s	r2,r2,0x4
+  33304e:	0a01 0135           	brhs.d.nt	r2,0x4,0	;0x33304c
+  333052:	1c04 10d0           	st.ab	r3,[r12,4]
+  333056:	ea06                	breq_s	r2,0,12	;0x333060
+  333058:	228d 0000           	dbnz.d	r2,0	;0x333058
+  33305c:	1c01 1052           	stb.ab	r1,[r12,1]
+  333060:	c4c2                	leave_s	[r13,pcl]
+  333062:	78e0                	nop_s

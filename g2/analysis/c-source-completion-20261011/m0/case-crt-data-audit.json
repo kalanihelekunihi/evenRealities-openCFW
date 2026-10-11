@@ -1,0 +1,236 @@
+{
+  "source_image": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin (payload after 32-byte header)",
+  "compressed_address": "0x0800d95c",
+  "compressed_extent_bytes": 104,
+  "compressed_sha256": "472083284ba94332c5783c720a938429b0b1cd2863b25371e6b9ba945633f809",
+  "destination_address": "0x20000000",
+  "destination_extent_bytes": 420,
+  "decoded_sha256": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a",
+  "record_count": 18,
+  "records": [
+    {
+      "source_offset": 0,
+      "destination_offset": 0,
+      "literal_bytes": 0,
+      "zero_bytes": 20
+    },
+    {
+      "source_offset": 2,
+      "destination_offset": 20,
+      "literal_bytes": 1,
+      "zero_bytes": 3
+    },
+    {
+      "source_offset": 4,
+      "destination_offset": 24,
+      "literal_bytes": 1,
+      "zero_bytes": 7
+    },
+    {
+      "source_offset": 6,
+      "destination_offset": 32,
+      "literal_bytes": 1,
+      "zero_bytes": 9
+    },
+    {
+      "source_offset": 8,
+      "destination_offset": 42,
+      "literal_bytes": 1,
+      "zero_bytes": 7
+    },
+    {
+      "source_offset": 10,
+      "destination_offset": 50,
+      "literal_bytes": 55,
+      "zero_bytes": 3
+    },
+    {
+      "source_offset": 67,
+      "destination_offset": 108,
+      "literal_bytes": 4,
+      "zero_bytes": 9
+    },
+    {
+      "source_offset": 72,
+      "destination_offset": 121,
+      "literal_bytes": 1,
+      "zero_bytes": 38
+    },
+    {
+      "source_offset": 75,
+      "destination_offset": 160,
+      "literal_bytes": 1,
+      "zero_bytes": 3
+    },
+    {
+      "source_offset": 77,
+      "destination_offset": 164,
+      "literal_bytes": 1,
+      "zero_bytes": 7
+    },
+    {
+      "source_offset": 79,
+      "destination_offset": 172,
+      "literal_bytes": 1,
+      "zero_bytes": 17
+    },
+    {
+      "source_offset": 82,
+      "destination_offset": 190,
+      "literal_bytes": 1,
+      "zero_bytes": 60
+    },
+    {
+      "source_offset": 85,
+      "destination_offset": 251,
+      "literal_bytes": 1,
+      "zero_bytes": 8
+    },
+    {
+      "source_offset": 87,
+      "destination_offset": 260,
+      "literal_bytes": 2,
+      "zero_bytes": 18
+    },
+    {
+      "source_offset": 91,
+      "destination_offset": 280,
+      "literal_bytes": 1,
+      "zero_bytes": 3
+    },
+    {
+      "source_offset": 93,
+      "destination_offset": 284,
+      "literal_bytes": 1,
+      "zero_bytes": 8
+    },
+    {
+      "source_offset": 95,
+      "destination_offset": 293,
+      "literal_bytes": 2,
+      "zero_bytes": 117
+    },
+    {
+      "source_offset": 99,
+      "destination_offset": 412,
+      "literal_bytes": 4,
+      "zero_bytes": 4
+    }
+  ],
+  "nonzero_runs_offsets": [
+    [
+      20,
+      21
+    ],
+    [
+      24,
+      25
+    ],
+    [
+      32,
+      33
+    ],
+    [
+      42,
+      43
+    ],
+    [
+      50,
+      99
+    ],
+    [
+      100,
+      102
+    ],
+    [
+      103,
+      105
+    ],
+    [
+      108,
+      112
+    ],
+    [
+      121,
+      122
+    ],
+    [
+      160,
+      161
+    ],
+    [
+      164,
+      165
+    ],
+    [
+      172,
+      173
+    ],
+    [
+      190,
+      191
+    ],
+    [
+      251,
+      252
+    ],
+    [
+      260,
+      262
+    ],
+    [
+      280,
+      281
+    ],
+    [
+      284,
+      285
+    ],
+    [
+      293,
+      295
+    ],
+    [
+      412,
+      416
+    ]
+  ],
+  "typed_fields": [
+    {
+      "ram_offset": "0x124",
+      "width_bytes": 4,
+      "initial_value": 16000000,
+      "meaning": "initial system clock in hertz",
+      "consumer_examples": [
+        "0x08008420 SysTick",
+        "0x08004480 console timing",
+        "0x08004f14 clock plan"
+      ]
+    },
+    {
+      "ram_offset": "0x19c",
+      "width_bytes": 4,
+      "initial_value_hex": "0xaaaaaaaa",
+      "meaning": "scheduler depth/magic initial word; scheduler start later clears it",
+      "consumer_examples": [
+        "0x0800b31c task return",
+        "0x0800c57c scheduler start"
+      ]
+    }
+  ],
+  "typed_consumers": [
+    {
+      "ram_offset": "0x2a",
+      "extent_bytes": 80,
+      "native_read_compare": "0x08009f80",
+      "native_write_repair": "0x08009e0c",
+      "register_selector": "16 + byte index",
+      "register_identity": "Cellwise CW221X battery fuel-gauge profile, independently matched by chip ID 0xA0, profile extent 0x10..0x5f, mode register 0x08, update flag register 0x0b and ready register 0xa7",
+      "independent_reference": "https://github.com/rockchip-linux/kernel/blob/develop-6.1/drivers/power/supply/cw221x_battery.c",
+      "product_value_provenance": "stock CASE only; independent battery characterization/profile source still missing",
+      "nonzero_values": 59,
+      "table_sha256": "923bf3796afa2e45777f41208c1d9d7ec6f7ac4e3aa9af0984787b9ab05f23ae"
+    }
+  ],
+  "contract": "Audit only. Exact typed field meanings, independent data source, final placement and full native data inventory are unresolved; no bytes are emitted as firmware source."
+}

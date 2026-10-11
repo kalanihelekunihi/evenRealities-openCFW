@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "cases": 547,
+  "original_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "3c1eba8dbbe36c76fd078d3a590baab02333d8538b714e78aeeb20301b5a2c39",
+  "alias_sha256": "2f98e398bd80702fccd5e21bdd0be6bd273e6295398090a40ea536f05fe62662",
+  "original_trace_bytes": 664,
+  "limits": [
+    "Compatible M4 build is emulated; M55 archive and direct branch are checked separately.",
+    "Stock selector and register updater execute; RAM values and power-register memory are synthetic.",
+    "The alias preserves saved-R7 R0 return, SP, callee-saved registers and PRIMASK; no physical MSPI mode is proved."
+  ]
+}

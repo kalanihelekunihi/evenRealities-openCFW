@@ -1,0 +1,1151 @@
+{
+  "status": "PASS_BOUNDED_DELAY",
+  "cases": 64,
+  "source_sha256": "f3197ee996d49620160eac64e38363ff909c1efec0b8c32cbfe656a35994dab7",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "elf_sha256": "aa96d3d55dad7e316a8293abe3382183e85186be4ecf61e45bfac41b5eb71223",
+  "limits": "Selected IRQ context, suspend and yield C execute. Delayed-list and resume child entries are cut with controlled ABI returns; suspended-scheduler fatal path excluded. No physical elapsed time or full scheduler claim.",
+  "rows": [
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 0,
+        "resume": 0
+      },
+      "result": {
+        "status": 0,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 0,
+        "resume": 1
+      },
+      "result": {
+        "status": 0,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 1,
+        "resume": 0
+      },
+      "result": {
+        "status": 0,
+        "events": [
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume",
+            0,
+            0
+          ]
+        ],
+        "writes": [
+          [
+            537348696,
+            4,
+            1
+          ],
+          [
+            3758157060,
+            4,
+            268435456
+          ]
+        ],
+        "suspended": 1,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 1,
+        "resume": 1
+      },
+      "result": {
+        "status": 0,
+        "events": [
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume",
+            0,
+            0
+          ]
+        ],
+        "writes": [
+          [
+            537348696,
+            4,
+            1
+          ]
+        ],
+        "suspended": 1,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 33,
+        "resume": 0
+      },
+      "result": {
+        "status": 0,
+        "events": [
+          [
+            "block",
+            33,
+            0
+          ],
+          [
+            "resume",
+            0,
+            0
+          ]
+        ],
+        "writes": [
+          [
+            537348696,
+            4,
+            1
+          ],
+          [
+            3758157060,
+            4,
+            268435456
+          ]
+        ],
+        "suspended": 1,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 33,
+        "resume": 1
+      },
+      "result": {
+        "status": 0,
+        "events": [
+          [
+            "block",
+            33,
+            0
+          ],
+          [
+            "resume",
+            0,
+            0
+          ]
+        ],
+        "writes": [
+          [
+            537348696,
+            4,
+            1
+          ]
+        ],
+        "suspended": 1,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 4294967295,
+        "resume": 0
+      },
+      "result": {
+        "status": 0,
+        "events": [
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume",
+            0,
+            0
+          ]
+        ],
+        "writes": [
+          [
+            537348696,
+            4,
+            1
+          ],
+          [
+            3758157060,
+            4,
+            268435456
+          ]
+        ],
+        "suspended": 1,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 4294967295,
+        "resume": 1
+      },
+      "result": {
+        "status": 0,
+        "events": [
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume",
+            0,
+            0
+          ]
+        ],
+        "writes": [
+          [
+            537348696,
+            4,
+            1
+          ]
+        ],
+        "suspended": 1,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 0,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 0,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 1,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 1,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 33,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 33,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 4294967295,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 4294967295,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 0,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 0,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 1,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 1,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 33,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 33,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 4294967295,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 4294967295,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 0,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 0,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 1,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 1,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 33,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 33,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 4294967295,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 0,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 4294967295,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 0,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 0,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 1,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 1,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 33,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 33,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 4294967295,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 0,
+        "ticks": 4294967295,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 0,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 0,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 1,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 1,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 33,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 33,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 4294967295,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 0,
+        "basepri": 48,
+        "ticks": 4294967295,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 0,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 0,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 1,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 1,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 33,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 33,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 4294967295,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 0,
+        "ticks": 4294967295,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 0,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 0,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 1,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 1,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 33,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 33,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 4294967295,
+        "resume": 0
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    },
+    {
+      "fixture": {
+        "ipsr": 1,
+        "primask": 1,
+        "basepri": 48,
+        "ticks": 4294967295,
+        "resume": 1
+      },
+      "result": {
+        "status": 4294967290,
+        "events": [],
+        "writes": [],
+        "suspended": 0,
+        "sp": 537391104
+      }
+    }
+  ]
+}

@@ -1,0 +1,245 @@
+{
+  "matched": 16,
+  "total": 16,
+  "cases": [
+    {
+      "op": "pll_power_enabled",
+      "mmio": 0,
+      "result": {
+        "return": 0,
+        "out": "01a5a5a5",
+        "writes": [
+          [
+            536895744,
+            1,
+            1
+          ]
+        ],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "pll_power_enabled",
+      "mmio": 2147483648,
+      "result": {
+        "return": 0,
+        "out": "00a5a5a5",
+        "writes": [
+          [
+            536895744,
+            1,
+            0
+          ]
+        ],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "pll_power_enabled",
+      "mmio": 1073741824,
+      "result": {
+        "return": 0,
+        "out": "01a5a5a5",
+        "writes": [
+          [
+            536895744,
+            1,
+            1
+          ]
+        ],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "pll_power_enabled",
+      "mmio": 4294967295,
+      "result": {
+        "return": 0,
+        "out": "00a5a5a5",
+        "writes": [
+          [
+            536895744,
+            1,
+            0
+          ]
+        ],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_target",
+      "reference": 1,
+      "target": 100,
+      "result": {
+        "return": 0,
+        "out": "64000000",
+        "writes": [
+          [
+            536895744,
+            4,
+            100
+          ]
+        ],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_target",
+      "reference": 10,
+      "target": 123,
+      "result": {
+        "return": 0,
+        "out": "0c000000",
+        "writes": [
+          [
+            536895744,
+            4,
+            12
+          ]
+        ],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_target",
+      "reference": 1000,
+      "target": 999,
+      "result": {
+        "return": 0,
+        "out": "00000000",
+        "writes": [
+          [
+            536895744,
+            4,
+            0
+          ]
+        ],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_target",
+      "reference": 4294967295,
+      "target": 4294967295,
+      "result": {
+        "return": 0,
+        "out": "01000000",
+        "writes": [
+          [
+            536895744,
+            4,
+            1
+          ]
+        ],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_force",
+      "target": 0,
+      "mmio": 4294967295,
+      "result": {
+        "return": 0,
+        "out": "a5a5a5a5",
+        "writes": [],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_force",
+      "target": 1,
+      "mmio": 0,
+      "result": {
+        "return": 0,
+        "out": "a5a5a5a5",
+        "writes": [],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_force",
+      "target": 256,
+      "mmio": 36,
+      "result": {
+        "return": 0,
+        "out": "a5a5a5a5",
+        "writes": [],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_force",
+      "target": 255,
+      "mmio": 2147483648,
+      "result": {
+        "return": 0,
+        "out": "a5a5a5a5",
+        "writes": [],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_disable",
+      "target": 0,
+      "mmio": 0,
+      "result": {
+        "return": 0,
+        "out": "a5a5a5a5",
+        "writes": [],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_disable",
+      "target": 0,
+      "mmio": 1,
+      "result": {
+        "return": 0,
+        "out": "a5a5a5a5",
+        "writes": [],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_disable",
+      "target": 0,
+      "mmio": 4294967295,
+      "result": {
+        "return": 0,
+        "out": "a5a5a5a5",
+        "writes": [],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    },
+    {
+      "op": "hfrc_disable",
+      "target": 0,
+      "mmio": 305419896,
+      "result": {
+        "return": 0,
+        "out": "a5a5a5a5",
+        "writes": [],
+        "sp": 537387008,
+        "pc": 1049344
+      }
+    }
+  ],
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "object_sha256": "a3348e2c4b57e314e9641fb44f74d9393d593fe5e9e05a50cd51425cb0dac31a",
+  "scope": "Apollo clock leaf original versus Clang Cortex-M55 alias on synthetic MMIO/output RAM, unchanged SP and matching return/nonstack writes. No live clock readiness or div-by-zero trap."
+}

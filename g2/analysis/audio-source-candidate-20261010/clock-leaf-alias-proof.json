@@ -1,0 +1,98 @@
+{
+  "entries": {
+    "stock_pll_power_enabled": {
+      "source_symbol": "audio_pll_power_enabled",
+      "original_entry": "0x4800e4",
+      "original_end_exclusive": "0x4800f4",
+      "original_body_bytes": 16,
+      "original_body_sha256": "88fe4bc375b30d44413f20a96455db8b9a360ffc73d884e2ad72466a377c1d11",
+      "same_object_offset": "0x124",
+      "abi": "uint32_t(uint8_t*)",
+      "fresh_cases": 4
+    },
+    "stock_hfrc_target": {
+      "source_symbol": "audio_hfrc_target",
+      "original_entry": "0x4d3914",
+      "original_end_exclusive": "0x4d391e",
+      "original_body_bytes": 10,
+      "original_body_sha256": "15eabeb671434c5c1f485fd4600130400e24f0e1ce62364e4b684e1b6e17bfdf",
+      "same_object_offset": "0x268",
+      "abi": "uint32_t(uint32_t,uint32_t,uint32_t*)",
+      "fresh_cases": 4
+    },
+    "stock_hfrc_force": {
+      "source_symbol": "audio_hfrc_force",
+      "original_entry": "0x4d391e",
+      "original_end_exclusive": "0x4d3938",
+      "original_body_bytes": 26,
+      "original_body_sha256": "f9a534885d93c13e5786052214ad6fd9fa86aac9fdcacebfb697ede03326d105",
+      "same_object_offset": "0x13c",
+      "abi": "uint32_t(uint32_t)",
+      "fresh_cases": 4
+    },
+    "stock_hfrc_disable": {
+      "source_symbol": "audio_hfrc_disable",
+      "original_entry": "0x4d3944",
+      "original_end_exclusive": "0x4d3952",
+      "original_body_bytes": 14,
+      "original_body_sha256": "9c8ce07724ee14bf19003f771d009e86d5a60f98cf35890d7b9b750d1a15d79f",
+      "same_object_offset": "0x16c",
+      "abi": "uint32_t(void)",
+      "fresh_cases": 4
+    },
+    "stock_pll_power_enable": {
+      "source_symbol": "audio_pll_power_enable",
+      "original_entry": "0x480058",
+      "original_end_exclusive": "0x48009e",
+      "original_body_bytes": 70,
+      "original_body_sha256": "22d3bdcbc12b811f3e882cedca00a5d353bd54a327ceb22065adfcfd49218a38",
+      "same_object_offset": "0x7c",
+      "abi": "uint32_t(void)",
+      "fresh_cases": 0,
+      "prior_source_cases": 20
+    },
+    "stock_pll_power_disable": {
+      "source_symbol": "audio_pll_power_disable",
+      "original_entry": "0x48009e",
+      "original_end_exclusive": "0x4800de",
+      "original_body_bytes": 64,
+      "original_body_sha256": "9823fe770daf50650ad41cfda67e35b33a7ecdd9087b5ce73c70c7233d0110f7",
+      "same_object_offset": "0xd4",
+      "abi": "uint32_t(void)",
+      "fresh_cases": 0,
+      "prior_source_cases": 20
+    },
+    "stock_hfrc2_force": {
+      "source_symbol": "audio_hfrc2_force",
+      "original_entry": "0x4d3952",
+      "original_end_exclusive": "0x4d3992",
+      "original_body_bytes": 64,
+      "original_body_sha256": "8399d1a23e1cbfcdf603c957f27db31823a189ecb2a5f4bcb6688df0157eebff",
+      "same_object_offset": "0x180",
+      "abi": "uint32_t(uint32_t)",
+      "fresh_cases": 0,
+      "prior_source_cases": 20
+    }
+  },
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "old_source_sha256": "9138e1eabd6ac31e46a29e5a63759bc749b96f3ad80f5ba6c6f7c6382b69306d",
+  "alias_source_sha256": "346aab3fa8181b819b689d1ec0f2422ab054e3d7bc364ea66083e2128bb7185a",
+  "included_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c": "346aab3fa8181b819b689d1ec0f2422ab054e3d7bc364ea66083e2128bb7185a",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_leaf_providers_offline/providers.c": "9138e1eabd6ac31e46a29e5a63759bc749b96f3ad80f5ba6c6f7c6382b69306d",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_leaf_providers_offline/providers.h": "0763241463852746e581c7d69bcfcda08d77a6a65be89ec21c4dac36d946c7d1",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_leaf_providers_offline/../clock_manager_ownership_offline/ownership.h": "dd87c180aad8d8a77165ca6e19e0016b2768687de60d71b4498683fbdf85e364",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_leaf_providers_offline/../gpio_providers_offline/gpio.h": "af311301606b449cb75c608eb5480a0aa0f49009d0876be9ea7a78b6a2a5d622"
+  },
+  "old_object_sha256": "e72a28483a5d37da4730cc33851b671b9e5db6506fcc34e10944d657df1393c8",
+  "new_object_sha256": "4324f44fedbc0627caa60283fb0a50effe9af6c59c8d2e24d2094567b347dfdb",
+  "old_text_sha256": "ff2b0ddaeaea2e25b27a9432e680801d8747abf45ab420ed1bf6b7187a130b46",
+  "new_text_sha256": "ff2b0ddaeaea2e25b27a9432e680801d8747abf45ab420ed1bf6b7187a130b46",
+  "text_equal": true,
+  "prior_suite": "g2/analysis/audio-clock-leaf-providers-2026-10-08/results.json",
+  "prior_suite_each_op_cases": 20,
+  "fresh_execution": "clock-leaf-alias-execution.json",
+  "fresh_execution_total": 16,
+  "limits": "Direct same-object entries; prior clock-leaf source suite includes 20 cases each for PLL enable/disable and HFRC2 force with actual delay/wait/IRQ bodies. Current archive still has unresolved stock_delay; stock_wait5 has a separate selected source adapter. No live clock readiness, timing, concurrent MMIO, or division-trap proof."
+}

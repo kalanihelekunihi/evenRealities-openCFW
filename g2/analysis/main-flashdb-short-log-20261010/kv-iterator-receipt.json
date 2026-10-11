@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "cases": 120,
+  "stock_address": "0x5443b0..0x54443a",
+  "stock_body_sha256": "cfe88ab6f1c6a76761ad7b783c2d594e4d201a44b583f2aae575739d60d0291e",
+  "source_sha256": "787a49e65a72c52df482a32db6af2c671e7540f566edcb3fce52ef034f8382bd",
+  "elf_sha256": "1e2cfd8845ecdb0ab6d3fda517bef20d6d22e870c176dbdc17ed59a68c6e7c64",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_kv_iterator",
+    "-Wl,--defsym=g2_flashdb_read_sector_info=0x54418f",
+    "-Wl,--defsym=g2_flashdb_read_kv=0x544001",
+    "-Wl,--defsym=g2_flashdb_next_kv_addr=0x543f8d",
+    "-Wl,--defsym=g2_flashdb_next_sector_addr=0x544375",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_kv_iterator_candidates_20261010/kv_iterator.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-kv-iterator.elf"
+  ],
+  "limits": "Complete local 138-byte iterator routing, with synthetic read-sector/read-KV/next-KV/next-sector and callback boundaries. Coherent two-sector, up-to-two-KV fixture; no stock child or persistent flash proof. M4 scalar execution; M55 archive compile separate."
+}

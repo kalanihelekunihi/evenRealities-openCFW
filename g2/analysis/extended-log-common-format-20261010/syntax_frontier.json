@@ -1,0 +1,155 @@
+{
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "resolved_syntactic_sites": 6227,
+  "static_syntax_subset_sites": 6209,
+  "static_syntax_outside_sites": 18,
+  "unresolved_literal_sites": 12,
+  "outside_unique_formats": 18,
+  "outside": [
+    {
+      "call": "0x49d580",
+      "format": {
+        "address": "0x748bec",
+        "text": "day_high:%f, day_low:%f, dark_price:%f",
+        "signature": "fff"
+      }
+    },
+    {
+      "call": "0x49d614",
+      "format": {
+        "address": "0x73d5e0",
+        "text": "price_change_percent:%f, current_price:%f",
+        "signature": "ff"
+      }
+    },
+    {
+      "call": "0x49d68e",
+      "format": {
+        "address": "0x753138",
+        "text": "changing_trend:%d, open_price:%f",
+        "signature": "df"
+      }
+    },
+    {
+      "call": "0x4a4f96",
+      "format": {
+        "address": "0x734634",
+        "text": "[IMU] Check head-down event,euler_data[1]=%.2f",
+        "signature": "f"
+      }
+    },
+    {
+      "call": "0x4a507e",
+      "format": {
+        "address": "0x715994",
+        "text": "[IMU] Check head-up event,euler_data[1]=%.2f,threshold=%d",
+        "signature": "fd"
+      }
+    },
+    {
+      "call": "0x4a6c92",
+      "format": {
+        "address": "0x6fc9bc",
+        "text": "IMU Calib Para Init: calibMatrix = %f, %f, %f, %f, %f, %f, %f, %f, %f",
+        "signature": "fffffffff"
+      }
+    },
+    {
+      "call": "0x4adb0a",
+      "format": {
+        "address": "0x71b628",
+        "text": "ALS read ignored by pitch, pitch:%.2f, raw:%d, fill:%d",
+        "signature": "fdd"
+      }
+    },
+    {
+      "call": "0x4e13aa",
+      "format": {
+        "address": "0x7775f4",
+        "text": "x = %f, y = %f, z = %f",
+        "signature": "fff"
+      }
+    },
+    {
+      "call": "0x4ff442",
+      "format": {
+        "address": "0x728518",
+        "text": "validate stock Invalid price range: high=%f, low=%f",
+        "signature": "ff"
+      }
+    },
+    {
+      "call": "0x511ee8",
+      "format": {
+        "address": "0x779b74",
+        "text": "  v0=%f,i0=%f,t0=%f\n",
+        "signature": "fff"
+      }
+    },
+    {
+      "call": "0x559a7e",
+      "format": {
+        "address": "0x6e82a8",
+        "text": "Saved health data: type=%s, goal=%u, value=%.2f, avg=%.2f, duration=%u, trend=%d",
+        "signature": "suffud"
+      }
+    },
+    {
+      "call": "0x559bc4",
+      "format": {
+        "address": "0x6e3778",
+        "text": "Batch save health data: type=%s, goal=%u, value=%.2f, avg=%.2f, duration=%u, trend=%d",
+        "signature": "suffud"
+      }
+    },
+    {
+      "call": "0x55a60c",
+      "format": {
+        "address": "0x6de194",
+        "text": "pSingleData:data_type = %d, goal = %d, value = %f, avg_value = %f, duration = %d, trend = %d",
+        "signature": "ddffdd"
+      }
+    },
+    {
+      "call": "0x57212a",
+      "format": {
+        "address": "0x788490",
+        "text": "lux val is:%f",
+        "signature": "f"
+      }
+    },
+    {
+      "call": "0x5721c8",
+      "format": {
+        "address": "0x770580",
+        "text": "after adjust lux val is:%f",
+        "signature": "f"
+      }
+    },
+    {
+      "call": "0x57379a",
+      "format": {
+        "address": "0x6fc53c",
+        "text": "IMU Calib Para Init: calibMatrix = %f, %f, %f, %f, %f, %f, %f, %f, %f",
+        "signature": "fffffffff"
+      }
+    },
+    {
+      "call": "0x5739ee",
+      "format": {
+        "address": "0x77ae34",
+        "text": "gear = %d,lux val is:%f",
+        "signature": "df"
+      }
+    },
+    {
+      "call": "0x5743f6",
+      "format": {
+        "address": "0x721cc0",
+        "text": "IMU Base Info: calibrated=%s, euler=[%.2f, %.2f, %.2f]",
+        "signature": "sfff"
+      }
+    }
+  ],
+  "limit": "This regex is a syntax triage over linear-sweep BL sites. It does not prove reachability, argument counts, exact source semantics, or that every matching format was tested."
+}

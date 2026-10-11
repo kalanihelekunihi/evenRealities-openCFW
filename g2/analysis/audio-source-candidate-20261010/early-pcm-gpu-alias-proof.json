@@ -1,0 +1,80 @@
+{
+  "source": "g2/components/audio/early_pcm_gpu_offline/gpu.c",
+  "source_sha256": "9284898fdabafc805fa01aa0df5cbdf182abccebd288cb9e4309453f936a1014",
+  "old_object_sha256": "f7a3265eb98fcc8b9d0596a119dce009806a35d1f2bb018b4afbc57ba8885bf7",
+  "alias_source": "g2/components/audio/source_candidate_20261010/early_pcm_gpu_aliases.c",
+  "alias_source_sha256": "165e01a2e7c9911ebe07838bbcca95a7abb8bc40be1e7d59b093fd6df78d298e",
+  "alias_object_sha256": "4bab5a8e61af2f0e2a846e7abac4e68d0228d46f48d5ce460b0128528b7ed9bc",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/early_pcm_gpu_aliases.c": "165e01a2e7c9911ebe07838bbcca95a7abb8bc40be1e7d59b093fd6df78d298e",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../early_pcm_gpu_offline/gpu.c": "9284898fdabafc805fa01aa0df5cbdf182abccebd288cb9e4309453f936a1014",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../early_pcm_gpu_offline/gpu.h": "c0704b859beb77076d1fe06d65cd0072a1c65d48680dc2d7ddb042348771b00b",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "old_new_text_sha256": "8353b06cc19d1377b87f058dbe5623e7905251e56fbe66aed254765d23ea32a0",
+  "caller_source": "g2/components/audio/platform_callbacks_offline/callbacks.c",
+  "numeric_receipt": "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json",
+  "original_source_suite": "g2/analysis/audio-early-pcm-gpu-closure-2026-10-08/results.json",
+  "aliases": {
+    "early_other": {
+      "source_function": "pcm_early_on",
+      "original_entry": "0x59fbac",
+      "original_end_exclusive": "0x59fca2",
+      "original_body_sha256": "51a30833b5d1b1f5db62367b1004e4ac0bc8f02879e92148d357ef4e61b19ef5",
+      "object_offset": "0x3c",
+      "reused_original_source_cases": 1196
+    },
+    "early_zero": {
+      "source_function": "pcm_early_off",
+      "original_entry": "0x59fca2",
+      "original_end_exclusive": "0x59fd36",
+      "original_body_sha256": "470324919adad0674580acb943f3dc237862166e6606dafdbf08b2228c560102",
+      "object_offset": "0x144",
+      "reused_original_source_cases": 1172
+    },
+    "middle_action0": {
+      "source_function": "pcm_sleep",
+      "original_entry": "0x5a0204",
+      "original_end_exclusive": "0x5a0316",
+      "original_body_sha256": "affc47ae9190e795d32f018e89ef9fb5dc0276dc720e4774349d1005ea5d3c29",
+      "object_offset": "0x324",
+      "reused_original_source_cases": 414
+    },
+    "middle_action2": {
+      "source_function": "pcm_temperature",
+      "original_entry": "0x5a00fc",
+      "original_end_exclusive": "0x5a0204",
+      "original_body_sha256": "5cf1d6490be8e99cbc802900d5021f53a44fd49ab34fae01f67cc4308c11b5a0",
+      "object_offset": "0x238",
+      "reused_original_source_cases": 336
+    },
+    "middle_other": {
+      "source_function": "pcm_middle_on",
+      "original_entry": "0x5a0328",
+      "original_end_exclusive": "0x5a05e0",
+      "original_body_sha256": "c9552cf58053bfdb2f5a718ff6f8c02b4b0e2f364c7f4ef8943259b50c53ad8f",
+      "object_offset": "0x3bc",
+      "reused_original_source_cases": 1180
+    },
+    "middle_zero": {
+      "source_function": "pcm_middle_off",
+      "original_entry": "0x5a05e0",
+      "original_end_exclusive": "0x5a0786",
+      "original_body_sha256": "edfe870951a87996468049011734304d32aaafa5d38ebee17748d930b8e5efb5",
+      "object_offset": "0x634",
+      "reused_original_source_cases": 1156
+    }
+  },
+  "reused_comparisons_total": 5454,
+  "fresh_comparisons": 0,
+  "abi": [
+    "early_other and middle_other: uint32_t(uint32_t) matched",
+    "early_zero and middle_zero: original/source take void, caller sets R0 but value ignored",
+    "middle_action0: void(uint32_t) matched",
+    "middle_action2: uint32_t(uint32_t[3]) via pointer matched"
+  ],
+  "limits": [
+    "Prior suite used synthetic MMIO and external delay/TON/temperature providers.",
+    "No physical rail behavior or timer daemon completion proved."
+  ]
+}

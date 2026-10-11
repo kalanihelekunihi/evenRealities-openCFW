@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "archive_sha256": "d7def8f2ca873ea8364ea1e1ec9de40296a6d6bea3087c0aca92939b2cfcf519",
+  "alias_compilation": {
+    "source": "g2/components/audio/source_candidate_20261010/soft_float_math_aliases.c",
+    "source_sha256": "b642ac11f918e592336b0f08e83287cdb918732141f806ba1bafa8a43c7fed74",
+    "object_path": "/private/tmp/g2-audio-arm-inventory/193-source_candidate_20261010-soft_float_math_aliases.o",
+    "command": [
+      "clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/g2-audio-arm-inventory/193-source_candidate_20261010-soft_float_math_aliases.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/soft_float_math_aliases.c",
+      "-o",
+      "/private/tmp/g2-audio-arm-inventory/193-source_candidate_20261010-soft_float_math_aliases.o"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "object_sha256": "2b08eef2295eae6e3974a3df6d8d5bd069adc51fbc4971d85af67cef3a9b8774",
+    "dependency_sha256": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/soft_float_math_aliases.c": "b642ac11f918e592336b0f08e83287cdb918732141f806ba1bafa8a43c7fed74",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../float_runtime_offline/math.c": "513c1b1715717dd90ca652ae0a4d015460abc40e8d5f87b2d0eb5d7675211ac8",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../float_runtime_offline/math.h": "4af7cb7e0beafe11a407049bf5c2983d0b70059a93d364e20d90efdb3e867a42",
+      "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+    }
+  },
+  "caller_compilation": {
+    "source": "g2/components/audio/syspll_generator_offline/generator.c",
+    "source_sha256": "b40be1ffd842c96d83613bd37901165b1811ac5b3fe9eb1d86443229dd9b4d1b",
+    "object_path": "/private/tmp/g2-audio-arm-inventory/081-syspll_generator_offline-generator.o",
+    "command": [
+      "clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/g2-audio-arm-inventory/081-syspll_generator_offline-generator.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/syspll_generator_offline/generator.c",
+      "-o",
+      "/private/tmp/g2-audio-arm-inventory/081-syspll_generator_offline-generator.o"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "object_sha256": "b4e3cbcd74815ec86f262d5885282556e5c08c4e6cae1036a039686b954967d1",
+    "dependency_sha256": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/syspll_generator_offline/generator.c": "b40be1ffd842c96d83613bd37901165b1811ac5b3fe9eb1d86443229dd9b4d1b",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/syspll_generator_offline/generator.h": "8de3fd51755629e5858a4b0d9c489d932d23f7cdfc2373a6e2ddb13fe9130389",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/syspll_generator_offline/../clock_driver_config_offline/driver.h": "0e0091ffd40ba5a755c3f8e535b5b90a3616113d0f310df68e0ca08f03632eaa",
+      "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+    }
+  },
+  "same_object_offsets": {
+    "stock_floorf": 0,
+    "stock_roundf": 76,
+    "stock_ceilf": 152,
+    "stock_fmodf": 232
+  },
+  "fresh_original_source_cases": 4208,
+  "reused_prior_hard_float_cases": 13920,
+  "execution_receipt": "soft-float-math-execution.json",
+  "prior_execution_receipt": "g2/analysis/audio-float-runtime-closure-2026-10-08/results.json",
+  "abi_scope": "Stock originals pass float bits via S0/S1; selected archive caller and provider pass same bits via R0/R1. Source-side ABI adaptation only, not a stock binary drop-in.",
+  "oracle_note": "Verifier executes one original VFP vmov during setup before resetting FPSCR; this avoids Unicorn lazy FPSCR reset on first stock VFP instruction. Result bits, FPSCR, errno, and SP were compared.",
+  "integration_limit": "Independent provider proof; composed PLL graph and live hardware not executed."
+}

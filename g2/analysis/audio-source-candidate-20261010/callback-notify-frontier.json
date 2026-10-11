@@ -1,0 +1,28 @@
+{
+  "callback_registration": {
+    "entry": "0x480434",
+    "body_bytes": 668,
+    "caller": "clock_reset_active_offline/prefix.c invokes with no arguments and ignores result",
+    "observable_state": [
+      "Clears 60-byte dispatch table at 0x20073270 via memset 0x43c0e4",
+      "Reads device ID register 0x4002000c and RAM selector 0x200001e8",
+      "Writes predicate bytes in 0x20074f64..0x20074f69 and pointer slots in the 60-byte dispatch table",
+      "Conditionally invokes table slot zero at 0x4806c8 and returns callback result; otherwise returns zero"
+    ],
+    "callback_literal_pool": "0x48072c..0x48079c contains stock function pointers in 0x59fdxx..0x5a4exx; source ownership and call ABI for all selected slots not proved",
+    "admission": "deferred: device ID/selector matrix, table image and invoked callback state need complete original/source oracle; copying stock function pointers into source is not permitted"
+  },
+  "receiver_notify_wait": {
+    "entry": "0x455b84",
+    "body_bytes": 174,
+    "caller": "uart_rx_consumer_offline/compat.h maps xTaskNotifyWait to receiver_notify_wait(0, clear_entry, clear_exit, out, ticks)",
+    "observable_state": [
+      "Nonzero first index calls BASEPRI mask 0x5fa0a4 then attempts invalid write to 0xffffffff",
+      "Zero index enters critical 0x4420d0/0x4420e8, manipulates current TCB notification value at +0x68 and state byte at +0x6c",
+      "A pending wait invokes task-delay/list helper 0x455fa8 and yield 0x4420bc; timeout/notification decides return value and clear-on-exit"
+    ],
+    "admission": "deferred: no selected full source for task-delay/list helper or scheduler timeout/notification interleaving; no public-entry original/source oracle"
+  },
+  "archive_delta": 0,
+  "remaining_global_names": 60
+}

@@ -1,0 +1,18 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10207008 <.data+0x4004>:
+10207008:	4490      	ld.w      	r2, (r0, 0x10)
+1020700a:	6090      	ld.w      	r3, (r0, 0x0)
+1020700c:	2390      	ld.w      	r1, (r0, 0xc)
+1020700e:	c860      	addu      	r3, r2
+10207010:	428023c4 	divs      	r2, r3, r1
+10207014:	847c      	mult      	r2, r1
+10207016:	ca60      	subu      	r3, r2
+10207018:	4190      	ld.w      	r2, (r0, 0x4)
+1020701a:	8e64      	cmpne      	r3, r2
+1020701c:	0364      	mvcv      	r0
+1020701e:	3c78      	jmp      	r15

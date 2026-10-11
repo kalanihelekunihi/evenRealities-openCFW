@@ -1,0 +1,33 @@
+{
+  "build_receipt": "g2/build/c-firmware/20261011/em-framework-run-round/receipt.json",
+  "build_receipt_sha256": "c62e0171b7c2743e3d41ad63d7a2f105e183020c581aeb21dedb395d34b8a1f6",
+  "candidate_compilation_passed": true,
+  "inputs": [
+    {
+      "path": "g2/components/em9305/qpc_scheduler_candidate/framework_run.c",
+      "sha256": "8d0acaebb585d1689b912f044e1345da4e3b224e8b611ec7f57b310833e10ce1"
+    },
+    {
+      "path": "g2/components/em9305/qpc_scheduler_candidate/startup_hook.c",
+      "sha256": "781bf4d9d562a649c9143feafa7d0fae638a43bf50167c6d7103b694dc0a25b0"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/em9305/startup-lower-native.txt",
+      "sha256": "0886160857e90d3e42de501e9fc351141bd162fe930731e0073ccb39099741a3"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/em9305/framework-run-native.txt",
+      "sha256": "6d9c20658bdfc2268bddb110f7604fd6ac608c48ac172402c2ec2436170b6e3e"
+    }
+  ],
+  "original_instruction_execution": false,
+  "full_source_complete": false,
+  "native_findings": [
+    "Startup lower0x302518 exactly NOP_S/return ignores R0; provisional incomingR0 requirement removed.",
+    "Framework run preserves CLRI/SYNC, scheduler lock0 before sched/optional activate, startup hook, SETI0 and nonreturning idle loop."
+  ],
+  "limits": [
+    "Actual idle0x3115e4 remains unresolved C body.",
+    "Product callbacks/IRQ profile, reset, controller code/data and record coverage/layout unproved."
+  ]
+}

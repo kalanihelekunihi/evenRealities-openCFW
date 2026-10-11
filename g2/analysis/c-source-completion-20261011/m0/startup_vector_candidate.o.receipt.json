@@ -1,0 +1,75 @@
+{
+  "status": "compiled_relocatable_only",
+  "sources": [
+    {
+      "path": "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c",
+      "sha256": "61529fc30f8f48b1520e334ca59a463bb48bb321c60331407a34821c5b79394c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/startup_handler_forward_candidates.c",
+      "sha256": "330ebe6ee8b012a1333c38c563bec2f819b93c2041ae42817ea06a1dbf5c935c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/startup_vector_candidate.c",
+      "sha256": "0655c8e4e16753a79c6a8b05fef1ee75e499aa4ccd703408cd65603d60ecfd46"
+    }
+  ],
+  "compiler": "/usr/bin/clang",
+  "compiler_sha256": "21df4f5520528e31b8632cfb3b4b57a3f2a33126693828bf69d1976f537aaec7",
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Os",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "output": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/m0/startup_vector_candidate.o",
+  "output_sha256": "a1ecc6123efb7ec5d85c74ac4287c338d4ca1c3ffcae64268982fd4a3e7fc161",
+  "undefined_symbols": [
+    "case_application_entry_a598",
+    "case_crt_initial_data",
+    "case_init_boost_set",
+    "case_init_display_reset",
+    "case_init_hex_log",
+    "case_init_id0",
+    "case_init_id1",
+    "case_init_id2",
+    "case_init_led_show",
+    "case_init_log",
+    "case_init_motion_read",
+    "case_init_pin_read",
+    "case_init_pmic_prepare",
+    "case_init_pmic_read",
+    "case_init_pmic_reset",
+    "case_init_pmic_write",
+    "case_init_power_set",
+    "case_init_read_product_byte",
+    "case_init_secondary_read",
+    "case_init_secondary_write",
+    "case_init_selfcheck_read",
+    "case_init_sensor_finish",
+    "case_init_sensor_prepare",
+    "case_init_service_ready",
+    "case_init_service_start",
+    "case_init_usb_reset",
+    "case_init_usb_reset_requested",
+    "case_init_wait",
+    "case_init_wake_clock",
+    "case_init_wake_config",
+    "case_init_wake_mask",
+    "case_irq_child_4330",
+    "case_irq_child_5a52",
+    "case_irq_child_5c90",
+    "case_irq_child_5f50",
+    "case_vector_irq_3bc8",
+    "case_vector_irq_3c2c",
+    "case_vector_irq_3d24",
+    "case_vector_pendsv_0102",
+    "case_vector_systick_8420"
+  ],
+  "limits": "Separate startup candidate; exact product initializer data, handler bodies and final image layout remain unowned."
+}

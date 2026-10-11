@@ -3,6 +3,7 @@
  * Geometry and littlefs callbacks are supplied by filesystem.c. */
 #include "boot_mount.h"
 #include "file_services.h"
+#include "boot_mount_log.h"
 #include <stdint.h>
 
 #ifdef OPENCFW_BOOT_FS_TEST
@@ -29,20 +30,25 @@ static int ensure_directories(lfs_t *fs) {
         int status = lfs_dir_open(fs, &directory, boot_directories[i]);
         if (status == 0) {
             (void)lfs_dir_close(fs, &directory);
-            opencfw_boot_fs_error(0x0043394cu, boot_directories[i]);
+            BOOT_MOUNT_LOG(4, "check_and_create_directories", 0x5a,
+                "Directory exists: %s", boot_directories[i]);
             continue;
         }
         if (status != LFS_ERR_NOENT) {
-            opencfw_boot_fs_error(0x00433340u, boot_directories[i], status);
+            BOOT_MOUNT_LOG(2, "check_and_create_directories", 0x5c,
+                "Error checking directory %s: %d", boot_directories[i], status);
             return -1;
         }
         status = lfs_mkdir(fs, boot_directories[i]);
         if (status == 0) {
-            opencfw_boot_fs_error(0x00433934u, boot_directories[i]);
+            BOOT_MOUNT_LOG(4, "check_and_create_directories", 0x51,
+                "Created directory: %s", boot_directories[i]);
         } else if (status == LFS_ERR_EXIST) {
-            opencfw_boot_fs_error(0x00433320u, boot_directories[i]);
+            BOOT_MOUNT_LOG(4, "check_and_create_directories", 0x53,
+                "Directory already exists: %s", boot_directories[i]);
         } else {
-            opencfw_boot_fs_error(0x00432fdcu, boot_directories[i], status);
+            BOOT_MOUNT_LOG(2, "check_and_create_directories", 0x55,
+                "Failed to create directory %s: %d", boot_directories[i], status);
         }
     }
     return 0;
@@ -53,11 +59,13 @@ static int format_recover(lfs_t *fs) {
     (void)lfs_format(fs, &opencfw_boot_lfs_config);
     int status = lfs_mount(fs, &opencfw_boot_lfs_config);
     if (status != 0) {
-        opencfw_boot_fs_error(0x0043397cu, status);
+        BOOT_MOUNT_LOG(2, "littlefs_format", 0x6b,
+            "lfs_mount faild: %d\n", status);
         return 9;
     }
     if (ensure_directories(fs) != 0) {
-        opencfw_boot_fs_error(0x0043178cu);
+        BOOT_MOUNT_LOG(2, "littlefs_format", 0x6f,
+            "check_and_create_directories faild\n");
         return 9;
     }
     return 0;
@@ -73,7 +81,7 @@ static void update_boot_count(lfs_t *fs) {
     (void)lfs_file_seek(fs, file, 0, LFS_SEEK_SET);
     (void)lfs_file_write(fs, file, &count, sizeof(count));
     (void)lfs_file_close(fs, file);
-    opencfw_boot_fs_error(0x00433e48u, count);
+    BOOT_MOUNT_LOG(4, "littlefs_init", 0x9a, "boot_count: %d", count);
 }
 
 uint32_t opencfw_provider_421210(void) {
@@ -83,12 +91,14 @@ uint32_t opencfw_provider_421210(void) {
         (void)lfs_format(fs, &opencfw_boot_lfs_config);
         status = lfs_mount(fs, &opencfw_boot_lfs_config);
         if (status != 0) {
-            opencfw_boot_fs_error(0x0043397cu, status);
+            BOOT_MOUNT_LOG(2, "littlefs_init", 0x7f,
+                "lfs_format faild: %d\n", status);
             return 9;
         }
     }
     if (ensure_directories(fs) != 0) {
-        opencfw_boot_fs_error(0x0043178cu);
+        BOOT_MOUNT_LOG(2, "littlefs_init", 0x86,
+            "check_and_create_directories faild, format and create again\n");
         (void)format_recover(fs);
     }
     *BOOT_READY = 1;

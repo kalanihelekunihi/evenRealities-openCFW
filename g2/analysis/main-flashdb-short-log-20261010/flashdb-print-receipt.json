@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "cases": 96,
+  "stock_body_sha256": "995b43fde13c4f3fe3f3c59069fd1b3afc4fdc595a84ed2488c1cb2420b30762",
+  "source_sha256": "95ce03d7a770721bce52e52f73c3e228baf10e83022b266d06e70d5a2b47045d",
+  "elf_sha256": "e8f18d086f6cd2c97fe172788873c35cd397ed09a5af8fdc8fa3892182aec1c5",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_print",
+    "-Wl,--defsym=g2_flashdb_print_sink=0x200742f0",
+    "-Wl,--defsym=g2_flashdb_print_buffer=0x2006b930",
+    "-Wl,--defsym=g2_flashdb_vformat=0x473037",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_print_wrapper_candidates_20261010/print_wrapper.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-print-wrapper.elf"
+  ],
+  "limits": "M55 public-entry wrapper only. Shared synthetic vformatter and output sink; no general variadic syntax, output transport, buffer placement, callback lifetime, concurrent state or hardware proof."
+}

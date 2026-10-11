@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "reset_vector": "0x5e4233",
+  "constructor_table": "0x75d3c8",
+  "zero": {
+    "entry": "0x5fa01e",
+    "descriptor": "0x75d3cc",
+    "next": "0x75d3e0",
+    "ranges": [
+      [
+        "0x20004558",
+        "0x20075048"
+      ],
+      [
+        "0x2013be70",
+        "0x2037ce44"
+      ]
+    ],
+    "sequence_0x20074f9f": 0,
+    "policy_0x20074fa1": 0,
+    "low_ring_unchanged": true,
+    "write_count": 706227
+  },
+  "low_ram_decompress": {
+    "entry": "0x43a11e",
+    "descriptor": "0x75d3f4",
+    "next": "0x75d400",
+    "source_offset": "0x344aa",
+    "encoded_length": "0x54e0",
+    "destination": "0x20000000",
+    "written_range": [
+      "0x20000000",
+      "0x20004558"
+    ],
+    "output_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+    "write_count": 17756
+  },
+  "ring_descriptor_0x200004c8": {
+    "base": "0x200ccbd8",
+    "capacity": 32768,
+    "read": 0,
+    "write": 0,
+    "raw_hex": "d8cb0c20008000000000000000000000"
+  },
+  "shared_ram_decompress": {
+    "entry": "0x43a11e",
+    "descriptor": "0x75d404",
+    "next": "0x75d410",
+    "destination": "0x20080000",
+    "ring_storage": [
+      "0x200ccbd8",
+      "0x200d4bd8"
+    ],
+    "ring_storage_zeroed": true,
+    "write_count": 769650
+  },
+  "limits": "Stock constructor execution proves runtime bytes, not source ownership of the compressed initialized payload or complete boot ordering."
+}

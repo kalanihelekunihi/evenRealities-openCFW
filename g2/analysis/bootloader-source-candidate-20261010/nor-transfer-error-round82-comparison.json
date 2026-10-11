@@ -1,0 +1,188 @@
+{
+  "status": "PASS",
+  "cases": 6,
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "original_body_sha256": "4dd35a80dd88663be85e71c3b7e3bf5409c1e4e2150ec3fd1d66133b6d2ad0ea",
+  "original_format_sha256": "e73a360bfa15f203c43993cfb88e978a1d079143cd76859fb5fda251446b6f7f",
+  "source_entry_sha256": "318e74defbcc7af59ddd2e07fc38d5984beadd54e561cd9176835d49b4b93634",
+  "visited_original_bytes": 44,
+  "unvisited_original_addresses": [],
+  "comparisons": [
+    {
+      "callback": false,
+      "format": "MSPI write xfer failed: instr=0x%02X, addr=0x%08X, len=%u, hal_st=%d\n",
+      "register_args": [
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "r0": 0,
+        "r1": 0,
+        "calls": [],
+        "buffer": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537128960,
+        "r4_r11": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "callback": false,
+      "format": "MSPI write xfer failed: instr=0x%02X, addr=0x%08X, len=%u, hal_st=%d\n",
+      "register_args": [
+        5,
+        305419896,
+        128
+      ],
+      "result": {
+        "r0": 0,
+        "r1": 128,
+        "calls": [],
+        "buffer": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537128960,
+        "r4_r11": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "callback": false,
+      "format": "MSPI write xfer failed: instr=0x%02X, addr=0x%08X, len=%u, hal_st=%d\n",
+      "register_args": [
+        255,
+        4294967295,
+        2779077210
+      ],
+      "result": {
+        "r0": 0,
+        "r1": 2779077210,
+        "calls": [],
+        "buffer": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537128960,
+        "r4_r11": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "callback": true,
+      "format": "MSPI write xfer failed: instr=0x%02X, addr=0x%08X, len=%u, hal_st=%d\n",
+      "register_args": [
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "r0": 77,
+        "r1": 0,
+        "calls": [
+          [
+            537021648,
+            "4d5350492077726974652078666572206661696c65643a20696e7374723d307830302c20616464723d307830303030303030302c206c656e3d302c2068616c5f73743d3238373435343032300a"
+          ]
+        ],
+        "buffer": "4d5350492077726974652078666572206661696c65643a20696e7374723d307830302c20616464723d307830303030303030302c206c656e3d302c2068616c5f73743d3238373435343032300a00a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537128960,
+        "r4_r11": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "callback": true,
+      "format": "MSPI write xfer failed: instr=0x%02X, addr=0x%08X, len=%u, hal_st=%d\n",
+      "register_args": [
+        5,
+        305419896,
+        128
+      ],
+      "result": {
+        "r0": 79,
+        "r1": 128,
+        "calls": [
+          [
+            537021648,
+            "4d5350492077726974652078666572206661696c65643a20696e7374723d307830352c20616464723d307831323334353637382c206c656e3d3132382c2068616c5f73743d3238373435343032300a"
+          ]
+        ],
+        "buffer": "4d5350492077726974652078666572206661696c65643a20696e7374723d307830352c20616464723d307831323334353637382c206c656e3d3132382c2068616c5f73743d3238373435343032300a00a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537128960,
+        "r4_r11": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "callback": true,
+      "format": "MSPI write xfer failed: instr=0x%02X, addr=0x%08X, len=%u, hal_st=%d\n",
+      "register_args": [
+        255,
+        4294967295,
+        2779077210
+      ],
+      "result": {
+        "r0": 86,
+        "r1": 2779077210,
+        "calls": [
+          [
+            537021648,
+            "4d5350492077726974652078666572206661696c65643a20696e7374723d307846462c20616464723d307846464646464646462c206c656e3d323737393037373231302c2068616c5f73743d3238373435343032300a"
+          ]
+        ],
+        "buffer": "4d5350492077726974652078666572206661696c65643a20696e7374723d307846462c20616464723d307846464646464646462c206c656e3d323737393037373231302c2068616c5f73743d3238373435343032300a00a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+        "sp": 537128960,
+        "r4_r11": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "Callback body is a controlled observer; parser executes stock or selected source.",
+    "The single authenticated NOR-write format is source-owned in the alias; floats and the full varargs grammar are not covered.",
+    "M4-compatible ELF comparison; current M55 archive compilation/linking checked separately."
+  ]
+}

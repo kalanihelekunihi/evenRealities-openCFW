@@ -1,0 +1,76 @@
+{
+  "status": "PASS reused original/source",
+  "archive_sha256": "cb1416a99c7b36b17861fb2de75e880a64892225cafdd1fedde332f934f7470a",
+  "alias_compilation": {
+    "source": "g2/components/audio/source_candidate_20261010/timer_delete_alias.c",
+    "source_sha256": "90a7c088a76091409a747caeb2116587ec8fc4f977c9ba339b313e7cff8f0a8d",
+    "object_path": "/private/tmp/g2-audio-arm-inventory/198-source_candidate_20261010-timer_delete_alias.o",
+    "command": [
+      "clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/g2-audio-arm-inventory/198-source_candidate_20261010-timer_delete_alias.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/timer_delete_alias.c",
+      "-o",
+      "/private/tmp/g2-audio-arm-inventory/198-source_candidate_20261010-timer_delete_alias.o"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "object_sha256": "9fb324d6c39b970d9db430ddad5cf4f4cdce4517a49f760cb48394b575750a36",
+    "dependency_sha256": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/timer_delete_alias.c": "90a7c088a76091409a747caeb2116587ec8fc4f977c9ba339b313e7cff8f0a8d",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../timer_aux_lifetime_offline/aux.c": "cc76f47beb27f965a6c972bb096553fa9494f66ae4a6fb186097a0bb265254a6",
+      "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../timer_aux_lifetime_offline/../timer_commands_offline/timer.h": "b3f894ca2af122ff2623446e3375db0091aa38e74ef62fb1011166d4268d9519"
+    }
+  },
+  "superseded_original_compilation": {
+    "source": "g2/components/audio/timer_aux_lifetime_offline/aux.c",
+    "source_sha256": "cc76f47beb27f965a6c972bb096553fa9494f66ae4a6fb186097a0bb265254a6",
+    "object_path": "/private/tmp/g2-audio-arm-inventory/085-timer_aux_lifetime_offline-aux.o",
+    "command": [
+      "clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/g2-audio-arm-inventory/085-timer_aux_lifetime_offline-aux.d",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/timer_aux_lifetime_offline/aux.c",
+      "-o",
+      "/private/tmp/g2-audio-arm-inventory/085-timer_aux_lifetime_offline-aux.o"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "object_sha256": "cf700a43399eb3fbb1c9b485136f91f416837a89d58c81a8a701c7f53fe127e6",
+    "dependency_sha256": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/timer_aux_lifetime_offline/aux.c": "cc76f47beb27f965a6c972bb096553fa9494f66ae4a6fb186097a0bb265254a6",
+      "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/timer_aux_lifetime_offline/../timer_commands_offline/timer.h": "b3f894ca2af122ff2623446e3375db0091aa38e74ef62fb1011166d4268d9519"
+    }
+  },
+  "same_object_offsets": {
+    "audio_timer_delete": 0,
+    "audio_timer_delete_selected": 0
+  },
+  "rebuilt_text_sha256": "4be0eb3905f7ac5601a4a60088ecd220df105075c74871a4741342953f773349",
+  "text_identical_to_prior_selected_object": true,
+  "fresh_original_source_cases": 0,
+  "reused_lifecycle_cases": 50,
+  "prior_receipt": "g2/analysis/audio-timer-aux-lifetime-closure-2026-10-08/results.json",
+  "caller_abi": "int32_t(void *timer): R0 pointer, R0 status; same original 0x44953e entry as selected source wrapper",
+  "limits": "Prior 50 cases cover selected static/dynamic timer and auxiliary, empty/full/absent command queue, thread/ISR and constructed drain/due interleavings. Live daemon scheduling, callback cancellation and M55 composed execution remain unproved."
+}

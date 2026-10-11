@@ -1,0 +1,126 @@
+{
+  "status": "PASS",
+  "counts": {
+    "clear": 384,
+    "post": 384,
+    "forward": 384
+  },
+  "total": 1152,
+  "original_firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "candidate_elf_sha256": "039865d92c826aab5ab21f0595753954d09a775612e1b0c8a6e63b92c4628335",
+  "python": "/private/tmp/iar-c-runtime-venv/bin/python",
+  "unicorn_version": "2.1.4",
+  "pyelftools_version": "0.33",
+  "kernel_boundaries": {
+    "134268108": "get",
+    "134268024": "clear_isr",
+    "134267980": "clear_task",
+    "134268264": "set_isr",
+    "134268126": "set_task"
+  },
+  "examples": [
+    {
+      "kind": "clear",
+      "flags": 0,
+      "ipsr": 15,
+      "return": 0,
+      "calls": [
+        [
+          "get",
+          536891392
+        ],
+        [
+          "clear_isr",
+          536891392,
+          0
+        ]
+      ]
+    },
+    {
+      "kind": "clear",
+      "flags": 0,
+      "ipsr": 15,
+      "return": 72,
+      "calls": [
+        [
+          "get",
+          536891392
+        ],
+        [
+          "clear_isr",
+          536891392,
+          0
+        ]
+      ]
+    },
+    {
+      "kind": "clear",
+      "flags": 0,
+      "ipsr": 15,
+      "return": 0,
+      "calls": [
+        [
+          "get",
+          536891392
+        ],
+        [
+          "clear_isr",
+          536891392,
+          0
+        ]
+      ]
+    },
+    {
+      "kind": "clear",
+      "flags": 0,
+      "ipsr": 15,
+      "return": 72,
+      "calls": [
+        [
+          "get",
+          536891392
+        ],
+        [
+          "clear_isr",
+          536891392,
+          0
+        ]
+      ]
+    },
+    {
+      "kind": "clear",
+      "flags": 0,
+      "ipsr": 15,
+      "return": 0,
+      "calls": [
+        [
+          "get",
+          536891392
+        ],
+        [
+          "clear_isr",
+          536891392,
+          0
+        ]
+      ]
+    },
+    {
+      "kind": "clear",
+      "flags": 0,
+      "ipsr": 15,
+      "return": 72,
+      "calls": [
+        [
+          "get",
+          536891392
+        ],
+        [
+          "clear_isr",
+          536891392,
+          0
+        ]
+      ]
+    }
+  ],
+  "scope": "Original and compiled source wrappers execute; identical explicit kernel result models intercept only documented child entries. No kernel implementation, scheduling, or hardware claim."
+}

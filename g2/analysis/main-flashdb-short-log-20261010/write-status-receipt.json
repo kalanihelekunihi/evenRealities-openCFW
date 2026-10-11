@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "cases": 2112,
+  "stock_set": "0x585870..0x5858a8",
+  "stock_write": "0x5858d8..0x585948",
+  "stock_bodies_sha256": {
+    "set": "1b452daae71eb65169b3979b09c1ed063484dd90df219d688ebd360cfe9ea821",
+    "write": "f70a8b51c10f796eadf0504f11cbc6388fe6684d269c3363da0e4bbb466af34c"
+  },
+  "source_sha256": "b24d4f62705b0ae1ccc889cd60d4507c1ae9a4141eaa2c7cd83b23b8ed2615d1",
+  "elf_sha256": "679d3417fd9a63e06d4b14b078190d45c62f2ee1c4e1114f35bae3124361cf74",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_write_status",
+    "-Wl,--defsym=g2_flashdb_flash_write=0x585a53",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_write_status_candidates_20261010/write_status.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-write-status.elf"
+  ],
+  "limits": "Complete set-status and valid-input write-status local paths; nonreturning FDB_ASSERT invalid index/null table excluded. Shared synthetic flash-write callback. M4 scalar oracle, M55 archive compile separate."
+}

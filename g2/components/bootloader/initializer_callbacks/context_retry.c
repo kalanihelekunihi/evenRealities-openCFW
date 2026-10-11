@@ -2,14 +2,15 @@
 #include "context_claim.h"
 extern uint32_t opencfw_bl_power_register_update(uint32_t,uint32_t);
 extern void opencfw_boot_delay_scaled(uint32_t);
+extern const uint32_t opencfw_boot_mode_values[2];
 #define WORD(p) (*(volatile uint32_t *)(uintptr_t)(p))
 uint32_t opencfw_boot_context_retry(uint32_t index)
 {
     if ((uint8_t)index==4u) {
         uint32_t config=WORD(0x20000374u+((uint8_t)index<<4)+8u);
-        (void)opencfw_bl_power_register_update(WORD(config),WORD(0x434158u));
+        (void)opencfw_bl_power_register_update(WORD(config),opencfw_boot_mode_values[0]);
         config=WORD(0x20000374u+((uint8_t)index<<4)+8u);
-        (void)opencfw_bl_power_register_update(WORD(config+4u),WORD(0x434158u));
+        (void)opencfw_bl_power_register_update(WORD(config+4u),opencfw_boot_mode_values[0]);
     }
     uint32_t status=0u;
     for (uint32_t tries=0;tries<1000u;++tries) {

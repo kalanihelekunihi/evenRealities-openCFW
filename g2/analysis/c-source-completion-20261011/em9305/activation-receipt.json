@@ -1,0 +1,44 @@
+{
+  "build_receipt": "g2/build/c-firmware/20261011/em-activation-round/receipt.json",
+  "build_receipt_sha256": "afe62ef9be3d8f49c6cc16793082a5b5932f888125e44060657142b78037c700",
+  "candidate_compilation_passed": true,
+  "defined_symbols": 5,
+  "unresolved_symbols": [
+    "opencfw_em9305_active_get",
+    "opencfw_em9305_assert",
+    "opencfw_em9305_event_gc"
+  ],
+  "inputs": [
+    {
+      "path": "g2/components/em9305/qpc_scheduler_candidate/activate.c",
+      "sha256": "9e5be8ff5514505b57b585e97512148331275f2989b7a1ac59e62f6b2cb21fbb"
+    },
+    {
+      "path": "g2/analysis/em9305-qpc-source-binding-2026-10-09/QK_activate_-instructions.txt",
+      "sha256": "a03e13709397641f254d66426a231d6bf64d867f39e26b27b224df0f6f1ed6b4"
+    },
+    {
+      "path": "g2/analysis/em9305-qpc-source-binding-2026-10-09/provenance.json",
+      "sha256": "fcc05f03cc696bc1239147aff12a04c333fc6f5cf4faa1924befec66d27322dd"
+    },
+    {
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/qpc-official/src/qk/qk.c",
+      "sha256": "f1b069a535260c1a23d66d3dfe3373259b5068fc94bccef078bd55bf2bdfed0a"
+    }
+  ],
+  "original_instruction_execution": false,
+  "full_source_complete": false,
+  "native_findings": [
+    "Initial next priority zero assertion500 can return; next field reset once before loop.",
+    "Active table root0x80131c, state0x801394, ready halfword+6, front event+12.",
+    "seti0 before event get/virtual dispatch/GC; clri0 and sync afterward.",
+    "Ready removal uses decoded BCLR hardware instruction.",
+    "LOG2P1 result narrows to byte before previous/lock guards and assert510.",
+    "Previous active priority restored on final exit."
+  ],
+  "limits": [
+    "Event get and garbage collection source remain genuine unresolved bodies.",
+    "Object/vtable ABI, SRAM initialization, producing IRQ profile and final record layout unproved.",
+    "Compilation/static listing correspondence is not native execution/equality proof."
+  ]
+}

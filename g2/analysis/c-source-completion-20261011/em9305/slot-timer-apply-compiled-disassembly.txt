@@ -1,0 +1,99 @@
+0000ea2c <opencfw_em9305_ll_slot_adjust_317c10>:
+    ea2c:	c0f1                	push_s	blink
+    ea2e:	c5e1                	push_s	r13
+    ea30:	0915 02f5           	brhs.d.nt	r1,0xb,20	;ea44 <opencfw_em9305_ll_slot_adjust_317c10+0x18>
+    ea34:	4528                	mov_s	r13,r1
+    ea36:	40a1                	mov_s	r0,r13
+    ea38:	1404 301f           	ld	blink,[sp,4]
+    ea3c:	7fe0                	j_s.d	[blink]
+    ea3e:	1408 340d           	ld.ab	r13,[sp,8]
+    ea42:	78e0                	nop_s
+    ea44:	1082 0702           	ldh.as	r2,[r0,130]
+    ea48:	1085 0701           	ldh.as	r1,[r0,133]
+    ea4c:	7850                	exth_s	r0,r2
+    ea4e:	7930                	exth_s	r1,r1
+    ea50:	0802 0020           	bl.d	0	;ea50 <opencfw_em9305_ll_slot_adjust_317c10+0x24>
+    ea54:	7404                	add_s	r0,r0,4
+    ea56:	780b                	tst_s	r0,r0
+    ea58:	2841 0082           	lsr	r2,r0,0x2
+    ea5c:	22c5 0f84 c000 0000 	or.n	r2,r2,0xc0000000
+    ea64:	204b 80c0           	tst	r0,0x3
+    ea68:	621a                	add_s	r2,r2,r0
+    ea6a:	22c0 0062           	add.ne	r2,r2,0x1
+    ea6e:	0acb 8345           	brhs.nt	r2,r13,-54	;ea36 <opencfw_em9305_ll_slot_adjust_317c10+0xa>
+    ea72:	4d50                	sub_s	r0,r13,r2
+    ea74:	da0a                	mov_s	r2,0xa
+    ea76:	e08a                	cmp_s	r0,0xa
+    ea78:	22ca 0006           	mov.nc	r2,r0
+    ea7c:	4040                	mov_s	r0,r2
+    ea7e:	1404 301f           	ld	blink,[sp,4]
+    ea82:	7fe0                	j_s.d	[blink]
+    ea84:	1408 340d           	ld.ab	r13,[sp,8]
+
+0000ea88 <opencfw_em9305_ll_slot_apply_308708>:
+    ea88:	c0f1                	push_s	blink
+    ea8a:	1cfc b408           	st.aw	r16,[sp,-4]
+    ea8e:	c7e1                	push_s	r15
+    ea90:	c6e1                	push_s	r14
+    ea92:	c5e1                	push_s	r13
+    ea94:	4628                	mov_s	r14,r1
+    ea96:	209f 040e           	mpyuw	r0,r0,912
+    ea9a:	1600 700d 0080 5c70 	ld	r13,[0x805c70]
+    eaa2:	651d                	add_s	r13,r13,r0
+    eaa4:	0f8a ffef           	bl.d	-120	;ea2c <opencfw_em9305_ll_slot_adjust_317c10>
+    eaa8:	40a1                	mov_s	r0,r13
+    eaaa:	0e65 1000           	breq.nt	r14,r0,100	;eb0c <opencfw_em9305_ll_slot_apply_308708+0x84>
+    eaae:	1585 1703           	ldh.as	r3,[r13,133]
+    eab2:	2500 1f82 0000 034e 	add	r2,r13,0x34e
+    eaba:	9240                	ldh_s	r2,[r2,0]
+    eabc:	1582 1701           	ldh.as	r1,[r13,130]
+    eac0:	4708                	mov_s	r15,r0
+    eac2:	7b70                	exth_s	r3,r3
+    eac4:	7930                	exth_s	r1,r1
+    eac6:	7a50                	exth_s	r2,r2
+    eac8:	7124                	add_s	r1,r1,1
+    eaca:	7a6a                	mpyuw_s	r2,r2,r3
+    eacc:	7a2c                	mpy_s	r2,r2,r1
+    eace:	218a 0a0f           	mov	r1,1000
+    ead2:	0802 0020           	bl.d	0	;ead0 <opencfw_em9305_ll_slot_apply_308708+0x48>
+    ead6:	40c1                	mov_s	r0,r14
+    ead8:	218a 0893           	mov	r1,1250
+    eadc:	4010                	mov_s	r16,r0
+    eade:	0802 0020           	bl.d	0	;eadc <opencfw_em9305_ll_slot_apply_308708+0x54>
+    eae2:	4040                	mov_s	r0,r2
+    eae4:	0829 2004           	brlo.nt	r16,r0,40	;eb0c <opencfw_em9305_ll_slot_apply_308708+0x84>
+    eae8:	156d 1082           	ldb	r2,[r13,109]
+    eaec:	1d76 13d8           	st.as	r15,[r13,118]
+    eaf0:	1d7b 1398           	st.as	r14,[r13,123]
+    eaf4:	262f f087           	extb.f	0,r2
+    eaf8:	f414                	bne_s	40	;eb20 <opencfw_em9305_ll_slot_apply_308708+0x98>
+    eafa:	710c                	mov_s	r0,1
+    eafc:	1410 301f           	ld	blink,[sp,16]
+    eb00:	c5c1                	pop_s	r13
+    eb02:	c6c1                	pop_s	r14
+    eb04:	c7c1                	pop_s	r15
+    eb06:	7fe0                	j_s.d	[blink]
+    eb08:	1408 3410           	ld.ab	r16,[sp,8]
+    eb0c:	700c                	mov_s	r0,0
+    eb0e:	1410 301f           	ld	blink,[sp,16]
+    eb12:	c5c1                	pop_s	r13
+    eb14:	c6c1                	pop_s	r14
+    eb16:	c7c1                	pop_s	r15
+    eb18:	7fe0                	j_s.d	[blink]
+    eb1a:	1408 3410           	ld.ab	r16,[sp,8]
+    eb1e:	78e0                	nop_s
+    eb20:	4e99                	add_s	r1,r14,0x9
+    eb22:	211c 0f81 cccc cccd 	mpymu	r1,r1,0xcccccccd
+    eb2a:	b923                	lsr_s	r1,r1,0x3
+    eb2c:	0b8a fa6f           	bl.d	-46200	;36b4 <opencfw_em9305_wsf_timer_start_ticks>
+    eb30:	2556 1f80           	add3	r0,r13,0x3e
+    eb34:	1576 1601           	ld.as	r1,[r13,118]
+    eb38:	2500 1f80 0000 01dc 	add	r0,r13,0x1dc
+    eb40:	4999                	add_s	r1,r1,0x9
+    eb42:	211c 0f81 cccc cccd 	mpymu	r1,r1,0xcccccccd
+    eb4a:	0b6e fa6f           	bl.d	-46228	;36b4 <opencfw_em9305_wsf_timer_start_ticks>
+    eb4e:	b923                	lsr_s	r1,r1,0x3
+    eb50:	07ad ffef           	b.d	-84	;eafc <opencfw_em9305_ll_slot_apply_308708+0x74>
+    eb54:	710c                	mov_s	r0,1
+    eb56:	78e0                	nop_s
+

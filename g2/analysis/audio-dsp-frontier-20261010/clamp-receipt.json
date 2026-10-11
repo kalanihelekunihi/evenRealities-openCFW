@@ -1,0 +1,527 @@
+{
+  "status": "PASS",
+  "cases": 72,
+  "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "stock_body_sha256": "c5293fd63b23610d5d29beb387445a5bbf93f4f92bd72879ab193a8dd26f2d7c",
+  "source_sha256": "04d4d32c8c3f08816f3914e90f247ae58714b24fe40754c742e0a5ee2f0cbed2",
+  "compiler": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "compiler_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "compiler_flags": [
+    "-c",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfpu=fpv5-d16",
+    "-mfloat-abi=hard",
+    "-O0",
+    "-ffreestanding",
+    "-fno-builtin"
+  ],
+  "object_sha256": "e232785a28f56d6d286eadffd157b376697a087573da15ba24a1a189318571e9",
+  "results": [
+    {
+      "case": "inside",
+      "initial_fpscr": "0x0",
+      "output": "0x3fd0000000000000",
+      "stock_fpscr": "0x20000000",
+      "compiled_fpscr": "0x20000000"
+    },
+    {
+      "case": "below",
+      "initial_fpscr": "0x0",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x80000000",
+      "compiled_fpscr": "0x80000000"
+    },
+    {
+      "case": "above",
+      "initial_fpscr": "0x0",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80000000",
+      "compiled_fpscr": "0x80000000"
+    },
+    {
+      "case": "lower_equal",
+      "initial_fpscr": "0x0",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x20000000",
+      "compiled_fpscr": "0x20000000"
+    },
+    {
+      "case": "upper_equal",
+      "initial_fpscr": "0x0",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x60000000",
+      "compiled_fpscr": "0x60000000"
+    },
+    {
+      "case": "negative_zero",
+      "initial_fpscr": "0x0",
+      "output": "0x8000000000000000",
+      "stock_fpscr": "0x20000000",
+      "compiled_fpscr": "0x20000000"
+    },
+    {
+      "case": "positive_zero",
+      "initial_fpscr": "0x0",
+      "output": "0x0",
+      "stock_fpscr": "0x20000000",
+      "compiled_fpscr": "0x20000000"
+    },
+    {
+      "case": "qnan_value",
+      "initial_fpscr": "0x0",
+      "output": "0x7ff8000000000001",
+      "stock_fpscr": "0x30000000",
+      "compiled_fpscr": "0x30000000"
+    },
+    {
+      "case": "qnan_lower",
+      "initial_fpscr": "0x0",
+      "output": "0x0",
+      "stock_fpscr": "0x20000000",
+      "compiled_fpscr": "0x20000000"
+    },
+    {
+      "case": "qnan_upper",
+      "initial_fpscr": "0x0",
+      "output": "0x0",
+      "stock_fpscr": "0x30000000",
+      "compiled_fpscr": "0x30000000"
+    },
+    {
+      "case": "snan_value",
+      "initial_fpscr": "0x0",
+      "output": "0x7ff0000000000001",
+      "stock_fpscr": "0x30000001",
+      "compiled_fpscr": "0x30000001"
+    },
+    {
+      "case": "snan_lower",
+      "initial_fpscr": "0x0",
+      "output": "0x0",
+      "stock_fpscr": "0x20000001",
+      "compiled_fpscr": "0x20000001"
+    },
+    {
+      "case": "snan_upper",
+      "initial_fpscr": "0x0",
+      "output": "0x0",
+      "stock_fpscr": "0x30000001",
+      "compiled_fpscr": "0x30000001"
+    },
+    {
+      "case": "negative_qnan_value",
+      "initial_fpscr": "0x0",
+      "output": "0xfff8000000000001",
+      "stock_fpscr": "0x30000000",
+      "compiled_fpscr": "0x30000000"
+    },
+    {
+      "case": "subnormal",
+      "initial_fpscr": "0x0",
+      "output": "0x1",
+      "stock_fpscr": "0x20000000",
+      "compiled_fpscr": "0x20000000"
+    },
+    {
+      "case": "positive_inf",
+      "initial_fpscr": "0x0",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80000000",
+      "compiled_fpscr": "0x80000000"
+    },
+    {
+      "case": "negative_inf",
+      "initial_fpscr": "0x0",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x80000000",
+      "compiled_fpscr": "0x80000000"
+    },
+    {
+      "case": "reversed_bounds",
+      "initial_fpscr": "0x0",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80000000",
+      "compiled_fpscr": "0x80000000"
+    },
+    {
+      "case": "inside",
+      "initial_fpscr": "0x1",
+      "output": "0x3fd0000000000000",
+      "stock_fpscr": "0x20000001",
+      "compiled_fpscr": "0x20000001"
+    },
+    {
+      "case": "below",
+      "initial_fpscr": "0x1",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x80000001",
+      "compiled_fpscr": "0x80000001"
+    },
+    {
+      "case": "above",
+      "initial_fpscr": "0x1",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80000001",
+      "compiled_fpscr": "0x80000001"
+    },
+    {
+      "case": "lower_equal",
+      "initial_fpscr": "0x1",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x20000001",
+      "compiled_fpscr": "0x20000001"
+    },
+    {
+      "case": "upper_equal",
+      "initial_fpscr": "0x1",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x60000001",
+      "compiled_fpscr": "0x60000001"
+    },
+    {
+      "case": "negative_zero",
+      "initial_fpscr": "0x1",
+      "output": "0x8000000000000000",
+      "stock_fpscr": "0x20000001",
+      "compiled_fpscr": "0x20000001"
+    },
+    {
+      "case": "positive_zero",
+      "initial_fpscr": "0x1",
+      "output": "0x0",
+      "stock_fpscr": "0x20000001",
+      "compiled_fpscr": "0x20000001"
+    },
+    {
+      "case": "qnan_value",
+      "initial_fpscr": "0x1",
+      "output": "0x7ff8000000000001",
+      "stock_fpscr": "0x30000001",
+      "compiled_fpscr": "0x30000001"
+    },
+    {
+      "case": "qnan_lower",
+      "initial_fpscr": "0x1",
+      "output": "0x0",
+      "stock_fpscr": "0x20000001",
+      "compiled_fpscr": "0x20000001"
+    },
+    {
+      "case": "qnan_upper",
+      "initial_fpscr": "0x1",
+      "output": "0x0",
+      "stock_fpscr": "0x30000001",
+      "compiled_fpscr": "0x30000001"
+    },
+    {
+      "case": "snan_value",
+      "initial_fpscr": "0x1",
+      "output": "0x7ff0000000000001",
+      "stock_fpscr": "0x30000001",
+      "compiled_fpscr": "0x30000001"
+    },
+    {
+      "case": "snan_lower",
+      "initial_fpscr": "0x1",
+      "output": "0x0",
+      "stock_fpscr": "0x20000001",
+      "compiled_fpscr": "0x20000001"
+    },
+    {
+      "case": "snan_upper",
+      "initial_fpscr": "0x1",
+      "output": "0x0",
+      "stock_fpscr": "0x30000001",
+      "compiled_fpscr": "0x30000001"
+    },
+    {
+      "case": "negative_qnan_value",
+      "initial_fpscr": "0x1",
+      "output": "0xfff8000000000001",
+      "stock_fpscr": "0x30000001",
+      "compiled_fpscr": "0x30000001"
+    },
+    {
+      "case": "subnormal",
+      "initial_fpscr": "0x1",
+      "output": "0x1",
+      "stock_fpscr": "0x20000001",
+      "compiled_fpscr": "0x20000001"
+    },
+    {
+      "case": "positive_inf",
+      "initial_fpscr": "0x1",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80000001",
+      "compiled_fpscr": "0x80000001"
+    },
+    {
+      "case": "negative_inf",
+      "initial_fpscr": "0x1",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x80000001",
+      "compiled_fpscr": "0x80000001"
+    },
+    {
+      "case": "reversed_bounds",
+      "initial_fpscr": "0x1",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80000001",
+      "compiled_fpscr": "0x80000001"
+    },
+    {
+      "case": "inside",
+      "initial_fpscr": "0x400000",
+      "output": "0x3fd0000000000000",
+      "stock_fpscr": "0x20400000",
+      "compiled_fpscr": "0x20400000"
+    },
+    {
+      "case": "below",
+      "initial_fpscr": "0x400000",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x80400000",
+      "compiled_fpscr": "0x80400000"
+    },
+    {
+      "case": "above",
+      "initial_fpscr": "0x400000",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80400000",
+      "compiled_fpscr": "0x80400000"
+    },
+    {
+      "case": "lower_equal",
+      "initial_fpscr": "0x400000",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x20400000",
+      "compiled_fpscr": "0x20400000"
+    },
+    {
+      "case": "upper_equal",
+      "initial_fpscr": "0x400000",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x60400000",
+      "compiled_fpscr": "0x60400000"
+    },
+    {
+      "case": "negative_zero",
+      "initial_fpscr": "0x400000",
+      "output": "0x8000000000000000",
+      "stock_fpscr": "0x20400000",
+      "compiled_fpscr": "0x20400000"
+    },
+    {
+      "case": "positive_zero",
+      "initial_fpscr": "0x400000",
+      "output": "0x0",
+      "stock_fpscr": "0x20400000",
+      "compiled_fpscr": "0x20400000"
+    },
+    {
+      "case": "qnan_value",
+      "initial_fpscr": "0x400000",
+      "output": "0x7ff8000000000001",
+      "stock_fpscr": "0x30400000",
+      "compiled_fpscr": "0x30400000"
+    },
+    {
+      "case": "qnan_lower",
+      "initial_fpscr": "0x400000",
+      "output": "0x0",
+      "stock_fpscr": "0x20400000",
+      "compiled_fpscr": "0x20400000"
+    },
+    {
+      "case": "qnan_upper",
+      "initial_fpscr": "0x400000",
+      "output": "0x0",
+      "stock_fpscr": "0x30400000",
+      "compiled_fpscr": "0x30400000"
+    },
+    {
+      "case": "snan_value",
+      "initial_fpscr": "0x400000",
+      "output": "0x7ff0000000000001",
+      "stock_fpscr": "0x30400001",
+      "compiled_fpscr": "0x30400001"
+    },
+    {
+      "case": "snan_lower",
+      "initial_fpscr": "0x400000",
+      "output": "0x0",
+      "stock_fpscr": "0x20400001",
+      "compiled_fpscr": "0x20400001"
+    },
+    {
+      "case": "snan_upper",
+      "initial_fpscr": "0x400000",
+      "output": "0x0",
+      "stock_fpscr": "0x30400001",
+      "compiled_fpscr": "0x30400001"
+    },
+    {
+      "case": "negative_qnan_value",
+      "initial_fpscr": "0x400000",
+      "output": "0xfff8000000000001",
+      "stock_fpscr": "0x30400000",
+      "compiled_fpscr": "0x30400000"
+    },
+    {
+      "case": "subnormal",
+      "initial_fpscr": "0x400000",
+      "output": "0x1",
+      "stock_fpscr": "0x20400000",
+      "compiled_fpscr": "0x20400000"
+    },
+    {
+      "case": "positive_inf",
+      "initial_fpscr": "0x400000",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80400000",
+      "compiled_fpscr": "0x80400000"
+    },
+    {
+      "case": "negative_inf",
+      "initial_fpscr": "0x400000",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x80400000",
+      "compiled_fpscr": "0x80400000"
+    },
+    {
+      "case": "reversed_bounds",
+      "initial_fpscr": "0x400000",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80400000",
+      "compiled_fpscr": "0x80400000"
+    },
+    {
+      "case": "inside",
+      "initial_fpscr": "0x800000",
+      "output": "0x3fd0000000000000",
+      "stock_fpscr": "0x20800000",
+      "compiled_fpscr": "0x20800000"
+    },
+    {
+      "case": "below",
+      "initial_fpscr": "0x800000",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x80800000",
+      "compiled_fpscr": "0x80800000"
+    },
+    {
+      "case": "above",
+      "initial_fpscr": "0x800000",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80800000",
+      "compiled_fpscr": "0x80800000"
+    },
+    {
+      "case": "lower_equal",
+      "initial_fpscr": "0x800000",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x20800000",
+      "compiled_fpscr": "0x20800000"
+    },
+    {
+      "case": "upper_equal",
+      "initial_fpscr": "0x800000",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x60800000",
+      "compiled_fpscr": "0x60800000"
+    },
+    {
+      "case": "negative_zero",
+      "initial_fpscr": "0x800000",
+      "output": "0x8000000000000000",
+      "stock_fpscr": "0x20800000",
+      "compiled_fpscr": "0x20800000"
+    },
+    {
+      "case": "positive_zero",
+      "initial_fpscr": "0x800000",
+      "output": "0x0",
+      "stock_fpscr": "0x20800000",
+      "compiled_fpscr": "0x20800000"
+    },
+    {
+      "case": "qnan_value",
+      "initial_fpscr": "0x800000",
+      "output": "0x7ff8000000000001",
+      "stock_fpscr": "0x30800000",
+      "compiled_fpscr": "0x30800000"
+    },
+    {
+      "case": "qnan_lower",
+      "initial_fpscr": "0x800000",
+      "output": "0x0",
+      "stock_fpscr": "0x20800000",
+      "compiled_fpscr": "0x20800000"
+    },
+    {
+      "case": "qnan_upper",
+      "initial_fpscr": "0x800000",
+      "output": "0x0",
+      "stock_fpscr": "0x30800000",
+      "compiled_fpscr": "0x30800000"
+    },
+    {
+      "case": "snan_value",
+      "initial_fpscr": "0x800000",
+      "output": "0x7ff0000000000001",
+      "stock_fpscr": "0x30800001",
+      "compiled_fpscr": "0x30800001"
+    },
+    {
+      "case": "snan_lower",
+      "initial_fpscr": "0x800000",
+      "output": "0x0",
+      "stock_fpscr": "0x20800001",
+      "compiled_fpscr": "0x20800001"
+    },
+    {
+      "case": "snan_upper",
+      "initial_fpscr": "0x800000",
+      "output": "0x0",
+      "stock_fpscr": "0x30800001",
+      "compiled_fpscr": "0x30800001"
+    },
+    {
+      "case": "negative_qnan_value",
+      "initial_fpscr": "0x800000",
+      "output": "0xfff8000000000001",
+      "stock_fpscr": "0x30800000",
+      "compiled_fpscr": "0x30800000"
+    },
+    {
+      "case": "subnormal",
+      "initial_fpscr": "0x800000",
+      "output": "0x1",
+      "stock_fpscr": "0x20800000",
+      "compiled_fpscr": "0x20800000"
+    },
+    {
+      "case": "positive_inf",
+      "initial_fpscr": "0x800000",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80800000",
+      "compiled_fpscr": "0x80800000"
+    },
+    {
+      "case": "negative_inf",
+      "initial_fpscr": "0x800000",
+      "output": "0xbff0000000000000",
+      "stock_fpscr": "0x80800000",
+      "compiled_fpscr": "0x80800000"
+    },
+    {
+      "case": "reversed_bounds",
+      "initial_fpscr": "0x800000",
+      "output": "0x3ff0000000000000",
+      "stock_fpscr": "0x80800000",
+      "compiled_fpscr": "0x80800000"
+    }
+  ],
+  "limits": "D0 output bits and FPSCR compared on synthetic values and four initial FPSCR modes. Stack traffic and non-ABI registers may differ. All higher DSP functions remain unproven."
+}

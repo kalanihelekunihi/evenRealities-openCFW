@@ -1,0 +1,232 @@
+{
+  "admitted_names": 11,
+  "groups": [
+    {
+      "provider": "uxListRemove",
+      "aliases": [
+        "audio_aux_list_remove",
+        "audio_timer_list_remove",
+        "stock_list_remove"
+      ],
+      "abi": "UBaseType_t(ListItem_t*); callers pass item pointer and use or ignore 32-bit result",
+      "prior_proof": "list-remove-alias-proof.json",
+      "reused_original_source_cases": 8,
+      "source": "g2/components/audio/source_candidate_20261010/list_remove_alias.c",
+      "source_sha256": "414339485a407d2972f3bfccbb4cb2ab3954284af46217cc46f11076f7f92566",
+      "object_sha256": "254cb2571fd3b19de4634e34c3503ac6e1e28811a80c5f7fbb5bd1e84cc29891",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/list_remove_alias.c": "414339485a407d2972f3bfccbb4cb2ab3954284af46217cc46f11076f7f92566",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../../foundation/freertos_ready/list_subset.c": "537ebd8aca3a9a757935179ff2474d3544bf0a07bd89fa697cc4bd90535b7677",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../../foundation/freertos_ready/ready_compat.h": "46476ef71baa382e0d93d9be8159d71dee84606b993e09caa4a7b00b50ab34af",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../../foundation/freertos_ready/ready.h": "b88903df66fdfa00e97318afc5372de9ad2a5750b9d0ec32454e35042c7bfd7b",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../../foundation/freertos_ready/../freertos_event_group/event_group.h": "37edf591b135477ae72b8e006e975b06c5a103d89417942f927f9a7cacd1654f",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+      },
+      "text_sha256": "e41e1d3b055f2b856911c730fc7db07bd361e55964c6eeab243b60bd6b991ea9"
+    },
+    {
+      "provider": "audio_resume_pending_ticks_selected",
+      "aliases": [
+        "audio_aux_resume",
+        "audio_resume",
+        "receiver_resume"
+      ],
+      "abi": "int32_t(void); void callers ignore result, receiver uses BaseType_t",
+      "prior_proof": "scheduler-resume-alias-proof.json",
+      "reused_original_source_cases": 432,
+      "source": "g2/components/audio/source_candidate_20261010/scheduler_resume_alias.c",
+      "source_sha256": "6b3e17dd504512adcdefa7588dc38668c0e7bebfae062eb75de2310f9f3796e6",
+      "object_sha256": "ee2170ba6d322eb68e46fcb61cf15e4269cde587a0947e44740d780f1f26eb95",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/scheduler_resume_alias.c": "6b3e17dd504512adcdefa7588dc38668c0e7bebfae062eb75de2310f9f3796e6",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../resume_ticks_offline/resume.c": "6347104574e63896120a6b490a417390ef6773aa60c5e34c9d640c42df58b9eb",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../resume_ticks_offline/../notification_wake_offline/wake.h": "34ffd5555001498cc6e9dd0b51b4d6f93687001e6314d4a65640575d954b22ac",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+      },
+      "text_sha256": "3d75c61560c43afaa4aef51fdfba5fa800a0114fb6dfd0dd9924828e4247bcc0"
+    },
+    {
+      "provider": "stock_exit_critical",
+      "aliases": [
+        "audio_exit_critical",
+        "receiver_critical_exit"
+      ],
+      "abi": "void(void)",
+      "prior_proof": "critical-entry-alias-proof.json",
+      "reused_original_source_cases": 49,
+      "source": "g2/components/audio/source_candidate_20261010/critical_entry_aliases.c",
+      "source_sha256": "2fd48d21be62329dce2e84c4f77773ac1e5846ba571dfaa24a01f1c5b4ff81c0",
+      "object_sha256": "5e93a70b1750fd0c0c04ca3501170e892a49c5bcdf75d37a6bae6e0541c007ff",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/critical_entry_aliases.c": "2fd48d21be62329dce2e84c4f77773ac1e5846ba571dfaa24a01f1c5b4ff81c0",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../timer_wake_providers_offline/port.c": "fdb2a47b0550b4da6e049b6cfabb55194298201e559ad765032098eed4dd9fdc",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      },
+      "text_sha256": "4de4941bbea71e5202d2a0a596fe80d4c58928bf7dcc731cde34cc767fd1a49e"
+    },
+    {
+      "provider": "audio_gpio_pin_set",
+      "aliases": [
+        "codec_gpio_config"
+      ],
+      "abi": "uint32_t(uint32_t,uint32_t); caller ignores result",
+      "prior_proof": "gpio-pin-alias-proof.json",
+      "reused_original_source_cases": 1300,
+      "source": "g2/components/audio/source_candidate_20261010/gpio_pin_aliases.c",
+      "source_sha256": "98050e4915a49cb807258a4793b762820e56cca8da3eae36fd81fb9f12c82240",
+      "object_sha256": "558b8afc18c88a718a2bd99f42ca5f6965d8187e6421f3fa134c1fe020269211",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/gpio_pin_aliases.c": "98050e4915a49cb807258a4793b762820e56cca8da3eae36fd81fb9f12c82240",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../gpio_providers_offline/gpio.c": "b5838a00b945dfad9ef6f8b387dc1201fe883edd0a7d3fd0364a628486254253",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../gpio_providers_offline/gpio.h": "af311301606b449cb75c608eb5480a0aa0f49009d0876be9ea7a78b6a2a5d622",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      },
+      "text_sha256": "c5d6e7205187cb7d3902532e24f1ce85944ebd34c68584e4273a57ef8039dda0"
+    },
+    {
+      "provider": "audio_pll_power_enable and audio_pll_power_disable",
+      "aliases": [
+        "stock_syspll_enable",
+        "stock_syspll_disable"
+      ],
+      "abi": "uint32_t(void); void callers ignore result",
+      "prior_proof": "clock-leaf-alias-proof.json",
+      "reused_original_source_cases": 40,
+      "source": "g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c",
+      "source_sha256": "7a149a84534d360db9d93ef275a9bf88d5863f1876f3cd6d0008ce82815a6fb6",
+      "object_sha256": "fb37df7479f2fa58598e3b0ebf4241a273266ccaae275982cf31baebbcf9a1d0",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/clock_leaf_aliases.c": "7a149a84534d360db9d93ef275a9bf88d5863f1876f3cd6d0008ce82815a6fb6",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_leaf_providers_offline/providers.c": "9138e1eabd6ac31e46a29e5a63759bc749b96f3ad80f5ba6c6f7c6382b69306d",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_leaf_providers_offline/providers.h": "0763241463852746e581c7d69bcfcda08d77a6a65be89ec21c4dac36d946c7d1",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_leaf_providers_offline/../clock_manager_ownership_offline/ownership.h": "dd87c180aad8d8a77165ca6e19e0016b2768687de60d71b4498683fbdf85e364",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_leaf_providers_offline/../gpio_providers_offline/gpio.h": "af311301606b449cb75c608eb5480a0aa0f49009d0876be9ea7a78b6a2a5d622"
+      },
+      "text_sha256": "ff2b0ddaeaea2e25b27a9432e680801d8747abf45ab420ed1bf6b7187a130b46"
+    }
+  ],
+  "per_name_original_binding": [
+    {
+      "name": "audio_aux_list_remove",
+      "original_entry": "0x4560e8",
+      "binding_receipts": [
+        "g2/analysis/audio-timer-aux-lifetime-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-timer-wake-provider-closure-2026-10-08/reproduction-receipt.json"
+      ],
+      "selected_provider": "uxListRemove"
+    },
+    {
+      "name": "audio_aux_resume",
+      "original_entry": "0x454dcc",
+      "binding_receipts": [
+        "g2/analysis/audio-timer-aux-lifetime-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-timer-wake-provider-closure-2026-10-08/reproduction-receipt.json"
+      ],
+      "selected_provider": "audio_resume_pending_ticks_selected"
+    },
+    {
+      "name": "audio_exit_critical",
+      "original_entry": "0x4420e8",
+      "binding_receipts": [
+        "g2/analysis/audio-notification-block-insertion-2026-10-09/reproduction-receipt.json",
+        "g2/analysis/audio-notification-block-wake-return-2026-10-09/reproduction-receipt.json"
+      ],
+      "selected_provider": "stock_exit_critical"
+    },
+    {
+      "name": "audio_resume",
+      "original_entry": "0x454dcc",
+      "binding_receipts": [
+        "g2/analysis/audio-queue-delete-closure-2026-10-08/reproduction-receipt.json"
+      ],
+      "selected_provider": "audio_resume_pending_ticks_selected"
+    },
+    {
+      "name": "audio_timer_list_remove",
+      "original_entry": "0x4560e8",
+      "binding_receipts": [
+        "g2/analysis/audio-timer-aux-lifetime-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-timer-commands-closure-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-timer-wake-provider-closure-2026-10-08/reproduction-receipt.json"
+      ],
+      "selected_provider": "uxListRemove"
+    },
+    {
+      "name": "codec_gpio_config",
+      "original_entry": "0x480f0c",
+      "binding_receipts": [
+        "g2/analysis/audio-codec-lifecycle-hal-composition-2026-10-09/reproduction-receipt.json",
+        "g2/analysis/audio-codec-uart-irq-delivery-2026-10-09/reproduction-receipt.json",
+        "g2/analysis/audio-codec-uart-lifecycle-2026-10-09/reproduction-receipt.json"
+      ],
+      "selected_provider": "audio_gpio_pin_set"
+    },
+    {
+      "name": "receiver_critical_exit",
+      "original_entry": "0x4420e8",
+      "binding_receipts": [
+        "g2/analysis/audio-uart-rx-consumer-2026-10-09/reproduction-receipt.json"
+      ],
+      "selected_provider": "stock_exit_critical"
+    },
+    {
+      "name": "receiver_resume",
+      "original_entry": "0x454dcc",
+      "binding_receipts": [
+        "g2/analysis/audio-uart-rx-consumer-2026-10-09/reproduction-receipt.json"
+      ],
+      "selected_provider": "audio_resume_pending_ticks_selected"
+    },
+    {
+      "name": "stock_list_remove",
+      "original_entry": "0x4560e8",
+      "binding_receipts": [
+        "g2/analysis/audio-timer-daemon-order-closure-2026-10-08/reproduction-receipt.json"
+      ],
+      "selected_provider": "uxListRemove"
+    },
+    {
+      "name": "stock_syspll_disable",
+      "original_entry": "0x48009e",
+      "binding_receipts": [
+        "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-gpio-providers-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-info-memory-providers-2026-10-08/reproduction-receipt.json"
+      ],
+      "selected_provider": "audio_pll_power_enable and audio_pll_power_disable"
+    },
+    {
+      "name": "stock_syspll_enable",
+      "original_entry": "0x480058",
+      "binding_receipts": [
+        "g2/analysis/audio-clock-reset-active-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-gpio-providers-2026-10-08/reproduction-receipt.json",
+        "g2/analysis/audio-info-memory-providers-2026-10-08/reproduction-receipt.json"
+      ],
+      "selected_provider": "audio_pll_power_enable and audio_pll_power_disable"
+    }
+  ],
+  "fresh_original_source_cases": 0,
+  "reused_prior_suites": "Five previously executed source suites; family counts identify prior cases, not new alias executions.",
+  "limits": [
+    "Same-object aliases add no wrapper instructions.",
+    "Prior suites cover isolated valid input contracts; physical scheduling, GPIO, PLL settling remain unproved."
+  ]
+}

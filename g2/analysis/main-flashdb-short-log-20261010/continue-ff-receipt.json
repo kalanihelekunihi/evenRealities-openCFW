@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "cases": 1152,
+  "stock_address": "0x5859a0..0x585a12",
+  "stock_body_sha256": "244c8c4eeae18d10a97fdb554479380a9037dd128a1879452875bed2db13a479",
+  "source_sha256": "2721e823028f2a6789fdb84b4294fd1acebe7cdd441ccd88ea6f5383e90b0691",
+  "elf_sha256": "d64c62a0665a408ff194399bc70ca9ec88e7903e554f370a88ec6e77283f3d48",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_continue_ff_addr",
+    "-Wl,--defsym=g2_flashdb_flash_read=0x585a13",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_continue_ff_candidates_20261010/continue_ff.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-continue-ff.elf"
+  ],
+  "limits": "Complete local 114-byte FF-run scanner over bounded valid flash ranges; uint32 address wrap outside accepted FAL range is excluded. Shared synthetic flash-read callback; read errors are ignored by stock. M4 scalar oracle, M55 archive compile separate; no physical flash proof."
+}

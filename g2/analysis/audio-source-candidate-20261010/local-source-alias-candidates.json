@@ -1,0 +1,194 @@
+{
+  "audio_block_remove": [
+    "uxListRemove"
+  ],
+  "audio_block_sorted_insert": [
+    "audio_public_list_insert"
+  ],
+  "audio_resume_enter": [
+    "stock_enter_critical"
+  ],
+  "audio_resume_exit": [
+    "stock_exit_critical"
+  ],
+  "audio_resume_next_unblock": [
+    "audio_queue_next_unblock"
+  ],
+  "audio_timer_wait_enter": [
+    "stock_enter_critical"
+  ],
+  "audio_timer_wait_exit": [
+    "stock_exit_critical"
+  ],
+  "audio_timer_wait_unlock": [
+    "audio_public_queue_unlock"
+  ],
+  "callback_apply": [
+    "audio_platform_step"
+  ],
+  "callback_change_state": [
+    "audio_platform_change_state"
+  ],
+  "callback_classify": [
+    "audio_platform_classify"
+  ],
+  "callback_plan": [
+    "audio_platform_plan"
+  ],
+  "callback_prepare_state": [
+    "audio_platform_prepare_state"
+  ],
+  "callback_save_disable_irq": [
+    "uart_save_irq"
+  ],
+  "callback_voltage": [
+    "pcm22_ton_adjust"
+  ],
+  "codec_hal_configure": [
+    "am_hal_uart_configure"
+  ],
+  "codec_hal_power": [
+    "am_hal_uart_power_control"
+  ],
+  "early_other": [
+    "pcm_early_on"
+  ],
+  "early_zero": [
+    "pcm_early_off"
+  ],
+  "middle_action0": [
+    "pcm_sleep"
+  ],
+  "middle_action2": [
+    "pcm_temperature"
+  ],
+  "middle_other": [
+    "pcm_middle_on"
+  ],
+  "middle_zero": [
+    "pcm_middle_off"
+  ],
+  "offline_notify": [
+    "uart_notify_isr"
+  ],
+  "pcm21_classify": [
+    "audio_platform_classify"
+  ],
+  "stock_apply": [
+    "pcm21_apply"
+  ],
+  "stock_ceilf": [
+    "audio_ceilf"
+  ],
+  "stock_change_state": [
+    "pcm21_change_state"
+  ],
+  "stock_completion": [
+    "pcm21_buck_complete"
+  ],
+  "stock_delay": [
+    "audio_delay_us"
+  ],
+  "stock_floorf": [
+    "audio_floorf"
+  ],
+  "stock_fmodf": [
+    "audio_fmodf"
+  ],
+  "stock_hfrc2_force": [
+    "audio_hfrc2_force"
+  ],
+  "stock_hfrc2_ratio": [
+    "audio_hfrc2_ratio"
+  ],
+  "stock_hfrc_disable": [
+    "audio_hfrc_disable"
+  ],
+  "stock_hfrc_force": [
+    "audio_hfrc_force"
+  ],
+  "stock_hfrc_target": [
+    "audio_hfrc_target"
+  ],
+  "stock_info_populate": [
+    "audio_info1_populate"
+  ],
+  "stock_mcu_memory_config": [
+    "audio_mcu_memory_config"
+  ],
+  "stock_mcuctrl": [
+    "audio_oscillator_control"
+  ],
+  "stock_pin_get": [
+    "audio_gpio_pin_get"
+  ],
+  "stock_pin_set": [
+    "audio_gpio_pin_set"
+  ],
+  "stock_plan": [
+    "pcm21_plan"
+  ],
+  "stock_pll_config": [
+    "audio_pll_configure"
+  ],
+  "stock_pll_deinit": [
+    "audio_pll_deinit"
+  ],
+  "stock_pll_disable": [
+    "audio_pll_disable"
+  ],
+  "stock_pll_enable": [
+    "audio_pll_enable"
+  ],
+  "stock_pll_generate": [
+    "audio_pll_postdiv"
+  ],
+  "stock_pll_init": [
+    "audio_pll_init"
+  ],
+  "stock_pll_power_disable": [
+    "audio_pll_power_disable"
+  ],
+  "stock_pll_power_enable": [
+    "audio_pll_power_enable"
+  ],
+  "stock_pll_power_enabled": [
+    "audio_pll_power_enabled"
+  ],
+  "stock_pll_wait": [
+    "audio_pll_wait"
+  ],
+  "stock_prepare": [
+    "pcm21_prepare"
+  ],
+  "stock_priority_disinherit": [
+    "xTaskPriorityDisinherit"
+  ],
+  "stock_roundf": [
+    "audio_roundf"
+  ],
+  "stock_scheduler_resume": [
+    "audio_resume_pending_ticks_selected"
+  ],
+  "stock_sram_config": [
+    "audio_sram_config"
+  ],
+  "stock_temperature_apply": [
+    "pcm_hardware_temperature"
+  ],
+  "stock_timer_clear": [
+    "pcm21_boost_remove"
+  ],
+  "stock_timer_publish": [
+    "pcm21_timer_publish"
+  ],
+  "stock_ton": [
+    "pcm21_ton"
+  ],
+  "stock_ton_adjust": [
+    "pcm22_ton_adjust"
+  ],
+  "stock_ton_update": [
+    "pcm_ton_dispatch"
+  ]
+}

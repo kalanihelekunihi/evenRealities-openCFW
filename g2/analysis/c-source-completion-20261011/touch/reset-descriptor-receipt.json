@@ -1,0 +1,54 @@
+{
+  "status": "PASS_PARTIAL_SOURCE_ISLANDS",
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "source_elf_sha256": "91d2839525bd8176b3536fe783250972a35bdc5672cc9862c4ab8d477038b6ea",
+  "source_files": [
+    "g2/components/touch/reset_layout_candidate_20261010/reset_sensor_descriptors.c",
+    "g2/components/touch/reset_layout_candidate_20261010/reset_slot_links.c",
+    "g2/components/touch/reset_layout_candidate_20261010/reset_pm_descriptor.c",
+    "g2/components/touch/ilo_pm_offline/pm.c"
+  ],
+  "source_owned_bytes": 68,
+  "sections": [
+    {
+      "section": "active_slot_link",
+      "flash_address": "0xb5e8",
+      "ram_address": "0x2000051c",
+      "bytes": 4,
+      "sha256": "0b5315c37a97d1d31502e1f5c734b8883adf1146c7dbf9d7f870fd03f797bcb0"
+    },
+    {
+      "section": "lp_slot_link",
+      "flash_address": "0xb5ec",
+      "ram_address": "0x20000520",
+      "bytes": 4,
+      "sha256": "c51bf2e274e24961b4abefc2ba7fe7ed3824ce70098a073404f44b6117f5ae01"
+    },
+    {
+      "section": "lp_sensor_descriptors",
+      "flash_address": "0xb8d4",
+      "ram_address": "0x20000808",
+      "bytes": 16,
+      "sha256": "7e765ae15da936dcab2060a5b7d48b8e84405836886fa8888b9fb054144afd7d"
+    },
+    {
+      "section": "active_sensor_descriptors",
+      "flash_address": "0xb8e4",
+      "ram_address": "0x20000818",
+      "bytes": 16,
+      "sha256": "6623fd92b27813e624543716abfda57af3d382249cef5a0844cf9e878d1c598e"
+    },
+    {
+      "section": "pm_descriptor",
+      "flash_address": "0xb91c",
+      "ram_address": "0x20000850",
+      "bytes": 28,
+      "sha256": "b51a11c3faa95aea78b56c26952b213fb0a70279c269dd8f94479d6e483b4885"
+    }
+  ],
+  "limits": [
+    "Only two descriptor arrays and their two context pointer fields are source-owned here; the other reset-copy fields remain open.",
+    "The section addresses come from a bounded linker fixture, not a final executable Touch image.",
+    "Physical touch behavior and the missing generated product CapSense configuration are not established."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "audio_queue_delete_peer",
+  "original_entry": "0x449bec",
+  "caller": "g2/components/audio/stop_handshake_offline/stop.c",
+  "caller_abi": "void(void*); original int32_t result ignored",
+  "source_sha256": "6f2ade0db01cab0cb6d116f24039faaa0b4225413ff59805256ef08f487aab04",
+  "object_sha256": "781a0888a92aa9c290c645e01ddd8e9394544d823b9f1fafa4c14aef6ce705f7",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/queue_delete_peer_provider.c": "6f2ade0db01cab0cb6d116f24039faaa0b4225413ff59805256ef08f487aab04",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "execution": "queue-delete-peer-execution.json",
+  "fresh_cases": 16,
+  "children": "Original IRQ-context 0x44900E, queue-delete0x441EA2 and free0x456210 execute; source-backed children have independent suites.",
+  "limits": [
+    "Constructed isolated heap and scheduler-unstarted state; no active queue waiters or live task scheduling."
+  ]
+}

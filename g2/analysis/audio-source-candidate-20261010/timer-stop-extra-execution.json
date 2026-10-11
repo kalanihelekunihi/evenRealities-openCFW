@@ -1,0 +1,208 @@
+{
+  "status": "PASS",
+  "fresh_cases": 4,
+  "comparisons": [
+    {
+      "inputs": {
+        "kind": "stop",
+        "initial": 305419896,
+        "clock_clients": 65536,
+        "mask": 0
+      },
+      "original_and_source": {
+        "continuation_flag": "01",
+        "writes": [
+          [
+            "0x400083e0",
+            4,
+            305419896
+          ],
+          [
+            "0x40008010",
+            4,
+            305419896
+          ],
+          [
+            "0xe000e188",
+            4,
+            262144
+          ],
+          [
+            "0x40008068",
+            4,
+            3221225472
+          ],
+          [
+            "0xe000e288",
+            4,
+            262144
+          ]
+        ],
+        "calls": [
+          [
+            "0x4c4530",
+            4,
+            49
+          ]
+        ],
+        "trim_globals": "000000000000000000000000000000000000000000000000",
+        "sequence": "02",
+        "last_state": 255,
+        "clock_clients": "0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000",
+        "primask": 0
+      }
+    },
+    {
+      "inputs": {
+        "kind": "stop",
+        "initial": 305419896,
+        "clock_clients": 65537,
+        "mask": 1
+      },
+      "original_and_source": {
+        "continuation_flag": "01",
+        "writes": [
+          [
+            "0x400083e0",
+            4,
+            305419896
+          ],
+          [
+            "0x40008010",
+            4,
+            305419896
+          ],
+          [
+            "0xe000e188",
+            4,
+            262144
+          ],
+          [
+            "0x40008068",
+            4,
+            3221225472
+          ],
+          [
+            "0xe000e288",
+            4,
+            262144
+          ]
+        ],
+        "calls": [
+          [
+            "0x4c4530",
+            4,
+            49
+          ]
+        ],
+        "trim_globals": "000000000000000000000000000000000000000000000000",
+        "sequence": "02",
+        "last_state": 255,
+        "clock_clients": "0000000000000000000000000000000000000000000000000000000000000000000000000100010000000000000000000000000000000000",
+        "primask": 1
+      }
+    },
+    {
+      "inputs": {
+        "kind": "stop",
+        "initial": 1437226410,
+        "clock_clients": 65536,
+        "mask": 1
+      },
+      "original_and_source": {
+        "continuation_flag": "01",
+        "writes": [
+          [
+            "0x400083e0",
+            4,
+            1437226410
+          ],
+          [
+            "0x40008010",
+            4,
+            1437226410
+          ],
+          [
+            "0xe000e188",
+            4,
+            262144
+          ],
+          [
+            "0x40008068",
+            4,
+            3221225472
+          ],
+          [
+            "0xe000e288",
+            4,
+            262144
+          ]
+        ],
+        "calls": [
+          [
+            "0x4c4530",
+            4,
+            49
+          ]
+        ],
+        "trim_globals": "000000000000000000000000000000000000000000000000",
+        "sequence": "02",
+        "last_state": 255,
+        "clock_clients": "0000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000",
+        "primask": 1
+      }
+    },
+    {
+      "inputs": {
+        "kind": "stop",
+        "initial": 1437226410,
+        "clock_clients": 65537,
+        "mask": 0
+      },
+      "original_and_source": {
+        "continuation_flag": "01",
+        "writes": [
+          [
+            "0x400083e0",
+            4,
+            1437226410
+          ],
+          [
+            "0x40008010",
+            4,
+            1437226410
+          ],
+          [
+            "0xe000e188",
+            4,
+            262144
+          ],
+          [
+            "0x40008068",
+            4,
+            3221225472
+          ],
+          [
+            "0xe000e288",
+            4,
+            262144
+          ]
+        ],
+        "calls": [
+          [
+            "0x4c4530",
+            4,
+            49
+          ]
+        ],
+        "trim_globals": "000000000000000000000000000000000000000000000000",
+        "sequence": "02",
+        "last_state": 255,
+        "clock_clients": "0000000000000000000000000000000000000000000000000000000000000000000000000100010000000000000000000000000000000000",
+        "primask": 0
+      }
+    }
+  ],
+  "source_fixture": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/audio-transition-timer-closure-2026-10-08/verify.py",
+  "limits": "Fresh synthetic state cases use the prior GCC-built source ELF and real original clock-release child; the selected Clang object text is separately matched to its previous source build. No live clock/timer behavior."
+}

@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "cases": 10,
+  "fixed_alias_cases": 2,
+  "read_detail_cases": 8,
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "alias_sha256": "40578d286a0d59ff7c84c820e6a822878db32e0843ce7088c55eabd32f0e483a",
+  "native_sha256": "e2e6695ac5df909331ecbbe8547ea45655d63dd475cadd2f0c7b15543b1e3e0b",
+  "task_sha256": "228c458f621202ff12f48cc8d4c55851def7b59384c2499f79079fe771807dfc",
+  "elf_sha256": "c20ff8a957f7dbd96693ef207abeaffcaf5b24418b0e23896247fdf9c6981436",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,opencfw_boot_dfu_log",
+    "-Wl,--gc-sections",
+    "-Wl,--defsym=opencfw_boot_elog_output=0x10020001",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/source_candidate_20261010/dfu_log_alias.c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/log_call_adapters/log_adapters.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-source-candidate-20261010/dfu-log-alias-candidate.elf"
+  ],
+  "limits": "Two bounded stock call prefixes compared at EasyLogger entry. Fixed line 356 exercises alias; line 532 exercises the selected detail adapter after caller repair. Other DFU lines have historical static callsite metadata but are not current executed fixtures. Logger body/output and full DFU task not proved."
+}

@@ -1,0 +1,982 @@
+{
+  "basis": "Historical linker bindings and current selected providers. Address mention is lexical evidence only, not ABI proof.",
+  "counts": {
+    "linker_only": 17,
+    "source_address_mentioned": 46
+  },
+  "aliases": [
+    {
+      "alias": "opencfw_bl_clear",
+      "original_addresses": [
+        "0x426c11"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "memset",
+          "source": "g2/components/bootloader/filesystem/runtime_memory.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_clock_request",
+      "original_addresses": [
+        "0x004222f1"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "clock_request",
+          "source": "g2/components/bootloader/clock_manager/clock_manager.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_config_retry",
+      "original_addresses": [
+        "0x43048f"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_context_retry",
+          "source": "g2/components/bootloader/initializer_callbacks/context_retry.c",
+          "source_mentions_original_address": [
+            "0x43048e"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_config_transaction",
+      "original_addresses": [
+        "0x42c989"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_context_transaction",
+          "source": "g2/components/bootloader/initializer_callbacks/context_transaction.c",
+          "source_mentions_original_address": [
+            "0x42c988"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_context_claim",
+      "original_addresses": [
+        "0x42c4c7"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_context_claim",
+          "source": "g2/components/bootloader/initializer_callbacks/context_claim.c",
+          "source_mentions_original_address": [
+            "0x42c4c6"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_context_enable",
+      "original_addresses": [
+        "0x42c539"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_context_enable",
+          "source": "g2/components/bootloader/initializer_callbacks/context_instance.c",
+          "source_mentions_original_address": [
+            "0x42c538"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_context_interrupt_enable",
+      "original_addresses": [
+        "0x42c63b"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_context_interrupt_enable",
+          "source": "g2/components/bootloader/initializer_callbacks/context_interrupt.c",
+          "source_mentions_original_address": [
+            "0x42c63a"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_context_nvic_enable",
+      "original_addresses": [
+        "0x430471"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_context_nvic_enable",
+          "source": "g2/components/bootloader/initializer_callbacks/context_nvic.c",
+          "source_mentions_original_address": [
+            "0x430470"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_delay",
+      "original_addresses": [
+        "0x41f9d9"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_delay_scaled",
+          "source": "g2/components/bootloader/platform_startup/local_providers.S",
+          "source_mentions_original_address": [
+            "0x41f9d8"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_delay_raw",
+      "original_addresses": [
+        "0x41f9e7"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_delay_raw",
+          "source": "g2/components/bootloader/platform_startup/local_providers.S",
+          "source_mentions_original_address": [
+            "0x41f9e6"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_generic_log",
+      "original_addresses": [
+        "0x415faf"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_plain_printf",
+          "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_instance_configure",
+      "original_addresses": [
+        "0x42cc35"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_context_configure",
+          "source": "g2/components/bootloader/initializer_callbacks/context_instance.c",
+          "source_mentions_original_address": [
+            "0x42cc34"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_kernel_queue_create_static",
+      "original_addresses": [
+        "0x00419c9d"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_timer_queue_fresh",
+          "source": "g2/components/bootloader/thread_creation/timer_service.c",
+          "source_mentions_original_address": [
+            "0x419c9c"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_kernel_state",
+      "original_addresses": [
+        "0x416089"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_kernel_state",
+          "source": "g2/components/bootloader/thread_creation/lifecycle.c",
+          "source_mentions_original_address": [
+            "0x416088"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_log",
+      "original_addresses": [
+        "0x004176cf",
+        "0x4176cf"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_elog_output",
+          "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_logger_output",
+      "original_addresses": [
+        "0x4176cf"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_elog_output",
+          "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_mutex_create",
+      "original_addresses": [
+        "0x416611"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_provider_416610",
+          "source": "g2/components/bootloader/thread_creation/resource_creators.c",
+          "source_mentions_original_address": [
+            "0x416610"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_post_configure",
+      "original_addresses": [
+        "0x422ba9"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_control_power_apply",
+          "source": "g2/components/bootloader/platform_control/runtime.c",
+          "source_mentions_original_address": [
+            "0x422ba8"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_post_record_initialized",
+      "original_addresses": [
+        "0x41f8bb"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_control_mode_one",
+          "source": "g2/components/bootloader/platform_control/runtime.c",
+          "source_mentions_original_address": [
+            "0x41f8ba"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_printf",
+      "original_addresses": [
+        "0x00415faf",
+        "0x415faf"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_plain_printf",
+          "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_semaphore_create",
+      "original_addresses": [
+        "0x416763"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_semaphore_create",
+          "source": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+          "source_mentions_original_address": [
+            "0x416762"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_bl_transfer_error",
+      "original_addresses": [
+        "0x415faf"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_plain_printf",
+          "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_control_delay_us",
+      "original_addresses": [
+        "0x41d1c1"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_delay_us_math",
+          "source": "g2/components/bootloader/platform_startup/delay_math.S",
+          "source_mentions_original_address": [
+            "0x41d1c0"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_dfu_flags_set",
+      "original_addresses": [
+        "0x41623b"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_provider_41623a",
+          "source": "g2/components/bootloader/flags_runtime/cmsis_notifications.c",
+          "source_mentions_original_address": [
+            "0x41623a"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_dfu_flags_wait",
+      "original_addresses": [
+        "0x4162c5"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_provider_4162c4",
+          "source": "g2/components/bootloader/flags_runtime/cmsis_notifications.c",
+          "source_mentions_original_address": [
+            "0x4162c4"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_dfu_panic",
+      "original_addresses": [
+        "0x41b2f9"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_mask_interrupts",
+          "source": "g2/components/bootloader/thread_creation/kernel_runtime.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_dfu_queue_get",
+      "original_addresses": [
+        "0x416921"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_queue_get",
+          "source": "g2/components/bootloader/queue/queue_wrappers.c",
+          "source_mentions_original_address": [
+            "0x416920"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_dfu_queue_new",
+      "original_addresses": [
+        "0x416817"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_queue_create",
+          "source": "g2/components/bootloader/queue/queue_wrappers.c",
+          "source_mentions_original_address": [
+            "0x416816"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_dfu_queue_put",
+      "original_addresses": [
+        "0x4168a3"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_queue_put",
+          "source": "g2/components/bootloader/queue/queue_wrappers.c",
+          "source_mentions_original_address": [
+            "0x4168a2"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_dfu_thread_new",
+      "original_addresses": [
+        "0x4160ff"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_thread_new",
+          "source": "g2/components/bootloader/thread_creation/thread_creation.c",
+          "source_mentions_original_address": [
+            "0x4160fe"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_fs_error",
+      "original_addresses": [
+        "0x415faf"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_plain_printf",
+          "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "original_addresses": [
+        "0x4166ab"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_mutex_acquire",
+          "source": "g2/components/bootloader/queue/mutex.c",
+          "source_mentions_original_address": [
+            "0x4166aa"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "original_addresses": [
+        "0x416711"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_mutex_release",
+          "source": "g2/components/bootloader/queue/mutex.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_log",
+      "original_addresses": [
+        "0x4176cf"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_elog_output",
+          "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_nor_erase",
+      "original_addresses": [
+        "0x420a09"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_provider_420a08",
+          "source": "g2/components/bootloader/nor_write/nor_write.c",
+          "source_mentions_original_address": [
+            "0x420a08"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_nor_prog",
+      "original_addresses": [
+        "0x420b0d"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_provider_420b0c",
+          "source": "g2/components/bootloader/nor_write/nor_write.c",
+          "source_mentions_original_address": [
+            "0x420b0c"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_platform_system_init",
+      "original_addresses": [
+        "0x41b863"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_main_init",
+          "source": "g2/components/bootloader/main_init/main_init.c",
+          "source_mentions_original_address": [
+            "0x41b862"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_power_control",
+      "original_addresses": [
+        "0x41cd1b"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_power_callback",
+          "source": "g2/components/bootloader/platform_control/power_domains.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_power_register_update",
+      "original_addresses": [],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_power_register_update",
+          "source": "g2/components/bootloader/clock_manager/clock_class_providers.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_boot_runtime_call",
+      "original_addresses": [
+        "0x41e349"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_cache_maintain",
+          "source": "g2/components/bootloader/platform_control/cache_runtime.c",
+          "source_mentions_original_address": [
+            "0x41e348"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_hal_delay_us",
+      "original_addresses": [
+        "0x08000121",
+        "0x41d1c1"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_delay_us_math",
+          "source": "g2/components/bootloader/platform_startup/delay_math.S",
+          "source_mentions_original_address": [
+            "0x41d1c0"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_hal_power_control",
+      "original_addresses": [
+        "0x426809"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_power_control",
+          "source": "g2/components/bootloader/nor_mspi_power/power_control_adapter.c",
+          "source_mentions_original_address": [
+            "0x426808"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_power_register_read",
+      "original_addresses": [],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_power_register_read",
+          "source": "g2/components/bootloader/initializer_callbacks/startup_power_register_read.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_415fae",
+      "original_addresses": [
+        "0x415faf"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_plain_printf",
+          "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41602a",
+      "original_addresses": [
+        "0x41602b"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_context_guard",
+          "source": "g2/components/bootloader/thread_creation/kernel_runtime.c",
+          "source_mentions_original_address": [
+            "0x41602a"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_416058",
+      "original_addresses": [
+        "0x416059"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_kernel_initialize",
+          "source": "g2/components/bootloader/thread_creation/lifecycle.c",
+          "source_mentions_original_address": [
+            "0x416058"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_4160b0",
+      "original_addresses": [
+        "0x4160b1"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_kernel_start",
+          "source": "g2/components/bootloader/thread_creation/lifecycle.c",
+          "source_mentions_original_address": [
+            "0x4160b0"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_4160fe",
+      "original_addresses": [
+        "0x4160ff"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_thread_new",
+          "source": "g2/components/bootloader/thread_creation/thread_creation.c",
+          "source_mentions_original_address": [
+            "0x4160fe"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_416816",
+      "original_addresses": [
+        "0x416817"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_queue_create",
+          "source": "g2/components/bootloader/queue/queue_wrappers.c",
+          "source_mentions_original_address": [
+            "0x416816"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_416920",
+      "original_addresses": [
+        "0x416921"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_queue_get",
+          "source": "g2/components/bootloader/queue/queue_wrappers.c",
+          "source_mentions_original_address": [
+            "0x416920"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_4176ce",
+      "original_addresses": [
+        "0x4176cf"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_elog_output",
+          "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41ac44",
+      "original_addresses": [
+        "0x41ac45"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_coprocessor_enable",
+          "source": "g2/components/bootloader/platform_startup/local_providers.S",
+          "source_mentions_original_address": [
+            "0x41ac44"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41ac5a",
+      "original_addresses": [
+        "0x41ac5b"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_fp_lazy_mode",
+          "source": "g2/components/bootloader/platform_startup/local_providers.S",
+          "source_mentions_original_address": [
+            "0x41ac5a"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41b2f8",
+      "original_addresses": [
+        "0x41b2f9"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_bl_mask_interrupts",
+          "source": "g2/components/bootloader/thread_creation/kernel_runtime.c",
+          "source_mentions_original_address": []
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41ba80",
+      "original_addresses": [
+        "0x41ba81"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_control_mode_two",
+          "source": "g2/components/bootloader/platform_control/runtime.c",
+          "source_mentions_original_address": [
+            "0x41ba80"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41e1e8",
+      "original_addresses": [
+        "0x41e1e9"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_icache_enable",
+          "source": "g2/components/bootloader/platform_control/cache_enable.c",
+          "source_mentions_original_address": [
+            "0x41e1e8"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41e266",
+      "original_addresses": [
+        "0x41e267"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_dcache_enable",
+          "source": "g2/components/bootloader/platform_control/cache_enable.c",
+          "source_mentions_original_address": [
+            "0x41e266"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41f846",
+      "original_addresses": [
+        "0x41f847"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_platform_configure",
+          "source": "g2/components/bootloader/platform_startup/platform_startup.c",
+          "source_mentions_original_address": [
+            "0x41f846"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41f9d8",
+      "original_addresses": [
+        "0x41f9d9"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_delay_scaled",
+          "source": "g2/components/bootloader/platform_startup/local_providers.S",
+          "source_mentions_original_address": [
+            "0x41f9d8"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41f9f8",
+      "original_addresses": [
+        "0x41f9f9"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_init_table_default",
+          "source": "g2/components/bootloader/init_table/init_table.c",
+          "source_mentions_original_address": [
+            "0x41f9f8"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_41fd70",
+      "original_addresses": [
+        "0x41fd71"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_allocator_init",
+          "source": "g2/components/bootloader/allocator/allocator.c",
+          "source_mentions_original_address": [
+            "0x41fd70"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_provider_42dca2",
+      "original_addresses": [
+        "0x42dca3"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_boot_dfu_send",
+          "source": "g2/components/bootloader/dfu_task/context.c",
+          "source_mentions_original_address": [
+            "0x42dca2"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    },
+    {
+      "alias": "opencfw_publish_device_mode",
+      "original_addresses": [
+        "0x41fadd"
+      ],
+      "selected_provider_targets": [
+        {
+          "provider": "opencfw_publish_mspi_mode",
+          "source": "g2/components/bootloader/clock_manager/mode_publisher_abi.S",
+          "source_mentions_original_address": [
+            "0x41fadc"
+          ]
+        }
+      ],
+      "status": "requires_abi_checkpoint_review"
+    }
+  ]
+}

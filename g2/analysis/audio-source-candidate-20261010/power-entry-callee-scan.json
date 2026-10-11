@@ -1,0 +1,71 @@
+{
+  "enable": {
+    "entry": "0x47f5b8",
+    "scan_end": "0x47f7ae",
+    "decoded_until": "0x47f694",
+    "call_sites": [
+      {
+        "site": "0x47f5c4",
+        "target": "#0x47ef18"
+      },
+      {
+        "site": "0x47f5f6",
+        "target": "#0x48032c"
+      },
+      {
+        "site": "0x47f60e",
+        "target": "#0x47f11c"
+      },
+      {
+        "site": "0x47f616",
+        "target": "#0x4c44bc"
+      },
+      {
+        "site": "0x47f628",
+        "target": "#0x4c44bc"
+      },
+      {
+        "site": "0x47f646",
+        "target": "#0x480312"
+      },
+      {
+        "site": "0x47f660",
+        "target": "#0x480312"
+      },
+      {
+        "site": "0x47f67c",
+        "target": "#0x480312"
+      },
+      {
+        "site": "0x47f680",
+        "target": "#0x473940"
+      }
+    ]
+  },
+  "disable": {
+    "entry": "0x47f7ae",
+    "scan_end": "0x47f90c",
+    "decoded_until": "0x47f85a",
+    "call_sites": [
+      {
+        "site": "0x47f7ba",
+        "target": "#0x47ef18"
+      },
+      {
+        "site": "0x47f80c",
+        "target": "#0x480826"
+      },
+      {
+        "site": "0x47f842",
+        "target": "#0x48032c"
+      },
+      {
+        "site": "0x47f846",
+        "target": "#0x473940"
+      }
+    ]
+  },
+  "source": "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_pwrctrl.c",
+  "source_sha256": "84cc1da6a01dd46f29e0465074ad92602c4dd6d7a12f7f4596aef64a9a250586",
+  "scope": "Linear Thumb call scan only; literal pools and branch targets require CFG resolution before claiming complete callee graph."
+}

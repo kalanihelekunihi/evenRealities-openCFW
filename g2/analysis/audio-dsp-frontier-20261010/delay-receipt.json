@@ -1,0 +1,233 @@
+{
+  "status": "PASS",
+  "cases": 26,
+  "stock_body_sha256": "3bfc72be8b8bdc7511bdae236d3bfa0a5bfa01c785522731ab2b090729a52549",
+  "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "elf_sha256": "b6410eddb7442d5800e68e7bace941f2ef231c1920844f9e1320c1eb2e784ed1",
+  "compiler": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "compiler_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfpu=fpv5-d16",
+    "-mfloat-abi=hard",
+    "-O0",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_audio_dsp_delay_to_angle",
+    "-Wl,--defsym=stock_asin=0x43c261"
+  ],
+  "rows": [
+    {
+      "case": "zero",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0x0",
+      "asin_fpscr": "0x20000000",
+      "result_d0": "0x0",
+      "result_fpscr": "0x20000000"
+    },
+    {
+      "case": "lag_minus_10",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0xbff0000000000000",
+      "asin_fpscr": "0x80000010",
+      "result_d0": "0xbff921fb54442d18",
+      "result_fpscr": "0x80000010"
+    },
+    {
+      "case": "lag_minus_3",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0xbfdd666666666665",
+      "asin_fpscr": "0x20000010",
+      "result_d0": "0xbfde8bf15e8cee80",
+      "result_fpscr": "0x20000010"
+    },
+    {
+      "case": "lag_minus_1",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0xbfc399999999999a",
+      "asin_fpscr": "0x20000010",
+      "result_d0": "0xbfc3ad6b01882089",
+      "result_fpscr": "0x80000010"
+    },
+    {
+      "case": "lag_plus_1",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0x3fc399999999999a",
+      "asin_fpscr": "0x20000010",
+      "result_d0": "0x3fc3ad6b01882089",
+      "result_fpscr": "0x80000010"
+    },
+    {
+      "case": "lag_plus_3",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0x3fdd666666666665",
+      "asin_fpscr": "0x20000010",
+      "result_d0": "0x3fde8bf15e8cee80",
+      "result_fpscr": "0x20000010"
+    },
+    {
+      "case": "lag_plus_10",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0x3ff0000000000000",
+      "asin_fpscr": "0x80000010",
+      "result_d0": "0x3ff921fb54442d18",
+      "result_fpscr": "0x80000010"
+    },
+    {
+      "case": "negative_zero",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0x8000000000000000",
+      "asin_fpscr": "0x20000000",
+      "result_d0": "0x8000000000000000",
+      "result_fpscr": "0x20000000"
+    },
+    {
+      "case": "positive_inf",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0x3ff0000000000000",
+      "asin_fpscr": "0x80000000",
+      "result_d0": "0x3ff921fb54442d18",
+      "result_fpscr": "0x80000000"
+    },
+    {
+      "case": "negative_inf",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0xbff0000000000000",
+      "asin_fpscr": "0x80000000",
+      "result_d0": "0xbff921fb54442d18",
+      "result_fpscr": "0x80000000"
+    },
+    {
+      "case": "quiet_nan",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0x7ff8000000000001",
+      "asin_fpscr": "0x30000000",
+      "result_d0": "0x7ff8000000000001",
+      "result_fpscr": "0x30000000"
+    },
+    {
+      "case": "signaling_nan",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0x7ff8000000000001",
+      "asin_fpscr": "0x30000001",
+      "result_d0": "0x7ff8000000000001",
+      "result_fpscr": "0x30000001"
+    },
+    {
+      "case": "zero_spacing",
+      "initial_fpscr": "0x0",
+      "asin_d0": "0x7ff8000000000000",
+      "asin_fpscr": "0x30000001",
+      "result_d0": "0x7ff8000000000000",
+      "result_fpscr": "0x30000001"
+    },
+    {
+      "case": "zero",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0x0",
+      "asin_fpscr": "0x20000001",
+      "result_d0": "0x0",
+      "result_fpscr": "0x20000001"
+    },
+    {
+      "case": "lag_minus_10",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0xbff0000000000000",
+      "asin_fpscr": "0x80000011",
+      "result_d0": "0xbff921fb54442d18",
+      "result_fpscr": "0x80000011"
+    },
+    {
+      "case": "lag_minus_3",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0xbfdd666666666665",
+      "asin_fpscr": "0x20000011",
+      "result_d0": "0xbfde8bf15e8cee80",
+      "result_fpscr": "0x20000011"
+    },
+    {
+      "case": "lag_minus_1",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0xbfc399999999999a",
+      "asin_fpscr": "0x20000011",
+      "result_d0": "0xbfc3ad6b01882089",
+      "result_fpscr": "0x80000011"
+    },
+    {
+      "case": "lag_plus_1",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0x3fc399999999999a",
+      "asin_fpscr": "0x20000011",
+      "result_d0": "0x3fc3ad6b01882089",
+      "result_fpscr": "0x80000011"
+    },
+    {
+      "case": "lag_plus_3",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0x3fdd666666666665",
+      "asin_fpscr": "0x20000011",
+      "result_d0": "0x3fde8bf15e8cee80",
+      "result_fpscr": "0x20000011"
+    },
+    {
+      "case": "lag_plus_10",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0x3ff0000000000000",
+      "asin_fpscr": "0x80000011",
+      "result_d0": "0x3ff921fb54442d18",
+      "result_fpscr": "0x80000011"
+    },
+    {
+      "case": "negative_zero",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0x8000000000000000",
+      "asin_fpscr": "0x20000001",
+      "result_d0": "0x8000000000000000",
+      "result_fpscr": "0x20000001"
+    },
+    {
+      "case": "positive_inf",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0x3ff0000000000000",
+      "asin_fpscr": "0x80000001",
+      "result_d0": "0x3ff921fb54442d18",
+      "result_fpscr": "0x80000001"
+    },
+    {
+      "case": "negative_inf",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0xbff0000000000000",
+      "asin_fpscr": "0x80000001",
+      "result_d0": "0xbff921fb54442d18",
+      "result_fpscr": "0x80000001"
+    },
+    {
+      "case": "quiet_nan",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0x7ff8000000000001",
+      "asin_fpscr": "0x30000001",
+      "result_d0": "0x7ff8000000000001",
+      "result_fpscr": "0x30000001"
+    },
+    {
+      "case": "signaling_nan",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0x7ff8000000000001",
+      "asin_fpscr": "0x30000001",
+      "result_d0": "0x7ff8000000000001",
+      "result_fpscr": "0x30000001"
+    },
+    {
+      "case": "zero_spacing",
+      "initial_fpscr": "0x1",
+      "asin_d0": "0x7ff8000000000000",
+      "asin_fpscr": "0x30000001",
+      "result_d0": "0x7ff8000000000000",
+      "result_fpscr": "0x30000001"
+    }
+  ],
+  "limit": "Synthetic double inputs, stock asin shared as authenticated external provider; no full asin source, no hardware execution."
+}

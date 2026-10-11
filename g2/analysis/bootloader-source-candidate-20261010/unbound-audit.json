@@ -1,0 +1,416 @@
+{
+  "basis": "Unbound names grouped by source callsites and recovered callback table roles; no automatic target equivalence assumed",
+  "counts": {
+    "idle_power_scheduler_hooks": 8,
+    "pcm22_callbacks_and_helpers": 16,
+    "dfu_thread_teardown": 2,
+    "formatter_engine": 1,
+    "cache_maintenance": 1,
+    "queue_submit_lower": 1
+  },
+  "names": [
+    {
+      "symbol": "boost_service",
+      "group": "idle_power_scheduler_hooks",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm21_boost_service.c",
+        "g2/components/bootloader/thread_creation/idle_sleep/spot_sleep_wrappers.c",
+        "g2/components/bootloader/thread_creation/idle_sleep/sysctrl_sleep.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_power/spot_sleep_wrappers.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/startup_runtime.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_runtime_native/startup_runtime.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/startup_runtime.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/pcm21_boost.c"
+      ],
+      "reference_count": 8,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "buck_override",
+      "group": "idle_power_scheduler_hooks",
+      "component_references": [
+        "g2/components/bootloader/thread_creation/idle_sleep/sysctrl_sleep.c"
+      ],
+      "reference_count": 1,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "cleanup",
+      "group": "idle_power_scheduler_hooks",
+      "component_references": [
+        "g2/components/bootloader/nor_write/nor_write.c",
+        "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+        "g2/components/bootloader/platform_control/runtime.c",
+        "g2/components/bootloader/platform_control/control.c",
+        "g2/components/bootloader/thread_creation/idle_cleanup.c",
+        "g2/components/bootloader/thread_creation/idle_sleep/idle_chain.c",
+        "g2/components/bootloader/filesystem/upstream/lfs.c",
+        "g2/components/bootloader/update_core/handoff.S"
+      ],
+      "reference_count": 8,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "delay_one",
+      "group": "idle_power_scheduler_hooks",
+      "component_references": [
+        "g2/components/bootloader/thread_creation/idle_sleep/sysctrl_sleep.c"
+      ],
+      "reference_count": 1,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "power_state",
+      "group": "idle_power_scheduler_hooks",
+      "component_references": [
+        "g2/components/bootloader/thread_creation/idle_sleep/spot_sleep_wrappers.c",
+        "g2/components/bootloader/thread_creation/idle_sleep/sysctrl_sleep.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_power/spot_sleep_wrappers.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_events_a.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_runtime.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/startup_events_a.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/startup_runtime.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_runtime_native/startup_runtime.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/startup_runtime.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/startup_events_a.c"
+      ],
+      "reference_count": 10,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "reschedule",
+      "group": "idle_power_scheduler_hooks",
+      "component_references": [
+        "g2/components/bootloader/flags_runtime/flags_runtime.c",
+        "g2/components/bootloader/thread_creation/kernel_runtime.c",
+        "g2/components/bootloader/thread_creation/scheduler_resume.c",
+        "g2/components/bootloader/thread_creation/mutex_kernel.c",
+        "g2/components/bootloader/thread_creation/timer_wait.c",
+        "g2/components/bootloader/thread_creation/thread_notifications.c",
+        "g2/components/bootloader/thread_creation/thread_register.c",
+        "g2/components/bootloader/thread_creation/thread_termination.c",
+        "g2/components/bootloader/thread_creation/thread_priority.c",
+        "g2/components/bootloader/thread_creation/isr_delivery.c",
+        "g2/components/bootloader/thread_creation/queue_send.c",
+        "g2/components/bootloader/thread_creation/queue_receive.c"
+      ],
+      "reference_count": 14,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "resume_scheduler",
+      "group": "idle_power_scheduler_hooks",
+      "component_references": [
+        "g2/components/bootloader/thread_creation/idle_sleep/idle_chain.c"
+      ],
+      "reference_count": 1,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "suspend_scheduler",
+      "group": "idle_power_scheduler_hooks",
+      "component_references": [
+        "g2/components/bootloader/thread_creation/idle_sleep/idle_chain.c"
+      ],
+      "reference_count": 1,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "event_a_pcm22_transition_sequence_0",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "event_a_pcm22_transition_sequence_2",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "event_a_power_ton_adjust",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence3.c",
+        "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence1.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/pcm22_sequence9.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/pcm22_remaining.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/pcm22_sequence23.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/pcm22_sequence13.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/pcm22_sequence22.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/pcm22_sequence10.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/pcm22_sequence6.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_sequence5.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_hot_transitions.c"
+      ],
+      "reference_count": 11,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "event_a_power_trims_update",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_events_a.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/startup_events_a.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/startup_events_a.c"
+      ],
+      "reference_count": 3,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "event_a_transition_sequence_24",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "event_a_transition_sequence_8_timer_native",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "native_spot_profile_trim_42ae24",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm21_boost_service.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/pcm21_boost.c"
+      ],
+      "reference_count": 2,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "native_spot_trim_restore_42ae6c",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm21_boost_service.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/pcm21_boost.c"
+      ],
+      "reference_count": 2,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_pcm22_icache_disable",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence1.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_hot_transitions.c"
+      ],
+      "reference_count": 2,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_pcm22_spot_timer_start",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/pcm22_remaining.c"
+      ],
+      "reference_count": 1,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_pcm22_spot_timer_stop",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm21_boost_service.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/pcm21_boost.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_sequence5.c"
+      ],
+      "reference_count": 3,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_pcm22_timer_service",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence3.c",
+        "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence17.c",
+        "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence1.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/pcm22_sequence9.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_runtime.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/pcm22_remaining.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/pcm22_sequence23.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/pcm22_sequence20.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/pcm22_sequence13.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/pcm22_sequence22.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/startup_runtime.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_runtime_native/startup_runtime.c"
+      ],
+      "reference_count": 17,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_spot_pcm22_transition14",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_spot_pcm22_transition15",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_spot_pcm22_transition16",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_spot_pcm22_transition18",
+      "group": "pcm22_callbacks_and_helpers",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_thread_deinit_native",
+      "group": "dfu_thread_teardown",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_boot_manager_thread_deinit",
+      "group": "dfu_thread_teardown",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+        "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c"
+      ],
+      "reference_count": 9,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_boot_format_engine",
+      "group": "formatter_engine",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/bounded_format_native/bounded_format.c"
+      ],
+      "reference_count": 1,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_cache_invalidate",
+      "group": "cache_maintenance",
+      "component_references": [
+        "g2/components/bootloader/initializer_callbacks/startup_clockmux.c"
+      ],
+      "reference_count": 1,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    },
+    {
+      "symbol": "opencfw_boot_queue_submit_raw",
+      "group": "queue_submit_lower",
+      "component_references": [
+        "g2/components/bootloader/source_candidate_20261010/queue_submit_41649a.c"
+      ],
+      "reference_count": 1,
+      "boundary": "source_provider_not_selected_or_not_registered"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "original_entry": "0x474d16",
+  "original_extent": "0x474d16..0x474d54 (62 bytes)",
+  "body_sha256": "8706d28fe3ed25754064a77a6516ee12bc49c4ac412da1f7200c3c54f83f09b9",
+  "caller_abi": "void(void *) from file_close_offline/close.c; codec_release is bound to the same original entry",
+  "success_path": [
+    "Read mutex handle cell 0x200748f8; call CMSIS mutex acquire 0x4497b6 with 1000 ticks",
+    "Only on acquire result zero, read file-pool pointer cell 0x20074abc and pass pool and caller pointer to 0x4d0808",
+    "Read mutex handle cell again and call CMSIS mutex release 0x44981c"
+  ],
+  "failure_path": [
+    "On nonzero acquire result call 0x4733ee with stock literal",
+    "Then call diagnostic 0x4d09b4 with stock source/function literals and line 1086",
+    "If diagnostic returns, function falls through to return; actual fault/exception continuation is unproved"
+  ],
+  "unselected_lower_contracts": [
+    "0x4d0808 file-pool free has nested calls 0x4cfe04, 0x4cfdb4, 0x4cfe96, 0x4d02d6, 0x4d033a, 0x4d019a; no complete pool-state source/original suite",
+    "0x4497b6/0x44981c mutex outcome and 1000-tick wait need joint state/timeout oracle",
+    "0x4733ee and 0x4d09b4 failure logger/diagnostic path needs literal, vararg and fault-prefix oracle"
+  ],
+  "prior_evidence": "file-heap-provider-audit.json authenticates byte range and ABI; transaction-release-execution.json intercepts this callee and does not test its implementation",
+  "admission": "deferred; neither synthetic successful child return nor no-failure test covers complete public-entry contract",
+  "inventory_classes": {
+    "timing_scheduler": 9,
+    "timer_daemon": 4,
+    "cmsis_kernel_sync": 10,
+    "peripheral_clock_power": 14,
+    "file_heap": 4,
+    "transport_codec": 11,
+    "logger_state": 7,
+    "info_memory": 1
+  },
+  "next_unrepeated_leads": [
+    "peripheral power enable/disable same-entry groups with pinned Ambiq SDK source but clock/register/rollback oracle open",
+    "stock_register_callbacks 0x480434 with an authenticated address lead and 668-byte body requiring callback registry provenance/state",
+    "receiver_notify_wait 0x455b84 with a FreeRTOS-family semantic lead but scheduler/list and timeout oracle open"
+  ],
+  "archive_delta": 0
+}

@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "cases": 1328,
+  "stock_body_sha256": "f1884d1237841c070c072523606e977d6e9f91ffe3d76cb13783907442ef761d",
+  "source_sha256": "3cf8d9a000eed03a886d15904397bcde569192fededaf344736e13eb89a296d4",
+  "elf_sha256": "19287a90f4147c48d25f260e584ccdb94f7ce4d4fea11dae4a16642430e087d2",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_flash_read",
+    "-Wl,--defsym=g2_flashdb_partition_read=0x597d35",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_flash_read_candidates_20261010/flash_read.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-flash-read.elf"
+  ],
+  "limits": "Pinned local 32-byte FAL-mode body with synthetic fal_partition_read, no physical flash, file-mode support or database initialization."
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "comparisons": 194,
+  "source_sha256": "15034415bd6dd08f98a4a37e7654b4e3174c14375dd50e6e6b503e1f80a90986",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "domain": "stock logger fixed call capacity 5, format %ld, 32-bit value",
+  "limits": [
+    "Only fixed timestamp call, not general snprintf or variadic formatter.",
+    "No initialized logger buffer or output side effects established."
+  ]
+}

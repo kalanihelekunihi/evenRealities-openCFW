@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "comparisons": 162,
+  "call_shapes": 2,
+  "original_tail": "0x56f0ec..0x56f144",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_sha256": "96cf2332d6d969219e43925f17fd2ee482fe9dd4b7ff0c3f1ace4b1ceae5413d",
+  "compile_command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/smp_sm_dispatch_tail_20261010/dispatch_tail.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/smp-sm-dispatch-tail-20261010/dispatch_tail.o"
+  ],
+  "limits": [
+    "Tail entered with original saved-register/stack frame; preceding logging path not executed.",
+    "Role provider and indirect action callbacks are scripted; initialized transition tables and action side effects not established.",
+    "Only this 88-byte tail subcontract, not complete 738-byte smpSmExecute."
+  ]
+}

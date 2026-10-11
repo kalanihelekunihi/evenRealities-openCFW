@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "cases": 260,
+  "source_sha256": "0ae676d1ba55c80ae36bf34154c97c6e9590d2f4806228fa622ff4906a9db6ad",
+  "elf_sha256": "7a1cabe69e08013743f1cebb319b6bc259f308bbbc80d5e4279901b0652f1c9c",
+  "compiler_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "command": [
+    "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x100000",
+    "-Wl,-e,case_ack",
+    "-Wl,--defsym=case_send=0x00100f01",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/ack_provider.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/case-ack-source-candidate-20261010/ack.elf"
+  ],
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "python": "/private/tmp/iar-c-runtime-venv/bin/python",
+  "scope": "Payload bytes, send length and restored SP; send transport is an explicit child boundary."
+}

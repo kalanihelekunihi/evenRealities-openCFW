@@ -1,0 +1,59 @@
+{
+  "entries": {
+    "stock_info_populate": {
+      "source_symbol": "audio_info1_populate",
+      "original_entry": "0x47f954",
+      "original_end_exclusive": "0x47fab4",
+      "original_body_bytes": 352,
+      "original_body_sha256": "023136426561e70c161eec71be3daaa3bf4794aaf7013f3eef101afc96bbe31c",
+      "same_object_offset": "0x0",
+      "caller_abi": "void(void), uint32_t return ignored",
+      "old_source_sha256": "7b59fa7a93dcb4338f5791fc0b2f4ac51bb1d539a14c1458d89bf82ae59c210a",
+      "alias_source_sha256": "1c18ed362e5101ac2d3738656633718eba22dc6313f557f689460f4350d47d2b",
+      "included_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/info_populate_alias.c": "1c18ed362e5101ac2d3738656633718eba22dc6313f557f689460f4350d47d2b",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../info_memory_offline/info.c": "7b59fa7a93dcb4338f5791fc0b2f4ac51bb1d539a14c1458d89bf82ae59c210a",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../info_memory_offline/info.h": "e58fabe73ccccacd61fd004beff3a2429cf71e4684ab3a78c3fab044d0bbaaba",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      },
+      "old_object_sha256": "0bc8f42004f77a4fc1c60f18a7f563ee2e17a8a597c31b58654de4cc84d59ca0",
+      "new_object_sha256": "e3438d19e71d279197362a4514bf907541b5c505ef5a6c25059ae194bec922e8",
+      "old_text_sha256": "8964be56ef8a2322ed64fccc51c4762dbe06518de693fea4aa6139d7f0218c6e",
+      "new_text_sha256": "8964be56ef8a2322ed64fccc51c4762dbe06518de693fea4aa6139d7f0218c6e",
+      "text_equal": true,
+      "prior_suite": "g2/analysis/audio-info-memory-providers-2026-10-08/info-results.json",
+      "prior_suite_cases": 96
+    },
+    "stock_mcuctrl": {
+      "source_symbol": "audio_oscillator_control",
+      "original_entry": "0x4809c4",
+      "original_end_exclusive": "0x480c56",
+      "original_body_bytes": 658,
+      "original_body_sha256": "eb3d3bb0a11febea901aa2630257bf91b9993e4b363b608e875ac34871df3624",
+      "same_object_offset": "0x0",
+      "caller_abi": "uint32_t(uint32_t,uint8_t*) / uint32_t(uint32_t,const void*)",
+      "old_source_sha256": "2293a3ed53aa32dd2aec5efc61aec247d340cbae0aeb23535283e2bc33472649",
+      "alias_source_sha256": "b2df8eafa9b57c5c0d0ede2650a025294649df02ed2b04cc8316784596cf6d62",
+      "included_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/oscillator_control_alias.c": "b2df8eafa9b57c5c0d0ede2650a025294649df02ed2b04cc8316784596cf6d62",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../info_memory_offline/oscillator.c": "2293a3ed53aa32dd2aec5efc61aec247d340cbae0aeb23535283e2bc33472649",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../info_memory_offline/oscillator.h": "e296079c03b16df5c2426dd05da32cd19ed3a79c199e3141e13e8b2fa97bc9eb",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      },
+      "old_object_sha256": "54289cf992bb650d8ca5d2949e3a1943383fd55f2cba28b3c1210a7dd0fcb824",
+      "new_object_sha256": "4f3c1fc0923aed59b6c69cfd6bcfc0cfbe49ad41ad4d7f9734354b1f2a195dd6",
+      "old_text_sha256": "2f4d33122180849dd41b7068fb0fc3063161c65d09cd7fad3952a87335b0c1e2",
+      "new_text_sha256": "2f4d33122180849dd41b7068fb0fc3063161c65d09cd7fad3952a87335b0c1e2",
+      "text_equal": true,
+      "prior_suite": "g2/analysis/audio-info-memory-providers-2026-10-08/oscillator-results.json",
+      "prior_suite_cases": 384
+    }
+  },
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "callers": [
+    "g2/components/audio/clock_reset_active_offline/prefix.c",
+    "g2/components/audio/clock_reset_active_offline/recovery.c"
+  ],
+  "fresh_stock_source_cases": 0,
+  "limits": "Prior INFO1 suite executes actual stock provider with synthetic OTP words and availability; oscillator suite executes actual delay/clock-manager with synthetic control and capacitance. No factory calibration or physical frequency proof."
+}

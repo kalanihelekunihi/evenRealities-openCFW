@@ -17,7 +17,7 @@ extern void opencfw_bl_log(uint32_t,const char *,const char *,const char *,uint3
 #define LOG(level,fn,line,msg) opencfw_bl_log(level,"drv.norflash","D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",fn,line,msg)
 void opencfw_provider_41fe9c(void) {
  if(U32(0x200270e0u)!=0u && opencfw_boot_fs_mutex_acquire(U32(0x200270e0u),UINT32_MAX)!=0u)
-  LOG(1,"mspi_flash_mutex_lock",0xc3,"failed to acquire mutex");
+  LOG(1,"mspi_flash_mutex_lock",0xc3,"[mspi_flash_mutex_id] lock timeout");
 }
 void opencfw_provider_41fed4(void) {
  if(U32(0x200270e0u)!=0u && opencfw_boot_fs_mutex_release(U32(0x200270e0u))!=0u)

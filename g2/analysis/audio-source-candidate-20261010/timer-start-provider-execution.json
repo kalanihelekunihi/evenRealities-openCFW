@@ -1,0 +1,690 @@
+{
+  "status": "PASS",
+  "fresh_cases": 48,
+  "original_entry": "0x449498",
+  "source_entry": "0x100001",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "11cadd2a13b2b7bc74a1473f089f26b8b5b46830a3f0d9e0a1b1362ef7cf5c2a",
+  "elf_sha256": "a43d28999a96cf0fdd60b3e95bd9069d96e3af96ba1078ce21cd40725234c0e2",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "lower_bindings": "audio_cmsis_irq_context = 0x44900f; audio_aux_command = 0x47e7b1; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "cases": [
+    {
+      "timer_present": 0,
+      "ticks": 0,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 0,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 0,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 0,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 0,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 0,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 0,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 0,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 1,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 1,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 1,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 1,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 1,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 1,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 1,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 1,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 2000,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 2000,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 2000,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 2000,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 2000,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 2000,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 2000,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 0,
+      "ticks": 2000,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 0,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 0,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 0,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 0,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967292,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 0,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 0,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 0,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 0,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 1,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 0,
+      "calls": [
+        [
+          "0x44900e"
+        ],
+        [
+          "0x47e7b0",
+          536896520,
+          4,
+          1
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 1,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 0,
+      "calls": [
+        [
+          "0x44900e"
+        ],
+        [
+          "0x47e7b0",
+          536896520,
+          4,
+          1
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 1,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967293,
+      "calls": [
+        [
+          "0x44900e"
+        ],
+        [
+          "0x47e7b0",
+          536896520,
+          4,
+          1
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 1,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967293,
+      "calls": [
+        [
+          "0x44900e"
+        ],
+        [
+          "0x47e7b0",
+          536896520,
+          4,
+          1
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 1,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 1,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 1,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 1,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 2000,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 0,
+      "calls": [
+        [
+          "0x44900e"
+        ],
+        [
+          "0x47e7b0",
+          536896520,
+          4,
+          2000
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 2000,
+      "ipsr": 0,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 0,
+      "calls": [
+        [
+          "0x44900e"
+        ],
+        [
+          "0x47e7b0",
+          536896520,
+          4,
+          2000
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 2000,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967293,
+      "calls": [
+        [
+          "0x44900e"
+        ],
+        [
+          "0x47e7b0",
+          536896520,
+          4,
+          2000
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 2000,
+      "ipsr": 0,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967293,
+      "calls": [
+        [
+          "0x44900e"
+        ],
+        [
+          "0x47e7b0",
+          536896520,
+          4,
+          2000
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 2000,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 2000,
+      "ipsr": 15,
+      "queue_full": 0,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 2000,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 0,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    },
+    {
+      "timer_present": 1,
+      "ticks": 2000,
+      "ipsr": 15,
+      "queue_full": 1,
+      "scheduler_started": 1,
+      "result": 4294967290,
+      "calls": [
+        [
+          "0x44900e"
+        ]
+      ]
+    }
+  ],
+  "limits": [
+    "Original IRQ-context and timer-command lower bodies execute for both entries; selected empty/full synthetic queue and task state.",
+    "No daemon command consumption, timer expiry, callback cancellation, elapsed real ticks or hardware timing.",
+    "M4 source execution; M55 selected archive object is compile-proven only."
+  ]
+}

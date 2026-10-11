@@ -1,0 +1,189 @@
+{
+  "status": "PASS_REGISTER_AND_FATAL_PREFIX",
+  "register_cases": 24,
+  "fatal_cases": 4,
+  "register_rows": [
+    {
+      "ipsr": 0,
+      "control": 0,
+      "privileged": 1,
+      "exception": 0
+    },
+    {
+      "ipsr": 0,
+      "control": 1,
+      "privileged": 0,
+      "exception": 0
+    },
+    {
+      "ipsr": 0,
+      "control": 2,
+      "privileged": 1,
+      "exception": 0
+    },
+    {
+      "ipsr": 0,
+      "control": 3,
+      "privileged": 0,
+      "exception": 0
+    },
+    {
+      "ipsr": 1,
+      "control": 0,
+      "privileged": 1,
+      "exception": 1
+    },
+    {
+      "ipsr": 1,
+      "control": 1,
+      "privileged": 1,
+      "exception": 1
+    },
+    {
+      "ipsr": 1,
+      "control": 2,
+      "privileged": 1,
+      "exception": 1
+    },
+    {
+      "ipsr": 1,
+      "control": 3,
+      "privileged": 1,
+      "exception": 1
+    },
+    {
+      "ipsr": 3,
+      "control": 0,
+      "privileged": 1,
+      "exception": 3
+    },
+    {
+      "ipsr": 3,
+      "control": 1,
+      "privileged": 1,
+      "exception": 3
+    },
+    {
+      "ipsr": 3,
+      "control": 2,
+      "privileged": 1,
+      "exception": 3
+    },
+    {
+      "ipsr": 3,
+      "control": 3,
+      "privileged": 1,
+      "exception": 3
+    },
+    {
+      "ipsr": 15,
+      "control": 0,
+      "privileged": 1,
+      "exception": 15
+    },
+    {
+      "ipsr": 15,
+      "control": 1,
+      "privileged": 1,
+      "exception": 15
+    },
+    {
+      "ipsr": 15,
+      "control": 2,
+      "privileged": 1,
+      "exception": 15
+    },
+    {
+      "ipsr": 15,
+      "control": 3,
+      "privileged": 1,
+      "exception": 15
+    },
+    {
+      "ipsr": 255,
+      "control": 0,
+      "privileged": 1,
+      "exception": 255
+    },
+    {
+      "ipsr": 255,
+      "control": 1,
+      "privileged": 1,
+      "exception": 255
+    },
+    {
+      "ipsr": 255,
+      "control": 2,
+      "privileged": 1,
+      "exception": 255
+    },
+    {
+      "ipsr": 255,
+      "control": 3,
+      "privileged": 1,
+      "exception": 255
+    },
+    {
+      "ipsr": 511,
+      "control": 0,
+      "privileged": 1,
+      "exception": 511
+    },
+    {
+      "ipsr": 511,
+      "control": 1,
+      "privileged": 1,
+      "exception": 511
+    },
+    {
+      "ipsr": 511,
+      "control": 2,
+      "privileged": 1,
+      "exception": 511
+    },
+    {
+      "ipsr": 511,
+      "control": 3,
+      "privileged": 1,
+      "exception": 511
+    }
+  ],
+  "fatal_rows": [
+    {
+      "initial": 0,
+      "write": [
+        3758157068,
+        4,
+        100270084
+      ]
+    },
+    {
+      "initial": 1792,
+      "write": [
+        3758157068,
+        4,
+        100271876
+      ]
+    },
+    {
+      "initial": 4294967295,
+      "write": [
+        3758157068,
+        4,
+        100271876
+      ]
+    },
+    {
+      "initial": 305419896,
+      "write": [
+        3758157068,
+        4,
+        100271620
+      ]
+    }
+  ],
+  "source_sha256": "703f13d255790bd7318ba916504f9f69d0979d769b086eafb2960306668e78f6",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "elf_sha256": "08881ff1c947bece0e0714bc06c3dc055ea2c69e1870db9653db4f68b25d42a4",
+  "limits": "Register helper is an architectural projection of outer MRS IPSR, not a same-entry stock helper. Fatal comparison stops at AIRCR write; no reset or infinite loop executed."
+}

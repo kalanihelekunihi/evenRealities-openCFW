@@ -1,0 +1,1336 @@
+{
+  "status": "PASS",
+  "cases": 23,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "a393881529d250a736a9393a1b6e67eb1c71aba1e2102804760f1d3d9aa91fea",
+  "source_sha256": "1a8bd4e22f9c16d08f2615c67951b8b821943475760cf6b1cb110423f6c11ace",
+  "alias_sha256": "d4d188c4a658ec94ff8338224c3b2de29d1dff41acfebed73d3b28e0c60824b1",
+  "aliases": {
+    "opencfw_boot_nor_prog": {
+      "stock_entry": "0x420b0d",
+      "comparisons": [
+        {
+          "arguments": [
+            73969,
+            536903680,
+            288
+          ],
+          "fixture": {},
+          "observed": {
+            "return": 0,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                73969,
+                1,
+                536903680,
+                15,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                73984,
+                1,
+                536903695,
+                256,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                74240,
+                1,
+                536903951,
+                17,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73728,
+            536903680,
+            0
+          ],
+          "fixture": {},
+          "observed": {
+            "return": 6,
+            "providers": [
+              [
+                "printf",
+                "PP invalid arg: handle=%p, buf=%p, len=%u\n",
+                [
+                  536895488,
+                  536903680,
+                  0
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73728,
+            0,
+            1
+          ],
+          "fixture": {},
+          "observed": {
+            "return": 6,
+            "providers": [
+              [
+                "printf",
+                "PP invalid arg: handle=%p, buf=%p, len=%u\n",
+                [
+                  536895488,
+                  0,
+                  1
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73728,
+            536903680,
+            1
+          ],
+          "fixture": {
+            "handle": 0
+          },
+          "observed": {
+            "return": 6,
+            "providers": [
+              [
+                "printf",
+                "PP invalid arg: handle=%p, buf=%p, len=%u\n",
+                [
+                  0,
+                  536903680,
+                  1
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            33554432,
+            536903680,
+            1
+          ],
+          "fixture": {},
+          "observed": {
+            "return": 5,
+            "providers": [
+              [
+                "printf",
+                "PP out of range: addr=0x%08X, total=0x%08X\n",
+                [
+                  33554432,
+                  33554432
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            33554431,
+            536903680,
+            2
+          ],
+          "fixture": {},
+          "observed": {
+            "return": 0,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                33554431,
+                1,
+                536903680,
+                1,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                33554432,
+                1,
+                536903681,
+                1,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73969,
+            536903680,
+            288
+          ],
+          "fixture": {
+            "delay_status": 7
+          },
+          "observed": {
+            "return": 4,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "printf",
+                "PP wait_idle(before WREN) timeout: addr=0x%08X, len=%u\n",
+                [
+                  73969,
+                  15
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73969,
+            536903680,
+            288
+          ],
+          "fixture": {
+            "transfer_status": 7
+          },
+          "observed": {
+            "return": 7,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                7
+              ],
+              [
+                "log",
+                1,
+                "drv.norflash",
+                "mx25u25643g_enable_write_enable",
+                1010,
+                "Write enable failed before sector erase\n"
+              ],
+              [
+                "printf",
+                "PP write_enable failed: addr=0x%08X, len=%u, st=%d\n",
+                [
+                  73969,
+                  15,
+                  7
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73969,
+            536903680,
+            288
+          ],
+          "fixture": {
+            "transfer_status": [
+              0,
+              8
+            ]
+          },
+          "observed": {
+            "return": 8,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                73969,
+                1,
+                536903680,
+                15,
+                8
+              ],
+              [
+                "printf",
+                "PP program failed: addr=0x%08X, len=%u, st=%d\n",
+                [
+                  73969,
+                  15,
+                  8
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73969,
+            536903680,
+            288
+          ],
+          "fixture": {
+            "wait_status": 1
+          },
+          "observed": {
+            "return": 4,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                73969,
+                1,
+                536903680,
+                15,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "printf",
+                "PP wait_idle(after PP) timeout: addr=0x%08X, len=%u\n",
+                [
+                  73969,
+                  15
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73969,
+            536903680,
+            288
+          ],
+          "fixture": {
+            "transfer_status": [
+              0,
+              0,
+              9
+            ]
+          },
+          "observed": {
+            "return": 9,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                73969,
+                1,
+                536903680,
+                15,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                "log",
+                2,
+                "drv.norflash",
+                "mx25u25643g_enable_write_disable",
+                1022,
+                "Write enable failed before sector erase\n"
+              ],
+              [
+                "printf",
+                "PP write_disable failed: addr=0x%08X, len=%u, st=%d\n",
+                [
+                  73969,
+                  15,
+                  9
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73969,
+            536903680,
+            288
+          ],
+          "fixture": {
+            "delay_status": [
+              0,
+              0,
+              7
+            ]
+          },
+          "observed": {
+            "return": 4,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                73969,
+                1,
+                536903680,
+                15,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                73984,
+                1,
+                536903695,
+                256,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "printf",
+                "PP wait_idle(before WREN) timeout: addr=0x%08X, len=%u\n",
+                [
+                  74240,
+                  17
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73969,
+            536903680,
+            288
+          ],
+          "fixture": {
+            "transfer_status": [
+              0,
+              0,
+              0,
+              0,
+              10
+            ]
+          },
+          "observed": {
+            "return": 10,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                73969,
+                1,
+                536903680,
+                15,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                73984,
+                1,
+                536903695,
+                256,
+                10
+              ],
+              [
+                "printf",
+                "PP program failed: addr=0x%08X, len=%u, st=%d\n",
+                [
+                  73984,
+                  256,
+                  10
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            33554431,
+            536903680,
+            2
+          ],
+          "fixture": {
+            "transfer_status": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              5
+            ]
+          },
+          "observed": {
+            "return": 5,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                33554431,
+                1,
+                536903680,
+                1,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                2,
+                33554432,
+                1,
+                536903681,
+                1,
+                0
+              ],
+              [
+                "wait",
+                10
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                5
+              ],
+              [
+                "log",
+                2,
+                "drv.norflash",
+                "mx25u25643g_enable_write_disable",
+                1022,
+                "Write enable failed before sector erase\n"
+              ],
+              [
+                "printf",
+                "PP write_disable failed: addr=0x%08X, len=%u, st=%d\n",
+                [
+                  33554432,
+                  1,
+                  5
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "opencfw_boot_nor_erase": {
+      "stock_entry": "0x420a09",
+      "comparisons": [
+        {
+          "arguments": [
+            73728
+          ],
+          "fixture": {},
+          "observed": {
+            "return": 0,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                32,
+                73728,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73729
+          ],
+          "fixture": {},
+          "observed": {
+            "return": 6,
+            "providers": [
+              [
+                "log",
+                2,
+                "drv.norflash",
+                "mx25u25643g_sector_erase",
+                1038,
+                "Error: Address must be 4KB aligned\n"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            33554432
+          ],
+          "fixture": {},
+          "observed": {
+            "return": 5,
+            "providers": []
+          }
+        },
+        {
+          "arguments": [
+            73728
+          ],
+          "fixture": {
+            "handle": 0
+          },
+          "observed": {
+            "return": 2,
+            "providers": []
+          }
+        },
+        {
+          "arguments": [
+            73728
+          ],
+          "fixture": {
+            "delay_status": 9
+          },
+          "observed": {
+            "return": 3,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "printf",
+                "SE wait_idle(before WREN) timeout: addr=0x%08X\n",
+                [
+                  73728
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73728
+          ],
+          "fixture": {
+            "transfer_status": 7
+          },
+          "observed": {
+            "return": 7,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                7
+              ],
+              [
+                "log",
+                1,
+                "drv.norflash",
+                "mx25u25643g_enable_write_enable",
+                1010,
+                "Write enable failed before sector erase\n"
+              ],
+              [
+                "printf",
+                "SE write_enable failed: addr=0x%08X, st=%d\n",
+                [
+                  73728,
+                  7
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73728
+          ],
+          "fixture": {
+            "transfer_status": [
+              0,
+              8
+            ]
+          },
+          "observed": {
+            "return": 8,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                32,
+                73728,
+                1,
+                0,
+                0,
+                8
+              ],
+              [
+                "printf",
+                "SE erase command failed: addr=0x%08X, st=%d\n",
+                [
+                  73728,
+                  8
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73728
+          ],
+          "fixture": {
+            "delay_status": [
+              0,
+              9
+            ]
+          },
+          "observed": {
+            "return": 4,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                32,
+                73728,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "printf",
+                "SE wait_idle(after erase) timeout: addr=0x%08X\n",
+                [
+                  73728
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        },
+        {
+          "arguments": [
+            73728
+          ],
+          "fixture": {
+            "transfer_status": [
+              0,
+              0,
+              10
+            ]
+          },
+          "observed": {
+            "return": 10,
+            "providers": [
+              [
+                "before"
+              ],
+              [
+                "write_mode"
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                6,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                "transfer",
+                32,
+                73728,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                "delay"
+              ],
+              [
+                "transfer",
+                4,
+                0,
+                0,
+                0,
+                0,
+                10
+              ],
+              [
+                "log",
+                2,
+                "drv.norflash",
+                "mx25u25643g_enable_write_disable",
+                1022,
+                "Write enable failed before sector erase\n"
+              ],
+              [
+                "printf",
+                "SE write_disable failed: addr=0x%08X, st=%d\n",
+                [
+                  73728,
+                  10
+                ]
+              ],
+              [
+                "restore_mode"
+              ],
+              [
+                "after"
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "distinct_original_trace_bytes": 590,
+  "limits": [
+    "Filesystem calls pass address/source/length or address in the expected ARM32 registers and consume status.",
+    "Mode setup/restore, delay/wait, PIO transfers and diagnostic sinks are controlled cuts at stock entries. No flash was read or changed.",
+    "Compatible M4 execution is compared; M55 archive compilation and direct relocations are checked separately. Formatter R1 behavior remains unresolved."
+  ]
+}

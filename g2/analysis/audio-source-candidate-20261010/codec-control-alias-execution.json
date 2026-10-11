@@ -1,0 +1,474 @@
+{
+  "matched": 15,
+  "total": 15,
+  "cases": [
+    {
+      "argument": 0,
+      "queue": "null",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              0
+            ]
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 0,
+        "queue_payload": "000000000000000000000000",
+        "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 0,
+      "queue": "empty",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          }
+        ],
+        "boundary": [
+          {
+            "kind": "before_thread_flags_set",
+            "thread": 536900096,
+            "flags": 4194304
+          }
+        ],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "000000000100000000000000",
+        "queue_digest": "1b2c5285c1eba0a28a44980d536f929c71bfdf511d99329c34cd05a4ca3e865f",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 0,
+      "queue": "full",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "63000000580000004d000000",
+        "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 2,
+      "queue": "null",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 0,
+        "queue_payload": "000000000000000000000000",
+        "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 2,
+      "queue": "empty",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          }
+        ],
+        "boundary": [
+          {
+            "kind": "before_thread_flags_set",
+            "thread": 536900096,
+            "flags": 4194304
+          }
+        ],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "000000000100000002000000",
+        "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 2,
+      "queue": "full",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "63000000580000004d000000",
+        "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 255,
+      "queue": "null",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              255
+            ]
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 0,
+        "queue_payload": "000000000000000000000000",
+        "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 255,
+      "queue": "empty",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              255
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          }
+        ],
+        "boundary": [
+          {
+            "kind": "before_thread_flags_set",
+            "thread": 536900096,
+            "flags": 4194304
+          }
+        ],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "0000000001000000ff000000",
+        "queue_digest": "b228f8a51320e5d59ee918402442851a823ce454539ff498fda3a8c97ff7187b",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 255,
+      "queue": "full",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              255
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "63000000580000004d000000",
+        "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 256,
+      "queue": "null",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              0
+            ]
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 0,
+        "queue_payload": "000000000000000000000000",
+        "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 256,
+      "queue": "empty",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          }
+        ],
+        "boundary": [
+          {
+            "kind": "before_thread_flags_set",
+            "thread": 536900096,
+            "flags": 4194304
+          }
+        ],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "000000000100000000000000",
+        "queue_digest": "1b2c5285c1eba0a28a44980d536f929c71bfdf511d99329c34cd05a4ca3e865f",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 256,
+      "queue": "full",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "63000000580000004d000000",
+        "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 4294967295,
+      "queue": "null",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              255
+            ]
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 0,
+        "queue_payload": "000000000000000000000000",
+        "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 4294967295,
+      "queue": "empty",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              255
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          }
+        ],
+        "boundary": [
+          {
+            "kind": "before_thread_flags_set",
+            "thread": 536900096,
+            "flags": 4194304
+          }
+        ],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "0000000001000000ff000000",
+        "queue_digest": "b228f8a51320e5d59ee918402442851a823ce454539ff498fda3a8c97ff7187b",
+        "basepri": 0
+      }
+    },
+    {
+      "argument": 4294967295,
+      "queue": "full",
+      "observed": {
+        "trace": [
+          {
+            "call": "audio_submit",
+            "message": [
+              0,
+              1,
+              255
+            ]
+          },
+          {
+            "call": "message_queue_put",
+            "queue": 536895488,
+            "priority": 0,
+            "timeout_ticks": 0
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          },
+          {
+            "call": "log_mask"
+          }
+        ],
+        "boundary": [],
+        "counter_after": 0,
+        "queue_count": 1,
+        "queue_payload": "63000000580000004d000000",
+        "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+        "basepri": 0
+      }
+    }
+  ],
+  "alias_elf_sha256": "4e2a008e16912b3a55b1b17db461d4984eb7f26bf667bed8ed7fa12eb694b425",
+  "prior_fixture_sha256": "bde8a44fcbf3c01ef4735d654ddc4cbe44bc16bdef2e3e19cbd4a440efa07774",
+  "scope": "Complete original emitter and GCC Cortex-M4 same-source alias execute through real original publisher/CMSIS queue. Empty queue stops before thread-flags set; no audio task dispatch or hardware timing."
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PASS_STATIC_CREATE_BOUNDED",
+  "cases": 3,
+  "rows": [
+    {
+      "depth": 1,
+      "priority": 1
+    },
+    {
+      "depth": 1024,
+      "priority": 54
+    },
+    {
+      "depth": 65536,
+      "priority": 56
+    }
+  ],
+  "source_sha256": "f736138f35976442a9eaa5ab76bd66f101dcdd48e7c782b865c808dc6f8dca62",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "limits": "Valid caller TCB/stack; TCB init and scheduler insert cut. Assertion, live task execution and ownership untested."
+}

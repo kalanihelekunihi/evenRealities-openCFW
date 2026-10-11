@@ -2,7 +2,8 @@
  * Original scheduler query/critical providers and callback bodies remain peers. */
 #include "consumer.h"
 extern int32_t case_scheduler_state(void);
-extern void case_enter_critical(void),case_exit_critical(void),case_yield_request(void);
+extern void case_enter_critical(void),case_exit_critical(void);
+extern uint32_t case_yield_request(void);
 extern int32_t case_remove_waiter(case_list *);
 int32_t case_receive_nowait(case_queue *q,void *out){
  (void)case_scheduler_state();case_enter_critical();

@@ -16,11 +16,13 @@ extern int32_t opencfw_provider_4160fe(void (*entry)(void),
                                        const void *attributes);
 extern void opencfw_provider_4160b0(void);
 extern void opencfw_provider_41b2f8(void);
+extern void opencfw_boot_manager_task(void *);
+extern const char opencfw_boot_manager_name[];
 
 /* This is the exact first 36-byte attribute record consumed by the callback. */
 __attribute__((section(".rodata.manager_attributes"), used))
 const uint32_t opencfw_boot_manager_attributes[9] = {
-    0x434134u, 0u, 0x20026ac0u, 0x70u, 0x20018aa0u,
+    (uintptr_t)opencfw_boot_manager_name, 0u, 0x20026ac0u, 0x70u, 0x20018aa0u,
     0x4000u, 0x30u, 1u, 0u,
 };
 
@@ -44,7 +46,7 @@ CALLBACK_ENTRY_SECTION void opencfw_boot_main_callback(void)
 {
     opencfw_provider_416058();
     *manager_handle = (uint32_t)opencfw_provider_4160fe(
-        (void (*)(void))(uintptr_t)0x42e2f9u, 0u,
+        (void (*)(void))opencfw_boot_manager_task, 0u,
         opencfw_boot_manager_attributes);
     if (*manager_handle == 0u)
         allocation_failure();

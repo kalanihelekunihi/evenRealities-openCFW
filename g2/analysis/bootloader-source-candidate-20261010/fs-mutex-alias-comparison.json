@@ -1,0 +1,5410 @@
+{
+  "status": "PASS",
+  "cases": 288,
+  "per_alias": {
+    "opencfw_boot_fs_mutex_acquire": 216,
+    "opencfw_boot_fs_mutex_release": 72
+  },
+  "original_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "47ead5882202ef724d3f0987828d89570caec8fe304ad51e023c93b135e8027b",
+  "alias_sha256": "29b762191ee491686871527c0b9ea37db26c7e8dafca92855728c03f73c7f6d7",
+  "distinct_original_trace_bytes": 258,
+  "comparisons": [
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "alias": "opencfw_boot_fs_mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    }
+  ],
+  "limits": [
+    "The compatible Cortex-M4 build is emulated; M55 archive compilation/linking is checked separately because Unicorn rejects one M55 instruction.",
+    "Tagged/plain kernel mutex operations are synthetic cuts; context/runtime queries execute.",
+    "Nonzero IPSR, scheduling, ownership and blocking time remain unverified."
+  ]
+}

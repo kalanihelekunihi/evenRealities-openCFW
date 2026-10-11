@@ -1,0 +1,571 @@
+{
+  "status": "PASS",
+  "cases": 24,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "original_body_sha256": "69608d49656b5685af08e567db6cb31852e5ee8d50767fc393d8bf31c6f2c114",
+  "stock_entry": "0x41d92d",
+  "distinct_original_trace_bytes": 98,
+  "original_body_bytes": 126,
+  "alias_sha256": "be9b2428ddfc3523ba0ea1a2d64886d757d882b5c79c448594755e823a864d2a",
+  "source_sha256": "71a7210ba488db0b1e50739bd9448fe2fd82be6e4b7bf96cf2e82514fc197848",
+  "source_elf_sha256": "9ad487a79ac7fb029ad397b6ca62de6f95452b8822d82c428df00cad4f40ea57",
+  "comparisons": [
+    {
+      "register_id": 15,
+      "value": 3,
+      "primask_in": 0,
+      "result": {
+        "status": 0,
+        "primask": 0,
+        "power_area_sha256": "cf52aaeba32889f7c0ee9f3890722feca4203ef672b02d9cf5cb67ab005c722d",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            3
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 15,
+      "value": 3,
+      "primask_in": 1,
+      "result": {
+        "status": 0,
+        "primask": 1,
+        "power_area_sha256": "cf52aaeba32889f7c0ee9f3890722feca4203ef672b02d9cf5cb67ab005c722d",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            3
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 15,
+      "value": 10,
+      "primask_in": 0,
+      "result": {
+        "status": 0,
+        "primask": 0,
+        "power_area_sha256": "f64366d156726742305d2c64ab0fc2dc9fbf1c44a7559c0889f6ac79d391c9a4",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            10
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 15,
+      "value": 10,
+      "primask_in": 1,
+      "result": {
+        "status": 0,
+        "primask": 1,
+        "power_area_sha256": "f64366d156726742305d2c64ab0fc2dc9fbf1c44a7559c0889f6ac79d391c9a4",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            10
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 0,
+      "value": 0,
+      "primask_in": 0,
+      "result": {
+        "status": 0,
+        "primask": 0,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807360,
+            4,
+            0
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 0,
+      "value": 0,
+      "primask_in": 1,
+      "result": {
+        "status": 0,
+        "primask": 1,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807360,
+            4,
+            0
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 0,
+      "value": 2048,
+      "primask_in": 0,
+      "result": {
+        "status": 7,
+        "primask": 0,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": []
+      }
+    },
+    {
+      "register_id": 0,
+      "value": 2048,
+      "primask_in": 1,
+      "result": {
+        "status": 7,
+        "primask": 1,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": []
+      }
+    },
+    {
+      "register_id": 5,
+      "value": 8192,
+      "primask_in": 0,
+      "result": {
+        "status": 0,
+        "primask": 0,
+        "power_area_sha256": "be8e77b6226253721176f35e61aaad3522f206fc9c90dbbc8597f705b109fcf4",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807380,
+            4,
+            8192
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 5,
+      "value": 8192,
+      "primask_in": 1,
+      "result": {
+        "status": 0,
+        "primask": 1,
+        "power_area_sha256": "be8e77b6226253721176f35e61aaad3522f206fc9c90dbbc8597f705b109fcf4",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807380,
+            4,
+            8192
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 5,
+      "value": 16384,
+      "primask_in": 0,
+      "result": {
+        "status": 0,
+        "primask": 0,
+        "power_area_sha256": "53fc8a890f834aced8854ea58f4bd51e14d97fdce5d566cf6eda34f7d380ca53",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807380,
+            4,
+            16384
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 5,
+      "value": 16384,
+      "primask_in": 1,
+      "result": {
+        "status": 0,
+        "primask": 1,
+        "power_area_sha256": "53fc8a890f834aced8854ea58f4bd51e14d97fdce5d566cf6eda34f7d380ca53",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807380,
+            4,
+            16384
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 223,
+      "value": 0,
+      "primask_in": 0,
+      "result": {
+        "status": 0,
+        "primask": 0,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073808252,
+            4,
+            0
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 223,
+      "value": 0,
+      "primask_in": 1,
+      "result": {
+        "status": 0,
+        "primask": 1,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073808252,
+            4,
+            0
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 224,
+      "value": 0,
+      "primask_in": 0,
+      "result": {
+        "status": 5,
+        "primask": 0,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": []
+      }
+    },
+    {
+      "register_id": 224,
+      "value": 0,
+      "primask_in": 1,
+      "result": {
+        "status": 5,
+        "primask": 1,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": []
+      }
+    },
+    {
+      "register_id": 28,
+      "value": 0,
+      "primask_in": 0,
+      "result": {
+        "status": 0,
+        "primask": 0,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807472,
+            4,
+            0
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 28,
+      "value": 0,
+      "primask_in": 1,
+      "result": {
+        "status": 0,
+        "primask": 1,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807472,
+            4,
+            0
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 28,
+      "value": 19,
+      "primask_in": 0,
+      "result": {
+        "status": 0,
+        "primask": 0,
+        "power_area_sha256": "8b8595232c59514fc3aeda58d50f3ae565b7a87e2455ed9d96dde83ea63b18e1",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807472,
+            4,
+            19
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 28,
+      "value": 19,
+      "primask_in": 1,
+      "result": {
+        "status": 0,
+        "primask": 1,
+        "power_area_sha256": "8b8595232c59514fc3aeda58d50f3ae565b7a87e2455ed9d96dde83ea63b18e1",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807472,
+            4,
+            19
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 28,
+      "value": 8192,
+      "primask_in": 0,
+      "result": {
+        "status": 0,
+        "primask": 0,
+        "power_area_sha256": "a20bcdb0b7498e0d7bccf461bb55a8bf220ecccc8cee213d6e5531e0c64b5d42",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807472,
+            4,
+            8192
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 28,
+      "value": 8192,
+      "primask_in": 1,
+      "result": {
+        "status": 0,
+        "primask": 1,
+        "power_area_sha256": "a20bcdb0b7498e0d7bccf461bb55a8bf220ecccc8cee213d6e5531e0c64b5d42",
+        "writes": [
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807472,
+            4,
+            8192
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "register_id": 4294967295,
+      "value": 4294967295,
+      "primask_in": 0,
+      "result": {
+        "status": 5,
+        "primask": 0,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": []
+      }
+    },
+    {
+      "register_id": 4294967295,
+      "value": 4294967295,
+      "primask_in": 1,
+      "result": {
+        "status": 5,
+        "primask": 1,
+        "power_area_sha256": "82823076344d2111f1047052202daf8028f30b99b902e4aa20169338762b6ef3",
+        "writes": []
+      }
+    }
+  ],
+  "limits": [
+    "Selected startup_alternatives passes ID 0x1c and a RAM-loaded value in R0/R1.",
+    "MMIO is synthetic RAM; actual register effects are not established.",
+    "M33 execution is compared; M55 archive compilation is separate."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "status": "PASS_FILE_BACKEND_CLOSE_BOUNDED",
+  "cases": 4,
+  "rows": [
+    {
+      "isopen": 0,
+      "result": 0
+    },
+    {
+      "isopen": 0,
+      "result": 4294967295
+    },
+    {
+      "isopen": 1,
+      "result": 0
+    },
+    {
+      "isopen": 1,
+      "result": 4294967295
+    }
+  ],
+  "source_sha256": "70c2be213030c3a939421dea0dd06cc5edc6c7111e1e5799aea77abf74c1f933",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "limits": "littlefs isopen, diagnostic and close children cut; no actual filesystem mutation or fatal behavior proof."
+}

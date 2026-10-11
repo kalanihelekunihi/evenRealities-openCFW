@@ -1,0 +1,36 @@
+{
+  "original_ota": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "original_ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source": "g2/components/audio/source_candidate_20261010/irq_mask_pair.c",
+  "source_sha256": "56e6bbcb6ac3464d10528f120fc5f1980dcbb75bbb958547eb0ba54e9bd3fb0d",
+  "object_sha256": "93ec1575b45325bdfe508b2019244664d64a61900cda59c300241db48970ed17",
+  "compiler": "Apple clang 21 arm-none-eabi cortex-m55 -O2",
+  "functions": [
+    {
+      "name": "audio_mask_save",
+      "original_address": "0x5fa0a4",
+      "original_file_offset": "0x1c20c4",
+      "original_hex": "eff311804ff0300181f31188bff34f8fbff36f8f7047",
+      "compiled_text_hex": "eff311804ff0300181f31188bff34f8fbff36f8f7047",
+      "exact_text_match": true
+    },
+    {
+      "name": "audio_mask_restore",
+      "original_address": "0x5fa0ba",
+      "original_file_offset": "0x1c20da",
+      "original_hex": "80f31188bff34f8fbff36f8f7047",
+      "compiled_text_hex": "80f31188bff34f8fbff36f8f7047",
+      "exact_text_match": true
+    }
+  ],
+  "padding_note": "Compiler emits a two-byte NOP between functions for alignment; it is excluded from both function body comparisons.",
+  "same_entry_alias": {
+    "name": "mutex_assert_boundary",
+    "original_thumb_entry": "0x5fa0a5",
+    "caller_declared_abi": "void (void); ignored return",
+    "provider_abi": "uint32_t (void); no input arguments",
+    "caller": "g2/components/audio/mutex_disinherit_offline/compat.h",
+    "evidence": "g2/analysis/audio-mutex-disinherit-closure-2026-10-09/integration-receipt.json",
+    "alias_symbol_address_in_object_matches_audio_mask_save": true
+  }
+}

@@ -83,9 +83,9 @@ uintptr_t opencfw_provider_4163b2(uintptr_t callback,uint32_t type,
         (!attr[2] && !attr[3])?0:-1;
     uintptr_t tagged=record|allocated,result=0;
     if (mode==1)result=opencfw_boot_timer_create_static(name,1,periodic,
-        tagged,0x41639b,(uint32_t *)(uintptr_t)attr[2]);
+        tagged,(uintptr_t)opencfw_boot_timer_callback_dispatcher,(uint32_t *)(uintptr_t)attr[2]);
     else if (!mode)result=opencfw_boot_timer_create_dynamic(name,1,periodic,
-        tagged,0x41639b);
+        tagged,(uintptr_t)opencfw_boot_timer_callback_dispatcher);
     if (!result && allocated)opencfw_bl_rtos_free(tagged&~(uintptr_t)1);
     return result;
 }

@@ -1,0 +1,54 @@
+{
+  "new_aliases": {
+    "audio_power_clock_acquire": {
+      "original_entry": "0x4c44bc",
+      "object_offset": "0xb4",
+      "caller": "g2/components/audio/i2s_power_offline/power.c",
+      "abi": "uint32_t(uint32_t,uint32_t)"
+    },
+    "spot_timer_clock_request": {
+      "original_entry": "0x4c44bc",
+      "object_offset": "0xb4",
+      "caller": "g2/components/audio/platform_callbacks_offline/timer.c",
+      "abi": "uint32_t(uint32_t,uint32_t); result ignored"
+    },
+    "audio_power_clock_release": {
+      "original_entry": "0x4c4530",
+      "object_offset": "0x168",
+      "caller": "g2/components/audio/i2s_power_offline/power.c",
+      "abi": "uint32_t(uint32_t,uint32_t); result ignored"
+    },
+    "audio_i2s_clock_release": {
+      "original_entry": "0x4c4530",
+      "object_offset": "0x168",
+      "caller": "g2/components/audio/i2s_stop_offline/stop.c",
+      "abi": "uint32_t(uint32_t,uint32_t); result ignored"
+    }
+  },
+  "source_sha256": "3190bd0d871bee1270b794d47732c255295284485c3a11d060a82e66344cc9b6",
+  "object_sha256": "fe9c440d8e8ba58609548f9858e07f54ed92e7c18443840088311c15726388c4",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/clock_public_aliases.c": "3190bd0d871bee1270b794d47732c255295284485c3a11d060a82e66344cc9b6",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_public_dispatch_offline/dispatch.c": "87f03e1e72a42e7ef8a9442641cb04227943d6f6f34ff0f029620aa2a07d29c0",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_public_dispatch_offline/dispatch.h": "271fba1a8150673071b7c988c655cdac38e6e463a22858873316819e93d38e77",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_public_dispatch_offline/../clock_manager_ownership_offline/ownership.h": "dd87c180aad8d8a77165ca6e19e0016b2768687de60d71b4498683fbdf85e364",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_public_dispatch_offline/../xtal_request_offline/request.h": "22dde7f1b96651aad61aa4fa823d0319fc31126a91f8f335d604667ce8295216",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_public_dispatch_offline/../hfrc_syspll_offline/clocks.h": "47e99794d2f413ded8571b494dec4ee1279a753688b38882508e073e79b86a12",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../clock_public_dispatch_offline/../clock_leaf_providers_offline/providers.h": "0763241463852746e581c7d69bcfcda08d77a6a65be89ec21c4dac36d946c7d1"
+  },
+  "text_sha256": "79328a5563a9f173f61f797def58cadaf20c32ba296556f83ad5c761ec05ff0a",
+  "numeric_receipts": [
+    "g2/analysis/audio-i2s-power-closure-2026-10-08/reproduction-receipt.json",
+    "g2/analysis/audio-i2s-stop-closure-2026-10-08/reproduction-receipt.json",
+    "g2/analysis/audio-platform-callbacks-closure-2026-10-08/reproduction-receipt.json"
+  ],
+  "prior_suite": "g2/analysis/audio-clock-public-dispatch-closure-2026-10-08/results.json",
+  "reused_request_cases": 408,
+  "reused_release_cases": 408,
+  "fresh_cases": 0,
+  "limits": [
+    "Same original source entries; suite cases reused, not multiplied by alias count.",
+    "Clock readiness and physical timing are not established."
+  ]
+}

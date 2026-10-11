@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "cases": 3360,
+  "stock_address": "0x543ee8..0x543f8c",
+  "stock_body_sha256": "f17989d63bef652a799289623d5c5323d6be22d4083f73b210e40cb067816245",
+  "source_sha256": "719b07fb6be2f3e44cb3e837138c86fdcf6fd9a65360fe88a75becbce455f067",
+  "elf_sha256": "8580a9af67852ead8efd9267a4dc9cfb9ddff4bf5c41e2f45726a2bcef43546c",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_find_next_kv_addr",
+    "-Wl,--defsym=g2_flashdb_sector_cache_lookup=0x543cc1",
+    "-Wl,--defsym=g2_flashdb_flash_read=0x585a13",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_magic_scan_candidates_20261010/magic_scan.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-magic-scan.elf"
+  ],
+  "limits": "Complete local 164-byte scanner with coherent synthetic cache and flash-read callbacks. Includes read failure and byte-window positions; no sector-cache implementation or physical flash proof. M4 scalar oracle, M55 archive compile separate."
+}

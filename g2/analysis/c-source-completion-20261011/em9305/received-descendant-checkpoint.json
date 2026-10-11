@@ -1,0 +1,33 @@
+{
+  "source": "g2/components/em9305/qpc_scheduler_candidate/controller_init.c",
+  "native_bodies": [
+    "0x31825c",
+    "0x31b750",
+    "0x3048b0",
+    "0x304a98",
+    "0x316e5c",
+    "0x3175d0",
+    "0x316f50",
+    "0x3175f0",
+    "0x31761c",
+    "0x318708",
+    "0x318740"
+  ],
+  "target_compile_link_pass_rounds": [
+    "em-received-link-ready-round",
+    "em-received-fragment-round",
+    "em-stream-header-buffer-round",
+    "em-received-link-segment-declared-round"
+  ],
+  "open_processing_bodies": [
+    "0x317680"
+  ],
+  "architectural_gap": {
+    "native_address": "0x317718",
+    "word": "0x321c0302",
+    "status": "undecoded; no C arithmetic fabricated"
+  },
+  "ghidra_mcp_live_check": "No running instances; existing local decoder evidence retained",
+  "native_execution_qualified": false,
+  "source_complete": false
+}

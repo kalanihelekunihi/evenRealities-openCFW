@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "cases": 6,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "stock_entry": "0x41b5f7",
+  "original_body_bytes": 10,
+  "distinct_original_trace_bytes": 10,
+  "alias_sha256": "9fe011ad61a8fd45a3b11ce3b3f1a21e9b7208e4a23ab1778f917051cbfa99fd",
+  "source_sha256": "abac16bf0d1a2f6521431b5efeabf786844f76c740a1bf809f463ff93e98a915",
+  "source_elf_sha256": "6936500f9f0fb5a6641a0c45134d7eee7013ae17dde2ab329bf263b4cfcfec62",
+  "comparisons": [
+    {
+      "r0": 0,
+      "r1": 0,
+      "result": {
+        "calls": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a"
+          ]
+        ],
+        "terminal": "spin-after-print"
+      }
+    },
+    {
+      "r0": 0,
+      "r1": 536875008,
+      "result": {
+        "calls": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a"
+          ]
+        ],
+        "terminal": "spin-after-print"
+      }
+    },
+    {
+      "r0": 1,
+      "r1": 0,
+      "result": {
+        "calls": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a"
+          ]
+        ],
+        "terminal": "spin-after-print"
+      }
+    },
+    {
+      "r0": 1,
+      "r1": 536875008,
+      "result": {
+        "calls": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a"
+          ]
+        ],
+        "terminal": "spin-after-print"
+      }
+    },
+    {
+      "r0": 3735928559,
+      "r1": 0,
+      "result": {
+        "calls": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a"
+          ]
+        ],
+        "terminal": "spin-after-print"
+      }
+    },
+    {
+      "r0": 3735928559,
+      "r1": 536875008,
+      "result": {
+        "calls": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a"
+          ]
+        ],
+        "terminal": "spin-after-print"
+      }
+    }
+  ],
+  "limits": [
+    "The stock and source formatter are controlled cuts; exact diagnostic bytes and spin request agree.",
+    "Neither physical fault handling nor terminal scheduling is exercised.",
+    "M33 execution is compared; M55 archive compilation is separate."
+  ]
+}

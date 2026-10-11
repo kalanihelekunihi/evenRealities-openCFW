@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "comparisons": 72,
+  "original_entries": {
+    "enter": "0x43d416",
+    "exit": "0x43d438"
+  },
+  "original_bytes": 68,
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_sha256": "7547cde80d90f55b6289b9168c850c753358f865232f1d0041a0200739cb1f97",
+  "compile_command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/extended_log_helpers_20261010/guard.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/extended-log-frontier-20261010/guard.o"
+  ],
+  "limits": [
+    "Lower provider entry 0x44aa98 and exit 0x44aaa0 intercepted identically; their mutex/kernel effects not implemented.",
+    "Guard helpers only; extended log 0x43d574 body remains unimplemented.",
+    "Cortex-M55 compile and Cortex-M4 Unicorn comparison; synthetic log control state."
+  ]
+}

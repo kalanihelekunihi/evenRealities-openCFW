@@ -1,0 +1,24 @@
+{
+  "scope": "Native controller init/level C source and ARC EM compilation/partial link",
+  "source": "g2/components/em9305/qpc_scheduler_candidate/controller_init.c",
+  "source_sha256": "2cc32d39eb8e754cb366562d04dce72ba438a6914422a70179fba0818d7f6079",
+  "build_receipt": "g2/build/c-firmware/20261011/em-level-selection-round/receipt.json",
+  "build_receipt_sha256": "c40814725260dcbb3420c72d25670a0fd20608fdd21318713aa5143e3e0c3025",
+  "source_bodies": [
+    "0x30f4b0",
+    "0x30f668",
+    "0x30f768",
+    "0x30f794",
+    "0x30f864",
+    "0x30f9bc"
+  ],
+  "compilation_passed": true,
+  "native_runtime_equality": false,
+  "full_source_complete": false,
+  "remaining": [
+    "Product table ownership and exact CRT configuration",
+    "Resident ROM ABI/runtime",
+    "Full controller/application code crosswalk",
+    "Reset/linker/layout"
+  ]
+}

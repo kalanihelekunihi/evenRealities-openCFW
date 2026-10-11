@@ -1,0 +1,4273 @@
+{
+  "status": "ADDRESS_TRIAGE_ONLY",
+  "fixed_pseudocode_sha256": "531c1c8e75ff25deea66d8f0a5fd30d44654a68508b529396b77898c1c247f57",
+  "recognized_entries": 426,
+  "counts": {
+    "exact_header_lead": 319,
+    "abbreviated_header_lead": 88,
+    "no_header_lead": 19
+  },
+  "limitations": [
+    "An address in a comment is a lead, not proof of a C body or semantic equivalence.",
+    "Four-digit short addresses may collide or merely label a called child.",
+    "Native indirect calls, vector entries, uncalled routines and data/layout are not covered."
+  ],
+  "rows": [
+    {
+      "entry": "0x080000cc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_context_switch_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_run_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080000f4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_irq_yield_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_candidates.c",
+        "g2/components/case/source_candidate_20261010/mask_providers.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_systick_vector_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080000fc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_irq_yield_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_candidates.c",
+        "g2/components/case/source_candidate_20261010/mask_providers.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_systick_vector_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08000102",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/mask_providers.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pendsv_vector_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08000144",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/startup_vector_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08000156",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08000160",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_gate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_commit_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_battery_percent_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_console_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_console_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_console_start_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_current_sample_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_clock_sources_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_validate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_product_measure_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_config_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800018c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_14_scale_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080001b4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_dispatch_copy_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080001d8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_runtime_leaf_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_task_frame_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080001e6",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_runtime_leaf_helpers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080001ea",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_runtime_leaf_helpers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080001fc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_le32_read_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08000210",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_udivmod64_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08000270",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/startup_vector_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08000294",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_shift64_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080002b4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_shift64_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080002d6",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08000310",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_retry_reads_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08000420",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_retry_reads_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080004c0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/aa_reader_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_input_transaction_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800056c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_write_transaction_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/frame_pack_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08000610",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_bus_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_bus_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080006c4",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080006d4",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_config_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08000734",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_start_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_config_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080007a8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_config_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800085c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08000928",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08000e1c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080012e4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_56_exit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_failure_reset_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08001334",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_aging_begin_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/case_transport_defaults_config.c"
+      ]
+    },
+    {
+      "entry": "0x080013b8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_event_idle_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08001408",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_status_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_sample_refresh_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08001574",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080018e4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_stable_service_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08001c1c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_action_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_monitor_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08001d68",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08001e94",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/record_dispatch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/record_scan_prefix_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_action_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_status_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_parse_probe_alias_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080023f4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080024c0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800258c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_action_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_status_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002744",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002888",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_entry_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_power_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080028b4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_transaction_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_timer_query_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800292c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_secondary_transport_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080029a4",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002a00",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_secondary_transport_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002a5c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_hall_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002a68",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_periodic_power_update_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002b40",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_finishing_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002b4c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_copy_sn_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08002c30",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_standby_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_periodic_power_update_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002c8e",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/watchdog_frame_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_standby_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002cb8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_periodic_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002cc0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_apply_file_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08002d48",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002e04",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_write_chunk_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08002edc",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002f28",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08002f46",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_apply_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_mode_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_running_bank_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002f60",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_flash_fill_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/legacy_shared_aliases_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_read_serial_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_copy_sn_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002f88",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_flash_fill_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_read_serial_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_copy_sn_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08002fc8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080035b8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_guarded_sensor_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080035d4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/guarded_frame_candidates.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_standby_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3bc8_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_periodic_power_update_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080035f0",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_finishing_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003656",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3d24_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_usb_reset_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003664",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/set_sn_flash_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800373c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_5e_retry_failure_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_apply_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003848",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_hall_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_bb90_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_idle_callback_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080038a0",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_finishing_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080038e0",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_begin_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080039c8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_button_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080039e4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/guarded_frame_candidates.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_write_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003a00",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_button_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003a30",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003a3c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_refresh_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003a60",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_refresh_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003a84",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_button_refresh_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3bc8_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003b90",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_rx_restart_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003bb0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_send_packet_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003bc8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3bc8_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003c2c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/case_policy_flag_defaults_config.c"
+      ]
+    },
+    {
+      "entry": "0x08003d24",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3d24_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003e90",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_input_system_config_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_console_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_init_failure_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_probe_reconfigure_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003e94",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_operations_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_register_leaves_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_erase_primitives_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_option_erase_execute_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003ea8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_option_read_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003ec0",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_option_read_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003ed4",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_option_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003eec",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_operations_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_register_leaves_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_erase_primitives_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_option_erase_execute_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003f1c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_operations_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_register_leaves_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003f38",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_copy_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08003f6c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_option_erase_execute_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08003fd0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_start_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080040f8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080040fa",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080040fc",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080040fe",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004100",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_apply_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004324",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004326",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004328",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004330",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c",
+        "g2/components/case/startup_candidate_20261011/startup_handler_forward_candidates.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08004480",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_open_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_clock_scheduler_defaults_config.c"
+      ]
+    },
+    {
+      "entry": "0x080046a0",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080046a4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_reset_descriptor_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_open_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004710",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080047d4",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800483c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800487a",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_5f50_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_restart_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080048e6",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_5f50_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_restart_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004958",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_apply_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/owned_lower_aliases_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800497c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_erase_execute_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004a00",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_mode_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_snapshot_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_option_read_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_begin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_running_bank_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004a6c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_option_write_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_begin_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004b20",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_lock_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_copy_sn_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_write_chunk_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004b3c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_begin_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004b50",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08004b6c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_begin_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004b94",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_copy_sn_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_write_chunk_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004bf4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_apply_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_lock_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_begin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_copy_sn_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_write_chunk_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004c1c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pin_clear_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_stop_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004d00",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_clear_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004d04",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_clear_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3bc8_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004d2c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_clear_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004d30",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_gpio_config_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_pin_leaves_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_gpio_defaults_config.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_reset_descriptor_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_gpio_compat_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pin_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_power_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_periodic_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004e94",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_sample_candidate.c",
+        "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_gpio_compat_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_periodic_power_update_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004e9e",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_line_candidate.c",
+        "g2/components/case/source_candidate_20261010/control_providers.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_gpio_compat_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pin_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_pin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_periodic_power_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_reset_pulse_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004eac",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_operations_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_wait_candidate.c",
+        "g2/components/case/source_candidate_20261010/tick_word_provider.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/transfer_control_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_clock_setup_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_prepare_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_start_frequency_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_device_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_console_start_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_guard_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_ready_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_transfer_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_config_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_register_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004eb8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08004ec4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08004ed0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08004edc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_snapshot_helpers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08004eec",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_entry_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_restore_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004f14",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_rate_tables_candidate.c",
+        "g2/components/case/startup_candidate_20261011/clock_plan_candidate.c",
+        "g2/components/case/startup_candidate_20261011/transfer_control_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_device_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_restore_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_clock_scheduler_defaults_config.c"
+      ]
+    },
+    {
+      "entry": "0x08004fb0",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_restore_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08004fec",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_disable_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_stop_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800500c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_reset_descriptor_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pin_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005024",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/clock_plan_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_restore_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_console_reset_descriptor_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pin_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800502c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/reset_child_502c.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_finishing_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005048",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_gate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_input_system_config_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005094",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_standby_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080050a8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_standby_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080050c4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_standby_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080050e8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_tail_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_wake_arm_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005128",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_clock_setup_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080052e4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_device_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_input_system_config_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800543c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_snapshot_helpers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005474",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_clock_sources_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800549c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_clock_sources_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_device_apply_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005528",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/transfer_control_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005910",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_start_frequency_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800598c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_full_battery_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_start_frequency_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_bus_frequency_alias_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005a50",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5a52_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005a52",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5a52_candidate.c",
+        "g2/components/case/startup_candidate_20261011/startup_handler_forward_candidates.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005a74",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005b24",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_reset_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005b8c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_prepare_apply_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005bc0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_register_mask_5bc0_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005bd4",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005bd6",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005bd8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005bda",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/clock_plan_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005c26",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_native_noop_hooks_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005c28",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/clock_plan_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005c8c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005c90",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c",
+        "g2/components/case/startup_candidate_20261011/startup_handler_forward_candidates.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005e14",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005e16",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005e18",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005e2c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005e2e",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_probe_reconfigure_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005e6a",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/uart_event_callback.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_simple_callbacks_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005e6c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_native_noop_hooks_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005e6e",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_probe_reconfigure_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005eb6",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_probe_reconfigure_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005efc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_native_noop_hooks_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005efe",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_native_noop_hooks_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005f00",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_shutdown_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_probe_reconfigure_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08005f42",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/evidenced_providers.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_cancel_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_stream_callbacks_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005f44",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_flags_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08005f50",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_5f50_candidate.c",
+        "g2/components/case/startup_candidate_20261011/startup_handler_forward_candidates.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08006240",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_probe_reconfigure_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080062ac",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_stop_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_shutdown_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006308",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_initialize_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080063ec",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/uart_read_provider.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_guard_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080064ec",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_bind_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_rx_restart_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006544",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/uart_rx_complete_callback.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_simple_callbacks_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_stream_callbacks_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080066ac",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/uart_write_provider.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_transfer_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_send_packet_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006776",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/tx_complete_provider.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_5f50_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_error_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006778",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800677a",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_config_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006782",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_leaf_aliases_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800678a",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_console_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_config_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_register_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006792",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_4330_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_register_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080067a2",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_leaf_aliases_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080067b0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_write_field_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_open_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080067c8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/ignored_return_aliases_candidate.c",
+        "g2/components/case/source_candidate_20261010/hex_log_provider.c",
+        "g2/components/case/startup_candidate_20261011/owned_lower_aliases_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800680c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/ignored_return_aliases_candidate.c",
+        "g2/components/case/source_candidate_20261010/send_provider.c",
+        "g2/components/case/startup_candidate_20261011/owned_lower_aliases_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080068d0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/ignored_return_aliases_candidate.c",
+        "g2/components/case/source_candidate_20261010/ack_provider.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080068f0",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006968",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_start_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08006a40",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pin_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_entry_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08006b80",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_gpio_aliases_candidate.c",
+        "g2/components/case/source_candidate_20261010/control_providers.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_pin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_status_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_hall_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_clock_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_toggle_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_finishing_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_failure_reset_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006b98",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_gpio_aliases_candidate.c",
+        "g2/components/case/source_candidate_20261010/control_providers.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_pin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_status_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_hall_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_clock_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_finishing_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_failure_reset_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006bb0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_entry_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006c00",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_entry_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006c80",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_probe_reconfigure_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006cf8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_probe_reconfigure_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006d70",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08006d72",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_prepare_apply_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006db8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_prepare_apply_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08006e08",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08006e18",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08007214",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_postservice_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_tail_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08008420",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_systick_vector_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/case_clock_scheduler_defaults_config.c"
+      ]
+    },
+    {
+      "entry": "0x08008438",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_entry_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_input_system_config_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080084ae",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080084b0",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080084c0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/clock_plan_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800856c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_commit_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_control_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080085b0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_apply_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800867c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_finish_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080086e0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_cancel_callback_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x080086f4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_error_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_5f50_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08008758",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_simple_callbacks_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_bind_core_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08008808",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_stream_callbacks_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_bind_core_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08008998",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_simple_callbacks_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_bind_core_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08008a48",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_stream_callbacks_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_bind_core_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08008bd8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_validate_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08008d98",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_bind_core_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_bind_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08008ec4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/uart_wait_provider.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_open_ready_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_guard_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_transfer_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08008f98",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08008fa8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_retry_reads_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009004",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/frame_pack_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/watchdog_frame_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_aliases_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009040",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/aa_reader_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/control_dump_candidates.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_aliases_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080090ac",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_retry_reads_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009108",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_program_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08009170",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/logger_aliases_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_idle_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_standby_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_aging_begin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_button_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3bc8_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_log_alias_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_periodic_power_update_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_action_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_status_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_clock_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_monitor_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_bus_aliases_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_service_start_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_apply_file_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_copy_sn_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_failure_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_write_chunk_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_shared_aliases_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x080091ac",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/clock_plan_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_restore_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009210",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/vformat_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08009638",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_format_padding_helpers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08009658",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_format_padding_helpers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08009684",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/case_transport_defaults_config.c"
+      ]
+    },
+    {
+      "entry": "0x080099e8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_set_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_service_start_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_side_prepare_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009a14",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_box_idle_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009a9c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_reset_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08009b70",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_action_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_status_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009b94",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009bc0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_sample_refresh_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009cc8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_sample_refresh_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009df4",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009e0c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x08009ebc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_battery_percent_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_product_measure_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_button_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009ef8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009f18",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_14_read_b_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/legacy_shared_aliases_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_current_sample_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009f80",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x08009ff0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_value_readers_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/legacy_shared_aliases_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_power_samples_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a01e",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_value_readers_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/legacy_shared_aliases_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_power_samples_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_idle_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_timer_query_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a046",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a074",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_sensor_word_lower_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_battery_percent_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_current_sample_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_power_samples_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_product_measure_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_timer_query_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a0ea",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a124",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_sensor_read_lower_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_current_sample_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_power_samples_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a130",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_sensor_read_lower_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a13a",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a148",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_delay_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a164",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_output_sample_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a176",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_input_transaction_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_sample_byte_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a188",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_waveform_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_write_transaction_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_output_sample_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a19a",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_bus_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_sample_byte_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_bus_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a1ac",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a1ca",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a1e8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a206",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a224",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_waveform_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_write_transaction_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a24a",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_bus_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_bus_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a270",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_periodic_power_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a2a2",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_waveform_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_write_transaction_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a2c4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_bus_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_send_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_bus_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a2e6",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_output_prepare_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/frame_pack_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_retry_reads_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a310",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_bus_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_bus_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a358",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_reset_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a39c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_gpio_compat_helpers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a3ac",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_gpio_compat_helpers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a3ba",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_current_sample_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a3d2",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_transport_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_pmic_bus_primitives_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a408",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_delay_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a414",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_transport_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a436",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_transport_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a46c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_transport_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a4b4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_sensor_start_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a4dc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_transport_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_power_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a4fa",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_transport_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a528",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_sample_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/sensor_transport_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a550",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_line_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_power_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a574",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_line_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_power_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_pmic_bus_primitives_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a598",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_entry_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a794",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_runtime_leaf_helpers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a7a2",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_pin_leaves_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_runtime_leaf_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_reset_pulse_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a7b0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_service_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_monitor_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_side_prepare_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_reset_pulse_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a7d2",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/evidenced_providers.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_idle_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_mutation_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a816",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_event_idle_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_query_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a836",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate_0a836.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_start_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a888",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/evidenced_providers.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_signal_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_bb90_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a8d8",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_service_start_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800a900",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_start_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800a93c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_worker_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_registration_data_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_start_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800aa00",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800aa24",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_tail_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_notify_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800aa48",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_register_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_registration_data_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_start_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800aaf0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_event_idle_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_aging_begin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_bb90_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_idle_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_mutation_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_refresh_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ab26",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/task_cancel_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_bb90_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_failure_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_refresh_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ab70",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_idle_callback_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800abb0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_delay_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_list_candidates.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_event_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_queue_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ac08",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_register_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_create_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_worker_storage_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ac84",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_initialize_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_ready_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_task_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ace4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_idle_maintenance_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_idle_task_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ad24",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ad48",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_candidates.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_copy_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_message_copy_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_send_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_special_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800adb8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_reclaim_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_idle_maintenance_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ae0c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800ae74",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pool_initialize_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_pool_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ae96",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_initialize_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_create_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_worker_storage_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800af30",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_task_initialize_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_register_storage_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800af70",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_register_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800afcc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_insert_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_free_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b024",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_due_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b064",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b080",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_small_state_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_helpers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b0a0",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_due_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_process_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b0fc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_service_task_entry_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b260",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/scheduler_list_candidate_20261010/resume.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_wake_cleanup_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sleep_exit_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b284",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_now_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_process_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b2b0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_wrap_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_now_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b330",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b374",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_unlock_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_queue_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_cleanup_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b3e8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_storage_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_register_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_register_storage_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_worker_storage_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b4a4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_trampoline_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800b4c0",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_frame_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b4e0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_sample_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_output_sample_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b53c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_poll_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_response_sample_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_sample_byte_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800b5ac",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_output_sample_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b5d6",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_input_transaction_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_sample_byte_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800b600",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_input_system_config_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_tail_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800b678",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_reset_pulse_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800ba44",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_gpio_compat_helpers_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800ba64",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800ba84",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800baa4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_pin_leaves_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bac4",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bad8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_pin_leaves_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bae8",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bafc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_pin_leaves_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_waveform_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bb0c",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bb2c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_gpio_compat_helpers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800bb4c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_toggle_callback_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bb74",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_refresh_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800be74",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_probe_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800be90",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_side_prepare_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800beba",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_side_prepare_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800bede",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_side_prepare_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800bf08",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bf2c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_list_primitives_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_due_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_wrap_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_notify_resume_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_queue_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800bf54",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_regions_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bf6c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_regions_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800bf94",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_storage_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800bfaa",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_frame_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_task_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800bfb0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_list_primitives_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_due_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_wrap_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_queue_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800bfe2",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_list_primitives_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_event_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_notify_resume_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_queue_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800bffc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_small_leaves_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/task_kernel_candidates.c",
+        "g2/components/case/source_candidate_20261010/critical_providers.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_queue_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_trampoline_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_query_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_scheduler_primitives_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_send_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c014",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_small_leaves_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/task_kernel_candidates.c",
+        "g2/components/case/source_candidate_20261010/critical_providers.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_queue_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_trampoline_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_query_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_scheduler_primitives_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_send_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c030",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_free_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_reclaim_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_register_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_worker_storage_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c078",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_systick_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_run_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c0a0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_irq_yield_candidate.c",
+        "g2/components/case/source_candidate_20261010/yield_request.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_idle_task_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_process_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_scheduler_primitives_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_send_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c0b8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c0e0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_queue_wait_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_process_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c128",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c15c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_small_state_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_send_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c16c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_unlock_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_cleanup_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c178",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_list_candidates.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_helpers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c19c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_event_wait_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_queue_wait_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c1cc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/scheduler_list_candidate_20261010/unblock.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_signal_task_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c228",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c284",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_activate_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_start_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c2f8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_notify_core_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_task_notify_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c380",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_small_state_candidate.c",
+        "g2/components/case/source_candidate_20261010/suspend_scheduler.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_signal_task_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_process_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_scheduler_primitives_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_send_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c390",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_wake_dispatch_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pendsv_vector_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_notify_core_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c3f8",
+      "classification": "no_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800c412",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_bus_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_parity_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_sample_byte_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_output_sample_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_bus_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c42c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_waveform_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_write_transaction_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800c43c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_bus_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_poll_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_bus_write_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c44c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/event_clear_task.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_event_mutation_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_query_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c478",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/event_clear_isr.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_event_dispatch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_mutation_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c48c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/event_clear_isr.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_storage_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate_0a836.c"
+      ]
+    },
+    {
+      "entry": "0x0800c4aa",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_storage_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate_0a836.c"
+      ]
+    },
+    {
+      "entry": "0x0800c4cc",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/event_get_isr.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_event_mutation_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_query_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c4de",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/source_candidate_20261010/event_get_isr.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_signal_task_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_signal_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c568",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_signal_isr_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_signal_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c57c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_run_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_activate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_clock_scheduler_defaults_config.c"
+      ]
+    },
+    {
+      "entry": "0x0800c5ac",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_systick_vector_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800c5d0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_pool_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c616",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pool_prepare_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pool_initialize_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c686",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_candidates.c",
+        "g2/components/case/legacy_default_candidate_20261010/task_kernel_candidates.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_dispatch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_send_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c7a8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_candidates.c",
+        "g2/components/case/legacy_default_candidate_20261010/task_kernel_candidates.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_event_dispatch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_scheduler_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_special_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c83a",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c948",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_helpers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800c9a8",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_worker_storage_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_worker_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ca06",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_task_create_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_worker_storage_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_activate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_ready_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_worker_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ca4c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_small_leaves_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/task_kernel_candidates.c",
+        "g2/components/case/source_candidate_20261010/scheduler_state.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_systick_vector_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_dispatch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_scheduler_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_send_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ca6c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_counter_read_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800ca78",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_resume_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_tick_candidate.c",
+        "g2/components/case/scheduler_list_candidate_20261010/resume.c",
+        "g2/components/case/scheduler_list_candidate_20261010/tick.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_tick_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_systick_vector_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sleep_exit_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800cb38",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_copy_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_list_candidates.c",
+        "g2/components/case/scheduler_list_candidate_20261010/disinherit.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_message_copy_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_notify_resume_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800cba0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_candidates.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_list_candidates.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pool_wake_waiter_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_pool_prepare_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_command_receive_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_send_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_message_special_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800cc0c",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_resume_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sleep_exit_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_signal_task_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_process_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ccc0",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_register_storage_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_register_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ccf2",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_register_storage_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_register_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800cd20",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_ready_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_activate_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800cd80",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/task_cancel_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/task_kernel_candidates.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_due_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_wrap_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_dispatch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_mutation_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_refresh_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800cde4",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/task_cancel_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/task_kernel_candidates.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_refresh_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ce0c",
+      "classification": "abbreviated_header_lead",
+      "exact_header_sources": [],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_signal_isr_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_dispatch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_scheduler_helpers_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800ce34",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_service_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800d154",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_enable_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_shared_aliases_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800d178",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_service_start_candidate.c"
+      ],
+      "abbreviated_header_sources": []
+    },
+    {
+      "entry": "0x0800d218",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/legacy_default_candidate_20261010/control_dump_candidates.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_init_bus_aliases_candidate.c"
+      ]
+    },
+    {
+      "entry": "0x0800d250",
+      "classification": "exact_header_lead",
+      "exact_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_prepare_candidate.c"
+      ],
+      "abbreviated_header_sources": [
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c"
+      ]
+    }
+  ]
+}

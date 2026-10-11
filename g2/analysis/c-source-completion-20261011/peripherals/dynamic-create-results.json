@@ -1,0 +1,57 @@
+{
+  "status": "PASS_DYNAMIC_CREATE_BOUNDED",
+  "cases": 12,
+  "rows": [
+    {
+      "depth": 0,
+      "allocation": 0
+    },
+    {
+      "depth": 0,
+      "allocation": 1
+    },
+    {
+      "depth": 0,
+      "allocation": 2
+    },
+    {
+      "depth": 1,
+      "allocation": 0
+    },
+    {
+      "depth": 1,
+      "allocation": 1
+    },
+    {
+      "depth": 1,
+      "allocation": 2
+    },
+    {
+      "depth": 1024,
+      "allocation": 0
+    },
+    {
+      "depth": 1024,
+      "allocation": 1
+    },
+    {
+      "depth": 1024,
+      "allocation": 2
+    },
+    {
+      "depth": 65535,
+      "allocation": 0
+    },
+    {
+      "depth": 65535,
+      "allocation": 1
+    },
+    {
+      "depth": 65535,
+      "allocation": 2
+    }
+  ],
+  "source_sha256": "9cd78b77fc56eb6c36e67d353e4762a07c3c4a736f907beb4a6e5528b333d61a",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "limits": "Heap allocator/free and TCB init/schedule cut; no actual allocation, scheduler, stack ownership or task execution proof."
+}

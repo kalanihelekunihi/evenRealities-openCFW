@@ -1,0 +1,45 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00310d38 <.data+0xe938>:
+  310d38:	c2e8                	enter_s	[r13-r16,blink]
+  310d3a:	4508                	mov_s	r13,r0
+  310d3c:	272f 043f           	clri	r16
+  310d40:	236f 003f           	sync
+  310d44:	8003                	ld_s	r0,[r0,0xc]
+  310d46:	e888                	brne_s	r0,0,16	;0x310d54
+  310d48:	40c3 0033 4538      	mov_s	r0,0x334538
+  310d4e:	0a8e 0060           	bl.d	2700	;0x3117d8
+  310d52:	d96e                	mov_s	r1,0x6e
+  310d54:	85c3                	ld_s	r14,[r13,0xc]
+  310d56:	8d17                	ldb_s	r0,[r13,0x17]
+  310d58:	7104                	add_s	r0,r0,1
+  310d5a:	ad17                	stb_s	r0,[r13,0x17]
+  310d5c:	8d34                	ldb_s	r1,[r13,0x14]
+  310d5e:	780f                	extb_s	r0,r0
+  310d60:	0923 0005           	brhs.nt	r1,r0,34	;0x310d82
+  310d64:	7124                	add_s	r1,r1,1
+  310d66:	0933 0020           	breq.d.nt	r1,r0,50	;0x310d96
+  310d6a:	1d0c 1001           	st	0,[r13,12]
+  310d6e:	262f 043f           	seti	r16
+  310d72:	40c3 0033 4538      	mov_s	r0,0x334538
+  310d78:	0a62 0060           	bl.d	2656	;0x3117d8
+  310d7c:	218a 0d84           	mov	r1,310
+  310d80:	f00b                	b_s	22	;0x310d96
+  310d82:	8544                	ld_s	r2,[r13,0x10]
+  310d84:	8d16                	ldb_s	r0,[r13,0x16]
+  310d86:	4a00                	ld_s.as	r0,[r2,r0]
+  310d88:	a503                	st_s	r0,[r13,0xc]
+  310d8a:	8d16                	ldb_s	r0,[r13,0x16]
+  310d8c:	e882                	brne_s	r0,0,4	;0x310d90
+  310d8e:	ad36                	stb_s	r1,[r13,0x16]
+  310d90:	8d16                	ldb_s	r0,[r13,0x16]
+  310d92:	7704                	add_s	r0,r0,-1
+  310d94:	ad16                	stb_s	r0,[r13,0x16]
+  310d96:	262f 043f           	seti	r16
+  310d9a:	40c1                	mov_s	r0,r14
+  310d9c:	c6c8                	leave_s	[r13-r16,blink,pcl]
+  310d9e:	78e0                	nop_s

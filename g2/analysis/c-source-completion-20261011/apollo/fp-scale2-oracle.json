@@ -1,0 +1,95 @@
+{
+  "status": "PASS_BOUNDED_FP_SCALE2",
+  "cases": [
+    {
+      "case": "normal-up",
+      "result": {
+        "result": "4044000000000000",
+        "errno": 0
+      }
+    },
+    {
+      "case": "normal-down",
+      "result": {
+        "result": "4028000000000000",
+        "errno": 0
+      }
+    },
+    {
+      "case": "normal-to-max-exp",
+      "result": {
+        "result": "7fe0000000000001",
+        "errno": 0
+      }
+    },
+    {
+      "case": "normal-to-overflow",
+      "result": {
+        "result": "7ff0000000000000",
+        "errno": 34
+      }
+    },
+    {
+      "case": "min-normal-to-min-normal",
+      "result": {
+        "result": "0010000000000000",
+        "errno": 0
+      }
+    },
+    {
+      "case": "zero",
+      "result": {
+        "result": "0000000000000000",
+        "errno": 0
+      }
+    },
+    {
+      "case": "negative-zero",
+      "result": {
+        "result": "8000000000000000",
+        "errno": 0
+      }
+    },
+    {
+      "case": "infinity",
+      "result": {
+        "result": "7ff0000000000000",
+        "errno": 0
+      }
+    },
+    {
+      "case": "nan",
+      "result": {
+        "result": "7ff8000000000012",
+        "errno": 0
+      }
+    },
+    {
+      "case": "hard-underflow",
+      "result": {
+        "result": "0000000000000000",
+        "errno": 34
+      }
+    },
+    {
+      "case": "negative-hard-underflow",
+      "result": {
+        "result": "8000000000000000",
+        "errno": 34
+      }
+    },
+    {
+      "case": "overflow",
+      "result": {
+        "result": "7ff0000000000000",
+        "errno": 34
+      }
+    }
+  ],
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_sha256": "d04b37c3a1c149ff2fac86cbcd7d6ea12285554a2d194874515438c8e276b054",
+  "limits": [
+    "Finite raw-word inputs only; Unicorn M-class cannot execute the stock double-precision VMUL at 0x42276a, so multiplying denormal and gradual-underflow paths remain untested.",
+    "FPSCR exception flags and all exponent boundary values are not yet fully qualified."
+  ]
+}

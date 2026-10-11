@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "original_entry": "0x43ce9e",
+  "caller_abi": "DSP control/request callers pass three fixed 32-bit words plus variadic words; return is ignored. Source returns uint32_t zero with same AAPCS inputs.",
+  "source_sha256": "1804fd452fb56ba1a65d37348af02632560949acd4ee900c381af4359295f680",
+  "archive_object_sha256": "b1fc78ec5b1e26989b27669e236784dff7d5b4bf54ff3b59fb1f8a4cde865d29",
+  "dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/simple_log_provider.c": "1804fd452fb56ba1a65d37348af02632560949acd4ee900c381af4359295f680",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdarg.h": "ce6e43d79dc89b50208ecf259b1ffd519f5a78cd3a2c7fcaac6386f376b89fef",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_header_macro.h": "7b3fbcc442af2508f36bb2dc98d9ad2b8a1f5c0f5333394fb2159c8bd5ecd5b8",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___gnuc_va_list.h": "feca975bfdfb254d17458a8e3d51f8ad6d9bdc9fd6287727f0f8b2fb81fcb0b0",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_list.h": "81c3055f7033e26e7f53705653bc9d69b5202f25c2692e03b3a4f77ff44a7d76",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_arg.h": "274c75a1db86f649439aa3bcc1dead4170725e6f803925c3fc38a2e93307afdc",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___va_copy.h": "f0a8d3c963338173f2d57b2cbc209dde38c90536107b15eb0cf78166d4caee1f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_copy.h": "bb195f56cb08d4cee6a60bd9f62f34466e8ac4f89f6fed043b044cb2f7ead010"
+  },
+  "original_body_sha256": "e12619a59901ab35a2e841248baf0175ef61c0d4a6a66d16ae088d662f8af57e",
+  "dsp_lane_cases_reused": 162,
+  "fresh_archive_cases": 0,
+  "lower_imports": [
+    "audio_log_policy",
+    "audio_log_lock",
+    "audio_log_format",
+    "audio_log_unlock",
+    "audio_log_lock_state"
+  ],
+  "archive_sha256": "ed389678e865febadf4a2b108fb457e19f41c00e6a719052e7d691997419beb3",
+  "scope": "Lower policy/lock/format/unlock intercepted in independent suite; live logger output/concurrency unproved, archive M55 object not independently executed."
+}

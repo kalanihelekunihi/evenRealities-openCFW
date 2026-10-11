@@ -1,0 +1,24 @@
+{
+  "alias": "audio_block_remove",
+  "source_symbol": "uxListRemove",
+  "original_entry": "0x4560e9",
+  "original_body_bytes": 38,
+  "original_body_hex": "0169826843689a60426883685a604a68824201d182684a60002202610868401e086008687047",
+  "same_object_offsets": {
+    "audio_block_remove": "1c",
+    "uxListRemove": "1c"
+  },
+  "caller_abi": "uint32_t item pointer; caller ignores return in delayed-block source",
+  "provider_abi": "UBaseType_t (ListItem_t * const), 32-bit return and pointer",
+  "old_text_sha256": "e41e1d3b055f2b856911c730fc7db07bd361e55964c6eeab243b60bd6b991ea9",
+  "alias_text_sha256": "e41e1d3b055f2b856911c730fc7db07bd361e55964c6eeab243b60bd6b991ea9",
+  "text_byte_equal_to_prior_selected_object": true,
+  "old_object_sha256": "4c933f95887e06d1cfdb524492c38aae2b0c70d07ff33fb626f261ffbd31ad3f",
+  "alias_object_sha256": "3614cb0439b1cf189fd05314af49917acd86d581e936dcf025a4aacf9520fd74",
+  "alias_source_sha256": "f9848bacbfbca26e63e23966796851359b8a6328b57df62dd437a382a2ecde88",
+  "included_source": "g2/components/foundation/freertos_ready/list_subset.c",
+  "included_source_sha256": "537ebd8aca3a9a757935179ff2474d3544bf0a07bd89fa697cc4bd90535b7677",
+  "execution_cases": 8,
+  "execution_matched": 8,
+  "scope": "Clang Cortex-M55 source alias vs original uxListRemove on coherent one/two-item FreeRTOS list fixtures. Ordered writes, full list bytes, return count, SP and PC agree; no concurrent mutation."
+}

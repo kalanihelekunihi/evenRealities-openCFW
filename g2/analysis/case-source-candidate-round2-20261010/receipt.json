@@ -5,12 +5,14 @@
   "tool_versions": {
     "clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
     "ar": "GNU ar (GNU Binutils) 2.47.20260726",
-    "nm": "GNU nm (GNU Binutils) 2.47.20260726"
+    "nm": "GNU nm (GNU Binutils) 2.47.20260726",
+    "ld": "GNU ld (GNU Binutils) 2.47.20260726"
   },
   "tool_sha256": {
     "clang": "21df4f5520528e31b8632cfb3b4b57a3f2a33126693828bf69d1976f537aaec7",
     "ar": "f40cd1c0ee57dd53d75e1a210c099cfb6a7fd5132257dfe0bbeed236f42400cb",
-    "nm": "9b8f74d84d023b1c794d2119c1fd33854f6708a75c6ed504925664f380768ba7"
+    "nm": "9b8f74d84d023b1c794d2119c1fd33854f6708a75c6ed504925664f380768ba7",
+    "ld": "740d9c697620b00fed6c48a12740895f648cf2fbebb635509d768cbed798fd4f"
   },
   "flags": [
     "--target=arm-none-eabi",
@@ -29,7 +31,7 @@
   "sources": [
     {
       "source": "g2/components/case/source_candidate_20261010/evidenced_providers.c",
-      "sha256": "b57184ddae3b95b33e9677c7bd27023284dd0ee87efc02f22199e908a057b838",
+      "sha256": "b4a0da90513f4d95b8e81d331be5705d04a3d9740a45bbaa336d3b9ad919599f",
       "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/evidenced_providers.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.o",
       "exit": 0,
       "stdout": "",
@@ -37,7 +39,205 @@
       "dependencies": [
         {
           "path": "g2/components/case/source_candidate_20261010/evidenced_providers.c",
-          "sha256": "b57184ddae3b95b33e9677c7bd27023284dd0ee87efc02f22199e908a057b838"
+          "sha256": "b4a0da90513f4d95b8e81d331be5705d04a3d9740a45bbaa336d3b9ad919599f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/control_providers.c",
+      "sha256": "12ac9b2e6d5a6422b7f9e330010a2d3ec37460790cd6f6b097ed5664b9a95e3f",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__control_providers.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/control_providers.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__control_providers.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/control_providers.c",
+          "sha256": "12ac9b2e6d5a6422b7f9e330010a2d3ec37460790cd6f6b097ed5664b9a95e3f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/ack_provider.c",
+      "sha256": "0ae676d1ba55c80ae36bf34154c97c6e9590d2f4806228fa622ff4906a9db6ad",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__ack_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/ack_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__ack_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/ack_provider.c",
+          "sha256": "0ae676d1ba55c80ae36bf34154c97c6e9590d2f4806228fa622ff4906a9db6ad"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/mask_providers.c",
+      "sha256": "7bb92fea265dc2de6006764fbdb26ef9094595525dc2b6f5f0606097b7ef9122",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__mask_providers.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/mask_providers.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__mask_providers.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/mask_providers.c",
+          "sha256": "7bb92fea265dc2de6006764fbdb26ef9094595525dc2b6f5f0606097b7ef9122"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/scheduler_state.c",
+      "sha256": "6d0a0afd40f674aee1c081c01d339c12b0f7ebcef7e3ad00ad93669f7e54650a",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__scheduler_state.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/scheduler_state.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__scheduler_state.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/scheduler_state.c",
+          "sha256": "6d0a0afd40f674aee1c081c01d339c12b0f7ebcef7e3ad00ad93669f7e54650a"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/yield_request.c",
+      "sha256": "b3af85ef1f584126df212383b7aff8bcd2119c240d8b00b8b3f542c7bf0c072c",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__yield_request.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/yield_request.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__yield_request.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/yield_request.c",
+          "sha256": "b3af85ef1f584126df212383b7aff8bcd2119c240d8b00b8b3f542c7bf0c072c"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/critical_providers.c",
+      "sha256": "c3dbb3810e9988d291cc19c05c09ba8edd4ae88eec7c1dfe2fdf5a463c35b391",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__critical_providers.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/critical_providers.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__critical_providers.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/critical_providers.c",
+          "sha256": "c3dbb3810e9988d291cc19c05c09ba8edd4ae88eec7c1dfe2fdf5a463c35b391"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/suspend_scheduler.c",
+      "sha256": "8764f9ce74945f5ab3fffbd63f50efaa5ba9c39d27a47120e925956b0fad2a81",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__suspend_scheduler.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/suspend_scheduler.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__suspend_scheduler.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/suspend_scheduler.c",
+          "sha256": "8764f9ce74945f5ab3fffbd63f50efaa5ba9c39d27a47120e925956b0fad2a81"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/event_get_isr.c",
+      "sha256": "f82c8ea32642428c4eb23034ced398249fab3dccc852269eb9562a7629678322",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_get_isr.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/event_get_isr.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_get_isr.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/event_get_isr.c",
+          "sha256": "f82c8ea32642428c4eb23034ced398249fab3dccc852269eb9562a7629678322"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/event_clear_isr.c",
+      "sha256": "5b1070095ddc14af7aa3623544edf441f584a0c897e4d84a60bbee29a7afd581",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_isr.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/event_clear_isr.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_isr.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/event_clear_isr.c",
+          "sha256": "5b1070095ddc14af7aa3623544edf441f584a0c897e4d84a60bbee29a7afd581"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/event_clear_callback.c",
+      "sha256": "2d2ddc77deb5f8b051c6d072b4cff36f389ca44784c5a6d7c700b3924e533ec2",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_callback.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/event_clear_callback.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_callback.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/event_clear_callback.c",
+          "sha256": "2d2ddc77deb5f8b051c6d072b4cff36f389ca44784c5a6d7c700b3924e533ec2"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/event_clear_task.c",
+      "sha256": "abe43709fc23143d4d71026117e26abad4977381092fbaa2d7ad80e803ffd14e",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_task.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/event_clear_task.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_task.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/event_clear_task.c",
+          "sha256": "abe43709fc23143d4d71026117e26abad4977381092fbaa2d7ad80e803ffd14e"
         },
         {
           "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
@@ -65,7 +265,7 @@
     },
     {
       "source": "g2/components/case/deferred_consumer_offline/consumer.c",
-      "sha256": "54b6c1266341a1ec337781c0b8509bbbdb842a2f19405b452a2d0cb5f5ecf741",
+      "sha256": "1ef0c0ca1ef4062e605e364f9b64b502ded363820721f389b0f803225fad36cf",
       "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/deferred_consumer_offline/consumer.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.o",
       "exit": 0,
       "stdout": "",
@@ -73,7 +273,7 @@
       "dependencies": [
         {
           "path": "g2/components/case/deferred_consumer_offline/consumer.c",
-          "sha256": "54b6c1266341a1ec337781c0b8509bbbdb842a2f19405b452a2d0cb5f5ecf741"
+          "sha256": "1ef0c0ca1ef4062e605e364f9b64b502ded363820721f389b0f803225fad36cf"
         },
         {
           "path": "g2/components/case/deferred_consumer_offline/consumer.h",
@@ -122,13 +322,325 @@
       ]
     },
     {
-      "source": "g2/components/case/deferred_event_offline/deferred.c",
-      "sha256": "398063f649894ab704b78bd5285dc6635af077368f24aeeec9cbbba9aa856059",
-      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_event_offline__deferred.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/deferred_event_offline/deferred.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_event_offline__deferred.c.o",
+      "source": "g2/components/case/scheduler_list_candidate_20261010/waiter.c",
+      "sha256": "9b365f7f05efc2dbc6f5b87ec8e959f5cfc0aeed57f51ecfdc817f56dbd0c0f0",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__waiter.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/scheduler_list_candidate_20261010/waiter.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__waiter.c.o",
       "exit": 0,
       "stdout": "",
       "stderr": "",
       "dependencies": [
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/waiter.c",
+          "sha256": "9b365f7f05efc2dbc6f5b87ec8e959f5cfc0aeed57f51ecfdc817f56dbd0c0f0"
+        },
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/list_abi.h",
+          "sha256": "46b30d564c2ca455505e818f0b07604ecd09a09c3fda2b9307f008920c29a8a9"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/scheduler_list_candidate_20261010/resume.c",
+      "sha256": "f63455871e7a659f0f9d545dbb2b0323aa0fd588bb82e5307970d92075dbeb4f",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__resume.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/scheduler_list_candidate_20261010/resume.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__resume.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/resume.c",
+          "sha256": "f63455871e7a659f0f9d545dbb2b0323aa0fd588bb82e5307970d92075dbeb4f"
+        },
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/list_abi.h",
+          "sha256": "46b30d564c2ca455505e818f0b07604ecd09a09c3fda2b9307f008920c29a8a9"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/scheduler_list_candidate_20261010/tick.c",
+      "sha256": "88cc1ec3e79478f2356e357806fe227ec553e51e10bdb2b2f3070f5fa97d16d0",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__tick.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/scheduler_list_candidate_20261010/tick.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__tick.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/tick.c",
+          "sha256": "88cc1ec3e79478f2356e357806fe227ec553e51e10bdb2b2f3070f5fa97d16d0"
+        },
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/list_abi.h",
+          "sha256": "46b30d564c2ca455505e818f0b07604ecd09a09c3fda2b9307f008920c29a8a9"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/scheduler_list_candidate_20261010/disinherit.c",
+      "sha256": "b0262c3f54a017b97ed19393852212cb0fe1a7d47871823bae76709151aa2245",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__disinherit.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/scheduler_list_candidate_20261010/disinherit.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__disinherit.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/disinherit.c",
+          "sha256": "b0262c3f54a017b97ed19393852212cb0fe1a7d47871823bae76709151aa2245"
+        },
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/list_abi.h",
+          "sha256": "46b30d564c2ca455505e818f0b07604ecd09a09c3fda2b9307f008920c29a8a9"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/scheduler_list_candidate_20261010/unblock.c",
+      "sha256": "b4e8687f86ee302436a4ffae83e6ad963977aaf432758bcf27fcece854a8467c",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__unblock.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/scheduler_list_candidate_20261010/unblock.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__unblock.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/unblock.c",
+          "sha256": "b4e8687f86ee302436a4ffae83e6ad963977aaf432758bcf27fcece854a8467c"
+        },
+        {
+          "path": "g2/components/case/scheduler_list_candidate_20261010/list_abi.h",
+          "sha256": "46b30d564c2ca455505e818f0b07604ecd09a09c3fda2b9307f008920c29a8a9"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/send_provider.c",
+      "sha256": "03ea4e15f1d9cdff8ed3e620c414e43279c6d48bd4cfd0b5b7aa24e1093e3135",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__send_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/send_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__send_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/send_provider.c",
+          "sha256": "03ea4e15f1d9cdff8ed3e620c414e43279c6d48bd4cfd0b5b7aa24e1093e3135"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/hex_log_provider.c",
+      "sha256": "609076214b0d7960361a989a32fc83c6dcc06aa2aec5ca804f5aac3ed08860e5",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__hex_log_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/hex_log_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__hex_log_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/hex_log_provider.c",
+          "sha256": "609076214b0d7960361a989a32fc83c6dcc06aa2aec5ca804f5aac3ed08860e5"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/log_wrapper_provider.c",
+      "sha256": "746809959f6357528adaec7cbadfc39415d0bd984ec95c7b2a14071c8a53fbe8",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__log_wrapper_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/log_wrapper_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__log_wrapper_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/log_wrapper_provider.c",
+          "sha256": "746809959f6357528adaec7cbadfc39415d0bd984ec95c7b2a14071c8a53fbe8"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdarg.h",
+          "sha256": "ce6e43d79dc89b50208ecf259b1ffd519f5a78cd3a2c7fcaac6386f376b89fef"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_header_macro.h",
+          "sha256": "7b3fbcc442af2508f36bb2dc98d9ad2b8a1f5c0f5333394fb2159c8bd5ecd5b8"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___gnuc_va_list.h",
+          "sha256": "feca975bfdfb254d17458a8e3d51f8ad6d9bdc9fd6287727f0f8b2fb81fcb0b0"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_list.h",
+          "sha256": "81c3055f7033e26e7f53705653bc9d69b5202f25c2692e03b3a4f77ff44a7d76"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_arg.h",
+          "sha256": "274c75a1db86f649439aa3bcc1dead4170725e6f803925c3fc38a2e93307afdc"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___va_copy.h",
+          "sha256": "f0a8d3c963338173f2d57b2cbc209dde38c90536107b15eb0cf78166d4caee1f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_copy.h",
+          "sha256": "bb195f56cb08d4cee6a60bd9f62f34466e8ac4f89f6fed043b044cb2f7ead010"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/uart_write_provider.c",
+      "sha256": "24056fdcc735faabce4ae7008612a8de5712c39f6878b63f152d5236392db7cb",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_write_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/uart_write_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_write_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/uart_write_provider.c",
+          "sha256": "24056fdcc735faabce4ae7008612a8de5712c39f6878b63f152d5236392db7cb"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/tick_word_provider.c",
+      "sha256": "c3005807dbfc13091791c18635377513628fd7a75a07616ce165b7b6ef32069a",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__tick_word_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/tick_word_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__tick_word_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/tick_word_provider.c",
+          "sha256": "c3005807dbfc13091791c18635377513628fd7a75a07616ce165b7b6ef32069a"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/uart_wait_provider.c",
+      "sha256": "14b9f1f04be23a29c1919d986801d4afb9f9e1c75b713571bb4c92f6b1a860d6",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_wait_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/uart_wait_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_wait_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/uart_wait_provider.c",
+          "sha256": "14b9f1f04be23a29c1919d986801d4afb9f9e1c75b713571bb4c92f6b1a860d6"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/uart_read_provider.c",
+      "sha256": "9f76e65ab1b761637ef540a462e91496535deb7df0c480c4baeea882258e9647",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_read_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/uart_read_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_read_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/uart_read_provider.c",
+          "sha256": "9f76e65ab1b761637ef540a462e91496535deb7df0c480c4baeea882258e9647"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/uart_event_callback.c",
+      "sha256": "df605da0ed73c3fa19bb1d8c675130de99889e170456a6a872ae79238fb71ad2",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_event_callback.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/uart_event_callback.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_event_callback.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/uart_event_callback.c",
+          "sha256": "df605da0ed73c3fa19bb1d8c675130de99889e170456a6a872ae79238fb71ad2"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/uart_rx_complete_callback.c",
+      "sha256": "71660734fa7fbd1ab3313079908cfdb7c38ff5bf3dfc9e8cf2c8cfb8d5ac5a68",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_rx_complete_callback.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/uart_rx_complete_callback.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_rx_complete_callback.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/uart_rx_complete_callback.c",
+          "sha256": "71660734fa7fbd1ab3313079908cfdb7c38ff5bf3dfc9e8cf2c8cfb8d5ac5a68"
+        },
+        {
+          "path": "g2/components/case/frame_callback_offline/frame.h",
+          "sha256": "271e5b85c5b64da1a7eaac2045008cfe35386ba8803a617830fe02b0d1bb0676"
+        },
+        {
+          "path": "g2/components/case/uart_start_offline/start.h",
+          "sha256": "7d91557e40f895b10c88952797238bc8b78431c16462fa30e3160df8f4f439be"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/timer_pend_export.c",
+      "sha256": "7d49180a657c9bb47ca82800c1f77f367838d358a020c762266bf3ac9e90dc60",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__timer_pend_export.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/timer_pend_export.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__timer_pend_export.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/timer_pend_export.c",
+          "sha256": "7d49180a657c9bb47ca82800c1f77f367838d358a020c762266bf3ac9e90dc60"
+        },
         {
           "path": "g2/components/case/deferred_event_offline/deferred.c",
           "sha256": "398063f649894ab704b78bd5285dc6635af077368f24aeeec9cbbba9aa856059"
@@ -230,13 +742,17 @@
       ]
     },
     {
-      "source": "g2/components/case/event_waiters_offline/waiters.c",
-      "sha256": "d6a4ba76d822f94bcc0777e578061b5ed466897be429151cbfd54ecf1b10891a",
-      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_waiters_offline__waiters.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/event_waiters_offline/waiters.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_waiters_offline__waiters.c.o",
+      "source": "g2/components/case/source_candidate_20261010/event_set_task.c",
+      "sha256": "194cddcdd85910da49a5eaa4512ed348820f7a0f7d33279918d6758558dff3c0",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_set_task.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/event_set_task.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_set_task.c.o",
       "exit": 0,
       "stdout": "",
       "stderr": "",
       "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/event_set_task.c",
+          "sha256": "194cddcdd85910da49a5eaa4512ed348820f7a0f7d33279918d6758558dff3c0"
+        },
         {
           "path": "g2/components/case/event_waiters_offline/waiters.c",
           "sha256": "d6a4ba76d822f94bcc0777e578061b5ed466897be429151cbfd54ecf1b10891a"
@@ -400,6 +916,110 @@
       ]
     },
     {
+      "source": "g2/components/case/source_candidate_20261010/uart_irq_continuations.c",
+      "sha256": "0bd3ca32207fa209d9646c092466ecb0add0e68ef4230d67e4cc3eb77276bcd3",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_continuations.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/uart_irq_continuations.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_continuations.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/uart_irq_continuations.c",
+          "sha256": "0bd3ca32207fa209d9646c092466ecb0add0e68ef4230d67e4cc3eb77276bcd3"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/uart_irq_toidle_dma.c",
+      "sha256": "f90381c472e639f0a0f9827037e314b61081e79fbcc77ace80d4fe6b1f3da11e",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_toidle_dma.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/uart_irq_toidle_dma.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_toidle_dma.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/uart_irq_toidle_dma.c",
+          "sha256": "f90381c472e639f0a0f9827037e314b61081e79fbcc77ace80d4fe6b1f3da11e"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/uart_irq_toidle_no_dma.c",
+      "sha256": "724c6b8246f270f557dec8ce1bc15ca57cced806291245afeb5fb9088064bc44",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_toidle_no_dma.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/uart_irq_toidle_no_dma.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_toidle_no_dma.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/uart_irq_toidle_no_dma.c",
+          "sha256": "724c6b8246f270f557dec8ce1bc15ca57cced806291245afeb5fb9088064bc44"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/uart_irq_mixed_tail.c",
+      "sha256": "c09c6079789a7e13d418d2a22446a5ec796f258d59574b12598ceac325490072",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_mixed_tail.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/uart_irq_mixed_tail.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_mixed_tail.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/uart_irq_mixed_tail.c",
+          "sha256": "c09c6079789a7e13d418d2a22446a5ec796f258d59574b12598ceac325490072"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/dma_abort_provider.c",
+      "sha256": "341acd5946678074f45632379304cab8bebc5f5f6455c8f40851b761bfbd5ae0",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__dma_abort_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/dma_abort_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__dma_abort_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/dma_abort_provider.c",
+          "sha256": "341acd5946678074f45632379304cab8bebc5f5f6455c8f40851b761bfbd5ae0"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/source_candidate_20261010/tx_complete_provider.c",
+      "sha256": "2ac733473696f263b15ac9d2b4325e966bc7f53a49208704a097c6bbb7c8772b",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__tx_complete_provider.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/tx_complete_provider.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__tx_complete_provider.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/tx_complete_provider.c",
+          "sha256": "2ac733473696f263b15ac9d2b4325e966bc7f53a49208704a097c6bbb7c8772b"
+        }
+      ]
+    },
+    {
       "source": "g2/components/case/uart_receive_offline/receive.c",
       "sha256": "f00b1bc265348171771745eb8ae21f4cb9d2eebb09dd0dd12e93eb09458bc975",
       "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/uart_receive_offline/receive.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.o",
@@ -509,65 +1129,90 @@
     }
   ],
   "archive": "g2/components/case/source_candidate_20261010/build/libcase_source_candidate.a",
-  "archive_sha256": "632136a54e9049dedf5b11287a778dea19144a73e51496c595df752e3881eea2",
+  "archive_sha256": "3fd6b453372e695c75fbb4a057217031809c5fd989dead729b1d43f18c0f9951",
   "archive_rebuild_same_sha256": true,
-  "archive_command": "/opt/homebrew/bin/arm-none-eabi-ar rcsD /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/libcase_source_candidate.a /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/binary_forward_offline__forward.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_event_offline__deferred.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_flags_offline__events.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_waiters_offline__waiters.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_callback_offline__frame.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_dispatch_offline__dispatch.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/local_commands_offline__local.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_error_atomic_offline__uart.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_start_offline__start.c.o",
-  "nm_command": "/opt/homebrew/bin/arm-none-eabi-nm -A /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/binary_forward_offline__forward.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_event_offline__deferred.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_flags_offline__events.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_waiters_offline__waiters.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_callback_offline__frame.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_dispatch_offline__dispatch.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/local_commands_offline__local.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_error_atomic_offline__uart.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_start_offline__start.c.o",
+  "archive_command": "/opt/homebrew/bin/arm-none-eabi-ar rcsD /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/libcase_source_candidate.a /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__control_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__ack_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__mask_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__scheduler_state.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__yield_request.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__critical_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__suspend_scheduler.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_get_isr.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_isr.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_callback.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_task.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/binary_forward_offline__forward.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__waiter.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__resume.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__tick.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__disinherit.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__unblock.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__send_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__hex_log_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__log_wrapper_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_write_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__tick_word_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_wait_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_read_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_event_callback.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_rx_complete_callback.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__timer_pend_export.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_flags_offline__events.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_set_task.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_callback_offline__frame.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_dispatch_offline__dispatch.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/local_commands_offline__local.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_error_atomic_offline__uart.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_continuations.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_toidle_dma.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_toidle_no_dma.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_mixed_tail.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__dma_abort_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__tx_complete_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_start_offline__start.c.o",
+  "relocatable": "g2/components/case/source_candidate_20261010/build/case_source_candidate.o",
+  "relocatable_sha256": "8355fc1647031b0812be4047033708df55261726cff3f574852792eaa3a80248",
+  "relocatable_command": "/opt/homebrew/bin/arm-none-eabi-ld -r --whole-archive /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/libcase_source_candidate.a --no-whole-archive -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/case_source_candidate.o",
+  "nm_command": "/opt/homebrew/bin/arm-none-eabi-nm -A -g /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__control_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__ack_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__mask_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__scheduler_state.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__yield_request.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__critical_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__suspend_scheduler.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_get_isr.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_isr.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_callback.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_clear_task.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/binary_forward_offline__forward.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__waiter.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__resume.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__tick.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__disinherit.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/scheduler_list_candidate_20261010__unblock.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__send_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__hex_log_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__log_wrapper_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_write_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__tick_word_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_wait_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_read_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_event_callback.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_rx_complete_callback.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__timer_pend_export.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_flags_offline__events.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__event_set_task.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_callback_offline__frame.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_dispatch_offline__dispatch.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/local_commands_offline__local.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_error_atomic_offline__uart.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_continuations.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_toidle_dma.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_toidle_no_dma.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__uart_irq_mixed_tail.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__dma_abort_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__tx_complete_provider.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_start_offline__start.c.o",
   "provided_symbols": [
+    "HAL_UARTEx_RxEventCallback",
     "HAL_UART_ErrorCallback",
+    "HAL_UART_RxCpltCallback",
+    "case_ack",
+    "case_bulk_receive",
+    "case_clear_event",
+    "case_control_a",
+    "case_control_b",
+    "case_control_write",
     "case_copy_from_queue",
     "case_copy_to_queue",
+    "case_disinherit",
     "case_dispatch_received_frame",
+    "case_dma_abort",
+    "case_dma_abort_it",
     "case_drain_negative_callbacks",
+    "case_enter_critical",
     "case_event_flags_set",
     "case_event_post",
     "case_event_set_waiters",
+    "case_exit_critical",
     "case_forward_event",
     "case_forward_nonlocal",
     "case_frame_callback",
     "case_frame_de_prefix",
     "case_frame_resync",
     "case_hex_digit",
+    "case_increment_tick",
     "case_local_selected",
-    "case_pend_from_isr",
+    "case_log_output_char",
+    "case_mask_restore",
+    "case_mask_save",
     "case_poll_frame_action",
     "case_queue_send_isr",
     "case_receive_nowait",
-    "case_uart_begin_rx",
-    "case_uart_end_rx",
-    "case_uart_error_irq",
-    "case_uart_rx16",
-    "case_uart_rx8",
-    "case_uart_start_api",
-    "receive",
-    "xEventGroupSetBitsFromISR"
-  ],
-  "unresolved_symbols": [
-    "HAL_UARTEx_RxEventCallback",
-    "HAL_UART_RxCpltCallback",
-    "case_ack",
-    "case_binary_command",
-    "case_bulk_receive",
-    "case_clear_event",
-    "case_control_a",
-    "case_control_b",
-    "case_disinherit",
-    "case_enter_critical",
-    "case_exit_critical",
-    "case_legacy_command",
-    "case_mask_restore",
-    "case_mask_save",
     "case_remove_waiter",
+    "case_reset_next_unblock",
     "case_resume_scheduler",
     "case_scheduler_state",
     "case_send",
+    "case_source_list_insert_end",
+    "case_source_list_remove",
     "case_suspend_scheduler",
+    "case_tick_word2",
+    "case_tx_complete_provider",
+    "case_uart_begin_rx",
+    "case_uart_dma_abort_callback",
     "case_uart_dma_boundary",
+    "case_uart_end_rx",
+    "case_uart_error_irq",
+    "case_uart_mixed_tail",
     "case_uart_other_irq",
+    "case_uart_rx16",
+    "case_uart_rx8",
+    "case_uart_start_api",
+    "case_uart_toidle_dma_branch",
+    "case_uart_toidle_no_dma_branch",
     "case_unblock_waiter",
+    "case_wait_condition",
+    "case_write_controller_blocking",
     "case_yield_request",
-    "xEventGroupSetBits"
+    "g2_log_printf",
+    "log_hex_buffer",
+    "vEventGroupClearBitsCallback",
+    "xEventGroupClearBits",
+    "xEventGroupClearBitsFromISR",
+    "xEventGroupGetBitsFromISR",
+    "xEventGroupSetBits",
+    "xEventGroupSetBitsFromISR",
+    "xTimerPendFunctionCallFromISR"
   ],
-  "source_count": 12,
-  "object_count": 12
+  "unresolved_symbols": [
+    "case_binary_command",
+    "case_legacy_command",
+    "case_vformat"
+  ],
+  "source_count": 43,
+  "object_count": 43
 }

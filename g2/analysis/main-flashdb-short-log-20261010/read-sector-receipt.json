@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "cases": 1152,
+  "stock_address": "0x54418e..0x544374",
+  "stock_body_sha256": "1823fb0fd6b8580637b5a17a877a473c458d0011f14692f3cd3f79da9b4f34fb",
+  "source_sha256": "ddee6a2844ecc18b02b9823a1062858a20ce8410dfa89636c98464e5b8a70d20",
+  "elf_sha256": "79b1ca20aa2e334704f735d3d5d773f45c37999ef6e6d08c61fda86ba5b271c0",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_read_sector_info",
+    "-Wl,--defsym=g2_flashdb_sector_cache_lookup=0x543cc1",
+    "-Wl,--defsym=g2_flashdb_flash_read=0x585a13",
+    "-Wl,--defsym=g2_flashdb_get_status=0x5858a9",
+    "-Wl,--defsym=g2_flashdb_read_kv=0x544001",
+    "-Wl,--defsym=g2_flashdb_next_kv_addr=0x543f8d",
+    "-Wl,--defsym=g2_flashdb_continue_ff_addr=0x5859a1",
+    "-Wl,--defsym=g2_flashdb_update_sector_cache=0x543c49",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_read_sector_candidates_20261010/read_sector.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-read-sector.elf"
+  ],
+  "limits": "Complete valid-input 486-byte local body with coherent synthetic cache/header/KV/FF/update children. FDB_ASSERT unaligned/null fatal paths excluded. M4 scalar oracle, M55 archive compile separate; no persistent flash/cache-state proof."
+}

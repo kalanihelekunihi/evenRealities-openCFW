@@ -3,6 +3,13 @@
  * No range guard is added to the stock callback arithmetic. */
 #include "filesystem.h"
 #include <stddef.h>
+/* Authenticated diagnostic inputs at stock 0x4317cc/0x43180c/0x432568. */
+static const char lfs_read_failure[] =
+    "lfs READ fail: block=%u, off=%u, size=%u, addr=0x%08X, st=%d\n";
+static const char lfs_prog_failure[] =
+    "lfs PROG fail: block=%u, off=%u, size=%u, addr=0x%08X, st=%d\n";
+static const char lfs_erase_failure[] =
+    "lfs ERASE fail: block=%u, addr=0x%08X, st=%d\n";
 #ifndef OPENCFW_BOOT_FS_TEST
 _Static_assert(sizeof(void *)==4,"stock littlefs ABI is ARM32");
 _Static_assert(sizeof(struct lfs_config)==84,"stock config is 84 bytes");
@@ -13,19 +20,19 @@ _Static_assert(sizeof(lfs_file_t)<=92,"candidate file must fit stock 96-byte all
 int opencfw_boot_lfs_read(const struct lfs_config *cfg,lfs_block_t block,lfs_off_t off,void *out,lfs_size_t size) {
     (void)cfg;uint32_t address=0x01400000u+block*0x1000u+off;
     uint32_t status=opencfw_boot_nor_read(address,out,size);
-    if(status) {opencfw_boot_fs_error(0x4317ccu,block,off,size,address,status);return LFS_ERR_IO;}
+    if(status) {opencfw_boot_fs_printf((uintptr_t)lfs_read_failure,block,off,size,address,status);return LFS_ERR_IO;}
     return 0;
 }
 int opencfw_boot_lfs_prog(const struct lfs_config *cfg,lfs_block_t block,lfs_off_t off,const void *data,lfs_size_t size) {
     (void)cfg;uint32_t address=0x01400000u+block*0x1000u+off;
     uint32_t status=opencfw_boot_nor_prog(address,data,size);
-    if(status) {opencfw_boot_fs_error(0x43180cu,block,off,size,address,status);return LFS_ERR_IO;}
+    if(status) {opencfw_boot_fs_printf((uintptr_t)lfs_prog_failure,block,off,size,address,status);return LFS_ERR_IO;}
     return 0;
 }
 int opencfw_boot_lfs_erase(const struct lfs_config *cfg,lfs_block_t block) {
     (void)cfg;uint32_t address=0x01400000u+block*0x1000u;
     uint32_t status=opencfw_boot_nor_erase(address);
-    if(status) {opencfw_boot_fs_error(0x432568u,block,address,status);return LFS_ERR_IO;}
+    if(status) {opencfw_boot_fs_printf((uintptr_t)lfs_erase_failure,block,address,status);return LFS_ERR_IO;}
     return 0;
 }
 int opencfw_boot_lfs_sync(const struct lfs_config *cfg) {(void)cfg;return 0;}

@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "cases": 28,
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "0456a8831b7be86afef4e7a6b3b061397a2867155147b78d81a83a580dc9cd1b",
+  "object_sha256": "3e6549a215978bbb843625e5dd8910627436bd4dc6963bddce30e4a014e20255",
+  "archive_sha256": null,
+  "lengths": [
+    0,
+    1,
+    2,
+    5,
+    16,
+    255,
+    256
+  ],
+  "flags": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "boundary": "UART single-byte calls, logger format/argument, hex buffer pointer contents and length.",
+  "limits": [
+    "Lower UART/logger providers are intercepted, not source-defined here.",
+    "Payload length limited to tested 0..256; uint16 loop behavior above 65535 is outside valid contract.",
+    "No physical UART or delivery proof."
+  ]
+}

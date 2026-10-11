@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "cases": 32,
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "df605da0ed73c3fa19bb1d8c675130de99889e170456a6a872ae79238fb71ad2",
+  "object_sha256": "1fdbeb743d4957d7afaec5f670fc254e0f14090387b1915327f97f2b5d40ef53",
+  "archive_sha256": "b0c6d9feda844782fbb05efcc6302a91982cc10637097ee503773256ec41c40d",
+  "binding": "Stock RX8 and RX16 decomp callers both target 0x08005e6a; stock two-byte body is bx lr.",
+  "limits": [
+    "Only this stock-selected TOIDLE event callback body; no claim for RX completion parser or registered callback overrides.",
+    "No physical UART execution."
+  ]
+}

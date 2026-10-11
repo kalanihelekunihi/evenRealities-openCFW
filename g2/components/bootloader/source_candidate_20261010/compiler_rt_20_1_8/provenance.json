@@ -1,0 +1,12 @@
+{
+  "upstream": "https://github.com/llvm/llvm-project",
+  "ref": "llvmorg-20.1.8",
+  "license": "Apache-2.0 WITH LLVM-exception",
+  "purpose": "Source-owned ARM EABI double-to-float helper; arithmetic provenance, not original bootloader implementation identity",
+  "files": [
+    {"path": "truncdfsf2.c", "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/truncdfsf2.c", "sha256": "2842933c7721ae3e6c9d4f8d131f77f9c8228c1d5f77b1b05102c7e8b1f9b515"},
+    {"path": "fp_trunc_impl.inc", "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fp_trunc_impl.inc", "sha256": "17098ba776ada9f2cc568a02cf34317bb0b59b8a603ff8a92ea909b7bc8c214b"},
+    {"path": "fp_trunc.h", "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fp_trunc.h", "sha256": "90626a0811dcf96be507daa5d7fe872d1efae2c388af4c48eaba45101856be23"}
+  ],
+  "shared_dependencies": "third-party/upstream/llvm-compiler-rt-format-20.1.8/provenance.json"
+}

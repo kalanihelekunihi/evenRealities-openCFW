@@ -1,0 +1,64 @@
+{
+  "status": "PASS_SEMIHOST_ERROR_BOUNDED",
+  "cases": 3,
+  "rows": [
+    [
+      0,
+      {
+        "events": [
+          [
+            24,
+            135184,
+            [
+              7389796,
+              6155,
+              7469280
+            ]
+          ],
+          [
+            24,
+            131110,
+            null
+          ]
+        ],
+        "returned": false
+      }
+    ],
+    [
+      1,
+      {
+        "events": [
+          [
+            24,
+            135184,
+            [
+              7389796,
+              6155,
+              7469280
+            ]
+          ]
+        ],
+        "returned": true
+      }
+    ],
+    [
+      4294967295,
+      {
+        "events": [
+          [
+            24,
+            135184,
+            [
+              7389796,
+              6155,
+              7469280
+            ]
+          ]
+        ],
+        "returned": true
+      }
+    ]
+  ],
+  "source_sha256": "8c8aab526d7f3aea1b5339bd15e9f3ca498cf612fd0a04de2fdb14193c919cd0",
+  "limits": "BKPT intercepted; successful semihost reply returns, zero reply compared through first repeated SYS_EXIT call. No debugger or physical fatal execution."
+}

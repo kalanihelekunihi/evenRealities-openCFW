@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "aliases": [
+    {
+      "alias": "audio_i2s_power",
+      "selected_symbol": "audio_i2s_power_selected",
+      "original_entry": "0x590648",
+      "same_object_text_offset": "0x0",
+      "prior_original_source_cases_reused": 804,
+      "old_source_sha256": "d0528b3d1ced6dfe19ba1d1e50147da2be90ff416c83b9c343e4e2f31ebe8259",
+      "alias_source_sha256": "ec1042672bf83cf45fe888d58d700bb60242ccbdac7699fbfc9f5afc03622d30",
+      "old_object_sha256": "ebbdc7722a5ce6ae82e13c8549a51d1a4aa678b5fd48d03c33c4eedead0441c9",
+      "rebuilt_object_sha256": "554460fda01a9367fe09599fbcdb952d72070417559522aa7f477ddfd5353694",
+      "object_text_sha256": "a2309d58227416075a8e262e0895eed34b1cd35029ef3cec3140610a8947a43c",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/i2s_power_aliases.c": "ec1042672bf83cf45fe888d58d700bb60242ccbdac7699fbfc9f5afc03622d30",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../i2s_power_offline/power.c": "d0528b3d1ced6dfe19ba1d1e50147da2be90ff416c83b9c343e4e2f31ebe8259",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      }
+    },
+    {
+      "alias": "audio_i2s_uninit",
+      "selected_symbol": "audio_i2s_uninitialize_selected",
+      "original_entry": "0x5900ce",
+      "same_object_text_offset": "0x17c",
+      "prior_original_source_cases_reused": 32,
+      "old_source_sha256": "d0528b3d1ced6dfe19ba1d1e50147da2be90ff416c83b9c343e4e2f31ebe8259",
+      "alias_source_sha256": "ec1042672bf83cf45fe888d58d700bb60242ccbdac7699fbfc9f5afc03622d30",
+      "old_object_sha256": "ebbdc7722a5ce6ae82e13c8549a51d1a4aa678b5fd48d03c33c4eedead0441c9",
+      "rebuilt_object_sha256": "554460fda01a9367fe09599fbcdb952d72070417559522aa7f477ddfd5353694",
+      "object_text_sha256": "a2309d58227416075a8e262e0895eed34b1cd35029ef3cec3140610a8947a43c",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/i2s_power_aliases.c": "ec1042672bf83cf45fe888d58d700bb60242ccbdac7699fbfc9f5afc03622d30",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../i2s_power_offline/power.c": "d0528b3d1ced6dfe19ba1d1e50147da2be90ff416c83b9c343e4e2f31ebe8259",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      }
+    },
+    {
+      "alias": "audio_i2s_dma_stop",
+      "selected_symbol": "audio_i2s_dma_stop_selected",
+      "original_entry": "0x590c62",
+      "same_object_text_offset": "0x0",
+      "prior_original_source_cases_reused": 1280,
+      "old_source_sha256": "fde70ccf3b8a50decb5366affd3af180ae2332d68ef81b3dec5dfb4109ec2e4c",
+      "alias_source_sha256": "45e310d8f3a5d5cf794a23e312709c9dd3450ff80cdeff186b047cbe587fca6e",
+      "old_object_sha256": "4bccde7b2275307a8cd683e5be4ff01b5836ed9a25cae97fea42f44776d9e7bd",
+      "rebuilt_object_sha256": "66cde434912d83620fce116eec27d157deaa91f88a8b047fb51582fde461e844",
+      "object_text_sha256": "15cd21a4ce01237bd21c4374133b62a7a48ff890b9834eaeb1406ef4a40dce24",
+      "full_dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/i2s_stop_alias.c": "45e310d8f3a5d5cf794a23e312709c9dd3450ff80cdeff186b047cbe587fca6e",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/../i2s_stop_offline/stop.c": "fde70ccf3b8a50decb5366affd3af180ae2332d68ef81b3dec5dfb4109ec2e4c",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      }
+    }
+  ],
+  "archive_sha256": "f79bfe0a64b06733249c20791be9cfe6df69ba2a5cf69414e32f75c1ed540aec",
+  "reused_prior_cases": 2116,
+  "fresh_cases": 0,
+  "caller_abi": "control_callbacks_offline declares void(void*), void(void*,uint32_t,uint32_t), and void(void*) for DMA-stop, power, uninit; source uses matching register inputs and returns uint32_t ignored by callers.",
+  "scope": "Rebuilt M55 object text identical to selected prior object; aliases same entry and add no instructions. Prior selected original/source suites reused, with their own clock/delay/ROM boundaries."
+}

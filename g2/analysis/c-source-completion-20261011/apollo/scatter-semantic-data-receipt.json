@@ -1,0 +1,46 @@
+{
+  "status": "COMPILED_DATA_REDUCTION",
+  "stock_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "records": [
+    {
+      "input_start": "0x434461",
+      "input_length": 22,
+      "input_sha256": "f7416eabf10e45a1b98a8034c0d649de0c6d680d354b6e6deb57f459f45a820f",
+      "output_start": "0x40",
+      "output_length": 24,
+      "output_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+      "nonzero_bytes": 24,
+      "source_owner": "startup/itcm_helpers.S"
+    },
+    {
+      "input_start": "0x4341c0",
+      "input_length": 625,
+      "input_sha256": "5b8e3a303e0ca03dcf5375491441067823e17d840181ae16898c58b8cafde4f8",
+      "output_start": "0x20000000",
+      "output_length": 1371,
+      "output_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+      "nonzero_bytes": 650,
+      "source_owner": "initializer_callbacks/pcm22_remaining_native/initialized_data.c"
+    },
+    {
+      "input_start": "0x434431",
+      "input_length": 48,
+      "input_sha256": "5a14fdce36feee1baa2671a18a80b296b5fdde8a06709bde95cc0e75e57feb26",
+      "output_start": "0x20080000",
+      "output_length": 4096,
+      "output_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "nonzero_bytes": 0,
+      "source_owner": "initializer_callbacks/pcm22_remaining_native/initialized_data.c zero installer"
+    }
+  ],
+  "itcm_source_section_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "selected_objects": 331,
+  "providers": 903,
+  "unresolved": 5,
+  "limits": [
+    "Decoded stock streams are oracle inputs only; selected scatter records for all three streams now carry no stock payload offset.",
+    "ITCM code bytes equal source assembly section; final linker must place/load that section in source image and copy it before use.",
+    "The 1371-byte C initializer retains numeric address-valued fields and unsupported callback contracts; source address attribution and final relocations remain open.",
+    "Archive compilation does not establish final image layout or runtime equality of the modified adapter."
+  ]
+}

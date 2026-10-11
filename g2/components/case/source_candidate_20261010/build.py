@@ -6,13 +6,34 @@ ROOT=Path(__file__).resolve().parents[4]
 HERE=Path(__file__).resolve().parent
 REPORT=ROOT/'g2/analysis/case-source-candidate-round2-20261010'
 SOURCES=[
- 'source_candidate_20261010/evidenced_providers.c', 'binary_forward_offline/forward.c','deferred_consumer_offline/consumer.c',
- 'deferred_event_offline/deferred.c','event_flags_offline/events.c',
- 'event_waiters_offline/waiters.c','frame_callback_offline/frame.c',
+ 'source_candidate_20261010/evidenced_providers.c', 'source_candidate_20261010/control_providers.c', 'source_candidate_20261010/ack_provider.c', 'source_candidate_20261010/mask_providers.c', 'source_candidate_20261010/scheduler_state.c', 'source_candidate_20261010/yield_request.c', 'source_candidate_20261010/critical_providers.c', 'source_candidate_20261010/suspend_scheduler.c', 'source_candidate_20261010/event_get_isr.c', 'source_candidate_20261010/event_clear_isr.c', 'source_candidate_20261010/event_clear_callback.c', 'source_candidate_20261010/event_clear_task.c', 'binary_forward_offline/forward.c','deferred_consumer_offline/consumer.c',
+ 'scheduler_list_candidate_20261010/waiter.c',
+ 'scheduler_list_candidate_20261010/resume.c',
+ 'scheduler_list_candidate_20261010/tick.c',
+ 'scheduler_list_candidate_20261010/disinherit.c',
+ 'scheduler_list_candidate_20261010/unblock.c',
+ 'source_candidate_20261010/send_provider.c',
+ 'source_candidate_20261010/hex_log_provider.c',
+ 'source_candidate_20261010/log_wrapper_provider.c',
+ 'source_candidate_20261010/uart_write_provider.c',
+ 'source_candidate_20261010/tick_word_provider.c',
+ 'source_candidate_20261010/uart_wait_provider.c',
+ 'source_candidate_20261010/uart_read_provider.c',
+ 'source_candidate_20261010/uart_event_callback.c',
+ 'source_candidate_20261010/uart_rx_complete_callback.c',
+ 'source_candidate_20261010/timer_pend_export.c','event_flags_offline/events.c',
+ 'source_candidate_20261010/event_set_task.c','frame_callback_offline/frame.c',
  'frame_dispatch_offline/dispatch.c','local_commands_offline/local.c',
- 'uart_error_atomic_offline/uart.c','uart_receive_offline/receive.c',
+ 'uart_error_atomic_offline/uart.c',
+ 'source_candidate_20261010/uart_irq_continuations.c',
+ 'source_candidate_20261010/uart_irq_toidle_dma.c',
+ 'source_candidate_20261010/uart_irq_toidle_no_dma.c',
+ 'source_candidate_20261010/uart_irq_mixed_tail.c',
+ 'source_candidate_20261010/dma_abort_provider.c',
+ 'source_candidate_20261010/tx_complete_provider.c',
+ 'uart_receive_offline/receive.c',
  'uart_start_offline/start.c']
-CLANG='/usr/bin/clang'; AR='/opt/homebrew/bin/arm-none-eabi-ar'; NM='/opt/homebrew/bin/arm-none-eabi-nm'
+CLANG='/usr/bin/clang'; AR='/opt/homebrew/bin/arm-none-eabi-ar'; NM='/opt/homebrew/bin/arm-none-eabi-nm'; LD='/opt/homebrew/bin/arm-none-eabi-ld'
 FLAGS=['--target=arm-none-eabi','-mcpu=cortex-m0plus','-mthumb','-mfloat-abi=soft','-std=c11','-Os','-ffreestanding','-fno-builtin','-ffunction-sections','-fdata-sections','-Wall','-Wextra']
 OUT=HERE/'build'; OUT.mkdir(exist_ok=True)
 receipts=[]; objects=[]
@@ -36,7 +57,11 @@ rebuild=subprocess.run(cmd,text=True,capture_output=True)
 if rebuild.returncode: raise SystemExit(rebuild.stderr)
 second_hash=hashlib.sha256(archive.read_bytes()).hexdigest()
 if first_hash!=second_hash: raise SystemExit('nondeterministic archive rebuild')
-cmdnm=[NM,'-A',*[str(x) for x in objects]]
+relocatable=OUT/'case_source_candidate.o'
+cmdld=[LD,'-r','--whole-archive',str(archive),'--no-whole-archive','-o',str(relocatable)]
+linked=subprocess.run(cmdld,text=True,capture_output=True)
+if linked.returncode: raise SystemExit(linked.stderr)
+cmdnm=[NM,'-A','-g',*[str(x) for x in objects]]
 nm=subprocess.run(cmdnm,text=True,capture_output=True,check=True).stdout
 (REPORT/'nm.txt').write_text(nm)
 provides=set(); needs=set()
@@ -46,6 +71,8 @@ for line in nm.splitlines():
  typ,sym=parts[-2:]
  if typ=='U': needs.add(sym)
  elif typ.upper() in ('T','D','B','R','C','W'): provides.add(sym)
-receipt={'target':'arm-none-eabi cortex-m0plus thumb soft float','python_interpreter':sys.executable,'python_version':sys.version.split()[0],'tool_versions':{x:subprocess.run([v,'--version'],capture_output=True,text=True).stdout.splitlines()[0] for x,v in [('clang',CLANG),('ar',AR),('nm',NM)]},'tool_sha256':{x:hashlib.sha256(Path(v).read_bytes()).hexdigest() for x,v in [('clang',CLANG),('ar',AR),('nm',NM)]},'flags':FLAGS,'sources':receipts,'archive':str(archive.relative_to(ROOT)),'archive_sha256':second_hash,'archive_rebuild_same_sha256':first_hash==second_hash,'archive_command':shlex.join(cmd),'nm_command':shlex.join(cmdnm),'provided_symbols':sorted(provides),'unresolved_symbols':sorted(needs-provides),'source_count':len(SOURCES),'object_count':len(objects)}
+link_undefined={line.split()[-1] for line in subprocess.run([NM,'-u',str(relocatable)],text=True,capture_output=True,check=True).stdout.splitlines() if line.split()}
+if link_undefined != needs-provides: raise SystemExit('relocatable undefined symbols differ from member census')
+receipt={'target':'arm-none-eabi cortex-m0plus thumb soft float','python_interpreter':sys.executable,'python_version':sys.version.split()[0],'tool_versions':{x:subprocess.run([v,'--version'],capture_output=True,text=True).stdout.splitlines()[0] for x,v in [('clang',CLANG),('ar',AR),('nm',NM),('ld',LD)]},'tool_sha256':{x:hashlib.sha256(Path(v).read_bytes()).hexdigest() for x,v in [('clang',CLANG),('ar',AR),('nm',NM),('ld',LD)]},'flags':FLAGS,'sources':receipts,'archive':str(archive.relative_to(ROOT)),'archive_sha256':second_hash,'archive_rebuild_same_sha256':first_hash==second_hash,'archive_command':shlex.join(cmd),'relocatable':str(relocatable.relative_to(ROOT)),'relocatable_sha256':hashlib.sha256(relocatable.read_bytes()).hexdigest(),'relocatable_command':shlex.join(cmdld),'nm_command':shlex.join(cmdnm),'provided_symbols':sorted(provides),'unresolved_symbols':sorted(needs-provides),'source_count':len(SOURCES),'object_count':len(objects)}
 (REPORT/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
 print(json.dumps({'source_count':len(SOURCES),'provided':len(provides),'unresolved':receipt['unresolved_symbols']},indent=2))

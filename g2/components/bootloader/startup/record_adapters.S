@@ -9,7 +9,7 @@
 .thumb_func
 opencfw_boot_expand_adapter:
     mov r1,r9
-    b.w opencfw_boot_expand_record
+    b.w opencfw_boot_expand_locked_data_record
 .section .boot_zero_adapter,"ax",%progbits
 .global opencfw_boot_zero_adapter
 .thumb_func

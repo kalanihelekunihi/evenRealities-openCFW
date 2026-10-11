@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "cases": 500,
+  "original_address": "0x44b610",
+  "original_extent": "0x44b610..0x44b63a",
+  "source_sha256": "6b3d6f3b462da1008ca2307a05aef02ebe249af8f0498eec2909153c0ab49fc6",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "compile_command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/smp_provider_candidates_20261010/compare.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/smp-provider-candidate-20261010/compare.o"
+  ],
+  "limits": [
+    "Cortex-M55 compilation; Cortex-M4 Unicorn comparison on synthetic RAM strings.",
+    "Caller literal/data identity and source archive integration remain separate."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "codec_irq_status",
+  "original_entry": "0x58e80e",
+  "caller": "g2/components/audio/codec_uart_irq_offline/irq.c",
+  "caller_abi": "uint32_t(void*,uint32_t*,uint32_t); result ignored",
+  "source_sha256": "a05a356e431c044e1be134be7439412b56b97e4651b91a4a9dc2e6683810607f",
+  "object_sha256": "9b14751caec1654f2fddcaa398f971c694e87637f43c14c6589da5057f6ba3c5",
+  "full_dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/codec_irq_status_provider.c": "a05a356e431c044e1be134be7439412b56b97e4651b91a4a9dc2e6683810607f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "execution": "codec-irq-status-execution.json",
+  "fresh_cases": 144,
+  "limits": [
+    "Null handle/output fault attempts compared before exception delivery; synthetic UART IRQ status registers."
+  ]
+}

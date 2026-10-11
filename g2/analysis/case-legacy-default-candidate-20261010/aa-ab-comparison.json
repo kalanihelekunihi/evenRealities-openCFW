@@ -1,0 +1,841 @@
+{
+  "status": "PASS_AA_AB_BOUNDED_BRANCHES",
+  "cases": 36,
+  "image_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "3ee33bf5bfe869f86953ccf01b26e4bbbe3d5b190285cad6960cd3f73cb57274",
+  "elf_sha256": "610c32a886a2d9d10aca412fdb601084c42394151d301e7698341d38923f8e50",
+  "limits": [
+    "Only aa and ab table branches; three lower children controlled.",
+    "No public legacy handler or physical lower effects."
+  ],
+  "rows": [
+    {
+      "opcode": 170,
+      "length": 0,
+      "flag": 0,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "aa_first",
+            0
+          ],
+          [
+            "aa_second",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 0,
+      "flag": 0,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 2271560481,
+        "events": [
+          [
+            "aa_first",
+            0
+          ],
+          [
+            "aa_second",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 0,
+      "flag": 1,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "aa_first",
+            1
+          ],
+          [
+            "aa_second",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 0,
+      "flag": 1,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 2271560481,
+        "events": [
+          [
+            "aa_first",
+            1
+          ],
+          [
+            "aa_second",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 0,
+      "flag": 127,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "aa_first",
+            127
+          ],
+          [
+            "aa_second",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 0,
+      "flag": 127,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 2271560481,
+        "events": [
+          [
+            "aa_first",
+            127
+          ],
+          [
+            "aa_second",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 1,
+      "flag": 0,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "aa_first",
+            0
+          ],
+          [
+            "aa_second",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 1,
+      "flag": 0,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 2271560481,
+        "events": [
+          [
+            "aa_first",
+            0
+          ],
+          [
+            "aa_second",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 1,
+      "flag": 1,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "aa_first",
+            1
+          ],
+          [
+            "aa_second",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 1,
+      "flag": 1,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 2271560481,
+        "events": [
+          [
+            "aa_first",
+            1
+          ],
+          [
+            "aa_second",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 1,
+      "flag": 127,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "aa_first",
+            127
+          ],
+          [
+            "aa_second",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 1,
+      "flag": 127,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 2271560481,
+        "events": [
+          [
+            "aa_first",
+            127
+          ],
+          [
+            "aa_second",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 8,
+      "flag": 0,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "aa_first",
+            0
+          ],
+          [
+            "aa_second",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 8,
+      "flag": 0,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 2271560481,
+        "events": [
+          [
+            "aa_first",
+            0
+          ],
+          [
+            "aa_second",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 8,
+      "flag": 1,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "aa_first",
+            1
+          ],
+          [
+            "aa_second",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 8,
+      "flag": 1,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 2271560481,
+        "events": [
+          [
+            "aa_first",
+            1
+          ],
+          [
+            "aa_second",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 8,
+      "flag": 127,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "aa_first",
+            127
+          ],
+          [
+            "aa_second",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 170,
+      "length": 8,
+      "flag": 127,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 2271560481,
+        "events": [
+          [
+            "aa_first",
+            127
+          ],
+          [
+            "aa_second",
+            305419896
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 0,
+      "flag": 0,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "ab_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 0,
+      "flag": 0,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 4276993775,
+        "events": [
+          [
+            "ab_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 0,
+      "flag": 1,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "ab_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 0,
+      "flag": 1,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 4276993775,
+        "events": [
+          [
+            "ab_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 0,
+      "flag": 127,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "ab_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 0,
+      "flag": 127,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 4276993775,
+        "events": [
+          [
+            "ab_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 1,
+      "flag": 0,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "ab_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 1,
+      "flag": 0,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 4276993775,
+        "events": [
+          [
+            "ab_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 1,
+      "flag": 1,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "ab_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 1,
+      "flag": 1,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 4276993775,
+        "events": [
+          [
+            "ab_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 1,
+      "flag": 127,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "ab_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 1,
+      "flag": 127,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 4276993775,
+        "events": [
+          [
+            "ab_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 8,
+      "flag": 0,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "ab_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 8,
+      "flag": 0,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 4276993775,
+        "events": [
+          [
+            "ab_child",
+            0
+          ]
+        ],
+        "writes": [],
+        "flag": "00"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 8,
+      "flag": 1,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "ab_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 8,
+      "flag": 1,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 4276993775,
+        "events": [
+          [
+            "ab_child",
+            1
+          ]
+        ],
+        "writes": [],
+        "flag": "01"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 8,
+      "flag": 127,
+      "returns": [
+        0,
+        0,
+        0
+      ],
+      "comparison": {
+        "return_value": 0,
+        "events": [
+          [
+            "ab_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    },
+    {
+      "opcode": 171,
+      "length": 8,
+      "flag": 127,
+      "returns": [
+        305419896,
+        2271560481,
+        4276993775
+      ],
+      "comparison": {
+        "return_value": 4276993775,
+        "events": [
+          [
+            "ab_child",
+            127
+          ]
+        ],
+        "writes": [],
+        "flag": "7f"
+      }
+    }
+  ]
+}

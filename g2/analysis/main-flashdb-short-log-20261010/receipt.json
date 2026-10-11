@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "cases": 324,
+  "stock_body_sha256": "e12619a59901ab35a2e841248baf0175ef61c0d4a6a66d16ae088d662f8af57e",
+  "source_sha256": "99a38dc5ba2c997466b03dc8d5723c323ab1baa6f56d238d667ccde6880796a2",
+  "elf_sha256": "7fd6d9e10fb64a52d0db3b0d2ed087788294ae7aea184dd5e1f56b9ba1b40c05",
+  "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "compile": [
+    "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfloat-abi=hard",
+    "-mfpu=fpv5-d16",
+    "-O0",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_candidate_compress",
+    "-Wl,--defsym=audio_log_policy=0x44a9af",
+    "-Wl,--defsym=audio_lock_take=0x441751",
+    "-Wl,--defsym=audio_lock_give=0x441711",
+    "-Wl,--defsym=audio_log_short_format=0x43cb85",
+    "-Wl,--defsym=audio_log_lock_state=0x20074388",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/short_log_wrapper.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/short_log_wrapper.elf"
+  ],
+  "limits": "Lower policy, lock and formatter are ABI interceptions; caller has valid format and four varargs; interrupt and lock state are synthetic."
+}

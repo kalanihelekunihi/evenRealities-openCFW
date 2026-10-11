@@ -41,7 +41,12 @@ uint32_t opencfw_boot_nor_erase(uint32_t address) {
     ++erases;
     return 0;
 }
-void opencfw_boot_fs_error(uintptr_t format, ...) { (void)format; ++logs; }
+void opencfw_boot_elog_output(uint32_t level, const char *tag, const char *file,
+    const char *function, long line, const char *format, ...) {
+    (void)level; (void)tag; (void)file; (void)function; (void)line;
+    (void)format; ++logs;
+}
+void opencfw_boot_fs_printf(uintptr_t format, ...) { (void)format; ++logs; }
 uint32_t opencfw_boot_fs_mutex_acquire(uintptr_t mutex, uint32_t timeout) { (void)mutex; (void)timeout; assert(0); return 0; }
 void opencfw_boot_fs_mutex_release(uintptr_t mutex) { (void)mutex; assert(0); }
 void *opencfw_boot_fs_alloc(uint32_t size) { return malloc(size); }

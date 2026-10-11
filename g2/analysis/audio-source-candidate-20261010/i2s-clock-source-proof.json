@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "original_entry": "0x58fd1c",
+  "source_names": [
+    "audio_i2s_clock_source",
+    "audio_power_clock_source"
+  ],
+  "caller_abi": "Both selected callers declare uint32_t(uint32_t), then narrow return to uint8_t for clock release/acquire.",
+  "same_object_symbol_offset": "0x0",
+  "source_sha256": "9d25808bcc03133caa6cf10ee20d009b9afe481b2d484f4ad17e7c4f6b3dcf73",
+  "archive_object_sha256": "9d863160284cc2dd322de1b35288eb4d01091e82e0064d4271dd3e557861b31a",
+  "dependency_sha256": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/source_candidate_20261010/i2s_clock_source_provider.c": "9d25808bcc03133caa6cf10ee20d009b9afe481b2d484f4ad17e7c4f6b3dcf73",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+  },
+  "archive_sha256": "98be06ac52e40b3967c5d9c95db445cb356c181bb185ca52429da639eba6e806",
+  "comparison_object_sha256": "c5ff89e840328cfc51b1a4cf83fba600c4c45b5d0a608cc4ffe40d1c4646e8e6",
+  "original_body_sha256": "2e63fdbb5680af731c9fc4b4bdfd54d76a9388452d03c367bc633cf8e375633f",
+  "original_source_cases": 384,
+  "comparison_scope": "Clang Cortex-M4 O2 same source; archive remains Clang Cortex-M55 O2, source/ABI/hash checked but archive object not executed. Synthetic MMIO only."
+}

@@ -1,0 +1,17 @@
+/* Main 0x481836 candidate: adapted from pinned IAR Bootloader source;
+ * identical 1270-instruction core topology except 23 relocated BL sites. */
+/* Preserve the stock232-byte entry frame so decimal digit scratch retains the
+ * actual prior stack bytes on generation-budget overflow paths. No opcode array. */
+#include "engine.h"
+__attribute__((naked)) int32_t g2_iar_general_format(g2_main_format_put put,void *context,const char *format,uint32_t **cursor,unsigned mode){__asm__ volatile(
+ "push.w {r0,r4,r5,r6,r7,r8,r9,r10,r11,lr}\n"
+ "sub sp,#192\n"
+ "mov r4,sp\n"
+ "ldr r5,[sp,#232]\n"
+ "sub sp,#8\n"
+ "str r5,[sp]\n"
+ "str r4,[sp,#4]\n"
+ "bl g2_main_iar_format_core\n"
+ "add sp,#8\n"
+ "add sp,#196\n"
+ "pop.w {r4,r5,r6,r7,r8,r9,r10,r11,pc}\n");}

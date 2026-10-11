@@ -4,12 +4,14 @@
  * Runtime-enable/error transaction and queue implementation are dependencies.
  */
 #include "task.h"
+#include "../log_call_adapters/log_adapters.h"
 #include "../update_core/update_core.h"
 #include <string.h>
 #define IMAGE ((opencfw_boot_image_header *)(uintptr_t)0x20026ef8u)
 #define HANDLE ((uint32_t *)(uintptr_t)0x20027174u)
 #define QUEUE (*(uint32_t volatile *)(uintptr_t)0x200004d8u)
-#define PATH 0x004336e4u
+extern const char opencfw_update_path_4336e4[];
+#define PATH ((uintptr_t)opencfw_update_path_4336e4)
 static uint32_t stack_word(void) {
     return *(volatile uint32_t *)(uintptr_t)IMAGE->destination;
 }
@@ -43,7 +45,7 @@ void opencfw_boot_dfu_task(void) {
             uint32_t got=opencfw_boot_file_read(IMAGE,1,32,*HANDLE);
             if(*HANDLE) {opencfw_boot_file_close(*HANDLE);*HANDLE=0;}
             if(got!=32u) {
-                opencfw_boot_dfu_log(1,0x214u);
+                opencfw_dfu_log_detail_native(1,0x214u,got);
                 opencfw_boot_dfu_error_transaction();
                 continue;
             }

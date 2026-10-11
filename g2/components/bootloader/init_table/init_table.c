@@ -3,6 +3,7 @@
  * The sorter is reconstructed in qsort.c and has independent stock tests.
  */
 #include "init_table.h"
+extern const struct opencfw_boot_init_record opencfw_boot_initializer_callback_records[4];
 
 extern void opencfw_boot_init_sort(
     void *base, uint32_t count, uint32_t record_size,
@@ -41,10 +42,10 @@ void opencfw_boot_init_table_run(const struct opencfw_boot_init_record *begin,
     }
 }
 
-/* Fixed-table entry consumed by the locked-image startup path. */
+/* The authenticated four-record order is source-owned callback data. */
 void opencfw_boot_init_table_default(void)
 {
     opencfw_boot_init_table_run(
-        (const struct opencfw_boot_init_record *)(uintptr_t)0x433440u,
-        (const struct opencfw_boot_init_record *)(uintptr_t)0x433460u);
+        opencfw_boot_initializer_callback_records,
+        opencfw_boot_initializer_callback_records + 4);
 }

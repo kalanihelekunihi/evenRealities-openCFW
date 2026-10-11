@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "comparisons": 2016,
+  "path_shapes": 4,
+  "original": "0x542960..0x5429f2",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_sha256": "3aeb5d0178989b9ebfc97cb446d993c6ee46a6ec57e06cc00d5c1f0411e04d13",
+  "compile_command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-Oz",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/smp_db_candidates_20261010/db_service.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/smp-db-candidate-20261010/db_service.o"
+  ],
+  "limits": [
+    "Synthetic 10-row DB and timer state; timer-start provider callback observed, not implemented.",
+    "Cortex-M55 compile and Cortex-M4 Unicorn original/source comparisons; no initialized device database, wall-clock timing or byte identity."
+  ]
+}

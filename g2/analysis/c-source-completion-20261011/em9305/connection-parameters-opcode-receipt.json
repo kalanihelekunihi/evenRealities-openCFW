@@ -1,0 +1,11 @@
+{
+  "primary_source": "g2/build/pseudocode-first/20260930T190500Z/tools/arc-binutils-001/source/opcodes/arc-tbl.h",
+  "sha256": "516563e6a138c22a67d012b20b6e0ed0782df74ae645bba7b5eaa389b23abb28",
+  "native_instructions": [
+    "30a6e0 mpywhul r1,r0,r3",
+    "30a6f0 mpyuw_s r2,r2,r13",
+    "30a6f2 mpywhl r0,r1,r0"
+  ],
+  "decode_options": "-EL -b binary -m EM -M cpu=em,dsp",
+  "scope": "Named DSP operations retained in target C; host contract arithmetic not native ISA equality"
+}

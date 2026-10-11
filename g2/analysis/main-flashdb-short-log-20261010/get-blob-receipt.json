@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "cases": 864,
+  "stock_body_sha256": "03a3cfe2718933bc5462526c4871406610ef93f5f36dbe768ad7abccc998c254",
+  "source_sha256": "f0ec214614517fd9a25cd2e8faa678c455a328b18d8af2341a2ff1efd267dbbb",
+  "elf_sha256": "27f26107c6e0636390224143d88db42039c9e5f8b6206c8092f18b4a9967e77f",
+  "compile": [
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-Oz",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x10001000",
+    "-Wl,-e,g2_flashdb_candidate_get_blob",
+    "-Wl,--defsym=g2_flashdb_get_kv=0x5444f5",
+    "-Wl,--defsym=g2_flashdb_db_path=0x585c95",
+    "-Wl,--defsym=g2_flashdb_print=0x4733ef",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/main/flashdb_get_blob_candidates_20261010/get_blob.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/main-flashdb-short-log-20261010/flashdb-get-blob.elf"
+  ],
+  "limits": "Pinned local body with synthetic get_kv, db-name, print, lock/unlock callbacks and initialized RAM; no complete lookup/FAL/logger or DB object lifecycle."
+}

@@ -1,0 +1,148 @@
+{
+  "status": "PASS",
+  "cases": 24,
+  "original_extent_bytes": 20,
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "source_sha256": "5b1070095ddc14af7aa3623544edf441f584a0c897e4d84a60bbee29a7afd581",
+  "compiler_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "elf_sha256": "42c1b79c3b1f4c162d0a3e763248face15f55d34419a7ba1ce05ad31a2e39fc7",
+  "command": [
+    "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-Wl,-Ttext=0x100000",
+    "-Wl,-e,xEventGroupClearBitsFromISR",
+    "-Wl,--defsym=xTimerPendFunctionCallFromISR=0x00100f01",
+    "-Wl,--defsym=vEventGroupClearBitsCallback=0x00100f11",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/event_clear_isr.c",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/case-event-clear-isr-20261010/event_clear_isr.elf"
+  ],
+  "results": [
+    {
+      "event": 0,
+      "bits": 0,
+      "child_result": 0
+    },
+    {
+      "event": 0,
+      "bits": 0,
+      "child_result": 1
+    },
+    {
+      "event": 0,
+      "bits": 0,
+      "child_result": 4294967295
+    },
+    {
+      "event": 0,
+      "bits": 1,
+      "child_result": 0
+    },
+    {
+      "event": 0,
+      "bits": 1,
+      "child_result": 1
+    },
+    {
+      "event": 0,
+      "bits": 1,
+      "child_result": 4294967295
+    },
+    {
+      "event": 0,
+      "bits": 8388608,
+      "child_result": 0
+    },
+    {
+      "event": 0,
+      "bits": 8388608,
+      "child_result": 1
+    },
+    {
+      "event": 0,
+      "bits": 8388608,
+      "child_result": 4294967295
+    },
+    {
+      "event": 0,
+      "bits": 4294967295,
+      "child_result": 0
+    },
+    {
+      "event": 0,
+      "bits": 4294967295,
+      "child_result": 1
+    },
+    {
+      "event": 0,
+      "bits": 4294967295,
+      "child_result": 4294967295
+    },
+    {
+      "event": 536891392,
+      "bits": 0,
+      "child_result": 0
+    },
+    {
+      "event": 536891392,
+      "bits": 0,
+      "child_result": 1
+    },
+    {
+      "event": 536891392,
+      "bits": 0,
+      "child_result": 4294967295
+    },
+    {
+      "event": 536891392,
+      "bits": 1,
+      "child_result": 0
+    },
+    {
+      "event": 536891392,
+      "bits": 1,
+      "child_result": 1
+    },
+    {
+      "event": 536891392,
+      "bits": 1,
+      "child_result": 4294967295
+    },
+    {
+      "event": 536891392,
+      "bits": 8388608,
+      "child_result": 0
+    },
+    {
+      "event": 536891392,
+      "bits": 8388608,
+      "child_result": 1
+    },
+    {
+      "event": 536891392,
+      "bits": 8388608,
+      "child_result": 4294967295
+    },
+    {
+      "event": 536891392,
+      "bits": 4294967295,
+      "child_result": 0
+    },
+    {
+      "event": 536891392,
+      "bits": 4294967295,
+      "child_result": 1
+    },
+    {
+      "event": 536891392,
+      "bits": 4294967295,
+      "child_result": 4294967295
+    }
+  ],
+  "scope": "Deferred-call argument/return contract; timer queue and callback bodies external."
+}

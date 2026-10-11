@@ -1,0 +1,53 @@
+{
+  "captured_utc": "2026-10-11T00:28:28.107357+00:00",
+  "status": "ABI_COMPATIBLE_ISOLATED_ALIAS_UNSELECTED",
+  "files": {
+    "vformat_alias_source": {
+      "path": "g2/analysis/main-print-lower-frontier-20261010/vformat_alias.S",
+      "sha256": "ff13bb1aa3ca98dfdd6969a212310bde1ebe99a11a87440d21a549dc4583b5f3",
+      "bytes": 242
+    },
+    "vformat_alias_object": {
+      "path": "g2/analysis/main-print-lower-frontier-20261010/vformat_alias.o",
+      "sha256": "3e2ccc777937e0cce08ea66e474931d3f2466c4dc721870f262b26f6bbd0d56f",
+      "bytes": 548
+    },
+    "abi_probe_source": {
+      "path": "g2/analysis/main-print-lower-frontier-20261010/abi_probe.c",
+      "sha256": "68a88f758347eb87cf8c5c1d448b2988388499259ba4e40b9671f709be8ec0a1",
+      "bytes": 339
+    },
+    "abi_probe_object": {
+      "path": "g2/analysis/main-print-lower-frontier-20261010/abi_probe.o",
+      "sha256": "7c1810fea1ac529837cf0c508dd2d5c1effe6c82890a41a2601927fa5eed534a",
+      "bytes": 892
+    },
+    "existing_ambiq_adaptation": {
+      "path": "g2/components/audio/main_formatter_offline/format.c",
+      "sha256": "92563c1b28c8b3b70238d9605f7e344e639d64d6c1b359ff3a4c9e20e8de8215",
+      "bytes": 26974
+    },
+    "existing_88_case_receipt": {
+      "path": "g2/analysis/audio-main-formatter-source-successor-2026-10-09/results.json",
+      "sha256": "fe2d7b2d222def610d309f60eac2f42a2c472194e36a5cd307d483b1885081a3",
+      "bytes": 387396
+    },
+    "existing_96_case_receipt": {
+      "path": "g2/analysis/main-flashdb-short-log-20261010/flashdb-print-receipt.json",
+      "sha256": "7815c6d551d080b6b4eea3c8abf990066b6fef326c5262fbdac35e1d4b8c8e24",
+      "bytes": 1242
+    }
+  },
+  "alias_relocation": "R_ARM_THM_JUMP24 audio_heap_formatter",
+  "arm_va_list_bytes": 4,
+  "existing_formatter_cases_reused": 88,
+  "existing_print_wrapper_cases_reused": 96,
+  "fresh_original_source_cases": 0,
+  "main_archive_delta": 0,
+  "main_unresolved_names": 9,
+  "lower_print_imports_remaining": [
+    "g2_flashdb_print_buffer",
+    "g2_flashdb_print_sink",
+    "g2_flashdb_vformat"
+  ]
+}

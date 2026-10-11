@@ -1,0 +1,2434 @@
+{
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-hooks-double-read/boot.elf",
+  "catalogue_entries": 903,
+  "entries_with_source_attribution_leads": 649,
+  "entries_without_machine_crosswalk": 254,
+  "unattributed_entries_with_linked_identified_caller_lead": 4,
+  "unattributed_entries_without_linked_identified_caller_lead": 250,
+  "limits": [
+    "The catalogue recognizes functions but does not establish complete firmware code extents.",
+    "A linked identified source caller and a native call edge together prioritize review; they do not prove source reachability or missing implementation.",
+    "Crosswalk source leads are candidate attribution, not whole-body equivalence."
+  ],
+  "frontier": [
+    {
+      "entry": "0x00414948",
+      "native_name": "FUN_00414948",
+      "body_bytes": 8,
+      "native_direct_callers": [
+        "0x00414650",
+        "0x0041513c"
+      ],
+      "linked_identified_source_caller_leads": [
+        "0x0041513c"
+      ]
+    },
+    {
+      "entry": "0x0041715c",
+      "native_name": "FUN_0041715c",
+      "body_bytes": 164,
+      "native_direct_callers": [
+        "0x00417240"
+      ],
+      "linked_identified_source_caller_leads": [
+        "0x00417240"
+      ]
+    },
+    {
+      "entry": "0x00417208",
+      "native_name": "FUN_00417208",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x00417240"
+      ],
+      "linked_identified_source_caller_leads": [
+        "0x00417240"
+      ]
+    },
+    {
+      "entry": "0x0041b854",
+      "native_name": "FUN_0041b854",
+      "body_bytes": 14,
+      "native_direct_callers": [
+        "0x0041a692"
+      ],
+      "linked_identified_source_caller_leads": [
+        "0x0041a692"
+      ]
+    },
+    {
+      "entry": "0x00411be4",
+      "native_name": "FUN_00411be4",
+      "body_bytes": 32,
+      "native_direct_callers": [
+        "0x00412784",
+        "0x00412fae",
+        "0x0041315c",
+        "0x0041450e",
+        "0x00414954",
+        "0x00414ada",
+        "0x00414d18",
+        "0x00414db8",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410b46",
+      "native_name": "FUN_00410b46",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00411670",
+        "0x00411caa",
+        "0x004122d2",
+        "0x00412784",
+        "0x00412b80",
+        "0x00412fae",
+        "0x0041315c",
+        "0x00414b64",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410bc0",
+      "native_name": "FUN_00410bc0",
+      "body_bytes": 6,
+      "native_direct_callers": [
+        "0x00410bc6",
+        "0x00410c14",
+        "0x00410c2a",
+        "0x00410c4c",
+        "0x00410f42",
+        "0x004110d0",
+        "0x004112b4",
+        "0x00413586",
+        "0x00414c40"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410af2",
+      "native_name": "FUN_00410af2",
+      "body_bytes": 42,
+      "native_direct_callers": [
+        "0x00410c64",
+        "0x00412208",
+        "0x004122d2",
+        "0x004125a8",
+        "0x00412784",
+        "0x00412b80",
+        "0x00414ada",
+        "0x00414b64"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004169fc",
+      "native_name": "FUN_004169fc",
+      "body_bytes": 20,
+      "native_direct_callers": [
+        "0x00416a2c",
+        "0x00416ad0",
+        "0x00416e04",
+        "0x00416e26",
+        "0x00416e48",
+        "0x00416e60",
+        "0x00416f20",
+        "0x0041707c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004110d0",
+      "native_name": "FUN_004110d0",
+      "body_bytes": 40,
+      "native_direct_callers": [
+        "0x00411c04",
+        "0x00411caa",
+        "0x0041315c",
+        "0x00413586",
+        "0x00414650",
+        "0x00414954",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410ad8",
+      "native_name": "FUN_00410ad8",
+      "body_bytes": 26,
+      "native_direct_callers": [
+        "0x004122d2",
+        "0x00413ac4",
+        "0x00414650",
+        "0x00414954",
+        "0x00414ada",
+        "0x00414baa",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410522",
+      "native_name": "FUN_00410522",
+      "body_bytes": 8,
+      "native_direct_callers": [
+        "0x00410802",
+        "0x004108c4",
+        "0x004122d2",
+        "0x00412784",
+        "0x00413322",
+        "0x0041385e",
+        "0x004139a4"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00412f8c",
+      "native_name": "FUN_00412f8c",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x00412fae",
+        "0x00413586",
+        "0x00413ac4",
+        "0x0041450e",
+        "0x00414d18",
+        "0x00414db8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00411c04",
+      "native_name": "FUN_00411c04",
+      "body_bytes": 54,
+      "native_direct_callers": [
+        "0x004122d2",
+        "0x00412784",
+        "0x00412b80",
+        "0x00414650",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b53c",
+      "native_name": "FUN_0041b53c",
+      "body_bytes": 30,
+      "native_direct_callers": [
+        "0x00418a44",
+        "0x00419684",
+        "0x00419978",
+        "0x004199bc",
+        "0x00419be8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041052a",
+      "native_name": "FUN_0041052a",
+      "body_bytes": 26,
+      "native_direct_callers": [
+        "0x00410802",
+        "0x00413586",
+        "0x0041385e",
+        "0x00413cf0",
+        "0x00413ff8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410b5c",
+      "native_name": "FUN_00410b5c",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x004122d2",
+        "0x00412784",
+        "0x00412b80",
+        "0x00412fae",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410bc6",
+      "native_name": "FUN_00410bc6",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00410f42",
+        "0x004112b4",
+        "0x00411670",
+        "0x00411e9c",
+        "0x00412282"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00411e9c",
+      "native_name": "FUN_00411e9c",
+      "body_bytes": 182,
+      "native_direct_callers": [
+        "0x00411f52",
+        "0x00412296",
+        "0x004122d2",
+        "0x00412784"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004145fc",
+      "native_name": "FUN_004145fc",
+      "body_bytes": 80,
+      "native_direct_callers": [
+        "0x00414650",
+        "0x00414954",
+        "0x00414ada",
+        "0x00414baa"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00413234",
+      "native_name": "FUN_00413234",
+      "body_bytes": 68,
+      "native_direct_callers": [
+        "0x00413278",
+        "0x00413322",
+        "0x004134c4",
+        "0x00413f0c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004157c0",
+      "native_name": "FUN_004157c0",
+      "body_bytes": 52,
+      "native_direct_callers": [
+        "0x00410790",
+        "0x00411670",
+        "0x00411e60",
+        "0x00411f52"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410c64",
+      "native_name": "FUN_00410c64",
+      "body_bytes": 38,
+      "native_direct_callers": [
+        "0x00410f42",
+        "0x00411670",
+        "0x00412b80",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f424",
+      "native_name": "FUN_0041f424",
+      "body_bytes": 28,
+      "native_direct_callers": [
+        "0x0041b670",
+        "0x0041b6fa",
+        "0x0041b754",
+        "0x0041f440"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041cde0",
+      "native_name": "FUN_0041cde0",
+      "body_bytes": 26,
+      "native_direct_callers": [
+        "0x0041bae8",
+        "0x0041c4b4",
+        "0x0042f204",
+        "0x0042f2fa"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410b7c",
+      "native_name": "FUN_00410b7c",
+      "body_bytes": 20,
+      "native_direct_callers": [
+        "0x00410bc6",
+        "0x00410f42",
+        "0x0041121c",
+        "0x00414650"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416b14",
+      "native_name": "FUN_00416b14",
+      "body_bytes": 14,
+      "native_direct_callers": [
+        "0x00416b22",
+        "0x00416f20",
+        "0x0041702a",
+        "0x0041715c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a40",
+      "native_name": "FUN_00416a40",
+      "body_bytes": 12,
+      "native_direct_callers": [
+        "0x00416f62",
+        "0x00416fc6",
+        "0x0041702a",
+        "0x00417290"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410a7e",
+      "native_name": "FUN_00410a7e",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x00410a88",
+        "0x00410ab4",
+        "0x00412fae",
+        "0x00413586"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a9c",
+      "native_name": "FUN_00416a9c",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x00416ad0",
+        "0x00416d5c",
+        "0x00416e60",
+        "0x004170de"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00412162",
+      "native_name": "FUN_00412162",
+      "body_bytes": 160,
+      "native_direct_callers": [
+        "0x00412208",
+        "0x00412fae",
+        "0x0041450e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00414c40",
+      "native_name": "FUN_00414c40",
+      "body_bytes": 116,
+      "native_direct_callers": [
+        "0x00412b80",
+        "0x00412fae",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f440",
+      "native_name": "FUN_0041f440",
+      "body_bytes": 108,
+      "native_direct_callers": [
+        "0x0041b670",
+        "0x0041b6fa",
+        "0x0041b754"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00414cbc",
+      "native_name": "FUN_00414cbc",
+      "body_bytes": 78,
+      "native_direct_callers": [
+        "0x00412b80",
+        "0x00414db8",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410a36",
+      "native_name": "FUN_00410a36",
+      "body_bytes": 72,
+      "native_direct_callers": [
+        "0x004122d2",
+        "0x00413322",
+        "0x0041385e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416ad0",
+      "native_name": "FUN_00416ad0",
+      "body_bytes": 68,
+      "native_direct_callers": [
+        "0x00416b14",
+        "0x00416b38",
+        "0x00416fc6"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00430a60",
+      "native_name": "address_validate_430a60",
+      "body_bytes": 60,
+      "native_direct_callers": [
+        "0x00430a9c",
+        "0x00430ac4",
+        "0x00430aec"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004144dc",
+      "native_name": "FUN_004144dc",
+      "body_bytes": 50,
+      "native_direct_callers": [
+        "0x00413ff8",
+        "0x0041450e",
+        "0x00414948"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416bf8",
+      "native_name": "FUN_00416bf8",
+      "body_bytes": 46,
+      "native_direct_callers": [
+        "0x00416c26",
+        "0x00416e04",
+        "0x00416e26"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416e26",
+      "native_name": "FUN_00416e26",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x0041702a",
+        "0x0041715c",
+        "0x00417290"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004216b2",
+      "native_name": "FUN_004216b2",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x00421ba4",
+        "0x00421d28",
+        "0x00421e8c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410bdc",
+      "native_name": "FUN_00410bdc",
+      "body_bytes": 30,
+      "native_direct_callers": [
+        "0x00411c04",
+        "0x004122d2",
+        "0x00412784"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410bfa",
+      "native_name": "FUN_00410bfa",
+      "body_bytes": 26,
+      "native_direct_callers": [
+        "0x004122d2",
+        "0x00412784",
+        "0x00414650"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410c14",
+      "native_name": "FUN_00410c14",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00412b80",
+        "0x00414c40",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a2c",
+      "native_name": "FUN_00416a2c",
+      "body_bytes": 20,
+      "native_direct_callers": [
+        "0x00416ad0",
+        "0x00416f20",
+        "0x00416fc6"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a74",
+      "native_name": "FUN_00416a74",
+      "body_bytes": 14,
+      "native_direct_callers": [
+        "0x00416b22",
+        "0x0041702a",
+        "0x0041715c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410bae",
+      "native_name": "FUN_00410bae",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x00410f42",
+        "0x0041121c",
+        "0x00411670"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416aa6",
+      "native_name": "FUN_00416aa6",
+      "body_bytes": 4,
+      "native_direct_callers": [
+        "0x00416ad0",
+        "0x00416e60",
+        "0x0041715c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00413278",
+      "native_name": "FUN_00413278",
+      "body_bytes": 170,
+      "native_direct_callers": [
+        "0x00413b92",
+        "0x00413cf0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00413f0c",
+      "native_name": "FUN_00413f0c",
+      "body_bytes": 160,
+      "native_direct_callers": [
+        "0x00413fac",
+        "0x00415232"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416cc6",
+      "native_name": "FUN_00416cc6",
+      "body_bytes": 150,
+      "native_direct_callers": [
+        "0x00416e04",
+        "0x0041707c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00414baa",
+      "native_name": "FUN_00414baa",
+      "body_bytes": 122,
+      "native_direct_callers": [
+        "0x00412b80",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410790",
+      "native_name": "FUN_00410790",
+      "body_bytes": 114,
+      "native_direct_callers": [
+        "0x00411670",
+        "0x00411f52"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00414ada",
+      "native_name": "FUN_00414ada",
+      "body_bytes": 106,
+      "native_direct_callers": [
+        "0x00412784",
+        "0x00412b80"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00426d48",
+      "native_name": "float_gcd_426d48",
+      "body_bytes": 106,
+      "native_direct_callers": [
+        "0x00426db4",
+        "0x00427040"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422468",
+      "native_name": "debug_disable",
+      "body_bytes": 74,
+      "native_direct_callers": [
+        "0x00423d20",
+        "0x00423dd0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004108c4",
+      "native_name": "FUN_004108c4",
+      "body_bytes": 72,
+      "native_direct_callers": [
+        "0x00411f52",
+        "0x00413ac4"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042252e",
+      "native_name": "FUN_0042252e",
+      "body_bytes": 70,
+      "native_direct_callers": [
+        "0x0041c4b4",
+        "0x00422468"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416f20",
+      "native_name": "FUN_00416f20",
+      "body_bytes": 66,
+      "native_direct_callers": [
+        "0x00416f62",
+        "0x00416fc6"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004169a4",
+      "native_name": "FUN_004169a4",
+      "body_bytes": 62,
+      "native_direct_callers": [
+        "0x004169e2",
+        "0x004169f2"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041c9ca",
+      "native_name": "FUN_0041c9ca",
+      "body_bytes": 62,
+      "native_direct_callers": [
+        "0x0041a71e",
+        "0x0041c4b4"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00411e60",
+      "native_name": "FUN_00411e60",
+      "body_bytes": 60,
+      "native_direct_callers": [
+        "0x00411e9c",
+        "0x004122d2"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410d54",
+      "native_name": "FUN_00410d54",
+      "body_bytes": 54,
+      "native_direct_callers": [
+        "0x0041450e",
+        "0x00414d18"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004273dc",
+      "native_name": "syspll_disable_4273dc",
+      "body_bytes": 48,
+      "native_direct_callers": [
+        "0x00422220",
+        "0x00427310"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004122a6",
+      "native_name": "FUN_004122a6",
+      "body_bytes": 44,
+      "native_direct_callers": [
+        "0x004122d2",
+        "0x004125a8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410b1c",
+      "native_name": "FUN_00410b1c",
+      "body_bytes": 42,
+      "native_direct_callers": [
+        "0x004145fc",
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416ba4",
+      "native_name": "FUN_00416ba4",
+      "body_bytes": 42,
+      "native_direct_callers": [
+        "0x00416d5c",
+        "0x00416e60"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004234fa",
+      "native_name": "FUN_004234fa",
+      "body_bytes": 42,
+      "native_direct_callers": [
+        "0x004233e8",
+        "0x0042348e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410a88",
+      "native_name": "FUN_00410a88",
+      "body_bytes": 40,
+      "native_direct_callers": [
+        "0x00412fae",
+        "0x00413586"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041397c",
+      "native_name": "FUN_0041397c",
+      "body_bytes": 40,
+      "native_direct_callers": [
+        "0x00412b80",
+        "0x00413cf0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004150b0",
+      "native_name": "FUN_004150b0",
+      "body_bytes": 40,
+      "native_direct_callers": [
+        "0x00412fae",
+        "0x00413586"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004157f8",
+      "native_name": "FUN_004157f8",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x00410a7e",
+        "0x00411caa"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041581a",
+      "native_name": "FUN_0041581a",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x00410a88",
+        "0x00411caa"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416e04",
+      "native_name": "FUN_00416e04",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x00416f62",
+        "0x00416fc6"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004234d8",
+      "native_name": "FUN_004234d8",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x004233e8",
+        "0x00423444"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410ca8",
+      "native_name": "FUN_00410ca8",
+      "body_bytes": 30,
+      "native_direct_callers": [
+        "0x004122d2",
+        "0x00412784"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a10",
+      "native_name": "FUN_00416a10",
+      "body_bytes": 28,
+      "native_direct_callers": [
+        "0x00416e60",
+        "0x0041715c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410cf2",
+      "native_name": "FUN_00410cf2",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00413586",
+        "0x00414954"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416b22",
+      "native_name": "FUN_00416b22",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00416e60",
+        "0x00417290"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00417c64",
+      "native_name": "FUN_00417c64",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00415ffa",
+        "0x0041e47a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041cd34",
+      "native_name": "FUN_0041cd34",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x0041bf84",
+        "0x0041c17a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041cd4a",
+      "native_name": "FUN_0041cd4a",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x0041bf84",
+        "0x0041c17a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00427d98",
+      "native_name": "roundf_427d98",
+      "body_bytes": 16,
+      "native_direct_callers": [
+        "0x00426db4",
+        "0x00426eac"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a4c",
+      "native_name": "FUN_00416a4c",
+      "body_bytes": 14,
+      "native_direct_callers": [
+        "0x00416b22",
+        "0x0041715c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a5a",
+      "native_name": "FUN_00416a5a",
+      "body_bytes": 14,
+      "native_direct_callers": [
+        "0x00416b38",
+        "0x0041715c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a82",
+      "native_name": "FUN_00416a82",
+      "body_bytes": 14,
+      "native_direct_callers": [
+        "0x00416b38",
+        "0x0041715c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00414c34",
+      "native_name": "FUN_00414c34",
+      "body_bytes": 12,
+      "native_direct_callers": [
+        "0x00414650",
+        "0x00414d18"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a68",
+      "native_name": "FUN_00416a68",
+      "body_bytes": 12,
+      "native_direct_callers": [
+        "0x00416aaa",
+        "0x00416f62"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410ace",
+      "native_name": "FUN_00410ace",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x00411670",
+        "0x004122d2"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004169f2",
+      "native_name": "FUN_004169f2",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x00416bf8",
+        "0x00416c26"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f4b6",
+      "native_name": "FUN_0041f4b6",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x0041b6e2",
+        "0x0041b754"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410512",
+      "native_name": "FUN_00410512",
+      "body_bytes": 8,
+      "native_direct_callers": [
+        "0x00413586",
+        "0x00413ff8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041a69a",
+      "native_name": "FUN_0041a69a",
+      "body_bytes": 8,
+      "native_direct_callers": [
+        "0x00417570",
+        "0x00417b7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041a6a2",
+      "native_name": "FUN_0041a6a2",
+      "body_bytes": 8,
+      "native_direct_callers": [
+        "0x00417592",
+        "0x00417b7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422714",
+      "native_name": "FUN_00422714",
+      "body_bytes": 256,
+      "native_direct_callers": [
+        "0x00422700"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00421978",
+      "native_name": "FUN_00421978",
+      "body_bytes": 184,
+      "native_direct_callers": [
+        "0x004222a0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00414db8",
+      "native_name": "FUN_00414db8",
+      "body_bytes": 172,
+      "native_direct_callers": [
+        "0x004150b0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416d5c",
+      "native_name": "FUN_00416d5c",
+      "body_bytes": 168,
+      "native_direct_callers": [
+        "0x00416e26"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041315c",
+      "native_name": "FUN_0041315c",
+      "body_bytes": 166,
+      "native_direct_callers": [
+        "0x00415288"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00418b7c",
+      "native_name": "FUN_00418b7c",
+      "body_bytes": 162,
+      "native_direct_callers": [
+        "0x0041a24e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f918",
+      "native_name": "FUN_0041f918",
+      "body_bytes": 158,
+      "native_direct_callers": [
+        "0x0041b854"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f358",
+      "native_name": "FUN_0041f358",
+      "body_bytes": 152,
+      "native_direct_callers": [
+        "0x0041b6fa"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00414d18",
+      "native_name": "FUN_00414d18",
+      "body_bytes": 148,
+      "native_direct_callers": [
+        "0x004150b0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042ea68",
+      "native_name": "hw_profile_apply_42ea68",
+      "body_bytes": 142,
+      "native_direct_callers": [
+        "0x00430000"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b46e",
+      "native_name": "FUN_0041b46e",
+      "body_bytes": 136,
+      "native_direct_callers": [
+        "0x00417d94"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041070c",
+      "native_name": "FUN_0041070c",
+      "body_bytes": 132,
+      "native_direct_callers": [
+        "0x00410802"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00420f70",
+      "native_name": "FUN_00420f70",
+      "body_bytes": 130,
+      "native_direct_callers": [
+        "0x004212d8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042a43a",
+      "native_name": "spotmgr_temperature_transition_separate_42a43a",
+      "body_bytes": 130,
+      "native_direct_callers": [
+        "0x0042a4bc"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004224b2",
+      "native_name": "FUN_004224b2",
+      "body_bytes": 124,
+      "native_direct_callers": [
+        "0x00422468"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00412208",
+      "native_name": "FUN_00412208",
+      "body_bytes": 122,
+      "native_direct_callers": [
+        "0x004125a8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416c4e",
+      "native_name": "FUN_00416c4e",
+      "body_bytes": 120,
+      "native_direct_callers": [
+        "0x0041707c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422040",
+      "native_name": "FUN_00422040",
+      "body_bytes": 114,
+      "native_direct_callers": [
+        "0x00422364"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422220",
+      "native_name": "FUN_00422220",
+      "body_bytes": 110,
+      "native_direct_callers": [
+        "0x00422364"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004174a6",
+      "native_name": "FUN_004174a6",
+      "body_bytes": 106,
+      "native_direct_callers": [
+        "0x0043194c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422ee2",
+      "native_name": "FUN_00422ee2",
+      "body_bytes": 106,
+      "native_direct_callers": [
+        "0x004234d8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00428378",
+      "native_name": "spotmgr_transition_sequence_2b_428378",
+      "body_bytes": 106,
+      "native_direct_callers": [
+        "0x0042a04a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416f62",
+      "native_name": "FUN_00416f62",
+      "body_bytes": 100,
+      "native_direct_callers": [
+        "0x00417290"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416fc6",
+      "native_name": "FUN_00416fc6",
+      "body_bytes": 100,
+      "native_direct_callers": [
+        "0x00417290"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422634",
+      "native_name": "FUN_00422634",
+      "body_bytes": 100,
+      "native_direct_callers": [
+        "0x00422628"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041707c",
+      "native_name": "FUN_0041707c",
+      "body_bytes": 98,
+      "native_direct_callers": [
+        "0x0041726a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410e36",
+      "native_name": "FUN_00410e36",
+      "body_bytes": 88,
+      "native_direct_callers": [
+        "0x00410e8e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b6fa",
+      "native_name": "FUN_0041b6fa",
+      "body_bytes": 88,
+      "native_direct_callers": [
+        "0x0041b4f6"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004225d0",
+      "native_name": "FUN_004225d0",
+      "body_bytes": 88,
+      "native_direct_callers": [
+        "0x0041e47a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422f4c",
+      "native_name": "FUN_00422f4c",
+      "body_bytes": 86,
+      "native_direct_callers": [
+        "0x004234fa"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042eda0",
+      "native_name": "hardware_channel_normalize_42eda0",
+      "body_bytes": 86,
+      "native_direct_callers": [
+        "0x00430000"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041702a",
+      "native_name": "FUN_0041702a",
+      "body_bytes": 82,
+      "native_direct_callers": [
+        "0x004170de"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00417290",
+      "native_name": "FUN_00417290",
+      "body_bytes": 74,
+      "native_direct_callers": [
+        "0x00415558"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00423444",
+      "native_name": "FUN_00423444",
+      "body_bytes": 74,
+      "native_direct_callers": [
+        "0x004233e8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042348e",
+      "native_name": "FUN_0042348e",
+      "body_bytes": 74,
+      "native_direct_callers": [
+        "0x004233e8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004233e8",
+      "native_name": "FUN_004233e8",
+      "body_bytes": 72,
+      "native_direct_callers": [
+        "0x0041f918"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00421a94",
+      "native_name": "FUN_00421a94",
+      "body_bytes": 66,
+      "native_direct_callers": [
+        "0x004222f0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00421e4a",
+      "native_name": "FUN_00421e4a",
+      "body_bytes": 66,
+      "native_direct_callers": [
+        "0x00422364"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042c034",
+      "native_name": "hw_status_route_42c034",
+      "body_bytes": 66,
+      "native_direct_callers": [
+        "0x0042c538"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004170de",
+      "native_name": "FUN_004170de",
+      "body_bytes": 62,
+      "native_direct_callers": [
+        "0x0041726a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b918",
+      "native_name": "FUN_0041b918",
+      "body_bytes": 60,
+      "native_direct_callers": [
+        "0x0041c4b4"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422fa2",
+      "native_name": "FUN_00422fa2",
+      "body_bytes": 60,
+      "native_direct_callers": [
+        "0x00422fde"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042ebaa",
+      "native_name": "hw_handle_enable_42ebaa",
+      "body_bytes": 56,
+      "native_direct_callers": [
+        "0x00430000"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410d1e",
+      "native_name": "FUN_00410d1e",
+      "body_bytes": 54,
+      "native_direct_callers": [
+        "0x00414650"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00415232",
+      "native_name": "FUN_00415232",
+      "body_bytes": 54,
+      "native_direct_callers": [
+        "0x004154d2"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00426484",
+      "native_name": "am_hal_mspi_interrupt_disable",
+      "body_bytes": 54,
+      "native_direct_callers": [
+        "0x00426808"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422698",
+      "native_name": "FUN_00422698",
+      "body_bytes": 52,
+      "native_direct_callers": [
+        "0x0041e47a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004226cc",
+      "native_name": "FUN_004226cc",
+      "body_bytes": 52,
+      "native_direct_callers": [
+        "0x0041e47a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00415288",
+      "native_name": "FUN_00415288",
+      "body_bytes": 50,
+      "native_direct_callers": [
+        "0x004210c8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00421ad6",
+      "native_name": "FUN_00421ad6",
+      "body_bytes": 50,
+      "native_direct_callers": [
+        "0x00422364"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041711c",
+      "native_name": "FUN_0041711c",
+      "body_bytes": 48,
+      "native_direct_callers": [
+        "0x00417208"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f2c8",
+      "native_name": "FUN_0041f2c8",
+      "body_bytes": 46,
+      "native_direct_callers": [
+        "0x0041e47a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416b4e",
+      "native_name": "FUN_00416b4e",
+      "body_bytes": 44,
+      "native_direct_callers": [
+        "0x00416bce"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00423e14",
+      "native_name": "stage_two_mode_flags",
+      "body_bytes": 44,
+      "native_direct_callers": [
+        "0x004251c0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00430b10",
+      "native_name": "word_transfer_critical_430b10",
+      "body_bytes": 44,
+      "native_direct_callers": [
+        "0x00430ac4"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416b7a",
+      "native_name": "FUN_00416b7a",
+      "body_bytes": 42,
+      "native_direct_callers": [
+        "0x0041715c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416bce",
+      "native_name": "FUN_00416bce",
+      "body_bytes": 42,
+      "native_direct_callers": [
+        "0x0041726a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00421584",
+      "native_name": "FUN_00421584",
+      "body_bytes": 42,
+      "native_direct_callers": [
+        "0x004215fe"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042ebe2",
+      "native_name": "hw_handle_disable_42ebe2",
+      "body_bytes": 42,
+      "native_direct_callers": [
+        "0x00430000"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416c26",
+      "native_name": "FUN_00416c26",
+      "body_bytes": 40,
+      "native_direct_callers": [
+        "0x0041707c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416aaa",
+      "native_name": "FUN_00416aaa",
+      "body_bytes": 38,
+      "native_direct_callers": [
+        "0x00416f62"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b64c",
+      "native_name": "FUN_0041b64c",
+      "body_bytes": 36,
+      "native_direct_callers": [
+        "0x0041b6fa"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041726a",
+      "native_name": "FUN_0041726a",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x0041552c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004196e6",
+      "native_name": "FUN_004196e6",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x00419bd2"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00423d58",
+      "native_name": "stage_one_status",
+      "body_bytes": 34,
+      "native_direct_callers": [
+        "0x00423d20"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041ac92",
+      "native_name": "FUN_0041ac92",
+      "body_bytes": 32,
+      "native_direct_callers": [
+        "0x0042740c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041ca0c",
+      "native_name": "FUN_0041ca0c",
+      "body_bytes": 32,
+      "native_direct_callers": [
+        "0x0041a71e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00423d7a",
+      "native_name": "stage_one_wait_reg80",
+      "body_bytes": 32,
+      "native_direct_callers": [
+        "0x00423d58"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042eff4",
+      "native_name": "hw_handle_command_42eff4",
+      "body_bytes": 32,
+      "native_direct_callers": [
+        "0x00430000"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410c8a",
+      "native_name": "FUN_00410c8a",
+      "body_bytes": 30,
+      "native_direct_callers": [
+        "0x00411c04"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041a5e0",
+      "native_name": "FUN_0041a5e0",
+      "body_bytes": 30,
+      "native_direct_callers": [
+        "0x00419ec0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042e8a4",
+      "native_name": "guarded_call_cleanup_42e8a4",
+      "body_bytes": 30,
+      "native_direct_callers": [
+        "0x0042e4a0"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b614",
+      "native_name": "FUN_0041b614",
+      "body_bytes": 28,
+      "native_direct_callers": [
+        "0x0041b6fa"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b630",
+      "native_name": "FUN_0041b630",
+      "body_bytes": 28,
+      "native_direct_callers": [
+        "0x0041b754"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422590",
+      "native_name": "FUN_00422590",
+      "body_bytes": 28,
+      "native_direct_callers": [
+        "0x0041e47a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422aac",
+      "native_name": "FUN_00422aac",
+      "body_bytes": 28,
+      "native_direct_callers": [
+        "0x0041f424"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410ab4",
+      "native_name": "FUN_00410ab4",
+      "body_bytes": 26,
+      "native_direct_callers": [
+        "0x00413586"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004150e2",
+      "native_name": "FUN_004150e2",
+      "body_bytes": 26,
+      "native_direct_callers": [
+        "0x004125a8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410c4c",
+      "native_name": "FUN_00410c4c",
+      "body_bytes": 24,
+      "native_direct_callers": [
+        "0x00414d18"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00413fbe",
+      "native_name": "FUN_00413fbe",
+      "body_bytes": 24,
+      "native_direct_callers": [
+        "0x00413f0c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416e48",
+      "native_name": "FUN_00416e48",
+      "body_bytes": 24,
+      "native_direct_callers": [
+        "0x0041702a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b55a",
+      "native_name": "FUN_0041b55a",
+      "body_bytes": 24,
+      "native_direct_callers": [
+        "0x00417f0a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f340",
+      "native_name": "FUN_0041f340",
+      "body_bytes": 24,
+      "native_direct_callers": [
+        "0x0041f358"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410c36",
+      "native_name": "FUN_00410c36",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00414db8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410cc6",
+      "native_name": "FUN_00410cc6",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00411670"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410cdc",
+      "native_name": "FUN_00410cdc",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00411f52"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410d08",
+      "native_name": "FUN_00410d08",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x00413ac4"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416b38",
+      "native_name": "FUN_00416b38",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x004170de"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00418d90",
+      "native_name": "FUN_00418d90",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x0041a24e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041a65c",
+      "native_name": "FUN_0041a65c",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x0041a69a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041cdca",
+      "native_name": "FUN_0041cdca",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x0041c4b4"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041ce10",
+      "native_name": "FUN_0041ce10",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x0041c4b4"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041ce26",
+      "native_name": "FUN_0041ce26",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x0041a71e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041ce3c",
+      "native_name": "FUN_0041ce3c",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x0041a71e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042a19c",
+      "native_name": "spotmgr_internal_power_domain_42a19c",
+      "body_bytes": 22,
+      "native_direct_callers": [
+        "0x0042a878"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041a492",
+      "native_name": "FUN_0041a492",
+      "body_bytes": 20,
+      "native_direct_callers": [
+        "0x0041a24e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f4c0",
+      "native_name": "FUN_0041f4c0",
+      "body_bytes": 20,
+      "native_direct_callers": [
+        "0x0041b6e2"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00413fac",
+      "native_name": "FUN_00413fac",
+      "body_bytes": 18,
+      "native_direct_callers": [
+        "0x00415274"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041a672",
+      "native_name": "FUN_0041a672",
+      "body_bytes": 18,
+      "native_direct_callers": [
+        "0x0041a6a2"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422700",
+      "native_name": "FUN_00422700",
+      "body_bytes": 18,
+      "native_direct_callers": [
+        "0x0041e47a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042dc90",
+      "native_name": "vector_handoff_42dc90",
+      "body_bytes": 18,
+      "native_direct_callers": [
+        "0x0042de58"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004169e2",
+      "native_name": "FUN_004169e2",
+      "body_bytes": 16,
+      "native_direct_callers": [
+        "0x00416c4e"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041cae8",
+      "native_name": "FUN_0041cae8",
+      "body_bytes": 16,
+      "native_direct_callers": [
+        "0x00427310"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00423342",
+      "native_name": "FUN_00423342",
+      "body_bytes": 14,
+      "native_direct_callers": [
+        "0x00422fde"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410c2a",
+      "native_name": "FUN_00410c2a",
+      "body_bytes": 12,
+      "native_direct_callers": [
+        "0x00414e7c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00416a90",
+      "native_name": "FUN_00416a90",
+      "body_bytes": 12,
+      "native_direct_callers": [
+        "0x00417290"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b5e8",
+      "native_name": "FUN_0041b5e8",
+      "body_bytes": 12,
+      "native_direct_callers": [
+        "0x0041b754"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004213da",
+      "native_name": "FUN_004213da",
+      "body_bytes": 12,
+      "native_direct_callers": [
+        "0x004213e6"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422628",
+      "native_name": "FUN_00422628",
+      "body_bytes": 12,
+      "native_direct_callers": [
+        "0x0041e47a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00413208",
+      "native_name": "FUN_00413208",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x0041531c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041527e",
+      "native_name": "FUN_0041527e",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x004210c8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041531c",
+      "native_name": "FUN_0041531c",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x004210c8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041714c",
+      "native_name": "FUN_0041714c",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x0041715c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f4ac",
+      "native_name": "FUN_0041f4ac",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x0041b6fa"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00423dc4",
+      "native_name": "stage_one_wait_zero",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x00423d58"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00432910",
+      "native_name": "vector_table_relocate_432910",
+      "body_bytes": 10,
+      "native_direct_callers": [
+        "0x0043297c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00410b98",
+      "native_name": "FUN_00410b98",
+      "body_bytes": 8,
+      "native_direct_callers": [
+        "0x00411670"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041e474",
+      "native_name": "FUN_0041e474",
+      "body_bytes": 6,
+      "native_direct_callers": [
+        "0x0041f15c"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422874",
+      "native_name": "FUN_00422874",
+      "body_bytes": 4,
+      "native_direct_callers": [
+        "0x0041e47a"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041b5f4",
+      "native_name": "FUN_0041b5f4",
+      "body_bytes": 2,
+      "native_direct_callers": [
+        "0x0041b754"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004213d8",
+      "native_name": "FUN_004213d8",
+      "body_bytes": 2,
+      "native_direct_callers": [
+        "0x004213e6"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042e276",
+      "native_name": "noop_callback_0042e276",
+      "body_bytes": 2,
+      "native_direct_callers": [
+        "0x0042e2f8"
+      ],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041121c",
+      "native_name": "FUN_0041121c",
+      "body_bytes": 126,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00417438",
+      "native_name": "FUN_00417438",
+      "body_bytes": 110,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422dc6",
+      "native_name": "FUN_00422dc6",
+      "body_bytes": 98,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00417510",
+      "native_name": "FUN_00417510",
+      "body_bytes": 96,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00415590",
+      "native_name": "redirect_init",
+      "body_bytes": 88,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004175b4",
+      "native_name": "FUN_004175b4",
+      "body_bytes": 86,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00420e36",
+      "native_name": "flash_mode_reconfigure",
+      "body_bytes": 86,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042029a",
+      "native_name": "boot_mspi_initialize",
+      "body_bytes": 84,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042bf54",
+      "native_name": "hardware_readiness_gate_42bf54",
+      "body_bytes": 80,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00414b64",
+      "native_name": "FUN_00414b64",
+      "body_bytes": 70,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004202ee",
+      "native_name": "boot_mspi_configure",
+      "body_bytes": 64,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0043194c",
+      "native_name": "platform_services_init_43194c",
+      "body_bytes": 62,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00417b7c",
+      "native_name": "FUN_00417b7c",
+      "body_bytes": 60,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004240d2",
+      "native_name": "sched_hiprio_call",
+      "body_bytes": 60,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00425cc8",
+      "native_name": "nonblocking_transfer_call",
+      "body_bytes": 54,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004303de",
+      "native_name": "FUN_004303de",
+      "body_bytes": 38,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00430404",
+      "native_name": "FUN_00430404",
+      "body_bytes": 38,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0043042a",
+      "native_name": "FUN_0043042a",
+      "body_bytes": 38,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00424978",
+      "native_name": "mspi_seq_loopback",
+      "body_bytes": 36,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041fe06",
+      "native_name": "FUN_0041fe06",
+      "body_bytes": 34,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004301d6",
+      "native_name": "platform_boot_sequence_4301d6",
+      "body_bytes": 30,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00425012",
+      "native_name": "device_configure_init_call",
+      "body_bytes": 28,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f5d0",
+      "native_name": "FUN_0041f5d0",
+      "body_bytes": 22,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f5e6",
+      "native_name": "FUN_0041f5e6",
+      "body_bytes": 22,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041f5fc",
+      "native_name": "FUN_0041f5fc",
+      "body_bytes": 22,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042e3ca",
+      "native_name": "guarded_context_teardown_42e3ca",
+      "body_bytes": 22,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00412282",
+      "native_name": "FUN_00412282",
+      "body_bytes": 20,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0041a648",
+      "native_name": "FUN_0041a648",
+      "body_bytes": 20,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00425f92",
+      "native_name": "queue_transaction_call",
+      "body_bytes": 20,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042410e",
+      "native_name": "sched_hiprio_call",
+      "body_bytes": 18,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00412296",
+      "native_name": "FUN_00412296",
+      "body_bytes": 16,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00426620",
+      "native_name": "interrupt_service_call",
+      "body_bytes": 14,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00425c60",
+      "native_name": "blocking_transfer_call",
+      "body_bytes": 10,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x0042032e",
+      "native_name": "boot_low_level_configure",
+      "body_bytes": 8,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00422aca",
+      "native_name": "FUN_00422aca",
+      "body_bytes": 8,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004258b8",
+      "native_name": "piomixed_configure_call",
+      "body_bytes": 8,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x004258e4",
+      "native_name": "device_configure_public_call",
+      "body_bytes": 8,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    },
+    {
+      "entry": "0x00424976",
+      "native_name": "mspi_dummy_callback",
+      "body_bytes": 2,
+      "native_direct_callers": [],
+      "linked_identified_source_caller_leads": []
+    }
+  ]
+}

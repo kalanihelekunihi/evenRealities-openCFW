@@ -2,6 +2,7 @@
  * Timer startup and port timer/SVC transfer remain explicit providers.
  */
 #include <stdint.h>
+extern void idle_entry(void);
 extern uint32_t opencfw_bl_kernel_static_thread(uintptr_t,uintptr_t,uint32_t,
  uintptr_t,uint32_t,uintptr_t,uintptr_t);
 extern uint32_t opencfw_bl_timer_service_start(void);
@@ -16,7 +17,7 @@ void opencfw_boot_idle_memory(uint32_t *cb,uint32_t *stack,uint32_t *words) {
 uint32_t opencfw_bl_kernel_start(void) {
     uint32_t cb=0,stack=0,words;
     opencfw_boot_idle_memory(&cb,&stack,&words);
-    WORD(0x20027168)=opencfw_bl_kernel_static_thread(0x4189ad,
+    WORD(0x20027168)=opencfw_bl_kernel_static_thread((uintptr_t)idle_entry,
          (uintptr_t)opencfw_boot_idle_name,words,0,0,stack,cb);
     uint32_t success=WORD(0x20027168)!=0;
     if (success)success=opencfw_bl_timer_service_start();

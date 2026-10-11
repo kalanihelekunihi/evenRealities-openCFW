@@ -1,0 +1,24 @@
+{
+  "build_receipt": "g2/build/c-firmware/20261011/em-sleep-mode-branch-round/receipt.json",
+  "build_receipt_sha256": "15366292bb8d147f47bdcff742eedd8324f954c6167ff5f43964b847fc459bae",
+  "candidate_compilation_passed": true,
+  "inputs": [
+    {
+      "path": "g2/components/em9305/qpc_scheduler_candidate/sleep_mode_branch.c",
+      "sha256": "e6e42d13fa105d678a201990121507476beb80f74ce058ec8ab7b0773e630e17"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/em9305/sleep-native.txt",
+      "sha256": "f32afead02c1edc73082fb70e25a5b6fd35fb90db0be4bd268f9cb727586fc15"
+    }
+  ],
+  "original_instruction_execution": false,
+  "full_source_complete": false,
+  "scope": "Synthetic helper for full native mode-not0/not1 branch0x312774..0x312808 plus common disabled-IRQ return0x31281a..0x312822; not a stock separate function.",
+  "precondition": "mode!=0 && mode!=1; full sleep caller composition remains unresolved.",
+  "limits": [
+    "Actual ROM sleep0x101d50 and controller sleep0x30f374 child contracts remain.",
+    "Full sleep source0x3126e0 is still unresolved; new helper does not close it.",
+    "Compilation and native static correspondence only; original behavior/IRQ/callback timing not executed."
+  ]
+}

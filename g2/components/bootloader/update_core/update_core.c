@@ -7,9 +7,25 @@
 #define STORAGE (*(opencfw_boot_storage * volatile *)(uintptr_t)0x200004f0u)
 #define CRC_BUFFER ((void *)(uintptr_t)0x2001fdf0u)
 #define PROGRAM_BUFFER ((void *)(uintptr_t)0x2001ede0u)
-#define PATH 0x4336e4u
-#define TAG 0x433fe0u
-#define FILE_NAME 0x4310c4u
+extern const char opencfw_update_path_4336e4[];
+extern const char opencfw_update_log_literal_4310c4[];
+extern const char opencfw_update_log_literal_43184c[];
+extern const char opencfw_update_log_literal_4320ac[];
+extern const char opencfw_update_log_literal_433700[];
+extern const char opencfw_update_log_literal_4339ac[];
+extern const char opencfw_update_log_literal_4339c4[];
+extern const char opencfw_update_log_literal_4339dc[];
+extern const char opencfw_update_log_literal_433bdc[];
+extern const char opencfw_update_log_literal_433bf0[];
+extern const char opencfw_update_log_literal_433c04[];
+extern const char opencfw_update_log_literal_433c18[];
+extern const char opencfw_update_log_literal_433c2c[];
+extern const char opencfw_update_log_literal_433e78[];
+extern const char opencfw_update_log_literal_433e88[];
+extern const char opencfw_update_log_literal_433fe0[];
+#define PATH ((uintptr_t)opencfw_update_path_4336e4)
+#define TAG ((uintptr_t)opencfw_update_log_literal_433fe0)
+#define FILE_NAME ((uintptr_t)opencfw_update_log_literal_4310c4)
 #define LOG(fn,line,format,...) opencfw_boot_log(4,TAG,FILE_NAME,fn,line,format,##__VA_ARGS__)
 #define ERROR(fn,line,format,...) opencfw_boot_log(1,TAG,FILE_NAME,fn,line,format,##__VA_ARGS__)
 _Static_assert(sizeof(opencfw_boot_image_header)==32,"header layout");
@@ -28,10 +44,18 @@ uint32_t opencfw_boot_crc32(const void *data, uint32_t size, const uint32_t *pre
     return ~crc;
 }
 uintptr_t opencfw_boot_stream_mode(uint32_t flags) {
-    if(flags&3u) return (flags&0x100u) ? ((flags&0x400u)?0x42dad0u:0x42dad4u):0x42dad8u;
-    if(!(flags&2u)) return 0x42dae4u;
-    if(flags&0x800u) return 0x42dadcu;
-    return (flags&0x100u) ? ((flags&0x400u)?0x42dae0u:0x42dadcu):0x42dae0u;
+    static const char mode_write_plus[] = "w+";
+    static const char mode_append_plus[] = "a+";
+    static const char mode_read_plus[] = "r+";
+    static const char mode_append[] = "a";
+    static const char mode_write[] = "w";
+    static const char mode_read[] = "r";
+    if(flags&3u) return (uintptr_t)((flags&0x100u) ?
+        ((flags&0x400u)?mode_write_plus:mode_append_plus):mode_read_plus);
+    if(!(flags&2u)) return (uintptr_t)mode_read;
+    if(flags&0x800u) return (uintptr_t)mode_append;
+    return (uintptr_t)((flags&0x100u) ?
+        ((flags&0x400u)?mode_write:mode_append):mode_write);
 }
 int32_t opencfw_boot_memcmp(const void *a,const void *b,uint32_t size) {
     const uint8_t *left=a,*right=b;
@@ -70,8 +94,8 @@ int32_t opencfw_boot_compare(uint32_t address,const void *source,uint32_t size,
         uint32_t chunk=remaining>0x1000u?0x1000u:remaining;
         descriptor->read(CRC_BUFFER,address+offset,chunk);
         int32_t result=opencfw_boot_memcmp(CRC_BUFFER,(const uint8_t *)source+offset,chunk);
-        if(result) { ERROR(0x433c04u,0x10bu,0x4320acu,address,size); return result; }
-        LOG(0x433c04u,0x10eu,0x43184cu,address,size,remaining);
+        if(result) { ERROR(((uintptr_t)opencfw_update_log_literal_433c04),0x10bu,((uintptr_t)opencfw_update_log_literal_4320ac),address,size); return result; }
+        LOG(((uintptr_t)opencfw_update_log_literal_433c04),0x10eu,((uintptr_t)opencfw_update_log_literal_43184c),address,size,remaining);
         offset+=chunk;remaining-=chunk;
     }
     return 0;
@@ -79,45 +103,45 @@ int32_t opencfw_boot_compare(uint32_t address,const void *source,uint32_t size,
 uint32_t opencfw_boot_verify(uint32_t *handle,const opencfw_boot_image_header *header) {
     uint32_t length=(header->encoded_size&0xffffffu)-8u,crc=0;
     *handle=opencfw_boot_file_open(PATH,opencfw_boot_stream_mode(1));
-    if(!*handle) { ERROR(0x4339acu,0xcfu,0x433bdcu,PATH);return 0; }
+    if(!*handle) { ERROR(((uintptr_t)opencfw_update_log_literal_4339ac),0xcfu,((uintptr_t)opencfw_update_log_literal_433bdc),PATH);return 0; }
     opencfw_boot_file_prepare(*handle,8,0);
     for(uint32_t i=0;i<length/STORAGE->chunk_size;i++) {
         uint32_t amount=STORAGE->chunk_size;
         uint32_t got=opencfw_boot_file_read(CRC_BUFFER,1,amount,*handle);
-        if(got!=STORAGE->chunk_size) ERROR(0x4339acu,0xd7u,0x433e78u,got);
+        if(got!=STORAGE->chunk_size) ERROR(((uintptr_t)opencfw_update_log_literal_4339ac),0xd7u,((uintptr_t)opencfw_update_log_literal_433e78),got);
         crc=opencfw_boot_crc32(CRC_BUFFER,STORAGE->chunk_size,&crc);
     }
     uint32_t tail=length-STORAGE->chunk_size*(length/STORAGE->chunk_size);
     if(tail) {
         uint32_t got=opencfw_boot_file_read(CRC_BUFFER,1,tail,*handle);
-        if(got!=tail) ERROR(0x4339acu,0xdfu,0x433bf0u,got,tail);
+        if(got!=tail) ERROR(((uintptr_t)opencfw_update_log_literal_4339ac),0xdfu,((uintptr_t)opencfw_update_log_literal_433bf0),got,tail);
         crc=opencfw_boot_crc32(CRC_BUFFER,tail,&crc);
     }
     if(*handle) { opencfw_boot_file_close(*handle);*handle=0; }
-    LOG(0x4339acu,0xe4u,0x4339c4u,crc,WORD(0x20026efcu));
+    LOG(((uintptr_t)opencfw_update_log_literal_4339ac),0xe4u,((uintptr_t)opencfw_update_log_literal_4339c4),crc,WORD(0x20026efcu));
     return crc==header->expected_crc;
 }
 void opencfw_boot_program(uint32_t *handle,const opencfw_boot_image_header *header) {
     uint32_t remaining=(header->encoded_size&0xffffffu)-32u,address=header->destination;
     opencfw_boot_erase_visit(address,remaining);
-    LOG(0x4339dcu,0x120u,0x433700u,remaining,address);
+    LOG(((uintptr_t)opencfw_update_log_literal_4339dc),0x120u,((uintptr_t)opencfw_update_log_literal_433700),remaining,address);
     *handle=opencfw_boot_file_open(PATH,opencfw_boot_stream_mode(1));
-    if(!*handle) { ERROR(0x4339dcu,0x123u,0x433bdcu,PATH);return; }
+    if(!*handle) { ERROR(((uintptr_t)opencfw_update_log_literal_4339dc),0x123u,((uintptr_t)opencfw_update_log_literal_433bdc),PATH);return; }
     opencfw_boot_file_prepare(*handle,32,0);
-    LOG(0x4339dcu,0x128u,0x433e88u,remaining,address);
+    LOG(((uintptr_t)opencfw_update_log_literal_4339dc),0x128u,((uintptr_t)opencfw_update_log_literal_433e88),remaining,address);
     while(remaining) {
         uint32_t percent=100u-(remaining*100u)/(header->encoded_size&0xffffffu);
-        LOG(0x4339dcu,0x12cu,0x433c18u,remaining,percent);
+        LOG(((uintptr_t)opencfw_update_log_literal_4339dc),0x12cu,((uintptr_t)opencfw_update_log_literal_433c18),remaining,percent);
         uint32_t chunk=remaining<STORAGE->chunk_size?remaining:STORAGE->chunk_size;
         uint32_t got=opencfw_boot_file_read(PROGRAM_BUFFER,1,chunk,*handle);
-        if(got!=chunk) ERROR(0x4339dcu,0x131u,0x433bf0u,got,chunk);
+        if(got!=chunk) ERROR(((uintptr_t)opencfw_update_log_literal_4339dc),0x131u,((uintptr_t)opencfw_update_log_literal_433bf0),got,chunk);
         STORAGE->program(address,PROGRAM_BUFFER,STORAGE->chunk_size);
         if(opencfw_boot_compare(address,PROGRAM_BUFFER,chunk,STORAGE))
-            ERROR(0x4339dcu,0x136u,0x4320acu,address,chunk);
+            ERROR(((uintptr_t)opencfw_update_log_literal_4339dc),0x136u,((uintptr_t)opencfw_update_log_literal_4320ac),address,chunk);
         address+=chunk;remaining-=chunk;
     }
     if(*handle) { opencfw_boot_file_close(*handle);*handle=0; }
     /* R13/R8 are incidental saved values in the final variadic stock log;
      * only its fixed semantic payload and line are reconstructed here. */
-    LOG(0x4339dcu,0x13cu,0x433c2cu);
+    LOG(((uintptr_t)opencfw_update_log_literal_4339dc),0x13cu,((uintptr_t)opencfw_update_log_literal_433c2c));
 }

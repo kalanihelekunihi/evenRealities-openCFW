@@ -1,0 +1,35 @@
+{
+  "original_entries": {
+    "enter": "0x4420d1",
+    "exit": "0x4420e9"
+  },
+  "original_body_bytes": {
+    "enter": 24,
+    "exit": 44
+  },
+  "same_object_offsets": {
+    "audio_enter_critical": "1c",
+    "audio_resume_enter": "1c",
+    "audio_resume_exit": "48",
+    "audio_timer_wait_enter": "1c",
+    "audio_timer_wait_exit": "48",
+    "receiver_critical_enter": "1c",
+    "stock_enter_critical": "1c",
+    "stock_exit_critical": "48"
+  },
+  "old_object_text_sha256": "4de4941bbea71e5202d2a0a596fe80d4c58928bf7dcc731cde34cc767fd1a49e",
+  "alias_object_text_sha256": "4de4941bbea71e5202d2a0a596fe80d4c58928bf7dcc731cde34cc767fd1a49e",
+  "text_byte_equal": true,
+  "source_sha256": "bc369034845c0ee81bebded31d42f2ce7b304eaef1d7c8f2836980fe289a6147",
+  "included_source_sha256": "fdb2a47b0550b4da6e049b6cfabb55194298201e559ad765032098eed4dd9fdc",
+  "old_object_sha256": "dcf3615b8db0fd95674be5df13bf5dcd3c0b41895a8c6972658f7202ad975fad",
+  "alias_object_sha256": "6b91d622e914c21c12a7aacb1446fb059daef0d2dcec2047c10e91f04e36d4b8",
+  "original_source_cases": 49,
+  "selected_aliases_now": [
+    "audio_resume_enter",
+    "audio_timer_wait_enter",
+    "audio_resume_exit",
+    "audio_timer_wait_exit"
+  ],
+  "scope": "Same compiled port text and same entry addresses for void(void) aliases. Original/source trace compares ordered BASEPRI and nesting side effects, final state, SP, PC. Zero-depth exit fatal path excluded. Instruction indices differ; no equal-cycle or physical interrupt-latency claim."
+}
