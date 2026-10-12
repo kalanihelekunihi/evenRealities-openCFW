@@ -1,0 +1,40 @@
+PAGE 308
+308 Synopsys, Inc.SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+Instruction Set Summary ARCv2 ISA Programmer’ s Reference Manual for ARC EM Processors
+If the long immediate indicator is used in both a source and the destination operand, a long immediate 
+value is used as the source operand and the result is discarded as expected.
+If the long immediate indicator is used in both source operands, the same long immediate value is used as 
+the value for both source operands. This common long immediate source operand is not duplicated in 
+memory; it is encoded only once and immediately after the instruction as usual.
+For a detailed description of the layout in memory for instructions with long immediate data, see to the 
+section on “Instruction Layout in Memory” on page 126.
+Operand syntax:
+limm - when used as a source operand (limm value is stored in memory after the instruction)
+0 - when used as a destination operand (no value is stored in memory)
+7.1.8 Condition Code Tests
+Table 7-7 lists the codes used for condition code tests.
+Figure 7-1 Long Immediate source data value
+3 1 3 0 2 9 2 8 2 7 2 6 2 5 2 4 2 3 2 2 2 1 2 0 1 9 1 8 1 7 1 6 1 5 1 4 1 3 1 2 1 1 1 0 9876543210
+Limm[31:0]
+Table 7-7 Condition Codes
+Code 
+Q field Mnemonic Condition Test
+0x00 AL, RA Always 1
+0x01 EQ, Z Zero (Note that EQ and Z are 
+equivalent encodings for condition 
+codes)
+Z
+0x02 NE, NZ Non-Zero /Z
+0x03 PL, P Positive /N
+0x04 MI, N Negative N
+0x05 CS, C, LO Carry set, lower than (unsigned) C
+0x06 CC, NC, HS Carry clear, higher or same (unsigned) /C
+0x07 VS, V Over-flow set V
+0x08 VC, NV Over-flow clear /V
+0x09 GT Greater than (signed) (N and V and /Z) or (/N and /V and /Z)
+0x0A GE Greater than or equal to (signed) (N and V) or (/N and /V)
+0x0B LT Less than (signed) (N and /V) or (/N and V)
+0x0C LE Less than or equal to (signed) Z or (N and /V) or (/N and V)

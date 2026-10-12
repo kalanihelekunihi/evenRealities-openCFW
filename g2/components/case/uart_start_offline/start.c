@@ -1,6 +1,10 @@
 /* Independent64ec/8d98; original ISR pointer values are ABI metadata only. */
 #include "start.h"
 #include <stddef.h>
+extern void case_boot_sensor_callback_8808(uint32_t descriptor);
+extern void case_boot_sensor_callback_8a48(uint32_t descriptor);
+extern void case_boot_sensor_callback_8758(uint32_t descriptor);
+extern void case_boot_sensor_callback_8998(uint32_t descriptor);
 _Static_assert(offsetof(case_start_handle,pRxBuffPtr)==0x58,"buffer");
 _Static_assert(offsetof(case_start_handle,FifoMode)==0x64,"fifo");
 _Static_assert(offsetof(case_start_handle,RxState)==0x8c,"state");
@@ -11,10 +15,12 @@ uint32_t case_uart_begin_rx(case_start_handle *h,uint8_t *p,uint16_t n){
  h->Mask=word==0x1000?(parity?0xff:0x1ff):word==0?(parity?0x7f:0xff):word==0x10000000?(parity?0x3f:0x7f):0;
  h->ErrorCode=0;h->RxState=0x22;set(&h->Instance->CR3,1);
  if(h->FifoMode==0x20000000 && n>=h->NbRxDataToProcess){
-  h->RxISR=(void (*)(case_start_handle *))(word==0x1000 && !parity?0x08008809u:0x08008a49u);
+  h->RxISR=(void (*)(case_start_handle *))(uintptr_t)(word==0x1000 && !parity?
+      case_boot_sensor_callback_8808:case_boot_sensor_callback_8a48);
   if(parity)set(&h->Instance->CR1,0x100);set(&h->Instance->CR3,0x10000000);
  }else{
-  h->RxISR=(void (*)(case_start_handle *))(word==0x1000 && !parity?0x08008759u:0x08008999u);
+  h->RxISR=(void (*)(case_start_handle *))(uintptr_t)(word==0x1000 && !parity?
+      case_boot_sensor_callback_8758:case_boot_sensor_callback_8998);
   set(&h->Instance->CR1,parity?0x120:0x20);
  }
  return 0;

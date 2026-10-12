@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08002e04 write a received OTA chunk in 8-byte flash units.
  */
@@ -9,7 +10,7 @@ extern uint32_t case_policy_log(uint32_t); /* 0x9170 */
 uint32_t case_policy_box_write_chunk(uint32_t offset,uint32_t data,uint32_t count)
 {
     volatile const uint8_t *quiet=(volatile const uint8_t *)(uintptr_t)0x200000bfu;
-    if(*quiet==0u)(void)case_policy_log(0x08002eb4u);
+    if(*quiet==0u)(void)case_policy_log(CASE_STRING_ADDR(08002eb4));
     if(count==0u)return 1u;
     case_boot_option_prepare();
     volatile const uint8_t *bytes=(volatile const uint8_t *)(uintptr_t)data;
@@ -23,7 +24,7 @@ uint32_t case_policy_box_write_chunk(uint32_t offset,uint32_t data,uint32_t coun
             low=(low<<8)|b;
         }
         if(case_boot_option_write(1u,0x08040000u+offset+i*8u,low,high)!=0u){
-            if(*quiet==0u){(void)case_policy_log(0x08002ebcu);(void)case_policy_log(0x08002ed8u);}
+            if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08002ebc));(void)case_policy_log(CASE_STRING_ADDR(08002ed8));}
             case_boot_option_commit_c();return 0u;
         }
     }

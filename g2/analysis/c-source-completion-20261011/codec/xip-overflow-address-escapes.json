@@ -1,0 +1,666 @@
+{
+  "purpose": "bounded raw address escapes for current fixed-slot overflows",
+  "eligibility_manifest_sha256": "022b09db6deac9f50c125e863835df3f7a4f33a92176c1ef81de0ef9f345f169",
+  "regions": [
+    {
+      "name": "image_a_sram",
+      "base": "0x10023400",
+      "bytes": 14716,
+      "sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin"
+    },
+    {
+      "name": "image_a_xip",
+      "base": "0x10203004",
+      "bytes": 36484,
+      "sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+    }
+  ],
+  "overflow_provider_count": 62,
+  "providers_with_raw_hits": 13,
+  "providers_with_sram_hits": 5,
+  "providers_with_xip_hits_outside_catalogue_gaps": 1,
+  "overflow_providers": [
+    {
+      "entry": "0x102030c4",
+      "native_name": "gx8002_uart_transmit_complete",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_uart_transmit_complete_102030c4",
+      "candidate_section_relocations": 2,
+      "raw_address_hits": [
+        {
+          "region": "image_a_xip",
+          "address": "0x1020318c",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x1020318c",
+            "0x10203190"
+          ]
+        }
+      ]
+    },
+    {
+      "entry": "0x10203108",
+      "native_name": "gx8002_uart_transmit_dma_entry",
+      "overflow_bytes": 8,
+      "candidate_symbol": "gx8002_xip_uart_transmit_dma_entry_10203108",
+      "candidate_section_relocations": 7,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10203190",
+      "native_name": "gx8002_uart_receive_dma",
+      "overflow_bytes": 16,
+      "candidate_symbol": "gx8002_xip_uart_receive_dma_10203190",
+      "candidate_section_relocations": 7,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10203a98",
+      "native_name": "gx8002_dma_deallocate",
+      "overflow_bytes": 20,
+      "candidate_symbol": "gx8002_xip_dma_deallocate_10203a98",
+      "candidate_section_relocations": 3,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10203adc",
+      "native_name": "gx8002_dma_irq_handler",
+      "overflow_bytes": 20,
+      "candidate_symbol": "gx8002_xip_dma_isr_10203adc",
+      "candidate_section_relocations": 4,
+      "raw_address_hits": [
+        {
+          "region": "image_a_xip",
+          "address": "0x10203c3c",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x10203c36",
+            "0x10203c40"
+          ]
+        }
+      ]
+    },
+    {
+      "entry": "0x10203b64",
+      "native_name": "gx8002_dma_callback",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_dma_callback_10203b64",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10203b78",
+      "native_name": "gx8002_dma_transfer",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_dma_transfer_10203b78",
+      "candidate_section_relocations": 2,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10203dc8",
+      "native_name": "_pcm_channel_setting.isra.0",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_pcm_channel_setting_10203dc8",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10203e7c",
+      "native_name": "gx8002_audio_input_pdm",
+      "overflow_bytes": 8,
+      "candidate_symbol": "gx8002_xip_audio_input_pdm_10203e7c",
+      "candidate_section_relocations": 2,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10203ec8",
+      "native_name": "gx8002_audio_input_i2s",
+      "overflow_bytes": 24,
+      "candidate_symbol": "gx8002_xip_audio_input_i2s_10203ec8",
+      "candidate_section_relocations": 1,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10203f70",
+      "native_name": "gx_audio_in_set_input_channel",
+      "overflow_bytes": 28,
+      "candidate_symbol": "gx8002_xip_audio_set_input_channel_10203f70",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10204080",
+      "native_name": "gx8002_audio_output_logfbank",
+      "overflow_bytes": 36,
+      "candidate_symbol": "gx8002_xip_audio_output_logfbank_10204080",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x1020412c",
+      "native_name": "gx8002_audio_output_spectrum",
+      "overflow_bytes": 20,
+      "candidate_symbol": "gx8002_xip_audio_output_spectrum_1020412c",
+      "candidate_section_relocations": 2,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10204228",
+      "native_name": "gx8002_audio_output_i2s",
+      "overflow_bytes": 44,
+      "candidate_symbol": "gx8002_xip_audio_output_i2s_10204228",
+      "candidate_section_relocations": 1,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x102042d4",
+      "native_name": "gx8002_audio_pga_gain",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_audio_pga_gain_102042d4",
+      "candidate_section_relocations": 1,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10204320",
+      "native_name": "gx_audio_in_set_i2s_clock",
+      "overflow_bytes": 14,
+      "candidate_symbol": "gx8002_xip_audio_set_i2s_clock_10204320",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10204330",
+      "native_name": "gx_audio_in_set_i2sin_mode",
+      "overflow_bytes": 8,
+      "candidate_symbol": "gx8002_xip_audio_set_i2sin_mode_10204330",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10204340",
+      "native_name": "gx_audio_in_set_i2sout_mode",
+      "overflow_bytes": 6,
+      "candidate_symbol": "gx8002_xip_audio_set_i2sout_mode_10204340",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x102043ac",
+      "native_name": "gx_audio_in_set_rough_gain",
+      "overflow_bytes": 16,
+      "candidate_symbol": "gx8002_xip_audio_set_rough_gain_102043ac",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x102043fc",
+      "native_name": "gx_audio_in_set_evad_enable",
+      "overflow_bytes": 52,
+      "candidate_symbol": "gx8002_xip_audio_set_evad_enable_102043fc",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x1020452c",
+      "native_name": "gx_audio_in_set_logfbank_enable",
+      "overflow_bytes": 16,
+      "candidate_symbol": "gx8002_xip_audio_set_logfbank_enable_1020452c",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x1020470c",
+      "native_name": "gx_audio_in_set_fftvad_curve_5",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_audio_vad_curve5_1020470c",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x102049b0",
+      "native_name": "gx8002_audio_channel_field",
+      "overflow_bytes": 12,
+      "candidate_symbol": "gx8002_xip_audio_channel_field_102049b0",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x102049e8",
+      "native_name": "aout_dac_config",
+      "overflow_bytes": 6,
+      "candidate_symbol": "gx8002_xip_aout_dac_config_102049e8",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10204c90",
+      "native_name": "gx8002_aout_config_dac",
+      "overflow_bytes": 12,
+      "candidate_symbol": "gx8002_xip_aout_config_dac_10204c90",
+      "candidate_section_relocations": 1,
+      "raw_address_hits": [
+        {
+          "region": "image_a_sram",
+          "address": "0x10026bec",
+          "word_aligned": true,
+          "native_catalogue_gap": null
+        }
+      ]
+    },
+    {
+      "entry": "0x10204ff0",
+      "native_name": "gx8002_aout_get_db",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_aout_get_db_10204ff0",
+      "candidate_section_relocations": 1,
+      "raw_address_hits": [
+        {
+          "region": "image_a_sram",
+          "address": "0x10026c04",
+          "word_aligned": true,
+          "native_catalogue_gap": null
+        }
+      ]
+    },
+    {
+      "entry": "0x10205254",
+      "native_name": "gx8002_aout_alloc_playback",
+      "overflow_bytes": 44,
+      "candidate_symbol": "gx8002_xip_aout_alloc_playback_10205254",
+      "candidate_section_relocations": 4,
+      "raw_address_hits": [
+        {
+          "region": "image_a_sram",
+          "address": "0x10026bc8",
+          "word_aligned": true,
+          "native_catalogue_gap": null
+        }
+      ]
+    },
+    {
+      "entry": "0x102055dc",
+      "native_name": "gx8002_reg_clear_bit",
+      "overflow_bytes": 2,
+      "candidate_symbol": "gx8002_xip_register_clear_bit_102055dc",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10205a90",
+      "native_name": "gx8002_snpu_suspend",
+      "overflow_bytes": 8,
+      "candidate_symbol": "gx8002_xip_snpu_suspend_10205a90",
+      "candidate_section_relocations": 4,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10205e50",
+      "native_name": "gx_analog_set_pga_bypass",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_analog_pga_bypass_10205e50",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10205e68",
+      "native_name": "gx_analog_set_pga_enable",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_analog_pga_enable_10205e68",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10205e98",
+      "native_name": "gx_analog_set_adc_out_at_clk",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_analog_adc_out_clk_10205e98",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10205eb0",
+      "native_name": "gx_analog_set_adc_in_sel",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_analog_adc_input_select_10205eb0",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10205ec8",
+      "native_name": "gx_analog_set_adc_rstn",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_analog_adc_rstn_10205ec8",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10205ee0",
+      "native_name": "gx8002_gpio_isr",
+      "overflow_bytes": 24,
+      "candidate_symbol": "gx8002_xip_gpio_isr_10205ee0",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": [
+        {
+          "region": "image_a_xip",
+          "address": "0x10206070",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x10206070",
+            "0x10206074"
+          ]
+        }
+      ]
+    },
+    {
+      "entry": "0x102060e8",
+      "native_name": "gx8002_device_list_init",
+      "overflow_bytes": 8,
+      "candidate_symbol": "gx8002_xip_device_list_initialize_102060e8",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x102060fc",
+      "native_name": "gx8002_spi_register_master",
+      "overflow_bytes": 8,
+      "candidate_symbol": "gx8002_xip_spi_register_master_102060fc",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10206190",
+      "native_name": "gx8002_dw_spi_setup",
+      "overflow_bytes": 12,
+      "candidate_symbol": "gx8002_xip_spi_setup_10206190",
+      "candidate_section_relocations": 1,
+      "raw_address_hits": [
+        {
+          "region": "image_a_xip",
+          "address": "0x10206578",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x10206570",
+            "0x1020658c"
+          ]
+        }
+      ]
+    },
+    {
+      "entry": "0x10206908",
+      "native_name": "gx8002_gsensor_workstate",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_gsensor_workstate_10206908",
+      "candidate_section_relocations": 2,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10206a84",
+      "native_name": "tfp_format",
+      "overflow_bytes": 164,
+      "candidate_symbol": "gx8002_xip_tfp_format_10206a84",
+      "candidate_section_relocations": 6,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10206cb0",
+      "native_name": "gx8002_kws_flash_load",
+      "overflow_bytes": 28,
+      "candidate_symbol": "gx8002_xip_kws_flash_load_10206cb0",
+      "candidate_section_relocations": 18,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10206f5c",
+      "native_name": "gx8002_pcm_frame_size",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_pcm_frame_size_10206f5c",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10207024",
+      "native_name": "gx8002_audio_input_buffer_size",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_audio_input_buffer_size_10207024",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x1020704c",
+      "native_name": "gx8002_audio_input_buffer_addr",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_audio_input_buffer_addr_1020704c",
+      "candidate_section_relocations": 1,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10207070",
+      "native_name": "gx8002_audio_input_output",
+      "overflow_bytes": 150,
+      "candidate_symbol": "gx8002_xip_audio_input_output_10207070",
+      "candidate_section_relocations": 13,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10207234",
+      "native_name": "gx8002_audio_input_config",
+      "overflow_bytes": 16,
+      "candidate_symbol": "gx8002_xip_audio_input_config_10207234",
+      "candidate_section_relocations": 28,
+      "raw_address_hits": [
+        {
+          "region": "image_a_xip",
+          "address": "0x102073e8",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x102073e2",
+            "0x102073f8"
+          ]
+        }
+      ]
+    },
+    {
+      "entry": "0x102075c8",
+      "native_name": "gx8002_audio_input_env_noise",
+      "overflow_bytes": 16,
+      "candidate_symbol": "gx8002_xip_tws_commit_102075c8",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10207660",
+      "native_name": "gx8002_audio_input_standby_startup",
+      "overflow_bytes": 12,
+      "candidate_symbol": "gx8002_xip_audio_standby_startup_10207660",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10207770",
+      "native_name": "gx8002_power_lock_create",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_power_lock_create_10207770",
+      "candidate_section_relocations": 0,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10207808",
+      "native_name": "gx8002_power_suspend",
+      "overflow_bytes": 8,
+      "candidate_symbol": "gx8002_xip_tws_command_10207808",
+      "candidate_section_relocations": 12,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10207f08",
+      "native_name": "gx8002_uart_send_callback",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_uart_send_callback_10207f08",
+      "candidate_section_relocations": 8,
+      "raw_address_hits": [
+        {
+          "region": "image_a_xip",
+          "address": "0x10207b34",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x10207b32",
+            "0x10207b38"
+          ]
+        },
+        {
+          "region": "image_a_xip",
+          "address": "0x10207c48",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x10207c42",
+            "0x10207c50"
+          ]
+        }
+      ]
+    },
+    {
+      "entry": "0x10208098",
+      "native_name": "gx8002_uart_receive_callback",
+      "overflow_bytes": 116,
+      "candidate_symbol": "gx8002_xip_uart_receive_callback_10208098",
+      "candidate_section_relocations": 6,
+      "raw_address_hits": [
+        {
+          "region": "image_a_xip",
+          "address": "0x10207ce8",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x10207ce6",
+            "0x10207cec"
+          ]
+        },
+        {
+          "region": "image_a_xip",
+          "address": "0x10207ed0",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x10207ecc",
+            "0x10207ee0"
+          ]
+        },
+        {
+          "region": "image_a_xip",
+          "address": "0x10208538",
+          "word_aligned": true,
+          "native_catalogue_gap": [
+            "0x1020852a",
+            "0x1020854c"
+          ]
+        }
+      ]
+    },
+    {
+      "entry": "0x1020854c",
+      "native_name": "UartMessageAsyncDone",
+      "overflow_bytes": 20,
+      "candidate_symbol": "gx8002_xip_uart_async_done_1020854c",
+      "candidate_section_relocations": 9,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10208670",
+      "native_name": "gx8002_tws_init",
+      "overflow_bytes": 8,
+      "candidate_symbol": "gx8002_xip_tws_initialize_10208670",
+      "candidate_section_relocations": 9,
+      "raw_address_hits": [
+        {
+          "region": "image_a_xip",
+          "address": "0x1020b208",
+          "word_aligned": true,
+          "native_catalogue_gap": null
+        }
+      ]
+    },
+    {
+      "entry": "0x10208b78",
+      "native_name": "gx8002_bionic_run",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_bionic_run_10208b78",
+      "candidate_section_relocations": 3,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10208d48",
+      "native_name": "LvpAppEventTick",
+      "overflow_bytes": 8,
+      "candidate_symbol": "gx8002_xip_app_event_tick_10208d48",
+      "candidate_section_relocations": 2,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x10208e4c",
+      "native_name": "gx8002_sample_app_init",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_sample_app_init_10208e4c",
+      "candidate_section_relocations": 5,
+      "raw_address_hits": [
+        {
+          "region": "image_a_sram",
+          "address": "0x10026d40",
+          "word_aligned": true,
+          "native_catalogue_gap": null
+        }
+      ]
+    },
+    {
+      "entry": "0x10208ff0",
+      "native_name": "gx8002_start_i2s",
+      "overflow_bytes": 16,
+      "candidate_symbol": "gx8002_xip_start_i2s_10208ff0",
+      "candidate_section_relocations": 35,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x1020913c",
+      "native_name": "gx8002_stop_i2s",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_stop_i2s_1020913c",
+      "candidate_section_relocations": 12,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x102091bc",
+      "native_name": "gx8002_i2s_request_tick",
+      "overflow_bytes": 16,
+      "candidate_symbol": "gx8002_xip_i2s_request_tick_102091bc",
+      "candidate_section_relocations": 17,
+      "raw_address_hits": [
+        {
+          "region": "image_a_sram",
+          "address": "0x10026d48",
+          "word_aligned": true,
+          "native_catalogue_gap": null
+        }
+      ]
+    },
+    {
+      "entry": "0x102096fc",
+      "native_name": "gx8002_notification_setup",
+      "overflow_bytes": 12,
+      "candidate_symbol": "gx8002_xip_notification_setup_102096fc",
+      "candidate_section_relocations": 12,
+      "raw_address_hits": []
+    },
+    {
+      "entry": "0x1020979c",
+      "native_name": "gx8002_vad_notify",
+      "overflow_bytes": 4,
+      "candidate_symbol": "gx8002_xip_vad_notify_1020979c",
+      "candidate_section_relocations": 4,
+      "raw_address_hits": []
+    }
+  ],
+  "limits": [
+    "Raw four-byte address matches only; direct branch encodings and computed addresses are not inspected.",
+    "Only BINH-A image SRAM and XIP loaded regions are searched; image-B, ROM, and external references are not covered.",
+    "A native fixed-slot overflow may still be solved by a source-owned relocated placement, but no spare XIP allocation or full reference rewrite is established here."
+  ]
+}

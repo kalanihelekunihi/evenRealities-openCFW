@@ -21,6 +21,6 @@ SECTIONS {
  ASSERT(SIZEOF(.active_slot_link)==4,"active slot pointer")
  ASSERT(SIZEOF(.lp_slot_link)==4,"LP slot pointer")
  ASSERT(SIZEOF(.lp_sensor_descriptors)==16,"LP rows")
- ASSERT(SIZEOF(.active_sensor_descriptors)==16,"active rows")
+ ASSERT(SIZEOF(.active_sensor_descriptors)==20,"active rows")
  ASSERT(SIZEOF(.pm_descriptor)==28,"DeepSleep callback descriptor")
 }

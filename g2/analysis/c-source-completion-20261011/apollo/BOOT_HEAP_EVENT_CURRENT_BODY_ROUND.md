@@ -1,0 +1,9 @@
+# Boot RTOS heap and event-wake body round
+
+Locked bootloader SHA-256 `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`.
+
+The current selected `thread_creation/rtos_heap.c` was rebuilt in an isolated Cortex-M4 test link and passed `boot-heap-current-oracle.json`: 159 stock/source allocate/free operations. The fixture compares the complete 81,920-byte heap arena hash and all heap globals after every operation. It visits 228 of the native 256 bytes at allocator `0x419730`, and exercises initialization, split, sorted free insertion/merge, draining, zero/large requests and failure boundary. Scheduler suspend/resume are explicit controlled child cuts; double-free, concurrent scheduling and physical IRQ effects are outside this proof. The oracle records the selected source hash.
+
+The current selected `thread_creation/event_waiter_wake.c` passed fresh `event-wake-current/comparison.json`: seven event-wake and three missed-yield cases. It visits 244 of the native 246-byte event-wake body `0x41872c`, comparing ordered SRAM writes, pending/ready insertion, priority/yield status, timer-list interaction and null-owner fatal boundary. Its source hash equals the selected file. The fixture uses one synthetic waiter and no live scheduler or hardware interrupt delivery.
+
+No current selected source correction was warranted by these comparisons. Both bodies now have reviewed source bindings. The coherent full Boot candidate `boot-coplacement-heap-event-proof-round/receipt.json` is `PASS_BOUNDED_LINK`: 373 selected C/ASM units, 1,010 providers, three genuine ROM imports, 34 source callback relocations. The rooted catalogue has 654 labels and 147 header-only proof leads, down from 149; zero rooted entries lack a machine crosswalk. These 147 are attribution/proof work, not a missing-C count. Full image data/scatter/indirect-root and physical runtime qualification remain open.

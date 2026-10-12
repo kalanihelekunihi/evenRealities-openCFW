@@ -5,6 +5,7 @@
  * Body parsing at 0x10207cec remains a genuine typed source contract.
  */
 #include <stdint.h>
+#include "resident_sample_product_data.h"
 
 extern volatile uint32_t *gx8002_xip_uart_channel_lookup_10207ac0(
     uint32_t port);
@@ -41,7 +42,8 @@ uint32_t gx8002_xip_uart_receive_callback_10208098(uint32_t port,
         (volatile uint32_t *)(uintptr_t)UINT32_C(0x2002e5d8);
     volatile uint32_t *const header_progress =
         (volatile uint32_t *)(uintptr_t)
-            (UINT32_C(0x20026c74) + port * 4u);
+            ((uintptr_t)gx8002_uart_receive_config_words_26c74 +
+             port * 4u);
     volatile uint32_t *const trailer_progress =
         (volatile uint32_t *)(uintptr_t)
             (UINT32_C(0x2002e5dc) + port * 4u);

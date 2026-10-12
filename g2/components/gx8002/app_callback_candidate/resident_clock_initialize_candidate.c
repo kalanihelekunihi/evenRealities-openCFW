@@ -9,6 +9,7 @@ struct clock_record { uint32_t selector, value; };
 extern const struct clock_record gx8002_clock_osc_sources_26904[10];
 extern const struct clock_record gx8002_clock_xtal_sources_26954[10];
 extern const struct clock_record gx8002_clock_1m_sources_25cd0[2];
+extern const struct clock_record gx8002_clock_startmode1_sources_25cf4[2];
 extern const int32_t gx8002_clock_startmode_adjustments_25ce0[5];
 extern uint32_t gx8002_resident_start_mode_24984(void);
 extern uint32_t gx8002_resident_trim_state_24a1c(void);
@@ -68,7 +69,7 @@ void gx8002_resident_clock_init_pointer_25a88(
     } else if (start_mode == 1u) {
         struct clock_record records[2];
         gx8002_resident_memcpy_25738(records,
-            gx8002_clock_1m_sources_25cd0, 16u);
+            gx8002_clock_startmode1_sources_25cf4, 16u);
         if (pll_config[14] == 1u)
             gx8002_resident_clock_pll_wait_25060(
                 (const uint32_t *)pll_config);

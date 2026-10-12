@@ -1,0 +1,72 @@
+/* Native HCI disconnect-reason names, 0x4b848c. */
+#include <stdint.h>
+const char *audio_ble_disconnect_reason(uint8_t code) {
+    switch(code) {
+    case 0x00u:return "Success";
+    case 0x01u:return "Unknown HCI command";
+    case 0x02u:return "Unknown connection identifier";
+    case 0x03u:return "Hardware failure";
+    case 0x04u:return "Page timeout";
+    case 0x05u:return "Authentication failure";
+    case 0x06u:return "PIN or key missing";
+    case 0x07u:return "Memory capacity exceeded";
+    case 0x08u:return "Connection timeout";
+    case 0x09u:return "Connection limit exceeded";
+    case 0x0au:return "Synchronous connection limit exceeded";
+    case 0x0bu:return "ACL connection already exists";
+    case 0x0cu:return "Command disallowed";
+    case 0x0du:return "Connection rejected limited resources";
+    case 0x0eu:return "Connection rejected security reasons";
+    case 0x0fu:return "Connection rejected unacceptable BD_ADDR";
+    case 0x10u:return "Connection accept timeout exceeded";
+    case 0x11u:return "Unsupported feature or parameter value";
+    case 0x12u:return "Invalid HCI command parameters";
+    case 0x13u:return "Remote user terminated connection";
+    case 0x14u:return "Remote device low resources";
+    case 0x15u:return "Remote device power off";
+    case 0x16u:return "Connection terminated by local host";
+    case 0x17u:return "Repeated attempts";
+    case 0x18u:return "Pairing not allowed";
+    case 0x19u:return "Unknown LMP PDU";
+    case 0x1au:return "Unsupported remote feature";
+    case 0x1bu:return "SCO offset rejected";
+    case 0x1cu:return "SCO interval rejected";
+    case 0x1du:return "SCO air mode rejected";
+    case 0x1eu:return "Invalid LMP parameters";
+    case 0x1fu:return "Unspecified error";
+    case 0x20u:return "Unsupported LMP parameter value";
+    case 0x21u:return "Role change not allowed";
+    case 0x22u:return "LL response timeout";
+    case 0x23u:return "LMP error transaction collision";
+    case 0x24u:return "LMP pdu not allowed";
+    case 0x25u:return "Encryption mode not acceptable";
+    case 0x26u:return "Link key can not be changed";
+    case 0x27u:return "Requested qos not supported";
+    case 0x28u:return "Instant passed";
+    case 0x29u:return "Pairing with unit key not supported";
+    case 0x2au:return "Different transaction collision";
+    case 0x2eu:return "Channel classification not supported";
+    case 0x2fu:return "Insufficient security";
+    case 0x30u:return "Parameter out of mandatory range";
+    case 0x32u:return "Role switch pending";
+    case 0x34u:return "Reserved slot violation";
+    case 0x35u:return "Role switch failed";
+    case 0x36u:return "Extended inquiry response too large";
+    case 0x37u:return "Secure simple pairing not supported by host";
+    case 0x38u:return "Host busy - pairing";
+    case 0x39u:return "Connection rejected no suitable channel";
+    case 0x3au:return "Controller busy";
+    case 0x3bu:return "Unacceptable connection interval";
+    case 0x3cu:return "Advertising timeout";
+    case 0x3du:return "Connection terminated due to MIC failure";
+    case 0x3eu:return "Connection failed to be established";
+    case 0x3fu:return "MAC connection failed";
+    case 0x40u:return "Coarse clock adjustment rejected";
+    case 0x41u:return "Type0 submap not defined";
+    case 0x42u:return "Unknown advertising identifier";
+    case 0x43u:return "Limit reached";
+    case 0x44u:return "Operation cancelled by host";
+    case 0x45u:return "Packet too long";
+    default:return "Unknown error";
+    }
+}

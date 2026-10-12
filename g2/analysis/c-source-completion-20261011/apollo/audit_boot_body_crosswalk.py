@@ -113,12 +113,6 @@ def main():
         if provider in providers:
             status = "exact_entry_provider_name"
             leads = [providers[provider]["source"]]
-        elif header:
-            status = "selected_source_header_address_lead"
-            leads = header
-        elif int(entry, 16) in receipt_leads:
-            status = "selected_source_receipt_address_lead"
-            leads = receipt_leads[int(entry, 16)]
         elif int(entry, 16) in manual_leads:
             status = "reviewed_manual_source_lead"
             leads = [manual_leads[int(entry, 16)]["source"]]
@@ -134,6 +128,12 @@ def main():
             status = ("reviewed_selected_static_function_lead" if row["emitted"] else
                       "reviewed_selected_static_definition_inlined_or_optimized_lead")
             leads = [row["source"] + "::" + row["symbol"]]
+        elif header:
+            status = "selected_source_header_address_lead"
+            leads = header
+        elif int(entry, 16) in receipt_leads:
+            status = "selected_source_receipt_address_lead"
+            leads = receipt_leads[int(entry, 16)]
         elif named:
             status = "selected_source_function_name_lead"
             leads = named

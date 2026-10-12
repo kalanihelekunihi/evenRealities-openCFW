@@ -11,19 +11,41 @@ extern uint32_t opencfw_bl_port_timer_compare_set(uint32_t compare_id,
 extern uint32_t opencfw_bl_mask_interrupts(void);
 extern uint32_t opencfw_bl_tick_increment(void);
 
+static uint32_t native_udiv(uint32_t numerator, uint32_t denominator)
+{
+    uint32_t quotient;
+    __asm__ volatile("udiv %0, %1, %2"
+                     : "=r"(quotient) : "r"(numerator), "r"(denominator));
+    return quotient;
+}
+
+/* Stock 0x41f4c0: the vector wrapper at 0x41b6e2 passes zero and observes
+ * the raw STIMER status. Other callers may request status masked by INTEN. */
+uint32_t opencfw_boot_stimer_irq_status(uint8_t masked)
+{
+    uint32_t status = WORD(UINT32_C(0x40008904));
+    if (masked != 0u)
+        status &= WORD(UINT32_C(0x40008900));
+    return status;
+}
+
 void opencfw_boot_stimer_tickless_service(void)
 {
     const uint32_t current = opencfw_bl_port_timer_read_counter();
     const uint32_t last = WORD(UINT32_C(0x20027120));
-    const uint32_t interval = WORD(UINT32_C(0x20027124));
     const uint32_t elapsed = current - last - (current < last ? 1u : 0u);
-    const uint32_t remainder = elapsed % interval;
+    const uint32_t ticks = native_udiv(elapsed, WORD(UINT32_C(0x20027124)));
+    const uint32_t remainder_quotient =
+        native_udiv(elapsed, WORD(UINT32_C(0x20027124)));
+    const uint32_t remainder = elapsed -
+        WORD(UINT32_C(0x20027124)) * remainder_quotient;
     WORD(UINT32_C(0x20027120)) = current - remainder;
-    (void)opencfw_bl_port_timer_compare_set(0u, interval - remainder);
+    (void)opencfw_bl_port_timer_compare_set(
+        0u, WORD(UINT32_C(0x20027124)) - remainder);
     (void)opencfw_bl_mask_interrupts();
-    uint32_t ticks = elapsed / interval;
+    uint32_t remaining_ticks = ticks;
     uint32_t reschedule = 0u;
-    while (ticks-- != 0u)
+    while (remaining_ticks-- != 0u)
         if (opencfw_bl_tick_increment() != 0u)
             reschedule = 1u;
     if (reschedule)
@@ -33,7 +55,7 @@ void opencfw_boot_stimer_tickless_service(void)
 
 void opencfw_boot_stimer_irq(void)
 {
-    if ((WORD(UINT32_C(0x40008904)) & WORD(UINT32_C(0x40008900))) & 1u) {
+    if ((opencfw_boot_stimer_irq_status(0u) & 1u) != 0u) {
         WORD(UINT32_C(0x40008908)) = 1u;
         (void)WORD(UINT32_C(0x40008904));
         opencfw_boot_stimer_tickless_service();

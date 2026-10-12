@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x38e0 option-bit update for box activation.
  * The option selector is read from the actual native stack slot at SP+4
@@ -21,15 +22,15 @@ __attribute__((noinline,used)) void case_policy_box_begin_with_native_words(uint
     uint32_t status=words[6];
     uint8_t quiet=*(volatile uint8_t *)(uintptr_t)0x200000bfu;
     if((status&0x100000u)==0u){
-        if(quiet==0u){(void)case_legacy_logger((const char *)(uintptr_t)0x08003964u,status);(void)case_legacy_logger((const char *)(uintptr_t)0x0800398cu);}
+        if(quiet==0u){(void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(08003964),status);(void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(0800398c));}
         status|=0x100000u;
     }else{
-        if(quiet==0u){(void)case_legacy_logger((const char *)(uintptr_t)0x08003990u,status);(void)case_legacy_logger((const char *)(uintptr_t)0x0800398cu);}
+        if(quiet==0u){(void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(08003990),status);(void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(0800398c));}
         status&=~0x100000u;
     }
     words[6]=status;
     case_boot_option_prepare();case_boot_option_unlock();
-    if(quiet==0u){(void)case_legacy_logger((const char *)(uintptr_t)0x080039b8u,case_boot_option_write(words));(void)case_legacy_logger((const char *)(uintptr_t)0x0800398cu);}
+    if(quiet==0u){(void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(080039b8),case_boot_option_write(words));(void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(0800398c));}
     case_policy_sensor_delay(100u);
     case_boot_option_commit_a();case_boot_option_commit_b();case_boot_option_commit_c();
 }

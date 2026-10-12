@@ -8,13 +8,12 @@
  */
 #include <stdint.h>
 #include <stddef.h>
+#include "reset_pin_config.h"
 struct touch_msclp_driver_context { uint32_t lock_key; };
-struct touch_pin_config { volatile uint32_t *port; uint8_t pin,pad; };
 struct touch_shield_electrode_config {
     const struct touch_pin_config *pins;
     uint8_t type,count;
 };
-_Static_assert(sizeof(struct touch_pin_config)==8,"LP pin ABI");
 _Static_assert(sizeof(struct touch_shield_electrode_config)==8,"LP electrode ABI");
 struct touch_msclp_driver_context touch_msclp_context_ram_20000cc8
     __attribute__((section(".touch_bss.msclp_context"),used));

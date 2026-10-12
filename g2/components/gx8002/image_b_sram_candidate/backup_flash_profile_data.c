@@ -27,6 +27,7 @@ _Static_assert(sizeof(struct gx8002_image_b_protection_level) == 8u,
 _Static_assert(sizeof(struct gx8002_image_b_flash_profile) == 24u,
                "native flash profile stride");
 
+__attribute__((section(".data.image_b.flash_protection_p25q21l"), aligned(4)))
 const struct gx8002_image_b_protection_level
 gx8002_image_b_protection_p25q21l[5] = {
     {0x00, 0x9c, 0x00, 0x41, 0x00000},
@@ -36,6 +37,7 @@ gx8002_image_b_protection_p25q21l[5] = {
     {0x1c, 0xfc, 0x00, 0x41, 0x40000},
 };
 
+__attribute__((section(".data.image_b.flash_protection_p25q40l"), aligned(4)))
 const struct gx8002_image_b_protection_level
 gx8002_image_b_protection_p25q40l[7] = {
     {0x00, 0x9c, 0x00, 0x41, 0x00000},
@@ -47,6 +49,7 @@ gx8002_image_b_protection_p25q40l[7] = {
     {0x1c, 0xfc, 0x00, 0x41, 0x80000},
 };
 
+__attribute__((section(".data.image_b.flash_protection_p25q80l"), aligned(4)))
 const struct gx8002_image_b_protection_level
 gx8002_image_b_protection_p25q80l[9] = {
     {0x00, 0x9c, 0x00, 0x41, 0x000000},
@@ -62,6 +65,7 @@ gx8002_image_b_protection_p25q80l[9] = {
 
 /* The protection binding addresses are writable SRAM slots populated by
  * 0x10007f80. Names and profile fields are authenticated payload values. */
+__attribute__((section(".data.image_b.flash_profiles"), aligned(4)))
 const struct gx8002_image_b_flash_profile gx8002_image_b_flash_profiles[7] = {
     {"p25q21l", 0x00854012, 0x0003f000, 0x60, 0x20017644, 0x20016f4c},
     {"p25q40l", 0x00856013, 0x0007f000, 0x60, 0x2001764c, 0x20016f4c},
@@ -72,4 +76,9 @@ const struct gx8002_image_b_flash_profile gx8002_image_b_flash_profiles[7] = {
     {0, 0, 0, 0, 0, 0},
 };
 
-const uint32_t gx8002_image_b_flash_erase_sector_bytes = 0x1000u;
+/* Profile +20 points here. Native callbacks read words 0..4 as the
+ * address base, stride, shift parameter, status value and control index. */
+__attribute__((section(".data.image_b.flash_geometry"), aligned(4)))
+const uint32_t gx8002_image_b_flash_geometry[5] = {
+    0x1000u, 0x1000u, 0x200u, 3u, 0u,
+};

@@ -1,0 +1,111 @@
+1520 Synopsys, Inc.SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+Scalar DSP Instruction Set Details ARCv2 ISA Pr ogrammer’s Reference Manual for ARC EM Processors
+MPYWHL
+Function
+Signed multiplication of 32 bits of one operand and least-significant 16 bits of the other operand.
+Extension Group
+DSP 32x16 MAC
+Operation
+if (cc) {
+ accwide = b * c.h0;
+ a = accwide;
+}
+Instruction Format
+op a, b, c
+Syntax Example
+MPYWHL <.f> a,b,c
+STATUS32 Flags Affected
+Description
+Signed multiplication of 32 bits of the b operand and the least-significant 16 bits of the c operand. 
+Write the product to the wide accumulator. Return the least-significant 32 bits of the wide 
+accumulator. The other flags are updated only if the .F suffix is used. An illegal instruction exception 
+is raised if you use the loop-counter (LP_COUNT/r60) as a destination operand register.
+Z • = Set if result is zero
+N • = Set if the accumulator is negative
+C = Unchanged
+V • =Set if the accumulator cannot be re presented as a 32-bit signed integer
+Synopsys, Inc. 1521SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+ARCv2 ISA Programmer’s Reference Manual for ARC EM Processors                                                 Scalar DSP Instruc tion Set Details
+Pseudo Code
+Assembly Code Example
+Syntax and Encoding
+Long Immediate and Null Destination Operands
+In 32-bit formats, a register encoding of 62 represents a long-immediate (limm) source operand and a null destination operand. 
+A null destination operand is specified syntactically using a zero destination. For example, the following instruction subtracts r1 
+from r0, sets the flags, and then discards its result because it has a null destination register operand:
+SUB.F 0,R0,R1
+Two limm source operands in the same instruction must always have the same value. This is due to the fact that each instruction can 
+have at most one limm value, although it can be referenced by both source operands.
+Where permitted in 16-bit formats, a register encoding of 30 represents a long-immediate (limm) source operand and a null (0) 
+destination operand. Most register operands in 16-bit formats are 3 bits wide, and are unable to specify a register encoding of 30. 
+// note: accumulators modeled as 128b integers
+if (DSP_CTRL.GE)
+ accwide = b * c.h0;
+ ACC0_GHI.GUARD = (accwide >> 64) & 0xff;
+ s = accwide >> 31 != 0 && accwide >> 31 != -1
+else
+ accwide = b * c.h0;
+ s = accwide >> 31 != 0 && accwide >> 31 != -1
+ACC0_HI = accwide >> 32 & 0xffff_ffff;
+ACC0_LO = accwide & 0xffff_ffff;
+a = accwide & 0xffff_ffff;
+if F {
+ Z_flag = a = 0;
+ N_flag = accwide < 0;
+ V_flag |= s;
+}
+/* MPYWHL 
+*/
+MPYWHL r0,r2,r3 ; Signed integer multiplication r2 and r3 and 
+; return result in register r0
+Instruction Code 
+MPYWHL<.f> a,b,c
+00110bbb00011100FBBBCCCCCCAAAAAA
+MPYWHL<.f> a,b,u6 00110bbb01011100FBBBuuuuuuAAAAAA
+MPYWHL<.f> b,b,s12 00110bbb10011100FBBBssssssSSSSSS
+MPYWHL<.cc><.f> b,b,c 00110bbb11011100FBBBCCCCCC0QQQQQ
+MPYWHL<.cc><.f> b,b,u6 00110bbb11011100FBBBuuuuuu1QQQQQ
+1522 Synopsys, Inc.SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+Scalar DSP Instruction Set Details ARCv2 ISA Pr ogrammer’s Reference Manual for ARC EM Processors
+However, some 16-bit formats contain an extended 5-bit field, indicated with the syntactic element g or h, allowing a value of 30 to 
+be specified.
+For additional encoding and syntax notes for multiple limm values, see section Dual-operand Instructions, F32_GEN4.
+Synopsys, Inc. 1523SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+ARCv2 ISA Programmer’s Reference Manual for ARC EM Processors                                                 Scalar DSP Instruc tion Set Details
+MPYWHUL
+Function
+Unsigned multiplication of 32 bits of one operand and the least-significant 16 bits of the other 
+operand.
+Extension Group
+DSP 32x16 MAC
+Operation
+if (cc) {
+ accwide = (unsigned) (b * c.h0);
+ a = accwide;
+}
+Instruction Format
+op a, b, c
+Syntax Example
+MPYWHUL <.f> a,b,c
+STATUS32 Flags Affected
+Description
+Unsigned multiplication of 32 bits of the b operand and the least-significant 16 bits of the c operand. 
+Write the product to the wide accumulator. Return the least-significant 32 bits of the wide 
+accumulator. The other flags are updated only if the .F suffix is used. An illegal instruction exception 
+is raised if you use the loop-counter (LP_COUNT/r60) as a destination operand register.
+Z • = Set when the destination register value is zero
+N • = Cleared
+C = Unchanged
+V • =Set if the accumulator cannot be re presented as a 32-bit unsigned integer

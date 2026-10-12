@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: MIT
- * Isolated 0xff prefix through first reset lower call.
- * Lower call and anything after it remain unmodeled.
+ * Native 0xff logging and reset entry. The sourced child writes AIRCR and
+ * stays in the stock idle loop; physical reset is outside emulator proof.
  */
 #include <stdint.h>
 extern uint32_t case_legacy_logger(const char *format, ...);

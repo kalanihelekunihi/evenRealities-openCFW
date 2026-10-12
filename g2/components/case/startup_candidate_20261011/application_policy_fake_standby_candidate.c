@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x0800738a-0x08007482 dual fake-standby counters. The left and right
  * structures are the two live stack pointers initialized at 0x08007200.
@@ -31,10 +32,10 @@ void case_policy_fake_standby_counters_738a(volatile uint8_t *state,
         write16(state+0x38u,(uint16_t)(old+1u));
         if(old>300u){
             if(left[0x13u]!=0u){
-                if(shared[7u]==0u){case_policy_log(0x0800763cu);case_policy_log(0x08007608u);}
+                if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(0800763c));case_policy_log(CASE_STRING_ADDR(08007608));}
                 write16(state+0x38u,0u);
             }else{
-                if(shared[7u]==0u){case_policy_log(0x08007664u);case_policy_log(0x08007608u);}
+                if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(08007664));case_policy_log(CASE_STRING_ADDR(08007608));}
                 case_policy_fake_standby_set(1u);
                 if(shared[3u]!=0u)case_policy_fake_standby_clear();
             }
@@ -45,10 +46,10 @@ void case_policy_fake_standby_counters_738a(volatile uint8_t *state,
         write16(right+0x14u,(uint16_t)(old+1u));
         if(old>300u){
             if(right[0x0fu]!=0u){
-                if(shared[7u]==0u){case_policy_log(0x08007694u);case_policy_log(0x08007608u);}
+                if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(08007694));case_policy_log(CASE_STRING_ADDR(08007608));}
                 write16(right+0x14u,0u);
             }else{
-                if(shared[7u]==0u){case_policy_log(0x080076bcu);case_policy_log(0x08007608u);}
+                if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(080076bc));case_policy_log(CASE_STRING_ADDR(08007608));}
                 case_policy_fake_standby_set(0u);
             }
         }

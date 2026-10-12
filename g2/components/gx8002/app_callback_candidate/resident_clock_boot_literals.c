@@ -19,3 +19,10 @@ const struct gx8002_clock_boot_source gx8002_clock_1m_sources_25cd0[2]
 const int32_t gx8002_clock_startmode_adjustments_25ce0[5]
     __attribute__((section(".gx8002.clock_boot.25ce0"), used,
                    aligned(4))) = {0, 10, 15, -10, -15};
+
+/* Native 0x10025aee..0x10025af4 copies this separate 16-byte pair from
+ * 0x10025cf4 for start mode 1. The pair at 0x10025cd0 belongs to the
+ * independent 0x10025a14 low-power switch. */
+const struct gx8002_clock_boot_source gx8002_clock_startmode1_sources_25cf4[2]
+    __attribute__((section(".gx8002.clock_boot.25cf4"), used,
+                   aligned(4))) = {{16u, 0u}, {0u, 1u}};

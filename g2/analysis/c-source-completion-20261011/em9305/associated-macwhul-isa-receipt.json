@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "native_address": "0x32b4d4",
+  "mnemonic": "macwhul 0,r1,r15",
+  "exact_bytes": 4,
+  "source_sha256": "2a4a7a5c017df3eb0325b756db8b719ecd0656d33a2fc13789d03a3e5b1fb9c9",
+  "scope": "exact named opcode identity and publisher accumulator semantics; no runtime",
+  "manual": "third-party/manuals/synopsys-arc-em/macwhul-extract.txt",
+  "manual_pdf_page": 1466,
+  "manual_extract_sha256": "0c594a4d680a9584add84276f90dfe44acad0f169e8075bb6d31c9a2942108ea",
+  "semantics": "unsigned ACC low64/72 += unsigned32(B)*unsigned16(C.h0); ACC0_LO=low32; null destination discards register result"
+}

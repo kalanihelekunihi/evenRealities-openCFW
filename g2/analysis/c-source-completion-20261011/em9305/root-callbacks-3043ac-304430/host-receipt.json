@@ -1,0 +1,17 @@
+{
+  "status": "PASS_HOST_UBSAN_CHILD_CUTS",
+  "routes": 6,
+  "source_sha256": "70409c7e0a0f9fbd03b08092e0b8536d027cc28239ba3e7afa9b511e8e519196",
+  "fixture_sha256": "d4cfcb406424a71123b3b1346059815373cb12c4f7e521cadb23e0ae34d1d170",
+  "native_ranges": [
+    "3043ac..30442e",
+    "304430..304464"
+  ],
+  "review": "Full authenticated instructions reviewed; callback receives live R2 identity; counter unconditional store and fresh callback-mutated index reviewed",
+  "limits": [
+    "No ARC native numeric execution",
+    "Resident radio child behavior cut",
+    "Whole callback ABI and hardware qualification open"
+  ],
+  "selected": false
+}

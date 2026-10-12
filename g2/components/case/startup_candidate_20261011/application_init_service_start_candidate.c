@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x0800d178 service command startup sequence.
  * Log format at 0x0800d1ac remains linker-owned product data.
@@ -12,5 +13,5 @@ void case_init_service_start(void)
     case_policy_sensor_command(3u,0xaeu);
     case_policy_sensor_command(4u,0xaeu);
     case_policy_sensor_command(7u,0x20u);
-    (void)case_legacy_logger((const char *)(uintptr_t)0x0800d1acu);
+    (void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(0800d1ac));
 }

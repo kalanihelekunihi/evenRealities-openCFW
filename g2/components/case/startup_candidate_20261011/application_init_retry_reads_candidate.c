@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x8fa8 and 0x90ac ten-attempt peripheral reads.
  */
@@ -17,7 +18,7 @@ uint32_t case_init_motion_read(uint32_t index,uint32_t count,uint8_t *out)
         if(result!=0u)return result;
         diagnostics[0]++;
         if(diagnostics[4]==1u)
-            (void)case_legacy_logger((const char *)(uintptr_t)0x0800d408u,diagnostics[1],diagnostics[2],diagnostics[3]);
+            (void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(0800d408),diagnostics[1],diagnostics[2],diagnostics[3]);
     }
     for(uint32_t i=0u;i<count;++i)out[i]=0xffu;
     return 0u;
@@ -31,7 +32,7 @@ uint32_t case_init_secondary_config_read(uint32_t index,uint32_t count,uint8_t *
         __asm__ volatile("cpsie i" ::: "memory");
         if(result!=0u)return result;
         diagnostics[1]++;
-        (void)case_legacy_logger((const char *)(uintptr_t)0x0800d4c0u,retry,diagnostics[2],diagnostics[3],diagnostics[4]);
+        (void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(0800d4c0),retry,diagnostics[2],diagnostics[3],diagnostics[4]);
     }
     for(uint32_t i=0u;i<count;++i)out[i]=0xffu;
     return 0u;

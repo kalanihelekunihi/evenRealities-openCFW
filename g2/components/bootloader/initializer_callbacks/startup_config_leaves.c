@@ -5,9 +5,10 @@
 extern uint32_t opencfw_boot_startup_select4(uint32_t,uint32_t);
 extern uint32_t opencfw_boot_startup_select5(uint32_t,uint32_t);
 extern uint32_t opencfw_boot_startup_select6(uint32_t,uint32_t);
-uint32_t opencfw_boot_startup_clock_descriptor(const void *src) {
- if (!src) return 6;
- const uint8_t *p=src; volatile uint8_t *q=(volatile uint8_t *)0x2000007c;
+uint32_t opencfw_boot_startup_clock_descriptor(volatile void *destination) {
+ if (!destination) return 6;
+ volatile const uint8_t *p=(volatile const uint8_t *)0x2000007c;
+ volatile uint8_t *q=destination;
  for (unsigned i=0;i<20;i++) q[i]=p[i];
  return 0;
 }

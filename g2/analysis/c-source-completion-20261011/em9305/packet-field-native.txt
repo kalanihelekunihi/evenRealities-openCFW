@@ -1,0 +1,36 @@
+  308ecc:	c2e6                	enter_s	[r13-r15,blink]
+  308ece:	0b9a 08e0           	bl.d	72600	;0x31aa64
+  308ed2:	4428                	mov_s	r12,r1
+  308ed4:	4608                	mov_s	r14,r0
+  308ed6:	e827                	breq_s	r0,0,78	;0x308f22
+  308ed8:	1620 1080           	ldb	r0,[r14,32]
+  308edc:	080f 001e           	bbit0.t	r0,0,14	;0x308eea
+  308ee0:	8e02                	ldb_s	r0,[r14,0x2]
+  308ee2:	7014                	cmp_s	r0,0
+  308ee4:	d80c                	mov_s	r0,0xc
+  308ee6:	f203                	beq_s	6	;0x308eea
+  308ee8:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  308eea:	0f3e fdaf           	bl.d	-18628	;0x304624
+  308eee:	4081                	mov_s	r0,r12
+  308ef0:	4528                	mov_s	r13,r1
+  308ef2:	732c                	mov_s	r1,3
+  308ef4:	b90e                	asl_s	r1,r1,0xe
+  308ef6:	2504 1042           	and	r2,r13,r1
+  308efa:	0a13 0060           	breq.d.nt	r2,r1,18	;0x308f0a
+  308efe:	4708                	mov_s	r15,r0
+  308f00:	2252 83be           	bxor.f	0,r2,0xe
+  308f04:	f203                	beq_s	6	;0x308f0a
+  308f06:	d812                	mov_s	r0,0x12
+  308f08:	eaf0                	brne_s	r2,0,-32	;0x308ee8
+  308f0a:	084e 0580           	bl	45132	;0x313f54
+  308f0e:	a6a3                	st_s	r13,[r14,0xc]
+  308f10:	a6e2                	st_s	r15,[r14,0x8]
+  308f12:	1e04 1043           	stb	1,[r14,4]
+  308f16:	085a 05a0           	bl.d	45144	;0x313f6c
+  308f1a:	1e03 1043           	stb	1,[r14,3]
+  308f1e:	700c                	mov_s	r0,0
+  308f20:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  308f22:	d842                	mov_s	r0,0x42
+  308f24:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  308f26:	78e0                	nop_s
+  30cee0:	07ed fdcf           	b	-16404	;0x308ecc

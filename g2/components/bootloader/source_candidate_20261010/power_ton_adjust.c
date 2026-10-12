@@ -10,9 +10,8 @@ void event_a_power_ton_adjust(uint32_t new_minor, uint32_t major)
     if (major == 8u)
         new_minor = 7u;
     if (new_minor == 0u) {
-        const uint32_t value = WORD(0x20026bfcu);
         ton = BYTE(0x20026bfcu) & 0x1fu;
-        trim = (value & 0x7fffu) >> 10;
+        trim = (WORD(0x20026bfcu) & 0x7fffu) >> 10;
     } else if (new_minor == 2u) {
         ton = BYTE(0x20026bf4u) & 0x1fu;
         trim = BYTE(0x20026bf8u) & 0x1fu;

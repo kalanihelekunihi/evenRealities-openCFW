@@ -4,6 +4,7 @@
  * addresses; no success value or callback is synthesized here.
  */
 #include <stdint.h>
+#include "resident_flash_api_data.h"
 
 extern uint64_t gx8002_resident_clock_time_us_2585c(void);
 
@@ -17,7 +18,7 @@ int32_t gx8002_resident_flash_probe_2475c(
     volatile uint8_t *const probe_flag =
         (volatile uint8_t *)(uintptr_t)UINT32_C(0x20026ff4);
     const volatile uint32_t *const callback_slot =
-        (const volatile uint32_t *)(uintptr_t)UINT32_C(0x20026504);
+        (const volatile uint32_t *)(const void *)gx8002_flash_api_26504;
     do {
         if (*probe_flag < 2u) {
             gx8002_probe_callback callback =

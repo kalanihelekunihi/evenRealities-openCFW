@@ -1,0 +1,29 @@
+  310664:	43c3 0080 12ec      	mov_s	r3,0x8012ec
+  31066a:	42c3 0080 12ee      	mov_s	r2,0x8012ee
+  310670:	b200                	sth_s	r0,[r2,0]
+  310672:	710c                	mov_s	r0,1
+  310674:	7fe0                	j_s.d	[blink]
+  310676:	b320                	sth_s	r1,[r3,0]
+  313744:	c2e2                	enter_s	[r13,blink]
+  313746:	209f 0893           	mpyuw	r0,r0,1250
+  31374a:	45cb 0080 5f34      	mov_s	r13,0x805f34
+  313750:	0c9e 1020           	bl.d	132252	;0x333bec
+  313754:	1d00 1003           	stb	0,[r13]
+  313758:	1d00 1043           	stb	1,[r13]
+  31375c:	c6c2                	leave_s	[r13,blink,pcl]
+  333bec:	44cb 0080 5f28      	mov_s	r12,0x805f28
+  333bf2:	8c2c                	ldb_s	r1,[r12,0xc]
+  333bf4:	e902                	breq_s	r1,0,4	;0x333bf8
+  333bf6:	7ee0                	j_s	[blink]
+  333bf8:	244a 7200           	mov	lp_count,0x8
+  333bfc:	41c3 0033 5800      	mov_s	r1,0x335800
+  333c02:	42c3 0033 57e0      	mov_s	r2,0x3357e0
+  333c08:	1c08 1000           	st	r0,[r12,8]
+  333c0c:	20a8 01c0           	lp	14	;0x333c1a
+  333c10:	1204 0403           	ld.ab	r3,[r2,4]
+  333c14:	0b09 0004           	brlo.nt	r3,r0,8	;0x333c1c
+  333c18:	7424                	add_s	r1,r1,4
+  333c1a:	f1ef                	b_s	-34	;0x333bf6
+  333c1c:	8100                	ld_s	r0,[r1,0]
+  333c1e:	7fe0                	j_s.d	[blink]
+  333c20:	a401                	st_s	r0,[r12,0x4]

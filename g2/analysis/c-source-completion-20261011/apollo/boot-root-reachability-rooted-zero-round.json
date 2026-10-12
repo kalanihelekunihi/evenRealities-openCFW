@@ -1,0 +1,40 @@
+{
+  "status": "ROOTED_DIRECT_CALL_GRAPH_CENSUS",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "vector_slots": 256,
+  "vector_catalogue_slots": 146,
+  "vector_distinct_catalogue_roots": 17,
+  "scatter_callback_roots": 34,
+  "scatter_callback_catalogue_roots": 29,
+  "scatter_callback_entries_not_in_catalogue": [
+    {
+      "offset": "0x174",
+      "entry": "0x428920"
+    },
+    {
+      "offset": "0x1b0",
+      "entry": "0x429e00"
+    },
+    {
+      "offset": "0x1b8",
+      "entry": "0x42a030"
+    },
+    {
+      "offset": "0x1bc",
+      "entry": "0x42a032"
+    },
+    {
+      "offset": "0x1c0",
+      "entry": "0x42a034"
+    }
+  ],
+  "reachable_catalogue_entries": 654,
+  "reachable_without_machine_crosswalk": 0,
+  "unattributed_root_entries": [],
+  "largest_reachable_unattributed": [],
+  "limits": [
+    "The native catalogue omits some valid function entries and may have incomplete direct-call edges.",
+    "Reachability from vectors and one expanded callback payload excludes runtime-installed function pointers, task creation, computed dispatch and external ROM callbacks.",
+    "Source attribution leads do not prove whole-body equality or physical behavior."
+  ]
+}

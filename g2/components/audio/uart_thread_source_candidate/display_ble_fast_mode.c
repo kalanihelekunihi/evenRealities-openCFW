@@ -2,7 +2,7 @@
 #include <stdint.h>
 extern volatile uint8_t audio_ble_fast_mode_throttle_enabled; /* RAM 0x20074f90 */
 extern uint32_t audio_ble_fast_mode_last_reject_tick; /* RAM 0x20074340 */
-extern void audio_ble_fast_mode_event(void); /* function pointer ROM 0x47761d */
+extern void audio_ble_connect_param_request(uint8_t); /* native callback ROM 0x47761d */
 extern uint32_t g2_flashdb_candidate_tick(void); /* selected osKernelGetTickCount 0x4490cc */
 extern void audio_event_loop_remove_delayed(void (*)(void)); /* native 0x476ace */
 extern void audio_event_loop_push_delayed(void (*)(void),uint32_t,uint32_t); /* native 0x47697e */
@@ -25,6 +25,6 @@ void audio_ble_set_fast_mode(void) {
             return;
         }
     }
-    audio_event_loop_remove_delayed(audio_ble_fast_mode_event);
-    audio_event_loop_push_delayed(audio_ble_fast_mode_event,163u,0u);
+    audio_event_loop_remove_delayed((void (*)(void))audio_ble_connect_param_request);
+    audio_event_loop_push_delayed((void (*)(void))audio_ble_connect_param_request,163u,0u);
 }

@@ -1,6 +1,7 @@
 /* Independent ARM32 reconstruction. Valid coherent queues required.
  * Task removal and mutex disinherit are unresolved original peer boundaries. */
 #include "deferred.h"
+extern void vEventGroupSetBitsCallback(void *event_group,uint32_t bits);
 extern uint32_t case_mask_save(void);
 extern void case_mask_restore(uint32_t);
 extern int32_t case_remove_waiter(case_list *);
@@ -27,6 +28,6 @@ int32_t case_pend_from_isr(uint32_t callback,uint32_t arg1,uint32_t arg2,int32_t
  case_deferred_message message={-2,callback,arg1,arg2};
  return case_queue_send_isr(*(case_queue **)0x20000164u,&message,yield,0);
 }
-int32_t xEventGroupSetBitsFromISR(void *event,uint32_t flags,int32_t *yield){return case_pend_from_isr(0x0800bf8du,(uint32_t)event,flags,yield);}
+int32_t xEventGroupSetBitsFromISR(void *event,uint32_t flags,int32_t *yield){return case_pend_from_isr((uint32_t)(uintptr_t)vEventGroupSetBitsCallback,(uint32_t)event,flags,yield);}
 
 void case_copy_from_queue(case_queue *q,void *out){if(q->item_size){q->read+=q->item_size;if(q->read>=q->tail)q->read=q->head;copy_bytes(out,q->read,q->item_size);}}

@@ -1,0 +1,150 @@
+
+/imcra_sizes_native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+1000ea68 <.data>:
+1000ea68:	4039      	cmpnei      	r1, 0
+1000ea6a:	3033      	movi      	r3, 48
+1000ea6c:	0030      	movi      	r0, 0
+1000ea6e:	400c03c4 	inct      	r0, r3, 0
+1000ea72:	3c78      	jmp      	r15
+1000ea74:	d314      	push      	r4-r6, r15
+1000ea76:	2414      	subi      	r14, r14, 16
+1000ea78:	6898      	ld.w      	r3, (r14, 0x20)
+1000ea7a:	036d      	mov      	r4, r0
+1000ea7c:	4f6d      	mov      	r5, r3
+1000ea7e:	3032      	movi      	r2, 48
+1000ea80:	6998      	ld.w      	r3, (r14, 0x24)
+1000ea82:	0031      	movi      	r1, 0
+1000ea84:	30240ef4 	fsts      	fr0, (r14, 0xc)
+1000ea88:	21240ef4 	fsts      	fr1, (r14, 0x8)
+1000ea8c:	12240ef4 	fsts      	fr2, (r14, 0x4)
+1000ea90:	03240ef4 	fsts      	fr3, (r14, 0x0)
+1000ea94:	8f6d      	mov      	r6, r3
+1000ea96:	971400e0 	bsr      	0x100113c4	// 0x100113c4
+1000ea9a:	03200ef4 	flds      	fr3, (r14, 0x0)
+1000ea9e:	12200ef4 	flds      	fr2, (r14, 0x4)
+1000eaa2:	21200ef4 	flds      	fr1, (r14, 0x8)
+1000eaa6:	30200ef4 	flds      	fr0, (r14, 0xc)
+1000eaaa:	4b0004e9 	bez      	r4, 0x1000eb40	// 0x1000eb40
+1000eaae:	0033      	movi      	r3, 0
+1000eab0:	002404f4 	fsts      	fr0, (r4, 0x0)
+1000eab4:	601b06f4 	fmtvrl      	fr0, r6
+1000eab8:	2c0064dc 	st.b      	r3, (r4, 0x2c)
+1000eabc:	a01800f4 	fstoui.rz      	fr0, fr0
+1000eac0:	104123ea 	movih      	r3, 16656
+1000eac4:	332404f4 	fsts      	fr3, (r4, 0xc)
+1000eac8:	112404f4 	fsts      	fr1, (r4, 0x4)
+1000eacc:	222404f4 	fsts      	fr2, (r4, 0x8)
+1000ead0:	502404f4 	fsts      	fr0, (r4, 0x14)
+1000ead4:	a4b4      	st.w      	r5, (r4, 0x10)
+1000ead6:	601b03f4 	fmtvrl      	fr0, r3
+1000eada:	e90a00e0 	bsr      	0x100100ac	// 0x100100ac
+1000eade:	512004f4 	flds      	fr1, (r4, 0x14)
+1000eae2:	222004f4 	flds      	fr2, (r4, 0x8)
+1000eae6:	211a01f4 	fuitos      	fr1, fr1
+1000eaea:	010241f4 	fmuls      	fr1, fr1, fr2
+1000eaee:	e00000f4 	fnegs      	fr0, fr0
+1000eaf2:	000320f4 	fdivs      	fr0, fr0, fr1
+1000eaf6:	df0a00e0 	bsr      	0x100100b4	// 0x100100b4
+1000eafa:	104123ea 	movih      	r3, 16656
+1000eafe:	802404f4 	fsts      	fr0, (r4, 0x20)
+1000eb02:	601b03f4 	fmtvrl      	fr0, r3
+1000eb06:	d30a00e0 	bsr      	0x100100ac	// 0x100100ac
+1000eb0a:	512004f4 	flds      	fr1, (r4, 0x14)
+1000eb0e:	322004f4 	flds      	fr2, (r4, 0xc)
+1000eb12:	211a01f4 	fuitos      	fr1, fr1
+1000eb16:	010241f4 	fmuls      	fr1, fr1, fr2
+1000eb1a:	e00000f4 	fnegs      	fr0, fr0
+1000eb1e:	000320f4 	fdivs      	fr0, fr0, fr1
+1000eb22:	c90a00e0 	bsr      	0x100100b4	// 0x100100b4
+1000eb26:	2c0064d8 	ld.b      	r3, (r4, 0x2c)
+1000eb2a:	902404f4 	fsts      	fr0, (r4, 0x24)
+1000eb2e:	060023e9 	bnez      	r3, 0x1000eb3a	// 0x1000eb3a
+1000eb32:	0033      	movi      	r3, 0
+1000eb34:	66b4      	st.w      	r3, (r4, 0x18)
+1000eb36:	67b4      	st.w      	r3, (r4, 0x1c)
+1000eb38:	6ab4      	st.w      	r3, (r4, 0x28)
+1000eb3a:	0133      	movi      	r3, 1
+1000eb3c:	2c0064dc 	st.b      	r3, (r4, 0x2c)
+1000eb40:	136c      	mov      	r0, r4
+1000eb42:	0414      	addi      	r14, r14, 16
+1000eb44:	9314      	pop      	r4-r6, r15
+1000eb46:	0000      	bkpt
+1000eb48:	4039      	cmpnei      	r1, 0
+1000eb4a:	3433      	movi      	r3, 52
+1000eb4c:	0030      	movi      	r0, 0
+1000eb4e:	400c03c4 	inct      	r0, r3, 0
+1000eb52:	3c78      	jmp      	r15
+1000eb54:	d414      	push      	r4-r7, r15
+1000eb56:	2414      	subi      	r14, r14, 16
+1000eb58:	6998      	ld.w      	r3, (r14, 0x24)
+1000eb5a:	4f6d      	mov      	r5, r3
+1000eb5c:	036d      	mov      	r4, r0
+1000eb5e:	6a98      	ld.w      	r3, (r14, 0x28)
+1000eb60:	8f6d      	mov      	r6, r3
+1000eb62:	3432      	movi      	r2, 52
+1000eb64:	6b98      	ld.w      	r3, (r14, 0x2c)
+1000eb66:	0031      	movi      	r1, 0
+1000eb68:	30240ef4 	fsts      	fr0, (r14, 0xc)
+1000eb6c:	21240ef4 	fsts      	fr1, (r14, 0x8)
+1000eb70:	12240ef4 	fsts      	fr2, (r14, 0x4)
+1000eb74:	03240ef4 	fsts      	fr3, (r14, 0x0)
+1000eb78:	cf6d      	mov      	r7, r3
+1000eb7a:	251400e0 	bsr      	0x100113c4	// 0x100113c4
+1000eb7e:	03200ef4 	flds      	fr3, (r14, 0x0)
+1000eb82:	12200ef4 	flds      	fr2, (r14, 0x4)
+1000eb86:	21200ef4 	flds      	fr1, (r14, 0x8)
+1000eb8a:	30200ef4 	flds      	fr0, (r14, 0xc)
+1000eb8e:	4c0004e9 	bez      	r4, 0x1000ec26	// 0x1000ec26
+1000eb92:	0033      	movi      	r3, 0
+1000eb94:	002404f4 	fsts      	fr0, (r4, 0x0)
+1000eb98:	601b07f4 	fmtvrl      	fr0, r7
+1000eb9c:	300064dc 	st.b      	r3, (r4, 0x30)
+1000eba0:	a01800f4 	fstoui.rz      	fr0, fr0
+1000eba4:	104123ea 	movih      	r3, 16656
+1000eba8:	332404f4 	fsts      	fr3, (r4, 0xc)
+1000ebac:	112404f4 	fsts      	fr1, (r4, 0x4)
+1000ebb0:	222404f4 	fsts      	fr2, (r4, 0x8)
+1000ebb4:	602404f4 	fsts      	fr0, (r4, 0x18)
+1000ebb8:	a4b4      	st.w      	r5, (r4, 0x10)
+1000ebba:	601b03f4 	fmtvrl      	fr0, r3
+1000ebbe:	c5b4      	st.w      	r6, (r4, 0x14)
+1000ebc0:	760a00e0 	bsr      	0x100100ac	// 0x100100ac
+1000ebc4:	612004f4 	flds      	fr1, (r4, 0x18)
+1000ebc8:	322004f4 	flds      	fr2, (r4, 0xc)
+1000ebcc:	211a01f4 	fuitos      	fr1, fr1
+1000ebd0:	010241f4 	fmuls      	fr1, fr1, fr2
+1000ebd4:	e00000f4 	fnegs      	fr0, fr0
+1000ebd8:	000320f4 	fdivs      	fr0, fr0, fr1
+1000ebdc:	6c0a00e0 	bsr      	0x100100b4	// 0x100100b4
+1000ebe0:	104123ea 	movih      	r3, 16656
+1000ebe4:	902404f4 	fsts      	fr0, (r4, 0x24)
+1000ebe8:	601b03f4 	fmtvrl      	fr0, r3
+1000ebec:	600a00e0 	bsr      	0x100100ac	// 0x100100ac
+1000ebf0:	612004f4 	flds      	fr1, (r4, 0x18)
+1000ebf4:	422004f4 	flds      	fr2, (r4, 0x10)
+1000ebf8:	211a01f4 	fuitos      	fr1, fr1
+1000ebfc:	010241f4 	fmuls      	fr1, fr1, fr2
+1000ec00:	e00000f4 	fnegs      	fr0, fr0
+1000ec04:	000320f4 	fdivs      	fr0, fr0, fr1
+1000ec08:	560a00e0 	bsr      	0x100100b4	// 0x100100b4
+1000ec0c:	300064d8 	ld.b      	r3, (r4, 0x30)
+1000ec10:	a02404f4 	fsts      	fr0, (r4, 0x28)
+1000ec14:	060023e9 	bnez      	r3, 0x1000ec20	// 0x1000ec20
+1000ec18:	0033      	movi      	r3, 0
+1000ec1a:	67b4      	st.w      	r3, (r4, 0x1c)
+1000ec1c:	68b4      	st.w      	r3, (r4, 0x20)
+1000ec1e:	6bb4      	st.w      	r3, (r4, 0x2c)
+1000ec20:	0133      	movi      	r3, 1
+1000ec22:	300064dc 	st.b      	r3, (r4, 0x30)
+1000ec26:	136c      	mov      	r0, r4
+1000ec28:	0414      	addi      	r14, r14, 16
+1000ec2a:	9414      	pop      	r4-r7, r15
+1000ec2c:	4039      	cmpnei      	r1, 0
+1000ec2e:	000500c4 	mvc      	r0
+1000ec32:	0640      	lsli      	r0, r0, 6
+1000ec34:	3c78      	jmp      	r15
+	...

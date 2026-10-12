@@ -1,0 +1,37 @@
+{
+  "stock_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "source_receipt_sha256": "8caf255645192936a92a73b6d95254be937a17b3ffd7e228f7cdd8fc9f1c2b27",
+  "qemu_sha256": "9fbb51168ef087533e8436a3e020962214a6145b33c7398903d08025b753e304",
+  "cases": [
+    "zero stage/frame and zero output",
+    "zero stage/frame with tail copy"
+  ],
+  "observations": {
+    "original": {
+      "elf_sha256": "2ce1e2d685687cfa98dbdf24fde8d8c15cf4651e7b8829928992b2a84630dec3",
+      "trace": [
+        "label: 3",
+        "label: 1",
+        "label: 1000",
+        "label: 2000",
+        "label: 90",
+        "label: 0",
+        "csky_exit_write: exit(0)"
+      ]
+    },
+    "source": {
+      "elf_sha256": "9186077f9eabdb6b8e2836a22c3bd3e01ba68146507efc7c85b6bfc231fb4e7b",
+      "trace": [
+        "label: 3",
+        "label: 1",
+        "label: 1000",
+        "label: 2000",
+        "label: 90",
+        "label: 0",
+        "csky_exit_write: exit(0)"
+      ]
+    }
+  },
+  "result": "PASS",
+  "limit": "Two finite QEMU paths; no active stage/frame/channel, DSP numerical, FP exception, original four-register RAM-binding, hardware, or whole-image equivalence proof."
+}

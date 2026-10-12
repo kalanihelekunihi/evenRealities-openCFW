@@ -19,8 +19,8 @@ extern void SVC_Settings_AutoBrightnessOpen(void);
 extern void SVC_Settings_AutoBrightnessClose(void);
 extern void SVC_Settings_SaveSettingConfigToKVCheck(void);
 extern void audio_uart_display_service_prepare(void); /* 0x44227e */
-extern void audio_uart_display_application_init(void); /* 0x44ff38 */
-extern uint32_t audio_uart_display_audio_new(void); /* 0x45f15a */
+extern void *audio_uart_display_application_init(void); /* 0x44ff38 */
+extern uint32_t audio_uart_display_audio_new(void *); /* 0x45f15a */
 extern void audio_uart_display_audio_release(uint32_t); /* 0x45f7be */
 extern void audio_uart_display_audio_stop(uint32_t,uint32_t,uint32_t); /* 0x45faa8 */
 extern void audio_uart_display_context_set(const void *); /* 0x60090 */
@@ -119,8 +119,8 @@ static void handle_start(void) {
     audio_uart_display_background=0u;
     log1(3u,0x2a0u,e,c,message_id());
     audio_uart_display_service_prepare();
-    audio_uart_display_application_init();
-    audio_uart_display_audio_handle=audio_uart_display_audio_new();
+    void *active_screen=audio_uart_display_application_init();
+    audio_uart_display_audio_handle=audio_uart_display_audio_new(active_screen);
     audio_uart_display_context_set(audio_uart_display_context);
     audio_uart_display_layer_init();
     audio_uart_display_context_commit();

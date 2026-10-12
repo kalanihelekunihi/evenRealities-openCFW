@@ -166,6 +166,48 @@ sources = {
     'resident_xip_snpu_process_status.c': ['10205bd8'],
     'resident_xip_snpu_overtime.c': ['10205ad8', '10205b1c'],
     'resident_xip_gpio_irq_disable.c': ['10205ee0', '10205fb4', '10206074'],
+    'resident_xip_uart_async_done.c': ['1020854c'],
+    'resident_xip_notification_service.c': ['1020979c', '102097c8'],
+    'resident_xip_multiboot_switch.c': ['10207a80'],
+    'resident_xip_aout_push_frame.c': ['102051a8'],
+    'resident_xip_aout_select_channel.c': ['1020502c'],
+    'resident_xip_aout_db_table.c': ['10204f90', '10204ff0'],
+    'resident_xip_aout_hw_init.c': ['10204f18'],
+    'resident_xip_aout_dispatch.c': ['10205374', '1020537c', '102053b0',
+                                    '102053e4', '10205418', '10205450',
+                                    '10205488', '102054c0', '102054f8',
+                                    '10205530', '10205574'],
+    'resident_xip_aout_alloc_playback.c': ['10205254'],
+    'resident_xip_app_audio_gpio.c': ['10208d98', '10208dcc',
+                                      '10208dec', '10208e20'],
+    'resident_xip_app_setup.c': ['10208e4c', '102096fc'],
+    'resident_xip_app_commands.c': ['10209258'],
+    'resident_xip_mic_buffer.c': ['10208e80'],
+    'resident_xip_stop_i2s.c': ['1020913c'],
+    'resident_xip_start_i2s.c': ['10208ff0'],
+    'resident_xip_sample_event.c': ['10208f04'],
+    'resident_xip_i2s_request_tick.c': ['102091bc'],
+    'resident_xip_app_command_callback.c': ['10209430'],
+    'resident_xip_strtok.c': ['1020995c'],
+    'resident_xip_div64.c': ['102098b4'],
+    'resident_xip_muldi3.c': ['1020a528'],
+    'resident_xip_fp_parts.c': ['1020a704', '1020a7e8'],
+    'resident_xip_pack_double.c': ['1020a574'],
+    'resident_xip_fpadd_parts.c': ['10209dd8'],
+}
+pinned_library_candidates = {
+    # Same-version, authenticated LLVM compiler-rt source algorithms.
+    # These are C candidates for stock compiler helpers; ABI and IEEE
+    # native equivalence are separate gates, not implied by this mapping.
+    'adddf3.c': ['1020a09c'],
+    'comparedf2.c': ['1020a420'],
+    'divdf3.c': ['1020a308'],
+    'fixdfsi.c': ['1020a460'],
+    'fixunsdfsi.c': ['10209a6c'],
+    'floatunsidf.c': ['1020a4d0'],
+    'muldf3.c': ['1020a108'],
+    'subdf3.c': ['1020a0cc'],
+    'udivdi3.c': ['10209aa4'],
 }
 seed_a = {x['entry']: x for x in map(json.loads, (base/'image_a_xip/functions-000.jsonl').open())}
 seed_b = {x['entry']: x for x in map(json.loads, (base/'image_b_sram/functions-000.jsonl').open())}
@@ -177,21 +219,52 @@ for source, addresses in sources.items():
         assert address in seed_a, address
         bindings.append({'entry': address, 'native_name': seed_a[address]['name'],
                          'body_bytes': seed_a[address]['body_bytes'],
-                         'candidate_source': str(path.relative_to(root))})
+                         'candidate_source': str(path.relative_to(root)),
+                         'binding_kind': 'component_source_candidate'})
+component_binding_count = len(bindings)
+for source, addresses in pinned_library_candidates.items():
+    path = root/'third-party/upstream/llvm-compiler-rt-format-20.1.8'/source
+    assert path.is_file(), path
+    for address in addresses:
+        assert address in seed_a, address
+        bindings.append({'entry': address, 'native_name': seed_a[address]['name'],
+                         'body_bytes': seed_a[address]['body_bytes'],
+                         'candidate_source': str(path.relative_to(root)),
+                         'binding_kind': 'pinned_library_algorithm_candidate_abi_unqualified'})
+sdk_crc = root/'third-party/upstream/nationalchip-lvp-kws/base/src/crc32.c'
+assert sdk_crc.is_file(), sdk_crc
+bindings.append({'entry': '102097f4',
+                 'native_name': seed_a['102097f4']['name'],
+                 'body_bytes': seed_a['102097f4']['body_bytes'],
+                 'candidate_source': str(sdk_crc.relative_to(root)),
+                 'binding_kind': 'pinned_nationalchip_crc_algorithm_candidate'})
 assert len({x['entry'] for x in bindings}) == len(bindings)
 bound_addresses = {x['entry'] for x in bindings}
 unbound_entries = [x for x in seed_a.values() if x['entry'] not in bound_addresses]
 # Native image-A XIP's post-code region begins at 0x1020a8aa. These Ghidra
 # function labels point into initialized literals/tables, not executable C.
 data_tail = [x for x in unbound_entries if int(x['entry'], 16) >= 0x1020a8aa]
-possible_code = [x for x in unbound_entries if int(x['entry'], 16) < 0x1020a8aa]
+interior_code_labels = {
+    # Direct native 0x10209c70 falls through into this address; no entry
+    # prologue or independent caller ABI exists. The catalogue split the
+    # multi-block 0x10209aa4 udivdi3 body and mislabeled this middle block
+    # as UART DMA. Native 0x10209db0 branches back to 0x10209cc2.
+    '10209c74': 'interior fallthrough of 0x10209aa4 unsigned division',
+}
+possible_code = [x for x in unbound_entries
+                 if int(x['entry'], 16) < 0x1020a8aa
+                 and x['entry'] not in interior_code_labels]
 result = {
     'image_a_xip': {'raw_seed_labels': len(seed_a), 'explicit_candidate_bindings': len(bindings),
+                    'component_source_bindings': component_binding_count,
+                    'pinned_library_algorithm_bindings': 9,
+                    'pinned_sdk_crc_algorithm_bindings': 1,
                     'unbound_raw_labels': len(seed_a)-len(bindings),
                     'unbound_data_tail_labels': [x['entry'] for x in data_tail],
+                    'unbound_interior_code_labels': interior_code_labels,
                     'possible_unbound_code_labels': [x['entry'] for x in possible_code],
                     'possible_unbound_code_count_upper_bound': len(possible_code),
-                    'known_pinned_source_body_outside_component_crosswalk': ['102097f4'],
+                    'known_pinned_source_body_outside_component_crosswalk': [],
                     'bindings': sorted(bindings, key=lambda x: x['entry'])},
     'image_b_sram': {'raw_seed_labels': len(seed_b), 'explicit_candidate_bindings_in_this_crosswalk': 0,
                      'unreviewed_raw_labels': len(seed_b)},

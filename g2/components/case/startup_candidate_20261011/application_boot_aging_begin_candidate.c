@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08001334 aging state reset and task signals.
  */
@@ -16,8 +17,8 @@ void case_boot_aging_begin(void)
     state[5u]=0u;
     state[7u]=4u;
     if(*(volatile uint8_t *)(uintptr_t)0x200000bfu==0u){
-        (void)case_policy_log(0x0800137cu);
-        (void)case_policy_log(0x080013b0u);
+        (void)case_policy_log(CASE_STRING_ADDR(0800137c));
+        (void)case_policy_log(CASE_STRING_ADDR(080013b0));
     }
     (void)case_policy_event_signal(*(volatile uint32_t *)(uintptr_t)0x200000d4u,5000u);
     (void)case_policy_event_signal(*(volatile uint32_t *)(uintptr_t)0x200000d8u,2000u);

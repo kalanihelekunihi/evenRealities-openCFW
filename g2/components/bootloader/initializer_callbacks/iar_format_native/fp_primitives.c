@@ -17,7 +17,16 @@ uint64_t opencfw_fp_frexp(uint64_t x,int *exponent){
  unsigned high=(unsigned)(magnitude>>32),low=(unsigned)magnitude;unsigned shift=high?(unsigned)__builtin_clz(high)-11:(unsigned)__builtin_clz(low)+21;
  *exponent=-(int)shift-1021;return (x&UINT64_C(0x8000000000000000))+(magnitude<<shift)+UINT64_C(0x3fd0000000000000);
 }
-uint64_t opencfw_fp_pow10(uint64_t x,unsigned exponent){uint64_t factor=UINT64_C(0x4024000000000000);while(exponent){if(exponent&1)x=opencfw_fp_mul(x,factor);factor=opencfw_fp_mul(factor,factor);exponent>>=1;}return x;}
+uint64_t opencfw_fp_pow10(uint64_t x,int32_t exponent){
+ uint64_t factor=UINT64_C(0x4024000000000000);
+ while(exponent){
+  if(exponent&1)x=opencfw_fp_mul(x,factor);
+  factor=opencfw_fp_mul(factor,factor);
+  /* Stock 0x41f2a4 is ASRS: negative exponents remain negative. */
+  exponent=(int32_t)(((uint32_t)exponent>>1)|((uint32_t)exponent&0x80000000u));
+ }
+ return x;
+}
 
 /* IAR's private binary exponent scaler, reached through the raw-word wrapper
  * at 0x422700. The error cell is the literal used by its native out-of-line

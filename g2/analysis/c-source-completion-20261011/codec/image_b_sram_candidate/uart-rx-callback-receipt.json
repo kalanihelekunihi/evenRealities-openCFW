@@ -1,0 +1,34 @@
+{
+  "native_image_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "new_native_callback_bodies": [
+    "0x1000af94",
+    "0x1000b198"
+  ],
+  "target_receipt": "g2/analysis/c-source-completion-20261011/codec/image_b_sram_candidate/build-uart-rx-callback-round/receipt.json",
+  "target_units": 111,
+  "linked_object_sha256": "0d880ccd716a179d86cfc4a5cafabd2cdcc56130c7e46a02a1b2d9476abd94ad",
+  "current_source_hashes_match": true,
+  "catalogue_source_covered": 171,
+  "catalogue_total": 288,
+  "catalogue_outside": 117,
+  "bounded_host_checks": {
+    "receive_packet": "3 address-rebased cuts PASS",
+    "rx_irq": "4 address/pointer-rebased cuts PASS"
+  },
+  "undefined_symbols": [
+    "__fe_getround",
+    "__fe_raise_inexact",
+    "gx8002_image_b_native_word_at_zero_1000ada6",
+    "gx8002_image_b_uart_dma_ambient_direction_100040e8"
+  ],
+  "native_address_zero_contract": "0xaf94 passes null input pointer to 0xad60, whose native instruction at 0x1000ada6 reads word [0]; modeled as typed external read, no value supplied",
+  "data_layout_gates": [
+    "RX header progress at 0x20016f64",
+    "RX scratch at 0x2002d0f0",
+    "ring at 0x2002d770",
+    "registration table at 0x2002cf30",
+    "six completion callback records at 0x2002d148"
+  ],
+  "source_complete": false,
+  "data_and_final_layout_complete": false
+}

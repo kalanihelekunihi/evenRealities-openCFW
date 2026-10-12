@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "cases": 131080,
+  "scope": "controlled host contract/source model, not native ARC execution",
+  "source_sha256": "6fff3d39cb1e8b93c3d12ae491d25aea20c165653550a568bfcce8c73a96f8dc",
+  "coverage": [
+    "all 16-bit instant/counter wrap values",
+    "changed and unchanged channel masks",
+    "full state callbacks/reset/apply",
+    "third-slot incidental return",
+    "PHY fields and activation gate"
+  ],
+  "native_tail_receipt": "associated-channel-notify-isa-receipt.json",
+  "unqualified": [
+    "invalid state indices beyond native reachable0/1",
+    "hardware execution",
+    "full image layout"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_sha256": "1be4c81322771e1fd75d85a87780694b36cf70f22bd6e214899e6ed457796417",
+  "isolated_elf_sha256": "6c8ec9aa6d7f9c0081fb26bfc3e0d8f61fc796c5e10dce67986c6a45b7aaf0cd",
+  "cases": [
+    [
+      0,
+      0
+    ],
+    [
+      537029088,
+      0
+    ],
+    [
+      537029088,
+      1
+    ],
+    [
+      537029088,
+      2
+    ]
+  ],
+  "body_bytes": 144,
+  "visited_body_bytes": 130,
+  "unvisited_body_bytes": [
+    "0x4181ca",
+    "0x4181cb",
+    "0x4181cc",
+    "0x4181cd",
+    "0x4181ce",
+    "0x4181cf",
+    "0x4181d0",
+    "0x4181d1",
+    "0x4181d2",
+    "0x4181d3",
+    "0x4181d4",
+    "0x4181d5",
+    "0x4181d6",
+    "0x4181d7"
+  ],
+  "limits": [
+    "Fatal timer result UINT32_MAX is structurally checked but not executed.",
+    "Child calls are controlled cuts; no RTOS scheduler or hardware execution proof."
+  ]
+}

@@ -1,0 +1,18 @@
+  30bb50:	c2e2                	enter_s	[r13,blink]
+  30bb52:	09d6 0160           	bl.d	10708	;0x30e524
+  30bb56:	4508                	mov_s	r13,r0
+  30bb58:	7014                	cmp_s	r0,0
+  30bb5a:	d80c                	mov_s	r0,0xc
+  30bb5c:	f20b                	beq_s	22	;0x30bb72
+  30bb5e:	40c3 0080 5a9c      	mov_s	r0,0x805a9c
+  30bb64:	1000 00c0           	ldb.x	r0,[r0]
+  30bb68:	0eca 0220           	bl.d	18120	;0x310230
+  30bb6c:	702c                	mov_s	r1,0
+  30bb6e:	ad00                	stb_s	r0,[r13,0]
+  30bb70:	700c                	mov_s	r0,0
+  30bb72:	c6c2                	leave_s	[r13,blink,pcl]
+  30bb74:	41c3 0080 5b40      	mov_s	r1,0x805b40
+  30bb7a:	8141                	ld_s	r2,[r1,0x4]
+  30bb7c:	026d fc6f           	b.d	-30100	;0x3045e8
+  30bb80:	8120                	ld_s	r1,[r1,0]
+  30bb82:	78e0                	nop_s

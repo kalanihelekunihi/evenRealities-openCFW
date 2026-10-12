@@ -1,0 +1,132 @@
+
+/imcra_ctor_native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+1000e784 <.data>:
+1000e784:	d414      	push      	r4-r7, r15
+1000e786:	2314      	subi      	r14, r14, 12
+1000e788:	0b6d      	mov      	r4, r2
+1000e78a:	836d      	mov      	r6, r0
+1000e78c:	2832      	movi      	r2, 40
+1000e78e:	c76d      	mov      	r7, r1
+1000e790:	136c      	mov      	r0, r4
+1000e792:	0031      	movi      	r1, 0
+1000e794:	181600e0 	bsr      	0x100113c4	// 0x100113c4
+1000e798:	0033      	movi      	r3, 0
+1000e79a:	62b4      	st.w      	r3, (r4, 0x8)
+1000e79c:	63b4      	st.w      	r3, (r4, 0xc)
+1000e79e:	64b4      	st.w      	r3, (r4, 0x10)
+1000e7a0:	65b4      	st.w      	r3, (r4, 0x14)
+1000e7a2:	611b06f4 	fmtvrl      	fr1, r6
+1000e7a6:	7412      	lrw      	r3, 0x20016ff0	// 0x1000e8f4
+1000e7a8:	011a01f4 	fsitos      	fr1, fr1
+1000e7ac:	032003f4 	flds      	fr3, (r3, 0x0)
+1000e7b0:	601b07f4 	fmtvrl      	fr0, r7
+1000e7b4:	7112      	lrw      	r3, 0x20016fe8	// 0x1000e8f8
+1000e7b6:	2700a4e4 	addi      	r5, r4, 40
+1000e7ba:	022003f4 	flds      	fr2, (r3, 0x0)
+1000e7be:	11240ef4 	fsts      	fr1, (r14, 0x4)
+1000e7c2:	001a00f4 	fsitos      	fr0, fr0
+1000e7c6:	6e12      	lrw      	r3, [pc, 312]	// from address pool at 0x1000e8fc0x138	// 0x3
+1000e7c8:	030303f4 	fdivs      	fr3, fr3, fr0
+1000e7cc:	6093      	ld.w      	r3, (r3, 0x0)
+1000e7ce:	60b8      	st.w      	r3, (r14, 0x0)
+1000e7d0:	020302f4 	fdivs      	fr2, fr2, fr0
+1000e7d4:	6b12      	lrw      	r3, [pc, 300]	// from address pool at 0x1000e9000x12c	// 0x3
+1000e7d6:	176c      	mov      	r0, r5
+1000e7d8:	012003f4 	flds      	fr1, (r3, 0x0)
+1000e7dc:	c0b4      	st.w      	r6, (r4, 0x0)
+1000e7de:	e1b4      	st.w      	r7, (r4, 0x4)
+1000e7e0:	6912      	lrw      	r3, [pc, 292]	// from address pool at 0x1000e9040x124	// 0x3
+1000e7e2:	002003f4 	flds      	fr0, (r3, 0x0)
+1000e7e6:	470100e0 	bsr      	0x1000ea74	// 0x1000ea74
+1000e7ea:	06b4      	st.w      	r0, (r4, 0x18)
+1000e7ec:	0231      	movi      	r1, 2
+1000e7ee:	3d0100e0 	bsr      	0x1000ea68	// 0x1000ea68
+1000e7f2:	012004f4 	flds      	fr1, (r4, 0x0)
+1000e7f6:	011a01f4 	fsitos      	fr1, fr1
+1000e7fa:	6412      	lrw      	r3, [pc, 272]	// from address pool at 0x1000e9080x110	// 0x3
+1000e7fc:	4061      	addu      	r5, r0
+1000e7fe:	032003f4 	flds      	fr3, (r3, 0x0)
+1000e802:	21240ef4 	fsts      	fr1, (r14, 0x8)
+1000e806:	102004f4 	flds      	fr0, (r4, 0x4)
+1000e80a:	001a00f4 	fsitos      	fr0, fr0
+1000e80e:	6012      	lrw      	r3, [pc, 256]	// from address pool at 0x1000e90c0x100	// 0x3
+1000e810:	030303f4 	fdivs      	fr3, fr3, fr0
+1000e814:	6093      	ld.w      	r3, (r3, 0x0)
+1000e816:	61b8      	st.w      	r3, (r14, 0x4)
+1000e818:	176c      	mov      	r0, r5
+1000e81a:	7e11      	lrw      	r3, [pc, 248]	// from address pool at 0x1000e9100xf8	// 0x3
+1000e81c:	012003f4 	flds      	fr1, (r3, 0x0)
+1000e820:	010301f4 	fdivs      	fr1, fr1, fr0
+1000e824:	01240ef4 	fsts      	fr1, (r14, 0x0)
+1000e828:	7b11      	lrw      	r3, [pc, 236]	// from address pool at 0x1000e9140xec	// 0x3
+1000e82a:	022003f4 	flds      	fr2, (r3, 0x0)
+1000e82e:	7b11      	lrw      	r3, [pc, 236]	// from address pool at 0x1000e9180xec	// 0x3
+1000e830:	012003f4 	flds      	fr1, (r3, 0x0)
+1000e834:	7a11      	lrw      	r3, [pc, 232]	// from address pool at 0x1000e91c0xe8	// 0x3
+1000e836:	002003f4 	flds      	fr0, (r3, 0x0)
+1000e83a:	8d0100e0 	bsr      	0x1000eb54	// 0x1000eb54
+1000e83e:	07b4      	st.w      	r0, (r4, 0x1c)
+1000e840:	0231      	movi      	r1, 2
+1000e842:	830100e0 	bsr      	0x1000eb48	// 0x1000eb48
+1000e846:	012004f4 	flds      	fr1, (r4, 0x0)
+1000e84a:	011a01f4 	fsitos      	fr1, fr1
+1000e84e:	7511      	lrw      	r3, [pc, 212]	// from address pool at 0x1000e9200xd4	// 0x3
+1000e850:	4061      	addu      	r5, r0
+1000e852:	032003f4 	flds      	fr3, (r3, 0x0)
+1000e856:	102004f4 	flds      	fr0, (r4, 0x4)
+1000e85a:	21240ef4 	fsts      	fr1, (r14, 0x8)
+1000e85e:	001a00f4 	fsitos      	fr0, fr0
+1000e862:	7111      	lrw      	r3, [pc, 196]	// from address pool at 0x1000e9240xc4	// 0x3
+1000e864:	030303f4 	fdivs      	fr3, fr3, fr0
+1000e868:	012003f4 	flds      	fr1, (r3, 0x0)
+1000e86c:	010301f4 	fdivs      	fr1, fr1, fr0
+1000e870:	11240ef4 	fsts      	fr1, (r14, 0x4)
+1000e874:	176c      	mov      	r0, r5
+1000e876:	6d11      	lrw      	r3, [pc, 180]	// from address pool at 0x1000e9280xb4	// 0x3
+1000e878:	012003f4 	flds      	fr1, (r3, 0x0)
+1000e87c:	010301f4 	fdivs      	fr1, fr1, fr0
+1000e880:	01240ef4 	fsts      	fr1, (r14, 0x0)
+1000e884:	6a11      	lrw      	r3, [pc, 168]	// from address pool at 0x1000e92c0xa8	// 0x3
+1000e886:	022003f4 	flds      	fr2, (r3, 0x0)
+1000e88a:	6a11      	lrw      	r3, [pc, 168]	// from address pool at 0x1000e9300xa8	// 0x3
+1000e88c:	012003f4 	flds      	fr1, (r3, 0x0)
+1000e890:	6911      	lrw      	r3, [pc, 164]	// from address pool at 0x1000e9340xa4	// 0x3
+1000e892:	002003f4 	flds      	fr0, (r3, 0x0)
+1000e896:	d10100e0 	bsr      	0x1000ec38	// 0x1000ec38
+1000e89a:	08b4      	st.w      	r0, (r4, 0x20)
+1000e89c:	0231      	movi      	r1, 2
+1000e89e:	c70100e0 	bsr      	0x1000ec2c	// 0x1000ec2c
+1000e8a2:	6611      	lrw      	r3, [pc, 152]	// from address pool at 0x1000e9380x98	// 0x3
+1000e8a4:	1460      	addu      	r0, r5
+1000e8a6:	032003f4 	flds      	fr3, (r3, 0x0)
+1000e8aa:	042004f4 	flds      	fr4, (r4, 0x0)
+1000e8ae:	041a04f4 	fsitos      	fr4, fr4
+1000e8b2:	6311      	lrw      	r3, [pc, 140]	// from address pool at 0x1000e93c0x8c	// 0x3
+1000e8b4:	022003f4 	flds      	fr2, (r3, 0x0)
+1000e8b8:	102004f4 	flds      	fr0, (r4, 0x4)
+1000e8bc:	001a00f4 	fsitos      	fr0, fr0
+1000e8c0:	6011      	lrw      	r3, [pc, 128]	// from address pool at 0x1000e9400x80	// 0x3
+1000e8c2:	030303f4 	fdivs      	fr3, fr3, fr0
+1000e8c6:	012003f4 	flds      	fr1, (r3, 0x0)
+1000e8ca:	04240ef4 	fsts      	fr4, (r14, 0x0)
+1000e8ce:	020302f4 	fdivs      	fr2, fr2, fr0
+1000e8d2:	7d10      	lrw      	r3, [pc, 116]	// from address pool at 0x1000e9440x74	// 0x3
+1000e8d4:	010301f4 	fdivs      	fr1, fr1, fr0
+1000e8d8:	002003f4 	flds      	fr0, (r3, 0x0)
+1000e8dc:	500200e0 	bsr      	0x1000ed7c	// 0x1000ed7c
+1000e8e0:	7a10      	lrw      	r3, [pc, 104]	// from address pool at 0x1000e9480x68	// 0x3
+1000e8e2:	002003f4 	flds      	fr0, (r3, 0x0)
+1000e8e6:	09b4      	st.w      	r0, (r4, 0x24)
+1000e8e8:	220200e0 	bsr      	0x1000ed2c	// 0x1000ed2c
+1000e8ec:	136c      	mov      	r0, r4
+1000e8ee:	0314      	addi      	r14, r14, 12
+1000e8f0:	9414      	pop      	r4-r7, r15
+1000e8f2:	0000      	bkpt
+1000e8f4:	f06f      	or      	r15, r12
+1000e8f6:	0120      	addi      	r0, 2
+1000e8f8:	e86f      	or      	r15, r10
+1000e8fa:	0120      	addi      	r0, 2

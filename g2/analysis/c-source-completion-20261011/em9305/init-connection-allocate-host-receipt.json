@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "cases": 600,
+  "scope": "isolated C with controlled memset/limit/callback/count/request; authentic full native CFG reviewed; no ARC/runtime/hardware proof",
+  "source_sha256": "22aebf243b92622787f5a7553464cbc832cff11b48656965953e3fb6c19ae45e",
+  "host_sha256": "98a5d375b6d03e95b6390c7ddac1b563d7e528aeeca570342d9dd829dbdf3194",
+  "contracts": [
+    "count0/full/no-slot and first-free search",
+    "configuration reload after memset/callback",
+    "optional fields and cap251",
+    "captured original base for stores/final fresh base for return"
+  ],
+  "retained_gates": [
+    "indirect callback registers beyond R0/R1",
+    "native ARC and hardware runtime"
+  ]
+}

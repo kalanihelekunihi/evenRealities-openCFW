@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "candidate_sha256": "39ef1b005191f9cad43ec848d62bdb3bbd102fd8bb375fd3d4f1486ad82e18c4",
+  "eligibility_sha256": "022b09db6deac9f50c125e863835df3f7a4f33a92176c1ef81de0ef9f345f169",
+  "linker_script_sha256": "8f4040b21878878e9e6b2a4c0bfad4af8d0f15ac32561b8a541bc1871ff9e69b",
+  "placed_object_sha256": "47e937bcae2b17b1ee4418b0a1646d9e3d2eb834480e960421f88165e715dcab",
+  "native_code_span": [
+    "0x10203004",
+    "0x1020a8aa"
+  ],
+  "native_code_span_bytes": 30886,
+  "packed_start": "0x10203004",
+  "packed_bytes": 26692,
+  "packed_end_exclusive": "0x10209848",
+  "remaining_native_code_span_bytes": 4194,
+  "expected_direct_symbols": 311,
+  "packed_expected_direct_symbols": 311,
+  "extra_packed_symbols": [
+    "gx8002_xip_audio_input_irq_10207020",
+    "gx8002_xip_main_exit_10207a7c"
+  ],
+  "limits": [
+    "This relocatable packed link checks named source code size and symbol membership only.",
+    "It does not include all helper code/rodata/literal-tail data in the packed region.",
+    "It does not resolve final XIP address space, branch reach, outside-stage references, loader copy, or runtime equality."
+  ]
+}

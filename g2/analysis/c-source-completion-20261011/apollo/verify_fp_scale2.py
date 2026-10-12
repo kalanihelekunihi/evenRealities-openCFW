@@ -18,7 +18,7 @@ with tempfile.TemporaryDirectory(prefix='boot-scale2-') as td:
  with elfpath.open('rb') as f:
   e=ELFFile(f);symbols={s.name:s['st_value'] for s in e.get_section_by_name('.symtab').iter_symbols()}
   segments=[(p['p_vaddr'],p.data()) for p in e.iter_segments() if p['p_type']=='PT_LOAD']
- inputs=[('normal-up',0x3ff4000000000000,5),('normal-down',0x4058000000000000,-3),('normal-to-max-exp',0x7fd0000000000001,1),('normal-to-overflow',0x7fd0000000000001,2),('min-normal-to-min-normal',0x0020000000000000,-1),('zero',0,500),('negative-zero',0x8000000000000000,-500),('infinity',0x7ff0000000000000,-100),('nan',0x7ff8000000000012,3),('hard-underflow',0x0010000000000000,-60),('negative-hard-underflow',0x8010000000000000,-60),('overflow',0x7fefffffffffffff,1)]
+ inputs=[('normal-up',0x3ff4000000000000,5),('normal-down',0x4058000000000000,-3),('normal-to-max-exp',0x7fd0000000000001,1),('normal-to-overflow',0x7fd0000000000001,2),('min-normal-to-min-normal',0x0020000000000000,-1),('zero',0,500),('negative-zero',0x8000000000000000,-500),('infinity',0x7ff0000000000000,-100),('nan',0x7ff8000000000012,3),('hard-underflow',0x0010000000000000,-60),('negative-hard-underflow',0x8010000000000000,-60),('overflow',0x7fefffffffffffff,1),('hex-fraction-low',0x3fe0000000000000,28),('hex-fraction-near-one',0x3fefffffffffffff,28),('hex-fraction-rounding',0x3fe123456789abcd,28),('hex-fraction-negative',0xbfe123456789abcd,28)]
  cases=[]
  for label,x,n in inputs:
   pair=[]

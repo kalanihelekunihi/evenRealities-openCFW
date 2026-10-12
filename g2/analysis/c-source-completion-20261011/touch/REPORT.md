@@ -198,3 +198,100 @@ schema for that location; the authenticated image has no absolute pointer
 literal to that address. The value remains an explicit product data contract.
 The finite audit records the exact hashes and limits. No live Ghidra instance
 was available for an interactive xref check.
+
+## Fifth active scan-slot row
+
+The four-byte reset value at RAM `0x20000828` is the fifth
+`cy_stc_capsense_scan_slot_t` entry in the active descriptor array, with
+`wdId=2` and `snsId=0`. It follows the four `wdId=1` rows at
+`0x20000818..0x20000827`; the next named channel descriptor begins at
+`0x2000082c`. The pinned v6 vendor type declares two `uint16_t` fields in
+this order. `reset_sensor_descriptors.c` now owns five active rows, and the
+bounded target compiler/linker check compares all 20 bytes exactly with stock
+(`reset-descriptor-receipt.json`). The fresh Touch candidate build passes
+with 54 source units and the same nine genuine generated-data imports.
+Selected attributed reset-copy closure is now **538/964 bytes**, with the
+426-byte LP history extent the sole remaining unowned reset-copy interval.
+This does not establish that entire allocation or the generated configuration
+pointees.
+
+## Generated LP pin records
+
+The pinned CapSense v6 LP `cy_stc_capsense_pin_config_t` has an eight-byte
+record containing a port pointer, pin number, and pad number. The five records
+at stock ROM `0xb34c..0xb373` are now expressed as the typed source array
+`touch_generated_pin_config`. `verify_reset_pin_config.py` compiles this array
+for Cortex-M0+ and compares its complete 40-byte section against the locked
+G2 2.2.6.10 Touch image: **40/40 exact bytes**. The selected context refers
+to this symbol with the same typed declaration. The fresh experimental Touch
+build at `g2/build/c-firmware/20261011/touch-pin-config-round/receipt.json`
+passes with **55 C units and eight generated-data imports**; source completion
+is still false. The 426-byte LP history reset interval and final source
+placement remain open. This source section is relocatable; the bounded byte
+comparison does not establish the final firmware link address.
+
+## Active-scan runtime BSS
+
+The v6 LP active-sensor runtime type contains four pointers, two halfwords,
+and three state bytes, occupying 24 bytes on Cortex-M0+. The authenticated
+context points to RAM `0x20000c38`; the next generated internal context starts
+at `0x20000c50`, exactly 24 bytes later. The stock reset zero descriptor clears
+`0x200008a8..0x20000f57`, which includes this object. The selected
+`touch_generated_active_scan_sns` is now a typed 24-byte NOBITS definition;
+target `readelf` confirms section type `NOBITS`, size 24, alignment 4. The
+context uses a typed pointer to it. The fresh coherent experimental build at
+`g2/build/c-firmware/20261011/touch-active-scan-nobits-round/receipt.json`
+passes with **seven generated-data imports**. Its address still requires final
+linker placement, and this evidence does not identify the other generated
+runtime objects or the 426-byte reset history allocation.
+
+## MSCLP base-frame runtime
+
+The pinned PDL `cy_msclp.h` defines `cy_stc_msclp_base_config_t` as 28 named
+register words, eight global switch words, and four seven-word sensing-mode
+records. That is exactly 256 bytes. The generated context points to RAM
+`0x20000b38`, and the next identified active-scan object begins at
+`0x20000c38`, exactly 256 bytes later. Both lie inside the authenticated CRT
+zero range. The selected C declares this typed object with all named fields;
+the isolated target object is a 256-byte, four-byte-aligned NOBITS section.
+The coherent Touch receipt at
+`g2/build/c-firmware/20261011/touch-base-frame-final-round/receipt.json`
+compiles all **57/57** source units and retains **six** genuine generated-data
+imports. This establishes type, size and reset mode; final address placement
+and physical MSCLP behavior remain separate obligations.
+
+## Low-power and active sensor-frame storage
+
+The selected scan descriptors contain four low-power slots and five active
+slots. The pinned CapSense LP sensing source indexes low-power frames by the
+PDL's 11-word sensor register stride. Four such frames occupy exactly the
+pointer-bounded `0x200009fc..0x20000aab` interval (176 bytes). The active
+sensor-frame interval `0x20000aac..0x20000b37` is 140 bytes, matching five
+seven-word frames used by the active frame layout. Both intervals lie inside
+the authenticated 1712-byte CRT zero range. The selected C now owns typed
+`uint32_t` slot arrays; target object sections are NOBITS with sizes 176 and
+140 bytes. The coherent build at
+`g2/build/c-firmware/20261011/touch-sensor-frames-round/receipt.json`
+compiles **58/58** units and leaves **four** generated-data imports: common
+config, widget config, internal context, and LP history. The 426-byte reset
+history extent and final addresses remain open.
+
+## Remaining generated-object boundary
+
+Four selected imports remain. `touch_generated_lp_history` starts at reset
+RAM `0x2000065e`; the next named object starts at `0x20000808`, leaving 426
+zero bytes. Vendor LP history elements are `uint16_t`, but the generated
+array dimension and possible two-byte alignment tail are not proven.
+`touch_generated_internal_context` starts at zeroed RAM `0x20000c50`; native
+code writes through at least offset 117, while a distinct PDL lock object
+starts at `0x20000cc8`. Its exact generated type/extent and field-option
+configuration still need a producer declaration or equivalent ABI proof.
+`touch_generated_common_config` at ROM `0xb2a8` and
+`touch_generated_widget_config` at ROM `0xb0f8` require their generated LP
+option set and typed field values; nearby pointer tables and stock bytes give
+boundaries but do not uniquely establish those full vendor layouts. The
+missing `cycfg_capsense.c/.h` or an authenticated generated map remains the
+most direct evidence. A final linker/scatter source is also required to place
+all owned ROM/BSS objects and establish the executable image. The root Touch
+builder's historical “484 reset-copy bytes” gate predates the fifth active
+slot attribution; the current unowned reset-copy interval is **426 bytes**.

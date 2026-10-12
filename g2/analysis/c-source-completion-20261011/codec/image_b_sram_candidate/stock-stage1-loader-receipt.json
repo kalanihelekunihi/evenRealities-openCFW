@@ -1,0 +1,29 @@
+{
+  "stage1_sha256": "a80924ccf78205ef1761c4f568d4ce31f909635bf3ad7eecfaed250ad801626c",
+  "stage2_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "header_stage1_bytes": 12288,
+  "header_stage2_bytes": 82060,
+  "normal_branch": {
+    "dispatch": "0x10000e0a..0x10000e18, mode word 0x20001720 equals 2",
+    "loader": "0x10000d4c..0x10000d98",
+    "flash_reader": "0x10000fdc",
+    "destination": "0x10003000",
+    "copy_bytes": 82060,
+    "stage2_entry": "0x10003100",
+    "initialized_tail_load": [
+      "0x10016f60",
+      "0x1001708c"
+    ],
+    "typed_runtime_vma": [
+      "0x20016f60",
+      "0x2001708c"
+    ]
+  },
+  "stock_normal_loader_copy_extent_proven": true,
+  "iram_dram_alias_on_physical_target_proven": false,
+  "custom_final_elf_or_hardware_proven": false,
+  "limits": [
+    "Marker-selected alternative boot branch is outside this proof.",
+    "Physical IRAM/DRAM alias behavior and final custom image placement remain unqualified."
+  ]
+}

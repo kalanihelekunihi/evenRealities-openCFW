@@ -1,0 +1,28 @@
+{
+  "stock_image_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "target": "C-SKY CK804EF hard-float C11",
+  "scope": "two typed, relocation-free normal-copy records; no CRT, linker or hardware proof",
+  "all_equal": true,
+  "records": [
+    {
+      "source": "g2/components/gx8002/image_b_sram_candidate/backup_audio_runtime_initialized_state.c",
+      "source_sha256": "0758d35fddb8dc81634f951d81dfdb16e6eeba9d25c52cb7d39a09b9ce9f120b",
+      "stock_address": "0x10016f64",
+      "section": ".data.image_b.audio_runtime_state",
+      "size": 16,
+      "candidate_sha256": "a8f493a17d108b7990f6efde8f9d6f7d73c35d56778dbb9d89ca65e0a97fa359",
+      "stock_sha256": "a8f493a17d108b7990f6efde8f9d6f7d73c35d56778dbb9d89ca65e0a97fa359",
+      "bytes_equal": true
+    },
+    {
+      "source": "g2/components/gx8002/image_b_sram_candidate/backup_trigonometry_kernel_coefficients.c",
+      "source_sha256": "5631cfc2004ce35a682418944d3a9577e52439c0ca517ed40ecc7e33473905ee",
+      "stock_address": "0x10017034",
+      "section": ".data.image_b.kernel_coefficients",
+      "size": 88,
+      "candidate_sha256": "4a1eeeac5f3da50912682f58a23def82f95d14808cbaf8646ebc91469f69d478",
+      "stock_sha256": "4a1eeeac5f3da50912682f58a23def82f95d14808cbaf8646ebc91469f69d478",
+      "bytes_equal": true
+    }
+  ]
+}

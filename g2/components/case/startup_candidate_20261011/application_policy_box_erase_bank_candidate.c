@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08002d48 erase inactive OTA bank with four attempts.
  */
@@ -21,7 +22,7 @@ uint32_t case_policy_box_erase_bank(void)
     uint32_t retries=0u;
     while(case_boot_option_erase_execute((uint32_t)(uintptr_t)operation,&error)!=0u){
         if(retries++==3u){
-            if(*quiet==0u){(void)case_policy_log(0x08002dc8u,128u,error,retries);(void)case_policy_log(0x08002e00u);}
+            if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08002dc8),128u,error,retries);(void)case_policy_log(CASE_STRING_ADDR(08002e00));}
             case_boot_option_commit_c();
             return 0u;
         }

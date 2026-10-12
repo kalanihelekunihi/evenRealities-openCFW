@@ -1,6 +1,6 @@
 from pathlib import Path
 import subprocess,re,json
-root=Path(__file__).resolve().parents[4];s=(root/'g2/components/em9305/qpc_scheduler_candidate/controller_init.c').read_text();b=s[s.index('/* Authenticated stock334474'):]
+root=Path(__file__).resolve().parents[4];s=(root/'g2/components/em9305/qpc_scheduler_candidate/controller_init.c').read_text();b=s[s.index('/* Authenticated stock334474'):s.index('/* Native3239d4')]
 b=re.sub(r'__asm__ volatile\("mpyuw %0,%1,%2".*?;', 'offset=id*912u;',b)
 h=r'''#define _GNU_SOURCE
 #include <stdint.h>

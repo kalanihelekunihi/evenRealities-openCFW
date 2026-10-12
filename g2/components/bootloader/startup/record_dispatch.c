@@ -8,7 +8,7 @@ extern const uint32_t opencfw_boot_init_records[18];
 void opencfw_boot_init_records_run(void) {
     const uint32_t *cursor=opencfw_boot_init_records;
     const uint32_t *end=opencfw_boot_init_records+18;
-    while(cursor<end) {
+    while(cursor!=end) {
         uintptr_t callback=(uintptr_t)cursor+*cursor;
         cursor=((const uint32_t *(*)(const uint32_t *))callback)(cursor+1);
     }

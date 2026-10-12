@@ -33,6 +33,12 @@ SOURCES=[
  'source_candidate_20261010/tx_complete_provider.c',
  'uart_receive_offline/receive.c',
  'uart_start_offline/start.c']
+# The native-backed public command and formatter graph is now selected as C
+# source. The full graph is compiled here so archive/member provenance and
+# unresolved-symbol accounting cover the actual public providers.
+SOURCES += [str(p.relative_to(HERE.parent)) for p in
+            sorted((HERE.parent/'legacy_default_candidate_20261010').glob('*.c'))]
+SOURCES += ['semantic_strings_candidate_20261011/case_semantic_strings.c']
 CLANG='/usr/bin/clang'; AR='/opt/homebrew/bin/arm-none-eabi-ar'; NM='/opt/homebrew/bin/arm-none-eabi-nm'; LD='/opt/homebrew/bin/arm-none-eabi-ld'
 FLAGS=['--target=arm-none-eabi','-mcpu=cortex-m0plus','-mthumb','-mfloat-abi=soft','-std=c11','-Os','-ffreestanding','-fno-builtin','-ffunction-sections','-fdata-sections','-Wall','-Wextra']
 OUT=HERE/'build'; OUT.mkdir(exist_ok=True)
@@ -73,6 +79,6 @@ for line in nm.splitlines():
  elif typ.upper() in ('T','D','B','R','C','W'): provides.add(sym)
 link_undefined={line.split()[-1] for line in subprocess.run([NM,'-u',str(relocatable)],text=True,capture_output=True,check=True).stdout.splitlines() if line.split()}
 if link_undefined != needs-provides: raise SystemExit('relocatable undefined symbols differ from member census')
-receipt={'target':'arm-none-eabi cortex-m0plus thumb soft float','python_interpreter':sys.executable,'python_version':sys.version.split()[0],'tool_versions':{x:subprocess.run([v,'--version'],capture_output=True,text=True).stdout.splitlines()[0] for x,v in [('clang',CLANG),('ar',AR),('nm',NM),('ld',LD)]},'tool_sha256':{x:hashlib.sha256(Path(v).read_bytes()).hexdigest() for x,v in [('clang',CLANG),('ar',AR),('nm',NM),('ld',LD)]},'flags':FLAGS,'sources':receipts,'archive':str(archive.relative_to(ROOT)),'archive_sha256':second_hash,'archive_rebuild_same_sha256':first_hash==second_hash,'archive_command':shlex.join(cmd),'relocatable':str(relocatable.relative_to(ROOT)),'relocatable_sha256':hashlib.sha256(relocatable.read_bytes()).hexdigest(),'relocatable_command':shlex.join(cmdld),'nm_command':shlex.join(cmdnm),'provided_symbols':sorted(provides),'unresolved_symbols':sorted(needs-provides),'source_count':len(SOURCES),'object_count':len(objects)}
+receipt={'target':'arm-none-eabi cortex-m0plus thumb soft float','python_interpreter':sys.executable,'python_version':sys.version.split()[0],'tool_versions':{x:subprocess.run([v,'--version'],capture_output=True,text=True).stdout.splitlines()[0] for x,v in [('clang',CLANG),('ar',AR),('nm',NM),('ld',LD)]},'tool_sha256':{x:hashlib.sha256(Path(v).read_bytes()).hexdigest() for x,v in [('clang',CLANG),('ar',AR),('nm',NM),('ld',LD)]},'flags':FLAGS,'sources':receipts,'archive':str(archive.relative_to(ROOT)),'archive_sha256':second_hash,'archive_rebuild_same_sha256':first_hash==second_hash,'archive_command':shlex.join(cmd),'relocatable':str(relocatable.relative_to(ROOT)),'relocatable_sha256':hashlib.sha256(relocatable.read_bytes()).hexdigest(),'relocatable_command':shlex.join(cmdld),'nm_command':shlex.join(cmdnm),'provided_symbols':sorted(provides),'unresolved_symbols':sorted(needs-provides),'source_count':len(SOURCES),'object_count':len(objects),'source_complete':False,'limits':['Public CASE command and formatter source is selected with bounded native/C evidence.','Malformed pointers and unbounded formatter width/precision/callback behavior lack full stock equivalence proof.','Product linker placement and physical flash, PMIC, reset, sensor and transport effects are not validated.']}
 (REPORT/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
 print(json.dumps({'source_count':len(SOURCES),'provided':len(provides),'unresolved':receipt['unresolved_symbols']},indent=2))

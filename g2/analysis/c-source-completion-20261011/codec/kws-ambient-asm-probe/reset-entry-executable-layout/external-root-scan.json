@@ -1,0 +1,29 @@
+{
+  "stock_package_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "regions": {
+    "A_stage1": {
+      "bytes": 12288,
+      "aligned_absolute_word_hits": [
+        {
+          "package_offset": "0xa06c",
+          "word": "0x10023500",
+          "target_region": "resident_code"
+        }
+      ]
+    },
+    "inter_image_payload": {
+      "bytes": 129964,
+      "aligned_absolute_word_hits": []
+    },
+    "B_stage1": {
+      "bytes": 12288,
+      "aligned_absolute_word_hits": []
+    },
+    "B_stage2_and_tail": {
+      "bytes": 82064,
+      "aligned_absolute_word_hits": []
+    }
+  },
+  "aligned_external_word_hits_total": 1,
+  "qualification": "Bounded aligned absolute-word scan only. It does not exclude computed, encoded, unaligned or hardware-configured roots."
+}

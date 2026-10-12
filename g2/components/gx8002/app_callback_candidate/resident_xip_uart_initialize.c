@@ -5,10 +5,10 @@
  * object ownership and placement are established.
  */
 #include <stdint.h>
+#include "resident_uart_product_descriptors.h"
 
 extern void gx8002_resident_platform_gate_25080(uint32_t, uint32_t);
 extern uint32_t gx8002_resident_clock_frequency_25210(uint32_t);
-extern uint8_t gx8002_xip_uart_channel_storage_20026a94[];
 extern uint32_t gx8002_xip_uart_configure_102033c8(void *channel);
 
 uint32_t gx8002_xip_uart_initialize_10203530(uint32_t port, uint32_t baud)
@@ -21,7 +21,7 @@ uint32_t gx8002_xip_uart_initialize_10203530(uint32_t port, uint32_t baud)
     else if (1000000u - remainder <= 100u)
         clock += 1000000u - remainder;
     volatile uint8_t *const channel =
-        gx8002_xip_uart_channel_storage_20026a94 + port * 0x80u;
+        (volatile uint8_t *)(void *)&gx8002_uart_channels_26a94[port];
     *(volatile uint32_t *)(void *)(channel + 0x0cu) = clock;
     *(volatile uint32_t *)(void *)(channel + 0x10u) = baud;
     return gx8002_xip_uart_configure_102033c8((void *)channel);

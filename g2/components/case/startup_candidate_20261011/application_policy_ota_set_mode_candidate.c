@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x1d68 OTA mode packet and three-attempt response exchange.
  * The native twelve-byte template remains a product data contract.
@@ -20,8 +21,8 @@ void case_policy_ota_set_mode(uint32_t mode)
     while(*busy!=0u)case_policy_sensor_delay(100u);
     uint8_t silent=*(volatile uint8_t *)(uintptr_t)0x200000bfu;
     if(silent==0u){
-        (void)case_legacy_logger((const char *)(uintptr_t)0x08001e20u,mode);
-        (void)case_legacy_logger((const char *)(uintptr_t)0x08001e48u);
+        (void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(08001e20),mode);
+        (void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(08001e48));
     }
     uint8_t packet[12];
     for(uint32_t i=0u;i<12u;++i)packet[i]=case_policy_ota_probe_template[i];
@@ -44,7 +45,7 @@ void case_policy_ota_set_mode(uint32_t mode)
         case_policy_sensor_delay(200u);
     }
     if(silent==0u){
-        (void)case_legacy_logger((const char *)(uintptr_t)(success?0x08001e78u:0x08001e5cu));
-        (void)case_legacy_logger((const char *)(uintptr_t)0x08001e48u);
+        (void)case_legacy_logger((const char *)(uintptr_t)(success?CASE_STRING_ADDR(08001e78):CASE_STRING_ADDR(08001e5c)));
+        (void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(08001e48));
     }
 }

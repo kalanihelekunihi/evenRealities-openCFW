@@ -1,0 +1,60 @@
+
+/imcra_shift_native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+1000e28c <.data>:
+1000e28c:	0e0062e9 	blsz      	r2, 0x1000e2a8	// 0x1000e2a8
+1000e290:	0b0061e9 	blsz      	r1, 0x1000e2a6	// 0x1000e2a6
+1000e294:	4460      	addu      	r1, r1
+1000e296:	4060      	addu      	r1, r0
+1000e298:	005060d8 	ld.hs      	r3, (r0, 0x0)
+1000e29c:	ca70      	asr      	r3, r2
+1000e29e:	038400d4 	stbi.h      	r3, (r0)
+1000e2a2:	0664      	cmpne      	r1, r0
+1000e2a4:	fa0b      	bt      	0x1000e298	// 0x1000e298
+1000e2a6:	3c78      	jmp      	r15
+1000e2a8:	ffff61e9 	blsz      	r1, 0x1000e2a6	// 0x1000e2a6
+1000e2ac:	0033      	movi      	r3, 0
+1000e2ae:	4460      	addu      	r1, r1
+1000e2b0:	495b      	subu      	r2, r3, r2
+1000e2b2:	4060      	addu      	r1, r0
+1000e2b4:	005060d8 	ld.hs      	r3, (r0, 0x0)
+1000e2b8:	c870      	lsl      	r3, r2
+1000e2ba:	038400d4 	stbi.h      	r3, (r0)
+1000e2be:	4264      	cmpne      	r0, r1
+1000e2c0:	fa0b      	bt      	0x1000e2b4	// 0x1000e2b4
+1000e2c2:	3c78      	jmp      	r15
+1000e2c4:	2139      	cmplti      	r1, 2
+1000e2c6:	005080d9 	ld.hs      	r12, (r0, 0x0)
+1000e2ca:	0c020cc4 	abs      	r12, r12
+1000e2ce:	0c08      	bt      	0x1000e2e6	// 0x1000e2e6
+1000e2d0:	4460      	addu      	r1, r1
+1000e2d2:	4658      	addi      	r2, r0, 2
+1000e2d4:	0460      	addu      	r0, r1
+1000e2d6:	039002d0 	ldbi.hs      	r3, (r2)
+1000e2da:	8264      	cmpne      	r0, r2
+1000e2dc:	030203c4 	abs      	r3, r3
+1000e2e0:	accc6cf8 	max.s32      	r12, r12, r3
+1000e2e4:	f90b      	bt      	0x1000e2d6	// 0x1000e2d6
+1000e2e6:	0030      	movi      	r0, 0
+1000e2e8:	008022ea 	movih      	r2, 32768
+1000e2ec:	1f0012ea 	movi      	r18, 31
+1000e2f0:	2031      	movi      	r1, 32
+1000e2f2:	232082c5 	and      	r3, r2, r12
+1000e2f6:	8d0012c4 	subu      	r13, r18, r0
+1000e2fa:	f570      	lsr      	r3, r13
+1000e2fc:	413b      	cmpnei      	r3, 1
+1000e2fe:	080c      	bf      	0x1000e30e	// 0x1000e30e
+1000e300:	414a      	lsri      	r2, r2, 1
+1000e302:	0020      	addi      	r0, 1
+1000e304:	f7ff21e8 	bnezad      	r1, 0x1000e2f2	// 0x1000e2f2
+1000e308:	0030      	movi      	r0, 0
+1000e30a:	0e28      	subi      	r0, 15
+1000e30c:	3c78      	jmp      	r15
+1000e30e:	1133      	movi      	r3, 17
+1000e310:	015b      	subu      	r0, r3, r0
+1000e312:	3c78      	jmp      	r15
+1000e314:	0320a0d9 	ld.w      	r13, (r0, 0xc)
+1000e318:	052040da 	ld.w      	r18, (r0, 0x14)

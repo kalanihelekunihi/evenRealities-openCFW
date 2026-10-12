@@ -25,3 +25,7 @@ int32_t g2_log_transport_queue_failure(const char *format,...) {
     emit(error_buffer);
     return written;
 }
+/* The radio/logging corpus's 0x4733ee import is this exact variadic body.
+ * Keep the alias in the defining TU so the ABI and live emitter cell match. */
+int32_t audio_ble_hci_boot_log_4733ee(const char *,...)
+    __attribute__((alias("g2_log_transport_queue_failure")));

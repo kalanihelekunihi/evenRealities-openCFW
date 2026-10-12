@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Source reduction of native CASE 0x0800ce34..0x0800d0ea.
  * The ADC/time/IRQ descendants remain typed platform contracts.
@@ -20,7 +21,7 @@ static void count_low(volatile uint8_t *counter,volatile uint8_t *state,
                       volatile uint8_t *quiet,uint32_t first_log)
 {
     if(*counter<6u){++*counter;return;}
-    if(*quiet==0u){case_policy_log(first_log);case_policy_log(0x0800d128u);}
+    if(*quiet==0u){case_policy_log(first_log);case_policy_log(CASE_STRING_ADDR(0800d128));}
     state[0]=1u;state[2]=1u;
 }
 void case_policy_service_update(void)
@@ -67,7 +68,7 @@ void case_policy_service_update(void)
             s[0x10u]=(uint8_t)(case_policy_sensor_sample()<620u);
         }
         if(s[0x10u]!=0u && left_low!=0u)
-            count_low(counters,s+0x31u,quiet,0x0800d100u);
+            count_low(counters,s+0x31u,quiet,CASE_STRING_ADDR(0800d100));
         else counters[0]=0u;
         if(s[0x10u]!=0u && s[0x11u]!=0u && s[0x31u]!=0u && s[0x33u]==0u){
             case_policy_sensor_command(5u,3u);case_policy_sensor_command(6u,0x81u);
@@ -83,7 +84,7 @@ void case_policy_service_update(void)
             s[0x11u]=(uint8_t)(case_policy_sensor_sample()<620u);
         }
         if(s[0x11u]!=0u && right_low!=0u)
-            count_low(counters+1u,s+0x4du,quiet,0x0800d12cu);
+            count_low(counters+1u,s+0x4du,quiet,CASE_STRING_ADDR(0800d12c));
         else counters[1]=0u;
         if(s[0x10u]!=0u && s[0x11u]!=0u && s[0x4du]!=0u && s[0x4fu]==0u){
             case_policy_sensor_command(5u,3u);case_policy_sensor_command(6u,0x81u);

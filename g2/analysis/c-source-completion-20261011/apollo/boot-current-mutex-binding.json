@@ -1,0 +1,18 @@
+{
+  "status": "CURRENT_SOURCE_BOUND",
+  "oracle": "g2/analysis/c-source-completion-20261011/apollo/boot-current-mutex-oracle.json",
+  "isolated_elf": "g2/analysis/c-source-completion-20261011/apollo/boot-mutex-m4-isolated.elf",
+  "isolated_elf_sha256": "6b81c223ef9a53b08b620e12339dc3ca02c4be37fba4a778011e6eba806d4c26",
+  "current_source_sha256": {
+    "g2/components/bootloader/queue/mutex.c": "6989dfbac60611e2a4a612f030b927a375737c9da08d106d3d7697a6c5c606b7",
+    "g2/components/bootloader/thread_creation/mutex_kernel.c": "1acf3fc7ec62ed6a107b0a6849d6e05dddb7bb461b05741b4e0d5c038486d57f",
+    "g2/components/bootloader/thread_creation/queue_receive.c": "0b8ee96a10bc0a9957b54d446bcd174146b2673786047669a6c6b74912d2ae3c",
+    "g2/components/bootloader/thread_creation/queue_send.c": "d16a784f3fed5a1593a34f20b49a89e8aa45c37bd61b5634d9f82bf8fa966663"
+  },
+  "compile_profile": "selected source compiled for Cortex-M4 to run retained Unicorn native/source fixture; source candidate selected build remains Cortex-M55",
+  "limits": [
+    "516 bounded fixture cases execute stock and source mutex control/state with scheduler child cuts",
+    "Cortex-M4 compilation is a test profile, not the selected Cortex-M55 image",
+    "No physical scheduling or interrupt delivery"
+  ]
+}

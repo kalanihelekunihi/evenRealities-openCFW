@@ -1,0 +1,13 @@
+  326a84:	c2e2                	enter_s	[r13,blink]
+  326a86:	4508                	mov_s	r13,r0
+  326a88:	086a 0360           	bl.d	26728	;0x32d2f0
+  326a8c:	720c                	mov_s	r0,2
+  326a8e:	4100                	mov_s	r1,r0
+  326a90:	e80b                	breq_s	r0,0,22	;0x326aa6
+  326a92:	1900 01c3           	stb	7,[r1]
+  326a96:	40c3 0080 2818      	mov_s	r0,0x802818
+  326a9c:	8800                	ldb_s	r0,[r0,0]
+  326a9e:	a901                	stb_s	r0,[r1,0x1]
+  326aa0:	088e 0360           	bl.d	26764	;0x32d32c
+  326aa4:	40a1                	mov_s	r0,r13
+  326aa6:	c6c2                	leave_s	[r13,blink,pcl]

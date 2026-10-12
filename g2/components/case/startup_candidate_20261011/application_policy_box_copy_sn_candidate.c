@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08002b4c copy serial/identity words into OTA bank.
  */
@@ -22,7 +23,7 @@ uint32_t case_policy_box_copy_sn(void)
     case_boot_option_commit_c();return 1u;
 fail:
     if(*(volatile const uint8_t *)(uintptr_t)0x200000bfu==0u){
-        (void)case_policy_log(0x08002c10u);(void)case_policy_log(0x08002c2cu);
+        (void)case_policy_log(CASE_STRING_ADDR(08002c10));(void)case_policy_log(CASE_STRING_ADDR(08002c2c));
     }
     case_boot_option_commit_c();return 0u;
 }

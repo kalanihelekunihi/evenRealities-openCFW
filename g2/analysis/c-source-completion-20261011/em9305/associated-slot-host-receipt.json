@@ -1,0 +1,25 @@
+{
+  "qualification": "controlled host source-model differential; not ARC execution",
+  "cases": 133120,
+  "result": "PASS",
+  "native_binary_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "native_ranges": [
+    "3336d8..33377e",
+    "33382c..3338f2",
+    "3338f4..333946",
+    "333948..3339cc",
+    "3133b4 allocator"
+  ],
+  "source_sha256": "9397b1b6b7551be4503daf9de48c16886e0d20cb500d0ca45eae95d16c405a24",
+  "scope": [
+    "selector unsigned wrap/rounding/exclusion",
+    "bitmap zero-divisor prior values, shift modulo64, skip and early break",
+    "allocator successful slot/count/output updates"
+  ],
+  "unqualified": [
+    "native ARC execution",
+    "hardware scheduling",
+    "full image placement"
+  ],
+  "target_arithmetic": "named ARC DIV/REMU avoids compiler runtime division imports; host port substitutes equivalent bounded arithmetic"
+}

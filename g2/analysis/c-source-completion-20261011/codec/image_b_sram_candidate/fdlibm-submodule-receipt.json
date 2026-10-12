@@ -1,0 +1,36 @@
+{
+  "repository": "https://github.com/bminor/glibc.git",
+  "tag": "glibc-2.3",
+  "commit": "451c8c22c68df72324fb61b462e24e4778c5fe23",
+  "submodule_path": "third-party/upstream/glibc-2.3-fdlibm",
+  "gitlink_verified": true,
+  "files": [
+    {
+      "upstream_path": "third-party/upstream/glibc-2.3-fdlibm/sysdeps/ieee754/flt-32/e_powf.c",
+      "analysis_copy": "g2/analysis/c-source-completion-20261011/codec/image_b_sram_candidate/upstream-glibc-2.3-e_powf.c",
+      "sha256": "02e4fab31121173c4af9c9e9bc9cf7df45e5456063975abf5a472f5d91bced58",
+      "bytes": 7664
+    },
+    {
+      "upstream_path": "third-party/upstream/glibc-2.3-fdlibm/sysdeps/ieee754/flt-32/e_sqrtf.c",
+      "analysis_copy": "g2/analysis/c-source-completion-20261011/codec/image_b_sram_candidate/upstream-glibc-2.3-e_sqrtf.c",
+      "sha256": "474ea5d9e8c3200506ecb8eda7eb8c4cb3966fb75e41ff888f71d6e49e80cf55",
+      "bytes": 2175
+    },
+    {
+      "upstream_path": "third-party/upstream/glibc-2.3-fdlibm/sysdeps/ieee754/flt-32/s_scalbnf.c",
+      "analysis_copy": "g2/analysis/c-source-completion-20261011/codec/image_b_sram_candidate/upstream-glibc-2.3-s_scalbnf.c",
+      "sha256": "1481ed4c658a049705af2c22035ba947121f9c502e3fc9a2a48d688e51f12ace",
+      "bytes": 1802
+    },
+    {
+      "upstream_path": "third-party/upstream/glibc-2.3-fdlibm/sysdeps/ieee754/flt-32/e_logf.c",
+      "analysis_copy": "g2/analysis/c-source-completion-20261011/codec/image_b_sram_candidate/upstream-glibc-2.3-e_logf.c",
+      "sha256": "71704d3c512136c0c40e2ebc72d5b10caf4e5d03b738b5a218be506f43340ef4",
+      "bytes": 2634
+    }
+  ],
+  "scope": "Exact attributable source pin; native correspondence and implementation separately qualified. No firmware/hardware completion claim.",
+  "checkout": "Sparse cone sysdeps/ieee754/flt-32 plus root files, to avoid unrelated m88k case-colliding .S/.s paths on macOS",
+  "checkout_clean_verified": true
+}

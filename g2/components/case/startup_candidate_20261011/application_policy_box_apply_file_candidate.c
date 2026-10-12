@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08002cc0 image checksum against OTA file metadata.
  */
@@ -16,8 +17,8 @@ uint32_t case_policy_box_apply_file(void)
     }
     uint32_t expected=*(volatile const uint32_t *)(uintptr_t)(0x2000087cu+0x24u);
     if(*(volatile const uint8_t *)(uintptr_t)0x200000bfu==0u){
-        (void)case_policy_log(0x08002d1cu,total,expected);
-        (void)case_policy_log(0x08002d44u);
+        (void)case_policy_log(CASE_STRING_ADDR(08002d1c),total,expected);
+        (void)case_policy_log(CASE_STRING_ADDR(08002d44));
     }
     (void)box;
     return total==expected?1u:0u;

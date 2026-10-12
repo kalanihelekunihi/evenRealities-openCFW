@@ -34,9 +34,17 @@ PREFERRED_PROVIDERS = {
 }
 ASSEMBLY_SOURCES = [
     "runtime_memory/boot_assert.S",
+    "runtime_memory/double_compare_flags.S",
+    "runtime_memory/native_empty_leaves.S",
+    "runtime_memory/iar_constraint_dispatch_entry.S",
     "application_storage/storage_callback_veneers.S",
     "initializer_callbacks/callback_table.S",
     "initializer_callbacks/startup_clockmux_entry.S",
+    "initializer_callbacks/startup_mcu_memory_entry.S",
+    "initializer_callbacks/native_uart_log_abi_wrapper.S",
+    "initializer_callbacks/uart_rx_drain32_abi.S",
+    "initializer_callbacks/hardware_readiness_gate.S",
+    "filesystem/native_unmount_abi_wrapper.S",
     "startup/reset.S",
     "startup/fpu.S",
     "startup/itcm_helpers.S",
@@ -50,6 +58,7 @@ ASSEMBLY_SOURCES = [
     "nor_commands/nor_timing_wrapper.S",
     "nor_mspi_init/irq_guard.S",
     "platform_control/critical_save.S",
+    "platform_control/runtime_transition_entry.S",
     "platform_startup/delay_math.S",
     "platform_startup/local_providers.S",
     "thread_creation/first_task_transfer.S",
@@ -57,9 +66,7 @@ ASSEMBLY_SOURCES = [
     "source_candidate_20261010/startup_root_entry.S",
 ]
 ISOLATED_CANDIDATES = {
-    "source_candidate_20261010/mspi_interrupt_service_candidate.c",
     "source_candidate_20261010/startup_power_root_candidate.c",
-    "source_candidate_20261010/generic_log_float_candidate.c",
     "source_candidate_20261010/tlsf_printf_candidate.c",
 }
 

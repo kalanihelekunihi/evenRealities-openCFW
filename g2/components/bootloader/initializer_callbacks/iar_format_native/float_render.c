@@ -2,7 +2,7 @@
  * Decimal digit budgets and rounding retain stock behavior/limitations. */
 #include "record.h"
 #include <stddef.h>
-extern uint64_t opencfw_fp_mul(uint64_t,uint64_t),opencfw_fp_sub(uint64_t,uint64_t),opencfw_fp_div(uint64_t,uint64_t),opencfw_fp_frexp(uint64_t,int *),opencfw_fp_pow10(uint64_t,unsigned),opencfw_fp_from_i32(int32_t),opencfw_fp_from_u32(uint32_t);
+extern uint64_t opencfw_fp_mul(uint64_t,uint64_t),opencfw_fp_sub(uint64_t,uint64_t),opencfw_fp_div(uint64_t,uint64_t),opencfw_fp_frexp(uint64_t,int *),opencfw_fp_pow10(uint64_t,int32_t),opencfw_fp_scale2(uint64_t,int32_t),opencfw_fp_from_i32(int32_t),opencfw_fp_from_u32(uint32_t);
 extern int32_t opencfw_fp_i32(uint64_t);extern uint32_t opencfw_fp_u32(uint64_t);
 static void copy(uint8_t *dst,const uint8_t *src,int n){while(n-->0)*dst++=*src++;}
 static int round_digits(uint8_t **start,int count,int available,unsigned half,unsigned zero,unsigned maximum,int *exponent,int carry){
@@ -29,7 +29,7 @@ int opencfw_format_float_render(format_record *r,unsigned c,uint32_t **cursor,ui
   int need=r->precision<0?33:(int32_t)((uint32_t)r->precision+1);int budget=(int32_t)((uint32_t)need+1);buffer[0]=0;exponent-=4;
   /* The stock comparison helper treats both signs of zero as zero. Under
    * round-toward-minus-infinity an exact subtraction can produce -0. */
-  while(budget>0&&(fraction&UINT64_C(0x7fffffffffffffff))){fraction+=UINT64_C(28)<<52;int32_t part=opencfw_fp_i32(fraction);budget-=7;
+  while(budget>0&&(fraction&UINT64_C(0x7fffffffffffffff))){fraction=opencfw_fp_scale2(fraction,28);int32_t part=opencfw_fp_i32(fraction);budget-=7;
    if(budget>0)fraction=opencfw_fp_sub(fraction,opencfw_fp_from_i32(part));
    for(int j=6;j>=0;j--){digits[count+j]=(uint8_t)((uint32_t)part&15);part>>=4;}count+=7;
   }
@@ -37,7 +37,7 @@ int opencfw_format_float_render(format_record *r,unsigned c,uint32_t **cursor,ui
   for(int i=count-1;i>=0;i--)digits[i]=(uint8_t)(digits[i]<10?digits[i]+'0':digits[i]+c-10);
   if(r->precision<0)r->precision=count-1;
  }else{
-  exponent=exponent*30103/100000;int scale=7-exponent;uint64_t value=scale>0?opencfw_fp_pow10(magnitude,(unsigned)scale):opencfw_fp_div(magnitude,opencfw_fp_pow10(UINT64_C(0x3ff0000000000000),(unsigned)-scale));
+  exponent=exponent*30103/100000;int scale=7-exponent;uint64_t value=scale>0?opencfw_fp_pow10(magnitude,scale):opencfw_fp_div(magnitude,opencfw_fp_pow10(UINT64_C(0x3ff0000000000000),-scale));
   int budget=(int32_t)((uint32_t)r->precision+(uint32_t)(lower=='f'?exponent+10:6));if(budget>20)budget=20;buffer[0]='0';
   /* Stock consumes prior bytes when no digits were generated. The entry
    * frame/pointer at+0xac bounds this scan and preserves the physical input. */

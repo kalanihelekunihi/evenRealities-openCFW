@@ -5,8 +5,8 @@
 
 extern volatile uint8_t *const audio_uart_mux_bitset; /* DAT_004c43dc */
 extern const volatile uint8_t *const audio_uart_mux_capabilities; /* DAT_004c43e8 */
-extern volatile uint32_t audio_uart_mux_group3_active_pin; /* *DAT_004c4678 */
-extern volatile uint32_t audio_uart_mux_group3_idle_pin; /* *DAT_004c467c */
+extern const uint32_t audio_uart_mux_group3_active_pin; /* *DAT_004c4678 */
+extern const uint32_t audio_uart_mux_group3_idle_pin; /* *DAT_004c467c */
 extern uint32_t g2_gpio_critical_save(void); /* selected 0x473940 */
 extern bool g2_log_is_privileged(void); /* selected privilege test */
 extern uint32_t g2_codec_pin_function(uint32_t,uint32_t); /* selected 0x480f0c */

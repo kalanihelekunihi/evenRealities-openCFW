@@ -3,12 +3,15 @@
 #include <stddef.h>
 typedef struct {uint32_t low,high,unused,digits,scratch,prefix_count,digit_count,unused1,zero_count,unused2,unused3,unused4;int32_t precision,width;uint16_t flags;uint8_t length,mode;} integer_format;
 _Static_assert(offsetof(integer_format,flags)==0x38,"stock layout");
+/* Stock 0x41e474..0x41e47a is a distinct ASCII case-fold leaf used when
+ * choosing the integer radix. It deliberately ORs bit5 for any input. */
+__attribute__((noinline)) uint32_t opencfw_format_ascii_lower_mask(uint32_t value){return value|0x20u;}
 static uint64_t divide(uint64_t n,unsigned base,unsigned *remainder){
  if(base==8||base==16){unsigned shift=base==8?3:4;*remainder=(unsigned)n&(base-1);return n>>shift;}
  uint64_t q=0;unsigned r=0;for(int bit=63;bit>=0;bit--){r=(r<<1)|(unsigned)((n>>bit)&1);if(r>=10){r-=10;q|=(uint64_t)1<<bit;}}*remainder=r;return q;
 }
 uint64_t opencfw_format_integer_render(integer_format *s,unsigned conversion,uint32_t return_low,uint32_t return_high){
- unsigned base=conversion=='o'?8:((conversion|0x20)=='x'?16:10),pos=60;uint64_t n=((uint64_t)s->high<<32)|s->low;
+ unsigned base=conversion=='o'?8:(opencfw_format_ascii_lower_mask(conversion)=='x'?16:10),pos=60;uint64_t n=((uint64_t)s->high<<32)|s->low;
  if((conversion=='d'||conversion=='i')&&(s->high&0x80000000u))n=0-n;
  uint8_t *buf=(uint8_t *)(uintptr_t)s->scratch;
  if(n==0&&s->precision==0){if(base==8&&(s->flags&8))buf[--pos]='0';}

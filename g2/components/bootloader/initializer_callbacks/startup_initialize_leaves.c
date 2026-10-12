@@ -14,6 +14,8 @@ NI void opencfw_boot_startup_sleep_fields_read(uint8_t output[3]){
  uint32_t value=W(0xe001e300u);output[0]=(value>>8)&3;output[1]=(value>>4)&3;output[2]=value&3;
 }
 #define HOOK(name,offset) NI uint32_t name(void){if(W(0x20026e38u+offset))return ((uint32_t(*)(void))(uintptr_t)W(0x20026e38u+offset))();return 0;}
+HOOK(opencfw_boot_startup_hook0c,0x0cu)
+HOOK(opencfw_boot_startup_hook10,0x10u)
 HOOK(opencfw_boot_startup_hook20,0x20u)
 HOOK(opencfw_boot_startup_hook28,0x28u)
 HOOK(opencfw_boot_startup_hook30,0x30u)

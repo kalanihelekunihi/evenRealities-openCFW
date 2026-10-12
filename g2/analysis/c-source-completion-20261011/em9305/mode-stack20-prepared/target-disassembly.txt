@@ -1,0 +1,47 @@
+
+/out/stack20.o:     file format elf32-littlearc
+
+
+Disassembly of section .text:
+
+00000000 <opencfw_em9305_mode_event_322fdc>:
+   0:	1cec b7c8           	st.aw	blink,[sp,-20]
+   4:	42c3 0080 5c70      	mov_s	r2,0x805c70
+   a:	4244                	ld_s	r2,[r2,0]
+   c:	c162                	stb_s	r1,[sp,0x8]
+   e:	1c07 3042           	stb	r1,[sp,7]
+  12:	4852                	sub_s	r2,r0,r2
+  14:	2a84 040e           	div	r2,r2,912
+  18:	7034                	cmp_s	r1,0
+  1a:	1c10 3005           	sth	0,[sp,16]
+  1e:	1c0c 3001           	st	0,[sp,12]
+  22:	1c06 31c3           	stb	7,[sp,6]
+  26:	794f                	extb_s	r1,r2
+  28:	4283                	mov_s	r2,sp
+  2a:	b225                	sth_s	r1,[r2,0xa]
+  2c:	b222                	sth_s	r1,[r2,0x4]
+  2e:	0016 0002           	bne	22	;42 <opencfw_em9305_mode_event_322fdc+0x42>
+  32:	218a 0a0a           	mov	r1,680
+  36:	10a9 0602           	ld.as	r2,[r0,169]
+  3a:	6030                	ldh_s	r0,[r0,r1]
+  3c:	c243                	st_s	r2,[sp,0xc]
+  3e:	1c10 3004           	sth	r0,[sp,16]
+  42:	0802 0020           	bl.d	0	;0 <opencfw_em9305_ll_event_callback_30e79c>
+			42: R_ARC_S25W_PCREL	opencfw_em9305_ll_event_callback_30e79c
+  46:	c081                	add_s	r0,sp,0x4
+  48:	1414 341f           	ld.ab	blink,[sp,20]
+  4c:	7ee0                	j_s	[blink]
+  4e:	78e0                	nop_s
+
+00000050 <opencfw_em9305_mode_event_31ac3c>:
+  50:	109f 0603           	ld.as	r3,[r0,159]
+  54:	0b09 0457           	bbit1.nt	r3,0x11,8	;5c <opencfw_em9305_mode_event_31ac3c+0xc>
+  58:	7ee0                	j_s	[blink]
+  5a:	78e0                	nop_s
+  5c:	882c                	ldb_s	r1,[r0,0xc]
+  5e:	bbb1                	bclr_s	r3,r3,0x11
+  60:	189f 00d8           	st.as	r3,[r0,159]
+  64:	18a0 0019           	st.as	0,[r0,160]
+  68:	0799 ffef           	b.d	-104	;0 <opencfw_em9305_mode_event_322fdc>
+  6c:	792f                	extb_s	r1,r1
+  6e:	78e0                	nop_s

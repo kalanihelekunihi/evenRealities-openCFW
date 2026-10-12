@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock idle-standby sequence at 0x0800726a through WFI 0x080072b0.
  * Product message and device reads retain typed lower contracts.
@@ -13,8 +14,8 @@ extern void case_init_wake_clock(void); /* 0x080050c4 */
 void case_policy_standby_idle(void)
 {
     if(*(volatile uint8_t *)(uintptr_t)0x200000bfu==0u){
-        case_policy_log(0x080075f0u);
-        case_policy_log(0x08007608u);
+        case_policy_log(CASE_STRING_ADDR(080075f0));
+        case_policy_log(CASE_STRING_ADDR(08007608));
     }
     uint8_t scratch=0u;
     case_init_pmic_read(0x10u,&scratch,1u);

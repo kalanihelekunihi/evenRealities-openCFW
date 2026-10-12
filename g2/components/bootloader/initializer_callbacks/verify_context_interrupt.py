@@ -32,7 +32,9 @@ class Machine:
         self.source = source
         self.symbols = symbols or {}
         self.cpu = Uc(UC_ARCH_ARM, UC_MODE_THUMB | UC_MODE_MCLASS)
-        self.cpu.mem_map(BASE, 0x25000)
+        # Co-placed source ELF may extend beyond the locked stock 0x24477 span.
+        # elf_reader bounds that experimental executable segment below 0x440000.
+        self.cpu.mem_map(BASE, 0x30000 if source else 0x25000)
         self.cpu.mem_map(0x20000000, 0x40000)
         self.cpu.mem_map(STOP, 0x10000)
         self.cpu.mem_map(IRQ, 0x4000)
@@ -43,7 +45,7 @@ class Machine:
             for segment in segments:
                 lo = segment["address"] & ~0xfff
                 hi = (segment["address"] + len(segment["data"]) + 0xfff) & ~0xfff
-                if not (BASE <= lo < BASE + 0x25000 or
+                if not (BASE <= lo < BASE + (0x30000 if source else 0x25000) or
                         0x20000000 <= lo < 0x20040000 or
                         STOP <= lo < STOP + 0x10000 or
                         IRQ <= lo < IRQ + 0x4000):

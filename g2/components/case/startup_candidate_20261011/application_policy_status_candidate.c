@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08007884-0x080079b4 lens-status and charging-result decision.
  * Prior left/right status are the 0x08007200 stack snapshots at SP+12/+20.
@@ -18,32 +19,32 @@ uint32_t case_policy_status_7884(volatile uint8_t *state,
         *(volatile uint32_t *)(void *)(state+0x0cu)=0u;
         if(state[2u]<3u){
             case_policy_led_left_clear(0u);case_policy_led_right_clear(0u);state[2u]=2u;
-            if(shared[7u]==0u){case_policy_log(0x08007b8cu);case_policy_log(0x08007b84u);}
+            if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(08007b8c));case_policy_log(CASE_STRING_ADDR(08007b84));}
         }
         if(r==0u){
-            uint32_t message=(l==0u)?0x08007c2cu:0x08007c74u;
-            if(shared[7u]==0u){case_policy_log(message);case_policy_log(0x08007b84u);}
+            uint32_t message=(l==0u)?CASE_STRING_ADDR(08007c2c):CASE_STRING_ADDR(08007c74);
+            if(shared[7u]==0u){case_policy_log(message);case_policy_log(CASE_STRING_ADDR(08007b84));}
         }else if(l==0u){
-            if(shared[7u]==0u){case_policy_log(0x08007c50u);case_policy_log(0x08007b84u);}
+            if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(08007c50));case_policy_log(CASE_STRING_ADDR(08007b84));}
         }else if(left[0x10u]==0u || right[0x0cu]==0u){
-            if(shared[7u]==0u){case_policy_log(0x08007bf0u);case_policy_log(0x08007b84u);}
+            if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(08007bf0));case_policy_log(CASE_STRING_ADDR(08007b84));}
             shared[1u]=8u;
         }else if(shared[7u]==0u){
-            case_policy_log(0x08007bb0u);case_policy_log(0x08007b84u);
+            case_policy_log(CASE_STRING_ADDR(08007bb0));case_policy_log(CASE_STRING_ADDR(08007b84));
         }
         return 1u;
     }
     if(*(volatile uint32_t *)(void *)(state+0x0cu)<=10u)return 0u;
     if(state[0x14u]==1u){
         if(left[0x10u]!=0u && right[0x0cu]!=0u && left[0x13u]==0u && right[0x0fu]==0u){
-            if(shared[7u]==0u){case_policy_log(0x08007c98u);case_policy_log(0x08007b84u);}
+            if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(08007c98));case_policy_log(CASE_STRING_ADDR(08007b84));}
             return 1u;
         }
     }else if(state[0x14u]==2u){
         uint8_t left_bad=(left[0x14u]==0u || left[0x10u]!=0u);
         uint8_t right_bad=(right[0x10u]==0u || right[0x0cu]!=0u);
         if(!(left_bad && right_bad)){
-            if(shared[7u]==0u){case_policy_log(0x08007cc0u);case_policy_log(0x08007b84u);}
+            if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(08007cc0));case_policy_log(CASE_STRING_ADDR(08007b84));}
             return 1u;
         }
     }

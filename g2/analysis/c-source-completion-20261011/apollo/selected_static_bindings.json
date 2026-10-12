@@ -9,120 +9,6 @@
       "basis": "Native zero returns one digit, otherwise repeats unsigned64 divide-by-ten 0x415844 while incrementing count; pinned Ambiq plain formatter static helper has this algorithm."
     },
     {
-      "entry": "0x004159a0",
-      "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
-      "symbol": "uint64_to_str",
-      "basis": "Native repeatedly divides unsigned64 by10, writes reversed digits to a temporary array, optionally emits forward NUL-terminated decimal string and returns digit count; pinned Ambiq plain formatter source has this static helper."
-    },
-    {
-      "entry": "0x00426c58",
-      "source": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
-      "symbol": "hfadj_enable",
-      "basis": "Native writes 0x40004044 bit0 to boolean(enabled) and returns0; selected static HFADJ enable does the same masked write."
-    },
-    {
-      "entry": "0x00426d1e",
-      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
-      "symbol": "clkgen_disable",
-      "basis": "Native clears bit0 of CLKGEN divider register 0x40004048 and returns0; selected static disable expresses the same side effect."
-    },
-    {
-      "entry": "0x00426c8c",
-      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
-      "symbol": "dual_switch",
-      "basis": "Native disabled path clears bit0x20; enabled path tests status bit5, sets bit0x20 if clear and waits up to100 for 0x01000000 readiness. Selected static class-5 dual-switch source matches these MMIO/control branches."
-    },
-    {
-      "entry": "0x00427310",
-      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
-      "symbol": "pll_deinitialize",
-      "basis": "Native SYSPLL context-magic gate, optional active disable, power-down/restore flag and context-bit clear match selected static source. The source discards disable status only after initial handle validation, when native disable necessarily returns0."
-    },
-    {
-      "entry": "0x00427754",
-      "source": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
-      "symbol": "update_indices",
-      "basis": "Native critical region reads callback table at queue+0x24, folds low eight bits of hardware index into queue+0x1c with 0x100 wrap correction against queue+0x20, updates queue+0x0c and restores PRIMASK; selected static source has the same fields and arithmetic."
-    },
-    {
-      "entry": "0x00423864",
-      "source": "g2/components/bootloader/init_table/qsort.c",
-      "symbol": "swap_item",
-      "basis": "Native 0x423864 byte swap below64 and 128-byte chunked swap at or above64 now match source fixed-scratch helper. Source qsort compared 27 original cases at record widths crossing 64, 128 and 256, counts2/33/42; this is bounded call-path evidence, not all aliases or widths."
-    },
-    {
-      "entry": "0x004238ba",
-      "source": "g2/components/bootloader/init_table/qsort.c",
-      "symbol": "rotate3",
-      "basis": "Native 0x4238ba byte rotate below64 and 128-byte chunked three-record rotate at or above64 now match source fixed-scratch helper. Source qsort compared 27 original cases at record widths crossing 64, 128 and 256, counts2/33/42; this is bounded call-path evidence."
-    },
-    {
-      "entry": "0x00417ad4",
-      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
-      "symbol": "fmt_enabled",
-      "basis": "Native level>5 assertion at line 0x2e7 and mask test at logger format word +0xd8+4*level match selected static formatter flag predicate. The selected assertion routes through its source-owned reset requester."
-    },
-    {
-      "entry": "0x00426c72",
-      "source": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
-      "symbol": "hfadj_configure",
-      "basis": "Native single write of input|1 to 0x40004020, then status0, matches selected static HFADJ configuration leaf."
-    },
-    {
-      "entry": "0x00426ccc",
-      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
-      "symbol": "clkgen_config",
-      "basis": "Native null status6 and CLKGEN writes at 0x4000404c/48/50 with masks 7, 0xdfffffff, 0x80000003 and 0x1fffffff match selected static class-5 configuration body; separate startup HF2 source duplicates the same leaf."
-    },
-    {
-      "entry": "0x004215fe",
-      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
-      "symbol": "users",
-      "basis": "Native sums population counts of the two user-bit words at 0x20026e74 + clock*8; selected startup clock helper reads the same two words and counts set bits. The native SWAR helper and source per-bit loops are semantically equal for 32-bit values, but this is an attribution lead; cross-class calling paths still need whole-body checking."
-    },
-    {
-      "entry": "0x004215dc",
-      "source": "g2/components/bootloader/clock_manager/clock_manager.c",
-      "symbol": "clock_user_has",
-      "basis": "Native clock/user bitmap test indexes 0x20026e74 by clock*8 + (user>>5)*4 and extracts user&31; selected static source uses identical address and bit arithmetic. Called by clock request/release paths; attribution lead, not full-domain proof."
-    },
-    {
-      "entry": "0x00421632",
-      "source": "g2/components/bootloader/clock_manager/clock_manager.c",
-      "symbol": "clock_user_update",
-      "basis": "Native clock<7 and user<57 validation returns 6 on invalid input, otherwise sets/clears bit at 0x20026e74 + clock*8 + (user>>5)*4 and returns 0; selected static source has the same branches and masks."
-    },
-    {
-      "entry": "0x00416e60",
-      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
-      "symbol": "block_trim_used",
-      "basis": "Native block-size-minus-request split test, residual block split, next-block used marking, merge-next, and free-list insertion match pinned TLSF block_trim_used. The selected compiler inlines this static definition; this is an attribution lead, not a byte/whole-body equivalence receipt."
-    },
-    {
-      "entry": "0x00415ab6",
-      "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
-      "symbol": "ftoa",
-      "basis": "Selected Ambiq plain formatter defines the same float-to-decimal buffer-size, exponent, significand, and rounding algorithm; older pinned source/stock formatter probe covered 1778 cases including float values. Current selected compiler inlines ftoa into opencfw_boot_plain_vsprintf, so this is attribution of an inlined body, not a standalone machine-function or current whole-domain proof."
-    },
-    {
-      "entry": "0x004210c8",
-      "source": "g2/components/bootloader/filesystem/boot_mount.c",
-      "symbol": "ensure_directories",
-      "basis": "Four path loop, lfs_dir_open/lfs_mkdir branches, and recovered EasyLogger line 0x51/0x53/0x55/0x5a/0x5c."
-    },
-    {
-      "entry": "0x0042740c",
-      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
-      "symbol": "pll_configure",
-      "basis": "Handle magic, config bytes and multiplier ranges, identical SYSPLL register masks and write order."
-    },
-    {
-      "entry": "0x00415a08",
-      "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
-      "symbol": "uint64_to_hexstr",
-      "basis": "Native 64-bit nibble loop, zero digit, lower/upper alpha offset, reverse optional buffer and digit count exactly follow selected Ambiq static uint64_to_hexstr; native disassembly 0x415a08..0x415a7a compared to pinned source body."
-    },
-    {
       "entry": "0x00415924",
       "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
       "symbol": "ndigits_in_i64",
@@ -133,6 +19,24 @@
       "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
       "symbol": "ndigits_in_hex",
       "basis": "Native 64-bit shift-right-by-four loop with zero=>one digit matches pinned Ambiq ndigits_in_hex."
+    },
+    {
+      "entry": "0x0041595c",
+      "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+      "symbol": "decstr_to_int",
+      "basis": "Native optional minus, decimal range loop with 32-bit multiply-by-ten, optional consumed-count output and negated return match selected pinned Ambiq decstr_to_int source."
+    },
+    {
+      "entry": "0x004159a0",
+      "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+      "symbol": "uint64_to_str",
+      "basis": "Native repeatedly divides unsigned64 by10, writes reversed digits to a temporary array, optionally emits forward NUL-terminated decimal string and returns digit count; pinned Ambiq plain formatter source has this static helper."
+    },
+    {
+      "entry": "0x00415a08",
+      "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+      "symbol": "uint64_to_hexstr",
+      "basis": "Native 64-bit nibble loop, zero digit, lower/upper alpha offset, reverse optional buffer and digit count exactly follow selected Ambiq static uint64_to_hexstr; native disassembly 0x415a08..0x415a7a compared to pinned source body."
     },
     {
       "entry": "0x00415a7c",
@@ -147,34 +51,238 @@
       "basis": "Native signed nonpositive count=>0, optional pointer byte fill and count return match selected static padbuffer."
     },
     {
-      "entry": "0x0041595c",
+      "entry": "0x00415ab6",
       "source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
-      "symbol": "decstr_to_int",
-      "basis": "Native optional minus, decimal range loop with 32-bit multiply-by-ten, optional consumed-count output and negated return match selected pinned Ambiq decstr_to_int source."
+      "symbol": "ftoa",
+      "basis": "Selected Ambiq plain formatter defines the same float-to-decimal buffer-size, exponent, significand, and rounding algorithm; older pinned source/stock formatter probe covered 1778 cases including float values. Current selected compiler inlines ftoa into opencfw_boot_plain_vsprintf, so this is attribution of an inlined body, not a standalone machine-function or current whole-domain proof."
     },
     {
-      "entry": "0x0041cc92",
-      "source": "g2/components/bootloader/source_candidate_20261010/gx_children.c",
-      "symbol": "native_spot_clock_ramp_disable",
-      "basis": "Native internal clock-ramp disable clears bit0, pulses bit1 at 0x400083e0, writes wait*6 to 0x400083e8, writes 0xc0000000 to 0x40008068 and 0x40000 to NVIC clear-pending, then restores bit0; selected static native_spot_clock_ramp_disable inside state transition mirrors this sequence."
+      "entry": "0x004169fc",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_size",
+      "basis": "Native masks both free flag bits from header size at +4; exact pinned TLSF block_size."
     },
     {
-      "entry": "0x00426c7e",
-      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
-      "symbol": "hf1_default",
-      "basis": "Native HFADJ default reads 0x40004020, clears bit0, stores it and returns0; selected static hf1_default in startup_clock_config.c has the same MMIO effect."
+      "entry": "0x00416a10",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_set_size",
+      "basis": "Native merges requested size with the two existing free flag bits at header+4; exact pinned TLSF block_set_size."
     },
     {
-      "entry": "0x00421d28",
-      "source": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
-      "symbol": "callback_finish",
-      "basis": "Native class-4 completion waits via 0x4216b2 while timeout and active, then saves PRIMASK, marks 0x2002719e deferred, clears 0x2002719c active and 0x20027044 callback pointer, restores PRIMASK; selected static callback_finish has this sequence."
+      "entry": "0x00416a2c",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_is_last",
+      "basis": "Native compares block_size to zero; exact pinned TLSF block_is_last."
     },
     {
-      "entry": "0x00421e8c",
-      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
-      "symbol": "callback_finish",
-      "basis": "Native class-5 completion waits via 0x4216b2 while timeout and active, then saves PRIMASK, clears 0x2002719d active and 0x20027048 callback pointer, restores PRIMASK; selected static callback_finish has this sequence."
+      "entry": "0x00416a40",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_is_free",
+      "basis": "Native tests free flag in size word; exact pinned TLSF block_is_free."
+    },
+    {
+      "entry": "0x00416a4c",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_set_free",
+      "basis": "Native ORs free flag into size word; exact pinned TLSF block_set_free."
+    },
+    {
+      "entry": "0x00416a5a",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_set_used",
+      "basis": "Native clears free flag in size word; exact pinned TLSF block_set_used."
+    },
+    {
+      "entry": "0x00416a68",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_is_prev_free",
+      "basis": "Native tests previous-free flag in size word; exact pinned TLSF block_is_prev_free."
+    },
+    {
+      "entry": "0x00416a74",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_set_prev_free",
+      "basis": "Native ORs previous-free flag into size word; exact pinned TLSF block_set_prev_free."
+    },
+    {
+      "entry": "0x00416a82",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_set_prev_used",
+      "basis": "Native clears previous-free flag in size word; exact pinned TLSF block_set_prev_used."
+    },
+    {
+      "entry": "0x00416a90",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_from_ptr",
+      "basis": "Native subtracts pinned block_start_offset from user pointer; exact pinned TLSF block_from_ptr."
+    },
+    {
+      "entry": "0x00416a9c",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_to_ptr",
+      "basis": "Native adds pinned block_start_offset to block header address; exact selected pinned TLSF block_to_ptr at tlsf.c:417."
+    },
+    {
+      "entry": "0x00416aa6",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "offset_to_block",
+      "basis": "Native adds size to pointer and casts to block header; exact selected pinned TLSF offset_to_block at tlsf.c:424."
+    },
+    {
+      "entry": "0x00416aaa",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_prev",
+      "basis": "Native asserts previous-free flag via block_is_prev_free and returns previous physical block pointer at offset0; exact pinned TLSF block_prev at line430."
+    },
+    {
+      "entry": "0x00416ad0",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_next",
+      "basis": "Native computes block_to_ptr(block)+block_size(block)-block_header_overhead, asserts source block is not terminal, returns next block; exact pinned TLSF block_next at tlsf.c:437. Assertion side effect is retained in selected source; optimizer may inline this static helper."
+    },
+    {
+      "entry": "0x00416b14",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_link_next",
+      "basis": "Native computes block_next and writes current block into next prev_phys_block; exact pinned TLSF block_link_next."
+    },
+    {
+      "entry": "0x00416b22",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_mark_as_free",
+      "basis": "Native link_next then set_prev_free(next) and set_free(current); exact pinned TLSF block_mark_as_free."
+    },
+    {
+      "entry": "0x00416b38",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_mark_as_used",
+      "basis": "Native block_next then set_prev_used(next) and set_used(current); exact pinned TLSF block_mark_as_used."
+    },
+    {
+      "entry": "0x00416b4e",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "align_up",
+      "basis": "Native verifies power-of-two alignment and computes (x+align-1)&~(align-1), exact pinned TLSF align_up at line468."
+    },
+    {
+      "entry": "0x00416b7a",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "align_down",
+      "basis": "Native verifies power-of-two alignment and computes x-(x&(align-1)), exact pinned TLSF align_down at line474."
+    },
+    {
+      "entry": "0x00416ba4",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "align_ptr",
+      "basis": "Native verifies power-of-two alignment and rounds pointer up by mask, exact pinned TLSF align_ptr at line480."
+    },
+    {
+      "entry": "0x00416bce",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "adjust_request_size",
+      "basis": "Native zero-size guard, aligned request and max/min bound, exact pinned TLSF adjust_request_size at line492."
+    },
+    {
+      "entry": "0x00416bf8",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "mapping_insert",
+      "basis": "Native small<128 FL0/SL size/4, else highest-bit based FL/SL extraction, exact pinned TLSF mapping_insert at line513."
+    },
+    {
+      "entry": "0x00416c26",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "mapping_search",
+      "basis": "Native rounds large size to next SL bucket then calls mapping_insert, exact pinned TLSF mapping_search at line533."
+    },
+    {
+      "entry": "0x00416c4e",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "search_suitable_block",
+      "basis": "Native masks second-level bitmap from requested sl, advances first-level bitmap when empty, takes first set bits, updates fli/sli and returns control blocks[fl][sl]. Exact pinned TLSF v3.1 search_suitable_block at tlsf.c:544."
+    },
+    {
+      "entry": "0x00416cc6",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "remove_free_block",
+      "basis": "Native unlinks prev/next at block+8/+12, updates control block free-list head and FL/SL bitmaps when emptied; selected pinned TLSF remove_free_block lines575-600 has same operations and native assert lines0x245/0x246."
+    },
+    {
+      "entry": "0x00416d5c",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "insert_free_block",
+      "basis": "Native assertions carry pinned TLSF source lines 609/610/616; native writes block next_free/prev_free and current prev_free, then control blocks[fl][sl] and fl/sl bitmaps exactly as selected upstream tlsf.c lines605-623. This is source attribution; valid-list bounded byte comparison is not added here."
+    },
+    {
+      "entry": "0x00416e04",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_remove",
+      "basis": "Native computes block_size, mapping_insert fl/sl, then remove_free_block; exact selected pinned TLSF block_remove at tlsf.c:626."
+    },
+    {
+      "entry": "0x00416e26",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_insert",
+      "basis": "Native computes block_size, mapping_insert fl/sl, then insert_free_block; exact selected pinned TLSF block_insert at tlsf.c:634."
+    },
+    {
+      "entry": "0x00416e48",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_can_split",
+      "basis": "Native compares block_size against requested size plus 0x10 block header extent; exact selected pinned TLSF block_can_split at tlsf.c:641."
+    },
+    {
+      "entry": "0x00416e60",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_trim_used",
+      "basis": "Native block-size-minus-request split test, residual block split, next-block used marking, merge-next, and free-list insertion match pinned TLSF block_trim_used. The selected compiler inlines this static definition; this is an attribution lead, not a byte/whole-body equivalence receipt."
+    },
+    {
+      "entry": "0x00416f20",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_absorb",
+      "basis": "Native asserts previous is not final block, adds block_size(next)+header-overhead to previous size, calls block_link_next and returns previous; exact pinned TLSF v3.1 block_absorb at tlsf.c:669."
+    },
+    {
+      "entry": "0x00416f62",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_merge_prev",
+      "basis": "Native tests prev-free bit, obtains previous physical block, asserts previous exists/free, removes it from free list, absorbs current, returns merged block; exact pinned TLSF block_merge_prev at tlsf.c:679."
+    },
+    {
+      "entry": "0x00416fc6",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_merge_next",
+      "basis": "Native obtains next physical block, asserts it exists, tests free, removes next and absorbs into current; exact pinned TLSF block_merge_next at tlsf.c:694."
+    },
+    {
+      "entry": "0x0041702a",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_trim_free",
+      "basis": "Native asserts block free, tests split, splits, links next, marks remainder previous-free and reinserts; exact pinned TLSF block_trim_free at tlsf.c:710."
+    },
+    {
+      "entry": "0x0041707c",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_locate_free",
+      "basis": "Native initializes FL/SL, mapping_search for nonzero size, bounds FL<24, searches suitable block, asserts size and removes it; exact pinned TLSF block_locate_free at tlsf.c:756."
+    },
+    {
+      "entry": "0x004170de",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "block_prepare_used",
+      "basis": "Native checks block, asserts nonzero requested size, trims free trailing space, marks used and converts block to user pointer; exact pinned TLSF block_prepare_used at tlsf.c:783."
+    },
+    {
+      "entry": "0x0041711c",
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "symbol": "control_construct",
+      "basis": "Native null-block self-links, zero FL and 24 SL bitmaps, fills 24x32 block pointers with null block, exact pinned TLSF control_construct at line797."
+    },
+    {
+      "entry": "0x00417ad4",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "symbol": "fmt_enabled",
+      "basis": "Native level>5 assertion at line 0x2e7 and mask test at logger format word +0xd8+4*level match selected static formatter flag predicate. The selected assertion routes through its source-owned reset requester."
     },
     {
       "entry": "0x00417b48",
@@ -195,28 +303,154 @@
       "basis": "Native mask predicate selects any-bit when wait_all=0 or all-bits when nonzero; selected static event_flags_satisfied matches the two branches."
     },
     {
+      "entry": "0x0041a5e0",
+      "source": "g2/components/bootloader/thread_creation/queue_send.c",
+      "symbol": "queue_is_full",
+      "basis": "Native enters/exits kernel critical region around comparison of queue words14/15; exact selected queue_is_full static helper."
+    },
+    {
+      "entry": "0x0041a6c2",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "symbol": "thread_name",
+      "basis": "Native logger metadata helper checks queue runtime mode then current task and returns task+0x34 or the source-owned unknown literal. Selected static thread_name implements that path; p_info/t_info wrappers each call it."
+    },
+    {
+      "entry": "0x0041cae8",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "symbol": "pll_power_down",
+      "basis": "Native reads SYSPLL_CONTROL0 at authenticated 0x400204d8, writes low output byte as inverse bit31, returns zero. Exact selected static pll_power_down body; used by native syspll_deinitialize 0x427310."
+    },
+    {
+      "entry": "0x0041cc92",
+      "source": "g2/components/bootloader/source_candidate_20261010/gx_children.c",
+      "symbol": "native_spot_clock_ramp_disable",
+      "basis": "Native internal clock-ramp disable clears bit0, pulses bit1 at 0x400083e0, writes wait*6 to 0x400083e8, writes 0xc0000000 to 0x40008068 and 0x40000 to NVIC clear-pending, then restores bit0; selected static native_spot_clock_ramp_disable inside state transition mirrors this sequence."
+    },
+    {
       "entry": "0x0041f340",
       "source": "g2/components/bootloader/port_timer/port_timer.c",
       "symbol": "clock_source_class",
       "basis": "Native clock-source selector helper called twice by STIMER configure; selected static clock_source_class maps the low-nibble source to class before request/release."
     },
     {
-      "entry": "0x00416d5c",
-      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
-      "symbol": "insert_free_block",
-      "basis": "Native assertions carry pinned TLSF source lines 609/610/616; native writes block next_free/prev_free and current prev_free, then control blocks[fl][sl] and fl/sl bitmaps exactly as selected upstream tlsf.c lines605-623. This is source attribution; valid-list bounded byte comparison is not added here."
+      "entry": "0x004210c8",
+      "source": "g2/components/bootloader/filesystem/boot_mount.c",
+      "symbol": "ensure_directories",
+      "basis": "Four path loop, lfs_dir_open/lfs_mkdir branches, and recovered EasyLogger line 0x51/0x53/0x55/0x5a/0x5c."
     },
     {
-      "entry": "0x00416cc6",
-      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
-      "symbol": "remove_free_block",
-      "basis": "Native unlinks prev/next at block+8/+12, updates control block free-list head and FL/SL bitmaps when emptied; selected pinned TLSF remove_free_block lines575-600 has same operations and native assert lines0x245/0x246."
+      "entry": "0x004213da",
+      "source": "g2/components/bootloader/application_storage/device_wait_service.c",
+      "symbol": "adjust_info1_word_offset",
+      "basis": "Native if word offset >=0x200 adds 0x280 else preserves; exact selected INFO1 MRAM adjust_info1_word_offset. Direct Thumb disassembly confirms comparison/add."
+    },
+    {
+      "entry": "0x004215dc",
+      "source": "g2/components/bootloader/clock_manager/clock_manager.c",
+      "symbol": "clock_user_has",
+      "basis": "Native clock/user bitmap test indexes 0x20026e74 by clock*8 + (user>>5)*4 and extracts user&31; selected static source uses identical address and bit arithmetic. Called by clock request/release paths; attribution lead, not full-domain proof."
+    },
+    {
+      "entry": "0x004215fe",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
+      "symbol": "users",
+      "basis": "Native sums population counts of the two user-bit words at 0x20026e74 + clock*8; selected startup clock helper reads the same two words and counts set bits. The native SWAR helper and source per-bit loops are semantically equal for 32-bit values, but this is an attribution lead; cross-class calling paths still need whole-body checking."
+    },
+    {
+      "entry": "0x00421632",
+      "source": "g2/components/bootloader/clock_manager/clock_manager.c",
+      "symbol": "clock_user_update",
+      "basis": "Native clock<7 and user<57 validation returns 6 on invalid input, otherwise sets/clears bit at 0x20026e74 + clock*8 + (user>>5)*4 and returns 0; selected static source has the same branches and masks."
+    },
+    {
+      "entry": "0x00421d28",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
+      "symbol": "callback_finish",
+      "basis": "Native class-4 completion waits via 0x4216b2 while timeout and active, then saves PRIMASK, marks 0x2002719e deferred, clears 0x2002719c active and 0x20027044 callback pointer, restores PRIMASK; selected static callback_finish has this sequence."
+    },
+    {
+      "entry": "0x00421e8c",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
+      "symbol": "callback_finish",
+      "basis": "Native class-5 completion waits via 0x4216b2 while timeout and active, then saves PRIMASK, clears 0x2002719d active and 0x20027048 callback pointer, restores PRIMASK; selected static callback_finish has this sequence."
+    },
+    {
+      "entry": "0x00423864",
+      "source": "g2/components/bootloader/init_table/qsort.c",
+      "symbol": "swap_item",
+      "basis": "Native 0x423864 byte swap below64 and 128-byte chunked swap at or above64 now match source fixed-scratch helper. Source qsort compared 27 original cases at record widths crossing 64, 128 and 256, counts2/33/42; this is bounded call-path evidence, not all aliases or widths."
+    },
+    {
+      "entry": "0x004238ba",
+      "source": "g2/components/bootloader/init_table/qsort.c",
+      "symbol": "rotate3",
+      "basis": "Native 0x4238ba byte rotate below64 and 128-byte chunked three-record rotate at or above64 now match source fixed-scratch helper. Source qsort compared 27 original cases at record widths crossing 64, 128 and 256, counts2/33/42; this is bounded call-path evidence."
+    },
+    {
+      "entry": "0x00426c58",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
+      "symbol": "hfadj_enable",
+      "basis": "Native writes 0x40004044 bit0 to boolean(enabled) and returns0; selected static HFADJ enable does the same masked write."
+    },
+    {
+      "entry": "0x00426c72",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
+      "symbol": "hfadj_configure",
+      "basis": "Native single write of input|1 to 0x40004020, then status0, matches selected static HFADJ configuration leaf."
+    },
+    {
+      "entry": "0x00426c7e",
+      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
+      "symbol": "hf1_default",
+      "basis": "Native HFADJ default reads 0x40004020, clears bit0, stores it and returns0; selected static hf1_default in startup_clock_config.c has the same MMIO effect."
+    },
+    {
+      "entry": "0x00426c8c",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
+      "symbol": "dual_switch",
+      "basis": "Native disabled path clears bit0x20; enabled path tests status bit5, sets bit0x20 if clear and waits up to100 for 0x01000000 readiness. Selected static class-5 dual-switch source matches these MMIO/control branches."
+    },
+    {
+      "entry": "0x00426ccc",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
+      "symbol": "clkgen_config",
+      "basis": "Native null status6 and CLKGEN writes at 0x4000404c/48/50 with masks 7, 0xdfffffff, 0x80000003 and 0x1fffffff match selected static class-5 configuration body; separate startup HF2 source duplicates the same leaf."
+    },
+    {
+      "entry": "0x00426d1e",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
+      "symbol": "clkgen_disable",
+      "basis": "Native clears bit0 of CLKGEN divider register 0x40004048 and returns0; selected static disable expresses the same side effect."
+    },
+    {
+      "entry": "0x00427310",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "symbol": "pll_deinitialize",
+      "basis": "Native SYSPLL context-magic gate, optional active disable, power-down/restore flag and context-bit clear match selected static source. The source discards disable status only after initial handle validation, when native disable necessarily returns0."
+    },
+    {
+      "entry": "0x0042740c",
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "symbol": "pll_configure",
+      "basis": "Native 0x427424 reads context[1] before 0x427426 rereads context[0] after magic validation. Corrected selected volatile C emits both ordered reads, and preserves config range, divider, SYSPLL control masks, reference selection, and write order. The static function is inlined in the selected object."
+    },
+    {
+      "entry": "0x00427754",
+      "source": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "symbol": "update_indices",
+      "basis": "Native critical region reads callback table at queue+0x24, folds low eight bits of hardware index into queue+0x1c with 0x100 wrap correction against queue+0x20, updates queue+0x0c and restores PRIMASK; selected static source has the same fields and arithmetic."
     },
     {
       "entry": "0x00430b10",
       "source": "g2/components/bootloader/application_storage/storage_callbacks.c",
       "symbol": "program_with_critical_state",
       "basis": "Native saves PRIMASK, rounds byte size to words, dispatches authenticated 0x12344321 MRAM program key, restores PRIMASK and returns; selected static helper program_with_critical_state has same body, with ROM programming external."
+    },
+    {
+      "entry": "0x00415ffa",
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "symbol": "strstr",
+      "basis": "Native 0x415ffa performs first-character search through 0x417c64 then compares following bytes until match or restart. Selected logger static strstr has the same substring predicate for tag and keyword filtering. Native one-character file-mode callers are separately represented by file_services.c::contains for r/w/a/+ needles. This is a source body/path attribution, not stock-byte identity."
     }
   ]
 }

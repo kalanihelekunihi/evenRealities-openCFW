@@ -1,0 +1,124 @@
+{
+  "result": "PASS_SOURCE_SIZE_CENSUS",
+  "elf_sha256": "f63e434e22a6305053dc9a06038b64c01584e78b62c71f52295c74c1570df50a",
+  "stock_stage2_copy_end": "0x1001708c",
+  "late_audio_bytes": 2536,
+  "late_audio_function_count": 21,
+  "function_bytes_total": 2494,
+  "functions_largest_first": [
+    {
+      "symbol": "gx8002_image_b_audio_out_pcm_config_100061f4",
+      "address": "0x1002df3c",
+      "bytes": 678
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_config_dac_1000694c",
+      "address": "0x1002dc08",
+      "bytes": 328
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_config_hardware_1000687c",
+      "address": "0x1002db24",
+      "bytes": 228
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_irq_1000669c",
+      "address": "0x1002ddd4",
+      "bytes": 214
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_alloc_native_100067ec",
+      "address": "0x1002deac",
+      "bytes": 128
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_push_descriptor_10006774",
+      "address": "0x1002d850",
+      "bytes": 116
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_power_up_1000663c",
+      "address": "0x1002da00",
+      "bytes": 90
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_set_buffers_100064ec",
+      "address": "0x1002d8c4",
+      "bytes": 82
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_route_mode_1000612c",
+      "address": "0x1002d800",
+      "bytes": 78
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_disable_routes_100065bc",
+      "address": "0x1002d988",
+      "bytes": 76
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_get_db_1000609c",
+      "address": "0x1002dd84",
+      "bytes": 74
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_clear_runtime_10006540",
+      "address": "0x1002d918",
+      "bytes": 60
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_dac_mute_100060ec",
+      "address": "0x1002da88",
+      "bytes": 52
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_enable_routes_1000657c",
+      "address": "0x1002d954",
+      "bytes": 52
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_dac_start_wait_100061bc",
+      "address": "0x1002daf0",
+      "bytes": 50
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_set_db_1000602c",
+      "address": "0x1002dd50",
+      "bytes": 50
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_config_route_10005ff4",
+      "address": "0x1002da5c",
+      "bytes": 44
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_power_down_1000660c",
+      "address": "0x1002d9d4",
+      "bytes": 44
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_dac_high_word_10006194",
+      "address": "0x1002dac4",
+      "bytes": 36
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_dac_read_100061b4",
+      "address": "0x1002dae8",
+      "bytes": 8
+    },
+    {
+      "symbol": "gx8002_image_b_audio_out_status_halfword_10006124",
+      "address": "0x1002dabc",
+      "bytes": 6
+    }
+  ],
+  "rodata_end": "0x100166a4",
+  "authenticated_initialized_data_start": "0x100168c0",
+  "current_headroom_bytes": 540,
+  "additional_reduction_to_move_late_audio_before_fixed_data": 1996,
+  "limits": [
+    "This measures source function sizes; merging shared MMIO bodies requires caller and effect proof.",
+    "The stock loader copies only through 0x1001708c; a late section beyond it is not delivered.",
+    "Header extension or segmented loading is not established by this size audit."
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_sha256": "f4b42f74fabe0f4e2195513bd1c8fbbd297c74ff797c91f8d366430b82dbd744",
+  "reset_source_sha256": "f3810da62cf0dd6961aeeec0d4ef363ba587737e210d73be644d7f79e4e4b5cf",
+  "elf_sha256": "37fbd44c39d9352f215cf3db698161a787aaace594915802cb1f6789ec767dc3",
+  "cases": [
+    [
+      3,
+      4,
+      536969216,
+      5
+    ],
+    [
+      50,
+      16,
+      536969216,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      2
+    ]
+  ],
+  "reset_catalogue_body_bytes": 180,
+  "visited_reset_catalogue_bytes": 126,
+  "limits": [
+    "Count is nonzero as required by stock UDIV; zero-count fault behavior not modeled.",
+    "RTOS children are typed controlled cuts; scheduler runtime and fatal paths unqualified."
+  ]
+}

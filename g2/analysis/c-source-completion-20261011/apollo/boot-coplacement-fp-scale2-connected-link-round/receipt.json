@@ -1,0 +1,200 @@
+{
+  "captured_utc": "2026-10-12T06:10:43.770443+00:00",
+  "target_id": "official-s200-v2.2.6.10",
+  "target_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+  "source_gate_sha256": "e31e02c5ab63aebab9dd557719a8af35b4c1cce853d25b82b1516fb15589b7da",
+  "experimental_source_manifest_sha256": "1353daa07396b6062caa64bd8aa5c5c8fe15067100195b08e321eede274130e2",
+  "builder_sha256": "5041d341b71d92f6546296e3c8a0a7b01406bbea00de9e6aa3fa908961764898",
+  "images": {
+    "apollo_bootloader": {
+      "build_commands": [
+        {
+          "argv": [
+            "/opt/homebrew/opt/python@3.14/bin/python3.14",
+            "g2/components/bootloader/source_candidate_20261010/build.py",
+            "--output",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/objects"
+          ],
+          "returncode": 0,
+          "process_returncode": 0,
+          "log": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/compile.log",
+          "log_sha256": "6b393915d6be0fe0ba05316e2e372a1427cd8f733fa53973d17a97cbf89f5f66"
+        }
+      ],
+      "candidate_compilation_passed": false,
+      "artifacts": [
+        {
+          "path": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/objects/libbootloader_source_candidate_m55.a",
+          "sha256": "7c324d742cd443242ecfc9fe892d2d4cd38cef9ceadb0bab940ae66cbbf5ff8c"
+        },
+        {
+          "path": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/objects/inventory.json",
+          "sha256": "268b65ee76249bd502d1a8295c6a5a318d9e2ba48994f28aba1c4af3dd0d9244"
+        }
+      ],
+      "experimental_compile": [
+        {
+          "argv": [
+            "clang",
+            "--target=arm-none-eabi",
+            "-mcpu=cortex-m55",
+            "-mthumb",
+            "-mfpu=fpv5-sp-d16",
+            "-mfloat-abi=softfp",
+            "-std=c11",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-O2",
+            "-Wall",
+            "-Wextra",
+            "-fshort-enums",
+            "-fwrapv",
+            "-MD",
+            "-MF",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-000.d",
+            "-c",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/source_candidate_20261010/tlsf_printf_candidate.c",
+            "-o",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-000.o"
+          ],
+          "returncode": 0,
+          "process_returncode": 0,
+          "log": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-000.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "compile_source_snapshot": {
+            "path": "g2/components/bootloader/source_candidate_20261010/tlsf_printf_candidate.c",
+            "sha256_before": "829d8dc3d4b7451933310dc1e2d7bd7c29d2864ceb473fc4976a09de6495cf54",
+            "sha256_after": "829d8dc3d4b7451933310dc1e2d7bd7c29d2864ceb473fc4976a09de6495cf54",
+            "stable_during_command": true
+          },
+          "source": "g2/components/bootloader/source_candidate_20261010/tlsf_printf_candidate.c",
+          "source_sha256": "829d8dc3d4b7451933310dc1e2d7bd7c29d2864ceb473fc4976a09de6495cf54",
+          "validation": "experimental C reduction; not admitted stock-equivalent provider",
+          "object": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-000.o",
+          "object_sha256": "a3dd7a97c4e9a70989643f1bee0c5249f931d336164238ec8285f58f12844c0f",
+          "header_inputs": {
+            "g2/components/bootloader/source_candidate_20261010/tlsf_printf_candidate.c": "829d8dc3d4b7451933310dc1e2d7bd7c29d2864ceb473fc4976a09de6495cf54"
+          }
+        },
+        {
+          "argv": [
+            "clang",
+            "--target=arm-none-eabi",
+            "-mcpu=cortex-m55",
+            "-mthumb",
+            "-mfpu=fpv5-sp-d16",
+            "-mfloat-abi=softfp",
+            "-std=c11",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-O2",
+            "-Wall",
+            "-Wextra",
+            "-fshort-enums",
+            "-fwrapv",
+            "-MD",
+            "-MF",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-001.d",
+            "-c",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/source_candidate_20261010/generic_log_float_candidate.c",
+            "-o",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-001.o"
+          ],
+          "returncode": 0,
+          "process_returncode": 0,
+          "log": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-001.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "compile_source_snapshot": {
+            "path": "g2/components/bootloader/source_candidate_20261010/generic_log_float_candidate.c",
+            "sha256_before": "fa02ce0743c5cd29cda0517652500a2b0c64124e76f1e042fe4142c66e3f8fc1",
+            "sha256_after": "fa02ce0743c5cd29cda0517652500a2b0c64124e76f1e042fe4142c66e3f8fc1",
+            "stable_during_command": true
+          },
+          "source": "g2/components/bootloader/source_candidate_20261010/generic_log_float_candidate.c",
+          "source_sha256": "fa02ce0743c5cd29cda0517652500a2b0c64124e76f1e042fe4142c66e3f8fc1",
+          "validation": "experimental C reduction; not admitted stock-equivalent provider",
+          "object": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-001.o",
+          "object_sha256": "63fd9dc147c164b2bf3b6f2f8f1fe81f09441b70aa8a65b699263ab3e0160f84",
+          "header_inputs": {
+            "g2/components/bootloader/source_candidate_20261010/generic_log_float_candidate.c": "fa02ce0743c5cd29cda0517652500a2b0c64124e76f1e042fe4142c66e3f8fc1"
+          }
+        },
+        {
+          "argv": [
+            "clang",
+            "--target=arm-none-eabi",
+            "-mcpu=cortex-m55",
+            "-mthumb",
+            "-mfpu=fpv5-sp-d16",
+            "-mfloat-abi=softfp",
+            "-std=c11",
+            "-ffreestanding",
+            "-fno-builtin",
+            "-O2",
+            "-Wall",
+            "-Wextra",
+            "-fshort-enums",
+            "-fwrapv",
+            "-MD",
+            "-MF",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-002.d",
+            "-c",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/source_candidate_20261010/mspi_interrupt_service_candidate.c",
+            "-o",
+            "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-002.o"
+          ],
+          "returncode": 0,
+          "process_returncode": 0,
+          "log": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-002.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "compile_source_snapshot": {
+            "path": "g2/components/bootloader/source_candidate_20261010/mspi_interrupt_service_candidate.c",
+            "sha256_before": "32caeba0bb5324a50de1cd0a5f4975e1e2a1c57df5ed04d2fe2dbf6a2220cf9f",
+            "sha256_after": "32caeba0bb5324a50de1cd0a5f4975e1e2a1c57df5ed04d2fe2dbf6a2220cf9f",
+            "stable_during_command": true
+          },
+          "source": "g2/components/bootloader/source_candidate_20261010/mspi_interrupt_service_candidate.c",
+          "source_sha256": "32caeba0bb5324a50de1cd0a5f4975e1e2a1c57df5ed04d2fe2dbf6a2220cf9f",
+          "validation": "experimental C reduction; not admitted stock-equivalent provider",
+          "object": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-002.o",
+          "object_sha256": "23e88ac54f494d66a87fb91a14185c7b5e8bc30e520da5844303a99da2f29c70",
+          "header_inputs": {
+            "g2/components/bootloader/source_candidate_20261010/mspi_interrupt_service_candidate.c": "32caeba0bb5324a50de1cd0a5f4975e1e2a1c57df5ed04d2fe2dbf6a2220cf9f"
+          }
+        }
+      ],
+      "relocatable_link": {
+        "argv": [
+          "/opt/homebrew/bin/arm-none-eabi-ld",
+          "-r",
+          "--whole-archive",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/objects/libbootloader_source_candidate_m55.a",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-000.o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-001.o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/experimental-002.o",
+          "--no-whole-archive",
+          "-o",
+          "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/candidate.o"
+        ],
+        "returncode": 1,
+        "process_returncode": 1,
+        "log": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-fp-scale2-connected-link-round/apollo_bootloader/relocatable-link.log",
+        "log_sha256": "b9d47e844138a7134aa05e89f5dc2802c35c1796c0939111373b14cec005d6a2"
+      },
+      "source_gates": [
+        "whole-path startup-power root/clock child composition beyond the bounded native query/critical oracle",
+        "remaining logger/runtime/ROM contracts",
+        "source-owned initialized data, startup and final linker layout",
+        "complete body coverage has not been established"
+      ],
+      "source_complete": false,
+      "full_payload_linked": false
+    }
+  },
+  "complete_source_payloads": 0,
+  "limits": [
+    "No official payload bytes are consumed by this coordinator",
+    "Imports and data/layout ownership remain distinct source gates",
+    "Compilation does not establish stock equivalence or hardware operation"
+  ]
+}

@@ -1,0 +1,1780 @@
+{
+  "build": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-mutex-reread-round",
+  "bounded_link_status": "PASS_BOUNDED_LINK",
+  "bounded_image_file_bytes": 158836,
+  "main_preamble_boundary_bytes": 163808,
+  "discarded": {
+    ".text.": {
+      "sections": 179,
+      "bytes": 15912
+    },
+    ".rodata.": {
+      "sections": 9,
+      "bytes": 112
+    },
+    ".data.": {
+      "sections": 0,
+      "bytes": 0
+    },
+    ".bss.": {
+      "sections": 2,
+      "bytes": 1208
+    }
+  },
+  "discarded_sections_with_manually_bound_stock_bodies": 65,
+  "discarded_manually_bound_stock_body_bytes": 4666,
+  "discarded_sections_with_direct_rooted_stock_bodies": 52,
+  "discarded_direct_rooted_stock_body_bytes": 3754,
+  "entries": [
+    {
+      "section": ".bss.boot_uart_context_pool",
+      "bytes": 1136,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_context.c",
+      "object": "unit_138.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_rename",
+      "bytes": 814,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_provider_42a550",
+      "bytes": 708,
+      "source": "g2/components/bootloader/source_candidate_20261010/spot_power_state_determine_42a550.c",
+      "object": "unit_304.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_realloc",
+      "bytes": 634,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_check",
+      "bytes": 442,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_file_truncate",
+      "bytes": 426,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_crc32",
+      "bytes": 382,
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "object": "unit_365.o",
+      "stock_body_bindings": [
+        "0x0042e1ec"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_memcmp",
+      "bytes": 336,
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "object": "unit_365.o",
+      "stock_body_bindings": [
+        "0x00415758"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00415758"
+      ]
+    },
+    {
+      "section": ".text.lfs_remove",
+      "bytes": 328,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_memalign",
+      "bytes": 328,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_provider_42287c",
+      "bytes": 322,
+      "source": "g2/components/bootloader/source_candidate_20261010/u64_division_42287c.c",
+      "object": "unit_318.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_fs_gc",
+      "bytes": 282,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_init_table_run",
+      "bytes": 280,
+      "source": "g2/components/bootloader/init_table/init_table.c",
+      "object": "unit_033.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_fp_scale2",
+      "bytes": 258,
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/fp_primitives.c",
+      "object": "unit_067.o",
+      "stock_body_bindings": [
+        "0x00422700",
+        "0x00422714"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00422700",
+        "0x00422714"
+      ]
+    },
+    {
+      "section": ".text.lfs_dir_seek",
+      "bytes": 232,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_pll_fraction",
+      "bytes": 196,
+      "source": "g2/components/bootloader/initializer_callbacks/clock_pll_math.c",
+      "object": "unit_042.o",
+      "stock_body_bindings": [
+        "0x00426eac"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00426eac"
+      ]
+    },
+    {
+      "section": ".text.lfs_dir_read",
+      "bytes": 188,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_fs_pred",
+      "bytes": 172,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_dir_getinfo",
+      "bytes": 168,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.state_event_zero_42cfe0_native",
+      "bytes": 168,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_spot_events.c",
+      "object": "unit_131.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_fs_grow",
+      "bytes": 166,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_memmove",
+      "bytes": 158,
+      "source": "g2/components/bootloader/runtime_memory/boot_memmove.c",
+      "object": "unit_202.o",
+      "stock_body_bindings": [
+        "0x004276bc"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x004276bc"
+      ]
+    },
+    {
+      "section": ".text.opencfw_bl_port_timer_clock_configure",
+      "bytes": 152,
+      "source": "g2/components/bootloader/port_timer/port_timer.c",
+      "object": "unit_197.o",
+      "stock_body_bindings": [
+        "0x0041f358"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041f358"
+      ]
+    },
+    {
+      "section": ".text.state_update_critical_42cea4_native",
+      "bytes": 150,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_spot_events.c",
+      "object": "unit_131.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_getattr",
+      "bytes": 148,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_dir_drop",
+      "bytes": 146,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_file_opencfg",
+      "bytes": 146,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_event_enqueue",
+      "bytes": 146,
+      "source": "g2/components/bootloader/manager_task/event_dispatch.c",
+      "object": "unit_147.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_mutex_inherit",
+      "bytes": 146,
+      "source": "g2/components/bootloader/thread_creation/mutex_kernel.c",
+      "object": "unit_339.o",
+      "stock_body_bindings": [
+        "0x00418b7c"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00418b7c"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_thread_state",
+      "bytes": 138,
+      "source": "g2/components/bootloader/thread_creation/thread_termination.c",
+      "object": "unit_358.o",
+      "stock_body_bindings": [
+        "0x00417fe4"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00417fe4"
+      ]
+    },
+    {
+      "section": ".text.lfs_file_sync",
+      "bytes": 136,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_file_size",
+      "bytes": 134,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_commitattr",
+      "bytes": 130,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.am_hal_cmdq_term",
+      "bytes": 126,
+      "source": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "object": "unit_178.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_provider_427ad6",
+      "bytes": 126,
+      "source": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "object": "unit_178.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_rtos_heap_insert",
+      "bytes": 124,
+      "source": "g2/components/bootloader/thread_creation/rtos_heap.c",
+      "object": "unit_346.o",
+      "stock_body_bindings": [
+        "0x004198fa"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x004198fa"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_u64_div10",
+      "bytes": 124,
+      "source": "g2/components/bootloader/runtime_memory/boot_u64_div10.c",
+      "object": "unit_204.o",
+      "stock_body_bindings": [
+        "0x00415844"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00415844"
+      ]
+    },
+    {
+      "section": ".text.lfs_fs_mkconsistent",
+      "bytes": 120,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_fs_stat",
+      "bytes": 120,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_provider_424a5a",
+      "bytes": 118,
+      "source": "g2/components/bootloader/nor_mspi_init/nor_mspi_init.c",
+      "object": "unit_167.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_file_tell",
+      "bytes": 116,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_pcm22_sequence2b",
+      "bytes": 114,
+      "source": "g2/components/bootloader/source_candidate_20261010/pcm22_timer_service.c",
+      "object": "unit_276.o",
+      "stock_body_bindings": [
+        "0x00428378"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00428378"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_thread_frame",
+      "bytes": 112,
+      "source": "g2/components/bootloader/thread_creation/kernel_static.c",
+      "object": "unit_336.o",
+      "stock_body_bindings": [
+        "0x0041b46e"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041b46e"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_timer_queue_wait",
+      "bytes": 112,
+      "source": "g2/components/bootloader/thread_creation/timer_wait.c",
+      "object": "unit_362.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.state_adjust_42cdf8_native",
+      "bytes": 110,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_spot_events.c",
+      "object": "unit_131.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.memchr",
+      "bytes": 108,
+      "source": "g2/components/bootloader/runtime_memory/boot_memchr.c",
+      "object": "unit_201.o",
+      "stock_body_bindings": [
+        "0x004225d0"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x004225d0"
+      ]
+    },
+    {
+      "section": ".text.tlsf_remove_pool",
+      "bytes": 108,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_manager_signal_wait",
+      "bytes": 106,
+      "source": "g2/components/bootloader/manager_task/manager_setup.c",
+      "object": "unit_150.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_services_initialize",
+      "bytes": 102,
+      "source": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+      "object": "unit_072.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_bl_nor_busy",
+      "bytes": 98,
+      "source": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "object": "unit_182.o",
+      "stock_body_bindings": [
+        "0x0042074e"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0042074e"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_uart_rx_collect",
+      "bytes": 94,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c",
+      "object": "unit_142.o",
+      "stock_body_bindings": [
+        "0x00423350"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00423350"
+      ]
+    },
+    {
+      "section": ".text.native_spot_trim_enable_42adb8",
+      "bytes": 92,
+      "source": "g2/components/bootloader/source_candidate_20261010/gx_children.c",
+      "object": "unit_248.o",
+      "stock_body_bindings": [
+        "0x0042adb8"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_mram_aligned",
+      "bytes": 90,
+      "source": "g2/components/bootloader/platform_control/control.c",
+      "object": "unit_186.o",
+      "stock_body_bindings": [
+        "0x0042e4a0"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0042e4a0"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_startup_hf2_apply",
+      "bytes": 90,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
+      "object": "unit_116.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_pcm22_sequence21b",
+      "bytes": 90,
+      "source": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/pcm22_deferred21.c",
+      "object": "unit_081.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_hardware_readiness_gate",
+      "bytes": 88,
+      "source": "g2/components/bootloader/initializer_callbacks/hardware_readiness_gate.S",
+      "object": "unit_376.o",
+      "stock_body_bindings": [
+        "0x0042bf54"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_timer_create_dynamic",
+      "bytes": 88,
+      "source": "g2/components/bootloader/thread_creation/resource_creators.c",
+      "object": "unit_345.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_wait_list_append",
+      "bytes": 88,
+      "source": "g2/components/bootloader/thread_creation/timer_wait.c",
+      "object": "unit_362.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_provider_41866a",
+      "bytes": 88,
+      "source": "g2/components/bootloader/flags_runtime/flags_runtime.c",
+      "object": "unit_032.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_manager_start_done",
+      "bytes": 86,
+      "source": "g2/components/bootloader/manager_task/manager_handshake.c",
+      "object": "unit_149.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_services_finalize",
+      "bytes": 86,
+      "source": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+      "object": "unit_072.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_uart_irq_rx_drain",
+      "bytes": 86,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_rx.c",
+      "object": "unit_140.o",
+      "stock_body_bindings": [
+        "0x0041f776"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041f776"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_manager_start_wait",
+      "bytes": 82,
+      "source": "g2/components/bootloader/manager_task/manager_handshake.c",
+      "object": "unit_149.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_stat",
+      "bytes": 80,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_power_release_needed",
+      "bytes": 80,
+      "source": "g2/components/bootloader/platform_control/power_domains.c",
+      "object": "unit_188.o",
+      "stock_body_bindings": [
+        "0x0041c0be"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041c0be"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_uart_rx_claim",
+      "bytes": 80,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c",
+      "object": "unit_142.o",
+      "stock_body_bindings": [
+        "0x00422f4c"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00422f4c"
+      ]
+    },
+    {
+      "section": ".text.opencfw_provider_41fe9c",
+      "bytes": 80,
+      "source": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "object": "unit_182.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_timer_create_static",
+      "bytes": 78,
+      "source": "g2/components/bootloader/thread_creation/resource_creators.c",
+      "object": "unit_345.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_provider_41fed4",
+      "bytes": 76,
+      "source": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "object": "unit_182.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.strchr",
+      "bytes": 76,
+      "source": "g2/components/bootloader/filesystem/runtime_memory.c",
+      "object": "unit_028.o",
+      "stock_body_bindings": [
+        "0x00417c64"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00417c64"
+      ]
+    },
+    {
+      "section": ".bss.boot_adc_context_pool",
+      "bytes": 72,
+      "source": "g2/components/bootloader/initializer_callbacks/adc_context.c",
+      "object": "unit_036.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.am_hal_cmdq_enable",
+      "bytes": 72,
+      "source": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "object": "unit_178.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_manager_needs_update",
+      "bytes": 72,
+      "source": "g2/components/bootloader/manager_task/manager_task.c",
+      "object": "unit_151.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_walk_pool",
+      "bytes": 72,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_uart_dma_error",
+      "bytes": 70,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_dispatch.c",
+      "object": "unit_139.o",
+      "stock_body_bindings": [
+        "0x00422d7a"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00422d7a"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_rtos_heap_initialize",
+      "bytes": 68,
+      "source": "g2/components/bootloader/thread_creation/rtos_heap.c",
+      "object": "unit_346.o",
+      "stock_body_bindings": [
+        "0x004198a0"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x004198a0"
+      ]
+    },
+    {
+      "section": ".text.opencfw_bl_clock_request_id0",
+      "bytes": 66,
+      "source": "g2/components/bootloader/clock_manager/clock_manager.c",
+      "object": "unit_015.o",
+      "stock_body_bindings": [
+        "0x00421a30"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00421a30"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_timer_insert",
+      "bytes": 66,
+      "source": "g2/components/bootloader/thread_creation/timer_commands.c",
+      "object": "unit_359.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_timer_object_initialize",
+      "bytes": 66,
+      "source": "g2/components/bootloader/thread_creation/resource_creators.c",
+      "object": "unit_345.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_stream_put_bytes",
+      "bytes": 64,
+      "source": "g2/components/bootloader/initializer_callbacks/stream_put_bytes_41f2c8.c",
+      "object": "unit_137.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_kernel_delay",
+      "bytes": 64,
+      "source": "g2/components/bootloader/thread_creation/task_delay_native/task_delay.c",
+      "object": "unit_350.o",
+      "stock_body_bindings": [
+        "0x00417fa8"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00417fa8"
+      ]
+    },
+    {
+      "section": ".text.opencfw_bl_clock_release_id0",
+      "bytes": 62,
+      "source": "g2/components/bootloader/clock_manager/clock_manager.c",
+      "object": "unit_015.o",
+      "stock_body_bindings": [
+        "0x00421a62"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00421a62"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_tlsf_fls_generic",
+      "bytes": 62,
+      "source": "g2/components/bootloader/allocator/tlsf_fls_generic_native.c",
+      "object": "unit_001.o",
+      "stock_body_bindings": [
+        "0x004169a4"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x004169a4"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_tlsf_fls_native",
+      "bytes": 62,
+      "source": "g2/components/bootloader/allocator/tlsf_fls_generic_native.c",
+      "object": "unit_001.o",
+      "stock_body_bindings": [
+        "0x004169f2"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x004169f2"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_ton_clock_gate",
+      "bytes": 60,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_ton_hooks.c",
+      "object": "unit_135.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_iar_aligned_copy_native",
+      "bytes": 60,
+      "source": "g2/components/bootloader/initializer_callbacks/iar_memory_native/memory.c",
+      "object": "unit_071.o",
+      "stock_body_bindings": [
+        "0x004156ac"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x004156ac"
+      ]
+    },
+    {
+      "section": ".text.am_hal_cmdq_disable",
+      "bytes": 56,
+      "source": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "object": "unit_178.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_address_validate",
+      "bytes": 56,
+      "source": "g2/components/bootloader/application_storage/address_validate_430a60.c",
+      "object": "unit_003.o",
+      "stock_body_bindings": [
+        "0x00430a60"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00430a60"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_erase_visit",
+      "bytes": 56,
+      "source": "g2/components/bootloader/update_core/update_core.c",
+      "object": "unit_365.o",
+      "stock_body_bindings": [
+        "0x0042d9f0"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.strcpy",
+      "bytes": 56,
+      "source": "g2/components/bootloader/filesystem/runtime_memory.c",
+      "object": "unit_028.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.default_walker",
+      "bytes": 54,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_bl_radio_callback_finish",
+      "bytes": 52,
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider2.c",
+      "object": "unit_010.o",
+      "stock_body_bindings": [
+        "0x00421ba4"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00421ba4"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_storage_range_valid",
+      "bytes": 52,
+      "source": "g2/components/bootloader/application_storage/storage_callbacks.c",
+      "object": "unit_009.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_syspll_disable",
+      "bytes": 52,
+      "source": "g2/components/bootloader/source_candidate_20261010/syspll_disable_4273dc.c",
+      "object": "unit_310.o",
+      "stock_body_bindings": [
+        "0x004273dc"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x004273dc"
+      ]
+    },
+    {
+      "section": ".text.power_predicate_41f3f0_native",
+      "bytes": 52,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_spot_events.c",
+      "object": "unit_131.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_check_pool",
+      "bytes": 50,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.am_hal_mspi_interrupt_disable",
+      "bytes": 48,
+      "source": "g2/components/bootloader/source_candidate_20261010/mspi_interrupt_disable.c",
+      "object": "unit_262.o",
+      "stock_body_bindings": [
+        "0x00426484"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00426484"
+      ]
+    },
+    {
+      "section": ".text.opencfw_bl_invalid_pin_configure",
+      "bytes": 48,
+      "source": "g2/components/bootloader/initializer_callbacks/elog_setters.c",
+      "object": "unit_057.o",
+      "stock_body_bindings": [
+        "0x004174a6"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_bl_service_configure",
+      "bytes": 48,
+      "source": "g2/components/bootloader/initializer_callbacks/elog_setters.c",
+      "object": "unit_057.o",
+      "stock_body_bindings": [
+        "0x00417510"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_constraint_dispatch_core",
+      "bytes": 48,
+      "source": "g2/components/bootloader/runtime_memory/iar_constraint_dispatch.c",
+      "object": "unit_205.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_elog_set_lock_mode",
+      "bytes": 48,
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "object": "unit_056.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_lfs_deinit_4144dc",
+      "bytes": 48,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_mutex_create_static",
+      "bytes": 48,
+      "source": "g2/components/bootloader/thread_creation/resource_creators.c",
+      "object": "unit_345.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_services_reset",
+      "bytes": 48,
+      "source": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+      "object": "unit_072.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_bl_service_enable",
+      "bytes": 46,
+      "source": "g2/components/bootloader/initializer_callbacks/elog_setters.c",
+      "object": "unit_057.o",
+      "stock_body_bindings": [
+        "0x00417438"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_bl_service_mode",
+      "bytes": 46,
+      "source": "g2/components/bootloader/initializer_callbacks/elog_setters.c",
+      "object": "unit_057.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_dfu_queue_init",
+      "bytes": 46,
+      "source": "g2/components/bootloader/dfu_task/context.c",
+      "object": "unit_020.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_counting_semaphore_static",
+      "bytes": 44,
+      "source": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+      "object": "unit_112.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_dir_rewind",
+      "bytes": 42,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_clock_popcount",
+      "bytes": 42,
+      "source": "g2/components/bootloader/clock_manager/clock_popcount_421584.c",
+      "object": "unit_016.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_mutex_create_dynamic",
+      "bytes": 42,
+      "source": "g2/components/bootloader/thread_creation/resource_creators.c",
+      "object": "unit_345.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_pend_callback_isr",
+      "bytes": 40,
+      "source": "g2/components/bootloader/thread_creation/isr_delivery.c",
+      "object": "unit_333.o",
+      "stock_body_bindings": [
+        "0x004196e6"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_uart_dma_rx_stop",
+      "bytes": 40,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_dispatch.c",
+      "object": "unit_139.o",
+      "stock_body_bindings": [
+        "0x00422d4c"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00422d4c"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_manager_callback_dispatch",
+      "bytes": 38,
+      "source": "g2/components/bootloader/manager_task/manager_setup.c",
+      "object": "unit_150.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_mspi_stage_two_mode_flags",
+      "bytes": 38,
+      "source": "g2/components/bootloader/source_candidate_20261010/mspi_stage_two_mode_flags.c",
+      "object": "unit_265.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_terminal_mode",
+      "bytes": 38,
+      "source": "g2/components/bootloader/platform_control/control.c",
+      "object": "unit_186.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_uart_dma_disable",
+      "bytes": 38,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_irq_dispatch.c",
+      "object": "unit_139.o",
+      "stock_body_bindings": [
+        "0x00422d20"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00422d20"
+      ]
+    },
+    {
+      "section": ".text.lfs_fs_size",
+      "bytes": 36,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_bl_port_timer_irq_priority",
+      "bytes": 36,
+      "source": "g2/components/bootloader/port_timer/port_timer.c",
+      "object": "unit_197.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_thread_name_get",
+      "bytes": 36,
+      "source": "g2/components/bootloader/thread_creation/thread_name_getter.c",
+      "object": "unit_353.o",
+      "stock_body_bindings": [
+        "0x00418372"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00418372"
+      ]
+    },
+    {
+      "section": ".text.elog_port_get_time",
+      "bytes": 34,
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "object": "unit_056.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_bl_port_timer_irq_enable",
+      "bytes": 34,
+      "source": "g2/components/bootloader/port_timer/port_timer.c",
+      "object": "unit_197.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".rodata.opencfw_boot_constraint_dispatch_core.bad_message",
+      "bytes": 32,
+      "source": "g2/components/bootloader/runtime_memory/iar_constraint_dispatch.c",
+      "object": "unit_205.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_setattr",
+      "bytes": 32,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_mutex_object_initialize",
+      "bytes": 32,
+      "source": "g2/components/bootloader/thread_creation/resource_creators.c",
+      "object": "unit_345.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_counting_semaphore_dynamic",
+      "bytes": 30,
+      "source": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+      "object": "unit_112.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_dfu_thread_deinit",
+      "bytes": 30,
+      "source": "g2/components/bootloader/dfu_task/context.c",
+      "object": "unit_020.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_elog_lock",
+      "bytes": 30,
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "object": "unit_056.o",
+      "stock_body_bindings": [
+        "0x00417570"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00417570"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_elog_unlock",
+      "bytes": 30,
+      "source": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "object": "unit_056.o",
+      "stock_body_bindings": [
+        "0x00417592"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00417592"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_startup_sleep_fields_read",
+      "bytes": 30,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_initialize_leaves.c",
+      "object": "unit_121.o",
+      "stock_body_bindings": [
+        "0x0041ca0c"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_timer_next_expiry",
+      "bytes": 30,
+      "source": "g2/components/bootloader/thread_creation/timer_wait.c",
+      "object": "unit_362.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_iar_fill_native",
+      "bytes": 30,
+      "source": "g2/components/bootloader/initializer_callbacks/iar_memory_native/memory.c",
+      "object": "unit_071.o",
+      "stock_body_bindings": [
+        "0x0041560c"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041560c"
+      ]
+    },
+    {
+      "section": ".text.opencfw_bl_radio_mode_sample",
+      "bytes": 28,
+      "source": "g2/components/bootloader/clock_manager/clock_class_provider2.c",
+      "object": "unit_010.o",
+      "stock_body_bindings": [
+        "0x0041d676"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041d676"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_clockmux_entry",
+      "bytes": 28,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_clockmux_entry.S",
+      "object": "unit_372.o",
+      "stock_body_bindings": [
+        "0x0041acb2"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041acb2"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_dfu_dispatch",
+      "bytes": 26,
+      "source": "g2/components/bootloader/dfu_task/context.c",
+      "object": "unit_020.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_idle_memory",
+      "bytes": 26,
+      "source": "g2/components/bootloader/thread_creation/scheduler_bootstrap.c",
+      "object": "unit_347.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_spot_internal_power_domain",
+      "bytes": 26,
+      "source": "g2/components/bootloader/initializer_callbacks/spot_internal_power_domain.c",
+      "object": "unit_114.o",
+      "stock_body_bindings": [
+        "0x0042a19c"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_mutex_claim_current",
+      "bytes": 24,
+      "source": "g2/components/bootloader/thread_creation/mutex_kernel.c",
+      "object": "unit_339.o",
+      "stock_body_bindings": [
+        "0x00418d90"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00418d90"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_power_special_hook",
+      "bytes": 24,
+      "source": "g2/components/bootloader/platform_control/power_special_mode.c",
+      "object": "unit_190.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_services_configure",
+      "bytes": 24,
+      "source": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+      "object": "unit_072.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_services_enable",
+      "bytes": 24,
+      "source": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+      "object": "unit_072.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_services_pin_configure",
+      "bytes": 24,
+      "source": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+      "object": "unit_072.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_triple_snapshot",
+      "bytes": 24,
+      "source": "g2/components/bootloader/runtime_memory/boot_triple_snapshot.c",
+      "object": "unit_203.o",
+      "stock_body_bindings": [
+        "0x00422aac"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00422aac"
+      ]
+    },
+    {
+      "section": ".text.sample_three",
+      "bytes": 24,
+      "source": "g2/components/bootloader/thread_creation/idle_sleep/idle_chain.c",
+      "object": "unit_326.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_removeattr",
+      "bytes": 22,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_startup_hook0c",
+      "bytes": 22,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_initialize_leaves.c",
+      "object": "unit_121.o",
+      "stock_body_bindings": [
+        "0x0041cd34"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041cd34"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_startup_hook10",
+      "bytes": 22,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_initialize_leaves.c",
+      "object": "unit_121.o",
+      "stock_body_bindings": [
+        "0x0041cd4a"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041cd4a"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_startup_hook28",
+      "bytes": 22,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_initialize_leaves.c",
+      "object": "unit_121.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_startup_hook34",
+      "bytes": 22,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_initialize_leaves.c",
+      "object": "unit_121.o",
+      "stock_body_bindings": [
+        "0x0041ce26"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_startup_hook38",
+      "bytes": 22,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_initialize_leaves.c",
+      "object": "unit_121.o",
+      "stock_body_bindings": [
+        "0x0041ce3c"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_stimer_irq_status",
+      "bytes": 22,
+      "source": "g2/components/bootloader/initializer_callbacks/stimer_irq.c",
+      "object": "unit_136.o",
+      "stock_body_bindings": [
+        "0x0041f4c0"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041f4c0"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_thread_wait_result_take",
+      "bytes": 22,
+      "source": "g2/components/bootloader/thread_creation/thread_notifications.c",
+      "object": "unit_354.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_provider_418d7a",
+      "bytes": 22,
+      "source": "g2/components/bootloader/flags_runtime/flags_runtime.c",
+      "object": "unit_032.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_control_finish",
+      "bytes": 20,
+      "source": "g2/components/bootloader/platform_control/runtime.c",
+      "object": "unit_191.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_power_hook_begin",
+      "bytes": 20,
+      "source": "g2/components/bootloader/platform_control/power_domains.c",
+      "object": "unit_188.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_power_hook_end",
+      "bytes": 20,
+      "source": "g2/components/bootloader/platform_control/power_domains.c",
+      "object": "unit_188.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_semaphore_queue_destroy",
+      "bytes": 20,
+      "source": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+      "object": "unit_112.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_hal_mspi_control_request34_dispatch",
+      "bytes": 20,
+      "source": "g2/components/bootloader/nor_mspi_init/control_request34.c",
+      "object": "unit_159.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_event_flags_read",
+      "bytes": 18,
+      "source": "g2/components/bootloader/thread_creation/event_flags_set.c",
+      "object": "unit_323.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_mutex_waiter_priority",
+      "bytes": 18,
+      "source": "g2/components/bootloader/thread_creation/mutex_kernel.c",
+      "object": "unit_339.o",
+      "stock_body_bindings": [
+        "0x0041a492"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041a492"
+      ]
+    },
+    {
+      "section": ".rodata.cst16",
+      "bytes": 16,
+      "source": "g2/components/bootloader/initializer_callbacks/platform_bringup.c",
+      "object": "unit_108.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.fatal",
+      "bytes": 16,
+      "source": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+      "object": "unit_112.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_file_rewind",
+      "bytes": 16,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [
+        "0x00415274"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00415274"
+      ]
+    },
+    {
+      "section": ".text.opencfw_bl_port_timer_gate_enable",
+      "bytes": 16,
+      "source": "g2/components/bootloader/port_timer/port_timer.c",
+      "object": "unit_197.o",
+      "stock_body_bindings": [
+        "0x0041f4ac"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041f4ac"
+      ]
+    },
+    {
+      "section": ".text.tlsf_block_size",
+      "bytes": 16,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_uart_rx_drain32_abi",
+      "bytes": 14,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx_drain32_abi.S",
+      "object": "unit_375.o",
+      "stock_body_bindings": [
+        "0x00423342"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00423342"
+      ]
+    },
+    {
+      "section": ".rodata..L__const.opencfw_bl_platform_bringup.channel",
+      "bytes": 12,
+      "source": "g2/components/bootloader/initializer_callbacks/platform_bringup.c",
+      "object": "unit_108.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".rodata..L__const.opencfw_provider_420254.base_config",
+      "bytes": 12,
+      "source": "g2/components/bootloader/nor_mspi_init/nor_mspi_init.c",
+      "object": "unit_167.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".rodata.str4.4",
+      "bytes": 12,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
+      "object": "unit_116.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_allocator_core",
+      "bytes": 12,
+      "source": "g2/components/bootloader/allocator/allocator.c",
+      "object": "unit_000.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_queue_isr_task_count",
+      "bytes": 12,
+      "source": "g2/components/bootloader/thread_creation/isr_delivery.c",
+      "object": "unit_333.o",
+      "stock_body_bindings": [
+        "0x0041836c"
+      ],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_iar_thread_pointer_anchor",
+      "bytes": 10,
+      "source": "g2/components/bootloader/runtime_memory/iar_thread_pointer_anchor.c",
+      "object": "unit_206.o",
+      "stock_body_bindings": [
+        "0x00422874"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00422874"
+      ]
+    },
+    {
+      "section": ".rodata.opencfw_ton_rows",
+      "bytes": 9,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_ton_hooks.c",
+      "object": "unit_135.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".rodata.opencfw_boot_spot_config_values",
+      "bytes": 8,
+      "source": "g2/components/bootloader/initializer_callbacks/startup_product_config.c",
+      "object": "unit_128.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_constraint_dispatch",
+      "bytes": 8,
+      "source": "g2/components/bootloader/runtime_memory/iar_constraint_dispatch_entry.S",
+      "object": "unit_369.o",
+      "stock_body_bindings": [
+        "0x00422590"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x00422590"
+      ]
+    },
+    {
+      "section": ".rodata..L__const.opencfw_bl_platform_bringup.profile",
+      "bytes": 7,
+      "source": "g2/components/bootloader/initializer_callbacks/platform_bringup.c",
+      "object": "unit_108.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_fs_traverse",
+      "bytes": 6,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_selector_source_mask",
+      "bytes": 6,
+      "source": "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+      "object": "unit_095.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_block_size_max",
+      "bytes": 6,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_get_pool",
+      "bytes": 6,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_size",
+      "bytes": 6,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".rodata.opencfw_gx_cfg",
+      "bytes": 4,
+      "source": "g2/components/bootloader/source_candidate_20261010/gx_adapters.c",
+      "object": "unit_247.o",
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.lfs_dir_tell",
+      "bytes": 4,
+      "source": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "object": "unit_029.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.opencfw_boot_mspi_interrupt_clear",
+      "bytes": 4,
+      "source": "g2/components/bootloader/mspi/interrupt.c",
+      "object": "unit_152.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_align_size",
+      "bytes": 4,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_alloc_overhead",
+      "bytes": 4,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_block_size_min",
+      "bytes": 4,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    },
+    {
+      "section": ".text.tlsf_pool_overhead",
+      "bytes": 4,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [
+        "0x0041714c"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x0041714c"
+      ]
+    },
+    {
+      "section": ".text.opencfw_boot_info0_word_offset",
+      "bytes": 2,
+      "source": "g2/components/bootloader/application_storage/device_wait_service.c",
+      "object": "unit_008.o",
+      "stock_body_bindings": [
+        "0x004213d8"
+      ],
+      "direct_rooted_stock_bodies": [
+        "0x004213d8"
+      ]
+    },
+    {
+      "section": ".text.tlsf_destroy",
+      "bytes": 2,
+      "source": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "object": "unit_002.o",
+      "stock_body_bindings": [],
+      "direct_rooted_stock_bodies": []
+    }
+  ],
+  "limits": [
+    "--gc-sections removes archive functions without a relocation from selected roots.",
+    "Function-pointer, registration, native absolute-address, and loader roots require independent proof.",
+    "Discarded sections are candidate placement obligations, not automatically required stock bodies."
+  ]
+}

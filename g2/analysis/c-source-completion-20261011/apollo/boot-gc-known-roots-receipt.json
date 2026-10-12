@@ -1,0 +1,16 @@
+{
+  "status": "PASS_KNOWN_SOURCE_ROOTS_SURVIVE_GC",
+  "source_elf_sha256": "6468d227e4058a1ec43727df2180abfd1292ef398b9d21d3527bda27e4f3f1bd",
+  "selected_providers": 1007,
+  "linked_provider_names": 796,
+  "gc_excluded_provider_names": 211,
+  "vector_symbol_entries": 146,
+  "runtime_slot_assignments": 31,
+  "scatter_callback_bindings": 34,
+  "unique_known_source_roots": 80,
+  "known_roots_excluded": [],
+  "limits": [
+    "Proves only that the vector, decoded startup callback, selected runtime-slot, and manager-task source symbols survive this experimental section collection.",
+    "The excluded provider count is not a missing-body count. Other callback tables, computed/registered roots, and final linker placement require independent analysis."
+  ]
+}

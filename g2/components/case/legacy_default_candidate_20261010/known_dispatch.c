@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: MIT
  * Bounded composition of independently compared legacy branches.
- * Unsupported opcodes return false; this is not case_legacy_command.
+ * Valid command buffers have a routed branch for each opcode; this remains
+ * an experimental composition, not the selected public handler.
  */
 #include <stdbool.h>
 #include <stdint.h>
@@ -23,6 +24,8 @@ extern uint32_t case_legacy_d3_branch(const uint8_t *,uint32_t);
 extern uint32_t case_legacy_d4_branch(const uint8_t *,uint32_t);
 extern uint32_t case_legacy_dd_branch(const uint8_t *,uint32_t);
 extern uint32_t case_legacy_df_branch(const uint8_t *,uint32_t);
+extern uint32_t case_legacy_ee_prefix(const uint8_t *,uint32_t);
+extern uint32_t case_legacy_ff_prefix(const uint8_t *,uint32_t);
 bool case_legacy_known_dispatch(const uint8_t *command,uint32_t length,uint32_t *result)
 {
     if (!command || !result) return false;
@@ -48,7 +51,8 @@ bool case_legacy_known_dispatch(const uint8_t *command,uint32_t length,uint32_t 
     case 0xd4:branch=case_legacy_d4_branch;break;
     case 0xdd:branch=case_legacy_dd_branch;break;
     case 0xdf:branch=case_legacy_df_branch;break;
-    case 0xee:case 0xff:return false;
+    case 0xee:branch=case_legacy_ee_prefix;break;
+    case 0xff:branch=case_legacy_ff_prefix;break;
     default:branch=case_legacy_default_branch;break;
     }
     *result=branch(command,length);

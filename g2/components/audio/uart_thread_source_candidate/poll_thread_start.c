@@ -2,7 +2,7 @@
  * pool extents are product-owned data contracts, with no default values. */
 #include <stdint.h>
 extern void *audio_uart_mutex_new(const void *);
-extern int32_t audio_uart_mutex_delete(void *); /* osMutexDelete 0x449852 */
+extern int32_t audio_uart_mutex_delete(void *); /* osMutexDelete 0x44986e */
 extern void *audio_queue_new(uint32_t,uint32_t,const void *);
 extern int32_t audio_queue_delete(void *);
 extern void *audio_thread_new(void (*)(void *),void *,const void *);
@@ -20,8 +20,19 @@ extern void *audio_uart_pool_threads[8]; /* RAM0x200739dc */
 extern char audio_uart_pool_names[8][20]; /* RAM0x20071710 */
 extern uint8_t audio_uart_pool_stacks[8][0x1000]; /* RAM0x20033558 */
 extern uint8_t audio_uart_pool_controls[8][0x70]; /* RAM0x2006d0bc */
-extern const uint8_t audio_uart_pool_queue_attrs[24]; /* ROM0x77ccac */
-extern const uint8_t audio_uart_pool_thread_attrs[36]; /* ROM0x75bd00 */
+struct pool_queue_attrs {
+    const char *name; uint32_t attr_bits; void *cb_mem; uint32_t cb_size;
+    void *mq_mem; uint32_t mq_size;
+};
+struct pool_thread_attrs {
+    const char *name; uint32_t attr_bits; void *cb_mem; uint32_t cb_size;
+    void *stack_mem; uint32_t stack_size; uint32_t priority;
+    uint32_t tz_module; uint32_t reserved;
+};
+_Static_assert(sizeof(struct pool_queue_attrs)==24u,"queue attributes ABI");
+_Static_assert(sizeof(struct pool_thread_attrs)==36u,"thread attributes ABI");
+extern const struct pool_queue_attrs audio_uart_pool_queue_attrs; /* native 0x77ccac */
+extern const struct pool_thread_attrs audio_uart_pool_thread_attrs; /* native 0x75bd00 */
 
 static const char module[]="thread_pool";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\framework\\sync\\thread_pool.c";
@@ -65,7 +76,7 @@ uint32_t audio_uart_poll_thread_start(void) {
         return UINT32_MAX;
     }
     uint8_t queue_attrs[24];
-    (void)audio_queue_copy_bytes(queue_attrs,audio_uart_pool_queue_attrs,24u);
+    (void)audio_queue_copy_bytes(queue_attrs,&audio_uart_pool_queue_attrs,24u);
     audio_uart_pool_queue=audio_queue_new(0x96u,0x14u,queue_attrs);
     if(audio_uart_pool_queue==0) {
         log0(1u,0x8fu,e_queue,c_queue);
@@ -76,7 +87,7 @@ uint32_t audio_uart_poll_thread_start(void) {
     uint32_t count=0u;
     for(uint32_t i=0u;i<8u;++i) {
         uint32_t attrs[9];
-        (void)audio_queue_copy_bytes(attrs,audio_uart_pool_thread_attrs,36u);
+        (void)audio_queue_copy_bytes(attrs,&audio_uart_pool_thread_attrs,36u);
         char name[20]={0};
         (void)g2_audio_dump_snprintf(name,20u,name_format,i);
         for(uint32_t k=0u;k<20u;++k) {

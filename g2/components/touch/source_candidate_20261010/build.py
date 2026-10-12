@@ -16,7 +16,7 @@ OUT.mkdir(exist_ok=True)
 analysis_only = {TOUCH / "lp_history_offline/decoder.c"}
 sources = sorted(p for p in TOUCH.glob("*_offline/*.c") if p not in analysis_only)
 sources += [TOUCH / "reset_layout_candidate_20261010" / name for name in
-            ("reset_sensor_descriptors.c", "reset_capsense_context.c",
+            ("reset_sensor_descriptors.c", "reset_pin_config.c", "reset_active_scan_context.c", "reset_base_frame_context.c", "reset_sensor_frames.c", "reset_capsense_context.c",
              "reset_pm_descriptor.c", "reset_common_context.c", "reset_widget_contexts.c", "reset_sensor_contexts.c", "reset_channel_pending.c", "reset_app_pm.c", "reset_position_history.c")]
 flags = ["-target", "armv6m-none-eabi", "-mcpu=cortex-m0plus", "-mthumb",
          "-Og", "-ffreestanding", "-fno-builtin", "-ffunction-sections",

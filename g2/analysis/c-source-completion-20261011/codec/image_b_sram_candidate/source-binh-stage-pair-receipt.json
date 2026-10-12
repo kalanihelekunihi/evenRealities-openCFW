@@ -1,0 +1,24 @@
+{
+  "result": "PASS_OFFLINE_BINH_STAGE_PAIR_SHAPE",
+  "source_stage1_sha256": "64ac7f7006ca7535cfdf8da5dedb461a8ffd8a63a9ca96d6c0054c5aad5e0b6a",
+  "source_stage2_sha256": "7a2b3b5b6b38cc5c3798ff46efee5a48016e2e703a6f727dcfd8bae26d7e2a4a",
+  "joined_bytes": 94352,
+  "joined_sha256": "c14b0531b19b26e7cc7a0517854b25a7d656aee898c452916277c8432810aaa8",
+  "stock_payload_binh_b_offset": 231740,
+  "stock_observed_interstage_separator_hex": "00000000",
+  "stock_stage2_payload_offset": 244032,
+  "header_fields": {
+    "magic": "0x484e4942",
+    "medium": "0x55aa55aa",
+    "version": "0x203",
+    "stage2_length": 82060,
+    "stage1_length": 12288,
+    "load": "0x20000000"
+  },
+  "limits": [
+    "Offline stage pair only; not an outer codec package or flashable artifact.",
+    "The four-byte zero separator is observed in the stock outer payload; its field meaning is unqualified.",
+    "Stage1 generated footer/CRC is experimental; product authentication and transport are unqualified.",
+    "Stage1 loader and IRAM/DRAM alias, physical execution, and behavioral timing remain unqualified."
+  ]
+}

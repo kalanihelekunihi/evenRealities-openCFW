@@ -1,5 +1,6 @@
-/* Native IRQ entry 0x10025574; retained as unqualified source because the
- * available C-SKY assembler rejects fr16-fr19 multi-register operands. */
+/* Native IRQ entry 0x10025574. The exact stock FPU pair f4ee3400 /
+ * f4ee3000 is fstms/fldms fr0-fr7 on the selected ck804ef assembler.
+ * Earlier fr16-fr19 disassembly was a decoder error. */
     .text
     .align 2
     .global gx8002_resident_irq_compact_entry_25574
@@ -10,7 +11,7 @@ gx8002_resident_irq_compact_entry_25574:
     subi r14, r14, 56
     stm r18-r31, (r14)
     subi r14, r14, 32
-    fstms fr16-fr19, (r14)
+    fstms fr0-fr7, (r14)
     push r15
     lrw r3, 0xe000e100
     ld.w r0, (r3, 0xb00)
@@ -25,7 +26,7 @@ gx8002_resident_irq_compact_entry_25574:
     jsr r2
 3:  ld.w r15, (r14, 0)
     addi r14, r14, 4
-    fldms fr16-fr19, (r14)
+    fldms fr0-fr7, (r14)
     addi r14, r14, 32
     ldm r18-r31, (r14)
     addi r14, r14, 56

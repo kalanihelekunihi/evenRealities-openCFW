@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "cases": 196608,
+  "source_sha256": "0d937714ae23c5781f45dad03a6d8fc9b2f7d54cf87531b9580c51f2638ea84b",
+  "scope": "captured native-contract packet-builder argument checks, not ARC execution",
+  "native_ranges": [
+    "323ac8..323b0c",
+    "3243e0..324436"
+  ],
+  "coverage": [
+    "five header bytes/alignment",
+    "all byte flag/count domains",
+    "all mode/enabled byte combinations",
+    "global policy bits",
+    "9th stack arg and compose argument order"
+  ],
+  "unqualified": [
+    "compose child323dc0 runtime/body",
+    "hardware packet creation"
+  ]
+}

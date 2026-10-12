@@ -1,0 +1,86 @@
+  318278:	c2e2                	enter_s	[r13,blink]
+  31827a:	4508                	mov_s	r13,r0
+  31827c:	0eda fdef           	bl.d	-16680	;0x314154
+  318280:	2056 0b40           	add3	r0,r0,0x2d
+  318284:	e805                	breq_s	r0,0,10	;0x31828e
+  318286:	d93e                	mov_s	r1,0x3e
+  318288:	0982 06e0           	bl.d	55680	;0x325c08
+  31828c:	40a1                	mov_s	r0,r13
+  31828e:	c6c2                	leave_s	[r13,blink,pcl]
+  318290:	c3f0                	enter_s	[r13-r20,fp,blink]
+  318292:	c1a2                	sub_s	sp,sp,0x8
+  318294:	4708                	mov_s	r15,r0
+  318296:	2250 0040           	bclr	r0,r2,0x1
+  31829a:	45c8                	mov_s	r13,r6
+  31829c:	240a 2140           	mov	r20,r5
+  3182a0:	230a 2100           	mov	r19,r4
+  3182a4:	4270                	mov_s	r18,r3
+  3182a6:	4150                	mov_s	r17,r2
+  3182a8:	4030                	mov_s	r16,r1
+  3182aa:	706c                	mov_s	r3,0
+  3182ac:	46cb 0080 5be2      	mov_s	r14,0x805be2
+  324680:	2080 0506           	add	r0,r0,404
+  324684:	7fe0                	j_s.d	[blink]
+  324686:	1800 0043           	stb	1,[r0]
+  32468a:	78e0                	nop_s
+  32468c:	40c3 0080 5194      	mov_s	r0,0x805194
+  324692:	02a5 f7cf           	b	-66908	;0x314134
+  324696:	78e0                	nop_s
+  324698:	c2e2                	enter_s	[r13,blink]
+  32469a:	41c3 0080 5cac      	mov_s	r1,0x805cac
+  3246a0:	8120                	ld_s	r1,[r1,0]
+  3246a2:	4508                	mov_s	r13,r0
+  3246a4:	8000                	ld_s	r0,[r0,0]
+  3246a6:	914d                	ldh_s	r2,[r1,0x1a]
+  3246a8:	0976 0760           	bl.d	59764	;0x33301c
+  3246ac:	702c                	mov_s	r1,0
+  3246ae:	40c3 0080 5194      	mov_s	r0,0x805194
+  3246b4:	0b16 f7ef           	bl.d	-66796	;0x3141c8
+  325250:	2080 0549           	add	r0,r0,597
+  325254:	7fe0                	j_s.d	[blink]
+  325256:	1800 0003           	stb	0,[r0]
+  32525a:	78e0                	nop_s
+  32525c:	107b 0601           	ld.as	r1,[r0,123]
+  325260:	0099 f7af           	b.d	-69480	;0x3142f8
+  325264:	2056 0f80           	add3	r0,r0,0x3e
+  325268:	41c3 0080 5b18      	mov_s	r1,0x805b18
+  32526e:	40c3 0080 5b58      	mov_s	r0,0x805b58
+  325274:	8940                	ldb_s	r2,[r1,0]
+  325276:	8020                	ld_s	r1,[r0,0]
+  325278:	40c3 0080 51e4      	mov_s	r0,0x8051e4
+  32527e:	0089 f7af           	b.d	-69496	;0x314304
+  325282:	a84c                	stb_s	r2,[r0,0xc]
+  325284:	8844                	ldb_s	r2,[r0,0x4]
+  325286:	621a                	add_s	r2,r2,r0
+  325288:	aa20                	stb_s	r1,[r2,0]
+  32528a:	8825                	ldb_s	r1,[r0,0x5]
+  32c7e4:	c0f1                	push_s	blink
+  32c7e6:	4200                	mov_s	r2,r0
+  32c7e8:	880b                	ldb_s	r0,[r0,0xb]
+  32c7ea:	0825 017e           	bbit0.d.t	r0,0x5,36	;0x32c80c
+  32c7ee:	4040                	mov_s	r0,r2
+  32c7f0:	2080 060b           	add	r0,r0,728
+  32c7f4:	10a4 8081           	ldb	r1,[r0,-92]
+  32c7f8:	090d 003f           	bbit1.d.t	r1,0,12	;0x32c804
+  32c7fc:	d928                	mov_s	r1,0x28
+  32c7fe:	0b0a f3cf           	bl	-99576	;0x314304
+  32c802:	f006                	b_s	12	;0x32c80c
+  32c804:	0af6 f3ef           	bl.d	-99596	;0x3142f8
+  32c808:	12bf 0701           	ldh.as	r1,[r2,191]
+  32c80c:	c0d1                	pop_s	blink
+  32c80e:	7ee0                	j_s	[blink]
+  32e214:	2080 04c6           	add	r0,r0,403
+  32e218:	7fe0                	j_s.d	[blink]
+  32e21a:	1800 0003           	stb	0,[r0]
+  32e21e:	78e0                	nop_s
+  32e220:	c3e8                	enter_s	[r13-r16,fp,blink]
+  32e222:	c1a2                	sub_s	sp,sp,0x8
+  32e224:	4508                	mov_s	r13,r0
+  32e226:	2080 0506           	add	r0,r0,404
+  32e22a:	2556 1b0f           	add3	r15,r13,0x2c
+  32e22e:	1800 0003           	stb	0,[r0]
+  32e232:	0f26 f2ef           	bl.d	-106716	;0x314154
+  32e236:	40e1                	mov_s	r0,r15
+  32e238:	e89f                	brne_s	r0,0,62	;0x32e276
+  32e23a:	0a7a ffaf           	bl.d	-3464	;0x32d4b0
+  32e23e:	40a1                	mov_s	r0,r13

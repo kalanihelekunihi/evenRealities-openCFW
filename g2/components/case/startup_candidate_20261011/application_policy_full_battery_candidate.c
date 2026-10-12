@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x080072bc-0x08007376 complete full-battery counter/standby branch.
  * R5 is task-local live context established at 0x08007200.
@@ -29,7 +30,7 @@ uint8_t case_policy_full_battery_step_72bc(volatile uint8_t *state,
     r5=(uint8_t)(r5+1u);
     if(old!=5u)return r5;
     case_policy_flash_write(0x20000948u,0x3840u,4u);
-    if(shared[7u]==0u){case_policy_log(0x0800761cu);case_policy_log(0x08007608u);}
+    if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(0800761c));case_policy_log(CASE_STRING_ADDR(08007608));}
     uint8_t scratch=0u;
     case_init_pmic_read(0x10u,&scratch,1u);
     case_init_pmic_read(0x11u,&scratch,1u);

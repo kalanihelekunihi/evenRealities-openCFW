@@ -3,6 +3,7 @@
  * and register memory. The final calibrated wait is the external ROM routine
  * at Thumb address 0x00000041 (raw BL target 0x40). */
 #include "clock_class_provider4.h"
+#include "clock_wait_4216b2.h"
 
 enum {
     CLOCK_USER_BITS_BASE = 0x20026e74u,
@@ -108,10 +109,7 @@ static void callback_finish(uint32_t *timeout)
     if (*active == 0u)
         return;
 
-    while (*timeout != 0u && *active != 0u) {
-        opencfw_bl_delay_us(10u);
-        *timeout -= 1u;
-    }
+    opencfw_bl_clock_wait_active(active, timeout);
 
     const uint32_t previous = critical_save_disable();
     *(volatile uint8_t *)(uintptr_t)CLOCK4_DEFERRED_FLAG = 1u;

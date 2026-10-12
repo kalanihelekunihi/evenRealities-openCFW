@@ -7,7 +7,7 @@
 extern volatile uint8_t audio_uart_dashboard_ready; /* *DAT_0050215c */
 extern uint8_t audio_uart_dashboard_file_buffer[4096]; /* DAT_00502654 */
 extern uint8_t audio_uart_dashboard_decoded[188]; /* DAT_00502660 */
-extern const void *audio_uart_dashboard_schema; /* DAT_00502664 */
+extern const void *const audio_uart_dashboard_schema; /* literal 0x502664 -> descriptor 0x776574 */
 extern const char audio_uart_dashboard_path[]; /* DAT_0050261c */
 extern const char audio_uart_dashboard_mode[]; /* LAB_005020ec */
 extern const char audio_uart_dashboard_module[]; /* DAT_0050262c */

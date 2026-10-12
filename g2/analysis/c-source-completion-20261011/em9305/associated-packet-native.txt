@@ -1,0 +1,127 @@
+  32c69c:	c2f0                	enter_s	[r13-r20,blink]
+  32c69e:	1024 0010           	ld	r16,[r0,36]
+  32c6a2:	7034                	cmp_s	r1,0
+  32c6a4:	4110                	mov_s	r17,r0
+  32c6a6:	460a                	mov_s	r14,r16
+  32c6a8:	2055 2b0d           	add2	r13,r16,0x2c
+  32c6ac:	2680 190c           	add	r14,r14,804
+  32c6b0:	1695 9081           	ldb	r1,[r14,-107]
+  32c6b4:	1581 1614           	ld.as	r20,[r13,129]
+  32c6b8:	4002                	mov_s	r0,r16
+  32c6ba:	230a 2400           	mov	r19,r16
+  32c6be:	2080 0b46           	add	r0,r0,429
+  32c6c2:	2380 2e11           	add	r19,r19,1144
+  32c6c6:	a820                	stb_s	r1,[r0,0]
+  32c6c8:	f226                	beq_s	76	;0x32c714
+  32c6ca:	8e00                	ldb_s	r0,[r14,0]
+  32c6cc:	16af 170d           	ldh.as	r13,[r14,175]
+  32c6d0:	e804                	breq_s	r0,0,8	;0x32c6d8
+  32c6d2:	8e02                	ldb_s	r0,[r14,0x2]
+  32c6d4:	7704                	add_s	r0,r0,-1
+  32c6d6:	ae02                	stb_s	r0,[r14,0x2]
+  32c6d8:	16aa 1700           	ldh.as	r0,[r14,170]
+  32c6dc:	0d09 1004           	brlo.nt	r13,r0,8	;0x32c6e4
+  32c6e0:	8e02                	ldb_s	r0,[r14,0x2]
+  32c6e2:	e805                	breq_s	r0,0,10	;0x32c6ea
+  32c6e4:	0b1a fcaf           	bl.d	-27880	;0x3259fc
+  32c6e8:	4002                	mov_s	r0,r16
+  32c6ea:	4102                	mov_s	r1,r16
+  32c6ec:	2180 0d50           	add	r1,r1,1077
+  32c6f0:	716c                	mov_s	r3,1
+  32c6f2:	4002                	mov_s	r0,r16
+  32c6f4:	0bd6 fbaf           	bl.d	-35884	;0x323ac8
+  32c6f8:	4262                	mov_s	r2,r19
+  32c6fa:	1656 1601           	ld.as	r1,[r14,86]
+  32c6fe:	16af 1702           	ldh.as	r2,[r14,175]
+  32c702:	1e10 9004           	sth	r0,[r14,-240]
+  32c706:	61b9                	add_s	r1,r1,r13
+  32c708:	4ab0                	sub_s	r0,r2,r13
+  32c70a:	1890 2058           	st.as	r1,[r16,144]
+  32c70e:	1e18 9004           	sth	r0,[r14,-232]
+  32c712:	f068                	b_s	208	;0x32c7e0
+  32c714:	2000 2f8f 0000 0af9 	add	r15,r16,0xaf9
+  32c71c:	8f00                	ldb_s	r0,[r15,0]
+  32c71e:	704e                	mov_s	r18,0
+  32c720:	1eaf 149c           	sth.as	r18,[r14,175]
+  32c724:	e884                	brne_s	r0,0,8	;0x32c72c
+  32c726:	0ada fcaf           	bl.d	-27944	;0x3259fc
+  32c72a:	4002                	mov_s	r0,r16
+  32c72c:	8d00                	ldb_s	r0,[r13,0]
+  32c72e:	0875 0051           	brne.nt	r0,0x1,116	;0x32c7a0
+  32c732:	4136                	ld_s	r1,[r17,0x8]
+  32c734:	8501                	ld_s	r0,[r13,0x4]
+  32c736:	7822                	sub_s	r0,r0,r1
+  32c738:	208c 85c9           	cmp	r0,599
+  32c73c:	f710                	bhi_s	32	;0x32c75c
+  32c73e:	10be 2103           	ldh	r3,[r16,190]
+  32c742:	10c1 208c           	ldb	r12,[r16,193]
+  32c746:	854f                	ld_s	r2,[r13,0x3c]
+  32c748:	8530                	ld_s	r1,[r13,0x40]
+  32c74a:	239f 0893           	mpyuw	r3,r3,1250
+  32c74e:	2200 8302           	add.f	r2,r2,r12
+  32c752:	2141 8001           	adc.f	r1,r1,0
+  32c756:	6078                	add_s	r0,r0,r3
+  32c758:	a54f                	st_s	r2,[r13,0x3c]
+  32c75a:	a530                	st_s	r1,[r13,0x40]
+  32c75c:	0819 0f85 0007 7fc4 	brhs.nt	r0,0x77fc4,24	;0x32c774
+  32c764:	201c 0f81 1111 1112 	mpymu	r1,r0,0x11111112
+  32c76c:	1d0c 1482           	stb	r18,[r13,12]
+  32c770:	7a3d                	lsr_s	r2,r1
+  32c772:	f00c                	b_s	24	;0x32c788
+  32c774:	201c 0f81 69d0 369e 	mpymu	r1,r0,0x69d0369e
+  32c77c:	2014 0002           	add1	r2,r0,r0
+  32c780:	1d0c 1043           	stb	1,[r13,12]
+  32c784:	623a                	add_s	r2,r2,r1
+  32c786:	ba2a                	lsr_s	r2,r2,0xa
+  32c788:	10be 2101           	ldh	r1,[r16,190]
+  32c78c:	18ba 2084           	sth	r2,[r16,186]
+  32c790:	e905                	breq_s	r1,0,10	;0x32c79a
+  32c792:	219f 0893           	mpyuw	r1,r1,1250
+  32c796:	090d 0005           	brhs.nt	r1,r0,12	;0x32c7a0
+  32c79a:	714e                	mov_s	r18,1
+  32c79c:	1d00 1fc3           	stb	-1,[r13]
+  32c7a0:	8f00                	ldb_s	r0,[r15,0]
+  32c7a2:	e809                	breq_s	r0,0,18	;0x32c7b2
+  32c7a4:	2030 2f81 0000 0b00 	ld	r1,[r16,0xb00]
+  32c7ac:	7960                	jl_s.d	[r1]
+  32c7ae:	4002                	mov_s	r0,r16
+  32c7b0:	f00b                	b_s	22	;0x32c7c6
+  32c7b2:	4102                	mov_s	r1,r16
+  32c7b4:	2180 0d50           	add	r1,r1,1077
+  32c7b8:	716c                	mov_s	r3,1
+  32c7ba:	4262                	mov_s	r2,r19
+  32c7bc:	0c26 fbef           	bl.d	-33756	;0x3243e0
+  32c7c0:	4002                	mov_s	r0,r16
+  32c7c2:	1e76 901c           	sth.as	r0,[r14,-138]
+  32c7c6:	0a0b 2010           	breq.nt	r18,0,10	;0x32c7ce
+  32c7ca:	1d00 1043           	stb	1,[r13]
+  32c7ce:	2080 2f11           	add	r16,r16,1148
+  32c7d2:	16af 1701           	ldh.as	r1,[r14,175]
+  32c7d6:	4006                	ld_s	r0,[r16,0]
+  32c7d8:	1e7a 905c           	sth.as	r1,[r14,-134]
+  32c7dc:	1868 a018           	st.as	r0,[r16,-152]
+  32c7e0:	4082                	mov_s	r0,r20
+  32c7e2:	c6d0                	leave_s	[r13-r20,blink,pcl]
+  32c7e4:	c0f1                	push_s	blink
+  32c7e6:	4200                	mov_s	r2,r0
+  32c7e8:	880b                	ldb_s	r0,[r0,0xb]
+  32c7ea:	0825 017e           	bbit0.d.t	r0,0x5,36	;0x32c80c
+  32c7ee:	4040                	mov_s	r0,r2
+  32c7f0:	2080 060b           	add	r0,r0,728
+  32c7f4:	10a4 8081           	ldb	r1,[r0,-92]
+  32c7f8:	090d 003f           	bbit1.d.t	r1,0,12	;0x32c804
+  32c7fc:	d928                	mov_s	r1,0x28
+  32c7fe:	0b0a f3cf           	bl	-99576	;0x314304
+  32c802:	f006                	b_s	12	;0x32c80c
+  32c804:	0af6 f3ef           	bl.d	-99596	;0x3142f8
+  32c808:	12bf 0701           	ldh.as	r1,[r2,191]
+  32c80c:	c0d1                	pop_s	blink
+  32c80e:	7ee0                	j_s	[blink]
+  32c810:	03f9 fcaf           	b.d	-27656	;0x325c08
+  32c814:	d970                	mov_s	r1,0x70
+  32c816:	78e0                	nop_s
+  32c818:	882b                	ldb_s	r1,[r0,0xb]
+  32c81a:	b9e5                	btst_s	r1,0x5
+  32c81c:	7ce0                	jeq_s	[blink]
+  32c81e:	02f9 f3ef           	b.d	-99592	;0x314314
+  32c822:	2080 060b           	add	r0,r0,728

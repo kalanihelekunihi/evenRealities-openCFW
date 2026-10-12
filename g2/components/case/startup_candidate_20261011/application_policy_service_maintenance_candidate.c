@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x080018e4 periodic left/right charging and status service.
  */
@@ -11,7 +12,7 @@ static uint32_t rd32(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr32(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
 static uint16_t rd16(uint32_t a){return *(volatile uint16_t *)(uintptr_t)a;}
 static uint32_t rem(uint32_t value,uint32_t divisor){return value-case_policy_sensor_divide(value,divisor)*divisor;}
-static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(0x08001b08u);}
+static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(CASE_STRING_ADDR(08001b08));}
 void case_policy_service_maintenance(void)
 {
     const uint32_t base=0x2000087cu;
@@ -25,15 +26,15 @@ void case_policy_service_maintenance(void)
         left_allowed=0u;right_allowed=0u;
         uint32_t n=rd32(base+0x0cu);
         if((n<5u || rem(n,20u)==0u) && *quiet==0u)
-            {(void)case_policy_log(0x08001adcu,left_present,right_present);(void)case_policy_log(0x08001b08u);}
+            {(void)case_policy_log(CASE_STRING_ADDR(08001adc),left_present,right_present);(void)case_policy_log(CASE_STRING_ADDR(08001b08));}
     }
     if(left_present!=0u && s[0x31u]!=0u){
         uint32_t ticks=rd16(base+0x38u);
         if(ticks!=0u){
             left_allowed=0u;
             if(rem(ticks,30u)==0u && *quiet==0u){
-                (void)case_policy_log(s[0x33u]==0u?0x08001b38u:0x08001b0cu,ticks);
-                (void)case_policy_log(0x08001b08u);
+                (void)case_policy_log(s[0x33u]==0u?CASE_STRING_ADDR(08001b38):CASE_STRING_ADDR(08001b0c),ticks);
+                (void)case_policy_log(CASE_STRING_ADDR(08001b08));
             }
         }
     }
@@ -42,8 +43,8 @@ void case_policy_service_maintenance(void)
         if(ticks!=0u){
             right_allowed=0u;
             if(rem(ticks,30u)==0u && *quiet==0u){
-                (void)case_policy_log(s[0x4fu]==0u?0x08001b98u:0x08001b6cu,ticks);
-                (void)case_policy_log(0x08001b08u);
+                (void)case_policy_log(s[0x4fu]==0u?CASE_STRING_ADDR(08001b98):CASE_STRING_ADDR(08001b6c),ticks);
+                (void)case_policy_log(CASE_STRING_ADDR(08001b08));
             }
         }
     }
@@ -60,7 +61,7 @@ void case_policy_service_maintenance(void)
             wr32(base+0x3cu,rd32(base+0x3cu)+1u);
         }else{
             wr32(base+0x3cu,0u);wr32(base+0x40u,rd32(base+0x40u)+1u);
-            if(*quiet==0u)logline(0x08001bd4u);
+            if(*quiet==0u)logline(CASE_STRING_ADDR(08001bd4));
         }
     }
     if(right_present!=0u && right_allowed!=0u && rem(rd32(base+0x60u),15u)==0u){
@@ -73,7 +74,7 @@ void case_policy_service_maintenance(void)
             wr32(base+0x58u,rd32(base+0x58u)+1u);
         }else{
             wr32(base+0x5cu,rd32(base+0x5cu)+1u);wr32(base+0x58u,0u);
-            if(*quiet==0u)logline(0x08001bf8u);
+            if(*quiet==0u)logline(CASE_STRING_ADDR(08001bf8));
         }
     }
 }

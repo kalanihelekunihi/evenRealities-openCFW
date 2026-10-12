@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08007494 through 0x08007548 box idle qualification. This internal
  * path uses 0x08007200's left/right stack pointers and state R4.
@@ -19,8 +20,8 @@ uint32_t case_policy_box_idle_7494(volatile uint8_t *state,
         uint8_t next=(uint8_t)(state[0x17u]+1u);
         state[0x17u]=next;
         if(next==30u && shared[7u]==0u){
-            case_policy_log(0x080076ecu);
-            case_policy_log(0x08007608u);
+            case_policy_log(CASE_STRING_ADDR(080076ec));
+            case_policy_log(CASE_STRING_ADDR(08007608));
         }
         return 0u;
     }
@@ -33,8 +34,8 @@ uint32_t case_policy_box_idle_7494(volatile uint8_t *state,
         uint8_t next=(uint8_t)(state[0x17u]+1u);
         state[0x17u]=next;
         if(next==30u && shared[7u]==0u){
-            case_policy_log(0x0800770cu);
-            case_policy_log(0x08007608u);
+            case_policy_log(CASE_STRING_ADDR(0800770c));
+            case_policy_log(CASE_STRING_ADDR(08007608));
             return 0u;
         }
     }

@@ -1,0 +1,23 @@
+  30cdd8:	c2e6                	enter_s	[r13-r15,blink]
+  30cdda:	4728                	mov_s	r15,r1
+  30cddc:	0f4a 00a0           	bl.d	5960	;0x30e524
+  30cde0:	4608                	mov_s	r14,r0
+  30cde2:	7014                	cmp_s	r0,0
+  30cde4:	d80c                	mov_s	r0,0xc
+  30cde6:	f218                	beq_s	48	;0x30ce14
+  30cde8:	0e2d 1835           	brhs.d.nt	r14,0x20,44	;0x30ce14
+  30cdec:	d812                	mov_s	r0,0x12
+  30cdee:	096a 0380           	bl	29032	;0x313f54
+  30cdf2:	45cb 0080 5ba0      	mov_s	r13,0x805ba0
+  30cdf8:	41e1                	mov_s	r1,r15
+  30cdfa:	42c1                	mov_s	r2,r14
+  30cdfc:	09ca 1320           	bl.d	156104	;0x332fc4
+  30ce00:	40a1                	mov_s	r0,r13
+  30ce02:	1d20 1043           	stb	1,[r13,32]
+  30ce06:	096a 03a0           	bl.d	29032	;0x313f6c
+  30ce0a:	addf                	stb_s	r14,[r13,0x1f]
+  30ce0c:	0c72 fcef           	bl.d	-25488	;0x306a7c
+  30ce10:	710c                	mov_s	r0,1
+  30ce12:	700c                	mov_s	r0,0
+  30ce14:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  30ce16:	78e0                	nop_s

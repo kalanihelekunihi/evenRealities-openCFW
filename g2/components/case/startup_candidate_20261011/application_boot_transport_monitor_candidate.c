@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x080082ec recurring transport side monitor.
  */
@@ -27,8 +28,8 @@ void case_boot_transport_cb_82ec(void)
             int8_t next=(int8_t)(shared[1u]-1u);shared[1u]=(uint8_t)next;
             if(next>0)goto pause;
             if(shared[7u]==0u){
-                (void)case_policy_log(0x080083bcu);
-                (void)case_policy_log(0x080083ecu);
+                (void)case_policy_log(CASE_STRING_ADDR(080083bc));
+                (void)case_policy_log(CASE_STRING_ADDR(080083ec));
             }
         }else{
             shared[4u]=1u;
@@ -42,8 +43,8 @@ pause:
         }else{
             int8_t next=(int8_t)(shared[1u]-1u);shared[1u]=(uint8_t)next;
             if(next<=0 && shared[7u]==0u){
-                (void)case_policy_log(0x080083f0u);
-                (void)case_policy_log(0x080083ecu);
+                (void)case_policy_log(CASE_STRING_ADDR(080083f0));
+                (void)case_policy_log(CASE_STRING_ADDR(080083ec));
             }
         }
         (void)case_policy_sensor_delay(20u);

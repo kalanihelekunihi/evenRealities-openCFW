@@ -2,13 +2,14 @@
  * 0x1020975c and 0x10209770. Source is Ghidra/native instruction evidence,
  * not the public sample app. Child contracts remain external. */
 #include "request.h"
+#include "resident_sample_product_data.h"
 
 /* Stack-byte pointer lifetime depends on the actual queue/ROM consumer;
  * synchronous payload copying has not been established. */
 /* Both stock call sites use a literal structure address, not a pointer cell.
  * Its runtime contents remain product state, not zero-filled source data. */
 static g2_codec_request *const g2_codec_request_cell =
-    (g2_codec_request *)(uintptr_t)UINT32_C(0x20026d5c);
+    &gx8002_request_initial_26d5c.request;
 extern uint32_t g2_codec_timestamp(void); /* resident 0x10025930 */
 
 uint32_t g2_codec_gpio_set_level(uint32_t pin, uint32_t level) {

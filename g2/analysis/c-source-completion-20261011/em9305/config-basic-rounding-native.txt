@@ -1,0 +1,61 @@
+  317efc:	7744                	add_s	r2,r2,-1
+  317efe:	7a09                	mpyw_s	r2,r2,r0
+  317f00:	7124                	add_s	r1,r1,1
+  317f02:	782a                	mpyuw_s	r0,r0,r1
+  317f04:	794f                	extb_s	r1,r2
+  317f06:	6941                	add_s	r2,r1,0x1
+  317f08:	794f                	extb_s	r1,r2
+  317f0a:	7b0f                	extb_s	r3,r0
+  317f0c:	4040                	mov_s	r0,r2
+  317f0e:	7150                	cmp_s	r1,r2
+  317f10:	20ca 0062           	mov.ne	r0,0x1
+  317f14:	780f                	extb_s	r0,r0
+  317f16:	2b05 0001           	divu	r1,r3,r0
+  317f1a:	4020                	mov_s	r0,r1
+  317f1c:	30dc 0081           	
+  317f20:	780f                	extb_s	r0,r0
+  317f22:	2339 0000           	setne	r0,r3,r0
+  317f26:	6119                	add_s	r1,r1,r0
+  317f28:	7fe0                	j_s.d	[blink]
+  317f2a:	782f                	extb_s	r0,r1
+  317f2c:	c2e4                	enter_s	[r13-r14,blink]
+  317f2e:	4508                	mov_s	r13,r0
+  317f30:	208a 0b09           	mov	r0,620
+  317f34:	650a                	ldb_s	r2,[r13,r0]
+  317f36:	40c3 0033 4b98      	mov_s	r0,0x334b98
+  317f3c:	0a09 0070           	breq.d.nt	r2,0x1,8	;0x317f44
+  317f40:	4628                	mov_s	r14,r1
+  317f42:	ea8d                	brne_s	r2,0,26	;0x317f5a
+  317f44:	48c1                	ld_s.as	r1,[r0,r14]
+  317f46:	e904                	breq_s	r1,0,8	;0x317f4c
+  317f48:	7960                	jl_s.d	[r1]
+  317f4a:	40a1                	mov_s	r0,r13
+  317f4c:	2632 1f80 0033 4ba0 	ldb	r0,[r14,0x334ba0]
+  317f54:	2580 1c09           	add	r13,r13,624
+  317f58:	ad00                	stb_s	r0,[r13,0]
+  317f5a:	c6c4                	leave_s	[r13-r14,blink,pcl]
+  317f5c:	c2e8                	enter_s	[r13-r16,blink]
+  317f5e:	4010                	mov_s	r16,r0
+  317f60:	e1f0                	cmp_s	r1,0x70
+  317f62:	704c                	mov_s	r2,0
+  317f64:	f20f                	beq_s	30	;0x317f82
+  317f66:	094d 0a70           	breq.d.nt	r1,0x29,76	;0x317fb0
+  317f6a:	716c                	mov_s	r3,1
+  317f6c:	e18c                	cmp_s	r1,0xc
+  317f6e:	f485                	bne_s	266	;0x318076
+  317f70:	41c3 0080 2818      	mov_s	r1,0x802818
+  317f76:	8900                	ldb_s	r0,[r1,0]
+  317f78:	706c                	mov_s	r3,0
+  317f7a:	084b 09b0           	breq.d.nt	r0,0x26,74	;0x317fc2
+  317f7e:	712c                	mov_s	r1,1
+  317f80:	f07b                	b_s	246	;0x318076
+  317f82:	10a1 2600           	ld.as	r0,[r16,161]
+  317f86:	0831 077f           	bbit1.d.t	r0,0x1d,48	;0x317fb4
+  317f8a:	b8fe                	btst_s	r0,0x1e
+  317f8c:	f275                	beq_s	234	;0x318076
+  317f8e:	b8be                	bclr_s	r0,r0,0x1e
+  317f90:	4102                	mov_s	r1,r16
+  317f92:	18a2 2098           	st.as	r2,[r16,162]
+  317f96:	18a1 2018           	st.as	r0,[r16,161]
+  317f9a:	2180 088d           	add	r1,r1,866
+  317f9e:	40c3 0080 281c      	mov_s	r0,0x80281c

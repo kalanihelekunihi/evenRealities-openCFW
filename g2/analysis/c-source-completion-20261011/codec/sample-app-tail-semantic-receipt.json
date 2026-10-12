@@ -1,0 +1,38 @@
+{
+  "stock_image_sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+  "source_range": [
+    "0x10026c74",
+    "0x10026d7c"
+  ],
+  "bytes": 264,
+  "range_sha256": "334e9013b3a6e11393389efc5d871d274b33fa4290f7df4273a35218a790d100",
+  "fieldwise_exact": true,
+  "segments": [
+    {
+      "address": "0x10026c74",
+      "bytes": 8,
+      "kind": "two receive config words"
+    },
+    {
+      "address": "0x10026c7c",
+      "bytes": 176,
+      "kind": "two 88-byte keyword records"
+    },
+    {
+      "address": "0x10026d2c",
+      "bytes": 4,
+      "kind": "sample state word"
+    },
+    {
+      "address": "0x10026d30",
+      "bytes": 44,
+      "kind": "sample callback descriptor and eight relocations"
+    },
+    {
+      "address": "0x10026d5c",
+      "bytes": 32,
+      "kind": "initialized BUXX request and reserved tail"
+    }
+  ],
+  "limit": "stock scalar/address identity; C relocation, final placement/copy, and native runtime remain unqualified"
+}

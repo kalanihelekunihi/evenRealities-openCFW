@@ -1,0 +1,28 @@
+{
+  "image_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "catalogue_before": 157,
+  "catalogue_after": 161,
+  "catalogue_total": 288,
+  "new_catalogue_entries": [
+    "0x100034e0",
+    "0x10004078",
+    "0x1000aad0",
+    "0x1000b430"
+  ],
+  "source_units": 97,
+  "target_linked_object_sha256": "ed7c7d094872e186a6d6b194c8e5432733f1bb109572c507e0c409857b0cd7a4",
+  "target_link": "PASS: deterministic full 97-unit C-SKY CK804EF hard-float ELF32 relocatable build; all source/object hashes recorded in build-registration-table-round/receipt.json",
+  "undefined_symbols": [
+    "__fe_getround",
+    "__fe_raise_inexact"
+  ],
+  "bounded_checks": {
+    "uart_width": 28,
+    "callback_table": 6
+  },
+  "native_evidence": "0x100034e0 shares the pinned NationalChip Grus clk_priv.h parameter table with 0x100035c0; 0x1000aad0 literals 0x20033ffc/0xaabbccdd and exact two strings; 0x1000b430 native 16x28 table search, clearing and insertion at 0x2002cf30.",
+  "data_evidence": "Native corpus has direct literals for 0x2002cb80 at 0xa46c/0xa704/0x15cf8, but no direct literal of 0x2002cb84; this does not prove no indirect initializer.",
+  "source_complete": false,
+  "data_and_final_layout_complete": false,
+  "limits": "Full original-byte execution for boot marker/reset, callback table consumers, UART hardware, initial VAD mode, and final SRAM scatter remains unqualified. 127 catalogue entries outside candidate."
+}

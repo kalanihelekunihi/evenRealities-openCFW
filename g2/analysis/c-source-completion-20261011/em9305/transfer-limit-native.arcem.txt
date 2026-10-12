@@ -1,0 +1,43 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00317b10 <.data+0x15710>:
+  317b10:	104c 0082           	ldb	r2,[r0,76]
+  317b14:	9163                	ldh_s	r3,[r1,0x6]
+  317b16:	0a1d 00b0           	breq.d.nt	r2,0x2,28	;0x317b30
+  317b1a:	9182                	ldh_s	r12,[r1,0x4]
+  317b1c:	0a1b 00f1           	brne.d.nt	r2,0x3,26	;0x317b36
+  317b20:	6c56                	asl_s	r2,r12,0x6
+  317b22:	2308 0f83 0000 0a90 	max	r3,r3,0xa90
+  317b2a:	2280 040f           	add	r2,r2,976
+  317b2e:	f008                	b_s	16	;0x317b3c
+  317b30:	da3c                	mov_s	r2,0x3c
+  317b32:	7a95                	add2_s	r2,r2,r12
+  317b34:	f004                	b_s	8	;0x317b3c
+  317b36:	6c53                	asl_s	r2,r12,0x3
+  317b38:	2254 0e02           	add1	r2,r2,0x38
+  317b3c:	104d 0080           	ldb	r0,[r0,77]
+  317b40:	2209 00c3           	min	r3,r2,r3
+  317b44:	9141                	ldh_s	r2,[r1,0x2]
+  317b46:	0823 00b0           	breq.d.nt	r0,0x2,34	;0x317b66
+  317b4a:	9120                	ldh_s	r1,[r1,0]
+  317b4c:	0821 00f1           	brne.d.nt	r0,0x3,32	;0x317b6c
+  317b50:	6913                	asl_s	r0,r1,0x3
+  317b52:	b906                	asl_s	r1,r1,0x6
+  317b54:	2208 0f80 0000 0a90 	max	r0,r2,0xa90
+  317b5c:	2180 040f           	add	r1,r1,976
+  317b60:	2109 0000           	min	r0,r1,r0
+  317b64:	f008                	b_s	16	;0x317b74
+  317b66:	d83c                	mov_s	r0,0x3c
+  317b68:	7835                	add2_s	r0,r0,r1
+  317b6a:	f004                	b_s	8	;0x317b70
+  317b6c:	2054 0e00           	add1	r0,r0,0x38
+  317b70:	2009 0080           	min	r0,r0,r2
+  317b74:	631b                	add_s	r3,r3,r0
+  317b76:	2380 0582           	add	r3,r3,150
+  317b7a:	7fe0                	j_s.d	[blink]
+  317b7c:	7870                	exth_s	r0,r3
+  317b7e:	78e0                	nop_s

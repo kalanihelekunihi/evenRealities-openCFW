@@ -1,20 +1,20 @@
 /* SPDX-License-Identifier: MIT
  * Native image-A XIP 0x102035b4..0x102035d2, 0x102037f0..0x102037fe.
  * The output path owns CR-before-LF conversion and the resident UART channel
- * stride. Product SRAM channel descriptors and selected port are typed imports.
+ * stride. The channel descriptors are source-owned initialized SRAM data;
+ * the selected port remains a typed runtime input.
  */
 #include <stdint.h>
+#include "resident_uart_product_descriptors.h"
 
 struct g2_codec_uart_prefix;
 extern void g2_codec_dw_uart_putc(const struct g2_codec_uart_prefix *uart,
                                    uint32_t value);
-extern uint8_t gx8002_xip_uart_channel_storage_20026a94[];
 extern uint32_t gx8002_xip_console_port_2002731c;
 
 static struct g2_codec_uart_prefix *gx8002_xip_uart_channel(uint32_t port)
 {
-    return (struct g2_codec_uart_prefix *)(void *)(
-        gx8002_xip_uart_channel_storage_20026a94 + port * 0x80u);
+    return (struct g2_codec_uart_prefix *)(void *)&gx8002_uart_channels_26a94[port];
 }
 
 void gx8002_xip_uart_putc_102035b4(uint32_t port, uint32_t character)

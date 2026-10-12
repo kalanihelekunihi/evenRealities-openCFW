@@ -8,6 +8,13 @@ extern uint32_t opencfw_bl_power_register_update(uint32_t,uint32_t);
 extern uint32_t opencfw_bl_mode_register_update(uint32_t,uint32_t,uint32_t);
 extern void opencfw_boot_context_nvic_enable(uint32_t);
 extern const int16_t opencfw_boot_gpio_irqnums[4];
+/* Stock 0x434190..0x43419b: three 32-bit product GPIO mode bases.  Native
+ * registrar430280 reads each through its literal-pool pointer.  Type 2 then
+ * replaces bits 6:7 with the descriptor's interrupt mode (BFI), so the
+ * stored 0x93 does not force bit 7 for modes 0 and 1. */
+__attribute__((section(".boot_gpio_mode_bases"), used))
+const volatile uint32_t opencfw_boot_gpio_mode_bases[3] = {0x183u, 0x93u, 3u};
+_Static_assert(sizeof(opencfw_boot_gpio_mode_bases) == 12u, "GPIO base size");
 static void restore(uint32_t token) { __asm__ volatile("msr primask, %0" :: "r"(token) : "memory"); }
 NI uint32_t opencfw_boot_gpio_mask_status(uint32_t channel,uint32_t enabled,uint32_t *mask) {
     uint32_t ch=(uint8_t)channel,en=(uint8_t)enabled;
@@ -64,10 +71,12 @@ NI uint32_t opencfw_bl_descriptor_register(const opencfw_boot_gpio_descriptor *t
     if(!table || !count)return 0xffffffffu;
     for(uint32_t i=0;i<count;i++) {
         if(rows[i].type==1) {
-            (void)opencfw_bl_power_register_update(rows[i].pin,0x183u);
+            (void)opencfw_bl_power_register_update(rows[i].pin,opencfw_boot_gpio_mode_bases[0]);
             (void)opencfw_bl_mode_register_update(rows[i].pin,rows[i].initial==1?1u:0u,0);
         } else if(rows[i].type==2) {
-            (void)opencfw_bl_power_register_update(rows[i].pin,0x13u|((rows[i].interrupt_mode&3u)<<6));
+            uint32_t mode=(opencfw_boot_gpio_mode_bases[1]&~0xc0u)|
+                          ((rows[i].interrupt_mode&3u)<<6);
+            (void)opencfw_bl_power_register_update(rows[i].pin,mode);
             if(rows[i].interrupt_mode && rows[i].callback) {
                 uint32_t pin=rows[i].pin,mask[7]={0};mask[pin>>5]=1u<<(pin&31u);
                 (void)opencfw_boot_gpio_mask_status(0,1,mask);
@@ -79,7 +88,7 @@ NI uint32_t opencfw_bl_descriptor_register(const opencfw_boot_gpio_descriptor *t
                 irq=(uint32_t)(int32_t)opencfw_boot_gpio_irqnums[rows[i].pin>>5];
                 opencfw_boot_context_nvic_enable(irq);
             }
-        } else if(rows[i].type==4) (void)opencfw_bl_power_register_update(rows[i].pin,3u);
+        } else if(rows[i].type==4) (void)opencfw_bl_power_register_update(rows[i].pin,opencfw_boot_gpio_mode_bases[2]);
     }
     return 0;
 }

@@ -1,6 +1,8 @@
 /* Independent exact binary32 remainder reconstruction, stock427ccc/427cdc.
  * Integer operations avoid host libm and preserve sign/NaN/error behavior.
- * Pending original-instruction validation. */
+ * Current-source stock comparison covers the complete 202-byte native
+ * 0x427cdc body in 2,560 bounded remainder cases; hardware FP state and
+ * arbitrary input histories remain outside that fixture. */
 #include <stdint.h>
 float opencfw_boot_pll_mod(float,float) __attribute__((pcs("aapcs-vfp")));
 typedef union {float f;uint32_t bits;} binary32;

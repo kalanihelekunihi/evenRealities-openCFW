@@ -4,6 +4,8 @@
 
 #include <stdint.h>
 
-uint32_t opencfw_boot_control_transition(uint32_t mode);
+uint64_t opencfw_boot_control_transition(uint32_t mode);
+uint64_t opencfw_boot_control_transition_core(uint32_t mode,
+                                              uint32_t ambient_r1);
 
 #endif

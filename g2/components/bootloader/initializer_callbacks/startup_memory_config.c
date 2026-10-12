@@ -6,7 +6,7 @@
 #define B(a) (*(volatile uint8_t *)(uintptr_t)(a))
 #define NI __attribute__((noinline))
 extern uint32_t opencfw_hal_status_poll(uint32_t,uintptr_t,uint32_t,uint32_t,uint32_t);
-NI uint32_t opencfw_boot_startup_mcu_memory(const uint8_t config[5]){
+NI uint64_t opencfw_boot_startup_mcu_memory_core(const uint8_t config[5],uint32_t ambient_r1){
  uint32_t desired=0,enable=0;uint8_t force=0;B(0x200271a7)=config[0];
  if(config[0]==0){enable|=32;desired|=128;}
  enable|=config[1]&7;desired|=config[1]&7;
@@ -14,16 +14,16 @@ NI uint32_t opencfw_boot_startup_mcu_memory(const uint8_t config[5]){
  if(config[3]==3&&(W(0x40021018)&72)==8){W(0x40020284)|=1;force=1;}
  if(desired!=W(0x40021018)){
   uint32_t expected=desired&W(0x40021018);W(0x40021014)&=enable;
-  uint32_t status=opencfw_hal_status_poll(5,0x40021018,0xcf,expected,1);if(status)return status;
+  uint32_t status=opencfw_hal_status_poll(5,0x40021018,0xcf,expected,1);if(status)return ((uint64_t)ambient_r1<<32)|status;
   (void)opencfw_boot_power_callback(5,1,&desired);W(0x40021014)=enable;
   status=opencfw_hal_status_poll(5,0x40021018,0xcf,desired,1);
   if(force)W(0x40020284)&=~1u;
-  if(status)return status;
-  if((W(0x40021018)&7)!=(W(0x40021014)&7)||((W(0x40021018)>>3)&1)!=((W(0x40021014)>>3)&1)||((W(0x40021018)>>6)&(W(0x40021018)>>3)&1)!=((W(0x40021014)>>4)&1)||((W(0x40021018)>>7)&1)!=((W(0x40021014)>>5)&1)||((W(0x40021008)>>27)&1)!=((W(0x40021004)>>27)&1))return 1;
+  if(status)return ((uint64_t)ambient_r1<<32)|status;
+  if((W(0x40021018)&7)!=(W(0x40021014)&7)||((W(0x40021018)>>3)&1)!=((W(0x40021014)>>3)&1)||((W(0x40021018)>>6)&(W(0x40021018)>>3)&1)!=((W(0x40021014)>>4)&1)||((W(0x40021018)>>7)&1)!=((W(0x40021014)>>5)&1)||((W(0x40021008)>>27)&1)!=((W(0x40021004)>>27)&1))return ((uint64_t)ambient_r1<<32)|1u;
  }
  if(config[4])W(0x4002101c)&=~2u;else W(0x4002101c)|=2;
- if(config[2]==1)W(0x4002101c)|=1;else if(config[2]==0)W(0x4002101c)&=~1u;else return 5;
- return 0;
+ if(config[2]==1)W(0x4002101c)|=1;else if(config[2]==0)W(0x4002101c)&=~1u;else return ((uint64_t)ambient_r1<<32)|5u;
+ return (uint64_t)ambient_r1<<32;
 }
 NI uint32_t opencfw_boot_startup_shared_memory(const uint8_t config[5]){
  uint8_t lower=0;

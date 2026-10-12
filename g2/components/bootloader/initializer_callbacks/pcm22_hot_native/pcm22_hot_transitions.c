@@ -1,6 +1,7 @@
 /* Stock instruction reconstructions, not SDK replacement bodies.
  * 11:428e6a..4290a2;12:4290a2..4291e0;21:429c46..429d9e.
- * Raw R0 is a private test ABI: walker discards callback results. */
+ * Callbacks 11/12 retain their native R1:R0 return, including the
+ * pre-transition fields and ambient fourth word respectively. */
 #include <stdint.h>
 #define B(a) (*(volatile uint8_t *)(uintptr_t)(a))
 #define W(a) (*(volatile uint32_t *)(uintptr_t)(a))
@@ -36,7 +37,7 @@ static inline void vddf_boost(profile r){
  if(value>=128)W(0x4002004c)=W(0x4002004c)|127u;
  else W(0x4002004c)=(W(0x4002004c)&~127u)|value;
 }
-uint32_t opencfw_spot_pcm22_transition11(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton){
+uint64_t opencfw_spot_pcm22_transition11(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton){
  (void)old_ton;profile r=read_profile(target,current);timer_and_globals(r,target,ton);
  W(0x40021000)=(W(0x40021000)&~3u)|1u;
  uint32_t n=0;while(n<20 && !(W(0x40021000)&4)){opencfw_hal_delay_us(1);n++;}
@@ -55,13 +56,15 @@ uint32_t opencfw_spot_pcm22_transition11(uint32_t target,uint32_t current,uint32
  if(temporary)W(0x40004044)=W(0x40004044)&~32u;
  core_ldo(r);W(0x40020044)=(W(0x40020044)&~127u)|r.ldo;
  vddf_boost(r);opencfw_hal_delay_us(50);W(0x4002004c)=(W(0x4002004c)&~127u)|r.vddf;
- (void)event_a_power_ton_adjust(ton,target);return (uint32_t)r.word;
+ (void)event_a_power_ton_adjust(ton,target);
+ return ((uint64_t)r.packed<<32)|(uint32_t)r.word;
 }
-uint32_t opencfw_spot_pcm22_transition12(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton){
- (void)old_ton;profile r=read_profile(target,current);timer_and_globals(r,target,ton);
+uint64_t opencfw_spot_pcm22_transition12(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton){
+ profile r=read_profile(target,current);timer_and_globals(r,target,ton);
  /* No TON adjustment in the locked selector12, despite SDK counterpart. */
  vddf_boost(r);core_ldo(r);opencfw_hal_delay_us(50);
- W(0x4002004c)=(W(0x4002004c)&~127u)|r.vddf;return r.packed;
+ W(0x4002004c)=(W(0x4002004c)&~127u)|r.vddf;
+ return ((uint64_t)old_ton<<32)|r.packed;
 }
 uint32_t opencfw_spot_pcm22_transition21(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton){
  (void)old_ton;profile r=read_profile(target,current);timer_and_globals(r,target,ton);

@@ -9,6 +9,7 @@ extern uint32_t opencfw_bl_mask_interrupts(void);
 extern uint32_t opencfw_bl_kernel_static_thread(uintptr_t,uintptr_t,uint32_t,
  uintptr_t,uint32_t,uintptr_t,uintptr_t);
 extern void opencfw_boot_timer_task(void *);
+extern uint32_t opencfw_boot_queue_reset(uint32_t *queue,uint32_t clear_waiters);
 #define WORD(a) (*(volatile uint32_t *)(uintptr_t)(a))
 __attribute__((section(".boot_timer_name"),used))
 const char opencfw_boot_timer_name[]="Tmr Svc";
@@ -23,12 +24,8 @@ uint32_t opencfw_boot_timer_queue_fresh(uint32_t count,uint32_t item_size,
     uint32_t *q=(uint32_t *)control_block;uint8_t *bytes=(uint8_t *)q;
     bytes[0x46]=1;q[0]=item_size?storage:control_block;
     q[15]=count;q[16]=item_size;
-    if (UINT32_MAX/count<item_size)fail();
-    opencfw_bl_kernel_enter();
-    q[2]=q[0]+count*item_size;q[14]=0;q[1]=q[0];
-    q[3]=q[0]+(count-1)*item_size;bytes[0x44]=255;bytes[0x45]=255;
-    opencfw_boot_list_initialize(q+4);opencfw_boot_list_initialize(q+9);
-    opencfw_bl_kernel_exit();bytes[0x4c]=(uint8_t)type;
+    (void)opencfw_boot_queue_reset(q,1u);
+    bytes[0x4c]=(uint8_t)type;
     return control_block;
 }
 void opencfw_boot_timer_initialize(void) {

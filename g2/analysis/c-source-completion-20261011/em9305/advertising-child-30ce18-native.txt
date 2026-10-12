@@ -1,0 +1,59 @@
+  30ce18:	c2f4                	enter_s	[r13-r22,blink]
+  30ce1a:	45cb 0080 5a71      	mov_s	r13,0x805a71
+  30ce20:	1523 1015           	ld	r21,[r13,35]
+  30ce24:	260a 21c0           	mov	r22,r7
+  30ce28:	230a 2180           	mov	r19,r6
+  30ce2c:	240a 2140           	mov	r20,r5
+  30ce30:	220a 2100           	mov	r18,r4
+  30ce34:	4170                	mov_s	r17,r3
+  30ce36:	4050                	mov_s	r16,r2
+  30ce38:	4628                	mov_s	r14,r1
+  30ce3a:	0eee 00a0           	bl.d	5868	;0x30e524
+  30ce3e:	4708                	mov_s	r15,r0
+  30ce40:	8d20                	ldb_s	r1,[r13,0]
+  30ce42:	4200                	mov_s	r2,r0
+  30ce44:	099b 0031           	brne.d.nt	r1,0,154	;0x30cede
+  30ce48:	d80c                	mov_s	r0,0xc
+  30ce4a:	0a97 0010           	breq.nt	r2,0,150	;0x30cede
+  30ce4e:	081d 2070           	breq.d.nt	r16,0x1,28	;0x30ce68
+  30ce52:	d811                	mov_s	r0,0x11
+  30ce54:	088b 2155           	brhs.nt	r16,0x5,138	;0x30cede
+  30ce58:	0e87 1f85 0000 4001 	brhs.nt	r14,0x4001,134	;0x30cede
+  30ce60:	e7a0                	cmp_s	r15,0x20
+  30ce62:	26cc 93c6           	cmp.nc	r14,r15
+  30ce66:	f789                	blo_s	18	;0x30ce76
+  30ce68:	2551 a180           	btst	r21,0x6
+  30ce6c:	730c                	mov_s	r0,3
+  30ce6e:	20ca 0061           	mov.eq	r0,0x1
+  30ce72:	7032                	cmp_s	r0,r17
+  30ce74:	d811                	mov_s	r0,0x11
+  30ce76:	006a 0005           	bc	106	;0x30cede
+  30ce7a:	0819 2050           	breq.nt	r16,0x1,24	;0x30ce90
+  30ce7e:	0815 2110           	breq.nt	r16,0x4,20	;0x30ce90
+  30ce82:	0911 207f           	bbit1.d.t	r17,0x1,16	;0x30ce90
+  30ce86:	2342 2041           	sub	r1,r19,0x1
+  30ce8a:	0919 01d4           	brlo.nt	r1,0x7,24	;0x30cea0
+  30ce8e:	f029                	b_s	82	;0x30cede
+  30ce90:	0a4f 2095           	brhs.nt	r18,0x2,78	;0x30cede
+  30ce94:	0c4b 2030           	breq.d.nt	r20,0,74	;0x30cede
+  30ce98:	2342 2041           	sub	r1,r19,0x1
+  30ce9c:	0943 01d5           	brhs.nt	r1,0x7,66	;0x30cede
+  30cea0:	0e0d 2114           	brlo.nt	r22,0x4,12	;0x30ceac
+  30cea4:	0809 2110           	breq.nt	r16,0x4,8	;0x30ceac
+  30cea8:	0837 2051           	brne.nt	r16,0x1,54	;0x30cede
+  30ceac:	269f 1c49           	mpyuw	r14,r14,625
+  30ceb0:	279f 1c49           	mpyuw	r15,r15,625
+  30ceb4:	45cb 0080 5b88      	mov_s	r13,0x805b88
+  30ceba:	4082                	mov_s	r0,r20
+  30cebc:	1d15 1582           	stb	r22,[r13,21]
+  30cec0:	1d14 14c2           	stb	r19,[r13,20]
+  30cec4:	1d0a 1482           	stb	r18,[r13,10]
+  30cec8:	1d09 1442           	stb	r17,[r13,9]
+  30cecc:	1d08 1402           	stb	r16,[r13,8]
+  30ced0:	a5c1                	st_s	r14,[r13,0x4]
+  30ced2:	0f56 fbaf           	bl.d	-34988	;0x304624
+  30ced6:	a5e0                	st_s	r15,[r13,0]
+  30ced8:	a503                	st_s	r0,[r13,0xc]
+  30ceda:	700c                	mov_s	r0,0
+  30cedc:	a524                	st_s	r1,[r13,0x10]
+  30cede:	c6d4                	leave_s	[r13-r22,blink,pcl]

@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x0800258c sensor probe send and optional framed reply read.
  */
@@ -19,7 +20,7 @@ extern uint32_t case_policy_log_number(uint32_t,uint32_t);
 extern void case_policy_idle_clear(void); /* 0x9a14 */
 extern uint32_t case_boot_sensor_flags_5f44(uint32_t descriptor);
 static void logline(uint32_t address)
-{(void)case_policy_log(address);(void)case_policy_log(0x0800271cu);}
+{(void)case_policy_log(address);(void)case_policy_log(CASE_STRING_ADDR(0800271c));}
 
 uint32_t case_policy_send_probe(uint32_t side,const uint8_t *packet,uint32_t count,uint32_t reply)
 {
@@ -36,13 +37,13 @@ uint32_t case_policy_send_probe(uint32_t side,const uint8_t *packet,uint32_t cou
     case_boot_sensor_post_transmit();
     if(reply!=0u){
         if(case_boot_sensor_finish_guard(descriptor,(const uint8_t *)(uintptr_t)rx,5u,80u)==3u){
-            if(*quiet==0u)logline(0x080026c8u);
+            if(*quiet==0u)logline(CASE_STRING_ADDR(080026c8));
             goto finish;
         }
         uint32_t index=0u;
         while(index<5u && rx[index]!=0x5au)++index;
         if(index==5u){
-            if(*quiet==0u)(void)case_policy_log(0x080026e0u);
+            if(*quiet==0u)(void)case_policy_log(CASE_STRING_ADDR(080026e0));
             log_hex_buffer((const uint8_t *)(uintptr_t)rx,5u);
             goto finish;
         }
@@ -52,7 +53,7 @@ uint32_t case_policy_send_probe(uint32_t side,const uint8_t *packet,uint32_t cou
             if(index>1u){
                 if(case_boot_sensor_finish_guard(descriptor,
                     (const uint8_t *)(uintptr_t)(rx+index+1u),index-1u,50u)==3u){
-                    if(*quiet==0u)logline(0x08002700u);
+                    if(*quiet==0u)logline(CASE_STRING_ADDR(08002700));
                     log_hex_buffer((const uint8_t *)(uintptr_t)rx,5u);
                     goto finish;
                 }
@@ -64,8 +65,8 @@ uint32_t case_policy_send_probe(uint32_t side,const uint8_t *packet,uint32_t cou
         if(case_boot_sensor_finish_guard(descriptor,
             (const uint8_t *)(uintptr_t)(rx+retained),data_length,wait)==3u){
             if(*quiet==0u){
-                (void)case_policy_log_number(0x08002720u,data_length);
-                (void)case_policy_log(0x0800271cu);
+                (void)case_policy_log_number(CASE_STRING_ADDR(08002720),data_length);
+                (void)case_policy_log(CASE_STRING_ADDR(0800271c));
             }
         }
     }

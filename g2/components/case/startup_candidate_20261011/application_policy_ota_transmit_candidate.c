@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08002744 OTA packet send and optional framed response.
  */
@@ -27,7 +28,7 @@ uint32_t case_policy_ota_transmit(uint32_t channel,const uint8_t *packet,uint32_
         uint32_t index=0u;
         while(index<5u && rx[index]!=0x5au)++index;
         if(index==5u){
-            if(*quiet==0u)(void)case_policy_log(0x08002838u);
+            if(*quiet==0u)(void)case_policy_log(CASE_STRING_ADDR(08002838));
             log_hex_buffer((const uint8_t *)(uintptr_t)rx,5u);
             goto finish;
         }
@@ -36,7 +37,7 @@ uint32_t case_policy_ota_transmit(uint32_t channel,const uint8_t *packet,uint32_
             for(uint32_t j=0u;j<retained;++j)rx[j]=rx[index+j];
             if(index>1u){
                 if(case_boot_sensor_finish_guard(descriptor,(const uint8_t *)(uintptr_t)(rx+index+1u),index-1u,50u)==3u){
-                    if(*quiet==0u){(void)case_policy_log(0x08002860u);(void)case_policy_log(0x08002884u);}
+                    if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08002860));(void)case_policy_log(CASE_STRING_ADDR(08002884));}
                     log_hex_buffer((const uint8_t *)(uintptr_t)rx,5u);
                     goto finish;
                 }

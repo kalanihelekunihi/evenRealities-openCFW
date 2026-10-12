@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "cases": 45,
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "selected_elf_sha256": "8b54fd3fe148406a90512d52b28465d5ef3f9b26e54c9d7f16bca9c3b3232c4c",
+  "cuts": [
+    "service wake/sleep calls return without executing mutex internals"
+  ],
+  "limits": [
+    "Logger lock-mode register and service-call choice only; no scheduler or physical mutex proof."
+  ]
+}

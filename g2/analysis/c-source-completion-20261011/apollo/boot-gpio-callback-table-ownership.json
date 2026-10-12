@@ -1,0 +1,49 @@
+{
+  "status": "PASS_STRUCTURAL_DATA_OWNERSHIP",
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "stock_scatter_record_address": "0x4330dc",
+  "zero_extent_start": "0x2000055c",
+  "zero_extent_end_exclusive": "0x200271c8",
+  "source_record": "g2/components/bootloader/startup/init_records.S",
+  "source_registration": "g2/components/bootloader/initializer_callbacks/gpio_descriptors.c",
+  "source_consumer": "g2/components/bootloader/initializer_callbacks/gpio_irq_runtime.c",
+  "tables": [
+    {
+      "name": "callback_bank0",
+      "start": "0x20023600",
+      "end_exclusive": "0x20023980",
+      "bytes": 896,
+      "within_stock_zero_extent": true
+    },
+    {
+      "name": "callback_bank1",
+      "start": "0x20023980",
+      "end_exclusive": "0x20023d00",
+      "bytes": 896,
+      "within_stock_zero_extent": true
+    },
+    {
+      "name": "argument_bank0",
+      "start": "0x20023d00",
+      "end_exclusive": "0x20024080",
+      "bytes": 896,
+      "within_stock_zero_extent": true
+    },
+    {
+      "name": "argument_bank1",
+      "start": "0x20024080",
+      "end_exclusive": "0x20024400",
+      "bytes": 896,
+      "within_stock_zero_extent": true
+    }
+  ],
+  "source_sha256": {
+    "g2/components/bootloader/startup/init_records.S": "2835e4d3a16a8db4cf37cbdef39fa3bc9b73fec423ec3cf3df7bd9df371962c4",
+    "g2/components/bootloader/initializer_callbacks/gpio_descriptors.c": "4708a655ff874d25b0793dfc98227dfe9db45ee9b9ee38cbf5d95b3467ef525b",
+    "g2/components/bootloader/initializer_callbacks/gpio_irq_runtime.c": "b233986bb24d5137589447fc93aa15c14f2b712f7a0b25d33408ab102d7b8b40"
+  },
+  "limits": [
+    "Native producer writes and consumer reads are address-aligned; real installed callback values and asynchronous delivery remain unqualified.",
+    "This proves zero record coverage and source ownership of table layout, not final image equality."
+  ]
+}

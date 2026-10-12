@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08009a9c no-reply sensor reset. The five GPIO configuration
  * words at stock 0xd36c alias the event descriptor tail at 0xd26c+0x100.
@@ -25,8 +26,8 @@ void case_policy_no_reply_reset(uint32_t left,uint32_t right)
     volatile uint8_t *shared=(volatile uint8_t *)(uintptr_t)0x200000b8u;
     if(shared[4u]!=0u){
         if(shared[7u]==0u){
-            (void)case_policy_log(0x08009b38u);
-            (void)case_policy_log(0x08009b60u);
+            (void)case_policy_log(CASE_STRING_ADDR(08009b38));
+            (void)case_policy_log(CASE_STRING_ADDR(08009b60));
         }
         return;
     }

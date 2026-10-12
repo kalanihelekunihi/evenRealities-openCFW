@@ -1,0 +1,518 @@
+
+/stock/binh_b_stage2.bin:     file format binary
+
+
+Disassembly of section .data:
+
+100100bc <.data+0xd0bc>:
+100100bc:	push      	r4-r10, r15
+100100be:	subi      	r14, r14, 4
+100100c0:	fsts      	fr8, (r14, 0x0)
+100100c4:	subi      	r14, r14, 4
+100100c6:	fmfvrl      	r4, fr1
+100100ca:	zext      	r5, r4, 30, 0
+100100ce:	fmfvrl      	r6, fr0
+100100d2:	fmfvrl      	r8, fr1
+100100d6:	bez      	r5, 0x10010104	// 0x10010104
+100100da:	zext      	r7, r6, 30, 0
+100100de:	movih      	r3, 32640
+100100e2:	cmplt      	r3, r7
+100100e4:	fmfvrl      	r9, fr0
+100100e8:	bf      	0x100100f8	// 0x100100f8
+100100ea:	lrw      	r0, 0x100138f0	// 0x10010568
+100100ee:	bsr      	0x10011298	// 0x10011298
+100100f2:	fmfvrl      	r13, fr0
+100100f6:	br      	0x10010108	// 0x10010108
+100100f8:	cmplt      	r3, r5
+100100fa:	bf      	0x10010116	// 0x10010116
+100100fc:	movih      	r13, 16256
+10010100:	cmpne      	r7, r13
+10010102:	bt      	0x100100ea	// 0x100100ea
+10010104:	movih      	r13, 16256
+10010108:	fmtvrl      	fr0, r13
+1001010c:	addi      	r14, r14, 4
+1001010e:	flds      	fr8, (r14, 0x0)
+10010112:	addi      	r14, r14, 4
+10010114:	pop      	r4-r10, r15
+10010116:	blz      	r6, 0x100101d4	// 0x100101d4
+1001011a:	movi      	r10, 0
+1001011e:	movih      	r1, 32640
+10010122:	cmpne      	r5, r1
+10010124:	bf      	0x100101c0	// 0x100101c0
+10010126:	movih      	r3, 16256
+1001012a:	cmpne      	r5, r3
+1001012c:	bf      	0x10010200	// 0x10010200
+1001012e:	movih      	r2, 16384
+10010132:	cmpne      	r4, r2
+10010134:	bf      	0x10010236	// 0x10010236
+10010136:	movih      	r0, 16128
+1001013a:	cmpne      	r4, r0
+1001013c:	fmtvrl      	fr0, r6
+10010140:	bf      	0x10010188	// 0x10010188
+10010142:	bsr      	0x100112c4	// 0x100112c4
+10010146:	movih      	r12, 32640
+1001014a:	cmpne      	r7, r12
+1001014c:	fmfvrl      	r13, fr0
+10010150:	bf      	0x10010208	// 0x10010208
+10010152:	bez      	r7, 0x10010208	// 0x10010208
+10010156:	movih      	r3, 16256
+1001015a:	cmpne      	r7, r3
+1001015c:	bf      	0x10010208	// 0x10010208
+1001015e:	lsri      	r2, r6, 31
+10010160:	subi      	r2, 1
+10010162:	or      	r0, r10, r2
+10010166:	bez      	r0, 0x1001026e	// 0x1001026e
+1001016a:	movih      	r12, 19712
+1001016e:	cmplt      	r12, r5
+10010170:	bf      	0x10010280	// 0x10010280
+10010172:	movih      	r3, 16256
+10010176:	subi      	r3, 9
+10010178:	cmplt      	r3, r7
+1001017a:	bt      	0x100105d4	// 0x100105d4
+1001017e:	blz      	r8, 0x100105e4	// 0x100105e4
+10010182:	movi      	r13, 0
+10010186:	br      	0x10010108	// 0x10010108
+10010188:	bhsz      	r9, 0x10010244	// 0x10010244
+1001018c:	bsr      	0x100112c4	// 0x100112c4
+10010190:	movih      	r1, 32640
+10010194:	cmpne      	r7, r1
+10010196:	fmfvrl      	r13, fr0
+1001019a:	bf      	0x100101a0	// 0x100101a0
+1001019c:	bnez      	r7, 0x10010156	// 0x10010156
+100101a0:	movih      	r4, 49280
+100101a4:	addu      	r1, r7, r4
+100101a6:	or      	r1, r10
+100101a8:	bez      	r1, 0x1001025c	// 0x1001025c
+100101ac:	cmpnei      	r10, 1
+100101b0:	bt      	0x10010108	// 0x10010108
+100101b2:	fmtvrl      	fr0, r13
+100101b6:	fnegs      	fr4, fr0
+100101ba:	fmfvrl      	r13, fr4
+100101be:	br      	0x10010108	// 0x10010108
+100101c0:	movih      	r12, 16256
+100101c4:	cmpne      	r7, r12
+100101c6:	bf      	0x10010104	// 0x10010104
+100101c8:	cmplt      	r12, r7
+100101ca:	bf      	0x10010224	// 0x10010224
+100101cc:	blz      	r8, 0x10010182	// 0x10010182
+100101d0:	mov      	r13, r4
+100101d2:	br      	0x10010108	// 0x10010108
+100101d4:	movih      	r0, 19328
+100101d8:	subi      	r0, 1
+100101da:	cmplt      	r0, r5
+100101dc:	bt      	0x1001021e	// 0x1001021e
+100101de:	movih      	r1, 16256
+100101e2:	subi      	r1, 1
+100101e4:	cmplt      	r1, r5
+100101e6:	bf      	0x100101fa	// 0x100101fa
+100101e8:	asri      	r3, r5, 23
+100101ea:	movi      	r2, 150
+100101ec:	subu      	r0, r2, r3
+100101ee:	asr      	r10, r5, r0
+100101f2:	lsl      	r12, r10, r0
+100101f6:	cmpne      	r5, r12
+100101f8:	bf      	0x100105b8	// 0x100105b8
+100101fa:	movi      	r10, 0
+100101fe:	br      	0x10010126	// 0x10010126
+10010200:	blz      	r8, 0x1001024e	// 0x1001024e
+10010204:	mov      	r13, r6
+10010206:	br      	0x10010108	// 0x10010108
+10010208:	bhsz      	r8, 0x10010218	// 0x10010218
+1001020c:	fmtvrl      	fr8, r13
+10010210:	frecips      	fr6, fr8
+10010214:	fmfvrl      	r13, fr6
+10010218:	bhsz      	r9, 0x10010108	// 0x10010108
+1001021c:	br      	0x100101a0	// 0x100101a0
+1001021e:	movi      	r10, 2
+10010222:	br      	0x1001011e	// 0x1001011e
+10010224:	bhsz      	r8, 0x10010182	// 0x10010182
+10010228:	fmtvrl      	fr0, r4
+1001022c:	fnegs      	fr4, fr0
+10010230:	fmfvrl      	r13, fr4
+10010234:	br      	0x10010108	// 0x10010108
+10010236:	fmtvrl      	fr2, r6
+1001023a:	fmuls      	fr3, fr2, fr2
+1001023e:	fmfvrl      	r13, fr3
+10010242:	br      	0x10010108	// 0x10010108
+10010244:	bsr      	0x10010bcc	// 0x10010bcc
+10010248:	fmfvrl      	r13, fr0
+1001024c:	br      	0x10010108	// 0x10010108
+1001024e:	fmtvrl      	fr8, r6
+10010252:	frecips      	fr6, fr8
+10010256:	fmfvrl      	r13, fr6
+1001025a:	br      	0x10010108	// 0x10010108
+1001025c:	fmtvrl      	fr5, r13
+10010260:	fsubs      	fr1, fr5, fr5
+10010264:	fdivs      	fr7, fr1, fr1
+10010268:	fmfvrl      	r13, fr7
+1001026c:	br      	0x10010108	// 0x10010108
+1001026e:	fmtvrl      	fr7, r6
+10010272:	fsubs      	fr2, fr7, fr7
+10010276:	fdivs      	fr3, fr2, fr2
+1001027a:	fmfvrl      	r13, fr3
+1001027e:	br      	0x10010108	// 0x10010108
+10010280:	bmaski      	r1, 23
+10010284:	cmplt      	r1, r7
+10010286:	bt      	0x100105d0	// 0x100105d0
+10010288:	movih      	r7, 19328
+1001028c:	fmtvrl      	fr0, r7
+10010290:	fmtvrl      	fr1, r13
+10010294:	fmuls      	fr2, fr1, fr0
+10010298:	movi      	r0, 0
+1001029a:	fmfvrl      	r7, fr2
+1001029e:	subi      	r0, 24
+100102a0:	asri      	r3, r7, 23
+100102a2:	subi      	r3, 127
+100102a4:	addu      	r3, r0
+100102a6:	zext      	r7, r7, 22, 0
+100102aa:	lrw      	r0, 0x1cc471	// 0x1001056c
+100102ac:	movih      	r13, 16256
+100102b0:	cmplt      	r0, r7
+100102b2:	or      	r1, r7, r13
+100102b6:	mov      	r12, r3
+100102b8:	st.w      	r1, (r14, 0x0)
+100102ba:	bf      	0x100102d8	// 0x100102d8
+100102bc:	lrw      	r3, 0x5db3d6	// 0x10010570
+100102be:	cmplt      	r3, r7
+100102c0:	bf      	0x1001071a	// 0x1001071a
+100102c4:	mov      	r1, r12
+100102c6:	ld.w      	r13, (r14, 0x0)
+100102ca:	movih      	r0, 65408
+100102ce:	addi      	r1, 1
+100102d0:	addu      	r13, r0
+100102d2:	mov      	r12, r1
+100102d4:	st.w      	r13, (r14, 0x0)
+100102d8:	movi      	r3, 0
+100102da:	movih      	r1, 16256
+100102de:	fmtvrl      	fr3, r3
+100102e2:	fmtvrl      	fr4, r3
+100102e6:	movi      	r13, 0
+100102ea:	fmtvrl      	fr7, r1
+100102ee:	flds      	fr5, (r14, 0x0)
+100102f2:	fadds      	fr6, fr7, fr5
+100102f6:	frecips      	fr1, fr6
+100102fa:	fsubs      	fr8, fr5, fr7
+100102fe:	fmuls      	fr5, fr8, fr1
+10010302:	fmfvrl      	r3, fr5
+10010306:	movi      	r0, 4095
+1001030a:	nor      	r0, r0
+1001030c:	and      	r1, r3, r0
+10010310:	ld.w      	r3, (r14, 0x0)
+10010312:	fmtvrl      	fr6, r1
+10010316:	asri      	r1, r3, 1
+10010318:	movih      	r0, 4
+1001031c:	bseti      	r1, 29
+1001031e:	addu      	r1, r0
+10010320:	addu      	r1, r13
+10010322:	fmtvrl      	fr0, r1
+10010326:	fsubs      	fr2, fr0, fr7
+1001032a:	flds      	fr7, (r14, 0x0)
+1001032e:	fnmacs      	fr8, fr0, fr6
+10010332:	fsubs      	fr0, fr7, fr2
+10010336:	fnmacs      	fr8, fr0, fr6
+1001033a:	lrw      	r13, 0x3e6c3255	// 0x10010574
+1001033e:	lrw      	r3, 0x3e53f142	// 0x10010578
+10010340:	fmuls      	fr0, fr8, fr1
+10010344:	fmtvrl      	fr2, r3
+10010348:	fmuls      	fr8, fr5, fr5
+1001034c:	fmtvrl      	fr1, r13
+10010350:	lrw      	r1, 0x3e8ba305	// 0x1001057c
+10010352:	fmacs      	fr1, fr8, fr2
+10010356:	lrw      	r0, 0x3eaaaaab	// 0x10010580
+10010358:	fmtvrl      	fr2, r1
+1001035c:	fmacs      	fr2, fr1, fr8
+10010360:	fmtvrl      	fr7, r0
+10010364:	lrw      	r13, 0x3edb6db7	// 0x10010584
+10010368:	fmacs      	fr7, fr2, fr8
+1001036c:	fmtvrl      	fr1, r13
+10010370:	lrw      	r3, 0x3f19999a	// 0x10010588
+10010372:	fmacs      	fr1, fr7, fr8
+10010376:	fadds      	fr2, fr5, fr6
+1001037a:	fmtvrl      	fr7, r3
+1001037e:	fmacs      	fr7, fr1, fr8
+10010382:	movih      	r1, 16448
+10010386:	fmuls      	fr1, fr2, fr0
+1001038a:	fmuls      	fr8, fr8, fr8
+1001038e:	fmacs      	fr1, fr7, fr8
+10010392:	fmtvrl      	fr2, r1
+10010396:	fmuls      	fr8, fr6, fr6
+1001039a:	fadds      	fr7, fr8, fr2
+1001039e:	fadds      	fr7, fr7, fr1
+100103a2:	fsts      	fr7, (r14, 0x0)
+100103a6:	ld.w      	r0, (r14, 0x0)
+100103a8:	movi      	r13, 4095
+100103ac:	nor      	r13, r13
+100103ae:	and      	r3, r0, r13
+100103b2:	fmtvrl      	fr7, r3
+100103b6:	fsubs      	fr2, fr7, fr2
+100103ba:	fsubs      	fr8, fr2, fr8
+100103be:	fsubs      	fr1, fr1, fr8
+100103c2:	fmuls      	fr0, fr0, fr7
+100103c6:	fmuls      	fr6, fr7, fr6
+100103ca:	fmacs      	fr0, fr1, fr5
+100103ce:	fadds      	fr5, fr6, fr0
+100103d2:	fsts      	fr5, (r14, 0x0)
+100103d6:	ld.w      	r1, (r14, 0x0)
+100103d8:	and      	r0, r1, r13
+100103dc:	fmtvrl      	fr7, r0
+100103e0:	fsubs      	fr6, fr7, fr6
+100103e4:	lrw      	r3, 0x3f763800	// 0x1001058c
+100103e6:	lrw      	r1, 0x369dc3a0	// 0x10010590
+100103e8:	fsubs      	fr1, fr0, fr6
+100103ec:	fmtvrl      	fr2, r3
+100103f0:	fmtvrl      	fr0, r1
+100103f4:	lrw      	r0, 0x3f76384f	// 0x10010594
+100103f6:	fmuls      	fr8, fr2, fr7
+100103fa:	fmuls      	fr5, fr0, fr7
+100103fe:	fmtvrl      	fr7, r0
+10010402:	fmacs      	fr5, fr1, fr7
+10010406:	fadds      	fr6, fr5, fr4
+1001040a:	fadds      	fr1, fr8, fr6
+1001040e:	fmtvrl      	fr4, r12
+10010412:	fsitos      	fr2, fr4
+10010416:	fadds      	fr0, fr1, fr3
+1001041a:	fadds      	fr5, fr0, fr2
+1001041e:	fsts      	fr5, (r14, 0x0)
+10010422:	ld.w      	r12, (r14, 0x0)
+10010426:	and      	r13, r12
+10010428:	st.w      	r13, (r14, 0x0)
+1001042c:	flds      	fr7, (r14, 0x0)
+10010430:	fsubs      	fr2, fr7, fr2
+10010434:	fsubs      	fr3, fr2, fr3
+10010438:	fsubs      	fr8, fr3, fr8
+1001043c:	fsubs      	fr6, fr6, fr8
+10010440:	subi      	r10, r10, 1
+10010444:	or      	r2, r10
+10010446:	bez      	r2, 0x100105c6	// 0x100105c6
+1001044a:	movih      	r2, 16256
+1001044e:	fmtvrl      	fr8, r2
+10010452:	movi      	r12, 4095
+10010456:	nor      	r12, r12
+10010458:	and      	r13, r4, r12
+1001045c:	fmtvrl      	fr3, r4
+10010460:	fmtvrl      	fr1, r13
+10010464:	fsubs      	fr5, fr3, fr1
+10010468:	fmuls      	fr6, fr6, fr3
+1001046c:	fmacs      	fr6, fr5, fr7
+10010470:	fmuls      	fr7, fr7, fr1
+10010474:	fadds      	fr2, fr6, fr7
+10010478:	fsts      	fr2, (r14, 0x0)
+1001047c:	ld.w      	r4, (r14, 0x0)
+1001047e:	mov      	r12, r4
+10010480:	zext      	r0, r4, 30, 0
+10010484:	blsz      	r4, 0x1001066a	// 0x1001066a
+10010488:	movih      	r13, 17152
+1001048c:	cmplt      	r13, r0
+1001048e:	bt      	0x1001060e	// 0x1001060e
+10010490:	cmpne      	r0, r13
+10010492:	bf      	0x100105f6	// 0x100105f6
+10010494:	movih      	r3, 16128
+10010498:	cmplt      	r3, r0
+1001049a:	bt      	0x10010624	// 0x10010624
+1001049c:	movi      	r3, 0
+1001049e:	mov      	r0, r3
+100104a0:	movi      	r12, 4095
+100104a4:	nor      	r12, r12
+100104a6:	and      	r13, r4, r12
+100104aa:	fmtvrl      	fr2, r13
+100104ae:	lrw      	r1, 0x3f317200	// 0x10010598
+100104b0:	lrw      	r2, 0x35bfbe8c	// 0x1001059c
+100104b2:	fmtvrl      	fr0, r1
+100104b6:	fsubs      	fr7, fr2, fr7
+100104ba:	fmtvrl      	fr1, r2
+100104be:	lrw      	r4, 0x3f317218	// 0x100105a0
+100104c0:	fmuls      	fr4, fr0, fr2
+100104c4:	fsubs      	fr6, fr6, fr7
+100104c8:	fmuls      	fr0, fr1, fr2
+100104cc:	fmtvrl      	fr3, r4
+100104d0:	fmacs      	fr0, fr6, fr3
+100104d4:	fadds      	fr2, fr4, fr0
+100104d8:	fsubs      	fr4, fr2, fr4
+100104dc:	lrw      	r12, 0x35ddea0e	// 0x100105a4
+100104e0:	lrw      	r13, 0x3331bb4c	// 0x100105a8
+100104e4:	fmuls      	fr6, fr2, fr2
+100104e8:	fsubs      	fr7, fr0, fr4
+100104ec:	fmtvrl      	fr1, r12
+100104f0:	fmtvrl      	fr0, r13
+100104f4:	lrw      	r1, 0x388ab355	// 0x100105ac
+100104f6:	fmscs      	fr1, fr6, fr0
+100104fa:	fmtvrl      	fr3, r1
+100104fe:	lrw      	r2, 0x3b360b61	// 0x100105b0
+10010500:	fmacs      	fr3, fr1, fr6
+10010504:	fmtvrl      	fr5, r2
+10010508:	lrw      	r4, 0x3e2aaaab	// 0x100105b4
+1001050a:	fmscs      	fr5, fr3, fr6
+1001050e:	fmtvrl      	fr1, r4
+10010512:	fmacs      	fr1, fr5, fr6
+10010516:	fmovs      	fr3, fr2
+1001051a:	movih      	r12, 16384
+1001051e:	fnmacs      	fr3, fr1, fr6
+10010522:	fmtvrl      	fr4, r12
+10010526:	fmuls      	fr0, fr2, fr3
+1001052a:	fsubs      	fr5, fr3, fr4
+1001052e:	fdivs      	fr1, fr0, fr5
+10010532:	fmacs      	fr7, fr2, fr7
+10010536:	fsubs      	fr7, fr1, fr7
+1001053a:	movih      	r13, 16256
+1001053e:	fsubs      	fr2, fr7, fr2
+10010542:	fmtvrl      	fr3, r13
+10010546:	fsubs      	fr0, fr3, fr2
+1001054a:	fsts      	fr0, (r14, 0x0)
+1001054e:	ld.w      	r1, (r14, 0x0)
+10010550:	addu      	r3, r1
+10010552:	asri      	r2, r3, 23
+10010554:	blsz      	r2, 0x1001073c	// 0x1001073c
+10010558:	fmtvrl      	fr0, r3
+1001055c:	fmuls      	fr8, fr0, fr8
+10010560:	fmfvrl      	r13, fr8
+10010564:	br      	0x10010108	// 0x10010108
+10010568:	.long: 0x000038f0
+1001056a:	lrw      	r0, 0x1cc471	// 0x1001056c
+1001056c:	.long: 0xc471001c
+10010570:	st.w      	r6, (r3, 0x58)
+10010572:	lrw      	r2, 0xf4620200	// 0x100108f8
+10010574:	movi      	r2, 85
+10010576:	.long: 0x00003e6c
+10010578:	.long: 0xf1423e53
+1001057c:	st.b      	r0, (r3, 0x5)
+1001057e:	bclri      	r6, 11
+10010580:	st.h      	r5, (r2, 0x16)
+10010582:	bseti      	r6, 10
+10010584:	mov      	r6, r13
+10010586:	btsti      	r6, 27
+10010588:	ld.w      	r4, (r14, 0xe8)
+1001058a:	cmphsi      	r7, 26
+1001058c:	cmphsi      	r0, 1
+1001058e:	.long: 0x00003f76
+10010590:	.long: 0xc3a0369d
+10010594:	cmpnei      	r0, 15
+10010596:	.long: 0x00003f76
+10010598:	lsl      	r8, r0
+1001059a:	cmplti      	r7, 18
+1001059c:	st.w      	r4, (r14, 0x330)
+1001059e:	movi      	r5, 191
+100105a0:	lsl      	r8, r6
+100105a2:	cmplti      	r7, 18
+100105a4:	movi      	r14, 13789
+100105a8:	st.w      	r2, (r14, 0x1b0)
+100105aa:	movi      	r3, 49
+100105ac:	st.w      	r2, (r3, 0x54)
+100105ae:	bclri      	r0, 10
+100105b0:	bt      	0x10010472	// 0x10010472
+100105b2:	cmplti      	r3, 23
+100105b4:	st.h      	r5, (r2, 0x16)
+100105b6:	cmplti      	r6, 11
+100105b8:	andi      	r13, r10, 1
+100105bc:	movi      	r10, 2
+100105c0:	subu      	r10, r13
+100105c2:	br      	0x10010126	// 0x10010126
+100105c6:	movih      	r0, 49024
+100105ca:	fmtvrl      	fr8, r0
+100105ce:	br      	0x10010452	// 0x10010452
+100105d0:	movi      	r0, 0
+100105d2:	br      	0x100102a0	// 0x100102a0
+100105d4:	movi      	r1, 59376
+100105d8:	rotli      	r1, r1, 19
+100105dc:	cmplt      	r1, r7
+100105de:	bf      	0x1001069a	// 0x1001069a
+100105e0:	blsz      	r8, 0x10010182	// 0x10010182
+100105e4:	lrw      	r0, 0x7149f2ca	// 0x10010748
+100105e6:	fmtvrl      	fr5, r0
+100105ea:	fmuls      	fr1, fr5, fr5
+100105ee:	fmfvrl      	r13, fr1
+100105f2:	br      	0x10010108	// 0x10010108
+100105f6:	lrw      	r4, 0x3338aa3c	// 0x1001074c
+100105f8:	fmtvrl      	fr0, r4
+100105fc:	fadds      	fr4, fr6, fr7
+10010600:	fadds      	fr2, fr6, fr0
+10010604:	fsubs      	fr1, fr4, fr7
+10010608:	fcmplts      	fr1, fr2
+1001060c:	bf      	0x10010624	// 0x10010624
+1001060e:	lrw      	r3, 0x7149f2ca	// 0x10010748
+10010610:	fmtvrl      	fr6, r3
+10010614:	fmuls      	fr0, fr8, fr6
+10010618:	fmuls      	fr4, fr0, fr6
+1001061c:	fmfvrl      	r13, fr4
+10010620:	br      	0x10010108	// 0x10010108
+10010624:	asri      	r0, r0, 23
+10010626:	subi      	r0, 126
+10010628:	movih      	r1, 128
+1001062c:	asr      	r13, r1, r0
+10010630:	ld.w      	r2, (r14, 0x0)
+10010632:	addu      	r13, r2
+10010634:	zext      	r4, r13, 30, 23
+10010638:	subi      	r4, 127
+1001063a:	bmaski      	r3, 23
+1001063e:	asr      	r3, r4
+10010640:	andn      	r0, r13, r3
+10010644:	st.w      	r0, (r14, 0x0)
+10010646:	movi      	r1, 23
+10010648:	zext      	r0, r13, 22, 0
+1001064c:	bseti      	r0, 23
+1001064e:	subu      	r2, r1, r4
+10010650:	asr      	r0, r2
+10010652:	blz      	r12, 0x10010742	// 0x10010742
+10010656:	flds      	fr3, (r14, 0x0)
+1001065a:	fsubs      	fr7, fr7, fr3
+1001065e:	fadds      	fr5, fr6, fr7
+10010662:	fmfvrl      	r4, fr5
+10010666:	lsli      	r3, r0, 23
+10010668:	br      	0x100104a0	// 0x100104a0
+1001066a:	movih      	r1, 17174
+1001066e:	cmplt      	r1, r0
+10010670:	bt      	0x10010684	// 0x10010684
+10010672:	cmpne      	r0, r1
+10010674:	bt      	0x10010494	// 0x10010494
+10010676:	fadds      	fr4, fr6, fr7
+1001067a:	fsubs      	fr1, fr4, fr7
+1001067e:	fcmphss      	fr1, fr6
+10010682:	bf      	0x10010624	// 0x10010624
+10010684:	lrw      	r2, 0xda24260	// 0x10010750
+10010686:	fmtvrl      	fr3, r2
+1001068a:	fmuls      	fr8, fr8, fr3
+1001068e:	fmuls      	fr5, fr8, fr3
+10010692:	fmfvrl      	r13, fr5
+10010696:	br      	0x10010108	// 0x10010108
+1001069a:	movih      	r0, 16256
+1001069e:	fmtvrl      	fr1, r0
+100106a2:	fmtvrl      	fr0, r13
+100106a6:	movih      	r3, 16000
+100106aa:	lrw      	r13, 0x3eaaaaab	// 0x10010754
+100106ae:	fsubs      	fr5, fr0, fr1
+100106b2:	fmtvrl      	fr2, r13
+100106b6:	fmtvrl      	fr3, r3
+100106ba:	movih      	r1, 16128
+100106be:	fnmacs      	fr2, fr5, fr3
+100106c2:	fmtvrl      	fr8, r1
+100106c6:	fnmacs      	fr8, fr2, fr5
+100106ca:	fmuls      	fr6, fr5, fr5
+100106ce:	lrw      	r12, 0x3fb8aa00	// 0x10010758
+100106d2:	lrw      	r0, 0x3fb8aa3b	// 0x1001075c
+100106d4:	fmtvrl      	fr7, r12
+100106d8:	fmuls      	fr1, fr8, fr6
+100106dc:	fmtvrl      	fr0, r0
+100106e0:	lrw      	r12, 0x36eca570	// 0x10010760
+100106e4:	fmuls      	fr4, fr5, fr7
+100106e8:	fmuls      	fr8, fr1, fr0
+100106ec:	fmtvrl      	fr7, r12
+100106f0:	fmscs      	fr8, fr5, fr7
+100106f4:	fadds      	fr5, fr4, fr8
+100106f8:	fsts      	fr5, (r14, 0x0)
+100106fc:	ld.w      	r13, (r14, 0x0)
+10010700:	movi      	r3, 4095
+10010704:	nor      	r3, r3
+10010706:	and      	r1, r13, r3
+1001070a:	st.w      	r1, (r14, 0x0)
+1001070c:	flds      	fr7, (r14, 0x0)
+10010710:	fsubs      	fr4, fr7, fr4
+10010714:	fsubs      	fr6, fr8, fr4
+10010718:	br      	0x10010440	// 0x10010440
+1001071a:	movi      	r3, 64599
+1001071e:	rotli      	r3, r3, 14
+10010722:	lrw      	r1, 0x35d1cfdc	// 0x10010764
+10010724:	movih      	r0, 16320
+10010728:	fmtvrl      	fr3, r3
+1001072c:	fmtvrl      	fr4, r1
+10010730:	movih      	r13, 32
+10010734:	fmtvrl      	fr7, r0
+10010738:	br      	0x100102ee	// 0x100102ee

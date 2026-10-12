@@ -1,0 +1,12 @@
+  30cee4:	41c3 0080 5a9c      	mov_s	r1,0x805a9c
+  30ceea:	7fe0                	j_s.d	[blink]
+  30ceec:	a900                	stb_s	r0,[r1,0]
+  30ceee:	78e0                	nop_s
+  30cef0:	c2e6                	enter_s	[r13-r15,blink]
+  30cef2:	4728                	mov_s	r15,r1
+  30cef4:	0862 03a0           	bl.d	28768	;0x313f54
+  30cef8:	4508                	mov_s	r13,r0
+  30cefa:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  30cf00:	8000                	ld_s	r0,[r0,0]
+  30cf02:	72cd                	mov_s	r14,2
+  30cf04:	1022 0080           	ldb	r0,[r0,34]

@@ -1,0 +1,15 @@
+{
+  "native_range": "0x332be4..0x332c2e exclusive",
+  "source": "g2/analysis/c-source-completion-20261011/em9305/duration-332be4-register-shift.s",
+  "assembled_size": 72,
+  "native_size": 74,
+  "prefix_comparison": "First 56 bytes equal except three equivalent short ASL encodings at offsets 14,30,38",
+  "suffix_comparison": "assembled[62:] equals native[64:]",
+  "replacement": "Native ASLACC LIMM 226 replaced with MOV_S r0,226; ASLACC r0 after MPYDU consumes r0",
+  "basis": "Synopsys ARCv2 ISA Programmer Reference Manual ARC EM 5755-101, ASLACC and MPYWHL sections",
+  "configuration_semantics": "Retains DSP_ACCSHIFT limited/full clamping and DSP_CTRL.GE behavior through genuine ASLACC instruction",
+  "assembled_sha256": "2a794bef811db45cf4dee7acca056ac52e3074aee79f339af61349bc0755e76a",
+  "native_sha256": "adc85ef8412f7afcbd30140daeaa8f941e6c6a04002b455efc28c9485619acc9",
+  "hardware_execution_verified": false,
+  "raw_opcode_payload": false
+}

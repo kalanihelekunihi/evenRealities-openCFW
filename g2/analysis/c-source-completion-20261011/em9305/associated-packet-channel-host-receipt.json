@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "cases": 9472,
+  "scope": "bounded rejection-channel source model, not ARC execution",
+  "source_sha256": "8095d062131975ec28e0132f2c4e8a5509d500dc35e2b35bf9da9bf4570ef0c7",
+  "native_range": "3259fc..325a3c",
+  "coverage": [
+    "all byte previous channels",
+    "all37 single-bit selected masks",
+    "rejections/PRNG calls",
+    "storedrandom and selectedchannel",
+    "native low-word shift return"
+  ],
+  "unqualified": [
+    "empty mask intentionally loops",
+    "wider random domains",
+    "native ARC runtime"
+  ]
+}

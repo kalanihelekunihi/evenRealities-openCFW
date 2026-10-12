@@ -1,0 +1,263 @@
+  30329c:	41c3 0080 15e4      	mov_s	r1,0x8015e4
+  3032a2:	0525 17e0           	b.d	195876	;0x332fc4
+  3032a6:	da26                	mov_s	r2,0x26
+  3032a8:	41c3 0080 17fc      	mov_s	r1,0x8017fc
+  3032ae:	0519 17e0           	b.d	195864	;0x332fc4
+  3032b2:	da24                	mov_s	r2,0x24
+  3032b4:	41c3 0080 1820      	mov_s	r1,0x801820
+  3032ba:	050d 17e0           	b.d	195852	;0x332fc4
+  3032be:	da28                	mov_s	r2,0x28
+  3032c0:	41c3 0080 1848      	mov_s	r1,0x801848
+  3032c6:	0501 17e0           	b.d	195840	;0x332fc4
+  3032ca:	da1c                	mov_s	r2,0x1c
+  3032cc:	c2e2                	enter_s	[r13,blink]
+  3032ce:	081a 0640           	bl	51224	;0x30fae4
+  3032d2:	45cb 0031 43f4      	mov_s	r13,0x3143f4
+  3032d8:	710c                	mov_s	r0,1
+  3032da:	43c3 0031 4548      	mov_s	r3,0x314548
+  3032e0:	41c3 0031 4408      	mov_s	r1,0x314408
+  3032e6:	44c3 0031 4580      	mov_s	r4,0x314580
+  30bb30:	42c3 0080 5cac      	mov_s	r2,0x805cac
+  30bb36:	8240                	ld_s	r2,[r2,0]
+  30bb38:	ea03                	breq_s	r2,0,6	;0x30bb3e
+  30bb3a:	8a4c                	ldb_s	r2,[r2,0xc]
+  30bb3c:	f002                	b_s	4	;0x30bb40
+  30bb3e:	704c                	mov_s	r2,0
+  30bb40:	a840                	stb_s	r2,[r0,0]
+  30bb42:	40c3 0080 5b1c      	mov_s	r0,0x805b1c
+  30bb48:	9000                	ldh_s	r0,[r0,0]
+  30bb4a:	7fe0                	j_s.d	[blink]
+  30bb4c:	b100                	sth_s	r0,[r1,0]
+  30bb4e:	78e0                	nop_s
+  30bb50:	c2e2                	enter_s	[r13,blink]
+  30bb52:	09d6 0160           	bl.d	10708	;0x30e524
+  30bb56:	4508                	mov_s	r13,r0
+  30bb58:	7014                	cmp_s	r0,0
+  30bb5a:	d80c                	mov_s	r0,0xc
+  30bb5c:	f20b                	beq_s	22	;0x30bb72
+  30bb5e:	40c3 0080 5a9c      	mov_s	r0,0x805a9c
+  30bb64:	1000 00c0           	ldb.x	r0,[r0]
+  30bb68:	0eca 0220           	bl.d	18120	;0x310230
+  30bb6c:	702c                	mov_s	r1,0
+  30bb6e:	ad00                	stb_s	r0,[r13,0]
+  30bb70:	700c                	mov_s	r0,0
+  30bb72:	c6c2                	leave_s	[r13,blink,pcl]
+  30bb74:	41c3 0080 5b40      	mov_s	r1,0x805b40
+  30bb7a:	8141                	ld_s	r2,[r1,0x4]
+  30bb7c:	026d fc6f           	b.d	-30100	;0x3045e8
+  30bb80:	8120                	ld_s	r1,[r1,0]
+  30bb82:	78e0                	nop_s
+  30bb84:	1600 700c 0080 5cac 	ld	r12,[0x805cac]
+  30bb8c:	ec0b                	breq_s	r12,0,22	;0x30bba2
+  30bb8e:	1439 108c           	ldb	r12,[r12,57]
+  30bb92:	a880                	stb_s	r12,[r0,0]
+  30bb94:	1600 7000 0080 5cac 	ld	r0,[0x805cac]
+  30bb9c:	103a 008c           	ldb	r12,[r0,58]
+  30bba0:	f004                	b_s	8	;0x30bba8
+  30bba2:	708d                	mov_s	r12,0
+  30bba4:	1800 0003           	stb	0,[r0]
+  30bba8:	aa80                	stb_s	r12,[r2,0]
+  30bbaa:	40c3 0080 5b28      	mov_s	r0,0x805b28
+  30bbb0:	9041                	ldh_s	r2,[r0,0x2]
+  30bbb2:	b140                	sth_s	r2,[r1,0]
+  30bbb4:	9000                	ldh_s	r0,[r0,0]
+  30bbb6:	7fe0                	j_s.d	[blink]
+  30bbb8:	b300                	sth_s	r0,[r3,0]
+  30bbba:	78e0                	nop_s
+  30bbbc:	c2e6                	enter_s	[r13-r15,blink]
+  30bbbe:	4528                	mov_s	r13,r1
+  30bbc0:	0b96 0420           	bl.d	33684	;0x313f54
+  30bbc4:	4608                	mov_s	r14,r0
+  30bbc6:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  30bbcc:	8000                	ld_s	r0,[r0,0]
+  30bbce:	72ed                	mov_s	r15,2
+  30bbd0:	1022 0080           	ldb	r0,[r0,34]
+  30bbd4:	0e29 1025           	brhs.d.nt	r14,r0,40	;0x30bbfc
+  30bbd8:	40c1                	mov_s	r0,r14
+  30bbda:	0f46 fd8f           	bl	-18620	;0x30731c
+  30bbde:	e810                	breq_s	r0,0,32	;0x30bbfc
+  30bbe0:	0ade fdaf           	bl.d	-19748	;0x306ebc
+  30bbe4:	40c1                	mov_s	r0,r14
+  30bbe6:	ad24                	stb_s	r1,[r13,0x4]
+  30bbe8:	ad00                	stb_s	r0,[r13,0]
+  30bbea:	2841 0602           	lsr	r2,r0,0x18
+  30bbee:	2841 0401           	lsr	r1,r0,0x10
+  30bbf2:	b828                	lsr_s	r0,r0,0x8
+  30bbf4:	70ed                	mov_s	r15,0
+  30bbf6:	ad43                	stb_s	r2,[r13,0x3]
+  30bbf8:	ad22                	stb_s	r1,[r13,0x2]
+  30bbfa:	ad01                	stb_s	r0,[r13,0x1]
+  30bbfc:	0b72 0400           	bl	33648	;0x313f6c
+  30bc00:	40e1                	mov_s	r0,r15
+  30bc02:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  30bc04:	1600 700c 0080 5cac 	ld	r12,[0x805cac]
+  30bc0c:	ec0b                	breq_s	r12,0,22	;0x30bc22
+  30bc0e:	1434 108c           	ldb	r12,[r12,52]
+  30bc12:	a880                	stb_s	r12,[r0,0]
+  30bc14:	1600 7000 0080 5cac 	ld	r0,[0x805cac]
+  30bc1c:	1035 008c           	ldb	r12,[r0,53]
+  30bc20:	f004                	b_s	8	;0x30bc28
+  30bc22:	708d                	mov_s	r12,0
+  30bc24:	1800 0003           	stb	0,[r0]
+  30bc28:	aa80                	stb_s	r12,[r2,0]
+  30bc2a:	40c3 0080 5b24      	mov_s	r0,0x805b24
+  30bc30:	9041                	ldh_s	r2,[r0,0x2]
+  30bc32:	b140                	sth_s	r2,[r1,0]
+  30bc34:	9000                	ldh_s	r0,[r0,0]
+  30bc36:	7fe0                	j_s.d	[blink]
+  30bc38:	b300                	sth_s	r0,[r3,0]
+  30bc3a:	78e0                	nop_s
+  30bc3c:	0299 fd8f           	b	-19816	;0x306ed4
+  30bc40:	42c3 0080 5cac      	mov_s	r2,0x805cac
+  30bc46:	8240                	ld_s	r2,[r2,0]
+  30bc48:	ea04                	breq_s	r2,0,8	;0x30bc50
+  30bc4a:	1222 0082           	ldb	r2,[r2,34]
+  30bc4e:	f003                	b_s	6	;0x30bc52
+  30bc50:	704c                	mov_s	r2,0
+  30bc52:	a840                	stb_s	r2,[r0,0]
+  30bc54:	40c3 0080 5b1a      	mov_s	r0,0x805b1a
+  30bc5a:	9000                	ldh_s	r0,[r0,0]
+  30bc5c:	7fe0                	j_s.d	[blink]
+  30bc5e:	b100                	sth_s	r0,[r1,0]
+  30bc60:	c2ea                	enter_s	[r13-r17,blink]
+  30bc62:	42c3 0000 09c4      	mov_s	r2,0x9c4
+  30bc68:	43c3 0606 0000      	mov_s	r3,0x6060000
+  30bc6e:	702c                	mov_s	r1,0
+  30bc70:	45cb ba04 0032      	mov_s	r13,0xba040032
+  30bc76:	44c3 0000 c2d8      	mov_s	r4,0xc2d8
+  30bc7c:	742e                	mov_s	r17,4
+  30bc7e:	268a 3104           	mov	r30,260
+  30bc82:	238a 1302           	mov	r11,140
+  30bd94:	1800 00c3           	stb	3,[r0]
+  30bd98:	40c3 0080 5b20      	mov_s	r0,0x805b20
+  30bd9e:	9000                	ldh_s	r0,[r0,0]
+  30bda0:	7fe0                	j_s.d	[blink]
+  30bda2:	b100                	sth_s	r0,[r1,0]
+  30bda4:	1800 00c3           	stb	3,[r0]
+  30bda8:	40c3 0080 5b1e      	mov_s	r0,0x805b1e
+  30bdae:	9000                	ldh_s	r0,[r0,0]
+  30bdb0:	7fe0                	j_s.d	[blink]
+  30bdb2:	b100                	sth_s	r0,[r1,0]
+  30bdb4:	41c3 0080 5a94      	mov_s	r1,0x805a94
+  30bdba:	8141                	ld_s	r2,[r1,0x4]
+  30bdbc:	03a5 03e0           	b.d	31652	;0x313960
+  30bdc0:	8120                	ld_s	r1,[r1,0]
+  30bdc2:	78e0                	nop_s
+  30bdc4:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  30bdca:	8000                	ld_s	r0,[r0,0]
+  30bdcc:	7fe0                	j_s.d	[blink]
+  30bdce:	9016                	ldh_s	r0,[r0,0x2c]
+  30bdd0:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  30bdd6:	8000                	ld_s	r0,[r0,0]
+  30bdd8:	7fe0                	j_s.d	[blink]
+  30bdda:	102a 0080           	ldb	r0,[r0,42]
+  30bdde:	78e0                	nop_s
+  30bde0:	c2e6                	enter_s	[r13-r15,blink]
+  30bde2:	4728                	mov_s	r15,r1
+  30bde4:	0972 0420           	bl.d	33136	;0x313f54
+  30bde8:	4608                	mov_s	r14,r0
+  30bdea:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  30bdf0:	8000                	ld_s	r0,[r0,0]
+  30bdf2:	72ad                	mov_s	r13,2
+  30bdf4:	1022 0080           	ldb	r0,[r0,34]
+  30bdf8:	0e2d 1025           	brhs.d.nt	r14,r0,44	;0x30be24
+  30bdfc:	40c1                	mov_s	r0,r14
+  30bdfe:	0d22 fd8f           	bl	-19168	;0x30731c
+  30be02:	e812                	breq_s	r0,0,36	;0x30be24
+  30be04:	40c3 0080 5a96      	mov_s	r0,0x805a96
+  30be0a:	8800                	ldb_s	r0,[r0,0]
+  30be0c:	0819 003e           	bbit0.d.t	r0,0,24	;0x30be24
+  30be10:	dd0c                	mov_s	r13,0xc
+  30be12:	09ce fdaf           	bl.d	-20020	;0x306fdc
+  30be16:	40c1                	mov_s	r0,r14
+  30be18:	e886                	brne_s	r0,0,12	;0x30be24
+  30be1a:	40c1                	mov_s	r0,r14
+  30be1c:	092a fdaf           	bl.d	-20184	;0x306f44
+  30be20:	41e1                	mov_s	r1,r15
+  30be22:	70ad                	mov_s	r13,0
+  30be24:	094a 0400           	bl	33096	;0x313f6c
+  30be28:	40a1                	mov_s	r0,r13
+  30be2a:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  30be2c:	1800 0183           	stb	6,[r0]
+  30be30:	40c3 0080 5b22      	mov_s	r0,0x805b22
+  30be36:	9000                	ldh_s	r0,[r0,0]
+  30be38:	7fe0                	j_s.d	[blink]
+  30be3a:	b100                	sth_s	r0,[r1,0]
+  30be3c:	e904                	breq_s	r1,0,8	;0x30be44
+  30be3e:	0135 fdaf           	b.d	-20172	;0x306f70
+  30be42:	780f                	extb_s	r0,r0
+  30be44:	0149 fd8f           	b	-20152	;0x306f8c
+  30e0d4:	40c3 0080 58d8      	mov_s	r0,0x8058d8
+  30e0da:	7fe0                	j_s.d	[blink]
+  30e0dc:	9000                	ldh_s	r0,[r0,0]
+  30e0de:	78e0                	nop_s
+  30e0e0:	02bd fe0f           	b	-15684	;0x30a39c
+  30e0e4:	001d fe0f           	b	-16356	;0x30a100
+  30e0e8:	c0f1                	push_s	blink
+  30e0ea:	40c3 0080 58dc      	mov_s	r0,0x8058dc
+  30e0f0:	702c                	mov_s	r1,0
+  30e0f2:	0f2e 1260           	bl.d	151340	;0x33301c
+  30e0f6:	228a 0506           	mov	r2,404
+  30e0fa:	41c3 0080 5210      	mov_s	r1,0x805210
+  3101f0:	7fe0                	j_s.d	[blink]
+  3101f2:	700c                	mov_s	r0,0
+  3101f4:	41c3 0080 5ec8      	mov_s	r1,0x805ec8
+  3101fa:	7fe0                	j_s.d	[blink]
+  3101fc:	a100                	st_s	r0,[r1,0]
+  3101fe:	78e0                	nop_s
+  310200:	c2e2                	enter_s	[r13,blink]
+  310202:	4508                	mov_s	r13,r0
+  310204:	0ffe 00a0           	bl.d	6140	;0x311a00
+  310208:	710c                	mov_s	r0,1
+  31020a:	41c3 0080 12b8      	mov_s	r1,0x8012b8
+  310210:	1100 00c1           	ldb.x	r1,[r1]
+  310214:	2109 0000           	min	r0,r1,r0
+  310218:	0817 0342           	brlt.nt	r0,r13,22	;0x31022e
+  31021c:	40c3 0080 12b9      	mov_s	r0,0x8012b9
+  310222:	1000 00c1           	ldb.x	r1,[r0]
+  310226:	40a1                	mov_s	r0,r13
+  310228:	71b1                	cmp_s	r1,r13
+  31022a:	20ca 0049           	mov.gt	r0,r1
+  31022e:	c6c2                	leave_s	[r13,blink,pcl]
+  310230:	c2e2                	enter_s	[r13,blink]
+  310232:	4508                	mov_s	r13,r0
+  310234:	0fce 00a0           	bl.d	6092	;0x311a00
+  310238:	710c                	mov_s	r0,1
+  31023a:	41c3 0080 12b8      	mov_s	r1,0x8012b8
+  310240:	1100 00c1           	ldb.x	r1,[r1]
+  310244:	2109 0000           	min	r0,r1,r0
+  310248:	0817 0342           	brlt.nt	r0,r13,22	;0x31025e
+  31024c:	40c3 0080 12b9      	mov_s	r0,0x8012b9
+  310252:	1000 00c1           	ldb.x	r1,[r0]
+  310358:	7fe0                	j_s.d	[blink]
+  31035a:	710c                	mov_s	r0,1
+  31035c:	7fe0                	j_s.d	[blink]
+  31035e:	710c                	mov_s	r0,1
+  310360:	40c3 0080 5e7c      	mov_s	r0,0x805e7c
+  310366:	885d                	ldb_s	r2,[r0,0x1d]
+  310368:	8080                	ld_s	r12,[r0,0]
+  31036a:	710c                	mov_s	r0,1
+  31071c:	41c3 0080 1318      	mov_s	r1,0x801318
+  310722:	7fe0                	j_s.d	[blink]
+  310724:	a900                	stb_s	r0,[r1,0]
+  310726:	78e0                	nop_s
+  310728:	02c1 ffef           	b.d	-1344	;0x3101e8
+  31072c:	d810                	mov_s	r0,0x10
+  31072e:	78e0                	nop_s
+  310730:	c2e4                	enter_s	[r13-r14,blink]
+  310732:	7704                	add_s	r0,r0,-1
+  310734:	7a0f                	extb_s	r2,r0
+  310736:	45cb 0080 5ed8      	mov_s	r13,0x805ed8
+  31073c:	080d 00b5           	brhs.d.nt	r0,0x2,12	;0x310748
+  310740:	227c 008e           	setlo	r14,r2,0x2
+  310744:	6d04                	add_s	r0,r13,0x4
+  310746:	f003                	b_s	6	;0x31074a
+  313760:	40c3 0080 5f1c      	mov_s	r0,0x805f1c
+  313766:	7fe0                	j_s.d	[blink]
+  313768:	9000                	ldh_s	r0,[r0,0]
+  31376a:	78e0                	nop_s
+  31376c:	710c                	mov_s	r0,1
+  31376e:	1e00 7002 00f0 0458 	stb	r0,[0xf00458]
+  313fa4:	00e1 f78e           	b	-2166560	;0x103084
+  313fa8:	c2e2                	enter_s	[r13,blink]
+  313faa:	0942 f78e           	bl	-2166464	;0x1030e8

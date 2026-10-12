@@ -17,3 +17,6 @@ void audio_ble_wsf_trace(const char *format,...) {
         audio_ble_wsf_assert("D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\cordio\\wsf\\sources\\port\\freertos\\wsf_trace.c",0x89u);
     (void)g2_log_transport_queue_failure("\n");
 }
+/* HCI/L2CAP users name this same native 0x52a63c entry. */
+void audio_ble_hci_wsf_trace(const char *,...)
+    __attribute__((alias("audio_ble_wsf_trace")));

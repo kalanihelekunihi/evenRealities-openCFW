@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08001c1c side transport request/reply state update.
  * The eight packet seed bytes at 0x1d04 remain product-data source input.
@@ -30,7 +31,7 @@ void case_boot_transport_action(uint32_t left,uint32_t right)
         }else{
             *(volatile uint32_t *)(void *)(state+0x3cu)=0u;
             (*(volatile uint32_t *)(void *)(state+0x40u))++;
-            if(*quiet==0u){(void)case_policy_log(0x08001d14u);(void)case_policy_log(0x08001d3cu);}
+            if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08001d14));(void)case_policy_log(CASE_STRING_ADDR(08001d3c));}
         }
     }
     if(right!=0u && state[17u]!=0u){
@@ -45,7 +46,7 @@ void case_boot_transport_action(uint32_t left,uint32_t right)
         }else{
             *(volatile uint32_t *)(void *)(state+0x58u)=0u;
             (*(volatile uint32_t *)(void *)(state+0x5cu))++;
-            if(*quiet==0u){(void)case_policy_log(0x08001d40u);(void)case_policy_log(0x08001d3cu);}
+            if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08001d40));(void)case_policy_log(CASE_STRING_ADDR(08001d3c));}
         }
     }
 }

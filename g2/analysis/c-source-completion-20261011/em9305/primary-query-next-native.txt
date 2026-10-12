@@ -1,0 +1,102 @@
+  30bf04:	c5e1                	push_s	r13
+  30bf06:	44cb 0080 5cac      	mov_s	r12,0x805cac
+  30bf0c:	8460                	ld_s	r3,[r12,0]
+  30bf0e:	93a0                	ldh_s	r13,[r3,0]
+  30bf10:	8b64                	ldb_s	r3,[r3,0x4]
+  30bf12:	b0a0                	sth_s	r13,[r0,0]
+  30bf14:	a960                	stb_s	r3,[r1,0]
+  30bf16:	8400                	ld_s	r0,[r12,0]
+  30bf18:	9001                	ldh_s	r0,[r0,0x2]
+  30bf1a:	b200                	sth_s	r0,[r2,0]
+  30bf1c:	c4c2                	leave_s	[r13,pcl]
+  30bf1e:	78e0                	nop_s
+  30bf20:	0731 fbcf           	b	-32976	;0x303e50
+  30c928:	0201 01c0           	b	14848	;0x310328
+  30c92c:	0141 01c0           	b	14656	;0x31026c
+  30c930:	040d fdcf           	b	-17396	;0x30853c
+  30c934:	043d fdcf           	b	-17348	;0x308570
+  30c938:	0455 fdcf           	b	-17324	;0x30858c
+  30c93c:	04d9 fdcf           	b	-17192	;0x308614
+  30c940:	01c9 fdcf           	b	-17976	;0x308308
+  30c944:	c2e6                	enter_s	[r13-r15,blink]
+  30c946:	42c3 0080 5cac      	mov_s	r2,0x805cac
+  30c94c:	8240                	ld_s	r2,[r2,0]
+  30c94e:	4628                	mov_s	r14,r1
+  30c950:	4508                	mov_s	r13,r0
+  30c952:	1222 0082           	ldb	r2,[r2,34]
+  30c956:	0841 00a5           	brhs.d.nt	r0,r2,64	;0x30c994
+  30c95a:	72ed                	mov_s	r15,2
+  30bb74:	41c3 0080 5b40      	mov_s	r1,0x805b40
+  30bb7a:	8141                	ld_s	r2,[r1,0x4]
+  30bb7c:	026d fc6f           	b.d	-30100	;0x3045e8
+  30bb80:	8120                	ld_s	r1,[r1,0]
+  30bb82:	78e0                	nop_s
+  30bb84:	1600 700c 0080 5cac 	ld	r12,[0x805cac]
+  30bb8c:	ec0b                	breq_s	r12,0,22	;0x30bba2
+  30bb8e:	1439 108c           	ldb	r12,[r12,57]
+  30bb92:	a880                	stb_s	r12,[r0,0]
+  30bb94:	1600 7000 0080 5cac 	ld	r0,[0x805cac]
+  30bb9c:	103a 008c           	ldb	r12,[r0,58]
+  30bba0:	f004                	b_s	8	;0x30bba8
+  30bba2:	708d                	mov_s	r12,0
+  30bba4:	1800 0003           	stb	0,[r0]
+  30bba8:	aa80                	stb_s	r12,[r2,0]
+  30bbaa:	40c3 0080 5b28      	mov_s	r0,0x805b28
+  30bdb4:	41c3 0080 5a94      	mov_s	r1,0x805a94
+  30bdba:	8141                	ld_s	r2,[r1,0x4]
+  30bdbc:	03a5 03e0           	b.d	31652	;0x313960
+  30bdc0:	8120                	ld_s	r1,[r1,0]
+  30bdc2:	78e0                	nop_s
+  30bdc4:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  30bdca:	8000                	ld_s	r0,[r0,0]
+  30bdcc:	7fe0                	j_s.d	[blink]
+  30bdce:	9016                	ldh_s	r0,[r0,0x2c]
+  30bdd0:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  30bdd6:	8000                	ld_s	r0,[r0,0]
+  30bdd8:	7fe0                	j_s.d	[blink]
+  30bdda:	102a 0080           	ldb	r0,[r0,42]
+  30bdde:	78e0                	nop_s
+  30bf20:	0731 fbcf           	b	-32976	;0x303e50
+  30bea4:	41c3 0080 5b48      	mov_s	r1,0x805b48
+  30beaa:	8141                	ld_s	r2,[r1,0x4]
+  30beac:	02b5 03e0           	b.d	31412	;0x313960
+  30beb0:	8120                	ld_s	r1,[r1,0]
+  30beb2:	78e0                	nop_s
+  313960:	c0e4                	enter_s	[r13-r14]
+  313962:	a844                	stb_s	r2,[r0,0x4]
+  313964:	a820                	stb_s	r1,[r0,0]
+  313966:	2a41 060c           	lsr	r12,r2,0x18
+  31396a:	2a41 040d           	lsr	r13,r2,0x10
+  31396e:	2a41 020e           	lsr	r14,r2,0x8
+  313972:	2941 0603           	lsr	r3,r1,0x18
+  313976:	2941 0402           	lsr	r2,r1,0x10
+  31397a:	b928                	lsr_s	r1,r1,0x8
+  31397c:	a887                	stb_s	r12,[r0,0x7]
+  31397e:	a8a6                	stb_s	r13,[r0,0x6]
+  313980:	a8c5                	stb_s	r14,[r0,0x5]
+  313982:	a863                	stb_s	r3,[r0,0x3]
+  313984:	a842                	stb_s	r2,[r0,0x2]
+  313986:	a821                	stb_s	r1,[r0,0x1]
+  313988:	c4c4                	leave_s	[r13-r14,pcl]
+  31398a:	78e0                	nop_s
+  31398c:	c0f1                	push_s	blink
+  31398e:	0b3a f88e           	bl	-2157768	;0x104cc4
+  313992:	1600 7001 00f0 3800 	ld	r1,[0xf03800]
+  31399a:	d818                	mov_s	r0,0x18
+  31399c:	b9e0                	btst_s	r1,0
+  31399e:	20ca 06a1           	mov.eq	r0,0x1a
+  3139a2:	2034 0f80 0080 fdd4 	ldh	r0,[r0,0x80fdd4]
+  3139aa:	081b 0030           	breq.d.nt	r0,0,26	;0x3139c2
+  3139ae:	7704                	add_s	r0,r0,-1
+  3139b0:	7810                	exth_s	r0,r0
+  3139b2:	7104                	add_s	r0,r0,1
+  3139b4:	240a 7000           	mov	lp_count,r0
+  3139b8:	20a8 0140           	lp	10	;0x3139c2
+  3139bc:	264a 7000           	nop
+  3139c0:	78e0                	nop_s
+  3139c2:	0ae6 f88e           	bl	-2157852	;0x104ca4
+  3139c6:	c0d1                	pop_s	blink
+  3139c8:	7ee0                	j_s	[blink]
+  3139ca:	78e0                	nop_s
+  3139cc:	c0f1                	push_s	blink
+  3139ce:	0b3a f88e           	bl	-2157768	;0x104d04

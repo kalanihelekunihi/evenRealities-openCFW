@@ -1,0 +1,45 @@
+  306ee8:	c2e2                	enter_s	[r13,blink]
+  306eea:	780f                	extb_s	r0,r0
+  306eec:	0b7a 09e0           	bl.d	80760	;0x31aa64
+  306ef0:	4528                	mov_s	r13,r1
+  306ef2:	4100                	mov_s	r1,r0
+  306ef4:	e809                	breq_s	r0,0,18	;0x306f06
+  306ef6:	113c 00c0           	ldb.x	r0,[r1,60]
+  306efa:	0b3a 04a0           	bl.d	37688	;0x310230
+  306efe:	702c                	mov_s	r1,0
+  306f00:	ad00                	stb_s	r0,[r13,0]
+  306f02:	700c                	mov_s	r0,0
+  306f04:	c6c2                	leave_s	[r13,blink,pcl]
+  306f06:	d842                	mov_s	r0,0x42
+  306f08:	c6c2                	leave_s	[r13,blink,pcl]
+  306f0a:	78e0                	nop_s
+  30bd8c:	da81                	mov_s	r2,0x81
+  30bd8e:	015d fdaf           	b.d	-20132	;0x306ee8
+  30bd92:	a940                	stb_s	r2,[r1,0]
+  30c768:	c2e2                	enter_s	[r13,blink]
+  30c76a:	0daa 00e0           	bl.d	7592	;0x30e510
+  30c76e:	4508                	mov_s	r13,r0
+  30c770:	7014                	cmp_s	r0,0
+  30c772:	d80c                	mov_s	r0,0xc
+  30c774:	f20a                	beq_s	20	;0x30c788
+  30c776:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  30c77c:	8000                	ld_s	r0,[r0,0]
+  30c77e:	9028                	ldh_s	r1,[r0,0x10]
+  30c780:	700c                	mov_s	r0,0
+  30c782:	2189 0c99           	min	r1,r1,1650
+  30c786:	b520                	sth_s	r1,[r13,0]
+  30c788:	c6c2                	leave_s	[r13,blink,pcl]
+  30c78a:	78e0                	nop_s
+  30c7b0:	c2e2                	enter_s	[r13,blink]
+  30c7b2:	0d62 00e0           	bl.d	7520	;0x30e510
+  30c7b6:	4508                	mov_s	r13,r0
+  30c7b8:	7014                	cmp_s	r0,0
+  30c7ba:	d80c                	mov_s	r0,0xc
+  30c7bc:	f208                	beq_s	16	;0x30c7cc
+  30c7be:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  30c7c4:	8000                	ld_s	r0,[r0,0]
+  30c7c6:	882c                	ldb_s	r1,[r0,0xc]
+  30c7c8:	700c                	mov_s	r0,0
+  30c7ca:	ad20                	stb_s	r1,[r13,0]
+  30c7cc:	c6c2                	leave_s	[r13,blink,pcl]
+  30c7ce:	78e0                	nop_s

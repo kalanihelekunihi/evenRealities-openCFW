@@ -3,9 +3,14 @@
  * The aligned path uses 16-, 4-, then 1-byte units; unaligned addresses
  * use bytes throughout. This is not a memmove contract.
  */
+#include <stddef.h>
 #include <stdint.h>
 
-void gx8002_resident_memcpy_25738(
+#if defined(__CSKYABIV2__)
+_Static_assert(sizeof(size_t) == sizeof(uint32_t), "C-SKY memcpy length ABI");
+#endif
+
+void *gx8002_resident_memcpy_25738(
     void *destination, const void *source, uint32_t bytes)
 {
     uintptr_t dst = (uintptr_t)destination;
@@ -39,4 +44,14 @@ void gx8002_resident_memcpy_25738(
         ++dst;
         --bytes;
     }
+    /* Native 0x1002573a copies r0 to r12 and never modifies r0. */
+    return destination;
 }
+
+/* The compiler emits standard memcpy for three by-value audio records.
+ * The native forward-copy body already has its destination-return ABI, so
+ * both entry identities share that single source implementation. */
+#if defined(__CSKYABIV2__)
+void *memcpy(void *destination, const void *source, size_t bytes)
+    __attribute__((alias("gx8002_resident_memcpy_25738")));
+#endif

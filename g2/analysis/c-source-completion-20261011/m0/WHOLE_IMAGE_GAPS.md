@@ -64,7 +64,7 @@ evidence that 304 functions lack C or that 122 have equivalent bodies.
 | `0x08007214` | Long application policy loop with event flags, stop mode and frame activity; decomp uses unrecovered incoming registers/stack | No attributable whole-entry C body found in selected or command-candidate sources. Requires register/stack ABI recovery before faithful reduction. |
 | `0x08002fc8` | Board/application initialization and version/status work | Separate startup graph now has a full control-flow C candidate with typed physical/log contracts. Initial state setup passes eight stock/source cases; self-check retry loop passes ten at sensor/delay cuts; one successful PMIC path matches through boost-set. PMIC failure, secondary/final paths, format data and full-entry effects remain unqualified. |
 | `0x08001e94` | `Z`, `0xa5`, `0xff` record scan and decode | Source-owned scan/CRC prefix now passes 15 no-header and `0x5a` bad-CRC early-return stock cases. Valid-frame command dispatch, diagnostics and payload effects remain unowned. |
-| `0x08005528` | Peripheral register/transfer state machine | No attributable whole-entry C body found. Hardware register semantics and callbacks are open. |
+| `0x08005528` | Peripheral register/transfer state machine | `transfer_control_candidate.c` now supplies the C body; `verify_case_transfer_control.py` covers bounded register/poll paths with clock-plan and tick lowers. Hardware timing and unexercised paths remain open. |
 
 The listed gaps are first-pass source attribution findings, not claims that
 these functions are all reachable from the current command handler.
@@ -448,6 +448,25 @@ ELF with zero undefined symbols using `build_case_absolute_experiment.py` and
 its text exceeds the official payload, and no stock-address or physical-device
 equivalence follows from the link. Typed CRT initializers reproduce all 420
 decoded initialized RAM bytes; this closes that source-data subcomponent only.
+
+Fresh `case_absolute_current_round.elf` and `case-absolute-layout-audit.json`
+measure one 65,196-byte load segment against the 55,752-byte official CASE
+payload, a **9,444-byte overflow**. Its entry `0x0800a493` differs from the
+native reset Thumb entry `0x08000145`. The `case_vformat` stock/source corpus
+has also been extended from 815 to **1,068 passing cases**, including signed
+and unsigned 64-bit extrema, j/z/t/L/h/hh modifiers, width and precision,
+and `%n` widths. These checks improve the bounded formatter evidence without
+establishing all invalid-pointer, callback, overflow or caller domains.
+
+Later CASE source-only layout work is recorded in `CASE_LAYOUT_SIZE_ROUND.md`.
+It places the reset entry at `0x08000145`, retains all 39 aligned native
+pointer leads, and moves 203 authenticated semantic strings into named C
+objects with relocatable references. Sixteen logger callsite bindings were
+corrected from native ADR/literal loads. The latest isolated optimized and
+garbage-collected C ELF has one `0x0f970` = 63,856-byte load segment, 8,104
+bytes beyond the official payload, with zero unresolved imports. This is a
+newer diagnostic candidate than the 65,196-byte graph above; its reachability,
+final product capacity, scatter and physical effects remain unqualified.
 
 The conservative fixed-pseudocode crosswalk currently recognizes 426 entries,
 of which 303 have an address lead in a source header and 123 do not. A header

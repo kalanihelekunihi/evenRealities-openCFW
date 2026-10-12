@@ -127,12 +127,15 @@ typedef uint32_t (*event_a_sequence_callback)(uint32_t, uint32_t,
 #define EVENT_A_CALLBACK_TABLE ((volatile event_a_sequence_callback *)(uintptr_t)0x20000158U)
 
 __attribute__((noinline, used))
-void event_a_temperature_transition_separate(uint32_t target_state,
+uint64_t event_a_temperature_transition_separate(uint32_t target_state,
                                              uint32_t current_state,
                                              uint32_t target_ton_state,
                                              uint32_t current_ton_state)
 {
-    uint8_t sequence = EVENT_A_TRANSITION_INVALID;
+    /* Native stack word starts with arg2 high 24 bits and selector 0x1a;
+     * the sequence lower mutates only its low byte. The epilogue returns
+     * this entire word in r0 and arg3 in r1. */
+    uint32_t selector_word = (target_ton_state & 0xffffff00U) | EVENT_A_TRANSITION_INVALID;
     uint32_t starting_state;
     uint32_t ending_state;
 
@@ -141,8 +144,8 @@ void event_a_temperature_transition_separate(uint32_t target_state,
              ++starting_state) {
             ending_state = starting_state + 1U;
             if (event_a_state_transition_sequence(ending_state, starting_state,
-                                                   &sequence) == 0U) {
-                (void)EVENT_A_CALLBACK_TABLE[sequence](
+                                                   (uint8_t *)&selector_word) == 0U) {
+                (void)EVENT_A_CALLBACK_TABLE[(uint8_t)selector_word](
                     target_state, current_state,
                     target_ton_state, current_ton_state);
             }
@@ -152,12 +155,13 @@ void event_a_temperature_transition_separate(uint32_t target_state,
              --starting_state) {
             ending_state = starting_state - 1U;
             if (event_a_state_transition_sequence(ending_state, starting_state,
-                                                   &sequence) == 0U) {
-                (void)EVENT_A_CALLBACK_TABLE[sequence](
+                                                   (uint8_t *)&selector_word) == 0U) {
+                (void)EVENT_A_CALLBACK_TABLE[(uint8_t)selector_word](
                     target_state, current_state,
                     target_ton_state, current_ton_state);
             }
         }
     }
+    return ((uint64_t)current_ton_state << 32) | selector_word;
 }
 

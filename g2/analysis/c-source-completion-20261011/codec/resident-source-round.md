@@ -1598,3 +1598,584 @@ and six genuine imports. XIP raw-label bindings are 286/362;
 23 labels remain in the literal/data tail and at most 53 are possible
 code labels. Hardware IRQ execution and full SRAM initialization/
 placement remain unqualified.
+
+Direct C-SKY disassembly of 0x10205fb4..0x10206073 and all eight stock
+table words at 0x1020aca4 close GPIO enable-trigger as a full C body.
+Modes 1, 2, 3, 4, and 8 set the pin bit in offsets 0x2c, 0x28,
+0x24, 0x14, and 0x18 respectively; modes 5, 6, and 7 only register
+the interrupt. Every valid pin records the callback triple and
+registers IRQ 1 with the relocated selected ISR symbol, including
+out-of-range trigger modes. Pins >=32 return -1 before writes.
+`codec-gpio-trigger-complete-round/receipt.json` is a coherent target
+PASS with the same 195 source files, SHA-256
+`6e8851aeb62594b4a4d92ec01c2ada7a6a690722cb29b66ec9559c390a98a8b3`,
+and six genuine imports. XIP raw-label bindings rise to 287/362;
+23 labels are in the data tail and at most 52 are possible code labels.
+GPIO IRQ timing and callback execution remain unqualified on native
+hardware.
+
+The complete native UART async teardown at 0x1020854c is selected C.
+It aborts transmit and receive for two existing channel slots, clears
+their active words, then zeros three distinct SRAM regions in stock
+order. Literal-pool words at 0x10208598/9c/a0 resolve the bases to
+0x2002e360 (0x1c0 bytes), 0x2002ecc4 (0x14 bytes), and 0x2002e050
+(0x2f8 bytes). These are runtime clear extents; they do not alone
+establish source-owned startup allocation or initial contents.
+`codec-uart-async-done-round/receipt.json` is a coherent target PASS
+with 196 distinct image-A inputs, SHA-256
+`f4f41d965ee80460f597dde81b4a295a0cdec4401aff49793351ff8d9de2de5f`,
+and six genuine imports. XIP raw-label bindings are 288/362;
+23 data-tail labels remain and at most 51 are possible code labels.
+
+Direct C-SKY disassembly closes the two notification service bodies
+0x1020979c and 0x102097c8. Both native literal pools resolve the shared
+state base 0x2002e8f0. VAD notify checks its +0x34 halfword, prints the
+exact stock `notify vad status\n` string at 0x1020b8f4, and calls the
+already selected event prepare/dispatch providers. Poll re-reads the
++0x20 timestamp after the selected clock provider and raises GPIO 2
+when the unsigned difference is at least 61, then zeros the timestamp.
+`codec-notification-service-round/receipt.json` is a coherent target
+PASS with 197 distinct image-A source inputs, SHA-256
+`643ea91b4ba478d91f7c9821275dac22ea07cc8765aa9d3e2a405987e60027eb`,
+and six genuine imports unchanged. XIP raw-label bindings rise to
+290/362, with 23 data-tail labels and at most 49 possible code labels.
+The runtime source/initial value of the shared state fields remains a
+whole-image data/layout obligation.
+
+The connected multiboot switch at native 0x10207a80 is now selected
+C. Direct C-SKY disassembly fixes its SRAM selector address
+0x20033ffc, sentinel 0xaabbccdd, exact stock log strings at
+0x1020b148/0x1020b162, 16-byte cache-clean range, and reboot order.
+It binds to already selected printf, resident cache clean, and reboot
+bodies. The selector's initial production value and placement are
+still product data/layout obligations, independent of this control
+flow. `codec-multiboot-source-round/receipt.json` is a coherent target
+PASS with 198 distinct image-A inputs, SHA-256
+`ed36d95b5d373cb000c5a486a413f87a830777fc4ce3963879ee19ca8a12a281`,
+and six genuine imports. XIP raw-label bindings are 291/362;
+23 data-tail labels and at most 48 possible code labels remain.
+
+The AOUT frame submission function at 0x102051a8 is now a selected
+full C body. Direct native instructions prove the eight-byte frame
+copy, signed frame-span division, ordered reads/writes at sample MMIO
+0xa0b80000, conditional playback start through two selected helpers,
+and zero-frame error return. Context byte +0x19 is a nonzero divisor
+precondition present in stock behavior; the source does not invent a
+fallback. `codec-aout-push-frame-round/receipt.json` is a coherent
+target PASS with 199 distinct image-A inputs, SHA-256
+`0e0b283dd59ccded14921f7346d1df3c88126c22f184abd4b83c3f01078ff267`,
+and six genuine imports. XIP raw-label bindings are 292/362;
+23 data-tail labels and at most 47 possible code labels remain.
+Hardware frame transfer and the width precondition remain runtime
+qualification obligations.
+
+The AOUT channel selector at 0x1020502c now owns its exact 12-byte
+stock lookup table at 0x1020a9a4 and three ordered register updates.
+`codec-aout-channel-table-round/receipt.json` passed coherent target
+compile/link with 200 distinct image-A sources, SHA-256
+`b3af314cf1d10d9caca53d8b6536c6916a91a0d4abdb844f536265ad4fffdf78`,
+and six genuine imports. Its XIP binding count was 293/362.
+
+The adjacent 0x1020a910 dB table is now 37 semantic `(register code,
+signed dB)` C records rather than an opaque payload. Encoding those
+records as little-endian halfword pairs reproduced all 148 original
+bytes exactly (SHA-256
+`d576318ca73483bedc9e54e13f8d0ebd8cd62fddf92083c5c1514e833a58db99`).
+Full set/get dB control flow at 0x10204f90/0x10204ff0 preserves
+clamping, scan, register bit replacement, original requested value,
+and the no-match fallthrough into the adjacent channel-table first
+record `(0,1)`. `codec-aout-db-table-round/receipt.json` is the later
+coherent target PASS: 201 distinct image-A sources, SHA-256
+`b8a0fb0516d1146a9731ad3e78a6389ca57638495e7920f7b6369e0c4848544b`,
+six imports. XIP bindings are 295/362; 23 data-tail labels and at
+most 44 possible code labels remain. Final ROM table placement and
+hardware behavior still need whole-image qualification.
+
+Native AOUT hardware initialization at 0x10204f18 is now a selected
+full C body. It enables clock gates 11/15, makes three ordered writes
+to control +0x20, applies the special mode-2 +0x04 branch, waits
+without a synthetic timeout for status bit 0x100000, acknowledges the
+native register value, and enables bit31 of the base register.
+`codec-aout-hw-init-round/receipt.json` is a coherent target PASS with
+202 distinct image-A inputs, SHA-256
+`e09e50efdb8bf43ba2b047b749e107dc7bdb81ad826fa1eb51f46f5d587f7ad5`,
+and six genuine imports. XIP raw-label bindings are 296/362;
+23 data-tail labels and at most 43 possible code labels remain.
+The register wait and clock behavior have not been qualified on hardware.
+
+The adjacent playback allocator 0x10205254 has a stock branch that
+sets its context pointer to zero and then writes fields at offsets
+0x14/0x18. This path requires an explicit native fault/precondition
+assessment before C selection; a fabricated successful fallback would
+change behavior. Its 0x10205374 child returns a proven fixed product
+config pointer 0x20026c1c, whose producer/layout remain open.
+
+The eleven public AOUT table dispatch bodies at 0x10205374 and
+0x1020537c..0x10205599 are now C in `resident_xip_aout_dispatch.c`.
+They retain the active table word at 0x2002734c, exact error string,
+stock slot offsets, zero-slot return, and unaltered argument registers.
+`codec-aout-dispatch-round/receipt.json` is a coherent target PASS with
+203 distinct image-A sources, SHA-256
+`527343dc726b9c7597ace53432904da11b6fca86db4006f5e79bd5be5d7c960b`,
+and six genuine imports. Runtime function-pointer calling and table
+placement are still unqualified.
+
+The full native playback allocator 0x10205254 is C in
+`resident_xip_aout_alloc_playback.c`. Direct C-SKY disassembly confirms
+the three-part context guard, 36-byte clear, byte active flag, selector
+call, ordered AOUT MMIO writes, IRQ13 registration, and return address.
+On guard failure stock sets r4 to zero and stores at absolute addresses
+0x14, 0x18, and 0x30 before the MMIO path. The C candidate retains
+these volatile numeric-address stores. Whether that path faults or writes
+to mapped hardware remains an unresolved CPU/memory-map runtime question;
+the source does not substitute a success return. The comparison is against
+the full 32-bit mode even though the context field is one byte. The first
+allocator build snapshot (`codec-aout-allocator-round/receipt.json`) is a
+coherent target PASS at 204 inputs, SHA-256
+`4ebedcb1bbd31958497031bb0eaa6a1f05d6a1370b802d374004c1843efac084`;
+it predates the full-width comparison correction. The corrected source
+is in the next build snapshot.
+
+Native stage2 SRAM 0x10026bc8..0x10026c1b is a 21-word AOUT operation
+table, copied or aliased to the 0x20026bc8 address used by XIP calls.
+`verify_aout_product_table.py` confirms all 21 original words and
+SHA-256 `b5466e260001986f04418e55cdc810ea9654f2f6b1c3ef24dbd95af7b3995f8a`.
+`resident_xip_aout_product_table.c` expresses each nonzero word as a
+typed relocation to an independently selected C provider; slot twelve
+is the exact zero. Its 84-byte C struct and section are source owned,
+while final SRAM placement and 0x1002/0x2002 alias or copy semantics
+remain open. The adjacent 52-byte context record and 88-byte config
+record are still product initialized-data obligations.
+
+The corrected combined `codec-aout-table-final-round/receipt.json` is
+a source-coherent target PASS with **205 distinct image-A inputs**,
+SHA-256 `5fa4a8ec146a26edb31c8736ab50861afa9798eac3b8b74790db5b0b9c8e5c5a`,
+and the same six genuine imports (`__fe_getround`,
+`__fe_raise_inexact`, compact IRQ entry, console port, ambient KWS task
+words, and UART channel storage). Target ELF inspection shows section
+`.gx8002.sram.aout_operations` has size 0x54 and alignment four,
+with exactly 20 `R_CKCORE_ADDR32` provider relocations at the stock
+nonzero word offsets. The zero slot at +0x30 has no relocation. XIP
+address bindings are **308/362**; 23 unbound labels are data-tail and
+at most **31** remaining labels may denote executable code (including
+the pinned CRC body tracked outside this component crosswalk). SRAM
+retained true-body coverage remains 123/124, with the compact IRQ ISA
+frontier open. This is C candidate compilation and relocation identity,
+not native runtime equality or a complete loaded image.
+
+The neighboring stock AOUT context at SRAM 0x10026b94..0x10026bc7
+is 52 bytes: one pointer to the exact XIP string `"0 route play"`,
+followed by 48 initialized zero bytes. Consumer accesses support typed
+fields for allocated flag, owner word, mode, mute/dB, frame range,
+callbacks, and config pointer. The 88-byte config record at
+0x10026c1c..0x10026c73 has eight nonzero initialized words, at offsets
+0x04, 0x1c, 0x34, 0x38, 0x40, 0x44, 0x4c, and 0x54; all others are
+zero. `resident_xip_aout_runtime_data.c` owns these as two typed C
+records and a route string. `verify_aout_context_config.py` independently
+checks the native ranges and exact initialized values. Its final XIP/SRAM
+placement and 0x1002/0x2002 alias remain open.
+
+Four additional complete application XIP bodies at 0x10208d98,
+0x10208dcc, 0x10208dec, and 0x10208e20 are C in
+`resident_xip_app_audio_gpio.c`. The audio range callback preserves
+unsigned wrap arithmetic and the two alternate frame ranges before
+forwarding to the selected AOUT push wrapper. GPIO suspend/resume and
+event callbacks preserve exact stock format strings, pin 6, trigger
+registration, timer start, and the 2000 state write. Runtime state
+0x2002e8c4 is a genuine separately initialized product contract. XIP
+bindings rise to 312/362; 23 remaining data-tail labels and at most 27
+possible code labels remain. Target build receipt is pending below.
+
+`codec-aout-context-app-gpio-round/receipt.json` is now a coherent
+target PASS with **207 distinct image-A inputs**, SHA-256
+`a1bf04026b9ff86fdb551bad4107137c22d7e3e8f7c05be213e909c0d77466b7`,
+and the same six genuine imports. Target ELF inspection confirms an
+88-byte AOUT config section whose raw bytes have exactly the stock
+SHA-256 `1d5c6201e8d1d2cc00d6fa541ac409a9b36e2ba9bee03073e35edf914a6c6a84`;
+the context section is 52 bytes with one `R_CKCORE_ADDR32` route-string
+relocation at offset zero, and the route section is 13 bytes. These
+prove source-owned initializer content and relocation shape, while
+final address placement and native execution remain unqualified.
+
+The remaining image-A SRAM compact IRQ entry at 0x10025574 is now
+resolved at source and byte level. The earlier `fr16-fr19` operand was
+a decoder interpretation error: the stock opcode pair
+`f4ee3400`/`f4ee3000` assembles as `fstms/fldms fr0-fr7` under the
+selected `ck804ef` target. With only that operand correction, the
+entire named-instruction IRQ assembly, including its literal pool,
+is **80/80 bytes exactly equal** to stock range
+0x10025574..0x100255c3 (SHA-256
+`4603c68912b68c0dc567ddcea48266e00421c600eec7ac5c0e8db8a55dfc9288`).
+`irq-compact-source-receipt.json` records the comparison. This supersedes
+the earlier architecture mismatch hypothesis; native runtime and final
+vector placement still require qualification. The selected graph build
+including this source is pending below.
+
+Two connected app setup bodies, 0x10208e4c and 0x102096fc, and the
+11-registration command builder 0x10209258 are now C candidates.
+The UART setup's source-owned four-word descriptor exactly matches
+stock XIP 0x1020b688..0x1020b697, SHA-256
+`f5cd8f6ebe63cf67229afeed7c2ce254291d7a23d98c97a68c2b38d9353d6f3c`.
+All 11 command names and IDs are native attributed; two 32-byte
+payload descriptors retain the product address 0x2002e8f0. The builder
+returns the last registration result as the native ABI does. The
+callback 0x10209430 remains an actual connected body import. XIP
+bindings rise to 315/362, 23 data-tail labels, at most 24 possible
+code labels; the coherent corrected build is pending below.
+
+`codec-irq-app-commands-corrected-round/receipt.json` now passes with
+**210 distinct image-A inputs**, source snapshot coherent at link,
+SHA-256 `d19ef01fd5e3d976996843281164a03e49b0b2d83eb0a0414e8c3de9c9e56a76`,
+and six genuine imports: the two floating-environment contracts,
+app command callback 0x10209430, console port, ambient KWS task words,
+and UART channel storage. Compiler-generated `memset` was eliminated
+by explicit calls to the selected 0x102099cc provider. The selected
+IRQ object's `.text` SHA-256 is the exact stock 80-byte hash above.
+All **124/124 identified true image-A SRAM bodies** now have selected
+C/ASM candidate source. This closes the retained SRAM body census,
+not the whole image's initialized data/scatter, runtime, or separate
+loaded-stage obligations.
+
+The native 0x10208e80 mic-buffer calculation and 0x1020913c I2S stop
+body are selected C. The first preserves the unsigned frame-span
+arithmetic, divisor preconditions, and address outputs; the second
+preserves the exact stop/log/padmux/free/exit/state-clear sequence.
+`codec-mic-buffer-i2s-stop-round/receipt.json` passes with **212 distinct
+image-A inputs**, coherent at link, SHA-256
+`e611838b225956cbd6d876225f4bcda673a86a284b23083afa004facf6112897`,
+and the same six genuine imports. XIP attribution is 317/362, with 23
+data-tail labels and at most 22 possible code labels. Runtime
+equivalence of these bodies is still unqualified.
+
+The complete native start-I2S body 0x10208ff0 is now selected C,
+including its active guard, old-handle cleanup, 7..10 padmux,
+clock/AOUT setup, three stack descriptors, exact stock log strings,
+and 0/-1 return. Direct ISA and literal review plus isolated CK804EF
+target syntax compilation passed. The coherent selected
+`codec-start-i2s-round/receipt.json` passes with **213 distinct image-A
+inputs**, SHA-256
+`de8d73f874c0c9c5b424dad01ab5236a9ac50c5457c54bec9a6f3f3a3cd8130c`,
+and the same six imports. Attribution was 318/362, 23 data-tail, at
+most 21 possible code labels at that snapshot.
+
+The adjacent native sample-event 0x10208f04 and I2S request-tick
+0x102091bc are now selected C candidates. The event source preserves
+the context status notification, 100/101 wake dispatch, and guarded
+91 first-frame path with both mic-buffer queries and exact range push.
+The tick source preserves request state, lock/start and stop/unlock
+branches, signed 10-count timeout, and exact logs. Both pass isolated
+CK804EF target syntax checks; the selected coherent receipt is pending.
+Attribution is **320/362 XIP**, 23 data-tail and at most **19 possible
+code labels**. Native runtime behavior remains unqualified.
+
+`codec-app-audio-event-tick-round/receipt.json` passes with **215
+distinct image-A inputs**, coherent at link, SHA-256
+`2356cd826ff56c71acb44a732225868561f327b1f00ba6c678bceea2b1509180`,
+and six unchanged imports. The next selected source round corrects two
+issues found during direct native review: I2S tick now declares its
+void stop callee correctly; audio channel field 0x102049b0 now takes
+an integer register index and accesses `0xa0a00000 + ((index+10)<<2)`.
+The former selected pointer interpretation would have been invalid
+for native caller index zero. The remaining operation preserves the
+native six-bit insertion at bits 10..15.
+
+The formerly imported app command callback 0x10209430 and stateful
+tokenizer 0x1020995c are now selected full C candidates. The callback
+preserves all eleven independent command branches, exact stock logs,
+version request byte setup, gain check, GPIO/padmux operations, and
+request descriptor writes; tokenization uses the native SRAM state
+cell 0x2002e934. Isolated CK804EF target syntax checks passed. The
+selected coherent receipt is pending. The XIP crosswalk is **322/362**,
+with 23 data-tail labels and at most **17 possible code labels**.
+Runtime, product data initialization, and final placement remain open.
+
+`codec-app-command-callback-native-round/receipt.json` passes with
+**217 distinct image-A inputs**, coherent at link, SHA-256
+`3f373ed1a9609e579329aa4472e915694cb51f6a08c2006c9e6de0e31dc7587b`.
+The app-command callback import is now closed. Five genuine imports
+remain: `__fe_getround`, `__fe_raise_inexact`, the console port cell,
+ambient KWS task words, and UART channel storage. This is link/source
+evidence, not native execution equivalence.
+
+Native review also invalidated the retained 0x10209c74 "UART DMA"
+catalogue label. Instruction 0x10209c70 falls directly through into
+0x10209c74, and the continuation branches back within the 0x10209aa4
+unsigned division algorithm. It is an interior code label, not an
+independent function. The crosswalk now records this separately.
+
+Two further native arithmetic bodies are selected C: 0x102098b4
+unsigned 64-by-32 quotient/remainder and 0x1020a528 `__muldi3`.
+Each compiled to an isolated CK804EF object with no unresolved symbol;
+deterministic host arithmetic checks passed 100,005 and 100,006
+cases respectively. The original stock instruction ranges were
+reviewed for ABI and arithmetic, but stock execution equality remains
+unqualified, particularly divisor-zero behavior. Four more exact
+revision-pinned LLVM compiler-rt C algorithms (`comparedf2`,
+`fixdfsi`, `subdf3`, `udivdi3`) are selected alongside the five earlier
+pins. This is a semantic-library candidate with C source provenance;
+native soft-float ABI and IEEE equality require separate proof.
+The crosswalk is **333/362 labels**: 324 component C/ASM candidate
+bindings, nine pinned-library algorithm candidates, 23 data-tail
+labels, one interior false function label, and at most **five possible
+code labels** still unbound. One of those five, 0x102097f4 CRC, has a
+previously pinned source body outside this component crosswalk. The
+new selected arithmetic/library build is pending.
+
+`codec-runtime-arithmetic-source-round/receipt.json` now passes with
+**223 distinct image-A inputs**, coherent at link, SHA-256
+`90e0be958dbdd4cc37ac817f73c94ee85071f66d375ef03c7da1fb4a03dcaad8`,
+and the five unchanged genuine imports. The reproducible host
+`verify_runtime_arithmetic.py` receipt pins the two C source hashes and
+records 100,006 multiplication and 100,005 nonzero-denominator division
+cases. Native execution and pinned soft-float ABI remain unqualified.
+
+Two more internal runtime bodies, native 0x1020a704 unpack-double and
+0x1020a7e8 compare-parts, are now selected C. Direct ISA inspection
+corrected the retained decompiler's missing 20th fraction bit, the
+normal mantissa implicit bit, and quiet/signaling NaN classification.
+`verify_fp_parts_host.py` checks 100,008 IEEE class/normalization bit
+patterns and 100,007 pairwise ordering cases against independent host
+expectations; its receipt records the current source hash. Isolated
+CK804EF target compilation has no unresolved symbols. The selected
+coherent build is pending. The XIP crosswalk is now **335/362**: 326
+component-source bindings, nine pinned-library algorithm candidates,
+23 data-tail, one interior false label, and at most **three possible
+code labels**. Of those, 0x102097f4 CRC has previously pinned source;
+0x10209dd8 fpadd-parts and 0x1020a574 pack-double remain true direct
+source reconstruction work. Whole Codec source/data/scatter/runtime
+and image-B completion remain open.
+
+`codec-fp-parts-source-round/receipt.json` passes with **224 distinct
+image-A inputs**, coherent at link, SHA-256
+`c4cd748c95e35a5ae97d0775f38f6e40686044a0465e0a82e33dbc095062cad5`,
+and five unchanged genuine imports. The selected graph now includes
+0x1020a704 unpack and 0x1020a7e8 compare, while runtime/ABI equality
+remains unqualified.
+
+Native 0x1020a574 pack-double and 0x10209dd8 fpadd-parts have now
+been selected as C candidates. The former preserves normal/subnormal
+round-to-nearest-even, zero, infinity, quiet-NaN, and overflow cases.
+The latter preserves special-value early returns, the source-owned
+five-zero-word canonical NaN object at stock 0x1020bd08, sticky
+alignment, sign-sensitive subtraction, and normalization. Isolated
+CK804EF objects each have zero undefined symbols. Reproducible host
+receipts at current source hashes record 100,008 unpack/pack
+roundtrips, 20,000 exact-rational rounding cases, and 99,909
+non-NaN IEEE addition matches. Stock native execution and soft-float
+ABI equality are not established by those host checks.
+
+The 256-byte stock division lookup 0x1020bd1c is also selected as a
+source-owned C initializer generated from `byte_index.bit_length()`;
+the receipt proves all bytes and SHA-256
+`14a5d850c255623f9472e3c650abce0c78d32f0276b315b3a276a0462d97a1ac`.
+The pinned NationalChip CRC table has a separate 1024-byte exact
+algorithmic receipt. `data-tail-ownership.md` classifies all 23
+post-code raw labels, including string-boundary aliases and the flash
+dispatch table whose interior branch relocations remain a layout gap.
+The retained XIP **seed-label** crosswalk is now **338/362 source
+candidate bindings**, 23 data-tail labels, one proven interior false
+function label, and **zero possible unbound code labels in that
+catalogue**. This census does not prove all executable XIP bytes or
+source scatter/layout coverage. The selected 227-input Codec receipt
+is now terminal PASS: `g2/build/c-firmware/20261011/codec-xip-seed-source-census-round/receipt.json`
+records 227 distinct image-A source inputs, a coherent source snapshot
+at link, output SHA-256
+`06ebb482748cb7ffe936f3346bb1f0a20eefd8db55b89c93447d59953f460e55`,
+and five genuine imports (`__fe_getround`, `__fe_raise_inexact`, console
+port storage, ambient KWS task words, and UART channel storage).
+`candidate_compilation_passed=true`; `source_complete=false`.
+
+`audit_xip_range_gaps.py` adds a byte-range guard to this label census.
+The retained function-range union covers 28,554 of the 30,886 bytes in
+0x10203004..0x1020a8aa; there are 267 gaps totaling 2,332 bytes.
+Largest reviewed gaps include an unsigned-division continuation
+(0x10209d02..0x10209d8c), literal pools, and branch case blocks that
+are semantically represented in selected C. The range gaps are not a
+missing-function count. Their literal/branch relocations and final
+placement require whole-image source/layout qualification.
+
+The five remaining link imports are genuine boundaries. The two
+`__fe_*` hooks arise from the pinned compiler-rt FP algorithm. Its
+`fp_mode.c` would supply nearest rounding and suppress the inexact
+exception, but the GX8002 FPU/environment policy is not established,
+so that default is not selected. The console-port cell and two
+0x80-byte UART channel records have native typed consumers; exact SRAM
+object extent, startup initialization, and scatter ownership still
+need proof. The KWS loader reads ambient task words from the native
+stack; no source producer or valid default has been established.
+
+The two initialized UART channel records now have a shared typed C
+definition and XIP consumers use that symbol. The target section is
+writable and its 256 bytes still equal stock exactly (SHA-256
+`63c9aeaf67fd2385d2b68b3c18ae2e871d7d94392b1f347ef23a49a2fc81fde2`).
+The coherent `codec-uart-sram-owner-round/receipt.json` passes with 227
+inputs, SHA-256
+`27958e259b7245760f872b85270d922a6ee57980fa2a448b3f5fc31e89c9c578`,
+and four remaining imports. Runtime 0x20026a94 alias placement is not
+proved by this relocatable link.
+
+The stock SRAM span 0x10026c74..0x10026d7c has now been reconstructed
+field by field: two receive words, two 88-byte keyword descriptors,
+sample registration with eight pointer fields, and the initialized
+32-byte request. `verify_sample_app_tail_semantics.py` checks all 264
+bytes against stock, SHA-256
+`334e9013b3a6e11393389efc5d871d274b33fa4290f7df4273a35218a790d100`.
+`resident_sample_product_data.c` expresses these values as C fields
+and real function/name relocations. Its isolated CK804EF object compiles;
+`verify_sample_tail_target.py` confirms 272 scalar/string bytes in
+eight sections and nine pointer relocation offsets. The selected full
+Codec build with this additional source is pending. Final SRAM scatter,
+XIP placement, and runtime equality remain open.
+
+`codec-sample-product-data-round/receipt.json` then passed with 228
+distinct image-A inputs, source snapshot coherent at link, SHA-256
+`a441f744dc7941736a4c8514b0ffbd7249b4fb96e81a42f97b0d27e01248af88`,
+and four unchanged genuine imports. `source_complete=false`.
+
+The broader SRAM gap audit shows 122 retained function-range gaps
+totalling 3,403 bytes out of the 14,716-byte loaded image. The gaps
+mix initialized data, vectors, literal pools, branch case blocks, and
+unseeded code. It exposed a real board-state extent error: native XIP
+audio code reads and writes through byte +0xec of the board object,
+whereas the previous C initializer only covered 40 bytes. Its source
+now owns the full mutable 240-byte 0x100269a4..0x10026a94 record;
+all target section bytes match stock, SHA-256
+`e1d1077d066d53c1e39bcefca3ec0294d43ace92ffc1a986d2a432cd931dde2e`.
+The board getter now relocates to that source symbol.
+
+The flash runtime source initializer 0x100264e4..0x1002657c is also
+represented in C: an exact 32-byte mutable state object and a 30-slot
+API table whose seven zero slots are exact and whose 23 function slots
+are relocations to the selected flash bodies. Native dispatch reads
+API offsets +4, +0x34, and +0x58; four other native callers use its
+0x20026504 runtime alias. The console-port word at 0x2002731c is now
+a source-owned four-byte NOBITS object inside the authenticated startup
+BSS clear span. `verify_board_flash_data.py` records these target
+checks; final exact address placement, data copy, and runtime behavior
+remain unqualified. A coherent selected build for this chunk is pending.
+Native table slot zero points to 0x1002443c; two existing C callsites
+invoke it through a four-register callback type while its selected
+provider is declared `uint32_t(void)`. The machine may ignore surplus
+register arguments, but this C function-pointer mismatch needs a native
+ABI qualification before runtime-equivalence admission.
+
+`codec-board-flash-bss-round/receipt.json` is now terminal PASS with
+230 distinct image-A inputs, source snapshot coherent at link, SHA-256
+`d00675f1ec394e16812c9407597693f3cadf3ccb021ab69bb6b8789c20ad5baf`,
+and three genuine imports: `__fe_getround`, `__fe_raise_inexact`, and
+`gx8002_xip_kws_ambient_task_words`. The console storage import was
+closed by the proved BSS object. `source_complete=false` remains correct.
+The named data sections form one contiguous, source-owned 2,200-byte
+initialized tail at 0x100264e4..0x10026d7c, in addition to the
+256-byte vector source at 0x10023400. Section adjacency and runtime
+alias placement have not yet been achieved by a final linker map.
+
+`audit_sram_range_gaps.py` now records each of the 122 function-range
+gaps by stock hash and adjacent retained function. Named source-data
+intervals account for 1,707 of the 3,403 gap bytes. The residual 107
+fragments/1,696 bytes include 53 address-literal-word pools (382
+bytes), 29 zero alignments (58 bytes), and 25 mixed/nonword/scalar
+fragments (1,256 bytes) that need direct native classification. The
+largest are a clock/platform jump-table and constant pool at
+0x100253b8 (244 bytes), the already sourced unseeded TWS buffer
+updater at 0x100260e4 (212 bytes), and case-block regions next to
+selected platform/flash functions. Residual gap bytes are not a
+missing-function count or proof of final source layout.
+
+The remaining 18 mixed residual fragments were then individually
+associated with their native neighboring startup, flash, platform,
+clock, or scalar-literal source candidate. Together with the seven
+large regions, all 25 mixed fragments/1,256 bytes now carry explicit
+candidate attribution in `sram-function-range-gap-receipt.json`.
+This closes the range-gap *triage* queue, not code/data identity,
+instruction equality, interior jump-table relocation, or final loaded
+layout qualification.
+
+`codec-data-reloc-final-round/receipt.json` is terminal PASS for the
+230-input image-A candidate, source coherent at link, output SHA-256
+`4bf4688c38c3f7f4c2ce5629283f357203b050f8b60ca5f5ccd8913cb949e934`.
+It includes the source-owned UART receive configuration address binding
+and leaves the same three genuine imports. After that build, three
+unproven keyword-record semantic field labels were changed to neutral
+offset labels (`field_28`, `field_48`, `field_54`). An isolated CK804EF
+recompile of the changed initializer passes `verify_sample_tail_target.py`:
+272 exact scalar/string bytes across eight target sections and nine
+pointer relocations. The metadata rename is not part of the preceding
+full-link source snapshot; the next integrated receipt must capture it.
+No final placement/scatter copy or runtime equality follows from this
+isolated object check.
+
+The optional `--codec-placement-check` is now wired into the selected
+Codec builder. It invokes `image_a_known_data.ld` and
+`check_known_data_link.py` only after the image-A relocatable link
+passes. The gate pins and checks 24 named sections: the 256-byte vector,
+23 contiguous initialized sections totaling 2,200 bytes, and the
+four-byte console BSS word inside the native clear span. The full
+`codec-placement-gated-round/receipt.json` is terminal PASS with 230
+source inputs and source snapshot coherent at link, including the
+neutral keyword labels (source SHA-256 `e68225734c47a8204173bfcaee09491a5077101c6bbd388162a61180a3689adc`).
+The image-A candidate SHA-256 remains
+`4bf4688c38c3f7f4c2ce5629283f357203b050f8b60ca5f5ccd8913cb949e934`;
+the isolated placed object SHA-256 is
+`93cd57b5da8df1d9de19f4e360286345d8bc72599f9e539c5cd5c070a68074f2`.
+The three true imports are unchanged. Image-B's separate candidate
+also compiled coherently in this run. The known-data placement gate
+does not establish the final executable/XIP map, relocated pointer
+values, hardware alias, package copy, or native runtime equality.
+## Image-A FENV, shift lowers, and XIP placement probe
+
+The selected image-A candidate now compiles `resident_fp_environment_csky.c`
+under `-mcpu=ck804ef -mhard-float` using pinned C-SKY glibc FPUv2 register
+semantics. Target disassembly confirms a live `mfcr ..., cr<1, 2>` rounding
+read and runtime `fdivs` inexact operation. The pinned LLVM 20.1.8
+`ashldi3.c` and `lshrdi3.c` are source-owned compiler lowers, each 44 bytes
+when isolated at O2 with no further imports. Their authenticated URLs and
+SHA-256 hashes are recorded in the existing LLVM provenance file. Real-device
+directed rounding is still unqualified.
+
+`g2/build/c-firmware/20261011/codec-fenv-shift-coherent-round/receipt.json`
+records a terminal combined Codec build: image-A 233 coherent selected inputs,
+target compile/link PASS, candidate SHA-256
+`87a041c4015726b0d137e22d12ab25a7211526937c08580d3b271b6ad485042f`;
+24 authenticated data placements PASS. The sole image-A unresolved symbol is
+`gx8002_xip_kws_ambient_task_words`, a genuine runtime/product input.
+Separate image-B captured 226 coherent inputs and linked SHA-256
+`d6a7eb922f6c5a4468cb1305c741142e2bf792fa4acf909c47e43283c507a0c5`;
+its nine genuine inputs remain explicit. Both subimages remain
+`source_complete=false`.
+
+The fresh image-A XIP audit is 249 direct named slots that fit, 62 stock
+fixed-slot overflows totaling 1,150 bytes, and 28 labels without a direct
+suffix symbol (27 mapped to other source functions, one false interior label).
+A bounded relocatable packed link places all 311 direct source symbols plus
+two additional XIP functions in 26,692 bytes starting at `0x10203004`, leaving
+4,194 bytes before native code end `0x1020a8aa`. Ten other authenticated
+helper bodies already total 4,208 bytes at O2; source placement of the rest,
+literal data, linker branch reach, outside-stage references, loader copy,
+`0x1002`/`0x2002` alias behavior, and native runtime remain open. An isolated
+O2/Os target probe reduces those ten body sizes to 3,536 bytes with Os, but
+does not qualify a final link or hardware behavior. The reproducible audits
+and exact symbolic pointer evidence are in `xip-relocation-candidates.md`.
+
+The subsequent `codec-xip-unbound-os-round/receipt.json` is the terminal
+source-coherent size-policy checkpoint. Image-A has 233 inputs, target
+compile/link PASS, candidate SHA-256
+`3060f87ab1719228b1f58fb6ebe8ae8170934d17ee274f395ea1de047e2e0911`;
+all 53 SHA-guarded `-Os` source selections applied with zero stale inputs,
+and the 24-section known-data placement check passed. Its only unresolved
+symbol remains `gx8002_xip_kws_ambient_task_words`. Separately loaded image-B
+has 226 coherent inputs, linked SHA-256
+`aa9ae4ab78a1e01ad9825b239c352741703c269e0b06a401acba1fab26a83deb`,
+and nine genuine imports. Both loaded stages remain source incomplete.
+
+The new selected image-A object retains 249 fixed-slot eligible direct
+functions, 62 overflows, and 28 no-direct suffix labels. Its packed direct
+XIP probe is 26,632 bytes. `audit_xip_packed_lower_bound.py` additionally
+counts 4,020 bytes of 18 mapped helper bodies, 3,848 bytes across 59 named
+XIP read-only sections, and 44 bytes of sample strings: **34,544 bytes of
+the 36,484-byte native XIP payload**, leaving 1,940 bytes before remaining
+code/data/alignment/veneer obligations. This is 1,152 bytes below the prior
+candidate's same bounded floor, not proof that the final payload fits.
+`kws-ambient-task-words-boundary.md` records native instructions proving no
+local write to task words 0, 3, or 4 before the full 32-byte child copy;
+the caller does not supply them. No default-value C provider is selected.

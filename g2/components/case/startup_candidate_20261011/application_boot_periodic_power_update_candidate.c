@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08002a68 periodic external-power edge debounce.
  */
@@ -21,7 +22,7 @@ void case_boot_periodic_power_update(void)
     case_init_boost_set(desired==0u);
     *counter=0u;
     if(*(volatile uint8_t *)(uintptr_t)0x200000bfu==0u){
-        (void)case_policy_log(0x08002b04u);
-        (void)case_policy_log(0x08002b3cu);
+        (void)case_policy_log(CASE_STRING_ADDR(08002b04));
+        (void)case_policy_log(CASE_STRING_ADDR(08002b3c));
     }
 }

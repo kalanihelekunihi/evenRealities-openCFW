@@ -1,0 +1,11 @@
+# Boot current-source mutex and resume round
+
+Locked bootloader SHA-256: `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`.
+
+`0x41a24e` is the 354-byte FreeRTOS plain mutex take body selected from `thread_creation/mutex_kernel.c`. The retained 516-case oracle lacked source hashes, so I rebuilt the current selected mutex, wrapper, queue-receive and queue-send sources for Cortex-M4 in an isolated test link. `boot-current-mutex-binding.json` records all four source hashes and the isolated ELF hash. `boot-current-mutex-oracle.json` is a fresh 516-case stock/source PASS; it visits 326 native bytes in the plain-take body and covers immediate take, timeout/wait/inheritance, owner/list effects and recursive wrappers. The fixture cuts suspend/resume, timeout check, wait enqueue and queue unlock on blocking paths. It does not prove physical task switches or all fatal/race cases.
+
+The source-only isolated link initially used Cortex-M55 selected objects and Unicorn rejected `cinc` at `0x10038`, then `cset` at `0x106e8`. Recompiling the four executed source units for Cortex-M4 allowed the same current C semantics to run under the retained harness; unexecuted archive units remain outside that test. The test script was restored after diagnostic instrumentation. This is an oracle qualification profile, not a change to the selected Cortex-M55 Boot candidate.
+
+The next large rooted body `0x418228` is `scheduler_resume.c`. A fresh 96-case source/stock resume-plus-tick oracle on the isolated link passes and visits 290 of its 306 native bytes. It exercises pending/delayed removal, ready insertion, cursor repair, deferred tick, BASEPRI and PendSV decisions with one pending and one current task. Empty-task, fatal and concurrent IRQ behavior remain outside this bounded suite.
+
+Both bodies now have reviewed current-source bindings. Rooted catalogue census remains 654; header-only proof leads are 152, down from 154. There are zero rooted catalogue entries without a machine crosswalk. No selected Boot source changed this round; the latest coherent selected candidate remains `boot-coplacement-pll-postdiv-ordered-round/receipt.json` with 373 units, 1,010 providers and three ROM imports. Full source/data/scatter, indirect roots and physical runtime are still open. Next large lead `0x41f15c` is an IAR integer renderer, not RTOS.

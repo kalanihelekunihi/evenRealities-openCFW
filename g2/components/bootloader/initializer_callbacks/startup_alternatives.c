@@ -11,7 +11,7 @@ extern void opencfw_boot_power_register_update(uint32_t,uint32_t);
 extern void opencfw_boot_startup_power_initialize(void);
 extern void opencfw_boot_startup_power_configure(uint32_t,uint32_t);
 extern void __attribute__((pcs("aapcs-vfp"))) opencfw_boot_startup_temperature(float *,float);
-extern void opencfw_boot_startup_clock_descriptor(const uint32_t *);
+extern uint32_t opencfw_boot_startup_clock_descriptor(volatile void *);
 extern uint32_t opencfw_boot_startup_clock_select(uint32_t,uint32_t,uint32_t);
 extern const uint32_t opencfw_boot_conditional_power_value;
 NI void opencfw_boot_startup_conditional(void){
@@ -23,7 +23,7 @@ NI void opencfw_boot_startup_conditional(void){
  B(0x20027198)=0;
 }
 NI void opencfw_provider_41fa50(void){
- float scratch[2];const uint32_t descriptor[5]={0,0,0,0x8000,0xb71b00};
+ float scratch[2];volatile uint32_t descriptor[5]={0,0,0,0x8000,0xb71b00};
  opencfw_boot_startup_conditional();opencfw_boot_startup_power_initialize();
  opencfw_boot_startup_power_configure(0,0);
  opencfw_boot_startup_temperature(scratch,25.0f);

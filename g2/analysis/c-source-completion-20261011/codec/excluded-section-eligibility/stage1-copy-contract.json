@@ -1,0 +1,22 @@
+{
+  "stage1_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "stage2_container_sha256": "2515d7201f82c612cfba7f0c61bb014a0af9fe8b7e9037959f0705b7267850ee",
+  "header_stage1_bytes": 12288,
+  "header_stage2_bytes": 51200,
+  "nominal_first_firmware_path": {
+    "flash_reader_entry": "0x10000c58",
+    "stage2_header_word_read": "0x10000a9e..0x10000aa0",
+    "sram_copy_call": "0x10000ab4..0x10000ab8",
+    "sram_copy_destination": "0x10023400",
+    "sram_copy_bytes": 14716,
+    "xip_bytes_before_sram": 36484,
+    "reset_entry": "0x10023500",
+    "size_formula": "0x20026d7c + 0x100264e4 - 0x10023400 - 0x200264e4"
+  },
+  "stock_nominal_loader_copy_extent_proven": true,
+  "final_custom_image_loader_equality_proven": false,
+  "limits": [
+    "The other multiboot path and flash hardware side effects are not qualified by this bounded instruction audit.",
+    "The start of XIP in the final custom package and physical DRAM aliasing still require full linker/loader validation."
+  ]
+}

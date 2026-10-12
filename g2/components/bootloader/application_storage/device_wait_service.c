@@ -17,6 +17,13 @@ static uint32_t adjust_info1_word_offset(uint32_t word_offset)
     return word_offset < 0x200u ? word_offset : word_offset + 0x280u;
 }
 
+/* Stock 0x4213d8 is an actual Thumb BX LR identity leaf. Its caller uses
+ * the returned word offset when INFO0 comes from MRAM. */
+__attribute__((noinline)) uint32_t opencfw_boot_info0_word_offset(uint32_t word_offset)
+{
+    return word_offset;
+}
+
 uint32_t opencfw_boot_info_read_dispatch(uint32_t info_space,
                                          uint32_t word_offset,
                                          uint32_t word_count,
@@ -54,7 +61,8 @@ uint32_t opencfw_boot_info_read_dispatch(uint32_t info_space,
                 return 9u;
             info_address = 0x42004000u + word_offset * 4u;
         } else {
-            info_address = 0x42000000u + word_offset * 4u;
+            info_address = 0x42000000u +
+                           opencfw_boot_info0_word_offset(word_offset) * 4u;
         }
         break;
     case 1u:

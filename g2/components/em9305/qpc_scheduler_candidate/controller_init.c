@@ -997,11 +997,11 @@ uint32_t opencfw_em9305_controller_init(void)
 extern uint32_t opencfw_em9305_dispatch_32eec8(uintptr_t); /* native 0x32eec8 */
 extern uint32_t opencfw_em9305_dispatch_32fea4(uintptr_t,uintptr_t); /* native0x32fea4 */
 extern uint32_t opencfw_em9305_dispatch_32ff20(uintptr_t); /* native0x32ff20 */
-extern void opencfw_em9305_dispatch_3300c8(void); /* native 0x3300c8, ABI not qualified */
-extern void opencfw_em9305_dispatch_330400(void); /* native 0x330400, ABI not qualified */
+extern uint32_t opencfw_em9305_dispatch_3300c8(uintptr_t,uintptr_t); /* qualified native request/input ABI */
+extern uint32_t opencfw_em9305_dispatch_330400(uintptr_t); /* native packet ABI */
 extern uint32_t opencfw_em9305_dispatch_330568(uintptr_t request,uintptr_t input); /* native 0x330568 */
 extern uint32_t opencfw_em9305_dispatch_3305ac(uintptr_t request,uintptr_t input); /* native 0x3305ac */
-extern void opencfw_em9305_dispatch_331dc0(void); /* native 0x331dc0, ABI not qualified */
+extern uint32_t opencfw_em9305_dispatch_331dc0(uintptr_t,uintptr_t); /* native 0x331dc0 */
 extern uint32_t opencfw_em9305_dispatch_331ec0(uintptr_t); /* native packet ABI */
 extern uint32_t opencfw_em9305_dispatch_331f5c(uintptr_t); /* native packet ABI */
 extern uint32_t opencfw_em9305_dispatch_332038(uintptr_t,uintptr_t); /* native request/input ABI */
@@ -2078,18 +2078,18 @@ uint32_t opencfw_em9305_ll_event_kick(uint32_t incoming)
 extern uint32_t opencfw_em9305_dispatch_32e3bc(void); /*0x32e3bc*/
 extern uint32_t opencfw_em9305_dispatch_32e3e0(uint32_t,uint32_t); /*0x32e3e0*/
 extern uint32_t opencfw_em9305_dispatch_32ef10(uintptr_t,uintptr_t); /*0x32ef10*/
-extern void opencfw_em9305_dispatch_32f0a0(void); /*0x32f0a0*/
+extern uint32_t opencfw_em9305_dispatch_32f0a0(uintptr_t); /* native packet ABI */
 extern uint32_t opencfw_em9305_dispatch_32f64c(uintptr_t,uintptr_t); /*0x32f64c*/
 extern uint32_t opencfw_em9305_dispatch_32f70c(uintptr_t); /*0x32f70c*/
 extern uint32_t opencfw_em9305_dispatch_330440(uintptr_t request,uintptr_t input); /*native330440*/
-extern void opencfw_em9305_dispatch_3304f0(void); /*0x3304f0*/
+extern uint32_t opencfw_em9305_dispatch_3304f0(uintptr_t); /* native packet ABI */
 extern uint32_t opencfw_em9305_dispatch_3305b0(uintptr_t request,uintptr_t input); /*native3305b0*/
-extern void opencfw_em9305_dispatch_330664(void); /*0x330664*/
-extern void opencfw_em9305_dispatch_330848(void); /*0x330848*/
+extern uint32_t opencfw_em9305_dispatch_330664(uintptr_t,uintptr_t); /* native request/input ABI */
+extern uint32_t opencfw_em9305_dispatch_330848(uintptr_t); /* qualified native packet ABI */
 extern uintptr_t opencfw_em9305_dispatch_331a8c(void); /*0x331a8c*/
 extern uint32_t opencfw_em9305_dispatch_332278(uintptr_t request,uintptr_t input); /* native 0x332278 */
 extern uint32_t opencfw_em9305_dispatch_332394(uintptr_t request,uintptr_t input); /* native 0x332394 */
-extern void opencfw_em9305_dispatch_3324e0(void); /*0x3324e0*/
+extern uint32_t opencfw_em9305_dispatch_3324e0(uintptr_t,uintptr_t); /*0x3324e0*/
 extern uint32_t opencfw_em9305_dispatch_3327f4(uintptr_t); /* native packet ABI */
 uint32_t opencfw_em9305_ll_callback_pair(uintptr_t first,uintptr_t second)
 {
@@ -2177,15 +2177,15 @@ uint32_t opencfw_em9305_controller_transport_status(void)
 }
 
 /* Further native LL callback constructors; indirect ABI remains unqualified. */
-extern void opencfw_em9305_dispatch_32e4c4(void); /*0x32e4c4*/
-extern void opencfw_em9305_dispatch_330c60(void); /*0x330c60*/
-extern void opencfw_em9305_dispatch_330ce0(void); /*0x330ce0*/
-extern void opencfw_em9305_dispatch_330fa0(void); /*0x330fa0*/
-extern void opencfw_em9305_dispatch_331074(void); /*0x331074*/
+extern uint32_t opencfw_em9305_dispatch_32e4c4(uintptr_t,uintptr_t); /*0x32e4c4*/
+extern uint32_t opencfw_em9305_dispatch_330c60(uintptr_t,uintptr_t); /*0x330c60*/
+extern uint32_t opencfw_em9305_dispatch_330ce0(uintptr_t); /*0x330ce0*/
+extern uint32_t opencfw_em9305_dispatch_330fa0(uintptr_t,uintptr_t); /*0x330fa0*/
+extern uint32_t opencfw_em9305_dispatch_331074(uintptr_t,uintptr_t); /*0x331074*/
 extern uint32_t opencfw_em9305_dispatch_331100(uintptr_t); /*0x331100*/
 extern uint32_t opencfw_em9305_dispatch_331204(uintptr_t,uintptr_t); /*0x331204*/
-extern void opencfw_em9305_dispatch_331334(void); /*0x331334*/
-extern void opencfw_em9305_dispatch_3316e0(void); /*0x3316e0*/
+extern uint32_t opencfw_em9305_dispatch_331334(uintptr_t); /*0x331334*/
+extern uint32_t opencfw_em9305_dispatch_3316e0(uintptr_t,uintptr_t); /*0x3316e0*/
 extern uint32_t opencfw_em9305_dispatch_331814(uintptr_t); /*0x331814*/
 extern uint32_t opencfw_em9305_dispatch_331868(uintptr_t,uintptr_t); /* native command ABI */
 extern uint32_t opencfw_em9305_dispatch_33194c(uintptr_t,uintptr_t); /* native command ABI */
@@ -4116,8 +4116,8 @@ uint32_t opencfw_em9305_common_callback_3153bc(uintptr_t object,uintptr_t input)
 
 /* Native 0x310340/0x31034c: callback stores retain the input in R0.
  * Source relocations replace stock code addresses; callback bodies remain imports. */
-extern void opencfw_em9305_radio_callback_333268(void);
-extern void opencfw_em9305_radio_callback_3330d8(void);
+extern uint32_t opencfw_em9305_radio_callback_333268(uint32_t);
+extern uint32_t opencfw_em9305_radio_callback_3330d8(uint32_t,uint32_t,uint32_t,uint32_t);
 uintptr_t opencfw_em9305_radio_callback_store_310340(uintptr_t callback)
 { *(volatile uint32_t *)(uintptr_t)0x805e7cu=(uint32_t)callback;return callback; }
 uintptr_t opencfw_em9305_radio_callback_store_31034c(uintptr_t callback)
@@ -4566,7 +4566,7 @@ uint32_t opencfw_em9305_common_channel_callback_315544(uint32_t first,uint32_t s
 extern uint32_t opencfw_em9305_radio_adjust_3101f4(uint32_t);
 extern uint32_t opencfw_em9305_radio_bits_311fcc(uintptr_t,uintptr_t);
 extern uint32_t opencfw_em9305_radio_commit_311fb0(uintptr_t);
-extern void opencfw_em9305_radio_callback_333480(void);
+extern uint32_t opencfw_em9305_radio_callback_333480(uint32_t);
 extern uint32_t opencfw_em9305_radio_schedule_311e60(uint32_t,uint32_t,uintptr_t);
 /* Native 0x310374..0x3103e0: parameter adjustment, optional radio bytes,
  * nine-bit mask and scheduled callback. Delay slots pass stack outputs. */
@@ -4745,7 +4745,7 @@ uint32_t opencfw_em9305_common_channel_callback_314fa4(void)
  return opencfw_em9305_common_radio_finish_3045c0(opencfw_em9305_common_activate_310580(result));
 }
 
-extern uint32_t opencfw_em9305_channel_timing_312b88(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_duration_piece_312b88(uint32_t,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_channel_continue_314f54(uintptr_t,uintptr_t);
 /* Native 0x315108..0x3151a0: counter phases and deferred channel start.
  * Zero current retains architectural descriptor pointer at address0x2c. */
@@ -4763,7 +4763,7 @@ uint32_t opencfw_em9305_common_channel_callback_315108(void)
   uint32_t first=*(volatile uint8_t *)(record+13u);
   uint32_t second=*(volatile uint8_t *)(record+177u);
   uint32_t timestamp=*(volatile uint32_t *)(record+180u);
-  result=opencfw_em9305_channel_timing_312b88(first,second,14u);
+  result=opencfw_em9305_radio_duration_piece_312b88(first,second,14u);
   *(volatile uint32_t *)(root+16u)=result+timestamp+150u;
  } else if (count!=3u) {
   if (count!=0u) return count;
@@ -4961,7 +4961,7 @@ uint32_t opencfw_em9305_common_channel_start_314db8(
    uint32_t length=*(volatile uint8_t *)(record+124u);
    uint32_t mode=*(volatile uint8_t *)(actual+12u);
    uint32_t option=*(volatile uint8_t *)(actual+14u);
-   uint32_t duration=opencfw_em9305_channel_timing_312b88(mode,option,length);
+   uint32_t duration=opencfw_em9305_radio_duration_piece_312b88(mode,option,length);
    duration+=opencfw_em9305_auxiliary_config_delay_303f74();
    duration=opencfw_em9305_channel_timing_adjust_312c5c(duration);
    timestamp=*(volatile uint32_t *)(root+16u)+duration;
@@ -12199,4 +12199,10676 @@ uint32_t opencfw_em9305_radio_callback_32d7f4(uintptr_t record)
  uint32_t result=opencfw_em9305_radio_encode_324594(record,record+1077u,record+1144u,1u);
  *(volatile uint16_t *)(context+100u)=(uint16_t)result;
  return result;
+}
+
+/* Native3239d4..3239fc: fields are ORed without invented input masks;
+ * captured input bytes precede both output stores, high byte stored first. */
+uint32_t opencfw_em9305_radio_encode_3239d4(uintptr_t output,uintptr_t input)
+{
+ uint32_t b1=*(volatile uint8_t *)(input+1u);
+ uint32_t b4=*(volatile uint8_t *)(input+4u);
+ uint32_t b2=*(volatile uint8_t *)(input+2u);
+ uint32_t b3=*(volatile uint8_t *)(input+3u);
+ uint32_t b0=*(volatile uint8_t *)input;
+ uint32_t shifted=b1<<5;
+ *(volatile uint8_t *)(output+1u)=(uint8_t)(((b4<<8)|shifted)>>8);
+ *(volatile uint8_t *)output=(uint8_t)(b0|(b2<<6)|shifted|(b3<<7));
+ return 2u;
+}
+/* Native323d1c..323d38: two six-byte address writes, children already
+ * source-owned; each high word is captured before its low word. */
+uint32_t opencfw_em9305_radio_encode_323d1c(uintptr_t output,uintptr_t input)
+{
+ uint32_t high=*(volatile uint32_t *)(input+4u);
+ uint32_t low=*(volatile uint32_t *)input;
+ (void)opencfw_em9305_radio_address_write_3045e8(output,low,high);
+ high=*(volatile uint32_t *)(input+12u);
+ low=*(volatile uint32_t *)(input+8u);
+ (void)opencfw_em9305_radio_address_write_3045e8(output+6u,low,high);
+ return 12u;
+}
+/* Native323c94..323d1c: complete 34-byte record serialization. Fresh
+ * mixed-width source reads and output store order preserved for overlap. */
+uint32_t opencfw_em9305_radio_encode_323c94(uintptr_t output,uintptr_t input)
+{
+ (void)opencfw_em9305_radio_encode_323d1c(output,input);
+ uint32_t word=*(volatile uint32_t *)(input+16u);
+ uint32_t half=*(volatile uint16_t *)(input+32u);
+ uint32_t high=half>>8;
+ *(volatile uint8_t *)(output+12u)=(uint8_t)word;
+ word=*(volatile uint32_t *)(input+16u);
+ *(volatile uint8_t *)(output+13u)=(uint8_t)(word>>8);
+ *(volatile uint8_t *)(output+14u)=(uint8_t)*(volatile uint16_t *)(input+18u);
+ *(volatile uint8_t *)(output+15u)=*(volatile uint8_t *)(input+19u);
+ word=*(volatile uint32_t *)(input+20u);
+ *(volatile uint8_t *)(output+16u)=(uint8_t)word;
+ word=*(volatile uint32_t *)(input+20u);
+ *(volatile uint8_t *)(output+17u)=(uint8_t)(word>>8);
+ *(volatile uint8_t *)(output+18u)=(uint8_t)*(volatile uint16_t *)(input+22u);
+ *(volatile uint8_t *)(output+19u)=*(volatile uint8_t *)(input+38u);
+ *(volatile uint8_t *)(output+20u)=*(volatile uint8_t *)(input+40u);
+ uint32_t byte=*(volatile uint8_t *)(input+41u);
+ *(volatile uint8_t *)(output+23u)=(uint8_t)high;
+ *(volatile uint8_t *)(output+22u)=(uint8_t)half;
+ *(volatile uint8_t *)(output+21u)=(uint8_t)byte;
+ for(uint32_t i=0u;i<4u;++i)
+  *(volatile uint8_t *)(output+24u+i)=*(volatile uint8_t *)(input+34u+i);
+ for(uint32_t i=0u;i<5u;++i)
+  *(volatile uint8_t *)(output+28u+i)=*(volatile uint8_t *)(input+24u+i);
+ uint32_t upper=*(volatile uint8_t *)(input+43u);
+ uint32_t lower=*(volatile uint8_t *)(input+42u);
+ *(volatile uint8_t *)(output+33u)=(uint8_t)((upper<<5)|lower);
+ return 34u;
+}
+
+extern uint32_t opencfw_em9305_radio_compose_323dc0(uintptr_t,uint32_t,uint32_t,uint32_t,uintptr_t,uintptr_t,uintptr_t,uint32_t,uint32_t);
+/* Native324594..3245ec: nine-argument composition call, last argument
+ * placed on caller stack; complete child semantics remain genuine import. */
+uint32_t opencfw_em9305_radio_encode_324594(uintptr_t record,uintptr_t output,uintptr_t length,uint32_t count)
+{
+ uint32_t global=*(volatile uint32_t *)(uintptr_t)0x805a98u;
+ uint32_t field=*(volatile uint8_t *)(record+716u);
+ uint32_t active=*(volatile uint8_t *)(record+804u);
+ uint32_t flags=((global>>1)&8u)|(field&64u)|(active<<2);
+ uint8_t event[5];
+ event[4]=0u;event[3]=0u;event[2]=0u;event[1]=0u;event[0]=7u;
+ return opencfw_em9305_radio_compose_323dc0(record,0u,(uint8_t)flags,0u,(uintptr_t)event,length,output,7u,count);
+}
+/* Native3245ec..324628: null-record composition with explicit byte flags. */
+uint32_t opencfw_em9305_radio_encode_3245ec(uint32_t flags,uintptr_t output,uintptr_t length,uint32_t count)
+{
+ uint8_t event[5];
+ event[0]=7u;event[4]=0u;event[3]=0u;event[2]=0u;event[1]=0u;
+ return opencfw_em9305_radio_compose_323dc0(0u,0u,(uint8_t)flags,0u,(uintptr_t)event,length,output,8u,count);
+}
+
+extern uint32_t opencfw_em9305_radio_channels_317ac0(uintptr_t);
+extern uint32_t opencfw_em9305_radio_phy_tables_31b6cc(uintptr_t);
+extern uint32_t opencfw_em9305_radio_limit_317b10(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_radio_schedule_313424(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_cb_31dc68(uintptr_t);
+extern uint32_t opencfw_em9305_radio_cb_31dfd0(uintptr_t);
+extern uint32_t opencfw_em9305_radio_cb_31e620(uintptr_t,uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_cb_31e7c8(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_cb_31df6c(uintptr_t);
+extern uint32_t opencfw_em9305_radio_cb_31dca0(uintptr_t);
+/* Native31dd88..31df6c: full slot initialization, callback providers and
+ * optional source timing. Null-source incidental R0 is slot+64; nonnull
+ * incidental R0 is the native product-derived word, not a success flag. */
+uint32_t opencfw_em9305_radio_transfer_31dd88(uintptr_t slot,uintptr_t input,uintptr_t source)
+{
+ *(volatile uint16_t *)(slot+262u)=0u;
+ *(volatile uint8_t *)(slot+270u)=0u;
+ (void)opencfw_em9305_memset((void *)(slot+16u),0u,176u);
+ uint32_t timeout=*(volatile uint16_t *)(input+36u);
+ uint32_t high=*(volatile uint32_t *)(input+28u);
+ uint32_t low=*(volatile uint32_t *)(input+24u),scaled_timeout;
+ __asm__ volatile("mpyuw %0,%1,%2":"=r"(scaled_timeout):"r"(timeout),"r"(10u));
+ uint32_t flags=*(volatile uint8_t *)(input+42u);
+ uint32_t period=*(volatile uint16_t *)(input+32u);
+ uint32_t limit=*(volatile uint16_t *)(input+34u);
+ *(volatile uint16_t *)(slot+382u)=(uint16_t)scaled_timeout;
+ *(volatile uint32_t *)(slot+492u)=30000u;
+ *(volatile uint32_t *)(slot+280u)=high;
+ *(volatile uint32_t *)(slot+276u)=low;
+ *(volatile uint8_t *)(slot+271u)=(uint8_t)flags;
+ *(volatile uint16_t *)(slot+266u)=(uint16_t)period;
+ *(volatile uint16_t *)(slot+260u)=(uint16_t)limit;
+ uint32_t adjusted=opencfw_em9305_ll_slot_adjust_317c10(slot,30000u);
+ high=*(volatile uint32_t *)(input+20u);
+ low=*(volatile uint32_t *)(input+16u);
+ *(volatile uint32_t *)(slot+472u)=adjusted;
+ *(volatile uint8_t *)(slot+635u)=255u;
+ *(volatile uint32_t *)(slot+324u)=high;
+ *(volatile uint32_t *)(slot+328u)=low;
+ (void)opencfw_em9305_radio_channels_317ac0(slot);
+ *(volatile uint16_t *)(slot+76u)=257u;
+ uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ low=*(volatile uint32_t *)(input+16u);
+ high=*(volatile uint32_t *)(input+20u);
+ *(volatile uint8_t *)(slot+64u)=4u;
+ uint32_t config_flags=*(volatile uint8_t *)(configuration+40u);
+ *(volatile uint32_t *)(slot+72u)=high;
+ *(volatile uint16_t *)(slot+322u)=(uint16_t)((low>>16)^low);
+ *(volatile uint8_t *)(slot+78u)=2u;
+ *(volatile uint32_t *)(slot+68u)=low;
+ *(volatile uint8_t *)(slot+66u)=(uint8_t)config_flags;
+ (void)opencfw_em9305_radio_phy_tables_31b6cc(slot);
+ *(volatile uint8_t *)(slot+336u)=255u;
+ *(volatile uint8_t *)(slot+110u)=1u;
+ uint32_t first=opencfw_em9305_radio_limit_317b10(slot,slot+574u);
+ *(volatile uint16_t *)(slot+592u)=(uint16_t)first;
+ uint32_t second=opencfw_em9305_radio_limit_317b10(slot,slot+566u);
+ period=*(volatile uint16_t *)(slot+266u);
+ uint32_t captured=*(volatile uint16_t *)(slot+592u);
+ uint32_t upper=*(volatile uint32_t *)(uintptr_t)0x805cb4u;
+ uint32_t lower=*(volatile uint32_t *)(uintptr_t)0x805cb8u,scaled;
+ __asm__ volatile("mpyuw %0,%1,%2":"=r"(scaled):"r"(period),"r"(1250u));
+ *(volatile uint16_t *)(slot+590u)=(uint16_t)second;
+ *(volatile uint8_t *)(slot+42u)=1u;
+ *(volatile uint32_t *)(slot+48u)=(uint32_t)(uintptr_t)opencfw_em9305_radio_cb_31dc68;
+ *(volatile uint32_t *)(slot+44u)=(uint32_t)(uintptr_t)opencfw_em9305_radio_cb_31dfd0;
+ *(volatile uint32_t *)(slot+176u)=(uint32_t)(uintptr_t)opencfw_em9305_radio_cb_31e620;
+ *(volatile uint32_t *)(slot+172u)=(uint32_t)(uintptr_t)opencfw_em9305_radio_cb_31e7c8;
+ *(volatile uint32_t *)(slot+168u)=(uint32_t)(uintptr_t)opencfw_em9305_radio_cb_31df6c;
+ *(volatile uint32_t *)(slot+164u)=(uint32_t)(uintptr_t)opencfw_em9305_radio_cb_31dca0;
+ *(volatile uint16_t *)(slot+40u)=1u;
+ *(volatile uint32_t *)(slot+52u)=(uint32_t)slot;
+ *(volatile uint32_t *)(slot+60u)=(uint32_t)(slot+64u);
+ *(volatile uint32_t *)(slot+28u)=captured;
+ *(volatile uint32_t *)(slot+180u)=upper;
+ *(volatile uint32_t *)(slot+184u)=lower;
+ *(volatile uint32_t *)(slot+32u)=scaled;
+ *(volatile uint32_t *)(slot+36u)=scaled;
+ if(source==0u) return (uint32_t)(slot+64u);
+ uint32_t mode=*(volatile uint8_t *)(slot+78u);
+ uint32_t phy=*(volatile uint8_t *)(slot+76u);
+ uint32_t source_time=*(volatile uint32_t *)(source+388u);
+ if(mode==0u) mode=2u;
+ uint32_t duration=opencfw_em9305_radio_duration_piece_312b88(phy,mode,36u);
+ uint32_t second_phy=*(volatile uint8_t *)(slot+77u);
+ duration+=source_time;
+ uint32_t second_duration=opencfw_em9305_radio_duration_piece_312b88(second_phy,2u,16u);
+ second_phy=*(volatile uint8_t *)(slot+77u);
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ period=*(volatile uint16_t *)(slot+266u);
+ uint32_t delta=(uint32_t)slot-(uint32_t)base,index;
+ __asm__ volatile("div %0,%1,%2":"=r"(index):"r"(delta),"r"(912u));
+ uint32_t total=second_duration+duration+(second_phy==3u?3750u:2500u);
+ __asm__ volatile("mpyuw %0,%1,%2":"=r"(scaled):"r"(period),"r"(1250u));
+ uint32_t elapsed=opencfw_em9305_radio_schedule_313424(scaled,(uint8_t)index,total+150u,0u,0u);
+ struct opencfw_em9305_native_product_pair product=opencfw_em9305_native_mpydu_329154(elapsed,0x1a36e3u);
+ uint32_t result=(product.high<<1)|(product.low>>31);
+ *(volatile uint8_t *)(source+1100u)=(uint8_t)(product.high>>7);
+ *(volatile uint8_t *)(source+1099u)=(uint8_t)result;
+ *(volatile uint32_t *)(slot+24u)=total+elapsed+150u;
+ return result;
+}
+
+/* Native317ac0..317afc: compact 37 channels from fresh low/high words
+ * on every iteration, original return pointer slot+272 retained. */
+uint32_t opencfw_em9305_radio_channels_317ac0(uintptr_t slot)
+{
+ uint32_t count=0u;
+ for(uint32_t index=0u;index<37u;++index){
+  uint32_t low=*(volatile uint32_t *)(slot+276u);
+  uint32_t high=*(volatile uint32_t *)(slot+280u);
+  uint32_t bit=index<32u?(low>>index)&1u:(high>>(index-32u))&1u;
+  if(bit!=0u) *(volatile uint8_t *)(slot+284u+count++)=(uint8_t)index;
+ }
+ *(volatile uint8_t *)(slot+272u)=(uint8_t)count;
+ return (uint32_t)(slot+272u);
+}
+/* Native31b6cc..31b714: capability bit8 and bit11 project four table
+ * entries, native postincrement means second row starts at332. */
+uint32_t opencfw_em9305_radio_phy_tables_31b6cc(uintptr_t slot)
+{
+ uint32_t global=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t base=(global&256u)!=0u?3u:1u;
+ uint32_t extra=(global>>9)&4u,mask=base+3u*extra;
+ for(uint32_t i=0u;i<4u;++i){
+  *(volatile uint8_t *)(slot+553u+i)=127u;
+  *(volatile uint8_t *)(slot+332u+i)=(mask&(1u<<i))!=0u?126u:127u;
+ }
+ return (uint32_t)(slot+557u);
+}
+/* Native317b10..317b80: PHY-dependent minimum durations, exact native
+ * add1/add2 shifts and final halfword truncation. */
+uint32_t opencfw_em9305_radio_limit_317b10(uintptr_t slot,uintptr_t input)
+{
+ uint32_t phy=*(volatile uint8_t *)(slot+76u);
+ uint32_t first_limit=*(volatile uint16_t *)(input+6u);
+ uint32_t first_size=*(volatile uint16_t *)(input+4u),first;
+ if(phy==3u){
+  if(first_limit<2704u) first_limit=2704u;
+  first=(first_size<<6)+976u;
+ }else if(phy==2u) first=60u+(first_size<<2);
+ else first=(first_size<<4)+56u;
+ phy=*(volatile uint8_t *)(slot+77u);
+ if(first>first_limit) first=first_limit;
+ uint32_t second_limit=*(volatile uint16_t *)(input+2u);
+ uint32_t second_size=*(volatile uint16_t *)input,second;
+ if(phy==3u){
+  if(second_limit<2704u) second_limit=2704u;
+  second=(second_size<<6)+976u;
+  if(second>second_limit) second=second_limit;
+ }else{
+  second=phy==2u?60u+(second_size<<2):(second_size<<4)+56u;
+  if(second>second_limit) second=second_limit;
+ }
+ return (uint16_t)(first+second+150u);
+}
+
+/* Native31df6c..31df8c: clear pending only when both source bytes are
+ * nonzero; native R0 return is always source+379. */
+uint32_t opencfw_em9305_radio_cb_31df6c(uintptr_t event)
+{
+ uintptr_t source=*(volatile uint32_t *)(event+36u);
+ uintptr_t pending=source+379u;
+ if(*(volatile uint8_t *)pending!=0u&&*(volatile uint8_t *)(source+380u)!=0u)
+  *(volatile uint8_t *)pending=0u;
+ return (uint32_t)pending;
+}
+/* Native31dc68..31dca0: clear shared flags before true tail callback. */
+uint32_t opencfw_em9305_radio_cb_31dc68(uintptr_t event)
+{
+ uintptr_t source=*(volatile uint32_t *)(event+36u);
+ uintptr_t pending=source+379u;
+ if(*(volatile uint8_t *)pending!=0u&&*(volatile uint8_t *)(source+380u)!=0u)
+  *(volatile uint8_t *)pending=0u;
+ if(*(volatile uint8_t *)(source+1u)==0u) return (uint32_t)event;
+ *(volatile uint8_t *)(uintptr_t)0x802a38u=0u;
+ *(volatile uint8_t *)(uintptr_t)0x802a34u=0u;
+ return opencfw_em9305_radio_cb_31dfd0(event);
+}
+/* Native31e7c8..31e7fc: status gate before event dereference; counter
+ * wraps on halfword store but untruncated R0 is retained on plain path. */
+uint32_t opencfw_em9305_radio_cb_31e7c8(uintptr_t event,uint32_t status)
+{
+ if(status!=0u) return (uint32_t)event;
+ uintptr_t source=*(volatile uint32_t *)(event+36u);
+ uint32_t mode=*(volatile uint8_t *)(source+341u);
+ uint32_t count=*(volatile uint16_t *)(source+904u);
+ *(volatile uint8_t *)(source+630u)=1u;
+ uint32_t next=count+1u;
+ *(volatile uint16_t *)(source+904u)=(uint16_t)next;
+ if(mode==0u) return next;
+ count=*(volatile uint16_t *)(uintptr_t)0x802a40u;
+ *(volatile uint16_t *)(uintptr_t)0x802a40u=(uint16_t)(count+1u);
+ return 0x802a40u;
+}
+
+extern uint32_t opencfw_em9305_radio_prepare_32780c(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_radio_query_3253a4(uint32_t);
+/* Native31dca0..31dd88: full gating/reset, optional per-slot callback,
+ * fresh pending halfword after callback and native six-byte request span. */
+uint32_t opencfw_em9305_radio_cb_31dca0(uintptr_t event)
+{
+ uintptr_t source=*(volatile uint32_t *)(event+36u);
+ uintptr_t pending=source+566u;
+ if(*(volatile uint8_t *)(source+1u)==3u){
+  if(*(volatile uint8_t *)(source+629u)!=0u){
+   if(*(volatile uint8_t *)(source+630u)!=0u)
+    return opencfw_em9305_auxiliary_signal_304394();
+  }else if(*(volatile uint8_t *)(source+620u)==0u||*(volatile uint32_t *)(source+360u)==0u)
+   return opencfw_em9305_auxiliary_signal_304394();
+ }
+ uintptr_t owner=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+ if(owner!=0u){
+  uintptr_t callback=*(volatile uint32_t *)(owner+24u);
+  if(callback!=0u){
+   uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+   uint32_t delta=(uint32_t)source-(uint32_t)base,index;
+   __asm__ volatile("div %0,%1,%2":"=r"(index):"r"(delta),"r"(912u));
+   (void)((uint32_t (*)(uint32_t))callback)((uint8_t)index);
+  }
+ }
+ *(volatile uint8_t *)(uintptr_t)0x802a38u=0u;
+ *(volatile uint8_t *)(uintptr_t)0x802a34u=0u;
+ *(volatile uint16_t *)(uintptr_t)0x802a3cu=0u;
+ *(volatile uint16_t *)(uintptr_t)0x802a40u=0u;
+ *(volatile uint16_t *)(uintptr_t)0x802a44u=0u;
+ *(volatile uint8_t *)(source+349u)=0u;
+ *(volatile uint8_t *)(source+347u)=0u;
+ *(volatile uint8_t *)(source+344u)=1u;
+ uint32_t prepared=opencfw_em9305_radio_prepare_32780c(source,0u,1u);
+ uint32_t result=opencfw_em9305_auxiliary_start_303f50(prepared);
+ if(result!=0u) return result;
+ uint32_t value=*(volatile uint16_t *)pending;
+ uint32_t saved=opencfw_em9305_radio_query_3253a4(value);
+ if(saved==0u) return opencfw_em9305_auxiliary_signal_304394();
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052ccu;
+ if(callback!=0u&&*(volatile uint8_t *)(source+109u)!=0u){
+  uint32_t mode=*(volatile uint8_t *)(source+111u);
+  if(mode==1u){
+   value=*(volatile uint16_t *)(source+262u);
+   (void)((uint32_t (*)(uint32_t,uint32_t))callback)(value,0u);
+  }else if(mode==0u){
+   uint32_t high=*(volatile uint32_t *)(source+468u);
+   uint32_t low=*(volatile uint32_t *)(source+464u);
+   (void)((uint32_t (*)(uint32_t,uint32_t))callback)(low,high);
+  }
+ }
+ value=*(volatile uint16_t *)pending;
+ return opencfw_em9305_radio_request_start_303cd8(saved,(uint16_t)(value+6u));
+}
+
+/* Native3253a4..3253bc: size addition precedes halfword narrowing in
+ * BL delay slot; source-owned WSF allocation and native pointer+2 return. */
+uint32_t opencfw_em9305_radio_query_3253a4(uint32_t requested)
+{
+ uintptr_t allocation=opencfw_em9305_wsf_event_allocate((uint16_t)(requested+12u));
+ return allocation!=0u?(uint32_t)(allocation+2u):0u;
+}
+
+extern uint32_t opencfw_em9305_radio_prepare_state_32d694(uintptr_t,uintptr_t,uintptr_t);
+/* Authenticated stock334464..33446c. Runtime request template only. */
+_Alignas(4) static const uint8_t opencfw_em9305_prepare_template_334464[8]={2u,0u,0u,0u,8u,40u,128u,0u};
+/* Native32780c..3279a4: complete preparation graph. Native scratch is
+ * intentionally uninitialized before true state provider writes it. */
+uint32_t opencfw_em9305_radio_prepare_32780c(uintptr_t source,uint32_t force,uint32_t gate)
+{
+ _Alignas(4) uint8_t scratch[36];
+ if(force==0u&&*(volatile uint8_t *)(source+347u)==0u&&
+    *(volatile uint8_t *)(source+339u)==0u&&gate==0u) return 0u;
+ *(volatile uint8_t *)(source+336u)=255u;
+ uint32_t count=opencfw_em9305_radio_prepare_state_32d694(source,(uintptr_t)(scratch+8u),(uintptr_t)(scratch+35u));
+ if(*(volatile uint8_t *)(source+379u)!=0u||count==0u){
+  if(force==0u&&*(volatile uint8_t *)(source+344u)==0u){
+   uintptr_t owner=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+   if(owner!=0u){
+    uintptr_t callback=*(volatile uint32_t *)(owner+12u);
+    if(callback!=0u){
+     uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+     uint32_t delta=(uint32_t)source-(uint32_t)base,index;
+     __asm__ volatile("div %0,%1,%2":"=r"(index):"r"(delta),"r"(912u));
+     if(((uint32_t (*)(uint32_t))callback)((uint8_t)index)==0u) return 0u;
+    }
+   }
+  }
+  *(volatile uint8_t *)(source+339u)=(uint8_t)(count!=0u);
+  *(volatile uint8_t *)(source+336u)=1u;
+  *(volatile uint8_t *)(source+341u)=0u;
+  (void)opencfw_em9305_ll_segment_header_323d70(0x802808u,source+336u);
+  uint32_t high=*(const uint32_t *)(const void *)(opencfw_em9305_prepare_template_334464+4u);
+  uint32_t low=*(const uint32_t *)(const void *)opencfw_em9305_prepare_template_334464;
+  *(volatile uint32_t *)(scratch+4u)=high;
+  *(volatile uint32_t *)scratch=low;
+  (void)opencfw_em9305_radio_request_current_303d58((uint32_t)(uintptr_t)scratch,1u);
+  uint32_t prior=*(volatile uint8_t *)(source+379u);
+  uint32_t result=*(volatile uint16_t *)scratch;
+  *(volatile uint8_t *)(source+379u)=1u;
+  *(volatile uint8_t *)(source+380u)=(uint8_t)(prior^1u);
+  return (uint16_t)result;
+ }
+ uint32_t active=1u;
+ if(*(volatile uint8_t *)(scratch+35u)==0u){
+  uint32_t flags=*(volatile uint8_t *)(source+4u);
+  active=0u;
+  if((flags&2u)!=0u) active=*(volatile uint8_t *)(source+2u)==1u;
+ }
+ uintptr_t payload=*(volatile uint32_t *)(scratch+12u);
+ *(volatile uint8_t *)(source+339u)=(uint8_t)active;
+ *(volatile uint8_t *)(scratch+35u)=(uint8_t)active;
+ uint32_t length=*(volatile uint8_t *)(payload+1u);
+ *(volatile uint8_t *)(source+341u)=(uint8_t)length;
+ uint32_t type=*(volatile uint8_t *)payload&3u;
+ *(volatile uint8_t *)(source+336u)=(uint8_t)type;
+ uint32_t bypass=0u;
+ if(type==0u){
+  uintptr_t owner=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+  if(owner!=0u){
+   uintptr_t callback=*(volatile uint32_t *)(owner+8u);
+   if(callback!=0u){
+    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uint32_t delta=(uint32_t)source-(uint32_t)base,index;
+    __asm__ volatile("div %0,%1,%2":"=r"(index):"r"(delta),"r"(912u));
+    (void)((uint32_t (*)(uint32_t))callback)((uint8_t)index);
+    bypass=1u;
+   }
+  }
+ }
+ if(bypass==0u){
+  uint32_t flags=*(volatile uint8_t *)payload&~28u;
+  *(volatile uint8_t *)payload=(uint8_t)flags;
+  uint32_t byte=*(volatile uint8_t *)(source+337u);
+  flags|=(byte<<2)&4u;
+  *(volatile uint8_t *)payload=(uint8_t)flags;
+  byte=*(volatile uint8_t *)(source+338u);
+  flags|=(byte<<3)&8u;
+  *(volatile uint8_t *)payload=(uint8_t)flags;
+  byte=*(volatile uint8_t *)(source+339u);
+  flags|=(byte<<4)&16u;
+  *(volatile uint8_t *)payload=(uint8_t)flags;
+ }
+ payload=*(volatile uint32_t *)(scratch+12u);
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052d0u;
+ uint32_t captured=*(volatile uint8_t *)payload;
+ if(callback!=0u&&*(volatile uint8_t *)(source+108u)!=0u){
+  uint32_t mode=*(volatile uint8_t *)(source+111u);
+  if(mode==1u){
+   uint32_t value=*(volatile uint16_t *)(source+262u);
+   (void)((uint32_t (*)(uint32_t,uint32_t))callback)(value,0u);
+  }else if(mode==0u){
+   uint32_t high=*(volatile uint32_t *)(source+460u);
+   uint32_t low=*(volatile uint32_t *)(source+456u);
+   (void)((uint32_t (*)(uint32_t,uint32_t))callback)(low,high);
+  }
+ }
+ (void)opencfw_em9305_radio_request_current_303d58((uint32_t)(uintptr_t)(scratch+8u),count);
+ payload=*(volatile uint32_t *)(scratch+12u);
+ uint32_t result=*(volatile uint8_t *)(payload+1u);
+ return (uint16_t)(result+((captured&32u)!=0u?3u:2u));
+}
+
+/* Authenticated preparation state 32d694 and queue/header children.
+ * Native ARC EM listing: 313fcc, 32dedc..32df24, 32d694..32d738.
+ * Preserve volatile read/store ordering and untouched optional fields. */
+uint32_t opencfw_em9305_queue_single_313fcc(uintptr_t queue)
+{
+ uint32_t tail=*(volatile uint32_t *)(queue+4u);
+ uint32_t head=*(volatile uint32_t *)queue;
+ return head==tail;
+}
+uint32_t opencfw_em9305_short_header_decode_32dedc(uintptr_t output,uintptr_t input)
+{
+ uint32_t b1=*(volatile uint8_t *)(input+1u);
+ uint32_t b0=*(volatile uint8_t *)input;
+ uint32_t packed=b0+(b1<<8),low=(uint8_t)packed;
+ *(volatile uint8_t *)(output+5u)=(uint8_t)b1;
+ *(volatile uint8_t *)output=(uint8_t)(packed&3u);
+ uint32_t flag=(low>>5)&1u;
+ *(volatile uint8_t *)(output+4u)=(uint8_t)flag;
+ *(volatile uint8_t *)(output+3u)=(uint8_t)((low>>4)&1u);
+ *(volatile uint8_t *)(output+2u)=(uint8_t)((low>>3)&1u);
+ *(volatile uint8_t *)(output+1u)=(uint8_t)((low>>2)&1u);
+ if(flag!=0u){
+  uint32_t extra=*(volatile uint8_t *)(input+2u);
+  *(volatile uint8_t *)(output+6u)=(uint8_t)(extra>>6);
+  *(volatile uint8_t *)(output+7u)=(uint8_t)(extra&31u);
+  return 3u;
+ }
+ return 2u;
+}
+uint32_t opencfw_em9305_radio_prepare_state_32d694(uintptr_t source,uintptr_t state,uintptr_t flagptr)
+{
+ uint8_t handler;
+ uintptr_t queue=source+360u;
+ uintptr_t packet=opencfw_em9305_wsf_event_peek(queue,(uintptr_t)&handler);
+ uint32_t kind=0u,flagvalue=0u;
+ if(packet!=0u){
+  uint32_t single=opencfw_em9305_queue_single_313fcc(queue);
+  if(handler==255u){
+   uint8_t decoded[8];
+   uint32_t header=opencfw_em9305_short_header_decode_32dedc((uintptr_t)decoded,packet);
+   uint32_t length=*(volatile uint8_t *)(packet+1u);
+   flagvalue=single^1u;
+   *(volatile uint32_t *)(state+4u)=(uint32_t)packet;
+   *(volatile uint16_t *)state=(uint16_t)(header+length);
+   kind=1u;
+  }else{
+   uint32_t index=*(volatile uint8_t *)(packet+7u);
+   uint32_t unit=*(volatile uint8_t *)(packet+6u);
+   uint32_t length=*(volatile uint16_t *)(packet+4u);
+   uint32_t product;
+   __asm__ volatile("mpyuw %0,%1,%2" : "=r"(product) : "r"(unit),"r"(index));
+   uint32_t end=product+unit;
+   if(length<end)unit=length-product;
+   uintptr_t base=packet+index*8u;
+   *(volatile uint32_t *)(state+4u)=(uint32_t)(base+10u);
+   uint32_t first=*(volatile uint8_t *)(base+8u);
+   uint32_t extra=*(volatile uint8_t *)(base+9u);
+   uint32_t data=*(volatile uint32_t *)packet;
+   *(volatile uint16_t *)(state+8u)=(uint16_t)unit;
+   *(volatile uint16_t *)state=(uint16_t)first;
+   *(volatile uint32_t *)(state+12u)=data+product;
+   if(extra!=0u){
+    *(volatile uint16_t *)(state+16u)=(uint16_t)extra;
+    *(volatile uint32_t *)(state+20u)=(uint32_t)(packet+12u+index*8u);
+    kind=3u;
+   }else kind=2u;
+   if(single==0u)flagvalue=1u;
+   else{
+    length=*(volatile uint16_t *)(packet+4u);
+    product+=(uint16_t)unit;
+    flagvalue=product<length;
+   }
+  }
+ }
+ *(volatile uint8_t *)flagptr=(uint8_t)(flagvalue&1u);
+ return kind;
+}
+
+/* Authenticated packet advance 32d738..32d790.
+ * The store at32d788 is the BL.D delay slot: publish the packet before
+ * calling313ff0. Later child caller-saved register residue is unused. */
+uint32_t opencfw_em9305_radio_packet_advance_32d738(uintptr_t source)
+{
+ uint8_t handler;
+ uintptr_t queue=source+360u;
+ uintptr_t packet=opencfw_em9305_wsf_event_peek(queue,(uintptr_t)&handler);
+ if(packet==0u)return 0u;
+ if(handler!=255u){
+  uint32_t index=*(volatile uint8_t *)(packet+7u);
+  uint32_t unit=*(volatile uint8_t *)(packet+6u);
+  uint32_t length=*(volatile uint16_t *)(packet+4u);
+  index+=1u;
+  uint32_t product;
+  __asm__ volatile("mpyuw %0,%1,%2" : "=r"(product) : "r"(unit),"r"(index));
+  if(product<length){
+   *(volatile uint8_t *)(packet+7u)=(uint8_t)index;
+   return 1u;
+  }
+  *(volatile uint8_t *)(uintptr_t)0x8056e4u=handler;
+ }else *(volatile uint8_t *)(uintptr_t)0x8056e4u=255u;
+ *(volatile uint32_t *)(uintptr_t)0x805cd4u=(uint32_t)packet;
+ (void)opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&handler);
+ return 1u;
+}
+
+/* Authenticated packet completion 32d790..32d7f4. The event-post call's
+ * delay slot clears the saved packet before the child executes. */
+uint32_t opencfw_em9305_radio_packet_complete_32d790(uintptr_t source)
+{
+ uintptr_t packet=*(volatile uint32_t *)(uintptr_t)0x805cd4u;
+ if(packet==0u)return (uint32_t)source;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x8056e4u;
+ if(handler!=255u){
+  uintptr_t payload=*(volatile uint32_t *)packet;
+  (void)opencfw_em9305_wsf_event_release(payload);
+  (void)opencfw_em9305_wsf_queue_append(0x8056dcu,packet-12u);
+  (void)opencfw_em9305_wsf_critical_enter();
+  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805ab4u;
+  *(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)(count+1u);
+  (void)opencfw_em9305_wsf_critical_exit();
+  count=*(volatile uint8_t *)(source+376u);
+  *(volatile uint8_t *)(source+376u)=(uint8_t)(count+1u);
+ }else (void)opencfw_em9305_wsf_event_release(packet);
+ handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint32_t *)(uintptr_t)0x805cd4u=0u;
+ return opencfw_em9305_wsf_event_post(handler,1u);
+}
+
+/* Authenticated duration quantization 312c5c..312ca0: full-word input,
+ * unsigned compare/round-up and original MPYMU/MPYUW/MPYWHUL instructions.
+ * Keep ISA arithmetic instead of substituting unproved division formulas. */
+uint32_t opencfw_em9305_channel_timing_adjust_312c5c(uint32_t value)
+{
+ uint32_t result;
+ if(value<0x3bfc4u){
+  uint32_t reciprocal=0x11111112u;
+  __asm__ volatile("mpymu %0,%1,%2":"=r"(result):"r"(value),"r"(reciprocal));
+  result>>=1;
+  uint32_t scale=30u,quotient=result;
+  __asm__ volatile("mpyuw %0,%1,%2":"=r"(result):"r"(quotient),"r"(scale));
+  if(result<value)result+=30u;
+  return result;
+ }
+ uint32_t reciprocal=0x69d0369eu;
+ __asm__ volatile("mpymu %0,%1,%2":"=r"(result):"r"(value),"r"(reciprocal));
+ uint32_t quotient=((value<<1)+value+result)>>10;
+ uint32_t scale=300u;
+ __asm__ volatile("mpywhul %0,%1,%2":"=r"(result):"r"(scale),"r"(quotient));
+ if(result<value)result+=300u;
+ return result;
+}
+
+/* Authenticated command apply 309514..3096a8: retain all validation,
+ * partial writes, refreshes after callbacks/copies and native DSP timing. */
+uint32_t opencfw_em9305_command_apply_309514(uint32_t id,uint32_t interval,uint32_t first,uint32_t second,uint32_t third,uint32_t size,uintptr_t input)
+{
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,%2":"=r"(offset):"r"(id),"r"(784u));
+ uintptr_t slot=0x804080u+offset;
+ uintptr_t record=*(volatile uint32_t *)(slot+4u);
+ uint32_t active=*(volatile uint16_t *)(record+16u);
+ if((int32_t)(active-interval)>1)return 70u;
+ if(second>=first){
+  if(interval+1u==active)return 70u;
+  if(active==interval&&*(volatile uint8_t *)(record+19u)>second)return 70u;
+ }
+ uintptr_t table=0x803f7au+offset;
+ uint32_t periods=*(volatile uint8_t *)(table+1u),budget;
+ __asm__ volatile("mpyuw %0,%1,%2":"=r"(budget):"r"(periods),"r"(125u));
+ budget-=150u;
+ uint32_t timing=0u;
+ if(*(volatile uint8_t *)(table+86u)!=0u){
+  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;
+  if(callback!=0u){
+   timing=((uint32_t (*)(void))callback)();
+   record=*(volatile uint32_t *)(slot+4u);
+  }
+ }
+ uint32_t flags=*(volatile uint16_t *)(record+366u);
+ uint32_t phy=*(volatile uint8_t *)(uintptr_t)(0x804080u+offset);
+ uint32_t duration=opencfw_em9305_radio_duration_312be4(phy,0u,timing,0u,size,0u,2u,(flags&64u)!=0u?5u:3u);
+ if(budget<duration)return 69u;
+ record=*(volatile uint32_t *)(slot+4u);
+ *(volatile uint8_t *)(record+109u)=(uint8_t)size;
+ (void)opencfw_em9305_memcpy((void *)(record+112u),(const void *)input,size);
+ *(volatile uint8_t *)(record+108u)=1u;
+ record=*(volatile uint32_t *)(slot+4u);
+ uint32_t position=*(volatile uint8_t *)(record+19u);
+ if(position==second&&*(volatile uint16_t *)(record+16u)==interval){
+  uint32_t length=*(volatile uint8_t *)(record+109u);
+  uintptr_t owner=*(volatile uint32_t *)(uintptr_t)(0x803d78u+offset+92u);
+  uintptr_t destination=*(volatile uint32_t *)(record+92u);
+  *(volatile uint16_t *)(record+98u)=0u;
+  *(volatile uint16_t *)(record+88u)=(uint16_t)length;
+  uint32_t rate=*(volatile uint8_t *)table;
+  uint32_t multiplier=*(volatile uint8_t *)(uintptr_t)(0x803d78u+offset+515u);
+  (void)opencfw_em9305_memcpy((void *)destination,(const void *)(record+112u),length);
+  record=*(volatile uint32_t *)(slot+4u);
+  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805c9cu;
+  flags=*(volatile uint16_t *)(record+366u);
+  *(volatile uint32_t *)(owner+124u)=(uint32_t)(record+22u);
+  uint32_t prepared=((uint32_t (*)(uint32_t,uintptr_t,uintptr_t,uint32_t))callback)(flags,record+22u,record+88u,0u);
+  record=*(volatile uint32_t *)(slot+4u);
+  uint32_t product;
+  __asm__ volatile("mpyuw %0,%1,%2":"=r"(product):"r"(third),"r"(multiplier));
+  *(volatile uint16_t *)(owner+120u)=(uint16_t)prepared;
+  uint32_t scheduled;
+  __asm__ volatile("mpyd 0,%1,%2\n\tmac %0,%3,%4":"=r"(scheduled):"r"(rate),"r"(1250u),"r"(product),"r"(125u));
+  destination=*(volatile uint32_t *)(record+92u);
+  uint32_t copied=*(volatile uint16_t *)(record+98u);
+  *(volatile uint32_t *)(owner+112u)=scheduled;
+  *(volatile uint32_t *)(owner+132u)=(uint32_t)destination;
+  *(volatile uint16_t *)(owner+128u)=(uint16_t)copied;
+  uint32_t now=opencfw_em9305_pal_current_time();
+  uint32_t previous=*(volatile uint32_t *)(owner+144u);
+  if((int32_t)(scheduled-now+previous)<0)return 70u;
+  callback=*(volatile uint32_t *)(uintptr_t)0x805c94u;
+  if(callback!=0u)(void)((uint32_t (*)(uintptr_t,uint32_t))callback)(0x803d78u+offset,duration);
+  return 0u;
+ }
+ *(volatile uint8_t *)(record+100u)=1u;
+ uint32_t shift=second&63u;
+ uint32_t low=shift<32u?1u<<shift:0u;
+ uint32_t high=shift>=32u?1u<<(shift-32u):0u;
+ uint32_t oldlow=*(volatile uint32_t *)record;
+ uint32_t oldhigh=*(volatile uint32_t *)(record+4u);
+ *(volatile uint8_t *)(record+second+368u)=(uint8_t)third;
+ *(volatile uint32_t *)record=low|oldlow;
+ *(volatile uint32_t *)(record+4u)=high|oldhigh;
+ return 0u;
+}
+
+/* Authenticated receive callback31e620..31e7c8. R1 is the received packet,
+ * R2 is the fullword status. The decoder output address is captured in its
+ * BL.D delay slot, before its returned header length indexes the input. */
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_receive_state_324ea4(uintptr_t);
+extern uint32_t opencfw_em9305_receive_gate_324f68(uintptr_t);
+extern uint32_t opencfw_em9305_receive_check_319838(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_receive_command_31b7c8(uintptr_t);
+extern uint32_t opencfw_em9305_receive_packet_release_3253bc(uintptr_t);
+extern uint32_t opencfw_em9305_receive_finish_324fb0(uintptr_t);
+extern uint32_t opencfw_em9305_receive_packet_finish_3253c4(uintptr_t,uintptr_t,uint32_t,uint32_t);
+uint32_t opencfw_em9305_radio_cb_31e620(uintptr_t event,uintptr_t input,uint32_t status)
+{
+ uintptr_t source=*(volatile uint32_t *)(event+36u);
+ uint32_t pending=*(volatile uint8_t *)(source+628u);
+ *(volatile uint8_t *)(source+269u)=(uint8_t)status;
+ if(pending!=0u){
+  uint32_t mode=*(volatile uint8_t *)(source+635u);
+  *(volatile uint8_t *)(source+628u)=0u;
+  if(mode==1u){
+   uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801314u;
+   if(callback!=0u){
+    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uint32_t delta=(uint32_t)(source-base),index;
+    __asm__ volatile("div %0,%1,%2":"=r"(index):"r"(delta),"r"(912u));
+    (void)((uint32_t (*)(uint32_t))callback)((uint8_t)index);
+   }
+  }
+  (void)opencfw_em9305_receive_terminate_325c08(source,110u);
+ }
+ if(status==2u)return opencfw_em9305_receive_packet_release_3253bc(input);
+ if(*(volatile uint8_t *)(source+1u)==3u){
+  if(*(volatile uint8_t *)(source+629u)!=0u){
+   if(*(volatile uint8_t *)(source+630u)!=0u)goto discard;
+  }else if(*(volatile uint8_t *)(source+620u)==0u||*(volatile uint32_t *)(source+360u)==0u)goto discard;
+ }
+ uint32_t data=0u,gate,success;
+ if(status==1u||status==3u)goto discard;
+ if(status==4u){
+  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x802a34u;
+  count+=1u;
+  *(volatile uint8_t *)(uintptr_t)0x802a34u=(uint8_t)count;
+  if((uint8_t)count>=2u)goto discard;
+  gate=(*(volatile uint8_t *)(source+4u)&8u)==0u;
+  goto prepare;
+ }
+ if(status==0u){
+  *(volatile uint8_t *)(uintptr_t)0x802a34u=0u;
+  *(volatile uint8_t *)(uintptr_t)0x802a38u=1u;
+ }
+ uintptr_t decoded=source+344u;
+ uint32_t header=opencfw_em9305_short_header_decode_32dedc(decoded,input);
+ uint32_t subtype=*(volatile uint8_t *)(input+header);
+ if(status==6u){
+  uint32_t b1=*(volatile uint8_t *)(source+346u);
+  uint32_t b0=*(volatile uint8_t *)(source+337u);
+  if(((b0^b1)&1u)==0u){
+   (void)opencfw_em9305_receive_terminate_325c08(source,72u);
+   goto discard;
+  }
+ }
+ if(*(volatile uint8_t *)(source+349u)!=0u){
+  uint32_t count=*(volatile uint16_t *)(uintptr_t)0x802a44u;
+  *(volatile uint16_t *)(uintptr_t)0x802a44u=(uint16_t)(count+1u);
+ }
+ data=opencfw_em9305_receive_state_324ea4(source);
+ gate=opencfw_em9305_receive_gate_324f68(source);
+ uint32_t length=*(volatile uint16_t *)(source+592u);
+ uint32_t value=*(volatile uint32_t *)(event+8u);
+ uint32_t check=opencfw_em9305_receive_check_319838(source,value,length);
+ if(check!=0u)(void)opencfw_em9305_auxiliary_signal_304394();
+ if((((status!=0u)|check)&1u)==0u&&*(volatile uint8_t *)decoded==3u&&subtype==5u&&*(volatile uint8_t *)(source+620u)==1u&&*(volatile uint8_t *)(source+635u)==19u){
+  if(opencfw_em9305_receive_command_31b7c8(source)!=0u)goto failed;
+ }
+ if(check!=0u){success=0u;goto finish;}
+ if(gate!=0u)gate=1u;
+ else gate=(*(volatile uint8_t *)(source+4u)&8u)==0u;
+prepare:
+ success=1u;
+ uint32_t prepared=opencfw_em9305_radio_prepare_32780c(source,status,1u&~gate);
+ if(prepared==0u)goto failed;
+ if(opencfw_em9305_auxiliary_start_303f50(prepared)!=0u)success=0u;
+ goto finish;
+failed:
+ (void)opencfw_em9305_auxiliary_signal_304394();
+ success=0u;
+finish:
+ {
+  uint32_t count=*(volatile uint16_t *)(uintptr_t)0x802a3cu;
+  *(volatile uint16_t *)(uintptr_t)0x802a3cu=(uint16_t)(count+(gate&1u));
+ }
+ (void)opencfw_em9305_receive_finish_324fb0(source);
+ if(*(volatile uint8_t *)(source+344u)==3u)*(volatile uint8_t *)(source+630u)=0u;
+ return opencfw_em9305_receive_packet_finish_3253c4(source,input,data,success);
+discard:
+ (void)opencfw_em9305_auxiliary_signal_304394();
+ return opencfw_em9305_receive_packet_release_3253bc(input);
+}
+
+/* Authenticated receive gate children324f68/324fb0/3253bc/32d5ac.
+ *32d5ac tests callback presence but does not call it; return is the native
+ * incidental R0 (advance, pointer, mode or updated high counter word). */
+uint32_t opencfw_em9305_receive_advance_32d5ac(uintptr_t source)
+{
+ *(volatile uint8_t *)(source+341u)=0u;
+ uint32_t result=opencfw_em9305_radio_packet_advance_32d738(source);
+ if(result==0u)return result;
+ result=*(volatile uint32_t *)(uintptr_t)0x8052d0u;
+ if(result==0u)return result;
+ result=*(volatile uint8_t *)(source+108u);
+ if(result==0u)return result;
+ result=*(volatile uint8_t *)(source+111u);
+ if(result!=0u)return result;
+ uint32_t low=*(volatile uint32_t *)(source+456u);
+ uint32_t high=*(volatile uint32_t *)(source+460u);
+ uint32_t next=low+1u;
+ result=high+(next<low);
+ *(volatile uint32_t *)(source+456u)=next;
+ *(volatile uint32_t *)(source+460u)=result;
+ return result;
+}
+uint32_t opencfw_em9305_receive_gate_324f68(uintptr_t source)
+{
+ uint32_t decoded=*(volatile uint8_t *)(source+345u);
+ uint32_t previous=*(volatile uint8_t *)(source+338u);
+ uint32_t result=(decoded^previous)&1u;
+ if(result==0u)return result;
+ uint32_t mode=*(volatile uint8_t *)(source+341u);
+ *(volatile uint8_t *)(source+338u)=(uint8_t)(previous+1u);
+ if(mode!=0u){
+  uint32_t kind=*(volatile uint8_t *)(source+336u);
+  if(kind==3u){
+   uint32_t remaining=*(volatile uint8_t *)(source+378u);
+   if(remaining!=0u)*(volatile uint8_t *)(source+378u)=(uint8_t)(remaining-1u);
+  }
+  (void)opencfw_em9305_receive_advance_32d5ac(source);
+ }else *(volatile uint8_t *)(source+379u)=0u;
+ return result;
+}
+uint32_t opencfw_em9305_receive_finish_324fb0(uintptr_t source)
+{ return opencfw_em9305_radio_packet_complete_32d790(source); }
+uint32_t opencfw_em9305_receive_packet_release_3253bc(uintptr_t packet)
+{ return opencfw_em9305_wsf_event_release(packet-2u); }
+
+/* Authenticated receive allocation/finalization324ea4,325374,3253c4.
+ * Preserve callback-presence tests, credit decrements, fresh counter reads
+ * and partial effects even when a later provider fails. */
+uint32_t opencfw_em9305_receive_state_324ea4(uintptr_t source)
+{
+ uint32_t kind=*(volatile uint8_t *)(source+344u);
+ if(kind==0u){
+  uintptr_t owner=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+  if(owner!=0u){
+   uintptr_t callback=*(volatile uint32_t *)(owner+16u);
+   if(callback!=0u){
+    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uint32_t delta=(uint32_t)(source-base),index;
+    __asm__ volatile("div %0,%1,%2":"=r"(index):"r"(delta),"r"(912u));
+    uint32_t response=((uint32_t (*)(uint32_t))callback)((uint8_t)index);
+    if(response!=0u)return 0u;
+    uint32_t size=*(volatile uint16_t *)(source+566u);
+    return opencfw_em9305_radio_query_3253a4(size);
+   }
+  }
+ }
+ uint32_t decoded=*(volatile uint8_t *)(source+346u);
+ uint32_t previous=*(volatile uint8_t *)(source+337u);
+ if(((decoded^previous)&1u)!=0u)return 0u;
+ uint32_t size=*(volatile uint16_t *)(source+566u);
+ uint32_t length=*(volatile uint8_t *)(source+349u);
+ if(size+4u<length||length==0u||kind-1u>=3u){
+  *(volatile uint8_t *)(source+337u)=(uint8_t)(previous+1u);
+  return 0u;
+ }
+ uint32_t credits=*(volatile uint8_t *)(uintptr_t)0x805ab5u;
+ if(credits==0u)return 0xffffffffu;
+ uint32_t allocation=opencfw_em9305_radio_query_3253a4(size);
+ if(allocation==0u)return 0xffffffffu;
+ credits=*(volatile uint8_t *)(uintptr_t)0x805ab5u;
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052ccu;
+ *(volatile uint8_t *)(uintptr_t)0x805ab5u=(uint8_t)(credits-1u);
+ if(callback!=0u&&*(volatile uint8_t *)(source+109u)!=0u&&*(volatile uint8_t *)(source+111u)==0u){
+  uint32_t low=*(volatile uint32_t *)(source+464u);
+  uint32_t high=*(volatile uint32_t *)(source+468u);
+  uint32_t next=low+1u;
+  *(volatile uint32_t *)(source+464u)=next;
+  *(volatile uint32_t *)(source+468u)=high+(next<low);
+ }
+ previous=*(volatile uint8_t *)(source+337u);
+ *(volatile uint8_t *)(source+337u)=(uint8_t)(previous+1u);
+ return allocation;
+}
+uint32_t opencfw_em9305_receive_packet_publish_325374(uintptr_t packet,uint32_t value,uint32_t id)
+{
+ packet-=2u;
+ *(volatile uint8_t *)packet=(uint8_t)value;
+ *(volatile uint8_t *)(packet+1u)=(uint8_t)(value>>8);
+ (void)opencfw_em9305_ll_event_enqueue(0x805abcu,(uint8_t)id,packet);
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ return opencfw_em9305_wsf_event_post(handler,2u);
+}
+uint32_t opencfw_em9305_receive_packet_finish_3253c4(uintptr_t source,uintptr_t packet,uint32_t data,uint32_t success)
+{
+ uintptr_t chosen=data!=0u?data:packet;
+ if(data!=0u){
+  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uint32_t value=*(volatile uint16_t *)(source+262u);
+  uint32_t delta=(uint32_t)(source-base),index;
+  __asm__ volatile("div %0,%1,%2":"=r"(index):"r"(delta),"r"(912u));
+  (void)opencfw_em9305_receive_packet_publish_325374(packet,value,(uint8_t)index);
+ }
+ if(success==0u){
+  if(chosen!=0u)return opencfw_em9305_receive_packet_release_3253bc(chosen);
+  return (uint32_t)source;
+ }
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052ccu;
+ if(callback!=0u&&*(volatile uint8_t *)(source+109u)!=0u){
+  uint32_t mode=*(volatile uint8_t *)(source+111u);
+  if(mode==1u){
+   uint32_t value=*(volatile uint16_t *)(source+262u);
+   (void)((uint32_t (*)(uint32_t,uint32_t))callback)(value,0u);
+  }else if(mode==0u){
+   uint32_t high=*(volatile uint32_t *)(source+468u);
+   uint32_t low=*(volatile uint32_t *)(source+464u);
+   (void)((uint32_t (*)(uint32_t,uint32_t))callback)(low,high);
+  }
+ }
+ uint32_t size=*(volatile uint16_t *)(source+566u);
+ return opencfw_em9305_radio_request_start_303cd8((uint32_t)chosen,(uint16_t)(size+6u));
+}
+
+/* Authenticated receive time check319838..319890 and termination325c08..325c40. */
+uint32_t opencfw_em9305_receive_check_319838(uintptr_t source,uint32_t reference,uint32_t length)
+{
+ uint32_t flags=*(volatile uint8_t *)(source+4u);
+ if((flags&4u)!=0u)return 0u;
+ uint32_t now=opencfw_em9305_pal_current_time();
+ uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
+ uint32_t interval=*(volatile uint16_t *)(source+266u),limit;
+ uintptr_t object=*(volatile uint32_t *)(source+20u);
+ __asm__ volatile("mpyuw %0,%1,%2":"=r"(limit):"r"(interval),"r"(1250u));
+ if(object!=0u){
+  uint32_t timestamp=*(volatile uint32_t *)(object+8u);
+  uint32_t elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(timestamp,reference);
+  if(limit>=elapsed){
+   object=*(volatile uint32_t *)(source+20u);
+   timestamp=*(volatile uint32_t *)(object+8u);
+   limit=opencfw_em9305_auxiliary_elapsed_303f8c(timestamp,reference);
+  }
+ }
+ uint32_t elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(now,reference);
+ uint32_t required=elapsed+(guard+length)+150u;
+ return limit<required;
+}
+uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t source,uint32_t reason)
+{
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
+ if(message==0u)return 0u;
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ *(volatile uint8_t *)(message+3u)=(uint8_t)reason;
+ uint32_t delta=(uint32_t)(source-base),index;
+ __asm__ volatile("div %0,%1,%2":"=r"(index):"r"(delta),"r"(912u));
+ *(volatile uint8_t *)(message+2u)=1u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint16_t *)message=(uint8_t)index;
+ return opencfw_em9305_wsf_task_message_send(handler,message);
+}
+
+/* Authenticated receive command predicate31b7c8..31b7d4 and radio
+ * completion3330d8..33322c, with complete scheduler leaf children. */
+uint32_t opencfw_em9305_receive_command_31b7c8(uintptr_t source)
+{ return *(volatile uint8_t *)(source+621u)==3u; }
+uint32_t opencfw_em9305_radio_window_3122fc(uint32_t value,uint32_t mode)
+{
+ *(volatile uint32_t *)(uintptr_t)0xf04420u=value;
+ *(volatile uint8_t *)(uintptr_t)0xf04405u=(uint8_t)mode;
+ return value;
+}
+uint32_t opencfw_em9305_radio_window_start_3103e0(uint32_t offset,uint32_t size)
+{
+ uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805e84u;
+ uint32_t deadline=offset+base-85u;
+ *(volatile uint32_t *)(uintptr_t)0x805e88u=deadline;
+ uint32_t result=opencfw_em9305_radio_deadline_333450(deadline);
+ uint32_t state=1u;
+ if(result!=0u){
+  uint32_t extra=*(volatile uint16_t *)(uintptr_t)0x805e9cu;
+  (void)opencfw_em9305_radio_window_3122fc(20u+((size+extra)<<2),1u);
+  (void)opencfw_em9305_radio_receive_trigger_312360();
+  state=3u;
+ }
+ *(volatile uint8_t *)(uintptr_t)0x805e78u=(uint8_t)state;
+ return result;
+}
+uint32_t opencfw_em9305_radio_window_resume_310430(uint32_t unused,uint32_t size)
+{
+ (void)unused;
+ uint32_t extra=*(volatile uint16_t *)(uintptr_t)0x805e9cu;
+ uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805e8cu;
+ *(volatile uint32_t *)(uintptr_t)0x805e84u=base;
+ uint32_t result=opencfw_em9305_radio_window_3122fc(20u+((size+extra)<<2),1u);
+ *(volatile uint8_t *)(uintptr_t)0x805e78u=3u;
+ return result;
+}
+uint32_t opencfw_em9305_radio_window_base_310654(uint32_t unused)
+{
+ (void)unused;
+ uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805e8cu;
+ *(volatile uint8_t *)(uintptr_t)0x805e78u=2u;
+ *(volatile uint32_t *)(uintptr_t)0x805e84u=base;
+ return base;
+}
+/* Exact five non-executable status bytes at native3344c0..3344c5. */
+const uint8_t opencfw_em9305_radio_status_3344c0[5]={0u,1u,3u,4u,6u};
+uint32_t opencfw_em9305_radio_callback_3330d8(uint32_t status,uint32_t timestamp,uint32_t selector,uint32_t context)
+{
+ uintptr_t source=0x805d18u,root=0x805cf4u;
+ uint32_t count=*(volatile uint16_t *)(source+12u);
+ *(volatile uint16_t *)(source+12u)=(uint16_t)(count+1u);
+ uint32_t active=1u,code=1u;
+ if(status<=4u&&((0x19u>>status)&1u)!=0u){
+  uintptr_t packet=*(volatile uint32_t *)(source+28u);
+  uint32_t length=*(volatile uint8_t *)packet;
+  uint32_t limit=*(volatile uint16_t *)(source+32u);
+  uint32_t span=length+2u>limit?limit+6u:length+9u;
+  if(*(volatile uint8_t *)(uintptr_t)0x805d3au!=0u)span+=4u;
+  if(selector==1u)span=8u+(span<<2);
+  else if(selector==3u)span=(span<<4)+80u;
+  else if(selector==4u)span=(span<<6)+80u;
+  else span=8u+(span<<3);
+  uint32_t finish;
+  if(*(volatile uint8_t *)(source+10u)!=0u){
+   uint32_t base=*(volatile uint32_t *)(root+8u);
+   finish=span+timestamp-base;
+  }else{
+   uint32_t base=*(volatile uint32_t *)source;
+   finish=base+span;
+  }
+  uint32_t mode=*(volatile uint8_t *)(root+16u);
+  *(volatile uint32_t *)(root+36u)=finish;
+  if(mode==1u){
+   uint32_t first=*(volatile uint8_t *)(source+14u);
+   uint32_t other=*(volatile uint8_t *)(source+15u);
+   *(volatile uint32_t *)source=finish+150u;
+   if(first!=other){
+    uint32_t second=*(volatile uint8_t *)(source+25u);
+    (void)opencfw_em9305_radio_configure_3104d8(first,second);
+   }
+   (void)opencfw_em9305_radio_window_base_310654(150u);
+  }else if(mode==3u){
+   uintptr_t owner=*(volatile uint32_t *)(root+24u);
+   if(owner!=0u){
+    (void)opencfw_em9305_radio_finish_310454(*(volatile uint8_t *)(owner+1u));
+    finish=*(volatile uint32_t *)(root+36u);
+   }
+   uint32_t extra=*(volatile uint16_t *)(root+40u);
+   uint32_t base=*(volatile uint32_t *)(root+12u);
+   finish+=150u;
+   *(volatile uint32_t *)(root+36u)=finish;
+   (void)opencfw_em9305_radio_window_resume_310430(147u,extra+base);
+  }else if(mode==2u){
+   uintptr_t owner=*(volatile uint32_t *)(root+24u);
+   if(owner!=0u){
+    (void)opencfw_em9305_radio_setup_310450(*(volatile uint32_t *)(owner+4u));
+    owner=*(volatile uint32_t *)(root+24u);
+    (void)opencfw_em9305_radio_timestamp_310474(*(volatile uint32_t *)(owner+8u));
+    owner=*(volatile uint32_t *)(root+24u);
+    (void)opencfw_em9305_radio_finish_310454(*(volatile uint8_t *)(owner+1u));
+    owner=*(volatile uint32_t *)(root+24u);
+    (void)opencfw_em9305_radio_transform_33322c(owner+20u);
+   }
+   uint32_t base=*(volatile uint32_t *)(root+8u);
+   uint32_t time=*(volatile uint32_t *)(root+20u);
+   uint32_t extra=*(volatile uint16_t *)(root+40u);
+   uint32_t delta=time-base;
+   *(volatile uint32_t *)(root+36u)=delta;
+   active=opencfw_em9305_radio_window_start_3103e0(delta-3u,extra+6u);
+  }else (void)opencfw_em9305_common_activate_310580(mode);
+ }
+ uint32_t encoded=selector==3u?1u:selector==4u?2u:0u;
+ if(status<5u)code=opencfw_em9305_radio_status_3344c0[status];
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805cf8u;
+ uint32_t result=((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t))callback)(code,context,0u,timestamp,encoded);
+ if(active==0u){
+  callback=*(volatile uint32_t *)(uintptr_t)0x805cf8u;
+  result=((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t))callback)(1u,context,0u,timestamp,encoded);
+ }
+ return result;
+}
+
+/* Authenticated radio follow-up callback333268..333338. Mode2's
+ * owner-null path compares the captured incremented counter's low half;
+ * the owner-present path reloads root48 after the transform child. */
+uint32_t opencfw_em9305_radio_callback_333268(uint32_t status)
+{
+ uintptr_t source=0x805d18u,root=0x805cf4u;
+ uint32_t count=*(volatile uint16_t *)(source+12u);
+ uint32_t increment=count+1u;
+ *(volatile uint16_t *)(source+12u)=(uint16_t)increment;
+ if(status==0u){
+  uint32_t mode=*(volatile uint8_t *)(root+16u);
+  if(mode==1u){
+   uint32_t time=*(volatile uint32_t *)source;
+   uint32_t size=*(volatile uint16_t *)(source+4u);
+   time+=150u;
+   *(volatile uint32_t *)source=time;
+   (void)opencfw_em9305_radio_window_resume_310430(147u,size+6u);
+  }else if(mode==3u){
+   uintptr_t owner=*(volatile uint32_t *)(root+24u);
+   if(owner!=0u)(void)opencfw_em9305_radio_finish_310454(*(volatile uint8_t *)(owner+1u));
+   uint32_t time=*(volatile uint32_t *)source;
+   uint32_t first=*(volatile uint8_t *)(source+14u);
+   uint32_t other=*(volatile uint8_t *)(source+15u);
+   time+=150u;
+   *(volatile uint32_t *)source=time;
+   if(first!=other){
+    uint32_t second=*(volatile uint8_t *)(source+25u);
+    (void)opencfw_em9305_radio_configure_3104d8(first,second);
+   }
+   (void)opencfw_em9305_radio_window_base_310654(150u);
+  }else if(mode==2u){
+   uintptr_t owner=*(volatile uint32_t *)(root+24u);
+   uint32_t comparison=increment;
+   if(owner!=0u){
+    (void)opencfw_em9305_radio_setup_310450(*(volatile uint32_t *)(owner+4u));
+    owner=*(volatile uint32_t *)(root+24u);
+    (void)opencfw_em9305_radio_timestamp_310474(*(volatile uint32_t *)(owner+8u));
+    owner=*(volatile uint32_t *)(root+24u);
+    (void)opencfw_em9305_radio_finish_310454(*(volatile uint8_t *)(owner+1u));
+    owner=*(volatile uint32_t *)(root+24u);
+    (void)opencfw_em9305_radio_transform_33322c(owner+20u);
+    comparison=*(volatile uint16_t *)(root+48u);
+   }
+   uint32_t base=*(volatile uint32_t *)(root+8u);
+   uint32_t time=*(volatile uint32_t *)(root+20u);
+   uint32_t delta=time-base;
+   *(volatile uint32_t *)(root+36u)=delta;
+   if((uint16_t)comparison==1u){
+    uint32_t first=*(volatile uint8_t *)(source+14u);
+    uint32_t other=*(volatile uint8_t *)(source+15u);
+    if(first!=other){
+     uint32_t second=*(volatile uint8_t *)(source+25u);
+     (void)opencfw_em9305_radio_configure_3104d8(first,second);
+     delta=*(volatile uint32_t *)source;
+    }
+   }
+   (void)opencfw_em9305_radio_request_state_310600(delta);
+  }else (void)opencfw_em9305_common_activate_310580(mode);
+ }
+ uintptr_t destination=*(volatile uint32_t *)(source+20u);
+ if(destination!=0u){
+  uint32_t length=*(volatile uint8_t *)(source+24u);
+  (void)opencfw_em9305_memcpy((void *)destination,(const void *)(source+16u),length);
+  *(volatile uint32_t *)(source+20u)=0u;
+ }
+ uintptr_t callback=*(volatile uint32_t *)root;
+ return ((uint32_t (*)(uint32_t))callback)(status!=0u);
+}
+
+/* Authenticated radio status callback333480..33354c. The measured signed
+ * level provider311a40 remains a genuine import pending its FPU contract. */
+extern uint32_t opencfw_em9305_radio_measured_level_311a40(void);
+uint32_t opencfw_em9305_radio_status_ready_311ddc(void)
+{ return (*(volatile uint32_t *)(uintptr_t)0xf04054u&0x20u)==0u; }
+uint32_t opencfw_em9305_radio_status_valid_311df0(void)
+{ return (*(volatile uint32_t *)(uintptr_t)0xf040a8u&6u)!=2u; }
+uint32_t opencfw_em9305_radio_callback_333480(uint32_t event)
+{
+ (void)opencfw_em9305_pal_hook_three(16u);
+ uintptr_t root=0x805e78u;
+ uint32_t state=*(volatile uint8_t *)root;
+ uint32_t adjusted=event-8u;
+ if(state==1u)return adjusted;
+ uint32_t code,second=0u,kind,fourth=0u;
+ if(adjusted<4u){
+  (void)opencfw_em9305_common_activate_310580(adjusted);
+  kind=*(volatile uint8_t *)(root+33u);code=1u;
+ }else if(event==5u){
+  (void)opencfw_em9305_common_activate_310580(adjusted);
+  kind=*(volatile uint8_t *)(root+33u);code=2u;
+ }else if(event==3u){
+  uint32_t first=*(volatile uint16_t *)(root+36u);
+  uint32_t extra=*(volatile uint16_t *)(root+38u);
+  uint32_t time=*(volatile uint32_t *)(uintptr_t)0xf01854u;
+  uint32_t value=time-(first+extra);
+  *(volatile uint32_t *)(root+24u)=value;
+  return value;
+ }else{
+  uint32_t offset=*(volatile uint16_t *)(root+36u);
+  uint32_t time=*(volatile uint32_t *)(uintptr_t)0xf0184cu;
+  *(volatile uint32_t *)(root+20u)=time-offset;
+  uint32_t ready=opencfw_em9305_radio_status_ready_311ddc();
+  uintptr_t owner=*(volatile uint32_t *)(root+28u);
+  uint32_t enabled=*(volatile uint8_t *)(owner+1u);
+  uint32_t level=opencfw_em9305_radio_measured_level_311a40();
+  kind=*(volatile uint8_t *)(root+33u);
+  if(kind==2u){
+   uint32_t flags=*(volatile uint32_t *)(uintptr_t)0xf04054u;
+   kind=(flags&768u)==0u?4u:3u;
+  }
+  uint32_t quotient;
+  __asm__ volatile("div %0,%1,10" : "=r"(quotient) : "r"(level));
+  fourth=(uint32_t)(int32_t)(int8_t)quotient;
+  code=3u;
+  if(ready!=0u){
+   uint32_t check=*(volatile uint8_t *)(uintptr_t)0x805ea5u;
+   code=0u;
+   if(check!=0u&&enabled!=0u&&opencfw_em9305_radio_status_valid_311df0()==0u)code=4u;
+  }
+  second=*(volatile uint32_t *)(root+24u);
+ }
+ uintptr_t callback=*(volatile uint32_t *)(root+4u);
+ return ((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t))callback)(code,second,kind,fourth);
+}
+
+/* Authenticated two-word mask count30c414..30c478. Preserve the native
+ * carry chain and DSP accumulator operations rather than replacing the
+ * accumulator sequence with an inferred generic popcount. */
+uint32_t opencfw_em9305_ll_mask_count_30c414(uint32_t low,uint32_t high)
+{
+ register uint32_t first __asm__("r0")=low;
+ register uint32_t second __asm__("r1")=high;
+ __asm__ volatile(
+  "lsr r2,r0,1\n\t"
+  "mov r11,0x55555555\n\t"
+  "and r2,r2,r11\n\t"
+  "mov r12,0x33333333\n\t"
+  "sub.f r0,r0,r2\n\t"
+  "and r2,r0,r12\n\t"
+  "lsr r0,r0,2\n\t"
+  "and r0,r0,r12\n\t"
+  "add r0,r0,r2\n\t"
+  "lsr r2,r0,4\n\t"
+  "mov r8,0x0f0f0f0f\n\t"
+  "add r0,r0,r2\n\t"
+  "and r2,r0,r8\n\t"
+  "lsr r0,r1,1\n\t"
+  "and r0,r0,r11\n\t"
+  "sbc.f r0,r1,r0\n\t"
+  "and r1,r0,r12\n\t"
+  "lsr r0,r0,2\n\t"
+  "mov r3,0x01010101\n\t"
+  "and r0,r0,r12\n\t"
+  "mpymu r58,r2,r3\n\t"
+  "add r0,r0,r1\n\t"
+  "lsr r1,r0,4\n\t"
+  "add r0,r0,r1\n\t"
+  "mac 0,r2,r3\n\t"
+  "and r0,r0,r8\n\t"
+  "mac r0,r0,r3\n\t"
+  "lsr r0,r0,24"
+  : "+r"(first),"+r"(second) : : "r2","r3","r8","r11","r12","cc");
+ return first;
+}
+
+/* Authenticated command-dispatch parent330c60 and shared330e10 handler.
+ * Stack records are semantic fields; lower commands remain genuine imports. */
+extern uint32_t opencfw_em9305_command_30ccf8(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30df08(uintptr_t);
+uint32_t opencfw_em9305_command_30dfd8(uint32_t value)
+{
+ uint32_t second=*(volatile uint8_t *)(uintptr_t)0x805a74u;
+ uint32_t first=*(volatile uint8_t *)(uintptr_t)0x805a73u;
+ if((first|second)!=0u)return 12u;
+ if(value-1u>=7u)return 18u;
+ *(volatile uint8_t *)(uintptr_t)0x805b00u=(uint8_t)value;
+ return 0u;
+}
+uintptr_t opencfw_em9305_ll_information_3032b4(uintptr_t output)
+{ return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x801820u,40u); }
+uint32_t opencfw_em9305_dispatch_shared_330e10(uintptr_t request,uintptr_t input)
+{
+ uint32_t command=*(volatile uint16_t *)request;
+ uint32_t status,length;
+ if(command==0xfffcu){status=0u;length=41u;}
+ else if(command==0xffe0u){
+  status=opencfw_em9305_command_30dfd8(*(volatile uint8_t *)input);
+  command=*(volatile uint16_t *)request;length=1u;
+ }else return 0u;
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(length,command);
+ if(response==0u)return 1u;
+ *(volatile uint8_t *)response=(uint8_t)status;
+ uintptr_t cursor=response+1u;
+ if(*(volatile uint16_t *)request==0xfffcu){
+  uint8_t scratch[40] __attribute__((aligned(4)));
+  (void)opencfw_em9305_memset(scratch,0u,40u);
+  (void)opencfw_em9305_ll_information_3032b4((uintptr_t)scratch);
+  (void)opencfw_em9305_memcpy((void *)cursor,scratch,40u);
+ }
+ (void)opencfw_em9305_ll_event_send(cursor-6u);
+ return 1u;
+}
+uint32_t opencfw_em9305_dispatch_330c60(uintptr_t request,uintptr_t input)
+{
+ if(opencfw_em9305_dispatch_shared_330e10(request,input)!=0u)return 1u;
+ uint32_t command=*(volatile uint16_t *)request;
+ if(command==0x200cu){
+  uint32_t second=*(volatile uint8_t *)(input+1u);
+  uint32_t first=*(volatile uint8_t *)input;
+  (void)opencfw_em9305_command_30ccf8(first,second);
+  return 1u;
+ }
+ if(command!=0x200bu)return 0u;
+ uint32_t mode=*(volatile uint8_t *)input;
+ uint32_t first=*(volatile uint8_t *)(input+5u);
+ uint32_t second=*(volatile uint8_t *)(input+6u);
+ uint32_t lo=*(volatile uint8_t *)(input+1u);
+ uint32_t hi=*(volatile uint8_t *)(input+2u);
+ uint32_t lower=*(volatile uint8_t *)(input+3u);
+ uint32_t upper=*(volatile uint8_t *)(input+4u);
+ uint8_t record[8] __attribute__((aligned(4)));
+ *(uint16_t *)(record+2u)=(uint16_t)(lower+(upper<<8u));
+ record[4]=(uint8_t)mode;record[5]=(uint8_t)first;record[6]=(uint8_t)second;
+ *(uint16_t *)record=(uint16_t)(lo+(hi<<8u));
+ uint32_t status=opencfw_em9305_command_30df08((uintptr_t)record);
+ command=*(volatile uint16_t *)request;
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(1u,command);
+ if(response==0u)return 0u;
+ if(*(volatile uint16_t *)request==0x200bu)*(volatile uint8_t *)response=(uint8_t)status;
+ (void)opencfw_em9305_ll_event_send(response-5u);
+ return 1u;
+}
+
+/* Authenticated scan command children30ccf8/30df08 and status30e8c0.
+ * Preserve allocation-failure returns and fresh payload reads after allocation. */
+uint32_t opencfw_em9305_command_status_30e8c0(uint32_t status)
+{
+ uint8_t record[4] __attribute__((aligned(4)));
+ record[3]=(uint8_t)status;record[2]=4u;*(uint16_t *)record=0u;
+ return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)record);
+}
+uint32_t opencfw_em9305_command_30ccf8(uint32_t selector,uint32_t enable)
+{
+ if(opencfw_em9305_ll_connection_gate_30e524()==0u)
+  return opencfw_em9305_command_status_30e8c0(12u);
+ if(selector==1u&&opencfw_em9305_ll_stream_kind_valid_30e4dc(
+       *(volatile uint8_t *)(uintptr_t)0x805afdu)==0u)
+  return opencfw_em9305_command_status_30e8c0(18u);
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
+ if(message==0u)return 0u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint8_t *)(message+4u)=(uint8_t)(enable!=0u);
+ *(volatile uint8_t *)(message+3u)=(uint8_t)((selector==0u)+1u);
+ *(volatile uint8_t *)(message+2u)=2u;
+ return opencfw_em9305_wsf_task_message_send(handler,message);
+}
+uint32_t opencfw_em9305_command_30df08(uintptr_t record)
+{
+ uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t limit=(flags&128u)!=0u?3u:1u;
+ if(opencfw_em9305_ll_connection_gate_30e524()==0u)return 12u;
+ uint32_t secondguard=*(volatile uint8_t *)(uintptr_t)0x805a74u;
+ uint32_t firstguard=*(volatile uint8_t *)(uintptr_t)0x805a73u;
+ if((firstguard|secondguard)!=0u)return 12u;
+ uint32_t first=*(volatile uint16_t *)record;
+ if(first>=0x4001u)return 18u;
+ uint32_t second=*(volatile uint16_t *)(record+2u);
+ if(first<second||second<4u)return 18u;
+ uint32_t mode=*(volatile uint8_t *)(record+4u);
+ if(mode>=2u)return 18u;
+ uint32_t phy=*(volatile uint8_t *)(record+5u);
+ uint32_t phylimit=(flags&64u)!=0u?3u:1u;
+ if(phylimit<phy)return 18u;
+ uint32_t secondary=*(volatile uint8_t *)(record+6u);
+ if(limit<secondary)return 18u;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(12u);
+ if(message==0u)return 0u;
+ *(volatile uint16_t *)(message+2u)=1026u;
+ first=*(volatile uint16_t *)record;
+ second=*(volatile uint16_t *)(record+2u);
+ *(volatile uint16_t *)(message+4u)=(uint16_t)first;
+ *(volatile uint16_t *)(message+6u)=(uint16_t)second;
+ uint32_t modes=*(volatile uint16_t *)(record+4u);
+ *(volatile uint16_t *)(message+8u)=(uint16_t)modes;
+ secondary=*(volatile uint8_t *)(record+6u);
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint8_t *)(message+10u)=(uint8_t)secondary;
+ (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ return 0u;
+}
+
+/* Authenticated record requests30fc68/30fcd8. Flattened buffer remains
+ * native R0 through halfword length reads and is passed to3105b8. */
+uint32_t opencfw_em9305_radio_state_310260(void)
+{ return *(volatile uint8_t *)(uintptr_t)0x805e78u; }
+uint32_t opencfw_em9305_radio_record_request_30fc68(uintptr_t descriptor,uint32_t selector)
+{
+ (void)opencfw_em9305_radio_request_enter_310678();
+ uintptr_t root=0x805cfcu;
+ uint32_t base=*(volatile uint32_t *)root;
+ *(volatile uint16_t *)(root+40u)=0u;
+ (void)opencfw_em9305_radio_request_base_310640(base);
+ if(opencfw_em9305_radio_state_310260()==2u){
+  uintptr_t buffer=opencfw_em9305_radio_flatten_333064(descriptor,selector);
+  uint32_t size=0u;
+  if(selector==1u)size=*(volatile uint16_t *)descriptor;
+  else if(selector==3u){
+   uint32_t first=*(volatile uint16_t *)descriptor;
+   uint32_t second=*(volatile uint16_t *)(descriptor+8u);
+   uint32_t third=*(volatile uint16_t *)(descriptor+16u);
+   size=first+second+third;
+  }else if(selector==2u){
+   uint32_t second=*(volatile uint16_t *)(descriptor+8u);
+   uint32_t first=*(volatile uint16_t *)descriptor;
+   size=second+first;
+  }
+  size=(uint16_t)size;
+  (void)opencfw_em9305_radio_request_3105b8(buffer,size);
+  uint32_t unit=*(volatile uint8_t *)(root+34u);
+  uint32_t extra=*(volatile uint8_t *)(root+36u);
+  uint32_t product;
+  __asm__ volatile("mpywhl %0,%1,%2":"=r"(product):"r"(size+9u),"r"(unit));
+  *(volatile uint8_t *)(root+38u)=0u;
+  *(volatile uint32_t *)(root+28u)=product+extra;
+ }
+ return opencfw_em9305_radio_request_exit_31069c();
+}
+uint32_t opencfw_em9305_radio_request_30fcd8(uintptr_t descriptor,uint32_t selector)
+{
+ uintptr_t buffer=opencfw_em9305_radio_flatten_333064(descriptor,selector);
+ uint32_t size=0u;
+ if(selector==1u)size=*(volatile uint16_t *)descriptor;
+ else if(selector==3u){
+  uint32_t first=*(volatile uint16_t *)descriptor;
+  uint32_t second=*(volatile uint16_t *)(descriptor+8u);
+  uint32_t third=*(volatile uint16_t *)(descriptor+16u);
+  size=first+second+third;
+ }else if(selector==2u){
+  uint32_t second=*(volatile uint16_t *)(descriptor+8u);
+  uint32_t first=*(volatile uint16_t *)descriptor;
+  size=second+first;
+ }
+ size=(uint16_t)size;
+ (void)opencfw_em9305_radio_request_3105b8(buffer,size);
+ uintptr_t root=0x805d18u;
+ uint32_t unit=*(volatile uint8_t *)(root+7u);
+ uint32_t extra=*(volatile uint8_t *)(root+9u);
+ uint32_t time=*(volatile uint32_t *)root,product;
+ __asm__ volatile("mpywhl %0,%1,%2":"=r"(product):"r"(size+9u),"r"(unit));
+ time+=extra+product;
+ *(volatile uint32_t *)root=time;
+ return time;
+}
+
+/* Authenticated packet request30faec and native window/callback tails. */
+uint32_t opencfw_em9305_radio_window_request_31041c(uint32_t base,uint32_t size)
+{
+ *(volatile uint32_t *)(uintptr_t)0x805e84u=base;
+ *(volatile uint8_t *)(uintptr_t)0x805e78u=3u;
+ return opencfw_em9305_radio_window_start_3103e0(0u,size);
+}
+uint32_t opencfw_em9305_radio_failure_callback_310360(void)
+{
+ uint32_t kind=*(volatile uint8_t *)(uintptr_t)0x805e99u;
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805e7cu;
+ return ((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t))callback)(1u,0u,kind,0u);
+}
+uint32_t opencfw_em9305_radio_request_30faec(uintptr_t packet,uint32_t length)
+{
+ (void)opencfw_em9305_radio_request_enter_310678();
+ uintptr_t root=0x805cfcu;
+ uint32_t extra=*(volatile uint16_t *)(root+32u);
+ uint32_t lead=*(volatile uint32_t *)(root+4u);
+ *(volatile uint32_t *)(root+56u)=(uint32_t)(packet+1u);
+ uint32_t size=extra+lead;
+ uint32_t base=*(volatile uint32_t *)root;
+ *(volatile uint16_t *)(root+60u)=(uint16_t)length;
+ *(volatile uint16_t *)(root+40u)=0u;
+ uint32_t result=opencfw_em9305_radio_window_request_31041c(base,size);
+ uint32_t state=opencfw_em9305_radio_state_310260();
+ if(state==3u){
+  result=opencfw_em9305_radio_followup_driver_310374((uint32_t)packet,length);
+  *(volatile uint8_t *)(root+38u)=1u;
+  *(volatile uint32_t *)(root+28u)=0u;
+ }
+ result=opencfw_em9305_radio_request_exit_31069c();
+ if(state==0u)result=opencfw_em9305_radio_failure_callback_310360();
+ return result;
+}
+
+/* Authenticated address-resolution lookup303890..30390c. Callback is
+ * optional after an eligible nonmatching row, and its return is ignored. */
+uint32_t opencfw_em9305_radio_resolve_303890(uint32_t low,uint32_t high,uintptr_t kind_cell,uintptr_t output)
+{
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x801610u;
+ uint32_t eligible=0u;
+ if(count!=0u){
+  uintptr_t table=*(volatile uint32_t *)(uintptr_t)0x805c00u;
+  for(uint32_t index=0u;index<count;index++){
+   uintptr_t row=table+index*72u;
+   uint32_t disabled=*(volatile uint8_t *)(row+64u);
+   if(disabled==0u){
+    uint32_t stored_high=*(volatile uint32_t *)(row+44u);
+    uint32_t stored_low=*(volatile uint32_t *)(row+40u);
+    eligible=1u;
+    if(((stored_high^high)|(stored_low^low))==0u){
+     uint32_t kind=*(volatile uint8_t *)(row+38u)&1u;
+     *(volatile uint8_t *)kind_cell=(uint8_t)kind;
+     uint32_t translated_high=*(volatile uint16_t *)(row+36u);
+     uint32_t translated_low=*(volatile uint32_t *)(row+32u);
+     *(volatile uint32_t *)(output+4u)=translated_high;
+     *(volatile uint32_t *)output=translated_low;
+     return 1u;
+    }
+   }
+  }
+ }
+ if(eligible!=0u){
+  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x80160cu;
+  if(callback!=0u){
+   uint32_t translated_high=*(volatile uint32_t *)(output+4u);
+   uint32_t translated_low=*(volatile uint32_t *)output;
+   uint32_t kind=*(volatile uint8_t *)kind_cell;
+   (void)((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t))callback)
+      (low,high,1u,kind,translated_low,translated_high);
+  }
+ }
+ return 0u;
+}
+
+/* Authenticated resolving address lookup303bdc..303c9c. Table base
+ * refreshes per row; count refreshes after key match child; captured row
+ * survives that child even if the global table changes. */
+extern uint32_t opencfw_em9305_radio_key_match_315640(uintptr_t,uint32_t,uint32_t);
+uint32_t opencfw_em9305_radio_resolve_303bdc(uint32_t low,uint32_t high,uintptr_t kind_cell,uintptr_t output)
+{
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x801610u;
+ for(uint32_t index=0u;index<count;index++){
+  uintptr_t table=*(volatile uint32_t *)(uintptr_t)0x805c00u;
+  uintptr_t row=table+index*72u;
+  uint32_t disabled=*(volatile uint8_t *)(row+64u);
+  if(disabled!=0u)continue;
+  uint32_t stored_high=*(volatile uint32_t *)(row+44u);
+  uint32_t stored_low=*(volatile uint32_t *)(row+40u);
+  uint32_t matched=((stored_high^high)|(stored_low^low))==0u;
+  if(matched==0u){
+   matched=opencfw_em9305_radio_key_match_315640(row,low,high)!=0u;
+   count=*(volatile uint8_t *)(uintptr_t)0x801610u;
+   if(matched!=0u){
+    *(volatile uint32_t *)(row+40u)=low;
+    *(volatile uint32_t *)(row+44u)=high;
+    *(volatile uint8_t *)(row+66u)=0u;
+   }
+  }
+  if(matched!=0u){
+   uint32_t kind=*(volatile uint8_t *)(row+38u)&1u;
+   *(volatile uint8_t *)kind_cell=(uint8_t)kind;
+   uint32_t translated_high=*(volatile uint16_t *)(row+36u);
+   uint32_t translated_low=*(volatile uint32_t *)(row+32u);
+   *(volatile uint32_t *)(output+4u)=translated_high;
+   *(volatile uint32_t *)output=translated_low;
+   return 1u;
+  }
+ }
+ uint32_t slot=*(volatile uint8_t *)(uintptr_t)0x801638u;
+ uintptr_t record=0x801618u+slot*8u;
+ uint32_t next=(slot+1u)&3u;
+ *(volatile uint32_t *)(record+4u)=high;
+ *(volatile uint32_t *)record=low;
+ *(volatile uint8_t *)(uintptr_t)0x801638u=(uint8_t)next;
+ return 0u;
+}
+
+/* Authenticated key-match315640..315658: split six-byte address into
+ * low24-bit comparison and high24-bit cipher challenge. */
+uint32_t opencfw_em9305_radio_key_match_315640(uintptr_t key,uint32_t low,uint32_t high)
+{
+ uint32_t expected=low&0xffffffu;
+ uint32_t challenge=((low>>24u)|(high<<8u))&0xffffffu;
+ uint32_t actual=opencfw_em9305_radio_hash24_314640(key,challenge);
+ return expected==actual;
+}
+
+/* Authenticated packet validation303404..303650. Descriptor cursor is
+ * output+8 after native ST.AB; output kind/status bytes are consequently
+ * output18/19 and output20/21. Address projection children remain genuine. */
+extern uint32_t opencfw_em9305_radio_address_project_303b7c(uint32_t,uint32_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_radio_address_associate_303844(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+uint32_t opencfw_em9305_radio_packet_check_303404(uint32_t packet,uintptr_t policy,uint32_t resolve,uintptr_t output)
+{
+ uintptr_t input=(uintptr_t)packet;
+ uint32_t type=*(volatile uint8_t *)input&15u;
+ uint32_t allowed=*(volatile uint16_t *)policy;
+ if((allowed&(1u<<type))==0u){
+  if(type==9u&&(*(volatile uint8_t *)(policy+4u)&128u)!=0u)return 1u;
+  return 0u;
+ }
+ uint32_t mask=1u<<type;
+ if((mask&896u)!=0u)return 1u;
+ uint32_t length=*(volatile uint8_t *)(input+1u)&63u;
+ *(volatile uint8_t *)(output+16u)=(uint8_t)type;
+ *(volatile uint8_t *)(output+17u)=(uint8_t)length;
+ uint32_t header=*(volatile uint8_t *)input;
+ uint64_t address=opencfw_em9305_controller_pack_address(input+2u);
+ uint32_t low=(uint32_t)address,high=(uint32_t)(address>>32u);
+ uint32_t flags=*(volatile uint32_t *)(policy+4u);
+ *(volatile uint32_t *)(output+12u)=high;
+ *(volatile uint32_t *)(output+8u)=low;
+ *(volatile uint32_t *)(output+4u)=high;
+ *(volatile uint32_t *)output=low;
+ uintptr_t descriptor=output+8u,kind_cell=output+19u;
+ uint32_t kind=(header>>6u)&1u;
+ *(volatile uint8_t *)(output+19u)=(uint8_t)kind;
+ *(volatile uint8_t *)(output+18u)=(uint8_t)kind;
+ uint32_t classification=opencfw_em9305_radio_classify_314470((flags>>6u)&1u,resolve,kind_cell,descriptor);
+ if(classification==1u||classification==3u)return 0u;
+ flags=*(volatile uint32_t *)(policy+4u);
+ high=*(volatile uint32_t *)(descriptor+4u);
+ low=*(volatile uint32_t *)descriptor;
+ kind=*(volatile uint8_t *)kind_cell;
+ uint32_t secondary=0u;
+ if((flags&4u)!=0u&&((kind!=0u)^((flags>>3u)&1u))==0u){
+  uint32_t wanted_low=*(volatile uint32_t *)(policy+16u);
+  uint32_t wanted_high=*(volatile uint32_t *)(policy+20u);
+  secondary=3u;
+  if(((wanted_low^low)|(wanted_high^high))==0u)secondary=2u;
+ }
+ uint32_t filter=*(volatile uint16_t *)(policy+2u);
+ uint32_t decision=0u;
+ if((filter&mask)!=0u){
+  if((low|high)==0u&&opencfw_em9305_radio_address_mode_303e5c()!=0u)decision=2u;
+  else decision=(opencfw_em9305_radio_address_match_303df8(kind!=0u,low,high)==0u)+2u;
+ }
+ uint32_t ordinary=(classification!=2u);
+ uint32_t selected=(classification==2u)*2u,accepted=2u;
+ if(decision<secondary){
+  flags=*(volatile uint32_t *)(policy+4u);
+  if((flags&4u)!=0u){
+   uint32_t wanted_high=*(volatile uint32_t *)(policy+20u);
+   uint32_t actual_high=*(volatile uint32_t *)(descriptor+4u);
+   uint32_t wanted_low=*(volatile uint32_t *)(policy+16u);
+   uint32_t actual_low=*(volatile uint32_t *)descriptor;
+   uint32_t actual_kind=*(volatile uint8_t *)kind_cell;
+   uint32_t mismatch=(actual_kind!=0u)^((flags>>3u)&1u);
+   if(((wanted_high^actual_high)|(wanted_low^actual_low))!=0u)mismatch|=1u;
+   if(mismatch==0u)selected=2u;
+   accepted=selected;
+   if(((~mismatch|ordinary)&1u)==0u)return 0u;
+  }
+ }else{
+  filter=*(volatile uint16_t *)(policy+2u);
+  if((filter&mask)!=0u){
+   high=*(volatile uint32_t *)(descriptor+4u);
+   low=*(volatile uint32_t *)descriptor;
+   kind=*(volatile uint8_t *)kind_cell;
+   if((low|high)!=0u||opencfw_em9305_radio_address_mode_303e5c()==0u){
+    uint32_t matched=opencfw_em9305_radio_address_match_303df8(kind!=0u,low,high);
+    if(matched!=0u)selected=2u;
+    accepted=selected;
+    if((matched|ordinary)!=1u)return 0u;
+   }
+  }
+ }
+ *(volatile uint8_t *)(descriptor+13u)=1u;
+ *(volatile uint8_t *)(descriptor+12u)=(uint8_t)(accepted==2u);
+ if(type>=6u||(42u&(1u<<type))==0u)return 1u;
+ int32_t second_header=(int8_t)*(volatile uint8_t *)input; /* LDB.AB accesses old input, then advances by8. */
+ address=opencfw_em9305_controller_pack_address(input+8u);
+ uint32_t peer_low=(uint32_t)address,peer_high=(uint32_t)(address>>32u);
+ flags=*(volatile uint32_t *)(policy+4u);
+ high=*(volatile uint32_t *)(descriptor+4u);
+ kind=*(volatile uint8_t *)kind_cell;
+ low=*(volatile uint32_t *)descriptor;
+ uint32_t pair[2]={low,high};
+ uint8_t projected_kind=(uint8_t)kind;
+ if((flags&16u)!=0u){
+  if(second_header<0&&(peer_high&0xc000u)==0x4000u){
+   if(resolve!=0u){
+    (void)opencfw_em9305_radio_address_project_303b7c(peer_low,peer_high,(uintptr_t)&projected_kind,(uintptr_t)pair);
+    low=pair[0];high=pair[1];kind=projected_kind;
+   }
+   if(opencfw_em9305_radio_address_associate_303844(peer_low,peer_high,kind,low,high)!=0u)return 1u;
+  }else{
+   if((opencfw_em9305_radio_peer_kind_3039f0(kind!=0u,low,high)&254u)==2u)return 0u;
+  }
+ }
+ flags=*(volatile uint32_t *)(policy+4u);
+ if((flags&1u)==0u)return 1u;
+ if((((second_header<0)^((flags>>1u)&1u))&1u)==0u){
+  uint32_t wanted_low=*(volatile uint32_t *)(policy+8u);
+  uint32_t wanted_high=*(volatile uint32_t *)(policy+12u);
+  if(((peer_low^wanted_low)|(peer_high^wanted_high))==0u)return 1u;
+ }
+ if(second_header>=0||(peer_high&0xc000u)!=0x4000u||(flags&32u)==0u)return 0u;
+ *(volatile uint8_t *)(descriptor+13u)=0u;
+ return 1u;
+}
+
+/* Authenticated address projection303b7c and association303844.
+ * Both preserve the stock zero return after recording/callback notification;
+ * association's callback R4/R5 survive identity-find unchanged natively. */
+uint32_t opencfw_em9305_radio_address_project_303b7c(uint32_t low,uint32_t high,uintptr_t kind_cell,uintptr_t identity)
+{
+ uint32_t identity_high=*(volatile uint32_t *)(identity+4u);
+ uint32_t identity_low=*(volatile uint32_t *)identity;
+ uint32_t kind=*(volatile uint8_t *)kind_cell;
+ uintptr_t row=opencfw_em9305_radio_identity_find_31441c(kind,identity_low,identity_high);
+ if(row!=0u&&*(volatile uint8_t *)(row+65u)==0u){
+  uint32_t stored_high=*(volatile uint32_t *)(row+60u);
+  uint32_t stored_low=*(volatile uint32_t *)(row+56u);
+  if(((stored_high^high)|(stored_low^low))==0u)return 1u;
+  if(opencfw_em9305_radio_key_match_315640(row+16u,low,high)!=0u){
+   *(volatile uint32_t *)(row+56u)=low;
+   *(volatile uint32_t *)(row+60u)=high;
+   return 1u;
+  }
+ }
+ uint32_t slot=*(volatile uint8_t *)(uintptr_t)0x801638u;
+ uintptr_t record=0x801618u+slot*8u;
+ uint32_t next=(slot+1u)&3u;
+ *(volatile uint32_t *)(record+4u)=high;
+ *(volatile uint32_t *)record=low;
+ *(volatile uint8_t *)(uintptr_t)0x801638u=(uint8_t)next;
+ return 0u;
+}
+uint32_t opencfw_em9305_radio_address_associate_303844(uint32_t low,uint32_t high,uint32_t kind,uint32_t identity_low,uint32_t identity_high)
+{
+ uintptr_t row=opencfw_em9305_radio_identity_find_31441c(kind,identity_low,identity_high);
+ if(row==0u||*(volatile uint8_t *)(row+65u)!=0u)return 0u;
+ uint32_t stored_high=*(volatile uint32_t *)(row+60u);
+ uint32_t stored_low=*(volatile uint32_t *)(row+56u);
+ if(((stored_high^high)|(stored_low^low))==0u)return 1u;
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x80160cu;
+ if(callback==0u)return 0u;
+ (void)((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t))callback)
+   (low,high,0u,kind,identity_low,identity_high);
+ return 0u;
+}
+
+/* Authenticated command dispatch330fa0..331074. Five commands decode
+ * fixed byte fields before invoking distinct native command providers. */
+extern uint32_t opencfw_em9305_command_30dbd4(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30c5e0(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30c5c0(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30dc70(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30d48c(uint32_t,uint32_t,uint32_t,uint32_t);
+uint32_t opencfw_em9305_dispatch_330fa0(uintptr_t request,uintptr_t input)
+{
+ uint32_t command=*(volatile uint16_t *)request;
+ uint32_t index=command-0x2059u;
+ if(index>=5u)return 0u;
+ uint32_t b1=*(volatile uint8_t *)(input+1u),status,id=0u,length=1u;
+ if(index==0u){
+  uint32_t b0=*(volatile uint8_t *)input;
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  status=opencfw_em9305_command_30dbd4((uint16_t)(b0+(b1<<8u)),b2);
+ }else if(index==1u){
+  uint32_t b0=*(volatile uint8_t *)input;
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  uint32_t b3=*(volatile uint8_t *)(input+3u);
+  uint32_t b4=*(volatile uint8_t *)(input+4u);
+  uint32_t b5=*(volatile uint8_t *)(input+5u);
+  id=(uint16_t)(b0+(b1<<8u));
+  status=opencfw_em9305_command_30c5e0(id,(uint16_t)(b2+(b3<<8u)),(uint16_t)(b4+(b5<<8u)));
+  length=3u;
+ }else if(index==2u){
+  uint32_t b3=*(volatile uint8_t *)(input+3u);
+  uint32_t b0=*(volatile uint8_t *)input;
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  uint32_t b4=*(volatile uint8_t *)(input+4u);
+  id=(uint16_t)(b0+(b1<<8u));
+  status=opencfw_em9305_command_30c5c0(id,(uint16_t)(b2+(b3<<8u)),b4);
+  length=3u;
+ }else if(index==3u){
+  uint32_t b4=*(volatile uint8_t *)(input+4u);
+  uint32_t b6=*(volatile uint8_t *)(input+6u);
+  uint32_t b0=*(volatile uint8_t *)input;
+  uint32_t b3=*(volatile uint8_t *)(input+3u);
+  uint32_t b5=*(volatile uint8_t *)(input+5u);
+  uint32_t b7=*(volatile uint8_t *)(input+7u);
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  id=(uint16_t)(b0+(b1<<8u));
+  status=opencfw_em9305_command_30dc70(id,b2,(uint16_t)(b3+(b4<<8u)),(uint16_t)(b5+(b6<<8u)),b7);
+  length=3u;
+ }else{
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  uint32_t b4=*(volatile uint8_t *)(input+4u);
+  uint32_t b3=*(volatile uint8_t *)(input+3u);
+  uint32_t b5=*(volatile uint8_t *)(input+5u);
+  uint32_t b0=*(volatile uint8_t *)input;
+  status=opencfw_em9305_command_30d48c(b0,(uint16_t)(b1+(b2<<8u)),(uint16_t)(b3+(b4<<8u)),b5);
+ }
+ (void)opencfw_em9305_ll_connection_response_32f34c(request,status,length,0u,id);
+ return 1u;
+}
+
+/* Authenticated five command providers30c5c0/30c5e0/30dbd4/30dc70/30d48c.
+ * Stream gate ignores incoming id; all children retain original full inputs. */
+extern uint32_t opencfw_em9305_command_apply_307fcc(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_apply_30805c(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_apply_307d0c(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_ready_3213d0(uint32_t);
+extern uint32_t opencfw_em9305_command_apply_309874(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+uint32_t opencfw_em9305_command_30c5c0(uint32_t id,uint32_t first,uint32_t second)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ return opencfw_em9305_command_apply_307fcc(id,first,second);
+}
+uint32_t opencfw_em9305_command_30c5e0(uint32_t id,uint32_t first,uint32_t second)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ return opencfw_em9305_command_apply_30805c(id,first,second);
+}
+uint32_t opencfw_em9305_command_30dbd4(uint32_t id,uint32_t mode)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ if(id>=0xf00u)return 18u;
+ if(opencfw_em9305_command_ready_3213d0(id)==0u)return 66u;
+ if((mode&3u)==3u&&(*(volatile uint32_t *)(uintptr_t)0x805b34u&16u)==0u)return 17u;
+ (void)opencfw_em9305_command_apply_307d0c(id,mode);
+ return 0u;
+}
+uint32_t opencfw_em9305_command_30dc70(uint32_t id,uint32_t mode,uint32_t first,uint32_t second,uint32_t last)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ if(mode>3u)return 18u;
+ if(mode==3u&&(*(volatile uint32_t *)(uintptr_t)0x805b34u&16u)==0u)return 17u;
+ if(first>499u)return 18u;
+ if((uint16_t)(second-0x4001u)<0xc009u)return 18u;
+ return opencfw_em9305_command_apply_309874(id,mode,first,second,last);
+}
+uint32_t opencfw_em9305_command_30d48c(uint32_t id,uint32_t first,uint32_t second,uint32_t unused)
+{
+ (void)unused;
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ if(id>3u)return 18u;
+ if(id==3u&&(*(volatile uint32_t *)(uintptr_t)0x805b34u&16u)==0u)return 17u;
+ if(first>499u)return 18u;
+ if((uint16_t)(second-0x4001u)<0xc009u)return 18u;
+ *(volatile uint16_t *)(uintptr_t)0x805aceu=(uint16_t)second;
+ *(volatile uint16_t *)(uintptr_t)0x805accu=(uint16_t)first;
+ *(volatile uint8_t *)(uintptr_t)0x805acbu=(uint8_t)id;
+ return 0u;
+}
+
+/* Authenticated command apply307d0c, readiness3213d0 and apply309874.
+ * MPYUW is retained; disabled-mode path leaves the second byte untouched. */
+uint32_t opencfw_em9305_command_apply_307d0c(uint32_t id,uint32_t mode)
+{
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,784":"=r"(offset):"r"(id));
+ uintptr_t row=0x803d7eu+offset;
+ uint32_t enabled=mode&1u;
+ *(volatile uint8_t *)row=(uint8_t)(enabled^1u);
+ if(enabled!=0u)*(volatile uint8_t *)(row+1u)=(uint8_t)((mode>>1u)&1u);
+ return (uint32_t)row;
+}
+uint32_t opencfw_em9305_command_ready_3213d0(uint32_t id)
+{
+ if(id>5u)return 0u;
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,784":"=r"(offset):"r"(id));
+ return *(volatile uint8_t *)(uintptr_t)(0x803d78u+offset)!=0u;
+}
+uint32_t opencfw_em9305_command_apply_309874(uint32_t id,uint32_t mode,uint32_t first,uint32_t second,uint32_t unused)
+{
+ (void)unused;
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+34u);
+ if(id>=count)return 2u;
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(offset):"r"(id));
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t row=base+offset;
+ if(*(volatile uint8_t *)row==0u)return 2u;
+ *(volatile uint16_t *)(row+618u)=(uint16_t)second;
+ *(volatile uint16_t *)(row+616u)=(uint16_t)first;
+ *(volatile uint8_t *)(row+614u)=(uint8_t)mode;
+ return 0u;
+}
+
+/* Authenticated command association apply307fcc/30805c. Same10-byte
+ * message opcode has distinct half4 policies (one vs zero). */
+uint32_t opencfw_em9305_command_apply_307fcc(uint32_t id,uint32_t value,uint32_t peer)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+34u);
+ if(id>=count)return 2u;
+ uintptr_t associated=opencfw_em9305_radio_record_find_31aa64(peer);
+ if(associated==0u)return 66u;
+ if(*(volatile uint8_t *)(associated+369u)!=1u)return 12u;
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(offset):"r"(id));
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t row=base+offset;
+ if(*(volatile uint8_t *)row==0u)return 2u;
+ if((*(volatile uint8_t *)(row+547u)&2u)==0u)return 26u;
+ if(*(volatile uint8_t *)(row+534u)==0u)return 26u;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(10u);
+ if(message==0u)return 0u;
+ *(volatile uint16_t *)(message+2u)=0x2201u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint16_t *)(message+8u)=(uint16_t)value;
+ *(volatile uint16_t *)(message+6u)=(uint16_t)peer;
+ *(volatile uint16_t *)message=(uint16_t)id;
+ *(volatile uint16_t *)(message+4u)=1u;
+ (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ return 0u;
+}
+uint32_t opencfw_em9305_command_apply_30805c(uint32_t id,uint32_t value,uint32_t peer)
+{
+ if(peer>=0xf00u)return 18u;
+ if(peer>=6u)return 66u;
+ uint32_t peer_offset;
+ __asm__ volatile("mpyuw %0,%1,784":"=r"(peer_offset):"r"(peer));
+ uintptr_t peer_row=0x803d78u+peer_offset;
+ if(*(volatile uint8_t *)peer_row==0u)return 66u;
+ if(*(volatile uint8_t *)(peer_row+1u)!=1u)return 66u;
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+34u);
+ if(id>=count)return 2u;
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(offset):"r"(id));
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t row=base+offset;
+ if(*(volatile uint8_t *)row==0u)return 2u;
+ if((*(volatile uint8_t *)(row+547u)&2u)==0u)return 26u;
+ if(*(volatile uint8_t *)(row+534u)==0u)return 26u;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(10u);
+ if(message==0u)return 0u;
+ *(volatile uint16_t *)(message+2u)=0x2201u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint16_t *)(message+8u)=(uint16_t)value;
+ *(volatile uint16_t *)(message+6u)=(uint16_t)peer;
+ *(volatile uint16_t *)message=(uint16_t)id;
+ *(volatile uint16_t *)(message+4u)=0u;
+ (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ return 0u;
+}
+
+/* Authenticated response33118c and command dispatch331074. The 0x2076
+ * query retains input+2; native post-increment byte load reads input0. */
+extern uint32_t opencfw_em9305_command_30c65c(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30da5c(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30da2c(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30e000(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_query_30bd34(uint32_t,uint32_t,uintptr_t,uintptr_t);
+uint32_t opencfw_em9305_ll_response_33118c(uintptr_t request,uint32_t status,uint32_t length,uintptr_t input,uint32_t id)
+{
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(length,*(volatile uint16_t *)request);
+ if(response==0u)return 0u;
+ uint32_t command=*(volatile uint16_t *)request;
+ if(command-0x2078u<3u){
+  *(volatile uint8_t *)(response+1u)=(uint8_t)id;
+  *(volatile uint8_t *)response=(uint8_t)status;
+  *(volatile uint8_t *)(response+2u)=(uint8_t)(id>>8u);
+ }else if(command==0x2076u){
+  uint32_t kind=*(volatile uint8_t *)input;
+  uint8_t first=0u,second=0u;
+  uint32_t result=opencfw_em9305_command_query_30bd34(id,kind,(uintptr_t)&first,(uintptr_t)&second);
+  uint32_t captured_first=*(volatile uint8_t *)&first;
+  uint32_t captured_second=*(volatile uint8_t *)&second;
+  *(volatile uint8_t *)(response+3u)=(uint8_t)kind;
+  *(volatile uint8_t *)(response+1u)=(uint8_t)id;
+  *(volatile uint8_t *)response=(uint8_t)result;
+  *(volatile uint8_t *)(response+2u)=(uint8_t)(id>>8u);
+  *(volatile uint8_t *)(response+5u)=(uint8_t)captured_second;
+  *(volatile uint8_t *)(response+4u)=(uint8_t)captured_first;
+ }
+ return opencfw_em9305_ll_event_send(response-5u);
+}
+uint32_t opencfw_em9305_dispatch_331074(uintptr_t request,uintptr_t input)
+{
+ uint32_t index=(uint32_t)*(volatile uint16_t *)request-0x2076u;
+ if(index>=5u)return 0u;
+ uint32_t b1=*(volatile uint8_t *)(input+1u);
+ uint32_t b0=*(volatile uint8_t *)input;
+ uint32_t id=(uint16_t)(b0+(b1<<8u));
+ input+=2u;
+ uint32_t status=0u,length=6u;
+ if(index==1u){
+  uint32_t value=*(volatile uint8_t *)input;
+  status=opencfw_em9305_command_30c65c(id,0u,value);
+  (void)opencfw_em9305_ll_status_event_331bf8(request,status);
+  return 1u;
+ }else if(index==2u){
+  uint32_t b5=*(volatile uint8_t *)(input+5u);
+  uint32_t b4=*(volatile uint8_t *)(input+4u);
+  uint32_t b3=*(volatile uint8_t *)(input+3u);
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  uint32_t c1=*(volatile uint8_t *)(input+1u);
+  uint32_t c0=*(volatile uint8_t *)input;
+  status=opencfw_em9305_command_30da5c(id,c0,c1,b2,b3,(uint16_t)(b4+(b5<<8u)));
+  length=3u;input=0u;
+ }else if(index==3u){
+  uint32_t value=*(volatile uint8_t *)input;
+  status=opencfw_em9305_command_30da2c(id,value);
+  length=3u;input=0u;
+ }else if(index==4u){
+  uint32_t second=*(volatile uint8_t *)(input+1u);
+  uint32_t first=*(volatile uint8_t *)input;
+  status=opencfw_em9305_command_30e000(id,first,second);
+  length=3u;input=0u;
+ }
+ (void)opencfw_em9305_ll_response_33118c(request,status,length,input,id);
+ return 1u;
+}
+
+/* Authenticated command2076 providers and native kind/query helpers.
+ * Signed query byte uses MPYUW; invalid kind must not read feature RAM. */
+extern uint32_t opencfw_em9305_command_apply_32754c(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_apply_327630(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_apply_327694(uint32_t,uint32_t,uint32_t);
+uint32_t opencfw_em9305_command_kind_valid_31b768(uint32_t kind)
+{
+ if(kind-3u<2u)return (*(volatile uint8_t *)(uintptr_t)0x805a95u>>3u)&1u;
+ if(kind==1u)return 1u;
+ if(kind==2u)return *(volatile uint8_t *)(uintptr_t)0x805a95u&1u;
+ return 0u;
+}
+uint32_t opencfw_em9305_command_signed_query_306fa8(uint32_t id,uint32_t kind)
+{
+ uint32_t original_not_four=kind!=4u,offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(offset):"r"(id));
+ if(kind==4u)kind=3u;
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uint32_t subtract=(kind!=3u)|original_not_four;
+ uintptr_t address=base+offset+(uint32_t)(kind-subtract)+332u;
+ uint32_t result=*(volatile uint8_t *)address;
+ if(result==0x7eu)result=0u;
+ return (uint32_t)(int32_t)(int8_t)result;
+}
+uint32_t opencfw_em9305_command_30c65c(uint32_t id,uint32_t value,uint32_t kind)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(id>=*(volatile uint8_t *)(config+34u))return 2u;
+ if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
+ if(opencfw_em9305_command_kind_valid_31b768(kind)==0u)return 17u;
+ uint64_t words=opencfw_em9305_ll_connection_query_words_307044(id);
+ if(((uint32_t)(words>>32u)&2u)==0u)return 17u;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
+ if(message==0u)return 7u;
+ *(volatile uint16_t *)(message+2u)=0x2801u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint8_t *)(message+5u)=(uint8_t)kind;
+ *(volatile uint8_t *)(message+4u)=(uint8_t)value;
+ *(volatile uint16_t *)message=(uint16_t)id;
+ (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ return 0u;
+}
+uint32_t opencfw_em9305_command_30da2c(uint32_t id,uint32_t value)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(id>=*(volatile uint8_t *)(config+34u))return 2u;
+ if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
+ return opencfw_em9305_command_apply_32754c(id,value);
+}
+uint32_t opencfw_em9305_command_30da5c(uint32_t id,uint32_t first,uint32_t second,uint32_t third,uint32_t fourth,uint32_t last)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(id>=*(volatile uint8_t *)(config+34u))return 2u;
+ if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
+ if(first==255u)second=0u;
+ if(first+second>255u||third>first)return 18u;
+ if(third<fourth)return 18u;
+ if((int32_t)(first-second)<(int32_t)(third+fourth))return 18u;
+ return opencfw_em9305_command_apply_327630(id,first,second,third,fourth,last);
+}
+uint32_t opencfw_em9305_command_30e000(uint32_t id,uint32_t first,uint32_t second)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(id>=*(volatile uint8_t *)(config+34u))return 2u;
+ if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
+ return opencfw_em9305_command_apply_327694(id,first,second);
+}
+uint32_t opencfw_em9305_command_query_30bd34(uint32_t id,uint32_t kind,uintptr_t first,uintptr_t second)
+{
+ (void)opencfw_em9305_wsf_critical_enter();
+ uint32_t status=2u;
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(id<*(volatile uint8_t *)(config+34u)&&opencfw_em9305_ll_slot_active_30731c(id)!=0u){
+  status=17u;
+  if(opencfw_em9305_command_kind_valid_31b768(kind)!=0u){
+   uint8_t lower;
+   (void)opencfw_em9305_ll_signed_bounds_31026c((uintptr_t)&lower,second);
+   uint32_t query=opencfw_em9305_command_signed_query_306fa8(id,kind);
+   uint32_t clamped=opencfw_em9305_ll_signed_clamp_310230(query);
+   status=0u;
+   *(volatile uint8_t *)first=(uint8_t)clamped;
+  }
+ }
+ (void)opencfw_em9305_wsf_critical_exit();
+ return status;
+}
+
+/* Authenticated command apply327630/327694. Native indexed word stores
+ * 194/195 are scaled by four; captured base survives allocator mutation. */
+extern uint32_t opencfw_em9305_command_derive_317ba8(uintptr_t);
+extern uint32_t opencfw_em9305_command_refresh_323268(uintptr_t);
+uint32_t opencfw_em9305_command_apply_327630(uint32_t id,uint32_t first,uint32_t second,uint32_t third,uint32_t fourth,uint32_t last)
+{
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(offset):"r"(id));
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t row=base+offset;
+ uint32_t state=*(volatile uint8_t *)(row+769u);
+ *(volatile uint32_t *)(row+776u)=0u;
+ *(volatile uint32_t *)(row+780u)=0u;
+ *(volatile uint8_t *)(row+779u)=(uint8_t)fourth;
+ *(volatile uint8_t *)(row+778u)=(uint8_t)third;
+ *(volatile uint8_t *)(row+777u)=(uint8_t)second;
+ *(volatile uint8_t *)(row+776u)=(uint8_t)first;
+ *(volatile uint8_t *)(row+782u)=1u;
+ *(volatile uint8_t *)(row+780u)=(uint8_t)last;
+ *(volatile uint8_t *)(row+784u)=0u;
+ if(state==1u&&*(volatile uint8_t *)(row+770u)==1u){
+  uint32_t derived=opencfw_em9305_command_derive_317ba8(row);
+  *(volatile uint8_t *)(row+782u)=(uint8_t)derived;
+  (void)opencfw_em9305_command_refresh_323268(row);
+ }else{
+  *(volatile uint8_t *)(row+770u)=2u;
+  *(volatile uint8_t *)(row+769u)=1u;
+ }
+ return 0u;
+}
+uint32_t opencfw_em9305_command_apply_327694(uint32_t id,uint32_t first,uint32_t second)
+{
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(offset):"r"(id));
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t row=base+offset;
+ *(volatile uint8_t *)(row+768u)=(uint8_t)(second!=0u);
+ *(volatile uint8_t *)(row+767u)=(uint8_t)(first!=0u);
+ if(second!=0u){
+  *(volatile uint8_t *)(row+771u)=1u;
+  uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
+  if(message!=0u){
+   *(volatile uint16_t *)(message+2u)=0x2801u;
+   uintptr_t fresh_base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+   uint32_t fresh_offset;
+   __asm__ volatile("mpyuw %0,%1,912":"=r"(fresh_offset):"r"(id));
+   *(volatile uint8_t *)(message+4u)=0u;
+   uint32_t difference=(uint32_t)(row-fresh_base),quotient;
+   __asm__ volatile("div %0,%1,912":"=r"(quotient):"r"(difference));
+   uintptr_t captured_row=base+fresh_offset;
+   *(volatile uint16_t *)message=(uint8_t)quotient;
+   uint32_t mode=*(volatile uint8_t *)(captured_row+77u);
+   uint32_t extra=0u;
+   if(mode==3u)extra=*(volatile uint8_t *)(captured_row+78u)==1u;
+   uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+   *(volatile uint8_t *)(message+5u)=(uint8_t)(mode+extra);
+   (void)opencfw_em9305_wsf_task_message_send(handler,message);
+  }
+ }
+ return 0u;
+}
+
+/* Authenticated command apply32754c and derive/refresh317b80/317ba8/323268.
+ * Native query helper preserves R3/R12; C makes those row/base captures explicit. */
+uint32_t opencfw_em9305_command_delta_317b80(uintptr_t row)
+{
+ uint32_t selector=*(volatile uint8_t *)(row+766u);
+ int32_t baseline=*(volatile int8_t *)(row+268u);
+ int32_t current=*(volatile int8_t *)(row+selector+553u);
+ int32_t difference=baseline<=current?current-baseline:baseline-current;
+ uint32_t magnitude=(uint32_t)(difference<0?-difference:difference);
+ return (uint8_t)magnitude;
+}
+uint32_t opencfw_em9305_command_derive_317ba8(uintptr_t row)
+{
+ uint32_t delta=opencfw_em9305_command_delta_317b80(row);
+ uint32_t fourth=*(volatile uint8_t *)(row+779u);
+ uint32_t third=*(volatile uint8_t *)(row+778u);
+ uint32_t state=*(volatile uint8_t *)(row+782u);
+ uint32_t second=*(volatile uint8_t *)(row+777u);
+ uint32_t first=*(volatile uint8_t *)(row+776u);
+ uint32_t lower=(uint8_t)(third-fourth),upper=(uint8_t)(second+first);
+ if(state==2u){
+  if(delta<lower)return 0u;
+  return 1u+(delta>=(uint8_t)(first-second));
+ }
+ if(state==1u){
+  if(upper<delta)return 2u;
+  return delta>=lower;
+ }
+ if(state!=0u)return 1u;
+ if(upper<delta)return 2u;
+ return (uint8_t)(fourth+third)<delta;
+}
+uint32_t opencfw_em9305_command_refresh_323268(uintptr_t row)
+{
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uint32_t delta=opencfw_em9305_command_delta_317b80(row);
+ uint32_t difference=(uint32_t)(row-base),quotient;
+ __asm__ volatile("div %0,%1,912":"=r"(quotient):"r"(difference));
+ _Alignas(4) uint8_t event[8];
+ *(volatile uint8_t *)(event+6u)=(uint8_t)delta;
+ uint32_t state=*(volatile uint8_t *)(row+782u);
+ *(volatile uint16_t *)(event+2u)=48u;
+ *(volatile uint8_t *)(event+7u)=(uint8_t)state;
+ *(volatile uint16_t *)(event+4u)=(uint8_t)quotient;
+ *(volatile uint16_t *)event=(uint8_t)quotient;
+ return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
+}
+uint32_t opencfw_em9305_command_apply_32754c(uint32_t id,uint32_t unused)
+{
+ (void)unused;
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(offset):"r"(id));
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t row=base+offset;
+ uintptr_t selector=row+(*(volatile uint8_t *)(row+2u)!=0u?197u:189u);
+ if(*(volatile uint8_t *)(row+770u)!=2u)return 12u;
+ uint32_t mode=*(volatile uint8_t *)(row+77u);
+ uint32_t selected=*(volatile uint8_t *)selector;
+ uint32_t second_offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(second_offset):"r"(id));
+ uint32_t extra=(mode==3u)&(selected==1u);
+ uint32_t effective=mode+extra;
+ uint32_t low_effective=(uint8_t)effective;
+ uint32_t status=*(volatile uint8_t *)(row+low_effective+553u);
+ uintptr_t captured_row=base+second_offset;
+ if(status==0x7fu){
+  *(volatile uint8_t *)(captured_row+771u)=1u;
+  *(volatile uint8_t *)(captured_row+784u)=1u;
+  uint32_t reduced=mode-(1u&~extra);
+  uint32_t query=*(volatile uint8_t *)(captured_row+reduced+332u);
+  if(query==0x7eu){
+   uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   uint32_t fallback=*(volatile uint8_t *)(config+40u);
+   *(volatile uint8_t *)(captured_row+low_effective+331u)=(uint8_t)fallback;
+  }
+  uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
+  if(message==0u)return 7u;
+  *(volatile uint16_t *)(message+2u)=0x2801u;
+  uintptr_t fresh_base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  *(volatile uint8_t *)(message+5u)=(uint8_t)effective;
+  uint32_t difference=(uint32_t)(row-fresh_base),quotient;
+  __asm__ volatile("div %0,%1,912":"=r"(quotient):"r"(difference));
+  *(volatile uint8_t *)(message+4u)=0u;
+  uint32_t short_id=(uint8_t)quotient;
+  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  *(volatile uint16_t *)message=(uint16_t)short_id;
+  (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ }else{
+  uint32_t derived=opencfw_em9305_command_derive_317ba8(row);
+  *(volatile uint8_t *)(captured_row+782u)=(uint8_t)derived;
+  (void)opencfw_em9305_command_refresh_323268(row);
+ }
+ *(volatile uint8_t *)(row+770u)=1u;
+ return 0u;
+}
+
+/* Authenticated dispatch330ce0: native extended-report rejection returns1;
+ * legacy rejection returns0. Allocation length wraps through low byte. */
+uint32_t opencfw_em9305_dispatch_330ce0(uintptr_t input)
+{
+ uint32_t type=*(volatile uint8_t *)(input+2u);
+ uintptr_t event;
+ if(type==4u){
+  event=opencfw_em9305_ll_event_allocate(14u,4u);
+  if(event==0u)return 0u;
+  *(volatile uint8_t *)(event+1u)=12u;
+  *(volatile uint8_t *)event=1u;
+  *(volatile uint8_t *)(event+2u)=32u;
+  *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(input+3u);
+ }else if(type==2u){
+  uint32_t kind=*(volatile uint8_t *)(input+18u);
+  uint32_t mask=*(volatile uint32_t *)(uintptr_t)0x8056f8u;
+  uint32_t extended=kind!=255u;
+  uint32_t rejected=extended;
+  if((mask&(extended?1024u:2u))==0u)return rejected;
+  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return rejected;
+  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+  if(count>=*(volatile uint8_t *)(config+14u))return rejected;
+  uint32_t length=18u;
+  if(!extended)length=(uint8_t)(*(volatile uint8_t *)(input+8u)+12u);
+  event=opencfw_em9305_ll_event_allocate(62u,length);
+  if(event==0u)return rejected;
+  *(volatile uint8_t *)(event+1u)=1u;
+  *(volatile uint8_t *)event=(uint8_t)(extended?11u:2u);
+  *(volatile uint8_t *)(event+2u)=*(volatile uint8_t *)(input+10u);
+  *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(input+11u);
+  (void)opencfw_em9305_radio_address_copy_304604(event+4u,input+12u);
+  if(extended){
+   *(volatile uint8_t *)(event+10u)=*(volatile uint8_t *)(input+18u);
+   (void)opencfw_em9305_radio_address_copy_304604(event+11u,input+19u);
+   *(volatile uint8_t *)(event+17u)=*(volatile uint8_t *)(input+9u);
+  }else{
+   *(volatile uint8_t *)(event+10u)=*(volatile uint8_t *)(input+8u);
+   uint32_t bytes=*(volatile uint8_t *)(input+8u);
+   uintptr_t data=*(volatile uint32_t *)(input+4u);
+   (void)opencfw_em9305_memcpy((void *)(event+11u),(const void *)data,bytes);
+   uint32_t fresh_bytes=*(volatile uint8_t *)(input+8u);
+   uint32_t tail=*(volatile uint8_t *)(input+9u);
+   *(volatile uint8_t *)(event+fresh_bytes+11u)=(uint8_t)tail;
+  }
+  count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+  *(volatile uint8_t *)(uintptr_t)0x805718u=(uint8_t)(count+1u);
+ }else return 0u;
+ (void)opencfw_em9305_ll_event_send(event-2u);
+ return 1u;
+}
+
+/* Authenticated completion303fb8..304140. State2 compares incoming R0;
+ * callback address low byte and changed R17 argument are intentional. */
+uint32_t opencfw_em9305_radio_completion_303fb8(uint32_t current,uint32_t first,uint32_t second,uint32_t third,uint32_t fourth,uint32_t fifth)
+{
+ uintptr_t root=0x8015ccu,row=0u,callback=0u;
+ uint32_t state=*(volatile uint8_t *)(root-8u),argument=first,result=current,amount=0u;
+ _Alignas(4) uint8_t scratch[20];
+ _Alignas(4) uint8_t descriptor[8];
+ typedef uint32_t (*completion_fn)(uint32_t,uint32_t);
+ if(state==3u){
+  row=*(volatile uint32_t *)(uintptr_t)(current+44u);
+  callback=*(volatile uint32_t *)(row+116u);
+  if(first-3u<2u){
+   result=((completion_fn)callback)(current,0u);
+   callback=*(volatile uint32_t *)(row+120u);
+   if(callback!=0u)result=((completion_fn)callback)(current,0u);
+   if(first==4u)goto cancel_finish;
+   goto finish;
+  }
+  if(first!=0u){
+   result=((completion_fn)callback)(current,0u);
+   callback=*(volatile uint32_t *)(row+120u);
+   if(callback!=0u)result=((completion_fn)callback)(current,0u);
+   goto finish;
+  }
+  argument=0x8013f0u;
+  amount=((completion_fn)callback)(current,argument);
+  result=amount;
+  if(amount!=0u)goto start;
+  goto fallback;
+ }
+ if(state==2u){
+  *(volatile uint8_t *)(root-8u)=3u;
+  row=*(volatile uint32_t *)(uintptr_t)(current+44u);
+  callback=*(volatile uint32_t *)(row+112u);
+  if(current<2u){
+   result=((completion_fn)callback)(current,0u);
+   if(first==4u)goto cancel_finish;
+   goto finish;
+  }
+  if(first!=0u)goto finish;
+  *(volatile uint32_t *)(row+140u)=fourth;
+  *(volatile uint32_t *)(row+136u)=third;
+  *(volatile uint8_t *)(row+133u)=(uint8_t)callback;
+  *(volatile uint8_t *)(row+134u)=(uint8_t)fifth;
+  argument=0x8013f0u;
+  result=((completion_fn)callback)(current,argument);
+  callback=*(volatile uint32_t *)(row+116u);
+  if(callback==0u)goto fallback;
+  amount=((completion_fn)callback)(current,argument);
+  result=amount;
+  if(amount!=0u)goto start;
+  goto fallback;
+ }
+ result=first-3u;
+ if(state!=0u)return 0u;
+ if(first==4u)goto cancel_finish;
+ if(first!=0u)goto finish;
+ row=*(volatile uint32_t *)(uintptr_t)(current+44u);
+ *(volatile uint32_t *)(row+136u)=third;
+ callback=*(volatile uint32_t *)(row+104u);
+ *(volatile uint32_t *)(row+140u)=fourth;
+ *(volatile uint8_t *)(row+133u)=(uint8_t)second;
+ *(volatile uint8_t *)(row+134u)=(uint8_t)fifth;
+ argument=0x8013f0u;
+ amount=((completion_fn)callback)(current,argument);
+ result=amount;
+ if(amount!=0u){
+  result=*(volatile uint32_t *)(row+100u);
+  if(result!=0u){
+   *(volatile uint8_t *)(root-8u)=1u;
+   uint32_t bytes=*(volatile uint8_t *)(row+124u);
+   *(volatile uint32_t *)(descriptor+4u)=result;
+   *(volatile uint16_t *)descriptor=(uint16_t)bytes;
+   (void)opencfw_em9305_memcpy(scratch,opencfw_em9305_radio_template_3343f8,20u);
+   (void)opencfw_em9305_radio_record_30fc28((uintptr_t)scratch);
+   result=opencfw_em9305_radio_request_30fcd8((uintptr_t)descriptor,1u);
+   goto initialized;
+  }
+ }
+ result=opencfw_em9305_radio_cancel_30fab8(result);
+initialized:
+ callback=*(volatile uint32_t *)(row+108u);
+ if(callback!=0u)result=((completion_fn)callback)(current,argument);
+ if(amount!=0u)return 0u;
+ callback=*(volatile uint32_t *)(row+116u);
+ if(callback==0u)goto fallback;
+ amount=((completion_fn)callback)(current,argument);
+ result=amount;
+ if(amount==0u)goto fallback;
+ *(volatile uint8_t *)(root-8u)=3u;
+ result=opencfw_em9305_radio_cancel_30fab8(result);
+start:
+ (void)opencfw_em9305_common_radio_prepare_30fb4c(row);
+ *(volatile uint32_t *)(root+8u)=amount+fourth;
+ (void)opencfw_em9305_common_radio_bind_30fc10(root);
+ (void)opencfw_em9305_memset(scratch,0u,20u);
+ (void)opencfw_em9305_radio_record_30fc28((uintptr_t)scratch);
+ (void)opencfw_em9305_radio_request_30faec(argument,257u);
+ callback=*(volatile uint32_t *)(row+120u);
+ result=((completion_fn)callback)(current,argument);
+ if(result!=0u)return 0u;
+ goto cancel_finish;
+fallback:
+ callback=*(volatile uint32_t *)(row+120u);
+ result=(uint32_t)callback;
+ if(callback!=0u)result=((completion_fn)callback)(current,argument);
+cancel_finish:
+ result=opencfw_em9305_radio_cancel_30fab8(result);
+finish:
+ (void)opencfw_em9305_common_radio_finish_3045c0(result);
+ return 1u;
+}
+
+/* Authenticated fragmented-report helpers32e48c/32e4a8/330f48. Fixed246
+ * allocator request, header old-address store then two-byte advance. */
+uintptr_t opencfw_em9305_ll_fragment_allocate_32e48c(uint32_t code,uint32_t length)
+{
+ uintptr_t block=opencfw_em9305_wsf_event_allocate(246u);
+ if(block==0u)return 0u;
+ *(volatile uint8_t *)(block+1u)=(uint8_t)length;
+ *(volatile uint8_t *)block=(uint8_t)code;
+ return block+2u;
+}
+uintptr_t opencfw_em9305_ll_fragment_allocate_32e4a8(uint32_t code,uint32_t length)
+{
+ uintptr_t block=opencfw_em9305_wsf_event_allocate(246u);
+ if(block==0u)return 0u;
+ *(volatile uint8_t *)(block+1u)=(uint8_t)length;
+ *(volatile uint8_t *)block=(uint8_t)code;
+ return block+2u;
+}
+uintptr_t opencfw_em9305_ll_fragment_format_330f48(uintptr_t output,uintptr_t input,uintptr_t data,uint32_t bytes)
+{
+ uintptr_t original=*(volatile uint32_t *)(input+16u);
+ uintptr_t end=data+bytes;
+ uint32_t expected=*(volatile uint8_t *)(input+13u);
+ uint32_t status=1u;
+ if((uint16_t)(end-original)==expected){
+  uint32_t mode=*(volatile uint8_t *)(input+12u);
+  status=mode==255u?0xffffffffu:mode==2u?2u:0u;
+ }
+ *(volatile uint8_t *)output=40u;
+ *(volatile uint8_t *)(output+1u)=*(volatile uint8_t *)(input+4u);
+ *(volatile uint8_t *)(output+2u)=*(volatile uint8_t *)(input+5u);
+ uint32_t captured=*(volatile uint8_t *)(input+6u);
+ *(volatile uint8_t *)(output+4u)=1u;
+ *(volatile uint8_t *)(output+3u)=(uint8_t)captured;
+ *(volatile uint8_t *)(output+5u)=*(volatile uint8_t *)(input+8u);
+ *(volatile uint8_t *)(output+6u)=*(volatile uint8_t *)(input+9u);
+ *(volatile uint8_t *)(output+7u)=*(volatile uint8_t *)(input+10u);
+ captured=*(volatile uint8_t *)(input+11u);
+ *(volatile uint8_t *)(output+10u)=(uint8_t)bytes;
+ *(volatile uint8_t *)(output+9u)=(uint8_t)status;
+ *(volatile uint8_t *)(output+8u)=(uint8_t)captured;
+ if(bytes==0u)return output;
+ return (uintptr_t)opencfw_em9305_memcpy((void *)(output+11u),(const void *)data,bytes);
+}
+
+/* Authenticated full dispatch331334..3316e0. Both fragment loops retain
+ * fresh capacity/count checks, native DSP preflight and overflow marker. */
+uint32_t opencfw_em9305_dispatch_331334(uintptr_t input)
+{
+ uint32_t type=*(volatile uint8_t *)(input+2u);
+ uintptr_t event;
+ if(type==32u||type==52u){
+  uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x8056fcu;
+  if((flags&(type==32u?16u:128u))==0u)return 0u;
+  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+  uint32_t remaining,needed;
+  uintptr_t config;
+  uintptr_t cursor;
+  if(type==32u){
+   if(*(volatile uint8_t *)(input+18u)==255u)return 0u;
+   remaining=*(volatile uint16_t *)(input+10u);
+   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   uint32_t quotient,negative_product;
+   __asm__ volatile("divu %0,%1,247":"=r"(quotient):"r"(remaining));
+   __asm__ volatile("mpyw %0,%1,-247":"=r"(negative_product):"r"(quotient));
+   needed=(uint8_t)(quotient+((uint16_t)negative_product!=(uint16_t)(0u-remaining)));
+  }else{
+   remaining=*(volatile uint8_t *)(input+13u);
+   register uint32_t nr0 __asm__("r0");
+   register uint32_t nr1 __asm__("r1");
+   register uint32_t nr2 __asm__("r2")=remaining;
+   __asm__ volatile("mov r0,243\n\tcmp r2,244\n\tsetlo r1,r0,r2\n\tmov r0,r2\n\tadd.nc r0,r0,12\n\textb.f 0,r0\n\tadd.ne r1,r1,1\n\textb r1,r1":"=&r"(nr0),"=&r"(nr1):"r"(nr2):"cc");
+   needed=nr1;
+   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  }
+  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+  if(needed+count>*(volatile uint8_t *)(config+14u))return 0u;
+  cursor=*(volatile uint32_t *)(input+(type==32u?12u:16u));
+  uint32_t capped=0u;
+  do{
+   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+   uint32_t chunk=remaining<244u?remaining:244u;
+   if(count>=*(volatile uint8_t *)(config+14u))return 0u;
+   event=type==32u?opencfw_em9305_ll_fragment_allocate_32e48c(62u,(uint8_t)(chunk+11u)):opencfw_em9305_ll_fragment_allocate_32e4a8(62u,(uint8_t)(chunk+11u));
+   if(event==0u)return 0u;
+   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+   remaining-=chunk;
+   capped=((uint8_t)(count+1u)==*(volatile uint8_t *)(config+14u))&&(remaining!=0u);
+   *(volatile uint8_t *)(uintptr_t)0x805718u=(uint8_t)(count+1u);
+   if(capped){remaining=0u;*(volatile uint8_t *)(input+(type==32u?9u:12u))=2u;}
+   uintptr_t end=cursor+chunk;
+   if(type==32u){
+    uintptr_t original=*(volatile uint32_t *)(input+12u);
+    uint32_t total=*(volatile uint16_t *)(input+10u),status=1u;
+    if(total==(uint16_t)(end-original)){
+     uint32_t mode=*(volatile uint8_t *)(input+9u);
+     status=mode==255u?0xffffffffu:mode==2u?2u:0u;
+    }
+    *(volatile uint8_t *)event=37u;
+    *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(input+4u);
+    *(volatile uint8_t *)(event+2u)=*(volatile uint8_t *)(input+5u);
+    *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(input+6u);
+    *(volatile uint8_t *)(event+4u)=*(volatile uint8_t *)(input+7u);
+    *(volatile uint8_t *)(event+5u)=*(volatile uint8_t *)(input+8u);
+    *(volatile uint8_t *)(event+6u)=*(volatile uint8_t *)(input+16u);
+    *(volatile uint8_t *)(event+7u)=*(volatile uint8_t *)(input+17u);
+    uint32_t captured=*(volatile uint8_t *)(input+18u);
+    *(volatile uint8_t *)(event+10u)=(uint8_t)chunk;
+    *(volatile uint8_t *)(event+9u)=(uint8_t)status;
+    *(volatile uint8_t *)(event+8u)=(uint8_t)captured;
+    if(chunk!=0u)(void)opencfw_em9305_memcpy((void *)(event+11u),(const void *)cursor,chunk);
+   }else (void)opencfw_em9305_ll_fragment_format_330f48(event,input,cursor,(uint8_t)chunk);
+   (void)opencfw_em9305_ll_event_send(event-2u);
+   cursor=end;
+  }while(remaining!=0u);
+  return capped^1u;
+ }
+ uint32_t bit,length,opcode;
+ if(type==5u){bit=1u;length=34u;opcode=41u;}
+ else if(type==30u){bit=8u;length=20u;opcode=36u;}
+ else if(type==38u){bit=32u;length=24u;opcode=38u;}
+ else if(type==53u){bit=64u;length=4u;opcode=39u;}
+ else return 0u;
+ uintptr_t flag_address=type==5u?0x8056fdu:0x8056fcu;
+ if((*(volatile uint8_t *)flag_address&bit)==0u)return 0u;
+ if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+ if(type==5u){
+  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  if(*(volatile uint8_t *)(config+4u)<13u)return 0u;
+ }else if(type==30u&&*(volatile uint8_t *)(input+21u)==0u)return 0u;
+ else if(type==38u&&*(volatile uint8_t *)(input+25u)==0u)return 0u;
+ event=opencfw_em9305_ll_event_allocate(62u,length);
+ if(event==0u)return 0u;
+ *(volatile uint8_t *)event=(uint8_t)opcode;
+ if(type==53u){
+  *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(input+4u);
+  *(volatile uint8_t *)(event+2u)=*(volatile uint8_t *)(input+5u);
+  *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(input+6u);
+ }
+ if(type==5u){
+  *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(input+4u);
+  *(volatile uint8_t *)(event+2u)=*(volatile uint8_t *)(input+6u);
+  *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(input+7u);
+  *(volatile uint8_t *)(event+4u)=*(volatile uint8_t *)(input+8u);
+  *(volatile uint8_t *)(event+5u)=*(volatile uint8_t *)(input+9u);
+  (void)opencfw_em9305_radio_address_copy_304604(event+6u,input+10u);
+  (void)opencfw_em9305_radio_address_copy_304604(event+12u,input+23u);
+  (void)opencfw_em9305_radio_address_copy_304604(event+18u,input+29u);
+  *(volatile uint8_t *)(event+24u)=*(volatile uint8_t *)(input+16u);
+  *(volatile uint8_t *)(event+25u)=*(volatile uint8_t *)(input+17u);
+  *(volatile uint8_t *)(event+26u)=*(volatile uint8_t *)(input+18u);
+  *(volatile uint8_t *)(event+27u)=*(volatile uint8_t *)(input+19u);
+  *(volatile uint8_t *)(event+28u)=*(volatile uint8_t *)(input+20u);
+  *(volatile uint8_t *)(event+29u)=*(volatile uint8_t *)(input+21u);
+  *(volatile uint8_t *)(event+30u)=*(volatile uint8_t *)(input+22u);
+  *(volatile uint8_t *)(event+31u)=*(volatile uint8_t *)(input+35u);
+  *(volatile uint8_t *)(event+32u)=*(volatile uint8_t *)(input+36u);
+  *(volatile uint8_t *)(event+33u)=*(volatile uint8_t *)(input+37u);
+ }
+ if(type==30u){
+  *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(input+4u);
+  *(volatile uint8_t *)(event+2u)=*(volatile uint8_t *)(input+6u);
+  *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(input+7u);
+  *(volatile uint8_t *)(event+4u)=*(volatile uint8_t *)(input+8u);
+  *(volatile uint8_t *)(event+5u)=*(volatile uint8_t *)(input+9u);
+  (void)opencfw_em9305_radio_address_copy_304604(event+6u,input+10u);
+  *(volatile uint8_t *)(event+12u)=*(volatile uint8_t *)(input+16u);
+  *(volatile uint8_t *)(event+13u)=*(volatile uint8_t *)(input+18u);
+  *(volatile uint8_t *)(event+14u)=*(volatile uint8_t *)(input+19u);
+  *(volatile uint8_t *)(event+15u)=*(volatile uint8_t *)(input+20u);
+  *(volatile uint8_t *)(event+16u)=*(volatile uint8_t *)(input+21u);
+  *(volatile uint8_t *)(event+17u)=*(volatile uint8_t *)(input+22u);
+  *(volatile uint8_t *)(event+18u)=*(volatile uint8_t *)(input+23u);
+  *(volatile uint8_t *)(event+19u)=*(volatile uint8_t *)(input+24u);
+ }
+ if(type==38u){
+  *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(input+4u);
+  *(volatile uint8_t *)(event+2u)=*(volatile uint8_t *)(input+6u);
+  *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(input+7u);
+  *(volatile uint8_t *)(event+4u)=*(volatile uint8_t *)(input+8u);
+  *(volatile uint8_t *)(event+5u)=*(volatile uint8_t *)(input+9u);
+  *(volatile uint8_t *)(event+6u)=*(volatile uint8_t *)(input+10u);
+  *(volatile uint8_t *)(event+7u)=*(volatile uint8_t *)(input+11u);
+  *(volatile uint8_t *)(event+8u)=*(volatile uint8_t *)(input+12u);
+  *(volatile uint8_t *)(event+9u)=*(volatile uint8_t *)(input+13u);
+  (void)opencfw_em9305_radio_address_copy_304604(event+10u,input+14u);
+  *(volatile uint8_t *)(event+16u)=*(volatile uint8_t *)(input+20u);
+  *(volatile uint8_t *)(event+17u)=*(volatile uint8_t *)(input+22u);
+  *(volatile uint8_t *)(event+18u)=*(volatile uint8_t *)(input+23u);
+  *(volatile uint8_t *)(event+19u)=*(volatile uint8_t *)(input+24u);
+  *(volatile uint8_t *)(event+20u)=*(volatile uint8_t *)(input+25u);
+  *(volatile uint8_t *)(event+21u)=*(volatile uint8_t *)(input+26u);
+  *(volatile uint8_t *)(event+22u)=*(volatile uint8_t *)(input+27u);
+  *(volatile uint8_t *)(event+23u)=*(volatile uint8_t *)(input+28u);
+ }
+ (void)opencfw_em9305_ll_event_send(event-2u);
+ return 1u;
+}
+
+/* Authenticated dispatch3316e0..331814. Scratch padding untouched; fresh
+ * request command after allocation governs response query/status layout. */
+extern uint32_t opencfw_em9305_command_30d4e4(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30dd04(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_30cba0(uintptr_t);
+extern uint32_t opencfw_em9305_command_30e120(uintptr_t);
+extern uint32_t opencfw_em9305_command_query_30c824(uint32_t,uintptr_t,uintptr_t);
+uint32_t opencfw_em9305_dispatch_3316e0(uintptr_t request,uintptr_t input)
+{
+ uint32_t index=(uint32_t)*(volatile uint16_t *)request-0x2030u;
+ if(index>=5u)return 0u;
+ _Alignas(4) uint8_t scratch[24];
+ uint32_t status=0u,id=0u,length=1u;
+ if(index==0u){
+  uint32_t b1=*(volatile uint8_t *)(input+1u);
+  uint32_t b0=*(volatile uint8_t *)input;
+  id=b0+(b1<<8u);length=5u;
+ }else if(index==1u){
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  uint32_t b1=*(volatile uint8_t *)(input+1u);
+  uint32_t b0=*(volatile uint8_t *)input;
+  status=opencfw_em9305_command_30d4e4(b0,b1,b2);
+ }else if(index==2u){
+  uint32_t b1=*(volatile uint8_t *)(input+1u);
+  uint32_t b6=*(volatile uint8_t *)(input+6u);
+  uint32_t b0=*(volatile uint8_t *)input;
+  uint32_t b5=*(volatile uint8_t *)(input+5u);
+  uint32_t b4=*(volatile uint8_t *)(input+4u);
+  uint32_t b3=*(volatile uint8_t *)(input+3u);
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  status=opencfw_em9305_command_30dd04((uint16_t)(b0+(b1<<8u)),b2,b3,b4,(uint16_t)(b5+(b6<<8u)));
+  (void)opencfw_em9305_ll_status_event_331bf8(request,status);
+  return 1u;
+ }else if(index==3u){
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  uint32_t b0=*(volatile uint8_t *)input;
+  uint32_t b1=*(volatile uint8_t *)(input+1u);
+  *(volatile uint8_t *)(scratch+10u)=(uint8_t)b2;
+  *(volatile uint16_t *)scratch=0u;
+  *(volatile uint32_t *)(scratch+16u)=0u;
+  *(volatile uint8_t *)(scratch+14u)=2u;
+  *(volatile uint8_t *)(scratch+11u)=0u;
+  *(volatile uint32_t *)(scratch+4u)=0x71764129u;
+  *(volatile uint16_t *)(scratch+12u)=256u;
+  *(volatile uint8_t *)(scratch+8u)=(uint8_t)b0;
+  *(volatile uint8_t *)(scratch+9u)=(uint8_t)b1;
+  status=opencfw_em9305_command_30cba0((uintptr_t)scratch);
+ }else{
+  uint32_t b3=*(volatile uint8_t *)(input+3u);
+  uint32_t b0=*(volatile uint8_t *)input;
+  uint32_t b1=*(volatile uint8_t *)(input+1u);
+  uint32_t b2=*(volatile uint8_t *)(input+2u);
+  *(volatile uint8_t *)(scratch+5u)=(uint8_t)b3;
+  *(volatile uint16_t *)scratch=0u;
+  *(volatile uint32_t *)(scratch+12u)=0u;
+  *(volatile uint8_t *)(scratch+8u)=2u;
+  *(volatile uint16_t *)(scratch+6u)=0u;
+  *(volatile uint8_t *)(scratch+16u)=127u;
+  *(volatile uint8_t *)(scratch+2u)=(uint8_t)b0;
+  *(volatile uint8_t *)(scratch+3u)=(uint8_t)b1;
+  *(volatile uint8_t *)(scratch+4u)=(uint8_t)b2;
+  status=opencfw_em9305_command_30e120((uintptr_t)scratch);
+ }
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(length,*(volatile uint16_t *)request);
+ if(response==0u)return 1u;
+ uint32_t command=*(volatile uint16_t *)request;
+ if(command-0x2033u<2u||command==0x2031u)*(volatile uint8_t *)response=(uint8_t)status;
+ else if(command==0x2030u){
+  *(volatile uint8_t *)scratch=0u;
+  *(volatile uint8_t *)(scratch+23u)=0u;
+  uint32_t result=opencfw_em9305_command_query_30c824((uint16_t)id,(uintptr_t)scratch,(uintptr_t)(scratch+23u));
+  uint32_t first=*(volatile uint8_t *)scratch;
+  uint32_t second=*(volatile uint8_t *)(scratch+23u);
+  *(volatile uint8_t *)(response+1u)=(uint8_t)id;
+  *(volatile uint8_t *)response=(uint8_t)result;
+  *(volatile uint8_t *)(response+2u)=(uint8_t)(id>>8u);
+  *(volatile uint8_t *)(response+4u)=(uint8_t)second;
+  *(volatile uint8_t *)(response+3u)=(uint8_t)first;
+ }
+ (void)opencfw_em9305_ll_event_send(response-5u);
+ return 1u;
+}
+
+/* Authenticated PHY policy332f3c/332f80 and providers30d4e4/30dd04.
+ * Feature checks precede protocol validation; disabled PHY fields zeroed. */
+uint32_t opencfw_em9305_command_phy_capable_332f80(uint32_t first,uint32_t second)
+{
+ uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ if((flags&256u)==0u&&((first|second)&2u)!=0u)return 0u;
+ if((flags&2048u)==0u&&((first|second)&4u)!=0u)return 0u;
+ return 1u;
+}
+uint32_t opencfw_em9305_command_phy_validate_332f3c(uint32_t mode,uint32_t first,uint32_t second,uint32_t kind)
+{
+ if(kind>2u||(mode&~3u)!=0u||(first|second)>7u)return 17u;
+ if(first!=second&&mode==0u&&(*(volatile uint32_t *)(uintptr_t)0x805a84u&128u)!=0u)return 17u;
+ if(first==0u&&(mode&1u)==0u)return 18u;
+ if((mode&2u)==0u&&second==0u)return 18u;
+ return 0u;
+}
+uint32_t opencfw_em9305_command_30d4e4(uint32_t mode,uint32_t first,uint32_t second)
+{
+ if(opencfw_em9305_command_phy_capable_332f80(first,second)==0u)return 17u;
+ uint32_t status=opencfw_em9305_command_phy_validate_332f3c(mode,first,second,0u);
+ if(status!=0u)return status;
+ if((mode&2u)!=0u)second=0u;
+ if((mode&1u)!=0u)first=0u;
+ *(volatile uint8_t *)(uintptr_t)0x805ac8u=(uint8_t)mode;
+ *(volatile uint8_t *)(uintptr_t)0x805acau=(uint8_t)second;
+ *(volatile uint8_t *)(uintptr_t)0x805ac9u=(uint8_t)first;
+ return 0u;
+}
+uint32_t opencfw_em9305_command_30dd04(uint32_t id,uint32_t mode,uint32_t first,uint32_t second,uint32_t kind)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(id>=*(volatile uint8_t *)(config+34u))return 2u;
+ if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
+ if(opencfw_em9305_ll_slot_pending_307434(id,32u)!=0u)return 12u;
+ if(opencfw_em9305_command_phy_capable_332f80(first,second)==0u)return 17u;
+ uint32_t status=opencfw_em9305_command_phy_validate_332f3c(mode,first,second,kind);
+ if(status!=0u)return status;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(10u);
+ if(message==0u)return 0u;
+ *(volatile uint16_t *)(message+2u)=0x2001u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ if((mode&2u)!=0u)second=0u;
+ if((mode&1u)!=0u)first=0u;
+ *(volatile uint16_t *)message=(uint16_t)id;
+ *(volatile uint8_t *)(message+6u)=(uint8_t)second;
+ *(volatile uint8_t *)(message+5u)=(uint8_t)first;
+ *(volatile uint16_t *)(message+8u)=(uint16_t)kind;
+ *(volatile uint8_t *)(message+4u)=(uint8_t)mode;
+ (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ return 0u;
+}
+
+/* Native PHY slot reads307008/30701c, query30c824..30c860 and310634.
+ * Keep the first output store before the second slot/config read. */
+uint32_t opencfw_em9305_ll_rx_phy_307008(uint32_t id)
+{
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(offset):"r"(id));
+ uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ return *(volatile uint8_t *)(slots+offset+77u);
+}
+uint32_t opencfw_em9305_ll_tx_phy_30701c(uint32_t id)
+{
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,912":"=r"(offset):"r"(id));
+ uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ return *(volatile uint8_t *)(slots+offset+76u);
+}
+uint32_t opencfw_em9305_command_query_30c824(uint32_t id,uintptr_t first,uintptr_t second)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(id>=*(volatile uint8_t *)(config+34u))return 2u;
+ if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
+ *(volatile uint8_t *)first=(uint8_t)opencfw_em9305_ll_tx_phy_30701c(id);
+ *(volatile uint8_t *)second=(uint8_t)opencfw_em9305_ll_rx_phy_307008(id);
+ return 0u;
+}
+uint32_t opencfw_em9305_ll_command_pending_310634(void)
+{
+ *(volatile uint8_t *)(uintptr_t)0x805ec5u=1u;
+ return 0x805ec5u;
+}
+
+/* Native command30cba0..30cce8 and channel mapping332c30..332c50.
+ * Callback bodies and scheduler contracts remain genuine symbolic imports. */
+extern uint32_t opencfw_em9305_command_callback_332d2c(uintptr_t);
+extern uint32_t opencfw_em9305_command_callback_332cd0(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_common_request_30455c(uint32_t);
+extern uint32_t opencfw_em9305_auxiliary_insert_313220(uintptr_t);
+uint32_t opencfw_em9305_command_channel_332c30(uint32_t channel)
+{
+ uint32_t value;
+ if(channel==0u)value=37u;
+ else if(channel<12u)value=channel-1u;
+ else if(channel==12u)value=38u;
+ else if(channel>=39u)value=39u;
+ else value=channel-2u;
+ return (uint8_t)value;
+}
+uint32_t opencfw_em9305_command_count_30e4bc(void)
+{
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a79u;
+ *(volatile uint8_t *)(uintptr_t)0x805a79u=(uint8_t)(count+1u);
+ return 0x805a79u;
+}
+uint32_t opencfw_em9305_command_30cba0(uintptr_t input)
+{
+ uintptr_t flags=0x805a70u,state=0x8058dcu,record=0x8059f8u;
+ if(*(volatile uint8_t *)(flags+4u)!=0u)return 12u;
+ if(*(volatile uint8_t *)(flags+3u)!=0u)return 12u;
+ if(*(volatile uint8_t *)(flags+2u)!=0u)return 12u;
+ if(*(volatile uint8_t *)(flags+1u)!=0u)return 12u;
+ if(*(volatile uint8_t *)state!=0u)return 12u;
+ if(*(volatile uint8_t *)flags!=0u)return 12u;
+ if(*(volatile uint8_t *)(input+8u)>39u)return 48u;
+ uint32_t kind=*(volatile uint8_t *)(input+9u);
+ if(kind-1u>2u)return 48u;
+ if(*(volatile uint8_t *)(input+10u)>1u)return 48u;
+ if(kind==3u){if((*(volatile uint8_t *)(uintptr_t)0x805a95u&8u)==0u)return 17u;}
+ else if(kind==2u){if((*(volatile uint8_t *)(uintptr_t)0x805a95u&1u)==0u)return 17u;}
+ if(*(volatile uint8_t *)(input+11u)!=0u)return 17u;
+ (void)opencfw_em9305_ll_command_pending_310634();
+ (void)opencfw_em9305_memset((void *)(state+24u),0u,44u);
+ (void)opencfw_em9305_memset((void *)record,0u,100u);
+ *(volatile uint32_t *)(state+68u)=(uint32_t)record;
+ uint32_t id=*(volatile uint16_t *)input;
+ *(volatile uint8_t *)(state+50u)=2u;
+ uint32_t channel=*(volatile uint8_t *)(input+8u);
+ *(volatile uint32_t *)(state+52u)=(uint32_t)(uintptr_t)&opencfw_em9305_command_callback_332d2c;
+ *(volatile uint16_t *)(state+2u)=(uint16_t)id;
+ *(volatile uint8_t *)record=1u;
+ uint32_t mapped=opencfw_em9305_command_channel_332c30(channel);
+ kind=*(volatile uint8_t *)(input+9u);
+ uint32_t value=*(volatile uint32_t *)(input+4u);
+ *(volatile uint8_t *)(record+1u)=(uint8_t)mapped;
+ *(volatile uint32_t *)(record+8u)=0x555555u;
+ *(volatile uint32_t *)(record+4u)=value;
+ uint32_t mode=0u;
+ if(kind==3u){mode=3u;*(volatile uint8_t *)(record+13u)=3u;}
+ else if(kind==2u){mode=2u;*(volatile uint8_t *)(record+13u)=2u;}
+ else if(kind==1u){mode=1u;*(volatile uint8_t *)(record+13u)=1u;}
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint8_t *)(record+12u)=(uint8_t)mode;
+ uint32_t duration=*(volatile uint16_t *)(config+60u);
+ *(volatile uint16_t *)(record+112u)=257u;
+ *(volatile uint32_t *)(record+104u)=(uint32_t)(uintptr_t)&opencfw_em9305_command_callback_332cd0;
+ uint32_t scaled;
+ __asm__ volatile("mpyuw %0,%1,1000":"=r"(scaled):"r"(duration));
+ *(volatile uint32_t *)(record+100u)=scaled;
+ uintptr_t allocation=opencfw_em9305_wsf_pool_allocate(257u);
+ *(volatile uint32_t *)(record+108u)=(uint32_t)allocation;
+ if(allocation==0u)return 31u;
+ *(volatile uint8_t *)(flags+8u)=1u;
+ *(volatile uint8_t *)state=2u; /* STB.AB uses old state address. */
+ (void)opencfw_em9305_command_count_30e4bc();
+ (void)opencfw_em9305_memset((void *)(state+4u),0u,20u);
+ (void)opencfw_em9305_common_request_30455c(2u);
+ (void)opencfw_em9305_auxiliary_insert_313220(state+24u);
+ return 0u;
+}
+
+/* Native command30e120..30e350: complete guards/update/allocate paths.
+ * Native332be4 does not write R3, preserving allocator request257. Its DSP
+ * accumulator result remains a genuine import until decoded and verified. */
+extern uint32_t opencfw_em9305_command_duration_332be4(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_pattern_332b94(uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_callback_332e2c(uintptr_t);
+extern uint32_t opencfw_em9305_command_callback_332db4(uintptr_t,uint32_t);
+uint32_t opencfw_em9305_command_30e120(uintptr_t input)
+{
+ uintptr_t state=0x8058dcu,flags=0x805a70u,policy=0x805994u;
+ uint32_t original=*(volatile uint8_t *)state;
+ if(original>=2u)return 12u;
+ if(*(volatile uint8_t *)(flags+4u)!=0u)return 12u;
+ if(*(volatile uint8_t *)(flags+3u)!=0u)return 12u;
+ if(*(volatile uint8_t *)(flags+2u)!=0u)return 12u;
+ if(*(volatile uint8_t *)flags!=0u)return 12u;
+ if(*(volatile uint8_t *)(flags+1u)!=0u)return 12u;
+ if(original==1u){
+  uint32_t requested=*(volatile uint8_t *)(input+4u);
+  uint32_t existing=*(volatile uint8_t *)(policy+1u);
+  if((requested==3u)!=(existing==3u))return 12u;
+ }
+ if(*(volatile uint8_t *)(input+2u)>=40u)return 48u;
+ if(*(volatile uint8_t *)(input+4u)>=8u)return 48u;
+ uint32_t mode=*(volatile uint8_t *)(input+5u);
+ if(mode-1u>=4u)return 48u;
+ if(mode-3u<2u){if((*(volatile uint8_t *)(uintptr_t)0x805a95u&8u)==0u)return 17u;}
+ else if(mode==2u){if((*(volatile uint8_t *)(uintptr_t)0x805a95u&1u)==0u)return 17u;}
+ if(*(volatile uint8_t *)(input+6u)!=0u)return 17u;
+ (void)opencfw_em9305_ll_command_pending_310634();
+ uint8_t lower,upper;
+ (void)opencfw_em9305_ll_signed_bounds_31026c((uintptr_t)&lower,(uintptr_t)&upper);
+ int32_t power=(int8_t)*(volatile uint8_t *)(input+16u);
+ uint32_t adjusted;
+ if(power==126)adjusted=lower;
+ else if(power==127)adjusted=upper;
+ else {
+  if((uint32_t)(power-21)<(uint32_t)-147)return 48u;
+  if((int8_t)upper<power)return 17u;
+  if(power<(int8_t)lower)return 17u;
+  adjusted=opencfw_em9305_ll_signed_clamp_310230((uint32_t)power);
+ }
+ *(volatile uint8_t *)(input+16u)=(uint8_t)adjusted;
+ if(*(volatile uint8_t *)state==0u)
+  (void)opencfw_em9305_memset((void *)(state+4u),0u,20u);
+ if(*(volatile uint8_t *)(input+4u)==3u){
+  *(volatile uint8_t *)(state+185u)=3u;
+  *(volatile uint8_t *)state=1u;
+  (void)opencfw_em9305_common_request_30455c(3u);
+  *(volatile uint8_t *)(flags+8u)=1u;
+  (void)opencfw_em9305_command_count_30e4bc();
+  return 0u;
+ }
+ (void)opencfw_em9305_wsf_critical_enter();
+ uint32_t pattern=*(volatile uint8_t *)(input+3u);
+ uint32_t kind=*(volatile uint8_t *)(input+4u);
+ uint32_t channel=*(volatile uint8_t *)(input+2u);
+ *(volatile uint8_t *)policy=(uint8_t)pattern;
+ *(volatile uint8_t *)(policy+1u)=(uint8_t)kind;
+ uint32_t mapped=opencfw_em9305_command_channel_332c30(channel);
+ mode=*(volatile uint8_t *)(input+5u);
+ *(volatile uint8_t *)(policy+2u)=(uint8_t)mapped;
+ if(mode==4u){*(volatile uint16_t *)(policy+4u)=1u;*(volatile uint8_t *)(policy+3u)=3u;}
+ else if(mode==2u){*(volatile uint16_t *)(policy+4u)=0u;*(volatile uint8_t *)(policy+3u)=2u;}
+ else if(mode==3u){*(volatile uint16_t *)(policy+4u)=2u;*(volatile uint8_t *)(policy+3u)=3u;}
+ else if(mode==1u){*(volatile uint16_t *)(policy+4u)=0u;*(volatile uint8_t *)(policy+3u)=1u;}
+ uint32_t requested_power=*(volatile uint8_t *)(input+16u);
+ *(volatile uint32_t *)(state+196u)=0xffffffffu;
+ *(volatile uint32_t *)(state+200u)=0u;
+ *(volatile uint8_t *)(state+204u)=(uint8_t)requested_power;
+ (void)opencfw_em9305_wsf_critical_exit();
+ uint32_t fresh=*(volatile uint8_t *)state;
+ uintptr_t pending=state+24u;
+ if(fresh==1u)return 0u;
+ uintptr_t record=state+72u;
+ (void)opencfw_em9305_memset((void *)pending,0u,148u);
+ *(volatile uint32_t *)(state+68u)=(uint32_t)record;
+ uint32_t encoding=*(volatile uint8_t *)(state+188u);
+ uint32_t saved_power=*(volatile uint8_t *)(state+204u);
+ uint32_t id=*(volatile uint16_t *)input;
+ uint32_t saved_channel=*(volatile uint8_t *)(state+186u);
+ uint32_t saved_mode=*(volatile uint8_t *)(state+187u);
+ uint32_t saved_pattern=*(volatile uint8_t *)(state+184u);
+ *(volatile uint8_t *)(state+74u)=(uint8_t)saved_power;
+ *(volatile uint16_t *)(state+2u)=(uint16_t)id;
+ *(volatile uint32_t *)(state+80u)=0x555555u;
+ *(volatile uint32_t *)(state+52u)=(uint32_t)(uintptr_t)&opencfw_em9305_command_callback_332e2c;
+ *(volatile uint32_t *)(state+172u)=(uint32_t)(uintptr_t)&opencfw_em9305_command_callback_332db4;
+ *(volatile uint32_t *)(state+76u)=0x71764129u;
+ *(volatile uint16_t *)(state+180u)=257u;
+ *(volatile uint8_t *)(state+50u)=2u;
+ *(volatile uint8_t *)(state+73u)=(uint8_t)saved_channel;
+ *(volatile uint8_t *)(state+85u)=(uint8_t)saved_mode;
+ *(volatile uint8_t *)(state+86u)=(uint8_t)encoding;
+ *(volatile uint8_t *)(state+84u)=(uint8_t)saved_mode;
+ uint32_t duration=opencfw_em9305_command_duration_332be4(saved_pattern,saved_mode,encoding);
+ *(volatile uint16_t *)(state+182u)=(uint16_t)duration;
+ uintptr_t allocation=opencfw_em9305_wsf_pool_allocate(257u);
+ *(volatile uint32_t *)(state+176u)=(uint32_t)allocation;
+ if(allocation==0u)return 31u;
+ uint32_t input_kind=*(volatile uint8_t *)(input+4u);
+ uint32_t input_pattern=*(volatile uint8_t *)(input+3u);
+ (void)opencfw_em9305_command_pattern_332b94(input_pattern,input_kind,allocation);
+ uint32_t saved_duration=*(volatile uint16_t *)(state+182u);
+ *(volatile uint8_t *)state=1u;
+ *(volatile uint8_t *)(flags+8u)=1u;
+ *(volatile uint32_t *)(state+192u)=saved_duration;
+ (void)opencfw_em9305_command_count_30e4bc();
+ (void)opencfw_em9305_common_request_30455c(2u);
+ (void)opencfw_em9305_auxiliary_insert_313220(pending);
+ return 0u;
+}
+
+/* Native pattern332b94..332be4 and PN9 loop332c50..332c84.
+ * STB.AB writes selector at old+2 before advancing payload address+2. */
+uintptr_t opencfw_em9305_command_pn9_332c50(uintptr_t output,uint32_t length)
+{
+ if(length==0u)return output;
+ uint32_t count=(uint8_t)(length-1u)+1u,seed=511u;
+ do {
+  *(volatile uint8_t *)output=(uint8_t)seed;
+  output++;
+  for(uint32_t bit=0u;bit<8u;bit++){
+   uint32_t feedback=((seed>>4u)^seed)<<8u;
+   seed=(feedback&256u)|(seed>>1u);
+  }
+ }while(--count!=0u);
+ return output;
+}
+uint32_t opencfw_em9305_command_pattern_332b94(uint32_t length,uint32_t selector,uintptr_t output)
+{
+ *(volatile uint8_t *)(output+1u)=(uint8_t)length;
+ *(volatile uint8_t *)(output+2u)=(uint8_t)selector;
+ output+=2u;
+ if(selector>=8u||selector==3u)return length;
+ if(selector==0u)return (uint32_t)opencfw_em9305_command_pn9_332c50(output,length);
+ uint32_t value;
+ switch(selector){
+ case 1u:value=15u;break;
+ case 2u:value=85u;break;
+ case 4u:value=255u;break;
+ case 5u:value=0u;break;
+ case 6u:value=240u;break;
+ default:value=170u;break;
+ }
+ return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)output,value,length);
+}
+
+/* Native completion332cd0..332d2c: event0 sign-extends R2 into total64;
+ * counters are loaded before ordered stores, limit uses fresh halfword reads. */
+uint32_t opencfw_em9305_command_callback_332cd0(uintptr_t unused,uint32_t event,uint32_t delta)
+{
+ (void)unused;
+ uintptr_t state=0x8058dcu;
+ if(event==0u){
+  uint32_t low=*(volatile uint32_t *)(state+12u);
+  uint32_t high=*(volatile uint32_t *)(state+16u);
+  uint32_t successful=*(volatile uint16_t *)(state+6u);
+  uint32_t total=*(volatile uint16_t *)(state+20u);
+  uint32_t next=low+delta;
+  uint32_t upper=high+((delta&0x80000000u)!=0u?0xffffffffu:0u)+(next<low);
+  *(volatile uint32_t *)(state+12u)=next;
+  *(volatile uint16_t *)(state+6u)=(uint16_t)(successful+1u);
+  *(volatile uint16_t *)(state+20u)=(uint16_t)(total+1u);
+  *(volatile uint32_t *)(state+16u)=upper;
+ }else if(event==4u){
+  uint32_t count=*(volatile uint16_t *)(state+8u);
+  *(volatile uint16_t *)(state+8u)=(uint16_t)(count+1u);
+ }else{
+  uint32_t count=*(volatile uint16_t *)(state+10u);
+  *(volatile uint16_t *)(state+10u)=(uint16_t)(count+1u);
+ }
+ uint32_t limit=*(volatile uint16_t *)(state+2u);
+ if(limit!=0u){
+  uint32_t success=*(volatile uint16_t *)(state+6u);
+  uint32_t failed=*(volatile uint16_t *)(state+8u);
+  uint32_t other=*(volatile uint16_t *)(state+10u);
+  if(success+failed+other>=limit)return 0u;
+ }
+ return *(volatile uint8_t *)state==2u;
+}
+
+/* Native continuation332d2c..332db4 and byte-decrement30e48c..30e49c.
+ * Native rereads state after stop/release/event effects. */
+extern uint32_t opencfw_em9305_command_stop_30b654(uintptr_t);
+extern uint32_t opencfw_em9305_common_release_304588(uint32_t);
+uint32_t opencfw_em9305_command_count_down_30e48c(void)
+{
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a79u;
+ *(volatile uint8_t *)(uintptr_t)0x805a79u=(uint8_t)(count-1u);
+ return 0x805a79u;
+}
+uint32_t opencfw_em9305_command_callback_332d2c(uintptr_t object)
+{
+ uintptr_t state=0x8058dcu;
+ uint32_t limit=*(volatile uint16_t *)(state+2u);
+ uintptr_t record=*(volatile uint32_t *)(object+44u);
+ if(limit!=0u){
+  uint32_t success=*(volatile uint16_t *)(state+6u);
+  uint32_t failed=*(volatile uint16_t *)(state+8u);
+  uint32_t other=*(volatile uint16_t *)(state+10u);
+  if(success+failed+other>=limit)(void)opencfw_em9305_command_stop_30b654(0u);
+ }
+ if(*(volatile uint8_t *)state==2u)return opencfw_em9305_auxiliary_insert_313220(object);
+ (void)opencfw_em9305_wsf_pool_release(*(volatile uint32_t *)(record+108u));
+ uintptr_t message=*(volatile uint32_t *)(uintptr_t)0x805a6cu;
+ if(message!=0u){
+  (void)opencfw_em9305_wsf_event_release(message);
+  *(volatile uint32_t *)(uintptr_t)0x805a6cu=0u;
+ }
+ (void)opencfw_em9305_common_release_304588(2u);
+ if(*(volatile uint8_t *)state==4u){
+  uintptr_t response=opencfw_em9305_wsf_event_allocate(4u);
+  if(response==0u)return 0u;
+  *(volatile uint16_t *)(response+2u)=261u;
+  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  return opencfw_em9305_wsf_task_message_send(handler,response);
+ }
+ *(volatile uint8_t *)state=0u;
+ *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
+ return opencfw_em9305_command_count_down_30e48c();
+}
+
+/* Native policy callback332db4..332e2c, complete selected body. */
+uint32_t opencfw_em9305_command_callback_332db4(uintptr_t object,uint32_t event)
+{
+ uintptr_t state=0x8058dcu;
+ uint32_t count=*(volatile uint16_t *)(state+4u);
+ uint32_t captured=*(volatile uint8_t *)state;
+ uint32_t next=count+1u;
+ *(volatile uint16_t *)(state+4u)=(uint16_t)next;
+ if(captured!=1u||event==1u)return 0u;
+ uint32_t limit=*(volatile uint16_t *)(state+2u);
+ if(limit!=0u&&(uint16_t)next>=limit)return 0u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),policy=0x805994u;
+ uint32_t channel=*(volatile uint8_t *)(policy+2u);
+ uint32_t recorded_channel=*(volatile uint8_t *)(record+1u);
+ if(channel!=recorded_channel)return 0u;
+ uintptr_t packet=*(volatile uint32_t *)(record+104u);
+ uint32_t kind=*(volatile uint8_t *)(policy+1u);
+ uint32_t header=*(volatile uint8_t *)packet;
+ if(kind!=(header&~32u))return 0u;
+ uint32_t packet_pattern=*(volatile uint8_t *)(packet+1u);
+ uint32_t pattern=*(volatile uint8_t *)policy;
+ if(pattern!=packet_pattern)return 0u;
+ uint32_t recorded_mode=*(volatile uint8_t *)(record+12u);
+ uint32_t mode=*(volatile uint8_t *)(policy+3u);
+ if(mode!=recorded_mode)return 0u;
+ uint32_t index=*(volatile uint32_t *)(policy+16u);
+ uint32_t bits=*(volatile uint32_t *)(policy+12u);
+ uint32_t value=(bits&(1u<<(index&31u)))!=0u?0x555555u:0xaaaaaau;
+ *(volatile uint32_t *)(policy+16u)=(index+1u)&31u;
+ *(volatile uint32_t *)(record+8u)=value;
+ return 1u;
+}
+
+/* Native continuation332e2c..332efc: complete selected body.
+ * Packet pointer and policy kind survive duration332be4's exact register set. */
+uint32_t opencfw_em9305_command_callback_332e2c(uintptr_t object)
+{
+ uintptr_t state=0x8058dcu;
+ uint32_t count=*(volatile uint16_t *)(state+4u);
+ uint32_t limit=*(volatile uint16_t *)(state+2u);
+ uintptr_t record=*(volatile uint32_t *)(object+44u);
+ uint32_t next=count+1u;
+ *(volatile uint16_t *)(state+4u)=(uint16_t)next;
+ if(limit!=0u&&(uint16_t)next>=limit)(void)opencfw_em9305_command_stop_30b654(0u);
+ uint32_t fresh=*(volatile uint8_t *)state;
+ uintptr_t packet=*(volatile uint32_t *)(record+104u);
+ if(fresh==1u){
+  uintptr_t policy=0x805994u;
+  uint32_t recorded_channel=*(volatile uint8_t *)(record+1u);
+  uint32_t channel=*(volatile uint8_t *)(policy+2u);
+  uint32_t kind=*(volatile uint8_t *)(policy+1u);
+  if(channel==recorded_channel){
+   uint32_t header=*(volatile uint8_t *)packet;
+   if(kind==(header&~32u)){
+    uint32_t packet_pattern=*(volatile uint8_t *)(packet+1u);
+    uint32_t pattern=*(volatile uint8_t *)policy;
+    if(pattern==packet_pattern){
+     uint32_t recorded_mode=*(volatile uint8_t *)(record+12u);
+     uint32_t mode=*(volatile uint8_t *)(policy+3u);
+     if(mode==recorded_mode){
+      uint32_t recorded_encoding=*(volatile uint8_t *)(record+14u);
+      uint32_t encoding=*(volatile uint16_t *)(policy+4u);
+      if(encoding==recorded_encoding)return opencfw_em9305_auxiliary_insert_313220(object);
+     }
+    }
+   }
+  }
+  uint32_t mode=*(volatile uint8_t *)(policy+3u);
+  uint32_t encoding=*(volatile uint8_t *)(policy+4u);
+  uint32_t pattern=*(volatile uint8_t *)policy;
+  *(volatile uint8_t *)(record+1u)=(uint8_t)channel;
+  *(volatile uint8_t *)(record+15u)=0u;
+  *(volatile uint16_t *)(record+108u)=(uint16_t)(pattern+2u);
+  *(volatile uint8_t *)(record+13u)=(uint8_t)mode;
+  *(volatile uint8_t *)(record+12u)=(uint8_t)mode;
+  *(volatile uint8_t *)(record+14u)=(uint8_t)encoding;
+  uint32_t duration=opencfw_em9305_command_duration_332be4(pattern,mode,encoding);
+  *(volatile uint16_t *)(record+110u)=(uint16_t)duration;
+  (void)opencfw_em9305_command_pattern_332b94(pattern,kind,packet);
+  return opencfw_em9305_auxiliary_insert_313220(object);
+ }
+ (void)opencfw_em9305_wsf_pool_release(packet);
+ (void)opencfw_em9305_common_release_304588(2u);
+ if(*(volatile uint8_t *)state==4u){
+  uintptr_t response=opencfw_em9305_wsf_event_allocate(4u);
+  if(response==0u)return 0u;
+  *(volatile uint16_t *)(response+2u)=261u;
+  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  return opencfw_em9305_wsf_task_message_send(handler,response);
+ }
+ *(volatile uint8_t *)state=0u;
+ *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
+ return opencfw_em9305_command_count_down_30e48c();
+}
+
+/* Native stop30b654..30b6bc: state1/kind3 fast release; otherwise
+ * state1/2 transition3, optional report copy, then exact20-byte clear. */
+uint32_t opencfw_em9305_command_stop_30b654(uintptr_t output)
+{
+ uintptr_t state=0x8058dcu;
+ uint32_t captured=*(volatile uint8_t *)state;
+ if(captured==1u){
+  uint32_t kind=*(volatile uint8_t *)(state+185u);
+  if(kind==3u){
+   (void)opencfw_em9305_common_release_304588(3u);
+   *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
+   *(volatile uint8_t *)state=0u;
+   (void)opencfw_em9305_command_count_down_30e48c();
+   return 0u;
+  }
+ }
+ if(captured==2u){
+  *(volatile uint8_t *)state=3u;
+  (void)opencfw_em9305_auxiliary_release_303ecc();
+ }else if(captured==1u){
+  *(volatile uint8_t *)state=3u;
+ }else return 12u;
+ uintptr_t report=state+4u;
+ if(output!=0u)(void)opencfw_em9305_memcpy((void *)output,(const void *)report,20u);
+ (void)opencfw_em9305_memset((void *)report,0u,20u);
+ return 0u;
+}
+
+/* Native common release304588..3045c0, full named ISA source preserves
+ * indirect callback R0/R1/R2/R3/R12 and delay-slot side effect. No opcodes. */
+uint32_t opencfw_em9305_pal_release_noop_30fd28(uint32_t incoming){return incoming;}
+__asm__(
+".text\n"
+".global opencfw_em9305_common_release_304588\n"
+".type opencfw_em9305_common_release_304588,@function\n"
+"opencfw_em9305_common_release_304588:\n"
+"push_s blink\n"
+"mpyuw r12,r0,24\n"
+"mov_s r3,0x801650\n"
+"add_s r2,r3,r12\n"
+"ld_s r1,[r2,8]\n"
+"sub.f r1,r1,1\n"
+"st_s r1,[r2,8]\n"
+"bne_s .Lrelease_done\n"
+"ldb r1,[r3,109]\n"
+"breq_s r1,0,.Lrelease_done\n"
+"ldb r1,[r3,108]\n"
+"brne.nt r1,r0,.Lrelease_done\n"
+"ld_s r0,[r12,r3]\n"
+"jl_s.d [r0]\n"
+"stb 0,[r3,109]\n"
+"bl opencfw_em9305_pal_release_noop_30fd28\n"
+".Lrelease_done:\n"
+"pop_s blink\n"
+"j_s [blink]\n"
+"nop_s\n"
+".size opencfw_em9305_common_release_304588,.-opencfw_em9305_common_release_304588\n"
+);
+
+/* Native request30455c..304588, pure no-op30fd2c and exact scaled count. */
+uint32_t opencfw_em9305_pal_request_noop_30fd2c(uint32_t incoming)
+{return incoming;}
+uint32_t opencfw_em9305_common_request_30455c(uint32_t index)
+{
+ uint32_t selected=*(volatile uint8_t *)(uintptr_t)0x8016bdu;
+ if(selected==0u){
+  (void)opencfw_em9305_pal_request_noop_30fd2c(index);
+  (void)opencfw_em9305_auxiliary_select_314d94(index);
+ }
+ uint32_t offset;
+ __asm__ volatile("mpyuw %0,%1,24":"=r"(offset):"r"(index));
+ uintptr_t slot=0x801658u+offset;
+ uint32_t count=*(volatile uint32_t *)slot;
+ *(volatile uint32_t *)slot=count+1u;
+ return (uint32_t)slot;
+}
+
+/* Native schedule313220..3132f8; source-owned time and guard providers.
+ * Signed native CMP.N is the sign bit of wrapping32-bit subtraction. */
+uint32_t opencfw_em9305_auxiliary_insert_313220(uintptr_t object)
+{
+ uintptr_t root=0x805f04u,queue=root+16u;
+ uint32_t now=opencfw_em9305_pal_current_time();
+ uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
+ uintptr_t head=*(volatile uint32_t *)queue;
+ *(volatile uint32_t *)(object+8u)=guard+now;
+ if(head==0u){
+  *(volatile uint32_t *)(queue+4u)=(uint32_t)object;
+  *(volatile uint32_t *)queue=(uint32_t)object;
+  *(volatile uint32_t *)(object+4u)=0u;
+  *(volatile uint32_t *)object=0u;
+  goto done;
+ }
+ uint32_t width=*(volatile uint32_t *)(object+12u);
+ uint32_t head_time=*(volatile uint32_t *)(head+8u);
+ guard=opencfw_em9305_auxiliary_guard_interval();
+ width+=guard;
+ uint32_t edge=guard+width;
+ if(((head_time-edge)&0x80000000u)==0u&&*(volatile uint8_t *)root!=2u){
+  head=*(volatile uint32_t *)queue;
+  uintptr_t prior=*(volatile uint32_t *)head;
+  *(volatile uint32_t *)object=(uint32_t)prior;
+  *(volatile uint32_t *)head=(uint32_t)object;
+  prior=*(volatile uint32_t *)object;
+  *(volatile uint32_t *)(object+4u)=(uint32_t)head;
+  if(prior!=0u)*(volatile uint32_t *)(prior+4u)=(uint32_t)object;
+  else *(volatile uint32_t *)queue=(uint32_t)object;
+  goto done;
+ }
+ uintptr_t link=queue,current;
+ for(;;){
+  current=*(volatile uint32_t *)link;
+  head=*(volatile uint32_t *)queue;
+  uint32_t end;
+  if(current==head){
+   end=*(volatile uint32_t *)(current+16u);
+   if(end!=0u)end+=*(volatile uint32_t *)(current+8u);
+   else {
+    uint32_t start=*(volatile uint32_t *)(current+8u);
+    end=*(volatile uint32_t *)(current+12u)+start;
+   }
+  }else{
+   uint32_t start=*(volatile uint32_t *)(current+8u);
+   end=*(volatile uint32_t *)(current+12u)+start;
+  }
+  guard=opencfw_em9305_auxiliary_guard_interval();
+  uintptr_t next=*(volatile uint32_t *)(current+4u);
+  uint32_t time=guard+end;
+  *(volatile uint32_t *)(object+8u)=time;
+  uintptr_t after=0u;
+  if(next!=0u){
+   uint32_t needed=*(volatile uint32_t *)(object+12u);
+   uint32_t next_time=*(volatile uint32_t *)(next+8u);
+   link=current+4u;
+   uint32_t sum=time+needed;
+   guard=opencfw_em9305_auxiliary_guard_interval();
+   sum+=guard;
+   if(((next_time-sum)&0x80000000u)!=0u)continue;
+   after=*(volatile uint32_t *)link;
+  }
+  *(volatile uint32_t *)(object+4u)=(uint32_t)after;
+  *(volatile uint32_t *)(current+4u)=(uint32_t)object;
+  after=*(volatile uint32_t *)(object+4u);
+  *(volatile uint32_t *)object=(uint32_t)current;
+  if(after!=0u)*(volatile uint32_t *)after=(uint32_t)object;
+  else *(volatile uint32_t *)(root+20u)=(uint32_t)object;
+  break;
+ }
+ done:
+ head=*(volatile uint32_t *)queue;
+ if(head==object)return opencfw_em9305_auxiliary_transition_333a60();
+ return (uint32_t)head;
+}
+
+/* Native duration332be4..332c2e; named ARC EM DSP instructions.
+ * Manual 5755-101 ASLACC c.b0/c.b1: register 226 preserves native
+ * accumulator selection and hardware shift clamping, without a LIMM form.
+ * MPYDU consumes original r0 before its temporary shift operand overwrite. */
+__asm__(
+".text\n"
+".global opencfw_em9305_command_duration_332be4\n"
+".type opencfw_em9305_command_duration_332be4,@function\n"
+"opencfw_em9305_command_duration_332be4:\n"
+"breq.nt r1,2,.Lduration_two\n"
+"brne.nt r1,3,.Lduration_other\n"
+"brne.d.nt r2,1,.Lduration_coded\n"
+"add_s r0,r0,5\n"
+"asl_s r0,r0,4\n"
+"add r0,r0,382\n"
+"b_s .Lduration_scale\n"
+".Lduration_two:\n"
+"mov_s r1,44\n"
+"add2 r0,r1,r0\n"
+"b_s .Lduration_scale\n"
+".Lduration_other:\n"
+"asl_s r0,r0,3\n"
+"add1 r0,r0,40\n"
+"b_s .Lduration_scale\n"
+".Lduration_coded:\n"
+"asl_s r0,r0,6\n"
+"add3 r0,r0,50\n"
+".Lduration_scale:\n"
+"add r0,r0,873\n"
+"mpydu 0,r0,0x1a36e3\n"
+"mov_s r0,226\n"
+"aslacc r0\n"
+"mov r0,r58\n"
+"j_s.d [blink]\n"
+"mpywhl r0,r0,625\n"
+".size opencfw_em9305_command_duration_332be4,.-opencfw_em9305_command_duration_332be4\n"
+);
+
+/* Native event330400..33043e; guarded packet type39 projection. */
+uint32_t opencfw_em9305_dispatch_330400(uintptr_t packet)
+{
+ if(*(volatile uint8_t *)(packet+2u)!=39u)return 0u;
+ if((*(volatile uint8_t *)(uintptr_t)0x8056fbu&1u)==0u)return 0u;
+ if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+ uintptr_t event=opencfw_em9305_ll_event_allocate(62u,29u);
+ if(event==0u)return 0u;
+ (void)opencfw_em9305_packet_event_fill_330e78(event,packet);
+ (void)opencfw_em9305_ll_event_send(event-2u);
+ return 1u;
+}
+
+/* Native3304f0..33052c. Prepared while selected snapshot runs. Native32f0a0 saves r0 and reads packet+2; native3304f0 forwards packet and returns its r0. */
+extern uint32_t opencfw_em9305_dispatch_32f0a0(uintptr_t);
+uint32_t opencfw_em9305_dispatch_3304f0(uintptr_t packet)
+{
+ if(*(volatile uint8_t *)(packet+2u)!=8u)
+  return opencfw_em9305_dispatch_32f0a0(packet);
+ uintptr_t event=opencfw_em9305_ll_event_allocate(14u,4u);
+ if(event==0u)return 0u;
+ *(volatile uint8_t *)(event+1u)=14u;
+ *(volatile uint8_t *)(event+2u)=32u;
+ /* Native STB.AB stores before subtracting2 from r0. */
+ *(volatile uint8_t *)event=1u;
+ uint32_t status=*(volatile uint8_t *)(packet+4u);
+ *(volatile uint8_t *)(event+3u)=(uint8_t)status;
+ (void)opencfw_em9305_ll_event_send(event-2u);
+ return 1u;
+}
+
+/* Native event32f0a0..32f34c: full product-gated packet projection. */
+uint32_t opencfw_em9305_dispatch_32f0a0(uintptr_t packet)
+{
+ uint32_t type=*(volatile uint8_t *)(packet+2u);
+ uintptr_t base=0x8056e8u;
+ uint32_t gate,mask,event_type=62u,size,subtype=0u,le=0u;
+ switch(type){
+ case 5u:gate=16u;mask=1u;size=19u;subtype=1u;le=1u;break;
+ case 6u:gate=0u;mask=16u;size=4u;event_type=5u;break;
+ case 7u:gate=16u;mask=4u;size=10u;subtype=3u;le=1u;break;
+ case 9u:gate=1u;mask=8u;size=8u;event_type=12u;break;
+ case 10u:gate=16u;mask=8u;size=12u;subtype=4u;le=1u;break;
+ case 16u:gate=16u;mask=32u;size=11u;subtype=6u;le=1u;break;
+ case 18u:gate=16u;mask=64u;size=11u;subtype=7u;break;
+ case 46u:gate=19u;mask=64u;size=5u;subtype=31u;le=1u;break;
+ case 47u:gate=20u;mask=1u;size=9u;subtype=33u;le=1u;break;
+ case 48u:gate=19u;mask=128u;size=5u;subtype=32u;le=1u;break;
+ default:return 0u;
+ }
+ if((*(volatile uint8_t *)(base+gate)&mask)==0u)return 0u;
+ if(le!=0u&&(*(volatile uint8_t *)(base+7u)&32u)==0u)return 0u;
+ uintptr_t event=opencfw_em9305_ll_event_allocate(event_type,size);
+ if(event==0u)return 0u;
+ if(subtype!=0u)*(volatile uint8_t *)event=(uint8_t)subtype;
+ switch(type){
+ case 5u:{
+  *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(packet+4u);
+  for(uint32_t i=0u;i<3u;++i)*(volatile uint8_t *)(event+2u+i)=*(volatile uint8_t *)(packet+6u+i);
+  uint32_t kind=*(volatile uint8_t *)(packet+9u);
+  uintptr_t address;
+  if((kind&~1u)==2u){*(volatile uint8_t *)(event+5u)=1u;address=packet+29u;}
+  else{*(volatile uint8_t *)(event+5u)=(uint8_t)kind;address=packet+10u;}
+  (void)opencfw_em9305_radio_address_copy_304604(event+6u,address);
+  for(uint32_t i=0u;i<7u;++i)*(volatile uint8_t *)(event+12u+i)=*(volatile uint8_t *)(packet+16u+i);
+  break;
+ }
+ case 6u:
+  *(volatile uint8_t *)event=*(volatile uint8_t *)(packet+4u);
+  for(uint32_t i=0u;i<3u;++i)*(volatile uint8_t *)(event+1u+i)=*(volatile uint8_t *)(packet+6u+i);
+  break;
+ case 7u:
+  *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(packet+4u);
+  for(uint32_t i=0u;i<8u;++i)*(volatile uint8_t *)(event+2u+i)=*(volatile uint8_t *)(packet+6u+i);
+  break;
+ case 9u:
+  *(volatile uint8_t *)event=*(volatile uint8_t *)(packet+4u);
+  for(uint32_t i=0u;i<3u;++i)*(volatile uint8_t *)(event+1u+i)=*(volatile uint8_t *)(packet+6u+i);
+  for(uint32_t i=0u;i<4u;++i)*(volatile uint8_t *)(event+4u+i)=*(volatile uint8_t *)(packet+10u+i);
+  break;
+ case 10u:
+  *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(packet+4u);
+  for(uint32_t i=0u;i<2u;++i)*(volatile uint8_t *)(event+2u+i)=*(volatile uint8_t *)(packet+6u+i);
+  (void)opencfw_em9305_memcpy((void *)(event+4u),(const void *)(packet+8u),8u);
+  break;
+ case 16u:case 18u:
+  for(uint32_t i=0u;i<10u;++i)*(volatile uint8_t *)(event+1u+i)=*(volatile uint8_t *)(packet+4u+i);
+  break;
+ case 46u:
+  *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(packet+4u);
+  for(uint32_t i=0u;i<3u;++i)*(volatile uint8_t *)(event+2u+i)=*(volatile uint8_t *)(packet+6u+i);
+  break;
+ case 47u:
+  *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(packet+4u);
+  for(uint32_t i=0u;i<7u;++i)*(volatile uint8_t *)(event+2u+i)=*(volatile uint8_t *)(packet+6u+i);
+  break;
+ case 48u:
+  for(uint32_t i=0u;i<4u;++i)*(volatile uint8_t *)(event+1u+i)=*(volatile uint8_t *)(packet+4u+i);
+  break;
+ }
+ (void)opencfw_em9305_ll_event_send(event-2u);
+ return 1u;
+}
+
+/* Native330664..330848 full command parent. Deeper provider ABIs from call sites; bodies unresolved. */
+extern uint32_t opencfw_em9305_command_prehandle_330bdc(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_scan_params_30b9f4(uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_create_30c488(uintptr_t);
+extern uint32_t opencfw_em9305_command_disable_30c54c(void);
+extern uint32_t opencfw_em9305_command_timeout_30c600(uint32_t);
+extern uint32_t opencfw_em9305_command_address_add_30aed4(uintptr_t);
+extern uint32_t opencfw_em9305_command_address_remove_30ca1c(uintptr_t);
+extern uint32_t opencfw_em9305_command_address_clear_30b12c(void);
+extern uint32_t opencfw_em9305_command_scan_extended_30d774(uint32_t,uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_power_query_30c80c(uintptr_t);
+uint32_t opencfw_em9305_dispatch_330664(uintptr_t request,uintptr_t input)
+{
+ if(opencfw_em9305_command_prehandle_330bdc(request,input)!=0u)return 1u;
+ uint32_t opcode=*(volatile uint16_t *)request,slot=opcode-0x2041u,status=0u;
+ if(slot>9u)return 0u;
+ _Alignas(4) uint8_t scratch[24];
+ switch(slot){
+ case 0u:{
+  uint32_t first=*(volatile uint8_t *)input,second=*(volatile uint8_t *)(input+1u),mask=*(volatile uint8_t *)(input+2u);
+  scratch[0]=(uint8_t)first;scratch[1]=(uint8_t)second;scratch[2]=(uint8_t)mask;
+  uintptr_t cursor=input+3u;uint32_t count=0u;
+  for(uint32_t bit=0u;bit<=7u&&count<=2u;++bit){
+   if((mask&(1u<<bit))!=0u){
+    uint32_t hi_a=*(volatile uint8_t *)(cursor+2u),hi_b=*(volatile uint8_t *)(cursor+4u);
+    uint32_t lo_a=*(volatile uint8_t *)(cursor+1u),lo_b=*(volatile uint8_t *)(cursor+3u);
+    uint32_t flags=*(volatile uint8_t *)cursor;
+    uintptr_t row=(uintptr_t)scratch+count*6u;
+    count++;cursor+=5u;
+    *(uint8_t *)(row+8u)=(uint8_t)flags;
+    *(uint16_t *)(row+4u)=(uint16_t)(lo_a+(hi_a<<8u));
+    *(uint16_t *)(row+6u)=(uint16_t)(lo_b+(hi_b<<8u));
+   }
+  }
+  status=opencfw_em9305_command_scan_extended_30d774(first,second,mask,(uintptr_t)scratch+4u);break;
+ }
+ case 1u:{
+  uint32_t ah=*(volatile uint8_t *)(input+3u),bh=*(volatile uint8_t *)(input+5u);
+  uint32_t al=*(volatile uint8_t *)(input+2u),bl=*(volatile uint8_t *)(input+4u);
+  uint32_t second=*(volatile uint8_t *)(input+1u),first=*(volatile uint8_t *)input;
+  (void)opencfw_em9305_command_scan_params_30b9f4(first,second,al+(ah<<8u),bl+(bh<<8u));return 1u;
+ }
+ case 2u:return 0u;
+ case 3u:{
+  uint32_t ah=*(volatile uint8_t *)(input+10u),bh=*(volatile uint8_t *)(input+12u),flags=*(volatile uint8_t *)input;
+  uint32_t al=*(volatile uint8_t *)(input+9u),bl=*(volatile uint8_t *)(input+11u);
+  uint32_t second=*(volatile uint8_t *)(input+1u),third=*(volatile uint8_t *)(input+2u),last=*(volatile uint8_t *)(input+13u);
+  scratch[0]=(uint8_t)flags;scratch[1]=(uint8_t)second;scratch[2]=(uint8_t)third;
+  *(uint32_t *)(scratch+4u)=(uint32_t)(input+3u);
+  scratch[12]=(uint8_t)last;
+  *(uint16_t *)(scratch+8u)=(uint16_t)(al+(ah<<8u));*(uint16_t *)(scratch+10u)=(uint16_t)(bl+(bh<<8u));
+  if((flags&2u)!=0u&&(*(volatile uint8_t *)(uintptr_t)0x8058adu&32u)==0u)status=62u;
+  else if((flags&4u)!=0u&&(*(volatile uint8_t *)(uintptr_t)0x805b34u&16u)==0u)status=17u;
+  else status=opencfw_em9305_command_create_30c488((uintptr_t)scratch);
+  (void)opencfw_em9305_ll_status_event_331bf8(request,status);return 1u;
+ }
+ case 4u:status=opencfw_em9305_command_disable_30c54c();break;
+ case 5u:{uint32_t high=*(volatile uint8_t *)(input+1u),low=*(volatile uint8_t *)input;status=opencfw_em9305_command_timeout_30c600(low+(high<<8u));break;}
+ case 6u:case 7u:{
+  uint32_t first=*(volatile uint8_t *)input,last=*(volatile uint8_t *)(input+7u);
+  *(uint32_t *)(scratch+4u)=(uint32_t)(input+1u);scratch[0]=(uint8_t)first;scratch[8]=(uint8_t)last;
+  status=slot==6u?opencfw_em9305_command_address_add_30aed4((uintptr_t)scratch):opencfw_em9305_command_address_remove_30ca1c((uintptr_t)scratch);break;
+ }
+ case 8u:status=opencfw_em9305_command_address_clear_30b12c();break;
+ case 9u:break;
+ }
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(slot==9u?2u:1u,*(volatile uint16_t *)request);
+ if(response==0u)return 1u;
+ uint32_t fresh=*(volatile uint16_t *)request,position=fresh-0x2041u;
+ if((position<10u&&(499u&(1u<<position))!=0u)||fresh==0x2081u)*(volatile uint8_t *)response=(uint8_t)status;
+ else if(position==9u){
+  scratch[0]=0u;
+  uint32_t result=opencfw_em9305_command_power_query_30c80c((uintptr_t)scratch);
+  *(volatile uint8_t *)response=(uint8_t)result;
+  *(volatile uint8_t *)(response+1u)=scratch[0];
+ }
+ (void)opencfw_em9305_ll_event_send(response-5u);return 1u;
+}
+
+/* Native303700..30370a: address-list count clear. */
+uint32_t opencfw_em9305_address_count_clear_303700(void)
+{*(volatile uint8_t *)(uintptr_t)0x80160au=0u;return 0x80160au;}
+/* Native30370c..303716: address-list capacity byte query. */
+uint32_t opencfw_em9305_address_capacity_30370c(void)
+{return *(volatile uint8_t *)(uintptr_t)0x80160bu;}
+/* Native307cb8..307cc6: product state equals1. */
+uint32_t opencfw_em9305_address_busy_307cb8(void)
+{return *(volatile uint8_t *)(uintptr_t)0x8051a4u==1u;}
+/* Native30b12c..30b150: read flag even if gate is closed. */
+uint32_t opencfw_em9305_command_address_clear_30b12c(void)
+{
+ uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();
+ uint32_t flag=*(volatile uint8_t *)(uintptr_t)0x805a77u;
+ if(flag!=0u||gate==0u)return 12u;
+ if(opencfw_em9305_address_busy_307cb8()!=0u)return 12u;
+ (void)opencfw_em9305_address_count_clear_303700();return 0u;
+}
+/* Native30c80c..30c824: output pointer preserved across gate. */
+uint32_t opencfw_em9305_command_power_query_30c80c(uintptr_t output)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ *(volatile uint8_t *)output=(uint8_t)opencfw_em9305_address_capacity_30370c();return 0u;
+}
+
+/* Native30c54c..30c57e: disable allowed only in product state1. */
+uint32_t opencfw_em9305_command_disable_30c54c(void)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ if(opencfw_em9305_address_busy_307cb8()==0u)return 12u;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(56u);
+ if(message!=0u){
+  *(volatile uint16_t *)(message+2u)=523u;
+  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ }
+ return 0u;
+}
+/* Native30c600..30c64e: original full-width timeout guards, then halfword message. */
+uint32_t opencfw_em9305_command_timeout_30c600(uint32_t timeout)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ if(timeout>=3840u)return 18u;
+ if(opencfw_em9305_command_ready_3213d0(timeout)==0u)return 66u;
+ if(opencfw_em9305_address_busy_307cb8()!=0u)return 12u;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(56u);
+ if(message!=0u){
+  *(volatile uint16_t *)message=(uint16_t)timeout;
+  *(volatile uint16_t *)(message+2u)=525u;
+  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ }
+ return 0u;
+}
+
+/* Native303674..3036b2: bounded byte index makes MPYUW stride12 exact in C. */
+uint32_t opencfw_em9305_address_append_303674(uint32_t kind,uint32_t low,uint32_t high,uint32_t selector)
+{
+ uint32_t capacity=*(volatile uint8_t *)(uintptr_t)0x80160bu;
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x80160au;
+ if(count>=capacity)return 0u;
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805bfcu;
+ *(volatile uint8_t *)(uintptr_t)0x80160au=(uint8_t)(count+1u);
+ uintptr_t row=base+count*12u;
+ *(volatile uint32_t *)(row+4u)=high;
+ *(volatile uint32_t *)row=low;
+ *(volatile uint8_t *)(row+8u)=(uint8_t)kind;
+ *(volatile uint8_t *)(row+9u)=(uint8_t)selector;
+ return 1u;
+}
+/* Native3036b4..3036fe: captured count, full-word address comparisons. */
+uint32_t opencfw_em9305_address_contains_3036b4(uint32_t kind,uint32_t low,uint32_t high,uint32_t selector)
+{
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x80160au;
+ if(count==0u)return 0u;
+ uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805bfcu;
+ for(uint32_t i=0u;i<count;++i,row+=12u){
+  if(*(volatile uint8_t *)(row+8u)!=kind)continue;
+  uint32_t upper=*(volatile uint32_t *)(row+4u),lower=*(volatile uint32_t *)row;
+  if(((upper^high)|(lower^low))!=0u)continue;
+  if(*(volatile uint8_t *)(row+9u)==selector)return 1u;
+ }
+ return 0u;
+}
+/* Native30aed4..30af30: gate/argument/busy/duplicate guards and fresh fields. */
+uint32_t opencfw_em9305_command_address_add_30aed4(uintptr_t input)
+{
+ uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();
+ uint32_t flag=*(volatile uint8_t *)(uintptr_t)0x805a77u;
+ if(flag!=0u||gate==0u)return 12u;
+ if(*(volatile uint8_t *)input>=2u)return 18u;
+ if(*(volatile uint8_t *)(input+8u)>=16u)return 18u;
+ if(opencfw_em9305_address_busy_307cb8()!=0u)return 12u;
+ uintptr_t address=*(volatile uint32_t *)(input+4u);
+ uint64_t packed=opencfw_em9305_controller_pack_address(address);
+ uint32_t low=(uint32_t)packed,high=(uint32_t)(packed>>32u);
+ uint32_t selector=*(volatile uint8_t *)(input+8u),kind=*(volatile uint8_t *)input;
+ if(opencfw_em9305_address_contains_3036b4(kind,low,high,selector)!=0u)return 18u;
+ selector=*(volatile uint8_t *)(input+8u);kind=*(volatile uint8_t *)input;
+ return opencfw_em9305_address_append_303674(kind,low,high,selector)!=0u?0u:7u;
+}
+
+/* Native303718..303788: swap last row into match, preserving trailing2 bytes. */
+uint32_t opencfw_em9305_address_remove_303718(uint32_t kind,uint32_t low,uint32_t high,uint32_t selector)
+{
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805bfcu;
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x80160au;
+ uintptr_t row=base;
+ for(uint32_t index=0u;index<count;++index,row+=12u){
+  if(*(volatile uint8_t *)(row+8u)!=kind)continue;
+  uint32_t upper=*(volatile uint32_t *)(row+4u),lower=*(volatile uint32_t *)row;
+  if(((upper^high)|(lower^low))!=0u)continue;
+  if(*(volatile uint8_t *)(row+9u)!=selector)continue;
+  uint32_t last=count-1u;
+  if(count>=2u&&index!=last){
+   uintptr_t tail=base+last*12u;
+   uint32_t tags=*(volatile uint16_t *)(tail+8u);
+   *(volatile uint16_t *)(row+8u)=(uint16_t)tags;
+   lower=*(volatile uint32_t *)tail;
+   upper=*(volatile uint32_t *)(tail+4u);
+   *(volatile uint32_t *)row=lower;
+   *(volatile uint32_t *)(row+4u)=upper;
+  }
+  *(volatile uint8_t *)(uintptr_t)0x80160au=(uint8_t)last;
+  return 1u;
+ }
+ return 0u;
+}
+/* Native30ca1c..30ca68: full delete command guards and captured address pair. */
+uint32_t opencfw_em9305_command_address_remove_30ca1c(uintptr_t input)
+{
+ uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();
+ uint32_t flag=*(volatile uint8_t *)(uintptr_t)0x805a77u;
+ if(flag!=0u||gate==0u)return 12u;
+ if(*(volatile uint8_t *)input>1u)return 18u;
+ if(*(volatile uint8_t *)(input+8u)>=16u)return 18u;
+ if(opencfw_em9305_address_busy_307cb8()!=0u)return 12u;
+ uintptr_t address=*(volatile uint32_t *)(input+4u);
+ uint64_t packed=opencfw_em9305_controller_pack_address(address);
+ uint32_t selector=*(volatile uint8_t *)(input+8u),kind=*(volatile uint8_t *)input;
+ return opencfw_em9305_address_remove_303718(kind,(uint32_t)packed,(uint32_t)(packed>>32u),selector)!=0u?0u:66u;
+}
+
+/* Native303270..303278: literal zero-fill52. */
+uintptr_t opencfw_em9305_command_info_zero_303270(uintptr_t output)
+{return (uintptr_t)opencfw_em9305_memset((void *)output,0u,52u);}
+/* Native3032a8..3032b4: forward36-byte resident information copy. */
+uintptr_t opencfw_em9305_command_info_copy_3032a8(uintptr_t output)
+{return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x8017fcu,36u);}
+extern uint32_t opencfw_em9305_command_pair_apply_307fa0(uint32_t,uint32_t);
+/* Native30c580..30c5c0: full-width id check, readiness, busy and apply result. */
+uint32_t opencfw_em9305_command_pair_set_30c580(uint32_t id,uint32_t value)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ if(id>=3840u)return 18u;
+ if(opencfw_em9305_command_ready_3213d0(id)==0u)return 66u;
+ if(opencfw_em9305_address_busy_307cb8()!=0u)return 12u;
+ return opencfw_em9305_command_pair_apply_307fa0(id,value)!=0u?0u:18u;
+}
+/* Native330bdc..330c60 full prehandler; fresh opcode after status store. */
+uint32_t opencfw_em9305_command_prehandle_330bdc(uintptr_t request,uintptr_t input)
+{
+ uint32_t command=*(volatile uint16_t *)request,status;
+ uintptr_t response;
+ if(command==0xffdbu){status=0u;response=opencfw_em9305_ll_response_allocate_32e428(53u,0xffdbu);}
+ else if(command==0xffb3u){
+  uint32_t first_hi=*(volatile uint8_t *)(input+1u),second_hi=*(volatile uint8_t *)(input+3u);
+  uint32_t first_lo=*(volatile uint8_t *)input,second_lo=*(volatile uint8_t *)(input+2u);
+  status=opencfw_em9305_command_pair_set_30c580(first_lo+(first_hi<<8u),second_lo+(second_hi<<8u));
+  response=opencfw_em9305_ll_response_allocate_32e428(1u,*(volatile uint16_t *)request);
+ }else return 0u;
+ if(response==0u)return 1u;
+ *(volatile uint8_t *)response=(uint8_t)status;
+ uint32_t fresh=*(volatile uint16_t *)request;
+ _Alignas(4) uint8_t scratch[52];
+ if(fresh==0xffdcu){
+  (void)opencfw_em9305_command_info_copy_3032a8((uintptr_t)scratch);
+  (void)opencfw_em9305_memcpy((void *)(response+1u),scratch,36u);
+ }else if(fresh==0xffdbu){
+  (void)opencfw_em9305_command_info_zero_303270((uintptr_t)scratch);
+  (void)opencfw_em9305_memcpy((void *)(response+1u),scratch,52u);
+ }
+ (void)opencfw_em9305_ll_event_send(response-5u);return 1u;
+}
+
+/* Native307fa0..307fcc: id<=5 byte stride and genuine wide-accumulator multiply. */
+uint32_t opencfw_em9305_command_pair_apply_307fa0(uint32_t id,uint32_t value)
+{
+ if(id>=6u)return 0u;
+ uint32_t offset=id*784u; /* bounded id makes native MPYUW stride exact */
+ uintptr_t row=0x803e74u+offset;
+ uint32_t factor=*(volatile uint32_t *)row;
+ *(volatile uint16_t *)(uintptr_t)(0x803fe0u+offset)=(uint16_t)value;
+ uint32_t product;
+ __asm__ volatile("mpywhul %0,%1,%2":"=r"(product):"r"(factor),"r"(value));
+ *(volatile uint32_t *)(row+8u)=product;
+ return 1u;
+}
+
+extern uint32_t opencfw_em9305_scan_available_307b9c(void);
+extern uint32_t opencfw_em9305_scan_error_30e7f8(uint32_t);
+/* Native30b9f4..30ba84: product mirror before gate, genuine16x16 DSP products. */
+uint32_t opencfw_em9305_command_scan_params_30b9f4(uint32_t first,uint32_t second,uint32_t interval,uint32_t duration)
+{
+ uintptr_t root=0x805a70u;
+ uint32_t prior=*(volatile uint8_t *)(root+12u);
+ *(volatile uint8_t *)(root+14u)=0u;
+ *(volatile uint8_t *)(root+13u)=(uint8_t)prior;
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)goto gate_error;
+ if(first==1u){
+  if(second>=3u)goto argument_error;
+  if(second==2u&&(interval==0u||duration==0u))goto argument_error;
+ }
+ uint32_t interval_ticks,duration_ticks;
+ __asm__ volatile("mpyuw %0,%1,10":"=r"(interval_ticks):"r"(interval));
+ __asm__ volatile("mpyuw %0,%1,1280":"=r"(duration_ticks):"r"(duration));
+ if(interval!=0u&&first==1u&&duration!=0u&&interval_ticks>=duration_ticks)goto argument_error;
+ if(opencfw_em9305_scan_available_307b9c()==0u)goto argument_error;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(16u);
+ if(message==0u)return 0u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint32_t *)(message+12u)=duration_ticks;
+ *(volatile uint32_t *)(message+8u)=interval_ticks;
+ *(volatile uint8_t *)(message+4u)=(uint8_t)second;
+ *(volatile uint8_t *)(message+3u)=(uint8_t)((first==0u)+1u);
+ *(volatile uint8_t *)(message+2u)=7u;
+ return opencfw_em9305_wsf_task_message_send(handler,message);
+ gate_error:
+ *(volatile uint8_t *)(root+13u)=1u;return opencfw_em9305_scan_error_30e7f8(12u);
+ argument_error:
+ *(volatile uint8_t *)(root+13u)=1u;return opencfw_em9305_scan_error_30e7f8(18u);
+}
+
+/* Native307b9c..307bdc: authenticated table3357b4 words8035dc/802a60/80389c. */
+uint32_t opencfw_em9305_scan_available_307b9c(void)
+{
+ if(*(volatile uint8_t *)(uintptr_t)0x805a81u!=0u)return 1u;
+ static const uintptr_t states[3]={0x8035dcu,0x802a60u,0x80389cu};
+ uint32_t mask=*(volatile uint8_t *)(uintptr_t)0x803560u;
+ for(uint32_t bit=0u;bit<3u;++bit){
+  if((mask&(1u<<bit))!=0u){
+   uint32_t kind=*(volatile uint8_t *)(states[bit]+13u);
+   if(opencfw_em9305_ll_stream_kind_valid_30e4dc(kind)==0u)return 0u;
+   mask=*(volatile uint8_t *)(uintptr_t)0x803560u;
+  }
+ }
+ return 1u;
+}
+/* Native30e7f8..30e834: first nonzero error latch, byte countdown, event24. */
+uint32_t opencfw_em9305_scan_error_30e7f8(uint32_t status)
+{
+ uintptr_t root=0x805a70u;
+ uint32_t latched=*(volatile uint8_t *)(root+14u);
+ if(status!=0u&&latched==0u){latched=status;*(volatile uint8_t *)(root+14u)=(uint8_t)status;}
+ uint32_t count=*(volatile uint8_t *)(root+13u);
+ if(count==0u)return 0u;
+ uint32_t remaining=count-1u;
+ *(volatile uint8_t *)(root+13u)=(uint8_t)remaining;
+ if((uint8_t)remaining!=0u)return remaining;
+ _Alignas(4) uint8_t event[5];
+ *(volatile uint8_t *)(event+4u)=(uint8_t)latched;
+ *(volatile uint8_t *)(event+3u)=(uint8_t)latched;
+ *(volatile uint8_t *)(event+2u)=24u;
+ *(volatile uint16_t *)(void *)event=0u;
+ return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
+}
+
+/* Native307ca8..307cb8: product state equals0. */
+uint32_t opencfw_em9305_command_idle_307ca8(void)
+{return *(volatile uint8_t *)(uintptr_t)0x8051a4u==0u;}
+/* Native3213b0..3213d0: six byte rows summed, low8 return. */
+uint32_t opencfw_em9305_command_count_3213b0(void)
+{
+ uint32_t sum=0u;
+ for(uint32_t i=0u;i<6u;++i)sum+=*(volatile uint8_t *)(uintptr_t)(0x803d78u+i*784u);
+ return sum&255u;
+}
+extern uint32_t opencfw_em9305_command_duplicate_307c5c(uint32_t,uint32_t,uint32_t,uint32_t);
+/* Native30c488..30c54c: full create guards and24-byte command projection. */
+uint32_t opencfw_em9305_command_create_30c488(uintptr_t input)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ if(*(volatile uint8_t *)(input+2u)>=2u)return 18u;
+ if(*(volatile uint8_t *)(input+1u)>=16u)return 18u;
+ if(*(volatile uint16_t *)(input+8u)>499u)return 18u;
+ if(*(volatile uint8_t *)input>=8u)return 18u;
+ uint32_t timing=*(volatile uint16_t *)(input+10u);
+ if((uint16_t)(timing-16385u)<49161u)return 18u;
+ if(*(volatile uint8_t *)(input+12u)==31u)return 12u;
+ if(opencfw_em9305_command_idle_307ca8()==0u)return 12u;
+ uintptr_t address=*(volatile uint32_t *)(input+4u);
+ uint32_t kind=*(volatile uint8_t *)(input+2u),role=*(volatile uint8_t *)(input+1u);
+ uint64_t packed=opencfw_em9305_controller_pack_address(address);
+ if(opencfw_em9305_command_duplicate_307c5c(role,kind,(uint32_t)packed,(uint32_t)(packed>>32u))!=0u)return 11u;
+ if(opencfw_em9305_command_count_3213b0()>=6u)return 7u;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(24u);
+ if(message==0u)return 0u;
+ *(volatile uint16_t *)(message+2u)=267u;
+ address=*(volatile uint32_t *)(input+4u);
+ packed=opencfw_em9305_controller_pack_address(address);
+ kind=*(volatile uint8_t *)(input+2u);role=*(volatile uint8_t *)(input+1u);
+ *(volatile uint32_t *)(message+12u)=(uint32_t)(packed>>32u);
+ *(volatile uint32_t *)(message+8u)=(uint32_t)packed;
+ *(volatile uint8_t *)(message+7u)=(uint8_t)kind;
+ *(volatile uint8_t *)(message+6u)=(uint8_t)role;
+ *(volatile uint32_t *)(message+16u)=*(volatile uint32_t *)(input+8u);
+ uint32_t flags=*(volatile uint8_t *)input,last=*(volatile uint8_t *)(input+12u);
+ *(volatile uint8_t *)(message+21u)=(uint8_t)last;
+ uint32_t bit1=(flags>>1u)&1u;
+ *(volatile uint8_t *)(message+5u)=(uint8_t)bit1;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint8_t *)(message+20u)=(uint8_t)(bit1?0u:(flags>>2u)&1u);
+ *(volatile uint8_t *)(message+4u)=(uint8_t)(flags&1u);
+ (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ return 0u;
+}
+
+/* Native307c5c..307ca8: six active row address/role/kind comparisons. */
+uint32_t opencfw_em9305_command_duplicate_307c5c(uint32_t role,uint32_t kind,uint32_t low,uint32_t high)
+{
+ for(uint32_t i=0u;i<6u;++i){
+  uintptr_t offset=i*784u;
+  if(*(volatile uint8_t *)(uintptr_t)(0x803d78u+offset)==0u)continue;
+  uintptr_t row=0x804044u+offset;
+  if(*(volatile uint8_t *)row!=role)continue;
+  if(*(volatile uint8_t *)(row+1u)!=kind)continue;
+  uint32_t stored_high=*(volatile uint32_t *)(row+8u);
+  uint32_t stored_low=*(volatile uint32_t *)(row+4u);
+  if(((stored_high^high)|(stored_low^low))==0u)return 1u;
+ }
+ return 0u;
+}
+
+/* Native307a58/307b8c: ARC dynamic bit index uses low five bits. */
+void opencfw_em9305_scan_mask_clear_307a58(uint32_t bit)
+{volatile uint8_t *p=(volatile uint8_t *)(uintptr_t)0x803560u;uint32_t v=*p;*p=(uint8_t)(v&~(1u<<(bit&31u)));}
+void opencfw_em9305_scan_mask_set_307b8c(uint32_t bit)
+{volatile uint8_t *p=(volatile uint8_t *)(uintptr_t)0x803560u;uint32_t v=*p;*p=(uint8_t)(v|(1u<<(bit&31u)));}
+/* Native307b70..307b8c: authenticated table, callers supply index0 or2. */
+void opencfw_em9305_scan_config_307b70(uint32_t index,uint32_t first,uint32_t second,uintptr_t input)
+{
+ static const uintptr_t states[3]={0x8035dcu,0x802a60u,0x80389cu};
+ uintptr_t row=states[index];
+ uint32_t duration=*(volatile uint16_t *)(input+2u),interval=*(volatile uint16_t *)input;
+ *(volatile uint8_t *)(row+14u)=(uint8_t)second;
+ *(volatile uint16_t *)(row+10u)=(uint16_t)duration;
+ uint32_t mode=*(volatile uint8_t *)(input+4u);
+ *(volatile uint16_t *)(row+8u)=(uint16_t)interval;
+ *(volatile uint8_t *)(row+13u)=(uint8_t)first;
+ *(volatile uint8_t *)(row+12u)=(uint8_t)mode;
+}
+/* Native332fa8..332fc4: interval>=duration>=4, mode<2. */
+uint32_t opencfw_em9305_scan_row_valid_332fa8(uintptr_t input)
+{
+ uint32_t duration=*(volatile uint16_t *)(input+2u),interval=*(volatile uint16_t *)input;
+ if(interval<duration||duration<4u)return 0u;
+ return *(volatile uint8_t *)(input+4u)<2u;
+}
+static inline uint32_t opencfw_em9305_scan_stride6(uint32_t value)
+{
+ uint32_t result;
+ __asm__ volatile("mpyuw %0,%1,6" : "=r"(result) : "r"(value));
+ return result;
+}
+/* Native30d774..30d854: full extended scan guard and compact row graph. */
+uint32_t opencfw_em9305_command_scan_extended_30d774(uint32_t first,uint32_t second,uint32_t mask,uintptr_t input)
+{
+ uintptr_t root=0x805a70u;
+ uint32_t cap=*(volatile uint32_t *)(root+36u),cap2=*(volatile uint32_t *)(root+40u);
+ uint32_t allowed=(cap&128u)?3u:1u;
+ if((cap2&1024u)==0u){if(second&12u)return 17u;}else allowed|=12u;
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ uint32_t state4=*(volatile uint8_t *)(root+4u),state3=*(volatile uint8_t *)(root+3u);
+ if(state3|state4)return 12u;
+ uint32_t allowed_mask=((cap>>9u)&4u)|1u;
+ if(mask&~allowed_mask)return 17u;
+ if(first>((cap&64u)?3u:1u))return 18u;
+ if((second&12u)==8u||mask==0u||second>allowed)return 18u;
+ uint32_t count=0u,row_index=0u,has1=mask&1u,has4=mask&4u;
+ if(has1){if(opencfw_em9305_scan_row_valid_332fa8(input)==0u)return 18u;row_index=1u;}
+ if(has4&&opencfw_em9305_scan_row_valid_332fa8(input+opencfw_em9305_scan_stride6(row_index))==0u)return 18u;
+ if(!has1)opencfw_em9305_scan_mask_clear_307a58(0u);
+ else{opencfw_em9305_scan_mask_set_307b8c(0u);opencfw_em9305_scan_config_307b70(0u,first,second,input);count=1u;}
+ if(!has4)opencfw_em9305_scan_mask_clear_307a58(2u);
+ else{opencfw_em9305_scan_mask_set_307b8c(2u);opencfw_em9305_scan_config_307b70(2u,first,second,input+opencfw_em9305_scan_stride6(count));++count;}
+ *(volatile uint8_t *)(root+12u)=(uint8_t)count;
+ return 0u;
+}
+
+/* Native32e470..32e48c: fixed249-byte allocation with variable payload header. */
+uintptr_t opencfw_em9305_event_allocate_large_32e470(uint32_t type,uint32_t bytes)
+{
+ uintptr_t event=opencfw_em9305_wsf_event_allocate(249u);
+ if(!event)return 0u;
+ *(volatile uint8_t *)(event+1u)=(uint8_t)bytes;
+ *(volatile uint8_t *)event=(uint8_t)type;
+ return event+2u;
+}
+static inline uint32_t opencfw_em9305_event_mpyw_negative(uint32_t quotient,uint32_t divisor)
+{
+ uint32_t product;
+ if(divisor==229u)__asm__ volatile("mpyw %0,%1,-229":"=r"(product):"r"(quotient));
+ else __asm__ volatile("mpyw %0,%1,-247":"=r"(product):"r"(quotient));
+ return product;
+}
+/* Native330848..330bdc: full event switch, live capacity and fragmented payloads. */
+uint32_t opencfw_em9305_dispatch_330848(uintptr_t packet)
+{
+ uint32_t type=*(volatile uint8_t *)(packet+2u);
+ uintptr_t event;
+ if(type==23u||type==32u){
+  uint32_t bit=type==23u?4u:6u;
+  if((*(volatile uint8_t *)(uintptr_t)0x8056f9u&(1u<<bit))==0u)return 0u;
+  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+  uint32_t divisor=type==23u?229u:247u;
+  uint32_t length=*(volatile uint16_t *)(packet+(type==23u?28u:10u));
+  uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uint32_t quotient=length/divisor;
+  uint32_t negative=opencfw_em9305_event_mpyw_negative(quotient,divisor);
+  uint32_t needed=(uint8_t)(quotient+((uint16_t)negative!=(uint16_t)(0u-length)));
+  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+  uint32_t capacity=*(volatile uint8_t *)(product+14u);
+  if(needed+count>capacity)return 0u;
+  uintptr_t data=*(volatile uint32_t *)(packet+(type==23u?32u:12u));
+  uint32_t remaining=length,stopped;
+  do{
+   product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+   uint32_t chunk=remaining<divisor?remaining:divisor;
+   capacity=*(volatile uint8_t *)(product+14u);
+   if(count>=capacity)return 0u;
+   event=type==23u?opencfw_em9305_wsf_event_allocate(231u):opencfw_em9305_event_allocate_large_32e470(62u,(uint8_t)(chunk+8u));
+   if(!event)return 0u;
+   if(type==23u){*(volatile uint8_t *)event=62u;*(volatile uint8_t *)(event+1u)=(uint8_t)(chunk+26u);}
+   product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+   remaining-=chunk;
+   capacity=*(volatile uint8_t *)(product+14u);
+   uint32_t next=count+1u;
+   if(type==23u){
+    *(volatile uint8_t *)(uintptr_t)0x805718u=(uint8_t)next;
+    stopped=(remaining!=0u)&&((uint8_t)next==capacity);
+    uint32_t flags=*(volatile uint16_t *)(packet+4u);
+    if(stopped){flags|=64u;remaining=0u;*(volatile uint16_t *)(packet+4u)=(uint16_t)flags;}
+    uintptr_t initial=*(volatile uint32_t *)(packet+32u);
+    uint32_t total=*(volatile uint16_t *)(packet+28u);
+    uintptr_t end=data+chunk;
+    uint32_t projected=(flags&31u)|32u;
+    if(total==(uint16_t)(end-initial))projected=flags;
+    *(volatile uint8_t *)(event+4u)=(uint8_t)projected;
+    *(volatile uint8_t *)(event+3u)=1u;*(volatile uint8_t *)(event+2u)=13u;
+    *(volatile uint8_t *)(event+5u)=(uint8_t)(projected>>8u);
+    *(volatile uint8_t *)(event+6u)=*(volatile uint8_t *)(packet+6u);
+    (void)opencfw_em9305_radio_address_copy_304604(event+7u,packet+7u);
+    for(uint32_t i=13u;i<=20u;++i)*(volatile uint8_t *)(event+i)=*(volatile uint8_t *)(packet+i);
+    (void)opencfw_em9305_radio_address_copy_304604(event+21u,packet+21u);
+    *(volatile uint8_t *)(event+27u)=(uint8_t)chunk;
+    (void)opencfw_em9305_memcpy((void *)(event+28u),(const void *)data,chunk);
+    (void)opencfw_em9305_ll_event_send(event);data=end;
+   }else{
+    stopped=(remaining!=0u)&&((uint8_t)next==capacity);
+    *(volatile uint8_t *)(uintptr_t)0x805718u=(uint8_t)next;
+    if(stopped){remaining=0u;*(volatile uint8_t *)(packet+9u)=2u;}
+    uintptr_t initial=*(volatile uint32_t *)(packet+12u);
+    uint32_t total=*(volatile uint16_t *)(packet+10u);
+    uintptr_t end=data+chunk;uint32_t projected=1u;
+    if(total==(uint16_t)(end-initial))projected=(*(volatile uint8_t *)(packet+9u)==2u)?2u:0u;
+    *(volatile uint8_t *)event=15u;
+    for(uint32_t i=1u;i<=4u;++i)*(volatile uint8_t *)(event+i)=*(volatile uint8_t *)(packet+i+3u);
+    uint32_t last=*(volatile uint8_t *)(packet+8u);
+    *(volatile uint8_t *)(event+7u)=(uint8_t)chunk;
+    *(volatile uint8_t *)(event+6u)=(uint8_t)projected;
+    *(volatile uint8_t *)(event+5u)=(uint8_t)last;
+    if((uint8_t)chunk)(void)opencfw_em9305_memcpy((void *)(event+8u),(const void *)data,chunk);
+    (void)opencfw_em9305_ll_event_send(event-2u);data=end;
+   }
+  }while(remaining!=0u);
+  return stopped^1u;
+ }
+ if(type==24u){
+  event=opencfw_em9305_ll_event_allocate(14u,4u);if(!event)return 0u;
+  *(volatile uint8_t *)(event+2u)=32u;*(volatile uint8_t *)(event+1u)=66u;
+  *(volatile uint8_t *)event=1u;
+  *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(packet+3u);
+  (void)opencfw_em9305_ll_event_send(event-2u);return 1u;
+ }
+ if(type==25u){
+  if((*(volatile uint8_t *)(uintptr_t)0x8056fau&1u)==0u)return 0u;
+  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+  event=opencfw_em9305_ll_event_allocate(62u,1u);if(!event)return 0u;
+  *(volatile uint8_t *)event=17u;(void)opencfw_em9305_ll_event_send(event-2u);return 1u;
+ }
+ if(type==30u||type==31u||type==38u){
+  uintptr_t feature=type==38u?0x8056fau:0x8056f9u;
+  uint32_t bit=type==30u?5u:7u;
+  if((*(volatile uint8_t *)feature&(1u<<bit))==0u)return 0u;
+  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+  uint32_t bytes=type==30u?16u:(type==31u?3u:20u);
+  event=opencfw_em9305_ll_event_allocate(62u,bytes);if(!event)return 0u;
+  if(type==31u){
+   *(volatile uint8_t *)event=16u;
+   *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(packet+4u);
+   *(volatile uint8_t *)(event+2u)=*(volatile uint8_t *)(packet+5u);
+  }else{
+   *(volatile uint8_t *)event=type==30u?14u:24u;
+   *(volatile uint8_t *)(event+1u)=*(volatile uint8_t *)(packet+4u);
+   uint32_t last=type==30u?5u:9u;
+   for(uint32_t i=2u;i<=last;++i)*(volatile uint8_t *)(event+i)=*(volatile uint8_t *)(packet+i+4u);
+   uint32_t dest=type==30u?6u:10u,src=type==30u?10u:14u;
+   (void)opencfw_em9305_radio_address_copy_304604(event+dest,packet+src);
+   *(volatile uint8_t *)(event+dest+6u)=*(volatile uint8_t *)(packet+src+6u);
+   for(uint32_t i=7u;i<=9u;++i)*(volatile uint8_t *)(event+dest+i)=*(volatile uint8_t *)(packet+src+i+1u);
+  }
+  (void)opencfw_em9305_ll_event_send(event-2u);return 1u;
+ }
+ return 0u;
+}
+
+extern uint32_t opencfw_em9305_command_config_basic_30d00c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_config_extended_30d204(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_config_clear_30ca18(uint32_t);
+extern uint32_t opencfw_em9305_command_config_pairs_30b3f8(uint32_t,uintptr_t);
+static inline uint32_t opencfw_em9305_config_stride(uint32_t n,uint32_t width)
+{
+ uint32_t result;
+ if(width==10u)__asm__ volatile("mpy %0,%1,10":"=r"(result):"r"(n));
+ else __asm__ volatile("mpy %0,%1,14":"=r"(result):"r"(n));
+ return result;
+}
+/* Native3300c8..330400: full four-opcode configuration and response graph. */
+uint32_t opencfw_em9305_dispatch_3300c8(uintptr_t request,uintptr_t input)
+{
+ uint32_t command=*(volatile uint16_t *)request,status,length;
+ _Alignas(4) uint8_t scratch[60];
+ if(command==0x2062u||command==0x2063u){
+  uint8_t fields[15];
+  static const uint8_t basic_order[15]={5,2,14,13,11,4,6,1,3,12,10,0,7,8,9};
+  static const uint8_t extended_order[15]={5,2,14,10,4,6,1,3,9,0,7,8,11,12,13};
+  const uint8_t *order=command==0x2062u?basic_order:extended_order;
+  for(uint32_t i=0u;i<15u;++i)fields[order[i]]=*(volatile uint8_t *)(input+order[i]);
+  uint32_t count=fields[14],limit=count<2u?count:2u;
+  *(volatile uint8_t *)(uintptr_t)0x8018d4u=fields[0];
+  *(volatile uint8_t *)(uintptr_t)0x805bf4u=(uint8_t)count;
+  uintptr_t rows=(uintptr_t)scratch+(command==0x2062u?28u:0u);
+  uint32_t width=command==0x2062u?10u:14u;
+  uint32_t in_width=command==0x2062u?9u:14u;
+  for(uint32_t i=0u;i<limit;++i){
+   uintptr_t row=rows+opencfw_em9305_config_stride(i,width),src=input+15u+i*in_width;
+   uint8_t v[14];
+   if(command==0x2062u){static const uint8_t idx[9]={2,4,1,3,0,5,6,7,8};for(uint32_t n=0u;n<9u;++n)v[idx[n]]=*(volatile uint8_t *)(src+idx[n]);
+    *(volatile uint8_t *)row=v[0];
+    for(uint32_t n=6u;n<=9u;++n)*(volatile uint8_t *)(row+n)=v[n-1u];
+    *(volatile uint16_t *)(row+2u)=(uint16_t)(v[1]|((uint32_t)v[2]<<8u));
+    *(volatile uint16_t *)(row+4u)=(uint16_t)(v[3]|((uint32_t)v[4]<<8u));
+   }else{static const uint8_t idx[14]={3,5,7,9,0,2,4,6,8,1,10,11,12,13};for(uint32_t n=0u;n<14u;++n)v[idx[n]]=*(volatile uint8_t *)(src+idx[n]);
+    *(volatile uint8_t *)row=v[0];*(volatile uint8_t *)(row+1u)=v[1];
+    for(uint32_t n=10u;n<14u;++n)*(volatile uint8_t *)(row+n)=v[n];
+    for(uint32_t n=2u;n<=8u;n+=2u)*(volatile uint16_t *)(row+n)=(uint16_t)(v[n]|((uint32_t)v[n+1u]<<8u));
+   }
+  }
+  uintptr_t config=(uintptr_t)scratch+(command==0x2062u?0u:28u);
+  *(volatile uint32_t *)(config+(command==0x2062u?24u:20u))=(uint32_t)rows;
+  if(command==0x2062u){
+   *(volatile uint8_t *)(config+20u)=fields[14];
+   *(volatile uint16_t *)(config+18u)=(uint16_t)(fields[12]|((uint32_t)fields[13]<<8u));
+   *(volatile uint16_t *)(config+16u)=(uint16_t)(fields[10]|((uint32_t)fields[11]<<8u));
+   *(volatile uint8_t *)(config+14u)=fields[9];*(volatile uint8_t *)(config+13u)=fields[8];*(volatile uint8_t *)(config+12u)=fields[7];
+  }else{
+   *(volatile uint8_t *)(config+19u)=fields[14];*(volatile uint8_t *)(config+18u)=fields[13];*(volatile uint8_t *)(config+17u)=fields[12];*(volatile uint8_t *)(config+16u)=fields[11];
+   *(volatile uint16_t *)(config+14u)=(uint16_t)(fields[9]|((uint32_t)fields[10]<<8u));
+   *(volatile uint8_t *)(config+13u)=fields[8];*(volatile uint8_t *)(config+12u)=fields[7];
+  }
+  *(volatile uint32_t *)(config+8u)=fields[4]|((uint32_t)fields[5]<<8u)|((uint32_t)fields[6]<<16u);
+  *(volatile uint32_t *)(config+4u)=fields[1]|((uint32_t)fields[2]<<8u)|((uint32_t)fields[3]<<16u);
+  *(volatile uint8_t *)config=fields[0];
+  status=command==0x2062u?opencfw_em9305_command_config_basic_30d00c(config,0x8018d8u):opencfw_em9305_command_config_extended_30d204(config,0x8018d8u);
+  uint32_t live_count=*(volatile uint8_t *)(uintptr_t)0x805bf4u;
+  uint32_t doubled=live_count*2u;
+  if((uint8_t)doubled==252u){(void)opencfw_em9305_ll_status_event_331bf8(request,status);return 1u;}
+  length=(uint8_t)(doubled+3u);
+ }else if(command==0x2065u){
+  uint32_t first=*(volatile uint8_t *)input;
+  *(volatile uint8_t *)(uintptr_t)0x8018d4u=(uint8_t)first;
+  status=opencfw_em9305_command_config_clear_30ca18(first);length=2u;
+ }else if(command==0x2064u){
+  uint32_t count=*(volatile uint8_t *)input,limit=count<2u?count:2u;
+  *(volatile uint8_t *)(uintptr_t)0x805bf4u=(uint8_t)count;
+  for(uint32_t i=0u;i<limit;++i){uintptr_t src=input+1u+i*4u;
+   uint32_t a=*(volatile uint8_t *)src,b=*(volatile uint8_t *)(src+1u),c=*(volatile uint8_t *)(src+2u),d=*(volatile uint8_t *)(src+3u);
+   *(volatile uint16_t *)(scratch+56u+i*2u)=(uint16_t)(a|(b<<8u));
+   *(volatile uint16_t *)(scratch+28u+i*2u)=(uint16_t)(c|(d<<8u));
+  }
+  *(volatile uint32_t *)(scratch+4u)=(uint32_t)(uintptr_t)(scratch+28u);
+  *(volatile uint32_t *)scratch=(uint32_t)(uintptr_t)(scratch+56u);
+  status=opencfw_em9305_command_config_pairs_30b3f8(count,(uintptr_t)scratch);
+  (void)opencfw_em9305_ll_status_event_331bf8(request,status);return 1u;
+ }else return 0u;
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(length,*(volatile uint16_t *)request);
+ if(!response)return 1u;
+ command=*(volatile uint16_t *)request;
+ if(command-0x2062u<2u){
+  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805bf4u;
+  *(volatile uint8_t *)response=(uint8_t)status;
+  uint32_t first=*(volatile uint8_t *)(uintptr_t)0x8018d4u;
+  if(status!=0u)count=0u;
+  *(volatile uint8_t *)(response+2u)=(uint8_t)count;
+  *(volatile uint8_t *)(response+1u)=(uint8_t)first;
+  for(uint32_t i=0u;i<count;++i){uint32_t value=*(volatile uint16_t *)(uintptr_t)(0x8018d8u+i*2u);
+   *(volatile uint8_t *)(response+3u+i*2u)=(uint8_t)value;*(volatile uint8_t *)(response+4u+i*2u)=(uint8_t)(value>>8u);}
+ }else if(command==0x2065u){*(volatile uint8_t *)response=(uint8_t)status;*(volatile uint8_t *)(response+1u)=*(volatile uint8_t *)(uintptr_t)0x8018d4u;}
+ (void)opencfw_em9305_ll_event_send(response-5u);return 1u;
+}
+
+extern uint32_t opencfw_em9305_config_pairs_apply_306b80(uint32_t,uintptr_t);
+/* Native30b3f8..30b480: capability, duplicate first-array ids, second-array slot state. */
+uint32_t opencfw_em9305_command_config_pairs_30b3f8(uint32_t count,uintptr_t arrays)
+{
+ if((*(volatile uint8_t *)(uintptr_t)0x805a98u&1u)==0u)return 12u;
+ uint32_t status=0u;
+ for(uint32_t row=0u;status==0u&&row<count;++row){
+  for(uint32_t previous=0u;status==0u&&previous<row;++previous){
+   uintptr_t first=*(volatile uint32_t *)arrays;
+   uint32_t prior=*(volatile uint16_t *)(first+previous*2u);
+   uint32_t current=*(volatile uint16_t *)(first+row*2u);
+   if(current==prior)status=18u;
+  }
+  if(status!=0u)continue;
+  uintptr_t second=*(volatile uint32_t *)(arrays+4u);
+  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uint32_t id=*(volatile uint16_t *)(second+row*2u);
+  uint32_t capacity=*(volatile uint8_t *)(config+34u);
+  status=2u;
+  if(id>=capacity)continue;
+  if(opencfw_em9305_ll_slot_active_30731c(id)==0u)continue;
+  second=*(volatile uint32_t *)(arrays+4u);
+  id=*(volatile uint16_t *)(second+row*2u);
+  status=opencfw_em9305_ll_slot_state_306fdc(id)!=0u?12u:0u;
+ }
+ if(status==0u)status=opencfw_em9305_config_pairs_apply_306b80(count,arrays);
+ return status&255u;
+}
+
+/* Native306b80..306c44: clipped two-row link/channel mutation, latch and six-byte message. */
+uint32_t opencfw_em9305_config_pairs_apply_306b80(uint32_t count,uintptr_t arrays)
+{
+ if(*(volatile uint8_t *)(uintptr_t)0x805ab1u!=0u)return 12u;
+ uint32_t limit=count<2u?count:2u;
+ for(uint32_t i=0u;i<limit;++i){
+  uintptr_t first=*(volatile uint32_t *)arrays;
+  uint32_t id=*(volatile uint16_t *)(first+i*2u);
+  uintptr_t link=opencfw_em9305_ll_link_find_31ab88(id);
+  if(link==0u)return 2u;
+  if(opencfw_em9305_ll_link_state_ready_31b750(link)!=0u)return 11u;
+  uintptr_t channel=opencfw_em9305_ll_test_channel_find_31ab50(*(volatile uint8_t *)(link+11u));
+  *(volatile uint8_t *)(channel+1u)=1u;
+  *(volatile uint8_t *)(link+25u)=0u;
+ }
+ *(volatile uint8_t *)(uintptr_t)0x802a48u=(uint8_t)limit;
+ *(volatile uint8_t *)(uintptr_t)0x805ab1u=1u;
+ for(uint32_t i=0u;i<limit;++i){
+  uintptr_t first=*(volatile uint32_t *)arrays,second=*(volatile uint32_t *)(arrays+4u);
+  uint32_t a=*(volatile uint16_t *)(first+i*2u);
+  *(volatile uint16_t *)(uintptr_t)(0x802a4au+i*2u)=(uint16_t)a;
+  uint32_t b=*(volatile uint16_t *)(second+i*2u);
+  *(volatile uint16_t *)(uintptr_t)(0x802a4eu+i*2u)=(uint16_t)b;
+  *(volatile uint8_t *)(uintptr_t)(0x802a52u+i)=0u;
+ }
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
+ if(message==0u)return 0u;
+ uint32_t second=*(volatile uint16_t *)(uintptr_t)0x802a4eu;
+ *(volatile uint16_t *)(message+2u)=0x2401u;
+ *(volatile uint16_t *)message=(uint16_t)second;
+ uint32_t first=*(volatile uint16_t *)(uintptr_t)0x802a4au;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint16_t *)(message+4u)=(uint16_t)first;
+ (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ return 0u;
+}
+
+extern uint32_t opencfw_em9305_config_channel_busy_31b2f8(uintptr_t);
+extern uint32_t opencfw_em9305_config_link_clear_31ad88(uintptr_t);
+extern uint32_t opencfw_em9305_config_channel_clear_31ad64(uintptr_t);
+static inline uint32_t opencfw_em9305_config_clear_stride(uint32_t i)
+{uint32_t result;__asm__ volatile("mpywhl %0,%1,656":"=r"(result):"r"(i));return result;}
+/* Native3083a4..30843c and30ca18 tail: channel guard, live link release and final clear. */
+uint32_t opencfw_em9305_command_config_clear_30ca18(uint32_t id)
+{
+ uintptr_t channel=opencfw_em9305_ll_test_channel_find_31ab50(id);
+ if(!channel)return 2u;
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+53u);
+ if(count){uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+  for(uint32_t i=0u;i<count;++i){uintptr_t row=base+opencfw_em9305_config_clear_stride(i);
+   if(*(volatile uint8_t *)row==0u)continue;
+   if(*(volatile uint8_t *)(row+11u)!=id)continue;
+   if(*(volatile uint8_t *)(row+10u)==1u)return 12u;
+   if(*(volatile uint8_t *)(row+67u)!=0u)return 12u;
+  }
+ }
+ if(opencfw_em9305_config_channel_busy_31b2f8(channel)!=0u)return 12u;
+ config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t i=0u;
+ while(i<*(volatile uint8_t *)(config+53u)){
+  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+  uintptr_t row=base+opencfw_em9305_config_clear_stride(i);
+  if(*(volatile uint8_t *)row!=0u&&*(volatile uint8_t *)(row+11u)==id&&*(volatile uint8_t *)(row+10u)==0u){
+   (void)opencfw_em9305_config_link_clear_31ad88(row);
+   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  }++i;
+ }
+ (void)opencfw_em9305_config_channel_clear_31ad64(channel);
+ return 0u;
+}
+
+/* Native31b2f8..31b2fc: channel byte23, returned in delay slot. */
+uint32_t opencfw_em9305_config_channel_busy_31b2f8(uintptr_t channel)
+{return *(volatile uint8_t *)(channel+23u);}
+/* Native31ad88..31ad90: active-byte clear; R0 pointer remains intact. */
+uint32_t opencfw_em9305_config_link_clear_31ad88(uintptr_t link)
+{*(volatile uint8_t *)link=0u;return (uint32_t)link;}
+/* Native31ad64..31ad88: exact channel clear stores, decrement and release1 result. */
+uint32_t opencfw_em9305_config_channel_clear_31ad64(uintptr_t channel)
+{
+ *(volatile uint8_t *)(channel+112u)=0u;
+ *(volatile uint16_t *)(channel+108u)=0u;
+ *(volatile uint8_t *)(channel+23u)=0u;
+ *(volatile uint8_t *)(channel+4u)=0u;
+ *(volatile uint8_t *)(channel+3u)=0u;
+ *(volatile uint16_t *)channel=0u;
+ (void)opencfw_em9305_command_count_down_30e48c();
+ return opencfw_em9305_common_release_304588(1u);
+}
+
+/* Native332f80..332fa8: combined PHY2/PHY4 capability guard; full-width args retained. */
+uint32_t opencfw_em9305_config_phy_pair_valid_332f80(uint32_t first,uint32_t second)
+{
+ uint32_t capability=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t combined=first|second;
+ if((capability&256u)==0u&&(combined&2u)!=0u)return 0u;
+ if((capability&2048u)==0u&&(combined&4u)!=0u)return 0u;
+ return 1u;
+}
+
+extern uint32_t opencfw_em9305_config_phy_pair_valid_332f80(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_config_basic_apply_3087ec(uintptr_t,uintptr_t);
+static inline uint32_t opencfw_em9305_config_basic_stride(uint32_t i)
+{uint32_t result;__asm__ volatile("mpy %0,%1,10":"=r"(result):"r"(i));return result;}
+static uint32_t opencfw_em9305_config_basic_time(uint32_t length,uint32_t phy)
+{
+ if(!length)return 0u;
+ if(phy==1u)return length*8u+80u;
+ if(phy==4u)return length*64u+720u;
+ if(phy==2u)return 44u+length*4u;
+ return 0u;
+}
+/* Native30d00c..30d204: complete basic configuration validation, clamp and apply. */
+uint32_t opencfw_em9305_command_config_basic_30d00c(uintptr_t input,uintptr_t output)
+{
+ uint32_t count=*(volatile uint8_t *)(input+20u);
+ if(count-1u>=16u)return 18u;
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(*(volatile uint8_t *)(config+53u)<count)return 9u;
+ uintptr_t rows=*(volatile uint32_t *)(input+24u);
+ uint32_t first_length=0u,second_length=0u;
+ for(uint32_t i=0u;i<count;++i){first_length=*(volatile uint16_t *)(rows+2u+i*10u);if(first_length)break;}
+ for(uint32_t i=0u;i<count;++i){second_length=*(volatile uint16_t *)(rows+4u+i*10u);if(second_length)break;}
+ if(*(volatile uint8_t *)input>239u)return 18u;
+ uint32_t first_time=*(volatile uint32_t *)(input+4u);
+ if((first_length&&first_time<255u)||first_time>0xfffffu)return 18u;
+ uint32_t second_time=*(volatile uint32_t *)(input+8u);
+ if((second_length&&second_time<255u)||second_time>0xfffffu)return 18u;
+ if(*(volatile uint8_t *)(input+12u)>=8u)return 18u;
+ if(*(volatile uint8_t *)(input+13u)>=2u)return 18u;
+ if(*(volatile uint8_t *)(input+14u)>=2u)return 18u;
+ for(uint32_t i=0u;i<count;++i){
+  uintptr_t row=rows+opencfw_em9305_config_basic_stride(i);
+  if(*(volatile uint8_t *)row>239u)return 18u;
+  uint32_t a=*(volatile uint16_t *)(row+2u);if(a>4095u)return 18u;
+  uint32_t b=*(volatile uint16_t *)(row+4u);if(b>4095u||(a|b)==0u)return 18u;
+  if(*(volatile uint8_t *)(row+6u)==0u)return 17u;
+  if(*(volatile uint8_t *)(row+7u)==0u)return 17u;
+  if(*(volatile uint8_t *)(row+8u)>=16u)*(volatile uint8_t *)(row+8u)=15u;
+  else if(*(volatile uint8_t *)(row+9u)>=16u)*(volatile uint8_t *)(row+9u)=15u;
+ }
+ uint32_t live_count,i=0u;
+ for(;;){
+  live_count=*(volatile uint8_t *)(input+20u);
+  if(i>=live_count)break;
+  rows=*(volatile uint32_t *)(input+24u);
+  uintptr_t row=rows+i*10u;
+  uint32_t second=*(volatile uint8_t *)(row+7u),first=*(volatile uint8_t *)(row+6u);
+  if(opencfw_em9305_config_phy_pair_valid_332f80(first,second)==0u)return 17u;
+  first=*(volatile uint8_t *)(row+6u);if(first&~7u)return 17u;
+  second=*(volatile uint8_t *)(row+7u);if(second&~7u)return 17u;
+  if(((first-1u)&first)!=0u||((second-1u)&second)!=0u)return 17u;
+  ++i;
+ }
+ if(live_count){
+  first_time=*(volatile uint32_t *)(input+4u);
+  rows=*(volatile uint32_t *)(input+24u);
+  for(uint32_t j=0u;j<live_count;++j){uintptr_t row=rows+opencfw_em9305_config_basic_stride(j);
+   uint32_t a=*(volatile uint16_t *)(row+2u),ta=0u;
+   if(a)ta=opencfw_em9305_config_basic_time(a,*(volatile uint8_t *)(row+6u));
+   uint32_t b=*(volatile uint16_t *)(row+4u),tb=0u;
+   if(b)tb=opencfw_em9305_config_basic_time(b,*(volatile uint8_t *)(row+7u));
+   if(ta>first_time)return 18u;
+   if(tb>*(volatile uint32_t *)(input+8u))return 18u;
+  }
+ }
+ if((uint16_t)(*(volatile uint16_t *)(input+16u)-4001u)<61540u)return 18u;
+ if((uint16_t)(*(volatile uint16_t *)(input+18u)-4001u)<61540u)return 18u;
+ (void)opencfw_em9305_memset((void *)output,0u,live_count*2u);
+ return opencfw_em9305_config_basic_apply_3087ec(input,output)&255u;
+}
+
+extern uintptr_t opencfw_em9305_config_channel_allocate_316b5c(uint32_t);
+extern uint32_t opencfw_em9305_config_existing_count_31b2a8(uintptr_t);
+extern uint32_t opencfw_em9305_config_free_links_31b278(void);
+extern uintptr_t opencfw_em9305_config_link_find_31abc0(uint32_t,uint32_t);
+extern uintptr_t opencfw_em9305_config_link_allocate_316bbc(uintptr_t);
+extern void opencfw_em9305_config_link_update_326ed8(uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_config_channel_update_326b00(uintptr_t,uintptr_t);
+static inline uint32_t opencfw_em9305_config_apply_stride(uint32_t i)
+{uint32_t r;__asm__ volatile("mpy %0,%1,10":"=r"(r):"r"(i));return r;}
+/* Native3087ec..308a3c: full basic apply, existing/new link paths and bounded decrement passes. */
+uint32_t opencfw_em9305_config_basic_apply_3087ec(uintptr_t input,uintptr_t output)
+{
+ uintptr_t channel=opencfw_em9305_ll_test_channel_find_31ab50(*(volatile uint8_t *)input);
+ if(!channel){channel=opencfw_em9305_config_channel_allocate_316b5c(*(volatile uint8_t *)input);if(!channel)return 7u;}
+ uint32_t latch=*(volatile uint8_t *)(uintptr_t)0x805ab1u;
+ uint32_t busy=*(volatile uint8_t *)(channel+23u);
+ if((busy|latch)!=0u)return 12u;
+ if(*(volatile uint8_t *)(channel+1u)!=0u)return 12u;
+ uint32_t existing=opencfw_em9305_config_existing_count_31b2a8(input);
+ uint32_t count=*(volatile uint8_t *)(input+20u);
+ if(count){uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t rows=*(volatile uint32_t *)(input+24u);
+  uint32_t max=*(volatile uint8_t *)(config+48u);
+  for(uint32_t i=0u;i<count;++i){uintptr_t p=rows+8u+i*10u;
+   uint32_t a=*(volatile uint8_t *)p;*(volatile uint8_t *)p=(uint8_t)(a<max?a:max);
+   uint32_t b=*(volatile uint8_t *)(p+1u);*(volatile uint8_t *)(p+1u)=(uint8_t)(b<max?b:max);
+  }
+ }
+ uint32_t free=opencfw_em9305_config_free_links_31b278();
+ if(existing){if((int32_t)(count-existing)>(int32_t)free)return 7u;
+  for(uint32_t i=0u;i<*(volatile uint8_t *)(input+20u);++i){
+   uintptr_t rows=*(volatile uint32_t *)(input+24u);
+   uint32_t offset=opencfw_em9305_config_apply_stride(i);
+   uint32_t id=*(volatile uint8_t *)input,slot=*(volatile uint8_t *)(rows+offset);
+   uintptr_t link=opencfw_em9305_config_link_find_31abc0(id,slot);
+   if(link){uint32_t first=*(volatile uint8_t *)(link+528u);
+    rows=*(volatile uint32_t *)(input+24u);uintptr_t row=rows+offset;
+    if(first!=255u&&*(volatile uint16_t *)(row+2u)==0u)return 12u;
+    if(*(volatile uint8_t *)(link+532u)!=255u&&*(volatile uint16_t *)(row+4u)==0u)return 12u;
+    (void)opencfw_em9305_config_link_update_326ed8(link,input,row);
+   }else{link=opencfw_em9305_config_link_allocate_316bbc(channel);
+    rows=*(volatile uint32_t *)(input+24u);
+    *(volatile uint8_t *)(link+10u)=0u;
+    (void)opencfw_em9305_config_link_update_326ed8(link,input,rows+offset);
+   }
+   uint32_t link_id=*(volatile uint16_t *)(link+8u);
+   *(volatile uint16_t *)(output+i*2u)=(uint16_t)link_id;
+  }
+ }else{if(count>free)return 9u;
+  uint32_t i=0u;uint32_t live_count=*(volatile uint8_t *)(input+20u);
+  if(live_count)do{uintptr_t link=opencfw_em9305_config_link_allocate_316bbc(channel);
+   uintptr_t rows=*(volatile uint32_t *)(input+24u);
+   *(volatile uint8_t *)(link+10u)=0u;
+   (void)opencfw_em9305_config_link_update_326ed8(link,input,rows+i*10u);
+   uint32_t link_id=*(volatile uint16_t *)(link+8u);
+   live_count=*(volatile uint8_t *)(input+20u);
+   ++i;*(volatile uint16_t *)(output+(i-1u)*2u)=(uint16_t)link_id;
+  }while(i<live_count);
+ }
+ (void)opencfw_em9305_config_channel_update_326b00(channel,input);
+ uint32_t changed=1u,complete=*(volatile uint8_t *)(channel+22u)==0u;
+ while(changed&&complete){changed=0u;uint32_t i=0u,live_count;
+  for(;;){live_count=*(volatile uint8_t *)(input+20u);if(i>=live_count)break;
+   uintptr_t link=opencfw_em9305_ll_link_find_31ab88(*(volatile uint16_t *)(output+i*2u));
+   uintptr_t rows=*(volatile uint32_t *)(input+24u),row=rows+opencfw_em9305_config_apply_stride(i);
+   uint32_t a=*(volatile uint8_t *)(row+8u);if(a){*(volatile uint8_t *)(row+8u)=(uint8_t)(a-1u);changed=1u;}
+   uint32_t bv=*(volatile uint8_t *)(row+9u);if(bv){*(volatile uint8_t *)(row+9u)=(uint8_t)(bv-1u);changed=1u;}
+   (void)opencfw_em9305_config_link_update_326ed8(link,input,row);
+   (void)opencfw_em9305_config_channel_update_326b00(channel,input);
+   if(*(volatile uint8_t *)(channel+22u)!=0u)break;
+   ++i;
+  }
+  complete=i>=live_count;
+ }
+ uint32_t all=1u,i=0u,count_final;
+ for(;;){count_final=*(volatile uint8_t *)(input+20u);if(i>=count_final)break;
+  uintptr_t rows=*(volatile uint32_t *)(input+24u);
+  uintptr_t link=opencfw_em9305_config_link_find_31abc0(*(volatile uint8_t *)input,*(volatile uint8_t *)(rows+i*10u));
+  if(*(volatile uint8_t *)(link+502u)==0u)all=0u;
+  else if(*(volatile uint8_t *)(link+503u)==0u)all=0u;
+  ++i;
+ }
+ if(!all)return 17u;
+ if(*(volatile uint8_t *)(channel+22u)==0u)return 17u;
+ *(volatile uint8_t *)(channel+112u)=(uint8_t)count_final;
+ return 0u;
+}
+
+/* Native31abc0..31ac08: active channel/slot match over656-byte rows. */
+uintptr_t opencfw_em9305_config_link_find_31abc0(uint32_t channel,uint32_t slot)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+53u);
+ if(!count)return 0u;
+ uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+ for(uint32_t i=0u;i<count;++i,row+=656u){
+  if(*(volatile uint8_t *)row==0u)continue;
+  if(*(volatile uint8_t *)(row+11u)!=channel)continue;
+  if(*(volatile uint8_t *)(row+12u)==slot)return row;
+ }
+ return 0u;
+}
+/* Native31b278..31b2a8: byte-sized inactive link count. */
+uint32_t opencfw_em9305_config_free_links_31b278(void)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+53u),free=0u;
+ if(count){uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+  for(uint32_t i=0u;i<count;++i,row+=656u)if(*(volatile uint8_t *)row==0u)++free;
+ }
+ return free&255u;
+}
+/* Native31b2a8..31b2d0: captured input count/rows/id, lookup each compact row. */
+uint32_t opencfw_em9305_config_existing_count_31b2a8(uintptr_t input)
+{
+ uint32_t count=*(volatile uint8_t *)(input+20u),found=0u;
+ if(count){uintptr_t rows=*(volatile uint32_t *)(input+24u);
+  uint32_t channel=*(volatile uint8_t *)input;
+  for(uint32_t i=0u;i<count;++i){uint32_t slot=*(volatile uint8_t *)(rows+i*10u);
+   found+=opencfw_em9305_config_link_find_31abc0(channel,slot)!=0u;
+  }
+ }
+ return found&255u;
+}
+
+static inline uint32_t opencfw_em9305_config_allocator_stride(uint32_t i,uint32_t width)
+{
+ uint32_t r;if(width==140u)__asm__ volatile("mpywhl %0,%1,140":"=r"(r):"r"(i));
+ else __asm__ volatile("mpywhl %0,%1,656":"=r"(r):"r"(i));
+ return r;
+}
+/* Native316b5c..316bbc: first inactive140B channel, typed initialization and shared request. */
+uintptr_t opencfw_em9305_config_channel_allocate_316b5c(uint32_t id)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+52u);
+ if(!count)return 0u;
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c64u;
+ for(uint32_t i=0u;i<count;++i){uintptr_t row=base+opencfw_em9305_config_allocator_stride(i,140u);
+  if(*(volatile uint8_t *)row!=0u)continue;
+  (void)opencfw_em9305_memset((void *)row,0u,140u);
+  *(volatile uint8_t *)row=1u;
+  *(volatile uint32_t *)(row+92u)=0u;*(volatile uint32_t *)(row+88u)=0u;
+  *(volatile uint16_t *)(row+8u)=(uint16_t)i;
+  *(volatile uint8_t *)(row+6u)=(uint8_t)id;
+  (void)opencfw_em9305_command_count_30e4bc();
+  (void)opencfw_em9305_common_request_30455c(1u);
+  return row;
+ }
+ return 0u;
+}
+/* Native316bbc..316c56: first inactive656B link and product-derived live fields. */
+uintptr_t opencfw_em9305_config_link_allocate_316bbc(uintptr_t channel)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+53u);
+ if(!count)return 0u;
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+ for(uint32_t i=0u;i<count;++i){uintptr_t row=base+opencfw_em9305_config_allocator_stride(i,656u);
+  if(*(volatile uint8_t *)row!=0u)continue;
+  (void)opencfw_em9305_memset((void *)row,0u,656u);
+  uint32_t seed=*(volatile uint16_t *)(row+6u);
+  config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  *(volatile uint16_t *)(row+80u)=(uint16_t)seed;
+  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t capacity=*(volatile uint8_t *)(config+34u);
+  *(volatile uint8_t *)(row+528u)=255u;*(volatile uint8_t *)(row+532u)=255u;
+  *(volatile uint16_t *)(row+82u)=0x5201u;
+  *(volatile uint16_t *)(row+458u)=0x470fu;
+  *(volatile uint8_t *)(row+88u)=(uint8_t)handler;
+  *(volatile uint8_t *)(row+464u)=(uint8_t)handler;
+  uint32_t id=*(volatile uint8_t *)(channel+6u);
+  uint32_t index=i+capacity;
+  *(volatile uint8_t *)row=1u;
+  *(volatile uint16_t *)(row+8u)=(uint16_t)index;
+  *(volatile uint16_t *)(row+456u)=(uint16_t)index;
+  *(volatile uint8_t *)(row+11u)=(uint8_t)id;
+  return row;
+ }
+ return 0u;
+}
+
+extern uint32_t opencfw_em9305_config_extended_apply_308a3c(uintptr_t,uintptr_t);
+static inline uint32_t opencfw_em9305_config_extended_stride(uint32_t i)
+{uint32_t result;__asm__ volatile("mpy %0,%1,14":"=r"(result):"r"(i));return result;}
+/* Native30d204..30d35a: complete extended validation. Output is cleared before any rejection. */
+uint32_t opencfw_em9305_command_config_extended_30d204(uintptr_t input,uintptr_t output)
+{
+ uint32_t count=*(volatile uint8_t *)(input+19u);
+ (void)opencfw_em9305_memset((void *)output,0u,count*2u);
+ uint32_t minimum=(*(volatile uint8_t *)(uintptr_t)0x805a86u&128u)?4u:2u;
+ if(*(volatile uint8_t *)input>239u)return 48u;
+ if((uint32_t)(*(volatile uint32_t *)(input+4u)+0xfff00000u)<0xfff000ffu)return 48u;
+ if((uint32_t)(*(volatile uint32_t *)(input+8u)+0xfff00000u)<0xfff000ffu)return 48u;
+ if((uint32_t)(*(volatile uint8_t *)(input+12u)-1u)>=31u)return 48u;
+ if((uint32_t)(*(volatile uint8_t *)(input+13u)-1u)>=31u)return 48u;
+ uint32_t interval=*(volatile uint16_t *)(input+14u);
+ if(interval<minimum||interval>=3201u)return 48u;
+ if(*(volatile uint8_t *)(input+16u)>=8u||*(volatile uint8_t *)(input+17u)>=2u||*(volatile uint8_t *)(input+18u)>=2u)return 48u;
+ count=*(volatile uint8_t *)(input+19u);
+ if(count-1u>=16u)return 48u;
+ uintptr_t rows=*(volatile uint32_t *)(input+20u);
+ for(uint32_t i=0u;i<count;++i){uintptr_t row=rows+opencfw_em9305_config_extended_stride(i);
+  if(*(volatile uint8_t *)row>239u)return 48u;
+  if(*(volatile uint16_t *)(row+2u)>4095u||*(volatile uint16_t *)(row+4u)>4095u)return 48u;
+  if(*(volatile uint16_t *)(row+6u)>4091u||*(volatile uint16_t *)(row+8u)>4091u)return 48u;
+  if(*(volatile uint8_t *)(row+10u)==0u||*(volatile uint8_t *)(row+11u)==0u)return 48u;
+  if(*(volatile uint8_t *)(row+12u)>=16u||*(volatile uint8_t *)(row+13u)>=16u)return 48u;
+ }
+ uint32_t limit=*(volatile uint8_t *)(rows+1u);
+ if(limit<*(volatile uint8_t *)(rows+12u)||limit<*(volatile uint8_t *)(rows+13u))return 48u;
+ uint32_t i=0u;
+ do {rows=*(volatile uint32_t *)(input+20u);uintptr_t row=rows+i*14u;
+  uint32_t second=*(volatile uint8_t *)(row+11u),first=*(volatile uint8_t *)(row+10u);
+  if(opencfw_em9305_config_phy_pair_valid_332f80(first,second)==0u)return 17u;
+  if(*(volatile uint8_t *)(row+10u)>=8u||*(volatile uint8_t *)(row+11u)>=8u)return 17u;
+  ++i;count=*(volatile uint8_t *)(input+19u);
+ }while(i<count);
+ if(count){rows=*(volatile uint32_t *)(input+20u);
+  for(i=0u;i<count;++i){uintptr_t row=rows+opencfw_em9305_config_extended_stride(i);
+   if(*(volatile uint8_t *)(row+12u)&&*(volatile uint16_t *)(row+2u)==0u)return 18u;
+   if(*(volatile uint8_t *)(row+13u)&&*(volatile uint16_t *)(row+4u)==0u)return 18u;
+  }
+ }
+ return opencfw_em9305_config_extended_apply_308a3c(input,output);
+}
+
+extern uint32_t opencfw_em9305_config_extended_existing_31b2d0(uintptr_t);
+extern void opencfw_em9305_config_extended_link_update_3272d8(uintptr_t,uintptr_t,uintptr_t);
+extern void opencfw_em9305_config_extended_channel_update_326d0c(uintptr_t,uintptr_t);
+/* Native31b2d0..31b2f8: captured count, input ID and 14-byte row lookup. */
+uint32_t opencfw_em9305_config_extended_existing_31b2d0(uintptr_t input)
+{
+ uint32_t count=*(volatile uint8_t *)(input+19u),found=0u;
+ if(count){uintptr_t rows=*(volatile uint32_t *)(input+20u);uint32_t id=*(volatile uint8_t *)input;
+  for(uint32_t i=0u;i<count;++i)found+=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+i*14u))!=0u;
+ }
+ return found&255u;
+}
+/* Native308a3c..308b14: complete extended apply. Native ignores clear status and preserves mutations on failure. */
+uint32_t opencfw_em9305_config_extended_apply_308a3c(uintptr_t input,uintptr_t output)
+{
+ uintptr_t channel=opencfw_em9305_ll_test_channel_find_31ab50(*(volatile uint8_t *)input);
+ if(channel){if(*(volatile uint8_t *)(channel+23u))return 12u;
+  (void)opencfw_em9305_command_config_clear_30ca18(*(volatile uint8_t *)input);
+ }
+ channel=opencfw_em9305_config_channel_allocate_316b5c(*(volatile uint8_t *)input);
+ if(!channel)return 7u;
+ uint32_t existing=opencfw_em9305_config_extended_existing_31b2d0(input);
+ uint32_t count=*(volatile uint8_t *)(input+19u);
+ if(existing){uint32_t free=opencfw_em9305_config_free_links_31b278();
+  if((int32_t)free<(int32_t)(count-existing))return 7u;
+  for(uint32_t i=0u;i<*(volatile uint8_t *)(input+19u);++i){uint32_t offset=opencfw_em9305_config_extended_stride(i);
+   uintptr_t rows=*(volatile uint32_t *)(input+20u);
+   uintptr_t link=opencfw_em9305_config_link_find_31abc0(*(volatile uint8_t *)input,*(volatile uint8_t *)(rows+offset));
+   if(!link){link=opencfw_em9305_config_link_allocate_316bbc(channel);rows=*(volatile uint32_t *)(input+20u);*(volatile uint8_t *)(link+10u)=0u;}
+   else rows=*(volatile uint32_t *)(input+20u);
+   opencfw_em9305_config_extended_link_update_3272d8(link,input,rows+offset);
+   *(volatile uint16_t *)(output+i*2u)=*(volatile uint16_t *)(link+8u);
+  }
+ }else{if(opencfw_em9305_config_free_links_31b278()<count)return 9u;
+  if(*(volatile uint8_t *)(input+19u)){uint32_t i=0u,offset=0u;
+   do{uintptr_t link=opencfw_em9305_config_link_allocate_316bbc(channel);uintptr_t rows=*(volatile uint32_t *)(input+20u);
+    *(volatile uint8_t *)(link+10u)=0u;
+    opencfw_em9305_config_extended_link_update_3272d8(link,input,rows+offset);
+    uint32_t id=*(volatile uint16_t *)(link+8u);count=*(volatile uint8_t *)(input+19u);++i;offset+=14u;
+    *(volatile uint16_t *)output=(uint16_t)id;output+=2u;
+   }while(i<count);
+  }
+ }
+ opencfw_em9305_config_extended_channel_update_326d0c(channel,input);
+ *(volatile uint8_t *)(channel+112u)=*(volatile uint8_t *)(input+19u);
+ return 0u;
+}
+
+/* Native3185e8..318670: two PHY contributions, feature reads remain separately live. */
+uint32_t opencfw_em9305_config_link_time_3185e8(uint32_t first_phy,uint32_t second_phy,uint32_t first_length,uint32_t second_length)
+{
+ uint32_t sum=0u;
+ if(first_phy==1u)sum=(first_length<<3u)+112u;
+ else if(first_phy==2u)sum=60u+(first_length<<2u);
+ else if(first_phy==3u){uint32_t n=first_length+4u;
+  sum=(*(volatile uint8_t *)(uintptr_t)0x805a86u&16u)?(n<<4u)+462u:(n<<6u)+720u;
+ }
+ sum+=150u;
+ if(second_phy==1u)sum+=(second_length<<3u)+112u;
+ else if(second_phy==2u)sum+=(second_length<<2u)+60u;
+ else if(second_phy==3u){uint32_t n=second_length+4u;
+  sum+=(*(volatile uint8_t *)(uintptr_t)0x805a86u&16u)?(n<<4u)+462u:(n<<6u)+720u;
+ }
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ return sum+*(volatile uint16_t *)(config+54u)+150u;
+}
+/* Native318670..31869e: early second-slot gate, equality and first empty attachment. R1 preserved by native routine. */
+uint32_t opencfw_em9305_config_attach_link_318670(uintptr_t channel,uintptr_t link)
+{
+ if(*(volatile uint32_t *)(channel+92u))return 0u;
+ for(uint32_t i=0u;i<2u;++i){uintptr_t cell=channel+88u+i*4u;uint32_t value=*(volatile uint32_t *)cell;
+  if(value==(uint32_t)link)return 1u;
+  if(value==0u){*(volatile uint32_t *)cell=(uint32_t)link;return 1u;}
+ }
+ return 0u;
+}
+
+/* Native3185a8..3185e8: captured count/id/row base and full timing sum. */
+uint32_t opencfw_em9305_config_basic_link_sum_3185a8(uintptr_t input)
+{
+ uint32_t count=*(volatile uint8_t *)(input+20u),total=0u;
+ if(count){uintptr_t rows=*(volatile uint32_t *)(input+24u);uint32_t id=*(volatile uint8_t *)input;
+  for(uint32_t i=0u;i<count;++i){uintptr_t link=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+i*10u));
+   uint32_t first_length=*(volatile uint8_t *)(link+448u);
+   uint32_t second=*(volatile uint8_t *)(link+481u);
+   uint32_t first=*(volatile uint8_t *)(link+480u);
+   uint32_t second_length=*(volatile uint8_t *)(link+444u);
+   total+=opencfw_em9305_config_link_time_3185e8(first,second,first_length,second_length);
+  }
+ }
+ return total;
+}
+
+extern uint32_t opencfw_em9305_config_channel_ready_3186a0(uintptr_t);
+static inline uint32_t opencfw_em9305_config_update_mpywhl(uint32_t a,uint32_t b)
+{uint32_t result;__asm__ volatile("mpywhl %0,%1,%2":"=r"(result):"r"(a),"r"(b));return result;}
+static uint32_t opencfw_em9305_config_update_link_time(uintptr_t link)
+{
+ uint32_t second=*(volatile uint8_t *)(link+481u);
+ uint32_t first_length=*(volatile uint8_t *)(link+448u);
+ uint32_t first=*(volatile uint8_t *)(link+480u);
+ uint32_t second_length=*(volatile uint8_t *)(link+444u);
+ return opencfw_em9305_config_link_time_3185e8(first,second,first_length,second_length);
+}
+/* Native326d0c..326ed8: complete extended channel timing, attachment and suffix schedule update. */
+void opencfw_em9305_config_extended_channel_update_326d0c(uintptr_t channel,uintptr_t input)
+{
+ uint32_t outer=0u,count,id;uintptr_t rows;
+ for(;;){count=*(volatile uint8_t *)(input+19u);rows=*(volatile uint32_t *)(input+20u);id=*(volatile uint8_t *)input;
+  if(outer>=count)break;
+  uint32_t offset=opencfw_em9305_config_extended_stride(outer);
+  uintptr_t link=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+offset));
+  (void)opencfw_em9305_config_attach_link_318670(channel,link);
+  uint32_t mode=*(volatile uint8_t *)(input+17u),total=0u;
+  if(mode==1u){count=*(volatile uint8_t *)(input+19u);
+   if(count){uint32_t i=0u,pos=0u;
+    do{rows=*(volatile uint32_t *)(input+20u);id=*(volatile uint8_t *)input;
+     uintptr_t other=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+pos));
+     uint32_t t=opencfw_em9305_config_update_link_time(other);
+     count=*(volatile uint8_t *)(input+19u);++i;total+=t;pos+=14u;
+    }while(i<count);
+   }
+   *(volatile uint32_t *)(link+508u)=total;
+   uint32_t t=opencfw_em9305_config_update_link_time(link);
+   *(volatile uint32_t *)(link+408u)=t;
+  }else{uint32_t t=opencfw_em9305_config_update_link_time(link);
+   *(volatile uint32_t *)(link+508u)=t;
+   *(volatile uint32_t *)(link+408u)=t;
+  }
+  ++outer;
+ }
+ uint32_t first_slot=*(volatile uint8_t *)rows;
+ uint32_t mode=*(volatile uint8_t *)(input+17u);
+ uintptr_t first_link=opencfw_em9305_config_link_find_31abc0(id,first_slot);
+ if(mode==1u){uint32_t t=*(volatile uint32_t *)(first_link+508u);
+  uint32_t multiplier=*(volatile uint8_t *)(first_link+504u);
+  uint32_t interval=*(volatile uint16_t *)(first_link+500u);
+  uint32_t baseline=opencfw_em9305_config_update_mpywhl(t,multiplier);
+  *(volatile uint16_t *)(channel+20u)=(uint16_t)interval;
+  *(volatile uint32_t *)(first_link+20u)=baseline;
+  *(volatile uint32_t *)(first_link+16u)=baseline;
+  *(volatile uint32_t *)(channel+12u)=baseline;
+  for(uint32_t index=1u;index<*(volatile uint8_t *)(input+19u);++index){
+   rows=*(volatile uint32_t *)(input+20u);id=*(volatile uint8_t *)input;
+   uintptr_t link=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+opencfw_em9305_config_extended_stride(index)));
+   uint32_t sum=0u,pos=0u;
+   for(uint32_t j=0u;j<index;++j){rows=*(volatile uint32_t *)(input+20u);id=*(volatile uint8_t *)input;
+    uintptr_t other=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+pos));
+    sum+=opencfw_em9305_config_update_link_time(other);pos+=14u;
+   }
+   *(volatile uint32_t *)(link+16u)=*(volatile uint32_t *)(first_link+16u)-sum;
+   *(volatile uint32_t *)(link+20u)=*(volatile uint32_t *)(first_link+16u);
+  }
+ }else{uint32_t index=0u,pos=0u;
+  count=*(volatile uint8_t *)(input+19u);
+  while(index<count){rows=*(volatile uint32_t *)(input+20u);id=*(volatile uint8_t *)input;
+   uintptr_t link=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+opencfw_em9305_config_extended_stride(index)));
+   count=*(volatile uint8_t *)(input+19u);
+   if(index<count){uint32_t j=index,offset=pos;
+    do{rows=*(volatile uint32_t *)(input+20u);id=*(volatile uint8_t *)input;
+     uintptr_t other=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+offset));
+     uint32_t t=*(volatile uint32_t *)(other+508u);
+     uint32_t multiplier=*(volatile uint8_t *)(other+504u);
+     uint32_t previous=*(volatile uint32_t *)(link+16u);
+     count=*(volatile uint8_t *)(input+19u);
+     uint32_t value=opencfw_em9305_config_update_mpywhl(t,multiplier)+previous;
+     ++j;offset+=14u;*(volatile uint32_t *)(link+16u)=value;
+    }while(j<count);
+   }
+   uint32_t baseline=*(volatile uint32_t *)(first_link+16u);pos+=14u;++index;
+   *(volatile uint32_t *)(link+20u)=baseline;
+  }
+  uint32_t baseline=*(volatile uint32_t *)(first_link+16u);
+  uint32_t interval=*(volatile uint16_t *)(first_link+500u);
+  *(volatile uint32_t *)(channel+12u)=baseline;
+  *(volatile uint16_t *)(channel+20u)=(uint16_t)interval;
+ }
+ *(volatile uint8_t *)(channel+2u)=*(volatile uint8_t *)(input+17u);
+ *(volatile uint8_t *)(channel+22u)=(uint8_t)opencfw_em9305_config_channel_ready_3186a0(channel);
+}
+
+static inline uint32_t opencfw_em9305_config_ready_mpyuw(uint32_t a)
+{uint32_t r;__asm__ volatile("mpyuw %0,%1,1250":"=r"(r):"r"(a));return r;}
+/* Native3186a0..318708: captured policy overhead, preceding active channels and unsigned readiness. */
+uint32_t opencfw_em9305_config_channel_ready_3186a0(uintptr_t channel)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t overhead=*(volatile uint16_t *)(config+50u);
+ overhead+=opencfw_em9305_auxiliary_guard_interval();
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c64u;
+ int32_t difference=(int32_t)((uint32_t)channel-(uint32_t)base);
+ uint32_t index=(uint8_t)(difference/140);
+ for(uint32_t i=0u;i<index;++i){
+  if(*(volatile uint8_t *)(base+4u+i*140u)){
+   uint32_t unused=*(volatile uint32_t *)(base+52u+i*140u);(void)unused;
+   uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
+   overhead+=guard;
+   base=*(volatile uint32_t *)(uintptr_t)0x805c64u;
+   overhead+=guard;
+  }
+ }
+ uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
+ uint32_t baseline=*(volatile uint32_t *)(channel+12u);
+ uint32_t interval=*(volatile uint16_t *)(channel+20u);
+ uint32_t required=guard+baseline;
+ uint32_t available=opencfw_em9305_config_ready_mpyuw(interval)-overhead;
+ return available>=required;
+}
+
+static inline uint32_t opencfw_em9305_config_limit_mpyuw(uint32_t a,uint32_t factor)
+{uint32_t r;if(factor==1000u)__asm__ volatile("mpyuw %0,%1,1000":"=r"(r):"r"(a));else __asm__ volatile("mpyuw %0,%1,1250":"=r"(r):"r"(a));return r;}
+static inline uint32_t opencfw_em9305_config_limit_divu(uint32_t a,uint32_t b)
+{uint32_t r=1u;__asm__ volatile("divu %0,%1,%2":"+r"(r):"r"(a),"r"(b));return r;}
+/* Native31855c..3185a8: full limit computation, full-width selector, unsigned quotient and low-byte return. */
+uint32_t opencfw_em9305_config_basic_limit_31855c(uintptr_t link,uintptr_t input,uint32_t selector)
+{
+ uint32_t policy=*(volatile uint16_t *)(input+(selector?16u:18u));
+ uint32_t interval=*(volatile uint16_t *)(link+500u);
+ uint32_t budget=opencfw_em9305_config_limit_mpyuw(policy,1000u);
+ uint32_t mode=*(volatile uint8_t *)(link+484u);
+ uint32_t baseline=*(volatile uint32_t *)(link+20u);
+ uint32_t period=opencfw_em9305_config_limit_mpyuw(interval,1250u);
+ uint32_t time=*(volatile uint32_t *)(link+(selector?492u:496u));
+ uint32_t value=budget-baseline;
+ if(mode==1u)value-=time;else value+=time;
+ uint32_t result=1u;
+ if(value>=period)result=opencfw_em9305_config_limit_divu(value,period);
+ return result&255u;
+}
+
+static inline uint32_t opencfw_em9305_config_round_mpyw(uint32_t a,uint32_t b)
+{uint32_t r;__asm__ volatile("mpyw %0,%1,%2":"=r"(r):"r"(a),"r"(b));return r;}
+static inline uint32_t opencfw_em9305_config_round_mpyuw(uint32_t a,uint32_t b)
+{uint32_t r;__asm__ volatile("mpyuw %0,%1,%2":"=r"(r):"r"(a),"r"(b));return r;}
+/* Native317efc..317f2c: byte-wrapped numerator/divisor and ceiling quotient. */
+uint32_t opencfw_em9305_config_basic_rounding_317efc(uint32_t first,uint32_t second,uint32_t third)
+{
+ uint32_t product=opencfw_em9305_config_round_mpyw(third-1u,first);
+ uint32_t numerator=opencfw_em9305_config_round_mpyuw(first,second+1u)&255u;
+ uint32_t divisor=(product&255u)+1u;
+ uint32_t raw_divisor=divisor;
+ if((divisor&255u)!=divisor)divisor=1u;
+ divisor&=255u;
+ uint32_t quotient=opencfw_em9305_config_limit_divu(numerator,divisor);
+ uint32_t reproduced=quotient;
+ if(raw_divisor==divisor)reproduced=opencfw_em9305_config_update_mpywhl(quotient,raw_divisor);
+ reproduced&=255u;
+ return (quotient+(numerator!=reproduced))&255u;
+}
+
+static inline uint32_t opencfw_em9305_config_update_macwhl(uint32_t prior,uint32_t a,uint32_t b)
+{uint32_t result;__asm__ volatile("mov r58,%1\n\tmacwhl %0,%2,%3":"=r"(result):"r"(prior),"r"(a),"r"(b));return result;}
+/* Native326b00..326d0c: full attachment/timing, two-slot schedule, limits and fixed-point retry. */
+uint32_t opencfw_em9305_config_channel_update_326b00(uintptr_t channel,uintptr_t input)
+{
+ uint32_t count,offset=0u,index=0u;
+ for(;;){count=*(volatile uint8_t *)(input+20u);if(index>=count)break;
+  uintptr_t rows=*(volatile uint32_t *)(input+24u);uint32_t id=*(volatile uint8_t *)input;
+  uintptr_t link=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+offset));
+  (void)opencfw_em9305_config_attach_link_318670(channel,link);
+  if(*(volatile uint8_t *)(input+13u)==1u){
+   *(volatile uint32_t *)(link+508u)=opencfw_em9305_config_basic_link_sum_3185a8(input);
+   uint32_t second_length=*(volatile uint8_t *)(link+444u),second=*(volatile uint8_t *)(link+481u);
+   uint32_t first_length=*(volatile uint8_t *)(link+448u),first=*(volatile uint8_t *)(link+480u);
+   *(volatile uint32_t *)(link+408u)=opencfw_em9305_config_link_time_3185e8(first,second,first_length,second_length);
+  }else{uint32_t second_length=*(volatile uint8_t *)(link+444u),second=*(volatile uint8_t *)(link+481u);
+   uint32_t first_length=*(volatile uint8_t *)(link+448u),first=*(volatile uint8_t *)(link+480u);
+   uint32_t time=opencfw_em9305_config_link_time_3185e8(first,second,first_length,second_length);
+   *(volatile uint32_t *)(link+508u)=time;*(volatile uint32_t *)(link+408u)=time;
+  }
+  offset+=10u;++index;
+ }
+ for(;;){uint32_t changed=0u;uintptr_t first_link=*(volatile uint32_t *)(channel+88u);
+  if(*(volatile uint8_t *)(input+13u)==1u){
+   uint32_t t=*(volatile uint32_t *)(first_link+508u),multiplier=*(volatile uint8_t *)(first_link+504u);
+   uint32_t interval=*(volatile uint16_t *)(first_link+500u);
+   uint32_t baseline=opencfw_em9305_config_update_mpywhl(t,multiplier);
+   *(volatile uint16_t *)(channel+20u)=(uint16_t)interval;
+   *(volatile uint32_t *)(first_link+20u)=baseline;*(volatile uint32_t *)(first_link+16u)=baseline;
+   *(volatile uint32_t *)(channel+12u)=baseline;
+   for(uint32_t i=1u;i<count;++i){uintptr_t rows=*(volatile uint32_t *)(input+24u);uint32_t id=*(volatile uint8_t *)input;
+    uintptr_t link=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+opencfw_em9305_config_basic_stride(i)));
+    uint32_t sum=0u,pos=0u;
+    for(uint32_t j=0u;j<i;++j){rows=*(volatile uint32_t *)(input+24u);id=*(volatile uint8_t *)input;
+     uintptr_t other=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+pos));
+     uint32_t first_length=*(volatile uint8_t *)(other+448u),second=*(volatile uint8_t *)(other+481u);
+     uint32_t first=*(volatile uint8_t *)(other+480u),second_length=*(volatile uint8_t *)(other+444u);
+     sum+=opencfw_em9305_config_link_time_3185e8(first,second,first_length,second_length);pos+=10u;
+    }
+    uint32_t baseline_now=*(volatile uint32_t *)(first_link+16u);count=*(volatile uint8_t *)(input+20u);
+    *(volatile uint32_t *)(link+16u)=baseline_now-sum;
+    *(volatile uint32_t *)(link+20u)=*(volatile uint32_t *)(first_link+16u);
+   }
+  }else{uint32_t sum=0u;uintptr_t link=first_link;
+   for(;;){uint32_t time=*(volatile uint32_t *)(link+508u),multiplier=*(volatile uint8_t *)(link+504u);
+    sum=opencfw_em9305_config_update_macwhl(sum,time,multiplier);
+    if(link!=first_link)break;
+    link=*(volatile uint32_t *)(channel+92u);if(!link)break;
+   }
+   link=first_link;
+   for(;;){*(volatile uint32_t *)(link+16u)=sum;
+    uint32_t baseline=*(volatile uint32_t *)(first_link+16u);*(volatile uint32_t *)(link+20u)=baseline;
+    if(link!=first_link)break;
+    link=*(volatile uint32_t *)(channel+92u);if(!link)break;
+   }
+   uint32_t baseline=*(volatile uint32_t *)(first_link+16u),interval=*(volatile uint16_t *)(first_link+500u);
+   *(volatile uint32_t *)(channel+12u)=baseline;*(volatile uint16_t *)(channel+20u)=(uint16_t)interval;
+  }
+  if(!count)break;
+  uint32_t i=0u,pos=0u;
+  do{uintptr_t rows=*(volatile uint32_t *)(input+24u);uint32_t id=*(volatile uint8_t *)input;
+   uintptr_t link=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+pos));
+   uint32_t a=*(volatile uint8_t *)(link+502u);
+   uint32_t first_limit=opencfw_em9305_config_basic_limit_31855c(link,input,1u);
+   uint32_t b=*(volatile uint8_t *)(link+503u);if(a>first_limit)a=first_limit;
+   /* Exact native R7 captures first limit return, and becomes second call R0. */
+   uint32_t second_limit=opencfw_em9305_config_basic_limit_31855c((uintptr_t)first_limit,input,0u);
+   *(volatile uint8_t *)(link+502u)=(uint8_t)a;
+   if(b>second_limit)b=second_limit;
+   *(volatile uint8_t *)(link+503u)=(uint8_t)b;
+   if(a==0u||b==0u)goto finish;
+   count=*(volatile uint8_t *)(input+20u);++i;pos+=10u;
+  }while(i<count);
+  if(!count)break;
+  uintptr_t rows=*(volatile uint32_t *)(input+24u);i=0u;
+  do{uint32_t offset_now=opencfw_em9305_config_basic_stride(i),id=*(volatile uint8_t *)input;
+   uintptr_t link=opencfw_em9305_config_link_find_31abc0(id,*(volatile uint8_t *)(rows+offset_now));
+   rows=*(volatile uint32_t *)(input+24u);uintptr_t row=rows+offset_now;
+   uint32_t a=*(volatile uint8_t *)(link+512u),b=*(volatile uint8_t *)(link+513u);
+   uint32_t limit_b=*(volatile uint8_t *)(link+503u),limit_a=*(volatile uint8_t *)(link+502u);
+   uint32_t row_b=*(volatile uint8_t *)(row+9u),row_a=*(volatile uint8_t *)(row+8u);
+   uint32_t rounded=opencfw_em9305_config_basic_rounding_317efc(a>b?a:b,row_a>row_b?row_a:row_b,limit_a<limit_b?limit_a:limit_b);
+   if(*(volatile uint8_t *)(link+504u)!=rounded){changed=1u;*(volatile uint8_t *)(link+504u)=(uint8_t)rounded;}
+   count=*(volatile uint8_t *)(input+20u);++i;
+  }while(i<count);
+  if(!changed)break;
+ }
+finish:
+ *(volatile uint8_t *)(channel+2u)=*(volatile uint8_t *)(input+13u);
+ uint32_t ready=opencfw_em9305_config_channel_ready_3186a0(channel);
+ *(volatile uint8_t *)(channel+22u)=(uint8_t)ready;
+ return ready;
+}
+
+static const uint8_t opencfw_em9305_config_phy_values_33449d[7]={2u,1u,3u,1u,1u,1u,4u};
+static inline uint32_t opencfw_em9305_config_extended_slot_stride(uint32_t i)
+{uint32_t r;__asm__ volatile("mpyuw %0,%1,912":"=r"(r):"r"(i));return r;}
+/* Native3272d8..32739c: full extended link projection, PHY mapping, seed and slot metadata. */
+void opencfw_em9305_config_extended_link_update_3272d8(uintptr_t link,uintptr_t input,uintptr_t row)
+{
+ uint32_t policy=*(volatile uint16_t *)(input+16u);
+ *(volatile uint16_t *)(link+482u)=(uint16_t)policy;
+ uint32_t modeword=*(volatile uint32_t *)(input+12u);
+ *(volatile uint32_t *)(link+500u)=(modeword>>16u)|(modeword<<16u);
+ uint32_t mode=*(volatile uint8_t *)(input+18u),multiplier=*(volatile uint8_t *)(row+1u);
+ *(volatile uint8_t *)(link+484u)=(uint8_t)mode;
+ *(volatile uint8_t *)(link+504u)=(uint8_t)multiplier;
+ uint32_t first_length=*(volatile uint16_t *)(row+2u),second_length=*(volatile uint16_t *)(row+4u);
+ uint32_t id=*(volatile uint8_t *)row;
+ *(volatile uint16_t *)(link+486u)=(uint16_t)first_length;
+ *(volatile uint16_t *)(link+488u)=(uint16_t)second_length;
+ uint32_t first_time=*(volatile uint32_t *)(input+4u),second_time=*(volatile uint32_t *)(input+8u);
+ uint32_t first_phy=*(volatile uint8_t *)(row+10u);
+ *(volatile uint8_t *)(link+12u)=(uint8_t)id;
+ *(volatile uint32_t *)(link+492u)=first_time;
+ *(volatile uint32_t *)(link+496u)=second_time;
+ uint32_t mapped=opencfw_em9305_radio_phy_project_3183d4(first_phy)-2u;
+ uint32_t value=1u;if((uint8_t)mapped<=6u)value=opencfw_em9305_config_phy_values_33449d[(int8_t)mapped];
+ uint32_t second_phy=*(volatile uint8_t *)(row+11u);
+ *(volatile uint8_t *)(link+480u)=(uint8_t)value;
+ mapped=opencfw_em9305_radio_phy_project_3183d4(second_phy)-2u;
+ value=1u;if((uint8_t)mapped<7u)value=opencfw_em9305_config_phy_values_33449d[(int8_t)mapped];
+ *(volatile uint8_t *)(link+481u)=(uint8_t)value;
+ uint32_t retries=*(volatile uint16_t *)(row+12u);
+ *(volatile uint16_t *)(link+512u)=(uint16_t)retries;
+ uint32_t seed=opencfw_em9305_radio_access_raw_318878();
+ uint32_t slot=*(volatile uint16_t *)(link+6u);
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uint32_t offset=opencfw_em9305_config_extended_slot_stride(slot);
+ *(volatile uint32_t *)(link+372u)=seed;
+ uint32_t a=*(volatile uint16_t *)(row+6u),b=*(volatile uint16_t *)(row+8u);
+ uint32_t metadata=*(volatile uint32_t *)(base+offset+324u);
+ uint32_t kind=*(volatile uint16_t *)(base+offset+382u);
+ *(volatile uint16_t *)(link+448u)=(uint16_t)a;
+ *(volatile uint16_t *)(link+444u)=(uint16_t)b;
+ *(volatile uint32_t *)(link+376u)=metadata;
+ *(volatile uint16_t *)(link+468u)=(uint16_t)kind;
+}
+
+/* Native326f2a..326f4c: original wide accumulator shift retained for full/limited DSP configurations.
+ * Argument is the already-selected maximum time; return is native ceil interval R4. */
+extern uint32_t opencfw_em9305_config_link_interval_326f2a(uint32_t);
+__asm__(
+".text\n"
+".align 2\n"
+".global opencfw_em9305_config_link_interval_326f2a\n"
+".type opencfw_em9305_config_link_interval_326f2a,@function\n"
+"opencfw_em9305_config_link_interval_326f2a:\n"
+"mpydu 0,r0,0x1a36e3\n"
+"mov r4,225\n"
+"aslacc r4\n"
+"mov r8,1250\n"
+"mov r4,r58\n"
+"mpywhul r12,r8,r58\n"
+"cmp_s r12,r0\n"
+"add.c r4,r4,1\n"
+"j_s.d [blink]\n"
+"mov_s r0,r4\n"
+".size opencfw_em9305_config_link_interval_326f2a,.-opencfw_em9305_config_link_interval_326f2a\n"
+);
+static inline uint32_t opencfw_em9305_config_link_mpywhul(uint32_t a,uint32_t b)
+{uint32_t r;__asm__ volatile("mpywhul %0,%1,%2":"=r"(r):"r"(a),"r"(b));return r;}
+static inline uint32_t opencfw_em9305_config_link_divu_prior(uint32_t a,uint32_t b,uint32_t prior)
+{__asm__ volatile("divu %0,%1,%2":"+r"(prior):"r"(a),"r"(b));return prior;}
+
+static inline uint32_t opencfw_em9305_config_link_has_remainder(uint32_t a,uint32_t b)
+{uint32_t r;__asm__ volatile("remu.f 0,%1,%2\n\tmov.eq %0,0\n\tmov.ne %0,1":"=r"(r):"r"(a),"r"(b):"cc");return r;}
+static uint32_t opencfw_em9305_config_link_policy_quotient(uintptr_t input,uintptr_t link,uint32_t off)
+{return opencfw_em9305_radio_unsigned_divide_30c3a4(opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(input+off),1000u),opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(link+500u),1250u));}
+static uint32_t opencfw_em9305_config_link_cap46(void)
+{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;return *(volatile uint16_t *)(config+46u);}
+static uint32_t opencfw_em9305_config_link_cap56(void)
+{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;return *(volatile uint8_t *)(config+56u);}
+static uint32_t opencfw_em9305_config_link_phy(uint32_t value)
+{uint32_t i=opencfw_em9305_radio_phy_project_3183d4(value)-2u;return (uint8_t)i<7u?opencfw_em9305_config_phy_values_33449d[(int8_t)i]:1u;}
+/* Native 30c40c tail enters 30c3a4. Capture authentic R3 for the
+ * later DIVU destination-preservation path at 3271be. Not an ABI return. */
+static uint32_t opencfw_em9305_config_link_timing_r3(uint32_t length,uint32_t unit,uint32_t prior)
+{
+ uint32_t n=length+unit-1u;
+ if(n<unit)return prior;
+ uint32_t high=0u,low=unit,mask=1u,r3;
+ do {
+  high=(high<<1)|(low>>31);low<<=1;
+  r3=n>=low;
+  mask<<=1;
+  __asm__ volatile("" ::: "memory");
+ }while(high==0u && r3);
+ if(mask==0u)return r3;
+ for(;;){
+  r3=high>>1;
+  uint32_t old_mask=mask;
+  high=r3;mask>>=1;
+  if(old_mask<=3u)return r3;
+ }
+}
+
+/* Native326ed8..3272d8: complete basic link projection and distinct flagged/unflagged arithmetic paths. */
+void opencfw_em9305_config_link_update_326ed8(uintptr_t link,uintptr_t input,uintptr_t row)
+{
+ *(volatile uint8_t *)(link+12u)=*(volatile uint8_t *)row;
+ *(volatile uint16_t *)(link+482u)=*(volatile uint16_t *)(input+12u);
+ uint32_t first_time=*(volatile uint32_t *)(input+4u),mode=*(volatile uint8_t *)(input+14u);
+ *(volatile uint8_t *)(link+484u)=(uint8_t)mode;
+ if(first_time<=1250u){first_time=1250u;*(volatile uint32_t *)(input+4u)=first_time;}
+ uint32_t second_time=*(volatile uint32_t *)(input+8u);
+ if(second_time<=1250u){second_time=1250u;*(volatile uint32_t *)(input+8u)=second_time;}
+ uint32_t minimum=first_time<second_time?first_time:second_time;
+ uint32_t maximum=minimum>5000u?minimum:5000u;
+ uint32_t interval=opencfw_em9305_config_link_interval_326f2a(maximum);
+ *(volatile uint16_t *)(link+500u)=(uint16_t)interval;
+ if(mode==0u){uint32_t period=opencfw_em9305_config_link_mpywhul(1250u,interval);
+  if(opencfw_em9305_config_link_has_remainder(minimum,period)){mode=1u;*(volatile uint8_t *)(link+484u)=1u;}
+ }
+ uint32_t first_length=*(volatile uint16_t *)(row+2u);
+ *(volatile uint32_t *)(link+496u)=second_time;*(volatile uint32_t *)(link+492u)=first_time;
+ if(mode){uint32_t a=0u,b=0u;
+  if(first_length){uint32_t cap=opencfw_em9305_config_link_cap46();a=first_length+5u;if(a>cap)a=cap;}
+  *(volatile uint16_t *)(link+448u)=(uint16_t)a;
+  uint32_t second_length=*(volatile uint16_t *)(row+4u);
+  if(second_length){uint32_t cap=opencfw_em9305_config_link_cap46();b=second_length+5u;if(b>cap)b=cap;}
+  uint32_t phy=*(volatile uint8_t *)(row+6u);
+  *(volatile uint16_t *)(link+488u)=(uint16_t)second_length;*(volatile uint16_t *)(link+444u)=(uint16_t)b;
+  *(volatile uint16_t *)(link+486u)=(uint16_t)first_length;
+  uint32_t first_phy=opencfw_em9305_config_link_phy(phy),second_phy=*(volatile uint8_t *)(row+7u);
+  *(volatile uint8_t *)(link+480u)=(uint8_t)first_phy;
+  *(volatile uint8_t *)(link+481u)=(uint8_t)opencfw_em9305_config_link_phy(second_phy);
+ }else{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uint32_t second_length=*(volatile uint16_t *)(row+4u);
+  *(volatile uint16_t *)(link+486u)=(uint16_t)first_length;
+  uint32_t cap=*(volatile uint16_t *)(config+46u),phy=*(volatile uint8_t *)(row+6u);
+  *(volatile uint16_t *)(link+488u)=(uint16_t)second_length;
+  *(volatile uint16_t *)(link+448u)=(uint16_t)(first_length<cap?first_length:cap);
+  *(volatile uint16_t *)(link+444u)=(uint16_t)(second_length<cap?second_length:cap);
+  uint32_t first_phy=opencfw_em9305_config_link_phy(phy),second_phy=*(volatile uint8_t *)(row+7u);
+  *(volatile uint8_t *)(link+480u)=(uint8_t)first_phy;
+  *(volatile uint8_t *)(link+481u)=(uint8_t)opencfw_em9305_config_link_phy(second_phy);
+ }
+ uint32_t cap=opencfw_em9305_config_link_cap56();
+ uint32_t limit_a=opencfw_em9305_config_link_policy_quotient(input,link,16u);
+ uint32_t cap_b;
+ if(cap>=limit_a){limit_a=opencfw_em9305_config_link_policy_quotient(input,link,16u);cap_b=opencfw_em9305_config_link_cap56();}
+ else{cap_b=opencfw_em9305_config_link_cap56();limit_a=cap_b;}
+ uint32_t first_budget=opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(input+18u),1000u);
+ uint32_t period=opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(link+500u),1250u);
+ *(volatile uint8_t *)(link+502u)=(uint8_t)limit_a;
+ uint32_t limit_b=opencfw_em9305_radio_unsigned_divide_30c3a4(first_budget,period);
+ if(cap_b>=limit_b)limit_b=opencfw_em9305_config_link_policy_quotient(input,link,18u);
+ else limit_b=opencfw_em9305_config_link_cap56();
+ *(volatile uint8_t *)(link+503u)=(uint8_t)limit_b;
+ if(mode){
+  uint32_t len_a=*(volatile uint16_t *)(row+2u),den_a=1u,den_b=1u,prior;
+  if(len_a){uint32_t c=opencfw_em9305_config_link_cap46();den_a=*(volatile uint16_t *)(link+486u)+5u;if(den_a>c)den_a=c;den_a&=255u;}
+  uint32_t len_b=*(volatile uint16_t *)(row+4u);
+  prior=len_b;
+  if(len_b){uint32_t c=opencfw_em9305_config_link_cap46();prior=*(volatile uint16_t *)(link+488u)+5u;den_b=prior<c?prior:c;den_b&=255u;}
+  uint32_t stored_a=*(volatile uint16_t *)(link+486u),q_a=0u,reproduced=den_a;
+  if(stored_a){q_a=opencfw_em9305_config_link_divu_prior(stored_a,den_a,prior);reproduced=opencfw_em9305_config_update_mpywhl(q_a,den_a);if(reproduced<stored_a)++q_a;}
+  *(volatile uint8_t *)(link+512u)=(uint8_t)q_a;
+  uint32_t stored_b=*(volatile uint16_t *)(link+488u),q_b=0u;
+  if(stored_b){q_b=opencfw_em9305_config_link_divu_prior(stored_b,den_b,reproduced);uint32_t product=opencfw_em9305_config_update_mpywhl(q_b,den_b);if(product<stored_b)++q_b;}
+  *(volatile uint8_t *)(link+513u)=(uint8_t)q_b;
+  uint32_t row_b=*(volatile uint8_t *)(row+9u),row_a=*(volatile uint8_t *)(row+8u);
+  uint32_t fresh_limit=*(volatile uint8_t *)(link+502u);
+  uint32_t rounded=opencfw_em9305_config_basic_rounding_317efc((q_a&255u)>(q_b&255u)?q_a&255u:q_b&255u,row_a>row_b?row_a:row_b,fresh_limit>(limit_b&255u)?fresh_limit:limit_b&255u);
+  uint32_t fresh_interval=*(volatile uint16_t *)(link+500u),fresh_time=*(volatile uint32_t *)(input+4u);
+  uint32_t large=opencfw_em9305_config_link_mpywhul(0xbec102u,fresh_interval);
+  uint32_t scaled=opencfw_em9305_config_update_mpywhl(fresh_time,10000u);
+  uint32_t small=opencfw_em9305_config_link_mpywhul(large,len_a);
+  uint32_t round_first=(q_a&255u)>(q_b&255u)?q_a&255u:q_b&255u;
+  uint32_t round_second=row_a>row_b?row_a:row_b;
+  uint32_t round_numerator=opencfw_em9305_config_round_mpyuw(round_first,round_second+1u)&255u;
+  uint32_t large_q=opencfw_em9305_config_link_divu_prior(large,scaled,row_b),small_q=opencfw_em9305_config_link_divu_prior(small,scaled,round_numerator);
+  *(volatile uint8_t *)(link+504u)=(uint8_t)rounded;
+  large_q+=large!=large_q*scaled;small_q+=small!=small_q*scaled;
+  uint32_t native_r3=opencfw_em9305_config_link_timing_r3(large_q*5u+small_q,q_a&255u,small_q);
+  uint32_t size_a=opencfw_em9305_radio_record_timing_30c40c(large_q*5u+small_q,q_a&255u);
+  fresh_time=*(volatile uint32_t *)(input+8u);len_b=*(volatile uint16_t *)(row+4u);
+  scaled=opencfw_em9305_config_update_mpywhl(fresh_time,10000u);
+  small=opencfw_em9305_config_link_mpywhul(large,len_b);
+  large_q=opencfw_em9305_config_link_divu_prior(large,scaled,native_r3);small_q=opencfw_em9305_config_link_divu_prior(small,scaled,len_b);
+  large_q+=large!=large_q*scaled;small_q+=small!=small_q*scaled;
+  uint32_t size_b=opencfw_em9305_radio_record_timing_30c40c(large_q*5u+small_q,*(volatile uint8_t *)(link+513u));
+  uint32_t a=0u,b=0u;
+  if(*(volatile uint16_t *)(row+2u)){uint32_t c=opencfw_em9305_config_link_cap46();a=size_a+2u;if(a>c)a=c;}
+  *(volatile uint16_t *)(link+448u)=(uint16_t)a;
+  if(*(volatile uint16_t *)(row+4u)){uint32_t c=opencfw_em9305_config_link_cap46();b=size_b+2u;if(b>c)b=c;}
+  *(volatile uint16_t *)(link+444u)=(uint16_t)b;
+ }else{
+  uint32_t den_a=*(volatile uint16_t *)(link+448u),q_a=0u;
+  if(den_a){uint32_t n=*(volatile uint16_t *)(link+486u);q_a=opencfw_em9305_config_link_divu_prior(n,den_a,(uint32_t)input);uint32_t product=opencfw_em9305_config_link_mpywhul(q_a,den_a);if((int32_t)product<(int32_t)n)++q_a;}
+  *(volatile uint8_t *)(link+512u)=(uint8_t)q_a;
+  uint32_t den_b=*(volatile uint16_t *)(link+444u),q_b=0u;
+  if(den_b){uint32_t n=*(volatile uint16_t *)(link+488u);q_b=opencfw_em9305_config_link_divu_prior(n,den_b,0u);uint32_t product=opencfw_em9305_config_link_mpywhul(q_b,den_b);if((int32_t)product<(int32_t)n)++q_b;}
+  *(volatile uint8_t *)(link+513u)=(uint8_t)q_b;
+  uint32_t row_b=*(volatile uint8_t *)(row+9u),row_a=*(volatile uint8_t *)(row+8u),fresh_limit=*(volatile uint8_t *)(link+502u);
+  *(volatile uint8_t *)(link+504u)=(uint8_t)opencfw_em9305_config_basic_rounding_317efc((q_a&255u)>(q_b&255u)?q_a&255u:q_b&255u,row_a>row_b?row_a:row_b,fresh_limit<(limit_b&255u)?fresh_limit:limit_b&255u);
+ }
+}
+
+extern void opencfw_em9305_native_stack_check_302820(void);
+__asm__(
+".text\n.balign 4\n.global opencfw_em9305_native_stack_check_302820\n"
+".type opencfw_em9305_native_stack_check_302820,@function\n"
+"opencfw_em9305_native_stack_check_302820:\n"
+"push_s r12\nmov r12,0x80e978\n"
+"brlo.nt sp,r12,.Lcfw_stack_bad_302820\n"
+"mov r12,0x80f978\n"
+"brlo.nt r12,sp,.Lcfw_stack_bad_302820\n"
+"pop_s r12\nj [blink]\n.balign 4\n.Lcfw_stack_bad_302820:\nbrk_s\n"
+".size opencfw_em9305_native_stack_check_302820,.-opencfw_em9305_native_stack_check_302820\n");
+extern uint32_t opencfw_em9305_command_records_apply_30dc48(uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_struct_decode_332abc(uintptr_t,uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_struct_apply_30b974(uintptr_t,uintptr_t,uintptr_t);
+/* Native32e4c4..32e5a8: packed record command, structured command and existing fallback. */
+uint32_t opencfw_em9305_dispatch_32e4c4(uintptr_t request,uintptr_t input)
+{
+ uint32_t command=*(volatile uint16_t *)request;
+ if(command==0x2082u){uint32_t count=*(volatile uint8_t *)(input+1u),id=*(volatile uint8_t *)input;
+  uintptr_t records=(uintptr_t)__builtin_alloca((3u+count*8u)&2040u);
+  opencfw_em9305_native_stack_check_302820();
+  uintptr_t row=input+2u;
+  for(uint32_t i=0u;i<count;++i){
+   uint32_t size=*(volatile uint8_t *)(row+3u),a=*(volatile uint8_t *)row,b=*(volatile uint8_t *)(row+1u),c=*(volatile uint8_t *)(row+2u);
+   uintptr_t data=row+4u;row+=size+4u;
+   uintptr_t out=records+i*8u;*(volatile uint32_t *)(out+4u)=(uint32_t)data;
+   *(volatile uint8_t *)out=(uint8_t)a;*(volatile uint8_t *)(out+1u)=(uint8_t)b;
+   *(volatile uint8_t *)(out+2u)=(uint8_t)c;*(volatile uint8_t *)(out+3u)=(uint8_t)size;
+  }
+  uint32_t status=opencfw_em9305_command_records_apply_30dc48(id,count,records);
+  uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(2u,*(volatile uint16_t *)request);
+  if(response){*(volatile uint8_t *)response=(uint8_t)status;
+   if(*(volatile uint16_t *)request==0x2082u)*(volatile uint8_t *)(response+1u)=(uint8_t)id;
+   (void)opencfw_em9305_ll_event_send(response-5u);
+  }
+  return 1u;
+ }
+ if(command==0x2085u){uint8_t scratch[60] __attribute__((aligned(4)));
+  uintptr_t base=(uintptr_t)scratch;
+  (void)opencfw_em9305_memset(scratch,0u,36u);
+  opencfw_em9305_command_struct_decode_332abc(base+48u,base+36u,base,input);
+  uint32_t status=opencfw_em9305_command_struct_apply_30b974(base+48u,base+36u,base);
+  (void)opencfw_em9305_ll_status_event_331bf8(request,status);return 1u;
+ }
+ return opencfw_em9305_dispatch_331204(request,input);
+}
+
+extern uint32_t opencfw_em9305_command_records_commit_3096a8(uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_struct_commit_306cec(uintptr_t,uintptr_t);
+/* Native30dc48..30dc6e: gate precedes ID validity; preserve captured arguments. */
+uint32_t opencfw_em9305_command_records_apply_30dc48(uint32_t id,uint32_t count,uintptr_t records)
+{
+ if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
+ if(id>239u)return 18u;
+ return opencfw_em9305_command_records_commit_3096a8(id,count,records);
+}
+/* Native332abc..332b60: header projection and either one or packed controls. */
+uint32_t opencfw_em9305_command_struct_decode_332abc(uintptr_t header,uintptr_t pairs,uintptr_t controls,uintptr_t input)
+{
+ uint32_t first=*(volatile uint8_t *)input;
+ *(volatile uint8_t *)(header+9u)=(uint8_t)first;
+ uint32_t second=*(volatile uint8_t *)(input+1u);
+ *(volatile uint8_t *)(header+10u)=(uint8_t)second;
+ *(volatile uint8_t *)header=*(volatile uint8_t *)(input+2u);
+ *(volatile uint8_t *)(header+1u)=*(volatile uint8_t *)(input+3u);
+ uint32_t kind=*(volatile uint8_t *)(input+4u);
+ *(volatile uint32_t *)(header+4u)=(uint32_t)(input+5u);
+ *(volatile uint8_t *)(header+2u)=(uint8_t)kind;
+ *(volatile uint8_t *)(header+8u)=*(volatile uint8_t *)(input+11u);
+ uintptr_t cursor=input+12u;
+ if(first!=255u&&second!=255u){
+  uint32_t high=*(volatile uint8_t *)(input+13u),low=*(volatile uint8_t *)(input+12u);
+  *(volatile uint16_t *)pairs=(uint16_t)((high<<8)+low);
+  high=*(volatile uint8_t *)(input+15u);low=*(volatile uint8_t *)(input+14u);
+  *(volatile uint16_t *)(pairs+2u)=(uint16_t)((high<<8)+low);
+  cursor=input+16u+opencfw_em9305_ll_stream_control_decode_332a78(controls,input+16u);
+ }else{
+  uint32_t packed=0u;
+  for(uint32_t bit=0u;bit<8u&&packed<3u;++bit){
+   uint32_t mask=*(volatile uint8_t *)(header+8u);
+   if((mask&(1u<<bit))==0u)continue;
+   uintptr_t pair=pairs+packed*4u;
+   uint32_t high=*(volatile uint8_t *)(cursor+1u),low=*(volatile uint8_t *)cursor;
+   *(volatile uint16_t *)pair=(uint16_t)((high<<8)+low);
+   high=*(volatile uint8_t *)(cursor+3u);low=*(volatile uint8_t *)(cursor+2u);
+   *(volatile uint16_t *)(pair+2u)=(uint16_t)((high<<8)+low);
+   uint32_t size=opencfw_em9305_ll_stream_control_decode_332a78(controls+packed*12u,cursor+4u);
+   cursor+=size+4u;++packed;
+  }
+ }
+ return (uint8_t)(cursor-input);
+}
+/* Native30b974..30b9ee: guarded single command or existing packed stream path. */
+uint32_t opencfw_em9305_command_struct_apply_30b974(uintptr_t header,uintptr_t pairs,uintptr_t controls)
+{
+ uint32_t id=*(volatile uint8_t *)(header+9u);
+ if(id==255u)return opencfw_em9305_ll_stream_command_30b7ec(header,pairs,controls);
+ uint32_t stream=*(volatile uint8_t *)(header+10u);
+ if(stream==255u)return opencfw_em9305_ll_stream_command_30b7ec(header,pairs,controls);
+ if(id>239u)return 66u;
+ if(stream>=16u)return 18u;
+ uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();
+ uint32_t busy=*(volatile uint8_t *)(uintptr_t)0x805a74u;
+ if(busy!=0u||gate==0u)return 12u;
+ if(opencfw_em9305_ll_stream_header_valid_332f04(header)==0u)return 18u;
+ if(opencfw_em9305_ll_stream_control_valid_332f00(controls)!=0u)return 18u;
+ uint64_t address=opencfw_em9305_controller_pack_address(*(volatile uint32_t *)(header+4u));
+ if(opencfw_em9305_ll_stream_address_busy_318200(*(volatile uint8_t *)(header+2u),(uint32_t)address,(uint32_t)(address>>32u))!=0u)return 11u;
+ return opencfw_em9305_command_struct_commit_306cec(header,controls);
+}
+
+/* Native306cec..306d7c: single-stream projection, fresh record reloads,
+ * sparse event275 and nonfatal allocation failure. */
+uint32_t opencfw_em9305_command_struct_commit_306cec(uintptr_t header,uintptr_t controls)
+{
+ uintptr_t record=opencfw_em9305_radio_record_find_31aa64(*(volatile uint8_t *)(header+9u));
+ if(record==0u)return 66u;
+ uintptr_t pointer=record+0xafcu;
+ uintptr_t target=*(volatile uint32_t *)pointer;
+ (void)opencfw_em9305_memcpy((void *)(target+82u),(const void *)controls,12u);
+ target=*(volatile uint32_t *)pointer;
+ uint32_t kind=*(volatile uint8_t *)(header+1u),address_kind=*(volatile uint8_t *)(header+2u);
+ uintptr_t address=*(volatile uint32_t *)(header+4u);
+ *(volatile uint8_t *)(target+65u)=(uint8_t)kind;
+ *(volatile uint8_t *)(target+66u)=(uint8_t)address_kind;
+ uint64_t packed=opencfw_em9305_controller_pack_address(address);
+ target=*(volatile uint32_t *)pointer;
+ uint32_t stream=*(volatile uint8_t *)(header+10u);
+ *(volatile uint8_t *)(record+0x8d5u)=1u;
+ *(volatile uint32_t *)(target+68u)=(uint32_t)packed;
+ *(volatile uint32_t *)(target+72u)=(uint32_t)(packed>>32u);
+ *(volatile uint8_t *)(target+76u)=(uint8_t)stream;
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(20u);
+ if(message==0u)return 0u;
+ *(volatile uint16_t *)(message+2u)=275u;
+ uint32_t id=*(volatile uint8_t *)(header+9u);
+ kind=*(volatile uint8_t *)(header+1u);address_kind=*(volatile uint8_t *)(header+2u);
+ *(volatile uint16_t *)message=(uint16_t)id;
+ address=*(volatile uint32_t *)(header+4u);
+ *(volatile uint8_t *)(message+5u)=(uint8_t)kind;
+ *(volatile uint8_t *)(message+6u)=(uint8_t)address_kind;
+ packed=opencfw_em9305_controller_pack_address(address);
+ *(volatile uint32_t *)(message+8u)=(uint32_t)packed;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint32_t *)(message+12u)=(uint32_t)(packed>>32u);
+ (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ return 0u;
+}
+
+/* Authenticated 334550..334950 CRC table, stock image SHA 0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03. */
+static const uint32_t opencfw_em9305_crc_table_334550[256]={
+ 0x00000000u,0x77073096u,0xee0e612cu,0x990951bau,0x076dc419u,0x706af48fu,0xe963a535u,0x9e6495a3u,
+ 0x0edb8832u,0x79dcb8a4u,0xe0d5e91eu,0x97d2d988u,0x09b64c2bu,0x7eb17cbdu,0xe7b82d07u,0x90bf1d91u,
+ 0x1db71064u,0x6ab020f2u,0xf3b97148u,0x84be41deu,0x1adad47du,0x6ddde4ebu,0xf4d4b551u,0x83d385c7u,
+ 0x136c9856u,0x646ba8c0u,0xfd62f97au,0x8a65c9ecu,0x14015c4fu,0x63066cd9u,0xfa0f3d63u,0x8d080df5u,
+ 0x3b6e20c8u,0x4c69105eu,0xd56041e4u,0xa2677172u,0x3c03e4d1u,0x4b04d447u,0xd20d85fdu,0xa50ab56bu,
+ 0x35b5a8fau,0x42b2986cu,0xdbbbc9d6u,0xacbcf940u,0x32d86ce3u,0x45df5c75u,0xdcd60dcfu,0xabd13d59u,
+ 0x26d930acu,0x51de003au,0xc8d75180u,0xbfd06116u,0x21b4f4b5u,0x56b3c423u,0xcfba9599u,0xb8bda50fu,
+ 0x2802b89eu,0x5f058808u,0xc60cd9b2u,0xb10be924u,0x2f6f7c87u,0x58684c11u,0xc1611dabu,0xb6662d3du,
+ 0x76dc4190u,0x01db7106u,0x98d220bcu,0xefd5102au,0x71b18589u,0x06b6b51fu,0x9fbfe4a5u,0xe8b8d433u,
+ 0x7807c9a2u,0x0f00f934u,0x9609a88eu,0xe10e9818u,0x7f6a0dbbu,0x086d3d2du,0x91646c97u,0xe6635c01u,
+ 0x6b6b51f4u,0x1c6c6162u,0x856530d8u,0xf262004eu,0x6c0695edu,0x1b01a57bu,0x8208f4c1u,0xf50fc457u,
+ 0x65b0d9c6u,0x12b7e950u,0x8bbeb8eau,0xfcb9887cu,0x62dd1ddfu,0x15da2d49u,0x8cd37cf3u,0xfbd44c65u,
+ 0x4db26158u,0x3ab551ceu,0xa3bc0074u,0xd4bb30e2u,0x4adfa541u,0x3dd895d7u,0xa4d1c46du,0xd3d6f4fbu,
+ 0x4369e96au,0x346ed9fcu,0xad678846u,0xda60b8d0u,0x44042d73u,0x33031de5u,0xaa0a4c5fu,0xdd0d7cc9u,
+ 0x5005713cu,0x270241aau,0xbe0b1010u,0xc90c2086u,0x5768b525u,0x206f85b3u,0xb966d409u,0xce61e49fu,
+ 0x5edef90eu,0x29d9c998u,0xb0d09822u,0xc7d7a8b4u,0x59b33d17u,0x2eb40d81u,0xb7bd5c3bu,0xc0ba6cadu,
+ 0xedb88320u,0x9abfb3b6u,0x03b6e20cu,0x74b1d29au,0xead54739u,0x9dd277afu,0x04db2615u,0x73dc1683u,
+ 0xe3630b12u,0x94643b84u,0x0d6d6a3eu,0x7a6a5aa8u,0xe40ecf0bu,0x9309ff9du,0x0a00ae27u,0x7d079eb1u,
+ 0xf00f9344u,0x8708a3d2u,0x1e01f268u,0x6906c2feu,0xf762575du,0x806567cbu,0x196c3671u,0x6e6b06e7u,
+ 0xfed41b76u,0x89d32be0u,0x10da7a5au,0x67dd4accu,0xf9b9df6fu,0x8ebeeff9u,0x17b7be43u,0x60b08ed5u,
+ 0xd6d6a3e8u,0xa1d1937eu,0x38d8c2c4u,0x4fdff252u,0xd1bb67f1u,0xa6bc5767u,0x3fb506ddu,0x48b2364bu,
+ 0xd80d2bdau,0xaf0a1b4cu,0x36034af6u,0x41047a60u,0xdf60efc3u,0xa867df55u,0x316e8eefu,0x4669be79u,
+ 0xcb61b38cu,0xbc66831au,0x256fd2a0u,0x5268e236u,0xcc0c7795u,0xbb0b4703u,0x220216b9u,0x5505262fu,
+ 0xc5ba3bbeu,0xb2bd0b28u,0x2bb45a92u,0x5cb36a04u,0xc2d7ffa7u,0xb5d0cf31u,0x2cd99e8bu,0x5bdeae1du,
+ 0x9b64c2b0u,0xec63f226u,0x756aa39cu,0x026d930au,0x9c0906a9u,0xeb0e363fu,0x72076785u,0x05005713u,
+ 0x95bf4a82u,0xe2b87a14u,0x7bb12baeu,0x0cb61b38u,0x92d28e9bu,0xe5d5be0du,0x7cdcefb7u,0x0bdbdf21u,
+ 0x86d3d2d4u,0xf1d4e242u,0x68ddb3f8u,0x1fda836eu,0x81be16cdu,0xf6b9265bu,0x6fb077e1u,0x18b74777u,
+ 0x88085ae6u,0xff0f6a70u,0x66063bcau,0x11010b5cu,0x8f659effu,0xf862ae69u,0x616bffd3u,0x166ccf45u,
+ 0xa00ae278u,0xd70dd2eeu,0x4e048354u,0x3903b3c2u,0xa7672661u,0xd06016f7u,0x4969474du,0x3e6e77dbu,
+ 0xaed16a4au,0xd9d65adcu,0x40df0b66u,0x37d83bf0u,0xa9bcae53u,0xdebb9ec5u,0x47b2cf7fu,0x30b5ffe9u,
+ 0xbdbdf21cu,0xcabac28au,0x53b39330u,0x24b4a3a6u,0xbad03605u,0xcdd70693u,0x54de5729u,0x23d967bfu,
+ 0xb3667a2eu,0xc4614ab8u,0x5d681b02u,0x2a6f2b94u,0xb40bbe37u,0xc30c8ea1u,0x5a05df1bu,0x2d02ef8du,
+};
+/* Native304678..304698: ordered byte loads and complement of fullword state. */
+uint32_t opencfw_em9305_crc_update_304678(uint32_t state,uint32_t count,uintptr_t input)
+{
+ if(count!=0u)do{uint32_t byte=*(volatile uint8_t *)input++;uint32_t index=(uint8_t)state^byte;state=(state>>8)^opencfw_em9305_crc_table_334550[index];}while(--count!=0u);
+ return ~state;
+}
+
+/* Native3096a8..309874: complete validation, timing, free-slot allocation,
+ * partial writes and fresh post-child base loads. */
+uint32_t opencfw_em9305_command_records_commit_3096a8(uint32_t id,uint32_t count,uintptr_t rows)
+{
+ if(id>239u)return 18u;
+ uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);
+ if(record==0u)return 66u;
+ uintptr_t row_state=record+796u;
+ if(*(volatile uint8_t *)(record+718u)==0u)return 12u;
+ if(count-1u>=15u)return 18u;
+ for(uint32_t i=0u;i<count;++i){uintptr_t row=rows+i*8u;
+  if(*(volatile uint8_t *)(row+3u)>251u)return 18u;
+  uint32_t value=*(volatile uint8_t *)(row+1u),maximum=*(volatile uint8_t *)(row_state+2u);
+  if(maximum<value)return 18u;
+  uint32_t index=*(volatile uint8_t *)row;
+  if(index>=15u)return 18u;
+  uintptr_t configuration=*(volatile uint32_t *)(record+0xafcu);
+  uint32_t start=*(volatile uint8_t *)(configuration+78u),span=*(volatile uint8_t *)(configuration+79u);
+  if(start+span<=index||index<start)return 12u;
+  uint32_t current=*(volatile uint8_t *)(row_state+3u);
+  if(index<current)return 70u;
+  if(index==current&&*(volatile uint8_t *)(row_state-107u)!=0u)return 70u;
+ }
+ for(uint32_t i=0u;i<count;++i){
+  uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uint32_t spacing=*(volatile uint16_t *)(configuration+20u),live_spacing=*(volatile uint32_t *)(record+72u);
+  if(live_spacing>spacing)spacing=live_spacing;
+  uint32_t budget;
+  if(*(volatile uint8_t *)(row_state+2u)!=0u)budget=opencfw_em9305_config_limit_mpyuw(*(volatile uint8_t *)row_state,1250u);
+  else budget=*(volatile uint32_t *)(record+792u);
+  uint32_t timing=0u;
+  if(*(volatile uint8_t *)(row_state+8u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;if(callback)timing=((uint32_t(*)(uint32_t))callback)(*(volatile uint8_t *)(row_state+8u));}
+  uint32_t size=*(volatile uint8_t *)(rows+i*8u+3u),phy=*(volatile uint8_t *)(record+63u);
+  uint32_t needed=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,0u,2u,5u);
+  if(budget-150u<needed)return 69u;
+ }
+ uintptr_t base=*(volatile uint32_t *)(row_state+364u);
+ for(uint32_t i=0u;i<count;++i){
+  uint32_t high=*(volatile uint32_t *)(base+0xf08u),low=*(volatile uint32_t *)(base+0xf04u);
+  uintptr_t mask_pointer=base+0xf04u;
+  uint32_t free_index=255u;
+  for(uint32_t bit=0u;bit<15u;++bit)if((low&(1u<<bit))!=0u){free_index=bit;break;}
+  if(free_index==255u)return 7u;
+  uintptr_t row=rows+i*8u;
+  uint32_t index=*(volatile uint8_t *)row;
+  uintptr_t mapping=base+index+0xf0cu;
+  if(*(volatile uint8_t *)mapping!=255u)return 18u;
+  *(volatile uint8_t *)mapping=(uint8_t)free_index;
+  base=*(volatile uint32_t *)(row_state+364u);
+  uint32_t size=*(volatile uint8_t *)(row+3u);
+  low&=~(1u<<free_index);
+  uintptr_t slot=base+(free_index<<8);
+  uintptr_t source=*(volatile uint32_t *)(row+4u);
+  *(volatile uint32_t *)(mask_pointer+4u)=high;
+  *(volatile uint32_t *)mask_pointer=low;
+  *(volatile uint8_t *)(slot+1u)=(uint8_t)size;
+  (void)opencfw_em9305_memcpy((void *)(slot+4u),(const void *)source,size);
+  source=*(volatile uint32_t *)(row+4u);size=*(volatile uint8_t *)(row+3u);
+  uint32_t seed=opencfw_em9305_pal_random_step();
+  uint32_t checksum=opencfw_em9305_crc_update_304678(seed,size,source);
+  base=*(volatile uint32_t *)(row_state+364u);
+  uint32_t first=*(volatile uint8_t *)(row+1u),second=*(volatile uint8_t *)(row+2u);
+  slot=base+(free_index<<8);
+  *(volatile uint16_t *)(slot+2u)=(uint16_t)checksum;
+  *(volatile uint8_t *)slot=1u;
+  *(volatile uint8_t *)(base+0xf00u)=(uint8_t)first;
+  *(volatile uint8_t *)(base+0xf01u)=(uint8_t)second;
+ }
+ *(volatile uint8_t *)(record+1156u)=1u;
+ return 0u;
+}
+
+extern uint32_t opencfw_em9305_command_vendor_byte_30cee4(int32_t);
+extern void opencfw_em9305_command_product_version_303258(uintptr_t);
+extern uint32_t opencfw_em9305_command_advertising_parameters_30ce18(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_advertising_data_30cdd8(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_scan_response_30df98(uint32_t,uintptr_t);
+extern void opencfw_em9305_command_advertising_enable_30aff8(uint32_t);
+extern uint32_t opencfw_em9305_command_advertising_power_30bb50(uintptr_t);
+/* Native331f00..331f5c: vendor-byte status and 32-byte version command. */
+uint32_t opencfw_em9305_dispatch_331f00(uintptr_t request,uintptr_t input)
+{
+ uint32_t command=*(volatile uint16_t *)request;
+ if(command!=0xfffbu&&command!=0xfff5u)return 0u;
+ uint32_t size=33u,opcode=0xfffbu;
+ if(command==0xfff5u){(void)opencfw_em9305_command_vendor_byte_30cee4((int8_t)*(volatile uint8_t *)input);size=1u;opcode=*(volatile uint16_t *)request;}
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(size,opcode);
+ if(response==0u)return 1u;
+ *(volatile uint8_t *)response=0u;
+ uintptr_t cursor=response+1u;
+ if(*(volatile uint16_t *)request==0xfffbu){uint8_t version[32] __attribute__((aligned(4)));opencfw_em9305_command_product_version_303258((uintptr_t)version);(void)opencfw_em9305_memcpy((void *)cursor,version,32u);}
+ (void)opencfw_em9305_ll_event_send(cursor-6u);
+ return 1u;
+}
+/* Native331dc0..331ec0: full five-command dispatcher and vendor prefix. */
+uint32_t opencfw_em9305_dispatch_331dc0(uintptr_t request,uintptr_t input)
+{
+ if(opencfw_em9305_dispatch_331f00(request,input)!=0u)return 1u;
+ uint32_t command=*(volatile uint16_t *)request;
+ if(command-0x2006u>=5u)return 0u;
+ uint32_t status=0u,size=1u;
+ if(command==0x2006u){
+  uint32_t h0=*(volatile uint8_t *)(input+3u),h1=*(volatile uint8_t *)(input+1u),l0=*(volatile uint8_t *)(input+2u),l1=*(volatile uint8_t *)input;
+  uint32_t type=*(volatile uint8_t *)(input+4u),own=*(volatile uint8_t *)(input+5u),peer=*(volatile uint8_t *)(input+6u);
+  uint8_t address[6];(void)opencfw_em9305_memcpy(address,(const void *)(input+7u),6u);
+  uint32_t channels=*(volatile uint8_t *)(input+13u),filter=*(volatile uint8_t *)(input+14u);
+  status=opencfw_em9305_command_advertising_parameters_30ce18((uint16_t)((h1<<8)+l1),(uint16_t)((h0<<8)+l0),type,own,peer,(uintptr_t)address,channels,filter);
+ }else if(command==0x2007u)size=2u;
+ else if(command==0x2008u)status=opencfw_em9305_command_advertising_data_30cdd8(*(volatile uint8_t *)input,input+1u);
+ else if(command==0x2009u)status=opencfw_em9305_command_scan_response_30df98(*(volatile uint8_t *)input,input+1u);
+ else {opencfw_em9305_command_advertising_enable_30aff8(*(volatile uint8_t *)input);return 1u;}
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(size,*(volatile uint16_t *)request);
+ if(response==0u)return 1u;
+ command=*(volatile uint16_t *)request;
+ if(command-0x2008u<2u||command==0x2006u)*(volatile uint8_t *)response=(uint8_t)status;
+ else if(command==0x2007u){uint8_t power=0u;uint32_t result=opencfw_em9305_command_advertising_power_30bb50((uintptr_t)&power);*(volatile uint8_t *)response=(uint8_t)result;*(volatile uint8_t *)(response+1u)=power;}
+ (void)opencfw_em9305_ll_event_send(response-5u);
+ return 1u;
+}
+
+extern uint32_t opencfw_em9305_command_advertising_data_notify_306a7c(uint32_t);
+extern uint32_t opencfw_em9305_command_radio_power_310230(int32_t,uint32_t);
+/* Native30cee4..30ceee: caller input R0 survives the byte store. */
+uint32_t opencfw_em9305_command_vendor_byte_30cee4(int32_t value)
+{*(volatile uint8_t *)(uintptr_t)0x805a9cu=(uint8_t)value;return (uint32_t)value;}
+/* Native303258..303264: live 32-byte product version, same copy provider. */
+void opencfw_em9305_command_product_version_303258(uintptr_t output)
+{(void)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x8013d0u,32u);}
+/* Native30cdd8..30ce18: captured length survives gate and critical calls. */
+uint32_t opencfw_em9305_command_advertising_data_30cdd8(uint32_t length,uintptr_t input)
+{
+ if(opencfw_em9305_ll_connection_gate_30e524()==0u)return 12u;
+ if(length>=32u)return 18u;
+ (void)opencfw_em9305_wsf_critical_enter();
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x805ba0u,(const void *)input,length);
+ *(volatile uint8_t *)(uintptr_t)0x805bc0u=1u;
+ *(volatile uint8_t *)(uintptr_t)0x805bbfu=(uint8_t)length;
+ (void)opencfw_em9305_wsf_critical_exit();
+ (void)opencfw_em9305_command_advertising_data_notify_306a7c(1u);
+ return 0u;
+}
+/* Native30df98..30dfd8: distinct adjacent scan-response data region. */
+uint32_t opencfw_em9305_command_scan_response_30df98(uint32_t length,uintptr_t input)
+{
+ if(opencfw_em9305_ll_connection_gate_30e524()==0u)return 12u;
+ if(length>=32u)return 18u;
+ (void)opencfw_em9305_wsf_critical_enter();
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x805bc1u,(const void *)input,length);
+ *(volatile uint8_t *)(uintptr_t)0x805be1u=1u;
+ *(volatile uint8_t *)(uintptr_t)0x805be0u=(uint8_t)length;
+ (void)opencfw_em9305_wsf_critical_exit();
+ (void)opencfw_em9305_command_advertising_data_notify_306a7c(2u);
+ return 0u;
+}
+/* Native30bb50..30bb74: gate failure leaves output untouched. */
+uint32_t opencfw_em9305_command_advertising_power_30bb50(uintptr_t output)
+{
+ if(opencfw_em9305_ll_connection_gate_30e524()==0u)return 12u;
+ int32_t requested=(int8_t)*(volatile uint8_t *)(uintptr_t)0x805a9cu;
+ uint32_t actual=opencfw_em9305_command_radio_power_310230(requested,0u);
+ *(volatile uint8_t *)output=(uint8_t)actual;
+ return 0u;
+}
+
+/* Native30ce18..30cee0: captured capability, full interval/mode/address
+ * validation and sparse live advertising-state projection. */
+uint32_t opencfw_em9305_command_advertising_parameters_30ce18(uint32_t minimum,uint32_t maximum,uint32_t type,uint32_t own,uint32_t peer,uintptr_t address,uint32_t channels,uint32_t filter)
+{
+ uint32_t capabilities=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t gate=opencfw_em9305_ll_connection_gate_30e524();
+ if(*(volatile uint8_t *)(uintptr_t)0x805a71u!=0u||gate==0u)return 12u;
+ if(type!=1u){if(type>=5u||maximum>=0x4001u||minimum<32u||maximum<minimum)return 17u;}
+ uint32_t maximum_own=(capabilities&64u)?3u:1u;
+ if(own>maximum_own)return 17u;
+ if(type==1u||type==4u||(own&2u)!=0u){if(peer>=2u||address==0u)return 17u;}
+ if(channels-1u>=7u)return 17u;
+ if(filter>=4u&&type!=4u&&type!=1u)return 17u;
+ uint32_t upper=opencfw_em9305_config_limit_mpyuw(maximum,625u),lower=opencfw_em9305_config_limit_mpyuw(minimum,625u);
+ uintptr_t state=0x805b88u;
+ *(volatile uint8_t *)(state+21u)=(uint8_t)filter;
+ *(volatile uint8_t *)(state+20u)=(uint8_t)channels;
+ *(volatile uint8_t *)(state+10u)=(uint8_t)peer;
+ *(volatile uint8_t *)(state+9u)=(uint8_t)own;
+ *(volatile uint8_t *)(state+8u)=(uint8_t)type;
+ *(volatile uint32_t *)(state+4u)=upper;
+ *(volatile uint32_t *)state=lower;
+ uint64_t value=opencfw_em9305_controller_pack_address(address);
+ *(volatile uint32_t *)(state+12u)=(uint32_t)value;
+ *(volatile uint32_t *)(state+16u)=(uint32_t)(value>>32u);
+ return 0u;
+}
+
+/* Native310230..310260: signed live upper/lower caps and measured query. */
+uint32_t opencfw_em9305_command_radio_power_310230(int32_t requested,uint32_t unused)
+{
+ (void)unused;
+ int32_t measured=(int32_t)opencfw_em9305_radio_status_311a00(1u);
+ int32_t upper=(int8_t)*(volatile uint8_t *)(uintptr_t)0x8012b8u;
+ if(upper>measured)upper=measured;
+ if(upper<requested)return (uint32_t)upper;
+ int32_t lower=(int8_t)*(volatile uint8_t *)(uintptr_t)0x8012b9u;
+ return (uint32_t)(lower>requested?lower:requested);
+}
+
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+/* Native3082dc..308308: event774 with three explicit cleared fields. */
+uint32_t opencfw_em9305_command_advertising_notify_3082dc(void)
+{
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(24u);
+ if(message==0u)return 0u;
+ *(volatile uint16_t *)(message+2u)=774u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint8_t *)(message+5u)=0u;
+ *(volatile uint32_t *)(message+12u)=0u;
+ *(volatile uint32_t *)(message+8u)=0u;
+ return opencfw_em9305_wsf_task_message_send(handler,message);
+}
+/* Native306a7c..306a90: mask mismatch preserves incoming full R0. */
+uint32_t opencfw_em9305_command_advertising_data_notify_306a7c(uint32_t mask)
+{
+ uint32_t configured=*(volatile uint8_t *)(uintptr_t)0x805400u;
+ if((configured&mask)!=mask)return mask;
+ return opencfw_em9305_command_advertising_notify_3082dc();
+}
+/* Native30e758..30e774: sparse four-byte error event, actual emitter child. */
+uint32_t opencfw_em9305_command_advertising_error_30e758(uint32_t status)
+{
+ uint8_t event[4] __attribute__((aligned(4)));*(uint16_t *)(void *)event=0u;event[2]=3u;event[3]=(uint8_t)status;
+ return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
+}
+/* Native30aff8..30b094: captured enable and full mode/capability paths. */
+void opencfw_em9305_command_advertising_enable_30aff8(uint32_t enable)
+{
+ uint32_t gate=opencfw_em9305_ll_connection_gate_30e524();
+ uintptr_t state=0x805b84u;
+ if(gate==0u){(void)opencfw_em9305_command_advertising_error_30e758(12u);return;}
+ uint32_t mode=*(volatile uint8_t *)(state+12u);
+ if(mode<5u&&(0x13u&(1u<<mode))!=0u){
+  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uint32_t active=*(volatile uint8_t *)(uintptr_t)0x805a70u,capacity=*(volatile uint8_t *)(config+34u);
+  if(active==capacity){(void)opencfw_em9305_command_advertising_error_30e758(12u);return;}
+ }
+ if(enable!=1u||opencfw_em9305_ll_stream_kind_valid_30e4dc(*(volatile uint8_t *)(state+13u))!=0u){
+  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);if(message==0u)return;
+  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  *(volatile uint8_t *)(message+3u)=(uint8_t)(1u+(enable==0u));
+  *(volatile uint8_t *)(message+2u)=4u;
+  (void)opencfw_em9305_wsf_task_message_send(handler,message);return;
+ }
+ mode=*(volatile uint8_t *)(state+12u);
+ if(mode==3u){
+  uint32_t high=*(volatile uint32_t *)(state+20u),low=*(volatile uint32_t *)(state+16u),kind=*(volatile uint8_t *)(state+14u);
+  if(opencfw_em9305_radio_identity_exists_31445c(kind,low,high)!=0u){
+   uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
+   if(message!=0u){*(volatile uint16_t *)(message+2u)=260u;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;(void)opencfw_em9305_wsf_task_message_send(handler,message);return;}
+  }
+ }
+ (void)opencfw_em9305_command_advertising_error_30e758(18u);
+}
+
+/* Native314370..3143f4: captured parent/now, guard addition in the call
+ * delay slot, mode overhead and sparse accumulator update. */
+uint32_t opencfw_em9305_radio_schedule_314370(uintptr_t object,uintptr_t record,uint32_t now,uint32_t guard)
+{
+ uint32_t initial=*(volatile uint32_t *)(object+12u);
+ uintptr_t parent=*(volatile uint32_t *)(object+44u);
+ uintptr_t accumulator=record+164u;
+ uint32_t overhead=initial+guard;
+ overhead+=opencfw_em9305_auxiliary_guard_interval();
+ uint32_t mode=*(volatile uint8_t *)(parent+13u);
+ if(mode==3u)overhead+=336u;else if(mode==2u)overhead+=24u;else if(mode==1u)overhead+=40u;
+ uint32_t used=*(volatile uint32_t *)accumulator;
+ uint32_t available=*(volatile uint32_t *)(object+16u);
+ if(available<used+overhead){*(volatile uint32_t *)accumulator=available;return 0u;}
+ uintptr_t next=*(volatile uint32_t *)(object+4u);
+ uint32_t remaining=available-used;
+ if(next!=0u){
+  uint32_t elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(*(volatile uint32_t *)(next+8u),now);
+  if(remaining<elapsed)elapsed=remaining;
+  if(elapsed<overhead){*(volatile uint32_t *)accumulator=*(volatile uint32_t *)accumulator+elapsed;return 0u;}
+  remaining=elapsed;
+ }
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805c18u;
+ uint32_t cap=opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(config+4u),1000u);
+ uint32_t room=remaining-overhead;
+ return room<cap?room:cap;
+}
+
+extern uint32_t opencfw_em9305_dispatch_3328c8(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_field_30cee0(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_extended_packet_30d678(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_packet_30d5ac(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_data_30d580(uint32_t,uint32_t,uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_response_30d854(uint32_t,uint32_t,uint32_t,uint32_t,uintptr_t);
+extern void opencfw_em9305_command_enable_rows_30b6cc(uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_clear_30ca00(uint32_t);
+extern uint32_t opencfw_em9305_command_clear_all_30b118(void);
+extern uint32_t opencfw_em9305_command_intervals_30db34(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_periodic_data_30dac8(uint32_t,uint32_t,uint32_t,uintptr_t);
+extern void opencfw_em9305_command_periodic_enable_30daf8(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_packet_power_30bd8c(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_packet_count_30c7b0(uintptr_t);
+extern uint32_t opencfw_em9305_command_packet_size_30c768(uintptr_t);
+/* Native3324e0..3327f4: complete packet/periodic command projection,
+ * sparse scratch records, fresh response opcode and status paths. */
+uint32_t opencfw_em9305_dispatch_3324e0(uintptr_t request,uintptr_t input)
+{
+ if(opencfw_em9305_dispatch_3328c8(request,input)!=0u)return 1u;
+ uint32_t command=*(volatile uint16_t *)request;
+ if(command-0x2035u>=12u&&command!=0x207fu)return 0u;
+ uint8_t scratch[32] __attribute__((aligned(4)));uint32_t status=0u,id=255u,size=1u;
+ switch(command){
+ case 0x2035u:id=*(volatile uint8_t *)input;status=opencfw_em9305_command_field_30cee0(id,input+1u);break;
+ case 0x2036u:case 0x207fu:{
+  if(command==0x2036u)(void)opencfw_em9305_memset(scratch,0u,32u);
+  id=*(volatile uint8_t *)input;
+  uint32_t first=*(volatile uint8_t *)(input+1u)+((uint32_t)*(volatile uint8_t *)(input+2u)<<8);
+  uint32_t lower=*(volatile uint8_t *)(input+3u)+((uint32_t)*(volatile uint8_t *)(input+4u)<<8)+((uint32_t)*(volatile uint8_t *)(input+5u)<<16);
+  uint32_t upper=*(volatile uint8_t *)(input+6u)+((uint32_t)*(volatile uint8_t *)(input+7u)<<8)+((uint32_t)*(volatile uint8_t *)(input+8u)<<16);
+  uint32_t a=*(volatile uint8_t *)(input+9u),b=*(volatile uint8_t *)(input+10u),c=*(volatile uint8_t *)(input+11u);
+  uint32_t extra=command==0x207fu?9u:7u;uint8_t tail[9];for(uint32_t j=0u;j<extra;++j)tail[j]=*(volatile uint8_t *)(input+18u+j);
+  *(uint16_t *)(void *)scratch=(uint16_t)first;*(uint32_t *)(void *)(scratch+4u)=lower;*(uint32_t *)(void *)(scratch+8u)=upper;
+  scratch[12]=(uint8_t)a;scratch[13]=(uint8_t)b;scratch[14]=(uint8_t)c;*(uint32_t *)(void *)(scratch+16u)=(uint32_t)(input+12u);
+  for(uint32_t j=0u;j<extra;++j)scratch[20u+j]=tail[j];
+  if(command==0x207fu){status=opencfw_em9305_command_extended_packet_30d678(id,(uintptr_t)scratch);*(volatile uint8_t *)(input+27u)=(uint8_t)status;}
+  else{status=opencfw_em9305_command_packet_30d5ac(id,(uintptr_t)scratch);*(volatile uint8_t *)(input+25u)=(uint8_t)status;}
+  size=2u;break;}
+ case 0x2037u:case 0x2038u:{uint32_t d=*(volatile uint8_t *)(input+3u),c=*(volatile uint8_t *)(input+2u),b=*(volatile uint8_t *)(input+1u),a=*(volatile uint8_t *)input;
+  status=command==0x2037u?opencfw_em9305_command_data_30d580(a,b,c,d,input+4u):opencfw_em9305_command_response_30d854(a,b,c,d,input+4u);break;}
+ case 0x2039u:{uint32_t count=*(volatile uint8_t *)(input+1u),enable=*(volatile uint8_t *)input,n=count<2u?count:2u;uintptr_t cursor=input+2u;
+  for(uint32_t j=0u;j<n;++j){uint32_t high=*(volatile uint8_t *)(cursor+2u),low=*(volatile uint8_t *)(cursor+1u),a=*(volatile uint8_t *)cursor,b=*(volatile uint8_t *)(cursor+3u);scratch[j*6u]=(uint8_t)a;scratch[j*6u+4u]=(uint8_t)b;*(uint16_t *)(void *)(scratch+j*6u+2u)=(uint16_t)(low+(high<<8));cursor+=4u;}
+  (void)opencfw_em9305_command_enable_rows_30b6cc(enable,count,(uintptr_t)scratch);return 1u;}
+ case 0x203au:size=3u;break;
+ case 0x203bu:size=2u;break;
+ case 0x203cu:status=opencfw_em9305_command_clear_30ca00(*(volatile uint8_t *)input);break;
+ case 0x203du:status=opencfw_em9305_command_clear_all_30b118();break;
+ case 0x203eu:{uint32_t a=*(volatile uint8_t *)(input+1u)+((uint32_t)*(volatile uint8_t *)(input+2u)<<8),b=*(volatile uint8_t *)(input+3u)+((uint32_t)*(volatile uint8_t *)(input+4u)<<8),c=*(volatile uint8_t *)(input+5u)+((uint32_t)*(volatile uint8_t *)(input+6u)<<8);id=*(volatile uint8_t *)input;*(uint16_t *)(void *)scratch=a;*(uint16_t *)(void *)(scratch+2u)=b;*(uint16_t *)(void *)(scratch+4u)=c;status=opencfw_em9305_command_intervals_30db34(id,(uintptr_t)scratch);break;}
+ case 0x203fu:{uint32_t c=*(volatile uint8_t *)(input+2u),b=*(volatile uint8_t *)(input+1u),a=*(volatile uint8_t *)input;status=opencfw_em9305_command_periodic_data_30dac8(a,b,c,input+3u);break;}
+ case 0x2040u:{uint32_t b=*(volatile uint8_t *)(input+1u),a=*(volatile uint8_t *)input;(void)opencfw_em9305_command_periodic_enable_30daf8(a,b);return 1u;}
+ }
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(size,*(volatile uint16_t *)request);if(response==0u)return 1u;
+ command=*(volatile uint16_t *)request;
+ if(command==0x2036u||command==0x207fu){(void)opencfw_em9305_command_packet_power_30bd8c(id,(uintptr_t)scratch);*(volatile uint8_t *)response=(uint8_t)status;*(volatile uint8_t *)(response+1u)=scratch[0];}
+ else if(command==0x203bu){scratch[0]=1u;uint32_t result=opencfw_em9305_command_packet_count_30c7b0((uintptr_t)scratch);*(volatile uint8_t *)response=(uint8_t)result;*(volatile uint8_t *)(response+1u)=scratch[0];}
+ else if(command==0x203au){*(uint16_t *)(void *)scratch=31u;uint32_t result=opencfw_em9305_command_packet_size_30c768((uintptr_t)scratch);*(volatile uint8_t *)response=(uint8_t)result;*(volatile uint8_t *)(response+1u)=scratch[0];*(volatile uint8_t *)(response+2u)=scratch[1];}
+ else if(command-0x2035u<12u||command==0x2080u)*(volatile uint8_t *)response=(uint8_t)status;
+ (void)opencfw_em9305_ll_event_send(response-5u);return 1u;
+}
+
+extern uint32_t opencfw_em9305_command_vendor_mode_30d5a8(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_vendor_option_30d75c(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_command_vendor_mask_30cf28(uint32_t,uint32_t);
+/* Native30be3c branches306f70/306f8c: genuine two-register64-bit result. */
+uint64_t opencfw_em9305_command_vendor_statistics_30be3c(uint32_t id,uint32_t associated)
+{
+ uint32_t high=0u,low=0u;
+ if(associated!=0u){uintptr_t record=opencfw_em9305_radio_record_find_31aa64((uint8_t)id);if(record!=0u){high=*(volatile uint32_t *)(record+724u);low=*(volatile uint32_t *)(record+720u);}}
+ else if(id<6u){uint32_t offset=opencfw_em9305_config_limit_mpyuw(id,784u);uintptr_t row=0x803ffcu+offset;low=*(volatile uint32_t *)row;high=*(volatile uint32_t *)(row+4u);}
+ return ((uint64_t)high<<32)|low;
+}
+/* Native303264..303270: live product36-byte snapshot, actual forward copy. */
+void opencfw_em9305_command_vendor_snapshot_303264(uintptr_t output)
+{(void)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x8014f4u,36u);}
+/* Native3328c8..3329b0: five vendor commands and fresh response opcode. */
+uint32_t opencfw_em9305_dispatch_3328c8(uintptr_t request,uintptr_t input)
+{
+ uint32_t command=*(volatile uint16_t *)request,status=0u,size=1u,id=0u,associated=0u;
+ switch(command){
+ case 0xffd0u:{uint32_t c=*(volatile uint8_t *)(input+2u),b=*(volatile uint8_t *)(input+1u),d=*(volatile uint8_t *)(input+3u),e=*(volatile uint8_t *)(input+4u),a=*(volatile uint8_t *)input;uint32_t mask=b+(c<<8)+(d<<16)+(e<<24);status=opencfw_em9305_command_vendor_mask_30cf28(a,mask);break;}
+ case 0xffd1u:{uint32_t b=*(volatile uint8_t *)(input+1u),a=*(volatile uint8_t *)input;status=opencfw_em9305_command_vendor_mode_30d5a8(a,b);break;}
+ case 0xffd2u:{uint32_t c=*(volatile uint8_t *)(input+2u),b=*(volatile uint8_t *)(input+1u),a=*(volatile uint8_t *)input;status=opencfw_em9305_command_vendor_option_30d75c(a,b,c);break;}
+ case 0xffdau:size=37u;break;
+ case 0xffdeu:{uint32_t high=*(volatile uint8_t *)(input+1u),low=*(volatile uint8_t *)input,selector=*(volatile uint8_t *)(input+2u);id=low+(high<<8);associated=selector!=0u;size=6u;break;}
+ default:return 0u;
+ }
+ uintptr_t response=opencfw_em9305_ll_response_allocate_32e428(size,*(volatile uint16_t *)request);if(response==0u)return 1u;
+ *(volatile uint8_t *)response=(uint8_t)status;uintptr_t cursor=response+1u;
+ command=*(volatile uint16_t *)request;
+ if(command==0xffdau){uint8_t snapshot[36] __attribute__((aligned(4)));opencfw_em9305_command_vendor_snapshot_303264((uintptr_t)snapshot);(void)opencfw_em9305_memcpy((void *)cursor,snapshot,36u);}
+ else if(command==0xffdeu){uint64_t counters=opencfw_em9305_command_vendor_statistics_30be3c((uint16_t)id,associated);*(volatile uint8_t *)(cursor+4u)=(uint8_t)(counters>>32u);*(volatile uint8_t *)cursor=(uint8_t)counters;*(volatile uint8_t *)(cursor+3u)=(uint8_t)(counters>>24u);*(volatile uint8_t *)(cursor+2u)=(uint8_t)(counters>>16u);*(volatile uint8_t *)(cursor+1u)=(uint8_t)(counters>>8u);}
+ (void)opencfw_em9305_ll_event_send(cursor-6u);return 1u;
+}
+
+/* Native30cf28 tail308780..30879c: saved record, critical store word72. */
+uint32_t opencfw_em9305_command_vendor_mask_30cf28(uint32_t id,uint32_t mask)
+{uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;(void)opencfw_em9305_wsf_critical_enter();*(volatile uint32_t *)(record+72u)=mask;(void)opencfw_em9305_wsf_critical_exit();return 0u;}
+/* Native30d5a8 tail308c44..308c6c: exact byte wrapping validation. */
+uint32_t opencfw_em9305_command_vendor_mode_30d5a8(uint32_t id,uint32_t mode)
+{uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if((uint8_t)(mode+4u)<5u)return 18u;(void)opencfw_em9305_wsf_critical_enter();*(volatile uint8_t *)(record+76u)=(uint8_t)mode;(void)opencfw_em9305_wsf_critical_exit();return 0u;}
+/* Native30d75c..30d772 tail308f28..308f50: low-byte OR validation, ordered stores. */
+uint32_t opencfw_em9305_command_vendor_option_30d75c(uint32_t id,uint32_t first,uint32_t second)
+{if((uint8_t)((first-1u)|(second-1u))>1u)return 18u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;(void)opencfw_em9305_wsf_critical_enter();*(volatile uint8_t *)(record+2531u)=(uint8_t)second;*(volatile uint8_t *)(record+2327u)=(uint8_t)first;(void)opencfw_em9305_wsf_critical_exit();return 0u;}
+
+/* Native30c768..30c788: post-gate live config, signed min on positive halfword. */
+uint32_t opencfw_em9305_command_packet_size_30c768(uintptr_t output)
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t size=*(volatile uint16_t *)(config+16u);if(size>1650u)size=1650u;*(volatile uint16_t *)output=(uint16_t)size;return 0u;}
+/* Native30c7b0..30c7cc: failure preserves caller output. */
+uint32_t opencfw_em9305_command_packet_count_30c7b0(uintptr_t output)
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t count=*(volatile uint8_t *)(config+12u);*(volatile uint8_t *)output=(uint8_t)count;return 0u;}
+/* Native30bd8c tail306ee8..306f08: initial output sentinel before lookup. */
+uint32_t opencfw_em9305_command_packet_power_30bd8c(uint32_t id,uintptr_t output)
+{*(volatile uint8_t *)output=129u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64((uint8_t)id);if(record==0u)return 66u;int32_t requested=*(volatile int8_t *)(record+60u);uint32_t power=opencfw_em9305_command_radio_power_310230(requested,0u);*(volatile uint8_t *)output=(uint8_t)power;return 0u;}
+
+/* Native31ac54..31ac82: capture notification flag before clearing active byte. */
+void opencfw_em9305_command_record_clear_31ac54(uintptr_t record)
+{uint32_t notify=*(volatile uint8_t *)(record+2809u);*(volatile uint8_t *)record=0u;if(notify!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805c74u;if(callback!=0u)((void (*)(uintptr_t))callback)(record);}(void)opencfw_em9305_wsf_timer_stop(record+808u);(void)opencfw_em9305_command_count_down_30e48c();}
+/* Native30ca00 tail308368..3083a0: gate, saved record, two busy flags and callback. */
+uint32_t opencfw_em9305_command_clear_30ca00(uint32_t id)
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+2u)!=0u||*(volatile uint8_t *)(record+369u)!=0u)return 12u;uintptr_t callback=*(volatile uint32_t *)(record+2804u);if(callback!=0u)((void (*)(uintptr_t))callback)(record);opencfw_em9305_command_record_clear_31ac54(record);return 0u;}
+/* Native30b118 tail306b14..306b6e: preflight fixed count, then reload after active clears. */
+uint32_t opencfw_em9305_command_clear_all_30b118(void)
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t count=*(volatile uint8_t *)(config+12u);if(count!=0u){uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u;for(uint32_t i=0;i<count;i++){if(*(volatile uint8_t *)(record+2u)!=0u||*(volatile uint8_t *)(record+369u)!=0u)return 12u;record+=2824u;}}uint32_t index=0u,offset=0u;while(index<count){uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u+offset;if(*(volatile uint8_t *)record!=0u){opencfw_em9305_command_record_clear_31ac54(record);config=*(volatile uint32_t *)(uintptr_t)0x805cacu;count=*(volatile uint8_t *)(config+12u);}offset+=2824u;index++;}return 0u;}
+
+/* Native30cee0 tail308ecc..308f24: captured record, live six-byte address and native high-word mask. */
+uint32_t opencfw_em9305_command_field_30cee0(uint32_t id,uintptr_t address)
+{uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;uint32_t flags=*(volatile uint8_t *)(record+32u);if((flags&1u)!=0u&&*(volatile uint8_t *)(record+2u)!=0u)return 12u;uint64_t packed=opencfw_em9305_controller_pack_address(address);uint32_t low=(uint32_t)packed,high=(uint32_t)(packed>>32),masked=high&0xc000u;if(masked==0x8000u)return 18u;(void)opencfw_em9305_wsf_critical_enter();*(volatile uint32_t *)(record+12u)=high;*(volatile uint32_t *)(record+8u)=low;*(volatile uint8_t *)(record+4u)=1u;*(volatile uint8_t *)(record+3u)=1u;(void)opencfw_em9305_wsf_critical_exit();return 0u;}
+
+/* Native3092f8..30939c: actual duration contract, post-call halfword reload and fresh flags. */
+uint32_t opencfw_em9305_command_intervals_lower_3092f8(uint32_t id,uintptr_t input)
+{uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+369u)!=0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t limit=*(volatile uint32_t *)(record+72u),spacing=*(volatile uint16_t *)(config+20u);if(limit>spacing)spacing=limit;uint32_t timing=0u;if(*(volatile uint8_t *)(record+804u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;if(callback!=0u)timing=((uint32_t (*)(void))callback)();}uint32_t size=*(volatile uint16_t *)(record+1144u),phy=*(volatile uint8_t *)(record+63u);uint32_t duration=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,1u,2u,0u);uint32_t maximum=opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(input+2u),1250u);if(duration>maximum)return 69u;if((*(volatile uint8_t *)(record+32u)&0x3bu)!=0u)return 18u;uint32_t minimum=*(volatile uint16_t *)input,third=*(volatile uint16_t *)(input+4u);*(volatile uint32_t *)(record+712u)=maximum;minimum=opencfw_em9305_config_limit_mpyuw(minimum,1250u);*(volatile uint8_t *)(record+718u)=1u;*(volatile uint32_t *)(record+2816u)=0u;*(volatile uint8_t *)(record+2809u)=0u;*(volatile uint16_t *)(record+716u)=(uint16_t)third;*(volatile uint32_t *)(record+708u)=minimum;return 0u;}
+/* Native30db34..30db62: save input/id before latch call, native validation order. */
+uint32_t opencfw_em9305_command_intervals_30db34(uint32_t id,uintptr_t input)
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;if(id>239u)return 48u;uint32_t minimum=*(volatile uint16_t *)input,maximum=*(volatile uint16_t *)(input+2u);if(maximum<minimum||minimum<6u)return 18u;return opencfw_em9305_command_intervals_lower_3092f8(id,input);}
+
+/* Native30e878..30e898: all six event bytes, repeated status and truncated id. */
+uint32_t opencfw_em9305_command_periodic_status_30e878(uint32_t id,uint32_t status)
+{uint8_t event[6] __attribute__((aligned(4)));event[5]=(uint8_t)id;*(uint16_t *)(void *)event=(uint16_t)id;event[4]=(uint8_t)status;event[3]=(uint8_t)status;event[2]=29u;return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);}
+/* Native309244..3092f4: saved flag bits, fresh notification flag after first send. */
+void opencfw_em9305_command_periodic_enable_lower_309244(uint32_t id,uint32_t flags)
+{uint32_t second=flags&2u;if(second!=0u&&(*(volatile uint8_t *)(uintptr_t)0x805a98u&16u)==0u){opencfw_em9305_command_periodic_status_30e878(id,17u);return;}uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u){opencfw_em9305_command_periodic_status_30e878(id,66u);return;}uint32_t enabled=flags&1u;if(*(volatile uint8_t *)(record+718u)==0u||(enabled!=0u&&*(volatile uint8_t *)(record+1152u)==0u)||(*(volatile uint8_t *)(record+32u)&0x3bu)!=0u){opencfw_em9305_command_periodic_status_30e878(id,12u);return;}*(volatile uint8_t *)(record+704u)=(uint8_t)(second>>1u);uintptr_t event=opencfw_em9305_wsf_event_allocate(4u);if(event!=0u){uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint8_t *)(event+3u)=(uint8_t)(enabled==0u?2u:1u);*(volatile uint8_t *)(event+2u)=10u;*(volatile uint16_t *)event=(uint16_t)id;(void)opencfw_em9305_wsf_task_message_send(handler,event);}if(*(volatile uint8_t *)(record+2809u)==0u)return;event=opencfw_em9305_wsf_event_allocate(4u);if(event==0u)return;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint8_t *)(event+3u)=(uint8_t)(enabled^5u);*(volatile uint8_t *)(event+2u)=14u;*(volatile uint16_t *)event=(uint16_t)id;(void)opencfw_em9305_wsf_task_message_send(handler,event);}
+/* Native30daf8..30db20: second argument is id, first argument is enable flags. */
+void opencfw_em9305_command_periodic_enable_30daf8(uint32_t flags,uint32_t id)
+{uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();if(gate==0u){opencfw_em9305_command_periodic_status_30e878(id,12u);return;}if(id>=240u){opencfw_em9305_command_periodic_status_30e878(id,48u);return;}opencfw_em9305_command_periodic_enable_lower_309244(id,flags);}
+
+/* Native30904c..309242: all five periodic payload operations and native partial failure writes. */
+uint32_t opencfw_em9305_command_periodic_data_lower_30904c(uint32_t id,uint32_t operation,uint32_t length,uintptr_t data)
+{
+ uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+718u)==0u)return 12u;
+ uint32_t busy=*(volatile uint8_t *)(record+369u);if((uint32_t)(operation-3u)>=2u){if(length==0u)return 18u;if(busy!=0u)return 12u;}
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t limit=*(volatile uint32_t *)(record+72u),spacing=*(volatile uint16_t *)(config+20u);uint32_t budget=*(volatile uint32_t *)(record+(busy==0u?712u:700u));if(limit>spacing)spacing=limit;uint32_t timing=0u;if(*(volatile uint8_t *)(record+804u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;if(callback!=0u)timing=((uint32_t (*)(void))callback)();}
+ uintptr_t packet=record+1152u;uint32_t size=length;if((operation|2u)==2u)size=(uint16_t)(*(volatile uint16_t *)(packet-8u)+length);uint32_t phy=*(volatile uint8_t *)(record+63u);uint32_t duration=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,1u,2u,0u);if(budget<duration)return 69u;if(operation>=5u)return 18u;
+ if(operation==0u||operation==2u){if(*(volatile uint8_t *)packet!=0u)return 18u;config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t old=*(volatile uint16_t *)(packet-8u),capacity=*(volatile uint16_t *)(config+16u);if(capacity<old+length){*(volatile uint8_t *)packet=0u;*(volatile uint16_t *)(packet-8u)=0u;return 69u;}}
+ if(operation==3u){if(*(volatile uint8_t *)(record+368u)==1u){*(volatile uint8_t *)(packet+13u)=(uint8_t)length;(void)opencfw_em9305_memcpy((void *)(packet+16u),(const void *)data,length);uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,length,data);*(volatile uint16_t *)(packet+14u)=(uint16_t)crc;*(volatile uint8_t *)(packet+12u)=1u;}else{uintptr_t destination=*(volatile uint32_t *)(packet-4u);(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);*(volatile uint16_t *)(packet-8u)=(uint16_t)length;uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,length,data);*(volatile uint8_t *)packet=1u;*(volatile uint16_t *)(packet-446u)=(uint16_t)crc;}}
+ else if(operation==4u){if(length!=0u||*(volatile uint8_t *)(record+368u)==0u||*(volatile uint16_t *)(packet-8u)==0u)return 18u;if(*(volatile uint8_t *)(packet+12u)!=0u&&*(volatile uint8_t *)(packet+13u)==0u)return 18u;uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,0u,data);*(volatile uint8_t *)packet=1u;*(volatile uint16_t *)(packet-446u)=(uint16_t)crc;}
+ else {if(*(volatile uint8_t *)(record+368u)!=0u)return 12u;if(length==0u)return 18u;uintptr_t destination=*(volatile uint32_t *)(packet-4u);if(operation==0u||operation==2u){destination+=*(volatile uint16_t *)(packet-8u);(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);uint32_t total=*(volatile uint16_t *)(packet-8u)+length;if(operation==0u)*(volatile uint8_t *)packet=0u;*(volatile uint16_t *)(packet-8u)=(uint16_t)total;if(operation!=0u){uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,length,data);*(volatile uint8_t *)packet=1u;*(volatile uint16_t *)(packet-446u)=(uint16_t)crc;}}else{(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);*(volatile uint16_t *)(packet-8u)=(uint16_t)length;*(volatile uint8_t *)packet=0u;}}
+ *(volatile uint8_t *)(record+1156u)=1u;return 0u;
+}
+/* Native30dac8..30daf6: saved arguments and gate-before-id/operation validation. */
+uint32_t opencfw_em9305_command_periodic_data_30dac8(uint32_t id,uint32_t operation,uint32_t length,uintptr_t data)
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;if(id>239u)return 48u;if(operation>=5u)return 18u;return opencfw_em9305_command_periodic_data_lower_30904c(id,operation,length,data);}
+
+/* Native308c70..308eca: exact saved record and allocation/configuration projection.
+ * Product buffer tables8028b4/802850/80519c stay live authentic inputs. */
+uint32_t opencfw_em9305_command_packet_lower_308c70(uint32_t id,uintptr_t input)
+{
+ uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);uint32_t existing=record!=0u;
+ if(record==0u){uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t count=*(volatile uint8_t *)(config+12u),index=0u;uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c38u;for(;index<count;index++){record=base+opencfw_em9305_config_update_mpywhl(index,2824u);if(*(volatile uint8_t *)record==0u)break;}if(index==count)return 7u;(void)opencfw_em9305_memset((void *)record,0u,2824u);uintptr_t packet=record+1152u;uint32_t shared=*(volatile uint32_t *)(uintptr_t)(0x8028b4u+index*4u);config=*(volatile uint32_t *)(uintptr_t)0x805cacu;*(volatile uint32_t *)(packet+548u)=shared;*(volatile uint32_t *)(packet+272u)=shared;*(volatile uint8_t *)(record+1428u)=1u;*(volatile uint8_t *)record=1u;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;uint32_t tertiary=*(volatile uint32_t *)(uintptr_t)(0x802850u+index*4u);*(volatile uint8_t *)packet=1u;*(volatile uint8_t *)(record+1704u)=1u;*(volatile uint8_t *)(record+1980u)=1u;uint32_t requested=*(volatile uint8_t *)(config+18u);*(volatile uint32_t *)(packet+824u)=tertiary;*(volatile uint8_t *)(record+820u)=(uint8_t)handler;uint32_t buffer=*(volatile uint32_t *)(uintptr_t)(0x80519cu+index*4u);*(volatile uint8_t *)(record+1u)=(uint8_t)id;*(volatile uint16_t *)(packet-340u)=(uint16_t)id;*(volatile uint8_t *)(record+76u)=(uint8_t)(requested>1u?requested:1u);*(volatile uint16_t *)(packet-338u)=1288u;*(volatile uint32_t *)(packet-4u)=buffer;(void)opencfw_em9305_command_count_30e4bc();}
+ if(*(volatile uint8_t *)(record+2u)!=0u)return 12u;
+ uintptr_t projection=record+1424u;
+ if(existing!=0u&&(*(volatile uint8_t *)(record+32u)&16u)!=0u){uint32_t count=*(volatile uint8_t *)(projection+17u);uintptr_t destination=*(volatile uint32_t *)projection;*(volatile uint16_t *)(record+2250u)=(uint16_t)count;(void)opencfw_em9305_memcpy((void *)destination,(const void *)(record+1442u),count);count=*(volatile uint8_t *)(record+1717u);destination=*(volatile uint32_t *)(projection+276u);(void)opencfw_em9305_memcpy((void *)destination,(const void *)(record+1718u),count);*(volatile uint16_t *)(record+2248u)=(uint16_t)count;}
+ uint32_t flags=*(volatile uint16_t *)input;
+ if((flags&16u)!=0u){if(existing!=0u&&(*(volatile uint8_t *)(record+32u)&16u)==0u){uint32_t count=*(volatile uint16_t *)(record+2250u);if(count>=32u)return 18u;uint32_t other=*(volatile uint16_t *)(record+2248u);if(other>=32u)return 18u;uintptr_t source=*(volatile uint32_t *)projection;*(volatile uint8_t *)(projection+17u)=(uint8_t)count;(void)opencfw_em9305_memcpy((void *)(record+1442u),(const void *)source,count);other=*(volatile uint16_t *)(record+2248u);source=*(volatile uint32_t *)(projection+276u);*(volatile uint8_t *)(record+1717u)=(uint8_t)other;(void)opencfw_em9305_memcpy((void *)(record+1718u),(const void *)source,other);}else{if(*(volatile uint16_t *)(record+2250u)>=32u||*(volatile uint16_t *)(record+2248u)>=32u)return 18u;}}
+ else{uint32_t length=*(volatile uint16_t *)(record+((flags&1u)!=0u||(flags&2u)==0u?2248u:2250u));if(length!=0u)return 18u;uint32_t second=*(volatile uint16_t *)(record+2250u),phy=*(volatile uint8_t *)(record+63u);uint32_t duration=opencfw_em9305_radio_duration_piece_312b88(phy,2u,second)+10000u;uint32_t maximum=opencfw_em9305_config_update_mpywhl(*(volatile uint32_t *)(input+8u),625u);if(duration>maximum)return 69u;}
+ uint32_t busy=*(volatile uint8_t *)(record+369u);flags=*(volatile uint16_t *)input;if(busy!=0u&&(flags&0x3bu)!=0u)return 12u;*(volatile uint16_t *)(record+32u)=(uint16_t)flags;uint32_t pair=*(volatile uint16_t *)(input+12u);*(volatile uint16_t *)(record+56u)=(uint16_t)pair;uint32_t minimum=*(volatile uint32_t *)(input+4u),maximum=*(volatile uint32_t *)(input+8u),filter=*(volatile uint8_t *)(input+14u);minimum=opencfw_em9305_config_update_mpywhl(minimum,625u);maximum=opencfw_em9305_config_update_mpywhl(maximum,625u);*(volatile uint8_t *)(record+58u)=(uint8_t)filter;uintptr_t address=*(volatile uint32_t *)(input+16u);*(volatile uint32_t *)(record+36u)=minimum;*(volatile uint32_t *)(record+40u)=maximum;uint64_t packed=opencfw_em9305_controller_pack_address(address);uint8_t tail[9];for(uint32_t i=0u;i<9u;i++)tail[i]=*(volatile uint8_t *)(input+20u+i);*(volatile uint32_t *)(record+48u)=(uint32_t)packed;*(volatile uint32_t *)(record+52u)=(uint32_t)(packed>>32);for(uint32_t i=0u;i<5u;i++)*(volatile uint8_t *)(record+59u+i)=tail[i];for(uint32_t i=5u;i<9u;i++)*(volatile uint8_t *)(record+61u+i)=tail[i];return 0u;
+}
+/* Native30d5ac/30d678: shared ordered validation, distinct live PHY capabilities. */
+static uint32_t opencfw_em9305_command_packet_validate(uint32_t id,uintptr_t input,uint32_t extended)
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;if(id>239u)return 48u;uint32_t minimum=*(volatile uint32_t *)(input+4u),maximum=*(volatile uint32_t *)(input+8u);if(maximum<minimum)return 18u;uint32_t flags=*(volatile uint16_t *)input;if(flags!=29u&&minimum<32u)return 18u;if(flags!=29u&&maximum>=0x346dc7u)return 17u;if(maximum>=0x4001u&&(flags&16u)!=0u)return 17u;if((flags&0xfc00u)!=0u||(flags&0x13u)==3u||((flags&16u)!=0u&&(flags&96u)!=0u)||((flags&32u)!=0u&&(flags&3u)!=0u))return 18u;uint32_t tx=*(volatile uint8_t *)(input+22u),rx;if((flags&16u)==0u){if((tx|2u)!=3u)return 18u;rx=*(volatile uint8_t *)(input+24u);if((uint32_t)(rx-1u)>=3u)return 18u;}else{if(tx!=1u)return 18u;rx=*(volatile uint8_t *)(input+24u);}if(extended!=0u){uint32_t first=*(volatile uint32_t *)(uintptr_t)0x805a94u,second=*(volatile uint32_t *)(uintptr_t)0x805a98u;if(rx==2u&&(first&256u)==0u)return 17u;if((first&2048u)==0u&&(tx==3u||rx==3u))return 17u;if((second&256u)==0u&&(*(volatile uint8_t *)(input+27u)!=0u||*(volatile uint8_t *)(input+28u)!=0u))return 17u;}else{if(rx==2u&&(*(volatile uint8_t *)(uintptr_t)0x805a95u&1u)==0u)return 17u;if((tx==3u||rx==3u)&&(*(volatile uint8_t *)(uintptr_t)0x805a95u&8u)==0u)return 17u;}if((flags&128u)==0u){if((flags&768u)!=0u)return 18u;}else if((flags&28u)!=0u)return 18u;return opencfw_em9305_command_packet_lower_308c70(id,input);}
+uint32_t opencfw_em9305_command_packet_30d5ac(uint32_t id,uintptr_t input){return opencfw_em9305_command_packet_validate(id,input,0u);}
+uint32_t opencfw_em9305_command_extended_packet_30d678(uint32_t id,uintptr_t input){return opencfw_em9305_command_packet_validate(id,input,1u);}
+
+/* Native3132f8..31330c: exact head/state predicate, no invented scheduler status. */
+uint32_t opencfw_em9305_command_schedule_idle_3132f8(uintptr_t object)
+{uint32_t head=*(volatile uint32_t *)(uintptr_t)0x805f14u;uint32_t state=*(volatile uint8_t *)(uintptr_t)0x805f04u;return (head!=(uint32_t)object)|(state!=2u);}
+/* Native3082b0..3082da: sparse24B notification with caller-provided address. */
+void opencfw_em9305_command_data_notify_3082b0(uint32_t type,uint32_t low,uint32_t high)
+{uintptr_t event=opencfw_em9305_wsf_event_allocate(24u);if(event==0u)return;*(volatile uint16_t *)(event+2u)=774u;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint32_t *)(event+8u)=low;*(volatile uint8_t *)(event+5u)=(uint8_t)type;*(volatile uint32_t *)(event+12u)=high;(void)opencfw_em9305_wsf_task_message_send(handler,event);}
+/* Native306c8c..306cba: original fullword input saved through record lookup. */
+void opencfw_em9305_command_data_notify_mask_306c8c(uint32_t id,uint32_t mask)
+{uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return;uint32_t flags=*(volatile uint8_t *)(record+2808u);if((flags&mask)!=mask)return;if(*(volatile uint8_t *)(record+1u)!=id)return;uint32_t high=*(volatile uint32_t *)(record+52u),low=*(volatile uint32_t *)(record+48u),type=*(volatile uint8_t *)(record+58u);opencfw_em9305_command_data_notify_3082b0(type,low,high);}
+/* Native327510..327540: legacy31-byte replacement; native payload begins at22. */
+uint32_t opencfw_em9305_command_payload_legacy_327510(uintptr_t record,uintptr_t packet,uint32_t operation,uint32_t length,uintptr_t data)
+{if(operation!=3u||length>=32u)return 18u;*(volatile uint8_t *)(packet+21u)=(uint8_t)length;if(data!=0u)(void)opencfw_em9305_memcpy((void *)(packet+22u),(const void *)data,length);if(*(volatile uint8_t *)(record+2u)==1u)*(volatile uint8_t *)(packet+8u)=1u;*(volatile uint8_t *)(packet+20u)=1u;return 0u;}
+/* Native32739c..32750c: six-register payload ABI, actual null-data behavior and partial resets. */
+uint32_t opencfw_em9305_command_payload_32739c(uintptr_t record,uintptr_t packet,uint32_t operation,uint32_t auxiliary,uint32_t length,uintptr_t data)
+{
+ if(operation>=5u)return 18u;
+ if(operation==0u||operation==2u){if(*(volatile uint8_t *)(packet+8u)!=0u)return 18u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t old=*(volatile uint16_t *)packet,capacity=*(volatile uint16_t *)(config+16u);if(capacity>1650u)capacity=1650u;if(capacity<old+length){*(volatile uint8_t *)(packet+8u)=0u;*(volatile uint16_t *)packet=0u;return 7u;}}
+ if(operation==0u||operation==1u||operation==2u){if(*(volatile uint8_t *)(record+2u)!=0u)return 12u;if(length==0u)return 18u;uintptr_t destination=*(volatile uint32_t *)(packet+4u);if(operation==0u||operation==2u)destination+=*(volatile uint16_t *)packet;if(data!=0u)(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);if(operation==1u){*(volatile uint8_t *)(packet+8u)=0u;*(volatile uint16_t *)packet=(uint16_t)length;return 0u;}uint32_t total=*(volatile uint16_t *)packet+length;if(operation==0u){*(volatile uint8_t *)(packet+8u)=0u;*(volatile uint16_t *)packet=(uint16_t)total;return 0u;}*(volatile uint16_t *)packet=(uint16_t)total;}
+ else if(operation==3u){if(*(volatile uint8_t *)(record+2u)==1u){*(volatile uint8_t *)(packet+21u)=(uint8_t)length;if(data!=0u)(void)opencfw_em9305_memcpy((void *)(packet+24u),(const void *)data,length);uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,length,data);*(volatile uint16_t *)(packet+22u)=(uint16_t)crc;*(volatile uint8_t *)(packet+20u)=1u;*(volatile uint8_t *)(packet+275u)=(uint8_t)auxiliary;uintptr_t first=record+2264u;if(opencfw_em9305_command_schedule_idle_3132f8(first)==0u)return 0u;if(*(volatile uint8_t *)(record+2785u)!=0u){uintptr_t second=record+2468u;if(opencfw_em9305_command_schedule_idle_3132f8(second)==0u)return 0u;if(*(volatile uint8_t *)(record+2785u)!=0u)(void)opencfw_em9305_ll_schedule_notify_313354(second);}(void)opencfw_em9305_ll_schedule_notify_313354(first);return 0u;}uintptr_t destination=*(volatile uint32_t *)(packet+4u);if(data!=0u)(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);*(volatile uint16_t *)packet=(uint16_t)length;}
+ else {if(length!=0u||*(volatile uint8_t *)(record+2u)==0u||*(volatile uint16_t *)packet==0u)return 18u;}
+ uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,operation==4u?0u:length,data);*(volatile uint16_t *)(record+64u)=(uint16_t)crc;*(volatile uint8_t *)(packet+12u)=(uint8_t)auxiliary;*(volatile uint8_t *)(packet+8u)=1u;return 0u;
+}
+/* Native30d580/308ba8: even failing modern child changes separate legacy length. */
+uint32_t opencfw_em9305_command_data_30d580(uint32_t id,uint32_t operation,uint32_t auxiliary,uint32_t length,uintptr_t data)
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;uint32_t flags=*(volatile uint16_t *)(record+32u),result;if((flags&16u)!=0u){result=opencfw_em9305_command_payload_legacy_327510(record,record+1420u,operation,length,data);if(result!=0u)return result;*(volatile uint8_t *)(record+1432u)=1u;}else{if(length!=0u&&(flags&2u)!=0u)return 18u;if(length!=0u&&*(volatile uint16_t *)(record+2248u)!=0u)return 12u;result=opencfw_em9305_command_payload_32739c(record,record+1420u,operation,auxiliary,length,data);if(operation==0u||operation==2u){uint32_t old=*(volatile uint16_t *)(record+2250u);*(volatile uint16_t *)(record+2250u)=(uint16_t)(old+length);}else if(operation==1u||operation==3u)*(volatile uint16_t *)(record+2250u)=(uint16_t)length;if(result!=0u)return result;}opencfw_em9305_command_data_notify_mask_306c8c((uint32_t)record,1u);return 0u;}
+/* Native30d854/308f54: response operation4 rejected before record flag tests. */
+uint32_t opencfw_em9305_command_response_30d854(uint32_t id,uint32_t operation,uint32_t auxiliary,uint32_t length,uintptr_t data)
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(operation==4u)return 18u;uint32_t flags=*(volatile uint16_t *)(record+32u);if((flags&2u)==0u&&length!=0u)return 18u;uint32_t result;if((flags&16u)!=0u){result=opencfw_em9305_command_payload_legacy_327510(record,record+1696u,operation,length,data);if(result!=0u)return result;*(volatile uint8_t *)(record+1708u)=1u;}else{if(operation!=3u&&length==0u)return 12u;if(length!=0u&&*(volatile uint16_t *)(record+2250u)!=0u)return 12u;result=opencfw_em9305_command_payload_32739c(record,record+1696u,operation,auxiliary,length,data);if(operation==0u||operation==2u){uint32_t old=*(volatile uint16_t *)(record+2248u);*(volatile uint16_t *)(record+2248u)=(uint16_t)(old+length);}else if(operation==1u||operation==3u)*(volatile uint16_t *)(record+2248u)=(uint16_t)length;if(result!=0u)return result;}opencfw_em9305_command_data_notify_mask_306c8c((uint32_t)record,2u);return 0u;}
+
+/* Native30e7ac..30e7e8: first-error latch, wrapped pending decrement, six exact status bytes. */
+void opencfw_em9305_command_rows_status_30e7ac(uint32_t id,uint32_t status)
+{uint32_t latched=*(volatile uint8_t *)(uintptr_t)0x805a7bu;if(status!=0u&&latched==0u){latched=status;*(volatile uint8_t *)(uintptr_t)0x805a7bu=(uint8_t)status;}uint32_t pending=*(volatile uint8_t *)(uintptr_t)0x805a7au;pending-=1u;*(volatile uint8_t *)(uintptr_t)0x805a7au=(uint8_t)pending;if((uint8_t)pending!=0u)return;uint8_t event[6] __attribute__((aligned(4)));event[5]=(uint8_t)id;*(uint16_t *)(void *)event=(uint16_t)id;event[4]=(uint8_t)latched;event[3]=(uint8_t)latched;event[2]=27u;(void)opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);}
+/* Native307330..307358: enable-only legacy interval validation with fullword subtraction. */
+uint32_t opencfw_em9305_command_row_interval_307330(uint32_t enable,uintptr_t row)
+{if(enable==0u)return 0u;uint32_t id=*(volatile uint8_t *)row;uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;uint32_t flags=*(volatile uint16_t *)(record+32u);if((flags&29u)==29u){uint32_t interval=*(volatile uint16_t *)(row+2u);if(interval-1u>127u)return 18u;}return 0u;}
+/* Native30735c..3073e8: ordered payload-ready, mode and length gates. */
+uint32_t opencfw_em9305_command_row_ready_30735c(uint32_t id)
+{uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+1428u)==0u||*(volatile uint8_t *)(record+1704u)==0u)return 12u;uint32_t flags=*(volatile uint16_t *)(record+32u);if((flags&18u)==2u&&*(volatile uint16_t *)(record+2248u)==0u)return 12u;uint32_t mode=*(volatile uint8_t *)(record+57u);if((mode|2u)==3u&&*(volatile uint8_t *)(record+4u)==0u)return 18u;if((flags&17u)==17u&&*(volatile uint16_t *)(record+2250u)>=32u)return 18u;uint32_t kind=flags&5u;if(kind==1u){if(*(volatile uint16_t *)(record+2250u)>245u)return 18u;}else if(kind==5u){if(*(volatile uint16_t *)(record+2250u)>239u)return 18u;}return 0u;}
+/* Native306e68..306ea4: dynamic config/base reload, active record ID collection. */
+uint32_t opencfw_em9305_command_rows_collect_306e68(uintptr_t output)
+{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t index=0u,count=0u;while(index<*(volatile uint8_t *)(config+12u)){uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c38u;uintptr_t record=base+opencfw_em9305_config_update_mpywhl(index,2824u);if(*(volatile uint8_t *)record!=0u){uint32_t id=*(volatile uint8_t *)(record+1u);*(volatile uint8_t *)(output+count)=(uint8_t)id;count+=1u;config=*(volatile uint32_t *)(uintptr_t)0x805cacu;}index+=1u;}return (uint8_t)count;}
+/* Native30b6cc..30b7d4: complete command, preflight both rows before allocation.
+ * Stock collect-all caller reserves two ID bytes. Product active-count contract remains unowned. */
+void opencfw_em9305_command_enable_rows_30b6cc(uint32_t enable,uint32_t count,uintptr_t rows)
+{if(*(volatile uint8_t *)(uintptr_t)0x805a7au!=0u)opencfw_em9305_command_rows_status_30e7ac(0u,12u);*(volatile uint8_t *)(uintptr_t)0x805a7bu=0u;uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();uint32_t error=0u;if(gate==0u)error=12u;else if(count>=3u)error=18u;else if(enable!=0u&&count==0u)error=18u;if(error!=0u){*(volatile uint8_t *)(uintptr_t)0x805a7au=1u;opencfw_em9305_command_rows_status_30e7ac(0u,error);return;}
+ if(enable==0u&&count==0u){uint8_t ids[2] __attribute__((aligned(4)));*(uint16_t *)(void *)ids=0u;uint32_t found=opencfw_em9305_command_rows_collect_306e68((uintptr_t)ids);for(uint32_t index=0u;index<found;index++){uintptr_t event=opencfw_em9305_wsf_event_allocate(12u);if(event==0u)continue;uint32_t id=*(volatile uint8_t *)(ids+index);*(volatile uint16_t *)(event+2u)=520u;uint32_t pending=*(volatile uint8_t *)(uintptr_t)0x805a7au;*(volatile uint16_t *)event=(uint16_t)id;*(volatile uint32_t *)(event+4u)=0u;*(volatile uint8_t *)(uintptr_t)0x805a7au=(uint8_t)(pending+1u);uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint8_t *)(event+8u)=0u;(void)opencfw_em9305_wsf_task_message_send(handler,event);}return;}
+ uint32_t total=count>1u?count:1u;for(uint32_t i=0u;i<total;i++){uintptr_t row=rows+i*6u;uint32_t id=*(volatile uint8_t *)row;error=opencfw_em9305_command_row_ready_30735c(id);if(error==0u)error=opencfw_em9305_command_row_interval_307330(enable,row);if(error!=0u){id=*(volatile uint8_t *)row;*(volatile uint8_t *)(uintptr_t)0x805a7au=1u;opencfw_em9305_command_rows_status_30e7ac(id,error);return;}}
+ uint32_t type=enable==0u?2u:1u;for(uint32_t i=0u;i<total;i++){uintptr_t event=opencfw_em9305_wsf_event_allocate(12u);if(event==0u)continue;uintptr_t row=rows+i*6u;uint32_t option=*(volatile uint8_t *)(row+4u),interval=*(volatile uint16_t *)(row+2u),pending=*(volatile uint8_t *)(uintptr_t)0x805a7au,id=*(volatile uint8_t *)row;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint8_t *)(event+8u)=(uint8_t)option;uint32_t scaled=opencfw_em9305_config_limit_mpyuw(interval,10u);*(volatile uint16_t *)event=(uint16_t)id;*(volatile uint8_t *)(uintptr_t)0x805a7au=(uint8_t)(pending+1u);*(volatile uint32_t *)(event+4u)=scaled;*(volatile uint8_t *)(event+3u)=(uint8_t)type;*(volatile uint8_t *)(event+2u)=8u;(void)opencfw_em9305_wsf_task_message_send(handler,event);}
+}
+
+/* Native331ac0..331aea: argument ignored, 28-byte tail clear and ordered masks.
+ * R0 at native return is the mask 0x1fff, retained for the caller ABI. */
+uint32_t opencfw_em9305_ll_dispatch_initialize(uint32_t ignored)
+{
+ (void)ignored;
+ (void)opencfw_em9305_memset((void *)(uintptr_t)0x805700u,0u,28u);
+ *(volatile uint32_t *)(uintptr_t)0x8056f8u=31u;
+ *(volatile uint32_t *)(uintptr_t)0x8056e8u=UINT32_MAX;
+ *(volatile uint32_t *)(uintptr_t)0x8056fcu=0u;
+ *(volatile uint32_t *)(uintptr_t)0x8056f4u=0u;
+ *(volatile uint32_t *)(uintptr_t)0x8056f0u=0u;
+ *(volatile uint32_t *)(uintptr_t)0x8056ecu=0x1fffu;
+ return 0x1fffu;
+}
+
+/* Native32e5d4..32e914: primary HCI command dispatch. Stack projections
+ * intentionally retain native unwritten padding; helper/data contracts remain explicit. */
+extern uint32_t opencfw_em9305_primary_vendor_32eb34(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_primary_private_304afc(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_primary_response_32e918(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_primary_reset_mode_310718(uint32_t);
+extern uint32_t opencfw_em9305_ll_special_mode_initialize(uint32_t);
+extern uint32_t opencfw_em9305_command_primary_30de38(uintptr_t);
+extern uint32_t opencfw_em9305_command_primary_30b190(uint32_t);
+extern uint32_t opencfw_em9305_command_primary_30af98(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_primary_30cac4(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_primary_masks_332b60(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_command_primary_30e3ec(int32_t,int32_t);
+extern uint32_t opencfw_em9305_command_primary_30d528(uint32_t);
+extern uint32_t opencfw_em9305_command_primary_30d8a0(uint32_t,uint32_t);
+uint32_t opencfw_em9305_ll_command_primary(uintptr_t request,uintptr_t input)
+{
+ if(opencfw_em9305_primary_vendor_32eb34(request,input)!=0u)return 1u;
+ if(opencfw_em9305_primary_private_304afc(request,input)!=0u)return 1u;
+ uint32_t command=*(volatile uint16_t *)request,status=0u,length=9u;
+ _Alignas(4) uint8_t scratch[20];
+ switch(command){
+ case 0x0c03u:{uint32_t value=opencfw_em9305_primary_reset_mode_310718(2u);uintptr_t result=opencfw_em9305_ll_special_mode_initialize(value);(void)result;(void)opencfw_em9305_memset((void *)(uintptr_t)0x8056e8u,0u,24u);return 1u;}
+ case 0x0c01u:(void)opencfw_em9305_primary_masks_332b60(0x8056e8u,input);length=1u;break;
+ case 0x0c63u:(void)opencfw_em9305_primary_masks_332b60(0x8056f0u,input);length=1u;break;
+ case 0x2001u:(void)opencfw_em9305_primary_masks_332b60(0x8056f8u,input);length=1u;break;
+ case 0x0c48u:case 0x200fu:length=2u;break;
+ case 0x0c49u:*(volatile uint8_t *)(uintptr_t)0x80571au=*(volatile uint8_t *)input;length=1u;break;
+ case 0x2002u:length=4u;break;
+ case 0x2005u:status=opencfw_em9305_command_primary_30de38(input);length=1u;break;
+ case 0x2010u:status=opencfw_em9305_command_primary_30b190(command);length=1u;break;
+ case 0x2011u:status=opencfw_em9305_command_primary_30af98(*(volatile uint8_t *)input,input+1u);length=1u;break;
+ case 0x2012u:status=opencfw_em9305_command_primary_30cac4(*(volatile uint8_t *)input,input+1u);length=1u;break;
+ case 0x201du:{uint32_t id=*(volatile uint8_t *)input;*(volatile uint8_t *)(scratch+8u)=(uint8_t)id;*(volatile uint16_t *)scratch=0u;*(volatile uint32_t *)(scratch+16u)=0u;*(volatile uint8_t *)(scratch+14u)=2u;*(volatile uint16_t *)(scratch+10u)=0u;*(volatile uint8_t *)(scratch+9u)=1u;*(volatile uint32_t *)(scratch+4u)=0x71764129u;*(volatile uint16_t *)(scratch+12u)=256u;status=opencfw_em9305_command_30cba0((uintptr_t)scratch);length=1u;break;}
+ case 0x201eu:{uint32_t b2=*(volatile uint8_t *)(input+2u),b0=*(volatile uint8_t *)input,b1=*(volatile uint8_t *)(input+1u);*(volatile uint8_t *)(scratch+4u)=(uint8_t)b2;*(volatile uint16_t *)scratch=0u;*(volatile uint32_t *)(scratch+12u)=0u;*(volatile uint8_t *)(scratch+8u)=2u;*(volatile uint16_t *)(scratch+6u)=0u;*(volatile uint8_t *)(scratch+5u)=1u;*(volatile uint8_t *)(scratch+16u)=127u;*(volatile uint8_t *)(scratch+2u)=(uint8_t)b0;*(volatile uint8_t *)(scratch+3u)=(uint8_t)b1;status=opencfw_em9305_command_30e120((uintptr_t)scratch);length=1u;break;}
+ case 0x201fu:case 0x204bu:length=3u;break;
+ case 0x204cu:length=5u;break;
+ case 0x204du:{uint32_t b1=*(volatile uint8_t *)(input+1u),b3=*(volatile uint8_t *)(input+3u),b0=*(volatile uint8_t *)input,b2=*(volatile uint8_t *)(input+2u);status=opencfw_em9305_command_primary_30e3ec((int16_t)(b0+(b1<<8u)),(int16_t)(b2+(b3<<8u)));length=1u;break;}
+ case 0x204fu:{uint32_t b[7];b[6]=*(volatile uint8_t *)(input+6u);for(uint32_t i=0u;i<6u;i++)b[i]=*(volatile uint8_t *)(input+i);*(volatile uint8_t *)(scratch+14u)=(uint8_t)b[6];*(volatile uint16_t *)scratch=0u;*(volatile uint32_t *)(scratch+4u)=0x71764129u;*(volatile uint32_t *)(scratch+16u)=(uint32_t)(input+7u);for(uint32_t i=0u;i<6u;i++)*(volatile uint8_t *)(scratch+8u+i)=(uint8_t)b[i];status=opencfw_em9305_command_30cba0((uintptr_t)scratch);length=1u;break;}
+ case 0x2050u:{uint32_t b[7];b[1]=*(volatile uint8_t *)(input+1u);b[0]=*(volatile uint8_t *)input;for(uint32_t i=2u;i<7u;i++)b[i]=*(volatile uint8_t *)(input+i);*(volatile uint8_t *)(scratch+3u)=(uint8_t)b[1];*(volatile uint16_t *)scratch=0u;*(volatile uint8_t *)(scratch+16u)=127u;*(volatile uint32_t *)(scratch+12u)=(uint32_t)(input+7u);*(volatile uint8_t *)(scratch+2u)=(uint8_t)b[0];for(uint32_t i=2u;i<7u;i++)*(volatile uint8_t *)(scratch+2u+i)=(uint8_t)b[i];status=opencfw_em9305_command_30e120((uintptr_t)scratch);length=1u;break;}
+ case 0x0c82u:{uint32_t b1=*(volatile uint8_t *)(input+1u),b0=*(volatile uint8_t *)input;status=opencfw_em9305_command_primary_30d528((uint16_t)(b0+(b1<<8u)));length=1u;break;}
+ case 0x0c84u:{uint32_t value=*(volatile uint8_t *)input;status=value!=0u&&value<17u?17u:0u;length=1u;break;}
+ case 0x2074u:{uint32_t b1=*(volatile uint8_t *)(input+1u),b0=*(volatile uint8_t *)input;status=opencfw_em9305_command_primary_30d8a0(b0,b1!=0u);length=1u;break;}
+ case 0x205fu:status=12u;length=1u;break;
+ case 0x207bu:status=1u;length=1u;break;
+ case 0x1002u:length=65u;break;
+ case 0x1009u:length=7u;break;
+ case 0u:length=1u;break;
+ case 0x1001u:case 0x1003u:case 0x2003u:case 0x2018u:case 0x201cu:break;
+ default:return 0u;
+ }
+ (void)opencfw_em9305_primary_response_32e918(request,(uint8_t)status,length);
+ return 1u;
+}
+
+/* Native332b60..332b6e: retain low-word R0 after eight-byte packing. */
+uint32_t opencfw_em9305_primary_masks_332b60(uintptr_t destination,uintptr_t input)
+{
+ uint64_t bits=opencfw_em9305_ll_pack64_304648(input);
+ *(volatile uint32_t *)(destination+4u)=(uint32_t)(bits>>32u);
+ *(volatile uint32_t *)destination=(uint32_t)bits;
+ return (uint32_t)bits;
+}
+/* Native30b190..30b1a8: argument dead, busy latch before reset. */
+uint32_t opencfw_em9305_command_primary_30b190(uint32_t ignored)
+{
+ (void)ignored;
+ if(*(volatile uint8_t *)(uintptr_t)0x805a76u!=0u)return 12u;
+ (void)opencfw_em9305_radio_address_reset_303e38();
+ return 0u;
+}
+/* Native30af98..30aff4 and30cac4..30cb20: fullword initial kind check,
+ * wrapped-byte second check and exact special 255 mode branch. */
+static uint32_t opencfw_em9305_primary_address_gate(uint32_t kind)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t version=*(volatile uint8_t *)(config+4u);
+ if(kind>=2u&&version<9u)return 18u;
+ if((uint8_t)(kind+1u)>=3u&&version>=9u)return 18u;
+ if(*(volatile uint8_t *)(uintptr_t)0x805a76u!=0u)return 12u;
+ return 0u;
+}
+uint32_t opencfw_em9305_command_primary_30af98(uint32_t kind,uintptr_t input)
+{
+ uint32_t error=opencfw_em9305_primary_address_gate(kind);
+ if(error!=0u)return error;
+ if(kind==255u){(void)opencfw_em9305_radio_address_enable_303dec();return 0u;}
+ uint64_t address=opencfw_em9305_controller_pack_address(input);
+ uint32_t result=opencfw_em9305_radio_address_add_303da4(kind!=0u,(uint32_t)address,(uint32_t)(address>>32u));
+ return result==0u?7u:0u;
+}
+uint32_t opencfw_em9305_command_primary_30cac4(uint32_t kind,uintptr_t input)
+{
+ uint32_t error=opencfw_em9305_primary_address_gate(kind);
+ if(error!=0u)return error;
+ if(kind==255u){(void)opencfw_em9305_radio_address_disable_303ec0();return 0u;}
+ uint64_t address=opencfw_em9305_controller_pack_address(input);
+ uint32_t result=opencfw_em9305_radio_address_remove_303e68(kind!=0u,(uint32_t)address,(uint32_t)(address>>32u));
+ return result==0u?18u:0u;
+}
+
+/* Native30d528..30d548: fullword input, wrapped halfword validation. */
+extern uint32_t opencfw_em9305_radio_primary_value_313744(uint32_t);
+uint32_t opencfw_em9305_command_primary_30d528(uint32_t value)
+{
+ if((uint16_t)(value-0x7df1u)<0x8211u)return 18u;
+ (void)opencfw_em9305_radio_primary_value_313744(value);
+ return 0u;
+}
+/* Native30e3ec..30e3fa: child zero/nonzero projected to18/0. */
+extern uint32_t opencfw_em9305_radio_primary_pair_310664(int32_t,int32_t);
+uint32_t opencfw_em9305_command_primary_30e3ec(int32_t first,int32_t second)
+{
+ return opencfw_em9305_radio_primary_pair_310664(first,second)==0u?18u:0u;
+}
+/* Native30d8a0..30d8f8, authenticated 3027c8 six-bit shift semantics.
+ * Capability loaded before busy gate; fullword enable shifted unchanged. */
+uint32_t opencfw_em9305_command_primary_30d8a0(uint32_t index,uint32_t enable)
+{
+ uint32_t shift=index&63u;
+ uint64_t bit=UINT64_C(1)<<shift;
+ uint32_t low=(uint32_t)bit,high=(uint32_t)(bit>>32u);
+ uint32_t supported_high=*(volatile uint32_t *)(uintptr_t)0x805b54u;
+ uint32_t supported_low=*(volatile uint32_t *)(uintptr_t)0x805b50u;
+ if(((high&supported_high)|(low&supported_low))==0u)return 17u;
+ if(*(volatile uint8_t *)(uintptr_t)0x805a70u!=0u)return 12u;
+ uint64_t value=(uint64_t)enable<<shift;
+ uint32_t old_low=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t old_high=*(volatile uint32_t *)(uintptr_t)0x805a98u;
+ low=(old_low&~low)|(uint32_t)value;
+ high=(old_high&~high)|(uint32_t)(value>>32u);
+ *(volatile uint32_t *)(uintptr_t)0x805a94u=low;
+ *(volatile uint32_t *)(uintptr_t)0x805a98u=high;
+ return 0u;
+}
+
+/* Native310664..310676: two halfword controls, first/second addresses reversed. */
+uint32_t opencfw_em9305_radio_primary_pair_310664(int32_t first,int32_t second)
+{
+ *(volatile uint16_t *)(uintptr_t)0x8012eeu=(uint16_t)first;
+ *(volatile uint16_t *)(uintptr_t)0x8012ecu=(uint16_t)second;
+ return 1u;
+}
+
+/* Native ROM3357e0/335800: eight exact paired words, reader333bec
+ * establishes extent through lp_count8. Source/table SHA in evidence receipt. */
+static const uint32_t opencfw_em9305_primary_timer_thresholds[8]={2000000u,1000000u,500000u,160000u,80000u,40000u,5000u,0u};
+static const uint32_t opencfw_em9305_primary_timer_quanta[8]={1000000u,100000u,50000u,10000u,5000u,2500u,1250u,625u};
+/* Native333bec..333c20: strict unsigned threshold, first hit, no-hit R0 unchanged. */
+uint32_t opencfw_em9305_radio_primary_timer_333bec(uint32_t value)
+{
+ if(*(volatile uint8_t *)(uintptr_t)0x805f34u!=0u)return value;
+ *(volatile uint32_t *)(uintptr_t)0x805f30u=value;
+ for(uint32_t i=0u;i<8u;i++){
+  if(opencfw_em9305_primary_timer_thresholds[i]<value){
+   uint32_t quantum=opencfw_em9305_primary_timer_quanta[i];
+   *(volatile uint32_t *)(uintptr_t)0x805f2cu=quantum;
+   return quantum;
+  }
+ }
+ return value;
+}
+/* Native313744..31375c: authentic 16x16 unsigned DSP multiply, flag clear
+ * in call delay slot, flag publish after child; R0 is child result. */
+uint32_t opencfw_em9305_radio_primary_value_313744(uint32_t value)
+{
+ uint32_t scaled=opencfw_em9305_config_limit_mpyuw(value,1250u);
+ *(volatile uint8_t *)(uintptr_t)0x805f34u=0u;
+ uint32_t result=opencfw_em9305_radio_primary_timer_333bec(scaled);
+ *(volatile uint8_t *)(uintptr_t)0x805f34u=1u;
+ return result;
+}
+
+/* Native32e918..32eb30: complete response router. Allocation captures the
+ * command before call, then routing reloads the request after allocation.
+ * Unwritten packet bytes and provider-owned scratch stay native sparse. */
+extern uint32_t opencfw_em9305_primary_query_30bf04(uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_primary_query_30c92c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_primary_query_30bb74(uintptr_t);
+extern uint32_t opencfw_em9305_primary_query_30bdb4(uintptr_t);
+extern uint32_t opencfw_em9305_primary_query_30bf20(uint32_t);
+extern uint32_t opencfw_em9305_primary_query_30bea4(uintptr_t);
+extern uint32_t opencfw_em9305_primary_query_30c928(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_primary_query_313960(uintptr_t,uint32_t,uint32_t);
+uint32_t opencfw_em9305_primary_response_32e918(uintptr_t request,uint32_t status,uint32_t length)
+{
+ uintptr_t packet=opencfw_em9305_ll_response_allocate_32e428(length,*(volatile uint16_t *)request);
+ if(packet==0u)return 0u;
+ uint32_t command=*(volatile uint16_t *)request;
+ _Alignas(4) uint8_t scratch[24];
+ switch(command){
+ case 0x2002u:{
+  uint32_t first=opencfw_em9305_ll_test_30bb14();
+  uint32_t second=opencfw_em9305_ll_test_30bb20();
+  *(volatile uint8_t *)(packet+3u)=(uint8_t)second;
+  *(volatile uint8_t *)(packet+1u)=(uint8_t)first;
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  *(volatile uint8_t *)(packet+2u)=(uint8_t)(first>>8u);break;
+ }
+ case 0x1001u:{
+  (void)opencfw_em9305_primary_query_30bf04((uintptr_t)scratch,(uintptr_t)(scratch+23u),(uintptr_t)(scratch+20u));
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  uint32_t single=*(volatile uint8_t *)(scratch+23u);
+  *(volatile uint8_t *)(packet+1u)=(uint8_t)single;
+  uint32_t word=*(volatile uint16_t *)(scratch+20u);
+  *(volatile uint8_t *)(packet+4u)=(uint8_t)single;
+  uint32_t first=*(volatile uint16_t *)scratch;
+  *(volatile uint8_t *)(packet+2u)=(uint8_t)word;
+  *(volatile uint8_t *)(packet+7u)=(uint8_t)word;
+  *(volatile uint8_t *)(packet+5u)=(uint8_t)first;
+  *(volatile uint8_t *)(packet+3u)=(uint8_t)(word>>8u);
+  *(volatile uint8_t *)(packet+8u)=(uint8_t)(word>>8u);
+  *(volatile uint8_t *)(packet+6u)=(uint8_t)(first>>8u);break;
+ }
+ case 0x204bu:
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  (void)opencfw_em9305_primary_query_30c92c(packet+1u,packet+2u);break;
+ case 0x1009u:
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  (void)opencfw_em9305_primary_query_30bb74(packet+1u);break;
+ case 0x2003u:
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  (void)opencfw_em9305_primary_query_30bdb4(packet+1u);break;
+ case 0x200fu:{
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  uint32_t result=opencfw_em9305_primary_query_30bf20(command);
+  *(volatile uint8_t *)(packet+1u)=(uint8_t)result;break;
+ }
+ case 0x2018u:
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  (void)opencfw_em9305_radio_random_bytes_310038(packet+1u,8u);break;
+ case 0x201cu:
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  (void)opencfw_em9305_primary_query_30bea4(packet+1u);break;
+ case 0x201fu:{
+  (void)opencfw_em9305_memset(scratch,0u,20u);
+  uint32_t result=opencfw_em9305_command_stop_30b654((uintptr_t)scratch);
+  *(volatile uint8_t *)packet=(uint8_t)result;
+  uint32_t first=*(volatile uint8_t *)(scratch+2u);
+  *(volatile uint8_t *)(packet+1u)=(uint8_t)first;
+  uint32_t second=*(volatile uint8_t *)(scratch+3u);
+  *(volatile uint8_t *)(packet+2u)=(uint8_t)second;break;
+ }
+ case 0x204cu:{
+  (void)opencfw_em9305_primary_query_30c928((uintptr_t)scratch,(uintptr_t)(scratch+20u));
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  uint32_t first=*(volatile uint8_t *)scratch;
+  *(volatile uint8_t *)(packet+1u)=(uint8_t)first;
+  uint32_t value=*(volatile uint16_t *)(scratch+20u);
+  uint32_t second=*(volatile uint8_t *)(scratch+1u);
+  *(volatile uint8_t *)(packet+3u)=(uint8_t)value;
+  *(volatile uint8_t *)(packet+2u)=(uint8_t)second;
+  *(volatile uint8_t *)(packet+4u)=(uint8_t)(value>>8u);break;
+ }
+ case 0x0c48u:
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  *(volatile uint8_t *)(packet+1u)=*(volatile uint8_t *)(uintptr_t)0x80571au;break;
+ case 0x1002u:
+  (void)opencfw_em9305_memset((void *)(packet+1u),0u,64u);
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  (void)opencfw_em9305_memcpy((void *)(packet+1u),(void *)(uintptr_t)0x805885u,64u);break;
+ case 0x1003u:
+  *(volatile uint8_t *)packet=(uint8_t)status;
+  (void)opencfw_em9305_primary_query_313960(packet+1u,0u,96u);break;
+ case 0u:case 0x0c01u:case 0x0c49u:case 0x0c63u:case 0x0c82u:case 0x0c84u:
+ case 0x2001u:case 0x2005u:case 0x2010u:case 0x2011u:case 0x2012u:case 0x201du:case 0x201eu:
+ case 0x204du:case 0x204fu:case 0x2050u:case 0x205fu:case 0x2074u:case 0x207bu:
+  *(volatile uint8_t *)packet=(uint8_t)status;break;
+ default:break;
+ }
+ return opencfw_em9305_ll_event_send(packet-5u);
+}
+
+/* Native313960..313988: full eight-byte serialization; exact store order
+ * 4,0,7,6,5,3,2,1 and original destination in R0. */
+uint32_t opencfw_em9305_primary_query_313960(uintptr_t output,uint32_t low,uint32_t high)
+{
+ *(volatile uint8_t *)(output+4u)=(uint8_t)high;
+ *(volatile uint8_t *)output=(uint8_t)low;
+ *(volatile uint8_t *)(output+7u)=(uint8_t)(high>>24u);
+ *(volatile uint8_t *)(output+6u)=(uint8_t)(high>>16u);
+ *(volatile uint8_t *)(output+5u)=(uint8_t)(high>>8u);
+ *(volatile uint8_t *)(output+3u)=(uint8_t)(low>>24u);
+ *(volatile uint8_t *)(output+2u)=(uint8_t)(low>>16u);
+ *(volatile uint8_t *)(output+1u)=(uint8_t)(low>>8u);
+ return (uint32_t)output;
+}
+/* Native30bf04..30bf1c: fields captured before output; second config pointer fresh. */
+uint32_t opencfw_em9305_primary_query_30bf04(uintptr_t first,uintptr_t version,uintptr_t second)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t first_value=*(volatile uint16_t *)config;
+ uint32_t version_value=*(volatile uint8_t *)(config+4u);
+ *(volatile uint16_t *)first=(uint16_t)first_value;
+ *(volatile uint8_t *)version=(uint8_t)version_value;
+ config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t second_value=*(volatile uint16_t *)(config+2u);
+ *(volatile uint16_t *)second=(uint16_t)second_value;
+ return second_value;
+}
+/* Native30c92c tail31026c; selected complete child retains output pointer R0. */
+uint32_t opencfw_em9305_primary_query_30c92c(uintptr_t lower,uintptr_t upper)
+{return opencfw_em9305_ll_signed_bounds_31026c(lower,upper);}
+/* Native30bb74..30bb80: high-word before low-word, selected six-byte serializer. */
+uint32_t opencfw_em9305_primary_query_30bb74(uintptr_t output)
+{
+ uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805b44u;
+ uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805b40u;
+ return (uint32_t)opencfw_em9305_radio_address_write_3045e8(output,low,high);
+}
+/* Native30bdb4..30bdc0: high-word before low-word, full serializer tail. */
+uint32_t opencfw_em9305_primary_query_30bdb4(uintptr_t output)
+{
+ uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805a98u;
+ uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ return opencfw_em9305_primary_query_313960(output,low,high);
+}
+/* Native30bf20 tail303e50; incoming R0 unused by actual child. */
+uint32_t opencfw_em9305_primary_query_30bf20(uint32_t ignored)
+{(void)ignored;return opencfw_em9305_radio_address_status_303e50();}
+/* Native30bea4..30beb0: high-word first, full serializer tail. */
+uint32_t opencfw_em9305_primary_query_30bea4(uintptr_t output)
+{
+ uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805b4cu;
+ uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805b48u;
+ return opencfw_em9305_primary_query_313960(output,low,high);
+}
+/* Native310328..31033c: first halfword written before second read. */
+uint32_t opencfw_em9305_primary_controls_310328(uintptr_t first,uintptr_t second)
+{
+ uint32_t first_value=*(volatile uint16_t *)(uintptr_t)0x8012eeu;
+ *(volatile uint16_t *)first=(uint16_t)first_value;
+ uint32_t second_value=*(volatile uint16_t *)(uintptr_t)0x8012ecu;
+ *(volatile uint16_t *)second=(uint16_t)second_value;
+ return second_value;
+}
+uint32_t opencfw_em9305_primary_query_30c928(uintptr_t first,uintptr_t second)
+{return opencfw_em9305_primary_controls_310328(first,second);}
+
+/* Native304838/304850/304880/304898: each provider reloads the table after
+ * authentic MPYUW index*912; exact halfword field and native word return. */
+static uint32_t opencfw_em9305_private_counter_field(uint32_t index,uint32_t field)
+{
+ uint32_t offset=opencfw_em9305_config_limit_mpyuw(index,912u);
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ return *(volatile uint16_t *)(base+offset+field);
+}
+uint32_t opencfw_em9305_private_counter_304838(uint32_t index){return opencfw_em9305_private_counter_field(index,908u);}
+uint32_t opencfw_em9305_private_counter_304850(uint32_t index){return opencfw_em9305_private_counter_field(index,906u);}
+uint32_t opencfw_em9305_private_counter_304880(uint32_t index){return opencfw_em9305_private_counter_field(index,910u);}
+uint32_t opencfw_em9305_private_counter_304898(uint32_t index){return opencfw_em9305_private_counter_field(index,904u);}
+/* Native304994..3049a8: ST.AS227/226 are words at908/904, in that order. */
+uint32_t opencfw_em9305_private_counter_reset_304994(uint32_t index)
+{
+ uint32_t offset=opencfw_em9305_config_limit_mpyuw(index,912u);
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t record=base+offset;
+ *(volatile uint32_t *)(record+908u)=0u;
+ *(volatile uint32_t *)(record+904u)=0u;
+ return (uint32_t)record;
+}
+/* Native3049ac..3049c8: fullword count<=7, publish enable then count. */
+uint32_t opencfw_em9305_private_mode_3049ac(uint32_t count,uint32_t enable)
+{
+ if(count>7u)return 18u;
+ *(volatile uint8_t *)(uintptr_t)0x805f00u=(uint8_t)enable;
+ *(volatile uint8_t *)(uintptr_t)0x8012fcu=(uint8_t)count;
+ return 0u;
+}
+/* Native3049cc..3049fc: mark busy before64-byte copy; store operation3
+ * before the existing wake provider, then return zero. */
+uint32_t opencfw_em9305_private_data_3049cc(uintptr_t input)
+{
+ if(*(volatile uint8_t *)(uintptr_t)0x805b80u!=0u)return 12u;
+ *(volatile uint8_t *)(uintptr_t)0x805b80u=1u;
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x80527cu,(const void *)input,64u);
+ *(volatile uint8_t *)(uintptr_t)0x805258u=3u;
+ (void)opencfw_em9305_wsf_wake_cell_313fc0(0x805258u);
+ return 0u;
+}
+/* Native304a00..304a60: critical capture and fourth output before exit.
+ * Invalid slots zero all four halfwords; fourth store occurs before exit. */
+uint32_t opencfw_em9305_private_stats_304a00(uint32_t index,uintptr_t first,uintptr_t second,uintptr_t third,uintptr_t fourth)
+{
+ (void)opencfw_em9305_wsf_critical_enter();
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+34u),status=2u,value=0u;
+ if(index<count&&opencfw_em9305_ll_slot_active_30731c(index)!=0u){
+  *(volatile uint16_t *)first=(uint16_t)opencfw_em9305_private_counter_304898(index);
+  *(volatile uint16_t *)second=(uint16_t)opencfw_em9305_private_counter_304850(index);
+  *(volatile uint16_t *)third=(uint16_t)opencfw_em9305_private_counter_304838(index);
+  value=opencfw_em9305_private_counter_304880(index);
+  status=0u;
+ }else{
+  *(volatile uint16_t *)first=0u;
+  *(volatile uint16_t *)second=0u;
+  *(volatile uint16_t *)third=0u;
+ }
+ *(volatile uint16_t *)fourth=(uint16_t)value;
+ (void)opencfw_em9305_wsf_critical_exit();
+ return status;
+}
+/* Native304a64..304a94: validated counter reset inside critical region. */
+uint32_t opencfw_em9305_private_reset_304a64(uint32_t index)
+{
+ (void)opencfw_em9305_wsf_critical_enter();
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t status=2u;
+ if(index<*(volatile uint8_t *)(config+34u)&&opencfw_em9305_ll_slot_active_30731c(index)!=0u){
+  (void)opencfw_em9305_private_counter_reset_304994(index);status=0u;
+ }
+ (void)opencfw_em9305_wsf_critical_exit();
+ return status;
+}
+/* Native304afc..304bb0: all four vendor-private opcodes; allocation uses
+ * command captured at native points, subsequent query tests fresh request. */
+uint32_t opencfw_em9305_primary_private_304afc(uintptr_t request,uintptr_t input)
+{
+ uint32_t command=*(volatile uint16_t *)request;
+ if(command==0xfe84u){
+  uint32_t status=opencfw_em9305_private_reset_304a64(*(volatile uint8_t *)input);
+  (void)opencfw_em9305_ll_status_event_331bf8(request,(uint8_t)status);return 1u;
+ }
+ if(command==0xfe82u){
+  uint32_t status=opencfw_em9305_private_data_3049cc(input);
+  (void)opencfw_em9305_ll_status_event_331bf8(request,(uint8_t)status);return 1u;
+ }
+ uint32_t id=0u,length=1u;
+ if(command==0xfe81u){
+  uint32_t count=*(volatile uint8_t *)input,enabled=*(volatile uint8_t *)(input+1u);
+  (void)opencfw_em9305_private_mode_3049ac(count,enabled!=0u);
+  command=*(volatile uint16_t *)request;
+ }else if(command==0xfe83u){id=*(volatile uint8_t *)input;length=9u;}
+ else return 0u;
+ uintptr_t packet=opencfw_em9305_ll_response_allocate_32e428(length,command);
+ if(packet==0u)return 1u;
+ _Alignas(4) uint8_t scratch[8];
+ if(*(volatile uint16_t *)request==0xfe83u){
+  uint32_t result=opencfw_em9305_private_stats_304a00(id,(uintptr_t)scratch,(uintptr_t)(scratch+6u),(uintptr_t)(scratch+4u),(uintptr_t)(scratch+2u));
+  *(volatile uint8_t *)packet=(uint8_t)result;
+  *(volatile uint8_t *)(packet+1u)=*(volatile uint8_t *)scratch;
+  uint32_t first=*(volatile uint16_t *)(scratch+6u),second=*(volatile uint16_t *)(scratch+4u),third=*(volatile uint16_t *)(scratch+2u),high=*(volatile uint8_t *)(scratch+1u);
+  *(volatile uint8_t *)(packet+3u)=(uint8_t)first;
+  *(volatile uint8_t *)(packet+5u)=(uint8_t)second;
+  *(volatile uint8_t *)(packet+7u)=(uint8_t)third;
+  *(volatile uint8_t *)(packet+2u)=(uint8_t)high;
+  *(volatile uint8_t *)(packet+4u)=(uint8_t)(first>>8u);
+  *(volatile uint8_t *)(packet+6u)=(uint8_t)(second>>8u);
+  *(volatile uint8_t *)(packet+8u)=(uint8_t)(third>>8u);
+ }
+ (void)opencfw_em9305_ll_event_send(packet-5u);
+ return 1u;
+}
+
+/* Complete native leaf providers used by32eb34; runtime descriptors stay live. */
+uint32_t opencfw_em9305_vendor_control_3101f0(uint32_t a,uint32_t b,uint32_t c){(void)a;(void)b;(void)c;return 0u;}
+uint32_t opencfw_em9305_vendor_control_31035c(uint32_t a){(void)a;return 1u;}
+uint32_t opencfw_em9305_vendor_control_310358(uint32_t a){(void)a;return 1u;}
+uint32_t opencfw_em9305_vendor_command_31071c(uint32_t a){*(volatile uint8_t *)(uintptr_t)0x801318u=(uint8_t)a;return a;}
+uint32_t opencfw_em9305_vendor_query_30e0d4(uint32_t incoming){(void)incoming;return *(volatile uint16_t *)(uintptr_t)0x8058d8u;}
+uint32_t opencfw_em9305_vendor_query_313760(void){return *(volatile uint16_t *)(uintptr_t)0x805f1cu;}
+uint32_t opencfw_em9305_vendor_snapshot_30329c(uintptr_t out){return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)out,(const void *)(uintptr_t)0x8015e4u,38u);}
+uint32_t opencfw_em9305_vendor_snapshot_3032c0(uintptr_t out){return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)out,(const void *)(uintptr_t)0x801848u,28u);}
+uint32_t opencfw_em9305_vendor_query_30bb30(uintptr_t first,uintptr_t second)
+{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t value=config!=0u?*(volatile uint8_t *)(config+12u):0u;*(volatile uint8_t *)first=(uint8_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b1cu;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+uint32_t opencfw_em9305_vendor_query_30bc40(uintptr_t first,uintptr_t second)
+{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t value=config!=0u?*(volatile uint8_t *)(config+34u):0u;*(volatile uint8_t *)first=(uint8_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b1au;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+uint32_t opencfw_em9305_vendor_query_30bd94(uintptr_t first,uintptr_t second)
+{*(volatile uint8_t *)first=3u;uint32_t value=*(volatile uint16_t *)(uintptr_t)0x805b20u;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+uint32_t opencfw_em9305_vendor_query_30bda4(uintptr_t first,uintptr_t second)
+{*(volatile uint8_t *)first=3u;uint32_t value=*(volatile uint16_t *)(uintptr_t)0x805b1eu;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+uint32_t opencfw_em9305_vendor_query_30be2c(uintptr_t first,uintptr_t second)
+{*(volatile uint8_t *)first=6u;uint32_t value=*(volatile uint16_t *)(uintptr_t)0x805b22u;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+uint32_t opencfw_em9305_vendor_query_30bb84(uintptr_t first,uintptr_t second,uintptr_t third,uintptr_t fourth)
+{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t value=0u;
+ if(config!=0u){value=*(volatile uint8_t *)(config+57u);*(volatile uint8_t *)first=(uint8_t)value;config=*(volatile uint32_t *)(uintptr_t)0x805cacu;value=*(volatile uint8_t *)(config+58u);}else{*(volatile uint8_t *)first=0u;}
+ *(volatile uint8_t *)third=(uint8_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b2au;*(volatile uint16_t *)second=(uint16_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b28u;*(volatile uint16_t *)fourth=(uint16_t)value;return value;}
+uint32_t opencfw_em9305_vendor_query_30bc04(uintptr_t first,uintptr_t second,uintptr_t third,uintptr_t fourth)
+{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t value=0u;
+ if(config!=0u){value=*(volatile uint8_t *)(config+52u);*(volatile uint8_t *)first=(uint8_t)value;config=*(volatile uint32_t *)(uintptr_t)0x805cacu;value=*(volatile uint8_t *)(config+53u);}else{*(volatile uint8_t *)first=0u;}
+ *(volatile uint8_t *)third=(uint8_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b26u;*(volatile uint16_t *)second=(uint16_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b24u;*(volatile uint16_t *)fourth=(uint16_t)value;return value;}
+
+/* Native32eb34..32eec6: full vendor router. Sparse packet tails and scratch
+ * outputs follow genuine provider writes; no invented response defaults. */
+extern uint32_t opencfw_em9305_vendor_control_3101f0(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_vendor_control_31035c(uint32_t);
+extern uint32_t opencfw_em9305_vendor_control_310358(uint32_t);
+extern uint32_t opencfw_em9305_vendor_command_30be48(uintptr_t);
+extern uint32_t opencfw_em9305_vendor_command_30d87c(uintptr_t);
+extern uint32_t opencfw_em9305_vendor_command_30d9b4(uint32_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_vendor_command_31071c(uint32_t);
+extern uint32_t opencfw_em9305_vendor_command_30cd5c(uint32_t);
+extern uint32_t opencfw_em9305_vendor_command_30db24(uint32_t);
+extern uint32_t opencfw_em9305_vendor_command_30e034(uint32_t);
+extern uint32_t opencfw_em9305_vendor_allocator_second_313fa8(uint32_t);
+extern uint32_t opencfw_em9305_vendor_query_30bc40(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_vendor_query_30e0d4(uint32_t);
+extern uint32_t opencfw_em9305_vendor_query_313760(void);
+extern uint32_t opencfw_em9305_vendor_query_30bb30(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_vendor_query_30bda4(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_vendor_query_30bd94(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_vendor_query_30be2c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_vendor_query_30bc04(uintptr_t,uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_vendor_query_30bb84(uintptr_t,uintptr_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_vendor_snapshot_30329c(uintptr_t);
+extern uint32_t opencfw_em9305_vendor_snapshot_3032c0(uintptr_t);
+uint32_t opencfw_em9305_primary_vendor_32eb34(uintptr_t request,uintptr_t input)
+{
+ uint32_t command=*(volatile uint16_t *)request,length=1u,status=0u;
+ _Alignas(4) uint8_t scratch[64];
+ switch(command){
+ case 0xfff0u:(void)opencfw_em9305_controller_set_address(input);break;
+ case 0xffa0u:*(volatile uint8_t *)(uintptr_t)0x8058ccu=1u;break;
+ case 0xffa1u:*(volatile uint8_t *)(uintptr_t)0x8057a8u=1u;break;
+ case 0xffa2u:{uint32_t b3=*(volatile uint8_t *)(input+3u),b2=*(volatile uint8_t *)(input+2u),b1=*(volatile uint8_t *)(input+1u),b0=*(volatile uint8_t *)input;uint32_t result=opencfw_em9305_vendor_control_3101f0(b0,b1,(uint16_t)(b2+(b3<<8u)));status=result!=0u?0u:18u;break;}
+ case 0xffa3u:{uint32_t result=opencfw_em9305_vendor_control_31035c(*(volatile uint8_t *)input);if(result!=0u)result=opencfw_em9305_vendor_control_310358(*(volatile uint8_t *)(input+1u));status=result!=0u?0u:18u;break;}
+ case 0xffc0u:length=57u;break;
+ case 0xffcdu:status=1u;break;
+ case 0xfff1u:status=opencfw_em9305_vendor_command_30be48(input);length=7u;break;
+ case 0xfff2u:status=opencfw_em9305_vendor_command_30d87c(input);break;
+ case 0xfff3u:{uint32_t low,high=0u;uintptr_t enable_input;
+  if(*(volatile uint8_t *)(request+2u)==5u){uint32_t b1=*(volatile uint8_t *)(input+1u),b0=*(volatile uint8_t *)input,b2=*(volatile uint8_t *)(input+2u),b3=*(volatile uint8_t *)(input+3u);low=b0+(b1<<8u)+(b2<<16u)+(b3<<24u);enable_input=input+4u;}
+  else{uint64_t bits=opencfw_em9305_ll_pack64_304648(input);low=(uint32_t)bits;high=(uint32_t)(bits>>32u);enable_input=input+8u;}
+  uint32_t enable=*(volatile uint8_t *)enable_input;status=opencfw_em9305_vendor_command_30d9b4(low,high,enable!=0u);break;}
+ case 0xfff4u:length=39u;break;
+ case 0xfff9u:(void)opencfw_em9305_vendor_command_31071c(*(volatile uint8_t *)input!=0u);break;
+ case 0xfffau:length=35u;break;
+ case 0xfffeu:length=29u;break;
+ case 0xffffu:status=12u;break;
+ case 0xffe1u:{uint64_t bits=opencfw_em9305_ll_pack64_304648(input);uint32_t flags=(uint32_t)bits,enabled=*(volatile uint8_t *)(input+8u)!=0u;
+  if((flags&1u)!=0u)(void)opencfw_em9305_vendor_command_30cd5c(enabled);
+  if((flags&8u)!=0u)(void)opencfw_em9305_vendor_command_30db24(enabled);
+  if((flags&4u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805858u;if(callback!=0u)(void)((uint32_t (*)(uint32_t))callback)(enabled);}break;}
+ case 0xffe6u:{uint32_t b1=*(volatile uint8_t *)(input+1u),b0=*(volatile uint8_t *)input,b2=*(volatile uint8_t *)(input+2u),b3=*(volatile uint8_t *)(input+3u);status=opencfw_em9305_vendor_command_30e034(b0+(b1<<8u)+(b2<<16u)+(b3<<24u));break;}
+ default:return 0u;
+ }
+ uintptr_t packet=opencfw_em9305_ll_response_allocate_32e428(length,*(volatile uint16_t *)request);
+ if(packet==0u)return 1u;
+ *(volatile uint8_t *)packet=(uint8_t)status;
+ uintptr_t payload=packet+1u;
+ command=*(volatile uint16_t *)request;
+ if(command==0xfffau){
+  uint32_t value=opencfw_em9305_pal_status_secondary();
+  *(volatile uint8_t *)payload=(uint8_t)value;
+  *(volatile uint8_t *)(payload+1u)=(uint8_t)(value>>8u);
+  value=opencfw_em9305_pal_pending_consume(0u);
+  *(volatile uint8_t *)(payload+2u)=(uint8_t)value;
+  value=opencfw_em9305_pal_pending_consume(0u);
+  uint32_t shifted=value>>8u;
+  *(volatile uint8_t *)(payload+3u)=(uint8_t)shifted;
+  value=opencfw_em9305_controller_allocator_query(shifted);
+  *(volatile uint8_t *)(payload+4u)=(uint8_t)value;
+  *(volatile uint8_t *)(payload+7u)=(uint8_t)(value>>24u);
+  *(volatile uint8_t *)(payload+6u)=(uint8_t)(value>>16u);
+  shifted=value>>8u;
+  *(volatile uint8_t *)(payload+5u)=(uint8_t)shifted;
+  value=opencfw_em9305_vendor_allocator_second_313fa8(shifted);
+  *(volatile uint8_t *)(payload+8u)=(uint8_t)value;
+  *(volatile uint8_t *)(payload+10u)=(uint8_t)(value>>16u);
+  *(volatile uint8_t *)(payload+9u)=(uint8_t)(value>>8u);
+  *(volatile uint8_t *)(payload+11u)=(uint8_t)(value>>24u);
+  *(volatile uint16_t *)scratch=0u;
+  uint32_t prior=opencfw_em9305_vendor_query_30bc40((uintptr_t)scratch,(uintptr_t)(scratch+48u));
+  uint32_t first=*(volatile uint16_t *)scratch,second=*(volatile uint16_t *)(scratch+48u);
+  *(volatile uint8_t *)(payload+17u)=0u;
+  *(volatile uint8_t *)(payload+12u)=(uint8_t)first;
+  *(volatile uint8_t *)(payload+14u)=(uint8_t)second;
+  *(volatile uint8_t *)(payload+16u)=0u;
+  *(volatile uint8_t *)(payload+13u)=(uint8_t)(first>>8u);
+  *(volatile uint8_t *)(payload+15u)=(uint8_t)(second>>8u);
+  value=opencfw_em9305_vendor_query_30e0d4(prior);
+  *(volatile uint8_t *)(payload+18u)=(uint8_t)value;
+  *(volatile uint8_t *)(payload+19u)=(uint8_t)(value>>8u);
+  value=opencfw_em9305_vendor_query_313760();
+  uint32_t last=*(volatile uint16_t *)(uintptr_t)0x805838u;
+  *(volatile uint8_t *)(payload+20u)=(uint8_t)value;
+  *(volatile uint8_t *)(payload+22u)=(uint8_t)last;
+  *(volatile uint8_t *)(payload+21u)=(uint8_t)(value>>8u);
+  *(volatile uint8_t *)(payload+23u)=(uint8_t)(last>>8u);
+ }else if(command==0xffc0u){
+  *(volatile uint16_t *)scratch=0u;
+  (void)opencfw_em9305_vendor_query_30bb30((uintptr_t)scratch,(uintptr_t)(scratch+48u));
+  *(volatile uint8_t *)payload=*(volatile uint8_t *)scratch;
+  uint32_t right=*(volatile uint16_t *)(scratch+48u),left=*(volatile uint8_t *)(scratch+1u);
+  *(volatile uint16_t *)(scratch+46u)=0u;
+  *(volatile uint8_t *)(payload+2u)=(uint8_t)right;
+  *(volatile uint8_t *)(payload+1u)=(uint8_t)left;
+  *(volatile uint8_t *)(payload+3u)=(uint8_t)(right>>8u);
+  (void)opencfw_em9305_vendor_query_30bda4((uintptr_t)(scratch+46u),(uintptr_t)(scratch+62u));
+  right=*(volatile uint16_t *)(scratch+62u);left=*(volatile uint16_t *)(scratch+46u);
+  *(volatile uint8_t *)(payload+6u)=(uint8_t)right;
+  *(volatile uint8_t *)(payload+4u)=(uint8_t)left;
+  *(volatile uint8_t *)(payload+7u)=(uint8_t)(right>>8u);
+  *(volatile uint16_t *)(scratch+44u)=0u;
+  *(volatile uint8_t *)(payload+5u)=(uint8_t)(left>>8u);
+  (void)opencfw_em9305_vendor_query_30bd94((uintptr_t)(scratch+44u),(uintptr_t)(scratch+60u));
+  right=*(volatile uint16_t *)(scratch+60u);left=*(volatile uint16_t *)(scratch+44u);
+  *(volatile uint8_t *)(payload+10u)=(uint8_t)right;
+  *(volatile uint8_t *)(payload+8u)=(uint8_t)left;
+  *(volatile uint8_t *)(payload+11u)=(uint8_t)(right>>8u);
+  *(volatile uint16_t *)(scratch+42u)=0u;
+  *(volatile uint8_t *)(payload+9u)=(uint8_t)(left>>8u);
+  (void)opencfw_em9305_vendor_query_30be2c((uintptr_t)(scratch+42u),(uintptr_t)(scratch+58u));
+  left=*(volatile uint16_t *)(scratch+42u);right=*(volatile uint16_t *)(scratch+58u);
+  *(volatile uint8_t *)(payload+12u)=(uint8_t)left;
+  *(volatile uint8_t *)(payload+14u)=(uint8_t)right;
+  *(volatile uint8_t *)(payload+13u)=(uint8_t)(left>>8u);
+  *(volatile uint8_t *)(payload+15u)=(uint8_t)(right>>8u);
+  *(volatile uint8_t *)(scratch+41u)=0u;*(volatile uint8_t *)(scratch+40u)=0u;
+  (void)opencfw_em9305_vendor_query_30bc04((uintptr_t)(scratch+41u),(uintptr_t)(scratch+56u),(uintptr_t)(scratch+40u),(uintptr_t)(scratch+54u));
+  uint32_t a=*(volatile uint16_t *)(scratch+56u),b=*(volatile uint8_t *)(scratch+40u),c=*(volatile uint16_t *)(scratch+54u),d=*(volatile uint8_t *)(scratch+41u);
+  *(volatile uint8_t *)(payload+20u)=(uint8_t)b;
+  *(volatile uint8_t *)(payload+22u)=(uint8_t)c;
+  *(volatile uint8_t *)(payload+16u)=(uint8_t)d;
+  *(volatile uint8_t *)(payload+18u)=(uint8_t)a;
+  *(volatile uint8_t *)(payload+19u)=(uint8_t)(a>>8u);
+  *(volatile uint8_t *)(payload+23u)=(uint8_t)(c>>8u);
+  *(volatile uint8_t *)(payload+17u)=0u;*(volatile uint8_t *)(payload+21u)=0u;
+  *(volatile uint8_t *)(scratch+39u)=0u;*(volatile uint8_t *)(scratch+38u)=0u;
+  (void)opencfw_em9305_vendor_query_30bb84((uintptr_t)(scratch+39u),(uintptr_t)(scratch+52u),(uintptr_t)(scratch+38u),(uintptr_t)(scratch+50u));
+  a=*(volatile uint16_t *)(scratch+52u);c=*(volatile uint16_t *)(scratch+50u);d=*(volatile uint8_t *)(scratch+39u);b=*(volatile uint8_t *)(scratch+38u);
+  *(volatile uint8_t *)(payload+26u)=(uint8_t)a;
+  *(volatile uint8_t *)(payload+30u)=(uint8_t)c;
+  *(volatile uint8_t *)(payload+25u)=0u;*(volatile uint8_t *)(payload+29u)=0u;
+  *(volatile uint8_t *)(payload+24u)=(uint8_t)d;
+  *(volatile uint8_t *)(payload+28u)=(uint8_t)b;
+  *(volatile uint8_t *)(payload+27u)=(uint8_t)(a>>8u);
+  *(volatile uint8_t *)(payload+31u)=(uint8_t)(c>>8u);
+ }else if(command==0xfff4u){
+  (void)opencfw_em9305_vendor_snapshot_30329c((uintptr_t)scratch);
+  (void)opencfw_em9305_memcpy((void *)payload,scratch,38u);
+ }else if(command==0xfffeu){
+  (void)opencfw_em9305_vendor_snapshot_3032c0((uintptr_t)scratch);
+  (void)opencfw_em9305_memcpy((void *)payload,scratch,28u);
+ }
+ (void)opencfw_em9305_ll_event_send(packet-5u);
+ return 1u;
+}
+
+/* Native30be48..30be64: six bytes go to input, not response payload. */
+uint32_t opencfw_em9305_vendor_command_30be48(uintptr_t input)
+{
+ if(*(volatile uint8_t *)(uintptr_t)0x805a81u==0u)return 18u;
+ uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805a90u;
+ uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805a8cu;
+ (void)opencfw_em9305_radio_address_write_3045e8(input,low,high);
+ return 0u;
+}
+/* Native30d87c..30d89c: only upper word controls range rejection. */
+uint32_t opencfw_em9305_vendor_command_30d87c(uintptr_t input)
+{
+ uint64_t bits=opencfw_em9305_ll_pack64_304648(input);
+ uint32_t low=(uint32_t)bits,high=(uint32_t)(bits>>32u);
+ if(high>=0x2000u)return 18u;
+ *(volatile uint32_t *)(uintptr_t)0x805a94u=low;
+ *(volatile uint32_t *)(uintptr_t)0x805a98u=high;
+ return 0u;
+}
+/* Native30d9b4..30d9f0: BMSK24 includes bits0..24. High then low
+ * captures precede low then high publication; fullword enable truth. */
+uint32_t opencfw_em9305_vendor_command_30d9b4(uint32_t low,uint32_t high,uint32_t enable)
+{
+ if(((low&0xc0010000u)|(high&0x01ffffffu))!=0u)return 18u;
+ uint32_t old_high=*(volatile uint32_t *)(uintptr_t)0x805a88u;
+ uint32_t old_low=*(volatile uint32_t *)(uintptr_t)0x805a84u;
+ if(enable!=0u){old_high|=high;old_low|=low;}else{old_high&=~high;old_low&=~low;}
+ *(volatile uint32_t *)(uintptr_t)0x805a84u=old_low;
+ *(volatile uint32_t *)(uintptr_t)0x805a88u=old_high;
+ return 0u;
+}
+/* Native30cd5c..30cd68: native R0 returns the byte-cell address. */
+uint32_t opencfw_em9305_vendor_command_30cd5c(uint32_t enabled)
+{*(volatile uint8_t *)(uintptr_t)0x805becu=(uint8_t)(enabled!=0u);return 0x805becu;}
+/* Native30db24..30db30: native R0 returns the normalized flag. */
+uint32_t opencfw_em9305_vendor_command_30db24(uint32_t enabled)
+{uint32_t flag=enabled!=0u;*(volatile uint8_t *)(uintptr_t)0x805beeu=(uint8_t)flag;return flag;}
+uint32_t opencfw_em9305_vendor_command_30e034(uint32_t value)
+{*(volatile uint32_t *)(uintptr_t)0x8059a0u=value;return 0u;}
+/* Native313fa8..313fb6: genuine ROM capacity/query contracts remain imports. */
+extern uint32_t opencfw_em9305_rom_allocator_capacity_1030e8(uint32_t);
+uint32_t opencfw_em9305_vendor_allocator_second_313fa8(uint32_t incoming)
+{
+ uint32_t capacity=opencfw_em9305_rom_allocator_capacity_1030e8(incoming);
+ uint32_t query=opencfw_em9305_controller_allocator_query(capacity);
+ return capacity-query;
+}
+
+/* Native310718: no instruction modifies incoming R0. */
+uint32_t opencfw_em9305_primary_reset_mode_310718(uint32_t incoming){return incoming;}
+uint32_t opencfw_em9305_primary_busy_307dd8(void){return *(volatile uint8_t *)(uintptr_t)0x804ffcu!=0u;}
+uint32_t opencfw_em9305_primary_busy_307c08(void){return *(volatile uint8_t *)(uintptr_t)0x803bb8u!=0u;}
+/* Native30de38..30dee8: callback address is reloaded on every one of
+ * three calls; input packing occurs only after all busy/callback gates. */
+uint32_t opencfw_em9305_command_primary_30de38(uintptr_t input)
+{
+ if(*(volatile uint8_t *)(uintptr_t)0x805a71u!=0u&&(*(volatile uint8_t *)(uintptr_t)0x805b91u&1u)!=0u)return 12u;
+ if(*(volatile uint8_t *)(uintptr_t)0x805a73u!=0u){
+  if(opencfw_em9305_primary_busy_307dd8()!=0u)return 12u;
+  if(*(volatile uint32_t *)(uintptr_t)0x801308u!=0u){
+   for(uint32_t i=0u;i<3u;i++){
+    uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801308u;
+    if(((uint32_t (*)(uint32_t))callback)((uint8_t)i)!=0u)return 12u;
+   }
+  }
+ }
+ if(*(volatile uint8_t *)(uintptr_t)0x805a74u!=0u){
+  if(opencfw_em9305_primary_busy_307c08()!=0u)return 12u;
+  if(*(volatile uint32_t *)(uintptr_t)0x801304u!=0u){
+   for(uint32_t i=0u;i<3u;i++){
+    uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801304u;
+    if(((uint32_t (*)(uint32_t))callback)((uint8_t)i)!=0u)return 12u;
+   }
+  }
+ }
+ uint64_t packed=opencfw_em9305_controller_pack_address(input);
+ uint32_t low=(uint32_t)packed,high=(uint32_t)(packed>>32u),kind=high&0xc000u;
+ if(kind!=0xc000u&&kind!=0x4000u&&kind!=0u)return 18u;
+ (void)opencfw_em9305_wsf_critical_enter();
+ *(volatile uint32_t *)(uintptr_t)0x805a90u=high;
+ *(volatile uint32_t *)(uintptr_t)0x805a8cu=low;
+ *(volatile uint8_t *)(uintptr_t)0x805a7fu=1u;
+ *(volatile uint16_t *)(uintptr_t)0x805a80u=257u;
+ (void)opencfw_em9305_wsf_critical_exit();
+ return 0u;
+}
+
+/* Native30c150 initializer and complete forwarding entries; genuine lower
+ * state initializers remain explicit imports, never empty substitutes. */
+extern uint32_t opencfw_em9305_init_lower_306ab4(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_306c44(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_3077f4(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307834(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_3079c4(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307af8(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307c18(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307cc8(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307d2c(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307d64(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307d74(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307de8(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307e30(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_307ec8(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_3080f8(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30814c(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_308630(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_309cb8(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30a0a4(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30a134(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30a29c(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30a328(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30a37c(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30e42c(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30e538(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30e564(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30e580(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30e594(uint32_t);
+extern uint32_t opencfw_em9305_init_lower_30e9e0(uint32_t);
+uint32_t opencfw_em9305_init_entry_30cd4c(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e564(value);value=opencfw_em9305_init_lower_307d74(value);return value;}
+uint32_t opencfw_em9305_init_entry_30b624(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e42c(value);value=opencfw_em9305_init_lower_307834(value);return value;}
+uint32_t opencfw_em9305_init_entry_30b094(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e9e0(value);value=opencfw_em9305_init_lower_309cb8(value);return value;}
+uint32_t opencfw_em9305_init_entry_30b634(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e42c(value);value=opencfw_em9305_init_lower_30a134(value);return value;}
+uint32_t opencfw_em9305_init_entry_30c6c4(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e580(value);value=opencfw_em9305_init_lower_30814c(value);return value;}
+uint32_t opencfw_em9305_init_entry_30cce8(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e594(value);value=opencfw_em9305_init_lower_308630(value);return value;}
+uint32_t opencfw_em9305_init_entry_30ba84(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e564(value);value=opencfw_em9305_init_lower_307af8(value);value=opencfw_em9305_init_lower_307c18(value);value=opencfw_em9305_init_lower_307d2c(value);value=opencfw_em9305_init_lower_307cc8(value);return value;}
+uint32_t opencfw_em9305_init_entry_30b9f0(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_3079c4(value);return value;}
+uint32_t opencfw_em9305_init_entry_30c650(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_307d64(value);return value;}
+uint32_t opencfw_em9305_init_entry_30b0f4(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e538(value);value=opencfw_em9305_init_lower_3077f4(value);return value;}
+uint32_t opencfw_em9305_init_entry_30b7d8(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e9e0(value);value=opencfw_em9305_init_lower_30a29c(value);value=opencfw_em9305_init_lower_30a328(value);return value;}
+uint32_t opencfw_em9305_init_entry_30c654(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30a37c(value);return value;}
+uint32_t opencfw_em9305_init_entry_30b104(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_30e538(value);value=opencfw_em9305_init_lower_30a0a4(value);return value;}
+uint32_t opencfw_em9305_init_entry_30b114(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_306ab4(value);return value;}
+uint32_t opencfw_em9305_init_entry_30c47c(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_307de8(value);return value;}
+uint32_t opencfw_em9305_init_entry_30c658(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_3080f8(value);return value;}
+uint32_t opencfw_em9305_init_entry_30b6bc(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_306c44(value);return value;}
+uint32_t opencfw_em9305_init_entry_30c480(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_307e30(value);return value;}
+uint32_t opencfw_em9305_init_entry_30c484(uint32_t incoming)
+{uint32_t value=incoming;value=opencfw_em9305_init_lower_307ec8(value);return value;}
+extern uint32_t opencfw_em9305_init_lower_307bdc(uint32_t);
+uint32_t opencfw_em9305_init_entry_30c1bc(uint32_t value){return opencfw_em9305_init_lower_307bdc(value);}
+extern uint32_t opencfw_em9305_init_final_30bf6c(uint32_t);
+extern uint32_t opencfw_em9305_init_callback_30bf24(uint32_t,uintptr_t);
+uint32_t opencfw_em9305_ll_radio_initialize(uintptr_t config)
+{
+ uint32_t value=opencfw_em9305_init_entry_30cd4c((uint32_t)config);
+ value=opencfw_em9305_init_entry_30c1bc(value);
+ value=opencfw_em9305_init_entry_30b624(value);
+ value=opencfw_em9305_init_entry_30b094(value);
+ value=opencfw_em9305_init_entry_30b634(value);
+ value=opencfw_em9305_init_entry_30c6c4(value);
+ value=opencfw_em9305_init_entry_30cce8(value);
+ value=opencfw_em9305_init_entry_30ba84(value);
+ value=opencfw_em9305_init_entry_30b9f0(value);
+ value=opencfw_em9305_init_entry_30c650(value);
+ value=opencfw_em9305_init_entry_30b0f4(value);
+ value=opencfw_em9305_init_entry_30b7d8(value);
+ value=opencfw_em9305_init_entry_30c654(value);
+ value=opencfw_em9305_init_entry_30b104(value);
+ value=opencfw_em9305_init_entry_30b114(value);
+ value=opencfw_em9305_init_entry_30c47c(value);
+ value=*(volatile uint8_t *)(config+74u);
+ if(value!=0u)value=opencfw_em9305_init_entry_30c658(value);
+ value=opencfw_em9305_init_entry_30b6bc(value);
+ value=opencfw_em9305_init_entry_30c480(value);
+ value=opencfw_em9305_init_entry_30c484(value);
+ value=opencfw_em9305_controller_wsf_register((uintptr_t)&opencfw_em9305_init_callback_30bf24);
+ return opencfw_em9305_init_final_30bf6c(value);
+}
+
+/* Native30e564..30e57c: VREP2HL16 = two16-bit lanes, value00100010. */
+uint32_t opencfw_em9305_init_lower_30e564(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x805b00u=0u;
+ *(volatile uint32_t *)(uintptr_t)0x805afcu=0u;
+ *(volatile uint32_t *)(uintptr_t)0x805af8u=0x00100010u;
+ *(volatile uint32_t *)(uintptr_t)0x805b08u=0u;
+ *(volatile uint32_t *)(uintptr_t)0x805b04u=0u;
+ *(volatile uint8_t *)(uintptr_t)0x805b00u=7u;
+ return 0x805af8u;
+}
+uint32_t opencfw_em9305_init_lower_30e580(uint32_t incoming)
+{(void)incoming;*(volatile uint8_t *)(uintptr_t)0x805b5cu=0u;*(volatile uint32_t *)(uintptr_t)0x805b58u=900u;return 0x805b58u;}
+uint32_t opencfw_em9305_init_lower_30e594(uint32_t incoming)
+{(void)incoming;*(volatile uint8_t *)(uintptr_t)0x805b82u=0u;*(volatile uint16_t *)(uintptr_t)0x805b80u=0u;return 0x805b80u;}
+/* Native30e538..30e560: live config reload occurs after the clear. */
+uint32_t opencfw_em9305_init_lower_30e538(uint32_t incoming)
+{
+ (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x805adcu,0u,28u);
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint8_t *)(uintptr_t)0x805af0u=3u;
+ uint32_t value=*(volatile uint16_t *)(config+42u);
+ *(volatile uint16_t *)(uintptr_t)0x805af4u=8096u;
+ *(volatile uint16_t *)(uintptr_t)0x805adcu=(uint16_t)value;
+ return value;
+}
+/* Native30e42c..30e47a: preserve the second clear and its delay-slot
+ * halfword27 write; final native R0 is VREP2HL1 =00010001. */
+uint32_t opencfw_em9305_init_lower_30e42c(uint32_t incoming)
+{
+ (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x805ab4u,0u,40u);
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint16_t *)(uintptr_t)0x805ab8u=328u;
+ uint32_t first=*(volatile uint8_t *)(config+35u),second=*(volatile uint8_t *)(config+36u);
+ *(volatile uint8_t *)(uintptr_t)0x805ac8u=3u;
+ *(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)first;
+ *(volatile uint8_t *)(uintptr_t)0x805ab5u=(uint8_t)second;
+ *(volatile uint16_t *)(uintptr_t)0x805ab6u=27u;
+ (void)opencfw_em9305_memset((void *)(uintptr_t)0x805ac9u,0u,5u);
+ *(volatile uint16_t *)(uintptr_t)0x805aceu=10u;
+ *(volatile uint16_t *)(uintptr_t)0x805ad8u=3200u;
+ *(volatile uint32_t *)(uintptr_t)0x805ad0u=0x00010001u;
+ return 0x00010001u;
+}
+
+/* Native30bf24..30bf6a: event low15 bits dispatch, optional message, two
+ * independent clock reads, fullword elapsed compared to halfword maximum. */
+extern uint32_t opencfw_em9305_init_event_dispatch_306c7c(uint32_t);
+extern uint32_t opencfw_em9305_init_message_3075cc(uintptr_t);
+uint32_t opencfw_em9305_init_callback_30bf24(uint32_t events,uintptr_t message)
+{
+ uint32_t start=opencfw_em9305_pal_current_time();
+ if(events!=0u){for(uint32_t i=0u;i<15u;i++){if((events&(1u<<i))!=0u)(void)opencfw_em9305_init_event_dispatch_306c7c((uint8_t)i);}}
+ if(message!=0u)(void)opencfw_em9305_init_message_3075cc(message);
+ uint32_t now=opencfw_em9305_pal_current_time();
+ uint32_t elapsed=opencfw_em9305_pal_elapsed_raw(now,start);
+ uint32_t maximum=*(volatile uint16_t *)(uintptr_t)0x8058d8u;
+ if(maximum<elapsed)*(volatile uint16_t *)(uintptr_t)0x8058d8u=(uint16_t)elapsed;
+ return elapsed;
+}
+/* Native30e9a4..30e9dc: capture high before low featuremask, complete
+ * 64-byte clear; exact defaults/feature words and native lowword return. */
+uint32_t opencfw_em9305_init_state_30e9a4(uint32_t incoming)
+{
+ (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x805a70u,0u,64u);
+ *(volatile uint32_t *)(uintptr_t)0x805a88u=0xfe000000u;
+ uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805b34u;
+ uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ *(volatile uint32_t *)(uintptr_t)0x805aa4u=31u;
+ *(volatile uint32_t *)(uintptr_t)0x805aa0u=0xffffffffu;
+ *(volatile uint32_t *)(uintptr_t)0x805a84u=0x0046dc40u;
+ *(volatile uint32_t *)(uintptr_t)0x805a98u=high;
+ *(volatile uint32_t *)(uintptr_t)0x805a94u=low;
+ return low;
+}
+
+extern uint32_t opencfw_em9305_init_features_3099cc(uint32_t);
+extern uint32_t opencfw_em9305_init_features_308ff8(uint32_t);
+extern uint32_t opencfw_em9305_init_event_state_30e0e8(uint32_t);
+/* Native30bf6c..30bfea: preserve all writes before the genuine reset
+ * state provider, including pending capabilities later overwritten by reset. */
+uint32_t opencfw_em9305_init_final_30bf6c(uint32_t incoming)
+{
+ *(volatile uint8_t *)(uintptr_t)0x805b18u=(uint8_t)incoming;
+ uint32_t value=opencfw_em9305_init_features_3099cc(incoming);
+ value=opencfw_em9305_init_features_308ff8(value);
+ (void)value;
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t previous=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ uint32_t a=*(volatile uint8_t *)(config+62u),b=*(volatile uint8_t *)(config+63u),c=*(volatile uint8_t *)(config+64u);
+ *(volatile uint8_t *)(uintptr_t)0x805aa8u=0u;
+ *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
+ *(volatile uint8_t *)(uintptr_t)0x805a76u=0u;
+ *(volatile uint32_t *)(uintptr_t)0x805a70u=0u;
+ *(volatile uint8_t *)(uintptr_t)0x805a74u=0u;
+ uint32_t d=*(volatile uint8_t *)(config+65u);
+ *(volatile uint32_t *)(uintptr_t)0x805b44u=0u;
+ *(volatile uint32_t *)(uintptr_t)0x805b40u=0u;
+ uint32_t bits=previous|(a<<8u)|(b<<11u)|(c<<9u)|(d<<10u);
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=bits;
+ uint8_t lower,upper;
+ (void)opencfw_em9305_ll_signed_bounds_31026c((uintptr_t)&lower,(uintptr_t)&upper);
+ int32_t bound=(int8_t)upper;
+ bits=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ if(bound>19)bits|=1u<<15u;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=bits;
+ value=opencfw_em9305_init_state_30e9a4((uint32_t)bound);
+ return opencfw_em9305_init_event_state_30e0e8(value);
+}
+
+/* Native3099cc..309aa2: keep incidental native R0, fresh count reads and
+ * each feature pair store. Provider presence is runtime, never assumed. */
+uint32_t opencfw_em9305_init_features_3099cc(uint32_t incoming)
+{
+ (void)incoming;
+ uint32_t r0=*(volatile uint32_t *)(uintptr_t)0x802960u;
+ uint32_t second=*(volatile uint32_t *)(uintptr_t)0x802958u;
+ uint32_t flags=3u,missing=(r0==0u)||(second==0u);
+ uint32_t first=*(volatile uint32_t *)(uintptr_t)0x802954u;
+ uint32_t third=*(volatile uint32_t *)(uintptr_t)0x80295cu;
+ uint32_t high=0u;
+ if(r0==0u)flags=0u;
+ if(!missing)flags|=0xc0003300u;
+ *(volatile uint32_t *)(uintptr_t)0x805b48u=flags;
+ *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
+ if(r0!=0u&&first!=0u){
+  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  flags|=0x2000008cu;
+  *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
+  r0=*(volatile uint8_t *)(config+34u);
+  *(volatile uint32_t *)(uintptr_t)0x805b48u=flags;
+  if(r0>=2u){high|=448u;*(volatile uint32_t *)(uintptr_t)0x805b48u=flags;*(volatile uint32_t *)(uintptr_t)0x805b4cu=high;}
+ }
+ if(second!=0u){
+  r0=flags|0x30u;
+  *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
+  *(volatile uint32_t *)(uintptr_t)0x805b48u=r0;
+  if(first==0u)return r0;
+  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
+  uint32_t count=*(volatile uint8_t *)(config+34u);
+  r0=flags|0x0f000070u;
+  *(volatile uint32_t *)(uintptr_t)0x805b48u=r0;
+  if(count>=2u){r0=flags|0x1f000070u;*(volatile uint32_t *)(uintptr_t)0x805b4cu=high;*(volatile uint32_t *)(uintptr_t)0x805b48u=r0;}
+  flags=r0;
+  if(third!=0u){flags=r0|0x00c00000u;*(volatile uint32_t *)(uintptr_t)0x805b4cu=high;*(volatile uint32_t *)(uintptr_t)0x805b48u=flags;}
+ }
+ r0=first==0u;
+ if(missing||r0!=0u)return r0;
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
+ uint32_t count=*(volatile uint8_t *)(config+34u);
+ r0=flags|0x003fcc00u;
+ *(volatile uint32_t *)(uintptr_t)0x805b48u=r0;
+ if(count>=2u){high|=575u;*(volatile uint32_t *)(uintptr_t)0x805b48u=r0;*(volatile uint32_t *)(uintptr_t)0x805b4cu=high;}
+ return r0;
+}
+/* Native308ff8..30902c: independent fresh publication reads, BMSKN27
+ * tests bits28..31; preserve incoming R0 when no branch rewrites it. */
+uint32_t opencfw_em9305_init_features_308ff8(uint32_t incoming)
+{
+ uint32_t r0=incoming,flags=*(volatile uint32_t *)(uintptr_t)0x805b34u;
+ if((flags&(1u<<8u))!=0u){r0=*(volatile uint32_t *)(uintptr_t)0x805b54u;r0|=1u<<9u;*(volatile uint32_t *)(uintptr_t)0x805b54u=r0;}
+ if((flags&(1u<<14u))!=0u){r0=*(volatile uint32_t *)(uintptr_t)0x805b54u;r0|=1u<<15u;*(volatile uint32_t *)(uintptr_t)0x805b54u=r0;}
+ uint32_t first=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ if((flags&(1u<<5u))!=0u){r0=*(volatile uint32_t *)(uintptr_t)0x805b54u;r0|=1u<<6u;*(volatile uint32_t *)(uintptr_t)0x805b54u=r0;}
+ if((first&0xf0000000u)!=0u){r0=*(volatile uint32_t *)(uintptr_t)0x805b54u;r0|=1u;*(volatile uint32_t *)(uintptr_t)0x805b54u=r0;}
+ return r0;
+}
+
+/* Authenticated native3344c8..3344df: exact six word default record;
+ * native30e9e0 reader copies24bytes, next distinct table starts3344e0. */
+static const uint32_t opencfw_em9305_init_defaults_3344c8[6]={0x00138800u,0x00138800u,0u,0u,0u,7u};
+/* Native30e9e0..30ea06: clear full112byte state, signed sentinel127,
+ * then24byte typed record; native R0 is destination+4. */
+uint32_t opencfw_em9305_init_lower_30e9e0(uint32_t incoming)
+{
+ (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x805b84u,0u,112u);
+ *(volatile uint8_t *)(uintptr_t)0x805bf0u=127u;
+ return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)(uintptr_t)0x805b88u,opencfw_em9305_init_defaults_3344c8,24u);
+}
+
+/* Native3133a0..3133b0: exact scheduler root clear and retained R0. */
+uint32_t opencfw_em9305_init_scheduler_clear_3133a0(void)
+{
+ *(volatile uint16_t *)(uintptr_t)0x805f1cu=0u;
+ *(volatile uint32_t *)(uintptr_t)0x805f18u=0u;
+ *(volatile uint32_t *)(uintptr_t)0x805f14u=0u;
+ *(volatile uint8_t *)(uintptr_t)0x805f04u=0u;
+ return 0x805f04u;
+}
+/* Native3075cc..307660: direct versus22-entry broadcast dispatch, captured
+ * message published before callbacks; reset runs22 registered initializers,
+ * emits exact4-byte event with latch clear before event provider. */
+uint32_t opencfw_em9305_init_message_3075cc(uintptr_t message)
+{
+ uint32_t type=*(volatile uint8_t *)(message+2u);
+ *(volatile uint32_t *)(uintptr_t)0x805c78u=(uint32_t)message;
+ if(type!=255u){
+  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(0x802950u+type*4u);
+  if(callback!=0u)(void)((uint32_t (*)(uintptr_t,uintptr_t))callback)(message,callback);
+ }else{
+  if(*(volatile uint8_t *)(message+3u)==0u)*(volatile uint8_t *)(uintptr_t)0x8051f8u=1u;
+  for(uint32_t i=1u;i<=22u;i++){
+   uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(0x802950u+i*4u);
+   if(callback!=0u)(void)((uint32_t (*)(uintptr_t,uintptr_t))callback)(message,callback);
+  }
+ }
+ uint32_t pending=*(volatile uint8_t *)(uintptr_t)0x8051f8u;
+ if(pending==0u)return 0u;
+ uint32_t busy=*(volatile uint8_t *)(uintptr_t)0x805a79u;
+ if(busy!=0u)return busy;
+ (void)opencfw_em9305_radio_address_reset_303e38();
+ (void)opencfw_em9305_radio_reset_30390c();
+ (void)opencfw_em9305_address_count_clear_303700();
+ uint32_t value=opencfw_em9305_init_scheduler_clear_3133a0();
+ (void)opencfw_em9305_init_state_30e9a4(value);
+ for(uint32_t i=1u;i<=22u;i++){
+  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(0x805200u+i*4u);
+  if(callback!=0u)(void)((uint32_t (*)(uintptr_t))callback)(callback);
+ }
+ _Alignas(4) uint32_t event=1u<<16u;
+ *(volatile uint8_t *)(uintptr_t)0x8051f8u=0u;
+ return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}
+
+/* Native321150 and32b04c entries capture record R0 and event R1; genuine
+ * state-machine bodies remain imports. Native executable literals replaced
+ * with source symbols, never published as linked stock code addresses. */
+extern uint32_t opencfw_em9305_init_phy_state_321150(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_slave_phy_state_32b04c(uintptr_t,uint32_t);
+/* Native329534..329550: short circuit635==21 then wrapped32-bit byte-1
+ * unsigned comparison<2, so only625field values1 or2 succeed. */
+uint32_t opencfw_em9305_init_slave_phy_predicate_329534(uintptr_t record)
+{
+ if(*(volatile uint8_t *)(record+635u)!=21u)return 0u;
+ uint32_t value=*(volatile uint8_t *)(record+625u);
+ return value-1u<2u;
+}
+uint32_t opencfw_em9305_init_lower_307d64(uint32_t incoming)
+{
+ (void)incoming;*(volatile uint32_t *)(uintptr_t)0x803d38u=(uint32_t)(uintptr_t)&opencfw_em9305_init_phy_state_321150;
+ return 0x803d38u;
+}
+uint32_t opencfw_em9305_init_lower_30a37c(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x805688u=(uint32_t)(uintptr_t)&opencfw_em9305_init_slave_phy_predicate_329534;
+ *(volatile uint32_t *)(uintptr_t)0x8056acu=(uint32_t)(uintptr_t)&opencfw_em9305_init_slave_phy_state_32b04c;
+ return 0x8056acu;
+}
+
+/* Genuine native action/transition tables33522c/3352cc and state children
+ * remain providers; their source ownership/extent is not invented. */
+typedef uint32_t (*opencfw_em9305_phy_action_fn)(uintptr_t);
+extern const opencfw_em9305_phy_action_fn opencfw_em9305_phy_actions_33522c[];
+extern const uint8_t opencfw_em9305_phy_transitions_3352cc[];
+extern uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t);
+extern uint32_t opencfw_em9305_phy_finish_32c810(uintptr_t);
+extern uint32_t opencfw_em9305_phy_reject_32698c(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_phy_defer_32caa0(uintptr_t);
+extern uint32_t opencfw_em9305_phy_defer_32cb48(uintptr_t);
+/* Native321150..3212ee: full master PHY state machine, including signed
+ * event comparisons, callback-mutated state rereads and exact pending bits. */
+uint32_t opencfw_em9305_init_phy_state_321150(uintptr_t record,uint32_t event)
+{
+ uint32_t force=0u,action=0u;
+ if((int32_t)event>=62){
+  action=7u;
+  if(event==62u){if(*(volatile uint8_t *)(record+635u)!=21u)return 0u;}
+  else if(event==110u){action=4u;if(*(volatile uint8_t *)(record+635u)!=21u)return 0u;}
+  else if(event==112u){
+   uint32_t bits=*(volatile uint32_t *)(record+644u);action=5u;
+   if((bits&(1u<<21u))!=0u){*(volatile uint32_t *)(record+648u)=0u;bits&=~(1u<<21u);}
+   else{action=6u;uint32_t original=bits;bits&=~(1u<<22u);if((original&(1u<<22u))==0u)return 0u;*(volatile uint32_t *)(record+648u)=0u;}
+   *(volatile uint32_t *)(record+644u)=bits;
+  }else return 0u;
+ }else if(event==12u){
+  uint32_t operation=*(volatile uint8_t *)(uintptr_t)0x802818u;
+  if(operation==7u||operation==17u){action=3u;if(*(volatile uint8_t *)(uintptr_t)0x80281cu!=22u)return 0u;}
+  else if(operation==13u){action=3u;if(*(volatile uint8_t *)(record+635u)!=21u)return 0u;}
+  else if(operation==22u){action=2u;force=1u;}
+  else if(operation==23u)action=1u;
+  else return 0u;
+ }else if(event!=32u)return 0u;
+ uint32_t active=*(volatile uint8_t *)(record+620u);
+ if(active==0u){
+  uint32_t state=*(volatile uint8_t *)(record+625u);
+  uintptr_t callback=(uintptr_t)opencfw_em9305_phy_actions_33522c[state*8u+action];
+  if(callback!=0u){(void)((uint32_t (*)(uintptr_t))callback)(record);state=*(volatile uint8_t *)(record+625u);}
+  uint32_t next=opencfw_em9305_phy_transitions_3352cc[state*8u+action];
+  *(volatile uint8_t *)(record+625u)=(uint8_t)next;
+  if(next!=0u){*(volatile uint8_t *)(record+620u)=1u;*(volatile uint8_t *)(record+635u)=21u;*(volatile uint8_t *)(record+628u)=0u;}
+  return 1u;
+ }
+ if(active!=1u)return 1u;
+ uint32_t procedure=*(volatile uint8_t *)(record+635u);
+ if(force!=0u){
+  if(procedure-2u>=3u&&procedure!=21u&&procedure!=7u)goto deferred;
+  if(procedure!=21u){
+  uint32_t bits=*(volatile uint32_t *)(record+644u);
+  *(volatile uint8_t *)(record+635u)=21u;
+  *(volatile uint8_t *)(record+631u)=1u;
+  bits|=1u<<(procedure&31u);
+  *(volatile uint32_t *)(record+644u)=bits;
+  }
+ }else if(procedure!=21u)goto deferred;
+ {
+  uint32_t state=*(volatile uint8_t *)(record+625u);
+  uintptr_t callback=(uintptr_t)opencfw_em9305_phy_actions_33522c[state*8u+action];
+  if(callback!=0u){(void)((uint32_t (*)(uintptr_t))callback)(record);state=*(volatile uint8_t *)(record+625u);}
+  uint32_t next=opencfw_em9305_phy_transitions_3352cc[state*8u+action];
+  *(volatile uint8_t *)(record+625u)=(uint8_t)next;
+  if(next==0u){
+   (void)opencfw_em9305_phy_complete_32c818(record);
+   *(volatile uint8_t *)(record+635u)=255u;
+   *(volatile uint8_t *)(record+620u)=0u;
+   (void)opencfw_em9305_phy_finish_32c810(record);
+  }
+  return 1u;
+ }
+ deferred:
+ if(action==0u){
+  (void)opencfw_em9305_phy_defer_32caa0(record);
+  uint32_t first=*(volatile uint32_t *)(record+636u),second=*(volatile uint32_t *)(record+644u);
+  first|=1u<<21u;second|=1u<<21u;
+  *(volatile uint32_t *)(record+636u)=first;
+  *(volatile uint32_t *)(record+644u)=second;
+ }else if(action==2u){
+  if(procedure<19u&&(0x00060002u&(1u<<procedure))!=0u)(void)opencfw_em9305_phy_reject_32698c(record,42u,1u);
+  else{(void)opencfw_em9305_phy_defer_32cb48(record);uint32_t bits=*(volatile uint32_t *)(record+644u);bits|=1u<<22u;*(volatile uint32_t *)(record+644u)=bits;}
+ }
+ return 1u;
+}
+
+extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_wsf_timer_stop(uintptr_t);
+/* Native32c810 complete tail, event112. */
+uint32_t opencfw_em9305_phy_finish_32c810(uintptr_t record)
+{ return opencfw_em9305_receive_terminate_325c08(record,112u); }
+/* Native32c818..32c822: timer address derived only when record flag permits. */
+uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t record)
+{
+ if((*(volatile uint8_t *)(record+11u)&32u)==0u)return (uint32_t)record;
+ return opencfw_em9305_wsf_timer_stop(record+728u);
+}
+/* Native32caa0..32cabe: copy four fields from captured runtime message. */
+uint32_t opencfw_em9305_phy_defer_32caa0(uintptr_t record)
+{
+ uintptr_t message=*(volatile uint32_t *)(uintptr_t)0x805c6cu;
+ *(volatile uint8_t *)(record+594u)=*(volatile uint8_t *)(message+4u);
+ *(volatile uint8_t *)(record+595u)=*(volatile uint8_t *)(message+5u);
+ *(volatile uint8_t *)(record+596u)=*(volatile uint8_t *)(message+6u);
+ *(volatile uint8_t *)(record+79u)=*(volatile uint8_t *)(message+8u);
+ return (uint32_t)record;
+}
+/* Native32cb48..32cb56 retains adjusted R0 return after halfword store. */
+uint32_t opencfw_em9305_phy_defer_32cb48(uintptr_t record)
+{
+ uint32_t value=*(volatile uint16_t *)(uintptr_t)0x80281cu;
+ *(volatile uint16_t *)(record+720u)=(uint16_t)value;
+ return (uint32_t)(record+720u);
+}
+
+extern uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t);
+extern uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_phy_response_3232dc(uintptr_t,uint32_t);
+/* Native32698c..3269ea, complete reject packet constructor/submit. */
+uint32_t opencfw_em9305_phy_reject_32698c(uintptr_t record,uint32_t reason,uint32_t extended)
+{
+ uint32_t use_extended=1u;
+ if(extended==0u){
+  use_extended=0u;
+  if((*(volatile uint8_t *)(record+544u)&4u)!=0u)
+   use_extended=*(volatile uint8_t *)(record+534u)!=0u;
+ }
+ if(*(volatile uint8_t *)(record+834u)!=0u)reason=68u;
+ uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(use_extended!=0u?3u:2u);
+ if(packet==0u)return 0u;
+ if(use_extended!=0u){
+  *(volatile uint8_t *)packet=17u;
+  uint32_t operation=*(volatile uint8_t *)(uintptr_t)0x802818u;
+  *(volatile uint8_t *)(packet+2u)=(uint8_t)reason;
+  *(volatile uint8_t *)(packet+1u)=(uint8_t)operation;
+ }else{
+  *(volatile uint8_t *)(packet+1u)=(uint8_t)reason;
+  *(volatile uint8_t *)packet=13u;
+ }
+ return opencfw_em9305_phy_packet_send_32d32c(record,packet);
+}
+/* Native31634c and3163a4 actual action tails. */
+uint32_t opencfw_em9305_phy_action_31634c(uintptr_t record)
+{ return opencfw_em9305_phy_response_3232dc(record,12u); }
+uint32_t opencfw_em9305_phy_action_3163a4(uintptr_t record)
+{ return opencfw_em9305_phy_reject_32698c(record,35u,1u); }
+
+/* Native32d2f0..32d328 full packet allocation and segment header construction. */
+uint32_t opencfw_em9305_phy_packet_alloc_32d2f0(uint32_t bytes)
+{
+ uintptr_t packet=opencfw_em9305_wsf_event_allocate(bytes+6u);
+ if(packet==0u)return 0u;
+ uint8_t fields[8]={3u,0u,0u,0u,0u,(uint8_t)bytes,0u,0u};
+ uintptr_t length=opencfw_em9305_ll_segment_header_323d70(packet,(uintptr_t)fields);
+ return (uint32_t)(packet+length);
+}
+/* Native32d32c..32d37c complete packet enqueue; callback ABI R0..R3. */
+uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t record,uintptr_t payload)
+{
+ uint32_t previous=*(volatile uint8_t *)(record+378u);
+ *(volatile uint8_t *)(record+378u)=(uint8_t)(previous+1u);
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8051e0u;
+ uint32_t opcode=*(volatile uint8_t *)payload;
+ uintptr_t header=payload-(opcode==27u?3u:2u);
+ if(callback!=0u){
+  uint32_t length=*(volatile uint8_t *)(header+1u);
+  (void)((uint32_t (*)(uintptr_t,uintptr_t,uintptr_t,uintptr_t))callback)(record+84u,header,payload,payload+length);
+ }
+ (void)opencfw_em9305_ll_event_enqueue(record+360u,255u,header);
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ (void)opencfw_em9305_wsf_event_post(handler,4u);
+ return opencfw_em9305_ll_segment_notify_3181b4(record);
+}
+
+/* Native master PHY five-state/eight-action tables. All executable entries
+ * are typed genuine function relocations; no native literal code aliases. */
+extern uint32_t opencfw_em9305_phy_action_31592c(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315a0c(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315c64(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315e60(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315e84(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315f0c(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_31634c(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_3163a4(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_3164a8(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_316550(uintptr_t);
+const opencfw_em9305_phy_action_fn opencfw_em9305_phy_actions_33522c[40]={
+ opencfw_em9305_phy_action_315a0c,0,opencfw_em9305_phy_action_315e60,0,0,opencfw_em9305_phy_action_31592c,opencfw_em9305_phy_action_31592c,0,
+ opencfw_em9305_phy_action_31634c,0,opencfw_em9305_phy_action_3163a4,0,0,0,0,opencfw_em9305_phy_action_3164a8,
+ opencfw_em9305_phy_action_31634c,opencfw_em9305_phy_action_315e84,opencfw_em9305_phy_action_3163a4,opencfw_em9305_phy_action_315f0c,opencfw_em9305_phy_action_315c64,0,0,0,
+ opencfw_em9305_phy_action_31634c,0,opencfw_em9305_phy_action_3163a4,0,0,0,0,opencfw_em9305_phy_action_316550,
+ opencfw_em9305_phy_action_31634c,0,opencfw_em9305_phy_action_3163a4,0,opencfw_em9305_phy_action_315c64,0,0,0,
+};
+const uint8_t opencfw_em9305_phy_transitions_3352cc[40]={
+ 1u,0u,3u,0u,0u,1u,3u,0u,
+ 1u,1u,1u,1u,1u,1u,1u,2u,
+ 2u,4u,2u,0u,0u,2u,2u,2u,
+ 3u,3u,3u,3u,3u,3u,3u,4u,
+ 4u,4u,4u,0u,0u,4u,4u,4u,
+};
+_Static_assert(sizeof(opencfw_em9305_phy_actions_33522c)==160u,"native ARC action table width");
+
+extern uint32_t opencfw_em9305_phy_start_324680(uintptr_t);
+extern uint32_t opencfw_em9305_phy_schedule_318278(uintptr_t);
+extern uint32_t opencfw_em9305_phy_update_packet_326764(uintptr_t,uint32_t,uint32_t,uint32_t,uint32_t);
+/* Native31592c..31593a, retains incoming record across both calls. */
+uint32_t opencfw_em9305_phy_action_31592c(uintptr_t record)
+{
+ (void)opencfw_em9305_phy_start_324680(record);
+ return opencfw_em9305_phy_schedule_318278(record);
+}
+/* Native315a0c..315a26. */
+uint32_t opencfw_em9305_phy_action_315a0c(uintptr_t record)
+{
+ uint32_t bits=*(volatile uint32_t *)(record+636u);
+ *(volatile uint32_t *)(record+636u)=bits|(1u<<21u);
+ (void)opencfw_em9305_phy_defer_32caa0(record);
+ return opencfw_em9305_phy_action_31592c(record);
+}
+/* Native315e60..315e6e. */
+uint32_t opencfw_em9305_phy_action_315e60(uintptr_t record)
+{
+ (void)opencfw_em9305_phy_defer_32cb48(record);
+ return opencfw_em9305_phy_action_31592c(record);
+}
+/* Native315e84..315eaa: exact byte capture sequence before packet child. */
+uint32_t opencfw_em9305_phy_action_315e84(uintptr_t record)
+{
+ uint32_t one=*(volatile uint8_t *)(record+720u);
+ uint32_t four=*(volatile uint8_t *)(uintptr_t)0x80281du;
+ uint32_t three=*(volatile uint8_t *)(uintptr_t)0x80281cu;
+ uint32_t two=*(volatile uint8_t *)(record+721u);
+ (void)opencfw_em9305_phy_update_packet_326764(record,one,two,three,four);
+ return opencfw_em9305_phy_complete_32c818(record);
+}
+/* Native315f0c..315f46: incidental R0 flags retained on no-notify paths. */
+uint32_t opencfw_em9305_phy_action_315f0c(uintptr_t record)
+{
+ (void)opencfw_em9305_phy_complete_32c818(record);
+ uint32_t bits=*(volatile uint32_t *)(record+636u);
+ if((bits&(1u<<21u))==0u)return bits;
+ bits&=~(1u<<21u);
+ uint32_t operation=*(volatile uint8_t *)(uintptr_t)0x802818u;
+ *(volatile uint32_t *)(record+640u)=0u;
+ *(volatile uint32_t *)(record+636u)=bits;
+ uint32_t reason;
+ if(operation==7u)reason=26u;
+ else if(operation==17u||operation==13u)reason=*(volatile uint8_t *)(uintptr_t)0x80281du;
+ else return bits;
+ return opencfw_em9305_phy_response_3232dc(record,reason);
+}
+
+/* Native31b39c..31b3b4: supported PHY mask from stored feature word. */
+uint32_t opencfw_em9305_phy_supported_31b39c(void)
+{
+ uint32_t bits=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ return ((bits&256u)==0u?1u:3u)|((bits>>9u)&4u);
+}
+/* Native316550..316590 full peer PHY start, preserving fresh flags reload. */
+uint32_t opencfw_em9305_phy_action_316550(uintptr_t record)
+{
+ uint32_t flags=*(volatile uint8_t *)(record+594u);
+ uint32_t second=*(volatile uint8_t *)(record+596u),first;
+ if((flags&1u)==0u)first=*(volatile uint8_t *)(record+595u);
+ else{first=opencfw_em9305_phy_supported_31b39c();flags=*(volatile uint8_t *)(record+594u);}
+ if((flags&2u)!=0u)second=opencfw_em9305_phy_supported_31b39c();
+ uint32_t four=*(volatile uint8_t *)(record+721u);
+ uint32_t three=*(volatile uint8_t *)(record+720u);
+ (void)opencfw_em9305_phy_update_packet_326764(record,(uint8_t)first,(uint8_t)second,three,four);
+ return opencfw_em9305_phy_complete_32c818(record);
+}
+extern uint32_t opencfw_em9305_phy_choose_316610(uintptr_t,uint32_t,uintptr_t,uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_phy_apply_327544(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_phy_update_complete_32e220(uintptr_t);
+extern uint32_t opencfw_em9305_phy_initiate_packet_326740(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_phy_timer_start_32c7e4(uintptr_t);
+/* Native3164a8..31654e: choose, compare mapped live PHY, initiate or finish. */
+uint32_t opencfw_em9305_phy_action_3164a8(uintptr_t record)
+{
+ uint32_t flags=*(volatile uint8_t *)(record+594u);
+ if((flags&3u)!=3u){
+  uint8_t first=*(volatile uint8_t *)(record+595u);
+  uint8_t second=*(volatile uint8_t *)(record+596u);
+  (void)opencfw_em9305_phy_choose_316610(record,flags,(uintptr_t)&first,(uintptr_t)&second,0u);
+  uint32_t mode=*(volatile uint8_t *)(record+76u),index=mode-2u;
+  uint32_t mapped=index>=3u?1u:(0x00080402u>>(index*8u))&255u;
+  if(first==mapped){
+   mode=*(volatile uint8_t *)(record+77u);index=mode-2u;
+   mapped=index>=3u?1u:(0x00080402u>>(index*8u))&255u;
+   if(second==mapped)goto unchanged;
+  }
+  (void)opencfw_em9305_phy_apply_327544(record,first);
+  (void)opencfw_em9305_phy_update_complete_32e220(record);
+  (void)opencfw_em9305_phy_initiate_packet_326740(record,first,second);
+  return opencfw_em9305_phy_timer_start_32c7e4(record);
+ }
+ unchanged:
+ (void)opencfw_em9305_phy_update_complete_32e220(record);
+ return opencfw_em9305_receive_terminate_325c08(record,110u);
+}
+
+extern uintptr_t opencfw_em9305_phy_record_325250(uintptr_t);
+extern uint32_t opencfw_em9305_phy_length_notify_32317c(uintptr_t,uint32_t);
+/* Native315c64..315d3e full post-PHY data-length adjustment. */
+uint32_t opencfw_em9305_phy_action_315c64(uintptr_t input)
+{
+ uintptr_t record=input;
+ (void)opencfw_em9305_phy_record_325250(input);
+ uint32_t bits=*(volatile uint32_t *)(record+636u);
+ if((bits&(1u<<21u))==0u)return bits;
+ *(volatile uint32_t *)(record+636u)=bits&~(1u<<21u);
+ *(volatile uint32_t *)(record+640u)=0u;
+ (void)opencfw_em9305_phy_response_3232dc(record,0u);
+ uint32_t mode_first=*(volatile uint8_t *)(record+76u);
+ uint32_t old_first=*(volatile uint16_t *)(record+580u);
+ uint32_t octets_first=*(volatile uint16_t *)(record+578u),time_first=0u;
+ if(mode_first-1u<2u){
+  time_first=*(volatile uint16_t *)(record+588u);
+  if(time_first!=0u)*(volatile uint16_t *)(record+588u)=0u;
+  else{uint32_t limit=octets_first*8u+112u;time_first=limit<old_first?limit:old_first;}
+ }else if(mode_first==3u){uint32_t limit=octets_first*64u+976u;time_first=limit<old_first?limit:old_first;}
+ uint32_t mode_second=*(volatile uint8_t *)(record+77u);
+ uint32_t old_second=*(volatile uint16_t *)(record+576u);
+ uint32_t octets_second=*(volatile uint16_t *)(record+574u),time_second=328u;
+ if(mode_second-1u<2u){
+  uint32_t value=*(volatile uint16_t *)(record+584u);
+  if(value!=0u)*(volatile uint16_t *)(record+584u)=0u;
+  else{uint32_t limit=octets_second*8u+112u;value=limit<old_second?limit:old_second;}
+  if(value>=329u)time_second=value;
+ }else if(mode_second==3u){
+  uint32_t limit=octets_second*64u+976u,value=limit<old_second?limit:old_second;
+  *(volatile uint16_t *)(record+584u)=(uint16_t)old_second;
+  time_second=value>2704u?value:2704u;
+ }
+ *(volatile uint16_t *)(record+576u)=(uint16_t)time_second;
+ if(mode_first==3u){*(volatile uint16_t *)(record+588u)=(uint16_t)old_first;if(time_first<2704u)time_first=2704u;}
+ else if(time_first<328u)time_first=328u;
+ uint32_t feature=*(volatile uint8_t *)(uintptr_t)0x805a94u;
+ *(volatile uint16_t *)(record+580u)=(uint16_t)time_first;
+ if((feature&32u)!=0u&&(old_first!=time_first||old_second!=time_second))
+  return opencfw_em9305_phy_length_notify_32317c(record,0u);
+ return feature;
+}
+
+/* Native324680..324686 and325250..325256 complete state leaves. */
+uint32_t opencfw_em9305_phy_start_324680(uintptr_t record)
+{ *(volatile uint8_t *)(record+404u)=1u;return (uint32_t)(record+404u); }
+uintptr_t opencfw_em9305_phy_record_325250(uintptr_t record)
+{ *(volatile uint8_t *)(record+597u)=0u;return record+597u; }
+/* Native318278..31828e checks actual queue and dispatches only if empty. */
+uint32_t opencfw_em9305_phy_schedule_318278(uintptr_t record)
+{
+ uint32_t empty=opencfw_em9305_wsf_queue_empty(record+360u);
+ if(empty==0u)return empty;
+ return opencfw_em9305_receive_terminate_325c08(record,62u);
+}
+/* Native32c7e4..32c80e; retains original record return when flag clear. */
+uint32_t opencfw_em9305_phy_timer_start_32c7e4(uintptr_t record)
+{
+ if((*(volatile uint8_t *)(record+11u)&32u)==0u)return (uint32_t)record;
+ uintptr_t timer=record+728u;
+ if((*(volatile uint8_t *)(record+636u)&1u)==0u)
+  return opencfw_em9305_wsf_timer_start_seconds(timer,40u);
+ uint32_t timeout=*(volatile uint16_t *)(record+764u);
+ return opencfw_em9305_wsf_timer_start_ms(timer,timeout);
+}
+
+/* Native327544..32754a full first-PHY state setter. */
+uint32_t opencfw_em9305_phy_apply_327544(uintptr_t record,uint32_t value)
+{ *(volatile uint8_t *)(record+597u)=(uint8_t)value;return (uint32_t)(record+597u); }
+/* Native316610..316696 full PHY preference selector, including incidental R0. */
+uint32_t opencfw_em9305_phy_choose_316610(uintptr_t record,uint32_t flags,uintptr_t first,uintptr_t second,uint32_t preferred)
+{
+ uint32_t b=*(volatile uint8_t *)second,a;
+ if((flags&1u)==0u)a=*(volatile uint8_t *)first;
+ else a=opencfw_em9305_phy_supported_31b39c();
+ if((flags&2u)!=0u)b=opencfw_em9305_phy_supported_31b39c();
+ uint32_t result=*(volatile uint8_t *)(record+4u);
+ if((result&128u)!=0u){
+  b&=a;
+  if((uint8_t)b!=0u){
+   uint32_t chosen=b&preferred;
+   if(chosen!=0u)b=chosen;
+   result=opencfw_em9305_radio_phy_project_3183d4((uint8_t)b);
+   a=result;b=result;
+  }else{
+   uint32_t mode_first=*(volatile uint8_t *)(record+76u);
+   uint32_t mode_second=*(volatile uint8_t *)(record+77u);
+   uint32_t index=mode_first-2u;
+   result=(uint8_t)index*8u;
+   a=index>=3u?1u:(0x00080402u>>(index*8u));
+   b=mode_second==4u?8u:mode_second==3u?4u:mode_second==2u?2u:1u;
+  }
+ }
+ *(volatile uint8_t *)first=(uint8_t)a;
+ *(volatile uint8_t *)second=(uint8_t)b;
+ return result;
+}
+/* Native32e220..32e276 full pending update queue drain. */
+uint32_t opencfw_em9305_phy_update_complete_32e220(uintptr_t record)
+{
+ *(volatile uint8_t *)(record+404u)=0u;
+ uintptr_t queue=record+352u;
+ uint32_t empty=opencfw_em9305_wsf_queue_empty(queue);
+ if(empty!=0u)return empty;
+ uint32_t capacity=opencfw_em9305_ll_event_mode_32d4b0(record);
+ _Alignas(4) uint8_t decoded[8];uint8_t handler;
+ for(;;){
+  uintptr_t message=opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&handler);
+  if(message==0u)break;
+  (void)opencfw_em9305_ll_event_decode_32dae4((uintptr_t)decoded,message);
+  (void)opencfw_em9305_ll_event_process_32d380(record,capacity,(uintptr_t)decoded,message);
+ }
+ uint32_t event_handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ return opencfw_em9305_wsf_event_post(event_handler,4u);
+}
+
+/* Native32671c..32673c complete three-byte control packet. */
+uint32_t opencfw_em9305_phy_control_packet_32671c(uintptr_t record,uint32_t opcode,uint32_t first,uint32_t second)
+{
+ uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(3u);
+ if(packet==0u)return 0u;
+ *(volatile uint8_t *)(packet+2u)=(uint8_t)second;
+ *(volatile uint8_t *)(packet+1u)=(uint8_t)first;
+ *(volatile uint8_t *)packet=(uint8_t)opcode;
+ return opencfw_em9305_phy_packet_send_32d32c(record,packet);
+}
+/* Native326740..326754 stores second before first then tail opcode22. */
+uint32_t opencfw_em9305_phy_initiate_packet_326740(uintptr_t record,uint32_t first,uint32_t second)
+{
+ *(volatile uint8_t *)(record+721u)=(uint8_t)second;
+ *(volatile uint8_t *)(record+720u)=(uint8_t)first;
+ return opencfw_em9305_phy_control_packet_32671c(record,22u,first,second);
+}
+uint32_t opencfw_em9305_phy_response_packet_326758(uintptr_t record,uint32_t first,uint32_t second)
+{ return opencfw_em9305_phy_control_packet_32671c(record,23u,first,second); }
+extern uint32_t opencfw_em9305_phy_update_message_326814(uintptr_t,uint32_t,uint32_t);
+/* Native326764..326810 full directional PHY negotiation/update parent. */
+uint32_t opencfw_em9305_phy_update_packet_326764(uintptr_t record,uint32_t first,uint32_t second,uint32_t third,uint32_t fourth)
+{
+ uint32_t second_mask=third&second,first_mask=fourth&first;
+ uint32_t common=opencfw_em9305_radio_phy_project_3183d4(fourth|third);
+ if((fourth!=0u&&common==third&&common==fourth)||(*(volatile uint8_t *)(record+4u)&128u)!=0u){
+  second_mask&=first_mask;first_mask=second_mask;
+ }
+ first=opencfw_em9305_radio_phy_project_3183d4(first_mask);
+ second=opencfw_em9305_radio_phy_project_3183d4(second_mask);
+ uint32_t old_first=*(volatile uint8_t *)(record+76u),old_second=*(volatile uint8_t *)(record+77u);
+ uint32_t a=old_first-2u,b=old_second-2u;
+ uint32_t mapped=a>=3u?1u:(0x00080402u>>(a*8u))&255u;
+ if(first==mapped)first=0u;
+ mapped=b>=3u?1u:(0x00080402u>>(b*8u))&255u;
+ if(second==mapped)second=0u;
+ (void)opencfw_em9305_phy_update_message_326814(record,first,second);
+ if((first|second)==0u)(void)opencfw_em9305_receive_terminate_325c08(record,110u);
+ if((uint8_t)first!=0u)(void)opencfw_em9305_phy_apply_327544(record,(uint8_t)first);
+ else (void)opencfw_em9305_phy_record_325250(record);
+ return opencfw_em9305_phy_update_complete_32e220(record);
+}
+
+/* Native314114..314130 full locked linked-queue count, 16-bit return. */
+uint32_t opencfw_em9305_phy_queue_count_314114(uintptr_t queue)
+{
+ (void)opencfw_em9305_wsf_critical_enter();
+ uintptr_t node=*(volatile uint32_t *)queue;uint32_t count=0u;
+ while(node!=0u){node=*(volatile uint32_t *)node;++count;}
+ (void)opencfw_em9305_wsf_critical_exit();
+ return (uint16_t)count;
+}
+/* Native326814..3268c8, full update instant calculation and five-byte packet.
+ * Native32684a/32686c are MPYWHUL; exact assembly identity is recorded. */
+uint32_t opencfw_em9305_phy_update_message_326814(uintptr_t record,uint32_t first,uint32_t second)
+{
+ uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(5u);
+ if(packet==0u)return 0u;
+ uintptr_t queue=record+360u;
+ *(volatile uint8_t *)(record+723u)=(uint8_t)second;
+ *(volatile uint8_t *)(record+722u)=(uint8_t)first;
+ uint32_t count=opencfw_em9305_phy_queue_count_314114(queue);
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t unit=*(volatile uint16_t *)(config+76u);
+ uint32_t scaled=opencfw_em9305_config_link_mpywhul(count,unit);
+ uint32_t capacity=opencfw_em9305_ll_event_mode_32d4b0(record);
+ uint32_t timing=opencfw_em9305_radio_record_timing_30c40c(scaled,capacity);
+ if(timing<6u)timing=6u;
+ else{
+  count=opencfw_em9305_phy_queue_count_314114(queue);
+  config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  unit=*(volatile uint16_t *)(config+76u);
+  scaled=opencfw_em9305_config_link_mpywhul(count,unit);
+  capacity=opencfw_em9305_ll_event_mode_32d4b0(record);
+  timing=opencfw_em9305_radio_record_timing_30c40c(scaled,capacity);
+ }
+ if((first|second)!=0u){
+  uint32_t latency=*(volatile uint16_t *)(record+260u);
+  uint32_t interval=*(volatile uint16_t *)(record+846u);
+  uint32_t product=timing*(latency+1u);
+  uint32_t anchor=*(volatile uint16_t *)(record+262u);
+  product=opencfw_em9305_native_mpyw_309f62(product,interval);
+  *(volatile uint16_t *)(record+724u)=(uint16_t)(product+anchor);
+ }else{
+  *(volatile uint16_t *)(record+724u)=0u;
+  (void)opencfw_em9305_receive_terminate_325c08(record,110u);
+ }
+ *(volatile uint8_t *)(packet+2u)=(uint8_t)second;
+ *(volatile uint8_t *)(packet+1u)=(uint8_t)first;
+ *(volatile uint8_t *)packet=24u;
+ *(volatile uint8_t *)(packet+3u)=*(volatile uint8_t *)(record+724u);
+ *(volatile uint8_t *)(packet+4u)=*(volatile uint8_t *)(record+725u);
+ return opencfw_em9305_phy_packet_send_32d32c(record,packet);
+}
+
+extern const opencfw_em9305_phy_action_fn opencfw_em9305_slave_phy_actions_33565c[];
+extern const uint8_t opencfw_em9305_slave_phy_transitions_335704[];
+/* Native32b04c..32b20e complete slave PHY state machine. */
+uint32_t opencfw_em9305_init_slave_phy_state_32b04c(uintptr_t record,uint32_t event)
+{
+ uint32_t action=0u,force=0u;
+ if((int32_t)event>=62){
+  if(event==62u){action=6u;if(*(volatile uint8_t *)(record+635u)!=21u)return 0u;}
+  else if(event==110u){action=4u;if(*(volatile uint8_t *)(record+635u)!=21u)return 0u;}
+  else if(event==112u){
+   uint32_t bits=*(volatile uint32_t *)(record+644u),extra=*(volatile uint32_t *)(record+648u);
+   if((bits^(1u<<21u))!=0u||extra!=0u)return 0u;
+   action=5u;*(volatile uint32_t *)(record+648u)=0u;*(volatile uint32_t *)(record+644u)=0u;
+  }else return 0u;
+ }else if(event==12u){
+  uint32_t operation=*(volatile uint8_t *)(uintptr_t)0x802818u;
+  if(operation==7u||operation==17u){action=3u;if(*(volatile uint8_t *)(uintptr_t)0x80281cu!=22u)return 0u;}
+  else if(operation==13u){action=3u;if(*(volatile uint8_t *)(record+635u)!=21u)return 0u;}
+  else if(operation==22u){action=2u;force=1u;}
+  else if(operation==24u)action=1u;
+  else return 0u;
+ }else if(event!=32u)return 0u;
+ uint32_t active=*(volatile uint8_t *)(record+620u);
+ if(active==0u){
+  uint32_t state=*(volatile uint8_t *)(record+625u);
+  opencfw_em9305_phy_action_fn callback=opencfw_em9305_slave_phy_actions_33565c[state*7u+action];
+  if(callback!=0){(void)callback(record);state=*(volatile uint8_t *)(record+625u);}
+  uint32_t next=opencfw_em9305_slave_phy_transitions_335704[state*7u+action];
+  *(volatile uint8_t *)(record+625u)=(uint8_t)next;
+  *(volatile uint8_t *)(record+634u)=(uint8_t)(next==5u);
+  if(next!=0u){*(volatile uint8_t *)(record+620u)=1u;*(volatile uint8_t *)(record+635u)=21u;*(volatile uint8_t *)(record+628u)=0u;}
+  return 1u;
+ }
+ if(active!=1u)return 1u;
+ uint32_t procedure=*(volatile uint8_t *)(record+635u);
+ if(force!=0u){
+  if(procedure-2u>=3u&&procedure!=21u&&procedure!=7u)goto deferred;
+  if(procedure!=21u){
+   uint32_t bits=*(volatile uint32_t *)(record+644u);
+   *(volatile uint8_t *)(record+635u)=21u;*(volatile uint8_t *)(record+631u)=1u;
+   *(volatile uint32_t *)(record+644u)=bits|(1u<<(procedure&31u));
+  }
+ }else if(procedure!=21u)goto deferred;
+ {
+  uint32_t state=*(volatile uint8_t *)(record+625u);
+  opencfw_em9305_phy_action_fn callback=opencfw_em9305_slave_phy_actions_33565c[state*7u+action];
+  if(callback!=0){(void)callback(record);state=*(volatile uint8_t *)(record+625u);}
+  uint32_t next=opencfw_em9305_slave_phy_transitions_335704[state*7u+action];
+  *(volatile uint8_t *)(record+625u)=(uint8_t)next;
+  *(volatile uint8_t *)(record+634u)=(uint8_t)(next==5u);
+  if(next==0u){(void)opencfw_em9305_phy_complete_32c818(record);*(volatile uint8_t *)(record+635u)=255u;*(volatile uint8_t *)(record+620u)=0u;(void)opencfw_em9305_phy_finish_32c810(record);}
+  return 1u;
+ }
+ deferred:
+ if(action==0u){
+  (void)opencfw_em9305_phy_defer_32caa0(record);
+  uint32_t first=*(volatile uint32_t *)(record+636u),second=*(volatile uint32_t *)(record+644u);
+  *(volatile uint32_t *)(record+636u)=first|(1u<<21u);
+  *(volatile uint32_t *)(record+644u)=second|(1u<<21u);
+ }else if(action==2u)(void)opencfw_em9305_phy_reject_32698c(record,42u,1u);
+ else if(action==3u){
+  uint32_t bits=*(volatile uint32_t *)(record+644u),state=*(volatile uint8_t *)(record+625u);
+  *(volatile uint32_t *)(record+648u)=0u;*(volatile uint32_t *)(record+644u)=bits&~(1u<<21u);
+  if(state!=0u)*(volatile uint8_t *)(record+625u)=0u;
+  uint32_t reason=*(volatile uint8_t *)(uintptr_t)0x80281du;
+  (void)opencfw_em9305_phy_response_3232dc(record,reason);
+ }
+ return 1u;
+}
+
+/* Native six-state/seven-action slave PHY tables, typed relocations. */
+extern uint32_t opencfw_em9305_phy_action_31592c(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315a28(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315c30(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315c64(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315e70(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315e80(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315eac(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_315f0c(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_316354(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_31644c(uintptr_t);
+extern uint32_t opencfw_em9305_phy_action_3164a8(uintptr_t);
+const opencfw_em9305_phy_action_fn opencfw_em9305_slave_phy_actions_33565c[42]={
+ opencfw_em9305_phy_action_315a28,0,opencfw_em9305_phy_action_315e70,0,0,opencfw_em9305_phy_action_31592c,0,
+ opencfw_em9305_phy_action_316354,0,opencfw_em9305_phy_action_315e80,0,0,opencfw_em9305_phy_action_31592c,opencfw_em9305_phy_action_3164a8,
+ opencfw_em9305_phy_action_316354,opencfw_em9305_phy_action_315eac,opencfw_em9305_phy_action_315e80,opencfw_em9305_phy_action_315f0c,opencfw_em9305_phy_action_315c30,opencfw_em9305_phy_action_31592c,0,
+ opencfw_em9305_phy_action_316354,0,0,opencfw_em9305_phy_action_315f0c,0,0,opencfw_em9305_phy_action_31644c,
+ opencfw_em9305_phy_action_316354,opencfw_em9305_phy_action_315eac,0,opencfw_em9305_phy_action_315f0c,0,0,0,
+ opencfw_em9305_phy_action_316354,0,0,0,opencfw_em9305_phy_action_315c64,0,0,
+};
+const uint8_t opencfw_em9305_slave_phy_transitions_335704[42]={
+ 1u,0u,3u,0u,0u,1u,0u,
+ 1u,1u,3u,1u,1u,1u,2u,
+ 2u,5u,3u,0u,0u,2u,2u,
+ 3u,3u,3u,3u,3u,3u,4u,
+ 4u,5u,4u,4u,4u,4u,4u,
+ 5u,5u,5u,5u,0u,5u,5u,
+};
+_Static_assert(sizeof(opencfw_em9305_slave_phy_actions_33565c)==168u,"native slave table width");
+
+extern uint32_t opencfw_em9305_slave_phy_apply_32cb58(uintptr_t);
+/* Native315a28..315a42 full pending action, same authenticated shared path. */
+uint32_t opencfw_em9305_phy_action_315a28(uintptr_t record)
+{
+ uint32_t bits=*(volatile uint32_t *)(record+636u);
+ *(volatile uint32_t *)(record+636u)=bits|(1u<<21u);
+ (void)opencfw_em9305_phy_defer_32caa0(record);
+ return opencfw_em9305_phy_action_31592c(record);
+}
+/* Native315c30..315c60, preserves incidental pointer/byte return. */
+uint32_t opencfw_em9305_phy_action_315c30(uintptr_t record)
+{
+ (void)opencfw_em9305_phy_record_325250(record);
+ uint32_t bits=*(volatile uint32_t *)(record+636u);
+ uint32_t result=(uint32_t)(record+400u);
+ if((bits&(1u<<21u))==0u)return result;
+ uint32_t enabled=*(volatile uint8_t *)(record+400u);
+ *(volatile uint32_t *)(record+640u)=0u;
+ *(volatile uint32_t *)(record+636u)=bits&~(1u<<21u);
+ if(enabled==0u)return result;
+ result=*(volatile uint8_t *)(record+1u);
+ if(result==3u)return result;
+ return opencfw_em9305_phy_response_3232dc(record,0u);
+}
+/* Native315e70..315e7e and315e80 real branch tail. */
+uint32_t opencfw_em9305_phy_action_315e70(uintptr_t record)
+{
+ (void)opencfw_em9305_phy_defer_32cb48(record);
+ return opencfw_em9305_phy_action_31592c(record);
+}
+uint32_t opencfw_em9305_phy_action_315e80(uintptr_t record)
+{ return opencfw_em9305_phy_action_315e70(record); }
+/* Native315eac..315ed4 after timer completion reads global direction bytes. */
+uint32_t opencfw_em9305_phy_action_315eac(uintptr_t record)
+{
+ (void)opencfw_em9305_phy_complete_32c818(record);
+ uint32_t second=*(volatile uint8_t *)(uintptr_t)0x80281du;
+ uint32_t first=*(volatile uint8_t *)(uintptr_t)0x80281cu;
+ if((first|second)==0u)return opencfw_em9305_receive_terminate_325c08(record,110u);
+ return opencfw_em9305_slave_phy_apply_32cb58(record);
+}
+uint32_t opencfw_em9305_phy_action_316354(uintptr_t record)
+{ return opencfw_em9305_phy_response_3232dc(record,12u); }
+/* Native31644c..3164a6 full slave preference/response/timer action. */
+uint32_t opencfw_em9305_phy_action_31644c(uintptr_t record)
+{
+ volatile uint8_t first=*(volatile uint8_t *)(record+595u);
+ volatile uint8_t second=*(volatile uint8_t *)(record+596u);
+ uint32_t direction_a=*(volatile uint8_t *)(record+720u);
+ uint32_t direction_b=*(volatile uint8_t *)(record+721u);
+ uint32_t flags=*(volatile uint8_t *)(record+594u);
+ (void)opencfw_em9305_phy_choose_316610(record,flags,(uintptr_t)&first,(uintptr_t)&second,direction_a&direction_b);
+ uint32_t chosen_first=first;
+ (void)opencfw_em9305_phy_apply_327544(record,chosen_first);
+ (void)opencfw_em9305_phy_update_complete_32e220(record);
+ uint32_t chosen_second=second;
+ (void)opencfw_em9305_phy_response_packet_326758(record,chosen_first,chosen_second);
+ return opencfw_em9305_phy_timer_start_32c7e4(record);
+}
+
+/* Native32cb58..32cbec full slave update validation and instant publish. */
+uint32_t opencfw_em9305_slave_phy_apply_32cb58(uintptr_t record)
+{
+ int32_t first=(int8_t)*(volatile uint8_t *)(uintptr_t)0x80281cu;
+ if(first<0)return opencfw_em9305_receive_terminate_325c08(record,74u);
+ int32_t second=(int8_t)*(volatile uint8_t *)(uintptr_t)0x80281du;
+ if(second<0)return opencfw_em9305_receive_terminate_325c08(record,74u);
+ if((first|second)==0)return opencfw_em9305_receive_terminate_325c08(record,110u);
+ uint32_t anchor=*(volatile uint16_t *)(record+262u);
+ uint32_t instant=*(volatile uint16_t *)(uintptr_t)0x80281eu;
+ if((uint16_t)(instant-anchor)>=32767u)return opencfw_em9305_receive_terminate_325c08(record,73u);
+ if(first!=0){
+  uint32_t supported=opencfw_em9305_phy_supported_31b39c();
+  if((supported&(uint32_t)first)==0u)return opencfw_em9305_receive_terminate_325c08(record,74u);
+  second=*(volatile uint8_t *)(uintptr_t)0x80281du;
+ }
+ if((uint8_t)second!=0u){
+  uint32_t supported=opencfw_em9305_phy_supported_31b39c();
+  if((supported&(uint32_t)second)==0u)return opencfw_em9305_receive_terminate_325c08(record,74u);
+ }
+ uint32_t value=*(volatile uint8_t *)(uintptr_t)0x80281cu,valid=1u;
+ if(value>=5u||((0x17u>>value)&1u)==0u){
+  (void)opencfw_em9305_receive_terminate_325c08(record,74u);valid=0u;
+ }
+ value=*(volatile uint8_t *)(uintptr_t)0x80281du;
+ if(value>=5u||value==3u)return opencfw_em9305_receive_terminate_325c08(record,74u);
+ if(valid==0u)return 0u;
+ uint32_t directions=*(volatile uint16_t *)(uintptr_t)0x80281cu;
+ instant=*(volatile uint16_t *)(uintptr_t)0x80281eu;
+ *(volatile uint16_t *)(record+722u)=(uint16_t)directions;
+ *(volatile uint16_t *)(record+724u)=(uint16_t)instant;
+ return instant;
+}
+
+/* Native3232dc/32317c reserve their original event frames before C executes.
+ * Untouched native stack bytes remain untouched, never zero-initialized. */
+static inline uint32_t opencfw_em9305_phy_event_index(uintptr_t record)
+{int32_t delta=(int32_t)((uint32_t)record-*(volatile uint32_t *)(uintptr_t)0x805c70u);int32_t index;__asm__ volatile("div %0,%1,912":"=r"(index):"r"(delta));return (uint8_t)index;}
+uint32_t opencfw_em9305_phy_response_frame_3232dc(uintptr_t record,uint32_t reason,uintptr_t event)
+{
+ uint32_t index=opencfw_em9305_phy_event_index(record);
+ *(volatile uint8_t *)(event+4u)=(uint8_t)reason;
+ *(volatile uint8_t *)(event+3u)=(uint8_t)reason;
+ uint32_t mode=*(volatile uint16_t *)(record+76u);
+ *(volatile uint8_t *)(event+2u)=22u;
+ *(volatile uint16_t *)(event+8u)=(uint16_t)mode;
+ *(volatile uint16_t *)(event+6u)=(uint16_t)index;
+ *(volatile uint16_t *)event=(uint16_t)index;
+ return opencfw_em9305_ll_event_callback_30e79c(event);
+}
+uint32_t opencfw_em9305_phy_length_frame_32317c(uintptr_t record,uint32_t reason,uintptr_t event)
+{
+ uint32_t index=opencfw_em9305_phy_event_index(record);
+ *(volatile uint8_t *)(event+3u)=(uint8_t)reason;
+ *(volatile uint8_t *)(event+2u)=18u;
+ uint32_t a=*(volatile uint16_t *)(record+578u),b=*(volatile uint16_t *)(record+580u);
+ *(volatile uint16_t *)(event+6u)=(uint16_t)a;
+ uint32_t c=*(volatile uint16_t *)(record+574u),d=*(volatile uint16_t *)(record+576u);
+ *(volatile uint16_t *)(event+8u)=(uint16_t)b;
+ *(volatile uint16_t *)(event+10u)=(uint16_t)c;
+ *(volatile uint16_t *)(event+12u)=(uint16_t)d;
+ *(volatile uint16_t *)(event+4u)=(uint16_t)index;
+ *(volatile uint16_t *)event=(uint16_t)index;
+ return opencfw_em9305_ll_event_callback_30e79c(event);
+}
+__asm__(
+".text\n.balign 4\n.global opencfw_em9305_phy_response_3232dc\n.type opencfw_em9305_phy_response_3232dc,@function\nopencfw_em9305_phy_response_3232dc:\nst.aw blink,[sp,-16]\nadd r2,sp,4\nbl opencfw_em9305_phy_response_frame_3232dc\nld.ab blink,[sp,16]\nj_s [blink]\n.size opencfw_em9305_phy_response_3232dc,.-opencfw_em9305_phy_response_3232dc\n"
+);
+__asm__(
+".text\n.balign 4\n.global opencfw_em9305_phy_length_notify_32317c\n.type opencfw_em9305_phy_length_notify_32317c,@function\nopencfw_em9305_phy_length_notify_32317c:\nst.aw blink,[sp,-20]\nadd r2,sp,4\nbl opencfw_em9305_phy_length_frame_32317c\nld.ab blink,[sp,20]\nj_s [blink]\n.size opencfw_em9305_phy_length_notify_32317c,.-opencfw_em9305_phy_length_notify_32317c\n"
+);
+
+extern uint32_t opencfw_em9305_associated_action_32b5ec(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_event_32b4e4(uintptr_t);
+/* Native30a328..30a378. Return retains native incidental R0. */
+uint32_t opencfw_em9305_init_lower_30a328(uint32_t incoming)
+{
+ (void)incoming;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t version=*(volatile uint8_t *)(config+4u);
+ *(volatile uint32_t *)(uintptr_t)0x802978u=(uint32_t)(uintptr_t)opencfw_em9305_associated_event_32b4e4;
+ *(volatile uint32_t *)(uintptr_t)0x801310u=(uint32_t)(uintptr_t)opencfw_em9305_radio_record_available_307410;
+ *(volatile uint32_t *)(uintptr_t)0x805224u=0u;
+ if(version<9u)return (uint32_t)config;
+ uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;flags|=1u<<13u;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=flags;
+ if(version<12u)return flags;
+ uint32_t second=*(volatile uint32_t *)(uintptr_t)0x805b34u;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=flags;
+ *(volatile uint32_t *)(uintptr_t)0x805b34u=second|(1u<<4u);
+ return flags;
+}
+/* Native32b4e4..32b536: event over one or every active2824B associated row. */
+uint32_t opencfw_em9305_associated_event_32b4e4(uintptr_t event)
+{
+ *(volatile uint32_t *)(uintptr_t)0x805cc0u=(uint32_t)event;
+ if(*(volatile uint8_t *)(event+2u)!=255u){
+  uintptr_t record=opencfw_em9305_radio_record_find_31aa64(*(volatile uint8_t *)event);
+  if(record==0u)return 0u;
+  return opencfw_em9305_associated_action_32b5ec(record,*(volatile uint8_t *)(event+3u));
+ }
+ uint32_t number=0u,offset=0u;
+ for(;;){
+  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uint32_t count=*(volatile uint8_t *)(config+12u);
+  if(number>=count)return count;
+  uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u;record+=offset;
+  if(*(volatile uint8_t *)record!=0u)(void)opencfw_em9305_associated_action_32b5ec(record,*(volatile uint8_t *)(event+3u));
+  offset+=2824u;number++;
+ }
+}
+extern uint32_t opencfw_em9305_associated_action_324b3c(uintptr_t);
+extern uint32_t opencfw_em9305_associated_action_324c60(uintptr_t);
+extern uint32_t opencfw_em9305_associated_action_324aa8(uintptr_t);
+extern uint32_t opencfw_em9305_associated_action_324aa0(uintptr_t);
+extern uint32_t opencfw_em9305_associated_action_324a8c(uintptr_t);
+typedef uint32_t (*opencfw_em9305_associated_action_fn)(uintptr_t);
+const opencfw_em9305_associated_action_fn opencfw_em9305_associated_actions_335328[16]={
+0,opencfw_em9305_associated_action_324b3c,0,0,0,opencfw_em9305_associated_action_324c60,opencfw_em9305_associated_action_324aa8,0,0,opencfw_em9305_associated_action_324aa0,opencfw_em9305_associated_action_324aa0,opencfw_em9305_associated_action_324a8c,0,opencfw_em9305_associated_action_324aa0,opencfw_em9305_associated_action_324aa0,0
+};
+const uint8_t opencfw_em9305_associated_transitions_335368[16]={0u,1u,0u,0u,3u,1u,2u,0u,3u,2u,2u,0u,3u,3u,3u,0u};
+/* Native32b5ec..32b614: callback-mutated state is reloaded before transition. */
+uint32_t opencfw_em9305_associated_action_32b5ec(uintptr_t record,uint32_t action)
+{
+ uint32_t state=*(volatile uint8_t *)(record+368u);
+ opencfw_em9305_associated_action_fn callback=opencfw_em9305_associated_actions_335328[state*4u+action];
+ if(callback!=0){(void)callback(record);state=*(volatile uint8_t *)(record+368u);}
+ uint32_t next=opencfw_em9305_associated_transitions_335368[state*4u+action];
+ *(volatile uint8_t *)(record+368u)=(uint8_t)next;return next;
+}
+
+extern uint32_t opencfw_em9305_associated_schedule_drop_3136ac(uint32_t);
+/* Native324a60..324a88 release, signed2824B row index, schedule removal and count. */
+uint32_t opencfw_em9305_associated_release_324a60(uintptr_t record)
+{
+ (void)opencfw_em9305_common_release_304588(1u);
+ int32_t delta=(int32_t)((uint32_t)record-*(volatile uint32_t *)(uintptr_t)0x805c38u),index;
+ __asm__ volatile("div %0,%1,2824":"=r"(index):"r"(delta));
+ (void)opencfw_em9305_associated_schedule_drop_3136ac((uint8_t)(index+4));
+ return opencfw_em9305_command_count_down_30e48c();
+}
+uint32_t opencfw_em9305_associated_action_324a8c(uintptr_t record)
+{
+ (void)opencfw_em9305_associated_release_324a60(record);
+ return opencfw_em9305_command_periodic_status_30e878(*(volatile uint8_t *)(record+1u),0u);
+}
+uint32_t opencfw_em9305_associated_action_324aa0(uintptr_t record)
+{ return opencfw_em9305_command_periodic_status_30e878(*(volatile uint8_t *)(record+1u),12u); }
+uint32_t opencfw_em9305_associated_action_324c60(uintptr_t record)
+{ return opencfw_em9305_command_periodic_status_30e878(*(volatile uint8_t *)(record+1u),0u); }
+
+/* Native306c7c..306c8a dynamic tail preserves all inherited registers; R0 is the loaded callback address. */
+__asm__(
+".text\n.balign 4\n.global opencfw_em9305_init_event_dispatch_306c7c\n.type opencfw_em9305_init_event_dispatch_306c7c,@function\nopencfw_em9305_init_event_dispatch_306c7c:\nld.as r0,[0x802878,r0]\ncmp_s r0,0\njeq_s [blink]\nj_s [r0]\nnop_s\n.size opencfw_em9305_init_event_dispatch_306c7c,.-opencfw_em9305_init_event_dispatch_306c7c\n"
+);
+
+uint32_t opencfw_em9305_event_reset_332cc0(uint32_t incoming)
+{(void)incoming;return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x8058dcu,0u,404u);}
+/* Native332c84..332cbc retains path-specific R0, including state before write4. */
+uint32_t opencfw_em9305_event_mode_332c84(uintptr_t event)
+{
+ uint32_t operation=*(volatile uint8_t *)(event+3u);
+ if(operation==1u){
+  *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
+  *(volatile uint8_t *)(uintptr_t)0x8058dcu=0u;
+  return opencfw_em9305_command_count_down_30e48c();
+ }
+ if(operation!=0u)return 0x805a70u;
+ uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x805a78u;
+ if(enabled==0u)return 0u;
+ (void)opencfw_em9305_command_stop_30b654(0u);
+ uint32_t state=*(volatile uint8_t *)(uintptr_t)0x8058dcu;
+ if(state==3u)*(volatile uint8_t *)(uintptr_t)0x8058dcu=4u;
+ return state;
+}
+/* Native30e0e8..30e11c: clear404, callback registration, actual common-init. */
+uint32_t opencfw_em9305_init_event_state_30e0e8(uint32_t incoming)
+{
+ (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x8058dcu,0u,404u);
+ *(volatile uint32_t *)(uintptr_t)0x805210u=(uint32_t)(uintptr_t)opencfw_em9305_event_reset_332cc0;
+ *(volatile uint32_t *)(uintptr_t)0x802964u=(uint32_t)(uintptr_t)opencfw_em9305_event_mode_332c84;
+ return opencfw_em9305_common_init_303d2c(0x802964u);
+}
+
+/* Native324aa8..324b38: associated stop action. Capture timing source/count
+ * before PRNG call, then reload product flags exactly at native point. */
+uint32_t opencfw_em9305_associated_action_324aa8(uintptr_t record)
+{
+ if(*(volatile uint8_t *)(record+2u)==1u&&*(volatile uint8_t *)(record+369u)!=0u){
+  uint32_t count=*(volatile uint16_t *)(record+2250u);
+  uintptr_t input=*(volatile uint32_t *)(record+1424u);
+  uint32_t seed=opencfw_em9305_pal_random_step();
+  uint32_t crc=opencfw_em9305_crc_update_304678(seed,count,input);
+  *(volatile uint8_t *)(record+2786u)=1u;
+  *(volatile uint16_t *)(record+1442u)=(uint16_t)crc;
+ }
+ uint32_t flag=*(volatile uint8_t *)(record+2809u);
+ *(volatile uint8_t *)(record+378u)=0u;
+ *(volatile uint8_t *)(record+369u)=0u;
+ *(volatile uint8_t *)(record+698u)=1u;
+ if(flag!=0u){
+  uintptr_t packet=*(volatile uint32_t *)(record+1160u);
+  *(volatile uint32_t *)(packet+3844u)=32767u;
+  *(volatile uint16_t *)(packet+3840u)=0u;
+  *(volatile uint32_t *)(packet+3848u)=0u;
+  (void)opencfw_em9305_memset((void *)(packet+3852u),255u,15u);
+ }
+ return opencfw_em9305_ll_schedule_notify_313354(record+380u);
+}
+
+extern uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_validate_32b2d4(uintptr_t);
+extern uint32_t opencfw_em9305_associated_cleanup_3266d0(uintptr_t,uint32_t);
+static uint32_t opencfw_em9305_associated_timing_crc(uintptr_t record)
+{
+ uint32_t count=*(volatile uint16_t *)(record+2250u);
+ uintptr_t input=*(volatile uint32_t *)(record+1424u);
+ uint32_t seed=opencfw_em9305_pal_random_step();
+ return opencfw_em9305_crc_update_304678(seed,count,input);
+}
+/* Native324b3c..324c5c complete associated start action. */
+uint32_t opencfw_em9305_associated_action_324b3c(uintptr_t record)
+{
+ (void)opencfw_em9305_common_request_30455c(1u);
+ *(volatile uint8_t *)(record+698u)=0u;
+ uint32_t access=opencfw_em9305_radio_access_raw_318878();
+ *(volatile uint32_t *)(record+372u)=access;
+ uint32_t second=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
+ uint32_t first=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
+ *(volatile uint32_t *)(record+720u)=first;
+ *(volatile uint8_t *)(record+799u)=0u;
+ *(volatile uint16_t *)(record+752u)=0u;
+ *(volatile uint32_t *)(record+724u)=second;
+ (void)opencfw_em9305_radio_channel_transform_30e3fc(record+720u);
+ access=*(volatile uint32_t *)(record+372u);
+ uint32_t flag=*(volatile uint8_t *)(record+2809u);
+ uint32_t seed=*(volatile uint16_t *)(record+752u);
+ *(volatile uint8_t *)(record+766u)=1u;
+ *(volatile uint16_t *)(record+768u)=(uint16_t)(access^(access>>16u));
+ if(flag!=0u)seed^=*(volatile uint8_t *)(record+799u);
+ uint32_t channel=opencfw_em9305_associated_channel_seed_324c98(record+720u,seed);
+ *(volatile uint8_t *)(record+697u)=(uint8_t)channel;
+ uint32_t status;
+ flag=*(volatile uint8_t *)(record+2809u);
+ uintptr_t callback=0u;
+ if(flag!=0u)callback=*(volatile uint32_t *)(uintptr_t)0x805cc4u;
+ if(callback!=0u)status=((uint32_t (*)(uintptr_t))callback)(record);
+ else status=opencfw_em9305_associated_validate_32b2d4(record);
+ if(status!=0u){
+  (void)opencfw_em9305_associated_cleanup_3266d0(record,3u);
+  return opencfw_em9305_command_periodic_status_30e878(*(volatile uint8_t *)(record+1u),status);
+ }
+ uint32_t kind=*(volatile uint8_t *)(record+2u);
+ *(volatile uint8_t *)(record+369u)=1u;
+ if(kind==1u){
+  if(*(volatile uint8_t *)(record+2785u)==0u)*(volatile uint8_t *)(record+378u)=1u;
+  uint32_t crc=opencfw_em9305_associated_timing_crc(record);
+  *(volatile uint8_t *)(record+2786u)=1u;
+  *(volatile uint16_t *)(record+1442u)=(uint16_t)crc;
+ }
+ if(*(volatile uint8_t *)(record+704u)!=0u){
+  uint32_t crc=opencfw_em9305_associated_timing_crc(record);
+  *(volatile uint16_t *)(record+706u)=(uint16_t)crc;
+ }
+ (void)opencfw_em9305_command_periodic_status_30e878(*(volatile uint8_t *)(record+1u),0u);
+ return opencfw_em9305_command_count_30e4bc();
+}
+
+/* Native324c98..324d6a: three bytewise permutations/MAM steps, native
+ * low16 multiplier lanes, reciprocal37 and channel-map remap. */
+uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t channels,uint32_t seed)
+{
+ uint32_t identity=*(volatile uint16_t *)(channels+48u),value=seed^identity;
+ for(uint32_t round=0u;round<3u;++round){
+  value=(value&0xf0f0u)|((value<<8u)&0xf0f00u);
+  value=(value&0xcccc0u)|((value<<4u)&0x333300u);
+  value=(value&0x2aaa80u)|((value<<2u)&0x555500u);
+  value>>=7u;
+  value=(value&65535u)*17u+identity;
+ }
+ uint32_t pseudo=value^identity;
+ uint32_t quotient=((pseudo&65535u)*0xdd68u)>>21u;
+ uint32_t choice=pseudo+(uint32_t)((int32_t)(int16_t)quotient*-37);
+ uint32_t high=*(volatile uint32_t *)(channels+4u),low=*(volatile uint32_t *)channels;
+ uint32_t index=((uint16_t)choice)&63u;
+ uint32_t shifted=index==0u?low:index<32u?(low>>index)|(high<<(32u-index)):high>>(index-32u);
+ if((shifted&1u)==0u){
+  uint32_t count=*(volatile uint8_t *)(channels+45u);
+  uint32_t remap=(count*(pseudo&65535u))>>16u;
+  choice=*(volatile uint8_t *)(channels+8u+remap);
+ }
+ return (uint8_t)choice;
+}
+
+/* Native3136ac..3136fa: exclude removed ID, recalculate strict maximum,
+ * then retain callback-fresh counter and full decrement return. */
+uint32_t opencfw_em9305_associated_schedule_drop_3136ac(uint32_t id)
+{
+ uintptr_t root=0x805f28u;
+ uint32_t existing=*(volatile uint32_t *)(root+8u);
+ uint32_t selected=*(volatile uint32_t *)(root+(id&65535u)*12u+52u);
+ if(selected==existing){
+  uint32_t maximum=0u;
+  for(uint32_t index=0u;index<8u;++index){
+   if(index==id)continue;
+   uint32_t candidate=*(volatile uint32_t *)(root+16u+index*4u);
+   if(candidate!=0u&&candidate>maximum)maximum=candidate;
+  }
+  (void)opencfw_em9305_radio_primary_timer_333bec(maximum);
+ }
+ uint32_t count=*(volatile uint8_t *)root;
+ *(volatile uint32_t *)(root+id*4u)=0u;
+ count-=1u;*(volatile uint8_t *)root=(uint8_t)count;
+ return count;
+}
+/* Native3266d0..3266f6: cleanup event4B actual byte order and R0 send return. */
+uint32_t opencfw_em9305_associated_cleanup_3266d0(uintptr_t record,uint32_t action)
+{
+ uintptr_t event=opencfw_em9305_wsf_event_allocate(4u);
+ if(event==0u)return 0u;
+ uint32_t id=*(volatile uint8_t *)(record+1u),handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint8_t *)(event+3u)=(uint8_t)action;
+ *(volatile uint16_t *)event=(uint16_t)id;
+ *(volatile uint8_t *)(event+2u)=10u;
+ return opencfw_em9305_wsf_task_message_send(handler,event);
+}
+
+extern uint32_t opencfw_em9305_associated_radio_callback_32b538(uintptr_t);
+extern uint32_t opencfw_em9305_associated_packet_callback_32c69c(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_object_init_312918(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_slot_allocate_3133b4(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t,uintptr_t);
+/* Native32b2d0 true tail to32b538, represented with actual source relocation. */
+uint32_t opencfw_em9305_associated_radio_tail_32b2d0(uintptr_t record)
+{ return opencfw_em9305_associated_radio_callback_32b538(record); }
+/* Native31896c..318986 keeps named XBFU and native low-bit BMSK semantics. */
+uint32_t opencfw_em9305_associated_random_31896c(void)
+{
+ uint32_t value=opencfw_em9305_pal_random_step(),first,second;
+ __asm__ volatile("xbfu %0,%1,0x28":"=r"(first):"r"(value));
+ __asm__ volatile("xbfu %0,%1,0x10":"=r"(second):"r"(value));
+ return (value&7u)+first+second+5u;
+}
+/* Native31b2fc..31b32a: exact signed low-word2824B record stride. */
+uint32_t opencfw_em9305_associated_slot_query_31b2fc(uint32_t id,uintptr_t output)
+{
+ uint32_t offset=opencfw_em9305_native_mpywhl(id-4u,2824u);
+ uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u;record+=offset;
+ if(*(volatile uint8_t *)(record+368u)!=1u)return 0u;
+ uint32_t result=*(volatile uint32_t *)(record+388u);
+ if(output!=0u){uint32_t extent=*(volatile uint32_t *)(record+392u);*(volatile uint32_t *)output=extent;}
+ return result;
+}
+static uint32_t opencfw_em9305_associated_macwhul(uint32_t prior,uint32_t factor,uint32_t iteration)
+{uint32_t result;__asm__ volatile("mov r58,%1\n\tmacwhul 0,%2,%3\n\tmov %0,r58":"=r"(result):"r"(prior),"r"(factor),"r"(iteration));return result;}
+/* Native32b2d4..32b4e2 complete validation/record/scheduler parent. */
+uint32_t opencfw_em9305_associated_validate_32b2d4(uintptr_t record)
+{
+ uintptr_t object=record+380u;
+ (void)opencfw_em9305_memset((void *)object,0u,148u);
+ *(volatile uint8_t *)(record+406u)=1u;*(volatile uint8_t *)(record+404u)=1u;
+ *(volatile uint32_t *)(record+412u)=(uint32_t)(uintptr_t)opencfw_em9305_associated_radio_tail_32b2d0;
+ *(volatile uint32_t *)(record+408u)=(uint32_t)(uintptr_t)opencfw_em9305_associated_radio_callback_32b538;
+ *(volatile uint32_t *)(record+416u)=(uint32_t)record;
+ *(volatile uint32_t *)(record+424u)=(uint32_t)(record+428u);
+ *(volatile uint32_t *)(record+420u)=(uint32_t)(record+1144u);
+ uint32_t random=opencfw_em9305_associated_random_31896c();
+ int32_t power=*(volatile int8_t *)(record+60u);uint32_t channel=*(volatile uint8_t *)(record+697u);
+ *(volatile uint8_t *)(record+696u)=(uint8_t)random;
+ *(volatile uint8_t *)(record+428u)=8u;*(volatile uint8_t *)(record+429u)=(uint8_t)channel;
+ if(power==127)power=*(volatile uint8_t *)(uintptr_t)0x805a9cu;
+ uint32_t access=*(volatile uint32_t *)(record+372u);
+ *(volatile uint8_t *)(record+430u)=(uint8_t)power;
+ *(volatile uint32_t *)(record+432u)=access;
+ uint32_t crc=opencfw_em9305_radio_crc_seed_318960();
+ uint32_t mode=*(volatile uint8_t *)(record+69u);
+ *(volatile uint32_t *)(record+436u)=crc;
+ *(volatile uint32_t *)(record+568u)=(uint32_t)(record+1077u);
+ *(volatile uint32_t *)(record+532u)=(uint32_t)(record+1077u);
+ *(volatile uint16_t *)(record+1154u)=0u;
+ uint32_t index=mode-1u,decoded=index<4u?(0x02010201u>>((index&3u)*8u)):0u;
+ uint32_t phy=*(volatile uint8_t *)(record+63u);
+ *(volatile uint8_t *)(record+443u)=(uint8_t)decoded;*(volatile uint8_t *)(record+442u)=(uint8_t)decoded;
+ *(volatile uint32_t *)(record+588u)=(uint32_t)(uintptr_t)opencfw_em9305_associated_packet_callback_32c69c;
+ *(volatile uint8_t *)(record+441u)=(uint8_t)phy;*(volatile uint8_t *)(record+440u)=(uint8_t)phy;
+ (void)opencfw_em9305_associated_object_init_312918(object,0u);
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t spacing=*(volatile uint16_t *)(config+20u),budget=*(volatile uint32_t *)(record+72u);
+ uint32_t maximum=*(volatile uint32_t *)(record+712u),minimum=*(volatile uint32_t *)(record+708u);
+ if(budget>spacing)spacing=budget;
+ uint32_t timing=0u;
+ if(*(volatile uint8_t *)(record+804u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;if(callback!=0u)timing=((uint32_t (*)(void))callback)();}
+ uint32_t size=*(volatile uint16_t *)(record+1144u);
+ phy=*(volatile uint8_t *)(record+63u);
+ uint32_t duration=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,1u,2u,0u);
+ config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t chosen=*(volatile uint16_t *)(config+28u);
+ if(chosen<duration){size=*(volatile uint16_t *)(record+1144u);phy=*(volatile uint8_t *)(record+63u);chosen=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,1u,2u,0u);}
+ uint32_t extent=*(volatile uint32_t *)(record+392u);if(chosen>extent)extent=chosen;
+ *(volatile uint32_t *)(record+392u)=extent;
+ if(maximum<chosen)return 69u;
+ if(chosen>minimum)minimum=chosen;
+ int32_t delta=(int32_t)((uint32_t)record-*(volatile uint32_t *)(uintptr_t)0x805c38u),row;
+ __asm__ volatile("div %0,%1,2824":"=r"(row):"r"(delta));
+ volatile uint32_t allocation;
+ uint32_t success=opencfw_em9305_associated_slot_allocate_3133b4((uint8_t)(row+4),1u,minimum,maximum,extent,(uintptr_t)&allocation,(uintptr_t)opencfw_em9305_associated_slot_query_31b2fc);
+ if(success==0u)return 67u;
+ uint32_t base=*(volatile uint32_t *)(record+2476u),selected=allocation;
+ *(volatile uint32_t *)(record+700u)=selected;*(volatile uint32_t *)(record+400u)=selected;
+ if(base==0u){selected=*(volatile uint32_t *)(record+700u);base=opencfw_em9305_pal_current_time();}
+ delta=(int32_t)((uint32_t)record-*(volatile uint32_t *)(uintptr_t)0x805c38u);
+ __asm__ volatile("div %0,%1,2824":"=r"(row):"r"(delta));
+ uint32_t elapsed=opencfw_em9305_radio_schedule_313424(selected,(uint8_t)(row+4),base,0u,0u);
+ uint32_t half=*(volatile uint32_t *)(record+36u);if(elapsed==half)elapsed=half>>1u;
+ uint32_t first=elapsed+base,next=first,iteration=1u;
+ for(;;){
+  *(volatile uint32_t *)(record+388u)=next;
+  if(opencfw_em9305_associated_schedule_insert_312da4(object,0u)!=0u)return 0u;
+  uint32_t count=*(volatile uint16_t *)(record+752u);selected=*(volatile uint32_t *)(record+700u);
+  count+=1u;next=opencfw_em9305_associated_macwhul(first,selected,iteration);
+  *(volatile uint16_t *)(record+752u)=(uint16_t)count;iteration+=1u;
+ }
+}
+
+/* Authenticated ARC native 3336d8 bitmap, 33382c occupancy, 3338f4 setter,
+ * 333948 selector and 3133b4 allocator. Source reduction, not runtime admission. */
+static inline uint32_t opencfw_em9305_associated_slot_sdiv(uint32_t numerator,uint32_t denominator)
+{uint32_t result;__asm__ volatile("div %0,%1,%2":"=r"(result):"r"(numerator),"r"(denominator));return result;}
+static inline uint32_t opencfw_em9305_associated_slot_rem625(uint32_t value)
+{uint32_t result;__asm__ volatile("remu %0,%1,625":"=r"(result):"r"(value));return result;}
+uint64_t opencfw_em9305_associated_bitmap_3336d8(uintptr_t head,uint32_t special)
+{
+ if(head==0u)return 0u;
+ uint32_t quantum=*(volatile uint32_t *)(uintptr_t)0x805f2cu;
+ uint64_t bits=0u;
+ for(uintptr_t node=head;node!=0u;node=*(volatile uint32_t *)(node+4u)){
+  uint32_t period=*(volatile uint32_t *)(node+20u);
+  if(period==0u)continue;
+  if(*(volatile uint8_t *)(node+25u)==1u&&special==0u)continue;
+  uint32_t delta=*(volatile uint32_t *)(node+8u)-*(volatile uint32_t *)(head+8u);
+  uint32_t end=*(volatile uint32_t *)(node+12u)+delta;
+  uint32_t endq=opencfw_em9305_config_link_divu_prior(end,quantum,end);
+  if((endq&224u)!=0u)break;
+  uint32_t pq=opencfw_em9305_config_link_divu_prior(period,quantum,period);
+  uint32_t start=opencfw_em9305_config_link_divu_prior(delta,quantum,delta);
+  uint32_t stride=(uint8_t)pq,reps=1u;
+  if(stride!=0u)reps=(uint8_t)(opencfw_em9305_associated_slot_sdiv(32u-(uint8_t)start,stride)+1);
+  uint32_t width=(uint8_t)(endq-start+1u);
+  for(uint32_t rep=0u;rep<reps;++rep){
+   start=(uint8_t)start;
+   for(uint32_t offset=0u;offset<width;++offset)bits|=UINT64_C(1)<<((start+offset)&63u);
+   start+=stride;
+  }
+ }
+ return bits;
+}
+uint32_t opencfw_em9305_associated_available_33382c(uint32_t id,uint32_t value,uint32_t extent,uint32_t existing)
+{
+ uintptr_t root=0x805f28u;
+ if(*(volatile uint8_t *)root==0u)return 1u;
+ uintptr_t node=*(volatile uint32_t *)(uintptr_t)0x805f14u;
+ while(node!=0u&&*(volatile uint32_t *)(node+20u)==0u)node=*(volatile uint32_t *)(node+4u);
+ uint64_t bits=opencfw_em9305_associated_bitmap_3336d8(node,1u);
+ uint32_t quantum,occupied=0u;
+ while(bits!=0u){quantum=*(volatile uint32_t *)(root+4u);occupied+=(0u-(uint32_t)(bits&1u))&quantum;bits>>=1u;}
+ if(existing!=0u){
+  uintptr_t slot=root+(id&65535u)*12u;
+  if(*(volatile uint8_t *)(slot+48u)==id){
+   uint32_t oldextent=*(volatile uint32_t *)(slot+56u);
+   uint32_t overhead=opencfw_em9305_auxiliary_guard_interval();
+   uint32_t oldvalue=*(volatile uint32_t *)(slot+52u);
+   quantum=*(volatile uint32_t *)(root+4u);
+   uint32_t ratio=(uint8_t)opencfw_em9305_config_link_divu_prior(oldvalue,quantum,quantum);
+   uint32_t contribution=(overhead+oldextent)*(ratio!=0u?opencfw_em9305_config_link_divu_prior(32u,ratio,32u):1u);
+   uint32_t reduced=occupied-contribution;
+   occupied=occupied<reduced?0u:reduced;
+  }
+ }
+ uint32_t overhead=opencfw_em9305_auxiliary_guard_interval();
+ quantum=*(volatile uint32_t *)(root+4u);
+ uint32_t ratio=(uint8_t)opencfw_em9305_config_link_divu_prior(value,quantum,value);
+ uint32_t total=occupied+(overhead+extent)*(ratio!=0u?opencfw_em9305_config_link_divu_prior(32u,ratio,32u):1u);
+ return total<(quantum<<5u);
+}
+uint32_t opencfw_em9305_associated_set_3338f4(uint32_t id,uint32_t value,uint32_t extent)
+{
+ uintptr_t root=0x805f28u,slot=root+(id&65535u)*12u;
+ uint32_t current=*(volatile uint32_t *)(root+8u);
+ if(current==0u){(void)opencfw_em9305_radio_primary_timer_333bec(value);*(volatile uint8_t *)(slot+49u)=1u;}
+ else if(current==value)*(volatile uint8_t *)(slot+49u)=1u;
+ else if(opencfw_em9305_associated_slot_rem625(value)!=0u)*(volatile uint8_t *)(slot+49u)=0u;
+ else {if(current<value)(void)opencfw_em9305_radio_primary_timer_333bec(value);*(volatile uint8_t *)(slot+49u)=1u;}
+ *(volatile uint32_t *)(slot+56u)=extent;
+ *(volatile uint32_t *)(slot+52u)=value;
+ *(volatile uint8_t *)(slot+48u)=(uint8_t)id;
+ return (uint32_t)slot;
+}
+uint32_t opencfw_em9305_associated_select_333948(uint32_t minimum,uint32_t maximum,uint32_t step,uint32_t direction,uint32_t exclude)
+{
+ uint32_t quotient=opencfw_em9305_config_link_divu_prior(direction==1u?maximum:minimum,625u,0u);
+ if(step>=626u)quotient=opencfw_em9305_config_link_divu_prior(quotient,opencfw_em9305_config_link_divu_prior(step,625u,625u),quotient);
+ uint32_t threshold=quotient*step;
+ if(direction==1u){if(threshold<minimum)threshold=maximum;}
+ else if(threshold<minimum)threshold=(quotient+1u)*step;
+ uint32_t largest=0u;
+ for(uint32_t index=0u;index<8u;++index){
+  if(index==exclude)continue;
+  uint32_t value=*(volatile uint32_t *)(uintptr_t)(0x805f38u+index*4u);
+  if(value>=threshold&&value<=maximum&&value>=largest)largest=value;
+ }
+ if(largest!=0u)return largest;
+ return maximum<threshold?maximum:threshold;
+}
+uint32_t opencfw_em9305_associated_slot_allocate_3133b4(uint32_t id,uint32_t direction,uint32_t minimum,uint32_t maximum,uint32_t extent,uintptr_t output,uintptr_t callback)
+{
+ (void)callback; /* Native passes R6 but all three children leave it unused. */
+ uint32_t choice=opencfw_em9305_associated_select_333948(minimum,maximum,625u,direction,id);
+ if(opencfw_em9305_associated_available_33382c(id,choice,extent,0u)==0u)return 0u;
+ (void)opencfw_em9305_associated_set_3338f4(id,choice,extent);
+ uintptr_t root=0x805f28u;
+ uint32_t count=*(volatile uint8_t *)root;
+ *(volatile uint32_t *)(root+16u+id*4u)=choice;
+ *(volatile uint8_t *)root=(uint8_t)(count+1u);
+ if(output!=0u)*(volatile uint32_t *)output=choice;
+ return 1u;
+}
+
+/* Native30e89c event frame contains untouched bytes5,10,11. Named ISA
+ * preserves the real incoming frame rather than inventing C stack contents. */
+extern uint32_t opencfw_em9305_associated_report_30e89c(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
+__asm__(
+ ".text\n.align 2\n.global opencfw_em9305_associated_report_30e89c\n"
+ ".type opencfw_em9305_associated_report_30e89c,@function\n"
+ "opencfw_em9305_associated_report_30e89c:\n"
+ "st.aw blink,[sp,-24]\nmov_s r12,sp\nsth_s r1,[r12,10]\n"
+ "stb_s r0,[sp,8]\nmov_s r1,34\nsth_s r0,[r12,4]\n"
+ "add_s r0,sp,4\nst r4,[sp,20]\nst_s r3,[sp,16]\n"
+ "sth_s r2,[r12,12]\nbl.d opencfw_em9305_ll_event_callback_30e79c\n"
+ "sth_s r1,[r12,6]\nld.ab blink,[sp,24]\nj_s [blink]\n"
+ ".size opencfw_em9305_associated_report_30e89c,.-opencfw_em9305_associated_report_30e89c\n");
+extern uint32_t opencfw_em9305_associated_channel_pending_327af4(uintptr_t);
+/* Native32b538..32b5e8 full registered callback including retry loop. */
+uint32_t opencfw_em9305_associated_radio_callback_32b538(uintptr_t object)
+{
+ uintptr_t record=*(volatile uint32_t *)(object+36u);
+ if(*(volatile uint8_t *)(record+698u)!=0u)return opencfw_em9305_associated_cleanup_3266d0(record,3u);
+ uintptr_t packet=*(volatile uint32_t *)(object+44u);
+ uint32_t power=*(volatile uint8_t *)(packet+15u);
+ if(power==0u)power=*(volatile uint8_t *)(uintptr_t)0x805bedu;
+ *(volatile uint8_t *)(packet+14u)=(uint8_t)power;
+ if(*(volatile uint8_t *)(record+1164u)!=0u){
+  uintptr_t destination=*(volatile uint32_t *)(record+1148u);
+  uint32_t bytes=*(volatile uint8_t *)(record+1165u);
+  *(volatile uint8_t *)(record+1164u)=0u;
+  (void)opencfw_em9305_memcpy((void *)destination,(const void *)(record+1168u),bytes);
+  bytes=*(volatile uint8_t *)(record+1165u);
+  uint32_t extent=*(volatile uint16_t *)(record+1166u);
+  *(volatile uint16_t *)(record+1144u)=(uint16_t)bytes;
+  *(volatile uint16_t *)(record+706u)=(uint16_t)extent;
+ }
+ if(*(volatile uint8_t *)(uintptr_t)0x805beeu!=0u){
+  uint32_t timestamp=*(volatile uint32_t *)(object+8u),spacing=*(volatile uint32_t *)(record+700u);
+  uint32_t count=*(volatile uint16_t *)(record+752u),id=*(volatile uint8_t *)(record+1u);
+  (void)opencfw_em9305_associated_report_30e89c(id,count,0u,spacing,timestamp);
+ }
+ *(volatile uint32_t *)(object+20u)=*(volatile uint32_t *)(record+700u);
+ for(;;){
+  uint32_t spacing=*(volatile uint32_t *)(record+700u),timestamp=*(volatile uint32_t *)(object+8u);
+  uint32_t count=*(volatile uint16_t *)(record+752u);
+  *(volatile uint16_t *)(record+752u)=(uint16_t)(count+1u);
+  *(volatile uint32_t *)(object+8u)=timestamp+spacing;
+  (void)opencfw_em9305_associated_channel_pending_327af4(record);
+  count=*(volatile uint16_t *)(record+752u);
+  uint32_t channel=opencfw_em9305_associated_channel_seed_324c98(record+720u,count);
+  *(volatile uint8_t *)(record+697u)=(uint8_t)channel;
+  uint32_t result=opencfw_em9305_associated_schedule_insert_312da4(object,0u);
+  if(result!=0u)return result;
+ }
+}
+
+/* Native3279a4/3279b4 indirect tails preserve R1 = loaded callback address. */
+extern uint32_t opencfw_em9305_associated_channel_notify_3279a4(uintptr_t);
+extern uint32_t opencfw_em9305_associated_phy_notify_3279b4(uintptr_t);
+__asm__(".text\n.align 2\n.global opencfw_em9305_associated_channel_notify_3279a4\n"
+".type opencfw_em9305_associated_channel_notify_3279a4,@function\n"
+"opencfw_em9305_associated_channel_notify_3279a4:\nld r1,[r0,2796]\ncmp_s r1,0\njeq_s [blink]\nldb_s r0,[r0,1]\nj_s [r1]\n"
+".size opencfw_em9305_associated_channel_notify_3279a4,.-opencfw_em9305_associated_channel_notify_3279a4\n"
+".align 2\n.global opencfw_em9305_associated_phy_notify_3279b4\n"
+".type opencfw_em9305_associated_phy_notify_3279b4,@function\n"
+"opencfw_em9305_associated_phy_notify_3279b4:\nld r1,[r0,2800]\ncmp_s r1,0\njeq_s [blink]\nldb_s r0,[r0,1]\nj_s [r1]\n"
+".size opencfw_em9305_associated_phy_notify_3279b4,.-opencfw_em9305_associated_phy_notify_3279b4\n");
+uint32_t opencfw_em9305_associated_channel_reset_3279c4(uintptr_t record)
+{return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(record+80u),0u,96u);}
+uint32_t opencfw_em9305_associated_channel_apply_3279d0(uintptr_t record)
+{
+ if(*(volatile uint8_t *)(record+80u)==1u)return (uint32_t)record;
+ uintptr_t event=*(volatile uint32_t *)(uintptr_t)0x805c34u;
+ uint32_t count=*(volatile uint16_t *)(record+752u);
+ uint32_t lower=*(volatile uint32_t *)(event+4u),upper=*(volatile uint32_t *)(event+8u);
+ *(volatile uint16_t *)(record+92u)=(uint16_t)(count+6u);
+ *(volatile uint8_t *)(record+82u)=8u;*(volatile uint8_t *)(record+80u)=1u;
+ *(volatile uint32_t *)(record+780u)=upper;*(volatile uint32_t *)(record+776u)=lower;
+ *(volatile uint32_t *)(record+88u)=upper;*(volatile uint32_t *)(record+84u)=lower;
+ return (uint32_t)record;
+}
+uint32_t opencfw_em9305_associated_phy_apply_327a04(uintptr_t record)
+{
+ if(*(volatile uint8_t *)(record+272u)==1u)return (uint32_t)record;
+ uint32_t value=*(volatile uint32_t *)(record+784u);
+ *(volatile uint32_t *)(record+276u)=value;
+ value=*(volatile uint8_t *)(record+788u);*(volatile uint8_t *)(record+274u)=9u;
+ *(volatile uint8_t *)(record+280u)=(uint8_t)value;
+ value=*(volatile uint8_t *)(record+796u);
+ uint32_t second=*(volatile uint8_t *)(record+789u),last=*(volatile uint8_t *)(record+797u);
+ *(volatile uint8_t *)(record+282u)=(uint8_t)value;
+ *(volatile uint8_t *)(record+281u)=(uint8_t)second;
+ *(volatile uint8_t *)(record+283u)=(uint8_t)last;
+ return last;
+}
+uint32_t opencfw_em9305_associated_phy_reset_327a3c(uintptr_t record)
+{
+ *(volatile uint32_t *)(record+280u)=0u;*(volatile uint32_t *)(record+276u)=0u;*(volatile uint32_t *)(record+272u)=0u;return (uint32_t)record;
+}
+/* Native3344a4/3344aa maps and334b00 typed six function destinations.
+ * Transition334b18 has four reachable states bytes and four native padding bytes. */
+static const uint8_t opencfw_em9305_associated_channel_event_kind[6]={0,0,1,1,2,2};
+static const uint8_t opencfw_em9305_associated_channel_event_action[6]={0,1,0,1,0,1};
+static uint32_t (*const opencfw_em9305_associated_channel_actions[6])(uintptr_t)={
+ opencfw_em9305_associated_channel_apply_3279d0,opencfw_em9305_associated_channel_reset_3279c4,
+ opencfw_em9305_associated_channel_notify_3279a4,opencfw_em9305_associated_phy_notify_3279b4,
+ opencfw_em9305_associated_phy_apply_327a04,opencfw_em9305_associated_phy_reset_327a3c};
+static const uint8_t opencfw_em9305_associated_channel_transitions[8]={1,0,1,0,0,0,0,0};
+uint32_t opencfw_em9305_associated_channel_state_327aac(uintptr_t record,uint32_t event)
+{
+ if(event>=6u)return (uint32_t)record;
+ uint32_t action=opencfw_em9305_associated_channel_event_action[event],kind=opencfw_em9305_associated_channel_event_kind[event];
+ (void)opencfw_em9305_associated_channel_actions[action+kind*2u](record);
+ uintptr_t slot=record+kind*96u;
+ uint32_t state=*(volatile uint8_t *)(slot+80u);
+ uint32_t next=*(const uint8_t *)((uintptr_t)opencfw_em9305_associated_channel_transitions+action+state*2u);
+ *(volatile uint8_t *)(slot+80u)=(uint8_t)next;
+ return next;
+}
+uint32_t opencfw_em9305_associated_channel_pending_327af4(uintptr_t record)
+{
+ uintptr_t slot=record+80u,channels=record+720u;uint32_t result=(uint32_t)record;
+ for(uint32_t index=0u;index<3u;++index){
+  uint32_t active=*(volatile uint8_t *)slot;result=active;slot+=96u;
+  if(active!=1u||index!=0u)continue;
+  uint32_t count=*(volatile uint16_t *)(record+752u),instant=*(volatile uint16_t *)(record+92u);
+  if(instant!=count)continue;
+  uint32_t lower=*(volatile uint32_t *)(record+84u),upper=*(volatile uint32_t *)(record+88u);
+  *(volatile uint32_t *)channels=lower;*(volatile uint32_t *)(channels+4u)=upper;
+  (void)opencfw_em9305_radio_channel_transform_30e3fc(channels);
+  (void)opencfw_em9305_associated_channel_state_327aac(record,1u);
+  upper=*(volatile uint32_t *)(channels+4u);lower=*(volatile uint32_t *)channels;
+  uint32_t oldupper=*(volatile uint32_t *)(record+780u),oldlower=*(volatile uint32_t *)(record+776u);
+  *(volatile uint32_t *)(record+132u)=upper;*(volatile uint32_t *)(record+128u)=lower;
+  result=upper;
+  if(((oldupper^upper)|(oldlower^lower))!=0u)result=opencfw_em9305_associated_channel_state_327aac(record,0u);
+ }
+ return result; /* Final third-slot active byte in native R0; caller ignores it. */
+}
+
+/* Native312918..312b84 full eight-way packet duration initialization.
+ * All children are already selected authenticated native source providers. */
+uint32_t opencfw_em9305_associated_object_init_312918(uintptr_t object,uint32_t requested)
+{
+ uintptr_t packet=*(volatile uint32_t *)(object+44u);
+ uint32_t type=*(volatile uint8_t *)packet,index=type-2u,duration=0u,result=index;
+ uint32_t kind,phy,mode,size;
+ switch(index){
+ case 0u:
+  kind=*(volatile uint8_t *)(packet+13u);
+  result=*(volatile uint32_t *)(packet+104u);duration=kind==3u?3088u:376u;
+  if(result!=0u){
+   size=*(volatile uint8_t *)(packet+149u);phy=*(volatile uint8_t *)(packet+12u);
+   result=opencfw_em9305_radio_duration_piece_312b88(phy,0u,size);duration+=result+150u;
+   uint32_t extra=*(volatile uint32_t *)(packet+108u);
+   if(extra!=0u)duration+=kind==3u?3238u:526u;
+  }
+  break;
+ case 1u:{
+  size=*(volatile uint8_t *)(packet+124u);mode=*(volatile uint8_t *)(packet+14u);phy=*(volatile uint8_t *)(packet+12u);
+  uint32_t initial=opencfw_em9305_radio_duration_piece_312b88(phy,mode,size);
+  uint32_t flags=*(volatile uint8_t *)(packet+127u);
+  uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
+  uint32_t adjusted=opencfw_em9305_channel_timing_adjust_312c5c(guard+initial);
+  uint32_t count=(flags&1u)+((flags>>1u)&1u)+((flags>>2u)&1u);
+  duration=(count-1u)*adjusted+initial;
+  result=adjusted;
+  uint32_t enabled=*(volatile uint32_t *)(packet+104u);
+  if(enabled!=0u){
+   kind=*(volatile uint8_t *)(packet+13u);
+   uint32_t gap=count*150u,base=kind==3u?3088u:376u;
+   result=(base&65535u)*(count&65535u);duration+=gap+result;
+   uint32_t extra=*(volatile uint32_t *)(packet+108u);
+   if(extra!=0u){
+    size=*(volatile uint8_t *)(packet+149u);phy=*(volatile uint8_t *)(packet+12u);
+    result=opencfw_em9305_radio_duration_piece_312b88(phy,0u,size);
+    result=opencfw_em9305_native_mpywhl(result,count);
+    duration+=gap+result;
+   }
+  }
+  break;
+ }
+ case 4u:{
+  uint32_t extended=*(volatile uint8_t *)(packet+132u);kind=*(volatile uint8_t *)(packet+13u);
+  if(extended!=0u){
+   duration=kind==3u?720u:(kind==2u?44u:80u);
+   if(kind==3u)*(volatile uint32_t *)(object+16u)=17040u;
+   result=*(volatile uint32_t *)(packet+100u);
+   if(result!=0u){
+    mode=*(volatile uint8_t *)(packet+15u);phy=*(volatile uint8_t *)(packet+12u);
+    result=opencfw_em9305_radio_duration_piece_312b88(phy,mode==0u?2u:mode,36u);
+    duration+=kind==3u?1916u:(kind==2u?400u:492u);
+    duration+=result;
+   }
+  }else{
+   duration=kind==3u?3792u:(kind==2u?236u:464u);
+   if(kind==3u)*(volatile uint32_t *)(object+16u)=17040u;
+   result=*(volatile uint32_t *)(packet+100u);
+   if(result!=0u){
+    mode=*(volatile uint8_t *)(packet+15u);size=*(volatile uint8_t *)(packet+124u);phy=*(volatile uint8_t *)(packet+12u);
+    result=opencfw_em9305_radio_duration_piece_312b88(phy,mode==0u?2u:mode,size);
+    duration+=result+150u+(kind==3u?17190u:(kind==2u?1214u:2270u));
+   }
+  }
+  break;
+ }
+ case 5u:{
+  uint32_t step=requested!=0u?requested:241u,limit=requested!=0u?requested:244u;
+  result=*(volatile uint32_t *)(packet+116u);
+  if(result!=0u){
+   mode=*(volatile uint8_t *)(packet+14u);phy=*(volatile uint8_t *)(packet+12u);
+   result=opencfw_em9305_radio_duration_piece_312b88(phy,mode,13u);duration=result;
+   kind=*(volatile uint8_t *)(packet+13u);
+   duration+=150u+(kind==3u?17190u:(kind==2u?1214u:2270u));
+  }
+  uintptr_t source=*(volatile uint32_t *)(object+40u);
+  uint32_t amount=source!=0u?*(volatile uint16_t *)source:0u;
+  mode=*(volatile uint8_t *)(packet+14u);phy=*(volatile uint8_t *)(packet+12u);
+  if(limit<amount){
+   result=opencfw_em9305_radio_duration_piece_312b88(phy,mode,step+16u);
+   uint32_t quotient=opencfw_em9305_config_link_divu_prior(amount,step,step);
+   result+=300u;
+   uint32_t product=(uint32_t)((int32_t)(int16_t)step*(int32_t)(int16_t)quotient);
+   result*=quotient;duration+=result;
+   uint32_t remainder=amount-product;
+   if((uint16_t)remainder!=0u){result=opencfw_em9305_radio_duration_piece_312b88(phy,mode,(uint16_t)(remainder+13u));duration+=result;}
+  }else{
+   uint32_t addition=*(volatile uint16_t *)(packet+100u);if(addition<13u)addition=13u;
+   result=opencfw_em9305_radio_duration_piece_312b88(phy,mode,(uint16_t)(amount+addition));duration+=result;
+  }
+  break;
+ }
+ case 6u:
+  {uintptr_t source=*(volatile uint32_t *)(object+40u);size=source!=0u?*(volatile uint16_t *)source:64u;if(size<64u)size=64u;}
+  phy=*(volatile uint8_t *)(packet+12u);mode=*(volatile uint8_t *)(packet+14u);
+  result=opencfw_em9305_radio_duration_312be4(phy,0u,0u,0u,size,0u,mode,0u);duration=result;break;
+ case 7u:
+  phy=*(volatile uint8_t *)(packet+12u);mode=*(volatile uint8_t *)(packet+14u);
+  result=opencfw_em9305_radio_duration_312be4(phy,0u,0u,0u,0u,0u,mode,0u);duration=result;break;
+ default:break;
+ }
+ *(volatile uint32_t *)(object+12u)=duration;
+ return result;
+}
+
+extern uint32_t opencfw_em9305_associated_packet_refill_3259fc(uintptr_t);
+extern uint32_t opencfw_em9305_associated_packet_continue_323ac8(uintptr_t,uintptr_t,uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_associated_packet_start_3243e0(uintptr_t,uintptr_t,uintptr_t,uint32_t);
+static inline uint32_t opencfw_em9305_associated_packet_high_product(uint32_t value,uint32_t factor)
+{uint32_t result;__asm__ volatile("mpymu %0,%1,%2":"=r"(result):"r"(value),"r"(factor));return result;}
+/* Native32c69c..32c7e2 registered packet callback, saved return slot692. */
+uint32_t opencfw_em9305_associated_packet_callback_32c69c(uintptr_t object,uint32_t continuing)
+{
+ uintptr_t record=*(volatile uint32_t *)(object+36u),state=record+176u;
+ uint32_t channel=*(volatile uint8_t *)(record+697u),saved=*(volatile uint32_t *)(record+692u);
+ *(volatile uint8_t *)(record+429u)=(uint8_t)channel;
+ if(continuing!=0u){
+  uint32_t enabled=*(volatile uint8_t *)(record+804u),consumed=*(volatile uint16_t *)(record+1154u);
+  if(enabled!=0u){uint32_t count=*(volatile uint8_t *)(record+806u);*(volatile uint8_t *)(record+806u)=(uint8_t)(count-1u);}
+  uint32_t size=*(volatile uint16_t *)(record+1144u);
+  if(consumed<size||*(volatile uint8_t *)(record+806u)!=0u)(void)opencfw_em9305_associated_packet_refill_3259fc(record);
+  uint32_t result=opencfw_em9305_associated_packet_continue_323ac8(record,record+1077u,record+1144u,1u);
+  uintptr_t cursor=*(volatile uint32_t *)(record+1148u);
+  uint32_t available=*(volatile uint16_t *)(record+1154u);
+  *(volatile uint16_t *)(record+564u)=(uint16_t)result;
+  *(volatile uint32_t *)(record+576u)=(uint32_t)(cursor+consumed);
+  *(volatile uint16_t *)(record+572u)=(uint16_t)(available-consumed);
+ }else{
+  uint32_t custom=*(volatile uint8_t *)(record+2809u),restore=0u;
+  *(volatile uint16_t *)(record+1154u)=0u;
+  if(custom==0u)(void)opencfw_em9305_associated_packet_refill_3259fc(record);
+  if(*(volatile uint8_t *)state==1u){
+   uint32_t timestamp=*(volatile uint32_t *)(object+8u),target=*(volatile uint32_t *)(state+4u),elapsed=target-timestamp;
+   if(elapsed<=599u){
+    uint32_t period=*(volatile uint16_t *)(record+190u),increment=*(volatile uint8_t *)(record+193u);
+    uint32_t low=*(volatile uint32_t *)(state+60u),high=*(volatile uint32_t *)(state+64u);
+    uint32_t next=low+increment;high+=(next<low);
+    elapsed+=period*1250u;
+    *(volatile uint32_t *)(state+60u)=next;*(volatile uint32_t *)(state+64u)=high;
+   }
+   uint32_t quantized;
+   if(elapsed<0x77fc4u){
+    quantized=opencfw_em9305_associated_packet_high_product(elapsed,0x11111112u)>>1u;
+    *(volatile uint8_t *)(state+12u)=0u;
+   }else{
+    uint32_t high=opencfw_em9305_associated_packet_high_product(elapsed,0x69d0369eu);
+    *(volatile uint8_t *)(state+12u)=1u;
+    quantized=(elapsed*3u+high)>>10u;
+   }
+   uint32_t period=*(volatile uint16_t *)(record+190u);
+   *(volatile uint16_t *)(record+186u)=(uint16_t)quantized;
+   if(period==0u||period*1250u<elapsed){restore=1u;*(volatile uint8_t *)state=255u;}
+  }
+  custom=*(volatile uint8_t *)(record+2809u);
+  if(custom!=0u){
+   uintptr_t callback=*(volatile uint32_t *)(record+2816u);
+   (void)((uint32_t (*)(uintptr_t,uintptr_t))callback)(record,callback);
+  }else{
+   uint32_t result=opencfw_em9305_associated_packet_start_3243e0(record,record+1077u,record+1144u,1u);
+   *(volatile uint16_t *)(record+528u)=(uint16_t)result;
+  }
+  if(restore!=0u)*(volatile uint8_t *)state=1u;
+  uint32_t available=*(volatile uint16_t *)(record+1154u);
+  uintptr_t cursor=*(volatile uint32_t *)(record+1148u);
+  *(volatile uint16_t *)(record+536u)=(uint16_t)available;
+  *(volatile uint32_t *)(record+540u)=(uint32_t)cursor;
+ }
+ return saved;
+}
+
+/* Native313310 priority comparison and optional tie callback. */
+uint32_t opencfw_em9305_associated_priority_313310(uintptr_t object,uintptr_t other,uintptr_t callback)
+{
+ uint32_t old=*(volatile uint8_t *)(other+24u),priority=*(volatile uint8_t *)(object+24u);
+ if(priority<old)return 1u;
+ if(callback!=0u&&priority==old)return ((uintptr_t (*)(uintptr_t,uintptr_t,uintptr_t))callback)(object,other,callback)==object;
+ return 0u;
+}
+/* Native312da4..312f86: C basic blocks retain native list mutation/capture
+ * order and subtraction N-flag tests (BP/BN), including wrapped deadlines. */
+uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t object,uintptr_t tie)
+{
+ uintptr_t root=0x805f04u,current=*(volatile uint32_t *)(root+16u),next,previous,seek=0u,last=0u,boundary=0u;
+ uint32_t success=0u,end,target,guard;
+ if(current==0u)goto empty;
+scan:
+ end=*(volatile uint32_t *)(object+12u);end+=*(volatile uint32_t *)(object+8u);
+ target=*(volatile uint32_t *)(current+8u);
+ guard=opencfw_em9305_auxiliary_guard_interval();
+ if((int32_t)(target-(end+guard))>=0)goto before;
+ end=*(volatile uint32_t *)(current+12u);end+=*(volatile uint32_t *)(current+8u);
+ target=*(volatile uint32_t *)(object+8u);
+ guard=opencfw_em9305_auxiliary_guard_interval();
+ if((int32_t)(target-(end+guard))<0)goto overlap;
+ next=*(volatile uint32_t *)(current+4u);
+ if(next!=0u){current=next;goto scan;}
+ *(volatile uint32_t *)(object+4u)=0u;
+ *(volatile uint32_t *)(current+4u)=(uint32_t)object;
+ next=*(volatile uint32_t *)(object+4u);success=1u;
+ *(volatile uint32_t *)object=(uint32_t)current;
+ if(next!=0u)*(volatile uint32_t *)next=(uint32_t)object;
+ else *(volatile uint32_t *)(root+20u)=(uint32_t)object;
+ goto finish;
+empty:
+ *(volatile uint32_t *)(root+20u)=(uint32_t)object;
+ *(volatile uint32_t *)(root+16u)=(uint32_t)object;
+ *(volatile uint32_t *)(object+4u)=0u;*(volatile uint32_t *)object=0u;success=1u;goto finish;
+before:
+ if(current==*(volatile uint32_t *)(root+16u)&&*(volatile uint8_t *)root==2u)goto finish;
+ previous=*(volatile uint32_t *)current;success=1u;
+ *(volatile uint32_t *)object=(uint32_t)previous;
+ *(volatile uint32_t *)current=(uint32_t)object;
+ previous=*(volatile uint32_t *)object;
+ *(volatile uint32_t *)(object+4u)=(uint32_t)current;
+ if(previous!=0u)*(volatile uint32_t *)(previous+4u)=(uint32_t)object;
+ else *(volatile uint32_t *)(root+16u)=(uint32_t)object;
+ goto finish;
+overlap:
+ if(current==*(volatile uint32_t *)(root+16u)&&*(volatile uint8_t *)root==2u)goto finish;
+ next=*(volatile uint32_t *)(current+4u);seek=current;
+ while(next!=0u){
+  end=*(volatile uint32_t *)(object+12u);end+=*(volatile uint32_t *)(object+8u);
+  target=*(volatile uint32_t *)(next+8u);
+  guard=opencfw_em9305_auxiliary_guard_interval();
+  if((int32_t)(target-(end+guard))>=0)break;
+  if(opencfw_em9305_associated_priority_313310(object,seek,tie)==0u)goto finish;
+  seek=*(volatile uint32_t *)(seek+4u);
+  next=*(volatile uint32_t *)(seek+4u);
+ }
+ if(opencfw_em9305_associated_priority_313310(object,seek,tie)==0u)goto finish;
+ if(*(volatile uint32_t *)(root+16u)==current)goto replace_head;
+ previous=*(volatile uint32_t *)current;last=current;boundary=0u;
+ next=*(volatile uint32_t *)(previous+4u);
+ while(next!=0u){
+  end=*(volatile uint32_t *)(object+12u);end+=*(volatile uint32_t *)(object+8u);
+  target=*(volatile uint32_t *)(next+8u);
+  guard=opencfw_em9305_auxiliary_guard_interval();
+  if((int32_t)(target-(end+guard))>=0){boundary=*(volatile uint32_t *)(previous+4u);goto splice_interior;}
+  uintptr_t removed=*(volatile uint32_t *)(previous+4u);
+  (void)opencfw_em9305_auxiliary_unlink_333804(removed);
+  next=*(volatile uint32_t *)(previous+4u);last=removed;
+ }
+splice_interior:
+ *(volatile uint32_t *)(object+4u)=(uint32_t)boundary;
+ *(volatile uint32_t *)(previous+4u)=(uint32_t)object;
+ next=*(volatile uint32_t *)(object+4u);
+ *(volatile uint32_t *)object=(uint32_t)previous;
+ if(next!=0u)*(volatile uint32_t *)next=(uint32_t)object;
+ else *(volatile uint32_t *)(root+20u)=(uint32_t)object;
+ goto notify_removed;
+replace_head:
+ next=current;last=0u;
+ for(;;){
+  end=*(volatile uint32_t *)(object+12u);end+=*(volatile uint32_t *)(object+8u);
+  target=*(volatile uint32_t *)(next+8u);
+  guard=opencfw_em9305_auxiliary_guard_interval();
+  if((int32_t)(target-(end+guard))>=0){
+   boundary=*(volatile uint32_t *)(root+16u);
+   if(boundary!=0u){
+    previous=*(volatile uint32_t *)boundary;
+    *(volatile uint32_t *)(object+4u)=(uint32_t)boundary;
+    *(volatile uint32_t *)object=(uint32_t)previous;
+    *(volatile uint32_t *)boundary=(uint32_t)object;
+    previous=*(volatile uint32_t *)object;
+    if(previous!=0u)*(volatile uint32_t *)(previous+4u)=(uint32_t)object;
+    else *(volatile uint32_t *)(root+16u)=(uint32_t)object;
+   }else goto replace_empty;
+   goto notify_removed;
+  }
+  last=*(volatile uint32_t *)(root+16u);
+  next=*(volatile uint32_t *)(last+4u);
+  *(volatile uint32_t *)(root+16u)=(uint32_t)next;
+  if(next==0u){*(volatile uint8_t *)root=0u;goto replace_empty;}
+  *(volatile uint32_t *)next=0u;*(volatile uint8_t *)root=0u;
+ }
+replace_empty:
+ *(volatile uint32_t *)(root+20u)=(uint32_t)object;
+ *(volatile uint32_t *)(root+16u)=(uint32_t)object;
+ *(volatile uint32_t *)(object+4u)=0u;*(volatile uint32_t *)object=0u;
+notify_removed:
+ for(;;){
+  uintptr_t callback=*(volatile uint32_t *)(current+32u);
+  next=*(volatile uint32_t *)(current+4u);
+  if(callback!=0u)(void)((uint32_t (*)(uintptr_t,uintptr_t))callback)(current,callback);
+  uint32_t done=current==last;current=next;
+  if(done!=0u)break;
+ }
+ success=1u;
+finish:
+ if(*(volatile uint32_t *)(root+16u)==object&&success!=0u){(void)opencfw_em9305_pal_timer_disarm();(void)opencfw_em9305_auxiliary_transition_333a60();}
+ return success;
+}
+
+/* Native3259fc..325a3c: rejection-sample next channel from global mask.
+ * Function name follows the prior parent contract; this is channel selection,
+ * not allocation/refill. Empty mask intentionally has no invented exit. */
+uint32_t opencfw_em9305_associated_packet_refill_3259fc(uintptr_t record)
+{
+ for(;;){
+  uint32_t random=opencfw_em9305_associated_random_31896c();
+  uint32_t previous=*(volatile uint8_t *)(record+697u);
+  *(volatile uint8_t *)(record+696u)=(uint8_t)random;
+  uint32_t sum=previous+random;
+  uint32_t quotient=opencfw_em9305_config_link_mpywhul(sum,0xdd68u)>>21u;
+  uint32_t correction=(uint32_t)((int32_t)(int16_t)quotient*-37);
+  uint32_t channel=sum+correction;
+  *(volatile uint8_t *)(record+697u)=(uint8_t)channel;
+  uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
+  uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
+  uint64_t mask=((uint64_t)high<<32u)|low;
+  uint32_t result=(uint32_t)(mask>>((uint8_t)channel&63u));
+  if((result&1u)!=0u)return result;
+ }
+}
+
+/* Native323ac8..323b0c: fully initialized five-byte header and ninth stack arg. */
+uint32_t opencfw_em9305_associated_packet_continue_323ac8(uintptr_t record,uintptr_t payload,uintptr_t size,uint32_t count)
+{
+ uint8_t header[5] __attribute__((aligned(4)))={7u,0u,0u,0u,0u};
+ uint32_t flags=0u;
+ if(count==0u&&(*(volatile uint8_t *)(record+32u)&2u)==0u)flags=8u;
+ return opencfw_em9305_radio_compose_323dc0(record,flags,16u,0u,(uintptr_t)header,size,payload,5u,count);
+}
+/* Native3243e0..324436: flags are full captured config/input then byte cast. */
+uint32_t opencfw_em9305_associated_packet_start_3243e0(uintptr_t record,uintptr_t payload,uintptr_t size,uint32_t count)
+{
+ uint32_t policy=*(volatile uint32_t *)(uintptr_t)0x805a98u;
+ uint32_t mode=*(volatile uint8_t *)(record+716u),enabled=*(volatile uint8_t *)(record+804u);
+ uint8_t header[5] __attribute__((aligned(4)))={7u,0u,0u,0u,0u};
+ uint32_t flags=((policy>>1u)&8u)|(mode&64u)|(enabled<<2u)|16u;
+ return opencfw_em9305_radio_compose_323dc0(record,0u,(uint8_t)flags,0u,(uintptr_t)header,size,payload,4u,count);
+}
+
+extern uint32_t opencfw_em9305_compose_aux_encode_324438(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_compose_finalize_32412c(uintptr_t,uintptr_t,uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_compose_action_3237e8(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_compose_action_32366c(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_compose_action_323820(uintptr_t,uintptr_t);
+/* Native3352f4 three typed callback identities; no stock code addresses copied. */
+static uint32_t (*const opencfw_em9305_compose_actions_3352f4[3])(uintptr_t,uintptr_t)={opencfw_em9305_compose_action_3237e8,opencfw_em9305_compose_action_32366c,opencfw_em9305_compose_action_323820};
+/* Native323dc0..32412a full compositor C control/data flow. */
+uint32_t opencfw_em9305_radio_compose_323dc0(uintptr_t record,uint32_t forced,uint32_t allowed,uint32_t prefix,uintptr_t header,uintptr_t source,uintptr_t output,uint32_t type,uint32_t count)
+{
+ uint32_t present=0u,enabled=1u,remaining=0u,capacity=0u,aux=0u,power=0u,written=0u;
+ uintptr_t channels=record+704u,cursor=output+4u,end=0u,body=output+3u;
+ *(volatile uint8_t *)(header+4u)=0u;
+ if(type==5u)type=count!=0u?4u:2u;
+ else if((*(volatile uint8_t *)(uintptr_t)0x805a87u&1u)!=0u)enabled=0u;
+ uint32_t include_address=record==0u?(type==3u||type==6u):((*(volatile uint16_t *)(record+32u)&32u)==0u||type==3u||type==6u);
+ if(include_address!=0u&&((forced&1u)!=0u||(record!=0u&&(allowed&1u)!=0u&&(*(volatile uint8_t *)(channels+123u)&1u)==0u))){
+  uint32_t low,high;
+  if(record!=0u){high=*(volatile uint32_t *)(record+20u);low=*(volatile uint32_t *)(record+16u);}
+  else {uintptr_t current=opencfw_em9305_auxiliary_ready_303f68();current=*(volatile uint32_t *)(current+36u);high=*(volatile uint32_t *)(current+744u);low=*(volatile uint32_t *)(current+740u);}
+  (void)opencfw_em9305_radio_address_write_3045e8(cursor,low,high);cursor=output+10u;present=1u;
+ }
+ if((forced&2u)!=0u||(record!=0u&&(allowed&2u)!=0u&&(*(volatile uint8_t *)(channels+123u)&2u)==0u)){
+  uint32_t low,high;present|=2u;
+  if(record!=0u){high=*(volatile uint32_t *)(record+28u);low=*(volatile uint32_t *)(record+24u);}
+  else {uintptr_t current=opencfw_em9305_auxiliary_ready_303f68();current=*(volatile uint32_t *)(current+36u);high=*(volatile uint32_t *)(current+752u);low=*(volatile uint32_t *)(current+748u);}
+  (void)opencfw_em9305_radio_address_write_3045e8(cursor,low,high);cursor+=6u;
+  if(record==0u)goto address_done;
+ }
+ if(record!=0u&&((forced&8u)!=0u||((allowed&8u)!=0u&&((*(volatile uint8_t *)(channels+123u)&8u)==0u||(count!=0u&&*(volatile uint8_t *)channels!=0u))))){
+  uint32_t value=*(volatile uint16_t *)(record+(count!=0u?706u:64u));present|=8u;
+  *(volatile uint8_t *)cursor=(uint8_t)value;cursor+=2u;
+  uint32_t phy=*(volatile uint8_t *)(record+66u);value&=0xf00u;
+  *(volatile uint8_t *)(cursor-1u)=(uint8_t)(((phy<<12u)+value)>>8u);
+ }
+address_done:
+ capacity=(uint32_t)(output-cursor)+257u;
+ if((forced&32u)!=0u||(record!=0u&&(allowed&32u)!=0u&&(*(volatile uint8_t *)(channels+123u)&32u)==0u)){capacity=(uint32_t)(output-cursor)+239u;aux=1u;}
+ if((allowed&64u)!=0u){
+  if(type==4u&&record==0u)power=0u;
+  else if(record!=0u&&(type==4u||type==7u)){power=(*(volatile uint8_t *)(channels+12u)&64u)!=0u;}
+  else if(type==8u)power=1u;
+  else if(record!=0u)power=(*(volatile uint16_t *)(record+32u)&64u)!=0u;
+  if(power!=0u)capacity-=1u;
+ }
+ if(enabled==0u)capacity=0u;
+ if(source!=0u){
+  uint32_t used=*(volatile uint16_t *)(source+10u),total=*(volatile uint16_t *)source;remaining=total-used;
+  if((allowed&16u)!=0u&&record!=0u&&*(volatile uint8_t *)(source+12u)==0u){uint32_t limit=*(volatile uint8_t *)(record+76u);if(capacity>limit)capacity=limit;}
+ }else remaining=0u;
+ if((forced&16u)!=0u)goto payload_field;
+ if((allowed&16u)==0u)goto no_payload_field;
+ if(capacity<(uint16_t)remaining)goto payload_field;
+ /* Native BNC then delay CMP record, followed by late basic block324114. */
+ if(record==0u||type!=4u||*(volatile uint8_t *)(channels+102u)==1u)goto no_payload_field;
+ if(*(volatile uint8_t *)(channels+100u)==0u)goto no_payload_field;
+payload_field:
+ end=cursor+3u;present|=16u;goto extra_fields;
+no_payload_field:
+ end=cursor;cursor=0u;
+extra_fields:
+ if(aux!=0u&&record!=0u){(void)opencfw_em9305_compose_aux_encode_324438(record,end);end+=18u;present|=32u;}
+ if(power!=0u&&record!=0u){
+  int32_t requested=*(volatile int8_t *)(record+2314u);
+  uint32_t actual=opencfw_em9305_command_radio_power_310230(requested,1u);
+  *(volatile uint8_t *)end=(uint8_t)actual;end+=1u;present|=64u;
+ }
+ if(type==4u||type==7u||(record!=0u&&type==2u&&*(volatile uint8_t *)(record+2809u)!=0u)){
+  uint32_t other=type!=2u;
+  for(uint32_t index=0u;index<3u;++index){
+   if(index==2u&&((record==0u)||other!=0u))continue;
+   if(record==0u)continue;
+   uintptr_t state=record+index*96u;
+   if(*(volatile uint8_t *)(state+80u)!=1u)continue;
+   uint32_t bytes=*(volatile uint8_t *)(state+82u);
+   uint32_t room=(uint8_t)((uint32_t)(body-end)+64u);
+   if(room<(uint8_t)(bytes+2u))continue;
+   uint32_t n=opencfw_em9305_compose_actions_3352f4[index](record,end);end+=n;written=1u;
+  }
+ }
+ if((present|written)==0u)end=body;
+ if((uint16_t)remaining!=0u){
+  uint32_t available=(uint32_t)(output-end)+257u;
+  if(available<capacity)capacity=available;
+  uint32_t used=*(volatile uint16_t *)(source+10u);
+  if(capacity>(uint16_t)remaining)capacity=(uint16_t)remaining;
+  *(volatile uint16_t *)(source+10u)=(uint16_t)(used+(uint8_t)capacity);
+ }else capacity=0u;
+ uint32_t extra=(uint32_t)(end-body);
+ *(volatile uint8_t *)(header+4u)=(uint8_t)(capacity+extra+1u);
+ (void)opencfw_em9305_radio_encode_3239d4(output,header);
+ uint32_t first=prefix<<6u;
+ if(type==1u){
+  uint32_t flags=*(volatile uint8_t *)(record+2820u);first|=flags;
+  *(volatile uint8_t *)(output+2u)=(uint8_t)first;
+  uint32_t total=*(volatile uint16_t *)source;uintptr_t input=*(volatile uint32_t *)(source+4u);
+  (void)opencfw_em9305_memcpy((void *)(body+(uint16_t)extra),(const void *)input,total);
+  uint32_t used=*(volatile uint16_t *)(source+10u);total=*(volatile uint16_t *)source;
+  used-=(uint8_t)capacity;end+=total;*(volatile uint16_t *)(source+10u)=(uint16_t)used;
+ }else *(volatile uint8_t *)(output+2u)=(uint8_t)(first|extra);
+ *(volatile uint8_t *)body=(uint8_t)present;
+ if(record!=0u)(void)opencfw_em9305_compose_finalize_32412c(record,cursor,header,present,type);
+ return (uint8_t)(end-output);
+}
+
+/* Native 3237e8..32381c: channel-map control element, ordered volatile loads. */
+uint32_t opencfw_em9305_compose_action_3237e8(uintptr_t record,uintptr_t output)
+{
+ volatile uint8_t *r=(volatile uint8_t *)record,*o=(volatile uint8_t *)output;
+ o[0]=8u;o[1]=40u;
+ o[2]=r[84];o[3]=r[85];o[4]=r[86];o[5]=r[87];o[6]=r[88];
+ o[7]=r[92];o[8]=r[93];return 9u;
+}
+/* Native 323820..32385a: PHY update element. Scaled native loads refer
+ * to record+276 and record+278; subsequent byte loads retain their order. */
+uint32_t opencfw_em9305_compose_action_323820(uintptr_t record,uintptr_t output)
+{
+ volatile uint8_t *r=(volatile uint8_t *)record,*o=(volatile uint8_t *)output;
+ o[0]=9u;o[1]=50u;
+ uint32_t value=*(volatile uint32_t *)(record+276u);o[2]=(uint8_t)value;
+ value=*(volatile uint32_t *)(record+276u);o[3]=(uint8_t)(value>>8);
+ uint16_t half=*(volatile uint16_t *)(record+278u);o[4]=(uint8_t)half;
+ o[5]=r[279];o[6]=r[280];o[7]=r[281];o[8]=r[282];o[9]=r[283];return 10u;
+}
+
+/* Native 32366c..3237e4: extended connection state control element.
+ * Every repeated native load remains a fresh volatile access. */
+uint32_t opencfw_em9305_compose_action_32366c(uintptr_t record,uintptr_t output)
+{
+ volatile uint8_t *r=(volatile uint8_t *)record,*o=(volatile uint8_t *)output;
+ uintptr_t fields=record+188u;
+ uint32_t length=r[178], captured=r[232];
+ o[1]=44u;o[0]=(uint8_t)(length+1u);o[2]=r[186];
+ uint32_t half=*(volatile uint16_t *)(record+186u);
+ uint32_t bit=r[188]&1u;
+ uint32_t interval=*(volatile uint16_t *)(record+190u);
+ o[3]=(uint8_t)(((half&0x3f00u)+(bit<<14)+(interval<<15))>>8);
+ o[4]=(uint8_t)(*(volatile uint16_t *)(record+190u)>>1);
+ interval=*(volatile uint16_t *)(record+190u);
+ uint32_t byte=r[192];o[5]=(uint8_t)(((interval<<15)|(byte<<27))>>24);
+ byte=r[194];uint32_t other=r[193];o[6]=(uint8_t)((byte<<5)|other);
+ uint32_t word=*(volatile uint32_t *)(fields+8u);byte=r[194];
+ o[7]=(uint8_t)(((word<<8)|(byte<<5))>>8);
+ o[8]=(uint8_t)(*(volatile uint32_t *)(fields+8u)>>8);
+ word=*(volatile uint32_t *)(fields+8u);byte=r[200];
+ o[9]=(uint8_t)(((word<<8)|(byte<<28))>>24);
+ o[10]=(uint8_t)*(volatile uint32_t *)(fields+16u);
+ o[11]=(uint8_t)(*(volatile uint32_t *)(fields+16u)>>8);
+ byte=r[208];word=*(volatile uint32_t *)(fields+16u);
+ o[12]=(uint8_t)(((byte<<20)|word)>>16);
+ byte=r[208];half=*(volatile uint16_t *)(record+210u);word=*(volatile uint32_t *)(fields+16u);
+ o[14]=0u;o[13]=(uint8_t)(((byte<<20)|word|(half<<24))>>24);
+ o[15]=(uint8_t)*(volatile uint32_t *)(fields+24u);
+ o[16]=(uint8_t)(*(volatile uint32_t *)(fields+24u)>>8);
+ o[17]=(uint8_t)*(volatile uint16_t *)(record+214u);o[18]=r[215];
+ o[19]=(uint8_t)*(volatile uint32_t *)(fields+28u);
+ o[20]=(uint8_t)(*(volatile uint32_t *)(fields+28u)>>8);
+ half=*(volatile uint16_t *)(fields+32u);word=*(volatile uint32_t *)(fields+28u);
+ o[21]=(uint8_t)(((half<<20)|word)>>16);
+ half=*(volatile uint16_t *)(fields+32u);word=*(volatile uint32_t *)(fields+28u);
+ o[22]=(uint8_t)(((half<<20)|word)>>24);
+ o[23]=r[222];o[24]=r[223];o[25]=r[224];o[26]=r[225];o[27]=r[226];o[28]=r[227];
+ word=*(volatile uint32_t *)(fields+40u);o[29]=(uint8_t)(((captured<<5)-32u)|word);
+ o[30]=r[236];o[31]=r[237];o[32]=r[238];o[33]=r[239];
+ word=*(volatile uint32_t *)(fields+52u);byte=r[244];o[34]=(uint8_t)((word&127u)+(byte<<7));
+ if(r[245]!=0u){
+  (void)opencfw_em9305_memcpy((void *)(output+35u),(const void *)(record+246u),8u);
+  (void)opencfw_em9305_memcpy((void *)(output+43u),(const void *)(record+254u),16u);
+ }
+ return (uint8_t)(length+2u);
+}
+
+/* Native312bb4..312bbe: duration piece with 300-unit guard. */
+uint32_t opencfw_em9305_compose_duration_guard_312bb4(uint32_t phy,uint32_t mode,uint32_t size)
+{return opencfw_em9305_radio_duration_piece_312b88(phy,mode,size)+300u;}
+/* Native323bac..323c08: auxiliary pointer field. Return retains native R0
+ * (PHY high bits); the serialized byte2 is computed in native R2. */
+uint32_t opencfw_em9305_compose_pointer_encode_323bac(uintptr_t record,uint32_t duration,uint32_t channel,uintptr_t output)
+{
+ uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805c18u;
+ uint32_t metric=*(volatile uint16_t *)configuration;
+ uint32_t quotient,selector;
+ if(duration<0x3bfc4u){uint32_t reciprocal=0x11111112u;
+  __asm__ volatile("mpymu %0,%1,%2":"=r"(quotient):"r"(duration),"r"(reciprocal));
+  quotient>>=1;selector=0u;
+ }else{uint32_t reciprocal=0x69d0369eu;
+  __asm__ volatile("mpymu %0,%1,%2":"=r"(quotient):"r"(duration),"r"(reciprocal));
+  quotient=((duration<<1)+duration+quotient)>>10;selector=128u;
+ }
+ volatile uint8_t *o=(volatile uint8_t *)output;
+ o[0]=(uint8_t)(((metric<51u?1u:0u)<<6)|channel|selector);
+ uint32_t phy=*(volatile uint8_t *)(record+63u);o[1]=(uint8_t)quotient;
+ uint32_t bits=(phy==2u?1u:(phy==3u?2u:0u))<<13;
+ o[2]=(uint8_t)((quotient|bits)>>8);return bits;
+}
+/* Native32412c..324274: complete eight-way finalization switch. */
+uint32_t opencfw_em9305_compose_finalize_32412c(uintptr_t record,uintptr_t cursor,uintptr_t header,uint32_t present,uint32_t type)
+{
+ if(type>=8u||type==5u)return (uint32_t)record;
+ if(type<=1u){*(volatile uint32_t *)(record+828u)=(uint32_t)cursor;
+  *(volatile uint8_t *)(record+827u)=(uint8_t)present;
+  *(volatile uint32_t *)(record+2780u)=0u;return (uint32_t)(record+2780u);
+ }
+ if(type==7u){*(volatile uint32_t *)(record+692u)=0u;return (uint32_t)record;}
+ if(type==4u)*(volatile uint32_t *)(record+692u)=0u;
+ else *(volatile uint32_t *)(record+2780u)=0u;
+ if(cursor==0u)return type==2u?(uint32_t)(record+2780u):(uint32_t)record;
+ uint32_t mode,phy,length;
+ if(type==3u||type==6u){
+  mode=*(volatile uint8_t *)(record+2531u);
+  phy=*(volatile uint8_t *)(record+2528u);
+  if(mode==0u)mode=*(volatile uint8_t *)(record+2693u);
+  length=*(volatile uint8_t *)(header+4u);
+ }else{
+  length=*(volatile uint8_t *)(header+4u);
+  mode=*(volatile uint8_t *)(record+2530u);
+  phy=*(volatile uint8_t *)(record+2528u);
+ }
+ uint32_t piece=opencfw_em9305_compose_duration_guard_312bb4(phy,mode,length+2u);
+ uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t record_guard=*(volatile uint32_t *)(record+72u);
+ uint32_t config_guard=*(volatile uint16_t *)(configuration+20u);
+ uint32_t duration=(record_guard>config_guard?record_guard:config_guard)+piece;
+ uint32_t bounded=duration<0x257ed4u?duration:0x257ed4u;
+ uint32_t channel;
+ if(type==4u){channel=*(volatile uint8_t *)(record+697u);
+  *(volatile uint32_t *)(record+692u)=bounded;
+ }else{
+  bounded=opencfw_em9305_channel_timing_adjust_312c5c(bounded);
+  *(volatile uint32_t *)(record+2780u)=bounded;
+  channel=*(volatile uint8_t *)(record+2784u);
+  *(volatile uint32_t *)(record+2780u)=bounded;
+ }
+ return opencfw_em9305_compose_pointer_encode_323bac(record,bounded,channel,cursor);
+}
+
+/* Native318988..3189c8: clock accuracy class plus configured offset. */
+uint32_t opencfw_em9305_compose_accuracy_318988(void)
+{
+ uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805c18u;
+ uint32_t metric=*(volatile uint16_t *)configuration;
+ uint32_t value=metric<21u?7u:metric<31u?6u:metric<51u?5u:metric<76u?4u:metric<101u?3u:metric<151u?2u:metric<251u?1u:0u;
+ return (uint8_t)(value+*(volatile uint8_t *)(uintptr_t)0x805aa8u);
+}
+/* Native324438..324590: full 18-byte auxiliary schedule descriptor. */
+uint32_t opencfw_em9305_compose_aux_encode_324438(uintptr_t record,uintptr_t output)
+{
+ volatile uint8_t *r=(volatile uint8_t *)record,*o=(volatile uint8_t *)output;
+ uint32_t enabled=r[2809];uint32_t next=*(volatile uint32_t *)(record+388u);
+ if(enabled!=0u){uint32_t slots=r[799];if((slots&127u)!=0u){
+  uint32_t stride=*(volatile uint32_t *)(record+792u);
+  uint32_t period=*(volatile uint32_t *)(record+700u);
+  uint32_t product=opencfw_em9305_native_mpywhl(stride,slots);
+  next=next+period-product;
+ }}
+ uint32_t elapsed;
+ for(;;){uint32_t previous=*(volatile uint32_t *)(record+2476u);
+  elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(next,previous);
+  if(elapsed>=301u)break;
+  next+=*(volatile uint32_t *)(record+700u);
+ }
+ uint32_t previous=*(volatile uint32_t *)(record+2476u);
+ elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(next,previous);
+ uint32_t quotient,selector;
+ if(elapsed<0x3bfc4u){quotient=opencfw_em9305_associated_packet_high_product(elapsed,0x11111112u)>>1;selector=0u;}
+ else{selector=elapsed<0x258000u?1u:0u;if(elapsed>0x257fffu)elapsed=0u;
+  uint32_t high=opencfw_em9305_associated_packet_high_product(elapsed,0x69d0369eu);
+  quotient=((elapsed<<1)+elapsed+high)>>10;
+ }
+ o[0]=(uint8_t)quotient;o[1]=(uint8_t)((quotient|(selector<<13))>>8);
+ uint32_t period=*(volatile uint32_t *)(record+700u);
+ struct opencfw_em9305_native_product_pair product=opencfw_em9305_native_mpydu_329154(period,0x1a36e3u);
+ o[2]=(uint8_t)((product.high<<1)|(product.low>>31));
+ period=*(volatile uint32_t *)(record+700u);
+ o[3]=(uint8_t)(opencfw_em9305_associated_packet_high_product(period,0x1a36e3u)>>7);
+ uint32_t access=*(volatile uint32_t *)(record+720u);
+ uint32_t upper=*(volatile uint32_t *)(record+724u);
+ uint32_t accuracy=opencfw_em9305_compose_accuracy_318988();
+ o[7]=(uint8_t)(access>>24);o[4]=(uint8_t)access;o[6]=(uint8_t)(access>>16);o[5]=(uint8_t)(access>>8);
+ o[8]=(uint8_t)((accuracy<<5)+(upper&31u));
+ o[9]=(uint8_t)*(volatile uint32_t *)(record+432u);
+ o[10]=(uint8_t)(*(volatile uint32_t *)(record+432u)>>8);
+ o[11]=(uint8_t)*(volatile uint16_t *)(record+434u);o[12]=r[435];
+ o[13]=(uint8_t)*(volatile uint32_t *)(record+436u);
+ o[14]=(uint8_t)(*(volatile uint32_t *)(record+436u)>>8);
+ o[15]=(uint8_t)*(volatile uint16_t *)(record+438u);
+ uint32_t result;
+ if(r[2809]!=0u){uint32_t slots=r[799];if((slots&127u)!=0u){
+  o[16]=(uint8_t)(r[376]+1u);
+  result=(*(volatile uint16_t *)(record+376u)+1u)>>8;
+  o[17]=(uint8_t)result;return result;
+ }}
+ o[16]=r[376];result=r[377];o[17]=(uint8_t)result;return result;
+}
+
+/* Authenticated native313424..31369a: complete scheduling offset selector.
+ * Variable names track native saved registers where modular width matters.
+ * Native DIVU destination prior, DIV signed and MACWHUL remain genuine ISA. */
+static uint32_t opencfw_em9305_schedule_remu(uint32_t value,uint32_t divisor)
+{uint32_t result;__asm__ volatile("remu %0,%1,%2":"=r"(result):"r"(value),"r"(divisor));return result;}
+uint32_t opencfw_em9305_radio_schedule_313424(uint32_t incoming,uint32_t index,uint32_t timestamp,uint32_t existing,uint32_t action)
+{
+ uintptr_t original_head=*(volatile uint32_t *)(uintptr_t)0x805f14u;
+ if(original_head==0u)return incoming;
+ uintptr_t first=original_head;
+ while(*(volatile uint32_t *)(first+20u)==0u){first=*(volatile uint32_t *)(first+4u);if(first==0u)return incoming;}
+ uintptr_t selected=first;
+ while(*(volatile uint8_t *)(selected+25u)==1u||*(volatile uint32_t *)(selected+20u)==0u){selected=*(volatile uint32_t *)(selected+4u);if(selected==0u)break;}
+ uint32_t absent=selected==0u?1u:0u;
+ uint32_t first_special=*(volatile uint8_t *)(first+25u)==1u?1u:0u;
+ if(absent!=0u||first_special==0u)selected=first;
+ uint64_t bitmap=opencfw_em9305_associated_bitmap_3336d8(selected,first_special&absent);
+ uint32_t r13=0u,fp=0u;
+ uintptr_t root=0x805f28u;
+ if(action==3u){
+  uintptr_t node=original_head;
+  while(node!=(uintptr_t)existing){node=*(volatile uint32_t *)(node+4u);if(node==0u)goto compose_offset;}
+  uint32_t anchor=*(volatile uint32_t *)(selected+8u);
+  r13=*(volatile uint32_t *)((uintptr_t)existing+8u);
+  if(r13<anchor){uint32_t elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(anchor,r13);
+   uint32_t period=*(volatile uint32_t *)((uintptr_t)existing+20u);
+   uint32_t turns=opencfw_em9305_config_link_divu_prior(elapsed,period,r13)+1u;
+   anchor=*(volatile uint32_t *)(selected+8u);r13+=turns*period;
+  }
+  uint32_t quantum=*(volatile uint32_t *)(root+4u),delta=r13-anchor;
+  uint32_t span=*(volatile uint32_t *)((uintptr_t)existing+12u);
+  r13=opencfw_em9305_config_link_divu_prior(delta,quantum,r13);
+  uint32_t remainder=delta-quantum*r13;remainder+=span;
+  uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
+  fp=remainder+guard+36u;r13&=31u;goto compose_offset;
+ }
+ {
+  uint32_t quantum=*(volatile uint32_t *)(root+4u);
+  uint32_t offset=(uint16_t)index*12u;
+  uintptr_t configuration=root+offset;
+  uint32_t period=*(volatile uint32_t *)(configuration+52u);
+  uint32_t stride=opencfw_em9305_config_link_divu_prior(period,quantum,period);
+  uint32_t r16=0u,r17=0u,current=0u;
+  for(uint32_t bit=0u;bit<31u;++bit){
+   uint32_t run=(uint16_t)current;
+   if((int32_t)run>(int32_t)r17){r17=run;r16=bit+1u;}
+   current+=1u;if(((bitmap>>(bit&63u))&1u)!=0u)current=0u;
+  }
+  uint32_t extra=*(volatile uint32_t *)(configuration+56u);
+  uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
+  uint32_t r14=r16-r17;
+  quantum=*(volatile uint32_t *)(root+4u);
+  uint32_t total=guard+extra;
+  uint32_t width_full=opencfw_em9305_config_link_divu_prior(total,quantum,total)+1u;
+  uint32_t width=(uint16_t)width_full,step=(uint16_t)stride;
+  uint32_t best_count=8u,best_position=0u;
+  while((uint16_t)r17!=0u&&(uint8_t)best_count!=0u){
+   if(action==1u){r14=r16-r17;r13=r14;}
+   else if(action==2u){r16=r17+r14;r13=r16-width_full;}
+   else{uint32_t start=(uint16_t)r14;r16=r17+r14;r13=(start+(uint16_t)r16)>>1;}
+   uint32_t reps=1u;
+   if(step!=0u)reps=opencfw_em9305_associated_slot_sdiv(32u-(uint16_t)r13,step)+1u;
+   uint32_t hits=0u;
+   if((uint16_t)reps!=0u){
+    reps=(uint16_t)(reps-1u)+1u;
+    uint32_t position=r13;
+    for(uint32_t rep=0u;rep<reps;++rep){
+     uint32_t bit=(uint16_t)position;
+     for(uint32_t n=0u;n<width;++n,++bit)hits+=(uint32_t)((bitmap>>(bit&63u))&1u);
+     position+=stride;
+    }
+   }
+   if((uint16_t)hits<(uint8_t)best_count){best_count=hits;best_position=r13;}
+   if(action!=0u)r17-=1u;else r17=(r17&0xfffeu)>>1;
+  }
+  if((uint8_t)best_count!=0u)r13=(uint8_t)best_position;
+ }
+compose_offset:
+ {
+  uint32_t quantum=*(volatile uint32_t *)(root+4u);
+  uint32_t offset=opencfw_em9305_associated_macwhul(fp,quantum,r13);
+  if(offset==0u)return incoming;
+  uint32_t scheduled=*(volatile uint32_t *)(selected+8u)+offset;
+  if(timestamp<scheduled){
+   uint32_t elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(scheduled,timestamp);
+   uint32_t period=*(volatile uint32_t *)(root+(uint16_t)index*12u+52u);
+   return opencfw_em9305_schedule_remu(elapsed,period);
+  }
+  uint32_t elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(timestamp,scheduled);
+  uintptr_t configuration=root+(uint16_t)index*12u;
+  uint32_t period=*(volatile uint32_t *)(configuration+52u);
+  uint32_t turns=opencfw_em9305_config_link_divu_prior(elapsed,period,elapsed)+1u;
+  turns=(uint8_t)turns;
+  uint32_t product=opencfw_em9305_native_mpywhl(period,turns);
+  uint32_t adjusted=opencfw_em9305_auxiliary_elapsed_303f8c(product,timestamp);
+  return adjusted+scheduled;
+ }
+}
+
+/* Native334f20: genuine four-state/four-event action identities.
+ * These actions ignore incoming R2/R3, confirmed from their full native CFG.
+ * Loaded action address R0 and captured state R1 retain native call ABI. */
+typedef uint32_t (*opencfw_em9305_init_state_action)(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_state_action_31b4e0(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_state_action_31b4a4(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_state_action_31b6b0(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_state_action_31b4c8(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_state_action_31b3b8(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_state_action_31b648(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_state_action_31b614(uintptr_t,uint32_t);
+static opencfw_em9305_init_state_action const opencfw_em9305_init_state_actions_334f20[16]={
+ 0,opencfw_em9305_init_state_action_31b4e0,opencfw_em9305_init_state_action_31b4a4,0,
+ opencfw_em9305_init_state_action_31b6b0,opencfw_em9305_init_state_action_31b4c8,opencfw_em9305_init_state_action_31b6b0,opencfw_em9305_init_state_action_31b3b8,
+ 0,opencfw_em9305_init_state_action_31b4c8,0,opencfw_em9305_init_state_action_31b648,
+ 0,opencfw_em9305_init_state_action_31b4c8,opencfw_em9305_init_state_action_31b4a4,opencfw_em9305_init_state_action_31b614};
+static const uint8_t opencfw_em9305_init_state_transitions_334f60[16]={0,1,0,0,3,1,2,0,3,2,2,0,3,3,3,0};
+/* Native320580..3205b2: event byte3, captured state then fresh post-action state.
+ * Out-of-range event/state remains unqualified; no invented native guard. */
+uint32_t opencfw_em9305_init_state_event_320580(uintptr_t event)
+{
+ uint32_t index=*(volatile uint8_t *)(event+3u);
+ uint32_t state=*(volatile uint8_t *)(uintptr_t)0x803bb8u;
+ opencfw_em9305_init_state_action action=opencfw_em9305_init_state_actions_334f20[state*4u+index];
+ if(action!=0){(void)action((uintptr_t)action,state);state=*(volatile uint8_t *)(uintptr_t)0x803bb8u;}
+ uint32_t next=opencfw_em9305_init_state_transitions_334f60[index+4u*state];
+ *(volatile uint8_t *)(uintptr_t)0x803bb8u=(uint8_t)next;return next;
+}
+/* Native3205b4..3205c0: genuine reset, full404-byte memset tail. */
+uint32_t opencfw_em9305_init_state_reset_3205b4(void)
+{return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x803b94u,0u,404u);}
+/* Native307bdc..307c04: typed callback registrations and reset body. */
+uint32_t opencfw_em9305_init_lower_307bdc(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x80295cu=(uint32_t)(uintptr_t)opencfw_em9305_init_state_event_320580;
+ *(volatile uint32_t *)(uintptr_t)0x805208u=(uint32_t)(uintptr_t)opencfw_em9305_init_state_reset_3205b4;
+ return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x803b94u,0u,404u);
+}
+
+/* Native31b6b0..31b6c6: disabled zero return, otherwise trigger byte and
+ * post-increment schedule object. Native incoming arguments are unused. */
+uint32_t opencfw_em9305_init_state_action_31b6b0(uintptr_t incoming,uint32_t state)
+{
+ (void)incoming;(void)state;
+ uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x805a74u;
+ if(enabled==0u)return 0u;
+ *(volatile uint8_t *)(uintptr_t)0x803c29u=1u;
+ return opencfw_em9305_ll_schedule_notify_313354((uintptr_t)0x803c2cu);
+}
+
+/* Native334458/33445e: six-byte state-status events with attributed
+ * halfword/byte field roles and no callback/code pointer payload. */
+struct opencfw_em9305_init_state_status {uint16_t handle;uint8_t event,status;uint16_t value;};
+_Static_assert(sizeof(struct opencfw_em9305_init_state_status)==6u,"native state status size");
+static const struct opencfw_em9305_init_state_status opencfw_em9305_init_state_status_334458={0u,8u,12u,12u};
+static const struct opencfw_em9305_init_state_status opencfw_em9305_init_state_status_33445e={0u,8u,0u,0u};
+uint32_t opencfw_em9305_init_state_action_31b4a4(uintptr_t incoming,uint32_t state)
+{
+ (void)incoming;(void)state;
+ _Alignas(4) struct opencfw_em9305_init_state_status event=opencfw_em9305_init_state_status_334458;
+ return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+}
+/* Native3257a4..3257e2:38 defined event bytes in40-byte native caller frame.
+ * Bytes38/39 are padding outside the qualified event extent. */
+uint32_t opencfw_em9305_init_state_status_send_3257a4(uint32_t code,uint32_t id,uint32_t low,uint32_t high)
+{
+ _Alignas(4) uint8_t event[38];
+ (void)opencfw_em9305_memset(event,0u,36u);
+ *(volatile uint16_t *)(event+36u)=0xffffu;event[35]=0xffu;
+ event[9]=(uint8_t)id;event[4]=(uint8_t)code;event[3]=(uint8_t)code;event[2]=5u;
+ (void)opencfw_em9305_radio_address_write_3045e8((uintptr_t)(event+10u),low,high);
+ return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
+}
+uint32_t opencfw_em9305_init_state_action_31b4c8(uintptr_t incoming,uint32_t state)
+{
+ (void)incoming;(void)state;
+ uintptr_t request=*(volatile uint32_t *)(uintptr_t)0x805c78u;
+ uint32_t high=*(volatile uint32_t *)(request+28u);
+ uint32_t low=*(volatile uint32_t *)(request+24u);
+ uint32_t id=*(volatile uint8_t *)(request+32u);
+ return opencfw_em9305_init_state_status_send_3257a4(12u,id,low,high);
+}
+/* Native30e49c..30e4a8: secondary byte counter and address return. */
+uint32_t opencfw_em9305_init_state_count_down_30e49c(void)
+{
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a76u;
+ *(volatile uint8_t *)(uintptr_t)0x805a76u=(uint8_t)(count-1u);return 0x805a76u;
+}
+/* Native322884..3228a4: clear each owned event before release, fresh second
+ * event loaded after first release. Native zero/child R0 retained. */
+uint32_t opencfw_em9305_init_state_events_clear_322884(uintptr_t record)
+{
+ uintptr_t event=*(volatile uint32_t *)(record+300u);
+ *(volatile uint32_t *)(record+300u)=0u;
+ if(event!=0u)(void)opencfw_em9305_wsf_event_release(event);
+ event=*(volatile uint32_t *)(record+308u);
+ *(volatile uint32_t *)(record+308u)=0u;
+ if(event!=0u)return opencfw_em9305_wsf_event_release(event);
+ return 0u;
+}
+/* Native325740..3257a2: complete cleanup. The native second loop advances
+ * record by48 on every iteration; retain this observed CFG, not a fixed queue. */
+uint32_t opencfw_em9305_init_state_cleanup_325740(uintptr_t record)
+{
+ (void)opencfw_em9305_command_count_down_30e48c();
+ if(record==(uintptr_t)0x804fd8u)*(volatile uint8_t *)(uintptr_t)0x805a73u=0u;
+ else *(volatile uint8_t *)(uintptr_t)0x805a74u=0u;
+ if((*(volatile uint8_t *)(record+66u)&1u)!=0u)(void)opencfw_em9305_init_state_count_down_30e49c();
+ (void)opencfw_em9305_init_state_events_clear_322884(record);
+ volatile uint8_t handler;
+ for(;;){uintptr_t event=opencfw_em9305_wsf_event_remove(record+40u,(uintptr_t)&handler);
+  if(event==0u)break;
+  (void)opencfw_em9305_wsf_event_release(event);
+ }
+ for(;;){record+=48u;uintptr_t event=opencfw_em9305_wsf_event_remove(record,(uintptr_t)&handler);
+  if(event==0u)return 0u;
+  (void)opencfw_em9305_wsf_event_release(event);
+ }
+}
+uint32_t opencfw_em9305_init_state_action_31b614(uintptr_t incoming,uint32_t state)
+{
+ (void)incoming;(void)state;
+ uint32_t index=*(volatile uint16_t *)(uintptr_t)0x803c0cu;
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ (void)opencfw_em9305_receive_terminate_325c08(base+index*912u,76u);
+ (void)opencfw_em9305_common_release_304588(1u);
+ return opencfw_em9305_init_state_cleanup_325740((uintptr_t)0x803b94u);
+}
+uint32_t opencfw_em9305_init_state_action_31b648(uintptr_t incoming,uint32_t state)
+{
+ (void)incoming;(void)state;
+ uint32_t index=*(volatile uint16_t *)(uintptr_t)0x803c0cu;
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ (void)opencfw_em9305_receive_terminate_325c08(base+index*912u,77u);
+ (void)opencfw_em9305_common_release_304588(1u);
+ (void)opencfw_em9305_init_state_cleanup_325740((uintptr_t)0x803b94u);
+ _Alignas(4) struct opencfw_em9305_init_state_status event=opencfw_em9305_init_state_status_33445e;
+ (void)opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
+ uintptr_t record=0x803cacu;
+ uint32_t high=*(volatile uint32_t *)(record+16u),low=*(volatile uint32_t *)(record+12u);
+ uint32_t kind=*(volatile uint8_t *)record;
+ return opencfw_em9305_init_state_status_send_3257a4(2u,kind&15u,low,high);
+}
+
+/* Native31b3b8..31b4a0: complete state report constructor and cleanup.
+ * Unwritten allocation bytes48..51/55..59/85 are retained, not invented zeroes. */
+uint32_t opencfw_em9305_init_state_action_31b3b8(uintptr_t incoming,uint32_t state)
+{
+ (void)incoming;(void)state;
+ if(*(volatile uint8_t *)(uintptr_t)0x805a74u==0u)return opencfw_em9305_init_state_action_31b6b0(0u,0u);
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(88u);
+ uintptr_t record=0x803b94u;
+ if(message!=0u){
+  uintptr_t input=record+68u;
+  uint32_t index=*(volatile uint16_t *)(input+52u);
+  *(volatile uint16_t *)(message+2u)=0x3f01u;
+  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  *(volatile uint16_t *)message=(uint8_t)index;
+  *(volatile uint8_t *)(base+(uint16_t)index*912u+2u)=0u;
+  (void)opencfw_em9305_memcpy((void *)(message+4u),(const void *)input,44u);
+  uintptr_t addresses=0x803d04u;
+  uint32_t original=*(volatile uint8_t *)(addresses+19u);
+  *(volatile uint8_t *)(message+52u)=(uint8_t)original;
+  uint32_t current=*(volatile uint8_t *)(addresses+19u);
+  uint32_t previous=*(volatile uint8_t *)(addresses+18u);
+  uint32_t low_second,high_second;
+  uint32_t changed=current!=previous?1u:0u;
+  if(changed==0u){
+   uint32_t high_first=*(volatile uint32_t *)(addresses+4u);
+   high_second=*(volatile uint32_t *)(addresses+12u);
+   uint32_t low_first=*(volatile uint32_t *)addresses;
+   low_second=*(volatile uint32_t *)(addresses+8u);
+   changed=((high_first^high_second)|(low_first^low_second))!=0u?1u:0u;
+  }
+  if(changed!=0u){
+   *(volatile uint8_t *)(message+52u)=(uint8_t)(original|2u);
+   high_second=*(volatile uint32_t *)(addresses+12u);
+   low_second=*(volatile uint32_t *)(addresses+8u);
+   previous=*(volatile uint8_t *)(addresses+18u);
+   current=*(volatile uint8_t *)(addresses+19u);
+  }
+  *(volatile uint32_t *)(message+72u)=0u;*(volatile uint32_t *)(message+68u)=0u;
+  *(volatile uint32_t *)(message+60u)=low_second;*(volatile uint32_t *)(message+64u)=high_second;
+  uint32_t high_first=*(volatile uint32_t *)(addresses+4u);
+  uint32_t low_first=*(volatile uint32_t *)addresses;
+  changed=current!=previous?1u:0u;
+  if(changed==0u){uint32_t high_other=*(volatile uint32_t *)(addresses+12u);
+   uint32_t low_other=*(volatile uint32_t *)(addresses+8u);
+   changed=((high_other^high_first)|(low_other^low_first))!=0u?1u:0u;
+  }
+  if(changed!=0u){*(volatile uint32_t *)(message+68u)=low_first;*(volatile uint32_t *)(message+72u)=high_first;}
+  uintptr_t parameters=0x803c04u;
+  uint32_t high=*(volatile uint32_t *)(parameters+4u);
+  uint32_t low=*(volatile uint32_t *)parameters;
+  *(volatile uint32_t *)(message+80u)=high;*(volatile uint32_t *)(message+76u)=low;
+  uint32_t flags=*(volatile uint8_t *)(parameters+13u);
+  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  *(volatile uint16_t *)(message+86u)=0xffffu;
+  *(volatile uint8_t *)(message+53u)=(uint8_t)flags;
+  *(volatile uint8_t *)(message+84u)=0xffu;
+  *(volatile uint8_t *)(message+54u)=1u;
+  (void)opencfw_em9305_wsf_task_message_send(handler,message);
+ }
+ (void)opencfw_em9305_common_release_304588(1u);
+ return opencfw_em9305_init_state_cleanup_325740(record);
+}
+
+/* Full native31b4e0..31b612. Genuine new child imports remain explicit. */
+extern uintptr_t opencfw_em9305_init_connection_allocate_316c58(void);
+extern uint32_t opencfw_em9305_init_connection_release_31ad90(uintptr_t);
+extern uint32_t opencfw_em9305_init_connection_parameters_32074c(uintptr_t,uint32_t,uint32_t,uint32_t);
+uint32_t opencfw_em9305_init_connection_query_31b21c(uint32_t id,uintptr_t output)
+{
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t record=base+(uint16_t)id*912u;
+ if(*(volatile uint8_t *)record==0u)return 0u;
+ if(*(volatile uint8_t *)(record+64u)!=4u)return 0u;
+ uint32_t value=*(volatile uint32_t *)(record+24u);
+ if(output!=0u)*(volatile uint32_t *)output=*(volatile uint32_t *)(record+28u);
+ return value;
+}
+uint32_t opencfw_em9305_init_secondary_count_up_30e4cc(void)
+{uint32_t value=*(volatile uint8_t *)(uintptr_t)0x805a76u;*(volatile uint8_t *)(uintptr_t)0x805a76u=(uint8_t)(value+1u);return 0x805a76u;}
+uint32_t opencfw_em9305_init_schedule_start_320b08(void)
+{
+ uint32_t guard=opencfw_em9305_auxiliary_guard_interval();uintptr_t record=0x803b94u;
+ uint32_t period=*(volatile uint16_t *)(record+62u);
+ *(volatile uint32_t *)(record+164u)=guard+1228u;
+ period=(uint16_t)period*625u;
+ *(volatile uint16_t *)(record+148u)=0u;
+ *(volatile uint32_t *)(record+168u)=period;
+ (void)opencfw_em9305_auxiliary_insert_313220(record+152u);
+ uint32_t value=*(volatile uint32_t *)(record+160u);
+ *(volatile uint32_t *)(record+56u)=value;return value;
+}
+uint32_t opencfw_em9305_init_state_action_31b4e0(uintptr_t incoming,uint32_t state)
+{
+ (void)incoming;(void)state;
+ uintptr_t request=*(volatile uint32_t *)(uintptr_t)0x805c78u;
+ uintptr_t connection=opencfw_em9305_init_connection_allocate_316c58();
+ uint32_t status;
+ if(connection==0u)status=9u;
+ else {
+  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uint32_t minimum=*(volatile uint16_t *)(request+4u)*1250u;
+  uint32_t maximum=*(volatile uint16_t *)(request+6u)*1250u;
+  uint32_t extent=*(volatile uint16_t *)(connection+592u);
+  uint32_t id=(uint8_t)opencfw_em9305_associated_slot_sdiv((uint32_t)(connection-base),912u);
+  uint32_t allocation;
+  uint32_t ok=opencfw_em9305_associated_slot_allocate_3133b4(id,0u,minimum,maximum,extent,(uintptr_t)&allocation,(uintptr_t)opencfw_em9305_init_connection_query_31b21c);
+  if(ok!=0u){
+   base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+   struct opencfw_em9305_native_product_pair product=opencfw_em9305_native_mpydu_329154(allocation,0x1a36e3u);
+   uintptr_t record=0x803bd0u;
+   id=(uint8_t)opencfw_em9305_associated_slot_sdiv((uint32_t)(connection-base),912u);
+   *(volatile uint16_t *)(record+62u)=(uint16_t)((product.low>>31)|(product.high<<1));
+   *(volatile uint16_t *)(record+60u)=(uint8_t)id;
+   uint32_t low=*(volatile uint32_t *)(request+16u),high=*(volatile uint32_t *)(request+20u);
+   *(volatile uint32_t *)record=low;*(volatile uint32_t *)(record+4u)=high;
+   (void)opencfw_em9305_common_request_30455c(1u);
+   (void)opencfw_em9305_command_count_30e4bc();
+   uint32_t flags=*(volatile uint8_t *)(record+6u);
+   *(volatile uint8_t *)(uintptr_t)0x805a74u=1u;
+   if((flags&1u)!=0u)(void)opencfw_em9305_init_secondary_count_up_30e4cc();
+   high=*(volatile uint32_t *)(request+28u);low=*(volatile uint32_t *)(request+24u);
+   uint32_t kind=*(volatile uint8_t *)(request+32u);
+   *(volatile uint8_t *)(uintptr_t)0x803d24u=1u;*(volatile uint16_t *)(uintptr_t)0x803d22u=1u;
+   (void)opencfw_em9305_init_connection_parameters_32074c(request+4u,kind,low,high);
+   (void)opencfw_em9305_radio_transfer_31dd88(connection,record+8u,0u);
+   high=*(volatile uint32_t *)(request+28u);low=*(volatile uint32_t *)(request+24u);kind=*(volatile uint8_t *)(request+32u);
+   *(volatile uint16_t *)(connection+892u)=0xffffu;*(volatile uint8_t *)(connection+890u)=0xffu;
+   *(volatile uint32_t *)(connection+520u)=high;*(volatile uint32_t *)(connection+516u)=low;
+   *(volatile uint8_t *)(connection+524u)=(uint8_t)kind;
+   uint32_t result=opencfw_em9305_init_schedule_start_320b08();
+   *(volatile uint8_t *)(uintptr_t)0x805a75u=1u;return result;
+  }
+  (void)opencfw_em9305_init_connection_release_31ad90(connection);status=13u;
+ }
+ uint32_t high=*(volatile uint32_t *)(request+28u),low=*(volatile uint32_t *)(request+24u),kind=*(volatile uint8_t *)(request+32u);
+ (void)opencfw_em9305_init_state_status_send_3257a4(status,kind,low,high);
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
+ if(message==0u)return 0u;
+ *(volatile uint16_t *)(message+2u)=771u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ return opencfw_em9305_wsf_task_message_send(handler,message);
+}
+
+/* Native325898..325980: three authentic spreading/addition passes,
+ * low16 MPYUW, signed16 MPYW correction and channel-mask lookup. */
+static uint32_t opencfw_em9305_init_channel_spread(uint32_t value)
+{
+ value=(value&0xf0f0u)|((value<<8u)&0xf0f00u);
+ value=(value&0xcccc0u)|((value<<4u)&0x333300u);
+ value=(value&0x2aaa80u)|((value<<2u)&0x555500u);
+ return ((uint16_t)(value>>7u))*17u;
+}
+uint32_t opencfw_em9305_init_callback_325898(uintptr_t record)
+{
+ uint32_t first=*(volatile uint16_t *)(record+262u);
+ uint32_t seed=*(volatile uint16_t *)(record+322u);
+ uint32_t value=first^seed;
+ value=opencfw_em9305_init_channel_spread(value)+seed;
+ value=opencfw_em9305_init_channel_spread(value)+seed;
+ value=opencfw_em9305_init_channel_spread(value)+seed;
+ value^=seed;
+ uint32_t quotient=((uint16_t)value*0xdd68u)>>21u;
+ uint32_t channel=value+(uint32_t)((int32_t)(int16_t)quotient*-37);
+ *(volatile uint8_t *)(record+270u)=(uint8_t)channel;
+ uint32_t low=*(volatile uint32_t *)(record+276u);
+ uint32_t high=*(volatile uint32_t *)(record+280u);
+ uint32_t result=(uint32_t)((((uint64_t)high<<32u)|low)>>((uint16_t)channel&63u));
+ if((result&1u)==0u){
+  uint32_t count=*(volatile uint8_t *)(record+272u);
+  uint32_t index=((uint16_t)count*(uint16_t)value)>>16u;
+  channel=*(volatile uint8_t *)(record+284u+index);
+ }
+ return (uint8_t)channel;
+}
+/* Native306ab4..306ade: callback relocation and feature bit14. */
+uint32_t opencfw_em9305_init_lower_306ab4(uint32_t incoming)
+{
+ (void)incoming;
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint32_t *)(uintptr_t)0x8027e4u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_325898;
+ uint32_t feature=*(volatile uint8_t *)(config+4u);
+ if(feature<9u)return feature;
+ uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=flags|(1u<<14u);return 0x805b30u;
+}
+
+/* Native3252b8..3252da: drain connection+368, count modulo256. */
+uint32_t opencfw_em9305_init_connection_drain_3252b8(uintptr_t connection)
+{
+ uintptr_t queue=connection+368u;uint32_t count=0u;uint8_t handler;
+ for(;;){uintptr_t event=opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&handler);if(event==0u)return (uint8_t)count;(void)opencfw_em9305_wsf_event_release(event);count+=1u;}
+}
+/* Native31ae64..31ae6e: return event's eight-byte header to recycle queue. */
+uint32_t opencfw_em9305_init_connection_recycle_31ae64(uintptr_t event)
+{return opencfw_em9305_wsf_queue_append(0x8056dcu,event-8u);}
+/* Native32d5f4..32d648: handler255 events have no nested payload/recycle. */
+uint32_t opencfw_em9305_init_connection_drain_32d5f4(uintptr_t connection)
+{
+ uintptr_t queue=connection+360u;uint32_t count=0u;uint8_t handler;
+ for(;;){
+  uintptr_t event=opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&handler);
+  if(event==0u)return (uint8_t)count;
+  if(handler==255u){(void)opencfw_em9305_wsf_event_release(event);continue;}
+  uintptr_t payload=*(volatile uint32_t *)event;
+  (void)opencfw_em9305_wsf_event_release(payload-4u);
+  (void)opencfw_em9305_init_connection_recycle_31ae64(event);
+  (void)opencfw_em9305_wsf_critical_enter();
+  uint32_t value=*(volatile uint8_t *)(uintptr_t)0x805ab4u;
+  *(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)(value+1u);
+  (void)opencfw_em9305_wsf_critical_exit();count+=1u;
+ }
+}
+/* Native31ad90..31ae62, including authentic indirect callback R1=callee.
+ * Further ambient caller-saved registers are not asserted by this contract. */
+uint32_t opencfw_em9305_init_connection_release_31ad90(uintptr_t connection)
+{
+ uint32_t drained=opencfw_em9305_init_connection_drain_3252b8(connection);
+ (void)opencfw_em9305_wsf_critical_enter();
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805ab5u;
+ *(volatile uint8_t *)(uintptr_t)0x805ab5u=(uint8_t)(count+drained);
+ (void)opencfw_em9305_wsf_critical_exit();
+ (void)opencfw_em9305_init_connection_drain_32d5f4(connection);
+ uintptr_t queue=connection+352u;uint8_t handler;
+ for(;;){
+  uintptr_t event=opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&handler);
+  if(event==0u)break;
+  if(handler!=255u){(void)opencfw_em9305_wsf_critical_enter();count=*(volatile uint8_t *)(uintptr_t)0x805ab4u;*(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)(count+1u);(void)opencfw_em9305_wsf_critical_exit();}
+  (void)opencfw_em9305_wsf_event_release(event);
+ }
+ (void)opencfw_em9305_wsf_timer_stop(connection+384u);
+ (void)opencfw_em9305_wsf_timer_stop(connection+728u);
+ (void)opencfw_em9305_wsf_timer_stop(connection+476u);
+ (void)opencfw_em9305_wsf_timer_stop(connection+496u);
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t callbacks=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+ uint32_t id=(uint8_t)opencfw_em9305_associated_slot_sdiv((uint32_t)(connection-base),912u);
+ if(callbacks!=0u){uintptr_t callback=*(volatile uint32_t *)(callbacks+4u);if(callback!=0u)(void)((uint32_t(*)(uint32_t,uintptr_t))callback)(id,callback);}
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8027f4u;
+ if(callback!=0u)(void)((uint32_t(*)(uint32_t,uintptr_t))callback)(id,callback);
+ uintptr_t event=*(volatile uint32_t *)(connection+760u);
+ *(volatile uint8_t *)connection=0u;
+ if(event!=0u)(void)opencfw_em9305_wsf_event_release(event);
+ (void)opencfw_em9305_command_count_down_30e48c();
+ count=*(volatile uint8_t *)(uintptr_t)0x805a70u;
+ *(volatile uint8_t *)(uintptr_t)0x805a70u=(uint8_t)(count-1u);
+ return opencfw_em9305_common_release_304588(1u);
+}
+
+/* Complete native316c58..316e58 connection allocator. Count is byte34;
+ * slot stride uses native MPYWHL. Final base reload is deliberate. */
+uintptr_t opencfw_em9305_init_connection_allocate_316c58(void)
+{
+ uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t count=*(volatile uint8_t *)(config+34u);
+ if(count==0u)return 0u;
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u,slot=0u;
+ uint32_t index;
+ for(index=0u;index<count;index++){
+  slot=base+opencfw_em9305_native_mpywhl(index,912u);
+  if(*(volatile uint8_t *)slot==0u)break;
+ }
+ if(index==count)return 0u;
+ uintptr_t header=slot+544u;
+ (void)opencfw_em9305_memset((void *)slot,0u,912u);
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t upper=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t lower=*(volatile uint32_t *)(uintptr_t)0x805a98u;
+ uint32_t access=*(volatile uint32_t *)(uintptr_t)0x805a84u;
+ uint32_t crc=*(volatile uint32_t *)(uintptr_t)0x805a88u;
+ *(volatile uint16_t *)(slot+502u)=0x5401u;
+ *(volatile uint16_t *)(slot+482u)=0x5301u;
+ *(volatile uint16_t *)(slot+390u)=0x4701u;
+ *(volatile uint16_t *)(header+190u)=0x5101u;
+ config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint16_t *)(header+36u)=328u;
+ uint32_t cap=*(volatile uint16_t *)(config+38u);
+ *(volatile uint16_t *)(header+32u)=328u;
+ *(volatile uint32_t *)(slot+8u)=crc;
+ if(cap>251u)cap=251u;
+ uint32_t first=*(volatile uint16_t *)(uintptr_t)0x805ab6u;
+ uint32_t second=*(volatile uint16_t *)(uintptr_t)0x805ab8u;
+ *(volatile uint16_t *)(header+22u)=(uint16_t)cap;
+ *(volatile uint16_t *)(header+24u)=(uint16_t)((cap<<6u)+976u);
+ *(volatile uint8_t *)slot=1u;
+ *(volatile uint16_t *)(slot+388u)=(uint16_t)index;
+ *(volatile uint16_t *)(slot+480u)=(uint16_t)index;
+ *(volatile uint16_t *)(slot+500u)=(uint16_t)index;
+ *(volatile uint16_t *)(header+188u)=(uint16_t)index;
+ *(volatile uint16_t *)(header+34u)=27u;
+ *(volatile uint16_t *)(header+30u)=27u;
+ *(volatile uint32_t *)(slot+4u)=access;
+ *(volatile uint32_t *)(slot+548u)=lower;
+ *(volatile uint32_t *)(slot+544u)=upper;
+ *(volatile uint32_t *)(slot+540u)=lower;
+ *(volatile uint32_t *)(slot+536u)=upper;
+ *(volatile uint8_t *)(header-148u)=(uint8_t)handler;
+ *(volatile uint8_t *)(header+196u)=(uint8_t)handler;
+ *(volatile uint8_t *)(slot+488u)=(uint8_t)handler;
+ *(volatile uint8_t *)(header-36u)=(uint8_t)handler;
+ *(volatile uint16_t *)(header+26u)=(uint16_t)first;
+ *(volatile uint16_t *)(header+28u)=(uint16_t)second;
+ *(volatile uint16_t *)(slot+76u)=257u;
+ first=opencfw_em9305_radio_limit_317b10(slot,slot+574u);
+ *(volatile uint16_t *)(header+48u)=(uint16_t)first;
+ second=opencfw_em9305_radio_limit_317b10(slot,slot+566u);
+ uint32_t value=*(volatile uint32_t *)(uintptr_t)0x805accu;
+ uint32_t interval=*(volatile uint16_t *)(uintptr_t)0x805ac8u;
+ uint32_t accuracy=*(volatile uint8_t *)(uintptr_t)0x805acbu;
+ uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x805aa8u;
+ uint32_t option=*(volatile uint8_t *)(uintptr_t)0x805acau;
+ *(volatile uint16_t *)(header+46u)=(uint16_t)second;
+ *(volatile uint8_t *)(header+54u)=2u;
+ *(volatile uint8_t *)(header+55u)=2u;
+ *(volatile uint8_t *)(header+56u)=2u;
+ *(volatile uint16_t *)(header+50u)=(uint16_t)interval;
+ *(volatile uint32_t *)(slot+616u)=value;
+ uintptr_t callbacks=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+ *(volatile uint8_t *)(header-142u)=6u;
+ *(volatile uint8_t *)(header+52u)=(uint8_t)option;
+ *(volatile uint8_t *)(header+202u)=(uint8_t)flags;
+ *(volatile uint8_t *)(header+70u)=(uint8_t)accuracy;
+ if(callbacks!=0u){uintptr_t callback=*(volatile uint32_t *)callbacks;if(callback!=0u)(void)((uint32_t(*)(uint32_t,uintptr_t))callback)((uint16_t)index,callback);}
+ if((*(volatile uint8_t *)(header+4u)&2u)!=0u){
+  uint32_t control=*(volatile uint8_t *)(uintptr_t)0x805a85u;
+  if((control&128u)!=0u){
+   uintptr_t original=base+opencfw_em9305_native_mpywhl(index,912u);
+   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   value=*(volatile uint8_t *)(config+66u);
+   *(volatile uint8_t *)(original+778u)=(uint8_t)value;
+   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   *(volatile uint32_t *)(original+824u)=0u;
+   *(volatile uint8_t *)(original+770u)=1u;
+   *(volatile uint8_t *)(original+769u)=0u;
+   value=*(volatile uint8_t *)(config+67u);
+   *(volatile uint8_t *)(original+833u)=0u;
+   *(volatile uint16_t *)(original+822u)=0u;
+   *(volatile uint8_t *)(original+564u)=255u;
+   *(volatile uint8_t *)(original+563u)=255u;
+   *(volatile uint8_t *)(original+562u)=255u;
+   *(volatile uint8_t *)(original+561u)=255u;
+   *(volatile uint16_t *)(original+776u)=0u;
+   *(volatile uint32_t *)(original+784u)=0u;
+   *(volatile uint8_t *)(original+793u)=0u;
+   *(volatile uint16_t *)(original+780u)=0u;
+   *(volatile uint8_t *)(original+779u)=(uint8_t)value;
+  }
+ }
+ uintptr_t original=base+opencfw_em9305_native_mpywhl(index,912u);
+ value=*(volatile uint32_t *)(uintptr_t)0x805ad0u;
+ *(volatile uint32_t *)(original+836u)=value;
+ value=*(volatile uint32_t *)(uintptr_t)0x805ad4u;
+ *(volatile uint32_t *)(original+840u)=value;
+ value=*(volatile uint16_t *)(uintptr_t)0x805ad8u;
+ *(volatile uint16_t *)(original+846u)=1u;
+ *(volatile uint16_t *)(original+844u)=(uint16_t)value;
+ (void)opencfw_em9305_command_count_30e4bc();
+ value=*(volatile uint8_t *)(uintptr_t)0x805a70u;
+ *(volatile uint8_t *)(uintptr_t)0x805a70u=(uint8_t)(value+1u);
+ (void)opencfw_em9305_common_request_30455c(1u);
+ base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ return base+opencfw_em9305_native_mpywhl(index,912u);
+}
+
+extern uint32_t opencfw_em9305_init_callback_320908(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_callback_3205c4(uintptr_t,uint32_t);
+/* Native31e5ec ignores its incoming registers, sets pending then signals. */
+uint32_t opencfw_em9305_init_callback_31e5ec(uintptr_t incoming,uint32_t state)
+{(void)incoming;(void)state;*(volatile uint8_t *)(uintptr_t)0x803c28u=1u;(void)opencfw_em9305_auxiliary_signal_304394();return 0u;}
+/* Native325708..32571c: exact bit-priority channel selector. */
+uint32_t opencfw_em9305_init_channel_first_325708(uint32_t flags)
+{if((flags&1u)==0u)return 37u;if((flags&2u)==0u)return 38u;if((flags&4u)==0u)return 39u;return 37u;}
+static uint32_t opencfw_em9305_init_parameter_bit(uint32_t value)
+{uint32_t result;__asm__ volatile("xbfu %0,%1,0xe":"=r"(result):"r"(value));return result;}
+/* Complete32074c..320904. Header postincrement at320864 is retained;
+ * callback identities use genuine relocations, never absolute code pointers. */
+uint32_t opencfw_em9305_init_connection_parameters_32074c(uintptr_t input,uint32_t kind,uint32_t low_in,uint32_t high_in)
+{
+ uintptr_t record=0x803b94u,header=0x803bd5u,second=header+1u;
+ (void)opencfw_em9305_memset((void *)(record+152u),0u,240u);
+ *(volatile uint32_t *)(second+130u)=(uint32_t)(record+200u);
+ uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x805b00u;
+ *(volatile uint8_t *)(second+112u)=1u;
+ *(volatile uint8_t *)(second+110u)=2u;
+ *(volatile uint32_t *)(second+114u)=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_320908;
+ *(volatile uint8_t *)(second+134u)=2u;
+ *(volatile uint32_t *)(second+118u)=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_320908;
+ uint32_t channel=opencfw_em9305_init_channel_first_325708(flags);
+ uint32_t type=*(volatile uint8_t *)second;
+ *(volatile uint8_t *)(second+135u)=(uint8_t)channel;
+ *(volatile uint32_t *)(second+142u)=0x555555u;
+ uint32_t option=*(volatile uint8_t *)(uintptr_t)0x805a9cu;
+ *(volatile uint16_t *)(second+210u)=3u;
+ *(volatile uint16_t *)(second+146u)=257u;
+ *(volatile uint32_t *)(second+138u)=0x8e89bed6u;
+ *(volatile uint8_t *)(second+136u)=(uint8_t)option;
+ if(type!=0u)*(volatile uint16_t *)(uintptr_t)0x803caau=3u;
+ flags=*(volatile uint8_t *)(uintptr_t)0x805b00u;
+ uintptr_t event=header+284u;
+ *(volatile uint8_t *)(event+2u)=(uint8_t)flags;
+ *(volatile uint32_t *)(header+251u)=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3205c4;
+ *(volatile uint8_t *)(event+1u)=45u;
+ uintptr_t packet=opencfw_em9305_wsf_event_allocate(45u);
+ *(volatile uint32_t *)(header+259u)=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31e5ec;
+ *(volatile uint32_t *)(header+235u)=(uint32_t)packet;
+ uint32_t value=opencfw_em9305_radio_access_raw_318878();
+ *(volatile uint32_t *)(header+19u)=value;
+ value=opencfw_em9305_radio_crc_seed_318960();
+ uint32_t upper=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
+ uint32_t lower=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
+ uint32_t period=*(volatile uint16_t *)(header+57u);
+ uint32_t minimum=*(volatile uint16_t *)(input+4u);
+ uint32_t maximum=*(volatile uint16_t *)(input+6u);
+ *(volatile uint8_t *)(header+41u)=1u;
+ *(volatile uint32_t *)(header+23u)=value;
+ *(volatile uint32_t *)(header+31u)=upper;
+ *(volatile uint32_t *)(header+27u)=lower;
+ *(volatile uint16_t *)(header+35u)=(uint16_t)period;
+ *(volatile uint16_t *)(header+37u)=(uint16_t)minimum;
+ *(volatile uint16_t *)(header+39u)=(uint16_t)maximum;
+ value=opencfw_em9305_associated_random_31896c();
+ *(volatile uint8_t *)(header+45u)=(uint8_t)value;
+ value=opencfw_em9305_compose_accuracy_318988();
+ *(volatile uint8_t *)(header+46u)=(uint8_t)value;
+ uintptr_t descriptor=0x803d1cu;
+ uint32_t feature=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ *(volatile uint8_t *)(descriptor+4u)=34u;
+ flags=*(volatile uint8_t *)header;header+=3u;
+ uintptr_t address=0x803cacu;
+ uint32_t bit=opencfw_em9305_init_parameter_bit(feature);
+ *(volatile uint8_t *)descriptor=5u;
+ *(volatile uint8_t *)(descriptor+1u)=(uint8_t)bit;
+ if((flags&1u)==0u){upper=*(volatile uint32_t *)(uintptr_t)0x805b44u;lower=*(volatile uint32_t *)(uintptr_t)0x805b40u;value=*(volatile uint32_t *)address;*(volatile uint32_t *)(address+8u)=upper;*(volatile uint32_t *)(address+4u)=lower;}
+ else {upper=*(volatile uint32_t *)(uintptr_t)0x805a90u;lower=*(volatile uint32_t *)(uintptr_t)0x805a8cu;value=*(volatile uint32_t *)address;*(volatile uint32_t *)(address+8u)=upper;*(volatile uint32_t *)(address+4u)=lower;value|=2u;}
+ uint32_t privacy=*(volatile uint8_t *)(uintptr_t)0x805a9du;
+ uint32_t output_flags=value|1u;
+ *(volatile uint32_t *)address=output_flags;
+ if(privacy!=0u){output_flags=value|81u;*(volatile uint32_t *)address=output_flags;}
+ type=*(volatile uint8_t *)second;
+ *(volatile uint32_t *)(second+2u)=lower;
+ *(volatile uint32_t *)(second+6u)=upper;
+ *(volatile uint8_t *)(descriptor+2u)=(uint8_t)((output_flags>>1u)&1u);
+ if(type==0u){bit=kind&1u;*(volatile uint8_t *)(descriptor+3u)=(uint8_t)bit;output_flags|=(bit<<3u)|4u;*(volatile uint32_t *)(record+292u)=low_in;*(volatile uint32_t *)(record+76u)=low_in;*(volatile uint32_t *)(record+296u)=high_in;*(volatile uint32_t *)(record+80u)=high_in;*(volatile uint32_t *)(record+280u)=output_flags;}
+ uintptr_t encoded=0x803cf1u;
+ uint32_t length=opencfw_em9305_radio_encode_3239d4(record,encoded+43u);
+ (void)opencfw_em9305_radio_encode_323c94(record+length,header);
+ *(volatile uint32_t *)(address+24u)=(uint32_t)record;
+ *(volatile uint8_t *)encoded=36u;
+ return 36u;
+}
+
+extern uint32_t opencfw_em9305_init_schedule_compare_318b78(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_init_schedule_finish_31ec40(uintptr_t);
+/* Full native320908..320976. Delay320938 saves the input object pointer,
+ * not the insertion result; every retry uses that same slot+16 object. */
+uint32_t opencfw_em9305_init_callback_320908(uintptr_t object,uint32_t incoming)
+{
+ (void)incoming;
+ if(*(volatile uint8_t *)(uintptr_t)0x803c28u!=0u){
+  uint32_t index=*(volatile uint16_t *)(uintptr_t)0x803c0cu;
+  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uintptr_t connection=base+(uint32_t)(uint16_t)index*912u;
+  uint32_t initial=*(volatile uint32_t *)(connection+24u);
+  uintptr_t schedule=connection+16u;
+  uintptr_t compare=(uintptr_t)opencfw_em9305_init_schedule_compare_318b78;
+  if(opencfw_em9305_associated_schedule_insert_312da4(schedule,compare)==0u){
+   uint32_t iteration=1u;
+   do{
+    uint32_t period=*(volatile uint16_t *)(connection+266u);
+    uint32_t scaled=(uint32_t)(uint16_t)iteration*(uint32_t)(uint16_t)period;
+    uint32_t counter=*(volatile uint16_t *)(connection+262u);
+    uint32_t offset=opencfw_em9305_native_mpywhl(scaled,1250u);
+    *(volatile uint16_t *)(connection+262u)=(uint16_t)(counter+1u);
+    *(volatile uint32_t *)(connection+24u)=initial+offset;
+    uint32_t success=opencfw_em9305_associated_schedule_insert_312da4(schedule,compare);
+    iteration+=1u;if(success!=0u)break;
+   }while(1);
+  }
+ }
+ *(volatile uint32_t *)(object+36u)=0x803b94u;
+ return opencfw_em9305_init_schedule_finish_31ec40(object);
+}
+
+/* Complete318b78..318c18: connection arbitration with wrapped MPYWHL,
+ * native unsigned comparisons and fresh queue/period reads. */
+uint32_t opencfw_em9305_init_schedule_compare_318b78(uintptr_t first,uintptr_t second)
+{
+ if(*(volatile uint8_t *)(second+26u)!=1u)return (uint32_t)first;
+ uintptr_t kind=*(volatile uint32_t *)(second+44u);
+ if((*(volatile uint8_t *)kind&254u)!=4u)return (uint32_t)first;
+ uintptr_t a=*(volatile uint32_t *)(first+36u);
+ if(*(volatile uint8_t *)(a+1u)==0u)return (uint32_t)second;
+ uintptr_t b=*(volatile uint32_t *)(second+36u);
+ uint32_t priority_a=*(volatile uint8_t *)(a+401u);
+ uint32_t priority_b=*(volatile uint8_t *)(b+401u);
+ if(priority_a<priority_b)return (uint32_t)second;
+ uint32_t period=*(volatile uint16_t *)(b+266u);
+ uint32_t elapsed=*(volatile uint32_t *)(b+392u);
+ uint32_t threshold=(uint32_t)(uint16_t)period*2500u;
+ uint32_t product=opencfw_em9305_native_mpywhl(elapsed,10000u);
+ if(product<threshold)return (uint32_t)second;
+ if(priority_a!=0u)return (uint32_t)first;
+ period=*(volatile uint16_t *)(a+266u);
+ elapsed=*(volatile uint32_t *)(a+392u);
+ threshold=(uint32_t)(uint16_t)period*2500u;
+ product=opencfw_em9305_native_mpywhl(elapsed,10000u);
+ if(product<threshold)return (uint32_t)first;
+ if(*(volatile uint8_t *)(b+635u)!=255u)return (uint32_t)second;
+ if(*(volatile uint8_t *)(a+635u)!=255u)return (uint32_t)first;
+ if(opencfw_em9305_wsf_queue_empty(b+360u)==0u)return (uint32_t)second;
+ if(opencfw_em9305_wsf_queue_empty(a+360u)==0u)return (uint32_t)first;
+ uint32_t period_b=*(volatile uint16_t *)(b+266u);
+ uint32_t period_a=*(volatile uint16_t *)(a+266u);
+ if(period_a<(period_b>>2u))return (uint32_t)second;
+ if(period_b>=(period_a>>2u))return (uint32_t)second;
+ return (uint32_t)first;
+}
+
+extern uint32_t opencfw_em9305_init_schedule_adjust_312f88(uintptr_t,uint32_t,uint32_t);
+/* Native325720..32573c. Native bit-test index is modulo32; masks with
+ * no reachable bit can loop forever and no invented escape is introduced. */
+uint32_t opencfw_em9305_init_channel_next_325720(uint32_t channel,uint32_t mask)
+{
+ if(mask==0u)return 37u;
+ for(;;){channel+=1u;if((uint8_t)channel>39u)channel=37u;if(((mask>>((channel-37u)&31u))&1u)!=0u)return (uint8_t)channel;}
+}
+/* Complete native31ec40..31ed30, retains three-argument genuine adjust
+ * contract, fresh loads and incidental native R0 on each return path. */
+uint32_t opencfw_em9305_init_schedule_finish_31ec40(uintptr_t object)
+{
+ uintptr_t record=*(volatile uint32_t *)(object+36u),extra=record+240u;
+ uint32_t pending=*(volatile uint8_t *)(record+149u);
+ if(pending==0u)pending=*(volatile uint8_t *)(extra-92u);
+ if(pending!=0u){
+  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
+  if(message==0u)return 0u;
+  *(volatile uint8_t *)(message+3u)=3u;
+  uint32_t event=record!=0x804fd8u?3u:2u;
+  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  *(volatile uint8_t *)(message+2u)=(uint8_t)event;
+  return opencfw_em9305_wsf_task_message_send(handler,message);
+ }
+ uint32_t update=*(volatile uint8_t *)(uintptr_t)0x805a80u;
+ if(update!=0u){
+  uint32_t flags=*(volatile uint8_t *)(record+65u);
+  if((flags&1u)!=0u){
+   *(volatile uint8_t *)(uintptr_t)0x805a80u=0u;
+   if((flags&2u)==0u){uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805a90u;uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805a8cu;(void)opencfw_em9305_radio_address_write_3045e8(record+2u,low,high);}
+   uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805a90u,low=*(volatile uint32_t *)(uintptr_t)0x805a8cu;
+   *(volatile uint32_t *)(extra+48u)=high;*(volatile uint32_t *)(extra+44u)=low;
+  }
+ }
+ uint32_t second=*(volatile uint16_t *)(record+62u),first=*(volatile uint16_t *)(record+60u);
+ uint32_t time=*(volatile uint32_t *)(record+56u);
+ *(volatile uint32_t *)(object+8u)=time;
+ if(first!=second){
+  uint32_t prior=*(volatile uint32_t *)(extra+124u),duration=*(volatile uint32_t *)(object+12u);
+  uint32_t period=(uint32_t)(uint16_t)second*625u;
+  if(duration+prior<period&&opencfw_em9305_init_schedule_adjust_312f88(object,prior,period)!=0u){
+   time=*(volatile uint32_t *)(record+56u);
+   uint32_t current=*(volatile uint32_t *)(object+8u);
+   uint32_t result=opencfw_em9305_auxiliary_elapsed_303f8c(current,time);
+   *(volatile uint32_t *)(extra+124u)=result;return result;
+  }
+ }
+ uint32_t mask=*(volatile uint8_t *)(record+351u),channel=*(volatile uint8_t *)(record+201u);
+ *(volatile uint32_t *)(extra+124u)=0u;
+ channel=opencfw_em9305_init_channel_next_325720(channel,mask);
+ second=*(volatile uint16_t *)(record+62u);first=*(volatile uint16_t *)(record+60u);
+ *(volatile uint8_t *)(record+201u)=(uint8_t)channel;
+ if(first==second){(void)opencfw_em9305_auxiliary_insert_313220(object);time=*(volatile uint32_t *)(object+8u);*(volatile uint32_t *)(record+56u)=time;return time;}
+ first=(uint32_t)(uint16_t)first*625u;second=(uint32_t)(uint16_t)second*625u;
+ time=*(volatile uint32_t *)(object+8u);uint32_t maximum=first+second;
+ time+=first;*(volatile uint32_t *)(record+56u)=time;
+ for(;;){
+  uint32_t success=opencfw_em9305_init_schedule_adjust_312f88(object,first,maximum);
+  time=*(volatile uint32_t *)(record+56u);
+  if(success!=0u){uint32_t current=*(volatile uint32_t *)(object+8u);uint32_t result=opencfw_em9305_auxiliary_elapsed_303f8c(current,time);*(volatile uint32_t *)(extra+124u)=result;return result;}
+  *(volatile uint32_t *)(object+8u)=time;time+=first;*(volatile uint32_t *)(record+56u)=time;
+ }
+}
+
+/* Complete native312f88..3130d2. BN/BP test wrapped subtraction N;
+ * list links are native previous@0,next@4. No invented iteration cap. */
+uint32_t opencfw_em9305_init_schedule_adjust_312f88(uintptr_t object,uint32_t minimum,uint32_t maximum)
+{
+ uintptr_t root=0x805f04u,list=root+16u,node=0u,neighbor=0u,link=0u;
+ uint32_t original=*(volatile uint32_t *)(object+8u),candidate=original+minimum;
+ *(volatile uint32_t *)(object+8u)=candidate;
+ uint32_t now=opencfw_em9305_pal_current_time();
+ if(opencfw_em9305_auxiliary_elapsed_303f8c(*(volatile uint32_t *)(object+8u),now+25u)==0u){
+  if((maximum&0x80000000u)==0u)goto fail;
+  now=opencfw_em9305_pal_current_time();
+  original=now+opencfw_em9305_auxiliary_guard_interval();
+  *(volatile uint32_t *)(object+8u)=original;
+ }
+ node=*(volatile uint32_t *)list;
+ if(node==0u){
+  *(volatile uint32_t *)(list+4u)=(uint32_t)object;
+  *(volatile uint32_t *)list=(uint32_t)object;
+  *(volatile uint32_t *)(object+4u)=0u;
+  *(volatile uint32_t *)object=0u;
+  goto success;
+ }
+ candidate=*(volatile uint32_t *)(object+8u);
+ uint32_t headtime=*(volatile uint32_t *)(node+8u);
+ if(((headtime-candidate)&0x80000000u)==0u){
+  uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
+  uint32_t end=candidate+guard+guard;
+  if(((headtime-end)&0x80000000u)==0u&&*(volatile uint8_t *)root!=2u){
+   neighbor=*(volatile uint32_t *)(root+16u);goto insert_before;
+  }
+  candidate=*(volatile uint32_t *)(object+8u);
+ }
+ node=*(volatile uint32_t *)(root+20u);
+ uint32_t time=*(volatile uint32_t *)(node+8u);
+ uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
+ uint32_t end=time+guard+guard;
+ if(((candidate-end)&0x80000000u)==0u){
+  neighbor=*(volatile uint32_t *)(root+20u);
+  *(volatile uint32_t *)object=(uint32_t)neighbor;
+  link=*(volatile uint32_t *)(neighbor+4u);
+  *(volatile uint32_t *)(object+4u)=(uint32_t)link;
+  *(volatile uint32_t *)(neighbor+4u)=(uint32_t)object;
+  link=*(volatile uint32_t *)(object+4u);
+  goto update_next;
+ }
+ link=list;
+scan:
+ node=*(volatile uint32_t *)link;
+ if(node==0u)goto fail;
+ time=*(volatile uint32_t *)(node+8u);
+ candidate=*(volatile uint32_t *)(object+8u);
+ guard=opencfw_em9305_auxiliary_guard_interval();
+ end=time+guard+guard;
+ if(((candidate-end)&0x80000000u)!=0u){
+  time=*(volatile uint32_t *)(node+8u);
+  guard=opencfw_em9305_auxiliary_guard_interval();
+  candidate=time+guard+guard;
+  *(volatile uint32_t *)(object+8u)=candidate;
+ }else candidate=*(volatile uint32_t *)(object+8u);
+ uint32_t displacement=candidate-original;
+ if(displacement<minimum||maximum<displacement)goto advance;
+ neighbor=*(volatile uint32_t *)(node+4u);
+ if(neighbor==0u){
+  *(volatile uint32_t *)(object+4u)=0u;
+  *(volatile uint32_t *)(node+4u)=(uint32_t)object;
+  link=*(volatile uint32_t *)(object+4u);
+  *(volatile uint32_t *)object=(uint32_t)node;
+  goto update_next;
+ }
+ time=*(volatile uint32_t *)(neighbor+8u);
+ uint32_t duration=*(volatile uint32_t *)(object+12u);
+ guard=opencfw_em9305_auxiliary_guard_interval();
+ end=duration+guard+guard;
+ if(((time-end)&0x80000000u)==0u){neighbor=*(volatile uint32_t *)(node+4u);goto insert_before;}
+advance:
+ link=node+4u;goto scan;
+insert_before:
+ link=*(volatile uint32_t *)neighbor;
+ *(volatile uint32_t *)object=(uint32_t)link;
+ *(volatile uint32_t *)neighbor=(uint32_t)object;
+ link=*(volatile uint32_t *)object;
+ *(volatile uint32_t *)(object+4u)=(uint32_t)neighbor;
+ if(link==0u)*(volatile uint32_t *)(root+16u)=(uint32_t)object;
+ else *(volatile uint32_t *)(link+4u)=(uint32_t)object;
+ goto success;
+update_next:
+ if(link==0u)*(volatile uint32_t *)(root+20u)=(uint32_t)object;
+ else *(volatile uint32_t *)link=(uint32_t)object;
+success:
+ if(*(volatile uint32_t *)list==(uint32_t)object)(void)opencfw_em9305_auxiliary_transition_333a60();
+ return 1u;
+fail:
+ *(volatile uint32_t *)(object+8u)=original;return 0u;
+}
+
+/* Complete native3205c4..320748. Source children preserve genuine contracts;
+ * modulo uses selected named ARC REMU helper, including native zero-divisor behavior. */
+uint32_t opencfw_em9305_init_callback_3205c4(uintptr_t object,uint32_t argument)
+{
+ uintptr_t record=*(volatile uint32_t *)(object+44u),extra=record+160u;
+ if(*(volatile uint8_t *)(extra+28u)==0u)return 0u;
+ uintptr_t output=*(volatile uint32_t *)(record+104u);
+ if(output==0u)return 0u;
+ uintptr_t input=argument;
+ uint32_t index=*(volatile uint16_t *)(uintptr_t)0x803c0cu;
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uint32_t offset=(uint32_t)(uint16_t)index*912u;
+ uintptr_t slot=base+offset;
+ uint32_t high=*(volatile uint32_t *)(extra+12u),low=*(volatile uint32_t *)(extra+8u);
+ uint32_t origin=*(volatile uint32_t *)extra;
+ uint32_t count=*(volatile uint8_t *)(record+185u);
+ (void)opencfw_em9305_radio_address_write_3045e8(output+8u,low,high);
+ uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x803bd5u;
+ uint32_t kind=*(volatile uint8_t *)(record+186u);
+ uintptr_t descriptor=0x803d1cu;
+ *(volatile uint8_t *)(descriptor+3u)=(uint8_t)kind;
+ if((flags&2u)==0u){*(volatile uint32_t *)(uintptr_t)0x803c08u=0u;*(volatile uint32_t *)(uintptr_t)0x803c04u=0u;}
+ else {
+  _Alignas(4) uint32_t pair[2];uint32_t identity;
+  if(*(volatile uint8_t *)(extra+24u)==1u){
+   identity=*(volatile uint8_t *)input>>7u; /* delayed load precedes address-pack child */
+   uint64_t packed=opencfw_em9305_controller_pack_address(input+8u);
+   pair[0]=(uint32_t)packed;pair[1]=(uint32_t)(packed>>32u);
+   if((pair[1]&0xc000u)==0x4000u){
+    high=*(volatile uint32_t *)(extra+20u);low=*(volatile uint32_t *)(extra+16u);
+    kind=*(volatile uint8_t *)(record+187u);
+    *(volatile uint32_t *)(uintptr_t)0x803c08u=pair[1];
+    *(volatile uint32_t *)(uintptr_t)0x803c04u=pair[0];
+    (void)opencfw_em9305_radio_peer_set_303cc0(kind,low,high,(uintptr_t)pair);
+   }else {*(volatile uint32_t *)(uintptr_t)0x803c08u=0u;*(volatile uint32_t *)(uintptr_t)0x803c04u=0u;}
+  }else {
+   pair[0]=*(volatile uint32_t *)(record+84u);pair[1]=*(volatile uint32_t *)(record+88u);
+   high=*(volatile uint32_t *)(extra+20u);low=*(volatile uint32_t *)(extra+16u);
+   kind=*(volatile uint8_t *)(record+187u);
+   uint32_t previous=*(volatile uint32_t *)(record+80u);
+   uint32_t found=opencfw_em9305_radio_peer_pair_303a40(kind,low,high,(uintptr_t)pair);
+   if(found!=0u){identity=1u;*(volatile uint32_t *)(uintptr_t)0x803c08u=pair[1];*(volatile uint32_t *)(uintptr_t)0x803c04u=pair[0];}
+   else {identity=(previous>>1u)&1u;*(volatile uint32_t *)(uintptr_t)0x803c08u=0u;*(volatile uint32_t *)(uintptr_t)0x803c04u=0u;}
+  }
+  output=*(volatile uint32_t *)(record+104u);
+  (void)opencfw_em9305_radio_address_write_3045e8(output+2u,pair[0],pair[1]);
+  *(volatile uint8_t *)(descriptor+2u)=(uint8_t)identity;
+ }
+ output=*(volatile uint32_t *)(record+104u);
+ (void)opencfw_em9305_radio_encode_3239d4(output,descriptor);
+ offset=(uint32_t)(uint16_t)index*912u;
+ uintptr_t freshbase=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uint32_t stamp=origin+(count<<3u);
+ uintptr_t originalslot=base+offset;
+ uint32_t slotindex=opencfw_em9305_associated_slot_sdiv((uint32_t)(slot-freshbase),912u);
+ uint32_t period=*(volatile uint16_t *)(originalslot+266u);
+ uint32_t elapsed=opencfw_em9305_radio_schedule_313424((uint32_t)(uint16_t)period*1250u,(uint8_t)slotindex,stamp+1832u,0u,0u);
+ struct opencfw_em9305_native_product_pair product=opencfw_em9305_native_mpydu_329154(elapsed,0x1a36e3u);
+ period=*(volatile uint16_t *)(originalslot+266u);
+ uint32_t scaled=((product.high<<1u)|(product.low>>31u))&0xffffu;
+ uint32_t quotient=opencfw_em9305_schedule_remu(scaled,period);
+ output=*(volatile uint32_t *)(record+104u);
+ uint32_t duration=(uint32_t)(uint16_t)period*1250u;
+ *(volatile uint8_t *)(output+22u)=(uint8_t)quotient;
+ uint32_t remainder=opencfw_em9305_schedule_remu(elapsed,duration);
+ output=*(volatile uint32_t *)(record+104u);
+ *(volatile uint8_t *)(output+23u)=(uint8_t)(quotient>>8u);
+ uint32_t next=remainder+stamp;
+ uint32_t type=*(volatile uint8_t *)(descriptor+1u);
+ next+=1832u;
+ *(volatile uint16_t *)(uintptr_t)0x803c00u=(uint16_t)quotient;
+ *(volatile uint32_t *)(originalslot+24u)=next;
+ uint32_t enabled=0u;
+ if(type==1u)enabled=(*(volatile uint8_t *)input&32u)!=0u;
+ *(volatile uint8_t *)(uintptr_t)0x803c11u=(uint8_t)enabled;
+ return 1u;
+}
+
+/* Native initializer registration identities. These extern functions are
+ * referenced only by address; their signatures/bodies remain genuine gates. */
+extern uint32_t opencfw_em9305_init_registered_31e8fc(uintptr_t);
+extern uint32_t opencfw_em9305_init_registered_321608(uintptr_t);
+extern void opencfw_em9305_init_registered_32182c(void);
+extern uint32_t opencfw_em9305_init_registered_322d68(uintptr_t,uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_init_registered_32613c(uintptr_t);
+extern uint32_t opencfw_em9305_init_registered_3263ec(uintptr_t);
+extern void opencfw_em9305_init_registered_32ce04(void);
+extern void opencfw_em9305_init_registered_3266f8(void);
+extern uint32_t opencfw_em9305_init_registered_324fb4(uintptr_t);
+/* Native307cb8..307cc2 equality getter, no incoming-argument use. */
+uint32_t opencfw_em9305_init_state_one_307cb8(void)
+{return *(volatile uint8_t *)(uintptr_t)0x8051a4u==1u;}
+/* Native307c18..307c5a. Delayed slot zero occurs on both version branches. */
+uint32_t opencfw_em9305_init_lower_307c18(uint32_t incoming)
+{
+ (void)incoming;uintptr_t cfg=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t version=*(volatile uint8_t *)(cfg+4u);
+ *(volatile uint32_t *)(uintptr_t)0x80297cu=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_31e8fc;
+ *(volatile uint32_t *)(uintptr_t)0x80130cu=(uint32_t)(uintptr_t)opencfw_em9305_init_state_one_307cb8;
+ *(volatile uint32_t *)(uintptr_t)0x805228u=0u;
+ if(version<9u)return version;
+ uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=flags|(1u<<13u);
+ return 0x805b30u;
+}
+/* Native307cc8..307d0a. Callback identity stores precede version load. */
+uint32_t opencfw_em9305_init_lower_307cc8(uint32_t incoming)
+{
+ (void)incoming;uintptr_t cfg=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint32_t *)(uintptr_t)0x802984u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_321608;
+ uint32_t version=*(volatile uint8_t *)(cfg+4u);
+ *(volatile uint32_t *)(uintptr_t)0x805230u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_32182c;
+ if(version>=9u){uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;*(volatile uint32_t *)(uintptr_t)0x805b30u=flags|(1u<<13u);}
+ *(volatile uint16_t *)(uintptr_t)0x805b22u=784u;
+ return 0x805b0cu;
+}
+/* Native307d2c..307d60, native capability bit25 threshold10. */
+uint32_t opencfw_em9305_init_lower_307d2c(uint32_t incoming)
+{
+ (void)incoming;uintptr_t cfg=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint32_t *)(uintptr_t)0x802980u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_322d68;
+ uint32_t version=*(volatile uint8_t *)(cfg+4u);
+ *(volatile uint32_t *)(uintptr_t)0x80522cu=0u;
+ if(version<10u)return version;
+ uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=flags|(1u<<25u);
+ return 0x805b30u;
+}
+/* Native307de8..307e2e, all five source relocation identities. */
+uint32_t opencfw_em9305_init_lower_307de8(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x8052bcu=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_32613c;
+ *(volatile uint32_t *)(uintptr_t)0x8052c0u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_3263ec;
+ *(volatile uint32_t *)(uintptr_t)0x8056d8u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_32ce04;
+ *(volatile uint32_t *)(uintptr_t)0x8052c4u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_3266f8;
+ *(volatile uint32_t *)(uintptr_t)0x8051f4u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_324fb4;
+ return 0x8051f4u;
+}
+
+/* Native334496: seven consumer-classified response data-type bytes. */
+const uint8_t opencfw_em9305_init_response_types_334496[7]={2u,1u,3u,1u,1u,1u,4u};
+/* Complete native326a84..326aa6. */
+uint32_t opencfw_em9305_init_response_packet_326a84(uintptr_t record)
+{
+ uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(2u);
+ if(packet==0u)return 0u;
+ *(volatile uint8_t *)packet=7u;
+ *(volatile uint8_t *)(packet+1u)=*(volatile uint8_t *)(uintptr_t)0x802818u;
+ return opencfw_em9305_phy_packet_send_32d32c(record,packet);
+}
+/* Complete native324fb4..3250f2. Holes in allocated event remain unwritten. */
+uint32_t opencfw_em9305_init_registered_324fb4(uintptr_t record)
+{
+ uintptr_t root=0x802818u;
+ uint32_t high=*(volatile uint32_t *)(root+36u),low=*(volatile uint32_t *)(root+32u);
+ uint32_t kind=*(volatile uint8_t *)(root+29u),role=*(volatile uint8_t *)(root+28u);
+ uint32_t duplicate=opencfw_em9305_command_duplicate_307c5c(role,kind,low,high);
+ if(duplicate!=0u)return duplicate;
+ uint32_t capacity=*(volatile uint8_t *)(record+614u),type=*(volatile uint8_t *)root;
+ if(capacity==0u)goto reject;
+ uint32_t features=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t requested=*(volatile uint8_t *)(root+31u);
+ uint32_t allowed=((features>>9u)&4u)|((features&(1u<<8u))!=0u?3u:1u);
+ if((requested&~allowed)!=0u||requested>=5u||(0x16u&(1u<<requested))==0u)goto reject;
+ if(type==42u){
+  uintptr_t config=0x802848u;
+  uint32_t a=*(volatile uint8_t *)config;
+  if(a>=16u)goto packet_reject;
+  uint32_t b=*(volatile uint8_t *)(config+1u);
+  if(b<6u)goto packet_reject;
+  a=*(volatile uint8_t *)(config+2u);
+  if(a==0u||a==255u||a>=b)goto packet_reject;
+  a=*(volatile uint8_t *)(config+3u);
+  if(a<2u)goto packet_reject;
+ }
+ uintptr_t event=opencfw_em9305_wsf_event_allocate(56u);
+ if(event==0u)goto terminate;
+ *(volatile uint16_t *)(event+2u)=268u;
+ uint32_t half=*(volatile uint16_t *)(root+4u);
+ *(volatile uint16_t *)(event+4u)=(uint16_t)half;
+ (void)opencfw_em9305_memcpy((void *)(event+6u),(const void *)(root+6u),18u);
+ uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ half=*(volatile uint16_t *)(record+262u);
+ uint32_t id=opencfw_em9305_associated_slot_sdiv((uint32_t)(record-base),912u);
+ *(volatile uint16_t *)(event+24u)=(uint8_t)id;
+ uint32_t value=*(volatile uint16_t *)(root+24u);
+ *(volatile uint16_t *)(event+28u)=(uint16_t)half;
+ *(volatile uint16_t *)(event+26u)=(uint16_t)value;
+ value=*(volatile uint16_t *)(root+26u);*(volatile uint16_t *)(event+30u)=(uint16_t)value;
+ value=*(volatile uint8_t *)(root+28u);*(volatile uint8_t *)(event+32u)=(uint8_t)value;
+ value=*(volatile uint8_t *)(root+29u);*(volatile uint8_t *)(event+33u)=(uint8_t)value;
+ value=*(volatile uint8_t *)(root+30u);*(volatile uint8_t *)(event+34u)=(uint8_t)value;
+ value=*(volatile uint8_t *)(root+31u);uint32_t index=value-2u;
+ value=index<7u?opencfw_em9305_init_response_types_334496[(int8_t)index]:1u;
+ *(volatile uint8_t *)(event+35u)=(uint8_t)value;
+ high=*(volatile uint32_t *)(root+36u);low=*(volatile uint32_t *)(root+32u);type=*(volatile uint8_t *)root;
+ *(volatile uint32_t *)(event+40u)=high;*(volatile uint32_t *)(event+36u)=low;
+ value=*(volatile uint16_t *)(root+40u);*(volatile uint16_t *)(event+44u)=(uint16_t)value;
+ value=*(volatile uint32_t *)(root+44u);*(volatile uint32_t *)(event+48u)=value;
+ value=*(volatile uint8_t *)(root+48u);*(volatile uint8_t *)(event+52u)=(uint8_t)value;
+ value=*(volatile uint8_t *)(root+49u);*(volatile uint8_t *)(event+53u)=(uint8_t)value;
+ value=*(volatile uint8_t *)(root+50u);uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint8_t *)(event+54u)=(uint8_t)value;
+ value=*(volatile uint8_t *)(root+51u);
+ *(volatile uint8_t *)(event+46u)=type==42u;
+ *(volatile uint8_t *)(event+55u)=(uint8_t)value;
+ (void)opencfw_em9305_wsf_task_message_send(handler,event);
+ goto terminate;
+packet_reject:
+ (void)opencfw_em9305_init_response_packet_326a84(record);goto terminate;
+reject:
+ if(type==42u)(void)opencfw_em9305_init_response_packet_326a84(record);
+terminate:
+ return opencfw_em9305_receive_terminate_325c08(record,110u);
+}
+
+/* Native334cac: four state rows, six event columns, typed source identities.
+ * Observed callback inputs R0=callee,R1=24*state+4*event,R2=state;
+ * ambient higher-register ABI remains explicitly unqualified. */
+typedef uint32_t (*opencfw_em9305_init_secondary_action)(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_secondary_action_318fc0(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_secondary_action_318fe8(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_secondary_action_319080(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_secondary_action_319094(uintptr_t,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_secondary_action_3190e0(uintptr_t,uint32_t,uint32_t);
+const opencfw_em9305_init_secondary_action opencfw_em9305_init_secondary_actions_334cac[24]={
+0,opencfw_em9305_init_secondary_action_318fe8,0,0,0,0,opencfw_em9305_init_secondary_action_318fc0,0,opencfw_em9305_init_secondary_action_318fc0,opencfw_em9305_init_secondary_action_319094,opencfw_em9305_init_secondary_action_319080,0,0,0,0,0,0,opencfw_em9305_init_secondary_action_3190e0,0,0,0,0,0,opencfw_em9305_init_secondary_action_3190e0};
+const uint8_t opencfw_em9305_init_secondary_transitions_335790[24]={0u,1u,0u,0u,0u,0u,3u,1u,2u,2u,0u,1u,2u,2u,2u,2u,2u,0u,3u,3u,3u,3u,0u,0u};
+/* Complete native31e90c..31e93c. Fresh state is read after action. */
+uint32_t opencfw_em9305_init_secondary_dispatch_31e90c(uint32_t event)
+{
+ uint32_t state=*(volatile uint8_t *)(uintptr_t)0x8051a4u;
+ opencfw_em9305_init_secondary_action action=opencfw_em9305_init_secondary_actions_334cac[state*6u+event];
+ if(action!=0){(void)action((uintptr_t)action,state*24u+event*4u,state);state=*(volatile uint8_t *)(uintptr_t)0x8051a4u;}
+ uint32_t next=opencfw_em9305_init_secondary_transitions_335790[state*6u+event];
+ *(volatile uint8_t *)(uintptr_t)0x8051a4u=(uint8_t)next;
+ return next;
+}
+/* Complete native31e8fc..31e908 dispatch entry. */
+uint32_t opencfw_em9305_init_registered_31e8fc(uintptr_t message)
+{
+ *(volatile uint32_t *)(uintptr_t)0x805c80u=(uint32_t)message;
+ uint32_t event=*(volatile uint8_t *)(message+3u);
+ return opencfw_em9305_init_secondary_dispatch_31e90c(event);
+}
+/* Complete native319080..31908e clearing return preserves prior byte. */
+uint32_t opencfw_em9305_init_secondary_action_319080(uintptr_t incoming,uint32_t offset,uint32_t state)
+{
+ (void)incoming;(void)offset;(void)state;
+ uint32_t prior=*(volatile uint8_t *)(uintptr_t)0x8051a5u;
+ if(prior!=0u)*(volatile uint8_t *)(uintptr_t)0x8051a5u=0u;
+ return prior;
+}
+
+/* Complete native325d50..325d72: delayed reason capture precedes allocation. */
+uint32_t opencfw_em9305_init_secondary_message_325d50(uintptr_t record,uint32_t reason)
+{
+ uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
+ if(message==0u)return 0u;
+ uint32_t event=*(volatile uint8_t *)(record+9u);
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ *(volatile uint8_t *)(message+3u)=(uint8_t)reason;
+ *(volatile uint8_t *)(message+2u)=(uint8_t)event;
+ return opencfw_em9305_wsf_task_message_send(handler,message);
+}
+/* Complete native318fc0..318fe6, callback incoming regs unused. */
+uint32_t opencfw_em9305_init_secondary_action_318fc0(uintptr_t incoming,uint32_t offset,uint32_t state)
+{
+ (void)incoming;(void)offset;(void)state;
+ uintptr_t root=0x8051a4u;
+ uintptr_t record=*(volatile uint32_t *)(root+20u);
+ uint32_t marked=*(volatile uint8_t *)(record+603u);
+ if(marked==0u)*(volatile uint8_t *)(record+4u)=1u;
+ uint32_t notify=*(volatile uint8_t *)(root+1u);
+ if(notify!=0u){*(volatile uint8_t *)(record+3u)=1u;return opencfw_em9305_ll_schedule_notify_313354(record+48u);}
+ return opencfw_em9305_init_secondary_message_325d50(record,5u);
+}
+
+/* Complete native316e74..316f4c, six fixed784-byte slots; DSP MPYWHL
+ * decoded in authenticated little-endian ARC dump. Fresh config after reset. */
+uint32_t opencfw_em9305_init_secondary_allocate_316e74(void)
+{
+ uint32_t index;uintptr_t record=0u;
+ for(index=0u;index<6u;index++){
+  uintptr_t candidate=0x803d78u+index*784u;
+  if(*(volatile uint8_t *)candidate==0u){record=candidate;break;}
+ }
+ if(record==0u)return 0u;
+ (void)opencfw_em9305_memset((void *)record,0u,784u);
+ uintptr_t first=0x803e90u+index*784u,second=0x804040u+index*784u;
+ *(volatile uint16_t *)(first-172u)=257u;
+ uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t option=*(volatile uint8_t *)(uintptr_t)0x805acau;
+ uint32_t context=*(volatile uint32_t *)(uintptr_t)(0x803d58u+index*4u);
+ *(volatile uint8_t *)second=(uint8_t)handler;
+ *(volatile uint8_t *)record=1u;
+ *(volatile uint16_t *)(second-6u)=1037u;
+ *(volatile uint16_t *)(second-8u)=(uint16_t)index;
+ *(volatile uint8_t *)(second+64u)=(uint8_t)option;
+ *(volatile uint32_t *)(first-240u)=context;
+ uintptr_t cursor=first;
+ for(unsigned i=0u;i<15u;i++){*(volatile uint16_t *)cursor=4095u;cursor+=2u;}
+ uintptr_t cfg=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint16_t *)(first+320u)=0u;
+ uint32_t version=*(volatile uint8_t *)(cfg+4u);
+ *(volatile uint8_t *)(second-110u)=0u;
+ if(version>=13u){
+  uintptr_t extra=*(volatile uint32_t *)(uintptr_t)(0x805c44u+index*4u);
+  if(extra!=0u){
+   *(volatile uint32_t *)(second+68u)=(uint32_t)extra;
+   (void)opencfw_em9305_memset((void *)extra,0u,584u);
+   extra=*(volatile uint32_t *)(second+68u);
+   uint32_t pointer=*(volatile uint32_t *)(uintptr_t)0x805cecu;
+   *(volatile uint8_t *)(extra+96u)=1u;
+   *(volatile uint32_t *)(extra+92u)=pointer;
+  }
+ }
+ return (uint32_t)record;
+}
+
+extern uint32_t opencfw_em9305_init_secondary_start_3213f8(uintptr_t);
+/* Complete native30e4ac..30e4b8 byte count helper, native R0 is address. */
+uint32_t opencfw_em9305_init_secondary_count_up_30e4ac(void)
+{
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a77u;
+ *(volatile uint8_t *)(uintptr_t)0x805a77u=(uint8_t)(count+1u);
+ return 0x805a77u;
+}
+/* Complete native318fe8..31907e source creation action. */
+uint32_t opencfw_em9305_init_secondary_action_318fe8(uintptr_t incoming,uint32_t offset,uint32_t state)
+{
+ (void)incoming;(void)offset;(void)state;
+ uintptr_t message=*(volatile uint32_t *)(uintptr_t)0x805c80u;
+ (void)opencfw_em9305_common_request_30455c(1u);
+ uint32_t flag=*(volatile uint8_t *)(message+4u);
+ if(flag!=0u){(void)opencfw_em9305_init_secondary_count_up_30e4ac();flag=*(volatile uint8_t *)(message+4u);}
+ uint32_t high=*(volatile uint32_t *)(message+12u),low=*(volatile uint32_t *)(message+8u);
+ uint32_t b=*(volatile uint8_t *)(message+7u),a=*(volatile uint8_t *)(message+6u),option=*(volatile uint8_t *)(message+21u);
+ uintptr_t root=0x8051a4u;
+ *(volatile uint8_t *)(root+4u)=(uint8_t)flag;
+ *(volatile uint32_t *)(root+12u)=high;*(volatile uint32_t *)(root+8u)=low;
+ *(volatile uint8_t *)(root+6u)=(uint8_t)b;*(volatile uint8_t *)(root+5u)=(uint8_t)a;
+ *(volatile uint8_t *)(root+16u)=(uint8_t)option;
+ uintptr_t record=opencfw_em9305_init_secondary_allocate_316e74();
+ if(record!=0u){
+  a=*(volatile uint8_t *)(message+6u);uint32_t period=*(volatile uint16_t *)(message+18u);
+  *(volatile uint32_t *)(root+20u)=(uint32_t)record;
+  high=*(volatile uint32_t *)(message+12u);low=*(volatile uint32_t *)(message+8u);
+  flag=*(volatile uint8_t *)(message+4u);b=*(volatile uint8_t *)(message+7u);
+  uint32_t half=*(volatile uint16_t *)(message+16u),enabled=*(volatile uint8_t *)(message+5u),other=*(volatile uint8_t *)(message+20u);
+  uintptr_t extra=record+624u;
+  *(volatile uint8_t *)(extra+1u)=(uint8_t)a;
+  period=(uint32_t)(uint16_t)period*10u;
+  *(volatile uint8_t *)extra=(uint8_t)flag;
+  enabled=enabled!=0u;other=other!=0u;
+  *(volatile uint8_t *)(record+9u)=11u;
+  *(volatile uint8_t *)(extra+2u)=(uint8_t)b;
+  *(volatile uint16_t *)(extra-8u)=(uint16_t)half;
+  *(volatile uint32_t *)(record+632u)=high;*(volatile uint32_t *)(record+628u)=low;
+  *(volatile uint8_t *)(record+6u)=(uint8_t)enabled;*(volatile uint8_t *)(record+7u)=(uint8_t)other;
+  *(volatile uint32_t *)(record+620u)=period;
+ }else record=*(volatile uint32_t *)(root+20u);
+ (void)opencfw_em9305_init_secondary_start_3213f8(record);
+ return opencfw_em9305_command_count_30e4bc();
+}
+
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_callback_321648(uintptr_t);
+extern uint32_t opencfw_em9305_callback_321c30(uintptr_t);
+extern uint32_t opencfw_em9305_callback_321958(uintptr_t);
+/* Native3213ec..3213f6: preserve original R0, mark referenced record. */
+uint32_t opencfw_em9305_callback_3213ec(uintptr_t object)
+{
+ uintptr_t record=*(volatile uint32_t *)(object+36u);
+ *(volatile uint8_t *)(record+8u)=1u;
+ return opencfw_em9305_callback_321648(object);
+}
+/* Native3213f8..32144c; callback pointers are genuine linker identities. */
+uint32_t opencfw_em9305_init_secondary_start_3213f8(uintptr_t record)
+{
+ (void)opencfw_em9305_memset((void *)(record+48u),0u,148u);
+ *(volatile uint8_t *)(record+74u)=1u;
+ *(volatile uint8_t *)(record+72u)=1u;
+ *(volatile uint8_t *)(record+96u)=9u;
+ *(volatile uint32_t *)(record+80u)=(uint32_t)(uintptr_t)opencfw_em9305_callback_3213ec;
+ *(volatile uint32_t *)(record+76u)=(uint32_t)(uintptr_t)opencfw_em9305_callback_321648;
+ *(volatile uint32_t *)(record+200u)=(uint32_t)(uintptr_t)opencfw_em9305_callback_321c30;
+ *(volatile uint32_t *)(record+196u)=(uint32_t)(uintptr_t)opencfw_em9305_callback_321958;
+ *(volatile uint32_t *)(record+84u)=(uint32_t)record;
+ *(volatile uint32_t *)(record+92u)=(uint32_t)(record+96u);
+ *(volatile uint8_t *)(record+2u)=0u;
+ *(volatile uint8_t *)(record+603u)=0u;
+ *(volatile uint32_t *)(record+212u)=0u;
+ return 0u;
+}
+
+extern uint32_t opencfw_em9305_init_secondary_fill_324768(uintptr_t,uint8_t *);
+extern uint32_t opencfw_em9305_init_secondary_event_30e928(uint32_t,uint32_t,uint8_t *,uint32_t);
+/* Full native319094..3190dc. Child324768 owns stack response content;
+ * no fabricated zero fill, slot identity uses signed native DIV then EXTB. */
+uint32_t opencfw_em9305_init_secondary_action_319094(uintptr_t incoming,uint32_t offset,uint32_t state)
+{
+ (void)incoming;(void)offset;(void)state;
+ uintptr_t root=0x8051a4u;
+ if(*(volatile uint8_t *)(root+1u)!=0u){
+  uintptr_t record=*(volatile uint32_t *)(root+20u);
+  *(volatile uint8_t *)(record+4u)=0u;
+  *(volatile uint8_t *)(record+3u)=1u;
+  (void)opencfw_em9305_ll_schedule_notify_313354(record+48u);
+  *(volatile uint8_t *)(root+1u)=0u;
+ }
+ uint8_t response[20];
+ uintptr_t record=*(volatile uint32_t *)(root+20u);
+ (void)opencfw_em9305_init_secondary_fill_324768(record,response);
+ record=*(volatile uint32_t *)(root+20u);
+ int32_t difference=(int32_t)((uint32_t)record-0x803d78u);
+ uint32_t slot=(uint8_t)(difference/784);
+ uint32_t flag=*(volatile uint8_t *)(record+777u);
+ return opencfw_em9305_init_secondary_event_30e928(62u,slot,response,flag);
+}
+
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,uint32_t);
+extern uintptr_t opencfw_em9305_radio_address_copy_304604(uintptr_t,uintptr_t);
+extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
+/* Complete324768..3247d0; output18B, native R0 is final source byte. */
+uint32_t opencfw_em9305_init_secondary_fill_324768(uintptr_t record,uint8_t *output)
+{
+ (void)opencfw_em9305_memset(output,0u,18u);
+ uint32_t kind=*(volatile uint8_t *)(record+716u);
+ uint32_t high=*(volatile uint32_t *)(record+724u);
+ uint32_t low=*(volatile uint32_t *)(record+720u);
+ output[0]=(uint8_t)kind;
+ (void)opencfw_em9305_radio_address_write_3045e8((uintptr_t)(output+2u),low,high);
+ uint32_t time=*(volatile uint32_t *)(record+252u);
+ uint32_t mode=*(volatile uint8_t *)(record+717u);
+ uint64_t product=(uint64_t)time*0x1a36e3u;
+ uint32_t marker=*(volatile uint8_t *)(record+256u);
+ uint32_t option=*(volatile uint8_t *)(record+776u);
+ output[1]=(uint8_t)mode;output[12]=(uint8_t)marker;
+ output[8]=(uint8_t)option;
+ *(uint16_t *)(void *)(output+10u)=(uint16_t)(product>>31u);
+ uint32_t value=*(volatile uint8_t *)(record+512u);output[13]=(uint8_t)value;
+ value=*(volatile uint8_t *)(record+513u);output[14]=(uint8_t)value;
+ value=*(volatile uint8_t *)(record+514u);output[15]=(uint8_t)value;
+ value=*(volatile uint8_t *)(record+515u);output[16]=(uint8_t)value;
+ return value;
+}
+/* Complete30e928..30e984. Holes5,17,25..27 are unowned native stack
+ * bytes; source owns only fields initialized by native stores. */
+uint32_t opencfw_em9305_init_secondary_event_30e928(uint32_t code,uint32_t slot,uint8_t *input,uint32_t enabled)
+{
+ _Alignas(4) uint8_t event[28];
+ event[4]=(uint8_t)code;*(uint32_t *)(void *)event=0x1e0000u;
+ uint32_t first=*(uint16_t *)(void *)input;input+=2u;
+ *(uint16_t *)(void *)(event+6u)=(uint16_t)slot;
+ *(uint16_t *)(void *)(event+8u)=(uint16_t)first;
+ uint32_t option=input[6],time=*(uint16_t *)(void *)(input+8u),marker=input[10];
+ *(uint16_t *)(void *)(event+10u)=0u;*(uint16_t *)(void *)(event+12u)=0u;*(uint16_t *)(void *)(event+14u)=0u;
+ event[16]=(uint8_t)option;*(uint16_t *)(void *)(event+18u)=(uint16_t)time;
+ event[20]=(uint8_t)marker;uint32_t flag=enabled!=0u?input[11]:0u;
+ uint32_t pair=*(uint16_t *)(void *)(input+12u),last=input[14];
+ event[21]=(uint8_t)flag;*(uint16_t *)(void *)(event+22u)=(uint16_t)pair;event[24]=(uint8_t)last;
+ (void)opencfw_em9305_radio_address_copy_304604((uintptr_t)(event+10u),(uintptr_t)input);
+ return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
+}
+
+extern uint32_t opencfw_em9305_common_release_304588(uint32_t);
+extern uint32_t opencfw_em9305_command_count_down_30e48c(void);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
+extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
+extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_init_secondary_event_30e928(uint32_t,uint32_t,uint8_t *,uint32_t);
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+uint32_t opencfw_em9305_init_secondary_count_down_30e47c(void)
+{
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a77u;
+ *(volatile uint8_t *)(uintptr_t)0x805a77u=(uint8_t)(count-1u);
+ return 0x805a77u;
+}
+/* Full321450..32148c; typed callback is original record slot+12. */
+uint32_t opencfw_em9305_init_secondary_cleanup_321450(uintptr_t record)
+{
+ (void)opencfw_em9305_common_release_304588(1u);
+ uintptr_t callback=*(volatile uint32_t *)(record+12u);
+ if(callback!=0u){
+  int32_t difference=(int32_t)((uint32_t)record-0x803d78u);
+  int32_t quotient=difference/784;
+  (void)((uint32_t (*)(uint32_t,uint32_t,uintptr_t))callback)((uint8_t)quotient,(uint32_t)quotient,callback);
+ }
+ uint32_t flagged=*(volatile uint8_t *)(record+624u);
+ if(flagged!=0u)(void)opencfw_em9305_init_secondary_count_down_30e47c();
+ (void)opencfw_em9305_command_count_down_30e48c();
+ uintptr_t pending=*(volatile uint32_t *)(record+604u);
+ uint32_t result=(uint32_t)pending;
+ if(pending!=0u)result=opencfw_em9305_wsf_event_release(pending);
+ *(volatile uint8_t *)record=0u;
+ return result;
+}
+/* Full3190e0..3191aa. Source preserves fresh-root record loads around
+ * message children and native R0 at each return. */
+uint32_t opencfw_em9305_init_secondary_action_3190e0(uintptr_t incoming,uint32_t offset,uint32_t state)
+{
+ (void)incoming;(void)offset;(void)state;uintptr_t root=0x8051a4u;
+ if(*(volatile uint8_t *)(root+1u)!=0u)*(volatile uint8_t *)(root+1u)=0u;
+ uintptr_t record=*(volatile uint32_t *)(root+20u);
+ (void)opencfw_em9305_init_secondary_cleanup_321450(record);
+ record=*(volatile uint32_t *)(root+20u);
+ _Alignas(4) uint8_t response[20];
+ if(*(volatile uint8_t *)(record+4u)!=0u){
+  (void)opencfw_em9305_memset(response,0u,18u);
+  uint32_t slot=(uint8_t)((int32_t)((uint32_t)record-0x803d78u)/784);
+  uint32_t flag=*(volatile uint8_t *)(record+777u);
+  (void)opencfw_em9305_init_secondary_event_30e928(68u,slot,response,flag);
+  record=*(volatile uint32_t *)(root+20u);
+ }
+ uint32_t armed=*(volatile uint8_t *)(record+603u);
+ if(armed==0u)return 0u;
+ uint32_t flags=*(volatile uint8_t *)(root+4u);
+ if((flags&1u)==0u){
+  (void)opencfw_em9305_memset(response,0u,18u);
+  uint32_t slot=(uint8_t)((int32_t)((uint32_t)record-0x803d78u)/784);
+  uint32_t flag=*(volatile uint8_t *)(record+777u);
+  (void)opencfw_em9305_init_secondary_event_30e928(26u,slot,response,flag);
+ }else{
+  uintptr_t message=opencfw_em9305_wsf_event_allocate(24u);
+  if(message!=0u){
+   *(volatile uint16_t *)(message+2u)=267u;
+   uint32_t high=*(volatile uint32_t *)(root+12u),b=*(volatile uint8_t *)(root+6u),a=*(volatile uint8_t *)(root+5u);
+   *(volatile uint32_t *)(message+12u)=high;
+   uint32_t freshflags=*(volatile uint8_t *)(root+4u),low=*(volatile uint32_t *)(root+8u);
+   *(volatile uint8_t *)(message+7u)=(uint8_t)b;*(volatile uint8_t *)(message+6u)=(uint8_t)a;
+   *(volatile uint8_t *)(message+4u)=(uint8_t)freshflags;*(volatile uint32_t *)(message+8u)=low;
+   uintptr_t freshrecord=*(volatile uint32_t *)(root+20u);
+   uint32_t enabled=*(volatile uint8_t *)(freshrecord+6u);*(volatile uint8_t *)(message+5u)=(uint8_t)enabled;
+   uint32_t period=*(volatile uint32_t *)(freshrecord+620u);*(volatile uint16_t *)(message+18u)=(uint16_t)period;
+   uint32_t half=*(volatile uint16_t *)(freshrecord+616u);*(volatile uint16_t *)(message+16u)=(uint16_t)half;
+   uint32_t option=*(volatile uint8_t *)(root+16u),handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+   *(volatile uint8_t *)(message+21u)=(uint8_t)option;
+   (void)opencfw_em9305_wsf_task_message_send(handler,message);
+  }
+ }
+ record=*(volatile uint32_t *)(root+20u);
+ *(volatile uint8_t *)(record+603u)=0u;
+ return (uint32_t)(record+603u);
+}
+
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+extern void opencfw_em9305_callback_3228a8(void);
+extern void opencfw_em9305_callback_3228f0(void);
+extern void opencfw_em9305_callback_3227e0(void);
+extern void opencfw_em9305_callback_3227a4(void);
+/* Full307d74..307dd4; R0 preserves low-version byte or high-version
+ * state address. Product/config read follows clear child. */
+uint32_t opencfw_em9305_init_lower_307d74(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x802958u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3228a8;
+ *(volatile uint32_t *)(uintptr_t)0x805204u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3228f0;
+ *(volatile uint32_t *)(uintptr_t)0x80289cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_3227e0;
+ *(volatile uint32_t *)(uintptr_t)0x802898u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3227a4;
+ (void)opencfw_em9305_memset((void *)0x804fd8u,0u,404u);
+ uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t version=*(volatile uint8_t *)(product+4u);
+ if(version<8u)return version;
+ uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=old|128u;
+ return 0x805b30u;
+}
+
+extern void opencfw_em9305_callback_32233c(void);
+extern void opencfw_em9305_callback_322184(void);
+extern void opencfw_em9305_callback_322178(void);
+extern void opencfw_em9305_callback_322580(void);
+extern void opencfw_em9305_callback_3225b0(void);
+extern void opencfw_em9305_callback_3246f8(void);
+extern uint32_t opencfw_em9305_callback_3042b4(uint32_t);
+extern uint32_t opencfw_em9305_callback_30425c(uintptr_t,uint32_t,uint32_t,uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_callback_3041e0(uintptr_t);
+extern uint32_t opencfw_em9305_callback_304214(uintptr_t,uintptr_t,uint32_t,uint32_t,uint32_t);
+/* Full3042e8..304320: callback registration, nativeR0 slot address. */
+uint32_t opencfw_em9305_init_child_3042e8(void)
+{
+ *(volatile uint32_t *)(uintptr_t)0x805c14u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3042b4;
+ *(volatile uint32_t *)(uintptr_t)0x805c10u=(uint32_t)(uintptr_t)opencfw_em9305_callback_30425c;
+ *(volatile uint32_t *)(uintptr_t)0x805c08u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3041e0;
+ *(volatile uint32_t *)(uintptr_t)0x805c0cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_304214;
+ return 0x805c0cu;
+}
+/* Full307e30..307ec4; loop post-stores six584-byte buffer identities. */
+uint32_t opencfw_em9305_init_lower_307e30(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x805c8cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32233c;
+ *(volatile uint32_t *)(uintptr_t)0x805c88u=(uint32_t)(uintptr_t)opencfw_em9305_callback_322184;
+ *(volatile uint32_t *)(uintptr_t)0x805c84u=(uint32_t)(uintptr_t)opencfw_em9305_callback_322178;
+ *(volatile uint32_t *)(uintptr_t)0x805c90u=(uint32_t)(uintptr_t)opencfw_em9305_callback_322580;
+ *(volatile uint32_t *)(uintptr_t)0x805c94u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3225b0;
+ (void)opencfw_em9305_init_child_3042e8();
+ *(volatile uint32_t *)(uintptr_t)0x805ca8u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3246f8;
+ for(uint32_t i=0u;i<6u;i++)*(volatile uint32_t *)(uintptr_t)(0x805c44u+4u*i)=0x801a1cu+584u*i;
+ uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t version=*(volatile uint8_t *)(product+4u);
+ if(version<13u)return version;
+ uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b34u;
+ *(volatile uint32_t *)(uintptr_t)0x805b34u=old|4096u;
+ return 0x805b34u;
+}
+
+extern void opencfw_em9305_callback_31c0e0(void);
+extern void opencfw_em9305_callback_324628(void);
+extern void opencfw_em9305_callback_326904(void);
+extern void opencfw_em9305_callback_323620(void);
+extern void opencfw_em9305_callback_324dd4(void);
+extern void opencfw_em9305_callback_324e3c(void);
+extern uint32_t opencfw_em9305_ll_command_pending_310634(void);
+extern uint32_t opencfw_em9305_radio_identity_control_303c9c(uint32_t);
+/* Full3080f8..308148; old state read before later callback stores. */
+uint32_t opencfw_em9305_init_lower_3080f8(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x8056bcu=(uint32_t)(uintptr_t)opencfw_em9305_callback_31c0e0;
+ *(volatile uint32_t *)(uintptr_t)0x803d48u=(uint32_t)(uintptr_t)opencfw_em9305_callback_31c0e0;
+ uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b34u;
+ *(volatile uint32_t *)(uintptr_t)0x805178u=(uint32_t)(uintptr_t)opencfw_em9305_callback_324628;
+ *(volatile uint32_t *)(uintptr_t)0x8052c8u=(uint32_t)(uintptr_t)opencfw_em9305_callback_326904;
+ *(volatile uint32_t *)(uintptr_t)0x805170u=(uint32_t)(uintptr_t)opencfw_em9305_callback_323620;
+ *(volatile uint32_t *)(uintptr_t)0x805b34u=old|14u;
+ return opencfw_em9305_ll_command_pending_310634();
+}
+/* Full30814c..308196; captured product before four ordered clears. */
+uint32_t opencfw_em9305_init_lower_30814c(uint32_t incoming)
+{
+ (void)incoming;uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ *(volatile uint32_t *)(uintptr_t)0x8051f0u=0u;
+ *(volatile uint32_t *)(uintptr_t)0x8051ecu=0u;
+ *(volatile uint32_t *)(uintptr_t)0x8051e8u=0u;
+ uint32_t version=*(volatile uint8_t *)(product+4u);
+ *(volatile uint32_t *)(uintptr_t)0x802968u=(uint32_t)(uintptr_t)opencfw_em9305_callback_324dd4;
+ *(volatile uint32_t *)(uintptr_t)0x8051e4u=0u;
+ if(version>=8u){uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;*(volatile uint32_t *)(uintptr_t)0x805b30u=old|64u;}
+ (void)opencfw_em9305_radio_identity_control_303c9c((uint32_t)(uintptr_t)opencfw_em9305_callback_324e3c);
+ *(volatile uint16_t *)(uintptr_t)0x8051eau=262u;
+ return 262u;
+}
+
+extern void opencfw_em9305_callback_31bbb0(void);
+extern void opencfw_em9305_callback_328d78(void);
+extern void opencfw_em9305_callback_32922c(void);
+extern uint32_t opencfw_em9305_callback_31ce10(void);
+extern uint32_t opencfw_em9305_init_child_3251dc(uint32_t);
+extern uint32_t opencfw_em9305_init_child_317498(void);
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+/* Full31b7d4..31b7e0, incoming R0 overwritten. */
+uint32_t opencfw_em9305_init_child_31b7d4(uint32_t incoming)
+{(void)incoming;return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)0x8028d0u,0u,128u);}
+/* Full30a0a4..30a0fe, children ordered before fresh product read. */
+uint32_t opencfw_em9305_init_lower_30a0a4(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x802894u=(uint32_t)(uintptr_t)opencfw_em9305_callback_31bbb0;
+ *(volatile uint32_t *)(uintptr_t)0x802990u=(uint32_t)(uintptr_t)opencfw_em9305_callback_328d78;
+ *(volatile uint32_t *)(uintptr_t)0x80523cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32922c;
+ (void)opencfw_em9305_init_child_3251dc((uint32_t)(uintptr_t)opencfw_em9305_callback_31ce10);
+ uint32_t result=opencfw_em9305_init_child_317498();
+ (void)opencfw_em9305_init_child_31b7d4(result);
+ uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t version=*(volatile uint8_t *)(product+4u);
+ if(version<11u)return version;
+ uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=old|0x40000000u;
+ return 0x805b30u;
+}
+
+extern void opencfw_em9305_callback_32bb9c(void);
+extern void opencfw_em9305_callback_32a218(void);
+extern void opencfw_em9305_callback_329844(void);
+extern void opencfw_em9305_callback_318f2c(void);
+extern void opencfw_em9305_callback_318c1c(void);
+extern uint32_t opencfw_em9305_mode_event_31bd78(uintptr_t,uint32_t);
+extern void opencfw_em9305_callback_32ae70(void);
+extern void opencfw_em9305_callback_32bc6c(void);
+extern void opencfw_em9305_callback_325984(void);
+extern void opencfw_em9305_callback_3189f4(void);
+extern void opencfw_em9305_callback_319890(void);
+extern void opencfw_em9305_callback_32a628(void);
+extern void opencfw_em9305_callback_32a5ac(void);
+extern uint32_t opencfw_em9305_callback_30fc20(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_callback_30fc24(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_child_3251dc(uint32_t);
+extern uint32_t opencfw_em9305_init_child_318ab8(uint32_t);
+/* Full30a1a0..30a278; authentic callback identities, no table aliases. */
+uint32_t opencfw_em9305_init_lower_30a1a0(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x802950u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32bb9c;
+ uint32_t prior=*(volatile uint32_t *)(uintptr_t)0x802954u;
+ *(volatile uint32_t *)(uintptr_t)0x805200u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32a218;
+ if(prior==0u)*(volatile uint32_t *)(uintptr_t)0x802954u=(uint32_t)(uintptr_t)opencfw_em9305_callback_329844;
+ prior=*(volatile uint32_t *)(uintptr_t)0x80280cu;
+ *(volatile uint32_t *)(uintptr_t)0x802878u=(uint32_t)(uintptr_t)opencfw_em9305_callback_318f2c;
+ *(volatile uint32_t *)(uintptr_t)0x80287cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_318c1c;
+ *(volatile uint32_t *)(uintptr_t)0x8056c8u=(uint32_t)(uintptr_t)opencfw_em9305_mode_event_31bd78;
+ *(volatile uint32_t *)(uintptr_t)0x8056a8u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32ae70;
+ if(prior==0u)*(volatile uint32_t *)(uintptr_t)0x80280cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32bc6c;
+ *(volatile uint32_t *)(uintptr_t)0x8027e0u=(uint32_t)(uintptr_t)opencfw_em9305_callback_325984;
+ uint32_t value=opencfw_em9305_init_child_3251dc((uint32_t)(uintptr_t)opencfw_em9305_callback_3189f4);
+ (void)opencfw_em9305_init_child_318ab8(value);
+ uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t version=*(volatile uint8_t *)(product+4u);
+ if(version<7u)return (uint32_t)product;
+ uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ value=old|14u;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
+ if(version==7u)return value;
+ uint32_t second=*(volatile uint32_t *)(uintptr_t)0x805b34u;
+ value=old|46u;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
+ if(version<9u)return value;
+ value=old|0x1002eu;*(volatile uint32_t *)(uintptr_t)0x805b34u=second;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
+ if(version==9u)return value;
+ value=old|0x501002eu;*(volatile uint32_t *)(uintptr_t)0x805b34u=second;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
+ if(version<12u)return value;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=value;*(volatile uint32_t *)(uintptr_t)0x805b34u=second|128u;
+ return value;
+}
+/* Full30a134..30a19a, then authentic fallthrough into30a1a0. */
+uint32_t opencfw_em9305_init_lower_30a134(uint32_t incoming)
+{
+ (void)incoming;uint32_t prior=*(volatile uint32_t *)(uintptr_t)0x80280cu;
+ *(volatile uint32_t *)(uintptr_t)0x8056a0u=(uint32_t)(uintptr_t)opencfw_em9305_callback_319890;
+ *(volatile uint32_t *)(uintptr_t)0x80569cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32a628;
+ if(prior==0u)*(volatile uint32_t *)(uintptr_t)0x80280cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32a5ac;
+ uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ uint32_t version=*(volatile uint8_t *)(product+4u);
+ *(volatile uint32_t *)(uintptr_t)0x8052ccu=(uint32_t)(uintptr_t)opencfw_em9305_callback_30fc20;
+ *(volatile uint32_t *)(uintptr_t)0x8052d0u=(uint32_t)(uintptr_t)opencfw_em9305_callback_30fc24;
+ uint32_t value=old|1u;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
+ if(version>=7u){value=old|17u;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;}
+ return opencfw_em9305_init_lower_30a1a0(value);
+}
+
+extern void opencfw_em9305_callback_32aa48(void);
+extern void opencfw_em9305_callback_327a54(void);
+extern void opencfw_em9305_callback_32bb40(void);
+extern void opencfw_em9305_callback_32ae3c(void);
+extern void opencfw_em9305_callback_32c148(void);
+extern uint32_t opencfw_em9305_callback_306cbc(uint32_t,uint32_t);
+extern uint32_t opencfw_em9305_init_child_3251dc(uint32_t);
+extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
+/* Full30a27c..30a29a; native MPYUW low halves, count is a byte. */
+uint32_t opencfw_em9305_init_child_30a27c(void)
+{
+ uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t output=*(volatile uint32_t *)(uintptr_t)0x805c38u;
+ uint32_t count=*(volatile uint8_t *)(product+12u);
+ return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)output,0u,count*2824u);
+}
+/* Full30a29c..30a324; version captured before flag stores/clear child. */
+uint32_t opencfw_em9305_init_lower_30a29c(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x802970u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32aa48;
+ *(volatile uint32_t *)(uintptr_t)0x802988u=(uint32_t)(uintptr_t)opencfw_em9305_callback_327a54;
+ *(volatile uint32_t *)(uintptr_t)0x80521cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32ae3c;
+ *(volatile uint32_t *)(uintptr_t)0x8028a0u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32c148;
+ (void)opencfw_em9305_init_child_3251dc((uint32_t)(uintptr_t)opencfw_em9305_callback_32bb40);
+ uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t version=*(volatile uint8_t *)(product+4u);
+ *(volatile uint32_t *)(uintptr_t)0x801300u=(uint32_t)(uintptr_t)opencfw_em9305_callback_306cbc;
+ if(version>=9u){
+  uint32_t first=*(volatile uint32_t *)(uintptr_t)0x805b30u|4096u;
+  *(volatile uint32_t *)(uintptr_t)0x805b30u=first;
+  if(version>=13u){
+   uint32_t second=*(volatile uint32_t *)(uintptr_t)0x805b34u;
+   *(volatile uint32_t *)(uintptr_t)0x805b30u=first;
+   *(volatile uint32_t *)(uintptr_t)0x805b34u=second|256u;
+   if(version!=13u){*(volatile uint32_t *)(uintptr_t)0x805b30u=first;*(volatile uint32_t *)(uintptr_t)0x805b34u=second|1280u;}
+  }
+ }
+ return opencfw_em9305_init_child_30a27c();
+}
+
+/* Native308630..308662: callback registration and ordered state publication. */
+extern uint32_t opencfw_em9305_init_callback_325450(void);
+extern uint32_t opencfw_em9305_init_callback_325474(void);
+uint32_t opencfw_em9305_init_registration_31408c(uint32_t callback)
+{
+ uint32_t count=*(volatile uint8_t *)(uintptr_t)0x80606cu;
+ if(count<=2u){
+  *(volatile uint8_t *)(uintptr_t)0x80606cu=(uint8_t)(count+1u);
+  *(volatile uint32_t *)(uintptr_t)(0x806060u+count*4u)=callback;
+ }
+ return callback;
+}
+uint32_t opencfw_em9305_init_lower_308630(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x8028a8u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_325450;
+ (void)opencfw_em9305_init_registration_31408c((uint32_t)(uintptr_t)opencfw_em9305_init_callback_325474);
+ uint32_t state=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ *(volatile uint8_t *)(uintptr_t)0x805b83u=0u;
+ state|=UINT32_C(1)<<27u;
+ *(volatile uint32_t *)(uintptr_t)0x805b30u=state;
+ return state;
+}
+/* Native309cb8..309cf6: four callback identities and tail buffer clear. */
+extern uint32_t opencfw_em9305_init_callback_327de0(uintptr_t,uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_init_callback_3280c8(void);
+extern uint32_t opencfw_em9305_init_callback_327dc8(void);
+extern void opencfw_em9305_init_callback_32c254(void);
+uint32_t opencfw_em9305_init_lower_309cb8(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x802960u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_327de0;
+ *(volatile uint32_t *)(uintptr_t)0x80520cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3280c8;
+ *(volatile uint32_t *)(uintptr_t)0x8028b0u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_327dc8;
+ *(volatile uint32_t *)(uintptr_t)0x8028a0u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32c254;
+ return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x8052d4u,0u,304u);
+}
+
+extern uint32_t opencfw_em9305_init_callback_30e840(uintptr_t,uint32_t);
+extern void opencfw_em9305_init_callback_32b61c(void);
+extern void opencfw_em9305_init_callback_32beb0(void);
+extern void opencfw_em9305_init_callback_32bfc4(void);
+extern void opencfw_em9305_init_callback_31ae84(void);
+extern uint32_t opencfw_em9305_init_callback_304430(uint32_t,uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_callback_3044e8(uintptr_t,uint32_t,uint32_t,uint32_t,uintptr_t);
+extern uint32_t opencfw_em9305_init_callback_3043ac(uint32_t,uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_callback_304468(uintptr_t,uintptr_t);
+extern void opencfw_em9305_init_callback_3183ec(void);
+extern void opencfw_em9305_init_callback_31836c(void);
+extern void opencfw_em9305_init_callback_3245ec(void);
+extern void opencfw_em9305_init_callback_32468c(void);
+extern void opencfw_em9305_init_callback_324698(void);
+extern void opencfw_em9305_init_callback_31810c(void);
+extern uint32_t opencfw_em9305_init_callback_31807c(uintptr_t);
+extern void opencfw_em9305_init_callback_318168(void);
+uint32_t opencfw_em9305_init_child_304324(void)
+{
+ *(volatile uint32_t *)(uintptr_t)0x805c20u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_304430;
+ *(volatile uint32_t *)(uintptr_t)0x805c28u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3044e8;
+ *(volatile uint32_t *)(uintptr_t)0x805c1cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3043ac;
+ *(volatile uint32_t *)(uintptr_t)0x805c24u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_304468;
+ return 0x805c24u;
+}
+uint32_t opencfw_em9305_init_lower_307ec8(uint32_t incoming)
+{
+ (void)incoming;
+ *(volatile uint32_t *)(uintptr_t)0x805cdcu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_30e840;
+ *(volatile uint32_t *)(uintptr_t)0x805cc4u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32b61c;
+ *(volatile uint32_t *)(uintptr_t)0x805cc8u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32beb0;
+ *(volatile uint32_t *)(uintptr_t)0x805cccu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32bfc4;
+ *(volatile uint32_t *)(uintptr_t)0x805c74u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31ae84;
+ (void)opencfw_em9305_init_child_304324();
+ uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uint32_t version=*(volatile uint8_t *)(product+4u);
+ *(volatile uint32_t *)(uintptr_t)0x805c60u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3183ec;
+ *(volatile uint32_t *)(uintptr_t)0x805c5cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31836c;
+ *(volatile uint32_t *)(uintptr_t)0x805c9cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3245ec;
+ *(volatile uint32_t *)(uintptr_t)0x805ca0u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32468c;
+ *(volatile uint32_t *)(uintptr_t)0x805ca4u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_324698;
+ *(volatile uint32_t *)(uintptr_t)0x805248u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31810c;
+ *(volatile uint32_t *)(uintptr_t)0x80299cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31807c;
+ if(version>=13u){
+  uint32_t state=*(volatile uint32_t *)(uintptr_t)0x805b34u;
+ *(volatile uint32_t *)(uintptr_t)0x8028acu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_318168;
+  state|=2048u;
+  *(volatile uint32_t *)(uintptr_t)0x805b34u=state;
+  return state;
+ }
+ return version;
 }

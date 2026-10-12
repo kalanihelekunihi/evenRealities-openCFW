@@ -5,6 +5,7 @@
  * comparison and length lowers.
  */
 #include <stdint.h>
+#include "resident_flash_api_data.h"
 
 extern uint32_t gx8002_resident_clock_frequency_25210(uint32_t module);
 extern int32_t gx8002_resident_flash_dispatch_otp_read_247f4(
@@ -40,7 +41,7 @@ int32_t gx8002_resident_flash_otp_mode_25d04(uint32_t *mode)
     *mode = UINT32_C(0x8002);
     uint32_t clock = gx8002_resident_clock_frequency_25210(13u);
     volatile const uint32_t *const initializer =
-        (volatile const uint32_t *)(uintptr_t)UINT32_C(0x20026504);
+        (volatile const uint32_t *)(const void *)gx8002_flash_api_26504;
     uintptr_t entry = *initializer;
     volatile uint8_t *descriptor =
         ((volatile uint8_t *(*)(uint32_t, uint32_t, uint32_t, uint32_t))entry)(

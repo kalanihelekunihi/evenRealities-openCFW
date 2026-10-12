@@ -1,0 +1,54 @@
+  318b78:	c2e8                	enter_s	[r13-r16,blink]
+  318b7a:	4528                	mov_s	r13,r1
+  318b7c:	893a                	ldb_s	r1,[r1,0x1a]
+  318b7e:	0947 0071           	brne.d.nt	r1,0x1,70	;0x318bc2
+  318b82:	4010                	mov_s	r16,r0
+  318b84:	850b                	ld_s	r0,[r13,0x2c]
+  318b86:	8800                	ldb_s	r0,[r0,0]
+  318b88:	b8a0                	bclr_s	r0,r0,0
+  318b8a:	083b 0111           	brne.nt	r0,0x4,58	;0x318bc2
+  318b8e:	1024 200e           	ld	r14,[r16,36]
+  318b92:	8e01                	ldb_s	r0,[r14,0x1]
+  318b94:	e816                	breq_s	r0,0,44	;0x318bc0
+  318b96:	85e9                	ld_s	r15,[r13,0x24]
+  318b98:	208a 0446           	mov	r0,401
+  318b9c:	660b                	ldb_s	r3,[r14,r0]
+  318b9e:	6708                	ldb_s	r0,[r15,r0]
+  318ba0:	0b21 0004           	brlo.nt	r3,r0,32	;0x318bc0
+  318ba4:	1785 170c           	ldh.as	r12,[r15,133]
+  318ba8:	1762 1601           	ld.as	r1,[r15,98]
+  318bac:	42c3 0000 09c4      	mov_s	r2,0x9c4
+  318bb2:	2a40 008b           	asl	r11,r2,0x2
+  318bb6:	7c4a                	mpyuw_s	r12,r12,r2
+  318bb8:	311c 02c0           	
+  318bbc:	080b 0305           	brhs.nt	r0,r12,10	;0x318bc6
+  318bc0:	40b1                	mov_s	r16,r13
+  318bc2:	4002                	mov_s	r0,r16
+  318bc4:	c6c8                	leave_s	[r13-r16,blink,pcl]
+  318bc6:	ebff                	brne_s	r3,0,-2	;0x318bc2
+  318bc8:	1685 1700           	ldh.as	r0,[r14,133]
+  318bcc:	1662 1601           	ld.as	r1,[r14,98]
+  318bd0:	7a0a                	mpyuw_s	r2,r2,r0
+  318bd2:	311c 02c0           	
+  318bd6:	08ef 80a4           	brlo.d.nt	r0,r2,-18	;0x318bc2
+  318bda:	208a 0ec9           	mov	r0,635
+  318bde:	6709                	ldb_s	r1,[r15,r0]
+  318be0:	218c 8fc3           	cmp	r1,255
+  318be4:	f5ee                	bne_s	-36	;0x318bc0
+  318be6:	6608                	ldb_s	r0,[r14,r0]
+  318be8:	208c 8fc3           	cmp	r0,255
+  318bec:	f5eb                	bne_s	-42	;0x318bc2
+  318bee:	0d6a fdaf           	bl.d	-19096	;0x314154
+  318bf2:	2756 1b40           	add3	r0,r15,0x2d
+  318bf6:	e866                	breq_s	r0,0,-52	;0x318bc0
+  318bf8:	0d5e fdaf           	bl.d	-19108	;0x314154
+  318bfc:	2656 1b40           	add3	r0,r14,0x2d
+  318c00:	e861                	breq_s	r0,0,-62	;0x318bc2
+  318c02:	1785 1702           	ldh.as	r2,[r15,133]
+  318c06:	1685 1700           	ldh.as	r0,[r14,133]
+  318c0a:	2a41 0081           	lsr	r1,r2,0x2
+  318c0e:	08b5 8064           	brlo.d.nt	r0,r1,-76	;0x318bc0
+  318c12:	b822                	lsr_s	r0,r0,0x2
+  318c14:	0aad 8005           	brhs.nt	r2,r0,-84	;0x318bc0
+  318c18:	f1d5                	b_s	-86	;0x318bc2
+  318c1a:	78e0                	nop_s

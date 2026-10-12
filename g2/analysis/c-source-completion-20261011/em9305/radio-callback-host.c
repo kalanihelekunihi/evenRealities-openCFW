@@ -64,6 +64,7 @@ uint32_t opencfw_em9305_radio_callback_32d7f4(uintptr_t record)
  return result;
 }
 
+
 int main(void){assert(mmap((void *)0x800000,0x100000,3,MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED,-1,0)==(void *)0x800000);unsigned cases=0;for(unsigned scenario=0;scenario<7;scenario++){memset((void *)0x800000,0,0x100000);uintptr_t r=0x880000,control=0x850000,buffer=0x860000;calls=0;mutate=scenario==6;
 *(uint32_t *)(r+2812)=control;*(uint32_t *)(r+1160)=buffer;*(uint32_t *)(r+1148)=0x830000;*(uint32_t *)0x805c70=0x840000;*(uint16_t *)(control+94)=3;*(uint16_t *)(0x851000+94)=3;*(uint8_t *)(r+799)=130;
 *(uint8_t *)(control+77)=scenario==0||scenario==6;unsigned index=scenario==4?33:scenario==5?65:1;*(uint8_t *)(buffer+3854)=scenario==1?255:index;uintptr_t entry=buffer+index*256;*(uint8_t *)entry=scenario==2?0:1;*(uint8_t *)(entry+1)=8;*(uint16_t *)(entry+2)=0x3210;for(unsigned i=0;i<8;i++)*(uint8_t *)(entry+4+i)=i+1;

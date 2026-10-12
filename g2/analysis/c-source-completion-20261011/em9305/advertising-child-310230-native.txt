@@ -1,0 +1,50 @@
+  310230:	c2e2                	enter_s	[r13,blink]
+  310232:	4508                	mov_s	r13,r0
+  310234:	0fce 00a0           	bl.d	6092	;0x311a00
+  310238:	710c                	mov_s	r0,1
+  31023a:	41c3 0080 12b8      	mov_s	r1,0x8012b8
+  310240:	1100 00c1           	ldb.x	r1,[r1]
+  310244:	2109 0000           	min	r0,r1,r0
+  310248:	0817 0342           	brlt.nt	r0,r13,22	;0x31025e
+  31024c:	40c3 0080 12b9      	mov_s	r0,0x8012b9
+  310252:	1000 00c1           	ldb.x	r1,[r0]
+  310256:	40a1                	mov_s	r0,r13
+  310258:	71b1                	cmp_s	r1,r13
+  31025a:	20ca 0049           	mov.gt	r0,r1
+  31025e:	c6c2                	leave_s	[r13,blink,pcl]
+  310260:	40c3 0080 5e78      	mov_s	r0,0x805e78
+  310266:	7fe0                	j_s.d	[blink]
+  310268:	8800                	ldb_s	r0,[r0,0]
+  31026a:	78e0                	nop_s
+  31026c:	42c3 0080 12b9      	mov_s	r2,0x8012b9
+  310272:	43c3 0080 12b8      	mov_s	r3,0x8012b8
+  310278:	8a80                	ldb_s	r12,[r2,0]
+  31027a:	8b40                	ldb_s	r2,[r3,0]
+  31027c:	a880                	stb_s	r12,[r0,0]
+  31027e:	7fe0                	j_s.d	[blink]
+  310280:	a940                	stb_s	r2,[r1,0]
+  310282:	78e0                	nop_s
+  310284:	077d 00a0           	b.d	6012	;0x311a00
+  310288:	700c                	mov_s	r0,0
+  31028a:	78e0                	nop_s
+  31028c:	c2e4                	enter_s	[r13-r14,blink]
+  31028e:	46cb 0080 5e78      	mov_s	r14,0x805e78
+  310294:	702c                	mov_s	r1,0
+  310296:	da50                	mov_s	r2,0x50
+  310298:	0d86 1160           	bl.d	142724	;0x33301c
+  31029c:	40c1                	mov_s	r0,r14
+  31029e:	0872 f9ee           	bl.d	-2148240	;0x103b0c
+  3102a2:	730c                	mov_s	r0,3
+  3102a4:	0df2 00e0           	bl.d	7664	;0x312094
+  3102a8:	d8ff                	mov_s	r0,0xff
+  3102aa:	d848                	mov_s	r0,0x48
+  3102ac:	45cb 00f0 1845      	mov_s	r13,0xf01845
+  3102b2:	1e00 7000 00f0 4044 	st	r0,[0xf04044]
+  3102ba:	710c                	mov_s	r0,1
+  3102bc:	712c                	mov_s	r1,1
+  3102be:	08ea 0060           	bl.d	2280	;0x310ba4
+  3102c2:	1d00 1043           	stb	1,[r13]
+  3102c6:	700c                	mov_s	r0,0
+  3102c8:	712c                	mov_s	r1,1
+  3102ca:	08de 0060           	bl.d	2268	;0x310ba4
+  3102ce:	1dff 9083           	stb	2,[r13,-1]

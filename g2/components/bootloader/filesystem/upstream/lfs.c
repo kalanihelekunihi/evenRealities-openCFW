@@ -4382,6 +4382,15 @@ static int lfs_deinit(lfs_t *lfs) {
     return 0;
 }
 
+#ifdef OPENCFW_NATIVE_LFS_ASSERT
+/* Native 0x004144dc is the internal deinit lower reached by the wrapper at
+ * 0x00414948. Export the pinned upstream body for that ABI adapter without
+ * altering the vendor implementation or the ordinary lfs_unmount path. */
+int opencfw_boot_lfs_deinit_4144dc(lfs_t *lfs) {
+    return lfs_deinit(lfs);
+}
+#endif
+
 
 
 #ifndef LFS_READONLY

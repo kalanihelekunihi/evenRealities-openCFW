@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 import struct
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -12,7 +13,7 @@ HERE = Path(__file__).resolve().parent
 BLOB = ROOT / 'g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin'
 LOCKED = 'f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5'
 CATALOGUE = ROOT / 'g2/research/corpus/apollo-bootloader/ghidra/open-2026-09-29/functions-000.jsonl'
-CROSSWALK = HERE / 'boot-body-crosswalk-current.json'
+CROSSWALK = Path(os.environ.get('BOOT_CROSSWALK', str(HERE / 'boot-body-crosswalk-current.json')))
 assert hashlib.sha256(BLOB.read_bytes()).hexdigest() == LOCKED
 native = {int(row['entry'], 16): row for row in map(json.loads, CATALOGUE.open())}
 cross = {int(row['entry'], 16): row for row in json.loads(CROSSWALK.read_text())['functions']}
@@ -73,6 +74,15 @@ report = {
         {'offset': hex(offset), 'entry': hex(address)}
         for offset, address in callback_roots.items() if address not in native],
     'reachable_catalogue_entries': len(seen),
+    'reachable_catalogue_addresses': [hex(address) for address in sorted(seen)],
+    'reachable_crosswalk_status_counts': dict(sorted(collections.Counter(
+        cross[address]['status'] for address in seen).items())),
+    'reachable_header_only_entries': [
+        {'entry': hex(address), 'name': native[address]['name'],
+         'body_bytes': native[address]['body_bytes'], 'direct_depth': seen[address]}
+        for address in sorted((a for a in seen if
+            cross[a]['status'] == 'selected_source_header_address_lead'),
+            key=lambda a: native[a]['body_bytes'], reverse=True)],
     'reachable_without_machine_crosswalk': len(unmapped),
     'unattributed_root_entries': [hex(a) for a in sorted(root_unmapped)],
     'largest_reachable_unattributed': [
@@ -85,7 +95,7 @@ report = {
         'Source attribution leads do not prove whole-body equality or physical behavior.',
     ],
 }
-output = HERE / 'boot-root-reachability-current.json'
+output = Path(os.environ.get('BOOT_ROOT_OUTPUT', str(HERE / 'boot-root-reachability-current.json')))
 output.write_text(json.dumps(report, indent=2) + '\n')
 print(json.dumps({key: report[key] for key in (
     'vector_distinct_catalogue_roots', 'scatter_callback_catalogue_roots',

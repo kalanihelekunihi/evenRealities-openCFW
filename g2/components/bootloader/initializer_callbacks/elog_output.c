@@ -73,6 +73,15 @@ static char *strstr(const char *hay,const char *needle) {
 }
 void opencfw_boot_elog_lock(void) {if(B(0x200267f2)){opencfw_bl_service_wake();B(0x200267f4)=1;}else B(0x200267f3)=1;}
 void opencfw_boot_elog_unlock(void) {if(B(0x200267f2)){opencfw_bl_service_sleep();B(0x200267f4)=0;}else B(0x200267f3)=0;}
+/* Native 0x417b7c changes the logger lock mode and synchronizes the
+ * existing active-lock flag with the service mutex when the mode is enabled. */
+void opencfw_boot_elog_set_lock_mode(uint8_t mode) {
+ B(0x200267f2)=mode;
+ if(B(0x200267f2)){
+  if(!B(0x200267f4) && B(0x200267f3))opencfw_bl_service_wake();
+  else if(B(0x200267f4) && !B(0x200267f3))opencfw_bl_service_sleep();
+ }
+}
 uint32_t opencfw_boot_elog_tag_level(const char *tag) {
  if(!tag)opencfw_boot_elog_assert("tag != ((void *)0)","elog_get_filter_tag_lvl",481);
  uint32_t level=5;

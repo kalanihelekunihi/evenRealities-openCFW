@@ -1,0 +1,203 @@
+{
+  "build_receipt_sha256": "9461ae3fe36da6d785eed7a4661f86f419867cc954ae4d0cb4044ce2a840af19",
+  "eligibility_sha256": "98bc03e913be40950acb74a26986a42f1ec2f47f53b20b3827c7748087d7dbf6",
+  "target": "C-SKY CK804EF hard-float, selected flags with O2 changed to Os",
+  "source_count": 18,
+  "O2_text_bytes_sum": 6274,
+  "Os_text_bytes_sum": 5374,
+  "rows": [
+    {
+      "source": "g2/components/gx8002/app_callback_candidate/board_uart.c",
+      "source_sha256": "3ade827d4ecdf94b24235eec46aba1d89e2c533dffb03f82b9df82ee2ab4afe1",
+      "O2_object_sha256": "2cfca0224c0a7d1ef8c52ecbcfdece55de78542b1060ad08b1dbc8ded1561715",
+      "Os_object_sha256": "e9d16fe5fe2b1d9207f1c275e8364e38930861bb87497d102350e26c65d2ceb4",
+      "O2_text_section_bytes": 184,
+      "Os_text_section_bytes": 184,
+      "direct_native_sections": [
+        ".text.gx8002_xip_audio_board_get_10203004",
+        ".text.gx8002_xip_audio_board_gain_1020300c"
+      ],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "g2/components/gx8002/app_callback_candidate/callbacks.c",
+      "source_sha256": "11b594b5e11e2551668b46e499a79c96406e527940b46575f1680fda4b23c6d5",
+      "O2_object_sha256": "434d7c3c19af555f09738ce666c9c3edcdd897d66dd0c649fc16f66bb97396bb",
+      "Os_object_sha256": "26253dc549851b442fb7f2c7fc13d491cfb8dc9524c3c648b103d1f4c593f372",
+      "O2_text_section_bytes": 254,
+      "Os_text_section_bytes": 198,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "g2/components/gx8002/app_callback_candidate/channel_runtime.c",
+      "source_sha256": "51736eb29befcb96e30e3413476486b4dc42d1df597311ba7f235819a0ab6d7e",
+      "O2_object_sha256": "56db491802a2484837ff2e3e665ad8008234018de00b294f25a3ee5dfe4142d6",
+      "Os_object_sha256": "e16448e723db108c64402926ef774d99cfec9414933c588a18e3c9faa371993c",
+      "O2_text_section_bytes": 136,
+      "Os_text_section_bytes": 136,
+      "direct_native_sections": [
+        ".text.gx8002_xip_uart_transmit_start_10203630",
+        ".text.gx8002_xip_uart_transmit_stop_10203664"
+      ],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "g2/components/gx8002/app_callback_candidate/queue_full.c",
+      "source_sha256": "6188c647ff31938f4fd99e125e2907cd2a37d35c296fd5652fe8a26b6508c5fe",
+      "O2_object_sha256": "d249ae890c15fea16e68bb9367efdb6a2313722bcbefe924cfa3dd909996a396",
+      "Os_object_sha256": "d249ae890c15fea16e68bb9367efdb6a2313722bcbefe924cfa3dd909996a396",
+      "O2_text_section_bytes": 24,
+      "Os_text_section_bytes": 24,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "g2/components/gx8002/app_callback_candidate/queue_read.c",
+      "source_sha256": "eb1af9e51a681b843e3dd0834e726c2ddd1ae7770962852b05a37e1295b36988",
+      "O2_object_sha256": "f1f7f622b5b525cbbc27bb90751ab9eabab946fe1e0dbb73af4192ca5a1cee2f",
+      "Os_object_sha256": "63df7d3c0e3e42887f5475b68706d1576cf246b0a588dbd2b03bca54fdfa1a8a",
+      "O2_text_section_bytes": 102,
+      "Os_text_section_bytes": 88,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "g2/components/gx8002/app_callback_candidate/request_send.c",
+      "source_sha256": "a0b445be19b4c90962cea3e8f0b7eee7009f0f8ba6ec545aec3db4e7fabf8e16",
+      "O2_object_sha256": "66e44c92f5e322ec84bae6b0488e948ea29548f159afa22835c900aba27f3da4",
+      "Os_object_sha256": "48a84a282f6df735a1ca793e7a7072c4419185e0f5a54a8025ed4af2c441d92f",
+      "O2_text_section_bytes": 216,
+      "Os_text_section_bytes": 202,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "g2/components/gx8002/app_callback_candidate/resident_xip_muldi3.c",
+      "source_sha256": "574f5d16d9962f68938a3770963df610e6e3206327154add573edaaef3b12891",
+      "O2_object_sha256": "c9dbbd88eaf24d44cde576ec5bbc674112f89eb453f05f049180536538e10b4f",
+      "Os_object_sha256": "c9dbbd88eaf24d44cde576ec5bbc674112f89eb453f05f049180536538e10b4f",
+      "O2_text_section_bytes": 94,
+      "Os_text_section_bytes": 94,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "g2/components/gx8002/app_callback_candidate/resident_xip_tinyprintf.c",
+      "source_sha256": "b6c3ef658499b0af38de1da050bcb821ddb4e3a6fb8e14e273517d6b7c275adb",
+      "O2_object_sha256": "a8d3a2d3fa3ad570a3cb0c4f269ff4e6e376ee5d9cb668364f0bbe5c9e81a8d6",
+      "Os_object_sha256": "4b8dfd5355c30e3f142d0d4a2533834a8cefab99e5d75bfe03de8b6fb0d0fc82",
+      "O2_text_section_bytes": 826,
+      "Os_text_section_bytes": 728,
+      "direct_native_sections": [
+        ".text.gx8002_xip_tfp_format_10206a84"
+      ],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/adddf3.c",
+      "source_sha256": "c948665a4272f7155fd0cd51c3f2bb218bfd0d1dc0ab556565ee1a4eb315eb26",
+      "O2_object_sha256": "c51bfcdc75a71f24198015fc8b51591d71d7c0597f7dad6b99d6e39df27f77df",
+      "Os_object_sha256": "3c5b358ebeca5dae42d59e813b58500ede458da178baba19e824a685f6bc7855",
+      "O2_text_section_bytes": 1134,
+      "Os_text_section_bytes": 1010,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/comparedf2.c",
+      "source_sha256": "c2af3f6a5ae89c08e5ee25b3ec03170b7e98d5dc699646c14820e359cd54fde5",
+      "O2_object_sha256": "1e19c1717cdaa5605c2340021718714cbae2707e4c8f57c45fec00d5b031ec2a",
+      "Os_object_sha256": "06ed4f3003dde6542d8e5037eaf4222e30e2507ca9e9f173bd06b4ca2b890326",
+      "O2_text_section_bytes": 370,
+      "Os_text_section_bytes": 346,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/divdf3.c",
+      "source_sha256": "2c8850a107c4ab79d518d1c3246ff936dd28446c82e17c1f347717a36b7a88a8",
+      "O2_object_sha256": "0218e4a4129705a293c219b4c7744d2df76a01aff44a13ae674d1ac6801a2703",
+      "Os_object_sha256": "dff5853413243db6d1abdfa7b318ba71880b5062404f7d03b4727a738256557d",
+      "O2_text_section_bytes": 1026,
+      "Os_text_section_bytes": 876,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixdfsi.c",
+      "source_sha256": "7a17622bf348e1854ff5c47a3290acf7f7d85ddfd97f35e2af7d51d05964ebb2",
+      "O2_object_sha256": "a282b485f9d65248c281c1aedd2ad2d2a03e26ebdfdafb6d93018ed6622cc6b8",
+      "Os_object_sha256": "a357f70f8a4ac221b3d2b34fb3ec3f76bb57fffa9e136d7ec29394b1a66b9a99",
+      "O2_text_section_bytes": 136,
+      "Os_text_section_bytes": 96,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixunsdfsi.c",
+      "source_sha256": "57b6312618aedf3f0f1c13bd1de12b5ea4b7c3070d2bb549d4fc93aca33abb28",
+      "O2_object_sha256": "b83ded7aa7b1f2bb91a10f343694dcb6cebc5ca51e64d05d542f3d868387a9ec",
+      "Os_object_sha256": "3271103b81afefcc33bff2cc98d71ef67ca9b1eb6047df773e8b483b91fb6984",
+      "O2_text_section_bytes": 106,
+      "Os_text_section_bytes": 86,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatunsidf.c",
+      "source_sha256": "9f3593197c2584c14c86a4760051be18c788d0835cf8ffdb9f11834c2ce9bf5b",
+      "O2_object_sha256": "799a39f68a2b71f7e50db53e427cd402c3904d96f5d20fecfae7b45139922a24",
+      "Os_object_sha256": "44db065a2da298add5f71c65c06c5ba99762f0905971ecd8e1c2ea701725129f",
+      "O2_text_section_bytes": 94,
+      "Os_text_section_bytes": 56,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/muldf3.c",
+      "source_sha256": "e35d748cefd466cb17e4d0fd4ef9d92e0911fea97bb7a59ad138479ba9c0d553",
+      "O2_object_sha256": "a43934626fef39ee7e43467bab20aa1aa8913a953cb3bb70cebb9ce10437a256",
+      "Os_object_sha256": "736907b07213d19f41c8edef9afa6fa131792891951d6eb82a671d58cfb9e5e4",
+      "O2_text_section_bytes": 1012,
+      "Os_text_section_bytes": 762,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/subdf3.c",
+      "source_sha256": "201404b61436f1f617221ac20aeee67e41349baaf13ef838f0f5969e3b8b86ab",
+      "O2_object_sha256": "1eee2f37acd1e6290188331282f03361abbee9d1b49ea28760436c6c76b69961",
+      "Os_object_sha256": "6795d9459e47c62467c309f43437b98d0d8bdcbe6b9103267d6926fa02fe5a7c",
+      "O2_text_section_bytes": 22,
+      "Os_text_section_bytes": 22,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivdi3.c",
+      "source_sha256": "e250263dcb27261e969db4228a479b2f3bde2b06e59baa2f2c595ac752b17643",
+      "O2_object_sha256": "31ee7fe799a5f1f38ffdabafba6bd37ae6f8b6b3ab083b38e8cc7f5e777233d7",
+      "Os_object_sha256": "ef1ef1f7808a003593282d370a1bc13181c75796cf7f847e54841c5598ffaa81",
+      "O2_text_section_bytes": 346,
+      "Os_text_section_bytes": 274,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    },
+    {
+      "source": "third-party/upstream/nationalchip-lvp-kws/base/src/crc32.c",
+      "source_sha256": "c1c1b49288b89f9db59e6db8567657a97c7f671699b882bd476c52dcdc221005",
+      "O2_object_sha256": "7d6531610688edb3fbfff1f6d9e5f5f7a0e5b48ae2a64cc539aca68d89dbbcb5",
+      "Os_object_sha256": "eb2ad821f2bec1d9140514cbc5f4d34bc07414074aa8a81883e9daf9bdd3817c",
+      "O2_text_section_bytes": 192,
+      "Os_text_section_bytes": 192,
+      "direct_native_sections": [],
+      "direct_sections_grown": []
+    }
+  ],
+  "limits": [
+    "Object text sums include all functions in each selected source, not only a native-bound function.",
+    "Section size is not native behavior equality or final XIP placement.",
+    "Any source file with a grown direct section needs separate fixed-slot review before policy admission."
+  ]
+}

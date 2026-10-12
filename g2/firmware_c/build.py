@@ -113,6 +113,14 @@ def experimental_arm_sources(image: str, folder: Path) -> tuple[list[Path], list
             # Seven stock Main helpers contain authenticated double-precision
             # VFP operations; the default single-precision assembler rejects them.
             source_flags = ["-mfpu=fpv5-d16", "-Werror"]
+        if source.startswith("g2/analysis/c-source-completion-20261011/peripherals/smp_tables/candidate_"):
+            cordio = ROOT / "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio"
+            source_flags += ["-I" + str(cordio / subdir) for subdir in (
+                "ble-host/include", "ble-host/sources/stack/smp",
+                "ble-host/sources/stack/cfg", "wsf/include", "wsf/sources",
+                "wsf/sources/port/freertos", "ble-host/sources/stack/dm")]
+            source_flags += ["-I" + str(ROOT / "g2/components/bootloader/filesystem/freestanding_include"),
+                             "-Wno-unused-parameter"]
         receipt = command(["clang", *flags, *source_flags, "-MD", "-MF", str(depfile),
                            "-c", str(path), "-o", str(obj)],
                           folder / f"experimental-{index:03d}.log")
@@ -229,7 +237,8 @@ def arm_image(image: str, out: Path, experimental: bool = False) -> dict:
     return result
 
 
-def codec_image(out: Path, experimental: bool = False) -> dict:
+def codec_image(out: Path, experimental: bool = False,
+                placement_check: bool = False) -> dict:
     folder = out / "codec"
     folder.mkdir(parents=True, exist_ok=True)
     tool = ROOT / "g2/build/offline-nationalchip-dsp-c-compiler-successor-20261009T195245Z/toolchain"
@@ -264,6 +273,7 @@ def codec_image(out: Path, experimental: bool = False) -> dict:
         source_paths.append("g2/components/gx8002/app_callback_candidate/uart_message_start.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/channel_runtime.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_irq.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_irq_compact_unqualified.S")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_cache.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_queue.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_timestamp.c")
@@ -397,9 +407,39 @@ def codec_image(out: Path, experimental: bool = False) -> dict:
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_snpu_process_status.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_snpu_overtime.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_gpio_irq_disable.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_async_done.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_notification_service.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_multiboot_switch.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_push_frame.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_select_channel.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_db_table.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_hw_init.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_dispatch.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_alloc_playback.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_product_table.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_aout_runtime_data.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_app_audio_gpio.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_app_setup.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_app_commands.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_mic_buffer.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_stop_i2s.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_start_i2s.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_sample_event.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_i2s_request_tick.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_app_command_callback.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_strtok.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_div64.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_muldi3.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_fp_parts.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_pack_double.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_fpadd_parts.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_udiv_bitlength_data.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_fp_environment_csky.c")
         source_paths.extend(
             f"third-party/upstream/llvm-compiler-rt-format-20.1.8/{name}.c"
-            for name in ("adddf3", "divdf3", "fixunsdfsi", "floatunsidf", "muldf3")
+            for name in ("adddf3", "ashldi3", "comparedf2", "divdf3", "fixdfsi",
+                         "fixunsdfsi", "floatunsidf", "muldf3", "subdf3",
+                         "lshrdi3", "udivdi3")
         )
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_app_ticks.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_uart_async_tick.c")
@@ -435,15 +475,31 @@ def codec_image(out: Path, experimental: bool = False) -> dict:
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_clock_product_tables.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_clock_runtime_defaults.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_uart_product_descriptors.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_sample_product_data.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_xip_console_state.c")
+        source_paths.append("g2/components/gx8002/app_callback_candidate/resident_flash_api_data.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_board_product_state.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_flash_product_otp_data.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_flash_product_catalog.c")
         source_paths.append("g2/components/gx8002/app_callback_candidate/resident_module_product_data.c")
         source_paths.append(sdk + "/base/src/crc32.c")
+    os_policy_path = (ROOT / "g2/analysis/c-source-completion-20261011/codec/"
+                      "xip-os-qualified-sources.json")
+    os_policy = json.loads(os_policy_path.read_text()) if experimental else None
+    os_qualified = (os_policy["qualified_files"] if os_policy else {})
+    os_applied = []
+    os_stale = []
     for rel in source_paths:
         source = rel
         inputs[rel] = digest(ROOT / rel)
         name = Path(source).stem + ".o"
+        compile_flags = flags.copy()
+        if rel in os_qualified:
+            if inputs[rel] == os_qualified[rel]["probed_source_sha256"]:
+                compile_flags[compile_flags.index("-O2")] = "-Os"
+                os_applied.append(rel)
+            else:
+                os_stale.append(rel)
         extra = ["-DFOR_X86_64=1"] if Path(source).stem == "csky_bitreversal" else []
         if rel.startswith("g2/components/gx8002/app_callback_candidate/") or rel == sdk + "/base/src/crc32.c":
             # Recovered headers and pinned CRC access the same RAM through byte,
@@ -454,7 +510,7 @@ def codec_image(out: Path, experimental: bool = False) -> dict:
             source_includes = ["-I/repo/g2/components/gx8002/app_callback_candidate/crc_port"] + includes
         depname = Path(source).stem + ".d"
         language_flags = ["-std=c11"] if Path(source).suffix == ".c" else []
-        commands.append(command(prefix + flags + language_flags + source_includes + extra +
+        commands.append(command(prefix + compile_flags + language_flags + source_includes + extra +
                                 ["-MD", "-MF", "/out/" + depname,
                                  "-c", "/repo/" + rel, "-o", "/out/" + name],
                                 folder / (name + ".log")))
@@ -476,6 +532,14 @@ def codec_image(out: Path, experimental: bool = False) -> dict:
               "compiler_sha256": digest(compiler), "candidate_compilation_passed":
               all(c["returncode"] == 0 for c in commands) and not changed_sources,
               "configuration_note": "FOR_X86_64 enables generic C bitreversal bodies on C-SKY; not the stock producing recipe"}
+    if os_policy:
+        result["xip_size_optimization"] = {
+            "policy": str(os_policy_path.relative_to(ROOT)),
+            "policy_sha256": digest(os_policy_path),
+            "applied_sources": os_applied,
+            "stale_source_evidence": os_stale,
+            "qualification": "target section size only; native runtime equality unqualified",
+        }
     if result["candidate_compilation_passed"]:
         link = command(prefix + ["-mcpu=ck804ef", "-mhard-float", "-nostdlib",
                        "-nostartfiles", "-Wl,-r", "-Wl,-A,ck803", *objects,
@@ -490,6 +554,25 @@ def codec_image(out: Path, experimental: bool = False) -> dict:
             link["symbol_command"] = census
             if census["returncode"] == 0:
                 link.update(parse_symbols((folder / "symbols.log").read_text()))
+            if placement_check:
+                check = (ROOT / "g2/analysis/c-source-completion-20261011/codec/"
+                         "check_known_data_link.py")
+                check_out = folder / "known-data-placement"
+                placement = command([sys.executable, str(check),
+                                     "--candidate", str(folder / "candidate.o"),
+                                     "--output", str(check_out)],
+                                    folder / "known-data-placement.log")
+                placement.update(checker=str(check.relative_to(ROOT)),
+                                 checker_sha256=digest(check),
+                                 linker_script_sha256=digest(check.with_name(
+                                     "image_a_known_data.ld")))
+                placement_receipt = check_out / "receipt.json"
+                if placement["returncode"] == 0 and placement_receipt.is_file():
+                    placement.update(receipt=str(placement_receipt.relative_to(ROOT)),
+                                     receipt_sha256=digest(placement_receipt),
+                                     checks=json.loads(placement_receipt.read_text()))
+                result["known_data_placement"] = placement
+                result["candidate_compilation_passed"] &= placement["returncode"] == 0
     if experimental:
         # UART boot stage 1 is a distinct loaded program, not a resident
         # translation unit of image-A stage 2. Keep its candidate separate.
@@ -1458,6 +1541,31 @@ def ble_image(out: Path, include_experimental: bool = False) -> dict:
                 elif dep.startswith("/tool/"):
                     controller_init_build["header_inputs"][dep] = digest(tool / dep.removeprefix("/tool/"))
             objects.append("/out/controller_init.o")
+            # Native-attributed initializer bodies compiled as separate source units.
+            result["experimental_controller_init_lower_compiles"] = {}
+            for init_lower_name in ('init_registration', 'init_mode', 'init_callback_status', 'init_stream_children', 'init_product_buffers', 'init_prelink', 'init_deeper_services', 'init_callback_aliases', 'init_callback_chain', 'init_callback_31f9b0', 'init_callback_31e7fc', 'init_child_3191dc_connected', 'init_child_319714_connected', 'init_packet_switch_known', 'init_packet_leaf_children', 'init_packet_mask_children', 'init_packet_word_children', 'init_packet_accum_child', 'init_packet_32dc40', 'init_packet_32de08', 'init_packet_32dfe8', 'init_packet_32dffc_e068', 'init_mode_safe_leaves', 'init_callback_small', 'init_event20', 'init_mode_event_318edc', 'init_mode_stack20', 'init_mode_frame_3231c4', 'init_mode_frame_323374', 'init_mode_event_322b70', 'init_mode_event_3212f0', 'init_mode_fallback', 'init_mode_fallback_leaves', 'init_mode_frame48', 'init_mode_parent', 'init_mode_callbacks_simple', 'init_mode_callbacks_fields', 'init_mode_callback_32cae4', 'init_mode_large', 'init_mode_callback_table', 'init_mode_guard', 'init_mode_selector', 'init_mode_reject', 'init_mode_done', 'init_mode_frame_3232a8', 'init_mode_frame_323314', 'init_mode_callback_32cde0', 'init_mode_callbacks_phy', 'init_mode_callbacks_short_packets', 'init_mode_callbacks_clamped_packets', 'init_mode_callback_32cf94', 'init_mode_callbacks_3269ec_323668', 'init_mode_callback_child_317ea4', 'init_mode_callback_value_318920', 'init_mode_callbacks_indirect_native', 'init_mode_callback_32c828', 'init_mode_callback_32c884', 'init_registered_32ce04', 'init_mode_callbacks_signed_packets', 'init_mode_callback_32c908', 'init_mode_callback_325b98', 'init_mode_callback_325b14', 'init_mode_callback_32ce84', 'init_mode_callback_325a68', 'init_mode_callback_32cffc', 'init_registered_32182c_3266f8', 'init_callback_32468c', 'init_callback_324698', 'init_callback_31ae84', 'init_callback_3245ec', 'init_callback_31810c', 'init_callback_318168', 'init_callback_3183ec', 'init_callback_31836c', 'init_callback_child_303918', 'init_transition_leaves_3249ac_3249b8', 'init_transition_refresh_327dbc', 'init_transition_counter_gate', 'init_transition_report_316908', 'init_transition_event_308664', 'init_transition_324964', 'init_transition_prepare_31a700', 'init_transition_31a434', 'init_transition_dispatch_316704', 'init_transition_finish_325eb4', 'init_transition_secondary_32d138', 'init_secondary_finish_321820', 'init_transition_packet_check_32e278', 'init_transition_packet_copy_32dd54', 'init_secondary_encode_32e164', 'init_secondary_channel_324c68', 'init_secondary_time_317ebc', 'init_secondary_schedule_318ad8', 'init_secondary_current_303f5c', 'init_transition_table_leaves_disjoint', 'init_transition_event_frame_30e988', 'init_transition_rom_tables', 'init_secondary_commit_321e14', 'init_transition_start_327b60', 'init_secondary_intervals_3357d0', 'init_secondary_compare_3249e8', 'init_transition_records', 'init_transition_stages_318290', 'init_transition_callback_328018', 'init_transition_callback_32805c', 'init_transition_random_317afc', 'init_transition_schedule_3130d4', 'init_transition_process_327de8', 'init_registered_321608', 'init_callback_31807c', 'init_registered_322d68', 'init_callback_327de0', 'init_callback_304468', 'init_radio_callback_3041e0', 'init_radio_callback_304214', 'init_radio_callback_30425c', 'init_radio_callback_3042b4', 'init_callback_325474', 'init_radio_key_operations_30ff70', 'init_radio_callback_3044e8', 'init_radio_callbacks_3043ac_304430', 'init_registered_32613c', 'init_registered_3263ec', 'init_generic_callbacks_306cbc_31ce10'):
+                init_lower_source = ROOT / "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers" / (init_lower_name + ".c")
+                init_lower_object = "controller_lower_" + init_lower_name
+                init_lower_build = command(prefix + ["/tool/bin/arc-elf32-gcc", "-mcpu=arcem",
+                    "-mcode-density", "-std=c11", "-ffreestanding", "-fno-builtin",
+                    "-O2", "-fno-strict-aliasing", "-Wall", "-Wextra", "-Werror", "-MD", "-MF", "/out/" + init_lower_object + ".d",
+                    "-c", "/repo/" + str(init_lower_source.relative_to(ROOT)), "-o", "/out/" + init_lower_object + ".o"],
+                    folder / (init_lower_object + "-compile.log"))
+                init_lower_build.update(source=str(init_lower_source.relative_to(ROOT)), source_sha256=digest(init_lower_source))
+                result["experimental_controller_init_lower_compiles"][init_lower_name] = init_lower_build
+                if init_lower_build["returncode"] != 0:
+                    result["candidate_compilation_passed"] = False
+                    return result
+                init_lower_build["object_sha256"] = digest(folder / (init_lower_object + ".o"))
+                init_lower_build["header_inputs"] = {}
+                init_lower_deps = shlex.split((folder / (init_lower_object + ".d")).read_text().split(":", 1)[1].replace("\\\n", " "))
+                for init_lower_dep in init_lower_deps:
+                    if init_lower_dep.startswith("/repo/"):
+                        init_lower_real = ROOT / init_lower_dep.removeprefix("/repo/")
+                        init_lower_build["header_inputs"][str(init_lower_real.relative_to(ROOT))] = digest(init_lower_real)
+                    elif init_lower_dep.startswith("/tool/"):
+                        init_lower_build["header_inputs"][init_lower_dep] = digest(tool / init_lower_dep.removeprefix("/tool/"))
+                objects.append("/out/" + init_lower_object + ".o")
             controller_timer_helpers = ROOT / "g2/components/em9305/qpc_scheduler_candidate/controller_timer_helpers.c"
             controller_timer_helpers_build = command(prefix + ["/tool/bin/arc-elf32-gcc", "-mcpu=arcem",
                 "-mcode-density", "-std=c11", "-ffreestanding", "-fno-builtin",
@@ -1513,7 +1621,11 @@ def main() -> int:
     parser.add_argument("--require-complete", action="store_true")
     parser.add_argument("--include-experimental", action="store_true",
                         help="Also build experimental Boot, Main/Audio, CASE, codec and ARC scheduler C bodies; behavioral admission remains open")
+    parser.add_argument("--codec-placement-check", action="store_true",
+                        help="For Codec, run isolated authenticated vector/data/BSS section placement check")
     args = parser.parse_args()
+    if args.codec_placement_check and not args.include_experimental:
+        parser.error("--codec-placement-check requires --include-experimental")
     target = json.loads((ROOT / "g2/workflow/target.json").read_text())
     gates = json.loads((HERE / "source-gates.json").read_text())
     out = args.output.resolve()
@@ -1528,7 +1640,8 @@ def main() -> int:
             if image in {"apollo_bootloader", "apollo_main", "case", "touch"}:
                 result = arm_image(image, out, args.include_experimental)
             elif image == "codec":
-                result = codec_image(out, args.include_experimental)
+                result = codec_image(out, args.include_experimental,
+                                     args.codec_placement_check)
             else:
                 result = ble_image(out, args.include_experimental)
             result["source_gates"] = gates[image]

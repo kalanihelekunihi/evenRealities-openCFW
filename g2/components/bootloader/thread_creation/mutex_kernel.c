@@ -120,7 +120,9 @@ uint32_t opencfw_bl_kernel_mutex_take_tagged(uint32_t *queue,uint32_t ticks) {
 uint32_t opencfw_bl_kernel_mutex_give_tagged(uint32_t *queue) {
     if(!queue)fail();
     if(queue[2]!=opencfw_boot_current_task())return 0;
-    queue[3]--;
-    if(!queue[3])(void)opencfw_bl_kernel_queue_put_blocking(queue,0,0,0);
+    volatile uint32_t *const depth=(volatile uint32_t *)&queue[3];
+    *depth=*depth-1u;
+    /* Stock 0x419e08 rereads the field after the decrement store. */
+    if(!*depth)(void)opencfw_bl_kernel_queue_put_blocking(queue,0,0,0);
     return 1;
 }

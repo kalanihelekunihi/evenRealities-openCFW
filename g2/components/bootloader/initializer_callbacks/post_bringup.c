@@ -16,7 +16,7 @@ extern uint32_t opencfw_bl_power_register_update(uint32_t id, uint32_t value);
 extern uint32_t opencfw_bl_register_mode(uint32_t kind, uint32_t mode);
 extern uint32_t opencfw_bl_post_context_register(uint32_t id,
                                                  const void *context);
-extern uint32_t opencfw_bl_post_configure(uint32_t transfer,
+extern uint64_t opencfw_bl_post_configure(uint32_t transfer,
                                          uint32_t a, uint32_t b);
 extern uint32_t opencfw_bl_post_validate(uint32_t transfer,
                                          uint32_t context);

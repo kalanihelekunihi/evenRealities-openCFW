@@ -8,6 +8,7 @@ extern void case_boot_sensor_irq_error(uint32_t descriptor); /* 0x86f4 */
 extern uint32_t case_boot_sensor_irq_restart_ready(uint32_t peripheral); /* 0x48e6 */
 extern uint32_t case_boot_sensor_irq_restart(uint32_t peripheral); /* 0x487a */
 extern void case_boot_sensor_irq_final(uint32_t descriptor); /* 0x6776 */
+extern uint32_t case_boot_sensor_cancel_callback(uint32_t descriptor); /* native 0x86e0 */
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static uint16_t rh(uint32_t a){return *(volatile uint16_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
@@ -49,7 +50,7 @@ void case_irq_child_5f50(uint32_t descriptor)
                     clear_locked(hw+8u,64u);
                     uint32_t p=rd(state);
                     if(p==0u)return;
-                    wr(p+56u,0x080086e1u);
+                    wr(p+56u,(uint32_t)(uintptr_t)case_boot_sensor_cancel_callback);
                     if(case_boot_sensor_irq_restart_ready(p)==0u)return;
                     invoke(rd(rd(state)+56u),rd(state));
                     return;

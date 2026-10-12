@@ -24,20 +24,26 @@ typedef struct {
 /* Product-specific configuration and state must be supplied by an attributed
  * binding. No fallback constants or success-only hooks are defined here. */
 extern const g2_power_product_config g2_power_product;
-extern volatile uint32_t g2_power_current_gpu_mode;
-extern volatile uint32_t g2_power_previous_gpu_mode;
+/* Native ROM pointers at 0x47fac0/c4 target adjacent live byte cells. */
+#define g2_power_current_gpu_mode (*(volatile uint8_t *)(uintptr_t)0x20074f60u)
+#define g2_power_previous_gpu_mode (*(volatile uint8_t *)(uintptr_t)0x20074f61u)
 extern uint32_t g2_power_get_descriptor(g2_power_descriptor *, uint32_t);
-extern void g2_power_tempco_postpone(void);
-extern void g2_power_tempco_pending(void);
-extern uint32_t g2_power_spot_update(uint32_t, bool, void *);
+extern uint32_t g2_power_tempco_postpone(void);
+extern uint32_t g2_power_tempco_pending(void);
+/* These selected bodies map by native entry 0x480312/0x4c44bc/0x4c4530/
+ * 0x4c45a4, respectively. Their returns are ignored by this caller. */
+extern uint32_t audio_ble_flash_control(uint32_t, uint32_t, const uint32_t *);
 extern uint32_t g2_power_gpu_mode_select(uint32_t);
-extern void g2_power_clock_request(uint32_t, uint32_t);
-extern void g2_power_clock_release(uint32_t, uint32_t);
-extern void g2_power_clock_release_all(uint32_t);
+extern uint32_t audio_uart_pin_mux_enable(uint32_t, uint32_t);
+extern uint32_t audio_uart_pin_mux_disable(uint32_t, uint32_t);
+extern uint32_t audio_uart_font_pin_mux_disable(uint32_t);
 extern uint32_t g2_power_critical_save(void);
 extern void g2_power_critical_restore(uint32_t);
-extern uint32_t g2_power_wait_status(uint32_t, uintptr_t, uint32_t, uint32_t, bool);
-extern void g2_power_delay_us(uint32_t);
+/* Stock 0x480826/0x4807fc/0x4807a0 are already selected as these
+ * source-defined timing bodies. The fifth wait argument is the polarity. */
+extern uint32_t audio_wait5(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t);
+extern uint32_t audio_wait4(uint32_t, uint32_t, uint32_t, uint32_t);
+extern void audio_delay_us(uint32_t);
 uint32_t g2_power_vendor_enable(uint32_t);
 uint32_t g2_power_vendor_disable(uint32_t);
 #endif

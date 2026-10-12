@@ -28,7 +28,7 @@ class Machine(v.Machine):
   except Exception as ex:raise RuntimeError((entry,self.source,hex(self.cpu.reg_read(a.UC_ARM_REG_PC)),hex(self.cpu.reg_read(a.UC_ARM_REG_R0)),hex(self.cpu.reg_read(a.UC_ARM_REG_R1)))) from ex
  def w(self,p,n):self.cpu.mem_write(p,struct.pack('<I',n&0xffffffff))
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--elf',required=True,type=Path);ap.add_argument('--output',required=True,type=Path);args=ap.parse_args();_,segs,syms=v.elf.elf_info(args.elf);cases=[];trace={}
+ ap=argparse.ArgumentParser();ap.add_argument('--elf',required=True,type=Path);ap.add_argument('--output',required=True,type=Path);args=ap.parse_args();_,segs,syms=v.elf.elf_info(args.elf,source_coplacement=True);cases=[];trace={}
  def compare(label,values,prepare=lambda m:None,entry='registrar'):
   obs=[]
   for source in (False,True):

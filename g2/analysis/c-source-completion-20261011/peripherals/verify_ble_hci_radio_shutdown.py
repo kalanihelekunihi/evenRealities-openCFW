@@ -9,7 +9,7 @@ BLOB=(ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[
 SRC=ROOT/'components/audio/uart_thread_source_candidate/display_ble_hci_radio_shutdown.c'
 SHIM='''#include <stdint.h>
 uint8_t audio_ble_hci_radio_timer[32];
-volatile uint8_t audio_ble_hci_radio_active,audio_ble_hci_radio_pending;
+volatile uint32_t audio_ble_hci_radio_active,audio_ble_hci_radio_pending;
 volatile uint32_t audio_ble_hci_radio_context_ptr;
 void WsfTimerStop(void*a){(void)a;}
 void audio_ble_hci_radio_disable_52dd6a(void){}
@@ -32,7 +32,7 @@ with tempfile.TemporaryDirectory() as td:
    ac=syms['audio_ble_hci_radio_active'] if compiled else 0x20074638
    pe=syms['audio_ble_hci_radio_pending'] if compiled else 0x2007463c
    context=syms['audio_ble_hci_radio_context_ptr'] if compiled else 0x20074630
-   u.mem_write(ac,bytes([active]));u.mem_write(pe,bytes([pending]));u.mem_write(context,struct.pack('<I',0x20005000))
+   u.mem_write(ac,struct.pack('<I',active));u.mem_write(pe,struct.pack('<I',pending));u.mem_write(context,struct.pack('<I',0x20005000))
    u.reg_write(UC_ARM_REG_SP,0x200ff000);u.reg_write(UC_ARM_REG_LR,0x600001)
    native={'timer':0x52a4d2,'disable':0x52dd6a,'switch':0x52eece,'pins':0x52dd7c,'reset':0x52df12}
    names={'timer':'WsfTimerStop','disable':'audio_ble_hci_radio_disable_52dd6a','switch':'audio_ble_hci_radio_switch_52eece','pins':'audio_ble_hci_radio_pins_52dd7c','reset':'audio_ble_hci_radio_reset_52df12'}
@@ -45,6 +45,6 @@ with tempfile.TemporaryDirectory() as td:
     uc.reg_write(UC_ARM_REG_R0,0);uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
    u.hook_add(UC_HOOK_CODE,hook)
    u.emu_start((syms['audio_ble_hci_driver_radio_shutdown'] if compiled else 0x4b49ce)|1,0x600000,count=700)
-   rows.append((calls,bytes(u.mem_read(ac,1)),bytes(u.mem_read(pe,1))))
+   rows.append((calls,bytes(u.mem_read(ac,4)),bytes(u.mem_read(pe,4))))
   assert rows[0]==rows[1],(active,pending,rows)
   print('PASS',active,pending,rows[0])

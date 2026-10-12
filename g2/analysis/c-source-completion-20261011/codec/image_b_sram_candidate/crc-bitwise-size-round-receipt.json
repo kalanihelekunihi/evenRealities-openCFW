@@ -1,0 +1,22 @@
+{
+  "result": "PASS_BOUNDED_BEHAVIOR_AND_LAYOUT",
+  "source_sha256": "fd6b7bff68806110b674f7a006cd9fdab0fd48fb65216fafb57fa1fe4646bcef",
+  "pinned_upstream": "third-party/upstream/nationalchip-lvp-kws/tools/uart_adpcm/crc/crc32.c @ 8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "pinned_source_sha256": "76a12e21f9ee0c11ec6899732e934bc35d8d63dc5a67281c437fdd8d85a8b2ce",
+  "host_direct_pinned_cases": 264,
+  "case_dimensions": "raw and complemented x 11 sizes x 4 alignments x 3 seeds",
+  "target_object_bytes_before": 1210,
+  "target_object_bytes_after": 62,
+  "size_saving_bytes": 1148,
+  "selected_units": 301,
+  "linked_object_sha256": "0a86141bda563b9ad5a71ef71c41b35e65425160fcfdae76586fafd69ab52e8e",
+  "final_layout_elf_sha256": "71bbfa8bbed9e386ac56675d4fabfa5bcfcccc61cd76b5bcd0e4ecaa923bf2ad",
+  "source_only_late_audio_bytes": 2536,
+  "current_headroom_bytes": 1688,
+  "remaining_deficit_bytes": 848,
+  "limits": [
+    "CRC bitwise is a behavioral optimization, not a byte-identical native body or timing equivalent.",
+    "Transmit and registration consumers pass variable lengths; timing deadline and physical UART behavior unverified.",
+    "Late audio remains outside fixed stock loader transfer; result is not bootable."
+  ]
+}

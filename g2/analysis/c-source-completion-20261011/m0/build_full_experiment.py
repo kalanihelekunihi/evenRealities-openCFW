@@ -24,15 +24,20 @@ args = parser.parse_args()
 expected = json.loads(SELECTED_RECEIPT.read_text())['archive_sha256']
 if sha(SELECTED) != expected:
     raise SystemExit('selected CASE archive differs from its pinned build receipt')
-subprocess.run(['python3', str(HERE / 'build_case_candidate.py')], check=True,
-               stdout=subprocess.DEVNULL)
+selected_receipt = json.loads(SELECTED_RECEIPT.read_text())
+public_selected = {'case_binary_command', 'case_legacy_command',
+                   'case_vformat'} <= set(selected_receipt['provided_symbols'])
+if not public_selected:
+    subprocess.run(['python3', str(HERE / 'build_case_candidate.py')], check=True,
+                   stdout=subprocess.DEVNULL)
 args.output.parent.mkdir(parents=True, exist_ok=True)
 with tempfile.TemporaryDirectory() as temp:
     temp = Path(temp)
     hashes = []
     for index in range(2):
         result = temp / f'case-{index}.o'
-        subprocess.run([LD, '-r', '--whole-archive', str(SELECTED), str(CANDIDATE),
+        inputs = [str(SELECTED)] if public_selected else [str(SELECTED), str(CANDIDATE)]
+        subprocess.run([LD, '-r', '--whole-archive', *inputs,
                         '--no-whole-archive', '-o', str(result)],
                        check=True, capture_output=True, text=True)
         hashes.append(sha(result))
@@ -48,7 +53,8 @@ receipt = {
     'sha256': sha(args.output),
     'rebuild_identical': True,
     'selected_archive_sha256': sha(SELECTED),
-    'command_candidate_archive_sha256': sha(CANDIDATE),
+    'command_candidate_archive_sha256': None if public_selected else sha(CANDIDATE),
+    'public_providers_selected': public_selected,
     'undefined_symbols': unresolved,
     'undefined_count': len(unresolved),
     'limits': ['not a flash image', 'not selected production firmware',

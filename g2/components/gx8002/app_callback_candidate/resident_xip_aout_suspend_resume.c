@@ -23,10 +23,13 @@ static void write32(uint32_t offset, uint32_t value)
 }
 
 uint32_t gx8002_xip_audio_channel_field_102049b0(
-    volatile uint8_t *registers, uint32_t channel)
+    uint32_t register_index, uint32_t channel)
 {
+    /* Native 0x102049b0 adds ten to numeric r0, then uses
+     * 0xa0a00000 + ((r0 + 10) << 2); r0 is not a pointer. */
     volatile uint32_t *field =
-        (volatile uint32_t *)(void *)(registers + 40u);
+        (volatile uint32_t *)(uintptr_t)
+            (UINT32_C(0xa0a00000) + ((register_index + 10u) << 2u));
     *field = (*field & UINT32_C(0xffff03ff)) |
              ((channel & UINT32_C(0x3f)) << 10u);
     return 0u;

@@ -31,7 +31,8 @@ static void restore_primask(uint32_t value)
     __asm volatile("msr primask, %0" :: "r"(value) : "memory");
 }
 
-uint32_t opencfw_boot_control_transition(uint32_t mode)
+uint64_t opencfw_boot_control_transition_core(uint32_t mode,
+                                              uint32_t ambient_r1)
 {
     volatile uint32_t *const power_mode =
         (volatile uint32_t *)(uintptr_t)0x40021000u;
@@ -92,5 +93,5 @@ uint32_t opencfw_boot_control_transition(uint32_t mode)
         (void)mode_config_hook(0u, 0u, &disabled);
     }
     restore_primask(previous);
-    return result;
+    return ((uint64_t)ambient_r1 << 32) | result;
 }

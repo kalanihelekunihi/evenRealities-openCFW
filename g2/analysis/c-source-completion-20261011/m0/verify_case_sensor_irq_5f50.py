@@ -11,7 +11,7 @@ src=R/'g2/components/case/startup_candidate_20261011/application_boot_sensor_irq
 obj=H/'sensor_irq_5f50.oracle.o';stub=H/'sensor_irq_5f50.oracle_stub.c';stubobj=H/'sensor_irq_5f50.oracle_stub.o';elf=H/'sensor_irq_5f50.oracle.elf'
 flags=['/usr/bin/clang','--target=arm-none-eabi','-mcpu=cortex-m0plus','-mthumb','-Os','-ffreestanding','-fno-builtin','-Wall','-Wextra','-Werror','-c']
 subprocess.run(flags+[str(src),'-o',str(obj)],check=True)
-stub.write_text('#include <stdint.h>\nvoid case_boot_sensor_irq_error(uint32_t x){(void)x;}\nuint32_t case_boot_sensor_irq_restart_ready(uint32_t x){(void)x;return 0;}\nvoid case_boot_sensor_irq_restart(uint32_t x){(void)x;}\nvoid case_boot_sensor_irq_final(uint32_t x){(void)x;}\n')
+stub.write_text('#include <stdint.h>\nvoid case_boot_sensor_irq_error(uint32_t x){(void)x;}\nuint32_t case_boot_sensor_irq_restart_ready(uint32_t x){(void)x;return 0;}\nvoid case_boot_sensor_irq_restart(uint32_t x){(void)x;}\nvoid case_boot_sensor_irq_final(uint32_t x){(void)x;}\nuint32_t case_boot_sensor_cancel_callback(uint32_t x){(void)x;return 0;}\n')
 subprocess.run(flags+[str(stub),'-o',str(stubobj)],check=True)
 subprocess.run(['/opt/homebrew/bin/arm-none-eabi-ld','-Ttext=0x100000',str(obj),str(stubobj),'-o',str(elf)],check=True,stderr=subprocess.DEVNULL)
 with elf.open('rb') as f:

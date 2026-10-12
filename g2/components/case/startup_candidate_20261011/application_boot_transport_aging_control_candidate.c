@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x080023f4/0x080024c0 left/right aging controls.
  * The native immediate six-byte request has command 0x3e, side and enable.
@@ -17,15 +18,15 @@ static void control(uint32_t side,uint32_t enabled)
     uint32_t offset=side==1u?16u:17u;
     if(state[offset]==0u){
         if(*quiet==0u){
-            (void)case_policy_log(side==1u?0x08002494u:0x08002560u);
-            (void)case_policy_log(side==1u?0x08002490u:0x0800255cu);
+            (void)case_policy_log(side==1u?CASE_STRING_ADDR(08002494):CASE_STRING_ADDR(08002560));
+            (void)case_policy_log(side==1u?CASE_STRING_ADDR(08002490):CASE_STRING_ADDR(0800255c));
         }
         return;
     }
     if(*busy!=0u){
         if(*quiet==0u){
-            (void)case_policy_log(side==1u?0x08002468u:0x08002534u);
-            (void)case_policy_log(side==1u?0x08002490u:0x0800255cu);
+            (void)case_policy_log(side==1u?CASE_STRING_ADDR(08002468):CASE_STRING_ADDR(08002534));
+            (void)case_policy_log(side==1u?CASE_STRING_ADDR(08002490):CASE_STRING_ADDR(0800255c));
         }
         return;
     }

@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "cases": 1620,
+  "source_sha256": "ac7d6c3bb0771e1d0954b1365a34c3ddfaa913d52898ccb7d7723908e9c6fdc5",
+  "scope": "controlled host source callback, not native ARC execution",
+  "coverage": [
+    "saved692return across child mutations",
+    "8-bit count underflow",
+    "continuing captured consumed vs fresh cursor/available",
+    "optional custom callback",
+    "default start and post-callback copies",
+    "64-bit counter carry",
+    "timing boundary and active restoration"
+  ],
+  "native_range": "32c69c..32c7e2",
+  "unqualified": [
+    "actual refill/start/continue providers",
+    "hardware callback runtime",
+    "full image placement"
+  ]
+}

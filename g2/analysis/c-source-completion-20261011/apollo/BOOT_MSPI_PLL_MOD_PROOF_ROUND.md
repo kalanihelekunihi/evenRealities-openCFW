@@ -1,0 +1,9 @@
+# Boot MSPI and PLL remainder proof round
+
+Locked Bootloader SHA-256 `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`.
+
+The largest rooted header-only lead, MSPI interrupt service `0x426536`, remains selected C. I recompiled the exact current `mspi_interrupt_service_candidate.c` for the retained Cortex-M33 stock/source child-cut oracle. `boot-mspi-service-current-oracle.json` is PASS for 14 invalid, idle, HP-completion, descriptor callback, CQ callback/status/error and nonzero-child cases. It records the current source hash, 610 native instruction bytes across the service region, and 180/234 bytes of the catalogue body. Real lower-child composition, remaining branches, synthetic MMIO liveness and physical interrupt delivery remain outside this oracle; the body stays a header-only proof lead rather than being promoted on insufficient coverage.
+
+The selected binary32 remainder helper `0x427cdc` has stronger evidence. A fresh full-descendant PLL-math run using current selected `clock_pll_mod.c` passes 4,311 cases, including 2,560 direct remainder cases, and visits all 202 native bytes of the catalogue body. It compares return bits, domain store and FPSCR exception bits under synthetic SRAM and FPSCR initially zero, with no child answer stubs or source-side stock fallback. Its source comment was updated to reflect this bounded qualification; no algorithm changed. Added a reviewed source binding for this complete native body.
+
+Coherent selected target build `boot-coplacement-msprirq-mod-proof-round/receipt.json` is `PASS_BOUNDED_LINK`: 373 selected C/ASM units, 1,010 source providers, three genuine ROM imports, 34 callback relocations. Rooted catalogue remains 654 labels with 146 header-only proof leads, down one; no rooted labels lack a machine crosswalk. This backlog is not a missing-C count. Full source data/scatter, indirect roots, hardware/runtime behavior and production image equality remain open.

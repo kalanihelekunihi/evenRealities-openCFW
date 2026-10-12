@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08009a14 lens charge/idle command selection.
  */
@@ -17,8 +18,8 @@ uint32_t case_policy_sensor_write(uint32_t channel,uint32_t count,const uint8_t 
         bus_state[1u]=bus_state[1u]+1u;
     }
     if(*(volatile uint8_t *)(uintptr_t)0x200000bfu==0u){
-        case_policy_log_four(0x0800d538u,10u,bus_state[2u],bus_state[3u],bus_state[4u]);
-        case_policy_log(0x0800916cu);
+        case_policy_log_four(CASE_STRING_ADDR(0800d538),10u,bus_state[2u],bus_state[3u],bus_state[4u]);
+        case_policy_log(CASE_STRING_ADDR(0800916c));
     }
     return 0u;
 }

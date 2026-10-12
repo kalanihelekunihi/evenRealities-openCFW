@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "cases": 263168,
+  "source_sha256": "d2b352cdd270da9460abf339e98abf8f2ffd22adb87605ec4838503b96fb05f6",
+  "scope": "controlled native-contract compositor source cases, not ARC execution",
+  "native_range": "323dc0..32412a",
+  "coverage": [
+    "all byte payload totals and product limits",
+    "optional field/disabled capacity",
+    "metadata width and second capacity clamp",
+    "captured serializer/finalizer arguments",
+    "both6-byte address fields",
+    "all byte PHY encoded field"
+  ],
+  "unqualified": [
+    "typed action and aux/finalize children",
+    "type1 overlapping payload copy",
+    "wider forced/allowed and callback mutations",
+    "native ARC runtime"
+  ]
+}

@@ -17,6 +17,7 @@ static bool last_in_domain(uint32_t peripheral) {
 }
 
 uint32_t g2_power_vendor_enable(uint32_t peripheral) {
+    peripheral=(uint8_t)peripheral; /* Native public ABI consumes the low byte. */
     const g2_power_product_config *c = &g2_power_product;
     g2_power_descriptor p;
     uint32_t status = g2_power_get_descriptor(&p, peripheral);
@@ -28,41 +29,42 @@ uint32_t g2_power_vendor_enable(uint32_t peripheral) {
     if (peripheral == c->gfx) {
         if (g2_power_previous_gpu_mode == c->gpu_high_performance)
             (void)g2_power_gpu_mode_select(c->gpu_high_performance);
-        g2_power_clock_request(c->clk_hfrc, c->user_gfx);
+        (void)audio_uart_pin_mux_enable(c->clk_hfrc, c->user_gfx);
         if (g2_power_current_gpu_mode == c->gpu_high_performance)
-            g2_power_clock_request(c->clk_hfrc2, c->user_gfx);
+            (void)audio_uart_pin_mux_enable(c->clk_hfrc2, c->user_gfx);
         uint32_t gpu_state = g2_power_current_gpu_mode == c->gpu_low_power ?
                              c->gpu_active_lp : c->gpu_active_hp;
-        status = g2_power_spot_update(c->stim_gpu, true, &gpu_state);
-        if (status != c->status_success) return status;
+        /* Native 0x47f642 continues after the GPU SPOT callback as well. */
+        (void)audio_ble_flash_control(c->stim_gpu, 1u, &gpu_state);
     } else {
         if ((p.enable_mask & c->monitor_device_mask) && peripheral < c->pdm0) {
             /* Stock 0x47f660 calls the ordinary SPOT hook and continues. */
-            (void)g2_power_spot_update(c->stim_device, true, &p.status_mask);
+            (void)audio_ble_flash_control(c->stim_device, 1u, &p.status_mask);
         }
         if ((p.enable_mask & c->monitor_audio_mask) && peripheral >= c->pdm0) {
             /* Stock 0x47f67c likewise ignores the audio hook result. */
-            (void)g2_power_spot_update(c->stim_audio, true, &p.status_mask);
+            (void)audio_ble_flash_control(c->stim_audio, 1u, &p.status_mask);
         }
     }
     uint32_t saved = g2_power_critical_save();
     REG(p.enable_register) |= p.enable_mask;
     g2_power_critical_restore(saved);
     g2_power_tempco_pending();
-    status = g2_power_wait_status(c->max_wait_us, p.status_register,
-                                  p.status_mask, p.status_mask, true);
+    status = audio_wait5(c->max_wait_us, (uint32_t)p.status_register,
+                         p.status_mask, p.status_mask, 1);
     if (status != c->status_success) return status;
     if (peripheral == c->crypto) {
-        status = g2_power_wait_status(c->crypto_wait_us, c->crypto_nvm_idle_register,
-                                      c->crypto_nvm_idle_mask, c->crypto_nvm_idle_mask, true);
+        status = audio_wait4(c->crypto_wait_us, (uint32_t)c->crypto_nvm_idle_register,
+                             c->crypto_nvm_idle_mask, c->crypto_nvm_idle_mask);
         if (status != c->status_success) return status;
-        g2_power_clock_request(c->clk_hfrc, c->user_crypto);
+        (void)audio_uart_pin_mux_enable(c->clk_hfrc, c->user_crypto);
     }
-    if (peripheral == c->otp) g2_power_delay_us(100);
+    if (peripheral == c->otp) audio_delay_us(100);
     return REG(p.status_register) & p.status_mask ? c->status_success : c->status_fail;
 }
 
 uint32_t g2_power_vendor_disable(uint32_t peripheral) {
+    peripheral=(uint8_t)peripheral;
     const g2_power_product_config *c = &g2_power_product;
     g2_power_descriptor p;
     uint32_t status = g2_power_get_descriptor(&p, peripheral);
@@ -72,24 +74,26 @@ uint32_t g2_power_vendor_disable(uint32_t peripheral) {
         if ((REG(c->revision_register) & 0xffu) < c->min_revision_for_otp_crypto_off &&
             (REG(c->otp_power_status_register) & c->crypto_power_mask))
             return c->status_in_use;
-        status = g2_power_wait_status(c->max_wait_otp_us, c->otp_ptm_status_register,
-                                      c->otp_ptm_busy_mask, 0, true);
+        status = audio_wait5(c->max_wait_otp_us, (uint32_t)c->otp_ptm_status_register,
+                             c->otp_ptm_busy_mask, 0, 1);
         if (status != c->status_success) return status;
     }
     if (peripheral == c->debug) {
         REG(c->debug_demcr_register) &= ~c->debug_trcena_mask;
-        REG(c->debug_control_register) &= ~(c->debug_trace_enable_mask | c->debug_clock_select_mask);
+        /* Native performs two control-register transactions in this order. */
+        REG(c->debug_control_register) &= ~c->debug_trace_enable_mask;
+        REG(c->debug_control_register) &= ~c->debug_clock_select_mask;
     }
     g2_power_tempco_postpone();
     uint32_t saved = g2_power_critical_save();
     REG(p.enable_register) &= ~p.enable_mask;
     g2_power_critical_restore(saved);
     if (last_in_domain(peripheral)) {
-        status = g2_power_wait_status(c->max_wait_us, p.status_register,
-                                      p.status_mask, p.status_mask, false);
+        status = audio_wait5(c->max_wait_us, (uint32_t)p.status_register,
+                             p.status_mask, p.status_mask, 0);
         if (status == c->status_success) {
             if (peripheral == c->crypto)
-                g2_power_clock_release(c->clk_hfrc, c->user_crypto);
+                (void)audio_uart_pin_mux_disable(c->clk_hfrc, c->user_crypto);
             if (peripheral == c->gfx) {
                 uint32_t gpu_state = c->gpu_off;
                 if (g2_power_current_gpu_mode == c->gpu_high_performance) {
@@ -98,17 +102,17 @@ uint32_t g2_power_vendor_disable(uint32_t peripheral) {
                 } else {
                     g2_power_previous_gpu_mode = c->gpu_low_power;
                 }
-                status = g2_power_spot_update(c->stim_gpu, true, &gpu_state);
-                if (status != c->status_success) return status;
-                g2_power_clock_release_all(c->user_gfx);
+                /* Native 0x47f8c8 retains the wait result, even on callback failure. */
+                (void)audio_ble_flash_control(c->stim_gpu, 1u, &gpu_state);
+                (void)audio_uart_font_pin_mux_disable(c->user_gfx);
             } else {
                 if (peripheral < c->pdm0 && (p.enable_mask & c->monitor_device_mask)) {
                     /* Stock 0x47f8e4 continues through TEMPco pending. */
-                    (void)g2_power_spot_update(c->stim_device, false, &p.status_mask);
+                    (void)audio_ble_flash_control(c->stim_device, 0u, &p.status_mask);
                 }
                 if (peripheral >= c->pdm0 && (p.enable_mask & c->monitor_audio_mask)) {
                     /* Stock 0x47f8fe also ignores this callback result. */
-                    (void)g2_power_spot_update(c->stim_audio, false, &p.status_mask);
+                    (void)audio_ble_flash_control(c->stim_audio, 0u, &p.status_mask);
                 }
             }
         }

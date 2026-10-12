@@ -7,6 +7,7 @@
 #include "queue_receive.h"
 #include "timer_wait.h"
 #include "event_flags_set.h"
+#include "list_insert_end.h"
 #include <stddef.h>
 #define W(a) (*(volatile uint32_t *)(uintptr_t)(a))
 extern uint32_t opencfw_bl_mask_interrupts(void);
@@ -54,11 +55,7 @@ uint32_t opencfw_bl_kernel_queue_get_from_isr(uint32_t *queue,void *message,uint
     opencfw_bl_restore_interrupts(mask);return result;
 }
 static void append(uint32_t *list,uint32_t *item) {
-    uint32_t *anchor=(uint32_t *)(uintptr_t)list[1];
-    uint32_t *previous=(uint32_t *)(uintptr_t)anchor[2];
-    item[1]=(uint32_t)(uintptr_t)anchor;item[2]=(uint32_t)(uintptr_t)previous;
-    previous[1]=(uint32_t)(uintptr_t)item;anchor[2]=(uint32_t)(uintptr_t)item;
-    item[4]=(uint32_t)(uintptr_t)list;list[0]++;
+    opencfw_boot_list_insert_end(list,item);
 }
 uint32_t opencfw_boot_isr_thread_notify(uint32_t *thread,uint32_t index,uint32_t value,uint32_t action,uint32_t *previous,uint32_t *woken) {
     if(!thread || index)fail();

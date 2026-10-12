@@ -73,6 +73,16 @@ static void critical_restore(uint32_t previous)
     __asm volatile("msr primask, %0" :: "r"(previous) : "memory");
 }
 
+/* Native 0x41ac92: one SYSPLL reference-select bit under PRIMASK. */
+__attribute__((noinline)) void opencfw_boot_syspll_ref_set(uint32_t selection)
+{
+    const uint32_t previous = critical_save();
+    volatile uint32_t *const ref_config =
+        (volatile uint32_t *)(uintptr_t)SYSPLL_REF_CONFIG;
+    *ref_config = (*ref_config & 0xffffffbfu) | ((selection & 1u) << 6);
+    critical_restore(previous);
+}
+
 static uint32_t delay_status_check(uint32_t timeout,
                                    volatile uint32_t *address,
                                    uint32_t mask, uint32_t expected)
@@ -168,9 +178,12 @@ static uint32_t pll_deinitialize(uint32_t *handle)
 
 static uint32_t pll_configure(uint32_t *handle, const uint8_t *config)
 {
-    if (handle == 0 || (handle[0] & 0x01ffffffu) != SYSPLL_CONTEXT_MAGIC)
+    volatile uint32_t *const context = (volatile uint32_t *)handle;
+    if (handle == 0 || (context[0] & 0x01ffffffu) != SYSPLL_CONTEXT_MAGIC)
         return 2u;
-    if ((handle[0] & 0x02000000u) != 0u)
+    /* Stock 0x427424 reads context[1] before rereading context[0]. */
+    (void)context[1];
+    if ((context[0] & 0x02000000u) != 0u)
         return 7u;
 
     const uint16_t multiplier =
@@ -206,12 +219,7 @@ static uint32_t pll_configure(uint32_t *handle, const uint8_t *config)
     *control2 = (*control2 & 0xfffff8ffu) |
                 (((uint32_t)config[5] & 7u) << 8);
 
-    const uint32_t previous = critical_save();
-    volatile uint32_t *const ref_config =
-        (volatile uint32_t *)(uintptr_t)SYSPLL_REF_CONFIG;
-    *ref_config = (*ref_config & 0xffffffbfu) |
-                  (((uint32_t)config[0] & 1u) << 6);
-    critical_restore(previous);
+    opencfw_boot_syspll_ref_set(config[0]);
 
     *control0 &= 0xffffffefu;
     *control0 |= 1u;

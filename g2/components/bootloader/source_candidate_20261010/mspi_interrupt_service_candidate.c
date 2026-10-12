@@ -1,8 +1,10 @@
 /* SPDX-License-Identifier: BSD-3-Clause
  * Copyright (c) 2025 Ambiq Micro, Inc.
- * Isolated candidate for stock bootloader 0x426536. Based on pinned Ambiq HAL
+ * Selected C candidate for stock bootloader 0x426536. Based on pinned Ambiq HAL
  * 5.1.0 am_hal_mspi_interrupt_service and locked stock pseudocode. The stock
- * target uses private cmdq, DMA and clock lowers; these remain real imports.
+ * target uses private cmdq, DMA and clock lowers; these are selected C
+ * providers. A 14-case bounded child-cut oracle covers 610/712 native bytes;
+ * remaining branches, real child composition and hardware timing stay open.
  */
 #include <stdint.h>
 #include <stddef.h>

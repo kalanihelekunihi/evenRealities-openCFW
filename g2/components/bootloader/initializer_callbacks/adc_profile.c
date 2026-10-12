@@ -36,6 +36,8 @@ uint32_t opencfw_bl_adc_profile_transfer(uint32_t context,uint32_t operation,uin
 }
 __attribute__((noinline))
 uint32_t opencfw_bl_adc_apply_profile(uint32_t context,const void *profile) {
+    /* Native 0x42ea6e reads context+4 before its NULL comparison. Preserve
+     * that genuine caller precondition, including the fault for NULL. */
     if(!valid(context))return 2;
     uintptr_t p=(uintptr_t)profile;
     if(B(p)!=2u)return 6;

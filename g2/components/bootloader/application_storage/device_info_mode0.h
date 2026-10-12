@@ -4,6 +4,7 @@
 
 #include <stdint.h>
 
-void opencfw_boot_device_mode_configure(volatile uint32_t *record);
+void opencfw_boot_device_mode_configure(volatile uint32_t *record,
+                                         uint32_t ambient_read_word);
 
 #endif

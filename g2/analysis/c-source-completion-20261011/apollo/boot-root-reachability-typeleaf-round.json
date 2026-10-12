@@ -1,0 +1,197 @@
+{
+  "status": "ROOTED_DIRECT_CALL_GRAPH_CENSUS",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "vector_slots": 256,
+  "vector_catalogue_slots": 146,
+  "vector_distinct_catalogue_roots": 17,
+  "scatter_callback_roots": 34,
+  "scatter_callback_catalogue_roots": 29,
+  "scatter_callback_entries_not_in_catalogue": [
+    {
+      "offset": "0x174",
+      "entry": "0x428920"
+    },
+    {
+      "offset": "0x1b0",
+      "entry": "0x429e00"
+    },
+    {
+      "offset": "0x1b8",
+      "entry": "0x42a030"
+    },
+    {
+      "offset": "0x1bc",
+      "entry": "0x42a032"
+    },
+    {
+      "offset": "0x1c0",
+      "entry": "0x42a034"
+    }
+  ],
+  "reachable_catalogue_entries": 654,
+  "reachable_without_machine_crosswalk": 26,
+  "unattributed_root_entries": [],
+  "largest_reachable_unattributed": [
+    {
+      "entry": "0x422698",
+      "name": "FUN_00422698",
+      "body_bytes": 52,
+      "direct_depth": 7
+    },
+    {
+      "entry": "0x4226cc",
+      "name": "FUN_004226cc",
+      "body_bytes": 52,
+      "direct_depth": 7
+    },
+    {
+      "entry": "0x412f8c",
+      "name": "FUN_00412f8c",
+      "body_bytes": 34,
+      "direct_depth": 7
+    },
+    {
+      "entry": "0x41ac92",
+      "name": "FUN_0041ac92",
+      "body_bytes": 32,
+      "direct_depth": 5
+    },
+    {
+      "entry": "0x41a5e0",
+      "name": "FUN_0041a5e0",
+      "body_bytes": 30,
+      "direct_depth": 10
+    },
+    {
+      "entry": "0x41f424",
+      "name": "FUN_0041f424",
+      "body_bytes": 28,
+      "direct_depth": 2
+    },
+    {
+      "entry": "0x417c64",
+      "name": "FUN_00417c64",
+      "body_bytes": 22,
+      "direct_depth": 6
+    },
+    {
+      "entry": "0x41a65c",
+      "name": "FUN_0041a65c",
+      "body_bytes": 22,
+      "direct_depth": 7
+    },
+    {
+      "entry": "0x418d90",
+      "name": "FUN_00418d90",
+      "body_bytes": 22,
+      "direct_depth": 10
+    },
+    {
+      "entry": "0x41a492",
+      "name": "FUN_0041a492",
+      "body_bytes": 20,
+      "direct_depth": 10
+    },
+    {
+      "entry": "0x41a672",
+      "name": "FUN_0041a672",
+      "body_bytes": 18,
+      "direct_depth": 7
+    },
+    {
+      "entry": "0x41cae8",
+      "name": "FUN_0041cae8",
+      "body_bytes": 16,
+      "direct_depth": 5
+    },
+    {
+      "entry": "0x427d98",
+      "name": "roundf_427d98",
+      "body_bytes": 16,
+      "direct_depth": 11
+    },
+    {
+      "entry": "0x4213da",
+      "name": "FUN_004213da",
+      "body_bytes": 12,
+      "direct_depth": 6
+    },
+    {
+      "entry": "0x414c34",
+      "name": "FUN_00414c34",
+      "body_bytes": 12,
+      "direct_depth": 7
+    },
+    {
+      "entry": "0x41f4b6",
+      "name": "FUN_0041f4b6",
+      "body_bytes": 10,
+      "direct_depth": 1
+    },
+    {
+      "entry": "0x41f4ac",
+      "name": "FUN_0041f4ac",
+      "body_bytes": 10,
+      "direct_depth": 5
+    },
+    {
+      "entry": "0x41527e",
+      "name": "FUN_0041527e",
+      "body_bytes": 10,
+      "direct_depth": 6
+    },
+    {
+      "entry": "0x41531c",
+      "name": "FUN_0041531c",
+      "body_bytes": 10,
+      "direct_depth": 6
+    },
+    {
+      "entry": "0x41714c",
+      "name": "FUN_0041714c",
+      "body_bytes": 10,
+      "direct_depth": 7
+    },
+    {
+      "entry": "0x413208",
+      "name": "FUN_00413208",
+      "body_bytes": 10,
+      "direct_depth": 7
+    },
+    {
+      "entry": "0x4169f2",
+      "name": "FUN_004169f2",
+      "body_bytes": 10,
+      "direct_depth": 9
+    },
+    {
+      "entry": "0x41a69a",
+      "name": "FUN_0041a69a",
+      "body_bytes": 8,
+      "direct_depth": 6
+    },
+    {
+      "entry": "0x41a6a2",
+      "name": "FUN_0041a6a2",
+      "body_bytes": 8,
+      "direct_depth": 6
+    },
+    {
+      "entry": "0x41e474",
+      "name": "FUN_0041e474",
+      "body_bytes": 6,
+      "direct_depth": 8
+    },
+    {
+      "entry": "0x4213d8",
+      "name": "FUN_004213d8",
+      "body_bytes": 2,
+      "direct_depth": 6
+    }
+  ],
+  "limits": [
+    "The native catalogue omits some valid function entries and may have incomplete direct-call edges.",
+    "Reachability from vectors and one expanded callback payload excludes runtime-installed function pointers, task creation, computed dispatch and external ROM callbacks.",
+    "Source attribution leads do not prove whole-body equality or physical behavior."
+  ]
+}

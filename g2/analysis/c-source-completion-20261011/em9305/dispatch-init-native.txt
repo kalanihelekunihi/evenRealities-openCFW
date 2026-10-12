@@ -1,0 +1,15 @@
+  331ac0:	c2e2                	enter_s	[r13,blink]
+  331ac2:	45cb 0080 56e8      	mov_s	r13,0x8056e8
+  331ac8:	4d38                	add_s	r0,r13,0x18
+  331aca:	702c                	mov_s	r1,0
+  331acc:	0d52 00a0           	bl.d	5456	;0x33301c
+  331ad0:	da1c                	mov_s	r2,0x1c
+  331ad2:	702c                	mov_s	r1,0
+  331ad4:	40c3 0000 1fff      	mov_s	r0,0x1fff
+  331ada:	1d10 17c1           	st	31,[r13,16]
+  331ade:	1d00 1fc1           	st	-1,[r13]
+  331ae2:	a525                	st_s	r1,[r13,0x14]
+  331ae4:	a523                	st_s	r1,[r13,0xc]
+  331ae6:	a522                	st_s	r1,[r13,0x8]
+  331ae8:	a501                	st_s	r0,[r13,0x4]
+  331aea:	c6c2                	leave_s	[r13,blink,pcl]

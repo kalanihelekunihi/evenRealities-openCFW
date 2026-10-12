@@ -8,7 +8,7 @@
  * selector11 raw R0 is target-word address; others return packed LV bytes.
  * Not a drop-in binary signature or public device-safe API. */
 uint32_t opencfw_spot_pcm22_transition5(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton);
-uint32_t opencfw_spot_pcm22_transition11(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton);
-uint32_t opencfw_spot_pcm22_transition12(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton);
+uint64_t opencfw_spot_pcm22_transition11(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton);
+uint64_t opencfw_spot_pcm22_transition12(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton);
 uint32_t opencfw_spot_pcm22_transition21(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton);
 #endif

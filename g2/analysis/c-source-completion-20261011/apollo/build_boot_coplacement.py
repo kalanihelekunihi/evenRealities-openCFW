@@ -18,9 +18,7 @@ objects = out / 'objects'
 subprocess.run([sys.executable,
     str(ROOT / 'g2/components/bootloader/source_candidate_20261010/build.py'),
     '--output', str(objects)], check=True)
-sources = [ROOT / f'g2/components/bootloader/source_candidate_20261010/{name}'
-           for name in ('tlsf_printf_candidate.c', 'generic_log_float_candidate.c',
-                        'mspi_interrupt_service_candidate.c')]
+sources = []
 experimental = []
 for index, source in enumerate(sources):
     obj = out / f'experimental-{index}.o'

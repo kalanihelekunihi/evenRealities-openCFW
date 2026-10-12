@@ -1,0 +1,18 @@
+{
+  "candidate_sha256": "803a4c2122dadf2443537111047261f354deb7e78ed4ca5ad4e65140bcd6f97d",
+  "script_sha256": "c28a766fc62317fa8b6c8c6e21061c2f509e66bc563810da5fa04785673e9ddc",
+  "link_exit_code": 0,
+  "link_stderr_tail": "",
+  "source_only": true,
+  "full_firmware_qualified": false,
+  "limits": [
+    "Conditional 25-section source-root discard requires native indirect/external root proof.",
+    "Stage-1 package/XIP header emission and physical SRAM/DRAM alias are outside this ELF.",
+    "QEMU/hardware execution and all target literal/branch behavior remain unqualified."
+  ],
+  "elf_sha256": "4e36b232a8aa8d9507de04aae985b9df8afb395df98ff51cd57641c2f92fadc7",
+  "relocation_table_empty": true,
+  "entry_address": "0x10023588",
+  "native_loader_entry_match": false,
+  "program_headers": "\nElf file type is EXEC (Executable file)\nEntry point 0x10023588\nThere are 3 program headers, starting at offset 52\n\nProgram Headers:\n  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align\n  LOAD           0x000000 0x10023000 0x10023000 0x03d7c 0x03d7c RWE 0x1000\n  LOAD           0x004004 0x10203004 0x10203004 0x08e34 0x08e34 R E 0x1000\n  LOAD           0x00cff8 0x20026ff8 0x20026ff8 0x00000 0x00328 RW  0x1000\n\n Section to Segment mapping:\n  Segment Sections...\n   00     .gx8002_vectors .gx8002_resident_body_pre .gx8002_clock_boot_25cd0 .gx8002_clock_boot_25ce0 .gx8002_clock_boot_25cf4 .gx8002_resident_body_post .gx8002_flash_state .gx8002_flash_api .gx8002_otp_2657c .gx8002_otp_265a4 .gx8002_otp_265dc .gx8002_flash_catalog .gx8002_flash_otp .gx8002_module_table .gx8002_module_config .gx8002_clock_defaults .gx8002_clock_sources_26904 .gx8002_clock_sources_26954 .gx8002_board_state .gx8002_uart_channels .gx8002_aout_context .gx8002_aout_ops .gx8002_aout_config .gx8002_uart_rx_config .gx8002_kws_keywords .gx8002_sample_prestate .gx8002_sample_registration .gx8002_request_initial \n   01     .gx8002_xip_closure \n   02     .gx8002_flash_protection_maps .gx8002_console_port \n"
+}

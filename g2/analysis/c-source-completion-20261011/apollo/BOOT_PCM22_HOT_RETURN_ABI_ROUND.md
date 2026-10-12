@@ -1,0 +1,9 @@
+# Boot PCM22 selector11/12 return ABI correction
+
+Locked stock SHA-256: `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`.
+
+Adjacent native selector callbacks 0x428e6a and 0x4290a2 both return 64 bits in R1:R0, while the selected C previously declared 32-bit results. Native selector11 returns the target selector-word pointer in R0 and the four pre-transition 7-bit fields in R1. Native selector12 returns those packed fields in R0 and the incoming fourth word unchanged in R1. The selected C now preserves these full results. Typed callback declarations across selected initialized-data units and the private interface were updated; callback pointer relocations remain at 34.
+
+Native pseudocode final concatenations establish the word layout. The target `unit_089.o` disassembly confirms selector11 ends with R0=target word and R1=packed field word, and selector12 ends with R0=packed word and R1=saved fourth input. This is ABI/source evidence, not a full original/source behavioral oracle for register side effects.
+
+Fresh `boot-coplacement-pcm22-hot-return-round/receipt.json` is terminal `PASS_BOUNDED_LINK`: 371 selected units, 1,008 providers, three genuine ROM imports, 34 callback relocations. It also includes the preceding selector13 64-bit correction. Selected image file is 158,628 bytes versus stock 148,599; final image layout/equality is open. The adjacent selector1 and selector3 source bodies already had correct 64-bit callback results, so explicit bindings were added after reviewing their native concatenations and selected source. In the conservative 654-entry vector/scatter direct-call graph, header-only proof leads moved 187 to 183; whole 903-entry catalogue has 281. Three ROM imports, indirect roots, scatter/layout, physical behavior and complete runtime equality remain open.

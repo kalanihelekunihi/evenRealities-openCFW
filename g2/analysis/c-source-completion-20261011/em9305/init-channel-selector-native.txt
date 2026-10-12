@@ -1,0 +1,90 @@
+  306ab4:	1600 7000 0080 5cac 	ld	r0,[0x805cac]
+  306abc:	41c3 0080 27e4      	mov_s	r1,0x8027e4
+  306ac2:	1900 0f80 0032 5898 	st	0x325898,[r1,0]
+  306aca:	8804                	ldb_s	r0,[r0,0x4]
+  306acc:	e089                	cmp_s	r0,0x9
+  306ace:	20e0 07c5           	jc	[blink]
+  306ad2:	40c3 0080 5b30      	mov_s	r0,0x805b30
+  306ad8:	8020                	ld_s	r1,[r0,0]
+  306ada:	b98e                	bset_s	r1,r1,0xe
+  306adc:	7fe0                	j_s.d	[blink]
+  306ade:	a020                	st_s	r1,[r0,0]
+  325898:	c2e6                	enter_s	[r13-r15,blink]
+  32589a:	4508                	mov_s	r13,r0
+  32589c:	1083 0700           	ldh.as	r0,[r0,131]
+  3258a0:	15a1 1701           	ldh.as	r1,[r13,161]
+  3258a4:	42c3 0000 f0f0      	mov_s	r2,0xf0f0
+  3258aa:	6a74                	asl_s	r3,r2,0x4
+  3258ac:	7827                	xor_s	r0,r0,r1
+  3258ae:	2004 0088           	and	r8,r0,r2
+  3258b2:	b808                	asl_s	r0,r0,0x8
+  3258b4:	7864                	and_s	r0,r0,r3
+  3258b6:	44cb 000c ccc0      	mov_s	r12,0xcccc0
+  3258bc:	2005 0200           	or	r0,r0,r8
+  3258c0:	6cd2                	asl_s	r14,r12,0x2
+  3258c2:	2004 0308           	and	r8,r0,r12
+  3258c6:	b804                	asl_s	r0,r0,0x4
+  3258c8:	78c4                	and_s	r0,r0,r14
+  3258ca:	47cb 002a aa80      	mov_s	r15,0x2aaa80
+  3258d0:	2005 0200           	or	r0,r0,r8
+  3258d4:	232f 13c0           	asl	r11,r15
+  3258d8:	2004 03c8           	and	r8,r0,r15
+  3258dc:	b802                	asl_s	r0,r0,0x2
+  3258de:	2004 02c0           	and	r0,r0,r11
+  3258e2:	2005 0200           	or	r0,r0,r8
+  3258e6:	b827                	lsr_s	r0,r0,0x7
+  3258e8:	205f 0440           	mpyuw	r0,r0,0x11
+  3258ec:	6038                	add_s	r0,r0,r1
+  3258ee:	2004 0088           	and	r8,r0,r2
+  3258f2:	b808                	asl_s	r0,r0,0x8
+  3258f4:	7864                	and_s	r0,r0,r3
+  3258f6:	2005 0200           	or	r0,r0,r8
+  3258fa:	2004 0308           	and	r8,r0,r12
+  3258fe:	b804                	asl_s	r0,r0,0x4
+  325900:	78c4                	and_s	r0,r0,r14
+  325902:	2005 0200           	or	r0,r0,r8
+  325906:	2004 03c8           	and	r8,r0,r15
+  32590a:	b802                	asl_s	r0,r0,0x2
+  32590c:	2004 02c0           	and	r0,r0,r11
+  325910:	2005 0200           	or	r0,r0,r8
+  325914:	b827                	lsr_s	r0,r0,0x7
+  325916:	205f 0440           	mpyuw	r0,r0,0x11
+  32591a:	6038                	add_s	r0,r0,r1
+  32591c:	7a04                	and_s	r2,r2,r0
+  32591e:	b808                	asl_s	r0,r0,0x8
+  325920:	7864                	and_s	r0,r0,r3
+  325922:	7a05                	or_s	r2,r2,r0
+  325924:	6a14                	asl_s	r0,r2,0x4
+  325926:	7c44                	and_s	r12,r12,r2
+  325928:	7e04                	and_s	r14,r14,r0
+  32592a:	2605 1300           	or	r0,r14,r12
+  32592e:	7f04                	and_s	r15,r15,r0
+  325930:	b802                	asl_s	r0,r0,0x2
+  325932:	2004 02c0           	and	r0,r0,r11
+  325936:	78e5                	or_s	r0,r0,r15
+  325938:	b827                	lsr_s	r0,r0,0x7
+  32593a:	205f 044e           	mpyuw	r14,r0,0x11
+  32593e:	663e                	add_s	r14,r14,r1
+  325940:	7e27                	xor_s	r14,r14,r1
+  325942:	261f 1f80 0000 dd68 	mpyuw	r0,r14,0xdd68
+  32594a:	41a1                	mov_s	r1,r13
+  32594c:	2180 0384           	add	r1,r1,270
+  325950:	b835                	lsr_s	r0,r0,0x15
+  325952:	209e 06ff           	mpyw	r0,r0,-37
+  325956:	661f                	add_s	r15,r14,r0
+  325958:	a9e0                	stb_s	r15,[r1,0]
+  32595a:	1545 1600           	ld.as	r0,[r13,69]
+  32595e:	1546 1601           	ld.as	r1,[r13,70]
+  325962:	0e96 ee6f           	bl.d	-143724	;0x3027f4
+  325966:	7af0                	exth_s	r2,r15
+  325968:	0817 003f           	bbit1.d.t	r0,0,22	;0x32597e
+  32596c:	2556 1880           	add3	r0,r13,0x22
+  325970:	8800                	ldb_s	r0,[r0,0]
+  325972:	78ca                	mpyuw_s	r0,r0,r14
+  325974:	b830                	lsr_s	r0,r0,0x10
+  325976:	651d                	add_s	r13,r13,r0
+  325978:	2580 1704           	add	r13,r13,284
+  32597c:	8de0                	ldb_s	r15,[r13,0]
+  32597e:	78ef                	extb_s	r0,r15
+  325980:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  325982:	78e0                	nop_s

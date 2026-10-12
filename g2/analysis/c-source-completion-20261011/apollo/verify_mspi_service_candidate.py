@@ -85,6 +85,8 @@ def main():
         ('idle-other-module',0x20010000,0x1880,{0:0x01bebebe,4:2,0x20:0}),
         ('hp-no-completion',0x20010000,0,{0:0x01bebebe,4:1,0x83c:1,0x840:1}),
         ('hp-complete',0x20010000,0x40,{0:0x01bebebe,4:1,0x83c:1,0x840:1,0x848:1,0x854:0x20018000,0x20:1}),
+        ('hp-error',0x20010000,0x1880,{0:0x01bebebe,4:1,0x83c:1,0x840:1,0x848:1,0x854:0x20018000,0x20:1}),
+        ('hp-remaining',0x20010000,0x40,{0:0x01bebebe,4:1,0x83c:1,0x840:2,0x848:1,0x854:0x20018000,0x20:1}),
         ('hp-complete-clock-release',0x20010000,0x40,{0:0x01bebebe,4:1,0x83c:1,0x840:1,0x848:1,0x854:0x20018000,0x20:0}),
         ('cq-status-idle',0x20010000,0x40,{0:0x01bebebe,4:0,0x20:1}),
         ('cq-status-error',0x20010000,0x1880,{0:0x01bebebe,4:0,0x20:1}),
@@ -92,6 +94,7 @@ def main():
         ('hp-descriptor-callback',0x20010000,0x40,{0:0x01bebebe,4:1,0x83c:1,0x840:1,0x848:1,0x854:0x20018000,0x20:1}),
         ('cq-status-failure',0x20010000,0x40,{0:0x01bebebe,4:0,0x20:1}),
         ('cq-disable-failure',0x20010000,0x1880,{0:0x01bebebe,4:0,0x20:1}),
+        ('cq-error-callback-active',0x20010000,0x1880,{0:0x01bebebe,4:0,0x20:2,0x2c:0x600101,0x42c:0x20018000}),
         ('hp-clock-release-failure',0x20010000,0x40,{0:0x01bebebe,4:1,0x83c:1,0x840:1,0x848:1,0x854:0x20018000,0x20:0}),
     ]
     visited=set(); results=[]
@@ -112,12 +115,18 @@ def main():
                                     [(i,original[1][i],candidate[1][i]) for i in range(0x8d0) if original[1][i]!=candidate[1][i]][:16],
                                     original[3],candidate[3])
         visited|=seen; results.append(label)
+    source_path=ROOT/'g2/components/bootloader/source_candidate_20261010/mspi_interrupt_service_candidate.c'
     receipt={'status':'PASS','original_sha256':HASH,'candidate_elf_sha256':hashlib.sha256(elf.read_bytes()).hexdigest(),
+             'candidate_source_sha256':hashlib.sha256(source_path.read_bytes()).hexdigest(),
              'cases':results,'stock_bytes_visited':len(visited),
+             'catalogue_body_bytes_visited':len(visited & set(range(ENTRY, ENTRY + 234))),
+             'catalogue_unvisited_bytes':[hex(x) for x in sorted(set(range(ENTRY, ENTRY + 234))-visited)],
+             'service_range_unvisited_bytes':[hex(x) for x in sorted(set(range(ENTRY, 0x426800))-visited)],
              'limits':['Cortex-M33 recompilation; selected Cortex-M55 object not executed.',
                        'Invalid-handle, idle CQ, HP completion, descriptor callback, CQ status/error, active CQ callback, and three nonzero child results. Lower calls are controlled cuts with explicit status output.',
                        'Synthetic RAM/MMIO; hardware effects and liveness not established.']}
-    pathlib.Path(__file__).with_name('mspi-service-oracle-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+    output=pathlib.Path(sys.argv[2]) if len(sys.argv)>2 else pathlib.Path(__file__).with_name('mspi-service-oracle-receipt.json')
+    output.write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(receipt))
 
 if __name__=='__main__': main()

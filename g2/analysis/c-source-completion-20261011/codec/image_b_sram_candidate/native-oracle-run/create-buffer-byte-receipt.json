@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "buffers": {
+    "forward": {
+      "bytes_compared": 2048,
+      "first_difference": null,
+      "original_sha256": "3ea52841afcfb52560f0cb4b9e0f4ae76a88226d3131624e78169bec11211cde",
+      "source_sha256": "3ea52841afcfb52560f0cb4b9e0f4ae76a88226d3131624e78169bec11211cde"
+    },
+    "inverse": {
+      "bytes_compared": 3072,
+      "first_difference": null,
+      "original_sha256": "211a7dc24f7f55c5b6efd8a43b8dc601894af404a0b9580c331a6355ae05203a",
+      "source_sha256": "211a7dc24f7f55c5b6efd8a43b8dc601894af404a0b9580c331a6355ae05203a"
+    },
+    "steering": {
+      "bytes_compared": 3084,
+      "first_difference": null,
+      "original_sha256": "62bd5f7b55f0d53189241aac22de027a13fb9ddcb905b0bf40ae41c788f95941",
+      "source_sha256": "62bd5f7b55f0d53189241aac22de027a13fb9ddcb905b0bf40ae41c788f95941"
+    }
+  },
+  "original_elf_sha256": "4b40aecd3b615c61bc59ad2f77013e63231b910c622764c008e96f55abc07199",
+  "source_elf_sha256": "0fe084c1bfe6f637af1cfb51589b93cfdd0f88354c630ef733acda7991164f59",
+  "source_receipt_sha256": "dbbe1b7e55fb6edfda0c2638aea5152e5d067eb80e9a5164e99fe1ab91256d06",
+  "stock_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "qemu_sha256": "9fbb51168ef087533e8436a3e020962214a6145b33c7398903d08025b753e304",
+  "limit": "One positive GSC create call in QEMU. Three full buffers only; no failure transport, arbitrary input, hardware FP, or final layout proof."
+}

@@ -43,6 +43,40 @@ uint32_t gx8002_image_b_audio_ring_read_10009fbc(
     return 1u;
 }
 
+/* Native 0x10015b64, the write-side companion to the selected ring reader.
+ * A full ring returns zero without touching input; signed capacity division
+ * and the byte-at-a-time source advance follow the C-SKY instructions. */
+uint32_t gx8002_image_b_audio_ring_write_at_10015b64(
+    volatile int32_t *ring, uint8_t *destination, const uint8_t *source)
+{
+    int32_t write_index = ring[0];
+    int32_t count = ring[4];
+    int32_t capacity = ring[3];
+    int32_t next = (int32_t)((uint32_t)write_index + (uint32_t)count);
+    next -= (next / capacity) * capacity;
+    if (next == ring[1]) return 0u;
+    for (int32_t index = 0; index < count; ++index) {
+        write_index = ring[0];
+        capacity = ring[3];
+        int32_t offset = (int32_t)((uint32_t)write_index + (uint32_t)index);
+        offset -= (offset / capacity) * capacity;
+        destination[offset] = source[index];
+    }
+    write_index = ring[0];
+    count = ring[4];
+    capacity = ring[3];
+    next = (int32_t)((uint32_t)write_index + (uint32_t)count);
+    ring[0] = next - (next / capacity) * capacity;
+    return 1u;
+}
+
+uint32_t gx8002_image_b_audio_ring_write_10015b64(
+    volatile int32_t *ring, const uint8_t *source)
+{
+    return gx8002_image_b_audio_ring_write_at_10015b64(
+        ring, (uint8_t *)(uintptr_t)(uint32_t)ring[2], source);
+}
+
 uint32_t gx8002_image_b_audio_ring_empty_1000a00c(
     const volatile int32_t *ring)
 {

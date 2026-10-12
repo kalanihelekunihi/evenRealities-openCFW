@@ -1,8 +1,9 @@
 /* SPDX-License-Identifier: MIT
- * Isolated ABI-preserving lead for platform bringup's seven direct calls to
- * stock formatter 0x415fae. That caller includes two binary64 `%f` formats.
- * The selected formatter entry exists, but a composed FP64/FPSCR/output
- * oracle for these callsites has not qualified archive selection.
+ * Selected ABI-preserving adapter for platform bringup's seven direct calls
+ * to stock formatter 0x415fae. The two binary64 formats were compared with
+ * source output in six bounded cases. Stock vcvt.f32.f64 is modeled for
+ * finite round-to-nearest inputs because Unicorn lacks that instruction;
+ * full FPSCR, exceptional values and hardware behavior remain open.
  */
 #include <stdint.h>
 

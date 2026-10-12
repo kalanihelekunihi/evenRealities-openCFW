@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 extern void event_a_power_ton_adjust(uint32_t new_minor, uint32_t major);
-extern void event_a_temperature_transition_separate(uint32_t new_major,
+extern uint64_t event_a_temperature_transition_separate(uint32_t new_major,
     uint32_t old_major, uint32_t new_minor, uint32_t old_minor);
 extern uint32_t event_a_state_transition_sequence(uint32_t from_state,
     uint32_t to_state, uint8_t *selector);

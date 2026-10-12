@@ -114,6 +114,20 @@ for _ in range(512):
     fmt = ('%' + flags + width + precision + conversion).encode('ascii')
     value = 0x20006000 if conversion in 'sp' else rng.getrandbits(32)
     cases.append((fmt, [value]))
+for conversion in (b'd', b'i', b'u', b'o', b'x', b'X'):
+    for length in (b'll', b'j'):
+        for value in (0, 1, 0xffffffff, 0x100000000,
+                      0x7fffffffffffffff, 0x8000000000000000,
+                      0xffffffffffffffff):
+            words = [value & 0xffffffff, value >> 32]
+            cases.append((b'%' + length + conversion, words))
+            cases.append((b'%#024.16' + length + conversion, words))
+for conversion in (b'd', b'u', b'x', b'X'):
+    for length in (b'z', b't', b'L', b'h', b'hh'):
+        for value in (0, 1, 0x80000000, 0xffffffff):
+            cases.append((b'%' + length + conversion, [value]))
+for fmt in (b'%lln', b'%jn', b'%zn', b'%tn', b'%ln'):
+    cases.append((b'xy' + fmt + b'z', [0x20007080, 0]))
 for fmt, words in cases:
     observations = []
     for original in (True, False):

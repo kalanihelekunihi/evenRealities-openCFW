@@ -1,7 +1,7 @@
 /* Native delayed callback bodies 0x4a01fc and 0x4bc418. */
 #include <stdint.h>
 extern uint8_t *audio_ble_master_context; /* product pointer cell 0x200742fc */
-extern uint8_t *audio_ble_controller; /* product pointer cell 0x200727f0, getter 0x4b8122 */
+extern uint8_t audio_ble_controller[]; /* direct product struct 0x200727f0; getter returns address */
 extern void *audio_wsf_msg_alloc(uint16_t);
 extern void audio_wsf_msg_send(uint8_t,void *);
 extern uint32_t audio_log_level(void);

@@ -3,6 +3,7 @@
  * decisions and literal addresses are from direct native instructions.
  */
 #include <stdint.h>
+#include "resident_flash_api_data.h"
 
 extern uint32_t gx8002_resident_platform_config_25d74(uint32_t, uint32_t *);
 extern void gx8002_resident_platform_gate_25080(uint32_t, uint32_t);
@@ -103,5 +104,5 @@ uint32_t gx8002_resident_flash_interface_initialize_2443c(void)
                ~UINT32_C(1);
     gx8002_resident_xip_initialize_2436c(
         0xebu, 8u, 1u, 0x18u, 4u, 0u, 1u, 4u, 4u);
-    return UINT32_C(0x20026504);
+    return (uint32_t)(uintptr_t)gx8002_flash_api_26504;
 }

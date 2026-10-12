@@ -30,7 +30,8 @@ uint32_t opencfw_boot_device_info_query(uint32_t selector,
         bytes[8] = (uint8_t)((SYSTEM_STATE >> 10) & 1u);
         bytes[9] = (uint8_t)((SYSTEM_STATE >> 19) & 1u);
         bytes[10] = (uint8_t)((SYSTEM_STATE >> 20) & 3u);
-        opencfw_boot_device_mode_configure(record);
+        /* Stock caller leaves the record pointer in R2 at 0x41d878. */
+        opencfw_boot_device_mode_configure(record, (uint32_t)(uintptr_t)record);
         return 0u;
     }
     case 1u:

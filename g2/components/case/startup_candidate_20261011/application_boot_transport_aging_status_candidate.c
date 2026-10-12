@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08001408 aging status exchange. Native immediate packet
  * fields at 0x1564/0x156c are expressed as typed protocol bytes.
@@ -14,11 +15,11 @@ uint32_t case_boot_transport_aging_status(void)
     volatile uint8_t *busy=(volatile uint8_t *)(uintptr_t)0x200000bcu;
     volatile uint8_t *quiet=(volatile uint8_t *)(uintptr_t)0x200000bfu;
     if(state[16u]==0u || state[17u]==0u){
-        if(*quiet==0u){(void)case_policy_log(0x08001518u);(void)case_policy_log(0x08001538u);}
+        if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(08001518));(void)case_policy_log(CASE_STRING_ADDR(08001538));}
         return 0u;
     }
     if(*busy!=0u){
-        if(*quiet==0u){(void)case_policy_log(0x0800153cu);(void)case_policy_log(0x08001538u);}
+        if(*quiet==0u){(void)case_policy_log(CASE_STRING_ADDR(0800153c));(void)case_policy_log(CASE_STRING_ADDR(08001538));}
         return 1u;
     }
     *busy=1u;

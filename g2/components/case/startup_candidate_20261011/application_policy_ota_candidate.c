@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08007376 side-OTA-ready transitions through loop tail 0x08007eda.
  * Box OTA file success and failure transitions are also represented with
@@ -20,8 +21,8 @@ uint32_t case_policy_ota_side_step_7376(volatile uint8_t *state)
     state[0x10u]=1u;state[0x11u]=1u;
     if(state[0x1au]==0u){
         if(*(volatile uint8_t *)(uintptr_t)0x200000bfu==0u){
-            case_policy_log(side==1u?0x08007730u:(side==2u?0x08007740u:0x08007750u));
-            case_policy_log(0x08007608u);
+            case_policy_log(side==1u?CASE_STRING_ADDR(08007730):(side==2u?CASE_STRING_ADDR(08007740):CASE_STRING_ADDR(08007750)));
+            case_policy_log(CASE_STRING_ADDR(08007608));
         }
         if(side==1u)case_policy_ota_left_prepare();
         else if(side==2u)case_policy_ota_right_prepare();
@@ -30,7 +31,7 @@ uint32_t case_policy_ota_side_step_7376(volatile uint8_t *state)
         if(side>2u){
             if(case_policy_box_file_open()==0u){
                 if(*(volatile uint8_t *)(uintptr_t)0x200000bfu==0u){
-                    case_policy_log(0x08007b50u);case_policy_log(0x08007b84u);
+                    case_policy_log(CASE_STRING_ADDR(08007b50));case_policy_log(CASE_STRING_ADDR(08007b84));
                 }
                 case_policy_ota_set_mode(0u);
                 state[0x1cu]=0u;state[0x1du]=0u;
@@ -39,7 +40,7 @@ uint32_t case_policy_ota_side_step_7376(volatile uint8_t *state)
                 case_policy_box_failure_reset();
             }else{
                 if(*(volatile uint8_t *)(uintptr_t)0x200000bfu==0u){
-                    case_policy_log(0x08007760u);case_policy_log(0x08007608u);
+                    case_policy_log(CASE_STRING_ADDR(08007760));case_policy_log(CASE_STRING_ADDR(08007608));
                 }
                 case_policy_ota_set_mode(1u);case_policy_wait(100u);case_policy_box_begin();
             }

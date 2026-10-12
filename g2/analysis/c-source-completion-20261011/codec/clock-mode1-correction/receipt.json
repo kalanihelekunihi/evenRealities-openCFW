@@ -1,0 +1,37 @@
+{
+  "native_image_sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+  "compiled_data_object_sha256": "326094f8e8b5dbbd4941d01ec313a6c7e5c5e3f3ad57786871f97d4c42f5e4cf",
+  "initializer_source_sha256": "b43d44daaf4f671e464a7ceaefea94f1c8e6073d932e9122a8bdbc214ad262b8",
+  "checks": [
+    {
+      "native_address": "0x10025cd0",
+      "section": ".gx8002.clock_boot.25cd0",
+      "bytes": 16,
+      "sha256": "e92b17c1fab00d0bee3ab9867018ac2c7fcad399d26c073583a3b3e252eeba59",
+      "words": [
+        28,
+        0,
+        18,
+        1
+      ]
+    },
+    {
+      "native_address": "0x10025cf4",
+      "section": ".gx8002.clock_boot.25cf4",
+      "bytes": 16,
+      "sha256": "fb3c46ec1cf815c27fed26f8c1960ad827b26828b2a56144f0eb0c1c6a7694d6",
+      "words": [
+        16,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "native_consumer_instructions": [
+    "0x10025a1c lrw r1, 0x10025cd0; 0x10025a1e bsr 0x10025738",
+    "0x10025af0 lrw r1, 0x10025cf4; 0x10025af4 bsr 0x10025738"
+  ],
+  "compiled_data_equal_stock": true,
+  "native_runtime_equivalence_proven": false
+}

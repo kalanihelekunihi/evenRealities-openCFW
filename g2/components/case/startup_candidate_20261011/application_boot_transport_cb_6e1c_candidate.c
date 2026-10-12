@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08006e1c transport event worker: startup signals and full
  * event-service loop. Child services retain independent source contracts.
@@ -28,7 +29,7 @@ static uint8_t rb(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
 static void wb(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
-static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(0x0800715cu);}
+static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(CASE_STRING_ADDR(0800715c));}
 static uint32_t gls_ready(uint32_t side)
 {
     if(side==0u)return rb(0x2000088cu)!=0u;
@@ -84,16 +85,16 @@ void case_boot_transport_cb_6e1c(void)
             (void)case_policy_parse_probe(1u);
         }
         if((bits&0x40u)!=0u && case_boot_transport_rx_restart()!=0u){
-            if(rb(0x200000bfu)==0u)logline(0x08007114u);
+            if(rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(08007148));
             (void)case_policy_event_clear(event,0x40u);
         }
         if((bits&0x100u)!=0u){
-            if(rb(0x200000bfu)==0u)logline(0x08007130u);
+            if(rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(08007160));
             case_policy_no_reply_reset(1u,1u);
             (void)case_policy_event_clear(event,0x100u);
         }
         if((bits&0x200u)!=0u){
-            if(rb(0x200000bfu)==0u)logline(0x08007148u);
+            if(rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(08007180));
             case_policy_no_reply_reset(1u,1u);
             (void)case_policy_event_clear(event,0x200u);
             case_init_display_reset();
@@ -103,17 +104,17 @@ void case_boot_transport_cb_6e1c(void)
             wb(0x200000f5u,0u);wb(0x200000fau,0u);
             if(gls_ready(0u)!=0u && rb(0x200000f6u)!=0u){
                 uint32_t i=0u;while(i<10u && rb(0x200000f6u)!=0u){case_boot_transport_left_aging(0u);++i;}
-                if(i<10u && rb(0x200000bfu)==0u)logline(0x08007018u);
+                if(i<10u && rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(08007194));
                 case_policy_wait(50u);
             }
             if(gls_ready(1u)!=0u && rb(0x200000f7u)!=0u){
                 uint32_t i=0u;while(i<10u && rb(0x200000f7u)!=0u){case_boot_transport_right_aging(0u);++i;}
-                if(i<10u && rb(0x200000bfu)==0u)logline(0x08007068u);
+                if(i<10u && rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(080071b4));
                 case_policy_wait(50u);
             }
             if((rb(0x200000f6u)!=0u || rb(0x200000f7u)!=0u) && rb(0x200000bfu)==0u){
-                (void)case_policy_log(0x080070b0u,rb(0x200000f6u),rb(0x200000f7u));
-                (void)case_policy_log(0x0800715cu);
+                (void)case_policy_log(CASE_STRING_ADDR(080071d4),rb(0x200000f6u),rb(0x200000f7u));
+                (void)case_policy_log(CASE_STRING_ADDR(0800715c));
             }
             case_policy_box_failure_reset();
             (void)case_policy_task_reset(rd(0x200000d4u));

@@ -1,0 +1,33 @@
+{
+  "result": "PASS_TARGET_OPTION_SIZE_COMPARISON",
+  "target": "CK804EF hard-float, original selected source, -fno-builtin",
+  "rows": [
+    {
+      "source": "backup_audio_out_pcm_config.c",
+      "Os_function_bytes": 678,
+      "Os_object_sha256": "f49c1b4fe9e25ed7005bf483ea752b42fec8543c9924cc49415e4307d572c318",
+      "O2_function_bytes": 700,
+      "O2_object_sha256": "3fdbdbee11d1ca37ebc7d99b9fc7170fab8fc61592cbdab58bb715fdaee460db",
+      "O2_minus_Os": 22
+    },
+    {
+      "source": "backup_audio_out_table_config.c",
+      "Os_function_bytes": 556,
+      "Os_object_sha256": "6cf6d14c29ace6c5d7fd1b150306f84c9d2ba251365ac3c1623901e68f13e03e",
+      "O2_function_bytes": 536,
+      "O2_object_sha256": "1142c18bccf270860f388ce60765a479d92f04de7d1c42de08e42c59a77945c2",
+      "O2_minus_Os": -20
+    },
+    {
+      "source": "backup_audio_out_irq_init.c",
+      "Os_function_bytes": 342,
+      "Os_object_sha256": "ed7d5a76c5e7f88f6184b76bb291fb92bff55eed8d043dd8836a2859dd06e3bb",
+      "O2_function_bytes": 348,
+      "O2_object_sha256": "2e1c24e696ef21eee0ed6a169ebd0eb2e7b2d811f9b51cf2f3f94441baca22ff",
+      "O2_minus_Os": 6
+    }
+  ],
+  "best_mixed_policy_saving_bytes": 20,
+  "stock_co_placement_deficit_bytes": 1996,
+  "conclusion": "Compiler flag selection on these three largest source units closes at most 20 of 1996 bytes; no alternate loader extent inferred."
+}

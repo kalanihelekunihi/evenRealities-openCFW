@@ -1,6 +1,6 @@
 /* Native _connectParamReq 0x47761c: peripheral handler and DM gating. */
 #include <stdint.h>
-extern uint8_t *audio_ble_controller; /* pointer cell RAM 0x200727f0, native getter 0x4b8122 */
+extern uint8_t audio_ble_controller[]; /* direct product struct 0x200727f0, native getter returns address */
 extern void *audio_ble_dm_conn_params(void); /* native dmGetConnParamPtr 0x46efcc */
 extern uint32_t audio_settings_terminal_mode(void); /* native 0x46c630 */
 extern void *audio_wsf_msg_alloc(uint16_t); /* native WsfMsgAlloc 0x4bf99e */

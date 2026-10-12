@@ -28,7 +28,7 @@ subprocess.run(['arm-none-eabi-ld','-T',str(HERE/'reset_descriptor_islands.ld'),
 sections=[('active_slot_link',0xb5e8,4,0x2000051c),
  ('lp_slot_link',0xb5ec,4,0x20000520),
  ('lp_sensor_descriptors',0xb8d4,16,0x20000808),
- ('active_sensor_descriptors',0xb8e4,16,0x20000818),
+ ('active_sensor_descriptors',0xb8e4,20,0x20000818),
  ('pm_descriptor',0xb91c,28,0x20000850)]
 rows=[]
 for name,flash,length,ram in sections:
@@ -40,7 +40,7 @@ for name,flash,length,ram in sections:
                   bytes=length,sha256=hashlib.sha256(data).hexdigest()))
 receipt=dict(status='PASS_PARTIAL_SOURCE_ISLANDS',firmware_sha256=hashlib.sha256(blob).hexdigest(),
  source_elf_sha256=hashlib.sha256(elf.read_bytes()).hexdigest(),
- source_files=[str(p.relative_to(ROOT)) for p in sources],source_owned_bytes=68,
+ source_files=[str(p.relative_to(ROOT)) for p in sources],source_owned_bytes=72,
  sections=rows,limits=['Only two descriptor arrays and their two context pointer fields are source-owned here; the other reset-copy fields remain open.','The section addresses come from a bounded linker fixture, not a final executable Touch image.','Physical touch behavior and the missing generated product CapSense configuration are not established.'])
 (HERE/'reset-descriptor-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
-print(json.dumps(dict(status=receipt['status'],source_owned_bytes=68,sections=rows),indent=2))
+print(json.dumps(dict(status=receipt['status'],source_owned_bytes=72,sections=rows),indent=2))

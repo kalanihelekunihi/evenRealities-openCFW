@@ -7,8 +7,8 @@
 #include <stdint.h>
 #include <stddef.h>
 extern uint32_t opencfw_spot_pcm22_transition22(uint32_t,uint32_t,uint32_t,uint32_t);
-extern uint32_t opencfw_spot_pcm22_transition11(uint32_t,uint32_t,uint32_t,uint32_t);
-extern uint32_t opencfw_spot_pcm22_transition12(uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint64_t opencfw_spot_pcm22_transition11(uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint64_t opencfw_spot_pcm22_transition12(uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t opencfw_spot_pcm22_transition21(uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t opencfw_spot_pcm22_transition5(uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t opencfw_spot_pcm22_transition20(uint32_t,uint32_t,uint32_t,uint32_t);

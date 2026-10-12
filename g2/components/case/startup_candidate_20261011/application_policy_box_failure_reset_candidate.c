@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x12e4 failed activation cleanup.
  */
@@ -14,7 +15,7 @@ void case_policy_box_failure_reset(void)
     case_policy_led_right_clear(0u);
     *(volatile uint8_t *)(uintptr_t)0x2000087eu=0u;
     if(*(volatile uint8_t *)(uintptr_t)0x200000bfu==0u){
-        (void)case_legacy_logger((const char *)(uintptr_t)0x0800131cu);
-        (void)case_legacy_logger((const char *)(uintptr_t)0x08001330u);
+        (void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(0800131c));
+        (void)case_legacy_logger((const char *)(uintptr_t)CASE_STRING_ADDR(08001330));
     }
 }

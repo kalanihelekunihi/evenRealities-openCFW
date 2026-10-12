@@ -2,6 +2,7 @@
  * Peripheral accesses and callback progress are synthetic in host tests. */
 #include "clock_class_provider2.h"
 #include "clock_class_provider4.h"
+#include "clock_wait_4216b2.h"
 #include "clock_manager.h"
 
 enum {
@@ -179,10 +180,7 @@ void opencfw_bl_radio_callback_finish(uint32_t *timeout)
     if (*active == 0u)
         return;
 
-    while (*timeout != 0u && *active != 0u) {
-        opencfw_bl_delay_us(10u);
-        --*timeout;
-    }
+    opencfw_bl_clock_wait_active(active, timeout);
 
     const uint32_t previous = critical_save();
     *active = 0u;

@@ -3,7 +3,7 @@
  * register sequence are architectural startup contracts, not C call ABI.
  * The system initializer and main are genuine external source requirements.
  */
-    .text
+    .section .text.gx8002_resident_reset_entry_23500,"ax",@progbits
     .align 2
     .global gx8002_resident_reset_entry_23500
     .type gx8002_resident_reset_entry_23500, %function

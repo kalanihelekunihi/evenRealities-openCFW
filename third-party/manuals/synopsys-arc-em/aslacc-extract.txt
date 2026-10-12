@@ -1,0 +1,126 @@
+1316 Synopsys, Inc.SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+Scalar DSP Instruction Set Details ARCv2 ISA Pr ogrammer’s Reference Manual for ARC EM Processors
+ASLACC
+Function
+Perform an arithmetic shift of the accumulator.
+Extension Group
+DSP Accumulator
+Operation
+switch (c.b1) {
+0: accwide = accwide << c.b0;
+1: acclo = acclo << c.b0;
+2: acchi = acchi << c.b0;
+3: acchi = acchi << c.b2; acclo = acclo << c.b0;
+}
+Instruction Format
+op c
+Syntax Example
+ASLACC c
+STATUS32 Flags Affected
+Description
+Perform an arithmetic left shift of the accumulator, including guard bits. The c operand consists of 
+two fields: the shift amount (c.b0) and the accumulator select (c.b1). The shift amount is a signed 
+integer; a negative value effectively shifts the accumulator right, without rounding.
+Using the loop-counter (LP_COUNT/r60) as a source operand to the ASLACC instruction results in 
+an illegal instruction exception.
+Z = Unchanged
+N = Unchanged
+C = Unchanged
+V = Unchanged
+Synopsys, Inc. 1317SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+ARCv2 ISA Programmer’s Reference Manual for ARC EM Processors                                                 Scalar DSP Instruc tion Set Details
+If, dsp_accshift==full, the shift amount is saturated to a range of -72 <= shamt <= +72; if 
+dsp_accshift==limited, the shift amount is saturated to a range of -8 <= shamt <= +8.
+Operand Attributes
+Operand c.b1 Description
+0 selects the wide accumulator
+1 selects the low accumulator 
+2 selects the high accumulator 
+3 selects dual hi/lo accumulator output; move c.b2 
+into the high accumulator, and move c.b0 into the low 
+accumulator
+1318 Synopsys, Inc.SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+Scalar DSP Instruction Set Details ARCv2 ISA Pr ogrammer’s Reference Manual for ARC EM Processors
+Pseudo Code
+if (DSP_ACCSHIFT == DSP_DSP_SHIFT_FULL)
+ shamt = c.b0 < -72 ? -72 : (c.b0 > 72 ? 72 : c.b0);
+else
+ shamt = c.b0 < -8 ? -8 : (c.b0 > 8 ? 8 : c.b0);
+switch (c.b1 & 3) {
+ case 0: 
+  if (DSP_CTRL.GE)
+   accwide = ACC0_GHI.GUARD << 64 | unsigned(ACC0_HI) << 32 | 
+unsigned(ACC0_LO);
+  else
+   accwide = ACCO_HI << 32 | unsigned(ACC0_LO);
+  accwide = (shamt >= 0) ? accwide << shamt : accwide >> -shamt;
+  if (DSP_CTRL.GE)
+   ACC0_GHI.GUARD = accwide >> 64 && 0xff;
+  ACC0_HI = accwide >> 32 && 0xffff_ffff;
+  ACC0_LO = accwide && 0xffff_ffff;
+  break;
+ case 1:
+  if (DSP_CTRL.GE)
+   acclo = ACC0_GLO.GUARD << 32 | unsigned(ACC0_LO);
+  else
+   acclo = ACC0_LO;
+  acclo = (shamt >= 0) ? acclo << shamt : acclo >> -shamt;
+  if (DSP_CTRL.GE)
+   ACC0_GLO.GUARD = acclo >> 32 && 0xff;
+  ACC0_LO = acclo && 0xffff_ffff;
+  break;
+ case 2:
+  if (DSP_CTRL.GE)
+   acchi = ACC0_GHI.GUARD << 32 | unsigned(ACC0_HI);
+  else
+   acchi = ACC0_HI;
+  acchi = (shamt >= 0) ? acchi << shamt : acchi >> -shamt;
+  if (DSP_CTRL.GE)
+   ACC0_GHI.GUARD = acchi >> 32 && 0xff;
+  ACC0_HI = acchi && 0xffff_ffff;
+  break;
+// ASLACC 
+Synopsys, Inc. 1319SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+ARCv2 ISA Programmer’s Reference Manual for ARC EM Processors                                                 Scalar DSP Instruc tion Set Details
+Assembly Code Example
+Syntax and Encoding
+case 3:
+  shamtl = sext(c.b0);
+  shamth = sext(c.b2);
+  if (DSP_ACCSHIFT == DSP_DSP_SHIFT_FULL)
+   shamtl = shamtl < -72 ? -72 : (shamtl > 72 ? 72 : shamtl);
+   shamth = shamth < -72 ? -72 : (shamth > 72 ? 72 : shamth);
+  else
+   shamtl = shamtl < -8 ? -8 : (shamtl > 8 ? 8 : shamtl);
+   shamth = shamth < -8 ? -8 : (shamth > 8 ? 8 : shamth);
+  if (DSP_CTRL.GE)
+   acchi = ACC0_GHI.GUARD << 32 | unsigned(ACC0_HI);
+   acclo = ACC0_GLO.GUARD << 32 | unsigned(ACC0_LO);
+  else
+   acchi = ACC0_HI;
+   acclo = ACC0_LO;
+  acchi = (shamth >= 0) ? acchi << shamth : acchi >> -shamth;
+  acclo = (shamtl >= 0) ? acclo << shamtl : acclo >> -shamtl;
+  if (DSP_CTRL.GE)
+   ACC0_GHI.GUARD = acchi >> 32 && 0xff;
+   ACC0_GLO.GUARD = acclo >> 32 && 0xff;
+  ACC0_HI = acchi && 0xffff_ffff;
+  ACC0_LO = acclo && 0xffff_ffff;
+  break;
+ }
+ASLACC r2 ; Shift left the accumulator based on fields in r2
+Instruction Code 
+ASLACC c 00101000001011110000CCCCCC111111
+ASLACC u6 00101000011011110000uuuuuu111111

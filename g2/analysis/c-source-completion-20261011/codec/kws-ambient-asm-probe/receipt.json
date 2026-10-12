@@ -1,0 +1,35 @@
+{
+  "result": "PASS",
+  "target": "C-SKY CK804EF QEMU finite seeded-caller-stack fixture",
+  "source_sha256": "ca00d8a3d5fa4ee0434430a8faad68bffc4497ffab926670b6ddbcfc648a9191",
+  "test_source_sha256": "749e62956f23062cda8a41e316b515f42cd893e3ab14a33e89e63d7087cc28d4",
+  "test_elf_sha256": "6f55c80acd3021c42922d01a7daefb5d9040145a3e6dc05b58f8adb556231bc9",
+  "expected_words_hex": [
+    "0x11223344",
+    "0x20000000",
+    "0x20000018",
+    "0x55667788",
+    "0x99aabbcc",
+    "0x20000060",
+    "0x20000038",
+    "0x20000070"
+  ],
+  "observed_words_dec": [
+    287454020,
+    536870912,
+    536870936,
+    1432778632,
+    -1716864052,
+    536871008,
+    536870968,
+    536871024
+  ],
+  "native_frame": "push r4-r9,r15; subi sp,32; native writes task offsets 4,8,20,24,28 before byte copy; leaves 0,12,16 as caller stack bytes",
+  "source_frame": "same seven-register push/32-byte frame, inline loads preserve slots 0,12,16 without external callable",
+  "limits": [
+    "Finite seeded-stack test, not all callers or hardware execution",
+    "C source uses extra same-value stack writes before copy; observed copied bytes match fixture"
+  ],
+  "selected_test_elf_sha256": "588d789ab530e0f396611be8553d5c359e2ed48fdffd065685b7ef8fcb30530a",
+  "selected_source_fixture_passed": true
+}

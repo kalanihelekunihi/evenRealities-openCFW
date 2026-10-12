@@ -6,7 +6,7 @@ from unicorn import Uc,UC_ARCH_ARM,UC_MODE_THUMB,UC_HOOK_CODE
 from unicorn.arm_const import *
 ROOT=Path(__file__).resolve().parents[3];BLOB=(ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 shim='''#include <stdint.h>
-uint8_t *audio_ble_master_context,*audio_ble_controller;
+uint8_t *audio_ble_master_context;uint8_t audio_ble_controller[0x70];
 void *audio_wsf_msg_alloc(uint16_t a){(void)a;return 0;}void audio_wsf_msg_send(uint8_t a,void*b){(void)a;(void)b;}
 uint32_t audio_log_level(void){return 0;}void audio_log_extended(uint8_t a,const char*b,const char*c,const char*d,uint32_t e,const char*f,...){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;}
 uint32_t compressed_log_output(uint32_t a,const char*b,const char*c,...){(void)a;(void)b;(void)c;return 0;}
@@ -20,11 +20,10 @@ with tempfile.TemporaryDirectory() as td:
   for compiled in (False,True):
    u=Uc(UC_ARCH_ARM,UC_MODE_THUMB);u.mem_map(0x400000,0x400000);u.mem_write(0x438000,BLOB);u.mem_map(0x100000,0x100000);u.mem_map(0x20000000,0x100000)
    for a,d in segs:u.mem_write(a,d)
-   if compiled:u.mem_write(syms['audio_ble_master_context'],struct.pack('<I',0x20002000));u.mem_write(syms['audio_ble_controller'],struct.pack('<I',0x20002100))
-   else:u.mem_write(0x200742fc,struct.pack('<I',0x20002000));u.mem_write(0x200727f0,struct.pack('<I',0x20002100))
-   u.mem_write(0x20002056,b'\x07');u.mem_write(0x20002156,bytes([7 if ready else 0]));u.mem_write(0x20003000,b'\xaa'*12)
+   if compiled:u.mem_write(syms['audio_ble_master_context'],struct.pack('<I',0x20002000))
+   else:u.mem_write(0x200742fc,struct.pack('<I',0x20002000))
+   u.mem_write(0x20002056,b'\x07');u.mem_write((syms['audio_ble_controller'] if compiled else 0x200727f0)+0x56,bytes([7 if ready else 0]));u.mem_write(0x20003000,b'\xaa'*12)
    cuts={(syms[n]&~1 if compiled else addr):n for n,addr in [('audio_wsf_msg_alloc',0x4bf99e),('audio_wsf_msg_send',0x4bf9ba),('audio_log_level',0x43d0ce),('audio_log_extended',0x43d574),('compressed_log_output',0x43ce9e)]};calls=[]
-   if not compiled:cuts[0x4b8122]='controller'
    def hook(uc,a,size,_):
     n=cuts.get(a)
     if n is None:return
@@ -32,7 +31,6 @@ with tempfile.TemporaryDirectory() as td:
     if n=='audio_wsf_msg_alloc':calls.append(('alloc',r0));uc.reg_write(UC_ARM_REG_R0,0x20003000 if alloc else 0)
     elif n=='audio_wsf_msg_send':calls.append(('send',r0,bytes(uc.mem_read(r1,12))))
     elif n=='audio_log_level':uc.reg_write(UC_ARM_REG_R0,0)
-    elif n=='controller':uc.reg_write(UC_ARM_REG_R0,0x20002100)
     uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
    u.hook_add(UC_HOOK_CODE,hook);u.reg_write(UC_ARM_REG_R0,arg);u.reg_write(UC_ARM_REG_SP,0x200ff000);u.reg_write(UC_ARM_REG_LR,0x600001);u.emu_start((syms[fn] if compiled else native)|1,0x600000,count=500)
    obs.append(calls)

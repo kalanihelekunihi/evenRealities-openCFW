@@ -1,0 +1,342 @@
+{
+  "status": "PASS",
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_sha256": "08abc6689d1c7e5f5269f274be38815cafd0081ff0a8605e213ea42f7149aff3",
+  "isolated_elf_sha256": "c3fcc821cddceb8ee62f71f417e75727fd496fd19b7b40d1b8229b27a7d809d7",
+  "cases": [
+    {
+      "tx_lock": -1,
+      "rx_lock": -1,
+      "tx_count": 0,
+      "rx_count": 0,
+      "calls": [
+        [
+          "enter",
+          null
+        ],
+        [
+          "exit",
+          null
+        ],
+        [
+          "enter",
+          null
+        ],
+        [
+          "exit",
+          null
+        ]
+      ],
+      "queue_sha256": "0fa8289481dcd3691f6c3ed0722737ef554df43c5281ba412ab48ddc5b35497d"
+    },
+    {
+      "tx_lock": 0,
+      "rx_lock": 0,
+      "tx_count": 1,
+      "rx_count": 1,
+      "calls": [
+        [
+          "enter",
+          null
+        ],
+        [
+          "exit",
+          null
+        ],
+        [
+          "enter",
+          null
+        ],
+        [
+          "exit",
+          null
+        ]
+      ],
+      "queue_sha256": "8b356404083dd79d9c1ddc5c3ea4bd2ace23b60124ee63697da5efbb47ee6db4"
+    },
+    {
+      "tx_lock": 1,
+      "rx_lock": 1,
+      "tx_count": 0,
+      "rx_count": 0,
+      "calls": [
+        [
+          "enter",
+          null
+        ],
+        [
+          "exit",
+          null
+        ],
+        [
+          "enter",
+          null
+        ],
+        [
+          "exit",
+          null
+        ]
+      ],
+      "queue_sha256": "0fa8289481dcd3691f6c3ed0722737ef554df43c5281ba412ab48ddc5b35497d"
+    },
+    {
+      "tx_lock": 1,
+      "rx_lock": 1,
+      "tx_count": 1,
+      "rx_count": 1,
+      "calls": [
+        [
+          "enter",
+          null
+        ],
+        [
+          "remove",
+          36
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "exit",
+          null
+        ],
+        [
+          "enter",
+          null
+        ],
+        [
+          "remove",
+          16
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "exit",
+          null
+        ]
+      ],
+      "queue_sha256": "0fa8289481dcd3691f6c3ed0722737ef554df43c5281ba412ab48ddc5b35497d"
+    },
+    {
+      "tx_lock": 2,
+      "rx_lock": 3,
+      "tx_count": 2,
+      "rx_count": 3,
+      "calls": [
+        [
+          "enter",
+          null
+        ],
+        [
+          "remove",
+          36
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "remove",
+          36
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "exit",
+          null
+        ],
+        [
+          "enter",
+          null
+        ],
+        [
+          "remove",
+          16
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "remove",
+          16
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "remove",
+          16
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "exit",
+          null
+        ]
+      ],
+      "queue_sha256": "0fa8289481dcd3691f6c3ed0722737ef554df43c5281ba412ab48ddc5b35497d"
+    },
+    {
+      "tx_lock": 3,
+      "rx_lock": 2,
+      "tx_count": 1,
+      "rx_count": 3,
+      "calls": [
+        [
+          "enter",
+          null
+        ],
+        [
+          "remove",
+          36
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "exit",
+          null
+        ],
+        [
+          "enter",
+          null
+        ],
+        [
+          "remove",
+          16
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "remove",
+          16
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "exit",
+          null
+        ]
+      ],
+      "queue_sha256": "29da7e424ea344093728c2c830516c2036f82b0b23546c0dc213c08fe5bd9e11"
+    },
+    {
+      "tx_lock": 127,
+      "rx_lock": 127,
+      "tx_count": 3,
+      "rx_count": 2,
+      "calls": [
+        [
+          "enter",
+          null
+        ],
+        [
+          "remove",
+          36
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "remove",
+          36
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "remove",
+          36
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "exit",
+          null
+        ],
+        [
+          "enter",
+          null
+        ],
+        [
+          "remove",
+          16
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "remove",
+          16
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "exit",
+          null
+        ]
+      ],
+      "queue_sha256": "0fa8289481dcd3691f6c3ed0722737ef554df43c5281ba412ab48ddc5b35497d"
+    },
+    {
+      "tx_lock": -128,
+      "rx_lock": 1,
+      "tx_count": 2,
+      "rx_count": 1,
+      "calls": [
+        [
+          "enter",
+          null
+        ],
+        [
+          "exit",
+          null
+        ],
+        [
+          "enter",
+          null
+        ],
+        [
+          "remove",
+          16
+        ],
+        [
+          "yield",
+          null
+        ],
+        [
+          "exit",
+          null
+        ]
+      ],
+      "queue_sha256": "00a6cc68a5f71046faf619e8edb236cd7735e26649c2509f75e28de763702165"
+    }
+  ],
+  "body_bytes": 110,
+  "visited_body_bytes": 110,
+  "limits": [
+    "Controlled enter/exit, event removal and yield children; synthetic queue/list state.",
+    "No asynchronous wake, scheduler, physical IRQ or full image proof."
+  ]
+}

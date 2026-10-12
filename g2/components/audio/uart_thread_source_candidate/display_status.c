@@ -1,7 +1,7 @@
 /* RING_SendGlassesStatusEvt native 0x47243a. */
 #include <stdint.h>
 extern uint32_t audio_uart_case_status(void); /* 0x4acad0 */
-extern uint32_t audio_uart_wear_status(void); /* 0x443484 */
+extern uint32_t audio_log_wake_allowed(void); /* 0x443484 */
 extern uint32_t semantic_get_aid_enabled(void);
 extern uint32_t audio_uart_lcd_status(void); /* 0x49eb8e */
 extern int32_t audio_uart_ring_task_msg_send(uint32_t,const void *,uint32_t);
@@ -16,7 +16,7 @@ static const char extended[]="glasses status send to ring: in case: %d, wear sta
 static const char compact[]="[ring.proto]glasses status send to ring: in case: %d, wear status: %d, imu status: %d, lcd status: %d, status: 0x%02X 0x%02X";
 int32_t audio_uart_display_housekeep(void) {
     uint8_t in_case=(uint8_t)audio_uart_case_status();
-    uint8_t wear=(uint8_t)audio_uart_wear_status();
+    uint8_t wear=(uint8_t)audio_log_wake_allowed();
     uint8_t imu=(uint8_t)semantic_get_aid_enabled();
     uint8_t lcd=(uint8_t)audio_uart_lcd_status();
     uint8_t status[2]={0u,0u};

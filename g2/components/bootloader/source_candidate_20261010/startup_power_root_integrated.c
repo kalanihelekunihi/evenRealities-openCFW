@@ -31,7 +31,7 @@ extern uint32_t child_41b918(uint32_t *);
 extern uint32_t child_41c320(void);
 extern uint32_t child_421548(uint32_t,uint32_t,uint32_t,uint32_t *);
 extern uint32_t child_41ce52(void);
-extern uint32_t child_41bbd0(uint8_t *);
+extern uint64_t child_41bbd0(uint8_t *);
 extern uint32_t child_41be36(const void *);
 extern uint32_t child_41b8ec(void);
 __attribute__((noinline)) uint32_t reconstructed_initialize_clock_coupled_abi_core(startup_root_register_carry_t *root){

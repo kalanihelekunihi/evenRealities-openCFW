@@ -1,0 +1,45 @@
+PDF page 1466
+1466 Synopsys, Inc.SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+Scalar DSP Instruction Set Details ARCv2 ISA Pr ogrammer’s Reference Manual for ARC EM Processors
+Pseudo Code
+Assembly Code Example
+Syntax and Encoding
+Long Immediate and Null Destination Operands
+In 32-bit formats, a register encoding of 62 represents a long-immediate (limm) source operand and a null destination operand. 
+A null destination operand is specified syntactically using a zero destination. For example, the following instruction subtracts r1 
+from r0, sets the flags, and then discards its result because it has a null destination register operand:
+SUB.F 0,R0,R1
+Two limm source operands in the same instruction must always have the same value. This is due to the fact that each instruction can 
+have at most one limm value, although it can be referenced by both source operands.
+// note: accumulators modeled as 128b integers
+// note: accumulators modeled as 128b integers
+if (DSP_CTRL.GE)
+ accwide = unsigned(ACC0_GHI.GUARD)<<64 | unsigned(ACC0_HI) << 32 | 
+unsigned(ACC0_LO);
+ accwide += b * c.h0;
+ ACC0_GHI.GUARD = (accwide >> 64) & 0xff;
+ s = accwide >> 72 != 0;
+else
+ accwide = unsigned(ACC0_HI << 32) | unsigned(ACC0_LO);
+ accwide += b * c.h0;
+ s = accwide >> 64 != 0;
+ACC0_HI = accwide >> 32 & 0xffff_ffff;
+ACC0_LO = accwide & 0xffff_ffff;
+a = accwide & 0xffff_ffff;
+if F {
+ V_flag |= s;
+}
+/* MACWHUL 
+*/
+MACWHUL r0,r2,r3 ; Unsigned integer multiply-accumulate r2 and r3 
+;and return result in register r0
+Instruction Code 
+MACWHUL<.f> a,b,c
+00110bbb00011111FBBBCCCCCCAAAAAA
+MACWHUL<.f> a,b,u6 00110bbb01011111FBBBuuuuuuAAAAAA
+MACWHUL<.f> b,b,s12 00110bbb10011111FBBBssssssSSSSSS
+MACWHUL<.cc><.f> b,b,c 00110bbb11011111FBBBCCCCCC0QQQQQ
+MACWHUL<.cc><.f> b,b,u6 00110bbb11011111FBBBuuuuuu1QQQQQ

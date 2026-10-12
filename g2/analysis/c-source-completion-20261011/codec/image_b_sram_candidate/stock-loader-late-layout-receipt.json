@@ -1,0 +1,29 @@
+{
+  "result": "PASS_NEGATIVE_STOCK_LOADER_COVERAGE",
+  "stock_stage1_sha256": "a80924ccf78205ef1761c4f568d4ce31f909635bf3ad7eecfaed250ad801626c",
+  "final_layout_receipt_sha256": "6f1476a011c8d43b5c3d41c773e0c5315af51d463ff6e60c1c3b275393ab6143",
+  "stock_normal_copy": [
+    "0x10003000",
+    "0x1001708c"
+  ],
+  "stock_copy_bytes": 82060,
+  "late_audio": [
+    "0x1002d800",
+    "0x1002e1e8"
+  ],
+  "late_audio_bytes": 2536,
+  "late_audio_outside_stock_copy": true,
+  "contiguous_payload_bytes_needed_through_late_end": 176616,
+  "additional_bytes_vs_stock_payload": 94556,
+  "sdk_alias_interpretation_of_added_interval": [
+    "0x2001708c",
+    "0x2002d800"
+  ],
+  "sdk_alias_interval_covers_native_bss": true,
+  "sdk_alias_interval_covers_retained": true,
+  "limits": [
+    "Stock normal branch copies exactly the original 0x1408c bytes; it never loads late audio.",
+    "A contiguous extended copy would cross BSS and retained addresses under the pinned SDK alias model; physical alias behavior remains unverified.",
+    "No stock-loader patch, split transfer, updated package, hardware execution or stack maximum is proven."
+  ]
+}

@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08009d70 transport clock-error callback.
  */
@@ -15,11 +16,11 @@ void case_boot_transport_cb_9d70(void)
         case_boot_transport_stop_link(0u);
         state[2u]=0u;
         if(shared[7u]==0u){
-            (void)case_policy_log(0x08009dbcu);
-            (void)case_policy_log(0x08009dc8u);
+            (void)case_policy_log(CASE_STRING_ADDR(08009dbc));
+            (void)case_policy_log(CASE_STRING_ADDR(08009dc8));
         }
     }else if(shared[7u]==0u){
-        (void)case_policy_log(0x08009dccu);
-        (void)case_policy_log(0x08009dc8u);
+        (void)case_policy_log(CASE_STRING_ADDR(08009dcc));
+        (void)case_policy_log(CASE_STRING_ADDR(08009dc8));
     }
 }

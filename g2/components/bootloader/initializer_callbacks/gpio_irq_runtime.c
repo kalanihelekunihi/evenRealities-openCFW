@@ -28,11 +28,7 @@ uint32_t opencfw_boot_gpio_irq_status(uint32_t irq, uint32_t enabled,
                            group_index(irq) * 0x10u;
     const uint32_t mask = enabled ? WORD(base) : UINT32_MAX;
     *output = WORD(base + 4u) & mask;
-    uint32_t ipsr, control;
-    __asm__ volatile("mrs %0, ipsr" : "=r"(ipsr));
-    __asm__ volatile("mrs %0, control" : "=r"(control));
-    if (ipsr != 0u || (control & 1u) == 0u)
-        __asm__ volatile("msr primask, %0" :: "r"(primask) : "memory");
+    __asm__ volatile("msr primask, %0" :: "r"(primask) : "memory");
     return 0u;
 }
 

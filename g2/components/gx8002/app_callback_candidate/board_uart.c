@@ -6,9 +6,11 @@
  */
 #include <stddef.h>
 #include <stdint.h>
+#include "resident_board_product_state.h"
 
 /* Stock literal at 0x10203008 and nine signed dB gains at 0x1020a8aa. */
-const uint32_t g2_codec_board_constant = UINT32_C(0x200269a4);
+const uint32_t g2_codec_board_constant =
+    (uint32_t)(uintptr_t)&gx8002_board_state_269a4;
 const int8_t g2_codec_gain_table[9] = {6, 12, 18, 24, 30, 36, 42, 48, 54};
 
 uint32_t g2_codec_audio_board_get(void)

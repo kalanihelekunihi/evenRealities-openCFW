@@ -35,8 +35,10 @@ report={
   'ram_start':'0x20000828','rom_start':hex(rom2),'bytes':4,
   'stock_value':'0x00000002','stock_sha256':hashlib.sha256(scalar).hexdigest(),
   'direct_absolute_pointer_literal_count':image.count(struct.pack('<I',0x20000828)),
-  'semantic_owner_established':False,
-  'missing_evidence':'Generated cycfg declaration or a native consumer whose access width/field offset identifies this value; current static decomp/source searches did not identify either.'},
- 'limits':['No live Ghidra instance was available for dynamic xref query; the pinned decomp corpus and local Touch source were searched.','Zero reset contents and adjacency do not prove allocation capacity.','This is a data ownership audit, not physical FIFO or final linker placement proof.']}
+  'semantic_owner_established':True,
+  'owner':'Fifth cy_stc_capsense_scan_slot_t active descriptor row {widget=2,sensor=0} contiguous with four selected rows at 0x20000818.',
+  'source':'g2/components/touch/reset_layout_candidate_20261010/reset_sensor_descriptors.c'},
+ 'limits':['The fifth active scan-slot row is now source-owned by adjacency, vendor row type and exact 20-byte compiled table comparison.','Zero reset contents and adjacency do not prove allocation capacity.','This is a data ownership audit, not physical FIFO or final linker placement proof.']}
+report['status']='TOUCH_FIFTH_ACTIVE_ROW_CLOSED_HISTORY_REMAINS'
 (HERE/'remaining-reset-gates-audit.json').write_text(json.dumps(report,indent=2)+'\n')
-print(json.dumps({'status':report['status'],'remaining_bytes':430,'history_bytes':426,'scalar_bytes':4}))
+print(json.dumps({'status':report['status'],'remaining_bytes':426,'history_bytes':426,'fifth_active_row_bytes':4}))

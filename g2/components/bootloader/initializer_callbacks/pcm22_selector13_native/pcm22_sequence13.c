@@ -6,7 +6,7 @@ extern uint32_t opencfw_boot_control_delay_status_change(uint32_t,volatile uint3
 extern void opencfw_hal_delay_us(uint32_t);
 extern uint32_t opencfw_pcm22_timer_service(void);
 extern void event_a_power_ton_adjust(uint32_t,uint32_t);
-uint32_t opencfw_spot_pcm22_transition13(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton){
+uint64_t opencfw_spot_pcm22_transition13(uint32_t target,uint32_t current,uint32_t ton,uint32_t old_ton){
  (void)old_ton;uintptr_t p=0x20026ba0,t=p+4+4*target,o=p+4+4*current;
  uint32_t old_ldo=(W(o)>>21)&127;
  uint32_t a=B(p+0x64)&127,b=(W(p+0x64)>>7)&127,c=(W(p+0x64)>>14)&127,d=(W(p+0x64)>>21)&127;
@@ -36,5 +36,7 @@ uint32_t opencfw_spot_pcm22_transition13(uint32_t target,uint32_t current,uint32
  (void)opencfw_boot_control_delay_status_change(15,(volatile uint32_t *)0x40004030,0x01000000,0x01000000);temporary=1;}
  if(W(0x40004030)&0x01000000){W(0x40021000)=(W(0x40021000)&~3u)|2u;n=0;while(n<20 && !(W(0x40021000)&4)){opencfw_hal_delay_us(1);n++;}}
  if(temporary)W(0x40004044)&=~32u;
- return delta;
+ /* Stock 0x4291ec returns R1:R0: low word is the computed temporary
+  * VDDf rise, high word is the four pre-transition byte fields. */
+ return ((uint64_t)(packed & UINT32_C(0x7f7f7fff)) << 32) | delta;
 }

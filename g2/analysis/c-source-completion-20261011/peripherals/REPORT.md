@@ -1882,6 +1882,60 @@ frontier is13: handshake send, event2, ready, service prepare0/4/5/6/7/8/9,
 and sync reset0/1/2. Product state contracts and the wider Main image still
 remain open.
 
+The legacy advertising connected code paths are now source-defined through
+`appSlaveAdvMode` 0x4b2bde, `appSlaveAdvStart` 0x4b446a,
+`AppDbCheckBonded` 0x47a600, stop/restart callbacks 0x4b2afe/0x4b2b90,
+and leg start/type-change/next-state 0x4b2a04/0x4b2a92/0x4b2aaa.
+Actual compiled-C/native scripts compare 5 mode, 4 start, 3 database,
+8 callback and 7 state cases. The product non-auto bondability write and
+warning dispatch were verified against native branches. The coherent Main
+`peripherals-app-slave-callback-state-round` receipt passes with 2475
+definitions, 807 mixed unresolved and zero duplicate strong, SHA-256
+`59d0140b4d9bc65bf83620b370620c4f54198e8d8dd49f92f01f76c51ddea925`.
+No direct `appSlaveAdv*` code import remains in this connected graph.
+The product-added transition flag, timer, handler ID, live state and
+advertising profile table still require source ownership/placement proof.
+
+The product BLE advertising initializer `_bleAdvInit` 0x46db04 is now a
+complete native-backed C body for test and normal modes, configuration
+fields, four advertising data setters, random address, address type, start
+and bondable flag. All four actual C/native cases pass, including the
+diagnostic branches with authenticated literal contents. Its descendants
+`AppAdvSetData` 0x4b2cec, `appAdvSetData` 0x4b4240,
+`DmDevSetRandAddr` 0x4b304c, `DmAdvSetAddrType` 0x4b32b8 and
+`HciLeSetRandAddrCmd` 0x52b4ba have actual C/native PASS8, PASS2 and
+PASS2 across packet/state/lock cases. Product `appSlaveConnOpen` 0x46de78
+has actual C/native PASS4 pointer and diagnostic effects.
+
+Six slave pointer cells at native RAM 0x20074328, 0x2007432c, 0x20074330,
+0x20074334, 0x2007434c and 0x20074350 now have 4-byte ARM BSS source
+definitions. Selected `APP_SlaveHanderInit` writes five; the native-backed
+connection-open provider writes the sixth. Absolute placement and startup
+zeroing remain external image gates. Coherent Main
+`peripherals-adv-pointer-cells-round/receipt.json` passes with 2488 defined,
+799 mixed unresolved and zero duplicate strong, SHA-256
+`97a5efeb6bce8be09fd952272f5812321fd35982730ea510846eafb34d3e86ab`.
+Advertising config/name RAM and app timer/handler cells remain authentic
+data obligations, with other Main interfaces and final firmware proof open.
+
+The next Cordio advertising descendants are source-defined: `appAdvStart`
+0x4b42f0 with its product OTA gate and independently evaluated capacity
+queries; `DmAdvStop` 0x4b3250; `DmAdvStart` 0x4b31ea;
+`DmAdvSetInterval` 0x4b3292; `DmAdvConfig` 0x4b3166; and
+`appSetAdvScanData` 0x4b3514. Actual compiled-C/native bounded checks pass
+3, 4, 6, 2 and 8 cases across these units. The capacity-query oracle
+caught and corrected a short-circuit discrepancy. The application slave
+profile pointer at native RAM 0x20074350 uses the existing
+`audio_ble_slave_profile_slot` written by the selected slave initializer;
+the profile table itself remains an unresolved data contract. The coherent
+`peripherals-app-adv-scan-config-round` target receipt passes with 2461
+defined, 809 mixed unresolved and zero duplicate strong, SHA-256
+`625ea7047c9754ca5e1ba2755a03548cedfaf169905e6f61061f9f3f30c3fb30`.
+Direct remaining connected code is `appSlaveAdvMode`,
+`appSlaveAdvStart`, `appSetAdvScanDataFrag`, `appSlaveConnectableAdv`,
+`appNumConns`, `DmAdvSetData` and their genuine descendants; RAM/profile
+data and final image/runtime gates are separate.
+
 ## UART sync reset and setup (2026-10-11)
 
 `sync_reset.c` reduces native0x584bc0/0x584c8c/0x584db6. It conditionally
@@ -3770,3 +3824,2425 @@ The final selected link `g2/build/c-firmware/20261011/audio-ble-dm-adv-atts-full
 The selected link `g2/build/c-firmware/20261011/audio-ble-hci-timeout-stage/receipt.json` passes with 1703 defined, 662 unresolved, zero duplicate strong symbols, SHA256 `3d8e538e6f0560b0e2c7c31c1878b6f13175936590b34babd34d4ae527c83916`. This is a source graph expansion, not whole-image closure; live HCI state, radio timing, and physical BLE behavior remain unqualified.
 
 Read-only cross-component audit: the Touch report's current selected reset attribution is 534/964 bytes, with 426-byte LP history allocation extent and an unowned four-byte value at 0x20000828 still gated by generated configuration or symbol-size evidence. Its 54 selected C units compile, but this data ownership does not prove linker placement or hardware operation. The CASE older archive receipt has three direct command/formatter imports; experimental public entry and command routing candidates already exist, and current startup sources contain the nine transport descendants named in an older report. Check the current CASE selected graph before assigning those historic names anew.
+
+### HCI radio shutdown and connected children (2026-10-11)
+
+- Added `display_ble_hci_radio_shutdown.c` for complete native 0x4b49ce: WSF timer stop, pin and radio shutdown calls, two live flag clears, and context reset. `verify_ble_hci_radio_shutdown.py` compared actual ARM compiled C against stock across three flag cases, PASS 3. The timer, flags, and context pointer are live product RAM contracts.
+- Added `display_ble_hci_radio_children.c` for native 0x52dd6a/0x52dd7c/0x52df12/0x52eece. The pin write uses the selected GPIO HAL, pin function the selected source provider; the mode word remains typed live product data. `verify_ble_hci_radio_children.py` compared compiled C and native: context reset PASS 5, pin disable PASS 2 including a child-mutated pin result. Switch and pins are statically crosswalked but their child MMIO effects are not yet runtime compared.
+- Dedicated `audio-ble-hci-radio-disable-stage/receipt.json`: Main candidate compilation and relocatable link PASS, 1708 definitions, 671 unresolved, zero duplicate strong definitions, candidate SHA-256 `bfac41a7ac82f576866ae617a427ea7c7d14bf780c9e00e41359dd36e4617564`. Full image source, placement, product initialization, and hardware runtime remain open.
+- Direct newly exposed code contracts include `audio_ble_hci_radio_pin_mask_4810b0`, `audio_ble_hci_radio_mask_4c2e30`, stack stop 0x55c430, option 0x55c7e8, and reset 0x55c286. Larger HCI event 0x56b390, reset sequence 0x569b56, ACL 0x52a962, and boot 0x4b48a6 remain unreduced. The 671 unresolved symbols include product RAM and other whole Main contracts, so their count is not an omitted-body count.
+
+### HCI ACL reassembly (2026-10-11)
+
+- Added `display_ble_hci_acl_reassemble.c` for native hciCoreAclReassembly 0x52a962, including start/continuation fragments, allocation, packet copy, length/remaining updates, complete-packet ownership transfer, and invalid-fragment frees. Added `display_ble_hci_acl_children.c` for hciCoreConnByHandle 0x52a704 (three live rows at 0x20071478, 0x1c stride) and WsfMsgDataAlloc 0x4bf990 using selected WsfMsgAlloc.
+- `verify_ble_hci_acl.py` executes actual ARM compiled C and native stock in seven bounded cases: unknown handle, complete start, zero-length, other packet kind, partial allocation/copy, continuation completion, and short continuation free. PASS 7, comparing return pointer, free/alloc calls, controller record bytes, and allocation content. Other malformed/overflow combinations and hardware behavior remain outside this oracle.
+- Dedicated `audio-ble-hci-acl-children-stage/receipt.json`: Main candidate compile/link PASS, 1711 definitions, 671 unresolved, zero duplicate strong definitions, SHA-256 `8d60863911f53bda0dc05018e7c124d07feb2bcd7d1bea3873a952cfb698ea42`. Whole-image source/equality remains false; controller state is live product RAM.
+
+### HCI reset opcode sequence (2026-10-11)
+
+- Added `display_ble_hci_reset_sequence.c` for native hciCoreResetSequence 0x569b56. It implements the complete retained command-complete opcode switch, state copies, typed live HCI controller/stack cells, vendor command progression, random retry and callback, and optional controller callback. Native R3 is an architectural input on the final 0x2018 callback path; a source-defined naked branch preserves it from the one-argument caller to the four-register C body.
+- `verify_ble_hci_reset_sequence.py` compared actual ARM compiled C with native stock for seven controlled cases: non-reset event, NVDS command, supported buffer record, random retry, final random callback, 0x2024 null option callback, and 0x2024 callback. PASS 7, comparing return register, selected child/callback calls, live state fields and random count. Remaining opcodes are statically crosswalked from the retained full decompilation but lack direct runtime fixtures. Caller R3 provenance after the event processor has no higher-level C meaning beyond the preserved register contract.
+- Dedicated `audio-ble-hci-reset-sequence-qualified-stage/receipt.json`: Main candidate compile/link PASS, 1713 definitions, 690 unresolved, zero duplicate strong definitions, SHA-256 `ef1df15735a4f8d5a7d6e437289d2ee721400decbd78e9bb55446a04bce72efc`. The higher import count exposes real HCI command providers and product RAM/ROM; it is not evidence of source completion.
+
+### HCI radio boot (2026-10-11)
+
+- Added `display_ble_hci_radio_boot.c` for native HciDrvRadioBoot 0x4b48a6, including acquire/detect/log/delay, conditional revision recovery, scheduler setup, optional identifier loading, radio register and mux startup. Every board configuration pointer, live state cell and ROM log string has an explicit typed external owner rather than a fabricated value. Corrected the shutdown parent’s live active/pending cells to 32-bit writes after checking native STR instructions; the updated four-byte shutdown oracle PASS 3.
+- `verify_ble_hci_radio_boot.py` compared actual ARM compiled C with native stock across five connected cases: ordinary boot, detector retry, matching revision, recovery, and identifier copy. PASS 5 comparing return, child call order, retry and command/active/pending cells, and identifier bytes. Hardware children are cut at their actual native addresses, so this verifies boot composition rather than the radio hardware itself.
+- Dedicated `audio-ble-hci-radio-boot-stage/receipt.json`: Main candidate compile/link PASS, 1714 definitions, 717 unresolved, zero duplicate strong definitions, SHA-256 `d8c8ce1149697c50d61580f74822ec9e39455ee2df85b9976f3914fd83cf91bf`. Direct radio child functions remain genuine code contracts; live hardware/product data is unresolved.
+
+### HCI event processor (2026-10-11)
+
+- Added `display_ble_hci_event_process.c` for the retained full native hciEvtProcessMsg 0x56b390 opcode/subevent tree: 16-bit event counters, HCI command events, LE reports, connection/CIS lifecycle, table-driven allocation/decode/callback/free, and vendor diagnostic branches. The event size and decoder tables remain typed ROM data contracts at 0x6e3720 and 0x6c910c. A source-defined naked branch preserves native R2/R3 call residue for the body’s 64-bit return. Diagnostic logging message/file pointers remain typed ROM contracts.
+- `verify_ble_hci_event_process.py` executes actual ARM C and stock native in nine bounded cases: unknown event, command complete/status, completed packets, idle, LE connection, disconnection, vendor trace, and enabled vendor log. PASS 9 comparing return registers (relocation-normalized vendor pointer), child call order, 16-bit counters, and event buffer header. The native disassembly exposed 16-bit counter writes; the source and oracle were corrected before the final target build. Remaining HCI subevent decoders, source-owned ROM table data, callback behavior, and all hardware effects are not covered by this oracle.
+- Dedicated `audio-ble-hci-event-qualified-stage/receipt.json`: Main candidate compile/link PASS, 1716 definitions, 746 unresolved, zero duplicate strong definitions, SHA-256 `0ad06cd758bee70fb9f16702344b167be611b37f0d4d8040f341e0a53f4af25f`. The HCI parent event/reset/ACL/boot/shutdown bodies are now source-defined; their children and product data keep the overall component and image incomplete.
+
+### HCI event command children (2026-10-11)
+
+- Added `display_ble_hci_event_command_children.c` for native hciEvtProcessCmdStatus 0x56b150 and hciCoreNumCmplPkts 0x530c08. The credit path uses selected hciCoreConnByHandle, 0x1c-byte live records, 8-bit wraparound subtraction, threshold callback and hciCoreTxReady. `verify_ble_hci_event_command_children.py` actual ARM C/native PASS 5 across status success/failure and credit notification/non-notification/unknown-handle cases.
+- Added `display_ble_hci_cmd_complete.c` for native hciEvtProcessCmdCmpl 0x56b182, including its complete retained opcode-to-event mapping, special random callback selection, vendor OGF fallback, allocator/decoder/callback/free sequence and command-receive completion. The source-defined naked entry preserves native R3 residue used by the native return. `verify_ble_hci_cmd_complete.py` actual ARM C/native PASS 4 for unknown, mapped, random and vendor opcodes, comparing allocation size, callback route, event header, free and receive-complete count. Remaining opcodes are statically crosswalked; ROM size/decoder table data remains an explicit contract.
+- Dedicated `audio-ble-hci-cmd-complete-stage/receipt.json`: Main target candidate compile/link PASS, 1720 definitions, 746 unresolved, zero duplicate strong definitions, SHA-256 `05fe7210f7155fb4f83b746e8def625082eceaa655da1d20e566daea6525f073`. The HCI graph remains incomplete through genuine decoder/radio children, product data tables and image placement/runtime gates.
+
+### HCI connection and command lower children (2026-10-11)
+
+- Added `display_ble_hci_conn_lifecycle.c` for native hciCoreConnAlloc/Free 0x52a67c/0x52a6b0 and open/close wrappers 0x52a758/0x52a762. The three 0x1c-byte live records retain sentinel 0xffff, queue/fragment release, credit return and callback order. `verify_ble_hci_conn_lifecycle.py` actual ARM C/native PASS 7: allocate, full table, free with/without attached messages, absent handle, open and close.
+- Added `display_ble_hci_cmd_lower.c` for native hciEvtCmdStatusFailure 0x56b100 and hciCmdRecvCmpl 0x52aef8. It composes selected WSF buffer/timer sources with the genuine HCI send child, preserving a special 0x2026/0x12 failure event and timer/state/send sequence. `verify_ble_hci_cmd_lower.py` actual ARM C/native PASS 5 across nonmatch, allocation failure/success and command completion.
+- Dedicated `audio-ble-hci-child-lifecycle-stage/receipt.json`: Main target candidate compile/link PASS, 1726 definitions, 743 unresolved, zero duplicate strong definitions, SHA-256 `7ba8c130db10021e42d7b7f3ef935b92d681cab5bbf52a885497049a89b966be`. Remaining HCI genuine code includes hciCoreTxReady/hciCmdSend, LE report decoders and radio HAL children; ROM tables and product runtime cells remain unresolved.
+
+### HCI command queue send (2026-10-11)
+
+- Added `display_ble_hci_cmd_send.c` for native hciCmdSend 0x52ae5e and WsfMsgPeek 0x4bfa00. It composes selected WSF enqueue/dequeue/free with timer start and transport command send contracts, preserves queue/message ownership and the saved R2 scratch byte overwritten by WsfMsgPeek. `verify_ble_hci_cmd_send.py` actual ARM C/native PASS 5: not ready, empty queue, transport failure, successful dequeue/free, and enqueue. The first oracle exposed the saved R2 low-byte effect, which was corrected before the final target build.
+- Dedicated `audio-ble-hci-cmd-send-stage/receipt.json`: Main candidate compile/link PASS, 1729 definitions, 744 unresolved, zero duplicate strong definitions, SHA-256 `3d1056523bf00a33cb1569e6ed8fdb6e9c5f4093719fd9f18316beca51235dc6`. Native transport send, timer start and remaining radio/LE children are still genuine code contracts.
+
+### HCI command transport children (2026-10-11)
+
+- Added `display_ble_hci_cmd_transport.c` for native WsfTimerStartSec 0x52a4b8 and hciTrSendCmd 0x530166. It retains 32-bit wrapping seconds-to-ticks conversion, the command packet length at byte 2 plus three header bytes, and exact hciDrvWrite return-length comparison. `verify_ble_hci_cmd_transport.py` actual ARM C/native PASS 6, including timer multiplication wrap and complete versus short writes.
+- Dedicated `audio-ble-hci-cmd-transport-stage/receipt.json`: Main candidate compile/link PASS, 1731 definitions, 744 unresolved, zero duplicate strong definitions, SHA-256 `a0813ab5bc460dd27c4a7f37263cec9e97c4e9cfe61e48d648fae98355e0ef2a`. The timer insert and radio driver write implementations remain genuine direct children, together with remaining event decoder and product data contracts.
+
+### HCI timer insertion and driver write (2026-10-11)
+
+- Added `display_ble_wsf_timer_insert.c` for native wsfTimerInsert 0x52a424, WsfQueueInsert 0x538c8c, and WsfQueuePush 0x538c6e. It composes selected task lock/timer remove/queue enqueue and retains sorted insertion with equal ticks placed after prior equal nodes. `verify_ble_wsf_timer_insert.py` actual ARM C/native PASS 5 for empty/front/middle/tail/equal sorted queues; active-timer removal is present but not bounded in this oracle.
+- Added `display_ble_hci_driver_write.c` for native hciDrvWrite 0x4b4a02, including full-ring and oversize authenticated error paths, framed packet length/type/payload into the live ring, ring commit and WSF event. `verify_ble_hci_driver_write.py` actual ARM C/native PASS 5 for zero, short, maximum accepted 0x102, oversize 0x103, and full queue. It compares framed bytes, return, and genuine child call order. The test initially hit an instruction-count bound at 0x102; increasing the emulator bound resolved it without a source change.
+- Dedicated `audio-ble-hci-timer-driver-stage/receipt.json`: Main target candidate compile/link PASS, 1735 definitions, 745 unresolved, zero duplicate strong definitions, SHA-256 `c37020de75828b5b69734e55c359c894da17f83ac577a5de97a2bbb34286e954`. Direct ring commit, WSF event, error handler and TxReady/ACL descendants remain, as do product RAM/ROM and whole-image gates.
+
+### HCI ACL TxReady and fragment transport (2026-10-11)
+
+- Added `display_ble_hci_tx_ready.c` for complete native hciCoreTxReady 0x52a79e. It saturates controller credits, drains continuation fragments, peeks/dequeues ACL queue messages, handles absent connection ownership, and starts/completes sends. The ARM entry preserves native R2 scratch. `verify_ble_hci_tx_ready.py` compares actual compiled C against stock for five controlled credit/queue cases, PASS 5.
+- Added `display_ble_hci_acl_fragments.c` for native hciCoreTxAclStart/Continue/Complete 0x52a850/0x52a8b0/0x52a936. It retains 0x1c-byte live connection record fields, packet length/header rewrite, segmented pointer/remaining updates, failure rollback and exact WSF free effects. `verify_ble_hci_acl_fragments.py` compares actual compiled C and stock across eight start/continue/complete cases, PASS 8. Other malformed packet and allocation states remain outside the bounded oracle.
+- Added `display_ble_hci_acl_transport.c` for native hciCoreNextConnFragment 0x52a72e, hciCoreSendAclData 0x52a76c, hciTrSendAclData 0x53013c and HciGetBufSize 0x530d34. Native literal slots 0x52ae14 and 0x530d68 both resolve to live state 0x20071478. `verify_ble_hci_acl_transport.py` executes actual C and stock through the transport with the same driver cut, PASS 7 including send success/failure and third-record selection.
+- Dedicated `audio-ble-hci-acl-transport-stage/receipt.json`: Main candidate compile/relocatable link PASS, 1744 defined, 744 unresolved, zero duplicate strong providers, SHA-256 `f0a7cd0dffe958b98360ab3158c60deb8607c8dcb28481c094945e6c8beaf39b`. Remaining direct HCI code includes ring commit, WSF event, radio HAL, LE decoders and error handler; unresolved product RAM, ROM tables, build placement and hardware runtime keep Main incomplete. The candidate fragment source has actual ARM/native bounded proof; broader HCI traffic and live-radio operation remain unverified.
+
+### HCI LE reports and driver children (2026-10-11)
+
+- Added `display_ble_hci_le_reports.c` for full retained native LE advertising, direct advertising, extended advertising and periodic advertising report decoders 0x56a398/0x56ab50/0x56a430/0x56a5be. It preserves allocation sizes, report iteration, 0x1f/0xe5/0xf7 length gates, event field layout, live callback at 0x20073878, and free timing. `verify_ble_hci_le_reports.py` executes actual ARM C and stock through the same allocator/callback cuts, PASS 4 for one valid report of each kind, comparing all delivered event bytes and calls. Multi-report and malformed/oversize cases remain outside this bounded oracle. Connection and connectionless IQ decoders remain genuine native code.
+- Added `display_ble_hci_driver_children.c` for native ring commit 0x530084, WsfSetEvent 0x52b91e, error_check 0x4b47ae, and the architectural IRQ save/restore behavior. The ring retains element-size multiplication, capacity test, optional copy, unsigned modulo and count increment; WSF event writes the handler event bit and scheduler ready bit; error_check invokes the configured callback after storing the code. Error value/callback and WSF task state are typed live RAM contracts. `verify_ble_hci_driver_children.py` executes actual ARM C and native stock with equivalent critical-section cuts, PASS 6 for ring empty/data/full, WSF event, and zero/nonzero errors. The emulator cannot execute this target's PRIMASK instructions directly; their decoded MRS/CPSID/MSR behavior is represented by authenticated C inline assembly and cut only in that bounded effect oracle.
+- Dedicated `audio-ble-hci-le-driver-qualified-stage/receipt.json`: Main target candidate compile/relocatable link PASS, 1758 defined, 737 unresolved, zero duplicate strong definitions, SHA-256 `df85d8e1f3bad67c1daaf5e704dfcb583ec0bb082f9c65aeba7edf216930b9ba`. The `audio_ble_hci_`/`audio_ble_wsf_` namespace has 76 unresolved entries: these include genuine IQ/radio/command code, live product RAM, and ROM tables/strings; 737 is whole Main graph imports, not a code body count. Full Main source, placement, data ownership and hardware runtime remain incomplete.
+
+### HCI CIS live handle table (2026-10-11)
+
+- Added `display_ble_hci_cis.c` for native CIS allocate/free/lookup 0x52ad9c/0x52adc2/0x52adec and open/close wrappers 0x52ae24/0x52ae2e. Authenticated ROM slot 0x52ae20 points to six 16-bit live handles at 0x200714cc, within the already declared HCI controller state. Unused entries are 0xffff; wrappers preserve native R7 return behavior. `verify_ble_hci_cis.py` actual ARM C/native PASS 7 for first/free/full/lookup/open/close effects.
+- Dedicated `audio-ble-hci-cis-stage/receipt.json`: Main compile/relocatable link PASS, 1763 defined, 734 unresolved, zero duplicate strong definitions, SHA-256 `a7c06a4d3143df00dc8627e2196d98b321106b0314cfe6cb4636358d976a5e26`. The live handle initializer and event/radio ROM data remain source/layout contracts, and full Main remains incomplete.
+
+### HCI radio detect/revision/enable children (2026-10-11)
+
+- Added `display_ble_hci_radio_simple.c` for complete native revision getter 0x52dee6, detector 0x52deee and enable 0x52dd58. Authenticated ROM slots 0x52ea24/0x52eaec point at live 0x20074224/0x20074228; detector compares against native constant 0x0301ff04 after its log. Enable passes an initialized 0x75 stack word to the genuine pin-mask child and returns the possibly modified word, as the native POP-to-R0 does. `verify_ble_hci_radio_simple.py` actual ARM C/native PASS 4 including a child mutation of that stack word.
+- Dedicated `audio-ble-hci-radio-simple-stage/receipt.json`: Main compile/relocatable link PASS, 1766 defined, 734 unresolved, zero duplicate strong definitions, SHA-256 `754030a8b11331ff4f9f8a9779a16b9fdaba9531d4f78ccc83d809653b7ba3a2`. New detected word, revision word and ROM log string remain typed source/data ownership contracts; full Main incomplete.
+
+### HCI radio scheduler and IRQ setup (2026-10-11)
+
+- Added `display_ble_hci_radio_scheduler.c` for native ring scheduler initialization 0x53006c, conditional radio preparation 0x52f38c, NVIC priority setup 0x4b4786 and NVIC interrupt enable 0x4b4768. Authenticated literal slots point at architectural NVIC priority 0xe000e400, system handler priority 0xe000ed18, and interrupt set-enable 0xe000e100. Radio preparation retains the native R7 return and invokes its genuine mode and prepare children. `verify_ble_hci_radio_scheduler.py` actual ARM C/native PASS 7 covering ring fields, both preparation branches, positive/negative IRQ priority and interrupt-enable paths. The initial negative IRQ fixture omitted ABI sign extension; corrected fixture passes against both implementations.
+- Dedicated `audio-ble-hci-radio-scheduler-stage/receipt.json`: Main compile/relocatable link PASS, 1771 defined, 732 unresolved, zero duplicate strong definitions, SHA-256 `15e5bf54caf638101c47c6621f69253828b6c984bdd3a679b07edb08c9777f90`. Two new radio mode/prepare child code contracts remain; full Main source and live hardware validation remain incomplete.
+
+### HCI radio mode selector and watchdog wrapper (2026-10-11)
+
+- Added `display_ble_hci_radio_mode.c` for native mode-state selector 0x50938e and watchdog-kick wrapper 0x5118e0. The three ROM literal pointers authenticate live adjacent mode cells at 0x20074368..6a; mode 1 selects +1, mode 2 selects +2, all other byte values select the base. The wrapper retains its genuine 0x5118e8 watchdog child and native R7 return. `verify_ble_hci_radio_mode.py` actual ARM C/native PASS 6 across selector values 0,1,2,3,256 and wrapper call.
+- Dedicated `audio-ble-hci-radio-mode-stage/receipt.json`: Main compile/relocatable link PASS, 1773 defined, 732 unresolved, zero duplicate strong definitions, SHA-256 `2fa56e1ef3ae651fbadcdd3e93ce34571401083fc50ce52dfa49bbf7b24a5fee`. The watchdog child and live mode cells remain genuine contracts. Whole Main source and runtime remain incomplete.
+
+### HCI radio GPIO interrupt mask body (2026-10-11)
+
+- Added `display_ble_hci_radio_pin_mask.c` for complete native 0x4810b0: null/opcode/pin validation; single-pin set/clear with bank 0/1/2 and the native bank-3 edge case; seven-word mask set/clear; architectural critical save/restore. ROM literal pointers 0x481768..9c authenticate seven registers per bank at 0x40010530..590 and 0x400105a0..600, spaced 0x10 bytes. An initial contiguous-register interpretation failed the actual-native oracle and was corrected to the authenticated 0x10-byte stride. `verify_ble_hci_radio_pin_mask.py` actual ARM C/native PASS 9, comparing return and full MMIO region for all four operations and errors. PRIMASK instructions are cut in Unicorn as in the prior ring oracle; source inline assembly is decoded from native.
+- Dedicated `audio-ble-hci-radio-pin-mask-stage/receipt.json`: Main compile/relocatable link PASS, 1774 defined, 731 unresolved, zero duplicate strong definitions, SHA-256 `ca147cb39c89be002bd8536bdf169b8880c47f43c57ff8e8b5d0f56eec3e93bb`. Radio acquire/watchdog and IQ decoder diagnostics remain genuine code; live product RAM and ROM data remain separate contracts. Full image remains incomplete.
+
+### HCI radio resource acquisition parent (2026-10-11)
+
+- Added `display_ble_hci_radio_acquire.c` for complete retained 0x52dd94 resource acquisition: busy/kind/config guards, power/platform preparation, 20-byte configuration copy with two caller words, four vendor stack stages, live 0x20073dc4 resource row initialization, output pointer ownership, context check/recover, revision logging and dispatch setup. Authenticated literal slots point to live resource row 0x20073dc4, product configuration 0x200001b4 and revision word 0x20074224; no values were invented. `verify_ble_hci_radio_acquire.py` compares actual compiled ARM C with stock across ten guarded/failure/success paths, PASS 10, including exact child order, configuration bytes, live row, output pointers and revision. Child hardware effects are cut at their authentic entry points; this is connected composition proof, not vendor stack or radio operation proof.
+- Dedicated `audio-ble-hci-radio-acquire-stage/receipt.json`: Main compile/relocatable link PASS, 1775 defined, 746 unresolved, zero duplicate strong definitions, SHA-256 `ba801e6ded39ebb89eada5a83f233a6b643dccee8cc2ced34265e4b2bc7a5499`. The import increase exposes fifteen genuine vendor stack/context/log/data contracts instead of claiming them complete. Full image remains incomplete.
+
+### HCI radio platform/context/dispatch children (2026-10-11)
+
+- Added `display_ble_hci_radio_context.c` for native platform pin setup 0x52dc40, context initialization 0x52e0a2 and dispatcher flag write 0x52edd8. Platform pin words 0x183/0x93 are authenticated source ROM data at 0x78ee40/44; the third pin word is live RAM 0x200001b0. It reuses selected native GPIO pin-function/write providers. Context initialization checks active/pending bytes, invokes stack stop/options in order, clears pending and returns native status; dispatcher flag is live 0x20074f51. `verify_ble_hci_radio_context.py` actual ARM C/native PASS 5, including all nine pin/GPIO call arguments and both context branches. The wrapper preserves native incoming R3 return on platform setup.
+- Dedicated `audio-ble-hci-radio-context-stage/receipt.json`: Main compile/relocatable link PASS, 1779 defined, 745 unresolved, zero duplicate strong definitions, SHA-256 `ffde102c4b213ed625dbb6e57e953e148fa319b9b35bdc9404bb6f36446b6d99`. Live pin/dispatch cells and vendor stack stop/options remain genuine imports; full image incomplete.
+
+### Vendor stack open/stop descendants (2026-10-11)
+
+- Added `display_ble_hci_vendor_stack_open_stop.c` for complete native vendor stack row open 0x55c2bc and stop 0x55c430. ROM slot 0x55cc18 authenticates eight 0x8a8-byte live rows at 0x2003b558, while 0x55c548 authenticates 0x40050000 MMIO. Open checks index/output/allocated bit, writes authenticated 0x00123456 low identifier plus state bits and returns the row. Stop checks the native 25-bit row signature, active/pending fields, clears MMIO bits 0 and 4, calls the genuine stop HAL child and clears active state. `verify_ble_hci_vendor_stack_open_stop.py` actual ARM C/native PASS 9 over guards and state/MMIO transitions; the HAL child effect remains cut.
+- Dedicated `audio-ble-vendor-stack-open-stop-stage/receipt.json`: Main compile/relocatable link PASS, 1781 defined, 745 unresolved, zero duplicate strong definitions, SHA-256 `631190959ca3a17c316c7a70c68bf3ec95ade9147db8952533155780df91d8d1`. Live vendor rows, stack stop HAL, option/config/start and other vendor graph bodies remain, so image source is incomplete.
+
+### Vendor stack option transfer (2026-10-11)
+
+- Added `display_ble_hci_vendor_stack_option.c` for complete retained native 0x55c7e8 row/MMIO option transfer. It validates the row signature and mode, stores or loads thirteen authenticated row-to-register fields, preserves bit-zero handling at 0x228, active-state wait, saved high return, IRQ off/on and completion status. The 0x55d248 ROM slot authenticates 0x40050000 vendor MMIO. `verify_ble_hci_vendor_stack_option.py` compares actual compiled ARM C with native stock over eleven guarded/store/load cases, PASS 11, including before-store, active wait/high return and after-load callbacks. The lower IRQ/wait callbacks are cut at native entries; their separate effects remain source contracts.
+- Dedicated `audio-ble-vendor-stack-option-stage/receipt.json`: Main compile/relocatable link PASS, 1783 defined, 751 unresolved, zero duplicate strong definitions, SHA-256 `67365767ad2393696aa4bdc7eba11ee881008dacd7fa8efb7b83a01d9cdb27c2`. The higher import count exposes genuine lower IRQ/wait callbacks and live vendor rows, not source completion.
+
+### Vendor stack configuration (2026-10-11)
+
+- Added `display_ble_hci_vendor_stack_config.c` for complete retained native 0x55ca94 configuration: row signature/index/active validation, mode 0 divider path and bit/rate limits, three accepted mode 1 frequencies, authenticated MMIO values at 0x40050000, row timing/count/width calculations and trailing state reset. All constants were read from stock ROM slots 0x55d24c..274; the complex divider 0x55bf64 remains a genuine imported C body. `verify_ble_hci_vendor_stack_config.py` actual compiled ARM C/native PASS 12 across null/invalid/active guards, mode 0 limits/acceptance and all three mode 1 frequencies. It compares entire 0x8a8-byte row and 0x300-byte MMIO window with the same divider cut.
+- Dedicated `audio-ble-vendor-stack-config-stage/receipt.json`: Main compile/relocatable link PASS, 1784 defined, 751 unresolved, zero duplicate strong definitions, SHA-256 `e770d4767e212ba9be99d82789774752b11dd106e13e1943d36626d0f2390eaa`. Vendor start/divider/IRQ children and live rows remain; full Main incomplete.
+
+### Vendor stack start (2026-10-11)
+
+- Added `display_ble_hci_vendor_stack_start.c` for complete retained native 0x55c32e: row signature/active guards, hardware start guard, optional DMA state reset and preparation, authenticated 0x800040 control write, completion wait, active-flag set on success, MMIO clear on wait failure, and native high-register return. `verify_ble_hci_vendor_stack_start.py` actual ARM C/native PASS 8 across null/invalid/active, guard failure, with/without DMA, DMA failure, wait failure/success. It compares the full 0x8a8-byte row and 0x300-byte MMIO window with authentic guard/DMA/wait child cuts.
+- Dedicated `audio-ble-vendor-stack-start-stage/receipt.json`: Main compile/relocatable link PASS, 1786 defined, 752 unresolved, zero duplicate strong definitions, SHA-256 `3bea4420be887a7e768aa38af7335172393565c72ba73cf7d55207f2b5654396`. Newly exposed vendor guard/DMA/wait children, live row/config and product data remain. Full image remains incomplete.
+
+### Vendor stack start guard and DMA preparation (2026-10-11)
+
+- Added `display_ble_hci_vendor_stack_start_children.c` for native start guard 0x55bd2e and DMA preparation 0x55c0dc. The guard uses authenticated 0x40050000 + index*0x1000 + 0x11c MMIO, compares the low state bits and writes 1 or 0x10. DMA preparation clears row offsets 0x828/0x20/0x85c, constructs the exact four-word parameter block including preserved R3 high word, calls genuine queue child 0x538d58, and sets row+0x20 to 0x100 on zero result. `verify_ble_hci_vendor_stack_start_children.py` actual ARM C/native PASS 5 for guard paths and DMA success/failure, comparing child parameters, entire row and MMIO.
+- Dedicated `audio-ble-vendor-stack-start-children-stage/receipt.json`: Main compile/relocatable link PASS, 1788 defined, 751 unresolved, zero duplicate strong definitions, SHA-256 `635041ff996910d2641974a5185b8093e0c5b77af151a2dab76d1aabc2dd1ac2`. The queue child is a genuine remaining code contract; live product rows and radio hardware runtime remain unresolved.
+
+### DMA queue channel setup (2026-10-11)
+
+- Added `display_ble_hci_dma_queue.c` for complete native 0x538d58: channel/parameter/out validation, 0x2c-byte live channel row allocation with busy bit, source/limit/length fields, authenticated identifier 0x00cdcdcd, descriptor pointer, and five register effects. ROM slots 0x539244/248 authenticate twelve rows at 0x2006ef28 and 0x28-byte descriptor entries at 0x6c0f40; descriptors remain typed source-owned ROM data contracts, not copied opaque payloads. `verify_ble_hci_dma_queue.py` actual ARM C/native PASS 7 for invalid channel/parameters/busy and successful setup, comparing entire row and MMIO window. Its test fixture loads authenticated descriptor bytes solely for comparison; the production C references an external typed descriptor table.
+- Dedicated `audio-ble-dma-queue-stage/receipt.json`: Main compile/relocatable link PASS, 1789 defined, 752 unresolved, zero duplicate strong definitions, SHA-256 `b179ad3220a90956e3d80d9f021f8856ce9e8029de1e67c73b6369e29e3eab62`. Live channel rows and ROM descriptor ownership/placement remain source-data gates; full Main remains incomplete.
+
+### Vendor clock divider arithmetic (2026-10-11)
+
+- Added `display_ble_hci_vendor_divider.c` for complete native 0x55bf64 and its arithmetic children 0x55bf1c/0x55bf50. It preserves integer ceiling, CLZ/shift behavior, encoded fractional/odd divider fields, nearest-frequency calculation and special power-of-two fallback. Authenticated ROM clock constants 0x05b8d800 and 0x0003d090 are source-defined values. `verify_ble_hci_vendor_divider.py` executes actual ARM C and unmodified native children for 28 frequency/mode pairs, PASS 28 comparing both return registers. These fixtures include zero, low rates, the 250/500 kHz fallback and 48/96 MHz limits; they do not prove every possible 32-bit frequency or hardware clock quality.
+- Dedicated `audio-ble-vendor-divider-stage/receipt.json`: Main compile/relocatable link PASS, 1793 defined, 751 unresolved, zero duplicate strong definitions, SHA-256 `0739862bb77a50d57a2eddf71723964bac53175eab61682be5cae3d77a9c5069`. Source remains candidate, with live vendor data, radio and IQ graph and whole-image placement/runtime gates open.
+
+### Vendor option linked-node callbacks (2026-10-11)
+
+- Added `display_ble_hci_vendor_option_children.c` for native 0x55c13a/0x55c168. Before-store forms the self-linked node through the authenticated 0x40050000 + channel*0x1000 + 0x22c MMIO pointer only when row+0x24 is zero, then calls the genuine DMA release child with row+0x828; after-load calls the DMA resume child with the same field. `verify_ble_hci_vendor_option_children.py` actual ARM C/native PASS 3 for linked-node, skip and resume effects.
+- Dedicated `audio-ble-vendor-option-children-stage/receipt.json`: Main compile/relocatable link PASS, 1795 defined, 751 unresolved, zero duplicate strong definitions, SHA-256 `2085775a04b1954fb7032be7bf383af66d7df4f2f211f79bbd23d602e144e749`. DMA release/resume remain authentic code contracts; full Main and radio runtime incomplete.
+
+### DMA release/resume (2026-10-11)
+
+- Added `display_ble_hci_dma_release_resume.c` for native 0x538e3c/0x538e8c. It validates the authenticated 0x01cdcdcd channel signature, follows the typed descriptor control pointer, sets/clears MMIO enable bit and active row flag, and executes DMB SY when the native 0x20080000 address threshold is met. `verify_ble_hci_dma_release_resume.py` actual ARM C/native PASS 8 for null/bad/inactive/active and barrier-threshold paths, comparing entire row and control register; the barrier instruction executes in both emulated implementations.
+- Dedicated `audio-ble-dma-release-resume-stage/receipt.json`: Main compile/relocatable link PASS, 1797 defined, 749 unresolved, zero duplicate strong definitions, SHA-256 `d83c1959d452074a762e5e315bd197995789d8b0757540f7d113d90cf8d73578`. Product descriptor table/rows and whole-image/runtime gates remain.
+
+### Radio reset/pin routing and vendor stop (2026-10-11)
+
+- Added `display_ble_hci_radio_reset_mask.c` for complete native vendor reset 0x55c286 and radio pin routing 0x4c2e30. The ROM pin function selector 3 is authenticated at 0x78ee48. `verify_ble_hci_radio_reset_mask.py` compares actual compiled ARM C and stock across 23 guards/routes, PASS 23. Corrected an earlier exact symbol reference for stack option 0x55c7e8. Dedicated `audio-ble-hci-radio-reset-mask-stage/receipt.json`: compile/relocatable link PASS, 1800 defined, 746 unresolved, zero duplicates, SHA-256 `17fdc3162cc427d3a8d907c1efed495b5d05e324198c620a5743e6b60f30d91c`.
+- Corrected the vendor stop 0x55c430 lower call ABI to pass its row in R0; the focused actual ARM C/native oracle now compares that register and PASS 9. Added `display_ble_hci_vendor_stop_hal.c` for native 0x55c11a, DMA close 0x53909a and DMA count refresh 0x538d18. The stop/close oracle compares six actual C/native guarded, busy and success transitions with the refresh child cut, PASS 6; the refresh body is target compiled but has no standalone native runtime qualification yet. Dedicated `audio-ble-vendor-stop-hal-stage/receipt.json`: Main compile/relocatable link PASS, 1803 defined, 745 unresolved, zero duplicates, SHA-256 `d0652b45511afc4345dd1579de6756d7075f25650976a9cd4a0c2e16c8fb45a8`.
+- The focused HCI/radio/vendor namespace remains 80 direct imports (70 HCI, 4 radio, 6 vendor). They include live product RAM, ROM tables/strings and at least 30 distinct genuine code contracts, including larger event/IQ decoders, resource validation and radio context recovery. The whole Main candidate has 745 unresolved symbols across all namespaces. This import count is a link frontier, not a body completeness count: source placement, data initialization, runtime and full native equivalence remain open.
+
+### Radio revision command transfer (2026-10-11)
+
+- Added `display_ble_hci_radio_read_revision.c` for native revision wrapper 0x52eeea and full command packet/response body 0x52ea28. The ROM word at 0x52f298 authenticates command 0x00402000. The C builds the nine-byte request, initializes native-sized packet/response buffers, calls the genuine exchange child, copies the low-byte-count response or logs its status and returns 15. `verify_ble_hci_radio_read_revision.py` executes actual ARM C and native stock for five null/exchange/success/status paths, PASS 5, comparing request bytes, exchange length, output copy and logger argument. It cuts the genuine exchange and logger child effects; product error string at stock 0x75d590 remains typed ROM data.
+- Dedicated `audio-ble-radio-read-revision-stage/receipt.json`: Main compile/relocatable link PASS, 1805 defined, 747 unresolved, zero duplicate strong definitions, SHA-256 `90e413bb8ce0f866c41263ad7fda268abc95744d50c481b9b71b3b76720f5f8c`. The two new genuine contracts are exchange 0x52e612 and the authenticated error string. Full command transport, product data and Main image remain incomplete.
+
+### Radio request exchange (2026-10-11)
+
+- Corrected the revision command's fifth stack argument: native 0x52ea9c stores the received-count pointer at SP before calling 0x52e612. Added `display_ble_hci_radio_exchange.c` for complete native 0x52e612: three null guards, begin child, authenticated 0x40010410 bit-21 poll with 5,000,000 limit, delay, receive retry until command bytes match and native two-register return. `verify_ble_hci_radio_exchange.py` compares actual ARM C/native over seven cases (nulls, begin failure, first match, retry, receive failure), PASS 7, including both R0/R1. The 5,000,000 iteration timeout is statically reconstructed and not emulated as a complete timeout fixture. Begin/receive children are genuine pending code, as is hardware state.
+- Dedicated `audio-ble-radio-exchange-stage/receipt.json`: Main compile/relocatable link PASS, 1806 defined, 748 unresolved, zero duplicate strong definitions, SHA-256 `5d62ae90ceed49a336c8f33b8551244f3365ddba85541f3573732c00f8a8e706`. The two newly exposed child imports keep source completion false.
+- Subsequent native register audit found that exchange forwards its original R2 request length into begin 0x52e0d2. The C call is corrected and the focused seven-case oracle now records and matches R2=9. Fresh `audio-ble-radio-exchange-abi-stage/receipt.json` PASS, 1806/748/zero duplicates, same linked output SHA-256 `5d62ae90ceed49a336c8f33b8551244f3365ddba85541f3573732c00f8a8e706`; the earlier build happened to preserve R2 in generated code but the source ABI is now explicit.
+
+### Radio exchange send child (2026-10-11)
+
+- Added `display_ble_hci_radio_exchange_begin.c` for full native 0x52e0d2 send path: selection, 0x104-byte bound, transmit-space chunking, serial fallback, native 0x30-byte vendor descriptor, error logs, release and context reset. ROM slots 0x52ed30/0x52ede0 authenticate log strings at 0x71b740/0x730e54; these remain typed ROM data imports. `verify_ble_hci_radio_exchange_begin.py` actual ARM C/native PASS 7 over select error, oversize, zero-length, no space, two-byte serial, vendor success and vendor error, comparing child order, descriptor count/type/payload and log arguments. Vendor, serial and context child internals remain separate code contracts.
+- Dedicated `audio-ble-radio-exchange-begin-draft/receipt.json`: Main compile/relocatable link PASS, 1807 defined, 755 unresolved, zero duplicate strong definitions, SHA-256 `e9b14ade8776a58049c50f66ece1d6557c4b525c35022d4e80b5f10b637c353f`. The higher import count exposes genuine transmit and vendor children, not an image-completion regression.
+
+### Radio exchange receive child (2026-10-11)
+
+- Added `display_ble_hci_radio_exchange_receive.c` for native 0x52e1ea: product busy and hardware-ready guards, context selection, vendor header retry and bulk read, serial fallback, bounds/error logs, GPIO pacing, received-count update and context reset. ROM slots authenticate busy cell 0x20074f4f, MMIO 0x40010410 and four log strings 0x768ae4/0x6f7d84/0x71b778/0x71b7b0. These remain real data contracts. `verify_ble_hci_radio_exchange_receive.py` actual ARM C/native PASS 6 over busy/not-ready/select error, serial invalid/success and vendor success. It compares call order, GPIO, read count and output bytes. Vendor retry/error and multi-chunk paths remain unqualified; native vendor child must initialize the two-byte header before a successful read.
+- Dedicated `audio-ble-radio-exchange-receive-draft/receipt.json`: Main compile/relocatable link PASS, 1808 defined, 761 unresolved, zero duplicate strong definitions, SHA-256 `5e081ef8e41274cb8c58523ded0393d13ae51edcd030fd4aceaad48156922072`. The +6 import growth exposes actual vendor/serial and product ROM/RAM children. Whole firmware source, placement and hardware remain incomplete.
+
+### Radio serial and context-select children (2026-10-11)
+
+- Added `display_ble_hci_radio_serial_children.c` for complete native 0x52e072/0x52e058/0x52dd1c/0x52dc98/0x52dcde: context select and stack option/start, transfer release timing and busy-cell reset, live serial-mode read and byte transmit/receive through authenticated 0x40010440/0x4001045c/0x40010408 MMIO. Product mode cell 0x20074f53 remains a typed runtime import. `verify_ble_hci_radio_serial_children.py` compares actual ARM C/native over ten cases, PASS 10, including exact GPIO/MMIO write sequence for two transmitted bytes and received bits, stack calls and release effects.
+- Dedicated `audio-ble-radio-serial-children-stage/receipt.json`: Main compile/relocatable link PASS, 1813 defined, 757 unresolved, zero duplicate strong definitions, SHA-256 `c7a5eabec6f819ebf3544d3f5caafae1d0262753770b27feff91b720c0b054de`. The next directly connected code frontiers are tx-space 0x52df50 and vendor stack send/receive 0x55cf40/0x55cc1c; product mode/busy cells are live data contracts.
+
+### Radio transmit-space query (2026-10-11)
+
+- Added `display_ble_hci_radio_tx_space.c` for native 0x52df50: live busy-cell set, GPIO low, 12,000 polls of authenticated 0x40010410 with 100-tick delays, ten vendor/serial retries of command 0x42 and returned free space, vendor error log and native result. The 0x52ec80 ROM slot authenticates log string 0x6ff930, kept typed. `verify_ble_hci_radio_tx_space.py` compares actual ARM C/native PASS 5 over vendor immediate/retry/error and serial immediate/retry, including GPIO order, command byte, result and busy cell. Full 12,000-poll timeout is statically reconstructed but not executed in this bounded harness.
+- Dedicated `audio-ble-radio-tx-space-stage/receipt.json`: Main compile/relocatable link PASS, 1814 defined, 757 unresolved, zero duplicate strong definitions, SHA-256 `9b76e9b0d4320e86d7a65fee2969e1e7770cb5feabb5d184788796f4a83365e3`. Vendor stack send/receive and associated data remain significant connected code frontier.
+
+### Vendor transfer guard and encoder (2026-10-11)
+
+- Added `display_ble_hci_vendor_transfer_children.c` for complete native descriptor guard 0x55c1e0 and control-word encoder 0x55bce8. ROM slots 0x55cc10/0x55c514 authenticate masks 0x00e0e0e0/0x000fff00; the 64-bit allowed-address mask is reconstructed from 32-bit halves to avoid an unselected runtime helper. `verify_ble_hci_vendor_transfer_children.py` actual ARM C/native PASS 34: ten guard cases (size, address, pointer/type, mode, strict flags) and 24 control encodings. No product configuration values are fabricated.
+- Dedicated `audio-ble-vendor-transfer-children-stage/receipt.json`: Main compile/relocatable link PASS, 1816 defined, 757 unresolved, zero duplicate strong definitions, SHA-256 `8482ff3f70f9c388661268f4d1b9e6795a9ff87abe928aa70d497d20c55893c3`. Larger stack send/receive 0x55cf40/0x55cc1c remain genuine connected bodies; whole Main and six-image hardware/runtime source closure remain open.
+
+### Vendor FIFO send (2026-10-11)
+
+- Added `display_ble_hci_vendor_send.c` for full native 0x55cf40: row/descriptor/transfer guard, live vendor MMIO setup, control encoding, FIFO polling and word/partial-byte transfers, final wait, recovery and register restoration. ROM slots 0x55d248/278/27c authenticate 0x40050000, signature 0x01123456 and 500,000 poll limit. `verify_ble_hci_vendor_send.py` actual ARM C/native PASS 13 over six guards, zero/word/partial transfers, three wait failures and finish recovery. It compares entire MMIO window, output input bytes and child call order. Long asynchronous polling and hardware timing remain unverified; wait/finish/recovery lower effects are genuine imports.
+- Dedicated `audio-ble-vendor-send-draft/receipt.json`: Main compile/relocatable link PASS, 1817 defined, 759 unresolved, zero duplicate strong definitions, SHA-256 `7492e8be906c43e042ff6115121bab8e2bf630e853475e9ffe5161d6fac0889b`. Vendor FIFO receive 0x55cc1c remains another substantial native body.
+
+### Vendor FIFO receive (2026-10-11)
+
+- Added `display_ble_hci_vendor_receive.c` for full native 0x55cc1c: row/descriptor/type guard, native zero-length type rewrite, MMIO setup and control encoding, type 1 read FIFO, type 0 write FIFO, partial-byte handling, wait/recovery and register restoration. `verify_ble_hci_vendor_receive.py` actual ARM C/native PASS 14 over guards, zero/word/partial read, type 0 write, three wait failures and finish recovery. It compares entire MMIO window, output bytes and child order. Long asynchronous waits and hardware state remain runtime gates.
+- Dedicated `audio-ble-vendor-receive-draft/receipt.json`: Main compile/relocatable link PASS, 1818 defined, 758 unresolved, zero duplicate strong definitions, SHA-256 `4360b5cd0fddd820b641cfd6c0638f808ef79dba471eb598aead3e7267726ec4`. Current HCI/radio/vendor namespace has 92 direct imports (72/11/9), including source data and newly exposed genuine lower functions. Whole Main remains incomplete with 758 unresolved direct imports; this is a link frontier, not a count of missing whole bodies.
+
+### Vendor wait and completion result (2026-10-11)
+
+- Added `display_ble_hci_vendor_wait_finish.c` for native masked polling 0x480826 and vendor completion classification 0x55bd70. The completion branch tests authentic bit 9 (`LSLS #22`), not bit 15 suggested by one decompiler rendering; stock disassembly and actual execution resolved it. ROM constants 0x55c548/54c/550 authenticate MMIO 0x40050000 and 0x08000001/2 errors. `verify_ble_hci_vendor_wait_finish.py` actual ARM C/native PASS 10 over equal/unequal/timeout/yield and all completion statuses including extra status. Yield remains a genuine hardware/time lower.
+- Dedicated `audio-ble-vendor-wait-finish-stage/receipt.json`: Main compile/relocatable link PASS, 1820 defined, 756 unresolved, zero duplicate strong definitions, SHA-256 `db5ffa82edbb13a2bd24226cfe4599126b88e05a65530971a5f0d994b6d17fcb`. Vendor recover 0x55bdac and yield 0x4807a0 remain code contracts.
+
+### Vendor recovery (2026-10-11)
+
+- Added `display_ble_hci_vendor_recover.c` for complete native MMIO recovery 0x55bdac: save/disable control, bit-11 flush/read-drain, bit-0x210 reset sequence with authenticated 0xdeadbeef fill word, interval delay, and final interrupt clear/control restore. `verify_ble_hci_vendor_recover.py` actual ARM C/native PASS 6 over plain, empty/one-word flush, receive drain and reset/both branches, comparing the entire 0x290-byte MMIO window and delay argument. Unbounded hardware spin waits remain a runtime condition, and the yield child is still a genuine timing contract.
+- Dedicated `audio-ble-vendor-recover-stage/receipt.json`: Main compile/relocatable link PASS, 1821 defined, 755 unresolved, zero duplicate strong definitions, SHA-256 `96e271d43be9327b841397463774545c1e3895f979ad45ad462930ae6f2cf047`. Main still lacks live data initialization, placement and hardware validation.
+
+### Vendor VFP delay (2026-10-11)
+
+- Added `display_ble_hci_vendor_yield.c` for native 0x4807a0: exact VFP unsigned-to-float and fixed-point conversion, live 0x40021000 clock-mode branch, 250.0f/96.0f scaling, overhead subtraction and a typed resident-ROM cycle-delay call at address 0x40. ROM slots 0x4807f0/f4/f8 authenticate float constants and clock cell. `verify_ble_hci_vendor_yield.py` actual ARM C/native PASS 16 over both mode branches and duration 0 through 0xffffffff, comparing call presence and exact cycle count. The resident ROM routine is an explicit external contract and has no C source in the retained image.
+- Dedicated `audio-ble-vendor-yield-draft/receipt.json`: Main compile/relocatable link PASS, 1822 defined, 755 unresolved, zero duplicate strong definitions, SHA-256 `6040bc757c2a96655a8c9722fdd2feda96cbcbe39f266e07ebd0b49d98f539f9`. ROM symbol replaces the yielded code import; firmware remains incomplete.
+
+### Vendor IRQ bank routing (2026-10-11)
+
+- Added `display_ble_hci_vendor_irq_dispatch.c` for complete native seven-bank disable 0x4c44bc and enable 0x4c4530 routing with IRQ bound 0x39 and low-byte arguments. `verify_ble_hci_vendor_irq_dispatch.py` actual ARM C/native PASS 20 over all fourteen bank routes and three invalid guards per direction, comparing exact lower selection, argument and low return. Native R7 high-return is unobserved by selected callers and not asserted as an equivalent output. Fourteen bank-specific lower bodies remain genuine contracts, some already source-defined elsewhere.
+- Dedicated `audio-ble-vendor-irq-dispatch-stage/receipt.json`: Main compile/relocatable link PASS, 1824 defined, 767 unresolved, zero duplicate strong definitions, SHA-256 `19c48edf8ade6aeca1480571ac190c35ee635221f54cb3c0bcfaec114ccc84fd`. Import growth exposes bank-specific native code. Full HCI context/decoder graph and product data remain open.
+
+### Radio context handshake (2026-10-11)
+
+- Added `display_ble_hci_radio_context_check.c` for native 0x52e4b4: reset/GPIO sequence, two 30,000-tick bit-21 status phases, response read, authenticated 0x0101ff04 compare, product diagnostic word and three real log branches. ROM 0x52f090 authenticates expected word; 0x52eba4 authenticates MMIO 0x40010410. `verify_ble_hci_radio_context_check.py` actual ARM C/native PASS 4 over null, successful match, mismatch diagnostic and receive error. It compares setup/GPIO/reset/delay/read/log order and live diagnostic word. Long timeouts are statically reconstructed, not exercised across all 30,000 iterations; product log strings and reset/setup lower effects remain distinct contracts.
+- Dedicated `audio-ble-radio-context-check-stage/receipt.json`: Main compile/relocatable link PASS, 1825 defined, 771 unresolved, zero duplicate strong definitions, SHA-256 `14b3506412a93f66422ef9e62b6cb0c98d4c618dec8d900b4b863bcc0f291678`. The higher direct import count exposes real product log/runtime and reset/setup lower bodies. Whole Main source/placement/runtime remains incomplete.
+
+### Radio context pin and reset children (2026-10-11)
+
+- Added `display_ble_hci_radio_context_children.c` for native setup 0x52e49a and reset delay 0x4910f4. ROM 0x52e6a8 points to 0x78ee44 = base pin config 0x93; enabled config is 0x2093. Reset forwards millisecond input multiplied by 1000, preserving 32-bit wrap, into the selected vendor VFP delay. `verify_ble_hci_radio_context_children.py` actual ARM C/native PASS 6 over enabled/disabled/low-byte argument and zero/unit/overflow delay, comparing exact lower arguments. Native R7 return is unobserved by selected callers.
+- Dedicated `audio-ble-radio-context-children-stage/receipt.json`: Main compile/relocatable link PASS, 1827 defined, 769 unresolved, zero duplicate strong definitions, SHA-256 `b3ad3095d1669c8b17e26efa3a2abee6aa182b9f347d9e609c377cd97bc84f8e`. HCI context graph retains larger recover/configure and product data contracts.
+
+### Radio context recovery (2026-10-11)
+
+- Added `display_ble_hci_radio_context_recover.c` for native 0x52f0f8: optional current-mode read/compare, stop/set/special/commit/check sequence, exact request bit packing, ten diagnostic branches and native two-register result with the response word in R1. Ten ROM pointer slots 0x52f2b8..dc authenticate the product strings, kept typed external data. `verify_ble_hci_radio_context_recover.py` actual ARM C/native PASS 9 over read failure/match, stop/set/special/commit/check failure, success and skip-read; it compares R0/R1, child/log order and committed two-word payload. The six command children are genuine remaining code bodies.
+- Dedicated `audio-ble-radio-context-recover-draft/receipt.json`: Main compile/relocatable link PASS, 1828 defined, 783 unresolved, zero duplicate strong definitions, SHA-256 `89760623817b137417ce95fb850b398b72f85823766622f1e188030cd58c29ef`. Newly exposed imports are real command children and product strings, not full context completion. Whole Main remains source incomplete.
+### HCI radio recovery command wrappers (2026-10-11)
+
+`display_ble_hci_radio_recover_commands.c` now defines the four original native command bodies at 0x52f094, 0x52ef74, 0x52efba, and 0x52efec. The first two command templates were corrected to their actual address ownership after an ARM C/native fixture exposed their initial reversal. `verify_ble_hci_radio_recover_commands.py` passes eight actual ARM C/native comparisons covering each wrapper with exchange success and failure: exact transmitted request bytes, CRC call arguments, copied response bytes, and return status. The first 24 commit request bytes are protocol fields and computed CRC, not an opaque executable or data blob. The deeper exchange and CRC algorithms have their own separate candidate proof scopes.
+
+Dedicated experimental Apollo Main build `g2/build/c-firmware/20261011/audio-ble-radio-recover-commands/receipt.json` passes compilation and relocatable linking with 1,832 defined symbols, 779 unresolved symbols, zero duplicate strong providers, SHA-256 `d6992ef5f02acb40f9196399897ebb4725ef97c59fff51818df2570647297d9b`. Source completeness remains false: radio stop 0x52e8be and other HCI descendants, product RAM and log data, resident services, final placement, and hardware runtime validation remain open.
+### HCI radio configuration stop and pin pulse (2026-10-11)
+
+`display_ble_hci_radio_recover_stop.c` defines the original 0x52e8be configuration-mode polling loop, including status bit 21, receive retry and reset, four-byte response comparison, and original unbounded wait. `display_ble_hci_radio_recover_pulse.c` defines its reset and pin-pulse children 0x52e8a4/0x52e854 with the ROM-authenticated pin configuration 0x183 and the original `(duration*1000)/33` pulse count. The selected 0x4751c8 comparison body is `g2_lfs_memcmp`; three log literals remain typed source-data imports. Controlled actual ARM C/native comparisons pass four stop traces (success, receive failure and retry, response mismatch, delayed ready) and four reset/pulse call sequences (0, 1, 2 duration). Calls to receive, compare, delay, GPIO, and log were cut at their true ABI; these fixtures do not prove peripheral timing or live hardware behavior.
+
+Dedicated experimental Apollo Main build `g2/build/c-firmware/20261011/audio-ble-radio-recover-stop-pulse/receipt.json` passes compilation and relocatable linking with 1,835 defined symbols, 781 unresolved symbols, zero duplicate strong providers, SHA-256 `c59ef4b1cbcc1b3a40e01dc070321e316a399ecd16b55eb543d8c79c68bda690`. Source completeness remains false; the three new log data contracts explain the net import increase despite three genuine code bodies being reduced.
+### Fresh Touch and CASE selected graph audit (2026-10-11)
+
+Read-only source and fresh experimental target builds were used to reassess the two other Cortex-M components. Touch receipt `g2/build/c-firmware/20261011/peripherals-touch-audit/receipt.json` passes candidate compilation/link with 228 defined, nine typed unresolved generated CapSense pointees, zero duplicate strong providers, SHA-256 `911b8972e640996960fe723a560d06e142912297ea5068aa7014082751f372c0`. This experimental top-level context selection differs from the earlier 229/0 selected graph. The unresolved names are `touch_generated_{active_scan_sns,base_frame_context,common_config,internal_context,lp_history,lp_sensor_frame_context,pin_config,sensor_frame_context,widget_config}`. The pinned v6 LP source establishes 16-bit history elements and a 212-word nominal window but does not establish the 426-byte linker extent from `0x2000065e` to `0x20000808`; the scalar `0x20000828` still has no attributed field or consumer. No generated `cycfg_capsense` declaration or symbol-size map was found in the current component/analysis source search. Thus reset ownership remains 534/964 attributed bytes and 430 unowned (426+4) in the prior hash-bound reset audit; the fresh target graph does not resolve those two data extents.
+
+CASE receipt `g2/build/c-firmware/20261011/peripherals-case-audit/receipt.json` passes candidate compilation/link with 70 defined, three unresolved (`case_binary_command`, `case_legacy_command`, `case_vformat`), zero duplicate strong, SHA-256 `8355fc1647031b0812be4047033708df55261726cff3f574852792eaa3a80248`. Existing experimental `full_command_candidate.c` and `vformat_candidate.c` are real, partially compared C candidates, but the selected frame dispatcher accepts arbitrary command payload opcodes. The command audit identifies ten legacy switch targets and 14 visible binary command values; the 180 formatter oracle cases do not establish its full domain. Promoting these candidates as complete providers would erase genuine branch and lower-effect obligations. The actionable CASE source frontier is the high-opcode legacy family (`b0`, `d0..d4`, `dd`, `df`, `ee`, `ff`), its nonreturning reset/standby and lower effects, remaining binary command families, and full formatter callback/grammar edge cases. This audit made no CASE or Touch source edit; it found no newly authenticated generated initializer or full-body alias that could be safely admitted during this round.
+### CASE ship-mode branch and standby descendants (2026-10-11)
+
+The experimental CASE legacy command candidate now includes the full native `0xee` branch from stock 0x08000928: USB-present return/logging, USB-absent two guarded PMIC reads, watchdog disable, power-stop request, wake-pin setup, product register write, and standby entry. `known_dispatch.c` routes `0xee` to this body; `0xff` remains the one unsupported legacy opcode in that bounded dispatcher. `verify_case_ee_full.py` passes eight actual Cortex-M0 native/C whole-branch comparisons over USB/log state and child return variants, including exact lower-call sequence, log text, MMIO register write and return register. Lower calls are cut at authenticated entry ABIs, so this is not a physical standby claim.
+
+`shipmode_mmio_children.c` defines native 0x08005094, 0x080050a8 and 0x080050c4 with exact GPIO/SCB MMIO updates and architectural `WFI`; `verify_case_ee_mmio.py` passes 24 actual Cortex-M0 native/C cases with varied mode and register seeds. `shipmode_power_stop.c` defines native 0x08002c30's three-attempt PMIC set/read loop; `verify_case_ee_power.py` passes 12 direct native/C cases covering both modes and success after 1/2/3 attempts or exhausted retry. Its guarded children already exist in the experimental source archive; physical PMIC effects remain lower validation gates.
+
+`build_full_experiment.py` builds all selected and experimental CASE source into a deterministic relocatable object with zero undefined symbols: `g2/build/c-firmware/20261011/peripherals-case-ee-closed/case-combined.o`, SHA-256 `6769f2e13a53adae56a19165624061ada260b3f395b67645e13b94fddaa76051` (receipt alongside). The selected CASE firmware archive remains 70 providers/three imports because the full command and formatter candidates are not admitted as complete native providers. The remaining bounded direct command gate is `0xff` plus binary full-domain and formatter qualifications; reset/standby hardware, source layout and final image equality remain open.
+
+The already sourced `0xff` reset entry and 0x0800502c AIRCR/idle child have a retained 36-case original/source reset-loop comparison. `known_dispatch.c` now routes `0xff` as well, giving all 256 opcode values an experimental branch under the allocated valid-buffer contract. The new combined source build remains deterministic with zero undefined symbols: `g2/build/c-firmware/20261011/peripherals-case-all-opcode-dispatch/case-combined.o`, SHA-256 `8d862af1d6b254df3c89f3a8ec884c8de7e5c9778a697cc16886e6056ce29f81`. The 36-case reset receipt is a prior hash-bound binary; this edit only changed routing and comments around that source body. No full 256-opcode connected stock/source oracle or production image equivalence is implied. The full binary command and formatter domains, nonreturn physical reset/standby, product linker layout and hardware effects remain open.
+
+A fresh linked Cortex-M0 legacy source ELF was subsequently built by `build_case_legacy256.py` from the current 21 C translation units with explicit authenticated lower-call addresses. `verify_case_legacy256.py` compares the full stock public entry to the linked dispatcher for **2,560 cases**: all 256 opcode bytes, logical lengths 0/1/2/4/8, and both log-state values. It records branch result, handled flag, non-stack writes, selected RAM state, ordered lower calls, and used logger text/arguments. The test now includes `0xee` and `0xff` with child effects cut at original ABIs; all comparisons pass. The receipt is `linked256-comparison.json`. This establishes connected bounded behavior for allocated 32-byte command buffers under controlled lowers. It does not establish physically short buffers (notably `0xdd`'s byte-1 access), live PMIC/reset/standby effects, arbitrary logger callbacks or final image placement. The selected CASE archive still has three unresolved public/formatter symbols pending full binary and formatter qualification.
+
+`verify_case_vformat_extended.py` freshly compiles the experimental formatter and compares actual Cortex-M0 native/C callback output and return across **1,140 cases**, including 116 retained native caller-format strings, 28 source literal formats, 512 deterministic random grammar cases, length modifiers, `%n` variants, and 77 unknown/floating-conversion forms. It exposed a real `%#o` precision discrepancy: stock does not add a separate alternate-form zero when precision already supplies one. `vformat_candidate.c` now follows that rule; the complete enlarged fixture passes. The combined CASE source experiment remains deterministic and links with zero undefined symbols at `g2/build/c-firmware/20261011/peripherals-case-formatter-extended/case-combined.o`, SHA-256 `fa08122f420636e26f1e0428385577a7920e95a3a1fe99b66abc5521014e418f`. This still does not prove all malformed strings, overflow, callback failure, or every native caller format; selected `case_vformat` remains an unresolved contract.
+
+The current selected-plus-experimental CASE object was linked as a Cortex-M0 test ELF, `case-binary-whole.elf`, with `case_binary_command_candidate` as the entry. This avoids relying on the older isolated binary dispatcher ELF. `verify_case_binary_whole_no_lower.py` passes **5,370** actual stock/whole-candidate cases whose paths return without a lower call, spanning non-destination-2 opcode routing, destination-2 fallback and guarded specials. `verify_case_binary_whole_local_four.py` passes **480** controlled lower cases for `0x50`, `0x5c`, `0x5d`, `0x68`; send and ack stop at true entry, while GPIO control is cut with matched return. `verify_case_binary_whole_handoff.py` passes **48** whole-entry cases for destination-2 `0x06` and `0x41`, matching ack opcode, one-byte handoff (`0xee` or `0xff`), logical length one, and return at the legacy lower cut. These are connected whole-candidate tests on allocated 256-byte buffers. They do not cover the remaining special families through all lower effects, nor physical transport/flash/sensor timing; selected CASE public binary provider remains unresolved.
+
+Two further native/whole-candidate special branches now pass on the same current ELF: `verify_case_binary_whole_14.py` compares **216** `0x14` cases through sourced reader wrappers to controlled sensor transaction/delay and send; `verify_case_binary_whole_3f.py` compares **192** `0x3f` cases through the sourced enable/program path to controlled bus/logger/ack, including retry and logging mutation. The connected whole-candidate total is 6,306 compared cases across distinct fixtures (5,370+480+48+216+192); these sets are bounded and their count is not a percentage of the accepted input domain. Remaining distinct special families include `0x3d`, `0x3e`, `0x51`, `0x56`, `0x5e`, `0x5f` and full effects of `0x06`/`0x41`; stock lower behavior and product configuration remain separate.
+
+All six previously distinct CASE binary special families now have connected whole-candidate comparisons on that same current ELF: `0x3d` **192**, `0x3e` **288**, `0x51` **45**, `0x56` **216**, `0x5e` **120**, and `0x5f` **45** cases. The fixtures compare full entry routing and bounded source state to authenticated stock while cutting real native lower ABIs (dispatch/control/logger/ack/send/flash apply/exit) where physical effects or lower ownership are independent. `verify_case_binary_whole_legacy_effects.py` adds **24** connected `0x06`/`0x41` cases through the full sourced EE/FF legacy branch, matching logs, lower sequence, product MMIO write and return under controlled standby/reset/PMIC children. The bounded whole-binary fixture count is now 7,236 (prior 6,306 plus 906 plus 24), with overlapping behavioral domains possible; it is not complete accepted-input coverage. Directly connected flash success data, sensor and transport physical behavior, malformed/short buffers, and final placement remain open.
+
+`verify_case_flash_apply_whole.py` next compares the actual compiled CASE `case_binary_5e_apply` body to stock 0x0800373c for **288** combinations of mode, logging flag, flash-read retry outcome, first/second program outcome, and three 16-byte input patterns. It passes with equal ordered mode/init/read/wait/program/finalize/log calls, exact four register arguments for each flash program block, return value and all 16 configuration bytes. The receipt is `case-flash-apply-whole-comparison.json`, keyed to the linked Cortex-M0 `case-binary-whole.elf` and source/stock hashes. This qualifies the previously untested erase-success and both program-success/failure paths of the source body under controlled real lower ABIs. Physical flash persistence, asynchronous wait and the command-to-apply connected success path remain open.
+
+The formatter's 1,140-case direct native/C oracle was rerun with callback return values selected among zero, `0xffffffff` and positive by format length; all cases still pass, including emitted output and formatter return. This tests attempted-emission counting for these callback outcomes, while arbitrary callback side effects/faults, malformed input pointers and overflow limits remain unqualified. Current CASE selected source still has exactly three unresolved public symbols (`case_binary_command`, `case_legacy_command`, `case_vformat`); the experimental all-source archive links with zero undefined. Beyond those three admission gates, physical flash/sensor/transport effects, product layout and hardware proof are separate finite requirements.
+
+An exhaustive single-byte formatter conversion suffix sweep (all 254 non-`%` values from 1 to 255) extends the direct compiled-C/native oracle to **1,394 passing cases** with the same three callback-return categories. `build_case_public_candidate.py` selects the actual three public provider objects and their archive dependencies into a deterministic relocatable CASE source candidate at `g2/build/c-firmware/20261011/peripherals-case-public-source/case-public-source.o`: **260 defined, zero undefined, zero duplicate strong**, SHA-256 `883e819380450e71f5c788a4765bd57607e0dfb1938d68d7f8be573f8b11aeaa`. The receipt records both input archive hashes and bounded evidence. This is a source provider selection for review, not canonical image admission; the pre-existing selected archive remains unchanged at 70/3. Native proof gaps are narrowed to malformed pointer/allocation and unbounded formatter width/precision/callback behavior. Runtime hardware effects and final placement are separate image requirements.
+
+After public-source review, the canonical CASE source candidate builder now includes the native-backed command/formatter graph as explicit source members. A fresh deterministic Cortex-M0 build selects **153 translation units, 262 defined symbols, zero unresolved imports and zero duplicate strong providers**. Its archive SHA-256 is `e5476d3821872dbc21c9a8624dd2dfc0df673be2adaa0164ac3c2c7abd77dce3`, and the relocatable source object SHA-256 is `5f8fa00b476175d24250eac379857576154c18490d449b39b88f0ed81fc10fde`; the authoritative receipt is `g2/analysis/case-source-candidate-round2-20261010/receipt.json`. The older 70/3 baseline statements above are historical. The builder records `source_complete: false` because malformed pointer/allocation and unbounded formatter edge behavior lack full stock equivalence evidence, and final linker placement plus physical effects remain unvalidated. `build_full_experiment.py` now detects this selected public graph and avoids compiling it twice.
+
+Main/Audio resumed with full native group-2 IRQ enable lower 0x4c3e9a in `display_ble_hci_vendor_irq_bank2_enable.c`: bit-presence early return, critical pin clear, group-any check, command 4 with one-byte payload, live power flag and pointer clear, and PRIMASK restore. The two product RAM cells remain typed external ownership contracts. Cortex-M4 target compile passes; `verify_ble_vendor_irq_bank2_enable.py` passes **32** actual stock/C cases over bit presence, remaining-group state, high pin truncation and live RAM seeds, comparing child order/args, RAM bytes and return. This closes one genuine bank lower, while the other bank routes and group-2 command itself remain separately sourced/imported.
+
+The group's command child is authenticated stock 0x4809c4, already source-owned as selected `audio_oscillator_control` with a retained 600-plus-case direct native comparison. The group-2 IRQ C body now calls that exact selected provider for action 4. Its own 32-case native/C comparison still passes. This removes the provisional `audio_uart_mux_group2_command` import; only the two typed live RAM cells remain newly exposed by this lower.
+
+Native ROM literals at 0x4c4680/84 authenticate the exact live addresses 0x20074f56/0x20074260, and existing selected crystal request/ownership source already accesses them directly. The new IRQ C body now uses those same typed address contracts instead of exporting new data symbols; no initializer value is fabricated. A fresh selected+experimental Main build at `g2/build/c-firmware/20261011/peripherals-group2-final/receipt.json` passes with **1,836 defined, 780 unresolved, zero duplicate strong**, relocatable SHA-256 `69d6f7bee996978c4a86b919ed512f0f914e69cbf43132fe9266215f20842d51`; `source_complete` remains false. The prior 782-import snapshot included provisional data symbol names and is superseded for this source state.
+
+The remaining seven-bank IRQ/mux lower names were mapped against exact native entry addresses and already selected source bodies: bank 2 request is selected `audio_xtal_request` (0x4c3d9e, retained direct 404-case crystal corpus); bank 4 is `audio_hfrc_request` (0x4c3f2a); bank 5 is `audio_hfrc2_request/release` (0x4c4086/0x4c420c); bank 6 is `audio_syspll_request/release` (0x4c427e/0x4c43ec), with retained 816-case HFRC/HFRC2/SYSPLL corpus. Exact-address wrappers in `display_ble_hci_vendor_irq_existing_banks.c` reuse those complete bodies and the previously selected bank0/1/3/off4 bodies; they do not substitute for any missing native implementation. The new bank2 release body supplies 0x4c3e9a. A fresh target Main build at `g2/build/c-firmware/20261011/peripherals-irq-banks-complete/receipt.json` passes **1,856 defined, 760 unresolved, zero duplicate strong**, SHA-256 `9d2c34957edd304ffc6a17eea28565ed79cdfba9d4e049b7efc8b6f1b625cd90`. All fourteen direct bank dispatch imports and five parallel mux names are now source-bound. The remaining 760 imports include five mux product RAM/capability cells and two distinct vendor power IRQ names (`0x47f5b8/0x47f7ae`) whose existing power source is explicitly experimental with stock branch limitations; link closure alone would not qualify them. No source-owned initializer for the live mux RAM cells was authenticated in this round.
+
+Native power enable/disable pseudocode at 0x47f5b8/0x47f7ae exposed two further real differences from the generic vendor projection. Stock ignores the GPU SPOT callback result in both directions, including a failure value; `power_vendor_candidate/power.c` now does so. Stock debug disable performs two separate control-register writes after clearing DEMCR; the source now preserves their order rather than combining masks. `verify_power_gpu_spot_continue.py` executes actual stock and Cortex-M4 C for **12** bounded cases: enable GPU mode 0/3 with callback return 0/1/7 through IRQ save, disable callback return 0/1/7 through clock release-all, and three seeded debug-register patterns through Tempco postpone with exact MMIO write sequence. All pass. This is not yet full 314/350-byte power admission: the product descriptor/config object and active non-GPU branches lack complete native/C comparison, and hardware waits remain unverified.
+
+Five mux data contracts were traced to actual Main ROM slots. `pin_mux_attributed_data.c` now defines the three authenticated pointer constants: bitset 0x4c43dc→0x20073324, capabilities 0x4c43e8→0x200001cc, and group-4 power word 0x4d3a08→0x40004044. The group-3 active/idle ROM pointers 0x4c4678/7c target immutable image words 0x78ee34/38, both value `3`; those two source constants are selected. This supplies no initial contents for live RAM and leaves exact final linker placement explicit. A fresh Main target candidate at `g2/build/c-firmware/20261011/peripherals-power-mux-data-round/receipt.json` passes **1,861 definitions, 755 unresolved, zero duplicate strong**, relocatable SHA-256 `79744c360985067922acd90a0103abc4947391c8c9408c3bb90984668a9f6d6a`. The five-import reduction is sourced data, not additional code-body closure; source completeness remains false.
+
+The native power descriptor function 0x47ef18 reads an authenticated 34-row semantic table from ROM 0x6becb0 (literal 0x47f944). `power_descriptor_native.c` expresses its masks and register groups as C formulas, including the five distinct shared status groups and the second peripheral register bank, without copying a stock data blob. `verify_power_descriptor_native.py` executes original ARM and compiled Cortex-M4 C for **78** selector/null combinations (all 34 valid rows and five invalid selectors, with null/non-null output) and compares status plus all four semantic fields; PASS. The vendor enable/disable C also now applies native low-byte truncation at entry. The root experimental manifest does not auto-select this new directory member; a manual Cortex-M55 softfp target compile and relocatable link with the current Main candidate succeeds at **1,862 defined, 754 unresolved, zero duplicate strong**, reducing one genuine code import. Coordinator manifest inclusion is pending. The broader vendor power body still lacks complete product config and full native/C branch qualification.
+
+The power product's immutable selectors, masks, wait budgets, MMIO addresses and five shared-domain masks are now expressed by `power_product_native.c`, attributed to the retained 0x47f5b8/0x47f7ae/0x47f6f2 native branches and ROM literal targets. GPU current/previous mode uses authenticated adjacent live byte cells at 0x20074f60/61, not source-initialized values. The native source address map identifies 0x480826 as selected `audio_wait5`, 0x4807fc as selected `audio_wait4`, and 0x4807a0 as selected `audio_delay_us`; vendor C now calls these exact providers. This corrected a real disable error: stock 0x47f86a passes wait polarity zero to detect status clearing; the previous C had polarity one. `verify_power_crypto_gate_connected.py` passes **12** stock/C precheck cases through the actual descriptor and product C, and `verify_power_enable_connected.py` passes **56** stock/C pre-critical paths across device/audio/GPU groups with callback outcomes. The GPU/debug oracle remains PASS **12** after the timing binding correction. These bound the connected branches only; full wait/IRQ restoration and every disable path remain open. The product object still awaits root manifest selection, after which a coherent Main target receipt is needed.
+
+The product object was selected and a fresh Main candidate at `g2/build/c-firmware/20261011/peripherals-power-product-round/receipt.json` passes target compilation and relocatable link: **1,863 definitions, 749 unresolved, zero duplicate strong**, candidate SHA-256 `44e1d260948286453421a513c8a38f970a145e08467c8b85cdea83994f2c0eb0`. This is a candidate source graph, not final image placement or live power proof.
+
+Native 0x48032c and 0x480342 are exact live platform callback dispatches through slots 3 and 4 at RAM 0x20073270. `power_callbacks_native.c` implements both complete short bodies and leaves slot initialization as a separate runtime contract. `verify_power_callbacks_native.py` passes **16** stock/C null and non-null callback cases, including return propagation; Cortex-M55 softfp `-Werror` target compilation passes. Vendor power now calls already selected exact-address C bodies for SPOT callback dispatch 0x480312 and pin-mux enable/disable/all 0x4c44bc/0x4c4530/0x4c45a4, instead of new unresolved aliases. The previous crypto/GPU/enable comparisons still pass after these source bindings, and `verify_power_disable_precritical.py` passes **56** direct native/C selector and GPU-mode cases through the critical-save cut. The callback source awaits root experimental manifest addition. GPU transition 0x47f11c and postcritical IRQ/wait effects remain active source/behavior gaps.
+
+The callback source was selected and a coherent Main target build at `g2/build/c-firmware/20261011/peripherals-power-callback-round/receipt.json` passes **1,865 definitions, 743 unresolved, zero duplicate strong**, SHA-256 `69b33d559013aeab9f5b5061759739601a363c986f8b69de1452e3db29608f9d`.
+
+Native GPU transition 0x47f11c is now `power_gpu_transition_native.c`: mode guard, GPU-rate register guard, descriptor-backed power-off guard, identical-mode previous-state update, PRIMASK save/restore, platform callback slot 9, 0x40021090/0x4002108c MMIO changes, delay 1/6 and two live mode byte updates. Native/C execution exposed and corrected the polarity of its power-status guard: stock allows mode changes when GPU power status is clear. `verify_power_gpu_transition_guards.py` passes **80** direct stock/C combinations; `verify_power_gpu_transition_effects.py` passes **18** successful transitions, including null and failure-return callbacks, ordered writes and return values. Cortex-M55 softfp `-Werror` compile passes. After manifest selection, fresh Main `g2/build/c-firmware/20261011/peripherals-power-transition-round/receipt.json` passes **1,866 definitions, 742 unresolved, zero duplicate strong**, SHA-256 `539dcd004eef46293de9f141fe018f70c92f55f5d3ed2f768a31c4f6146afa9c`. No `g2_power_*` import remains, but this is only closure of the selected power source graph. `verify_power_enable_wait_entry.py` compares native/C first wait5 call arguments and enable-register state across **16** connected paths; `verify_power_disable_wait_entry.py` covers **14** first-wait/peer-domain paths with clear polarity, callback and register effects. Both pass. Later wait results, scheduler callbacks, physical IRQ privilege and hardware transitions are not established by these bounded oracles, and Main still has 742 unresolved imports.
+
+The next Main radio firmware reconfiguration parent 0x4b480a is reduced in `display_ble_hci_radio_reconfigure.c`: configure/tune, two attempts, success commit/check and failed dispatch. Its two exact source-owned log strings are authenticated at stock 0x777984/0x7602d0; configuration is read from live RAM 0x20074970/96c/968/954. Direct stock/C child-call and return oracle `verify_radio_reconfigure_native.py` passes **9** retry and RAM-seed cases. Short source-owned configuration setters 0x52e5ce/0x52e5f2 write their authenticated live destination cells; `verify_radio_reconfigure_cells.py` passes **24** direct stock/C cases over null/non-null and byte truncation. The connected update attempt 0x52edf0 is now `display_ble_hci_radio_update_attempt.c`; it retains alternate image size, recover/current/erase/write/check error tree, exact source-owned stock diagnostic strings, live prepare flag and successful pin configuration. `verify_radio_update_attempt_native.py` passes **7** stock/C branch traces. The settled Main target receipt at `g2/build/c-firmware/20261011/peripherals-radio-update-attempt-round/receipt.json` passes **1,872 definitions, 749 unresolved, zero duplicates**, SHA-256 `52aad931e411fc8154bd847f4e82b7a83b9dee19c23dd9e31474173f99c57e2d`; the count rose from 742 because the genuine connected parent exposed its deeper code children. The pump preparation child 0x52ed34 now has a complete C read/modify/write/error tree in `display_ble_hci_radio_update_prepare.c`, with exact 0xF0040C/0xF0041C register commands and 0xF0B02 value. `verify_radio_update_prepare_native.py` passes **5** actual stock/C outcomes including four failure exits. A new coherent target receipt including this last child is pending.
+
+Further radio update descendants are source-reduced with direct stock/C effect comparisons: `display_ble_hci_radio_write_command.c` implements native 0x52eaf8 vendor packet/response handling, **15** cases over lengths 0/1/4/8/248 and transport/controller failures; `display_ble_hci_radio_update_erase.c` implements 0x52e9b4 NVM erase, **3** packet/log/status cases; `display_ble_hci_radio_image_rows.c` implements 0x52e788 live row selection, **9** mode/data cases; `display_ble_hci_radio_update_write.c` implements 0x52ebca row iteration with the native 248-byte chunk boundary, destination/data increments and progress calls, **20** cases; `display_ble_hci_radio_update_crc.c` implements current-image 0x52e7c0 and post-write check 0x52ec84 with distinct error/mismatch semantics, **8** cases. The CRC local helper 0x4d34f8 is expressed as a reflected polynomial 0xEDB88320 C loop rather than the authenticated stock table blob at 0x699fa8; `verify_radio_crc_local_native.py` passes **28** cases including seed continuations. The remote CRC helper 0x52e6ac is a full 12-byte HCI request/response decode; `verify_radio_crc_remote_native.py` passes **9** packet/status/output cases. The percentage helper 0x52eba8 passes **8** direct native/C arithmetic/log ABI cases, and alternate serial pin setup 0x52dd24 passes **5** exact native/C calls using authenticated immutable 0x183/0x93 pin settings. A fresh coherent Main build including all these files is running. Live image-row pointers and image payload provenance remain explicit data ownership gates; child effects are cut at their authenticated ABI in these bounded comparisons.
+
+The successful reconfiguration tail is now source-backed: `display_ble_hci_radio_commit.c` implements native 0x52eefa INFO-page read/erase/248-byte rewrite with first-word replacement; `verify_radio_commit_native.py` passes **4** stock/C success and per-stage failure effects. `display_ble_hci_radio_erase_info.c` implements its native 0x52e948 six-byte command and status decode; `verify_radio_erase_info_native.py` passes **3** stock/C packet cases. `display_ble_hci_radio_reset.c` implements native 0x44ab24 architectural DSB/AIRCR reset and 0x44b0ae wrapper; `verify_radio_system_reset_native.py` passes **6** stock/C AIRCR read/write cases up to the reset boundary, with no fabricated success return. The complete connected source graph still depends on physical reset, NVM persistence, authentic live image rows/payload and general HCI/logging runtime. The shared variadic logger import `audio_ble_hci_boot_log_4733ee` was mapped to the already selected exact 0x4733ee source body `g2_log_transport_queue_failure` via a same-translation-unit alias in `transport_failure.c`; its unbounded formatter child remains an explicit source/equality gate. Fresh target integration including the alias is running.
+
+That final selected Main integration at `g2/build/c-firmware/20261011/peripherals-radio-logger-bound-round/receipt.json` passes **1,888 definitions, 740 unresolved, zero duplicate strong**, candidate SHA-256 `2697a20e0807bef91e3aba03e6b0ca2ece2a88ed61eed8ccea437f881d1e8bec`. None of the directly connected `audio_ble_radio_update_*`, CRC, commit, erase-info, ready, alt-mode, or shared 0x4733ee logger names remains unresolved. This is a source provider graph result only. The 740 Main imports include other private HCI/application code, authentic live RAM cells, ROM data and runtime/toolchain contracts, and the unbounded formatter path remains incomplete.
+
+The EM9305 firmware-file path now has complete C source for native file-mode/size helpers 0x52f3a0/0x52f3f8, header validation 0x52fcfc, staged-image finalization 0x52fc04 and one-time recovery gate 0x52fb58. Their direct compiled-C/native bounded checks pass **18, 6, 4 and 6** cases respectively; they preserve the runtime `firmware/ble_em9305.bin` file and its live handle, allocation and image cells. Three downstream parse bodies are also source-owned: 0x52f86a copies the 16-byte header, 0x52f87c decodes at most four 12-byte records to the live 16-byte descriptor array, and 0x52f99e maps recognized device addresses to live image pointers/data rows. The two record parsers pass **6 and 8** original/C bounded effects with logging disabled. A direct oracle caught and corrected an eager logging-only pointer dereference in 0x52f99e. Extended/compressed log branches of those parsers and malformed file input remain outside these comparisons. Fresh Main target receipt `g2/build/c-firmware/20261011/peripherals-radio-records-corrected-round/receipt.json` passes **1,896 defined, 739 unresolved, zero duplicate strong**, SHA-256 `4b5604a3452dc1df1ebcf2a0a508b4939e64b1a196c73229ac3aabffbff73d9e`; the connected image loader 0x52f442 remains an import. No firmware file payload, placement, physical NVM persistence or live radio behavior is established by this build.
+
+The connected loader 0x52f442 is now source-reduced in `display_ble_hci_radio_image_load.c`: open/size/rounded heap allocation/read/close, header and record dispatch, live image pointer cells, and all failure cleanups with authenticated source strings. `verify_radio_image_load_native.py` compares **8** actual stock/C branch and RAM-effect cases from open failure through successful parse, with lower file/heap/parser effects cut at their ABI and log flags zero. A fresh selected Main target receipt `g2/build/c-firmware/20261011/peripherals-radio-loader-round/receipt.json` passes **1,897 defined, 738 unresolved, zero duplicate strong**, SHA-256 `fd5b358427242770f3271f11d39d4b8fe09f7fa6898d35ed2e3de87927d48984`; the direct `audio_ble_radio_image_load_52f442` import closes. Runtime file bytes, malformed-size behavior, nonzero diagnostic flags, actual file/heap allocator behavior, radio/NVM persistence and final placement remain separate evidence gates. This is a connected source chunk, not full Main source completion.
+
+The next Main HCI driver graph is source-reduced in `display_ble_hci_driver_handler.c`, `display_ble_hci_driver_handler_children.c`, and `display_ble_hci_serial_rx_incoming.c`. Native HciDrvHandler 0x4b4ab2 now preserves event-2 start, receive continuation, radio receive/error/restart, queue transmit, retry and timeout branches. Native 0x52b620 buffer-size command, 0x52a4c4 millisecond timer start, 0x4b4d18 queue reset, 0x5300e2 ring consume, 0x491102 delay wrapper, 0x52ae38 command allocation and 0x530186 HCI serial receive FSM are also C bodies. The last parses event and ACL headers into native live cells, calls selected WSF allocators, and dispatches complete packets through 0x530c88; the max ACL getter 0x530d4c is source-owned. Actual compiled-C/native bounded oracles pass **6** handler branches, **7** serial packet/partial-header cases, and **5** ring-consume state/output cases. These cut lower radio/WSF effects at authentic ABI and do not establish live controller behavior or full malformed-input coverage. The fresh Main target receipt `g2/build/c-firmware/20261011/peripherals-hci-handler-settled-round/receipt.json` passes **1,906 definitions, 736 unresolved, zero duplicate strong**, SHA-256 `d9a19388774bd48dc2ed2d4bea35feb24ae69c532ca3c09676566a3fa18e4b7d`. The distinct `HciLeReadBufSizeCmd` remains unresolved; it is not the newly implemented classic `HciReadBufSizeCmd` 0x52b620.
+
+Read-only Touch/CASE reassessment found no newly attributable generated layout owner: Touch's locked reset still has 426 history-window bytes from `0x2000065e` to the next known descriptor at `0x20000808` plus the separate four-byte `0x20000828` scalar without declared object/initializer ownership. The 426-byte interval is an upper window, not a proven allocation size. No generated `cycfg_capsense` declaration or product symbol-size map appears in the current source corpus. CASE's selected Cortex-M0 source graph has zero imports, but its current receipt explicitly retains malformed pointer/allocation, unbounded formatter, product linker layout and physical-effect gates; nearby `.ld` files are test fixtures and do not establish a product linker script. Both remain incomplete components.
+
+The HCI reset sequence's direct Cordio command frontier is now C source in `display_ble_hci_init_commands.c`: six empty opcodes, three 8-byte event masks, LE default data length, vendor power level (signed range check), vendor NVDS parameter seed and the common vendor packet sender. `verify_hci_init_commands_native.py` compares **26** stock/C allocation success/failure and packet effects, including 0xFFF2's six native-written live bytes at `0x20074150`. A fresh selected Main target receipt `g2/build/c-firmware/20261011/peripherals-hci-init-commands-round/receipt.json` passes **1,919 definitions, 724 unresolved, zero duplicate strong**, SHA-256 `84c1968b8b62b0ecbe92770b737cc1b9ee0a37df597258402da8d5ae5fc57963`. No `Hci*` command import remains in this snapshot. The reset handler's other live tables/ROM masks and hardware command transport remain separate source/runtime contracts; neither BLE controller execution nor full Main source coverage follows from this link.
+
+The same command source now includes LE resolving-list-size and max-data-length commands 0x52b7dc/0x52b24c plus native reset feature gates 0x569b04/0x569b2a. The gates read the authenticated state byte at `0x20071500` and capability byte at `0x20000028`, testing bits 6 and 5, then update live size byte `0x20071509` or send the correct fallback command. The expanded actual stock/C packet/branch oracle passes **40** cases, including crossed capability bits. Fresh Main target receipt `g2/build/c-firmware/20261011/peripherals-hci-init-branches-round/receipt.json` passes **1,923 definitions, 722 unresolved, zero duplicate strong**, SHA-256 `518fa992dc4ce3b11834b81f29a75903597e71b1d2fd86df1dd223fcaa84bdb6`. Main remains a candidate source graph with extensive live data, ROM tables, other application code and image-placement requirements.
+
+Three additional genuine ATT/DM dispatch bodies are now source-owned. `display_ble_att_handler.c` reconstructs native AttHandler 0x4b5146, including five event ranges and the live high-event direct callback, and `verify_ble_att_handler_native.py` passes **14** compiled-C/native callback/argument cases. `display_ble_dm_hci_callback.c` reconstructs dmHciEvtCback 0x4d299c and DmHandler 0x4d2a5c, preserving the live `0x20073b78` enable gate, class indexing and callback slots; `verify_ble_dm_hci_callback_native.py` passes **24** stock/C cases. The first DM handler's immutable event-class table at original ROM `0x6e006c` remains a typed source-data import `audio_ble_dm_hci_event_class_map_6e006c`; the bounded oracle linked its C reference to the original table for comparison and did not copy it into candidate source. The authenticated 0x5c-byte table is adjacent to other ROM data, so arbitrary event codes beyond its expected domain still need source/layout qualification. Fresh selected Main target receipt `g2/build/c-firmware/20261011/peripherals-att-dm-dispatch-settled-round/receipt.json` passes **1,926 definitions, 720 unresolved, zero duplicate strong**, SHA-256 `ce00df6a787b87a994f1c9a2cab7aadd63218f5dd1fa52c828871d5777d115af`. This link closure does not own live ATT/DM class vtables or controller execution.
+
+Native `_bleSlaveProcMsg` 0x46e098 is now an experimental complete event-switch C candidate in `display_ble_slave_proc_msg.c`. It preserves the 0x05/09/0a/0d/0e, 15/16, 21/22, 27/28, 37, 47/48, ad, b5/b6/b7/b8, ba/bb branches; source log strings and flag reads; connection open/disconnect cleanup; retry timers; advertising restart; security; TPL timeout and notifications. Five small genuine descendants are in `display_ble_slave_proc_children.c`: 0x4b46a8, 0x4bac4e, 0x47a676, 0x47aec0 and 0x47aec8. The C target syntax passes ARM Cortex-M55 freestanding `-Werror`. Fresh coherent selected Main candidate at `g2/build/c-firmware/20261011/peripherals-slave-proc-complete-round/receipt.json` passes target compilation and relocatable link with **1,932 definitions, 745 unresolved, zero duplicate strong**, SHA-256 `9b94658571022c48d5992aac1c70420485449b8fe0e9a16dfce6030687bc486a`. This is source/compile evidence, not a stock runtime comparison. Child callback functions 0x46f098/0x46f350/0x46effc, BLE advertisement/security operations, and product RAM 0x20074f8b/c/d remain genuine typed contracts; unresolved imports grew because the full parent exposed them. Connected stock/C effects oracle is still needed, especially role-1 disconnect, logging-enabled paths, and live address table ownership. The other native `bleProcMsg` 0x4b75ce is a separate 293-line parent and remains unimplemented.
+
+The three native delayed callbacks 0x46f098/0x46f350/0x46effc are now full C in `display_ble_slave_proc_callbacks.c`. The actual compiled-C/native effects comparison `verify_ble_slave_callbacks_native.py` passes **8** cases: security argument, trusted-state write, allocation failure and success, encoded 10-byte message prefix, and send handler. This comparison has logging disabled and does not qualify log-enabled varargs return registers. `_bleCommProcMsg`/`bleProcMsg` 0x4b75ce is now `display_ble_comm_proc_msg.c`, covering native event 0x12/15/20/27/28/2a/2b/2c/2d/2e/34/35/3c/46/79/a5/a6/bc and default; it exposes genuine pairing, timer, hash, notification and radio children. `verify_ble_comm_proc_minimal_native.py` passes **18** actual compiled-C/native event cases over event 0x00/12/15/20/2d/79 and three connection IDs. This is a bounded qualifier only; pairing, encryption, error logs and product-state transitions still need connected effect qualification. Two connected children, native 0x4bb07c pair-record lookup and 0x4b82e8 RPC security-state send, are in `display_ble_comm_proc_children.c`. The latter's compiled-C/native eight-byte payload, command, role-query order and state argument pass **9** cases in `verify_ble_comm_security_native.py`; it references the authenticated immutable template at 0x78c9ac via the typed ROM table beginning 0x78c9a4. Fresh Main candidate `g2/build/c-firmware/20261011/peripherals-slave-comm-children-round/receipt.json` passes target compilation and relocatable link with **1,938 definitions, 771 unresolved, zero duplicate strong**, SHA-256 `cc13c3fb52c7be9284b1e2719a74dde2cd649861aa6544a133afbe90a495aa99`. The source graph and source-equivalence flag remain incomplete; no hardware behavior, image placement or final product RAM ownership is inferred.
+
+The connected bounded oracle scope was expanded without altering candidate source: `_bleSlaveProcMsg` now passes **114** compiled-C/native role/event/log flag cases across 19 event classes, two roles and flags 0/1/2, including role-1 open schedules, disconnect cleanup, MTU, live state and compact/extended diagnostics; `bleProcMsg` passes **144** cases across 16 event classes, three connection IDs and flags 0/1/2, including pair-fail/encryption and their logs under controlled child effects. These are effect comparisons with selected child calls intercepted; successful nested pairing, advertising stack and hardware paths remain outside the bounded scope. `display_ble_app_ui_action.c` now reconstructs the full native Packetcraft AppUiAction 0x4bd054 event/log switch and live callback invocation through RAM 0x20073f60. `verify_ble_app_ui_action_native.py` passes **99** actual compiled-C/native cases: every event 0..31 and 255 under logging flags 0/1/2, comparing compact text, extended line/text, and callback arguments. The RAM callback cell initializer/placement is still a product contract. Fresh Main target `g2/build/c-firmware/20261011/peripherals-ble-ui-round/receipt.json` passes **1,939 definitions, 771 unresolved, zero duplicate strong**, SHA-256 `558df923a73f66789be64523abf6334d4740d374368556118f8a478c396be63f`. No final-image or live-controller claim follows from this receipt.
+
+Native Cordio pairing-failure descendants now have source-defined C candidates. `display_ble_pair_failure.c` reconstructs AppDbHandlePairingFailure 0x47c568 and preserves its null, invalid and status-specific record branches. `display_ble_pair_failure_children.c` reconstructs AppDbShowNvmStatus 0x47c2bc over mapped MRAM 0x7ff000 and AppDbClearRecordByConnId 0x47c8cc; `display_ble_pair_storage_refresh.c` reconstructs AppDbReloadResolvingList 0x47b4d4, including resolver clear and selected AppLoadResList. Actual compiled Cortex-M4 C/native bounded effect checks pass 45 parent, 21 children and 3 refresh cases across log policies and record states. The coherent target Main candidate at `g2/build/c-firmware/20261011/peripherals-pair-failure-round/receipt.json` passes 1,959 definitions, 768 unresolved imports, zero duplicate strong, SHA-256 `afe2f37f0f5d1c297a343ad61f5af8b5b704d51052666d85fe530d350377ed4b`. These counts reflect newly exposed genuine descendants, not a regression in source attribution; physical MRAM contents and BLE controller effects remain external.
+
+The next connected source member `display_ble_pair_remove.c` expresses AppDbClearRecordByMacAddr 0x47b59c plus lookup 0x47ad74 and record clear 0x47a47c. The lookup uses the existing typed 10 by 200-byte live RAM rows and counter, selected address comparison, actual host address type and native timestamp update. The parent preserves null/no-match/match diagnostics, rewrite/validation and resolving-list removal. `verify_ble_pair_remove_native.py` passes 13 bounded actual compiled-C/native cases, including return and call order, ten-row search and timestamp/row effects. The deeper rewrite/validation/resolving-list hardware/storage paths are separate existing candidate or external contracts. Full BLE application/component and full Main image source equivalence remain false.
+
+Fresh target Main candidate `g2/build/c-firmware/20261011/peripherals-pair-remove-round/receipt.json` passes with 1,962 definitions, 769 unresolved imports and zero duplicate strong, SHA-256 `74952bf2a9c1e0e5f40e64d75faf25185c8818fae958568ac74d18dcd0f070bf`. The new unresolved genuine descendants include `DmHostAddrType` (native 0x4d2aa8, reads a live role byte at a product pointer) and `DmPrivRemDevFromResList` (native 0x4d2880, allocates and sends a WSF message). The source code count rises by three while the import count rises by one because whole native parent functions expose their real children; neither metric is a full-source completion flag.
+
+The two direct leaves exposed by the removal source are now source-defined in `display_ble_dm_privacy_remove.c`. `DmHostAddrType` 0x4d2aa8 reads the existing live DM state byte at product address 0x20073b8e and maps types 2→0 and 3→1 only when that byte is set. `DmPrivRemDevFromResList` 0x4d2880 allocates a 12-byte WSF message, writes the native 16-bit handle/event/type fields and six address bytes, then sends to the live DM handler ID at 0x20073b84; allocation failure preserves the native no-send path. `verify_ble_dm_privacy_remove_native.py` passes 14 bounded actual compiled-C/native cases. Message allocation/send themselves are separate selected/runtime contracts; live DM state initialization is not source-owned by these two bodies.
+
+Fresh Main target candidate `g2/build/c-firmware/20261011/peripherals-pair-dm-remove-round/receipt.json` passes with 1,964 definitions, 769 unresolved imports, zero duplicate strong, SHA-256 `816c9dad736c087b8ca8fce68c8d238fb41ead547990f8ef9bbaa789c84ef99d`. The two DM names are now definitions; the complete source bodies expose genuine `WsfMsgAlloc` and `WsfMsgSend` imports, so unresolved count remains 769. Both WSF operations are actual native code contracts requiring separate implementation/selection, not no-op stand-ins. The candidate source link and bounded emulation are not full product source equivalence, final image layout or live BLE execution.
+
+The new WSF message imports are now source-defined, with further real descendants exposed. `display_ble_wsf_message.c` implements native WsfMsgAlloc 0x4bf99e (8-byte pool header offset) and WsfMsgSend 0x4bf9ba (queue lookup, enqueue, readiness). `display_ble_wsf_queue_ready.c` implements WsfTaskMsgQueue 0x52b97c, WsfMsgEnq 0x4bf9de and WsfTaskSetReady 0x52b95e. The queue address is the authenticated `0x20073230+0x34` field of typed live WSF state; readiness bit is at `+0x3c`. Bounded original/compiled-C checks pass 12 message wrapper cases and 9 queue/enqueue/ready cases, including allocation failure, 16-bit size wrap, payload preheader write, critical-section order and signal. WsfBufAlloc, WsfQueueEnq, WsfCsEnter/Exit and WsfSetOsSpecificEvent remain real deeper source imports, as does live WSF task RAM initialization. No allocator or OS-event no-op was introduced.
+
+Fresh target Main candidate `g2/build/c-firmware/20261011/peripherals-pair-wsf-round/receipt.json` passes with 1,969 definitions, 773 unresolved imports and zero duplicate strong, SHA-256 `da6e78df1b39b837b6deeae6898066403d9c3af7fb5af3fc529cd1c55b7b3817`. The five WSF public message/queue functions now define source bodies; their real next-level pool, queue, critical section and OS signal children plus live WSF state are unresolved. The increased import count is connected native frontier exposure, not evidence of a completed WSF subsystem.
+
+`display_ble_wsf_queue_critical.c` now reconstructs WsfQueueEnq 0x538c24 and the native nested critical-section primitives WsfCsEnter/Exit 0x52b8a4/b6. Original Thumb instructions at 0x52b8ac/0x52b8c4 are `cpsid i`/`cpsie i`; C uses those exact architectural operations only on depth zero transition, with a typed live depth byte at 0x20075045. The queue links its new node at tail or initializes head/tail under that critical section. `verify_ble_wsf_queue_critical_native.py` passes 12 actual compiled-C/native cases across first/nonempty queue and depth 0/1/2, comparing queue/node memory and PRIMASK. WSF pool and OS event signaling remain outside this source chunk.
+
+Fresh Main target candidate `g2/build/c-firmware/20261011/peripherals-pair-wsf-queue-round/receipt.json` passes with 1,972 definitions, 771 unresolved imports, zero duplicate strong, SHA-256 `0b496e5afc8a5a3902fae99df43d0780c0b4e2a1b48dcddc04b8d1a49810153a`. Three additional genuine source bodies replace five direct queue/critical imports and expose the one live critical-depth byte contract. Source completeness remains false.
+
+The two substantive WSF leaves are now C candidates. `display_ble_wsf_os_signal.c` reconstructs WsfSetOsSpecificEvent 0x52b8d8: it reads a live FreeRTOS task handle at 0x20074ef0, checks privileged exception mode through the already selected CONTROL/IPSR helpers, calls the actual task or ISR notify children, and performs native SCB ICSR PendSV write with task-path DSB/ISB when notification requests a yield. `verify_ble_wsf_os_signal_native.py` passes 16 bounded native/compiled-C cases covering absent/present handle, task/ISR, notify return and higher-priority-woken results. `display_ble_wsf_buf_alloc.c` reconstructs WsfBufAlloc 0x530446 from the live pool table pointer at 0x20074eec and class count at 0x20075044, scanning 12-byte size classes, entering/exiting the real WSF critical section, popping a free block, clearing its second word, and logging exhausted pools. `verify_ble_wsf_buf_alloc_native.py` passes 15 native/compiled-C class and log cases. Live task/pool RAM initialization and notification children remain separate real contracts; these tests intercept those children and do not prove full OS scheduling.
+
+Fresh Main target candidate `g2/build/c-firmware/20261011/peripherals-pair-wsf-signal-pool-round/receipt.json` passes with 1,974 definitions, 774 unresolved imports, zero duplicate strong, SHA-256 `0a69c81c0f2f44598dbd1e023cef9346b0f631ba173cba44ca35ee7904f49c97`. The pool and OS signal names are now definitions. This hash-bound snapshot exposed two notification imports and three live product cells (pool table pointer, pool count, OS task handle). Subsequent address mapping showed the notification functions at 0x47ee4a/0x47ed76 are the already selected pinned FreeRTOS `xEventGroupSetBitsFromISR`/`xEventGroupSetBits` bodies, so the OS signal C now calls those exact providers directly; the next receipt must capture that correction. The three live cells remain unresolved. This count is a relocatable candidate graph census only and is far from full Main source, RAM initialization, or physical hardware equivalence.
+
+The WSF notification call map is corrected in the selected source: stock 0x47ed76/0x47ee4a are the pinned FreeRTOS `xEventGroupSetBits`/`xEventGroupSetBitsFromISR` functions already selected from `foundation/freertos_event_group/event_groups_subset.c`. The intermediate redundant ISR wrapper was removed. The WSF signal bounded native/compiled-C oracle remains PASS 16 after direct provider binding. Fresh Main target candidate `g2/build/c-firmware/20261011/peripherals-pair-wsf-selected-notify-round/receipt.json` passes 1,974 definitions, 772 unresolved imports, zero duplicate strong, SHA-256 `1b5d0ba978f982cae551cf09f1ffba725927c8e79fa3fd5b2fbabf1fbf904980`. Two code imports closed by proven selected providers; the three WSF live cells and many other Main source/data contracts remain.
+
+A selected-source crosswalk resolved the five WSF RAM contracts previously described as external in this local round. `display_wsf_os_init.c` defines the event-group handle at native 0x20074ef0 and the 64-byte task state at 0x20073230; its WsfOsInit body zeros state and creates the event group if absent. `display_wsf_pool_data.c` defines the pool list pointer at 0x20074eec, count at 0x20075044 and critical depth at 0x20075045; selected `display_wsf_buf_init.c` sets pool pointer/count from a source-owned four-class product config and arena, while BSS initializes depth. The new WSF bodies now reference those actual selected producer symbols. Original/compiled-C WSF focused suites rerun PASS 16+15+12+9 after rebinding. The 1,974/772 receipt above predates this ownership correction; an aggregate rebuild is required. This proves source-level initializer ownership, not final linker addresses, scheduler execution or physical hardware timing.
+
+Fresh corrected Main target candidate `g2/build/c-firmware/20261011/peripherals-pair-wsf-owned-ram-round/receipt.json` passes with 1,974 definitions, **767 unresolved imports**, zero duplicate strong, SHA-256 `4a5b0068e871254a2d0ba66389e87325e7d9df6b139f2c4d60f9d09783e9f273`. The five WSF source-owned RAM symbols are BSS definitions in the selected aggregate, and the selected WsfOsInit/WsfBufInit bodies provide their runtime initialization. This reduces the previous 772-import candidate by five without inventing product values. It remains a relocatable candidate: source placement at the authenticated RAM addresses, live FreeRTOS/WSF behavior, and the rest of the Main source/data graph remain unproven. The wider Touch and CASE gates remain as in the prior finite audits: Touch 534/964 reset bytes attributed with 430 not owned by a generated declaration/symbol map; CASE selected source graph has zero imports but unbounded formatter/malformed input, product linker and physical execution evidence gaps. All six full component completion flags remain false.
+
+The next connected DM/SMP source unit `display_ble_dm_pair_children.c` defines six authenticated native bodies: DmPrivClearResList 0x4d28b0, DmDevReset 0x4b3026, DmConnRole 0x4b73c4, DmSecGetCompareValue 0x534948, DmSecCompareRsp 0x534910 and pair key ready 0x4bb030. The clear/reset messages use the now selected real WsfMsgAlloc/Send graph; the DM state byte/handler ID use selected `audio_ble_dm_handler_state`, while role lookup reuses the existing typed `audio_dm_connection_records` live data contract. The compare value is the four network-order bytes at offset 12 modulo the native ROM constant 1,000,000. Actual compiled-C/native oracle `verify_ble_dm_pair_children_native.py` passes 271 controlled cases across allocation failure/success, all 256 role IDs, value boundaries, SMP cancel versus success and key-ready child call order. This is bounded effect proof with deeper cancel, send and trace children intercepted. Final live record contents and packet controller effects remain separate.
+
+Fresh Main target candidate `g2/build/c-firmware/20261011/peripherals-dm-pair-children-round/receipt.json` passes with 1,980 definitions, 766 unresolved imports, zero duplicate strong, SHA-256 `44c79f4fbdf6bf1d4331a737928c09dd6d95651d7574f9c5dd2e83504d3afd16`. Six complete source bodies close the direct reset/privacy/role/compare/key-ready names and expose three real deeper code contracts: `SmpScGetCancelMsgWithReattempt` 0x56d188, `SmpDmMsgSend` 0x537bd6 and the diagnostic trace body 0x4bd91e. The connection-record RAM base is the already existing typed `audio_dm_connection_records` contract, not a new synthetic table. No product data initializer or final linker ownership was inferred from link success.
+
+`display_ble_smp_send.c` and `display_ble_pair_key_process.c` reduce native SMP send 0x537bd6, passkey process 0x4bafda and the 32-byte ring random getter 0x53634e to C. `verify_ble_pair_key_process_native.py` passes 36 actual compiled-C/native bounded cases, including direct ring cursor/count cases and connected passkey/SMP routing effects. Main target receipt `g2/build/c-firmware/20261011/peripherals-pair-key-process-round/receipt.json` passes with 1,983 definitions, 766 unresolved imports, zero duplicate strong, SHA-256 `68193c34ef144299ceb4ab94d6df9c74c7c5d3a0ba59f9455b5fcd465f0f3820`. The live random ring at 0x20072cb8 remains a typed product RAM contract; genuine newly exposed `DmSecAuthRsp` and passkey diagnostic trace remain deeper code at this snapshot.
+
+`display_ble_dm_auth_rsp.c` now reduces native `DmSecAuthRsp` 0x4d24d4: allocate 22 bytes, set connection/event/length fields, conditionally copy the exact caller-specified authentication byte count, then deliver to `SmpDmMsgSend`. `verify_ble_dm_auth_rsp_native.py` passes 20 actual compiled-C/native controlled cases over allocation failure/success, lengths 0/1/3/4/8 and null/non-null source, comparing allocation/send effects and 24 message bytes. Cortex-M55 `-Werror` syntax passes. Coherent Main target receipt `g2/build/c-firmware/20261011/peripherals-dm-auth-rsp-round/receipt.json` passes with 1,984 definitions, 765 unresolved imports, zero duplicate strong, SHA-256 `4b01b89c7c3547f441125202c170275ec98e2f0b4ad27bd13a959e29707e88f9`. The connected cancellation, logger and live product configuration state remain source work; this is not final source or hardware equivalence.
+
+`display_ble_smp_cancel_record.c` completes native `smpCcbByConnId` 0x5375fc, `SmpDbPairingFailed` 0x542838 and `SmpScGetCancelMsgWithReattempt` 0x56d188. It retains the native WARN/INFO diagnostic selection, selected formatter/WSF trace calls, CCB retry counter, SMP database record status update, and packet event choice. `display_ble_comm_registration_slot_storage.c` owns the BSS pointer at 0x200004b8: selected `bleCommHandlerInit` writes the authenticated ROM table address before these consumers read it. This declaration does not supply the ROM table or prove final RAM placement. `verify_ble_smp_cancel_record_native.py` passes 16 actual compiled-C/native controlled cases with diagnostic logging enabled and compares message, retry counter, record update, pointer return and call effects. Main target `g2/build/c-firmware/20261011/peripherals-smp-cancel-record-round/receipt.json` passes at 1,988 definitions / 764 unresolved / zero duplicate strong; SHA-256 `6ed7a5b37a0a2b98773cc55fc93fd5a62d2613cde36e2f5153fba2e561bb90fb`.
+
+`display_ble_smp_db_records.c` reduces native `smpDbGetRecord` 0x541fb8, `smpDbAddDevice` 0x541e72, `smpDbRecordInUse` 0x541e50, plus six-byte address equality/copy wrappers. The nine 24-byte record search, allocation fallback to the authenticated database base when full, zero-and-copy creation, and INFO diagnostics are represented. `verify_ble_smp_db_records_native.py` passes 15 actual compiled-C/native cases over empty, occupied, matching and full database records. `display_ble_dm_peer_access.c` adds native peer address type 0x4b6ed8 and pointer 0x4b6eea over the existing typed DM record import; `verify_ble_dm_peer_access_native.py` passes 512 actual compiled-C/native cases across every byte connection ID. Final coherent Main candidate `g2/build/c-firmware/20261011/peripherals-smp-peer-closed-round/receipt.json` passes at 1,995 definitions / 763 unresolved / zero duplicate strong, SHA-256 `261837d9c93c193e4fd5f583267e8188438e4718b2ee0977430827e66c2afccf`. Remaining connected data contracts include live trace policy 0x2007502f, random ring 0x20072cb8, DM connection records 0x200712a4, and the ROM registration table 0x774d44; their layout/initialization provenance is not inferred from candidate compilation.
+
+Direct DM/HCI continuation: `display_ble_dm_ecc.c` reduces full native `DmSecGenerateEccKeyReq` 0x5348ec, its 0x53673e WSF allocation/enqueue child, `HciLeReadLocalP256PubKey` 0x52b1f4 and `DmSecSetEccKey` 0x5348fc. It reuses selected `hciCmdAlloc`, `hciCmdSend`, WSF queue and DM handler state. `verify_ble_dm_ecc_native.py` passes eight actual compiled-C/native controlled cases across allocation failure/success and 96-byte key copying. `display_ble_hci_boot_public.c` binds the public `HciDrvRadioBoot` name to the existing full selected 0x4b48a6 source body, previously verified in five connected cases; this is a canonical-name binding rather than a new hardware proof. `DmDevVsInit` 0x4b308c remains an import: native returns incoming R7 via `pop {r0,pc}`, so a fabricated C return value would be wrong even though the caller ignores it. A tested provisional byte-truncation model failed and was removed before selection.
+
+The live policy byte 0x2007502f has one authenticated literal reference at 0x4c9cd4, the selected getter; no source initializer is attributable from that reference. Random-ring base 0x20072cb8 has four stock literals at 0x5363e8/0x536498/0x5366d4/0x5367e0, with queue pointer 0x20072ce0 exactly base+0x28 and cursor at base+0x3a. This proves shared address arithmetic but not the storage object's full extent or startup owner. DM connection base 0x200712a4 has seven stock literal references, including the already selected 48-byte record accessors; `DmConnInit` writes callback/config tables but does not establish the full record/storage initializer. These remain typed imports, not guessed C globals.
+
+`display_lv_application_root.c` reduces native LV active-screen getter 0x44fc62 and its application root 0x44ff38, preserving missing-display diagnostic and the active-screen return. The latter is passed as the first argument to page-manager initialization by native display-thread sequence; `display_thread.c` now uses the matching typed C return/argument rather than discarding R0. `verify_display_lv_application_root_native.py` passes eight actual compiled-C/native cases including direct, fallback and missing display.
+
+`display_page_manager_new.c` reduces full native `page_manager_init` 0x45f15a: allocation, all three LV objects and style/layout calls, parent/callback links, the BSS manager pointer written on both allocation paths, and the genuine fatal callback/reset path. Product page-style and dimension addresses remain imports. `verify_display_page_manager_new_native.py` passes its 35-child successful construction sequence with page/root memory effects and the allocation-failure fatal callback branch against actual ARM-compiled C/native execution. That failure oracle exposed a wrong callback string assumption; source now passes the authenticated literal `"0"` at 0x45f3c4. Deeper LV object children and actual target display effects remain unverified; source graph expansion is expected.
+
+Final coherent Main candidate `g2/build/c-firmware/20261011/peripherals-page-manager-qualified-round/receipt.json` passes with 2,004 definitions, 784 unresolved imports and zero duplicate strong, SHA-256 `1e89efb766a28008ba72872de0c3de1c45922815ea2b91a0f09138f7e7f6af0b`. Relative to the prior 1,995/763 receipt, complete parent bodies exposed roughly two dozen genuine LV object/style/callback lower contracts. Current 784 imports are a mixed code/data/runtime frontier, not 784 missing function bodies. The DM/HCI direct set is reduced to the special R7-return `DmDevVsInit` import; ECC/HCI hardware and product RAM remain open. UART/display now has the new LV page construction descendants plus many earlier product literal and runtime cell imports. Touch's 430 unowned reset bytes and CASE's formatter/layout/physical effects remain unchanged by this Main work. No component or firmware image is source-complete.
+
+LV constructor descendant round: `display_lv_page_style_wrappers.c` reduces thirteen native style setters and a composite wrapper with exact property IDs; native 0x44129e truncates its value to one byte. `display_lv_page_style_apply.c` preserves the seven-effect set-local-style sequence. `display_lv_style_resolve.c` reduces selector extraction 0x44b860, property-flag test 0x44b844, and subscribed style-node removal 0x44ca18, including list traversal and owner notifications. `display_page_manager_clear.c` reduces page clear 0x45fb7c and conditional clear 0x45fba2. `display_lv_theme_attach.c` reduces native display-theme attachment 0x44fe0e. Compiled-C versus original ARM bounded oracles pass 36 style-wrapper, 26 resolver/selector/flag, and 16 theme-attachment cases. Remaining style-local allocation, style value mutation, style refresh, and some callback effects are genuine code contracts, so this does not close LVGL.
+
+`display_lv_theme_apply.c` now reduces native theme lookup 0x44fe7e/0x482f74, theme application 0x482f8a, recursive theme-chain walker 0x482ff2/0x482fce, and style-removal wrapper 0x44bc3a. It uses the already selected display default/object lookup providers and the authenticated selector literal 0x000fffff at ROM 0x44c828. The deeper style-removal 0x44ba9a is a genuine unresolved source contract; theme-chain routines have target compilation and native pseudocode correspondence but no standalone full native/C oracle yet. Native 0x44104c, 0x44127e, and 0x488290 retain uninitialized upper-byte/word behavior, so they remain explicit ABI gates rather than fabricated deterministic C bodies.
+
+Latest coherent Main candidate `g2/build/c-firmware/20261011/peripherals-lv-theme-refresh-round/receipt.json` passes with 2,031 definitions, 784 unresolved imports, zero duplicate strong and SHA-256 `a1894db7d4caf752c308293f6a38c2549bf495af7ec84c8fdb8b347f1b8724fe`. Relative to the page-manager round, 27 additional definitions are source-defined; the equal unresolved count reflects true newly exposed children. Main still has substantial LVGL style, UART, OS, ROM, product RAM, and layout work. No image source-completion or live-hardware claim follows from this build.
+
+LV style core continuation: `display_lv_style_local_value.c` reduces full native get-local-style 0x44c5d4 and lv_style_set_prop 0x482868, including compact object style record insertion, 5-byte property/value allocation, constant-style diagnostic, invalid-property fatal path, and allocation effects. `display_lv_style_refresh.c` reduces full native refresh 0x44bc8c with live root refresh flag, layout/parent/layer/draw/child branches. `display_lv_style_remove.c` reduces full native removal 0x44ba9a: transition deletion, owned-style reset/free, record compaction, realloc, and conditional refresh. `display_lv_style_tree.c` reduces parent 0x44dca2, child count 0x44ddea, and recursive child refresh 0x44c9dc. `display_lv_style_helpers.c` reduces style flag scan 0x44ce2c and reset 0x482796, binding the already selected LV heap free provider. `display_lv_realloc.c` reduces LV realloc front end 0x44f76a and pool wrappers 0x48432a/0x484234 with genuine queue semaphore, TLSF reallocate, accounting, diagnostic, and typed live pool cell. `display_lv_style_position.c` reduces position getter wrappers 0x44b870/0x44b866 to their shared true lower.
+
+The native/compiled-C oracles pass: theme walker four valid-object cases, local style two, style value four, refresh 56, remove five, tree six, style flags four, realloc front end four, pool realloc four, and position wrappers two. The theme walker oracle exposed a source bug: stock dereferences a null child before testing its next pointer; source now preserves that fault. Refresh oracle exposed the native OR short circuit between the two position getters; source now matches. These are bounded source/native comparisons with controlled children, not complete LV runtime equality. The preceding theme-chain note about missing standalone oracle is superseded by this bounded oracle.
+
+Latest coherent Main candidate `g2/build/c-firmware/20261011/peripherals-lv-style-position-round/receipt.json` passes with 2,045 definitions, 785 unresolved imports, zero duplicate strong and SHA-256 `bf719f15098719edb83d142e3e7f488c064eee25401774b25a4e6e23b1590429`. The 785 names include newly exposed true LV style/runtime children, product RAM and other whole-image contracts; it is not a missing-function count. Direct LV code children now include shared property fetch 0x44bdea, TLSF reallocate 0x4d0868, property flags table lookup 0x482a6a, render/layout/layer effects, list/transition helpers, and genuine product RAM/ROM ownership. Main source_complete remains false, as do all other images.
+
+The next connected property subtree is C. `display_lv_style_property.c` reduces native 0x44bdea, taking object state, trying selector property, and falling back to the native property-default child. Its initial `value_act` seed is the pinned LVGL zero initializer and equals stock ROM 0x78f26c. `display_lv_style_selector_fetch.c` reduces 0x44ce8a direct, special coordinate, and inheritable-parent paths with the authentic object layout and runtime extension flags. `display_lv_style_entry_find.c` reduces native 0x44c834 selection over transition and normal style records and the style get-property 0x44b7ce. `display_lv_style_property_flags.c` reduces native 0x482a6a special property values, built-in flags and bounded extension lookup. Bounded actual compiled-C/native oracles pass four property, four selector, four entry-search, and all 512 property-flag matrix cases.
+
+`display_lv_style_builtin_flags.c` defines the 138-byte built-in property flag table from the pinned LVGL 9.3 designated initializer with property names and flag meanings retained. FLEX and GRID entries are enabled as demonstrated by authenticated stock ROM. A separate ARM compilation yielded a 138-byte `.rodata` section byte-equal to original 0x6d439c..0x6d4425. This is source-owned static data, not an opaque copied binary payload. The extension flag pointer/length under live LV root remain runtime product cells.
+
+Latest coherent Main candidate `g2/build/c-firmware/20261011/peripherals-lv-style-data-round/receipt.json` passes with 2,052 definitions, 784 unresolved imports, zero duplicate strong and SHA-256 `d322da9bde90b9320c90782000274e1563612bbcd7d4b060c1ae73f2440d4d0f`. Remaining direct LV code contracts include property default 0x48297c with a native partial-word ABI edge, render/layout/layer effects, style list/transition helpers, and TLSF realloc 0x4d0868; heap pool/static slot and LV root extension cells remain live RAM ownership contracts. Whole Main and all six image source-completion flags stay false.
+
+The linked layout/list/transition path is now C: `display_lv_mark_layout.c` reduces native 0x43f648, mutating object and screen layout flags and dispatching the actual display event child. The refreshed 56-case style-refresh oracle now compares the mark-layout R0 argument, which exposed and corrected an omitted object/parent argument in the earlier C. `display_lv_style_list.c` reduces generic intrusive list tail/previous/remove 0x482ce4/0x482cfa/0x482c0e, including product base-offset node links. `display_lv_style_remove_prop.c` reduces native 0x4827b0 with mutable compact allocation, original buffer release, and constant-style diagnostic. `display_lv_style_transition_unlink.c` reduces 0x450500/0x450b0c with the live transition list, callback cleanup and timer rescheduling. `display_lv_transition_schedule.c` reduces 0x4509da/0x46453e/0x464696, preserving pause/resume choice and timer callback state. Bounded actual compiled-C/native oracles pass mark-layout two, list twelve, style property removal five, transition unlink two, and schedule/resume four cases. The live transition list and timer state at LV root 0x2006f548 remain typed RAM contracts.
+
+Latest coherent Main target candidate `g2/build/c-firmware/20261011/peripherals-lv-transition-schedule-round/receipt.json` passes with 2,062 definitions, 780 unresolved imports, zero duplicate strong and SHA-256 `bccc405f58adbc25a3f9393cc6d66d4c4846512f3703029f2f06bbe9737346e8`. Four imports net closed despite genuine new children. Remaining direct LV code includes display/object event dispatch 0x44fdbe/0x451670, property default 0x48297c with partial-word ABI, refresh-draw/layer effects 0x452d42/0x44c50e, and an authenticated source-empty style-removed 0x44ce2a; product heap, lock, tick and transition-list RAM are external. Whole Main still has 780 mixed unresolved names across firmware, so LV local progress is not whole-image completion.
+
+The connected event and draw subtree now has authentic C for display event 0x44fdbe, event-list dispatch 0x44ffe6, event descriptor count/slot/disabled 0x450388/0x450390/0x45037e, event compaction 0x4502e0/0x450346, array clear/resize 0x488478/0x48849c, draw extent refresh 0x452d42/0x452dc8, layer-type refresh/predicate 0x44c50e/0x44cd9e, and object-specific attribute allocation 0x43e1fa. These reside in `display_lv_display_event.c`, `display_lv_event_list_dispatch.c`, `display_lv_event_array.c`, `display_lv_event_compact.c`, `display_lv_draw_layer_refresh.c`, `display_lv_layer_type.c`, and `display_lv_object_spec_attr.c`. Actual ARM-compiled C versus stock Thumb effect oracles pass 4, 8, 9, 8, 8, 4, and 2 bounded cases respectively. The event dispatcher retains nesting, stop state, phase filter and data compaction; the object allocator retains the native 0x34-byte allocation and flag mutation. All deeper event callbacks remain genuine lower effects at their ABIs in these oracles.
+
+The transition list head previously exposed as a separate external symbol is now addressed via authenticated LV root offset +0xac, equal to stock 0x2006f5f4. Its focused transition oracle still passes 2 actual C/native effects. Final coherent Main candidate `g2/build/c-firmware/20261011/peripherals-lv-root-layout-round/receipt.json` passes **2,076 definitions, 776 unresolved imports, zero duplicate strong**, SHA-256 `0586f500fb7107c4700ee41b8602110196b5c6e0ec1289dca4f43bbb4b4661b4`. The remaining 776 mixed imports are neither 776 missing bodies nor proof of image completeness; true direct LV code still includes object-event 0x451670, property-default 0x48297c with a partial-word native ABI, and render invalidation 0x4534be, while heap, LV root, display and callback state remain typed runtime cells. Whole Main source and physical firmware remain incomplete.
+
+`display_lv_event_scope.c` now reduces native nested-event enter/leave 0x44ffd0/0x44ffdc. The stock literal at 0x4502b4 authenticates the LV root at 0x2006f548; its active-event word is +0x6c, and the previous event is stored at event+0x14. `verify_display_lv_event_scope_native.py` passes 6 actual ARM-compiled C/stock RAM comparisons. Coherent Main receipt `g2/build/c-firmware/20261011/peripherals-lv-event-scope-round/receipt.json` passes **2,078 definitions, 776 unresolved imports, zero duplicate strong**, SHA-256 `e47b4a745abc2f94fb51f85f7eb9a238a087839001d96e584092a7bcee98d65a`. The unresolved count remains equal because the immediate object-event parent 0x451670 is still unimplemented; this adds real child bodies without claiming parent closure.
+
+`display_lv_render_invalidate.c` now reduces the complete stock control flow at 0x4534be: default-display resolution, enabled and rendering checks, zero-input reset, viewport clipping, 8-pixel alignment, direct/full refresh mode, event cancellation, containment scan, 32-area overflow reset to the full screen, storage and refresh event. Its rendering-in-progress assertion retains the authenticated source path, line 0x117 and source strings; the fatal memory-write path is not exercised by the bounded oracle. Actual compiled ARM C versus stock controlled-child effects pass **9** branches. The stock/C oracle caught and corrected an overflow branch discrepancy: when the area count reaches 32, native stores the full-screen rectangle, rather than the clipped input.
+
+The directly connected source children `display_lv_render_area_helpers.c` and `display_lv_render_contains.c` reduce native display width/height 0x44fa7e/0x44faa8, area intersection/copy 0x450bcc/0x4530fc, and area containment 0x450f28. Bounded actual C/native oracles pass **24** dimension/area cases and **18** containment/corner-order cases. The rounded-corner child 0x450dd4 is a newly exposed genuine code import. Coherent Main target `g2/build/c-firmware/20261011/peripherals-lv-render-children-round/receipt.json` passes **2,085 definitions, 776 unresolved mixed imports, zero duplicate strong**, SHA-256 `26d50154a03e30ce21a1960bf4d76ba1554a3ded67ee3af386d4bf04e27657e5`.
+
+`display_lv_property_default_model.c` models all 256 native 0x48297c branches with the incoming R1 word explicit. The stock function saves R1 and copies only three bytes into it for 0x1c and nine other property IDs, leaving the original high byte. `verify_display_lv_property_default_model_native.py` passes **768** ARM C/native comparisons across 256 IDs and three R1 seeds. The public one-argument source call at 0x44bdea does not capture the post-selector R1 value, so this exact mathematical model remains distinct from the unresolved public provider `audio_uart_lv_property_default_48297c`; binding it without authentic caller ABI evidence would change those returned high bytes. The model compiles in the candidate archive but does not close that public import. Remaining LV source includes this caller ABI, object-event 0x451670 with uninitialized flag bits, rounded-corner geometry, and deeper event/render children; live RAM and whole-image layout/hardware gates remain separate. All image source-completion flags remain false.
+
+The prior property-default public-import gate is superseded by an exact ARM ABI entry bridge in the same C translation unit. Its naked tail branch preserves incoming R1 unchanged and enters the verified C model, so all 256 property IDs and three incoming R1 seeds pass the direct **768-case public-entry** compiled-C/stock oracle. The one-argument caller therefore retains the authentic ambient R1 behavior without fabricating a second C call argument. This qualifies the public function body at its native entry ABI; it does not prove that the separately compiled caller and selector produce register-identical R1 on every path. Coherent Main receipt `g2/build/c-firmware/20261011/peripherals-lv-property-abi-round/receipt.json` passes **2,086 definitions, 775 unresolved mixed imports, zero duplicate strong**, SHA-256 `0939d88ad3426ffba35065125ac43b1a7eeef6d2a0e563972b048fd9a8c9240e`. The public `audio_uart_lv_property_default_48297c` import is closed; whole image source/layout/runtime remain incomplete.
+
+`display_lv_round_corner.c` now reduces the complete native 0x450dd4 rounded-containment body: rectangle rejection, signed radius clamping to half extents, four recursive radius-zero corner tests in stock order, transformed circle bounds and final acceptance. `display_lv_round_geometry.c` reduces authentic extent 0x451598/0x4515a4 and circle predicate 0x45163c using wrapping 32-bit fixed integer arithmetic. Bounded compiled-C/stock oracles pass **36** corner traces, **36** direct geometry values and **63** connected round/extent/circle results, including outside, edge, internal, and clamped-radius points.
+
+`display_lv_object_event.c` reduces native 0x451670 from pinned LVGL 9.3 `lv_obj_send_event`: null-object success, five event fields, three individually cleared bitfields, push, core dispatch, pop and byte return. The stock prologue reads the flags-storage byte from entry SP-16 and clears only bits 0–2; an ARM target ABI bridge reads that exact byte before entering the C model, preserving its five unnamed bits. The initial C model passed the named-field oracle but differed in those bits, so it was corrected. Full-byte compiled-C/stock call/effect oracle now passes **18** cases. The connected property caller 0x44bdea to public default provider 0x48297c also passes **21** direct compiled-C/stock cases with controlled post-selector R1 values across the partial-byte property families; this strengthens the previous standalone ABI proof, while full selector runtime equality remains separate.
+
+Coherent Main target `g2/build/c-firmware/20261011/peripherals-lv-round-object-event-round/receipt.json` passes **2,092 definitions, 774 unresolved mixed imports, zero duplicate strong**, SHA-256 `018068b3eddabe36defbd52d580a126873f128935161bf198fe9a2c2147c42e4`. The newly exposed event core 0x451a6c is genuine code; live LV root, display, heap, callback state, final image layout and hardware effects remain open. This closes the named rounded-corner/object-event providers, not LVGL or Main source completion.
+
+The next connected event graph is source-defined. `display_lv_event_core.c` reduces native 0x451a6c from pinned LVGL 9.3: active input gate, deleted/stop flag exits, target spec-attribute event list, preprocess/base/normal dispatch, result/stop checks, parent lookup and recursive bubbling. `display_lv_event_core_children.c` reduces active input 0x452ef8 from authenticated LV root+0x50, base-class event callback 0x4516f8, event bubbling selector 0x451b34 with the product's numeric code exclusions, and object flag check 0x43e0e0 including its exact source diagnostic and fatal path. Actual ARM-compiled C versus stock bounded effect oracles pass **10** core branch/recursive cases and **396** child cases covering all 128 event codes over three flag configurations plus callback/flag/active-input samples. Child effects are controlled at their ABIs in the core oracle; this is not full callback-runtime equivalence.
+
+Coherent Main target `g2/build/c-firmware/20261011/peripherals-lv-event-core-round/receipt.json` passes **2,097 definitions, 774 unresolved mixed imports, zero duplicate strong**, SHA-256 `48d5be229333c123cad3d1ac035f960a3b5f0ea27943455a7e081e37f490ece4`. Five true code providers were added while the net unresolved count remained 774 due other connected symbols; no direct `audio_uart_lv_*event*` or `audio_uart_lv_*flag*` imports remain in this snapshot. Main still has extensive other code, data, tool/runtime and placement gates; source_complete stays false.
+
+The next LV display path is now source-defined through native 0x440494. `display_lv_visible_area.c` reduces 0x4406c4 screen/layer membership, object and ancestor clipping, overflow expansion, and scrollbar path. `display_lv_visible_area_helpers.c` reduces area expansion 0x450b98 and scrollbar ancestor predicate 0x440a18. `display_lv_screen_layer_getters.c` reduces previous/top/system/bottom layer accessors 0x44fc90/0x44fcbe/0x44fcfc/0x44fd38 with their native offsets and log calls. `display_lv_scrollbar_clip.c` reduces 0x440494 inclusive-rectangle normalization plus recursive clip dispatcher 0x4403e6, retaining its parent-before-child order for flag bit1. Two direct imports were corrected to already selected exact providers: draw size 0x452dc8 and parent 0x44dca2. Actual compiled-C/stock bounded oracles pass **7** visible-area, **16** helper, **12** getter, and **6** null-object scrollbar clip cases. The active scrollbar child 0x440dda and scrollbar-mode getter 0x452dd8 remain genuine direct code imports; the six clip cases do not validate their non-null effects.
+
+Coherent Main target `g2/build/c-firmware/20261011/peripherals-lv-scrollbar-clip-round/receipt.json` passes **2,106 definitions, 774 unresolved mixed imports, zero duplicate strong**, SHA-256 `025151e14be7b6384cd1e24d852b8ebefa224620ab590e97468f95b16bf6d7dc`. The selected LV root and display state refer to product live RAM 0x2006f548. Pinned LVGL's global initializer establishes generic library construction behavior, but current product-native startup evidence has not established placement, initialization order, or producer for this exact RAM cell, so it remains a typed external runtime contract. The 774 imports mix code, live RAM, ROM, and integration contracts, and cannot be read as 774 missing bodies. Main and the other five images remain source-incomplete; final link/layout, product configuration, physical peripherals and runtime equality are unproved.
+
+Follow-on scrollbar source adds exact 0x452dd8 mode extraction from the object's spec-attribute word and the native 0x440dda transform dispatcher in `display_lv_scrollbar_transform.c`, including no-transform early return, percent-style pivot decoding, integer-scale reversal, and the 7-argument geometry effect. The mode getter's four bitfield outcomes and preceding six null-object scrollbar cases pass **10** actual compiled-C/stock comparisons. The larger transform body compiles with target `-Wall -Wextra -Werror` and links in Main; its style children and geometry transform effects have not yet received a connected native/compiled-C oracle, so its full behavioral qualification remains open. Coherent Main target `g2/build/c-firmware/20261011/peripherals-lv-scrollbar-transform-round/receipt.json` passes **2,108 definitions, 778 unresolved mixed imports, zero duplicate strong**, SHA-256 `5d15504d512626118a5c51cb828fb5ae91a0ab52fde2122bdc571c42126200a5`. The increase is six authentic style/geometry child contracts exposed by the full transform body, not regression by duplicate providers. Full source/runtime/image completion remains false.
+
+The six newly exposed connected transform contracts are now source-defined. `display_lv_transform_style.c` implements native style property wrappers 0x43ef2a/0x43ef34/0x43ef3e and clamped scale wrappers 0x43f07e/0x43f08c over the already selected 0x44bdea property getter. `display_lv_transform_points.c` implements full native point-array transform 0x4513c8: pivot subtraction, scale-only, interpolated trig rotation, before/after scaling, and signed fixed-point shifts. `display_lv_trig.c` supplies the 91-entry named `sin0_90_table` initializer from pinned LVGL 9.3 `src/misc/lv_math.c` and native sin 0x4885f0; it is attributed source data, not an opaque stock byte array. Connected actual ARM-compiled C/stock comparisons pass **8** scrollbar transform effects under controlled property getter responses, **9** point transform cases including rotation/reverse scaling, and **360** direct trig angles (377 total). These controls do not prove all product style-property or hardware state configurations.
+
+Coherent Main target `g2/build/c-firmware/20261011/peripherals-lv-transform-children-round/receipt.json` passes **2,115 definitions, 772 unresolved mixed imports, zero duplicate strong**, SHA-256 `f7c7d3ae5155ade88bdaa2dbae17e3d9b6d397e4b612518c802e3ce4464189f4`. No `audio_uart_lv_*transform*`, scrollbar, or 0x4885f0 sine imports remain in that selected graph. Pinned LVGL `lv_global_init` zeroes generic `lv_global_t`, initializes display/input linked lists, and seeds style/layout/event fields; product startup/configuration still has no authenticated mapping proving the exact live root at RAM 0x2006f548 is that source-owned object with matching layout and initialization order. Keep that RAM cell typed external. Main and all six final source/layout/runtime/hardware gates remain open; the 772 mixed imports are not a body count.
+
+A separate Audio/BLE-to-ring event provider is now C: `display_ring_event_task.c` reduces full native `Thread_SendEvtToRingTask` 0x4c543e with all three log-policy checks, authenticated source/module/function/format literals, and the real CMSIS thread-flags effect. The native prologue saves R0 but overwrites its stack slot with source line 374 on the extended-log branch; a five-level actual compiled-C/stock call/effect oracle found this return difference and the C now preserves it. The ring manager's thread pointer is read from live RAM 0x20004120+8; producer and initialization ordering remain typed external state. Coherent Main receipt `g2/build/c-firmware/20261011/peripherals-ring-event-round/receipt.json` passes **2,116 definitions, 772 unresolved mixed imports, zero duplicate strong**, SHA-256 `6e5cbc1da3b2cc7cacabca5d7dacb417c82b25a2636b40fb7e9d8b599c166227`. One true code import closed and one genuine live RAM contract exposed. Other Main source, product state, final layout and hardware gates remain open.
+
+The ring thread pointer producer has now been authenticated and source-reduced. Stock literals at 0x4c5648 and 0x4c9c80 both address manager RAM 0x20004120. Native `thread_ring_create` 0x4c4da4 stores the `osThreadNew` result at +8; queue init 0x4c4d66 stores the `osMessageQueueNew(3,4,NULL)` result at +12; terminate 0x4c4dd0 clears +8 after the actual CMSIS termination call. `display_ring_task_producer.c` implements all three, retaining native interrupt-mask plus invalid-address store/infinite-loop allocation-failure behavior. Its CMSIS thread attributes are source-owned with an authenticated ROM 0x75b8a4 field layout: name `ring`, callback storage RAM 0x20072290/112 bytes, stack RAM 0x2036be40/4096 bytes, priority 46, TZ module 1. Three actual compiled-C/stock successful-state oracles pass, including normalized attribute fields and manager writes. The failure fault/MMIO behavior is statically represented but not executed in this bounded oracle.
+
+`display_ring_task_entry.c` reduces native entry 0x4c4cec with authenticated start/queue/hooks/ready order, 0x00ffffff wait, notification loop, and failure logging. The two adjacent one-instruction hook bodies are source-empty because their actual stock entries are `bx lr`; deeper notification handler 0x4c507e remains a genuine separate body. `display_ring_task_sync.c` reduces native manager start/end transitions 0x4c9b86/0x4c9be2, including synchronization wait, all log policy branches, native saved-R0 return values, and event flag set from manager RAM 0x200040d8+0x1c. Ten actual compiled-C/stock controlled-child comparisons pass across five log levels for each transition. The initial task entry itself has target compilation/link but no connected looping runtime oracle yet.
+
+Coherent Main target `g2/build/c-firmware/20261011/peripherals-ring-sync-round/receipt.json` passes **2,126 definitions, 776 unresolved mixed imports, zero duplicate strong**, SHA-256 `7adb4f33173c9b98eaff84c38ef5986bd6cfe35b2c5c1e29615dee62b2dd9533`. The live manager object and callback/stack RAM are explicit external storage contracts. The create body proves the producer write to +8, while the product lifecycle caller that invokes creation and the initial zero/placement contract are not yet authenticated. Ring notification handling, other source bodies, final image layout and hardware execution remain open.
+
+The full 808-byte native ring notification dispatcher 0x4c507e is now source-defined in `display_ring_notify_event.c`. It handles message bit22, service discovery bit2, disconnect bit3, pairing bit4, heartbeat bit5, pair enable bit6, reconnect bit11, advertising bit8 and exit bit23 in stock order. Authenticated ROM strings and delayed callback addresses drive remove/re-enqueue intervals of 200, 500, 700 and 3000 ms where the original branches use them. It preserves repeated log-policy checks and the saved-R1 return word; callers do not depend on the return but the bounded oracle compares it. Actual compiled-C/stock **24** event-bit traces pass for log levels 0 and 7, including combined flags and normalized callback identities. This controls children at their native ABIs and does not prove each delayed callback's later effects.
+
+Connected `display_ring_task_messages.c` reduces the native 252-byte queue drain 0x4c4de8 with IDs 2, 0x80, 0x400 and 0x1000, format diagnostics, packet lengths, and heap free on all dequeued messages. Six actual compiled-C/stock successful receive/dispatch/free cases pass. `display_ring_task_exit.c` reduces native 0x4c53a6: manager sync, queue deletion/zeroing, diagnostics, and the infinite `osDelay(UINT32_MAX)` loop; two actual compiled-C/stock cases compare present/absent queue effects through the first delay. `display_ring_task_sync.c` also provides its adjacent 0x4c9c3c event-set child. `display_ring_notify_callbacks.c` reduces four callback entries 0x47257c/0x472588/0x4a285c/0x4c5032 and the connected 0x472630 event-send wrapper, with genuine lower imports for their own effects.
+
+Coherent Main target `g2/build/c-firmware/20261011/peripherals-ring-callback-round/receipt.json` passes **2,135 definitions, 784 unresolved mixed imports, zero duplicate strong**, SHA-256 `0f0a6ca3ad60c60c8f07fc8e05c726a6475eab46fac362425e81ce2a17d835fe`. The import increase exposes genuine packet/PHY/publish/pair/status children and live product data rather than duplicate providers. Ring manager live RAM 0x20004120 has a proven create/terminate producer for its thread pointer, but initial placement/zero and lifecycle dispatch into `thread_ring_create` remain unowned. Full ring descendant behavior, Main source, final layout and hardware gates remain open.
+
+The connected ring packet/PHY chunk now source-defines native `APP_MasterSetPhyEvent` 0x4a2254, three packet constructors 0x472378/0x4723d6/0x4722d8, and `APP_BleRingSendDataMsg` 0x4c4b7e in `display_ring_phy_event.c`, `display_ring_packet_messages.c`, and `display_ring_ble_send_data.c`. The send body preserves the disconnected/zero handle gate, wait, 12-byte Cordio descriptor, allocation-failure notify, and stock log branches. Authenticated strings, 0xac message ID, state RAM 0x20074074, and the selected WSF alloc/send providers are explicit. Actual compiled ARM C versus stock comparisons pass 4 PHY, 10 packet and 10 send cases, including logging levels 0/7 and allocation failures. The packet tests control `APP_BleRingSendDataMsg`; the send tests control its WSF and semaphore children, so these are bounded effect proofs rather than an end-to-end BLE radio trace.
+
+`display_ring_ble_tx_sync.c` source-defines native `threadBleWsfTakeTxReady` 0x4d0b36, `thread_ble_wsf_wait_tx_ready` 0x4d0b64 and `thread_ble_wsf_tx_complete_notify` 0x4d0c36, including the 20-iteration timeout, 10-tick poll/delay, elapsed tick log, and counted semaphore release. `display_ring_ble_sem_count.c` binds native osSemaphoreGetCount 0x449a0e to the already selected equivalent CMSIS FreeRTOS queue-count implementation at 0x449bc8. Ten bounded compiled-C/stock comparisons pass across acquire, timeout, missing handle, release and max-count paths. The native literal 0x4d0cdc locates the BLE WSF task descriptor at RAM 0x20004068, with semaphore handle at +0x14. Thread manager native 0x4c953e invokes the descriptor's offset-zero entry, and 0x4c963a reads its +8 thread handle for start, establishing a lifecycle edge. Its initial placement/copy and semaphore creation remain unowned typed data/source contracts.
+
+Final coherent Main target `g2/build/c-firmware/20261011/peripherals-ring-tx-sync-final-round/receipt.json` passes **2,144 definitions, 780 mixed unresolved imports, zero duplicate strong**, SHA-256 `9a398dbf733d1a3bfea860fac5d663a304725c17e6600bfbbd78068db865ed7e`. The connected direct code gap now includes publish-link-ready 0x4a271e and its ring owner/event children, while BLE WSF task state, ring handler state, packet templates, final placement, whole Main source and hardware validation remain open. Source completion for Main and for the full six-image firmware is false.
+
+`display_ring_publish_link_ready.c` now reduces the complete native `APP_MasterPublishRingLinkReady` 0x4a271e and its one-call event bridge 0x4a153c. It preserves the already-published, nonconnected-state and absent active-connection exits, then performs the native flag writes, security-state update, owner-gated policy notify, UX/App event and diagnostics. Direct children 0x4b82e8, 0x4a2914, 0x4ac16c and 0x49f828 were already selected C providers and are reused. Actual compiled-C/stock effects pass **8** cases, including both log levels and owner/no-owner success paths. The four bytes at 0x20074f84/85/88/89 and master context pointer cell 0x200742fc remain typed external RAM. Native `_masterConnect` 0x4a02e8 demonstrably clears +88/+89 when opening a new connection; that is a runtime producer, not a proof of initial placement.
+
+`display_ring_policy_success.c` reduces native `RING_ConnectPolicyNotifyConnectSuccessSoon` 0x49f646, including pending-byte clear, both delayed-callback removals, owner-gated 200 ms success scheduling and diagnostics. The two callback addresses authenticate to selected timeout 0x49f500 and success 0x4bc418 bodies. Actual compiled-C/stock effects pass **4** owner/log combinations. Coherent Main target `g2/build/c-firmware/20261011/peripherals-ring-publish-round/receipt.json` passes **2,147 definitions, 780 mixed unresolved imports, zero duplicate strong**, SHA-256 `cc1d6793c733081c52ee9d3e568ba2e76d6fe8a882f7bd61637518b88284e6f9`. The unchanged import count reflects newly explicit live product cells, including 0x20074f88, balancing code closure. BLE WSF descriptor RAM 0x20004068 has a manager call edge, but the retained native decompilation contains no authenticated semaphore-construction write at +0x14; its startup copy/placement remains unresolved. Main source, complete image layout and hardware validation remain open.
+
+The next connected task transport round reduces native `ring_task_msg_send` 0x4c549c in `display_ring_task_msg_send.c`. The complete body validates null payload and queue, allocates length+8, writes the ID/length header, copies payload, puts the owned pointer into the CMSIS queue, signals the task on success, and frees on put failure. It reuses selected zero/copy/queue/flag/free providers and leaves native `file_heap_allocate` 0x474cd2 as the existing genuine allocator import. Ten actual compiled-C/stock cases pass across null, missing queue, allocation failure, put failure, successful dispatch, and log levels 0/7. This closes the shared transport import used by touch follow-up, status, and ring task callers.
+
+`display_ring_mode_update.c`, `display_ring_pair_mode.c`, and `display_ring_heartbeat.c` reduce native 0x472362, 0x472546, and 0x472244. Their actual compiled-C/stock oracles pass **4** mode/pair and **2** heartbeat cases, comparing the 0x1000 task message's two payload bytes, 254-byte buffer-zero request, four transmitted packet bytes, log effects and selected hex dump call. Coherent Main target `g2/build/c-firmware/20261011/peripherals-ring-task-protocol-round/receipt.json` passes **2,151 definitions, 776 mixed unresolved imports, zero duplicate strong**, SHA-256 `3ea1cbc1bb7bb178f7617fa1f968bf7c1f06411e95ccf4542b8d942decbde121`. In the exact `audio_uart_ring_*` unresolved subset, one true code body remains (`audio_uart_ring_send_packet_472988`) and 18 product RAM/template/descriptor symbols remain. Other Main interfaces outside this prefix remain among the 776 mixed imports; these are not 776 missing bodies. No authenticated producer for BLE WSF descriptor+0x14 semaphore was found in the retained native call/decomp subset, so it stays a typed runtime contract. Final image layout and hardware execution remain unverified.
+
+`display_ring_send_packet.c` now reduces the full native `RING_CmdPackageParse` 0x472988 dispatcher. Its branches cover touch update 0x61, publish/ack 0x85, touch time 0x8a, battery 0x8b, wear 0x8c, touch error/heartbeat 0x94, and invalid glasses MAC 0x96. It preserves the authenticated delayed callbacks 0x4bc418/0x4a285c and 0x4c4fe4/0x4c4ee4, owner-gated publish or notify, 100/500 ms rescheduling, reverse MAC diagnostic and unpair call. Eleven actual compiled ARM C/stock branch traces pass. The selected `audio_ble_master_success_delayed` is native `PB_TxEncodeNotifyRingConnectInfo` 0x4bc418 and is reused for the 0x85 branch rather than adding an alias import.
+
+`display_ring_send_packet_children.c` reduces six complete native children: HID touch ack 0x47263c, throttled touch report 0x47269e, battery report 0x4727aa, wear status 0x4728b2, target address/name copy 0x4a2190, and disable-touch callback 0x4c4fe4. The target name copies the authenticated seven bytes at ROM 0x78c9cc; battery message bytes use the authenticated zero high word at ROM 0x78e464. Fifteen actual compiled-C/stock cases pass across touch event modes, throttling, HID ack, battery success/failure, wear transitions, both target-copy branches and callback logging. Deeper genuine code imports now exposed are touch event 0x4c5916, wear persistence 0x48eb32, and master unpair cleanup 0x4a2c9c, plus three live RAM cells 0x20074900/904 and 0x2007500c. The wear-persistence native call uses authenticated key 0x60102; it is not a fabricated storage success.
+
+Final coherent Main target `g2/build/c-firmware/20261011/peripherals-ring-dispatch-final-round/receipt.json` passes **2,158 definitions, 781 mixed unresolved imports, zero duplicate strong**, SHA-256 `db376fded52536e49fb9b38afd0b7091eb833f0cf86cf665a438b26ce5fb21ce`. The original direct ring packet code frontier is closed, but the newly exposed three code children, 21 ring-prefixed data contracts, broader Main source, placement and hardware remain incomplete. The import increase records these real dependencies and is not a regression in defined body count.
+
+The next connected source round defines native `INPM_EventSend` 0x4c5916 in `display_ring_touch_event.c` and persistence gateway 0x48eb32 in `display_ring_wear_persist.c`. Two actual compiled ARM C/stock touch event comparisons pass for the bytes the original initializes and six actual compiled ARM C/stock wear cases pass for clamping, initialization, submit and wake gating. The stock 12-byte touch packet writes bytes 0..1, 4..9 only; bytes 2..3 and 10..11 are ambient stack and cannot be claimed equal as portable source data. The persistence initializer/submit/wake children 0x48eac8/0x48ea66/0x47dd92 remain authentic code contracts; its queue and flags are product RAM contracts.
+
+`display_ring_unpair_cleanup.c` source-defines native `APP_MasterCleanupRingUnpair` 0x4a2c9c with its five delayed removals, auth and retry reset, target clear, hand-state publication/commit calls, role status, pair-record removal, security clear and three final connection-state branches. It reuses selected actual 0x4a23ac and 0x4a01fc bodies rather than behavior aliases. `display_ble_master_security_clear.c` reduces native `AppMasterSecClearAddr` 0x4d8ff6; its literal at 0x4d9128 authenticates the seven-byte RAM cell at 0x200003d8 and the final 0xff type byte. Both compile for ARM `-O2 -Wall -Wextra -Werror`; the unpair and security full effect trees have static native correspondence, with no connected execution oracle yet. Genuine newly exposed code children include input event send 0x464d1c, persistence 0x48eac8/0x48ea66/0x47dd92, and hand publish/commit 0x4661a6/0x466016. Live RAM initializers, final placement, full Main source and hardware remain open.
+
+Coherent target `g2/build/c-firmware/20261011/peripherals-ring-lower-final-round/receipt.json` passes **2,162 definitions, 790 mixed unresolved imports, zero duplicate strong**, SHA-256 `7f56f72434b5d25c6fd9b38404a8364b5b619cee8cdd3c206db71c2224c9cb9c`. The rise from 781 imports is the explicit native child and product-data frontier, not a whole-image completeness metric.
+
+The next lower pass defines native `SendDataToBoth` 0x464d1c in `display_input_event_send.c`: two allocations, 12-byte descriptor, eight-byte sync header, payload copy, 2000-tick queue put, bit-2 wake on success and both failure frees. Five actual compiled ARM C/stock queue and ownership cases pass, including missing queue, both allocation failures, success, and queue-put failure. It binds selected allocator/free/queue/event providers; queue and event pointer cells RAM 0x200749cc/0x20074b10 remain external.
+
+`display_ring_persist_notify.c` and `display_ring_persist_event_set.c` reduce native 0x47dd92 and 0x47dd62. Native 0x47dd92 reads a 32-bit event object at 0x20074acc, clears a 32-bit pending word at 0x20074ad0 and invokes the next event set body. The latter uses the selected 0x443484 wake predicate, selected bit-8 event signal on failure, and preserves 0x47e7b0 as a genuine lower contract. The persistence initialize/submit 0x48eac8/0x48ea66 remained open at this snapshot; their subsequent native ABI resolution and C bodies are recorded below.
+
+The hand-state chain now defines native 0x4661a6 publish, 0x466016 checksum commit, 0x49acd4 CRC16 and 0x448e34 mismatch signal in `display_ring_hand_publish.c`, `display_ring_hand_commit.c`, `display_ring_hand_checksum.c`, and `display_ring_hand_mismatch.c`. Actual compiled ARM C/stock publish effects pass for both role values, including its 48-byte packet layout and five-argument peer send. The CRC C matches all 256 authenticated native ROM table entries at 0x6c0b50 plus four data vectors; the table corresponds to polynomial 0x1021 and seed 0xffff when null. Security clear 0x4d8ff6 passes three actual compiled ARM C/stock seven-byte cases. The hand record RAM 0x200736d4 and snapshot source struct RAM 0x200036fc are typed live data contracts; producer/placement is revisited below.
+
+`display_ring_persist_buffer.c` defines native ring word read/write/size 0x48e8e2/0x48e8d4/0x48e8f0, validator 0x48e900 and reset 0x48e99c. Seven actual compiled ARM C/stock validator states pass, covering empty, one valid record, invalid header, invalid magic/alignment and overfull span. The ring storage RAM 0x200761f4 and six-word metadata RAM 0x200771f4 remain live product data. Coherent target `g2/build/c-firmware/20261011/peripherals-ring-deep-children-round/receipt.json` passes **2,174 definitions, 793 mixed unresolved imports, zero duplicate strong**, SHA-256 `cde29ebb5607907ee4f4bf5fc6deb8a831996710da2123f76af0c374dcc39a52`; `source_complete` remains false. The exact ring-local true code frontier is initialize 0x48eac8, submit 0x48ea66 and resident event op 0x47e7b0. Broader Main source, product data ownership, final layout and live hardware remain open.
+
+Native disassembly resolved the apparent fourth-register ambiguity in 0x48ea66: entry R3 is only saved/restored. At 0x48eaa0 and 0x48eab8 it explicitly loads R3 from the clock-derived value before append. `display_ring_persist_initialize.c`, `display_ring_persist_submit.c`, and `display_ring_persist_append.c` define queue initialization, early-time preface, and circular record eviction/write without an invented timestamp. `display_ring_persist_clock.c` and `display_ring_persist_metadata.c` define timing and metadata wrappers with RTC/kernel/division/parser lower calls explicit. The native critical mask helper 0x47dce4 is exactly `MRS PRIMASK; CPSID i`; C uses those instructions and the native restore `MSR PRIMASK`. Actual compiled ARM C/stock controlled-child cases pass **4** initialize, **3** submit, and **3** append, including eviction and physical ring wrap. The metadata reader pins the authenticated ROM version string `2.2.6.10` at 0x78c740. These bounded tests do not prove lower RTC/parser or persistent storage hardware effects.
+
+Coherent Main target `g2/build/c-firmware/20261011/peripherals-ring-persist-full-round/receipt.json` passes **2,181 definitions, 800 mixed unresolved imports, zero duplicate strong**, SHA-256 `3415373c7b1fb4f5dca5268bc9aa654633e3c0be890bceb501d721a99f43b7d8`, `source_complete=false`. Ring-local unresolved true code now includes kernel state, RTC refresh/snapshot, 64-bit divide, decimal parser, and event operation 0x47e7b0, plus live product RAM. The event operation reads an unusual fifth stack argument in its running-kernel branch despite four explicit register arguments from 0x47dd62; no fixed value has been assigned to that stack word. Main full source, data placement, and hardware execution remain open.
+
+The native settings-manager call graph proves a hand-record producer: `DEV_ResourceInit` 0x4c632c calls `svc_universal_setting_init` 0x466660, which zeroes only the first 0x2c bytes of RAM record 0x200736d4, copies three settings-manager source records from struct base RAM 0x200036fc at pointer fields +0x14/+0x0c/+0x10, logs, and publishes. `display_ring_hand_initialize.c` implements this complete body. One actual compiled ARM C/stock connected comparison passes and confirms the final four record bytes remain unchanged rather than being fabricated as zeros. The settings-manager struct at 0x200036fc was corrected from a pointer-cell interpretation after the controlled oracle exposed a native memory-address mismatch. Its three source pointer fields remain live storage contracts.
+
+`display_device_resource_init.c` defines full native `DEV_ResourceInit` 0x4c632c, including battery/clock/BLE/settings/hand call order, 50-by-8 queue creation at manager+0x0c, one-shot timer construction with authenticated 44-byte control block and `device_mgr_timer` name, and 1000-tick start on success. Four actual compiled ARM C/stock cases pass for queue success/failure and timer absent/failure/preexisting states. The battery/clock/BLE initializer and timer callback descendants remain authentic separate code contracts. Coherent target `g2/build/c-firmware/20261011/peripherals-device-resource-round/receipt.json` passes **2,183 definitions, 807 mixed unresolved imports, zero duplicate strong**, SHA-256 `dd72df949b346b83ecf968b28638c6a14b4850bfdff7e5363eec4312018d16ac`, `source_complete=false`. The hand-record runtime producer is now source-owned; initial settings-manager source pointers, product RAM placement, broader Main bodies, and hardware execution remain open.
+
+The next device-init pass reduces actual native timer callback 0x4c661c, CHG battery sync 0x4acf7c, BoxDetect constructor 0x4ac02a, ring battery callback wrapper/init 0x4ff8d4/0x500380, and BoxDetect callbacks 0x4ac016/0x4ac020. Target ARM compilation passes with `-Wall -Wextra -Werror`; actual ARM C/stock controlled comparisons pass one timer callback, two battery sync, four BoxDetect, and four connected `DEV_ResourceInit` cases. The device timer packet has only its first four bytes native-defined; the remaining four are ambient stack and are not asserted equal. Queue/timer handles, callback manager, record bytes and charger flags are typed live RAM at their authenticated addresses. Coherent Main target `g2/build/c-firmware/20261011/peripherals-device-children-round/receipt.json` passes **2,190 definitions, 816 mixed unresolved imports, zero duplicate strong**, SHA-256 `904bc1f74aa5906e37150f9f1eb7a98cc5a378eb3958b6c924fb461b0b73402a`.
+
+The RTC/kernel pass reduces full native snapshot 0x4d3554, CMSIS `osKernelGetState` 0x44906c, unsigned 64-bit quotient helper 0x47cc60, and RTC refresh 0x44a1ea. The latter connects the already-selected calendar reader 0x4d3c0a to selected epoch converter 0x44a108. Actual compiled ARM C/stock comparisons pass **4 snapshot**, **9 kernel-state**, **30 division**, and **2 refresh** cases. The snapshot preserves the zero-cache hardware read from MMIO 0x4000885c and writes the 15 native-defined output bytes. The divide helper uses a restoring algorithm, preserves the native zero-divisor dividend result, and introduces no compiler division import. Coherent Main target `g2/build/c-firmware/20261011/peripherals-rtc-kernel-round/receipt.json` passes **2,194 definitions, 814 mixed unresolved imports, zero duplicate strong**, SHA-256 `956ef92e2b1324d9b9c2e918d48864981446c5fbd8e23a5b684cc587232ac359`.
+
+Direct disassembly of native persistence event operation 0x47e7b0 resolves the previously reported fifth-argument uncertainty: caller 0x47dd62 explicitly stores zero at `[SP]` before its BL, which is the callee's entry fifth argument at `[SP+0x20]` after the eight-register push. `display_ring_persist_event_operation.c` implements the complete 12-byte queue packet, signed priority split, scheduler-gated fifth-argument wait, ISR woken-pointer path, queue return propagation and native null-event fault after the selected interrupt-mask operation. `display_ring_persist_event_set.c` now passes explicit zero as the fifth argument. Twelve actual compiled ARM C/stock queue and return comparisons pass, including absent queue, task, ISR, scheduler 1/2 and negative priority. The null event branch is statically matched to the native fault path and excluded from the bounded execution oracle. Coherent Main target `g2/build/c-firmware/20261011/peripherals-ring-event-round/receipt.json` passes **2,195 definitions, 814 mixed unresolved imports, zero duplicate strong**, SHA-256 `a523ad9a3c97524137fbfdf80084cdddd241e301f09b54f57b8815a13ab02235`, `source_complete=false`. The remaining ring-local genuine code contract is decimal parser 0x48d874/0x48d724; authenticated live RAM includes the event queue handle 0x20074ab0, kernel flag 0x20074384 and RTC cache 0x200742ac. Broader Main source, source-owned RAM initialization, image layout and hardware execution remain open.
+
+`display_ring_unsigned_parser.c` now reduces native parser wrapper 0x48d874 and core 0x48d724, including whitespace/sign, base 0 and 2..36, optional hexadecimal prefix, leading zeroes, end pointer, negative wrap and range overflow. The ROM base threshold table at 0x6f1208 was authenticated against its digit widths; source computes the equivalent threshold without embedding an opaque table. `display_ring_locale_dispatch.c` reduces native character wrappers 0x4d58ae/0x4d58c2 as actual function-pointer calls through the locale vtable at RAM 0x200044c0 offsets 0x20/0x28, plus native range-errno write 0x439cb2 to RAM 0x20074f14. Actual compiled ARM C/stock parser comparisons pass **100** deterministic ASCII-locale cases including bases, invalid strings, signs and overflow. The runtime locale vtable and errno cell remain typed product RAM contracts; arbitrary locale callback behavior was not executed in this oracle. Coherent Main target `g2/build/c-firmware/20261011/peripherals-ring-parser-round/receipt.json` passes **2,199 definitions, 815 mixed unresolved imports, zero duplicate strong**, SHA-256 `f6f8f912c439278b8fe60f3d9d2235953ba7bbfb50582915658c5b0ee70ba1c0`, `source_complete=false`. The ring-local genuine code imports exposed by this connected source path are now closed; ring product RAM/template/descriptor sources, broader Main code/data, final layout and hardware execution remain open.
+
+The subsequent Cordio discovery chunk reduces full native `appDiscStart` 0x531d60, `appDiscCfgStart` 0x531bd4, `AppDiscReadDatabaseHash` 0x5336e0 and byte comparator 0x44b610 in `display_ble_service_discovery_*.c`. The authenticated 0x78f54e database-hash UUID is represented as two source bytes, while the service dispatch pointer at RAM 0x20074348 and three per-connection rows at 0x200733fc remain typed live data. The sources preserve trace-level gates, profile row status transitions, connection dispatch 3/6/7, database hash request and selected 0x439be4 copy. Actual compiled ARM C/stock comparisons pass **12 start** and **10 child** cases across invalid connection, log levels, active row, callback, copy and request branches. Coherent Main `peripherals-ble-discovery-children-round` passes **2,205 definitions, 815 mixed unresolved imports, zero duplicate strong**, SHA-256 `3cb9976282dc40fb135663ba0b4aca5923d755e07fddffb7a2dcde117170fdec`.
+
+The ATT descendants now reduce native `AttcReadByTypeReq` 0x56c4ee, `attMsgAlloc` 0x4b50ae, `attcSendMsg` 0x4b5640, `attcExecCallback` 0x531ad6, `attExecCallback` 0x4b5074 and `attcCcbByConnId` 0x531820 in `display_ble_att*.c`. The message assembly writes only stock-defined bytes and retains ambient allocation bytes; queue success and error ownership use selected WSF alloc/send/free/lock providers. The CCB lookup reuses the already-selected `audio_ble_attc_state` storage and `AttcInit` producer at RAM 0x2006f904, rather than introducing a second alias for the same region. Actual compiled ARM C/stock comparisons pass **2 read-by-type**, **6 send**, **4 callback**, and **6 CCB lookup** cases; null, blocked, oversize, allocation failure, queue success, inactive connection and diagnostic paths are represented. Coherent Main `g2/build/c-firmware/20261011/peripherals-ble-att-final-round/receipt.json` passes **2,209 definitions, 814 mixed unresolved imports, zero duplicate strong**, SHA-256 `ff0354936cd7d883d41118f611a1b8fc1be295f4ec874c334cb8b22b0064d86d`, `source_complete=false`. The connected discovery/ATT true code imports are closed; the native ATT client table ROM contract and service dispatch RAM0x20074348 remain unresolved, as do the broader Main code/data graph, final layout and live hardware gates.
+
+### Cordio discovery connection events (2026-10-11)
+
+`display_ble_discovery_events.c` adds the complete native dispatcher at 0x5322bc
+and its five event children at 0x5320c2, 0x532124, 0x532174, 0x53228e,
+and 0x53223c. The 0x5320c2 close path calls the selected zero-fill provider,
+not memcpy; disassembly at 0x53210e also establishes that 0x20074360 holds a
+pointer whose first bytes select the discovery branch. The selected profile
+initializer 0x535488 already produces this cell as
+`audio_ble_profile_dispatch_slot`, pointing to the authenticated ROM entry
+0x5fa056; the event source now binds that producer directly. The native 0x532174 active-record
+query and connection-record table remain explicit imported contracts. The
+startup reset producer for the 0x200733fc rows was already selected at 0x532e52;
+the row storage placement and dispatch callback producer remain unproven.
+
+Focused actual compiled ARM C/native Unicorn comparison:
+`verify_ble_discovery_events_native.py` PASS for two defined-input close/resume
+cases, comparing row mutations and lower call arguments. Other event branches,
+diagnostic paths, and product-state initialization have static native evidence
+but no runtime equivalence receipt yet. Qualified target compilation and the
+coherent Main experimental relocatable link PASS at
+`g2/build/c-firmware/20261011/peripherals-discovery-events-round/receipt.json`:
+2215 defined, 820 mixed unresolved, zero duplicate strong providers, candidate
+SHA-256 `d0696835cdec5a3c4f24b113df75cc75524da2a949eaa753340f88ac2a33c086`.
+Source completeness remains false. New imported code descendants include
+`audio_ble_dm_conn_set_idle`, `audio_ble_discovery_config_resume`,
+`audio_ble_connection_is_active_4bad26`, and
+`audio_ble_pair_record_attach`; live table/callback cells remain data contracts.
+
+Follow-on selected source adds `display_ble_discovery_record_attach.c` for
+native 0x47b48e (42-byte descriptor copy, privacy rewrite, record validation)
+and `display_ble_discovery_config_next.c` for native 0x56c3a6/0x56beb6
+(descriptor/handle walk and ATT read/write request dispatch). The latter is
+target compiled and statically matched to native index, count, handle, and
+request branches; its connected request effects still need runtime comparison.
+Latest coherent Main receipt:
+`g2/build/c-firmware/20261011/peripherals-discovery-config-round/receipt.json`,
+2218 defined, 820 mixed unresolved, zero duplicate strong, candidate SHA-256
+`366ab4cde26f96b8b23cad3098619d5364fec1be4ebc3c677cf2577fd42f3dec`.
+The new direct ATT read/write request imports are genuine native descendants.
+
+The next four connected native providers are implemented in
+`display_ble_att_requests.c` and `display_ble_discovery_conn_state.c`:
+`AttcReadReq` 0x4b575a, `AttcWriteReq` 0x4b579c, the app connection-state
+query 0x4bad26, and `DmConnSetIdle` 0x4b71dc. The request bodies construct
+the native ATT headers and invoke the selected allocator/send path. The
+connection-state body uses the actual 0x200717b0 row stride and the DM idle
+mask at RAM 0x200712a4. Product RAM remains imported. The invalid-connection
+and trace paths have source-backed literal strings/branches but no focused
+runtime trace comparison yet. The connected config-next walk has actual
+compiled ARM C/native Unicorn comparison PASS for four cases (empty, skipped,
+read, write), including request call arguments and index effects, in
+`verify_ble_discovery_config_next_native.py`.
+
+Coherent target receipt:
+`g2/build/c-firmware/20261011/peripherals-discovery-descendants-round/receipt.json`,
+2222 defined, 817 mixed unresolved, zero duplicate strong, SHA-256
+`9d01fdb11e6ea053726d4175d2ea9d0e2a9b932454f88ab8ce46a2b9b010e87b`.
+No full Main image or live BLE execution claim follows from this build.
+
+After binding the selected 0x535488 profile initializer producer for RAM
+0x20074360, the focused discovery close/resume oracle remains PASS 2. The
+corrected coherent receipt is
+`g2/build/c-firmware/20261011/peripherals-discovery-mode-corrected-round/receipt.json`:
+2222 defined, 816 mixed unresolved, zero duplicate strong, SHA-256
+`0565bb69d58b82e8a638f6fdd251b98ff9796adc95305c15c9202ee5a63bb05c`.
+
+### Connected Cordio characteristic and descriptor walk
+
+Additional complete native bodies are selected from pinned Cordio/native
+operations: `AttcDiscCharStart` 0x56c1b8, `AttcDiscConfigCmpl` 0x56c396,
+`AttcDiscCharCmpl` 0x56c1f8, `attcDiscProcChar` 0x56be30,
+`attcDiscProcDesc` 0x56ba82, `attcDiscDescriptors` 0x56b86a,
+`attcDiscVerify` 0x56b834, and `AttcFindInfoReq` 0x4b571e. Sources are
+`display_ble_discovery_char_config.c`, `display_ble_discovery_char_complete.c`,
+`display_ble_discovery_parse.c`, `display_ble_discovery_descriptors.c`, and
+`display_ble_att_requests.c`. The characteristic UUID is the authenticated
+0x2803 pair at ROM 0x78f53e. The code retains source-owned handles,
+descriptor traversal, error statuses, buffer zeroing, and ATT request effects;
+two deeper parse helpers remain genuine imports.
+
+Actual compiled ARM C/native Unicorn comparison PASS 2 for characteristic
+start/config completion (`verify_ble_discovery_char_config_native.py`) and
+PASS 3 for empty/required-missing/find descriptor transitions
+(`verify_ble_discovery_descriptors_native.py`). Characteristic completion's
+diagnostic branches and parse helper effects remain static qualified only.
+Latest coherent Main target receipt
+`g2/build/c-firmware/20261011/peripherals-discovery-parser-descriptors-round/receipt.json`
+passes with 2230 defined, 818 mixed unresolved, zero duplicate strong,
+SHA-256 `f0453b9a98e75cb9c737789ada35134de820d758f01a644e4ab363bc556f86fc`.
+Full source, product data placement, and device execution remain incomplete.
+
+The connected parser children are further reduced in
+`display_ble_discovery_desc_pair.c` and
+`display_ble_discovery_char_decl.c`: native `attcDiscProcDescPair` 0x56b8fa,
+`attcUuidCmp` 0x56b7ec, `attUuidCmp16to128` 0x4b5014, and
+`attcDiscProcCharDecl` 0x56bb1c. The native mutable 128-bit UUID template at
+RAM 0x2000044c remains a typed data contract. Descriptor and characteristic
+handle writes, pending-next state, UUID matching, and source-backed log paths
+are represented in C. Actual compiled ARM C/native PASS 2 for defined-input
+matching descriptor and characteristic transitions in
+`verify_ble_discovery_pair_decl_native.py`; other logging and malformed packet
+paths remain untested. The coherent target receipt
+`g2/build/c-firmware/20261011/peripherals-discovery-decl-round/receipt.json`
+passes 2234 defined, 817 mixed unresolved, zero duplicate strong, SHA-256
+`63b7e5bbe40d5d3ce1703cccf126eba3221055fe9810f8cf5b00922948fe884f`.
+Direct parser code children are now source-defined, while whole discovery event
+processing 0x532924 and full service-completion 0x56bf32 remain larger genuine
+native parents. RAM row/table/callback placement and startup ownership remain
+unproven; the selected 0x532e52 reset is the only established row producer.
+
+`display_ble_discovery_restart.c` reduces native
+`appDiscRestartDiscovery` 0x531f20: invalid-connection diagnostics, four row
+field resets, buffer zero/record persistence, stage-2 pending flag, and
+profile-mode restart dispatch. It binds the already selected 0x535488 profile
+dispatch pointer cell. Actual compiled ARM C/native PASS 4 for valid stage,
+mode, and already-closed row transitions in
+`verify_ble_discovery_restart_native.py`. The coherent target receipt
+`g2/build/c-firmware/20261011/peripherals-discovery-restart-round/receipt.json`
+passes with 2236 defined, 817 mixed unresolved, zero duplicate strong,
+SHA-256 `e03cf708c78f5b268cc733bbcfe9f637919dd112c6adb1fa36e598a7ff802db0`.
+Product row/table/callback placement remains an explicit image data contract.
+
+`display_ble_discovery_process.c` reduces the full native
+`AppDiscProcAttMsg` parent 0x532924 across discovery stages 3, 1, and 2:
+database-hash comparison and pair record, service/characteristic/configuration
+completion, security wait, recovery, status dispatch and logging. The native
+0x56c396 configuration-complete wrapper was corrected to return its child's
+R0 status, which the parent consumes; the focused characteristic/config oracle
+now compares this return. Actual compiled ARM C/native parent comparison
+PASS 4 for stage-3 failure, successful service handoff, config restart, and
+config failure in `verify_ble_discovery_process_native.py`. Diagnostic printing
+and pair creation have newly exposed genuine code imports, and broader
+payload/status branches remain outside that bounded runtime receipt. Coherent
+Main target `g2/build/c-firmware/20261011/peripherals-discovery-process-round/receipt.json`
+passes with 2237 defined, 822 mixed unresolved, zero duplicate strong,
+SHA-256 `3bfdb45a7a846537b7b2e6b5ccd3e6f39407f69b7b00b6448a79e623afb97611`.
+Compilation does not settle product RAM/ROM ownership, whole image placement,
+or live BLE operation.
+
+`display_ble_discovery_pair_children.c` reduces native `DmConnSecLevel`
+0x4b71b2 and the 0x47b3ae pair-name update. `display_ble_pair_record_create.c`
+reduces `AppDbNewRecord` 0x47a71c and oldest-record selection 0x47a6b4 with
+real privacy-list eviction, table clearing, timestamp, address, and role
+effects. Actual compiled ARM C/native record creation comparison passes two
+bounded free-slot and saturated-unbonded cases in
+`verify_ble_pair_record_create_native.py`; bonded-oldest eviction and privacy
+hardware effects remain untested. The coherent Main receipt
+`g2/build/c-firmware/20261011/peripherals-discovery-pair-create-round/receipt.json`
+passes with 2241 defined, 819 mixed unresolved, zero duplicate strong,
+SHA-256 `de94667221965f91984af9c7e2c15adf3311c78a1cd41042f61d44d62935fc6a`.
+
+`display_ble_discovery_print.c` reduces native `appDiscPrintCharInfo`
+0x5322f6 and `appDiscPrintDescInfo` 0x532644 across UUID16/128, all seven
+characteristic-property bits, and descriptor families. Text and source tags
+come from authenticated stock literal pointers. ARM target compilation and
+coherent Main link pass with 2243 defined, 817 mixed unresolved, zero duplicate
+strong, SHA-256 `9891e2c24a5272f01ce2fc5725b553c0e5b23aaac1a422364eaf152fbe436e87`
+at `g2/build/c-firmware/20261011/peripherals-discovery-print-round/receipt.json`.
+Variadic compressed-log runtime effects have static source evidence only;
+there is no all-format actual-C/native equivalence or hardware claim. The
+discovery row, connection table, pair rows, and callback storage are typed
+live external RAM contracts pending whole-image producer and placement proof.
+
+`display_ble_smp_pairing.c` reduces native `smpProcPairing` 0x56e6e0 with
+the registered SMP product configuration pointer as a typed live contract,
+including IO-capability, secure-connection, authentication, and key-size
+decisions. Actual compiled ARM C/native comparison passes three no-dispatch
+cases in `verify_ble_smp_pairing_native.py`; `smpSmExecute` event paths are
+source-derived but not runtime-qualified yet. `display_ble_fast_mode.c` now
+passes the already selected native `_connectParamReq` 0x47761c function as the
+delayed callback directly instead of importing a second name for that same
+original address. The coherent Main receipt
+`g2/build/c-firmware/20261011/peripherals-smp-pairing-round/receipt.json`
+passes with 2244 defined, 816 mixed unresolved, zero duplicate strong,
+SHA-256 `725058694b2f6d0addb886e307d30d58f20e39d7c823acb6c060d83a101da773`.
+
+`display_ble_smp_dm_callback.c` reduces native `smpDmConnCback` 0x537502,
+including open-event role/state setup and close-event failure count, synthetic
+state-machine message, connection reset, and queued-message release.
+`display_ble_smp_resume.c` reduces native `smpResumeAttemptsState` 0x53749c,
+including legacy/secure state and timeout timer scheduling. These units have
+authenticated native static mapping and qualified target compilation; their
+complete callback/timer effects have not yet had an actual-C/native runtime
+comparison. The latest coherent Main target receipt
+`g2/build/c-firmware/20261011/peripherals-smp-resume-round/receipt.json`
+passes with 2246 defined, 818 mixed unresolved, zero duplicate strong,
+SHA-256 `953493f6be6af979d65eda4034cc4973bc7df9dff4f767ba0fd63bc44922e22b`.
+Fresh SMP code frontier: `SmpDbGetFailureCount` 0x54257c,
+`SmpDbSetFailureCount` 0x542418, `SmpDbGetPairingDisabledTime` 0x5422c4,
+and table-driven `smpSmExecute` 0x56ee62. The first three use selected
+`smpDbGetRecord`; the state machine depends on source-owned table pointers and
+action callbacks. Main's 818 unresolved entries are mixed code, live RAM,
+resident ROM and layout contracts, so they are not 818 unimplemented bodies.
+
+`display_ble_smp_failure_state.c` now reduces the three DB state bodies:
+`SmpDbGetPairingDisabledTime` 0x5422c4, `SmpDbSetFailureCount` 0x542418,
+and `SmpDbGetFailureCount` 0x54257c. The record reads/writes and nonzero-count
+timestamp copy use selected `smpDbGetRecord` and the authenticated live
+registration slot. Their INFO diagnostics retain stock source/function/format
+strings and trace gating. ARM target compilation and coherent Main link pass
+with 2249 defined, 815 mixed unresolved, zero duplicate strong, SHA-256
+`f7687dd8e6339e649797964f1950f35a32c7aa1acc248f0cd5c0bfd86300c64a`
+at `g2/build/c-firmware/20261011/peripherals-smp-failure-round/receipt.json`.
+Trace routing and actual record effects await connected compiled-C/native
+runtime qualification. The remaining SMP state-machine body 0x56ee62 includes
+table-driven dispatch and genuine source-owned table/action contracts.
+
+`display_ble_smp_sm_execute.c` reduces native `smpSmExecute` 0x56ee62:
+numeric/named trace selection, role-specific transition descriptor, per-state
+row scan, fallback row, state write, and action-vector dispatch. The selected
+`SmpiInit`/`SmprInit` families already install the descriptor pointers;
+their ROM table objects and action callbacks remain authentic typed imports.
+Actual compiled ARM C/native comparison passes two controlled table cases,
+matched transition/action and fallback/no action, in
+`verify_ble_smp_execute_native.py`. This bounds core dispatch only; product
+transition tables, all actions and trace formatting are not runtime-qualified.
+Coherent Main target receipt
+`g2/build/c-firmware/20261011/peripherals-smp-execute-round/receipt.json`
+passes with 2250 defined, 816 mixed unresolved, zero duplicate strong,
+SHA-256 `0f1103b63e283a532e8e1264b0f981e812b3608b1974ea7024de854fab429139`.
+
+`display_ble_smp_strings.c` and `display_ble_smp_state_strings.c` reduce
+native `smpEventStr` 0x56d31e, `smpStateStr` 0x56d454,
+`smpiStateStr` 0x537f24, and `smprStateStr` 0x538114. Event and state names
+are source-owned strings read from authenticated stock literal pointer cells;
+the role switch reads the selected SMP handler-state storage. Actual compiled
+ARM C/native string results match for all 256 byte inputs for the three direct
+mapping routines (768 cases) in `verify_ble_smp_strings_native.py`.
+Coherent Main target receipt
+`g2/build/c-firmware/20261011/peripherals-smp-strings-round/receipt.json`
+passes with 2254 defined, 814 mixed unresolved, zero duplicate strong,
+SHA-256 `2f1cf5e6fbe5b7a8ee2e8a516d748a23c5b80d3f1fb66265aa39914a46d1c32a`.
+The SMP state-machine callback/data graph and whole Main placement remain
+open; these exact string mappings do not establish BLE hardware operation.
+
+`display_ble_smp_l2c_control.c` and `display_ble_smp_state_idle.c` reduce
+native `smpL2cCtrlCback` 0x537444 and `smpStateIdle` 0x537bb8. Connected
+credit/closed transitions update CCB, release a pending packet through the
+genuine `smpSendPkt` child, and trigger state-machine event 0x0c when active.
+Actual compiled ARM C/native comparison passes two credit transitions with
+no pending packet in `verify_ble_smp_l2c_control_native.py`; pending-packet
+send and state-machine action execution are untested here. Coherent Main
+receipt `g2/build/c-firmware/20261011/peripherals-smp-l2c-round/receipt.json`
+passes with 2256 defined, 814 mixed unresolved, zero duplicate strong,
+SHA-256 `10fdf5bc3433024bd129e93e0449b56f415636baed796a3398377499323ce582`.
+The newly exposed `smpSendPkt` path carries native inherited registers into
+`L2cDataReq`; that ABI needs separate proof before importing or implementing
+the child as a fully equivalent provider.
+
+The SMP packet ABI is now resolved from native Thumb instructions:
+0x537ba4–0x537bb2 explicitly loads R0=6, R1=CCB handle, R2=packet-size table
+entry, and R3=packet before BL 0x530bbc. `L2cDataReq` 0x530bbc reads only
+these four arguments and writes the 8-byte ACL/L2CAP header; extra arguments
+shown by Ghidra are inherited register artifacts. `display_ble_smp_packet_send.c`
+reduces `smpSendPkt` 0x537a5a, `L2cDataReq`, and the authenticated 16-byte
+SMP packet-size table at ROM 0x7890c0 as source-owned typed C data. Exact
+`smpSendPkt` warning string and source role come from stock literal pointers.
+Actual compiled ARM C/native comparison passes send and pending-queue cases
+in `verify_ble_smp_packet_send_native.py`. Coherent target receipt
+`g2/build/c-firmware/20261011/peripherals-smp-send-round/receipt.json` passes
+with 2259 defined, 814 mixed unresolved, zero duplicate strong,
+SHA-256 `a3f90e37fcf5d9cfbd1dd496bff42f67d0e021cf3db8d174db85185e13351ef2`.
+
+`display_ble_hci_acl_send.c` and `display_ble_hci_acl_queue_count.c` reduce
+native `HciSendAclData` 0x52ad04 and `WsfQueueCount` 0x538cf6. The HCI body
+uses the selected connection lookup, WSF enqueue/critical-section providers,
+buffer-size provider and TxReady, plus the live HCI stack callback slot whose
+producer is already selected. Actual compiled ARM C/native comparison passes
+missing-connection/free and connected queue/fragment-counter effects in
+`verify_ble_hci_acl_send_native.py`; live controller transmission and callback
+threshold branches remain outside that receipt. Coherent Main target
+`g2/build/c-firmware/20261011/peripherals-smp-hci-send-round/receipt.json`
+passes with 2261 defined, 813 mixed unresolved, zero duplicate strong,
+SHA-256 `d0a9c7579d57f1d9c86f1ab27b47eb306e40b98419890b3f597d03b6b77e28e3`.
+Whole Main source, product RAM placement and hardware operation remain open.
+
+`display_ble_smp_ccb_handle.c` reduces native `DmConnIdByHandle` 0x4b6e96
+and `smpCcbByHandle` 0x5375c8 using selected three-row DM records and SMP
+CCB storage. `display_ble_smp_l2c_data.c` reduces native `smpL2cDataCback`
+0x537278: command/length/expected-opcode validation, authenticated warning
+format, and state-machine event construction. The non-command-5 event's
+fourth byte is native ambient stack data. A named Thumb entry shim now
+recreates the native push/sub frame and passes that exact slot to the C body,
+which writes only the stock-defined fields. Actual compiled ARM C/native
+comparison passes Pairing Failed, normal-command ambient-byte preservation,
+and invalid opcode in `verify_ble_smp_l2c_data_native.py`. Corrected receipt
+`g2/build/c-firmware/20261011/peripherals-smp-l2c-ambient-round/receipt.json`
+passes with 2264 defined, 812 mixed unresolved, zero duplicate strong,
+SHA-256 `bdf5d79054ff8b1776916eb0fcc281d3ce499de1e1e67b8a65843f37589ba99b`.
+The SMP action vector and live DM/CCB placement remain separate contracts.
+
+The pinned Cordio SMP state-machine sources compile as four separate ARM C
+units. `verify_ble_smp_tables.py` compares their relocatable object tables
+against native: **107 indexed state rows**, **four common tables**, and **158
+action-vector symbol names** all match. Four wrapper units under
+`peripherals/smp_tables/` export distinct legacy/secure-connection initiator
+and responder table symbols while preserving authentic Cordio bodies. An
+isolated relocatable link against Main passes with zero duplicate strong
+providers; it exposes 88 real action-function imports. These wrappers are
+not yet selected by the root manifest, and the live `smpCb` CCB storage and
+final ROM placement remain explicit contracts.
+
+Six further pinned Cordio action translation units are wrapped under
+`peripherals/smp_tables/candidate_*_act.c`. They compile for ARM M55 and
+define **99 unique action/helper bodies** across common, secure connection,
+initiator and responder roles. Only `smpSmExecute` overlaps a selected native
+body, so the pinned copy is explicitly renamed and remains unused. An
+isolated relocatable link with the corrected Main candidate passes at **2363
+defined / 854 mixed unresolved / zero duplicate strong** before adding the
+four transition-table wrappers. The additional imports are genuine WSF,
+cryptographic and DM descendants; the source units do not close the whole
+SMP runtime. `verify_ble_smp_action_cleanup_native.py` passes four actual
+compiled-C/stock `smpCleanup` cases, comparing the full 0x50-byte CCB and
+free/timer-stop effects. This bounded oracle supports the pinned source body,
+while the other action branches still need per-path qualification. The six
+action wrappers remain outside the selected manifest until the root table
+snapshot settles.
+`verify_ble_smp_action_failed_native.py` additionally passes four compiled
+ARM C/stock `smpActPairingFailed` cases, including scratch-buffer cleanup,
+timer stops, DM idle transition, and callback event/argument effects.
+Root-selected ten table/action wrappers now form a coherent Main candidate:
+`g2/build/c-firmware/20261011/peripherals-smp-actions-round/receipt.json`
+passes at **2374 defined / 850 mixed unresolved / zero duplicate strong**,
+SHA-256 `ed128a0e588fd2ab9b640d87375c87eaae67673a0797352df915b9ad233cb56d`.
+This is C source inclusion and relocatable linking, not full SMP behavior or
+product runtime data placement. The next authentic action descendants include
+roughly 42 distinct SMP/WSF/DM/security imports newly exposed by these bodies.
+
+`display_ble_smp_action_children.c` reduces `smpMsgAlloc` 0x537bca,
+`SmpScAlloc` 0x56cf04, and `WsfTimerStartSec` 0x52a4b8. It binds the already
+selected exact-ABI C implementations of WSF message data allocation and
+timer insertion; buffer allocation and state-machine execution remain their
+real selected providers. `verify_ble_smp_action_children_native.py` passes
+four actual compiled-C/stock cases across ordinary allocation, scratch
+allocation success/failure, and the 100-tick-per-second timer conversion,
+comparing defined arguments, returns and message bytes. Full SMP cryptography,
+DM live state and hardware effects remain unqualified.
+The coherent Main target build capturing these three children passes at
+**2377 defined / 847 mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-action-children-round/receipt.json`,
+SHA-256 `64be2fbaf7291f5762f8d58f7e69e3a84779f84b0d0e6d6dbb7f363cbb8f3f9d`.
+
+`display_ble_wsf_buf_free.c` reduces native `WsfBufFree` 0x5304d4 using the
+already selected pool-list/count RAM producers. The exact stock marker
+`0xfaabd00d` comes from native literal 0x530534. It scans pool classes in
+reverse, compares the block against each class base, then locks and pushes
+the block onto the matched free list. Four actual compiled ARM C/stock cases
+pass in `verify_ble_wsf_buf_free_native.py`: empty class list, lower class,
+upper class and below-range return; all descriptor/block bytes and critical
+section effects match. Pool table initialization and placement remain live
+product RAM contracts, not hardcoded values.
+The coherent Main snapshot including `WsfBufFree` passes at **2378 defined /
+846 mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-wsf-free-round/receipt.json`,
+SHA-256 `4056619505bf208a8f7454586671372064dbf67158e98082c2bbda83795e00e3`.
+
+Two further direct children are source-reduced: `display_ble_wsf_msg_free.c`
+implements native `WsfMsgFree` 0x4bf9b0 by returning the authenticated
+8-byte message header to `WsfBufFree`; `display_ble_dm_conn_sec_level.c`
+implements native `DmConnSecLevel` 0x4b71b2 from the live 0x30-byte DM
+connection rows. The latter uses the exact native arithmetic even for ID
+zero and passes four compiled-C/stock reads in
+`verify_ble_dm_conn_sec_level_native.py`. The DM row storage is an existing
+unresolved live RAM contract; no default connection records are invented.
+The coherent build with these two direct children passes at **2380 defined /
+844 mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-wsf-dm-round/receipt.json`,
+SHA-256 `c0cc511c146aa9ca7d21ffdf71c5232885ac82967ae407343135bb6356502e43`.
+
+`display_ble_dm_smp_callback.c` further reduces `DmSmpCbackExec` 0x4d24a8:
+events 0x2a/0x2c go first to the optional ATT callback at DM connection
+state +0x90, then all events reach the required DM client callback at handler
+state +8. These are live callback slots, not fabricated no-ops. Six actual
+compiled-C/stock cases pass in `verify_ble_dm_smp_callback_native.py`,
+comparing callback order and argument across both event classes and ATT slot
+present/absent. Coherent Main receipt
+`g2/build/c-firmware/20261011/peripherals-smp-dm-callback-round/receipt.json`
+passes at **2381 defined / 843 mixed unresolved / zero duplicate strong**,
+SHA-256 `15f77cb46378f43d4026b773bc544c0bb4f83148d8c7f7e4ca8279bcb1831b5c`.
+
+The pinned Cordio utility sources `bda.c`, `calc128.c`, `wstr.c` are wrapped as
+three separate candidate units under `peripherals/smp_tables/`. They compile
+for ARM M55 and add twelve source-defined providers, including the actual
+16-byte `calc128Zeros` C data object. An isolated relocatable link against the
+preceding Main snapshot passes with zero duplicate strong providers and
+reduces seven newly exposed utility names. The current decompilation corpus
+does not assign direct stock entry addresses to the BD/128-bit utility
+helpers, so this is pinned-source ABI inclusion rather than behavioral
+equivalence proof. The wrappers await root manifest selection.
+The three utility wrappers are now selected experimentally. Coherent Main
+`g2/build/c-firmware/20261011/peripherals-smp-util-round/receipt.json` passes
+at **2393 defined / 838 mixed unresolved / zero duplicate strong**, SHA-256
+`7e2d2eebbc31b14d92dcd0f54529c21b308df9a45f471af17bfcfe9f0ac942f9`.
+`WStrReverseCpy` additionally has direct stock entry 0x56d8c4; its pinned
+source's signed-16-bit loop and reverse-store order match the native
+decompilation. `verify_ble_wstr_reverse_native.py` passes five actual
+compiled-C/stock buffer cases with lengths 0, 1, 6, 16 and 31. The other
+utility bodies remain pinned-source candidates without direct native runtime
+qualification.
+
+`display_ble_smp_sc_scratch.c` reduces complete pinned/native
+`SmpScAllocScratchBuffers` 0x56cdc0 and `SmpScFreeScratchBuffers` 0x56ce4e.
+The five scratch fields at secure-connection offsets 0x14, 0x08, 0x18,
+0x0c and 0x10 use the exact native sizes 0x60, 0x40, 0x20, 0x40 and 0x20.
+The native allocation order, reuse, aggregate success result, and conditional
+free/clear order are preserved. `verify_ble_smp_sc_scratch_native.py` passes
+eight actual compiled-C/stock cases, comparing the full secure-connection
+state and alloc/free call sequence across existing buffers and one failure.
+The CCB and scratch storage remain live runtime data; no particular buffer
+address or allocation outcome is assumed by the selected implementation.
+The coherent Main snapshot with the scratch lifecycle passes at **2395
+defined / 836 mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-sc-scratch-round/receipt.json`,
+SHA-256 `18c4ea64ee14f4f60591acfb4ffd49e0e8427067802b30bd1133b6c0bfb24279`.
+
+`display_ble_smp_sc_f4.c` further reduces native `SmpScCat` 0x56cfc2 and
+`SmpScCalcF4` 0x56cf2c from pinned Cordio. The latter allocates 65 bytes,
+concatenates two 32-byte public-key coordinates, writes the Z byte, and
+passes the authenticated sixth stack argument as the CMAC key; allocation
+failure has no CMAC call. `verify_ble_smp_sc_f4_native.py` passes two actual
+compiled-C/stock connected cases with source-defined buffer bytes and
+child-call argument sequences. The cryptographic `SmpScCmac` child and its
+security hardware/provider effects remain genuine unresolved contracts.
+The coherent Main snapshot with F4 and Cat passes at **2397 defined / 834
+mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-sc-f4-round/receipt.json`, SHA-256
+`07bb29d8a33de5fba9c9e7b6267e46f0bdcfb50e988d9fac8e5d19046b11b316`.
+
+`display_ble_smp_sc_cmac.c` then reduces native `SmpScCmac` 0x56cec2:
+handler token from live SMP state +0xec, connection ID from CCB +0x3d,
+native event 0x1c, and conditional text free/status/event/SM execution on
+security request failure. `verify_ble_smp_sc_cmac_native.py` passes two
+actual compiled-C/stock branches, including six-argument `SecCmac` call
+state and failure effects. `display_ble_sec_cmac_request.c` reduces the
+native `SecCmac` producer 0x53665c from pinned Cordio: 100-byte WSF
+allocation, authenticated queue/callback field offsets, source-owned 16-byte
+key copy, live token increment, and subkey-generation call. The last
+routine passes two actual compiled-C/stock allocation success/failure cases
+in `verify_ble_sec_cmac_request_native.py`, comparing the full 100-byte
+request, key bytes, token and child calls. `secCmacGenSubkey1` is the next
+genuine crypto child; the existing `audio_ble_stack_state_20072cb8` contract
+is the typed live secCb RAM whose placement and initializer ownership remain
+unproven.
+The coherent Main snapshot through `SecCmac` passes at **2399 defined / 835
+mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-sc-cmac-request-round/receipt.json`,
+SHA-256 `f048cde7b7277783b5a064a7874ef73021dc808b56d6971d52626448225d9f6c`.
+
+`display_ble_sec_cmac_subkey.c` reduces native `secCmacGenSubkey1` 0x53653a
+from pinned Cordio: it extracts the key at CMAC CB +4, supplies a 16-byte
+zero block, and calls the genuine LE encryption child with handler at +0x28.
+`verify_ble_sec_cmac_subkey_native.py` passes three actual compiled-C/stock
+cases comparing the child arguments and all zero bytes. The connected child
+`display_ble_sec_le_encrypt.c` reduces native `SecLeEncryptCmd` 0x5363ae:
+two 16-byte reverse copies, enqueue to live secCb AES queue at +0x20, then
+HCI LE encrypt command. `verify_ble_sec_le_encrypt_native.py` passes two
+actual compiled-C/stock cases comparing enqueue order/arguments and both
+reversed command blocks. `HciLeEncryptCmd` is the next genuine controller
+command provider; transmission and controller response remain hardware gates.
+The coherent Main snapshot through both subkey and LE encrypt source bodies
+passes at **2401 defined / 835 mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-sc-encrypt-round/receipt.json`,
+SHA-256 `27225ff0d77c5a53ae59372eb049cc4f91aace868f1b4b3a90434c47aac64621`.
+
+`display_ble_hci_le_encrypt_cmd.c` reduces the genuine next provider
+`HciLeEncryptCmd` 0x52b266 from pinned Cordio `hci_cmd.c`. It allocates LE
+Encrypt opcode 0x2017 with 32-byte payload, writes 16-byte key and plain
+blocks at command offsets 3 and 0x13, and sends only on allocation success.
+`verify_ble_hci_le_encrypt_cmd_native.py` passes two actual compiled-C/stock
+allocation branches comparing full command bytes and alloc/send arguments.
+The selected HCI command allocator and sender are real connected providers;
+controller execution remains a hardware contract.
+The coherent Main snapshot including the HCI LE Encrypt command passes at
+**2402 defined / 834 mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-hci-encrypt-round/receipt.json`,
+SHA-256 `d53aa0e17b88612ae3ca99a246b87c92e2e6a578d14aab41416b0aedbac0050b`.
+
+The pinned `sec_main.h` supplies an attributable 0x50-byte `secCb_t` BSS
+layout at native RAM 0x20072cb8. `display_ble_sec_cb_storage.c` now defines
+the existing `audio_ble_stack_state_20072cb8` symbol as a typed object, with
+compile-time offset/extent checks for its 32 random bytes, three WSF queues,
+token and five callback slots. The already selected initializer
+`audio_ble_stack_lower_536324` clears queue words and token; selected callback
+initializers write the authenticated table slots. This owns C storage and
+proven source layout; final linker placement and runtime initialization order
+remain separate gates.
+The coherent Main snapshot after reusing and defining the existing secCb
+symbol passes at **2403 defined / 832 mixed unresolved / zero duplicate
+strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-seccb-storage-round/receipt.json`,
+SHA-256 `a749d34900ecee8322dd2e5a9d5033a709b2b80de951ad74c55f51442b4be386`.
+The earlier `audio_ble_sec_state` alias was removed before this snapshot.
+
+`display_ble_dm_conn_idle.c` reduces native `DmConnSetIdle` 0x4b71dc from
+pinned Cordio. It uses the existing live DM rows, locks around `DmConnInUse`,
+updates the 16-bit idle mask with native zero/nonzero idle semantics, unlocks,
+then follows the authenticated INFO diagnostic policy and exact source
+string/line. `verify_ble_dm_conn_idle_native.py` passes four actual compiled
+ARM C/stock cases for in-use/unallocated rows and clear/set masks with trace
+disabled, comparing mask bytes and lock/unlock/WSF trace effects. The
+trace-enabled INFO branch additionally passes two actual compiled-C/stock
+cases in `verify_ble_dm_conn_idle_log_native.py`, comparing the mask and
+complete path/name/line/format/argument log tuple. Other trace-policy
+levels remain outside these bounded tests. The
+`DmConnInUse` child is a genuine newly exposed provider; DM row storage and
+callback initialization remain live product-data obligations.
+The coherent Main snapshot with `DmConnSetIdle` passes at **2404 defined /
+832 mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-dm-idle-round/receipt.json`,
+SHA-256 `8d945aa16f770c0c1054ba011aa931f6c937eeb24d10f0c7ce9888acf409a43e`.
+`display_ble_dm_conn_in_use.c` reduces its native `DmConnInUse` child
+0x4b6ec6 from pinned Cordio using the authenticated 0x30-byte DM row stride
+and in-use byte offset. `verify_ble_dm_conn_in_use_native.py` passes four
+actual compiled-C/stock reads, including ID zero's exact native address
+arithmetic. The shared DM row object remains a live RAM/storage placement
+contract; this getter does not invent connection state.
+The coherent Main snapshot with `DmConnInUse` passes at **2405 defined /
+831 mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-dm-in-use-round/receipt.json`,
+SHA-256 `37b388519dca16b44012c2f26e04610c5ddf085ece077555c8608b7dd004f8ce`.
+
+`display_ble_smp_sc_small_children.c` reduces three further pinned/native
+SMP descendants: `SmpScCat128` 0x56cfdc, `smpGetPkBit` 0x56d150 and
+`smpGetScSecLevel` 0x537c00. It reuses selected `Calc128Cpy`, reads the
+authenticated secure-connection scratch and passkey position fields, and
+classifies LESC/MITM security from native CCB bytes. Twelve actual compiled
+C/stock cases pass in `verify_ble_smp_sc_small_native.py`, including passkey
+positions across the byte boundary and 127/128/255, security-level branches,
+and exact 16-byte append. Scratch and CCB objects remain live runtime state.
+The coherent Main snapshot including the three small SC helpers passes at
+**2408 defined / 828 mixed unresolved / zero duplicate strong** in
+`g2/build/c-firmware/20261011/peripherals-smp-sc-small-round/receipt.json`,
+SHA-256 `ebe62a00385d8a285f9129569f4f6ac09c0a7d27124110e82064ff719a63a27f`.
+
+`display_ble_smp_sc_send.c` reduces four complete pinned/native outgoing
+secure-pairing packet bodies: public key 0x56cfec, DH key check 0x56d054,
+random 0x56d0a8 and confirmation 0x56d0fc. Each marks the connection busy,
+starts the response timer, allocates the authenticated size, writes the
+native opcode and reverse-order payload, and either sends or emits the exact
+cancel event on allocation failure. `verify_ble_smp_sc_send_native.py`
+passes eight actual compiled-C/stock cases (success and allocation failure
+for all four) comparing packet/message bytes and every child-call argument
+and order. The selected HCI/SMP send descendants are source defined, while
+actual controller transmission remains unmeasured.
+
+`display_ble_discovery_service_complete.c` now reduces the full
+`AttcDiscServiceCmpl` 0x56bf32 parent, including event/status branches,
+start/end handle extraction, and authenticated trace paths. Actual compiled
+ARM C/native comparison PASS 4 for found service, empty data, explicit status,
+and unexpected event in `verify_ble_discovery_service_complete_native.py`.
+Coherent target receipt
+`g2/build/c-firmware/20261011/peripherals-discovery-service-round/receipt.json`
+passes with 2235 defined, 817 mixed unresolved, zero duplicate strong,
+SHA-256 `b59179a56833dd955441d523074518b42f879845951487c76a8ec7cb3a977c59`.
+The remaining substantial connected processor is 0x532924; it uses live
+discovery rows and a product callback pointer and has additional Cordio
+children, so it is not yet a source-complete whole subtree.
+
+`display_ble_smp_sc_fail_retry.c` reduces native 0x56d304 with an ARM entry
+shim that preserves the original incoming R2/R3 event-frame bytes. Its actual
+compiled-C/native oracle passes two ambient seeds. `display_ble_smp_generate_ltk.c`
+reduces native 0x5379f4 and pinned Cordio `smpGenerateLtk`, including random
+key generation, zero remainder, EDIV/RAND copy, security level, and the DM
+callback. Its actual compiled-C/native oracle passes six key-length and
+authentication combinations. The coherent Main receipt
+`g2/build/c-firmware/20261011/peripherals-smp-fail-ltk-round/receipt.json`
+passes with 2414 defined, 822 mixed unresolved, zero duplicate strong,
+SHA-256 `a21972dc2962588d1ff8ceec46927303137bedbb2f9e57f62e4b4f794a58bdd8`.
+Full Main source, final RAM placement, and controller behavior remain open.
+
+`display_ble_sec_rand.c` reduces pinned Cordio/native `SecRand` 0x53634e.
+It copies from the source-owned 32-byte `secCb` circular random ring and
+requests one real HCI refill per eight requested bytes. The actual
+compiled-C/native `verify_ble_sec_rand_native.py` passes 21 cases across
+lengths 0, 1, 7, 8, 9, 16, 32 and ring positions 0, 1, 3; it compares
+output bytes, ring state, and HCI refill count. The coherent Main receipt
+`g2/build/c-firmware/20261011/peripherals-sec-rand-round/receipt.json`
+passes with 2415 defined, 821 mixed unresolved, zero duplicate strong,
+SHA-256 `d472ab8fadfefbd2182afd66346e004df23be12fd6992d36965c4c52a9922cb2`.
+Source ownership of the ring does not prove hardware entropy or final RAM
+placement.
+
+`display_ble_smp_calc_s1.c` reduces full native 0x537998, including two
+64-bit random halves, AES request, token, and exact cancellation event.
+`display_ble_sec_aes.c` reduces native 0x536426 and its token child 0x5363fc,
+including 56-byte message allocation, token rollover past 0xff, queueing,
+and actual HCI encryption call. `display_ble_smp_calc_c1.c` reduces full
+native 0x537742 and 0x53786c, including both connection roles, RPA/address
+selection, 16-byte XOR inputs, AES request, and invalid-token event.
+Actual compiled-C/native oracles pass 2 S1, 4 AES, and 16 C1 cases,
+including cancellation and allocation failure. The coherent Main receipt
+`g2/build/c-firmware/20261011/peripherals-smp-c1-round/receipt.json`
+passes with 2419 defined, 822 mixed unresolved, zero duplicate strong,
+SHA-256 `15d6dbf99c1582e7c2e7a46225645569ced70a7aa2ff3b697e3e8cad88b9795f`.
+The two C1 bodies expose genuine DmConnLocalRpa/DmConnPeerRpa imports; their
+source/data producers and `SmpDbMaxAttemptReached` remain to reduce.
+
+The connected SMP database and DM RPA scope is now source defined:
+`display_ble_comm_registration_config.c` provides the authenticated 24-byte
+typed `smpCfg_t` initializer at stock 0x774d44; its compiled ARM `.rodata`
+equals all 24 stock bytes. `pSmpCfg` is the exact same native RAM pointer
+cell at 0x200004b8 as the selected registration slot, written by
+`bleCommHandlerInit`. `display_ble_smp_db_max_attempts.c` reduces native
+0x5426c0 with the selected diagnostic path, multiplier, timeout cap, record
+state, and service timer; actual C/native record and timer comparison passes
+eight trace-disabled cases. `display_ble_smp_db_service_timer.c` reduces
+0x541e34; actual C/native passes two timer-state cases.
+`display_ble_dm_rpa_access.c` reduces 0x4b6f28/0x4b707c with exact record
+offsets and the zero-connection WARN diagnostics; actual C/native passes
+six pointer/trace cases plus two enabled-WARN logging cases. Coherent Main
+receipt `g2/build/c-firmware/20261011/peripherals-smp-rpa-timer-round/receipt.json`
+passes with 2426 defined, 817 mixed unresolved, zero duplicate strong,
+SHA-256 `5b41feb3f62cd0be683758497b391cde50951f5a0ed3419498e965e2114826b5`.
+The formerly named C1/DB/RPA/pSmpCfg import group is closed in this
+candidate graph. Final data placement, startup order, and whole Main source
+and runtime equivalence remain unproved.
+
+The next DM/security and ATT connected bodies are source defined from
+authenticated native and pinned Cordio providers. DM local address/type,
+HCI local address, local CSRK, ECC-key getter, SMP encryption request, and
+connection-row lookup resolve their exact native state roles. Actual C/native
+oracles pass eight DM-local, two encryption-request, and six connection-row
+cases. The full ATT database hash builder 0x53527c, hashable attribute
+classifier 0x534ea8, and CMAC wrapper 0x53525c are compiled. Controlled
+native/C cases pass two allocator/assembled-message cases, twenty UUID and
+characteristic-skip cases, and three CMAC ABI cases. The UUID128 setting is
+native bit 0, confirmed by the comparison; an initial bit-1 interpretation
+was corrected before the coherent build. `HciLeStartEncryptionCmd` 0x52b5a2
+passes two command-byte/alloc-failure comparisons.
+
+The ATT CSF hash status getter/setter 0x52c914/0x52c6c0 use the existing
+live CSF state and perform complete/pending transitions. Actual C/native
+cases pass four state transitions and two enabled INFO diagnostic paths.
+The connected pending database-hash response 0x534dd8 handles all three
+connection rows, allocation error, absent attribute, data response, free,
+and pending clear; three actual C/native cases compare response bytes, row
+state, and lower-call effects. This is candidate source evidence; final
+physical RAM ownership/placement and runtime equality are separate gates.
+
+The pending ATT response exposed its own three genuine children. The pinned
+`attMsgAlloc` 0x4b50ae, `attsErrRsp` 0x534c9a, and `attsFindByHandle`
+0x56c5d4 are now C-defined, preserving allocation, error packet fields,
+L2CAP dispatch, group traversal and the successful group-out pointer.
+Five actual compiled-C/native cases compare alloc, error success/failure,
+and group hit/miss effects. The separately reconstructed HCI LE Start
+Encryption packet uses opcode 0x2019 and a 28-byte payload; two actual
+C/native cases compare the full packet and allocation failure.
+
+The connected ATT hash code graph now closes through the native
+`WsfMsgDataAlloc` 0x4bf990 and `attL2cDataReq` 0x4b50ba. Four actual C/native
+cases cover allocation, legacy ATT dispatch, extended bearer callback, and
+free-on-absent-callback behavior. The pinned 16-byte `attsCsfCb_t` is
+source-owned as `audio_ble_connection_state_table`, with client rows at +0,
+callback at +8 and hash status at +12. The coherent selected+experimental
+Main receipt `g2/build/c-firmware/20261011/peripherals-atts-csf-storage-round/receipt.json`
+passes with 2447 defined, 808 mixed unresolved and zero duplicate strong,
+SHA-256 `479820192889f07e5cd24303fad1da9cc0d0b415f355295a94d2e7621b0c956d`.
+
+`hciCmdAlloc` 0x52ae38 has a full source body and actual C/native PASS2.
+The canonical `hciCmdSend` entry branches to the already source-defined
+0x52ae5e body with previously qualified ARM C/native PASS5; the entry
+preserves all incoming registers needed by that body. The coherent Main
+receipt `g2/build/c-firmware/20261011/peripherals-hci-cmd-public-round/receipt.json`
+passes with 2449 defined, 806 mixed unresolved and zero duplicate strong,
+SHA-256 `673eb0df2af0d5b177f96eb36cfb918b6692dc585391fb44ef062fd515f401a3`.
+The remaining import count mixes code, live RAM, product tables, and compiler
+ABI contracts; it is not a missing-body count or final image completion.
+
+The advertising entry group now has native-backed full source bodies for
+`AppAdvStart` 0x4b2d22, `AppAdvStop` 0x4b2d62, `AppSetAdvType` 0x4b2d7c,
+`appAdvStop` 0x4b43fc, `appSetAdvType` 0x4b4510 and
+`appSlaveResetAdvDataOffset` 0x4b334c. The already selected
+`audio_ble_app_adv_state` is the exact native 0x4b46a8 child used by
+`appAdvStop`. Four actual compiled-C/native test scripts pass 6, 3, 6 and
+16 bounded cases respectively. They compare handles, pointer-referenced
+configuration, calls and state mutations including the stopped, active,
+suppressed-type, and fragmented-data branches. Pinned Cordio
+`app_slave_leg.c` and `app_slave.c` provide independent source attribution.
+The coherent `peripherals-app-adv-reset-round` target receipt passes with
+2455 defined, 807 mixed unresolved, zero duplicate strong, SHA-256
+`e2651517e31f11c60aede23c2ecef50d9a06c126d8261a95737ea1e8b7a76302`.
+Connected children `appSlaveAdvMode`, `appSlaveAdvStart`, `appAdvStart`,
+`DmAdvStop`, and the application state/configuration RAM remain genuine
+interfaces. Final source, placement, boot initialization and device proof
+remain open.
+
+The connected scan fragment emitter `appSetAdvScanDataFrag` 0x4b3416 and
+packet transport `DmAdvSetData` 0x4b319e are now complete pinned Cordio C
+bodies. Actual compiled-C/native comparison passes ten fragment cases across
+both locations and 0/5/251/252/500-byte lengths, and four data packet cases
+including allocation failure and 251-byte payload. `appSlaveConnectableAdv`
+0x4b32e2 and `appNumConns` 0x4bacf0 are source-defined using the existing
+live app-state and connection-row contracts; seven native/C cases cover
+advertising types/handles and role counts. The next coherent selected build
+is `peripherals-app-adv-capacity-round`; its terminal receipt must be checked
+before using its counts. The connected remaining bodies include
+`appSlaveAdvMode` and `appSlaveAdvStart` plus their logging/callback children.
+
+The subsequent advertising chain includes full native-backed C for
+`appSlaveAdvMode`, `appSlaveLegAdvStop/Restart/Start/TypeChanged/NextLegAdvState`,
+`_bleAdvInit`, `AppAdvSetData/appAdvSetData`, `DmDevSetRandAddr`,
+`DmAdvSetAddrType`, `HciLeSetRandAddrCmd`, and `appSlaveConnOpen`. Six
+application pointer cells are source-owned as four-byte BSS objects with
+existing native initialization writes; their final absolute placement remains
+open. The coherent `peripherals-adv-pointer-cells-round` Main relocatable link
+passes at 2488 defined, 799 mixed unresolved, zero duplicate strong, SHA-256
+`97a5efeb6bce8be09fd952272f5812321fd35982730ea510846eafb34d3e86ab`.
+
+`APP_StartServiceDiscovery` 0x5354c2 now has a C body at
+`display_ble_service_discovery_enqueue.c` and a named ARM entry shim that
+preserves the incoming R4 consumed by stock diagnostic calls. Actual compiled
+C/native comparison in `verify_ble_service_discovery_enqueue_native.py` passes
+16 bounded cases across record presence, allocation success, and log flags
+0/1/2/4. The first aggregate attempt had one callback function-pointer type
+compile failure and no Audio archive; the corrected round passed a coherent
+Main relocatable link at 2490 defined, 798 mixed unresolved, zero duplicates,
+SHA-256 `1bbe7521338d5dfea883e920ead0f726b614bf9de5bc09b8a989bbbd6c134df1`.
+The final aggregate snapshot after the diagnostic R4 correction is pending.
+`audio_ble_discovery_handler_id_20074f8a` remains a genuine live data
+contract; no initializer is attributed. Full Main source, RAM placement,
+boot layout, and physical behavior remain unproven.
+
+The corrected diagnostic R4 round passed Main at 2490 defined, 798 mixed
+unresolved, zero duplicate strong, SHA-256
+`6caa4e51e3a7d398831959d4e4df379d8ee01a759b0dbd8d40dade2e189aa72a`.
+Two connected delayed callbacks are now source-defined: connection timeout
+diagnostics 0x4b81b8 (`verify_ble_connect_timeout_check_native.py` PASS5), and
+ring follow-up 0x4722cc (`verify_ble_comm_notify_followup_native.py` PASS1).
+The coherent `peripherals-comm-callbacks-round` passed at 2492 defined, 796
+mixed unresolved, zero duplicates, SHA-256
+`06286c7b23882cc9c3cd648f540e42ae26010e5d0b31a52a99ff91bf97a02197`.
+
+The native getter at 0x4b8122 returns the direct product struct address
+0x200727f0. Older candidates had typed `audio_ble_controller` as a pointer
+cell. Both uses were corrected to a direct byte-array contract; refreshed
+actual compiled-C/native oracles pass four master callback cases and five
+connection-request cases. Product storage placement and initialization are
+still external. Full `PB_TxEncodeNotifySecAuth` 0x4bb92c is now source-defined
+in `display_ble_comm_recovery_delayed.c`: all diagnostics, controller handler
+check, allocation failure, message fields, send and return branches pass 16
+actual C/native comparisons. Coherent `peripherals-comm-recovery-round` Main
+passes at 2493 defined, 795 mixed unresolved, zero duplicates, SHA-256
+`a6f089472b1cf4e607a681b78dc5d577cd5c7a959e68cccf9bd07bbc5819680c`.
+
+Two original caller names for native 0x4bc418 now branch to the already
+source-defined `audio_ble_master_success_delayed` body with the same ABI.
+This is an exact shared entry and does not stand in for the separate larger
+`PB_TxEncodeNotifyRingConnectInfoImpl` 0x4bc1b4, which remains genuine work.
+The coherent `peripherals-ring-notify-alias-round` Main relocatable link passes
+at 2495 defined, 793 mixed unresolved, zero duplicate strong, SHA-256
+`ad86dd13cf10a63c203be018699cad024ac6dc80eb10e07c7eaf781aff5abd93`.
+The mixed unresolved count is neither a body count nor a full-image coverage
+measure. Remaining named work includes 0x4bc1b4, many BLE/HCI product table
+and live state contracts, source-backed audio/driver code, linker/startup
+placement, and physical device qualification.
+
+The genuine 0x4bc1b4 parent has since been source-defined in
+`display_ble_ring_connect_notify_impl.c`. It implements the native 0x1a8
+allocation, 20-byte nanopb ostream copy, packet fields and auth state,
+encoding and direct BLE send, all log/failure/free returns. Ten actual
+compiled-C/native cases pass, including log-enabled allocation, encode and
+send branches. Coherent `peripherals-ring-connect-notify-impl-round` Main
+passes at 2496 defined, 794 mixed unresolved, zero duplicates, SHA-256
+`37ff37e45ed62de07df3e3d520091929845ab09326c00f114e0ff42e4a31c795`.
+Its protobuf descriptor at native ROM 0x7766dc remains a typed genuine data
+contract. The distinct `Thread_MsgPbNotifyByBleDirect` 0x475aa6 child is now
+source-defined with OTA gate and exact six-register/stack Tx forwarding;
+`verify_ble_notify_direct_native.py` passes eight actual C/native cases.
+That child postdates the parent receipt; the next coherent target build is
+pending. Source completeness, descriptor ownership, final layout, and device
+behavior remain open.
+
+The subsequent coherent `peripherals-ring-connect-direct-round` Main build
+passes at 2497 defined, 793 mixed unresolved, zero duplicate strong, SHA-256
+`2aa3ce9e616ac3c87309074a1bf60b9201bdde49c595e9c94b46e67c49fca8ed`.
+The recent complete routine group is the advertising start/stop/data path,
+service discovery enqueue, three connected delayed callbacks, ring
+notification parent, and direct BLE send child. Whole Main remains incomplete:
+793 is a mixed code/data/runtime/ROM interface count, and final source layout
+and physical validation have not been shown. Immediate concrete work includes
+the authenticated ring protobuf descriptor extent/ownership, the separate
+SecAuth notification implementation, other connected BLE/HCI providers and
+live product table initializers; none are implied complete by this link.
+
+The ring protobuf data graph rooted at native ROM 0x7766dc has now been
+decoded using nanopb v0.4 `pb_msgdesc_t` and generated field-info semantics.
+`generate_ring_pb_descriptors.py` asserts the official OTA SHA-256 before
+emitting semantic `FIELD1`/`FIELD2` C initializers and typed child references.
+The finite graph has 20 unique descriptors, 71 fields, and 22 submessage
+relocations. `verify_ring_pb_descriptor_bytes.py` compiles the target source
+and verifies all 20 field-info arrays (488 bytes) and all descriptor count
+fields against authenticated stock bytes. The coherent
+`peripherals-ring-pb-descriptor-round` Main relocatable link passes at 2498
+defined, 792 mixed unresolved, zero duplicates, SHA-256
+`955e81f0c1556e01103a9176468a1cd76263a1606fde8949373c60f18f13d08b`.
+The actual `audio_pb_encode` parent and its iterator/field children remain
+genuine code imports; descriptor source bytes and pointer graph do not prove
+runtime encoding or final ROM placement. Whole Main remains incomplete.
+
+The source-defined nanopb encoder entry at native 0x490c32 now traverses the
+40-byte field iterator and dispatches extension/ordinary fields with authentic
+error exits. Actual compiled C/native child-cut comparison passes eight cases.
+The coherent `peripherals-pb-encode-parent-round` Main link has 2499 defined,
+795 mixed unresolved, zero duplicate strong symbols, SHA-256
+`efad021f77fa57909ae9866da7800390f1897709af4d103fee6c7a56335dbe9c`.
+The true iterator begin/reset/next bodies at 0x4d94ba/0x4d9384/0x4d93d8
+passed four C/native cases and coherent `peripherals-pb-iter-begin-next-round`
+has 2501 defined, 795 mixed unresolved, zero duplicates, SHA-256
+`4d5bb6bf31fd6f1a11e341d3b3c2e8a0bf6a8fa0d5fbd2f269b53afad97144cd`.
+
+The complete iterator field decoder 0x4d916e and advance 0x4d930a are now
+source-defined. A focused actual compiled C/native oracle passed 132 cases
+across four authenticated descriptors, nullable messages, and all field
+positions, including native unchanged-data behavior on a null message.
+Coherent `peripherals-pb-iter-decode-advance-round` Main link has 2503 defined,
+793 mixed unresolved, zero duplicates, SHA-256
+`c49232c8e32b61f55b5028ebe1af63e01c3ff216be4410aa3b8f5ac62c07490c`.
+The extension-list encoder 0x490bf8 passes six compiled C/native callback
+cases and coherent `peripherals-pb-encode-extension-round` has 2504 defined,
+793 mixed unresolved, zero duplicates, SHA-256
+`3c0bb25677f9506ff8942317d53f23be80120265b44dc5e7c9a085c39f04bc94`.
+The field dispatcher 0x490b1e passes ten compiled C/native branch cases;
+its five genuine child encoders/predicates remain explicit imports. The
+diagnostic is source-owned from native literal 0x779fc4 via 0x4910c8 pointer
+cell. Its coherent target link has 2505 defined, 797 mixed unresolved, zero
+duplicates, SHA-256
+`3218930d6d20a741007ac5175aed5677262cfe0cd904a94ca6b552bc132c48ed`.
+The callback dispatcher 0x490aea and first-char predicate 0x490678 pass six
+compiled C/native cases, including the authenticated callback-error literal;
+the coherent link is 2507/795/0, SHA-256
+`229d8b1c1daafa8ba860236a32c4e6f5ffdab235f4e20f26592536ccee231cc7`.
+The default predicate 0x49087a and callback marker 0x4d94e6 pass twelve
+bounded primitive cases; coherent link is 2509/794/0, SHA-256
+`57ebbe00b535af9b15451911ba19373255f9fc4739f25b07c4ae354528f95f85`.
+
+The full single-field dispatch 0x490a46 passes 48 compiled C/native cases
+across all 16 field type values, null data, and tag failure; coherent link
+is 2510/801/0, SHA-256
+`3efaeb133dd4ef935a6940aeb9ef451d8586df196f5d3214253d7864c44f1d82`.
+The native wire-key constructors 0x490d66/0x490d4a pass 32 cases and link at
+2512/801/0, SHA-256
+`f8446f01e8b073cf76c039ecdee71228fdd184c1d67faf0fb7f00070e07231b0`.
+The varint dispatch/emitter 0x490ce0/0x490c84 and stream writer 0x490616
+pass 24 actual compiled C/native byte/effect cases, including capacity and
+callback failures; coherent link is 2515/800/0, SHA-256
+`13c603b4bbb4fb83a651e37e9a8269db2fb53d535305bd3d10be58b336aff698`.
+The integer scalar 0x490eae and zigzag 0x490d08 pass thirty child-cut native/C
+cases; coherent link is 2517/799/0, SHA-256
+`c90baa6046718c80047c74863f29e958958b3ad9b3097b29ae7719b0e768f440`.
+The fixed-width writers, length-delimited writer, bytes, and string bodies
+pass eleven C/native cases; coherent link is 2523/796/0, SHA-256
+`fb2aba8e3015a6cfae1729e99e0f578a82f8fac250d2295959f0d0341dfb3bff`.
+The bool, fixed-length bytes, and submessage dispatch bodies pass seven
+native/C cases; coherent link is 2526/794/0, SHA-256
+`fb394f56a69b9bef723b699a50d3757003f6cad1baa1262dfd2288b86207353a`.
+The two-pass nested-message writer 0x490ddc passes six C/native branch cases
+with counted size, length prefix, capacity, second pass, and error propagation;
+coherent link is 2527/793/0, SHA-256
+`4bcd018ce18a13a4e81b9935cd65c50ac2a15f00319b738221d147b045cb06dc`.
+The full repeated-field encoder 0x490690 passes ten packed/nonpacked and
+pointer-array child-cut cases. The default extension 0x490bc8 and iterator
+setup 0x4d93a4 pass four cases; this found-cell verification corrected its
+source offset to extension+12. Coherent Main link is 2530 defined, 791 mixed
+unresolved, zero duplicates, SHA-256
+`16060fa9bab7550b2d26f91c6116b93e3f9b28cb5e111ddf30e663b0194f0d77`.
+There are zero `audio_pb_*` unresolved interfaces in that link. A connected
+standalone ARM ELF containing the source-owned descriptor graph and full
+reconstructed encoder passes nineteen actual C/native message comparisons against
+stock 0x490c32/0x7766dc. The cases cover optional scalar values and oneof
+submessage tags 3 through 14, 128, and 129, comparing output bytes, byte count, return,
+and diagnostics. The `audio_uart_buffer_zero` oracle shim performs actual
+zeroing; this is not arbitrary nanopb corpus equivalence. Mixed imports count
+is not remaining body count.
+Main source completeness, final layout, live product cells, and hardware
+behavior remain open.
+
+The native 496-byte `PB_TxEncodeNotifySecAuthImpl` 0x4bb73a has a full
+source-defined allocation, packet, encoding, direct BLE send, free, and
+diagnostic body. It reuses the authenticated source-owned ring descriptor and
+nanopb encoder. The product auth-enable byte at 0x20074ffc remains a typed
+live RAM contract, not an invented initializer. Actual compiled C/native
+comparison passes nine bounded allocation, encode, send, and logging paths;
+the comparison caught and corrected an initially reversed send-result branch.
+Coherent Main link is 2531 defined, 790 mixed unresolved, zero duplicates,
+SHA-256 `f76ed51905dafa71082194d053eb21e5b3e4898a5bb9a0a4424d54ccb9b100a7`.
+The next connected genuine frontier includes LE IQ report parsers, protobuf
+decoding for UART dashboard, and remaining live product RAM ownership.
+
+The native Cordio HCI connectionless IQ report parser 0x56a908 (448 bytes)
+is source-defined with 192-byte WSF allocation, exact event field offsets,
+two sample copy effects, callback/free, and trace/log selection. Native
+instructions verify that its second copy reloads the first destination
+pointer, rather than the separately stored second pointer. Authenticated
+`INFO`/`WARN`/`ERR`/`APP`/`HCI` literals are now source-owned const arrays.
+Actual compiled C/native comparison passes five allocation, logging, trace,
+and sample-count cases. Coherent Main link is 2537 defined, 784 mixed
+unresolved, zero duplicates, SHA-256
+`0d24ce5bf2e03b8f029f7045292ede37ae415115e944eb950dcf1ccbc72a053a`.
+The connected HCI connection IQ report parser 0x56a63e (708 bytes) is also
+source-defined with its two diagnostic stages and distinct 13-byte header.
+Five actual C/native fixtures pass. Both IQ parsers link coherently with 2538
+defined, 783 mixed unresolved, zero duplicates, SHA-256
+`f7a228776eb20f064e3a0b27c1f496d368acd3e6e0ae4a0231b93f23c6c7e6c7`.
+The HCI callback table at 0x20073870 remains live product RAM and final
+hardware behavior is unverified.
+
+The UART nanopb decoder entry 0x490120, descriptor iterator tag search
+0x4d93f8/extension search 0x4d946e, and input byte/varint/tag parser
+0x48f454/0x48f4b8/0x48f66c are source-defined. Actual compiled C versus
+stock passes 3 entry, 48 iterator search, and 14 parser cases, including
+overflow, truncated varints, stream errors, and preserved diagnostics.
+The coherent Main candidate link at `peripherals-pb-decode-tag-round` has
+2544 defined, 783 mixed unresolved, zero duplicate providers, SHA-256
+`d4e00ea7d398b915447b27153ae0cf4a4a3f04150c5bb513ad235a55fdfe8bc9`.
+The genuine decoder parent 0x48fe98 and field/skip/default children remain
+unreduced; dashboard schema/stream initialization are separate product data
+and source contracts. No full decoder or Main image claim follows from these
+bounded comparisons.
+The unknown-wire dispatcher 0x48f6a0 and varint-skip loop 0x48f628 are now
+source-defined; twelve stock/C child-cut cases pass for four valid wire types,
+invalid wire type, and lower success/failure. Their actual input stream reader
+0x48f3be and length skip 0x48f64c remain typed authentic code imports. The
+coherent Main candidate link at `peripherals-pb-skip-wire-round` has 2546
+defined, 785 mixed unresolved, zero duplicate providers, SHA-256
+`dc82db0a13a2742de98873757d2df9ead2ecc23cf354262641a0661a589b2038`.
+The connected input buffer reader 0x48f3a4, callback-aware stream read
+0x48f3be, and length-delimited skip 0x48f64c are source-defined. Eight
+actual compiled C/native cases pass direct and generic callbacks, null
+destinations, lengths, stream state, and failure behavior. The coherent
+Main link at `peripherals-pb-decode-stream-round` has 2549 defined,
+783 mixed unresolved, zero duplicates, SHA-256
+`15564de1c10e377ff8f87e1abb5e84da89e57760e7cf566ef0aaca9b7ff1a925`.
+The sole directly unresolved `audio_pb_*` code provider is the full decoder
+parent 0x48fe98; implementing it will expose real field/default children.
+The native storage-mode field dispatcher 0x48fbe4 is now source-defined and
+passes sixteen actual compiled C/native child-cut cases, including inherited
+diagnostics and invalid storage mode. Its three genuine static, callback,
+and pointer field bodies are now explicit typed code imports. The coherent
+Main link at `peripherals-pb-decode-dispatch-round` has 2550 defined, 786
+mixed unresolved, zero duplicate providers, SHA-256
+`e2598ab14b312d298815b21eb2906486e54c0cc73bdf4874e3ff77eb544a5d28`.
+The native pointer-field branch 0x48fb1c is a complete no-malloc failure body
+in this build, not a generic success stub. Source-owned diagnostic text
+matches stock and preserved prior errors. Two actual compiled C/native cases
+pass. Coherent Main link at `peripherals-pb-decode-pointer-round`: 2551
+defined, 785 mixed unresolved, zero duplicates, SHA-256
+`29a0fae1c176ccb1de956d1ee6550fbd044fec77e6079ceb3ae7e71c43a9effe`.
+The UART dashboard input-stream constructor 0x48f49c now uses the actual
+source-owned buffer callback and initializes the four native words. Four
+actual compiled C/native cases pass callback identity, buffer pointer,
+length, and null diagnostics. Coherent Main link at
+`peripherals-pb-decode-init-round`: 2552 defined, 784 mixed unresolved, zero
+duplicates, SHA-256
+`bd0b28c685c804cac456437fa671fdb20551ab641be358fd4fd8b405f02aaabe`.
+The full source candidate for static-storage field mode 0x48f968 and scalar
+wire dispatcher 0x48f7f4 now builds. Actual compiled C/native child-cut
+comparisons pass six optional/repeated/oneof/packed/overflow cases and sixty
+scalar type/wire combinations. The bounded cases do not yet cover the nested
+default-setting branch or a connected arbitrary decoder message. Coherent
+Main link at `peripherals-pb-decode-static-round`: 2554 defined, 794 mixed
+unresolved, zero duplicates, SHA-256
+`2d140667998afb65e05702ff888cd4a4c3c0383df3076b76fa97158a6264f4da`.
+Real scalar, submessage, substream, and defaults lower bodies are now typed
+imports to reduce next.
+The bounded substream begin/end pair 0x48f77e/0x48f7ca is source-defined,
+including length prefix, parent reservation, child drain, state propagation,
+and inherited diagnostics. Five actual compiled C/native connected buffer
+cases pass. Coherent Main link at `peripherals-pb-decode-substream-round`:
+2556 defined, 792 mixed unresolved, zero duplicates, SHA-256
+`dd8fd835ed886f78457ca18f2a0ba1af9f8f67c338eb8bc67697c7bc9f943034`.
+The bool, fixed32, fixed64, 64-bit varint, zigzag, and sized integer decoders
+are now source-defined. Actual compiled C/native comparisons pass eight
+bool/fixed stream cases and 135 type/width/value/truncation cases. Coherent
+Main link at `peripherals-pb-decode-scalar-round`: 2562 defined, 788 mixed
+unresolved, zero duplicates, SHA-256
+`89631eba502497fb8881a9c2732dedb870a1e39ef1efc118c961470a360fbf0b`.
+Remaining direct nanopb code is callback field, bytes, string, submessage,
+extension, defaults, and decoder parent; mixed imports include unrelated
+runtime/product data.
+The bytes, string, and fixed-length bytes readers are now source-defined.
+Ten actual compiled C/native buffer cases pass lengths, contents,
+terminators, bounded overflow, zero length, and diagnostic effects. Coherent
+Main link at `peripherals-pb-decode-text-round`: 2565 defined, 785 mixed
+unresolved, zero duplicate providers, SHA-256
+`7be9822c08e99ee1873f9d9a1b8ca738ee697d6f256a26d7821b14c04715709f`.
+Direct decoder code remains callback field, submessage, defaults, and parent.
+The full native submessage wrapper 0x49048c now has a source-defined
+substream, descriptor failure, optional callback, recursive parent, and
+substream finalization path. Eight compiled C/native child-cut cases pass,
+including callback consumption/failure and nested flags. Coherent Main link
+at `peripherals-pb-decode-submsg-round`: 2566 defined, 784 mixed unresolved,
+zero duplicates, SHA-256
+`9c38ef90725b3bf9defc6823a4dfaca9ca410fd73f55381ea73ebd71cc4f0ca1`.
+The remaining direct code set is callback field, defaults, and parent.
+The native callback-storage field body 0x48fb30 and callback scalar payload
+copier 0x48f6ea are source-defined. Actual compiled C/native child-cut checks
+pass eight callback dispatch/diagnostic cases, and eight connected payload
+byte/length/error cases pass. Coherent Main link at
+`peripherals-pb-decode-callback-round`: 2568 defined, 783 mixed unresolved,
+zero duplicates, SHA-256
+`c2d047247149d7759859ee7bfef0da3fc6a4fce562ebc8c0128f27a159ac4fbe`.
+Direct decoder code remaining is default initialization 0x48fdf2 and parent
+0x48fe98. Product dashboard schema and Main source/layout gates remain open.
+Both default-field 0x48fce2 and default-iterator 0x48fdf2 bodies are now
+source-defined. Nine native/C field-type reset cases pass, as do three
+connected ring-descriptor default sweeps using the actual compiled iterator
+and default bodies. This checks initial zero/default paths on the sampled
+descriptors; encoded default streams and arbitrary extension chains remain
+unqualified. Coherent Main link at `peripherals-pb-decode-defaults-round`:
+2570 defined, 782 mixed unresolved, zero duplicates, SHA-256
+`62eee755cf11be021907a6deabdb41ff6bf89e4a837be0ec88b4d31da484e40c`.
+The sole direct `audio_pb_*` import is decoder parent 0x48fe98.
+The full native message decoder parent 0x48fe98 and extension handlers
+0x48fc88/0x48fc26 are now source-defined. Ten actual compiled C/native parent
+branch cases pass; three extension-list/native cases pass. A standalone
+connected ARM ELF with all reconstructed nanopb decoder units and the
+source-defined ring descriptor passes 26 C/native message comparisons,
+including scalar, oneof submessages, unknown and malformed tags. This remains
+a bounded message corpus, not arbitrary decoder equivalence.
+
+The UART dashboard schema is now source-owned rather than an unresolved ROM
+pointer: literal 0x502664 loaded at native callsite 0x501ff8 points to
+descriptor root 0x776574. Its six descriptor records, 24 semantic fields,
+and five submessage relocations are generated as typed C initializers from
+the authenticated OTA. All six records and 164 field bytes match native
+source, and ten connected stock/C dashboard decode cases pass. Coherent
+Main link at `peripherals-pb-dashboard-source-round`: 2575 defined, 780
+mixed unresolved, zero duplicates, SHA-256
+`9c0915a1406a2e88219ce95965431d2853057864e28a14c92d9421a036a3af0b`.
+There are zero unresolved `audio_pb_*` and dashboard schema symbols in this
+link. This closes the selected nanopb decode source graph for the ring and
+dashboard bounded scopes. Main as a whole still has hundreds of mixed
+runtime/data/code imports, other unreduced functions, and final layout and
+hardware gates. The generated schema's final ROM placement remains open.
+
+## Connected dashboard layout and BLE/settings source round
+
+The product dashboard layout translator at native 0x502174 is source-defined
+as `audio_dashboard_apply_layout_pb`. It reads the selected decoded 188-byte
+dashboard object and ready byte, constructs the native 128-byte layout,
+rejects unsupported position/widget/watchface values, and invokes the real
+layout setter. Native 0x558376 setter, 0x558148 default restoration,
+0x558030 widget predicate, 0x558040 watchface slot predicate, and 0x558050
+watchface validator have full source bodies. The 128-byte default layout at
+0x6d52d8 is a semantic C initializer (15 meaningful bytes, rest zero), and
+all directly referenced diagnostic strings are byte-authenticated source
+data. `audio_dashboard_layout_current[128]` remains a typed live RAM placement
+contract at 0x200e7934. The native 0x44b5a0 bounded copy is source-defined;
+its alignment fast path is replaced by equivalent byte operations. Actual
+compiled C/native checks pass 12 parent child-cut cases, 11 connected parent
+cases, eight direct setter cases, and 96 bounded-copy cases. They cover
+defined decoded inputs, RAM layout effects, failure fallback, and selected
+logging-disabled branches; arbitrary runtime layout integration and final
+placement are unqualified.
+
+Native queue drain functions `Thread_BleMsgrxQueueClear` 0x48f018 and
+`Thread_BleMsgtxQueueClear` 0x475524 now have C bodies. They bind to the
+already selected `audio_cmsis_queue_get_count` 0x449bc8,
+`audio_uart_queue_receive` 0x449b3c, and `audio_file_heap_free` 0x474d16
+providers, with typed live thread state cells 0x20003ffc/0x20004020.
+Twelve actual compiled C/native effect cases pass across null/empty/multiple
+queues, failure, and null-message exits. Native `dmConnGetAdvState` 0x46ef60,
+used by the communications handler, is source-defined as the single-byte
+read of live RAM 0x20074f8d; all 256 byte inputs match stock. The large
+`SVC_Settings_DumpSettingConfig` 0x46b458 diagnostic body is source-defined
+from the live settings record 0x20072da8 and byte-authenticated formats.
+Ten actual compiled C/native cases compare all extended/compact call
+sequences, line numbers, formats, and scalar values under five log-flag masks.
+Its native inherited register only appears as an unused extra argument to
+the no-placeholder opening banner; no source value is invented.
+
+The coherent Main selected-plus-experimental archive at
+`g2/build/c-firmware/20261011/peripherals-dashboard-ble-settings-round`
+compiles and relocatable-links with 2620 defined symbols, 779 mixed
+unresolved symbols, zero duplicate strong providers, and candidate SHA-256
+`2e08358562fa3287007831b0e74b320657d74bd73694325afacb60824d8ef788`.
+All seven named new entry providers above are defined and neither CMSIS queue
+child is an unresolved import. This is a source candidate, not a flashable
+whole image: the mixed unresolved set still includes live RAM/product data,
+resident/runtime lower interfaces, and other true code providers. The
+dashboard current layout RAM, decoded protobuf RAM and ready byte, settings
+record, two BLE thread states, and final section placement remain external
+ownership or hardware gates.
+
+The thread-pool worker 0x49110c now has a full C loop. The selected pool
+constructor requests 20-byte queue items, proving that the native queue-get
+call fills the callback pointer and four arguments in one stack record.
+Sixteen actual compiled C/native first-dispatch cases match preliminary
+failed/null receives, callback register arguments, and diagnostic calls.
+The rollback mutex delete call is source-defined from the actual native
+osMutexDelete entry 0x44986e (an older caller comment named an interior
+address 0x449852 and is corrected). Eight stock/C cases match its IRQ,
+tag-bit, null, and selected queue-delete effects. Coherent Main at
+`peripherals-pool-rollback-round` has 2622 defined, 777 mixed unresolved,
+zero duplicate providers, SHA-256
+`2b7c089e580be873c0367654dd89956c8d364add75998c0cee1a5e33f6c22701`.
+
+The thread-pool queue and thread attribute records at native 0x77ccac and
+0x75bd00 are now semantic typed C data. The six queue fields bind the exact
+name `threadpool_Queue`, 0x50-byte control RAM, and 0xbb8-byte message RAM;
+the nine thread fields include the native priority 0x2b and 0x1000 stack
+size. The constructor still supplies per-thread name/control/stack pointer
+fields at runtime. A target object check verifies record sizes 24/36 bytes,
+all constant fields against native, and three actual pointer relocations.
+The two RAM backing extents remain typed linker placement contracts, and
+neither this source data nor the pool runtime is physical-hardware proof.
+
+Two additional native byte getters are source-defined: settings terminal mode
+0x46c630 reads the shared settings record at offset 0x1d, while device role
+0x45a568 reads live cell 0x20075024 already used by the selected service
+mode getter. Each matches all 256 possible byte values in actual compiled
+C/native comparisons. The coherent Main archive at
+`peripherals-settings-getters-round` has 2626 defined symbols, 775 mixed
+unresolved symbols, zero duplicate strong providers, and candidate SHA-256
+`29d27586e144318a3ba715d68dbe0695e8b5c5432b6e281589dc22144f7f09f5`.
+The code bodies are completed at this bounded source/oracle level; live RAM
+initialization, the final image layout, and hardware effects remain open.
+
+At this receipt, scanning the Audio C corpus for unresolved symbols declared
+as direct external functions yields 119 distinct names (47 `audio_uart_*`,
+50 `audio_ble_*`, 22 others). This is a scoped callable-interface census,
+not 119 independently recoverable bodies: some names are runtime/resident
+contracts, and callbacks in data tables or Main sources are outside this
+declaration scan. The 775 total mixed imports must not be interpreted as a
+body count. Prominent remaining direct callable groups include BLE ANCC,
+Cordio L2CAP/HCI handlers, display layer/transport effects, time/delay
+contracts, OTA receive timeout, and allocator/logger lowers. Product RAM
+placement and initialized data ownership remain separate work.
+
+The Cordio L2CAP callback cluster now has source-defined flow, default
+control/data/CID, ACL dispatch, and signaling receive bodies. The native
+flow callback 0x530aa4 uses an ARM entry branch to preserve inherited R3;
+72 actual compiled-C/stock cases match callback mutations and returns.
+Default data 0x530538 and CID 0x530640 retain repeated live log-enable
+reads and match 42 native/C diagnostic cases. The default control callback
+0x53076c is the authenticated empty `bx lr` body. The ACL callback
+0x5308e6 routes CID 4/5/6 and arbitrary CIDs through the initialized
+table, logs malformed lengths, and always calls the selected WsfMsgFree;
+24 native/C cases match routes, diagnostics and release. Signaling receive
+0x53076e dispatches master/slave role callbacks and authentic invalid-role
+diagnostics; 28 native/C cases match. The live log-enable cell at native
+0x2007502f remains an external RAM contract. Target Cortex-M55 C
+compilation passes with `-Werror` for these sources. These bounded
+checks do not establish callback return values that callers ignore,
+device execution, or final image placement. Remaining connected L2CAP
+children include master/slave signaling handlers and WsfTrace formatting;
+other Main/Audio callable and product-data frontiers remain open.
+The final coherent Main candidate at `peripherals-l2c-signaling-round` compiles
+and relocatably links with 2635 defined symbols, 769 mixed unresolved imports,
+zero duplicate strong providers, and candidate SHA-256
+`8e9680457aec5ac69bd6dab73ef796f65c3a02fba66100d03371b838ad8d228b`.
+This is a source-link checkpoint, not a finished firmware image.
+
+The native master/slave signaling receive callbacks 0x536fbc/0x536c5c
+are now source-defined with complete parsed/invalid branches. The master
+path checks the 12-byte command and native connection interval, latency,
+and timeout bounds before passing the six-field stack parameter record or
+sending an update response. The slave path reads the connection-indexed
+live L2CAP state at 0x20073bd8, clears the outstanding identifier,
+stops its timer at the state base, then delivers the update confirmation
+or command rejection; the invalid path logs and conditionally rejects.
+Native disassembly corrected the decompiler's mistaken timer argument:
+WsfTimerStop receives the state base, not a pointer inside the packet.
+Twenty-five actual compiled-C/native cases match branch effects, state
+bytes, diagnostics, and selected child arguments. The source-owned code
+compiles for Cortex-M55 with `-Werror`.
+
+The connected signaling response and command-reject children 0x537230 and
+0x530ae0, plus 0x530b28 message allocation, are source-defined. They
+write authenticated six-byte command headers into a 14-byte allocation
+and pass the allocation as L2cDataReq's fourth argument (native R3).
+Twelve stock/C allocation-success/failure and packet-byte cases match.
+The existing selected WsfMsgDataAlloc and L2cDataReq providers are reused.
+The next DM indication/confirmation/rejection children retain incoming
+register/stack bytes in their event records; native source shows ambient
+fields whose ownership must be resolved before a complete C binding.
+The coherent Main candidate at `peripherals-l2c-responses-round` passes
+compilation and relocatable link with 2640 defined symbols, 770 mixed
+unresolved imports, zero duplicate strong providers, and SHA-256
+`0e7e12c6dfe5f06d340c7d8b2baab59397e1005653bdfce6cc93f3fd131e0a5c`.
+The three named DM children above and the live L2CAP log-enable RAM cell
+remain directly connected imports; the 770 mixed imports are not a count of
+missing C bodies.
+
+Three DM event bridge children 0x55bc96/0x56e580/0x56e5a4 are now C
+bodies with named ARM entry shims. Their original frames copy incoming
+R3, R2/R3, or R5 bytes before replacing the event type/result fields;
+the source preserves those ambient bytes and passes the full event to
+the real selected callback or the still-unresolved dmConnUpdExecute.
+Eighteen actual compiled-C/native cases match event bytes and callback
+effects for found/missing connections and varied inherited registers.
+This closes these three bridge bodies at the bounded ABI level while
+leaving the transitive DM update executor and live callback table as
+separate contracts. Native dmConnCcbByHandle 0x4b601c is also source-
+defined: it searches exactly three 0x30-byte records at live RAM
+0x200712a4, preserves miss diagnostics, and matches 16 actual C/native
+cases. These sources compile for Cortex-M55 with `-Werror`.
+The lookup-inclusive coherent Main candidate at
+`peripherals-l2c-dm-lookup-round` passes compilation and relocatable link:
+2647 defined, 768 mixed unresolved, zero duplicate strong providers,
+SHA-256 `6a1d0e0075a653eece8713b86d3583b2af525c3e6a156e20649e9e682f54d500`.
+The directly connected L2CAP imports now reduce to dmConnUpdExecute
+0x4b6532 and the live log-enable RAM cell. Native executor action mapping
+indexes `(event[2]&7)` through a pointer to 0x78eff0, where only four
+bytes are attributable table data; index 7 reaches adjacent instructions.
+The pinned Cordio `dm_conn.c` now authenticates this as the complete
+four-byte `dmConnUpdActTbl`, with events 0x70-0x73 and action bytes
+0x10/0x20/0x11/0x21. Its API and L2CAP producers set only those four
+events; the earlier 0x77 concern is outside the executor's routed event
+domain. Native arbitrary-input indexing beyond the four entries remains
+an explicit invalid-domain/layout gate. The executor's diagnostic branches
+and action-set callbacks are still to be bound. Broader Main/Audio source
+and image gates remain open.
+
+The high-connectivity Cordio WsfTrace wrapper at 0x52a63c was already
+source-defined as `audio_ble_wsf_trace`. The distinct HCI/L2CAP caller
+name now aliases that same entry in the defining object, with no second
+body. It reserves the native 1024-byte stack buffer, forwards ARM
+varargs to the genuine custom formatter contract 0x473036, sends that
+buffer through the selected native print hook 0x4733ee, asserts at a returned count
+of at least 1024 with the authenticated `wsf_trace.c` path/line 0x89, and
+prints the source-owned newline. Five actual compiled-C/native cases match
+lower call arguments, output order, and assertion threshold. The
+formatter and print hook are selected source candidates, but their full
+grammar/equality and live sink state remain open; these tests substitute
+their lower effects and do not prove arbitrary formatting or physical
+output. Target Cortex-M55 `-Werror` compile passes.
+
+Native ANCC message dispatcher 0x4bf780 is now a C body with all nine
+event classes and the role/action/delayed-event branches represented.
+Fifty-four actual compiled-C/native cases match child call order and
+arguments. Its service-context argument now reads the existing typed
+0x200748a0 pointer cell. The four connected state children
+0x4bea04/0x4bea14/0x4bea24/0x4bea36 (open, close, active query,
+action-list pop) are complete C bodies using the authenticated 64-entry
+12-byte ANCC list and selected reset child. Sixteen compiled-C/native
+cases match RAM and reset effects, including empty, first, second, and
+unrelated list entries. Cortex-M55 `-Werror` compile passes. The coherent
+Main candidate at `peripherals-ancc-state-round` compiles and relocatable
+links with 2653 defined symbols, 769 mixed unresolved imports, zero
+duplicate strong providers, SHA-256
+`aa15a6831cf908911693b26d0077d9a592b13748f0a5211c99d947704d97dabe`.
+Remaining direct ANCC code children are delayed notification, attribute
+write, and value update. Five ANCC cells (state, cache, controller, mode,
+service context) remain live RAM contracts; the last three have selected
+initializer producers but final allocation/placement is still open.
+
+The remaining three directly called ANCC bodies are now source-defined:
+0x4bea7a delayed message generation, 0x4beae8 19-byte ATT attribute
+request, and 0x4befce value-update gating. The native packet bytes,
+log strings, 5-second wrap-safe tick comparison, transfer guards, and
+WSF allocation/send effects are represented. Thirty-nine actual compiled-
+C/native cases match their bounded effects, including no allocation,
+logging masks, no handle, all three ANCC handles, OTA/EFS blocks, and
+connection-age sides. Target Cortex-M55 `-Werror` compilation passes.
+The pre-executor coherent Main candidate at
+`peripherals-ancc-complete-children-round` passes with 2656 defined,
+771 mixed unresolved, zero duplicate providers, SHA-256
+`0b15d14d2b0949e3bd5fd7062651541cb942ffe31bff8596845f78799f3d1cab`.
+New genuine child 0x4bee5a handles notification payloads; enabled,
+EFS-transfer, and connection-tick cells remain live typed RAM.
+
+The pinned Ambiq Cordio `dm_conn.c` and native four-byte extent at
+0x78eff0 jointly authenticate `dmConnUpdActTbl` as 0x10,0x20,0x11,0x21
+for routed events 0x70-0x73. The source now owns that const table and
+native 0x4b6532 dispatch over the source-owned DM action-set RAM,
+including absent action sets. Eight actual compiled-C/native cases
+match ordered trace and callback effects for the four events with action
+sets present/absent. The native diagnostic macro is a typed unresolved
+lower; arbitrary invalid event indices depend on adjacent stock layout
+and remain a separate typed contract. This is an experimental valid-
+event provider, not a full arbitrary-input/equality claim.
+The executor-inclusive coherent Main candidate at
+`peripherals-ancc-dm-executor-round` passes compilation and relocatable
+link: 2658 defined, 773 mixed unresolved, zero duplicate strong providers,
+SHA-256 `2b9a0f5702a794b36003e5b0915de72b72566b61d12b5b0f357066c7f15c886e`.
+The three new executor imports are the genuine diagnostic prelude,
+invalid-action diagnostic, and invalid-event layout contract; the last
+is outside the authenticated 0x70-0x73 routed domain. ANCC's next full
+source body is the native notification-value handler 0x4bee5a, whose
+connected action-list push, remove callback, and attribute parser need
+separate reductions. Mixed imports are not a missing-body count.
+
+The next connected ANCC graph is source-defined at 0x4bee5a
+(notification value), 0x4bec20 (64-row action-list push), 0x4bee0a
+(remove callback), and 0x4bf228 (attribute parser). The parser preserves
+state 0/1/2 transitions, 512-byte cache append/overflow behavior,
+attribute counting and callback order, four whitelist classifications,
+notification result/reset branches, and authenticated diagnostics.
+Actual compiled-C/native comparison passes 19 notification/list cases
+(including log-mask paths) and 32 parser state/cache/callback cases.
+Cortex-M55 `-Werror` compile passes. The coherent Main candidate
+`peripherals-ancc-notification-parser-round` passes target compilation
+and relocatable link with 2662 defined symbols, 777 mixed unresolved,
+zero duplicate strong providers, SHA-256
+`f86c375b863b10361c70fbf044d815467b5a0a56168d8cf4b760c9e3b5434db4`.
+The directly connected parser imports now are whitelist type 0x4d67b8,
+not-whitelisted encoder 0x4d71bc, send-complete 0x4bedac,
+attribute callback 0x4bf06c, and perform-action 0x4beb82. The ANCC
+state/cache/controller/mode/service pointer, enable byte, and connection
+tick remain typed runtime-data/placement contracts. The 777 mixed
+imports include unrelated data, ROM, hardware, and tool contracts; they
+are not the count of missing ANCC or Main bodies.
+
+The five direct ANCC parser child bodies are now source-defined:
+whitelist lookup 0x4d67b8, not-whitelisted nanopb notification
+0x4d71bc, send-complete 0x4bedac, attribute callback 0x4bf06c,
+and six-byte perform-action ATT request 0x4beb82. Native RAM record
+strides, product whitelist count/flags, the 0x9c-byte protobuf packet,
+selected Nanopb stream/encoder calls, ATT payload, and authenticated
+logging branches are represented. Actual compiled-C/native cases pass
+35 whitelist, 20 protobuf allocation/encode/send/error, and 44
+completion/action/callback comparisons. Target Cortex-M55 `-Werror`
+compile passes. The coherent Main `peripherals-ancc-parser-children-round`
+passes with 2667 defined symbols, 776 mixed unresolved imports, zero
+duplicate strong providers, SHA-256
+`b912561dcb1b2915617e7feb90313abc8d88604df1163034859f9d1207ce7562`.
+Direct ANCC code frontier now consists of app-attribute writer 0x4bebc4
+and sync-result callback 0x4bed0e; source-owned protobuf descriptor at
+stock 0x7799f4 and live ANCC/whitelist RAM placements are separate data
+obligations. The whitelist RAM initializer has not been attributed.
+
+The ANCC app-attribute writer 0x4bebc4 and RX sync callback 0x4bed0e
+are source-defined, and the product protobuf descriptor at 0x7799f4 is now a
+source-owned typed graph of six records. The descriptor verifier confirms
+140 field bytes and all six count/pointer relationships against authenticated
+ROM. The writer's ARM entry shim preserves native `push {r4,r5,r6,lr}` plus
+64-byte local frame before a C body fills the packet. This matters for IDs
+of 62 or more characters: stock skips the copy, forwards existing stack
+bytes to ATT, and writes its terminator past the local frame into saved
+register slots. The source does the same, without zero-fill or a substitute
+ambient provider. Twenty-eight actual compiled-C/native cases match packet
+and log effects through 73-character IDs; larger corrupted-return paths are
+not claimed as runtime-qualified. The ANCC value handler's state byte now
+uses the same typed 0x200036c8 service-state cell as its other consumers;
+its 39-case native oracle still passes. The first coherent Main candidate
+`peripherals-ancc-app-descriptor-round` passed with 2670 defined, 774
+mixed unresolved, zero duplicate providers, SHA-256
+`ff7e233cfe25bb3505b256d6271e24877f6a4dc6304c0f5a43d8c063dc13cb91`.
+
+The ANCC writer, attribute request, and action packet now call the already
+selected `audio_ble_attc_write_request`, attributed to native AttcWriteReq
+0x4b579c. Its length ABI was corrected from `uint8_t` to `uint16_t`, which
+preserves ANCC's 64-257 byte packet route. Fourteen actual compiled-C/native
+ATT request cases match allocation, packet copying, and send effects at
+lengths 0, 6, 19, 64, 255, 256, and 257, including allocation failure.
+The ANCC 28/39/44-case oracles still pass after this direct binding. The
+source-owned descriptor does not establish final flash placement; live
+ANCC state, service context, cache, and whitelist RAM remain typed placement
+and initialization contracts. The selected image still has many unrelated
+source, ROM, RAM, and hardware imports; ANCC packet proof is bounded to the
+fixtures above and is not live-radio or whole-image proof.
+The subsequent coherent `peripherals-ancc-attc-binding-round` passes target
+compilation and relocatable link with 2671 defined, 772 mixed unresolved,
+zero duplicate strong providers, SHA-256
+`6b1392bb6679418d7e0808c8826e0562cf8cee0e87a4c0ffe180e6a420f34c9a`.
+The former `AttcWriteReq` and invented ambient-write imports are absent.
+
+The separate L2C slave handler/timeout pair at 0x536fa4/0x536b40 is now
+source-defined. The handler has a named ARM entry shim for native IAR
+`push {r7,lr}`/`pop {r0,pc}` so it returns inherited R7. The timeout
+body preserves all five trace-policy reads/compares, source-owned WARN/L2C
+strings and path, native log versus WSF trace routing, and DM update
+confirmation. Actual compiled-C/native comparison passes 16 cases across
+null, non-timeout, and timeout messages with trace/log flags. Cortex-M55
+`-Werror` compile passes. The coherent Main candidate
+`peripherals-l2c-slave-timeout-round` passes target compilation and
+relocatable link: 2673 defined symbols, 771 mixed unresolved, zero
+duplicate strong providers, SHA-256
+`610b305ba7f4ba496ba551822c579925b6bbda5b9f766e61d53277bb765dcd11`.
+The adjacent SMP handler 0x537d0c and BLE registration handler 0x4bae84
+remain separate substantive callback bodies. Runtime BLE tables and final
+image placement are still open.
+
+The Cordio SMP handler 0x537d0c is source-defined across null message,
+DB service event, scratch-buffer release, CCB-active and AES-token match/
+mismatch branches. It preserves authenticated WARN/SMP strings, four log
+levels, trace fallback, queue dequeue/free loop, and state-machine dispatch.
+Twenty-five actual compiled-C/native cases match call order and effects.
+The coherent Main `peripherals-smp-main-handler-round` passes target
+compilation and relocatable link: 2674 defined symbols, 773 mixed unresolved,
+zero duplicate providers, SHA-256
+`9a1cdf90e30deeda4e0e4f3d3af134287dc1436d22d21bd69b74b030c0fb9277`.
+Two genuine contracts were exposed: SmpDbService code and SMP queue RAM.
+The queued-message transport/storage remain live runtime data, not a
+source-owned initialized table.
+
+The SmpDbService child 0x542960 is also source-defined: ten 24-byte records,
+three unsigned 1000-ms decrement paths per active record, count division
+and reload from the authenticated pSmpCfg pointer cell, failure-count
+clear, and timer restart. A named ARM entry shim preserves the native
+entry-R3 return through IAR's saved-register pop. Twenty actual
+compiled-C/native cases match all ten record effects and lower call order,
+including zero divisor's ARM SDIV result, multiple active patterns, and
+1000/1001 boundaries. Cortex-M55 `-Werror` compilation passes. The
+registration pointer remains the selected source-owned pSmpCfg slot with
+runtime placement still required.
+
+The data-producer crosswalk then bound the SMP mismatch drain queue at
+0x20072cd8 to the already selected Cordio `secCb` object at 0x20072cb8+0x20.
+The pinned structure has a static assert for its AES queue offset and the
+selected 0x536324 initializer clears it. The ECC request queue at
+0x20072ce0 is the same object's public-key queue at +0x28, verified by the
+native 0x5367d4 literal and eight actual C/native ECC request cases. The
+0x60-byte ECC key storage at 0x200726d0 is source-owned because selected
+DmSecSetEccKey writes exactly that extent and DmSecGetEccKey returns its
+base; absolute SRAM placement is still open. A coherent Main build
+`peripherals-smp-sec-data-round` passes with 2677 defined, 768 mixed
+unresolved, zero duplicate providers, SHA-256
+`168b8732357f8ef767115d50c2de80071b6c34ba309bb891b3333f2418a6818c`.
+The succeeding `peripherals-ble-data-producers-round` additionally defines
+the three 16-byte discovery rows at 0x200733fc and 0x80-byte advertising
+link state at 0x200719c8, whose reset/initialization writers 0x532e52 and
+0x4b3c02 were already selected. That target build passes 2679 defined,
+766 mixed unresolved, zero duplicate providers, SHA-256
+`d466a18385d62e90c5a58009b3b35f245fc33cebb1e97ea9a12fe58475814916`.
+These are mutable RAM objects with source-owned producers, not extracted
+fixed ROM data or proof of native placement.
+
+A separate HCI storage audit found the preexisting `audio_ble_hci_state`
+array only allocated 0x80 bytes at native 0x20071478, while selected
+HciCoreInit 0x52ac02 writes a word at +0xa0 and bytes at +0x80/+0x81.
+The native object's proven minimum extent is therefore 0xa4 bytes. Its C
+storage was corrected to that lower bound and the unresolved
+`audio_ble_hci_controller_state_20071478` name now aliases the same data
+symbol in the object, with both symbols at offset zero and size 0xa4 under
+the Cortex-M55 compiler. This is exact same-address data ownership, not a
+behavioral provider alias; full product object extent and placement remain
+unproven. The coherent target build is pending separately.
+
+The last settled unresolved census has 766 mixed symbols. A lexical scan of
+extern declarations in selected Audio sources previously classified 112
+callable declarations, 611 data declarations, and 49 unclassified of the
+772-symbol snapshot before these producer bindings. This classification is
+an interface census, not a count of missing complete bodies: some callable
+names are ROM/compiler contracts and some data declarations are reused
+product cells. The DM connection base 0x200712a4 remains imported despite
+its known three 0x30-byte rows: DmConnRegister writes callback slots after
++0x90, so the full containing object extent/initializer still needs a
+pinned definition or native startup proof. The HCI callback table at
+0x20073870 likewise remains typed because selected writes reach internal
+fields but not an authenticated complete object boundary.
+
+The subsequent coherent `peripherals-hci-storage-extent-round` completed
+target compile and relocatable link with 2680 defined, 765 mixed unresolved,
+zero duplicate providers, SHA-256
+`86a174690f416d0e404a5a2ac33557109fe9a4ca7cb5ed5ebd66c9e9d12b92d0`.
+Native Packetcraft AppHandler 0x4bae84, its link/reset callbacks
+0x4bacc8/0x4bda34, and DmReadRemoteFeatures 0x4b6cb0 are now source-defined.
+The AppHandler's four trace branches, event class dispatch, and IAR saved-R0
+outgoing varargs effect passed 27 actual compiled-C/native cases. The remote
+features CCB/no-CCB and synthesized callback packet paths passed four cases.
+The connected HciLeReadRemoteFeatCmd 0x52b352 now uses the already selected
+Cordio command allocator/send providers and passed two actual compiled-C/native
+allocation/payload cases. `peripherals-app-remote-hci-round` passes target
+compile and relocatable link with 2686 defined, 764 mixed unresolved, zero
+duplicate providers, SHA-256
+`6e511566af12f66cd085c666aa71afd6d024085874e302e57e39e628996a3c92`.
+The App UI callback cell and DM connection object remain typed live imports.
+
+A fresh lexical declaration scan of the 764 unresolved names yields 111
+callable, 611 data, and 42 unclassified names. This scans declarations rather
+than ELF object kind, so the 42 include compiler support and source strings;
+the 111 are a callable interface frontier, not a missing-body count. The
+largest concrete remaining code groups include Cordio security and discovery,
+HCI driver/radio children, UART dispatch and parser descendants, plus
+formatting/runtime helpers. The 611 data names include live application,
+driver, and RTOS state, callback cells, selected product configuration, and
+tables whose full extent or initializer still needs authentication. Whole Main
+source closure, exact SRAM/ROM placement, and hardware behavior remain open.
+
+Native HciDrvHandlerInit 0x4b4a7c is now source-defined with its handler-ID
+write and the two timer event/type fields. Four actual compiled-C/native RAM
+effect cases match for handler IDs 0, 1, 127, and 255. The primary timer
+reuses the existing typed 0x20073e64 import; the adjacent second timer at
+0x20073e74 remains a separate typed live object, without assuming either
+timer's full extent or startup state. `peripherals-hci-driver-init-round`
+passes target compile/link with 2687 defined, 764 mixed unresolved, zero
+duplicate providers, SHA-256
+`dab90856341b76b0dcc6123f0d6e4f4882128dbb268fddbfc162e845fa03b5bd`.
+
+The native AppDbDeleteAllRecords 0x47acf8 and connected
+`_evenEraseAllBondInfo` 0x4787a4 are now source-defined as a connected C
+candidate. The parent clears ten exact 200-byte privacy rows (first six bytes
+through the selected zero provider, plus fields +0x2f/+0x30) and preserves
+the diagnostic call order and IAR saved-register return effects. The child
+performs cache maintenance, clears the live staging buffer using a live
+16-bit size cell, saves/restores ARM PRIMASK, and calls the selected NVM word
+writer with the authenticated key, MRAM destination, and size/4 count. Its
+success/failure diagnostics use authenticated strings and flags. Forty actual
+compiled-C/native cases match record/staging effects and lower call order
+across sizes 0/64/128/252, flash results 0/failure, and log masks 0/1/2/4/7.
+This does not prove malformed size beyond the staging object's available
+extent, flash hardware, or final address placement. Rows, staging buffer,
+MRAM mapping, and size cell remain typed live contracts.
+`peripherals-privacy-erase-round` target compile/link passes with 2691 defined,
+765 mixed unresolved, zero duplicate providers, SHA-256
+`443bfa5448adc742b594b20518d6eb3d0c4e7909aba8518d97a95758c6244b6c`.
+The fresh lexical interface census is 109 callable, 614 data, 42
+unclassified; the extra data names are now explicit staging/size contracts.
+
+The connected Cordio `smpScAuthReq` callback 0x5e2aba now has a source C
+body and a named ARM entry frame. The frame preserves the native 24-byte
+incoming stack contents and writes only the native defined event bytes:
+connection, event 0x2e with the two callback values, or event 4 with the
+three zero fields and byte 20 set to 3. It selects the existing
+DmSmpCbackExec or smpSmExecute providers using the authenticated CCB context
+and auth bit. Twelve actual compiled-C/native cases match full event-frame
+bytes and callback selection across both context states and auth bits. The
+coherent `peripherals-smp-sc-auth-round` target build passes with 2693 defined,
+764 mixed unresolved, zero duplicate providers, SHA-256
+`80958f5c9bddf4fa6ca86683605597bdfa1c890c1753e95a8e8adccaeb795e4f`.
+The larger `smpScProcPairing` 0x5e2784 processor remains the adjacent true
+code frontier, with its selected scratch and state-machine children but live
+SMP configuration/state data still requiring exact ownership proof.
+
+The adjacent `smpScProcPairing` 0x5e2784 processor is now source-defined too.
+Its named ARM entry keeps the native saved-R2/R3 frame for the outgoing event;
+the C body covers MITM/passkey selection, SC enablement, scratch allocation,
+three 32-byte ECC key copies, legacy branch, key-size/config rejection, and
+security-level state update. It reuses already selected Cordio children and
+the live pSmpCfg pointer cell. A 256-case actual compiled-C/native comparison
+(56 branch fixtures and 200 deterministic varied cases) matched CCB and SC
+state bytes, both outputs, complete 24-byte outgoing event frames, key-copy
+buffers, return R0, and child-call order. Product configuration values and
+state placement remain external contracts. The coherent
+`peripherals-smp-sc-pairing-round` target compile/link passes: 2695 defined,
+763 mixed unresolved, zero duplicate providers, SHA-256
+`687286ba043e586008812a0213b6e369f4fbe5c2525eb8330580ab68562babcb`.
+The fresh unresolved lexical census is 107 callable, 614 data, and 42
+unclassified names (763 mixed). These are interface classes, not a count of
+remaining complete native bodies. DM CCB full containing-object extent, HCI
+callback state extent, privacy staging/size/MRAM runtime ownership, pSmpCfg
+values, and final image placement remain concrete source/data obligations.
+
+The legacy `smpAuthReq` callback 0x56e84c is now source-defined with the
+native 24-byte stack frame; 12 actual compiled-C/native cases match full
+frames and callback selection. An initial legacy pairing addition exposed an
+already selected provider for `smpProcPairing` 0x56e6e0 at target link time.
+The duplicate unit was removed and that selected source was corrected to
+preserve the native saved-R2/R3 event frame, including ambient bytes outside
+the four written failure-event fields. Its full CCB/output/event effects and
+return R0 match 256 actual compiled-C/native fixtures. The corrected coherent
+`peripherals-smp-legacy-corrected-round` passes target compile/link with
+2698 defined, 762 mixed unresolved, zero duplicate providers, SHA-256
+`01d93c60b64f7f70eb644649cdc6152345f28ae6eba58c4d9c2c0597fb1204c4`.
+
+The authentic AppUiDisplayPasskey 0x4bd7fa and
+AppUiDisplayConfirmValue 0x4bd91e diagnostic bodies now source-own their
+NUL-terminated module/path/function/message strings, reproduce the native
+trace level and extended logger selection, retain the incoming fourth ARM
+register for level-one varargs, and invoke the live UI callback at the
+authenticated cell +4 when registered. A named entry frame restores the
+native R0-R3 outcome, including IAR outgoing stack arguments after an
+enabled extended log. Eighty actual compiled-C/native cases match logger,
+trace, callback, and return effects across five trace levels, two log masks,
+and present/absent UI callback; an unused extra stack word at non-level-one
+log calls was excluded from comparison because that argument is not consumed.
+`peripherals-pair-ui-diagnostics-round` target compile/link passes with 2701
+defined, 760 mixed unresolved, zero duplicate providers, SHA-256
+`4f4155a8f3a4b8aece23ea2281894df3f51f1f9567fa5512ae43bb14911c0fb9`.
+The fresh lexical interface census is 104 callable, 614 data, 42
+unclassified. The UI callback cell remains live runtime state; source strings
+alone do not establish its registration or final placement.
+
+The connected TPL transport graph now has six additional native-backed C
+bodies: `TPL_Init` 0x4b892c, `tpl_context_free` 0x4b8ba2,
+`_rxNextPacketTimeout` 0x4b8c6c, `TPL_RxPacketTimeoutHandler` 0x4b8da2,
+`_tplReponse` 0x4b9012, and `tpl_schedule_rx_timeout` 0x4b8c44. The
+initializer source-owns the authenticated four-by-56-byte context clear and
+send-mutex pointer cell. Service registration rows, response buffer,
+three-byte delayed argument cell, and BLE controller are typed live RAM
+contracts; their complete producer/extent and final addresses remain open.
+The response source preserves the native IAR saved-R1/R2 return and outgoing
+logger stack words through a named ARM entry shim; the scheduler similarly
+preserves its inherited R3 return. Actual compiled-C/native comparisons pass
+80 initializer cases, eight context-free cases, 18 timeout-callback cases,
+20 timeout-handler cases, and 32 response cases covering buffer bytes,
+callback-null/nonzero-pipe paths and R0/R1 results. Enabled response logger
+and schedule effects remain source/static qualified rather than dynamic
+equivalence claims. The coherent `peripherals-tpl-response-round` target
+compile/link passes with 2713 defined symbols, 762 mixed unresolved and zero
+duplicate providers, SHA-256
+`2b3cb7ade39662bd4050c4ed77c8c6bdfc04f51699dbdb0a1bff1f98de38e90f`.
+The TPL-local unresolved names include genuine live data
+`audio_tpl_response_buffer`, `audio_tpl_service_table`,
+`audio_tpl_timeout_ids` and next true code child
+`tpl_reset_receive_contexts_004b9984`; these are not counted as six
+completed product runtime objects or a complete Main image.
+
+The next true TPL child `tpl_reset_receive_contexts` 0x4b9984 now removes
+its authenticated delayed callback and releases each active row of the
+source-owned context pool. All 16 active-row masks match original execution
+against actual compiled C in call order and callback/row pointers. The
+coherent `peripherals-tpl-reset-round` target build passes: 2714 defined,
+761 mixed unresolved, zero duplicate providers, SHA-256
+`28a96d4ff313068d023cf85ca076a7ea7f4688cf700432e18bdffba49abb9953`.
+The TPL-local remaining unresolved names are three live data contracts:
+`audio_tpl_response_buffer`, `audio_tpl_service_table`, and
+`audio_tpl_timeout_ids`; final placement and their actual initialization are
+not established by this source closure. Main as a whole remains incomplete.
+
+A focused TPL storage xref audit found exactly one absolute ROM pointer to
+response-buffer RAM 0x20004204 (`0x4b99ec`) and delayed-argument RAM
+0x20074b04 (`0x4b9618`), and two to the service-table base 0x20071414
+(`0x4b90e8`, `0x4b9a30`). The second service-table pointer lies in the
+transport literal/data region. `TPL_Init` supplies an authenticated row
+registration writer, but its byte service-index range does not by itself
+prove a safe table extent. No initializer for the response buffer or delayed
+cell was established. Those live-data definitions remain external.
+
+The connected BLE slave MTU request parent `_bleSlaveRequestMtuExchange`
+0x46dedc and pinned Cordio children `AttGetMtu` 0x4b5204 and `AttcMtuReq`
+0x4b57fa are now source-defined. The parent uses the selected 0x20074330
+slave-context pointer cell, writes the native MTU field at +0x22, preserves
+both authenticated diagnostic branches with source-owned strings, and asks
+for MTU 0xf7. The getter keeps the native ambient high R7 return word; the
+request keeps incoming R3 on allocation failure and clears its saved word on
+success. The children reuse selected ATT CCB lookup, message allocation,
+and ATT client send providers. Twenty actual compiled-C/native parent cases
+match the 64-byte connection row, child call order and args, and R0/R1 return
+for five connection values and four current MTUs with logging disabled;
+child packet paths and enabled diagnostic effects are static/source
+qualified, not covered by that dynamic comparison. The coherent
+`peripherals-slave-mtu-round` target compile/link passes with 2720 defined,
+760 mixed unresolved, zero duplicate providers, SHA-256
+`2ceced0ccce23f66347093bc0765dc41f685ec67ebab29ad4470c47907eef205`.
+The live containing slave-context allocation/initializer and final placement
+remain open, as do the wider Main/Audio source and runtime gaps.
+
+The adjacent slave security request `_bleSlaveSecReq` 0x46df7e, native
+Cordio policy child 0x4b4684, and `DmSecSlaveReq` 0x52bb00 are also
+source-defined. The policy child reads the already selected live
+0x20074358 profile pointer cell, requests security only when the selected
+connection security level is zero, and allocates/sends the authenticated
+six-byte event layout. The parent owns its two stock diagnostic strings and
+preserves the native six-word ARM return frame. Twenty actual compiled-C/
+native fixtures match connection truncation, level/allocator branches,
+message bytes, call order, and R0/R1 return with logs disabled. Enabled
+logging is source/static qualified; runtime profile-table initialization
+remains a separate product contract. `peripherals-slave-security-round`
+passes target compile/link with 2725 defined, 759 mixed unresolved, zero
+duplicate providers, SHA-256
+`0749ab825ee441ea61ec5ed23df1c301605344f0f9b9303da266b92e7d57fec0`.
+This is a connected BLE slave source chunk, not full Main source completion.
+
+The slave disconnect dispatch 0x4bb04a and Cordio `DmConnClose` 0x4b6c82
+now use C bodies and the selected live dmCb handler byte at +0x0c. The
+native 36-byte allocated event writes connection, event 0x19, reason 0x13,
+and mode 3 at their authenticated offsets; the outer named ARM entry returns
+the inherited R7 word. Ten actual compiled-C/native cases match allocation
+failure/success, packet bytes, handler argument, call order, and return for
+five connection inputs. The coherent `peripherals-slave-disconnect-round`
+target compile/link passes with 2728 defined, 758 mixed unresolved, zero
+duplicate providers, SHA-256
+`2db0c09fc62c2a03779efbd16711faa2dcde9c003ca9003009913607904c910c`.
+The live dmCb object remains a product runtime/placement obligation and the
+wider Main source graph remains unfinished.
+
+The next BLE slave callback graph is now source-defined:
+`dmSlaveAdvStopOnDisconnect` 0x46dfd0, `GattValueUpdate` 0x4b5a1e, and
+the Cordio discovery callback 0x533630. It reuses the selected source-owned
+three-by-16-byte discovery rows at native 0x200733fc and selected restart
+provider; the slave subcontext pointer cell at 0x20074334 remains live
+runtime state. Thirty-two actual compiled-C/native cases match the outer
+R7 return and restart-call effect across disconnect flag, connection handle
+match, action 4 versus other, attribute range hit/miss, and row suppression
+flag. The coherent `peripherals-slave-adv-stop-round` target compile/link
+passes with 2733 defined, 757 mixed unresolved, zero duplicate providers,
+SHA-256
+`df811867ec9bf865919b313db8af6ab7b026ce34c72f5de1c2102e2f42059710`.
+A fresh lexical scan of unresolved names against `extern` declarations in
+all component and firmware C sources yields 97 callable, 653 data-like, and
+seven unclassified (757 total). This method includes inactive candidate
+source declarations and classifies function-pointer externs as data-like, so
+these counts are not directly comparable with earlier selected-source scans
+and are not missing-body counts. Remaining work spans genuine callable
+interfaces, product runtime/data ownership and full extents, ROM string and
+configuration ownership, complete image placement/link, and hardware proof.
+
+The next pinned BLE stack callback 0x536470 and its exact 16-byte copy
+child 0x542a44 are source-defined. The callback writes message+16 into the
+message's +4 pointer field, copies payload+5 into that 16-byte span, and
+sends the message through selected WSF. Its ARM shim retains the native
+saved-R3 result. Twenty actual compiled-C/native fixtures match the full
+40-byte message, copy offsets/count, WSF handler/argument, and R0 return for
+five payload seeds and four handler IDs. The coherent
+`peripherals-stack-callback-round` target compile/link passes with 2736
+defined, 756 mixed unresolved, zero duplicate providers, SHA-256
+`ed5b758f1a3b88b7ea79c8960e2c6c1261cdb81a9ad7d240b05a911a548f3695`.
+The neighboring callback 0x536620 has an authenticated native state switch
+and three called children 0x5364a4/0x5365a6/0x536608 whose retained
+high-level decompilation is absent; they are a concrete next native-source
+frontier rather than a reason to claim stack callback subsystem completion.
+
+The connected BLE stack state graph is now source-defined through callback
+0x536620, state-zero 0x5365a6, state-one 0x5364a4, state-two 0x536608,
+and their exact 16-byte shift/XOR helpers 0x53655c/0x542a60. The state-one
+path reuses the already selected `SecLeEncryptCmd` 0x5363ae, WSF queue,
+and HCI encryption providers. It assembles a final padded block when the
+signed remaining count is below 17, XORs the chaining block, advances the
+16-bit offset, and submits the authenticated reversed key/plaintext path.
+Actual compiled-C/native comparisons pass 12 callback state/null cases, 12
+state-two handoff cases, 32 state-zero shift/transition cases, and 32
+state-one valid-range block/crypto cases. The C compiler inlined the XOR
+helper in some fixtures; the oracle compares the resulting block and crypto
+arguments rather than requiring an artificial call. Negative or oversized
+remaining counts that would overrun the native 16-byte stack block are outside
+this bounded runtime comparison and remain a source/ABI safety gate.
+Coherent target snapshots passed throughout; latest
+`peripherals-stack-state1-round` passes with 2745 defined, 755 mixed
+unresolved, zero duplicate providers, SHA-256
+`a6d20133cf6c6af66d154ba426310790bbe839fc42305665a2cf310c26a048d7`.
+The local state-graph code frontier is closed; the remaining
+`audio_ble_hci_stack_state_20073870` is live controller RAM, not a missing
+child body. Native callback 0x536234 and later stack callback 0x5366dc remain
+separate larger source frontiers. Full Main source/layout and hardware proof
+are still open.
+
+The native stack key/command callback 0x5366dc is source-defined with its
+0x25 dual 32-byte reverse copies and 0x26 special-status/normal paths.
+Forty-eight actual compiled-C/native cases match full message bytes, reverse
+call spans, and WSF sends across four opcodes, two statuses, three payload
+seeds, and two handlers. The coherent
+`peripherals-stack-callback-5366dc-round` target build passes with 2746
+defined, 754 mixed unresolved, zero duplicate providers, SHA-256
+`15db3f37079c92639fef218fb4ddddba027c39c095969f10fbbd526ff02af9a2`.
+The remaining direct stack callback is native 0x536234. An updated lexical
+all-component extern scan of 754 mixed unresolved names gives 94 callable,
+653 data-like, seven unclassified; this remains an interface classification,
+not a missing native-body count. Live controller RAM, TPL RAM ownership,
+ROM/config data, whole-source coverage, final layout, and hardware proof
+remain separate gates.
+
+The final direct BLE stack callback 0x536234 is now source-defined together
+with authentic WsfMsgDeq 0x4bf9ec and WsfQueueDeq 0x538c4a. It handles the
+0x1c four-slot 8-byte rotation, 0x1b/0x25/0x26 queue selection, conditional
+16-byte reverse, 0x14 three-queue drain/free, and the live callback table
+at secCb +0x3c indexed by message state. Null dequeue on 0x1b retains the
+native dereference behavior. The event/queue oracle exercises actual native
+and compiled C queue transitions with controlled single-node heads and
+matches 48 combinations of event, state, and rotation index. It exposed an
+initial C selection of the +0x2c tail word for event 0x26; corrected source
+selects the native +0x30 queue and the comparison passes. The fresh
+post-correction `peripherals-stack-callback-536234-corrected-round` target
+compile/link passes with 2749 defined, 753 mixed unresolved, zero duplicate
+providers, SHA-256
+`8851cc0083c2276295ed5b995b02ac64fbaa34c616583facc44078eb31981c2d`.
+All four direct BLE stack callbacks 0x536234/0x536470/0x536620/0x5366dc
+now have C source and bounded effect comparisons, but broader stack runtime,
+product data, exact image layout, and device behavior remain open.
+### Radio revision and identifier source round (2026-10-12)
+
+The Main/Audio selected candidate now has native 0x4b47cc as `display_ble_hci_radio_revision_mismatch.c`: it compares bytes 3 through 0 in order and logs through the existing 0x4733ee provider. Its exact two source-owned strings come from literal pointer cells 0x4b4d44/48. The second formatter argument is the required revision left in native R2, not an invented value. `verify_ble_hci_radio_revision_mismatch.py` passed 22 actual compiled ARM C/native decisions, string bytes, and R1/R2 logger arguments. The coherent selected candidate was 2750 definitions, 752 unresolved, zero duplicate providers, SHA-256 `2ea0cc372f43919b9c51c139fedf0bc70c0214a9df15d1a9e5b37488423e1a0a`.
+
+Native 0x480d72 is source-defined in `display_ble_hci_radio_identifier.c`, including all mode-0 register bits, mode-1 dispatch and invalid/null status. `verify_ble_hci_radio_identifier.py` passed 28 actual compiled C/native mode and byte-effect cases. Its mode-1 child 0x480874 is source-defined in `display_ble_hci_radio_identifier_details.c` with source-owned bounded 4- and 12-entry halfword tables at 0x78c97c/0x774bac; `verify_ble_hci_radio_identifier_details.py` passed 16 compiled C/native MMIO readout and delay cases. The details snapshot was 2752 definitions, 752 unresolved, zero duplicate providers, SHA-256 `d6fef05e04beaefda4bb80c554949ba1f524892e553b20a4a8366e16197a3e1f`.
+
+Mode-0 capability child 0x480c7c is source-defined in `display_ble_hci_radio_identifier_caps.c`. The dispatcher explicitly forwards its native R2 output-pointer seed as the child's third ABI word; the child calls the real 0x4d3f3c hardware-read contract, retains its output word on failure, and updates the four-byte field. `verify_ble_hci_radio_identifier_caps.py` passed 90 compiled C/native revision, hardware-status, and output-word cases with the hardware read hooked to the same effect. Hardware selector 0x4d3f3c and full region reader 0x4d3dda are source-defined in `display_ble_hci_radio_read_word.c`/`display_ble_hci_radio_read_region.c`, including real MMIO controls, limits, source address arithmetic and selected `platform_copy_words`. Their actual compiled C/native oracles passed 256 selector branches and 336 region/copy cases. The coherent selected region graph passed 2755 definitions, 751 unresolved, zero duplicates, SHA-256 `1dbaba1da3b60ab6e691cee4146971456fe12558f3ff360a759444ed44e078f6`. Physical MMIO and copy effects are not hardware verified.
+
+The 0x48162c HCI dispatch-table register body is source-defined in `display_ble_hci_radio_register.c` against two typed writable table bases at native 0x20068228/0x20068928; their startup initializer and final placement remain open. `verify_ble_hci_radio_register.py` passed 35 actual compiled C/native target-mode and table-write cases, including target 2 writing both planes. The settled selected graph passed 2756 definitions, 752 unresolved, zero duplicates, SHA-256 `330f89654cb2ff5303841d97228550ced44b42eb0f6f91b795e489e70f314fcd`. A relocation-based census of this graph found 92 directly branch-referenced and 660 only address-referenced unresolved symbols. This is a *relocation classification*, not a missing-body count: address references include callable callback pointers as well as RAM/ROM data, and directly branched symbols include resident/runtime contracts. The mixed count rose by one because the register body replaces one code import with two live table-base imports. Whole Main source, storage initialization, final placement, formatter grammar, and hardware behavior remain incomplete.
+### Radio pin-function configuration and shared logger identity
+
+Native 0x4c2b68 is source-defined in `display_ble_radio_power_config.c`: all sixteen active group/setting branches, ordered selected 0x480f0c pin-function calls, and authenticated live RAM value cells (literal pointers 0x4c3228..0x4c36a4) are represented. It does not supply values for those cells. `verify_ble_radio_power_config.py` passed 45 actual compiled ARM C/native call-sequence cases over all group numbers 0..8 and representative settings 0, 1, 2, 3, 255. The coherent selected graph passed 2757 definitions, 751 unresolved, zero duplicate providers, SHA-256 `639119c062941e502426fcebc68cbfb6a1a1c43f487406550e71807498334dc7`. Live pin values and physical pin configuration remain runtime gates.
+
+The unresolved vendor log-flags name in three HCI sources was traced to native 0x43d0ce, already selected as `audio_log_flags`/`platform_log_flags` in `simple_ram_getters.c`, which reads exactly RAM byte 0x20004543. Those three callers now bind the existing same-address source provider. This is a provider-identity correction, not a new logger body; the selected direct 0x43d574 extended logger remains incomplete for the general formatter/fatal/output domains described elsewhere in this report. Fresh selected candidate `peripherals-radio-power-log-flags-round` passed 2757 definitions, 750 unresolved, zero duplicates, SHA-256 `15f399b0e71f21b8cb3398d1adc1bd1185d1b4ae9c367c3c1cd3e740708237ec`. Its relocation census has 90 directly branched and 660 address-only unresolved symbols, subject to the same callback-pointer/data distinction above. Exact native literal searches find the two radio dispatch table bases 0x20068228 and 0x20068928 only at literal cells 0x481810/14; no attributable per-table initializer has yet been found, so the writable storage extent and startup contents remain an explicit placement/data gate.
+### TinyFrame ID-listener and queue logger identity
+
+Native TinyFrame `TF_AddIdListener` 0x4918c2 is source-defined in `frame_extra_listener.c`: it scans all 128 24-byte entries, fills the exact ID/handler/context/sequence fields, advances the occupied count, and preserves the full-table extended and compressed diagnostic branches with authenticated source strings. `verify_frame_extra_listener.py` passed 12 actual compiled ARM C/native cases, including first/middle/last insertion and all eight diagnostic flag combinations on a full table. The input-event queue failure call at native 0x4733ee now binds the already selected same-address `audio_ble_hci_boot_log_4733ee` provider; this is an ABI identity correction, with its general unbounded formatter still a real lower gate. The coherent selected `peripherals-frame-extra-listener-round` passed 2758 definitions, 748 unresolved, zero duplicates, SHA-256 `2acbb8ab5968e8f50fe8e2561712e7c2223de54241ca4a8d163c44e1328846e1`. These source-body reductions do not establish final TinyFrame RAM initialization or physical display/transport behavior.
+### Task-vote runtime graph
+
+`task_vote_runtime.c` source-defines six native task-vote bodies: 32-slot find/find-free 0x46d67c/0x46d69a, acquire/release for handle 0x46d70e/0x46d78c, and current-task entrypoints 0x46d816/0x46d826. It binds the already selected current-task pointer read and architectural PRIMASK save/restore sources; the single 0x105-byte live state extent at native 0x200700e0 remains an explicit writable product-data/initialization contract. `verify_task_vote_runtime.py` passed 30 actual compiled ARM C/native lookup and state-transition cases across disabled, empty, existing active/inactive and full tables. The oracle cuts PRIMASK restore because Unicorn does not execute that instruction in this setup, so it compares RAM/return/call effects, not physical interrupt state. The coherent selected `peripherals-task-vote-round` passed 2764 definitions, 747 unresolved, zero duplicate providers, SHA-256 `156ed75c55b86f3f93ebfe712198691d92d8480069d71d3df7db6b7a76de3737`. Literal search finds 0x200700e0 only at pool cell 0x46d878; no independent startup initializer/placement proof was established. Full display thread, formatter, product RAM layout and live hardware remain open.
+### Freestanding runtime and OTA/wear getter bindings
+
+`freestanding_memory.c` supplies real C byte-copy/clear bodies for unresolved `memcpy`, `memset`, `__aeabi_memcpy`, `__aeabi_memclr`, and `__aeabi_memclr8`. An ARM EABI target object had all five providers with no undefined references; a host effect check passed 16 lengths (0..255) for byte content, untouched tails and standard return pointers. This qualifies the source/runtime contract, not original stock byte identity or overlapping-copy behavior. The coherent selected `peripherals-freestanding-memory-round` passed 2769 definitions, 742 unresolved, zero duplicates, SHA-256 `69c61ea4cb23334da0eae1a1c449b04d20eb8466db1a3b0d3a52ba470db5dc08`.
+
+Native `ble_ota_mode_get` 0x46efec is source-defined in `display_ble_ota_mode_get.c` as the raw shared live byte at 0x20074f8b, already used by the slave unpair path. `verify_ble_ota_mode_get.py` passed all 256 actual compiled ARM C/native byte values. The two wear-status callers now bind selected `audio_log_wake_allowed`, whose source is the same native 0x443484 predicate reading 0x20074f2c; this is same-address provider reuse, not new behavior. The coherent selected `peripherals-ota-wear-round` passed 2770 definitions, 740 unresolved, zero duplicates, SHA-256 `1d0ed2fd478ad1d890b114d2275fac12427e28a85da336254a25fea64e949d00`. Both RAM bytes retain live producer/initialization gates.
+### TLSF realloc source closure
+
+`tlsf_reallocate.c` source-defines native realloc 0x4d0868, used-block trim 0x4d03f0, and predecessor-free flag clear 0x4cfdf6 from the pinned TLSF block ABI. The realloc body covers null/zero requests, size adjustment, free-neighbor growth, fallback allocation/copy/free, and used-block trimming with the selected real TLSF helpers. It source-owns the two authenticated assertion strings and source path from literal cells 0x4d09b0/0x4d097c/0x4d09a0. `verify_tlsf_reallocate.py` passed seven actual compiled C/native branch/call cases; `verify_tlsf_trim_used.py` passed four actual compiled C/native split/error/flag cases. Child effects were cut symmetrically, so the checks qualify composition, not physical heap persistence or all allocator layouts. The coherent selected `peripherals-tlsf-reallocate-round` passed 2773 definitions, 739 unresolved, zero duplicate providers, SHA-256 `22804956fdf06da49d363d0f2ee12373fac8ba4fc4071b1ad230e2a67bee4fa0`. Whole Main source, initialized heap/pool state and final layout remain open.
+### Display audio release and event callback removal
+
+`display_audio_release.c` source-defines native 0x45f7be list traversal, transition unlink, callback removal, page clearing, field resets, object deletion, ordered node frees and finalization. It reuses selected same-address `audio_uart_lv_style_unlink_450500` rather than importing a duplicate transition body. `verify_display_audio_release.py` passed four actual compiled ARM C/native null/empty/one-list/two-list ordered-call and state cases. `display_audio_page_deinit.c` defines native 0x45fb7c and 0x45fbae, including the full 0xc3-byte effect; `verify_display_audio_page_deinit.py` passed four actual compiled C/native null/non-null memory cases using the selected freestanding `memset` source. The coherent selected `peripherals-display-audio-page-round` passed 2776 definitions, 741 unresolved, zero duplicate providers, SHA-256 `48ff843f2409885ef6230c12f3ef71cbc446451c71fc915487e3a12506a5cc67`.
+
+The next native child 0x451862, `lv_obj_remove_event_cb`, is source-defined in `display_event_remove_callback.c`: it preserves the fixed initial event count, forward index even after a removal, callback-pointer equality and the authenticated null assertion/log followed by an invalid-address fault. `verify_display_event_remove_callback.py` passed seven actual compiled C/native matched-index and null-fault cases with event-list child effects cut symmetrically. The selected target snapshot including this child is pending. Event list count/at/remove 0x451790/0x4517d6/0x45181c, object delete 0x44d7b8, finalize 0x45bbd2, and product page/list state remain genuine connected obligations.
+### Event-list and display stop round (2026-10-12)
+
+The selected Main/Audio candidate now includes authenticated LV object-event count,
+lookup and removal wrappers (0x451790/0x4517d6/0x45181c), callback removal
+(0x451862), and the event-list count/lookup/remove bodies
+(0x450158/0x450190/0x4501d2). The list removal sets the descriptor invalid bit
+and requests deferred compaction, matching the native child order. Actual
+compiled ARM C versus stock ARM checks pass nine wrapper, seven callback, and
+six event-list cases. The coherent target link is
+`peripherals-event-list-access-round`: 2783 definitions, 740 mixed unresolved
+imports, zero duplicate strong providers, SHA-256
+`318b9ecb6d2ea7836f5832d189810b9eef78cd8a50250f386796f2df1a0df76d`.
+Its relocation census has 79 direct branch imports and 661 address-only
+imports. These counts are interfaces, not missing-body or source coverage counts.
+
+The next selected source adds the complete audio-stop selector at 0x45faa8 and
+brightness open/close wrappers at 0x46f68a/0x46f6a2. Audio-stop's 40 actual
+compiled ARM C versus stock cases cover null state, byte-truncated modes,
+missing IDs, child lookup failures and successful child routing. Brightness
+uses the already attributed live byte `audio_uart_font_flash_mode` at
+RAM0x20074fb8. Its stage, prepare and commit children remain genuine typed
+callable imports. The coherent target link `peripherals-display-stop-brightness-round`
+has 2786 definitions, 745 mixed unresolved imports, zero duplicates, SHA-256
+`d140a6e4253fee5154fac0c6f96cd87b6e83c261f8b326332f458446de338e70`.
+Audio-stop exposes four genuine child bodies. The image remains source-incomplete;
+live RAM initialization, target placement and hardware execution remain open.
+
+The four direct audio-stop children are now source-defined: all-stop event
+0x45f6da, two-list ID lookup 0x45f840, and ID-specific event posts
+0x45f6c0/0x45f6ec. They use the previously selected native LV object-event
+provider 0x451670, including the synchronous stack-local ID payload.
+Twelve actual compiled ARM C versus stock ARM lookup/event cases pass.
+`peripherals-display-stop-children-round` links 2790 definitions, 741 mixed
+unresolved imports, zero duplicates, SHA-256
+`e46192b1658b9be6d6d7ac02377dca4bf155569ad14c34d89c3fde06cc8520fe`.
+The connected stop path is source-closed at its direct children, while the
+larger display service, product object state and live layout remain open.
+
+Brightness flash-power preparation 0x46f50c/0x46f52c is now source-defined
+against the previously selected `audio_uart_font_flash_power` provider and
+authenticated device/sleep cells. Six actual compiled ARM C versus stock ARM
+cases cover prior sleep values 0, 1 and 2 for both directions. Existing
+`display_font_flash_lock.c` already contained the full native mutex and
+diagnostic bodies of 0x46f5a6/0x46f604 as private helpers; these now export
+their authenticated identities and remain shared by the older flash-lock
+callers. The fresh post-change coherent Main receipt
+`peripherals-brightness-connected-round` links 2794 definitions, 737 mixed
+unresolved imports, zero duplicates, SHA-256
+`ea4a07892e4db30ce32a980773cb22bec7063a9ae44c89044f7938e8ff767035`.
+The two new preparation branches have actual C/native comparison; the reused
+mutex diagnostic branches have source/native static correspondence and still
+need broader runtime/hardware qualification. Product mutex/device cell
+initialization and final placement remain separate contracts.
+
+### Display service and BLE receive transport round (2026-10-12)
+
+The native display service entry 0x44227e and framebuffer-base getter
+0x46ca6e are now source-defined. Two actual compiled ARM C versus stock ARM
+checks cover the ordered EFS/logger calls and the authenticated 0x20080000
+framebuffer literal. The connected EFS request 0x458c48 initializes its
+one-byte stack payload to zero and passes ID0x400/length1; the actual
+compiled/native call comparison passes. The logger BLE cancellation parent
+0x458e48, flag getter0x458e32, setter0x458df0 and descriptor writer0x448cb8
+are source-defined against authenticated RAM cells at0x20074fe2,
+0x200746b0 and direct descriptor object0x20073b90. Six actual compiled/native
+cases pass across inactive, no-log, extended-log and compressed-log branches.
+The callback pointer is an authenticated Thumb reference to 0x5bf972 and
+remains a genuine source/ROM contract. The post-change coherent Main receipt
+`peripherals-display-service-connected-round` links 2801 definitions, 740
+mixed unresolved imports and zero duplicates, SHA-256
+`640727ad547f226151354252a88779a2f23c3bbf6de95721696d56a15d428fa9`.
+
+`display_thread_msg_rx_ble.c` adds the complete native receive transport
+0x48f12c: validation, heap allocation, payload zero/copy, queue counts,
+submission, wake and failure cleanup. It reuses the existing typed RX manager
+contract `audio_ble_rx_thread_state` at RAM0x20003ffc. Five actual compiled
+ARM C versus stock ARM cases cover null input, missing queue, allocation
+failure, success and queue failure. The zero-fill oracle normalizes stock
+helper0x43c0e4's `(destination,length,value)` ABI against C `memset` while
+comparing resulting bytes and all other call effects. The fresh corrected
+Main receipt `peripherals-ble-rx-transport-corrected-round` links 2802
+definitions, 739 mixed unresolved imports, zero duplicates, SHA-256
+`265e2857a63793f216089a56e6f9ae1e068f54c21976fd80581977a79ba0153b`.
+Its relocation census is 74 direct branch imports and 665 address-only
+imports. These are interface counts, not missing-body counts. Heap product
+cells, BLE RX queue/thread initialization, callback source and final
+placement/hardware remain open.
+
+The shared connection-state callback 0x46f32c is now one source-defined
+provider for both display and BLE slave-sync call sites. It reads the
+profile context at offset0x54 and invokes the already selected security-state
+provider0x4b82e8 with a normalized Boolean. Four actual compiled ARM C versus
+stock ARM cases pass for byte values 0, 1, 2 and 255. The context pointer
+cell0x2007432c has an authenticated source producer in the selected
+`audio_ble_app_slave_handler_init` (native0x46ed94); allocation and live
+initialization of its pointed-to state remain separate. The coherent Main
+receipt `peripherals-display-connected-round` links 2803 definitions, 737
+mixed unresolved imports and zero duplicates, SHA-256
+`cd2f27420ee8358f045e568528d24f57e519185d90628013efc308bacd8133cc`.
+Current relocation census: 72 direct branch imports and 665 address-only
+imports. No full source, layout or hardware completion is inferred.
+
+### LV startup descendant round (2026-10-12)
+
+`display_lv_init.c` reduces the full native lv_init parent0x473548 with its
+ordered initialization, idempotent warning, authenticated three-byte version
+check, endian assertion and final root flag. It reuses the selected LV root
+RAM0x2006f548 and file context RAM0x20071ac8 symbols. Actual compiled ARM C
+versus stock ARM passes the first-run and initialized branches with child calls
+symmetrically cut. `display_lv_global_init.c` reduces native0x4734cc:
+the 0x1ec-byte clear, two array headers, fixed constants and fixed-root
+assignment. Its actual compiled/native 0x200-byte state comparison passes.
+The coherent receipt `peripherals-lv-global-init-round` links 2805 definitions,
+753 mixed unresolved imports and zero duplicates, SHA-256
+`e8e7cda9ffc1a78e12a828d73bd30f1b776696027b08c474363565cd3d5680d8`.
+
+`display_lv_init_children.c` adds eight genuine native LV startup children:
+memory0x48aa60, async0x49acb0, display0x464330, indev0x4c6d8c,
+style0x44d32c, animation0x48438c, cache0x44b90c and font0x488f4c.
+The array-header primitive0x482b00 is source-defined once and shared with
+the global initializer. Eight actual compiled ARM C versus stock ARM cases
+pass for child call sequence, arguments and changed root bytes. The coherent
+receipt `peripherals-lv-init-children-round` links 2814 definitions, 751
+mixed unresolved imports, zero duplicates, SHA-256
+`f3bc77149d3b6a5cfaf2bfb3e158888c73ea0a40d74a474573989fe18ee5a75e`.
+Current relocation census: 86 direct-branch imports and 665 address-only
+imports. The direct count rose because full native parent/children exposed
+genuine allocator, timer, filesystem and callback-table descendants. The
+selected C graph remains incomplete; LV root placement and startup RAM
+ownership still require product evidence.

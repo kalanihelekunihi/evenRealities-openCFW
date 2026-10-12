@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native 0x08003a00 fake-standby state change and 0x080013b8 clear.
  */
@@ -32,5 +33,5 @@ void case_policy_fake_standby_clear(void)
     case_policy_task_cancel(*(volatile uint32_t *)(void *)(shared+0x30u));
     case_policy_task_cancel(*(volatile uint32_t *)(void *)(shared+0x28u));
     shared[3u]=0u;
-    if(shared[7u]==0u){case_policy_log(0x080013f4u);case_policy_log(0x08001404u);}
+    if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(080013f4));case_policy_log(CASE_STRING_ADDR(08001404));}
 }

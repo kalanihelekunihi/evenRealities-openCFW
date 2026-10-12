@@ -1,7 +1,7 @@
 {
   "status": "COMPILED_RELOCATABLE_CANDIDATE",
   "target": "arm-none-eabi cortex-m0plus thumb",
-  "source_count": 108,
+  "source_count": 110,
   "sources": [
     {
       "path": "g2/components/case/legacy_default_candidate_20261010/aa_reader_candidate.c",
@@ -907,8 +907,8 @@
     },
     {
       "path": "g2/components/case/legacy_default_candidate_20261010/known_dispatch.c",
-      "sha256": "14a6825479d324c3b7e924ee5f8d6988a5baa7d52b88ba5949d4c16e903bd48a",
-      "object_sha256": "9b40240097709146019027880539247c804513237ca4a64a8ae633c76cd4c918",
+      "sha256": "0e3ef61aaaa7b5abaf2e5ec04f4cd5a4e820d6c709d8befe2e485c57d557b50e",
+      "object_sha256": "36eba33f8c87edcaa8a44f7dd78d54e9084f242a00c242372851cb5f3778d350",
       "headers": [
         {
           "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdbool.h",
@@ -988,7 +988,7 @@
     },
     {
       "path": "g2/components/case/legacy_default_candidate_20261010/reset_ff_prefix.c",
-      "sha256": "88ff65db9bdc3d7f52e4ead4542f5514bebe7be30b3e8c4f5dbf9d395f94bf89",
+      "sha256": "88367a8699ef05b32205926c243f58524a5de608ee22757d80df54923750f2c3",
       "object_sha256": "8cf1453f556a672b3b1a77e840ad17f48b59c6334224b0cf5c0c9d4315117008",
       "headers": [
         {
@@ -1120,8 +1120,30 @@
     },
     {
       "path": "g2/components/case/legacy_default_candidate_20261010/shipmode_ee_prefix.c",
-      "sha256": "13c342de5e7c3d57657bad196b9e6502f55f2a1b3958fa20c02c991f98e4327b",
-      "object_sha256": "15548db7b4c5bb42f9d3d2b04240c388a4c731c9ce5a7b55c6c0dad707e2299f",
+      "sha256": "daef8683d98795d5f080d2a9e4b015a59c0685b146bfb36527d9c7cf427db16e",
+      "object_sha256": "27e9bedd9f47e9833a0dd7bd8d28a387b414f5d550b827bd24992da49a324a19",
+      "headers": [
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "path": "g2/components/case/legacy_default_candidate_20261010/shipmode_mmio_children.c",
+      "sha256": "7021504e800875b1d4cf1bf1cfbd1e7d9dfa1a93e0101279f933ab020168d46e",
+      "object_sha256": "96d8daf749faeb9dc3e0e159755374091f47f2bebd32a0413cb303356bcf7bcc",
+      "headers": [
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "path": "g2/components/case/legacy_default_candidate_20261010/shipmode_power_stop.c",
+      "sha256": "045f5772396ba6d0faa69b74d90140789cc90042fb5c1d1a3ec08f26b62f3efc",
+      "object_sha256": "5a7d38479db46967789cc91459683528ec1f4236578984bb6924277872749508",
       "headers": [
         {
           "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
@@ -1197,8 +1219,8 @@
     },
     {
       "path": "g2/components/case/legacy_default_candidate_20261010/vformat_candidate.c",
-      "sha256": "8c3a4a35e3f40974bd0a146e5d84ddc7898a5383e133355428226e2286ac280e",
-      "object_sha256": "126d8ef97e03ca29e97c42221152de3fb4e4e2731afd3a41ca472c5b4f14e230",
+      "sha256": "3e1325d27abd739160b4fd5a1e0147925b998279e2349af949390cececc8c242",
+      "object_sha256": "220fa8a69ecd880abf4802f01dd0e57a3bd7f48833488075b80b4b9347081dbb",
       "headers": [
         {
           "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
@@ -1273,7 +1295,7 @@
     }
   ],
   "archive": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/m0/case-build/libcase_command_candidate.a",
-  "archive_sha256": "1d5b58e754f97918015c9fc3cc7b8576eab1cbdf78121a2b486b3300f6764d63",
+  "archive_sha256": "837d6614d4638ee661d9ae3ee8b46ef0b6481123d4a7515a33dc84cc224e129c",
   "compiler_sha256": "21df4f5520528e31b8632cfb3b4b57a3f2a33126693828bf69d1976f537aaec7",
   "archiver_sha256": "f40cd1c0ee57dd53d75e1a210c099cfb6a7fd5132257dfe0bbeed236f42400cb",
   "flags": [
@@ -1451,9 +1473,13 @@
     "case_legacy_dd_branch",
     "case_legacy_default_branch",
     "case_legacy_df_branch",
+    "case_legacy_ee_enter_standby",
     "case_legacy_ee_first",
+    "case_legacy_ee_power_stop",
     "case_legacy_ee_prefix",
     "case_legacy_ee_transport",
+    "case_legacy_ee_wake_enable",
+    "case_legacy_ee_wake_prepare",
     "case_legacy_ff_prefix",
     "case_legacy_fill8",
     "case_legacy_gpio_bit0",

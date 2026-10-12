@@ -92,7 +92,8 @@ static void put_number(case_emit_t emit,void *context,uint32_t *count,
     if(flags&ALT) {
         if(flags&PTR) prefix1='@';
         else if(base==16 && nonzero) {prefix1='0';prefix2=upper?'X':'x';}
-        else if(base==8 && (!digits||reverse[digits-1]!='0')) prefix1='0';
+        else if(base==8 && (!digits||
+                (precision<=(int32_t)digits && reverse[digits-1]!='0'))) prefix1='0';
     }
     uint32_t zeros=precision>(int32_t)digits?(uint32_t)precision-digits:0;
     uint32_t used=digits+zeros+(sign!=0)+(prefix1!=0)+(prefix2!=0);

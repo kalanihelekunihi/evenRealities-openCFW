@@ -18,7 +18,7 @@ static const char lock_error[]="[mspi_flash_mutex_id] lock timeout"; /* ROM0x753
 static const char unlock_error[]="[mspi_flash_mutex_id] unlock timeout"; /* ROM0x749a74 */
 static const char lock_short[]="[drv.norflash][mspi_flash_mutex_id] lock timeout"; /* ROM0x729114 */
 static const char unlock_short[]="[drv.norflash][mspi_flash_mutex_id] unlock timeout"; /* ROM0x729148 */
-static void flash_mutex_take(void) {
+void audio_uart_brightness_stage_46f5a6(void) {
     if(audio_uart_font_flash_mutex==0) return;
     if(audio_file_mutex_acquire(audio_uart_font_flash_mutex,UINT32_MAX)==0) return;
     if(audio_log_flags()&2u)
@@ -26,7 +26,7 @@ static void flash_mutex_take(void) {
     if((audio_log_flags()&1u)||(audio_log_flags()&4u))
         (void)compressed_log_output(0x04000000u,lock_short,lock_short);
 }
-static void flash_mutex_give(void) {
+void audio_uart_brightness_commit_46f604(void) {
     if(audio_uart_font_flash_mutex==0) return;
     if(audio_file_mutex_release(audio_uart_font_flash_mutex)==0) return;
     if(audio_log_flags()&2u)
@@ -35,7 +35,7 @@ static void flash_mutex_give(void) {
         (void)compressed_log_output(0x04000000u,unlock_short,unlock_short);
 }
 void audio_uart_ring_config_lock(void) {
-    flash_mutex_take();
+    audio_uart_brightness_stage_46f5a6();
     if(audio_uart_font_flash_mode!=1u) {
         (void)audio_uart_font_flash_power(audio_uart_font_flash_device,0u,1u);
         audio_uart_font_flash_sleep=0u;
@@ -46,5 +46,5 @@ void audio_uart_ring_config_unlock(void) {
         (void)audio_uart_font_flash_power(audio_uart_font_flash_device,2u,1u);
         audio_uart_font_flash_sleep=1u;
     }
-    flash_mutex_give();
+    audio_uart_brightness_commit_46f604();
 }

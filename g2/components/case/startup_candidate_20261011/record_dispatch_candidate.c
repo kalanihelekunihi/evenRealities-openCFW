@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Source-owned control-flow reduction of stock parser 0x08001e94.
  * Product messages, the 0x5a copy extent, and downstream transport remain
@@ -18,7 +19,7 @@ static void record_clear(void){for(uint32_t i=0;i<0x118u;i++)input[i]=0u;}
 static uint32_t read32be(const volatile uint8_t *p){return ((uint32_t)p[0]<<24)|((uint32_t)p[1]<<16)|((uint32_t)p[2]<<8)|p[3];}
 static void write32(volatile uint8_t *p,uint32_t v){for(uint32_t i=0;i<4u;i++)p[i]=(uint8_t)(v>>(i*8u));}
 static void write16(volatile uint8_t *p,uint16_t v){p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8);}
-static void logline(uint32_t message,uint32_t a,uint32_t b,uint32_t c,uint32_t d,uint32_t e){case_record_log(message,a,b,c,d,e,0);case_record_log(0x08002278u,0,0,0,0,0,0);}
+static void logline(uint32_t message,uint32_t a,uint32_t b,uint32_t c,uint32_t d,uint32_t e){case_record_log(message,a,b,c,d,e,0);case_record_log(CASE_STRING_ADDR(08002278),0,0,0,0,0,0);}
 static void charging(uint32_t side,const volatile uint8_t *p,uint8_t logs_quiet){
     if(p[3]==6u){
         uint16_t voltage=(uint16_t)(((uint16_t)p[5]<<8)|p[6]);
@@ -34,18 +35,18 @@ static void charging(uint32_t side,const volatile uint8_t *p,uint8_t logs_quiet)
             state[0x2d]=enabled;
             if(flags[0] && !flags[1])state[0x2d]=0u;
             state[-13]=0u;state[0x2e]=p[7];write16(state+0x32,voltage);
-            if(!logs_quiet)logline(0x08002320u,state[0x2c],direction,voltage,p[7],(uint32_t)current);
+            if(!logs_quiet)logline(CASE_STRING_ADDR(08002320),state[0x2c],direction,voltage,p[7],(uint32_t)current);
         }else{
             uint8_t old=seq[0];seq[0]=(uint8_t)(old*2u);
             if(permits || ((volatile uint32_t *)(uintptr_t)state)[10]<10u)seq[0]=(uint8_t)(old*2u+1u);
             state[0x14]=1u;state[0x10]=(seq[0]&7u)!=0u;
-            if(!state[0x11] && state[-14] && p[7]>0x61u && !logs_quiet)logline(0x080022bfu,0,0,0,0,0);
+            if(!state[0x11] && state[-14] && p[7]>0x61u && !logs_quiet)logline(CASE_STRING_ADDR(080022bf),0,0,0,0,0);
             state[0x11]=(state[0x11] || state[-14]) ? (p[7]>=0x62u) : (uint8_t)direction;
             if(flags[0] && !flags[1])state[0x11]=0u;
             state[-14]=0u;state[0x12]=p[7];write16(state+0x16,voltage);
-            if(!logs_quiet)logline(0x080022ebu,state[0x10],direction,voltage,p[7],(uint32_t)current);
+            if(!logs_quiet)logline(CASE_STRING_ADDR(080022eb),state[0x10],direction,voltage,p[7],(uint32_t)current);
         }
-    }else if(p[3]==1u && p[4]==1u && !logs_quiet){logline(side?0x08002354u:0x08002378u,0,0,0,0,0);}
+    }else if(p[3]==1u && p[4]==1u && !logs_quiet){logline(side?CASE_STRING_ADDR(08002354):CASE_STRING_ADDR(08002378),0,0,0,0,0);}
 }
 uint32_t case_record_dispatch_1e94(uint32_t side){
     struct case_record_prefix prefix;
@@ -54,7 +55,7 @@ uint32_t case_record_dispatch_1e94(uint32_t side){
     const volatile uint8_t *p=(const volatile uint8_t *)(uintptr_t)prefix.payload;
     uint8_t q=quiet();
     if(scan==3u){
-        if(!q){logline(0x0800225bu,0,0,0,0,0);if(!quiet())case_record_log(0x0800227cu,prefix.calculated_crc,prefix.received_crc,prefix.length,0,0,0);}
+        if(!q){logline(CASE_STRING_ADDR(0800225b),0,0,0,0,0);if(!quiet())case_record_log(CASE_STRING_ADDR(0800227c),prefix.calculated_crc,prefix.received_crc,prefix.length,0,0,0);}
         case_record_hex_log((const uint8_t *)(uintptr_t)p,prefix.length);
         return 0xffu;
     }
@@ -65,9 +66,9 @@ uint32_t case_record_dispatch_1e94(uint32_t side){
         if(p[3]==0x20u){
             if(p[9]==2u && p[10]>0x39u){
                 state[-4]=2u;state[-3]=p[10];write32(state,read32be(p+12));write32(state+4,read32be(p+16));state[-7]=3u;state[-6]=0u;
-                if(!q){case_record_log(0x080023b8u,2u,0x39u,p[9],p[10],read32be(p+12),read32be(p+16));case_record_log(0x08002278u,0,0,0,0,0,0);}
-            }else if(!q)logline(0x080023bcu,2u,0x39u,p[9],p[10],0);
-        }else if(!q)logline(0x0800239cu,0,0,0,0,0);
+                if(!q){case_record_log(CASE_STRING_ADDR(0800d648),2u,0x39u,p[9],p[10],read32be(p+12),read32be(p+16));case_record_log(CASE_STRING_ADDR(08002278),0,0,0,0,0,0);}
+            }else if(!q)logline(CASE_STRING_ADDR(080023bc),2u,0x39u,p[9],p[10],0);
+        }else if(!q)logline(CASE_STRING_ADDR(0800239c),0,0,0,0,0);
         break;
     case 0x59u:if(p[3]==1u && p[4]==0u)result=0x59u;break;
     case 0x5au:

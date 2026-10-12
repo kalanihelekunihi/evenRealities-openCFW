@@ -1,0 +1,287 @@
+
+/out/backup_clock_div_dto_experiment.o:     file format elf32-csky-little
+
+
+Disassembly of section .text:
+
+00000000 <__module_get_info>:
+   0:	3319      	movi      	r3, 25
+   2:	640c      	cmphs      	r3, r0
+   4:	0c1e      	bf      	0x40	// 40 <__module_get_info+0x40>
+   6:	e901001d 	bez      	r1, 0x40	// 40 <__module_get_info+0x40>
+   a:	ea9200b8 	lrw      	r18, 0x0	// 2e8 <gx8002_image_b_clock_config_flags_100038e8+0xd4>
+   e:	3200      	movi      	r2, 0
+  10:	c480482c 	lsli      	r12, r0, 4
+  14:	b140      	st.w      	r2, (r1, 0x0)
+  16:	d1920822 	ldr.w      	r2, (r18, r12 << 0)
+  1a:	6482      	cmpne      	r0, r2
+  1c:	0c47      	bf      	0xaa	// aa <__module_get_info+0xaa>
+  1e:	d8522000 	ld.w      	r2, (r18, 0x0)
+  22:	6482      	cmpne      	r0, r2
+  24:	0c15      	bf      	0x4e	// 4e <__module_get_info+0x4e>
+  26:	e452000f 	addi      	r2, r18, 16
+  2a:	ea0c0001 	movi      	r12, 1
+  2e:	d9a22000 	ld.w      	r13, (r2, 0x0)
+  32:	6742      	cmpne      	r0, r13
+  34:	0c09      	bf      	0x46	// 46 <__module_get_info+0x46>
+  36:	e58c0000 	addi      	r12, r12, 1
+  3a:	220f      	addi      	r2, 16
+  3c:	e823fff9 	bnezad      	r3, 0x2e	// 2e <__module_get_info+0x2e>
+  40:	3000      	movi      	r0, 0
+  42:	2800      	subi      	r0, 1
+  44:	783c      	jmp      	r15
+  46:	c48c482c 	lsli      	r12, r12, 4
+  4a:	c5920032 	addu      	r18, r18, r12
+  4e:	de412000 	st.w      	r18, (r1, 0x0)
+  52:	c412482c 	lsli      	r12, r18, 0
+  56:	e90cfff5 	bez      	r12, 0x40	// 40 <__module_get_info+0x40>
+  5a:	3809      	cmphsi      	r0, 10
+  5c:	0c14      	bf      	0x84	// 84 <__module_get_info+0x84>
+  5e:	ea23a030 	movih      	r3, 41008
+  62:	b161      	st.w      	r3, (r1, 0x4)
+  64:	027d      	lrw      	r3, 0xa0300088	// 2ec <gx8002_image_b_clock_config_flags_100038e8+0xd8>
+  66:	b162      	st.w      	r3, (r1, 0x8)
+  68:	ea23a030 	movih      	r3, 41008
+  6c:	2317      	addi      	r3, 24
+  6e:	b163      	st.w      	r3, (r1, 0xc)
+  70:	ea23a030 	movih      	r3, 41008
+  74:	231b      	addi      	r3, 28
+  76:	b164      	st.w      	r3, (r1, 0x10)
+  78:	3000      	movi      	r0, 0
+  7a:	ea23a030 	movih      	r3, 41008
+  7e:	3ba5      	bseti      	r3, 5
+  80:	b165      	st.w      	r3, (r1, 0x14)
+  82:	783c      	jmp      	r15
+  84:	ea23a001 	movih      	r3, 40961
+  88:	b161      	st.w      	r3, (r1, 0x4)
+  8a:	0365      	lrw      	r3, 0xa001008c	// 2f0 <gx8002_image_b_clock_config_flags_100038e8+0xdc>
+  8c:	b162      	st.w      	r3, (r1, 0x8)
+  8e:	ea23a001 	movih      	r3, 40961
+  92:	2317      	addi      	r3, 24
+  94:	b163      	st.w      	r3, (r1, 0xc)
+  96:	ea23a001 	movih      	r3, 40961
+  9a:	231b      	addi      	r3, 28
+  9c:	b164      	st.w      	r3, (r1, 0x10)
+  9e:	3000      	movi      	r0, 0
+  a0:	ea23a001 	movih      	r3, 40961
+  a4:	3ba5      	bseti      	r3, 5
+  a6:	b165      	st.w      	r3, (r1, 0x14)
+  a8:	783c      	jmp      	r15
+  aa:	c592002c 	addu      	r12, r18, r12
+  ae:	dd812000 	st.w      	r12, (r1, 0x0)
+  b2:	07d2      	br      	0x56	// 56 <__module_get_info+0x56>
+
+000000b4 <gx8002_image_b_clock_config_10003788>:
+  b4:	14d2      	push      	r4-r5, r15
+  b6:	1426      	subi      	r14, r14, 24
+  b8:	6d47      	mov      	r5, r1
+  ba:	6c7b      	mov      	r1, r14
+  bc:	6d03      	mov      	r4, r0
+  be:	e0000000 	bsr      	0x0	// 0 <__module_get_info>
+			be: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+  c2:	e9200088 	bnez      	r0, 0x1d2	// 1d2 <gx8002_image_b_clock_config_10003788+0x11e>
+  c6:	d98e2000 	ld.w      	r12, (r14, 0x0)
+  ca:	d86c2002 	ld.w      	r3, (r12, 0x8)
+  ce:	e9030082 	bez      	r3, 0x1d2	// 1d2 <gx8002_image_b_clock_config_10003788+0x11e>
+  d2:	8340      	ld.b      	r2, (r3, 0x0)
+  d4:	e902007f 	bez      	r2, 0x1d2	// 1d2 <gx8002_image_b_clock_config_10003788+0x11e>
+  d8:	da430001 	ld.b      	r18, (r3, 0x1)
+  dc:	d9a31001 	ld.h      	r13, (r3, 0x2)
+  e0:	9861      	ld.w      	r3, (r14, 0x4)
+  e2:	60c8      	addu      	r3, r2
+  e4:	c40555f3 	zext      	r19, r5, 15, 0
+  e8:	9360      	ld.w      	r3, (r3, 0x0)
+  ea:	c6434043 	lsr      	r3, r3, r18
+  ee:	68f4      	and      	r3, r13
+  f0:	3b40      	cmpnei      	r3, 0
+  f2:	c4630c41 	inct      	r3, r3, 1
+  f6:	c4730480 	cmpne      	r19, r3
+  fa:	0c6c      	bf      	0x1d2	// 1d2 <gx8002_image_b_clock_config_10003788+0x11e>
+  fc:	e90d0089 	bez      	r13, 0x20e	// 20e <gx8002_image_b_clock_config_10003788+0x15a>
+ 100:	6cc3      	mov      	r3, r0
+ 102:	2300      	addi      	r3, 1
+ 104:	c46d4041 	lsr      	r1, r13, r3
+ 108:	e921fffd 	bnez      	r1, 0x102	// 102 <gx8002_image_b_clock_config_10003788+0x4e>
+ 10c:	daac4004 	ld.bs      	r21, (r12, 0x4)
+ 110:	c4720023 	addu      	r3, r18, r3
+ 114:	e7230000 	addi      	r25, r3, 1
+ 118:	dacc4006 	ld.bs      	r22, (r12, 0x6)
+ 11c:	daee2002 	ld.w      	r23, (r14, 0x8)
+ 120:	e9950074 	blz      	r21, 0x208	// 208 <gx8002_image_b_clock_config_10003788+0x154>
+ 124:	9823      	ld.w      	r1, (r14, 0xc)
+ 126:	da812000 	ld.w      	r20, (r1, 0x0)
+ 12a:	c6b44054 	lsr      	r20, r20, r21
+ 12e:	e6942001 	andi      	r20, r20, 1
+ 132:	e9140009 	bez      	r20, 0x144	// 144 <gx8002_image_b_clock_config_10003788+0x90>
+ 136:	d98e2005 	ld.w      	r12, (r14, 0x14)
+ 13a:	3101      	movi      	r1, 1
+ 13c:	c6a14021 	lsl      	r1, r1, r21
+ 140:	dc2c2000 	st.w      	r1, (r12, 0x0)
+ 144:	d9972000 	ld.w      	r12, (r23, 0x0)
+ 148:	c6cc404c 	lsr      	r12, r12, r22
+ 14c:	e58c2001 	andi      	r12, r12, 1
+ 150:	e90c0007 	bez      	r12, 0x15e	// 15e <gx8002_image_b_clock_config_10003788+0xaa>
+ 154:	3c46      	cmpnei      	r4, 6
+ 156:	0c4c      	bf      	0x1ee	// 1ee <gx8002_image_b_clock_config_10003788+0x13a>
+ 158:	3109      	movi      	r1, 9
+ 15a:	6504      	cmphs      	r1, r4
+ 15c:	0c49      	bf      	0x1ee	// 1ee <gx8002_image_b_clock_config_10003788+0x13a>
+ 15e:	9821      	ld.w      	r1, (r14, 0x4)
+ 160:	6084      	addu      	r2, r1
+ 162:	3101      	movi      	r1, 1
+ 164:	db022000 	ld.w      	r24, (r2, 0x0)
+ 168:	c7214021 	lsl      	r1, r1, r25
+ 16c:	c4382058 	andn      	r24, r24, r1
+ 170:	df022000 	st.w      	r24, (r2, 0x0)
+ 174:	db022000 	ld.w      	r24, (r2, 0x0)
+ 178:	c7012421 	or      	r1, r1, r24
+ 17c:	b220      	st.w      	r1, (r2, 0x0)
+ 17e:	db022000 	ld.w      	r24, (r2, 0x0)
+ 182:	c64d4021 	lsl      	r1, r13, r18
+ 186:	c4382041 	andn      	r1, r24, r1
+ 18a:	7555      	zexth      	r5, r5
+ 18c:	b220      	st.w      	r1, (r2, 0x0)
+ 18e:	9220      	ld.w      	r1, (r2, 0x0)
+ 190:	e9050006 	bez      	r5, 0x19c	// 19c <gx8002_image_b_clock_config_10003788+0xe8>
+ 194:	e4131000 	subi      	r0, r19, 1
+ 198:	c6404020 	lsl      	r0, r0, r18
+ 19c:	6c04      	or      	r0, r1
+ 19e:	b200      	st.w      	r0, (r2, 0x0)
+ 1a0:	3101      	movi      	r1, 1
+ 1a2:	9200      	ld.w      	r0, (r2, 0x0)
+ 1a4:	c4614023 	lsl      	r3, r1, r3
+ 1a8:	c4602041 	andn      	r1, r0, r3
+ 1ac:	b220      	st.w      	r1, (r2, 0x0)
+ 1ae:	9220      	ld.w      	r1, (r2, 0x0)
+ 1b0:	6cc4      	or      	r3, r1
+ 1b2:	b260      	st.w      	r3, (r2, 0x0)
+ 1b4:	e90c0007 	bez      	r12, 0x1c2	// 1c2 <gx8002_image_b_clock_config_10003788+0x10e>
+ 1b8:	3c46      	cmpnei      	r4, 6
+ 1ba:	0c0e      	bf      	0x1d6	// 1d6 <gx8002_image_b_clock_config_10003788+0x122>
+ 1bc:	3309      	movi      	r3, 9
+ 1be:	650c      	cmphs      	r3, r4
+ 1c0:	0c0b      	bf      	0x1d6	// 1d6 <gx8002_image_b_clock_config_10003788+0x122>
+ 1c2:	e9140008 	bez      	r20, 0x1d2	// 1d2 <gx8002_image_b_clock_config_10003788+0x11e>
+ 1c6:	9844      	ld.w      	r2, (r14, 0x10)
+ 1c8:	3301      	movi      	r3, 1
+ 1ca:	c6a34035 	lsl      	r21, r3, r21
+ 1ce:	dea22000 	st.w      	r21, (r2, 0x0)
+ 1d2:	1406      	addi      	r14, r14, 24
+ 1d4:	1492      	pop      	r4-r5, r15
+ 1d6:	3301      	movi      	r3, 1
+ 1d8:	d8572000 	ld.w      	r2, (r23, 0x0)
+ 1dc:	c6c34036 	lsl      	r22, r3, r22
+ 1e0:	c6c22043 	andn      	r3, r2, r22
+ 1e4:	c4762436 	or      	r22, r22, r3
+ 1e8:	ded72000 	st.w      	r22, (r23, 0x0)
+ 1ec:	07eb      	br      	0x1c2	// 1c2 <gx8002_image_b_clock_config_10003788+0x10e>
+ 1ee:	ea180000 	movi      	r24, 0
+ 1f2:	e7181001 	subi      	r24, r24, 2
+ 1f6:	d8372000 	ld.w      	r1, (r23, 0x0)
+ 1fa:	c6d84118 	rotl      	r24, r24, r22
+ 1fe:	c4382038 	and      	r24, r24, r1
+ 202:	df172000 	st.w      	r24, (r23, 0x0)
+ 206:	07ac      	br      	0x15e	// 15e <gx8002_image_b_clock_config_10003788+0xaa>
+ 208:	ea140000 	movi      	r20, 0
+ 20c:	079c      	br      	0x144	// 144 <gx8002_image_b_clock_config_10003788+0x90>
+ 20e:	6cf7      	mov      	r3, r13
+ 210:	077e      	br      	0x10c	// 10c <gx8002_image_b_clock_config_10003788+0x58>
+	...
+
+00000214 <gx8002_image_b_clock_config_flags_100038e8>:
+ 214:	14d2      	push      	r4-r5, r15
+ 216:	1426      	subi      	r14, r14, 24
+ 218:	6d07      	mov      	r4, r1
+ 21a:	6c7b      	mov      	r1, r14
+ 21c:	6d4b      	mov      	r5, r2
+ 21e:	e0000000 	bsr      	0x0	// 0 <__module_get_info>
+			21e: R_CKCORE_PCREL_IMM26BY2	__module_get_info
+ 222:	e9200060 	bnez      	r0, 0x2e2	// 2e2 <gx8002_image_b_clock_config_flags_100038e8+0xce>
+ 226:	9820      	ld.w      	r1, (r14, 0x0)
+ 228:	9163      	ld.w      	r3, (r1, 0xc)
+ 22a:	e903005c 	bez      	r3, 0x2e2	// 2e2 <gx8002_image_b_clock_config_flags_100038e8+0xce>
+ 22e:	8360      	ld.b      	r3, (r3, 0x0)
+ 230:	e9030059 	bez      	r3, 0x2e2	// 2e2 <gx8002_image_b_clock_config_flags_100038e8+0xce>
+ 234:	9841      	ld.w      	r2, (r14, 0x4)
+ 236:	60c8      	addu      	r3, r2
+ 238:	9340      	ld.w      	r2, (r3, 0x0)
+ 23a:	c4025700 	zext      	r0, r2, 24, 0
+ 23e:	6412      	cmpne      	r4, r0
+ 240:	0c5a      	bf      	0x2f4	// 2f4 <gx8002_image_b_clock_config_flags_100038e8+0xe0>
+ 242:	d9a14004 	ld.bs      	r13, (r1, 0x4)
+ 246:	3d40      	cmpnei      	r5, 0
+ 248:	6483      	mvcv      	r2
+ 24a:	d98e2002 	ld.w      	r12, (r14, 0x8)
+ 24e:	da414006 	ld.bs      	r18, (r1, 0x6)
+ 252:	e98d006b 	blz      	r13, 0x328	// 328 <gx8002_image_b_clock_config_flags_100038e8+0x114>
+ 256:	9823      	ld.w      	r1, (r14, 0xc)
+ 258:	9100      	ld.w      	r0, (r1, 0x0)
+ 25a:	7035      	lsr      	r0, r13
+ 25c:	e4002001 	andi      	r0, r0, 1
+ 260:	e9000008 	bez      	r0, 0x270	// 270 <gx8002_image_b_clock_config_flags_100038e8+0x5c>
+ 264:	da6e2005 	ld.w      	r19, (r14, 0x14)
+ 268:	3101      	movi      	r1, 1
+ 26a:	7074      	lsl      	r1, r13
+ 26c:	dc332000 	st.w      	r1, (r19, 0x0)
+ 270:	d82c2000 	ld.w      	r1, (r12, 0x0)
+ 274:	c6414041 	lsr      	r1, r1, r18
+ 278:	e4212001 	andi      	r1, r1, 1
+ 27c:	e9010044 	bez      	r1, 0x304	// 304 <gx8002_image_b_clock_config_flags_100038e8+0xf0>
+ 280:	3101      	movi      	r1, 1
+ 282:	c6414021 	lsl      	r1, r1, r18
+ 286:	da6c2000 	ld.w      	r19, (r12, 0x0)
+ 28a:	c4212492 	nor      	r18, r1, r1
+ 28e:	c6532033 	and      	r19, r19, r18
+ 292:	425b      	lsli      	r2, r2, 27
+ 294:	de6c2000 	st.w      	r19, (r12, 0x0)
+ 298:	6c90      	or      	r2, r4
+ 29a:	ea330400 	movih      	r19, 1024
+ 29e:	ea140000 	movi      	r20, 0
+ 2a2:	de632000 	st.w      	r19, (r3, 0x0)
+ 2a6:	de832000 	st.w      	r20, (r3, 0x0)
+ 2aa:	de632000 	st.w      	r19, (r3, 0x0)
+ 2ae:	c6622433 	or      	r19, r2, r19
+ 2b2:	3ab9      	bseti      	r2, 25
+ 2b4:	3aba      	bseti      	r2, 26
+ 2b6:	de632000 	st.w      	r19, (r3, 0x0)
+ 2ba:	b340      	st.w      	r2, (r3, 0x0)
+ 2bc:	b340      	st.w      	r2, (r3, 0x0)
+ 2be:	de632000 	st.w      	r19, (r3, 0x0)
+ 2c2:	d86c2000 	ld.w      	r3, (r12, 0x0)
+ 2c6:	c4722032 	and      	r18, r18, r3
+ 2ca:	c6412421 	or      	r1, r1, r18
+ 2ce:	dc2c2000 	st.w      	r1, (r12, 0x0)
+ 2d2:	e9000008 	bez      	r0, 0x2e2	// 2e2 <gx8002_image_b_clock_config_flags_100038e8+0xce>
+ 2d6:	9844      	ld.w      	r2, (r14, 0x10)
+ 2d8:	3301      	movi      	r3, 1
+ 2da:	c5a3402d 	lsl      	r13, r3, r13
+ 2de:	dda22000 	st.w      	r13, (r2, 0x0)
+ 2e2:	1406      	addi      	r14, r14, 24
+ 2e4:	1492      	pop      	r4-r5, r15
+ 2e6:	0000      	.short	0x0000
+ 2e8:	00000000 	.long	0x00000000
+			2e8: R_CKCORE_ADDR32	.data
+ 2ec:	a0300088 	.long	0xa0300088
+ 2f0:	a001008c 	.long	0xa001008c
+ 2f4:	ea200800 	movih      	r0, 2048
+ 2f8:	6c81      	xor      	r2, r0
+ 2fa:	c7625762 	zext      	r2, r2, 27, 27
+ 2fe:	6496      	cmpne      	r5, r2
+ 300:	0ba1      	bt      	0x242	// 242 <gx8002_image_b_clock_config_flags_100038e8+0x2e>
+ 302:	07f0      	br      	0x2e2	// 2e2 <gx8002_image_b_clock_config_flags_100038e8+0xce>
+ 304:	425b      	lsli      	r2, r2, 27
+ 306:	ea2c0400 	movih      	r12, 1024
+ 30a:	6c90      	or      	r2, r4
+ 30c:	dd832000 	st.w      	r12, (r3, 0x0)
+ 310:	b320      	st.w      	r1, (r3, 0x0)
+ 312:	c5822421 	or      	r1, r2, r12
+ 316:	3ab9      	bseti      	r2, 25
+ 318:	3aba      	bseti      	r2, 26
+ 31a:	dd832000 	st.w      	r12, (r3, 0x0)
+ 31e:	b320      	st.w      	r1, (r3, 0x0)
+ 320:	b340      	st.w      	r2, (r3, 0x0)
+ 322:	b340      	st.w      	r2, (r3, 0x0)
+ 324:	b320      	st.w      	r1, (r3, 0x0)
+ 326:	07d6      	br      	0x2d2	// 2d2 <gx8002_image_b_clock_config_flags_100038e8+0xbe>
+ 328:	3000      	movi      	r0, 0
+ 32a:	07a3      	br      	0x270	// 270 <gx8002_image_b_clock_config_flags_100038e8+0x5c>

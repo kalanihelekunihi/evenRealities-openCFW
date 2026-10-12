@@ -1,0 +1,12 @@
+{
+  "result": "assembler_rejected",
+  "instruction": "aslacc 0xe2",
+  "native_word": "282f0fbf",
+  "native_limm": "000000e2",
+  "pinned_opcode_table_match": "aslacc RC, register encoding RC62",
+  "final_word": "309c0c49",
+  "final_opcode_match": "mpywhl RB,RBdup,SIMM12_20",
+  "decoded_final_immediate": 625,
+  "error": "immediate is out of bounds for instruction aslacc",
+  "scope": "Mask/source inference only; long-immediate extension and arithmetic semantic proof unresolved. No raw opcode provider introduced."
+}

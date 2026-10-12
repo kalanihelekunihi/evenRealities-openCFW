@@ -84,10 +84,38 @@
         "result": "7ff0000000000000",
         "errno": 34
       }
+    },
+    {
+      "case": "hex-fraction-low",
+      "result": {
+        "result": "41a0000000000000",
+        "errno": 0
+      }
+    },
+    {
+      "case": "hex-fraction-near-one",
+      "result": {
+        "result": "41afffffffffffff",
+        "errno": 0
+      }
+    },
+    {
+      "case": "hex-fraction-rounding",
+      "result": {
+        "result": "41a123456789abcd",
+        "errno": 0
+      }
+    },
+    {
+      "case": "hex-fraction-negative",
+      "result": {
+        "result": "c1a123456789abcd",
+        "errno": 0
+      }
     }
   ],
   "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
-  "source_sha256": "d04b37c3a1c149ff2fac86cbcd7d6ea12285554a2d194874515438c8e276b054",
+  "source_sha256": "4c642065e4b0f8c16f56ac93bcafa6a5a5592ff9f362a8d0eba8f499f394d726",
   "limits": [
     "Finite raw-word inputs only; Unicorn M-class cannot execute the stock double-precision VMUL at 0x42276a, so multiplying denormal and gradual-underflow paths remain untested.",
     "FPSCR exception flags and all exponent boundary values are not yet fully qualified."

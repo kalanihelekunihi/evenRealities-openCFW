@@ -1,0 +1,26 @@
+{
+  "status": "CONDITIONAL_SOURCE_PAYLOAD_ONLY",
+  "source_elf_sha256": "e066ae2f2048e351fa8591c40a632f30e291beacab028cf7814187a6fa73d5e8",
+  "geometry_sha256": "517f6d2bd3820f6fe2ff5df92c0ac246035ad0a72832fb9ca63b96439b5dcc66",
+  "output_sha256": "eaa5caa75b5eaf7d1b7d316c8d17cbc4f4ba6a70294fd9583db97c21c0bb222b",
+  "output_bytes": 51204,
+  "explicit_gap_fill_byte": "0x0",
+  "loaded_source_sections": 29,
+  "stage2_header_word": "0x8e84",
+  "xip_interval": [
+    "0x10203004",
+    "0x1020be88"
+  ],
+  "sram_interval": [
+    "0x10023400",
+    "0x10026d7c"
+  ],
+  "xip_bytes": 36484,
+  "sram_bytes": 14716,
+  "unassigned_bytes": 854,
+  "firmware_image_complete": false,
+  "limits": [
+    "Gap fill byte is caller supplied and not authenticated to the product.",
+    "The A stage-1 container, checksums, indirect roots, runtime alias and hardware behavior are not qualified."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "goal": "Six-image source reduction remains active",
+  "accepted_complete_images": 0,
+  "total_images": 6,
+  "rounds": {
+    "em9305": {
+      "settled_receipt": "g2/build/c-firmware/20261012/em-full-packet-constructors-round/receipt.json",
+      "definitions": 1472,
+      "unresolved": 74,
+      "duplicates": 0,
+      "pending_round": "em-generic-record-loop-callbacks-round",
+      "next_source_gaps": [
+        "Registered initializers and callbacks in remaining relocation inventory"
+      ],
+      "hardware_qualified": false,
+      "independently_checked_stable_current_snapshots": 124,
+      "settled_source_current": false
+    },
+    "apollo_main": {
+      "settled_receipt": "g2/build/c-firmware/20261011/peripherals-lv-init-children-round/receipt.json",
+      "definitions": 2814,
+      "mixed_unresolved": 751,
+      "duplicates": 0,
+      "newer_worker_rounds_pending_root_audit": false,
+      "independently_checked_stable_current_snapshots": 134,
+      "direct_call_imports": 86,
+      "address_only_imports": 665
+    },
+    "apollo_boot": {
+      "worker_latest": "Separate FLS and FFS compiled native comparisons; HF2 conversion order corrected",
+      "proof_leads": 6,
+      "gc_paths_worker_last_report": 0,
+      "rom_imports": 3,
+      "settled_receipt": "g2/analysis/c-source-completion-20261011/apollo/boot-coplacement-tlsf-ffs-hf2-order-round/receipt.json",
+      "image_file_bytes": 159100,
+      "bytes_before_main_preamble": 163808,
+      "margin_before_padding_veneers": 4708,
+      "source_input_hashes_current": 379,
+      "gc_review_scope": "53 sections,3590 bytes bounded final behavior; intermediate writes and concurrency open",
+      "settled_receipt_status": "PASS_BOUNDED_LINK independently hash-current",
+      "source_providers": 1012
+    },
+    "case_touch_codec": "See codec/image_b_sram_candidate/four-component-completion-audit.md for exact finite evidence gates",
+    "codec_b_loader_review": {
+      "full_native_branches_reviewed": 2,
+      "host_child_cut_cases": 32,
+      "physical_alias_proven": false,
+      "remaining": "Flash child effects, ambient read-failure word, reset runtime, physical alias and final package"
+    }
+  },
+  "estimation": "Counts are current source/provider review queues; do not convert to global completion percentages or hardware readiness."
+}

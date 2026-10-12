@@ -1,0 +1,107 @@
+{
+  "result": "TARGET_COMPILE_AND_RELOCATABLE_LINK_PASS",
+  "image": "BINH B separate 12 KiB stage1",
+  "source_complete": false,
+  "stock_stage1_sha256": "a80924ccf78205ef1761c4f568d4ce31f909635bf3ad7eecfaed250ad801626c",
+  "sdk_path": "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/spl/spl_spinor.c",
+  "sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "sdk_sha256": "a4b55a11ea67992e67791f7da06729850b5a358b2a027298a5d81cd8ef429606",
+  "source_units": [
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_boot_setup.c",
+      "sha256": "640625d8cb31fbcc3015718bb126cf3c9447908863123c72334c449e39d5fd32",
+      "object_sha256": "4e8ac012556e7bb65e879d08d0b5aa49eb9ea4a1337ee5b3d1b3ee5b99b97b31"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_clock_gate.c",
+      "sha256": "cc875f38ed5ac6f630f65546a2ae73c0dfa930e26d645f15060c7d92eb37204f",
+      "object_sha256": "1c15213a61994e399f90b4dd7ff385afccaf7a04c5e51f4cef5134ba449130b0"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_flash_chunk.c",
+      "sha256": "26896a930cb4dae6ab9d06ec291a769892fc7cdb859856d37dcf444726f21876",
+      "object_sha256": "475ade24c3ce664179d40e193a7697b3572bde76bb1f4301a3831ad5df84f595"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_flash_initialize.c",
+      "sha256": "40215ee98785571c97831b13ffb6dd18f0b7eb2dec3f85050c6e7c8cc6ce5e69",
+      "object_sha256": "9541d3774f8e537c40ffe57854d4fbccc4cdd45042a4baf7593461c0b8f92259"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_flash_reader.c",
+      "sha256": "54586ed857647a70017c0f349c8bc406f56e523dbd8f2f1eba739ef257f22b09",
+      "object_sha256": "e3ae710a1be8311c2dd8f8937f845051ef0cabab12f31c8d38ebd2a537942f46"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_flash_transaction.c",
+      "sha256": "0b5a5ef114d0195746366b34009c26d873ba386eaae787a2a9c2bbd20c20c09f",
+      "object_sha256": "468be91e93f05b6e8f6441e559069def22e35eeec6435c0c58e3c67e38409b4a"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_flash_write_transaction.c",
+      "sha256": "2b760073e4d536f7842c3066a71d1602d54eb2c929ece663698f95dc80abecd5",
+      "object_sha256": "82be680242b31ab85099154897e1b7ff5dd712d357752cd1212bb0ac8f1bc8bd"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_loader.c",
+      "sha256": "867b5dead57840ae33338ec5b3875f986b6590bc1c9cadb9b0d198bf611fe480",
+      "object_sha256": "14d56c331e8b62c9e95771ef34c9f0620c40087974f1f798b29002ef99998706"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_runtime_data.c",
+      "sha256": "cb54ab78384fb34887c33ff53f79775ad463cf34399006a74b537ee8ed5b15a4",
+      "object_sha256": "9f12e08cdfe01ef31367d482a7147e104fd1d91e7e40391dca2cd8420ecfda08"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_startup.c",
+      "sha256": "e4660d05f1dd0a9b3e50294b729f2c372236b39f291d6615b6930558d0347489",
+      "object_sha256": "7b40517124d80148448ae30cdc2b8fbd830b680e62e6bba14454832369660230"
+    },
+    {
+      "path": "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_timer.c",
+      "sha256": "4f5b8944da3d7d7d90565abf069cc2928175e887569110302fe1138b5fe298e3",
+      "object_sha256": "88fb42d4ef8e370fb9c488ef5bddc55f89e27813259066d7a2b6f06937995cbe"
+    }
+  ],
+  "linked_object": "g2/analysis/c-source-completion-20261011/codec/image_b_stage1_candidate/build/image_b_stage1_loader_candidate.o",
+  "linked_sha256": "4f4ad1b9b23f9c94f621c4c02a5d50187a6e353ec9a1448dd7642ad0977c0c28",
+  "known_native_body_addresses": [
+    "0x10000100",
+    "0x10000130",
+    "0x10000134",
+    "0x100001f8",
+    "0x10000300",
+    "0x100004f4",
+    "0x100007d8",
+    "0x10000d24",
+    "0x10000d4c",
+    "0x10000df0",
+    "0x10000e20",
+    "0x10000e64",
+    "0x10000ea0",
+    "0x10000eb8",
+    "0x10000ed0",
+    "0x10000edc",
+    "0x10000f5c",
+    "0x10000fdc",
+    "0x1000105a",
+    "0x100010e2",
+    "0x10001234",
+    "0x10001260",
+    "0x100012e0",
+    "0x100012f0",
+    "0x10001310"
+  ],
+  "unresolved_children": [
+    "gx8002_image_b_stage2_reset_10003100 (authenticated interstage target, bound in layout_probe.ld)"
+  ],
+  "limits": [
+    "Separate 11-unit stage1 ELF layout probe passes source and selected byte-range checks; package footer regenerated only experimentally.",
+    "Twenty-three direct native BSR target identifications accounted for; indirect edges and whole-body effects remain open.",
+    "Physical flash/MMIO and IRAM/DRAM alias behavior remain unqualified.",
+    "Stock normal stage2 copy length 0x1408c does not load late-audio extension."
+  ],
+  "stage1_runtime_address_rule": "file_offset + 0x0fffffe8 (24-byte BINH header excluded)",
+  "layout_probe_receipt": "g2/analysis/c-source-completion-20261011/codec/image_b_stage1_candidate/layout-probe-receipt.json",
+  "direct_call_census_receipt": "g2/analysis/c-source-completion-20261011/codec/image_b_stage1_candidate/direct-call-census-receipt.json"
+}

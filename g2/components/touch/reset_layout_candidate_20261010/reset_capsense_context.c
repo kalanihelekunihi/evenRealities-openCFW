@@ -7,17 +7,16 @@
  */
 #include <stdint.h>
 #include <stddef.h>
+#include "reset_pin_config.h"
+#include "reset_active_scan_context.h"
+#include "reset_base_frame_context.h"
+#include "reset_sensor_frames.h"
 extern const unsigned char touch_generated_common_config[];
 extern unsigned char touch_reset_common[];
 extern unsigned char touch_generated_internal_context[];
 extern const unsigned char touch_generated_widget_config[];
 extern unsigned char touch_reset_widgets[];
-extern const unsigned char touch_generated_pin_config[];
 extern const unsigned char touch_shield_pins_rom_b33c[];
-extern unsigned char touch_generated_active_scan_sns[];
-extern unsigned char touch_generated_base_frame_context[];
-extern unsigned char touch_generated_sensor_frame_context[];
-extern unsigned char touch_generated_lp_sensor_frame_context[];
 extern unsigned char touch_reset_active_descriptors[];
 extern unsigned char touch_reset_lp_descriptors[];
 extern unsigned char touch_generated_lp_history[];
@@ -50,9 +49,9 @@ touch_capsense_context_v6_lp touch_reset_capsense_context
  .ptrWdContext=touch_reset_widgets,
  .ptrPinConfig=touch_generated_pin_config,
  .ptrShieldPinConfig=touch_shield_pins_rom_b33c,
- .ptrActiveScanSns=touch_generated_active_scan_sns,
+ .ptrActiveScanSns=&touch_generated_active_scan_sns,
  .ptrBistContext=0,
- .ptrBaseFrameContext=touch_generated_base_frame_context,
+ .ptrBaseFrameContext=&touch_generated_base_frame_context,
  .ptrSensorFrameContext=touch_generated_sensor_frame_context,
  .ptrSensorFrameLpContext=touch_generated_lp_sensor_frame_context,
  .ptrScanSlots=touch_reset_active_descriptors,

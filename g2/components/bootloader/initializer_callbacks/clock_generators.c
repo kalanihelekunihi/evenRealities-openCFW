@@ -16,13 +16,13 @@ uint32_t opencfw_boot_startup_hf2_generate(uint32_t reference,uint32_t target,
  /* Keep architectural register-shift, UDIV and fixed-point VCVT semantics,
   * including shift>=32 and invalid/saturating FP conversion. No C cast UB. */
  __asm__ volatile(
-  "movs %0,#1\nlsls.w %0,%0,%3\nudiv %1,%2,%0\n"
   "vmov s0,%4\nvcvt.f32.u32 s0,s0\n"
+  "movs %0,#1\nlsls.w %0,%0,%3\nudiv %1,%2,%0\n"
   "vmov s1,%1\nvcvt.f32.u32 s1,s1\nvdiv.f32 s0,s0,s1\n"
-  "vcvt.u32.f32 s0,s0,#15\nvmov %1,s0"
-  :"=&r"(divisor),"=&r"(value):"r"(reference),"r"(shift),"r"(target)
-  :"s0","s1","cc");
- *out=value;return 0;
+  "vcvt.u32.f32 s0,s0,#15\nvstr s0,[%5]"
+  :"=&r"(divisor),"=&r"(value):"r"(reference),"r"(shift),"r"(target),"r"(out)
+  :"s0","s1","cc","memory");
+ return 0;
 }
 uint32_t opencfw_boot_pll_min_generate(opencfw_pll_config *out,
  uint32_t reference,uint32_t target,uint32_t minimum){
@@ -67,8 +67,17 @@ uint32_t opencfw_boot_startup_pll_generate(uint8_t *destination,
  if(!lo&&!hi)chosen=score(&low,reference,target)<score(&high,reference,target)?&low:&high;
  else if(!hi)chosen=&high;else if(!lo)chosen=&low;
  if(!chosen)return 5;
- /* Caller owns reference selection; offset0 is deliberately retained. */
- const uint8_t *bytes=(const uint8_t *)chosen;
- for(unsigned i=1;i<12;i++)destination[i]=bytes[i];
+ /* Caller owns reference selection; offset0 is deliberately retained.
+  * Stock 0x427288..0x4272a2 emits five byte stores, then one halfword
+  * and one word store. Preserve their width and order for the destination. */
+ volatile const uint8_t *bytes=(volatile const uint8_t *)chosen;
+ volatile uint8_t *output=(volatile uint8_t *)destination;
+ for(unsigned i=1;i<=5;i++)output[i]=bytes[i];
+ typedef uint16_t __attribute__((may_alias)) alias_u16;
+ typedef uint32_t __attribute__((may_alias)) alias_u32;
+ *(volatile alias_u16 *)(void *)(destination+6)=
+     *(volatile const alias_u16 *)(const void *)(bytes+6);
+ *(volatile alias_u32 *)(void *)(destination+8)=
+     *(volatile const alias_u32 *)(const void *)(bytes+8);
  return 0;
 }

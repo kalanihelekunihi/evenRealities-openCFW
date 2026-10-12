@@ -59,10 +59,11 @@ uint64_t opencfw_spot_pcm22_transition17(uint32_t new_power,
     uint32_t fields = *temp_active;
     fields = (fields & 0xffffc3ffu) | (((new_word >> 17) & 0x0fu) << 10);
     *temp_active = fields;
+    fields = *temp_active;
     fields = (fields & 0xfffffc00u) | ((new_word >> 7) & 0x3ffu);
     *temp_active = fields;
 
-    *trim = (intermediate_trim & 0xffffff80u) | new_low;
+    *trim = (*trim & 0xffffff80u) | new_low;
 
     uint32_t packed = (low_trim[0] & 0xffu) | ((low_trim[1] & 0xffu) << 8) |
                       ((low_trim[2] & 0xffu) << 16) | ((low_trim[3] & 0xffu) << 24);

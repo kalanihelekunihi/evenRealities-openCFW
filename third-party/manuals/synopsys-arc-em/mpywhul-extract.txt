@@ -1,0 +1,30 @@
+Synopsys, Inc. 1523SolvNetPlus
+DesignWare
+Version 5755-101
+October 2021
+ARCv2 ISA Programmer’s Reference Manual for ARC EM Processors                                                 Scalar DSP Instruc tion Set Details
+MPYWHUL
+Function
+Unsigned multiplication of 32 bits of one operand and the least-significant 16 bits of the other 
+operand.
+Extension Group
+DSP 32x16 MAC
+Operation
+if (cc) {
+ accwide = (unsigned) (b * c.h0);
+ a = accwide;
+}
+Instruction Format
+op a, b, c
+Syntax Example
+MPYWHUL <.f> a,b,c
+STATUS32 Flags Affected
+Description
+Unsigned multiplication of 32 bits of the b operand and the least-significant 16 bits of the c operand. 
+Write the product to the wide accumulator. Return the least-significant 32 bits of the wide 
+accumulator. The other flags are updated only if the .F suffix is used. An illegal instruction exception 
+is raised if you use the loop-counter (LP_COUNT/r60) as a destination operand register.
+Z • = Set when the destination register value is zero
+N • = Cleared
+C = Unchanged
+V • =Set if the accumulator cannot be re presented as a 32-bit unsigned integer

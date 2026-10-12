@@ -1,0 +1,53 @@
+{
+  "result": "PASS_STRUCTURAL_GEOMETRY_ONLY",
+  "stock_package_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "source_elf_sha256": "e066ae2f2048e351fa8591c40a632f30e291beacab028cf7814187a6fa73d5e8",
+  "native_binh_offset": "0x1cbb0",
+  "stage1_bytes": 12288,
+  "stage2_payload_bytes": 51200,
+  "stage2_flash_header_offset": "0xc58c",
+  "stage2_header_word_le": "0x8e84",
+  "xip_flash_data_start": "0xc590",
+  "xip_flash_data_end_exclusive": "0x15414",
+  "sram_flash_data_start": "0x15414",
+  "sram_flash_data_end_exclusive": "0x18d90",
+  "loader_xip_address_interval": [
+    "0x10203004",
+    "0x1020be88"
+  ],
+  "loader_sram_address_interval": [
+    "0x10023400",
+    "0x10026d7c"
+  ],
+  "source_loaded_sections": 29,
+  "xip_source_sections": 1,
+  "sram_source_sections": 28,
+  "xip_unassigned_intervals": [
+    {
+      "start": "0x1020be3c",
+      "end_exclusive": "0x1020be88",
+      "bytes": 76
+    }
+  ],
+  "sram_unassigned_intervals": [
+    {
+      "start": "0x10025c68",
+      "end_exclusive": "0x10025cd0",
+      "bytes": 104
+    },
+    {
+      "start": "0x10026242",
+      "end_exclusive": "0x100264e4",
+      "bytes": 674
+    }
+  ],
+  "xip_unassigned_bytes": 76,
+  "sram_unassigned_bytes": 778,
+  "aligned_absolute_words_into_unassigned_intervals": [],
+  "source_stage2_payload_emitted": false,
+  "limits": [
+    "Gap bytes have no authenticated source fill or indirect-root exclusion; no packed binary is emitted.",
+    "Stock package geometry verifies the nominal stage-1 intervals only; modified package metadata/checksum and flash behavior remain unqualified.",
+    "The ELF entry/relocation proof and physical SRAM/DRAM alias require separate receipts."
+  ]
+}

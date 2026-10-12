@@ -1,0 +1,45 @@
+{
+  "result": "PASS",
+  "stock_sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+  "source_receipt_sha256": "17011e8016426cc27d97b623801d9181dcde4185e2afddbdadcc42320a7ece66",
+  "qemu_sha256": "9fbb51168ef087533e8436a3e020962214a6145b33c7398903d08025b753e304",
+  "pair": {
+    "original": {
+      "elf_sha256": "71e7d5579da867c86b9cadfe2c89fb39af67f60a5078718dc86510efb38433f2",
+      "trace": [
+        "label: -1219501908",
+        "label: 1071889724",
+        "label: 768288904",
+        "label: -1075904101",
+        "label: -1587140900",
+        "label: 1064635934",
+        "label: -919463175",
+        "label: 1068805052",
+        "label: -1352526122",
+        "label: -1075409789",
+        "label: 1216895541",
+        "label: -1075240453",
+        "csky_exit_write: exit(0)"
+      ]
+    },
+    "source": {
+      "elf_sha256": "ba23bec7b9b892cedbcac979cb16b1d491f863754cc73852b24da172a99eb17d",
+      "trace": [
+        "label: -1219501908",
+        "label: 1071889724",
+        "label: 768288904",
+        "label: -1075904101",
+        "label: -1587140900",
+        "label: 1064635934",
+        "label: -919463175",
+        "label: 1068805052",
+        "label: -1352526122",
+        "label: -1075409789",
+        "label: 1216895541",
+        "label: -1075240453",
+        "csky_exit_write: exit(0)"
+      ]
+    }
+  },
+  "limit": "Finite explicit binary64 helper operands only, not whole kernel or hardware FP equivalence."
+}

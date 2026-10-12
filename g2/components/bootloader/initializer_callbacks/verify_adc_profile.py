@@ -26,7 +26,7 @@ class Machine(v.Machine):
   for reg,n in zip((a.UC_ARM_REG_R0,a.UC_ARM_REG_R1,a.UC_ARM_REG_R2,a.UC_ARM_REG_R3),params+[0]*4):self.cpu.reg_write(reg,n)
   self.cpu.reg_write(a.UC_ARM_REG_SP,v.v.v.v.SP);self.cpu.reg_write(a.UC_ARM_REG_LR,v.v.v.v.STOP|1);name,orig={'transfer':('opencfw_bl_adc_profile_transfer',0x42f020),'apply':('opencfw_bl_adc_apply_profile',0x42ea68),'power-enter':('opencfw_bl_mspi_mode_enter',0x41bf84),'power-leave':('opencfw_bl_mspi_mode_leave',0x41c17a)}[kind];pc=self.symbols[name]&~1 if self.source else orig;self.cpu.emu_start(pc|1,v.v.v.v.STOP+2,count=50000);assert self.done;return self.cpu.reg_read(a.UC_ARM_REG_R0)
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--elf',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);args=ap.parse_args();_,segs,syms=v.v.v.v.elf.elf_info(args.elf);cases=[];trace={}
+ ap=argparse.ArgumentParser();ap.add_argument('--elf',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);args=ap.parse_args();_,segs,syms=v.v.v.v.elf.elf_info(args.elf,source_coplacement=True);cases=[];trace={}
  def compare(label,seq,fixture=None):
   f=dict(flags=0x01afafaf,saved=1,allowed=1,users=0,power_control=0,power_status=0x2000,callbacks=False,primask=0,profile=[2,1,0,7,1,0,1]);f.update(fixture or {});observations=[]
   for source in (False,True):

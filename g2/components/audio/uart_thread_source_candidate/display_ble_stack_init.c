@@ -24,8 +24,8 @@ extern void audio_ble_handler_536814(void);
 extern void audio_ble_handler_4d2a5c(void);
 extern void audio_ble_handler_536fa4(void);
 extern void audio_ble_handler_4b5146(void);
-extern void audio_ble_handler_537d0c(void);
-extern void audio_ble_handler_4bae84(void);
+extern void audio_ble_smp_handler_537d0c(void); /* native SmpHandler 0x537d0c */
+extern void audio_ble_app_handler_4bae84(void); /* native AppHandler 0x4bae84 */
 extern void audio_ble_handler_4b7d32(void);
 extern void audio_ble_handler_4b4ab2(void);
 extern void DmDevVsInit(uint32_t);
@@ -84,10 +84,10 @@ void audio_ble_exactle_stack_initialize(void) {
     L2cSlaveHandlerInit(handler);L2cInit();L2cSlaveInit();L2cMasterInit();
     handler=WsfOsSetNextHandler(audio_ble_handler_4b5146);
     AttHandlerInit(handler);AttsInit();AttsIndInit();AttcInit();
-    handler=WsfOsSetNextHandler(audio_ble_handler_537d0c);
+    handler=WsfOsSetNextHandler(audio_ble_smp_handler_537d0c);
     SmpHandlerInit(handler);SmpiInit();SmpiScInit();SmprInit();SmprScInit();
     HciSetMaxRxAclLen(0xfbu);
-    handler=WsfOsSetNextHandler(audio_ble_handler_4bae84);
+    handler=WsfOsSetNextHandler(audio_ble_app_handler_4bae84);
     audio_ble_stack_lower_4bae6c(handler);
     handler=WsfOsSetNextHandler(audio_ble_handler_4b7d32);
     audio_ble_comm_handler_init(handler);

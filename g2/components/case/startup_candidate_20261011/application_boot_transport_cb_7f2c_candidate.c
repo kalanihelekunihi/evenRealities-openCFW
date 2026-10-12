@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08007f2c periodic PMIC/battery/aging policy worker.
  */
@@ -26,7 +27,7 @@ static uint8_t rb(uint32_t a){return *(volatile uint8_t *)(uintptr_t)a;}
 static void wb(uint32_t a,uint8_t v){*(volatile uint8_t *)(uintptr_t)a=v;}
 static uint32_t rd(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
 static void wr(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
-static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(0x080081c0u);}
+static void logline(uint32_t a){(void)case_policy_log(a);(void)case_policy_log(CASE_STRING_ADDR(080081c0));}
 void case_boot_transport_cb_7f2c(void)
 {
     uint8_t stuck=0u;
@@ -47,30 +48,30 @@ void case_boot_transport_cb_7f2c(void)
             }
             if(rb(0x2000087du)==99u && rb(0x2000087fu)!=0u){
                 uint8_t old=stuck;stuck=(uint8_t)(stuck+1u);
-                if(old>60u){stuck=0u;if(rb(0x200000bfu)==0u)logline(0x08008194u);wb(0x2000087du,100u);}
+                if(old>60u){stuck=0u;if(rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(080081a0));wb(0x2000087du,100u);}
             }else stuck=0u;
             if(rb(0x20000895u)==0u && rb(0x200000bfu)==0u){
-                uint32_t format=rb(0x20000891u)!=0u?0x080080b4u:0x08008018u;
+                uint32_t format=rb(0x20000891u)!=0u?CASE_STRING_ADDR(0800d7b8):CASE_STRING_ADDR(0800d828);
                 (void)case_policy_log(format,voltage,rb(0x2000087du),rb(0x20000880u),current,
                     rb(0x2000087fu),rb(0x2000088cu),rb(0x2000088du),rb(0x20000892u),
                     rb(0x200000f5u),rb(0x20000895u));
-                (void)case_policy_log(0x080081c0u);
+                (void)case_policy_log(CASE_STRING_ADDR(080081c0));
             }
             if(temperature<451u || rb(0x20000892u)==0u){
                 if(temperature-1u<399u && rb(0x20000892u)==0u){
-                    if(rb(0x200000bfu)==0u)logline(0x080080f0u);
+                    if(rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(080081f4));
                     (void)case_init_pmic_reset(0x16u,0u);
                     wb(0x20000892u,1u);
                 }
             }else{
-                if(rb(0x200000bfu)==0u)logline(0x08008130u);
+                if(rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(080081cc));
                 (void)case_init_pmic_reset(0x16u,0x10u);
                 wb(0x20000892u,0u);
             }
             if(rb(0x2000087du)==0u && rb(0x2000087fu)==0u){
                 uint32_t battery=0u;case_boot_battery_sample(&battery);
                 if(battery<3250u){
-                    if(rb(0x200000bfu)==0u)logline(0x08008160u);
+                    if(rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(0800822c));
                     uint8_t scratch=0u;
                     (void)case_init_pmic_read(0x10u,&scratch,1u);
                     (void)case_init_pmic_read(0x11u,&scratch,1u);
@@ -84,21 +85,21 @@ void case_boot_transport_cb_7f2c(void)
                     case_policy_box_failure_reset();
                     case_boot_transport_stop_clock(1u);
                     wb(0x2000087eu,4u);
-                    if(rb(0x200000bfu)==0u)logline(0x080081e0u);
+                    if(rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(08008254));
                 }
                 if(rb(0x200008aeu)<100u || rb(0x200008cau)<100u){
                     uint32_t age=rd(0x200000fcu);
                     if(age<7200u){
                         wr(0x200000fcu,age+5u);
                         if(rb(0x200000bfu)==0u){
-                            (void)case_policy_log(0x08008200u,rd(0x200008b2u),rb(0x200008aeu),
+                            (void)case_policy_log(CASE_STRING_ADDR(080082b4),rd(0x200008b2u),rb(0x200008aeu),
                                 *(volatile uint16_t *)(uintptr_t)0x200008ceu,
                                 rb(0x200008cau),rd(0x200000fcu));
-                            (void)case_policy_log(0x080081c0u);
+                            (void)case_policy_log(CASE_STRING_ADDR(080081c0));
                         }
                         goto wait;
                     }
-                    if(rb(0x200000bfu)==0u)logline(0x08008250u);
+                    if(rb(0x200000bfu)==0u)logline(CASE_STRING_ADDR(08008274));
                 }
                 case_boot_aging_begin();
             }

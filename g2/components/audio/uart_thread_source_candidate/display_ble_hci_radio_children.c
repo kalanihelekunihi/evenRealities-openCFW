@@ -6,6 +6,13 @@ extern int32_t g2_gpio_hal_write(uint32_t pin, uint32_t mode); /* 0x480fd6 */
 extern uint32_t g2_codec_pin_function(uint32_t pin, uint32_t mode); /* 0x480f0c */
 extern volatile uint32_t audio_ble_hci_radio_pin_mode; /* *DAT_0052e93c */
 
+extern uint32_t audio_ble_hci_radio_pin_mask_4810b0(uint32_t, uint32_t, uint32_t *);
+uint32_t audio_ble_hci_radio_disable_52dd6a(void) {
+    uint32_t pin=0x75u;
+    (void)audio_ble_hci_radio_pin_mask_4810b0(0u,0u,&pin);
+    return pin;
+}
+
 void audio_ble_hci_radio_switch_52eece(uint8_t enabled) {
     (void)g2_gpio_hal_write(0x88u, enabled == 0u ? 0u : 1u);
 }
@@ -17,7 +24,7 @@ void audio_ble_hci_radio_pins_52dd7c(void) {
 
 extern void audio_ble_hci_radio_mask_4c2e30(uint32_t, uint32_t);
 extern void audio_ble_hci_radio_stack_stop_55c430(uint32_t);
-extern void audio_ble_hci_radio_stack_option_55c7e8(uint32_t, uint32_t, uint32_t);
+extern void audio_ble_radio_stack_option_55c7e8(uint32_t, uint32_t, uint32_t);
 extern void audio_ble_hci_radio_stack_reset_55c286(uint32_t);
 
 uint32_t audio_ble_hci_radio_reset_52df12(void *context) {
@@ -27,7 +34,7 @@ uint32_t audio_ble_hci_radio_reset_52df12(void *context) {
     uint32_t stack=*(uint32_t *)(void *)(base+4u);
     audio_ble_hci_radio_mask_4c2e30(selector,0u);
     audio_ble_hci_radio_stack_stop_55c430(stack);
-    if(base[9u]!=0u) audio_ble_hci_radio_stack_option_55c7e8(stack,2u,1u);
+    if(base[9u]!=0u) audio_ble_radio_stack_option_55c7e8(stack,2u,1u);
     base[9u]=0u;
     audio_ble_hci_radio_stack_reset_55c286(stack);
     base[8u]=0u;

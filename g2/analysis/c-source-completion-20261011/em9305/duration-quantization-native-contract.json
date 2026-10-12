@@ -1,0 +1,13 @@
+{
+  "native_start": "0x312c5c",
+  "native_end_exclusive": "0x312ca0",
+  "binary_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "native_bytes_sha256": "811eb559adbfa0fc0a16639cdf3db956ebf4888a8bc86c0bda8a639eecb7b3ed",
+  "contract": [
+    "full 32-bit input; threshold unsigned 0x3bfc4",
+    "low branch MPYMU reciprocal 0x11111112, logical right shift1, MPYUW30",
+    "high branch MPYMU reciprocal0x69d0369e; wrapped add1(value,value)+product, logical right shift10, MPYWHUL(300,quotient)",
+    "unsigned result>=input returns result; otherwise adds30/300 with full-word wrap"
+  ],
+  "proof_scope": "Authenticated native instructions retained in selected C inline ISA, target object verification required. No arithmetic normalization/native runtime/layout/hardware proof."
+}

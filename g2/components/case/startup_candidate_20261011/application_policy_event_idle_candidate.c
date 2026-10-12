@@ -1,3 +1,4 @@
+#include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08007b2e-0x08007e90 shared event and idle-standby gate.
  * Native event bits and elapsed time are typed scheduler/clock contracts.
@@ -33,7 +34,7 @@ void case_policy_event_idle_7b2e(volatile uint8_t *state)
     uint32_t elapsed=0u;
     case_policy_elapsed(&elapsed);
     if(elapsed>=0xcb2u)return;
-    if(shared[7u]==0u){case_policy_log(0x08007eecu);case_policy_log(0x08007f18u);}
+    if(shared[7u]==0u){case_policy_log(CASE_STRING_ADDR(08007eec));case_policy_log(CASE_STRING_ADDR(08007f18));}
     uint8_t scratch=0u;
     case_init_pmic_read(0x10u,&scratch,1u);case_init_pmic_read(0x11u,&scratch,1u);
     case_init_power_set(0u);case_init_boost_set(0u);

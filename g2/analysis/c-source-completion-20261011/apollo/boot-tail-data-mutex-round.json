@@ -1,0 +1,78 @@
+{
+  "status": "PASS_BOUNDED_SOURCE_DATA_BYTES",
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "025d085ee18048acc31d54d507330e8d28920030150f88df3bf835665212098b",
+  "checked_bytes": 78,
+  "rows": [
+    {
+      "stock_address": "0x43412c",
+      "size": 5,
+      "source_symbol": "opencfw_boot_idle_name",
+      "sha256": "1fb4a5dc35b8f2f5076872699bc2c56f10b372be3442d64873e000aba2f394da"
+    },
+    {
+      "stock_address": "0x43413c",
+      "size": 8,
+      "source_symbol": "opencfw_boot_timer_name",
+      "sha256": "942af4968e52ddd40e0ebf13550c2c72c22f4acb76a5fd79983facf9f30e9f35"
+    },
+    {
+      "stock_address": "0x434178",
+      "size": 24,
+      "source_symbol": "opencfw_boot_elog_level_suffixes",
+      "sha256": "9a596665561b4d86b769909cd791028af2888ae05a703bd7e9aec58a8295dc31"
+    },
+    {
+      "stock_address": "0x434190",
+      "size": 12,
+      "source_symbol": "opencfw_boot_gpio_mode_bases",
+      "sha256": "91d2c98444542df4585465a92e118cd4651db164f32a6abb45c18015b067c71b"
+    },
+    {
+      "stock_address": "0x4341a4",
+      "size": 4,
+      "source_symbol": "opencfw_boot_dfu_thread_name",
+      "sha256": "725bca38e056913b09376dacbaa74eb3f961742535d131bf7927e950e11f7103"
+    },
+    {
+      "stock_address": "0x434024",
+      "size": 5,
+      "source_symbol": "opencfw_boot_shared_memory_profile",
+      "sha256": "aaa3d195aa8a5dae595ed4006eebf9c59489d8f62df05dfed563fc249aa26908"
+    },
+    {
+      "stock_address": "0x434154",
+      "size": 4,
+      "source_symbol": "opencfw_boot_conditional_power_value",
+      "sha256": "9d9f290527a6be626a8f5985b26e19b237b44872b03631811df4416fc1713178"
+    },
+    {
+      "stock_address": "0x434160",
+      "size": 4,
+      "source_symbol": "opencfw_boot_sleep_fields_initial",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "stock_address": "0x434170",
+      "size": 4,
+      "source_symbol": "opencfw_boot_adc_power_initial",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "stock_address": "0x434174",
+      "size": 4,
+      "source_symbol": "opencfw_boot_adc_power_final",
+      "sha256": "9d9f290527a6be626a8f5985b26e19b237b44872b03631811df4416fc1713178"
+    },
+    {
+      "stock_address": "0x43419c",
+      "size": 4,
+      "source_symbol": "opencfw_boot_post_special_register_value",
+      "sha256": "9d9f290527a6be626a8f5985b26e19b237b44872b03631811df4416fc1713178"
+    }
+  ],
+  "limits": [
+    "Checks named semantic data in the current co-placed source ELF, not the entire original tail or final image placement.",
+    "Several remaining tail words are compiler literal-pool operands or unqualified product values and are not admitted by this check."
+  ]
+}

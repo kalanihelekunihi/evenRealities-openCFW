@@ -1,0 +1,46 @@
+{
+  "candidate_sha256": "48d3a570fc11a976726c913803e7e2baab377b2297feadf4764beb0138363312",
+  "linker_sha256": "2b5a2234422c1e2f65e3661ed66d491ddf139722a5870f8ba460044494d2fbd4",
+  "gc_object_sha256": "2dee182627e284c1af48493cbf3d725feeddc2be9c9ec8debb022dfd25d70e25",
+  "source_root_reachable_sections": 595,
+  "selected_alloc_sections": 620,
+  "discarded_sections": [
+    ".text.__fixdfsi",
+    ".text.__gedf2",
+    ".text.__ledf2",
+    ".text.__muldi3",
+    ".text.__subdf3",
+    ".text.__udivdi3",
+    ".text.__unorddf2",
+    ".text.csky_bitreversal_16",
+    ".text.csky_bitreversal_32",
+    ".text.csky_bitreversal_f32",
+    ".text.csky_bitreversal_q15",
+    ".text.csky_bitreversal_q31",
+    ".text.csky_cfft_q15",
+    ".text.csky_cfft_radix4_q15",
+    ".text.csky_cfft_radix4by2_inverse_q15",
+    ".text.csky_cfft_radix4by2_q15",
+    ".text.csky_copy_q15",
+    ".text.csky_fill_q15",
+    ".text.csky_radix4_butterfly_inverse_q15",
+    ".text.csky_radix4_butterfly_q15",
+    ".text.csky_rfft_q15",
+    ".text.csky_shift_q15",
+    ".text.csky_split_rfft_q15",
+    ".text.csky_split_rifft_q15",
+    ".text.g2_codec_crc32"
+  ],
+  "discarded_count": 25,
+  "discarded_raw_bytes": 8494,
+  "native_direct_symbols_preserved": 311,
+  "native_direct_symbols_missing": [],
+  "undefined_symbols_after_gc": [
+    "gx8002_xip_kws_ambient_task_words"
+  ],
+  "limits": [
+    "This proves selected source-root relocation GC behavior, not absence of unmodelled stock indirect entry paths.",
+    "The roots include named XIP and resident bodies, vector/reset and every source-owned gx8002 product/registration section.",
+    "Final nonrelocatable XIP/SRAM linker placement, loader copy, runtime alias and hardware behavior are not established."
+  ]
+}
