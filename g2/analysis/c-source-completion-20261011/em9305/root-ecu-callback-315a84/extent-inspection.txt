@@ -1,0 +1,131 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00315a84 <.data+0x13684>:
+  315a84:	c2e2                	enter_s	[r13,blink]
+  315a86:	4508                	mov_s	r13,r0
+  315a88:	086a 0be0           	bl.d	96360	;0x32d2f0
+  315a8c:	d80b                	mov_s	r0,0xb
+  315a8e:	4100                	mov_s	r1,r0
+  315a90:	e81e                	breq_s	r0,0,60	;0x315acc
+  315a92:	d826                	mov_s	r0,0x26
+  315a94:	42a1                	mov_s	r2,r13
+  315a96:	a900                	stb_s	r0,[r1,0]
+  315a98:	2280 060d           	add	r2,r2,856
+  315a9c:	8a00                	ldb_s	r0,[r2,0]
+  315a9e:	a901                	stb_s	r0,[r1,0x1]
+  315aa0:	8a01                	ldb_s	r0,[r2,0x1]
+  315aa2:	a902                	stb_s	r0,[r1,0x2]
+  315aa4:	8a02                	ldb_s	r0,[r2,0x2]
+  315aa6:	a903                	stb_s	r0,[r1,0x3]
+  315aa8:	8a03                	ldb_s	r0,[r2,0x3]
+  315aaa:	a904                	stb_s	r0,[r1,0x4]
+  315aac:	8a04                	ldb_s	r0,[r2,0x4]
+  315aae:	a905                	stb_s	r0,[r1,0x5]
+  315ab0:	8a05                	ldb_s	r0,[r2,0x5]
+  315ab2:	a906                	stb_s	r0,[r1,0x6]
+  315ab4:	8a06                	ldb_s	r0,[r2,0x6]
+  315ab6:	a907                	stb_s	r0,[r1,0x7]
+  315ab8:	8a07                	ldb_s	r0,[r2,0x7]
+  315aba:	a908                	stb_s	r0,[r1,0x8]
+  315abc:	8a08                	ldb_s	r0,[r2,0x8]
+  315abe:	a909                	stb_s	r0,[r1,0x9]
+  315ac0:	8a09                	ldb_s	r0,[r2,0x9]
+  315ac2:	a90a                	stb_s	r0,[r1,0xa]
+  315ac4:	086a 0be0           	bl.d	96360	;0x32d32c
+  315ac8:	40a1                	mov_s	r0,r13
+  315aca:	c6c2                	leave_s	[r13,blink,pcl]
+  315acc:	d96f                	mov_s	r1,0x6f
+  315ace:	093e 0820           	bl.d	65852	;0x325c08
+  315ad2:	40a1                	mov_s	r0,r13
+  315ad4:	40c3 0080 5c70      	mov_s	r0,0x805c70
+  315ada:	8000                	ld_s	r0,[r0,0]
+  315adc:	4d11                	sub_s	r1,r13,r0
+  315ade:	2984 040e           	div	r1,r1,912
+  315ae2:	782f                	extb_s	r0,r1
+  315ae4:	09b6 06e0           	bl.d	55732	;0x323498
+  315ae8:	d90d                	mov_s	r1,0xd
+  315aea:	c6c2                	leave_s	[r13,blink,pcl]
+  315aec:	c2e6                	enter_s	[r13-r15,blink]
+  315aee:	1089 0601           	ld.as	r1,[r0,137]
+  315af2:	46cb 0080 5c70      	mov_s	r14,0x805c70
+  315af8:	0913 017e           	bbit0.d.t	r1,0x5,18	;0x315b0a
+  315afc:	4508                	mov_s	r13,r0
+  315afe:	40c3 0080 5a98      	mov_s	r0,0x805a98
+  315b04:	8800                	ldb_s	r0,[r0,0]
+  315b06:	0819 019f           	bbit1.t	r0,0x6,24	;0x315b1c
+  315b0a:	8600                	ld_s	r0,[r14,0]
+  315b0c:	4d11                	sub_s	r1,r13,r0
+  315b0e:	2984 040e           	div	r1,r1,912
+  315b12:	782f                	extb_s	r0,r1
+  315b14:	d90c                	mov_s	r1,0xc
+  315b16:	0986 06c0           	bl	55684	;0x323498
+  315b1a:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  315b1c:	0915 01bf           	bbit1.d.t	r1,0x6,20	;0x315b30
+  315b20:	40a1                	mov_s	r0,r13
+  315b22:	8600                	ld_s	r0,[r14,0]
+  315b24:	4d11                	sub_s	r1,r13,r0
+  315b26:	2984 040e           	div	r1,r1,912
+  315b2a:	782f                	extb_s	r0,r1
+  315b2c:	d91a                	mov_s	r1,0x1a
+  315b2e:	f1f5                	b_s	-22	;0x315b16
+  315b30:	2080 0e0d           	add	r0,r0,888
+  315b34:	1800 0043           	stb	1,[r0]
+  315b38:	0fba 0ba0           	bl.d	96184	;0x32d2f0
+  315b3c:	d80b                	mov_s	r0,0xb
+  315b3e:	4100                	mov_s	r1,r0
+  315b40:	e838                	breq_s	r0,0,112	;0x315bb0
+  315b42:	1583 1700           	ldh.as	r0,[r13,131]
+  315b46:	42a1                	mov_s	r2,r13
+  315b48:	2280 0b8d           	add	r2,r2,878
+  315b4c:	12ea 8103           	ldh	r3,[r2,-22]
+  315b50:	b200                	sth_s	r0,[r2,0]
+  315b52:	12ee 8100           	ldh	r0,[r2,-18]
+  315b56:	12f0 810c           	ldh	r12,[r2,-16]
+  315b5a:	12f2 810e           	ldh	r14,[r2,-14]
+  315b5e:	b203                	sth_s	r0,[r2,0x6]
+  315b60:	6b09                	sub_s	r0,r3,0x1
+  315b62:	df27                	mov_s	r15,0x27
+  315b64:	2409 1000           	min	r0,r12,r0
+  315b68:	1afe 80c4           	sth	r3,[r2,-2]
+  315b6c:	b2c4                	sth_s	r14,[r2,0x8]
+  315b6e:	b201                	sth_s	r0,[r2,0x2]
+  315b70:	a9e0                	stb_s	r15,[r1,0]
+  315b72:	12fe 8080           	ldb	r0,[r2,-2]
+  315b76:	a901                	stb_s	r0,[r1,0x1]
+  315b78:	12ff 8080           	ldb	r0,[r2,-1]
+  315b7c:	a902                	stb_s	r0,[r1,0x2]
+  315b7e:	8a00                	ldb_s	r0,[r2,0]
+  315b80:	a903                	stb_s	r0,[r1,0x3]
+  315b82:	8a01                	ldb_s	r0,[r2,0x1]
+  315b84:	a904                	stb_s	r0,[r1,0x4]
+  315b86:	8a06                	ldb_s	r0,[r2,0x6]
+  315b88:	a905                	stb_s	r0,[r1,0x5]
+  315b8a:	8a07                	ldb_s	r0,[r2,0x7]
+  315b8c:	a906                	stb_s	r0,[r1,0x6]
+  315b8e:	8a02                	ldb_s	r0,[r2,0x2]
+  315b90:	a907                	stb_s	r0,[r1,0x7]
+  315b92:	8a03                	ldb_s	r0,[r2,0x3]
+  315b94:	a908                	stb_s	r0,[r1,0x8]
+  315b96:	8a08                	ldb_s	r0,[r2,0x8]
+  315b98:	a909                	stb_s	r0,[r1,0x9]
+  315b9a:	8a09                	ldb_s	r0,[r2,0x9]
+  315b9c:	a90a                	stb_s	r0,[r1,0xa]
+  315b9e:	0f92 0ba0           	bl.d	96144	;0x32d32c
+  315ba2:	40a1                	mov_s	r0,r13
+  315ba4:	159f 1600           	ld.as	r0,[r13,159]
+  315ba8:	b89d                	bset_s	r0,r0,0x1d
+  315baa:	1d9f 1018           	st.as	r0,[r13,159]
+  315bae:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  315bb0:	d96f                	mov_s	r1,0x6f
+  315bb2:	085a 0820           	bl.d	65624	;0x325c08
+  315bb6:	40a1                	mov_s	r0,r13
+  315bb8:	8600                	ld_s	r0,[r14,0]
+  315bba:	4d11                	sub_s	r1,r13,r0
+  315bbc:	2984 040e           	div	r1,r1,912
+  315bc0:	782f                	extb_s	r0,r1
+  315bc2:	d90d                	mov_s	r1,0xd
+  315bc4:	f1a9                	b_s	-174	;0x315b16

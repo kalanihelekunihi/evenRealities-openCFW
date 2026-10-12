@@ -1,0 +1,19 @@
+{
+  "status": "PASS_COMPILED_ARM_NATIVE_IMAGE_CACHE_CALLBACKS",
+  "cases": 7780,
+  "by_provider": {
+    "audio_uart_lv_image_source_compare_4d4b32": 1305,
+    "audio_uart_lv_image_header_source_compare_4d4c3a": 1305,
+    "audio_uart_lv_image_cache_compare_4d4b94": 1305,
+    "audio_uart_lv_image_header_cache_compare_4d4c9c": 1305,
+    "audio_uart_lv_image_cache_free_4d4ba4": 2304,
+    "audio_uart_lv_image_header_cache_free_4d4cac": 256
+  },
+  "source_sha256": "32b959a73990f452eaf9cea4a1e1aae8fdc1a07951b927cc373499fc3e6b906a",
+  "selected_leaf_source_sha256": "1b003ecfc25dfeae1c46196d71d3d5bf1b8512c50002174bd14f5c0d287cd2d2",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual flag leaf executes. String compare,draw destroy,heap free are controlled child cuts; signed compare boundaries and destroy mutation tested.",
+    "Image/header startup,concrete LRU class/tree/allocator/data bindings and full-image/hardware remain open."
+  ]
+}

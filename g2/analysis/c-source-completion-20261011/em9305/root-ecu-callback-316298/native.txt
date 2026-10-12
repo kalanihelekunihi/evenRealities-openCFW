@@ -1,0 +1,66 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00316298 <.data+0x13e98>:
+  316298:	c2e6                	enter_s	[r13-r15,blink]
+  31629a:	45cb 0080 2810      	mov_s	r13,0x802810
+  3162a0:	95c9                	ldh_s	r14,[r13,0x12]
+  3162a2:	1510 110b           	ldh	r11,[r13,16]
+  3162a6:	9586                	ldh_s	r12,[r13,0xc]
+  3162a8:	956a                	ldh_s	r3,[r13,0x14]
+  3162aa:	268c 9d07           	cmp	r14,500
+  3162ae:	4008                	mov_s	r8,r0
+  3162b0:	f783                	blo_s	6	;0x3162b6
+  3162b2:	704c                	mov_s	r2,0
+  3162b4:	f009                	b_s	18	;0x3162c6
+  3162b6:	6c29                	sub_s	r1,r12,0x1
+  3162b8:	4061                	mov_s	r0,r11
+  3162ba:	7a30                	exth_s	r2,r1
+  3162bc:	20bc 0d07           	setlo	r0,r0,500
+  3162c0:	22bc 0d07           	setlo	r2,r2,500
+  3162c4:	7a04                	and_s	r2,r2,r0
+  3162c6:	2340 1040           	add	r0,r11,0x1
+  3162ca:	301e 030f           	mpywhul	r15,r0,r12
+  3162ce:	235f 0289           	mpyuw	r9,r3,0xa
+  3162d2:	278c 9d47           	cmp	r15,501
+  3162d6:	f684                	blt_s	8	;0x3162dc
+  3162d8:	700c                	mov_s	r0,0
+  3162da:	f00f                	b_s	30	;0x3162f6
+  3162dc:	2300 0f81 ffff f37f 	add	r1,r3,0xfffff37f
+  3162e4:	7930                	exth_s	r1,r1
+  3162e6:	263c 1300           	setlo	r0,r14,r12
+  3162ea:	263c 7041 0000 f388 	setlo	r1,0xf388,r1
+  3162f2:	7824                	and_s	r0,r0,r1
+  3162f4:	7844                	and_s	r0,r0,r2
+  3162f6:	1085 1701           	ldh.as	r1,[r8,133]
+  3162fa:	2941 0082           	lsr	r2,r1,0x2
+  3162fe:	2153 807e           	bmsk.f	0,r1,0x1
+  316302:	6159                	add_s	r1,r1,r2
+  316304:	21c0 0062           	add.ne	r1,r1,0x1
+  316308:	79ec                	mpy_s	r1,r1,r15
+  31630a:	793b                	asl_s	r1,r1
+  31630c:	092b 1044           	brlo.nt	r9,r1,42	;0x316336
+  316310:	e813                	breq_s	r0,0,38	;0x316336
+  316312:	109f 1601           	ld.as	r1,[r8,159]
+  316316:	9547                	ldh_s	r2,[r13,0xe]
+  316318:	4001                	mov_s	r0,r8
+  31631a:	2080 038d           	add	r0,r0,846
+  31631e:	b99d                	bset_s	r1,r1,0x1d
+  316320:	1882 12dc           	sth.as	r11,[r8,130]
+  316324:	18bf 125c           	sth.as	r9,[r8,191]
+  316328:	b080                	sth_s	r12,[r0,0]
+  31632a:	b0c2                	sth_s	r14,[r0,0x4]
+  31632c:	b063                	sth_s	r3,[r0,0x6]
+  31632e:	b041                	sth_s	r2,[r0,0x2]
+  316330:	189f 1058           	st.as	r1,[r8,159]
+  316334:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  316336:	40c3 0080 5a86      	mov_s	r0,0x805a86
+  31633c:	8800                	ldb_s	r0,[r0,0]
+  31633e:	08f9 817e           	bbit0.d.t	r0,0x5,-8	;0x316334
+  316342:	d973                	mov_s	r1,0x73
+  316344:	08c6 07e0           	bl.d	63684	;0x325c08
+  316348:	4001                	mov_s	r0,r8
+  31634a:	c6c6                	leave_s	[r13-r15,blink,pcl]

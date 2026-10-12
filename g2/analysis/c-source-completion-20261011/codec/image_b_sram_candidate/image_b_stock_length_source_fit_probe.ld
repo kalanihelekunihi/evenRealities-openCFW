@@ -99,12 +99,38 @@ SECTIONS
   .data : { *(.data*) }
   .bss 0x20017090 (NOLOAD) : {
     *(.bss) *(COMMON)
+    . = 0x300;
+    KEEP(*(.bss.image_b_exception_anchor))
+    . = 0x304;
+    KEEP(*(.bss.image_b_clock_gate_bits))
     . = 0x308;
     KEEP(*(.bss.image_b_platform_shadow))
+    . = 0x30c;
+    KEEP(*(.bss.image_b_console_port))
+    . = 0x310;
+    KEEP(*(.bss.image_b_gpio_irq_masks))
+    . = 0x318;
+    KEEP(*(.bss.image_b_irq_descriptors))
+    . = 0x42c;
+    KEEP(*(.bss.image_b_timer_records))
+    . = 0x5cc;
+    KEEP(*(.bss.image_b_flash_probe_state))
+    . = 0x5e0;
+    KEEP(*(.bss.image_b_spi_device_state))
+    . = 0x648;
+    KEEP(*(.bss.image_b_board_pins_ready))
+    . = 0x15af8;
+    KEEP(*(.bss.image_b_pmu_record))
     . = 0x16224;
     KEEP(*(.bss.image_b_mode_loop))
     . = 0x16228;
     KEEP(*(.bss.image_b_mode_index))
+    . = 0x1622c;
+    KEEP(*(.bss.image_b_denoise_mode_prefix))
+    . = 0x16248;
+    KEEP(*(.bss.image_b_denoise_queue))
+    . = 0x16260;
+    KEEP(*(.bss.image_b_denoise_queue_buffer))
     . = 0x16350;
     KEEP(*(.bss.image_b_token_cursor))
     *(.bss.*)
@@ -132,23 +158,37 @@ PROVIDE(gx8002_image_b_bss_end = 0x2002d79c);
  * These aliases bind typed C lvalues to their native RAM addresses. The
  * encompassing .bss reservation owns capacity; no initial value is supplied.
  */
-PROVIDE(gx8002_image_b_exception_scratch_20017390 = 0x20017390);
-PROVIDE(gx8002_image_b_clock_gate_bits_20017394 = 0x20017394);
-PROVIDE(gx8002_image_b_console_port_2001739c = 0x2001739c);
-PROVIDE(gx8002_image_b_gpio_irq_masks_200173a0 = 0x200173a0);
-PROVIDE(gx8002_image_b_irq_descriptors_200173a8 = 0x200173a8);
-PROVIDE(gx8002_image_b_timer_records_200174bc = 0x200174bc);
-PROVIDE(gx8002_image_b_flash_probe_state_2001765c = 0x2001765c);
-PROVIDE(gx8002_image_b_spi_device_state_20017670 = 0x20017670);
-PROVIDE(gx8002_image_b_board_pins_ready_200176d8 = 0x200176d8);
-PROVIDE(gx8002_image_b_pmu_record_2002cb88 = 0x2002cb88);
-PROVIDE(gx8002_image_b_denoise_mode_state_2002d2bc = 0x2002d2bc);
-PROVIDE(gx8002_image_b_denoise_ring_2002d2d8 = 0x2002d2d8);
 /* These four words/records lie before the stage2 initialized-data span.
  * Their addresses are authenticated; their stage1/resident producer and
  * initial values are still external contracts, never invented here. */
 ASSERT(gx8002_image_b_reset_10003100 == 0x10003100,
        "source reset entry offset");
+ASSERT(gx8002_image_b_flash_probe_state_2001765c == 0x2001765c,
+       "flash probe state native placement");
+ASSERT(gx8002_image_b_spi_device_state_20017670 == 0x20017670,
+       "SPI device state SDK-correlated native placement");
+ASSERT(gx8002_image_b_console_port_2001739c == 0x2001739c,
+       "console port native placement");
+ASSERT(gx8002_image_b_exception_scratch_20017390 == 0x20017390,
+       "exception anchor native placement");
+ASSERT(gx8002_image_b_clock_gate_bits_20017394 == 0x20017394,
+       "clock gate bits native placement");
+ASSERT(gx8002_image_b_gpio_irq_masks_200173a0 == 0x200173a0,
+       "GPIO IRQ masks native placement");
+ASSERT(gx8002_image_b_irq_descriptors_200173a8 == 0x200173a8,
+       "IRQ descriptor table native placement");
+ASSERT(gx8002_image_b_timer_records_200174bc == 0x200174bc,
+       "timer records native placement");
+ASSERT(gx8002_image_b_pmu_record_2002cb88 == 0x2002cb88,
+       "PMU record native placement");
+ASSERT(gx8002_image_b_denoise_mode_state_2002d2bc == 0x2002d2bc,
+       "denoise mode prefix native placement");
+ASSERT(gx8002_image_b_denoise_ring_2002d2d8 == 0x2002d2d8,
+       "denoise queue native placement");
+ASSERT(gx8002_image_b_denoise_queue_buffer_2002d2f0 == 0x2002d2f0,
+       "denoise queue buffer native placement");
+ASSERT(gx8002_image_b_board_pins_ready_200176d8 == 0x200176d8,
+       "board pins ready native placement");
 ASSERT(SIZEOF(.vectors) == 0x100, "vector extent");
 ASSERT(ADDR(.rodata) + SIZEOF(.rodata) <= 0x100168c0,
        "source rodata overlaps fixed initialized clock state");

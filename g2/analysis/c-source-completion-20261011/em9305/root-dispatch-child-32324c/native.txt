@@ -1,0 +1,18 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0032324c <.data+0x20e4c>:
+  32324c:	1cf0 b7c8           	st.aw	blink,[sp,-16]
+  323250:	c143                	st_s	r1,[sp,0xc]
+  323252:	c062                	stb_s	r0,[sp,0x8]
+  323254:	d931                	mov_s	r1,0x31
+  323256:	4283                	mov_s	r2,sp
+  323258:	b202                	sth_s	r0,[r2,0x4]
+  32325a:	c081                	add_s	r0,sp,0x4
+  32325c:	0d42 f5af           	bl.d	-84672	;0x30e79c
+  323260:	b223                	sth_s	r1,[r2,0x6]
+  323262:	1410 341f           	ld.ab	blink,[sp,16]
+  323266:	7ee0                	j_s	[blink]

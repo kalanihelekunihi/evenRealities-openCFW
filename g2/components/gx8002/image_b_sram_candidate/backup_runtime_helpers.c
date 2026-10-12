@@ -6,6 +6,7 @@
 #include <stdint.h>
 
 typedef uint32_t __attribute__((may_alias)) gx8002_image_b_word;
+extern volatile uint32_t gx8002_image_b_irq_descriptors_200173a8[64];
 
 void gx8002_image_b_zero_100113c4(
     void *destination, uint32_t byte_value, uint32_t bytes)
@@ -42,7 +43,7 @@ void gx8002_image_b_request_irq_10004844(
 {
     if (line >= 32u || handler == 0) return;
     volatile uint32_t *descriptor =
-        (volatile uint32_t *)(uintptr_t)(UINT32_C(0x200173a8) + line * 8u);
+        &gx8002_image_b_irq_descriptors_200173a8[line * 2u];
     descriptor[0] = (uint32_t)(uintptr_t)handler;
     descriptor[1] = argument;
     *(volatile uint32_t *)(uintptr_t)UINT32_C(0xe000e100) = 1u << line;

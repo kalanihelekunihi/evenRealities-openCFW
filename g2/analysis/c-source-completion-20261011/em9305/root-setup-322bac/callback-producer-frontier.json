@@ -1,0 +1,92 @@
+{
+  "status": "BOUNDED_FOUR_DIRECT_LITERAL_READERS",
+  "address": "0x8028c0",
+  "direct_literal_readers": [
+    {
+      "literal_instruction": "317c6a:\t1600 7003 0080 28c0 \tld\tr3,[0x8028c0]",
+      "following_native_context": [
+        "  317c72:\t700c                \tmov_s\tr0,0",
+        "  317c74:\t2178 0002           \tseteq\tr2,r1,0",
+        "  317c78:\t1e72 1018           \tst.as\tr0,[r14,114]",
+        "  317c7c:\t1e7d 1002           \tstb\tr0,[r14,125]",
+        "  317c80:\t1e73 1018           \tst.as\tr0,[r14,115]",
+        "  317c84:\t1e74 1018           \tst.as\tr0,[r14,116]",
+        "  317c88:\t1e75 1018           \tst.as\tr0,[r14,117]",
+        "  317c8c:\t1e7c 1082           \tstb\tr2,[r14,124]",
+        "  317c90:\teb0b                \tbreq_s\tr3,0,22\t;0x317ca6",
+        "  317c92:\t40c3 0080 5c70      \tmov_s\tr0,0x805c70",
+        "  317c98:\t8000                \tld_s\tr0,[r0,0]",
+        "  317c9a:\t4e10                \tsub_s\tr0,r14,r0",
+        "  317c9c:\t2884 040e           \tdiv\tr0,r0,912",
+        "  317ca0:\t790f                \textb_s\tr1,r0",
+        "  317ca2:\t7b60                \tjl_s.d\t[r3]"
+      ]
+    },
+    {
+      "literal_instruction": "322c6e:\t1600 7003 0080 28c0 \tld\tr3,[0x8028c0]",
+      "following_native_context": [
+        "  322c76:\t1dea 141c           \tsth.as\tr16,[r13,234]",
+        "  322c7a:\teb0d                \tbreq_s\tr3,0,26\t;0x322c92",
+        "  322c7c:\t40c3 0080 5c3c      \tmov_s\tr0,0x805c3c",
+        "  322c82:\t8000                \tld_s\tr0,[r0,0]",
+        "  322c84:\t714c                \tmov_s\tr2,1",
+        "  322c86:\t4d10                \tsub_s\tr0,r13,r0",
+        "  322c88:\tb829                \tlsr_s\tr0,r0,0x9",
+        "  322c8a:\t7604                \tadd_s\tr0,r0,6",
+        "  322c8c:\t790f                \textb_s\tr1,r0",
+        "  322c8e:\t7b60                \tjl_s.d\t[r3]",
+        "  322c90:\t40c1                \tmov_s\tr0,r14",
+        "  322c92:\tc6c8                \tleave_s\t[r13-r16,blink,pcl]",
+        "  322c94:\tc2e6                \tenter_s\t[r13-r15,blink]",
+        "  322c96:\t4628                \tmov_s\tr14,r1",
+        "  322c98:\t4508                \tmov_s\tr13,r0"
+      ]
+    },
+    {
+      "literal_instruction": "3277ee:\t1600 7003 0080 28c0 \tld\tr3,[0x8028c0]",
+      "following_native_context": [
+        "  3277f6:\t208a 0048           \tmov\tr0,513",
+        "  3277fa:\t1f44 1004           \tsth\tr0,[r15,68]",
+        "  3277fe:\teb06                \tbreq_s\tr3,0,12\t;0x327808",
+        "  327800:\t8d22                \tldb_s\tr1,[r13,0x2]",
+        "  327802:\t714c                \tmov_s\tr2,1",
+        "  327804:\t7b60                \tjl_s.d\t[r3]",
+        "  327806:\t40c1                \tmov_s\tr0,r14",
+        "  327808:\tc6ce                \tleave_s\t[r13-r19,blink,pcl]",
+        "  32780a:\t78e0                \tnop_s",
+        "  32780c:\tc3ea                \tenter_s\t[r13-r17,fp,blink]",
+        "  32780e:\tc1a9                \tsub_s\tsp,sp,0x24",
+        "  327810:\t4708                \tmov_s\tr15,r0",
+        "  327812:\t4130                \tmov_s\tr17,r1",
+        "  327814:\t4508                \tmov_s\tr13,r0",
+        "  327816:\t2780 1ec5           \tadd\tr15,r15,379"
+      ]
+    },
+    {
+      "literal_instruction": "32c394:\t1600 7003 0080 28c0 \tld\tr3,[0x8028c0]",
+      "following_native_context": [
+        "  32c39c:\t1dea 141c           \tsth.as\tr16,[r13,234]",
+        "  32c3a0:\teb0c                \tbreq_s\tr3,0,24\t;0x32c3b8",
+        "  32c3a2:\t40c3 0080 5c3c      \tmov_s\tr0,0x805c3c",
+        "  32c3a8:\t8000                \tld_s\tr0,[r0,0]",
+        "  32c3aa:\t714c                \tmov_s\tr2,1",
+        "  32c3ac:\t4d10                \tsub_s\tr0,r13,r0",
+        "  32c3ae:\tb829                \tlsr_s\tr0,r0,0x9",
+        "  32c3b0:\t7604                \tadd_s\tr0,r0,6",
+        "  32c3b2:\t790f                \textb_s\tr1,r0",
+        "  32c3b4:\t7b60                \tjl_s.d\t[r3]",
+        "  32c3b6:\t40c1                \tmov_s\tr0,r14",
+        "  32c3b8:\tc6c8                \tleave_s\t[r13-r16,blink,pcl]",
+        "  32c3ba:\t78e0                \tnop_s",
+        "  32c3bc:\tc2e8                \tenter_s\t[r13-r16,blink]",
+        "  32c3be:\t1803 0043           \tstb\t1,[r0,3]"
+      ]
+    }
+  ],
+  "direct_literal_reader_count": 4,
+  "direct_literal_writer_count": 0,
+  "limits": [
+    "Literal-reference corpus only; computed/PC-relative/ROM/external writers not exhausted",
+    "Unknown callback identity and ambient argument registers remain open"
+  ]
+}

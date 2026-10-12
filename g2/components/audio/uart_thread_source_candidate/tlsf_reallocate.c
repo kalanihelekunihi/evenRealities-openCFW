@@ -23,7 +23,8 @@ static const char trim_used_error[]="!block_is_free(block) && \"block must be us
 
 void g2_tlsf_block_clear_prev_free(void *block) /* native 0x4cfdf6 */
 {
-    *(uint32_t *)((uint8_t *)block+4u)&=~2u;
+    uint32_t flag=*(volatile const uint32_t *)(uintptr_t)0x78f4b8u;
+    *(volatile uint32_t *)((uint8_t *)block+4u)&=~flag;
 }
 
 void g2_tlsf_block_trim_used(void *pool,void *block,uint32_t size) /* 0x4d03f0 */

@@ -1,0 +1,57 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00326904 <.data+0x24504>:
+  326904:	c2ee                	enter_s	[r13-r19,blink]
+  326906:	4110                	mov_s	r17,r0
+  326908:	208a 0f4b           	mov	r0,765
+  32690c:	2132 2000           	ldb	r0,[r17,r0]
+  326910:	230a 2100           	mov	r19,r4
+  326914:	4070                	mov_s	r16,r3
+  326916:	4748                	mov_s	r15,r2
+  326918:	4230                	mov_s	r18,r1
+  32691a:	e839                	breq_s	r0,0,114	;0x32698a
+  32691c:	09d6 0360           	bl.d	27092	;0x32d2f0
+  326920:	750c                	mov_s	r0,5
+  326922:	4508                	mov_s	r13,r0
+  326924:	e833                	breq_s	r0,0,102	;0x32698a
+  326926:	2242 2041           	sub	r1,r18,0x1
+  32692a:	714c                	mov_s	r2,1
+  32692c:	7a38                	asl_s	r2,r2,r1
+  32692e:	462a                	mov_s	r14,r17
+  326930:	784f                	extb_s	r0,r2
+  326932:	704e                	mov_s	r18,0
+  326934:	081b 0131           	brne.d.nt	r0,0x4,26	;0x32694e
+  326938:	2680 1385           	add	r14,r14,334
+  32693c:	0b13 2010           	breq.nt	r19,0,18	;0x32694e
+  326940:	8e20                	ldb_s	r1,[r14,0]
+  326942:	8e01                	ldb_s	r0,[r14,0x1]
+  326944:	7030                	cmp_s	r0,r1
+  326946:	2039 0052           	setne	r18,r0,r1
+  32694a:	22ca 0321           	mov.eq	r2,0xc
+  32694e:	d825                	mov_s	r0,0x25
+  326950:	ad00                	stb_s	r0,[r13,0]
+  326952:	4002                	mov_s	r0,r16
+  326954:	0a22 fa6f           	bl.d	-46560	;0x31b374
+  326958:	ad41                	stb_s	r2,[r13,0x1]
+  32695a:	ad02                	stb_s	r0,[r13,0x2]
+  32695c:	4022                	mov_s	r0,r17
+  32695e:	41a1                	mov_s	r1,r13
+  326960:	1d04 1402           	stb	r16,[r13,4]
+  326964:	09ca 0360           	bl.d	27080	;0x32d32c
+  326968:	ade3                	stb_s	r15,[r13,0x3]
+  32696a:	0a23 2010           	breq.nt	r18,0,34	;0x32698a
+  32696e:	1601 10ce           	ldb.x	r14,[r14,1]
+  326972:	1d01 1203           	stb	8,[r13,1]
+  326976:	0a02 fa6f           	bl.d	-46592	;0x31b374
+  32697a:	40c1                	mov_s	r0,r14
+  32697c:	ad02                	stb_s	r0,[r13,0x2]
+  32697e:	4022                	mov_s	r0,r17
+  326980:	41a1                	mov_s	r1,r13
+  326982:	adc4                	stb_s	r14,[r13,0x4]
+  326984:	09aa 0360           	bl.d	27048	;0x32d32c
+  326988:	ade3                	stb_s	r15,[r13,0x3]
+  32698a:	c6ce                	leave_s	[r13-r19,blink,pcl]

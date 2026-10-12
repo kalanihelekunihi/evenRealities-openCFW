@@ -1,0 +1,52 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+003173ac <.data+0x14fac>:
+  3173ac:	c0e6                	enter_s	[r13-r15]
+  3173ae:	8940                	ldb_s	r2,[r1,0]
+  3173b0:	1034 008c           	ldb	r12,[r0,52]
+  3173b4:	716d                	mov_s	r11,1
+  3173b6:	7144                	add_s	r2,r2,1
+  3173b8:	7b4f                	extb_s	r3,r2
+  3173ba:	0b5d 0324           	brlo.d.nt	r3,r12,92	;0x317414
+  3173be:	a940                	stb_s	r2,[r1,0]
+  3173c0:	8944                	ldb_s	r2,[r1,0x4]
+  3173c2:	89e1                	ldb_s	r15,[r1,0x1]
+  3173c4:	88d8                	ldb_s	r14,[r0,0x18]
+  3173c6:	88bb                	ldb_s	r13,[r0,0x1b]
+  3173c8:	6a61                	add_s	r3,r2,0x1
+  3173ca:	6f41                	add_s	r2,r15,0x1
+  3173cc:	251f 138f           	mpyuw	r15,r13,r14
+  3173d0:	a964                	stb_s	r3,[r1,0x4]
+  3173d2:	7b6f                	extb_s	r3,r3
+  3173d4:	708d                	mov_s	r12,0
+  3173d6:	a941                	stb_s	r2,[r1,0x1]
+  3173d8:	7a4f                	extb_s	r2,r2
+  3173da:	0f17 10e5           	brhs.d.nt	r15,r3,22	;0x3173ee
+  3173de:	a980                	stb_s	r12,[r1,0]
+  3173e0:	0a2d 0384           	brlo.nt	r2,r14,44	;0x31740c
+  3173e4:	8943                	ldb_s	r2,[r1,0x3]
+  3173e6:	a981                	stb_s	r12,[r1,0x1]
+  3173e8:	7144                	add_s	r2,r2,1
+  3173ea:	a943                	stb_s	r2,[r1,0x3]
+  3173ec:	f010                	b_s	32	;0x31740c
+  3173ee:	0a21 0384           	brlo.nt	r2,r14,32	;0x31740c
+  3173f2:	8942                	ldb_s	r2,[r1,0x2]
+  3173f4:	a981                	stb_s	r12,[r1,0x1]
+  3173f6:	7144                	add_s	r2,r2,1
+  3173f8:	7e4f                	extb_s	r14,r2
+  3173fa:	0e15 1364           	brlo.d.nt	r14,r13,20	;0x31740c
+  3173fe:	a942                	stb_s	r2,[r1,0x2]
+  317400:	885a                	ldb_s	r2,[r0,0x1a]
+  317402:	a982                	stb_s	r12,[r1,0x2]
+  317404:	ea84                	brne_s	r2,0,8	;0x31740c
+  317406:	8839                	ldb_s	r1,[r0,0x19]
+  317408:	0b0b 0045           	brhs.nt	r3,r1,10	;0x317412
+  31740c:	8839                	ldb_s	r1,[r0,0x19]
+  31740e:	0b09 0044           	brlo.nt	r3,r1,8	;0x317414
+  317412:	706d                	mov_s	r11,0
+  317414:	4061                	mov_s	r0,r11
+  317416:	c4c6                	leave_s	[r13-r15,pcl]

@@ -1,0 +1,56 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0031eac8 <.data+0x1c6c8>:
+  31eac8:	c3ec                	enter_s	[r13-r18,fp,blink]
+  31eaca:	c1a4                	sub_s	sp,sp,0x10
+  31eacc:	47cb 0080 5010      	mov_s	r15,0x805010
+  31ead2:	41d3 0080 4fd8      	mov_s	r17,0x804fd8
+  31ead8:	2754 1c00           	add1	r0,r15,0x30
+  31eadc:	702c                	mov_s	r1,0
+  31eade:	daf0                	mov_s	r2,0xf0
+  31eae0:	2755 190d           	add2	r13,r15,0x24
+  31eae4:	2155 2b4e           	add2	r14,r17,0x2d
+  31eae8:	0d36 0a20           	bl.d	83252	;0x33301c
+  31eaec:	4210                	mov_s	r18,r0
+  31eaee:	41c3 0080 5b00      	mov_s	r1,0x805b00
+  31eaf4:	8960                	ldb_s	r3,[r1,0]
+  31eaf6:	40c3 0031 ec40      	mov_s	r0,0x31ec40
+  31eafc:	228a 0044           	mov	r2,257
+  31eb00:	a601                	st_s	r0,[r14,0x4]
+  31eb02:	a600                	st_s	r0,[r14,0]
+  31eb04:	4060                	mov_s	r0,r3
+  31eb06:	a6a4                	st_s	r13,[r14,0x10]
+  31eb08:	1efc 90c3           	stb	3,[r14,-4]
+  31eb0c:	1e08 1440           	st	r17,[r14,8]
+  31eb10:	1e14 1083           	stb	2,[r14,20]
+  31eb14:	0bf6 0360           	bl.d	27636	;0x325708
+  31eb18:	19b2 2084           	sth	r2,[r17,178]
+  31eb1c:	1142 208c           	ldb	r12,[r17,66]
+  31eb20:	41c3 0055 5555      	mov_s	r1,0x555555
+  31eb26:	40d3 0080 5a8c      	mov_s	r16,0x805a8c
+  31eb2c:	a627                	st_s	r1,[r14,0x1c]
+  31eb2e:	1010 2081           	ldb	r1,[r16,16]
+  31eb32:	19c9 2002           	stb	r0,[r17,201]
+  31eb36:	d857                	mov_s	r0,0x57
+  31eb38:	45cb 0080 50ec      	mov_s	r13,0x8050ec
+  31eb3e:	b650                	sth_s	r2,[r14,0x20]
+  31eb40:	42c3 8e89 bed6      	mov_s	r2,0x8e89bed6
+  31eb46:	b500                	sth_s	r0,[r13,0]
+  31eb48:	a646                	st_s	r2,[r14,0x18]
+  31eb4a:	0c0d 103e           	bbit0.d.t	r12,0,12	;0x31eb54
+  31eb4e:	19ca 2042           	stb	r1,[r17,202]
+  31eb52:	b501                	sth_s	r0,[r13,0x2]
+  31eb54:	0c09 107e           	bbit0.d.t	r12,0x1,8	;0x31eb5c
+  31eb58:	d820                	mov_s	r0,0x20
+  31eb5a:	a501                	st_s	r0,[r13,0x4]
+  31eb5c:	2740 120e           	add	r14,r15,0x8
+  31eb60:	d82d                	mov_s	r0,0x2d
+  31eb62:	2600 1f81 0000 011c 	add	r1,r14,0x11c
+  31eb6a:	a902                	stb_s	r0,[r1,0x2]
+  31eb6c:	1e42 1f98 0032 2910 	st.as	0x322910,[r14,66]
+  31eb74:	1e41 1f98 0032 28e4 	st.as	0x3228e4,[r14,65]
+  31eb7c:	1e40 1f98   	st.as	0x31e9f8,[r14,64]

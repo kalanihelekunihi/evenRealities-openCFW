@@ -1,0 +1,93 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004d5172 <.data+0x9d172>:
+  4d5172:	b57c      	push	{r2, r3, r4, r5, r6, lr}
+  4d5174:	0005      	movs	r5, r0
+  4d5176:	000e      	movs	r6, r1
+  4d5178:	0031      	movs	r1, r6
+  4d517a:	0028      	movs	r0, r5
+  4d517c:	682a      	ldr	r2, [r5, #0]
+  4d517e:	6a12      	ldr	r2, [r2, #32]
+  4d5180:	4790      	blx	r2
+  4d5182:	0004      	movs	r4, r0
+  4d5184:	2c00      	cmp	r4, #0
+  4d5186:	d10a      	bne.n	0x4d519e
+  4d5188:	4837      	ldr	r0, [pc, #220]	@ (0x4d5268)
+  4d518a:	9000      	str	r0, [sp, #0]
+  4d518c:	4b37      	ldr	r3, [pc, #220]	@ (0x4d526c)
+  4d518e:	f240 124b 	movw	r2, #331	@ 0x14b
+  4d5192:	492a      	ldr	r1, [pc, #168]	@ (0x4d523c)
+  4d5194:	2003      	movs	r0, #3
+  4d5196:	f778 f861 	bl	0x44d25c
+  4d519a:	2000      	movs	r0, #0
+  4d519c:	e00f      	b.n	0x4d51be
+  4d519e:	0032      	movs	r2, r6
+  4d51a0:	0021      	movs	r1, r4
+  4d51a2:	0028      	movs	r0, r5
+  4d51a4:	682b      	ldr	r3, [r5, #0]
+  4d51a6:	695b      	ldr	r3, [r3, #20]
+  4d51a8:	4798      	blx	r3
+  4d51aa:	0020      	movs	r0, r4
+  4d51ac:	f000 f8f3 	bl	0x4d5396
+  4d51b0:	0031      	movs	r1, r6
+  4d51b2:	69aa      	ldr	r2, [r5, #24]
+  4d51b4:	4790      	blx	r2
+  4d51b6:	0020      	movs	r0, r4
+  4d51b8:	f000 f98f 	bl	0x4d54da
+  4d51bc:	2001      	movs	r0, #1
+  4d51be:	bd76      	pop	{r1, r2, r4, r5, r6, pc}
+  4d51c0:	b5fe      	push	{r1, r2, r3, r4, r5, r6, r7, lr}
+  4d51c2:	0005      	movs	r5, r0
+  4d51c4:	000c      	movs	r4, r1
+  4d51c6:	0016      	movs	r6, r2
+  4d51c8:	0033      	movs	r3, r6
+  4d51ca:	2200      	movs	r2, #0
+  4d51cc:	0021      	movs	r1, r4
+  4d51ce:	0028      	movs	r0, r5
+  4d51d0:	682f      	ldr	r7, [r5, #0]
+  4d51d2:	6a7f      	ldr	r7, [r7, #36]	@ 0x24
+  4d51d4:	47b8      	blx	r7
+  4d51d6:	0001      	movs	r1, r0
+  4d51d8:	b2c9      	uxtb	r1, r1
+  4d51da:	2901      	cmp	r1, #1
+  4d51dc:	d114      	bne.n	0x4d5208
+  4d51de:	68a8      	ldr	r0, [r5, #8]
+  4d51e0:	9002      	str	r0, [sp, #8]
+  4d51e2:	9401      	str	r4, [sp, #4]
+  4d51e4:	4822      	ldr	r0, [pc, #136]	@ (0x4d5270)
+  4d51e6:	9000      	str	r0, [sp, #0]
+  4d51e8:	4b22      	ldr	r3, [pc, #136]	@ (0x4d5274)
+  4d51ea:	f240 1259 	movw	r2, #345	@ 0x159
+  4d51ee:	4913      	ldr	r1, [pc, #76]	@ (0x4d523c)
+  4d51f0:	2003      	movs	r0, #3
+  4d51f2:	f778 f833 	bl	0x44d25c
+  4d51f6:	2000      	movs	r0, #0
+  4d51f8:	e017      	b.n	0x4d522a
+  4d51fa:	0033      	movs	r3, r6
+  4d51fc:	2200      	movs	r2, #0
+  4d51fe:	0021      	movs	r1, r4
+  4d5200:	0028      	movs	r0, r5
+  4d5202:	682f      	ldr	r7, [r5, #0]
+  4d5204:	6a7f      	ldr	r7, [r7, #36]	@ 0x24
+  4d5206:	47b8      	blx	r7
+  4d5208:	b2c0      	uxtb	r0, r0
+  4d520a:	2802      	cmp	r0, #2
+  4d520c:	d107      	bne.n	0x4d521e
+  4d520e:	0031      	movs	r1, r6
+  4d5210:	0028      	movs	r0, r5
+  4d5212:	f7ff ffae 	bl	0x4d5172
+  4d5216:	2800      	cmp	r0, #0
+  4d5218:	d1ef      	bne.n	0x4d51fa
+  4d521a:	2000      	movs	r0, #0
+  4d521c:	e005      	b.n	0x4d522a
+  4d521e:	0032      	movs	r2, r6
+  4d5220:	0021      	movs	r1, r4
+  4d5222:	0028      	movs	r0, r5
+  4d5224:	682b      	ldr	r3, [r5, #0]
+  4d5226:	691b      	ldr	r3, [r3, #16]
+  4d5228:	4798      	blx	r3
+  4d522a:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}

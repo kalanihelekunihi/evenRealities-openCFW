@@ -1,0 +1,60 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0032c990 <.data+0x2a590>:
+  32c990:	c3e4                	enter_s	[r13-r14,fp,blink]
+  32c992:	c1a3                	sub_s	sp,sp,0xc
+  32c994:	4508                	mov_s	r13,r0
+  32c996:	46cb 0080 281c      	mov_s	r14,0x80281c
+  32c99c:	8804                	ldb_s	r0,[r0,0x4]
+  32c99e:	8640                	ld_s	r2,[r14,0]
+  32c9a0:	8621                	ld_s	r1,[r14,0x4]
+  32c9a2:	1c08 3001           	st	0,[sp,8]
+  32c9a6:	c240                	st_s	r2,[sp,0]
+  32c9a8:	080f 013f           	bbit1.d.t	r0,0x4,14	;0x32c9b6
+  32c9ac:	c141                	st_s	r1,[sp,0x4]
+  32c9ae:	0d0a eeef           	bl.d	-140024	;0x30a6b4
+  32c9b2:	c080                	add_s	r0,sp,0
+  32c9b4:	e802                	breq_s	r0,0,4	;0x32c9b8
+  32c9b6:	c7c4                	leave_s	[r13-r14,fp,blink,pcl]
+  32c9b8:	40a1                	mov_s	r0,r13
+  32c9ba:	2080 0b0a           	add	r0,r0,684
+  32c9be:	da18                	mov_s	r2,0x18
+  32c9c0:	0e06 0320           	bl.d	26116	;0x332fc4
+  32c9c4:	41c1                	mov_s	r1,r14
+  32c9c6:	8d04                	ldb_s	r0,[r13,0x4]
+  32c9c8:	0845 017f           	bbit1.d.t	r0,0x5,68	;0x32ca0c
+  32c9cc:	41a1                	mov_s	r1,r13
+  32c9ce:	2180 050a           	add	r1,r1,660
+  32c9d2:	9600                	ldh_s	r0,[r14,0]
+  32c9d4:	9140                	ldh_s	r2,[r1,0]
+  32c9d6:	0811 0084           	brlo.nt	r0,r2,16	;0x32c9e4
+  32c9da:	9161                	ldh_s	r3,[r1,0x2]
+  32c9dc:	0b09 0004           	brlo.nt	r3,r0,8	;0x32c9e4
+  32c9e0:	4200                	mov_s	r2,r0
+  32c9e2:	b100                	sth_s	r0,[r1,0]
+  32c9e4:	9601                	ldh_s	r0,[r14,0x2]
+  32c9e6:	080f 0084           	brlo.nt	r0,r2,14	;0x32c9f2
+  32c9ea:	9141                	ldh_s	r2,[r1,0x2]
+  32c9ec:	0a07 0004           	brlo.nt	r2,r0,6	;0x32c9f2
+  32c9f0:	b101                	sth_s	r0,[r1,0x2]
+  32c9f2:	2580 160a           	add	r13,r13,664
+  32c9f6:	9622                	ldh_s	r1,[r14,0x4]
+  32c9f8:	9643                	ldh_s	r2,[r14,0x6]
+  32c9fa:	9500                	ldh_s	r0,[r13,0]
+  32c9fc:	9561                	ldh_s	r3,[r13,0x2]
+  32c9fe:	2009 0041           	min	r1,r0,r1
+  32ca02:	2308 0080           	max	r0,r3,r2
+  32ca06:	b520                	sth_s	r1,[r13,0]
+  32ca08:	b501                	sth_s	r0,[r13,0x2]
+  32ca0a:	c7c4                	leave_s	[r13-r14,fp,blink,pcl]
+  32ca0c:	c200                	ld_s	r2,[sp,0]
+  32ca0e:	c101                	ld_s	r1,[sp,0x4]
+  32ca10:	c002                	ld_s	r0,[sp,0x8]
+  32ca12:	1da5 1098           	st.as	r2,[r13,165]
+  32ca16:	1da6 1058           	st.as	r1,[r13,166]
+  32ca1a:	1da7 1018           	st.as	r0,[r13,167]
+  32ca1e:	c7c4                	leave_s	[r13-r14,fp,blink,pcl]

@@ -1,5 +1,8 @@
 #include "init_lower_native.h"
 
+extern uint8_t *const opencfw_em9305_ext_init_records_3357a8[3];
+extern uint8_t *const opencfw_em9305_stream_objects_3357b4[3];
+
 extern void *opencfw_em9305_memset(void *destination, uint32_t value, uint32_t bytes);
 
 /* Native 0x307980..0x3079c2. The product pointer table is the same
@@ -14,7 +17,7 @@ uint32_t opencfw_em9305_init_child_307980(void)
     *(volatile uint8_t *)0x805a7cu = 1u;
     *(volatile uint8_t *)0x802a5eu = 1u;
     for (uint32_t index = 0; index < 3u; ++index) {
-        uintptr_t context = (uintptr_t)init_read32(0x3357a8u + 4u * index);
+        uintptr_t context = (uintptr_t)opencfw_em9305_ext_init_records_3357a8[index];
         if (context != 0u) {
             result = (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)context, 0u, 704u);
             *(volatile uint8_t *)(context + 16u) = (uint8_t)index;
@@ -29,7 +32,7 @@ uint32_t opencfw_em9305_init_child_307a68(void)
 {
     (void)opencfw_em9305_memset((void *)0x803560u, 0u, 124u);
     for (uint32_t index = 0; index < 3u; ++index) {
-        uintptr_t context = (uintptr_t)init_read32(0x3357b4u + 4u * index);
+        uintptr_t context = (uintptr_t)opencfw_em9305_stream_objects_3357b4[index];
         (void)opencfw_em9305_memset((void *)context, 0u, 704u);
         uint32_t slot = init_read32(0x803b5cu + 4u * index);
         *(volatile uint8_t *)(context + 16u) = (uint8_t)index;

@@ -304,3 +304,169 @@ Authenticated literals fix the reset limit at `0x2007d000` and idle output
 addresses at `0x20026970`/`0x200250d0`. Their target instructions and selected
 source bodies are attributable; exception/semihost hardware and installed
 callback producer behavior remain unqualified.
+
+## Direct-root source attribution closure and remaining gates
+
+The source-coherent selected reference is now
+`boot-coplacement-hf2-store-order-round/receipt.json`: 374 units, 1,012
+providers (distinct TLSF FFS and FLS), three ROM imports, 159,100-byte
+bounded ELF, and 34 callback relocations. The two TLSF stock entries differ:
+`0x4169e2` isolates `word & -word` for FFS, while `0x4169f2` scans the raw word
+for FLS. Separate compiled source-versus-native Unicorn oracles pass 167 cases
+each. Earlier low-bit receipt and its single-entry interpretation are
+superseded. The HF2 inline assembly was also ordered to match native target
+conversion before integer division and VSTR before return-zero; target
+object disassembly confirms the instruction order, while FPSCR and hardware
+rounding remain unqualified.
+
+Fresh `boot-body-crosswalk-hf2-store-order-round.json` and
+`boot-root-reachability-hf2-store-order-round.json` report **zero** remaining
+header-only proof leads among 654 native direct-root reachable catalogue
+entries, and zero machine-unattributed direct roots. The last two full-body
+bindings were HF2 `0x426c24` and process stack `0x43293c`. This is a finite
+direct-call attribution result. It does not enumerate runtime-installed or
+computed native callback roots, prove every callback/scatter data producer, or
+admit physical ROM and memory behavior. Those remain required for a complete
+Boot source image.
+
+The native runtime installer `0x41ce52` is a separate indirect-root frontier.
+Its decompilation covers 60-byte slot clear, revision/variant flags, variant
+specific callback pointer stores, and invocation of slot zero. Current
+selected `startup_runtime.c` registers 28 distinct named callbacks; all 28
+are retained in the bounded ELF. The selected installer source and stock
+revision/variant pointer-store matrix have not been runtime compared for all
+branches, nor have external ROM/computed callback producers been exhaustively
+enumerated. Full source-image eligibility therefore remains open despite the
+zero direct-root header-only count.
+
+A bounded native indirect-producer check now executes SPOT installer `0x41ce52`
+for 16 hardware revision/product variant pairs (33–36, 0–3), with only the
+slot-zero callback cut to return zero. `boot-spot-installer-stock-matrix.json`
+records its nonzero installed slot offsets and six variant bytes.
+`boot-spot-installer-condition-crosscheck.json` compares those state outputs
+with the selected `startup_runtime.c` condition/slot model: 16/16 match.
+This source side is a checked static model. Direct execution of the selected
+M55 installer under the existing M4 Unicorn profile stops at the compiled
+`LE` low-overhead-loop instruction, so callback target identity, exact source
+execution, MMIO order, and all computed/ROM indirect roots remain open.
+
+The next bounded check found a real selected-source callback mismatch. Stock
+PCM2.1 palette word `0x41d16c` contains Thumb entry `0x42bf55`, the hardware
+readiness gate, while the selected installer had registered the PCM2.2
+temperature initializer at slot `0x08`. `startup_runtime.c` now registers
+`opencfw_boot_hardware_readiness_gate` in that branch. The fresh
+`boot-coplacement-spot-callback-identity-round/receipt.json` is
+`PASS_BOUNDED_LINK`: 374 selected units, 1,012 providers, three genuine ROM
+imports, 34 callback relocations, 159,180-byte ELF. All 379 source hashes in
+that receipt match the current worktree.
+
+`build_boot_spot_installer_m4_oracle.py` reproducibly compiles the **same
+selected installer C source** at Cortex-M4/O2 and binds its external callback
+names to authenticated stock palette identities. The companion
+`boot-spot-installer-compiled-m4-oracle.json` executes that ELF and stock
+`0x41ce52` through Unicorn for all 16 revision/variant cases. After mapping
+the ten local static callback symbols to their stock Thumb identities,
+all 16 cases match on every installed pointer in the 60-byte table, the six
+variant bytes, both modified MMIO words, and return value. Both runs cut only
+the final slot-zero callback to return zero. This qualifies the selected C
+installer's bounded branch and callback identity behavior under an M4 code
+generator. It does not execute the selected M55 ELF, the callback bodies, ROM,
+or physical MMIO. After the corrected branch, the selected installer names
+29 distinct callback symbols; all 29 occur in the fresh ELF symbol table.
+This retention result is separate from native identity comparison; other
+runtime callback producers and scatter
+behavior remain full-image gates.
+
+The next initialized indirect-root family is GPIO. The locked 97-record,
+1,164-byte descriptor table at `0x42f674` matches the fresh selected ELF's
+typed `opencfw_boot_gpio_descriptors` byte for byte (both SHA-256
+`6fc9fa7cc921845e12cd3e0dfdb151730a39112e1cf692cc528a30e058222576`).
+All 97 native/source `interrupt_mode` and callback fields are zero. The
+selected registrar's callback registration predicate requires both fields, so
+this initialized startup table installs no GPIO callback roots. The
+reproducible `boot-gpio-startup-indirect-roots.json` binds stock, selected C,
+and current ELF hashes. Later external calls to the GPIO registration API and
+actual interrupt delivery remain unqualified.
+
+The bounded indirect-root queue now has five named families beyond the
+qualified SPOT and initialized GPIO paths: (1) the 34 relocated callbacks in
+the startup initialized record, (2) four initializer callback records, (3)
+runtime API supplied GPIO/UART/clock callback words, (4) the logging and
+stdio sink words at `0x200270e4` and `0x200270cc`, and (5) ROM or computed
+callback values outside aligned initialized records. The first two have
+source relocation receipts but still need final load placement and call-path
+qualification. The latter three require producer/caller evidence before
+source-owned identities can be declared. This is a work queue, not an
+exhaustive proof that every indirect edge in the stock image was found.
+
+The stdio sink producer has one authenticated direct caller in the retained
+native function catalogue: `0x41fa98` calls setter `0x41583c` with zero.
+Selected `startup_alternatives.c` and `startup_power_config.c` preserve that
+call and the store to `0x200270cc`. The zero-scatter extent also covers that
+word. `boot-stdio-sink-startup-roots.json` records the corpus and source
+hashes. This closes the known direct startup producer as a null callback;
+the conditional call may not run, and indirect or external callers may later
+install an output callback. It does not establish the sink's runtime identity.
+
+The current scatter traversal audit is recorded in
+`boot-scatter-traversal-current.json`. Native `0x43299c` walks the four
+authenticated 18-word records at `0x4330d8..0x43311f`; their callback words
+resolve to the native zero adapter and three expansion adapters. The selected
+ELF's four record callbacks resolve to the corresponding named source symbols,
+and the 34 initialized SRAM callback words each have a live source relocation.
+Executing the native expansion adapter yields 1,371 initialized bytes. The
+current selected ELF matches those decoded bytes outside 63 relocated words:
+34 callback words and 29 logging, configuration, and locale data pointers.
+Those 1,119 exact nonrelocated bytes and the 34 callback relocation identities
+bound the source reduction. Selected M55 callback execution, complete final
+load placement, and runtime equality of all relocated data pointers remain
+open.
+
+The selected co-placement linker exposed a concrete scatter overlap: it had
+placed the 17,728-byte `opencfw_boot_iom_contexts` pool at `0x20000000`, the
+destination of the 1,371-byte initialized copy. The pool's native address is
+`0x2001455c`; `context_claim.c` already gives it a dedicated section. The
+experimental linker now fixes that section to `0x2001455c..0x20018a9c` with
+address and size assertions. That interval lies inside the authenticated
+`0x2000055c..0x200271c8` zero-scatter range and outside the initialized copy.
+The fresh `boot-coplacement-iom-pool-placement-round/receipt.json` remains
+`PASS_BOUNDED_LINK`: 374 selected units, 1,012 providers, three ROM imports,
+34 callback relocations, 159,180 flash bytes and 4,628 bytes before the main
+preamble. Its `placement-receipt.json` checks those linked intervals, while
+`scatter-receipt.json` reruns the 1,119-byte nonrelocated initialized-data
+comparison against this fresh ELF. This is a source linker correction with a
+bounded placement receipt, not execution of M55 startup or proof that all
+native RAM globals have matching final addresses. The initialized block still
+has 63 relocation words requiring runtime target equality: 34 callback and
+29 logging/configuration/locale data pointers.
+
+The fresh ELF has exactly one allocated RAM section and one sized RAM object:
+the corrected IOM pool. There are no other linked `.data` or `.bss` objects
+to place in this current selected graph. The placement audit lexically finds
+197 distinct direct RAM hex literals across 374 selected source units; 35 are
+inside the initialized 1,371-byte destination, 156 inside the first zero
+range, one inside the 4,096-byte source zero stream, three inside the second
+zero range, and two stack literals outside those ranges (`0x2007d000` reset
+limit and `0x2007fb00` vector stack). None is inside the IOM pool. This
+closes the **current linked allocated-RAM-section overlap queue** at one
+identified pool and one corrected placement. The 197-literal inventory is a
+screen for further source/runtime address work, not a proof about computed
+addresses, ROM writes or unretained objects. The remaining initialized-data
+pointer queue is the 63 relocation words already named above; final target
+equality and complete RAM behavior still require separate evidence.
+
+The 63 initialized-data relocation words now have a per-word target audit in
+`boot-coplacement-iom-pool-placement-round/initialized-pointer-objects.json`.
+All 34 callback words map to the authenticated stock pointer inventory and
+named Thumb symbols in the fresh ELF: 27 transition selectors, three storage
+callbacks and four task lifecycle callbacks. The other 29 words resolve to
+source data objects at the expected element offset and declared extent. Their
+195 per-entry pointee bytes match stock flash: six four-byte log level
+suffixes, six eight-byte color suffixes, four 16-byte context records, three
+16-byte platform records, nine one-byte empty locale strings and one two-byte
+decimal-point string. The logger's selected source reads the pointer arrays
+at `0x2000031c` and `0x20000334`; transition code reads the 27-entry array
+at `0x20000158`. This closes the static pointee identity/content review for
+the 63 current relocations. Runtime call paths, callback bodies, final pointer
+values after scatter and native consumer behavior remain separate checks;
+there is no evidence-backed source identity correction in this round.

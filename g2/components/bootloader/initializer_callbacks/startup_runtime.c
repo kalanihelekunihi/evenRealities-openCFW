@@ -9,6 +9,7 @@ extern uint32_t opencfw_pcm22_post_lptohp(void);
 extern uint32_t opencfw_pcm22_timer_service(void);
 extern uint32_t pcm21_boost_service(void);
 extern uint32_t opencfw_pcm22_temperature_init(void);
+extern uint32_t opencfw_boot_hardware_readiness_gate(void);
 extern uint32_t opencfw_boot_spotmgr_power_state_update_a(uint32_t,uint32_t,void *);
 extern uint32_t opencfw_boot_spot_state_power_event(uint8_t,uint8_t,uint32_t *);
 /* SPDX-License-Identifier: MIT. Locked-f89a4c46 reconstruction.
@@ -112,7 +113,7 @@ NI uint32_t opencfw_boot_startup_spot_dispatch(void){
  if(B(0x200271ad)){
   slot(0,(uint32_t)(uintptr_t)&spotmgr_init_42abbc_native);slot(4,(uint32_t)(uintptr_t)&opencfw_boot_spotmgr_power_state_update_a);slot(8,(uint32_t)(uintptr_t)&opencfw_pcm22_temperature_init);slot(0x1c,(uint32_t)(uintptr_t)&opencfw_pcm22_profile_apply);slot(0x28,(uint32_t)(uintptr_t)&opencfw_pcm22_post_lptohp);slot(0x2c,(uint32_t)(uintptr_t)&opencfw_pcm22_timer_service);
  }else if(B(0x200271a9)){
-  slot(0,(uint32_t)(uintptr_t)&hw_state_compose_42bdf0_native);slot(4,(uint32_t)(uintptr_t)&opencfw_boot_spot_state_power_event);slot(8,(uint32_t)(uintptr_t)&opencfw_pcm22_temperature_init);slot(0x14,(uint32_t)(uintptr_t)&pcm21_slot14_config);slot(0x18,(uint32_t)(uintptr_t)&pcm21_slot18_timing);slot(0x1c,(uint32_t)(uintptr_t)&pcm21_slot1c_timing);slot(0x2c,(uint32_t)(uintptr_t)&pcm21_boost_service);
+  slot(0,(uint32_t)(uintptr_t)&hw_state_compose_42bdf0_native);slot(4,(uint32_t)(uintptr_t)&opencfw_boot_spot_state_power_event);slot(8,(uint32_t)(uintptr_t)&opencfw_boot_hardware_readiness_gate);slot(0x14,(uint32_t)(uintptr_t)&pcm21_slot14_config);slot(0x18,(uint32_t)(uintptr_t)&pcm21_slot18_timing);slot(0x1c,(uint32_t)(uintptr_t)&pcm21_slot1c_timing);slot(0x2c,(uint32_t)(uintptr_t)&pcm21_boost_service);
  }else if((REV==33&&VAR>=2)||(REV==34&&VAR<2)||(REV==35&&VAR==0)){
   slot(0,(uint32_t)(uintptr_t)&bl_bl009_dispatch_native);slot(4,(uint32_t)(uintptr_t)&state_event_dispatch_42d562_native);slot(8,(uint32_t)(uintptr_t)&bl009_slot8_noop);slot(0xc,(uint32_t)(uintptr_t)&state_event_flag_set_42d5c2_native);slot(0x10,(uint32_t)(uintptr_t)&state_event_finalize_42d5cc_native);slot(0x30,(uint32_t)(uintptr_t)&autosw_initialize_42d63a_native);slot(0x34,(uint32_t)(uintptr_t)&bl009_slot34_enable);slot(0x38,(uint32_t)(uintptr_t)&bl009_slot38_disable);
   if(REV==33&&VAR==2){slot(0x18,(uint32_t)(uintptr_t)&bl009_special_slot18_timing);slot(0x1c,(uint32_t)(uintptr_t)&bl009_special_slot1c_config);}else{slot(0x18,(uint32_t)(uintptr_t)&bl009_slot18_timing);slot(0x1c,(uint32_t)(uintptr_t)&bl009_slot1c_config);}

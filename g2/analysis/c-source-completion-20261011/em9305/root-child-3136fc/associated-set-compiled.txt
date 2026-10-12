@@ -1,0 +1,71 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261012/em-root-dispatch-round47/ble_em9305/candidate.o:     file format elf32-littlearc
+
+
+Disassembly of section .text:
+
+00030444 <opencfw_em9305_associated_set_3338f4>:
+   30444:	c7e1                	push_s	r15
+   30446:	c6e1                	push_s	r14
+   30448:	c5e1                	push_s	r13
+   3044a:	1600 700c 0080 5f30 	ld	r12,[0x805f30]
+   30452:	205f 00c3           	mpyuw	r3,r0,0x3
+   30456:	4708                	mov_s	r15,r0
+   30458:	2615 70c5 0080 5f59 	add2	r5,0x805f59,r3
+   30460:	2615 70c0 0080 5f28 	add2	r0,0x805f28,r3
+   30468:	ec0c                	breq_s	r12,0,24	;30480 <opencfw_em9305_associated_set_3338f4+0x3c>
+   3046a:	0c4b 1040           	breq.nt	r12,r1,74	;304b2 <opencfw_em9305_associated_set_3338f4+0x6e>
+   3046e:	2909 0f8d 0000 0271 	remu	r13,r1,0x271
+   30476:	ed34                	breq_s	r13,0,104	;304dc <opencfw_em9305_associated_set_3338f4+0x98>
+   30478:	1d00 0003           	stb	0,[r5]
+   3047c:	f01d                	b_s	58	;304b6 <opencfw_em9305_associated_set_3338f4+0x72>
+   3047e:	78e0                	nop_s
+   30480:	1600 708d 0080 5f34 	ldb	r13,[0x805f34]
+   30488:	262f f347           	extb.f	0,r13
+   3048c:	f413                	bne_s	38	;304b2 <opencfw_em9305_associated_set_3338f4+0x6e>
+   3048e:	1e00 7040 0080 5f30 	st	r1,[0x805f30]
+   30496:	45cb 0000 0000      	mov_s	r13,0
+   3049c:	de08                	mov_s	r14,0x8
+   3049e:	240a 7380           	mov	lp_count,r14
+   304a2:	20a8 0240           	lp	18	;304b2 <opencfw_em9305_associated_set_3338f4+0x6e>
+   304a6:	1500 1004           	ld	r4,[r13]
+   304aa:	0c6d 0064           	brlo.d.nt	r4,r1,108	;30514 <opencfw_em9305_associated_set_3338f4+0xd0>
+   304ae:	74a5                	add_s	r13,r13,4
+   304b0:	7185                	add_s	r12,r12,1
+   304b2:	1d00 0043           	stb	1,[r5]
+   304b6:	2615 70cc 0080 5f60 	add2	r12,0x805f60,r3
+   304be:	a440                	st_s	r2,[r12,0]
+   304c0:	2615 70c2 0080 5f5c 	add2	r2,0x805f5c,r3
+   304c8:	a220                	st_s	r1,[r2,0]
+   304ca:	2615 70c3 0080 5f58 	add2	r3,0x805f58,r3
+   304d2:	abe0                	stb_s	r15,[r3,0]
+   304d4:	c5c1                	pop_s	r13
+   304d6:	c6c1                	pop_s	r14
+   304d8:	7fe0                	j_s.d	[blink]
+   304da:	c7c1                	pop_s	r15
+   304dc:	0cd7 9045           	brhs.nt	r12,r1,-42	;304b2 <opencfw_em9305_associated_set_3338f4+0x6e>
+   304e0:	1600 708c 0080 5f34 	ldb	r12,[0x805f34]
+   304e8:	262f f307           	extb.f	0,r12
+   304ec:	f5e3                	bne_s	-58	;304b2 <opencfw_em9305_associated_set_3338f4+0x6e>
+   304ee:	1e00 7040 0080 5f30 	st	r1,[0x805f30]
+   304f6:	44cb 0000 0000      	mov_s	r12,0
+   304fc:	de08                	mov_s	r14,0x8
+   304fe:	240a 7380           	mov	lp_count,r14
+   30502:	20a8 0240           	lp	18	;30512 <opencfw_em9305_associated_set_3338f4+0xce>
+   30506:	1400 1004           	ld	r4,[r12]
+   3050a:	0c21 0064           	brlo.d.nt	r4,r1,32	;30528 <opencfw_em9305_associated_set_3338f4+0xe4>
+   3050e:	7485                	add_s	r12,r12,4
+   30510:	71a5                	add_s	r13,r13,1
+   30512:	f1d1                	b_s	-94	;304b2 <opencfw_em9305_associated_set_3338f4+0x6e>
+   30514:	2615 730c 0000 0000 	add2	r12,0,r12
+   3051c:	8480                	ld_s	r12,[r12,0]
+   3051e:	1e00 7300 0080 5f2c 	st	r12,[0x805f2c]
+   30526:	f1c7                	b_s	-114	;304b2 <opencfw_em9305_associated_set_3338f4+0x6e>
+   30528:	2615 734d 0000 0000 	add2	r13,0,r13
+   30530:	8580                	ld_s	r12,[r13,0]
+   30532:	1e00 7300 0080 5f2c 	st	r12,[0x805f2c]
+   3053a:	f1bd                	b_s	-134	;304b2 <opencfw_em9305_associated_set_3338f4+0x6e>
+
+Disassembly of section .text.opencfw_em9305_auxiliary_guard_interval:
+
+Disassembly of section .text.opencfw_em9305_channel_timing_adjust_312c5c:

@@ -2001,3 +2001,27 @@ Full3043ac/304430 coherent target compilation passes (1470 definitions,76 import
 ### Full packet constructors settled
 
 Both constructor sources compile in a coherent target round; exact counts are recorded in progress-20261012.json. All124 compilation snapshots independently hash-current and stable. Two more complete native callback bodies306cbc/31ce10 are selected for the next round after513 host UBSan cases covering all256 flag values, all256 loop counts and null lookup. NativeARC execution/resident behavior and final image qualification remain open.
+
+### Record/loop callbacks settled; next full units selected
+
+`em-generic-record-loop-callbacks-round` target passes with1474 definitions,72 unresolved imports,zero duplicates and125 stable current initializer snapshots. Next selected units provide full32922c/32a218/32ae3c call chains, full3246c0/3246dc four-slot loops reusing existing32468c/324698 bodies, and full32c148 named stack-frame queue handler. Three chain routes and32four-slot masks pass focused host fixtures. The stack-frame handler strictARC object uses baseline32-bit LD rather than an unqualified alternateCD2compactencoding; no byte equality claimed. Coherent target receipt pending.
+
+## Root associated callback admission, 2026-10-12
+
+Settled generic chains/four-slot round: 1480 definitions, 68 unresolved imports, zero duplicates; 128 stable current initializer snapshots. Selected full32c254 named stack-frame unit and independently reviewed four associated units (32b618,32b82c,32b9a4,30e858) for the next coherent build. Parent32b61c remains unselected because optional callback ambient R2 is not justified by its two-argument C draft. Six callback and four start host routes cover bounded child-cut behavior, not native ARC numeric or hardware equivalence.
+
+## Associated four and queue-frame round settled
+
+Full ARC build:1485 definitions,67 genuine imports,0duplicates;133stable current initializer snapshots independently checked. The four reviewed associated bodies and full32c254frame compile together. Parent32b61c ambientR2 gate remains open. Next selected full32bc6c typed callback and322178tail thunk; native callbackconsumer318ce0 explicitly supplies R1packet. Tail preserves incoming registers and delay-store ordering; child32233c remains genuine unresolved.
+
+## 312be4 signed-halfword duration correction
+
+Independent full-native review at312c3c/312c4c found selected uint16 child arguments lost EXTH_S sign extension. Corrected both to sign-extended32-bit arguments. Local Clang UBSan compiled regression passes12 nonzero-divisor instruction-model cases; original source mismatches6, corrected matches12. This is host model evidence, not native ARC execution; generic zero-divider ambient destination remains open. Interrupted callback build94008 has no process/receipt and will be replaced by a new coherent build including this fix.
+
+## Complete native duration ABI pair prepared
+
+Named ISA C units for312b88 and312be4 compile and link at isolated native addresses. Entire44-byte piece and120-byte duration bodies match authenticated stock, including three canonical child relocations. This preserves native live-register contracts, signed EXTH and ambient DIVU R11 destination. Both await replacing canonical ordinary C definitions after active coherent build; no full-image/native-execution/hardware proof inferred.
+
+## Guard and quantizer native ABI units prepared
+
+Full303f80 and312c5c named ISA C units strict target compile and independently full-native effect review pass. Source sizes14/70 vsnative12/68 due baseline LD/ADD replacing assembler-selected unprovedCD2 compact forms. Guard preserves R1..R12; quantizer preserves R4..R12 and native branch-specific R1/R2/R3. Both await canonical replacement after active build; no byte equality/native execution/hardware claim.

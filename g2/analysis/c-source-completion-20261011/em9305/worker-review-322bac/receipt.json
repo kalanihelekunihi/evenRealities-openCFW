@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "source_sha256": "74ebc8e8fe2298d9658be51bdaa977d507e9e1c7601a8989c990d57da96f13ba",
+  "native_sha256": "ac4d1cf93b764e7f494ef677e94f918ab716d97123d3c39432ee1e601036ea17",
+  "target_sha256": "66f73de2c8abc325fe213dc50cb08a669071656adc61efadc1fb2661f332df4e",
+  "instruction_count": 72,
+  "native_body_bytes": 232,
+  "target_body_bytes": 234,
+  "baseline_expansion": "322c82 native ld_s r0,[r0,0] -> target full ld r0,[r0]",
+  "child_relocations": {
+    "0x322bc0": "opencfw_em9305_radio_access_mix_3188b8",
+    "0x322be6": "opencfw_em9305_radio_channel_transform_30e3fc",
+    "0x322c1c": "opencfw_em9305_memcpy",
+    "0x322c68": "opencfw_em9305_memcpy"
+  },
+  "native_indirect_callback": "322c8e jl_s.d [r3]; 322c90 delay slot mov_s r0,r14",
+  "scope": "Full instruction sequence and bytes outside child relocations and one LD expansion; indirect callback contract remains open."
+}

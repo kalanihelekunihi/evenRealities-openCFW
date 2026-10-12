@@ -1,0 +1,259 @@
+{
+  "native_blob_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "candidates": [
+    {
+      "member": "lctr_sm_adv_master.c.obj",
+      "transition_bytes": 20,
+      "transition_exact": true,
+      "sdk_transition_values": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        3,
+        1,
+        2,
+        0,
+        1,
+        3,
+        2,
+        2,
+        0,
+        2,
+        3,
+        3,
+        3,
+        0,
+        3
+      ],
+      "stock_transition_values": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        3,
+        1,
+        2,
+        0,
+        1,
+        3,
+        2,
+        2,
+        0,
+        2,
+        3,
+        3,
+        3,
+        0,
+        3
+      ],
+      "callback_slots": [
+        {
+          "offset": 4,
+          "sdk_symbol": "lctrScanActDiscover",
+          "stock_callback": "0x325548"
+        },
+        {
+          "offset": 8,
+          "sdk_symbol": "lctrScanActScanCnf",
+          "stock_callback": "0x3255c0"
+        },
+        {
+          "offset": 16,
+          "sdk_symbol": "lctrScanActUpdateScanParam",
+          "stock_callback": "0x325648"
+        },
+        {
+          "offset": 20,
+          "sdk_symbol": "lctrScanActShutdown",
+          "stock_callback": "0x3255fc"
+        },
+        {
+          "offset": 24,
+          "sdk_symbol": "lctrScanActUpdateScanFilt",
+          "stock_callback": "0x325618"
+        },
+        {
+          "offset": 28,
+          "sdk_symbol": "lctrScanActShutdown",
+          "stock_callback": "0x3255fc"
+        },
+        {
+          "offset": 32,
+          "sdk_symbol": "lctrScanActSelfTerm",
+          "stock_callback": "0x3255e4"
+        },
+        {
+          "offset": 44,
+          "sdk_symbol": "lctrScanActDisallowScan",
+          "stock_callback": "0x325540"
+        },
+        {
+          "offset": 48,
+          "sdk_symbol": "lctrScanActDisallowScan",
+          "stock_callback": "0x325540"
+        },
+        {
+          "offset": 52,
+          "sdk_symbol": "lctrScanActScanTerm",
+          "stock_callback": "0x3255c8"
+        },
+        {
+          "offset": 56,
+          "sdk_symbol": "lctrScanActUpdateScanParam",
+          "stock_callback": "0x325648"
+        },
+        {
+          "offset": 64,
+          "sdk_symbol": "lctrScanActDisallowScan",
+          "stock_callback": "0x325540"
+        },
+        {
+          "offset": 68,
+          "sdk_symbol": "lctrScanActDisallowScan",
+          "stock_callback": "0x325540"
+        },
+        {
+          "offset": 72,
+          "sdk_symbol": "lctrScanActResetTerm",
+          "stock_callback": "0x3255a8"
+        },
+        {
+          "offset": 76,
+          "sdk_symbol": "lctrScanActUpdateScanParam",
+          "stock_callback": "0x325648"
+        }
+      ],
+      "symbol_extents": [
+        "00000000 l     O .rodata_in_data.lctrScanNextStateTbl\t00000014 lctrScanNextStateTbl",
+        "00000000 l     O .rodata_in_data.lctrScanActionTbl\t00000050 lctrScanActionTbl"
+      ]
+    },
+    {
+      "member": "lctr_sm_adv_slave.c.obj",
+      "transition_bytes": 20,
+      "transition_exact": false,
+      "sdk_transition_values": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        3,
+        1,
+        2,
+        1,
+        0,
+        3,
+        2,
+        2,
+        2,
+        0,
+        3,
+        3,
+        3,
+        3,
+        0
+      ],
+      "stock_transition_values": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        3,
+        1,
+        2,
+        0,
+        1,
+        3,
+        2,
+        2,
+        0,
+        2,
+        3,
+        3,
+        3,
+        0,
+        3
+      ],
+      "callback_slots": [
+        {
+          "offset": 4,
+          "sdk_symbol": "lctrAdvActStart",
+          "stock_callback": "0x325548"
+        },
+        {
+          "offset": 8,
+          "sdk_symbol": "lctrAdvActAdvCnf",
+          "stock_callback": "0x3255c0"
+        },
+        {
+          "offset": 12,
+          "sdk_symbol": "lctrAdvActSelfStart",
+          "stock_callback": "0x0"
+        },
+        {
+          "offset": 20,
+          "sdk_symbol": "lctrAdvActShutdown",
+          "stock_callback": "0x3255fc"
+        },
+        {
+          "offset": 24,
+          "sdk_symbol": "lctrAdvActAdvCnf",
+          "stock_callback": "0x325618"
+        },
+        {
+          "offset": 28,
+          "sdk_symbol": "lctrAdvActShutdown",
+          "stock_callback": "0x3255fc"
+        },
+        {
+          "offset": 36,
+          "sdk_symbol": "lctrAdvActSelfTerm",
+          "stock_callback": "0x0"
+        },
+        {
+          "offset": 44,
+          "sdk_symbol": "lctrAdvActDisallowAdvCnf",
+          "stock_callback": "0x325540"
+        },
+        {
+          "offset": 48,
+          "sdk_symbol": "lctrAdvActDisallowAdvCnf",
+          "stock_callback": "0x325540"
+        },
+        {
+          "offset": 56,
+          "sdk_symbol": "lctrAdvActAdvTerm",
+          "stock_callback": "0x325648"
+        },
+        {
+          "offset": 64,
+          "sdk_symbol": "lctrAdvActDisallowAdvCnf",
+          "stock_callback": "0x325540"
+        },
+        {
+          "offset": 68,
+          "sdk_symbol": "lctrAdvActDisallowAdvCnf",
+          "stock_callback": "0x325540"
+        },
+        {
+          "offset": 76,
+          "sdk_symbol": "lctrAdvActResetTerm",
+          "stock_callback": "0x325648"
+        }
+      ],
+      "symbol_extents": [
+        "00000000 l     O .rodata_in_data.lctrAdvNextStateTbl\t00000014 lctrAdvNextStateTbl",
+        "00000000 l     O .rodata_in_data.lctrAdvActionTbl\t00000050 lctrAdvActionTbl"
+      ]
+    }
+  ],
+  "limits": [
+    "Callback names alone do not establish provider body identity.",
+    "Runtime state ownership and final placement remain open."
+  ]
+}

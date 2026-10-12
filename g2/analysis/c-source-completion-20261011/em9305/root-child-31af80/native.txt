@@ -1,0 +1,35 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0031af80 <.data+0x18b80>:
+  31af80:	c2e6                	enter_s	[r13-r15,blink]
+  31af82:	46cb 0080 281c      	mov_s	r14,0x80281c
+  31af88:	4508                	mov_s	r13,r0
+  31af8a:	2080 0f46           	add	r0,r0,445
+  31af8e:	da08                	mov_s	r2,0x8
+  31af90:	0836 0c20           	bl.d	98356	;0x332fc4
+  31af94:	41c1                	mov_s	r1,r14
+  31af96:	9644                	ldh_s	r2,[r14,0x8]
+  31af98:	40a1                	mov_s	r0,r13
+  31af9a:	4e9a                	add_s	r1,r14,0xa
+  31af9c:	2080 0946           	add	r0,r0,421
+  31afa0:	1de3 109c           	sth.as	r2,[r13,227]
+  31afa4:	0822 0c20           	bl.d	98336	;0x332fc4
+  31afa8:	da08                	mov_s	r2,0x8
+  31afaa:	40a1                	mov_s	r0,r13
+  31afac:	2080 0d46           	add	r0,r0,437
+  31afb0:	744c                	mov_s	r2,4
+  31afb2:	0816 0c20           	bl.d	98324	;0x332fc4
+  31afb6:	4eaa                	add_s	r1,r14,0x12
+  31afb8:	40a1                	mov_s	r0,r13
+  31afba:	2080 0e46           	add	r0,r0,441
+  31afbe:	087e faaf           	bl.d	-44932	;0x310038
+  31afc2:	742c                	mov_s	r1,4
+  31afc4:	2580 1b46           	add	r13,r13,429
+  31afc8:	d908                	mov_s	r1,0x8
+  31afca:	0872 faaf           	bl.d	-44944	;0x310038
+  31afce:	40a1                	mov_s	r0,r13
+  31afd0:	c6c6                	leave_s	[r13-r15,blink,pcl]

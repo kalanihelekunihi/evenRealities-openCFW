@@ -1,0 +1,39 @@
+{
+  "status": "PASS_NATIVE_INDEX_DOMAIN_AND_SDK_NINE_BYTE_OBJECT_COMPARISON",
+  "native_instructions": [
+    "32a696 sub_s r0,r0,3",
+    "32a698 brhs.d.nt r0,9,32a674",
+    "32a69c extb_s r2,r0",
+    "32a69e mov r1,393",
+    "32a6a2 bbit0.d.t r1,r2,32a674",
+    "32a6a6 sexb_s r0,r0",
+    "32a6a8 ldb r15,[r0,3344b7]"
+  ],
+  "input_cases": 256,
+  "accepted_rows": [
+    {
+      "input_byte": 3,
+      "index": 0,
+      "output_event": 0
+    },
+    {
+      "input_byte": 6,
+      "index": 3,
+      "output_event": 1
+    },
+    {
+      "input_byte": 10,
+      "index": 7,
+      "output_event": 2
+    },
+    {
+      "input_byte": 11,
+      "index": 8,
+      "output_event": 3
+    }
+  ],
+  "extent_bytes": 9,
+  "limits": [
+    "Index-domain proof covers this native consumer only. SDK caller has material code differences and is not accepted as an identical provider. Final image placement remains open."
+  ]
+}

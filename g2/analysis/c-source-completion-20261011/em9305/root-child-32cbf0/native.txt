@@ -1,0 +1,90 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0032cbf0 <.data+0x2a7f0>:
+  32cbf0:	c2ee                	enter_s	[r13-r19,blink]
+  32cbf2:	40d3 0080 2810      	mov_s	r16,0x802810
+  32cbf8:	100c 2083           	ldb	r3,[r16,12]
+  32cbfc:	100e 20cf           	ldb.x	r15,[r16,14]
+  32cc00:	244a 7100           	mov	lp_count,0x4
+  32cc04:	4210                	mov_s	r18,r0
+  32cc06:	4310                	mov_s	r19,r0
+  32cc08:	2280 200c           	add	r18,r18,768
+  32cc0c:	714c                	mov_s	r2,1
+  32cc0e:	71cd                	mov_s	r14,1
+  32cc10:	204a 0040           	mov	r0,0x1
+  32cc14:	1aeb a003           	stb	0,[r18,-21]
+  32cc18:	20a8 0240           	lp	18	;0x32cc2a
+  32cc1c:	6829                	sub_s	r1,r0,0x1
+  32cc1e:	2a00 0041           	asl	r1,r2,r1
+  32cc22:	090d 00e0           	breq.d.nt	r1,r3,12	;0x32cc2c
+  32cc26:	7104                	add_s	r0,r0,1
+  32cc28:	71c5                	add_s	r14,r14,1
+  32cc2a:	deff                	mov_s	r14,0xff
+  32cc2c:	78cf                	extb_s	r0,r14
+  32cc2e:	208c 8fc3           	cmp	r0,255
+  32cc32:	4110                	mov_s	r17,r0
+  32cc34:	f20a                	beq_s	20	;0x32cc48
+  32cc36:	0b36 f76f           	bl.d	-70860	;0x31b768
+  32cc3a:	4022                	mov_s	r0,r17
+  32cc3c:	e806                	breq_s	r0,0,12	;0x32cc48
+  32cc3e:	e7fe                	cmp_s	r15,0x7e
+  32cc40:	f408                	bne_s	16	;0x32cc50
+  32cc42:	1aeb a783           	stb	30,[r18,-21]
+  32cc46:	c6ce                	leave_s	[r13-r19,blink,pcl]
+  32cc48:	d820                	mov_s	r0,0x20
+  32cc4a:	1aeb a002           	stb	r0,[r18,-21]
+  32cc4e:	c6ce                	leave_s	[r13-r19,blink,pcl]
+  32cc50:	1200 2080           	ldb	r0,[r18]
+  32cc54:	2300 244d           	add	r13,r19,r17
+  32cc58:	2580 1a48           	add	r13,r13,553
+  32cc5c:	e814                	breq_s	r0,0,40	;0x32cc84
+  32cc5e:	8d20                	ldb_s	r1,[r13,0]
+  32cc60:	78ef                	extb_s	r0,r15
+  32cc62:	0925 0020           	breq.d.nt	r1,r0,36	;0x32cc84
+  32cc66:	40e1                	mov_s	r0,r15
+  32cc68:	0f0e f70f           	bl	-71924	;0x31b374
+  32cc6c:	8d20                	ldb_s	r1,[r13,0]
+  32cc6e:	4500                	mov_s	r5,r0
+  32cc70:	714c                	mov_s	r2,1
+  32cc72:	4f30                	sub_s	r0,r15,r1
+  32cc74:	262f 0005           	sexb	r6,r0
+  32cc78:	702c                	mov_s	r1,0
+  32cc7a:	4062                	mov_s	r0,r19
+  32cc7c:	4322                	mov_s	r3,r17
+  32cc7e:	09a6 fb6f           	bl.d	-38492	;0x323620
+  32cc82:	44e1                	mov_s	r4,r15
+  32cc84:	ade0                	stb_s	r15,[r13,0]
+  32cc86:	100d 20c2           	ldb.x	r2,[r16,13]
+  32cc8a:	4062                	mov_s	r0,r19
+  32cc8c:	0d8a f52f           	bl.d	-88696	;0x317214
+  32cc90:	4122                	mov_s	r1,r17
+  32cc92:	1afe a382           	stb	r14,[r18,-2]
+  32cc96:	1afc a002           	stb	r0,[r18,-4]
+  32cc9a:	e857                	breq_s	r0,0,-82	;0x32cc46
+  32cc9c:	12ff a080           	ldb	r0,[r18,-1]
+  32cca0:	e853                	breq_s	r0,0,-90	;0x32cc46
+  32cca2:	7436                	cmp_s	r17,4
+  32cca4:	26ca 10e1           	mov.eq	r14,0x3
+  32cca8:	79cf                	extb_s	r1,r14
+  32ccaa:	2179 2102           	setne	r2,r17,0x4
+  32ccae:	2179 00c0           	setne	r0,r1,0x3
+  32ccb2:	7845                	or_s	r0,r0,r2
+  32ccb4:	4910                	sub_s	r0,r1,r0
+  32ccb6:	7062                	add_s	r0,r0,r19
+  32ccb8:	2080 0305           	add	r0,r0,332
+  32ccbc:	1000 00cd           	ldb.x	r13,[r0]
+  32ccc0:	0eb6 f72f           	bl.d	-72012	;0x31b374
+  32ccc4:	40a1                	mov_s	r0,r13
+  32ccc6:	12fc a0c6           	ldb.x	r6,[r18,-4]
+  32ccca:	4500                	mov_s	r5,r0
+  32cccc:	702c                	mov_s	r1,0
+  32ccce:	704c                	mov_s	r2,0
+  32ccd0:	4062                	mov_s	r0,r19
+  32ccd2:	4322                	mov_s	r3,r17
+  32ccd4:	094e fb6f           	bl.d	-38580	;0x323620
+  32ccd8:	44a1                	mov_s	r4,r13
+  32ccda:	c6ce                	leave_s	[r13-r19,blink,pcl]

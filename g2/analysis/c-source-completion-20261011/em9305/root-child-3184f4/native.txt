@@ -1,0 +1,45 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+003184f4 <.data+0x160f4>:
+  3184f4:	c3e6                	enter_s	[r13-r15,fp,blink]
+  3184f6:	c1a2                	sub_s	sp,sp,0x8
+  3184f8:	4548                	mov_s	r13,r2
+  3184fa:	43c3 0080 5a9d      	mov_s	r3,0x805a9d
+  318500:	4608                	mov_s	r14,r0
+  318502:	153a 1080           	ldb	r0,[r13,58]
+  318506:	8b60                	ldb_s	r3,[r3,0]
+  318508:	824d                	ld_s	r2,[r2,0x34]
+  31850a:	4728                	mov_s	r15,r1
+  31850c:	852c                	ld_s	r1,[r13,0x30]
+  31850e:	2079 000c           	setne	r12,r0,0
+  318512:	a547                	st_s	r2,[r13,0x1c]
+  318514:	a526                	st_s	r1,[r13,0x18]
+  318516:	ae83                	stb_s	r12,[r14,0x3]
+  318518:	eb20                	breq_s	r3,0,64	;0x318558
+  31851a:	1539 1083           	ldb	r3,[r13,57]
+  31851e:	0b37 007e           	bbit0.d.t	r3,0x1,54	;0x318552
+  318522:	c380                	add_s	r3,sp,0
+  318524:	1c04 3001           	st	0,[sp,4]
+  318528:	0d3a f5af           	bl.d	-84680	;0x303a60
+  31852c:	1c00 3001           	st	0,[sp]
+  318530:	e888                	brne_s	r0,0,16	;0x318540
+  318532:	854d                	ld_s	r2,[r13,0x34]
+  318534:	852c                	ld_s	r1,[r13,0x30]
+  318536:	153a 1080           	ldb	r0,[r13,58]
+  31853a:	0be2 f5af           	bl.d	-85024	;0x303918
+  31853e:	c380                	add_s	r3,sp,0
+  318540:	c001                	ld_s	r0,[sp,0x4]
+  318542:	c100                	ld_s	r1,[sp,0]
+  318544:	2105 803e           	or.f	0,r1,r0
+  318548:	f205                	beq_s	10	;0x318552
+  31854a:	a526                	st_s	r1,[r13,0x18]
+  31854c:	1e03 1043           	stb	1,[r14,3]
+  318550:	a507                	st_s	r0,[r13,0x1c]
+  318552:	8714                	ld_s	r0,[r15,0x50]
+  318554:	b886                	bset_s	r0,r0,0x6
+  318556:	a714                	st_s	r0,[r15,0x50]
+  318558:	c7c6                	leave_s	[r13-r15,fp,blink,pcl]

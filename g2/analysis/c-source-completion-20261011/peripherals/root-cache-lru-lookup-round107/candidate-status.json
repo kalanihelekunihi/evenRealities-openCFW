@@ -1,0 +1,25 @@
+{
+  "status": "NATIVE_QUALIFIED_SELECTED_BUILD_AUDIT_PASS",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_ranges": [
+    "5c2e4c..5c2f32",
+    "5c2be4..5c2bee",
+    "482d22..482d88"
+  ],
+  "repairs_required": [
+    "Preserve fatal store for null cache/key",
+    "Compute and save fast-path entry before compare callback, not afterward",
+    "Full-word zero comparison in fast path; RB find separately narrows to signed byte",
+    "Reload list first after RB find rather than stale captured first",
+    "Reload native returned RB data after list move callback",
+    "List move preserves native four link writes and fresh offset loads after removal",
+    "Lookup third context argument is ignored native, declare complete ABI"
+  ],
+  "remaining_estimate": [
+    "Coherent build/audit1",
+    "Five remaining LRU callbacks plus insertion/list dependencies",
+    "RB removal/insertion/rotations and concrete heap/data/full-image gates"
+  ],
+  "cases": 705,
+  "build": "g2/build/c-firmware/20261012/peripherals-root-cache-lru-lookup-round107"
+}

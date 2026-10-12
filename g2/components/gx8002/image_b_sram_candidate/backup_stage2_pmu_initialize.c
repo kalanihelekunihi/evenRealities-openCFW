@@ -1,6 +1,6 @@
 /* Native image-B 0x1000a744..0x1000a77e. Cold/warm status selects
  * 144-byte PMU record clear or replay of retained callback pairs.
- * The record at 0x2002cb88 is a genuine BSS/retention placement contract.
+ * The record at 0x2002cb88 is source-owned conditional BSS.
  */
 #include <stdint.h>
 

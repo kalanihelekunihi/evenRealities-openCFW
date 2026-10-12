@@ -1,0 +1,16 @@
+{
+  "status": "PASS_COMPILED_ARM_NATIVE_COUNT_SIZE_LRU_INITIALIZERS",
+  "cases": 460,
+  "by_provider": {
+    "audio_uart_font_lru_initialize": 224,
+    "audio_uart_lv_cache_size_lru_init_5c2d30": 224,
+    "audio_uart_lv_cache_count_data_size_5c330c": 6,
+    "audio_uart_lv_cache_size_data_size_5c3310": 6
+  },
+  "source_sha256": "248e286a51fb03fd6c6d4bf65f5ad4a6a0d3dc1180be215abb7c92d1a8f30524",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual array initializer executes; tree init and logger controlled child cuts, including full-word returns and mutation.",
+    "Native wrapped node-size arithmetic and fatal store exact; data size leaf varied word0. Concrete RB/class/allocator/image/full-image/hardware gates open."
+  ]
+}

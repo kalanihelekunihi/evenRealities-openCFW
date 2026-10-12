@@ -1,0 +1,20 @@
+{
+  "status": "PASS_COMPILED_ARM_NATIVE_LRU_INSERT_LIST_PREPEND",
+  "cases": 237,
+  "by_provider": {
+    "audio_uart_font_lru_insert": 195,
+    "audio_uart_lv_list_prepend_482b12": 42
+  },
+  "source_hashes": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-cache-lru-insert-round110/lru_insert_candidate.c": "63cdcf8039f17c7001969641287914ebb638b1cd4f37aa0bd443cfe4b208c180",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_font_lru_lookup.c": "90827de06cc8ca612774dcd01e41c4ecf92f1489a258d7cd0419364b6dbccaec",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_font_cache_entry.c": "4f8982462ac39fdc44a9abf909104833337774fc2e27acf2c2ca4a020481e9e4",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_font_rb_core.c": "244f344deac641a0562cb8577cbebb89d683712acb462bcee25319361c2e0ad1"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual entry-at/init,link helper,list-prepend and RB erase execute; RB allocate/remove,malloc,copy,heap free,logger controlled cuts.",
+    "All three copies retain native call order; stack pointer words normalized by contents,callback field changes and allocation-failure rollback tested.",
+    "Concrete RB insertion/removal/rotations,heap/data/layout/byte equality/hardware remain open."
+  ]
+}

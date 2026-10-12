@@ -1,0 +1,22 @@
+{
+  "status": "COMPILED_C_CANDIDATE_NOT_SELECTED_PENDING_NATIVE_COMPARISON",
+  "native_range": "4c79d0..4c7b1c",
+  "source": "g2/analysis/c-source-completion-20261011/peripherals/root-bin-info-round60/info_candidate.c",
+  "source_sha256": "95947e0f2b91507b20062f662c030c227c40d06c98827b337a9ac378d957faa4",
+  "native_witness": "g2/analysis/c-source-completion-20261011/peripherals/root-fs-close-round59/info-next-native.txt",
+  "native_witness_sha256": "8bf539912a0244dfa592946f60272037a5fcd218fd2e064298efc943c5ae47ff",
+  "selected": false,
+  "remaining_estimate": {
+    "callback_bodies_not_qualified": 3,
+    "info_candidate_native_comparison": 1,
+    "new_info_dependencies_not_qualified": [
+      "4c70e4 extension",
+      "4547be string compare",
+      "4c6f46 read"
+    ]
+  },
+  "limits": [
+    "Compilation alone does not qualify native semantics or source selection.",
+    "Complete native info body inspected including late success and early failure paths."
+  ]
+}

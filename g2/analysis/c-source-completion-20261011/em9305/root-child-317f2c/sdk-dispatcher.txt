@@ -1,0 +1,23 @@
+
+g2/analysis/c-source-completion-20261011/em9305/root-child-317f2c/lctr_act_enc.c.obj:     file format elf32-littlearc
+
+
+Disassembly of section .text.lctrModifyEncMode:
+
+00000000 <lctrModifyEncMode>:
+   0:	4200                	mov_s	r2,r0
+   2:	2280 0008           	add	r2,r2,512
+   6:	8a22                	ldb_s	r1,[r2,0x2]
+   8:	0923 0051           	brne.nt	r1,0x1,34	;2a <lctrModifyEncMode+0x2a>
+   c:	8a21                	ldb_s	r1,[r2,0x1]
+   e:	8a60                	ldb_s	r3,[r2,0]
+  10:	186e 00c2           	stb	r3,[r0,110]
+  14:	0913 0071           	brne.d.nt	r1,0x1,18	;26 <lctrModifyEncMode+0x26>
+  18:	186f 0042           	stb	r1,[r0,111]
+  1c:	4100                	mov_s	r1,r0
+  1e:	2180 0184           	add	r1,r1,262
+  22:	a03c                	st_s	r1,[r0,0x70]
+  24:	f003                	b_s	6	;2a <lctrModifyEncMode+0x2a>
+  26:	1870 0001           	st	0,[r0,112]
+  2a:	7fe0                	j_s.d	[blink]
+  2c:	1a02 0003           	stb	0,[r2,2]

@@ -1,0 +1,79 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00322bac <.data+0x207ac>:
+  322bac:	c2e8                	enter_s	[r13-r16,blink]
+  322bae:	4728                	mov_s	r15,r1
+  322bb0:	4508                	mov_s	r13,r0
+  322bb2:	2056 0cc1           	add3	r1,r0,0x33
+  322bb6:	8709                	ld_s	r0,[r15,0x24]
+  322bb8:	1900 0303           	stb	12,[r1]
+  322bbc:	46a9                	mov_s	r14,r13
+  322bbe:	702c                	mov_s	r1,0
+  322bc0:	0cfa faef           	bl.d	-41736	;0x3188b8
+  322bc4:	2680 1386           	add	r14,r14,398
+  322bc8:	876d                	ld_s	r3,[r15,0x34]
+  322bca:	874c                	ld_s	r2,[r15,0x30]
+  322bcc:	2841 0401           	lsr	r1,r0,0x10
+  322bd0:	1d67 1018           	st.as	r0,[r13,103]
+  322bd4:	7827                	xor_s	r0,r0,r1
+  322bd6:	1dc8 101c           	sth.as	r0,[r13,200]
+  322bda:	2556 1b00           	add3	r0,r13,0x2c
+  322bde:	1e00 1043           	stb	1,[r14]
+  322be2:	1d59 10d8           	st.as	r3,[r13,89]
+  322be6:	081a f5ef           	bl.d	-83944	;0x30e3fc
+  322bea:	1d58 1098           	st.as	r2,[r13,88]
+  322bee:	15ae 1700           	ldh.as	r0,[r13,174]
+  322bf2:	1656 1082           	ldb	r2,[r14,86]
+  322bf6:	1696 9081           	ldb	r1,[r14,-106]
+  322bfa:	b808                	asl_s	r0,r0,0x8
+  322bfc:	ae37                	stb_s	r1,[r14,0x17]
+  322bfe:	0a97 0030           	breq.d.nt	r2,0,150	;0x322c92
+  322c02:	1d68 1018           	st.as	r0,[r13,104]
+  322c06:	40a1                	mov_s	r0,r13
+  322c08:	41a1                	mov_s	r1,r13
+  322c0a:	208a 2048           	mov	r16,513
+  322c0e:	2080 0f06           	add	r0,r0,444
+  322c12:	2180 0947           	add	r1,r1,485
+  322c16:	da08                	mov_s	r2,0x8
+  322c18:	1e37 1043           	stb	1,[r14,55]
+  322c1c:	0baa 0820           	bl.d	66472	;0x332fc4
+  322c20:	1de3 141c           	sth.as	r16,[r13,227]
+  322c24:	162e 1082           	ldb	r2,[r14,46]
+  322c28:	1567 1600           	ld.as	r0,[r13,103]
+  322c2c:	162f 108c           	ldb	r12,[r14,47]
+  322c30:	1630 108f           	ldb	r15,[r14,48]
+  322c34:	1631 108b           	ldb	r11,[r14,49]
+  322c38:	7a07                	xor_s	r2,r2,r0
+  322c3a:	2841 0201           	lsr	r1,r0,0x8
+  322c3e:	2841 0403           	lsr	r3,r0,0x10
+  322c42:	b838                	lsr_s	r0,r0,0x18
+  322c44:	7987                	xor_s	r1,r1,r12
+  322c46:	7be7                	xor_s	r3,r3,r15
+  322c48:	2007 02c0           	xor	r0,r0,r11
+  322c4c:	1e2e 1082           	stb	r2,[r14,46]
+  322c50:	1e2f 1042           	stb	r1,[r14,47]
+  322c54:	1e30 10c2           	stb	r3,[r14,48]
+  322c58:	1e31 1002           	stb	r0,[r14,49]
+  322c5c:	46a9                	mov_s	r14,r13
+  322c5e:	2680 1b06           	add	r14,r14,428
+  322c62:	2554 1b81           	add1	r1,r13,0x2e
+  322c66:	da10                	mov_s	r2,0x10
+  322c68:	0b5e 0820           	bl.d	66396	;0x332fc4
+  322c6c:	40c1                	mov_s	r0,r14
+  322c6e:	1600 7003 0080 28c0 	ld	r3,[0x8028c0]
+  322c76:	1dea 141c           	sth.as	r16,[r13,234]
+  322c7a:	eb0d                	breq_s	r3,0,26	;0x322c92
+  322c7c:	40c3 0080 5c3c      	mov_s	r0,0x805c3c
+  322c82:	8000                	ld_s	r0,[r0,0]
+  322c84:	714c                	mov_s	r2,1
+  322c86:	4d10                	sub_s	r0,r13,r0
+  322c88:	b829                	lsr_s	r0,r0,0x9
+  322c8a:	7604                	add_s	r0,r0,6
+  322c8c:	790f                	extb_s	r1,r0
+  322c8e:	7b60                	jl_s.d	[r3]
+  322c90:	40c1                	mov_s	r0,r14
+  322c92:	c6c8                	leave_s	[r13-r16,blink,pcl]

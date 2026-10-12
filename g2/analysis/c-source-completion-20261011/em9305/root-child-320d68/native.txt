@@ -1,0 +1,46 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00320d68 <.data+0x1e968>:
+  320d68:	c3ea                	enter_s	[r13-r17,fp,blink]
+  320d6a:	c1a7                	sub_s	sp,sp,0x1c
+  320d6c:	4130                	mov_s	r17,r1
+  320d6e:	4608                	mov_s	r14,r0
+  320d70:	e932                	breq_s	r1,0,100	;0x320dd4
+  320d72:	86a9                	ld_s	r13,[r14,0x24]
+  320d74:	162c 1010           	ld	r16,[r14,44]
+  320d78:	c085                	add_s	r0,sp,0x14
+  320d7a:	4122                	mov_s	r1,r17
+  320d7c:	0d92 0660           	bl.d	52624	;0x32db0c
+  320d80:	2555 19cf           	add2	r15,r13,0x27
+  320d84:	2100 2002           	add	r2,r17,r0
+  320d88:	2555 1980           	add2	r0,r13,0x26
+  320d8c:	099a 06a0           	bl.d	53656	;0x32df24
+  320d90:	2440 36c1           	add	r1,sp,0x1b
+  320d94:	c125                	ldb_s	r1,[sp,0x14]
+  320d96:	1416 3102           	ldh	r2,[sp,22]
+  320d9a:	8761                	ld_s	r3,[r15,0x4]
+  320d9c:	8703                	ld_s	r0,[r15,0xc]
+  320d9e:	162c 1008           	ld	r8,[r14,44]
+  320da2:	8780                	ld_s	r12,[r15,0]
+  320da4:	87e2                	ld_s	r15,[r15,0x8]
+  320da6:	159a 108b           	ldb	r11,[r13,154]
+  320daa:	c164                	stb_s	r1,[sp,0x10]
+  320dac:	1c12 3084           	sth	r2,[sp,18]
+  320db0:	c341                	st_s	r3,[sp,0x4]
+  320db2:	c043                	st_s	r0,[sp,0xc]
+  320db4:	2055 2903           	add2	r3,r16,0x24
+  320db8:	2054 1981           	add1	r1,r8,0x26
+  320dbc:	c080                	add_s	r0,sp,0
+  320dbe:	714c                	mov_s	r2,1
+  320dc0:	c440                	st_s	r12,[sp,0]
+  320dc2:	c742                	st_s	r15,[sp,0x8]
+  320dc4:	0a5a f12f           	bl.d	-122280	;0x30301c
+  320dc8:	1c11 32c2           	stb	r11,[sp,17]
+  320dcc:	0dca f1af           	bl.d	-117304	;0x304394
+  320dd0:	1d01 1043           	stb	1,[r13,1]
+  320dd4:	700c                	mov_s	r0,0
+  320dd6:	c7ca                	leave_s	[r13-r17,fp,blink,pcl]

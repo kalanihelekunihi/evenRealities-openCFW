@@ -12,16 +12,16 @@ static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\
 static void fail(uint32_t line,const char *function,const char *expression) {
     audio_uart_lvgl_log(3u,source,line,function,
                         "Asserted at expression: %s (%s)",expression,"NULL pointer");
-    for(;;) { /* authenticated native assertion loop */ }
+    for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
 }
 static uint32_t size_of(uint8_t *cache,const void *data) {
-    uint32_t cb=*(uint32_t *)(void *)(cache+0x40u);
+    uint32_t cb=*(volatile uint32_t *)(void *)(cache+0x40u);
     return ((uint32_t (*)(const void *))(uintptr_t)cb)(data);
 }
+extern void *audio_uart_lv_cache_lru_link_5c2be4(void *,void *);
 static uint32_t list_link(uint8_t *cache,uint8_t *rb) {
-    uint32_t data=*(uint32_t *)(void *)(rb+0x10u);
-    uint32_t address=*(uint32_t *)(void *)(cache+0x30u)+data-4u;
-    return *(uint32_t *)(void *)(uintptr_t)address;
+    void *link=audio_uart_lv_cache_lru_link_5c2be4(cache,rb);
+    return *(volatile uint32_t *)link;
 }
 void audio_uart_font_lru_remove(void *cache,void *entry,uint32_t context) {
     (void)context;
@@ -35,7 +35,9 @@ void audio_uart_font_lru_remove(void *cache,void *entry,uint32_t context) {
     (void)audio_uart_font_rb_remove(base+0x28u,rb);
     audio_uart_lv_list_remove(base+0x34u,(void *)(uintptr_t)node);
     audio_uart_lv_heap_free((void *)(uintptr_t)node);
-    *(uint32_t *)(void *)(base+0x0cu)-=size_of(base,data);
+    uint32_t delta=size_of(base,data);
+    volatile uint32_t *current=(void *)(base+0x0cu);
+    *current=*current-delta;
 }
 void audio_uart_font_lru_evict(void *cache,const void *key,uint32_t context) {
     if(cache==0) fail(0x162u,"drop_cb","lru != NULL");
@@ -43,12 +45,14 @@ void audio_uart_font_lru_evict(void *cache,const void *key,uint32_t context) {
     uint8_t *base=(uint8_t *)cache;
     uint8_t *rb=(uint8_t *)audio_uart_font_rb_find(base+0x28u,key);
     if(rb==0) return;
-    uint32_t data=*(uint32_t *)(void *)(rb+0x10u);
-    uint32_t callback=*(uint32_t *)(void *)(base+0x18u);
+    uint32_t data=*(volatile uint32_t *)(void *)(rb+0x10u);
+    uint32_t callback=*(volatile uint32_t *)(void *)(base+0x18u);
     ((void (*)(void *,uint32_t))(uintptr_t)callback)((void *)(uintptr_t)data,context);
-    *(uint32_t *)(void *)(base+0x0cu)-=size_of(base,(void *)(uintptr_t)data);
+    uint32_t delta=size_of(base,(void *)(uintptr_t)data);
+    volatile uint32_t *current=(void *)(base+0x0cu);
+    *current=*current-delta;
     void *entry=audio_uart_font_cache_entry_at((void *)(uintptr_t)data,
-                    *(uint32_t *)(void *)(base+4u));
+                    *(volatile uint32_t *)(void *)(base+4u));
     uint32_t node=list_link(base,rb);
     (void)audio_uart_font_rb_remove(base+0x28u,rb);
     audio_uart_font_cache_entry_delete(entry);

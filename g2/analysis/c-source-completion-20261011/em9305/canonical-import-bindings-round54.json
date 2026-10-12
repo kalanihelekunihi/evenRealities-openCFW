@@ -1,0 +1,93 @@
+{
+  "status": "SIX_REBOUND_UNITS_FRESH_COMPILE_CROSSWALK_PASS_PENDING_COHERENT_BUILD",
+  "entries": [
+    {
+      "address": "325dfc",
+      "destination": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_325dfc.c",
+      "previous_source_sha256": "be652a2180113409ae39b39074eb3e3e20c0d366a6dfe6a495bcd0a0bc3e682e",
+      "source_sha256": "28f75118dddd1fbfe8e73c1bf7dd64a72af4ca9746c671bc0e580bff0d6b5292",
+      "instructions": 31,
+      "native_bytes": 80,
+      "canonical_mapping": {
+        "32d2f0": "opencfw_em9305_phy_packet_alloc_32d2f0",
+        "332fc4": "opencfw_em9305_memcpy",
+        "32d32c": "opencfw_em9305_phy_packet_send_32d32c"
+      }
+    },
+    {
+      "address": "32cbf0",
+      "destination": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_32cbf0.c",
+      "previous_source_sha256": "f9362a4adf3d862d8ed5e5f6d60b2385256b52d82d1bd75ce4599dbf61f84717",
+      "source_sha256": "9dd3748699d146c1686880fc30673aea7f8a4bf08bedd1d0b26a0d805717a00f",
+      "instructions": 83,
+      "native_bytes": 236,
+      "canonical_mapping": {
+        "31b768": "opencfw_em9305_command_kind_valid_31b768",
+        "31b374": "opencfw_em9305_ll_signed_classify_31b374",
+        "323620": "opencfw_em9305_callback_323620",
+        "317214": "opencfw_em9305_child_317214"
+      }
+    },
+    {
+      "address": "325fd4",
+      "destination": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_325fd4.c",
+      "previous_source_sha256": "46bd4f3c550b23012da7605344bf8ba033cbf31a9915026c53296e19645e500f",
+      "source_sha256": "775010e9336669f154baf312f066e56b81288067161644ad51f766744c82f371",
+      "instructions": 28,
+      "native_bytes": 70,
+      "canonical_mapping": {
+        "32d2f0": "opencfw_em9305_phy_packet_alloc_32d2f0",
+        "32d32c": "opencfw_em9305_phy_packet_send_32d32c"
+      }
+    },
+    {
+      "address": "31af38",
+      "destination": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_31af38.c",
+      "previous_source_sha256": "22d829e8634c145e42af08835b972f4b820690e0aad939010634d4d8e0f31859",
+      "source_sha256": "08aa21884ad06096a204411fe8d3d918fcac52d00fc570439e1e75301bfbf85c",
+      "instructions": 25,
+      "native_bytes": 72,
+      "canonical_mapping": {
+        "332fc4": "opencfw_em9305_memcpy",
+        "310038": "opencfw_em9305_radio_random_bytes_310038"
+      }
+    },
+    {
+      "address": "325f9c",
+      "destination": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_325f9c.c",
+      "previous_source_sha256": "2dce235303e4316a0785cc5646a509c20ce066931cb62eb6bc70d52ca7d3d956",
+      "source_sha256": "6e32b0c288a05ee451b106d194e6e38069e8d8f72ac6c15813a2eff582291137",
+      "instructions": 10,
+      "native_bytes": 26,
+      "canonical_mapping": {
+        "32d2f0": "opencfw_em9305_phy_packet_alloc_32d2f0",
+        "32d32c": "opencfw_em9305_phy_packet_send_32d32c"
+      }
+    },
+    {
+      "address": "32601c",
+      "destination": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_32601c.c",
+      "previous_source_sha256": "e6a567a817830f4ec52e39030b4334b37901c08e6b1fcb6b4461cf145e3a581a",
+      "source_sha256": "a98dd3ee235b0e112827570481737137286b0e1ec56f516821ba3f88f5a0910c",
+      "instructions": 37,
+      "native_bytes": 110,
+      "canonical_mapping": {
+        "32698c": "opencfw_em9305_phy_reject_32698c",
+        "32d2f0": "opencfw_em9305_phy_packet_alloc_32d2f0",
+        "31b374": "opencfw_em9305_ll_signed_classify_31b374",
+        "32d32c": "opencfw_em9305_phy_packet_send_32d32c"
+      }
+    }
+  ],
+  "instructions": 214,
+  "native_bytes": 594,
+  "imports_expected_removed": [
+    "ll_signed_classify",
+    "phy_packet_alloc",
+    "phy_packet_send",
+    "radio_random_bytes"
+  ],
+  "limits": [
+    "Names now bind existing providers at the authenticated call addresses; whole-image and hardware qualification remain open."
+  ]
+}

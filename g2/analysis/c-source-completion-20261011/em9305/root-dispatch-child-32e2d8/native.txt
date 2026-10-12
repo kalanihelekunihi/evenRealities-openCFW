@@ -1,0 +1,40 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0032e2d8 <.data+0x2bed8>:
+  32e2d8:	c0e4                	enter_s	[r13-r14]
+  32e2da:	6b89                	sub_s	r12,r3,0x1
+  32e2dc:	7195                	cmp_s	r12,1
+  32e2de:	708d                	mov_s	r12,0
+  32e2e0:	f70b                	bhi_s	22	;0x32e2f6
+  32e2e2:	8881                	ldb_s	r12,[r0,0x1]
+  32e2e4:	88c0                	ldb_s	r14,[r0,0]
+  32e2e6:	88a2                	ldb_s	r13,[r0,0x2]
+  32e2e8:	8803                	ldb_s	r0,[r0,0x3]
+  32e2ea:	bc08                	asl_s	r12,r12,0x8
+  32e2ec:	bd10                	asl_s	r13,r13,0x10
+  32e2ee:	64dc                	add_s	r12,r12,r14
+  32e2f0:	b818                	asl_s	r0,r0,0x18
+  32e2f2:	64bc                	add_s	r12,r12,r13
+  32e2f4:	641c                	add_s	r12,r12,r0
+  32e2f6:	0b11 0090           	breq.nt	r3,0x2,16	;0x32e304
+  32e2fa:	0b13 0050           	breq.nt	r3,0x1,18	;0x32e30a
+  32e2fe:	eb90                	brne_s	r3,0,32	;0x32e31c
+  32e300:	e98f                	brne_s	r1,0,30	;0x32e31e
+  32e302:	f00b                	b_s	22	;0x32e316
+  32e304:	090f 0100           	breq.nt	r1,r4,14	;0x32e312
+  32e308:	f00b                	b_s	22	;0x32e31e
+  32e30a:	0917 0114           	brlo.nt	r1,0x4,22	;0x32e31e
+  32e30e:	0c13 0044           	brlo.nt	r4,r1,18	;0x32e31e
+  32e312:	0c0f 1141           	brne.nt	r12,r5,14	;0x32e31e
+  32e316:	8200                	ld_s	r0,[r2,0]
+  32e318:	7104                	add_s	r0,r0,1
+  32e31a:	a200                	st_s	r0,[r2,0]
+  32e31c:	c4c4                	leave_s	[r13-r14,pcl]
+  32e31e:	8202                	ld_s	r0,[r2,0x8]
+  32e320:	7104                	add_s	r0,r0,1
+  32e322:	a202                	st_s	r0,[r2,0x8]
+  32e324:	c4c4                	leave_s	[r13-r14,pcl]

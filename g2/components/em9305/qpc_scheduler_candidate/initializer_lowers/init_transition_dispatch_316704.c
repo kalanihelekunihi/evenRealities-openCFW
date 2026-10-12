@@ -9,7 +9,7 @@ extern uint32_t opencfw_em9305_init_transition_packet_check_32e278(uintptr_t);
 extern uint32_t opencfw_em9305_ll_stream_address_busy_318200(
     uint32_t,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
-extern uint32_t opencfw_em9305_wsf_event_free(uintptr_t);
+extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
 extern uint32_t opencfw_em9305_common_release_304588(uint32_t);
 extern uint32_t opencfw_em9305_init_transition_gate_3168e4(void);
 extern uintptr_t opencfw_em9305_init_transition_refresh_327dbc(void);
@@ -141,7 +141,7 @@ uint32_t opencfw_em9305_init_transition_dispatch_316704_body(uint8_t *frame)
     return opencfw_em9305_init_transition_gate_3168e4();
 
 error_event:
-    if(event!=0u)(void)opencfw_em9305_wsf_event_free(event);
+    if(event!=0u)(void)opencfw_em9305_wsf_event_release(event);
     event=opencfw_em9305_wsf_event_allocate(4u);
     if(event!=0u) {
         wr16(event+2u,772u);

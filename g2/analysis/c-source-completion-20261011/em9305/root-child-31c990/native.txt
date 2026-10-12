@@ -1,0 +1,41 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0031c990 <.data+0x1a590>:
+  31c990:	c2ec                	enter_s	[r13-r18,blink]
+  31c992:	4708                	mov_s	r15,r0
+  31c994:	8009                	ld_s	r0,[r0,0x24]
+  31c996:	8821                	ldb_s	r1,[r0,0x1]
+  31c998:	e92a                	breq_s	r1,0,84	;0x31c9ec
+  31c99a:	1058 0101           	ldh	r1,[r0,88]
+  31c99e:	40c3 0080 5c70      	mov_s	r0,0x805c70
+  31c9a4:	80a0                	ld_s	r13,[r0,0]
+  31c9a6:	219f 040e           	mpyuw	r1,r1,912
+  31c9aa:	46cb 0031 8b78      	mov_s	r14,0x318b78
+  31c9b0:	653d                	add_s	r13,r13,r1
+  31c9b2:	1518 1010           	ld	r16,[r13,24]
+  31c9b6:	4d28                	add_s	r0,r13,0x10
+  31c9b8:	41c1                	mov_s	r1,r14
+  31c9ba:	0bee fb2f           	bl.d	-39956	;0x312da4
+  31c9be:	4110                	mov_s	r17,r0
+  31c9c0:	e896                	brne_s	r0,0,44	;0x31c9ec
+  31c9c2:	714e                	mov_s	r18,1
+  31c9c4:	1585 1700           	ldh.as	r0,[r13,133]
+  31c9c8:	221f 2001           	mpyuw	r1,r18,r0
+  31c9cc:	1583 1700           	ldh.as	r0,[r13,131]
+  31c9d0:	319c 0893           	mpywhl	r1,r1,1250
+  31c9d4:	7104                	add_s	r0,r0,1
+  31c9d6:	1d83 101c           	sth.as	r0,[r13,131]
+  31c9da:	2000 2040           	add	r0,r16,r1
+  31c9de:	a506                	st_s	r0,[r13,0x18]
+  31c9e0:	4022                	mov_s	r0,r17
+  31c9e2:	0bc6 fb2f           	bl.d	-39996	;0x312da4
+  31c9e6:	41c1                	mov_s	r1,r14
+  31c9e8:	7146                	add_s	r18,r18,1
+  31c9ea:	e86e                	breq_s	r0,0,-36	;0x31c9c4
+  31c9ec:	080a 0020           	bl.d	8	;0x31c9f4
+  31c9f0:	40e1                	mov_s	r0,r15
+  31c9f2:	c6cc                	leave_s	[r13-r18,blink,pcl]

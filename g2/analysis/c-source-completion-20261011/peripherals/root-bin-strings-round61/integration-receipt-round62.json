@@ -1,0 +1,27 @@
+{
+  "status": "COHERENT_COMPILATION_AND_CURRENT_SOURCE_AUDIT_PASS",
+  "source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+  "source_sha256": "1eacc99bb2302f6fa4929a394a7ef6efe7176485e0bef5ecc513936a589a0101",
+  "strings_cases": 347,
+  "corrected_info_cases": 528,
+  "integrated_arm_m55_compile": "PASS_WALL_WEXTRA_WERROR",
+  "builder_fix": "Required archive absence now makes candidate_compilation_passed false.",
+  "build": {
+    "status": "PASS",
+    "audit": "g2/build/c-firmware/20261012/peripherals-root-bin-strings-round62/root-source-audit.json"
+  },
+  "remaining_estimate": {
+    "decoder_callbacks": 2,
+    "file_read_provider": 1,
+    "coherent_builds": 0,
+    "other_gates": [
+      "Full source coverage",
+      "Native data/layout and byte equality",
+      "Hardware"
+    ]
+  },
+  "limits": [
+    "Standalone provider comparisons use child cuts; coherent link not yet audited.",
+    "Previous round61 ended without relocatable_link and is not a qualified build."
+  ]
+}

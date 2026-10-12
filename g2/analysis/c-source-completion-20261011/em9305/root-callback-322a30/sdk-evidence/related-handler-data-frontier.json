@@ -1,0 +1,17 @@
+{
+  "status": "RELATED_SDK_DATA_OBJECT_IDENTIFIED_NOT_ADMITTED",
+  "sdk_member": "lctr_main_adv_master_ae.c.obj",
+  "sdk_function": "lctrMstSendPendingAdvRptHandler",
+  "sdk_function_bytes": 234,
+  "stock_function_bytes": 318,
+  "sdk_data_symbol": "pLctrMstExtScanTbl",
+  "symbol_lines": [
+    "00000000 l    d  .rodata_in_data.pLctrMstExtScanTbl\t00000000 .rodata_in_data.pLctrMstExtScanTbl",
+    "00000000 g     O .rodata_in_data.pLctrMstExtScanTbl\t0000000c pLctrMstExtScanTbl"
+  ],
+  "limits": [
+    "Related handler has different register allocation, control flow and periodic-scan loop count; no exact wholebody binding.",
+    "Three pointer loads do not prove stock object extent.",
+    "Need independent relocation/initializer binding before source-owned table definition."
+  ]
+}

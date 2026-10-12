@@ -1,0 +1,17 @@
+{
+  "status": "PASS_BOUNDED_STDIO_SINK_STARTUP_NULL_PRODUCER",
+  "sink_word": "0x200270cc",
+  "native_setter": "0x0041583c",
+  "known_direct_native_callers": [
+    "0041fa98"
+  ],
+  "known_direct_call_argument": 0,
+  "source_caller_sha256": "53987539b568749640dcb1f930f8b1a04eeefa09203d1785d34e21a0836a6f5d",
+  "source_setter_sha256": "2b4aa740ec7ff0442318bdaf27624b1ec7eae2359634a391474a5f8701308e2d",
+  "native_functions_sha256": "d39fd796806841458f65b24310eb0ac591f9e996394a87cc70064ff03b16ebe4",
+  "limits": [
+    "Authenticated native function catalogue has one direct caller of this setter, passing zero; selected caller and setter match.",
+    "The startup zero-scatter record covers the sink word, but this audit does not prove the conditional startup path always runs.",
+    "Indirect/external calls may later install a nonzero sink; the audit does not establish physical output behavior."
+  ]
+}

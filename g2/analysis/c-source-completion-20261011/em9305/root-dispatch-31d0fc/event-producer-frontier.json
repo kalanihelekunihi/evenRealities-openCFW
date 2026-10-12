@@ -1,0 +1,100 @@
+{
+  "status": "BOUNDED_DIRECT_EVENT_PRODUCER_FRONTIER",
+  "direct_call_sites": [
+    {
+      "call_address": "31cfb0",
+      "context": [
+        "  31cfa0:\t1768 1100           \tldh\tr0,[r15,104]",
+        "  31cfa4:\t7822                \tsub_s\tr0,r0,r1",
+        "  31cfa6:\t262f f006           \tsexh.f\t0,r0",
+        "  31cfaa:\t005c 0003           \tbp\t92\t;0x31d004",
+        "  31cfae:\tf038                \tb_s\t112\t;0x31d01c",
+        "  31cfb0:\t097a 0020           \tbl.d\t376\t;0x31d128",
+        "  31cfb4:\t40a1                \tmov_s\tr0,r13"
+      ],
+      "observed_event": 7,
+      "producer_witness": "31cf26 delayed branch setsR1=7 at31cf2a on takenedge"
+    },
+    {
+      "call_address": "31cfd6",
+      "context": [
+        "  31cfca:\tc7da                \tleave_s\t[r13-r25,fp,blink,pcl]",
+        "  31cfcc:\t0e52 fd2f           \tbl.d\t-22960\t;0x31761c",
+        "  31cfd0:\t4020                \tmov_s\tr0,r1",
+        "  31cfd2:\t762c                \tmov_s\tr1,6",
+        "  31cfd4:\t40a1                \tmov_s\tr0,r13",
+        "  31cfd6:\t0956 0020           \tbl.d\t340\t;0x31d128",
+        "  31cfda:\t1e14 1001           \tst\t0,[r14,20]"
+      ],
+      "observed_event": 6,
+      "producer_witness": "31cfd2 MOVR1=6"
+    },
+    {
+      "call_address": "31d014",
+      "context": [
+        "  31d004:\t1000 2080           \tldb\tr0,[r16]",
+        "  31d008:\t200f 0480           \tbset\tr0,r0,r18",
+        "  31d00c:\t1800 2002           \tstb\tr0,[r16]",
+        "  31d010:\tf006                \tb_s\t12\t;0x31d01c",
+        "  31d012:\t40a1                \tmov_s\tr0,r13",
+        "  31d014:\t0916 0020           \tbl.d\t276\t;0x31d128",
+        "  31d018:\t1b00 2783           \tstb\t30,[r19]"
+      ],
+      "observed_event": 4,
+      "producer_witness": "31cffe delayed branch setsR1=4 at31d002 on takenedge"
+    },
+    {
+      "call_address": "31d0ca",
+      "context": [
+        "  31d0ba:\t0956 0420           \tbl.d\t33108\t;0x32520c",
+        "  31d0be:\t40a1                \tmov_s\tr0,r13",
+        "  31d0c0:\t1000 2080           \tldb\tr0,[r16]",
+        "  31d0c4:\t080d 007e           \tbbit0.d.t\tr0,0x1,12\t;0x31d0d0",
+        "  31d0c8:\t742c                \tmov_s\tr1,4",
+        "  31d0ca:\t0862 0020           \tbl.d\t96\t;0x31d128",
+        "  31d0ce:\t40a1                \tmov_s\tr0,r13"
+      ],
+      "observed_event": 4,
+      "producer_witness": "31d0c4 delayed branch setsR1=4 at31d0c8"
+    },
+    {
+      "call_address": "31d48e",
+      "context": [
+        "  31d47e:\t2242 2040           \tsub\tr0,r18,0x1",
+        "  31d482:\t7214                \tcmp_s\tr0,2",
+        "  31d484:\t010c 0005           \tbc\t268\t;0x31d590",
+        "  31d488:\t0a0f 21b1           \tbrne.d.nt\tr18,0x6,14\t;0x31d496",
+        "  31d48c:\t762c                \tmov_s\tr1,6",
+        "  31d48e:\t0c9e ffef           \tbl.d\t-868\t;0x31d128",
+        "  31d492:\t40e1                \tmov_s\tr0,r15"
+      ],
+      "observed_event": 6,
+      "producer_witness": "31d488 delayed branch setsR1=6 at31d48c"
+    },
+    {
+      "call_address": "31db6e",
+      "context": [
+        "  31db62:\t71c6                \tadd_s\tr22,r22,1",
+        "  31db64:\tb140                \tsth_s\tr2,[r1,0]",
+        "  31db66:\tf1f9                \tb_s\t-14\t;0x31db56",
+        "  31db68:\t0ab6 fccf           \tbl\t-25932\t;0x31761c",
+        "  31db6c:\t762c                \tmov_s\tr1,6",
+        "  31db6e:\t0dbe ffaf           \tbl.d\t-2628\t;0x31d128",
+        "  31db72:\t4022                \tmov_s\tr0,r17"
+      ],
+      "observed_event": 6,
+      "producer_witness": "31db6c MOVR1=6"
+    }
+  ],
+  "direct_call_count": 6,
+  "limits": [
+    "Catalogued direct call sites only; computed callers and unconstrained packet bytes remain open",
+    "This establishes observed caller contexts, not complete event/state domains or table object extent"
+  ],
+  "observed_direct_event_values": [
+    4,
+    6,
+    7
+  ],
+  "remaining_domain_gate": "All six catalogued direct sender callsites use events4/6/7. Other packet producers and indirect routes remain open, so neither complete event domain nor full table extent is established."
+}

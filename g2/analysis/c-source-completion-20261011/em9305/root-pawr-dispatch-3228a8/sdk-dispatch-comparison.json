@@ -1,0 +1,94 @@
+[
+  {
+    "member": "lctr_sm_adv_master.c.obj",
+    "section": ".text.lctrMstScanExecuteSm",
+    "bytes": 50,
+    "unmasked_exact": true,
+    "relocations": [
+      {
+        "offset": 4,
+        "symbol": "lctrMstScan+0x00000024",
+        "stock_address": "0x804ffc"
+      },
+      {
+        "offset": 22,
+        "symbol": "lctrScanActionTbl",
+        "stock_address": "0x3353fc"
+      },
+      {
+        "offset": 42,
+        "symbol": "lctrScanNextStateTbl",
+        "stock_address": "0x33544c"
+      }
+    ]
+  },
+  {
+    "member": "lctr_sm_adv_master_ae.c.obj",
+    "section": ".text.lctrMstCreateSyncExecuteSm",
+    "bytes": 50,
+    "unmasked_exact": false,
+    "relocations": [
+      {
+        "offset": 4,
+        "symbol": "lctrPerCreateSync",
+        "stock_address": "0x804ffc"
+      },
+      {
+        "offset": 22,
+        "symbol": "lctrCreateSyncActionTbl",
+        "stock_address": "0x3353fc"
+      },
+      {
+        "offset": 42,
+        "symbol": "lctrTransferSyncNextStateTbl",
+        "stock_address": "0x33544c"
+      }
+    ]
+  },
+  {
+    "member": "lctr_sm_adv_master_ae.c.obj",
+    "section": ".text.lctrMstTransferSyncExecuteSm",
+    "bytes": 50,
+    "unmasked_exact": false,
+    "relocations": [
+      {
+        "offset": 4,
+        "symbol": "lctrPerTransferSync",
+        "stock_address": "0x804ffc"
+      },
+      {
+        "offset": 22,
+        "symbol": "lctrTransferSyncActionTbl",
+        "stock_address": "0x3353fc"
+      },
+      {
+        "offset": 42,
+        "symbol": "lctrTransferSyncNextStateTbl",
+        "stock_address": "0x33544c"
+      }
+    ]
+  },
+  {
+    "member": "lctr_sm_adv_slave.c.obj",
+    "section": ".text.lctrSlvAdvExecuteSm",
+    "bytes": 50,
+    "unmasked_exact": true,
+    "relocations": [
+      {
+        "offset": 4,
+        "symbol": "lctrSlvAdv+0x00000027",
+        "stock_address": "0x804ffc"
+      },
+      {
+        "offset": 22,
+        "symbol": "lctrAdvActionTbl",
+        "stock_address": "0x3353fc"
+      },
+      {
+        "offset": 42,
+        "symbol": "lctrAdvNextStateTbl",
+        "stock_address": "0x33544c"
+      }
+    ]
+  }
+]

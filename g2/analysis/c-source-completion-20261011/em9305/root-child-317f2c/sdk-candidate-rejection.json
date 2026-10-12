@@ -1,0 +1,17 @@
+{
+  "status": "REJECTED_SIZE_ONLY_PROVIDER_MATCH",
+  "candidate": "lctrModifyEncMode",
+  "archive_member": "lctr_act_enc.c.obj",
+  "candidate_bytes": 48,
+  "native_bytes": 48,
+  "reason": "Candidate modifies record+512 pending fields; native dispatches two tables via record+620. Instruction bodies differ.",
+  "native_table_action_candidates": [
+    "315aec",
+    "3160d4"
+  ],
+  "native_table_addresses": [
+    "334b98",
+    "334ba0"
+  ],
+  "remaining": "Independent table extent and symbol binding; target body recovery; runtime index bounds."
+}

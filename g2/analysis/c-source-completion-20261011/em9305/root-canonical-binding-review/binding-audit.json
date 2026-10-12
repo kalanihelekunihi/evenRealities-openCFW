@@ -1,0 +1,30 @@
+{
+  "status": "CORRECTIONS_VERIFIED_ADMITTED_ROUND17",
+  "bindings": [
+    {
+      "caller": "32a000",
+      "native_call_site": "32a090",
+      "native_target": "329610",
+      "current_import": "opencfw_em9305_child_329610",
+      "canonical_provider": "opencfw_em9305_associated_child_329610",
+      "proof": "Whole-native associated child329610 verified and selected; call target same authenticated native address"
+    },
+    {
+      "caller": "316704",
+      "native_call_site": "316866",
+      "native_target": "314014",
+      "current_import": "opencfw_em9305_wsf_event_free",
+      "canonical_provider": "opencfw_em9305_wsf_event_release",
+      "proof": "Native BL.D314014; canonical source declaration/body remove eight-byte prefix"
+    }
+  ],
+  "limits": [
+    "Change caller bindings after round16 snapshots settle; recompile and verify callers; no synthetic forwarding aliases"
+  ],
+  "verification": {
+    "associated_caller": "PASS_WHOLE_NATIVE_INSTRUCTION_CROSSWALK",
+    "transition_arc_compile": "PASS",
+    "transition_linux_host_fixture": "PASS_FOUR_BOUNDED_CHILD_CUT_PATHS",
+    "macos_fixture": "FIXED_ADDRESS_MAP_UNAVAILABLE"
+  }
+}

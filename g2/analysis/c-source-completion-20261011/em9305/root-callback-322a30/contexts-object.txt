@@ -1,0 +1,50 @@
+
+g2/analysis/c-source-completion-20261011/em9305/root-callback-322a30/contexts.o:     file format elf32-littlearc
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .rodata       0000000c  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+  4 .bss.opencfw_scan_context_80389c 000002c0  00000000  00000000  00000040  2**2
+                  ALLOC
+  5 .bss.opencfw_scan_context_802a60 000002c0  00000000  00000000  00000040  2**2
+                  ALLOC
+  6 .bss.opencfw_scan_context_8035dc 000002c0  00000000  00000000  00000040  2**2
+                  ALLOC
+  7 .comment      0000003d  00000000  00000000  00000040  2**0
+                  CONTENTS, READONLY
+  8 .note.GNU-stack 00000000  00000000  00000000  0000007d  2**0
+                  CONTENTS, READONLY
+  9 .ARC.attributes 00000025  00000000  00000000  0000007d  2**0
+                  CONTENTS, READONLY
+SYMBOL TABLE:
+00000000 l    df *ABS*	00000000 contexts.c
+00000000 l    d  .text	00000000 .text
+00000000 l    d  .data	00000000 .data
+00000000 l    d  .bss	00000000 .bss
+00000000 l    d  .rodata	00000000 .rodata
+00000000 l    d  .bss.opencfw_scan_context_80389c	00000000 .bss.opencfw_scan_context_80389c
+00000000 l    d  .bss.opencfw_scan_context_802a60	00000000 .bss.opencfw_scan_context_802a60
+00000000 l    d  .bss.opencfw_scan_context_8035dc	00000000 .bss.opencfw_scan_context_8035dc
+00000000 l    d  .note.GNU-stack	00000000 .note.GNU-stack
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .ARC.attributes	00000000 .ARC.attributes
+00000000 g     O .rodata	0000000c opencfw_em9305_stream_objects_3357b4
+00000000 g     O .bss.opencfw_scan_context_8035dc	000002c0 opencfw_em9305_scan_context_8035dc
+00000000 g     O .bss.opencfw_scan_context_802a60	000002c0 opencfw_em9305_scan_context_802a60
+00000000 g     O .bss.opencfw_scan_context_80389c	000002c0 opencfw_em9305_scan_context_80389c
+
+
+RELOCATION RECORDS FOR [.rodata]:
+OFFSET   TYPE              VALUE
+00000000 R_ARC_32          opencfw_em9305_scan_context_8035dc
+00000004 R_ARC_32          opencfw_em9305_scan_context_802a60
+00000008 R_ARC_32          opencfw_em9305_scan_context_80389c
+
+

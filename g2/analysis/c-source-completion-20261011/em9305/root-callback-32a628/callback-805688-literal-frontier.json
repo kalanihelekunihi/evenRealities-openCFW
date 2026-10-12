@@ -1,0 +1,44 @@
+{
+  "address": "805688",
+  "literal_references": [
+    {
+      "instruction": "30a37c:\t41c3 0080 5688      \tmov_s\tr1,0x805688",
+      "context": [
+        "  30a374:\tb984                \tbset_s\tr1,r1,0x4",
+        "  30a376:\t7fe0                \tj_s.d\t[blink]",
+        "  30a378:\ta221                \tst_s\tr1,[r2,0x4]",
+        "  30a37a:\t78e0                \tnop_s",
+        "  30a37c:\t41c3 0080 5688      \tmov_s\tr1,0x805688",
+        "  30a382:\t40c3 0080 56ac      \tmov_s\tr0,0x8056ac",
+        "  30a388:\t1900 0f80 0032 9534 \tst\t0x329534,[r1,0]",
+        "  30a390:\t1800 0f80 0032 b04c \tst\t0x32b04c,[r0,0]",
+        "  30a398:\t7ee0                \tj_s\t[blink]",
+        "  30a39a:\t78e0                \tnop_s",
+        "  30a39c:\tc2ea                \tenter_s\t[r13-r17,blink]",
+        "  30a39e:\t1600 7002 0080 5cac \tld\tr2,[0x805cac]",
+        "  30a3a6:\t4628                \tmov_s\tr14,r1"
+      ]
+    },
+    {
+      "instruction": "32a6fa:\t1600 7001 0080 5688 \tld\tr1,[0x805688]",
+      "context": [
+        "  32a6f0:\te891                \tbrne_s\tr0,0,34\t;0x32a712",
+        "  32a6f2:\t0e1a ff6f           \tbl.d\t-4584\t;0x329508",
+        "  32a6f6:\t40a1                \tmov_s\tr0,r13",
+        "  32a6f8:\te88d                \tbrne_s\tr0,0,26\t;0x32a712",
+        "  32a6fa:\t1600 7001 0080 5688 \tld\tr1,[0x805688]",
+        "  32a702:\te909                \tbreq_s\tr1,0,18\t;0x32a712",
+        "  32a704:\t7960                \tjl_s.d\t[r1]",
+        "  32a706:\t40a1                \tmov_s\tr0,r13",
+        "  32a708:\te885                \tbrne_s\tr0,0,10\t;0x32a712",
+        "  32a70a:\t0e4e ff6f           \tbl.d\t-4532\t;0x329554",
+        "  32a70e:\t40a1                \tmov_s\tr0,r13",
+        "  32a710:\te80a                \tbreq_s\tr0,0,20\t;0x32a724",
+        "  32a712:\t8e2e                \tldb_s\tr1,[r14,0xe]"
+      ]
+    }
+  ],
+  "limits": [
+    "Linear disassembly may decode data as instructions. Computed-base stores and ROM writers are not excluded by a literal scan."
+  ]
+}

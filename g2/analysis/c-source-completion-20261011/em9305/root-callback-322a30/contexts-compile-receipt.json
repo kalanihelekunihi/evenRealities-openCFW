@@ -1,0 +1,19 @@
+{
+  "status": "PASS_THREE_BSS_EXTENTS_AND_ALL_POINTER_TABLE_RELOCATION_SLOTS",
+  "source_sha256": "ba77b6624625c6b387f19d0619fb613846f4f1ba223f6316e9869c596d52cfc5",
+  "context_bytes_each": 704,
+  "total_context_bytes": 2112,
+  "table_bytes": 12,
+  "pointer_relocations": 3,
+  "required_placement": {
+    "opencfw_em9305_scan_context_8035dc": "8035dc",
+    "opencfw_em9305_scan_context_802a60": "802a60",
+    "opencfw_em9305_scan_context_80389c": "80389c",
+    "opencfw_em9305_stream_objects_3357b4": "3357b4"
+  },
+  "limits": [
+    "Dedicated BSS sections compiled; final linker placement unproven.",
+    "Existing hardcoded native consumers require exact placement or complete relocation conversion.",
+    "Runtime ownership and zero initialization remain final image gates."
+  ]
+}

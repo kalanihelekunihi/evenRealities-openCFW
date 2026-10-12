@@ -1,0 +1,56 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0031aeb4 <.data+0x18ab4>:
+  31aeb4:	c3ec                	enter_s	[r13-r18,fp,blink]
+  31aeb6:	c1a6                	sub_s	sp,sp,0x18
+  31aeb8:	4668                	mov_s	r14,r3
+  31aeba:	4250                	mov_s	r18,r2
+  31aebc:	4528                	mov_s	r13,r1
+  31aebe:	0ede 0920           	bl.d	75484	;0x32d598
+  31aec2:	4010                	mov_s	r16,r0
+  31aec4:	4110                	mov_s	r17,r0
+  31aec6:	e837                	breq_s	r0,0,110	;0x31af32
+  31aec8:	0d1b 10b0           	breq.d.nt	r13,0x2,26	;0x31aee2
+  31aecc:	70ed                	mov_s	r15,0
+  31aece:	71b5                	cmp_s	r13,1
+  31aed0:	70ad                	mov_s	r13,0
+  31aed2:	f40d                	bne_s	26	;0x31aeea
+  31aed4:	0da6 f88f           	bl	-59996	;0x30c478
+  31aed8:	2809 0480           	remu	r0,r0,r18
+  31aedc:	2048 010d           	max	r13,r0,0x4
+  31aee0:	f005                	b_s	10	;0x31aeea
+  31aee2:	7556                	cmp_s	r18,5
+  31aee4:	74ad                	mov_s	r13,4
+  31aee6:	25ca 1486           	mov.nc	r13,r18
+  31aeea:	c180                	add_s	r1,sp,0
+  31aeec:	4022                	mov_s	r0,r17
+  31aeee:	c764                	stb_s	r15,[sp,0x10]
+  31aef0:	4283                	mov_s	r2,sp
+  31aef2:	b2a7                	sth_s	r13,[r2,0xe]
+  31aef4:	b2e6                	sth_s	r15,[r2,0xc]
+  31aef6:	b2a2                	sth_s	r13,[r2,0x4]
+  31aef8:	1c02 3085           	sth	2,[sp,2]
+  31aefc:	0ab2 0060           	bl.d	2736	;0x31b9ac
+  31af00:	1c00 3404           	sth	r16,[sp]
+  31af04:	ed17                	breq_s	r13,0,46	;0x31af32
+  31af06:	7022                	add_s	r0,r0,r17
+  31af08:	2e41 1603           	lsr	r3,r14,0x18
+  31af0c:	2e41 1402           	lsr	r2,r14,0x10
+  31af10:	2e41 1201           	lsr	r1,r14,0x8
+  31af14:	a8c0                	stb_s	r14,[r0,0]
+  31af16:	a863                	stb_s	r3,[r0,0x3]
+  31af18:	a842                	stb_s	r2,[r0,0x2]
+  31af1a:	0d1b 1174           	brlo.d.nt	r13,0x5,26	;0x31af32
+  31af1e:	a821                	stb_s	r1,[r0,0x1]
+  31af20:	6d4c                	sub_s	r2,r13,0x4
+  31af22:	6824                	add_s	r1,r0,0x4
+  31af24:	204a 0100           	mov	r0,0x4
+  31af28:	1901 0012           	stb.ab	r0,[r1,1]
+  31af2c:	228d 0fbf           	dbnz.d	r2,-4	;0x31af28
+  31af30:	7104                	add_s	r0,r0,1
+  31af32:	4022                	mov_s	r0,r17
+  31af34:	c7cc                	leave_s	[r13-r18,fp,blink,pcl]

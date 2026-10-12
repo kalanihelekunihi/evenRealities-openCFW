@@ -1,0 +1,21 @@
+{
+  "status": "PASS_SELECTED_WIDE_CALL_STACK_LAYOUT",
+  "saved_register_bytes": 44,
+  "local_bytes": 48,
+  "incoming_stack_base": 92,
+  "caller_stack_offsets": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20
+  ],
+  "stack_words": 6,
+  "caller_source_sha256": "a80e281dea375313ff1d53170e501dc899f522ff3d2504c282b91d44d44f6ed0",
+  "callee_source_sha256": "abfa564e6a0ed7ed9fa870ae114a6ac6111cc69a9fbac22c0f057fcd9a17b070",
+  "limits": [
+    "Confirms six stack stores and native/selected callee load layout.",
+    "Live argument values, register preservation through nested calls and hardware remain separate."
+  ]
+}

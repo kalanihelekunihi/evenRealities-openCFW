@@ -1,0 +1,30 @@
+{
+  "status": "PORTABLE_C_BOX_CLEAR_NATIVE_COMPARISON_PASS_PENDING_COHERENT_BUILD",
+  "native_start": "0x454746",
+  "native_end_exclusive": "0x45475a",
+  "body_bytes": 20,
+  "instructions": 9,
+  "source": "g2/components/audio/uart_thread_source_candidate/display_lv_theme_basic_children.c",
+  "source_sha256": "b34bc0b65f383a4b78ed4d558d44140f2008d937450db6b24c40edf31f1d1df5",
+  "locked_package_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "comparison_receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-main-init-round55/box-clear-receipt.json",
+  "controlled_cases": 3840,
+  "selected": true,
+  "resolved_direct_symbol": "audio_uart_lv_basic_box_clear_454746",
+  "reused_provider": "audio_uart_buffer_zero native43c0e4",
+  "remaining_estimate": {
+    "group_direct_bodies": 0,
+    "coherent_builds": 1,
+    "main_direct_imports_expected": 81,
+    "main_address_only_imports_previous": 675,
+    "other_gates": [
+      "Complete main provider graph",
+      "Native layout and data ownership",
+      "Hardware"
+    ]
+  },
+  "limits": [
+    "Buffer child is cut to verify argument order, low-byte truncation, incidental R0 propagation and restored SP.",
+    "Buffer child runtime and complete Main image remain separate gates."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "status": "FOUR_BODY_AND_BOUNDED_TABLE_LOCAL_COMPILE_PASS_PENDING_INTEGRATION",
+  "address": "31dfd0",
+  "instructions": 356,
+  "native_bytes": 1160,
+  "target_bytes": 1164,
+  "source_sha256": "fc4fffa8e66de5c73817ba4a17daf112fee5b7fde2822866fe8cd6126fed6c3d",
+  "object_sha256": "5520a8760e3e788437a978db8f52db4de7698aebd384483ee22317154fb6ae15",
+  "pending_direct_targets": [],
+  "embedded_callback_target": {
+    "318b78": "opencfw_em9305_init_schedule_compare_318b78"
+  },
+  "selected": false,
+  "remaining_estimate": {
+    "direct_bodies": 0,
+    "pointer_bindings": 0,
+    "integration_units": 5,
+    "coherent_builds": 1,
+    "other_gates": [
+      "Indirect callbacks and table bounds",
+      "Lifecycle, placement and hardware"
+    ]
+  },
+  "limits": [
+    "Named ARC assembly in a C translation unit, not a portable C rewrite.",
+    "Full body ends at31e458, preserving retries and all early and late returns."
+  ],
+  "closure_receipt": "g2/analysis/c-source-completion-20261011/em9305/radio-four-body-closure-round54.json"
+}

@@ -1,0 +1,1 @@
+SECTIONS { .piece 0x312b88 : { /repo/g2/analysis/c-source-completion-20261011/em9305/root-piece-abi-312b88/source.o(.text) } .duration 0x312be4 : { /repo/g2/analysis/c-source-completion-20261011/em9305/root-duration-abi-312be4/source.o(.text) } }

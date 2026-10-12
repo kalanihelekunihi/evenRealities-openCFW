@@ -1,0 +1,20 @@
+{
+  "status": "PASS_COMPILED_ARM_NATIVE_LRU_ALLOC_DESTROY_ADD",
+  "cases": 418,
+  "by_provider": {
+    "audio_uart_font_lru_allocate": 3,
+    "audio_uart_lv_cache_lru_memzero_5c2af4": 12,
+    "audio_uart_font_lru_destroy": 16,
+    "audio_uart_font_lru_add": 387
+  },
+  "source_hashes": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-cache-lru-hooks-round106/lru_alloc_candidate.c": "d5a537e6950928fb151be65c703c17c6bf3bc60ae3a379e53e7b7a30937b0643",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-cache-lru-hooks-round106/lru_hooks_candidate.c": "51b3d6ec84524bac256fc6ee5213169d1b3278b197f3c7eaaad5e86cd4db5a97",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_font_cache_entry.c": "4f8982462ac39fdc44a9abf909104833337774fc2e27acf2c2ca4a020481e9e4"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual native/source LRU zero wrapper and qualified cache-entry-at execute; malloc/clear/insert/destroy/size/logger controlled child cuts.",
+    "Destroy caller context preserved; full-word callback delta,mutation,wrapped entry addresses and fatal stores tested. Concrete heap/insertion/backend/data/full-image/hardware gates remain."
+  ]
+}

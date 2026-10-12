@@ -1,0 +1,29 @@
+{
+  "status": "PASS_COMPILED_ARM_CONNECTED_TLSF_REALLOC",
+  "cases": 2160,
+  "source_sha256": {
+    "components/audio/file_pool_allocate_candidate/pool_allocate.c": "13f0931c8c55dae4aa68d5a4d387b69061bf54bbf6dc662124e91a47f3beb48a",
+    "components/audio/tlsf_adjust_request_candidate/adjust.c": "f0e6a0c1e6fff7d8683db53780b71d53a84bca33caa37c96caacb501229e42d3",
+    "components/audio/tlsf_locate_free_candidate/locate.c": "1e89e8fe4ebbb2c42c81acee4e1a7354a7a02e5a4e7b191f037de4f25fe87236",
+    "components/audio/file_pool_free_candidate/tlsf_mapping.c": "27784e39a47b7ca0b2497888766d5a2dae2c0f4264f4760fedc704a0ae2025de",
+    "components/audio/file_pool_free_candidate/tlsf_absorb_leaves.c": "a37060a2458b7db3a6f7f0444fd90ddd09dc405bb52c3f57f858df55b9475bf0",
+    "components/audio/file_pool_free_candidate/tlsf_free_lists.c": "ed003e0a5777ed185e3fbc0af6ee17aedeb89cd28156bc176f67c5b1c45458cf",
+    "components/audio/tlsf_prepare_allocation_candidate/prepare.c": "49f5f4d4d3efae0f2f48c8f4f2e2c58aa6a298aa1211b6138b10f15a80343347",
+    "components/audio/tlsf_split_block_candidate/split.c": "4c30d8f0f0563c5bfa76baa1283cebfc170de9420b08eff8dc7ef49d12cbe24d",
+    "components/audio/file_pool_free_candidate/tlsf_block_next.c": "8c28c2a8525a5b1f8c9a0f956328a65a6e94ab9f3515bca0e6859196a55c94c6",
+    "components/audio/file_pool_free_candidate/tlsf_mark_free.c": "88149b0f9a200a6249b8a2772d9ee8ef0cbbe1ef1dc7cd97213a11101c39c064",
+    "components/audio/file_pool_free_candidate/tlsf_lists.c": "f1b355d1cb3fb202fcc0e94c11105a9a4c985088731896844c93c538e314803d",
+    "components/audio/file_pool_free_candidate/tlsf_align.c": "1bcb1ab3ee85f9aec46c0262527820a6b08a351a69976838793309083c2c0acb",
+    "components/audio/file_pool_free_candidate/tlsf_leaf.c": "a4e9be3677b91c708428208a4a67d257ab261f2c9aa7bc18c12a06a8e6277983",
+    "components/audio/file_pool_free_candidate/pool_free.c": "38294e8d78f1ac57eac15abc905a5c25c5be075db6a0fceef2689483109e327f",
+    "components/audio/file_pool_free_candidate/tlsf_merge.c": "a403dc782cf33526ba1e56b6321a465ed135ded40492b3b1b8c84ae0c67c3dc0",
+    "components/audio/file_pool_free_candidate/tlsf_merge_leaves.c": "0ec990cada87958f5d985517335fcdbe385c76d1b6374c051c12f85ab09897f4",
+    "components/audio/file_pool_free_candidate/tlsf_absorb.c": "9852fdde72908233f69765cfa55b29e33c9029235ce6de084d1267e64fb03cd6",
+    "components/audio/uart_thread_source_candidate/tlsf_reallocate.c": "20c3673be6dab23e7ed21e67ef5dc89f9fdaa0a07b41a87ced901a6bf38baaa2"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual pool allocation,adjust/find/remove,prepare/trim/split/insert,physical links,mark-used/free,free/merge/absorb/list insertion and pointer/size helpers execute. Actual realloc and used-block trimming execute too; error reporting and copy are controlled cuts.",
+    "Valid128/256/512 byte initial blocks and empty lists,request/split thresholds and overflow compared with full control and1024 block bytes. Three allocation attempts with all six free-order permutations; full state compared after every operation. Resize first allocation across shrink,grow,zero/failure boundaries; heap initialization,cache integration and hardware gates remain."
+  ]
+}

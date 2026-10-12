@@ -1,0 +1,54 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0031a368 <.data+0x17f68>:
+  31a368:	c3ea                	enter_s	[r13-r17,fp,blink]
+  31a36a:	c1a2                	sub_s	sp,sp,0x8
+  31a36c:	45cb 0080 2a54      	mov_s	r13,0x802a54
+  31a372:	8d2a                	ldb_s	r1,[r13,0xa]
+  31a374:	4608                	mov_s	r14,r0
+  31a376:	700e                	mov_s	r16,0
+  31a378:	47cb 0033 57a8      	mov_s	r15,0x3357a8
+  31a37e:	712e                	mov_s	r17,1
+  31a380:	2900 2400           	asl	r0,r17,r16
+  31a384:	790b                	tst_s	r1,r0
+  31a386:	f215                	beq_s	42	;0x31a3ae
+  31a388:	8d49                	ldb_s	r2,[r13,0x9]
+  31a38a:	784b                	tst_s	r0,r2
+  31a38c:	f411                	bne_s	34	;0x31a3ae
+  31a38e:	8700                	ld_s	r0,[r15,0]
+  31a390:	1600 7002 0080 5c70 	ld	r2,[0x805c70]
+  31a398:	1058 0100           	ldh	r0,[r0,88]
+  31a39c:	209f 040e           	mpyuw	r0,r0,912
+  31a3a0:	6058                	add_s	r0,r0,r2
+  31a3a2:	8840                	ldb_s	r2,[r0,0]
+  31a3a4:	ea05                	breq_s	r2,0,10	;0x31a3ae
+  31a3a6:	0866 05e0           	bl.d	47204	;0x325c08
+  31a3aa:	d94d                	mov_s	r1,0x4d
+  31a3ac:	8d2a                	ldb_s	r1,[r13,0xa]
+  31a3ae:	7106                	add_s	r16,r16,1
+  31a3b0:	08d1 a0f4           	brlo.d.nt	r16,0x3,-48	;0x31a380
+  31a3b4:	74e5                	add_s	r15,r15,4
+  31a3b6:	0b7a 02e0           	bl.d	23416	;0x31ff2c
+  31a3ba:	40c1                	mov_s	r0,r14
+  31a3bc:	8e00                	ldb_s	r0,[r14,0]
+  31a3be:	082d 00f0           	breq.d.nt	r0,0x3,44	;0x31a3e8
+  31a3c2:	4383                	mov_s	r3,sp
+  31a3c4:	40c3 0033 4452      	mov_s	r0,0x334452
+  31a3ca:	9040                	ldh_s	r2,[r0,0]
+  31a3cc:	9021                	ldh_s	r1,[r0,0x2]
+  31a3ce:	9002                	ldh_s	r0,[r0,0x4]
+  31a3d0:	b340                	sth_s	r2,[r3,0]
+  31a3d2:	b321                	sth_s	r1,[r3,0x2]
+  31a3d4:	b302                	sth_s	r0,[r3,0x4]
+  31a3d6:	0bca fa2f           	bl.d	-48184	;0x30e79c
+  31a3da:	c080                	add_s	r0,sp,0
+  31a3dc:	8561                	ld_s	r3,[r13,0x4]
+  31a3de:	8540                	ld_s	r2,[r13,0]
+  31a3e0:	8d28                	ldb_s	r1,[r13,0x8]
+  31a3e2:	0bc6 05a0           	bl.d	46020	;0x3257a4
+  31a3e6:	720c                	mov_s	r0,2
+  31a3e8:	c7ca                	leave_s	[r13-r17,fp,blink,pcl]

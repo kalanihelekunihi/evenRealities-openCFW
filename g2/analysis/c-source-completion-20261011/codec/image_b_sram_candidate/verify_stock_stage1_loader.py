@@ -41,6 +41,20 @@ def main():
         assert fragment in loader
     for fragment in ("10000fe2:", "10000fe4:", "10000fea:", "10001092:", "10001098:"):
         assert fragment in reader
+    # Marker-selected branch is a separate native path. The first call reads
+    # a word from package+0x323b0; the second uses that word as a base,
+    # requests zero bytes at 0x20000000, and returns to stage-1 reset.
+    for fragment in ("10000d9a:", "movi      \tr3, 51436", "10000da2:",
+                     "10000da4:", "10000da8:", "movi      \tr3, 51437",
+                     "movih      \tr1, 8192", "movi      \tr2, 0",
+                     "10000dba:", "10000dc0:", "10000dc4:", "10000dc6:"):
+        assert fragment in loader, fragment
+    source = ROOT / "g2/components/gx8002/image_b_stage1_candidate/backup_stage1_loader.c"
+    source_text = source.read_text()
+    for fragment in ("package + UINT32_C(0x323b0)", "word + UINT32_C(0x323b4)",
+                     "(void *)(uintptr_t)UINT32_C(0x20000000), 0u",
+                     "&gx8002_image_b_stage1_reset_10000100"):
+        assert fragment in source_text, fragment
     count = (0x2001708c + 0x100167d0 - 0x10003000 - 0x200167d0) & 0xffffffff
     assert count == len(raw2)
     assert len(raw2) - 300 == 0x13f60
@@ -59,10 +73,23 @@ def main():
             "initialized_tail_load": ["0x10016f60", "0x1001708c"],
             "typed_runtime_vma": ["0x20016f60", "0x2001708c"],
         },
+        "marker_branch": {
+            "loader": "0x10000d9a..0x10000dce",
+            "first_reader_source": "package+0x323b0",
+            "first_reader_bytes": 4,
+            "second_reader_source": "first_read_word+0x323b4",
+            "second_reader_destination": "0x20000000",
+            "second_reader_bytes": 0,
+            "entry_word": "0x2002d3e4",
+            "entry_target": "0x10000100",
+            "selected_source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+            "qualified_as_static_native_source_control_flow": True,
+            "reader_side_effects_executed": False,
+        },
         "stock_normal_loader_copy_extent_proven": True,
         "iram_dram_alias_on_physical_target_proven": False,
         "custom_final_elf_or_hardware_proven": False,
-        "limits": ["Marker-selected alternative boot branch is outside this proof.",
+        "limits": ["Both loader branch arguments and control targets are statically cross-checked. The flash reader, MMIO effects, reset transfers and package contents were not executed here.",
                    "Physical IRAM/DRAM alias behavior and final custom image placement remain unqualified."],
     }
     (HERE / "stock-stage1-loader-receipt.json").write_text(json.dumps(result, indent=2) + "\n")

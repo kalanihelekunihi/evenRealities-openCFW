@@ -1,0 +1,33 @@
+{
+  "status": "SDK_STATE_MACHINE_PATTERN_AND_EXACT_TRANSITION_SEARCH",
+  "searched_members": 25,
+  "matches": [
+    {
+      "member": "lctr_sm_llcp_conn_slave.c.obj",
+      "sha256": "021501fd8c17c69cfe9a4e7f4491942bde4a04500dbd377577f3d742a4d4147b",
+      "action_section": ".rodata_in_data.lctrSlvConnUpdActionTbl",
+      "transition_sections": [
+        ".rodata_in_data.lctrSlvConnUpdNextStateTbl"
+      ],
+      "slots": 32,
+      "action_relocations": 19,
+      "symbol_to_native_address": {
+        "lctrActHostConnUpd": "0x315958",
+        "lctrActPeerConnParam": "0x315d68",
+        "lctrActPeerConnInd": "0x315d40",
+        "lctrActStartConnUpd": "0x31640c",
+        "lctrActConnUpdDisallow": "0x31591c",
+        "lctrActRejectCollision": "0x31639c",
+        "lctrActHostReply": "0x315a6c",
+        "lctrActHostNegReply": "0x3159e8",
+        "lctrActNotifyHostColliding": "0x315c0c",
+        "lctrActPeerConnParamWithCollision": "0x315da0",
+        "lctrActPeerRejectConnParam": "0x315ed8",
+        "lctrActNotifyHostConnUpdSuccess": "0x315c18"
+      }
+    }
+  ],
+  "limits": [
+    "Names provisional; evidence attribution does not prove provider ABI, source completeness or hardware."
+  ]
+}

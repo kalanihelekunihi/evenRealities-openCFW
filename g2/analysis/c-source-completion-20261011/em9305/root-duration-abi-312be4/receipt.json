@@ -1,0 +1,27 @@
+{
+  "status": "PASS_FULL_NATIVE_INSTRUCTION_REVIEW_AND_FIXED_PLACEMENT_BODY_BYTE_BINDING",
+  "selected": true,
+  "source_sha256": "dc1c32322b17a7237d14f033465fa1eea1cf05bf11305ba8af9adcdb7e66cfc7",
+  "piece_source_sha256": "ef74208055bb2023e7f1beadaccebf28a382faefcd3360545c1087b2ecc698ee",
+  "object_sha256": "83800f80c8df7cf822ef37177feb0ca6ee06cacc3e4d8fbc2b922b600ee054d2",
+  "isolated_link_sha256": "e5e76ec792cec8238f4946a0a0b0baad43884b19f2c098b717f8a90a9656f877",
+  "native_binary_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "full_function_matches": {
+    ".piece": {
+      "address": "0x312b88",
+      "bytes": 44,
+      "sha256": "b101b5210f4962aea5f60eb6b0bbec161838bb29fe72caafe164b71e69b20e1b"
+    },
+    ".duration": {
+      "address": "0x312be4",
+      "bytes": 120,
+      "sha256": "1dd172817a638816a091fe55c5fe69218da4b1828e20f394bdee61eae972baa7"
+    }
+  },
+  "review": "Full native instructions/branches/delay effects/EXTH/DSP reviewed. Both source-assembled functions equal complete native byte bodies at original isolated addresses, including three symbol-relocated BLs. DIVU uses original ambient R11 destination; all native exit registers retained.",
+  "limits": [
+    "Fixed-placement isolated two-function equality does not establish final-image equality or placement",
+    "Native ARC execution and physical hardware unverified"
+  ],
+  "selected_source": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_duration_312be4.c"
+}

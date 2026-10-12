@@ -1,0 +1,17 @@
+{
+  "status": "PASS_COMPILED_ARM_NATIVE_PREMULTIPLY_AND_COLOR_LEAVES",
+  "cases": 7149,
+  "leaf_cases": 3584,
+  "source_sha256": "ebee55de1fd402bf3507e5994657d679ffd153036e0770e13d1a4a5f53bf14c1",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_ranges": [
+    "440f38..440f44",
+    "4410b8..4410ee",
+    "4410ee..441164",
+    "48b540..48b722"
+  ],
+  "limits": [
+    "Actual color leaves execute in full draw-buffer body. Clear/logger child cuts; clear performs actual byte writes and selected header mutations.",
+    "Exhaustive low-byte alpha values with bounded colors, odd addresses, formats/stride/dimensions; exact logs, flags and first assertion store. Full-image and hardware gates open."
+  ]
+}

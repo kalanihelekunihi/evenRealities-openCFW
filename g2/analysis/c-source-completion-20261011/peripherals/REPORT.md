@@ -6246,3 +6246,264 @@ imports. The direct count rose because full native parent/children exposed
 genuine allocator, timer, filesystem and callback-table descendants. The
 selected C graph remains incomplete; LV root placement and startup RAM
 ownership still require product evidence.
+
+### Connected LV theme and filesystem registration (2026-10-12)
+
+The source graph now includes the native filesystem driver construct0x4c7064 and
+register0x4c706e bodies in `display_lv_fs_driver_register.c`. The list-prepend
+primitive0x482b12 was exported from its already selected implementation and
+reused. Allocation failure retains the stock assertion log followed by its
+invalid-address write; it is not a fabricated successful return. Three actual
+compiled ARM C/native state and failure cases pass. The coherent receipt
+`peripherals-lv-fs-register-round` links 2826 definitions, 757 mixed unresolved
+imports and zero duplicate strong providers, SHA-256
+`b32e1c7a12769fac2febf5a8af8477fb588a4f4c0390c71577ed43575b777fe2`;
+82 direct branch imports and 675 address-only imports.
+
+The theme setup children0x48ba64 and0x48ca26 are now source-defined in
+`display_lv_theme_init_children.c`. Their callback slots are actual Thumb
+function pointers0x48bae5/0x48ca3d, represented by typed unresolved C callback
+imports rather than stock absolute pointers. Four actual compiled ARM C/native
+state cases pass. The coherent receipt `peripherals-lv-theme-children-round`
+links 2828 definitions, 757 mixed unresolved imports and zero duplicate
+strong providers, SHA-256
+`a61e1443b59a3ff798f5e8475dad05660eae886a541a6b08c899fd2093eedb14`;
+80 direct branch imports and 677 address-only imports. The child callbacks,
+other LV filesystem callbacks, live product RAM and final layout remain open.
+
+The basic-theme apply callback0x48ca3c is source-defined in
+`display_lv_theme_basic_apply.c`: state/region initialization, per-child
+iteration, state cleanup, indefinite-size invalidation and event0x33 are
+preserved. Three actual compiled ARM C/native call-and-region cases pass for
+zero/two children and the invalidation branch. The coherent receipt
+`peripherals-lv-basic-apply-round` links 2829 definitions, 767 mixed unresolved
+imports and zero duplicate strong providers, SHA-256
+`09bb788b1064e03889b7a77a3029b90b6b7f1c15e83508275faa673df826e294`;
+91 direct branch imports and 676 address-only imports. The genuine basic-theme
+children became explicit. Default-theme apply0x48bae4 is still a 149-line
+native body with many source-backed descendants, so this callback group is
+incomplete. Runtime theme RAM pointer placement and final image layout remain
+separate gates.
+
+Eight additional native basic-theme helpers are source-defined in
+`display_lv_theme_basic_children.c`: box clear0x48c80e, width/height style
+selectors0x48c81a/0x48c824, four-pointer cleanup0x48cbda, x/y relative
+coordinates0x48c920/0x48c94e and parent x/y offsets0x44e486/0x44e498.
+Four actual compiled ARM C/native null/non-null parent offset cases pass;
+coordinate/style/cleanup wrappers are statically mapped to selected provider
+ABIs and remain bounded by those lower implementations. The coherent receipt
+`peripherals-lv-basic-children-round` links 2837 definitions, 764 mixed
+unresolved imports, zero duplicate strong providers, SHA-256
+`be3b23993c2e56befccad1eb98b03d18fac5169ac492244474e611dd778c0461`;
+88 direct branch imports and 676 address-only imports. Newly exposed direct
+children include the basic state initializer, item renderer and coordinate
+lower selectors. The default-theme callback and product layout remain open.
+
+### LV layout attribution and basic state (2026-10-12)
+
+The earlier `theme`-named internal candidates at 0x48ba64/0x48ca26 are the
+pinned LVGL 9.3 flex/grid layout installers, and their callbacks0x48bae4/
+0x48ca3c are `flex_update`/`grid_update`; the internal symbol names predate
+this attribution. The actual slot writes and grid callback algorithm remain
+as verified. `display_lv_theme_basic_coordinate_selectors.c` adds four native
+style selectors0x48c842/84c/892/89c. `display_lv_theme_basic_state_init.c`
+adds full native grid `calc` state constructor0x48cad8, including empty-grid
+clear, row/column preparation, content-auto flags and two axis calculations.
+Three actual compiled ARM C/native state/call/argument cases pass, including
+an empty grid and both finite and content-sized grids. The coherent receipt
+`peripherals-lv-basic-state-round` links 2842 definitions, 770 mixed unresolved
+imports, zero duplicate providers, SHA-256
+`5707d68c580180ce09cd72ec86b8bdc40f9efbe880fa1bebc46ae735652bf29f`;
+94 direct branch imports and 676 address-only imports. Genuine grid state
+preparation, axis and item placement children are now explicit. The flex
+callback remains the next substantial source body, and live product RAM/final
+image layout remain open.
+
+The full native flex_update0x48bae4 callback is source-defined in
+`display_lv_flex_update.c`, adapted from the pinned LVGL 9.3 flex source with
+native four-byte flex flags and seven-word track structure. It includes
+track measurement, RTL/reverse handling, placement, child repositioning,
+grow-descriptor free, content-size invalidation and layout-changed event.
+Four actual compiled ARM C/native bounded cases pass for empty, one-child,
+RTL column and reversed track paths with children cut symmetrically. The
+coherent `peripherals-lv-flex-update-qualified-round` receipt links 2843
+definitions, 783 mixed unresolved imports, zero duplicates, SHA-256
+`974eaa10f3607ce70c22c51a2f397b376e32ef49ca0e1c4df8ba84fdba322954`;
+108 direct branch imports and 675 address-only imports. This is an actual
+parent source reduction that exposes genuine flex selectors, track scan,
+placement and repositioning children; their runtime effects are separate.
+
+Eleven native flex style selectors are source-defined in
+`display_lv_flex_selectors.c`, including byte-truncated flow/placement/base
+selectors, row/column gaps, width/height and direction-sensitive top/left
+space. Nine actual compiled ARM C/native selector calls pass property-ID,
+argument and return-width checks; top/left composition remains statically
+mapped to the three new genuine lower selector imports. Source comments now
+identify these earlier `theme`-named ABI symbols as flex/grid layout routines
+without changing their canonical symbol bindings. The coherent receipt
+`peripherals-lv-flex-selectors-round` links 2854 definitions, 776 mixed
+unresolved imports, zero duplicate strong providers, SHA-256
+`abd219f60c3df181d4638ee3037c7455c29f561bae6ef2170d317e3abefef6c7`;
+101 direct branch imports and 675 address-only imports. Flex track scan,
+placement, repositioning and grid item renderer remain connected genuine code;
+source-owned LV root initialization is represented by the earlier global
+initializer, while physical placement and whole-image layout remain open.
+
+Four further flex space selectors are source-defined in
+`display_lv_flex_space_selectors.c`, binding authenticated style IDs 0x10,
+0x12, 0x30 and 0x34. The complete pinned/native `place_content`0x48c6d8
+body is source-defined in `display_lv_flex_place.c`. All 28 placement/count
+combinations (enum values0..6, counts0..3) pass actual compiled ARM C versus
+stock ARM state comparison, including the native no-write count<2 branch.
+The coherent `peripherals-lv-flex-place-round` receipt links 2859 definitions,
+771 mixed unresolved imports, zero duplicate strong providers, SHA-256
+`11025bbb1979c59f06abf06f940e41b44aaf5e966b2d1c43ca0fa544e0e4f027`;
+96 direct branch imports and 675 address-only imports. Connected track scan and
+child repositioning are the next larger authentic C bodies. Final image and
+hardware evidence remain absent.
+
+`display_lv_flex_track_scan.c` source-reduces native `find_track_end`0x48be22
+from pinned LVGL 9.3: content-size wrap suppression, child flag filtering,
+fixed/grow tracks, margin sizing, optional grow descriptor allocation, and
+single-item fallback. Three actual compiled ARM C/native bounded cases pass
+for zero, fixed and grow child tracks, comparing child calls, return ID,
+flex flags and all 28 track bytes. The native `LV_MAX` cross getter's second
+winning call is retained. Its allocation assertion0x48c026..0x48c052 is
+source-defined with authenticated source/function/expression/message literals,
+log level/line and invalid-address write loop in
+`display_lv_flex_track_alloc_failure.c`; an additional actual compiled
+C/native failure trace passes. The coherent
+`peripherals-lv-flex-track-qualified-round` receipt links 2861 definitions,
+780 mixed unresolved imports, zero duplicate strong providers, SHA-256
+`6eefc370e3625f7e0726aa85b47640309227035e288933deb13fbce54a351eb6`;
+105 direct branch imports and 675 address-only imports. Native child getter,
+flag-any, margin getter, grow descriptor and flex reposition descendants are
+still explicit genuine code. Full Main source, data placement and hardware
+remain incomplete.
+
+`display_lv_flex_next_item.c` now source-defines native 0x48c770, shared by the
+track scan and child repositioning. It preserves byte-width direction, signed
+index update, forward count bound, reverse zero bound and selected child pointer.
+`verify_display_lv_flex_next_item.py` passes 20 actual compiled ARM C/native
+direction and index cases. The coherent experimental Main receipt
+`peripherals-lv-flex-next-item-experimental-round` links 2862 definitions,
+779 mixed unresolved imports and zero duplicate strong providers, SHA-256
+`0b5c52e67097c4b9fdb2ff3c79d2635eec12cbd249c182a344d38f967ef678fd`.
+The connected child repositioning and grid item renderer remain source gaps;
+the selected image remains incomplete and has no final placement or hardware proof.
+
+### Connected LV flex repositioning and grid item rendering
+
+`display_lv_flex_children_repos.c` source-defines the complete native flex
+`children_repos` parent at 0x48c14e: grow-weight redistribution and clamps,
+child traversal, hidden-child filtering, row/column and RTL/reverse placement,
+cross-axis alignment, percentage offsets, rectangle resizing, event order and
+child movement. `display_lv_grid_item.c` source-defines native grid item
+renderer 0x48cfe0: row/column spans, grid-cell bounds, align/stretch modes,
+size events, percentage offsets and movement. Both retain genuine typed child
+imports. The native flex zero-weight assertion is source-defined separately
+with its authenticated path, function, line and expression strings.
+
+Actual compiled ARM C/native bounded checks pass **11 flex repositioning**
+cases (empty, multiple children, hidden, reverse, RTL, grow with and without
+resize, row/column cross placement) and **8 grid item** cases (hidden, zero
+spans, ordinary, RTL, two-cell spans, stretch/resize and movement). The
+oracles compare ordered effect-sensitive child calls with arguments, pure
+getter call multisets, object/track state and rectangle writes. Lower getter,
+event, invalidation and child movement bodies are symmetrically cut, so these
+cases do not establish live LV object-tree behavior or every style branch.
+
+The first coherent full-body receipt,
+`peripherals-lv-flex-grid-render-round`, links **2864 definitions, 814 mixed
+unresolved imports, zero duplicates**, with **139 direct branch and 675
+address-only imports**, SHA-256
+`b3043333b6b99a363da647b738c78d7a6971909c81113344882395d128be9aac`.
+Twenty-six pinned/native flex and grid style leaves and wrappers were then
+source-defined; 26 compiled ARM C/native property-ID and value-width cases
+pass. The `peripherals-lv-flex-grid-selectors-round` receipt links **2902
+definitions, 787 mixed unresolved imports, zero duplicates**, with **112
+direct branch and 675 address-only imports**, SHA-256
+`75dd06b011d4e85c9200d3a012f32f03026617411f7404e3446e32a5ba99598c`.
+
+Grid state now calls the canonical child getter 0x44dce2 and grid base-direction
+selector 0x48c8a8; its three prior compiled/native cases still pass. The full
+child getter (including negative indexing and null assertion) is source-defined;
+16 nonnull compiled ARM C/native index cases pass. Width and height rectangle
+setters 0x450b6c/76 and both 16-byte snapshot copies 0x48b8f8/0x48c7fc are
+source-defined; 16 compiled/native rectangle cases pass. Flex/grid also bind
+the previously selected area-width/height and invalidation providers by their
+canonical source symbol names. The corrected coherent receipt
+`peripherals-lv-layout-connected-round` links **2907 definitions, 773 mixed
+unresolved imports, zero duplicate strong providers**, with **98 direct branch
+and 675 address-only imports**, SHA-256
+`de745d1639001bcf3c9b04c9c5d73c80cdff08946a86e2954af4c383960b40af`.
+
+The connected layout frontiers remain grid axis calculation 0x48d3c8,
+grid track preparations 0x48cdec/0x48cbf8, flex margin/min/max getters,
+content/object size and flag getters, object parent and child movement,
+plus other display initialization, file, font and product callbacks. Mixed
+unresolved counts are interfaces, not independent missing bodies. Main source,
+initialized object trees, target placement, byte equality and hardware behavior
+remain unproved.
+
+The grid-axis allocator/positioner 0x48d3c8 is now full C in
+`display_lv_grid_axis.c`. It preserves all seven placement modes, auto-size
+handling, count-one spacing, signed division, reverse coordinate writes and
+returned extent. An **84-case** actual compiled ARM C/native matrix passes for
+one to three tracks, all placement modes, auto size and reverse direction.
+Six flex track min/max and margin dimension bodies are source-defined in
+`display_lv_flex_track_dimensions.c`; their **6** compiled/native selector
+and call-order cases pass. The coherent
+`peripherals-lv-axis-dimensions-round` receipt links **2914 definitions, 766
+mixed unresolved imports, zero duplicates**, with **91 direct branch and 675
+address-only imports**, SHA-256
+`25911e07cdbbf3bb4882c97998e9f6ca6a9e4e025b44224c0961d99082ca0f00`.
+The grid column/row preparation bodies and their descriptor/data contracts
+remain the immediate connected queue.
+
+Both full native grid track preparation bodies are now source-defined in
+`display_lv_grid_track_prepare.c`: `calc_cols`0x48cbf8 and `calc_rows`0x48cdec.
+They preserve direct and inherited descriptors, terminal sentinel copies,
+fixed/content/fractional track sizing, child flag/span/index scans, allocations,
+missing-descriptor diagnostics and the row helper's incoming R3 return ABI.
+The descriptor count0x48d4d0, weighted round0x48ca18, child-count0x44ddea
+and copy wrapper0x454738 are source-defined in companion units. Actual
+compiled ARM C/native comparisons pass **12** track-preparation cases with
+ordered allocation/copy/free/round/log calls and array/state writes, **25**
+descriptor-helper cases and **9** child-count/copy cases. The selector oracle
+also now covers **36** leaf and wrapper entries, including the previously
+unqualified grid descriptor and index wrappers. Lower allocator, object tree,
+flag, size and parent calls are symmetrically cut in the track cases; live
+object-tree and concurrent behavior are still unproved.
+
+The coherent `peripherals-lv-grid-track-qualified-round` receipt links **2921
+definitions, 764 mixed unresolved imports, zero duplicates**, with **89 direct
+branch and 675 address-only imports**, SHA-256
+`1cc867ac25e96dd0fd7338d55837532d0dbe41fd6c85ed5fcdc896b43f95a22b`.
+The remaining connected LV layout imports include object content/outer size,
+flag-any, parent and child movement bodies, plus the broader display startup,
+font, timer and product callbacks. These counts are source interfaces, not
+missing-body counts; Main image placement, byte equality and hardware remain
+open.
+
+The connected LV object group is now source-defined: flag-any 0x43e11c,
+parent 0x44dca2, outer width/height 0x43fd9e/0x43fdda, content width/height
+0x43fe16/0x43fe70, and recursive child movement 0x44035e. Actual compiled
+ARM C/native comparisons pass **46** object field cases, **24** recursive
+movement cases covering zero/two children, nested descendants, floating-skip
+and signed deltas, plus **6** content dimension cases with ordered synthetic
+child-call cuts and return arithmetic. The content test does not qualify the
+lower style padding getters themselves. The coherent
+`peripherals-lv-object-connected-round` receipt links **2928 definitions, 761
+mixed unresolved imports, zero duplicate strong symbols**, with **86 direct
+branch and 675 address-only imports**, SHA-256
+`8f48b4965b296f83ce059cc5a965b3dd87d1fcb521ff780bb63338544416db83`.
+The four style padding getter bodies 0x43efc6/0x43eff4/0x43f022/0x43f050
+are the next connected layout imports. Remaining Main work also includes
+their shared style resolution, broader display startup, font, timer and
+product callbacks. This is a relocatable source build and bounded native
+comparison, not an image placement, byte equality or hardware result.
+
+## Root-only padding round 2026-10-12
+
+Completed four native space helpers43efc6/43eff4/43f022/43f050 in display_lv_style_padding.c. These preserve ordered padding, border-width, and byte side-mask property reads, with native wrapping addition. verify_display_lv_style_padding.py passes380 compiled ARM/native cases with the shared style provider cut. Coherent receipt peripherals-root-padding-round passes2932 definitions/757 unresolved (82 direct/675 address-only); all134 compile snapshots are current. This completes this four-body source queue, with no full Main image or hardware claim.

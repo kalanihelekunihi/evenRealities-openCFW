@@ -149,6 +149,107 @@ def main() -> None:
     if (section_map[".bss"]["size"] != 0x1670c or
             section_map[".bss"]["vma"] != 0x20017090):
         raise RuntimeError("BSS reservation differs")
+    flash_state = None
+    board_pins_ready = None
+    console_port = None
+    exception_anchor = None
+    clock_gate_bits = None
+    gpio_irq_masks = None
+    irq_descriptors = None
+    timer_records = None
+    pmu_record = None
+    spi_device_state = None
+    denoise_runtime = None
+    if script.name == "image_b_stock_length_source_fit_probe.ld":
+        symbols = target("nm", out, ["-S", "/out/" + elf.name])
+        match = re.search(
+            r"(?m)^2001765c 00000001 B gx8002_image_b_flash_probe_state_2001765c$",
+            symbols)
+        if match is None:
+            raise RuntimeError("source flash probe byte missing or misplaced")
+        flash_state = {"address":"0x2001765c","bytes":1,
+                       "storage":"NOLOAD within conditionally cleared BSS",
+                       "initial_value_proven":False}
+        if re.search(
+            r"(?m)^200176d8 00000004 B gx8002_image_b_board_pins_ready_200176d8$",
+            symbols) is None:
+            raise RuntimeError("source board pins ready word missing or misplaced")
+        board_pins_ready = {"address":"0x200176d8","bytes":4,
+                            "storage":"NOLOAD within conditionally cleared BSS",
+                            "initial_value_proven":False}
+        if re.search(
+            r"(?m)^2001739c 00000004 B gx8002_image_b_console_port_2001739c$",
+            symbols) is None:
+            raise RuntimeError("source console port word missing or misplaced")
+        console_port = {"address":"0x2001739c","bytes":4,
+                        "storage":"NOLOAD within conditionally cleared BSS",
+                        "initial_value_proven":False}
+        if re.search(
+            r"(?m)^20017390 00000004 B gx8002_image_b_exception_scratch_20017390$",
+            symbols) is None:
+            raise RuntimeError("source exception anchor word missing or misplaced")
+        exception_anchor = {"address":"0x20017390","bytes":4,
+                            "storage":"NOLOAD within conditionally cleared BSS",
+                            "initial_value_proven":False,
+                            "adjacent_frame_72_bytes_proven":False}
+        if re.search(
+            r"(?m)^20017394 00000004 B gx8002_image_b_clock_gate_bits_20017394$",
+            symbols) is None:
+            raise RuntimeError("source clock gate word missing or misplaced")
+        clock_gate_bits = {"address":"0x20017394","bytes":4,
+                           "storage":"NOLOAD within conditionally cleared BSS",
+                           "initial_value_proven":False,
+                           "retained_producer_proven":False}
+        if re.search(
+            r"(?m)^200173a0 00000008 B gx8002_image_b_gpio_irq_masks_200173a0$",
+            symbols) is None:
+            raise RuntimeError("source GPIO IRQ masks missing or misplaced")
+        gpio_irq_masks = {"address":"0x200173a0","bytes":8,
+                          "storage":"NOLOAD within conditionally cleared BSS",
+                          "initial_value_proven":False,
+                          "retained_producer_proven":False}
+        if re.search(
+            r"(?m)^200173a8 00000100 B gx8002_image_b_irq_descriptors_200173a8$",
+            symbols) is None:
+            raise RuntimeError("source IRQ descriptor table missing or misplaced")
+        irq_descriptors = {"address":"0x200173a8","bytes":256,
+                           "storage":"NOLOAD within conditionally cleared BSS",
+                           "registered_line_count":32,
+                           "controller_dispatch_line_validity_proven":False}
+        if re.search(
+            r"(?m)^200174bc 00000168 B gx8002_image_b_timer_records_200174bc$",
+            symbols) is None:
+            raise RuntimeError("source timer records missing or misplaced")
+        timer_records = {"address":"0x200174bc","bytes":360,
+                         "storage":"NOLOAD within conditionally cleared BSS",
+                         "record_count":10,"record_bytes":36}
+        if re.search(
+            r"(?m)^2002cb88 00000090 B gx8002_image_b_pmu_record_2002cb88$",
+            symbols) is None:
+            raise RuntimeError("source PMU record missing or misplaced")
+        pmu_record = {"address":"0x2002cb88","bytes":144,
+                      "storage":"NOLOAD within conditionally cleared BSS",
+                      "warm_callback_contents_proven":False}
+        if re.search(
+            r"(?m)^20017670 00000060 B gx8002_image_b_spi_device_state_20017670$",
+            symbols) is None:
+            raise RuntimeError("SDK-correlated SPI state missing or misplaced")
+        spi_device_state = {"address":"0x20017670","bytes":96,
+                            "storage":"NOLOAD within conditionally cleared BSS",
+                            "sdk_correlated_subrecord_bytes":[16,36,44],
+                            "physical_controller_effects_proven":False}
+        denoise_symbols = (
+            ("2002d2bc", "0000001c", "gx8002_image_b_denoise_mode_state_2002d2bc"),
+            ("2002d2d8", "00000014", "gx8002_image_b_denoise_ring_2002d2d8"),
+            ("2002d2f0", "00000028", "gx8002_image_b_denoise_queue_buffer_2002d2f0"),
+        )
+        for address, size, name in denoise_symbols:
+            if re.search(rf"(?m)^{address} {size} B {name}$", symbols) is None:
+                raise RuntimeError(f"source denoise object {name} missing or misplaced")
+        denoise_runtime = {"mode_prefix_bytes":28,"queue_bytes":20,
+                            "unattributed_gap_bytes":4,"queue_buffer_bytes":40,
+                            "storage":"NOLOAD within conditionally cleared BSS",
+                            "queue_lifecycle_proven":False}
     entry = re.search(r"Entry point address:\s*(0x[0-9a-f]+)", header)
     if entry is None or int(entry.group(1), 16) != 0x10003100:
         raise RuntimeError("entry is not native reset offset")
@@ -165,6 +266,17 @@ def main() -> None:
         "entry": entry.group(1),
         "sections": section_map,
         "external_resident_address_contracts": RESIDENT,
+        "source_flash_probe_state": flash_state,
+        "source_board_pins_ready": board_pins_ready,
+        "source_console_port": console_port,
+        "source_exception_anchor": exception_anchor,
+        "source_clock_gate_bits": clock_gate_bits,
+        "source_gpio_irq_masks": gpio_irq_masks,
+        "source_irq_descriptors": irq_descriptors,
+        "source_timer_records": timer_records,
+        "source_pmu_record": pmu_record,
+        "source_spi_device_state": spi_device_state,
+        "source_denoise_runtime": denoise_runtime,
         "limits": [
             "The flash callback table has source relocations, but whole physical flash behavior is not validated.",
             "The 91916-byte BSS interval is reserved by native reset bounds; most interior field roles remain untyped.",

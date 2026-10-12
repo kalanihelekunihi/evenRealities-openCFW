@@ -1,0 +1,20 @@
+{
+  "status": "PASS_COMPILED_ARM_REALLOC_NATIVE",
+  "cases": 6804,
+  "by_provider": {
+    "audio_uart_lv_pool_realloc_484234": 1944,
+    "audio_uart_lv_pool_realloc_48432a": 1944,
+    "audio_uart_lv_realloc_44f76a": 2916
+  },
+  "source_sha256": "e1d20cb140a43f49ed4305477b2a30c5012862cc5866cc0c7a2bb080e9c99cbc",
+  "selected_heap_sha256": "e9f6d938154205cbc16c534bc3ac16a3dd04d31e697db4494509ffe1e93e4a6d",
+  "selected_leaf_sha256": {
+    "components/audio/file_pool_free_candidate/tlsf_leaf.c": "a4e9be3677b91c708428208a4a67d257ab261f2c9aa7bc18c12a06a8e6277983",
+    "components/audio/file_pool_free_candidate/tlsf_absorb_leaves.c": "a37060a2458b7db3a6f7f0444fd90ddd09dc405bb52c3f57f858df55b9475bf0"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual heap malloc/free/pool,size-query,pointer/block helpers execute. TLSF alloc/free/realloc,semaphore/logger controlled cuts.",
+    "Accounting state observed at actual size-query entry and mutated there; header offsets0/8/16,word wrap,NULL/static slot,failures,log result preservation compared. Full TLSF heap/scheduler/image/hardware gates open."
+  ]
+}

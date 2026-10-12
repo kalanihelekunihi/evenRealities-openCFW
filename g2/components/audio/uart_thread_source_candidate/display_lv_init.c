@@ -5,7 +5,7 @@ extern uint8_t audio_uart_display_lv_root[]; /* selected RAM0x2006f548 */
 extern uint8_t audio_file_lfs_context[]; /* selected RAM0x20071ac8 */
 extern void audio_uart_lv_init_global_4734cc(volatile uint8_t *);
 extern void audio_uart_lv_init_memory_48aa60(void);
-extern void audio_uart_lv_init_timer_4c6d04(void);
+extern void audio_uart_lv_span_stack_init_4c6d04(void);
 extern void audio_uart_lv_init_async_49acb0(void);
 extern void audio_uart_lv_init_display_464330(void);
 extern void audio_uart_lv_init_indev_4c6d8c(void);
@@ -16,8 +16,8 @@ extern void audio_uart_lv_init_draw_unit_4b1b98(uint32_t);
 extern void audio_uart_lv_init_anim_48438c(void);
 extern void audio_uart_lv_init_group_4c73d6(void);
 extern void audio_uart_lv_init_cache_44b90c(void);
-extern void audio_uart_lv_init_font_488f4c(uint32_t,uint32_t);
-extern void audio_uart_lv_init_fs_4c794c(void);
+extern void audio_uart_lv_image_decoder_init_488f4c(uint32_t,uint32_t);
+extern void audio_uart_lv_bin_decoder_init_4c794c(void);
 extern void audio_uart_lv_init_misc_4c8f0a(void);
 extern void audio_uart_lv_init_global_bind_4c8efc(void *);
 extern void audio_uart_lv_init_assert_4c91a8(void);
@@ -41,7 +41,7 @@ void audio_uart_display_clock_prepare(void)
     }
     audio_uart_lv_init_global_4734cc(audio_uart_display_lv_root);
     audio_uart_lv_init_memory_48aa60();
-    audio_uart_lv_init_timer_4c6d04();
+    audio_uart_lv_span_stack_init_4c6d04();
     audio_uart_lv_init_async_49acb0();
     audio_uart_lv_init_display_464330();
     audio_uart_lv_init_indev_4c6d8c();
@@ -52,8 +52,8 @@ void audio_uart_display_clock_prepare(void)
     audio_uart_lv_init_anim_48438c();
     audio_uart_lv_init_group_4c73d6();
     audio_uart_lv_init_cache_44b90c();
-    audio_uart_lv_init_font_488f4c(0u,0u);
-    audio_uart_lv_init_fs_4c794c();
+    audio_uart_lv_image_decoder_init_488f4c(0u,0u);
+    audio_uart_lv_bin_decoder_init_4c794c();
     if (version_bytes[0]!=0xc3u || version_bytes[1]!=0x81u || version_bytes[2]!=0u)
         audio_uart_lvgl_log(2u,source,0x12cu,function,bad_encoding);
     const uint32_t endian_probe=0x11223344u;

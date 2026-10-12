@@ -19,11 +19,24 @@
       "0x2001708c"
     ]
   },
+  "marker_branch": {
+    "loader": "0x10000d9a..0x10000dce",
+    "first_reader_source": "package+0x323b0",
+    "first_reader_bytes": 4,
+    "second_reader_source": "first_read_word+0x323b4",
+    "second_reader_destination": "0x20000000",
+    "second_reader_bytes": 0,
+    "entry_word": "0x2002d3e4",
+    "entry_target": "0x10000100",
+    "selected_source_sha256": "867b5dead57840ae33338ec5b3875f986b6590bc1c9cadb9b0d198bf611fe480",
+    "qualified_as_static_native_source_control_flow": true,
+    "reader_side_effects_executed": false
+  },
   "stock_normal_loader_copy_extent_proven": true,
   "iram_dram_alias_on_physical_target_proven": false,
   "custom_final_elf_or_hardware_proven": false,
   "limits": [
-    "Marker-selected alternative boot branch is outside this proof.",
+    "Both loader branch arguments and control targets are statically cross-checked. The flash reader, MMIO effects, reset transfers and package contents were not executed here.",
     "Physical IRAM/DRAM alias behavior and final custom image placement remain unqualified."
   ]
 }

@@ -1,0 +1,21 @@
+/* Native scan parameter update: tail-copy eight bytes from current parameters. */
+__asm__(
+".text\n"
+".balign 4\n"
+".global opencfw_em9305_scan_action_325648\n"
+".type opencfw_em9305_scan_action_325648,@function\n"
+"opencfw_em9305_scan_action_325648:\n"
+"L325648:\n"
+"mov_s r0,0x805c78\n"
+"L32564e:\n"
+"ld r0,[r0,0]\n"
+"L325650:\n"
+"add_s r1,r0,0x4\n"
+"L325652:\n"
+"mov_s r0,0x805af8\n"
+"L325658:\n"
+"b.d opencfw_em9305_memcpy\n"
+"L32565c:\n"
+"mov_s r2,0x8\n"
+".size opencfw_em9305_scan_action_325648,.-opencfw_em9305_scan_action_325648\n"
+);

@@ -1,0 +1,53 @@
+
+g2/analysis/c-source-completion-20261011/em9305/root-dispatch-31d0fc/source.o:     file format elf32-littlearc
+
+
+Disassembly of section .text:
+
+00000000 <opencfw_em9305_callback_child_31d0fc>:
+   0:	c2e4                	enter_s	[r13-r14,blink]
+
+00000002 <L31d0fe>:
+   2:	8841                	ldb_s	r2,[r0,0x1]
+
+00000004 <L31d100>:
+   4:	4508                	mov_s	r13,r0
+
+00000006 <L31d102>:
+   6:	4628                	mov_s	r14,r1
+
+00000008 <L31d104>:
+   8:	6a15                	asl_s	r0,r2,0x5
+
+0000000a <L31d106>:
+   a:	7835                	add2_s	r0,r0,r1
+
+0000000c <L31d108>:
+   c:	2030 0f81 0000 0000 	ld	r1,[r0,0]
+			10: R_ARC_32_ME	opencfw_em9305_dispatch_callbacks_334f70
+
+00000014 <L31d110>:
+  14:	e904                	breq_s	r1,0,8	;1c <L31d118>
+
+00000016 <L31d112>:
+  16:	7960                	jl_s.d	[r1]
+
+00000018 <L31d114>:
+  18:	40a1                	mov_s	r0,r13
+
+0000001a <L31d116>:
+  1a:	8d41                	ldb_s	r2,[r13,0x1]
+
+0000001c <L31d118>:
+  1c:	7e56                	add3_s	r14,r14,r2
+
+0000001e <L31d11a>:
+  1e:	2632 1f80 0000 0000 	ldb	r0,[r14,0]
+			22: R_ARC_32_ME	opencfw_em9305_dispatch_transitions_335010
+
+00000026 <L31d122>:
+  26:	ad01                	stb_s	r0,[r13,0x1]
+
+00000028 <L31d124>:
+  28:	c6c4                	leave_s	[r13-r14,blink,pcl]
+  2a:	78e0                	nop_s

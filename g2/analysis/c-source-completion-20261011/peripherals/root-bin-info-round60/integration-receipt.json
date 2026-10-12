@@ -1,0 +1,31 @@
+{
+  "status": "NATIVE_COMPARISON_PASS_COHERENT_BUILD_FAILED",
+  "source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+  "source_sha256": "6343f34af4e9707f3fe5f3d9569438f4d507e4ef6d69ea33fd76a4f35dc4d6d2",
+  "native_range": "4c79d0..4c7b1c",
+  "selected": true,
+  "comparison_cases": 528,
+  "diagnostic_string_correction": "Native comparison required single runtime path separators; candidate corrected before selection.",
+  "remaining_estimate": {
+    "callback_bodies": 2,
+    "new_dependency_bodies": 3,
+    "dependencies": [
+      "audio_uart_lv_fs_extension_4c70e4",
+      "audio_uart_lv_string_compare_4547be",
+      "audio_uart_lv_fs_file_read_4c6f46"
+    ],
+    "coherent_builds": 1,
+    "other_gates": [
+      "Data ownership/layout",
+      "Native byte equality",
+      "Hardware"
+    ]
+  },
+  "limits": [
+    "Controlled child cuts do not supply production provider bodies."
+  ],
+  "build": {
+    "status": "AUDIO_COMPILE_FAILED_NO_RELOCATABLE_LINK",
+    "reason": "Conflicting audio_uart_lvgl_log declaration in selected source; isolated candidate used fixed format parameter while existing declaration has varargs after function name."
+  }
+}

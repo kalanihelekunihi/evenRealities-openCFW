@@ -1,0 +1,49 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00325ccc <.data+0x238cc>:
+  325ccc:	c3e8                	enter_s	[r13-r16,fp,blink]
+  325cce:	c1a1                	sub_s	sp,sp,0x4
+  325cd0:	4100                	mov_s	r1,r0
+  325cd2:	2180 080a           	add	r1,r1,672
+  325cd6:	4508                	mov_s	r13,r0
+  325cd8:	8914                	ldb_s	r0,[r1,0x14]
+  325cda:	11f8 8103           	ldh	r3,[r1,-8]
+  325cde:	11fa 8102           	ldh	r2,[r1,-6]
+  325ce2:	209f 0893           	mpyuw	r0,r0,1250
+  325ce6:	11b0 810e           	ldh	r14,[r1,-80]
+  325cea:	11f6 8110           	ldh	r16,[r1,-10]
+  325cee:	11f4 810f           	ldh	r15,[r1,-12]
+  325cf2:	1900 0043           	stb	1,[r1]
+  325cf6:	b163                	sth_s	r3,[r1,0x6]
+  325cf8:	0f16 f6af           	bl.d	-76012	;0x31340c
+  325cfc:	b144                	sth_s	r2,[r1,0x8]
+  325cfe:	1600 7001 0080 5c70 	ld	r1,[0x805c70]
+  325d06:	279f 1893           	mpyuw	r15,r15,1250
+  325d0a:	209f 2893           	mpyuw	r16,r16,1250
+  325d0e:	4d31                	sub_s	r1,r13,r1
+  325d10:	2984 040e           	div	r1,r1,912
+  325d14:	4300                	mov_s	r3,r0
+  325d16:	2440 3005           	add	r5,sp,0
+  325d1a:	4202                	mov_s	r2,r16
+  325d1c:	44c1                	mov_s	r4,r14
+  325d1e:	782f                	extb_s	r0,r1
+  325d20:	09de f6ef           	bl.d	-75300	;0x3136fc
+  325d24:	41e1                	mov_s	r1,r15
+  325d26:	e811                	breq_s	r0,0,34	;0x325d46
+  325d28:	c000                	ld_s	r0,[sp,0]
+  325d2a:	1dc0 1043           	stb	1,[r13,192]
+  325d2e:	2580 190a           	add	r13,r13,676
+  325d32:	2819 0f82 001a 36e3 	mpydu	r2,r0,0x1a36e3
+  325d3a:	797b                	asl_s	r1,r3
+  325d3c:	2a41 07c0           	lsr	r0,r2,0x1f
+  325d40:	7825                	or_s	r0,r0,r1
+  325d42:	b500                	sth_s	r0,[r13,0]
+  325d44:	c7c8                	leave_s	[r13-r16,fp,blink,pcl]
+  325d46:	d972                	mov_s	r1,0x72
+  325d48:	0ec2 ffef           	bl.d	-320	;0x325c08
+  325d4c:	40a1                	mov_s	r0,r13
+  325d4e:	c7c8                	leave_s	[r13-r16,fp,blink,pcl]

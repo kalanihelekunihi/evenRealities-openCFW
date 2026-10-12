@@ -295,3 +295,30 @@ most direct evidence. A final linker/scatter source is also required to place
 all owned ROM/BSS objects and establish the executable image. The root Touch
 builder's historical “484 reset-copy bytes” gate predates the fifth active
 slot attribution; the current unowned reset-copy interval is **426 bytes**.
+
+## Four generated-object boundary recheck
+
+`audit_generated_product_frontier.py` records the locked ROM and RAM boundaries
+in `generated-product-frontier.json`. The three native widget records start at
+`0xb0f8`, `0xb188`, and `0xb218`, giving an observed 144-byte stride and a
+432-byte span before the common configuration at `0xb2a8`. That common region
+has 132 observed bytes before the first named electrode descriptor at
+`0xb32c`; its LP channel pointer at `0xb2b0` is `0x2000082c`. These are native
+byte boundaries, not a recovered product option macro set or generated C
+initializer. The pinned v6 PDL declares LP history elements as `uint16_t` and
+advances one element per scanned slot per frame. Neither its type nor the
+426-byte zero gap proves the generated array count. The internal context
+starts at `0x20000c50` with observed native writes through offset 117; the
+named lock at `0x20000cc8` bounds 120 available bytes without proving the
+object's extent or conditional field layout.
+
+A repository file inventory found no product `cycfg_capsense.c/.h`. The two
+`design.modus` files are third-party reference designs for different devices;
+their option choices cannot be transferred to this G2 image. A targeted
+public search for G2/S200 generated CapSense files found no exact product
+artifact. All four strong imports therefore remain source contracts. The
+next admissible evidence is the product's generated `cycfg_capsense.c/.h`,
+its option-bearing design input plus the matching generator version, or an
+authenticated linker map with symbol extents together with a validated PDL
+field-layout option set. No 426-byte array or ROM configuration initializer
+was fabricated in this pass.

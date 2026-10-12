@@ -1,0 +1,75 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0044f70c <.data+0x1770c>:
+  44f70c:	b580      	push	{r7, lr}
+  44f70e:	000a      	movs	r2, r1
+  44f710:	2100      	movs	r1, #0
+  44f712:	f005 f818 	bl	0x454746
+  44f716:	bd01      	pop	{r0, pc}
+  44f718:	b580      	push	{r7, lr}
+  44f71a:	2800      	cmp	r0, #0
+  44f71c:	d101      	bne.n	0x44f722
+  44f71e:	4821      	ldr	r0, [pc, #132]	@ (0x44f7a4)
+  44f720:	e005      	b.n	0x44f72e
+  44f722:	f034 fdfc 	bl	0x48431e
+  44f726:	2800      	cmp	r0, #0
+  44f728:	d101      	bne.n	0x44f72e
+  44f72a:	2000      	movs	r0, #0
+  44f72c:	e7ff      	b.n	0x44f72e
+  44f72e:	bd02      	pop	{r1, pc}
+  44f730:	b538      	push	{r3, r4, r5, lr}
+  44f732:	0005      	movs	r5, r0
+  44f734:	2d00      	cmp	r5, #0
+  44f736:	d101      	bne.n	0x44f73c
+  44f738:	481a      	ldr	r0, [pc, #104]	@ (0x44f7a4)
+  44f73a:	e00c      	b.n	0x44f756
+  44f73c:	0028      	movs	r0, r5
+  44f73e:	f034 fdee 	bl	0x48431e
+  44f742:	0004      	movs	r4, r0
+  44f744:	2c00      	cmp	r4, #0
+  44f746:	d101      	bne.n	0x44f74c
+  44f748:	2000      	movs	r0, #0
+  44f74a:	e004      	b.n	0x44f756
+  44f74c:	0029      	movs	r1, r5
+  44f74e:	0020      	movs	r0, r4
+  44f750:	f7ff ffdc 	bl	0x44f70c
+  44f754:	0020      	movs	r0, r4
+  44f756:	bd32      	pop	{r1, r4, r5, pc}
+  44f758:	b580      	push	{r7, lr}
+  44f75a:	4912      	ldr	r1, [pc, #72]	@ (0x44f7a4)
+  44f75c:	4288      	cmp	r0, r1
+  44f75e:	d003      	beq.n	0x44f768
+  44f760:	2800      	cmp	r0, #0
+  44f762:	d001      	beq.n	0x44f768
+  44f764:	f034 fde8 	bl	0x484338
+  44f768:	bd01      	pop	{r0, pc}
+  44f76a:	b580      	push	{r7, lr}
+  44f76c:	2900      	cmp	r1, #0
+  44f76e:	d103      	bne.n	0x44f778
+  44f770:	f7ff fff2 	bl	0x44f758
+  44f774:	480b      	ldr	r0, [pc, #44]	@ (0x44f7a4)
+  44f776:	e014      	b.n	0x44f7a2
+  44f778:	4a0a      	ldr	r2, [pc, #40]	@ (0x44f7a4)
+  44f77a:	4290      	cmp	r0, r2
+  44f77c:	d103      	bne.n	0x44f786
+  44f77e:	0008      	movs	r0, r1
+  44f780:	f7ff ffca 	bl	0x44f718
+  44f784:	e00d      	b.n	0x44f7a2
+  44f786:	f034 fdd0 	bl	0x48432a
+  44f78a:	2800      	cmp	r0, #0
+  44f78c:	d109      	bne.n	0x44f7a2
+  44f78e:	4806      	ldr	r0, [pc, #24]	@ (0x44f7a8)
+  44f790:	9000      	str	r0, [sp, #0]
+  44f792:	4b06      	ldr	r3, [pc, #24]	@ (0x44f7ac)
+  44f794:	22a2      	movs	r2, #162	@ 0xa2
+  44f796:	4906      	ldr	r1, [pc, #24]	@ (0x44f7b0)
+  44f798:	2003      	movs	r0, #3
+  44f79a:	f7fd fd5f 	bl	0x44d25c
+  44f79e:	2000      	movs	r0, #0
+  44f7a0:	e7ff      	b.n	0x44f7a2
+  44f7a2:	bd02      	pop	{r1, pc}
+  44f7a4:	f5ac 2006 	sub.w	r0, ip, #548864	@ 0x86000

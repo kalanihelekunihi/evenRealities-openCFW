@@ -1,0 +1,37 @@
+{
+  "status": "PASS_NATIVE_STARTUP_OWNER_ASSIGNMENTS_LIFECYCLE_OPEN",
+  "startup": "307e30",
+  "consumer": "31ef5c",
+  "owners": [
+    {
+      "slot": "805c88",
+      "startup_store": "307e58",
+      "target": "322184",
+      "consumer_load": "31f11e",
+      "consumer_call": "31f156",
+      "arguments": "R0..R3 preserved by native delay slot; four arguments."
+    },
+    {
+      "slot": "805c90",
+      "startup_store": "307e68",
+      "target": "322580",
+      "consumer_load": "31f15c",
+      "consumer_call": "31f166",
+      "arguments": "R0 set to record in delay slot; one argument."
+    }
+  ],
+  "additional_assigned_metadata": [
+    {
+      "slot": "805c84",
+      "target": "322178"
+    },
+    {
+      "slot": "805c8c",
+      "target": "32233c"
+    }
+  ],
+  "limits": [
+    "Startup binding established; intervening writes, initialization reachability and indirect callback provider bodies remain separate gates.",
+    "No hardware execution or full image completion established."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "status": "COHERENT_COMPILATION_AND_CURRENT_SOURCE_AUDIT_PASS",
+  "source": "g2/analysis/c-source-completion-20261011/peripherals/root-fs-read-round63/read_candidate.c",
+  "source_sha256": "9ac3e20440b3e90b633838ff4e7a886b2811c841019c966a209cdc913efb95c2",
+  "native_range": "4c6f46..4c6fba",
+  "comparison_cases": 576,
+  "selected": true,
+  "upstream_source": "third-party/upstream/lvgl/src/misc/lv_fs.c",
+  "upstream_revision": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+  "remaining_estimate": {
+    "decoder_callbacks": 2,
+    "cached_read_provider": 1,
+    "selected_integration": 0,
+    "coherent_builds": 0,
+    "other_gates": [
+      "Full source coverage",
+      "Native data/layout and byte equality",
+      "Hardware"
+    ]
+  },
+  "limits": [
+    "File-read body waits for running build97948 terminal audit before selected integration.",
+    "Cached-read4c713c is a genuine unresolved child; controlled test cut is not implementation."
+  ],
+  "integrated_source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+  "integrated_source_sha256": "8520ec317f73c446477774c5af73305c7b168927d10d7cb47e5848b09accce0c",
+  "build": {
+    "status": "PASS",
+    "audit": "g2/build/c-firmware/20261012/peripherals-root-fs-read-round63/root-source-audit.json"
+  }
+}

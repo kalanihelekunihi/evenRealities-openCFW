@@ -1,0 +1,36 @@
+{
+  "status": "LOCAL_COMPONENTS_COMPLETE_NATIVE_QUALIFIED_SELECTED_CURRENT_BUILD_AUDIT_PASS",
+  "native_cases": 5179,
+  "providers": 9,
+  "selected_sources": {
+    "g2/components/audio/uart_thread_source_candidate/display_font_alloc.c": "e9f6d938154205cbc16c534bc3ac16a3dd04d31e697db4494509ffe1e93e4a6d",
+    "g2/components/audio/uart_thread_source_candidate/display_timer_children.c": "8b3670f102b87d639992a7b7cc4d16782dbc1f4de10c80a6055284cc1754d91e"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_ranges": [
+    "44f70c..44f76a",
+    "484180..4841d8",
+    "48429e..4842e6",
+    "48431e..48432a",
+    "484338..484344",
+    "4d05e4..4d05fa"
+  ],
+  "lvgl_commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+  "upstream": [
+    "src/stdlib/lv_mem.c",
+    "src/stdlib/builtin/lv_mem_core_builtin.c"
+  ],
+  "limits": [
+    "Actual canonical TLSF pointer/block size helpers execute; allocator/free/semaphore/memset controlled cuts.",
+    "Full heap algorithms,scheduler,data/layout,byte equality and hardware remain open."
+  ],
+  "build": "g2/build/c-firmware/20261012/peripherals-root-cache-heap-round113",
+  "audit": {
+    "definitions": 3028,
+    "imports": 752,
+    "snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes": 6,
+    "builder_hash_checked": true
+  }
+}

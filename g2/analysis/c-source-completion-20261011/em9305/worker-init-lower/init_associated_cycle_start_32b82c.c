@@ -20,10 +20,19 @@ static void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
 static void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
 static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
 
+#if defined(OPENCFW_EM9305_HOST_FIXTURE)
+/* Host-only branch model; it does not qualify ARC DSP numeric behavior. */
+static uint64_t fixture_accumulator;
+static void native_mpyd_32b82c(uint32_t a,uint32_t b)
+{fixture_accumulator=(uint64_t)a*b;}
+static uint32_t native_mac_32b82c(uint32_t a,uint32_t b)
+{fixture_accumulator+=(uint64_t)a*b;return (uint32_t)fixture_accumulator;}
+#else
 static void native_mpyd_32b82c(uint32_t a,uint32_t b)
 {__asm__ volatile("mpyd 0,%0,%1"::"r"(a),"r"(b):"r58","r59","memory");}
 static uint32_t native_mac_32b82c(uint32_t a,uint32_t b)
 {uint32_t out;__asm__ volatile("mac %0,%1,%2":"=r"(out):"r"(a),"r"(b):"r58","r59","memory");return out;}
+#endif
 
 uint32_t opencfw_em9305_associated_cycle_start_32b82c(uintptr_t record,uintptr_t object)
 {
@@ -63,7 +72,7 @@ uint32_t opencfw_em9305_associated_cycle_start_32b82c(uintptr_t record,uintptr_t
     uintptr_t channel_state=record+720u;
     for(;;){
         uint32_t inserted=opencfw_em9305_associated_schedule_insert_312da4(object,0u);
-        uint32_t index=r8(record+799u); /* BL delay slot. */
+        uint32_t index=r8(record+799u); /* Load after 312da4 returns. */
         if(inserted!=0u){
             uintptr_t choices=r32(record+1160u);
             uint32_t current=index&127u;
@@ -88,12 +97,14 @@ uint32_t opencfw_em9305_associated_cycle_start_32b82c(uintptr_t record,uintptr_t
         uint32_t width=r8(record+788u);
         w8(record+799u,next); /* BRNE.D delay store. */
         uint32_t counter;
+        uint32_t seed_index=next;
         if(next==width){
             counter=r16(record+376u);
             w8(record+799u,0u);
             w16(record+376u,counter+1u);
+            seed_index=0u; /* 32b8fc sets R1=0 before 32b910 XOR. */
         }else counter=r16(record+376u);
-        uint32_t seed=(uint16_t)((counter^next)&0xffffu);
+        uint32_t seed=(uint16_t)((counter^seed_index)&0xffffu);
         uint32_t chosen=opencfw_em9305_associated_channel_seed_324c98(channel_state,seed);
         uint32_t latest_count=r16(record+376u);
         uint32_t interval=r32(record+700u);

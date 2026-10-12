@@ -10,7 +10,7 @@ static const char assertion[]="Asserted at expression: %s (%s)";
 static const char reason[]="NULL pointer";
 static void fail(uint32_t line,const char *expression) {
     audio_uart_lvgl_log(3u,source,line,function,assertion,expression,reason);
-    for(;;) { /* authenticated native assertion loop */ }
+    for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
 }
 void *audio_uart_font_cache_find(void *cache,const void *key,uint32_t context) {
     if(cache==0) fail(0x53u,"cache != NULL");

@@ -1,0 +1,80 @@
+[
+  {
+    "member": "lctr_main_adv_master_ae.c.obj",
+    "section": ".text.lctrMstSendPendingAdvRptHandler",
+    "function": "00000000 <lctrMstSendPendingAdvRptHandler>:",
+    "first_instructions": [
+      [
+        "enter_s",
+        "[r13-r17,fp,blink]"
+      ],
+      [
+        "bl.d",
+        "0"
+      ],
+      [
+        "sub_s",
+        "sp,sp,0x1c"
+      ],
+      [
+        "breq.d.nt",
+        "r0,0,220"
+      ],
+      [
+        "mov_s",
+        "r17,0"
+      ],
+      [
+        "mov_s",
+        "r14,0"
+      ],
+      [
+        "mov_s",
+        "r13,0"
+      ],
+      [
+        "mov_s",
+        "r16,0"
+      ]
+    ]
+  },
+  {
+    "member": "sch_main.c.obj",
+    "section": ".text.SchHandler",
+    "function": "00000000 <SchHandler>:",
+    "first_instructions": [
+      [
+        "enter_s",
+        "[r13-r17,fp,blink]"
+      ],
+      [
+        "bl.d",
+        "0"
+      ],
+      [
+        "sub_s",
+        "sp,sp,0x4"
+      ],
+      [
+        "mov_s",
+        "r17,r0"
+      ],
+      [
+        "mov_s",
+        "r13,0"
+      ],
+      [
+        "mov_s",
+        "r15,1"
+      ],
+      [
+        "mov_s",
+        "r16,3"
+      ],
+      [
+        "ld_s",
+        "r0,[r13,0x8]"
+      ]
+    ]
+  }
+]

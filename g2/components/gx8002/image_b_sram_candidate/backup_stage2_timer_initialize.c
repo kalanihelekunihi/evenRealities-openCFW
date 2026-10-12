@@ -1,7 +1,7 @@
 /* Native image-B timer setup 0x10004fcc..0x10005064 and timer IRQ
  * 0x100050cc..0x1000513c. Pinned NationalChip gx_delay/timer interfaces
  * corroborate the 10 records of 36 bytes and 1 MHz prescale. The records
- * occupy exact BSS at 0x200174bc and are deliberately a linker contract.
+ * occupy exact source-owned BSS at 0x200174bc.
  */
 #include <stdint.h>
 

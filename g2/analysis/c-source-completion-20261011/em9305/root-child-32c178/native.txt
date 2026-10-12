@@ -1,0 +1,35 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0032c178 <.data+0x29d78>:
+  32c178:	c2e6                	enter_s	[r13-r15,blink]
+  32c17a:	806b                	ld_s	r3,[r0,0x2c]
+  32c17c:	1394 0082           	ldb	r2,[r3,148]
+  32c180:	0a1d 0170           	breq.d.nt	r2,0x5,28	;0x32c19c
+  32c184:	70ad                	mov_s	r13,0
+  32c186:	0a4d 00d1           	brne.nt	r2,0x3,76	;0x32c1d0
+  32c18a:	1398 0081           	ldb	r1,[r3,152]
+  32c18e:	e922                	breq_s	r1,0,68	;0x32c1d0
+  32c190:	0e56 fcaf           	bl.d	-27052	;0x3257e4
+  32c194:	1395 0081           	ldb	r1,[r3,149]
+  32c198:	4508                	mov_s	r13,r0
+  32c19a:	f01c                	b_s	56	;0x32c1d0
+  32c19c:	80c9                	ld_s	r14,[r0,0x24]
+  32c19e:	47cb 0080 19fc      	mov_s	r15,0x8019fc
+  32c1a4:	096a 00e0           	bl.d	6504	;0x32db0c
+  32c1a8:	40e1                	mov_s	r0,r15
+  32c1aa:	8f04                	ldb_s	r0,[r15,0x4]
+  32c1ac:	0825 0891           	brne.nt	r0,0x22,36	;0x32c1d0
+  32c1b0:	8f00                	ldb_s	r0,[r15,0]
+  32c1b2:	0821 0151           	brne.nt	r0,0x5,32	;0x32c1d0
+  32c1b6:	1600 7000 0080 2954 	ld	r0,[0x802954]
+  32c1be:	e80a                	breq_s	r0,0,20	;0x32c1d0
+  32c1c0:	2695 1cc8           	add2	r14,r14,563
+  32c1c4:	1e00 1003           	stb	0,[r14]
+  32c1c8:	09ce ec2f           	bl.d	-163380	;0x304394
+  32c1cc:	1e08 1043           	stb	1,[r14,8]
+  32c1d0:	40a1                	mov_s	r0,r13
+  32c1d2:	c6c6                	leave_s	[r13-r15,blink,pcl]

@@ -1,0 +1,31 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004d43b4 <.data+0x9c3b4>:
+  4d43b4:	f3bf 8f5f 	dmb	sy
+  4d43b8:	f050 0001 	orrs.w	r0, r0, #1
+  4d43bc:	4991      	ldr	r1, [pc, #580]	@ (0x4d4604)
+  4d43be:	6008      	str	r0, [r1, #0]
+  4d43c0:	4891      	ldr	r0, [pc, #580]	@ (0x4d4608)
+  4d43c2:	6801      	ldr	r1, [r0, #0]
+  4d43c4:	f451 3180 	orrs.w	r1, r1, #65536	@ 0x10000
+  4d43c8:	6001      	str	r1, [r0, #0]
+  4d43ca:	f3bf 8f4f 	dsb	sy
+  4d43ce:	f3bf 8f6f 	isb	sy
+  4d43d2:	4770      	bx	lr
+  4d43d4:	f3bf 8f5f 	dmb	sy
+  4d43d8:	488b      	ldr	r0, [pc, #556]	@ (0x4d4608)
+  4d43da:	6801      	ldr	r1, [r0, #0]
+  4d43dc:	f431 3180 	bics.w	r1, r1, #65536	@ 0x10000
+  4d43e0:	6001      	str	r1, [r0, #0]
+  4d43e2:	4888      	ldr	r0, [pc, #544]	@ (0x4d4604)
+  4d43e4:	6801      	ldr	r1, [r0, #0]
+  4d43e6:	0849      	lsrs	r1, r1, #1
+  4d43e8:	0049      	lsls	r1, r1, #1
+  4d43ea:	6001      	str	r1, [r0, #0]
+  4d43ec:	f3bf 8f4f 	dsb	sy
+  4d43f0:	f3bf 8f6f 	isb	sy
+  4d43f4:	4770      	bx	lr

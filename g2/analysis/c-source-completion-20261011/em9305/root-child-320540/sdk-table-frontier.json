@@ -1,0 +1,49 @@
+{
+  "status": "PASS_SDK_SCAN_TABLE_PATTERN_AND_TRANSITION",
+  "action_slots": [
+    "0x0",
+    "0x31a870",
+    "0x31a918",
+    "0x0",
+    "0x31a93c",
+    "0x31a980",
+    "0x31a93c",
+    "0x0",
+    "0x0",
+    "0x31a900",
+    "0x31a8d4",
+    "0x31a920",
+    "0x0",
+    "0x31a85c",
+    "0x31a85c",
+    "0x31a920"
+  ],
+  "pending_action_targets": [
+    "31a85c",
+    "31a870",
+    "31a8d4",
+    "31a900",
+    "31a918",
+    "31a920",
+    "31a93c",
+    "31a980"
+  ],
+  "provisional_sdk_symbol_mapping": {
+    "lctrExtScanActDiscover": "0x31a870",
+    "lctrExtScanActScanCnf": "0x31a918",
+    "lctrExtScanActShutdown": "0x31a93c",
+    "lctrExtScanActUpdateDiscover": "0x31a980",
+    "lctrExtScanActHostEnable": "0x31a900",
+    "lctrExtScanActHostDisable": "0x31a8d4",
+    "lctrExtScanActScanTerm": "0x31a920",
+    "lctrExtScanActDisallowScan": "0x31a85c"
+  },
+  "action_extent": 64,
+  "transition_extent": 16,
+  "archive_sha256": "9dd1b320399e5263185d1d0cb95a44b2d3957b0c2120cf4e5ea706455e5bc909",
+  "sdk_member_sha256": "de971ceef0ce4d75dc01edc8e597dcc3e0e495367de30e22bbe63ba281b8d7fd",
+  "limits": [
+    "Table layout and repeated action pattern verified; symbol identity is provisional.",
+    "Eight action bodies, source-owned tables, state/event bounds and runtime ownership remain."
+  ]
+}

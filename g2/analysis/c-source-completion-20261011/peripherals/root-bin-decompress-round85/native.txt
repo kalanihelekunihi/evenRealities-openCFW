@@ -1,0 +1,106 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004c8d8c <.data+0x90d8c>:
+  4c8d8c:	b5fe      	push	{r1, r2, r3, r4, r5, r6, r7, lr}
+  4c8d8e:	0004      	movs	r4, r0
+  4c8d90:	000d      	movs	r5, r1
+  4c8d92:	0020      	movs	r0, r4
+  4c8d94:	f7ff fa05 	bl	0x4c81a2
+  4c8d98:	2800      	cmp	r0, #0
+  4c8d9a:	d101      	bne.n	0x4c8da0
+  4c8d9c:	2000      	movs	r0, #0
+  4c8d9e:	e06a      	b.n	0x4c8e76
+  4c8da0:	68ae      	ldr	r6, [r5, #8]
+  4c8da2:	686f      	ldr	r7, [r5, #4]
+  4c8da4:	6aa0      	ldr	r0, [r4, #40]	@ 0x28
+  4c8da6:	b280      	uxth	r0, r0
+  4c8da8:	9000      	str	r0, [sp, #0]
+  4c8daa:	6a23      	ldr	r3, [r4, #32]
+  4c8dac:	0a1b      	lsrs	r3, r3, #8
+  4c8dae:	b2db      	uxtb	r3, r3
+  4c8db0:	6a62      	ldr	r2, [r4, #36]	@ 0x24
+  4c8db2:	0c12      	lsrs	r2, r2, #16
+  4c8db4:	6a61      	ldr	r1, [r4, #36]	@ 0x24
+  4c8db6:	b289      	uxth	r1, r1
+  4c8db8:	4849      	ldr	r0, [pc, #292]	@ (0x4c8ee0)
+  4c8dba:	f7c2 f929 	bl	0x48b010
+  4c8dbe:	0004      	movs	r4, r0
+  4c8dc0:	2c00      	cmp	r4, #0
+  4c8dc2:	d10c      	bne.n	0x4c8dde
+  4c8dc4:	9602      	str	r6, [sp, #8]
+  4c8dc6:	9701      	str	r7, [sp, #4]
+  4c8dc8:	4846      	ldr	r0, [pc, #280]	@ (0x4c8ee4)
+  4c8dca:	9000      	str	r0, [sp, #0]
+  4c8dcc:	4b46      	ldr	r3, [pc, #280]	@ (0x4c8ee8)
+  4c8dce:	f240 425d 	movw	r2, #1117	@ 0x45d
+  4c8dd2:	4933      	ldr	r1, [pc, #204]	@ (0x4c8ea0)
+  4c8dd4:	2002      	movs	r0, #2
+  4c8dd6:	f784 fa41 	bl	0x44d25c
+  4c8dda:	2000      	movs	r0, #0
+  4c8ddc:	e04b      	b.n	0x4c8e76
+  4c8dde:	68e0      	ldr	r0, [r4, #12]
+  4c8de0:	42b0      	cmp	r0, r6
+  4c8de2:	d210      	bcs.n	0x4c8e06
+  4c8de4:	68e0      	ldr	r0, [r4, #12]
+  4c8de6:	9002      	str	r0, [sp, #8]
+  4c8de8:	9601      	str	r6, [sp, #4]
+  4c8dea:	4840      	ldr	r0, [pc, #256]	@ (0x4c8eec)
+  4c8dec:	9000      	str	r0, [sp, #0]
+  4c8dee:	4b3e      	ldr	r3, [pc, #248]	@ (0x4c8ee8)
+  4c8df0:	f240 4262 	movw	r2, #1122	@ 0x462
+  4c8df4:	492a      	ldr	r1, [pc, #168]	@ (0x4c8ea0)
+  4c8df6:	2003      	movs	r0, #3
+  4c8df8:	f784 fa30 	bl	0x44d25c
+  4c8dfc:	0020      	movs	r0, r4
+  4c8dfe:	f7c2 fa0a 	bl	0x48b216
+  4c8e02:	2000      	movs	r0, #0
+  4c8e04:	e037      	b.n	0x4c8e76
+  4c8e06:	6920      	ldr	r0, [r4, #16]
+  4c8e08:	7828      	ldrb	r0, [r5, #0]
+  4c8e0a:	f010 000f 	ands.w	r0, r0, #15
+  4c8e0e:	2801      	cmp	r0, #1
+  4c8e10:	d10d      	bne.n	0x4c8e2e
+  4c8e12:	4837      	ldr	r0, [pc, #220]	@ (0x4c8ef0)
+  4c8e14:	9000      	str	r0, [sp, #0]
+  4c8e16:	4b34      	ldr	r3, [pc, #208]	@ (0x4c8ee8)
+  4c8e18:	f240 427b 	movw	r2, #1147	@ 0x47b
+  4c8e1c:	4920      	ldr	r1, [pc, #128]	@ (0x4c8ea0)
+  4c8e1e:	2002      	movs	r0, #2
+  4c8e20:	f784 fa1c 	bl	0x44d25c
+  4c8e24:	0020      	movs	r0, r4
+  4c8e26:	f7c2 f9f6 	bl	0x48b216
+  4c8e2a:	2000      	movs	r0, #0
+  4c8e2c:	e023      	b.n	0x4c8e76
+  4c8e2e:	7828      	ldrb	r0, [r5, #0]
+  4c8e30:	f010 000f 	ands.w	r0, r0, #15
+  4c8e34:	2802      	cmp	r0, #2
+  4c8e36:	d10d      	bne.n	0x4c8e54
+  4c8e38:	482e      	ldr	r0, [pc, #184]	@ (0x4c8ef4)
+  4c8e3a:	9000      	str	r0, [sp, #0]
+  4c8e3c:	4b2a      	ldr	r3, [pc, #168]	@ (0x4c8ee8)
+  4c8e3e:	f240 428c 	movw	r2, #1164	@ 0x48c
+  4c8e42:	4917      	ldr	r1, [pc, #92]	@ (0x4c8ea0)
+  4c8e44:	2002      	movs	r0, #2
+  4c8e46:	f784 fa09 	bl	0x44d25c
+  4c8e4a:	0020      	movs	r0, r4
+  4c8e4c:	f7c2 f9e3 	bl	0x48b216
+  4c8e50:	2000      	movs	r0, #0
+  4c8e52:	e010      	b.n	0x4c8e76
+  4c8e54:	7828      	ldrb	r0, [r5, #0]
+  4c8e56:	f010 000f 	ands.w	r0, r0, #15
+  4c8e5a:	9001      	str	r0, [sp, #4]
+  4c8e5c:	4826      	ldr	r0, [pc, #152]	@ (0x4c8ef8)
+  4c8e5e:	9000      	str	r0, [sp, #0]
+  4c8e60:	4b21      	ldr	r3, [pc, #132]	@ (0x4c8ee8)
+  4c8e62:	f240 4293 	movw	r2, #1171	@ 0x493
+  4c8e66:	490e      	ldr	r1, [pc, #56]	@ (0x4c8ea0)
+  4c8e68:	2002      	movs	r0, #2
+  4c8e6a:	f784 f9f7 	bl	0x44d25c
+  4c8e6e:	0020      	movs	r0, r4
+  4c8e70:	f7c2 f9d1 	bl	0x48b216
+  4c8e74:	2000      	movs	r0, #0
+  4c8e76:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}

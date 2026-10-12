@@ -1,0 +1,48 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00317214 <.data+0x14e14>:
+  317214:	c2ea                	enter_s	[r13-r17,blink]
+  317216:	4110                	mov_s	r17,r0
+  317218:	217c 0100           	setlo	r0,r1,0x4
+  31721c:	2149 00cf           	min	r15,r1,0x3
+  317220:	4f15                	sub_s	r13,r15,r0
+  317222:	7522                	add_s	r13,r13,r17
+  317224:	2580 1305           	add	r13,r13,332
+  317228:	1500 10c0           	ldb.x	r0,[r13]
+  31722c:	4050                	mov_s	r16,r2
+  31722e:	e0ff                	cmp_s	r0,0x7f
+  317230:	f20b                	beq_s	22	;0x317246
+  317232:	e0fe                	cmp_s	r0,0x7e
+  317234:	f40b                	bne_s	22	;0x31724a
+  317236:	40c3 0080 5cac      	mov_s	r0,0x805cac
+  31723c:	8000                	ld_s	r0,[r0,0]
+  31723e:	1028 0081           	ldb	r1,[r0,40]
+  317242:	4628                	mov_s	r14,r1
+  317244:	f008                	b_s	16	;0x317254
+  317246:	702c                	mov_s	r1,0
+  317248:	f01a                	b_s	52	;0x31727c
+  31724a:	0fea fc6f           	bl.d	-28696	;0x310230
+  31724e:	702c                	mov_s	r1,0
+  317250:	8d20                	ldb_s	r1,[r13,0]
+  317252:	4608                	mov_s	r14,r0
+  317254:	7102                	add_s	r1,r1,r16
+  317256:	0811 2072           	brlt.d.nt	r16,0x1,16	;0x317264
+  31725a:	792d                	sexb_s	r1,r1
+  31725c:	78cd                	sexb_s	r0,r14
+  31725e:	7110                	cmp_s	r1,r0
+  317260:	d87f                	mov_s	r0,0x7f
+  317262:	f683                	blt_s	6	;0x317266
+  317264:	4020                	mov_s	r0,r1
+  317266:	0f9e fc6f           	bl.d	-28772	;0x310200
+  31726a:	4102                	mov_s	r1,r16
+  31726c:	ad00                	stb_s	r0,[r13,0]
+  31726e:	114c 2081           	ldb	r1,[r17,76]
+  317272:	0f0b 1041           	brne.nt	r15,r1,10	;0x31727a
+  317276:	1942 2002           	stb	r0,[r17,66]
+  31727a:	48d1                	sub_s	r1,r0,r14
+  31727c:	782d                	sexb_s	r0,r1
+  31727e:	c6ca                	leave_s	[r13-r17,blink,pcl]

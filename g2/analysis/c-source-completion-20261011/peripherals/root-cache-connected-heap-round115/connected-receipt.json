@@ -1,0 +1,25 @@
+{
+  "status": "PASS_COMPILED_ARM_CONNECTED_RB_ACTUAL_HEAP_WRAPPERS",
+  "cases": 4800,
+  "by_operation": {
+    "insert": 2400,
+    "remove": 2400
+  },
+  "random_seeds": 100,
+  "nodes_per_seed": 24,
+  "native_executed_instruction_addresses": 419,
+  "source_sha256": {
+    "components/audio/uart_thread_source_candidate/display_font_rb_insert.c": "4d7fbfbec06fe3594bf04ca81183ed58ec601843841c6ec70811205f1aa06c1d",
+    "components/audio/uart_thread_source_candidate/display_font_rb_core.c": "244f344deac641a0562cb8577cbebb89d683712acb462bcee25319361c2e0ad1",
+    "components/audio/uart_thread_source_candidate/display_font_rb_balance.c": "599efad39b404dcc4e03413666d5ec45d0f262da59304457216cec49293df04c",
+    "components/audio/uart_thread_source_candidate/display_font_rb_remove.c": "52e21bd89d6473025c58778bfc46931e6ad074f3ef420a52d6d135087592df60",
+    "components/audio/uart_thread_source_candidate/display_font_alloc.c": "e9f6d938154205cbc16c534bc3ac16a3dd04d31e697db4494509ffe1e93e4a6d",
+    "components/audio/file_pool_free_candidate/tlsf_leaf.c": "a4e9be3677b91c708428208a4a67d257ab261f2c9aa7bc18c12a06a8e6277983",
+    "components/audio/file_pool_free_candidate/tlsf_absorb_leaves.c": "a37060a2458b7db3a6f7f0444fd90ddd09dc405bb52c3f57f858df55b9475bf0"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual RB chain and selected heap alloc/free/pool/size-query/pointer-to-block/block-size wrappers execute. TLSF allocation/free,semaphores,canonical memset and comparator are controlled cuts.",
+    "Valid constructed trees only; malformed/null/fatal and standalone helper cases remain unqualified. No full image or hardware claim."
+  ]
+}

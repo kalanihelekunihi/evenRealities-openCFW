@@ -1,0 +1,58 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00318f2c <.data+0x16b2c>:
+  318f2c:	c3e6                	enter_s	[r13-r15,fp,blink]
+  318f2e:	47cb 0080 5cac      	mov_s	r15,0x805cac
+  318f34:	8700                	ld_s	r0,[r15,0]
+  318f36:	1cfc b009           	st.aw	0,[sp,-4]
+  318f3a:	081e fdaf           	bl.d	-20452	;0x313f54
+  318f3e:	1022 008e           	ldb	r14,[r0,34]
+  318f42:	45cb 0080 5c70      	mov_s	r13,0x805c70
+  318f48:	1500 1002           	ld	r2,[r13]
+  318f4c:	240a 7380           	mov	lp_count,r14
+  318f50:	20a8 04c0           	lp	38	;0x318f76
+  318f54:	6e89                	sub_s	r12,r14,0x1
+  318f56:	4081                	mov_s	r0,r12
+  318f58:	309c 040e           	mpywhl	r0,r0,912
+  318f5c:	6058                	add_s	r0,r0,r2
+  318f5e:	8820                	ldb_s	r1,[r0,0]
+  318f60:	e90a                	breq_s	r1,0,20	;0x318f74
+  318f62:	2056 0bc0           	add3	r0,r0,0x2f
+  318f66:	8820                	ldb_s	r1,[r0,0]
+  318f68:	c380                	add_s	r3,sp,0
+  318f6a:	667e                	add_s	r14,r14,r3
+  318f6c:	1800 0003           	stb	0,[r0]
+  318f70:	1eff 9042           	stb	r1,[r14,-1]
+  318f74:	4689                	mov_s	r14,r12
+  318f76:	0ffa fd4f           	bl	-20488	;0x313f6c
+  318f7a:	8700                	ld_s	r0,[r15,0]
+  318f7c:	1022 008e           	ldb	r14,[r0,34]
+  318f80:	c080                	add_s	r0,sp,0
+  318f82:	7704                	add_s	r0,r0,-1
+  318f84:	60c9                	ldb_s	r1,[r0,r14]
+  318f86:	77c5                	add_s	r14,r14,-1
+  318f88:	e908                	breq_s	r1,0,16	;0x318f98
+  318f8a:	40c3 0080 5b10      	mov_s	r0,0x805b10
+  318f90:	8040                	ld_s	r2,[r0,0]
+  318f92:	ea04                	breq_s	r2,0,8	;0x318f98
+  318f94:	7a60                	jl_s.d	[r2]
+  318f96:	78d0                	exth_s	r0,r14
+  318f98:	47c9                	mov_s	r15,r14
+  318f9a:	8520                	ld_s	r1,[r13,0]
+  318f9c:	379c 140e           	mpywhl	r15,r15,912
+  318fa0:	208a 0506           	mov	r0,404
+  318fa4:	673f                	add_s	r15,r15,r1
+  318fa6:	6708                	ldb_s	r0,[r15,r0]
+  318fa8:	e80a                	breq_s	r0,0,20	;0x318fbc
+  318faa:	09ae fdaf           	bl.d	-20052	;0x314154
+  318fae:	2756 1b40           	add3	r0,r15,0x2d
+  318fb2:	e806                	breq_s	r0,0,12	;0x318fbc
+  318fb4:	d93e                	mov_s	r1,0x3e
+  318fb6:	0c56 0660           	bl.d	52308	;0x325c08
+  318fba:	40e1                	mov_s	r0,r15
+  318fbc:	eee2                	brne_s	r14,0,-60	;0x318f80
+  318fbe:	c7c6                	leave_s	[r13-r15,fp,blink,pcl]

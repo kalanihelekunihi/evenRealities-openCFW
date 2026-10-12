@@ -14,25 +14,24 @@ static const char assertion[]="Asserted at expression: %s (%s)";
 static const char reason[]="NULL pointer";
 static void fail(uint32_t line,const char *function,const char *expression) {
     audio_uart_lvgl_log(3u,source,line,function,assertion,expression,reason);
-    for(;;) { /* authenticated native assertion loop */ }
+    for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
 }
 typedef void *(*lookup_fn)(void *,const void *,uint32_t);
 typedef void (*remove_fn)(void *,void *,uint32_t);
 typedef void (*data_fn)(void *,uint32_t);
 static uint32_t *vtable(void *cache) { return *(uint32_t **)(void *)cache; }
-static void remove_core(void *cache,const void *key,uint32_t context) {
+void audio_uart_lv_cache_drop_internal_4d511c(void *cache,const void *key,uint32_t context) {
     uint32_t *vt=vtable(cache);
     void *entry=((lookup_fn)(uintptr_t)vt[3])(cache,key,context);
     if(entry==0) return;
-    remove_fn remove=(remove_fn)(uintptr_t)vt[5];
     if(audio_uart_font_cache_has_owner(entry)==0u) {
-        remove(cache,entry,context);
+        ((remove_fn)(uintptr_t)vtable(cache)[5])(cache,entry,context);
         void *data=audio_uart_font_cache_info(entry);
         ((data_fn)(uintptr_t)*(uint32_t *)(void *)((uint8_t *)cache+0x18u))(data,context);
         audio_uart_font_cache_entry_delete(entry);
     } else {
         audio_uart_font_cache_set_invalid(entry,1u);
-        remove(cache,entry,context);
+        ((remove_fn)(uintptr_t)vtable(cache)[5])(cache,entry,context);
     }
 }
 void audio_uart_font_cache_remove(void *cache,void *entry,uint32_t context) {
@@ -53,6 +52,6 @@ void audio_uart_font_cache_drop(void *cache,void *key,uint32_t context) {
     if(key==0) fail(0xd4u,"lv_cache_drop","key != NULL");
     uint8_t *base=(uint8_t *)cache;
     (void)audio_uart_lv_lock_core(base+0x1cu);
-    remove_core(cache,key,context);
+    audio_uart_lv_cache_drop_internal_4d511c(cache,key,context);
     (void)audio_uart_lv_unlock_core(base+0x1cu);
 }

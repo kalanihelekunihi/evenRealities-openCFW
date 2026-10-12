@@ -1,0 +1,73 @@
+{
+  "status": "FOUR_BODY_AND_BOUNDED_TABLE_LOCAL_COMPILE_PASS_PENDING_INTEGRATION",
+  "entries": [
+    {
+      "address": "31dfd0",
+      "source": "g2/analysis/c-source-completion-20261011/em9305/root-child-31dfd0/source-relocated.c",
+      "source_sha256": "4ad6cd44838b06b38e9220455ccc4a603dd3ad01656df795ec12adc020f57c3a",
+      "object_sha256": "2c3d46f4dddc6c1fae4adca32c04a43c6446e37e8e31f155cf4018c09d65eae3",
+      "instructions": 356,
+      "native_bytes": 1160,
+      "target_bytes": 1164,
+      "pointer_relocations": 1
+    },
+    {
+      "address": "32d64c",
+      "source": "g2/analysis/c-source-completion-20261011/em9305/root-child-32d64c/source.c",
+      "source_sha256": "95a0b276da0c9e26ee0c80977f06f9b8519e0d909c98a6e65d84a9e9001a2b9e",
+      "object_sha256": "30226d578d8c7d8cae2eca6ca7e27b84144c253add1b926d14afc58796c4b551",
+      "instructions": 27,
+      "native_bytes": 70,
+      "target_bytes": 70,
+      "pointer_relocations": 0
+    },
+    {
+      "address": "323d38",
+      "source": "g2/analysis/c-source-completion-20261011/em9305/root-child-323d38/source.c",
+      "source_sha256": "e547ab23f465188f64aae9fe6b2419aadd57eb9e98a0497e2be6a7c4cbe599c7",
+      "object_sha256": "cebab214f88994ccfad5beec2f65fe4b5c8c673918ba236d37267bbc5d7cbd81",
+      "instructions": 26,
+      "native_bytes": 54,
+      "target_bytes": 54,
+      "pointer_relocations": 0
+    },
+    {
+      "address": "322630",
+      "source": "g2/analysis/c-source-completion-20261011/em9305/root-child-322630/source-relocated.c",
+      "source_sha256": "1e19a4fde1cba6d4a1960a6a9df3a705217b0bafbd35e1e93aac9bc8b2e5e610",
+      "object_sha256": "9b1580ca53ca6b5c66feb0a3b421c2127170b522f5993a02d5616d4cb23b3c23",
+      "instructions": 94,
+      "native_bytes": 290,
+      "target_bytes": 300,
+      "pointer_relocations": 2
+    }
+  ],
+  "total_instructions": 503,
+  "native_bytes": 1574,
+  "target_bytes": 1588,
+  "pending_direct_targets": [],
+  "pending_embedded_pointer_targets": [],
+  "table_receipt": "g2/analysis/c-source-completion-20261011/em9305/root-child-322630/table-receipt.json",
+  "selected": false,
+  "remaining_estimate": {
+    "direct_bodies": 0,
+    "pointer_bindings": 0,
+    "integration_units": 5,
+    "coherent_builds": 1,
+    "other_gates": [
+      "Indirect callbacks and table bounds",
+      "Lifecycle, placement and hardware"
+    ]
+  },
+  "limits": [
+    "Named ARC assembly in C units is not a portable C rewrite.",
+    "No full image or hardware validation claim."
+  ],
+  "portable_alternative_323d38": {
+    "source": "g2/analysis/c-source-completion-20261011/em9305/root-child-323d38/portable.c",
+    "receipt": "g2/analysis/c-source-completion-20261011/em9305/root-child-323d38/portable-receipt.json",
+    "source_sha256": "79935271c9843503bae003df5060796510664f2fdcfbb7ba6190c90934697e63",
+    "object_sha256": "c000b873b2c3517f1a0a03bb0dc1e77c9383a682389fd5fbc1ceb16b40ced8ac",
+    "implementation_class": "portable C"
+  }
+}

@@ -1,0 +1,62 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+003230e0 <.data+0x20ce0>:
+  3230e0:	c3e6                	enter_s	[r13-r15,fp,blink]
+  3230e2:	c1a9                	sub_s	sp,sp,0x24
+  3230e4:	4628                	mov_s	r14,r1
+  3230e6:	4508                	mov_s	r13,r0
+  3230e8:	c081                	add_s	r0,sp,0x4
+  3230ea:	702c                	mov_s	r1,0
+  3230ec:	0f32 07e0           	bl.d	65328	;0x33301c
+  3230f0:	da20                	mov_s	r2,0x20
+  3230f2:	8d02                	ldb_s	r0,[r13,0x2]
+  3230f4:	d929                	mov_s	r1,0x29
+  3230f6:	c661                	stb_s	r14,[sp,0x4]
+  3230f8:	1c03 3382           	stb	r14,[sp,3]
+  3230fc:	1c02 3042           	stb	r1,[sp,2]
+  323100:	1c05 3002           	stb	r0,[sp,5]
+  323104:	1c00 3004           	sth	r0,[sp]
+  323108:	eeb6                	brne_s	r14,0,108	;0x323174
+  32310a:	8d78                	ldb_s	r3,[r13,0x18]
+  32310c:	8d5a                	ldb_s	r2,[r13,0x1a]
+  32310e:	9502                	ldh_s	r0,[r13,0x4]
+  323110:	1510 100b           	ld	r11,[r13,16]
+  323114:	218a 1904           	mov	r9,292
+  323118:	8d3b                	ldb_s	r1,[r13,0x1b]
+  32311a:	1c12 30c2           	stb	r3,[sp,18]
+  32311e:	1c13 3082           	stb	r2,[sp,19]
+  323122:	1c16 3004           	sth	r0,[sp,22]
+  323126:	2b19 1f82 001a 36e3 	mpydu	r2,r11,0x1a36e3
+  32312e:	2532 1240           	ldb	r0,[r13,r9]
+  323132:	1534 1088           	ldb	r8,[r13,52]
+  323136:	85ea                	ld_s	r15,[r13,0x28]
+  323138:	85cb                	ld_s	r14,[r13,0x2c]
+  32313a:	8d99                	ldb_s	r12,[r13,0x19]
+  32313c:	c165                	stb_s	r1,[sp,0x14]
+  32313e:	c064                	stb_s	r0,[sp,0x10]
+  323140:	797b                	asl_s	r1,r3
+  323142:	2a41 07c0           	lsr	r0,r2,0x1f
+  323146:	2042 903c           	sub.f	lp_count,r8,0
+  32314a:	7825                	or_s	r0,r0,r1
+  32314c:	c742                	st_s	r15,[sp,0x8]
+  32314e:	c643                	st_s	r14,[sp,0xc]
+  323150:	1c11 3302           	stb	r12,[sp,17]
+  323154:	1c1a 3202           	stb	r8,[sp,26]
+  323158:	1c18 3004           	sth	r0,[sp,24]
+  32315c:	f20c                	beq_s	24	;0x323174
+  32315e:	702c                	mov_s	r1,0
+  323160:	20a8 0280           	lp	20	;0x323174
+  323164:	2515 1040           	add2	r0,r13,r1
+  323168:	800e                	ld_s	r0,[r0,0x38]
+  32316a:	c380                	add_s	r3,sp,0
+  32316c:	7b34                	add1_s	r3,r3,r1
+  32316e:	7124                	add_s	r1,r1,1
+  323170:	9041                	ldh_s	r2,[r0,0x2]
+  323172:	b34e                	sth_s	r2,[r3,0x1c]
+  323174:	0e2a f5af           	bl.d	-84440	;0x30e79c
+  323178:	c080                	add_s	r0,sp,0
+  32317a:	c7c6                	leave_s	[r13-r15,fp,blink,pcl]

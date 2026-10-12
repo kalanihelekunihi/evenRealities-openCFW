@@ -1,0 +1,24 @@
+{
+  "status": "pass",
+  "source_sha256": "91dfd3aac42b4bbfad68f40d0e71f722d991c28ba25f6f063664ae6b551040b9",
+  "native_sha256": "936fb48d1de37750d59e957af4a119421a887fc2a664ceda9980bb5e4c32d2a6",
+  "target_disassembly_sha256": "84bea497ea35cdc0b7b20212a746bc9e13f1dbdc3949d4e3031743677faed182",
+  "instruction_count": 77,
+  "native_body_bytes": 210,
+  "target_body_bytes": 220,
+  "baseline_ld_expansions": [
+    "0x322cd0",
+    "0x322cd2",
+    "0x322ce2",
+    "0x322cec",
+    "0x322d4a"
+  ],
+  "child_relocations": {
+    "0x322cca": "opencfw_em9305_sleep_sync_divide",
+    "0x322d20": "opencfw_em9305_memcpy",
+    "0x322d32": "opencfw_em9305_memcpy",
+    "0x322d40": "opencfw_em9305_radio_encrypt_seed_317334",
+    "0x322d5a": "opencfw_em9305_mode_callback_child_317ea4"
+  },
+  "scope": "All named ISA instructions, child targets and non-relocated bytes; five full baseline LDs expand by ten bytes."
+}

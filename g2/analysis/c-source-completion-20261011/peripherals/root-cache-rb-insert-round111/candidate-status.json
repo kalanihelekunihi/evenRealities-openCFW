@@ -1,0 +1,30 @@
+{
+  "status": "NATIVE_QUALIFIED_SELECTED_CURRENT_BUILD_AUDIT_PASS",
+  "source_sha256": "4d7fbfbec06fe3594bf04ca81183ed58ec601843841c6ec70811205f1aa06c1d",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_ranges": [
+    "5c34e4..5c3594",
+    "5c37a4..5c3860"
+  ],
+  "providers": [
+    "RB insert",
+    "RB create node",
+    "RB parent walk"
+  ],
+  "repairs": [
+    "Native fatal zero-stores",
+    "Fresh tree comparator on each parent-walk iteration",
+    "Keep temporary key pointer through final compare and insert balancing; restore allocated data only afterward",
+    "Explicit fresh red-color store before final comparison",
+    "Volatile allocator/tree/child-visible fields and expose existing helpers"
+  ],
+  "remaining_estimate": [
+    "Coherent build/audit1",
+    "RB removal/rotations/balance",
+    "Concrete heap/data/ABI and connected cache execution",
+    "All six image coverage/layout/byte equality/hardware gates"
+  ],
+  "native_cases": 499,
+  "build": "g2/build/c-firmware/20261012/peripherals-root-cache-rb-insert-round111",
+  "actual_balancing_native_cases": 799
+}

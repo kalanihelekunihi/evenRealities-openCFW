@@ -1,0 +1,231 @@
+{
+  "status": "PASS_STATIC_SOURCE_CONDITION_VS_NATIVE_STATE",
+  "cases": 16,
+  "stock_receipt": "boot-spot-installer-stock-matrix.json",
+  "selected_source_sha256": "9408c20f55c5fb10b4543590ea2f92bfd02381cb3015a3798efa1691a4cc5602",
+  "comparisons": [
+    {
+      "rev": 33,
+      "var": 0,
+      "slot_offsets": [
+        32,
+        36
+      ],
+      "flags": "000000000000"
+    },
+    {
+      "rev": 33,
+      "var": 1,
+      "slot_offsets": [
+        0,
+        4,
+        24,
+        28,
+        32,
+        36
+      ],
+      "flags": "000000000000"
+    },
+    {
+      "rev": 33,
+      "var": 2,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        24,
+        28,
+        48,
+        52,
+        56
+      ],
+      "flags": "000100000000"
+    },
+    {
+      "rev": 33,
+      "var": 3,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        24,
+        28,
+        48,
+        52,
+        56
+      ],
+      "flags": "000101000000"
+    },
+    {
+      "rev": 34,
+      "var": 0,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        24,
+        28,
+        48,
+        52,
+        56
+      ],
+      "flags": "000100000000"
+    },
+    {
+      "rev": 34,
+      "var": 1,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        24,
+        28,
+        48,
+        52,
+        56
+      ],
+      "flags": "000000010000"
+    },
+    {
+      "rev": 34,
+      "var": 2,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        20,
+        24,
+        28,
+        44
+      ],
+      "flags": "010000000001"
+    },
+    {
+      "rev": 34,
+      "var": 3,
+      "slot_offsets": [],
+      "flags": "000000000000"
+    },
+    {
+      "rev": 35,
+      "var": 0,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        24,
+        28,
+        48,
+        52,
+        56
+      ],
+      "flags": "000000010000"
+    },
+    {
+      "rev": 35,
+      "var": 1,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        20,
+        24,
+        28,
+        44
+      ],
+      "flags": "010000000001"
+    },
+    {
+      "rev": 35,
+      "var": 2,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        28,
+        40,
+        44
+      ],
+      "flags": "000000000100"
+    },
+    {
+      "rev": 35,
+      "var": 3,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        28,
+        40,
+        44
+      ],
+      "flags": "000000000100"
+    },
+    {
+      "rev": 36,
+      "var": 0,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        28,
+        40,
+        44
+      ],
+      "flags": "000000000100"
+    },
+    {
+      "rev": 36,
+      "var": 1,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        28,
+        40,
+        44
+      ],
+      "flags": "000000000100"
+    },
+    {
+      "rev": 36,
+      "var": 2,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        28,
+        40,
+        44
+      ],
+      "flags": "000000000100"
+    },
+    {
+      "rev": 36,
+      "var": 3,
+      "slot_offsets": [
+        0,
+        4,
+        8,
+        28,
+        40,
+        44
+      ],
+      "flags": "000000000100"
+    }
+  ],
+  "limits": [
+    "Selected side is condition-and-slot source model checked against selected C text markers; no selected M55 runtime execution.",
+    "Slot target identity and pointer relocation, MMIO read/write ordering, callback execution and external roots remain unqualified."
+  ]
+}

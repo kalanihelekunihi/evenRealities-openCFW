@@ -1,0 +1,16 @@
+{
+  "status": "PASS_INDEPENDENT_QEMU_THUMB_NATIVE_MEMMOVE",
+  "cases": 3888,
+  "source_sha256": "6820aca54527c853f1e14a885aa69bde78510daece86bf049003b9813d7a9a91",
+  "canonical_forward_source_sha256": "fa0e2490d54deca2bf8baf83808b9350e49df609f4d46d4aaf395ff70338ae5b",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_ranges": [
+    "439710..4397a6",
+    "45475a..454768"
+  ],
+  "qemu_version": "QEMU emulator version 11.1.2",
+  "limits": [
+    "Actual full native and source wrappers execute; no child cuts or CPU-state correction. Final1024bytes and exact return checked.",
+    "VersatilePB Cortex-A9 Thumb execution resolves Unicorn IT-loop observation; not G2 hardware/placement/byte equality or bus timing proof. Native executable bytes are temporary test oracle only."
+  ]
+}

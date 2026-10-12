@@ -1,0 +1,23 @@
+
+g2/analysis/c-source-completion-20261011/em9305/root-child-323d38/portable.o:     file format elf32-littlearc
+
+
+Disassembly of section .text:
+
+00000000 <opencfw_em9305_child_323d38>:
+   0:	c5e1                	push_s	r13
+   2:	1800 0003           	stb	0,[r0]
+   6:	8940                	ldb_s	r2,[r1,0]
+   8:	6962                	add_s	r3,r1,0x2
+   a:	a841                	stb_s	r2,[r0,0x1]
+   c:	7822                	sub_s	r0,r0,r1
+   e:	da0a                	mov_s	r2,0xa
+  10:	240a 7080           	mov	lp_count,r2
+  14:	20a8 0180           	lp	12	;20 <opencfw_em9305_child_323d38+0x20>
+  18:	607c                	add_s	r12,r0,r3
+  1a:	1301 048d           	ldb.ab	r13,[r3,1]
+  1e:	aca0                	stb_s	r13,[r12,0]
+  20:	d80c                	mov_s	r0,0xc
+  22:	7fe0                	j_s.d	[blink]
+  24:	c5c1                	pop_s	r13
+  26:	78e0                	nop_s

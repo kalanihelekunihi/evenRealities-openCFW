@@ -2886,6 +2886,18 @@
       "source": "g2/components/bootloader/initializer_callbacks/clock_pll_rounding.c",
       "symbol": "opencfw_boot_pll_ceil",
       "basis": "Native hard-float wrapper moves S0 raw word to R0, invokes ceil_bits 0x427de0, moves resulting R0 to S0 and returns via IP. Selected pcs(aapcs-vfp) ceil uses source-owned same raw-bit algorithm; prior 810-case native/source oracle covers private floor/round/ceil bit results. Hard-float wrapper call/return timing and FPSCR behavior remain separate."
+    },
+    {
+      "entry": "0x00426c24",
+      "source": "g2/components/bootloader/initializer_callbacks/clock_generators.c",
+      "symbol": "opencfw_boot_startup_hf2_generate",
+      "basis": "Native instruction order is VMOV/VCVT target, shift 1 by R2, UDIV reference by shift, VMOV/VCVT quotient, VDIV, fixed-point VCVT #15, VSTR to output pointer, MOVS R0=0. Selected inline ASM was corrected to this exact instruction and store/return order; target object disassembly in hf2-store-order-round confirms it. Native M-profile FP exception/FPSCR and division-by-zero hardware behavior remain unqualified."
+    },
+    {
+      "entry": "0x0043293c",
+      "source": "g2/components/bootloader/startup/reset.S",
+      "symbol": "opencfw_boot_stack_entry",
+      "basis": "Native Thumb 0x43293c loads 0xfef5eda5, copies to R1, pushes R0/R1, writes PSP=SP, executes NOP.W, calls FPU init then system entry. Selected named reset.S stack entry preserves these instructions/call order; no return under selected terminal system entry. Cortex-M55 stack/hardware execution remains unqualified."
     }
   ]
 }

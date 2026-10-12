@@ -12,7 +12,7 @@ static const char inc_function[]="lv_cache_entry_inc_ref";
 uint32_t audio_uart_font_cache_has_owner(void *entry) {
     if(entry==0) {
         audio_uart_lvgl_log(3u,source,0x4au,ref_function,assertion,expression,reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     return *(uint32_t *)(void *)((uint8_t *)entry+4u);
 }
@@ -20,16 +20,16 @@ uint32_t audio_uart_font_cache_has_owner(void *entry) {
 void *audio_uart_font_cache_info(void *entry) {
     if(entry==0) {
         audio_uart_lvgl_log(3u,source,0x67u,data_function,assertion,expression,reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     uint32_t offset=*(uint32_t *)(void *)((uint8_t *)entry+8u);
-    return (uint8_t *)entry-offset;
+    return (void *)((uintptr_t)entry-offset);
 }
 
 void audio_uart_font_cache_retain(void *entry) { /* native 0x4d5278 */
     if(entry==0) {
         audio_uart_lvgl_log(3u,source,0x3au,inc_function,assertion,expression,reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     ++*(uint32_t *)(void *)((uint8_t *)entry+4u);
 }
@@ -38,7 +38,7 @@ void *audio_uart_font_cache_acquire_data(void *entry) { /* native 0x4d53c6 */
     if(entry==0) {
         audio_uart_lvgl_log(3u,source,0x6du,"lv_cache_entry_acquire_data",
                             assertion,expression,reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     audio_uart_font_cache_retain(entry);
     return audio_uart_font_cache_info(entry);
@@ -48,7 +48,7 @@ uint32_t audio_uart_font_cache_is_invalid(void *entry) { /* native 0x4d536a */
     if(entry==0) {
         audio_uart_lvgl_log(3u,source,0x61u,"lv_cache_entry_is_invalid",
                             assertion,expression,reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     return ((uint8_t *)entry)[0x0cu];
 }
@@ -57,11 +57,11 @@ void audio_uart_font_cache_decrement(void *entry) { /* native 0x4d52b2 */
     if(entry==0) {
         audio_uart_lvgl_log(3u,source,0x40u,"lv_cache_entry_dec_ref",
                             assertion,expression,reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
-    int32_t *ref=(int32_t *)(void *)((uint8_t *)entry+4u);
-    --*ref;
-    if(*ref<0) {
+    volatile uint32_t *ref=(volatile uint32_t *)(void *)((uint8_t *)entry+4u);
+    *ref=*ref-1u;
+    if((*ref&0x80000000u)!=0u) {
         audio_uart_lvgl_log(2u,source,0x43u,"lv_cache_entry_dec_ref",
                             "ref_cnt(%u) < 0",(uint32_t)*ref);
         *ref=0;
@@ -72,12 +72,12 @@ void audio_uart_font_cache_release_data(void *entry) { /* native 0x4d5400 */
     if(entry==0) {
         audio_uart_lvgl_log(3u,source,0x77u,"lv_cache_entry_release_data",
                             assertion,expression,reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     uint32_t ref=audio_uart_font_cache_has_owner(entry);
     if(ref==0u)
         audio_uart_lvgl_log(3u,source,0x79u,"lv_cache_entry_release_data",
-                            "ref_cnt(%u) == 0",ref);
+                            "ref_cnt(%u) == 0",*(volatile uint32_t *)(void *)((uint8_t *)entry+4u));
     else audio_uart_font_cache_decrement(entry);
 }
 
@@ -85,7 +85,7 @@ void audio_uart_font_cache_set_invalid(void *entry,uint8_t invalid) { /* native 
     if(entry==0) {
         audio_uart_lvgl_log(3u,source,0x5bu,"lv_cache_entry_set_invalid",
                             assertion,expression,reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     ((uint8_t *)entry)[0x0cu]=invalid;
 }
@@ -95,7 +95,7 @@ void audio_uart_font_cache_entry_delete(void *entry) { /* native 0x4d54da */
     if(entry==0) {
         audio_uart_lvgl_log(3u,source,0xb1u,"lv_cache_entry_delete",
                             assertion,expression,reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     void *data=audio_uart_font_cache_info(entry);
     audio_uart_lv_heap_free(data);
@@ -105,9 +105,9 @@ void *audio_uart_font_cache_entry_at(void *data,uint32_t offset) { /* native 0x4
     if(data==0) {
         audio_uart_lvgl_log(3u,source,0x82u,"lv_cache_entry_get_entry",
                             assertion,"data != NULL",reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
-    return (uint8_t *)data+offset;
+    return (void *)((uintptr_t)data+offset);
 }
 
 void audio_uart_font_cache_entry_init(void *entry,void *data,uint32_t offset) { /* 0x4d547e */
@@ -115,11 +115,11 @@ void audio_uart_font_cache_entry_init(void *entry,void *data,uint32_t offset) { 
         audio_uart_lvgl_log(3u,source,entry==0?0xa6u:0xa7u,
             "lv_cache_entry_init",assertion,
             entry==0?expression:"cache != NULL",reason);
-        for(;;) { /* authenticated native assertion loop */ }
+        for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
     uint8_t *e=(uint8_t *)entry;
-    *(uint32_t *)(void *)e=(uint32_t)(uintptr_t)data;
-    *(uint32_t *)(void *)(e+4u)=0u;
-    *(uint32_t *)(void *)(e+8u)=offset;
-    e[0x0cu]=0u;
+    *(volatile uint32_t *)(void *)e=(uint32_t)(uintptr_t)data;
+    *(volatile uint32_t *)(void *)(e+8u)=offset;
+    *(volatile uint32_t *)(void *)(e+4u)=0u;
+    ((volatile uint8_t *)e)[0x0cu]=0u;
 }

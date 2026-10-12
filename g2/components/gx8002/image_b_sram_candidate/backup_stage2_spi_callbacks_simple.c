@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 extern uint32_t gx8002_image_b_clock_frequency_10003cf0(uint32_t);
-extern volatile uint32_t gx8002_image_b_spi_device_state_20017670[21];
+extern volatile uint32_t gx8002_image_b_spi_device_state_20017670[24];
 
 void gx8002_image_b_spi_callback_1000827c(uint32_t *master)
 {

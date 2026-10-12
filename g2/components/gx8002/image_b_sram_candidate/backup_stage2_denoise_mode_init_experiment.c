@@ -1,7 +1,7 @@
 /* Stock image-B 0x1000bc44..0x1000bd1a, denoise mode initializer.
  * CFG and exact product log strings come from the native image; pinned
  * NationalChip lvp/lvp_mode_denoise.c corroborates queue/GSC/IMCRA/audio
- * phases. The 0x2002d2bc mode state is a genuine BSS placement contract.
+ * phases. The mode prefix, queue and queue buffer have separate BSS objects.
  */
 #include <stdint.h>
 
@@ -18,6 +18,8 @@ extern void *gx8002_image_b_imcra_constructor_1000e784(int32_t, int32_t, void *)
 extern int32_t gx8002_image_b_audio_register_1000a418(uint32_t);
 extern int32_t gx8002_image_b_denoise_audio_callback_1000bd54(uint32_t, void *);
 extern volatile uint8_t gx8002_image_b_denoise_mode_state_2002d2bc[];
+extern volatile int32_t gx8002_image_b_denoise_ring_2002d2d8[5];
+extern volatile uint8_t gx8002_image_b_denoise_queue_buffer_2002d2f0[40];
 
 int32_t gx8002_image_b_mode5_init_1000bc44(uint32_t mode)
 {
@@ -27,8 +29,9 @@ int32_t gx8002_image_b_mode5_init_1000bc44(uint32_t mode)
         (void)gx8002_image_b_heap_log_10009934(
             "[LVP_MODE_DENOISE]Init denoise mode\n");
         gx8002_image_b_audio_frame_set_10009fa8(
-            (uint32_t *)(void *)(state + 28u),
-            (uint32_t)(uintptr_t)(state + 52u), 40, 4);
+            (uint32_t *)(void *)gx8002_image_b_denoise_ring_2002d2d8,
+            (uint32_t)(uintptr_t)gx8002_image_b_denoise_queue_buffer_2002d2f0,
+            40, 4);
         (void)gx8002_image_b_heap_start_10009f10();
         uint32_t type = *(volatile uint32_t *)(void *)(state + 0x10u);
         if (type == 0u) {

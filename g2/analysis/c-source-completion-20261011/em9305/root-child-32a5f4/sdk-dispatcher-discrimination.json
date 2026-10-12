@@ -1,0 +1,43 @@
+{
+  "candidates": [
+    {
+      "kind": "master",
+      "bytes": 50,
+      "unmasked_mismatches": [],
+      "unmasked_byte_count": 42,
+      "literal_bindings": {
+        "0x16": "335564",
+        "0x2a": "335628"
+      },
+      "ActionTbl": {
+        "bytes": 224,
+        "native_byte_equal": null
+      },
+      "NextStateTbl": {
+        "bytes": 56,
+        "native_byte_equal": false
+      }
+    },
+    {
+      "kind": "slave",
+      "bytes": 50,
+      "unmasked_mismatches": [],
+      "unmasked_byte_count": 42,
+      "literal_bindings": {
+        "0x16": "335564",
+        "0x2a": "335628"
+      },
+      "ActionTbl": {
+        "bytes": 196,
+        "native_byte_equal": null
+      },
+      "NextStateTbl": {
+        "bytes": 49,
+        "native_byte_equal": true
+      }
+    }
+  ],
+  "limits": [
+    "Callback relocation slot mapping still required; no table admission from instruction match alone."
+  ]
+}

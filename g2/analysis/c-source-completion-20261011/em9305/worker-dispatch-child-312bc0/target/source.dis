@@ -1,0 +1,47 @@
+
+/out/source.o:     file format elf32-littlearc
+
+
+Disassembly of section .text:
+
+00000000 <opencfw_em9305_dispatch_child_312bc0>:
+   0:	0817 00d0           	breq.nt	r0,0x3,22	;16 <L312bd6>
+
+00000004 <L312bc4>:
+   4:	081b 00b0           	breq.d.nt	r0,0x2,26	;1e <L312bde>
+
+00000008 <L312bc8>:
+   8:	7114                	cmp_s	r0,1
+
+0000000a <L312bca>:
+   a:	d896                	mov_s	r0,0x96
+
+0000000c <L312bcc>:
+   c:	7de0                	jne_s	[blink]
+
+0000000e <L312bce>:
+   e:	208a 0184           	mov	r0,262
+
+00000012 <L312bd2>:
+  12:	7fe0                	j_s.d	[blink]
+
+00000014 <L312bd4>:
+  14:	7836                	add3_s	r0,r0,r1
+
+00000016 <L312bd6>:
+  16:	6916                	asl_s	r0,r1,0x6
+
+00000018 <L312bd8>:
+  18:	7fe0                	j_s.d	[blink]
+
+0000001a <L312bda>:
+  1a:	2080 0991           	add	r0,r0,1126
+
+0000001e <L312bde>:
+  1e:	d8d2                	mov_s	r0,0xd2
+
+00000020 <L312be0>:
+  20:	7fe0                	j_s.d	[blink]
+
+00000022 <L312be2>:
+  22:	7835                	add2_s	r0,r0,r1

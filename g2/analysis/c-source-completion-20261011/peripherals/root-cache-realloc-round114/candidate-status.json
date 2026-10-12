@@ -1,0 +1,30 @@
+{
+  "status": "LOCAL_COMPONENTS_COMPLETE_NATIVE_QUALIFIED_SELECTED_CURRENT_BUILD_AUDIT_PASS",
+  "source_sha256": "e1d20cb140a43f49ed4305477b2a30c5012862cc5866cc0c7a2bb080e9c99cbc",
+  "repairs": [
+    "Canonical configurable allocation size",
+    "Current pool mutex reload on release",
+    "Store subtraction before querying new allocation size",
+    "Volatile current accounting and explicit native high-water store"
+  ],
+  "remaining": [
+    "Three realloc providers native qualification",
+    "Integration/build/audit",
+    "Connected cache with actual heap algorithms and six image gates"
+  ],
+  "native_cases": 6804,
+  "build": "g2/build/c-firmware/20261012/peripherals-root-cache-realloc-round114",
+  "audit": {
+    "definitions": 3028,
+    "imports": 752,
+    "snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes": 6,
+    "builder_hash_checked": true
+  },
+  "remaining_estimate": [
+    "Connected TLSF allocator/free/realloc algorithms and scheduler ABI",
+    "Connected generic cache/LRU/data execution",
+    "All six image coverage/layout/byte equality/hardware gates"
+  ]
+}

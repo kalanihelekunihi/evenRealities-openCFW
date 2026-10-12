@@ -1,0 +1,28 @@
+/* Native LV filesystem driver construct/register 0x4c7064/0x4c706e. */
+#include <stdint.h>
+#include <stddef.h>
+extern uint8_t audio_uart_display_lv_root[];
+extern void *memset(void *,int,size_t);
+extern void *audio_uart_lv_list_prepend_482b12(uint32_t *); /* selected */
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_fs.c";
+static const char function[]="lv_fs_drv_register";
+static const char format[]="Asserted at expression: %s (%s)";
+static const char expression[]="new_drv != NULL";
+static const char message[]="Out of memory";
+
+void audio_uart_lv_fs_driver_construct_4c7064(void *driver)
+{
+    (void)memset(driver,0,0x34u);
+}
+
+void audio_uart_lv_fs_driver_register_4c706e(void *driver)
+{
+    uint8_t *slot=audio_uart_lv_list_prepend_482b12(
+        (uint32_t *)(void *)(audio_uart_display_lv_root+0x180u));
+    if (slot==0) {
+        audio_uart_lvgl_log(3u,source,0x190u,function,format,expression,message);
+        for (;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+    }
+    *(void **)(void *)slot=driver;
+}

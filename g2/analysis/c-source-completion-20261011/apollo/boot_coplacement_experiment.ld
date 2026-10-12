@@ -16,8 +16,16 @@ SECTIONS {
   .boot_vectors : { KEEP(*(.boot_vectors)) } > FLASH
   .text : { *(.text*) *(.rodata*) *(.ARM.extab*) *(.ARM.exidx*) } > FLASH
   .data : { *(.data*) } > SRAM AT> FLASH
+  /* Native IOM pool starts at 0x2001455c inside the authenticated zero
+   * scatter extent. Ordinary low-SRAM placement collides with the 1371-byte
+   * initialized block at 0x20000000. */
+  .bss.boot_iom_context_pool 0x2001455c (NOLOAD) : {
+    KEEP(*(.bss.boot_iom_context_pool))
+  } > SRAM
   .bss (NOLOAD) : { *(.bss*) *(COMMON) } > SRAM
   /DISCARD/ : { *(.comment*) *(.note.GNU-stack*) }
 }
 ASSERT(ADDR(.boot_vectors) == 0x00410000, "Boot vector base moved")
 ASSERT(SIZEOF(.boot_vectors) == 1024, "Boot 256-word vector table changed size")
+ASSERT(ADDR(.bss.boot_iom_context_pool) == 0x2001455c, "IOM pool native address moved")
+ASSERT(SIZEOF(.bss.boot_iom_context_pool) == 0x4540, "IOM pool native size changed")

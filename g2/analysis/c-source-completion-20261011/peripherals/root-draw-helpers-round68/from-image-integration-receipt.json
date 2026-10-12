@@ -1,0 +1,25 @@
+{
+  "status": "FULL_C_NATIVE_COMPARISON_PASS_SELECTED_PENDING_BUILD",
+  "source": "g2/analysis/c-source-completion-20261011/peripherals/root-draw-helpers-round68/from_image_candidate.c",
+  "source_sha256": "58802fddeddf7877e9b6dea0f31de815e07ddbc6a6e2bb13d69dd10fa3a751e8",
+  "native_range": "48b762..48b7a6",
+  "child": "audio_uart_lv_draw_buf_init_48aef8",
+  "remaining_estimate": {
+    "wrapper_comparisons": 1,
+    "initializer_provider": 1,
+    "other_gates": [
+      "Format/cache/reshape/read providers",
+      "Full source/data/layout/byte equality",
+      "Hardware"
+    ]
+  },
+  "selected": true,
+  "comparison_cases": 288,
+  "build": {
+    "status": "BUILD_RUNNING",
+    "session_id": 95825,
+    "output": "g2/build/c-firmware/20261012/peripherals-root-from-image-round69",
+    "source_freeze": "Main selected sources and build.py frozen until terminal audit."
+  },
+  "integrated_source_sha256": "5a32d2d1dbe3c705fe0734532c9935d63a75d43f8fd472e3147d2622b2277e06"
+}

@@ -1,4 +1,4 @@
-/* Native LV theme initialization 0x4546dc, rooted at RAM0x2006f548. */
+/* Native LV flex/grid layout callback table initialization 0x4546dc. */
 #include <stdint.h>
 extern uint8_t audio_uart_display_lv_root[];
 extern void *audio_uart_lv_malloc(uint32_t); /* selected native0x44f718 */

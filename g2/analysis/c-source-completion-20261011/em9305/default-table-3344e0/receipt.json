@@ -1,0 +1,65 @@
+{
+  "status": "PASS_BOUNDED_TYPED_DATA_COMPILE_BYTES_EXACT",
+  "start": "0x3344e0",
+  "extent": 8,
+  "values": [
+    0,
+    0,
+    3,
+    4,
+    5,
+    6,
+    8,
+    10
+  ],
+  "source_sha256": "53ea610cff78ad2a4a417d586b15afbfd125ed6aadcf73895ce623fdee585743",
+  "data_sha256": "9f80eeac8bf6c54d19161f08b3130fa99e01c86b67664252161593863ce39121",
+  "callers": [
+    {
+      "site": "304808",
+      "producer": "30f31c",
+      "range": [
+        1,
+        7
+      ]
+    },
+    {
+      "site": "311884",
+      "producer": "30f794",
+      "range": [
+        0,
+        7
+      ]
+    },
+    {
+      "site": "3119f6",
+      "producer": "30f31c",
+      "range": [
+        1,
+        7
+      ]
+    }
+  ],
+  "selector_range_proof": {
+    "selected_register": "r13",
+    "assignments": {
+      "30f7a0": 7,
+      "30f7ae": 6,
+      "30f7c0": 5,
+      "30f7d2": 4,
+      "30f7e0": 3,
+      "30f7f2": 2,
+      "30f7fc": 1,
+      "30f85e": 0
+    },
+    "return_move": "30f820 mov_s r0,r13"
+  },
+  "available_level_proof": "30f31c branches return5 or7 via setne/asl/add5; remaining flag branches return5,4,3,2,1.",
+  "next_table_identity": "310d2c installs pointer3344e8 into record; distinct from3344e0 lookup",
+  "limits": [
+    "Eight-byte ownership is supported for all identified direct native callers.",
+    "Computed references and complete initialized data placement remain separate evidence gates.",
+    "No guard or out-of-domain replacement behavior was added."
+  ],
+  "object_sha256": "31e75d4de07a63608932cc64d4145af7426cedb40c83e57ca89cfca910dfe51c"
+}

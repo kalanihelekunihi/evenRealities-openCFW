@@ -7,7 +7,7 @@ extern uint32_t opencfw_em9305_associated_random_31896c(void);
 extern uint32_t opencfw_em9305_radio_crc_seed_318960(void);
 extern uint32_t opencfw_em9305_mode_callback_child_317ea4(uint32_t);
 extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t,uint32_t);
-extern uint32_t opencfw_em9305_init_callback_child_3246c0(uintptr_t,uint32_t);
+extern uint32_t opencfw_em9305_init_callback_child_3246c0(uintptr_t);
 extern uint32_t opencfw_em9305_associated_object_init_312918(uintptr_t,uint32_t);
 extern uint32_t opencfw_em9305_radio_duration_312be4(
     uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
@@ -85,7 +85,7 @@ uint32_t opencfw_em9305_init_callback_32b61c(uintptr_t record)
     uint32_t selected=read8(record+798u); /* 32b76c precedes second result store. */
     write32(record+684u,second);
     write8(record+656u,(uint8_t)selected);
-    (void)opencfw_em9305_init_callback_child_3246c0(record+428u,selected);
+    (void)opencfw_em9305_init_callback_child_3246c0(record+428u);
     (void)opencfw_em9305_associated_object_init_312918(object,0u);
     config=read32(0x805cacu);
     uint32_t budget=read32(record+72u);
@@ -96,8 +96,8 @@ uint32_t opencfw_em9305_init_callback_32b61c(uintptr_t record)
     uint32_t timing=0u;
     if(read8(record+804u)!=0u) {
         uintptr_t callback=(uintptr_t)read32(0x801a14u);
-        if(callback!=0u)timing=((uint32_t (*)(uintptr_t,uint32_t,uintptr_t))callback)(
-            0x801a14u,budget,0x801a14u);
+        if(callback!=0u)timing=((uint32_t (*)(uintptr_t,uint32_t))callback)(
+            0x801a14u,budget);
     }
     uint32_t size=read16(record+1144u);
     uint32_t phy=read8(record+63u);

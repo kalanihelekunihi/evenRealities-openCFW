@@ -14,13 +14,13 @@ FUNCS={'memory':(0x48aa60,'audio_uart_lv_init_memory_48aa60'),
        'style':(0x44d32c,'audio_uart_lv_init_style_44d32c'),
        'anim':(0x48438c,'audio_uart_lv_init_anim_48438c'),
        'cache':(0x44b90c,'audio_uart_lv_init_cache_44b90c'),
-       'font':(0x488f4c,'audio_uart_lv_init_font_488f4c')}
-LOWERS={'pool':(0x48aa80,'audio_uart_lv_memory_pool_init_48aa80'),
+       'image_decoder':(0x488f4c,'audio_uart_lv_image_decoder_init_488f4c')}
+LOWERS={'handlers':(0x48aa80,'audio_uart_lv_draw_handlers_default_48aa80'),
         'async':(0x4d465c,'audio_uart_lv_async_init_4d465c'),
         'display':(0x4645d8,'audio_uart_lv_display_init_4645d8'),
         'anim':(0x4d46de,'audio_uart_lv_anim_init_4d46de'),
-        'font_init':(0x4d4ad4,'audio_uart_lv_font_init_4d4ad4'),
-        'font_deinit':(0x4d4bdc,'audio_uart_lv_font_deinit_4d4bdc')}
+        'image_cache_init':(0x4d4ad4,'audio_uart_lv_image_cache_init_4d4ad4'),
+        'header_cache_init':(0x4d4bdc,'audio_uart_lv_image_header_cache_init_4d4bdc')}
 SHIM='''#include <stdint.h>
 #include <stddef.h>
 uint8_t audio_uart_display_lv_root[0x200];
@@ -30,9 +30,12 @@ void audio_uart_lvgl_log(uint32_t a,const char*b,uint32_t c,const char*d,...)
 for _,name in LOWERS.values():SHIM+='void '+name+'(){}\n'
 with tempfile.TemporaryDirectory() as td:
     stub=Path(td)/'stub.c';stub.write_text(SHIM);elf=Path(td)/'test.elf'
+    # Isolate the eight startup children; appended providers are independently qualified.
+    children=Path(td)/'children.c'
+    children.write_text((DIR/'display_lv_init_children.c').read_text().split('/* Full native4c6d04..4c6d62:')[0])
     subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-fno-builtin','-nostdlib',
                     '-Wl,-Ttext=0x100000','-Wl,-e,audio_uart_lv_init_memory_48aa60',
-                    str(DIR/'display_lv_init_children.c'),str(DIR/'display_lv_global_init.c'),str(stub),'-o',str(elf)],check=True)
+                    str(children),str(DIR/'display_lv_global_init.c'),str(stub),'-o',str(elf)],check=True)
     syms={v[2]:int(v[0],16) for line in subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True).splitlines() if len(v:=line.split())==3}
     with elf.open('rb') as f:segs=[(s['p_vaddr'],s.data()) for s in ELFFile(f).iter_segments() if s['p_type']=='PT_LOAD']
     for group,(native,csym) in FUNCS.items():
@@ -51,7 +54,7 @@ with tempfile.TemporaryDirectory() as td:
             def hook(uc,a,size,_):
                 if a not in mapping:return
                 n=mapping[a];arg=uc.reg_read(UC_ARM_REG_R0)
-                calls.append((n,arg-root if n in ('pool','async','anim') else arg))
+                calls.append((n,arg-root if n in ('handlers','async','anim') else arg))
                 uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
             u.hook_add(UC_HOOK_CODE,hook)
             u.emu_start((syms[csym] if is_c else native)|1,0x600000,count=100)

@@ -1,0 +1,18 @@
+{
+  "status": "PASS_COMPILED_ARM_MPU_WRITERS_MODELED_NATIVE",
+  "cases": 1057,
+  "fixture_cpu_state": "CPSR initialized per call; original failing case passes first in fresh engines without reset",
+  "by_provider": {
+    "audio_uart_mpu_attribute_write_raw_4d43f6": 240,
+    "audio_uart_mpu_attribute_write_4d4434": 240,
+    "audio_uart_mpu_copy_words_4d4446": 64,
+    "audio_uart_mpu_regions_write_raw_4d445e": 256,
+    "audio_uart_mpu_regions_write_4d44d2": 257
+  },
+  "source_sha256": "11de7f2c73d4f6f66204b000afba3d893a1cd35150f73b942e39c45774b85e85",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual five raw/wrapper attribute/word-copy/region writer bodies execute; modeled RAM/MMIO read/write traces and final words compared.",
+    "Byte truncation,index bank rejection,zero/single/multiple count,start wrap,bank transitions,overlapping forward copies and read mutations sampled. Flat modeled registers do not establish physical MPU alias behavior or hardware execution."
+  ]
+}

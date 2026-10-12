@@ -1,0 +1,47 @@
+{
+  "status": "COHERENT_COMPILATION_AND_CURRENT_SOURCE_AUDIT_PASS",
+  "bodies": [
+    "488f40..488f4c",
+    "4890c8..48911a",
+    "4c794c..4c79ce"
+  ],
+  "source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+  "source_sha256": "a74df9ce113ad08a283dee7f2fccab565fa969048c69ce1060fd071ed4112a0b",
+  "upstream_revision": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+  "upstream_sources": {
+    "third-party/upstream/lvgl/src/draw/lv_image_decoder.c": "6ddccf575bc39a097943fc85772c5766ac1cad61a43c2e433b503ce13606c6bf",
+    "third-party/upstream/lvgl/src/libs/bin_decoder/lv_bin_decoder.c": "865b35d5cb7bf5336aae40d71eabfc1d9093f65c9aa562d99fa4ceae0b6e40d0"
+  },
+  "renamed_binding": {
+    "previous": "audio_uart_lv_init_fs_4c794c",
+    "current": "audio_uart_lv_bin_decoder_init_4c794c"
+  },
+  "comparison_cases": 12,
+  "parent_startup_cases": 2,
+  "callback_identities": {
+    "info": "0x4c79d1",
+    "open": "0x4c7b25",
+    "get_area": "0x4c7e4d",
+    "close": "0x4c7e29"
+  },
+  "remaining_estimate": {
+    "direct_group_bodies": 0,
+    "callback_bodies": 4,
+    "coherent_builds": 0,
+    "main_direct_imports_expected": 79,
+    "new_address_only_imports_expected": 4,
+    "other_gates": [
+      "Callback invocation contracts",
+      "Data ownership and native layout",
+      "Hardware"
+    ]
+  },
+  "limits": [
+    "Oracle ARM build disables inlining so prepend/creator, byte-clear and logger child cuts remain observable.",
+    "Outer initializer failure is checked as a separate exact source-body translation unit; integrated compiler can eliminate it because creator fails fatally.",
+    "Four callback bodies and invocation signatures remain genuine imports.",
+    "Failure comparison stops at first faulting store; hardware fault handling and image layout are unverified."
+  ],
+  "selected": true,
+  "build_audit": "g2/build/c-firmware/20261012/peripherals-root-bin-decoder-round57/root-source-audit.json"
+}

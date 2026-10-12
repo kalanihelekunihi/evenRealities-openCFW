@@ -1,0 +1,31 @@
+{
+  "status": "PASS_TWO_STATIC_NINTH_STACK_ARGUMENT_OFFSETS",
+  "caller": "31f298",
+  "callee": "319ee8",
+  "callee_entry_frame_bytes": 52,
+  "callee_load_address": "319f0c",
+  "callee_stack_offset": 52,
+  "calls": [
+    {
+      "call_address": "31f322",
+      "store_address": "31f326",
+      "register": "r20",
+      "store_in_delay_slot": true,
+      "caller_stack_offset": 0
+    },
+    {
+      "call_address": "31f374",
+      "store_address": "31f370",
+      "register": "r19",
+      "store_in_delay_slot": false,
+      "caller_stack_offset": 0
+    }
+  ],
+  "source_sha256": {
+    "caller": "190a36fc4c7ab808c15ab22ade826608f92449f8a87f9cc002abf5b3f5037fc1",
+    "callee": "a706b51f02608b2f255d8a0f06b682872e1ec45435c61bdcf7c4f9840b47d794"
+  },
+  "limits": [
+    "Static native stack correspondence; nested register clobber and runtime gates remain open."
+  ]
+}

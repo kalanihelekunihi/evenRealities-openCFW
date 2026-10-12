@@ -1,0 +1,11 @@
+{
+  "dependency": "third-party/upstream/lvgl",
+  "commit": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+  "sources": [
+    "src/draw/lv_draw_buf.c",
+    "src/misc/lv_color.c"
+  ],
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_sha256": "ebee55de1fd402bf3507e5994657d679ffd153036e0770e13d1a4a5f53bf14c1",
+  "interface_repair": "Selected premultiply declaration uint32_t matches native success/failure; callers ignore value."
+}

@@ -1,0 +1,73 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004c8c94 <.data+0x90c94>:
+  4c8c94:	b4f0      	push	{r4, r5, r6, r7}
+  4c8c96:	9c04      	ldr	r4, [sp, #16]
+  4c8c98:	2500      	movs	r5, #0
+  4c8c9a:	b2c0      	uxtb	r0, r0
+  4c8c9c:	2807      	cmp	r0, #7
+  4c8c9e:	d006      	beq.n	0x4c8cae
+  4c8ca0:	d32e      	bcc.n	0x4c8d00
+  4c8ca2:	2809      	cmp	r0, #9
+  4c8ca4:	d01d      	beq.n	0x4c8ce2
+  4c8ca6:	d311      	bcc.n	0x4c8ccc
+  4c8ca8:	280a      	cmp	r0, #10
+  4c8caa:	d025      	beq.n	0x4c8cf8
+  4c8cac:	e028      	b.n	0x4c8d00
+  4c8cae:	2001      	movs	r0, #1
+  4c8cb0:	2508      	movs	r5, #8
+  4c8cb2:	fb92 f5f5 	sdiv	r5, r2, r5
+  4c8cb6:	442c      	add	r4, r5
+  4c8cb8:	f012 0207 	ands.w	r2, r2, #7
+  4c8cbc:	f1d2 0207 	rsbs	r2, r2, #7
+  4c8cc0:	2601      	movs	r6, #1
+  4c8cc2:	4086      	lsls	r6, r0
+  4c8cc4:	1e76      	subs	r6, r6, #1
+  4c8cc6:	2700      	movs	r7, #0
+  4c8cc8:	9d05      	ldr	r5, [sp, #20]
+  4c8cca:	e032      	b.n	0x4c8d32
+  4c8ccc:	2002      	movs	r0, #2
+  4c8cce:	2504      	movs	r5, #4
+  4c8cd0:	fb92 f5f5 	sdiv	r5, r2, r5
+  4c8cd4:	442c      	add	r4, r5
+  4c8cd6:	0052      	lsls	r2, r2, #1
+  4c8cd8:	f012 0206 	ands.w	r2, r2, #6
+  4c8cdc:	f1d2 0206 	rsbs	r2, r2, #6
+  4c8ce0:	e7ee      	b.n	0x4c8cc0
+  4c8ce2:	2004      	movs	r0, #4
+  4c8ce4:	2502      	movs	r5, #2
+  4c8ce6:	fb92 f5f5 	sdiv	r5, r2, r5
+  4c8cea:	442c      	add	r4, r5
+  4c8cec:	0092      	lsls	r2, r2, #2
+  4c8cee:	f012 0204 	ands.w	r2, r2, #4
+  4c8cf2:	f1d2 0204 	rsbs	r2, r2, #4
+  4c8cf6:	e7e3      	b.n	0x4c8cc0
+  4c8cf8:	2008      	movs	r0, #8
+  4c8cfa:	4414      	add	r4, r2
+  4c8cfc:	2200      	movs	r2, #0
+  4c8cfe:	e7df      	b.n	0x4c8cc0
+  4c8d00:	2000      	movs	r0, #0
+  4c8d02:	e019      	b.n	0x4c8d38
+  4c8d04:	f894 c000 	ldrb.w	ip, [r4]
+  4c8d08:	fa5c fc02 	asrs.w	ip, ip, r2
+  4c8d0c:	ea16 0c0c 	ands.w	ip, r6, ip
+  4c8d10:	fa5f fc8c 	uxtb.w	ip, ip
+  4c8d14:	f851 c02c 	ldr.w	ip, [r1, ip, lsl #2]
+  4c8d18:	f845 c027 	str.w	ip, [r5, r7, lsl #2]
+  4c8d1c:	1a12      	subs	r2, r2, r0
+  4c8d1e:	4694      	mov	ip, r2
+  4c8d20:	fa4f fc8c 	sxtb.w	ip, ip
+  4c8d24:	f1bc 0f00 	cmp.w	ip, #0
+  4c8d28:	d502      	bpl.n	0x4c8d30
+  4c8d2a:	f1d0 0208 	rsbs	r2, r0, #8
+  4c8d2e:	1c64      	adds	r4, r4, #1
+  4c8d30:	1c7f      	adds	r7, r7, #1
+  4c8d32:	429f      	cmp	r7, r3
+  4c8d34:	dbe6      	blt.n	0x4c8d04
+  4c8d36:	2001      	movs	r0, #1
+  4c8d38:	bcf0      	pop	{r4, r5, r6, r7}
+  4c8d3a:	4770      	bx	lr

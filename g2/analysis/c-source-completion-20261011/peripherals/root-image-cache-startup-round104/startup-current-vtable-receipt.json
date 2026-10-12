@@ -1,0 +1,27 @@
+{
+  "status": "PASS_COMPILED_ARM_NATIVE_CACHE_STARTUP_CURRENT_VTABLE",
+  "cases": 156,
+  "by_provider": {
+    "audio_uart_lv_image_cache_init_4d4ad4": 72,
+    "audio_uart_lv_image_header_cache_init_4d4bdc": 72,
+    "audio_uart_lv_cache_set_name_4d5114": 12
+  },
+  "source_hashes": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-image-cache-startup-round104/image_cache_startup_candidate.c": "ffc12605ac04a5e8aa7b455f2c3854fcacec58637f2dfc160a8c8f6896dbd19e",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-image-cache-startup-round104/lru_init_candidate.c": "248e286a51fb03fd6c6d4bf65f5ad4a6a0d3dc1180be215abb7c92d1a8f30524",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_font_lru_vtable.c": "e1618b1b2472ddb51b6b31b82a3b0ec7fb85f58697dd0f4176cd69f6cb36a80c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_font_cache_create.c": "2920676af66d7926a157d1da4b51574c7c39f540c92c8ac5b6255873591fb891",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_lv_init_mutex_children.c": "463c67c5a520831a62f9693125779418ac0fbcac2e9b27d235c182f9296b8cd2",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c": "95be4c94cb474a83df251ce98683f13df36f278a49d166f3eb4a01d7d95cdeb0",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_lv_global_init.c": "b593abe5fc21cf3b8d35ce6611008015cb082f8b048ef097a024195041a45f25",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_font_rb_core.c": "244f344deac641a0562cb8577cbebb89d683712acb462bcee25319361c2e0ad1",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_font_lru_alloc.c": "d5a537e6950928fb151be65c703c17c6bf3bc60ae3a379e53e7b7a30937b0643"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "class_words_compared": 20,
+  "limits": [
+    "Actual shared constructor,count/size initializers,array and mutex wrapper execute; Actual LRU allocator/zero wrapper and RB initializer/zero wrapper execute; malloc,clear,mutex ensure,free,logger controlled child cuts.",
+    "Source-owned callback/class/name pointers normalized by authenticated identities; no relocation/byte equality or hardware claim.",
+    "Cache name setter executes on startup successful/NULL paths plus standalone arbitrary-name-word cases. Concrete backend/tree/allocator/source-data/full-image gates remain."
+  ]
+}

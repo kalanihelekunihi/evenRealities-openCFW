@@ -1,0 +1,10 @@
+{
+  "status": "PASS_BOUNDED_COMPILED_ARM_NATIVE_FS_READ",
+  "cases": 576,
+  "source_sha256": "9ac3e20440b3e90b633838ff4e7a886b2811c841019c966a209cdc913efb95c2",
+  "limits": [
+    "Cached-read child and indirect read callback are controlled cuts; cached-read remains a genuine production import.",
+    "Covers missing driver/read/seek, null output, zeroed local count, callback stack ABI, returned counts and byte status truncation.",
+    "Native layout, byte equality and hardware remain unproven."
+  ]
+}

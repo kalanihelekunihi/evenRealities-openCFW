@@ -1,0 +1,114 @@
+
+g2/analysis/c-source-completion-20261011/em9305/root-callback-31ce50/source.o:     file format elf32-littlearc
+
+
+Disassembly of section .text:
+
+00000000 <opencfw_em9305_callback_31ce50>:
+   0:	c2e8                	enter_s	[r13-r16,blink]
+
+00000002 <L31ce52>:
+   2:	4508                	mov_s	r13,r0
+
+00000004 <L31ce54>:
+   4:	8802                	ldb_s	r0,[r0,0x2]
+
+00000006 <L31ce56>:
+   6:	41c3 0080 5c7c      	mov_s	r1,0x805c7c
+
+0000000c <L31ce5c>:
+   c:	a1a0                	st_s	r13,[r1,0]
+
+0000000e <L31ce5e>:
+   e:	208c 8fc3           	cmp	r0,255
+
+00000012 <L31ce62>:
+  12:	f205                	beq_s	10	;1a <L31ce6a>
+
+00000014 <L31ce64>:
+  14:	8d03                	ldb_s	r0,[r13,0x3]
+
+00000016 <L31ce66>:
+  16:	0847 00d1           	brne.nt	r0,0x3,70	;5a <L31cea4>
+
+0000001a <L31ce6a>:
+  1a:	46cb 0080 5cac      	mov_s	r14,0x805cac
+
+00000020 <L31ce70>:
+  20:	1600 1002           	ld	r2,[r14]
+
+00000024 <L31ce72>:
+  24:	700e                	mov_s	r16,0
+
+00000026 <L31ce74>:
+  26:	270a 1f80 0080 5c3c 	mov	r15,0x805c3c
+
+0000002e <L31ce7c>:
+  2e:	1239 0080           	ldb	r0,[r2,57]
+
+00000032 <L31ce80>:
+  32:	0839 2025           	brhs.d.nt	r16,r0,56	;68 <L31ceb2>
+
+00000036 <L31ce84>:
+  36:	2840 2240           	asl	r0,r16,0x9
+
+0000003a <L31ce88>:
+  3a:	1700 1001           	ld	r1,[r15]
+
+0000003e <L31ce8a>:
+  3e:	6038                	add_s	r0,r0,r1
+
+00000040 <L31ce8c>:
+  40:	8820                	ldb_s	r1,[r0,0]
+
+00000042 <L31ce8e>:
+  42:	e90b                	breq_s	r1,0,22	;56 <L31cea0>
+
+00000044 <L31ce90>:
+  44:	8823                	ldb_s	r1,[r0,0x3]
+
+00000046 <L31ce92>:
+  46:	e989                	brne_s	r1,0,18	;56 <L31cea0>
+
+00000048 <L31ce94>:
+  48:	8842                	ldb_s	r2,[r0,0x2]
+
+0000004a <L31ce96>:
+  4a:	8d23                	ldb_s	r1,[r13,0x3]
+
+0000004c <L31ce98>:
+  4c:	0802 0020           	bl.d	0	;0 <opencfw_em9305_callback_child_31d0fc>
+			4c: R_ARC_S25W_PCREL	opencfw_em9305_callback_child_31d0fc
+
+00000050 <L31ce9c>:
+  50:	b540                	sth_s	r2,[r13,0]
+
+00000052 <L31ce9e>:
+  52:	1600 1002           	ld	r2,[r14]
+
+00000056 <L31cea0>:
+  56:	7106                	add_s	r16,r16,1
+
+00000058 <L31cea2>:
+  58:	f1eb                	b_s	-42	;2e <L31ce7c>
+
+0000005a <L31cea4>:
+  5a:	0802 0020           	bl.d	0	;0 <opencfw_em9305_ll_record_find_31aa98>
+			5a: R_ARC_S25W_PCREL	opencfw_em9305_ll_record_find_31aa98
+
+0000005e <L31cea8>:
+  5e:	8d00                	ldb_s	r0,[r13,0]
+
+00000060 <L31ceaa>:
+  60:	e804                	breq_s	r0,0,8	;68 <L31ceb2>
+
+00000062 <L31ceac>:
+  62:	0802 0020           	bl.d	0	;0 <opencfw_em9305_callback_child_31d0fc>
+			62: R_ARC_S25W_PCREL	opencfw_em9305_callback_child_31d0fc
+
+00000066 <L31ceb0>:
+  66:	8d23                	ldb_s	r1,[r13,0x3]
+
+00000068 <L31ceb2>:
+  68:	c6c8                	leave_s	[r13-r16,blink,pcl]
+  6a:	78e0                	nop_s

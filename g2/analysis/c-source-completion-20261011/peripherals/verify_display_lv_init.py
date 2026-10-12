@@ -7,13 +7,15 @@ from unicorn.arm_const import *
 ROOT=Path(__file__).resolve().parents[3]
 BLOB=(ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 SRC=ROOT/'components/audio/uart_thread_source_candidate/display_lv_init.c'
-CHILDREN=[('global',0x4734cc),('memory',0x48aa60),('timer',0x4c6d04),
+CHILDREN=[('global',0x4734cc),('memory',0x48aa60),('span_stack',0x4c6d04),
  ('async',0x49acb0),('display',0x464330),('indev',0x4c6d8c),
  ('theme',0x4546dc),('event',0x4503a4),('style',0x44d32c),
  ('draw_unit',0x4b1b98),('anim',0x48438c),('group',0x4c73d6),
- ('cache',0x44b90c),('font',0x488f4c),('fs',0x4c794c),
+ ('cache',0x44b90c),('font',0x488f4c),('bin_decoder',0x4c794c),
  ('misc',0x4c8f0a),('bind',0x4c8efc),('assert',0x4c91a8)]
 NAMES={n:'audio_uart_lv_init_'+n+'_'+hex(a)[2:] for n,a in CHILDREN}
+NAMES['span_stack']='audio_uart_lv_span_stack_init_4c6d04'
+NAMES['bin_decoder']='audio_uart_lv_bin_decoder_init_4c794c'
 NAMES['bind']='audio_uart_lv_init_global_bind_4c8efc'
 SHIM='''#include <stdint.h>
 uint8_t audio_uart_display_lv_root[0x200];

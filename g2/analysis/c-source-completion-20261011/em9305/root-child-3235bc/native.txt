@@ -1,0 +1,49 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+003235bc <.data+0x211bc>:
+  3235bc:	c3e6                	enter_s	[r13-r15,fp,blink]
+  3235be:	c1a4                	sub_s	sp,sp,0x10
+  3235c0:	4608                	mov_s	r14,r0
+  3235c2:	706c                	mov_s	r3,0
+  3235c4:	70ad                	mov_s	r13,0
+  3235c6:	4308                	mov_s	r11,r0
+  3235c8:	c343                	st_s	r3,[sp,0xc]
+  3235ca:	c342                	st_s	r3,[sp,0x8]
+  3235cc:	c341                	st_s	r3,[sp,0x4]
+  3235ce:	c340                	st_s	r3,[sp,0]
+  3235d0:	1334 1081           	ldb	r1,[r11,52]
+  3235d4:	0b35 0045           	brhs.nt	r3,r1,52	;0x323608
+  3235d8:	864e                	ld_s	r2,[r14,0x38]
+  3235da:	ea15                	breq_s	r2,0,42	;0x323602
+  3235dc:	1224 0081           	ldb	r1,[r2,36]
+  3235e0:	e991                	brne_s	r1,0,34	;0x323602
+  3235e2:	8a30                	ldb_s	r1,[r2,0x10]
+  3235e4:	e90f                	breq_s	r1,0,30	;0x323602
+  3235e6:	9201                	ldh_s	r0,[r2,0x2]
+  3235e8:	79bb                	asl_s	r1,r13
+  3235ea:	c482                	add_s	r12,sp,0x8
+  3235ec:	2184 0f87           	and	r1,r1,510
+  3235f0:	643c                	add_s	r12,r12,r1
+  3235f2:	b400                	sth_s	r0,[r12,0]
+  3235f4:	c780                	add_s	r15,sp,0
+  3235f6:	8a90                	ldb_s	r12,[r2,0x10]
+  3235f8:	71a5                	add_s	r13,r13,1
+  3235fa:	61f9                	add_s	r1,r1,r15
+  3235fc:	b180                	sth_s	r12,[r1,0]
+  3235fe:	1a10 0003           	stb	0,[r2,16]
+  323602:	74c5                	add_s	r14,r14,4
+  323604:	7164                	add_s	r3,r3,1
+  323606:	f1e6                	b_s	-52	;0x3235d0
+  323608:	40c3 0080 5b38      	mov_s	r0,0x805b38
+  32360e:	8060                	ld_s	r3,[r0,0]
+  323610:	eb07                	breq_s	r3,0,14	;0x32361e
+  323612:	202f 8347           	extb.f	r0,r13
+  323616:	f205                	beq_s	10	;0x32361e
+  323618:	c182                	add_s	r1,sp,0x8
+  32361a:	7b60                	jl_s.d	[r3]
+  32361c:	c280                	add_s	r2,sp,0
+  32361e:	c7c6                	leave_s	[r13-r15,fp,blink,pcl]

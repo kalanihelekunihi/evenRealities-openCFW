@@ -1,0 +1,18 @@
+{
+  "status": "PASS_BOUNDED_GPIO_STARTUP_INDIRECT_ROOT_ABSENCE",
+  "descriptor_count": 97,
+  "descriptor_bytes": 1164,
+  "stock_descriptor_sha256": "6fc9fa7cc921845e12cd3e0dfdb151730a39112e1cf692cc528a30e058222576",
+  "source_elf_descriptor_sha256": "6fc9fa7cc921845e12cd3e0dfdb151730a39112e1cf692cc528a30e058222576",
+  "source_descriptor_sha256": "5e458a49a486f04d2392c853d11cd22c7e86bfec3c25501908578734670bc3e0",
+  "selected_registrar_sha256": "4708a655ff874d25b0793dfc98227dfe9db45ee9b9ee38cbf5d95b3467ef525b",
+  "selected_elf_sha256": "918fd680a8dc7a5f789d4edd1740ad8829379a2ae54392f78590335f58a75527",
+  "nonzero_interrupt_mode_rows": [],
+  "nonzero_callback_rows": [],
+  "startup_registration_predicate": "interrupt_mode && callback",
+  "limits": [
+    "The stock 97-record descriptor initialization causes no GPIO callback registrations in the selected startup registrar.",
+    "External callers may later register runtime GPIO callbacks; this does not enumerate those values or prove interrupt delivery.",
+    "Stock/source descriptor bytes and selected C predicate establish only this initialized startup path."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS_COMPILED_ARM_NATIVE_DRAW_DUPLICATE",
+  "cases": 480,
+  "source_sha256": "0cf87be49a8f40d50bb1a2b6ad16f4c777d1231d6e33efe017a036015b756fa2",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_range": "48b134..48b196",
+  "limits": [
+    "Allocation and memcpy child cuts; memcpy performs actual byte writes. Alias and allocation-side source mutation covered.",
+    "Full image/layout/byte equality/hardware unproven."
+  ]
+}

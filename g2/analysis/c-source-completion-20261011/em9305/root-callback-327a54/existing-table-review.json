@@ -1,0 +1,10 @@
+{
+  "status": "PASS_EXISTING_PROVIDER_CONSTANTS_MATCH_AUTHENTICATED_NATIVE_SLICES",
+  "map_bytes": 12,
+  "callback_slots": 6,
+  "transition_slice_bytes": 8,
+  "limits": [
+    "Slice equality does not prove table extent or runtime state bounds.",
+    "Native transition index is 2*action+state, whereas existing C provider uses action+2*state; provider requires correction before exact contract acceptance."
+  ]
+}

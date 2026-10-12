@@ -1,0 +1,29 @@
+{
+  "status": "PASS_ISOLATED_FIXED_CONTEXT_PLACEMENT_AND_EXACT_NATIVE_TABLE_BYTES",
+  "sections": {
+    ".rodata": {
+      "address": 3364788,
+      "bytes": 12,
+      "flags": "CONTENTS, ALLOC, LOAD, READONLY, DATA"
+    },
+    ".context_802a60": {
+      "address": 8399456,
+      "bytes": 704,
+      "flags": "ALLOC"
+    },
+    ".context_8035dc": {
+      "address": 8402396,
+      "bytes": 704,
+      "flags": "ALLOC"
+    },
+    ".context_80389c": {
+      "address": 8403100,
+      "bytes": 704,
+      "flags": "ALLOC"
+    }
+  },
+  "elf_sha256": "44982df53047471cc2fb4659477e71a28d2cb0cb2e469618d5a26d3f5a50685e",
+  "limits": [
+    "Isolated layout only; full firmware overlap, startup zeroing and runtime ownership remain open."
+  ]
+}

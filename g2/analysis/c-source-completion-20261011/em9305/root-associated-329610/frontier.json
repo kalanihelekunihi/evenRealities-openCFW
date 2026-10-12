@@ -1,0 +1,117 @@
+{
+  "status": "SOURCE_PREPARED_NOT_COMPILED",
+  "start": "0x329610",
+  "end_exclusive": "0x329840",
+  "bytes": 560,
+  "instructions": 162,
+  "calls": [
+    {
+      "at": "0x32962e",
+      "target": "33301c"
+    },
+    {
+      "at": "0x32967c",
+      "target": "304868"
+    },
+    {
+      "at": "0x32968c",
+      "target": "317ea4"
+    },
+    {
+      "at": "0x3296b0",
+      "target": "317c10"
+    },
+    {
+      "at": "0x3296e4",
+      "target": "3142f8"
+    },
+    {
+      "at": "0x3296ec",
+      "target": "317ac0"
+    },
+    {
+      "at": "0x329728",
+      "target": "31b6cc"
+    },
+    {
+      "at": "0x32973a",
+      "target": "317b10"
+    },
+    {
+      "at": "0x32974c",
+      "target": "317b10"
+    },
+    {
+      "at": "0x329764",
+      "target": "317ebc"
+    },
+    {
+      "at": "0x329806",
+      "target": "312da4"
+    },
+    {
+      "at": "0x329824",
+      "target": "317ebc"
+    }
+  ],
+  "function_pointer_writes": [
+    {
+      "at": "0x329798",
+      "operand": "0x329574,[r13,168]"
+    },
+    {
+      "at": "0x3297a0",
+      "operand": "0x329840,[r13,172]"
+    },
+    {
+      "at": "0x3297a8",
+      "operand": "0x32a47c,[r13,176]"
+    },
+    {
+      "at": "0x3297b0",
+      "operand": "0x32a230,[r13,180]"
+    },
+    {
+      "at": "0x3297b8",
+      "operand": "0x329888,[r13,44]"
+    },
+    {
+      "at": "0x3297c0",
+      "operand": "0x329560,[r13,48]"
+    },
+    {
+      "at": "0x329800",
+      "operand": "r1,0x318b78"
+    }
+  ],
+  "next_steps": [
+    "Audit canonical existing providers for every true BL.",
+    "Replace function pointer literals with named relocations after provider identity audit.",
+    "Preserve full ARC register and delay-slot contracts in a C translation unit.",
+    "Compile and crosswalk every instruction including MPYWHL and local branch hint encodings."
+  ],
+  "selected": false,
+  "prepared_source": "source.c",
+  "canonical_call_mapping": {
+    "33301c": "opencfw_em9305_memset",
+    "304868": "opencfw_em9305_associated_child_304868",
+    "317ea4": "opencfw_em9305_mode_callback_child_317ea4",
+    "317c10": "opencfw_em9305_ll_slot_adjust_317c10",
+    "3142f8": "opencfw_em9305_wsf_timer_start_ms",
+    "317ac0": "opencfw_em9305_radio_channels_317ac0",
+    "31b6cc": "opencfw_em9305_radio_phy_tables_31b6cc",
+    "317b10": "opencfw_em9305_radio_limit_317b10",
+    "317ebc": "opencfw_em9305_init_secondary_time_317ebc",
+    "312da4": "opencfw_em9305_associated_schedule_insert_312da4"
+  },
+  "pointer_relocations": {
+    "329574": "opencfw_em9305_associated_callback_329574",
+    "329840": "opencfw_em9305_associated_callback_329840",
+    "32a47c": "opencfw_em9305_associated_callback_32a47c",
+    "32a230": "opencfw_em9305_associated_callback_32a230",
+    "329888": "opencfw_em9305_associated_callback_329888",
+    "329560": "opencfw_em9305_associated_callback_329560",
+    "318b78": "opencfw_em9305_init_schedule_compare_318b78"
+  },
+  "baseline_load_expansions_pending_compile": []
+}

@@ -1,0 +1,37 @@
+{
+  "status": "PASS_TARGET_REGISTER_TRANSPORT_AND_HOST_CANARIES",
+  "selected": false,
+  "snapshot_registers": [
+    "R2",
+    "R3",
+    "R4",
+    "R5",
+    "R6",
+    "R7"
+  ],
+  "snapshot_offsets": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20
+  ],
+  "source_sha256": "286eb5f8914e5b60f0913a1a8518a91f035758d13c18d45828951551c891b902",
+  "parent_candidate_sha256": "1e1ed04570b384204ca8a9dd519056e5f00ef4f699343439af34a53302471a29",
+  "fixture_sha256": "fbf4126c83f3ec90f394469011273427283372e839a8bf6237fd80676001338e",
+  "target_object_sha256": "cff35ddbe49eac4cdbf0e2cc48df98cf55efb999ad1644dd276e1fdca1620d7d",
+  "target_disassembly_checks": [
+    "3246c0 then canonical312918 without intervening R2 modification",
+    "six stores immediately after canonical312918 BL",
+    "six loads immediately before optional JL",
+    "R0 address and R1 budget restored",
+    "postcallback MOV R2,R0 before return"
+  ],
+  "host_fixture": "gcc:14 linux/amd64 mapped-memory four parent routes PASS, six distinct register canaries verified by optional callback stub",
+  "limits": [
+    "Host fixture stubs target assembly and validates C routing, not ARC runtime values",
+    "Parent assumes packet type remains8 across 3246c0 and canonical312918; unexpected mutation leaves ambient entry scratch unqualified",
+    "Selected full EM target link and native hardware execution pending"
+  ]
+}

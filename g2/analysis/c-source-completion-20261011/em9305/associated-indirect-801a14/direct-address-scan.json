@@ -1,0 +1,126 @@
+{
+  "status": "DIRECT_ADDRESS_SCAN_COMPLETE_NOT_ALL_WRITERS_PROVEN",
+  "source_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "range": [
+    "0x302400",
+    "0x3333fc"
+  ],
+  "hits": [
+    {
+      "line": "  3090b0:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+      "context": [
+        "  3090a8:\t27ca 108d           \tmov.hi\tr15,r2",
+        "  3090ac:\t704c                \tmov_s\tr2,0",
+        "  3090ae:\te909                \tbreq_s\tr1,0,18\t;0x3090be",
+        "  3090b0:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+        "  3090b6:\t8000                \tld_s\tr0,[r0,0]",
+        "  3090b8:\te803                \tbreq_s\tr0,0,6\t;0x3090be",
+        "  3090ba:\t7840                \tjl_s\t[r0]",
+        "  3090bc:\t4200                \tmov_s\tr2,r0",
+        "  3090be:\t234f 2040           \tbset\tr0,r19,0x1",
+        "  3090c2:\t2200 2f8d 0000 0480 \tadd\tr13,r18,0x480",
+        "  3090ca:\t0837 00b1           \tbrne.d.nt\tr0,0x2,54\t;0x3090fe"
+      ]
+    },
+    {
+      "line": "  309336:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+      "context": [
+        "  30932e:\t71f1                \tcmp_s\tr1,r15",
+        "  309330:\t27ca 104d           \tmov.hi\tr15,r1",
+        "  309334:\te808                \tbreq_s\tr0,0,16\t;0x309344",
+        "  309336:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+        "  30933c:\t8000                \tld_s\tr0,[r0,0]",
+        "  30933e:\te804                \tbreq_s\tr0,0,8\t;0x309344",
+        "  309340:\t7840                \tjl_s\t[r0]",
+        "  309342:\t4200                \tmov_s\tr2,r0",
+        "  309344:\t10d5 2704           \tldh.as\tr4,[r16,213]",
+        "  309348:\t163f 1080           \tldb\tr0,[r14,63]",
+        "  30934c:\t7bf0                \texth_s\tr3,r15"
+      ]
+    },
+    {
+      "line": "  309410:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+      "context": [
+        "  309408:\t71f1                \tcmp_s\tr1,r15",
+        "  30940a:\t27ca 104d           \tmov.hi\tr15,r1",
+        "  30940e:\te809                \tbreq_s\tr0,0,18\t;0x30941e",
+        "  309410:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+        "  309416:\t8000                \tld_s\tr0,[r0,0]",
+        "  309418:\te803                \tbreq_s\tr0,0,6\t;0x30941e",
+        "  30941a:\t7840                \tjl_s\t[r0]",
+        "  30941c:\t4010                \tmov_s\tr16,r0",
+        "  30941e:\t12aa 2704           \tldh.as\tr4,[r18,170]",
+        "  309422:\t153f 1080           \tldb\tr0,[r13,63]",
+        "  309426:\t7bf0                \texth_s\tr3,r15"
+      ]
+    },
+    {
+      "line": "  30957c:\t1600 7000 0080 1a14 \tld\tr0,[0x801a14]",
+      "context": [
+        "  309572:\t249f 2f41           \tmpyuw\tr20,r20,125",
+        "  309576:\t2480 2abd           \tadd\tr20,r20,-150",
+        "  30957a:\te80a                \tbreq_s\tr0,0,20\t;0x30958c",
+        "  30957c:\t1600 7000 0080 1a14 \tld\tr0,[0x801a14]",
+        "  309584:\te804                \tbreq_s\tr0,0,8\t;0x30958c",
+        "  309586:\t7840                \tjl_s\t[r0]",
+        "  309588:\t8781                \tld_s\tr12,[r15,0x4]",
+        "  30958a:\t4200                \tmov_s\tr2,r0",
+        "  30958c:\t14b7 1701           \tldh.as\tr1,[r12,183]",
+        "  309590:\t2032 2340           \tldb\tr0,[r16,r13]",
+        "  309594:\t75ec                \tmov_s\tr7,5"
+      ]
+    },
+    {
+      "line": "  309762:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+      "context": [
+        "  30975c:\t8f08                \tldb_s\tr0,[r15,0x8]",
+        "  30975e:\t704c                \tmov_s\tr2,0",
+        "  309760:\te808                \tbreq_s\tr0,0,16\t;0x309770",
+        "  309762:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+        "  309768:\t8000                \tld_s\tr0,[r0,0]",
+        "  30976a:\te804                \tbreq_s\tr0,0,8\t;0x309770",
+        "  30976c:\t7840                \tjl_s\t[r0]",
+        "  30976e:\t4200                \tmov_s\tr2,r0",
+        "  309770:\t1503 1084           \tldb\tr4,[r13,3]",
+        "  309774:\t133f 2080           \tldb\tr0,[r19,63]",
+        "  309778:\t7bd0                \texth_s\tr3,r14"
+      ]
+    },
+    {
+      "line": "  32b3cc:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+      "context": [
+        "  32b3c4:\t7152                \tcmp_s\tr1,r18",
+        "  32b3c6:\t22ca 204d           \tmov.hi\tr18,r1",
+        "  32b3ca:\te80a                \tbreq_s\tr0,0,20\t;0x32b3dc",
+        "  32b3cc:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+        "  32b3d2:\t80c0                \tld_s\tr14,[r0,0]",
+        "  32b3d4:\tee04                \tbreq_s\tr14,0,8\t;0x32b3dc",
+        "  32b3d6:\t7e40                \tjl_s\t[r14]",
+        "  32b3d8:\t4510                \tmov_s\tr21,r0",
+        "  32b3da:\tf003                \tb_s\t6\t;0x32b3de",
+        "  32b3dc:\t70ae                \tmov_s\tr21,0",
+        "  32b3de:\t1000 2104           \tldh\tr4,[r16]"
+      ]
+    },
+    {
+      "line": "  32b79e:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+      "context": [
+        "  32b796:\t71d1                \tcmp_s\tr1,r14",
+        "  32b798:\t26ca 104d           \tmov.hi\tr14,r1",
+        "  32b79c:\te809                \tbreq_s\tr0,0,18\t;0x32b7ae",
+        "  32b79e:\t40c3 0080 1a14      \tmov_s\tr0,0x801a14",
+        "  32b7a4:\t80a0                \tld_s\tr13,[r0,0]",
+        "  32b7a6:\ted05                \tbreq_s\tr13,0,10\t;0x32b7ae",
+        "  32b7a8:\t7d40                \tjl_s\t[r13]",
+        "  32b7aa:\t4200                \tmov_s\tr2,r0",
+        "  32b7ac:\tf002                \tb_s\t4\t;0x32b7b0",
+        "  32b7ae:\t704c                \tmov_s\tr2,0",
+        "  32b7b0:\t1400 2104           \tldh\tr4,[r20]"
+      ]
+    }
+  ],
+  "limits": [
+    "Linear disassembly can include data and does not prove reachability.",
+    "Computed pointer writes and boot initialization are not excluded by direct immediate search."
+  ]
+}

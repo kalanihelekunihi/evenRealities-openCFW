@@ -1,0 +1,73 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0048b2aa <.data+0x532aa>:
+  48b2aa:	b53e      	push	{r1, r2, r3, r4, r5, lr}
+  48b2ac:	000c      	movs	r4, r1
+  48b2ae:	2800      	cmp	r0, #0
+  48b2b0:	d114      	bne.n	0x48b2dc
+  48b2b2:	489e      	ldr	r0, [pc, #632]	@ (0x48b52c)
+  48b2b4:	9002      	str	r0, [sp, #8]
+  48b2b6:	f8df 0524 	ldr.w	r0, [pc, #1316]	@ 0x48b7dc
+  48b2ba:	9001      	str	r0, [sp, #4]
+  48b2bc:	489d      	ldr	r0, [pc, #628]	@ (0x48b534)
+  48b2be:	9000      	str	r0, [sp, #0]
+  48b2c0:	f8df 351c 	ldr.w	r3, [pc, #1308]	@ 0x48b7e0
+  48b2c4:	f240 12b1 	movw	r2, #433	@ 0x1b1
+  48b2c8:	f8df 1468 	ldr.w	r1, [pc, #1128]	@ 0x48b734
+  48b2cc:	2003      	movs	r0, #3
+  48b2ce:	f7c1 ffc5 	bl	0x44d25c
+  48b2d2:	2000      	movs	r0, #0
+  48b2d4:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  48b2d8:	6008      	str	r0, [r1, #0]
+  48b2da:	e7fa      	b.n	0x48b2d2
+  48b2dc:	2800      	cmp	r0, #0
+  48b2de:	d101      	bne.n	0x48b2e4
+  48b2e0:	2000      	movs	r0, #0
+  48b2e2:	e033      	b.n	0x48b34c
+  48b2e4:	6901      	ldr	r1, [r0, #16]
+  48b2e6:	6803      	ldr	r3, [r0, #0]
+  48b2e8:	f3c3 2307 	ubfx	r3, r3, #8, #8
+  48b2ec:	2b07      	cmp	r3, #7
+  48b2ee:	d101      	bne.n	0x48b2f4
+  48b2f0:	2302      	movs	r3, #2
+  48b2f2:	e016      	b.n	0x48b322
+  48b2f4:	6803      	ldr	r3, [r0, #0]
+  48b2f6:	f3c3 2307 	ubfx	r3, r3, #8, #8
+  48b2fa:	2b08      	cmp	r3, #8
+  48b2fc:	d101      	bne.n	0x48b302
+  48b2fe:	2304      	movs	r3, #4
+  48b300:	e00f      	b.n	0x48b322
+  48b302:	6803      	ldr	r3, [r0, #0]
+  48b304:	f3c3 2307 	ubfx	r3, r3, #8, #8
+  48b308:	2b09      	cmp	r3, #9
+  48b30a:	d101      	bne.n	0x48b310
+  48b30c:	2310      	movs	r3, #16
+  48b30e:	e008      	b.n	0x48b322
+  48b310:	6803      	ldr	r3, [r0, #0]
+  48b312:	f3c3 2307 	ubfx	r3, r3, #8, #8
+  48b316:	2b0a      	cmp	r3, #10
+  48b318:	d102      	bne.n	0x48b320
+  48b31a:	f44f 7380 	mov.w	r3, #256	@ 0x100
+  48b31e:	e000      	b.n	0x48b322
+  48b320:	2300      	movs	r3, #0
+  48b322:	eb01 0183 	add.w	r1, r1, r3, lsl #2
+  48b326:	6883      	ldr	r3, [r0, #8]
+  48b328:	b29b      	uxth	r3, r3
+  48b32a:	fb02 f203 	mul.w	r2, r2, r3
+  48b32e:	eb01 0502 	add.w	r5, r1, r2
+  48b332:	2c00      	cmp	r4, #0
+  48b334:	d101      	bne.n	0x48b33a
+  48b336:	0028      	movs	r0, r5
+  48b338:	e008      	b.n	0x48b34c
+  48b33a:	6800      	ldr	r0, [r0, #0]
+  48b33c:	0a00      	lsrs	r0, r0, #8
+  48b33e:	b2c0      	uxtb	r0, r0
+  48b340:	f7b5 fe00 	bl	0x440f44
+  48b344:	4344      	muls	r4, r0
+  48b346:	08e4      	lsrs	r4, r4, #3
+  48b348:	eb05 0004 	add.w	r0, r5, r4
+  48b34c:	bd3e      	pop	{r1, r2, r3, r4, r5, pc}

@@ -11,4 +11,15 @@ Stage-1 entry `0x10000100` sets SP `0x20002ffc`, calls `0x10000df0`, then transf
 
 The stage-2 binary is exactly `0x1408c` bytes. Its final 300 bytes occupy load addresses `0x10016f60..0x1001708c`. The package BINH header also declares `0x1408c` at offset `0x0c`. This stock instruction sequence establishes one contiguous stage-2 load into IRAM; a stage-2 CRT copy is not required to account for the flash payload. The typed C records place those final 300 bytes at runtime DRAM addresses `0x20016f60..0x2001708c`, following the pinned GX8002 SDK linker alias/dummy-section model. Whether this exact stock device aliases those IRAM and DRAM ranges is still a hardware/SoC mapping qualification gate. The marker-selected alternative branch at `0x10000d9a` loads a different payload and is not covered by this stage-2 normal-branch claim.
 
+The bounded `verify_stock_stage1_loader.py` now also cross-checks the
+marker-selected branch's exact native instructions against selected
+`backup_stage1_loader.c`: its first reader call takes four bytes at
+`package+0x323b0`; its second takes zero bytes at
+`first_read_word+0x323b4` with destination `0x20000000`, then stores
+`0x10000100` at entry word `0x2002d3e4` and transfers to stage-1 reset.
+`stock-stage1-loader-receipt.json` records the source hash and both branch
+arguments. This closes the *static selected-loader branch crosswalk*, not the
+reader's possible zero-length side effects, package contents, reset execution,
+IRAM/DRAM alias or complete product loader behavior.
+
 Reproduce the native slice with `/tool/bin/csky-abiv2-elf-objdump -D -b binary -m csky --no-show-raw-insn --adjust-vma=0x0fffffe8 --start-address=0x10000d4c --stop-address=0x10000dd0 /stock/binh_b_stage1.bin`, using the pinned C-SKY toolchain mount in `verify_audio_buffers.py`.

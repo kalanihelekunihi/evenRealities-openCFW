@@ -1,0 +1,34 @@
+{
+  "status": "PASS_WHOLE_NATIVE_INSTRUCTION_CROSSWALK",
+  "pending_encoding_differences": [],
+  "baseline_load_expansions": [
+    "0x322930",
+    "0x322932",
+    "0x32294c",
+    "0x32297c",
+    "0x32297e",
+    "0x322980",
+    "0x322982",
+    "0x322994",
+    "0x32299c"
+  ],
+  "instructions": 97,
+  "native_bytes": 288,
+  "target_function_bytes": 308,
+  "target_section_bytes": 308,
+  "trailing_alignment_bytes": 0,
+  "true_child_calls": 5,
+  "local_branches": 9,
+  "function_pointer_relocations": 0,
+  "byte_exact_other_instructions": 74,
+  "source_sha256": "0aaea7fa262ac24b6550be1a275c05c6b53ec4f30fc993d65810ee4bcf8fa0fb",
+  "selected": false,
+  "limits": [
+    "Native response packet fields and adaptive interval branches preserved.",
+    "Child register contracts, final image linking and hardware execution remain separate gates.",
+    "Nine load expansions and one same-condition/same-target branch expansion add20bytes; final placement remains open."
+  ],
+  "baseline_branch_expansions": [
+    "0x322964"
+  ]
+}

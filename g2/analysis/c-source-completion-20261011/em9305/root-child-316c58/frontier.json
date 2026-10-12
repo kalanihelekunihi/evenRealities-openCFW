@@ -1,0 +1,26 @@
+{
+  "canonical_call_mapping": {
+    "33301c": "opencfw_em9305_memset",
+    "317b10": "opencfw_em9305_radio_limit_317b10",
+    "30e4bc": "opencfw_em9305_command_count_30e4bc",
+    "30455c": "opencfw_em9305_common_request_30455c"
+  },
+  "instructions": 152,
+  "native_bytes": 514,
+  "status": "COMPILED_WHOLE_BODY_CROSSWALK_PASS",
+  "source_sha256": "876f9ca405bf4278b98496244f9fc836c539673dc54a823bbdb89fd6198552fe",
+  "missing_direct_children": [],
+  "indirect_callback_owner": "805cd8",
+  "hardware_loop": {
+    "start": "316c7c",
+    "end": "316c90",
+    "count": "byte34 of *805cac",
+    "record_stride": 912
+  },
+  "remaining": [
+    "Prove configured recordcount/allocation capacity and signed DSPindex bounds",
+    "Indirectcallback ABI and owner lifecycle",
+    "Coherent admission and finalimage/runtime validation"
+  ],
+  "selected": false
+}

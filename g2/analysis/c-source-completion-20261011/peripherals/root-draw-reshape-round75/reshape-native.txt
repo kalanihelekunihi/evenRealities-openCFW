@@ -1,0 +1,60 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0048b196 <.data+0x53196>:
+  48b196:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+  48b19a:	0004      	movs	r4, r0
+  48b19c:	4688      	mov	r8, r1
+  48b19e:	0017      	movs	r7, r2
+  48b1a0:	001e      	movs	r6, r3
+  48b1a2:	2c00      	cmp	r4, #0
+  48b1a4:	d101      	bne.n	0x48b1aa
+  48b1a6:	2000      	movs	r0, #0
+  48b1a8:	e033      	b.n	0x48b212
+  48b1aa:	4640      	mov	r0, r8
+  48b1ac:	b2c0      	uxtb	r0, r0
+  48b1ae:	2800      	cmp	r0, #0
+  48b1b0:	d103      	bne.n	0x48b1ba
+  48b1b2:	f8d4 8000 	ldr.w	r8, [r4]
+  48b1b6:	ea5f 2818 	movs.w	r8, r8, lsr #8
+  48b1ba:	9d06      	ldr	r5, [sp, #24]
+  48b1bc:	2d00      	cmp	r5, #0
+  48b1be:	d105      	bne.n	0x48b1cc
+  48b1c0:	4641      	mov	r1, r8
+  48b1c2:	b2c9      	uxtb	r1, r1
+  48b1c4:	0038      	movs	r0, r7
+  48b1c6:	f7ff fc87 	bl	0x48aad8
+  48b1ca:	0005      	movs	r5, r0
+  48b1cc:	002b      	movs	r3, r5
+  48b1ce:	4642      	mov	r2, r8
+  48b1d0:	b2d2      	uxtb	r2, r2
+  48b1d2:	0031      	movs	r1, r6
+  48b1d4:	0038      	movs	r0, r7
+  48b1d6:	f000 fb49 	bl	0x48b86c
+  48b1da:	68e1      	ldr	r1, [r4, #12]
+  48b1dc:	4281      	cmp	r1, r0
+  48b1de:	d201      	bcs.n	0x48b1e4
+  48b1e0:	2000      	movs	r0, #0
+  48b1e2:	e016      	b.n	0x48b212
+  48b1e4:	0020      	movs	r0, r4
+  48b1e6:	fa5f f888 	uxtb.w	r8, r8
+  48b1ea:	6801      	ldr	r1, [r0, #0]
+  48b1ec:	f368 210f 	bfi	r1, r8, #8, #8
+  48b1f0:	6001      	str	r1, [r0, #0]
+  48b1f2:	0020      	movs	r0, r4
+  48b1f4:	6841      	ldr	r1, [r0, #4]
+  48b1f6:	f367 010f 	bfi	r1, r7, #0, #16
+  48b1fa:	6041      	str	r1, [r0, #4]
+  48b1fc:	0020      	movs	r0, r4
+  48b1fe:	6841      	ldr	r1, [r0, #4]
+  48b200:	f366 411f 	bfi	r1, r6, #16, #16
+  48b204:	6041      	str	r1, [r0, #4]
+  48b206:	0020      	movs	r0, r4
+  48b208:	6881      	ldr	r1, [r0, #8]
+  48b20a:	f365 010f 	bfi	r1, r5, #0, #16
+  48b20e:	6081      	str	r1, [r0, #8]
+  48b210:	0020      	movs	r0, r4
+  48b212:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}

@@ -1,0 +1,568 @@
+
+g2/analysis/c-source-completion-20261011/em9305/root-callback-31c0e0/lctr_act_pc.c.obj:     file format elf32-littlearc
+
+
+Disassembly of section .text.lctrConnServicePowerMonitor:
+
+00000000 <lctrConnServicePowerMonitor>:
+   0:	c2ee                	enter_s	[r13-r19,blink]
+   2:	4210                	mov_s	r18,r0
+   4:	2280 250c           	add	r18,r18,788
+   8:	4310                	mov_s	r19,r0
+   a:	1210 a080           	ldb	r0,[r18,-240]
+   e:	0815 005e           	bbit0.t	r0,0x1,20	;20 <lctrConnServicePowerMonitor+0x20>
+  12:	1600 7080 0000 0000 	ldb	r0,[0]
+			16: R_ARC_32_ME	lmgrCb+0x15
+  1a:	0813 01ff           	bbit1.d.t	r0,0x7,18	;2a <lctrConnServicePowerMonitor+0x2a>
+  1e:	70ed                	mov_s	r15,0
+  20:	2380 208c           	add	r19,r19,770
+  24:	1b00 2003           	stb	0,[r19]
+  28:	c6ce                	leave_s	[r13-r19,blink,pcl]
+  2a:	134d 208d           	ldb	r13,[r19,77]
+  2e:	0d0f 10d1           	brne.nt	r13,0x3,14	;3a <lctrConnServicePowerMonitor+0x3a>
+  32:	134e 2080           	ldb	r0,[r19,78]
+  36:	2078 004f           	seteq	r15,r0,0x1
+  3a:	12f8 a100           	ldh	r0,[r18,-8]
+  3e:	e80e                	breq_s	r0,0,28	;58 <lctrConnServicePowerMonitor+0x58>
+  40:	13c4 2601           	ld.as	r1,[r19,196]
+  44:	2904 0000           	div	r0,r1,r0
+  48:	790d                	sexb_s	r1,r0
+  4a:	0802 0020           	bl.d	0	;0 <lctrRssiAddAveragePoint>
+			4a: R_ARC_S25W_PCREL	lctrRssiAddAveragePoint
+  4e:	4042                	mov_s	r0,r18
+  50:	1af8 a005           	sth	0,[r18,-8]
+  54:	1bc4 2019           	st.as	0,[r19,196]
+  58:	1205 2080           	ldb	r0,[r18,5]
+  5c:	08cd 8134           	brlo.d.nt	r0,0x4,-52	;28 <lctrConnServicePowerMonitor+0x28>
+  60:	4062                	mov_s	r0,r19
+  62:	0802 0020           	bl.d	0	;0 <lctrRssiGetAverage>
+			62: R_ARC_S25W_PCREL	lctrRssiGetAverage
+  66:	2080 050c           	add	r0,r0,788
+  6a:	12f4 a081           	ldb	r1,[r18,-12]
+  6e:	4608                	mov_s	r14,r0
+  70:	e98b                	brne_s	r1,0,22	;86 <lctrConnServicePowerMonitor+0x86>
+  72:	12f6 a0c0           	ldb.x	r0,[r18,-10]
+  76:	080f 0382           	brlt.nt	r0,r14,14	;82 <lctrConnServicePowerMonitor+0x82>
+  7a:	12f7 a0c0           	ldb.x	r0,[r18,-9]
+  7e:	0ead 9003           	brge.nt	r14,r0,-84	;28 <lctrConnServicePowerMonitor+0x28>
+  82:	1af4 a043           	stb	1,[r18,-12]
+  86:	67bf                	add_s	r15,r15,r13
+  88:	7def                	extb_s	r13,r15
+  8a:	7562                	add_s	r13,r13,r19
+  8c:	2580 1b48           	add	r13,r13,557
+  90:	1500 1090           	ldb	r16,[r13]
+  94:	4062                	mov_s	r0,r19
+  96:	2080 020c           	add	r0,r0,776
+  9a:	2044 2081           	and	r1,r16,0x2
+  9e:	2044 2043           	and	r3,r16,0x1
+  a2:	2178 0002           	seteq	r2,r1,0
+  a6:	2378 0003           	seteq	r3,r3,0
+  aa:	0802 0020           	bl.d	0	;0 <lctrGetPowerControlReqDelta>
+			aa: R_ARC_S25W_PCREL	lctrGetPowerControlReqDelta
+  ae:	41c1                	mov_s	r1,r14
+  b0:	8d24                	ldb_s	r1,[r13,0x4]
+  b2:	218c 8fc3           	cmp	r1,255
+  b6:	f209                	beq_s	18	;c6 <lctrConnServicePowerMonitor+0xc6>
+  b8:	7a13                	neg_s	r2,r0
+  ba:	214e 0011           	neg	r17,r1
+  be:	7230                	cmp_s	r2,r1
+  c0:	21ca 200c           	mov.le	r17,r0
+  c4:	f002                	b_s	4	;c8 <lctrConnServicePowerMonitor+0xc8>
+  c6:	4110                	mov_s	r17,r0
+  c8:	12f6 a0c1           	ldb.x	r1,[r18,-10]
+  cc:	090d 0382           	brlt.nt	r1,r14,12	;d8 <lctrConnServicePowerMonitor+0xd8>
+  d0:	12f7 a0c0           	ldb.x	r0,[r18,-9]
+  d4:	0e0f 1003           	brge.nt	r14,r0,14	;e2 <lctrConnServicePowerMonitor+0xe2>
+  d8:	12f5 a080           	ldb	r0,[r18,-11]
+  dc:	7104                	add_s	r0,r0,1
+  de:	1af5 a002           	stb	r0,[r18,-11]
+  e2:	2053 2050           	bmsk	r16,r16,0x1
+  e6:	080d 20f0           	breq.d.nt	r16,0x3,12	;f0 <lctrConnServicePowerMonitor+0xf0>
+  ea:	262f f447           	extb.f	0,r17
+  ee:	f20c                	beq_s	24	;104 <lctrConnServicePowerMonitor+0x104>
+  f0:	12f7 a0c0           	ldb.x	r0,[r18,-9]
+  f4:	4910                	sub_s	r0,r1,r0
+  f6:	2844 0100           	div	r0,r0,0x4
+  fa:	12f5 a081           	ldb	r1,[r18,-11]
+  fe:	780f                	extb_s	r0,r0
+ 100:	0909 0004           	brlo.nt	r1,r0,8	;108 <lctrConnServicePowerMonitor+0x108>
+ 104:	1af4 a005           	sth	0,[r18,-12]
+ 108:	262f f447           	extb.f	0,r17
+ 10c:	f38e                	beq_s	-228	;28 <lctrConnServicePowerMonitor+0x28>
+ 10e:	1267 a080           	ldb	r0,[r18,-153]
+ 112:	0819 8710           	breq.nt	r0,0x1c,-232	;28 <lctrConnServicePowerMonitor+0x28>
+ 116:	1273 a080           	ldb	r0,[r18,-141]
+ 11a:	0811 813f           	bbit1.d.t	r0,0x4,-240	;28 <lctrConnServicePowerMonitor+0x28>
+ 11e:	760c                	mov_s	r0,6
+ 120:	0802 0000           	bl	0	;0 <WsfMsgAlloc>
+			120: R_ARC_S25W_PCREL	WsfMsgAlloc
+ 124:	4100                	mov_s	r1,r0
+ 126:	e819                	breq_s	r0,0,50	;156 <lctrConnServicePowerMonitor+0x156>
+ 128:	42c3 0000 2801      	mov_s	r2,0x2801
+ 12e:	40c3 0000 0000      	mov_s	r0,0
+			130: R_ARC_32_ME	pLctrConnTbl
+ 134:	b141                	sth_s	r2,[r1,0x2]
+ 136:	8000                	ld_s	r0,[r0,0]
+ 138:	a9e5                	stb_s	r15,[r1,0x5]
+ 13a:	1904 0442           	stb	r17,[r1,4]
+ 13e:	2302 2002           	sub	r2,r19,r0
+ 142:	2a84 040e           	div	r2,r2,912
+ 146:	1600 7080 0000 0000 	ldb	r0,[0]
+			14a: R_ARC_32_ME	lmgrPersistCb+0xc
+ 14e:	7a4f                	extb_s	r2,r2
+ 150:	0802 0020           	bl.d	0	;0 <WsfMsgSend>
+			150: R_ARC_S25W_PCREL	WsfMsgSend
+ 154:	b140                	sth_s	r2,[r1,0]
+ 156:	1a05 2003           	stb	0,[r18,5]
+ 15a:	c6ce                	leave_s	[r13-r19,blink,pcl]
+
+Disassembly of section .text.lctrSendPeerPowerRsp:
+
+00000000 <lctrSendPeerPowerRsp>:
+   0:	7ee0                	j_s	[blink]
+
+Disassembly of section .text.lctrStorePeerPowerInd:
+
+00000000 <lctrStorePeerPowerInd>:
+   0:	c2e4                	enter_s	[r13-r14,blink]
+   2:	4608                	mov_s	r14,r0
+   4:	208a 000c           	mov	r0,768
+   8:	45cb 0000 0000      	mov_s	r13,0
+			a: R_ARC_32_ME	lctrDataPdu
+   e:	6608                	ldb_s	r0,[r14,r0]
+  10:	0835 0071           	brne.d.nt	r0,0x1,52	;44 <lctrStorePeerPowerInd+0x44>
+  14:	8d2c                	ldb_s	r1,[r13,0xc]
+  16:	164d 1083           	ldb	r3,[r14,77]
+  1a:	6b09                	sub_s	r0,r3,0x1
+  1c:	0929 002e           	bbit0.d.t	r1,r0,40	;44 <lctrStorePeerPowerInd+0x44>
+  20:	6638                	add_s	r0,r14,r1
+  22:	2080 0a48           	add	r0,r0,553
+  26:	150f 10c4           	ldb.x	r4,[r13,15]
+  2a:	8800                	ldb_s	r0,[r0,0]
+  2c:	150d 1085           	ldb	r5,[r13,13]
+  30:	702c                	mov_s	r1,0
+  32:	200e 0100           	rsub	r0,r0,r4
+  36:	262f 0005           	sexb	r6,r0
+  3a:	714c                	mov_s	r2,1
+  3c:	0802 0020           	bl.d	0	;0 <lctrStorePeerPowerInd>
+			3c: R_ARC_S25W_PCREL	lctrNotifyPowerReportInd
+  40:	40c1                	mov_s	r0,r14
+  42:	8d2c                	ldb_s	r1,[r13,0xc]
+  44:	8d0f                	ldb_s	r0,[r13,0xf]
+  46:	61d9                	add_s	r1,r1,r14
+  48:	2180 0a48           	add	r1,r1,553
+  4c:	a900                	stb_s	r0,[r1,0]
+  4e:	c6c4                	leave_s	[r13-r14,blink,pcl]
+
+Disassembly of section .text.lctrSendPowerChangeInd:
+
+00000000 <lctrSendPowerChangeInd>:
+   0:	c2ee                	enter_s	[r13-r19,blink]
+   2:	4110                	mov_s	r17,r0
+   4:	208a 0f4b           	mov	r0,765
+   8:	2132 2000           	ldb	r0,[r17,r0]
+   c:	4390                	mov_s	r19,r4
+   e:	4070                	mov_s	r16,r3
+  10:	4748                	mov_s	r15,r2
+  12:	4230                	mov_s	r18,r1
+  14:	e839                	breq_s	r0,0,114	;86 <lctrSendPowerChangeInd+0x86>
+  16:	0802 0020           	bl.d	0	;0 <lctrTxCtrlPduAlloc>
+			16: R_ARC_S25W_PCREL	lctrTxCtrlPduAlloc
+  1a:	750c                	mov_s	r0,5
+  1c:	4508                	mov_s	r13,r0
+  1e:	e835                	breq_s	r0,0,106	;86 <lctrSendPowerChangeInd+0x86>
+  20:	2242 2041           	sub	r1,r18,0x1
+  24:	710c                	mov_s	r0,1
+  26:	2800 0042           	asl	r2,r0,r1
+  2a:	462a                	mov_s	r14,r17
+  2c:	784f                	extb_s	r0,r2
+  2e:	704e                	mov_s	r18,0
+  30:	081b 0131           	brne.d.nt	r0,0x4,26	;4a <lctrSendPowerChangeInd+0x4a>
+  34:	2680 1385           	add	r14,r14,334
+  38:	0b13 2010           	breq.nt	r19,0,18	;4a <lctrSendPowerChangeInd+0x4a>
+  3c:	8e20                	ldb_s	r1,[r14,0]
+  3e:	8e01                	ldb_s	r0,[r14,0x1]
+  40:	7030                	cmp_s	r0,r1
+  42:	2039 0052           	setne	r18,r0,r1
+  46:	22ca 0321           	mov.eq	r2,0xc
+  4a:	d825                	mov_s	r0,0x25
+  4c:	ad00                	stb_s	r0,[r13,0]
+  4e:	4002                	mov_s	r0,r16
+  50:	0802 0020           	bl.d	0	;0 <lctrGetPowerLimits>
+			50: R_ARC_S25W_PCREL	lctrGetPowerLimits
+  54:	ad41                	stb_s	r2,[r13,0x1]
+  56:	ad02                	stb_s	r0,[r13,0x2]
+  58:	4022                	mov_s	r0,r17
+  5a:	41a1                	mov_s	r1,r13
+  5c:	1d04 1402           	stb	r16,[r13,4]
+  60:	0802 0020           	bl.d	0	;0 <lctrTxCtrlPduQueue>
+			60: R_ARC_S25W_PCREL	lctrTxCtrlPduQueue
+  64:	ade3                	stb_s	r15,[r13,0x3]
+  66:	0a23 2010           	breq.nt	r18,0,34	;86 <lctrSendPowerChangeInd+0x86>
+  6a:	1601 10ce           	ldb.x	r14,[r14,1]
+  6e:	1d01 1203           	stb	8,[r13,1]
+  72:	0802 0020           	bl.d	0	;0 <lctrGetPowerLimits>
+			72: R_ARC_S25W_PCREL	lctrGetPowerLimits
+  76:	40c1                	mov_s	r0,r14
+  78:	ad02                	stb_s	r0,[r13,0x2]
+  7a:	4022                	mov_s	r0,r17
+  7c:	41a1                	mov_s	r1,r13
+  7e:	adc4                	stb_s	r14,[r13,0x4]
+  80:	0802 0020           	bl.d	0	;0 <lctrTxCtrlPduQueue>
+			80: R_ARC_S25W_PCREL	lctrTxCtrlPduQueue
+  84:	ade3                	stb_s	r15,[r13,0x3]
+  86:	c6ce                	leave_s	[r13-r19,blink,pcl]
+
+Disassembly of section .text.lctrStorePeerPowerControlRsp:
+
+00000000 <lctrStorePeerPowerControlRsp>:
+   0:	c2ec                	enter_s	[r13-r18,blink]
+   2:	4508                	mov_s	r13,r0
+   4:	42b1                	mov_s	r18,r13
+   6:	2580 100c           	add	r13,r13,768
+   a:	40c3 0000 0000      	mov_s	r0,0
+			c: R_ARC_32_ME	lctrDataPdu+0xc
+  10:	8d20                	ldb_s	r1,[r13,0]
+  12:	1003 0090           	ldb	r16,[r0,3]
+  16:	1002 00ce           	ldb.x	r14,[r0,2]
+  1a:	1001 0091           	ldb	r17,[r0,1]
+  1e:	0931 0071           	brne.d.nt	r1,0x1,48	;4c <lctrStorePeerPowerControlRsp+0x4c>
+  22:	88e0                	ldb_s	r15,[r0,0]
+  24:	15fe 9083           	ldb	r3,[r13,-2]
+  28:	79cf                	extb_s	r1,r14
+  2a:	2200 20c0           	add	r0,r18,r3
+  2e:	2080 0a48           	add	r0,r0,553
+  32:	8800                	ldb_s	r0,[r0,0]
+  34:	0919 0020           	breq.d.nt	r1,r0,24	;4c <lctrStorePeerPowerControlRsp+0x4c>
+  38:	4e10                	sub_s	r0,r14,r0
+  3a:	262f 0005           	sexb	r6,r0
+  3e:	702c                	mov_s	r1,0
+  40:	714c                	mov_s	r2,1
+  42:	4042                	mov_s	r0,r18
+  44:	44c1                	mov_s	r4,r14
+  46:	0802 0020           	bl.d	0	;0 <lctrStorePeerPowerControlRsp>
+			46: R_ARC_S25W_PCREL	lctrNotifyPowerReportInd
+  4a:	45e1                	mov_s	r5,r15
+  4c:	15fe 9080           	ldb	r0,[r13,-2]
+  50:	7042                	add_s	r0,r0,r18
+  52:	2080 0a48           	add	r0,r0,553
+  56:	a8c0                	stb_s	r14,[r0,0]
+  58:	15fe 9080           	ldb	r0,[r13,-2]
+  5c:	7042                	add_s	r0,r0,r18
+  5e:	2080 0b48           	add	r0,r0,557
+  62:	a8e0                	stb_s	r15,[r0,0]
+  64:	15fe 9080           	ldb	r0,[r13,-2]
+  68:	7042                	add_s	r0,r0,r18
+  6a:	2080 0c48           	add	r0,r0,561
+  6e:	1800 0402           	stb	r16,[r0]
+  72:	15fe 9080           	ldb	r0,[r13,-2]
+  76:	7042                	add_s	r0,r0,r18
+  78:	2080 0a48           	add	r0,r0,553
+  7c:	1000 00c0           	ldb.x	r0,[r0]
+  80:	e0fd                	cmp_s	r0,0x7d
+  82:	f616                	bgt_s	44	;ac <lctrStorePeerPowerControlRsp+0xac>
+  84:	8d03                	ldb_s	r0,[r13,0x3]
+  86:	080b 0051           	brne.nt	r0,0x1,10	;8e <lctrStorePeerPowerControlRsp+0x8e>
+  8a:	1d03 1003           	stb	0,[r13,3]
+  8e:	8d01                	ldb_s	r0,[r13,0x1]
+  90:	081d 0051           	brne.nt	r0,0x1,28	;ac <lctrStorePeerPowerControlRsp+0xac>
+  94:	8d10                	ldb_s	r0,[r13,0x10]
+  96:	0819 0071           	brne.d.nt	r0,0x1,24	;ac <lctrStorePeerPowerControlRsp+0xac>
+  9a:	4042                	mov_s	r0,r18
+  9c:	0802 0020           	bl.d	0	;0 <lctrCalcPathLossZone>
+			9c: R_ARC_S25W_PCREL	lctrCalcPathLossZone
+  a0:	1d10 1003           	stb	0,[r13,16]
+  a4:	ad0e                	stb_s	r0,[r13,0xe]
+  a6:	0802 0020           	bl.d	0	;0 <lctrNotifyHostPathLossRpt>
+			a6: R_ARC_S25W_PCREL	lctrNotifyHostPathLossRpt
+  aa:	4042                	mov_s	r0,r18
+  ac:	2280 2f0b           	add	r18,r18,764
+  b0:	1a00 2442           	stb	r17,[r18]
+  b4:	c6cc                	leave_s	[r13-r18,blink,pcl]
+
+Disassembly of section .text.lctrSendPeerPowerControlRsp:
+
+00000000 <lctrSendPeerPowerControlRsp>:
+   0:	c2e8                	enter_s	[r13-r16,blink]
+   2:	4508                	mov_s	r13,r0
+   4:	2580 1f0b           	add	r13,r13,764
+   8:	15ef 9081           	ldb	r1,[r13,-17]
+   c:	4010                	mov_s	r16,r0
+   e:	e909                	breq_s	r1,0,18	;1e <lctrSendPeerPowerControlRsp+0x1e>
+  10:	714c                	mov_s	r2,1
+  12:	0802 0020           	bl.d	0	;0 <lctrSendRejectInd>
+			12: R_ARC_S25W_PCREL	lctrSendRejectInd
+  16:	4002                	mov_s	r0,r16
+  18:	1def 9003           	stb	0,[r13,-17]
+  1c:	c6c8                	leave_s	[r13-r16,blink,pcl]
+  1e:	8d02                	ldb_s	r0,[r13,0x2]
+  20:	2079 0101           	setne	r1,r0,0x4
+  24:	2049 00c0           	min	r0,r0,0x3
+  28:	7822                	sub_s	r0,r0,r1
+  2a:	7002                	add_s	r0,r0,r16
+  2c:	2080 0305           	add	r0,r0,332
+  30:	1000 00ce           	ldb.x	r14,[r0]
+  34:	0802 0020           	bl.d	0	;0 <lctrTxCtrlPduAlloc>
+			34: R_ARC_S25W_PCREL	lctrTxCtrlPduAlloc
+  38:	750c                	mov_s	r0,5
+  3a:	4708                	mov_s	r15,r0
+  3c:	e810                	breq_s	r0,0,32	;5c <lctrSendPeerPowerControlRsp+0x5c>
+  3e:	d824                	mov_s	r0,0x24
+  40:	af00                	stb_s	r0,[r15,0]
+  42:	0802 0020           	bl.d	0	;0 <lctrGetPowerLimits>
+			42: R_ARC_S25W_PCREL	lctrGetPowerLimits
+  46:	40c1                	mov_s	r0,r14
+  48:	af01                	stb_s	r0,[r15,0x1]
+  4a:	8d00                	ldb_s	r0,[r13,0]
+  4c:	41e1                	mov_s	r1,r15
+  4e:	1f04 1fc3           	stb	-1,[r15,4]
+  52:	af02                	stb_s	r0,[r15,0x2]
+  54:	4002                	mov_s	r0,r16
+  56:	0802 0020           	bl.d	0	;0 <lctrTxCtrlPduQueue>
+			56: R_ARC_S25W_PCREL	lctrTxCtrlPduQueue
+  5a:	afc3                	stb_s	r14,[r15,0x3]
+  5c:	2080 2f4b           	add	r16,r16,765
+  60:	1800 2043           	stb	1,[r16]
+  64:	c6c8                	leave_s	[r13-r16,blink,pcl]
+
+Disassembly of section .text.lctrStorePeerPowerControlReq:
+
+00000000 <lctrStorePeerPowerControlReq>:
+   0:	c2ee                	enter_s	[r13-r19,blink]
+   2:	40d3 0000 0000      	mov_s	r16,0
+			4: R_ARC_32_ME	lctrDataPdu
+   8:	100c 2083           	ldb	r3,[r16,12]
+   c:	100e 20cf           	ldb.x	r15,[r16,14]
+  10:	244a 7100           	mov	lp_count,0x4
+  14:	4210                	mov_s	r18,r0
+  16:	712c                	mov_s	r1,1
+  18:	4310                	mov_s	r19,r0
+  1a:	2280 200c           	add	r18,r18,768
+  1e:	71cd                	mov_s	r14,1
+  20:	2142 0040           	sub	r0,r1,0x1
+  24:	1aeb a003           	stb	0,[r18,-21]
+  28:	20a8 0200           	lp	16	;38 <lctrStorePeerPowerControlReq+0x38>
+  2c:	2900 0002           	asl	r2,r1,r0
+  30:	0a0b 00e0           	breq.d.nt	r2,r3,10	;3a <lctrStorePeerPowerControlReq+0x3a>
+  34:	7104                	add_s	r0,r0,1
+  36:	71c5                	add_s	r14,r14,1
+  38:	deff                	mov_s	r14,0xff
+  3a:	78cf                	extb_s	r0,r14
+  3c:	208c 8fc3           	cmp	r0,255
+  40:	4110                	mov_s	r17,r0
+  42:	f20b                	beq_s	22	;56 <lctrStorePeerPowerControlReq+0x56>
+  44:	0802 0020           	bl.d	0	;0 <lctrIsPclPhyValueSupported>
+			44: R_ARC_S25W_PCREL	lctrIsPclPhyValueSupported
+  48:	4022                	mov_s	r0,r17
+  4a:	e807                	breq_s	r0,0,14	;56 <lctrStorePeerPowerControlReq+0x56>
+  4c:	e7fe                	cmp_s	r15,0x7e
+  4e:	f409                	bne_s	18	;5e <lctrStorePeerPowerControlReq+0x5e>
+  50:	1aeb a783           	stb	30,[r18,-21]
+  54:	c6ce                	leave_s	[r13-r19,blink,pcl]
+  56:	d820                	mov_s	r0,0x20
+  58:	1aeb a002           	stb	r0,[r18,-21]
+  5c:	c6ce                	leave_s	[r13-r19,blink,pcl]
+  5e:	1200 2080           	ldb	r0,[r18]
+  62:	2300 244d           	add	r13,r19,r17
+  66:	0831 0071           	brne.d.nt	r0,0x1,48	;94 <lctrStorePeerPowerControlReq+0x94>
+  6a:	2580 1a48           	add	r13,r13,553
+  6e:	8d20                	ldb_s	r1,[r13,0]
+  70:	78ef                	extb_s	r0,r15
+  72:	0925 0020           	breq.d.nt	r1,r0,36	;94 <lctrStorePeerPowerControlReq+0x94>
+  76:	40e1                	mov_s	r0,r15
+  78:	0802 0000           	bl	0	;0 <lctrGetPowerLimits>
+			78: R_ARC_S25W_PCREL	lctrGetPowerLimits
+  7c:	8d20                	ldb_s	r1,[r13,0]
+  7e:	4500                	mov_s	r5,r0
+  80:	714c                	mov_s	r2,1
+  82:	4f30                	sub_s	r0,r15,r1
+  84:	262f 0005           	sexb	r6,r0
+  88:	702c                	mov_s	r1,0
+  8a:	4062                	mov_s	r0,r19
+  8c:	4322                	mov_s	r3,r17
+  8e:	0802 0020           	bl.d	0	;0 <lctrStorePeerPowerControlReq>
+			8e: R_ARC_S25W_PCREL	lctrNotifyPowerReportInd
+  92:	44e1                	mov_s	r4,r15
+  94:	ade0                	stb_s	r15,[r13,0]
+  96:	100d 20c2           	ldb.x	r2,[r16,13]
+  9a:	4062                	mov_s	r0,r19
+  9c:	0802 0020           	bl.d	0	;0 <lctrStorePeerPowerControlReq>
+			9c: R_ARC_S25W_PCREL	lctrAttemptTxPowerChange
+  a0:	4122                	mov_s	r1,r17
+  a2:	1afe a382           	stb	r14,[r18,-2]
+  a6:	1afc a002           	stb	r0,[r18,-4]
+  aa:	e856                	breq_s	r0,0,-84	;54 <lctrStorePeerPowerControlReq+0x54>
+  ac:	12ff a080           	ldb	r0,[r18,-1]
+  b0:	08a5 8071           	brne.d.nt	r0,0x1,-92	;54 <lctrStorePeerPowerControlReq+0x54>
+  b4:	7436                	cmp_s	r17,4
+  b6:	26ca 10e1           	mov.eq	r14,0x3
+  ba:	2179 2101           	setne	r1,r17,0x4
+  be:	78cf                	extb_s	r0,r14
+  c0:	7822                	sub_s	r0,r0,r1
+  c2:	7062                	add_s	r0,r0,r19
+  c4:	2080 0305           	add	r0,r0,332
+  c8:	1000 00cd           	ldb.x	r13,[r0]
+  cc:	0802 0020           	bl.d	0	;0 <lctrGetPowerLimits>
+			cc: R_ARC_S25W_PCREL	lctrGetPowerLimits
+  d0:	40a1                	mov_s	r0,r13
+  d2:	12fc a0c6           	ldb.x	r6,[r18,-4]
+  d6:	4500                	mov_s	r5,r0
+  d8:	702c                	mov_s	r1,0
+  da:	704c                	mov_s	r2,0
+  dc:	4062                	mov_s	r0,r19
+  de:	4322                	mov_s	r3,r17
+  e0:	0802 0020           	bl.d	0	;0 <lctrStorePeerPowerControlReq>
+			e0: R_ARC_S25W_PCREL	lctrNotifyPowerReportInd
+  e4:	44a1                	mov_s	r4,r13
+  e6:	c6ce                	leave_s	[r13-r19,blink,pcl]
+
+Disassembly of section .text.lctrNotifyPowerReportInd:
+
+00000000 <lctrNotifyPowerReportInd>:
+   0:	1cec b7c8           	st.aw	blink,[sp,-20]
+   4:	44cb 0000 0000      	mov_s	r12,0
+			6: R_ARC_32_ME	pLctrConnTbl
+   a:	8480                	ld_s	r12,[r12,0]
+   c:	1c07 3042           	stb	r1,[sp,7]
+  10:	d92f                	mov_s	r1,0x2f
+  12:	7882                	sub_s	r0,r0,r12
+  14:	2884 040e           	div	r0,r0,912
+  18:	1c10 3182           	stb	r6,[sp,16]
+  1c:	1c0f 3142           	stb	r5,[sp,15]
+  20:	1c0e 3102           	stb	r4,[sp,14]
+  24:	1c0d 30c2           	stb	r3,[sp,13]
+  28:	780f                	extb_s	r0,r0
+  2a:	4383                	mov_s	r3,sp
+  2c:	b305                	sth_s	r0,[r3,0xa]
+  2e:	b302                	sth_s	r0,[r3,0x4]
+  30:	c081                	add_s	r0,sp,0x4
+  32:	c263                	stb_s	r2,[sp,0xc]
+  34:	1c08 3003           	stb	0,[sp,8]
+  38:	0802 0020           	bl.d	0	;0 <LmgrSendEvent>
+			38: R_ARC_S25W_PCREL	LmgrSendEvent
+  3c:	1c06 3042           	stb	r1,[sp,6]
+  40:	1414 341f           	ld.ab	blink,[sp,20]
+  44:	7ee0                	j_s	[blink]
+
+Disassembly of section .text.lctrSendPeerPowerControlReq:
+
+00000000 <lctrSendPeerPowerControlReq>:
+   0:	c2e8                	enter_s	[r13-r16,blink]
+   2:	4608                	mov_s	r14,r0
+   4:	2680 1f8b           	add	r14,r14,766
+   8:	8ee0                	ldb_s	r15,[r14,0]
+   a:	16fe 908d           	ldb	r13,[r14,-2]
+   e:	4010                	mov_s	r16,r0
+  10:	0802 0020           	bl.d	0	;0 <lctrTxCtrlPduAlloc>
+			10: R_ARC_S25W_PCREL	lctrTxCtrlPduAlloc
+  14:	740c                	mov_s	r0,4
+  16:	4100                	mov_s	r1,r0
+  18:	e816                	breq_s	r0,0,44	;44 <lctrSendPeerPowerControlReq+0x44>
+  1a:	db23                	mov_s	r3,0x23
+  1c:	2779 1102           	setne	r2,r15,0x4
+  20:	2749 10c0           	min	r0,r15,0x3
+  24:	a960                	stb_s	r3,[r1,0]
+  26:	4852                	sub_s	r2,r0,r2
+  28:	8e00                	ldb_s	r0,[r14,0]
+  2a:	718d                	mov_s	r12,1
+  2c:	7202                	add_s	r2,r2,r16
+  2e:	7704                	add_s	r0,r0,-1
+  30:	7c18                	asl_s	r12,r12,r0
+  32:	a9a2                	stb_s	r13,[r1,0x2]
+  34:	2280 0305           	add	r2,r2,332
+  38:	a981                	stb_s	r12,[r1,0x1]
+  3a:	8a00                	ldb_s	r0,[r2,0]
+  3c:	a903                	stb_s	r0,[r1,0x3]
+  3e:	0802 0020           	bl.d	0	;0 <lctrTxCtrlPduQueue>
+			3e: R_ARC_S25W_PCREL	lctrTxCtrlPduQueue
+  42:	4002                	mov_s	r0,r16
+  44:	c6c8                	leave_s	[r13-r16,blink,pcl]
+
+Disassembly of section .text.lctrStorePowerControlAction:
+
+00000000 <lctrStorePowerControlAction>:
+   0:	c5e1                	push_s	r13
+   2:	1600 7001 0000 0000 	ld	r1,[0]
+			6: R_ARC_32_ME	pLctrConnMsg
+   a:	4200                	mov_s	r2,r0
+   c:	2280 0f0b           	add	r2,r2,764
+  10:	8964                	ldb_s	r3,[r1,0x4]
+  12:	aa60                	stb_s	r3,[r2,0]
+  14:	8985                	ldb_s	r12,[r1,0x5]
+  16:	609d                	add_s	r13,r0,r12
+  18:	2580 12c5           	add	r13,r13,331
+  1c:	8d20                	ldb_s	r1,[r13,0]
+  1e:	aa82                	stb_s	r12,[r2,0x2]
+  20:	e1fe                	cmp_s	r1,0x7e
+  22:	f416                	bne_s	44	;4c <lctrStorePowerControlAction+0x4c>
+  24:	41c3 0000 0000      	mov_s	r1,0
+			26: R_ARC_32_ME	pLctrRtCfg
+  2a:	8140                	ld_s	r2,[r1,0]
+  2c:	7395                	cmp_s	r12,3
+  2e:	1228 0082           	ldb	r2,[r2,40]
+  32:	ad40                	stb_s	r2,[r13,0]
+  34:	f78c                	blo_s	24	;4c <lctrStorePowerControlAction+0x4c>
+  36:	8180                	ld_s	r12,[r1,0]
+  38:	4200                	mov_s	r2,r0
+  3a:	722c                	mov_s	r1,2
+  3c:	2280 0305           	add	r2,r2,332
+  40:	1428 108c           	ldb	r12,[r12,40]
+  44:	21ca 00e1           	mov.eq	r1,0x3
+  48:	6159                	add_s	r1,r1,r2
+  4a:	a980                	stb_s	r12,[r1,0]
+  4c:	218a 00cc           	mov	r1,771
+  50:	6029                	ldb_s	r1,[r0,r1]
+  52:	e987                	brne_s	r1,0,14	;5e <lctrStorePowerControlAction+0x5e>
+  54:	eb85                	brne_s	r3,0,10	;5e <lctrStorePowerControlAction+0x5e>
+  56:	2080 0a4b           	add	r0,r0,745
+  5a:	1800 0043           	stb	1,[r0]
+  5e:	c4c2                	leave_s	[r13,pcl]
+
+Disassembly of section .text.lctrAttemptTxPowerChange:
+
+00000000 <lctrAttemptTxPowerChange>:
+   0:	c2ea                	enter_s	[r13-r17,blink]
+   2:	4110                	mov_s	r17,r0
+   4:	217c 0100           	setlo	r0,r1,0x4
+   8:	2149 00cf           	min	r15,r1,0x3
+   c:	4f15                	sub_s	r13,r15,r0
+   e:	7522                	add_s	r13,r13,r17
+  10:	2580 1305           	add	r13,r13,332
+  14:	8d00                	ldb_s	r0,[r13,0]
+  16:	4050                	mov_s	r16,r2
+  18:	e0ff                	cmp_s	r0,0x7f
+  1a:	f20c                	beq_s	24	;30 <lctrAttemptTxPowerChange+0x30>
+  1c:	e0fe                	cmp_s	r0,0x7e
+  1e:	f40c                	bne_s	24	;34 <lctrAttemptTxPowerChange+0x34>
+  20:	40c3 0000 0000      	mov_s	r0,0
+			22: R_ARC_32_ME	pLctrRtCfg
+  26:	8000                	ld_s	r0,[r0,0]
+  28:	1028 0081           	ldb	r1,[r0,40]
+  2c:	4628                	mov_s	r14,r1
+  2e:	f00a                	b_s	20	;40 <lctrAttemptTxPowerChange+0x40>
+  30:	700c                	mov_s	r0,0
+  32:	f01c                	b_s	56	;68 <lctrAttemptTxPowerChange+0x68>
+  34:	780d                	sexb_s	r0,r0
+  36:	0802 0020           	bl.d	0	;0 <PalRadioGetActualTxPower>
+			36: R_ARC_S25W_PCREL	PalRadioGetActualTxPower
+  3a:	702c                	mov_s	r1,0
+  3c:	8d20                	ldb_s	r1,[r13,0]
+  3e:	4608                	mov_s	r14,r0
+  40:	7102                	add_s	r1,r1,r16
+  42:	0811 2072           	brlt.d.nt	r16,0x1,16	;50 <lctrAttemptTxPowerChange+0x50>
+  46:	792d                	sexb_s	r1,r1
+  48:	78cd                	sexb_s	r0,r14
+  4a:	7110                	cmp_s	r1,r0
+  4c:	d87f                	mov_s	r0,0x7f
+  4e:	f683                	blt_s	6	;52 <lctrAttemptTxPowerChange+0x52>
+  50:	4020                	mov_s	r0,r1
+  52:	0802 0020           	bl.d	0	;0 <PalRadioGetActualPowerChange>
+			52: R_ARC_S25W_PCREL	PalRadioGetActualPowerChange
+  56:	4102                	mov_s	r1,r16
+  58:	ad00                	stb_s	r0,[r13,0]
+  5a:	114c 2081           	ldb	r1,[r17,76]
+  5e:	0f0b 1041           	brne.nt	r15,r1,10	;66 <lctrAttemptTxPowerChange+0x66>
+  62:	1942 2002           	stb	r0,[r17,66]
+  66:	78c2                	sub_s	r0,r0,r14
+  68:	780d                	sexb_s	r0,r0
+  6a:	c6ca                	leave_s	[r13-r17,blink,pcl]

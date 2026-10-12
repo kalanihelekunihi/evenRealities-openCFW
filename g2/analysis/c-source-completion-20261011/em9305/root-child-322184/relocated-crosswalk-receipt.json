@@ -1,0 +1,25 @@
+{
+  "status": "PASS_WHOLE_NATIVE_INSTRUCTION_CROSSWALK",
+  "pending_encoding_differences": [],
+  "baseline_load_expansions": [
+    "0x322192",
+    "0x322196",
+    "0x3221c2",
+    "0x322222"
+  ],
+  "instructions": 145,
+  "native_bytes": 440,
+  "target_function_bytes": 448,
+  "target_section_bytes": 448,
+  "trailing_alignment_bytes": 0,
+  "true_child_calls": 9,
+  "local_branches": 5,
+  "function_pointer_relocations": 1,
+  "byte_exact_other_instructions": 126,
+  "source_sha256": "4c1a554112bb6ff5f89495b60cc39b8b90e0d672f50c23e7e34e077eac7f821a",
+  "selected": false,
+  "limits": [
+    "All native out-of-line paths, indirect callback and delayed effects preserved.",
+    "Child register contracts, final image linking and hardware execution remain separate gates."
+  ]
+}

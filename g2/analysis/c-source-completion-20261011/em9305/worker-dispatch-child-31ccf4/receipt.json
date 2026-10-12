@@ -1,0 +1,30 @@
+{
+  "status": "pass",
+  "source_sha256": "dace310e53cde689b0b16e31337a1b54af26986827732c4b39c4fda26a20a78c",
+  "native_sha256": "936fb48d1de37750d59e957af4a119421a887fc2a664ceda9980bb5e4c32d2a6",
+  "target_disassembly_sha256": "c18d83a486166946aefc337186a1ba2e99ceb23c898c62adaedf6e29818f93a7",
+  "instruction_count": 93,
+  "native_body_bytes": 282,
+  "target_body_bytes": 288,
+  "baseline_ld_expansions": [
+    "0x31cd60",
+    "0x31cd80",
+    "0x31cdf4"
+  ],
+  "child_relocations": {
+    "0x31cd0a": "opencfw_em9305_memset",
+    "0x31cd18": "opencfw_em9305_memset",
+    "0x31cd48": "opencfw_em9305_memcpy",
+    "0x31cd5a": "opencfw_em9305_dispatch_child_312bc0",
+    "0x31cdc2": "opencfw_em9305_init_secondary_time_317ebc",
+    "0x31cdde": "opencfw_em9305_dispatch_child_3257f4",
+    "0x31cde8": "opencfw_em9305_associated_schedule_insert_312da4"
+  },
+  "pointer_relocations": {
+    "0x31cd38": "opencfw_em9305_dispatch_callback_31ca0c",
+    "0x31cd40": "opencfw_em9305_dispatch_callback_31ceb4",
+    "0x31cda2": "opencfw_em9305_dispatch_callback_31d43c",
+    "0x31cdaa": "opencfw_em9305_dispatch_callback_31cbb0"
+  },
+  "scope": "Full instruction sequence; genuine child and callback relocations; three baseline LD expansions."
+}

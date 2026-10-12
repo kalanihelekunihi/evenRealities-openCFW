@@ -1,0 +1,78 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00323028 <.data+0x20c28>:
+  323028:	c3f2                	enter_s	[r13-r21,fp,blink]
+  32302a:	c1ac                	sub_s	sp,sp,0x30
+  32302c:	c619                	ld_s	r14,[sp,0x64]
+  32302e:	4548                	mov_s	r13,r2
+  323030:	4708                	mov_s	r15,r0
+  323032:	c162                	stb_s	r1,[sp,0x8]
+  323034:	1c06 3004           	sth	r0,[sp,6]
+  323038:	1c00 3004           	sth	r0,[sp]
+  32303c:	2440 3280           	add	r0,sp,0xa
+  323040:	702c                	mov_s	r1,0
+  323042:	da19                	mov_s	r2,0x19
+  323044:	220a 21c0           	mov	r18,r7
+  323048:	230a 2180           	mov	r19,r6
+  32304c:	240a 2140           	mov	r20,r5
+  323050:	250a 2100           	mov	r21,r4
+  323054:	1c09 30c2           	stb	r3,[sp,9]
+  323058:	1c02 3143           	stb	5,[sp,2]
+  32305c:	c661                	stb_s	r14,[sp,0x4]
+  32305e:	0fc2 07e0           	bl.d	65472	;0x33301c
+  323062:	1c03 3382           	stb	r14,[sp,3]
+  323066:	c11c                	ld_s	r1,[sp,0x70]
+  323068:	c01b                	ld_s	r0,[sp,0x6c]
+  32306a:	1460 3010           	ld	r16,[sp,96]
+  32306e:	145c 3011           	ld	r17,[sp,92]
+  323072:	1c24 3044           	sth	r1,[sp,36]
+  323076:	1c23 3002           	stb	r0,[sp,35]
+  32307a:	ed0b                	breq_s	r13,0,22	;0x32308e
+  32307c:	8548                	ld_s	r2,[r13,0x20]
+  32307e:	9532                	ldh_s	r1,[r13,0x24]
+  323080:	152b 1080           	ldb	r0,[r13,43]
+  323084:	c244                	st_s	r2,[sp,0x10]
+  323086:	1c14 3044           	sth	r1,[sp,20]
+  32308a:	1c16 3002           	stb	r0,[sp,22]
+  32308e:	2440 3280           	add	r0,sp,0xa
+  323092:	41a2                	mov_s	r1,r21
+  323094:	0d56 f0af           	bl.d	-125612	;0x3045e8
+  323098:	4282                	mov_s	r2,r20
+  32309a:	2440 3740           	add	r0,sp,0x1d
+  32309e:	4162                	mov_s	r1,r19
+  3230a0:	0d4a f0af           	bl.d	-125624	;0x3045e8
+  3230a4:	4242                	mov_s	r2,r18
+  3230a6:	2440 35c0           	add	r0,sp,0x17
+  3230aa:	4122                	mov_s	r1,r17
+  3230ac:	0d3e f0af           	bl.d	-125636	;0x3045e8
+  3230b0:	4202                	mov_s	r2,r16
+  3230b2:	0eee f5af           	bl.d	-84244	;0x30e79c
+  3230b6:	c080                	add_s	r0,sp,0
+  3230b8:	ee02                	breq_s	r14,0,4	;0x3230bc
+  3230ba:	c7d2                	leave_s	[r13-r21,fp,blink,pcl]
+  3230bc:	40c3 0080 5a95      	mov_s	r0,0x805a95
+  3230c2:	8800                	ldb_s	r0,[r0,0]
+  3230c4:	08f7 81be           	bbit0.d.t	r0,0x6,-10	;0x3230ba
+  3230c8:	d821                	mov_s	r0,0x21
+  3230ca:	c11a                	ld_s	r1,[sp,0x68]
+  3230cc:	4283                	mov_s	r2,sp
+  3230ce:	b215                	sth_s	r0,[r2,0x2a]
+  3230d0:	c08a                	add_s	r0,sp,0x28
+  3230d2:	b2f6                	sth_s	r15,[r2,0x2c]
+  3230d4:	b2f4                	sth_s	r15,[r2,0x28]
+  3230d6:	0eca f5af           	bl.d	-84280	;0x30e79c
+  3230da:	1c2e 3042           	stb	r1,[sp,46]
+  3230de:	c7d2                	leave_s	[r13-r21,fp,blink,pcl]
+  3230e0:	c3e6                	enter_s	[r13-r15,fp,blink]
+  3230e2:	c1a9                	sub_s	sp,sp,0x24
+  3230e4:	4628                	mov_s	r14,r1
+  3230e6:	4508                	mov_s	r13,r0
+  3230e8:	c081                	add_s	r0,sp,0x4
+  3230ea:	702c                	mov_s	r1,0
+  3230ec:	0f32 07e0           	bl.d	65328	;0x33301c
+  3230f0:	da20                	mov_s	r2,0x20
+  3230f2:	8d02                	ldb_s	r0,[r13,0x2]

@@ -1,11 +1,11 @@
 /* Native image-B 0x100085ac..0x100086ac: SPI master device setup.
- * The descriptor and controller state remain exact linker-owned RAM/MMIO
+ * The descriptor and controller state use source-owned RAM/MMIO
  * contracts. The three callback entries are native function relocations;
  * their bodies are separate genuine source obligations.
  */
 #include <stdint.h>
 
-extern volatile uint32_t gx8002_image_b_spi_device_state_20017670[21];
+extern volatile uint32_t gx8002_image_b_spi_device_state_20017670[24];
 extern void gx8002_image_b_platform_gate_10003be8(uint32_t, uint32_t);
 extern int32_t gx8002_image_b_spi_register_master_10008218(uint32_t *);
 extern void gx8002_image_b_request_irq_10004844(

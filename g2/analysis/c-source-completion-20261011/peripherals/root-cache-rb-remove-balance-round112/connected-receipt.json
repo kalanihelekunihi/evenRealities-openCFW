@@ -1,0 +1,22 @@
+{
+  "status": "PASS_COMPILED_ARM_CONNECTED_RB_INSERT_REMOVE",
+  "cases": 4800,
+  "by_operation": {
+    "insert": 2400,
+    "remove": 2400
+  },
+  "random_seeds": 100,
+  "nodes_per_seed": 24,
+  "native_executed_instruction_addresses": 419,
+  "source_sha256": {
+    "analysis/c-source-completion-20261011/peripherals/root-cache-rb-insert-round111/rb_insert_candidate.c": "4d7fbfbec06fe3594bf04ca81183ed58ec601843841c6ec70811205f1aa06c1d",
+    "components/audio/uart_thread_source_candidate/display_font_rb_core.c": "244f344deac641a0562cb8577cbebb89d683712acb462bcee25319361c2e0ad1",
+    "analysis/c-source-completion-20261011/peripherals/root-cache-rb-remove-balance-round112/rb_balance_candidate.c": "599efad39b404dcc4e03413666d5ec45d0f262da59304457216cec49293df04c",
+    "analysis/c-source-completion-20261011/peripherals/root-cache-rb-remove-balance-round112/rb_remove_candidate.c": "52e21bd89d6473025c58778bfc46931e6ad074f3ef420a52d6d135087592df60"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual find/create/parent/insert balancing/remove/leftmost/delete balancing/rotations execute. Allocator/comparator/free are controlled cuts.",
+    "Valid constructed trees only; malformed/null/fatal and standalone helper cases remain unqualified. No full image or hardware claim."
+  ]
+}

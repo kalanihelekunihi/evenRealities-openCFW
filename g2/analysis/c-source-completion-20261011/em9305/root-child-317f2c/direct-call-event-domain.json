@@ -1,0 +1,47 @@
+{
+  "status": "BOUNDED_EVENT_DOMAIN_FOR_TWO_IDENTIFIED_DIRECT_CALLS",
+  "caller": "317f5c",
+  "join": "317fc2",
+  "join_predecessors": [
+    {
+      "from": "317f80",
+      "r1_definition": "317f7e mov_s r1,1",
+      "event": 1
+    },
+    {
+      "from": "317fae",
+      "r1_definition": "317fac mov_s r1,1",
+      "event": 1
+    },
+    {
+      "from": "317fb2",
+      "r1_definition": "317fb0 mov_s r1,0",
+      "event": 0
+    },
+    {
+      "from": "317fbe",
+      "r1_definition": "317fbc mov_s r1,0",
+      "event": 0
+    }
+  ],
+  "calls": [
+    "317fec",
+    "318012"
+  ],
+  "accepted_event_indices": [
+    0,
+    1
+  ],
+  "reason": "No R1 write occurs between the join and either direct call. The memcpy path restores R1=1 before joining. The first child-call path exits without reaching the second call.",
+  "native_action_slots": [
+    "315aec",
+    "3160d4"
+  ],
+  "native_transition_values": [
+    0,
+    0
+  ],
+  "limits": [
+    "This proves the two identified direct caller paths only. It does not exclude indirect callers or establish complete object extents. SDK handler bodies materially differ; semantic role similarity is not byte identity."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "status": "PASS_CONSERVATIVE_DIRECT_CALL_EVENT_DOMAIN",
+  "call_values": {
+    "0x31fb4a": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "0x31fb6e": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "analysis": "Both conditional outcomes traversed; calls clobber R1; delay writes executed before successors; all14 BIH slots explored.",
+  "visited_abstract_states": 183,
+  "native_disassembly_sha256": "b454b7c5d79d484f20816787412e74e995c35cfc205934083161b71eaf73a04e",
+  "limits": [
+    "Proves event<7 for these two call sites under native control flow.",
+    "State<8, other/indirectcallers and callback mutations remain open."
+  ]
+}

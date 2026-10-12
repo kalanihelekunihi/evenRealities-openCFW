@@ -1,0 +1,78 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+005c34e4 <.data+0x18b4e4>:
+  5c34e4:	e92d 41ff 	stmdb	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  5c34e8:	0004      	movs	r4, r0
+  5c34ea:	000e      	movs	r6, r1
+  5c34ec:	2c00      	cmp	r4, #0
+  5c34ee:	d115      	bne.n	0x5c351c
+  5c34f0:	f8df 05c8 	ldr.w	r0, [pc, #1480]	@ 0x5c3abc
+  5c34f4:	9002      	str	r0, [sp, #8]
+  5c34f6:	f8df 05c8 	ldr.w	r0, [pc, #1480]	@ 0x5c3ac0
+  5c34fa:	9001      	str	r0, [sp, #4]
+  5c34fc:	f8df 05c4 	ldr.w	r0, [pc, #1476]	@ 0x5c3ac4
+  5c3500:	9000      	str	r0, [sp, #0]
+  5c3502:	f8df 35d8 	ldr.w	r3, [pc, #1496]	@ 0x5c3adc
+  5c3506:	2244      	movs	r2, #68	@ 0x44
+  5c3508:	f8df 15c0 	ldr.w	r1, [pc, #1472]	@ 0x5c3acc
+  5c350c:	2003      	movs	r0, #3
+  5c350e:	f689 fea5 	bl	0x44d25c
+  5c3512:	2000      	movs	r0, #0
+  5c3514:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  5c3518:	6008      	str	r0, [r1, #0]
+  5c351a:	e7fa      	b.n	0x5c3512
+  5c351c:	2c00      	cmp	r4, #0
+  5c351e:	d101      	bne.n	0x5c3524
+  5c3520:	2000      	movs	r0, #0
+  5c3522:	e034      	b.n	0x5c358e
+  5c3524:	0031      	movs	r1, r6
+  5c3526:	0020      	movs	r0, r4
+  5c3528:	f000 f834 	bl	0x5c3594
+  5c352c:	2800      	cmp	r0, #0
+  5c352e:	d12e      	bne.n	0x5c358e
+  5c3530:	0020      	movs	r0, r4
+  5c3532:	f000 f937 	bl	0x5c37a4
+  5c3536:	0005      	movs	r5, r0
+  5c3538:	2d00      	cmp	r5, #0
+  5c353a:	d101      	bne.n	0x5c3540
+  5c353c:	2000      	movs	r0, #0
+  5c353e:	e026      	b.n	0x5c358e
+  5c3540:	6820      	ldr	r0, [r4, #0]
+  5c3542:	2800      	cmp	r0, #0
+  5c3544:	d106      	bne.n	0x5c3554
+  5c3546:	6025      	str	r5, [r4, #0]
+  5c3548:	2000      	movs	r0, #0
+  5c354a:	6028      	str	r0, [r5, #0]
+  5c354c:	2001      	movs	r0, #1
+  5c354e:	7328      	strb	r0, [r5, #12]
+  5c3550:	0028      	movs	r0, r5
+  5c3552:	e01c      	b.n	0x5c358e
+  5c3554:	692f      	ldr	r7, [r5, #16]
+  5c3556:	612e      	str	r6, [r5, #16]
+  5c3558:	0029      	movs	r1, r5
+  5c355a:	0020      	movs	r0, r4
+  5c355c:	f000 f96c 	bl	0x5c3838
+  5c3560:	4680      	mov	r8, r0
+  5c3562:	f8c5 8000 	str.w	r8, [r5]
+  5c3566:	2000      	movs	r0, #0
+  5c3568:	7328      	strb	r0, [r5, #12]
+  5c356a:	f8d8 1010 	ldr.w	r1, [r8, #16]
+  5c356e:	0030      	movs	r0, r6
+  5c3570:	6862      	ldr	r2, [r4, #4]
+  5c3572:	4790      	blx	r2
+  5c3574:	2800      	cmp	r0, #0
+  5c3576:	d502      	bpl.n	0x5c357e
+  5c3578:	f8c8 5004 	str.w	r5, [r8, #4]
+  5c357c:	e001      	b.n	0x5c3582
+  5c357e:	f8c8 5008 	str.w	r5, [r8, #8]
+  5c3582:	0029      	movs	r1, r5
+  5c3584:	0020      	movs	r0, r4
+  5c3586:	f000 f9a1 	bl	0x5c38cc
+  5c358a:	612f      	str	r7, [r5, #16]
+  5c358c:	0028      	movs	r0, r5
+  5c358e:	b004      	add	sp, #16
+  5c3590:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}

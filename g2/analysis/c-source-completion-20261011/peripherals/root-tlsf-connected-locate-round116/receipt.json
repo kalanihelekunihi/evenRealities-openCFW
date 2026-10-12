@@ -1,0 +1,17 @@
+{
+  "status": "PASS_COMPILED_ARM_CONNECTED_TLSF_ADJUST_LOCATE_REMOVE",
+  "cases": 180,
+  "source_sha256": {
+    "components/audio/file_pool_allocate_candidate/pool_allocate.c": "13f0931c8c55dae4aa68d5a4d387b69061bf54bbf6dc662124e91a47f3beb48a",
+    "components/audio/tlsf_adjust_request_candidate/adjust.c": "f0e6a0c1e6fff7d8683db53780b71d53a84bca33caa37c96caacb501229e42d3",
+    "components/audio/tlsf_locate_free_candidate/locate.c": "1e89e8fe4ebbb2c42c81acee4e1a7354a7a02e5a4e7b191f037de4f25fe87236",
+    "components/audio/file_pool_free_candidate/tlsf_mapping.c": "27784e39a47b7ca0b2497888766d5a2dae2c0f4264f4760fedc704a0ae2025de",
+    "components/audio/file_pool_free_candidate/tlsf_absorb_leaves.c": "a37060a2458b7db3a6f7f0444fd90ddd09dc405bb52c3f57f858df55b9475bf0",
+    "components/audio/file_pool_free_candidate/tlsf_free_lists.c": "ed003e0a5777ed185e3fbc0af6ee17aedeb89cd28156bc176f67c5b1c45458cf"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual pool allocate/request adjustment/align/size mapping/search/find/block-size and actual free-list removal execute; prepare/error remain controlled cuts.",
+    "One available size class plus empty bitmap,size overflow/assertion boundaries and remove mutation compared. Full allocator/free/realloc and hardware gates remain."
+  ]
+}

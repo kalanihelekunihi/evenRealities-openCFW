@@ -1,0 +1,65 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00439710 <.data+0x1710>:
+  439710:	4281      	cmp	r1, r0
+  439712:	bf3a      	itte	cc
+  439714:	1853      	addcc	r3, r2, r1
+  439716:	4298      	cmpcc	r0, r3
+  439718:	f000 ba64 	bcs.w	0x439be4
+  43971c:	1880      	adds	r0, r0, r2
+  43971e:	0799      	lsls	r1, r3, #30
+  439720:	d007      	beq.n	0x439732
+  439722:	1e52      	subs	r2, r2, #1
+  439724:	bf24      	itt	cs
+  439726:	f813 1d01 	ldrbcs.w	r1, [r3, #-1]!
+  43972a:	f800 1d01 	strbcs.w	r1, [r0, #-1]!
+  43972e:	d8f6      	bhi.n	0x43971e
+  439730:	4770      	bx	lr
+  439732:	0781      	lsls	r1, r0, #30
+  439734:	d11b      	bne.n	0x43976e
+  439736:	3a10      	subs	r2, #16
+  439738:	d307      	bcc.n	0x43974a
+  43973a:	b430      	push	{r4, r5}
+  43973c:	e933 1032 	ldmdb	r3!, {r1, r4, r5, ip}
+  439740:	3a10      	subs	r2, #16
+  439742:	e920 1032 	stmdb	r0!, {r1, r4, r5, ip}
+  439746:	d2f9      	bcs.n	0x43973c
+  439748:	bc30      	pop	{r4, r5}
+  43974a:	3210      	adds	r2, #16
+  43974c:	1f12      	subs	r2, r2, #4
+  43974e:	bf24      	itt	cs
+  439750:	f853 1d04 	ldrcs.w	r1, [r3, #-4]!
+  439754:	f840 1d04 	strcs.w	r1, [r0, #-4]!
+  439758:	d8f8      	bhi.n	0x43974c
+  43975a:	bf38      	it	cc
+  43975c:	1d12      	addcc	r2, r2, #4
+  43975e:	1e52      	subs	r2, r2, #1
+  439760:	bf24      	itt	cs
+  439762:	f813 1d01 	ldrbcs.w	r1, [r3, #-1]!
+  439766:	f800 1d01 	strbcs.w	r1, [r0, #-1]!
+  43976a:	d8f8      	bhi.n	0x43975e
+  43976c:	4770      	bx	lr
+  43976e:	1f12      	subs	r2, r2, #4
+  439770:	d3f3      	bcc.n	0x43975a
+  439772:	07c1      	lsls	r1, r0, #31
+  439774:	d109      	bne.n	0x43978a
+  439776:	f853 1d04 	ldr.w	r1, [r3, #-4]!
+  43977a:	1f12      	subs	r2, r2, #4
+  43977c:	f820 1d04 	strh.w	r1, [r0, #-4]!
+  439780:	ea4f 4131 	mov.w	r1, r1, ror #16
+  439784:	8041      	strh	r1, [r0, #2]
+  439786:	d2f6      	bcs.n	0x439776
+  439788:	e7e7      	b.n	0x43975a
+  43978a:	f853 1d04 	ldr.w	r1, [r3, #-4]!
+  43978e:	1f12      	subs	r2, r2, #4
+  439790:	f800 1d04 	strb.w	r1, [r0, #-4]!
+  439794:	ea4f 2131 	mov.w	r1, r1, ror #8
+  439798:	f8a0 1001 	strh.w	r1, [r0, #1]
+  43979c:	ea4f 4131 	mov.w	r1, r1, ror #16
+  4397a0:	70c1      	strb	r1, [r0, #3]
+  4397a2:	d2f2      	bcs.n	0x43978a
+  4397a4:	e7d9      	b.n	0x43975a

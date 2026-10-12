@@ -1,0 +1,11 @@
+{
+  "status": "PASS_BOUNDED_COMPILED_ARM_NATIVE_CLOSE_AND_CLEANUP",
+  "cases": 132,
+  "source_sha256": "9488b8140927a6a1badf5e7d667b6c6722d104de7ee2cc3486df7745cc0cfa15",
+  "native_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Filesystem close, draw-buffer destroy and heap free are controlled child cuts, not implementations provided by this test.",
+    "Tests include all five resource-presence bits, null user_data and child mutation with fresh field reloads.",
+    "Void scratch R0 is not compared; full image placement and hardware remain unproven."
+  ]
+}

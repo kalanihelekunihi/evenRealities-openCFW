@@ -1,0 +1,31 @@
+{
+  "status": "LOCAL_COMPONENTS_COMPLETE_NATIVE_QUALIFIED_SELECTED_CURRENT_BUILD_AUDIT_PASS",
+  "native_cases": 1728,
+  "selected_sources": {
+    "g2/components/audio/uart_thread_source_candidate/display_font_alloc.c": "0f6251e298aa3a68f41b1bbd361568229f016f9a4008cbdf9551ab8ab7ba5889",
+    "g2/components/audio/uart_thread_source_candidate/tlsf_reallocate.c": "2e353433ba201362979f449b0610fd8ad9b21d6c8f74dcf9a8bf06b62573c119"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_ranges": [
+    "4d0608..4d06ac",
+    "4cfdc0..4cfddc",
+    "4cfdf6..4cfe04"
+  ],
+  "limits": [
+    "Actual size/link/flag helpers execute; insertion/logger/error cuts. Startup success/hardware not proved."
+  ],
+  "build": "g2/build/c-firmware/20261012/peripherals-root-tlsf-add-pool-round123",
+  "audit": {
+    "definitions": 3036,
+    "imports": 753,
+    "snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes": 6,
+    "builder_hash_checked": true
+  },
+  "remaining_estimate": [
+    "Memory-protection configuration and its child providers",
+    "Connected startup/cache/LRU and scheduler ABI",
+    "Six full image gates"
+  ]
+}

@@ -1,0 +1,94 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0032b210 <.data+0x28e10>:
+  32b210:	c2e6                	enter_s	[r13-r15,blink]
+  32b212:	4628                	mov_s	r14,r1
+  32b214:	0917 0731           	brne.d.nt	r1,0x1c,22	;0x32b22a
+  32b218:	4508                	mov_s	r13,r0
+  32b21a:	208a 0388           	mov	r0,526
+  32b21e:	6508                	ldb_s	r0,[r13,r0]
+  32b220:	e805                	breq_s	r0,0,10	;0x32b22a
+  32b222:	0956 fc2f           	bl.d	-32428	;0x323374
+  32b226:	40a1                	mov_s	r0,r13
+  32b228:	c6c6                	leave_s	[r13-r15,blink,pcl]
+  32b22a:	47cb 0080 569c      	mov_s	r15,0x80569c
+  32b230:	8740                	ld_s	r2,[r15,0]
+  32b232:	ea06                	breq_s	r2,0,12	;0x32b23c
+  32b234:	40a1                	mov_s	r0,r13
+  32b236:	7a60                	jl_s.d	[r2]
+  32b238:	41c1                	mov_s	r1,r14
+  32b23a:	e8f8                	brne_s	r0,0,-16	;0x32b228
+  32b23c:	8741                	ld_s	r2,[r15,0x4]
+  32b23e:	ea06                	breq_s	r2,0,12	;0x32b248
+  32b240:	40a1                	mov_s	r0,r13
+  32b242:	7a60                	jl_s.d	[r2]
+  32b244:	41c1                	mov_s	r1,r14
+  32b246:	e8f2                	brne_s	r0,0,-28	;0x32b228
+  32b248:	8742                	ld_s	r2,[r15,0x8]
+  32b24a:	ea06                	breq_s	r2,0,12	;0x32b254
+  32b24c:	40a1                	mov_s	r0,r13
+  32b24e:	7a60                	jl_s.d	[r2]
+  32b250:	41c1                	mov_s	r1,r14
+  32b252:	e8ec                	brne_s	r0,0,-40	;0x32b228
+  32b254:	8743                	ld_s	r2,[r15,0xc]
+  32b256:	ea06                	breq_s	r2,0,12	;0x32b260
+  32b258:	40a1                	mov_s	r0,r13
+  32b25a:	7a60                	jl_s.d	[r2]
+  32b25c:	41c1                	mov_s	r1,r14
+  32b25e:	e8e6                	brne_s	r0,0,-52	;0x32b228
+  32b260:	8744                	ld_s	r2,[r15,0x10]
+  32b262:	ea06                	breq_s	r2,0,12	;0x32b26c
+  32b264:	40a1                	mov_s	r0,r13
+  32b266:	7a60                	jl_s.d	[r2]
+  32b268:	41c1                	mov_s	r1,r14
+  32b26a:	e8e0                	brne_s	r0,0,-64	;0x32b228
+  32b26c:	8745                	ld_s	r2,[r15,0x14]
+  32b26e:	ea06                	breq_s	r2,0,12	;0x32b278
+  32b270:	40a1                	mov_s	r0,r13
+  32b272:	7a60                	jl_s.d	[r2]
+  32b274:	41c1                	mov_s	r1,r14
+  32b276:	e8da                	brne_s	r0,0,-76	;0x32b228
+  32b278:	8746                	ld_s	r2,[r15,0x18]
+  32b27a:	ea06                	breq_s	r2,0,12	;0x32b284
+  32b27c:	40a1                	mov_s	r0,r13
+  32b27e:	7a60                	jl_s.d	[r2]
+  32b280:	41c1                	mov_s	r1,r14
+  32b282:	e8d4                	brne_s	r0,0,-88	;0x32b228
+  32b284:	8747                	ld_s	r2,[r15,0x1c]
+  32b286:	ea06                	breq_s	r2,0,12	;0x32b290
+  32b288:	40a1                	mov_s	r0,r13
+  32b28a:	7a60                	jl_s.d	[r2]
+  32b28c:	41c1                	mov_s	r1,r14
+  32b28e:	e8ce                	brne_s	r0,0,-100	;0x32b228
+  32b290:	8748                	ld_s	r2,[r15,0x20]
+  32b292:	ea06                	breq_s	r2,0,12	;0x32b29c
+  32b294:	40a1                	mov_s	r0,r13
+  32b296:	7a60                	jl_s.d	[r2]
+  32b298:	41c1                	mov_s	r1,r14
+  32b29a:	e8c8                	brne_s	r0,0,-112	;0x32b228
+  32b29c:	8749                	ld_s	r2,[r15,0x24]
+  32b29e:	ea07                	breq_s	r2,0,14	;0x32b2aa
+  32b2a0:	40a1                	mov_s	r0,r13
+  32b2a2:	7a60                	jl_s.d	[r2]
+  32b2a4:	41c1                	mov_s	r1,r14
+  32b2a6:	0885 8011           	brne.nt	r0,0,-124	;0x32b228
+  32b2aa:	874a                	ld_s	r2,[r15,0x28]
+  32b2ac:	ea06                	breq_s	r2,0,12	;0x32b2b8
+  32b2ae:	40a1                	mov_s	r0,r13
+  32b2b0:	7a60                	jl_s.d	[r2]
+  32b2b2:	41c1                	mov_s	r1,r14
+  32b2b4:	0875 8011           	brne.nt	r0,0,-140	;0x32b228
+  32b2b8:	874b                	ld_s	r2,[r15,0x2c]
+  32b2ba:	ea07                	breq_s	r2,0,14	;0x32b2c6
+  32b2bc:	40a1                	mov_s	r0,r13
+  32b2be:	7a60                	jl_s.d	[r2]
+  32b2c0:	41c1                	mov_s	r1,r14
+  32b2c2:	0869 8011           	brne.nt	r0,0,-152	;0x32b228
+  32b2c6:	40a1                	mov_s	r0,r13
+  32b2c8:	095a f8af           	bl.d	-61096	;0x31c420
+  32b2cc:	41c1                	mov_s	r1,r14
+  32b2ce:	c6c6                	leave_s	[r13-r15,blink,pcl]

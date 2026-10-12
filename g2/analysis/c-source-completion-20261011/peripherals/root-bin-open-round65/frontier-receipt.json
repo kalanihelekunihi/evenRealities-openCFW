@@ -1,0 +1,46 @@
+{
+  "status": "FULL_OPEN_NATIVE_BODY_TRACED_DATA_GET_C_CANDIDATE_COMPILES",
+  "native_open_range": "4c7b24..4c7e22",
+  "literal_string_range": "4c7e24..4c7e28",
+  "direct_native_calls": [
+    "0x439c04",
+    "0x440f44",
+    "0x44d25c",
+    "0x44f718",
+    "0x44f758",
+    "0x4547be",
+    "0x48911a",
+    "0x489168",
+    "0x48b750",
+    "0x48b762",
+    "0x4c6d9a",
+    "0x4c70e4",
+    "0x4c81a2",
+    "0x4c8210",
+    "0x4c8256",
+    "0x4c8570",
+    "0x4c8780",
+    "0x4c887c",
+    "0x4c8a2c",
+    "0x4d4b24"
+  ],
+  "data_get_source": "g2/analysis/c-source-completion-20261011/peripherals/root-bin-open-round65/data_get_candidate.c",
+  "data_get_source_sha256": "fe38981fbaa234d5fe9911fbde29138f67a05311b27c22946ba7bedc5660fb82",
+  "data_get_native_range": "4c81a2..4c8204",
+  "selected": false,
+  "remaining_estimate": {
+    "decoder_callback_bodies": 2,
+    "data_get_native_comparison": 1,
+    "open_direct_native_call_identities": 20,
+    "other_gates": [
+      "Open full C body and dependencies",
+      "Coherent build",
+      "Full source/data/layout/byte equality",
+      "Hardware"
+    ]
+  },
+  "limits": [
+    "Open callback has not been reduced to C; child call identity count is not count of missing providers.",
+    "Data-get compilation alone does not prove native behavior."
+  ]
+}

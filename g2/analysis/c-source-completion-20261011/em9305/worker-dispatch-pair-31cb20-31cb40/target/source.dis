@@ -1,0 +1,120 @@
+
+/out/source.o:     file format elf32-littlearc
+
+
+Disassembly of section .text:
+
+00000000 <opencfw_em9305_dispatch_callback_31cb20>:
+   0:	c2e2                	enter_s	[r13,blink]
+
+00000002 <L31cb22>:
+   2:	8822                	ldb_s	r1,[r0,0x2]
+
+00000004 <L31cb24>:
+   4:	4508                	mov_s	r13,r0
+
+00000006 <L31cb26>:
+   6:	0802 0020           	bl.d	0	;0 <opencfw_em9305_ll_record_error_322f08>
+			6: R_ARC_S25W_PCREL	opencfw_em9305_ll_record_error_322f08
+
+0000000a <L31cb2a>:
+   a:	700c                	mov_s	r0,0
+
+0000000c <L31cb2c>:
+   c:	d944                	mov_s	r1,0x44
+
+0000000e <L31cb2e>:
+   e:	0802 0020           	bl.d	0	;0 <opencfw_em9305_dispatch_child_322e80>
+			e: R_ARC_S25W_PCREL	opencfw_em9305_dispatch_child_322e80
+
+00000012 <L31cb32>:
+  12:	40a1                	mov_s	r0,r13
+
+00000014 <L31cb34>:
+  14:	0802 0020           	bl.d	0	;0 <opencfw_em9305_radio_record_release_31ac84>
+			14: R_ARC_S25W_PCREL	opencfw_em9305_radio_record_release_31ac84
+
+00000018 <L31cb38>:
+  18:	40a1                	mov_s	r0,r13
+
+0000001a <L31cb3a>:
+  1a:	0802 0000           	bl	0	;0 <opencfw_em9305_command_count_down_30e48c>
+			1a: R_ARC_S25W_PCREL	opencfw_em9305_command_count_down_30e48c
+
+0000001e <L31cb3e>:
+  1e:	c6c2                	leave_s	[r13,blink,pcl]
+
+00000020 <opencfw_em9305_dispatch_callback_31cb40>:
+  20:	c2e2                	enter_s	[r13,blink]
+
+00000022 <L31cb42>:
+  22:	4508                	mov_s	r13,r0
+
+00000024 <L31cb44>:
+  24:	0802 0020           	bl.d	0	;0 <opencfw_em9305_common_release_304588>
+			24: R_ARC_S25W_PCREL	opencfw_em9305_common_release_304588
+
+00000028 <L31cb48>:
+  28:	710c                	mov_s	r0,1
+
+0000002a <L31cb4a>:
+  2a:	15c4 1000           	ld	r0,[r13,196]
+
+0000002e <L31cb4e>:
+  2e:	e806                	breq_s	r0,0,12	;38 <L31cb58>
+
+00000030 <L31cb50>:
+  30:	2080 0686           	add	r0,r0,410
+
+00000034 <L31cb54>:
+  34:	1800 0003           	stb	0,[r0]
+
+00000038 <L31cb58>:
+  38:	8d01                	ldb_s	r0,[r13,0x1]
+
+0000003a <L31cb5a>:
+  3a:	081f 00d1           	brne.nt	r0,0x3,30	;56 <L31cb76>
+
+0000003e <L31cb5e>:
+  3e:	15c8 1082           	ldb	r2,[r13,200]
+
+00000042 <L31cb62>:
+  42:	8d22                	ldb_s	r1,[r13,0x2]
+
+00000044 <L31cb64>:
+  44:	ea06                	breq_s	r2,0,12	;50 <L31cb70>
+
+00000046 <L31cb66>:
+  46:	4020                	mov_s	r0,r1
+
+00000048 <L31cb68>:
+  48:	0802 0020           	bl.d	0	;0 <opencfw_em9305_dispatch_child_323574>
+			48: R_ARC_S25W_PCREL	opencfw_em9305_dispatch_child_323574
+
+0000004c <L31cb6c>:
+  4c:	4140                	mov_s	r1,r2
+
+0000004e <L31cb6e>:
+  4e:	f005                	b_s	10	;56 <L31cb76>
+
+00000050 <L31cb70>:
+  50:	0802 0020           	bl.d	0	;0 <opencfw_em9305_ll_record_error_322f08>
+			50: R_ARC_S25W_PCREL	opencfw_em9305_ll_record_error_322f08
+
+00000054 <L31cb74>:
+  54:	700c                	mov_s	r0,0
+
+00000056 <L31cb76>:
+  56:	0802 0020           	bl.d	0	;0 <opencfw_em9305_radio_record_release_31ac84>
+			56: R_ARC_S25W_PCREL	opencfw_em9305_radio_record_release_31ac84
+
+0000005a <L31cb7a>:
+  5a:	40a1                	mov_s	r0,r13
+
+0000005c <L31cb7c>:
+  5c:	0802 0000           	bl	0	;0 <opencfw_em9305_command_count_down_30e48c>
+			5c: R_ARC_S25W_PCREL	opencfw_em9305_command_count_down_30e48c
+
+00000060 <L31cb80>:
+  60:	c6c2                	leave_s	[r13,blink,pcl]
+  62:	78e0                	nop_s

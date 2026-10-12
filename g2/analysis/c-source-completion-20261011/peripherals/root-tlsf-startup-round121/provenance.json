@@ -1,0 +1,31 @@
+{
+  "status": "THREE_LOCAL_COMPONENTS_COMPLETE_NATIVE_QUALIFIED_SELECTED_CURRENT_BUILD_AUDIT_PASS",
+  "native_cases": 232,
+  "selected_source": "g2/components/audio/uart_thread_source_candidate/display_font_alloc.c",
+  "selected_sha256": "a6f3b76cd00ffea6a41ed1565c42e11e685966ab8b41f17ac66baad3002587f4",
+  "candidate_sha256": "f67dd69451f1a8a9564cda442116e465524a6a9ce4b780941dc8a2044ee083de",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_ranges": [
+    "48413c..484180",
+    "4842e6..48431e",
+    "4d06ec..4d0716"
+  ],
+  "limits": [
+    "Control-create/add-pool/mutex/logger/memory-configuration controlled cuts; actual startup success/hardware unproved."
+  ],
+  "build": "g2/build/c-firmware/20261012/peripherals-root-tlsf-startup-round121",
+  "audit": {
+    "definitions": 3031,
+    "imports": 755,
+    "snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes": 6,
+    "builder_hash_checked": true
+  },
+  "remaining_estimate": [
+    "Two control construction/create providers qualification/integration",
+    "Add-pool and memory-configuration child providers",
+    "Connected cache/LRU with actual startup/heap and scheduler ABI",
+    "All six image gates"
+  ]
+}

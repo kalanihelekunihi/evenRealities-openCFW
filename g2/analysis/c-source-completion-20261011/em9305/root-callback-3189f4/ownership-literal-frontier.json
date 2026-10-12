@@ -1,0 +1,79 @@
+{
+  "references": [
+    {
+      "instruction": "307462:\t2132 0f83 0033 4479 \tldb\tr3,[r1,0x334479]",
+      "context": [
+        "  307454:\t239f 040e           \tmpyuw\tr3,r3,912",
+        "  307458:\t8240                \tld_s\tr2,[r2,0]",
+        "  30745a:\t792d                \tsexb_s\tr1,r1",
+        "  30745c:\t208a 0ec9           \tmov\tr0,635",
+        "  307460:\t627a                \tadd_s\tr2,r2,r3",
+        "  307462:\t2132 0f83 0033 4479 \tldb\tr3,[r1,0x334479]",
+        "  30746a:\t6208                \tldb_s\tr0,[r2,r0]",
+        "  30746c:\t7070                \tcmp_s\tr0,r3",
+        "  30746e:\t710c                \tmov_s\tr0,1",
+        "  307470:\t7ce0                \tjeq_s\t[blink]",
+        "  307472:\t12a1 0601           \tld.as\tr1,[r2,161]",
+        "  307476:\t2111 80c0           \tbtst\tr1,r3",
+        "  30747a:\t7de0                \tjne_s\t[blink]"
+      ]
+    },
+    {
+      "instruction": "318a6a:\t1600 7001 0080 1314 \tld\tr1,[0x801314]",
+      "context": [
+        "  318a5c:\t0ada fb8f           \tbl\t-36136\t;0x30fd34",
+        "  318a60:\t18f0 2000           \tst\tr0,[r16,240]",
+        "  318a64:\ta5e0                \tst_s\tr15,[r13,0]",
+        "  318a66:\ta5c1                \tst_s\tr14,[r13,0x4]",
+        "  318a68:\tf023                \tb_s\t70\t;0x318aae",
+        "  318a6a:\t1600 7001 0080 1314 \tld\tr1,[0x801314]",
+        "  318a72:\t252f 1448           \texth\tr13,r17",
+        "  318a76:\te904                \tbreq_s\tr1,0,8\t;0x318a7c",
+        "  318a78:\t7960                \tjl_s.d\t[r1]",
+        "  318a7a:\t40a1                \tmov_s\tr0,r13",
+        "  318a7c:\td916                \tmov_s\tr1,0x16",
+        "  318a7e:\t09ba f76f           \tbl.d\t-71240\t;0x307434",
+        "  318a82:\t40a1                \tmov_s\tr0,r13"
+      ]
+    },
+    {
+      "instruction": "31e64a:\t1600 7002 0080 1314 \tld\tr2,[0x801314]",
+      "context": [
+        "  31e63a:\ta840                \tstb_s\tr2,[r0,0]",
+        "  31e63c:\teb19                \tbreq_s\tr3,0,50\t;0x31e66e",
+        "  31e63e:\t162b 1080           \tldb\tr0,[r14,43]",
+        "  31e642:\t0827 0071           \tbrne.d.nt\tr0,0x1,38\t;0x31e666",
+        "  31e646:\t1e24 1003           \tstb\t0,[r14,36]",
+        "  31e64a:\t1600 7002 0080 1314 \tld\tr2,[0x801314]",
+        "  31e652:\tea0b                \tbreq_s\tr2,0,22\t;0x31e666",
+        "  31e654:\t40c3 0080 5c70      \tmov_s\tr0,0x805c70",
+        "  31e65a:\t8000                \tld_s\tr0,[r0,0]",
+        "  31e65c:\t4d11                \tsub_s\tr1,r13,r0",
+        "  31e65e:\t2984 040e           \tdiv\tr1,r1,912",
+        "  31e662:\t7a60                \tjl_s.d\t[r2]",
+        "  31e664:\t782f                \textb_s\tr0,r1"
+      ]
+    },
+    {
+      "instruction": "32a258:\t1600 7002 0080 1314 \tld\tr2,[0x801314]",
+      "context": [
+        "  32a248:\ta840                \tstb_s\tr2,[r0,0]",
+        "  32a24a:\teb1a                \tbreq_s\tr3,0,52\t;0x32a27c",
+        "  32a24c:\t162b 1080           \tldb\tr0,[r14,43]",
+        "  32a250:\t0825 0071           \tbrne.d.nt\tr0,0x1,36\t;0x32a274",
+        "  32a254:\t1e24 1003           \tstb\t0,[r14,36]",
+        "  32a258:\t1600 7002 0080 1314 \tld\tr2,[0x801314]",
+        "  32a260:\tea0a                \tbreq_s\tr2,0,20\t;0x32a274",
+        "  32a262:\t40c3 0080 5c70      \tmov_s\tr0,0x805c70",
+        "  32a268:\t8000                \tld_s\tr0,[r0,0]",
+        "  32a26a:\t4d11                \tsub_s\tr1,r13,r0",
+        "  32a26c:\t2984 040e           \tdiv\tr1,r1,912",
+        "  32a270:\t7a60                \tjl_s.d\t[r2]",
+        "  32a272:\t782f                \textb_s\tr0,r1"
+      ]
+    }
+  ],
+  "limits": [
+    "Linear disassembly is not code/data classification. Computed-base writers and ROM ownership remain possible."
+  ]
+}

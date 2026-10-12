@@ -1,0 +1,17 @@
+{
+  "status": "PASS_COMPILED_ARM_NATIVE_RB_INSERT_NODE_PARENT",
+  "cases": 499,
+  "by_provider": {
+    "audio_uart_font_rb_alloc_insert": 361,
+    "audio_uart_lv_cache_rb_create_node_5c37a4": 48,
+    "audio_uart_lv_cache_rb_find_parent_5c3838": 90
+  },
+  "source_sha256": "4d7fbfbec06fe3594bf04ca81183ed58ec601843841c6ec70811205f1aa06c1d",
+  "selected_core_sha256": "244f344deac641a0562cb8577cbebb89d683712acb462bcee25319361c2e0ad1",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual RB find/node-create/parent-walk execute; allocator/comparator/balancing/logger controlled child cuts.",
+    "Full signed parent/final compare versus signed low-byte find behavior,current comparator,key lifetime through balance,allocation failures,mutation and native fatal stores compared.",
+    "Concrete balancing/removal/heap/data/connected cache and full-image/layout/byte equality/hardware open."
+  ]
+}

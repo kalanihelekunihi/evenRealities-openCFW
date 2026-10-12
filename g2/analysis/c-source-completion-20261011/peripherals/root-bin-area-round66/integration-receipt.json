@@ -1,0 +1,36 @@
+{
+  "status": "GET_AREA_BODY_COHERENT_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+  "source": "g2/analysis/c-source-completion-20261011/peripherals/root-bin-area-round66/area_candidate.c",
+  "source_sha256": "2446f0c2673e8d3bddc3849ebf2aee32c18ac1fcc3eb39740e02112436b2dd23",
+  "native_range": "4c7e4c..4c81a2",
+  "selected": true,
+  "remaining_estimate": {
+    "decoder_callback_bodies": 0,
+    "coherent_builds": 0,
+    "other_gates": [
+      "Actual provider bodies",
+      "Full source/data/layout/byte equality",
+      "Hardware"
+    ]
+  },
+  "limits": [
+    "Compilation is not semantic qualification.",
+    "Arithmetic follows native unsigned wrapping/shifts and signed scanline comparison; division/aliasing boundaries require native comparison.",
+    "Root-relative handlers address0x108 inferred from authenticated native literal; complete data placement remains unproven."
+  ],
+  "native_comparison_progress": {
+    "early_cases": 256,
+    "continuing_cases": 360,
+    "initial_cases": 128,
+    "limits": [
+      "Controlled child cuts do not provide production implementations.",
+      "Fault comparison ends at first native failing store."
+    ]
+  },
+  "integrated_source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+  "integrated_source_sha256": "33521fed794364f01bdc1ff01f804a2cea80795f45d6fa5be75dc6548ccf76f6",
+  "build": {
+    "status": "PASS",
+    "audit": "g2/build/c-firmware/20261012/peripherals-root-bin-area-round67/root-source-audit.json"
+  }
+}

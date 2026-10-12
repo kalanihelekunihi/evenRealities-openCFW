@@ -1,0 +1,30 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00317a44 <.data+0x15644>:
+  317a44:	c5e1                	push_s	r13
+  317a46:	8a67                	ldb_s	r3,[r2,0x7]
+  317a48:	4408                	mov_s	r12,r0
+  317a4a:	8aa6                	ldb_s	r13,[r2,0x6]
+  317a4c:	1201 00ba           	ldb	r58,[r2,1]
+  317a50:	8a02                	ldb_s	r0,[r2,0x2]
+  317a52:	bb08                	asl_s	r3,r3,0x8
+  317a54:	234a 7000           	mov	r59,0
+  317a58:	657d                	add_s	r13,r13,r3
+  317a5a:	8a63                	ldb_s	r3,[r2,0x3]
+  317a5c:	288f 0004           	macu	r0,r0,256
+  317a60:	8a04                	ldb_s	r0,[r2,0x4]
+  317a62:	2b1b 0fbe 0001 0000 	macdu	0,r3,0x10000
+  317a6a:	8a45                	ldb_s	r2,[r2,0x5]
+  317a6c:	b818                	asl_s	r0,r0,0x18
+  317a6e:	2000 8e80           	add.f	r0,r0,r58
+  317a72:	b1a0                	sth_s	r13,[r1,0]
+  317a74:	2341 f001           	adc.f	r1,r59,0
+  317a78:	6159                	add_s	r1,r1,r2
+  317a7a:	a400                	st_s	r0,[r12,0]
+  317a7c:	d808                	mov_s	r0,0x8
+  317a7e:	a421                	st_s	r1,[r12,0x4]
+  317a80:	c4c2                	leave_s	[r13,pcl]

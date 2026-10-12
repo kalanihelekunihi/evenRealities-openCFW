@@ -1,0 +1,108 @@
+{
+  "status": "PASS_FOUR_CALLBACKS_FOUR_HELPERS_AND_DIRECT_SYMBOL_CLOSURE",
+  "bodies": [
+    {
+      "address": "32c178",
+      "instructions": 28,
+      "native_bytes": 92,
+      "target_bytes": 92,
+      "source_sha256": "cf56cb3451e6907136a4d5fabc07676c872895365361b5ff23dab6a32cec92a4",
+      "object_sha256": "8a0272f3fcfa4e380c83c3e71df1c1d7a868f7699a53d34d77fcd26a8e772211",
+      "calls": {
+        "3257e4": "opencfw_em9305_child_3257e4",
+        "32db0c": "opencfw_em9305_child_32db0c",
+        "304394": "opencfw_em9305_auxiliary_signal_304394"
+      }
+    },
+    {
+      "address": "32c1d4",
+      "instructions": 24,
+      "native_bytes": 72,
+      "target_bytes": 74,
+      "source_sha256": "5f68370c5076df4b4be9ca718a17260bdc42219c3460c53fcc4df2cc3424d7f2",
+      "object_sha256": "429b6879a2e32bf7ed5ece7b42cdf1a16200d75df00af912e257f33074b211b3",
+      "calls": {
+        "32c21c": "opencfw_em9305_child_32c21c"
+      }
+    },
+    {
+      "address": "32c4fc",
+      "instructions": 56,
+      "native_bytes": 168,
+      "target_bytes": 174,
+      "source_sha256": "3d15a270e4acd276bb8caa2f88064000f9c30a478a52cdaf99499fa0c3790fec",
+      "object_sha256": "88458be2f6b1ae2aa7ab09fac5f0e2eee8d99e8a981627a73ec31d8eb3567413",
+      "calls": {
+        "325854": "opencfw_em9305_child_325854",
+        "323ac8": "opencfw_em9305_associated_packet_continue_323ac8",
+        "3239fc": "opencfw_em9305_child_3239fc"
+      }
+    },
+    {
+      "address": "32c5a4",
+      "instructions": 55,
+      "native_bytes": 170,
+      "target_bytes": 172,
+      "source_sha256": "f8958d159fb0dec7139ac82d6c6f0508432245121057fb0c615163ed356f14b3",
+      "object_sha256": "43fad996456b7080c55f7af2b637856a43d81257520c529b195476e01b16fafb",
+      "calls": {
+        "325854": "opencfw_em9305_child_325854",
+        "323ac8": "opencfw_em9305_associated_packet_continue_323ac8",
+        "323c0c": "opencfw_em9305_child_323c0c"
+      }
+    },
+    {
+      "address": "3257e4",
+      "instructions": 6,
+      "native_bytes": 16,
+      "target_bytes": 16,
+      "source_sha256": "cf0befd5789464d4ef1efd292c454b310a406e68492fc35890afdf0ad72abd01",
+      "object_sha256": "85f2a95ff2c7665b83b50e49c441c9fdd1adf2ff9e3764cd1b17347e4fbed2b3",
+      "calls": {}
+    },
+    {
+      "address": "32c21c",
+      "instructions": 21,
+      "native_bytes": 56,
+      "target_bytes": 62,
+      "source_sha256": "af08d04604de94d96ba9a957ea1002fd91fa3702b502fbf7ea60b758f54b0110",
+      "object_sha256": "88f439da83f62a773dd022d35852a1c7e4cd4bb96a3ca367ecfd68f0d4130f27",
+      "calls": {
+        "30e8dc": "opencfw_em9305_child_30e8dc"
+      }
+    },
+    {
+      "address": "323c0c",
+      "instructions": 36,
+      "native_bytes": 106,
+      "target_bytes": 106,
+      "source_sha256": "6aa51307061fba0068ab21ac47271ae78036df328a045dc96a9c5d7e951652de",
+      "object_sha256": "63d6a1d67b155a7bccf587f0c19da69a28fa74c9b5135e43731eacdeaabf3ffe",
+      "calls": {
+        "318440": "opencfw_em9305_child_318440",
+        "3184f4": "opencfw_em9305_child_3184f4",
+        "323dc0": "opencfw_em9305_radio_compose_323dc0"
+      }
+    },
+    {
+      "address": "30e8dc",
+      "instructions": 18,
+      "native_bytes": 52,
+      "target_bytes": 52,
+      "source_sha256": "da39bbcbf477371842668402ca6051c8c186560417451afc5edbf447277768a5",
+      "object_sha256": "809590003504b8569d4f0c87569d443120be519cbb257e8861b43468f386e616",
+      "calls": {
+        "3045e8": "opencfw_em9305_radio_address_write_3045e8",
+        "30e79c": "opencfw_em9305_ll_event_callback_30e79c"
+      }
+    }
+  ],
+  "instructions": 244,
+  "native_bytes": 732,
+  "target_bytes": 748,
+  "selected": false,
+  "limits": [
+    "Register-level native contract recovery; callback lifecycle, ABI and image placement remain separate gates.",
+    "Named ARC assembly within C translation units does not prove portable C conversion or hardware execution."
+  ]
+}

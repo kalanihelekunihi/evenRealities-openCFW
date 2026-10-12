@@ -1,0 +1,45 @@
+{
+  "status": "BOUNDED_TABLE_PREFIX_OBSERVED_FULL_EXTENT_UNPROVED",
+  "native_blob_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "callback_base": "335378",
+  "callback_observed_words": [
+    "0x315a84",
+    "0x315ff4",
+    "0x0",
+    "0x0",
+    "0x316298",
+    "0x315f48"
+  ],
+  "transition_base": "335390",
+  "transition_observed_six_bytes": [
+    1,
+    0,
+    0,
+    1,
+    0,
+    0
+  ],
+  "native_consumer": "3247f8",
+  "consumer_contract": {
+    "event_guard": "unsigned event<3",
+    "callback_index": "state*3+event, word load",
+    "transition_index": "state*3+event, byte load",
+    "state_location": "record+624",
+    "callback_may_mutate_state": "state is reread after JL before transition index"
+  },
+  "genuine_callback_body_queue": [
+    "315a84",
+    "315ff4",
+    "316298",
+    "315f48"
+  ],
+  "full_extent_gate": "Need complete producer/state-domain proof, including callback-written state; six-word adjacency alone insufficient",
+  "whole_listing_literal_consumer_observations": [
+    "324818 callback load",
+    "32482e transition load"
+  ],
+  "limits": [
+    "Literal consumers search does not exclude computed pointers",
+    "No table definitions admitted from prefixes alone"
+  ]
+}

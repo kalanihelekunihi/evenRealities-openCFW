@@ -1,0 +1,64 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+003169b4 <.data+0x145b4>:
+  3169b4:	c0e6                	enter_s	[r13-r15]
+  3169b6:	1040 0083           	ldb	r3,[r0,64]
+  3169ba:	0b99 0030           	breq.d.nt	r3,0,152	;0x316a50
+  3169be:	702d                	mov_s	r9,0
+  3169c0:	80b1                	ld_s	r13,[r0,0x44]
+  3169c2:	1042 0088           	ldb	r8,[r0,66]
+  3169c6:	244a 7200           	mov	lp_count,0x8
+  3169ca:	4300                	mov_s	r3,r0
+  3169cc:	708d                	mov_s	r12,0
+  3169ce:	706d                	mov_s	r11,0
+  3169d0:	20a8 0380           	lp	28	;0x3169ec
+  3169d4:	0d13 12ce           	bbit0.t	r13,r11,18	;0x3169e6
+  3169d8:	83e1                	ld_s	r15,[r3,0x4]
+  3169da:	83c0                	ld_s	r14,[r3,0]
+  3169dc:	7f47                	xor_s	r15,r15,r2
+  3169de:	7e27                	xor_s	r14,r14,r1
+  3169e0:	2605 93fe           	or.f	0,r14,r15
+  3169e4:	f207                	beq_s	14	;0x3169f2
+  3169e6:	e308                	add_s	r3,r3,0x8
+  3169e8:	7185                	add_s	r12,r12,1
+  3169ea:	7165                	add_s	r11,r11,1
+  3169ec:	1841 0043           	stb	1,[r0,65]
+  3169f0:	f030                	b_s	96	;0x316a50
+  3169f2:	7b8f                	extb_s	r3,r12
+  3169f4:	0b5d 0220           	breq.d.nt	r3,r8,92	;0x316a50
+  3169f8:	712d                	mov_s	r9,1
+  3169fa:	2340 104c           	add	r12,r11,0x1
+  3169fe:	e387                	cmp_s	r3,0x7
+  316a00:	24ca 1021           	mov.eq	r12,0
+  316a04:	0c2f 1200           	breq.nt	r12,r8,46	;0x316a32
+  316a08:	0d27 132e           	bbit0.d.t	r13,r12,38	;0x316a2e
+  316a0c:	4381                	mov_s	r3,r12
+  316a0e:	2016 00ce           	add3	r14,r0,r3
+  316a12:	2016 02cf           	add3	r15,r0,r11
+  316a16:	e387                	cmp_s	r3,0x7
+  316a18:	6b81                	add_s	r12,r3,0x1
+  316a1a:	4368                	mov_s	r11,r3
+  316a1c:	8661                	ld_s	r3,[r14,0x4]
+  316a1e:	86c0                	ld_s	r14,[r14,0]
+  316a20:	24ca 1021           	mov.eq	r12,0
+  316a24:	a761                	st_s	r3,[r15,0x4]
+  316a26:	0ce5 9221           	brne.d.nt	r12,r8,-28	;0x316a08
+  316a2a:	a7c0                	st_s	r14,[r15,0]
+  316a2c:	f003                	b_s	6	;0x316a32
+  316a2e:	2510 12cd           	bclr	r13,r13,r11
+  316a32:	7015                	cmp_s	r8,0
+  316a34:	2042 1043           	sub	r3,r8,0x1
+  316a38:	23ca 01e1           	mov.eq	r3,0x7
+  316a3c:	1842 00c2           	stb	r3,[r0,66]
+  316a40:	7b6f                	extb_s	r3,r3
+  316a42:	250f 10cc           	bset	r12,r13,r3
+  316a46:	2016 00c3           	add3	r3,r0,r3
+  316a4a:	a091                	st_s	r12,[r0,0x44]
+  316a4c:	a341                	st_s	r2,[r3,0x4]
+  316a4e:	a320                	st_s	r1,[r3,0]
+  316a50:	4021                	mov_s	r0,r9
+  316a52:	c4c6                	leave_s	[r13-r15,pcl]

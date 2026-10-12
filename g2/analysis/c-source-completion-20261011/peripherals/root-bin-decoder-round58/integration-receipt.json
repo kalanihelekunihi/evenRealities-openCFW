@@ -1,0 +1,29 @@
+{
+  "status": "COHERENT_COMPILATION_AND_CURRENT_SOURCE_AUDIT_PASS",
+  "bodies": [
+    "4c7e28..4c7e4a",
+    "4c8210..4c8256"
+  ],
+  "source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+  "source_sha256": "9488b8140927a6a1badf5e7d667b6c6722d104de7ee2cc3486df7745cc0cfa15",
+  "comparison_cases": 132,
+  "remaining_estimate": {
+    "callback_bodies": 3,
+    "new_direct_provider_bodies": 1,
+    "provider": "audio_uart_lv_fs_file_close_4c6ee0",
+    "coherent_builds": 0,
+    "other_gates": [
+      "Data ownership",
+      "Native layout and byte equality",
+      "Hardware"
+    ]
+  },
+  "build": {
+    "status": "PASS",
+    "audit": "g2/build/c-firmware/20261012/peripherals-root-bin-decoder-round58/root-source-audit.json"
+  },
+  "limits": [
+    "Controlled child cuts test ordering and mutations; they do not supply missing production implementation.",
+    "Draw-buffer destroy and heap-free production providers already selected; filesystem-close remains a genuine import."
+  ]
+}

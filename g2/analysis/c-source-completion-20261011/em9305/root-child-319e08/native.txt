@@ -1,0 +1,56 @@
+
+g2/build/c-firmware/20261011/em-activation-round/em-inspection.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00319e08 <.data+0x17a08>:
+  319e08:	c2e2                	enter_s	[r13,blink]
+  319e0a:	4508                	mov_s	r13,r0
+  319e0c:	0f52 f52f           	bl.d	-88240	;0x30455c
+  319e10:	710c                	mov_s	r0,1
+  319e12:	1600 7002 0080 5cbc 	ld	r2,[0x805cbc]
+  319e1a:	40a1                	mov_s	r0,r13
+  319e1c:	2500 1f83 0000 08d6 	add	r3,r13,0x8d6
+  319e24:	702c                	mov_s	r1,0
+  319e26:	8a88                	ldb_s	r12,[r2,0x8]
+  319e28:	2080 0e8c           	add	r0,r0,826
+  319e2c:	ab20                	stb_s	r1,[r3,0]
+  319e2e:	1bfe 8042           	stb	r1,[r3,-2]
+  319e32:	1dcf 1058           	st.as	r1,[r13,207]
+  319e36:	a820                	stb_s	r1,[r0,0]
+  319e38:	18ff 8042           	stb	r1,[r0,-1]
+  319e3c:	18fe 8302           	stb	r12,[r0,-2]
+  319e40:	8221                	ld_s	r1,[r2,0x4]
+  319e42:	0942 0860           	bl.d	67904	;0x32a780
+  319e46:	40a1                	mov_s	r0,r13
+  319e48:	4100                	mov_s	r1,r0
+  319e4a:	e80a                	breq_s	r0,0,20	;0x319e5c
+  319e4c:	0962 fa6f           	bl.d	-46752	;0x30e7ac
+  319e50:	8d01                	ldb_s	r0,[r13,0x1]
+  319e52:	742c                	mov_s	r1,4
+  319e54:	0bee 05e0           	bl.d	48108	;0x325a40
+  319e58:	40a1                	mov_s	r0,r13
+  319e5a:	c6c2                	leave_s	[r13,blink,pcl]
+  319e5c:	42c3 0080 5a72      	mov_s	r2,0x805a72
+  319e62:	153b 1080           	ldb	r0,[r13,59]
+  319e66:	8a20                	ldb_s	r1,[r2,0]
+  319e68:	7014                	cmp_s	r0,0
+  319e6a:	6901                	add_s	r0,r1,0x1
+  319e6c:	aa00                	stb_s	r0,[r2,0]
+  319e6e:	f204                	beq_s	8	;0x319e74
+  319e70:	0e5e fa0f           	bl	-47524	;0x30e4cc
+  319e74:	1600 7000 0080 5cbc 	ld	r0,[0x805cbc]
+  319e7c:	8041                	ld_s	r2,[r0,0x4]
+  319e7e:	ea0c                	breq_s	r2,0,24	;0x319e94
+  319e80:	8529                	ld_s	r1,[r13,0x24]
+  319e82:	40a1                	mov_s	r0,r13
+  319e84:	2080 0a0c           	add	r0,r0,808
+  319e88:	2985 0a0f           	divu	r1,r1,1000
+  319e8c:	4a31                	sub_s	r1,r2,r1
+  319e8e:	0c6e fd2f           	bl.d	-23444	;0x3142f8
+  319e92:	b96a                	sub_s	r1,r1,0xa
+  319e94:	8d01                	ldb_s	r0,[r13,0x1]
+  319e96:	091a fa6f           	bl.d	-46824	;0x30e7ac
+  319e9a:	702c                	mov_s	r1,0
+  319e9c:	c6c2                	leave_s	[r13,blink,pcl]

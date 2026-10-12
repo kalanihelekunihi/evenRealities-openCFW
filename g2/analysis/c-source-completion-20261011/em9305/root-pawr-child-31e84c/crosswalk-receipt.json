@@ -1,0 +1,25 @@
+{
+  "status": "PASS_WHOLE_NATIVE_INSTRUCTION_CROSSWALK",
+  "pending_encoding_differences": [],
+  "baseline_load_expansions": [
+    "0x31e876",
+    "0x31e8d0",
+    "0x31e8d6",
+    "0x31e8da"
+  ],
+  "instructions": 66,
+  "native_bytes": 174,
+  "target_function_bytes": 182,
+  "target_section_bytes": 184,
+  "trailing_alignment_bytes": 2,
+  "true_child_calls": 3,
+  "local_branches": 16,
+  "function_pointer_relocations": 0,
+  "byte_exact_other_instructions": 43,
+  "source_sha256": "9a67d2626826f1221b741e143c2ad293a004a3235008b6755e6ae6c581a915b4",
+  "selected": false,
+  "limits": [
+    "Seven consecutive BIH branch slots and native descriptor stores preserved.",
+    "Child register contracts, final image linking and hardware execution remain separate gates."
+  ]
+}

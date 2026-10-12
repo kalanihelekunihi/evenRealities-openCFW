@@ -155,14 +155,3 @@ void audio_uart_lv_free(void *pointer) {
     if(pointer!=0&&pointer!=audio_uart_lv_static_slot)
         audio_uart_lv_heap_free(pointer);
 }
-void audio_uart_lv_heap_free(void *pointer) {
-    uint8_t *pool=audio_uart_lv_heap_pool;
-    if(pointer==0) return;
-    void *mutex=*(void **)(void *)pool;
-    if(xQueueSemaphoreTake(mutex,UINT32_MAX)!=1) return;
-    uint32_t amount=g2_tlsf_block_size((uint8_t *)pointer-8u);
-    g2_file_pool_free(*(void **)(void *)(pool+4u),pointer);
-    uint32_t *used=(uint32_t *)(void *)(pool+8u);
-    *used=amount<*used?*used-amount:0u;
-    (void)audio_uart_queue_send(mutex,0,0u,0u);
-}

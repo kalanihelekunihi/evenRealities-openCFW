@@ -1,0 +1,36 @@
+{
+  "canonical_call_mapping": {
+    "33301c": "opencfw_em9305_memset",
+    "325708": "opencfw_em9305_init_channel_first_325708",
+    "313fd8": "opencfw_em9305_wsf_event_allocate",
+    "318878": "opencfw_em9305_radio_access_raw_318878",
+    "318960": "opencfw_em9305_radio_crc_seed_318960",
+    "31896c": "opencfw_em9305_associated_random_31896c",
+    "318988": "opencfw_em9305_compose_accuracy_318988",
+    "3239d4": "opencfw_em9305_radio_encode_3239d4",
+    "323c94": "opencfw_em9305_radio_encode_323c94"
+  },
+  "instructions": 145,
+  "native_bytes": 492,
+  "status": "COMPILED_WHOLE_BODY_CROSSWALK_PASS",
+  "source_sha256": "30e86e99e9c55b4c834d5d41d7c447217b5298ce53f362c3febac0c531c1e9cd",
+  "registered_callbacks": [
+    "320274",
+    "320e00",
+    "320dd8",
+    "31fb98"
+  ],
+  "missing_direct_children": [],
+  "selected": false,
+  "remaining_gates": [
+    "Registered callbacks are still native fixed pointers; recover bodies and replace with named relocations before selection.",
+    "Fixed RAM contexts, table capacity, callback lifecycle and register clobber contracts require independent validation.",
+    "Full source linking, image placement and physical hardware remain unverified."
+  ],
+  "pointer_relocations": {
+    "320274": "opencfw_em9305_child_320274",
+    "320e00": "opencfw_em9305_child_320e00",
+    "320dd8": "opencfw_em9305_child_320dd8",
+    "31fb98": "opencfw_em9305_child_31fb98"
+  }
+}

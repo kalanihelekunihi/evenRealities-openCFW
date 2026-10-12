@@ -1,0 +1,102 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+005c3600 <.data+0x18b600>:
+  5c3600:	b570      	push	{r4, r5, r6, lr}
+  5c3602:	0004      	movs	r4, r0
+  5c3604:	000d      	movs	r5, r1
+  5c3606:	2000      	movs	r0, #0
+  5c3608:	2000      	movs	r0, #0
+  5c360a:	2001      	movs	r0, #1
+  5c360c:	6868      	ldr	r0, [r5, #4]
+  5c360e:	2800      	cmp	r0, #0
+  5c3610:	d039      	beq.n	0x5c3686
+  5c3612:	68a8      	ldr	r0, [r5, #8]
+  5c3614:	2800      	cmp	r0, #0
+  5c3616:	d036      	beq.n	0x5c3686
+  5c3618:	0028      	movs	r0, r5
+  5c361a:	6880      	ldr	r0, [r0, #8]
+  5c361c:	f000 f8bc 	bl	0x5c3798
+  5c3620:	0002      	movs	r2, r0
+  5c3622:	6828      	ldr	r0, [r5, #0]
+  5c3624:	2800      	cmp	r0, #0
+  5c3626:	d009      	beq.n	0x5c363c
+  5c3628:	6828      	ldr	r0, [r5, #0]
+  5c362a:	6840      	ldr	r0, [r0, #4]
+  5c362c:	42a8      	cmp	r0, r5
+  5c362e:	d102      	bne.n	0x5c3636
+  5c3630:	6828      	ldr	r0, [r5, #0]
+  5c3632:	6042      	str	r2, [r0, #4]
+  5c3634:	e003      	b.n	0x5c363e
+  5c3636:	6828      	ldr	r0, [r5, #0]
+  5c3638:	6082      	str	r2, [r0, #8]
+  5c363a:	e000      	b.n	0x5c363e
+  5c363c:	6022      	str	r2, [r4, #0]
+  5c363e:	6891      	ldr	r1, [r2, #8]
+  5c3640:	6810      	ldr	r0, [r2, #0]
+  5c3642:	7b13      	ldrb	r3, [r2, #12]
+  5c3644:	42a8      	cmp	r0, r5
+  5c3646:	d101      	bne.n	0x5c364c
+  5c3648:	0010      	movs	r0, r2
+  5c364a:	e007      	b.n	0x5c365c
+  5c364c:	2900      	cmp	r1, #0
+  5c364e:	d000      	beq.n	0x5c3652
+  5c3650:	6008      	str	r0, [r1, #0]
+  5c3652:	6041      	str	r1, [r0, #4]
+  5c3654:	68ae      	ldr	r6, [r5, #8]
+  5c3656:	6096      	str	r6, [r2, #8]
+  5c3658:	68ae      	ldr	r6, [r5, #8]
+  5c365a:	6032      	str	r2, [r6, #0]
+  5c365c:	682e      	ldr	r6, [r5, #0]
+  5c365e:	6016      	str	r6, [r2, #0]
+  5c3660:	7b2e      	ldrb	r6, [r5, #12]
+  5c3662:	7316      	strb	r6, [r2, #12]
+  5c3664:	686e      	ldr	r6, [r5, #4]
+  5c3666:	6056      	str	r6, [r2, #4]
+  5c3668:	686e      	ldr	r6, [r5, #4]
+  5c366a:	6032      	str	r2, [r6, #0]
+  5c366c:	b2db      	uxtb	r3, r3
+  5c366e:	2b01      	cmp	r3, #1
+  5c3670:	d103      	bne.n	0x5c367a
+  5c3672:	0002      	movs	r2, r0
+  5c3674:	0020      	movs	r0, r4
+  5c3676:	f000 f97e 	bl	0x5c3976
+  5c367a:	692c      	ldr	r4, [r5, #16]
+  5c367c:	0028      	movs	r0, r5
+  5c367e:	f68c f86b 	bl	0x44f758
+  5c3682:	0020      	movs	r0, r4
+  5c3684:	e01f      	b.n	0x5c36c6
+  5c3686:	68a8      	ldr	r0, [r5, #8]
+  5c3688:	2800      	cmp	r0, #0
+  5c368a:	d001      	beq.n	0x5c3690
+  5c368c:	68a9      	ldr	r1, [r5, #8]
+  5c368e:	e000      	b.n	0x5c3692
+  5c3690:	6869      	ldr	r1, [r5, #4]
+  5c3692:	682a      	ldr	r2, [r5, #0]
+  5c3694:	7b28      	ldrb	r0, [r5, #12]
+  5c3696:	2900      	cmp	r1, #0
+  5c3698:	d000      	beq.n	0x5c369c
+  5c369a:	600a      	str	r2, [r1, #0]
+  5c369c:	2a00      	cmp	r2, #0
+  5c369e:	d006      	beq.n	0x5c36ae
+  5c36a0:	6853      	ldr	r3, [r2, #4]
+  5c36a2:	42ab      	cmp	r3, r5
+  5c36a4:	d101      	bne.n	0x5c36aa
+  5c36a6:	6051      	str	r1, [r2, #4]
+  5c36a8:	e002      	b.n	0x5c36b0
+  5c36aa:	6091      	str	r1, [r2, #8]
+  5c36ac:	e000      	b.n	0x5c36b0
+  5c36ae:	6021      	str	r1, [r4, #0]
+  5c36b0:	b2c0      	uxtb	r0, r0
+  5c36b2:	2801      	cmp	r0, #1
+  5c36b4:	d102      	bne.n	0x5c36bc
+  5c36b6:	0020      	movs	r0, r4
+  5c36b8:	f000 f95d 	bl	0x5c3976
+  5c36bc:	692c      	ldr	r4, [r5, #16]
+  5c36be:	0028      	movs	r0, r5
+  5c36c0:	f68c f84a 	bl	0x44f758
+  5c36c4:	0020      	movs	r0, r4
+  5c36c6:	bd70      	pop	{r4, r5, r6, pc}

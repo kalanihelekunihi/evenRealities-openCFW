@@ -1,0 +1,57 @@
+{
+  "status": "THREE_RADIO_BODIES_COMPILE_AND_NATIVE_INSTRUCTION_COMPARISON_PASS",
+  "entries": [
+    {
+      "address": "311a40",
+      "source": "g2/analysis/c-source-completion-20261011/em9305/root-child-311a40/source.c",
+      "source_sha256": "ac4823a0dd4c9a677a8325ba59a9b4518ad7f8aeeba55069ec6ecd7dcc12e43b",
+      "object_sha256": "2d1ac5c7ca68c1759773a94fa0a3d444b8898027976ef0cbf8487cbee8ff1a4f",
+      "instructions": 26,
+      "native_bytes": 116,
+      "target_bytes": 116,
+      "required_target_flags": [
+        "-mfpu=fpus"
+      ]
+    },
+    {
+      "address": "311e04",
+      "source": "g2/analysis/c-source-completion-20261011/em9305/root-child-311e04/source.c",
+      "source_sha256": "ce2153fd7bce816d1c8b654ee94b720a001dbbd64739a0a99f1a62f13fdce22b",
+      "object_sha256": "66e7b0baa2a867ea80402d09a16678362f7d2bbd479f2d1958cacdbe74331f9a",
+      "instructions": 18,
+      "native_bytes": 90,
+      "target_bytes": 90,
+      "required_target_flags": [
+        "-mfpu=fpus"
+      ]
+    },
+    {
+      "address": "312344",
+      "source": "g2/analysis/c-source-completion-20261011/em9305/root-child-312344/source.c",
+      "source_sha256": "688828f1fc82303d97ef6e03616567a1a9faf09d2ffb146933d7b8b59235ade9",
+      "object_sha256": "a52a27c273fcc362b67c6cb86107ec180078b366485827be94985800fcc6eee2",
+      "instructions": 7,
+      "native_bytes": 26,
+      "target_bytes": 26,
+      "required_target_flags": []
+    }
+  ],
+  "instructions": 51,
+  "native_bytes": 232,
+  "vendor_instruction_receipt": "g2/analysis/c-source-completion-20261011/em9305/vendor-extension-contract/receipt.json",
+  "pending_direct_targets": [],
+  "selected": false,
+  "remaining_estimate": {
+    "integration_units": 3,
+    "coherent_builds": 1,
+    "other_gates": [
+      "FPU mode and numerical edge behavior",
+      "MMIO lifecycle and hardware",
+      "Final image data and layout"
+    ]
+  },
+  "limits": [
+    "These sources contain named ARC and attributed vendor instructions, not portable C numeric replacements.",
+    "Resident ROM dependencies and default data table remain external/unresolved."
+  ]
+}

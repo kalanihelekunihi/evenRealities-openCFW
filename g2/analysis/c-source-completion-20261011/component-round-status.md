@@ -385,3 +385,271 @@ No full firmware image completion;0/6. Three workers continue.
 Settled separate initializer target integration PASS: 1255 definitions/51 genuine imports/0 duplicate strong symbols; all four source unit snapshots and monolithic controller stable and match current files. Five initializer lowers closed (10 remain), two callback leaves/two stream children source-owned;15 callback identities +2 actual child bodies exposed by this unit group. Root host256-version PASS. Real child frontier increase is not source completion.
 
 CORRECTION: full native307980/307a68 review finds context+16 stores loop index0/1/2 (native3079ba/307aa0), not zero. Prior selected stream-child source/host qualification is SUPERSEDED. Selected source corrected; stronger per-row/null-pattern fixture and expanded coherent target rebuild required. Compiler receipts remain historical compilation evidence only.
+
+## Root-only rounds55/56, 2026-10-12
+
+EM9305 tracked non-ROM dependency group COMPLETE at coherent round55:1947 definitions,12 resident-ROM imports,zero non-ROM imports,zero duplicate strong symbols;615 stable/current compile snapshots. Audit:g2/build/c-firmware/20261012/em-root-dispatch-round55/root-source-audit.json. This is not whole-payload source coverage, final image layout, or hardware proof. Recent recovered units are named ARC/vendor assembly in C except portable packet serializer323d38 and typed data tables. EvenHub SDK remains excluded.
+
+Main wrapper454746 source group COMPLETE:3840 compiled ARM/native controlled-child cases; coherent main clear round55 passes2933 definitions/756 mixed imports,81 direct/675 address-only,134 stable/current snapshots,zero duplicates. Native4c6d04 was mislabeled timer; authenticated log strings and pinned LVGL show lv_span_stack_init. Its full portable C body and allocation/failure stores pass12 compiled ARM/native controlled-child cases; renamed parent startup passes2 call-chain cases. Main span round56 is running with selected sources frozen. Expected direct imports80; coherent receipt is required. Physical fault handling remains unverified.
+
+All six complete accepted firmware images remain0/6. Work runs only in the root thread.
+
+## Root Main binary decoder rounds57-58
+
+Round57 completed: three portable C initialization bodies; coherent build audit2937 definitions,79 direct imports,679 address-only imports,134 stable/current snapshots. Round58 adds full close callback and cleanup helper,132 ARM/native comparisons pass; coherent build running session38337. Estimated remaining decoder callbacks3 plus filesystem-close provider1. Source coverage, native data/layout, byte equality and hardware remain open; accepted complete images0/6. EvenHub SDK excluded.
+
+## Root Main rounds58-59
+
+Round58 completed local close/cleanup bodies:132 compiled ARM/native comparisons; coherent audit2939 definitions,80 direct imports,678 address-only imports,134 stable/current snapshots. Round59 filesystem-close body completed in C with576 compiled ARM/native comparisons; integrated coherent build running session11886. Estimated binary decoder callback bodies remaining3 (info/open/get_area). Filesystem-close body remaining0, coherent build gate1; indirect callback ownership/runtime, data/layout, byte equality and hardware remain open. Accepted complete images0/6.
+
+## Root Main round59 terminal audit and round60 candidate
+
+Filesystem-close provider coherent compilation complete:2940 definitions,79 direct imports,678 address-only imports,134 stable/current snapshots,0 duplicate strong symbols. Full binary decoder info callback candidate compiles in ARM C but remains unselected pending native comparisons; three callback bodies remain unqualified and info exposes extension/compare/read dependency bodies. Full image coverage/layout/byte equality/hardware remain open; accepted complete images0/6.
+
+## Root Main decoder-info round60
+
+Full callback4c79d0..4c7b1c reduced to portable C and selected after528 compiled ARM/native comparisons. Diagnostic path separator discrepancy detected and corrected before selection. Coherent Main build running session11719. Remaining binary decoder callback bodies2 (open/get_area), newly exposed real dependencies3 (extension/compare/read), coherent build gate1. Data/layout, byte equality and hardware remain open; accepted complete images0/6.
+
+## Correction: round60 selected-source compilation
+
+Top-level candidate_compilation_passed omitted audio compilation failure; no relocatable_link exists. Audio unit display_lv_init_children.c failed due conflicting logger declaration. Native callback comparisons528 remain passing; coherent build is NOT qualified. Strings helpers347 comparisons pass but remain unselected. Session54848 runs unchanged inputs and must finish before repairing declaration and integrating strings. Remaining2 callbacks,1 file-read provider,1 declaration repair and coherent build; accepted complete images0/6.
+
+## Root round62 repair and string integration
+
+Logger declaration repaired; corrected info callback retains528 native comparisons. Three string helper bodies selected after347 comparisons; integrated ARM M55 source compile passes -Wall -Wextra -Werror. Builder now marks missing required archives as failed compilation. Coherent build running session97948 with selected Main sources/build.py frozen. Remaining2 decoder callbacks,1 file-read provider,1 coherent build gate, full source/data/layout/byte equality/hardware. Accepted complete images0/6.
+
+## Root filesystem-read round63 candidate
+
+Full4c6f46..4c6fba entry point reduced to C;576 compiled ARM/native comparisons pass including cached/uncached dispatch and callback stack ABI. Unselected while round62 build session97948 remains live. Remaining2 decoder callbacks plus cached-read provider4c713c, selected integration/coherent build and full source/data/layout/byte equality/hardware gates. Accepted complete images0/6.
+
+## Root cached-read round64
+
+File-read round63 terminal coherent audit PASS:2945 definitions,80 direct imports,677 address-only imports,134 stable/current snapshots. Full cached-read body4c713c..4c7326 selected after2880 compiled ARM/native comparisons; integrated M55 compile passes warnings-as-errors. Coherent build session17691 running. Cached-read local body complete, coherent gate pending; remaining decoder callbacks2 (open/get_area). Full source/data/layout, byte equality and hardware remain open; accepted complete images0/6.
+
+## Root rounds64-65
+
+Cached-read complete local body and coherent build audit PASS. Open callback entire native body traced through terminal return, pool/string excluded. Data-get helper C candidate compiles but is unselected pending native comparison. Remaining2 decoder callbacks and their genuine child providers; full source/data/layout/byte equality/hardware remain open. Accepted complete images0/6.
+
+## Root data-get round65 integration
+
+Full helper4c81a2..4c8204 selected after16 compiled ARM/native comparisons (owner present/absent, allocator success/failure, child mutation). Integrated M55 compile passes warnings-as-errors. Coherent build session20534 running. Remaining decoder callback bodies2 (open/get_area) and native-discovered actual child providers; source/data/layout/byte equality/hardware gates remain open. Accepted complete images0/6.
+
+## Root full decoder-open candidate
+
+Full4c7b24..4c7e22 callback now C candidate, ARM M55 compile passes -Wall -Wextra -Werror. Candidate unselected pending native comparisons and child contracts (including cache-key byte/padding ABI). Data-get coherent build session20534 remains running; selected inputs frozen. Remaining unqualified decoder callbacks2 and genuine format/cache providers; full source/data/layout/byte equality/hardware remain open. Accepted complete images0/6.
+
+## Root decoder-open file-path comparisons
+
+Open candidate passes4128 additional compiled ARM/native comparisons (all256 formats, compressed/indexed dispatch, allocation/open failures, status truncation) alongside255 earlier paths. Controlled cuts leave decoded pointer null; variable conversion/postprocess/cache still unverified. Candidate remains unselected. Remaining2 decoder callbacks and genuine child implementations; full image coverage/layout/byte equality/hardware open. Accepted complete images0/6.
+
+## Root decoder-open round66 integration
+
+Open C body selected after255 early,4128 file,48 postprocess/cache,8192 variable native comparisons. Integrated M55 compile passes warnings-as-errors. Child operations remain bounded cuts, genuine production imports preserved. Coherent build session56192 running. Remaining decoder callback body1 (get_area), plus actual format/cache provider bodies; full source/data/layout/byte equality/hardware remain open. Accepted complete images0/6.
+
+## Root full get-area C candidate
+
+Full4c7e4c..4c81a2 callback C candidate compiles ARM M55 with warnings-as-errors. Includes native sentinel0xe0000001, indexed scanline, RGB read, RGB565/A8 dual read and allocation assertion. Candidate unselected pending native comparisons. Decoder-open coherent build session56192 still pending audit. Remaining decoder callback body1 plus genuine providers and image source/data/layout/byte equality/hardware gates. Accepted complete images0/6.
+
+## Root open audit and area early comparisons
+
+Decoder-open coherent audit PASS:2948 definitions,767 imports,134 stable/current snapshots,0 duplicate strong symbols. Import count includes newly exposed genuine format/cache providers and is not source-completion percentage. Get-area early256 native comparisons PASS (unsupported CF and null-data). Candidate remains unselected; scanline allocation/indexed/RGB/A8 and mutation comparisons outstanding. One callback body unqualified; actual provider bodies and full image source/data/layout/byte equality/hardware remain open. Accepted complete images0/6.
+
+## Root get-area continuing scanlines
+
+360 compiled ARM/native comparisons pass for continuing scanlines: indexed file/variable, RGB, dual RGB565/A8, signed end check and negative-x bit patterns. Controlled child cuts preserve missing production providers as genuine work. Initial reshape/create/assertion and child mutation paths remain unverified; candidate unselected. One decoder callback still unqualified; full image source/data/layout/byte equality/hardware gates remain open, accepted complete images0/6.
+
+## Root get-area round67 integration
+
+Full callback selected after256 rejection/null-data,360 continuing-scanline,128 initial allocation/mutation native comparisons. Integrated M55 compile passes warnings-as-errors. All four binary-decoder callback bodies reduced to C; local group coherent build gate pending session58486. Actual format/cache/reshape/read-at/indexed-line providers remain genuine imports. Full image source/data/layout/byte equality/hardware unproven; accepted complete images0/6.
+
+## Root decoder build audit and helpers round68
+
+Get-area coherent audit PASS:2949 definitions,770 imports,134 stable/current snapshots,0 duplicates. All four decoder callback bodies have selected coherent-build evidence; callback body frontier0, provider/full-image gates remain. Two shared width/flag helpers integrated after98 native comparisons, build session16150 running. Full from-image wrapper C candidate compiles but remains unselected pending native comparison; initializer48aef8 remains genuine provider. Accepted complete images0/6.
+
+## Root from-image round69
+
+Wrapper48b762..48b7a6 selected after288 native comparisons incl seven-argument ABI and alias/mutations. Prior helper round68 link failed due existing width provider in display_lv_round_geometry.c; newly introduced duplicate removed, existing implementation preserved. Flag helper retained. Integrated compile passes warnings-as-errors; coherent build session95825 running. Initializer48aef8 and genuine format/cache/reshape/read providers remain; full image gates unproven, accepted0/6.
+
+## Root draw-buffer initializer candidate
+
+Full48aef8..48affa initializer C candidate compiles M55 warnings-as-errors; unselected pending native comparison. Retains null assertion, zero-before-size-check, full32-bit wrapped required size, truncated header fields and root+0xc8 handlers. Newly identified zero48aa54/alignment48ab04 genuine providers2; stride provider already selected. Round69 build session95825 remains live. Full image gates remain unproven; accepted0/6.
+
+## Root default draw callbacks
+
+Four native callbacks48b80c/48b816/48b81e/48b82a reduced to C and384 compiled ARM/native comparisons pass, unselected pending handler-init comparison and integration. Local callback bodies0 remaining; BPP actual provider remains. Round71 build session81354 terminal, audit next. Full image source/data/layout/byte equality/hardware unproven; accepted0/6.
+
+## Root handlers complete and BPP round73
+
+Handlers/default and four callbacks local group COMPLETE:18 handler +384 callback native comparisons, round72 coherent audit2961 definitions/767 imports/134 stable-current snapshots/0 duplicates. BPP440f44 full C leaf passes1024 compiled ARM/native comparisons with no child cuts; selected, coherent build pending. Remaining local BPP body0/build1; genuine format/cache/reshape/read providers and full image coverage/layout/byte equality/hardware remain. Accepted complete images0/6. EvenHub SDK excluded.
+
+## Root BPP complete; filesystem seek/read-at candidates
+
+Color-format BPP local component COMPLETE:1024 native comparisons without child cuts, round73 coherent audit2962 definitions/766 imports/134 stable-current snapshots/0 duplicates. Eight startup child comparisons rerun PASS after repairing historical48aa80 pool name to draw handlers. Three filesystem seek/cached-seek/read-at C candidates compile M55 warnings-as-errors; native comparison session4739 running. Remaining candidate bodies0/verification1/integration1/build1. Full six-image coverage/data/layout/byte equality/hardware gates open; accepted0/6. EvenHub SDK excluded.
+
+## Root filesystem group complete; reshape candidates
+
+Seek/cached-seek/read-at local component COMPLETE:20192 native comparisons, round74 coherent audit2965 definitions/765 imports/134 stable-current snapshots/0 duplicates. Size48b86c and reshape48b196 full C candidates compile warnings-as-errors; session93525 comparing all byte formats, unsigned size wrapping, inherited format and stride-child mutation. Remaining candidate bodies0/native verification1/integration1/build1. Full image gates remain open; accepted0/6.
+
+## Root reshape group complete; cache-enabled round76
+
+Reshape/size local component COMPLETE:15264 compiled ARM/native cases, round75 coherent audit2967 definitions/764 imports/134 stable-current source snapshots/0 duplicates;6 artifact hashes and builder hash checked. Cache-enabled root wrapper and capacity predicate pass16 native cases without child cuts; selected pending coherent build. Remaining local cache-query body0/build1. Cache insertion/ownership and format decoding remain, as do full-image coverage/data/layout/byte equality/hardware. Accepted0/6; EvenHub SDK excluded and root-only execution maintained.
+
+## Root cache-query complete and SDK exclusion checkpoint
+
+Cache-enabled root wrapper and capacity predicate local component COMPLETE:16 compiled ARM/native comparisons without child cuts; round76 coherent audit2969 definitions/763 genuine imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder hash checked. All five local groups in this span complete; no live build/test remains. Connected decoder frontier:6 format helpers,2 insertion/postprocess providers,1 allocation binding requiring qualification. Full-image coverage/data/layout/byte equality/hardware remain open; accepted complete images0/6 and goal active. Earlier three agents confirmed completed; all current work root-only. EvenHub SDK entirely excluded. No commits/staging/push/flashing/device writes.
+
+## Root indexed line complete; RGB round78
+
+Indexed-line local component COMPLETE:3160 compiled ARM/native cases without child cuts, round77 audit2970 definitions/762 imports/134 stable-current snapshots/0 duplicates. Full RGB4c8780..4c884a selected after2880 native child-contract comparisons; integrated compile passes, coherent build pending. Remaining RGB body0/build1;4 connected format providers, cache insertion/postprocess and draw allocation binding remain. Full six-image gates open; accepted0/6; root-only and EvenHub SDK excluded.
+
+## Root RGB complete; alpha verification running
+
+RGB local component COMPLETE:2880 native child-contract cases and round78 coherent audit2971 definitions/761 imports/134 stable-current source snapshots/0 duplicates. Alpha4c887c..4c8a10 and bit extension4c884a..4c887c full C candidates compile warnings-as-errors. Test session9391 exercises actual native/compiled BPP and interpolation bodies; other dependencies remain controlled child cuts. Initial fixture bytearray write corrected to bytes; no C failure identified. Remaining alpha bodies0/native verification1/integration1/build1, followed by3 connected format providers, cache insertion/postprocess and allocation binding qualification. Full image gates open, accepted0/6.
+
+## Root alpha integrated; canonical draw allocation binding
+
+Alpha plus bit extension selected after5452 alpha cases and2304 helper cases; integrated M55 compile passes warnings-as-errors. Coherent build session66199 running, selected Main sources frozen. Canonical draw allocation C already exists at the same native48b010..48b12c; address-qualified wrapper remains unselected while session92743 expands qualification over all byte formats, full-width boundaries, zero/missing handlers, child mutations and fatal first store. Remaining alpha body0/build1; allocation body0/binding verification1/integration1/build1. Full image gates open, accepted0/6, SDK excluded/root-only.
+
+## Root alpha complete
+
+Alpha/bit-extension local component COMPLETE:5452 alpha plus2304 interpolation cases; round79 coherent audit2973 definitions/760 genuine imports/134 stable-current source snapshots/0 duplicates,6 artifact hashes plus builder hash checked. Alpha local bodies0/build0. Three connected format providers remain:decode-indexed/load-indexed/decode-compressed, plus cache insertion/postprocess and draw allocation binding under session92743 qualification. Full-image source/data/layout/byte equality/hardware remain open; accepted0/6.
+
+## Root allocation binding complete; indexed-load frontier
+
+Canonical draw allocation binding local component COMPLETE:6739 native cases, round80 coherent audit2974 definitions/759 genuine imports/134 stable-current snapshots/0 duplicates;6 artifact hashes and builder hash checked. Current selected Main sources remain bound to this audited build. Four local groups in this span complete with20535 native comparisons; no live processes remain. Full indexed-load4c8570..4c8778 candidate is C-compilable but UNSELECTED:remaining native comparison1/file-tell provider1/integration1/build1. Two additional format providers and two cache providers remain beyond it. Full six-image source/data/layout/byte equality/hardware gates open; accepted0/6 and goal active. Root-only, EvenHub SDK excluded, no commit/staging/push/flashing/device write.
+
+## Root file tell complete; load and expansion
+
+File-tell local component COMPLETE:288 native cases and round82 coherent audit2975 definitions/759 imports/134 stable-current snapshots/0 duplicates. Indexed-load selected after2304 native comparisons; coherent build session88002 running, selected Main source frozen. Full indexed expansion4c8256..4c8554 C candidate compiles M55 warnings-as-errors, unselected pending comparisons. Remaining load body0/build1; expansion body0/verification1/integration1/build1; compression, cache and full-image gates remain. Accepted0/6; root-only, EvenHub SDK excluded.
+
+## Root indexed load complete; expansion integration
+
+Indexed-load local component COMPLETE:2304 native comparisons and round83 coherent audit2976 definitions/758 imports/134 stable-current snapshots/0 duplicates. Indexed expansion selected after1008 compiled ARM/native cases using real indexed-line bodies; integrated compile next, coherent build pending. Remaining expansion body0/build1, compressed format provider1 and cache insertion/postprocess2, then all full-image gates. Accepted complete images0/6; root-only and SDK excluded.
+
+## Root expansion complete; native codec configuration
+
+Indexed-expansion local component COMPLETE:1008 comparisons executing real line decoders; round84 coherent audit2977 definitions/757 imports/134 stable-current snapshots/0 duplicates. Native decompress_image4c8d8c..4c8e78 reduces to C after544 cases; selected pending build. Locked native RLE/LZ4 both explicitly disabled, and all provider branches return0 with diagnostic/cleanup. This is native behavior, not a success substitute or codec implementation. Full compressed-wrapper plus memzero candidates compile unselected; remaining wrapper verification1/integration1/build1. Cache providers2 and full-image coverage/data/layout/byte equality/hardware remain. Accepted0/6; root-only, SDK excluded.
+
+## Root disabled-codec provider complete; compressed wrapper next
+
+Native decompression-provider local component COMPLETE:544 bounded native comparisons and round85 coherent build audit saved. Source preserves native disabled RLE/LZ4 diagnostics/cleanup and always-zero return; no successful codec implementation claimed. File tell/indexed load/indexed expansion/decompression groups in this span total4144 native comparisons. Two compressed-wrapper/memzero C candidates compile but remain unselected pending verification/integration/build. Cache providers2 and full six-image source/data/layout/byte equality/hardware gates remain; accepted0/6 and goal active. No live build/test remains. Official payload SHA and native dump identity confirmed; source provenance retained. Root-only; EvenHub SDK excluded.
+
+## Root compressed and getter complete; cache insertion
+
+Compressed wrapper plus native memzero local component COMPLETE:2276 native comparisons and round86 coherent audit2980 definitions/756 imports/134 stable-current source snapshots/0 duplicates. Locked decompressor still returns0; synthetic success child cuts qualify static dispatch only. Existing cache getter null assertion repaired to native UINT32_MAX zero-store and offset rewritten with unsigned address wrapping:8 native cases, round87 coherent auditPASS. Other accessor assertions require individual review. Cache insertion selected after48 comparisons using actual getter; cache-add provider remains genuine dependency, postprocess remains. Pending insertion build1; full-image gates open, accepted0/6; root-only and SDK excluded.
+
+## Root cache insertion complete
+
+Insertion-wrapper local component COMPLETE:48 native cases with actual getter; round88 coherent audit2981 definitions/756 genuine imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder hash checked. This span completed compressed wrapper/zeroing helper, getter repair and insertion wrapper with2332 native comparisons. Remaining connected providers:postprocess489168 and cache-add4d4eea. Other selected cache accessor assertion loops require individual native review after the verified getter mismatch. Full six-image source/data/layout/byte equality/hardware gates remain; accepted0/6 and goal active. No live build/test remains; no staging/commits/push/flashing/device writes. Root-only, SDK excluded.
+
+## Root postprocess leaves complete
+
+Alpha-format440fc4 and header-flag48b73c local components COMPLETE:3107 compiled ARM/native comparisons without child cuts. Round89 coherent Main audit: 2983 definitions/756 imports/134 stable-current snapshots/0 duplicates; six artifact hashes and builder checked. Remaining connected group: postprocess wrapper, four larger draw-buffer providers, cache-add; each requires its own native review/verification/integration. Full-image source/data/layout/byte equality/hardware gates open; accepted0/6, goal active. No live process. Root only; EvenHub excluded.
+
+## Root postprocessor, duplicate and stride adjustment complete
+
+Local components COMPLETE: postprocess489168 (4609 native comparisons), duplicate48b134 (480), adjust_stride48b34e (6482), total11571. Round91 coherent audit2985 definitions/758 imports/134 stable-current snapshots/0 duplicates was checked before adding adjust. Round92 current coherent audit2986 definitions/758 imports/134 stable-current snapshots/0 duplicates; six artifact hashes and builder checked. Postprocess uses actual color/flag leaves; adjust uses actual flags/BPP/size providers. Other child cuts and mutation coverage recorded individually. Remaining connected groups estimate4: draw copy, premultiply, cache-add, memmove wrapper plus lower compiler helper. Native memmove439710..4397a6 identified; forward branch439be4 has existing canonicalaudio_queue_copy_bytes. Requires own qualification. Full six-image source/data/layout/byte equality/hardware gates remain, accepted0/6 and goal active. No live build/test, staging, commit, push, flash or device write. Root only; EvenHub excluded.
+
+## Root memmove and premultiply complete; copy next
+
+Local memmove compiler helper plus LVGL wrapper COMPLETE after3888 independent QEMU native/source cases with no child cuts or CPU corrections; final1024bytes and exact pointer return checked. Unicorn forward/reverse IT-loop discrepancies retained in diagnostic and qualification history, not used as passing evidence. Round93 audit2988 definitions/757 imports/134 snapshots/0 duplicates checked before next mutation. Local premultiply plus zero/RGBA/RGB565 helpers COMPLETE after7149 native comparisons,3584 exhaustive-alpha leaf cases. Actual leaves execute, clear/logger child cuts perform memory writes and header mutations; exact diagnostics/assertion store verified. Round94 current audit2992 definitions/756 imports/134 stable-current snapshots/0 duplicates; six artifact hashes and builder checked. Draw-copy full unselected C candidate compiles; remaining estimate2 connected groups: copy plus goto_xy (verification/integration/build and own dependency qualification), cache-add. Source/data/layout/byte equality/hardware gates remain across all six images, accepted0/6. Goal active, root only, EvenHub excluded. No live build/test or staging/commit/push/flash/device write.
+
+## Root draw copy and goto complete; cache-add qualification next
+
+Local draw-copy COMPLETE after2592 native comparisons using actual goto/BPP/area-width; memcpy/logger/custom callbacks are controlled child cuts performing byte/header mutations. Local goto_xy COMPLETE after34561 comparisons across all256 formats and bounded wrapped coordinates/stride/data addresses, actual BPP executes. Combined37153 cases; round96 current coherent audit2994 definitions/755 imports/134 stable-current snapshots/0 duplicates, six artifact hashes and builder checked. Cache-add wrapper candidate compiles; existing cache internal add/evict candidates compile, exposing canonical static bodies and matching native current-vtable reloads/diagnostic source literal. No selected cache file edits yet. Remaining cache group estimate3 provider qualifications,2 acquire/retain assertion repairs with verification,1 integration/build/audit. Other selected accessor assertion paths require individual native reviews later. Full six-image source/data/layout/byte equality/hardware gates remain; accepted0/6, goal active. No live build/test. Root only; EvenHub excluded; no staging/commit/push/flashing/device writes.
+
+## Root cache-add, accessors and acquire-or-create complete
+
+Local components COMPLETE: add wrapper/internal/evict after1443 native comparisons; retain/acquire null assertion repairs after64; all11 cache accessors after7937, fixing eight remaining fatal stores, signed decrement wrap, pointer wrap and native init store order; acquire-or-create after9603, native fast acquire, fresh class/ops loads and explicit initializer low byte. Total19047 cases, child-cut limits individually retained. Round98 and99 coherent audits2997 definitions/754 imports/134 stable-current snapshots/0 duplicates checked before later edits. Round100 current audit2997 definitions/754 imports/134 stable-current snapshots/0 duplicates; six artifact hashes and builder checked. Lookup/release/drop/internal-drop candidates compile unselected; remaining local estimate4 native qualifications plus1 integration/build/audit, then concrete cache callback/tree/allocator/data binding and all full-image gates. Acceptedcomplete0/6, goal active. No live build/test, staging/commits/pushes/flashing/device writes. Root only; EvenHub excluded.
+
+## Root cache lookup/drop and shared constructor complete; image callbacks integrated
+
+Local components COMPLETE: lookup/release/drop/internal-drop after968 native cases and round101 coherent audit2998 definitions/754 imports/134 stable-current snapshots/0 duplicates; shared constructor after432 cases and round102 coherent audit2999 definitions/754 imports/134 stable-current snapshots/0 duplicates. Both audits check6 artifact hashes plus builder. Six image/header comparison and cleanup callbacks pass7780 compiled ARM/native cases and are selected; round103 coherent build/audit pending. Actual flag leaf executes; strcmp/destroy/free remain controlled child cuts, with signed boundaries and cleanup mutations tested. Remaining estimate:2 startup providers plus naming repair; size-LRU initializer/callback; concrete count/shared LRU tree/allocator/data ABI qualification; all six image gates. Ghidra refresh reports no running instance; REA no open target. Accepted complete0/6, goal active, root only, EvenHub excluded. No staging/commit/push/flashing/device writes.
+
+### Round103 settled
+
+Image/header comparison and cleanup local components COMPLETE:7780 native cases; coherent Main auditPASS3005 definitions/754 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. Total rounds101..1039180 cases. No live build/test remains. Full native name setter safely skipsNULL, correcting earlier inferred fault; ledger updated. Next round104 native size-LRU initializer and name setter disassembly retained. Remaining estimate2 startup providers plus name setter/naming repair, size backend initializer/callback/binding, concrete LRU qualifications and all six-image gates. Accepted complete0/6; goal active, root only, EvenHub excluded.
+
+## Root image/header cache startup and count/size initialization complete
+
+Local components COMPLETE: count/size LRU initializers and data-size leaves460 native cases; image/header startup and safe name setter588, actual shared constructor/count/size init/array/mutex wrapper execute;20 class words checked by source/native identity. Eight startup children revalidated after correcting font init/deinit to image/header cache init and decoder wrapper naming. Round104 current coherent audit3012 definitions/752 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. Concrete allocator/tree init/mutex ensure/free/logger are controlled child cuts; source-owned pointers normalized, no byte/hardware claim. Remaining estimate:5 RB core/helper bodies with assertion/comparator/zeroing repairs; other RB insertion/removal/rotation/list/backend callbacks, concrete allocator/data/ABI qualification and all six image gates. Accepted complete0/6, goal active, root only, EvenHub excluded. No live build/test or staging/commit/push/flashing/device write.
+
+## Root RB core complete; LRU allocator and backend hooks integrated
+
+Five RB core/helper local components COMPLETE after488 native comparisons; fatal stores, native memzero call, fresh comparator/child loads repaired. Actual RB-init startup chain passes156 additional cases. Round105 coherent audit3013 definitions/752 imports/134 stable-current snapshots/0 duplicates,6 hashes plus builder checked before next edits. Four LRU alloc/zero/destroy/add providers pass418 cases and are selected; source typed table declarations now preserve destroy context and add context-unused native ABI. Add callback reloads current cache size after size callback mutation; exact fatal stores retained. Round106 coherent build/audit pending. Remaining estimate:6 LRU backend callbacks plus insert helper/list dependencies; RB insertion/removal/rotations; concrete allocator/data/ABI and all six image gates. Accepted complete0/6, goal active, root only, EvenHub excluded. No staging/commit/push/flashing/device write.
+
+### Round106 settled
+
+LRU alloc/zero/destroy/add local components COMPLETE after418 native cases and current coherent audit3014 definitions/752 imports/134 stable-current snapshots/0 duplicates;6 hashes plus builder verified. Startup with actual LRU allocator/zero wrapper and RB initializer/zero wrapper passes156 additional cases; lower malloc/clear/mutex ensure/logger remain child cuts. This span rounds104..106 total2266 native comparisons plus8 startup child naming regressions. Lookup native review records genuine before-compare entry capture, fresh list head after find, post-move RB data reload and four native link-write order; next round107 three providers pending native qualification/integration/build. Remaining estimate6 LRU callbacks plus insertion/list dependencies, RB insertion/removal/rotations, concrete heap/data/ABI and all six coverage/data/layout/byte equality/hardware gates. Accepted complete0/6, goal active. No live build/test. Root only; EvenHub excluded; no staging/commit/push/flashing/device writes.
+
+## Root ten LRU class slots locally complete; insertion frontier
+
+Local groups COMPLETE: lookup/link/list move705 native comparisons; remove/evict/victim/reserve2208; clear/custom cleanup/wrapper136; current typed count/size class tables plus actual allocator/RB startup156,20 class words checked. Total3205 cases rounds107..109. All ten class-slot bodies (11 distinct count/size providers) locally qualified and selected; comprehensive local receipt root-lru-class-local-completion-round109.json records scope. Actual cache-entry/list and tree-clear bodies execute in specified tests; controlled RB find/remove/heap/callback cuts remain. Round107/108 audits3016 definitions/752 imports/134 snapshots/0 duplicates checked before edits. Round109 current audit3017 definitions/752 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. LRU insertion/list prepend full C candidate compiles M55 warnings-as-errors unselected; remaining native qualification1/integration1/build1/audit1. RB node create/parent/insert/remove/rotations/balance, concrete heap/data/ABI and connected operations remain, plus all six coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active. No live build/test. Root only, EvenHub excluded; no staging/commit/push/flashing/device writes.
+
+## Root LRU insertion qualified and selected; RB key-lifetime repair
+
+LRU insertion and list prepend pass237 compiled ARM/native comparisons, preserving three canonical memcpy calls, stack pointer-word contents, callback mutations and native allocation failure rollback through actual RB erase. Selected; round110 coherent build running, all selected Main .c and builder frozen. Actual entry-at/init/link/prepend/erase execute; RB alloc/remove,malloc/copy/free/logger child cuts remain. RB insert/create-node/parent-walk full C candidate compiles M55 warnings-as-errors unselected. Native proves temporary key persists through balancing; existing source restored allocation data too early. Candidate fixes lifetime, fresh comparator and red-byte store, fatal stores, volatile fields. Remaining estimate current build/audit1,3 RB candidates qualification/integration/build, removal/rotation/balance, concrete heap/data/ABI/connected cache and six image gates. Accepted complete0/6, goal active, root only, EvenHub excluded. No staging/commit/push/flashing/device write.
+
+### Round110 settled
+
+LRU insertion/list prepend local components COMPLETE after237 native comparisons; current coherent Main auditPASS3017 definitions/752 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder checked. No live build/test remains. Three RB insert/create/parent-walk C candidates are unselected pending qualification, with authenticated key-through-balance lifetime repair documented. Remaining RB remove/rotations/balance, concrete heap/data/ABI/connected execution and all six image gates open. Accepted complete0/6, goal active; root only and EvenHub excluded.
+
+## Root RB insertion/node/parent complete; actual balancing exercised
+
+Three RB insertion/create-node/parent-walk local components COMPLETE after499 native comparisons; repaired native fatal stores,current comparator reload,full signed parent/final compare,temporary key lifetime through balancing and fresh red-byte store. An additional799 native comparisons execute actual insert balancing and private rotations across five bounded tree shapes, actual RB find/create/parent too. Allocator/comparator/logger remain child cuts; this does not prove all balancing inputs or heap execution. Total1298 cases. Round111 current coherent Main audit3019 definitions/752 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. Remove/leftmost C candidate compiles M55 warnings-as-errors unselected; next estimate2 native provider qualifications,4 rotation/insert/delete balancing qualifications incl fatal/invalid paths, concrete heap/data/ABI/connected cache, all six image gates. Existing delete-balancing empty assertion loop and parent-null break require native review. Accepted complete0/6; goal active, root only, EvenHub excluded. No live build/test; no staging/commit/push/flashing/device writes.
+
+## Round112 connected RB execution complete; candidate qualification remains
+
+Connected valid-tree insertion/removal test COMPLETE:4800 compiled ARM/native comparisons across100 seeds of24 nodes,2400 insertions and2400 removals. Actual find/create/parent/insert balancing/remove/leftmost/delete balancing/rotations execute; allocator/comparator/free remain controlled cuts. Candidate delete balancing repairs fatal zero-store,parent-null behavior,condition order and four unconditional nephew blackening stores. Candidates remain unselected pending six standalone provider qualifications including malformed/null/fatal paths; then selection,coherent build and audit. Latest selected Main build remains round111 PASS3019 definitions/752 imports/134 stable-current snapshots/0 duplicates. Concrete heap/data/connected cache and six image gates remain. Accepted complete0/6; goal active,root only,EvenHub excluded. No live test/build remains. No staging/commit/push/flashing/device writes.
+
+### Round112 settled
+
+Six RB remove/leftmost/right-left rotation/insert-delete balancing local components COMPLETE after4859 compiled ARM/native comparisons:4800 connected operations across100 seeds and59 direct helper cases including null/malformed colors/parents/assertion logging/fault address-width-access and fatal zero-store. Both full C files selected. Current coherent Main auditPASS3022 definitions/752 imports/134 stable-current snapshots/0 duplicate strong symbols,6 artifact hashes plus builder checked. Arbitrary aliasing and exhaustive malformed trees remain unproved; heap/comparator/logger remain controlled cuts. Next round113 authenticated native allocator/free evidence retained:44f758 skips static zero-size slot, unlike selected heap-free; pool semaphore release reloads current mutex, unlike saved selected mutex. Remaining estimate allocator/free wrappers and pool qualification,actual heap/data/ABI connected cache,and six image coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active,root only,EvenHub excluded. No live build/test remains; no staging/commit/push/flashing/device writes.
+
+## Round113 heap wrappers and accounting complete
+
+Nine heap malloc/calloc/zero/free/pool/size-query local components COMPLETE after5179 compiled ARM/native comparisons. Repairs preserve static zero-size slot skip,canonical memset454746,configured TLSF header offset through actual block-from-pointer/block-size helpers,current pool mutex release reload,volatile accounting and high-water stores. NULL/zero-size,lock/allocation failures,offset0/8/16,word wrap and child pool mutations compared. Semaphore,TLSF allocate/free and memset remain controlled cuts; heap algorithms/scheduler not qualified by this receipt. Bodies selected into explicit existing source files; old duplicate heap-free body removed from timer source. Current coherent Main auditPASS3028 definitions/752 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder checked. Three realloc provider repairs prepared unselected,M55 warnings-as-errors compilePASS; native stores old-size subtraction before new-size query,canonical configurable size,current release mutex and volatile high-water preserved. Next estimate realloc3 qualification/integration/build/audit,connected cache with actual heap/data/scheduler ABI,and six image coverage/layout/byte equality/hardware gates. Accepted complete0/6,goal active,root only,EvenHub excluded. No live build/test; no staging/commit/push/flashing/device writes.
+
+## Round114 realloc and round115 connected heap wrappers complete
+
+Three realloc local components COMPLETE after6804 compiled ARM/native comparisons. Actual selected heap malloc/free/pool plus configurable size helpers execute; TLSF allocate/free/realloc,semaphores/logger controlled cuts. Realloc query-entry state observed and mutated to prove subtraction store before new-size query,volatile accounting/current mutex/high-water stores,NULL/static-slot/failures/log return preservation. Selected; current coherent Main auditPASS3028 definitions/752 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder checked. Round115 connected RB with actual selected heap alloc/free/pool/size-query/pointer/block helpers COMPLETE4800 comparisons across100 seeds of24 nodes; TLSF allocate/free,semaphores,canonical memset and comparator remain controlled cuts. This does not qualify full heap algorithms or generic cache/LRU interactions. Next estimate connected TLSF alloc/free/realloc plus scheduler/data ABI,connected generic cache/LRU,and all six coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active,root only,EvenHub excluded. No live test/build remains; no staging/commit/push/flashing/device writes.
+
+## Round116 connected TLSF request/search/removal locally verified
+
+Connected allocation adjustment/size mapping/find/search/free-list removal verification COMPLETE180 compiled ARM/native comparisons. Actual pool-allocation entry,align/request adjustment,size mapping,bitmap search,block-size and free-list removal execute. Preparation/error remain controlled cuts. Empty versus one available size class,word overflow/request bounds,size assertion paths and pre-removal mutation compared,including full control and block memory. No selected C changed; round114 coherent build remains current3028 definitions/752 imports/134 snapshots/0 duplicates. Remaining estimate actual allocation preparation/split/mark/insert,connected TLSF free/realloc and heap state,generic cache/LRU and scheduler ABI,all six coverage/layout/byte equality/hardware gates. Accepted complete0/6,goal active,root only,EvenHub excluded. No live test/build; no staging/commit/push/flashing/device writes.
+
+## Rounds117-118 connected allocation and free/coalescing locally verified
+
+Round117 allocation preparation/split/insert/mark path verification COMPLETE120 compiled ARM/native comparisons. Round118 allocation then free/coalescing verification COMPLETE120 comparisons; actual TLSF allocation/find/remove/prepare/trim/split/insert/physical links/mark/free/merge/absorb/helpers execute,error reporting sole controlled cut. Authenticated128/256/512 initial block layouts plus empty lists,request/split/overflow bounds compared with full4096 control and1024 block bytes after allocation and free. Existing selected bodies match these bounded sequences; no C source changed. Current Main build remains round1143028 definitions/752 imports/134 snapshots/0 duplicates. Remaining estimate multiple live allocation orders and previous/next coalescing,actual TLSF realloc/startup,generic cache/LRU/scheduler ABI,and all six coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active,root only,EvenHub excluded. No live test/build; no staging/commit/push/flashing/device writes.
+
+## Rounds119-120 multiple live TLSF and realloc locally verified
+
+Multiple live allocation/free-order check COMPLETE720 compiled ARM/native comparisons:three allocation attempts,all six free orders,full control/block memory after every operation. Connected realloc check COMPLETE2160 comparisons:shrink/growth/zero/failure boundaries,actual allocator/split/find/prepare/merge/free/used trim bodies execute; error/copy controlled cuts. Configured128/256/512 layouts and empty lists sampled; no source repair required. Main round114 remains current3028 definitions/752 imports/134 snapshots/0 duplicates. Native heap-startup/pool-init dumps retained for round121. Ghidra refresh no running instance;REA no open target. Remaining estimate heap initialization/startup,connected generic cache/LRU with actual heap,scheduler/data ABI,and six coverage/layout/byte equality/hardware gates. Accepted complete0/6,goal active,root only,EvenHub excluded. No live tests/build; no staging/commit/push/flashing/device writes.
+
+## Round121 heap startup C candidates prepared
+
+Three unselected C providers compile M55 warnings-as-errors:pool initialization48413c,three-pool startup4842e6,create-with-pool4d06ec. Native ranges and candidate hash retained. Preserve genuine self-loop failures after heap logger;create-with-pool calls add-pool even withNULL control,and unsigned bytes-3188 including1024 third startup pool. These observations require child contract qualification,not inferred successful heap initialization. Native4840c8 is memory protection configuration,not heap snapshot; correction retained. Remaining estimate3 provider qualification/selection,control-create/add-pool/memory-protection child providers,connected cache/LRU and six image gates. No selected source changed; Main round114 remains current. Accepted complete0/6; goal active,root only,EvenHub excluded. No live test/build; no staging/commit/push/flashing/device writes.
+
+### Round121 settled; two control bodies prepared
+
+Three heap-startup/create-with-pool/pool-init local components COMPLETE after232 compiled ARM/native comparisons,rerun against integrated selected source. Native failure self-loops,unsigned header subtraction,ignored add-pool result,NULL control child invocation,mutations and exact flag clears qualified within controlled child scope. Current coherent Main auditPASS3031 definitions/755 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. Three newly exposed child contracts remain genuine imports; startup success not claimed. Round122 control construct/create two candidates compile M55 warnings-as-errors unselected. Next estimate their qualification/integration,add-pool/memory-configuration children,connected cache/LRU/startup/scheduler and all six coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active,root only,EvenHub excluded. No live build/test; no staging/commit/push/flashing/device writes.
+
+### Round122 control construction/create complete; add-pool candidate prepared
+
+Two control providers locally COMPLETE40 compiled ARM/native comparisons,full3188 control bytes and surrounding storage checked,aligned/misaligned/NULL and logger mutation/write faults qualified. Selected; current coherent Main auditPASS3033 definitions/754 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. Round123 add-pool,set-free/set-used C candidates plus repair of existing clear-prev-free configurable flag compile M55 warnings-as-errors unselected. Native uses78f4b8 flag,existing source hardcodes2; preserve one canonical helper body. Remaining estimate4 provider/helper qualifications,integration/build/audit,memory-protection configuration/startup/cache/scheduler ABI,and all six coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active,root only,EvenHub excluded. No live build/test; no staging/commit/push/flashing/device writes.
+
+## Rounds123-124 add-pool/flag helpers and connected create locally complete
+
+Add-pool,set-free/set-used and canonical clear-prev-free helper repair locally COMPLETE1728 compiled ARM/native comparisons. Configured masks,alignment/size/wrap,overheads0/4/8,offsets8/12,actual size/link/physical-next helpers and insertion mutation qualified; insertion/logger/error controlled cuts. Three bodies selected; existing shared clear-prev-free now reads78f4b8 instead of hardcoded2,one canonical body. Coherent current Main auditPASS3036 definitions/753 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. Round124 connected control construct/create/add-pool/free-list insertion COMPLETE32 comparisons with16384 arena bytes; logger/error only cuts. Observed1024 pool:nonNULL control return,add-pool size error logged,free-class bitmap0. This is not usable allocation capacity or successful hardware startup. Remaining estimate memory-protection configuration/children,connected startup/cache/LRU/scheduler ABI,all six coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active,root only,EvenHub excluded. No live test/build; no staging/commit/push/flashing/device writes.
+
+## Round125 memory-configuration sequence locally complete; MPU controls prepared
+
+Memory-protection root sequence4840c8 locally COMPLETE24 compiled ARM/native comparisons:call order,non-executable descriptor contents,copy-output/RAM/stack mutations and ignored child statuses qualified with MPU/copy/cache controlled cuts. Three authenticated descriptor arrays source-owned,placement gate open. Selected; current coherent Main auditPASS3037 definitions/756 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. Newly exposed MPU child contracts remain genuine imports. Round126 four control providers compile M55 warnings-as-errors unselected:enable/disable register leaves and reset/enable wrappers,preserve volatile MMIO and ordered DMB/DSB/ISB. Remaining estimate four native MMIO/barrier/ABI qualifications,attributes/region children,connected memory-protection/startup/cache/scheduler ABI,and six coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active,root only,EvenHub excluded. No live test/build; no staging/commit/push/flashing/device writes.
+
+## Round126 MPU control locally complete; descriptor providers prepared
+
+Four MPU enable/disable register/reset/enable wrapper local components COMPLETE672 compiled ARM/native modeled-register comparisons. MMIO reads/writes and DMB/DSB/ISB instruction order matched; low-byte ABI,status3 ifalreadyenabled,word preservation and read mutation tested. Physical MPU/cache/hardware effects not proved by modeled traces. Selected; current coherent Main auditPASS3041 definitions/754 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. Round127 two descriptor attribute/region candidates compile M55 warnings-as-errors unselected; native11/24 byte strides,packing/order/count wrap and enabled/index checks preserved. Remaining estimate2 descriptor qualifications,attribute/bulk-region writer children,connected modeled memory-protection/startup/cache/scheduler ABI,and six coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active,root only,EvenHub excluded. No live test/build; no staging/commit/push/flashing/device writes.
+
+## Round127 descriptor processing locally complete; five writer bodies prepared
+
+Attribute/region descriptor processing local components COMPLETE1008 compiled ARM/native comparisons:724 attribute and284 region cases. Native11/24 byte strides,low-byte/word packing,validation/NULL order,partial processing,next descriptor mutations,count wrap and zero-count behavior tested with writer cuts. Pathological counts beyond native local stack and physical MPU effects unproved. Selected; current coherent Main auditPASS3043 definitions/754 imports/134 stable-current snapshots/0 duplicates,6 artifact hashes plus builder. Round128 five raw/wrapper attribute writers,word copy and raw/wrapper bulk-region writers compile M55 warnings-as-errors unselected. Next estimate five register/read/write/ABI qualifications,connected modeled descriptors/config/startup,cache/LRU/scheduler ABI,and six coverage/layout/byte equality/hardware gates. Accepted complete0/6; goal active,root only,EvenHub excluded. No live test/build; no staging/commit/push/flashing/device writes.

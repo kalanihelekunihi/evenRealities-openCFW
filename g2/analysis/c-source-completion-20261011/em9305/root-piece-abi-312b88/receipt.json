@@ -1,0 +1,17 @@
+{
+  "status": "PASS_TARGET_FULL_BODY_BYTE_BINDING_AND_NATIVE_ABI_REVIEW",
+  "selected": true,
+  "source_sha256": "ef74208055bb2023e7f1beadaccebf28a382faefcd3360545c1087b2ecc698ee",
+  "object_sha256": "048267acdd6114591e81bdbdf047e6cd8a7354ccf1243ef8dd7f13d97584f116",
+  "authenticated_binary_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "native_range": "312b88..312bb3",
+  "compiled_text_bytes": 44,
+  "compiled_text_sha256": "b101b5210f4962aea5f60eb6b0bbec161838bb29fe72caafe164b71e69b20e1b",
+  "entire_function_text_equals_authenticated_native": true,
+  "review": "All branch/delay/condition/DSP instructions independently reviewed; preserves R2,R3..R12, native R1 result. No code-address aliases or raw opcode arrays.",
+  "limits": [
+    "This isolated function byte binding is not image-wide byte equality",
+    "Native runtime and hardware remain unverified"
+  ],
+  "selected_source": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_duration_piece_312b88.c"
+}

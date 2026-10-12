@@ -1,0 +1,34 @@
+{
+  "status": "LOCAL_COMPONENTS_COMPLETE_NATIVE_QUALIFIED_SELECTED_CURRENT_BUILD_AUDIT_PASS",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_sha256": "52e21bd89d6473025c58778bfc46931e6ad074f3ef420a52d6d135087592df60",
+  "native_ranges": [
+    "5c3600..5c36c8",
+    "5c3798..5c37a4",
+    "5c3860..5c3abc"
+  ],
+  "remaining_estimate": [
+    "Allocator/free wrapper and pool contracts qualification",
+    "Connected cache with actual allocator/data/ABI",
+    "All six coverage/data/layout/byte equality/hardware gates"
+  ],
+  "connected_native_cases": 4800,
+  "repairs_completed": [
+    "Native fatal zero store",
+    "Parent-null break removed",
+    "Child color evaluated before root equality",
+    "Unconditional native nephew blackening stores",
+    "Volatile fields and exported rotations"
+  ],
+  "balance_source_sha256": "599efad39b404dcc4e03413666d5ec45d0f262da59304457216cec49293df04c",
+  "build": "g2/build/c-firmware/20261012/peripherals-root-cache-rb-remove-balance-round112",
+  "audit": {
+    "definitions": 3022,
+    "imports": 752,
+    "snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes": 6,
+    "builder_hash_checked": true
+  },
+  "standalone_native_cases": 59
+}
