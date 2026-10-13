@@ -1,0 +1,76 @@
+{
+  "wave_id": "component-goal-case-wave005-reset-chain",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T20:07:26.530885+00:00",
+  "status": "COMPLETED_BOUNDED_RESET_CHAIN_QUALIFICATION",
+  "done_criteria": "Execute authenticated native and actual complete source reset from native vector reset address to genuine application entry; compare initialized RAM and SP under three nonidentical initial fill seeds.",
+  "functions": {
+    "path": "g2/analysis/component-goal-20261013/case-wave005-reset-chain/native-function-extents.json",
+    "sha256": "6d5a3398bb632c82e9f8f50356783ede276248bccd7971879d54102e868f0db5"
+  },
+  "source_object_build_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/clang-profile/build-receipt.json",
+    "sha256": "5b2698aa158b89b0c1a333009fac094ce897b5aa54ef2abca0d6a0d8960e7c30"
+  },
+  "qualified_profile": {
+    "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/wave.json",
+    "sha256": "00cf366fb6a4c75ab426cd204732ca39f60c2cb5acc9f9bd20c8deabcdcd1e1d"
+  },
+  "test": {
+    "path": "g2/analysis/component-goal-20261013/case-wave005-reset-chain/verification.json",
+    "sha256": "088e546e063addd1e5bc9cc31d2051c21b5b473655453e6b724e562cb8376fe6"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave005-reset-chain/verify.py",
+    "sha256": "3d0dbe67be54e5d211493f4613d8ec3c8c3a7bbf62eef209669a58c4dee59bab"
+  },
+  "RAM_compared_bytes": 11400,
+  "RAM_start": "0x20000000",
+  "RAM_end_exclusive": "0x20002c88",
+  "seeds": [
+    0,
+    165,
+    255
+  ],
+  "all_RAM_bytes_equal": true,
+  "SP_at_application_entry": "0x20002c88",
+  "hardware_child_stubs": false,
+  "cut": "Before first genuine application-entry instruction (native0800a598; source relocated symbol)",
+  "source_delta": "None; qualifies existing reproducible wave003 source graph. Source hashes verified unchanged.",
+  "source_drift": [],
+  "ownership": "Parent-authorized separate CASE stream; MAIN reserves Apollo MAIN/FreeType only. No source writes or concurrent index changes.",
+  "lineage_license_ABI": "Preserves locked native provenance and existing wave002/003 license/source records; source CRT flattening remains semantic reconstruction, not stock byte equality.",
+  "component_acceptance_gates": {
+    "cold_reset_RAM_SP": "PASS only to application-entry boundary",
+    "application_ambient_stack_and_peripherals": "not qualified by this test",
+    "source_completeness_and_computed_roots": "unresolved",
+    "linker_placement": "diagnostic native vector/reset only; other stock placement unresolved",
+    "byte_equality": "not met",
+    "hardware": "not run; no hardware/flash approval",
+    "accepted_images": "0/6",
+    "workflow": "G1 passed; G2-G6 not_run unchanged"
+  },
+  "next_critical_path_task": "Qualify application startup using real resident peripheral/provider effects and computed callbacks; physical boot/IRQ/FIFO/scheduler evidence remains unavailable here. Continue source/evidence work where recoverable without invented hardware effects.",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "persistent_goal_controls": {
+    "configured": false,
+    "reason": "No dedicated Goal controls exposed; parent-authorized substantive continuation uses this thread, no invented Goal ID."
+  },
+  "schema": "opencfw-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave005-reset-chain/wave.json",
+    "sha256": "81391a454522cf789c6674a8b8fe90a1cb3d0df71ed233fc5774b96a0c68c3e1"
+  },
+  "publication": {
+    "scope": "CASE reset boundary checkpoint",
+    "MAIN_Touch_preserved": true,
+    "interval_promotion": false,
+    "page_publication": "pending parent"
+  },
+  "profile_history": {
+    "best_qualified": "wave003",
+    "wave004": "no accepted improvement; preserved separately"
+  }
+}

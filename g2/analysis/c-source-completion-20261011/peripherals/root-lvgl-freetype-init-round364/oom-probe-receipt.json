@@ -1,0 +1,43 @@
+{
+  "status": "PASS_FREETYPE_OOM_ASSERT_LOG_AND_FATAL_STORE_BOUNDARY",
+  "comparisons": 1,
+  "results": [
+    {
+      "logger": [
+        3,
+        "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c",
+        73,
+        "lv_freetype_init",
+        "Asserted at expression: %s (%s)",
+        "(&lv_global)->ft_context != NULL",
+        "Out of memory"
+      ],
+      "fatal_store": [
+        4294967295,
+        0
+      ],
+      "scope": "execution stopped immediately before native-fatal store"
+    },
+    {
+      "logger": [
+        3,
+        "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c",
+        73,
+        "lv_freetype_init",
+        "Asserted at expression: %s (%s)",
+        "(&lv_global)->ft_context != NULL",
+        "Out of memory"
+      ],
+      "fatal_store": [
+        4294967295,
+        0
+      ],
+      "scope": "execution stopped immediately before native-fatal store"
+    }
+  ],
+  "pointer_binding_receipt": "oracle-bindings.json",
+  "instructions_unchanged": true,
+  "limits": [
+    "Stops before invalid-address store; no hardware fault recovery claim"
+  ]
+}

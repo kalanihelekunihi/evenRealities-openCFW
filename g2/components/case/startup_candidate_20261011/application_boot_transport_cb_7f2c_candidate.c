@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08007f2c periodic PMIC/battery/aging policy worker.
@@ -11,7 +12,6 @@ extern void case_boot_battery_sample(uint32_t *); /* 0xa01e */
 extern void case_init_pmic_prepare(void); /* 0x9df4 */
 extern uint32_t case_init_pmic_write(uint32_t,uint32_t); /* 0x39c8 */
 extern void case_boot_battery_percent(uint32_t *); /* 0x9ebc */
-extern uint32_t case_policy_log(uint32_t,...); /* 0x9170 */
 extern uint32_t case_init_pmic_reset(uint32_t,uint32_t); /* 0x39e4 */
 extern uint32_t case_init_pmic_read(uint32_t,uint8_t *,uint32_t); /* 0x35d4 */
 extern void case_init_power_set(uint32_t); /* 0x2c8e */

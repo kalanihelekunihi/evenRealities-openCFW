@@ -1,0 +1,17 @@
+{
+  "status": "NATIVE_INVALID_ALLOCATOR_MUTATION_NONRETURNING_FAULT_OBSERVED",
+  "case": {
+    "count_initial": 3,
+    "count_after_allocator": -1,
+    "sort": 1
+  },
+  "native_entry": "0x528298",
+  "native_sp_at_exception_stop": "0x2007fdd0",
+  "saved_registers_unrestored": true,
+  "interpretation": "Negative caller-owned count is passed unsigned into native sort core after callback mutation; outside valid positive-count allocator fixtures",
+  "production_change": "No invented recovery guard; C candidate preserves unsigned sort call",
+  "limits": [
+    "Native observed only; no C sort-core source exists yet",
+    "Not a successful-return comparison or hardware recovery proof"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "aggressive": {
+    "ABI_test_setup": "Missing child symbols after inlining",
+    "frame_regression": "Assertion failure; child entry cuts no longer retained",
+    "layout_CRT_formatter": "PASS 1149 formatter cases and 3 CRT seeds"
+  },
+  "bounded_internalized": {
+    "copy_SN_case0": "Native write args [1,address,word0,word1]; compiled child uses promoted args [address,word0,word1,0]",
+    "flash_provider_case0": "Native doubleword args [address,address,word0,word1]; compiled promoted child args [1,1,address,word0]",
+    "frame_regression": "PASS 4830",
+    "qualification": "REJECTED as replacement of existing native/provider ABI cuts"
+  },
+  "selective": {
+    "status": "LINKED_UNQUALIFIED_NO_SIZE_BENEFIT",
+    "source_load_span_bytes": 68956
+  }
+}

@@ -1465,3 +1465,283 @@ Three wholebodies appendedtoexisting intended helper TU withprefixhash preserved
 Nativepublic wrapper assertlines exactlymatch7unmodified pinned source locations:open6119/close6155/read6189/write6207/seek6225/tell6258/dir-open6318. Native diagnostic calls,sourceasserttext andfunctionlifts saved. Pin0494ce7169f06a734a7bd7585f49a9fa91fa7318/lfs.cSHA81a209e8551754d13b24fc0a2b6707fb3b2475e14feba00bf0df722b98a31398. Existingboot lfs.h/util.c/util.h bytes matchpin;boot lfs.c differsandassertlinepositionsshift+9. Do notsilentlyreuse modifiedbootC asMain source identity.
 
 Completionflag:7public API source-line fingerprint reconciliation complete. This narrows provenance; doesnotprove fullbody/version/config/ABI equivalence orauthorize unreviewed provideradmission. Remainingfull source/compiler/native/provider/config/globalstate closure. Main345unchanged3247definitions/772imports;0/6accepted;rootonly;EvenHubexcluded;goalactive.
+
+## Rounds347-348 LittleFS public entries anddirectory-close core
+
+Six entire bodies(close4cfad0/write4cfb7c/dir-open4cfc66/dir-close4cfcf8/dir-read4cfd02/dir-close-core4cd604) compile andpass450 controlled native comparisons/90assertion boundaries. Connected actual selected membership/unlink/native bodies thenpass630comparisons/150assertion boundaries;5lowerbackends controlled. Empty/head/middle/tail/successor/absent lists,exactdiagnostic text/lines,full32bit args/results,whole4KiBfixture,SP/R4-R11/caller guard checked. Assertions stoppedaterrorhelper boundary. Sixwholebodies admittedintoexisting helperTU;no newglobsource/builderchange. Main348terminalbuild/current-sourceauditPASS:3253definitions/770imports/134stablesnapshots/0duplicate strong/sixartifacthashes+builder. Sourcesunfrozen.
+
+Completionflag:fivepublicentries anddirectory-closecore locally complete/admitted/buildverified. Remainingestimate:3newlyexposedwrite/dir-open/dir-readcores,formatter andboundedcopy,configuration/global/block/heap/filesystem runtimeownership;Main770imports/all6imagegates. 0/6accepted;EvenHubexcluded;rootonly;goalactive.
+
+## Round349 complete bounded-copy helper
+
+Native54byte entry454778 reducedtoentireC andconnectedtoactual selectedstrlenadapter/lengthbody/copybody. Originalnative lowerbodies andselectedC execute;0controlledbackends.624M55 comparisonsPASS across7lengths0..255/all4x4alignments/zero-one-exact-truncated-oversize-UINT32_MAX capacities;independentexpected4KiBregion/result/NUL andSP/R4-R11/caller16byteguard checked. Initialharness leftMVE disabled causingUsageFault;enabledCPACR andreranwholematrixPASS. Validnulterminated/disjointregionsonly;overlap/invalidpointersunqualified. Nativebytesunmodified;actualhelperobjects recompiledbyte-identicalbeforeadmission. PinnedLVGL builtinstrlcpy hasdifferent operationordering;nativeordering governedtranslation.
+
+Wholebody admittedexistingintendedTU;nonewglobsource/builderchange. Main349terminal/current-sourceauditPASS3254definitions/769imports/134snapshots/0duplicates/sixartifacthashes+builder. Completionflag:bounded-copy locally complete/admitted/buildverifiedwithin scope. Remainingestimate:formatter,3LittleFScores/flushedwriteclosure/config/global/block/heap/filesystemruntime andMain769imports/all6gates;0/6accepted;EvenHubexcluded;rootonly;goalactive.
+
+## Round350 full LittleFS write core
+
+Entire170byte native4ce308..4ce3b1 reducedtoC usingpinnedlfs.c3657andnativeinstructions. Initialdraft reversedREADING/WRITING flags;nativeprobe rejectedcalltrace andheaderconfirmsREADING40000/WRITING20000. Correctedbeforeadmission;initialmismatch retained. Foundexistingselectedflushedwrite4ce1a0 provider;usesg2_lfs_file_flushedwrite,nonewdependency. RefreshedselectedTU prefixafter349thencompiledC11/M55/O2/Werror.148nativecomparisons/4assertionboundariesPASS with3lowerbackendscontrolled. Append/flushnonzero/filemax/wrapped32bitsum/gapzerobyteandupperbufferpointerword/gapadvanceandabort/finalerror/ERREDclearing/exactasserttext-source-3659/full4KiB/SP/R4-R11/caller16byteguard checked. Twoordinarystringpointerwordsreboundinanalysisoracle;instructionbytes unchanged. Connectedactualflush/flushedwrite filesystemengineunqualified.
+
+EntirecoreadmittedexistinghelperTU;no newglobsource/builderchange. Main350terminalbuild/current-sourceauditPASS3255definitions/768imports/134snapshots/0duplicates/sixartifacthashes+builder. Completionflag:outerwritecore locally complete/admitted/buildverifiedwithcontrolledlowerboundaries. Remainingestimate:2exposeddirectorycores166/172nativebytes,formatterandconnectedfilesystem/config/global/block/heap/runtimeownership;Main768imports/all6imagegates.0/6accepted;EvenHubexcluded;rootonly;goalactive.
+
+## Round 351: complete directory open and read cores
+
+**Local completion:** Both entire bodies are admitted and build audited: directory open `0x4cd558` (166 bytes) and directory read `0x4cd60e` (172 bytes). The pinned LittleFS source, complete native instruction ranges, and selected C agree across 387 M55 comparisons (63 open, 324 read). Native and selected list insertion, endian conversion, directory-get wrapper, and buffer fill execute; four deeper backends are controlled. The initial duplicate symbol in the research link was resolved by moving the control point from the existing directory-get wrapper to its slice reader.
+
+Qualification covers root/non-root tags, negative find/get and nonzero fetch results, path/root mutations, stacked slice arguments, successful head/id/position/type/list setup, 264-byte info clearing, dot entries, unsigned position wrap, 16-bit id wrap, split traversal, missing-entry skips, and info errors. Full 4 KiB fixture, SP, R4-R11 and caller guard match. Original native bytes are unchanged. Current helper objects matched qualified objects before admission.
+
+Main build and current-source audit pass: **3,257 definitions, 767 imports, 134 stable snapshots, zero duplicate strong symbols**; six artifact hashes and builder checked. No new glob-selected source or builder changes. Sources are unfrozen.
+
+**Remaining estimate:** One newly exposed directory-info provider, formatter entry/backend, connected filesystem/configuration/global/block/heap/runtime qualification, and the broader 767-import frontier. Complete-image acceptance remains 0/6. EvenHub excluded; root only; goal active.
+
+## Round 352: complete directory-info provider
+
+**Local completion:** Entire `0x4cbf38..0x4cbfdd` (166 bytes) is admitted and build audited. Pinned LittleFS lines 1415-1447 and native instructions govern the translation. Historical CONCAT44 return is register preservation, not a 64-bit API. Original saved identifier/info-pointer words are retained in the temporary pair; directory-get writes its eight bytes, then the selected endian converter executes.
+
+700 M55 comparisons pass with real directory-get/endian bodies and one controlled slice reader. Checks cover low-16-bit root/id handling, unsigned name_max wrap/tag packing, name and struct errors, low-byte type, CTZ/inline/other size behavior, untouched fields, stacked slice arguments, full 4 KiB memory, SP/R4-R11/caller guard. Synthetic name_max boundaries do not establish valid filesystem configuration. Distinct valid objects only. Original native bytes unchanged; current helper object matches qualification.
+
+Main build/current-source audit pass: **3,258 definitions, 766 imports, 134 stable snapshots, zero duplicate strong symbols**; six artifacts and builder checked. No new glob-selected source or builder changes. Sources unfrozen.
+
+**Remaining estimate:** Formatter entry/backend and connected disk/filesystem/configuration/global/block/heap/runtime qualification, plus the broader 766-import frontier. Complete-image acceptance remains 0/6. EvenHub excluded; root only; goal active.
+
+## Round 353: formatter cluster and headless Ghidra dossiers
+
+**Inventory completion:** Authenticated 4,076-byte native cluster `0x483028..0x484013` packaged into an analysis-only ELF, with 13 declared function records. Twelve corpus bodies match stored SHA-256 values; the missing eight-byte output callback is bounded at its return. All loadable bytes remain original. Function declarations and mapping symbols are analyst metadata. Shared `$d` string-table names prevented safe global rename; symbol references now use unique existing Thumb mapping names for reviewed bodies, preserving gap-data mapping.
+
+REA/Ghidra 12.1.4 provides saved complete dossiers for output callback (8 bytes), inner formatter (1,644), snprintf (26), and vsnprintf (18). Pointer word `0x484010 = 0x483029` identifies a Thumb output callback, not a data table. Callback stores the low byte only when index < capacity. Pinned LVGL builtin sprintf source corroborates outer/inner structure. Database signatures remain undefined and wrapper pseudocode is void despite preserved return R0; they cannot define the C ABI. New and historical Ghidra output share provider lineage and do not independently establish whole-image coverage.
+
+**Remaining estimate:** Entire formatter C/configuration, helper/literal ownership, 32/64-bit varargs alignment and all format-feature qualification, then admission/build. Connected filesystem/config/global/runtime and broader Main frontier remain. No production changes; Main round352 remains **3,258 definitions / 766 imports**, 0/6 accepted images. EvenHub excluded; root only; goal active.
+
+## Round 354: entire formatter source and text/32-bit qualification
+
+**Draft completion:** Full pinned LVGL builtin sprintf source (890 adapted lines) compiles, including float, exponential, long long and nested V features. MIT license retained; namespace/configuration adapted; pointer/long/va-list widths asserted. 1,128 native comparisons pass for text and 32-bit formats across both wrappers, with no controlled backend executed. Fourteen compiler arithmetic imports remain in the initial research link; their stubs are forbidden by hardware breakpoints and were never executed. Not admitted.
+
+**Remaining estimate:** Real numerical providers, 64-bit/float/alignment/data/configuration qualification, then actual selected-TU admission and Main audit.
+
+## Round 355: real arithmetic runtime and concrete counterexamples
+
+Pinned LLVM20.1.8 runtime: 33 files hash verified, 16 C files plus real EABI comparator/quotient-remainder adapters compile and link with no arithmetic stubs. The default generated runtime hits INVSTATE at a LE instruction in udivmoddi4; the formatter later hits the same instruction class. Compiler/QEMU/feature causation is unproven. Disabling the loop transform alone avoids those faults but yields a zero-padding mismatch, retained as a rejected configuration. Original absolute data addresses are outside the emulated usable memory; the attempted original mirror was removed. Five ordinary pointers (two callbacks and three authenticated literal/pow10 tables) are rebound to original bytes in the relocated oracle. fni-/fni+ and all ten binary64 powers exactly match pinned source. Instructions unchanged. Not admitted.
+
+**Remaining estimate:** Source-owned scalar feature configuration and coherent whole-TU execution; FP environment, original IAR identity and image gates remain.
+
+## Round 356: complete formatter with scalar source configuration
+
+**Local qualification:** Source-level target attributes disable lob/mve/mve.fp for the new formatter/runtime functions while retaining normal global M55/C11/O2 flags and every pinned format feature. 816 native comparisons pass for both wrappers, 102 fixtures, aligned/mixed 32/64 varargs, signed/unsigned extremes, fixed/exponential/general formatting, zero/signed zero/negative/small/large/inf/nan, capacities0/1/8/64, full4KiB, SP/R4-R11/D8-D15 and caller96-byte guard. Real arithmetic bodies execute; no controlled callees. Default FPSCR input0 only; exception flags/other rounding/nativeIAR byte identity remain unqualified. Not yet admitted; complete selected-TU integration next.
+
+**Remaining estimate:** Coherent whole-TU text/float/provider qualification and dependency hashes, admission/Main audit, then connected filesystem/configuration/runtime and remaining Main frontier. Main still 3,258 definitions /766 imports; all6image gates open. EvenHub excluded; root only; goal active.
+
+## Round 357: coherent formatter/provider translation unit
+
+Whole selected-TU draft plus direct pinned C source includes compile/link; private conversion typedef/template names are scoped per original source file, preserving their original separate-TU namespacing. Comparator redeclarations were removed in favor of exact existing definitions and AAPCS types. 1,944 comparisons pass (1,128 text/32-bit, 81664-bit/float), no controlled backends. Admission check rejects a second strong __aeabi_uldivmod, already owned by uart_power_config_offline/division_support.c. Production source was not changed. A baseline build inadvertently started after the failed admission command; it completed and audited at the original 3,258 definitions /766 imports /134 snapshots and is explicitly baseline evidence, not formatter admission.
+
+**Remaining estimate:** Use and qualify the actual selected divider, then admit/build/audit the entire pack. FP environment/IAR identity/layout/hardware and broader image gates remain.
+
+## Round 358: connected actual divider, entire formatter pack admitted
+
+Duplicate research divider adapter removed. Actual selected division_support.c object is reused byte-for-byte after checking source/object hashes against the current Main receipt. Complete source TU plus actual divider passes both matrices: **1,944 native comparisons**, zero controlled backends. Scalar target attributes apply only to new formatter/runtime functions; ordinary global M55 build flags and builder unchanged. Pinned LLVM16 C files are direct source includes in the existing intended TU, with33dependency hashes verified. Original licenses retained; no new glob-selected source, executable blobs, opcode arrays or placeholder traps. EABI quotient/remainder binding uses the existing real provider; comparator wrappers are typed to full C arithmetic definitions. Native instructions unchanged; five ordinary pointers rebound only in the analysis oracle.
+
+**Local completion pending terminal build:** Entire formatter and numerical provider pack admitted after prefix/candidate/dependency/duplicate-symbol checks. Main build is running; all selected source/dependencies and builder frozen until terminal audit.
+
+**Remaining estimate:** Main build/current-source audit; FP exception/other-rounding/nativeIAR identity/layout/hardware qualification; connected filesystem/configuration/global/block/heap/runtime and remaining Main frontier. All6image gates remain open;0/6accepted. EvenHub excluded; root only; goal active.
+
+### Round 358 terminal build/audit
+
+**Local completion confirmed:** Main build and current-source audit pass: **3,301 definitions, 765 imports, 134 stable source snapshots, zero duplicate strong symbols**, six artifact hashes and builder checked. Entire formatter/numerical pack admitted and compiled; actual existing divider retained. Source/dependencies/builder unfrozen after terminal audit.
+
+## Round 359: actual Main compiler profile and dependency audit
+
+Actual audio compile row/source/object checked against the admitted candidate. All **54 compiler-recorded dependency hashes** and **33 pinned runtime file hashes** verify. The base audit's134snapshots cover its recorded top-level inputs; this supplemental receipt explicitly checks the newly included transitive sources and headers. Actual audio compiler FP/ABI profile is matched in the research executable; function/data sections are the sole packaging addition for reachable-code extraction.
+
+**Local completion:** Both full execution matrices pass again under that profile: **1,944 comparisons**, with actual existing divider and real C arithmetic, no controlled backends. Source/object/dependency hashes rechecked after execution. Default FPSCR input0 only. Exception flags/other rounding, original IAR byte identity, full layout and hardware remain unqualified.
+
+**Remaining estimate:** Connected filesystem/configuration/global/block/heap/runtime qualification and the broader Main765-import frontier; FP environment and all6image acceptance gates remain. Current Main3,301definitions/765imports;0/6fullyaccepted images. EvenHub excluded; root only; goal active.
+
+## Round 360: full draw unit, dispatch and task-selection bodies
+
+Six complete bodies compile and pass1,557M55 comparisons: unitcreate86bytes/96cases, dispatch12/9, refreshinggetter8/4, firsttask18/8, availabilitywrapper28/1,152, multiselector136/288.24allocation-failure boundaries verify exact loglevel/path/84/function/format/expression/reason before logger execution. Fatal store-loop is preserved in C but not executed by this probe.
+
+Actual native/source dimension getters and existing sync-signal execute;8lower backends controlled. Compiler inlining prevented controlling the signal at its own entry; the unused weak-symbol experiment was replaced with four explicit lower RTOS controls. Native/source whole-TU paths check zeroed allocation/list insertion/wrapped counter/index rereads/alias fixtures, first-only single-unit behavior, prior->next traversal, queued/preferred-lowbyte/independence selection, full-screen busy-head exclusion, rotation and signed dimensions, waiter/pending/atomic/notify order and mutations. Full8KiB/SP/R4-R11/caller32byte guard verified.8ordinary root/sync/string pointers rebound in oracle; native instructions unchanged.
+
+**Local admission:** Six whole bodies appended to existing intended TU after prefix/candidate and current dimension-object checks. No new glob source/builder change. Main build running, source/dependencies/builder frozen through terminal audit.
+
+**Remaining estimate:** Terminal Main audit;54byte independence body and actual area integration; layerallocator/draw-unit initializer; real heap/sync/kernel/global configuration/runtime and all6image gates.0/6accepted;EvenHub excluded;root only;goal active.
+
+### Round360 terminal build/audit
+
+**Local completion confirmed:** Six draw bodies admitted and Main build/current-source audit pass: **3,307 definitions /763imports /134stable snapshots /zero duplicate strong symbols**; six artifact hashes and builder checked. Source/dependencies/builder unfrozen after terminal audit. Qualification remains bounded by the documented eight lower controls andOOM logger boundary.
+
+**Remaining estimate:** Independence54byte provider currently in connected execution qualification; layerallocator/draw-unit initializer, heap/sync/kernel/globalconfiguration/runtime and allimage gates.0/6accepted;goalactive.
+
+## Round361: complete task independence with real geometry
+
+**Local qualification/admission:** Entire54byte is_independent4848b2..4848e7 reduced to C from pinned lv_draw.c525 andnative traversal/state/real-area offsets. Actual native/source area-intersection helper executes, replacing the prior controlled independence boundary. Complete connected pack passes **1,757 comparisons**: all previous1,557 fixture paths rerun with explicit real-area geometry plus200direct independence cases (empty/head/middle/tail/absent targets, states includingREADY3, overlap/touch/disjoint/signedextreme areas). Actual first/multi/wrapper/getters/signal/independence/intersection execute; seven lower heap/log/defaultdisplay/syncensure/critical/notify boundaries remain controlled. Full8KiB/SP/R4-R11/caller32byte guard and24OOMlog boundaries verified.
+
+The54byte provider is appended afterprefix/candidate and current area/dimension object checks. No new glob-selected source or builderchange. **Main build running in session35346**, log/tmp/g2-361-main-build.log; selected source/dependencies/builder frozen until terminal audit. Previous completed Main360 remains3,307definitions/763imports; do not treat the new build as passed yet.
+
+**Remaining estimate:** Terminal Main audit and dependency receipt; two identified draw providers (layer allocation114nativebytes and draw-unit initializer) plus real heap/sync/kernel/global configuration/runtime closure. All6complete-image/layout/byteidentity/hardware gates remain open;0/6accepted. EvenHub excluded;root only;goalactive.
+
+## Round363: full draw-buffer clear admitted, terminal build pending
+
+Complete 258-byte native body 0x48ac40 reduced to C, preserving fresh callback reread, cached 16-bit stride, fresh height/format reads, clipping and arithmetic line-length shift. 480 connected native/C comparisons passed with real geometry/pixel-address/color-depth/cache-flush providers. Basic memory-fill backend and custom clear/flush callbacks remain controlled. One additional null assertion comparison verifies exact diagnostics and zero store to 0xffffffff; execution stops before the invalid store. Candidate admitted to existing selected TU; no new selected files or builder changes.
+
+Main build session76073 running; source/dependencies/builder frozen. Remaining for this component: terminal build/current-source/dependency audit. Further Main work: FreeType init 0x4b1b98 (260 bytes), real runtime/global configuration and final image gates. 0/6 accepted images; no hardware claim.
+
+**Round363 terminal completion:** Build session76073 exited0; current-source/relocatable-link audit PASS, 3,311 definitions /760 imports /134 top-level stable snapshots /zero duplicate strong symbols. Six artifact hashes and builder checked; selected TU source/object plus54 actual dependency hashes separately checked. Sources unfrozen. Clear provider bounded work complete; Main full-image gates remain open, 0/6 accepted. Next: FreeType initialization260bytes and connected provider/data contracts.
+
+## Round364: full FreeType initialization candidate compiles, unadmitted
+
+260-byte body 0x4b1b98 identified as lv_freetype_init; historical draw-unit alias retained only for linkage. Whole C body and typed three-function callback table compile under actual Main audio target profile. Native literal contract captured: root+448 context,28-byte allocation,max-glyph offset20,cache offset24,shared cache class0x73f478,callback table0x78ae5c with Thumb targets4b2343/4b220b/4b2309. New callback implementations and FT_Init_FreeType remain explicit imports; no opcode/address substitutes. Current corpus search does not expose those callback function bodies.
+
+Remaining estimate for initializer: connected native/C comparison, caller return declaration reconciliation, admission and terminal Main build/current-source audit. Four newly exposed direct code providers require independent full-body recovery and qualification; runtime/data/layout gates remain. 0/6 accepted images; goal active.
+
+**Round364 terminal completion:** Build93328 exited0, source/link audit PASS: 3312 definitions/763 imports/zero duplicates,134 stable top-level snapshots,six artifact hashes,builder checked. Two edited TU source/object/dependency maps independently current. Initializer bounded work complete; typed callback data exposes four direct code providers, so import count increase reflects explicit source closure obligations. Next comparator90bytes compiles unadmitted in round365; create82/free58nativebytes identified. 0/6 accepted; full runtime/layout/byte gates open.
+
+## Round365/366: node comparator qualified; lifecycle candidates compile
+
+Complete90byte comparator passed567 native/C comparisons, no controlled callees, real string helpers, unsigned mode/style fields, ordering/sign normalization,whole2KiB/SP/R4-R11/caller guards. Admitted; Main build10096 running with sources frozen. Next lifecycle candidates cover entire native create82/free58byte bodies and compile; native comparisons pending. Native create has no kerning write; source preserves reference128/italic/mutex sequence. Four deeper lifecycle children exposed explicitly, no retained executable data in production. Remaining comparator work: terminal build/audit; lifecycle: native qualification/admission/build and deeper source graph.0/6 images accepted.
+
+**Round365 terminal PASS:** 3,313 definitions/762 imports/zero duplicates;134 stable top-level snapshots,six artifacts,builder and54 actual selected-TU dependencies checked. Comparator bounded component complete.
+
+**Round366 qualification/admission:** Complete create82/free58byte C bodies pass31 connected native/C comparisons (15create/16free), real context getter/mutex-delete wrapper, seven explicit lower controls. Error path/style reread/reference-before-italic/face-before-mutex/cache-second-pointer mutation/full8KiB and ABI guards checked. Admitted; Main build60884 running, sources frozen. Remaining: terminal build/current-source audit, five identified direct provider obligations and allimage runtime/layout/byte gates.0/6 accepted.
+
+**Round366 terminal completion:** Build60884 exited0; current-source/link audit PASS,3315 definitions/764 imports/zero duplicates,134 stable top-level snapshots,six artifacts,builder checked;54 actual selected-TU source dependencies/object verified. Create/free bounded component complete; sources unfrozen.
+
+**Round367:** Whole cache-destroy96/italic-transform74/FT_Init_FreeType56byte C candidates compile unadmitted. Native instructions govern callbackorder/assertions/matrix constants and post-error context read. Remaining: connected qualification,admission,terminal build/audit,and deeper FT memory/library/module/transform providers plus real initialized runtime and final image gates.0/6 accepted.
+
+**Round367 qualification/admission:** Full cache destruction96/italic transform74/FT_Init_FreeType56byte bodies passed36 connected comparisons plus2exact null assertion/fatal-store boundary comparisons. Real mutex-delete wrapper executes; deeper FT/lock/free/queue/logger/destroy callbacks controlled. Cache class is fetched after lock mutation,allcleanup preserved even lock failure,exact italic matrix13930 andlibrary failure/success semantics verified. Admitted; Main build65224 running,sources frozen. Remaining: terminal build/source/dependency audit,sevenidentified direct provider gaps,realruntime/initializeddata/fullimage layout/byteidentity gates.0/6 accepted.
+
+**Round368 source evidence:** Existing FreeType gitlink86bc8a95056c97a810986434a3f268cbe67f2902 was uninitialized; exact pin downloaded and verified. ftobjs/ftinit/ftsystem source hashes captured; selected build inputs unchanged. Whole132byte FT_Set_Transform C candidate compiles, native qualification pending. Source explains optimized-away default-properties call, but native product allocation differs from stock malloc and configuration/version identity remains open. Main367 session65224 still live, no restart; source freeze retained.
+
+**Round367 terminal PASS:** Build65224 exited0; current-source/link audit 3318definitions/766imports/zero duplicates,134stable top-level snapshots,six artifacts andbuilder checked;54selected-TU dependencies/source/object verified. Three bounded providers complete,sources unfrozen.0/6 accepted.
+
+**Round368 qualification/admission:** Full132byte face transform passed480 native/C comparisons,no controlled callees,real staged copy,NULL/identity/shear/extreme/overlapping internalmatrix/vector fixtures,full2KiB andABI guards. Admitted;Main build80780 running,sources frozen. Remaining: terminal build/current-source/dependency audit. Next native memory group identified as38/12/10/12/10byte bodies backed by existing pool providers and authenticated handle20000354; realheap initialization remains open.0/6 accepted.
+
+**Round369:** Five complete memory adapters admitted after32native/C comparisons with3controlled pool backends. ABI old/new-size/block,callback word layout,exact producthandle,failedallocation/object preservation,whole2KiB andABI guards verified. Initial fixture incorrectly expected originalADRcallback addresses; corrected relocatedADRidentity assertions pass without nativeinstruction changes. Main91550running,frozen.
+
+**Round370:** FT_New_Library68byte completeC candidate compiles; nativeversion2.9.1 matches downloaded sourceheaders. Existing genuine memoryallocator provider available. Native default-module table inventoried:10classes autofitter/truetype/cff/psaux/psnames/pshinter/sfnt/smooth/smooth-lcd/smooth-lcdv plusnull. Typed class/callback contracts not admitted by address inventory alone. Remainingconstructor qualification/admission/build andmodule graph/runtime/layout gates;0/6accepted.
+
+**Round369 terminal PASS:** 3324definitions/763imports/zero duplicates,134top-level snapshots,sixartifacthashes,builder and54selectedTUdependencies/source/object checked. Fiveboundedmemory adapters complete.
+**Round370:** Constructor68bytes passes16connected native/C comparisons,real memoryallocation andzero providers,onecontrolledalloccallback,NULL/failure/aliasedoutput/version/refcount guards;admitted.Mainbuild pending.No image acceptance.
+
+**Round371:** Four completeC candidates compile: FT_New_Face36bytes,FT_Done_Face104bytes,FT_List_Find30bytes,FT_List_Remove36bytes. Pinned2.9.1source matches lifecycle structure; native uninitializedunusedOpenArgs fields retained and childdefined flags/path/stream only. Fresh refcount/internal/driver reads and signed decrement,head/tail/nodechain unlink semantics preserved. Remaining connectednative qualification/admission/build; two deeper opener/destroyfacechildren plusrealcallback/runtime gates. Main37024624live;selectedsources frozen.0/6accepted.
+
+**Round370 terminal PASS:** Build24624 exited0,3325definitions/762imports/zero duplicates,134top-level snapshots,six artifacts,builder and54actualselectedTUdependencies/source/object checked.Libraryconstructor boundedcomponent complete,sources unfrozen.0/6accepted.
+
+**Round371 qualification/admission:** Fourwholebodies pass196native/C comparisons:96newface,80doneface,12directfind,8directremove. Actual listfind/remove/memfree execute;3loweropener/destructor/freecallbackcontrols. Directlistentries required explicit researchlink retention afterGCinlined them;relinkedwithoutsource changes. NULL/signedindex/refcountwrap/headmiddle tailabsent/order/whole2KiB andABIguardschecked. Admitted;Main58600running,sourcesfrozen. Remainingterminalbuild/audit,deeperopener/destructor/module andruntimegates.0/6accepted.
+
+**Round371 terminal PASS:** Build58600 exited0;3329definitions/762imports/zero duplicates,134top-level stable snapshots,six artifacts,builder and54selectedTUdependencies/source/object checked.Four bounded bodies complete,sources unfrozen.
+**Round372:** Complete142byte destroy_face C candidate compiles unadmitted,pinned2.9.1source/directnative body/callbacktypedsizefinalizer identity captured. Cachedclazz beforecallback,glyphchainrereads,size/stream/internalclear ordering preserved. Remainingnative/C qualification,admission/build/audit,five exposed childproviders andrealruntime/module/finalimagegates.0/6accepted.
+
+**Round372:** Full142byte destroyface passes96connectedcomparisons,actualmemfree; cachedclass andcallbackmutation/glyphchain/typedsizefinalizer/flags/clear/freeorder/whole2KiB andABIguards.Admitted;Main38071running,frozen. Remainingterminalbuild/sourceaudit and5deeperchildren.
+**Round373:** Whole70byte FT_List_Finalize compiles unadmitted; cachesnext andreadsdata beforecallback/free,clearslistonlyaftercompletion,skipsNULLlist/memory. Nativequalification next;0/6accepted.
+
+**Round372 terminal PASS:** 3330definitions/766imports/zero duplicates;134 top-level snapshots,six artifacts,builder and54actualselectedTUdependencies/source/object checked.Destroyface boundedcomponent complete.
+**Round373:** Full70byte finalizer passes48native/C comparisons,realmemfree,2controlledcallbacks;NULL/optionaldestructor/cachednext/poisonednode/listmutation/endclear/ABIguards. Admitted;terminalMainbuild pending.Fullimagegates open,0/6accepted.
+
+**Round373 terminal PASS:** 3331definitions/765imports/zero duplicates,134top-level snapshots,six artifacts,builder and54selectedTUdependencies/source/object checked.Listfinalizer boundedcomponent complete.
+**Round374:** Whole destroy_size60/streamfree34/streamclose18bytes pass32native/C comparisons,actualclose/memfree,controlledcallbacks; freshclass/allocatorcache/pointermutation/NULL/externaltruth/clear-free-order/ABIguards.Admitted;Mainbuild pending.Realruntimeandfinalimagegatesopen,0/6accepted.
+
+**Round374 terminal PASS:** Build81277 exited0;3334definitions/763imports/zero duplicates,134top-level snapshots,sixartifacts,builder and54selectedTUdependencies/source/object verified. Threeboundedcleanup providers complete,sourcesunfrozen.
+**Round375:** Complete glyphslot80/cmapfinalizer34/charmaparray58byte C bodies compile unadmitted. Native cachedmemory/slotchain unlink/fresharray-count aftercallback semantics preserved; actual lowercmap child included. Remainingconnectedqualification/admission/build/audit,glyphslot_done525334/internalopener/module/runtime andfullimagegates;0/6accepted.
+
+**Round375 qualification/admission:** Threewholeglyphslot80/cmap34/charmaparray58byte C bodies pass46connectednativecomparisons(10slot/4cmap/32array),actualcmapfinalizer/memfree,controlledglyphslotdone/finalizers/freecallbacks. NULL/absent/head/middle/tailunlink,cachedmemory,freshcount/array/validallocatorreplacement,andwhole2KiB/ABIguards checked. Initialinvalidallocator fixture faultednative; correctedvalidsecondallocator; nofaultrecovery invented. Admitted;Main38118running,sourcesfrozen. Remainingterminalbuild/sourceaudit,oneglyphslotchild/opener/module/runtime/finalimagegates.0/6accepted.
+
+**Round376:** Whole glyphslot_done82/loader_done28byte C candidates compile unadmitted; cacheddriver/memory,moduleoutlineflag512,typeddrivercallback,currentinternal pointer clears,loaderNULL/cache-memory/reset/free order preserved. Existing bitmap-release provider source retains internalpointer afterfreecallback,while native rereads it; native/Cmutationfixture required before admission/repair. New childloader_reset524bc4 exposed. Main37538118 stilllive,frozen;no selectedsource edits.0/6accepted.
+
+**Round375 terminal PASS:** Build38118 exited0,3337definitions/762imports/zero duplicates,134top-level snapshots,six artifacts,builder and54selectedTUdependencies/source/object verified. Threeboundedcomponents complete;sourceunfrozen.0/6accepted.
+
+**Round376 repair qualification:** Bitmaprelease correction passes32native/Ccomparisons and demonstrates3oldsource counterexamples. Stillunadmitted: compilerinlinesbody into glyphslot_clear, so existingcallerfunctioncode changes and connectedcallerqualification is required. Prematurebaselinebuild33092 started after failedunchangedcallerassertion; knownprocesses terminated beforeclaimingrepairbuild.No production sourcewrite occurred. Nextqualifycallerwithcorrectedbody,thenadmitcoherentbuild.0/6accepted.
+
+**Round376 bitmaprepair:** Direct+fullinlinedcaller64comparisons pass with6oldsource counterexamples. Actualmemfree/compilerzero execute; no unchangedcallerbytesclaim. Qualifiedrepair applied aftersourcehashcheck; fresh repairedMain71329 running,frozen. Prematureoldbaseline build retained as terminatedfailedattempt.
+**Round376 provider graph:** FourwholeC bodies compile unadmitted: glyphslotdone82,loaderdone28,loaderreset90,loaderrewind28bytes. Reset cachesmemory,reads/frees/clearseachallocationfresh,rewind halfwordclear+36byteactualcopy semantics. Remainingnativequalification/admission/build,plusmainopener/module/runtime/finalimagegates;0/6accepted.
+
+**Bitmaprepair terminal PASS:** Freshbuild71329 exited0,3337definitions/762imports/zero duplicates;134top-level snapshots,sixartifacts,builder andbothaffectedTUsource/object/dependency maps verified. Qualifiedrepair boundedcomponent complete.
+**Glyphslot/loader graph:** Fourbodies82/28/90/28bytes pass48native/C comparisons,actualrepairedbitmap/memfree/loaderchain/stagedcopy,onlydriver+memoryfreecallback controls. Cachedmemory/moduleflag/ownedbitmap/internalreplacement/allocationmutation/rewindcopy/ABIguards.Admitted;Mainbuild pending.0/6accepted.
+
+**Glyphslot/loader terminal PASS:** Build98602 exited0;3341definitions/761imports/zero duplicates,134top-level snapshots,six artifacts,builder andbothhelper/repairedbitmap source/object/dependency maps checked. Fourboundedproviders complete,sourcesunfrozen.
+**Round377:** Full840byte internalfaceopener authenticatedhashmatchesexistingcorpus;completeinstruction/call/branchinventory captured,analysis-onlyELF created.REA deeperanalysis running for stackedABI/configuration joins. No partialproductionimplementation admitted;fullMacfallback/cleanup branches remain in scope.0/6accepted.
+
+**Round377 REA/source completion:** Ghidra12.1.4 completed840byte internalopener dossier,matchingexistingpseudocorpus andnativehash. WholeC candidate compiles underactualaudio profile; all explicitdriver/scanneddrivers/Mac+PSfallback/streamownership/allocation/list/glyphsize/signnormalization/internaldefaults/output/release andlinked-unlinked cleanup branches retained. Seven/six/five childparameter stack joins captured. No partialproductionimplementation admitted; remainingconnected fullbranch qualification/provider/datajoins/admission/terminalbuild and allimagegates.0/6accepted.
+
+**Round377 qualification/admission:** Whole840byte opener passes133core branch/ABIcomparisons plus133connectedcomparisons withrealFTmemalloc/compilerzero/pathcompare. All explicit/scanneddrivers/stacked7-6-5params/MacPSfallback/errornormalization/node-glyph-sizefailure/signoverflow/internaldefaults/output-release/whole4KiB/ABIguards exercised. Elevenchildproviders+alloccallback remaincontrolled; completebodyadmitted withoutclaimingclosureofparser/fallback/runtime. Main95796running,frozen. Remainingterminalbuild/current-sourceaudit,providergraph andallimagegates.0/6accepted.
+
+**Round377 terminal PASS:** Build95796 exited0;3342definitions/768imports/zero duplicates,134top-level snapshots,six artifacts,builder and54selectedTUdependencies/source/object checked. Full840byte opener boundedcomponent complete,sourcesunfrozen.
+**Round378:** Fullstreamconstructor148/driverfaceopener288byte C bodies compile unadmitted. Native/pinned2.9.1source joins cover sourceflags/outputinitialization/externalstreamreplacement/pathname reread/5argumentclassinit/incrementalparameter tag/streamreplacement/charmapaccept/errorcleanup. Remainingconnectednativequalification/admission/build/provider-datajoins;0/6accepted.
+
+**Round378 qualification/admission:** Whole streamnew148/driveropen288/memoryopen22byte C bodies pass1,187 connected comparisons(320stream/864driver/3memory); actualallocator/zero/memfree/memoryinitializer/charmapcleanup execute. Filesystem/unicodelookup andallocator/classcallbacks controlled. Sourceflagprecedence,outputinitialclear,pathname+externalpointer rereads,face/internalOOM,low8bitexternal,incrscanwithzeroretry/signedcounts,5argclassinit,streamreplacement,lookupmissing38acceptance/errorcleanup,andwhole4KiB/ABIguards verified. Admitted; Main23534running,sourcesfrozen. Remainingterminalbuild/audit and realchildprovider/module/runtime/fullimagegates.0/6accepted.
+
+**Round378 terminal PASS:** Build23534 exited0;3345definitions/768imports/zero duplicates,134top-level snapshots,six artifacts,builder and54actualselectedTUdependencies/source/object checked.Threeboundedstream/driver providers complete,sourcesunfrozen.
+**Round379:** FivewholeC creationcandidates compile:loadernew32/slotinit86/newglyphslot110/newsize198/listadd32bytes. HiddenloaderoutputR1ABI reconciled;exactallocation/output/rollback/classcallbacks/moduleoutlineflag/listappend semantics preserved.No addedinternalcleanupbeyondnativeNewSizeerrorpath. Remainingconnectednativequalification/admission/build andrealmodule/runtime/finalimagegates;0/6accepted.
+
+**Round379 qualification/admission:** Fivewholecreation bodies32/86/110/198/32bytes pass1,082connectedcomparisons(2loader/48slotinit/512newglyph/512newsize/8listadd). Actualallocator/zero/free/bitmaprepair/slot-loaderrollback/stagedcopy/listappend execute; allocator/drivercallbacks controlled. Everyallocationfailure stage/NULLvalidation/outputtiming/outlineflags/hiddenloaderoutputABI/currentchain-after-callback/nativesize-errorcleanup/whole4KiB andABIguards checked. Admitted;Main3468running,sourcesfrozen. Remainingterminalbuild/current-sourceaudit,filesystem/unicode/MacPS/module/runtime/finalimagegates.0/6accepted.
+
+**Round379 terminal PASS:** Build3468 exited0;3350definitions/765imports/zero duplicates,134top-level snapshots,six artifacts,builder and54actualselectedTUdependencies/source/object checked.Fiveboundedcreation providers complete,sourcesunfrozen.
+**Round380:** FullUnicode selector116/file-read70/file-close34/file-open184byte C bodies compile unadmitted. PinnedLVGLftsystem source+native productadapter joined; backwardUCS4preference,zero-countbounds,seek/readlowbyteerrors,close-cachedfile/poolhandle,open12bytedescriptor/callbacktypedrefs/exactdiag/fatalspin retained. Remainingnativequalification/providerjoins/admission/build andfilesystem/runtime/allimagegates;0/6accepted.
+
+**Round380 qualification/admission:** FourfullUnicode116/read70/close34/open184byte bodies pass343core+343connectedcomparisons,actualLVGLseek/tell/read/close uncachedpaths. Filesystemopen/pool/logger/drivercallbacks controlled; cachedruntimeunproven. BackwardUCS4/Unicodepreference,lowbyteresults,seekignoredfailures,typedcallbackidentitynormalizedafterassertion,allocator/filecopy mutation,closecachedpointer,exactOOMdiag+selfloopboundary,whole4KiB/ABIguards checked. Admitted;Main42908running,frozen. Ongoingmetadatacoordinatorrelay requested externally; directuserauthorizationpending,previoussingle-use relayconsumed. No cloudmutation/publicationclaim.0/6accepted.
+
+**Round380 terminal PASS:** Build42908 exited0;3354definitions/763imports/zero duplicates,134top-level snapshots,six artifacts,builder and54actualselectedTUdependencies/source/object checked.Fourboundedproviders complete. Ongoing coordinator metadata reporting authorized by originalquestion Sentinel_b7612c873d108191ba58ee633471fc64 and human Approved reply Sentinel_70d6492d2dd48191a91be5a3509d8e7a supplied throughverifiedcoordinator; notLibrary/Pageownership.
+**Round381:** ThreecompleteSFNTfallback C bodies compile unadmitted:locator298/bufferopener154/PSwrapper228bytes. Allrecordselection/errors/offset-lengthwrap/indexmask/rewind/bufferownership cleanup retained.Remainingnativequalification/childcontracts/admission/build andruntime/fullimagegates;0/6accepted.
+
+**Round380 dashboard handoff:** Ownerwave sealed with54dependency/source/object/currentterminal hashes,revision+dirty/indexreceipt andscopedimportdelta. Supportedauthorizedmetadata message delivered toverifiedcoordinator01a1228e-2121-71b9-a9df-9eede6787020; waveSHA3bfb87002c06c9ac17e86ca0c44f3dfcd06e832b91ed6b4d4f5803a2ae7515a8. Inventory/validation/Libraryversion/Pagepublication/readback remainpending; noautonomouspublicationclaim.No source orfirmware exported.
+
+**Round381 ongoing:** Fivewholefallback bodies compile: SFNTlocator298/bufferopener154/PSwrapper228/memory-streamclose30/new-memory-stream78bytes. Locator passes1,280native/C comparisons with3controlledBEread/skipchildren:headerreject/emptyCIDTYP1otherrecords/negativeandextremeindex/wrappedheaders/allreachableerrors/output-beforeerrorcheck/stackedCID/whole1KiB/ABIguards. Packetunadmitted; remainingconnectedwrapper/buffer/memorystreamownership qualification,childjoins/admission/build/audit. Nativeconstructor leavesmemoryfield forlaterFT_Stream_New; noinventedinitialization.0/6accepted;goalactive.
+
+**Round381 qualification/admission:** Fivefullbodies locator298/buffer154/PSwrapper228/memoryclose30/newmemory78bytes pass1,280locator+709connectednativecomparisons (664PS/36buffer/8new/1close). Actualallocator/zero/free/SFNTlocator/wrapper/buffer/newmemory/streamclose/openmemory execute; driver/module/stream/callbacks controlled. Rewinderror precedence,highbyteunknownformat,wrappedbounds/extremeindexes,bufferownership/freeerror/successflags/typedcallbacks/nativeconstructor noextraallocatorwrite verified. Admitted;Main81380running,frozen. Remainingterminalbuild/sourceaudit,streamBE/services,module+Macprovider/runtime/finalimagegates.0/6accepted. Completedwave coordinatorreceipt deferred untilterminalaudit.
+
+### Round381 completed — PS/SFNT fallback
+Five complete C bodies admitted; 1,280 locator +709 connected comparisons. Terminal Main build and current source/object/54 dependencies PASS:3,359 definitions,767 imports,134 snapshots,0 duplicate strong symbols. Remaining: seven stream/module candidates require qualification; Mac fallback and initialized runtime/layout remain open.0/6 accepted images.
+
+### Round382 completed — root-freetype-stream-primitives-module-round382
+7 complete C bodies admitted; 2472 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3366 definitions,761 imports,134 snapshots,0 duplicates. Remaining: Mac resource/path parser graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round383 completed — root-freetype-macbinary-wrapper-round383
+2 complete C bodies admitted; 4160 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3368 definitions,762 imports,134 snapshots,0 duplicates. Remaining: Mac resource/path parser graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round384 completed — root-freetype-mac-resource-dispatch-round384
+1 complete C bodies admitted; 485 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3369 definitions,765 imports,134 snapshots,0 duplicates. Remaining: Mac resource/path parser graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round385 completed — root-freetype-resource-header-round385
+1 complete C bodies admitted; 6416 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3370 definitions,764 imports,134 snapshots,0 duplicates. Remaining: Mac resource/path parser graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round386 completed — root-freetype-resource-offsets-round386
+3 complete C bodies admitted; 1959 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3373 definitions,764 imports,134 snapshots,0 duplicates. Remaining: Mac resource/path parser graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round387 completed — root-freetype-mac-sfnt-resource-round387
+1 complete C bodies admitted; 2242 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3374 definitions,763 imports,134 snapshots,0 duplicates. Remaining: Mac resource/path parser graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round388 completed — root-freetype-mac-post-resource-round388
+1 complete C bodies admitted; 1882 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3375 definitions,762 imports,134 snapshots,0 duplicates. Remaining: Mac path search and nine-rule table, sort core and helper graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round389 completed — root-freetype-mac-path-rules-recon-round389
+2 complete C bodies admitted; 60 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3378 definitions,771 imports,134 snapshots,0 duplicates. Nine entry typed rule table admitted. Remaining: nine path handlers, parent Mac path search, sort core, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round390 completed — root-freetype-mac-path-insert-round390
+3 complete C bodies admitted; 112 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3381 definitions,769 imports,134 snapshots,0 duplicates. Remaining: seven path handlers, parent Mac path search, sort core, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round391 completed — root-freetype-mac-darwin-paths-round391
+2 complete C bodies admitted; 64 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3383 definitions,767 imports,134 snapshots,0 duplicates. Remaining: five path handlers, parent Mac path search, sort core, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round392 completed — root-freetype-apple-rule-wrappers-round392
+2 complete C bodies admitted; 32 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3385 definitions,766 imports,134 snapshots,0 duplicates. Remaining: Apple generic parser, three path handlers, parent Mac path search, sort core, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round393 completed — root-freetype-apple-generic-parser-round393
+1 complete C bodies admitted; 516 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3386 definitions,765 imports,134 snapshots,0 duplicates. Remaining: three path handlers, double-from-file graph, parent Mac path search, sort core, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round394 completed — root-freetype-double-path-rules-round394
+3 complete C bodies admitted; 216 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3389 definitions,763 imports,134 snapshots,0 duplicates. Nine typed Mac rule handler bodies complete. Remaining: double-from-file probe, parent Mac path search, sort core, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round395 completed — root-freetype-double-from-file-round395
+1 complete C bodies admitted; 33 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3390 definitions,762 imports,134 snapshots,0 duplicates. Remaining: parent Mac path search, nine-rule dispatcher, connected path-open/AppleDouble stream graph, sort core, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round396 completed — root-freetype-mac-path-search-round396
+1 complete C bodies admitted; 120 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3391 definitions,763 imports,134 snapshots,0 duplicates. Remaining: nine-rule dispatcher, connected path-open/AppleDouble resource graph, sort core, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round397 completed — root-freetype-nine-rule-dispatch-round397
+1 complete C bodies admitted; 120 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS: 3392 definitions,762 imports,134 snapshots,0 duplicates. Nine-rule table and Mac path bodies complete in C. Remaining: connected path-open/AppleDouble resource graph, sort core, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round398 completed — sort helpers
+Five complete C helper bodies (484 native bytes) admitted after 48 native/C comparisons including comparator trace. Terminal Main build/current source/object/54 dependencies PASS: 3397 definitions,762 imports,134 snapshots,0 duplicates. Remaining: sort core704 bytes, connected Mac resource graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round399 completed — sort core
+One complete704-byte C body admitted after392 native/C comparisons. Connected six-body sort graph (1188 native bytes) complete in C. Terminal Main build/current source/object/54 dependencies PASS:3398 definitions,761 imports,134 snapshots,0 duplicates. Remaining: connected Mac path/resource graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.

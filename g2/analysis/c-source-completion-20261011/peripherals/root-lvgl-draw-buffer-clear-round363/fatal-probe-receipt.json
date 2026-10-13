@@ -1,0 +1,43 @@
+{
+  "status": "PASS_NULL_ASSERT_LOG_AND_FATAL_STORE_BOUNDARY",
+  "comparisons": 1,
+  "results": [
+    {
+      "logger": [
+        3,
+        "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c",
+        165,
+        "lv_draw_buf_clear",
+        "Asserted at expression: %s (%s)",
+        "draw_buf != NULL",
+        "NULL pointer"
+      ],
+      "fatal_store": [
+        4294967295,
+        0
+      ],
+      "scope": "execution stopped immediately before native-fatal store"
+    },
+    {
+      "logger": [
+        3,
+        "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c",
+        165,
+        "lv_draw_buf_clear",
+        "Asserted at expression: %s (%s)",
+        "draw_buf != NULL",
+        "NULL pointer"
+      ],
+      "fatal_store": [
+        4294967295,
+        0
+      ],
+      "scope": "execution stopped immediately before native-fatal store"
+    }
+  ],
+  "ordinary_pointer_words_rebound": 5,
+  "instructions_unchanged": true,
+  "limits": [
+    "Stops before invalid-address store; no hardware fault recovery claim"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "status": "PASS_OFFSETS_COMPARATOR_SORT_WRAPPER",
+  "comparisons": 1909,
+  "by_component": {
+    "offsets": 1848,
+    "comparator": 49,
+    "wrapper": 12
+  },
+  "native_sizes": [
+    472,
+    38,
+    24
+  ],
+  "actual_helpers": [
+    "stream seek/skip/BE16/BE32",
+    "selected realloc/zero/free",
+    "native sort core and swap graph in analysis only",
+    "C comparator used by native core in candidate path"
+  ],
+  "controlled_boundaries": [
+    "allocation/free callbacks",
+    "sort core remains native oracle dependency; not production C source"
+  ],
+  "checks": [
+    "type/resource count bounds",
+    "absent/present tags and signed relative offsets",
+    "short read/skip rollback",
+    "first/second allocation OOM and free",
+    "attribute signed rejection/24-bit masking/wrapped data offsets",
+    "signed duplicate resource IDs and sort flag low byte",
+    "comparator NULL sort-wrapper guards",
+    "whole4KiB/SP/R4-R11/four stacked args/caller guard"
+  ],
+  "limits": [
+    "704-byte sort core not reduced to C; production import stays unresolved",
+    "Native sort instructions only in analysis ELF, not production",
+    "No initialized runtime/layout/hardware proof"
+  ],
+  "selected": false
+}

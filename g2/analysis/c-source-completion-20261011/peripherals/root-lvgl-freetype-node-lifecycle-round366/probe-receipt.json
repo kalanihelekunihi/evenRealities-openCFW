@@ -1,0 +1,35 @@
+{
+  "status": "PASS_FULL_NODE_CREATE_FREE_CONNECTED",
+  "comparisons": 31,
+  "per_path": {
+    "create": 15,
+    "free": 16
+  },
+  "actual_helpers": [
+    "context getter",
+    "mutex deletion wrapper"
+  ],
+  "controlled_boundaries": [
+    "audio_uart_ft_new_face_525ade",
+    "audio_uart_ft_italic_transform_4b1fd4",
+    "audio_uart_lv_async_init_4d465c",
+    "audio_uart_ft_done_face_526814",
+    "audio_uart_lv_cache_destroy_4d4d6a",
+    "audio_queue_delete",
+    "audio_uart_lvgl_log"
+  ],
+  "checks": [
+    "error diagnostics and no-success-writes",
+    "fresh style after FT_New_Face",
+    "reference128 before italic callback",
+    "face storage before mutex init",
+    "done_face then mutex deletion then cache cleanup",
+    "second cache reread after first destroy mutation",
+    "whole8KiB/SP/R4-R11/caller guard"
+  ],
+  "selected": false,
+  "limits": [
+    "FT face/italic/mutex-init/cache-destroy/queue/log controlled",
+    "No image/layout/hardware proof"
+  ]
+}

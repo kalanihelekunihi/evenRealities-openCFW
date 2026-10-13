@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08001574 OTA box file open, bank preparation and chunk fetch.
@@ -5,7 +6,6 @@
  */
 #include <stdint.h>
 extern void case_policy_wait(uint32_t); /* 0xa7b0 */
-extern uint32_t case_policy_log(uint32_t); /* 0x9170 */
 extern void case_policy_ota_checksum(uint8_t *,uint32_t); /* 0x9b70 */
 extern uint32_t case_policy_ota_transmit(uint32_t,const uint8_t *,uint32_t,uint32_t); /* 0x2744 */
 extern uint32_t case_policy_parse_probe(uint32_t); /* 0x1e94 */

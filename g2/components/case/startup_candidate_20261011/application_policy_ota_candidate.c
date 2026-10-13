@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08007376 side-OTA-ready transitions through loop tail 0x08007eda.
@@ -5,7 +6,6 @@
  * typed file, mode, delay and flash children.
  */
 #include <stdint.h>
-extern void case_policy_log(uint32_t message);
 extern void case_policy_ota_left_prepare(void);  /* 0x0800be90 */
 extern void case_policy_ota_right_prepare(void); /* 0x0800bede */
 extern void case_ack(uint32_t opcode);           /* 0x080068d0 */

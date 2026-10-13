@@ -1,0 +1,37 @@
+{
+  "status": "PASS_FULL_INTERNAL_OPENER_BRANCH_AND_ABI_PROBE",
+  "comparisons": 133,
+  "controlled_boundaries": [
+    "audio_uart_ft_stream_new_524f96",
+    "audio_uart_ft_open_driver_face_5259be",
+    "audio_uart_font_mem_alloc",
+    "audio_uart_ft_list_add_529304",
+    "audio_uart_ft_new_glyph_slot_525386",
+    "audio_uart_ft_new_size_52687e",
+    "audio_uart_ft_stream_seek_5288e0",
+    "audio_uart_ft_open_ps_sfnt_525d32",
+    "audio_uart_ft_load_mac_face_526452",
+    "audio_uart_ft_stream_free_52502a",
+    "audio_uart_ft_done_face_526814",
+    "audio_uart_ft_destroy_face_5258a8"
+  ],
+  "actual_helpers": [
+    "pathname compare"
+  ],
+  "checks": [
+    "invalidargs/nulloutput/indexqueries",
+    "explicit and scanned drivers",
+    "seven/six/five parameter stacked ABI",
+    "externalstream ownership",
+    "Mac/PS fallbacks and error normalization",
+    "node/glyphslot/size failure cleanup",
+    "scalable height/vertical/fixed-strike overflow normalization",
+    "internal defaults/output/release",
+    "whole4KiB/SP/R4-R11/caller guard"
+  ],
+  "limits": [
+    "Twelve child providers controlled; connected deeper-source pass pending",
+    "No image/layout/hardware proof"
+  ],
+  "selected": false
+}

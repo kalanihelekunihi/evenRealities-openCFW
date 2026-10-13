@@ -1,0 +1,25 @@
+{
+  "status": "PASS_COMPLETE_RESOURCE_HEADER",
+  "comparisons": 2528,
+  "native_bytes": 526,
+  "actual_helpers": [
+    "seek/skip/read/read_at/BE16",
+    "selected staged forward copy"
+  ],
+  "controlled_boundaries": [],
+  "checks": [
+    "header high-bit and overlap rejection",
+    "signed overflow/stream extent bounds",
+    "partial output persistence",
+    "zero/equal/unequal map header",
+    "negative/large type list offsets",
+    "skip failure overwritten by BE error reset",
+    "shared output and position aliasing",
+    "whole4KiB/SP/R4-R11/fifth arg/caller guard"
+  ],
+  "limits": [
+    "Memory-stream paths; callback errors require additional pass",
+    "No initialized runtime/layout/hardware proof"
+  ],
+  "selected": false
+}

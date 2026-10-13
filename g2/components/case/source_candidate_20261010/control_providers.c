@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include "case_gpio_control_contract.h"
 
 /* Stock 0x08004e9e: write one selected control register. */
 void case_control_write(uint32_t base, uint32_t mask, uint32_t enable)
@@ -12,12 +12,12 @@ void case_control_write(uint32_t base, uint32_t mask, uint32_t enable)
 }
 
 /* Stock 0x08006b80 and 0x08006b98. */
-void case_control_a(uint32_t enable)
+__attribute__((noinline)) void case_control_a(uint32_t enable)
 {
     case_control_write(0x50000000u, 0x40u, enable != 0u);
 }
 
-void case_control_b(uint32_t enable)
+__attribute__((noinline)) void case_control_b(uint32_t enable)
 {
     case_control_write(0x50000000u, 0x80u, enable != 0u);
 }

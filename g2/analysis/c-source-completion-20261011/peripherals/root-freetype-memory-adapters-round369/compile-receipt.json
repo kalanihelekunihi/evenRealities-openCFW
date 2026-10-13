@@ -1,0 +1,57 @@
+{
+  "status": "PASS_UNADMITTED",
+  "command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-O2",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate",
+    "-c",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-memory-adapters-round369/combined-unadmitted.c",
+    "-o",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-memory-adapters-round369/combined.o"
+  ],
+  "returncode": 0,
+  "stderr": "",
+  "selected_prefix_sha256": "66d2a58e1c57c76c939ca31fac5f6ec5e02ef4b35e68b3209f0e29df9849e122",
+  "bodies": [
+    {
+      "address": "0x5676a0",
+      "size": 38,
+      "sha256": "5e4701cb43df7caf1a68bf40ff19c5cf822a4f7e64006f5948486f48de1afbe7"
+    },
+    {
+      "address": "0x5676c6",
+      "size": 12,
+      "sha256": "1e09944b88e432f55928464668c2d73dff7411cca8c22d9cfad098130a198f09"
+    },
+    {
+      "address": "0x5676d4",
+      "size": 10,
+      "sha256": "e090b2739473c789c0dfa2c51ba3b392f215144783e13b0ab7272f37285a2a0c"
+    },
+    {
+      "address": "0x5676e0",
+      "size": 12,
+      "sha256": "865949354a57ff35f51d15729b0fdef70f0cd77fa867e6d3eaa6fa94141a9cc6"
+    },
+    {
+      "address": "0x5676ec",
+      "size": 10,
+      "sha256": "143fc7d91d37ac4553915ccd25eb74159268764147fdce3f76795f85b2011bb1"
+    }
+  ],
+  "callback_ABI": "alloc(memory,size),free(memory,block),realloc(memory,old_size,new_size,block)",
+  "qualification": "pending",
+  "selected": false
+}

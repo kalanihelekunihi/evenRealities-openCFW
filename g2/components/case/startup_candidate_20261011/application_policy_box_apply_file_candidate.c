@@ -1,9 +1,9 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08002cc0 image checksum against OTA file metadata.
  */
 #include <stdint.h>
-extern uint32_t case_policy_log(uint32_t,...); /* 0x9170 */
 uint32_t case_policy_box_apply_file(void)
 {
     volatile const uint8_t *box=(volatile const uint8_t *)(uintptr_t)0x2000087cu;

@@ -1,11 +1,10 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x080079b0-0x08007abc no-reply policy. Counts and modulo boundaries
  * are state at R4+0x40/+0x44 and +0x5c/+0x60, not independent timers.
  */
 #include <stdint.h>
-extern void case_policy_log(uint32_t message);
-extern void case_policy_log_number(uint32_t message,uint32_t value); /* 0x08009170 */
 extern void case_policy_refresh(void); /* 0x0800bb74 */
 extern void case_policy_no_reply_reset(uint32_t left,uint32_t right); /* 0x08009a9c */
 static uint32_t read32(volatile uint8_t *p)

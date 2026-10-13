@@ -1,7 +1,7 @@
 /* Destination 2, selected commands, logging disabled at entry. Child calls are boundaries. */
 #include <stdint.h>
 extern void case_send(const uint8_t*,uint32_t),case_ack(uint32_t);
-extern void case_control_a(uint32_t),case_control_b(uint32_t);
+#include "../source_candidate_20261010/case_gpio_control_contract.h"
 void case_local_selected(const uint8_t *p,uint32_t n,uint32_t mode){
  (void)mode;uint8_t reply[7];
  switch(p[0]){

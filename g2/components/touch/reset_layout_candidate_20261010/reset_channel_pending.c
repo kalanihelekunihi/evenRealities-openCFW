@@ -27,7 +27,7 @@ const struct touch_shield_electrode_config touch_shield_config_rom_b32c[2]
     {&touch_shield_pins_rom_b33c[0],0u,1u},
     {&touch_shield_pins_rom_b33c[1],0u,1u},
 };
-typedef struct {
+typedef struct touch_reset_lp_channel {
     volatile uint32_t *hardware;
     struct touch_msclp_driver_context *context;
     volatile uint32_t *cmod1_port;

@@ -1,0 +1,53 @@
+{
+  "status": "PASS_FOUR_FULL_BODIES_UNADMITTED",
+  "command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate",
+    "-c",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/combined-unadmitted.c",
+    "-o",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/combined.o"
+  ],
+  "returncode": 0,
+  "stderr": "",
+  "selected_prefix_sha256": "624b1961bd97a2403a8ee40f91f38c2916478e64c3c7c29c222384866a8815cd",
+  "bodies": [
+    {
+      "address": "0x52594a",
+      "size": 116,
+      "sha256": "fd0dcfcd0d71963c3b95f747787d4fc3997c2f0850c5173fff391962856cd7d8"
+    },
+    {
+      "address": "0x567734",
+      "size": 70,
+      "sha256": "3e4a5d905b596ef1b5f9c24f764aa8ae962700b29120b61cf6d6352e0a0de381"
+    },
+    {
+      "address": "0x5676f8",
+      "size": 34,
+      "sha256": "5093ec75137934d43da9ec634cd61a11ba6ac3e26cc8c07522bf78149620f1f4"
+    },
+    {
+      "address": "0x5675e8",
+      "size": 184,
+      "sha256": "b9b55e193f95e83fa4a9eea7b9c9355da8a3a0dd6dc720b0de38a6b34e64d037"
+    }
+  ],
+  "source": "third-party/upstream/ambiq-lvgl/src/libs/freetype/lv_ftsystem.c",
+  "configuration": "Native product pool20000354/path/assertion differs from stock ft system; preserved",
+  "qualification": "pending",
+  "selected": false
+}

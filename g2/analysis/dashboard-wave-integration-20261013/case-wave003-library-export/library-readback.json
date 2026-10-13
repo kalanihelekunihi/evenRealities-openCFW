@@ -1,0 +1,361 @@
+{
+  "wave_id": "component-goal-case-wave002-call-contracts",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T19:34:49.800991+00:00",
+  "status": "COMPLETED_INTEGRATED_CALL_CONTRACT_FIX_WAVE",
+  "ownership": "Parent-authorized separate component stream; MAIN current wave reserves only Apollo MAIN/FreeType. Separate CASE outputs and current manifest; historical selected receipts/archive preserved.",
+  "functions": [
+    {
+      "symbol": "case_policy_box_copy_sn",
+      "native_start": "0x8002b4c",
+      "native_end_exclusive": "0x8002c02",
+      "native_body_bytes": 182,
+      "native_sha256": "9703de490a3738124a54785ab8ea6d6335ba003aea0622fdbae016a54c9c75c8",
+      "scope": "Correct4b94 callee binding",
+      "new_coverage_claim": false
+    },
+    {
+      "symbol": "case_policy_box_write_chunk",
+      "native_start": "0x8002e04",
+      "native_end_exclusive": "0x8002eb0",
+      "native_body_bytes": 172,
+      "native_sha256": "479d2c34294ad6b68cefc9ce4ad4354cf5cf190298aa6d1e925bb14e5106da73",
+      "scope": "Correct4b94 callee binding",
+      "new_coverage_claim": false
+    },
+    {
+      "symbol": "case_policy_log",
+      "native_start": "0x8009170",
+      "native_end_exclusive": "0x8009188",
+      "native_body_bytes": 24,
+      "native_sha256": "c9d6ec41b92fc6df3b714659fa8b2cd181a6414a2b0ad10717a7f59eeca16fa3",
+      "scope": "Native entry alias preserves full varargs through actual logger/formatter entry",
+      "new_coverage_claim": false
+    },
+    {
+      "symbol": "case_task_signal",
+      "native_start": "0x800cd80",
+      "native_end_exclusive": "0x800cde0",
+      "native_body_bytes": 96,
+      "native_sha256": "26171919a597e126837150eb6c61a5466c7c52c2fc30f490f55448cbc4c11f9e",
+      "scope": "Queue-post woken pointer contract",
+      "new_coverage_claim": false
+    },
+    {
+      "symbol": "case_frame_callback",
+      "native_start": "0x8006544",
+      "native_end_exclusive": "0x8006696",
+      "native_body_bytes": 338,
+      "native_sha256": "2a44a16ffc3fd241572e71b43c2e8e0e3c3911783bb660be7ae9596adafb7b98",
+      "scope": "Bulk receive32-bit declaration; callback-prefix regression",
+      "new_coverage_claim": false
+    }
+  ],
+  "source_snapshot": [
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_box_copy_sn_candidate.c",
+      "sha256": "db79b275a3a4d34d32c5fe8152fa4c8a19e106fd4eaab27bae0992007a9d4caf",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_box_copy_sn_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_box_write_chunk_candidate.c",
+      "sha256": "73d1ad7b9e863457627562d9c514e20dec211790f20745f72048de768ffae218",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_box_write_chunk_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_shared_aliases_candidate.c",
+      "sha256": "31cf1e557f54b86c47125bf34b859f2746bc3ef517ad059c9e245c32c08312f7",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_shared_aliases_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c",
+      "sha256": "7488eee2b0071a41734634f24ed90b62197475cd53ee1de7324d1d10c35cb936",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_aging_control_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_no_reply_reset_candidate.c",
+      "sha256": "ed5cac38cb08473be7d6829e49fbedf30efa4cc99e253aaee273e523e70a5a3d",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_no_reply_reset_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c",
+      "sha256": "adf1c633df1d26bf308f91c7052c76cd6d65d0b99efb83fda6ce6aceba25b244",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_box_erase_bank_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_periodic_power_update_candidate.c",
+      "sha256": "36b9c904e02069996b225c4dab0915518fbea040ed522b7102d31918a3fb0905",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_periodic_power_update_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_status_candidate.c",
+      "sha256": "2a9adac46961996c3011fbdb432c67efa2dafde157f767f09de1acb66b29cc0e",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_aging_status_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_box_apply_file_candidate.c",
+      "sha256": "fc57c52b72d36c6307f6701677bc02b31f424da1e118d722ecc8682082de6b3a",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_box_apply_file_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_ota_probe_candidate.c",
+      "sha256": "511067eb6a839ae6d023cfd274481fbd4e2c6340ce953eb5c68a61e3fdc9fcaa",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_ota_probe_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_status_candidate.c",
+      "sha256": "ceefa89095858c9a597b90d7bb9eeaba61b0a6aa568a0149467151d05f2ec996",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_status_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c",
+      "sha256": "46ba0db2364d78363d3debcd9a71cdbca79d4f67651081114da1d31373efd753",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_cb_7f2c_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_standby_candidate.c",
+      "sha256": "47e7589fc887069d638a7540845228c901f762c1a7ac60a731f96079a2415859",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_standby_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c",
+      "sha256": "3c9f6d4b031c187f5bbf9e69827a1c2c80de77a4b423c1cc155ca55a67ab3931",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_service_update_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_ota_candidate.c",
+      "sha256": "a823e7865ca2561a074d60b52e95b32d3a8f9d87eb63e54da55231a62fff3eec",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_ota_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_clock_callback_candidate.c",
+      "sha256": "acbf404d941cf6743fd369c869729daf0c5fa68e16bc77db08faa6487437be7f",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_clock_callback_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_box_idle_candidate.c",
+      "sha256": "4c42d3f8e4d0afe8b059f061f3b88c149ff6b57882ea892adbe54354f53042b3",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_box_idle_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_bb90_candidate.c",
+      "sha256": "017b823f989e2a92b765515f70b272a035cc84ba2b699f19e47c7ac2cce34212",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_cb_bb90_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_aging_begin_candidate.c",
+      "sha256": "edf5f745c6c63d6c501df1f4fa94cfa1751cfde6876d00c19ae2a1ab987e1639",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_aging_begin_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c",
+      "sha256": "1e29505f70a08440d231d57c462b40955507599ebef091ca92dea518b1af873b",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_cb_9684_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c",
+      "sha256": "4ec1cf9ed130f41035e0765398db697ef5c5fd0ac185c540490ca436a28e6e57",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_idle_clear_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c",
+      "sha256": "a9f861d30799a3dad755e96741bf7a49c04a8a79b66b2339ec37257ea1ba8253",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_service_maintenance_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c",
+      "sha256": "bc7767bca17fa63fa8f6d3f2cc13b67cbe16edf9e1d43041d6cddf41ef44c668",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_ota_transmit_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_full_battery_candidate.c",
+      "sha256": "e95f359636e17808ef7fd2dbfb399e19b779d022318c50cb7de24a596ce66a5d",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_full_battery_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_sample_refresh_candidate.c",
+      "sha256": "b5262b81b352db06d91ccf6b5cbfb8eb73c5defcd3809fdfa727b8e6921bc299",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_sample_refresh_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_monitor_candidate.c",
+      "sha256": "1577a3ffb3c23424bf7d3f4196a74f7dc13687099aa184b8159e31f124a30e42",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_monitor_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_lowers_candidate.c",
+      "sha256": "f9ea7278acf9889a89adc7bc96ffccd253656fedc56e3c0112bdd4eb69c1fed9",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_fake_standby_lowers_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_event_idle_candidate.c",
+      "sha256": "c42cda09461cccb1ea7ee87e980569c82e6ffb19f4af5f14de21adfdab8dba4d",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_event_idle_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+      "sha256": "956c6c6e28ff373ee1f968cf51c8774bd9cddf2d84ad14a7c8d4c8d5b8234d90",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_box_file_open_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c",
+      "sha256": "8f288ce365769e67b58687082f9a1777fc813d7aaa72bffb75d7ae7f0f64b30d",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_cb_b7ec_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c",
+      "sha256": "b69fd0d1b95911509d1bd51216d17a164cb79475c1d4fd7833ab4479f21d5da8",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_send_probe_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+      "sha256": "fae1a0c3948007715ddf98c45a5768a458f04233f5a25a84236fd7b3f2edcaca",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_cb_6e1c_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_transport_action_candidate.c",
+      "sha256": "c8897c518457c15bb3e9cbc6b5f0ab628f2dfaea846ba3b554b8c507107369a2",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_boot_transport_action_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_no_reply_candidate.c",
+      "sha256": "9c8f41cf951c2cb2091820d20d2f893fcf3139ad808372f4aac3da33c79150d4",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_no_reply_candidate.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_candidate.c",
+      "sha256": "4e52fbfe5f3a0aeb7d1cb007153e2133824afd9b16108818fb8e05730bee2463",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/application_policy_fake_standby_candidate.c"
+    },
+    {
+      "path": "g2/components/case/frame_callback_offline/frame.c",
+      "sha256": "567ed26960643d340d8a2de28cdffe5eb5a9d76c1fe71f64d71d59f779fa9887",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/frame.c"
+    },
+    {
+      "path": "g2/components/case/legacy_default_candidate_20261010/task_kernel_candidates.c",
+      "sha256": "c9f9bbddf6baaaf2f58fd77f4e8fe2ea23e40687084183061bc2b1b6d506c8d0",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/task_kernel_candidates.c"
+    },
+    {
+      "path": "g2/components/case/startup_candidate_20261011/case_logger_contract.h",
+      "sha256": "b743b3811032cc8cd09085d2b25257444d7d25c2cb66e0dac33b8026f2aef50a",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/sealed-source/case_logger_contract.h"
+    }
+  ],
+  "lineage": {
+    "locked_case_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+    "catalog_sha256": "5447649e214aaf10cbe916d3474dcdfbece16a0570d3d243dc9e34e64ed39ab7",
+    "license": "Existing/new authored recovery MIT; no upstream binary provider imported.",
+    "behavior": "Stock-compatible correction of wrong provider identity and lost arguments; no intentional upstream behavior changes."
+  },
+  "build": {
+    "command_source_count": 154,
+    "startup_source_count": 246,
+    "total_C_units": 400,
+    "undefined_symbols": [],
+    "elf_sha256": "b5d28277943878f2f028cd8a491a580b63bb6f94903fd8eed4a5d1f462636875",
+    "relocatable_sha256": "7c7546a37b801a3069bf23b43c4c93150c2eb776c427148e7362920018dd775a",
+    "compiler_sha256": "21df4f5520528e31b8632cfb3b4b57a3f2a33126693828bf69d1976f537aaec7"
+  },
+  "imports": {
+    "full_graph_before": [],
+    "full_graph_after": [],
+    "corrected_edge": "Two4-argument calls now resolve existing4b94 provider instead of1-pointer4a6c provider; symbol closure alone previously missed this."
+  },
+  "tests": {
+    "box_copy_and_chunk_caller_cases": 320,
+    "queue_task_cases": 64,
+    "logger_vararg_handoff_cases": 128,
+    "formatter_cases": 1149,
+    "frame_prefix_cases": 4830,
+    "flash_program_provider_cases": 18,
+    "total_bounded_cases": 6509
+  },
+  "source_drift": "All400 current source hashes and selected command dependency hashes verified at seal;37 changed units and1 new header have byte snapshots.",
+  "acceptance_gates": {
+    "corrected_provider_identity_and_ABI": true,
+    "bounded_regressions": true,
+    "whole_component_source_complete": false,
+    "final_reset_linker_placement": false,
+    "whole_image_behavior": false,
+    "byte_identical_bundle": false,
+    "hardware_validated": false
+  },
+  "limitations": [
+    "Real source graph used for integrated tests, with explicit native child-entry cuts; no oracle stubs admitted as providers.",
+    "UART rearm callback pointer normalization uses4 explicit native/relocated provider identity joins.",
+    "Full executable-body/indirect-root coverage, ambient stack and hardware/peripheral effects remain open.",
+    "Historical G2-G6 gate state unchanged; no interval promotion or accepted replacement image.",
+    "CASE waveform/code bytes remain different from stock; canonical historical selected manifest is not overwritten by this separate current build."
+  ],
+  "supporting_receipts": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/build.py",
+      "sha256": "59b82935c98b09cbdff983103cb73be2a5bc4964c90fc952c3dfbdcd2f6bf4d8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/build-receipt.json",
+      "sha256": "7a16c71bd45bf629d0fc77034d81c19886c5eb102e0d006fbac8bb28509ad6e7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/source-delta.json",
+      "sha256": "6565e010ab947ab68c52634ebb31e5d691cb9e426697c98c1cbd486aa2d32345"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/command-evidence/receipt.json",
+      "sha256": "d368ee0f2321b612608f3cfe24b9b72570b10067160204289f5603422ae77685"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/startup.o.receipt.json",
+      "sha256": "752a5aff19d6082d65eb4aa392b93494d7e40abf6ae6aba7e274771685018f84"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/verification.json",
+      "sha256": "73d4e70cd00f9032a1945ec96eb4f9d85e1f07570f140f8b11190751a8887abf"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/frame-regression.json",
+      "sha256": "0b8697d176e3f37299e9823cd440b56c0667bee0b11f0f50c7927100e0314e5f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/flash-provider-verification.json",
+      "sha256": "b31b650c0e18d9f0a6c0157f195d70f07b8bca5ef445b0a232389ed2039ba494"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/verify.py",
+      "sha256": "9c6fdef86001aa946c9f0b5f7bb3a3510fe5294303e275a3228ad9fe61b3ffc5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/verify_frame.py",
+      "sha256": "ab782995f35917cc00603855acbaf19fbd346d027ba56393eb48d44547917b45"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/verify_flash_provider.py",
+      "sha256": "1c919854bdd07d88e9abe80edefa3500cce7360cb5a856d9f11ca8e9dbfd3af8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/case.elf",
+      "sha256": "b5d28277943878f2f028cd8a491a580b63bb6f94903fd8eed4a5d1f462636875"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/case.o",
+      "sha256": "7c7546a37b801a3069bf23b43c4c93150c2eb776c427148e7362920018dd775a"
+    }
+  ],
+  "next_critical_path_task": "Resume pinned compiler source-size experiment after matching ABI contracts, supplying genuine source runtime providers and qualifying reset/root/CRT/formatter placement.",
+  "schema": "opencfw-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/wave.json",
+    "sha256": "76625ec34369d4fb3e2d4b1783237ef137f0b104c5adc718d18a4b52d277cdf3"
+  },
+  "publication": {
+    "scope": "separate CASE checkpoint; Touch and MAIN preserved",
+    "interval_promotion": false,
+    "page_publication": "pending parent"
+  },
+  "historical_full_map_cutoff_utc": "2026-10-13T17:02:21.929738Z",
+  "accepted_images": 0,
+  "total_images": 6
+}

@@ -1,0 +1,142 @@
+{
+  "wave_id": "component-goal-case-wave006-merged-module-sections",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T20:13:41.862175+00:00",
+  "status": "COMPLETED_QUALIFIED_SOURCE_PROFILE_REDUCTION",
+  "done_criteria": [
+    "Current 401-unit graph, pinned compiler/library, no firmware-source modifications",
+    "Whole-module optimization preserves public ABI and genuine test-child entries",
+    "Full 6509 prior native/C domains, 765 memory-provider cases and full reset chain on 3 RAM fills",
+    "Fresh full compilation yields identical ELF; profile smaller than prior qualified wave003"
+  ],
+  "source_delta": "No firmware-source changes. New isolated reproducible profile builder and test adapters.",
+  "source_object_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/selective/receipt.json",
+    "sha256": "ca88e30aeff2bd284fd22d6cbd867f0a59b8f409fc36fbf5e91fcbad8ba6dc47"
+  },
+  "compiled_function_extents": {
+    "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/compiled-function-extents.json",
+    "sha256": "b9de2d6d160ee4cedc886c542bd7525e08607f37398a642f54fb36ee413f2729"
+  },
+  "native_scope_and_provenance": {
+    "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/wave.json",
+    "sha256": "76625ec34369d4fb3e2d4b1783237ef137f0b104c5adc718d18a4b52d277cdf3"
+  },
+  "build": {
+    "C_units": 401,
+    "ELF_sha256": "354d35532c351a1eafbffd3ec71335515a21c87b401797f306cd7ae463d2b2c7",
+    "load_span_bytes": 63396,
+    "stock_payload_bytes": 55752,
+    "over_stock_payload_bytes": 7644,
+    "previous_qualified_bytes": 63868,
+    "reduction_bytes": 472,
+    "undefined_symbols": [],
+    "fresh_build_byte_identical": true,
+    "known_roots": 39,
+    "public_ABI_internalization": false,
+    "genuine_test_child_boundary_TUs_noinline": 11
+  },
+  "tests": {
+    "unique_prior_native_C_cases": 6509,
+    "memory_provider_cases": 765,
+    "real_reset_initial_fill_cases": 3,
+    "reset_RAM_bytes_compared": 11400,
+    "CRT_initial_fill_cases": 3,
+    "proof": [
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/selective/verification.json",
+        "sha256": "db9c6d7b73e3319890d1bb3b17ab228ef854123d0eacf80279c75105bebf7436"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/clang-contracts.json",
+        "sha256": "ed3e3e78e5b3ad838331f5676294d5b3507e87b0582236a688b1b38631fc6719"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/clang-frame-regression.json",
+        "sha256": "2f9b81716ad876fbadc844f7803ed6a7e5884950c1ddc7f5ea592615eba8ce8c"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/clang-flash-provider-verification.json",
+        "sha256": "5212cfb40eebc0cac0d912d61cd71bf0e3ef5717066f42b7ff77e036b3929417"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/reset-verification.json",
+        "sha256": "8ba1868428a68b5643bd783c99055a004286fe6a8cd68e2f141b9c4ee3bff991"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/compiler-memory-verification.json",
+        "sha256": "802bd12438be390969007fe1234b996168ed43db3c01610541076bed86adb4ce"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/reproducibility.json",
+        "sha256": "ff7ed8a71133c530e0cb9225ea48b9a8a12acccdb07280c9da0266ae13f1979d"
+      }
+    ]
+  },
+  "negative_results": [
+    {
+      "profile": "C API debug-options section attempt",
+      "load_bytes": 75216,
+      "result": "Flags accepted but merged output remained monolithic .text, no size improvement",
+      "receipt": {
+        "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/build/receipt.json",
+        "sha256": "1f516948921ef49ca23cba01fc554fc2ac4f53558234f053f9a14ef9ce397e4a"
+      }
+    },
+    {
+      "profile": "Merged-module backend with all ABI-bounded units and overforced preserved roots",
+      "result": "Sections emitted correctly but oversized; not admitted",
+      "receipt": {
+        "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/sections/receipt.json",
+        "sha256": "23e9567431dc86b1e556ea562148ab7669c0d20766d617b71934aeb330e8598f"
+      }
+    }
+  ],
+  "implementation": "Real LLVM C API joins bitcode with internalization disabled; pinned Clang backend compiles merged IR into function/data sections. Genuine assembly/two-divmod-source objects remain non-LTO. Linker preserves original known roots, formatter/CRT and real memory providers; no blanket retention of unused non-LTO import names.",
+  "source_drift": [],
+  "ownership": "Parent renewed CASE-only authority; MAIN owner current scope Apollo MAIN/FreeType. Separate outputs, index unchanged.",
+  "license_lineage": "Inherited wave002/003 recovered product source and runtime provenance; LLVM/compiler pins in inventory; no new upstream behavior fixes, executable blobs or fabricated providers.",
+  "scripts": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/build.py",
+      "sha256": "0d3cc3973abdb64bbb38b73570ee60b73fe38a06dc456fb42932d35d7d75234a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/verify_clang_profile.py",
+      "sha256": "b502f31f35c556aab713a49fc5466a3bd33174573eab1443a7f3cb114bdbab53"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/verify_clang_contracts.py",
+      "sha256": "fc37b6496d014c6e4441afd0642c3524342cf1b984039583f93aeff9a244fc62"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/verify_clang_frame.py",
+      "sha256": "827194eef41c08b30d45867de5d7719e001563de8c2a1ae1c1e4f2946cc24ae9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/verify_clang_flash_provider.py",
+      "sha256": "ece53a168f279f5104a0fff106e83de2a1800befde0827df4509e44b74ac74c7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/verify_reset.py",
+      "sha256": "53ccc08ab232831ffc59d0ec729349c2776eafb99c527fe3253b1a3fb85414dc"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/verify_memory.py",
+      "sha256": "c47d9ae0b639fd6eebb414cbaa7c86d5f7fb2cd91d88ec0069cae5fcb03699c2"
+    }
+  ],
+  "component_acceptance_gates": {
+    "bounded_reset_and_ABI": "PASS tested domains only",
+    "source_completeness_and_computed_roots": "unresolved",
+    "linker_placement": "Native vector/reset only; source load is RX, no writable orphan data, remaining exact layout/RAM and ambient-stack gates unresolved",
+    "byte_equality": "not met",
+    "hardware": "not run; no flashing approval",
+    "accepted_images": "0/6",
+    "workflow": "G1 passed; G2-G6 not_run unchanged"
+  },
+  "next_critical_path_task": "Test supported machine outlining across the now-sectioned merged module, preserving identical behavioral qualification; then application/peripheral/computed-root evidence.",
+  "map_promotion": false,
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z"
+}

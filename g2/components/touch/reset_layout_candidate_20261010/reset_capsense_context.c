@@ -11,9 +11,9 @@
 #include "reset_active_scan_context.h"
 #include "reset_base_frame_context.h"
 #include "reset_sensor_frames.h"
-extern const unsigned char touch_generated_common_config[];
+#include "reset_generated_common_config.h"
+#include "reset_generated_internal_context.h"
 extern unsigned char touch_reset_common[];
-extern unsigned char touch_generated_internal_context[];
 extern const unsigned char touch_generated_widget_config[];
 extern unsigned char touch_reset_widgets[];
 extern const unsigned char touch_shield_pins_rom_b33c[];
@@ -42,9 +42,9 @@ _Static_assert(offsetof(touch_capsense_context_v6_lp,ptrScanSlots)==0x30u,"slot 
 _Static_assert(offsetof(touch_capsense_context_v6_lp,ptrLpHistoricContext)==0x38u,"history ABI");
 touch_capsense_context_v6_lp touch_reset_capsense_context
  __attribute__((section(".touch_init.capsense_context"),used)) = {
- .ptrCommonConfig=touch_generated_common_config,
+ .ptrCommonConfig=&touch_generated_common_config,
  .ptrCommonContext=touch_reset_common,
- .ptrInternalContext=touch_generated_internal_context,
+ .ptrInternalContext=&touch_generated_internal_context,
  .ptrWdConfig=touch_generated_widget_config,
  .ptrWdContext=touch_reset_widgets,
  .ptrPinConfig=touch_generated_pin_config,

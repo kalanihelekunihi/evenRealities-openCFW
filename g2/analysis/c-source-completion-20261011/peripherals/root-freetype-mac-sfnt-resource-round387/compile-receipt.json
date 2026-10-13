@@ -1,0 +1,30 @@
+{
+  "status": "COMPILE_PASS_UNADMITTED",
+  "command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-O2",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "g2/components/audio/uart_thread_source_candidate",
+    "-c",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-sfnt-resource-round387/combined-unadmitted.c",
+    "-o",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-sfnt-resource-round387/combined.o"
+  ],
+  "native_bytes": 260,
+  "candidate_sha256": "218d3806edb7d913a96e5ff9afe3c4567f672b544b7c661fa7c60d9f400ba218",
+  "limits": [
+    "No native qualification/admission yet",
+    "Driver parser/runtime ownership paths must remain explicit"
+  ]
+}

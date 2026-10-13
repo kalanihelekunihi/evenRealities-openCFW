@@ -1,0 +1,103 @@
+{
+  "status": "COMPLETE_FORMATTER_CLUSTER_ANALYSIS_ELF_PREPARED",
+  "functions": [
+    {
+      "address": 4730920,
+      "name": "native_lv_out_buffer",
+      "size": 8,
+      "boundary": "complete native return/manual review"
+    },
+    {
+      "address": 4730928,
+      "name": "native_FUN_00483030",
+      "size": 2,
+      "corpus_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8"
+    },
+    {
+      "address": 4730930,
+      "name": "native_FUN_00483032",
+      "size": 18,
+      "corpus_sha256": "f397c48340ecfea3718d8251334de9ec9df2ecbadbe00475a49f46641342b5b8"
+    },
+    {
+      "address": 4730948,
+      "name": "native_FUN_00483044",
+      "size": 40,
+      "corpus_sha256": "436082fd720dad573c13a2e2407e2a3886faa198346ddee929e18ba3819f5055"
+    },
+    {
+      "address": 4730988,
+      "name": "native_FUN_0048306c",
+      "size": 110,
+      "corpus_sha256": "539deb5e8dc993fe5483a052837ce7780517f23b01ff51e28b4e9976fe4a00c8"
+    },
+    {
+      "address": 4731098,
+      "name": "native_FUN_004830da",
+      "size": 304,
+      "corpus_sha256": "b5694553bfa306e4696cdf5b6cd02bee3fb27f8db9e1eab5a27ca90319901a32"
+    },
+    {
+      "address": 4731402,
+      "name": "native_FUN_0048320a",
+      "size": 146,
+      "corpus_sha256": "ff618cbd02cd895efb5160e764d501fd6f18994b42cff1fe7db7d288b3eccf15"
+    },
+    {
+      "address": 4731548,
+      "name": "native_FUN_0048329c",
+      "size": 178,
+      "corpus_sha256": "51b5a24f5952ae265e5677f4e754dd776571836b367943ef28f8b941adeeda8f"
+    },
+    {
+      "address": 4731728,
+      "name": "native_FUN_00483350",
+      "size": 706,
+      "corpus_sha256": "184e02e2498722f68a1f12f47502a7d8ad332e34312c105fd20cc25801e26352"
+    },
+    {
+      "address": 4732492,
+      "name": "native_FUN_0048364c",
+      "size": 700,
+      "corpus_sha256": "66c7415fa9587cb5f1022d48848abf4d54f1c1929c38a16d385ad7d6978e527e"
+    },
+    {
+      "address": 4733280,
+      "name": "native_FUN_00483960",
+      "size": 1644,
+      "corpus_sha256": "69f04620a01aaca4a11601ea426644fa3e2bd47c972700c6ddc1676607e1435b"
+    },
+    {
+      "address": 4734928,
+      "name": "native_FUN_00483fd0",
+      "size": 26,
+      "corpus_sha256": "a7bbf413eb4e6661219f9fa0f0b2e90ec4ff1f6321af913ea5b0561c19700bbe"
+    },
+    {
+      "address": 4734954,
+      "name": "native_FUN_00483fea",
+      "size": 18,
+      "corpus_sha256": "efd2fb98268737ddd968133f20a0ae190b499fb11e24abeab8bfd69a239b388f"
+    }
+  ],
+  "all_cluster_bytes_original": true,
+  "analysis_metadata_only": true,
+  "native_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "analysis_elf_sha256": "5195f30dab9b45d16da7a5e3fb18e3619607465cc1e3c8553b3e760466d84e77",
+  "cluster_start": "0x483028",
+  "cluster_size": 4076,
+  "pinned_source": "third-party/upstream/ambiq-lvgl/src/stdlib/builtin/lv_sprintf_builtin.c",
+  "pinned_source_sha256": "4efe0afd79c703eaef6f8629194aa79831480a5e7acfa9ecbc1c1ecd2bf5d681",
+  "output_callback_pointer_word": "0x484010",
+  "output_callback": "0x483029 Thumb",
+  "outer_snprintf": "0x483fd0 26bytes",
+  "outer_vsnprintf": "0x483fea 18bytes",
+  "inner": "0x483960 1644bytes",
+  "selected": false,
+  "remaining": [
+    "Full inner/source configuration andhelper ABI reconciliation",
+    "Varargs/float64/alignment/format feature qualification",
+    "Source-owned callback/literals/ROM dependencies",
+    "Entire C qualification/admission/build"
+  ]
+}

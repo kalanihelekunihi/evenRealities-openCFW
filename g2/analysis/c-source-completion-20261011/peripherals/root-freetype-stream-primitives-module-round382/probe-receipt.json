@@ -1,0 +1,34 @@
+{
+  "status": "PASS_SEVEN_COMPLETE_STREAM_MODULE_BODIES",
+  "comparisons": 2472,
+  "by_component": {
+    "seek": 252,
+    "skip": 252,
+    "read_at": 504,
+    "read": 504,
+    "ushort": 432,
+    "ulong": 432,
+    "module": 96
+  },
+  "controlled_boundaries": [
+    "indirect stream callback only"
+  ],
+  "actual_helpers": [
+    "selected staged forward copy",
+    "selected unsigned-byte string comparison"
+  ],
+  "checks": [
+    "callback position mutation",
+    "seek EOF versus read EOF",
+    "negative skip and wrapped addition",
+    "short/exact/oversized reported reads",
+    "unaligned memory copy",
+    "BE wrapped bounds and computed NULL data",
+    "module NULL/empty/duplicate/absent name",
+    "whole2KiB/SP/R4-R11/caller32-byte guard"
+  ],
+  "limits": [
+    "Controlled callback backend; no initialized filesystem/module runtime or full image hardware proof"
+  ],
+  "selected": false
+}

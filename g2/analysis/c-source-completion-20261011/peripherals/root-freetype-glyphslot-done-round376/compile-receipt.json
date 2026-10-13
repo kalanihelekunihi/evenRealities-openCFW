@@ -1,0 +1,42 @@
+{
+  "status": "PASS_FOUR_FULL_BODIES_UNADMITTED",
+  "command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-O2",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate",
+    "-c",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-glyphslot-done-round376/combined-unadmitted.c",
+    "-o",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-glyphslot-done-round376/combined.o"
+  ],
+  "returncode": 0,
+  "stderr": "",
+  "selected_prefix_sha256": "62e5339517142e1dc8395e2df790f254bfac141dbb7b948a0c9180f2a8c5ec6d",
+  "native_bytes": 82,
+  "existing_bitmap_provider": "audio_uart_font_slot_bitmap_release",
+  "new_child": "glyph_loader_done524c1e",
+  "qualification": "pending against corrected bitmap provider",
+  "selected": false,
+  "additional_body": {
+    "address": "0x524c1e",
+    "bytes": 28
+  },
+  "required_existing_provider_check": "bitmap release stale cached internal pointer vs native reread after memory callback; investigate with mutation fixture",
+  "additional_bodies": {
+    "loader_done": 28,
+    "loader_reset": 90,
+    "loader_rewind": 28
+  }
+}

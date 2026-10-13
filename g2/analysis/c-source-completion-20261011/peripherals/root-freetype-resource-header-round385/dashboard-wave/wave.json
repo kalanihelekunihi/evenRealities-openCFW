@@ -1,0 +1,145 @@
+{
+  "schema": "opencfw-completed-wave-v1",
+  "wave_id": "root-apollo-main-round385-resource-header",
+  "component": "apollo_main",
+  "status": "completed",
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "target_id": "official-s200-v2.2.6.10",
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "source_snapshot_id": "round385-28f22df5dab73d8a",
+  "completed_utc": "2026-10-13T19:12:43.294389+00:00",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-resource-header-round385/receipt.json",
+      "sha256": "1cd4244b9d04ccb92bea1e1baa2590600ec5b72eed716d1215f6be9356105f6d"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-resource-header-round385/root-source-audit.json",
+      "sha256": "4d21f360147f9ba3bc1a39e5610216c7fac6352ff7d1fa191383f511b2e57fb3"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-resource-header-round385/admission-receipt.json",
+      "sha256": "fd50c37adf9ff5ea7bea21b860d1a870dafd3a7679847394af40bf173bce0ad3"
+    }
+  ],
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-resource-header-round385/current-dependency-audit.json",
+      "sha256": "9e344cfa40834742a1e161b6f83dffd9dd9349d6f284fb32e901700a3cfa986c"
+    }
+  ],
+  "implementation_delta": {
+    "actual_c_bodies": [
+      {
+        "symbol": "audio_uart_ft_raccess_header_528064"
+      }
+    ],
+    "abi_adapters": [],
+    "typed_data": [],
+    "pseudocode_only": [],
+    "fixtures_or_stubs": []
+  },
+  "build": {
+    "compiler_settings_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-resource-header-round385/current-dependency-audit.json",
+      "sha256": "9e344cfa40834742a1e161b6f83dffd9dd9349d6f284fb32e901700a3cfa986c"
+    },
+    "definitions": 3370,
+    "imports": 764,
+    "import_classification_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-resource-header-round385/dashboard-wave/import-delta.json",
+      "sha256": "bb8b7c29f1a79feaa9b4600315db34548280323dc0ad50339f72ab9ffb1d1528"
+    },
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false
+  },
+  "tests": {
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-resource-header-round385/probe-receipt.json",
+        "sha256": "e91fb429a4ff1c2bb69c0bd29cd1a3eddc228380b103256f5f4891e707dfcf31"
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-resource-header-round385/qualification-input-hashes.json",
+        "sha256": "44ba4daa8fb1d242e6ee7a4694bdea6ebc1cd0f8c0b3926a76fdfb4a1461173b"
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-resource-header-round385/callback-probe-receipt.json",
+        "sha256": "bfe918195564267ad552d6a437debc09fb763c1c830a90077211938c059589ae"
+      }
+    ],
+    "expected_failures": [],
+    "controlled_boundaries": [
+      "indirect stream backend"
+    ]
+  },
+  "address_resource_delta_receipts": [],
+  "limitations": [
+    "Callback backend controlled; actual stream services execute",
+    "No initialized runtime/layout/hardware proof",
+    "134 top-level snapshots and54 selected-TU dependencies checked",
+    "0/6 accepted images; runtime/data/layout/byte equality/hardware open",
+    "Dashboard checkpoint publication separate from interval reconciliation"
+  ],
+  "next_goal": {
+    "owner": "existing implementation goal",
+    "reason": "Qualify remaining resource parser graph",
+    "exit_criteria": [
+      "Complete native/C comparison",
+      "Admission and terminal current-source/dependency audit"
+    ],
+    "missing_input_or_authorization": null,
+    "ranked_gaps": [
+      "Data-offset/comparator/sort-wrapper candidates round386",
+      "Data offsets/POST/SFNT/path readers",
+      "Initialized runtime/module graph",
+      "Other five image gates"
+    ]
+  },
+  "dashboard": {
+    "state": "awaiting_inventory",
+    "data_owner_thread_id": "01a120b1-9d22-7596-9ee5-a6d93342c014",
+    "publisher_thread_id": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "validated_snapshot_id": null,
+    "publish_receipts": [],
+    "readback_verified": false,
+    "snapshot": {
+      "full": {
+        "library_file_id": "libfile_3d9914466c448191be6edc3918867204",
+        "version": null,
+        "sha256": null
+      },
+      "compact": {
+        "library_file_id": "libfile_e7f198676fe481918961cdfb1a1eb33f",
+        "version": null,
+        "sha256": null
+      },
+      "validation": {
+        "status": "pending",
+        "receipt_path": null,
+        "receipt_sha256": null
+      },
+      "page_id": "page_e5199b4adeb081918164ac6acd8e4b04",
+      "page_sequence": null
+    }
+  },
+  "repository": {
+    "root": "/Users/kalani/Repo/evenRealities-openCFW",
+    "head_revision": "2359c6906032d9ee59c16c7b8c2ce56fda50c1c0",
+    "dirty_state_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-resource-header-round385/dashboard-wave/repository-state.json",
+      "sha256": "85fa8c70fe55c4feaa559c4dbc63c64463a164749eb6d35addfc4d53739acc31"
+    },
+    "index_unchanged_by_wave_reporting": true
+  },
+  "reporting_route": {
+    "coordinator": "01a1228e-2121-71b9-a9df-9eede6787020",
+    "authorization_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/reporting-authorization.json",
+      "sha256": "144e9fd325f50d5585bb4910fca8b7dd474213dc79349d0302fd73b495b79164"
+    },
+    "scope": "completed-wave metadata only until revoked",
+    "publisher": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "publication_verified": false
+  }
+}

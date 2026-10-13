@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08009d70 transport clock-error callback.
@@ -5,7 +6,6 @@
 #include <stdint.h>
 extern void case_boot_transport_stop_clock(uint32_t channel); /* 0x6b80 */
 extern void case_boot_transport_stop_link(uint32_t channel); /* 0x6b98 */
-extern uint32_t case_policy_log(uint32_t message); /* 0x9170 */
 void case_boot_transport_cb_9d70(void)
 {
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x2000087cu;

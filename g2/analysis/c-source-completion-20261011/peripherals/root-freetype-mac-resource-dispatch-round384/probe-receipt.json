@@ -1,0 +1,26 @@
+{
+  "status": "PASS_COMPLETE_MAC_RESOURCE_DISPATCH",
+  "comparisons": 485,
+  "native_bytes": 222,
+  "actual_helpers": [
+    "selected memory free including NULL suppression"
+  ],
+  "controlled_boundaries": [
+    "resource header parser",
+    "resource offsets parser",
+    "POST/SFNT parser",
+    "memory free callback"
+  ],
+  "checks": [
+    "cached allocator despite library replacement",
+    "NULL offsets versus actual free",
+    "signed index modulo including dividezero/INT_MIN",
+    "POST/SFNT count writes",
+    "free callback mutates escaped count and face pointer",
+    "whole2KiB/SP/R4-R11/fifth arg/caller guard"
+  ],
+  "limits": [
+    "Child resource parsers controlled; no initialized runtime/layout/hardware proof"
+  ],
+  "selected": false
+}

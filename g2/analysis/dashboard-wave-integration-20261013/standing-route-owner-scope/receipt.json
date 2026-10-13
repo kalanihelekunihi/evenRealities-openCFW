@@ -1,0 +1,30 @@
+{
+  "checked_utc": "2026-10-13T18:27:44.734494+00:00",
+  "advisory_delivery": "SUCCESS_CONFIRMED_BY_SUPPORTED_SEND_TOOL",
+  "owner_goal_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "parent_supplied_approval": "Approved advisory and ongoing completion receipt route",
+  "owner_actor_specific_consent_check": {
+    "question_id": "call_6e76012c1454410189f716e261265ec8",
+    "question": "May I send each completed wave\u2019s receipt path, hash, and status to coordinator Verify Apollo I2C lineage (01a1228e-2121-71b9-a9df-9eede6787020) until you revoke it?",
+    "approval_option": "Authorize ongoing receipt metadata",
+    "state": "pending at last supported read; no direct approval reply observed"
+  },
+  "operational_route_status": "AWAITING_OWNER_CONSENT_CHECK_AND_PUBLICATION_ACK",
+  "scope_if_owner_confirmed": {
+    "recipient": "01a1228e-2121-71b9-a9df-9eede6787020",
+    "trigger": "each completed bounded recovery wave",
+    "contents": "receipt ID/path/hash/status only; no raw firmware/source/secrets",
+    "duration": "until revoked",
+    "unrelated_cross_task_messages": false
+  },
+  "permissions_broadened_or_question_answered_programmatically": false,
+  "duplicate_permission_question_created_by_coordinator": false,
+  "ownership": {
+    "Library_v3_resource_export": "separate approved resource worker",
+    "Page_publication": "existing parent sole writer",
+    "implementation": "existing goal, uninterrupted"
+  },
+  "automatic_publication_verified": false,
+  "future_completed_wave_under_new_scope_received": false,
+  "preservation": "Additive owner-scope receipt; earlier direct-parent failure/single-use/standing-parent approval records unchanged"
+}

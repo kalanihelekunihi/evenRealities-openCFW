@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x0800258c sensor probe send and optional framed reply read.
@@ -15,8 +16,6 @@ extern void case_boot_sensor_post_transmit(void); /* 0x6c80 */
 extern uint32_t case_boot_sensor_finish_guard(uint32_t,const uint8_t *,uint32_t,uint32_t); /* 0x63ec */
 extern void log_hex_buffer(const uint8_t *,uint32_t); /* 0x67c8 */
 extern uint32_t case_policy_sensor_divide(uint32_t,uint32_t); /* 0x0160 */
-extern uint32_t case_policy_log(uint32_t);
-extern uint32_t case_policy_log_number(uint32_t,uint32_t);
 extern void case_policy_idle_clear(void); /* 0x9a14 */
 extern uint32_t case_boot_sensor_flags_5f44(uint32_t descriptor);
 static void logline(uint32_t address)

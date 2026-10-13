@@ -1,0 +1,198 @@
+{
+  "schema": "opencfw-latest-wave-checkpoint-v1",
+  "wave_id": "root-apollo-main-round382-stream-primitives-module",
+  "completed_utc": "2026-10-13T18:57:34.848907+00:00",
+  "target_id": "official-s200-v2.2.6.10",
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "snapshot_id": "round382-f81aa888a26aea82",
+  "source_object_inventory": {
+    "selected_source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+    "sealed_source_sha256": "f81aa888a26aea82669a6e7ec31bf5a1762a19e16fc894a85639e6a3e7149c75",
+    "object_path": "g2/build/c-firmware/20261013/peripherals-root-freetype-stream-primitives-module-round382/apollo_main/audio/754-uart_thread_source_candidate-display_lv_init_children.o",
+    "object_sha256": "5c68db83f10cc7a39a92a196cfa732d69c543ed8f543428ae001adef6f4e32db",
+    "selected_dependency_count": 54,
+    "build_counts": {
+      "compiler_settings_receipt": {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-stream-primitives-module-round382/current-dependency-audit.json",
+        "sha256": "29b2a6dfab91b7d4fcf1acedfe26349f2203068987cbe190466d17185c11d252"
+      },
+      "definitions": 3366,
+      "imports": 761,
+      "import_classification_receipt": {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-stream-primitives-module-round382/dashboard-wave/import-delta.json",
+        "sha256": "ee8dec41e17a1a01ab6c4fe1a92d1d3385ce99ddcc1b05c988bf376941da6468"
+      },
+      "duplicate_strong_symbols": 0,
+      "full_payload_linked": false
+    },
+    "compiler_profile": [
+      "arm-none-eabi",
+      "cortex-m55",
+      "thumb",
+      "c11",
+      "freestanding",
+      "fno-builtin",
+      "O2"
+    ]
+  },
+  "import_inventory": {
+    "removed_code": [
+      "audio_uart_ft_get_module_5273b8",
+      "audio_uart_ft_stream_read_528928",
+      "audio_uart_ft_stream_read_ulong_528ba8",
+      "audio_uart_ft_stream_read_ushort_528b4a",
+      "audio_uart_ft_stream_seek_5288e0",
+      "audio_uart_ft_stream_skip_528914"
+    ],
+    "added_code": [],
+    "classification_basis": "Exact admitted native bodies/direct callee joins; remaining imports not wholesale classified"
+  },
+  "admitted_functions": [
+    {
+      "symbol": "audio_uart_ft_stream_seek_5288e0",
+      "address": "0x5288e0",
+      "end_exclusive": "0x528914",
+      "native_bytes": 52,
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "symbol": "audio_uart_ft_stream_skip_528914",
+      "address": "0x528914",
+      "end_exclusive": "0x528928",
+      "native_bytes": 20,
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "symbol": "audio_uart_ft_stream_read_at_528936",
+      "address": "0x528936",
+      "end_exclusive": "0x528992",
+      "native_bytes": 92,
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "symbol": "audio_uart_ft_stream_read_528928",
+      "address": "0x528928",
+      "end_exclusive": "0x528936",
+      "native_bytes": 14,
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "symbol": "audio_uart_ft_stream_read_ushort_528b4a",
+      "address": "0x528b4a",
+      "end_exclusive": "0x528ba8",
+      "native_bytes": 94,
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "symbol": "audio_uart_ft_stream_read_ulong_528ba8",
+      "address": "0x528ba8",
+      "end_exclusive": "0x528c14",
+      "native_bytes": 108,
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "symbol": "audio_uart_ft_get_module_5273b8",
+      "address": "0x5273b8",
+      "end_exclusive": "0x5273f2",
+      "native_bytes": 58,
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    }
+  ],
+  "bounded_comparisons": {
+    "native_C": 2472
+  },
+  "typed_data": [],
+  "source_drift": {
+    "export_observed_utc": "2026-10-13T18:58:48.337238+00:00",
+    "selected_source_current_sha256": "552b425d6a853e3187fff486cd13d3349c303d68a74b40f0a9cad45728571644",
+    "matches_sealed_wave": false,
+    "continuous_goal": true,
+    "claim_scope": "sealed round382 only; no later source promoted"
+  },
+  "exclusions": [
+    "Indirect stream callback controlled",
+    "No full initialized runtime/layout/hardware proof",
+    "Controlled callback backend; no initialized filesystem/module runtime or full image hardware proof",
+    "134 top-level snapshots and54 selected-TU dependencies checked",
+    "0/6 accepted images; runtime/data/layout/byte equality/hardware open",
+    "Dashboard checkpoint publication separate from interval reconciliation",
+    "No raw firmware/source bytes",
+    "No global interval union or coverage percentage recomputed",
+    "Full import classification owned by data audit track"
+  ],
+  "acceptance": {
+    "accepted_images": 0,
+    "total_images": 6,
+    "full_payload_linked": false,
+    "unresolved": [
+      "source completeness",
+      "full payload linkage",
+      "layout",
+      "byte equality",
+      "hardware behavior",
+      "cached and physical filesystem/pool/kernel/module runtime",
+      "inventory interval reconciliation",
+      "dashboard publication/readback"
+    ]
+  },
+  "historical_full_map": {
+    "as_of_utc": "2026-10-13T17:02:21.929738Z",
+    "full_v3_sha256": "c7ac188238981f4c43f0ae096021239e921b5b016b8be2cdfc37b8f4f982e339",
+    "policy": "Full map remains at stated cutoff until data owner reconciles interval evidence; latest wave is a separate checkpoint"
+  },
+  "supporting_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-stream-primitives-module-round382/dashboard-wave/wave.json",
+      "sha256": "12a343ba0f53efcf75dcc0445fce6faad3066ce7be15b34aba90f3170229fceb"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-stream-primitives-module-round382/receipt.json",
+      "sha256": "79d4d610a1f7bdecb4717205c4e5573976d0596f54ceefa3e7ff240406260271"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-stream-primitives-module-round382/root-source-audit.json",
+      "sha256": "64e79e8191477636d7f03568c577fb41bccf4b4fe2bd05c12918c290de5c2813"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-stream-primitives-module-round382/admission-receipt.json",
+      "sha256": "610642e3c4169f7d40545fde1cd4aad906c3b07fe811a2703bf74de4ffd33df0"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-stream-primitives-module-round382/current-dependency-audit.json",
+      "sha256": "29b2a6dfab91b7d4fcf1acedfe26349f2203068987cbe190466d17185c11d252"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-stream-primitives-module-round382/dashboard-wave/import-delta.json",
+      "sha256": "ee8dec41e17a1a01ab6c4fe1a92d1d3385ce99ddcc1b05c988bf376941da6468"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-stream-primitives-module-round382/probe-receipt.json",
+      "sha256": "e51ec1bd8764e718f33b31d73bc63f30c6cebee0a75affe7dacf9f61352048e6"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-stream-primitives-module-round382/qualification-input-hashes.json",
+      "sha256": "1f9d925125bf437b2eaa20aedd597036ae439e0c10a7c32a0c512cb3d3683ce6"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-stream-primitives-module-round382/dashboard-wave/repository-state.json",
+      "sha256": "50906f65b5a9bc3f3f89c5f880608bdb204a0266428a1317a7a3be50c9cacadb"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/reporting-authorization.json",
+      "sha256": "144e9fd325f50d5585bb4910fca8b7dd474213dc79349d0302fd73b495b79164"
+    }
+  ],
+  "publication": {
+    "purpose": "private per-wave dashboard dataset",
+    "page_mutation_performed": false,
+    "identity_policy": "Replace this same Library file for subsequent wave checkpoints with expected current version; retain version history",
+    "replaces_checkpoint_wave": "root-apollo-main-round381-ps-sfnt-fallback"
+  }
+}

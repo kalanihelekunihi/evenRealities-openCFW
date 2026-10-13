@@ -1,10 +1,10 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock idle-standby sequence at 0x0800726a through WFI 0x080072b0.
  * Product message and device reads retain typed lower contracts.
  */
 #include <stdint.h>
-extern void case_policy_log(uint32_t message); /* 0x08009170, product string source */
 extern void case_init_pmic_read(uint32_t address,uint8_t *out,uint32_t count); /* 0x080035d4 */
 extern void case_init_power_set(uint32_t enabled); /* 0x08002c8e */
 extern void case_init_boost_set(uint32_t enabled); /* 0x08002c30 */

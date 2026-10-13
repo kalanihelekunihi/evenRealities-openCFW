@@ -6,7 +6,7 @@
 #define FRAME ((volatile uint8_t *)0x20000974u)
 #define UART ((case_start_handle *)0x20000e24u)
 #define EVENT (*(uint32_t *)0x200000f0u)
-extern uint32_t case_bulk_receive(case_start_handle *,uint8_t *,uint16_t,uint32_t);
+extern uint32_t case_bulk_receive(void *,uint8_t *,uint32_t,uint32_t);
 extern uint32_t case_event_post(uint32_t,uint32_t);
 uint32_t case_frame_de_prefix(const uint8_t *p){return (p[0]=='D'||p[0]=='d')&&(p[1]=='E'||p[1]=='e');}
 void case_frame_resync(void){if(COUNT>=2 && LAST==0x5a){FRAME[0]=0x5a;COUNT=1;}else COUNT=0;}

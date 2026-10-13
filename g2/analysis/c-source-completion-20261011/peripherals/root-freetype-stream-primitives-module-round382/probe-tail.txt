@@ -1,0 +1,51 @@
+ FS=0x20003000;STREAM=FS+0x100;DATA=FS+0x300;OUT=FS+0x400;ERR=FS+0x200
+ saved=[UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7,UC_ARM_REG_R8,UC_ARM_REG_R9,UC_ARM_REG_R10,UC_ARM_REG_R11];seeds=[0x12345000+i*0x101 for i in range(8)]
+ def put(a,v):u.mem_write(a,struct.pack('<I',v&0xffffffff))
+ def run(entry,initial,args,case):
+  u.mem_write(FS,initial);u.reg_write(UC_ARM_REG_CPSR,0x01000000);u.reg_write(UC_ARM_REG_SP,0x2007ff00);u.reg_write(UC_ARM_REG_LR,stop_address|1)
+  for r,v in zip([UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3],args):u.reg_write(r,v&0xffffffff)
+  for r,v in zip(saved,seeds):u.reg_write(r,v)
+  guard=b'\xa5'*32;u.mem_write(0x2007ff00,guard);u.reg_write(UC_ARM_REG_PC,entry&~1);seen=[]
+  for step in range(10):
+   response=command('c');pc=u.reg_read(UC_ARM_REG_PC)
+   if pc==stop_address:break
+   assert targets.get(pc)=='probe_read',(hex(pc),response)
+   a,b,c,d=[u.reg_read(r) for r in [UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3]];assert a==STREAM
+   if c and d:u.mem_write(c,bytes((0x91+i*37)&255 for i in range(min(d,64))))
+   if case['mutate'] is not None:put(STREAM+8,case['mutate'])
+   result=case['result'];seen.append((b,0 if c==0 else ('out' if c==OUT else 'local'),d,result));u.reg_write(UC_ARM_REG_R0,result);u.reg_write(UC_ARM_REG_PC,u.reg_read(UC_ARM_REG_LR)&~1)
+  else:raise AssertionError('call bound')
+  assert u.reg_read(UC_ARM_REG_SP)==0x2007ff00 and [u.reg_read(r) for r in saved]==seeds;assert bytes(u.mem_read(0x2007ff00,32))==guard
+  return u.reg_read(UC_ARM_REG_R0),seen,bytes(u.mem_read(FS,2048))
+ import itertools
+ rng=random.Random(382);counts={};addresses={'seek':0x5288e0,'skip':0x528914,'read_at':0x528936,'read':0x528928,'ushort':0x528b4a,'ulong':0x528ba8,'module':0x5273b8};names={'seek':'audio_uart_ft_stream_seek_5288e0','skip':'audio_uart_ft_stream_skip_528914','read_at':'audio_uart_ft_stream_read_at_528936','read':'audio_uart_ft_stream_read_528928','ushort':'audio_uart_ft_stream_read_ushort_528b4a','ulong':'audio_uart_ft_stream_read_ulong_528ba8','module':'audio_uart_ft_get_module_5273b8'}
+ def compare(kind,initial,args,case):
+  native=run(addresses[kind]+delta,initial,args,case);candidate=run(symbols[names[kind]],initial,args,case)
+  assert native==candidate,(kind,args,case,native[:2],candidate[:2],[(i,a,b) for i,(a,b) in enumerate(zip(native[2],candidate[2])) if a!=b][:12]);counts[kind]=counts.get(kind,0)+1
+ def fixture(size,pos,callback,base=DATA):
+  initial=bytearray(rng.getrandbits(8) for _ in range(2048))
+  for off,v in [(0,base),(4,size),(8,pos),(20,symbols['probe_read'] if callback else 0)]:struct.pack_into('<I',initial,STREAM-FS+off,v&0xffffffff)
+  return initial
+ for kind in ['seek','skip']:
+  for callback,size,pos,distance,result,mutate in itertools.product([0,1],[0,4,0xffffffff],[0,3,0xfffffffe],[0,4,0x7fffffff,0xffffffff],[0,1,85],[None,0xfffffffd]):
+   if not callback and (result!=0 or mutate is not None):continue
+   compare(kind,fixture(size,pos,callback),[STREAM,distance,0,0],{'result':result,'mutate':mutate})
+ for kind in ['read_at','read']:
+  for callback,size,offset,count,result,mutate,align in itertools.product([0,1],[0,3,32],[0,2,32],[0,1,4,17],[0,2,20],[None,0xfffffffc],[0,1]):
+   if not callback and (result!=0 or mutate is not None):continue
+   initial=fixture(size,offset,callback,DATA+align);args=[STREAM,offset,OUT,count] if kind=='read_at' else [STREAM,OUT,count,0]
+   compare(kind,initial,args,{'result':result,'mutate':mutate})
+ for kind,width in [('ushort',2),('ulong',4)]:
+  for callback,size,pos,result,mutate,align in itertools.product([0,1],[0,1,4,32],[0,1,3,31,0xfffffffe,0xffffffff],[0,width-1,width,width+1],[None,0xfffffffe],[0,1]):
+   if not callback and (result!=0 or mutate is not None):continue
+   base=DATA+align
+   if not callback and pos>=0xfffffffe:base=(-pos)&0xffffffff
+   compare(kind,fixture(size,pos,callback,base),[STREAM,ERR,0,0],{'result':result,'mutate':mutate})
+ for count,query,duplicate,null_lib,null_name in itertools.product([0,1,3],['alpha','beta','missing',''],[False,True],[False,True],[False,True]):
+  initial=bytearray(rng.getrandbits(8) for _ in range(2048));lib=FS+0x100;name=FS+0x650;struct.pack_into('<I',initial,lib-FS+16,count);initial[name-FS:name-FS+len(query)+1]=query.encode()+b'\0'
+  for i,s in enumerate(['alpha','alpha' if duplicate else 'beta','']):
+   mod=FS+0x220+i*0x20;cls=FS+0x280+i*0x20;text=FS+0x500+i*0x20;struct.pack_into('<I',initial,lib-FS+20+4*i,mod);struct.pack_into('<I',initial,mod-FS,cls);struct.pack_into('<I',initial,cls-FS+8,text);initial[text-FS:text-FS+len(s)+1]=s.encode()+b'\0'
+  compare('module',initial,[0 if null_lib else lib,0 if null_name else name,0,0],{'result':0,'mutate':None})
+ receipt={'status':'PASS_SEVEN_COMPLETE_STREAM_MODULE_BODIES','comparisons':sum(counts.values()),'by_component':counts,'controlled_boundaries':['indirect stream callback only'],'actual_helpers':['selected staged forward copy','selected unsigned-byte string comparison'],'checks':['callback position mutation','seek EOF versus read EOF','negative skip and wrapped addition','short/exact/oversized reported reads','unaligned memory copy','BE wrapped bounds and computed NULL data','module NULL/empty/duplicate/absent name','whole2KiB/SP/R4-R11/caller32-byte guard'],'limits':['Controlled callback backend; no initialized filesystem/module runtime or full image hardware proof'],'selected':False};(D/'probe-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt),flush=True)
+finally:
+ p.terminate();p.communicate(timeout=5)

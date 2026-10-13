@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x080072bc-0x08007376 complete full-battery counter/standby branch.
@@ -5,7 +6,6 @@
  */
 #include <stdint.h>
 extern void case_policy_flash_write(uint32_t address,uint32_t ticks,uint32_t length); /* 0x0800598c */
-extern void case_policy_log(uint32_t message);
 extern void case_init_pmic_read(uint32_t address,uint8_t *out,uint32_t count);
 extern void case_init_power_set(uint32_t enabled);
 extern void case_init_boost_set(uint32_t enabled);

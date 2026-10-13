@@ -1,0 +1,49 @@
+# OpenCFW completed-wave dashboard contract
+
+User authorized integration with the existing task “Continue OpenCFW Shortcut Research”. This is a completed-wave handoff, not a time-based schedule, new firmware worker or permission to bypass paused phases.
+
+## Owners and identities
+
+Implementation goal: local Codex thread `01a1274a-b92b-7aa1-8cbb-186993f21387`, verified active by list_threads/read_thread on 2026-10-13. Sidebar metadata cwd is SybilSight; observed current commands run in `/Users/kalani/Repo/evenRealities-openCFW`. Use the actual OpenCFW checkout, main checkout only, no new worktrees. Latest observed constraints: root-only, EvenHub excluded, evidence/gates preserved, no automatic commits/pushes/flashing. Current source may be unfrozen; a settled snapshot must be verified before dashboard promotion.
+
+Data/address/resource inventory owner: existing audit thread `01a120b1-9d22-7596-9ee5-a6d93342c014`. It owns full bundle/resource accounting and address unions. Other tasks must not overwrite its inventories or independently coalesce replacement ranges.
+
+Dashboard coordinator/publisher: parent thread `01a118d2-91c5-7234-9dad-7c70bfd620de` until a tested publisher route is accepted. Single writer to the Page and Library identities below. Implementation writes only its own wave receipt/report; audit writes its own validation/snapshots; publisher writes the existing cloud resources. No duplicate owners or workers.
+
+Page: `page_e5199b4adeb081918164ac6acd8e4b04` (OpenCFW Flash Recovery Progress). Full Library identity: `libfile_3d9914466c448191be6edc3918867204`, observed v2; compact identity: `libfile_e7f198676fe481918961cdfb1a1eb33f`. These are identity anchors, not fixed future version numbers. Preserve identity/version history; reread latest metadata before updates. Never blindly replay a cloud mutation.
+
+## Completion trigger and state machine
+
+A wave is completed when its bounded exit criteria and terminal compile/link/current-source checks have receipts, including expected failures/limits. Prepared or running chunks are visible as pending, not completed. Capture a settled snapshot at the boundary, before subsequent edits make its source hashes stale. Do not pause useful authorized work while waiting for the dashboard; dashboard can lag explicitly with separate last-build/last-audit/last-publication stamps.
+
+1. **completed**: Implementation emits wave.json matching the supplied template, plus concise results. Record wave/goal IDs, completed-at UTC, repository HEAD revision and dirty-state receipt, target/component/native identity, actual selected source/object/dependency hashes, compiler settings, symbols/imports by code/data/ROM/address-only class, tests and expected failures, ownership/resource deltas, limits and next goal. A no-progress or blocked wave is still reportable with exact reason and no coverage promotion.
+2. **inventoried**: Existing data owner consumes the exact wave and established baseline. Reconcile source/address/resource inventories without double-counting versions, aliases or image-local ranges. Do not infer executable denominators by subtracting partially classified resources. Keep nested codec programs and MAIN+Audio identity correct.
+3. **validated**: Data owner emits full and compact snapshots derived from the same snapshot_id. Validate source/hash/version joins, target identity, six component partitions, resources/container metadata, unchanged baseline stage meaning, candidate-versus-behavior-versus-exact distinctions, explicit exclusions and unresolved/unplaced evidence. Test counts and symbols never become recovered firmware-function percentages.
+4. **published**: Sole publisher updates existing full/compact Library files, then refreshes the native Page with guarded current-block edits/reference updates. Retain exact full/compact Library IDs, versions and hashes, validation status/receipt hash, upload/version/edit receipts; read back Page references and snapshot_id. A successful request without readback is not completed publication. Unknown outcomes require reconciliation, not duplicate uploads/embeds.
+5. **next_goal_selected**: Implementation keeps or selects the next highest-impact authorized bounded goal, informed by validated evidence. Prefer closing genuine source/runtime/ABI/initialized-data/indirect-root/layout obligations over increasing a displayed metric. Preserve in-flight ownership; do not switch owners or restart completed work merely to improve the dashboard.
+
+Deduplication key: target identity + component + wave_id + terminal_receipt SHA256 + source_snapshot_id. Publishing state may advance only for that exact validated snapshot. Rejected or stale hash joins stay visible; they do not alter source or seals.
+
+## Supported tool route and current proof
+
+This coordinator context exposes `mcp__codex_apps__chatgpt_space_read_page`, `chatgpt_space_edit_page`, `chatgpt_space_create_page_visualization`, and Page file-reference tools, plus Library tools. A successful read_page(include_content:false) confirms the exact Page exists and current account can_read/can_write; sequence observed15. This checks access only. No publish mutation/end-to-end automatic wave refresh has been tested by this handoff.
+
+The local implementation goal must discover its own callable tools; availability in this coordinator does not establish availability there. Codex app's `read_page_reference` is read-only, while `create_spaces_artifact/connect_spaces_artifact` target Sheets/Slides and cannot publish this native text/HTML Page. `mcp__codex_app__send_message_to_thread` can deliver human-authorized instructions to the existing goal; read_thread can observe completion without filesystem session access. Do not read denied session paths, use credentials/direct endpoints to bypass missing tools, or create cron/heartbeat schedules.
+
+If cloud Page/Library write tools are absent from the local goal, its supported route is a parent-mediated publish: emit the wave handoff, and coordinator reads it through task metadata/repository artifacts, asks existing audit owner for validated snapshots, then uses its connected cloud tools. Direct local publishing is optional only after actual capability/access/write/readback is tested and single-writer ownership is transferred explicitly. Until then report “contract delivered; parent-mediated publisher required; automatic refresh unverified”.
+
+Before edits, publisher applies the relevant Pages/Library skills, reads Page guidance and current blocks, uses observed IDs/hashes and exact current Library versions. Large full snapshot is already ~40.8MB; Page visualization256KiB/file-reference10MiB limits do not permit stuffing it into a Page. Keep full data in the existing Library identity using its supported large-file update route, and embed only validated compact/render artifacts with explicit limits. Failure is a publish blocker, not authority to silently drop full evidence.
+
+## Initial priorities from current evidence
+
+Finish the owner's in-flight Main round362 layer allocation/buffer-wrapper qualification before switching scope. Latest verified owner message: Main round3613,308 definitions/762 imports, 0/6 accepted images; these are symbol/import counts, not firmware denominator. Full LVGL formatter pack was admitted with1,944 comparisons under Main profile and54 dependency hashes checked; do not repeat it without a changed hypothesis.
+
+After that, prioritize a complete genuine direct-code child and its connected provider graph, such as the corrected FreeType initialization identity, only if authenticated pinned source and current import classification support it. Exit: whole native body/ABI accounted, selected source/dependency/object hashes coherent, connected bounded native/C comparison with explicit deeper boundaries, terminal build/current-source audit, newly exposed imports classified. Do not treat a smaller import count alone as success.
+
+Across components, high-impact gates already documented are: Boot initialized scatter/callback/resident-ROM contracts; EM12 resident ROM interfaces and delay-slot/callback ABI qualification; CASE final executable/startup/layout versus oversized non-stock ELF; Touch authenticated generated history/product configuration rather than arbitrary gap allocation; Codec stage loader/alias/runtime-state and final source-linked layout. These are recommendations to the existing owner, not assignments to new workers or permission to resume denied discovery/provider phases. Record exact missing input and stop the relevant bounded goal when authorization/evidence is exhausted.
+
+## Notification/export check
+
+The sent human-authorized task instruction asks the verified existing owner to acknowledge this exact CONTRACT.md as its per-wave input and report its own available tool names. Parent notification is supported in this coordinator via mcp__codex_app__send_message_to_thread, but local-goal availability/acknowledgement is still pending. This contract does not infer export ability from a Library ID. Local Library export needs library_prepare_materialize plus the connected host materialization route; Library replacement needs prepare_uploads/host upload/finalize_uploads and replace_library_file with the current file identity. Tool metadata alone is not a successful export/upload. If absent, parent handles both. No direct endpoint, cookie, session-file or permission workaround is authorized.
+
+Exactly one successful wave-to-parent message, current-source terminal receipt, audit inventory/validation, versioned full/compact snapshot, guarded Page update and readback are required to accept the end-to-end integration dry run. A pending owner acknowledgement or metadata-only Page read is not that receipt. Until then, manual parent-mediated refresh remains the proven management path; no claim of automatic wave-triggered execution.

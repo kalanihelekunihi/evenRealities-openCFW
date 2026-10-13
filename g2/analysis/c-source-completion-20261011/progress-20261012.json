@@ -11198,5 +11198,1256 @@
     "round": 346,
     "current_main_build": "round345:3247 definitions/772 imports",
     "accepted_complete_images": 0
+  },
+  "root_littlefs_public_entries_round347": {
+    "status": "PASS_ACTUAL_SELECTED_TU_M55_FIVE_LITTLEFS_PUBLIC_ENTRIES_AND_DIR_CLOSE_CORE",
+    "native_comparisons": 450,
+    "per_function": {
+      "close": 75,
+      "write": 75,
+      "dir_open": 75,
+      "dir_close": 75,
+      "dir_read": 75,
+      "dir_close_core": 75
+    },
+    "assertion_boundary_cases": 90,
+    "candidate_sha256": "257e4b942413924cc88962f89a4b1413365987f9029e275ff813d19408df0a7b",
+    "controlled_lower_backends": 7,
+    "actual_dir_close_core_executes": true,
+    "instruction_bytes_unchanged": true,
+    "ordinary_pointer_bindings": "oracle-bindings.json",
+    "checks": [
+      "Live mlist40 pointer/membership zero/nonzero branching",
+      "Exact assertion expression/source/line boundary before error helper execution",
+      "Core argument forwarding/full32bit return",
+      "Directory unlink delegation andconstant0 return",
+      "Entire4KiB fixture/mutating membership/core callbacks",
+      "SP/R4-R11/caller guard onreturning paths"
+    ],
+    "selected": false,
+    "limits": [
+      "Seven lower membership/error/core backends controlled; actual filesystem engine not qualified here",
+      "Assertions stopaterror-helper boundary; no fatal helper/hardware claim",
+      "No full-image/layout/source completeness claim"
+    ],
+    "round": 347
+  },
+  "root_littlefs_public_entries_connected_round348": {
+    "status": "ADMITTED_MAIN_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+    "native_comparisons": 630,
+    "per_function": {
+      "close": 105,
+      "write": 105,
+      "dir_open": 105,
+      "dir_close": 105,
+      "dir_read": 105,
+      "dir_close_core": 105
+    },
+    "assertion_boundary_cases": 150,
+    "candidate_sha256": "257e4b942413924cc88962f89a4b1413365987f9029e275ff813d19408df0a7b",
+    "controlled_lower_backends": 5,
+    "actual_membership_and_unlink_execute": true,
+    "list_fixtures": [
+      "empty",
+      "targethead",
+      "targetmiddle",
+      "targettail",
+      "absent",
+      "targetwithsuccessor",
+      "threeothernodes"
+    ],
+    "actual_dir_close_core_executes": true,
+    "instruction_bytes_unchanged": true,
+    "ordinary_pointer_bindings": "oracle-bindings.json",
+    "checks": [
+      "Live mlist40 pointer/membership zero/nonzero branching",
+      "Exact assertion expression/source/line boundary before error helper execution",
+      "Core argument forwarding/full32bit return",
+      "Directory unlink delegation andconstant0 return",
+      "Entire4KiB fixture/actual membership andunlink/mutating core callbacks",
+      "SP/R4-R11/caller guard onreturning paths"
+    ],
+    "selected": false,
+    "limits": [
+      "Five lower assertion/file-close/write/dir-open/dir-read cores controlled; real membership/unlink execute; filesystem engine remains unqualified",
+      "Assertions stopaterror-helper boundary; no fatal helper/hardware claim",
+      "No full-image/layout/source completeness claim"
+    ],
+    "selected_sha256": "257e4b942413924cc88962f89a4b1413365987f9029e275ff813d19408df0a7b",
+    "prefix_sha256": "8d96802d2ea1705109df362180a913ca5db4ab5613fee33ad568f44d331afcc2",
+    "connected_native_comparisons": 630,
+    "real_selected_membership_unlink_current_objects_match_qualified": true,
+    "new_glob_source": false,
+    "builder_changed": false,
+    "new_dependencies": [
+      "audio_file_lfs_write_core_4ce308",
+      "audio_file_lfs_dir_open_core_4cd558",
+      "audio_file_lfs_dir_read_core_4cd60e"
+    ],
+    "accepted_complete_images": 0,
+    "main_definitions": 3253,
+    "main_imports": 770,
+    "stable_snapshots": 134,
+    "duplicate_strong_symbols": 0,
+    "build": "g2/build/c-firmware/20261013/peripherals-root-littlefs-public-entries-round348",
+    "round": 348,
+    "remaining": [
+      "Three newly exposed LittleFS write/dir-open/dir-read cores",
+      "Formatter483fd0 andboundedcopy454778",
+      "Configuration/ABI/globalstate/blockdriver/heap/filesystem runtime andall imagegates"
+    ]
+  },
+  "root_lvgl_bounded_copy_connected_round349": {
+    "status": "BOUNDED_COPY_ADMITTED_MAIN_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+    "native_comparisons": 624,
+    "controlled_lower_backends": 0,
+    "actual_native_and_selected_strlen_copy_execute": true,
+    "candidate_sha256": "5861fcad6c4eb252f5158aff208d87360a191c54195648a6cef9519ce57b0128",
+    "checks": [
+      "Seven lengths0..255/allsourceanddestinationalignments",
+      "Zero/one/exact/truncated/oversize/UINT32_MAXcapacity",
+      "Originalfullstringlengthreturn/exactnulplacement",
+      "Entire4KiBfixtureandindependentexpectedcontract",
+      "SP/R4-R11/caller16byteguard"
+    ],
+    "selected": true,
+    "limits": [
+      "Validnulterminatedsource/disjointregionsonly;overlapandinvalidpointersunqualified",
+      "No completeimage/layout/byteidentity/hardwareclaim"
+    ],
+    "selected_prefix_sha256": "257e4b942413924cc88962f89a4b1413365987f9029e275ff813d19408df0a7b",
+    "native_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "native_entry": "0x454778",
+    "native_size": 54,
+    "actual_selected_helpers": [
+      "g2/components/main/extended_log_root_candidate_20261011/selected_helper_adapters.c",
+      "g2/components/main/extended_log_memory_candidates_20261010/memory.c",
+      "g2/components/audio/queue_cmsis_offline/cmsis.c"
+    ],
+    "selected_sha256": "5861fcad6c4eb252f5158aff208d87360a191c54195648a6cef9519ce57b0128",
+    "production_modified": true,
+    "helper_objects_current_match": true,
+    "new_glob_source": false,
+    "builder_changed": false,
+    "accepted_complete_images": 0,
+    "main_definitions": 3254,
+    "main_imports": 769,
+    "stable_snapshots": 134,
+    "duplicate_strong_symbols": 0,
+    "build": "g2/build/c-firmware/20261013/peripherals-root-lvgl-bounded-copy-round349",
+    "round": 349,
+    "remaining": [
+      "Formatter483fd0",
+      "Three LittleFS coreproviders andflushedwriteclosure",
+      "Configuration/globalstate/block/heap/filesystemruntime/allimagegates"
+    ]
+  },
+  "root_littlefs_write_core_round350": {
+    "status": "FULL_WRITE_CORE_ADMITTED_MAIN_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+    "native_comparisons": 148,
+    "assertion_boundary_cases": 4,
+    "candidate_sha256": "e6f9da84722cf3fea9fa482cae9da0c714b52edcd8c5721ecbc8448147494bbd",
+    "controlled_lower_backends": 3,
+    "checks": [
+      "Fullwritecore/flagreads/appendposition/filemax/wrappedaddition",
+      "Flush0/nonzeroandsignedwriteerrors/ERREDclearing",
+      "Gapzerobyteandremainingbufferpointerword/positionadvance/abort",
+      "Exactasserttext/source/3659boundary",
+      "Entire4KiBfixture/SP/R4-R11/caller16byteguard"
+    ],
+    "selected": true,
+    "limits": [
+      "Flush/flushedwrite/errorhelpercontrolled;connectedfilesystemengineunqualified",
+      "Assertionsstoppedbeforeerrorhelperexecution",
+      "No completeimage/layout/hardwareclaim"
+    ],
+    "native_body_sha256": "2f19e76d3161e93140d0c6d398f5de08afc93973f3f2b4e7e89fd6752b271ef8",
+    "native_size": 170,
+    "pinned_source": "third-party/upstream/littlefs/lfs.c:3657",
+    "selected_prefix_sha256": "5861fcad6c4eb252f5158aff208d87360a191c54195648a6cef9519ce57b0128",
+    "new_unresolved_dependency": null,
+    "remaining": [
+      "Two exposeddirectorycores4cd558/4cd60e",
+      "Formatter483fd0/483960",
+      "Connectedflush/flushedwrite/configuration/globalstate/block/heap/filesystemruntime/allimagegates"
+    ],
+    "actual_existing_provider": "g2_lfs_file_flushedwrite:0x4ce1a0",
+    "corrections": [
+      "Nativeandpinnedheader READING0x40000/WRITING0x20000 corrected beforeadmission",
+      "Existing selected flushedwrite provideridentified;useactualalias ratherthannewimport"
+    ],
+    "selected_sha256": "e6f9da84722cf3fea9fa482cae9da0c714b52edcd8c5721ecbc8448147494bbd",
+    "new_glob_source": false,
+    "builder_changed": false,
+    "accepted_complete_images": 0,
+    "main_definitions": 3255,
+    "main_imports": 768,
+    "stable_snapshots": 134,
+    "duplicate_strong_symbols": 0,
+    "build": "g2/build/c-firmware/20261013/peripherals-root-littlefs-write-core-round350",
+    "round": 350
+  },
+  "root_littlefs_directory_cores_round351": {
+    "status": "TWO_DIRECTORY_CORES_ADMITTED_MAIN_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+    "native_comparisons": 387,
+    "per_function": {
+      "open": 63,
+      "read": 324
+    },
+    "candidate_sha256": "0f98cacddfc5f1fed617f2b39c99c4dded582d43cf825d12a1912eebede4e05d",
+    "controlled_lower_backends": 4,
+    "actual_selected_and_native_helpers_execute": [
+      "listappend",
+      "endianpairconversion",
+      "dirgetwrapper",
+      "bufferfill"
+    ],
+    "checks": [
+      "Opennegativefind/notdir/rootandnonroot/geterrors/fetchnonzero",
+      "Findpathpointerandrootmutations/decodedtagmask/stackedsliceABI",
+      "Successhead/id/pos/type/listinsertion",
+      "Info264clear/dot/dotdot/unsignedposwrap",
+      "Id16wrap/count/split0andnonzero/fetcherror/NOENTskip/infoerrors",
+      "Whole4KiBfixture/SP/R4-R11/caller16byteguard"
+    ],
+    "selected": true,
+    "limits": [
+      "Find/sliceread/fetch/getinfo controlled;disk/filesystemengineunqualified",
+      "Distinctvaliddirectory/info/path objects;invalidaliasesunqualified",
+      "No completeimage/layout/byteidentity/hardwareclaim"
+    ],
+    "selected_prefix_sha256": "e6f9da84722cf3fea9fa482cae9da0c714b52edcd8c5721ecbc8448147494bbd",
+    "native_bodies": {
+      "0x4cd558": 166,
+      "0x4cd60e": 172
+    },
+    "actual_selected_helpers": [
+      "g2/components/audio/uart_thread_source_candidate/display_file_lfs_simple_helpers.c",
+      "g2/components/audio/file_sync_candidate/cache_fill.c"
+    ],
+    "new_dependency": "audio_file_lfs_dir_getinfo_4cbf38",
+    "native_opcode_or_data_changes": false,
+    "selected_sha256": "0f98cacddfc5f1fed617f2b39c99c4dded582d43cf825d12a1912eebede4e05d",
+    "new_glob_source": false,
+    "builder_changed": false,
+    "accepted_complete_images": 0,
+    "main_definitions": 3257,
+    "main_imports": 767,
+    "stable_snapshots": 134,
+    "duplicate_strong_symbols": 0,
+    "build": "g2/build/c-firmware/20261013/peripherals-root-littlefs-directory-cores-round351",
+    "round": 351,
+    "remaining": [
+      "Directory-info core4cbf38",
+      "Formatter483fd0/483960",
+      "Connected filesystem/configuration/globalstate/block/heap/runtime andall imagegates"
+    ]
+  },
+  "root_littlefs_directory_info_round352": {
+    "status": "ENTIRE_DIRECTORY_INFO_ADMITTED_MAIN_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+    "native_comparisons": 700,
+    "candidate_sha256": "057ab426c3c7b7e8e18695cec8eb6b52bb86ad783d195886e4d8b124badf6d56",
+    "controlled_lower_backends": 1,
+    "actual_selected_and_native_helpers_execute": [
+      "directorygetwrapper",
+      "endianpairconversion"
+    ],
+    "checks": [
+      "UXTHidandrootlow16bits/rootpreservessize",
+      "Name_maxunsignedwrapand16bitidtagpacking",
+      "Nameerrorandstructerror/noinventedclearing",
+      "Typelowbyte/CTZsize/inline10bitsize/otherpreservessize",
+      "Originalsavedwordpairinitialization/exact8bytesliceABI",
+      "Whole4KiBfixture/SP/R4-R11/caller16byteguard"
+    ],
+    "selected": true,
+    "limits": [
+      "Slicereadcontrolled;diskengineunqualified",
+      "Syntheticname_maxboundariesarenotvalidfilesystemconfigproof",
+      "Distinctvalidinformationobject;invalidaliasesunqualified",
+      "No completeimage/layout/byteidentity/hardwareclaim"
+    ],
+    "selected_prefix_sha256": "0f98cacddfc5f1fed617f2b39c99c4dded582d43cf825d12a1912eebede4e05d",
+    "native_entry": "0x4cbf38",
+    "native_size": 166,
+    "actual_selected_helper": "g2/components/audio/uart_thread_source_candidate/display_file_lfs_simple_helpers.c",
+    "selected_sha256": "057ab426c3c7b7e8e18695cec8eb6b52bb86ad783d195886e4d8b124badf6d56",
+    "helper_object_current_match": true,
+    "new_glob_source": false,
+    "builder_changed": false,
+    "accepted_complete_images": 0,
+    "main_definitions": 3258,
+    "main_imports": 766,
+    "stable_snapshots": 134,
+    "duplicate_strong_symbols": 0,
+    "build": "g2/build/c-firmware/20261013/peripherals-root-littlefs-directory-info-round352",
+    "round": 352,
+    "remaining": [
+      "Formatter483fd0/483960",
+      "Connected filesystem/configuration/globalstate/block/heap/runtime andall imagegates"
+    ]
+  },
+  "root_lvgl_formatter_inventory_round353": {
+    "status": "FORMATTER_NATIVE_CLUSTER_AND_FOUR_HEADLESS_GHIDRA_DOSSIERS_COMPLETE",
+    "round": 353,
+    "analysis_elf_sha256": "5195f30dab9b45d16da7a5e3fb18e3619607465cc1e3c8553b3e760466d84e77",
+    "native_cluster_bytes": 4076,
+    "declared_function_records": 13,
+    "all_loadable_bytes_original": true,
+    "body_dossiers": {
+      "0x483960": {
+        "name": "native_FUN_00483960",
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x483960",
+              "end": "0x483fcb"
+            }
+          ],
+          "total_bytes": 1644,
+          "span_bytes": 1644,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "database_signature": "undefined native_FUN_00483960()",
+        "pseudocode_saved": "native_FUN_00483960-rea-dossier.json",
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        }
+      },
+      "0x483028": {
+        "name": "native_lv_out_buffer",
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x483028",
+              "end": "0x48302f"
+            }
+          ],
+          "total_bytes": 8,
+          "span_bytes": 8,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "database_signature": "undefined native_lv_out_buffer()",
+        "pseudocode_saved": "native_lv_out_buffer-rea-dossier.json",
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        }
+      },
+      "0x483fea": {
+        "name": "native_FUN_00483fea",
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x483fea",
+              "end": "0x483ffb"
+            }
+          ],
+          "total_bytes": 18,
+          "span_bytes": 18,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "database_signature": "undefined native_FUN_00483fea()",
+        "pseudocode_saved": "native_FUN_00483fea-rea-dossier.json",
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        }
+      },
+      "0x483fd0": {
+        "name": "native_FUN_00483fd0",
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x483fd0",
+              "end": "0x483fe9"
+            }
+          ],
+          "total_bytes": 26,
+          "span_bytes": 26,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "database_signature": "undefined native_FUN_00483fd0()",
+        "pseudocode_saved": "native_FUN_00483fd0-rea-dossier.json",
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        }
+      }
+    },
+    "callback_pointer_binding": {
+      "word": "0x484010",
+      "value": "0x483029",
+      "meaning": "Thumb function pointer to8bytebufferoutput, not a data table"
+    },
+    "metadata_correction": "Shared $d string-table name mustnot be renamed globally; selectedbody mapping symbols reference unique existing $t names; gap data mapping preserved",
+    "prototype_limits": [
+      "Database signatures undefined andwrapper pseudocode void despite returnedR0; preserve native/source ABI reconciliation",
+      "Corpus andnewGhidra dossier shareprovider lineage; not independent wholeimage coverage",
+      "Function symbols/sizes are analyst metadata authenticated against originalbody bytes"
+    ],
+    "source_match_scope": "Pinned LVGL builtin sprintf source corroborates callback/inner parser/wrappers; fullconfiguration/varargs/float/feature equivalence unqualified",
+    "production_modified": false,
+    "current_main_build": "round352:3258 definitions/766 imports",
+    "remaining": [
+      "Complete formatter C configuration andallhelpers/literals ownership",
+      "Native/source varargs32/64 alignment andformat feature qualification",
+      "Entire source admission/coherentMain buildaudit",
+      "Connected filesystem/config/global/runtime/all imagegates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lvgl_formatter_round354": {
+    "status": "ENTIRE_PINNED_FORMATTER_C_DRAFT_COMPILE_LINK_PASS",
+    "selected_prefix_sha256": "057ab426c3c7b7e8e18695cec8eb6b52bb86ad783d195886e4d8b124badf6d56",
+    "candidate_sha256": "f442e0bfabc029dcf1f972a7cfcb1957a06d641b8e17353d3da3e8c11664e2fb",
+    "pinned_source": "third-party/upstream/ambiq-lvgl/src/stdlib/builtin/lv_sprintf_builtin.c",
+    "pinned_source_sha256": "4efe0afd79c703eaef6f8629194aa79831480a5e7acfa9ecbc1c1ecd2bf5d681",
+    "namespace_map": {
+      "lv_snprintf": "audio_uart_lv_snprintf_483fd0",
+      "lv_vsnprintf": "audio_uart_lv_vsnprintf_483fea",
+      "lv_vsnprintf_inner": "lvfmt354_inner",
+      "lv_strnlen": "lvfmt354_strnlen",
+      "lv_vaformat_t": "lvfmt354_vaformat_t",
+      "out_fct_type": "lvfmt354_out_type",
+      "out_fct_wrap_type": "lvfmt354_out_wrap",
+      "_out_buffer": "lvfmt354_out_buffer",
+      "_out_null": "lvfmt354_out_null",
+      "_is_digit": "lvfmt354_is_digit",
+      "_atoi": "lvfmt354_atoi",
+      "_out_rev": "lvfmt354_out_rev",
+      "_ntoa_format": "lvfmt354_ntoa_format",
+      "_ntoa_long": "lvfmt354_ntoa_long",
+      "_ntoa_long_long": "lvfmt354_ntoa_long_long",
+      "_ftoa": "lvfmt354_ftoa",
+      "_etoa": "lvfmt354_etoa",
+      "PRINTF_SUPPORT_FLOAT": "LVFMT354_PRINTF_SUPPORT_FLOAT",
+      "FLAGS_PLUS": "LVFMT354_FLAGS_PLUS",
+      "FLAGS_ADAPT_EXP": "LVFMT354_FLAGS_ADAPT_EXP",
+      "PRINTF_DISABLE_SUPPORT_EXPONENTIAL": "LVFMT354_PRINTF_DISABLE_SUPPORT_EXPONENTIAL",
+      "PRINTF_DISABLE_SUPPORT_PTRDIFF_T": "LVFMT354_PRINTF_DISABLE_SUPPORT_PTRDIFF_T",
+      "FLAGS_LONG": "LVFMT354_FLAGS_LONG",
+      "FLAGS_UPPERCASE": "LVFMT354_FLAGS_UPPERCASE",
+      "FLAGS_LEFT": "LVFMT354_FLAGS_LEFT",
+      "PRINTF_SUPPORT_EXPONENTIAL": "LVFMT354_PRINTF_SUPPORT_EXPONENTIAL",
+      "PRINTF_NTOA_BUFFER_SIZE": "LVFMT354_PRINTF_NTOA_BUFFER_SIZE",
+      "FLAGS_SPACE": "LVFMT354_FLAGS_SPACE",
+      "FLAGS_HASH": "LVFMT354_FLAGS_HASH",
+      "FLAGS_LONG_LONG": "LVFMT354_FLAGS_LONG_LONG",
+      "PRINTF_DISABLE_SUPPORT_FLOAT": "LVFMT354_PRINTF_DISABLE_SUPPORT_FLOAT",
+      "FLAGS_PRECISION": "LVFMT354_FLAGS_PRECISION",
+      "PRINTF_DEFAULT_FLOAT_PRECISION": "LVFMT354_PRINTF_DEFAULT_FLOAT_PRECISION",
+      "PRINTF_SUPPORT_PTRDIFF_T": "LVFMT354_PRINTF_SUPPORT_PTRDIFF_T",
+      "PRINTF_DISABLE_SUPPORT_LONG_LONG": "LVFMT354_PRINTF_DISABLE_SUPPORT_LONG_LONG",
+      "PRINTF_SUPPORT_LONG_LONG": "LVFMT354_PRINTF_SUPPORT_LONG_LONG",
+      "FLAGS_ZEROPAD": "LVFMT354_FLAGS_ZEROPAD",
+      "FLAGS_CHAR": "LVFMT354_FLAGS_CHAR",
+      "PRINTF_MAX_FLOAT": "LVFMT354_PRINTF_MAX_FLOAT",
+      "PRINTF_FTOA_BUFFER_SIZE": "LVFMT354_PRINTF_FTOA_BUFFER_SIZE",
+      "FLAGS_SHORT": "LVFMT354_FLAGS_SHORT"
+    },
+    "candidate_config": {
+      "float": true,
+      "exponential": true,
+      "long_long": true,
+      "ptrdiff_t": true,
+      "ntoa_buffer": 32,
+      "ftoa_buffer": 32,
+      "default_precision": 6,
+      "max_fixed_float": 1000000000.0
+    },
+    "compiler_arithmetic_imports": [
+      "__aeabi_d2iz",
+      "__aeabi_d2uiz",
+      "__aeabi_dadd",
+      "__aeabi_dcmpge",
+      "__aeabi_dcmpgt",
+      "__aeabi_dcmple",
+      "__aeabi_dcmplt",
+      "__aeabi_dcmpun",
+      "__aeabi_ddiv",
+      "__aeabi_dmul",
+      "__aeabi_dsub",
+      "__aeabi_i2d",
+      "__aeabi_ui2d",
+      "__aeabi_uldivmod"
+    ],
+    "qualification_elf_only_arithmetic_stubs": "Forbidden toexecute ininitial32bit/textphase; hardwarebreakpoints reject entry",
+    "selected": false,
+    "production_modified": false,
+    "limits": [
+      "Fullsourcecompilationisnotnativeequivalence",
+      "Configurationandallfloat/64bitfeaturesunqualified",
+      "No completeimage/layout/byteidentity/hardwareclaim"
+    ],
+    "round": 354,
+    "current_main_build": "round352:3258 definitions/766 imports",
+    "accepted_complete_images": 0,
+    "execution": {
+      "status": "PASS_ENTIRE_FORMATTER_SOURCE_32BIT_TEXT_FEATURES_M55",
+      "native_comparisons": 1128,
+      "per_entry": {
+        "snprintf": 564,
+        "vsnprintf": 564
+      },
+      "format_fixtures": 47,
+      "candidate_sha256": "f442e0bfabc029dcf1f972a7cfcb1957a06d641b8e17353d3da3e8c11664e2fb",
+      "controlled_backends_executed": 0,
+      "compiler_arithmetic_stub_entries_rejected": true,
+      "checks": [
+        "32bitINT_MIN/unsignedmax/charshortlongsizeptrdiff/pointers/baseflags",
+        "Widthprecisionincludingstarandnegativevalues",
+        "Stringprecision/truncation/nulloutput/zeroandUINT32_MAXcapacity",
+        "NestedVandpV/unsupportedformatliteralbehavior",
+        "Actualnativeandfullsourceformatterhelpers/callbacksexecute",
+        "Whole4KiBfixture/SP/R4-R11/caller64byteargsandguard"
+      ],
+      "selected": false,
+      "limits": [
+        "Floatand64bitformatscompiledbutnotexecuted/qualifiedinthisphase",
+        "Completeconfig/ROMliterals/arithmeticprovidersstillopen",
+        "No completeimage/layout/byteidentity/hardwareclaim"
+      ]
+    }
+  },
+  "root_lvgl_formatter_round355": {
+    "status": "RESEARCH_RUNTIME_COMPILES_COUNTEREXAMPLES_PRESERVED_NOT_ADMITTED",
+    "pinned_files_verified": 33,
+    "compiled_c_sources": 17,
+    "compiler_runtime_source": "third-party/upstream/llvm-compiler-rt-format-20.1.8",
+    "ref": "llvmorg-20.1.8",
+    "formatter_candidate_sha256": "f442e0bfabc029dcf1f972a7cfcb1957a06d641b8e17353d3da3e8c11664e2fb",
+    "runtime_controlled_stubs": 0,
+    "abi_adapters_research_only": true,
+    "selected": false,
+    "production_modified": false,
+    "limits": [
+      "Compiler-rt is a source-available numerical lead, not native IAR identity orrounding/exception proof",
+      "Completeformat/arithmetic/native execution qualificationpending"
+    ],
+    "runtime_compile_flags": [
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-mfpu=fpv5-sp-d16",
+      "-mfloat-abi=softfp",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-mllvm",
+      "-disable-arm-loloops"
+    ],
+    "default_runtime_compiler_fault": {
+      "CFSR": "0x00020000 INVSTATE",
+      "stacked_pc": "0x28002884 LE LR in__udivmoddi4",
+      "record": "default-loop-fault.log",
+      "code_generated_withoutDLSatloopstart": true,
+      "cause_not_yet_attributed": "Compiler transformation orQEMU/hardwarefeaturebehavior; notnativefirmwaredefect"
+    },
+    "analysis_absolute_native_mirror": "Removed: originalconstantaddressesoutsideMPS3usablememory; fiveordinarypointerwords reboundtorelativelyloadedoriginalbytes",
+    "probe_elf_sha256": "0acb1a97bc696ac9bdf121e6820beeeebdb7e316d747bd2cf41c6bfc082551b7",
+    "data_bindings": "oracle-bindings.json",
+    "authenticated_data_matches_pinned_source": [
+      "fni-",
+      "fni+",
+      "tenbinary64powers10^0..10^9"
+    ],
+    "formatter_compile_flags": [
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-mfpu=fpv5-sp-d16",
+      "-mfloat-abi=softfp",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-mllvm",
+      "-disable-arm-loloops"
+    ],
+    "normal_main_build_compatibility_qualified": false,
+    "round": 355,
+    "current_main_build": "round352:3258 definitions/766 imports",
+    "accepted_complete_images": 0,
+    "counterexample": "M55 generatedLE UsageFault; looptransformdisable alone causedzero-padding mismatch; scalar sourcefeatures qualifiednext round"
+  },
+  "root_lvgl_formatter_round356": {
+    "status": "FULL_FORMATTER_SOURCE_SCALAR_TARGET_ATTRIBUTE_COMPILE_LINK_PASS",
+    "selected_prefix_sha256": "057ab426c3c7b7e8e18695cec8eb6b52bb86ad783d195886e4d8b124badf6d56",
+    "candidate_sha256": "faf0737a8482c81fe87dd28a2e6ca16f967f5641084ec5f351d59f4697c354fd",
+    "compiler_flags": [
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-mfpu=fpv5-sp-d16",
+      "-mfloat-abi=softfp",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffunction-sections",
+      "-fdata-sections"
+    ],
+    "source_target_features_disabled": [
+      "lob",
+      "mve",
+      "mve.fp"
+    ],
+    "global_builder_changed": false,
+    "runtime_sources": "PinnedLLVM20.1.8/33verifiedfiles/16Cfiles",
+    "runtime_controlled_stubs": 0,
+    "source_changes": "Onlynamespace/config/targetattributes; all pinnedformatfeatures retained",
+    "prior_counterexample": "round355/no-looptransform alone overwrote32bitword inzero-padding; source scalarconfiguration nowunderqualification",
+    "selected": false,
+    "production_modified": false,
+    "limits": [
+      "Featureconfiguration is a new qualifiedsourcecandidate, notnativeIAR codeidentity",
+      "DefaultFPSCR only; exception/rounding/hardware gates open"
+    ],
+    "round": 356,
+    "current_main_build": "round352:3258 definitions/766 imports",
+    "accepted_complete_images": 0,
+    "execution": {
+      "status": "PASS_FULL_FORMATTER_64BIT_FLOAT_FEATURES_SOURCE_SCALAR_CONFIGURATION_M55",
+      "native_comparisons": 816,
+      "per_entry": {
+        "snprintf": 408,
+        "vsnprintf": 408
+      },
+      "format_fixtures": 102,
+      "candidate_sha256": "faf0737a8482c81fe87dd28a2e6ca16f967f5641084ec5f351d59f4697c354fd",
+      "controlled_backends_executed": 0,
+      "actual_compiler_rt_arithmetic_executes": true,
+      "ordinary_pointer_bindings": "oracle-bindings.json:two code/three literal-datapointers; instructionbytesunchanged",
+      "checks": [
+        "Signed/unsigned64includingextremes/alignedvarargsandmixed32/64",
+        "Fixed/exponential/general/upper/defaultandexplicitprecision",
+        "Zero/signedzero/negative/small/large/inf/nan",
+        "Capacity0/1/8/64andwhole4KiBfixture",
+        "SP/R4-R11/D8-D15/caller96byteargsandguard"
+      ],
+      "selected": false,
+      "limits": [
+        "DefaultFPSCR input0; exceptionflags/otherroundingmodesunqualified",
+        "Compiler-rt is not original IAR arithmetic identity orbyteequality",
+        "No completeimage/layout/hardwareclaim"
+      ]
+    }
+  },
+  "root_lvgl_formatter_round357": {
+    "status": "COHERENT_FORMATTER_PACK_QUALIFIED_ADMISSION_REJECTED_EXISTING_DIVIDER",
+    "selected_prefix_sha256": "057ab426c3c7b7e8e18695cec8eb6b52bb86ad783d195886e4d8b124badf6d56",
+    "candidate_sha256": "159a6cc68b7be221e45592abb1092a90c8506f19f6144d194c293374a4898ff1",
+    "source_includes": [
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/adddf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/ashldi3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/comparedf2.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/divdf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixdfsi.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixunsdfsi.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatsidf.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatunsidf.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mode.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/lshrdi3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/muldf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/subdf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/truncdfsf2.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivdi3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/umoddi3.c"
+    ],
+    "compiler_flags": [
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-mfpu=fpv5-sp-d16",
+      "-mfloat-abi=softfp",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-I",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate"
+    ],
+    "builder_changed": false,
+    "new_glob_source": false,
+    "all_arithmetic_bodies_C": true,
+    "inline_asm": "RealEABIquotient/remainder adapter only; no opcodearrays/placeholders",
+    "selected": false,
+    "production_modified": false,
+    "remaining": [
+      "CoherentactualselectedTU text/64bit/float qualification",
+      "Currentdependency snapshots/admission/Mainbuildaudit",
+      "FPstatus/rounding/nativecodeidentity/layout/hardwaregates"
+    ],
+    "round": 357,
+    "text_execution": {
+      "status": "PASS_COMPLETE_SELECTED_TU_FORMATTER_32BIT_TEXT_FEATURES_M55",
+      "native_comparisons": 1128,
+      "per_entry": {
+        "snprintf": 564,
+        "vsnprintf": 564
+      },
+      "format_fixtures": 47,
+      "candidate_sha256": "159a6cc68b7be221e45592abb1092a90c8506f19f6144d194c293374a4898ff1",
+      "controlled_backends_executed": 0,
+      "actual_numerical_providers_available_no_stubs": true,
+      "checks": [
+        "32bitINT_MIN/unsignedmax/charshortlongsizeptrdiff/pointers/baseflags",
+        "Widthprecisionincludingstarandnegativevalues",
+        "Stringprecision/truncation/nulloutput/zeroandUINT32_MAXcapacity",
+        "NestedVandpV/unsupportedformatliteralbehavior",
+        "Actualnativeandfullsourceformatterhelpers/callbacksexecute",
+        "Whole4KiBfixture/SP/R4-R11/caller64byteargsandguard"
+      ],
+      "selected": false,
+      "limits": [
+        "Floatand64bitformatsqualifiedinseparateprobe_float_m55.py",
+        "Completeconfig/ROMliterals/arithmeticprovidersstillopen",
+        "No completeimage/layout/byteidentity/hardwareclaim"
+      ]
+    },
+    "float_execution": {
+      "status": "PASS_COMPLETE_SELECTED_TU_FORMATTER_AND_NUMERICAL_PROVIDERS_M55",
+      "native_comparisons": 816,
+      "per_entry": {
+        "snprintf": 408,
+        "vsnprintf": 408
+      },
+      "format_fixtures": 102,
+      "candidate_sha256": "159a6cc68b7be221e45592abb1092a90c8506f19f6144d194c293374a4898ff1",
+      "controlled_backends_executed": 0,
+      "actual_compiler_rt_arithmetic_executes": true,
+      "ordinary_pointer_bindings": "oracle-bindings.json:two code/three literal-datapointers; instructionbytesunchanged",
+      "checks": [
+        "Signed/unsigned64includingextremes/alignedvarargsandmixed32/64",
+        "Fixed/exponential/general/upper/defaultandexplicitprecision",
+        "Zero/signedzero/negative/small/large/inf/nan",
+        "Capacity0/1/8/64andwhole4KiBfixture",
+        "SP/R4-R11/D8-D15/caller96byteargsandguard"
+      ],
+      "selected": false,
+      "limits": [
+        "DefaultFPSCR input0; exceptionflags/otherroundingmodesunqualified",
+        "Compiler-rt is not original IAR arithmetic identity orbyteequality",
+        "No completeimage/layout/hardwareclaim"
+      ]
+    },
+    "admission_rejection": "__aeabi_uldivmod alreadydefinedbyactualselecteddivision_support.c; duplicateadapter mustberemoved",
+    "baseline_build": "peripherals-root-lvgl-full-formatter-round357:3258 definitions/766 imports/134 stable snapshots;noformatteradmission"
+  },
+  "root_lvgl_formatter_round358": {
+    "status": "ENTIRE_FORMATTER_NUMERICAL_PACK_ADMITTED_MAIN_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+    "selected_prefix_sha256": "057ab426c3c7b7e8e18695cec8eb6b52bb86ad783d195886e4d8b124badf6d56",
+    "candidate_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+    "source_includes": [
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/adddf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/ashldi3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/comparedf2.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/divdf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixdfsi.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixunsdfsi.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatsidf.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatunsidf.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mode.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/lshrdi3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/muldf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/subdf3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/truncdfsf2.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivdi3.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/umoddi3.c"
+    ],
+    "compiler_flags": [
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-mfpu=fpv5-sp-d16",
+      "-mfloat-abi=softfp",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-I",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate"
+    ],
+    "builder_changed": false,
+    "new_glob_source": false,
+    "all_arithmetic_bodies_C": true,
+    "inline_asm": "RealEABIquotient/remainder adapter only; no opcodearrays/placeholders",
+    "selected": true,
+    "production_modified": false,
+    "remaining": [
+      "CoherentactualselectedTU text/64bit/float qualification",
+      "Currentdependency snapshots/admission/Mainbuildaudit",
+      "FPstatus/rounding/nativecodeidentity/layout/hardwaregates"
+    ],
+    "existing_divider": {
+      "source": "g2/components/audio/uart_power_config_offline/division_support.c",
+      "source_sha256": "b80b40111c16a0e0ca5cc0f46e203cd91b0b01eb9a1532273d351e924c66af5a",
+      "object_path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-littlefs-directory-info-round352/apollo_main/audio/178-uart_power_config_offline-division_support.o",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m55",
+        "-mthumb",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-O2",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-littlefs-directory-info-round352/apollo_main/audio/178-uart_power_config_offline-division_support.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_power_config_offline/division_support.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-littlefs-directory-info-round352/apollo_main/audio/178-uart_power_config_offline-division_support.o"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "object_sha256": "89aa56c39f27ce924b422d7f1fe409ad1e6a28170bef1aa4a48ba4a410dd7883",
+      "dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_power_config_offline/division_support.c": "b80b40111c16a0e0ca5cc0f46e203cd91b0b01eb9a1532273d351e924c66af5a",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+      }
+    },
+    "duplicate_divider_adapter_removed": true,
+    "selected_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+    "native_comparisons": 1944,
+    "controlled_backends_executed": 0,
+    "dependency_hashes": {
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/comparedf2.c": "c2af3f6a5ae89c08e5ee25b3ec03170b7e98d5dc699646c14820e359cd54fde5",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_compare_impl.inc": "b3a602d7e840571537aef20a2ad57ad124f2efc7f0a456a37bece30e9dde6394",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_lib.h": "8edc3d7debe27cb64355bbcd1d3d18390da20f7bf1358586ece770714bcfdc5e",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_types.h": "b4b768e1b2251df4c0161b4c1f120417500ff4883b7008120104d042eeb2151f",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_endianness.h": "ec5175561075845b7b16a92ad5ecdfd42a284de2736dd07e4ca7011b75c37709",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_math.h": "42d83ee41543909de016379a8251e211a6890cbc7945c433bb30f4ba29d7b10c",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_lib.h": "b31130f10484636895daa13b91b63d47ea82b45547f29e4dd136b48a67854d30",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_util.h": "63d06198ab720a75c20bfd84be895c2746581b129168bae6201e7384bbb0473b",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatsidf.c": "d5141b5b7e860113c75f2d03d0cf39ca41aeea3e75390c40f73979c4ac172b51",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatunsidf.c": "9f3593197c2584c14c86a4760051be18c788d0835cf8ffdb9f11834c2ce9bf5b",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixdfsi.c": "7a17622bf348e1854ff5c47a3290acf7f7d85ddfd97f35e2af7d51d05964ebb2",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_fixint_impl.inc": "9f783582b31c028721a14561f2c5741b5bb19befa557a4575e1436381f966f4e",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/divdf3.c": "2c8850a107c4ab79d518d1c3246ff936dd28446c82e17c1f347717a36b7a88a8",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_div_impl.inc": "2d1d901e87805e0bb2f3a3ab951b29224a59a761d6f292c3bd86f35368186fdd",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/muldf3.c": "e35d748cefd466cb17e4d0fd4ef9d92e0911fea97bb7a59ad138479ba9c0d553",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mul_impl.inc": "5fd5ec9eaf57c983ed521f3501346660221d6f2d49d48d186b2046702b54d8c3",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/subdf3.c": "201404b61436f1f617221ac20aeee67e41349baaf13ef838f0f5969e3b8b86ab",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/adddf3.c": "c948665a4272f7155fd0cd51c3f2bb218bfd0d1dc0ab556565ee1a4eb315eb26",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_add_impl.inc": "327276adbb45d7e2cb2da1cf98b508da00b43b0cb84d4883d07878a0a9a1cd07",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mode.h": "874aa9eee8990ae2a6f48127ddb48c3198a8fa741f634f93053ebac3f89e1e83",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixunsdfsi.c": "57b6312618aedf3f0f1c13bd1de12b5ea4b7c3070d2bb549d4fc93aca33abb28",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_fixuint_impl.inc": "fc0d0b1b6fd1b3ec61ed3cd96e634de9f380eb76b7161fea91ddbddece71ac09",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/LICENSE.TXT": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivdi3.c": "e250263dcb27261e969db4228a479b2f3bde2b06e59baa2f2c595ac752b17643",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/umoddi3.c": "d812aa1e62d6179f9013e38bc040ba69d905be128fa25e104645a9da0841d209",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c": "e963fd1418909bb0f43603a7846edf568d4c8bae0670bd3b13a3e754a104e2fe",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_div_impl.inc": "833906405d418f0f421d6155acc5abf79d9902ed37a44903d01c95ff55d3a010",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mode.c": "0f626fefe2e19854549dfe598bd168a770bae7e1cab34b459871fabec4632f25",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/truncdfsf2.c": "2842933c7721ae3e6c9d4f8d131f77f9c8228c1d5f77b1b05102c7e8b1f9b515",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_trunc_impl.inc": "17098ba776ada9f2cc568a02cf34317bb0b59b8a603ff8a92ea909b7bc8c214b",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_trunc.h": "90626a0811dcf96be507daa5d7fe872d1efae2c388af4c48eaba45101856be23",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/ashldi3.c": "7982c05b8a139ab662ac1a88be061669d7ee838d2153b42e4b0f4ec410bdf5a5",
+      "third-party/upstream/llvm-compiler-rt-format-20.1.8/lshrdi3.c": "b8c43f0df0c6136f017ffc18123e74677a52c893dbb166e216804756578a1eab"
+    },
+    "current_new_runtime_strong_definition_collisions": [],
+    "accepted_complete_images": 0,
+    "round": 358,
+    "text_execution": {
+      "status": "PASS_COMPLETE_SELECTED_TU_CONNECTED_EXISTING_DIVIDER_FORMATTER_32BIT_TEXT_FEATURES_M55",
+      "native_comparisons": 1128,
+      "per_entry": {
+        "snprintf": 564,
+        "vsnprintf": 564
+      },
+      "format_fixtures": 47,
+      "candidate_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+      "controlled_backends_executed": 0,
+      "actual_numerical_providers_available_no_stubs": true,
+      "checks": [
+        "32bitINT_MIN/unsignedmax/charshortlongsizeptrdiff/pointers/baseflags",
+        "Widthprecisionincludingstarandnegativevalues",
+        "Stringprecision/truncation/nulloutput/zeroandUINT32_MAXcapacity",
+        "NestedVandpV/unsupportedformatliteralbehavior",
+        "Actualnativeandfullsourceformatterhelpers/callbacksexecute",
+        "Whole4KiBfixture/SP/R4-R11/caller64byteargsandguard"
+      ],
+      "selected": false,
+      "limits": [
+        "Floatand64bitformatsqualifiedinseparateprobe_float_m55.py",
+        "Completeconfig/ROMliterals/arithmeticprovidersstillopen",
+        "No completeimage/layout/byteidentity/hardwareclaim"
+      ]
+    },
+    "float_execution": {
+      "status": "PASS_COMPLETE_SELECTED_TU_CONNECTED_EXISTING_DIVIDER_FORMATTER_AND_NUMERICAL_PROVIDERS_M55",
+      "native_comparisons": 816,
+      "per_entry": {
+        "snprintf": 408,
+        "vsnprintf": 408
+      },
+      "format_fixtures": 102,
+      "candidate_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+      "controlled_backends_executed": 0,
+      "actual_compiler_rt_arithmetic_executes": true,
+      "ordinary_pointer_bindings": "oracle-bindings.json:two code/three literal-datapointers; instructionbytesunchanged",
+      "checks": [
+        "Signed/unsigned64includingextremes/alignedvarargsandmixed32/64",
+        "Fixed/exponential/general/upper/defaultandexplicitprecision",
+        "Zero/signedzero/negative/small/large/inf/nan",
+        "Capacity0/1/8/64andwhole4KiBfixture",
+        "SP/R4-R11/D8-D15/caller96byteargsandguard"
+      ],
+      "selected": false,
+      "limits": [
+        "DefaultFPSCR input0; exceptionflags/otherroundingmodesunqualified",
+        "Compiler-rt is not original IAR arithmetic identity orbyteequality",
+        "No completeimage/layout/hardwareclaim"
+      ]
+    },
+    "main_definitions": 3301,
+    "main_imports": 765,
+    "stable_snapshots": 134,
+    "duplicate_strong_symbols": 0,
+    "build": "g2/build/c-firmware/20261013/peripherals-root-lvgl-full-formatter-round358"
+  },
+  "root_lvgl_formatter_round359": {
+    "status": "PASS_CURRENT_MAIN_SOURCE_OBJECT_DEPENDENCIES_AND_COMPILER_PROFILE_EXECUTION",
+    "actual_compile_row": {
+      "source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+      "source_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+      "object_path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-lvgl-full-formatter-round358/apollo_main/audio/754-uart_thread_source_candidate-display_lv_init_children.o",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m55",
+        "-mthumb",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-O2",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-lvgl-full-formatter-round358/apollo_main/audio/754-uart_thread_source_candidate-display_lv_init_children.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-lvgl-full-formatter-round358/apollo_main/audio/754-uart_thread_source_candidate-display_lv_init_children.o"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "object_sha256": "799a6ca22a688a674e5525e8dbedf2368134cfd5d8f9ed39781d49e0169268c6",
+      "dependency_sha256": {
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdbool.h": "48655faf4ebd4ca0af26a1ee8e3e16f8dc68385c9cd550ffb3629320681305b3",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/limits.h": "6b59cc1b6f86c901bf41ce942b8434530e852eb16e79e6e9287f89441f71efca",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdarg.h": "ce6e43d79dc89b50208ecf259b1ffd519f5a78cd3a2c7fcaac6386f376b89fef",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_header_macro.h": "7b3fbcc442af2508f36bb2dc98d9ad2b8a1f5c0f5333394fb2159c8bd5ecd5b8",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___gnuc_va_list.h": "feca975bfdfb254d17458a8e3d51f8ad6d9bdc9fd6287727f0f8b2fb81fcb0b0",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_list.h": "81c3055f7033e26e7f53705653bc9d69b5202f25c2692e03b3a4f77ff44a7d76",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_arg.h": "274c75a1db86f649439aa3bcc1dead4170725e6f803925c3fc38a2e93307afdc",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___va_copy.h": "f0a8d3c963338173f2d57b2cbc209dde38c90536107b15eb0cf78166d4caee1f",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_copy.h": "bb195f56cb08d4cee6a60bd9f62f34466e8ac4f89f6fed043b044cb2f7ead010",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/float.h": "e01d54aa02c8268038e34e98b1c8e87b0b71b6a0a3a23efec84a33fd5c42867f",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__float_header_macro.h": "7ee2302b023d41fd787a326059980800594c6e2cbac134b3167947d0025a72d7",
+        "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__float_float.h": "423f74269d269d1bea5661517bb2685d670ff2acd4158a885d4780dd3b8bc0c8",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/adddf3.c": "c948665a4272f7155fd0cd51c3f2bb218bfd0d1dc0ab556565ee1a4eb315eb26",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_add_impl.inc": "327276adbb45d7e2cb2da1cf98b508da00b43b0cb84d4883d07878a0a9a1cd07",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_lib.h": "8edc3d7debe27cb64355bbcd1d3d18390da20f7bf1358586ece770714bcfdc5e",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/int_lib.h": "b31130f10484636895daa13b91b63d47ea82b45547f29e4dd136b48a67854d30",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/int_types.h": "b4b768e1b2251df4c0161b4c1f120417500ff4883b7008120104d042eeb2151f",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/int_endianness.h": "ec5175561075845b7b16a92ad5ecdfd42a284de2736dd07e4ca7011b75c37709",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/int_util.h": "63d06198ab720a75c20bfd84be895c2746581b129168bae6201e7384bbb0473b",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/int_math.h": "42d83ee41543909de016379a8251e211a6890cbc7945c433bb30f4ba29d7b10c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mode.h": "874aa9eee8990ae2a6f48127ddb48c3198a8fa741f634f93053ebac3f89e1e83",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/ashldi3.c": "7982c05b8a139ab662ac1a88be061669d7ee838d2153b42e4b0f4ec410bdf5a5",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/comparedf2.c": "c2af3f6a5ae89c08e5ee25b3ec03170b7e98d5dc699646c14820e359cd54fde5",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_compare_impl.inc": "b3a602d7e840571537aef20a2ad57ad124f2efc7f0a456a37bece30e9dde6394",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/divdf3.c": "2c8850a107c4ab79d518d1c3246ff936dd28446c82e17c1f347717a36b7a88a8",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_div_impl.inc": "2d1d901e87805e0bb2f3a3ab951b29224a59a761d6f292c3bd86f35368186fdd",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fixdfsi.c": "7a17622bf348e1854ff5c47a3290acf7f7d85ddfd97f35e2af7d51d05964ebb2",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_fixint_impl.inc": "9f783582b31c028721a14561f2c5741b5bb19befa557a4575e1436381f966f4e",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fixunsdfsi.c": "57b6312618aedf3f0f1c13bd1de12b5ea4b7c3070d2bb549d4fc93aca33abb28",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_fixuint_impl.inc": "fc0d0b1b6fd1b3ec61ed3cd96e634de9f380eb76b7161fea91ddbddece71ac09",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/floatsidf.c": "d5141b5b7e860113c75f2d03d0cf39ca41aeea3e75390c40f73979c4ac172b51",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/floatunsidf.c": "9f3593197c2584c14c86a4760051be18c788d0835cf8ffdb9f11834c2ce9bf5b",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mode.c": "0f626fefe2e19854549dfe598bd168a770bae7e1cab34b459871fabec4632f25",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/lshrdi3.c": "b8c43f0df0c6136f017ffc18123e74677a52c893dbb166e216804756578a1eab",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/muldf3.c": "e35d748cefd466cb17e4d0fd4ef9d92e0911fea97bb7a59ad138479ba9c0d553",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mul_impl.inc": "5fd5ec9eaf57c983ed521f3501346660221d6f2d49d48d186b2046702b54d8c3",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/subdf3.c": "201404b61436f1f617221ac20aeee67e41349baaf13ef838f0f5969e3b8b86ab",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/truncdfsf2.c": "2842933c7721ae3e6c9d4f8d131f77f9c8228c1d5f77b1b05102c7e8b1f9b515",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_trunc_impl.inc": "17098ba776ada9f2cc568a02cf34317bb0b59b8a603ff8a92ea909b7bc8c214b",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_trunc.h": "90626a0811dcf96be507daa5d7fe872d1efae2c388af4c48eaba45101856be23",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/udivdi3.c": "e250263dcb27261e969db4228a479b2f3bde2b06e59baa2f2c595ac752b17643",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/int_div_impl.inc": "833906405d418f0f421d6155acc5abf79d9902ed37a44903d01c95ff55d3a010",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c": "e963fd1418909bb0f43603a7846edf568d4c8bae0670bd3b13a3e754a104e2fe",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate/../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/umoddi3.c": "d812aa1e62d6179f9013e38bc040ba69d905be128fa25e104645a9da0841d209"
+      }
+    },
+    "dependency_hashes_checked": 54,
+    "admitted_runtime_pin_files_checked": 33,
+    "production_object_hash_checked": true,
+    "research_compiler_flags": [
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-std=c11",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-O2",
+      "-ffunction-sections",
+      "-fdata-sections"
+    ],
+    "only_research_packaging_difference": "Function/data sections forreachable-code analysis; actualaudio FP/ABI profile matched",
+    "selected_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+    "production_modified": false,
+    "remaining": [
+      "FPenvironment/otherrounding/IARidentity/layout/hardware",
+      "Connectedfilesystem/configuration/globalstate/runtime/remaining Mainfrontier"
+    ],
+    "native_comparisons": 1944,
+    "controlled_backends_executed": 0,
+    "text_execution": {
+      "status": "PASS_ACTUAL_MAIN_COMPILER_PROFILE_CONNECTED_FORMATTER_32BIT_TEXT_FEATURES_M55",
+      "native_comparisons": 1128,
+      "per_entry": {
+        "snprintf": 564,
+        "vsnprintf": 564
+      },
+      "format_fixtures": 47,
+      "candidate_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+      "controlled_backends_executed": 0,
+      "actual_numerical_providers_available_no_stubs": true,
+      "checks": [
+        "32bitINT_MIN/unsignedmax/charshortlongsizeptrdiff/pointers/baseflags",
+        "Widthprecisionincludingstarandnegativevalues",
+        "Stringprecision/truncation/nulloutput/zeroandUINT32_MAXcapacity",
+        "NestedVandpV/unsupportedformatliteralbehavior",
+        "Actualnativeandfullsourceformatterhelpers/callbacksexecute",
+        "Whole4KiBfixture/SP/R4-R11/caller64byteargsandguard"
+      ],
+      "selected": false,
+      "limits": [
+        "Floatand64bitformatsqualifiedinseparateprobe_float_m55.py",
+        "Completeconfig/ROMliterals/arithmeticprovidersstillopen",
+        "No completeimage/layout/byteidentity/hardwareclaim"
+      ]
+    },
+    "float_execution": {
+      "status": "PASS_ACTUAL_MAIN_COMPILER_PROFILE_CONNECTED_FORMATTER_AND_NUMERICAL_PROVIDERS_M55",
+      "native_comparisons": 816,
+      "per_entry": {
+        "snprintf": 408,
+        "vsnprintf": 408
+      },
+      "format_fixtures": 102,
+      "candidate_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+      "controlled_backends_executed": 0,
+      "actual_compiler_rt_arithmetic_executes": true,
+      "ordinary_pointer_bindings": "oracle-bindings.json:two code/three literal-datapointers; instructionbytesunchanged",
+      "checks": [
+        "Signed/unsigned64includingextremes/alignedvarargsandmixed32/64",
+        "Fixed/exponential/general/upper/defaultandexplicitprecision",
+        "Zero/signedzero/negative/small/large/inf/nan",
+        "Capacity0/1/8/64andwhole4KiBfixture",
+        "SP/R4-R11/D8-D15/caller96byteargsandguard"
+      ],
+      "selected": false,
+      "limits": [
+        "DefaultFPSCR input0; exceptionflags/otherroundingmodesunqualified",
+        "Compiler-rt is not original IAR arithmetic identity orbyteequality",
+        "No completeimage/layout/hardwareclaim"
+      ]
+    },
+    "main_definitions": 3301,
+    "main_imports": 765,
+    "accepted_complete_images": 0
+  },
+  "root_lvgl_draw_unit_task_round360": {
+    "status": "SIX_DRAW_BODIES_ADMITTED_MAIN_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+    "selected_prefix_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+    "candidate_sha256": "2350abd884c2d140ded2e070ac4832633de7843463605961dc5f6f412394fd65",
+    "native_bodies": {
+      "0x453604": 8,
+      "0x484398": 86,
+      "0x48462e": 12,
+      "0x4849fc": 18,
+      "0x484656": 136,
+      "0x48463a": 28
+    },
+    "controlled_backends": {
+      "audio_uart_lv_heap_alloc": 4519728,
+      "audio_uart_lvgl_log": 4510300,
+      "audio_uart_lv_anim_mutex_ensure_4d47fa": 5064698,
+      "stock_enter_critical": 4464848,
+      "stock_exit_critical": 4464872,
+      "audio_notify_task": 4545608,
+      "audio_uart_lv_draw_task_independent_4848b2": 4737202,
+      "audio_uart_display_default_get": 4520474
+    },
+    "actual_dimensions_source": "g2/components/audio/uart_thread_source_candidate/display_lv_render_area_helpers.c",
+    "research_metadata_change": "Existing syncsignal inlined; actualsignalexecutesandfourlowerprimitivescontrolled; no productionmetadatachanges",
+    "selected": true,
+    "native_comparisons": 1557,
+    "per_function": {
+      "create": 96,
+      "dispatch": 9,
+      "refresh": 4,
+      "first": 8,
+      "available": 1152,
+      "next": 288
+    },
+    "oom_boundary_cases": 24,
+    "controlled_lower_backends": 8,
+    "actual_native_and_selected_execute": [
+      "dimensiongetters",
+      "refreshgetter",
+      "firsttask",
+      "multitaskselector",
+      "availabilitywrapper",
+      "existingsyncsignal"
+    ],
+    "checks": [
+      "Unitallocationzeroed/listinsertion/counterwrap/indexandrereads/aliasfixtures",
+      "ExactOOM84logsource/function/format/expression/reasonbeforefatalhandler",
+      "Singleunitonlyfirsttask/multipleunitpriornext/state/preferredUXTB/independence",
+      "Fullscreenbusyhead/signedcoordinates/unsigneddimensionminus1/rotation",
+      "Syncpending/waiteratomicsequence/notifyargumentsandmemorymutations",
+      "Whole8KiBfixture/SP/R4-R11/caller32byteguard"
+    ],
+    "limits": [
+      "Heap/log/independence/defaultdisplay/syncensure/critical/notifybackendscontrolled",
+      "OOMstoppedatloggerentry;fatalstore notexecuted",
+      "Syntheticalias/dimensionboundaryfixtures arenothardwareconfigproof",
+      "No completeimage/layout/byteidentity/hardwareclaim"
+    ],
+    "selected_sha256": "2350abd884c2d140ded2e070ac4832633de7843463605961dc5f6f412394fd65",
+    "oom_boundaries": 24,
+    "dimensions_current_object_matches": true,
+    "new_glob_source": false,
+    "builder_changed": false,
+    "accepted_complete_images": 0,
+    "round": 360,
+    "remaining": [
+      "Main terminalbuild/current-source anddependency audit",
+      "54byte independencecore andconnectedarea qualification",
+      "Layerallocator/draw-unit initializer",
+      "Heap/sync/kernel/globalconfiguration/runtime/allimagegates"
+    ],
+    "main_definitions": 3307,
+    "main_imports": 763,
+    "stable_snapshots": 134,
+    "duplicate_strong_symbols": 0,
+    "build": "g2/build/c-firmware/20261013/peripherals-root-lvgl-draw-unit-task-cores-round360"
+  },
+  "root_lvgl_draw_independence_round361": {
+    "status": "FULL_INDEPENDENCE_BODY_ADMITTED_MAIN_BUILD_PENDING",
+    "selected_prefix_sha256": "2350abd884c2d140ded2e070ac4832633de7843463605961dc5f6f412394fd65",
+    "candidate_sha256": "44baaf5d4e5a36dcd11f4733fdcb41ce95b1822e1ae06c684380ebd16fee7573",
+    "native_body_size": 54,
+    "actual_intersection_and_dimensions_source": "g2/components/audio/uart_thread_source_candidate/display_lv_render_area_helpers.c",
+    "controlled_lower_backends": 7,
+    "selected": true,
+    "native_comparisons": 1757,
+    "per_function": {
+      "create": 96,
+      "dispatch": 9,
+      "refresh": 4,
+      "first": 8,
+      "available": 1152,
+      "next": 288,
+      "independent": 200
+    },
+    "oom_boundary_cases": 24,
+    "actual_native_and_selected_execute": [
+      "dimensiongetters",
+      "refreshgetter",
+      "firsttask",
+      "multitaskselector",
+      "availabilitywrapper",
+      "existingsyncsignal",
+      "independence",
+      "areaintersection"
+    ],
+    "checks": [
+      "Unitallocationzeroed/listinsertion/counterwrap/indexandrereads/aliasfixtures",
+      "ExactOOM84logsource/function/format/expression/reasonbeforefatalhandler",
+      "Singleunitonlyfirsttask/multipleunitpriornext/state/preferredUXTB/independence",
+      "Fullscreenbusyhead/signedcoordinates/unsigneddimensionminus1/rotation",
+      "Syncpending/waiteratomicsequence/notifyargumentsandmemorymutations",
+      "Whole8KiBfixture/SP/R4-R11/caller32byteguard"
+    ],
+    "limits": [
+      "Heap/log/defaultdisplay/syncensure/critical/notifybackendscontrolled; realindependence/intersectionexecute",
+      "OOMstoppedatloggerentry;fatalstore notexecuted",
+      "Syntheticalias/dimensionboundaryfixtures arenothardwareconfigproof",
+      "No completeimage/layout/byteidentity/hardwareclaim"
+    ],
+    "selected_sha256": "44baaf5d4e5a36dcd11f4733fdcb41ce95b1822e1ae06c684380ebd16fee7573",
+    "direct_independence_cases": 200,
+    "current_intersection_object_matches": true,
+    "new_glob_source": false,
+    "builder_changed": false,
+    "accepted_complete_images": 0,
+    "round": 361,
+    "live_main_build_session": 35346,
+    "build_log": "/tmp/g2-361-main-build.log",
+    "last_terminal_main_build": "round360:3307definitions/763imports",
+    "remaining": [
+      "TerminalMainbuild/current-source/dependency audit",
+      "Layerallocation114byte body anddraw-unitinitializer",
+      "Actualheap/sync/kernel/globalconfiguration/runtime",
+      "Allimage/layout/byteidentity/hardwaregates"
+    ]
   }
 }

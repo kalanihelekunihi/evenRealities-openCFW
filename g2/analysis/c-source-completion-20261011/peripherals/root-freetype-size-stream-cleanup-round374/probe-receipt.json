@@ -1,0 +1,30 @@
+{
+  "status": "PASS_THREE_FULL_SIZE_STREAM_CLEANUP_BODIES",
+  "comparisons": 32,
+  "per_path": {
+    "size": 8,
+    "stream": 12,
+    "close": 12
+  },
+  "actual_helpers": [
+    "stream close",
+    "FT memory free"
+  ],
+  "controlled_boundaries": [
+    "generic/class/close callbacks",
+    "memoryfree callback"
+  ],
+  "checks": [
+    "fresh driverclass after generic",
+    "internal pointer mutation and clear before size free",
+    "NULL stream/callback",
+    "externalflag entireword truth",
+    "allocator cached before close changes streammemory",
+    "whole2KiB/SP/R4-R11/caller guard"
+  ],
+  "limits": [
+    "Callbacks controlled; actual allocator/runtime unproven",
+    "No image/layout/hardware proof"
+  ],
+  "selected": false
+}

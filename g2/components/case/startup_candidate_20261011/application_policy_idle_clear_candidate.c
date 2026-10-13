@@ -1,11 +1,10 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08009a14 lens charge/idle command selection.
  */
 #include <stdint.h>
 extern uint32_t case_policy_bus_write(uint32_t bus,uint32_t channel,uint32_t count,const uint8_t *value); /* 0x08000610 */
-extern void case_policy_log_four(uint32_t message,uint32_t a,uint32_t b,uint32_t c,uint32_t d); /* 0x08009170 */
-extern void case_policy_log(uint32_t message);
 /* Stock 0x08009108: nine IRQ-guarded bus attempts, cumulative failure count. */
 uint32_t case_policy_sensor_write(uint32_t channel,uint32_t count,const uint8_t *value)
 {

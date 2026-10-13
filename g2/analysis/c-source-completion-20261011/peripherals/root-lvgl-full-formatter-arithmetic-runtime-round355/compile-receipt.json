@@ -1,0 +1,67 @@
+{
+  "status": "PINNED_RUNTIME_COMPILED_LINK_PASS",
+  "pinned_files_verified": 33,
+  "compiled_c_sources": 17,
+  "compiler_runtime_source": "third-party/upstream/llvm-compiler-rt-format-20.1.8",
+  "ref": "llvmorg-20.1.8",
+  "formatter_candidate_sha256": "f442e0bfabc029dcf1f972a7cfcb1957a06d641b8e17353d3da3e8c11664e2fb",
+  "runtime_controlled_stubs": 0,
+  "abi_adapters_research_only": true,
+  "selected": false,
+  "production_modified": false,
+  "limits": [
+    "Compiler-rt is a source-available numerical lead, not native IAR identity orrounding/exception proof",
+    "Completeformat/arithmetic/native execution qualificationpending"
+  ],
+  "runtime_compile_flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=softfp",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-mllvm",
+    "-disable-arm-loloops"
+  ],
+  "default_runtime_compiler_fault": {
+    "CFSR": "0x00020000 INVSTATE",
+    "stacked_pc": "0x28002884 LE LR in__udivmoddi4",
+    "record": "default-loop-fault.log",
+    "code_generated_withoutDLSatloopstart": true,
+    "cause_not_yet_attributed": "Compiler transformation orQEMU/hardwarefeaturebehavior; notnativefirmwaredefect"
+  },
+  "analysis_absolute_native_mirror": "Removed: originalconstantaddressesoutsideMPS3usablememory; fiveordinarypointerwords reboundtorelativelyloadedoriginalbytes",
+  "probe_elf_sha256": "0acb1a97bc696ac9bdf121e6820beeeebdb7e316d747bd2cf41c6bfc082551b7",
+  "data_bindings": "oracle-bindings.json",
+  "authenticated_data_matches_pinned_source": [
+    "fni-",
+    "fni+",
+    "tenbinary64powers10^0..10^9"
+  ],
+  "formatter_compile_flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=softfp",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-mllvm",
+    "-disable-arm-loloops"
+  ],
+  "normal_main_build_compatibility_qualified": false
+}

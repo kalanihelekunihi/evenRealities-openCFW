@@ -1,0 +1,38 @@
+{
+  "status": "FOUR_FACE_LIFECYCLE_BOUNDED_BODIES_TERMINAL_BUILD_AUDIT_COMPLETE",
+  "selected_sha256": "b8e3a7d341c0f811b9ba2cd1200935f471a7e197380c10619f408d4616d2049d",
+  "comparisons": 196,
+  "native_body_sizes": [
+    36,
+    104,
+    30,
+    36
+  ],
+  "actual_helpers": [
+    "list find",
+    "list remove",
+    "memory free"
+  ],
+  "controlled_boundaries": [
+    "opener",
+    "destructor",
+    "free callback"
+  ],
+  "limits": [
+    "Unused uninitialized OpenArgs fields excluded; pathname flags source contract",
+    "No full image/layout/hardware proof"
+  ],
+  "source_frozen": false,
+  "terminal_audit": {
+    "status": "PASS_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+    "snapshots": 134,
+    "definitions": 3329,
+    "imports": 762,
+    "duplicate_strong_symbols": 0,
+    "artifact_hashes_checked": 6,
+    "builder_hash_checked": true,
+    "limits": [
+      "Full coverage/layout/byte equality/hardware unproven."
+    ]
+  }
+}

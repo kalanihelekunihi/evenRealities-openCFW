@@ -1,0 +1,148 @@
+{
+  "wave_id": "component-goal-case-wave010-extended-asm-lto",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T20:29:36.530502+00:00",
+  "status": "COMPLETED_QUALIFIED_SOURCE_PROFILE_REDUCTION",
+  "done_criteria": [
+    "Compile all401 source units, admit extended-asm-only sources into LTO while preserving real naked/startup/native4register boundaries",
+    "Keep unchanged6509native/C graph cases and765memory cases plus3fullresetfills",
+    "Add complete-body PRIMASK/RAM/SCB/return/SP and native invalid-nesting behavior checks; repeat2576GPIO module cases",
+    "Fresh401unit source compilation produces identical ELF and smaller qualified profile"
+  ],
+  "source_delta": "None afterwave009",
+  "source_object_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/qualified/receipt.json",
+    "sha256": "d74385d07bb2d5bc14d570d35691fb499b5e32c4adc9de1af0ad253bff022d5d"
+  },
+  "newly_LTO_source_units": {
+    "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/extended-asm-inputs.json",
+    "sha256": "27120b9a2879b98226d68b9a8737fc960a9321284f8f736fe69895f505f001f9"
+  },
+  "compiled_function_envelopes": {
+    "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/compiled-function-extents.json",
+    "sha256": "65819e941faf8c6e38e779d49820c7971f9788dc1650235f553d1f12a3c92b61"
+  },
+  "build": {
+    "C_units": 401,
+    "LLVM_bitcode_units": 388,
+    "ordinary_source_objects": 13,
+    "ELF_sha256": "b3c5becf4ba9161bedf9a6c3006a0cc35c7b51db05e24828b6ceb49f61ab0468",
+    "load_span_bytes": 63122,
+    "stock_payload_bytes": 55752,
+    "over_stock_payload_bytes": 7370,
+    "previous_qualified_bytes": 63348,
+    "reduction_bytes": 226,
+    "undefined_symbols": [],
+    "known_roots": 39,
+    "reproducible": true
+  },
+  "negative_profile": {
+    "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/negative-profile.json",
+    "sha256": "25512725bf57488e5d7857b4227ff3f139ecb1d2fae72560abc9885745bbf477"
+  },
+  "negative_build_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/selective/receipt.json",
+    "sha256": "81a635a738f6228bd3ad7d5756112b132588b77d9309f3597a75953da29065ed"
+  },
+  "ABI_boundary": "Real flash_register_leaves_candidate.c remains non-LTO. Preserves retained_r1 at native3f1c call boundary; test unchanged. No fabricated stub/return or register normalization masks the failed profile.",
+  "tests": {
+    "prior_graph_native_C_cases": 6509,
+    "GPIO_complete_body_cases": 2576,
+    "interrupt_state_complete_body_cases": 280,
+    "native_invalid_nesting_loop_cases": 16,
+    "memory_provider_cases": 765,
+    "cold_reset_fills": 3,
+    "cold_reset_RAM_bytes": 11400,
+    "proof": [
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/qualified/verification.json",
+        "sha256": "22e8b0b20faad5c1240a315a2587d035c6e5fc27e5efcc97d8433f845d982ea8"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/clang-contracts.json",
+        "sha256": "a93bab64475e5c09e554ce36e8fb80ef0418aadcf94832e4b5462567fe185486"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/clang-frame-regression.json",
+        "sha256": "587d7e35efc46a45d6017a52e734fe370386fdb50a10e065c3b133cd42fe5e90"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/clang-flash-provider-verification.json",
+        "sha256": "c15291c52e74aa14c14bde24cda2cb016cfedbaefba4d0bdd2d5c43a9f605528"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/reset-verification.json",
+        "sha256": "8b5375fd2309bafa9ce89aa0af3f1af7d2b1e005a10a948f13c5f6a91bc8f919"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/compiler-memory-verification.json",
+        "sha256": "5de1e5c7ec25c474f8e7ad1b3ebe8177e19025bc4f0c21abd2dc43be61a017fe"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/interrupt-verification.json",
+        "sha256": "d484c6fdc20f36fedac4c707ab089e5afb2fd6669605d039bf672d93114e05e9"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/gpio-verification.json",
+        "sha256": "b697b2cd08f40b59495676c99c038ea568150021b4b5ed5a34eb606d5e70604b"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/reproducibility.json",
+        "sha256": "d1e37eb01fcd2fd519fa966c9769de07db19e4b0bcda0b040d5ab72a2d176010"
+      }
+    ]
+  },
+  "source_drift": [],
+  "ownership": "Parent-authorized separate CASE stream; no firmware changes inwave010, MAIN/Touch/index preserved",
+  "license_lineage": "Same locked source/native and compiler/runtime provenance aswave009; source-derived extendedasm/barriers retained, no prebuilt firmware/runtime blob or upstream behavior fix",
+  "scripts": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/build.py",
+      "sha256": "c0bdddc78bf33c765fd89b991defd17cf17944b23f014c7151f297792d489813"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/verify_clang_profile.py",
+      "sha256": "2a1d267720f91cce5bb295d42dfc3cc53c09c56520798e122a0a70cf1564fb71"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/verify_clang_contracts.py",
+      "sha256": "835aa5f135df34306991fa7baa70e1c879c4167e545ebcb2369ee15428e4f01c"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/verify_clang_frame.py",
+      "sha256": "662c0382918008c12775efef88d497d6bbc8c4ab093e42bf3c794cec078edb8d"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/verify_clang_flash_provider.py",
+      "sha256": "1f6a53ac8949e681deb6f1fc073c367e563f94d6a222eb26dff5a82f974a0302"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/verify_reset.py",
+      "sha256": "c2c8f351b69cb9299aca9cc37251e988285a89ba0858119d5728a904d7ccac35"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/verify_memory.py",
+      "sha256": "a009795cbfc0e27da379eea0e81cfb696de0c53fa92090d7095ffc79b664958a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/verify_interrupts.py",
+      "sha256": "fa7b40a7f7083cccedacdaab77e1f659f76fe1b1554aede6234e30793cac5ea5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/verify_gpio.py",
+      "sha256": "097cd048d4b77d9e2c299c12d0c5cb83fef34e45f52dc2365c04e8db3b1fce34"
+    }
+  ],
+  "component_acceptance_gates": {
+    "reset_ABI_GPIO_interrupt_software_domains": "PASS bounded domains only",
+    "physical_IRQ_FIFO_GPIO_scheduler": "requires hardware",
+    "whole_body_computed_roots_ambientstack_exactplacement": "unresolved",
+    "byte_equality": "not met",
+    "accepted_images": "0/6",
+    "workflow": "G1passed;G2-G6not_run unchanged"
+  },
+  "next_critical_path_task": "Inspect current CASE native/source behavior frontiers and original ArmCompiler6/armlink access/recipe evidence. Further source work must remain component-focused; compiler/profile experiments alone cannot establish native byte equality.",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

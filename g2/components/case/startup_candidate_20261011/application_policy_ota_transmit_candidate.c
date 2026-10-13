@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08002744 OTA packet send and optional framed response.
@@ -10,7 +11,6 @@ extern void case_boot_sensor_post_transmit(void); /* 0x6c80 */
 extern uint32_t case_boot_sensor_finish_guard(uint32_t,const uint8_t *,uint32_t,uint32_t); /* 0x63ec */
 extern uint32_t case_policy_sensor_shutdown(uint32_t); /* 0x5f00 */
 extern uint32_t case_policy_sensor_divide(uint32_t,uint32_t); /* 0x0160 */
-extern uint32_t case_policy_log(uint32_t); /* 0x9170 */
 extern void log_hex_buffer(const uint8_t *,uint32_t); /* 0x67c8 */
 static uint32_t sensor_flags(uint32_t d){volatile const uint32_t *s=(volatile const uint32_t *)(uintptr_t)(d+0x88u);return s[0u]|s[1u];}
 uint32_t case_policy_ota_transmit(uint32_t channel,const uint8_t *packet,uint32_t count,uint32_t option)

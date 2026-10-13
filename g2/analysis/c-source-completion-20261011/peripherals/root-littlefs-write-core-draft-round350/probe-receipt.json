@@ -1,0 +1,20 @@
+{
+  "status": "PASS_ENTIRE_SELECTED_TU_WRITE_CORE_M55_CONTROLLED_BACKENDS",
+  "native_comparisons": 148,
+  "assertion_boundary_cases": 4,
+  "candidate_sha256": "e6f9da84722cf3fea9fa482cae9da0c714b52edcd8c5721ecbc8448147494bbd",
+  "controlled_lower_backends": 3,
+  "checks": [
+    "Fullwritecore/flagreads/appendposition/filemax/wrappedaddition",
+    "Flush0/nonzeroandsignedwriteerrors/ERREDclearing",
+    "Gapzerobyteandremainingbufferpointerword/positionadvance/abort",
+    "Exactasserttext/source/3659boundary",
+    "Entire4KiBfixture/SP/R4-R11/caller16byteguard"
+  ],
+  "selected": false,
+  "limits": [
+    "Flush/flushedwrite/errorhelpercontrolled;connectedfilesystemengineunqualified",
+    "Assertionsstoppedbeforeerrorhelperexecution",
+    "No completeimage/layout/hardwareclaim"
+  ]
+}

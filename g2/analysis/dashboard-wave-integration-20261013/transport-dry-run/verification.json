@@ -1,0 +1,89 @@
+{
+  "verified_utc": "2026-10-13T16:58:19.300620+00:00",
+  "status": "LOCAL_WAVE_HANDOFF_VERIFIED_TRANSPORT_BLOCKED",
+  "wave_id": "root-apollo-main-round362-layer-buffer",
+  "goal_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "wave_completed_utc": "2026-10-13T16:55:02.529094+00:00",
+  "source_snapshot_id": "round362-e970ba8e7bb848f2",
+  "wave_path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/dashboard-wave/wave.json",
+  "wave_sha256": "79a0d92dc95851cf166f9d4cca84eb1b14c1e874833947411e9c0acc7ec8d86c",
+  "reference_receipt_hashes_checked": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-lvgl-layer-buffer-round362/receipt.json",
+      "sha256": "7efaf9be0a97a82a2681a6336f853c1e0827a7089f3d4345b66a1aadf525bd03"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-lvgl-layer-buffer-round362/root-source-audit.json",
+      "sha256": "243548d8f0b83da162cd18afeddc2dcf45c593ca00cb3affc7003d0d7682b43d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/admission-receipt.json",
+      "sha256": "8437573d1ac611fbafcdd9f921553128d5a7307a9b3eb86ae2d2dcd4ed04942a"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/dashboard-wave/source-object-dependency-audit.json",
+      "sha256": "1af85be9c8b0922c24e2be6ae5e066dbe64a8f24305835b79829f315db169823"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/probe-receipt.json",
+      "sha256": "dfe2b523efc9fc31fc944096a54da13df117191baa411f350308f7116a8d9765"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/interface-reconciliation-receipt.json",
+      "sha256": "0dd11af9fd215ce7670e0c44c58d06d65a6020b1a9186635985d7087865fa2ad"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/dashboard-wave/import-delta.json",
+      "sha256": "773211a072aea4d91f4d2ae9e14f6c6c24e912dbb7dd5fd1838387bdf9db3313"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/dashboard-wave/repository-state.json",
+      "sha256": "cdfe479867ceacc96b9d7d3df88f7955c1b5d5074cb825466cf89879d1d44f07"
+    }
+  ],
+  "head_at_completion": "2359c6906032d9ee59c16c7b8c2ce56fda50c1c0",
+  "human_authorization_evidence": {
+    "tool": "mcp__codex_app__read_thread",
+    "user_message_id": "01a1362c-5cdb-77f3-82df-3b052043d99b",
+    "answer": "Authorize one parent notification",
+    "scope": "one notification only"
+  },
+  "actual_notification_call": {
+    "tool": "mcp__codex_app__send_message_to_thread",
+    "call_id": "exec-6933e45f-c89b-4491-b87b-2d217bc11f52",
+    "target_thread_id": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "status": "failed",
+    "error": "Some requested entity was not found: thread not found",
+    "failure_receipt_path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/dashboard-wave/notification-result.json",
+    "failure_receipt_sha256": "501aa1cc2ace700a592518b6fe05d730cb473f27d6bf7597605389fc6433e569",
+    "delivered": false,
+    "retry_or_alternate_route_attempted": false
+  },
+  "local_goal_capability_report": {
+    "present": [
+      "send_message_to_thread",
+      "read_thread",
+      "native Page read/edit/visualization",
+      "Page-reference tools"
+    ],
+    "absent": [
+      "Library materialization",
+      "Library upload/finalize/replacement"
+    ],
+    "export_tested": false,
+    "export_blocker": "No callable Library export/materialization route in owner context; no alternate/direct endpoint attempted"
+  },
+  "publication": {
+    "state": "pending",
+    "validated_snapshot_id": null,
+    "library_versions_verified_for_wave": false,
+    "parent_snapshot_hash_page_readback_matched": false,
+    "end_to_end_verified": false,
+    "schedule_created": false
+  },
+  "boundaries": [
+    "Reference receipts checked only; no source behavior rerun or new implementation",
+    "Source hashes describe owner completion snapshot; ongoing source edits are separate",
+    "Resolve a supported parent task address before any new notification authorization/retry; no spoofed/remapped recipient or denied-phase work"
+  ]
+}

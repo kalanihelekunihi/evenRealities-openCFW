@@ -1,0 +1,75 @@
+{
+  "status": "PASS_ITALIC_AND_CACHE_NULL_FATAL_BOUNDARIES",
+  "comparisons": 2,
+  "results": [
+    {
+      "logger": [
+        3,
+        "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c",
+        216,
+        "lv_freetype_italic_transform",
+        "Asserted at expression: %s (%s)",
+        "face != NULL",
+        "NULL pointer"
+      ],
+      "fatal_store": [
+        4294967295,
+        0
+      ],
+      "scope": "execution stopped immediately before native-fatal store"
+    },
+    {
+      "logger": [
+        3,
+        "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c",
+        216,
+        "lv_freetype_italic_transform",
+        "Asserted at expression: %s (%s)",
+        "face != NULL",
+        "NULL pointer"
+      ],
+      "fatal_store": [
+        4294967295,
+        0
+      ],
+      "scope": "execution stopped immediately before native-fatal store"
+    },
+    {
+      "logger": [
+        3,
+        "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\cache\\lv_cache.c",
+        72,
+        "lv_cache_destroy",
+        "Asserted at expression: %s (%s)",
+        "cache != NULL",
+        "NULL pointer"
+      ],
+      "fatal_store": [
+        4294967295,
+        0
+      ],
+      "scope": "execution stopped immediately before native-fatal store"
+    },
+    {
+      "logger": [
+        3,
+        "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\cache\\lv_cache.c",
+        72,
+        "lv_cache_destroy",
+        "Asserted at expression: %s (%s)",
+        "cache != NULL",
+        "NULL pointer"
+      ],
+      "fatal_store": [
+        4294967295,
+        0
+      ],
+      "scope": "execution stopped immediately before native-fatal store"
+    }
+  ],
+  "ordinary_pointer_words_rebound": 10,
+  "instructions_unchanged": true,
+  "limits": [
+    "Stops before invalid-address store; no hardware fault recovery claim"
+  ]
+}

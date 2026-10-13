@@ -1,0 +1,180 @@
+{
+  "schema": "opencfw-latest-wave-checkpoint-v1",
+  "wave_id": "root-apollo-main-round380-filesystem-unicode",
+  "completed_utc": "2026-10-13T18:31:27.494713+00:00",
+  "target_id": "official-s200-v2.2.6.10",
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "snapshot_id": "round380-4867350b610b1f3a",
+  "source_object_inventory": {
+    "selected_source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+    "sealed_source_sha256": "4867350b610b1f3a8a4fd151302c5627abdee160e02cc1da984dd1f158c32904",
+    "object_path": "g2/build/c-firmware/20261013/peripherals-root-freetype-filesystem-unicode-round380/apollo_main/audio/754-uart_thread_source_candidate-display_lv_init_children.o",
+    "object_sha256": "d780b8056842c9c6b7dc3f2cf28312f5b578f7fb36dbca6e858a6bd4d83497fc",
+    "selected_dependency_count": 54,
+    "stable_top_level_snapshots": 134,
+    "build_counts": {
+      "compiler_settings_receipt": {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/current-dependency-audit.json",
+        "sha256": "d2ee5e6eb6b006e6ea3e3e2db0cc4af2ff52874739228a0a2486523225480e98"
+      },
+      "definitions": 3354,
+      "imports": 763,
+      "import_classification_receipt": {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/dashboard-wave/import-delta.json",
+        "sha256": "4933d41805e3477d0b5c3a2d78b3d83f4292d3fb1ec9a1c1f9bb3141dec51b6a"
+      },
+      "duplicate_strong_symbols": 0,
+      "full_payload_linked": false
+    },
+    "compiler_profile": [
+      "arm-none-eabi",
+      "cortex-m55",
+      "thumb",
+      "c11",
+      "freestanding",
+      "fno-builtin",
+      "O2"
+    ]
+  },
+  "import_inventory": {
+    "scope": "Wave import delta only; remaining763 imports not wholesale classified",
+    "removed_code": [
+      "audio_uart_ft_find_unicode_charmap_52594a",
+      "audio_uart_ft_stream_open_path_5675e8"
+    ],
+    "added_code": [],
+    "other_classes_delta": [],
+    "remaining_imports": 763,
+    "full_import_inventory_owner": "01a120b1-9d22-7596-9ee5-a6d93342c014"
+  },
+  "admitted_functions": [
+    {
+      "address": "0x52594a",
+      "native_bytes": 116,
+      "symbol": "audio_uart_ft_find_unicode_charmap_52594a",
+      "end_exclusive": "0x5259be",
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "address": "0x567734",
+      "native_bytes": 70,
+      "symbol": "audio_uart_ft_lv_fs_stream_io_567734",
+      "end_exclusive": "0x56777a",
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "address": "0x5676f8",
+      "native_bytes": 34,
+      "symbol": "audio_uart_ft_lv_fs_stream_close_5676f8",
+      "end_exclusive": "0x56771a",
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "address": "0x5675e8",
+      "native_bytes": 184,
+      "symbol": "audio_uart_ft_stream_open_path_5675e8",
+      "end_exclusive": "0x5676a0",
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    }
+  ],
+  "bounded_comparisons": {
+    "core": 343,
+    "connected": 343
+  },
+  "typed_data": [
+    "Typed C read/close callback references and authenticated diagnostic strings; no opcode arrays"
+  ],
+  "source_drift": {
+    "export_observed_utc": "2026-10-13T18:36:07.667747+00:00",
+    "selected_source_current_sha256": "4867350b610b1f3a8a4fd151302c5627abdee160e02cc1da984dd1f158c32904",
+    "matches_sealed_wave": true,
+    "continuous_goal": true,
+    "claim_scope": "sealed round380 only; no later source promoted"
+  },
+  "exclusions": [
+    "343 core and343 connected comparisons; uncached LVGL seek/tell/read/close paths execute",
+    "Cached/physical filesystem,pool/kernel/module runtime not proven",
+    "134 stable top-level snapshots;54 selected-TU dependencies independently verified",
+    "0/6 accepted images; source completeness/full payload linkage/layout/byte equality/hardware remain open",
+    "Dashboard inventory/validation/publication/readback pending; sole publisher unchanged",
+    "No raw firmware or source bytes included",
+    "No interval union or global code-only percentage recomputed",
+    "No ABI adapters, pseudocode-only rows, fixtures or stubs admitted by this wave",
+    "Remaining763 imports not wholesale classified"
+  ],
+  "acceptance": {
+    "accepted_images": 0,
+    "total_images": 6,
+    "full_payload_linked": false,
+    "unresolved": [
+      "source completeness",
+      "full payload linkage",
+      "layout",
+      "byte equality",
+      "hardware behavior",
+      "cached and physical filesystem/pool/kernel/module runtime",
+      "inventory interval reconciliation",
+      "dashboard publication/readback"
+    ]
+  },
+  "historical_full_map": {
+    "as_of_utc": "2026-10-13T17:02:21.929738Z",
+    "full_v3_sha256": "c7ac188238981f4c43f0ae096021239e921b5b016b8be2cdfc37b8f4f982e339",
+    "policy": "Full map remains at stated cutoff until data owner reconciles interval evidence; latest wave is a separate checkpoint"
+  },
+  "supporting_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/dashboard-wave/wave.json",
+      "sha256": "3bfb87002c06c9ac17e86ca0c44f3dfcd06e832b91ed6b4d4f5803a2ae7515a8"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/admission-receipt.json",
+      "sha256": "45d3a0310e0c9c89dc1da80a5b54613e0cf132029896fb229f0b33c6c0ca95bb"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/current-dependency-audit.json",
+      "sha256": "d2ee5e6eb6b006e6ea3e3e2db0cc4af2ff52874739228a0a2486523225480e98"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/dashboard-wave/import-delta.json",
+      "sha256": "4933d41805e3477d0b5c3a2d78b3d83f4292d3fb1ec9a1c1f9bb3141dec51b6a"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/dashboard-wave/repository-state.json",
+      "sha256": "68c409e43e7fe3790b6a531794f3399d93e6a73839a95ecb9dc4936adff720c4"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/reporting-authorization.json",
+      "sha256": "144e9fd325f50d5585bb4910fca8b7dd474213dc79349d0302fd73b495b79164"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-filesystem-unicode-round380/receipt.json",
+      "sha256": "7f919f8c749f247a44ce06f7905a483058b479b967a915b245a721070542bd23"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-filesystem-unicode-round380/root-source-audit.json",
+      "sha256": "04d35022338a4808db3cffc199c964e5ee65a170cea8dfcf94c1d460e52c4388"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/admission-receipt.json",
+      "sha256": "45d3a0310e0c9c89dc1da80a5b54613e0cf132029896fb229f0b33c6c0ca95bb"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/probe-receipt.json",
+      "sha256": "aa0c3a95fdf6afeaf0e8248e142957b0b69d263dda0056ece48f23d2cd32d470"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/connected-probe-receipt.json",
+      "sha256": "33fd5bbba6a023de0094afaef85451c0c88a88ab226a591ef6c655997f3a0633"
+    }
+  ],
+  "publication": {
+    "purpose": "private per-wave dashboard dataset",
+    "page_mutation_performed": false,
+    "identity_policy": "Replace this same Library file for subsequent wave checkpoints with expected current version; retain version history"
+  }
+}

@@ -1,10 +1,10 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08007494 through 0x08007548 box idle qualification. This internal
  * path uses 0x08007200's left/right stack pointers and state R4.
  */
 #include <stdint.h>
-extern void case_policy_log(uint32_t message); /* 0x08009170 */
 extern void case_policy_idle_clear(void);       /* 0x08009a14 */
 
 /* 0: 0x7376; 1: 0x75e2; 2: 0x77ae; 3: 0x754a log continuation. */

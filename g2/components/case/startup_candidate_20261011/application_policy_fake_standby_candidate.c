@@ -1,10 +1,10 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x0800738a-0x08007482 dual fake-standby counters. The left and right
  * structures are the two live stack pointers initialized at 0x08007200.
  */
 #include <stdint.h>
-extern void case_policy_log(uint32_t message);
 extern void case_policy_fake_standby_set(uint32_t side); /* 0x08003a00 */
 extern void case_policy_fake_standby_clear(void);       /* 0x080013b8 */
 static uint16_t read16(volatile uint8_t *p)

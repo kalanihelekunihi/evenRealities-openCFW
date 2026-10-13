@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x0800b7ec aging mode entry and exit callback.
@@ -6,7 +7,6 @@
 extern void case_boot_transport_left_aging(uint32_t enabled); /* 0x23f4 */
 extern void case_boot_transport_right_aging(uint32_t enabled); /* 0x24c0 */
 extern uint32_t case_policy_service_idle(void); /* 0xd154 */
-extern uint32_t case_policy_log(uint32_t);
 extern uint32_t case_legacy_logger(const char *,...);
 extern __attribute__((noreturn)) void case_init_display_reset(void); /* 0x502c */
 

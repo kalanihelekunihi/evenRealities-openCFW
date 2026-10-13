@@ -1,0 +1,23 @@
+{
+  "status": "PASS_FULL_298_BYTE_SFNT_PS_LOCATOR",
+  "comparisons": 1280,
+  "controlled_boundaries": [
+    "audio_uart_ft_stream_read_ulong_528ba8",
+    "audio_uart_ft_stream_read_ushort_528b4a",
+    "audio_uart_ft_stream_skip_528914"
+  ],
+  "checks": [
+    "header type rejection",
+    "empty/CID/TYP1/other record scans",
+    "negative/0/1/2/extreme requested index",
+    "wrapped offset/length header adjustment",
+    "all reachable read/skip error positions",
+    "output clear and output writes before error check",
+    "whole1KiB/SP/R4-R11/stackedCID pointer/caller guard"
+  ],
+  "limits": [
+    "Stream read/skip providers controlled; wrapper/buffer ownership qualification pending",
+    "No completeimage/layout/hardware proof"
+  ],
+  "selected": false
+}

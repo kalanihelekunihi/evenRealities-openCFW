@@ -1,0 +1,61 @@
+{
+  "status": "PASS_BOUNDED_FOUR_GENERATED_OBJECT_BOUNDARIES",
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "pinned_vendor_header_sha256": "12402112ee3f37cdd966d758cfcc7c2eee14c1892bbf93674d75a9534bb89cd4",
+  "objects": [
+    {
+      "symbol": "touch_generated_widget_config",
+      "native_start": "0xb0f8",
+      "observed_next_object": "0xb2a8",
+      "observed_bytes": 432,
+      "three_native_record_starts": [
+        "0xb0f8",
+        "0xb188",
+        "0xb218"
+      ],
+      "observed_record_stride": 144,
+      "stock_sha256": "27ef6582ee031179cdfb25d6e091b0be3f869c1ac1e73eb7f58ebaf2ef8022ce",
+      "missing": "Authenticated product option macros and generated field initializer source; observed three-record span alone does not identify conditional vendor layout."
+    },
+    {
+      "symbol": "touch_generated_common_config",
+      "native_start": "0xb2a8",
+      "observed_next_object": "0xb32c",
+      "observed_bytes": 132,
+      "lp_channel_pointer_at": "0xb2b0",
+      "lp_channel_pointer": "0x2000082c",
+      "stock_sha256": "b4ddbec0a11aeb1303b654068b5d29c367719ac5b81bc78be9a9004d24930fb5",
+      "missing": "Authenticated product option macros and generated common-config initializer/source; observed boundary is not a declaration."
+    },
+    {
+      "symbol": "touch_generated_internal_context",
+      "native_start": "0x20000c50",
+      "next_named_lock": "0x20000cc8",
+      "available_gap_bytes": 120,
+      "native_write_seen_through_offset": 117,
+      "missing": "Product generated type/field-option declaration or authenticated symbol extent and zero-scatter placement."
+    },
+    {
+      "symbol": "touch_generated_lp_history",
+      "native_start": "0x2000065e",
+      "next_named_object": "0x20000808",
+      "available_gap_bytes": 426,
+      "vendor_element_type": "uint16_t",
+      "nominal_four_slot_words": 212,
+      "nominal_four_slot_bytes": 424,
+      "missing": "Product generated array dimension or authenticated symbol extent; 426-byte gap cannot be used as allocation count."
+    }
+  ],
+  "source_search": {
+    "repository_cycfg_capsense_files": [],
+    "reference_design_modus_files": [
+      "third-party/reference/infineon-msclp-demo/templates/TARGET_CY8CKIT-040T/config/design.modus",
+      "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/infineon-cy8cproto-040t/config/design.modus"
+    ]
+  },
+  "limits": [
+    "The observed ROM spans and pointer values are locked-product byte facts. Adjacency does not prove symbol size or optional field layout.",
+    "The vendor v6 source proves LP history element width and a consumer advancing one element per scanned slot per frame, not generated history capacity.",
+    "No generated product cycfg_capsense.c/.h, product design.modus, or official Touch linker map was found in the checked repository/workspace sources."
+  ]
+}

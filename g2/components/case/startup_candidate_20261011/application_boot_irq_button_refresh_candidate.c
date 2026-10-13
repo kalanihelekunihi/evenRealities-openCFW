@@ -3,7 +3,7 @@
  * The 0x9ebc sampler is source-owned as case_init_read_product_byte; all RAM
  * state and literals below are read from the native branch graph.
  */
-#include <stdint.h>
+#include "case_side_state_contract.h"
 extern int32_t case_init_read_product_byte(uint32_t *out); /* 0x9ebc */
 extern uint32_t case_legacy_logger(const char *format,...); /* 0x9170 */
 extern uint32_t case_init_pmic_write(uint32_t reg,uint32_t value); /* 0x39c8 */

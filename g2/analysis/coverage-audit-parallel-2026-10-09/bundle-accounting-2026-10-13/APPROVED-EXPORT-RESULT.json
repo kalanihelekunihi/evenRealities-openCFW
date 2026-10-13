@@ -1,0 +1,60 @@
+{
+  "status": "APPROVED_UPLOAD_BLOCKED_PREPARATION_UNAVAILABLE",
+  "ownerApprovalReceived": true,
+  "supportedPreparedHelperAttempts": 1,
+  "automaticApprovalDenied": false,
+  "exactBlocker": "library upload failed: Library prepare_uploads is not available",
+  "transferStarted": false,
+  "uploadOccurred": false,
+  "alternateRouteUsed": false,
+  "requestedFiles": [
+    {
+      "localPath": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/bundle-accounting-2026-10-13/full-v3.json",
+      "filename": "full-v3.json",
+      "bytes": 11511313,
+      "sha256": "c7ac188238981f4c43f0ae096021239e921b5b016b8be2cdfc37b8f4f982e339",
+      "schema": "opencfw-bundle-accounting-v3",
+      "library_file_id": null,
+      "file_id": null,
+      "version": null
+    },
+    {
+      "localPath": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/bundle-accounting-2026-10-13/compact-v3-packed.json",
+      "filename": "compact-v3-packed.json",
+      "bytes": 192348,
+      "sha256": "7795ccb747f8d66836db03428847df04acb07201631c081636c72dff5a2c8559",
+      "schema": "opencfw-v3-gzip-length-envelope",
+      "library_file_id": null,
+      "file_id": null,
+      "version": null
+    },
+    {
+      "localPath": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/bundle-accounting-2026-10-13/resource-expansion/resources-full.json",
+      "filename": "resources-full.json",
+      "bytes": 1471999,
+      "sha256": "e05b786a0c550fe9633e818b947e889b4a7bfba667bf581bd79dedbf8d5a47fb",
+      "schema": "opencfw-resource-expansion-v1",
+      "library_file_id": null,
+      "file_id": null,
+      "version": null
+    },
+    {
+      "localPath": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/bundle-accounting-2026-10-13/resource-expansion/dashboard-resources.json",
+      "filename": "dashboard-resources.json",
+      "bytes": 141596,
+      "sha256": "ce73ede9fbfaa59f331c6b633dd14a03cfee5d6af550a2b1fbe4bfc8ff81f462",
+      "schema": "opencfw-resource-expansion-v1",
+      "library_file_id": null,
+      "file_id": null,
+      "version": null
+    }
+  ],
+  "existingLibraryIdentityPreserved": {
+    "library_file_id": "libfile_3d9914466c448191be6edc3918867204",
+    "file_id": "file_00000000430c81f7acf675fc5d259652",
+    "version": 2,
+    "filename": "expanded-dashboard-data.json",
+    "reason": "older expanded work evidence is distinct from v3 bundle accounting; preserved rather than replaced"
+  },
+  "remediation": "Restore prepared Library upload availability to the supported helper; no repeat write performed."
+}

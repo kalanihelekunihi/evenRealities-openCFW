@@ -1,0 +1,143 @@
+{
+  "schema": "opencfw-completed-wave-v1",
+  "wave_id": "root-apollo-main-round396-mac-path-search",
+  "component": "apollo_main",
+  "status": "completed",
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "target_id": "official-s200-v2.2.6.10",
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "source_snapshot_id": "round396-6a4894d035b07ca7",
+  "completed_utc": "2026-10-13T20:18:10.059783+00:00",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-mac-path-search-round396/receipt.json",
+      "sha256": "0e3c0cdcd032a594f9b2882e3c2d123383878771366e536de465fead7e35ec54"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-mac-path-search-round396/root-source-audit.json",
+      "sha256": "509ee75efae55c7fda2cac6368294463d1568b3a1b4c36cf0cd1fabb77592e60"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-path-search-round396/admission-receipt.json",
+      "sha256": "8e5c0a95659c1a4111b14d62745fd38a91c3ead6ec03c50f9ea40f64b19dead7"
+    }
+  ],
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-path-search-round396/current-dependency-audit.json",
+      "sha256": "9468ea07a922dd9bcea9be7f5071e3b7f12d8f594544015a56d04b8bc6073cdb"
+    }
+  ],
+  "implementation_delta": {
+    "actual_c_bodies": [
+      {
+        "symbol": "audio_uart_ft_mac_path_search_526356"
+      }
+    ],
+    "abi_adapters": [],
+    "typed_data": [],
+    "pseudocode_only": [],
+    "fixtures_or_stubs": []
+  },
+  "build": {
+    "compiler_settings_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-path-search-round396/current-dependency-audit.json",
+      "sha256": "9468ea07a922dd9bcea9be7f5071e3b7f12d8f594544015a56d04b8bc6073cdb"
+    },
+    "definitions": 3391,
+    "imports": 763,
+    "import_classification_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-path-search-round396/dashboard-wave/import-delta.json",
+      "sha256": "7ee3c250d21349ca83eb59227e7bf0d249db1c07b68a9e3d903587fbaf8c474c"
+    },
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false
+  },
+  "tests": {
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-path-search-round396/probe-receipt.json",
+        "sha256": "83cf06024b70589f81d7a0782a1e05e8248de7980627d5429015e7967db97bda"
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-path-search-round396/qualification-input-hashes.json",
+        "sha256": "f0181db61735c4931fdd8175f4f78355bb5af2b4d86d6234e483af20b77623a4"
+      }
+    ],
+    "expected_failures": [],
+    "controlled_boundaries": [
+      "nine-rule candidate generation",
+      "stream new/read-resource/close",
+      "memory free callback"
+    ]
+  },
+  "address_resource_delta_receipts": [],
+  "limitations": [
+    "Connected candidate generation and path-open/read graph not yet qualified",
+    "Sort core and initialized runtime/layout/byte/hardware unproven",
+    "134 top-level snapshots and54 selected-TU dependencies checked",
+    "0/6 accepted images; runtime/data/layout/byte equality/hardware open",
+    "Dashboard checkpoint publication separate from interval reconciliation"
+  ],
+  "next_goal": {
+    "owner": "existing implementation goal",
+    "reason": "Qualify nine-rule dispatcher and connected Mac path graph",
+    "exit_criteria": [
+      "Complete native/C comparison",
+      "Admission and terminal current-source/dependency audit"
+    ],
+    "missing_input_or_authorization": null,
+    "ranked_gaps": [
+      "Nine-rule candidate dispatcher110 bytes",
+      "Connected path-open/AppleDouble resource graph",
+      "Sort core704 bytes and helper graph",
+      "Initialized runtime and remaining image gates"
+    ]
+  },
+  "dashboard": {
+    "state": "awaiting_inventory",
+    "data_owner_thread_id": "01a120b1-9d22-7596-9ee5-a6d93342c014",
+    "publisher_thread_id": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "validated_snapshot_id": null,
+    "publish_receipts": [],
+    "readback_verified": false,
+    "snapshot": {
+      "full": {
+        "library_file_id": "libfile_3d9914466c448191be6edc3918867204",
+        "version": null,
+        "sha256": null
+      },
+      "compact": {
+        "library_file_id": "libfile_e7f198676fe481918961cdfb1a1eb33f",
+        "version": null,
+        "sha256": null
+      },
+      "validation": {
+        "status": "pending",
+        "receipt_path": null,
+        "receipt_sha256": null
+      },
+      "page_id": "page_e5199b4adeb081918164ac6acd8e4b04",
+      "page_sequence": null
+    }
+  },
+  "repository": {
+    "root": "/Users/kalani/Repo/evenRealities-openCFW",
+    "head_revision": "2359c6906032d9ee59c16c7b8c2ce56fda50c1c0",
+    "dirty_state_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-path-search-round396/dashboard-wave/repository-state.json",
+      "sha256": "c196d433d125ce4b09754e4e597781b84e0d4cb91ff209523e6971fe28b825df"
+    },
+    "index_unchanged_by_wave_reporting": true
+  },
+  "reporting_route": {
+    "coordinator": "01a1228e-2121-71b9-a9df-9eede6787020",
+    "authorization_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/reporting-authorization.json",
+      "sha256": "144e9fd325f50d5585bb4910fca8b7dd474213dc79349d0302fd73b495b79164"
+    },
+    "scope": "completed-wave metadata only until revoked",
+    "publisher": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "publication_verified": false
+  }
+}

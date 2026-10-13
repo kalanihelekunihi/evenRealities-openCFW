@@ -1,0 +1,107 @@
+{
+  "status": "COHERENT_FORMATTER_PACK_QUALIFIED_ADMISSION_REJECTED_EXISTING_DIVIDER",
+  "selected_prefix_sha256": "057ab426c3c7b7e8e18695cec8eb6b52bb86ad783d195886e4d8b124badf6d56",
+  "candidate_sha256": "159a6cc68b7be221e45592abb1092a90c8506f19f6144d194c293374a4898ff1",
+  "source_includes": [
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/adddf3.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/ashldi3.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/comparedf2.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/divdf3.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixdfsi.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/fixunsdfsi.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatsidf.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/floatunsidf.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mode.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/lshrdi3.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/muldf3.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/subdf3.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/truncdfsf2.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivdi3.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c",
+    "third-party/upstream/llvm-compiler-rt-format-20.1.8/umoddi3.c"
+  ],
+  "compiler_flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=softfp",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-I",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate"
+  ],
+  "builder_changed": false,
+  "new_glob_source": false,
+  "all_arithmetic_bodies_C": true,
+  "inline_asm": "RealEABIquotient/remainder adapter only; no opcodearrays/placeholders",
+  "selected": false,
+  "production_modified": false,
+  "remaining": [
+    "CoherentactualselectedTU text/64bit/float qualification",
+    "Currentdependency snapshots/admission/Mainbuildaudit",
+    "FPstatus/rounding/nativecodeidentity/layout/hardwaregates"
+  ],
+  "round": 357,
+  "text_execution": {
+    "status": "PASS_COMPLETE_SELECTED_TU_FORMATTER_32BIT_TEXT_FEATURES_M55",
+    "native_comparisons": 1128,
+    "per_entry": {
+      "snprintf": 564,
+      "vsnprintf": 564
+    },
+    "format_fixtures": 47,
+    "candidate_sha256": "159a6cc68b7be221e45592abb1092a90c8506f19f6144d194c293374a4898ff1",
+    "controlled_backends_executed": 0,
+    "actual_numerical_providers_available_no_stubs": true,
+    "checks": [
+      "32bitINT_MIN/unsignedmax/charshortlongsizeptrdiff/pointers/baseflags",
+      "Widthprecisionincludingstarandnegativevalues",
+      "Stringprecision/truncation/nulloutput/zeroandUINT32_MAXcapacity",
+      "NestedVandpV/unsupportedformatliteralbehavior",
+      "Actualnativeandfullsourceformatterhelpers/callbacksexecute",
+      "Whole4KiBfixture/SP/R4-R11/caller64byteargsandguard"
+    ],
+    "selected": false,
+    "limits": [
+      "Floatand64bitformatsqualifiedinseparateprobe_float_m55.py",
+      "Completeconfig/ROMliterals/arithmeticprovidersstillopen",
+      "No completeimage/layout/byteidentity/hardwareclaim"
+    ]
+  },
+  "float_execution": {
+    "status": "PASS_COMPLETE_SELECTED_TU_FORMATTER_AND_NUMERICAL_PROVIDERS_M55",
+    "native_comparisons": 816,
+    "per_entry": {
+      "snprintf": 408,
+      "vsnprintf": 408
+    },
+    "format_fixtures": 102,
+    "candidate_sha256": "159a6cc68b7be221e45592abb1092a90c8506f19f6144d194c293374a4898ff1",
+    "controlled_backends_executed": 0,
+    "actual_compiler_rt_arithmetic_executes": true,
+    "ordinary_pointer_bindings": "oracle-bindings.json:two code/three literal-datapointers; instructionbytesunchanged",
+    "checks": [
+      "Signed/unsigned64includingextremes/alignedvarargsandmixed32/64",
+      "Fixed/exponential/general/upper/defaultandexplicitprecision",
+      "Zero/signedzero/negative/small/large/inf/nan",
+      "Capacity0/1/8/64andwhole4KiBfixture",
+      "SP/R4-R11/D8-D15/caller96byteargsandguard"
+    ],
+    "selected": false,
+    "limits": [
+      "DefaultFPSCR input0; exceptionflags/otherroundingmodesunqualified",
+      "Compiler-rt is not original IAR arithmetic identity orbyteequality",
+      "No completeimage/layout/hardwareclaim"
+    ]
+  },
+  "admission_rejection": "__aeabi_uldivmod alreadydefinedbyactualselecteddivision_support.c; duplicateadapter mustberemoved",
+  "baseline_build": "peripherals-root-lvgl-full-formatter-round357:3258 definitions/766 imports/134 stable snapshots;noformatteradmission"
+}

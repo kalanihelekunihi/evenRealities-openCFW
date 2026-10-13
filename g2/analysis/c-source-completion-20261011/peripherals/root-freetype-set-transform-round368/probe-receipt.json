@@ -1,0 +1,20 @@
+{
+  "status": "PASS_FULL_SET_TRANSFORM_CONNECTED_REAL_COPY",
+  "comparisons": 480,
+  "controlled_callees": 0,
+  "actual_helpers": [
+    "native/source aligned forward copy"
+  ],
+  "checks": [
+    "NULL face/matrix/vector",
+    "identity/shear/zero/signed extrema",
+    "matrix/vector overlap with internal fields",
+    "native staged copy and read order",
+    "flags reset and bits1/2",
+    "whole2KiB/SP/R4-R11/caller guard"
+  ],
+  "limits": [
+    "No full-image/layout/hardware proof"
+  ],
+  "selected": false
+}

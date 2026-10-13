@@ -1,0 +1,21 @@
+{
+  "status": "PASS_FULL_NODE_COMPARATOR_CONNECTED_REAL_STRING_COMPARE",
+  "comparisons": 567,
+  "controlled_callees": 0,
+  "actual_helpers": [
+    "lv_string_compare",
+    "font_path_compare"
+  ],
+  "checks": [
+    "mode then style ordering",
+    "unsigned byte fields",
+    "empty equal prefix high-byte and long strings",
+    "sign normalization",
+    "whole2KiB/SP/R4-R11/caller guard"
+  ],
+  "selected": false,
+  "limits": [
+    "Volatile asynchronous field mutation not dynamically injected",
+    "No image/layout/hardware proof"
+  ]
+}

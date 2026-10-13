@@ -1,0 +1,31 @@
+{
+  "status": "THREE_BOUNDED_PROVIDERS_TERMINAL_BUILD_AND_AUDIT_COMPLETE",
+  "session_id": 65224,
+  "source_frozen": false,
+  "remaining_component_work": [
+    "terminal build",
+    "current source/object/dependency audit"
+  ],
+  "next_direct_code_gaps": [
+    "memory allocator5676a0",
+    "library constructor5274b2",
+    "memory destructor5676c6",
+    "default module registration5242fc",
+    "face transform525444",
+    "FT_New_Face525ade",
+    "FT_Done_Face526814"
+  ],
+  "accepted_complete_images": 0,
+  "terminal_audit": {
+    "status": "PASS_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+    "snapshots": 134,
+    "definitions": 3318,
+    "imports": 766,
+    "duplicate_strong_symbols": 0,
+    "artifact_hashes_checked": 6,
+    "builder_hash_checked": true,
+    "limits": [
+      "Full coverage/layout/byte equality/hardware unproven."
+    ]
+  }
+}

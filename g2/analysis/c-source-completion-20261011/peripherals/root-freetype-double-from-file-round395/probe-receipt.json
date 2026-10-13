@@ -1,0 +1,23 @@
+{
+  "status": "PASS_DOUBLE_FROM_FILE_WRAPPER_CONTRACT",
+  "comparisons": 33,
+  "native_bytes": 64,
+  "native_entry": "0x528802",
+  "controlled_boundaries": [
+    "stream-new path opener",
+    "AppleDouble reader",
+    "stream-free"
+  ],
+  "checks": [
+    "FT_Open_Args pathname flag and pointer",
+    "stream-new failures",
+    "reader status/offset",
+    "stream close exactly once on success path",
+    "whole4KiB/R0/SP/R4-R11/caller guard"
+  ],
+  "limits": [
+    "Connected path-open/AppleDouble stream graph not qualified by this wrapper probe",
+    "Parent Mac path search and runtime/layout/byte/hardware unproven"
+  ],
+  "selected": false
+}

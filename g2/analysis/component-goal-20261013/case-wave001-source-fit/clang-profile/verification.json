@@ -1,0 +1,28 @@
+{
+  "status": "PASS_BOUNDED_CASE_SOURCE_PROFILE",
+  "elf_sha256": "5413b62e4edf781eb2d02bc1b97b7be5268d3571533e0f07cbad84c9837f7965",
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "stock_payload_bytes": 55752,
+  "source_load_span_bytes": 63868,
+  "difference_from_stock": 8116,
+  "known_native_pointer_roots_present": 39,
+  "vector_words": 46,
+  "typed_vector_entries": 14,
+  "reset_entry": "0x8000145",
+  "CRT_bytes": 420,
+  "CRT_initial_fill_cases": [
+    0,
+    165,
+    255
+  ],
+  "formatter_native_C_cases": 1149,
+  "source_format_count": 193,
+  "native_caller_format_count": 116,
+  "harness_sha256": "ea8b786ce50a021105a737fdeadd3f59975992e03f3865bafd15909404a04ae8",
+  "undefined_symbols": [],
+  "limits": [
+    "Known39 roots and14 vector entries, not full computed-pointer or native-body coverage.",
+    "Different compiler/optimized layout requires full ambient stack, ABI and peripheral qualification; bounded tests are not firmware-ready.",
+    "No stock package equality, hardware execution or workflow G2-G6 promotion."
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "schema": "opencfw-latest-wave-checkpoint-v1",
+  "wave_id": "root-apollo-main-round383-macbinary-wrapper",
+  "completed_utc": "2026-10-13T19:01:21.621579+00:00",
+  "target_id": "official-s200-v2.2.6.10",
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "snapshot_id": "round383-552b425d6a853e31",
+  "source_object_inventory": {
+    "selected_source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+    "sealed_source_sha256": "552b425d6a853e3187fff486cd13d3349c303d68a74b40f0a9cad45728571644",
+    "object_path": "g2/build/c-firmware/20261013/peripherals-root-freetype-macbinary-wrapper-round383/apollo_main/audio/754-uart_thread_source_candidate-display_lv_init_children.o",
+    "object_sha256": "fcf93b0cea50d455e8030be8cb3bddc216f67616105116041d79c6f27becde60",
+    "selected_dependency_count": 54,
+    "build_counts": {
+      "compiler_settings_receipt": {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/current-dependency-audit.json",
+        "sha256": "37a3ecf09368bc8a8e838d0b7466245fb2ef57a864b53d798b8e108732d98e72"
+      },
+      "definitions": 3368,
+      "imports": 762,
+      "import_classification_receipt": {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/dashboard-wave/import-delta.json",
+        "sha256": "97871aba2641a0db33e5683f99dd44a605a4d73235eaafb259004526d6b65812"
+      },
+      "duplicate_strong_symbols": 0,
+      "full_payload_linked": false
+    },
+    "compiler_profile": [
+      "arm-none-eabi",
+      "cortex-m55",
+      "thumb",
+      "c11",
+      "freestanding",
+      "fno-builtin",
+      "O2"
+    ]
+  },
+  "import_inventory": {
+    "removed_code": [
+      "audio_uart_ft_load_mac_face_526452"
+    ],
+    "added_code": [
+      "audio_uart_ft_read_mac_path_526356",
+      "audio_uart_ft_read_mac_resource_5261ac"
+    ],
+    "classification_basis": "Exact admitted native bodies/direct callee joins; remaining imports not wholesale classified"
+  },
+  "admitted_functions": [
+    {
+      "symbol": "audio_uart_ft_read_macbinary_5262ac",
+      "address": "0x5262ac",
+      "end_exclusive": "0x526356",
+      "native_bytes": 170,
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    },
+    {
+      "symbol": "audio_uart_ft_load_mac_face_526452",
+      "address": "0x526452",
+      "end_exclusive": "0x5264a6",
+      "native_bytes": 84,
+      "address_domain": "native Apollo main image virtual address",
+      "qualification": "bounded provider admission; not byte-identical source replacement"
+    }
+  ],
+  "bounded_comparisons": {
+    "native_C": 4160
+  },
+  "typed_data": [],
+  "source_drift": {
+    "export_observed_utc": "2026-10-13T19:02:26.828693+00:00",
+    "selected_source_current_sha256": "552b425d6a853e3187fff486cd13d3349c303d68a74b40f0a9cad45728571644",
+    "matches_sealed_wave": true,
+    "continuous_goal": true,
+    "claim_scope": "sealed round383 only; no later source promoted"
+  },
+  "exclusions": [
+    "Resource/path parser controlled",
+    "No complete runtime/layout/hardware proof",
+    "Resource/path parser controls; no initialized runtime/layout/hardware proof",
+    "134 top-level snapshots and54 selected-TU dependencies checked",
+    "0/6 accepted images; runtime/data/layout/byte equality/hardware open",
+    "Dashboard checkpoint publication separate from interval reconciliation",
+    "No raw firmware/source bytes",
+    "No global interval union or coverage percentage recomputed",
+    "Full import classification owned by data audit track"
+  ],
+  "acceptance": {
+    "accepted_images": 0,
+    "total_images": 6,
+    "full_payload_linked": false,
+    "unresolved": [
+      "source completeness",
+      "full payload linkage",
+      "layout",
+      "byte equality",
+      "hardware behavior",
+      "cached and physical filesystem/pool/kernel/module runtime",
+      "inventory interval reconciliation",
+      "dashboard publication/readback"
+    ]
+  },
+  "historical_full_map": {
+    "as_of_utc": "2026-10-13T17:02:21.929738Z",
+    "full_v3_sha256": "c7ac188238981f4c43f0ae096021239e921b5b016b8be2cdfc37b8f4f982e339",
+    "policy": "Full map remains at stated cutoff until data owner reconciles interval evidence; latest wave is a separate checkpoint"
+  },
+  "supporting_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/dashboard-wave/wave.json",
+      "sha256": "7cbc6be6fd454cee307bc4f0c698063cccbcf7932ac8f053745bfe0c4f13bbda"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-macbinary-wrapper-round383/receipt.json",
+      "sha256": "244dfb95b54aac0f7a7cf7f85a18d82af6b747b6a1eeb52173b079b0934d9fbe"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-macbinary-wrapper-round383/root-source-audit.json",
+      "sha256": "398978e5a1ea3cf8b977de8c978b2240dff69ea0202c2f652cbe8b98fd01862c"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/admission-receipt.json",
+      "sha256": "62f5185f780a01da95cc1365c4a917d9fcb6b6a3cde81e90377415037dd5f927"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/current-dependency-audit.json",
+      "sha256": "37a3ecf09368bc8a8e838d0b7466245fb2ef57a864b53d798b8e108732d98e72"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/dashboard-wave/import-delta.json",
+      "sha256": "97871aba2641a0db33e5683f99dd44a605a4d73235eaafb259004526d6b65812"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/probe-receipt.json",
+      "sha256": "aaca8231d1fc4d7cb0a0cd5f022a6982a9f7422caa49e7acd7f1c9b20c433342"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/qualification-input-hashes.json",
+      "sha256": "324acd6980552c73027b1e431801a672380aefa8f5a6c7e55b3db4d9e9ac607f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/dashboard-wave/repository-state.json",
+      "sha256": "ff7327c4b5dd0884dfc8f3b631e1117e1a0d39b2a9956b2e4a62390802aa155a"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/reporting-authorization.json",
+      "sha256": "144e9fd325f50d5585bb4910fca8b7dd474213dc79349d0302fd73b495b79164"
+    }
+  ],
+  "publication": {
+    "purpose": "private per-wave dashboard dataset",
+    "page_mutation_performed": false,
+    "identity_policy": "Replace this same Library file for subsequent wave checkpoints with expected current version; retain version history",
+    "replaces_checkpoint_wave": "root-apollo-main-round382-stream-primitives-module"
+  }
+}

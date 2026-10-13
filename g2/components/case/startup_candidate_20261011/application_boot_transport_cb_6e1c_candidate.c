@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08006e1c transport event worker: startup signals and full
@@ -14,7 +15,6 @@ extern uint32_t case_policy_send_probe(uint32_t,const uint8_t *,uint32_t,uint32_
 extern uint32_t case_policy_ota_transmit(uint32_t,const uint8_t *,uint32_t,uint32_t); /* 0x2744 */
 extern uint32_t case_policy_parse_probe(uint32_t); /* 0x1e94 */
 extern uint32_t case_boot_transport_rx_restart(void); /* 0x3b90 */
-extern uint32_t case_policy_log(uint32_t,...); /* 0x9170 */
 extern void case_policy_no_reply_reset(uint32_t,uint32_t); /* 0x9a9c */
 extern void case_init_display_reset(void); /* 0x502c */
 extern void case_boot_transport_event_085c(void); /* 0x085c */

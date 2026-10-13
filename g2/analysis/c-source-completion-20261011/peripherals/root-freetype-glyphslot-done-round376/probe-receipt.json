@@ -1,0 +1,34 @@
+{
+  "status": "PASS_FOUR_GLYPHSLOT_LOADER_BODIES_CONNECTED_REPAIRED_BITMAP",
+  "comparisons": 48,
+  "per_path": {
+    "slot": 32,
+    "done": 8,
+    "reset": 4,
+    "rewind": 4
+  },
+  "actual_helpers": [
+    "repaired bitmap release",
+    "FT memory free",
+    "loader done/reset/rewind",
+    "aligned staged copy"
+  ],
+  "controlled_boundaries": [
+    "driver done-slot callback",
+    "memoryfree callback"
+  ],
+  "checks": [
+    "cached driver memory before callback",
+    "module outlineflag512",
+    "NULL internal and owned bitmap/replacement internal",
+    "loader memory cached across free mutation",
+    "fresh allocation fields each free/clear",
+    "rewind16bitcounts/subglyphcount/36bytecopy",
+    "whole2KiB/SP/R4-R11/caller guard"
+  ],
+  "limits": [
+    "Callbacks controlled; real heap/runtime/module config unproven",
+    "No image/layout/hardware proof"
+  ],
+  "selected": false
+}

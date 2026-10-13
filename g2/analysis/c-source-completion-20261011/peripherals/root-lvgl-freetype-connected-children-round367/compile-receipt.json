@@ -1,0 +1,47 @@
+{
+  "status": "PASS_UNADMITTED",
+  "command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-O2",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/components/audio/uart_thread_source_candidate",
+    "-c",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-freetype-connected-children-round367/combined-unadmitted.c",
+    "-o",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-freetype-connected-children-round367/combined.o"
+  ],
+  "returncode": 0,
+  "stderr": "",
+  "selected_prefix_sha256": "f8b929b9f1d75ae783adca7dd00adb8607c586f092dd02eb1f8f994416934c0b",
+  "bodies": [
+    {
+      "address": "0x52431c",
+      "size": 56,
+      "sha256": "b5b7601a9be9efc68a5b0740025aeb715cd62d308204d546d7942f67eac57ba2"
+    },
+    {
+      "address": "0x4b1fd4",
+      "size": 74,
+      "sha256": "de3e6fec63f450223b44608b52b972dbe2f605157def89e37d91ea02a38e4dfd"
+    },
+    {
+      "address": "0x4d4d6a",
+      "size": 96,
+      "sha256": "c9b2be15b565737d4a93803dcb3f7c43ba2fab8bb07938931d05e72730a1aa88"
+    }
+  ],
+  "qualification": "pending",
+  "selected": false,
+  "selected_source_unchanged_during_round366_build": true
+}

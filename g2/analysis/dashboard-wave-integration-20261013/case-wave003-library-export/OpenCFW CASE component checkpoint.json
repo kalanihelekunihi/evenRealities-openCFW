@@ -1,0 +1,229 @@
+{
+  "wave_id": "component-goal-case-wave003-source-profile-qualification",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T19:52:09.765655+00:00",
+  "status": "COMPLETED_BOUNDED_SOURCE_PROFILE_QUALIFICATION_WAVE",
+  "attempt_directory_note": "Initial source-fit attempt001 reserved before ABIfix wave002; completed profile receives monotonic canonical wave003 ID.",
+  "ownership": "Parent-authorized separate component stream; MAIN current wave reserves only Apollo MAIN/FreeType. Separate CASE outputs and current manifest; historical selected receipts/archive preserved.",
+  "functions": [],
+  "source_delta": "No further CASE firmware-source change after wave002; adds isolated source profile builders and genuine compiler runtime support.",
+  "source_snapshot_reference": {
+    "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/wave.json",
+    "sha256": "76625ec34369d4fb3e2d4b1783237ef137f0b104c5adc718d18a4b52d277cdf3"
+  },
+  "new_source_inputs": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/build.py",
+      "sha256": "8b933eabc19ee2369e8606abb03a3181ff828bd87d9232e49a0ee03f9a7bdf41",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/sealed-inputs/build.py"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/build_clang_profile.py",
+      "sha256": "11c0f31a76641affce1be2784291e2b5496340a6b9aeebea6ff26ae59b9a4ed1",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/sealed-inputs/build_clang_profile.py"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/compiler_memory.c",
+      "sha256": "7aac52ee209a471f253487f51988f6b4a79a81a96a5857b29ab3ef8c32da9e90",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/sealed-inputs/compiler_memory.c"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/layout.ld",
+      "sha256": "e703433fc82479744ec691c4a5cbb0611f3ae2a98d913926c071d953c9421430",
+      "sealed_path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/sealed-inputs/layout.ld"
+    }
+  ],
+  "build": {
+    "best_profile": "Pinned current Clang Oz, two documented divmod-introducing units atOs, sectionGC and39knownnative roots",
+    "C_units_compiled": 401,
+    "undefined_symbols": [],
+    "best_ELF_sha256": "5413b62e4edf781eb2d02bc1b97b7be5268d3571533e0f07cbad84c9837f7965",
+    "source_load_span_bytes": 63868,
+    "locked_payload_bytes": 55752,
+    "over_locked_payload_bytes": 8116,
+    "matched_unoptimized_current_graph_load_bytes": 71728,
+    "reduction_vs_current_Os_noGC_graph_bytes": 7860,
+    "gnu_profile_load_bytes": 65358,
+    "fresh_independent_build_identical": true
+  },
+  "tests": {
+    "known_native_pointer_roots_present": 39,
+    "vector_words": 46,
+    "typed_vector_entries": 14,
+    "native_reset_entry": "0x08000145",
+    "CRT_initialized_bytes": 420,
+    "CRT_fill_cases_per_profile": 3,
+    "optimized_current_graph_call_contract_cases": 1661,
+    "optimized_retained_UART_frame_cases": 4830,
+    "optimized_flash_program_provider_cases": 18,
+    "GNU_profile_formatter_cases": 1149,
+    "GNU_compiler_memory_cases": 765
+  },
+  "runtime_lineage": {
+    "gcc_source_commit": "a05ea1e5ee0867191bb432a84c055be99dbdbc16",
+    "switch_helper_source": {
+      "source": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/gcc-arm14-runtime/libgcc/config/arm/lib1funcs.S",
+      "sha256": "356ccb5aa1fb82e2bbf2f08585e18eb138efcd8a745c12a0e367d935aad29769",
+      "command": [
+        "/tool/bin/arm-none-eabi-gcc",
+        "-mcpu=cortex-m0plus",
+        "-mthumb",
+        "-DL_thumb1_case_sqi",
+        "-DL_thumb1_case_uqi",
+        "-DL_thumb1_case_shi",
+        "-DL_thumb1_case_uhi",
+        "-c",
+        "/repo/g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/gcc-arm14-runtime/libgcc/config/arm/lib1funcs.S",
+        "-o",
+        "/out/compiler_switches.o"
+      ],
+      "object_sha256": "84f57ed23631381034f3793a831a6ffe69173efbad5fdad3508dc67a751650bf",
+      "license": "GPL-3.0-or-later WITH GCC-exception-3.1"
+    },
+    "GCC_notice_and_exception": [
+      {
+        "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/gcc-arm14-runtime/COPYING3",
+        "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+      },
+      {
+        "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/gcc-arm14-runtime/COPYING.RUNTIME",
+        "sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74"
+      },
+      {
+        "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/gcc-arm14-runtime/provenance.json",
+        "sha256": "2fd7db2fe51ef3f6a84652283a1e7c4d5c2dee77af3975447a39a21a198c3d26"
+      }
+    ],
+    "memory_provider_license": "MIT authored byte algorithms, standard valid-buffer nonoverlap domain; no native-body claim.",
+    "original_firmware_provenance_unchanged": true
+  },
+  "source_drift": "All401 current C source and repository dependency hashes verified at seal. Fresh source rebuild at distinct output path has exact ELF hash equality. CASE wave002 source snapshots unchanged.",
+  "acceptance_gates": {
+    "reproducible_source_derived_ELF": true,
+    "known_roots_vectors_CRT_and_bounded_behavior": true,
+    "locked_payload_fit": false,
+    "whole_native_body_and_computed_roots": false,
+    "final_RAM_scatter_and_ambient_stack": false,
+    "byte_identical_bundle": false,
+    "hardware_validated": false
+  },
+  "limitations": [
+    "Best profile remains8116bytes over locked payload; stock occupied length is not a declaration of physical flash capacity.",
+    "Existing6image acceptance count remains0; no changed reference hash, package-size relaxation, blob, opcode-array or trap provider.",
+    "Optimized graph uses startup UART semantic providers; alternate dead HAL/frame names were not artificially retained. Tests normalize4explicit native/source callback identity joins.",
+    "An initial frame harness name mismatch was setup-only and corrected; final4830 retained-provider cases pass.",
+    "Source profiling does not pass workflow G2-G6 or reconcile global map intervals."
+  ],
+  "supporting_receipts": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/build.py",
+      "sha256": "8b933eabc19ee2369e8606abb03a3181ff828bd87d9232e49a0ee03f9a7bdf41"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/build_clang_profile.py",
+      "sha256": "11c0f31a76641affce1be2784291e2b5496340a6b9aeebea6ff26ae59b9a4ed1"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/build-receipt.json",
+      "sha256": "de1327231423a8b20f32296600a627c39bf0d3b1cc674c4741ddc72c43d6249a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/compiler_memory.c",
+      "sha256": "7aac52ee209a471f253487f51988f6b4a79a81a96a5857b29ab3ef8c32da9e90"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/compiler-memory-verification.json",
+      "sha256": "82e2c03b2ab41ff5df3bbd351d0f428cfff3777e7347ae0b03f4f37928fdf799"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/layout.ld",
+      "sha256": "e703433fc82479744ec691c4a5cbb0611f3ae2a98d913926c071d953c9421430"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/verification.json",
+      "sha256": "eb93ed1137dd9aa04638a8bb1c60aac3e48a45c1291c74c89d931b89ecd25b06"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/clang-profile/build-receipt.json",
+      "sha256": "5b2698aa158b89b0c1a333009fac094ce897b5aa54ef2abca0d6a0d8960e7c30"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/clang-profile/verification.json",
+      "sha256": "a8b7684e0974b9347a8d8a2db0a5b622974bc8ea33da8f7199e5e496871c9483"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/clang-profile/case.elf",
+      "sha256": "5413b62e4edf781eb2d02bc1b97b7be5268d3571533e0f07cbad84c9837f7965"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/clang-rebuild/build-receipt.json",
+      "sha256": "ecdd2b58bf7a36f9e218ee0fc77253fb66299a3dbed00ed5307217777c0c025a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/clang-rebuild/case.elf",
+      "sha256": "5413b62e4edf781eb2d02bc1b97b7be5268d3571533e0f07cbad84c9837f7965"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/reproducibility.json",
+      "sha256": "e017275012c670b2eb8e7dbde874081ef55b20b631c9ad6f824e8f73c3c292b9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/clang-contracts.json",
+      "sha256": "caba26c0c6fb9790e40a3906a0b86abe5a3d8ba71b8290672cc0ea9628760f23"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/clang-frame-regression.json",
+      "sha256": "73129406b86c918f7a48a099b448f4f169fc54d06b21eeb1e0a2bd12fadea1c7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/clang-flash-provider-verification.json",
+      "sha256": "088cf08ead2a0fbff823ab0d326a60b6f209b94e0a146670f2890645415b28ca"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/verify.py",
+      "sha256": "cdff8b89cf11ae811ff10604ed91fb9735ab81f4d59e96a25a90ede2635df6be"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/verify_clang_profile.py",
+      "sha256": "3ecc4ae80cc24dfe3b30dd9cbdfd4831ab19c869593afd7bd507102408e36fee"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/verify_clang_contracts.py",
+      "sha256": "77bc0374b76a0568472fee2ffa7b552baec89c99511392f30db9bcb6812f7d53"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/verify_clang_frame.py",
+      "sha256": "619d4e26dfae826316faf862b9c8d6d15ac31a7021389ed26580e01b3e2c2be2"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/verify_clang_flash_provider.py",
+      "sha256": "5e12ad19dde642e003241a8939b5b067d8fdbf98990a34ca56d27e66602af2cd"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/verify_compiler_memory.py",
+      "sha256": "ba4f8a0bbb17737b1a62cdb67592062a0647221e7c4ec8f7c00644e06e9e7f86"
+    }
+  ],
+  "next_critical_path_task": "Qualify producing compiler/linker and native section/ambient stack contracts; reduce the retained source footprint without dropping required bodies/roots. Full native-body census and hardware validation remain separate gates.",
+  "schema": "opencfw-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/wave.json",
+    "sha256": "00cf366fb6a4c75ab426cd204732ca39f60c2cb5acc9f9bd20c8deabcdcd1e1d"
+  },
+  "publication": {
+    "scope": "CASE per-component checkpoint; MAIN and Touch preserved",
+    "interval_promotion": false,
+    "page_publication": "pending parent"
+  },
+  "historical_full_map_cutoff_utc": "2026-10-13T17:02:21.929738Z",
+  "accepted_images": 0,
+  "total_images": 6,
+  "compiled_extent_supplement": {
+    "receipt_path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/extent-supplement.json",
+    "receipt_sha256": "72e20052528cd1815d2749bb330b3f48e592529dbb0f21117394b1d876b61a92",
+    "extent_path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/object-address-extents.json",
+    "extent_sha256": "e943673ad7b06b1e6a49d60d4b07bc6d3f810fd584a8c575723393b0a03e66df",
+    "domain": "compiled object addresses; not native byte joins"
+  }
+}

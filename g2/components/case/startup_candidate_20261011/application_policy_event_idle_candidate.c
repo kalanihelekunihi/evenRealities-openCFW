@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08007b2e-0x08007e90 shared event and idle-standby gate.
@@ -9,7 +10,6 @@ extern void case_policy_event_clear(uint32_t task,uint32_t bits); /* 0x0800a7d2 
 extern void case_policy_event_signal(uint32_t task,uint32_t value); /* 0x0800aaf0 */
 extern void case_policy_fake_standby_clear(void); /* 0x080013b8 */
 extern void case_policy_elapsed(uint32_t *out); /* 0x0800a01e */
-extern void case_policy_log(uint32_t message);
 extern void case_init_pmic_read(uint32_t address,uint8_t *out,uint32_t count);
 extern void case_init_power_set(uint32_t enabled);
 extern void case_init_boost_set(uint32_t enabled);

@@ -1,0 +1,25 @@
+{
+  "status": "PASS_APPLE_RULE_WRAPPER_CONTRACTS",
+  "comparisons": 32,
+  "native_bytes": 56,
+  "native_entries": [
+    "0x528508",
+    "0x528524"
+  ],
+  "controlled_boundaries": [
+    "shared Apple resource parser return/offset"
+  ],
+  "checks": [
+    "null versus valid stream",
+    "magic values 0x51607 and 0x51600",
+    "out pointer reset",
+    "parser status/offset behavior",
+    "whole4KiB/R0/SP/R4-R11/caller guard"
+  ],
+  "limits": [
+    "Shared Apple resource parser remains unresolved",
+    "Parent path search and remaining three table handlers unqualified",
+    "Runtime/layout/byte/hardware unproven"
+  ],
+  "selected": false
+}

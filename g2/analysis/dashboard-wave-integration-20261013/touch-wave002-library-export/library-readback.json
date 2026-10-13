@@ -1,0 +1,172 @@
+{
+  "wave_id": "component-goal-touch-wave001-common-config",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "touch",
+  "completed_utc": "2026-10-13T19:09:37.995455+00:00",
+  "status": "COMPLETED_BOUNDED_DATA_PROVIDER_WAVE",
+  "persistent_goal_configured": false,
+  "ownership": "Parent-authorized separate component stream; MAIN owner confirms current wave reserves Apollo MAIN/FreeType only; no global reservation proof.",
+  "functions": [],
+  "data_extents": [
+    {
+      "section": "common",
+      "stock_rom_start": "0xb2a8",
+      "end_exclusive": "0xb2e4",
+      "bytes": 60,
+      "sha256": "b8d793075ea50eeaf387b7dad2e60f21c6b4f306e53c6172e94b58a9e4fdc297"
+    },
+    {
+      "section": "electrodes",
+      "stock_rom_start": "0xb2e4",
+      "end_exclusive": "0xb32c",
+      "bytes": 72,
+      "sha256": "2c96d3c4a1cf7f9e61dbf50697667d04f88d340ccdc9e8869e3746f5bfdde3c5"
+    }
+  ],
+  "new_source_owned_typed_rom_bytes": 132,
+  "imports_before": [
+    "touch_generated_common_config",
+    "touch_generated_internal_context",
+    "touch_generated_lp_history",
+    "touch_generated_widget_config"
+  ],
+  "imports_after": [
+    "touch_generated_internal_context",
+    "touch_generated_lp_history",
+    "touch_generated_widget_config"
+  ],
+  "build": {
+    "source_count": 59,
+    "compiled_count": 59,
+    "archive_sha256": "10a6b20d93d4304abd7cff2eea30af3f66d38f12ef3899a27dd446a1886c8088",
+    "duplicate_strong_globals": {}
+  },
+  "source_snapshot": [
+    {
+      "path": "g2/components/touch/reset_layout_candidate_20261010/reset_generated_common_config.c",
+      "sha256": "89ad3764956b615f31a9ad1066c6c15c664986281c0ecb85070db1e086e59cb7"
+    },
+    {
+      "path": "g2/components/touch/reset_layout_candidate_20261010/reset_generated_common_config.h",
+      "sha256": "36b74c217db47e071953c6205bae0437d01d90a0fa45c35898602f403cdf991c"
+    },
+    {
+      "path": "g2/components/touch/reset_layout_candidate_20261010/reset_capsense_context.c",
+      "sha256": "1738f445ff6f3e27a463eefedd3bd67cae671795b5c973d9427234bd18f2a55e"
+    },
+    {
+      "path": "g2/components/touch/reset_layout_candidate_20261010/reset_channel_pending.c",
+      "sha256": "b02fe15d85c95f3e4b91e3747326331365d1363f9b4a61a72b945aed5e039035"
+    },
+    {
+      "path": "g2/components/touch/source_candidate_20261010/build.py",
+      "sha256": "8f52c1450f5f4db57c8fa7029e33b7922d175a41d2b92d4ee33a49c7e8627b34"
+    }
+  ],
+  "source_drift": "All selected C and provider source/dependency hashes verified against completed build; stable at seal.",
+  "tests": {
+    "exact_stock_data_and_relocations_bytes": 232,
+    "native_C_all_slot_regression_cases": 144
+  },
+  "acceptance_gates": {
+    "bounded_common_and_electrode_provider": true,
+    "whole_component_source_complete": false,
+    "final_reset_ABI_linker_placement": false,
+    "whole_image_behavior": false,
+    "byte_identical_bundle": false,
+    "hardware_validated": false
+  },
+  "lineage": {
+    "reference_commit": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+    "locked_touch_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "license": "New authored files MIT; vendor reference LICENSE retained, not linked.",
+    "behavior": "Stock-compatible data recovery; no intentional upstream fix."
+  },
+  "limits": [
+    "Bounded data and relocation fixture only; no full firmware placement, native-body census, package equality or hardware qualification.",
+    "LP history extent, internal context and widget configuration remain separate source gates.",
+    "Vendor layout matches evidence; producing generator/SDK version not uniquely identified.",
+    "No interval promotion; new typed bytes may already be present in data inventory.",
+    "Full workflow G2-G6 remain not_run; bounded source wave does not pass them."
+  ],
+  "supporting_receipts": [
+    {
+      "path": "g2/analysis/component-goal-20261013/touch-wave001-common-config/verification.json",
+      "sha256": "4a60b849585cfc8df7e759a8f1a41323a5bb524db367887cc125ef02eb1371b8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/touch-wave001-common-config/native-regression.json",
+      "sha256": "e6a2bc4cede83ff711759f47dee175fe0fb815308799fb533a663c9812229fd0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/touch-wave001-common-config/source-build-receipt.json",
+      "sha256": "0af14e3ce5a02289db963b04926a6058b982d6c8c749ff2931e8ef1f3a300aa9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/touch-wave001-common-config/fixture.ld",
+      "sha256": "7d2929308360f9206325d8bc12ea4d1fe40515ebdcf34a1be06b4882b128667b"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/touch-wave001-common-config/verify.py",
+      "sha256": "51e9374e536801538640762cdc8288a6574086b2976ef37f40466da4987a4df2"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/touch-wave001-common-config/fixture.elf",
+      "sha256": "20e709031056138a295aa469def3adc6133cfa9db9d4872d60017d2c996ea9a0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/touch-wave001-common-config/all-slots.elf",
+      "sha256": "175e91fa84bb101ca36b320e1ebef38250e77841beccd874ad2575b8ada4c4fa"
+    }
+  ],
+  "next_critical_path_task": "Recover LP internal context from pinned layout, native field offsets and CRT zero range; then widget config; history extent remains evidence gate.",
+  "schema": "opencfw-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/touch-wave001-common-config/wave.json",
+    "sha256": "d51b06d9f656541eafbcb6329ec31b1b20f98370db8300986514f005a437232d"
+  },
+  "export_source_drift": [
+    {
+      "path": "g2/components/touch/reset_layout_candidate_20261010/reset_generated_common_config.c",
+      "sealed_sha256": "89ad3764956b615f31a9ad1066c6c15c664986281c0ecb85070db1e086e59cb7",
+      "export_current_sha256": "89ad3764956b615f31a9ad1066c6c15c664986281c0ecb85070db1e086e59cb7",
+      "matches_seal": true
+    },
+    {
+      "path": "g2/components/touch/reset_layout_candidate_20261010/reset_generated_common_config.h",
+      "sealed_sha256": "36b74c217db47e071953c6205bae0437d01d90a0fa45c35898602f403cdf991c",
+      "export_current_sha256": "36b74c217db47e071953c6205bae0437d01d90a0fa45c35898602f403cdf991c",
+      "matches_seal": true
+    },
+    {
+      "path": "g2/components/touch/reset_layout_candidate_20261010/reset_capsense_context.c",
+      "sealed_sha256": "1738f445ff6f3e27a463eefedd3bd67cae671795b5c973d9427234bd18f2a55e",
+      "export_current_sha256": "1738f445ff6f3e27a463eefedd3bd67cae671795b5c973d9427234bd18f2a55e",
+      "matches_seal": true
+    },
+    {
+      "path": "g2/components/touch/reset_layout_candidate_20261010/reset_channel_pending.c",
+      "sealed_sha256": "b02fe15d85c95f3e4b91e3747326331365d1363f9b4a61a72b945aed5e039035",
+      "export_current_sha256": "b02fe15d85c95f3e4b91e3747326331365d1363f9b4a61a72b945aed5e039035",
+      "matches_seal": true
+    },
+    {
+      "path": "g2/components/touch/source_candidate_20261010/build.py",
+      "sealed_sha256": "8f52c1450f5f4db57c8fa7029e33b7922d175a41d2b92d4ee33a49c7e8627b34",
+      "export_current_sha256": "8f52c1450f5f4db57c8fa7029e33b7922d175a41d2b92d4ee33a49c7e8627b34",
+      "matches_seal": true
+    }
+  ],
+  "historical_full_map": {
+    "as_of_utc": "2026-10-13T17:02:21.929738Z",
+    "policy": "Unchanged until data owner interval reconciliation"
+  },
+  "publication": {
+    "scope": "separate component producer checkpoint only",
+    "MAIN_library_identity_unchanged": "libfile_7532794e94488191abea79956be5c2b3",
+    "interval_promotion": false,
+    "page_publication": "pending parent"
+  },
+  "accepted_images": 0,
+  "total_images": 6
+}

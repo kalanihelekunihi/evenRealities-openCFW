@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x080023f4/0x080024c0 left/right aging controls.
@@ -7,7 +8,6 @@
 extern void case_policy_ota_checksum(uint8_t *,uint32_t); /* 0x9b70 */
 extern uint32_t case_policy_send_probe(uint32_t,const uint8_t *,uint32_t,uint32_t); /* 0x258c */
 extern uint32_t case_policy_parse_probe(uint32_t); /* 0x1e94 */
-extern uint32_t case_policy_log(uint32_t); /* 0x9170 */
 
 static void control(uint32_t side,uint32_t enabled)
 {

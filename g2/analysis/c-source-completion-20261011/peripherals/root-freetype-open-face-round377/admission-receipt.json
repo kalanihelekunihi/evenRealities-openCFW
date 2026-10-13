@@ -1,0 +1,31 @@
+{
+  "status": "FULL_OPENER_BOUNDED_PROVIDER_TERMINAL_BUILD_AUDIT_COMPLETE",
+  "selected_sha256": "722eef99cb954924e0eca36a7e5275fd87e1e4213c1f7b69544148fb954c57e9",
+  "core_comparisons": 133,
+  "connected_comparisons": 133,
+  "actual_helpers": [
+    "FT memory allocation",
+    "zero",
+    "pathname compare"
+  ],
+  "controlled_boundaries": "Eleven child providers plus allocator callback",
+  "REA_evidence": "rea-dossier.json",
+  "limits": [
+    "Complete body reduced; child parser/stream/fallback/runtime gates open",
+    "Analysis entry/size metadata supplied by analyst",
+    "No image/layout/hardware proof"
+  ],
+  "source_frozen": false,
+  "terminal_audit": {
+    "status": "PASS_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+    "snapshots": 134,
+    "definitions": 3342,
+    "imports": 768,
+    "duplicate_strong_symbols": 0,
+    "artifact_hashes_checked": 6,
+    "builder_hash_checked": true,
+    "limits": [
+      "Full coverage/layout/byte equality/hardware unproven."
+    ]
+  }
+}

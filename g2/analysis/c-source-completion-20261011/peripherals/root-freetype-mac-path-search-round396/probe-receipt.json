@@ -1,0 +1,29 @@
+{
+  "status": "PASS_MAC_PATH_SEARCH_RULE_TRAVERSAL",
+  "comparisons": 120,
+  "native_bytes": 252,
+  "native_entry": "0x526356",
+  "actual_helpers": [
+    "selected typed nine-rule classifier",
+    "native nine-rule classifier",
+    "selected FT memory free"
+  ],
+  "controlled_boundaries": [
+    "nine-rule candidate generation",
+    "stream new/read-resource/close",
+    "memory free callback"
+  ],
+  "checks": [
+    "all nine rules and fallback pathname",
+    "guess error filtering",
+    "special rule 3/4 suppression after 0x51 or read failure",
+    "early success/all failure",
+    "candidate cleanup",
+    "whole4KiB/R0/SP/R4-R11/stack arg"
+  ],
+  "limits": [
+    "Connected candidate generation and path-open/read graph not yet qualified",
+    "Sort core and initialized runtime/layout/byte/hardware unproven"
+  ],
+  "selected": false
+}

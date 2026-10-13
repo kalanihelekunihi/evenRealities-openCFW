@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x080082ec recurring transport side monitor.
@@ -5,7 +6,6 @@
 #include <stdint.h>
 extern int32_t case_policy_sensor_delay(uint32_t amount); /* 0xa7b0 */
 extern void case_boot_transport_action(uint32_t side,uint32_t mode); /* 0x1c1c */
-extern uint32_t case_policy_log(uint32_t message); /* 0x9170 */
 
 void case_boot_transport_cb_82ec(void)
 {

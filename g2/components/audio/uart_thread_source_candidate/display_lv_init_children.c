@@ -484,7 +484,7 @@ uint32_t audio_uart_lv_bin_decoder_open_4c7b24(void *decoder,void *descriptor)
  * Arithmetic follows native 32-bit wrapping and unsigned shifts. */
 extern uint8_t audio_uart_display_lv_root[];
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
-extern uint32_t audio_uart_lv_area_width_451598(const void *);
+extern int32_t audio_uart_lv_area_width_451598(const int32_t *);
 extern void *audio_uart_lv_draw_buf_reshape_48b196(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void audio_uart_font_bitmap_release(void *);
@@ -1533,7 +1533,7 @@ uint32_t audio_uart_lv_draw_buf_premultiply_48b540(void *buffer)
 }
 
 #include <stdint.h>
-extern uint32_t audio_uart_lv_area_width_451598(const void *);
+extern int32_t audio_uart_lv_area_width_451598(const int32_t *);
 extern void *audio_uart_lv_draw_buf_goto_xy_48b2aa(const void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
@@ -1563,7 +1563,7 @@ void audio_uart_lv_draw_buf_copy_48ad42(void *destination,const void *destinatio
         else palette=0u;
         audio_uart_lv_grid_copy_454738((void *)(uintptr_t)d[4],(void *)(uintptr_t)s[4],palette*4u);
     }
-    if((source_area==0 && width!=(uint16_t)s[1]) || (source_area!=0 && width!=audio_uart_lv_area_width_451598(source_area))) {
+    if((source_area==0 && width!=(uint16_t)s[1]) || (source_area!=0 && width!=(uint32_t)audio_uart_lv_area_width_451598(source_area))) {
         audio_uart_lvgl_log(3u,file,250u,function,"Asserted at expression: %s (%s)","0","Source and destination areas have different width");
         for(;;) *(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
     }
@@ -1840,7 +1840,7 @@ uint32_t audio_uart_lv_bmp_open_4c92a8(void *decoder,void *descriptor) {
 #include <stdint.h>
 extern uint8_t audio_uart_display_lv_root[];
 extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
-extern uint32_t audio_uart_lv_area_width_451598(const void *);
+extern int32_t audio_uart_lv_area_width_451598(const int32_t *);
 extern void *audio_uart_lv_draw_buf_reshape_48b196(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void audio_uart_font_bitmap_release(void *);
@@ -2285,8 +2285,8 @@ uint32_t audio_uart_lv_thread_sync_wait_4d46e8(void *cell) {
 #include <stdint.h>
 extern void audio_uart_ambiq_area_copy_4c73c4(uint32_t *,const void *);
 extern void audio_uart_ambiq_area_move_450bb2(uint32_t *,uint32_t,uint32_t);
-extern uint32_t audio_uart_lv_area_width_451598(const void *);
-extern uint32_t audio_uart_lv_area_height_4515a4(const void *);
+extern int32_t audio_uart_lv_area_width_451598(const int32_t *);
+extern int32_t audio_uart_lv_area_height_4515a4(const int32_t *);
 extern void audio_uart_ambiq_transform_area_488cda(uint32_t *,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,void *);
 extern uint32_t audio_uart_lv_area_intersect_450bcc(int32_t *,const int32_t *,const int32_t *);
 extern void audio_uart_lv_draw_flush_cache_48abb8(void *,const void *);
@@ -2319,8 +2319,8 @@ void audio_uart_ambiq_execute_drawing_4c7752(void *task) {
     if(t[4]==6u) {
         volatile uint32_t *d=(void *)(uintptr_t)*(volatile uint32_t *)(t+84u);
         if(d[12]!=0u||d[13]!=256u||d[14]!=256u||d[16]!=0u||d[15]!=0u) {
-            uint32_t w=audio_uart_lv_area_width_451598(area);
-            uint32_t h=audio_uart_lv_area_height_4515a4(area);
+            uint32_t w=(uint32_t)audio_uart_lv_area_width_451598((const int32_t *)(const void *)area);
+            uint32_t h=(uint32_t)audio_uart_lv_area_height_4515a4((const int32_t *)(const void *)area);
             uint32_t sy=d[14],sx=d[13],rotation=d[12];
             audio_uart_ambiq_transform_area_488cda(area,w,h,rotation,sx,sy,(void *)(d+17));
             area[0]+=*(volatile uint32_t *)(t+8u);
@@ -6429,8 +6429,8 @@ extern int32_t audio_uart_lv_style_margin_left_43ef84(void *,uint32_t);
 extern int32_t audio_uart_lv_style_margin_right_43ef8e(void *,uint32_t);
 extern int32_t audio_uart_lv_style_margin_top_43ef70(void *,uint32_t);
 extern int32_t audio_uart_lv_style_margin_bottom_43ef7a(void *,uint32_t);
-extern uint32_t audio_uart_lv_area_width_451598(const void *);
-extern uint32_t audio_uart_lv_area_height_4515a4(const void *);
+extern int32_t audio_uart_lv_area_width_451598(const int32_t *);
+extern int32_t audio_uart_lv_area_height_4515a4(const int32_t *);
 static uint32_t lv322_read(const void *p,uint32_t offset){return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
 static void lv322_write(void *p,uint32_t offset,uint32_t value){*(volatile uint32_t *)((uint8_t *)p+offset)=value;}
 static int32_t lv322_add(int32_t a,int32_t b){return (int32_t)((uint32_t)a+(uint32_t)b);}
@@ -6453,7 +6453,7 @@ int32_t audio_uart_lv_calc_content_width_440a3c(void *object)
   if(positioned || (rtl?(align==0 || align==3 || align==6 || align==8):(align==0 || align==1 || align==4 || align==7))){
    tmp=rtl?lv322_extent(lv322_read(object,28),lv322_read(child,20)):lv322_extent(lv322_read(child,28),lv322_read(object,20));
   }else if(audio_uart_lv_style_x_43eee2(child,0)==0){
-   tmp=lv322_add(audio_uart_lv_area_width_451598((uint8_t *)child+20),rtl?right:left);
+   tmp=lv322_add(audio_uart_lv_area_width_451598((const int32_t *)((uint8_t *)child+20)),rtl?right:left);
    tmp=lv322_add(tmp,rtl?audio_uart_lv_style_margin_left_43ef84(child,0):audio_uart_lv_style_margin_right_43ef8e(child,0));
   }
   int32_t margin=rtl?audio_uart_lv_style_margin_left_43ef84(child,0):audio_uart_lv_style_margin_right_43ef8e(child,0);
@@ -6482,7 +6482,7 @@ int32_t audio_uart_lv_calc_content_height_440c2e(void *object)
   uint8_t align=0;if(!positioned)align=audio_uart_lv_style_align_43eef6(child,0);
   if(positioned || align<=3){tmp=lv322_extent(lv322_read(child,32),lv322_read(object,24));}
   else if(audio_uart_lv_style_y_43eeec(child,0)==0){
-   tmp=lv322_add(audio_uart_lv_area_height_4515a4((uint8_t *)child+20),top);
+   tmp=lv322_add(audio_uart_lv_area_height_4515a4((const int32_t *)((uint8_t *)child+20)),top);
    tmp=lv322_add(tmp,audio_uart_lv_style_margin_top_43ef70(child,0));
   }
   int32_t margin=audio_uart_lv_style_margin_bottom_43ef7a(child,0);
@@ -7109,3 +7109,2949 @@ int32_t audio_file_lfs_dir_close_4cfcf8(void *filesystem,void *directory)
 {return audio_file_lfs_dir_close_core_4cd604(filesystem,directory);}
 int32_t audio_file_lfs_dir_read_4cfd02(void *filesystem,void *directory,void *info)
 {return audio_file_lfs_dir_read_core_4cd60e(filesystem,directory,info);}
+
+/* Whole native bounded-copy entry0x454778..0x4547ad; qualification draft. */
+extern uint32_t g2_log_module_length(const char *);
+extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
+uint32_t audio_uart_lv_strlcpy_454778(char *destination,const char *source,uint32_t capacity)
+{
+ uint32_t length=g2_log_module_length(source);
+ if(capacity!=0u){
+  uint32_t count=length;
+  if(length>=capacity)count=capacity-1u;
+  (void)audio_queue_copy_bytes(destination,source,count);
+  *(volatile uint8_t *)(destination+count)=0u;
+ }
+ return length;
+}
+
+/* Whole native LittleFS write core4ce308..4ce3b1,170bytes. Unadmitted draft.
+ * Pinned lfs.c3657..3701; allstateoffsets/flagbits/native32bitwrap preserved. */
+#include <stdint.h>
+extern int32_t g2_lfs_file_flush(void *,void *);
+extern int32_t g2_lfs_file_flushedwrite(void *,void *,const void *,uint32_t);
+extern void g2_file_close_error(const char *,const char *,uint32_t);
+static uint32_t lfs350_get(const void *p,uint32_t offset)
+{return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
+static void lfs350_put(void *p,uint32_t offset,uint32_t value)
+{*(volatile uint32_t *)((uint8_t *)p+offset)=value;}
+int32_t audio_file_lfs_write_core_4ce308(void *filesystem,void *file,const void *buffer,uint32_t size)
+{
+ uint32_t zero_word=(uint32_t)(uintptr_t)buffer;
+ if((*(const volatile uint8_t *)((const uint8_t *)file+48u)&2u)==0u)
+  g2_file_close_error("(file->flags & LFS_O_WRONLY) == LFS_O_WRONLY","D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\littlefs\\lfs.c",3659u);
+ if((lfs350_get(file,48u)&0x40000u)!=0u){
+  int32_t error=g2_lfs_file_flush(filesystem,file);if(error!=0)return error;
+ }
+ if((lfs350_get(file,48u)&0x800u)!=0u&&lfs350_get(file,52u)<lfs350_get(file,44u))
+  lfs350_put(file,52u,lfs350_get(file,44u));
+ if(lfs350_get(filesystem,116u)<(uint32_t)(size+lfs350_get(file,52u)))return -27;
+ if((lfs350_get(file,48u)&0x20000u)==0u&&lfs350_get(file,44u)<lfs350_get(file,52u)){
+  uint32_t target=lfs350_get(file,52u);lfs350_put(file,52u,lfs350_get(file,44u));
+  while(lfs350_get(file,52u)<target){
+   *(uint8_t *)&zero_word=0u;
+   int32_t error=g2_lfs_file_flushedwrite(filesystem,file,&zero_word,1u);
+   if(error<0)return error;
+  }
+ }
+ int32_t result=g2_lfs_file_flushedwrite(filesystem,file,buffer,size);
+ if(result>=0)lfs350_put(file,48u,lfs350_get(file,48u)&0xfff7ffffu);
+ return result;
+}
+
+/* Whole directory cores:open4cd558..4cd5fd/read4cd60e..4cd6b9. Draft.
+ * Pinned lfs.c2722..2821, nativeoffsetsandtagconstants preserved. */
+extern int32_t audio_file_lfs_dir_find(void *,void *,const char **,uint16_t *);
+extern int32_t audio_file_lfs_dir_get(void *,void *,uint32_t,uint32_t,void *);
+extern void audio_file_lfs_ctz_fromle32(void *);
+extern int32_t g2_lfs_dir_fetch(void *,void *,const uint32_t *);
+extern void audio_file_lfs_mlist_append(void *,void *);
+extern void *g2_lfs_cache_fill(void *,uint32_t,uint32_t);
+extern int32_t audio_file_lfs_dir_getinfo_4cbf38(void *,void *,uint32_t,void *);
+static uint32_t lfs351_word(const void *p,uint32_t offset)
+{return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
+static void lfs351_store(void *p,uint32_t offset,uint32_t value)
+{*(volatile uint32_t *)((uint8_t *)p+offset)=value;}
+static uint16_t lfs351_half(const void *p,uint32_t offset)
+{return *(const volatile uint16_t *)((const uint8_t *)p+offset);}
+static void lfs351_storehalf(void *p,uint32_t offset,uint16_t value)
+{*(volatile uint16_t *)((uint8_t *)p+offset)=value;}
+int32_t audio_file_lfs_dir_open_core_4cd558(void *filesystem,void *directory,const char *path)
+{
+ uint8_t *d=directory;
+ int32_t tag=audio_file_lfs_dir_find(filesystem,d+8u,&path,0);
+ if(tag<0)return tag;
+ if(((uint32_t)tag>>20u&0x7ffu)!=2u)return -20;
+ uint32_t pair[2];uint32_t id=((uint32_t)tag>>10u)&0x3ffu;
+ if(id==0x3ffu){pair[0]=lfs351_word(filesystem,32u);pair[1]=lfs351_word(filesystem,36u);}
+ else {
+  int32_t result=audio_file_lfs_dir_get(filesystem,d+8u,0x700ffc00u,0x20000008u|(id<<10u),pair);
+  if(result<0)return result;
+  audio_file_lfs_ctz_fromle32(pair);
+ }
+ int32_t result=g2_lfs_dir_fetch(filesystem,d+8u,pair);
+ if(result!=0)return result;
+ lfs351_store(directory,44u,lfs351_word(directory,8u));
+ lfs351_store(directory,48u,lfs351_word(directory,12u));
+ lfs351_storehalf(directory,4u,0u);lfs351_store(directory,40u,0u);
+ *(volatile uint8_t *)(d+6u)=2u;audio_file_lfs_mlist_append(filesystem,directory);return 0;
+}
+static void lfs351_dotcopy(char *destination,const char *source)
+{for(;;){uint8_t byte=*(const volatile uint8_t *)source++;*(volatile uint8_t *)destination++=byte;if(byte==0u)return;}}
+int32_t audio_file_lfs_dir_read_core_4cd60e(void *filesystem,void *directory,void *information)
+{
+ uint8_t *d=directory,*info=information;
+ (void)g2_lfs_cache_fill(info,264u,0u);
+ if(lfs351_word(directory,40u)==0u){
+  *(volatile uint8_t *)info=2u;lfs351_dotcopy((char *)info+8u,".");
+  lfs351_store(directory,40u,lfs351_word(directory,40u)+1u);return 1;
+ }else if(lfs351_word(directory,40u)==1u){
+  *(volatile uint8_t *)info=2u;lfs351_dotcopy((char *)info+8u,"..");
+  lfs351_store(directory,40u,lfs351_word(directory,40u)+1u);return 1;
+ }
+ for(;;){
+  if(lfs351_half(directory,4u)==lfs351_half(directory,28u)){
+   if(*(const volatile uint8_t *)(d+31u)==0u)return 0;
+   int32_t result=g2_lfs_dir_fetch(filesystem,d+8u,(const uint32_t *)(d+32u));
+   if(result!=0)return result;
+   lfs351_storehalf(directory,4u,0u);
+  }
+  int32_t result=audio_file_lfs_dir_getinfo_4cbf38(filesystem,d+8u,lfs351_half(directory,4u),information);
+  if(result!=0&&result!=-2)return result;
+  lfs351_storehalf(directory,4u,(uint16_t)(lfs351_half(directory,4u)+1u));
+  if(result!=-2)break;
+ }
+ lfs351_store(directory,40u,lfs351_word(directory,40u)+1u);return 1;
+}
+
+/* Entire lfs_dir_getinfo4cbf38..4cbfdd166bytes; pinned lfs.c1415..1447. Draft. */
+int32_t audio_file_lfs_dir_getinfo_4cbf38(void *filesystem,void *directory,uint32_t identifier,void *information)
+{
+ uint8_t *info=information;uint32_t id=(uint16_t)identifier;
+ if(id==0x3ffu){lfs351_dotcopy((char *)info+8u,"/");*(volatile uint8_t *)info=2u;return 0;}
+ int32_t tag=audio_file_lfs_dir_get(filesystem,directory,0x780ffc00u,
+  (lfs351_word(filesystem,112u)+1u)|(id<<10u),info+8u);
+ if(tag<0)return tag;
+ *(volatile uint8_t *)info=(uint8_t)(((uint32_t)tag>>20u)&0x7ffu);
+ uint32_t pair[2]={identifier,(uint32_t)(uintptr_t)information};
+ tag=audio_file_lfs_dir_get(filesystem,directory,0x700ffc00u,0x20000008u|(id<<10u),pair);
+ if(tag<0)return tag;
+ audio_file_lfs_ctz_fromle32(pair);
+ uint32_t type=((uint32_t)tag>>20u)&0x7ffu;
+ if(type==0x202u)lfs351_store(information,4u,pair[1]);
+ else if(type==0x201u)lfs351_store(information,4u,(uint32_t)tag&0x3ffu);
+ return 0;
+}
+#pragma clang attribute push (__attribute__((target("no-lob,no-mve,no-mve.fp"))), apply_to=function)
+
+/* Entire pinned LVGL builtin formatter adapted for native-cluster qualification.
+ * Unadmitted: configuration, allformatclasses, helpers anddata require qualification. */
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdarg.h>
+#define LVFMT354_UNUSED(x) ((void)(x))
+_Static_assert(sizeof(size_t)==4 && sizeof(long)==4 && sizeof(long long)==8,"native widths");
+_Static_assert(sizeof(va_list)==4,"native va-list pointer width");
+static size_t lvfmt354_strnlen(const char *str,size_t max_len)
+{size_t i=0;while(i<max_len && str[i])i++;return i;}
+///////////////////////////////////////////////////////////////////////////////
+// \author (c) Marco Paland (info@paland.com)
+//             2014-2019, PALANDesign Hannover, Germany
+//
+// \license The MIT License (MIT)
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+// \brief Tiny printf, sprintf and (v)snprintf implementation, optimized for speed on
+//        embedded systems with a very limited resources. These routines are thread
+//        safe and reentrant!
+//        Use this instead of the bloated standard/newlib printf cause these use
+//        malloc for printf (and may not be thread safe).
+//
+///////////////////////////////////////////////////////////////////////////////
+
+/*Original repository: https://github.com/mpaland/printf*/
+
+
+
+
+
+
+
+
+#define LVFMT354_PRINTF_DISABLE_SUPPORT_FLOAT 0 /* Native fixed/exponential helpers present; candidate configuration. */
+
+// 'ntoa' conversion buffer size, this must be big enough to hold one converted
+// numeric number including padded zeros (dynamically created on stack)
+// default: 32 byte
+#ifndef LVFMT354_PRINTF_NTOA_BUFFER_SIZE
+    #define LVFMT354_PRINTF_NTOA_BUFFER_SIZE    32U
+#endif
+
+// 'ftoa' conversion buffer size, this must be big enough to hold one converted
+// float number including padded zeros (dynamically created on stack)
+// default: 32 byte
+#ifndef LVFMT354_PRINTF_FTOA_BUFFER_SIZE
+    #define LVFMT354_PRINTF_FTOA_BUFFER_SIZE    32U
+#endif
+
+// support for the floating point type (%f)
+// default: activated
+#if !LVFMT354_PRINTF_DISABLE_SUPPORT_FLOAT
+    #define LVFMT354_PRINTF_SUPPORT_FLOAT
+#endif
+
+// support for exponential floating point notation (%e/%g)
+// default: activated
+#ifndef LVFMT354_PRINTF_DISABLE_SUPPORT_EXPONENTIAL
+    #define LVFMT354_PRINTF_SUPPORT_EXPONENTIAL
+#endif
+
+// define the default floating point precision
+// default: 6 digits
+#ifndef LVFMT354_PRINTF_DEFAULT_FLOAT_PRECISION
+    #define LVFMT354_PRINTF_DEFAULT_FLOAT_PRECISION 6U
+#endif
+
+// define the largest float suitable to print with %f
+// default: 1e9
+#ifndef LVFMT354_PRINTF_MAX_FLOAT
+    #define LVFMT354_PRINTF_MAX_FLOAT 1e9
+#endif
+
+// support for the long long types (%llu or %p)
+// default: activated
+#ifndef LVFMT354_PRINTF_DISABLE_SUPPORT_LONG_LONG
+    #define LVFMT354_PRINTF_SUPPORT_LONG_LONG
+#endif
+
+// support for the ptrdiff_t type (%t)
+// ptrdiff_t is normally defined in <stddef.h> as long or long long type
+// default: activated
+#ifndef LVFMT354_PRINTF_DISABLE_SUPPORT_PTRDIFF_T
+    #define LVFMT354_PRINTF_SUPPORT_PTRDIFF_T
+#endif
+
+///////////////////////////////////////////////////////////////////////////////
+
+// internal flag definitions
+#define LVFMT354_FLAGS_ZEROPAD   (1U <<  0U)
+#define LVFMT354_FLAGS_LEFT      (1U <<  1U)
+#define LVFMT354_FLAGS_PLUS      (1U <<  2U)
+#define LVFMT354_FLAGS_SPACE     (1U <<  3U)
+#define LVFMT354_FLAGS_HASH      (1U <<  4U)
+#define LVFMT354_FLAGS_UPPERCASE (1U <<  5U)
+#define LVFMT354_FLAGS_CHAR      (1U <<  6U)
+#define LVFMT354_FLAGS_SHORT     (1U <<  7U)
+#define LVFMT354_FLAGS_LONG      (1U <<  8U)
+#define LVFMT354_FLAGS_LONG_LONG (1U <<  9U)
+#define LVFMT354_FLAGS_PRECISION (1U << 10U)
+#define LVFMT354_FLAGS_ADAPT_EXP (1U << 11U)
+
+typedef struct {
+    const char * fmt;
+    va_list * va;
+} lvfmt354_vaformat_t;
+
+// import float.h for DBL_MAX
+#if defined(LVFMT354_PRINTF_SUPPORT_FLOAT)
+    #include <float.h>
+#endif
+
+// output function type
+typedef void (*lvfmt354_out_type)(char character, void * buffer, size_t idx, size_t maxlen);
+
+// wrapper (used as buffer) for output function type
+typedef struct {
+    void (*fct)(char character, void * arg);
+    void * arg;
+} lvfmt354_out_wrap;
+
+// internal buffer output
+static inline void lvfmt354_out_buffer(char character, void * buffer, size_t idx, size_t maxlen)
+{
+    if(idx < maxlen) {
+        ((char *)buffer)[idx] = character;
+    }
+}
+
+// internal null output
+static inline void lvfmt354_out_null(char character, void * buffer, size_t idx, size_t maxlen)
+{
+    LVFMT354_UNUSED(character);
+    LVFMT354_UNUSED(buffer);
+    LVFMT354_UNUSED(idx);
+    LVFMT354_UNUSED(maxlen);
+}
+
+// internal test if char is a digit (0-9)
+// \return true if char is a digit
+static inline bool lvfmt354_is_digit(char ch)
+{
+    return (ch >= '0') && (ch <= '9');
+}
+
+// internal ASCII string to unsigned int conversion
+static unsigned int lvfmt354_atoi(const char ** str)
+{
+    unsigned int i = 0U;
+    while(lvfmt354_is_digit(**str)) {
+        i = i * 10U + (unsigned int)(*((*str)++) - '0');
+    }
+    return i;
+}
+
+// output the specified string in reverse, taking care of any zero-padding
+static size_t lvfmt354_out_rev(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, const char * buf, size_t len,
+                       unsigned int width, unsigned int flags)
+{
+    const size_t start_idx = idx;
+
+    // pad spaces up to given width
+    if(!(flags & LVFMT354_FLAGS_LEFT) && !(flags & LVFMT354_FLAGS_ZEROPAD)) {
+        size_t i;
+        for(i = len; i < width; i++) {
+            out(' ', buffer, idx++, maxlen);
+        }
+    }
+
+    // reverse string
+    while(len) {
+        out(buf[--len], buffer, idx++, maxlen);
+    }
+
+    // append pad spaces up to given width
+    if(flags & LVFMT354_FLAGS_LEFT) {
+        while(idx - start_idx < width) {
+            out(' ', buffer, idx++, maxlen);
+        }
+    }
+
+    return idx;
+}
+
+// internal itoa format
+static size_t lvfmt354_ntoa_format(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, char * buf, size_t len,
+                           bool negative, unsigned int base, unsigned int prec, unsigned int width, unsigned int flags)
+{
+    // pad leading zeros
+    if(!(flags & LVFMT354_FLAGS_LEFT)) {
+        if(width && (flags & LVFMT354_FLAGS_ZEROPAD) && (negative || (flags & (LVFMT354_FLAGS_PLUS | LVFMT354_FLAGS_SPACE)))) {
+            width--;
+        }
+        while((len < prec) && (len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE)) {
+            buf[len++] = '0';
+        }
+        while((flags & LVFMT354_FLAGS_ZEROPAD) && (len < width) && (len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE)) {
+            buf[len++] = '0';
+        }
+    }
+
+    // handle hash
+    if(flags & LVFMT354_FLAGS_HASH) {
+        if(!(flags & LVFMT354_FLAGS_PRECISION) && len && ((len == prec) || (len == width))) {
+            len--;
+            if(len && (base == 16U)) {
+                len--;
+            }
+        }
+        if((base == 16U) && !(flags & LVFMT354_FLAGS_UPPERCASE) && (len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE)) {
+            buf[len++] = 'x';
+        }
+        else if((base == 16U) && (flags & LVFMT354_FLAGS_UPPERCASE) && (len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE)) {
+            buf[len++] = 'X';
+        }
+        else if((base == 2U) && (len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE)) {
+            buf[len++] = 'b';
+        }
+        if(len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE) {
+            buf[len++] = '0';
+        }
+    }
+
+    if(len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE) {
+        if(negative) {
+            buf[len++] = '-';
+        }
+        else if(flags & LVFMT354_FLAGS_PLUS) {
+            buf[len++] = '+';  // ignore the space if the '+' exists
+        }
+        else if(flags & LVFMT354_FLAGS_SPACE) {
+            buf[len++] = ' ';
+        }
+    }
+
+    return lvfmt354_out_rev(out, buffer, idx, maxlen, buf, len, width, flags);
+}
+
+// internal itoa for 'long' type
+static size_t lvfmt354_ntoa_long(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, unsigned long value, bool negative,
+                         unsigned long base, unsigned int prec, unsigned int width, unsigned int flags)
+{
+    char buf[LVFMT354_PRINTF_NTOA_BUFFER_SIZE];
+    size_t len = 0U;
+
+    // no hash for 0 values
+    if(!value) {
+        flags &= ~LVFMT354_FLAGS_HASH;
+    }
+
+    // write if precision != 0 and value is != 0
+    if(!(flags & LVFMT354_FLAGS_PRECISION) || value) {
+        do {
+            const char digit = (char)(value % base);
+            buf[len++] = digit < 10 ? '0' + digit : (flags & LVFMT354_FLAGS_UPPERCASE ? 'A' : 'a') + digit - 10;
+            value /= base;
+        } while(value && (len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE));
+    }
+
+    return lvfmt354_ntoa_format(out, buffer, idx, maxlen, buf, len, negative, (unsigned int)base, prec, width, flags);
+}
+
+// internal itoa for 'long long' type
+#if defined(LVFMT354_PRINTF_SUPPORT_LONG_LONG)
+static size_t lvfmt354_ntoa_long_long(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, unsigned long long value,
+                              bool negative, unsigned long long base, unsigned int prec, unsigned int width, unsigned int flags)
+{
+    char buf[LVFMT354_PRINTF_NTOA_BUFFER_SIZE];
+    size_t len = 0U;
+
+    // no hash for 0 values
+    if(!value) {
+        flags &= ~LVFMT354_FLAGS_HASH;
+    }
+
+    // write if precision != 0 and value is != 0
+    if(!(flags & LVFMT354_FLAGS_PRECISION) || value) {
+        do {
+            const char digit = (char)(value % base);
+            buf[len++] = digit < 10 ? '0' + digit : (flags & LVFMT354_FLAGS_UPPERCASE ? 'A' : 'a') + digit - 10;
+            value /= base;
+        } while(value && (len < LVFMT354_PRINTF_NTOA_BUFFER_SIZE));
+    }
+
+    return lvfmt354_ntoa_format(out, buffer, idx, maxlen, buf, len, negative, (unsigned int)base, prec, width, flags);
+}
+#endif  // LVFMT354_PRINTF_SUPPORT_LONG_LONG
+
+#if defined(LVFMT354_PRINTF_SUPPORT_FLOAT)
+
+#if defined(LVFMT354_PRINTF_SUPPORT_EXPONENTIAL)
+// forward declaration so that lvfmt354_ftoa can switch to exp notation for values > LVFMT354_PRINTF_MAX_FLOAT
+static size_t lvfmt354_etoa(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, double value, unsigned int prec,
+                    unsigned int width, unsigned int flags);
+#endif
+
+// internal ftoa for fixed decimal floating point
+static size_t lvfmt354_ftoa(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, double value, unsigned int prec,
+                    unsigned int width, unsigned int flags)
+{
+    char buf[LVFMT354_PRINTF_FTOA_BUFFER_SIZE];
+    size_t len  = 0U;
+    double diff = 0.0;
+
+    // powers of 10
+    static const double pow10[] = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000 };
+
+    // test for special values
+    if(value != value)
+        return lvfmt354_out_rev(out, buffer, idx, maxlen, "nan", 3, width, flags);
+    if(value < -DBL_MAX)
+        return lvfmt354_out_rev(out, buffer, idx, maxlen, "fni-", 4, width, flags);
+    if(value > DBL_MAX)
+        return lvfmt354_out_rev(out, buffer, idx, maxlen, (flags & LVFMT354_FLAGS_PLUS) ? "fni+" : "fni", (flags & LVFMT354_FLAGS_PLUS) ? 4U : 3U, width,
+                        flags);
+
+    // test for very large values
+    // standard printf behavior is to print EVERY whole number digit -- which could be 100s of characters overflowing your buffers == bad
+    if((value > LVFMT354_PRINTF_MAX_FLOAT) || (value < -LVFMT354_PRINTF_MAX_FLOAT)) {
+#if defined(LVFMT354_PRINTF_SUPPORT_EXPONENTIAL)
+        return lvfmt354_etoa(out, buffer, idx, maxlen, value, prec, width, flags);
+#else
+        return 0U;
+#endif
+    }
+
+    // test for negative
+    bool negative = false;
+    if(value < 0) {
+        negative = true;
+        value = 0 - value;
+    }
+
+    // set default precision, if not set explicitly
+    if(!(flags & LVFMT354_FLAGS_PRECISION)) {
+        prec = LVFMT354_PRINTF_DEFAULT_FLOAT_PRECISION;
+    }
+    // limit precision to 9, cause a prec >= 10 can lead to overflow errors
+    while((len < LVFMT354_PRINTF_FTOA_BUFFER_SIZE) && (prec > 9U)) {
+        buf[len++] = '0';
+        prec--;
+    }
+
+    int whole = (int)value;
+    double tmp = (value - whole) * pow10[prec];
+    unsigned long frac = (unsigned long)tmp;
+    diff = tmp - frac;
+
+    if(diff > 0.5) {
+        ++frac;
+        // handle rollover, e.g. case 0.99 with prec 1 is 1.0
+        if(frac >= pow10[prec]) {
+            frac = 0;
+            ++whole;
+        }
+    }
+    else if(diff < 0.5) {
+    }
+    else if((frac == 0U) || (frac & 1U)) {
+        // if halfway, round up if odd OR if last digit is 0
+        ++frac;
+    }
+
+    if(prec == 0U) {
+        diff = value - (double)whole;
+        if((!(diff < 0.5) || (diff > 0.5)) && (whole & 1)) {
+            // exactly 0.5 and ODD, then round up
+            // 1.5 -> 2, but 2.5 -> 2
+            ++whole;
+        }
+    }
+    else {
+        unsigned int count = prec;
+        // now do fractional part, as an unsigned number
+        while(len < LVFMT354_PRINTF_FTOA_BUFFER_SIZE) {
+            --count;
+            buf[len++] = (char)(48U + (frac % 10U));
+            if(!(frac /= 10U)) {
+                break;
+            }
+        }
+        // add extra 0s
+        while((len < LVFMT354_PRINTF_FTOA_BUFFER_SIZE) && (count-- > 0U)) {
+            buf[len++] = '0';
+        }
+        if(len < LVFMT354_PRINTF_FTOA_BUFFER_SIZE) {
+            // add decimal
+            buf[len++] = '.';
+        }
+    }
+
+    // do whole part, number is reversed
+    while(len < LVFMT354_PRINTF_FTOA_BUFFER_SIZE) {
+        buf[len++] = (char)(48 + (whole % 10));
+        if(!(whole /= 10)) {
+            break;
+        }
+    }
+
+    // pad leading zeros
+    if(!(flags & LVFMT354_FLAGS_LEFT) && (flags & LVFMT354_FLAGS_ZEROPAD)) {
+        if(width && (negative || (flags & (LVFMT354_FLAGS_PLUS | LVFMT354_FLAGS_SPACE)))) {
+            width--;
+        }
+        while((len < width) && (len < LVFMT354_PRINTF_FTOA_BUFFER_SIZE)) {
+            buf[len++] = '0';
+        }
+    }
+
+    if(len < LVFMT354_PRINTF_FTOA_BUFFER_SIZE) {
+        if(negative) {
+            buf[len++] = '-';
+        }
+        else if(flags & LVFMT354_FLAGS_PLUS) {
+            buf[len++] = '+';  // ignore the space if the '+' exists
+        }
+        else if(flags & LVFMT354_FLAGS_SPACE) {
+            buf[len++] = ' ';
+        }
+    }
+
+    return lvfmt354_out_rev(out, buffer, idx, maxlen, buf, len, width, flags);
+}
+
+#if defined(LVFMT354_PRINTF_SUPPORT_EXPONENTIAL)
+// internal ftoa variant for exponential floating-point type, contributed by Martijn Jasperse <m.jasperse@gmail.com>
+static size_t lvfmt354_etoa(lvfmt354_out_type out, char * buffer, size_t idx, size_t maxlen, double value, unsigned int prec,
+                    unsigned int width, unsigned int flags)
+{
+    // check for NaN and special values
+    if((value != value) || (value > DBL_MAX) || (value < -DBL_MAX)) {
+        return lvfmt354_ftoa(out, buffer, idx, maxlen, value, prec, width, flags);
+    }
+
+    // determine the sign
+    const bool negative = value < 0;
+    if(negative) {
+        value = -value;
+    }
+
+    // default precision
+    if(!(flags & LVFMT354_FLAGS_PRECISION)) {
+        prec = LVFMT354_PRINTF_DEFAULT_FLOAT_PRECISION;
+    }
+
+    // determine the decimal exponent
+    // based on the algorithm by David Gay (https://www.ampl.com/netlib/fp/dtoa.c)
+    union {
+        uint64_t U;
+        double   F;
+    } conv;
+
+    conv.F = value;
+    int exp2 = (int)((conv.U >> 52U) & 0x07FFU) - 1023;           // effectively log2
+    conv.U = (conv.U & ((1ULL << 52U) - 1U)) | (1023ULL << 52U);  // drop the exponent so conv.F is now in [1,2)
+    // now approximate log10 from the log2 integer part and an expansion of ln around 1.5
+    int expval = (int)(0.1760912590558 + exp2 * 0.301029995663981 + (conv.F - 1.5) * 0.289529654602168);
+    // now we want to compute 10^expval but we want to be sure it won't overflow
+    exp2 = (int)(expval * 3.321928094887362 + 0.5);
+    const double z  = expval * 2.302585092994046 - exp2 * 0.6931471805599453;
+    const double z2 = z * z;
+    conv.U = (uint64_t)(exp2 + 1023) << 52U;
+    // compute exp(z) using continued fractions, see https://en.wikipedia.org/wiki/Exponential_function#Continued_fractions_for_ex
+    conv.F *= 1 + 2 * z / (2 - z + (z2 / (6 + (z2 / (10 + z2 / 14)))));
+    // correct for rounding errors
+    if(value < conv.F) {
+        expval--;
+        conv.F /= 10;
+    }
+
+    // the exponent format is "%+03d" and largest value is "307", so set aside 4-5 characters
+    unsigned int minwidth = ((expval < 100) && (expval > -100)) ? 4U : 5U;
+
+    // in "%g" mode, "prec" is the number of *significant figures* not decimals
+    if(flags & LVFMT354_FLAGS_ADAPT_EXP) {
+        // do we want to fall-back to "%f" mode?
+        if((value >= 1e-4) && (value < 1e6)) {
+            if((int)prec > expval) {
+                prec = (unsigned)((int)prec - expval - 1);
+            }
+            else {
+                prec = 0;
+            }
+            flags |= LVFMT354_FLAGS_PRECISION;   // make sure lvfmt354_ftoa respects precision
+            // no characters in exponent
+            minwidth = 0U;
+            expval   = 0;
+        }
+        else {
+            // we use one sigfig for the whole part
+            if((prec > 0) && (flags & LVFMT354_FLAGS_PRECISION)) {
+                --prec;
+            }
+        }
+    }
+
+    // will everything fit?
+    unsigned int fwidth = width;
+    if(width > minwidth) {
+        // we didn't fall-back so subtract the characters required for the exponent
+        fwidth -= minwidth;
+    }
+    else {
+        // not enough characters, so go back to default sizing
+        fwidth = 0U;
+    }
+    if((flags & LVFMT354_FLAGS_LEFT) && minwidth) {
+        // if we're padding on the right, DON'T pad the floating part
+        fwidth = 0U;
+    }
+
+    // rescale the float value
+    if(expval) {
+        value /= conv.F;
+    }
+
+    // output the floating part
+    const size_t start_idx = idx;
+    idx = lvfmt354_ftoa(out, buffer, idx, maxlen, negative ? -value : value, prec, fwidth, flags & ~LVFMT354_FLAGS_ADAPT_EXP);
+
+    // output the exponent part
+    if(minwidth) {
+        // output the exponential symbol
+        out((flags & LVFMT354_FLAGS_UPPERCASE) ? 'E' : 'e', buffer, idx++, maxlen);
+        // output the exponent value
+        idx = lvfmt354_ntoa_long(out, buffer, idx, maxlen, (expval < 0) ? -expval : expval, expval < 0, 10, 0, minwidth - 1,
+                         LVFMT354_FLAGS_ZEROPAD | LVFMT354_FLAGS_PLUS);
+        // might need to right-pad spaces
+        if(flags & LVFMT354_FLAGS_LEFT) {
+            while(idx - start_idx < width) out(' ', buffer, idx++, maxlen);
+        }
+    }
+    return idx;
+}
+#endif  // LVFMT354_PRINTF_SUPPORT_EXPONENTIAL
+#endif  // LVFMT354_PRINTF_SUPPORT_FLOAT
+
+// internal vsnprintf
+static int lvfmt354_inner(lvfmt354_out_type out, char * buffer, const size_t maxlen, const char * format, va_list va)
+{
+    unsigned int flags, width, precision, n;
+    size_t idx = 0U;
+
+    if(!buffer) {
+        // use null output function
+        out = lvfmt354_out_null;
+    }
+
+    while(*format) {
+        // format specifier?  %[flags][width][.precision][length]
+        if(*format != '%') {
+            // no
+            out(*format, buffer, idx++, maxlen);
+            format++;
+            continue;
+        }
+        else {
+            // yes, evaluate it
+            format++;
+        }
+
+        // evaluate flags
+        flags = 0U;
+        do {
+            switch(*format) {
+                case '0':
+                    flags |= LVFMT354_FLAGS_ZEROPAD;
+                    format++;
+                    n = 1U;
+                    break;
+                case '-':
+                    flags |= LVFMT354_FLAGS_LEFT;
+                    format++;
+                    n = 1U;
+                    break;
+                case '+':
+                    flags |= LVFMT354_FLAGS_PLUS;
+                    format++;
+                    n = 1U;
+                    break;
+                case ' ':
+                    flags |= LVFMT354_FLAGS_SPACE;
+                    format++;
+                    n = 1U;
+                    break;
+                case '#':
+                    flags |= LVFMT354_FLAGS_HASH;
+                    format++;
+                    n = 1U;
+                    break;
+                default :
+                    n = 0U;
+                    break;
+            }
+        } while(n);
+
+        // evaluate width field
+        width = 0U;
+        if(lvfmt354_is_digit(*format)) {
+            width = lvfmt354_atoi(&format);
+        }
+        else if(*format == '*') {
+            const int w = va_arg(va, int);
+            if(w < 0) {
+                flags |= LVFMT354_FLAGS_LEFT;    // reverse padding
+                width = (unsigned int) - w;
+            }
+            else {
+                width = (unsigned int)w;
+            }
+            format++;
+        }
+
+        // evaluate precision field
+        precision = 0U;
+        if(*format == '.') {
+            flags |= LVFMT354_FLAGS_PRECISION;
+            format++;
+            if(lvfmt354_is_digit(*format)) {
+                precision = lvfmt354_atoi(&format);
+            }
+            else if(*format == '*') {
+                const int prec = (int)va_arg(va, int);
+                precision = prec > 0 ? (unsigned int)prec : 0U;
+                format++;
+            }
+        }
+
+        // evaluate length field
+        switch(*format) {
+            case 'l' :
+                flags |= LVFMT354_FLAGS_LONG;
+                format++;
+                if(*format == 'l') {
+                    flags |= LVFMT354_FLAGS_LONG_LONG;
+                    format++;
+                }
+                break;
+            case 'h' :
+                flags |= LVFMT354_FLAGS_SHORT;
+                format++;
+                if(*format == 'h') {
+                    flags |= LVFMT354_FLAGS_CHAR;
+                    format++;
+                }
+                break;
+#if defined(LVFMT354_PRINTF_SUPPORT_PTRDIFF_T)
+            case 't' :
+                flags |= (sizeof(ptrdiff_t) == sizeof(long) ? LVFMT354_FLAGS_LONG : LVFMT354_FLAGS_LONG_LONG);
+                format++;
+                break;
+#endif
+            case 'j' :
+                flags |= (sizeof(intmax_t) == sizeof(long) ? LVFMT354_FLAGS_LONG : LVFMT354_FLAGS_LONG_LONG);
+                format++;
+                break;
+            case 'z' :
+                flags |= (sizeof(size_t) == sizeof(long) ? LVFMT354_FLAGS_LONG : LVFMT354_FLAGS_LONG_LONG);
+                format++;
+                break;
+            default :
+                break;
+        }
+
+        // evaluate specifier
+        switch(*format) {
+            case 'd' :
+            case 'i' :
+            case 'u' :
+            case 'x' :
+            case 'X' :
+            case 'p' :
+            case 'P' :
+            case 'o' :
+            case 'b' : {
+                    // set the base
+                    unsigned int base;
+                    if(*format == 'x' || *format == 'X') {
+                        base = 16U;
+                    }
+                    else if(*format == 'p' || *format == 'P') {
+                        base = 16U;
+                        flags |= LVFMT354_FLAGS_HASH;   // always hash for pointer format
+#if defined(LVFMT354_PRINTF_SUPPORT_LONG_LONG)
+                        if(sizeof(uintptr_t) == sizeof(long long))
+                            flags |= LVFMT354_FLAGS_LONG_LONG;
+                        else
+#endif
+                            flags |= LVFMT354_FLAGS_LONG;
+
+                        if(*(format + 1) == 'V')
+                            format++;
+                    }
+                    else if(*format == 'o') {
+                        base =  8U;
+                    }
+                    else if(*format == 'b') {
+                        base =  2U;
+                    }
+                    else {
+                        base = 10U;
+                        flags &= ~LVFMT354_FLAGS_HASH;   // no hash for dec format
+                    }
+                    // uppercase
+                    if(*format == 'X' || *format == 'P') {
+                        flags |= LVFMT354_FLAGS_UPPERCASE;
+                    }
+
+                    // no plus or space flag for u, x, X, o, b
+                    if((*format != 'i') && (*format != 'd')) {
+                        flags &= ~(LVFMT354_FLAGS_PLUS | LVFMT354_FLAGS_SPACE);
+                    }
+
+                    // ignore '0' flag when precision is given
+                    if(flags & LVFMT354_FLAGS_PRECISION) {
+                        flags &= ~LVFMT354_FLAGS_ZEROPAD;
+                    }
+
+                    // convert the integer
+                    if((*format == 'i') || (*format == 'd')) {
+                        // signed
+                        if(flags & LVFMT354_FLAGS_LONG_LONG) {
+#if defined(LVFMT354_PRINTF_SUPPORT_LONG_LONG)
+                            const long long value = va_arg(va, long long);
+                            idx = lvfmt354_ntoa_long_long(out, buffer, idx, maxlen, (unsigned long long)(value > 0 ? value : 0 - value), value < 0, base,
+                                                  precision, width, flags);
+#endif
+                        }
+                        else if(flags & LVFMT354_FLAGS_LONG) {
+                            const long value = va_arg(va, long);
+                            idx = lvfmt354_ntoa_long(out, buffer, idx, maxlen, (unsigned long)(value > 0 ? value : 0 - value), value < 0, base, precision,
+                                             width, flags);
+                        }
+                        else {
+                            const int value = (flags & LVFMT354_FLAGS_CHAR) ? (char)va_arg(va, int) : (flags & LVFMT354_FLAGS_SHORT) ? (short int)va_arg(va,
+                                                                                                                                       int) : va_arg(va, int);
+                            idx = lvfmt354_ntoa_long(out, buffer, idx, maxlen, (unsigned int)(value > 0 ? value : 0 - value), value < 0, base, precision,
+                                             width, flags);
+                        }
+                    }
+                    else if(*format == 'V') {
+                        lvfmt354_vaformat_t * vaf = va_arg(va, lvfmt354_vaformat_t *);
+                        va_list copy;
+
+                        va_copy(copy, *vaf->va);
+                        idx += lvfmt354_inner(out, buffer + idx, maxlen - idx, vaf->fmt, copy);
+                        va_end(copy);
+                    }
+                    else {
+                        // unsigned
+                        if(flags & LVFMT354_FLAGS_LONG_LONG) {
+#if defined(LVFMT354_PRINTF_SUPPORT_LONG_LONG)
+                            idx = lvfmt354_ntoa_long_long(out, buffer, idx, maxlen, va_arg(va, unsigned long long), false, base, precision, width, flags);
+#endif
+                        }
+                        else if(flags & LVFMT354_FLAGS_LONG) {
+                            idx = lvfmt354_ntoa_long(out, buffer, idx, maxlen, va_arg(va, unsigned long), false, base, precision, width, flags);
+                        }
+                        else {
+                            const unsigned int value = (flags & LVFMT354_FLAGS_CHAR) ? (unsigned char)va_arg(va,
+                                                                                                    unsigned int) : (flags & LVFMT354_FLAGS_SHORT) ? (unsigned short int)va_arg(va, unsigned int) : va_arg(va, unsigned int);
+                            idx = lvfmt354_ntoa_long(out, buffer, idx, maxlen, value, false, base, precision, width, flags);
+                        }
+                    }
+                    format++;
+                    break;
+                }
+#if defined(LVFMT354_PRINTF_SUPPORT_FLOAT)
+            case 'f' :
+            case 'F' :
+                if(*format == 'F') flags |= LVFMT354_FLAGS_UPPERCASE;
+                idx = lvfmt354_ftoa(out, buffer, idx, maxlen, va_arg(va, double), precision, width, flags);
+                format++;
+                break;
+#if defined(LVFMT354_PRINTF_SUPPORT_EXPONENTIAL)
+            case 'e':
+            case 'E':
+            case 'g':
+            case 'G':
+                if((*format == 'g') || (*format == 'G')) flags |= LVFMT354_FLAGS_ADAPT_EXP;
+                if((*format == 'E') || (*format == 'G')) flags |= LVFMT354_FLAGS_UPPERCASE;
+                idx = lvfmt354_etoa(out, buffer, idx, maxlen, va_arg(va, double), precision, width, flags);
+                format++;
+                break;
+#endif  // LVFMT354_PRINTF_SUPPORT_EXPONENTIAL
+#endif  // LVFMT354_PRINTF_SUPPORT_FLOAT
+            case 'c' : {
+                    unsigned int l = 1U;
+                    // pre padding
+                    if(!(flags & LVFMT354_FLAGS_LEFT)) {
+                        while(l++ < width) {
+                            out(' ', buffer, idx++, maxlen);
+                        }
+                    }
+                    // char output
+                    out((char)va_arg(va, int), buffer, idx++, maxlen);
+                    // post padding
+                    if(flags & LVFMT354_FLAGS_LEFT) {
+                        while(l++ < width) {
+                            out(' ', buffer, idx++, maxlen);
+                        }
+                    }
+                    format++;
+                    break;
+                }
+
+            case 's' : {
+                    const char * p = va_arg(va, char *);
+                    unsigned int l = lvfmt354_strnlen(p, precision ? precision : (size_t) -1);
+                    // pre padding
+                    if(flags & LVFMT354_FLAGS_PRECISION) {
+                        l = (l < precision ? l : precision);
+                    }
+                    if(!(flags & LVFMT354_FLAGS_LEFT)) {
+                        while(l++ < width) {
+                            out(' ', buffer, idx++, maxlen);
+                        }
+                    }
+                    // string output
+                    while((*p != 0) && (!(flags & LVFMT354_FLAGS_PRECISION) || precision--)) {
+                        out(*(p++), buffer, idx++, maxlen);
+                    }
+                    // post padding
+                    if(flags & LVFMT354_FLAGS_LEFT) {
+                        while(l++ < width) {
+                            out(' ', buffer, idx++, maxlen);
+                        }
+                    }
+                    format++;
+                    break;
+                }
+
+            case '%' :
+                out('%', buffer, idx++, maxlen);
+                format++;
+                break;
+
+            default :
+                out(*format, buffer, idx++, maxlen);
+                format++;
+                break;
+        }
+    }
+
+    // termination
+    out((char)0, buffer, idx < maxlen ? idx : maxlen - 1U, maxlen);
+
+    // return written chars without terminating \0
+    return (int)idx;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// GLOBAL FUNCTIONS FOR LVGL
+///////////////////////////////////////////////////////////////////////////////
+
+int audio_uart_lv_snprintf_483fd0(char * buffer, size_t count, const char * format, ...)
+{
+    va_list va;
+    va_start(va, format);
+    const int ret = lvfmt354_inner(lvfmt354_out_buffer, buffer, count, format, va);
+    va_end(va);
+    return ret;
+}
+
+int audio_uart_lv_vsnprintf_483fea(char * buffer, size_t count, const char * format, va_list va)
+{
+    return lvfmt354_inner(lvfmt354_out_buffer, buffer, count, format, va);
+}
+
+
+
+#pragma clang attribute pop
+
+/* Source-owned compiler-rt numerical providers: pinned LLVM20.1.8.
+ * Upstream licenses retained through directsource inclusion; no executableblobs.
+ * Defaultnearest numerical qualification only; nativeIAR/FPstatus equality remainsopen. */
+#pragma clang attribute push (__attribute__((target("no-lob,no-mve,no-mve.fp"))), apply_to=function)
+#define fixuint_t lvfmt357_adddf3_fixuint_t
+#define fixint_t lvfmt357_adddf3_fixint_t
+#define __udivXi3 lvfmt357_adddf3___udivXi3
+#define __umodXi3 lvfmt357_adddf3___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/adddf3.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_ashldi3_fixuint_t
+#define fixint_t lvfmt357_ashldi3_fixint_t
+#define __udivXi3 lvfmt357_ashldi3___udivXi3
+#define __umodXi3 lvfmt357_ashldi3___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/ashldi3.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_comparedf2_fixuint_t
+#define fixint_t lvfmt357_comparedf2_fixint_t
+#define __udivXi3 lvfmt357_comparedf2___udivXi3
+#define __umodXi3 lvfmt357_comparedf2___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/comparedf2.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_divdf3_fixuint_t
+#define fixint_t lvfmt357_divdf3_fixint_t
+#define __udivXi3 lvfmt357_divdf3___udivXi3
+#define __umodXi3 lvfmt357_divdf3___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/divdf3.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_fixdfsi_fixuint_t
+#define fixint_t lvfmt357_fixdfsi_fixint_t
+#define __udivXi3 lvfmt357_fixdfsi___udivXi3
+#define __umodXi3 lvfmt357_fixdfsi___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fixdfsi.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_fixunsdfsi_fixuint_t
+#define fixint_t lvfmt357_fixunsdfsi_fixint_t
+#define __udivXi3 lvfmt357_fixunsdfsi___udivXi3
+#define __umodXi3 lvfmt357_fixunsdfsi___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fixunsdfsi.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_floatsidf_fixuint_t
+#define fixint_t lvfmt357_floatsidf_fixint_t
+#define __udivXi3 lvfmt357_floatsidf___udivXi3
+#define __umodXi3 lvfmt357_floatsidf___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/floatsidf.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_floatunsidf_fixuint_t
+#define fixint_t lvfmt357_floatunsidf_fixint_t
+#define __udivXi3 lvfmt357_floatunsidf___udivXi3
+#define __umodXi3 lvfmt357_floatunsidf___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/floatunsidf.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_fp_mode_fixuint_t
+#define fixint_t lvfmt357_fp_mode_fixint_t
+#define __udivXi3 lvfmt357_fp_mode___udivXi3
+#define __umodXi3 lvfmt357_fp_mode___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/fp_mode.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_lshrdi3_fixuint_t
+#define fixint_t lvfmt357_lshrdi3_fixint_t
+#define __udivXi3 lvfmt357_lshrdi3___udivXi3
+#define __umodXi3 lvfmt357_lshrdi3___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/lshrdi3.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_muldf3_fixuint_t
+#define fixint_t lvfmt357_muldf3_fixint_t
+#define __udivXi3 lvfmt357_muldf3___udivXi3
+#define __umodXi3 lvfmt357_muldf3___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/muldf3.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_subdf3_fixuint_t
+#define fixint_t lvfmt357_subdf3_fixint_t
+#define __udivXi3 lvfmt357_subdf3___udivXi3
+#define __umodXi3 lvfmt357_subdf3___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/subdf3.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_truncdfsf2_fixuint_t
+#define fixint_t lvfmt357_truncdfsf2_fixint_t
+#define __udivXi3 lvfmt357_truncdfsf2___udivXi3
+#define __umodXi3 lvfmt357_truncdfsf2___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/truncdfsf2.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_udivdi3_fixuint_t
+#define fixint_t lvfmt357_udivdi3_fixint_t
+#define __udivXi3 lvfmt357_udivdi3___udivXi3
+#define __umodXi3 lvfmt357_udivdi3___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/udivdi3.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_udivmoddi4_fixuint_t
+#define fixint_t lvfmt357_udivmoddi4_fixint_t
+#define __udivXi3 lvfmt357_udivmoddi4___udivXi3
+#define __umodXi3 lvfmt357_udivmoddi4___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#define fixuint_t lvfmt357_umoddi3_fixuint_t
+#define fixint_t lvfmt357_umoddi3_fixint_t
+#define __udivXi3 lvfmt357_umoddi3___udivXi3
+#define __umodXi3 lvfmt357_umoddi3___umodXi3
+#include "../../../../third-party/upstream/llvm-compiler-rt-format-20.1.8/umoddi3.c"
+#undef fixuint_t
+#undef fixint_t
+#undef __udivXi3
+#undef __umodXi3
+#include <stdint.h>
+
+
+
+int __aeabi_dcmpge(double a,double b){return __gedf2(a,b)>=0;}
+int __aeabi_dcmpgt(double a,double b){return __gedf2(a,b)>0;}
+int __aeabi_dcmple(double a,double b){return __ledf2(a,b)<=0;}
+int __aeabi_dcmplt(double a,double b){return __ledf2(a,b)<0;}
+int __aeabi_dcmpeq(double a,double b){return __eqdf2(a,b)==0;}
+#pragma clang attribute pop
+
+/* Entire LVGL draw unit/dispatch/task selector bodies. Unadmitted draft. */
+extern void *audio_uart_lv_heap_alloc(uint32_t);
+extern uint32_t audio_uart_lv_display_width_44fa7e(void *);
+extern uint32_t audio_uart_lv_display_height_44faa8(void *);
+extern uint32_t audio_uart_lv_draw_task_independent_4848b2(void *,void *);
+static uint32_t draw360_word(const void *p,uint32_t offset)
+{return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
+static void draw360_store(void *p,uint32_t offset,uint32_t value)
+{*(volatile uint32_t *)((uint8_t *)p+offset)=value;}
+static void *draw360_pointer(const void *p,uint32_t offset)
+{return (void *)(uintptr_t)draw360_word(p,offset);}
+void *audio_uart_lv_refreshing_display_453604(void)
+{return draw360_pointer(audio_uart_display_lv_root,16u);}
+void *audio_uart_lv_draw_unit_create_484398(uint32_t size)
+{
+ void *unit=audio_uart_lv_heap_alloc(size);
+ if(unit==0){
+  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw.c",84u,"lv_draw_create_unit","Asserted at expression: %s (%s)","new_unit != NULL","Out of memory");
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ draw360_store(unit,0u,draw360_word(audio_uart_display_lv_root,316u));
+ draw360_store(audio_uart_display_lv_root,316u,(uint32_t)(uintptr_t)unit);
+ draw360_store(audio_uart_display_lv_root,320u,draw360_word(audio_uart_display_lv_root,320u)+1u);
+ draw360_store(unit,8u,draw360_word(audio_uart_display_lv_root,320u));return unit;
+}
+void audio_uart_lv_draw_dispatch_request_48462e(void)
+{(void)audio_uart_lv_thread_sync_signal_4d4724(audio_uart_display_lv_root+328u);}
+void *audio_uart_lv_draw_first_available_4849fc(void *layer)
+{
+ void *task=draw360_pointer(layer,68u);
+ if(task!=0 && draw360_word(task,80u)!=1u)return 0;
+ return task;
+}
+void *audio_uart_lv_draw_next_available_484656(void *layer,void *previous,uint32_t unit_id)
+{
+ if(draw360_word(layer,68u)!=0u){
+  uint32_t width=audio_uart_lv_display_width_44fa7e(audio_uart_lv_refreshing_display_453604());
+  uint32_t height=audio_uart_lv_display_height_44faa8(audio_uart_lv_refreshing_display_453604());
+  void *head=draw360_pointer(layer,68u);
+  if(draw360_word(head,80u)!=1u && (int32_t)draw360_word(head,8u)<=0
+   && (int32_t)draw360_word(head,16u)>=(int32_t)(width-1u)
+   && (int32_t)draw360_word(head,12u)<=0
+   && (int32_t)draw360_word(head,20u)>=(int32_t)(height-1u))return 0;
+ }
+ void *task=previous?draw360_pointer(previous,0u):draw360_pointer(layer,68u);
+ for(;task!=0;task=draw360_pointer(task,0u)){
+  if(draw360_word(task,80u)==1u
+   && (*(const volatile uint8_t *)((const uint8_t *)task+88u)==0u
+    || *(const volatile uint8_t *)((const uint8_t *)task+88u)==(uint8_t)unit_id)
+   && audio_uart_lv_draw_task_independent_4848b2(layer,task)!=0u)return task;
+ }
+ return 0;
+}
+void *audio_uart_lv_draw_get_available_task_48463a(void *layer,void *previous,uint32_t unit_id)
+{
+ if(draw360_word(audio_uart_display_lv_root,320u)==1u)return audio_uart_lv_draw_first_available_4849fc(layer);
+ return audio_uart_lv_draw_next_available_484656(layer,previous,(uint8_t)unit_id);
+}
+
+/* Entire native is_independent4848b2..4848e754bytes; pinned lv_draw.c525. */
+extern uint32_t audio_uart_lv_area_intersect_450bcc(int32_t *,const int32_t *,const int32_t *);
+uint32_t audio_uart_lv_draw_task_independent_4848b2(void *layer,void *check)
+{
+ void *task=draw360_pointer(layer,68u);
+ while(task!=0 && task!=check){
+  if(draw360_word(task,80u)!=3u){
+   int32_t intersection[4];
+   if(audio_uart_lv_area_intersect_450bcc(intersection,
+    (const int32_t *)((const uint8_t *)task+24u),
+    (const int32_t *)((const uint8_t *)check+24u))!=0u)return 0u;
+  }
+  task=draw360_pointer(task,0u);
+ }
+ return 1u;
+}
+
+/* Whole lv_draw_layer_alloc_buf484836..4848b1124bytes andcreatewrapper48affa..48b00f22bytes. */
+extern int32_t audio_uart_lv_area_width_451598(const int32_t *);
+extern int32_t audio_uart_lv_area_height_4515a4(const int32_t *);
+extern uint32_t audio_uart_font_bitmap_stride(uint32_t,uint8_t);
+extern void *audio_uart_font_bitmap_allocate(void *,uint32_t,uint32_t,uint8_t,uint32_t);
+extern void audio_uart_lv_draw_buf_clear_48ac40(void *,const void *);
+void *audio_uart_display_surface_alloc(uint32_t width,uint32_t height,uint32_t format,uint32_t stride)
+{return audio_uart_font_bitmap_allocate(audio_uart_display_lv_root+200u,width,height,(uint8_t)format,stride);}
+void *audio_uart_lv_draw_layer_alloc_buf_484836(void *layer)
+{
+ if(draw360_word(layer,0u)!=0u)return draw360_pointer(draw360_pointer(layer,0u),16u);
+ uint32_t width=(uint32_t)audio_uart_lv_area_width_451598((const int32_t *)((const uint8_t *)layer+4u));
+ uint32_t height=(uint32_t)audio_uart_lv_area_height_4515a4((const int32_t *)((const uint8_t *)layer+4u));
+ uint32_t stride=audio_uart_font_bitmap_stride(width,*(const volatile uint8_t *)((const uint8_t *)layer+20u));
+ uint32_t bytes=stride*height;
+ void *buffer=audio_uart_display_surface_alloc(width,height,*(const volatile uint8_t *)((const uint8_t *)layer+20u),0u);
+ draw360_store(layer,0u,(uint32_t)(uintptr_t)buffer);
+ if(draw360_word(layer,0u)==0u){
+  audio_uart_lvgl_log(2u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw.c",471u,"lv_draw_layer_alloc_buf","Allocating layer buffer failed. Try later");return 0;
+ }
+ draw360_store(audio_uart_display_lv_root,324u,bytes+draw360_word(audio_uart_display_lv_root,324u));
+ if(audio_uart_lv_color_has_alpha_440fc4(*(const volatile uint8_t *)((const uint8_t *)layer+20u))!=0u)
+  audio_uart_lv_draw_buf_clear_48ac40(draw360_pointer(layer,0u),0);
+ return draw360_pointer(draw360_pointer(layer,0u),16u);
+}
+
+/* Whole native lv_draw_buf_clear 48ac40..48ad42, 258 bytes.
+ * Pinned LVGL source supplies structure; native instructions govern ABI/read order. */
+void audio_uart_lv_draw_buf_clear_48ac40(void *buffer,const void *area)
+{
+ const volatile uint32_t *b=buffer;
+ if(b==0)cache_assert(165u,"lv_draw_buf_clear","draw_buf != NULL");
+ const volatile uint32_t *handlers=(const void *)(uintptr_t)b[6];
+ if(handlers[6]!=0u){
+  uint32_t callback=handlers[6];
+  ((void (*)(void *,const void *))(uintptr_t)callback)(buffer,area);return;
+ }
+ uint32_t stride=(uint16_t)b[2];
+ if(area==0){
+  void *data=audio_uart_lv_draw_buf_goto_xy_48b2aa(buffer,0u,0u);
+  uint32_t height=b[1]>>16u;
+  audio_uart_lv_draw_memzero_48aa54(data,stride*height);
+  audio_uart_lv_draw_flush_cache_48abb8(buffer,area);return;
+ }
+ int32_t bounds[4],clipped[4];
+ bounds[0]=0;bounds[1]=0;
+ bounds[2]=(int32_t)((uint32_t)(uint16_t)b[1]-1u);
+ bounds[3]=(int32_t)((b[1]>>16u)-1u);
+ if(audio_uart_lv_area_intersect_450bcc(clipped,area,bounds)==0u)return;
+ if(audio_uart_lv_area_width_451598(clipped)<1)return;
+ if(audio_uart_lv_area_height_4515a4(clipped)<1)return;
+ uint32_t data=(uint32_t)(uintptr_t)audio_uart_lv_draw_buf_goto_xy_48b2aa(buffer,(uint32_t)clipped[0],(uint32_t)clipped[1]);
+ uint32_t bits=audio_uart_lv_color_bpp_440f44((uint8_t)(b[0]>>8u));
+ uint32_t width=(uint32_t)audio_uart_lv_area_width_451598(clipped);
+ uint32_t length=(uint32_t)((int32_t)((uint8_t)bits*width+7u)>>3u);
+ int32_t y=clipped[1];
+ while(y<=clipped[3]){
+  audio_uart_lv_draw_memzero_48aa54((void *)(uintptr_t)data,length);
+  data+=stride;y=(int32_t)((uint32_t)y+1u);
+ }
+ audio_uart_lv_draw_flush_cache_48abb8(buffer,area);
+}
+
+/* Complete lv_freetype_init 4b1b98..4b1c9c (260 bytes).
+ * Historical import alias retained; native return value is LV_RESULT 0/1. */
+extern void *audio_uart_font_outline_context(void);
+extern uint32_t audio_uart_ft_init_freetype_52431c(void *);
+extern int32_t audio_uart_ft_node_compare_4b2342(const void *,const void *);
+extern uint32_t audio_uart_ft_node_create_4b220a(void *,void *);
+extern void audio_uart_ft_node_free_4b2308(void *,void *);
+extern const uintptr_t audio_uart_font_cache_backend_vtable[];
+static const uintptr_t freetype364_ops[3]={
+ (uintptr_t)&audio_uart_ft_node_compare_4b2342,
+ (uintptr_t)&audio_uart_ft_node_create_4b220a,
+ (uintptr_t)&audio_uart_ft_node_free_4b2308
+};
+uint32_t audio_uart_lv_init_draw_unit_4b1b98(uint32_t max_glyphs)
+{
+ static const char path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c";
+ static const char name[]="lv_freetype_init";
+ if(draw360_word(audio_uart_display_lv_root,448u)!=0u){
+  audio_uart_lvgl_log(2u,path,68u,name,"freetype already initialized");return 0u;
+ }
+ void *allocated=audio_uart_lv_heap_alloc(28u);
+ draw360_store(audio_uart_display_lv_root,448u,(uint32_t)(uintptr_t)allocated);
+ if(draw360_word(audio_uart_display_lv_root,448u)==0u){
+  audio_uart_lvgl_log(3u,path,73u,name,"Asserted at expression: %s (%s)","(&lv_global)->ft_context != NULL","Out of memory");
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ if(draw360_word(audio_uart_display_lv_root,448u)==0u){
+  audio_uart_lvgl_log(3u,path,75u,name,"malloc failed for lv_freetype_context_t");return 0u;
+ }
+ void *context=audio_uart_font_outline_context();
+ draw360_store(context,20u,max_glyphs);
+ uint32_t error=audio_uart_ft_init_freetype_52431c(context);
+ if(error!=0u){audio_uart_lvgl_log(3u,path,87u,name,"FT_Init_FreeType error(0x%x)",error);return 0u;}
+ audio_uart_lv_array_init_482b00((uint8_t *)context+4u,8u);
+ void *cache=audio_uart_lv_cache_create_4d4cd4((const uint32_t *)(const void *)audio_uart_font_cache_backend_vtable,
+ 32u,0x7fffffffu,(uint32_t)freetype364_ops[0],(uint32_t)freetype364_ops[1],(uint32_t)freetype364_ops[2]);
+ draw360_store(context,24u,(uint32_t)(uintptr_t)cache);
+ audio_uart_lv_cache_set_name_4d5114(draw360_pointer(context,24u),"FREETYPE_CACHE_NODE");return 1u;
+}
+
+/* Complete native node comparator4b2342..4b239c90bytes.
+ * Byte fields are reread after comparison as in native instructions. */
+int32_t audio_uart_ft_node_compare_4b2342(const void *left,const void *right)
+{
+ const volatile uint8_t *a=left,*b=right;
+ if(a[5]!=b[5]){uint32_t rhs=b[5],lhs=a[5];return lhs>rhs?1:-1;}
+ if(a[4]!=b[4]){uint32_t rhs=b[4],lhs=a[4];return lhs>rhs?1:-1;}
+ const char *rhs=(const char *)(uintptr_t)*(const volatile uint32_t *)right;
+ const char *lhs=(const char *)(uintptr_t)*(const volatile uint32_t *)left;
+ int32_t result=audio_uart_lv_string_compare_4547be(lhs,rhs);
+ return result==0?0:result>0?1:-1;
+}
+
+/* Full native cache node creation4b220a..4b225c82bytes, no kerning write. */
+extern uint32_t audio_uart_ft_new_face_525ade(void *,const char *,int32_t,void **);
+extern void audio_uart_ft_italic_transform_4b1fd4(void *);
+uint32_t audio_uart_ft_node_create_4b220a(void *node,void *user_data)
+{
+ (void)user_data;
+ void *context=audio_uart_font_outline_context();void *face;
+ void *library=draw360_pointer(context,0u);
+ const char *pathname=draw360_pointer(node,0u);
+ uint32_t error=audio_uart_ft_new_face_525ade(library,pathname,0,&face);
+ if(error!=0u){
+  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c",371u,"cache_node_cache_create_cb","FT_New_Face error(0x%x)",error);return 0u;
+ }
+ draw360_store(node,8u,128u);
+ if((*(const volatile uint8_t *)((const uint8_t *)node+4u)&1u)!=0u)audio_uart_ft_italic_transform_4b1fd4(face);
+ draw360_store(node,12u,(uint32_t)(uintptr_t)face);
+ audio_uart_lv_async_init_4d465c((uint8_t *)node+16u);return 1u;
+}
+/* Full native node free4b2308..4b2342 58bytes; rereads cache after non-null tests. */
+extern uint32_t audio_uart_ft_done_face_526814(void *);
+extern void audio_uart_lv_cache_destroy_4d4d6a(void *,void *);
+void audio_uart_ft_node_free_4b2308(void *node,void *user_data)
+{
+ (void)audio_uart_ft_done_face_526814(draw360_pointer(node,12u));
+ (void)audio_uart_lv_mutex_delete_4d46c2((uint8_t *)node+16u);
+ if(draw360_word(node,24u)!=0u){audio_uart_lv_cache_destroy_4d4d6a(draw360_pointer(node,24u),user_data);draw360_store(node,24u,0u);}
+ if(draw360_word(node,28u)!=0u){audio_uart_lv_cache_destroy_4d4d6a(draw360_pointer(node,28u),user_data);draw360_store(node,28u,0u);}
+}
+
+/* Native FT_Init_FreeType52431c..52435456bytes. */
+extern void *audio_uart_ft_new_memory_5676a0(void);
+extern uint32_t audio_uart_ft_new_library_5274b2(void *,void *);
+extern void audio_uart_ft_done_memory_5676c6(void *);
+extern void audio_uart_ft_add_default_modules_5242fc(void *);
+uint32_t audio_uart_ft_init_freetype_52431c(void *out_library)
+{
+ void *memory=audio_uart_ft_new_memory_5676a0();
+ if(memory==0)return 7u;
+ uint32_t error=audio_uart_ft_new_library_5274b2(memory,out_library);
+ if(error!=0u)audio_uart_ft_done_memory_5676c6(memory);
+ else audio_uart_ft_add_default_modules_5242fc(draw360_pointer(out_library,0u));
+ (void)draw360_word(out_library,0u);return error;
+}
+/* Native italic transform4b1fd4..4b201e74bytes. */
+extern void audio_uart_ft_set_transform_525444(void *,const int32_t *,const int32_t *);
+void audio_uart_ft_italic_transform_4b1fd4(void *face)
+{
+ if(face==0){
+  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\freetype\\lv_freetype.c",216u,"lv_freetype_italic_transform","Asserted at expression: %s (%s)","face != NULL","NULL pointer");
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ int32_t matrix[4]={65536,13930,0,65536};
+ audio_uart_ft_set_transform_525444(face,matrix,0);
+}
+/* Native cache destroy4d4d6a..4d4dca96bytes. */
+void audio_uart_lv_cache_destroy_4d4d6a(void *cache,void *user_data)
+{
+ if(cache==0){
+  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\cache\\lv_cache.c",72u,"lv_cache_destroy","Asserted at expression: %s (%s)","cache != NULL","NULL pointer");
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ (void)audio_uart_lv_lock_core((uint8_t *)cache+28u);
+ void *vtable=draw360_pointer(cache,0u);
+ uint32_t callback=draw360_word(vtable,8u);
+ ((void (*)(void *,void *))(uintptr_t)callback)(cache,user_data);
+ (void)audio_uart_lv_unlock_core((uint8_t *)cache+28u);
+ (void)audio_uart_lv_mutex_delete_4d46c2((uint8_t *)cache+28u);
+ audio_uart_lv_heap_free(cache);
+}
+
+/* Full FT_Set_Transform525444..5254c8 132bytes.
+ * Matrix/vector pointers retain native aliasing and read order. */
+void audio_uart_ft_set_transform_525444(void *face,const int32_t *matrix,const int32_t *vector)
+{
+ if(face==0)return;
+ void *internal=draw360_pointer(face,128u);
+ draw360_store(internal,24u,0u);
+ if(matrix==0){
+  draw360_store(internal,0u,65536u);draw360_store(internal,4u,0u);
+  draw360_store(internal,8u,0u);draw360_store(internal,12u,65536u);
+  matrix=internal;
+ }else audio_uart_checksum_copy(internal,matrix,16u);
+ uint32_t xy=draw360_word(matrix,4u),yx=draw360_word(matrix,8u);
+ if((xy|yx)!=0u || draw360_word(matrix,0u)!=65536u || draw360_word(matrix,12u)!=65536u)
+  draw360_store(internal,24u,draw360_word(internal,24u)|1u);
+ if(vector==0){draw360_store(internal,16u,0u);draw360_store(internal,20u,0u);vector=(const void *)((const uint8_t *)internal+16u);}
+ else {uint32_t x=draw360_word(vector,0u),y=draw360_word(vector,4u);draw360_store(internal,16u,x);draw360_store(internal,20u,y);}
+ uint32_t x=draw360_word(vector,0u),y=draw360_word(vector,4u);
+ if((x|y)!=0u)draw360_store(internal,24u,draw360_word(internal,24u)|2u);
+}
+
+/* Five complete FT system-memory adapters, authenticated product pool handle. */
+extern void *audio_uart_lv_pool_allocate_484180(void *,uint32_t);
+extern void *audio_uart_lv_pool_realloc_484234(void *,void *,uint32_t);
+void *audio_uart_ft_memory_alloc_5676d4(void *memory,int32_t size)
+{(void)memory;return audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)0x20000354u,(uint32_t)size);}
+void *audio_uart_ft_memory_realloc_5676e0(void *memory,int32_t old_size,int32_t new_size,void *block)
+{(void)memory;(void)old_size;return audio_uart_lv_pool_realloc_484234((void *)(uintptr_t)0x20000354u,block,(uint32_t)new_size);}
+void audio_uart_ft_memory_free_5676ec(void *memory,void *block)
+{(void)memory;audio_uart_lv_pool_free_48429e((void *)(uintptr_t)0x20000354u,block);}
+void *audio_uart_ft_new_memory_5676a0(void)
+{
+ void *memory=audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)0x20000354u,16u);
+ if(memory!=0){
+  draw360_store(memory,0u,0u);
+  draw360_store(memory,4u,(uint32_t)(uintptr_t)&audio_uart_ft_memory_alloc_5676d4);
+  draw360_store(memory,12u,(uint32_t)(uintptr_t)&audio_uart_ft_memory_realloc_5676e0);
+  draw360_store(memory,8u,(uint32_t)(uintptr_t)&audio_uart_ft_memory_free_5676ec);
+ }
+ return memory;
+}
+void audio_uart_ft_done_memory_5676c6(void *memory)
+{audio_uart_lv_pool_free_48429e((void *)(uintptr_t)0x20000354u,memory);}
+
+/* Full native FT_New_Library5274b2..5274f6 68bytes, selected FreeType2.9.1. */
+extern void *audio_uart_font_mem_alloc(void *,int32_t,int32_t *);
+uint32_t audio_uart_ft_new_library_5274b2(void *memory,void *out_library)
+{
+ if(memory==0 || out_library==0)return 6u;
+ int32_t error;
+ void *library=audio_uart_font_mem_alloc(memory,184,&error);
+ if(error!=0)return (uint32_t)error;
+ draw360_store(library,0u,(uint32_t)(uintptr_t)memory);
+ draw360_store(library,4u,2u);draw360_store(library,8u,9u);draw360_store(library,12u,1u);
+ draw360_store(library,180u,1u);
+ draw360_store(out_library,0u,(uint32_t)(uintptr_t)library);return 0u;
+}
+
+/* FT_New_Face525ade..525b02 36bytes; flags/path/stream only initialized. */
+extern uint32_t audio_uart_ft_open_face_internal_5264a6(void *,const void *,int32_t,void **,uint32_t);
+uint32_t audio_uart_ft_new_face_525ade(void *library,const char *pathname,int32_t index,void **out)
+{
+ if(pathname==0)return 6u;
+ uint32_t args[8];args[0]=4u;args[3]=(uint32_t)(uintptr_t)pathname;args[4]=0u;
+ return audio_uart_ft_open_face_internal_5264a6(library,args,index,out,1u);
+}
+/* FT_Done_Face526814..52687c104bytes; native fresh reads preserved. */
+extern void *audio_uart_ft_list_find_5292e6(void *,void *);
+extern void audio_uart_ft_list_remove_529324(void *,void *);
+extern void audio_uart_font_mem_free(void *,void *);
+extern void audio_uart_ft_destroy_face_5258a8(void *,void *,void *);
+uint32_t audio_uart_ft_done_face_526814(void *face)
+{
+ if(face==0)return 35u;
+ if(draw360_word(face,96u)==0u)return 35u;
+ void *internal=draw360_pointer(face,128u);
+ uint32_t count=draw360_word(internal,64u)-1u;
+ draw360_store(draw360_pointer(face,128u),64u,count);
+ if((int32_t)draw360_word(draw360_pointer(face,128u),64u)>=1)return 0u;
+ void *driver=draw360_pointer(face,96u);
+ void *memory=draw360_pointer(driver,8u);
+ void *node=audio_uart_ft_list_find_5292e6((uint8_t *)driver+16u,face);
+ if(node==0)return 35u;
+ audio_uart_ft_list_remove_529324((uint8_t *)driver+16u,node);
+ audio_uart_font_mem_free(memory,node);
+ audio_uart_ft_destroy_face_5258a8(memory,face,driver);return 0u;
+}
+
+/* Complete FT_List_Find5292e6..52930430bytes. */
+void *audio_uart_ft_list_find_5292e6(void *list,void *data)
+{
+ if(list==0)return 0;
+ void *node=draw360_pointer(list,0u);
+ while(node!=0){if(draw360_pointer(node,8u)==data)return node;node=draw360_pointer(node,4u);}
+ return 0;
+}
+/* Complete FT_List_Remove529324..52934836bytes; detached node retained. */
+void audio_uart_ft_list_remove_529324(void *list,void *node)
+{
+ if(list==0 || node==0)return;
+ void *previous=draw360_pointer(node,0u),*next=draw360_pointer(node,4u);
+ if(previous!=0)draw360_store(previous,4u,(uint32_t)(uintptr_t)next);
+ else draw360_store(list,0u,(uint32_t)(uintptr_t)next);
+ if(next!=0)draw360_store(next,0u,(uint32_t)(uintptr_t)previous);
+ else draw360_store(list,4u,(uint32_t)(uintptr_t)previous);
+}
+
+/* Whole destroy_face5258a8..525936142bytes, FreeType2.9.1. */
+extern void audio_uart_ft_done_glyph_slot_5253f4(void *);
+extern void audio_uart_ft_destroy_size_525832(void *,void *,void *);
+extern void audio_uart_ft_list_finalize_529378(void *,void (*)(void *,void *,void *),void *,void *);
+extern void audio_uart_ft_destroy_charmaps_52586e(void *,void *);
+extern void audio_uart_ft_stream_free_52502a(void *,uint32_t);
+void audio_uart_ft_destroy_face_5258a8(void *memory,void *face,void *driver)
+{
+ void *clazz=draw360_pointer(driver,12u);
+ if(draw360_word(face,120u)!=0u){
+  void *data=draw360_pointer(face,116u);
+  uint32_t callback=draw360_word(face,120u);
+  ((void (*)(void *))(uintptr_t)callback)(data);
+ }
+ while(draw360_word(face,84u)!=0u)audio_uart_ft_done_glyph_slot_5253f4(draw360_pointer(face,84u));
+ audio_uart_ft_list_finalize_529378((uint8_t *)face+108u,audio_uart_ft_destroy_size_525832,memory,driver);
+ draw360_store(face,88u,0u);
+ if(draw360_word(face,48u)!=0u){uint32_t callback=draw360_word(face,48u);((void (*)(void *))(uintptr_t)callback)(face);}
+ audio_uart_ft_destroy_charmaps_52586e(face,memory);
+ if(draw360_word(clazz,52u)!=0u){uint32_t callback=draw360_word(clazz,52u);((void (*)(void *))(uintptr_t)callback)(face);}
+ uint32_t external=(draw360_word(face,8u)>>10u)&1u;
+ audio_uart_ft_stream_free_52502a(draw360_pointer(face,104u),external);
+ draw360_store(face,104u,0u);
+ if(draw360_word(face,128u)!=0u){audio_uart_font_mem_free(memory,draw360_pointer(face,128u));draw360_store(face,128u,0u);}
+ audio_uart_font_mem_free(memory,face);
+}
+
+/* Full FT_List_Finalize529378..5293be70bytes. Cache next before destructor/free. */
+void audio_uart_ft_list_finalize_529378(void *list,void (*destroy)(void *,void *,void *),void *memory,void *user)
+{
+ if(list==0 || memory==0)return;
+ void *node=draw360_pointer(list,0u);
+ while(node!=0){
+  void *next=draw360_pointer(node,4u);
+  void *data=draw360_pointer(node,8u);
+  if(destroy!=0)destroy(memory,data,user);
+  audio_uart_font_mem_free(memory,node);node=next;
+ }
+ draw360_store(list,0u,0u);draw360_store(list,4u,0u);
+}
+
+/* Full destroy_size525832..52586e60bytes. */
+void audio_uart_ft_destroy_size_525832(void *memory,void *size,void *driver)
+{
+ if(draw360_word(size,8u)!=0u){uint32_t callback=draw360_word(size,8u);((void (*)(void *))(uintptr_t)callback)(size);}
+ void *clazz=draw360_pointer(driver,12u);
+ if(draw360_word(clazz,60u)!=0u){clazz=draw360_pointer(driver,12u);uint32_t callback=draw360_word(clazz,60u);((void (*)(void *))(uintptr_t)callback)(size);}
+ audio_uart_font_mem_free(memory,draw360_pointer(size,40u));
+ draw360_store(size,40u,0u);audio_uart_font_mem_free(memory,size);
+}
+/* Full FT_Stream_Close5288ce..5288e018bytes, fresh callback reread. */
+void audio_uart_ft_stream_close_5288ce(void *stream)
+{
+ if(stream!=0 && draw360_word(stream,24u)!=0u){uint32_t callback=draw360_word(stream,24u);((void (*)(void *))(uintptr_t)callback)(stream);}
+}
+/* Full FT_Stream_Free52502a..52504c34bytes, allocator cached before close. */
+void audio_uart_ft_stream_free_52502a(void *stream,uint32_t external)
+{
+ if(stream==0)return;
+ void *memory=draw360_pointer(stream,28u);
+ audio_uart_ft_stream_close_5288ce(stream);
+ if(external==0u)audio_uart_font_mem_free(memory,stream);
+}
+
+/* Full FT_Done_GlyphSlot5253f4..52544480bytes. */
+extern void audio_uart_ft_glyph_slot_done_525334(void *);
+void audio_uart_ft_done_glyph_slot_5253f4(void *slot)
+{
+ if(slot==0)return;
+ void *driver=draw360_pointer(draw360_pointer(slot,4u),96u);
+ void *memory=draw360_pointer(driver,8u);
+ void *previous=0,*current=draw360_pointer(draw360_pointer(slot,4u),84u);
+ while(current!=0){
+  if(current==slot){
+   void *next=draw360_pointer(current,8u);
+   if(previous==0)draw360_store(draw360_pointer(slot,4u),84u,(uint32_t)(uintptr_t)next);
+   else draw360_store(previous,8u,(uint32_t)(uintptr_t)next);
+   if(draw360_word(slot,20u)!=0u){uint32_t callback=draw360_word(slot,20u);((void (*)(void *))(uintptr_t)callback)(slot);}
+   audio_uart_ft_glyph_slot_done_525334(slot);audio_uart_font_mem_free(memory,slot);return;
+  }
+  previous=current;current=draw360_pointer(current,8u);
+ }
+}
+/* Full ft_cmap_done_internal526e38..526e5a34bytes. Cached class and memory. */
+void audio_uart_ft_cmap_done_internal_526e38(void *cmap)
+{
+ void *clazz=draw360_pointer(cmap,12u);
+ void *face=draw360_pointer(cmap,0u);
+ void *memory=draw360_pointer(face,100u);
+ if(draw360_word(clazz,8u)!=0u){uint32_t callback=draw360_word(clazz,8u);((void (*)(void *))(uintptr_t)callback)(cmap);}
+ audio_uart_font_mem_free(memory,cmap);
+}
+/* Full destroy_charmaps52586e..5258a8 58bytes. Array/count freshly reread. */
+void audio_uart_ft_destroy_charmaps_52586e(void *face,void *memory)
+{
+ if(face==0)return;
+ uint32_t index=0u;
+ while((int32_t)index<(int32_t)draw360_word(face,36u)){
+  void *array=draw360_pointer(face,40u);
+  audio_uart_ft_cmap_done_internal_526e38(draw360_pointer(array,index*4u));
+  draw360_store(draw360_pointer(face,40u),index*4u,0u);index+=1u;
+ }
+ audio_uart_font_mem_free(memory,draw360_pointer(face,40u));
+ draw360_store(face,40u,0u);draw360_store(face,36u,0u);
+}
+
+/* Full ft_glyphslot_done525334..52538682bytes. Driver/memory cached before callback. */
+extern void audio_uart_font_slot_bitmap_release(void *);
+extern void audio_uart_ft_glyph_loader_done_524c1e(void *);
+void audio_uart_ft_glyph_slot_done_525334(void *slot)
+{
+ void *driver=draw360_pointer(draw360_pointer(slot,4u),96u);
+ void *clazz=draw360_pointer(driver,12u);
+ void *memory=draw360_pointer(driver,8u);
+ if(draw360_word(clazz,68u)!=0u){uint32_t callback=draw360_word(clazz,68u);((void (*)(void *))(uintptr_t)callback)(slot);}
+ audio_uart_font_slot_bitmap_release(slot);
+ if(draw360_word(slot,156u)!=0u){
+  void *module_class=draw360_pointer(driver,0u);
+  if((draw360_word(module_class,0u)&512u)==0u){
+   audio_uart_ft_glyph_loader_done_524c1e(draw360_pointer(draw360_pointer(slot,156u),0u));
+   draw360_store(draw360_pointer(slot,156u),0u,0u);
+  }
+  audio_uart_font_mem_free(memory,draw360_pointer(slot,156u));draw360_store(slot,156u,0u);
+ }
+}
+
+/* Full FT_GlyphLoader_Done524c1e..524c3a28bytes; memory cached before reset. */
+extern void audio_uart_ft_glyph_loader_reset_524bc4(void *);
+void audio_uart_ft_glyph_loader_done_524c1e(void *loader)
+{
+ if(loader==0)return;
+ void *memory=draw360_pointer(loader,0u);
+ audio_uart_ft_glyph_loader_reset_524bc4(loader);
+ audio_uart_font_mem_free(memory,loader);
+}
+
+/* Whole FT_GlyphLoader_Rewind524ba8..524bc4 28bytes. */
+void audio_uart_ft_glyph_loader_rewind_524ba8(void *loader)
+{
+ uint8_t *base=(uint8_t *)loader+20u;
+ *(volatile uint16_t *)(void *)(base+2u)=0u;
+ *(volatile uint16_t *)(void *)base=0u;
+ draw360_store(base,28u,0u);
+ audio_uart_checksum_copy((uint8_t *)loader+56u,base,36u);
+}
+/* Whole FT_GlyphLoader_Reset524bc4..524c1e90bytes; fresh each allocation read. */
+void audio_uart_ft_glyph_loader_reset_524bc4(void *loader)
+{
+ void *memory=draw360_pointer(loader,0u);
+ static const uint8_t offsets[5]={24u,28u,32u,40u,52u};
+ for(uint32_t i=0;i<5u;i++){
+  audio_uart_font_mem_free(memory,draw360_pointer(loader,offsets[i]));
+  draw360_store(loader,offsets[i],0u);
+ }
+ draw360_store(loader,44u,0u);draw360_store(loader,4u,0u);
+ draw360_store(loader,8u,0u);draw360_store(loader,12u,0u);
+ audio_uart_ft_glyph_loader_rewind_524ba8(loader);
+}
+
+/* Whole ft_open_face_internal5264a6..5267ee840bytes, FreeType2.9.1 with Mac branches. */
+extern uint32_t audio_uart_ft_stream_new_524f96(void *,const void *,void **);
+extern uint32_t audio_uart_ft_open_driver_face_5259be(void *,void **,uint32_t,int32_t,int32_t,void *,void **);
+extern void audio_uart_ft_list_add_529304(void *,void *);
+extern uint32_t audio_uart_ft_new_glyph_slot_525386(void *,void **);
+extern uint32_t audio_uart_ft_new_size_52687e(void *,void **);
+extern uint32_t audio_uart_ft_stream_seek_5288e0(void *,uint32_t);
+extern uint32_t audio_uart_ft_open_ps_sfnt_525d32(void *,void *,int32_t,int32_t,void *,void **);
+extern uint32_t audio_uart_ft_load_mac_face_526452(void *,void *,int32_t,void **,const void *);
+uint32_t audio_uart_ft_open_face_internal_5264a6(void *library,const void *args,int32_t face_index,void **out,uint32_t test_mac_fonts)
+{
+ void *driver=0,*memory=0,*stream=0,*face=0,*node=0;
+ if((out==0 && face_index>=0) || args==0)return 6u;
+ uint32_t external=(*(const volatile uint8_t *)args&2u)!=0u && draw360_word(args,16u)!=0u;
+ uint32_t error=audio_uart_ft_stream_new_524f96(library,args,&stream);
+ if(error!=0u)goto scan_failure;
+ memory=draw360_pointer(library,0u);
+ if((*(const volatile uint8_t *)args&8u)!=0u && draw360_word(args,20u)!=0u){
+  driver=draw360_pointer(args,20u);
+  if((*(const volatile uint8_t *)draw360_pointer(driver,0u)&1u)!=0u){
+   int32_t count=0;void *params=0;
+   if((*(const volatile uint8_t *)args&16u)!=0u){count=(int32_t)draw360_word(args,24u);params=draw360_pointer(args,28u);}
+   error=audio_uart_ft_open_driver_face_5259be(driver,&stream,external,face_index,count,params,&face);
+   if(error==0u)goto success;
+  }else error=32u;
+  audio_uart_ft_stream_free_52502a(stream,external);goto failure;
+ }
+ error=11u;
+ uint32_t cursor=(uint32_t)(uintptr_t)library+20u;
+ uint32_t limit=cursor+draw360_word(library,16u)*4u;
+ for(;cursor<limit;cursor+=4u){
+  void *candidate=draw360_pointer((void *)(uintptr_t)cursor,0u);
+  if((*(const volatile uint8_t *)draw360_pointer(candidate,0u)&1u)==0u)continue;
+  driver=candidate;int32_t count=0;void *params=0;
+  if((*(const volatile uint8_t *)args&16u)!=0u){count=(int32_t)draw360_word(args,24u);params=draw360_pointer(args,28u);}
+  error=audio_uart_ft_open_driver_face_5259be(driver,&stream,external,face_index,count,params,&face);
+  if(error==0u)goto success;
+  if((uint8_t)test_mac_fonts!=0u && audio_uart_font_path_compare(draw360_pointer(draw360_pointer(draw360_pointer((void *)(uintptr_t)cursor,0u),0u),8u),"truetype")==0 && (uint8_t)error==142u){
+   error=audio_uart_ft_stream_seek_5288e0(stream,0u);
+   if(error!=0u)break;
+   error=audio_uart_ft_open_ps_sfnt_525d32(library,stream,face_index,count,params,out);
+   if(error==0u){audio_uart_ft_stream_free_52502a(stream,external);return error;}
+  }
+  if((uint8_t)error!=2u)break;
+ }
+scan_failure:
+ if((uint8_t)error==81u || (uint8_t)error==2u || (uint8_t)error==85u){
+  if((uint8_t)test_mac_fonts!=0u){
+   error=audio_uart_ft_load_mac_face_526452(library,stream,face_index,out,args);
+   if(error==0u){audio_uart_ft_stream_free_52502a(stream,external);return error;}
+  }
+  if((uint8_t)error==2u)error=2u;
+ }
+ audio_uart_ft_stream_free_52502a(stream,external);
+ goto failure;
+success:
+ {
+  int32_t alloc_error;node=audio_uart_font_mem_alloc(memory,12,&alloc_error);error=(uint32_t)alloc_error;
+  if(error!=0u)goto failure;
+ }
+ draw360_store(node,8u,(uint32_t)(uintptr_t)face);
+ audio_uart_ft_list_add_529304((uint8_t *)draw360_pointer(face,96u)+16u,node);
+ if(face_index>=0){
+  error=audio_uart_ft_new_glyph_slot_525386(face,0);
+  if(error!=0u)goto failure;
+  void *size;error=audio_uart_ft_new_size_52687e(face,&size);
+  if(error!=0u)goto failure;
+  draw360_store(face,88u,(uint32_t)(uintptr_t)size);error=0u;
+ }
+ if((*(const volatile uint8_t *)((const uint8_t *)face+8u)&1u)!=0u){
+  volatile int16_t *height=(volatile int16_t *)((uint8_t *)face+74u);
+  if(*height<0)*height=(int16_t)(0u-(uint32_t)(int32_t)*height);
+  if((*(const volatile uint8_t *)((const uint8_t *)face+8u)&32u)==0u)
+   *(volatile int16_t *)((uint8_t *)face+78u)=*height;
+ }
+ if((*(const volatile uint8_t *)((const uint8_t *)face+8u)&2u)!=0u){
+  uint32_t i=0;
+  for(;(int32_t)i<(int32_t)draw360_word(face,28u);i++){
+   uint8_t *strike=(uint8_t *)draw360_pointer(face,32u)+i*16u;
+   volatile int16_t *height=(volatile int16_t *)(void *)strike;
+   if(*height<0)*height=(int16_t)(0u-(uint32_t)(int32_t)*height);
+   if((int32_t)draw360_word(strike,8u)<0)draw360_store(strike,8u,0u-draw360_word(strike,8u));
+   if((int32_t)draw360_word(strike,12u)<0)draw360_store(strike,12u,0u-draw360_word(strike,12u));
+   if(*height<0 || (int32_t)draw360_word(strike,8u)<0 || (int32_t)draw360_word(strike,12u)<0)
+    for(uint32_t j=0;j<8u;j++)((volatile uint16_t *)(void *)strike)[j]=0u;
+  }
+ }
+ {
+  void *internal=draw360_pointer(face,128u);
+  draw360_store(internal,0u,65536u);draw360_store(internal,4u,0u);draw360_store(internal,8u,0u);draw360_store(internal,12u,65536u);
+  draw360_store(internal,16u,0u);draw360_store(internal,20u,0u);draw360_store(internal,64u,1u);
+  *(volatile uint8_t *)((uint8_t *)internal+56u)=255u;
+ }
+ if(out!=0)draw360_store(out,0u,(uint32_t)(uintptr_t)face);
+ else (void)audio_uart_ft_done_face_526814(face);
+ return error;
+failure:
+ if(node!=0)(void)audio_uart_ft_done_face_526814(face);
+ else if(face!=0)audio_uart_ft_destroy_face_5258a8(memory,face,driver);
+ return error;
+}
+
+/* Whole FT_Stream_New524f96..52502a148bytes; output cleared before validation. */
+extern void audio_uart_ft_stream_open_memory_5288b8(void *,const void *,uint32_t);
+extern uint32_t audio_uart_ft_stream_open_path_5675e8(void *,const char *);
+uint32_t audio_uart_ft_stream_new_524f96(void *library,const void *args,void **out)
+{
+ draw360_store(out,0u,0u);
+ if(library==0)return 33u;
+ if(args==0)return 6u;
+ void *memory=draw360_pointer(library,0u);
+ int32_t error;void *stream=audio_uart_font_mem_alloc(memory,40,&error);
+ if(error!=0)return (uint32_t)error;
+ draw360_store(stream,28u,(uint32_t)(uintptr_t)memory);
+ if((*(const volatile uint8_t *)args&1u)!=0u)
+  audio_uart_ft_stream_open_memory_5288b8(stream,draw360_pointer(args,4u),draw360_word(args,8u));
+ else if((*(const volatile uint8_t *)args&4u)!=0u){
+  error=(int32_t)audio_uart_ft_stream_open_path_5675e8(stream,draw360_pointer(args,12u));
+  draw360_store(stream,16u,draw360_word(args,12u));
+ }else if((*(const volatile uint8_t *)args&2u)!=0u && draw360_word(args,16u)!=0u){
+  audio_uart_font_mem_free(memory,stream);stream=draw360_pointer(args,16u);
+ }else error=6;
+ if(error==0)draw360_store(stream,28u,(uint32_t)(uintptr_t)memory);
+ else{audio_uart_font_mem_free(memory,stream);stream=0;}
+ draw360_store(out,0u,(uint32_t)(uintptr_t)stream);return (uint32_t)error;
+}
+/* Whole open_face5259be..525ade288bytes; all seven call arguments explicit. */
+extern uint32_t audio_uart_ft_find_unicode_charmap_52594a(void *);
+uint32_t audio_uart_ft_open_driver_face_5259be(void *driver,void **stream_cell,uint32_t external,int32_t index,int32_t param_count,void *params,void **out)
+{
+ void *clazz=draw360_pointer(driver,12u);
+ void *memory=draw360_pointer(driver,8u);
+ void *internal=0;
+ int32_t error;
+ void *face=audio_uart_font_mem_alloc(memory,(int32_t)draw360_word(clazz,36u),&error);
+ if(error!=0)goto failed;
+ draw360_store(face,96u,(uint32_t)(uintptr_t)driver);draw360_store(face,100u,(uint32_t)(uintptr_t)memory);
+ draw360_store(face,104u,draw360_word(stream_cell,0u));
+ if((uint8_t)external!=0u)draw360_store(face,8u,draw360_word(face,8u)|1024u);
+ internal=audio_uart_font_mem_alloc(memory,68,&error);
+ if(error!=0)goto failed;
+ draw360_store(face,128u,(uint32_t)(uintptr_t)internal);
+ draw360_store(draw360_pointer(face,128u),52u,0u);
+ for(uint32_t i=0;(int32_t)i<param_count && draw360_word(draw360_pointer(face,128u),52u)==0u;i++){
+  if(draw360_word(params,i*8u)==0x696e6372u)
+   draw360_store(draw360_pointer(face,128u),52u,draw360_word(params,i*8u+4u));
+ }
+ draw360_store(draw360_pointer(face,128u),60u,UINT32_MAX);
+ if(draw360_word(clazz,48u)!=0u){
+  uint32_t callback=draw360_word(clazz,48u);
+  error=(int32_t)((uint32_t (*)(void *,void *,int32_t,int32_t,void *))(uintptr_t)callback)
+   (draw360_pointer(stream_cell,0u),face,index,param_count,params);
+ }
+ draw360_store(stream_cell,0u,draw360_word(face,104u));
+ if(error==0){
+  uint32_t lookup=audio_uart_ft_find_unicode_charmap_52594a(face);
+  if(lookup==0u || (uint8_t)lookup==38u){draw360_store(out,0u,(uint32_t)(uintptr_t)face);return (uint32_t)error;}
+  error=(int32_t)lookup;
+ }
+failed:
+ if(error!=0){
+  audio_uart_ft_destroy_charmaps_52586e(face,memory);
+  if(draw360_word(clazz,52u)!=0u){uint32_t callback=draw360_word(clazz,52u);((void (*)(void *))(uintptr_t)callback)(face);}
+  audio_uart_font_mem_free(memory,internal);audio_uart_font_mem_free(memory,face);
+  draw360_store(out,0u,0u);
+ }
+ return (uint32_t)error;
+}
+
+/* Whole FT_Stream_OpenMemory5288b8..5288ce22bytes. */
+void audio_uart_ft_stream_open_memory_5288b8(void *stream,const void *base,uint32_t size)
+{
+ draw360_store(stream,0u,(uint32_t)(uintptr_t)base);draw360_store(stream,4u,size);
+ draw360_store(stream,8u,0u);draw360_store(stream,32u,0u);
+ draw360_store(stream,20u,0u);draw360_store(stream,24u,0u);
+}
+
+/* Complete FT_GlyphLoader_New524b88..524ba8 32bytes; output only written on success. */
+uint32_t audio_uart_ft_glyph_loader_new_524b88(void *memory,void **out)
+{
+ int32_t error;void *loader=audio_uart_font_mem_alloc(memory,96,&error);
+ if(error==0){draw360_store(loader,0u,(uint32_t)(uintptr_t)memory);draw360_store(out,0u,(uint32_t)(uintptr_t)loader);}
+ return (uint32_t)error;
+}
+/* Complete ft_glyphslot_init52504c..5250a2 86bytes; typed hidden loader output. */
+uint32_t audio_uart_ft_glyph_slot_init_52504c(void *slot)
+{
+ void *driver=draw360_pointer(draw360_pointer(slot,4u),96u);
+ void *clazz=draw360_pointer(driver,12u),*memory=draw360_pointer(driver,8u);
+ draw360_store(slot,0u,draw360_word(driver,4u));
+ int32_t error;void *internal=audio_uart_font_mem_alloc(memory,40,&error);
+ if(error!=0)return (uint32_t)error;
+ draw360_store(slot,156u,(uint32_t)(uintptr_t)internal);
+ if((draw360_word(draw360_pointer(driver,0u),0u)&512u)==0u)
+  error=(int32_t)audio_uart_ft_glyph_loader_new_524b88(memory,draw360_pointer(slot,156u));
+ if(error==0 && draw360_word(clazz,64u)!=0u){uint32_t callback=draw360_word(clazz,64u);error=(int32_t)((uint32_t (*)(void *))(uintptr_t)callback)(slot);}
+ return (uint32_t)error;
+}
+/* Complete FT_New_GlyphSlot525386..5253f4110bytes; only allocation failure clears output. */
+uint32_t audio_uart_ft_new_glyph_slot_525386(void *face,void **out)
+{
+ if(face==0)return 35u;
+ if(draw360_word(face,96u)==0u)return 6u;
+ void *driver=draw360_pointer(face,96u),*clazz=draw360_pointer(driver,12u),*memory=draw360_pointer(driver,8u);
+ int32_t error;void *slot=audio_uart_font_mem_alloc(memory,(int32_t)draw360_word(clazz,44u),&error);
+ if(error!=0){if(out!=0)draw360_store(out,0u,0u);return (uint32_t)error;}
+ draw360_store(slot,4u,(uint32_t)(uintptr_t)face);
+ error=(int32_t)audio_uart_ft_glyph_slot_init_52504c(slot);
+ if(error!=0){audio_uart_ft_glyph_slot_done_525334(slot);audio_uart_font_mem_free(memory,slot);return (uint32_t)error;}
+ draw360_store(slot,8u,draw360_word(face,84u));draw360_store(face,84u,(uint32_t)(uintptr_t)slot);
+ if(out!=0)draw360_store(out,0u,(uint32_t)(uintptr_t)slot);
+ return (uint32_t)error;
+}
+/* Complete FT_New_Size52687e..526944198bytes; retained native cleanup scope. */
+uint32_t audio_uart_ft_new_size_52687e(void *face,void **out)
+{
+ if(face==0)return 35u;
+ if(out==0)return 6u;
+ if(draw360_word(face,96u)==0u)return 34u;
+ draw360_store(out,0u,0u);
+ void *clazz=draw360_pointer(draw360_pointer(face,96u),12u),*memory=draw360_pointer(face,100u);
+ void *node=0;int32_t error;
+ void *size=audio_uart_font_mem_alloc(memory,(int32_t)draw360_word(clazz,40u),&error);
+ if(error==0)node=audio_uart_font_mem_alloc(memory,12,&error);
+ if(error==0){
+  draw360_store(size,0u,(uint32_t)(uintptr_t)face);
+  void *internal=audio_uart_font_mem_alloc(memory,36,&error);
+  if(error==0){
+   draw360_store(size,40u,(uint32_t)(uintptr_t)internal);
+   if(draw360_word(clazz,56u)!=0u){uint32_t callback=draw360_word(clazz,56u);error=(int32_t)((uint32_t (*)(void *))(uintptr_t)callback)(size);}
+   if(error==0){draw360_store(out,0u,(uint32_t)(uintptr_t)size);draw360_store(node,8u,(uint32_t)(uintptr_t)size);audio_uart_ft_list_add_529304((uint8_t *)face+108u,node);}
+  }
+ }
+ if(error!=0){audio_uart_font_mem_free(memory,node);audio_uart_font_mem_free(memory,size);}
+ return (uint32_t)error;
+}
+
+/* Complete FT_List_Add529304..52932432bytes; tail cached before node writes. */
+void audio_uart_ft_list_add_529304(void *list,void *node)
+{
+ if(list==0 || node==0)return;
+ void *tail=draw360_pointer(list,4u);
+ draw360_store(node,4u,0u);draw360_store(node,0u,(uint32_t)(uintptr_t)tail);
+ if(tail!=0)draw360_store(tail,4u,(uint32_t)(uintptr_t)node);
+ else draw360_store(list,0u,(uint32_t)(uintptr_t)node);
+ draw360_store(list,4u,(uint32_t)(uintptr_t)node);
+}
+
+/* Full find_unicode_charmap52594a..5259be116bytes, backward UCS-4 preference. */
+uint32_t audio_uart_ft_find_unicode_charmap_52594a(void *face)
+{
+ uint32_t array=draw360_word(face,40u);
+ if(array==0u)return 38u;
+ uint32_t cursor=array+draw360_word(face,36u)*4u-4u;
+ for(;cursor>=array;cursor-=4u){
+  void *map=draw360_pointer((void *)(uintptr_t)cursor,0u);
+  if(draw360_word(map,4u)!=0x756e6963u)continue;
+  uint16_t platform=*(const volatile uint16_t *)((const uint8_t *)map+8u);
+  if((platform==3u && *(const volatile uint16_t *)((const uint8_t *)map+10u)==10u)
+   || (*(const volatile uint16_t *)((const uint8_t *)map+8u)==0u
+    && *(const volatile uint16_t *)((const uint8_t *)map+10u)==4u)){
+   draw360_store(face,92u,draw360_word((void *)(uintptr_t)cursor,0u));return 0u;
+  }
+ }
+ cursor=array+draw360_word(face,36u)*4u-4u;
+ for(;cursor>=array;cursor-=4u){
+  void *map=draw360_pointer((void *)(uintptr_t)cursor,0u);
+  if(draw360_word(map,4u)==0x756e6963u){draw360_store(face,92u,draw360_word((void *)(uintptr_t)cursor,0u));return 0u;}
+ }
+ return 38u;
+}
+/* Full LVGL filesystem read callback567734..56777a70bytes. */
+extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
+uint32_t audio_uart_ft_lv_fs_stream_io_567734(void *stream,uint32_t offset,void *buffer,uint32_t count)
+{
+ if(count==0u && draw360_word(stream,4u)<offset)return 1u;
+ void *file=draw360_pointer(stream,12u);
+ if(draw360_word(stream,8u)!=offset)(void)audio_uart_lv_fs_file_seek_4c6fba(file,offset,0u);
+ if(count==0u)return 0u;
+ uint32_t read_count;
+ uint32_t result=audio_uart_lv_fs_file_read_4c6f46(file,buffer,count,&read_count);
+ return (uint8_t)result==0u?read_count:0u;
+}
+/* Full LVGL filesystem close callback5676f8..56771a34bytes. */
+void audio_uart_ft_lv_fs_stream_close_5676f8(void *stream)
+{
+ void *file=draw360_pointer(stream,12u);
+ (void)audio_uart_lv_fs_file_close_4c6ee0(file);
+ audio_uart_lv_pool_free_48429e((void *)(uintptr_t)0x20000354u,file);
+ draw360_store(stream,12u,0u);draw360_store(stream,4u,0u);draw360_store(stream,0u,0u);
+}
+/* Full product FT_Stream_Open5675e8..5676a0184bytes, pinned LVGL adapter contract. */
+uint32_t audio_uart_ft_stream_open_path_5675e8(void *stream,const char *pathname)
+{
+ if(stream==0)return 40u;
+ draw360_store(stream,12u,0u);draw360_store(stream,16u,(uint32_t)(uintptr_t)pathname);
+ draw360_store(stream,0u,0u);draw360_store(stream,8u,0u);
+ draw360_store(stream,20u,0u);draw360_store(stream,24u,0u);
+ uint32_t file[3];
+ if((uint8_t)audio_uart_lv_fs_file_open_4c6d9a(file,pathname,2u)!=0u)return 1u;
+ (void)audio_uart_lv_fs_file_seek_4c6fba(file,0u,2u);
+ uint32_t size;
+ if((uint8_t)audio_uart_lv_fs_file_tell_4c7018(file,&size)!=0u){(void)audio_uart_lv_fs_file_close_4c6ee0(file);return 81u;}
+ draw360_store(stream,4u,size);
+ (void)audio_uart_lv_fs_file_seek_4c6fba(file,0u,0u);
+ void *file_p=audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)0x20000354u,12u);
+ if(file_p==0){
+  audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\lvgl_ambiq_demo\\lvgl_ttf\\src\\am_ftsystem.c",129u,"FT_Stream_Open","Asserted at expression: %s (%s)","file_p != NULL","Out of memory");
+  for(;;){}
+ }
+ if(file_p==0){(void)audio_uart_lv_fs_file_close_4c6ee0(file);return 81u;}
+ uint32_t a=file[0],b=file[1],c=file[2];
+ draw360_store(file_p,0u,a);draw360_store(file_p,4u,b);draw360_store(file_p,8u,c);
+ draw360_store(stream,12u,(uint32_t)(uintptr_t)file_p);
+ draw360_store(stream,20u,(uint32_t)(uintptr_t)&audio_uart_ft_lv_fs_stream_io_567734);
+ draw360_store(stream,24u,(uint32_t)(uintptr_t)&audio_uart_ft_lv_fs_stream_close_5676f8);
+ return 0u;
+}
+
+/* Whole ft_lookup_PS_in_sfnt_stream525c08..525d32 298bytes. */
+extern uint32_t audio_uart_ft_stream_read_ulong_528ba8(void *,int32_t *);
+extern uint32_t audio_uart_ft_stream_read_ushort_528b4a(void *,int32_t *);
+extern uint32_t audio_uart_ft_stream_skip_528914(void *,int32_t);
+uint32_t audio_uart_ft_lookup_ps_sfnt_525c08(void *stream,int32_t index,uint32_t *offset,uint32_t *length,uint8_t *cid)
+{
+ *offset=0u;*length=0u;*cid=0u;
+ int32_t error=index;
+ uint32_t tag=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+ if(error!=0)return (uint32_t)error;
+ if(tag!=0x74797031u)return 2u;
+ uint32_t count=(uint16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
+ if(error!=0)return (uint32_t)error;
+ error=(int32_t)audio_uart_ft_stream_skip_528914(stream,6);
+ if(error!=0)return (uint32_t)error;
+ int32_t found=-1;*cid=0u;
+ for(uint32_t i=0;i<count;i++){
+  uint32_t table=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+  if(error!=0)return (uint32_t)error;
+  error=(int32_t)audio_uart_ft_stream_skip_528914(stream,4);
+  if(error!=0)return (uint32_t)error;
+  uint32_t value=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);*offset=value;
+  if(error!=0)return (uint32_t)error;
+  value=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);*length=value;
+  if(error!=0)return (uint32_t)error;
+  if(table==0x43494420u){found=(int32_t)((uint32_t)found+1u);*offset+=22u;*length-=22u;*cid=1u;if(index<0)return 0u;}
+  else if(table==0x54595031u){found=(int32_t)((uint32_t)found+1u);*offset+=24u;*length-=24u;*cid=0u;if(index<0)return 0u;}
+  if(index>=0 && found==index)return 0u;
+ }
+ return 142u;
+}
+/* Whole open_face_from_buffer525b6e..525c08 154bytes, typed stream ownership. */
+extern void audio_uart_ft_memory_stream_close_525b02(void *);
+extern uint32_t audio_uart_ft_new_memory_stream_525b20(void *,void *,uint32_t,void (*)(void *),void **);
+extern void *audio_uart_ft_get_module_5273b8(void *,const char *);
+uint32_t audio_uart_ft_open_face_from_buffer_525b6e(void *library,void *buffer,uint32_t size,int32_t index,const char *driver_name,void **out)
+{
+ void *stream=0,*memory=draw360_pointer(library,0u);
+ uint32_t error=audio_uart_ft_new_memory_stream_525b20(library,buffer,size,audio_uart_ft_memory_stream_close_525b02,&stream);
+ if(error!=0u){audio_uart_font_mem_free(memory,buffer);return error;}
+ uint32_t args[8];args[0]=2u;args[4]=(uint32_t)(uintptr_t)stream;
+ if(driver_name!=0){args[0]=10u;args[5]=(uint32_t)(uintptr_t)audio_uart_ft_get_module_5273b8(library,driver_name);}
+ error=audio_uart_ft_open_face_internal_5264a6(library,args,index,out,0u);
+ if(error==0u){void *face=draw360_pointer(out,0u);draw360_store(face,8u,draw360_word(face,8u)&~1024u);}
+ else{audio_uart_ft_stream_close_5288ce(stream);audio_uart_font_mem_free(memory,stream);}
+ return error;
+}
+/* Whole open_face_PS_from_sfnt_stream525d32..525e16 228bytes. */
+extern uint32_t audio_uart_ft_stream_read_528928(void *,void *,uint32_t);
+uint32_t audio_uart_ft_open_ps_sfnt_525d32(void *library,void *stream,int32_t index,int32_t count,void *params,void **out)
+{
+ (void)count;(void)params;
+ void *memory=draw360_pointer(library,0u);
+ if(index>0)index=(int32_t)((uint32_t)index&65535u);
+ uint32_t original=draw360_word(stream,8u),offset,length;uint8_t cid;
+ uint32_t error=audio_uart_ft_lookup_ps_sfnt_525c08(stream,index,&offset,&length,&cid);
+ if(error==0u){
+  if(draw360_word(stream,4u)<offset || draw360_word(stream,4u)-offset<length)error=8u;
+  else{
+   error=audio_uart_ft_stream_seek_5288e0(stream,offset+original);
+   if(error==0u){
+    int32_t alloc_error;void *buffer=audio_uart_font_mem_alloc(memory,(int32_t)length,&alloc_error);error=(uint32_t)alloc_error;
+    if(error==0u){
+     error=audio_uart_ft_stream_read_528928(stream,buffer,length);
+     if(error==0u){if(index>=0)index=0;error=audio_uart_ft_open_face_from_buffer_525b6e(library,buffer,length,index,cid?"cid":"type1",out);}
+     else audio_uart_font_mem_free(memory,buffer);
+    }
+   }
+  }
+ }
+ if((uint8_t)error==2u){uint32_t rewind=audio_uart_ft_stream_seek_5288e0(stream,original);if(rewind!=0u)return rewind;}
+ return error;
+}
+
+/* Whole memory_stream_close525b02..525b20 30bytes. */
+void audio_uart_ft_memory_stream_close_525b02(void *stream)
+{
+ void *memory=draw360_pointer(stream,28u);
+ audio_uart_font_mem_free(memory,draw360_pointer(stream,0u));
+ draw360_store(stream,0u,0u);draw360_store(stream,4u,0u);
+ draw360_store(stream,0u,0u);draw360_store(stream,24u,0u);
+}
+/* Whole new_memory_stream525b20..525b6e78bytes; do not invent stream-memory initialization. */
+uint32_t audio_uart_ft_new_memory_stream_525b20(void *library,void *buffer,uint32_t size,void (*close)(void *),void **out)
+{
+ if(library==0)return 33u;
+ if(buffer==0)return 6u;
+ draw360_store(out,0u,0u);
+ void *memory=draw360_pointer(library,0u);
+ int32_t error;void *stream=audio_uart_font_mem_alloc(memory,40,&error);
+ if(error==0){audio_uart_ft_stream_open_memory_5288b8(stream,buffer,size);draw360_store(stream,24u,(uint32_t)(uintptr_t)close);draw360_store(out,0u,(uint32_t)(uintptr_t)stream);}
+ return (uint32_t)error;
+}
+
+/* Whole FT_Stream_Seek5288e0..52891452bytes. Callback count0 result is failure boolean. */
+uint32_t audio_uart_ft_stream_seek_5288e0(void *stream,uint32_t position)
+{
+ if(draw360_word(stream,20u)!=0u){
+  uint32_t callback=draw360_word(stream,20u);
+  uint32_t result=((uint32_t (*)(void *,uint32_t,void *,uint32_t))(uintptr_t)callback)(stream,position,0,0u);
+  if(result!=0u)return 85u;
+ }else if(draw360_word(stream,4u)<position)return 85u;
+ draw360_store(stream,8u,position);return 0u;
+}
+/* Whole FT_Stream_Skip528914..52892820bytes. */
+uint32_t audio_uart_ft_stream_skip_528914(void *stream,int32_t distance)
+{if(distance<0)return 85u;return audio_uart_ft_stream_seek_5288e0(stream,draw360_word(stream,8u)+(uint32_t)distance);}
+/* Whole FT_Stream_ReadAt528936..52899292bytes; short-read advances position. */
+uint32_t audio_uart_ft_stream_read_at_528936(void *stream,uint32_t offset,void *buffer,uint32_t count)
+{
+ if(offset>=draw360_word(stream,4u))return 85u;
+ uint32_t actual;
+ if(draw360_word(stream,20u)!=0u){
+  uint32_t callback=draw360_word(stream,20u);
+  actual=((uint32_t (*)(void *,uint32_t,void *,uint32_t))(uintptr_t)callback)(stream,offset,buffer,count);
+ }else{
+  actual=draw360_word(stream,4u)-offset;
+  if(count<actual)actual=count;
+  uint32_t address=draw360_word(stream,0u)+offset;
+  audio_uart_checksum_copy(buffer,(const void *)(uintptr_t)address,actual);
+ }
+ draw360_store(stream,8u,offset+actual);
+ return actual<count?85u:0u;
+}
+/* Whole FT_Stream_Read528928..52893614bytes. */
+uint32_t audio_uart_ft_stream_read_528928(void *stream,void *buffer,uint32_t count)
+{return audio_uart_ft_stream_read_at_528936(stream,draw360_word(stream,8u),buffer,count);}
+/* Common C representation of whole BE16/BE32 bodies; preserve all native read/order/ABI branches. */
+static uint32_t ft382_read_be(void *stream,int32_t *error,uint32_t width)
+{
+ *error=0;
+ if(draw360_word(stream,8u)+(width-1u)>=draw360_word(stream,4u)){*error=85;return 0u;}
+ uint8_t local[4];const volatile uint8_t *data;
+ if(draw360_word(stream,20u)!=0u){
+  uint32_t offset=draw360_word(stream,8u),callback=draw360_word(stream,20u);
+  uint32_t actual=((uint32_t (*)(void *,uint32_t,void *,uint32_t))(uintptr_t)callback)(stream,offset,local,width);
+  if(actual!=width){*error=85;return 0u;}
+  data=local;
+ }else data=(const volatile uint8_t *)(uintptr_t)(draw360_word(stream,0u)+draw360_word(stream,8u));
+ uint32_t value=0u;
+ if(data!=0)for(uint32_t i=0;i<width;i++)value=(value<<8u)|data[i];
+ draw360_store(stream,8u,draw360_word(stream,8u)+width);return value;
+}
+/* Whole FT_Stream_ReadUShort528b4a..528ba8 94bytes. */
+uint32_t audio_uart_ft_stream_read_ushort_528b4a(void *stream,int32_t *error)
+{return (uint16_t)ft382_read_be(stream,error,2u);}
+/* Whole FT_Stream_ReadULong528ba8..528c14108bytes. */
+uint32_t audio_uart_ft_stream_read_ulong_528ba8(void *stream,int32_t *error)
+{return ft382_read_be(stream,error,4u);}
+/* Whole FT_Get_Module5273b8..5273f2 58bytes. */
+void *audio_uart_ft_get_module_5273b8(void *library,const char *name)
+{
+ if(library==0 || name==0)return 0;
+ uint32_t cursor=(uint32_t)(uintptr_t)library+20u;
+ uint32_t limit=cursor+draw360_word(library,16u)*4u;
+ for(;cursor<limit;cursor+=4u){
+  void *module=draw360_pointer((void *)(uintptr_t)cursor,0u);
+  const char *module_name=draw360_pointer(draw360_pointer(module,0u),8u);
+  if(audio_uart_font_path_compare(module_name,name)==0)return draw360_pointer((void *)(uintptr_t)cursor,0u);
+ }
+ return 0;
+}
+/* Whole resource-fork provider222bytes remains an explicit external boundary. */
+extern uint32_t audio_uart_ft_read_mac_resource_5261ac(void *,void *,uint32_t,int32_t,void **);
+extern uint32_t audio_uart_ft_mac_path_search_526356(void *,void *,int32_t,void **,const void *);
+/* Whole MacBinary reader5262ac..526356170bytes. Native instruction ABI has four args. */
+uint32_t audio_uart_ft_read_macbinary_5262ac(void *library,void *stream,int32_t index,void **face)
+{
+ if(stream==0)return 85u;
+ uint32_t error=audio_uart_ft_stream_seek_5288e0(stream,0u);
+ if(error!=0u)return error;
+ uint8_t header[128];
+ error=audio_uart_ft_stream_read_528928(stream,header,128u);
+ if(error!=0u)return error;
+ if(header[0]!=0u || header[74]!=0u || header[82]!=0u || header[1]==0u || header[1]>=34u || header[63]!=0u || header[(uint32_t)header[1]+2u]!=0u || header[83]>=128u)return 2u;
+ uint32_t length=((uint32_t)header[83]<<24u)|((uint32_t)header[84]<<16u)|((uint32_t)header[85]<<8u)|header[86];
+ uint32_t offset=((length+127u)&~127u)+128u;
+ return audio_uart_ft_read_mac_resource_5261ac(library,stream,offset,index,face);
+}
+/* Whole Mac fallback526452..5264a684bytes; branch on low byte, preserve full R0 result. */
+uint32_t audio_uart_ft_load_mac_face_526452(void *library,void *stream,int32_t index,void **face,const void *args)
+{
+ uint32_t error=audio_uart_ft_read_macbinary_5262ac(library,stream,index,face);
+ if((uint8_t)error==2u)error=audio_uart_ft_read_mac_resource_5261ac(library,stream,0u,index,face);
+ if(((uint8_t)error==2u || (uint8_t)error==85u) && ((*(const volatile uint8_t *)args)&4u)!=0u)error=audio_uart_ft_mac_path_search_526356(library,stream,index,face,args);
+ return error;
+}
+extern uint32_t audio_uart_ft_raccess_header_528064(void *,void *,uint32_t,uint32_t *,uint32_t *);
+extern uint32_t audio_uart_ft_raccess_offsets_528298(void *,void *,uint32_t,uint32_t,uint32_t,uint32_t,void **,int32_t *);
+extern uint32_t audio_uart_ft_mac_read_post_525e16(void *,void *,void *,int32_t,int32_t,void **);
+extern uint32_t audio_uart_ft_mac_read_sfnt_5260a4(void *,void *,void *,int32_t,int32_t,void **);
+/* Whole IsMacResource5261ac..52628a222bytes. Cached allocator, full status, fresh face pointer. */
+uint32_t audio_uart_ft_read_mac_resource_5261ac(void *library,void *stream,uint32_t offset,int32_t index,void **face)
+{
+ void *memory=draw360_pointer(library,0u);
+ uint32_t map,data;
+ uint32_t error=audio_uart_ft_raccess_header_528064(library,stream,offset,&map,&data);
+ if(error!=0u)return error;
+ void *offsets;int32_t count;
+ error=audio_uart_ft_raccess_offsets_528298(library,stream,map,data,0x504f5354u,1u,&offsets,&count);
+ if(error==0u){
+  error=audio_uart_ft_mac_read_post_525e16(library,stream,offsets,count,index,face);
+  audio_uart_font_mem_free(memory,offsets);
+  offsets=0;
+  if(error==0u)draw360_store(*face,0u,1u);
+  return error;
+ }
+ error=audio_uart_ft_raccess_offsets_528298(library,stream,map,data,0x73666e74u,0u,&offsets,&count);
+ if(error==0u){
+  /* Cortex-M SDIV contract includes divide-by-zero and INT_MIN/-1 results. */
+  int32_t quotient=count==0?0:(index==(-2147483647-1) && count==-1?(-2147483647-1):index/count);
+  int32_t internal=(int32_t)((uint32_t)index-(uint32_t)count*(uint32_t)quotient);
+  error=audio_uart_ft_mac_read_sfnt_5260a4(library,stream,offsets,count,internal,face);
+  audio_uart_font_mem_free(memory,offsets);
+  offsets=0;
+  if(error==0u)draw360_store(*face,0u,(uint32_t)count);
+ }
+ return error;
+}
+static uint32_t ft385_be32(const uint8_t *p)
+{return ((uint32_t)p[0]<<24u)|((uint32_t)p[1]<<16u)|((uint32_t)p[2]<<8u)|p[3];}
+/* Whole FT_Raccess_Get_HeaderInfo528064..528272526bytes. Output writes persist on later failure. */
+uint32_t audio_uart_ft_raccess_header_528064(void *library,void *stream,uint32_t resource,uint32_t *map_out,uint32_t *data_out)
+{
+ (void)library;uint8_t h[32];int32_t error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,resource);
+ if(error!=0)return (uint32_t)error;
+ error=(int32_t)audio_uart_ft_stream_read_528928(stream,h,16u);
+ if(error!=0)return (uint32_t)error;
+ if(h[0]>=128u || h[4]>=128u || h[8]>=128u || h[12]>=128u)return 2u;
+ volatile uint32_t *data=data_out;
+ *data=ft385_be32(h);
+ uint32_t map=ft385_be32(h+4u),data_length=ft385_be32(h+8u),map_length=ft385_be32(h+12u);
+ if(map==0u)return 2u;
+ if((int32_t)*data<(int32_t)map){if((int32_t)(map-data_length)<(int32_t)*data)return 2u;}
+ else if((int32_t)(*data-map_length)<(int32_t)map)return 2u;
+ if((int32_t)(0x7fffffffu-data_length)<(int32_t)*data || (int32_t)(0x7fffffffu-map_length)<(int32_t)map || (int32_t)(0x7fffffffu-*data-data_length)<(int32_t)resource || (int32_t)(0x7fffffffu-map-map_length)<(int32_t)resource || draw360_word(stream,4u)<data_length+*data+resource || draw360_word(stream,4u)<map_length+map+resource)return 2u;
+ *data=resource+*data;map+=resource;
+ error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,map);
+ if(error!=0)return (uint32_t)error;
+ h[31]=(uint8_t)(h[15]+1u);
+ error=(int32_t)audio_uart_ft_stream_read_528928(stream,h+16u,16u);
+ if(error!=0)return (uint32_t)error;
+ uint32_t all_zero=1u,all_equal=1u;
+ for(uint32_t i=0;i<16u;i++){if(h[i+16u]!=0u)all_zero=0u;if(h[i+16u]!=h[i])all_equal=0u;}
+ if(all_zero==0u && all_equal==0u)return 2u;
+ /* Native BE reader overwrites the skip status through its error output. */
+ (void)audio_uart_ft_stream_skip_528914(stream,8);
+ int32_t type_offset=(int16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
+ if(error!=0)return (uint32_t)error;
+ if(type_offset<0)return 2u;
+ uint32_t type_position=map+(uint32_t)type_offset;
+ error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,type_position);
+ if(error==0)*map_out=type_position;
+ return (uint32_t)error;
+}
+extern void *audio_uart_font_mem_realloc_items(void *,int32_t,int32_t,int32_t,void *,int32_t *);
+extern void audio_uart_ft_sort_core_56798c(void *,uint32_t,uint32_t,uint32_t,int32_t (*)(const void *,const void *));
+/* Whole callback528272..52829838bytes, authenticated pointer word528710. */
+int32_t audio_uart_ft_resource_ref_compare_528272(const void *left,const void *right)
+{
+ int32_t a=*(const volatile int16_t *)left,b=*(const volatile int16_t *)right;
+ if(a<b)return -1;
+ b=*(const volatile int16_t *)right;a=*(const volatile int16_t *)left;
+ return b<a?1:0;
+}
+/* Whole qsort wrapper567c4c..567c6424bytes. Void contract; native scratch R0/R1 not API output. */
+void audio_uart_ft_qsort_567c4c(void *base,uint32_t count,uint32_t width,int32_t (*compare)(const void *,const void *))
+{if(base!=0 && compare!=0)audio_uart_ft_sort_core_56798c(base,count,count,width,compare);}
+/* Whole FT_Raccess_Get_DataOffsets528298..528470472bytes. */
+uint32_t audio_uart_ft_raccess_offsets_528298(void *library,void *stream,uint32_t map,uint32_t data,uint32_t tag,uint32_t sort,void **offsets_out,int32_t *count_out)
+{
+ void *memory=draw360_pointer(library,0u);int32_t error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,map);
+ if(error!=0)return (uint32_t)error;
+ int32_t types=(int16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
+ if(error!=0)return (uint32_t)error;
+ types++;
+ if(types>=4080)return 8u;
+ volatile int32_t *count=count_out;
+ for(int32_t i=0;i<types;i++){
+  uint32_t current_tag=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+  if(error!=0)return (uint32_t)error;
+  int32_t subcount=(int16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
+  if(error!=0)return (uint32_t)error;
+  int32_t relative=(int16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
+  if(error!=0)return (uint32_t)error;
+  if(current_tag!=tag)continue;
+  *count=subcount+1;
+  if((uint32_t)*count-1u>2726u)return 8u;
+  error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,map+(uint32_t)relative);
+  if(error!=0)return (uint32_t)error;
+  uint8_t *references=audio_uart_font_mem_realloc_items(memory,8,0,*count,0,&error);
+  if(error!=0)return (uint32_t)error;
+  for(int32_t j=0;j<*count;j++){
+   uint16_t id=(uint16_t)audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
+   *(volatile uint16_t *)(references+(uint32_t)j*8u)=id;
+   if(error!=0)goto cleanup;
+   error=(int32_t)audio_uart_ft_stream_skip_528914(stream,2);
+   if(error!=0)goto cleanup;
+   uint32_t attributes=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+   if(error!=0)goto cleanup;
+   error=(int32_t)audio_uart_ft_stream_skip_528914(stream,4);
+   if(error!=0)goto cleanup;
+   if((int32_t)attributes<0){error=8;goto cleanup;}
+   draw360_store(references+(uint32_t)j*8u,4u,attributes&0x00ffffffu);
+  }
+  if((uint8_t)sort!=0u){
+   audio_uart_ft_qsort_567c4c(references,(uint32_t)*count,8u,audio_uart_ft_resource_ref_compare_528272);
+   /* Native trace-disabled loop still rereads caller-owned count. */
+   for(int32_t j=0;j<*count;j++){}
+  }
+  uint32_t *offsets=audio_uart_font_mem_realloc_items(memory,4,0,*count,0,&error);
+  if(error==0){
+   for(int32_t j=0;j<*count;j++)offsets[j]=draw360_word(references+(uint32_t)j*8u,4u)+data;
+   *offsets_out=offsets;error=0;
+  }
+ cleanup:
+  audio_uart_font_mem_free(memory,references);return (uint32_t)error;
+ }
+ return 1u;
+}
+extern int32_t g2_lfs_memcmp(const void *,const void *,uint32_t);
+/* Whole Mac_Read_sfnt_Resource5260a4..5261a8260bytes. R0 is status; scratch R1 is not API output. */
+uint32_t audio_uart_ft_mac_read_sfnt_5260a4(void *library,void *stream,void *offsets,int32_t count,int32_t index,void **face)
+{
+ void *memory=draw360_pointer(library,0u);
+ uint32_t normalized=index<0?~(uint32_t)index:(uint32_t)index;
+ if((int32_t)normalized>=count)return 1u;
+ uint32_t offset=draw360_word(offsets,normalized*4u);
+ int32_t error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,offset);
+ if(error!=0)return (uint32_t)error;
+ uint32_t length=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+ if(error!=0)return (uint32_t)error;
+ if((int32_t)length<1)return 1u;
+ if(length>=0x01000000u)return 9u;
+ uint32_t ps_error=audio_uart_ft_open_ps_sfnt_525d32(library,stream,(int32_t)normalized,0,0,face);
+ if(ps_error==0u)return 0u;
+ error=(int32_t)audio_uart_ft_stream_seek_5288e0(stream,offset+4u);
+ if(error!=0)return (uint32_t)error;
+ void *buffer=audio_uart_font_mem_alloc(memory,(int32_t)length,&error);
+ if(error!=0)return (uint32_t)error;
+ error=(int32_t)audio_uart_ft_stream_read_528928(stream,buffer,length);
+ if(error!=0){audio_uart_font_mem_free(memory,buffer);return (uint32_t)error;}
+ const char *driver="truetype";
+ if(length>=5u && g2_lfs_memcmp(buffer,"OTTO",4u)==0)driver="cff";
+ return audio_uart_ft_open_face_from_buffer_525b6e(library,buffer,length,0,driver,face);
+}
+
+/* Complete Mac POST resource reader, native 0x525e16..0x52609c. */
+uint32_t audio_uart_ft_mac_read_post_525e16(void *library,void *stream,void *offsets,int32_t count,int32_t index,void **face)
+{
+ void *memory=draw360_pointer(library,0u);
+ uint32_t error=1u;
+ if(index==-1)index=0;
+ if(index!=0)return error;
+ uint32_t total=0u;
+ for(int32_t i=0;i<count;i++){
+  error=audio_uart_ft_stream_seek_5288e0(stream,draw360_word(offsets,(uint32_t)i*4u));
+  if(error!=0u)return error;
+  int32_t read_error=0;
+  uint32_t length=audio_uart_ft_stream_read_ulong_528ba8(stream,&read_error);
+  if(read_error!=0)return (uint32_t)read_error;
+  if(length>0xffffffu || 0xffffffu-length<total+6u)return 9u;
+  total+=length+6u;
+ }
+ if(total+2u<6u)return 10u;
+ int32_t alloc_error=0;
+ uint8_t *pfb=(uint8_t *)audio_uart_font_mem_alloc(memory,(int32_t)(total+2u),&alloc_error);
+ if(alloc_error!=0)return (uint32_t)alloc_error;
+ pfb[0]=0x80u;pfb[1]=1u;pfb[2]=0u;pfb[3]=0u;pfb[4]=0u;pfb[5]=0u;
+ uint32_t used=6u,header=2u,segment=0u;
+ int32_t prior_type=1;
+ int32_t i=0;
+ while(i<count){
+  error=audio_uart_ft_stream_seek_5288e0(stream,draw360_word(offsets,(uint32_t)i*4u));
+  if(error!=0u)goto fail;
+  int32_t read_error=0;
+  uint32_t resource_length=audio_uart_ft_stream_read_ulong_528ba8(stream,&read_error);
+  if(read_error!=0){error=(uint32_t)read_error;goto fail;}
+  if(resource_length>0x7fffffffu){error=9u;goto fail;}
+  uint32_t flags=audio_uart_ft_stream_read_ushort_528b4a(stream,&read_error);
+  if(read_error!=0){error=(uint32_t)read_error;goto fail;}
+  error=10u;
+  int32_t type=(int32_t)(flags>>8);
+  if(type!=0){
+   uint32_t payload=resource_length<3u?0u:resource_length-2u;
+   if(type==prior_type)segment+=payload;
+   else{
+    if(total+2u<header+3u)goto fail;
+    pfb[header]=(uint8_t)segment;pfb[header+1]=(uint8_t)(segment>>8);
+    pfb[header+2]=(uint8_t)(segment>>16);pfb[header+3]=(uint8_t)(segment>>24);
+    if(type==5)break;
+    if(total+2u<used+6u)goto fail;
+    pfb[used]=0x80u;pfb[used+1]=(uint8_t)type;
+    header=used+2u;
+    pfb[header]=0u;pfb[header+1]=0u;pfb[header+2]=0u;pfb[header+3]=0u;
+    used+=6u;segment=payload;
+   }
+   if(total<used || total<payload+used)goto fail;
+   error=audio_uart_ft_stream_read_528928(stream,pfb+used,payload);
+   if(error!=0u)goto fail;
+   used+=payload;error=0u;prior_type=type;
+  }
+  i++;
+ }
+ error=10u;
+ if(used+2u<=total+2u){
+  pfb[used]=0x80u;pfb[used+1]=3u;
+  if(header+3u<=total+2u){
+   pfb[header]=(uint8_t)segment;pfb[header+1]=(uint8_t)(segment>>8);
+   pfb[header+2]=(uint8_t)(segment>>16);pfb[header+3]=(uint8_t)(segment>>24);
+   return audio_uart_ft_open_face_from_buffer_525b6e(library,pfb,used+2u,0,"type1",face);
+  }
+ }
+fail:
+ if(error!=0u)error=1u;
+ audio_uart_font_mem_free(memory,pfb);
+ return error;
+}
+
+#include <stdint.h>
+/* Native Mac resource search rule table at 0x6fac7c, nine 8-byte entries. */
+typedef uint32_t (*audio_uart_ft_mac_rule_fn)(void *,void *,void *,void *,void *);
+typedef struct { audio_uart_ft_mac_rule_fn handler; int32_t type_code; } audio_uart_ft_mac_rule_entry;
+extern uint32_t audio_uart_ft_mac_rule_528508(void *,void *,void *,void *,void *);
+extern uint32_t audio_uart_ft_mac_rule_528524(void *,void *,void *,void *,void *);
+extern uint32_t audio_uart_ft_mac_rule_528540(void *,void *,void *,void *,void *);
+extern uint32_t audio_uart_ft_mac_rule_5285d4(void *,void *,void *,void *,void *);
+extern uint32_t audio_uart_ft_mac_rule_52857e(void *,void *,void *,void *,void *);
+extern uint32_t audio_uart_ft_mac_rule_52862c(void *,void *,void *,void *,void *);
+extern uint32_t audio_uart_ft_mac_rule_528650(void *,void *,void *,void *,void *);
+extern uint32_t audio_uart_ft_mac_rule_528674(void *,void *,void *,void *,void *);
+extern uint32_t audio_uart_ft_mac_rule_5286b2(void *,void *,void *,void *,void *);
+const audio_uart_ft_mac_rule_entry audio_uart_ft_mac_rules_6fac7c[9]={
+ {audio_uart_ft_mac_rule_528508,0},
+ {audio_uart_ft_mac_rule_528524,1},
+ {audio_uart_ft_mac_rule_528540,2},
+ {audio_uart_ft_mac_rule_5285d4,3},
+ {audio_uart_ft_mac_rule_52857e,4},
+ {audio_uart_ft_mac_rule_52862c,5},
+ {audio_uart_ft_mac_rule_528650,6},
+ {audio_uart_ft_mac_rule_528674,7},
+ {audio_uart_ft_mac_rule_5286b2,8}
+};
+int32_t audio_uart_ft_mac_rule_code_5284de(void *library,uint32_t index)
+{
+ (void)library;
+ return index<9u?(int8_t)audio_uart_ft_mac_rules_6fac7c[index].type_code:-2;
+}
+uint32_t audio_uart_ft_mac_rule_is_3_or_4_5284f4(void *library,uint32_t index)
+{
+ uint32_t code=(uint32_t)audio_uart_ft_mac_rule_code_5284de(library,index);
+ return code-3u<2u?1u:0u;
+}
+
+#include <stdint.h>
+extern void *audio_uart_font_mem_alloc(void *,int32_t,int32_t *);
+char *audio_uart_ft_mac_path_insert_528842(void *memory,const char *name,const char *insertion)
+{
+ uint32_t name_len=0u,insert_len=0u;
+ while(name[name_len]!=0)name_len++;
+ while(insertion[insert_len]!=0)insert_len++;
+ int32_t error=0;
+ char *result=(char *)audio_uart_font_mem_alloc(memory,(int32_t)(name_len+insert_len+1u),&error);
+ if(error!=0)return 0;
+ uint32_t slash=0u;uint32_t has_slash=0u;
+ for(uint32_t i=0;i<name_len;i++)if(name[i]=='/'){slash=i;has_slash=1u;}
+ uint32_t prefix=has_slash?slash+1u:0u;
+ for(uint32_t i=0;i<prefix;i++)result[i]=name[i];
+ result[prefix]=0;
+ uint32_t pos=prefix;
+ for(uint32_t i=0;i<insert_len;i++)result[pos++]=insertion[i];
+ for(uint32_t i=prefix;i<name_len;i++)result[pos++]=name[i];
+ result[pos]=0;
+ return result;
+}
+uint32_t audio_uart_ft_mac_rule_52862c(void *library,void *stream,void *name,void *out,void *offset)
+{
+ (void)stream;
+ char *path=audio_uart_ft_mac_path_insert_528842(*(void **)library,(const char *)name,"resource.frk/");
+ if(path==0)return 0x40u;
+ *(void **)out=path;*(uint32_t *)offset=0u;return 0u;
+}
+uint32_t audio_uart_ft_mac_rule_528650(void *library,void *stream,void *name,void *out,void *offset)
+{
+ (void)stream;
+ char *path=audio_uart_ft_mac_path_insert_528842(*(void **)library,(const char *)name,".resource/");
+ if(path==0)return 0x40u;
+ *(void **)out=path;*(uint32_t *)offset=0u;return 0u;
+}
+
+#include <stdint.h>
+extern void *audio_uart_font_mem_alloc(void *,int32_t,int32_t *);
+uint32_t audio_uart_ft_mac_rule_52857e(void *library,void *stream,void *name,void *out,void *offset)
+{
+ (void)stream;
+ const char *base=(const char *)name;uint32_t length=0u;while(base[length]!=0)length++;
+ int32_t error=0;char *path=(char *)audio_uart_font_mem_alloc(*(void **)library,(int32_t)(length+6u),&error);
+ if(error!=0)return (uint32_t)error;
+ for(uint32_t i=0;i<length;i++)path[i]=base[i];
+ const char suffix[6]="/rsrc";for(uint32_t i=0;i<6u;i++)path[length+i]=suffix[i];
+ *(void **)out=path;*(uint32_t *)offset=0u;return 0u;
+}
+uint32_t audio_uart_ft_mac_rule_5285d4(void *library,void *stream,void *name,void *out,void *offset)
+{
+ (void)stream;
+ const char *base=(const char *)name;uint32_t length=0u;while(base[length]!=0)length++;
+ int32_t error=0;char *path=(char *)audio_uart_font_mem_alloc(*(void **)library,(int32_t)(length+18u),&error);
+ if(error!=0)return (uint32_t)error;
+ for(uint32_t i=0;i<length;i++)path[i]=base[i];
+ const char suffix[18]="/..namedfork/rsrc";for(uint32_t i=0;i<18u;i++)path[length+i]=suffix[i];
+ *(void **)out=path;*(uint32_t *)offset=0u;return 0u;
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_ft_mac_apple_generic_528720(void *,void *,void *,uint32_t,void *);
+uint32_t audio_uart_ft_mac_rule_528508(void *library,void *stream,void *name,void *out,void *offset)
+{
+ *(void **)out=0;
+ if(stream==0)return 0x51u;
+ return audio_uart_ft_mac_apple_generic_528720(library,stream,name,0x00051607u,offset);
+}
+uint32_t audio_uart_ft_mac_rule_528524(void *library,void *stream,void *name,void *out,void *offset)
+{
+ *(void **)out=0;
+ if(stream==0)return 0x51u;
+ return audio_uart_ft_mac_apple_generic_528720(library,stream,name,0x00051600u,offset);
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_ft_stream_read_ulong_528ba8(void *,int32_t *);
+extern uint32_t audio_uart_ft_stream_read_ushort_528b4a(void *,int32_t *);
+extern uint32_t audio_uart_ft_stream_skip_528914(void *,int32_t);
+uint32_t audio_uart_ft_mac_apple_generic_528720(void *library,void *stream,void *name,uint32_t magic,void *offset_out)
+{
+ (void)library;(void)name;
+ int32_t error=0;
+ uint32_t actual=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+ if(error!=0)return (uint32_t)error;
+ if(actual!=magic)return 2u;
+ (void)audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+ if(error!=0)return (uint32_t)error;
+ error=(int32_t)audio_uart_ft_stream_skip_528914(stream,16);
+ if(error!=0)return (uint32_t)error;
+ uint32_t count=audio_uart_ft_stream_read_ushort_528b4a(stream,&error);
+ if(error!=0)return (uint32_t)error;
+ if((uint16_t)count==0u)return 2u;
+ for(uint32_t i=0;i<(uint16_t)count;i++){
+  uint32_t id=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+  if(error!=0)return (uint32_t)error;
+  if(id==2u){
+   uint32_t offset=audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+   if(error==0){
+    (void)audio_uart_ft_stream_read_ulong_528ba8(stream,&error);
+    if(error==0){*(uint32_t *)offset_out=offset;return 0u;}
+   }
+  }else{
+   error=(int32_t)audio_uart_ft_stream_skip_528914(stream,8);
+   if(error!=0)return (uint32_t)error;
+  }
+ }
+ return 2u;
+}
+
+#include <stdint.h>
+extern char *audio_uart_ft_mac_path_insert_528842(void *,const char *,const char *);
+extern void audio_uart_font_mem_free(void *,void *);
+extern uint32_t audio_uart_ft_mac_double_from_file_528802(void *,const char *,void *);
+uint32_t audio_uart_ft_mac_rule_528540(void *library,void *stream,void *name,void *out,void *offset)
+{
+ (void)stream;void *memory=*(void **)library;
+ char *path=audio_uart_ft_mac_path_insert_528842(memory,(const char *)name,"._");
+ if(path==0)return 0x40u;
+ uint32_t error=audio_uart_ft_mac_double_from_file_528802(library,path,offset);
+ if(error==0u)*(void **)out=path;else audio_uart_font_mem_free(memory,path);
+ return error;
+}
+uint32_t audio_uart_ft_mac_rule_528674(void *library,void *stream,void *name,void *out,void *offset)
+{
+ (void)stream;void *memory=*(void **)library;
+ char *path=audio_uart_ft_mac_path_insert_528842(memory,(const char *)name,"%");
+ if(path==0)return 0x40u;
+ uint32_t error=audio_uart_ft_mac_double_from_file_528802(library,path,offset);
+ if(error==0u)*(void **)out=path;else audio_uart_font_mem_free(memory,path);
+ return error;
+}
+uint32_t audio_uart_ft_mac_rule_5286b2(void *library,void *stream,void *name,void *out,void *offset)
+{
+ (void)stream;void *memory=*(void **)library;
+ char *path=audio_uart_ft_mac_path_insert_528842(memory,(const char *)name,".AppleDouble/");
+ if(path==0)return 0x40u;
+ uint32_t error=audio_uart_ft_mac_double_from_file_528802(library,path,offset);
+ if(error==0u)*(void **)out=path;else audio_uart_font_mem_free(memory,path);
+ return error;
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_ft_stream_new_524f96(void *,const void *,void **);
+extern uint32_t audio_uart_ft_mac_rule_528508(void *,void *,void *,void *,void *);
+extern void audio_uart_ft_stream_free_52502a(void *,uint32_t);
+uint32_t audio_uart_ft_mac_double_from_file_528802(void *library,const char *path,void *offset)
+{
+ uint32_t args[8]={0};args[0]=4u;args[3]=(uint32_t)(uintptr_t)path;
+ void *stream=0;void *unused=0;
+ uint32_t error=audio_uart_ft_stream_new_524f96(library,args,&stream);
+ if(error==0u){
+  error=audio_uart_ft_mac_rule_528508(library,stream,(void *)path,&unused,offset);
+  audio_uart_ft_stream_free_52502a(stream,0u);
+ }
+ return error;
+}
+
+#include <stdint.h>
+extern void audio_uart_ft_raccess_guess_528470(void *,void *,const char *,void **,uint32_t *,uint32_t *);
+extern uint32_t audio_uart_ft_mac_rule_is_3_or_4_5284f4(void *,uint32_t);
+extern uint32_t audio_uart_ft_stream_new_524f96(void *,const void *,void **);
+extern uint32_t audio_uart_ft_read_mac_resource_5261ac(void *,void *,uint32_t,int32_t,void **);
+extern void audio_uart_ft_stream_free_52502a(void *,uint32_t);
+extern void audio_uart_font_mem_free(void *,void *);
+uint32_t audio_uart_ft_mac_path_search_526356(void *library,void *stream,int32_t index,void **face,const void *args)
+{
+ void *memory=*(void **)library;
+ uint32_t status=2u,seen_special=0u;
+ void *names[9];uint32_t offsets[9],errors[9];
+ const char *base=*(const char *const *)((const uint8_t *)args+12u);
+ audio_uart_ft_raccess_guess_528470(library,stream,base,names,offsets,errors);
+ for(uint32_t i=0;i<9u;i++){
+  uint32_t special=audio_uart_ft_mac_rule_is_3_or_4_5284f4(library,i);
+  if((special==0u || seen_special==0u) && errors[i]==0u){
+   uint32_t open_args[8]={0};open_args[0]=4u;
+   open_args[3]=(uint32_t)(uintptr_t)(names[i]?names[i]:(void *)base);
+   void *opened=0;
+   status=audio_uart_ft_stream_new_524f96(library,open_args,&opened);
+   if(special!=0u && (status&0xffu)==0x51u)seen_special=1u;
+   if(status==0u){
+    status=audio_uart_ft_read_mac_resource_5261ac(library,opened,offsets[i],index,face);
+    audio_uart_ft_stream_free_52502a(opened,0u);
+    if(status==0u)break;
+    if(special!=0u)seen_special=1u;
+   }
+  }
+ }
+ for(uint32_t i=0;i<9u;i++)if(names[i]!=0)audio_uart_font_mem_free(memory,names[i]);
+ return status==0u?0u:2u;
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_ft_stream_seek_5288e0(void *,uint32_t);
+extern const audio_uart_ft_mac_rule_entry audio_uart_ft_mac_rules_6fac7c[9];
+void audio_uart_ft_raccess_guess_528470(void *library,void *stream,const char *base,void **names,uint32_t *offsets,uint32_t *errors)
+{
+ for(uint32_t i=0;i<9u;i++){
+  names[i]=0;
+  errors[i]=stream?audio_uart_ft_stream_seek_5288e0(stream,0u):0u;
+  if(errors[i]==0u)errors[i]=audio_uart_ft_mac_rules_6fac7c[i].handler(library,stream,(void *)base,&names[i],&offsets[i]);
+ }
+}
+
+/* Round 398: qualified complete native sort helper bodies. */
+typedef int32_t (*ft_sort_compare)(const void *, const void *);
+/* Complete native bodies 0x5677a8..0x56798c, excluding the sort core. */
+void audio_uart_ft_sort_swap_5677a8(uint8_t *a, uint8_t *b, uint32_t width)
+{
+    if (width < 64u) {
+        while (width-- != 0u) {
+            uint8_t value = *a;
+            *a++ = *b;
+            *b++ = value;
+        }
+        return;
+    }
+    do {
+        uint32_t length = width > 128u ? 128u : width;
+        uint8_t scratch[128];
+        for (uint32_t i = 0; i < length; ++i) scratch[i] = a[i];
+        for (uint32_t i = 0; i < length; ++i) a[i] = b[i];
+        for (uint32_t i = 0; i < length; ++i) b[i] = scratch[i];
+        a += length;
+        b += length;
+        width -= length;
+    } while (width != 0u);
+}
+
+void audio_uart_ft_sort_rotate_5677fe(uint8_t *a, uint8_t *b, uint8_t *c, uint32_t width)
+{
+    if (width < 64u) {
+        while (width-- != 0u) {
+            uint8_t value = *a;
+            *a++ = *c;
+            *c++ = *b;
+            *b++ = value;
+        }
+        return;
+    }
+    do {
+        uint32_t length = width > 128u ? 128u : width;
+        uint8_t scratch[128];
+        for (uint32_t i = 0; i < length; ++i) scratch[i] = a[i];
+        for (uint32_t i = 0; i < length; ++i) a[i] = c[i];
+        for (uint32_t i = 0; i < length; ++i) c[i] = b[i];
+        for (uint32_t i = 0; i < length; ++i) b[i] = scratch[i];
+        a += length;
+        b += length;
+        c += length;
+        width -= length;
+    } while (width != 0u);
+}
+
+void audio_uart_ft_sort_insert_56786c(uint8_t *a, uint8_t *b, uint32_t width)
+{
+    uint32_t remaining = width;
+    while (remaining != 0u) {
+        uint32_t length = remaining > 128u ? 128u : remaining;
+        uint8_t scratch[128];
+        for (uint32_t i = 0; i < length; ++i) scratch[i] = b[width - length + i];
+        uint32_t move = (uint32_t)(b - a) + width - length;
+        for (uint32_t i = move; i != 0u; --i) a[length + i - 1u] = a[i - 1u];
+        for (uint32_t i = 0; i < length; ++i) a[i] = scratch[i];
+        remaining -= length;
+    }
+}
+
+void audio_uart_ft_sort_median_5678b6(uint8_t *a, uint8_t *b, uint8_t *c,
+                                       uint32_t width, ft_sort_compare compare)
+{
+    if (compare(b, a) < 0) audio_uart_ft_sort_swap_5677a8(a, b, width);
+    if (compare(c, b) < 0) audio_uart_ft_sort_swap_5677a8(b, c, width);
+    if (compare(b, a) < 0) audio_uart_ft_sort_swap_5677a8(a, b, width);
+}
+
+uint32_t audio_uart_ft_sort_heap_sift_567906(uint8_t *base, uint32_t start,
+                                             uint32_t count, uint32_t width,
+                                             ft_sort_compare compare)
+{
+    uint32_t index = start;
+    uint8_t *cursor = base + width * index;
+    for (;;) {
+        uint32_t child = index * 2u + 2u;
+        if (child > count) break;
+        uint8_t *candidate = base + width * child;
+        if (child == count || compare(candidate, candidate - width) < 0) {
+            --child;
+            candidate -= width;
+        }
+        audio_uart_ft_sort_swap_5677a8(cursor, candidate, width);
+        index = child;
+        cursor = candidate;
+    }
+    while (index > start) {
+        index = (index - 1u) >> 1;
+        uint8_t *parent = base + width * index;
+        if (compare(cursor, parent) <= 0) break;
+        audio_uart_ft_sort_swap_5677a8(parent, cursor, width);
+        cursor = parent;
+    }
+    return start;
+}
+
+/* Round 399: complete native-matched sort core. */
+#define FT_PTR(x) ((uint8_t *)(uintptr_t)(x))
+#define FT_CMP(a,b) compare(FT_PTR(a), FT_PTR(b))
+
+/* Complete 0x56798c body candidate, pending all-path native qualification. */
+void audio_uart_ft_sort_core_56798c(void *base, uint32_t count, uint32_t budget,
+                                     uint32_t width, ft_sort_compare compare)
+{
+    uintptr_t current = (uintptr_t)base, left, pivot, end, right,
+              scan, previous, first, scratch;
+    uint32_t distance, result, chunk, local_budget = budget;
+    int32_t relation;
+    uint8_t swap_scratch[128];
+
+    while ((first = current, local_budget != 0u && count > 32u)) {
+        end = current + width * count;
+        pivot = current + width * (count >> 1);
+        previous = end - width;
+        distance = (uint32_t)(previous - current) / width;
+        right = pivot + width;
+        left = pivot;
+        if (distance > 40u) {
+            uint32_t stride = width * ((distance >> 3) + 1u);
+            audio_uart_ft_sort_median_5678b6(FT_PTR(current), FT_PTR(current + stride), FT_PTR(current + stride * 2u), width, compare);
+            audio_uart_ft_sort_median_5678b6(FT_PTR(pivot - stride), FT_PTR(pivot), FT_PTR(pivot + stride), width, compare);
+            audio_uart_ft_sort_median_5678b6(FT_PTR(previous - stride * 2u), FT_PTR(previous - stride), FT_PTR(previous), width, compare);
+            first = current + stride;
+            previous -= stride;
+        }
+        audio_uart_ft_sort_median_5678b6(FT_PTR(first), FT_PTR(pivot), FT_PTR(previous), width, compare);
+        first = pivot;
+        do {
+            pivot = first;
+            if (pivot <= current) break;
+            relation = FT_CMP(pivot - width, pivot);
+            first = pivot - width;
+        } while (relation == 0);
+        while ((first = right, left = pivot, right < end &&
+                (relation = FT_CMP(right, pivot), relation == 0))) right += width;
+scan_right:
+        for (distance = width; right < end; right += width) {
+            relation = FT_CMP(pivot, right);
+            if (relation >= 0) {
+                if (relation > 0) break;
+                audio_uart_ft_sort_swap_5677a8(FT_PTR(first), FT_PTR(right), width);
+                first += width;
+            }
+resume_right:
+            ;
+        }
+        while ((width = distance, scan = left, scratch = current, current < scan)) {
+            left = scan - width;
+            relation = FT_CMP(left, pivot);
+            distance = width;
+            if (relation >= 0) {
+                if (relation > 0) break;
+                pivot -= width;
+                scratch = left;
+                scan = pivot;
+                if (width < 64u) {
+                    for (uint32_t i = 0; i < width; ++i) {
+                        uint8_t t = FT_PTR(scan)[i];
+                        FT_PTR(scan)[i] = FT_PTR(scratch)[i];
+                        FT_PTR(scratch)[i] = t;
+                    }
+                } else {
+                    uint32_t remaining = width;
+                    do {
+                        chunk = remaining > 128u ? 128u : remaining;
+                        for (uint32_t i = 0; i < chunk; ++i) swap_scratch[i] = FT_PTR(scan)[i];
+                        for (uint32_t i = 0; i < chunk; ++i) FT_PTR(scan)[i] = FT_PTR(scratch)[i];
+                        for (uint32_t i = 0; i < chunk; ++i) FT_PTR(scratch)[i] = swap_scratch[i];
+                        remaining -= chunk;
+                        scan += chunk;
+                        scratch += chunk;
+                    } while (remaining != 0u);
+                }
+            }
+        }
+        if (scan != current) {
+            left = scan - width;
+            if (right != end) {
+                audio_uart_ft_sort_swap_5677a8(FT_PTR(right), FT_PTR(left), width);
+                goto resume_right;
+            }
+            pivot -= width;
+            first -= width;
+            if (left == pivot) audio_uart_ft_sort_swap_5677a8(FT_PTR(pivot), FT_PTR(first), width);
+            else audio_uart_ft_sort_rotate_5677fe(FT_PTR(left), FT_PTR(first), FT_PTR(pivot), width);
+            goto scan_right;
+        }
+        if (right != end) {
+            if (first == right) audio_uart_ft_sort_swap_5677a8(FT_PTR(right), FT_PTR(pivot), width);
+            else audio_uart_ft_sort_rotate_5677fe(FT_PTR(right), FT_PTR(pivot), FT_PTR(first), width);
+            right += width;
+            pivot += width;
+            first += width;
+            left = scan;
+            goto scan_right;
+        }
+        local_budget = (local_budget >> 1) + (local_budget >> 2);
+        count = (uint32_t)(pivot - scratch) / width;
+        result = (uint32_t)(end - first) / width;
+        if (result < count) {
+            audio_uart_ft_sort_core_56798c(FT_PTR(first), result, local_budget, width, compare);
+        } else {
+            audio_uart_ft_sort_core_56798c(FT_PTR(current), count, local_budget, width, compare);
+            count = result;
+            current = first;
+        }
+    }
+    if (count <= 32u) {
+        if (count > 1u) {
+            pivot = current;
+insertion_next:
+            count--;
+            if (count != 0u) {
+                pivot += width;
+                relation = FT_CMP(pivot, first);
+                right = first;
+                end = pivot;
+                if (relation >= 0) goto insertion_scan;
+                goto insertion_move;
+            }
+        }
+    } else {
+        distance = count >> 1;
+        while (distance != 0u) {
+            distance--;
+            audio_uart_ft_sort_heap_sift_567906(FT_PTR(first), distance, count, width, compare);
+        }
+        pivot = first + width * count;
+        current = first;
+        do {
+            pivot -= width;
+            audio_uart_ft_sort_swap_5677a8(FT_PTR(first), FT_PTR(pivot), width);
+            count--;
+            audio_uart_ft_sort_heap_sift_567906(FT_PTR(first), 0u, count, width, compare);
+        } while (count > 1u);
+    }
+    return;
+insertion_scan:
+    do {
+        right = end;
+        relation = FT_CMP(pivot, right - width);
+        end = right - width;
+    } while (relation < 0);
+    if (right != pivot) {
+insertion_move:
+        audio_uart_ft_sort_insert_56786c(FT_PTR(right), FT_PTR(pivot), width);
+    }
+    goto insertion_next;
+}
+
+#undef FT_CMP
+#undef FT_PTR

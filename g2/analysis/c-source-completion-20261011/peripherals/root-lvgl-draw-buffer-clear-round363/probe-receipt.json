@@ -1,0 +1,25 @@
+{
+  "status": "PASS_NON_NULL_DRAW_BUFFER_CLEAR_CONNECTED",
+  "native_comparisons": 480,
+  "actual_helpers": [
+    "goto_xy",
+    "color_bpp",
+    "area_intersect",
+    "width",
+    "height",
+    "memzero_wrapper",
+    "flush_cache",
+    "full_area"
+  ],
+  "controlled_boundaries": [
+    "basic memory-fill backend",
+    "custom clear callback",
+    "flush callback"
+  ],
+  "limits": [
+    "NULL fatal assertion not yet qualified",
+    "No image/layout/hardware proof"
+  ],
+  "candidate_sha256": "629396932966ced0108d0aa6bcf56c758ccfaf7655b7ee6eca1458c96375a41f",
+  "selected": false
+}

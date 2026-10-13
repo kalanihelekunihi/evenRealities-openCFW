@@ -1,0 +1,139 @@
+{
+  "wave_id": "component-goal-case-wave009-shared-gpio-provider",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "module": "GPIO control provider/ABI at4e9e/6b80/6b98",
+  "completed_utc": "2026-10-13T20:22:03.505720+00:00",
+  "status": "COMPLETED_SOURCE_GPIO_MODULE_AND_QUALIFIED_PROFILE_REDUCTION",
+  "done_criteria": [
+    "Source-derived canonical GPIO leaves and typed shared contract; all9 genuine entry names retained distinctly in module fixture",
+    "All native/source lower and wrapper bodies execute through actual MMIO stores with no child cuts/stubs",
+    "Full401unit graph builds; prior6509native/C+765memory+3reset domains pass",
+    "Fresh401unit build reproduces exact ELF and improves prior63396byte profile"
+  ],
+  "source_delta": {
+    "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/source-delta.json",
+    "sha256": "0a70c32db3528633e33af2cfcb338fc5be5ddb826ac94f41004cc544dafd23ca"
+  },
+  "input_manifest": {
+    "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/input-manifest.json",
+    "sha256": "5f7c848521908ee6f780490722edefa91f61094e1b45430f5c205ef855667b64"
+  },
+  "function_extents": {
+    "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/function-extents.json",
+    "sha256": "17393a9daa445e7c404cdc5b0a534f7c3201f1b8ba0aba1390fd3ad150f84aca"
+  },
+  "source_object_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/selective/receipt.json",
+    "sha256": "e1de54281cd8208ed4374df597f3085220c1dc0b753ddb468d8d62cb71006b53"
+  },
+  "build": {
+    "C_units": 401,
+    "ELF_sha256": "6680cefaabf9da15e69d75e28a32e4a8837d24c69707b5f3e7b939fb3d81d803",
+    "load_span_bytes": 63348,
+    "stock_payload_bytes": 55752,
+    "over_stock_payload_bytes": 7596,
+    "previous_qualified_bytes": 63396,
+    "reduction_bytes": 48,
+    "undefined_symbols": [],
+    "known_roots": 39,
+    "fresh_full_build_byte_identical": true
+  },
+  "tests": {
+    "native_C_GPIO_complete_body_cases": 2576,
+    "GPIO_distinct_entry_names": 9,
+    "native_C_prior_graph_cases": 6509,
+    "memory_provider_cases": 765,
+    "cold_reset_fills": 3,
+    "cold_reset_RAM_bytes": 11400,
+    "proof": [
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/selective/verification.json",
+        "sha256": "c3f7d4de394553e8c147f0f6a224b88a4112d25e9b09d54ae8396ec79f728531"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/clang-contracts.json",
+        "sha256": "96d7b072c31b58b3b487771611c10fa777f1b2f12c5c5577c8b9fb813dd89cda"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/clang-frame-regression.json",
+        "sha256": "6529e273e6c00a62840925c9890f911d649d146338f378f5f6d45e86b75c7598"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/clang-flash-provider-verification.json",
+        "sha256": "438bab82779597c1815985f4f763da95ec84a0ab3da31e97a980dab681a11bd9"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/reset-verification.json",
+        "sha256": "38c5c812f7a0fe34737091adc8a3cef3710732c357b8ec3dea82e6e7f2a6f151"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/compiler-memory-verification.json",
+        "sha256": "6a6a000e0cbb2ce33806f81a18ae91aa9d5a5f49c939c059099f281bae2eeeb4"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/gpio-verification.json",
+        "sha256": "4bdd518c6769b9abc88e9ac3b20298735823efb13ba7cc42975a7f4b1fc85438"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/gpio-fixture-link.json",
+        "sha256": "8d9fc3864fa925a0f1c06100065691267e70c9d18a12d511e4a5ee4e2d2d72c6"
+      },
+      {
+        "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/reproducibility.json",
+        "sha256": "63171e17f8d3d5fba1a2f1ea5c23799bdf293f3cef1256d238a252bcbb29dc95"
+      }
+    ]
+  },
+  "behavior": "No intentional upstream fix. Native nonzero boolean normalization and volatile register writes preserved. Canonical leaves marked noinline to prevent reexpansion; wrappers preserve distinct callable entry addresses. Dead wrappers remain GC-eligible in production graph; genuine all-entry fixture is separately linked and measured.",
+  "source_drift": [],
+  "ownership": "Parent-authorized CASE-only scope, no MAIN/Touch/index edits",
+  "lineage_license": "Existing source-derived CASE providers retained; new contract authoredMIT. Native product address/body hashes pinned from locked catalogue; no public vendor code copied or additional opcode/blob provider introduced.",
+  "scripts": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/build.py",
+      "sha256": "0f9a13efa4b9fd12fd66c0cff35fa73ac8708b848c80d2e76843f59ab95ee401"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/verify_clang_profile.py",
+      "sha256": "b502f31f35c556aab713a49fc5466a3bd33174573eab1443a7f3cb114bdbab53"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/verify_clang_contracts.py",
+      "sha256": "fc37b6496d014c6e4441afd0642c3524342cf1b984039583f93aeff9a244fc62"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/verify_clang_frame.py",
+      "sha256": "827194eef41c08b30d45867de5d7719e001563de8c2a1ae1c1e4f2946cc24ae9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/verify_clang_flash_provider.py",
+      "sha256": "ece53a168f279f5104a0fff106e83de2a1800befde0827df4509e44b74ac74c7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/verify_reset.py",
+      "sha256": "53ccc08ab232831ffc59d0ec729349c2776eafb99c527fe3253b1a3fb85414dc"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/verify_memory.py",
+      "sha256": "c47d9ae0b639fd6eebb414cbaa7c86d5f7fb2cd91d88ec0069cae5fcb03699c2"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/verify_gpio.py",
+      "sha256": "097cd048d4b77d9e2c299c12d0c5cb83fef34e45f52dc2365c04e8db3b1fce34"
+    }
+  ],
+  "component_acceptance_gates": {
+    "GPIO_module_source_ABI_and_MMIO_software_contract": "PASS bounded complete-body domain; no child stubs",
+    "GPIO_physical_pin_behavior": "requires hardware validation",
+    "CASE_reset_and_prior_ABI": "PASS boundeddomains only",
+    "CASE_computed_roots_wholebody_placement_ambientstack": "unresolved",
+    "byte_equality": "not met",
+    "hardware": "not run, no flashing approval",
+    "accepted_images": "0/6",
+    "workflow": "G1passed,G2-G6not_run unchanged"
+  },
+  "next_critical_path_task": "Evaluate LTO on extended-asm-only units; previous blanket __asm exclusion retained107 ordinary objects including empty memory barriers. Keep naked/static assembly relocations in ordinary source objects. Qualify mask/barrier behavior and existing wholegraph domains.",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

@@ -1,0 +1,38 @@
+{
+  "status": "PASS_THREE_STREAM_DRIVER_BODIES_CONNECTED",
+  "comparisons": 1187,
+  "per_path": {
+    "stream": 320,
+    "driver": 864,
+    "memory": 3
+  },
+  "actual_helpers": [
+    "FT allocator",
+    "zero",
+    "memoryfree",
+    "memory-stream initializer",
+    "charmap cleanup"
+  ],
+  "controlled_boundaries": [
+    "path open",
+    "unicode lookup",
+    "allocator/free callbacks",
+    "class init/done callbacks"
+  ],
+  "checks": [
+    "output zero before validation/allocation",
+    "sourceflag precedence/memory/path/external/invalid",
+    "path reread and external stream replacement after callback",
+    "face/internal alloc failures cleanup",
+    "lowbyte externalflag",
+    "incremental tag scan/zero-value retry/signed count",
+    "fiveargument class-init ABI and stream replacement",
+    "unicode missing38 accepted without error;othererrorscleanup",
+    "whole4KiB/SP/R4-R11/caller guard"
+  ],
+  "limits": [
+    "Filesystem/driver/unicode and allocator callbacks controlled; runtime/config gates open",
+    "No image/layout/hardware proof"
+  ],
+  "selected": false
+}

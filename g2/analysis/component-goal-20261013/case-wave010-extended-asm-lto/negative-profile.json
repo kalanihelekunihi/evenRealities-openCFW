@@ -1,0 +1,19 @@
+{
+  "status": "REJECTED_NATIVE_CALL_BOUNDARY_FAILURE",
+  "ELF_path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/selective/case.elf",
+  "reason": "case_flash_program_doubleword caller entry R1 changed from retained address to0 after cross-module dead-argument elimination",
+  "native_args": [
+    134475776,
+    134475776,
+    305419896,
+    2596069104
+  ],
+  "compiled_args": [
+    134475776,
+    0,
+    305419896,
+    2596069104
+  ],
+  "solution": "Keep genuine flash_register_leaves_candidate.c outside LTO; retain the native4register test",
+  "masked_by_test_changes": false
+}

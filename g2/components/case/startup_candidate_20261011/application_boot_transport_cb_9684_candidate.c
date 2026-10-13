@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08009684 transport state callback. The two sample refresh
@@ -7,8 +8,6 @@
 extern void case_boot_transport_sample_refresh(void); /* 0x9bc0 */
 extern void case_boot_transport_sample_refresh_mode4(void); /* 0x9cc8 */
 extern uint32_t case_policy_service_idle(void); /* 0xd154 */
-extern uint32_t case_policy_log(uint32_t);
-extern uint32_t case_policy_log_number(uint32_t,uint32_t);
 extern uint32_t case_legacy_logger(const char *,...);
 extern int32_t case_boot_sensor_finish_signal(uint32_t,uint32_t); /* 0xa888 */
 extern void case_boot_transport_stop_clock(uint32_t); /* 0x6b80 */

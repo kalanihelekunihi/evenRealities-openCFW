@@ -1,11 +1,19 @@
+#include "case_logger_contract.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE shared formatter 0x9170, idle setter 0xd154 and LED GPIO.
  */
 #include <stdint.h>
 extern uint32_t case_legacy_logger(const char *format,...); /* 0x9170 */
 extern uint32_t case_binary_3f_enable(void); /* 0xd154 */
-uint32_t case_policy_log(uint32_t format)
-{return case_legacy_logger((const char *)(uintptr_t)format);}
+/* Same native variadic entry0x9170: retain registers and caller stack words. */
+__attribute__((naked)) uint32_t case_policy_log(uint32_t format,...)
+{
+    __asm__ volatile("push {r3}\n"
+                     "ldr r3, =case_legacy_logger\n"
+                     "mov ip, r3\n"
+                     "pop {r3}\n"
+                     "bx ip\n");
+}
 uint32_t case_policy_log_number(uint32_t format,uint32_t value)
 {return case_legacy_logger((const char *)(uintptr_t)format,value);}
 uint32_t case_policy_log_four(uint32_t format,uint32_t a,uint32_t b,uint32_t c,uint32_t d)

@@ -3,9 +3,7 @@
  * their declarations use the selected void-return ABI. Physical pin behavior
  * remains a hardware validation boundary.
  */
-#include <stdint.h>
-extern void case_control_a(uint32_t enable); /* stock 0x08006b80 */
-extern void case_control_b(uint32_t enable); /* stock 0x08006b98 */
+#include "../source_candidate_20261010/case_gpio_control_contract.h"
 
 void case_binary_local_control_a(uint32_t enable){case_control_a(enable);}
 void case_binary_local_control_b(uint32_t enable){case_control_b(enable);}

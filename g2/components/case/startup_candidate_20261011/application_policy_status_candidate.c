@@ -1,10 +1,10 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Stock 0x08007884-0x080079b4 lens-status and charging-result decision.
  * Prior left/right status are the 0x08007200 stack snapshots at SP+12/+20.
  */
 #include <stdint.h>
-extern void case_policy_log(uint32_t message);
 extern void case_policy_led_left_clear(uint32_t value);  /* 0x08006b80 */
 extern void case_policy_led_right_clear(uint32_t value); /* 0x08006b98 */
 /* Return 1 for 0x79b0 refresh, 0 for 0x79b4 no-reply continuation. */

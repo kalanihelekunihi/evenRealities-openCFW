@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08009a9c no-reply sensor reset. The five GPIO configuration
@@ -6,7 +7,6 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "application_boot_transport_registration_data_candidate.h"
-extern uint32_t case_policy_log(uint32_t message); /* 0x9170 */
 extern void case_policy_sensor_prepare(void); /* 0xd250 */
 extern uint32_t case_policy_sensor_shutdown(uint32_t descriptor); /* 0x5f00 */
 extern void case_bus_gpio_config(uint32_t base,volatile uint32_t *config); /* 0x4d30 */

@@ -1,0 +1,145 @@
+{
+  "schema": "opencfw-completed-wave-v1",
+  "wave_id": "root-apollo-main-round393-apple-generic-parser",
+  "component": "apollo_main",
+  "status": "completed",
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "target_id": "official-s200-v2.2.6.10",
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "source_snapshot_id": "round393-3786496fff470d58",
+  "completed_utc": "2026-10-13T20:10:19.237641+00:00",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-apple-generic-parser-round393/receipt.json",
+      "sha256": "ab97202716d5eab1b28ac279a65cf8a35bab36232b977fc78560846151d34386"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-apple-generic-parser-round393/root-source-audit.json",
+      "sha256": "6a112114c2af54be0a39e3412dbec7c6b69aa708020fa24b5a4f33e13f85eda7"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-apple-generic-parser-round393/admission-receipt.json",
+      "sha256": "81a5c3ab5bbb6376fba16de34b523522eacf7ae1e2fe15e984e410acfaf59570"
+    }
+  ],
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-apple-generic-parser-round393/current-dependency-audit.json",
+      "sha256": "5ba38dfe05db9c55721ab1432e0764d56806d1b300c2e1d224a358c4ca886ecf"
+    }
+  ],
+  "implementation_delta": {
+    "actual_c_bodies": [
+      {
+        "symbol": "audio_uart_ft_mac_apple_generic_528720"
+      }
+    ],
+    "abi_adapters": [],
+    "typed_data": [],
+    "pseudocode_only": [],
+    "fixtures_or_stubs": []
+  },
+  "build": {
+    "compiler_settings_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-apple-generic-parser-round393/current-dependency-audit.json",
+      "sha256": "5ba38dfe05db9c55721ab1432e0764d56806d1b300c2e1d224a358c4ca886ecf"
+    },
+    "definitions": 3386,
+    "imports": 765,
+    "import_classification_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-apple-generic-parser-round393/dashboard-wave/import-delta.json",
+      "sha256": "6d3222c3be43d492629df94f723073e2f799877e1e3cf068e15a12cb64aaf0e2"
+    },
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false
+  },
+  "tests": {
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-apple-generic-parser-round393/probe-receipt.json",
+        "sha256": "d252f4aadaed67d7116abf18e72f8ca30df0c7a07d0c58d080579997fd0ea45b"
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-apple-generic-parser-round393/qualification-input-hashes.json",
+        "sha256": "d2f0efcaf8be08df747a6a3e64ec8fa28d9b17d5423dd9f64258c441ca4ec614"
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-apple-generic-parser-round393/callback-probe-receipt.json",
+        "sha256": "ac5128b6307439f52028ef19b6edeacd5276d8893b4db05399541582559eb912"
+      }
+    ],
+    "expected_failures": [],
+    "controlled_boundaries": [
+      "read/seek callback responses"
+    ]
+  },
+  "address_resource_delta_receipts": [],
+  "limitations": [
+    "Parent path search and remaining three table handlers unqualified",
+    "Runtime/layout/byte/hardware unproven",
+    "134 top-level snapshots and54 selected-TU dependencies checked",
+    "0/6 accepted images; runtime/data/layout/byte equality/hardware open",
+    "Dashboard checkpoint publication separate from interval reconciliation"
+  ],
+  "next_goal": {
+    "owner": "existing implementation goal",
+    "reason": "Qualify final three Mac path rule handlers, double-from-file graph, and parent path search",
+    "exit_criteria": [
+      "Complete native/C comparison",
+      "Admission and terminal current-source/dependency audit"
+    ],
+    "missing_input_or_authorization": null,
+    "ranked_gaps": [
+      "Three Mac path rule handlers and double-from-file graph",
+      "Mac path search252 bytes",
+      "Sort core704 bytes and helper graph",
+      "Initialized runtime and remaining image gates"
+    ]
+  },
+  "dashboard": {
+    "state": "awaiting_inventory",
+    "data_owner_thread_id": "01a120b1-9d22-7596-9ee5-a6d93342c014",
+    "publisher_thread_id": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "validated_snapshot_id": null,
+    "publish_receipts": [],
+    "readback_verified": false,
+    "snapshot": {
+      "full": {
+        "library_file_id": "libfile_3d9914466c448191be6edc3918867204",
+        "version": null,
+        "sha256": null
+      },
+      "compact": {
+        "library_file_id": "libfile_e7f198676fe481918961cdfb1a1eb33f",
+        "version": null,
+        "sha256": null
+      },
+      "validation": {
+        "status": "pending",
+        "receipt_path": null,
+        "receipt_sha256": null
+      },
+      "page_id": "page_e5199b4adeb081918164ac6acd8e4b04",
+      "page_sequence": null
+    }
+  },
+  "repository": {
+    "root": "/Users/kalani/Repo/evenRealities-openCFW",
+    "head_revision": "2359c6906032d9ee59c16c7b8c2ce56fda50c1c0",
+    "dirty_state_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-apple-generic-parser-round393/dashboard-wave/repository-state.json",
+      "sha256": "04d5f07dca604a85cad4bfa1761e793a191daecf222023c3fdec78e54fb64f96"
+    },
+    "index_unchanged_by_wave_reporting": true
+  },
+  "reporting_route": {
+    "coordinator": "01a1228e-2121-71b9-a9df-9eede6787020",
+    "authorization_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/reporting-authorization.json",
+      "sha256": "144e9fd325f50d5585bb4910fca8b7dd474213dc79349d0302fd73b495b79164"
+    },
+    "scope": "completed-wave metadata only until revoked",
+    "publisher": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "publication_verified": false
+  }
+}

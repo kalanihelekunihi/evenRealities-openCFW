@@ -1,0 +1,26 @@
+{
+  "status": "PASS_ACTUAL_MAIN_COMPILER_PROFILE_CONNECTED_FORMATTER_AND_NUMERICAL_PROVIDERS_M55",
+  "native_comparisons": 816,
+  "per_entry": {
+    "snprintf": 408,
+    "vsnprintf": 408
+  },
+  "format_fixtures": 102,
+  "candidate_sha256": "45ab30d0d1d7c084423b4a9e86a4e26e85aafee8e6ca080a6bf9c353d8f47d2c",
+  "controlled_backends_executed": 0,
+  "actual_compiler_rt_arithmetic_executes": true,
+  "ordinary_pointer_bindings": "oracle-bindings.json:two code/three literal-datapointers; instructionbytesunchanged",
+  "checks": [
+    "Signed/unsigned64includingextremes/alignedvarargsandmixed32/64",
+    "Fixed/exponential/general/upper/defaultandexplicitprecision",
+    "Zero/signedzero/negative/small/large/inf/nan",
+    "Capacity0/1/8/64andwhole4KiBfixture",
+    "SP/R4-R11/D8-D15/caller96byteargsandguard"
+  ],
+  "selected": false,
+  "limits": [
+    "DefaultFPSCR input0; exceptionflags/otherroundingmodesunqualified",
+    "Compiler-rt is not original IAR arithmetic identity orbyteequality",
+    "No completeimage/layout/hardwareclaim"
+  ]
+}

@@ -12,7 +12,7 @@ extern void audio_uart_lv_init_indev_4c6d8c(void);
 extern void audio_uart_lv_init_theme_4546dc(void);
 extern void audio_uart_lv_init_event_4503a4(void);
 extern void audio_uart_lv_init_style_44d32c(void);
-extern void audio_uart_lv_init_draw_unit_4b1b98(uint32_t);
+extern uint32_t audio_uart_lv_init_draw_unit_4b1b98(uint32_t);
 extern void audio_uart_lv_init_anim_48438c(void);
 extern void audio_uart_lv_init_group_4c73d6(void);
 extern void audio_uart_lv_init_cache_44b90c(void);

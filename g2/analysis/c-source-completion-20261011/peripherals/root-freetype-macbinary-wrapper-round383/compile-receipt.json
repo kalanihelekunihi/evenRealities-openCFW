@@ -1,0 +1,34 @@
+{
+  "status": "COMPILE_PASS_UNADMITTED",
+  "command": [
+    "clang",
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-std=c11",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-O2",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "g2/components/audio/uart_thread_source_candidate",
+    "-c",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/combined-unadmitted.c",
+    "-o",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-macbinary-wrapper-round383/combined.o"
+  ],
+  "returncode": 0,
+  "stderr": "",
+  "candidate_sha256": "5103482d4f7ca43bd02c43b379a6972ba4cfa77df0ea3bc95980f8275e0892bf",
+  "native_sizes": [
+    170,
+    84
+  ],
+  "limits": [
+    "Not native qualified or admitted; resource/path providers remain external"
+  ]
+}

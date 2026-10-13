@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08001c1c side transport request/reply state update.
@@ -8,7 +9,6 @@ extern const uint8_t case_boot_transport_action_template[8]; /* stock 0x1d04 */
 extern void case_policy_ota_checksum(uint8_t *packet,uint32_t count); /* 0x9b70 */
 extern uint32_t case_policy_send_probe(uint32_t side,const uint8_t *packet,uint32_t count,uint32_t reply); /* 0x258c */
 extern uint32_t case_policy_parse_probe(uint32_t side); /* 0x1e94 */
-extern uint32_t case_policy_log(uint32_t message); /* 0x9170 */
 
 void case_boot_transport_action(uint32_t left,uint32_t right)
 {

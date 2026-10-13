@@ -1,3 +1,4 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Source reduction of native CASE 0x0800ce34..0x0800d0ea.
@@ -10,7 +11,6 @@ extern uint32_t case_policy_sensor_sample(void); /* 0x2edc */
 extern uint32_t case_policy_sensor_divide(uint32_t value,uint32_t divisor); /* 0x0160 */
 extern void case_policy_sensor_prepare(void); /* 0xd250 */
 extern void case_policy_idle_clear(void); /* 0x9a14, existing source owner */
-extern void case_policy_log(uint32_t message); /* 0x9170 */
 
 static uint32_t sense_1000(void)
 {

@@ -1,0 +1,37 @@
+ FS=0x20003000;LIB=FS+0x100;STREAM=FS+0x180;OUT=FS+0x200;ARGS=FS+0x220;DATA=FS+0x300
+ saved=[UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7,UC_ARM_REG_R8,UC_ARM_REG_R9,UC_ARM_REG_R10,UC_ARM_REG_R11];seeds=[0x12345000+i*0x101 for i in range(8)]
+ def put(a,v):u.mem_write(a,struct.pack('<I',v&0xffffffff))
+ def run(entry,initial,case):
+  u.mem_write(FS,initial);u.reg_write(UC_ARM_REG_CPSR,0x01000000);u.reg_write(UC_ARM_REG_SP,0x2007ff00);u.reg_write(UC_ARM_REG_LR,stop_address|1)
+  for r,v in zip([UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3],[LIB,0 if case['nullstream'] else STREAM,case['index']&0xffffffff,OUT]):u.reg_write(r,v)
+  for r,v in zip(saved,seeds):u.reg_write(r,v)
+  guard=struct.pack('<I',ARGS)+b'\xa5'*28;u.mem_write(0x2007ff00,guard);u.reg_write(UC_ARM_REG_PC,entry&~1);seen=[];resources=0
+  for step in range(8):
+   response=command('c');pc=u.reg_read(UC_ARM_REG_PC)
+   if pc==stop_address:break
+   n=targets.get(pc);assert n,(hex(pc),response);a,b,c,d=[u.reg_read(r) for r in [UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3]];stackarg=struct.unpack('<I',u.mem_read(u.reg_read(UC_ARM_REG_SP),4))[0];assert a==LIB and b==(0 if case['nullstream'] else STREAM)
+   if n=='audio_uart_ft_read_mac_resource_5261ac':
+    assert d==case['index']&0xffffffff and stackarg==OUT;result=case['resource'][min(resources,1)];resources+=1;seen.append(('resource',c,d,result));put(OUT,FS+0x600)
+   else:
+    assert c==case['index']&0xffffffff and d==OUT and stackarg==ARGS;result=case['path'];seen.append(('path',c,result));put(OUT,FS+0x640)
+   u.reg_write(UC_ARM_REG_R0,result);u.reg_write(UC_ARM_REG_PC,u.reg_read(UC_ARM_REG_LR)&~1)
+  else:raise AssertionError('call bound')
+  assert u.reg_read(UC_ARM_REG_SP)==0x2007ff00 and [u.reg_read(r) for r in saved]==seeds;assert bytes(u.mem_read(0x2007ff00,32))==guard
+  return u.reg_read(UC_ARM_REG_R0),seen,bytes(u.mem_read(FS,2048))
+ import itertools
+ rng=random.Random(383);counts={}
+ headers=[]
+ h=bytearray(128);h[1]=3;headers.append(('valid-zero',bytes(h)))
+ for length in [1,127,128,0x7fffffff]:
+  v=bytearray(h);v[83:87]=length.to_bytes(4,'big');headers.append(('length'+str(length),bytes(v)))
+ for offset,value in [(0,1),(74,1),(82,1),(1,0),(1,34),(63,1),(5,1),(83,128)]:
+  v=bytearray(h);v[offset]=value;headers.append(('reject'+str((offset,value)),bytes(v)))
+ for size,nullstream,index,flags,(label,header),resource,path in itertools.product([127,128],[False,True],[-1,2],[0,4],headers,[(0,0),(2,85),(0x10002,0x10055),(85,2),(0x12345678,0)],[0,0xdeadbeef]):
+  initial=bytearray(rng.getrandbits(8) for _ in range(2048));initial[DATA-FS:DATA-FS+128]=header;initial[ARGS-FS]=flags
+  for off,v in [(0,DATA),(4,size),(8,31),(20,0)]:struct.pack_into('<I',initial,STREAM-FS+off,v)
+  case={'nullstream':nullstream,'index':index,'resource':resource,'path':path}
+  for kind,address,name in [('macbinary',0x5262ac,'audio_uart_ft_read_macbinary_5262ac'),('wrapper',0x526452,'audio_uart_ft_load_mac_face_526452')]:
+   native=run(address+delta,initial,case);candidate=run(symbols[name],initial,case);assert native==candidate,(kind,label,case,native[:2],candidate[:2]);counts[kind]=counts.get(kind,0)+1
+ receipt={'status':'PASS_COMPLETE_MACBINARY_AND_WRAPPER','comparisons':sum(counts.values()),'by_component':counts,'native_sizes':[170,84],'actual_helpers':['stream seek/read/read_at','selected forward copy','MacBinary reader inside wrapper'],'controlled_boundaries':['resource-fork parser222bytes','path reader252bytes'],'checks':['header field/name bounds','big-endian padded resource offsets','NULL/short stream','low-byte branches/full32-bit returned errors','stacked args/output writes/whole2KiB/SP/R4-R11/caller guard'],'limits':['Resource/path parser controls; no initialized runtime/layout/hardware proof'],'selected':False};(D/'probe-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt),flush=True)
+finally:
+ p.terminate();p.communicate(timeout=5)

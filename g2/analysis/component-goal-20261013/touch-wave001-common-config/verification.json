@@ -1,0 +1,169 @@
+{
+  "status": "PASS_TYPED_COMMON_CONFIG_AND_NINE_ELECTRODES",
+  "sections": [
+    {
+      "section": "common",
+      "stock_rom_start": "0xb2a8",
+      "end_exclusive": "0xb2e4",
+      "bytes": 60,
+      "sha256": "b8d793075ea50eeaf387b7dad2e60f21c6b4f306e53c6172e94b58a9e4fdc297"
+    },
+    {
+      "section": "electrodes",
+      "stock_rom_start": "0xb2e4",
+      "end_exclusive": "0xb32c",
+      "bytes": 72,
+      "sha256": "2c96d3c4a1cf7f9e61dbf50697667d04f88d340ccdc9e8869e3746f5bfdde3c5"
+    },
+    {
+      "section": "shield_electrodes",
+      "stock_rom_start": "0xb32c",
+      "end_exclusive": "0xb33c",
+      "bytes": 16,
+      "sha256": "5863099d716a146d1de570525837fec8fad1606191ce2b91c0a951a25a4bf234"
+    },
+    {
+      "section": "shield_pins",
+      "stock_rom_start": "0xb33c",
+      "end_exclusive": "0xb34c",
+      "bytes": 16,
+      "sha256": "579713e72853b4bccdf9dc6baf3c9974ddfd67af56cfaed0ee83283c85db0563"
+    },
+    {
+      "section": "pins",
+      "stock_rom_start": "0xb34c",
+      "end_exclusive": "0xb374",
+      "bytes": 40,
+      "sha256": "87eb8c266bd26559f954b9730fe9547cb9f02e5899f0e652e26b8e2cc1be7469"
+    },
+    {
+      "section": "channel",
+      "stock_rom_start": "0xb8f8",
+      "end_exclusive": "0xb914",
+      "bytes": 28,
+      "sha256": "42d9c428b0e3455de314eb1c34778778a9e05fa1d805aaeee75584e0314bce11"
+    }
+  ],
+  "new_typed_ROM_bytes": 132,
+  "existing_provider_bytes_rechecked": 100,
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "vendor_commit": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "vendor_header_sha256": "12402112ee3f37cdd966d758cfcc7c2eee14c1892bbf93674d75a9534bb89cd4",
+  "vendor_license_sha256": "aed445dc4b6832c07501ddb0c937a7bc342bb630d54636fca2b8177ec5722de0",
+  "records": [
+    {
+      "source": "g2/components/touch/reset_layout_candidate_20261010/reset_generated_common_config.c",
+      "source_sha256": "89ad3764956b615f31a9ad1066c6c15c664986281c0ecb85070db1e086e59cb7",
+      "object": "g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_generated_common_config.o",
+      "object_sha256": "46923d41b0bda2505cfe36f0ed82e2ea1d19c13a64f29113b7b32b1759bac030",
+      "command": [
+        "/usr/bin/clang",
+        "-target",
+        "armv6m-none-eabi",
+        "-mcpu=cortex-m0plus",
+        "-mthumb",
+        "-Og",
+        "-ffreestanding",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_generated_common_config.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/reset_layout_candidate_20261010/reset_generated_common_config.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_generated_common_config.o"
+      ],
+      "dependencies": {
+        "g2/components/touch/reset_layout_candidate_20261010/reset_generated_common_config.c": "89ad3764956b615f31a9ad1066c6c15c664986281c0ecb85070db1e086e59cb7",
+        "g2/components/touch/reset_layout_candidate_20261010/reset_generated_common_config.h": "36b74c217db47e071953c6205bae0437d01d90a0fa45c35898602f403cdf991c",
+        "g2/components/touch/reset_layout_candidate_20261010/reset_pin_config.h": "0672519ed57233560154454b7a13858fcdc98214ce3ea49fad740d56d04d0ebd"
+      },
+      "source_stable": true
+    },
+    {
+      "source": "g2/components/touch/reset_layout_candidate_20261010/reset_channel_pending.c",
+      "source_sha256": "b02fe15d85c95f3e4b91e3747326331365d1363f9b4a61a72b945aed5e039035",
+      "object": "g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_channel_pending.o",
+      "object_sha256": "e4d982b9c907f8a69f97e51649dd277732189498488b37c3935f512ad4489ddc",
+      "command": [
+        "/usr/bin/clang",
+        "-target",
+        "armv6m-none-eabi",
+        "-mcpu=cortex-m0plus",
+        "-mthumb",
+        "-Og",
+        "-ffreestanding",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_channel_pending.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/reset_layout_candidate_20261010/reset_channel_pending.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_channel_pending.o"
+      ],
+      "dependencies": {
+        "g2/components/touch/reset_layout_candidate_20261010/reset_channel_pending.c": "b02fe15d85c95f3e4b91e3747326331365d1363f9b4a61a72b945aed5e039035",
+        "g2/components/touch/reset_layout_candidate_20261010/reset_pin_config.h": "0672519ed57233560154454b7a13858fcdc98214ce3ea49fad740d56d04d0ebd"
+      },
+      "source_stable": true
+    },
+    {
+      "source": "g2/components/touch/reset_layout_candidate_20261010/reset_pin_config.c",
+      "source_sha256": "c700d87e08842e910ece1f806022c388e98e75d5feb6406ff35b224516078fba",
+      "object": "g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_pin_config.o",
+      "object_sha256": "d847e3f27ac61c8c87843aaad023b1ba4085690c0ec213dcae03ac5840e65c2e",
+      "command": [
+        "/usr/bin/clang",
+        "-target",
+        "armv6m-none-eabi",
+        "-mcpu=cortex-m0plus",
+        "-mthumb",
+        "-Og",
+        "-ffreestanding",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_pin_config.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/reset_layout_candidate_20261010/reset_pin_config.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_pin_config.o"
+      ],
+      "dependencies": {
+        "g2/components/touch/reset_layout_candidate_20261010/reset_pin_config.c": "c700d87e08842e910ece1f806022c388e98e75d5feb6406ff35b224516078fba",
+        "g2/components/touch/reset_layout_candidate_20261010/reset_pin_config.h": "0672519ed57233560154454b7a13858fcdc98214ce3ea49fad740d56d04d0ebd"
+      },
+      "source_stable": true
+    }
+  ],
+  "consumer_inputs": {
+    "g2/components/touch/pin_control_offline/pins.c": "4fc06e27b6b1903067101590010b4db5aaf156a99aa89f61c7db6bfd88a2556d",
+    "g2/components/touch/base_frame_offline/base.c": "8215c2798d3cca723848e12f5fd99f3726dd4eeb8195f6f6ef1d5aaed390854c",
+    "g2/components/touch/all_slot_offline/slots.c": "302698546e2ad9d313413720b9cb8ad95eda52976e14c19878e57226b241f202"
+  },
+  "elf_sha256": "20e709031056138a295aa469def3adc6133cfa9db9d4872d60017d2c996ea9a0",
+  "link_command": [
+    "arm-none-eabi-ld",
+    "-T",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/fixture.ld",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_generated_common_config.o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_channel_pending.o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/reset_pin_config.o",
+    "-o",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/touch-wave001-common-config/fixture.elf"
+  ],
+  "linker_script_sha256": "7d2929308360f9206325d8bc12ea4d1fe40515ebdcf34a1be06b4882b128667b",
+  "undefined_symbols": [],
+  "limits": [
+    "Bounded data and relocation fixture only; no full firmware placement, native-body census, package equality or hardware qualification.",
+    "LP history extent, internal context and widget configuration remain separate source gates.",
+    "Vendor layout matches evidence; producing generator/SDK version not uniquely identified."
+  ]
+}

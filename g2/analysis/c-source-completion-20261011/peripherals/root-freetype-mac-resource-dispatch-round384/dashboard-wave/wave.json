@@ -1,0 +1,143 @@
+{
+  "schema": "opencfw-completed-wave-v1",
+  "wave_id": "root-apollo-main-round384-mac-resource-dispatch",
+  "component": "apollo_main",
+  "status": "completed",
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "target_id": "official-s200-v2.2.6.10",
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "source_snapshot_id": "round384-c92485d935dd5adb",
+  "completed_utc": "2026-10-13T19:04:51.661801+00:00",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-mac-resource-dispatch-round384/receipt.json",
+      "sha256": "d0215dbb64c5f12b261b1709a1cbc84ead95cdfb1d676c96ab8496014c8d1bc5"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-mac-resource-dispatch-round384/root-source-audit.json",
+      "sha256": "7fdc29e92f00216f165e1346f49ffc34829bcde0f921ab5400d010525c4d46c9"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-resource-dispatch-round384/admission-receipt.json",
+      "sha256": "a0538e8160bc34a114a26e4b42624bbe0dbd002ba5337abbc448d09d88e4ce84"
+    }
+  ],
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-resource-dispatch-round384/current-dependency-audit.json",
+      "sha256": "0e6facc3e627dcc05f1c76f61a244410b1c0e10d21fde1fe57ba90c74643041a"
+    }
+  ],
+  "implementation_delta": {
+    "actual_c_bodies": [
+      {
+        "symbol": "audio_uart_ft_read_mac_resource_5261ac"
+      }
+    ],
+    "abi_adapters": [],
+    "typed_data": [],
+    "pseudocode_only": [],
+    "fixtures_or_stubs": []
+  },
+  "build": {
+    "compiler_settings_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-resource-dispatch-round384/current-dependency-audit.json",
+      "sha256": "0e6facc3e627dcc05f1c76f61a244410b1c0e10d21fde1fe57ba90c74643041a"
+    },
+    "definitions": 3369,
+    "imports": 765,
+    "import_classification_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-resource-dispatch-round384/dashboard-wave/import-delta.json",
+      "sha256": "0fae8a49bc1f80c0f9859beb5b1edcc8a341aa5110e2557953ab4536cfa0dd53"
+    },
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false
+  },
+  "tests": {
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-resource-dispatch-round384/probe-receipt.json",
+        "sha256": "66da7dbde0d837ebced80b890712ce0dced129114338a87cd4d8b5a75b8974ff"
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-resource-dispatch-round384/qualification-input-hashes.json",
+        "sha256": "a738dee8077c898917fe57962a7f804bc7d6f3ac1c2a3829034ecf3bba18bc4d"
+      }
+    ],
+    "expected_failures": [],
+    "controlled_boundaries": [
+      "resource header parser",
+      "resource offsets parser",
+      "POST/SFNT parser",
+      "memory free callback"
+    ]
+  },
+  "address_resource_delta_receipts": [],
+  "limitations": [
+    "Child resource parsers controlled; no initialized runtime/layout/hardware proof",
+    "134 top-level snapshots and54 selected-TU dependencies checked",
+    "0/6 accepted images; runtime/data/layout/byte equality/hardware open",
+    "Dashboard checkpoint publication separate from interval reconciliation"
+  ],
+  "next_goal": {
+    "owner": "existing implementation goal",
+    "reason": "Qualify remaining resource parser graph",
+    "exit_criteria": [
+      "Complete native/C comparison",
+      "Admission and terminal current-source/dependency audit"
+    ],
+    "missing_input_or_authorization": null,
+    "ranked_gaps": [
+      "Resource header round385",
+      "Data offsets/POST/SFNT/path readers",
+      "Initialized runtime/module graph",
+      "Other five image gates"
+    ]
+  },
+  "dashboard": {
+    "state": "awaiting_inventory",
+    "data_owner_thread_id": "01a120b1-9d22-7596-9ee5-a6d93342c014",
+    "publisher_thread_id": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "validated_snapshot_id": null,
+    "publish_receipts": [],
+    "readback_verified": false,
+    "snapshot": {
+      "full": {
+        "library_file_id": "libfile_3d9914466c448191be6edc3918867204",
+        "version": null,
+        "sha256": null
+      },
+      "compact": {
+        "library_file_id": "libfile_e7f198676fe481918961cdfb1a1eb33f",
+        "version": null,
+        "sha256": null
+      },
+      "validation": {
+        "status": "pending",
+        "receipt_path": null,
+        "receipt_sha256": null
+      },
+      "page_id": "page_e5199b4adeb081918164ac6acd8e4b04",
+      "page_sequence": null
+    }
+  },
+  "repository": {
+    "root": "/Users/kalani/Repo/evenRealities-openCFW",
+    "head_revision": "2359c6906032d9ee59c16c7b8c2ce56fda50c1c0",
+    "dirty_state_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-mac-resource-dispatch-round384/dashboard-wave/repository-state.json",
+      "sha256": "b914371f2a9cb0aef67a4979ed983b8cd6668b44447de7a58319d1bc28118a4a"
+    },
+    "index_unchanged_by_wave_reporting": true
+  },
+  "reporting_route": {
+    "coordinator": "01a1228e-2121-71b9-a9df-9eede6787020",
+    "authorization_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/reporting-authorization.json",
+      "sha256": "144e9fd325f50d5585bb4910fca8b7dd474213dc79349d0302fd73b495b79164"
+    },
+    "scope": "completed-wave metadata only until revoked",
+    "publisher": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "publication_verified": false
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "PASS_COMPLETE_MACBINARY_AND_WRAPPER",
+  "comparisons": 4160,
+  "by_component": {
+    "macbinary": 2080,
+    "wrapper": 2080
+  },
+  "native_sizes": [
+    170,
+    84
+  ],
+  "actual_helpers": [
+    "stream seek/read/read_at",
+    "selected forward copy",
+    "MacBinary reader inside wrapper"
+  ],
+  "controlled_boundaries": [
+    "resource-fork parser222bytes",
+    "path reader252bytes"
+  ],
+  "checks": [
+    "header field/name bounds",
+    "big-endian padded resource offsets",
+    "NULL/short stream",
+    "low-byte branches/full32-bit returned errors",
+    "stacked args/output writes/whole2KiB/SP/R4-R11/caller guard"
+  ],
+  "limits": [
+    "Resource/path parser controls; no initialized runtime/layout/hardware proof"
+  ],
+  "selected": false
+}

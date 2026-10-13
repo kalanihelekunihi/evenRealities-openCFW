@@ -1,0 +1,33 @@
+{
+  "status": "COMPLETED_TERMINAL_BUILD_CURRENT_SOURCE_DEPENDENCIES_PASS",
+  "previous_selected_sha256": "28f22df5dab73d8acc4d43b745ea9b0161b6b1699ccf740c34086b51466adecc",
+  "selected_sha256": "79687e2c44e28d5126b59f1affa2b77c45bb1dee7dd7caaabb5e9f462e9371e9",
+  "symbols": [
+    "audio_uart_ft_resource_ref_compare_528272",
+    "audio_uart_ft_qsort_567c4c",
+    "audio_uart_ft_raccess_offsets_528298"
+  ],
+  "native_sizes": [
+    472,
+    38,
+    24
+  ],
+  "comparisons": 1959,
+  "actual_helpers": [
+    "stream read/skip/seek/BE",
+    "selected realloc/zero/free",
+    "C comparator"
+  ],
+  "sort_core_boundary": "Unchanged native704-byte core used only in analysis; remains unresolved C production provider",
+  "expected_native_boundary": "Allocator count mutation to-1 before sorting causes native non-returning fault; no production recovery invented",
+  "limits": [
+    "Allocation/free controlled",
+    "No initialized runtime/layout/hardware proof"
+  ],
+  "source_frozen": false,
+  "selected": true,
+  "remaining_component_work": [],
+  "definitions": 3373,
+  "imports": 764,
+  "accepted_complete_images": 0
+}

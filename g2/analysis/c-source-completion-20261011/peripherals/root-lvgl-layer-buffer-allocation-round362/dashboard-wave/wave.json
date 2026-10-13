@@ -1,0 +1,146 @@
+{
+  "schema": "opencfw-completed-wave-v1",
+  "wave_id": "root-apollo-main-round362-layer-buffer",
+  "component": "apollo_main",
+  "status": "completed",
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "target_id": "official-s200-v2.2.6.10",
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "source_snapshot_id": "round362-e970ba8e7bb848f2",
+  "completed_utc": "2026-10-13T16:55:02.529094+00:00",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-lvgl-layer-buffer-round362/receipt.json",
+      "sha256": "7efaf9be0a97a82a2681a6336f853c1e0827a7089f3d4345b66a1aadf525bd03"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-lvgl-layer-buffer-round362/root-source-audit.json",
+      "sha256": "243548d8f0b83da162cd18afeddc2dcf45c593ca00cb3affc7003d0d7682b43d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/admission-receipt.json",
+      "sha256": "8437573d1ac611fbafcdd9f921553128d5a7307a9b3eb86ae2d2dcd4ed04942a"
+    }
+  ],
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/dashboard-wave/source-object-dependency-audit.json",
+      "sha256": "1af85be9c8b0922c24e2be6ae5e066dbe64a8f24305835b79829f315db169823"
+    }
+  ],
+  "implementation_delta": {
+    "actual_c_bodies": [
+      {
+        "symbol": "audio_uart_lv_draw_layer_alloc_buf_484836",
+        "address": "0x484836",
+        "bytes": 124
+      },
+      {
+        "symbol": "audio_uart_display_surface_alloc",
+        "address": "0x48affa",
+        "bytes": 22
+      }
+    ],
+    "abi_adapters": [
+      "Canonical signed rectangle extent declarations; all 330 preexisting function code sections identical after repair"
+    ],
+    "typed_data": [],
+    "pseudocode_only": [],
+    "fixtures_or_stubs": []
+  },
+  "build": {
+    "compiler_settings_receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/dashboard-wave/source-object-dependency-audit.json",
+    "definitions": 3310,
+    "imports": 761,
+    "import_classification_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/dashboard-wave/import-delta.json",
+      "sha256": "773211a072aea4d91f4d2ae9e14f6c6c24e912dbb7dd5fd1838387bdf9db3313"
+    },
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false
+  },
+  "tests": {
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/probe-receipt.json",
+        "sha256": "dfe2b523efc9fc31fc944096a54da13df117191baa411f350308f7116a8d9765"
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/interface-reconciliation-receipt.json",
+        "sha256": "0dd11af9fd215ce7670e0c44c58d06d65a6020b1a9186635985d7087865fa2ad"
+      }
+    ],
+    "expected_failures": [],
+    "controlled_boundaries": [
+      "stride backend",
+      "allocator backend",
+      "draw-buffer clear backend",
+      "logger backend"
+    ]
+  },
+  "address_resource_delta_receipts": [],
+  "limitations": [
+    "228 bounded native/C comparisons; no full image acceptance or hardware proof",
+    "0 of 6 accepted images",
+    "134 top-level snapshots in base audit; transitive selected TU dependencies separately audited",
+    "Library materialization/upload/replacement tools unavailable in this implementation context; parent-mediated publisher required",
+    "Inventory, validation, publication and readback pending; automatic refresh unverified"
+  ],
+  "next_goal": {
+    "owner": "existing implementation goal",
+    "reason": "Close newly exposed draw-buffer clear direct-code provider",
+    "exit_criteria": [
+      "Whole 258-byte native body and ABI accounted",
+      "Connected bounded native/C qualification with explicit lower boundaries",
+      "Terminal build and current source/dependency hash audit"
+    ],
+    "missing_input_or_authorization": null,
+    "ranked_gaps": [
+      "draw buffer clear 0x48ac40",
+      "FreeType initialization 0x4b1b98 and connected providers",
+      "Initialized runtime data and final image layout"
+    ]
+  },
+  "dashboard": {
+    "state": "awaiting_inventory",
+    "data_owner_thread_id": "01a120b1-9d22-7596-9ee5-a6d93342c014",
+    "publisher_thread_id": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "validated_snapshot_id": null,
+    "publish_receipts": [],
+    "readback_verified": false,
+    "snapshot": {
+      "full": {
+        "library_file_id": "libfile_3d9914466c448191be6edc3918867204",
+        "version": null,
+        "sha256": null
+      },
+      "compact": {
+        "library_file_id": "libfile_e7f198676fe481918961cdfb1a1eb33f",
+        "version": null,
+        "sha256": null
+      },
+      "validation": {
+        "status": "pending",
+        "receipt_path": null,
+        "receipt_sha256": null
+      },
+      "page_id": "page_e5199b4adeb081918164ac6acd8e4b04",
+      "page_sequence": null
+    }
+  },
+  "repository": {
+    "root": "/Users/kalani/Repo/evenRealities-openCFW",
+    "head_revision": "2359c6906032d9ee59c16c7b8c2ce56fda50c1c0",
+    "dirty_state_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-lvgl-layer-buffer-allocation-round362/dashboard-wave/repository-state.json",
+      "sha256": "cdfe479867ceacc96b9d7d3df88f7955c1b5d5074cb825466cf89879d1d44f07"
+    },
+    "index_unchanged_by_wave_reporting": true
+  },
+  "target_identity_join": {
+    "target_json_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+    "build_target_sha256_kind": "target JSON file hash",
+    "bundle_sha256_kind": "OTA bundle bytes hash",
+    "join": "target JSON bundle field matches contract lock"
+  }
+}

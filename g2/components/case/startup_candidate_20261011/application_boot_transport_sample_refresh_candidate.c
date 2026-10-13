@@ -1,11 +1,10 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08009bc0 and 0x08009cc8 aging status refresh paths.
  */
 #include <stdint.h>
 extern uint32_t case_boot_transport_aging_status(void); /* 0x1408 */
-extern uint32_t case_policy_log(uint32_t);
-extern uint32_t case_policy_log_number(uint32_t,uint32_t);
 extern uint32_t case_legacy_logger(const char *,...);
 extern int32_t case_boot_sensor_finish_signal(uint32_t,uint32_t);
 

@@ -1,10 +1,9 @@
+#include "case_logger_contract.h"
 #include "../semantic_strings_candidate_20261011/case_semantic_strings.h"
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x0800bb90 transport inbox/charging confirmation callback.
  */
 #include <stdint.h>
-extern uint32_t case_policy_log(uint32_t);
-extern uint32_t case_policy_log_four(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void case_boot_irq_hall_prepare(uint32_t); /* 0x3848 */
 extern int32_t case_policy_event_signal(uint32_t,uint32_t); /* 0xaaf0 */
 extern int32_t case_policy_task_reset(uint32_t); /* 0xab26 */
