@@ -6171,12 +6171,2236 @@
     }
   },
   "root_mpu_writers_round128": {
-    "status": "FIVE_UNSELECTED_M55_C_CANDIDATES",
+    "status": "FIVE_LOCAL_COMPONENTS_COMPLETE",
     "native_qualification": false,
     "remaining_estimate": [
       "Five modeled register/read/write/ABI qualifications",
       "Connected descriptors/config/startup",
       "Cache/LRU/scheduler and six full image gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 1057,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-mpu-writers-round128",
+    "audit": {
+      "definitions": 3048,
+      "imports": 752,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_memory_config_connected_round129": {
+    "status": "CONNECTED_MODELED_MPU_MEMORY_CONFIG_LOCAL_COMPLETE",
+    "native_cases": 18,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-memory-config-connected-round129/receipt.json",
+    "limits": [
+      "Copy/cache cuts; physical register alias routing/cache effects/hardware unproved"
+    ],
+    "remaining_estimate": [
+      "Connected actual TLSF/MPU heap startup",
+      "Copy/cache and generic cache/LRU/scheduler ABI",
+      "Six full image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_heap_startup_connected_round130": {
+    "status": "CONNECTED_TLSF_MPU_HEAP_STARTUP_LOCAL_COMPLETE",
+    "native_cases": 18,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-memory-config-connected-round130/receipt.json",
+    "limits": [
+      "Mutex/logger/error/copy/cache controlled cuts; physical startup and tiny pool allocation capacity unproved"
+    ],
+    "remaining_estimate": [
+      "Actual copy/cache and scheduler ABI",
+      "Connected generic cache/LRU using initialized heap",
+      "752 Main imports and six full image data/layout/byte equality/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_copy_discriminator_round131": {
+    "status": "DISJOINT_COPY_LOCAL_COMPLETE_CONNECTED_TEST_OPEN",
+    "qemu_native_cases": 1377,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-copy-discriminator-round131/receipt.json",
+    "connected_observation": "g2/analysis/c-source-completion-20261011/peripherals/root-memory-config-connected-round131/qualification-open.json",
+    "finding": "Connected Unicorn trace omits caller instructions4840ee and484100 after native439c40 return; these set descriptor count1. Isolated Unicorn24byte copy succeeds. No firmware source repair justified.",
+    "remaining_estimate": [
+      "Independent connected root/copy caller oracle",
+      "Copy overlap/access-width contract and cache/scheduler ABI",
+      "752 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_copy_overlap_round132": {
+    "status": "COPY_OVERLAP_LOCAL_COMPONENT_COMPLETE",
+    "qemu_native_cases": 5820,
+    "disjoint_cases": 1377,
+    "old_source_mismatches": 1766,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-copy-overlap-round132",
+    "audit": {
+      "definitions": 3048,
+      "imports": 752,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Connected caller oracle and native return/access-width contracts",
+      "Cache/scheduler and connected cache/LRU",
+      "752 Main imports and all six image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_cache_contract_round133": {
+    "status": "SELECTED_LOCAL_CACHE_CONTRACT_COMPLETE",
+    "native_cases": 48,
+    "remaining_estimate": [
+      "Physical cache effects and hardware startup",
+      "Connected actual copy caller/scheduler and generic cache/LRU",
+      "752 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_terminal_cases": 201,
+    "bounded_prefix_cases": 18,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-cache-contract-round133",
+    "audit": {
+      "definitions": 3048,
+      "imports": 752,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_heap_startup_actual_cache_round134": {
+    "status": "CONNECTED_TLSF_MPU_CACHE_STARTUP_LOCAL_COMPLETE",
+    "native_cases": 18,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-memory-config-connected-round134/receipt.json",
+    "controlled_cuts": [
+      "Mutex/logger/error/copy"
+    ],
+    "remaining_estimate": [
+      "Connected actual copy caller and scheduler ABI",
+      "Connected generic cache/LRU with initialized heap",
+      "752 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_mutex_connected_round135": {
+    "status": "CONNECTED_MUTEX_QUEUE_CONSTRUCTOR_LOCAL_COMPLETE",
+    "native_cases": 72,
+    "selected_source_mutation": false,
+    "remaining_estimate": [
+      "Actual reset/list integration",
+      "Actual queue send,critical sections and allocation provider",
+      "752 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_mutex_connected_round136": {
+    "status": "CONNECTED_MUTEX_QUEUE_RESET_LISTS_LOCAL_COMPLETE",
+    "native_cases": 72,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-mutex-connected-round136/receipt.json",
+    "controlled_cuts": [
+      "Allocation",
+      "Critical enter/exit",
+      "Queue send"
+    ],
+    "remaining_estimate": [
+      "Actual queue send and critical/allocator bodies",
+      "Connected heap startup with scheduler and independent copy oracle",
+      "752 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_mutex_connected_send_round137": {
+    "status": "CONNECTED_MUTEX_QUEUE_SEND_LOCAL_COMPLETE",
+    "native_cases": 72,
+    "selected_source_mutation": false,
+    "remaining_estimate": [
+      "Actual scheduler-state and critical sections",
+      "Allocation/disinherit provider integration",
+      "752 Main imports and six image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_mutex_connected_scheduler_round138": {
+    "status": "CONNECTED_MUTEX_QUEUE_SCHEDULER_STATE_LOCAL_COMPLETE",
+    "native_cases": 216,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-mutex-connected-round138/receipt.json",
+    "controlled_cuts": [
+      "Allocation",
+      "Critical enter/exit",
+      "Disinherit/yield"
+    ],
+    "remaining_estimate": [
+      "Actual critical body with explicit ROM mask-set/restore boundaries",
+      "Allocation/disinherit and connected heap startup",
+      "752 Main imports and six image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_mutex_connected_critical_round139": {
+    "status": "CONNECTED_CRITICAL_BODIES_LOCAL_COMPLETE",
+    "native_cases": 648,
+    "selected_source_mutation": false,
+    "remaining_estimate": [
+      "Actual RTOS heap allocation",
+      "Scheduler suspend/resume and disinherit",
+      "752 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_mutex_connected_allocator_round140": {
+    "status": "CONNECTED_RTOS_HEAP_MUTEX_LOCAL_COMPLETE",
+    "native_cases": 648,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-mutex-connected-round140/receipt.json",
+    "controlled_cuts": [
+      "Scheduler suspend/resume",
+      "Malloc failure callback",
+      "ROM mask-set/restore equivalents",
+      "Disinherit/yield"
+    ],
+    "remaining_estimate": [
+      "Multiple live RTOS allocations and allocator/free integration",
+      "Scheduler suspend/resume/disinherit and connected three-pool startup",
+      "752 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_dm_vs_init_round141": {
+    "status": "SELECTED_PROVIDER_COMPLETE_BUILD_AUDITED",
+    "native_cases": 256,
+    "function_body_byte_equal": true,
+    "body_bytes": 10,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-dm-vs-init-round141",
+    "remaining_estimate": [
+      "76 direct-call/branch imports and675 address-only imports require native/source ownership classification",
+      "Other five image provider/data/layout gates",
+      "Six full coverage/byte equality/hardware gates"
+    ],
+    "accepted_complete_images": 0,
+    "audit": {
+      "definitions": 3049,
+      "imports": 751,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_main_frontier_round141": {
+    "imports": 751,
+    "direct_call_or_branch_imports": 76,
+    "address_only_imports": 675,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-main-direct-frontier-round141.json",
+    "limits": [
+      "Address-only does not imply data;function pointers remain possible"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_memcmp_binding_round142": {
+    "status": "PUBLIC_MEMCMP_BINDING_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 640,
+    "native_direct_caller_bindings": 9,
+    "dependency_bda_callers_native_binding_unmapped": 2,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-memcmp-binding-round142",
+    "audit": {
+      "definitions": 3050,
+      "imports": 750,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Two unselected file heap bindings need caller audit and connected qualification",
+      "750 Main code/data/runtime imports",
+      "Six full image coverage/layout/byte equality/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_file_heap_bindings_round143": {
+    "status": "TWO_PUBLIC_HEAP_BINDINGS_COMPLETE_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Connected canonical TLSF/scheduler and complete heap data/layout",
+      "748 Main imports and all six image gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 180,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-file-heap-bindings-round143",
+    "audit": {
+      "definitions": 3052,
+      "imports": 748,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_heap_log_binding_round144": {
+    "status": "SELECTED_ALIAS_COMPLETE_BUILD_AUDITED",
+    "native_cases": 3,
+    "remaining_estimate": [
+      "Formatter/callback implementation and data/layout gates",
+      "747 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0,
+    "alias_symbol_identity_verified": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-heap-log-binding-round144",
+    "audit": {
+      "definitions": 3053,
+      "imports": 747,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_lv_timer_create_round145": {
+    "status": "SELECTED_LV_TIMER_CREATE_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_range": "464466..4644ee",
+    "remaining_estimate": [
+      "Connected actual allocator/tick with nonempty timer list",
+      "746 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 144,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-timer-create-round145",
+    "audit": {
+      "definitions": 3054,
+      "imports": 746,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_lv_timer_connected_round146": {
+    "status": "CONNECTED_TIMER_LIST_UPDATE_LOCAL_COMPLETE",
+    "native_cases": 144,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-lv-timer-connected-round146/receipt.json",
+    "controlled_cuts": [
+      "Malloc",
+      "Tick",
+      "Callback",
+      "Logger"
+    ],
+    "remaining_estimate": [
+      "Nonempty list and allocator/tick integration",
+      "Root data/layout and hardware effects",
+      "746 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_timer_nonempty_round147": {
+    "status": "CONNECTED_NONEMPTY_TIMER_LIST_LOCAL_COMPLETE",
+    "native_cases": 432,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-lv-timer-connected-round147/receipt.json",
+    "remaining_estimate": [
+      "Actual allocator/tick integration",
+      "Rootdata/layout and hardware gates",
+      "746 Main imports and six full image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_tick_contract_round148": {
+    "status": "SELECTED_TICK_REPAIR_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 60,
+    "baseline_mismatch_confirmed": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-tick-contract-round148",
+    "audit": {
+      "definitions": 3054,
+      "imports": 746,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Physical interrupt timing and image gates remain open"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_timer_connected_round149": {
+    "status": "CONNECTED_TIMER_LIST_TICK_UPDATE_LOCAL_COMPLETE",
+    "native_cases": 864,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-lv-timer-connected-round149/receipt.json",
+    "remaining_estimate": [
+      "Actual pool allocator and mutex integration",
+      "Root data ownership/layout",
+      "746 Main imports and six full coverage/byte equality/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_timer_connected_round150": {
+    "status": "CONNECTED_TIMER_LV_HEAP_WRAPPERS_TICK_UPDATE_LOCAL_COMPLETE",
+    "native_cases": 864,
+    "selected_source_mutation": false,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-lv-timer-connected-round150/receipt.json",
+    "remaining_estimate": [
+      "Actual pool allocator and mutex integration",
+      "Root data ownership/layout",
+      "746 Main imports and six full coverage/byte equality/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_timer_tlsf_round151": {
+    "status": "CONNECTED_ACTUAL_TLSF_TIMER_LOCAL_COMPLETE",
+    "native_cases": 48,
+    "fault_cases": 34,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-lv-timer-tlsf-round151/receipt.json",
+    "remaining_estimate": [
+      "Actual mutex/callback scheduling integration",
+      "746 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_bmp_round152": {
+    "status": "SELECTED_BMP_REGISTRATION_CLOSE_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 72,
+    "selected_body_rerun": true,
+    "remaining_estimate": [
+      "Open and get-area callbacks",
+      "Connected filesystem/allocator qualification",
+      "Fullimage gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_bmp_round153": {
+    "status": "SELECTED_BMP_INFO_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 480,
+    "selected_body_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-bmp-round153",
+    "audit": {
+      "definitions": 3057,
+      "imports": 747,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Two BMP callbacks,open/get-area",
+      "747 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_bmp_round154": {
+    "status": "SELECTED_BMP_OPEN_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 2304,
+    "selected_body_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-bmp-open-round154",
+    "audit": {
+      "definitions": 3058,
+      "imports": 746,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Connected filesystem/allocator and full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_bmp_round155": {
+    "status": "SELECTED_BMP_GET_AREA_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 192,
+    "selected_body_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-bmp-area-round155",
+    "audit": {
+      "definitions": 3059,
+      "imports": 745,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Connected actual filesystem/pixel transfer",
+      "745 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_bmp_round156": {
+    "status": "CONNECTED_BMP_GET_AREA_WIDTH_RESHAPE_LOCAL_COMPLETE",
+    "native_cases": 192,
+    "remaining_estimate": [
+      "Actual copy,draw-buffer create/size/stride,filesystem providers",
+      "745 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_fs_open_round157": {
+    "status": "SELECTED_LV_FS_OPEN_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 3456,
+    "selected_body_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-fs-open-round157",
+    "audit": {
+      "definitions": 3060,
+      "imports": 744,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Actual driver/heap and connected decoders",
+      "744 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_fs_open_registry_round158": {
+    "status": "CONNECTED_FS_OPEN_REGISTRY_LOCAL_COMPLETE",
+    "native_cases": 3456,
+    "remaining_estimate": [
+      "Actual driver callbacks and allocator",
+      "Connected BMP file/pixel transfers"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_source_round159": {
+    "status": "PINNED_AMBIQ_LVGL_SOURCE_DOWNLOADED_NATIVE_INIT_IDENTIFIED",
+    "submodule_commit": "5be8e0ae5077aa3880aba8a322b1487d6bc73c07",
+    "remaining_estimate": [
+      "Implement full native init using source structure plus native volatile ordering",
+      "Map dispatch/evaluate/delete/render callbacks",
+      "Recover Nema command-list/configuration and hardware providers"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_init_round160": {
+    "status": "SELECTED_AMBIQ_INIT_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 84,
+    "selected_body_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-init-round160",
+    "audit": {
+      "definitions": 3061,
+      "imports": 756,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "FourGPUcallbacks",
+      "Bufferhandlers/drawunit/VG/commandlist/thread/vectorfont providers",
+      "Unitcell sourceownership and756Mainimports",
+      "Sixfullimagegates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_thread_round161": {
+    "status": "SELECTED_LV_THREAD_INIT_TRAMPOLINE_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 192,
+    "selected_body_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-thread-round161",
+    "audit": {
+      "definitions": 3063,
+      "imports": 755,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Actual task scheduling",
+      "GPU/Nema graph and755Mainimports",
+      "Sixfullimagegates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_delete_round162": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 108,
+    "selected_body_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-delete-sync-round163",
+    "audit": {
+      "definitions": 3066,
+      "imports": 755,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Connected actual critical/notify/task deletion andNema destructor",
+      "Three GPU callbacks and755Mainimports",
+      "Sixfullimagegates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_sync_round163": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 108,
+    "selected_body_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-delete-sync-round163",
+    "audit": {
+      "definitions": 3066,
+      "imports": 755,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Connected actual critical/notify/task deletion andNema destructor",
+      "Three GPU callbacks and755Mainimports",
+      "Sixfullimagegates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_delete_connected_round164": {
+    "status": "CONNECTED_DELETE_SYNC_THREAD_DELETE_LOCAL_COMPLETE",
+    "native_cases": 108,
+    "remaining_estimate": [
+      "Actual Nema/bitmap/critical/tasknotify/taskdelete children",
+      "PhysicalGPU/scheduling andfullimagegates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_cl_destroy_round165": {
+    "status": "SELECTED_NEMA_CL_DESTROY_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 1080,
+    "selected_body_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-cl-destroy-round165",
+    "audit": {
+      "definitions": 3067,
+      "imports": 758,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Four qualified support bodies tointegrate",
+      "ThreeGPUcallbacks",
+      "758Mainimports andsixfullimagegates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_cl_leaves_round166": {
+    "status": "FOUR_NEMA_SUPPORT_BODIES_SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 5400,
+    "selected_leaf_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-cl-leaves-round166",
+    "audit": {
+      "definitions": 3071,
+      "imports": 755,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Actual poolfree/TLSF/criticalintegration",
+      "Context/poolownership and755Mainimports",
+      "Sixfullimagegates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_evaluate_round167": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 1384,
+    "remaining_estimate": [
+      "Evaluatorandformatmapperselection/qualification/buildaudit",
+      "Dispatch/rendercallbacks",
+      "Fullimagegates"
+    ],
+    "accepted_complete_images": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-evaluate-map-round168",
+    "audit": {
+      "definitions": 3073,
+      "imports": 754,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_ambiq_color_map_round168": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Hardware rendering and full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 1024,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-evaluate-map-round168",
+    "audit": {
+      "definitions": 3073,
+      "imports": 754,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_ambiq_evaluate_connected_round169": {
+    "status": "PASS_SELECTED_CONNECTED_BODY_3072_CASES_RESTRICTED_IT_FIXTURE",
+    "native_cases": 3072,
+    "remaining_estimate": [
+      "Dispatch and render callbacks",
+      "754 Main imports",
+      "Six image coverage/data/layout/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_dispatch_round170": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Actual task lookup/layer allocation/sync graph",
+      "Full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 192,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-dispatch-round170",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3074,
+      "imports": 755
+    }
+  },
+  "root_ambiq_render_thread_round171": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 216,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-render-thread-round171",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3075,
+      "imports": 758
+    },
+    "remaining_estimate": [
+      "Four exposed wait/execute/delete children",
+      "758 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_render_support_round172": {
+    "status": "THREE_SUPPORT_BODIES_SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 144,
+    "remaining_estimate": [
+      "Actual drawing/dispatch/queue child graphs",
+      "Full image gates"
+    ],
+    "accepted_complete_images": 0,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-render-support-round172",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3078,
+      "imports": 757
+    }
+  },
+  "root_lv_sync_wait_round173": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 216,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-sync-wait-round173",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3079,
+      "imports": 757
+    },
+    "remaining_estimate": [
+      "Notification-take body and connected actual scheduler/critical graph",
+      "Full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_drawing_round174": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "remaining_estimate": [
+      "17 newly exposed child dependencies",
+      "Actual buffer/transform/drawing and GPU graph",
+      "774 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 1232,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-drawing-round174",
+    "audit": {
+      "definitions": 3080,
+      "imports": 774,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_ambiq_area_leaves_round175": {
+    "status": "TWO_AREA_BODIES_SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "connected_cases": 1232,
+    "remaining_estimate": [
+      "Connected actual intersection/buffer/drawing graph",
+      "Full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "standalone_cases": 318,
+    "selected_connected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-area-leaves-round175",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3082,
+      "imports": 772
+    }
+  },
+  "root_draw_cache_round176": {
+    "status": "THREE_BODIES_SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 512,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-draw-cache-round176",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3085,
+      "imports": 771
+    },
+    "remaining_estimate": [
+      "Area-set provider selection",
+      "Actual cache callbacks and GPU graph",
+      "771 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_draw_area_set_round177": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "connected_cases": 512,
+    "standalone_cases": 125,
+    "remaining_estimate": [
+      "Actual GPU/cache-callback graph",
+      "Full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "selected_standalone_rerun": true,
+    "selected_connected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-draw-area-set-round177",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3086,
+      "imports": 770
+    }
+  },
+  "root_ambiq_common_end_round178": {
+    "status": "TWO_BODIES_SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 324,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-common-end-round178",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3088,
+      "imports": 778
+    },
+    "remaining_estimate": [
+      "Submit/wait/unbind/power/unlock/error children",
+      "778 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_error_get_round179": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "connected_cases": 648,
+    "remaining_estimate": [
+      "Actual Nema context and command-list/hardware graph",
+      "Full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "selected_connected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-error-get-round179",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3089,
+      "imports": 777
+    }
+  },
+  "root_ambiq_context_unlock_round180": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Actual queue/ensure/scheduler integration",
+      "Full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 240,
+    "selected_connected_mutex_cases": 240,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-context-unlock-round181",
+    "audit": {
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true,
+      "definitions": 3090,
+      "imports": 776
+    }
+  },
+  "root_lv_mutex_unlock_round181": {
+    "status": "EXACT_NATIVE_LOG_PATH_CORRECTED_SELECTED_BUILD_AUDITED",
+    "connected_cases": 240,
+    "selected_rerun": true,
+    "remaining_estimate": [
+      "Actual mutex ensure/queue give and scheduler graph",
+      "Other mutex init/lock logger paths still abbreviated"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_common_end_connected_round182": {
+    "status": "PASS_SELECTED_CONNECTED_FOUR_ACTUAL_CHILD_BODIES",
+    "native_cases": 1944,
+    "remaining_estimate": [
+      "Actual submit/wait/unbind/power/error interpretation/VG-error and queue/ensure children",
+      "776 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_common_start_round183": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Newly exposed zero/lock/power/CL/reset/blend/texture/clip dependencies",
+      "785 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 8832,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-common-start-round184",
+    "audit": {
+      "definitions": 3092,
+      "imports": 785,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_ambiq_dst_map_round184": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 1024,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-common-start-round184",
+    "audit": {
+      "definitions": 3092,
+      "imports": 785,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Physical rendering/full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_start_connected_round185": {
+    "status": "PASS_SELECTED_REAL_DEST_MAP_AND_INTERSECTION",
+    "native_cases": 7296,
+    "selected_rerun": true,
+    "remaining_estimate": [
+      "Remaining16controlled children and GPU graph",
+      "785 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_blend_clear_round186": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Physical GPU/fullimage gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 64,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-word-fill-blend-round187",
+    "audit": {
+      "definitions": 3095,
+      "imports": 783,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_lv_word_fill_round187": {
+    "status": "SELECTED_C_COMPILED_ALIGNED_QEMU_QUALIFIED_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Unaligned fault boundary and ordered bus trace unqualified",
+      "Instrumented Unicorn disagreement retained",
+      "Physical RAM/cache/full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "qemu_cases": 1548,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-word-fill-blend-round187",
+    "audit": {
+      "definitions": 3095,
+      "imports": 783,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_ambiq_start_memory_connected_round188": {
+    "status": "PASS_SELECTED_ACTUAL_MAP_INTERSECTION_ZERO_FILL_BLEND",
+    "native_cases": 7296,
+    "remaining_estimate": [
+      "Remaining14childcuts",
+      "Context lock/Nema/power/texture/clip graph",
+      "783Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_context_lock_round189": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 240,
+    "remaining_estimate": [
+      "Actual queue/ensure/scheduler and GPU startup connection",
+      "782Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-context-lock-round189",
+    "audit": {
+      "definitions": 3096,
+      "imports": 782,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_lv_mutex_lock_round190": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 240,
+    "selected_rerun": true,
+    "remaining_estimate": [
+      "Actual recursive queue/ensure/scheduler and hardware gates"
+    ],
+    "accepted_complete_images": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-mutex-lock-round190",
+    "audit": {
+      "definitions": 3096,
+      "imports": 782,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_nema_error_text_round191": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 2186,
+    "child_cuts": 0,
+    "remaining_estimate": [
+      "Source-owned string layout/pointer identity and full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-error-text-round191",
+    "audit": {
+      "definitions": 3099,
+      "imports": 780,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_ambiq_end_error_text_connected_round192": {
+    "status": "PASS_CONNECTED_SELECTED_COMPLETION_REAL_ERROR_LABELS",
+    "native_cases": 1944,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-error-text-round191",
+    "remaining_estimate": [
+      "Command-list submission/wait/unbind/power, VG getter, ensure/queue/log cuts",
+      "780 Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_vg_error_state_round193": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 196,
+    "child_cuts": 0,
+    "remaining_estimate": [
+      "NULL/invalid/concurrent context boundaries and context ownership",
+      "Full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-vg-error-state-round193",
+    "audit": {
+      "definitions": 3101,
+      "imports": 780,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_ambiq_end_vg_state_connected_round194": {
+    "status": "PASS_CONNECTED_SELECTED_COMPLETION_REAL_VG_STATE",
+    "native_cases": 1944,
+    "remaining_estimate": [
+      "Actual command-list/power/queue/ensure/log graph",
+      "Full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_cl_unbind_round195": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "native_cases": 640,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-cl-unbind-round195",
+    "audit": {
+      "definitions": 3102,
+      "imports": 779,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Invalid pointers and large wrapped indexes",
+      "Connected completion/full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_power_control_round197": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Actual status/on/off/GPU/VG reinitialization and register/reset selection",
+      "Physical driver/MMIO/data/full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 2060,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-power-control-round197-interface",
+    "audit": {
+      "definitions": 3103,
+      "imports": 783,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_ambiq_end_unbind_connected_round196": {
+    "status": "PASS_CONNECTED_SELECTED_COMPLETION_REAL_UNBIND_VG_STATE",
+    "native_cases": 5832,
+    "remaining_estimate": [
+      "Submit/wait/power, ensure/queue/logger cuts",
+      "779Main imports and six full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_register_reset_round198": {
+    "status": "SELECTED_LOCAL_COMPLETE_RAM_BACKED_QUALIFIED_BUILD_AUDITED",
+    "native_cases": 280,
+    "child_cuts": 0,
+    "remaining_estimate": [
+      "MMIO data-cell ownership/layout",
+      "Aligned-out-of-window/wrapped/fault boundaries and physical effects"
+    ],
+    "accepted_complete_images": 0,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-register-reset-round198",
+    "audit": {
+      "definitions": 3107,
+      "imports": 783,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_nema_power_state_connected_round199": {
+    "status": "PASS_SELECTED_POWER_WITH_ACTUAL_ERROR_RESET_REGISTER_ACCESSORS",
+    "native_cases": 2060,
+    "child_cuts": 5,
+    "remaining_estimate": [
+      "Select reset/register bodies",
+      "Status/on/off/GPU/VG reinit child providers and hardware"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_power_status_round200": {
+    "status": "SELECTED_LOCAL_COMPLETE_RAM_BACKED_NATIVE_QUALIFIED_BUILD_AUDITED",
+    "native_cases": 1312,
+    "selected_rerun": true,
+    "child_cuts": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-power-status-descriptor-round201",
+    "audit": {
+      "definitions": 3109,
+      "imports": 782,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Physical peripheral/MMIO effects",
+      "Source-owned table layout/byte-equality/full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_power_descriptor_round201": {
+    "status": "SELECTED_LOCAL_COMPLETE_RAM_BACKED_NATIVE_QUALIFIED_BUILD_AUDITED",
+    "native_cases": 1312,
+    "selected_rerun": true,
+    "child_cuts": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-power-status-descriptor-round201",
+    "audit": {
+      "definitions": 3109,
+      "imports": 782,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Physical peripheral/MMIO effects",
+      "Source-owned table layout/byte-equality/full-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_gpu_reinit_round202": {
+    "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Actual 12childprovider graph (four mode supports now selected)",
+      "Context ownership/GPU-MMIO/full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 1152,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-gpu-reinit-round202",
+    "audit": {
+      "definitions": 3110,
+      "imports": 789,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_nema_power_status_connected_round203": {
+    "status": "PASS_SELECTED_POWER_REAL_STATUS_DESCRIPTOR_COPY_STATE",
+    "native_cases": 1964,
+    "child_cuts": 4,
+    "remaining_estimate": [
+      "Actual on/off/GPU-reinit/VG-reinit graphs",
+      "782Mainimports and sixfull-image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_gpu_mode_support_round204": {
+    "status": "SELECTED_LOCAL_COMPLETE_CONNECTED_NATIVE_QUALIFIED_BUILD_AUDITED",
+    "native_cases": 2304,
+    "selected_rerun": true,
+    "child_cuts": 8,
+    "remaining_estimate": [
+      "Actual eight remaining GPU initialization children",
+      "Capabilities cell ownership/driver/MMIO/full-image gates"
+    ],
+    "accepted_complete_images": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-gpu-mode-support-round204",
+    "audit": {
+      "definitions": 3114,
+      "imports": 786,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_nema_command_emit_round205": {
+    "status": "SELECTED_LOCAL_COMPLETE_BOUNDED_M55_QEMU_QUALIFIED_BUILD_AUDITED",
+    "qemu_cases": 133200,
+    "matrix_cases": 136080,
+    "excluded_unbounded_padding_cases": 2880,
+    "selected_rerun": true,
+    "child_cuts": 7,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-command-emit-round205",
+    "audit": {
+      "definitions": 3115,
+      "imports": 789,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Seven real child providers and allocator/sector graphs",
+      "Bus trace/unbounded wrapping/pointer fault boundaries",
+      "Full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_node_allocate_round206": {
+    "status": "SELECTED_LOCAL_COMPLETE_NATIVE_WRAPPER_QUALIFIED_BUILD_AUDITED",
+    "remaining_estimate": [
+      "Actual pool/TLSF/arena graph",
+      "Full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0,
+    "native_cases": 32,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-node-allocate-round206",
+    "audit": {
+      "definitions": 3117,
+      "imports": 789,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_nema_ring_register_emit_round207": {
+    "status": "SELECTED_LOCAL_COMPLETE_CONTROLLED_NATIVE_QUALIFIED_BUILD_AUDITED",
+    "native_cases": 1600,
+    "selected_rerun": true,
+    "child_cuts": 2,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-ring-register-emit-round207",
+    "audit": {
+      "definitions": 3116,
+      "imports": 790,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Actual buffer flush/MMIO and ring descriptor/data ownership",
+      "Extreme pointer/fault/full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_buffer_cache_round208": {
+    "status": "SELECTED_LOCAL_COMPLETE_NATIVE_QUALIFIED_BUILD_AUDITED",
+    "native_cases": 1104,
+    "selected_rerun": true,
+    "child_cuts": 2,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-buffer-cache-round208",
+    "audit": {
+      "definitions": 3120,
+      "imports": 789,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    },
+    "remaining_estimate": [
+      "Actual clean/invalidate SCB graphs and physical effects",
+      "Pool data ownership/invalid pointers/full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_cache_clean_range_round209": {
+    "status": "SELECTED_LOCAL_COMPLETE_RAM_BACKED_NATIVE_QUALIFIED_BUILD_AUDITED",
+    "native_cases": 720,
+    "child_cuts": 0,
+    "remaining_estimate": [
+      "Physical cache/barrier effects, maximum geometry/long range/invalid pointer faults",
+      "Full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0,
+    "selected_rerun": true,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-cache-clean-range-round209",
+    "audit": {
+      "definitions": 3121,
+      "imports": 788,
+      "snapshots": 134,
+      "duplicates": 0,
+      "artifact_hashes": 6,
+      "builder_hash_checked": true
+    }
+  },
+  "root_nema_buffer_clean_connected_round210": {
+    "status": "PASS_SELECTED_BUFFER_WITH_ACTUAL_POOL_AND_SCB_CLEAN",
+    "native_cases": 1104,
+    "child_cuts": 1,
+    "remaining_estimate": [
+      "Actual invalidate and physical cache/barrier effects",
+      "Pool/data/full-image/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_buffer_create_round211": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "native_cases": 1296,
+    "definitions": 3122,
+    "imports": 788,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-buffer-create-round211",
+    "remaining_estimate": [
+      "Local body reduction complete within recorded controlled bounds",
+      "Actual connected arena/free-list/queue ownership, faults, full coverage/layout/byte equality and hardware gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_lv_pool_aligned_allocate_round212": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "native_cases": 3900,
+    "definitions": 3123,
+    "imports": 788,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-pool-aligned-allocate-round212",
+    "remaining_estimate": [
+      "Local body reduction complete within recorded controlled bounds",
+      "Actual connected arena/free-list/queue ownership, faults, full coverage/layout/byte equality and hardware gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_tlsf_aligned_allocate_round213": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "native_cases": 1152,
+    "definitions": 3124,
+    "imports": 788,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-tlsf-aligned-allocate-round213",
+    "remaining_estimate": [
+      "Local body reduction complete within recorded controlled bounds",
+      "Actual connected arena/free-list/queue ownership, faults, full coverage/layout/byte equality and hardware gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_tlsf_trim_leading_round215": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "native_cases": 288,
+    "definitions": 3125,
+    "imports": 787,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-tlsf-trim-leading-round215",
+    "remaining_estimate": [
+      "Local body reduction complete within recorded controlled bounds",
+      "Actual connected arena/free-list/queue ownership, faults, full coverage/layout/byte equality and hardware gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_buffer_aligned_connected_round214": {
+    "status": "PASS_CONNECTED_SELECTED_BUFFER_POOL_ALIGNED_WRAPPER",
+    "cases": 1296,
+    "child_cuts": 5,
+    "remaining_estimate": [
+      "Actual queue/TLSF/blocksize/general allocator and hardware gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_tlsf_trim_leading_connected_round216": {
+    "status": "PASS_CONNECTED_NATIVE_COHERENT_BUILD_AUDITED",
+    "cases": 100,
+    "child_cuts": 2,
+    "native_read_correction": "split overhead freshly read for remaining size and assertion size",
+    "remaining_estimate": [
+      "Free-list insertion and diagnostic handler still controlled; full allocator ownership/pointer faults/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-tlsf-trim-leading-connected-round216",
+    "definitions": 3125,
+    "imports": 787
+  },
+  "root_tlsf_config_connected_round217": {
+    "status": "PASS_FULL_FLASH_CONFIG_TRACE_COHERENT_BUILD_AUDITED",
+    "cases": 100,
+    "definitions": 3125,
+    "imports": 787,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-tlsf-config-connected-round217",
+    "source_corrections": [
+      "Split pointer read before overhead",
+      "Fresh minimum configuration word",
+      "Next-block terminal check re-reads block size"
+    ],
+    "remaining_estimate": [
+      "Local corrected paths matched; full ordered arena bus trace/pointerfaults/full-image/hardware remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_tlsf_insert_connected_round218": {
+    "status": "PASS_CONNECTED_REAL_INSERT_MAPPING_FREE_LISTS",
+    "cases": 100,
+    "child_cuts": 1,
+    "remaining_estimate": [
+      "Diagnostic handler controlled; arena ownership/pointerfaults/hardware/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_tlsf_alignment_connected_round219": {
+    "status": "PASS_CONNECTED_NATIVE_COHERENT_BUILD_AUDITED",
+    "cases": 100,
+    "child_cuts": 2,
+    "source_correction": "Request adjustment uses native max/min flash words and fresh fallback minimum read",
+    "remaining_estimate": [
+      "Real suitable-block lookup/arena ownership, ordered arena bus trace and pointer faults/full-image/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-tlsf-alignment-connected-round219",
+    "definitions": 3125,
+    "imports": 787
+  },
+  "root_tlsf_arena_alignment_round220": {
+    "status": "PASS_NATIVE_REAL_TLSF_ARENA",
+    "cases": 100,
+    "child_cuts": 1,
+    "remaining_estimate": [
+      "Diagnostic handler controlled; multi-block fragmentation/coalescing/ownership,ordered arena bus trace,pointerfaults,hardware/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_sector_rollover_round221": {
+    "status": "SELECTED_M55_QEMU_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "qemu_cases": 17281,
+    "child_cuts": 4,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-sector-rollover-round221",
+    "definitions": 3126,
+    "imports": 789,
+    "remaining_estimate": [
+      "Local body complete in recorded M55QEMU fullstate/ordered child scope",
+      "Finalize/submit/poll/error children controlled; conditional Unicorn event/read discrepancy retained; ordered bus trace,ownership/pointerfaults/hardware/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_list_finalize_round222": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 93313,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-finalize-poll-wait-round223",
+    "definitions": 3129,
+    "imports": 790,
+    "remaining_estimate": [
+      "Local bodies complete within recorded native/QEMU scope",
+      "Real cache/register/IRQ/scheduler/sector/chain/ownership/faults/hardware/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_poll_wait_round223": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 120,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-finalize-poll-wait-round223",
+    "definitions": 3129,
+    "imports": 790,
+    "remaining_estimate": [
+      "Local bodies complete within recorded native/QEMU scope",
+      "Real cache/register/IRQ/scheduler/sector/chain/ownership/faults/hardware/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_ring_submit_round224": {
+    "status": "SELECTED_M55_QEMU_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 2160,
+    "child_cuts": 2,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-ring-submit-round224",
+    "definitions": 3130,
+    "imports": 790,
+    "remaining_estimate": [
+      "Local body complete in recorded fullstate/ordered child scope",
+      "Actual cache/register/ring ownership,ordered bus trace,pointerfaults/hardware/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_sector_chain_packet_round225": {
+    "status": "SELECTED_M55_QEMU_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 29160,
+    "child_cuts": 2,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-sector-chain-packet-round225",
+    "definitions": 3132,
+    "imports": 788,
+    "remaining_estimate": [
+      "Local bodies complete within recorded M55QEMU state/ordered child/result scope",
+      "Read/write names corrected in later226 build; actual hardware/ownership/fault/bus/full-image gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_packet_drivers_connected_round226": {
+    "status": "PASS_NATIVE_REAL_PACKET_POOL_FLUSH_SCB_REGISTER_GRAPH_COHERENT_BUILD_AUDITED",
+    "cases": 192,
+    "child_cuts": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-packet-drivers-connected-round226",
+    "definitions": 3132,
+    "imports": 786,
+    "remaining_estimate": [
+      "Local packet/cache/register graph complete in recorded RAM-backed scope",
+      "Physical MMIO/cache/barrier effects,ownership/faults/full-image/hardware remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_finalize_drivers_connected_round227": {
+    "status": "PASS_NATIVE_REAL_FINALIZE_PACKET_POOL_SCB_REGISTER_POLL_GRAPH",
+    "cases": 864,
+    "executed_child_cuts": 0,
+    "unreachable_wait_error_cuts": 2,
+    "remaining_estimate": [
+      "Local graph complete with IRQwait/error explicitly forbidden andlastsubmission set signed maximum",
+      "ActualIRQ/scheduler/physical effects,ownership/faults/full-image/hardware remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_rollover_drivers_connected_round228": {
+    "status": "UNICORN_OBSERVATION_RETAINED_INDEPENDENT_COMPOSED_QEMU229_PASS",
+    "case": [
+      32,
+      1,
+      0,
+      0,
+      4,
+      0,
+      0,
+      0
+    ],
+    "remaining_estimate": [
+      "Independent unchanged-native M55QEMU composed rollover/finalizer/submit/packet graph to resolve missing native submit/extra source command write",
+      "Do not infer source correctness or change C solely from Unicorn discrepancy; prior isolated-body QEMU receipts221/222/224/225 retained",
+      "Physical drivers/scheduler/ownership/fault/bus/full-image/hardware remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_composed_rollover_round229": {
+    "status": "PASS_UNCHANGED_NATIVE_COMPOSED_M55_QEMU",
+    "cases": 93313,
+    "remaining_estimate": [
+      "Low-driver cuts and physical driver/ownership/fault/bus/full-image gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_ring_init_reset_round230": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 648,
+    "definitions": 3134,
+    "imports": 785,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-ring-init-reset-round230",
+    "remaining_estimate": [
+      "Local bodies complete within recorded controlled native scope",
+      "GPU startup ISA, actual drivers/ownership/faults and full-image gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_instruction_upload_round231": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 108,
+    "definitions": 3136,
+    "imports": 785,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-instruction-upload-round231",
+    "remaining_estimate": [
+      "Local bodies complete within recorded controlled native scope",
+      "GPU startup ISA, actual drivers/ownership/faults and full-image gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_rea_nema_provider_round232": {
+    "status": "PASS_THREE_VENDOR_SYMBOL_DECOMPILATIONS",
+    "provider": "Ghidra 12.1.4 via REA",
+    "functions": [
+      "nema_load_frag_shader",
+      "nema_set_rop_blend_mode",
+      "nema_readHwConfig"
+    ],
+    "scope": "Corroborating vendor contracts only; no provider accepted from pseudocode alone",
+    "remaining_estimate": [
+      "Further vendor functions and native binding investigation remain"
+    ]
+  },
+  "root_nema_dependency_discovery_round231": {
+    "commit": "931216a15337fa371f3a7d2de6dfb216a90093a4",
+    "path": "third-party/upstream/atc-miband8-fw",
+    "scope": "Sparse reference headers; unstaged submodule metadata, parent gitlink not registered; no code admission"
+  },
+  "root_nema_list_controls_round233": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 107,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-list-controls-round233-declfix",
+    "remaining_estimate": [
+      "Local three bodies complete within recorded native controlled scope",
+      "Actual rollover/poll/error graph,ownership,pointer faults,hardware/full-image gates remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3139,
+    "imports": 782
+  },
+  "root_nema_list_state_round234": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 36,
+    "remaining_estimate": [
+      "Local state bindings complete in recorded native scope; signed51418e binding adds no native coverage",
+      "Data lifecycle/placement,ownership/faults and full-image gates remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3142,
+    "imports": 780,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-list-state-round234"
+  },
+  "root_nema_list_create_round235": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 240,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-list-create-round235",
+    "remaining_estimate": [
+      "Local constructor complete within recorded controlled native scope",
+      "Real allocator/cache/ownership,pointer faults,ordered bus/full-image/hardware gates remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3143,
+    "imports": 779
+  },
+  "root_nema_sectored_bind_round236": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 2424,
+    "definitions": 3144,
+    "imports": 778,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-sectored-bind-round236",
+    "remaining_estimate": [
+      "Local G2 sector negotiation/list binding body complete within recorded native scope",
+      "Concurrent mutations,pointer faults/ownership,physical effects and full-image/hardware gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_interrupt_control_round237": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 12,
+    "remaining_estimate": [
+      "Local wrapper complete in recorded controlled scope; real emitter/IRQ ownership/full-image/hardware remain"
+    ],
+    "definitions": 3145,
+    "imports": 777,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-interrupt-control-round237"
+  },
+  "root_nema_bind_trace_round238": {
+    "status": "PASS_SELECTED_NATIVE_ORDERED_MEMORY_TRACE",
+    "cases": 2424,
+    "remaining_estimate": [
+      "Recorded ordered memory scope qualified; physical bus/concurrency/ownership/faults/hardware remain"
+    ]
+  },
+  "root_nema_vg_constructors_round239": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 72,
+    "definitions": 3147,
+    "imports": 776,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-vg-constructors-round239",
+    "remaining_estimate": [
+      "Local paint/gradient bodies complete in controlled native scope",
+      "Matrix provider selection,actual allocation/buffer/error/ownership,pointer faults/exact fault traces and full-image/hardware remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_matrix_identity_round240": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 12,
+    "remaining_estimate": [
+      "Local identity provider complete in recorded ordered-store native scope",
+      "Pointer fault/alignment/FPU ownership/full-image/hardware remain"
+    ],
+    "definitions": 3148,
+    "imports": 775,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-matrix-identity-round240"
+  },
+  "root_nema_vg_matrix_connected_round241": {
+    "status": "PASS_NATIVE_SELECTED_CONSTRUCTORS_AND_SELECTED_MATRIX_TEXT_VERIFIED",
+    "cases": 72,
+    "remaining_estimate": [
+      "Allocation/buffer/error controlled; matrix fixture hash/text checked against current selected source",
+      "Exact fault instructions/bus/ownership/hardware/full-image remain"
+    ]
+  },
+  "root_nema_vg_path_create_round242": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 36,
+    "definitions": 3149,
+    "imports": 774,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-vg-path-create-round242",
+    "remaining_estimate": [
+      "Local path constructor complete within recorded native ordered-store scope",
+      "Actual allocator/error/FPU ownership,pointer faults/exact fault traces and full-image/hardware remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_texture_bind_round243": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 8448,
+    "definitions": 3151,
+    "imports": 774,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-texture-bind-round244",
+    "remaining_estimate": [
+      "Local body complete within recorded native scope",
+      "Command-space provider,exact bus,pointer faults/concurrency/ownership,physical GPU/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_dual_tiling_round244": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 48,
+    "definitions": 3151,
+    "imports": 774,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-texture-bind-round244",
+    "remaining_estimate": [
+      "Local body complete within recorded native scope",
+      "Command-space provider,exact bus,pointer faults/concurrency/ownership,physical GPU/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_texture_tiling_connected_round245": {
+    "status": "PASS_NATIVE_SELECTED_TEXTURE_REAL_TILING_GRAPH",
+    "cases": 8448,
+    "child_cuts": 1,
+    "remaining_estimate": [
+      "Command-space contract controlled; pointer faults/ownership/physical GPU/full-image remain"
+    ]
+  },
+  "root_nema_command_space_round246": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 9609,
+    "definitions": 3152,
+    "imports": 774,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-command-space-round246",
+    "remaining_estimate": [
+      "Local reservation body complete within recorded ordered-native scope",
+      "Actual extension/rollover graph,allocator/ownership,pointer faults/physical GPU/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_list_extension_round247": {
+    "status": "SELECTED_M55_QEMU_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 123360,
+    "excluded_padding_cases": 12720,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-list-extension-round247",
+    "remaining_estimate": [
+      "Local extension body complete within recorded nativeM55 bounds",
+      "Actual allocation/buffer/release/diagnostic,child mutations,pointer faults/ownership/hardware/full-image remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3153,
+    "imports": 773
+  },
+  "root_nema_space_extension_connected_round248": {
+    "status": "PASS_M55_QEMU_SELECTED_SPACE_EXTENSION_GRAPH",
+    "cases": 123360,
+    "child_cuts": 5,
+    "remaining_estimate": [
+      "Allocation/buffer/release/diagnostic/rollover controlled; hardware/full-image remain"
+    ]
+  },
+  "root_nema_texture_space_connected_round249": {
+    "status": "PASS_M55_QEMU_SELECTED_TEXTURE_TILING_SPACE_EXTENSION_GRAPH",
+    "cases": 129600,
+    "native_map_verified_before_execution": true,
+    "child_cuts": 5,
+    "remaining_estimate": [
+      "Four actual native/C body groups connected; allocator/buffer/release/error/rollover controlled",
+      "Physical GPU,ownership/pointer faults/bus/hardware/full-image remain"
+    ]
+  },
+  "root_nema_register_base_data_round250": {
+    "status": "SOURCE_OWNED_NATIVE_BYTES_COHERENT_BUILD_AUDITED",
+    "bytes": 4,
+    "definitions": 3154,
+    "imports": 772,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-register-base-data-round250",
+    "remaining_estimate": [
+      "Local constant value/bytes complete; final placement/physical MMIO/full-image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_font_size_arithmetic_round251": {
+    "status": "SELECTED_NATIVE15000_AND96_GATES_COHERENT_BUILD_AUDITED",
+    "cases": 15000,
+    "remaining_estimate": [
+      "Local arithmetic/count/ignore corrections and 96 bounded flags/type gates complete",
+      "Ordered bus/concurrency/pointer faults/full-font/full-image remain"
+    ],
+    "accepted_complete_images": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-font-size-arithmetic-round252",
+    "definitions": 3154,
+    "imports": 771,
+    "gate_cases": 96
+  },
+  "root_font_metrics_dpi_round252": {
+    "status": "SELECTED_ARITHMETIC_BLOCK625_COHERENT_BUILD_AUDITED",
+    "cases": 625,
+    "remaining_estimate": [
+      "Only DPI arithmetic corrected with native block proof; full metrics function remains unqualified",
+      "full-font/ownership/pointerfault/full-image remain"
+    ],
+    "accepted_complete_images": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-font-size-arithmetic-round252",
+    "definitions": 3154,
+    "imports": 771
+  },
+  "root_font_prepare_metrics_round253": {
+    "status": "SELECTED_NATIVE72_COHERENT_BUILD_AUDITED",
+    "cases": 72,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-font-prepare-metrics-round253",
+    "remaining_estimate": [
+      "Local fresh-scale reload correction complete in recorded native scope; coherent build/audit complete",
+      "Full request/select metrics,ordered memory access,ownership/pointerfault/layout/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3154,
+    "imports": 771
+  },
+  "root_font_prepare_metrics_connected_round254": {
+    "status": "PASS_NATIVE_SELECTED_REAL_SCALE_GRAPH",
+    "cases": 15,
+    "child_cuts": 0,
+    "remaining_estimate": [
+      "Actual scaling graph complete within15 correlated scale cases; arbitrary inputs/ordered bus/pointerfault/ownership/full-font remain"
+    ]
+  },
+  "root_font_request_metrics_round255": {
+    "status": "SELECTED_NATIVE3024_COHERENT_BUILD_AUDITED",
+    "cases": 3024,
+    "child_cuts": 5,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-font-request-metrics-round255",
+    "remaining_estimate": [
+      "Local full request-metrics body complete in recorded child scope; coherent build/audit complete",
+      "Actual helper graph,ordered memory access,pointerfault/ownership/layout/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3154,
+    "imports": 771
+  },
+  "root_font_request_metrics_connected_round256": {
+    "status": "PASS_NATIVE_SELECTED_REAL_PREPARATION_SCALE_ZERO_GRAPH",
+    "child_cuts": 2,
+    "cases": 3024,
+    "remaining_estimate": [
+      "Two arithmetic child cuts remain; ordered bus/pointerfault/ownership/full-font/image remain"
+    ]
+  },
+  "root_font_select_metrics_round257": {
+    "status": "SELECTED_NATIVE1296_COHERENT_BUILD_AUDITED",
+    "cases": 1296,
+    "child_cuts": 2,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-font-select-metrics-round257",
+    "remaining_estimate": [
+      "Local fixed-strike metrics body complete in recorded child scope; coherent build/audit complete",
+      "Actual divide/preparation graph,ordered memory access,pointerfault/ownership/layout/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3154,
+    "imports": 771
+  },
+  "root_font_select_metrics_connected_round258": {
+    "status": "PASS_NATIVE_SELECTED_REAL_PREPARATION_SCALE_GRAPH",
+    "child_cuts": 1,
+    "cases": 1296,
+    "remaining_estimate": [
+      "One division child cut remains; ordered bus/pointerfault/ownership/full-font/image remain"
+    ]
+  },
+  "root_main_udivmod_abi_round259": {
+    "status": "SELECTED_NATIVE1569_COHERENT_BUILD_AUDITED",
+    "cases": 1569,
+    "child_cuts": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-main-udivmod-abi-round259",
+    "remaining_estimate": [
+      "Local full quotient/remainder ABI complete in recorded native scope; coherent build/audit complete",
+      "Exact bytes/timing/stack scratch/interrupt/fault/full-image/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3154,
+    "imports": 771
+  },
+  "root_font_request_metrics_full_graph_round260": {
+    "status": "PASS_NATIVE_SELECTED_FULL_ARITHMETIC_GRAPH",
+    "cases": 2688,
+    "child_cuts": 0,
+    "remaining_estimate": [
+      "Local request/preparation/scale/zero/divide/MulDiv graph complete in recorded scope",
+      "Ordered bus/pointerfault/concurrency/ownership/layout/hardware remain"
+    ]
+  },
+  "root_font_select_metrics_full_graph_round261": {
+    "status": "PASS_NATIVE_SELECTED_FULL_ARITHMETIC_GRAPH",
+    "cases": 1152,
+    "child_cuts": 0,
+    "remaining_estimate": [
+      "Local select/preparation/scale/divide graph complete in recorded scope",
+      "Ordered bus/pointerfault/concurrency/ownership/layout/hardware remain"
+    ]
+  },
+  "root_nema_vg_reset_bodies_round262": {
+    "status": "SELECTED_NATIVE72_COHERENT_BUILD_AUDITED",
+    "cases": 72,
+    "bodies": 3,
+    "child_cuts": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-vg-reset-bodies-round262",
+    "remaining_estimate": [
+      "Three local reset bodies complete in recorded scope; coherent build/audit complete",
+      "Resolution consumer and framebuffer allocation graph,concurrency/pointerfault/FPU ownership/physicalbus/timing/layout/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3157,
+    "imports": 771
+  },
+  "root_ambiq_stencil_adjust_round263": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 864,
+    "child_cuts": 5,
+    "definitions": 3159,
+    "imports": 771,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-resolution-wrapper-round264",
+    "remaining_estimate": [
+      "Local body complete in recorded ordered-access/controlled-child scope; coherent build/audit complete",
+      "Actual draw-buffer/log/framebuffer graph,ownership/pointerfault/concurrency/physical GPU/layout/image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_resolution_wrapper_round264": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 800,
+    "child_cuts": 9,
+    "definitions": 3159,
+    "imports": 771,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-resolution-wrapper-round264",
+    "remaining_estimate": [
+      "Local body complete in recorded ordered-access/controlled-child scope; coherent build/audit complete",
+      "Actual draw-buffer/log/framebuffer graph,ownership/pointerfault/concurrency/physical GPU/layout/image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_resolution_connected_round265": {
+    "status": "PASS_NATIVE_SELECTED_REAL_RESET_ADJUST_GRAPH",
+    "cases": 1296,
+    "child_cuts": 5,
+    "fixture_byte_access_values_masked": true,
+    "remaining_estimate": [
+      "Default/reset/matrix/error/blend/zero/stencil graph complete in recorded bounded scope",
+      "Create/reshape/release/log/framebuffer child contracts controlled; ownership/pointerfault/concurrency/physical GPU/layout/image remain"
+    ]
+  },
+  "root_nema_framebuffer_setter_round266": {
+    "status": "SELECTED_NATIVE864_FPSCR_COHERENT_BUILD_AUDITED",
+    "cases": 864,
+    "bodies": 2,
+    "child_cuts": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-framebuffer-setter-round266",
+    "remaining_estimate": [
+      "Two local setter/getter bodies complete in recorded native/FPSCR scope; coherent build/audit complete",
+      "Descriptor storage/lifetime/placement,FPU ownership/other FPSCR controls,wrapper5223a2 conditional children/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "fpscr_rounding_modes": 4,
+    "definitions": 3161,
+    "imports": 772
+  },
+  "root_nema_framebuffer_wrapper_round267": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 576,
+    "child_cuts": 3,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-framebuffer-wrapper-round268",
+    "remaining_estimate": [
+      "Local body complete in recorded scope; coherent build/audit complete",
+      "Connected actual framebuffer store/cleanup/error graph,descriptor/context storage-lifecycle-placement,allocator/FPU/ownership/physical effects/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3163,
+    "imports": 772
+  },
+  "root_nema_framebuffer_cleanup_round268": {
+    "status": "SELECTED_NATIVE_QUALIFIED_COHERENT_BUILD_AUDITED",
+    "cases": 108,
+    "child_cuts": 1,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-framebuffer-wrapper-round268",
+    "remaining_estimate": [
+      "Local body complete in recorded scope; coherent build/audit complete",
+      "Connected actual framebuffer store/cleanup/error graph,descriptor/context storage-lifecycle-placement,allocator/FPU/ownership/physical effects/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3163,
+    "imports": 772
+  },
+  "root_nema_framebuffer_connected_round269": {
+    "status": "PASS_M55_QEMU_SELECTED_CONNECTED_FRAMEBUFFER_GRAPH",
+    "cases": 1152,
+    "child_cuts": 1,
+    "native_section_vma_and_bytes_verified": true,
+    "independent_cleanup_error_gate_expectations_checked": true,
+    "remaining_estimate": [
+      "Local wrapper/setter/cleanup/destroy/pool-select/error graph complete in recorded M55 scope with descriptor and separate context alias cases",
+      "Real free allocator,ordered memory trace/SP/callee-saved,FPU lifecycle/context descriptor storage ownership/placement,physical GPU/full image remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_vector_font_registration_round270": {
+    "status": "SELECTED_NATIVE162_ATTRIBUTION_COHERENT_BUILD_AUDITED",
+    "cases": 162,
+    "bodies": 3,
+    "child_cuts": 5,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-vector-font-registration-attribution-round270",
+    "remaining_estimate": [
+      "Three local registration/initializer/dispatcher bodies complete in recorded scope; coherent attribution build/audit complete",
+      "Three event-specific vector operations and actual outline/log graph,callback placement/ownership/pointerfault/layout/hardware remain"
+    ],
+    "accepted_complete_images": 0,
+    "initial_build_audited": {
+      "definitions": 3166,
+      "imports": 774,
+      "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-vector-font-registration-round270"
+    },
+    "definitions": 3166,
+    "imports": 774
+  },
+  "root_ambiq_vector_font_context_connected_round271": {
+    "status": "PASS_NATIVE_SELECTED_REAL_OUTLINE_CONTEXT_GRAPH",
+    "cases": 162,
+    "child_cuts": 4,
+    "remaining_estimate": [
+      "Local initializer/registration/dispatcher/real context accessor graph complete in recorded scope",
+      "Three outline operation bodies/logger controlled,callback placement/state lifecycle/ownership/pointerfault/hardware remain"
+    ]
+  },
+  "root_ambiq_vector_font_release_round272": {
+    "selected": true,
+    "local_body_complete_in_recorded_scope": true,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-ambiq-vector-font-release-round272/receipt.json",
+    "remaining": [
+      "Actual path destroy/free/logger and connected release graph",
+      "Whole-image source/layout/hardware gates remain"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_path_buffer_getter_round273": {
+    "selected": true,
+    "local_body_complete_in_recorded_scope": true,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-ambiq-path-buffer-getter-round273/receipt.json",
+    "remaining": [
+      "Unaligned/unmapped pointers, ownership, concurrency and final placement",
+      "Whole-image source/layout/hardware gates remain"
+    ],
+    "accepted_complete_images": 0,
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-path-buffer-getter-round273",
+    "build_status": "PASS_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+    "definitions": 3168,
+    "imports": 774,
+    "stable_snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes_checked": 6,
+    "builder_hash_checked": true
+  },
+  "root_ambiq_vector_font_release_connected_round274": {
+    "selected_sources_unchanged": true,
+    "local_graph_complete_in_recorded_scope": true,
+    "native_comparisons": 72,
+    "child_cuts": 3,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-ambiq-vector-font-release-connected-round274/receipt.json",
+    "remaining": [
+      "Actual path destroy/node release/allocator/logger graph",
+      "Outline allocation53da54 and command53d8fc",
+      "Whole-image ownership/layout/hardware gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_nema_vg_path_destroy_round275": {
+    "selected": true,
+    "local_body_complete_in_recorded_scope": true,
+    "native_comparisons": 24,
+    "child_cuts": 1,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-nema-vg-path-destroy-round275/receipt.json",
+    "build": "g2/build/c-firmware/20261012/peripherals-root-nema-vg-path-destroy-round275",
+    "build_status": "PASS_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+    "remaining": [
+      "Actual pool allocator/lifecycle, pointer faults, FPU ownership, placement/hardware"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3169,
+    "imports": 773,
+    "stable_snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes_checked": 6,
+    "builder_hash_checked": true
+  },
+  "root_ambiq_vector_font_release_path_connected_round276": {
+    "selected_sources_unchanged": true,
+    "local_graph_complete_in_recorded_scope": true,
+    "native_comparisons": 72,
+    "child_cuts": 3,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-ambiq-vector-font-release-path-connected-round276/receipt.json",
+    "remaining": [
+      "Actual heap/pool allocator and logger",
+      "Outline allocation53da54/push53d8fc",
+      "Whole image gates"
+    ],
+    "accepted_complete_images": 0
+  },
+  "root_ambiq_vector_font_allocate_round277": {
+    "selected": true,
+    "local_body_complete_in_recorded_scope": true,
+    "native_comparisons": 360,
+    "child_cuts": 5,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-ambiq-vector-font-allocate-round277/receipt.json",
+    "build": "g2/build/c-firmware/20261012/peripherals-root-ambiq-vector-font-allocate-round277",
+    "build_status": "PASS_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+    "new_storage_imports": [
+      "200746c4 current path",
+      "20073cd4 path data array",
+      "20073cc0 path segments array"
+    ],
+    "remaining": [
+      "Actual child graph including external-array init488440",
+      "Outline commands53d8fc",
+      "Storage initialization/ownership/placement and image gates"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3170,
+    "imports": 776,
+    "stable_snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes_checked": 6,
+    "builder_hash_checked": true
+  },
+  "root_lv_array_external_init_round278": {
+    "selected": true,
+    "local_body_complete_in_recorded_scope": true,
+    "native_comparisons": 180,
+    "child_cuts": 1,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-lv-array-external-init-round278/receipt.json",
+    "build": "g2/build/c-firmware/20261012/peripherals-root-lv-array-external-init-round278",
+    "build_status": "PASS_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+    "remaining": [
+      "Actual logger, array lifecycle, pointer faults, placement/hardware"
+    ],
+    "accepted_complete_images": 0,
+    "definitions": 3171,
+    "imports": 775,
+    "stable_snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes_checked": 6,
+    "builder_hash_checked": true,
+    "build_source_current": false
+  },
+  "root_ambiq_vector_font_allocate_array_connected_round279": {
+    "selected_sources_unchanged": true,
+    "local_graph_complete_in_recorded_scope": true,
+    "native_comparisons": 360,
+    "child_cuts": 4,
+    "receipt": "g2/analysis/c-source-completion-20261011/peripherals/root-ambiq-vector-font-allocate-array-connected-round279/receipt.json",
+    "remaining": [
+      "Actual malloc/pathcreate/arrayclear/logger",
+      "Outline command body53d8fc",
+      "State lifecycle and whole-image gates"
     ],
     "accepted_complete_images": 0
   }

@@ -1,0 +1,18 @@
+{
+  "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+  "candidate_sha256": "6f6640d8c18d5aa5c4e6af7c15b6812482129b0974b6dc50dd9a98a2aba8fb4b",
+  "native_ranges": [
+    [
+      "0x4b128a",
+      "0x4b1298"
+    ]
+  ],
+  "provider_pin": "Ambiq LVGL5be8e0ae5077aa3880aba8a322b1487d6bc73c07",
+  "native_differences": [
+    "Native common-end power-control nonzero returns0 beforeunlock/errors.",
+    "Native context-unlock decrements and assertscount0 beforemutexunlock; downloadedprovider unlocksfirst."
+  ],
+  "limits": [
+    "Physical GPU/scheduling/full-image gates unproven."
+  ]
+}

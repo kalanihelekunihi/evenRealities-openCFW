@@ -1,0 +1,11 @@
+{
+  "status": "PASS_NATIVE_NEMA_RING_INIT_RESET",
+  "cases": 648,
+  "selected": true,
+  "candidate_sha256": "609376762ea5d4bfe3fe65c051914c2710aeafcd015214938bcb5b401d4e25c9",
+  "child_cuts": 3,
+  "limits": [
+    "Signed size-positive gate/allsize recording, initialize fullwidth flag, wrapped capacity/tail pointers with mapped huge positive size,specific tail-store order,reset,fresh descriptors across flush/register mutations,ordered accesses/fullstate/result/SP matched.",
+    "Error/flush/register handlers controlled; mapped addresses do not establish physical allocation,ownership/NULL faults/cache/hardware remain open."
+  ]
+}

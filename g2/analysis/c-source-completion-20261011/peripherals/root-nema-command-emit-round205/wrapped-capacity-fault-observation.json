@@ -1,0 +1,20 @@
+{
+  "authority": "controlled M55 QEMU replay",
+  "observation": "Native emitter precise bus fault for wrapped capacity causing unbounded padding",
+  "case": {
+    "flags": 2,
+    "capacity": "0x80000000",
+    "used": 1,
+    "sector": 0,
+    "allocation_mode": 0,
+    "chain": 0,
+    "seed": 0,
+    "bound": 1,
+    "phase": "native"
+  },
+  "CFSR": "0x00008200",
+  "HFSR": "0x40000000",
+  "CCR": "0x00000201",
+  "source_comparison_completed": false,
+  "qualification_limit": "Padding >32 pairs excluded from extended bounded matrix; fault boundary remains open."
+}

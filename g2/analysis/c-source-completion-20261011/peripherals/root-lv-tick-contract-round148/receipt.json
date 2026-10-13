@@ -1,0 +1,10 @@
+{
+  "status": "PASS_LV_TICK_NATIVE_READ_RELOAD_RETRY_TRACE",
+  "cases": 60,
+  "source_sha256": "a5d9e613f2a82286bbbcff89bce9cf40626eee26d81f69c96ba5ed3ea1330e3d",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual tick body executes; callback controlled cut. Full state reads/writes/return/SP and16statebytes plus callback-pointer mutation and boundedflag retries compared.",
+    "Modeled interference,not physical interrupt timing; connectedtimer/rootdata/fullimage gatesopen."
+  ]
+}

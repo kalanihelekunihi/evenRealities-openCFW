@@ -1,0 +1,10 @@
+{
+  "status": "PASS_INDEPENDENT_QEMU_COPY_OVERLAP",
+  "cases": 5820,
+  "source_sha256": "82592cea830a6ed66d527a68a898bb7a7c0aad6f95f2e5b231aabd1e0bc01d88",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Full1024byte buffer compared across source alignments0..3,lengths0..96 and fifteen deltas including forward/backward overlap; native return and bus timing not compared.",
+    "Independent Cortex-A9 Thumb execution; physical G2 startup and connected Unicorn mismatch remain unqualified. Native executable bytes temporary test oracle only."
+  ]
+}

@@ -1,0 +1,51 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004b064e <.data+0x7864e>:
+  4b064e:	b2c0      	uxtb	r0, r0
+  4b0650:	2806      	cmp	r0, #6
+  4b0652:	d01a      	beq.n	0x4b068a
+  4b0654:	280b      	cmp	r0, #11
+  4b0656:	d01c      	beq.n	0x4b0692
+  4b0658:	280c      	cmp	r0, #12
+  4b065a:	d01c      	beq.n	0x4b0696
+  4b065c:	280d      	cmp	r0, #13
+  4b065e:	d01c      	beq.n	0x4b069a
+  4b0660:	280e      	cmp	r0, #14
+  4b0662:	d01c      	beq.n	0x4b069e
+  4b0664:	280f      	cmp	r0, #15
+  4b0666:	d00a      	beq.n	0x4b067e
+  4b0668:	2810      	cmp	r0, #16
+  4b066a:	d00a      	beq.n	0x4b0682
+  4b066c:	2811      	cmp	r0, #17
+  4b066e:	d00a      	beq.n	0x4b0686
+  4b0670:	2812      	cmp	r0, #18
+  4b0672:	d002      	beq.n	0x4b067a
+  4b0674:	2815      	cmp	r0, #21
+  4b0676:	d00a      	beq.n	0x4b068e
+  4b0678:	e013      	b.n	0x4b06a2
+  4b067a:	2004      	movs	r0, #4
+  4b067c:	e013      	b.n	0x4b06a6
+  4b067e:	2039      	movs	r0, #57	@ 0x39
+  4b0680:	e011      	b.n	0x4b06a6
+  4b0682:	2010      	movs	r0, #16
+  4b0684:	e00f      	b.n	0x4b06a6
+  4b0686:	2011      	movs	r0, #17
+  4b0688:	e00d      	b.n	0x4b06a6
+  4b068a:	2009      	movs	r0, #9
+  4b068c:	e00b      	b.n	0x4b06a6
+  4b068e:	2044      	movs	r0, #68	@ 0x44
+  4b0690:	e009      	b.n	0x4b06a6
+  4b0692:	200b      	movs	r0, #11
+  4b0694:	e007      	b.n	0x4b06a6
+  4b0696:	2031      	movs	r0, #49	@ 0x31
+  4b0698:	e005      	b.n	0x4b06a6
+  4b069a:	2035      	movs	r0, #53	@ 0x35
+  4b069c:	e003      	b.n	0x4b06a6
+  4b069e:	2009      	movs	r0, #9
+  4b06a0:	e001      	b.n	0x4b06a6
+  4b06a2:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  4b06a6:	4770      	bx	lr

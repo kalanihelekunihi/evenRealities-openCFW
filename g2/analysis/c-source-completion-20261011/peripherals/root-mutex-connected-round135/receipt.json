@@ -1,0 +1,13 @@
+{
+  "status": "PASS_CONNECTED_DYNAMIC_MUTEX_QUEUE_CONSTRUCTOR",
+  "cases": 72,
+  "source_sha256": {
+    "g2/components/audio/uart_thread_source_candidate/mutex_lower.c": "eb8793b2c8d720132b196f062436c457cc6b00005f2b1672ff741537d1f40ffd",
+    "g2/components/audio/queue_dynamic_source_candidate/create.c": "33dc1c4b5416f45fb6b478ea3f25dec5cab5aca86cc912cfe023eab96a58cc6d"
+  },
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "limits": [
+    "Actual mutex/queue creation and initialization execute; allocation,queue reset and send are controlled cuts. Full80byte queue state and callbacks compared with NULL,byte truncation and child mutations.",
+    "Scheduler/list behavior,allocation provider,hardware and six image gates remain open."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PASS_CONNECTED_POWER_ACTUAL_STATUS_DESCRIPTOR_STATE",
+  "cases": 1964,
+  "selected": true,
+  "candidate_sha256": "904115ba4bcc4f28cfdc2e0b6b0e45fc23030d1120cad2efe756802ca9a5e19d",
+  "support_candidate_hashes": {
+    "root-nema-error-get-round179": "6f6640d8c18d5aa5c4e6af7c15b6812482129b0974b6dc50dd9a98a2aba8fb4b",
+    "root-nema-vg-error-state-round193": "7987000a8fecb2d2a0c0971f5444013bb4e268adbcd16768d26ad3bdd62c0e28",
+    "root-nema-register-reset-round198": "aa17f5a1f3ac156c99a4137d3dfd28339791ba004419d11382fe812c5dfba7dc",
+    "root-nema-power-status-round200": "7406398a64b8c56648a5f8d3dcced38a81d6307f51a12213d70fef55d789551a",
+    "root-power-descriptor-round201": "325642ed06263a65b947a89db271e1d61909408058a96c9d30d8efad3b502941"
+  },
+  "child_cuts": 4,
+  "limits": [
+    "All256state bytes/highbits, reinit lowbyte, real peripheral20 status plus controlled on/off/busy/GFX/VG error branches (status-error injection removed), context presence/child mutation, ordered calls/context reads/result/SP compared.",
+    "Actual GFX/VG error getters, last-submission reset, register-read execute; actual status/descriptor/copy execute; remaining on/off/GPU-reinit/VG-reinit cuts. Physical MMIO/driver/data ownership/hardware/full-image gates remain open."
+  ]
+}

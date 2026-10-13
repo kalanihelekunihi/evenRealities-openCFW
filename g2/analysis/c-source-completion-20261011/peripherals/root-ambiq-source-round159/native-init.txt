@@ -1,0 +1,112 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004c73d6 <.data+0x8f3d6>:
+  4c73d6:	b518      	push	{r3, r4, lr}
+  4c73d8:	b08f      	sub	sp, #60	@ 0x3c
+  4c73da:	f076 f8fe 	bl	0x53d5da
+  4c73de:	f8df 4540 	ldr.w	r4, [pc, #1344]	@ 0x4c7920
+  4c73e2:	20e4      	movs	r0, #228	@ 0xe4
+  4c73e4:	f7bc ffd8 	bl	0x484398
+  4c73e8:	6020      	str	r0, [r4, #0]
+  4c73ea:	f20f 20bd 	addw	r0, pc, #701	@ 0x2bd
+  4c73ee:	6821      	ldr	r1, [r4, #0]
+  4c73f0:	60c8      	str	r0, [r1, #12]
+  4c73f2:	f20f 1055 	addw	r0, pc, #341	@ 0x155
+  4c73f6:	6821      	ldr	r1, [r4, #0]
+  4c73f8:	6108      	str	r0, [r1, #16]
+  4c73fa:	f20f 00f5 	addw	r0, pc, #245	@ 0xf5
+  4c73fe:	6821      	ldr	r1, [r4, #0]
+  4c7400:	6188      	str	r0, [r1, #24]
+  4c7402:	f8df 0520 	ldr.w	r0, [pc, #1312]	@ 0x4c7924
+  4c7406:	6821      	ldr	r1, [r4, #0]
+  4c7408:	6048      	str	r0, [r1, #4]
+  4c740a:	2300      	movs	r3, #0
+  4c740c:	2210      	movs	r2, #16
+  4c740e:	2101      	movs	r1, #1
+  4c7410:	2040      	movs	r0, #64	@ 0x40
+  4c7412:	f7c3 fdf2 	bl	0x48affa
+  4c7416:	6821      	ldr	r1, [r4, #0]
+  4c7418:	63c8      	str	r0, [r1, #60]	@ 0x3c
+  4c741a:	2000      	movs	r0, #0
+  4c741c:	6821      	ldr	r1, [r4, #0]
+  4c741e:	6408      	str	r0, [r1, #64]	@ 0x40
+  4c7420:	f04d fd4c 	bl	0x514ebc
+  4c7424:	6821      	ldr	r1, [r4, #0]
+  4c7426:	6448      	str	r0, [r1, #68]	@ 0x44
+  4c7428:	f04d fe35 	bl	0x515096
+  4c742c:	6821      	ldr	r1, [r4, #0]
+  4c742e:	6488      	str	r0, [r1, #72]	@ 0x48
+  4c7430:	f04d fe6d 	bl	0x51510e
+  4c7434:	6821      	ldr	r1, [r4, #0]
+  4c7436:	64c8      	str	r0, [r1, #76]	@ 0x4c
+  4c7438:	2000      	movs	r0, #0
+  4c743a:	6821      	ldr	r1, [r4, #0]
+  4c743c:	6508      	str	r0, [r1, #80]	@ 0x50
+  4c743e:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  4c7442:	6821      	ldr	r1, [r4, #0]
+  4c7444:	f881 0054 	strb.w	r0, [r1, #84]	@ 0x54
+  4c7448:	6821      	ldr	r1, [r4, #0]
+  4c744a:	f881 0055 	strb.w	r0, [r1, #85]	@ 0x55
+  4c744e:	6821      	ldr	r1, [r4, #0]
+  4c7450:	f881 0056 	strb.w	r0, [r1, #86]	@ 0x56
+  4c7454:	221c      	movs	r2, #28
+  4c7456:	2100      	movs	r1, #0
+  4c7458:	6820      	ldr	r0, [r4, #0]
+  4c745a:	3058      	adds	r0, #88	@ 0x58
+  4c745c:	f78d f973 	bl	0x454746
+  4c7460:	2210      	movs	r2, #16
+  4c7462:	2100      	movs	r1, #0
+  4c7464:	6820      	ldr	r0, [r4, #0]
+  4c7466:	3074      	adds	r0, #116	@ 0x74
+  4c7468:	f78d f96d 	bl	0x454746
+  4c746c:	f45f 31c8 	movs.w	r1, #102400	@ 0x19000
+  4c7470:	4668      	mov	r0, sp
+  4c7472:	f04c ff01 	bl	0x514278
+  4c7476:	6820      	ldr	r0, [r4, #0]
+  4c7478:	3090      	adds	r0, #144	@ 0x90
+  4c747a:	4669      	mov	r1, sp
+  4c747c:	223c      	movs	r2, #60	@ 0x3c
+  4c747e:	f772 fbc1 	bl	0x439c04
+  4c7482:	6820      	ldr	r0, [r4, #0]
+  4c7484:	f8d0 0098 	ldr.w	r0, [r0, #152]	@ 0x98
+  4c7488:	2800      	cmp	r0, #0
+  4c748a:	d115      	bne.n	0x4c74b8
+  4c748c:	f8df 0498 	ldr.w	r0, [pc, #1176]	@ 0x4c7928
+  4c7490:	9002      	str	r0, [sp, #8]
+  4c7492:	f8df 0498 	ldr.w	r0, [pc, #1176]	@ 0x4c792c
+  4c7496:	9001      	str	r0, [sp, #4]
+  4c7498:	f8df 0494 	ldr.w	r0, [pc, #1172]	@ 0x4c7930
+  4c749c:	9000      	str	r0, [sp, #0]
+  4c749e:	f8df 3494 	ldr.w	r3, [pc, #1172]	@ 0x4c7934
+  4c74a2:	2257      	movs	r2, #87	@ 0x57
+  4c74a4:	f8df 1490 	ldr.w	r1, [pc, #1168]	@ 0x4c7938
+  4c74a8:	2003      	movs	r0, #3
+  4c74aa:	f785 fed7 	bl	0x44d25c
+  4c74ae:	2000      	movs	r0, #0
+  4c74b0:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  4c74b4:	6008      	str	r0, [r1, #0]
+  4c74b6:	e7fa      	b.n	0x4c74ae
+  4c74b8:	2000      	movs	r0, #0
+  4c74ba:	6821      	ldr	r1, [r4, #0]
+  4c74bc:	f8c1 008c 	str.w	r0, [r1, #140]	@ 0x8c
+  4c74c0:	6820      	ldr	r0, [r4, #0]
+  4c74c2:	f076 f90a 	bl	0x53d6da
+  4c74c6:	6820      	ldr	r0, [r4, #0]
+  4c74c8:	3084      	adds	r0, #132	@ 0x84
+  4c74ca:	f00d f8c7 	bl	0x4d465c
+  4c74ce:	6820      	ldr	r0, [r4, #0]
+  4c74d0:	9001      	str	r0, [sp, #4]
+  4c74d2:	f44f 4000 	mov.w	r0, #32768	@ 0x8000
+  4c74d6:	9000      	str	r0, [sp, #0]
+  4c74d8:	f20f 2325 	addw	r3, pc, #549	@ 0x225
+  4c74dc:	2228      	movs	r2, #40	@ 0x28
+  4c74de:	f8df 145c 	ldr.w	r1, [pc, #1116]	@ 0x4c793c
+  4c74e2:	6820      	ldr	r0, [r4, #0]
+  4c74e4:	302c      	adds	r0, #44	@ 0x2c
+  4c74e6:	f00d f893 	bl	0x4d4610
+  4c74ea:	b010      	add	sp, #64	@ 0x40
+  4c74ec:	bd10      	pop	{r4, pc}

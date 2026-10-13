@@ -1,5 +1,5 @@
 {
-  "status": "NATIVE_QUALIFIED_SELECTED_BUILD_PENDING",
+  "status": "FIVE_LOCAL_COMPONENTS_COMPLETE_MODELED_NATIVE_QUALIFIED_SELECTED_CURRENT_BUILD_AUDIT_PASS",
   "native_cases": 1057,
   "selected_source": "g2/components/audio/uart_thread_source_candidate/display_font_alloc.c",
   "selected_sha256": "f1bcea2ac39e333dbcaae08efecbe9973c0ea4f5832ce476f791a95de8e8f269",
@@ -9,5 +9,19 @@
   "limits": [
     "Flat modeled RAM/MMIO register traces; physical alias routing/MPU effects and hardware unproved."
   ],
-  "fixture_note": "Per-case CPSR initialization fixes warm-emulator state leakage; former mismatch independently passes first in fresh engines."
+  "fixture_note": "Per-case CPSR initialization fixes warm-emulator state leakage; former mismatch independently passes first in fresh engines.",
+  "build": "g2/build/c-firmware/20261012/peripherals-root-mpu-writers-round128",
+  "audit": {
+    "definitions": 3048,
+    "imports": 752,
+    "snapshots": 134,
+    "duplicates": 0,
+    "artifact_hashes": 6,
+    "builder_hash_checked": true
+  },
+  "remaining_estimate": [
+    "Connected heap startup with actual TLSF/MPU",
+    "Actual copy/cache effects and generic cache/LRU/scheduler ABI",
+    "Six image coverage/layout/byte equality/hardware gates"
+  ]
 }

@@ -1,0 +1,6 @@
+{
+  "cause": "Unicorn write hook reports full source register for STRB; native 0xffffffff and C255 both store byte255. Event normalization must mask value to access size.",
+  "evidence": "unmasked-byte-hook-mismatch.json",
+  "production_source_changed": false,
+  "normalization": "v & ((1 << (8*size)) - 1)"
+}

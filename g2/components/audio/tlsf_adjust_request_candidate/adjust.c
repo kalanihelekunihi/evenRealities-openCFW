@@ -18,7 +18,13 @@ uint32_t g2_tlsf_adjust_request(uint32_t size, uint32_t alignment) {
     if (size == 0u)
         return 0u;
     const uint32_t aligned = g2_tlsf_align_up(size, alignment);
-    if (aligned >= 0x40000000u)
+    const uint32_t maximum =
+        *(volatile const uint32_t *)(uintptr_t)0x78f4c8u;
+    if (aligned >= maximum)
         return 0u;
-    return aligned > 12u ? aligned : 12u;
+    const uint32_t minimum =
+        *(volatile const uint32_t *)(uintptr_t)0x78f4c4u;
+    if (minimum < aligned)
+        return aligned;
+    return *(volatile const uint32_t *)(uintptr_t)0x78f4c4u;
 }

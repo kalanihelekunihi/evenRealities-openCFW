@@ -1,0 +1,126 @@
+{
+  "evidence_id": "ev_b5fd57b854337cfb9ebd2b5b0049afd946aefc27776deaae2c748a3d010cefb1",
+  "subject": {
+    "name": "nema_cmdlist.o",
+    "digest": {
+      "sha256": "96efd544c670ada45df64a61326cf4c97f83a342acb3de7f9c9741644ad83d56"
+    },
+    "format": "elf",
+    "architecture": "arm",
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-rea-nema-provider-round232/nema_cmdlist.o"
+  },
+  "provider": {
+    "id": "rea-workflow",
+    "name": "REA composed investigation workflow",
+    "version": "1"
+  },
+  "analysis_profile": {
+    "provider": {
+      "id": "rea-workflow",
+      "name": "REA composed investigation workflow",
+      "version": "1"
+    },
+    "parameters": {
+      "upstream_analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26"
+      },
+      "workflow_revision": 2
+    },
+    "digest": "539ae87a089f8e9cc48d8dfe6045113a342d9c0b239d427d77365e4fe1d5cf26"
+  },
+  "predicate_type": "rea.analysis",
+  "operation": "batch_decompile",
+  "parameters": {
+    "addresses": [
+      "nema_cl_create_sized",
+      "nema_cl_bind_circular",
+      "nema_cl_unbind"
+    ]
+  },
+  "raw_result": null,
+  "normalized_result": {
+    "items": [
+      {
+        "address": "nema_cl_create_sized",
+        "procedure": {
+          "status": "resolved",
+          "address": "0x10048",
+          "name": "nema_cl_create_sized"
+        },
+        "status": "ok",
+        "pseudocode": "\nint * nema_cl_create_sized(int *param_1,undefined4 param_2)\n\n{\n  int iVar1;\n  int local_60;\n  int iStack_5c;\n  int iStack_58;\n  int iStack_54;\n  int local_50;\n  int iStack_4c;\n  int iStack_48;\n  int iStack_44;\n  \n  nema_buffer_create_pool(&local_60,0,param_2);\n  local_50 = local_60;\n  iStack_4c = iStack_5c;\n  iStack_48 = iStack_58;\n  iStack_44 = iStack_54;\n  nema_buffer_map(&local_50);\n  iVar1 = local_50;\n  if (local_50 < 0) {\n    iVar1 = local_50 + 7;\n  }\n  *param_1 = local_50;\n  param_1[1] = iStack_4c;\n  param_1[2] = iStack_48;\n  param_1[3] = iStack_44;\n  param_1[4] = (iVar1 >> 3) << 1;\n  param_1[5] = 0;\n  param_1[6] = 0x10;\n  param_1[7] = -1;\n  param_1[8] = 0;\n  param_1[9] = 0;\n  param_1[6] = 0;\n  return param_1;\n}\n\n"
+      },
+      {
+        "address": "nema_cl_bind_circular",
+        "procedure": {
+          "status": "resolved",
+          "address": "0x10450",
+          "name": "nema_cl_bind_circular"
+        },
+        "status": "ok",
+        "pseudocode": "\nvoid nema_cl_bind_circular(int param_1)\n\n{\n  int iVar1;\n  uint uVar2;\n  int iVar3;\n  int iVar4;\n  \n  if (param_1 == 0) {\n    nema_set_error(0x2000);\n    return;\n  }\n  if ((*(uint *)(param_1 + 0xc) & 7) == 0) {\n    iVar3 = *(int *)(param_1 + 0x24);\n    if (*(int *)(param_1 + 0x24) == 0) {\n      iVar3 = param_1;\n    }\n    if (bound_cl != 0) {\n      iVar1 = *(int *)(bound_cl + 0x14);\n      if (iVar1 + 1 < *(int *)(bound_cl + 0x10)) {\n        iVar4 = *(int *)(bound_cl + 8);\n        *(undefined4 *)(iVar4 + iVar1 * 4) = 0x50000;\n        *(undefined4 *)(iVar4 + iVar1 * 4 + 4) = 0;\n        uVar2 = *(uint *)(bound_cl + 0x18) & 0xfffffff7;\n      }\n      else {\n        uVar2 = *(uint *)(bound_cl + 0x18);\n      }\n      *(uint *)(bound_cl + 0x18) = uVar2 & 0xffffffdf;\n    }\n    bound_cl = iVar3;\n    *(uint *)(iVar3 + 0x18) = *(uint *)(iVar3 + 0x18) | 0x20;\n    return;\n  }\n  nema_set_error(0x4000);\n  return;\n}\n\n"
+      },
+      {
+        "address": "nema_cl_unbind",
+        "procedure": {
+          "status": "resolved",
+          "address": "0x104b8",
+          "name": "nema_cl_unbind"
+        },
+        "status": "ok",
+        "pseudocode": "\nvoid nema_cl_unbind(void)\n\n{\n  int iVar1;\n  int iVar2;\n  uint uVar3;\n  \n  if (bound_cl != 0) {\n    iVar2 = *(int *)(bound_cl + 0x14);\n    if (iVar2 + 1 < *(int *)(bound_cl + 0x10)) {\n      iVar1 = *(int *)(bound_cl + 8);\n      *(undefined4 *)(iVar1 + iVar2 * 4) = 0x50000;\n      *(undefined4 *)(iVar1 + iVar2 * 4 + 4) = 0;\n      uVar3 = *(uint *)(bound_cl + 0x18) & 0xfffffff7;\n    }\n    else {\n      uVar3 = *(uint *)(bound_cl + 0x18);\n    }\n    *(uint *)(bound_cl + 0x18) = uVar3 & 0xffffffdf;\n    bound_cl = 0;\n    return;\n  }\n  bound_cl = 0;\n  return;\n}\n\n"
+      }
+    ],
+    "total": 3,
+    "succeeded": 3,
+    "failed": 0
+  },
+  "confidence": "derived",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Derived by an REA composed workflow."
+  ],
+  "locations": [
+    {
+      "kind": "address",
+      "address": "0x10048"
+    },
+    {
+      "kind": "address",
+      "address": "0x10450"
+    },
+    {
+      "kind": "address",
+      "address": "0x104b8"
+    }
+  ],
+  "evidence_links": []
+}

@@ -1,0 +1,140 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004c7548 <.data+0x8f548>:
+  4c7548:	b538      	push	{r3, r4, r5, lr}
+  4c754a:	000c      	movs	r4, r1
+  4c754c:	7920      	ldrb	r0, [r4, #4]
+  4c754e:	2801      	cmp	r0, #1
+  4c7550:	d017      	beq.n	0x4c7582
+  4c7552:	2802      	cmp	r0, #2
+  4c7554:	d031      	beq.n	0x4c75ba
+  4c7556:	2803      	cmp	r0, #3
+  4c7558:	d036      	beq.n	0x4c75c8
+  4c755a:	2805      	cmp	r0, #5
+  4c755c:	f000 808c 	beq.w	0x4c7678
+  4c7560:	2806      	cmp	r0, #6
+  4c7562:	d069      	beq.n	0x4c7638
+  4c7564:	2807      	cmp	r0, #7
+  4c7566:	d060      	beq.n	0x4c762a
+  4c7568:	2808      	cmp	r0, #8
+  4c756a:	d050      	beq.n	0x4c760e
+  4c756c:	2809      	cmp	r0, #9
+  4c756e:	d055      	beq.n	0x4c761c
+  4c7570:	280a      	cmp	r0, #10
+  4c7572:	d030      	beq.n	0x4c75d6
+  4c7574:	280b      	cmp	r0, #11
+  4c7576:	f000 8086 	beq.w	0x4c7686
+  4c757a:	280d      	cmp	r0, #13
+  4c757c:	f000 808a 	beq.w	0x4c7694
+  4c7580:	e08f      	b.n	0x4c76a2
+  4c7582:	6d60      	ldr	r0, [r4, #84]	@ 0x54
+  4c7584:	f890 102f 	ldrb.w	r1, [r0, #47]	@ 0x2f
+  4c7588:	f011 010f 	ands.w	r1, r1, #15
+  4c758c:	2904      	cmp	r1, #4
+  4c758e:	d00b      	beq.n	0x4c75a8
+  4c7590:	f890 102f 	ldrb.w	r1, [r0, #47]	@ 0x2f
+  4c7594:	f011 010f 	ands.w	r1, r1, #15
+  4c7598:	2905      	cmp	r1, #5
+  4c759a:	d005      	beq.n	0x4c75a8
+  4c759c:	f890 002f 	ldrb.w	r0, [r0, #47]	@ 0x2f
+  4c75a0:	f010 000f 	ands.w	r0, r0, #15
+  4c75a4:	2803      	cmp	r0, #3
+  4c75a6:	d101      	bne.n	0x4c75ac
+  4c75a8:	2000      	movs	r0, #0
+  4c75aa:	e07b      	b.n	0x4c76a4
+  4c75ac:	200a      	movs	r0, #10
+  4c75ae:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c75b2:	2009      	movs	r0, #9
+  4c75b4:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c75b8:	e073      	b.n	0x4c76a2
+  4c75ba:	200a      	movs	r0, #10
+  4c75bc:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c75c0:	2009      	movs	r0, #9
+  4c75c2:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c75c6:	e06c      	b.n	0x4c76a2
+  4c75c8:	200a      	movs	r0, #10
+  4c75ca:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c75ce:	2009      	movs	r0, #9
+  4c75d0:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c75d4:	e065      	b.n	0x4c76a2
+  4c75d6:	6d60      	ldr	r0, [r4, #84]	@ 0x54
+  4c75d8:	f890 1043 	ldrb.w	r1, [r0, #67]	@ 0x43
+  4c75dc:	f011 010f 	ands.w	r1, r1, #15
+  4c75e0:	2904      	cmp	r1, #4
+  4c75e2:	d00b      	beq.n	0x4c75fc
+  4c75e4:	f890 1043 	ldrb.w	r1, [r0, #67]	@ 0x43
+  4c75e8:	f011 010f 	ands.w	r1, r1, #15
+  4c75ec:	2905      	cmp	r1, #5
+  4c75ee:	d005      	beq.n	0x4c75fc
+  4c75f0:	f890 0043 	ldrb.w	r0, [r0, #67]	@ 0x43
+  4c75f4:	f010 000f 	ands.w	r0, r0, #15
+  4c75f8:	2803      	cmp	r0, #3
+  4c75fa:	d101      	bne.n	0x4c7600
+  4c75fc:	2000      	movs	r0, #0
+  4c75fe:	e051      	b.n	0x4c76a4
+  4c7600:	200a      	movs	r0, #10
+  4c7602:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c7606:	2009      	movs	r0, #9
+  4c7608:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c760c:	e049      	b.n	0x4c76a2
+  4c760e:	200a      	movs	r0, #10
+  4c7610:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c7614:	2009      	movs	r0, #9
+  4c7616:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c761a:	e042      	b.n	0x4c76a2
+  4c761c:	200a      	movs	r0, #10
+  4c761e:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c7622:	2009      	movs	r0, #9
+  4c7624:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c7628:	e03b      	b.n	0x4c76a2
+  4c762a:	200a      	movs	r0, #10
+  4c762c:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c7630:	2009      	movs	r0, #9
+  4c7632:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c7636:	e034      	b.n	0x4c76a2
+  4c7638:	6d65      	ldr	r5, [r4, #84]	@ 0x54
+  4c763a:	6a28      	ldr	r0, [r5, #32]
+  4c763c:	0a00      	lsrs	r0, r0, #8
+  4c763e:	b2c0      	uxtb	r0, r0
+  4c7640:	f7e8 ffb0 	bl	0x4b05a4
+  4c7644:	f110 0f01 	cmn.w	r0, #1
+  4c7648:	d101      	bne.n	0x4c764e
+  4c764a:	2000      	movs	r0, #0
+  4c764c:	e02a      	b.n	0x4c76a4
+  4c764e:	f895 0051 	ldrb.w	r0, [r5, #81]	@ 0x51
+  4c7652:	f010 0007 	ands.w	r0, r0, #7
+  4c7656:	2802      	cmp	r0, #2
+  4c7658:	d005      	beq.n	0x4c7666
+  4c765a:	f895 0051 	ldrb.w	r0, [r5, #81]	@ 0x51
+  4c765e:	f010 0007 	ands.w	r0, r0, #7
+  4c7662:	2803      	cmp	r0, #3
+  4c7664:	d101      	bne.n	0x4c766a
+  4c7666:	2000      	movs	r0, #0
+  4c7668:	e01c      	b.n	0x4c76a4
+  4c766a:	200a      	movs	r0, #10
+  4c766c:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c7670:	2009      	movs	r0, #9
+  4c7672:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c7676:	e014      	b.n	0x4c76a2
+  4c7678:	200a      	movs	r0, #10
+  4c767a:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c767e:	2009      	movs	r0, #9
+  4c7680:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c7684:	e00d      	b.n	0x4c76a2
+  4c7686:	200a      	movs	r0, #10
+  4c7688:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c768c:	2009      	movs	r0, #9
+  4c768e:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c7692:	e006      	b.n	0x4c76a2
+  4c7694:	200a      	movs	r0, #10
+  4c7696:	f884 0059 	strb.w	r0, [r4, #89]	@ 0x59
+  4c769a:	2009      	movs	r0, #9
+  4c769c:	f884 0058 	strb.w	r0, [r4, #88]	@ 0x58
+  4c76a0:	e7ff      	b.n	0x4c76a2
+  4c76a2:	2000      	movs	r0, #0
+  4c76a4:	bd32      	pop	{r1, r4, r5, pc}
+	...

@@ -8,119 +8,105 @@ extern void audio_uart_buffer_zero(void *,uint32_t,uint32_t); /* selected 0x43c0
 static uint32_t word(const void *base,uint32_t offset) {
     return *(const uint32_t *)(const void *)((const uint8_t *)base+offset);
 }
-void audio_uart_font_select_size_metrics(void *face,uint32_t index) {
+void audio_uart_font_select_size_metrics(void *face,uint32_t index) { /* native 0x526a9c */
     uint8_t *f=(uint8_t *)face;
-    uint8_t *size=(uint8_t *)(uintptr_t)word(f,0x58u);
-    uint8_t *strike=(uint8_t *)(uintptr_t)(word(f,0x20u)+index*0x10u);
-    uint32_t x=word(strike,8u);
-    uint32_t y=word(strike,12u);
-    *(uint16_t *)(void *)(size+0x0cu)=(uint16_t)((x+0x20u)>>6u);
-    *(uint16_t *)(void *)(size+0x0eu)=(uint16_t)((y+0x20u)>>6u);
+    volatile uint8_t *m=(volatile uint8_t *)(uintptr_t)(word(f,88u)+12u);
+    const volatile uint8_t *s=(const volatile uint8_t *)(uintptr_t)(word(f,32u)+index*16u);
+    *(volatile uint16_t *)(m+0u)=(uint16_t)((int32_t)(*(const volatile uint32_t *)(s+8u)+32u)>>6u);
+    *(volatile uint16_t *)(m+2u)=(uint16_t)((int32_t)(*(const volatile uint32_t *)(s+12u)+32u)>>6u);
     if((f[8u]&1u)!=0u) {
-        int16_t upm=*(int16_t *)(void *)(f+0x44u);
-        *(uint32_t *)(void *)(size+0x10u)=
-            (uint32_t)audio_uart_font_divide_metric((int32_t)x,(int32_t)upm);
-        *(uint32_t *)(void *)(size+0x14u)=
-            (uint32_t)audio_uart_font_divide_metric((int32_t)y,(int32_t)upm);
-        audio_uart_font_prepare_metrics(face,size+0x0cu);
+        *(volatile int32_t *)(m+4u)=audio_uart_font_divide_metric((int32_t)*(const volatile uint32_t *)(s+8u),(int32_t)*(uint16_t *)(void *)(f+68u));
+        *(volatile int32_t *)(m+8u)=audio_uart_font_divide_metric((int32_t)*(const volatile uint32_t *)(s+12u),(int32_t)*(uint16_t *)(void *)(f+68u));
+        audio_uart_font_prepare_metrics(face,(void *)m);
     } else {
-        *(uint32_t *)(void *)(size+0x10u)=0x10000u;
-        *(uint32_t *)(void *)(size+0x14u)=0x10000u;
-        *(uint32_t *)(void *)(size+0x18u)=y;
-        *(uint32_t *)(void *)(size+0x1cu)=0u;
-        *(uint32_t *)(void *)(size+0x20u)=(uint32_t)((int32_t)*(int16_t *)(void *)strike<<6u);
-        *(uint32_t *)(void *)(size+0x24u)=x;
+        *(volatile uint32_t *)(m+4u)=65536u;
+        *(volatile uint32_t *)(m+8u)=65536u;
+        *(volatile uint32_t *)(m+12u)=*(const volatile uint32_t *)(s+12u);
+        *(volatile uint32_t *)(m+16u)=0u;
+        *(volatile uint32_t *)(m+20u)=(uint32_t)(int32_t)*(const volatile int16_t *)s<<6u;
+        *(volatile uint32_t *)(m+24u)=*(const volatile uint32_t *)(s+8u);
     }
 }
 
 void audio_uart_font_prepare_metrics(void *face,void *metrics) { /* native 0x526a4e */
     uint8_t *f=(uint8_t *)face;
     uint8_t *m=(uint8_t *)metrics;
-    int32_t y_scale=(int32_t)word(m,8u);
-    int32_t x_scale=(int32_t)word(m,4u);
     uint32_t value=(uint32_t)audio_uart_font_scale_metric(
-        (uint32_t)(int32_t)*(int16_t *)(void *)(f+0x46u),y_scale);
+        (uint32_t)(int32_t)*(int16_t *)(void *)(f+0x46u),(int32_t)word(m,8u));
     *(uint32_t *)(void *)(m+0x0cu)=(value+0x3fu)&~0x3fu;
     value=(uint32_t)audio_uart_font_scale_metric(
-        (uint32_t)(int32_t)*(int16_t *)(void *)(f+0x48u),y_scale);
+        (uint32_t)(int32_t)*(int16_t *)(void *)(f+0x48u),(int32_t)word(m,8u));
     *(uint32_t *)(void *)(m+0x10u)=value&~0x3fu;
     value=(uint32_t)audio_uart_font_scale_metric(
-        (uint32_t)(int32_t)*(int16_t *)(void *)(f+0x4au),y_scale);
+        (uint32_t)(int32_t)*(int16_t *)(void *)(f+0x4au),(int32_t)word(m,8u));
     *(uint32_t *)(void *)(m+0x14u)=(value+0x20u)&~0x3fu;
     value=(uint32_t)audio_uart_font_scale_metric(
-        (uint32_t)(int32_t)*(int16_t *)(void *)(f+0x4cu),x_scale);
+        (uint32_t)(int32_t)*(int16_t *)(void *)(f+0x4cu),(int32_t)word(m,4u));
     *(uint32_t *)(void *)(m+0x18u)=(value+0x20u)&~0x3fu;
 }
 
 void audio_uart_font_request_size_metrics(void *face,const void *request) { /* native 0x526b04 */
     uint8_t *f=(uint8_t *)face;
-    const uint8_t *r=(const uint8_t *)request;
-    uint8_t *size=(uint8_t *)(uintptr_t)word(f,0x58u);
-    uint8_t *metrics=size+0x0cu;
+    const volatile uint8_t *r=(const volatile uint8_t *)request;
+    volatile uint8_t *m=(volatile uint8_t *)(uintptr_t)(word(f,0x58u)+12u);
+    int32_t xb=0,yb=0,x=0,y=0;
     if((f[8u]&1u)==0u) {
-        audio_uart_buffer_zero(metrics,0x1cu,0u);
-        *(uint32_t *)(void *)(size+0x10u)=0x10000u;
-        *(uint32_t *)(void *)(size+0x14u)=0x10000u;
+        audio_uart_buffer_zero((void *)m,28u,0u);
+        *(volatile uint32_t *)(m+4u)=65536u;
+        *(volatile uint32_t *)(m+8u)=65536u;
         return;
     }
-    int32_t x_base=0,y_base=0,x_request=0,y_request=0;
     uint8_t type=r[0];
-    if(type==0u) {
-        x_base=(int32_t)(uint16_t)*(uint16_t *)(void *)(f+0x44u);
-        y_base=x_base;
-    } else if(type==1u) {
-        x_base=(int32_t)*(int16_t *)(void *)(f+0x46u)-
-               (int32_t)*(int16_t *)(void *)(f+0x48u);
-        y_base=x_base;
-    } else if(type==2u) {
-        x_base=(int32_t)word(f,0x3cu)-(int32_t)word(f,0x34u);
-        y_base=(int32_t)word(f,0x40u)-(int32_t)word(f,0x38u);
+    if(type==0u) xb=yb=(int32_t)*(uint16_t *)(void *)(f+68u);
+    else if(type==1u) xb=yb=(int32_t)*(int16_t *)(void *)(f+70u)-(int32_t)*(int16_t *)(void *)(f+72u);
+    else if(type==2u) {
+        xb=(int32_t)(word(f,60u)-word(f,52u));
+        yb=(int32_t)(word(f,64u)-word(f,56u));
     } else if(type==3u) {
-        x_base=(int32_t)*(int16_t *)(void *)(f+0x4cu);
-        y_base=(int32_t)*(int16_t *)(void *)(f+0x46u)-
-               (int32_t)*(int16_t *)(void *)(f+0x48u);
+        xb=(int32_t)*(int16_t *)(void *)(f+76u);
+        yb=(int32_t)*(int16_t *)(void *)(f+70u)-(int32_t)*(int16_t *)(void *)(f+72u);
     } else if(type==4u) {
-        uint32_t x=word(r,4u),y=word(r,8u);
-        if(x==0u) x=y;
-        else if(y==0u) y=x;
-        *(uint32_t *)(void *)(size+0x10u)=x;
-        *(uint32_t *)(void *)(size+0x14u)=y;
+        *(volatile uint32_t *)(m+4u)=*(const volatile uint32_t *)(r+4u);
+        *(volatile uint32_t *)(m+8u)=*(const volatile uint32_t *)(r+8u);
+        if(*(volatile uint32_t *)(m+4u)==0u)
+            *(volatile uint32_t *)(m+4u)=*(volatile uint32_t *)(m+8u);
+        else if(*(volatile uint32_t *)(m+8u)==0u)
+            *(volatile uint32_t *)(m+8u)=*(volatile uint32_t *)(m+4u);
         goto finish;
     }
-    if(x_base<0) x_base=-x_base;
-    if(y_base<0) y_base=-y_base;
-    int32_t x_dpi=(int32_t)word(r,0x0cu),y_dpi=(int32_t)word(r,0x10u);
-    x_request=x_dpi==0?(int32_t)word(r,4u):
-        (int32_t)(((int64_t)x_dpi*(int32_t)word(r,4u)+0x24)/0x48);
-    y_request=y_dpi==0?(int32_t)word(r,8u):
-        (int32_t)(((int64_t)y_dpi*(int32_t)word(r,8u)+0x24)/0x48);
-    if(word(r,4u)==0u) {
-        int32_t scale=audio_uart_font_divide_metric(y_request,y_base);
-        *(int32_t *)(void *)(size+0x10u)=scale;
-        *(int32_t *)(void *)(size+0x14u)=scale;
-        x_request=audio_uart_font_mul_div(y_request,x_base,y_base);
-    } else {
-        int32_t xscale=audio_uart_font_divide_metric(x_request,x_base);
-        *(int32_t *)(void *)(size+0x10u)=xscale;
-        if(word(r,8u)==0u) {
-            *(int32_t *)(void *)(size+0x14u)=xscale;
-            y_request=audio_uart_font_mul_div(x_request,y_base,x_base);
+    if(xb<0) xb=(int32_t)(0u-(uint32_t)xb);
+    if(yb<0) yb=(int32_t)(0u-(uint32_t)yb);
+    if(*(const volatile uint32_t *)(r+12u)!=0u)
+        x=(int32_t)(*(const volatile uint32_t *)(r+4u)**(const volatile uint32_t *)(r+12u)+36u)/72;
+    else x=(int32_t)*(const volatile uint32_t *)(r+4u);
+    if(*(const volatile uint32_t *)(r+16u)!=0u)
+        y=(int32_t)(*(const volatile uint32_t *)(r+8u)**(const volatile uint32_t *)(r+16u)+36u)/72;
+    else y=(int32_t)*(const volatile uint32_t *)(r+8u);
+    if(*(const volatile uint32_t *)(r+4u)!=0u) {
+        *(volatile int32_t *)(m+4u)=audio_uart_font_divide_metric(x,xb);
+        if(*(const volatile uint32_t *)(r+8u)!=0u) {
+            *(volatile int32_t *)(m+8u)=audio_uart_font_divide_metric(y,yb);
+            if(r[0]==3u) {
+                if(*(volatile int32_t *)(m+4u)<*(volatile int32_t *)(m+8u))
+                    *(volatile uint32_t *)(m+8u)=*(volatile uint32_t *)(m+4u);
+                else *(volatile uint32_t *)(m+4u)=*(volatile uint32_t *)(m+8u);
+            }
         } else {
-            int32_t yscale=audio_uart_font_divide_metric(y_request,y_base);
-            if(type==3u) { if(xscale<yscale) yscale=xscale; else xscale=yscale; }
-            *(int32_t *)(void *)(size+0x10u)=xscale;
-            *(int32_t *)(void *)(size+0x14u)=yscale;
+            *(volatile uint32_t *)(m+8u)=*(volatile uint32_t *)(m+4u);
+            y=audio_uart_font_mul_div(x,yb,xb);
         }
+    } else {
+        int32_t scale=audio_uart_font_divide_metric(y,yb);
+        *(volatile int32_t *)(m+8u)=scale;
+        *(volatile int32_t *)(m+4u)=scale;
+        x=audio_uart_font_mul_div(y,xb,yb);
     }
 finish:
-    if(type!=0u) {
-        int16_t upm=*(int16_t *)(void *)(f+0x44u);
-        x_request=audio_uart_font_scale_metric((uint32_t)(int32_t)upm,
-                    *(int32_t *)(void *)(size+0x10u));
-        y_request=audio_uart_font_scale_metric((uint32_t)(int32_t)upm,
-                    *(int32_t *)(void *)(size+0x14u));
+    if(r[0]!=0u) {
+        x=audio_uart_font_scale_metric((uint32_t)*(uint16_t *)(void *)(f+68u),*(volatile int32_t *)(m+4u));
+        y=audio_uart_font_scale_metric((uint32_t)*(uint16_t *)(void *)(f+68u),*(volatile int32_t *)(m+8u));
     }
-    *(uint16_t *)(void *)(size+0x0cu)=(uint16_t)((x_request+0x20)>>6u);
-    *(uint16_t *)(void *)(size+0x0eu)=(uint16_t)((y_request+0x20)>>6u);
-    audio_uart_font_prepare_metrics(face,metrics);
+    *(volatile uint16_t *)(m+0u)=(uint16_t)((int32_t)((uint32_t)x+32u)>>6u);
+    *(volatile uint16_t *)(m+2u)=(uint16_t)((int32_t)((uint32_t)y+32u)>>6u);
+    audio_uart_font_prepare_metrics(face,(void *)m);
 }

@@ -1,0 +1,156 @@
+{
+  "evidence_id": "ev_de0c4cdb89b4106e82dc2c2b6afcb8d08cd41905107fe1b39e2cd4b9bdd4b2de",
+  "subject": {
+    "name": "nema_programHW.o",
+    "digest": {
+      "sha256": "ed7dfaa12cc17ba3972d6a406c2fb432c5df50443c67b6b5b6f8414a89183e72"
+    },
+    "format": "elf",
+    "architecture": "arm",
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-rea-nema-provider-round232/nema_programHW.o"
+  },
+  "provider": {
+    "id": "rea-workflow",
+    "name": "REA composed investigation workflow",
+    "version": "1"
+  },
+  "analysis_profile": {
+    "provider": {
+      "id": "rea-workflow",
+      "name": "REA composed investigation workflow",
+      "version": "1"
+    },
+    "parameters": {
+      "upstream_analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "elf",
+          "architecture": "arm",
+          "available_architectures": [
+            "arm"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default"
+        },
+        "digest": "d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26"
+      },
+      "workflow_revision": 2
+    },
+    "digest": "539ae87a089f8e9cc48d8dfe6045113a342d9c0b239d427d77365e4fe1d5cf26"
+  },
+  "predicate_type": "rea.analysis",
+  "operation": "batch_decompile",
+  "parameters": {
+    "addresses": [
+      "nema_ext_hold_enable",
+      "nema_ext_hold_disable",
+      "nema_set_burst_size",
+      "nema_set_interrupt_ctrl",
+      "nema_set_interrupt_ctrl_imm"
+    ]
+  },
+  "raw_result": null,
+  "normalized_result": {
+    "items": [
+      {
+        "address": "nema_ext_hold_enable",
+        "procedure": {
+          "status": "resolved",
+          "address": "0x11e14",
+          "name": "nema_ext_hold_enable"
+        },
+        "status": "ok",
+        "pseudocode": "\nvoid nema_ext_hold_enable(uint param_1)\n\n{\n  uint uVar1;\n  \n  uVar1 = nema_reg_read(0xff4);\n  nema_reg_write(0xff4,0x10 << (param_1 & 0xff) & 0xffU | uVar1);\n  return;\n}\n\n"
+      },
+      {
+        "address": "nema_ext_hold_disable",
+        "procedure": {
+          "status": "resolved",
+          "address": "0x11e34",
+          "name": "nema_ext_hold_disable"
+        },
+        "status": "ok",
+        "pseudocode": "\nvoid nema_ext_hold_disable(uint param_1)\n\n{\n  uint uVar1;\n  \n  uVar1 = nema_reg_read(0xff4);\n  nema_reg_write(0xff4,uVar1 & ~(0x10 << (param_1 & 0xff) & 0xffU));\n  return;\n}\n\n"
+      },
+      {
+        "address": "nema_set_burst_size",
+        "procedure": {
+          "status": "resolved",
+          "address": "0x11ed4",
+          "name": "nema_set_burst_size"
+        },
+        "status": "ok",
+        "pseudocode": "\nvoid nema_set_burst_size(uint param_1,uint param_2)\n\n{\n  if (0xf < param_2) {\n    param_2 = 0;\n  }\n  if (param_1 < 0x10) {\n    param_2 = param_2 | param_1 << 4;\n  }\n  nema_cl_add_cmd(0xd0,param_2);\n  return;\n}\n\n"
+      },
+      {
+        "address": "nema_set_interrupt_ctrl",
+        "procedure": {
+          "status": "resolved",
+          "address": "0x118a4",
+          "name": "nema_set_interrupt_ctrl"
+        },
+        "status": "ok",
+        "pseudocode": "\nvoid nema_set_interrupt_ctrl(undefined4 param_1)\n\n{\n  nema_cl_add_cmd(0xf8,param_1);\n  return;\n}\n\n"
+      },
+      {
+        "address": "nema_set_interrupt_ctrl_imm",
+        "procedure": {
+          "status": "resolved",
+          "address": "0x118ac",
+          "name": "nema_set_interrupt_ctrl_imm"
+        },
+        "status": "ok",
+        "pseudocode": "\nvoid nema_set_interrupt_ctrl_imm(undefined4 param_1)\n\n{\n  nema_reg_write(0xf8,param_1);\n  return;\n}\n\n"
+      }
+    ],
+    "total": 5,
+    "succeeded": 5,
+    "failed": 0
+  },
+  "confidence": "derived",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Derived by an REA composed workflow."
+  ],
+  "locations": [
+    {
+      "kind": "address",
+      "address": "0x11e14"
+    },
+    {
+      "kind": "address",
+      "address": "0x11e34"
+    },
+    {
+      "kind": "address",
+      "address": "0x11ed4"
+    },
+    {
+      "kind": "address",
+      "address": "0x118a4"
+    },
+    {
+      "kind": "address",
+      "address": "0x118ac"
+    }
+  ],
+  "evidence_links": []
+}

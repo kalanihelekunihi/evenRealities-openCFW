@@ -1,0 +1,39 @@
+{
+  "native_ranges": [
+    [
+      "0x5138a4",
+      "0x513924"
+    ],
+    [
+      "0x522920",
+      "0x52294c"
+    ],
+    [
+      "0x522956",
+      "0x522960"
+    ]
+  ],
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_sha256": "f2f4a8a83b861d2f0fdca341798a10c7d7f6f20c8c003813a663dcffdea4a583",
+  "selected": false,
+  "compiled_m55": true,
+  "source_owned_startup_words_513ea8": [
+    0,
+    0,
+    134217730,
+    2147483657,
+    0,
+    0
+  ],
+  "state_ram": "0x200043a8",
+  "limits": [
+    "Generic instruction uploader and ROP-mode wrapper require native qualification",
+    "Startup5138a4 remains unselected; Nema_regs header identifies196/200/204 asIMEM_ADDR/DATAH/DATAL; fixed GPUword semantics not established",
+    "Actual emitter/program-memory ownership/faults/hardware remain open"
+  ],
+  "EvenHub": "excluded",
+  "startup_candidate": "startup-unselected.c",
+  "startup_sha256": "bb116bd19a9ffbe5373ab79be143d5230cc5a4a2b05163dbf38e59ba91aeb82d",
+  "startup_selected": false,
+  "startup_gate": "Opaque GPU instruction word array; no opcode-array production admission. Source-level instruction meaning/ISA reconstruction required."
+}

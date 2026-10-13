@@ -1,0 +1,80 @@
+{
+  "status": "PASS_HEAP_LOG_ALIAS_NATIVE_VARIADIC",
+  "cases": 3,
+  "rows": [
+    {
+      "installed": 0,
+      "arguments": [
+        1,
+        2,
+        3
+      ],
+      "result": {
+        "r0": 0,
+        "events": [],
+        "sp": 537391104
+      }
+    },
+    {
+      "installed": 1,
+      "arguments": [
+        1,
+        2,
+        3
+      ],
+      "result": {
+        "r0": 17,
+        "events": [
+          [
+            "format",
+            537311536,
+            "error!!!!!!elog_async_ext_output: enqueue_log failed\n",
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          [
+            "emit",
+            537311536,
+            "5100"
+          ]
+        ],
+        "sp": 537391104
+      }
+    },
+    {
+      "installed": 1,
+      "arguments": [
+        4294967295,
+        305419896,
+        0
+      ],
+      "result": {
+        "r0": 17,
+        "events": [
+          [
+            "format",
+            537311536,
+            "error!!!!!!elog_async_ext_output: enqueue_log failed\n",
+            [
+              4294967295,
+              305419896,
+              0
+            ]
+          ],
+          [
+            "emit",
+            537311536,
+            "5100"
+          ]
+        ],
+        "sp": 537391104
+      }
+    }
+  ],
+  "source_sha256": "4a5182412b10aa3d76a65e47d3e24970cc2db58a42b4f40c902313e4b0935f86",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "limits": "Underlying 0x473036 formatter and installed callback cut; compares variadic ABI, product string, buffer, event order and return."
+}

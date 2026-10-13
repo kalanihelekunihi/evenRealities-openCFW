@@ -27,17 +27,17 @@ void audio_ble_privacy_cache_maintenance(const uint32_t *range,uint8_t clean) {
         barrier();
         return;
     }
-    uint32_t address=range[0];
-    int32_t remaining=(int32_t)range[1];
-    if(remaining>0) {
-        remaining+=(int32_t)(address&31u);
+    uint32_t remaining=((const volatile uint32_t *)range)[1];
+    uint32_t address=((const volatile uint32_t *)range)[0];
+    if((int32_t)remaining>0) {
+        remaining+=address&31u;
         __asm__ volatile("dsb sy" ::: "memory");
         do {
             if(clean==0u) *dcimvac=address;
             else *dccimvac=address;
             address+=32u;
-            remaining-=32;
-        } while(remaining>0);
+            remaining-=32u;
+        } while((int32_t)remaining>0);
         barrier();
     }
 }

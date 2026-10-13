@@ -1,0 +1,15 @@
+{
+  "status": "PASS_M55_QEMU_CONNECTED_SPACE_EXTENSION",
+  "cases": 123360,
+  "matrix_cases": 136080,
+  "selected_extension": true,
+  "selected_space": true,
+  "space_sha256": "cbb8acc0a4cdb4ad11ca0b8c3c7d5c998fd3bc0e91194652b52dcff4df0248e1",
+  "candidate_sha256": "91bb72f9db018a246e992e0aabee5b4d2503929636274f3d6698b31e7f2a47f5",
+  "native_body_sha256": "f93c897c48573e17a793ef8bfd015d52150e53812bc0fddd9492558bf8e61af7",
+  "child_cuts": 5,
+  "limits": [
+    "Native space/extension bytes unchanged at common delta; actual relative inter-body call preserved; driver/allocator child veneers and both context literals unchanged. Cortex-M55 supports native low-overhead padding loops. Full context/list/threecommand buffers/ordered child events and signed result compared; request128 exercises1040byte large allocation,request40000000 exerciseswrapped minimum allocation.",
+    "Bus access trace, unbounded wrapped-capacity padding (>32 pairs excluded; no extension fault proof claimed), invalid pointers, child mutation and real allocation/driver/hardware/layout remain open."
+  ]
+}

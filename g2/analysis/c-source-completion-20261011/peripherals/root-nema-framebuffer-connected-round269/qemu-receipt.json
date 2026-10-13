@@ -1,0 +1,19 @@
+{
+  "status": "PASS_M55_QEMU_CONNECTED_FRAMEBUFFER_GRAPH",
+  "cases": 1152,
+  "selected": true,
+  "native_section_vma_and_bytes_verified": true,
+  "candidate_sha256": "8348e2f3b5391fb7bf1d582a215f825d07edda83db29d44f22a67826513886eb",
+  "child_cuts": 1,
+  "independent_cleanup_error_gate_expectations_checked": true,
+  "guard_bytes": {
+    "descriptor": 128,
+    "context_a": 128,
+    "context_b": 128,
+    "vg": 256
+  },
+  "helper_fixture_sha256": "0c32fe8c058377c34b89017c25b6c47aed909228f4d6a3e8aec2853b2900e1d3",
+  "limits": [
+    "Actual native/C wrapper,setter,cleanup,destroy,pool-select,error bodies execute on M55; full descriptor/two context/VG guards and free events/context mutation match. Free operation controlled; ordered memory trace,SP/callee-saved,FPU lifecycle/layout/hardware remain."
+  ]
+}

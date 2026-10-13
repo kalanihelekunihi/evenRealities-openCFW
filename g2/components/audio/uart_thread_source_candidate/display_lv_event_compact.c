@@ -29,14 +29,13 @@ __attribute__((noinline)) uint32_t audio_uart_lv_array_resize_48849c(void *array
     return 1u;
 }
 void audio_uart_lv_array_clear_488478(void *array) {
-    uint8_t *a=(uint8_t *)array;
-    void *data=*(void **)(void *)a;
-    if(data!=0) {
-        if(a[0x10u]!=0u)audio_uart_lv_heap_free(data);
-        *(uint32_t *)(void *)a=0u;
+    volatile uint8_t *a=array;
+    volatile uint32_t *words=array;
+    if(words[0]!=0u) {
+        if(a[16u]!=0u)audio_uart_lv_heap_free((void *)(uintptr_t)words[0]);
+        words[0]=0u;
     }
-    *(uint32_t *)(void *)(a+4u)=0u;
-    *(uint32_t *)(void *)(a+8u)=0u;
+    words[1]=0u;words[2]=0u;
 }
 void audio_uart_lv_event_restore_4502e0(void *list) {
     uint32_t count=audio_uart_lv_event_count_450388(list);

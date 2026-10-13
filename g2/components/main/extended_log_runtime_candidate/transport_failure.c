@@ -29,3 +29,7 @@ int32_t g2_log_transport_queue_failure(const char *format,...) {
  * Keep the alias in the defining TU so the ABI and live emitter cell match. */
 int32_t audio_ble_hci_boot_log_4733ee(const char *,...)
     __attribute__((alias("g2_log_transport_queue_failure")));
+
+/* Heap callers ignore R0; preserve native variadic register ABI4733ee. */
+int32_t g2_file_heap_error_log(const char *,...)
+    __attribute__((alias("g2_log_transport_queue_failure")));

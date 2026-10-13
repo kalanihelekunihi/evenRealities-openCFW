@@ -1730,3 +1730,2470 @@ uint32_t audio_uart_lv_image_header_cache_init_4d4bdc(uint32_t count)
     audio_uart_lv_cache_set_name_4d5114((void *)(uintptr_t)*slot,"IMAGE_HEADER");
     return *slot!=0u ? 1u : 0u;
 }
+
+#include <stdint.h>
+extern void *audio_uart_lv_image_decoder_create_4890c8(void);
+extern uint32_t audio_uart_lv_bmp_info_4c91e0(void *,void *,void *);
+extern uint32_t audio_uart_lv_bmp_open_4c92a8(void *,void *);
+extern uint32_t audio_uart_lv_bmp_get_area_4c93a0(void *,void *,const void *,void *);
+extern uint32_t audio_uart_lv_fs_file_close_4c6ee0(void *);
+extern void audio_uart_lv_heap_free(void *);
+extern void audio_uart_font_bitmap_release(void *);
+/* Native 4c94a8..4c94c6; callbacks can mutate descriptor fields. */
+void audio_uart_lv_bmp_close_4c94a8(void *decoder,void *descriptor) {
+    (void)decoder;
+    volatile uint32_t *d=descriptor;
+    (void)audio_uart_lv_fs_file_close_4c6ee0((void *)(uintptr_t)d[18]);
+    audio_uart_lv_heap_free((void *)(uintptr_t)d[18]);
+    if(d[11]!=0u) audio_uart_font_bitmap_release((void *)(uintptr_t)d[11]);
+}
+/* Native 4c91a8..4c91de is lv_bmp_init, despite legacy assert name. */
+void audio_uart_lv_init_assert_4c91a8(void) {
+    static const char name[]="BMP";
+    volatile uint32_t *d=audio_uart_lv_image_decoder_create_4890c8();
+    d[0]=(uint32_t)(uintptr_t)audio_uart_lv_bmp_info_4c91e0;
+    d[1]=(uint32_t)(uintptr_t)audio_uart_lv_bmp_open_4c92a8;
+    d[2]=(uint32_t)(uintptr_t)audio_uart_lv_bmp_get_area_4c93a0;
+    d[3]=(uint32_t)(uintptr_t)audio_uart_lv_bmp_close_4c94a8;
+    d[5]=(uint32_t)(uintptr_t)name;
+}
+
+#include <stdint.h>
+extern const char *audio_uart_lv_fs_extension_4c70e4(const char *);
+extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
+extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
+extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
+static const char bmp_format[]="Not supported bpp: %d";
+static const char bmp_function[]="decoder_info";
+static const char bmp_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\bmp\\lv_bmp.c";
+/* Native4c91e0..4c92a8; file type1, packed16-bit dimensions and byte8cf. */
+uint32_t audio_uart_lv_bmp_info_4c91e0(void *decoder,void *descriptor,void *header) {
+    (void)decoder;
+    volatile uint8_t *d=descriptor;
+    const char *src=(const char *)(uintptr_t)*(volatile uint32_t *)(d+12u);
+    uint8_t type=d[16];
+    if(type!=1u)return 0u;
+    if(audio_uart_lv_string_compare_4547be(audio_uart_lv_fs_extension_4c70e4(src),"bmp")!=0)return 0u;
+    uint8_t bytes[54];uint32_t width,height;uint16_t bpp;
+    (void)audio_uart_lv_fs_file_read_4c6f46((void *)(d+20u),bytes,54u,0);
+    audio_uart_lv_grid_copy_454738(&width,bytes+18u,4u);
+    audio_uart_lv_grid_copy_454738(&height,bytes+22u,4u);
+    volatile uint32_t *h=header;
+    h[1]=(h[1]&0xffff0000u)|(width&0xffffu);
+    h[1]=(h[1]&0x0000ffffu)|(height<<16);
+    audio_uart_lv_grid_copy_454738(&bpp,bytes+28u,2u);
+    uint32_t cf;
+    switch(bpp) {
+    case 16:cf=18u;break;
+    case 24:cf=15u;break;
+    case 32:cf=16u;break;
+    default:audio_uart_lvgl_log(2u,bmp_path,126u,bmp_function,bmp_format,(uint32_t)bpp);return 1u;
+    }
+    h[0]=(h[0]&0xffff00ffu)|(cf<<8);
+    return 1u;
+}
+
+#include <stdint.h>
+extern const char *audio_uart_lv_fs_extension_4c70e4(const char *);
+extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
+extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
+extern uint32_t audio_uart_lv_fs_file_open_4c6d9a(void *,const char *,uint32_t);
+extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
+extern uint32_t audio_uart_lv_fs_file_close_4c6ee0(void *);
+extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
+extern void *audio_uart_lv_malloc(uint32_t);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+static const char bmp_open_reason[]="Out of memory";
+static const char bmp_open_expression[]="dsc->user_data != NULL";
+static const char bmp_open_format[]="Asserted at expression: %s (%s)";
+static const char bmp_open_function[]="decoder_open";
+static const char bmp_open_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\bmp\\lv_bmp.c";
+/* Native4c92a8..4c93a0; unsigned wrapped row-size arithmetic. */
+uint32_t audio_uart_lv_bmp_open_4c92a8(void *decoder,void *descriptor) {
+    (void)decoder;volatile uint8_t *d=descriptor;
+    if(d[16]!=1u)return 0u;
+    const char *src=(const char *)(uintptr_t)*(volatile uint32_t *)(d+12u);
+    if(audio_uart_lv_string_compare_4547be(audio_uart_lv_fs_extension_4c70e4(src),"bmp")!=0)return 0u;
+    uint32_t state[8];uint8_t bytes[54];
+    audio_uart_lv_basic_box_clear_454746(state,0u,32u);
+    src=(const char *)(uintptr_t)*(volatile uint32_t *)(d+12u);
+    if((uint8_t)audio_uart_lv_fs_file_open_4c6d9a(state,src,2u)!=0u)return 0u;
+    (void)audio_uart_lv_fs_file_read_4c6f46(state,bytes,54u,0);
+    if(bytes[0]!=0x42u||bytes[1]!=0x4du) {
+        (void)audio_uart_lv_fs_file_close_4c6ee0(state);return 0u;
+    }
+    audio_uart_lv_grid_copy_454738(state+3,bytes+10u,4u);
+    audio_uart_lv_grid_copy_454738(state+4,bytes+18u,4u);
+    audio_uart_lv_grid_copy_454738(state+5,bytes+22u,4u);
+    audio_uart_lv_grid_copy_454738(state+6,bytes+28u,2u);
+    state[7]=((state[6]*state[4]+31u)>>5)<<2;
+    *(volatile uint32_t *)(d+72u)=(uint32_t)(uintptr_t)audio_uart_lv_malloc(32u);
+    if(*(volatile uint32_t *)(d+72u)==0u) {
+        audio_uart_lvgl_log(3u,bmp_open_path,180u,bmp_open_function,bmp_open_format,bmp_open_expression,bmp_open_reason);
+        for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+    }
+    if(*(volatile uint32_t *)(d+72u)==0u)return 0u;
+    audio_uart_lv_grid_copy_454738((void *)(uintptr_t)*(volatile uint32_t *)(d+72u),state,32u);
+    return 1u;
+}
+
+#include <stdint.h>
+extern uint8_t audio_uart_display_lv_root[];
+extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
+extern uint32_t audio_uart_lv_area_width_451598(const void *);
+extern void *audio_uart_lv_draw_buf_reshape_48b196(void *,uint32_t,uint32_t,uint32_t,uint32_t);
+extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,uint32_t,uint32_t);
+extern void audio_uart_font_bitmap_release(void *);
+extern uint32_t audio_uart_lv_fs_file_seek_4c6fba(void *,uint32_t,uint32_t);
+extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
+/* Native4c93a0..4c947c; signed row bound, unsigned wrap/shift offsets. */
+uint32_t audio_uart_lv_bmp_get_area_4c93a0(void *decoder,void *descriptor,const void *full_area,void *decoded_area) {
+    (void)decoder;
+    volatile uint32_t *d=descriptor,*area=decoded_area;
+    const volatile uint32_t *full=full_area;
+    volatile uint32_t *state=(void *)(uintptr_t)d[18];
+    void *decoded=(void *)(uintptr_t)d[11];
+    if(area[1]==0xe0000001u) {
+        audio_uart_checksum_copy(decoded_area,full_area,16u);
+        area[3]=area[1];
+        uint32_t width=audio_uart_lv_area_width_451598(full_area);
+        void *reshaped=audio_uart_lv_draw_buf_reshape_48b196(decoded,(uint8_t)(d[8]>>8),width,1u,0u);
+        if(reshaped==0) {
+            if(decoded!=0) {
+                audio_uart_font_bitmap_release(decoded);
+                d[11]=0u;
+            }
+            decoded=audio_uart_lv_draw_buf_create_ex_48b010(audio_uart_display_lv_root+0x108u,width,1u,(uint8_t)(d[8]>>8),0u);
+            if(decoded==0)return 0u;
+        } else decoded=reshaped;
+        d[11]=(uint32_t)(uintptr_t)decoded;
+    } else {
+        area[1]=area[1]+1u;
+        area[3]=area[3]+1u;
+    }
+    if((int32_t)full[3]<(int32_t)area[1])return 0u;
+    uint32_t row=state[5]-1u-area[1];
+    uint32_t offset=row*state[7]+state[3];
+    offset+=(state[6]>>3)*area[0];
+    (void)audio_uart_lv_fs_file_seek_4c6fba((void *)state,offset,0u);
+    uint32_t width=audio_uart_lv_area_width_451598(full_area);
+    uint32_t length=(state[6]>>3)*width;
+    void *pixels=(void *)(uintptr_t)((volatile uint32_t *)decoded)[4];
+    (void)audio_uart_lv_fs_file_read_4c6f46((void *)state,pixels,length,0);
+    return 1u;
+}
+
+#include <stdint.h>
+extern void *audio_uart_lv_fs_driver_find_4c70b4(uint32_t);
+extern void *audio_uart_lv_heap_alloc(uint32_t);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+static const char fs_open_null[]="Can't open file: path is NULL";
+static const char fs_open_function[]="lv_fs_open";
+static const char fs_open_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_fs.c";
+static const char fs_open_unknown[]="Can't open file (%s): unknown driver letter";
+static const char fs_open_ready[]="Can't open file (%s): driver not ready";
+static const char fs_open_missing[]="Can't open file (%s): open function not exists";
+static const char fs_open_reason[]="Out of memory";
+static const char fs_open_expression[]="file_p->cache != NULL";
+static const char fs_open_format[]="Asserted at expression: %s (%s)";
+/* Native4c6d9a..4c6ee0. Driver cache UINT32_MAX denotes memory-backed file. */
+uint32_t audio_uart_lv_fs_file_open_4c6d9a(void *file,const char *path,uint32_t mode) {
+    volatile uint32_t *f=file;
+    if(path==0) {audio_uart_lvgl_log(2u,fs_open_path,79u,fs_open_function,fs_open_null);return 11u;}
+    const volatile uint8_t *p=(const volatile uint8_t *)path;
+    uint8_t letter=p[0];const char *relative=path;
+    if(p[0]!=0u) {relative=path+1;if(*(const volatile uint8_t *)relative==':')++relative;}
+    volatile uint32_t *driver=audio_uart_lv_fs_driver_find_4c70b4(letter);
+    if(driver==0) {audio_uart_lvgl_log(2u,fs_open_path,88u,fs_open_function,fs_open_unknown,path);return 3u;}
+    if(driver[2]!=0u) {
+        uint32_t cb=driver[2];
+        if(((uint32_t (*)(void *))(uintptr_t)cb)((void *)driver)==0u) {
+            audio_uart_lvgl_log(2u,fs_open_path,94u,fs_open_function,fs_open_ready,path);return 1u;
+        }
+    }
+    if(driver[3]==0u) {audio_uart_lvgl_log(2u,fs_open_path,100u,fs_open_function,fs_open_missing,path);return 9u;}
+    f[1]=(uint32_t)(uintptr_t)driver;
+    if(driver[1]==UINT32_MAX) f[0]=(uint32_t)(uintptr_t)file;
+    else {
+        uint32_t cb=driver[3];
+        void *handle=((void *(*)(void *,const char *,uint8_t))(uintptr_t)cb)((void *)driver,relative,(uint8_t)mode);
+        if(handle==0||(uintptr_t)handle==UINT32_MAX)return 12u;
+        f[0]=(uint32_t)(uintptr_t)handle;
+    }
+    if(driver[1]!=0u) {
+        f[2]=(uint32_t)(uintptr_t)audio_uart_lv_heap_alloc(16u);
+        if(f[2]==0u) {
+            audio_uart_lvgl_log(3u,fs_open_path,123u,fs_open_function,fs_open_format,fs_open_expression,fs_open_reason);
+            for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+        }
+        if(driver[1]==UINT32_MAX) {
+            uint32_t buffer=*(const volatile uint32_t *)((const uint8_t *)path+4u);
+            ((volatile uint32_t *)(uintptr_t)f[2])[3]=buffer;
+            ((volatile uint32_t *)(uintptr_t)f[2])[0]=0u;
+            ((volatile uint32_t *)(uintptr_t)f[2])[2]=0u;
+            uint32_t end=*(const volatile uint32_t *)((const uint8_t *)path+8u);
+            ((volatile uint32_t *)(uintptr_t)f[2])[1]=end;
+        } else {
+            ((volatile uint32_t *)(uintptr_t)f[2])[0]=UINT32_MAX;
+            ((volatile uint32_t *)(uintptr_t)f[2])[1]=UINT32_MAX-1u;
+        }
+    }
+    return 0u;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_ambiq_unit_cell[]; /* RAM200746c0 */
+extern void audio_uart_ambiq_buffer_handlers_53d5da(void);
+extern void *audio_uart_lv_draw_unit_create_484398(uint32_t);
+extern int32_t audio_uart_ambiq_dispatch_4c76a8(void *,void *);
+extern int32_t audio_uart_ambiq_evaluate_4c7548(void *,void *);
+extern int32_t audio_uart_ambiq_delete_4c74f0(void *);
+extern void audio_uart_ambiq_render_thread_4c7700(void *);
+extern void *audio_uart_display_surface_alloc(uint32_t,uint32_t,uint32_t,uint32_t);
+extern void *audio_uart_nema_vg_path_create_514ebc(void);
+extern void *audio_uart_nema_vg_paint_create_515096(void);
+extern void *audio_uart_nema_vg_grad_create_51510e(void);
+extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
+/* Native hidden structure-return ABI: caller supplies60-byte result inR0. */
+extern void audio_uart_nema_cl_create_sized_514278(void *,uint32_t);
+extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_ambiq_vector_font_init_53d6da(void *);
+extern uint32_t audio_uart_lv_thread_init_4d4610(void *,const char *,uint32_t,void (*)(void),uint32_t,void *);
+static const char ambiq_name[]="AMBIQ";
+static const char ambiq_reason[]="NULL pointer";
+static const char ambiq_expression[]="draw_ambiq_unit->cl.bo.base_virt != NULL";
+static const char ambiq_format[]="Asserted at expression: %s (%s)";
+static const char ambiq_function[]="lv_draw_ambiq_init";
+static const char ambiq_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq.c";
+static const char ambiq_thread[]="ambiqdraw";
+static volatile uint32_t *ambiq_unit(void) {
+    return (volatile uint32_t *)(uintptr_t)audio_uart_ambiq_unit_cell[0];
+}
+/* Full native4c73d6..4c74ee; legacy group name retained for existing caller. */
+void audio_uart_lv_init_group_4c73d6(void) {
+    audio_uart_ambiq_buffer_handlers_53d5da();
+    audio_uart_ambiq_unit_cell[0]=(uint32_t)(uintptr_t)audio_uart_lv_draw_unit_create_484398(228u);
+    ambiq_unit()[3]=(uint32_t)(uintptr_t)audio_uart_ambiq_dispatch_4c76a8;
+    ambiq_unit()[4]=(uint32_t)(uintptr_t)audio_uart_ambiq_evaluate_4c7548;
+    ambiq_unit()[6]=(uint32_t)(uintptr_t)audio_uart_ambiq_delete_4c74f0;
+    ambiq_unit()[1]=(uint32_t)(uintptr_t)ambiq_name;
+    void *texture=audio_uart_display_surface_alloc(64u,1u,16u,0u);
+    ambiq_unit()[15]=(uint32_t)(uintptr_t)texture;
+    ambiq_unit()[16]=0u;
+    void *path=audio_uart_nema_vg_path_create_514ebc();ambiq_unit()[17]=(uint32_t)(uintptr_t)path;
+    void *paint=audio_uart_nema_vg_paint_create_515096();ambiq_unit()[18]=(uint32_t)(uintptr_t)paint;
+    void *grad=audio_uart_nema_vg_grad_create_51510e();ambiq_unit()[19]=(uint32_t)(uintptr_t)grad;
+    ambiq_unit()[20]=0u;
+    ((volatile uint8_t *)ambiq_unit())[84]=255u;
+    ((volatile uint8_t *)ambiq_unit())[85]=255u;
+    ((volatile uint8_t *)ambiq_unit())[86]=255u;
+    audio_uart_lv_basic_box_clear_454746((uint8_t *)ambiq_unit()+88u,0u,28u);
+    audio_uart_lv_basic_box_clear_454746((uint8_t *)ambiq_unit()+116u,0u,16u);
+    uint32_t command_list[15];
+    audio_uart_nema_cl_create_sized_514278(command_list,102400u);
+    audio_uart_checksum_copy((uint8_t *)ambiq_unit()+144u,command_list,60u);
+    if(ambiq_unit()[38]==0u) {
+        audio_uart_lvgl_log(3u,ambiq_path,87u,ambiq_function,ambiq_format,ambiq_expression,ambiq_reason);
+        for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+    }
+    ambiq_unit()[35]=0u;
+    audio_uart_ambiq_vector_font_init_53d6da((void *)ambiq_unit());
+    (void)audio_uart_lv_async_init_4d465c((uint8_t *)ambiq_unit()+132u);
+    void *unit=(void *)ambiq_unit();
+    (void)audio_uart_lv_thread_init_4d4610((uint8_t *)unit+44u,ambiq_thread,40u,(void (*)(void))audio_uart_ambiq_render_thread_4c7700,32768u,unit);
+}
+
+#include <stdint.h>
+extern int32_t g2_thread_create_dynamic(void (*)(void *),const char *,uint16_t,void *,uint32_t,void **);
+extern void audio_task_delete(void *);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+static const char lv_thread_message[]="xTaskCreate failed!";
+static const char lv_thread_function[]="lv_thread_init";
+static const char lv_thread_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\osal\\lv_freertos.c";
+/* Native4d4768..4d477a. Native scratchR0 discarded by caller. */
+void audio_uart_lv_thread_trampoline_4d4768(void *cell) {
+    volatile uint32_t *t=cell;
+    void *argument=(void *)(uintptr_t)t[1];
+    uint32_t callback=t[0];
+    ((void (*)(void *))(uintptr_t)callback)(argument);
+    audio_task_delete(0);
+}
+/* Native4d4610..4d4650: stackbytes>>2 truncated to16-bit depth. */
+uint32_t audio_uart_lv_thread_init_4d4610(void *cell,const char *name,uint32_t priority,void (*callback)(void),uint32_t stackbytes,void *argument) {
+    volatile uint32_t *t=cell;
+    t[1]=(uint32_t)(uintptr_t)argument;
+    t[0]=(uint32_t)(uintptr_t)callback;
+    int32_t result=g2_thread_create_dynamic(audio_uart_lv_thread_trampoline_4d4768,name,(uint16_t)(stackbytes>>2),cell,(uint8_t)priority,(void **)((uint8_t *)cell+8u));
+    if(result!=1) {
+        audio_uart_lvgl_log(3u,lv_thread_path,103u,lv_thread_function,lv_thread_message);return 0u;
+    }
+    return 1u;
+}
+
+#include <stdint.h>
+extern void audio_uart_font_bitmap_release(void *);
+extern void audio_uart_nema_cl_destroy_5142f0(void *);
+extern uint32_t audio_uart_lv_thread_sync_signal_4d4724(void *);
+extern void audio_task_delete(void *);
+/* Native4d4650..4d465c; taskdelete return discarded. */
+uint32_t audio_uart_lv_thread_delete_4d4650(void *thread) {
+    audio_task_delete((void *)(uintptr_t)((volatile uint32_t *)thread)[2]);
+    return 1u;
+}
+/* Native4c74f0..4c752e. No VG destroy calls in native configuration. */
+int32_t audio_uart_ambiq_delete_4c74f0(void *unit) {
+    volatile uint32_t *u=unit;
+    audio_uart_font_bitmap_release((void *)(uintptr_t)u[15]);
+    if(u[16]!=0u) audio_uart_font_bitmap_release((void *)(uintptr_t)u[16]);
+    audio_uart_nema_cl_destroy_5142f0((uint8_t *)unit+144u);
+    ((volatile uint8_t *)unit)[57]=1u;
+    if(((volatile uint8_t *)unit)[56]!=0u)
+        (void)audio_uart_lv_thread_sync_signal_4d4724((uint8_t *)unit+32u);
+    return (int32_t)audio_uart_lv_thread_delete_4d4650((uint8_t *)unit+44u);
+}
+
+#include <stdint.h>
+extern void audio_uart_lv_anim_mutex_ensure_4d47fa(uint32_t *);
+extern void stock_enter_critical(void);
+extern void stock_exit_critical(void);
+extern uint32_t audio_notify_task(void *,uint32_t,uint32_t,uint32_t,uint32_t *);
+/* Native4d4724..4d475c; consume waiter atomically, defer notification. */
+uint32_t audio_uart_lv_thread_sync_signal_4d4724(void *cell) {
+    volatile uint32_t *s=cell;
+    audio_uart_lv_anim_mutex_ensure_4d47fa(cell);
+    stock_enter_critical();
+    uint32_t waiter=s[2];
+    s[2]=0u;
+    if(waiter==0u)s[1]=1u;
+    stock_exit_critical();
+    if(waiter!=0u)(void)audio_notify_task((void *)(uintptr_t)waiter,0u,0u,2u,0);
+    return 1u;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[]; /* RAM20074efc */
+extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern void audio_uart_nema_cl_buffer_destroy_5140c6(void *);
+extern void audio_uart_nema_cl_node_release_514178(void *);
+/* Native5142f0..514382; command words are data for the GPU command buffer. */
+void audio_uart_nema_cl_destroy_5142f0(void *command_list) {
+    volatile uint32_t *cl=command_list;
+    if(cl==0) {audio_uart_nema_error_set_4b127c(8192u);return;}
+    uint32_t root=cl[9];
+    if(root!=0u&&(((volatile uint8_t *)cl)[24]&32u)==0u)
+        cl=(volatile uint32_t *)(uintptr_t)root;
+    do {
+        volatile uint32_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+        if(context[1]==(uint32_t)(uintptr_t)cl) {
+            uint32_t offset=cl[5];uint32_t size=cl[4];
+            if((int32_t)size>=(int32_t)(offset+2u)) {
+                volatile uint32_t *commands=(void *)(uintptr_t)cl[2];
+                commands[offset]=0x50000u;
+                commands[offset+1u]=0u;
+                cl[6]=cl[6]&~8u;
+            }
+            cl[6]=cl[6]&~32u;
+            context[1]=0u;
+        }
+        if((((volatile uint8_t *)cl)[24]&16u)!=0u)cl=(void *)(uintptr_t)cl[8];
+        else {
+            audio_uart_nema_cl_buffer_destroy_5140c6((void *)cl);
+            uint32_t root_after=cl[9];uint32_t next=cl[8];
+            if(root_after!=0u)audio_uart_nema_cl_node_release_514178((void *)cl);
+            cl=(void *)(uintptr_t)next;
+        }
+    } while(cl!=0);
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern void audio_uart_lv_pool_free_48429e(void *,void *);
+/* Native514050..514070, source-owned pool selector literal addresses. */
+void *audio_uart_nema_pool_select_514050(uint32_t pool_id) {
+    if(pool_id==2u)return (void *)(uintptr_t)0x20000370u;
+    if(pool_id==3u)return (void *)(uintptr_t)0x20000338u;
+    return (void *)(uintptr_t)0x20000354u;
+}
+/* Native5140c6..5140ea; poolfree can mutate the owner. */
+void audio_uart_nema_cl_buffer_destroy_5140c6(void *buffer) {
+    volatile uint32_t *b=buffer;
+    void *pool=audio_uart_nema_pool_select_514050(b[1]);
+    void *data=(void *)(uintptr_t)b[2];
+    audio_uart_lv_pool_free_48429e(pool,data);
+    b[2]=0u;b[3]=0u;b[0]=0u;b[1]=UINT32_MAX;
+}
+/* Native514178..514184. */
+void audio_uart_nema_cl_node_release_514178(void *node) {
+    audio_uart_lv_pool_free_48429e((void *)(uintptr_t)0x20000338u,node);
+}
+/* Native4b127c..4b128a; native scratch return ignored by void API. */
+void audio_uart_nema_error_set_4b127c(uint32_t error) {
+    volatile uint32_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+    context[8]=context[8]|error;
+}
+
+#include <stdint.h>
+extern int32_t audio_uart_ambiq_color_format_src_4b05a4(uint32_t);
+/* Native4c7548..4c76a8: return0 on all paths; acceptance changes two bytes. */
+int32_t audio_uart_ambiq_evaluate_4c7548(void *unit,void *task) {
+    (void)unit;
+    volatile uint8_t *t=task;
+    switch(t[4]) {
+    case 1: {
+        volatile uint8_t *d=(void *)(uintptr_t)*(volatile uint32_t *)(t+84u);
+        if((d[47]&15u)==4u||(d[47]&15u)==5u||(d[47]&15u)==3u)return 0;
+        break;
+    }
+    case 10: {
+        volatile uint8_t *d=(void *)(uintptr_t)*(volatile uint32_t *)(t+84u);
+        if((d[67]&15u)==4u||(d[67]&15u)==5u||(d[67]&15u)==3u)return 0;
+        break;
+    }
+    case 6: {
+        volatile uint8_t *d=(void *)(uintptr_t)*(volatile uint32_t *)(t+84u);
+        uint32_t cf=(uint8_t)(*(volatile uint32_t *)(d+32u)>>8);
+        if(audio_uart_ambiq_color_format_src_4b05a4(cf)==-1)return 0;
+        if((d[81]&7u)==2u||(d[81]&7u)==3u)return 0;
+        break;
+    }
+    case 2:case 3:case 5:case 7:case 8:case 9:case 11:case 13:break;
+    default:return 0;
+    }
+    t[89]=10u;
+    t[88]=9u;
+    return 0;
+}
+
+#include <stdint.h>
+/* Native4b05a4..4b064e; format input truncated tobyte. */
+int32_t audio_uart_ambiq_color_format_src_4b05a4(uint32_t format) {
+    switch((uint8_t)format) {
+    case 6u:return 9;
+    case 7u:return 11;
+    case 8u:return 49;
+    case 9u:return 53;
+    case 10u:return 9;
+    case 11u:return 12;
+    case 12u:return 48;
+    case 13u:return 52;
+    case 14u:return 8;
+    case 15u:return 57;
+    case 16u:return 16;
+    case 17u:return 17;
+    case 18u:return 4;
+    case 20u:return 4;
+    case 21u:return 68;
+    case 48u:return 18;
+    case 49u:return 22;
+    case 50u:return 23;
+    case 52u:return 76;
+    case 53u:return 77;
+    default:return -1;
+    }
+}
+
+#include <stdint.h>
+extern void *audio_uart_lv_draw_get_available_task_48463a(void *,void *,uint32_t);
+extern void *audio_uart_lv_draw_layer_alloc_buf_484836(void *);
+extern uint32_t audio_uart_lv_thread_sync_signal_4d4724(void *);
+/* Native4c76a8..4c7700; pinned Ambiq dispatch policy. */
+int32_t audio_uart_ambiq_dispatch_4c76a8(void *unit,void *layer) {
+    volatile uint8_t *u=unit;
+    if(*(volatile uint32_t *)(u+28u))return 0;
+    volatile uint8_t *task=audio_uart_lv_draw_get_available_task_48463a(layer,0,9u);
+    if(!task)return -1;
+    if(!audio_uart_lv_draw_layer_alloc_buf_484836(layer))return -1;
+    *(volatile uint32_t *)(task+80u)=2u;
+    *(volatile uint32_t *)(task+76u)=(uint32_t)(uintptr_t)unit;
+    *(volatile uint32_t *)(u+28u)=(uint32_t)(uintptr_t)task;
+    if(u[56])audio_uart_lv_thread_sync_signal_4d4724((void *)(u+32u));
+    return 1;
+}
+
+#include <stdint.h>
+extern void audio_uart_lv_anim_init_4d46de(void *);
+extern uint32_t audio_uart_lv_thread_sync_wait_4d46e8(void *);
+extern void audio_uart_ambiq_execute_unit_4c752e(void *);
+extern uint32_t audio_uart_lv_thread_sync_delete_4d475c(void *);
+extern uint32_t audio_uart_lv_mutex_delete_4d46c2(void *);
+/* Native4c7700..4c7752. All shared field loads retained. */
+void audio_uart_ambiq_render_thread_4c7700(void *unit) {
+    volatile uint8_t *u=unit;
+    audio_uart_lv_anim_init_4d46de((void *)(u+32u));
+    u[56]=1u;
+    for(;;) {
+        while(!*(volatile uint32_t *)(u+28u)&&!u[57])
+            audio_uart_lv_thread_sync_wait_4d46e8((void *)(u+32u));
+        if(u[57])break;
+        audio_uart_ambiq_execute_unit_4c752e((void *)(uintptr_t)*(volatile uint32_t *)(u+28u));
+    }
+    u[56]=0u;
+    audio_uart_lv_thread_sync_delete_4d475c((void *)(u+32u));
+    audio_uart_lv_mutex_delete_4d46c2((void *)(u+132u));
+}
+
+#include <stdint.h>
+extern void audio_uart_ambiq_execute_drawing_4c7752(void *);
+extern void audio_uart_lv_draw_dispatch_request_48462e(void);
+extern int32_t audio_queue_delete(void *);
+/* Native4c752e..4c7548: drawing may mutate the task's draw unit. */
+void audio_uart_ambiq_execute_unit_4c752e(void *task) {
+    volatile uint8_t *t=task;
+    audio_uart_ambiq_execute_drawing_4c7752(task);
+    volatile uint8_t *unit=(void *)(uintptr_t)*(volatile uint32_t *)(t+76u);
+    *(volatile uint32_t *)(t+80u)=3u;
+    *(volatile uint32_t *)(unit+28u)=0u;
+    audio_uart_lv_draw_dispatch_request_48462e();
+}
+/* Native4d475c..4d4768; waiter at word2 intentionally retained. */
+uint32_t audio_uart_lv_thread_sync_delete_4d475c(void *cell) {
+    volatile uint32_t *s=cell;
+    s[1]=0u;
+    s[0]=0u;
+    return 1u;
+}
+/* Native4d46c2..4d46de; queue deletion precedes clearing initialized. */
+uint32_t audio_uart_lv_mutex_delete_4d46c2(void *cell) {
+    volatile uint32_t *s=cell;
+    if(!s[0])return 0u;
+    audio_queue_delete((void *)(uintptr_t)s[1]);
+    s[0]=0u;
+    return 1u;
+}
+
+#include <stdint.h>
+extern void audio_uart_lv_anim_mutex_ensure_4d47fa(uint32_t *);
+extern void *receiver_current_task(void);
+extern void stock_enter_critical(void);
+extern void stock_exit_critical(void);
+extern uint32_t audio_uart_notify_take_455afc(uint32_t,int32_t,uint32_t);
+/* Native4d46e8..4d4724: consume pending signal, otherwise register and wait. */
+uint32_t audio_uart_lv_thread_sync_wait_4d46e8(void *cell) {
+    volatile uint32_t *s=cell;
+    audio_uart_lv_anim_mutex_ensure_4d47fa(cell);
+    uint32_t current=(uint32_t)(uintptr_t)receiver_current_task();
+    stock_enter_critical();
+    uint32_t pending=s[1];
+    s[1]=0u;
+    if(!pending)s[2]=current;
+    stock_exit_critical();
+    if(!pending)audio_uart_notify_take_455afc(0u,1,UINT32_MAX);
+    return 1u;
+}
+
+#include <stdint.h>
+extern void audio_uart_ambiq_area_copy_4c73c4(uint32_t *,const void *);
+extern void audio_uart_ambiq_area_move_450bb2(uint32_t *,uint32_t,uint32_t);
+extern uint32_t audio_uart_lv_area_width_451598(const void *);
+extern uint32_t audio_uart_lv_area_height_4515a4(const void *);
+extern void audio_uart_ambiq_transform_area_488cda(uint32_t *,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,void *);
+extern uint32_t audio_uart_lv_area_intersect_450bcc(int32_t *,const int32_t *,const int32_t *);
+extern void audio_uart_lv_draw_flush_cache_48abb8(void *,const void *);
+extern uint32_t audio_uart_ambiq_bind_buffer_4b092a(void *,const void *,uint32_t);
+extern void audio_uart_ambiq_draw_fill_53dc38(void *,void *,void *);
+extern void audio_uart_ambiq_draw_border_53df00(void *,void *,void *);
+extern void audio_uart_ambiq_draw_triangle_53e728(void *,void *);
+extern void audio_uart_ambiq_draw_line_53ecfc(void *,void *);
+extern void audio_uart_ambiq_draw_arc_53f09c(void *,void *,void *);
+extern void audio_uart_ambiq_draw_image_53f42a(void *,void *,void *);
+extern void audio_uart_ambiq_draw_layer_53f400(void *,void *,void *);
+extern void audio_uart_ambiq_set_resolution_4b0bea(uint32_t,uint32_t);
+extern void audio_uart_ambiq_draw_label_53faa6(void *,void *,void *);
+extern void audio_uart_ambiq_draw_box_shadow_540036(void *,void *,void *);
+extern void audio_uart_ambiq_draw_mask_5409f0(void *,void *,void *);
+extern uint32_t audio_uart_ambiq_submit_4b0c8a(uint32_t);
+extern void audio_uart_lv_draw_invalidate_cache_48ab30(void *,const void *);
+/* Native4c7752..4c791a. Wrapped uint32 arithmetic; all input loads volatile.
+ * Native type13 intentionally performs no drawing call before submit/flush. */
+void audio_uart_ambiq_execute_drawing_4c7752(void *task) {
+    volatile uint8_t *t=task;
+    volatile uint32_t *layer=(void *)(uintptr_t)*(volatile uint32_t *)(t+72u);
+    void *buffer=(void *)(uintptr_t)layer[0];
+    uint32_t clip[4],area[4];
+    (void)*(volatile uint32_t *)(t+76u);
+    audio_uart_ambiq_area_copy_4c73c4(clip,(void *)(t+56u));
+    uint32_t y=0u-layer[2],x=0u-layer[1];
+    audio_uart_ambiq_area_move_450bb2(clip,x,y);
+    audio_uart_ambiq_area_copy_4c73c4(area,(void *)(t+8u));
+    if(t[4]==6u) {
+        volatile uint32_t *d=(void *)(uintptr_t)*(volatile uint32_t *)(t+84u);
+        if(d[12]!=0u||d[13]!=256u||d[14]!=256u||d[16]!=0u||d[15]!=0u) {
+            uint32_t w=audio_uart_lv_area_width_451598(area);
+            uint32_t h=audio_uart_lv_area_height_4515a4(area);
+            uint32_t sy=d[14],sx=d[13],rotation=d[12];
+            audio_uart_ambiq_transform_area_488cda(area,w,h,rotation,sx,sy,(void *)(d+17));
+            area[0]+=*(volatile uint32_t *)(t+8u);
+            area[1]+=*(volatile uint32_t *)(t+12u);
+            area[2]+=*(volatile uint32_t *)(t+8u);
+            area[3]+=*(volatile uint32_t *)(t+12u);
+        }
+    }
+    y=0u-layer[2];x=0u-layer[1];
+    audio_uart_ambiq_area_move_450bb2(area,x,y);
+    if(!audio_uart_lv_area_intersect_450bcc((int32_t *)area,(const int32_t *)area,(const int32_t *)clip))return;
+    audio_uart_lv_draw_flush_cache_48abb8(buffer,area);
+    if((uint8_t)audio_uart_ambiq_bind_buffer_4b092a(buffer,clip,0u)!=1u)return;
+    switch(t[4]) {
+    case 1:audio_uart_ambiq_draw_fill_53dc38(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u),(void *)(t+8u));break;
+    case 2:audio_uart_ambiq_draw_border_53df00(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u),(void *)(t+8u));break;
+    case 3:audio_uart_ambiq_draw_box_shadow_540036(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u),(void *)(t+8u));break;
+    case 5: {
+        volatile uint32_t *b=buffer;
+        uint32_t height=b[1]>>16,width=(uint16_t)b[1];
+        audio_uart_ambiq_set_resolution_4b0bea(width,height);
+        audio_uart_ambiq_draw_label_53faa6(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u),(void *)(t+8u));
+        break;
+    }
+    case 6:audio_uart_ambiq_draw_image_53f42a(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u),(void *)(t+8u));break;
+    case 7:audio_uart_ambiq_draw_layer_53f400(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u),(void *)(t+8u));break;
+    case 8:audio_uart_ambiq_draw_line_53ecfc(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u));break;
+    case 9:audio_uart_ambiq_draw_arc_53f09c(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u),(void *)(t+8u));break;
+    case 10:audio_uart_ambiq_draw_triangle_53e728(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u));break;
+    case 11:audio_uart_ambiq_draw_mask_5409f0(task,(void *)(uintptr_t)*(volatile uint32_t *)(t+84u),(void *)(t+8u));break;
+    default:break;
+    }
+    audio_uart_ambiq_submit_4b0c8a(1u);
+    audio_uart_lv_draw_invalidate_cache_48ab30(buffer,area);
+}
+
+#include <stdint.h>
+/* Native4c73c4..4c73d6. Forward word copy, including overlapping areas. */
+void audio_uart_ambiq_area_copy_4c73c4(uint32_t *destination,const void *source) {
+    volatile uint32_t *d=destination;
+    const volatile uint32_t *s=source;
+    d[0]=s[0];d[1]=s[1];d[2]=s[2];d[3]=s[3];
+}
+/* Native450bb2..450bcc: x1,x2,y1,y2 access ordering and wrapped sums. */
+void audio_uart_ambiq_area_move_450bb2(uint32_t *area,uint32_t x,uint32_t y) {
+    volatile uint32_t *a=area;
+    a[0]=a[0]+x;
+    a[2]=a[2]+x;
+    a[1]=a[1]+y;
+    a[3]=a[3]+y;
+}
+
+#include <stdint.h>
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lv_draw_full_area_48b8d8(void *,void *);
+extern void audio_uart_lv_area_set_450b5c(void *,uint32_t,uint32_t,uint32_t,uint32_t);
+static void cache_assert(uint32_t line,const char *name,const char *expression) {
+    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c";
+    audio_uart_lvgl_log(3u,source,line,name,"Asserted at expression: %s (%s)",expression,"NULL pointer");
+    for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+}
+/* Native48ab30..48abb8. Cached handler table; callback freshly reread. */
+void audio_uart_lv_draw_invalidate_cache_48ab30(void *buffer,const void *area) {
+    volatile uint32_t *b=buffer;
+    if(!b)cache_assert(121u,"lv_draw_buf_invalidate_cache","draw_buf != NULL");
+    if(!b[6])cache_assert(122u,"lv_draw_buf_invalidate_cache","draw_buf->handlers != NULL");
+    volatile uint32_t *h=(void *)(uintptr_t)b[6];
+    if(h[3]) {
+        uint32_t full[4];
+        if(!area){audio_uart_lv_draw_full_area_48b8d8(buffer,full);area=full;}
+        uint32_t callback=h[3];
+        ((void (*)(void *,const void *))(uintptr_t)callback)(buffer,area);
+    }
+}
+/* Native48abb8..48ac40. Same contract, flush slot at handlerword4. */
+void audio_uart_lv_draw_flush_cache_48abb8(void *buffer,const void *area) {
+    volatile uint32_t *b=buffer;
+    if(!b)cache_assert(143u,"lv_draw_buf_flush_cache","draw_buf != NULL");
+    if(!b[6])cache_assert(144u,"lv_draw_buf_flush_cache","draw_buf->handlers != NULL");
+    volatile uint32_t *h=(void *)(uintptr_t)b[6];
+    if(h[4]) {
+        uint32_t full[4];
+        if(!area){audio_uart_lv_draw_full_area_48b8d8(buffer,full);area=full;}
+        uint32_t callback=h[4];
+        ((void (*)(void *,const void *))(uintptr_t)callback)(buffer,area);
+    }
+}
+/* Native48b8d8..48b8f6. Fresh height then width header reads, uint16 zero wraps. */
+void audio_uart_lv_draw_full_area_48b8d8(void *buffer,void *area) {
+    const volatile uint32_t *b=buffer;
+    uint32_t y2=(b[1]>>16)-1u;
+    uint32_t x2=(uint16_t)b[1]-1u;
+    audio_uart_lv_area_set_450b5c(area,0u,0u,x2,y2);
+}
+
+#include <stdint.h>
+/* Native450b5c..450b6c; four words written in coordinate order. */
+void audio_uart_lv_area_set_450b5c(void *area,uint32_t x1,uint32_t y1,uint32_t x2,uint32_t y2) {
+    volatile uint32_t *a=area;
+    a[0]=x1;a[1]=y1;a[2]=x2;a[3]=y2;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_ambiq_unit_cell[];
+extern void audio_uart_nema_cl_submit_514cf2(void *);
+extern int32_t audio_uart_nema_cl_wait_514d00(void *);
+extern void audio_uart_nema_cl_unbind_5144ba(void);
+extern int32_t audio_uart_nema_power_control_51419a(uint32_t,uint32_t);
+extern uint32_t audio_uart_ambiq_context_unlock_4b0886(void *);
+extern uint32_t audio_uart_nema_get_error_4b128a(void);
+extern uint32_t audio_uart_nema_vg_get_error_51564c(void);
+extern const char *audio_uart_nema_error_interpret_4b0594(uint32_t);
+extern const char *audio_uart_nema_vg_error_interpret_4b0584(uint32_t);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+/* Native4c791a..4c7920; mutable default unit cell read once per invocation. */
+void *audio_uart_ambiq_default_unit_4c791a(void) {
+    return (void *)(uintptr_t)audio_uart_ambiq_unit_cell[0];
+}
+/* Native4b0c8a..4b0d38. Native power failure returns0 before unlock/errors. */
+uint32_t audio_uart_ambiq_submit_4b0c8a(uint32_t sync) {
+    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
+    static const char name[]="lv_draw_ambiq_common_end";
+    uint8_t *unit=audio_uart_ambiq_default_unit_4c791a();
+    if((uint8_t)sync) {
+        audio_uart_nema_cl_submit_514cf2(unit+144u);
+        audio_uart_nema_cl_wait_514d00(unit+144u);
+        audio_uart_nema_cl_unbind_5144ba();
+        int32_t power=audio_uart_nema_power_control_51419a(2u,1u);
+        if(power) {
+            audio_uart_lvgl_log(3u,source,538u,name,"Power control failed: %d\r\n",power);
+            return 0u;
+        }
+    }
+    audio_uart_ambiq_context_unlock_4b0886(unit);
+    uint32_t error=audio_uart_nema_get_error_4b128a();
+    if(error) {
+        const char *text=audio_uart_nema_error_interpret_4b0594(error);
+        audio_uart_lvgl_log(3u,source,555u,name,"NemaGFX error 0x%lx, %s\r\n",error,text);
+    }
+    error=audio_uart_nema_vg_get_error_51564c();
+    if(error) {
+        const char *text=audio_uart_nema_vg_error_interpret_4b0584(error);
+        audio_uart_lvgl_log(3u,source,559u,name,"NemaVG error: 0x%lx, %s\r\n",error,text);
+    }
+    return 1u;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[]; /* RAM20074efc */
+/* Native4b128a..4b1298: read and clear error on the same saved context. */
+uint32_t audio_uart_nema_get_error_4b128a(void) {
+    volatile uint32_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+    uint32_t error=context[8];
+    context[8]=0u;
+    return error;
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_lv_unlock_core(void *); /* native4d4696 selected */
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+/* Native4b0886..4b092a. Decrement/assert BEFORE unlocking, unlike provider. */
+uint32_t audio_uart_ambiq_context_unlock_4b0886(void *unit) {
+    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
+    static const char name[]="lv_draw_ambiq_nema_context_unlock";
+    if(!unit) {
+        audio_uart_lvgl_log(3u,source,295u,name,"Asserted at expression: %s (%s)","unit != NULL","Ambiq GPU draw unit is not initialized!");
+        for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+    }
+    volatile uint32_t *count=(void *)((uint8_t *)unit+140u);
+    *count=*count-1u;
+    if(*count) {
+        audio_uart_lvgl_log(3u,source,297u,name,"Asserted at expression: %s (%s)","unit->nema_context_lock_count == 0","Ambiq GPU mutex lock count error!");
+        for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+    }
+    uint32_t result=audio_uart_lv_unlock_core((uint8_t *)unit+132u);
+    if((uint8_t)result!=1u)
+        audio_uart_lvgl_log(3u,source,301u,name,"Ambiq GPU mutex unlock failed!");
+    return (uint8_t)result;
+}
+
+#include <stdint.h>
+extern void *audio_uart_ambiq_default_unit_4c791a(void);
+extern void audio_uart_lv_memzero_48949c(void *,uint32_t);
+extern uint32_t audio_uart_lv_area_intersect_450bcc(int32_t *,const int32_t *,const int32_t *);
+extern int32_t audio_uart_ambiq_color_format_dst_4b064e(uint32_t);
+extern uint32_t audio_uart_ambiq_context_lock_4b07de(void *);
+extern int32_t audio_uart_nema_power_control_51419a(uint32_t,uint32_t);
+extern void *audio_uart_nema_cl_get_bound_5144fa(void);
+extern void audio_uart_nema_cl_rewind_514384(void *);
+extern void audio_uart_nema_cl_bind_sectored_5143d4(void *,uint32_t);
+extern int32_t audio_uart_nema_last_cl_id_51418e(void);
+extern uint32_t audio_uart_nema_last_submission_id_514194(void);
+extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
+extern void audio_uart_ambiq_blend_clear_4b075e(void *);
+extern uint32_t audio_uart_ambiq_context_unlock_4b0886(void *);
+extern void audio_uart_nema_bind_tex_4b1298(uint32_t,uint32_t,uint32_t,uint32_t,int32_t,uint32_t,uint32_t);
+extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
+extern void audio_uart_ambiq_clip_change_4b077e(void *,const void *,uint32_t);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+/* Native4b092a..4b0b5a; unit cached once, all source/header reads volatile.
+ * Null buffer is dereferenced before the later validation, as in native. */
+uint32_t audio_uart_ambiq_bind_buffer_4b092a(void *buffer,const void *raw_clip,uint32_t extend) {
+    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
+    static const char name[]="lv_draw_ambiq_common_start";
+    volatile uint32_t *b=buffer;
+    uint8_t *unit=audio_uart_ambiq_default_unit_4c791a();
+    uint32_t bounds[4],clip[4];
+    audio_uart_lv_memzero_48949c(bounds,16u);
+    bounds[2]=(uint16_t)b[1]-1u;
+    bounds[3]=(b[1]>>16)-1u;
+    if(!raw_clip)raw_clip=bounds;
+    if(!audio_uart_lv_area_intersect_450bcc((int32_t *)clip,raw_clip,(const int32_t *)bounds))return 0u;
+    if((int32_t)(clip[2]-clip[0])<1||(int32_t)(clip[3]-clip[1])<1)return 0u;
+    if(!buffer||!b[4]||(int32_t)(uint16_t)b[1]<1||(int32_t)(b[1]>>16)<1) {
+        audio_uart_lvgl_log(3u,source,332u,name,"Invalid buffer setting!");return 0u;
+    }
+    int32_t format=audio_uart_ambiq_color_format_dst_4b064e((uint8_t)(b[0]>>8));
+    uint32_t data=b[4];
+    if(format==-1&&(uint8_t)extend==1u) {
+        if((uint8_t)(b[0]>>8)==20u)format=4;
+        else if((uint32_t)((uint8_t)(b[0]>>8))-7u<4u) {
+            uint32_t count;
+            switch((uint8_t)(b[0]>>8)) {
+            case 7:count=2u;format=11;break;
+            case 8:count=4u;format=49;break;
+            case 9:count=16u;format=53;break;
+            default:count=256u;format=9;break;
+            }
+            data+=count*4u;
+        }
+    }
+    if(format==-1) {
+        audio_uart_lvgl_log(3u,source,377u,name,"Unsupported layer color format!");return 0u;
+    }
+    audio_uart_ambiq_context_lock_4b07de(unit);
+    int32_t power=audio_uart_nema_power_control_51419a(0u,1u);
+    if(power) {
+        audio_uart_lvgl_log(3u,source,385u,name,"Power control failed: %d\r\n",power);return 0u;
+    }
+    void *bound=audio_uart_nema_cl_get_bound_5144fa();
+    if(!bound) {
+        audio_uart_nema_cl_rewind_514384(unit+144u);
+        audio_uart_nema_cl_bind_sectored_5143d4(unit+144u,100u);
+    } else if(bound!=unit+144u) {
+        audio_uart_ambiq_context_unlock_4b0886(unit);
+        audio_uart_lvgl_log(3u,source,399u,name,"Unexpected command list in the context!\r\n");return 0u;
+    }
+    if(audio_uart_nema_last_cl_id_51418e()<0&&audio_uart_nema_last_submission_id_514194()==0u) {
+        audio_uart_lv_basic_box_clear_454746(unit+88u,0u,28u);
+        audio_uart_lv_basic_box_clear_454746(unit+116u,0u,16u);
+        audio_uart_ambiq_blend_clear_4b075e(unit);
+    }
+    volatile uint32_t *old=(void *)(unit+88u);
+    if(b[4]!=old[4]||(uint16_t)b[1]!=(uint16_t)old[1]||(b[1]>>16)!=(old[1]>>16)
+       ||(uint8_t)(b[0]>>8)!=(uint8_t)(old[0]>>8)||(uint16_t)b[2]!=(uint16_t)old[2]) {
+        uint32_t stride=(uint16_t)b[2],height=b[1]>>16,width=(uint16_t)b[1];
+        audio_uart_nema_bind_tex_4b1298(0u,data,width,height,format,stride,0u);
+        audio_uart_checksum_copy(unit+88u,buffer,28u);
+    }
+    audio_uart_ambiq_clip_change_4b077e(unit,clip,0u);
+    return 1u;
+}
+
+#include <stdint.h>
+/* Native4b064e..4b06a8; destination formats differ from source map. */
+int32_t audio_uart_ambiq_color_format_dst_4b064e(uint32_t format) {
+    switch((uint8_t)format) {
+    case 6:return 9;
+    case 11:return 11;
+    case 12:return 49;
+    case 13:return 53;
+    case 14:return 9;
+    case 15:return 57;
+    case 16:return 16;
+    case 17:return 17;
+    case 18:return 4;
+    case 21:return 68;
+    default:return -1;
+    }
+}
+
+#include <stdint.h>
+extern void *audio_uart_ambiq_default_unit_4c791a(void);
+/* Native4b075e..4b077e: NULL chooses default, record clears without callbacks. */
+void audio_uart_ambiq_blend_clear_4b075e(void *unit) {
+    if(!unit)unit=audio_uart_ambiq_default_unit_4c791a();
+    volatile uint8_t *u=unit;
+    *(volatile uint32_t *)(u+80u)=0u;
+    u[84]=255u;u[85]=255u;u[86]=255u;
+}
+
+#include <stdint.h>
+/* Native4d555c..4d558e; repeated WORD pattern, not byte-replicating memset.
+ * Return is the advanced destination; exact 16/8/4/2/1 store staging. */
+void *audio_uart_lv_word_fill_4d555c(void *destination,uint32_t size,uint32_t pattern) {
+    volatile uint8_t *p=destination;
+    while(size>=16u) {
+        *(volatile uint32_t *)(p+0u)=pattern;
+        *(volatile uint32_t *)(p+4u)=pattern;
+        *(volatile uint32_t *)(p+8u)=pattern;
+        *(volatile uint32_t *)(p+12u)=pattern;
+        p+=16u;size-=16u;
+    }
+    if(size&8u) {
+        *(volatile uint32_t *)(p+0u)=pattern;
+        *(volatile uint32_t *)(p+4u)=pattern;
+        p+=8u;
+    }
+    if(size&4u){*(volatile uint32_t *)p=pattern;p+=4u;}
+    if(size&2u){*(volatile uint16_t *)p=(uint16_t)pattern;p+=2u;}
+    if(size&1u){*p=(uint8_t)pattern;p+=1u;}
+    return (void *)p;
+}
+/* Native48949c..4894a2: two consumed arguments; zero pattern imposed. */
+void audio_uart_lv_memzero_48949c(void *destination,uint32_t size) {
+    (void)audio_uart_lv_word_fill_4d555c(destination,size,0u);
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_lv_lock_core(void *);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+/* Native4b07de..4b0886. Only lowbyte success1 increments the lock count. */
+uint32_t audio_uart_ambiq_context_lock_4b07de(void *unit) {
+    static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
+    static const char name[]="lv_draw_ambiq_nema_context_lock";
+    if(!unit) {
+        audio_uart_lvgl_log(3u,source,273u,name,"Asserted at expression: %s (%s)","unit != NULL","Ambiq GPU draw unit is not initialized!");
+        for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+    }
+    uint32_t result=audio_uart_lv_lock_core((uint8_t *)unit+132u);
+    if((uint8_t)result!=1u) {
+        audio_uart_lvgl_log(3u,source,277u,name,"Ambiq GPU mutex lock failed!");
+    } else {
+        volatile uint32_t *count=(void *)((uint8_t *)unit+140u);
+        *count=*count+1u;
+        if(*count!=1u) {
+            audio_uart_lvgl_log(3u,source,282u,name,"Asserted at expression: %s (%s)","unit->nema_context_lock_count == 1","Ambiq GPU mutex lock count error!");
+            for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+        }
+    }
+    return (uint8_t)result;
+}
+
+#include <stdint.h>
+struct audio_uart_nema_error_row { uint32_t code; const char *text; };
+/* Native4b0560..4b05a4; source-owned error labels from authenticated tables. */
+const char *audio_uart_nema_error_lookup_4b0560(const struct audio_uart_nema_error_row *rows,uint32_t count,uint32_t error) {
+    for(uint32_t i=0;i<count;++i) if(rows[i].code==error) return rows[i].text;
+    return "UNKNOWN";
+}
+static const struct audio_uart_nema_error_row vg_rows[] = {
+    { 0u, "NO_ERROR" },
+    { 1u, "BAD_HANDLE" },
+    { 2u, "BAD_BUFFER" },
+    { 4u, "INVALID_FILL_RULE" },
+    { 8u, "INVALID_PAINT_TYPE" },
+    { 16u, "INVALID_VERTEX_DATA" },
+    { 32u, "NO_RADIAL_ENABLED" },
+    { 64u, "NO_BOUND_CL" },
+    { 128u, "INVALID_ARGUMENTS" },
+    { 256u, "INVALID_ARC_DATA" },
+    { 512u, "CL_FULL" },
+    { 1024u, "DRAW_OUT_OF_BOUNDS" },
+    { 2048u, "INVALID_MASKING_OBJ" },
+    { 4096u, "INVALID_MASKING_FORMAT" },
+    { 8192u, "INVALID_LUT_IDX_FORMAT" },
+    { 16384u, "COORDS_OUT_OF_RANGE" },
+    { 32768u, "EMPTY_TSVG" },
+    { 65536u, "NO_BOUND_FONT" },
+    { 131072u, "UNSUPPORTED_FONT" },
+    { 262144u, "NON_INVERTIBLE_MATRIX" },
+    { 524288u, "INVALID_GRAD_STOPS" },
+    { 1048576u, "NO_INIT" },
+    { 2097152u, "INVALID_STROKE_WIDTH" },
+    { 4194304u, "INVALID_OPACITY" },
+    { 8388608u, "INVALID_CAP_STYLE" },
+    { 16777216u, "INVALID_JOIN_STYLE" },
+    { 33554432u, "INVALID_STENCIL_SIZE" },
+    { 67108864u, "DEPRECATED_FONT" },
+};
+const char *audio_uart_nema_vg_error_interpret_4b0584(uint32_t error) { return audio_uart_nema_error_lookup_4b0560(vg_rows,28u,error); }
+static const struct audio_uart_nema_error_row gfx_rows[] = {
+    { 0u, "NO_ERROR" },
+    { 1u, "SYS_INIT_FAILURE" },
+    { 2u, "GPU_ABSENT" },
+    { 4u, "RB_INIT_FAILURE" },
+    { 8u, "NON_EXPANDABLE_CL_FULL" },
+    { 16u, "CL_EXPANSION" },
+    { 32u, "OUT_OF_GFX_MEMORY" },
+    { 64u, "OUT_OF_HOST_MEMORY" },
+    { 128u, "NO_BOUND_CL" },
+    { 256u, "NO_BOUND_FONT" },
+    { 512u, "GFX_MEMORY_INIT" },
+    { 1024u, "DRIVER_FAILURE" },
+    { 2048u, "MUTEX_INIT" },
+    { 4096u, "INVALID_BO" },
+    { 8192u, "INVALID_CL" },
+    { 16384u, "INVALID_CL_ALIGMENT" },
+    { 32768u, "NO_INIT" },
+    { 65536u, "INVALID_SECTORED_CL_SIZE" },
+};
+const char *audio_uart_nema_error_interpret_4b0594(uint32_t error) { return audio_uart_nema_error_lookup_4b0560(gfx_rows,18u,error); }
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_vg_context_cell; /* authenticated RAM0x20074f04 */
+/* Native51564c..51565c: saved context, read-and-clear error word. */
+uint32_t audio_uart_nema_vg_get_error_51564c(void) {
+    volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_vg_context_cell;
+    uint32_t error=context[32];
+    context[32]=0u;
+    return error;
+}
+/* Native51565c..51566c: OR error bits into saved context. */
+void audio_uart_nema_vg_set_error_51565c(uint32_t error) {
+    volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_vg_context_cell;
+    context[32]=context[32]|error;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+/* Native5144ba..5144fa: cached context/list, wrapped signed capacity test. */
+void audio_uart_nema_cl_unbind_5144ba(void) {
+    volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];
+    volatile uint32_t *list=(volatile uint32_t *)(uintptr_t)context[1];
+    if(list) {
+        uint32_t used=list[5];
+        uint32_t capacity=list[4];
+        if((int32_t)capacity >= (int32_t)(used+2u)) {
+            volatile uint32_t *commands=(volatile uint32_t *)(uintptr_t)list[2];
+            commands[used]=0x50000u;
+            commands[used+1u]=0u;
+            list[6]=list[6]&~8u;
+        }
+        list[6]=list[6]&~32u;
+    }
+    context[1]=0u;
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_nema_power_status_47f90c(uint32_t,uint8_t *);
+extern uint32_t audio_power_peripheral_on(uint32_t);
+extern uint32_t audio_power_peripheral_off(uint32_t);
+extern uint32_t audio_uart_nema_get_error_4b128a(void);
+extern uint32_t audio_uart_nema_vg_get_error_51564c(void);
+extern void audio_uart_nema_reset_last_submission_514184(void);
+extern int32_t audio_uart_nema_gpu_reinit_4b11b0(void);
+extern void audio_uart_nema_vg_reinit_5224b6(void);
+extern uint32_t audio_uart_nema_reg_read_51403c(uint32_t);
+extern volatile uint32_t audio_uart_nema_vg_context_cell;
+/* Native51419a..514238. Preserve low-byte policy and ordered error consumption. */
+int32_t audio_uart_nema_power_control_51419a(uint32_t state,uint32_t reinit) {
+    uint8_t powered;
+    uint32_t result=audio_uart_nema_power_status_47f90c(20u,&powered);
+    if(result) return result;
+    state=(uint8_t)state;
+    if(state==0u) {
+        if(powered) return 0u;
+        result=audio_power_peripheral_on(20u);
+        if(result || (uint8_t)reinit==0u) return result;
+        (void)audio_uart_nema_get_error_4b128a();
+        audio_uart_nema_reset_last_submission_514184();
+        audio_uart_nema_gpu_reinit_4b11b0();
+        if(audio_uart_nema_get_error_4b128a()) return 1u;
+        if(audio_uart_nema_vg_context_cell!=0u) {
+            (void)audio_uart_nema_vg_get_error_51564c();
+            audio_uart_nema_vg_reinit_5224b6();
+            if(audio_uart_nema_vg_get_error_51564c()) return 1u;
+        }
+        return 0u;
+    }
+    if(state<=2u) {
+        if(!powered) return 0u;
+        if(audio_uart_nema_reg_read_51403c(252u)) return 3u;
+        return audio_power_peripheral_off(20u);
+    }
+    return 7u;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_last_submission; /* authenticated RAM20002e08 */
+extern const uint32_t audio_uart_nema_register_base; /* authenticated flash78f2f4 */
+/* Native514184..514194. */
+void audio_uart_nema_reset_last_submission_514184(void) { audio_uart_nema_last_submission=UINT32_MAX; }
+uint32_t audio_uart_nema_last_submission_51418e(void) { return audio_uart_nema_last_submission; }
+/* Native51403c..514050. Wrapped byte-offset register access. */
+uint32_t audio_uart_nema_reg_read_51403c(uint32_t offset) {
+    return *(volatile uint32_t *)(uintptr_t)(audio_uart_nema_register_base+offset);
+}
+void audio_uart_nema_reg_write_514046(uint32_t offset,uint32_t value) {
+    *(volatile uint32_t *)(uintptr_t)(audio_uart_nema_register_base+offset)=value;
+}
+
+#include <stdint.h>
+extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
+/* Source-owned configuration recovered from authenticated table6becb0. */
+static const uint32_t peripheral_rows[34][4] = {
+    { 0x40021004u, 0x1u, 0x40021008u, 0x30000001u },
+    { 0x40021004u, 0x10000000u, 0x40021008u, 0x30000001u },
+    { 0x40021004u, 0x20000000u, 0x40021008u, 0x30000001u },
+    { 0x40021004u, 0x2u, 0x40021008u, 0x1eu },
+    { 0x40021004u, 0x4u, 0x40021008u, 0x1eu },
+    { 0x40021004u, 0x8u, 0x40021008u, 0x1eu },
+    { 0x40021004u, 0x10u, 0x40021008u, 0x1eu },
+    { 0x40021004u, 0x20u, 0x40021008u, 0x1e0u },
+    { 0x40021004u, 0x40u, 0x40021008u, 0x1e0u },
+    { 0x40021004u, 0x80u, 0x40021008u, 0x1e0u },
+    { 0x40021004u, 0x100u, 0x40021008u, 0x1e0u },
+    { 0x40021004u, 0x200u, 0x40021008u, 0x1e00u },
+    { 0x40021004u, 0x400u, 0x40021008u, 0x1e00u },
+    { 0x40021004u, 0x800u, 0x40021008u, 0x1e00u },
+    { 0x40021004u, 0x1000u, 0x40021008u, 0x1e00u },
+    { 0x40021004u, 0x2000u, 0x40021008u, 0x2000u },
+    { 0x40021004u, 0x4000u, 0x40021008u, 0x4000u },
+    { 0x40021004u, 0x8000u, 0x40021008u, 0x8000u },
+    { 0x40021004u, 0x10000u, 0x40021008u, 0x10000u },
+    { 0x40021004u, 0x20000u, 0x40021008u, 0x20000u },
+    { 0x40021004u, 0x40000u, 0x40021008u, 0x40000u },
+    { 0x40021004u, 0x80000u, 0x40021008u, 0x80000u },
+    { 0x40021004u, 0x100000u, 0x40021008u, 0x100000u },
+    { 0x40021004u, 0x200000u, 0x40021008u, 0x200000u },
+    { 0x40021004u, 0x400000u, 0x40021008u, 0x400000u },
+    { 0x40021004u, 0x800000u, 0x40021008u, 0x800000u },
+    { 0x40021004u, 0x1000000u, 0x40021008u, 0x1000000u },
+    { 0x40021004u, 0x2000000u, 0x40021008u, 0x2000000u },
+    { 0x40021004u, 0x4000000u, 0x40021008u, 0x4000000u },
+    { 0x40021004u, 0x8000000u, 0x40021008u, 0x8000000u },
+    { 0x4002100cu, 0x4u, 0x40021010u, 0x4u },
+    { 0x4002100cu, 0x40u, 0x40021010u, 0xc0u },
+    { 0x4002100cu, 0x80u, 0x40021010u, 0xc0u },
+    { 0x4002100cu, 0x400u, 0x40021010u, 0x400u },
+};
+/* Native47ef18..47ef38. */
+uint32_t audio_uart_power_peripheral_descriptor_47ef18(uint32_t *out,uint32_t peripheral) {
+    if(!out || peripheral>=34u) return 6u;
+    audio_uart_checksum_copy(out,peripheral_rows[peripheral],16u);
+    return 0u;
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_power_peripheral_descriptor_47ef18(uint32_t *,uint32_t);
+/* Native47f90c..47f942: output clear precedes descriptor lookup. */
+uint32_t audio_uart_nema_power_status_47f90c(uint32_t peripheral,uint8_t *powered) {
+    if(!powered) return 6u;
+    *powered=0u;
+    uint32_t descriptor[4];
+    uint32_t result=audio_uart_power_peripheral_descriptor_47ef18(descriptor,(uint8_t)peripheral);
+    if(result) return result;
+    uint32_t status=*(volatile uint32_t *)(uintptr_t)descriptor[2];
+    *powered=(uint8_t)((status&descriptor[3])!=0u);
+    return 0u;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern uint32_t audio_uart_nema_reg_read_51403c(uint32_t);
+extern void audio_uart_nema_reg_write_514046(uint32_t,uint32_t);
+extern void audio_uart_nema_cl_unbind_5144ba(void);
+extern void audio_uart_lv_memzero_48949c(void *,uint32_t);
+extern void audio_uart_nema_child_523c88(void);
+extern void audio_uart_nema_child_523304(uint32_t);
+extern void audio_uart_nema_child_5138a4(void);
+extern void audio_uart_nema_child_514846(uint32_t,uint32_t);
+extern uint32_t audio_uart_nema_child_522602(void);
+extern void audio_uart_nema_child_52296a(uint32_t);
+extern void audio_uart_nema_child_52262e(uint32_t);
+extern uint32_t audio_uart_nema_child_52261a(void);
+/* Native4b11b0..4b127c. Keep fresh context-cell loads across child calls. */
+int32_t audio_uart_nema_gpu_reinit_4b11b0(void) {
+    if(audio_uart_nema_reg_read_51403c(492u)!=0x86362000u) {
+        volatile uint32_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+        context[8]=context[8]|2u;
+        return -1;
+    }
+    audio_uart_nema_cl_unbind_5144ba();
+    audio_uart_lv_memzero_48949c((void *)(uintptr_t)audio_uart_nema_context_cell[0],256u);
+    audio_uart_nema_child_523c88();
+    audio_uart_nema_reg_write_514046(232u,0u);
+    audio_uart_nema_reg_write_514046(252u,0u);
+    audio_uart_nema_reg_write_514046(904u,1u);
+    audio_uart_nema_child_523304(0u);
+    audio_uart_nema_child_5138a4();
+    audio_uart_nema_child_514846(512u,0u);
+    audio_uart_nema_child_514846(516u,UINT32_MAX);
+    if(!(audio_uart_nema_child_522602()&(1u<<18))) {
+        volatile uint8_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+        context[10]=0u;
+    } else {
+        audio_uart_nema_child_52296a(7u);
+        volatile uint8_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+        context[9]=0u;
+        context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+        uint32_t a=context[8];
+        uint32_t b=context[9];
+        audio_uart_nema_child_52262e(a|b);
+    }
+    volatile uint32_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+    context[5]=0u;
+    uint32_t a=context[3],b=context[4],c=context[7];
+    context[6]=a|b|c;
+    if(audio_uart_nema_child_52261a()&(1u<<9)) {
+        audio_uart_nema_reg_write_514046(884u,0u);
+        audio_uart_nema_reg_write_514046(872u,0u);
+    }
+    return 0;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_capabilities; /* authenticated RAM20074f00 */
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern uint32_t audio_uart_nema_reg_read_51403c(uint32_t);
+extern void audio_uart_nema_child_514846(uint32_t,uint32_t);
+/* Native522602..52261a: zero cache triggers read, then fresh reread. */
+uint32_t audio_uart_nema_child_522602(void) {
+    if(audio_uart_nema_capabilities==0u)
+        audio_uart_nema_capabilities=audio_uart_nema_reg_read_51403c(496u);
+    return audio_uart_nema_capabilities;
+}
+/* Native52261a..522622. */
+uint32_t audio_uart_nema_child_52261a(void) { return audio_uart_nema_reg_read_51403c(500u); }
+/* Native52296a..522974. */
+void audio_uart_nema_child_52296a(uint32_t mode) { audio_uart_nema_child_514846(480u,mode); }
+/* Native52262e..52264e: saved context; ordered independent word reads. */
+void audio_uart_nema_child_52262e(uint32_t enabled) {
+    uint32_t flags=enabled?0x40000000u:0u;
+    volatile uint32_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+    context[3]=flags;
+    uint32_t a=context[5];
+    uint32_t b=context[4];
+    uint32_t c=context[7];
+    context[6]=flags|a|b|c;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern void audio_uart_nema_register_emit_523e92(uint32_t,uint32_t);
+extern void audio_uart_nema_sector_rollover_5147b0(void *);
+extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern void *audio_uart_nema_node_allocate_51416c(uint32_t);
+extern void audio_uart_nema_buffer_create_514070(uint32_t *,uint32_t,uint32_t);
+extern void audio_uart_nema_cl_node_release_514178(void *);
+extern void audio_uart_nema_cl_unbind_5144ba(void);
+static int32_t emit_signed_div(int32_t x,int32_t y) {
+    if(y==0) return 0;
+    if(x==INT32_MIN && y==-1) return INT32_MIN;
+    return x/y;
+}
+static int32_t emit_space(volatile uint32_t *list) {
+    uint32_t delta;
+    if(((volatile uint8_t *)list)[24]&32u) {
+        uint32_t sector=list[11],used=list[5];
+        delta=sector-used+sector*(uint32_t)emit_signed_div((int32_t)used,(int32_t)sector);
+    } else { uint32_t capacity=list[4],used=list[5];delta=capacity-used; }
+    return (int32_t)delta/2;
+}
+static void emit_store(uint32_t base,uint32_t index,uint32_t value) {
+    *(volatile uint32_t *)(uintptr_t)(base+index*4u)=value;
+}
+static void emit_pair(volatile uint32_t *list,uint32_t first,uint32_t second) {
+    uint32_t used=list[5];
+    emit_store(list[2],used,first);
+    ++used;
+    emit_store(list[2],used,second);
+    list[5]=used+1u;
+}
+/* Native514846..514aec. Full sector/padding/allocation/chaining paths. */
+void audio_uart_nema_child_514846(uint32_t reg,uint32_t value) {
+    volatile uint32_t *context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+    volatile uint32_t *list=(void *)(uintptr_t)context[1];
+    if(!list) { audio_uart_nema_register_emit_523e92(reg,value);return; }
+    list[6]=list[6]&~8u;
+    int32_t available=emit_space(list);
+    uint32_t flags=list[6];
+    if(flags&32u) {
+        if(available<=1) {
+            ((volatile uint8_t *)context)[249]=0u;
+            context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+            audio_uart_nema_sector_rollover_5147b0((void *)(uintptr_t)context[1]);
+        }
+    } else if(!(flags&2u)) {
+        uint32_t used=list[5],capacity=list[4];
+        if((int32_t)capacity<(int32_t)(used+2u)) {audio_uart_nema_error_set_4b127c(8u);return;}
+    } else {
+        uint32_t used=list[5],capacity=list[4];
+        if((int32_t)(used+4u)>=(int32_t)capacity) {
+            int32_t padding=(int32_t)((uint32_t)emit_space(list)-2u);
+            if(padding>0) {
+                uint32_t n=(uint32_t)padding;
+                for(uint32_t i=0;i<(n&3u);++i) emit_pair(list,0x10000u,0u);
+                for(uint32_t i=0;i<(n>>2);++i) {
+                    uint32_t k=list[5];
+                    emit_store(list[2],k,0x10000u);++k;
+                    emit_store(list[2],k,0u);++k;
+                    uint32_t data=list[2];list[5]=k;
+                    emit_store(data,k,0x10000u);++k;
+                    emit_store(list[2],k,0u);++k;
+                    data=list[2];list[5]=k;
+                    emit_store(data,k,0x10000u);++k;
+                    emit_store(list[2],k,0u);++k;
+                    data=list[2];list[5]=k;
+                    emit_store(data,k,0x10000u);++k;
+                    emit_store(list[2],k,0u);list[5]=k+1u;
+                }
+            }
+            volatile uint32_t *node=(void *)(uintptr_t)list[8];
+            if(!node) {
+                node=audio_uart_nema_node_allocate_51416c(60u);
+                if(!node) {audio_uart_nema_error_set_4b127c(16u);return;}
+                uint32_t desc[4];audio_uart_nema_buffer_create_514070(desc,0u,1024u);
+                node[0]=desc[0];node[1]=desc[1];node[2]=desc[2];node[3]=desc[3];
+                node[4]=(uint32_t)((int32_t)desc[0]/8)*2u;
+                node[5]=0u;node[7]=UINT32_MAX;node[13]=UINT32_MAX;node[14]=UINT32_MAX;node[6]=2u;
+                uint32_t data=node[2];
+                node[8]=0u;node[9]=0u;node[10]=0u;node[11]=0u;node[12]=0u;
+                if(!data) {audio_uart_nema_error_set_4b127c(16u);audio_uart_nema_cl_node_release_514178((void *)node);return;}
+                context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+                list=(void *)(uintptr_t)context[1];
+                uint32_t root=list[9];node[9]=root?root:(uint32_t)(uintptr_t)list;
+                list=(void *)(uintptr_t)context[1];node[6]=list[6]&~12u;
+            }
+            context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+            list=(void *)(uintptr_t)context[1];
+            if(!list) audio_uart_nema_error_set_4b127c(8192u);
+            else list[6]=list[6]|4u;
+            context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+            list=(void *)(uintptr_t)context[1];
+            uint32_t k=list[5];
+            emit_store(list[2],k,240u);++k;
+            uint32_t address=node[3];emit_store(list[2],k,address);++k;
+            uint32_t data=list[2];list[5]=k;
+            emit_store(data,k,244u);++k;
+            uint32_t capacity_next=node[4];emit_store(list[2],k,capacity_next);list[5]=k+1u;list[8]=(uint32_t)(uintptr_t)node;
+            if(!node) audio_uart_nema_error_set_4b127c(8192u);
+            else if(((volatile uint8_t *)node)[12]&7u) audio_uart_nema_error_set_4b127c(16384u);
+            else {
+                if(context[1]) audio_uart_nema_cl_unbind_5144ba();
+                while(((volatile uint8_t *)node)[24]&4u) node=(void *)(uintptr_t)node[8];
+                context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];context[1]=(uint32_t)(uintptr_t)node;
+            }
+        }
+    }
+    context=(void *)(uintptr_t)audio_uart_nema_context_cell[0];
+    list=(void *)(uintptr_t)context[1];
+    emit_pair(list,reg,value);
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_ring_descriptor[];
+extern void audio_uart_nema_buffer_flush_5140ea(void *);
+extern void audio_uart_nema_reg_write_514046(uint32_t,uint32_t);
+/* Native523e92..523f0e: cached ring/data/capacity, fresh write-index reads. */
+void audio_uart_nema_register_emit_523e92(uint32_t reg,uint32_t value) {
+    volatile uint32_t *ring=(void *)(uintptr_t)audio_uart_nema_ring_descriptor[0];
+    uint32_t index=ring[4];
+    uint32_t capacity=audio_uart_nema_ring_descriptor[3];
+    uint32_t data=audio_uart_nema_ring_descriptor[1];
+    if((int32_t)capacity<(int32_t)(index+2u)) {
+        do {
+            ring[4]=index;
+            *(volatile uint32_t *)(uintptr_t)(data+index*4u)=0x10000u;
+            index=ring[4]+1u;
+        } while((int32_t)index<(int32_t)capacity && index!=0u);
+        ring[4]=0u;
+    }
+    index=ring[4];
+    *(volatile uint32_t *)(uintptr_t)(data+index*4u)=reg;
+    index=ring[4]+1u;
+    if((int32_t)index>=(int32_t)capacity)index=0u;
+    ring[4]=index;
+    *(volatile uint32_t *)(uintptr_t)(data+index*4u)=value;
+    index=ring[4]+1u;
+    if((int32_t)index>=(int32_t)capacity)index=0u;
+    ring[4]=index;
+    if(reg&0xff000000u) {
+        audio_uart_nema_buffer_flush_5140ea((void *)ring);
+        ring=(void *)(uintptr_t)audio_uart_nema_ring_descriptor[0];
+        uint32_t physical=audio_uart_nema_ring_descriptor[2];
+        index=ring[4];
+        audio_uart_nema_reg_write_514046(236u,(physical+index*4u)|4u);
+    }
+}
+
+#include <stdint.h>
+extern void *audio_uart_lv_pool_allocate_484180(void *,uint32_t);
+/* Native51416c..514178, same source pool contract as node-release514178. */
+void *audio_uart_nema_node_allocate_51416c(uint32_t size) { return audio_uart_lv_pool_allocate_484180((void *)(uintptr_t)0x20000338u,size); }
+
+#include <stdint.h>
+extern void *audio_uart_nema_pool_select_514050(uint32_t);
+extern uint32_t audio_uart_cache_clean_range_47510e(const uint32_t *);
+extern void audio_ble_privacy_cache_maintenance(const uint32_t *,uint8_t);
+/* Native5140ea..51411a: conditional clean, unconditional DSB. */
+void audio_uart_nema_buffer_flush_5140ea(void *buffer) {
+    volatile uint32_t *b=buffer;
+    const volatile uint8_t *pool=audio_uart_nema_pool_select_514050(b[1]);
+    if(pool[24]!=0u) {
+        uint32_t size=b[0];
+        uint32_t physical=b[3];
+        uint32_t range[2]={physical,size};
+        (void)audio_uart_cache_clean_range_47510e(range);
+    }
+    __asm__ volatile("dsb sy" ::: "memory");
+}
+/* Native51411a..514148: conditional invalidate, no extra barrier here. */
+void audio_uart_nema_buffer_invalidate_51411a(void *buffer) {
+    volatile uint32_t *b=buffer;
+    const volatile uint8_t *pool=audio_uart_nema_pool_select_514050(b[1]);
+    if(pool[24]!=0u) {
+        uint32_t size=b[0];
+        uint32_t physical=b[3];
+        uint32_t range[2]={physical,size};
+        audio_ble_privacy_cache_maintenance(range,0u);
+    }
+}
+/* Native514148..51416c: two fresh base loads; unsigned wrapped interval test. */
+uint32_t audio_uart_nema_pool_contains_514148(uint32_t id,uint32_t address,uint32_t size) {
+    const volatile uint32_t *pool=audio_uart_nema_pool_select_514050(id);
+    uint32_t base_first=pool[5];
+    uint32_t base_second=pool[5];
+    uint32_t length=pool[4];
+    uint32_t end=base_second+length;
+    if(address<base_first) return 0u;
+    return end>=address+size;
+}
+
+#include <stdint.h>
+static uint32_t clean_read(uint32_t a){return *(volatile uint32_t *)(uintptr_t)a;}
+static void clean_write(uint32_t a,uint32_t v){*(volatile uint32_t *)(uintptr_t)a=v;}
+static void clean_barrier(void){__asm__ volatile("dsb sy\n\tisb sy" ::: "memory");}
+/* Native47510e..475194: source-owned SCB addresses and native cache policy. */
+uint32_t audio_uart_cache_clean_range_47510e(const uint32_t *range) {
+    if(!(clean_read(0xe000ed14u)&(1u<<16))) {clean_barrier();return 0u;}
+    if(!range) {
+        clean_write(0xe000ed84u,0u);
+        __asm__ volatile("dsb sy" ::: "memory");
+        uint32_t ccsidr=clean_read(0xe000ed80u);
+        uint32_t set=(ccsidr>>13)&0x7fffu;
+        do {
+            uint32_t way=(ccsidr>>3)&0x3ffu;
+            do {
+                clean_write(0xe000ef6cu,((set<<5)&0x3fe0u)|(way<<30));
+                if(way==0u)break;
+                --way;
+            } while(1);
+            if(set==0u)break;
+            --set;
+        } while(1);
+        clean_barrier();
+    } else {
+        const volatile uint32_t *r=range;
+        uint32_t size=r[1];
+        uint32_t address=r[0];
+        if((int32_t)size>=1) {
+            uint32_t remaining=(address&31u)+size;
+            __asm__ volatile("dsb sy" ::: "memory");
+            do {
+                clean_write(0xe000ef68u,address);
+                address+=32u;
+                remaining-=32u;
+            } while((int32_t)remaining>=1);
+            clean_barrier();
+        }
+    }
+    return 0u;
+}
+
+#include <stdint.h>
+extern void *audio_uart_nema_pool_select_514050(uint32_t);
+extern void *audio_uart_lv_pool_allocate_484180(void *,uint32_t);
+extern void *audio_uart_lv_pool_aligned_allocate_4841d8(void *,uint32_t,uint32_t);
+extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
+/* Native514070..5140c6: hidden descriptor output, original full-width pool ID. */
+void audio_uart_nema_buffer_create_514070(uint32_t *out,uint32_t id,uint32_t size) {
+    void *pool=audio_uart_nema_pool_select_514050(id);
+    void *pointer;
+    if(((const volatile uint8_t *)pool)[24]!=0u) {
+        size=(size+31u)&~31u;
+        pointer=audio_uart_lv_pool_aligned_allocate_4841d8(pool,size,32u);
+    } else if(id<=2u) pointer=audio_uart_lv_pool_aligned_allocate_4841d8(pool,size,8u);
+    else pointer=audio_uart_lv_pool_allocate_484180(pool,size);
+    uint32_t descriptor[4]={size,id,(uint32_t)(uintptr_t)pointer,(uint32_t)(uintptr_t)pointer};
+    audio_uart_checksum_copy(out,descriptor,16u);
+}
+
+#include <stdint.h>
+extern int32_t xQueueSemaphoreTake(void *,uint32_t);
+extern int32_t audio_uart_queue_send(void *,const void *,uint32_t,uint32_t);
+extern void *audio_uart_lv_tlsf_aligned_allocate_4d0744(void *,uint32_t,uint32_t);
+extern uint32_t audio_uart_lv_allocation_size_4d05e4(void *);
+/* Native4841d8..484234: locked allocation and fresh accounting/high-water reads. */
+void *audio_uart_lv_pool_aligned_allocate_4841d8(void *cell,uint32_t bytes,uint32_t alignment) {
+    volatile uint32_t *pool=cell;
+    void *result=0;
+    if(bytes==0u)return 0;
+    if(xQueueSemaphoreTake((void *)(uintptr_t)pool[0],UINT32_MAX)==1) {
+        result=audio_uart_lv_tlsf_aligned_allocate_4d0744((void *)(uintptr_t)pool[1],alignment,bytes);
+        if(result) {
+            uint32_t size=audio_uart_lv_allocation_size_4d05e4(result);
+            pool[2]=size+pool[2];
+            uint32_t high=pool[3];
+            uint32_t current=pool[2];
+            if(high<current)high=pool[2];else high=pool[3];
+            pool[3]=high;
+        }
+        (void)audio_uart_queue_send((void *)(uintptr_t)pool[0],0,0u,0u);
+    }
+    return result;
+}
+
+#include <stdint.h>
+extern uint32_t g2_tlsf_adjust_request(uint32_t,uint32_t);
+extern void *g2_tlsf_find_suitable(void *,uint32_t);
+extern void *g2_tlsf_block_to_ptr(void *);
+extern void *g2_tlsf_align_ptr(void *,uint32_t);
+extern void *g2_tlsf_trim_free_leading_4d0444(void *,void *,uint32_t);
+extern void *g2_tlsf_prepare_allocation(void *,void *,uint32_t);
+extern void g2_file_close_error(const char *,const char *,uint32_t);
+/* Native4d0744..4d0802, pinned TLSF alignment policy with native gap16. */
+void *audio_uart_lv_tlsf_aligned_allocate_4d0744(void *pool,uint32_t alignment,uint32_t size) {
+    uint32_t adjusted=g2_tlsf_adjust_request(size,4u);
+    uint32_t requested=g2_tlsf_adjust_request(alignment+adjusted+16u,alignment);
+    if(adjusted==0u || alignment<5u)requested=adjusted;
+    void *block=g2_tlsf_find_suitable(pool,requested);
+    uint32_t minimum=*(const volatile uint32_t *)(uintptr_t)0x78f4c4u;
+    uint32_t overhead=*(const volatile uint32_t *)(uintptr_t)0x78f4bcu;
+    if(minimum+overhead!=16u)g2_file_close_error("sizeof(block_header_t) == block_size_min + block_header_overhead","D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\tlsf\\tlsf.c",1149u);
+    if(block) {
+        void *ptr=g2_tlsf_block_to_ptr(block);
+        void *aligned=g2_tlsf_align_ptr(ptr,alignment);
+        uint32_t gap=(uint32_t)(uintptr_t)aligned-(uint32_t)(uintptr_t)ptr;
+        if(gap!=0u && gap<16u) {
+            uint32_t offset=16u-gap;
+            if(alignment>=offset)offset=alignment;
+            aligned=g2_tlsf_align_ptr((void *)(uintptr_t)((uint32_t)(uintptr_t)aligned+offset),alignment);
+            gap=(uint32_t)(uintptr_t)aligned-(uint32_t)(uintptr_t)ptr;
+        }
+        if(gap) {
+            if(gap<16u)g2_file_close_error("gap >= gap_minimum && \"gap size too small\"","D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\tlsf\\tlsf.c",1173u);
+            block=g2_tlsf_trim_free_leading_4d0444(pool,block,gap);
+        }
+    }
+    return g2_tlsf_prepare_allocation(pool,block,adjusted);
+}
+
+#include <stdint.h>
+extern uint32_t g2_tlsf_block_can_split(void *,uint32_t);
+extern void *g2_tlsf_block_split(void *,uint32_t);
+extern void g2_tlsf_block_set_prev_free(void *);
+extern void *g2_tlsf_block_link_next(void *);
+extern void g2_tlsf_block_insert(void *,void *);
+/* Native4d0444..4d0484: leading free-block split and original-block reinsertion. */
+void *g2_tlsf_trim_free_leading_4d0444(void *pool,void *block,uint32_t size) {
+    void *result=block;
+    if(g2_tlsf_block_can_split(block,size)!=0u) {
+        uint32_t overhead=*(const volatile uint32_t *)(uintptr_t)0x78f4bcu;
+        result=g2_tlsf_block_split(block,size-overhead);
+        g2_tlsf_block_set_prev_free(result);
+        (void)g2_tlsf_block_link_next(block);
+        g2_tlsf_block_insert(pool,block);
+    }
+    return result;
+}
+
+#include <stdint.h>
+extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern void audio_uart_nema_list_finalize_514b7c(void *);
+extern void audio_uart_nema_submit_523f10(uint32_t);
+extern int32_t audio_uart_nema_poll_514026(uint32_t);
+static int32_t rollover_divide(int32_t a,int32_t b) {
+    if(b==0)return 0;
+    if(a==INT32_MIN && b==-1)return INT32_MIN;
+    return a/b;
+}
+/* Native5147b0..514846: preserve native quarter-sector policy and ready1 unconditional submit. */
+void audio_uart_nema_sector_rollover_5147b0(void *cell) {
+    volatile uint32_t *list=(volatile uint32_t *)cell;
+    if(!list) {audio_uart_nema_error_set_4b127c(8192u);return;}
+    uint32_t flags=((volatile uint8_t *)cell)[24];
+    uint32_t used=list[5];
+    if(flags&32u) {
+        uint32_t sector=list[11];
+        int32_t quotient=rollover_divide((int32_t)used,(int32_t)sector);
+        if(used-sector*(uint32_t)quotient==0u)return;
+    } else if(used==0u)return;
+    audio_uart_nema_list_finalize_514b7c(cell);
+    if(((volatile uint8_t *)cell)[24]&32u) {
+        volatile uint8_t *context=*(volatile uint8_t * volatile *)(uintptr_t)0x20074efcu;
+        uint32_t ready=context[249];
+        if(ready!=1u) {
+            uint32_t capacity=list[10],quarter=capacity>>2,position=list[12];
+            if(position!=quarter && position!=(capacity>>1) && position!=quarter*3u && position!=0u && list[13]!=0x00ffffffu)goto after_submit;
+        }
+        audio_uart_nema_submit_523f10(list[13]);
+        list[7]=list[13];
+    } else audio_uart_nema_submit_523f10(list[7]);
+after_submit:
+    if(list[7]==0x00ffffffu && audio_uart_nema_poll_514026(0x00ffffffu)>=0)list[7]=UINT32_MAX;
+}
+
+#include <stdint.h>
+extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern void audio_uart_nema_buffer_flush_5140ea(void *);
+extern uint32_t audio_uart_nema_reg_read_51403c(uint32_t);
+extern int32_t audio_uart_nema_poll_514026(uint32_t);
+extern uint32_t audio_uart_nema_sector_finalize_523ce0(uint32_t,uint32_t);
+extern uint32_t audio_uart_nema_chain_finalize_523dba(void *,uint32_t);
+static int32_t finalize_divide(int32_t a,int32_t b) {
+    if(b==0)return 0;
+    if(a==INT32_MIN && b==-1)return INT32_MIN;
+    return a/b;
+}
+static void finalize_flush_sector(volatile uint32_t *list,uint32_t data) {
+    uint32_t offset=list[12]*list[11];
+    uint32_t physical=list[3]+offset*4u;
+    uint32_t descriptor[4];
+    descriptor[3]=physical;descriptor[2]=data+offset*4u;
+    descriptor[0]=list[11]*4u;descriptor[1]=list[1];
+    audio_uart_nema_buffer_flush_5140ea(descriptor);
+}
+/* Native514b7c..514cf2: sector finalization and chained-buffer flush/link policy. */
+void audio_uart_nema_list_finalize_514b7c(void *cell) {
+    volatile uint32_t *root=(volatile uint32_t *)cell;
+    if(!root) {audio_uart_nema_error_set_4b127c(8192u);return;}
+    uint32_t flags=root[6],used=root[5];
+    if(flags&32u) {
+        uint32_t sector=root[11];
+        uint32_t residue=used-sector*(uint32_t)finalize_divide((int32_t)used,(int32_t)sector);
+        if(residue==0u)return;
+        uint32_t offset=sector*root[12];
+        uint32_t physical=root[3]+offset*4u;
+        if(!(flags&8u)) {
+            uint32_t virtual_address=root[2]+offset*4u;
+            uint32_t descriptor[4]={root[11]*4u,root[1],virtual_address,physical};
+            audio_uart_nema_buffer_flush_5140ea(descriptor);
+            root[6]=root[6]|8u;
+        }
+        uint32_t submitted=audio_uart_nema_reg_read_51403c(328u);
+        uint32_t capacity=root[10],sequence=root[13];
+        root[14]=submitted;
+        if((int32_t)(sequence-submitted)>(int32_t)(capacity-2u))
+            (void)audio_uart_nema_poll_514026(submitted+1u);
+        root[13]=audio_uart_nema_sector_finalize_523ce0(physical,residue);
+        uint32_t position=root[12]+1u;
+        capacity=root[10];
+        uint32_t next_used;
+        if(position>=capacity) {position=0u;next_used=0u;}
+        else next_used=root[11]*position;
+        root[5]=next_used;root[12]=position;
+        return;
+    }
+    if(used==0u)return;
+    volatile uint32_t *list=root;
+    for(;;) {
+        uint32_t byteflags=((volatile uint8_t *)list)[24];
+        uint32_t data=list[2];
+        volatile uint32_t *next=(volatile uint32_t *)(uintptr_t)list[8];
+        if(byteflags&4u) {
+            if(next) {
+                uint32_t capacity=list[4],next_used=next[5];
+                *(volatile uint32_t *)(uintptr_t)(data+capacity*4u-4u)=next_used;
+            }
+            flags=list[6]&~8u;list[6]=flags;
+            if(flags&32u)finalize_flush_sector(list,data);
+            else audio_uart_nema_buffer_flush_5140ea((void *)list);
+            list[6]=list[6]|8u;
+            list=(volatile uint32_t *)(uintptr_t)list[8];
+            if(list)continue;
+            break;
+        }
+        flags=list[6];
+        if(flags&8u)break;
+        if(flags&32u) {
+            /* Native branch re-reads virtual pointer after physical pointer. */
+            uint32_t offset=list[12]*list[11];
+            uint32_t physical=list[3]+offset*4u;
+            uint32_t virtual_address=list[2]+offset*4u;
+            uint32_t descriptor[4]={list[11]*4u,list[1],virtual_address,physical};
+            audio_uart_nema_buffer_flush_5140ea(descriptor);
+        } else audio_uart_nema_buffer_flush_5140ea((void *)list);
+        list[6]=list[6]|8u;
+        break;
+    }
+    root[7]=audio_uart_nema_chain_finalize_523dba(cell,root[5]);
+}
+
+#include <stdint.h>
+extern int32_t xQueueSemaphoreTake(void *,uint32_t);
+extern void g2_file_heap_error_log(const char *);
+extern volatile uint32_t audio_uart_nema_last_submission;
+/* Native51400a..51403c: exact semaphore-success gate, native fail-stop, signed submission wait. */
+void audio_uart_nema_wait_irq_51400a(void) {
+    void *handle=*(void * volatile *)(uintptr_t)0x20074814u;
+    if(xQueueSemaphoreTake(handle,1000u)!=1) {
+        g2_file_heap_error_log("GPU assert!!! nema_wait_irq timeout!!!\n");
+        for(;;) {}
+    }
+}
+int32_t audio_uart_nema_poll_514026(uint32_t submission) {
+    while((int32_t)audio_uart_nema_last_submission<(int32_t)submission)
+        audio_uart_nema_wait_irq_51400a();
+    return 0;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_ring_descriptor[];
+extern void audio_uart_nema_buffer_flush_5140ea(void *);
+extern void audio_uart_nema_reg_write_514046(uint32_t,uint32_t);
+static void submit_store(uint32_t data,uint32_t index,uint32_t value) {
+    *(volatile uint32_t *)(uintptr_t)(data+index*4u)=value;
+}
+static uint32_t submit_advance(volatile uint32_t *ring,uint32_t capacity) {
+    uint32_t index=ring[4]+1u;
+    return (int32_t)index>=(int32_t)capacity?0u:index;
+}
+static uint32_t submit_pad(volatile uint32_t *ring,uint32_t data,uint32_t capacity,uint32_t index) {
+    do {
+        ring[4]=index;submit_store(data,index,0x10000u);
+        index=ring[4]+1u;
+    } while((int32_t)index<(int32_t)capacity && index!=0u);
+    return 0u;
+}
+/* Native523f10..52404a: signed submission gate, ring command/padding/alignment, fresh descriptor after flush. */
+void audio_uart_nema_submit_523f10(uint32_t submission) {
+    if((int32_t)submission<=0)return;
+    volatile uint32_t *ring=(void *)(uintptr_t)audio_uart_nema_ring_descriptor[0];
+    uint32_t capacity=audio_uart_nema_ring_descriptor[3];
+    uint32_t index=ring[4];
+    uint32_t data=audio_uart_nema_ring_descriptor[1];
+    if((int32_t)capacity<(int32_t)(index+2u)) {index=submit_pad(ring,data,capacity,index);ring[4]=index;}
+    index=ring[4];submit_store(data,index,328u);
+    index=submit_advance(ring,capacity);ring[4]=index;submit_store(data,index,submission);
+    index=submit_advance(ring,capacity);
+    if((int32_t)capacity<(int32_t)(index+2u))index=submit_pad(ring,data,capacity,index);
+    ring[4]=index;submit_store(data,index,248u);
+    index=submit_advance(ring,capacity);ring[4]=index;submit_store(data,index,1u);
+    index=submit_advance(ring,capacity);
+    if((int32_t)(index+4u)>=(int32_t)capacity)index=submit_pad(ring,data,capacity,index);
+    while(index&3u) {
+        ring[4]=index;submit_store(data,index,0x10000u);
+        index=submit_advance(ring,capacity);
+    }
+    uint32_t physical=audio_uart_nema_ring_descriptor[2];
+    ring[4]=index;submit_store(data,index,0xff0000f0u);
+    uint32_t target=physical+(index+4u)*4u;
+    index=submit_advance(ring,capacity);ring[4]=index;submit_store(data,index,target);
+    index=submit_advance(ring,capacity);ring[4]=index;submit_store(data,index,0xff0000f4u);
+    index=submit_advance(ring,capacity);ring[4]=index;submit_store(data,index,audio_uart_nema_ring_descriptor[4]);
+    index=submit_advance(ring,capacity);ring[4]=index;
+    audio_uart_nema_buffer_flush_5140ea((void *)ring);
+    ring=(void *)(uintptr_t)audio_uart_nema_ring_descriptor[0];
+    physical=audio_uart_nema_ring_descriptor[2];index=ring[4];
+    audio_uart_nema_reg_write_514046(236u,(physical+index*4u)|4u);
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_ring_descriptor[];
+extern void audio_uart_nema_buffer_flush_5140ea(void *);
+extern void audio_uart_nema_reg_write_514046(uint32_t,uint32_t);
+static void packet_store(uint32_t data,uint32_t index,uint32_t value) {
+    *(volatile uint32_t *)(uintptr_t)(data+index*4u)=value;
+}
+static uint32_t packet_advance(volatile uint32_t *ring,uint32_t capacity) {
+    uint32_t index=ring[4]+1u;
+    return (int32_t)index>=(int32_t)capacity?0u:index;
+}
+static uint32_t packet_pad(volatile uint32_t *ring,uint32_t data,uint32_t capacity,uint32_t index) {
+    do {
+        ring[4]=index;packet_store(data,index,0x10000u);
+        index=ring[4]+1u;
+    } while((int32_t)index<(int32_t)capacity && index!=0u);
+    return 0u;
+}
+static uint32_t packet_emit(uint32_t physical,uint32_t words) {
+    volatile uint32_t *ring=(void *)(uintptr_t)audio_uart_nema_ring_descriptor[0];
+    uint32_t capacity=audio_uart_nema_ring_descriptor[3],data=audio_uart_nema_ring_descriptor[1];
+    uint32_t index=ring[4];
+    if((int32_t)(index+4u)>=(int32_t)capacity) {index=packet_pad(ring,data,capacity,index);ring[4]=index;}
+    while(((volatile uint8_t *)ring)[16]&3u) {
+        index=ring[4];packet_store(data,index,0x10000u);
+        index=packet_advance(ring,capacity);ring[4]=index;
+    }
+    index=ring[4];packet_store(data,index,240u);
+    index=packet_advance(ring,capacity);ring[4]=index;packet_store(data,index,physical);
+    index=packet_advance(ring,capacity);ring[4]=index;packet_store(data,index,0x000200f4u);
+    index=packet_advance(ring,capacity);ring[4]=index;packet_store(data,index,words);
+    index=packet_advance(ring,capacity);ring[4]=index;
+    audio_uart_nema_buffer_flush_5140ea((void *)ring);
+    ring=(void *)(uintptr_t)audio_uart_nema_ring_descriptor[0];
+    uint32_t current_physical=audio_uart_nema_ring_descriptor[2];index=ring[4];
+    audio_uart_nema_reg_write_514046(236u,(current_physical+index*4u)|4u);
+    ring=(void *)(uintptr_t)audio_uart_nema_ring_descriptor[0];
+    uint32_t sequence=ring[5]+1u;
+    if((int32_t)sequence>=0x01000000)sequence=0u;
+    ring[5]=sequence;return sequence;
+}
+/* Native523ce0..523dba and523dba..523e92: packet wrappers with distinct zero-length read policy. */
+uint32_t audio_uart_nema_sector_finalize_523ce0(uint32_t physical,uint32_t words) {
+    if(words==0u)return UINT32_MAX;
+    return packet_emit(physical,words);
+}
+uint32_t audio_uart_nema_chain_finalize_523dba(void *cell,uint32_t words) {
+    uint32_t physical=((volatile uint32_t *)cell)[3];
+    if(words==0u)return UINT32_MAX;
+    return packet_emit(physical,words);
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_ring_descriptor[];
+extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern void audio_uart_nema_buffer_flush_5140ea(void *);
+extern void audio_uart_nema_reg_write_514046(uint32_t,uint32_t);
+static void ring_init_store(uint32_t data,uint32_t offset,uint32_t value) {
+    *(volatile uint32_t *)(uintptr_t)(data+offset)=value;
+}
+/* Native523bf8..523c88: descriptor always records size; signed positive-size gate. */
+int32_t audio_uart_nema_ring_initialize_523bf8(void *cell,uint32_t initialize) {
+    volatile uint32_t *ring=cell;
+    uint32_t size=ring[0];audio_uart_nema_ring_descriptor[4]=size;
+    if((int32_t)size<=0) {audio_uart_nema_error_set_4b127c(4u);return -1;}
+    audio_uart_nema_ring_descriptor[0]=(uint32_t)(uintptr_t)cell;
+    uint32_t data=ring[2];audio_uart_nema_ring_descriptor[1]=data;
+    uint32_t physical=ring[3];
+    uint32_t capacity=(uint32_t)((int32_t)size/4)-4u;
+    audio_uart_nema_ring_descriptor[2]=physical;audio_uart_nema_ring_descriptor[3]=capacity;
+    if(initialize!=0u) {
+        ring=(void *)(uintptr_t)audio_uart_nema_ring_descriptor[0];
+        ring[4]=0u;ring[5]=0u;
+        uint32_t tail=data+capacity*4u;
+        ring_init_store(tail,0u,0xff0000f0u);ring_init_store(tail,4u,physical);
+        ring_init_store(tail,8u,0xff0000f4u);ring_init_store(tail,12u,size);
+        audio_uart_nema_buffer_flush_5140ea((void *)ring);
+        audio_uart_nema_reg_write_514046(328u,0u);
+        physical=audio_uart_nema_ring_descriptor[2];audio_uart_nema_reg_write_514046(236u,physical|6u);
+        physical=audio_uart_nema_ring_descriptor[2];audio_uart_nema_reg_write_514046(240u,physical);
+        size=audio_uart_nema_ring_descriptor[4];audio_uart_nema_reg_write_514046(244u,size);
+    }
+    return 0;
+}
+/* Native523c88..523ce0: tail store order differs from first initialization. */
+void audio_uart_nema_child_523c88(void) {
+    volatile uint32_t *ring=(void *)(uintptr_t)audio_uart_nema_ring_descriptor[0];
+    ring[4]=0u;ring[5]=0u;
+    uint32_t data=audio_uart_nema_ring_descriptor[1];
+    uint32_t capacity=audio_uart_nema_ring_descriptor[3];
+    uint32_t tail=data+capacity*4u;
+    ring_init_store(tail,0u,0xff0000f0u);
+    uint32_t physical=audio_uart_nema_ring_descriptor[2];
+    ring_init_store(tail,8u,0xff0000f4u);ring_init_store(tail,4u,physical);
+    uint32_t size=audio_uart_nema_ring_descriptor[4];ring_init_store(tail,12u,size);
+    audio_uart_nema_buffer_flush_5140ea((void *)ring);
+    audio_uart_nema_reg_write_514046(328u,0u);
+    physical=audio_uart_nema_ring_descriptor[2];audio_uart_nema_reg_write_514046(236u,physical|6u);
+    physical=audio_uart_nema_ring_descriptor[2];audio_uart_nema_reg_write_514046(240u,physical);
+    size=audio_uart_nema_ring_descriptor[4];audio_uart_nema_reg_write_514046(244u,size);
+}
+
+#include <stdint.h>
+extern void audio_uart_nema_child_514846(uint32_t,uint32_t);
+extern uint32_t audio_uart_nema_child_522602(void);
+/* Native522920..52294c: address command precedes zero-count gate, two words per upload. */
+void audio_uart_nema_instruction_upload_522920(const uint32_t *words,uint32_t count,uint32_t address) {
+    audio_uart_nema_child_514846(196u,address);
+    while(count!=0u) {
+        const volatile uint32_t *p=words;
+        audio_uart_nema_child_514846(200u,p[0]);
+        uint32_t second=p[1];words=(void *)((uintptr_t)words+8u);
+        audio_uart_nema_child_514846(204u,second);count--;
+    }
+}
+/* Native522956..522960: command464 scalar wrapper. */
+void audio_uart_nema_rop_blend_mode_522956(uint32_t value) {audio_uart_nema_child_514846(464u,value);}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern void audio_uart_nema_sector_rollover_5147b0(void *);
+extern int32_t audio_uart_nema_poll_514026(uint32_t);
+/* Native514384..5143d4: parent redirection, chained rewind and bound-parent update. */
+void audio_uart_nema_cl_rewind_514384(void *cell) {
+    volatile uint32_t *list=cell;
+    if(!list) {audio_uart_nema_error_set_4b127c(8192u);return;}
+    uint32_t parent=list[9];
+    if(parent)list=(volatile uint32_t *)(uintptr_t)parent;
+    do {
+        parent=list[9];
+        if(parent) {
+            volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)*(volatile uint32_t *)audio_uart_nema_context_cell;
+            if(context[1]==(uint32_t)(uintptr_t)list)context[1]=parent;
+        }
+        list[5]=0;list[12]=0;
+        list[6]=list[6]&~4u;
+        list=(volatile uint32_t *)(uintptr_t)list[8];
+    }while(list);
+}
+/* Native514cf2..514d00: context byte precedes the tail-called rollover. */
+void audio_uart_nema_cl_submit_514cf2(void *cell) {
+    volatile uint8_t *context=(volatile uint8_t *)(uintptr_t)*(volatile uint32_t *)audio_uart_nema_context_cell;
+    context[249]=1;
+    audio_uart_nema_sector_rollover_5147b0(cell);
+}
+/* Native514d00..514d2c: negative ID skips polling; successful poll resets ID. */
+int32_t audio_uart_nema_cl_wait_514d00(void *cell) {
+    volatile uint32_t *list=cell;
+    if(!list){audio_uart_nema_error_set_4b127c(8192u);return -1;}
+    uint32_t submission=list[7];
+    if((int32_t)submission<0 || audio_uart_nema_poll_514026(submission)>=0)list[7]=UINT32_MAX;
+    return 0;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern volatile uint32_t audio_uart_nema_last_submission;
+extern volatile uint32_t audio_uart_nema_command_state_20073bf0[];
+/* Native51418e..514194. */
+int32_t audio_uart_nema_last_cl_id_51418e(void) {return (int32_t)audio_uart_nema_last_submission;}
+/* Native514194..51419a: command state offset20, distinct from IRQ completion cell. */
+uint32_t audio_uart_nema_last_submission_id_514194(void) {return audio_uart_nema_command_state_20073bf0[5];}
+/* Native5144fa..514504: fresh context pointer then bound list word. */
+void *audio_uart_nema_cl_get_bound_5144fa(void) {
+ volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)*(volatile uint32_t *)audio_uart_nema_context_cell;
+ return (void *)(uintptr_t)context[1];
+}
+
+#include <stdint.h>
+extern void audio_uart_nema_buffer_create_514070(uint32_t *,uint32_t,uint32_t);
+/* Native514278..5142ee: buffer descriptor, signed capacity, full60byte list. */
+void audio_uart_nema_cl_create_sized_514278(void *out,uint32_t bytes) {
+ uint32_t descriptor[4];
+ audio_uart_nema_buffer_create_514070(descriptor,0u,bytes);
+ uint32_t row[15];
+ row[0]=descriptor[0];row[1]=descriptor[1];row[2]=descriptor[2];row[3]=descriptor[3];
+ row[4]=(uint32_t)(((int32_t)descriptor[0]/8)*2);
+ row[5]=0;row[6]=0;row[7]=UINT32_MAX;
+ row[8]=0;row[9]=0;row[10]=0;row[11]=0;row[12]=0;
+ row[13]=UINT32_MAX;row[14]=UINT32_MAX;
+ uint32_t *destination=out;
+ for(uint32_t i=0;i<15;i++)destination[i]=row[i];
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern void audio_uart_nema_error_set_4b127c(uint32_t);
+static int32_t bind236_div(uint32_t a,uint32_t b) {
+ int32_t result;__asm__("sdiv %0, %1, %2":"=r"(result):"r"(a),"r"(b));return result;
+}
+/* Native5143d4..5144ba: G2 sector negotiation and cached previous-list unbind. */
+void audio_uart_nema_cl_bind_sectored_5143d4(void *cell,uint32_t sectors) {
+ volatile uint32_t *list=cell;
+ if(!list){audio_uart_nema_error_set_4b127c(8192u);return;}
+ if(((volatile uint8_t *)list)[12]&7u){audio_uart_nema_error_set_4b127c(16384u);return;}
+ uint32_t parent=list[9];if(parent)list=(volatile uint32_t *)(uintptr_t)parent;
+ if((int32_t)sectors<2)sectors=2;
+ else if((int32_t)sectors>2){
+  uint32_t bytes=list[4]*4u;int32_t quotient=bind236_div(bytes,sectors);
+  if(quotient<512){
+   if(sectors&1u)sectors++;
+   while((int32_t)sectors>=4){sectors-=2;quotient=bind236_div(bytes,sectors);if(quotient>=512)break;}
+   if(quotient<512){audio_uart_nema_error_set_4b127c(65536u);return;}
+  }
+ }
+ uint32_t bytes=list[4]*4u;uint32_t quotient=(uint32_t)bind236_div(bytes,sectors);
+ if(bytes-sectors*quotient){audio_uart_nema_error_set_4b127c(16384u);return;}
+ volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];
+ volatile uint32_t *previous=(volatile uint32_t *)(uintptr_t)context[1];
+ if(previous){
+  uint32_t used=previous[5],capacity=previous[4];
+  if((int32_t)capacity>=(int32_t)(used+2u)){
+   uint32_t data=previous[2];
+   *(volatile uint32_t *)(uintptr_t)(data+used*4u)=0x00050000u;
+   *(volatile uint32_t *)(uintptr_t)(data+4u+used*4u)=0;
+   previous[6]=previous[6]&~8u;
+  }
+  previous[6]=previous[6]&~32u;context[1]=0;
+ }
+ list[6]=list[6]|32u;list[13]=UINT32_MAX;list[14]=UINT32_MAX;
+ uint32_t words=(uint32_t)bind236_div(list[4],sectors);if(words&1u)words--;
+ list[11]=words;list[10]=sectors;list[12]=0;
+ context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];context[1]=(uint32_t)(uintptr_t)list;
+}
+
+#include <stdint.h>
+extern void audio_uart_nema_child_514846(uint32_t,uint32_t);
+/* Native523304..52330c: command-buffer interrupt control, not immediate register write. */
+void audio_uart_nema_child_523304(uint32_t value) {audio_uart_nema_child_514846(248u,value);}
+
+#include <stdint.h>
+extern void *audio_uart_nema_node_allocate_51416c(uint32_t);
+extern void audio_uart_nema_vg_set_error_51565c(uint32_t);
+extern void audio_uart_nema_buffer_create_514070(uint32_t *,uint32_t,uint32_t);
+extern void audio_uart_nema_matrix_identity_561810(void *);
+/* Native515096..5150ea: sparse paint initialization; untouched fields preserved. */
+void *audio_uart_nema_vg_paint_create_515096(void) {
+ volatile uint8_t *paint=audio_uart_nema_node_allocate_51416c(220u);
+ if(!paint){audio_uart_nema_vg_set_error_51565c(1u);return (void *)paint;}
+ *(volatile uint32_t *)(paint+0)=0;*(volatile uint32_t *)(paint+4)=0;
+ paint[44]=0;paint[213]=0;paint[204]=0;
+ *(volatile uint32_t *)(paint+48)=0;
+ *(volatile uint32_t *)(paint+208)=0x3f800000u;
+ *(volatile uint32_t *)(paint+216)=0xff000000u;
+ audio_uart_nema_matrix_identity_561810((void *)(paint+52));
+ audio_uart_nema_matrix_identity_561810((void *)(paint+8));
+ paint[212]=0;return (void *)paint;
+}
+/* Native51510e..515136: buffer creation precedes unchecked output store. */
+void *audio_uart_nema_vg_grad_create_51510e(void) {
+ uint32_t *gradient=audio_uart_nema_node_allocate_51416c(16u);uint32_t descriptor[4];
+ audio_uart_nema_buffer_create_514070(descriptor,1u,256u);
+ gradient[0]=descriptor[0];gradient[1]=descriptor[1];gradient[2]=descriptor[2];gradient[3]=descriptor[3];
+ return gradient;
+}
+
+#include <stdint.h>
+/* Native561810..561830: exact IEEE754 identity words, ordered32bit stores. */
+void audio_uart_nema_matrix_identity_561810(void *cell) {
+ volatile uint32_t *matrix=cell;
+ matrix[0]=0x3f800000u;matrix[1]=0;matrix[2]=0;matrix[3]=0;
+ matrix[4]=0x3f800000u;matrix[5]=0;matrix[6]=0;matrix[7]=0;matrix[8]=0x3f800000u;
+}
+
+#include <stdint.h>
+extern void *audio_uart_nema_node_allocate_51416c(uint32_t);
+extern void audio_uart_nema_vg_set_error_51565c(uint32_t);
+extern void audio_uart_nema_matrix_identity_561810(void *);
+/* Native514ebc..514f34: pre-check absolute store and sparse path initialization. */
+void *audio_uart_nema_vg_path_create_514ebc(void) {
+ void *cell=audio_uart_nema_node_allocate_51416c(136u);
+ uint32_t address=(uint32_t)(uintptr_t)cell;
+ *(volatile uint32_t *)(uintptr_t)(address+132u)=0;
+ if(!cell){audio_uart_nema_vg_set_error_51565c(1u);return cell;}
+ audio_uart_nema_matrix_identity_561810((void *)(uintptr_t)(address+96u));
+ volatile uint32_t *path=cell;
+ path[33]=0;path[2]=0;path[3]=0;path[0]=0;path[1]=0;
+ path[4]=0x477fff00u;path[5]=0x477fff00u;path[6]=0xc77fff00u;path[7]=0xc77fff00u;
+ path[20]=0;path[21]=0;path[9]=0;path[8]=0;path[11]=0;path[10]=0;
+ path[13]=0;path[12]=0;path[15]=0;path[14]=0;path[22]=0;path[23]=0;
+ path[16]=0x477fff00u;path[17]=0x477fff00u;path[18]=0xc77fff00u;path[19]=0xc77fff00u;
+ return cell;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern void audio_uart_nema_child_52262e(uint32_t);
+extern void audio_uart_nema_child_52264e(uint32_t);
+extern void *audio_uart_nema_cl_get_space_514aec(uint32_t);
+static uint32_t bind243_align4(uint32_t x){x+=3u;return (x+((uint32_t)((int32_t)x>>1)>>30))&~3u;}
+static uint32_t bind243_round8(uint32_t x){x+=7u;x+=(uint32_t)((int32_t)x>>2)>>29;return (uint32_t)((int32_t)x>>3);}
+/* Native4b1298..4b146c: G2 format strides, context slots and three command pairs. */
+void audio_uart_nema_bind_tex_4b1298(uint32_t unit,uint32_t address,uint32_t width,uint32_t height,int32_t format,uint32_t stride,uint32_t flags){
+ if((int32_t)unit<0)return;
+ uint32_t fmt=(uint32_t)format&127u;
+ if(stride==UINT32_MAX){
+  stride=width;
+  if(flags&16u)stride=bind243_align4(stride);
+  if(fmt==18u||fmt==22u||fmt==23u||fmt==78u)stride=bind243_align4(stride);
+  if(fmt==76u||fmt==77u){stride+=1u;stride=(stride+(stride>>31))&~1u;}
+  switch(fmt){
+  case 11u:case 12u:case 39u:case 42u:stride=bind243_round8(stride);break;
+  case 18u:stride*=2u;break;
+  case 22u:case 23u:case 76u:case 77u:case 78u:stride*=3u;break;
+  case 40u:case 43u:case 48u:case 49u:stride=bind243_round8(stride*2u);break;
+  case 41u:case 44u:case 52u:case 53u:stride=bind243_round8(stride*4u);break;
+  default:{uint32_t factor=4u;switch(fmt){
+   case 4u:case 5u:case 6u:case 13u:case 19u:case 29u:case 61u:case 62u:case 63u:case 68u:case 70u:case 71u:case 72u:case 73u:case 74u:case 75u:case 76u:case 77u:factor=2u;break;
+   case 7u:case 8u:case 9u:case 12u:case 18u:case 22u:case 23u:case 24u:case 25u:case 26u:case 39u:case 40u:case 48u:case 49u:case 52u:case 53u:case 56u:case 64u:case 65u:case 66u:case 67u:case 69u:case 78u:factor=1u;break;
+   case 57u:case 60u:factor=3u;break;
+   default:break;}stride*=factor;break;}
+  }
+ }
+ if(unit==0u){
+  volatile uint8_t *ctx=(volatile uint8_t *)(uintptr_t)audio_uart_nema_context_cell[0];
+  if(fmt==18u||fmt==22u||fmt==23u){ctx[8]=1;audio_uart_nema_child_52262e(1u);}
+  else if(fmt==76u||fmt==77u){ctx[8]=1;audio_uart_nema_child_52264e(1u);}
+  else audio_uart_nema_child_52262e(ctx[9]);
+ }
+ uint32_t offset=unit*24u;
+ volatile uint32_t *slot=(volatile uint32_t *)(uintptr_t)(audio_uart_nema_context_cell[0]+offset+56u);
+ slot[0]=address;slot[1]=width;slot[2]=height;
+ slot[3]=(flags<<16)|((uint32_t)format<<24)|(stride&65535u);
+ slot[4]=1;slot[5]=(uint32_t)format;
+ volatile uint32_t *packet=audio_uart_nema_cl_get_space_514aec(3u);
+ if(packet){
+  uint32_t reg=unit*16u;
+  packet[0]=reg;packet[1]=address;packet[2]=reg+4u;
+  volatile uint32_t *fresh=(volatile uint32_t *)(uintptr_t)(audio_uart_nema_context_cell[0]+offset);
+  uint32_t packed=fresh[17];packet[3]=packed;packet[4]=reg+8u;packet[5]=width|(height<<16);
+ }
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+/* Native52264e..52266e: dual tiling state, distinct mask from52262e. */
+void audio_uart_nema_child_52264e(uint32_t enabled){
+ uint32_t flags=enabled?0xc0000000u:0u;
+ volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];
+ context[3]=flags;uint32_t a=context[5];uint32_t b=context[4];uint32_t c=context[7];
+ context[6]=flags|a|b|c;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern void audio_uart_nema_sector_rollover_5147b0(void *);
+extern int32_t audio_uart_nema_extend_bound_514504(uint32_t);
+static int32_t space246_div(uint32_t a,uint32_t b){int32_t r;__asm__("sdiv %0, %1, %2":"=r"(r):"r"(a),"r"(b));return r;}
+/* Native514aec..514b76: pair reservation with sector rollover or list extension. */
+void *audio_uart_nema_cl_get_space_514aec(uint32_t pairs){
+ volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];
+ volatile uint32_t *list=(volatile uint32_t *)(uintptr_t)context[1];
+ if(!list){audio_uart_nema_error_set_4b127c(128u);return 0;}
+ list[6]=list[6]&~8u;
+ uint32_t remaining;
+ if(((volatile uint8_t *)list)[24]&32u){uint32_t sector=list[11],used=list[5];remaining=sector-used+sector*(uint32_t)space246_div(used,sector);}
+ else {uint32_t capacity=list[4],used=list[5];remaining=capacity-used;}
+ uint32_t half=(uint32_t)((int32_t)(remaining+(remaining>>31))>>1);
+ if(((volatile uint8_t *)list)[24]&32u){
+  if((int32_t)half<(int32_t)(pairs+1u)){
+   ((volatile uint8_t *)context)[249]=0;
+   context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];
+   audio_uart_nema_sector_rollover_5147b0((void *)(uintptr_t)context[1]);
+  }
+ }else if((int32_t)(half-2u)<(int32_t)pairs){if(audio_uart_nema_extend_bound_514504(pairs)<0)return 0;}
+ context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];
+ list=(volatile uint32_t *)(uintptr_t)context[1];uint32_t used=list[5],data=list[2];
+ uint32_t pointer=data+used*4u;list[5]=used+pairs*2u;return (void *)(uintptr_t)pointer;
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_context_cell[];
+extern void audio_uart_nema_error_set_4b127c(uint32_t);
+extern void *audio_uart_nema_node_allocate_51416c(uint32_t);
+extern void audio_uart_nema_buffer_create_514070(uint32_t *,uint32_t,uint32_t);
+extern void audio_uart_nema_cl_node_release_514178(void *);
+static int32_t ext247_div(uint32_t a,uint32_t b){int32_t r;__asm__("sdiv %0, %1, %2":"=r"(r):"r"(a),"r"(b));return r;}
+static void ext247_store(uint32_t data,uint32_t index,uint32_t v){*(volatile uint32_t *)(uintptr_t)(data+index*4u)=v;}
+/* Native514504..5147b0: padding, allocation or reuse, chain packet and rebound tail. */
+int32_t audio_uart_nema_extend_bound_514504(uint32_t pairs){
+ volatile uint32_t *context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];
+ volatile uint32_t *list=(volatile uint32_t *)(uintptr_t)context[1];
+ if(!list){audio_uart_nema_error_set_4b127c(128u);return -1;}
+ uint32_t flags=((volatile uint8_t *)list)[24];
+ if(!(flags&2u)){audio_uart_nema_error_set_4b127c(8u);return -1;}
+ uint32_t delta;
+ if(flags&32u){uint32_t sector=list[11],used=list[5];delta=sector-used+sector*(uint32_t)ext247_div(used,sector);}
+ else {uint32_t capacity=list[4],used=list[5];delta=capacity-used;}
+ int32_t padding=(int32_t)((uint32_t)((int32_t)(delta+(delta>>31))>>1)-2u);
+ if(padding>0){
+  uint32_t n=(uint32_t)padding;
+  for(uint32_t i=0;i<(n&3u);i++){uint32_t k=list[5];ext247_store(list[2],k,65536u);k++;ext247_store(list[2],k,0);list[5]=k+1u;}
+  for(uint32_t i=0;i<(n>>2);i++){
+   uint32_t k=list[5];ext247_store(list[2],k,65536u);k++;ext247_store(list[2],k,0);k++;
+   uint32_t data=list[2];list[5]=k;ext247_store(data,k,65536u);k++;ext247_store(list[2],k,0);k++;
+   data=list[2];list[5]=k;ext247_store(data,k,65536u);k++;ext247_store(list[2],k,0);k++;
+   data=list[2];list[5]=k;ext247_store(data,k,65536u);k++;ext247_store(list[2],k,0);list[5]=k+1u;
+  }
+ }
+ volatile uint32_t *node=(volatile uint32_t *)(uintptr_t)list[8];
+ if(!node){
+  node=audio_uart_nema_node_allocate_51416c(60u);if(!node){audio_uart_nema_error_set_4b127c(16u);return -1;}
+  uint32_t bytes=(pairs+2u)*8u;uint32_t large=(int32_t)bytes>1024;
+  uint32_t desc[4];audio_uart_nema_buffer_create_514070(desc,0u,large?bytes:1024u);
+  node[0]=desc[0];node[1]=desc[1];node[2]=desc[2];node[3]=desc[3];node[4]=(uint32_t)((int32_t)desc[0]/8)*2u;
+  node[5]=0;node[6]=large?0u:2u;node[9]=0;node[7]=UINT32_MAX;node[13]=UINT32_MAX;node[14]=UINT32_MAX;
+  uint32_t data=node[2];node[10]=0;node[11]=0;node[12]=0;node[8]=0;
+  if(!data){audio_uart_nema_error_set_4b127c(16u);audio_uart_nema_cl_node_release_514178((void *)node);return -1;}
+  context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];list=(volatile uint32_t *)(uintptr_t)context[1];
+  uint32_t root=list[9];node[9]=root?root:(uint32_t)(uintptr_t)list;
+  list=(volatile uint32_t *)(uintptr_t)context[1];node[6]=list[6]&~12u;
+ }
+ context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];list=(volatile uint32_t *)(uintptr_t)context[1];
+ if(!list)audio_uart_nema_error_set_4b127c(8192u);else list[6]=list[6]|4u;
+ context=(volatile uint32_t *)(uintptr_t)audio_uart_nema_context_cell[0];list=(volatile uint32_t *)(uintptr_t)context[1];
+ uint32_t k=list[5];ext247_store(list[2],k,240u);k++;uint32_t physical=node[3];ext247_store(list[2],k,physical);k++;
+ uint32_t data=list[2];list[5]=k;ext247_store(data,k,244u);k++;uint32_t capacity=node[4];ext247_store(list[2],k,capacity);list[5]=k+1u;list[8]=(uint32_t)(uintptr_t)node;
+ if(((volatile uint8_t *)node)[12]&7u){audio_uart_nema_error_set_4b127c(16384u);return 0;}
+ list=(volatile uint32_t *)(uintptr_t)context[1];
+ if(list){uint32_t used=list[5],cap=list[4];if((int32_t)cap>=(int32_t)(used+2u)){data=list[2];ext247_store(data,used,327680u);ext247_store(data+4u,used,0);list[6]=list[6]&~8u;}list[6]=list[6]&~32u;}
+ context[1]=0;
+ while(((volatile uint8_t *)node)[24]&4u)node=(volatile uint32_t *)(uintptr_t)node[8];
+ context[1]=(uint32_t)(uintptr_t)node;return 0;
+}
+
+#include <stdint.h>
+/* Authenticated native flash78f2f4 register-window base. Placement remains gated. */
+const uint32_t audio_uart_nema_register_base=0x40090000u;
+
+#include <stdint.h>
+extern void audio_uart_nema_matrix_identity_561810(void *);
+extern void audio_uart_nema_vg_set_error_51565c(uint32_t);
+extern volatile uint32_t audio_uart_nema_vg_context_cell;
+/* Native514e50..514eba: NULL error precedes all path stores. */
+void audio_uart_nema_vg_path_reset_514e50(void *cell) {
+ if(!cell){audio_uart_nema_vg_set_error_51565c(1u);return;}
+ audio_uart_nema_matrix_identity_561810((void *)(uintptr_t)((uint32_t)(uintptr_t)cell+96u));
+ volatile uint32_t *path=cell;
+ path[33]=0;path[2]=0;path[3]=0;path[0]=0;path[1]=0;
+ path[4]=0x477fff00u;path[5]=0x477fff00u;path[6]=0xc77fff00u;path[7]=0xc77fff00u;
+ path[20]=0;path[21]=0;path[9]=0;path[8]=0;path[11]=0;path[10]=0;
+ path[13]=0;path[12]=0;path[15]=0;path[14]=0;path[22]=0;path[23]=0;
+ path[16]=0x477fff00u;path[17]=0x477fff00u;path[18]=0xc77fff00u;path[19]=0xc77fff00u;
+}
+/* Native515048..515096: sparse paint reset, two ordered identity calls. */
+void audio_uart_nema_vg_paint_reset_515048(void *cell) {
+ volatile uint8_t *paint=cell;
+ if(!paint){audio_uart_nema_vg_set_error_51565c(1u);return;}
+ *(volatile uint32_t *)(paint+0u)=0;*(volatile uint32_t *)(paint+4u)=0;
+ paint[44]=0;paint[213]=0;paint[204]=0;
+ *(volatile uint32_t *)(paint+48u)=0;
+ *(volatile uint32_t *)(paint+208u)=0x3f800000u;
+ *(volatile uint32_t *)(paint+216u)=0xff000000u;
+ audio_uart_nema_matrix_identity_561810((void *)(paint+52u));
+ audio_uart_nema_matrix_identity_561810((void *)(paint+8u));
+ paint[212]=0;
+}
+/* Native515676..5156aa: fresh context loads bracket real matrix calls. */
+void audio_uart_nema_vg_state_reset_515676(void) {
+ volatile uint8_t *context=(void *)(uintptr_t)audio_uart_nema_vg_context_cell;
+ context[445u]=context[144u]&1u;
+ context=(void *)(uintptr_t)audio_uart_nema_vg_context_cell;
+ *(volatile uint32_t *)(context+144u)=*(volatile uint32_t *)(context+144u)&~1u;
+ audio_uart_nema_matrix_identity_561810((void *)(context+164u));
+ context=(void *)(uintptr_t)audio_uart_nema_vg_context_cell;
+ audio_uart_nema_matrix_identity_561810((void *)(context+200u));
+}
+
+#include <stdint.h>
+extern void *audio_uart_ambiq_default_unit_4c791a(void);
+extern void *audio_uart_display_surface_alloc(uint32_t,uint32_t,uint32_t,uint32_t);
+extern void *audio_uart_lv_draw_buf_reshape_48b196(void *,uint32_t,uint32_t,uint32_t,uint32_t);
+extern void audio_uart_font_bitmap_release(void *);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+static const char stencil263_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
+static const char stencil263_message[]="Failed to create stencil buffer!";
+static const char stencil263_function[]="lv_draw_ambiq_stencil_buffer_adjust";
+/* Native4b0b5a..4b0bea: cached unit, fresh framebuffer loads after children. */
+uint32_t audio_uart_ambiq_stencil_adjust_4b0b5a(void *cell,uint32_t width,uint32_t height) {
+ volatile uint32_t *unit=cell;
+ if(!unit)unit=audio_uart_ambiq_default_unit_4c791a();
+ void *buffer=(void *)(uintptr_t)unit[16];
+ if(buffer) {
+  const volatile uint32_t *header=buffer;
+  if((uint32_t)(uint16_t)header[1]==width && (header[1]>>16u)==height)return 1u;
+ }
+ if(!buffer)unit[16]=(uint32_t)(uintptr_t)audio_uart_display_surface_alloc(width,height,14u,0u);
+ else {
+  void *reshaped=audio_uart_lv_draw_buf_reshape_48b196(buffer,14u,width,height,0u);
+  if(!reshaped) {
+   audio_uart_font_bitmap_release((void *)(uintptr_t)unit[16]);
+   unit[16]=(uint32_t)(uintptr_t)audio_uart_display_surface_alloc(width,height,14u,0u);
+  } else unit[16]=(uint32_t)(uintptr_t)reshaped;
+ }
+ if(unit[16]!=0u)return 1u;
+ audio_uart_lvgl_log(3u,stencil263_file,482u,stencil263_function,stencil263_message);
+ return 0u;
+}
+
+#include <stdint.h>
+extern void *audio_uart_ambiq_default_unit_4c791a(void);
+extern void audio_uart_nema_vg_path_reset_514e50(void *);
+extern void audio_uart_nema_vg_paint_reset_515048(void *);
+extern void audio_uart_nema_vg_state_reset_515676(void);
+extern void audio_uart_ambiq_blend_clear_4b075e(void *);
+extern uint32_t audio_uart_ambiq_stencil_adjust_4b0b5a(void *,uint32_t,uint32_t);
+extern void audio_uart_lv_memzero_48949c(void *,uint32_t);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+typedef struct {uint32_t words[4];} audio_uart_vg_framebuffer_264;
+extern void audio_uart_nema_vg_set_framebuffer_5223a2(uint32_t,uint32_t,audio_uart_vg_framebuffer_264);
+static const char resolution264_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
+static const char resolution264_message[]="Failed to adjust stencil buffer!";
+static const char resolution264_function[]="lv_draw_ambiq_vg_start";
+/* Native4b0bea..4b0c8a: cached unit, wrapped alignment and by-value descriptor. */
+void audio_uart_ambiq_set_resolution_4b0bea(uint32_t width,uint32_t height) {
+ volatile uint32_t *unit=audio_uart_ambiq_default_unit_4c791a();
+ audio_uart_nema_vg_path_reset_514e50((void *)(uintptr_t)unit[17]);
+ audio_uart_nema_vg_paint_reset_515048((void *)(uintptr_t)unit[18]);
+ audio_uart_nema_vg_state_reset_515676();
+ audio_uart_ambiq_blend_clear_4b075e((void *)unit);
+ width=(width+3u)&~3u;height=(height+3u)&~3u;
+ uint32_t status=audio_uart_ambiq_stencil_adjust_4b0b5a((void *)unit,width,height);
+ if((uint8_t)status!=1u) {
+  audio_uart_lvgl_log(3u,resolution264_file,509u,resolution264_function,resolution264_message);
+  return;
+ }
+ audio_uart_vg_framebuffer_264 framebuffer;
+ audio_uart_lv_memzero_48949c(&framebuffer,16u);
+ framebuffer.words[0]=((volatile uint32_t *)(uintptr_t)unit[16])[3];
+ framebuffer.words[2]=((volatile uint32_t *)(uintptr_t)unit[16])[4];
+ framebuffer.words[3]=((volatile uint32_t *)(uintptr_t)unit[16])[4];
+ audio_uart_nema_vg_set_framebuffer_5223a2(width,height,framebuffer);
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_vg_framebuffer_descriptor_200732e8[];
+/* Native5155e4..51562e: ordered descriptor writes and signed-to-float dimensions. */
+void audio_uart_nema_vg_framebuffer_store_5155e4(uint32_t width,uint32_t height,audio_uart_vg_framebuffer_264 framebuffer) {
+ volatile uint32_t *d=audio_uart_nema_vg_framebuffer_descriptor_200732e8;
+ volatile float *f=(volatile float *)(void *)d;
+ d[4]=width;
+ float w=(float)(int32_t)width;f[9]=w;f[11]=w;
+ float h=(float)(int32_t)height;
+ d[0]=framebuffer.words[0];d[1]=framebuffer.words[1];d[2]=framebuffer.words[2];d[3]=framebuffer.words[3];
+ d[5]=height;d[7]=0;d[8]=0;d[10]=0;f[12]=h;d[13]=0;f[14]=h;
+}
+/* Native51562e..515634: address only; no storage initializer inferred. */
+void *audio_uart_nema_vg_framebuffer_get_51562e(void) {return (void *)audio_uart_nema_vg_framebuffer_descriptor_200732e8;}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_vg_framebuffer_context_cell_20074f08;
+extern void audio_uart_nema_vg_framebuffer_destroy_5155dc(void);
+extern void audio_uart_nema_vg_framebuffer_store_5155e4(uint32_t,uint32_t,audio_uart_vg_framebuffer_264);
+extern void audio_uart_nema_vg_set_error_51565c(uint32_t);
+/* Native5223a2..5223fa: conditional cleanup, by-value store, fresh context reload. */
+void audio_uart_nema_vg_set_framebuffer_5223a2(uint32_t width,uint32_t height,audio_uart_vg_framebuffer_264 framebuffer) {
+ const volatile uint8_t *context=(void *)(uintptr_t)audio_uart_nema_vg_framebuffer_context_cell_20074f08;
+ if(context[24u]&1u)audio_uart_nema_vg_framebuffer_destroy_5155dc();
+ audio_uart_nema_vg_framebuffer_store_5155e4(width,height,framebuffer);
+ context=(void *)(uintptr_t)audio_uart_nema_vg_framebuffer_context_cell_20074f08;
+ if((context[16u]&3u)!=0u || (context[20u]&3u)!=0u)audio_uart_nema_vg_set_error_51565c(0x2000000u);
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_nema_vg_framebuffer_descriptor_200732e8[];
+extern void audio_uart_nema_cl_buffer_destroy_5140c6(void *);
+/* Native5155dc..5155e4: fixed framebuffer descriptor uses real destroy contract. */
+void audio_uart_nema_vg_framebuffer_destroy_5155dc(void) {
+ audio_uart_nema_cl_buffer_destroy_5140c6((void *)audio_uart_nema_vg_framebuffer_descriptor_200732e8);
+}
+
+#include <stdint.h>
+extern void *audio_uart_font_outline_context(void);
+extern void audio_uart_ambiq_vector_font_push_53d8fc(void *);
+extern void audio_uart_ambiq_vector_font_allocate_53da54(void *);
+extern void audio_uart_ambiq_vector_font_release_53db3c(void *);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+static const char vector270_message[]="unknown event code: %d";
+static const char vector270_function[]="lv_draw_ambiq_vector_font_ft_cb";
+static const char vector270_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_vector_font.c";
+/* Native53d82c..53d87c: event-code accessor masks bit15; event parameter always loaded. */
+void audio_uart_ambiq_vector_font_callback_53d82c(void *event) {
+ const volatile uint32_t *e=event;
+ uint32_t code=e[2]&~32768u;
+ void *data=(void *)(uintptr_t)e[4];
+ if(code==36u)audio_uart_ambiq_vector_font_push_53d8fc(data);
+ else if(code==40u)audio_uart_ambiq_vector_font_allocate_53da54(data);
+ else if(code==41u)audio_uart_ambiq_vector_font_release_53db3c((void *)(uintptr_t)*(volatile uint32_t *)data);
+ else audio_uart_lvgl_log(2u,vector270_file,186u,vector270_function,vector270_message,code);
+}
+/* Native529bf2..529bfe: only callback is stored; two incoming args are unused. */
+void audio_uart_font_outline_register_529bf2(uintptr_t callback,uint32_t unused,void *unit) {
+ (void)unused;(void)unit;
+ volatile uint32_t *context=audio_uart_font_outline_context();
+ context[4]=(uint32_t)callback;
+}
+/* Native53d6da..53d6ea: registers the source callback with the original arguments. */
+void audio_uart_ambiq_vector_font_init_53d6da(void *unit) {
+ audio_uart_font_outline_register_529bf2((uintptr_t)audio_uart_ambiq_vector_font_callback_53d82c,0u,unit);
+}
+
+#include <stdint.h>
+extern void audio_uart_ambiq_get_path_buffers_5fa21c(void *,uint32_t *,uint32_t *,void **,void **);
+extern void audio_uart_nema_vg_path_destroy_514d98(void *);
+extern void audio_uart_lv_heap_free(void *);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+static const char release272_null[]="NULL pointer";
+static const char release272_expression[]="outline != NULL";
+static const char release272_message[]="Asserted at expression: %s (%s)";
+static const char release272_function[]="lv_ambiq_ft_outline_destroy";
+static const char release272_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_vector_font.c";
+/* Native53db3c..53dbd8: fresh glyph loads bracket buffer and path release calls. */
+void audio_uart_ambiq_vector_font_release_53db3c(void *cell) {
+ volatile uint32_t *glyph=cell;
+ if(!glyph) {
+  audio_uart_lvgl_log(3u,release272_file,312u,release272_function,release272_message,release272_expression,release272_null);
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ uint32_t segment_size,data_size;void *segments,*data;
+ if(glyph[0]!=0u) {
+  audio_uart_ambiq_get_path_buffers_5fa21c((void *)(uintptr_t)glyph[0],&segment_size,&data_size,&segments,&data);
+  audio_uart_lv_heap_free(data);audio_uart_lv_heap_free(segments);
+ }
+ if(glyph[1]!=0u) {
+  audio_uart_ambiq_get_path_buffers_5fa21c((void *)(uintptr_t)glyph[1],&segment_size,&data_size,&segments,&data);
+  audio_uart_lv_heap_free(data);audio_uart_lv_heap_free(segments);
+ }
+ if(glyph[0]!=0u) {
+  audio_uart_nema_vg_path_destroy_514d98((void *)(uintptr_t)glyph[0]);glyph[0]=0u;
+ }
+ if(glyph[1]!=0u) {
+  audio_uart_nema_vg_path_destroy_514d98((void *)(uintptr_t)glyph[1]);glyph[1]=0u;
+ }
+ audio_uart_lv_heap_free((void *)glyph);
+}
+
+#include <stdint.h>
+/* Native5fa21c..5fa236: sequential volatile accesses preserve output/path aliases. */
+void audio_uart_ambiq_get_path_buffers_5fa21c(void *path,uint32_t *segment_size,uint32_t *data_size,void **segments,void **data) {
+ const volatile uint32_t *p=path;
+ *(volatile uint32_t *)segment_size=p[0];
+ *(volatile uint32_t *)data_size=p[1];
+ *(volatile uint32_t *)(void *)segments=p[2];
+ *(volatile uint32_t *)(void *)data=p[3];
+}
+
+#include <stdint.h>
+extern void audio_uart_nema_matrix_identity_561810(void *);
+extern void audio_uart_nema_vg_set_error_51565c(uint32_t);
+extern void audio_uart_nema_cl_node_release_514178(void *);
+/* Native514d98..514e0a: reset then release; NULL error bypasses both. */
+void audio_uart_nema_vg_path_destroy_514d98(void *cell) {
+ if(!cell){audio_uart_nema_vg_set_error_51565c(1u);return;}
+ audio_uart_nema_matrix_identity_561810((void *)(uintptr_t)((uint32_t)(uintptr_t)cell+96u));
+ volatile uint32_t *path=cell;
+ path[33]=0;path[2]=0;path[3]=0;path[0]=0;path[1]=0;
+ path[4]=0x477fff00u;path[5]=0x477fff00u;path[6]=0xc77fff00u;path[7]=0xc77fff00u;
+ path[20]=0;path[21]=0;path[9]=0;path[8]=0;path[11]=0;path[10]=0;
+ path[13]=0;path[12]=0;path[15]=0;path[14]=0;path[22]=0;path[23]=0;
+ path[16]=0x477fff00u;path[17]=0x477fff00u;path[18]=0xc77fff00u;path[19]=0xc77fff00u;
+ audio_uart_nema_cl_node_release_514178(cell);
+}
+
+#include <stdint.h>
+extern void *audio_uart_lv_malloc(uint32_t);
+extern void *audio_uart_nema_vg_path_create_514ebc(void);
+extern void audio_uart_lv_array_clear_488478(void *);
+extern void audio_uart_lv_array_init_external_488440(void *,void *,uint32_t,uint32_t);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern volatile uint32_t audio_uart_ambiq_vector_current_path_200746c4;
+extern uint8_t audio_uart_ambiq_vector_path_data_20073cd4[];
+extern uint8_t audio_uart_ambiq_vector_path_segments_20073cc0[];
+static const char alloc277_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_vector_font.c";
+static const char alloc277_function[]="lv_ambiq_ft_outline_alloc";
+static const char alloc277_format[]="Asserted at expression: %s (%s)";
+static const char alloc277_memory[]="Out of memory";
+static const char alloc277_outline[]="outline != NULL";
+static const char alloc277_data[]="data != NULL";
+static const char alloc277_segments[]="seg != NULL";
+static void alloc277_fail(uint32_t line,const char *expression) {
+ audio_uart_lvgl_log(3u,alloc277_file,line,alloc277_function,alloc277_format,expression,alloc277_memory);
+ for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+}
+/* Native53da54..53db3c: allocator failure is native diagnostic/fail-stop. */
+void audio_uart_ambiq_vector_font_allocate_53da54(void *parameter) {
+ volatile uint32_t *p=parameter;
+ if(p[0]==0u) {
+  volatile uint32_t *outline=audio_uart_lv_malloc(8u);
+  if(!outline)alloc277_fail(281u,alloc277_outline);
+  outline[0]=(uint32_t)(uintptr_t)audio_uart_nema_vg_path_create_514ebc();outline[1]=0u;
+  p[0]=(uint32_t)(uintptr_t)outline;
+  audio_uart_ambiq_vector_current_path_200746c4=outline[0];
+ }
+ audio_uart_lv_array_clear_488478(audio_uart_ambiq_vector_path_data_20073cd4);
+ audio_uart_lv_array_clear_488478(audio_uart_ambiq_vector_path_segments_20073cc0);
+ uint32_t data_size=p[9];uint32_t segment_size=p[8]+1u;
+ void *data=audio_uart_lv_malloc(data_size<<2);
+ if(!data)alloc277_fail(297u,alloc277_data);
+ void *segments=audio_uart_lv_malloc(segment_size);
+ if(!segments)alloc277_fail(299u,alloc277_segments);
+ audio_uart_lv_array_init_external_488440(audio_uart_ambiq_vector_path_data_20073cd4,data,data_size,4u);
+ audio_uart_lv_array_init_external_488440(audio_uart_ambiq_vector_path_segments_20073cc0,segments,segment_size,1u);
+}
+
+#include <stdint.h>
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+static const char array278_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_array.c";
+static const char array278_function[]="lv_array_init_from_buf";
+static const char array278_format[]="Asserted at expression: %s (%s)";
+static const char array278_expression[]="buf != NULL";
+static const char array278_null[]="NULL pointer";
+/* Native488440..488478: external buffer initialization with ordered sparse stores. */
+void audio_uart_lv_array_init_external_488440(void *array,void *buffer,uint32_t count,uint32_t stride) {
+ if(!buffer) {
+  audio_uart_lvgl_log(3u,array278_file,51u,array278_function,array278_format,array278_expression,array278_null);
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ volatile uint32_t *a=array;
+ a[1]=0u;a[2]=count;a[3]=stride;a[0]=(uint32_t)(uintptr_t)buffer;
+ ((volatile uint8_t *)array)[16]=0u;
+}

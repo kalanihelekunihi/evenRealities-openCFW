@@ -1,0 +1,9 @@
+{
+  "status": "PASS_NATIVE_BMP_GET_AREA",
+  "cases": 192,
+  "candidate_sha256": "855c02de2e6842db952c39feae1ec3821deb4fbc7b544eb4ad3169ee888c77f2",
+  "limits": [
+    "Copy/width/reshape/create/release/seek/read controlled cuts; first/subsequent rows,allocation failures,callback mutations,unsigned offsets/signed bounds,descriptor/area/state bytes,call snapshots and return/SP compared.",
+    "No actual filesystem pixel transfer or physical rendering; fullimage gates remain open."
+  ]
+}

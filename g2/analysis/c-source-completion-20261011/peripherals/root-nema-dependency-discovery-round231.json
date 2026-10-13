@@ -1,0 +1,19 @@
+{
+  "source_url": "https://github.com/atc1441/ATCmiBand8fw.git",
+  "commit": "931216a15337fa371f3a7d2de6dfb216a90093a4",
+  "local_path": "third-party/upstream/atc-miband8-fw",
+  "sparse_checkout": [
+    "Custom_Firmware/third_party/ThinkSi/NemaGFX_SDK"
+  ],
+  "header_sha256": {
+    "NemaGFX/nema_programHW.h": "5b373d6296c3a4dd9c2050d36566ebff2a22accc42d35f8559c1c4315375a215",
+    "NemaGFX/nema_shaderSpecific.h": "6bdfa34e563448752e33c466633d65a18e4daf5ca87709f55a13ff20dbf22388",
+    "NemaGFX/nema_regs.h": "c11610b1b2da72c712ccb3d4b743a86050be4cdeb01b2a28f8bb44bc1c10069c"
+  },
+  "evidence": "nema_regs.h148-150 identifies0xc4/0xc8/0xcc asinstruction-memory registers;startupwordtable not admitted source-owned config",
+  "limits": [
+    "Mirror/header provenance is not complete implementation/ISA coverage",
+    "No compile from this mirror selected; repository index unchanged;gitlink registration pending review"
+  ],
+  "EvenHub": "excluded"
+}

@@ -1,0 +1,13 @@
+{
+  "status": "PASS_M55_QEMU_FULL_COMMAND_EMITTER",
+  "cases": 133200,
+  "matrix_cases": 136080,
+  "selected": true,
+  "candidate_sha256": "bb56f57ca2229a6168b4d847875c280d15edc819769451edb38d87c012c03652",
+  "native_body_sha256": "53d0c598024ab05099922b0b788ecb6e440662a98aecd6b9b68c5c77cfdc6da9",
+  "child_cuts": 7,
+  "limits": [
+    "Full native body bytes unchanged relocated into QSPI; relative child calls use fixture veneers, context literal unchanged. Cortex-M55 supports native low-overhead padding loops. Full context/list/threecommand buffers/ordered child events compared.",
+    "Bus access trace, unbounded wrapped-capacity padding (>32 pairs excluded; native fault observation retained), invalid pointers, child mutation and real allocation/sector/driver/hardware/layout remain open."
+  ]
+}

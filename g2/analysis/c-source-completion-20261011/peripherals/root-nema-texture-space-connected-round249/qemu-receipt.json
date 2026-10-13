@@ -1,0 +1,18 @@
+{
+  "status": "PASS_M55_QEMU_CONNECTED_TEXTURE_TILING_SPACE_EXTENSION",
+  "cases": 129600,
+  "matrix_cases": 129600,
+  "selected_extension": true,
+  "selected_space": true,
+  "space_sha256": "cbb8acc0a4cdb4ad11ca0b8c3c7d5c998fd3bc0e91194652b52dcff4df0248e1",
+  "texture_sha256": "f94e4f4d3965fe6bdfd73502e60afd6c8240cf4de13f781aa5fbe75e67537484",
+  "tiling_sha256": "6ab5ea95417c4dc364a8dcb59d056bccbe2a0e56afafa2fd4f7e40f2f503fb25",
+  "candidate_sha256": "91bb72f9db018a246e992e0aabee5b4d2503929636274f3d6698b31e7f2a47f5",
+  "native_body_sha256": "f93c897c48573e17a793ef8bfd015d52150e53812bc0fddd9492558bf8e61af7",
+  "child_cuts": 5,
+  "limits": [
+    "Native texture,tiling,space,extension unchanged at common delta; actual inter-body calls preserved; allocation/rollover/error/release cuts and four context literals. Cortex-M55 supports native low-overhead padding loops. Full context/list/threecommand buffers/ordered child events compared; ten format branches and widths7/80000000,flags0/16,actual pair count3,allocation failures/reuse/chain traversal exercised.",
+    "Bus access trace, unbounded wrapped-capacity padding beyond recorded matrix; no extension fault proof claimed, invalid pointers, child mutation and real allocation/driver/hardware/layout remain open."
+  ],
+  "native_map_verified_before_execution": true
+}

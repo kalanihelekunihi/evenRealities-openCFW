@@ -1,0 +1,22 @@
+{
+  "status": "NATIVE_QUALIFIED_UNSELECTED_M55_COMPILED",
+  "native_range": "4c73d6..4c74ee",
+  "candidate_sha256": "e2ac874576b3e8c1547e05383eacaf3ef82eeb61181b852723ca5e757666bc6d",
+  "native_cases": 84,
+  "provider_submodule": "third-party/upstream/ambiq-lvgl",
+  "provider_commit": "5be8e0ae5077aa3880aba8a322b1487d6bc73c07",
+  "provider_source": "src/draw/ambiq/lv_draw_ambiq.c",
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "callback_entries": [
+    "4c76a8",
+    "4c7548",
+    "4c74f0",
+    "4c7700"
+  ],
+  "correction": "Render callback target corrected from4c7800 to4c7700 following differential mismatch; mismatch retained.",
+  "remaining": [
+    "Select using existing async-init declaration to avoid void/uint32 duplicate declaration conflict",
+    "Build and current-source audit",
+    "Reconstruct callback/Nema child graph and source-owned unit cell"
+  ]
+}

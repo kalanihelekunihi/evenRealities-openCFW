@@ -1,0 +1,14 @@
+{
+  "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_range": [
+    "0x51419a",
+    "0x514238"
+  ],
+  "candidate_sha256": "672d4122cc0f920ad50d6a251381762d56c7166786414824ef6d7caeabe4260b",
+  "status": "SELECTED_LOCAL_COMPLETE_BUILD_AUDITED",
+  "limits": [
+    "Status writes powered byte; all child ABIs/real driver and hardware gates open."
+  ],
+  "interface": "int32_t(uint32_t,uint32_t), preserving native return bits",
+  "build_observation": "First integrated build failed previous int32_t vs new uint32_t declaration; corrected new definition to existing interface."
+}

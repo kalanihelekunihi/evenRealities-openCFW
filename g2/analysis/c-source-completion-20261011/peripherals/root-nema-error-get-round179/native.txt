@@ -1,0 +1,13 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004b128a <.data+0x7928a>:
+  4b128a:	f8df 0500 	ldr.w	r0, [pc, #1280]	@ 0x4b178c
+  4b128e:	6801      	ldr	r1, [r0, #0]
+  4b1290:	2200      	movs	r2, #0
+  4b1292:	6a08      	ldr	r0, [r1, #32]
+  4b1294:	620a      	str	r2, [r1, #32]
+  4b1296:	4770      	bx	lr

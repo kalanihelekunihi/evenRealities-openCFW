@@ -1,0 +1,14 @@
+{
+  "status": "PASS_CONNECTED_BUFFER_CREATE_ACTUAL_ALIGNED_ALLOCATOR",
+  "cases": 1296,
+  "selected": true,
+  "candidate_sha256": "2f1a3f06f7051c9e12c1dc512e554546cba2a2029fcc454afe8159d24e070768",
+  "copy_sha256": "82592cea830a6ed66d527a68a898bb7a7c0aad6f95f2e5b231aabd1e0bc01d88",
+  "pool_selector_sha256": "67e8e2cef0605f63903c1329d16872f353f3830c52458e43f037578eab4fe482",
+  "aligned_candidate_sha256": "fef23df2a921c3002d01c9c351ab497cc5de7a5ec87b32bfac3714a433880ec5",
+  "child_cuts": 5,
+  "limits": [
+    "Cache flag/32byte size rounding including overflow, IDs0/1/2 aligned8 vs general, full-width pool-ID and pointer/failure descriptor, ordered pool/output accesses/full92bytes/SP compared. Actual poolselector and copy execute.",
+    "Actual aligned wrapper/accounting executes; general allocator, queue/TLSF/block-size children controlled; output alias/NULL faults, actual allocator/physical mapping/pool ownership and hardware remain open."
+  ]
+}

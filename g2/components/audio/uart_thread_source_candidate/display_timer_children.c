@@ -45,19 +45,21 @@ uint32_t audio_uart_lv_lock_core(void *cell) {
     audio_uart_lv_mutex_ensure(mutex);
     uint32_t ok=(uint32_t)xQueueTakeMutexRecursive((void *)(uintptr_t)mutex[1],UINT32_MAX);
     if(ok!=1u)
-        audio_uart_lvgl_log(3u,"lv_freertos.c",0x84u,
+        audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\osal\\lv_freertos.c",0x84u,
                             "lv_mutex_lock","xSemaphoreTake failed!");
     return ok==1u;
 }
+
 uint32_t audio_uart_lv_unlock_core(void *cell) {
     uint32_t *mutex=(uint32_t *)cell;
     audio_uart_lv_mutex_ensure(mutex);
     uint32_t ok=(uint32_t)xQueueGiveMutexRecursive((void *)(uintptr_t)mutex[1]);
     if(ok!=1u)
-        audio_uart_lvgl_log(3u,"lv_freertos.c",0xa8u,
+        audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\osal\\lv_freertos.c",0xa8u,
                             "lv_mutex_unlock","xSemaphoreGive failed!");
     return ok==1u;
 }
+
 
 void *audio_uart_lv_list_first(void *list) {
     if(list==0) return 0;
@@ -68,13 +70,19 @@ void *audio_uart_lv_list_next(void *list,void *node) {
     uintptr_t offset=(uintptr_t)node;
     return (void *)(uintptr_t)*(uint32_t *)(void *)(base+offset+4u);
 }
+/* Native 0x473482: volatile callback reload and tick flag retry. */
 uint32_t audio_uart_lv_tick(void) {
-    uint8_t *state=audio_uart_lv_tick_state;
-    uint32_t callback=*(uint32_t *)(void *)(state+8u);
-    if(callback!=0u)
+    volatile uint8_t *state=audio_uart_lv_tick_state;
+    if(*(volatile uint32_t *)(state+8u)!=0u) {
+        uint32_t callback=*(volatile uint32_t *)(state+8u);
         return ((uint32_t (*)(void))(uintptr_t)callback)();
-    state[4u]=1u;
-    return *(uint32_t *)(void *)state;
+    }
+    uint32_t tick;
+    do {
+        state[4u]=1u;
+        tick=*(volatile uint32_t *)state;
+    } while(state[4u]==0u);
+    return tick;
 }
 uint32_t audio_uart_lv_elapsed(uint32_t start) {
     return audio_uart_lv_tick()-start;
