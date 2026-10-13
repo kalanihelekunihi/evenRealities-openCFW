@@ -20,7 +20,7 @@ static uint32_t read32be(const volatile uint8_t *p){return ((uint32_t)p[0]<<24)|
 static void write32(volatile uint8_t *p,uint32_t v){for(uint32_t i=0;i<4u;i++)p[i]=(uint8_t)(v>>(i*8u));}
 static void write16(volatile uint8_t *p,uint16_t v){p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8);}
 static void logline(uint32_t message,uint32_t a,uint32_t b,uint32_t c,uint32_t d,uint32_t e){case_record_log(message,a,b,c,d,e,0);case_record_log(CASE_STRING_ADDR(08002278),0,0,0,0,0,0);}
-static void charging(uint32_t side,const volatile uint8_t *p,uint8_t logs_quiet){
+static uint32_t charging(uint32_t side,const volatile uint8_t *p,uint8_t logs_quiet){
     if(p[3]==6u){
         uint16_t voltage=(uint16_t)(((uint16_t)p[5]<<8)|p[6]);
         uint32_t direction=p[4]&1u;
@@ -46,7 +46,12 @@ static void charging(uint32_t side,const volatile uint8_t *p,uint8_t logs_quiet)
             state[-14]=0u;state[0x12]=p[7];write16(state+0x16,voltage);
             if(!logs_quiet)logline(CASE_STRING_ADDR(080022eb),state[0x10],direction,voltage,p[7],(uint32_t)current);
         }
-    }else if(p[3]==1u && p[4]==1u && !logs_quiet){logline(side?CASE_STRING_ADDR(08002354):CASE_STRING_ADDR(08002378),0,0,0,0,0);}
+        return 0x13u;
+    }else if(p[3]==1u && p[4]==1u){
+        if(!logs_quiet)logline(side?CASE_STRING_ADDR(08002354):CASE_STRING_ADDR(08002378),0,0,0,0,0);
+        return 0x13u;
+    }
+    return 0xffu;
 }
 uint32_t case_record_dispatch_1e94(uint32_t side){
     struct case_record_prefix prefix;
@@ -80,7 +85,7 @@ uint32_t case_record_dispatch_1e94(uint32_t side){
     case 8u:result=8u;break;
     case 7u:result=7u;break;
     case 0u:break;
-    case 0x13u:charging(side,p,q);result=0x13u;break;
+    case 0x13u:result=charging(side,p,q);break;
     case 0x3eu:if(p[4]==0u || p[4]==4u)result=0x3eu;break;
     default:case_record_forward((const uint8_t *)(uintptr_t)p,prefix.length);break;
     }

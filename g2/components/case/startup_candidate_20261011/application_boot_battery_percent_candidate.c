@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: MIT
  * Native CASE 0x08009ebc battery percentage conversion.
  */
-#include <stdint.h>
+#include "case_battery_measurement_contract.h"
 extern int32_t case_policy_timer_query(uint32_t,uint32_t *); /* 0xa074 */
 extern uint32_t case_policy_sensor_divide(uint32_t,uint32_t); /* 0x0160 */
 int32_t case_boot_battery_percent(uint32_t *out)

@@ -83,11 +83,14 @@ def parse_symbols(output: str) -> dict:
             "duplicate_strong_symbols": duplicates}
 
 
-def compose(archives: list[Path], output: Path, log: Path) -> dict:
+def compose(archives: list[Path], output: Path, log: Path,
+            aliases: dict[str, str] | None = None) -> dict:
     ld = shutil.which("arm-none-eabi-ld")
     if not ld:
         raise RuntimeError("arm-none-eabi-ld is required")
-    receipt = command([ld, "-r", "--whole-archive", *map(str, archives),
+    alias_args = [arg for alias, target in sorted((aliases or {}).items())
+                  for arg in ("--defsym", f"{alias}={target}")]
+    receipt = command([ld, "-r", *alias_args, "--whole-archive", *map(str, archives),
                        "--no-whole-archive", "-o", str(output)], log)
     if receipt["returncode"] == 0:
         receipt.update(symbol_census(output))
@@ -113,6 +116,29 @@ def experimental_arm_sources(image: str, folder: Path) -> tuple[list[Path], list
             # Seven stock Main helpers contain authenticated double-precision
             # VFP operations; the default single-precision assembler rejects them.
             source_flags = ["-mfpu=fpv5-d16", "-Werror"]
+        if source.startswith("third-party/upstream/freetype/src/"):
+            # Analysis-only class source closure. Native G2 FreeType structs
+            # require a 128-byte jump buffer; the pinned Newlib default is 160.
+            source_flags += ["-DFT2_BUILD_LIBRARY",
+                             "-I" + str(ROOT / "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include"),
+                             "-I" + str(ROOT / "g2/config-recovered/freetype/g2-config"),
+                             "-I" + str(ROOT / "third-party/upstream/freetype/include")]
+            if source.endswith("/base/ftgloadr.c"):
+                # Two loader bodies already have selected, native-checked C
+                # providers. Keep upstream copies distinct in this experiment.
+                source_flags += [
+                    "-DFT_GlyphLoader_CreateExtra=experimental_upstream_FT_GlyphLoader_CreateExtra",
+                    "-DFT_GlyphLoader_Rewind=experimental_upstream_FT_GlyphLoader_Rewind"]
+            if source.endswith("/base/ftstream.c"):
+                # Eight stream primitives have selected native-checked C
+                # providers. Compile the remaining upstream stream routines
+                # without colliding with those selected definitions.
+                source_flags += [
+                    f"-D{name}=experimental_upstream_{name}" for name in (
+                        "FT_Stream_Close", "FT_Stream_OpenMemory",
+                        "FT_Stream_Read", "FT_Stream_ReadAt",
+                        "FT_Stream_ReadULong", "FT_Stream_ReadUShort",
+                        "FT_Stream_Seek", "FT_Stream_Skip")]
         if source.startswith("g2/analysis/c-source-completion-20261011/peripherals/smp_tables/candidate_"):
             cordio = ROOT / "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio"
             source_flags += ["-I" + str(cordio / subdir) for subdir in (
@@ -190,8 +216,16 @@ def arm_image(image: str, out: Path, experimental: bool = False) -> dict:
     result["archive_inputs_present"] = all(p.is_file() for p in archives)
     result["candidate_compilation_passed"] &= result["archive_inputs_present"]
     if result["candidate_compilation_passed"]:
+        aliases = {}
+        if experimental and image == "apollo_main":
+            alias_path = HERE / "experimental-link-aliases.json"
+            aliases = json.loads(alias_path.read_text()).get(image, {})
+            result["experimental_link_aliases"] = {
+                "path": str(alias_path.relative_to(ROOT)),
+                "sha256": digest(alias_path), "bindings": aliases,
+                "validation": "experimental symbol joins; ABI and runtime still gated"}
         result["relocatable_link"] = compose(archives + extra, folder / "candidate.o",
-                                             folder / "relocatable-link.log")
+                                             folder / "relocatable-link.log", aliases)
         result["candidate_compilation_passed"] &= result["relocatable_link"]["returncode"] == 0
     if experimental and image == "case":
         candidate = folder / "libcase_command_candidate.a"

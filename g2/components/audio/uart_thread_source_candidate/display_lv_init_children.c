@@ -10055,3 +10055,335 @@ insertion_move:
 
 #undef FT_CMP
 #undef FT_PTR
+
+/* Round 401: complete native-matched FreeType module installer. */
+extern int32_t audio_uart_font_path_compare(const char *, const char *);
+extern void *audio_uart_font_mem_alloc(void *, int32_t, int32_t *);
+extern void audio_uart_font_mem_free(void *, void *);
+extern uint32_t audio_uart_ft_remove_module_527466(void *, void *);
+extern uint32_t audio_uart_ft_add_renderer_5270d2(void *);
+
+static uint32_t ft401_word(const void *base, uint32_t offset)
+{
+    return *(const volatile uint32_t *)((uintptr_t)base + offset);
+}
+
+static void ft401_set_word(void *base, uint32_t offset, uint32_t value)
+{
+    *(volatile uint32_t *)((uintptr_t)base + offset) = value;
+}
+
+/* Whole native FT_Add_Module body at 0x52729c, 278 bytes. */
+uint32_t audio_uart_ft_add_module_52729c(void *library, const void *clazz)
+{
+    if (library == 0) return 0x21u;
+    if (clazz == 0) return 6u;
+    if ((int32_t)ft401_word(clazz, 16u) >= 0x2000a) return 4u;
+
+    for (uint32_t i = 0; i < ft401_word(library, 16u); ++i) {
+        void *existing = (void *)(uintptr_t)ft401_word(library, 20u + i * 4u);
+        const void *old_class = (const void *)(uintptr_t)ft401_word(existing, 0u);
+        if (audio_uart_font_path_compare(
+                (const char *)(uintptr_t)ft401_word(old_class, 8u),
+                (const char *)(uintptr_t)ft401_word(clazz, 8u)) == 0) {
+            if ((int32_t)ft401_word(clazz, 12u) <= (int32_t)ft401_word(old_class, 12u))
+                return 5u;
+            (void)audio_uart_ft_remove_module_527466(library, existing);
+            break;
+        }
+    }
+
+    void *memory = (void *)(uintptr_t)ft401_word(library, 0u);
+    int32_t error = 0;
+    if (ft401_word(library, 16u) >= 32u) return 0x30u;
+
+    void *module = audio_uart_font_mem_alloc(memory, (int32_t)ft401_word(clazz, 4u), &error);
+    if (error != 0) return (uint32_t)error;
+    ft401_set_word(module, 4u, (uint32_t)(uintptr_t)library);
+    ft401_set_word(module, 8u, (uint32_t)(uintptr_t)memory);
+    ft401_set_word(module, 0u, (uint32_t)(uintptr_t)clazz);
+
+    uint32_t flags = ft401_word(clazz, 0u);
+    if ((flags & 2u) != 0u) {
+        error = (int32_t)audio_uart_ft_add_renderer_5270d2(module);
+        if (error != 0) goto fail;
+    }
+    if ((flags & 4u) != 0u) ft401_set_word(library, 0xa0u, (uint32_t)(uintptr_t)module);
+    if ((flags & 1u) != 0u) ft401_set_word(module, 12u, (uint32_t)(uintptr_t)clazz);
+
+    uint32_t init = ft401_word(clazz, 24u);
+    if (init != 0u) {
+        error = ((int32_t (*)(void *))(uintptr_t)init)(module);
+        if (error != 0) goto fail;
+    }
+    uint32_t count = ft401_word(library, 16u);
+    ft401_set_word(library, 16u, count + 1u);
+    ft401_set_word(library, 20u + count * 4u, (uint32_t)(uintptr_t)module);
+    return (uint32_t)error;
+
+fail:
+    if ((flags & 2u) != 0u) {
+        const void *renderer_class = (const void *)(uintptr_t)ft401_word(module, 12u);
+        if (renderer_class != 0 && ft401_word(renderer_class, 36u) == 0x6f75746cu &&
+            ft401_word(module, 52u) != 0u) {
+            const void *raster_class = (const void *)(uintptr_t)ft401_word(renderer_class, 56u);
+            uint32_t raster_done = ft401_word(raster_class, 20u);
+            ((void (*)(void *))(uintptr_t)raster_done)((void *)(uintptr_t)ft401_word(module, 52u));
+        }
+    }
+    audio_uart_font_mem_free(memory, module);
+    return (uint32_t)error;
+}
+
+/* Round 402: complete native-matched FreeType module removal and teardown. */
+extern void audio_uart_font_mem_free(void *, void *);
+extern void audio_uart_ft_remove_renderer_52716c(void *);
+extern void audio_uart_ft_destroy_driver_525936(void *);
+
+static uint32_t ft402_word(const void *base, uint32_t offset)
+{
+    return *(const volatile uint32_t *)((uintptr_t)base + offset);
+}
+
+static void ft402_set_word(void *base, uint32_t offset, uint32_t value)
+{
+    *(volatile uint32_t *)((uintptr_t)base + offset) = value;
+}
+
+/* Whole native FT_Done_Module body at 0x52724c, 80 bytes. */
+uint32_t audio_uart_ft_done_module_52724c(void *module)
+{
+    const void *clazz = (const void *)(uintptr_t)ft402_word(module, 0u);
+    void *library = (void *)(uintptr_t)ft402_word(module, 4u);
+    void *memory = (void *)(uintptr_t)ft402_word(module, 8u);
+    if (library != 0 && ft402_word(library, 0xa0u) == (uint32_t)(uintptr_t)module)
+        ft402_set_word(library, 0xa0u, 0u);
+    uint32_t flags = ft402_word(clazz, 0u);
+    if ((flags & 2u) != 0u) (void)audio_uart_ft_remove_renderer_52716c(module);
+    if ((flags & 1u) != 0u) (void)audio_uart_ft_destroy_driver_525936(module);
+    uint32_t done = ft402_word(clazz, 28u);
+    if (done != 0u) ((void (*)(void *))(uintptr_t)done)(module);
+    audio_uart_font_mem_free(memory, module);
+    return 0u;
+}
+
+/* Whole native FT_Remove_Module body at 0x527466, 76 bytes. */
+uint32_t audio_uart_ft_remove_module_527466(void *library, void *module)
+{
+    if (library == 0) return 0x21u;
+    if (module != 0) {
+        uint32_t count = ft402_word(library, 16u);
+        for (uint32_t i = 0; i < count; ++i) {
+            if (ft402_word(library, 20u + i * 4u) == (uint32_t)(uintptr_t)module) {
+                ft402_set_word(library, 16u, count - 1u);
+                for (uint32_t j = i; j + 1u < count; ++j)
+                    ft402_set_word(library, 20u + j * 4u,
+                                   ft402_word(library, 20u + (j + 1u) * 4u));
+                ft402_set_word(library, 20u + (count - 1u) * 4u, 0u);
+                (void)audio_uart_ft_done_module_52724c(module);
+                return 0u;
+            }
+        }
+    }
+    return 0x22u;
+}
+
+/* Round 403: complete native-matched FreeType renderer graph. */
+extern void *audio_uart_font_mem_alloc(void *, int32_t, int32_t *);
+extern void audio_uart_font_mem_free(void *, void *);
+extern void audio_uart_ft_list_add_529304(void *, void *);
+extern void *audio_uart_ft_list_find_5292e6(void *, void *);
+extern void audio_uart_ft_list_remove_529324(void *, void *);
+extern void *audio_uart_font_lookup_renderer(void *, uint32_t, void *);
+
+static uint32_t ft403_word(const void *base, uint32_t offset)
+{
+    return *(const volatile uint32_t *)((uintptr_t)base + offset);
+}
+
+static void ft403_set_word(void *base, uint32_t offset, uint32_t value)
+{
+    *(volatile uint32_t *)((uintptr_t)base + offset) = value;
+}
+
+/* Whole native ft_set_current_renderer body at 0x5270bc, 22 bytes. */
+void audio_uart_ft_set_current_renderer_5270bc(void *library)
+{
+    void *renderer = audio_uart_font_lookup_renderer(library, 0x6f75746cu, 0);
+    ft403_set_word(library, 0x9cu, (uint32_t)(uintptr_t)renderer);
+}
+
+/* Whole native ft_add_renderer body at 0x5270d2, 154 bytes. */
+uint32_t audio_uart_ft_add_renderer_5270d2(void *module)
+{
+    void *library = (void *)(uintptr_t)ft403_word(module, 4u);
+    void *memory = (void *)(uintptr_t)ft403_word(library, 0u);
+    int32_t error = 0;
+    void *node = audio_uart_font_mem_alloc(memory, 12, &error);
+    if (error != 0) return (uint32_t)error;
+
+    const void *clazz = (const void *)(uintptr_t)ft403_word(module, 0u);
+    ft403_set_word(module, 12u, (uint32_t)(uintptr_t)clazz);
+    uint32_t glyph_format = ft403_word(clazz, 36u);
+    ft403_set_word(module, 16u, glyph_format);
+    if (glyph_format == 0x6f75746cu) {
+        const void *raster_class = (const void *)(uintptr_t)ft403_word(clazz, 56u);
+        uint32_t raster_new = ft403_word(raster_class, 4u);
+        if (raster_new != 0u) {
+            error = ((int32_t (*)(void *, void **))(uintptr_t)raster_new)(
+                memory, (void **)((uintptr_t)module + 52u));
+            if (error != 0) goto fail;
+            ft403_set_word(module, 56u, ft403_word(raster_class, 16u));
+            ft403_set_word(module, 60u, ft403_word(clazz, 40u));
+        }
+    }
+    ft403_set_word(node, 8u, (uint32_t)(uintptr_t)module);
+    audio_uart_ft_list_add_529304((void *)((uintptr_t)library + 0x94u), node);
+    audio_uart_ft_set_current_renderer_5270bc(library);
+    return (uint32_t)error;
+
+fail:
+    audio_uart_font_mem_free(memory, node);
+    return (uint32_t)error;
+}
+
+/* Whole native ft_remove_renderer body at 0x52716c, 84 bytes. */
+void audio_uart_ft_remove_renderer_52716c(void *module)
+{
+    void *library = (void *)(uintptr_t)ft403_word(module, 4u);
+    if (library == 0) return;
+    void *memory = (void *)(uintptr_t)ft403_word(library, 0u);
+    void *list = (void *)((uintptr_t)library + 0x94u);
+    void *node = audio_uart_ft_list_find_5292e6(list, module);
+    if (node == 0) return;
+    const void *clazz = (const void *)(uintptr_t)ft403_word(module, 12u);
+    if (ft403_word(clazz, 36u) == 0x6f75746cu && ft403_word(module, 52u) != 0u) {
+        const void *raster_class = (const void *)(uintptr_t)ft403_word(clazz, 56u);
+        uint32_t raster_done = ft403_word(raster_class, 20u);
+        ((void (*)(void *))(uintptr_t)raster_done)(
+            (void *)(uintptr_t)ft403_word(module, 52u));
+    }
+    audio_uart_ft_list_remove_529324(list, node);
+    audio_uart_font_mem_free(memory, node);
+    audio_uart_ft_set_current_renderer_5270bc(library);
+}
+
+/* Round 404: complete native-matched FreeType driver teardown. */
+extern void audio_uart_ft_list_finalize_529378(void *, void (*)(void *, void *, void *), void *, void *);
+extern void audio_uart_ft_destroy_face_5258a8(void *, void *, void *);
+
+/* Whole native driver teardown at 0x525936, 20 bytes. */
+void audio_uart_ft_destroy_driver_525936(void *driver)
+{
+    void *memory = (void *)(uintptr_t)*(const volatile uint32_t *)((uintptr_t)driver + 8u);
+    audio_uart_ft_list_finalize_529378((void *)((uintptr_t)driver + 16u),
+                                       audio_uart_ft_destroy_face_5258a8,
+                                       memory, driver);
+}
+
+/* Round 405: native-matched typed FreeType default-module order. */
+struct FT_Module_Class;
+struct FT_Driver_ClassRec;
+struct FT_Renderer_Class;
+
+extern const struct FT_Module_Class autofit_module_class;
+extern const struct FT_Driver_ClassRec tt_driver_class;
+extern const struct FT_Driver_ClassRec cff_driver_class;
+extern const struct FT_Module_Class psaux_module_class;
+extern const struct FT_Module_Class psnames_module_class;
+extern const struct FT_Module_Class pshinter_module_class;
+extern const struct FT_Module_Class sfnt_module_class;
+extern const struct FT_Renderer_Class ft_smooth_renderer_class;
+extern const struct FT_Renderer_Class ft_smooth_lcd_renderer_class;
+extern const struct FT_Renderer_Class ft_smooth_lcdv_renderer_class;
+extern uint32_t audio_uart_ft_add_module_52729c(void *, const void *);
+
+/* Exact recovered ten-class order, source owned; class objects remain imports. */
+static const void *const ft405_default_modules[] = {
+    &autofit_module_class,
+    &tt_driver_class,
+    &cff_driver_class,
+    &psaux_module_class,
+    &psnames_module_class,
+    &pshinter_module_class,
+    &sfnt_module_class,
+    &ft_smooth_renderer_class,
+    &ft_smooth_lcd_renderer_class,
+    &ft_smooth_lcdv_renderer_class,
+    0
+};
+
+/* Whole native FT_Add_Default_Modules body at 0x5242fc, 28 bytes. */
+void audio_uart_ft_add_default_modules_5242fc(void *library)
+{
+    for (const void *const *current = ft405_default_modules; *current != 0; ++current)
+        (void)audio_uart_ft_add_module_52729c(library, *current);
+}
+
+/* Native 0x524c3a..0x524c88, pinned FreeType 2.9.1 ftgloadr.c. */
+static uint32_t ft407_word(const void *base, uint32_t offset) {
+  const uint8_t *p = (const uint8_t *)base + offset;
+  return (uint32_t)p[0] | ((uint32_t)p[1] << 8) |
+         ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
+}
+static void ft407_store(void *base, uint32_t offset, uint32_t value) {
+  uint8_t *p = (uint8_t *)base + offset;
+  p[0] = (uint8_t)value;
+  p[1] = (uint8_t)(value >> 8);
+  p[2] = (uint8_t)(value >> 16);
+  p[3] = (uint8_t)(value >> 24);
+}
+static int32_t ft407_short(const void *base, uint32_t offset) {
+  const uint8_t *p = (const uint8_t *)base + offset;
+  return (int16_t)((uint16_t)p[0] | ((uint16_t)p[1] << 8));
+}
+
+void audio_uart_ft_glyph_loader_adjust_points_524c3a(void *loader) {
+  int32_t points = ft407_short(loader, 22u);
+  int32_t contours = ft407_short(loader, 20u);
+  ft407_store(loader, 60u, ft407_word(loader, 24u) + (uint32_t)(points * 8));
+  ft407_store(loader, 64u, ft407_word(loader, 28u) + (uint32_t)points);
+  ft407_store(loader, 68u, ft407_word(loader, 32u) + (uint32_t)(contours * 2));
+  if (((uint8_t *)loader)[16u] != 0u) {
+    ft407_store(loader, 76u, ft407_word(loader, 40u) + (uint32_t)(points * 8));
+    ft407_store(loader, 80u, ft407_word(loader, 44u) + (uint32_t)(points * 8));
+  }
+}
+
+/* Native 0x524c88..0x524cc4. The qalloc child is still a controlled import. */
+extern void *audio_uart_font_mem_realloc_items(void *, int32_t, int32_t,
+                                                int32_t, void *, int32_t *);
+uint32_t audio_uart_ft_glyph_loader_create_extra_524c88(void *loader) {
+  int32_t error = 0;
+  uint32_t max_points = ft407_word(loader, 4u);
+  void *extra = audio_uart_font_mem_realloc_items(
+      (void *)(uintptr_t)ft407_word(loader, 0u), 8, 0,
+      (int32_t)(max_points * 2u), (void *)0, &error);
+  ft407_store(loader, 40u, (uint32_t)(uintptr_t)extra);
+  if (error == 0) {
+    ((uint8_t *)loader)[16u] = 1u;
+    ft407_store(loader, 44u, (uint32_t)(uintptr_t)extra + max_points * 8u);
+    audio_uart_ft_glyph_loader_adjust_points_524c3a(loader);
+  }
+  return (uint32_t)error;
+}
+
+/* Whole native ft_mem_qalloc body at 0x529176..0x52919c (38 bytes).
+ * Pinned FreeType 2.9.1 src/base/ftutil.c supplies the source contract. */
+void *audio_uart_ft_mem_qalloc_529176(void *memory, int32_t size, int32_t *error)
+{
+    void *block = 0;
+    int32_t status = 0;
+    if (size > 0) {
+        const uint8_t *p = (const uint8_t *)memory + 4u;
+        uint32_t callback = (uint32_t)p[0] | ((uint32_t)p[1] << 8) |
+                            ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
+        block = ((void *(*)(void *, int32_t))(uintptr_t)callback)(memory, size);
+        if (block == 0)
+            status = 64;
+    } else if (size < 0) {
+        status = 6;
+    }
+    *error = status;
+    return block;
+}

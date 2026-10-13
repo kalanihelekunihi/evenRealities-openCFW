@@ -31,7 +31,7 @@ extern void case_init_led_show(void);               /* 0x080038a0 */
 extern void case_init_usb_reset(void);              /* 0x08002b40 */
 extern void case_init_sensor_finish(void);          /* 0x080035f0 */
 extern void case_init_pmic_write(uint32_t address,uint32_t value); /* 0x080039c8 */
-extern int32_t case_init_read_product_byte(uint32_t *out); /* 0x08009ebc */
+#include "case_battery_measurement_contract.h"
 extern void case_init_service_start(void);          /* 0x0800d178 */
 extern void case_init_service_ready(void);          /* 0x0800d218 */
 

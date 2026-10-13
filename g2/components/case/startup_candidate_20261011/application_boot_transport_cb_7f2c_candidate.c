@@ -11,7 +11,7 @@ extern void case_boot_current_sample(uint32_t *); /* 0x9f18 */
 extern void case_boot_battery_sample(uint32_t *); /* 0xa01e */
 extern void case_init_pmic_prepare(void); /* 0x9df4 */
 extern uint32_t case_init_pmic_write(uint32_t,uint32_t); /* 0x39c8 */
-extern void case_boot_battery_percent(uint32_t *); /* 0x9ebc */
+#include "case_battery_measurement_contract.h"
 extern uint32_t case_init_pmic_reset(uint32_t,uint32_t); /* 0x39e4 */
 extern uint32_t case_init_pmic_read(uint32_t,uint8_t *,uint32_t); /* 0x35d4 */
 extern void case_init_power_set(uint32_t); /* 0x2c8e */

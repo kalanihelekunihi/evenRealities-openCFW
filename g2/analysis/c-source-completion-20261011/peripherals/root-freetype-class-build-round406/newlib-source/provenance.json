@@ -1,0 +1,21 @@
+{
+  "status": "ANALYSIS_ONLY_ABI_CANDIDATE",
+  "upstream_url": "https://sourceware.org/git/newlib-cygwin.git",
+  "upstream_commit": "45db03434ac7ae6500c29930f3d691a528584bdf",
+  "download": "shallow filtered sparse clone; exact three source files copied from pinned commit",
+  "files": {
+    "include/machine/setjmp.h": "7790ffc60502a023a76fb8be6f9b884c8f6c46fe3a57cbaaea1acf3366e8dcbe",
+    "machine/arm/setjmp.S": "7c6876f36d11d59e06a333f4f590b476f6ab7685501aaa930b562c2399e261a7",
+    "machine/arm/arm-acle-compat.h": "49317725ad9d25acec0e9cbc217446332f13a235d8fceb481d2ea5ac84d058eb"
+  },
+  "arm_header_candidate": {"_JBLEN": 20, "_JBTYPE": "long long", "jmp_buf_bytes_if_used": 160},
+  "experimental_assembly": {
+    "target": "arm-none-eabi Cortex-M55 Thumb",
+    "status": "compiled",
+    "object_sha256": "171a0f87f31b37dc3a3940e8517c62047997c105152b95b4f50c3a0a0b63f844",
+    "defined_symbols": ["setjmp", "longjmp"],
+    "unresolved_symbols": ["__aeabi_unwind_cpp_pr0"]
+  },
+  "admission_gate": "Native G2 setjmp buffer layout, calling convention and unwind/runtime provider identity remain unverified; do not use this object or header in selected production Main build.",
+  "submodule_status": "Downloaded as pinned analysis source snapshot; submodule reference pending because current work preserves the existing index without staging."
+}

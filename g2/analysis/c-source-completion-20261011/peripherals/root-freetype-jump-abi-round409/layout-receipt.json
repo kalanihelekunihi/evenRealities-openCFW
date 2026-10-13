@@ -1,0 +1,30 @@
+{
+  "status": "PASS_NATIVE_128_BYTE_LAYOUT_AND_JUMP_BEHAVIOR_ANALYSIS_ONLY",
+  "native_oracle_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_setjmp_entry": "0x56777c",
+  "native_longjmp_entry": "0x567790",
+  "native_save_footprint_bytes": 104,
+  "native_gray_worker_first_field_offset": 128,
+  "native_validator_fields_after_buffer": [
+    128,
+    132,
+    136,
+    140
+  ],
+  "analysis_overlay_sha256": "f3e2d2f7f9f28d4c5e4d466c10e5f708b771468ad909ede5f4165a24a93cfc3a",
+  "analysis_overlay_jmp_buf_bytes": 128,
+  "compiled_smooth_object_sha256": "79812dbc54c542238c0c40a9538afb69b33a3f0dc40e45783ce211983b472d6e",
+  "compiled_gray_convert_field_offsets": [
+    144,
+    148
+  ],
+  "newlib_assembly_sha256": "7c6876f36d11d59e06a333f4f590b476f6ab7685501aaa930b562c2399e261a7",
+  "newlib_default_header_bytes": 160,
+  "sampled_jump_comparisons": 80,
+  "probe_receipt_sha256": "f8c318f6b0bf6eb5af1efc0ba186cce5c6c32defab6bf1fed726a3e74499ff8a",
+  "limits": [
+    "Native 128-byte FreeType layout rejects unmodified Newlib 160-byte header for module compilation",
+    "Assembly register behavior compared in QEMU; production runtime and other call sites unverified",
+    "Class source side link is analysis only; initialized image and hardware gates remain open"
+  ]
+}

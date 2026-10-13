@@ -1,0 +1,124 @@
+{
+  "added_imports": [],
+  "alias_address_matches": {
+    "FT_Get_Module": {
+      "address": "0004952c",
+      "target": "audio_uart_ft_get_module_5273b8"
+    },
+    "FT_GlyphLoader_CreateExtra": {
+      "address": "0004c7f4",
+      "target": "audio_uart_ft_glyph_loader_create_extra_524c88"
+    },
+    "FT_GlyphLoader_Rewind": {
+      "address": "00048674",
+      "target": "audio_uart_ft_glyph_loader_rewind_524ba8"
+    },
+    "FT_List_Add": {
+      "address": "00048aac",
+      "target": "audio_uart_ft_list_add_529304"
+    },
+    "FT_List_Finalize": {
+      "address": "00048410",
+      "target": "audio_uart_ft_list_finalize_529378"
+    },
+    "FT_List_Find": {
+      "address": "000481d0",
+      "target": "audio_uart_ft_list_find_5292e6"
+    },
+    "FT_Stream_Close": {
+      "address": "00048524",
+      "target": "audio_uart_ft_stream_close_5288ce"
+    },
+    "FT_Stream_Free": {
+      "address": "000484fc",
+      "target": "audio_uart_ft_stream_free_52502a"
+    },
+    "FT_Stream_OpenMemory": {
+      "address": "00048ca0",
+      "target": "audio_uart_ft_stream_open_memory_5288b8"
+    },
+    "FT_Stream_Read": {
+      "address": "00049574",
+      "target": "audio_uart_ft_stream_read_528928"
+    },
+    "FT_Stream_ReadAt": {
+      "address": "000495c4",
+      "target": "audio_uart_ft_stream_read_at_528936"
+    },
+    "FT_Stream_ReadULong": {
+      "address": "000492e4",
+      "target": "audio_uart_ft_stream_read_ulong_528ba8"
+    },
+    "FT_Stream_ReadUShort": {
+      "address": "0004934c",
+      "target": "audio_uart_ft_stream_read_ushort_528b4a"
+    },
+    "FT_Stream_Seek": {
+      "address": "00048920",
+      "target": "audio_uart_ft_stream_seek_5288e0"
+    },
+    "FT_Stream_Skip": {
+      "address": "000493a8",
+      "target": "audio_uart_ft_stream_skip_528914"
+    },
+    "ft_mem_alloc": {
+      "address": "0002f490",
+      "target": "audio_uart_font_mem_alloc"
+    },
+    "ft_mem_free": {
+      "address": "0002f7ac",
+      "target": "audio_uart_font_mem_free"
+    },
+    "ft_mem_qalloc": {
+      "address": "0004c844",
+      "target": "audio_uart_ft_mem_qalloc_529176"
+    },
+    "ft_mem_realloc": {
+      "address": "000305cc",
+      "target": "audio_uart_font_mem_realloc_items"
+    }
+  },
+  "alias_manifest": {
+    "path": "g2/firmware_c/experimental-link-aliases.json",
+    "sha256": "7193fc012de798e6f6581d5ca37139c45a9ea032261664570ba59df3f264f582"
+  },
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-alias-link-round412/receipt.json",
+    "sha256": "191891356a365b84bd9401842456747a371bde5f9e1dd27e51cef273b7015d62"
+  },
+  "current_imports": 833,
+  "definitions": 3744,
+  "duplicate_strong_symbols": 0,
+  "image": "apollo_main",
+  "limits": [
+    "Symbol/address joins are experimental; callback ABI and runtime not proven",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "prior_imports": 852,
+  "removed_imports": [
+    "FT_Get_Module",
+    "FT_GlyphLoader_CreateExtra",
+    "FT_GlyphLoader_Rewind",
+    "FT_List_Add",
+    "FT_List_Finalize",
+    "FT_List_Find",
+    "FT_Stream_Close",
+    "FT_Stream_Free",
+    "FT_Stream_OpenMemory",
+    "FT_Stream_Read",
+    "FT_Stream_ReadAt",
+    "FT_Stream_ReadULong",
+    "FT_Stream_ReadUShort",
+    "FT_Stream_Seek",
+    "FT_Stream_Skip",
+    "ft_mem_alloc",
+    "ft_mem_free",
+    "ft_mem_qalloc",
+    "ft_mem_realloc"
+  ],
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-alias-link-round412/root-source-audit.json",
+    "sha256": "b8e62992fea40abab135b8fcc76b992a3dcce595b2c4a4465554ec115416d99c"
+  },
+  "status": "PASS_EXPERIMENTAL_ALIAS_LINK"
+}

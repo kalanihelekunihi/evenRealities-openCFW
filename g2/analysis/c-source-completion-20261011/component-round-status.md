@@ -1745,3 +1745,21 @@ Five complete C helper bodies (484 native bytes) admitted after 48 native/C comp
 
 ### Round399 completed — sort core
 One complete704-byte C body admitted after392 native/C comparisons. Connected six-body sort graph (1188 native bytes) complete in C. Terminal Main build/current source/object/54 dependencies PASS:3398 definitions,761 imports,134 snapshots,0 duplicates. Remaining: connected Mac path/resource graph, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round400 completed — Mac path direct call join
+Native BL at0x5264a0 to0x526356 joined to existing qualified C body; no new body. Terminal Main build/current source/object/54 dependencies PASS:3398 definitions,760 imports,134 snapshots,0 duplicates. Remaining: connected runtime graph, typed FreeType module data, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round401 completed — FreeType add module
+One complete278-byte C body admitted after276 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS:3399 definitions,762 imports,134 snapshots,0 duplicates. Two direct child imports exposed. Remaining: default module table/ten typed class objects, renderer/removal children, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round402 completed — FreeType module removal/teardown
+Two complete C bodies (156 native bytes) admitted after336 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS:3401 definitions,763 imports,134 snapshots,0 duplicates. Renderer removal and driver teardown imports exposed. Remaining: renderer/driver children, default table/ten typed class objects, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round403 completed — FreeType renderer graph
+Three complete C bodies (260 native bytes) admitted after66 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS:3404 definitions,761 imports,134 snapshots,0 duplicates. Remaining: driver teardown20bytes, default module table/ten typed class objects, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round404 completed — FreeType driver teardown
+One complete20-byte C body admitted after64 native/C comparisons. Terminal Main build/current source/object/54 dependencies PASS:3405 definitions,760 imports,134 snapshots,0 duplicates. Remaining: default module routine/ten typed class objects, initialized runtime/layout/byte/hardware gates.0/6 accepted images.
+
+### Round405 completed — FreeType default module order
+One complete28-byte C body plus source-owned ten-entry typed-pointer table admitted after62 native/C comparisons and620 controlled registration calls. Terminal Main build/current source/object/54 dependencies PASS:3406 definitions,769 imports,134 snapshots,0 duplicates. Class definitions0/10 remain explicit imports. Initialized runtime/layout/byte/hardware gates open.0/6 accepted images.

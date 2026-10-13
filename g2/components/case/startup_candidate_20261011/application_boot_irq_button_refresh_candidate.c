@@ -4,7 +4,7 @@
  * state and literals below are read from the native branch graph.
  */
 #include "case_side_state_contract.h"
-extern int32_t case_init_read_product_byte(uint32_t *out); /* 0x9ebc */
+#include "case_battery_measurement_contract.h"
 extern uint32_t case_legacy_logger(const char *format,...); /* 0x9170 */
 extern uint32_t case_init_pmic_write(uint32_t reg,uint32_t value); /* 0x39c8 */
 static uint16_t rd16(uint32_t a){return *(volatile uint16_t *)(uintptr_t)a;}

@@ -1,0 +1,92 @@
+{
+  "added_imports": [],
+  "alias_manifest": {
+    "path": "g2/firmware_c/experimental-link-aliases.json",
+    "sha256": "10960ac445c09f9b03e5baa710fee8484727748de48d011149860cac77aab611"
+  },
+  "all_alias_address_matches": 22,
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-base-alias-round413/receipt.json",
+    "sha256": "2ccefe52083e04459d8ccca814b1bb6d9a14556429fe2e18647aa436878e4a18"
+  },
+  "current_imports": 808,
+  "definitions": 3797,
+  "duplicate_strong_symbols": 0,
+  "image": "apollo_main",
+  "limits": [
+    "Upstream base sources and provider joins remain experimental; class callback ABI and runtime not proven",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "manifest": {
+    "path": "g2/firmware_c/experimental-sources.json",
+    "sha256": "b55710a8c2db825ffc3f27badfc7cbcd41dd9e88e34e19486c167ab14f28d3a0"
+  },
+  "new_provider_joins": {
+    "FT_Lookup_Renderer": "audio_uart_font_lookup_renderer",
+    "FT_Vector_Length": "audio_uart_font_vector_length",
+    "ft_mem_qrealloc": "audio_uart_font_mem_realloc_raw"
+  },
+  "prior_imports": 833,
+  "removed_imports": [
+    "FT_Bitmap_Convert",
+    "FT_Bitmap_Done",
+    "FT_Bitmap_Init",
+    "FT_DivFix",
+    "FT_Get_Advance",
+    "FT_Hypot",
+    "FT_Matrix_Invert",
+    "FT_Matrix_Multiply_Scaled",
+    "FT_MulDiv",
+    "FT_MulDiv_No_Round",
+    "FT_Outline_Decompose",
+    "FT_Outline_EmboldenXY",
+    "FT_Outline_Get_CBox",
+    "FT_Outline_Get_Orientation",
+    "FT_Outline_Transform",
+    "FT_Outline_Translate",
+    "FT_RoundFix",
+    "FT_Vector_NormLen",
+    "FT_Vector_Transform",
+    "FT_Vector_Transform_Scaled",
+    "ft_corner_is_flat",
+    "ft_corner_orientation",
+    "ft_hash_num_lookup",
+    "ps_property_get",
+    "ps_property_set"
+  ],
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-base-alias-round413/root-source-audit.json",
+    "sha256": "f9792bce42aa23a0c77d367a562b4cd735ccec31c9f384464d010824e9f749b9"
+  },
+  "source_probe": {
+    "path": "g2/build/c-firmware/20261013/freetype-base-probe-round413/probe.json",
+    "sha256": "5c1203ac7d3ce5972b6fa8ed2f699264cfe184000e481fda1d4c4e864bad84dd"
+  },
+  "source_refs": [
+    {
+      "path": "third-party/upstream/freetype/src/base/ftbitmap.c",
+      "sha256": "9cc7f63ae9dd6a087b63e58b306e6a5874ca0e2e0530cc8635ed4d08acb54496"
+    },
+    {
+      "path": "third-party/upstream/freetype/src/base/ftadvanc.c",
+      "sha256": "fff8d984307e81273fb8926d22c71b894e1bfa7d33e3502ae3c0197c229a4e8f"
+    },
+    {
+      "path": "third-party/upstream/freetype/src/base/ftcalc.c",
+      "sha256": "4a0b3452e9b911f67c618a29775f4bcfa6367b9b6b3a1d2b3cf62c6113ce2e8b"
+    },
+    {
+      "path": "third-party/upstream/freetype/src/base/ftoutln.c",
+      "sha256": "823b8100b8f9492239d3fcab599342dd5a210294be15b1cdda9e152b71ec0434"
+    },
+    {
+      "path": "third-party/upstream/freetype/src/base/fthash.c",
+      "sha256": "070c44530f36c1b85ec6b58619ae4c3f09a49e5f0998d2cc401720dabf792ec0"
+    },
+    {
+      "path": "third-party/upstream/freetype/src/base/ftpsprop.c",
+      "sha256": "39b5f885d4925cae188b680030943a7bad6cef93e3daa53a7adba95c3af89fcf"
+    }
+  ],
+  "status": "PASS_EXPERIMENTAL_SIX_BASE_SOURCES_AND_THREE_PROVIDER_JOINS"
+}

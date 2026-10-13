@@ -1,0 +1,20 @@
+{
+  "status": "PASS_NATIVE_C_FT_DRIVER_TEARDOWN",
+  "native_entry": "0x525936",
+  "native_bytes": 20,
+  "comparisons": 64,
+  "native_literal_address": "0x5262a0",
+  "native_callback_thumb_pointer": "0x5258a9",
+  "selected_callback": "audio_uart_ft_destroy_face_5258a8",
+  "controlled_boundary": "selected FT_List_Finalize at native0x529378",
+  "checks": [
+    "four argument ABI: driver list, callback, memory, driver",
+    "fresh driver memory read",
+    "full4KiB fixture",
+    "SP/R4-R11/caller guard"
+  ],
+  "limits": [
+    "List finalization separately qualified; connected initialized driver runtime not claimed",
+    "No full firmware image accepted"
+  ]
+}

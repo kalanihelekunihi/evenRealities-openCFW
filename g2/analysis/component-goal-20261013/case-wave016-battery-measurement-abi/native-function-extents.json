@@ -1,0 +1,118 @@
+{
+  "catalogue": {
+    "path": "g2/research/corpus/case/ghidra/open-2026-09-29/functions-000.jsonl",
+    "sha256": "5447649e214aaf10cbe916d3474dcdfbece16a0570d3d243dc9e34e64ed39ab7"
+  },
+  "functions": [
+    {
+      "entry": "08000160",
+      "name": "__aeabi_uidiv",
+      "body_start": "08000160",
+      "body_end_inclusive": "0800018b",
+      "body_bytes": 44,
+      "signature": "int __aeabi_uidiv(uint param_1,uint param_2);",
+      "calling_convention": "unknown",
+      "thunk": false,
+      "external": false,
+      "body_sha256": "07cc1d5fec74f23dcbc258c5f37c5463333c99745fffb84bfa8fd112e0bd1673",
+      "ranges": [
+        [
+          "08000160",
+          "0800018b"
+        ]
+      ],
+      "callees": [],
+      "decompiled": true
+    },
+    {
+      "entry": "080035b8",
+      "name": "case_run_guarded",
+      "body_start": "080035b8",
+      "body_end_inclusive": "080035cf",
+      "body_bytes": 24,
+      "signature": "void case_run_guarded(void);",
+      "calling_convention": "unknown",
+      "thunk": false,
+      "external": false,
+      "body_sha256": "a997c6a1781cd6996c564fb08ad0ccc4414a319ae6625dcf7a6e8303e2534028",
+      "ranges": [
+        [
+          "080035b8",
+          "080035cf"
+        ]
+      ],
+      "callees": [
+        "080028b4"
+      ],
+      "decompiled": true
+    },
+    {
+      "entry": "08009ebc",
+      "name": "bounded_percentage_convert",
+      "body_start": "08009ebc",
+      "body_end_inclusive": "08009ef7",
+      "body_bytes": 60,
+      "signature": "undefined4 bounded_percentage_convert(uint *param_1);",
+      "calling_convention": "unknown",
+      "thunk": false,
+      "external": false,
+      "body_sha256": "25f57737ad583620773138a015a13548167b06dffe6e3d239370c0ea6cd5f43b",
+      "ranges": [
+        [
+          "08009ebc",
+          "08009ef7"
+        ]
+      ],
+      "callees": [
+        "08000160",
+        "0800a074"
+      ],
+      "decompiled": true
+    },
+    {
+      "entry": "0800a074",
+      "name": "case_read_stable_u16",
+      "body_start": "0800a074",
+      "body_end_inclusive": "0800a0e9",
+      "body_bytes": 118,
+      "signature": "undefined4 case_read_stable_u16(undefined4 param_1,int *param_2);",
+      "calling_convention": "unknown",
+      "thunk": false,
+      "external": false,
+      "body_sha256": "020d5c2e5f4f099830ca57aacac192ecdd062585dc2c386216d23578899640d3",
+      "ranges": [
+        [
+          "0800a074",
+          "0800a0e9"
+        ]
+      ],
+      "callees": [
+        "0800a130",
+        "0800a148"
+      ],
+      "decompiled": true
+    },
+    {
+      "entry": "0800a130",
+      "name": "case_run_guarded_status",
+      "body_start": "0800a130",
+      "body_end_inclusive": "0800a139",
+      "body_bytes": 10,
+      "signature": "undefined4 case_run_guarded_status(void);",
+      "calling_convention": "unknown",
+      "thunk": false,
+      "external": false,
+      "body_sha256": "687c4b62265fb24f22f85e358dd9891d73dc7cfca499ed98361090a192906a51",
+      "ranges": [
+        [
+          "0800a130",
+          "0800a139"
+        ]
+      ],
+      "callees": [
+        "080035b8"
+      ],
+      "decompiled": true
+    }
+  ]
+}

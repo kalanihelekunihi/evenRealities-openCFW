@@ -1,0 +1,71 @@
+{
+  "wave_id": "component-goal-case-wave019-router-ready-registers",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T21:26:54.795191+00:00",
+  "status": "COMPLETED_FULL_LINKED_ROUTER_UART_READY_REGISTER_QUALIFICATION",
+  "done_criteria": [
+    "All246defaultopcodevalues atlength1,6,255 with4distributedheaderpositions",
+    "Actualnative/source router/framer/UART/wait/tick bodygraph executes",
+    "ObserveexactactualUART_TDR MMIO writes matchingattemptedframedbytes andnative/source RAM/definedreturn/SP",
+    "Clearlylabels staticreadyISR input as syntheticzero-latencyregisterfixture ratherthanphysicalFIFO/IRQ/timingproof"
+  ],
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave016-battery-measurement-abi/wave.json",
+    "sha256": "2871faa21ba64f9cf5f256a0f43da09069ca820ec5d773e776736a6fda08de1f"
+  },
+  "complementary_busy_regime": {
+    "path": "g2/analysis/component-goal-20261013/case-wave017-router-busy-forwarding/wave.json",
+    "sha256": "906c8f51052133575f3b6b10df1e19bc0fb5a7d205f2fd3b1e35f5299657d115"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave019-router-ready-registers/verify.py",
+    "sha256": "cc93c57322842ad0c5e612ad947ce7026131ffe4981fa8321d57c6fa4dcf36af"
+  },
+  "test": {
+    "path": "g2/analysis/component-goal-20261013/case-wave019-router-ready-registers/verification.json",
+    "sha256": "079ff5d363cfbe31268fc57f029f4e09411c7a57d4ac92782cfa7375d88aebbf"
+  },
+  "tests": {
+    "cases": 738,
+    "command_values": 246,
+    "lengths": [
+      1,
+      6,
+      255
+    ],
+    "headerpositions": "command%4",
+    "UART_handle": "0x20000e24",
+    "UART_instance_fixture": "0x40013800",
+    "UART_ISR_fixture": "TXE|TC=0xc0, static",
+    "UART_state": 32,
+    "actual_TDR_address": "0x40013828",
+    "UART_calls_and_TDR_writes_percase": "length+5",
+    "childstubs_cuts_or_returninjection": false,
+    "peripheral_model": "Explicitstaticreadyregisterfixture; no realtimeFIFOcapacity/statusprogressmodel"
+  },
+  "ELF_sha256": "a23c019ada7fe636347dbd22806879bdcabb689e6e524ed09b711a9c0946f27a",
+  "load_span_bytes": 63122,
+  "stock_length_overage": 7370,
+  "ownership": "SeparateCASEtestoutputs; source/index untouched",
+  "license_lineage": "Same lockednative/current401unit source provenance; no hardware/producerbyteequalityclaim",
+  "component_acceptance_gates": {
+    "software_forwarding_with_static_ready_registers": "PASS",
+    "transientFIFO_IRQ_clock_timeout_and_loggingenabled": "notvalidated",
+    "physical_UART_wire_output": "notvalidated",
+    "exact_binary_matching": "notmet",
+    "custom_fit": "Separatelypassedwave018",
+    "accepted_images": "0/6",
+    "workflow": "G1passed,G2-G6notrun unchanged"
+  },
+  "next_critical_path_task": "Assesslogenabledrouter/sink andtransientFIFO/timeout cases using source-derived independentmodels orhardware traces; retainexactmatching/customfit/hardware distinction.",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave019-router-ready-registers/wave.json",
+    "sha256": "5f1ef5a287dcafb55d3c524f0e07b18fdccf830f1fe09f259e587a90cb2eb71d"
+  },
+  "publication_scope": "CASE checkpoint only; no map/acceptance promotion; other streams preserved"
+}

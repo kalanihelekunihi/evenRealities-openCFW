@@ -1,0 +1,51 @@
+{
+  "added_imports": [],
+  "base_rest_probe": {
+    "path": "g2/build/c-firmware/20261013/freetype-base-rest-probe-round414/probe.json",
+    "sha256": "7843fc03ce7fc36ded86aab596d40dabd8e107ec2979e22ff058688891e1a173"
+  },
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-loader-round414/receipt.json",
+    "sha256": "5d871f6b26f9fc77da6da1a2d4e8524149a8f6dc42f98bb1f6e98ab74a9a0e9a"
+  },
+  "builder": {
+    "path": "g2/firmware_c/build.py",
+    "sha256": "86bb831f596373ea462a50807e8c17bc97f7aea0819eabcf1792d2405e3c167d"
+  },
+  "definitions": 3807,
+  "duplicate_strong_symbols": 0,
+  "exports_renamed": [
+    "FT_GlyphLoader_CreateExtra",
+    "FT_GlyphLoader_Rewind"
+  ],
+  "image": "apollo_main",
+  "imports": 804,
+  "limits": [
+    "Upstream loader source remains experimental; native ABI and runtime for four new bodies not proved",
+    "Renamed upstream copies of two selected loader bodies are retained only inside the experimental object",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "manifest": {
+    "path": "g2/firmware_c/experimental-sources.json",
+    "sha256": "8d33509c0d39a4387ed685bb25dbeb897e89ce22b1180ef8dcbc4ef9af75c8df"
+  },
+  "removed_imports": [
+    "FT_GlyphLoader_Add",
+    "FT_GlyphLoader_CheckPoints",
+    "FT_GlyphLoader_CheckSubGlyphs",
+    "FT_GlyphLoader_Prepare"
+  ],
+  "source": {
+    "path": "third-party/upstream/freetype/src/base/ftgloadr.c",
+    "sha256": "15f571f5b495d96ccd7c36966acf2244293d286051736f7b29f1b812350affe4"
+  },
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-loader-round414/root-source-audit.json",
+    "sha256": "4610d90f21c4e03a1e80dd0769ebda2e1fe88e5d61c132fbe91a2d5a45f61764"
+  },
+  "source_probe": {
+    "path": "g2/build/c-firmware/20261013/freetype-base-probe-round413/probe.json",
+    "sha256": "5c1203ac7d3ce5972b6fa8ed2f699264cfe184000e481fda1d4c4e864bad84dd"
+  },
+  "status": "PASS_EXPERIMENTAL_UPSTREAM_LOADER"
+}

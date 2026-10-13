@@ -1,0 +1,17 @@
+{
+  "status": "PASS_FULL_NATIVE_C_FT_MEM_QALLOC",
+  "comparisons": 60,
+  "native_extent": "0x529176..0x52919c",
+  "controlled_boundary": "allocator vtable callback",
+  "checks": [
+    "negative,zero,positive and signed limit sizes",
+    "allocator success/failure",
+    "error output overwritten after callback",
+    "full4KiB/SP/R4-R11/stack guard"
+  ],
+  "selected": false,
+  "limits": [
+    "Allocator callback controlled",
+    "No initialized runtime/image layout/hardware proof"
+  ]
+}

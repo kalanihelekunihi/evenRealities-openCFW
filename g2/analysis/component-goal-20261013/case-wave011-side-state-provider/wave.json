@@ -1,0 +1,99 @@
+{
+  "wave_id": "component-goal-case-wave011-shared-side-state-provider",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "module": "PureRAM side-state reset at native08003a00",
+  "completed_utc": "2026-10-13T20:36:02.961040+00:00",
+  "status": "COMPLETED_SHARED_SOURCE_MODULE_QUALIFICATION",
+  "done_criteria": [
+    "One source-derived canonical RAM state-reset provider and shared typed contract for both source names",
+    "Both zero/nonzero branch bodies execute in genuine native/source with no modeled children or hardware",
+    "Both source entry addresses distinct; voidreturn ABI/SP/R4-R11 and all12288RAMbytes compared over140inputs each",
+    "401unit production build reproduces byte-identically and does not regress prior qualified ELF"
+  ],
+  "source_delta": {
+    "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/source-delta.json",
+    "sha256": "4f81b3456881c22c19ca1aae8dd2885f5e7c1cab8ab52a289a93e96ba75ea531"
+  },
+  "source_input_manifest": {
+    "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/input-manifest.json",
+    "sha256": "080f3667f14613c0fe4c292afc5211032d837e65cd22d0b0212145bc60a924b2"
+  },
+  "native_function_extent": {
+    "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/native-function-extent.json",
+    "sha256": "88f284a8a7505f8ee91186c39145061926f6dd6a9ddecbc052478f9420cf3132"
+  },
+  "source_object_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/shared/receipt.json",
+    "sha256": "161395d472d20e4fde25a35c2b7801f6755f21ed245fc9f633bad92ce05a5939"
+  },
+  "module_fixture": {
+    "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/module-fixture.json",
+    "sha256": "69867c4a1f31261da542f48a1e839848873ec4d96182e21cf614e3b08ad29e45"
+  },
+  "module_test": {
+    "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/side-state-verification.json",
+    "sha256": "40ec5177460fa3b141143640680291fef7caf1603d410d1edde5717a9f7edfd1"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/verify_side_state.py",
+    "sha256": "10bd1ac88ff433190304a93be4c5d63c0da0ebd50ecf24741633e9400c7893e8"
+  },
+  "reproducibility": {
+    "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/reproducibility.json",
+    "sha256": "91bb219855a84ea5993336def8200095e953cd95a665d493bb581bee234be455"
+  },
+  "builder": {
+    "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/build.py",
+    "sha256": "c0bdddc78bf33c765fd89b991defd17cf17944b23f014c7151f297792d489813"
+  },
+  "build": {
+    "C_units": 401,
+    "ELF_sha256": "b3c5becf4ba9161bedf9a6c3006a0cc35c7b51db05e24828b6ceb49f61ab0468",
+    "load_span_bytes": 63122,
+    "stock_payload_bytes": 55752,
+    "over_stock_payload_bytes": 7370,
+    "equals_preceding_qualified_ELF": true,
+    "undefined_symbols": [],
+    "known_roots": 39
+  },
+  "tests": {
+    "full_native_C_new_module_cases": 280,
+    "RAM_bytes_per_case": 12288,
+    "distinct_source_entry_names": 2,
+    "prior_profile_tests_inherited_by_exact_ELF_identity": {
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/wave.json",
+      "sha256": "42c8336d2c6302e367991873d845c0baebea4a2f336454d55dab1d673bfcae30"
+    }
+  },
+  "negative_optimization": {
+    "result": {
+      "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/noinline-negative.json",
+      "sha256": "9220f25bdb7fcebcf88631d157689415f4546b83224027019442164668f06692"
+    },
+    "exact_intermediate_source": {
+      "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/negative-noinline-source.c",
+      "sha256": "38732d17f8cc68ef003fc174a8d24bf697d00d22c2301372d3e5165cbf7c2173"
+    },
+    "intermediate_build_inventory": {
+      "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/qualified/receipt.json",
+      "sha256": "0c2281b9eab2e1a258cc9d516e65288664557948992d158e5d4eda61d2a0d897"
+    },
+    "admission": "Rejected16byte increase; ordinary inlining retained"
+  },
+  "ownership": "Parent-authorized separate CASE scope;2existingCASE Cfiles+newheader only; MAIN/Touch/index preserved",
+  "source_drift": [],
+  "license_lineage": "Existing recoveredMIT product-specific provider; newMIT contract. Native catalogue exactaddress/extent/hash retained. No upstream behaviorfix, executable blob, opcode array, child stub or hardware model.",
+  "component_acceptance_gates": {
+    "RAM_state_module_source_ABI_and_complete_bounded_branch_bodies": "PASS",
+    "whole_CASE_source_computed_roots_ambientstack_exactplacement": "unresolved",
+    "original_producing_toolchain_and_recipe": "TC-ARMCLANG6 unresolved; tools unavailable and release/scatter/perfileflags unpinned",
+    "physical_startup_IRQ_FIFO_flash_scheduler": "requires hardware validation and applicable authorization",
+    "byte_equality": "not met",
+    "accepted_images": "0/6",
+    "workflow": "G1passed;G2-G6not_run unchanged"
+  },
+  "next_critical_path_task": "Resolve original ArmCompiler6/armlink access and authenticated build/scatter recipe; recover/qualify remaining end-to-end CASE startup/peripheral/computed-root evidence. Current bounded software module and profile claims must remain separate from full firmware admission.",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

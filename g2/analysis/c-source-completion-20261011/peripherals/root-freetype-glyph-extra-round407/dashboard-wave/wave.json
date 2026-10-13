@@ -1,0 +1,142 @@
+{
+  "schema": "opencfw-completed-wave-v1",
+  "wave_id": "root-apollo-main-round407-ft-glyph-extra",
+  "component": "apollo_main",
+  "status": "completed",
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "target_id": "official-s200-v2.2.6.10",
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "source_snapshot_id": "round407-c77151e5719cffbd",
+  "completed_utc": "2026-10-13T21:07:30.747064+00:00",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-glyph-extra-round407/receipt.json",
+      "sha256": "cbaaf27da4010a2a94f5129a3af541414a5c64236b6686d123f9c16472afea31"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-glyph-extra-round407/root-source-audit.json",
+      "sha256": "58e6bb60208bd564e65738fc9b6471f694484149538457d71a1cb1082aa6603f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-glyph-extra-round407/admission-receipt.json",
+      "sha256": "70007d55d5c9eddb47448fefb5ed140ec377893e0c72b680b8fc1398a8a182e2"
+    }
+  ],
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-glyph-extra-round407/current-dependency-audit.json",
+      "sha256": "24f3c8a846c41355db8cdf3fb2ea935377b260f80c41c96c2c5d89c411a55423"
+    }
+  ],
+  "implementation_delta": {
+    "actual_c_bodies": [
+      {
+        "symbol": "audio_uart_ft_glyph_loader_adjust_points_524c3a"
+      },
+      {
+        "symbol": "audio_uart_ft_glyph_loader_create_extra_524c88"
+      }
+    ],
+    "abi_adapters": [],
+    "typed_data": [],
+    "pseudocode_only": [],
+    "fixtures_or_stubs": []
+  },
+  "build": {
+    "compiler_settings_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-glyph-extra-round407/current-dependency-audit.json",
+      "sha256": "24f3c8a846c41355db8cdf3fb2ea935377b260f80c41c96c2c5d89c411a55423"
+    },
+    "definitions": 3408,
+    "imports": 770,
+    "import_classification_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-glyph-extra-round407/dashboard-wave/import-delta.json",
+      "sha256": "3d4250f0c4945285bf7d6877e32cf3411831d99634bc91f2d85beb1cfbe47306"
+    },
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false
+  },
+  "tests": {
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-glyph-extra-round407/probe-receipt.json",
+        "sha256": "a5aa466bb0f49b8a8bb4dc80b505a037315490fdcc91f28eb1a1340114c268a4"
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-glyph-extra-round407/compile-receipt.json",
+        "sha256": "20b51c15fb0634454e9a3f0ed6c610907241de0bc6ddf24303f333a2e4bb90a8"
+      }
+    ],
+    "expected_failures": [],
+    "controlled_boundaries": [
+      "FT memory qalloc provider at 0x52919c"
+    ]
+  },
+  "address_resource_delta_receipts": [],
+  "limitations": [
+    "Allocator provider remains controlled and unresolved",
+    "Ten FreeType class definitions are not production admitted",
+    "Initialized runtime, all-image layout/byte identity and hardware operation unverified"
+  ],
+  "next_goal": {
+    "owner": "existing implementation goal",
+    "reason": "Close FreeType glyph allocation and class callback providers",
+    "exit_criteria": [
+      "Qualify FT memory qalloc or another directly connected provider",
+      "Build selected Main with current source and dependencies",
+      "Continue remaining image source gates"
+    ],
+    "missing_input_or_authorization": null,
+    "ranked_gaps": [
+      "FT memory qalloc import",
+      "Ten class definitions and callbacks",
+      "Initialized runtime and remaining image gates"
+    ]
+  },
+  "dashboard": {
+    "state": "awaiting_inventory",
+    "data_owner_thread_id": "01a120b1-9d22-7596-9ee5-a6d93342c014",
+    "publisher_thread_id": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "validated_snapshot_id": null,
+    "publish_receipts": [],
+    "readback_verified": false,
+    "snapshot": {
+      "full": {
+        "library_file_id": "libfile_3d9914466c448191be6edc3918867204",
+        "version": null,
+        "sha256": null
+      },
+      "compact": {
+        "library_file_id": "libfile_e7f198676fe481918961cdfb1a1eb33f",
+        "version": null,
+        "sha256": null
+      },
+      "validation": {
+        "status": "pending",
+        "receipt_path": null,
+        "receipt_sha256": null
+      },
+      "page_id": "page_e5199b4adeb081918164ac6acd8e4b04",
+      "page_sequence": null
+    }
+  },
+  "repository": {
+    "root": "/Users/kalani/Repo/evenRealities-openCFW",
+    "head_revision": "35c3f73ed853137e337728c78722ffa6a61a50f7",
+    "dirty_state_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-glyph-extra-round407/dashboard-wave/repository-state.json",
+      "sha256": "05f62756844efb5298c15c0d05059489197c1991b77efcd92981c5c7cf587e52"
+    },
+    "index_unchanged_by_wave_reporting": true
+  },
+  "reporting_route": {
+    "coordinator": "01a1228e-2121-71b9-a9df-9eede6787020",
+    "authorization_receipt": {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-filesystem-unicode-round380/reporting-authorization.json",
+      "sha256": "144e9fd325f50d5585bb4910fca8b7dd474213dc79349d0302fd73b495b79164"
+    },
+    "scope": "completed-wave metadata only until revoked",
+    "publisher": "01a118d2-91c5-7234-9dad-7c70bfd620de",
+    "publication_verified": false
+  }
+}
