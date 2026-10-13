@@ -1,0 +1,10 @@
+{
+  "status": "PASS_NATIVE_ARRAY_APPEND_REAL_COPY_FILL_WRAPPERS",
+  "cases": 1440,
+  "selected": true,
+  "candidate_sha256": "0f23a375716713a4cffc9e17d30b945451c4068242bac8f364f6d92362aad1c6",
+  "child_cuts": 4,
+  "limits": [
+    "Full append and consumed-void zero wrapper, equality-only capacity gate/full32 resize result, wrapped destination, fresh field/count reloads, controlled copy/fill/resize args, ordered descriptor accesses/fullguard/returningR0/SP and NULL-data log/fail-stop existence match with child mutations. Actual copy/fill wrappers execute; resize/lowercopy/lowerfill/logger remain controlled. Destination memory/lifecycle/placement/hardware remain."
+  ]
+}

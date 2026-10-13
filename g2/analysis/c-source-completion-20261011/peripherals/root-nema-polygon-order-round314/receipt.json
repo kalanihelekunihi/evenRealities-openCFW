@@ -1,0 +1,44 @@
+{
+  "round": 314,
+  "status": "PASS_DIRECTED_JOINT_ACCESS_TRACE_WITH_BRANCH_GAPS_UNADMITTED",
+  "selected": false,
+  "candidate_sha256": "29569ff45b3b43bbba6865dfcbfa4079429816596898ea6445a09acb4c3b5626",
+  "current_source_nonfinite_abi_cases_passed": 239616,
+  "current_source_degenerate_abi_cases_passed": 147456,
+  "joint_external_access_fixtures_matched": 12,
+  "repair": "MinY store deferred until after maxX load only for second point of each polygon paired loop; first point and closure retain original ordering",
+  "native_branch_candidates": 96,
+  "native_branch_candidates_visited": 82,
+  "native_branch_candidates_both_successors": 26,
+  "unvisited_branch_candidates": {
+    "0x561d48": "cbnz r2, 0x561d52",
+    "0x561f20": "beq.n 0x561f74",
+    "0x562174": "cbz r0, 0x56219c",
+    "0x5624f2": "cbz r0, 0x56251a",
+    "0x56283e": "blt.n 0x562872",
+    "0x56285a": "blt.n 0x562872",
+    "0x56286e": "bge.w 0x56385a",
+    "0x562926": "blt.w 0x562b3a",
+    "0x562932": "bpl.w 0x562b3a",
+    "0x562f62": "cbz r0, 0x562f6c",
+    "0x56364a": "bmi.n 0x563696",
+    "0x5636a8": "bmi.n 0x5636dc",
+    "0x5636ee": "bmi.n 0x563722",
+    "0x563734": "bmi.n 0x563750"
+  },
+  "actual_selected_children": 10,
+  "controlled_children": 0,
+  "local_completed": [
+    "Twelve directed full joint external access traces",
+    "Current source broad output/FP/error/ABI matrices"
+  ],
+  "remaining": [
+    "Target additional-subpath, odd polygon-count, cubic fallback and arc interval branch fixtures",
+    "Classify branch candidates and final native valueflow audit",
+    "Admission/coherent Main build if supported",
+    "Complete source/layout/runtime/hardware gates"
+  ],
+  "production_unchanged_this_round": true,
+  "accepted_complete_images": 0,
+  "current_main_build": "round304:3193 definitions/776 imports"
+}

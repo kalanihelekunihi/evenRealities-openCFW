@@ -1,0 +1,6081 @@
+{
+  "status": "BOUNDED_EXTERNAL_INPUT_READ_WATCHPOINT_TRACE",
+  "traces": [
+    {
+      "case": 0,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "00000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "00000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "00000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "00000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 1,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229edc",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "000050c0",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "00009840",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "000080c0",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011c0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "000050c0",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "00009840",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "000080c0",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 2,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a0ba",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a07c",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28001e4c",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28001224",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 3,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229eb0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229edc",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822ab86",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822ab9c",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822abb2",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822abc8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822abda",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s3, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822abea",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s4, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822abee",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s5, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822abf2",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s6, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "d3419d40",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2800103c",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011c0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280018f4",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28001914",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001934",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28001954",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800196c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r1, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280019a4",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280019a8",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "ldr.w ip, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280019b6",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "d3419d40",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 4,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229e32",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229edc",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a784",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a79a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a7b0",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a7c6",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a7d8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a7e6",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a7ee",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s3, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a7fa",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s4, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "a002a93d",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "24894940",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "00000000",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2800118a",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011c0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280012c8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280012e8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001308",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28001328",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800134c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28001362",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001378",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r1, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2800139a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "a002a93d",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "24894940",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "00000000",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 5,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229eb0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229edc",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822ab86",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822ab9c",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822abb2",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822abc8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822abda",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s3, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822abea",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s4, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822abee",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s5, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822abf2",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s6, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229edc",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822ab86",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822ab9c",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822abb2",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822abc8",
+          "path": "d3419d40",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822abda",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s3, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822abea",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s4, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822abee",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s5, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822abf2",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s6, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "1111c1c0",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "24491241",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "00002041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "0000e0c0",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2800103c",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011c0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280018f4",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28001914",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001934",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28001954",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800196c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r1, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280019a4",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280019a8",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "ldr.w ip, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280019b6",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011c0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280018f4",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28001914",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001934",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28001954",
+          "path": "d3419d40",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800196c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r1, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280019a4",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280019a8",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "ldr.w ip, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280019b6",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "1111c1c0",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "24491241",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "00002041",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "0000e0c0",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 6,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229e32",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229edc",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a784",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a79a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a7b0",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a7c6",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a7d8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a7e6",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a7ee",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s3, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a7fa",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s4, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229ff0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229edc",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a784",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a79a",
+          "path": "a002a93d",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a7b0",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a7c6",
+          "path": "24894940",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a7d8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a7e6",
+          "path": "a002a93d",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a7ee",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s3, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a7fa",
+          "path": "24894940",
+          "width": 4,
+          "instruction": "vldr s4, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "f28367bf",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "365f0e41",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "bc6f8e40",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "000080bf",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2800118a",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011c0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280012c8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280012e8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001308",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28001328",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800134c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28001362",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001378",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r1, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2800139a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28001168",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011c0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280012c8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280012e8",
+          "path": "a002a93d",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001308",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28001328",
+          "path": "24894940",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800134c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28001362",
+          "path": "a002a93d",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001378",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r1, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2800139a",
+          "path": "24894940",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "04000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "f28367bf",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "365f0e41",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "bc6f8e40",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "000080bf",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 7,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a048",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r6, [r5, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229edc",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b750",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b766",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b77c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b792",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b7a8",
+          "path": "c8bc983f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b7be",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b7d4",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b7ea",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "c8bc983f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011ec",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011c0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x28002f86",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28002f9a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28002fae",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28002fc2",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x28002fd6",
+          "path": "c8bc983f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28002fea",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28002ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28003012",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "c8bc983f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 8,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a048",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r6, [r5, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229edc",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b750",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b766",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b77c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b792",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b7a8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b7be",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b7d4",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b7ea",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011ec",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x280011c0",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x28002f86",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28002f9a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28002fae",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28002fc2",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x28002fd6",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28002fea",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28002ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28003012",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 9,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a0e4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a0fe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a114",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a12e",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a140",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a22c",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a286",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a2a0",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a2ba",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a2cc",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #28]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a2f2",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a33c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a352",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a368",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a37e",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a3f2",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a40c",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a426",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a438",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28001d84",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x28001d90",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28001dac",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001dcc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28001dec",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #28]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28002466",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800249c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280024b8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280024d8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280024f8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #28]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28002518",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r7, [r9, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280023d8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280023f4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28002414",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28002434",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #28]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x28002576",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28002592",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280025b2",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280025d2",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 10,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a462",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a47c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a492",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a4ac",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a4be",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a5aa",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a604",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a61e",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a638",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a64a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #28]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2822a670",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822a6ba",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822a6d0",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822a6e6",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822a6fc",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28001e7a",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x28001e86",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28001ea2",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x28001ec2",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28001ee2",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #28]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2800284c",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800288c",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280028a8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280028c8",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280028e8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r3, [r9, #28]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28002908",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r7, [r9, #12]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280027ac",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280027c8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280027e8",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x28002808",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #28]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 11,
+      "native": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28229c90",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229c96",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldrne r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28229cfa",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229db6",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r2, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28229f3e",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b802",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b818",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b82e",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b840",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28229d06",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x2822a760",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr r0, [r5, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x2822b860",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr r1, [r5, #0]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b868",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b898",
+          "path": "000000bf",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b8c8",
+          "path": "00005040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b8f8",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2822b928",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2822b92c",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x2822b938",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s0, [r5, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2822b93c",
+          "path": "000080bf",
+          "width": 4,
+          "instruction": "vldr s1, [r5, #20]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20010000",
+          "pc": "0x28000e42",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000e48",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000eae",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x28000fe4",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00ff7f47",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00ff7fc7",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x2001000c",
+          "pc": "0x2800127a",
+          "path": "00200120",
+          "width": 4,
+          "instruction": "ldr.w r2, [r9, #12]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800186a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x2800188a",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280018aa",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280018ca",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #28]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x28000f30",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010008",
+          "pc": "0x280012ae",
+          "path": "00100120",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9, #8]"
+        },
+        {
+          "address": "0x20010000",
+          "pc": "0x28000f22",
+          "path": "03000000",
+          "width": 4,
+          "instruction": "ldr.w r0, [r9]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x2800302a",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #16]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x28003052",
+          "path": "000000bf",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #20]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x2800307a",
+          "path": "00005040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030a2",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010018",
+          "pc": "0x280030ca",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #24]"
+        },
+        {
+          "address": "0x20010010",
+          "pc": "0x280030ce",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #16]"
+        },
+        {
+          "address": "0x2001001c",
+          "pc": "0x280030da",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s0, [r9, #28]"
+        },
+        {
+          "address": "0x20010014",
+          "pc": "0x280030de",
+          "path": "000080bf",
+          "width": 4,
+          "instruction": "vldr s2, [r9, #20]"
+        }
+      ],
+      "match": true
+    }
+  ],
+  "selected": false,
+  "scope": "GDB QEMU write watchpoints; segment+coordinate input range4128bytes, twelve directed fixtures, roundnearest/defaultcontrols; addresses and post-stop snapshot compared, access-width/multiple-store semantics not yet qualified"
+}

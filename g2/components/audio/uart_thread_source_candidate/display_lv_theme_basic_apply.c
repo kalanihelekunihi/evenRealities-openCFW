@@ -11,7 +11,7 @@ extern void audio_uart_lv_basic_item_48cfe0(void *,void *,void *);
 extern void audio_uart_lv_basic_state_done_48cbda(void *);
 extern int32_t audio_uart_lv_basic_width_48c81a(void *,uint32_t);
 extern int32_t audio_uart_lv_basic_height_48c824(void *,uint32_t);
-extern void audio_uart_lv_basic_invalidate_43f1a4(void *);
+extern uint32_t audio_uart_lv_basic_invalidate_43f1a4(void *);
 extern uint32_t audio_uart_lv_obj_event_451670(void *,uint32_t,void *);
 
 void audio_uart_lv_theme_basic_apply_48ca3c(void *object)

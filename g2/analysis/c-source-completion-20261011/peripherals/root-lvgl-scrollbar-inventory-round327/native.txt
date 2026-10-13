@@ -1,0 +1,38 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0044f2ca <.data+0x172ca>:
+  44f2ca:	b510      	push	{r4, lr}
+  44f2cc:	b088      	sub	sp, #32
+  44f2ce:	0004      	movs	r4, r0
+  44f2d0:	466a      	mov	r2, sp
+  44f2d2:	a904      	add	r1, sp, #16
+  44f2d4:	0020      	movs	r0, r4
+  44f2d6:	f7ff fc27 	bl	0x44eb28
+  44f2da:	a804      	add	r0, sp, #16
+  44f2dc:	f001 fc50 	bl	0x450b80
+  44f2e0:	2800      	cmp	r0, #0
+  44f2e2:	d104      	bne.n	0x44f2ee
+  44f2e4:	4668      	mov	r0, sp
+  44f2e6:	f001 fc4b 	bl	0x450b80
+  44f2ea:	2800      	cmp	r0, #0
+  44f2ec:	d011      	beq.n	0x44f312
+  44f2ee:	a804      	add	r0, sp, #16
+  44f2f0:	f001 fc46 	bl	0x450b80
+  44f2f4:	2800      	cmp	r0, #0
+  44f2f6:	d003      	beq.n	0x44f300
+  44f2f8:	a904      	add	r1, sp, #16
+  44f2fa:	0020      	movs	r0, r4
+  44f2fc:	f7f1 f96a 	bl	0x4405d4
+  44f300:	4668      	mov	r0, sp
+  44f302:	f001 fc3d 	bl	0x450b80
+  44f306:	2800      	cmp	r0, #0
+  44f308:	d003      	beq.n	0x44f312
+  44f30a:	4669      	mov	r1, sp
+  44f30c:	0020      	movs	r0, r4
+  44f30e:	f7f1 f961 	bl	0x4405d4
+  44f312:	b008      	add	sp, #32
+  44f314:	bd10      	pop	{r4, pc}

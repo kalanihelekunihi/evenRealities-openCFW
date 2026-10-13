@@ -1,0 +1,20 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004c8ff0 <.data+0x90ff0>:
+  4c8ff0:	b510      	push	{r4, lr}
+  4c8ff2:	9c02      	ldr	r4, [sp, #8]
+  4c8ff4:	6b00      	ldr	r0, [r0, #48]	@ 0x30
+  4c8ff6:	f006 fda3 	bl	0x4cfb40
+  4c8ffa:	6020      	str	r0, [r4, #0]
+  4c8ffc:	6820      	ldr	r0, [r4, #0]
+  4c8ffe:	2800      	cmp	r0, #0
+  4c9000:	d501      	bpl.n	0x4c9006
+  4c9002:	200c      	movs	r0, #12
+  4c9004:	e000      	b.n	0x4c9008
+  4c9006:	2000      	movs	r0, #0
+  4c9008:	b2c0      	uxtb	r0, r0
+  4c900a:	bd10      	pop	{r4, pc}

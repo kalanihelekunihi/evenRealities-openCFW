@@ -1,0 +1,1215 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00562000 <.data+0x12a000>:
+  562000:	ed8d 0a09 	vstr	s0, [sp, #36]	@ 0x24
+  562004:	9101      	str	r1, [sp, #4]
+  562006:	edd2 0a00 	vldr	s1, [r2]
+  56200a:	1c49      	adds	r1, r1, #1
+  56200c:	edcd 0a0a 	vstr	s1, [sp, #40]	@ 0x28
+  562010:	9101      	str	r1, [sp, #4]
+  562012:	b920      	cbnz	r0, 0x56201e
+  562014:	9809      	ldr	r0, [sp, #36]	@ 0x24
+  562016:	900d      	str	r0, [sp, #52]	@ 0x34
+  562018:	980a      	ldr	r0, [sp, #40]	@ 0x28
+  56201a:	900e      	str	r0, [sp, #56]	@ 0x38
+  56201c:	e75e      	b.n	0x561edc
+  56201e:	ed9d 1a0b 	vldr	s2, [sp, #44]	@ 0x2c
+  562022:	ee30 0a01 	vadd.f32	s0, s0, s2
+  562026:	ed9d 1a0c 	vldr	s2, [sp, #48]	@ 0x30
+  56202a:	ee70 0a81 	vadd.f32	s1, s1, s2
+  56202e:	ed8d 0a09 	vstr	s0, [sp, #36]	@ 0x24
+  562032:	edcd 0a0a 	vstr	s1, [sp, #40]	@ 0x28
+  562036:	ed8d 0a0d 	vstr	s0, [sp, #52]	@ 0x34
+  56203a:	edcd 0a0e 	vstr	s1, [sp, #56]	@ 0x38
+  56203e:	e77e      	b.n	0x561f3e
+  562040:	f004 020f 	and.w	r2, r4, #15
+  562044:	2a09      	cmp	r2, #9
+  562046:	d117      	bne.n	0x562078
+  562048:	68ee      	ldr	r6, [r5, #12]
+  56204a:	9a0c      	ldr	r2, [sp, #48]	@ 0x30
+  56204c:	f856 b021 	ldr.w	fp, [r6, r1, lsl #2]
+  562050:	1c49      	adds	r1, r1, #1
+  562052:	9101      	str	r1, [sp, #4]
+  562054:	f8cd b01c 	str.w	fp, [sp, #28]
+  562058:	f856 b021 	ldr.w	fp, [r6, r1, lsl #2]
+  56205c:	1c49      	adds	r1, r1, #1
+  56205e:	9101      	str	r1, [sp, #4]
+  562060:	f8cd b020 	str.w	fp, [sp, #32]
+  562064:	f856 6021 	ldr.w	r6, [r6, r1, lsl #2]
+  562068:	1c49      	adds	r1, r1, #1
+  56206a:	9101      	str	r1, [sp, #4]
+  56206c:	990b      	ldr	r1, [sp, #44]	@ 0x2c
+  56206e:	9609      	str	r6, [sp, #36]	@ 0x24
+  562070:	920e      	str	r2, [sp, #56]	@ 0x38
+  562072:	910d      	str	r1, [sp, #52]	@ 0x34
+  562074:	f88d 3003 	strb.w	r3, [sp, #3]
+  562078:	2c04      	cmp	r4, #4
+  56207a:	d11b      	bne.n	0x5620b4
+  56207c:	68e9      	ldr	r1, [r5, #12]
+  56207e:	ed9d 0a0b 	vldr	s0, [sp, #44]	@ 0x2c
+  562082:	2800      	cmp	r0, #0
+  562084:	ed8d 0a05 	vstr	s0, [sp, #20]
+  562088:	d00d      	beq.n	0x5620a6
+  56208a:	9801      	ldr	r0, [sp, #4]
+  56208c:	ed9d 0a0c 	vldr	s0, [sp, #48]	@ 0x30
+  562090:	eb01 0180 	add.w	r1, r1, r0, lsl #2
+  562094:	1c40      	adds	r0, r0, #1
+  562096:	edd1 0a00 	vldr	s1, [r1]
+  56209a:	ee70 0a20 	vadd.f32	s1, s0, s1
+  56209e:	edcd 0a06 	vstr	s1, [sp, #24]
+  5620a2:	9001      	str	r0, [sp, #4]
+  5620a4:	e356      	b.n	0x562754
+  5620a6:	9a01      	ldr	r2, [sp, #4]
+  5620a8:	f851 1022 	ldr.w	r1, [r1, r2, lsl #2]
+  5620ac:	1c52      	adds	r2, r2, #1
+  5620ae:	9201      	str	r2, [sp, #4]
+  5620b0:	9106      	str	r1, [sp, #24]
+  5620b2:	e34f      	b.n	0x562754
+  5620b4:	2c03      	cmp	r4, #3
+  5620b6:	d111      	bne.n	0x5620dc
+  5620b8:	9901      	ldr	r1, [sp, #4]
+  5620ba:	68ea      	ldr	r2, [r5, #12]
+  5620bc:	eb02 0481 	add.w	r4, r2, r1, lsl #2
+  5620c0:	ed94 0a00 	vldr	s0, [r4]
+  5620c4:	b118      	cbz	r0, 0x5620ce
+  5620c6:	eddd 0a0b 	vldr	s1, [sp, #44]	@ 0x2c
+  5620ca:	ee30 0a80 	vadd.f32	s0, s1, s0
+  5620ce:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  5620d0:	1c49      	adds	r1, r1, #1
+  5620d2:	ed8d 0a05 	vstr	s0, [sp, #20]
+  5620d6:	9101      	str	r1, [sp, #4]
+  5620d8:	9006      	str	r0, [sp, #24]
+  5620da:	e33b      	b.n	0x562754
+  5620dc:	2c0a      	cmp	r4, #10
+  5620de:	f040 81bc 	bne.w	0x56245a
+  5620e2:	9c01      	ldr	r4, [sp, #4]
+  5620e4:	68e9      	ldr	r1, [r5, #12]
+  5620e6:	eddd 0a03 	vldr	s1, [sp, #12]
+  5620ea:	eb01 0284 	add.w	r2, r1, r4, lsl #2
+  5620ee:	1c64      	adds	r4, r4, #1
+  5620f0:	ed92 0a00 	vldr	s0, [r2]
+  5620f4:	eebd 0ac0 	vcvt.s32.f32	s0, s0
+  5620f8:	ee10 1a10 	vmov	r1, s0
+  5620fc:	9401      	str	r4, [sp, #4]
+  5620fe:	ed95 0a04 	vldr	s0, [r5, #16]
+  562102:	eef4 0a40 	vcmp.f32	s1, s0
+  562106:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  56210a:	bf48      	it	mi
+  56210c:	eeb0 0a60 	vmovmi.f32	s0, s1
+  562110:	ed85 0a04 	vstr	s0, [r5, #16]
+  562114:	ed95 0a05 	vldr	s0, [r5, #20]
+  562118:	ed9d 1a04 	vldr	s2, [sp, #16]
+  56211c:	eeb4 1a40 	vcmp.f32	s2, s0
+  562120:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562124:	bf48      	it	mi
+  562126:	eeb0 0a41 	vmovmi.f32	s0, s2
+  56212a:	ed85 0a05 	vstr	s0, [r5, #20]
+  56212e:	ed95 0a06 	vldr	s0, [r5, #24]
+  562132:	eeb4 0a60 	vcmp.f32	s0, s1
+  562136:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  56213a:	bf58      	it	pl
+  56213c:	eef0 0a40 	vmovpl.f32	s1, s0
+  562140:	ed95 0a07 	vldr	s0, [r5, #28]
+  562144:	eeb4 0a41 	vcmp.f32	s0, s2
+  562148:	edc5 0a06 	vstr	s1, [r5, #24]
+  56214c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562150:	bf58      	it	pl
+  562152:	eeb0 1a40 	vmovpl.f32	s2, s0
+  562156:	eb01 71d1 	add.w	r1, r1, r1, lsr #31
+  56215a:	ed85 1a07 	vstr	s2, [r5, #28]
+  56215e:	1049      	asrs	r1, r1, #1
+  562160:	2900      	cmp	r1, #0
+  562162:	f340 8122 	ble.w	0x5623aa
+  562166:	07ca      	lsls	r2, r1, #31
+  562168:	d55d      	bpl.n	0x562226
+  56216a:	68ea      	ldr	r2, [r5, #12]
+  56216c:	eb02 0684 	add.w	r6, r2, r4, lsl #2
+  562170:	ed96 0a00 	vldr	s0, [r6]
+  562174:	b190      	cbz	r0, 0x56219c
+  562176:	eddd 0a0b 	vldr	s1, [sp, #44]	@ 0x2c
+  56217a:	ee30 0a20 	vadd.f32	s0, s0, s1
+  56217e:	1c64      	adds	r4, r4, #1
+  562180:	eb02 0284 	add.w	r2, r2, r4, lsl #2
+  562184:	ed8d 0a05 	vstr	s0, [sp, #20]
+  562188:	9401      	str	r4, [sp, #4]
+  56218a:	ed92 0a00 	vldr	s0, [r2]
+  56218e:	eddd 0a0c 	vldr	s1, [sp, #48]	@ 0x30
+  562192:	ee70 0a20 	vadd.f32	s1, s0, s1
+  562196:	edcd 0a06 	vstr	s1, [sp, #24]
+  56219a:	e006      	b.n	0x5621aa
+  56219c:	1c64      	adds	r4, r4, #1
+  56219e:	ed8d 0a05 	vstr	s0, [sp, #20]
+  5621a2:	9401      	str	r4, [sp, #4]
+  5621a4:	f852 6024 	ldr.w	r6, [r2, r4, lsl #2]
+  5621a8:	9606      	str	r6, [sp, #24]
+  5621aa:	1c64      	adds	r4, r4, #1
+  5621ac:	9401      	str	r4, [sp, #4]
+  5621ae:	9a05      	ldr	r2, [sp, #20]
+  5621b0:	9c06      	ldr	r4, [sp, #24]
+  5621b2:	f88d 3044 	strb.w	r3, [sp, #68]	@ 0x44
+  5621b6:	920b      	str	r2, [sp, #44]	@ 0x2c
+  5621b8:	940c      	str	r4, [sp, #48]	@ 0x30
+  5621ba:	edd5 1a04 	vldr	s3, [r5, #16]
+  5621be:	ed9d 1a05 	vldr	s2, [sp, #20]
+  5621c2:	eeb4 1a61 	vcmp.f32	s2, s3
+  5621c6:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5621ca:	bf48      	it	mi
+  5621cc:	eef0 1a41 	vmovmi.f32	s3, s2
+  5621d0:	edc5 1a04 	vstr	s3, [r5, #16]
+  5621d4:	edd5 1a05 	vldr	s3, [r5, #20]
+  5621d8:	ed9d 2a06 	vldr	s4, [sp, #24]
+  5621dc:	eeb4 2a61 	vcmp.f32	s4, s3
+  5621e0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5621e4:	bf48      	it	mi
+  5621e6:	eef0 1a42 	vmovmi.f32	s3, s4
+  5621ea:	ed95 0a06 	vldr	s0, [r5, #24]
+  5621ee:	eeb4 0a41 	vcmp.f32	s0, s2
+  5621f2:	edc5 1a05 	vstr	s3, [r5, #20]
+  5621f6:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5621fa:	bf58      	it	pl
+  5621fc:	eeb0 1a40 	vmovpl.f32	s2, s0
+  562200:	ed95 0a07 	vldr	s0, [r5, #28]
+  562204:	eeb4 0a42 	vcmp.f32	s0, s4
+  562208:	ed85 1a06 	vstr	s2, [r5, #24]
+  56220c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562210:	bf58      	it	pl
+  562212:	eeb0 2a40 	vmovpl.f32	s4, s0
+  562216:	ac05      	add	r4, sp, #20
+  562218:	ed85 2a07 	vstr	s4, [r5, #28]
+  56221c:	aa03      	add	r2, sp, #12
+  56221e:	ec94 0a02 	vldmia	r4, {s0-s1}
+  562222:	ec82 0a02 	vstmia	r2, {s0-s1}
+  562226:	0849      	lsrs	r1, r1, #1
+  562228:	f000 80bf 	beq.w	0x5623aa
+  56222c:	68ea      	ldr	r2, [r5, #12]
+  56222e:	9c01      	ldr	r4, [sp, #4]
+  562230:	eb02 0684 	add.w	r6, r2, r4, lsl #2
+  562234:	ed96 0a00 	vldr	s0, [r6]
+  562238:	b190      	cbz	r0, 0x562260
+  56223a:	eddd 0a0b 	vldr	s1, [sp, #44]	@ 0x2c
+  56223e:	ee30 0a20 	vadd.f32	s0, s0, s1
+  562242:	1c64      	adds	r4, r4, #1
+  562244:	eb02 0284 	add.w	r2, r2, r4, lsl #2
+  562248:	ed8d 0a05 	vstr	s0, [sp, #20]
+  56224c:	9401      	str	r4, [sp, #4]
+  56224e:	ed92 0a00 	vldr	s0, [r2]
+  562252:	eddd 0a0c 	vldr	s1, [sp, #48]	@ 0x30
+  562256:	ee70 0a20 	vadd.f32	s1, s0, s1
+  56225a:	edcd 0a06 	vstr	s1, [sp, #24]
+  56225e:	e006      	b.n	0x56226e
+  562260:	1c64      	adds	r4, r4, #1
+  562262:	ed8d 0a05 	vstr	s0, [sp, #20]
+  562266:	9401      	str	r4, [sp, #4]
+  562268:	f852 6024 	ldr.w	r6, [r2, r4, lsl #2]
+  56226c:	9606      	str	r6, [sp, #24]
+  56226e:	1c64      	adds	r4, r4, #1
+  562270:	ed9d 0a05 	vldr	s0, [sp, #20]
+  562274:	eddd 0a06 	vldr	s1, [sp, #24]
+  562278:	9401      	str	r4, [sp, #4]
+  56227a:	ed8d 0a0b 	vstr	s0, [sp, #44]	@ 0x2c
+  56227e:	edcd 0a0c 	vstr	s1, [sp, #48]	@ 0x30
+  562282:	f88d 3044 	strb.w	r3, [sp, #68]	@ 0x44
+  562286:	ed95 1a04 	vldr	s2, [r5, #16]
+  56228a:	eddd 1a05 	vldr	s3, [sp, #20]
+  56228e:	eef4 1a41 	vcmp.f32	s3, s2
+  562292:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562296:	bf48      	it	mi
+  562298:	eeb0 1a61 	vmovmi.f32	s2, s3
+  56229c:	ed85 1a04 	vstr	s2, [r5, #16]
+  5622a0:	ed95 1a05 	vldr	s2, [r5, #20]
+  5622a4:	ed9d 2a06 	vldr	s4, [sp, #24]
+  5622a8:	eeb4 2a41 	vcmp.f32	s4, s2
+  5622ac:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5622b0:	bf48      	it	mi
+  5622b2:	eeb0 1a42 	vmovmi.f32	s2, s4
+  5622b6:	ed85 1a05 	vstr	s2, [r5, #20]
+  5622ba:	ed95 1a06 	vldr	s2, [r5, #24]
+  5622be:	eeb4 1a61 	vcmp.f32	s2, s3
+  5622c2:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5622c6:	bf58      	it	pl
+  5622c8:	eef0 1a41 	vmovpl.f32	s3, s2
+  5622cc:	ed95 1a07 	vldr	s2, [r5, #28]
+  5622d0:	eeb4 1a42 	vcmp.f32	s2, s4
+  5622d4:	edc5 1a06 	vstr	s3, [r5, #24]
+  5622d8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5622dc:	bf58      	it	pl
+  5622de:	eeb0 2a41 	vmovpl.f32	s4, s2
+  5622e2:	ac05      	add	r4, sp, #20
+  5622e4:	ed85 2a07 	vstr	s4, [r5, #28]
+  5622e8:	aa03      	add	r2, sp, #12
+  5622ea:	ec94 1a02 	vldmia	r4, {s2-s3}
+  5622ee:	ec82 1a02 	vstmia	r2, {s2-s3}
+  5622f2:	68ea      	ldr	r2, [r5, #12]
+  5622f4:	9c01      	ldr	r4, [sp, #4]
+  5622f6:	eb02 0684 	add.w	r6, r2, r4, lsl #2
+  5622fa:	ed96 1a00 	vldr	s2, [r6]
+  5622fe:	b170      	cbz	r0, 0x56231e
+  562300:	ee31 0a00 	vadd.f32	s0, s2, s0
+  562304:	1c64      	adds	r4, r4, #1
+  562306:	eb02 0284 	add.w	r2, r2, r4, lsl #2
+  56230a:	ed8d 0a05 	vstr	s0, [sp, #20]
+  56230e:	9401      	str	r4, [sp, #4]
+  562310:	ed92 0a00 	vldr	s0, [r2]
+  562314:	ee30 0a20 	vadd.f32	s0, s0, s1
+  562318:	ed8d 0a06 	vstr	s0, [sp, #24]
+  56231c:	e006      	b.n	0x56232c
+  56231e:	1c64      	adds	r4, r4, #1
+  562320:	ed8d 1a05 	vstr	s2, [sp, #20]
+  562324:	9401      	str	r4, [sp, #4]
+  562326:	f852 6024 	ldr.w	r6, [r2, r4, lsl #2]
+  56232a:	9606      	str	r6, [sp, #24]
+  56232c:	9a05      	ldr	r2, [sp, #20]
+  56232e:	1c64      	adds	r4, r4, #1
+  562330:	9401      	str	r4, [sp, #4]
+  562332:	920b      	str	r2, [sp, #44]	@ 0x2c
+  562334:	9a06      	ldr	r2, [sp, #24]
+  562336:	eddd 1a05 	vldr	s3, [sp, #20]
+  56233a:	920c      	str	r2, [sp, #48]	@ 0x30
+  56233c:	ed95 1a04 	vldr	s2, [r5, #16]
+  562340:	eef4 1a41 	vcmp.f32	s3, s2
+  562344:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562348:	bf48      	it	mi
+  56234a:	eeb0 1a61 	vmovmi.f32	s2, s3
+  56234e:	ed85 1a04 	vstr	s2, [r5, #16]
+  562352:	ed95 1a05 	vldr	s2, [r5, #20]
+  562356:	ed9d 2a06 	vldr	s4, [sp, #24]
+  56235a:	eeb4 2a41 	vcmp.f32	s4, s2
+  56235e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562362:	bf48      	it	mi
+  562364:	eeb0 1a42 	vmovmi.f32	s2, s4
+  562368:	ed95 0a06 	vldr	s0, [r5, #24]
+  56236c:	eeb4 0a61 	vcmp.f32	s0, s3
+  562370:	ed85 1a05 	vstr	s2, [r5, #20]
+  562374:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562378:	bf58      	it	pl
+  56237a:	eef0 1a40 	vmovpl.f32	s3, s0
+  56237e:	ed95 0a07 	vldr	s0, [r5, #28]
+  562382:	eeb4 0a42 	vcmp.f32	s0, s4
+  562386:	edc5 1a06 	vstr	s3, [r5, #24]
+  56238a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  56238e:	bf58      	it	pl
+  562390:	eeb0 2a40 	vmovpl.f32	s4, s0
+  562394:	ac05      	add	r4, sp, #20
+  562396:	ed85 2a07 	vstr	s4, [r5, #28]
+  56239a:	aa03      	add	r2, sp, #12
+  56239c:	ec94 0a02 	vldmia	r4, {s0-s1}
+  5623a0:	ec82 0a02 	vstmia	r2, {s0-s1}
+  5623a4:	1e49      	subs	r1, r1, #1
+  5623a6:	f47f af41 	bne.w	0x56222c
+  5623aa:	eddd 0a0f 	vldr	s1, [sp, #60]	@ 0x3c
+  5623ae:	ed9d 1a0b 	vldr	s2, [sp, #44]	@ 0x2c
+  5623b2:	ee31 1a60 	vsub.f32	s2, s2, s1
+  5623b6:	eeb5 1a40 	vcmp.f32	s2, #0.0
+  5623ba:	ed9d 0a10 	vldr	s0, [sp, #64]	@ 0x40
+  5623be:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5623c2:	bf01      	itttt	eq
+  5623c4:	ed9d 1a0c 	vldreq	s2, [sp, #48]	@ 0x30
+  5623c8:	ee31 1a40 	vsubeq.f32	s2, s2, s0
+  5623cc:	eeb5 1a40 	vcmpeq.f32	s2, #0.0
+  5623d0:	eef1 fa10 	vmrseq	APSR_nzcv, fpscr
+  5623d4:	d03d      	beq.n	0x562452
+  5623d6:	a905      	add	r1, sp, #20
+  5623d8:	a803      	add	r0, sp, #12
+  5623da:	ec91 1a02 	vldmia	r1, {s2-s3}
+  5623de:	ec80 1a02 	vstmia	r0, {s2-s3}
+  5623e2:	ed8d 0a06 	vstr	s0, [sp, #24]
+  5623e6:	9806      	ldr	r0, [sp, #24]
+  5623e8:	edcd 0a05 	vstr	s1, [sp, #20]
+  5623ec:	edcd 0a0b 	vstr	s1, [sp, #44]	@ 0x2c
+  5623f0:	900c      	str	r0, [sp, #48]	@ 0x30
+  5623f2:	ed95 0a04 	vldr	s0, [r5, #16]
+  5623f6:	eddd 0a05 	vldr	s1, [sp, #20]
+  5623fa:	eef4 0a40 	vcmp.f32	s1, s0
+  5623fe:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562402:	bf48      	it	mi
+  562404:	eeb0 0a60 	vmovmi.f32	s0, s1
+  562408:	ed85 0a04 	vstr	s0, [r5, #16]
+  56240c:	ed95 0a05 	vldr	s0, [r5, #20]
+  562410:	ed9d 1a06 	vldr	s2, [sp, #24]
+  562414:	eeb4 1a40 	vcmp.f32	s2, s0
+  562418:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  56241c:	bf48      	it	mi
+  56241e:	eeb0 0a41 	vmovmi.f32	s0, s2
+  562422:	ed85 0a05 	vstr	s0, [r5, #20]
+  562426:	ed95 0a06 	vldr	s0, [r5, #24]
+  56242a:	eeb4 0a60 	vcmp.f32	s0, s1
+  56242e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562432:	bf58      	it	pl
+  562434:	eef0 0a40 	vmovpl.f32	s1, s0
+  562438:	ed95 0a07 	vldr	s0, [r5, #28]
+  56243c:	eeb4 0a41 	vcmp.f32	s0, s2
+  562440:	edc5 0a06 	vstr	s1, [r5, #24]
+  562444:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562448:	bf58      	it	pl
+  56244a:	eeb0 1a40 	vmovpl.f32	s2, s0
+  56244e:	ed85 1a07 	vstr	s2, [r5, #28]
+  562452:	2000      	movs	r0, #0
+  562454:	f88d 0001 	strb.w	r0, [sp, #1]
+  562458:	e182      	b.n	0x562760
+  56245a:	2c0b      	cmp	r4, #11
+  56245c:	f47f ad6d 	bne.w	0x561f3a
+  562460:	9c01      	ldr	r4, [sp, #4]
+  562462:	68e9      	ldr	r1, [r5, #12]
+  562464:	eddd 0a03 	vldr	s1, [sp, #12]
+  562468:	eb01 0284 	add.w	r2, r1, r4, lsl #2
+  56246c:	1c64      	adds	r4, r4, #1
+  56246e:	ed92 0a00 	vldr	s0, [r2]
+  562472:	eebd 0ac0 	vcvt.s32.f32	s0, s0
+  562476:	ee10 1a10 	vmov	r1, s0
+  56247a:	9401      	str	r4, [sp, #4]
+  56247c:	ed95 0a04 	vldr	s0, [r5, #16]
+  562480:	eef4 0a40 	vcmp.f32	s1, s0
+  562484:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562488:	bf48      	it	mi
+  56248a:	eeb0 0a60 	vmovmi.f32	s0, s1
+  56248e:	ed85 0a04 	vstr	s0, [r5, #16]
+  562492:	ed95 0a05 	vldr	s0, [r5, #20]
+  562496:	ed9d 1a04 	vldr	s2, [sp, #16]
+  56249a:	eeb4 1a40 	vcmp.f32	s2, s0
+  56249e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5624a2:	bf48      	it	mi
+  5624a4:	eeb0 0a41 	vmovmi.f32	s0, s2
+  5624a8:	ed85 0a05 	vstr	s0, [r5, #20]
+  5624ac:	ed95 0a06 	vldr	s0, [r5, #24]
+  5624b0:	eeb4 0a60 	vcmp.f32	s0, s1
+  5624b4:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5624b8:	bf58      	it	pl
+  5624ba:	eef0 0a40 	vmovpl.f32	s1, s0
+  5624be:	ed95 0a07 	vldr	s0, [r5, #28]
+  5624c2:	eeb4 0a41 	vcmp.f32	s0, s2
+  5624c6:	edc5 0a06 	vstr	s1, [r5, #24]
+  5624ca:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5624ce:	bf58      	it	pl
+  5624d0:	eeb0 1a40 	vmovpl.f32	s2, s0
+  5624d4:	eb01 71d1 	add.w	r1, r1, r1, lsr #31
+  5624d8:	ed85 1a07 	vstr	s2, [r5, #28]
+  5624dc:	1049      	asrs	r1, r1, #1
+  5624de:	2900      	cmp	r1, #0
+  5624e0:	f340 813e 	ble.w	0x562760
+  5624e4:	07ca      	lsls	r2, r1, #31
+  5624e6:	d55d      	bpl.n	0x5625a4
+  5624e8:	68ea      	ldr	r2, [r5, #12]
+  5624ea:	eb02 0684 	add.w	r6, r2, r4, lsl #2
+  5624ee:	ed96 0a00 	vldr	s0, [r6]
+  5624f2:	b190      	cbz	r0, 0x56251a
+  5624f4:	eddd 0a0b 	vldr	s1, [sp, #44]	@ 0x2c
+  5624f8:	ee30 0a20 	vadd.f32	s0, s0, s1
+  5624fc:	1c64      	adds	r4, r4, #1
+  5624fe:	eb02 0284 	add.w	r2, r2, r4, lsl #2
+  562502:	ed8d 0a05 	vstr	s0, [sp, #20]
+  562506:	9401      	str	r4, [sp, #4]
+  562508:	ed92 0a00 	vldr	s0, [r2]
+  56250c:	eddd 0a0c 	vldr	s1, [sp, #48]	@ 0x30
+  562510:	ee70 0a20 	vadd.f32	s1, s0, s1
+  562514:	edcd 0a06 	vstr	s1, [sp, #24]
+  562518:	e006      	b.n	0x562528
+  56251a:	1c64      	adds	r4, r4, #1
+  56251c:	ed8d 0a05 	vstr	s0, [sp, #20]
+  562520:	9401      	str	r4, [sp, #4]
+  562522:	f852 6024 	ldr.w	r6, [r2, r4, lsl #2]
+  562526:	9606      	str	r6, [sp, #24]
+  562528:	1c64      	adds	r4, r4, #1
+  56252a:	9401      	str	r4, [sp, #4]
+  56252c:	9a05      	ldr	r2, [sp, #20]
+  56252e:	9c06      	ldr	r4, [sp, #24]
+  562530:	f88d 3044 	strb.w	r3, [sp, #68]	@ 0x44
+  562534:	920b      	str	r2, [sp, #44]	@ 0x2c
+  562536:	940c      	str	r4, [sp, #48]	@ 0x30
+  562538:	edd5 1a04 	vldr	s3, [r5, #16]
+  56253c:	ed9d 1a05 	vldr	s2, [sp, #20]
+  562540:	eeb4 1a61 	vcmp.f32	s2, s3
+  562544:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562548:	bf48      	it	mi
+  56254a:	eef0 1a41 	vmovmi.f32	s3, s2
+  56254e:	edc5 1a04 	vstr	s3, [r5, #16]
+  562552:	edd5 1a05 	vldr	s3, [r5, #20]
+  562556:	ed9d 2a06 	vldr	s4, [sp, #24]
+  56255a:	eeb4 2a61 	vcmp.f32	s4, s3
+  56255e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562562:	bf48      	it	mi
+  562564:	eef0 1a42 	vmovmi.f32	s3, s4
+  562568:	ed95 0a06 	vldr	s0, [r5, #24]
+  56256c:	eeb4 0a41 	vcmp.f32	s0, s2
+  562570:	edc5 1a05 	vstr	s3, [r5, #20]
+  562574:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562578:	bf58      	it	pl
+  56257a:	eeb0 1a40 	vmovpl.f32	s2, s0
+  56257e:	ed95 0a07 	vldr	s0, [r5, #28]
+  562582:	eeb4 0a42 	vcmp.f32	s0, s4
+  562586:	ed85 1a06 	vstr	s2, [r5, #24]
+  56258a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  56258e:	bf58      	it	pl
+  562590:	eeb0 2a40 	vmovpl.f32	s4, s0
+  562594:	ac05      	add	r4, sp, #20
+  562596:	ed85 2a07 	vstr	s4, [r5, #28]
+  56259a:	aa03      	add	r2, sp, #12
+  56259c:	ec94 0a02 	vldmia	r4, {s0-s1}
+  5625a0:	ec82 0a02 	vstmia	r2, {s0-s1}
+  5625a4:	0849      	lsrs	r1, r1, #1
+  5625a6:	f000 80db 	beq.w	0x562760
+  5625aa:	68ea      	ldr	r2, [r5, #12]
+  5625ac:	9c01      	ldr	r4, [sp, #4]
+  5625ae:	eb02 0684 	add.w	r6, r2, r4, lsl #2
+  5625b2:	ed96 0a00 	vldr	s0, [r6]
+  5625b6:	b190      	cbz	r0, 0x5625de
+  5625b8:	eddd 0a0b 	vldr	s1, [sp, #44]	@ 0x2c
+  5625bc:	ee30 0a20 	vadd.f32	s0, s0, s1
+  5625c0:	1c64      	adds	r4, r4, #1
+  5625c2:	eb02 0284 	add.w	r2, r2, r4, lsl #2
+  5625c6:	ed8d 0a05 	vstr	s0, [sp, #20]
+  5625ca:	9401      	str	r4, [sp, #4]
+  5625cc:	ed92 0a00 	vldr	s0, [r2]
+  5625d0:	eddd 0a0c 	vldr	s1, [sp, #48]	@ 0x30
+  5625d4:	ee70 0a20 	vadd.f32	s1, s0, s1
+  5625d8:	edcd 0a06 	vstr	s1, [sp, #24]
+  5625dc:	e006      	b.n	0x5625ec
+  5625de:	1c64      	adds	r4, r4, #1
+  5625e0:	ed8d 0a05 	vstr	s0, [sp, #20]
+  5625e4:	9401      	str	r4, [sp, #4]
+  5625e6:	f852 6024 	ldr.w	r6, [r2, r4, lsl #2]
+  5625ea:	9606      	str	r6, [sp, #24]
+  5625ec:	1c64      	adds	r4, r4, #1
+  5625ee:	ed9d 0a05 	vldr	s0, [sp, #20]
+  5625f2:	eddd 0a06 	vldr	s1, [sp, #24]
+  5625f6:	9401      	str	r4, [sp, #4]
+  5625f8:	ed8d 0a0b 	vstr	s0, [sp, #44]	@ 0x2c
+  5625fc:	edcd 0a0c 	vstr	s1, [sp, #48]	@ 0x30
+  562600:	f88d 3044 	strb.w	r3, [sp, #68]	@ 0x44
+  562604:	ed95 1a04 	vldr	s2, [r5, #16]
+  562608:	eddd 1a05 	vldr	s3, [sp, #20]
+  56260c:	eef4 1a41 	vcmp.f32	s3, s2
+  562610:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562614:	bf48      	it	mi
+  562616:	eeb0 1a61 	vmovmi.f32	s2, s3
+  56261a:	ed85 1a04 	vstr	s2, [r5, #16]
+  56261e:	ed95 1a05 	vldr	s2, [r5, #20]
+  562622:	ed9d 2a06 	vldr	s4, [sp, #24]
+  562626:	eeb4 2a41 	vcmp.f32	s4, s2
+  56262a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  56262e:	bf48      	it	mi
+  562630:	eeb0 1a42 	vmovmi.f32	s2, s4
+  562634:	ed85 1a05 	vstr	s2, [r5, #20]
+  562638:	ed95 1a06 	vldr	s2, [r5, #24]
+  56263c:	eeb4 1a61 	vcmp.f32	s2, s3
+  562640:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562644:	bf58      	it	pl
+  562646:	eef0 1a41 	vmovpl.f32	s3, s2
+  56264a:	ed95 1a07 	vldr	s2, [r5, #28]
+  56264e:	eeb4 1a42 	vcmp.f32	s2, s4
+  562652:	edc5 1a06 	vstr	s3, [r5, #24]
+  562656:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  56265a:	bf58      	it	pl
+  56265c:	eeb0 2a41 	vmovpl.f32	s4, s2
+  562660:	ac05      	add	r4, sp, #20
+  562662:	ed85 2a07 	vstr	s4, [r5, #28]
+  562666:	aa03      	add	r2, sp, #12
+  562668:	ec94 1a02 	vldmia	r4, {s2-s3}
+  56266c:	ec82 1a02 	vstmia	r2, {s2-s3}
+  562670:	68ea      	ldr	r2, [r5, #12]
+  562672:	9c01      	ldr	r4, [sp, #4]
+  562674:	eb02 0684 	add.w	r6, r2, r4, lsl #2
+  562678:	ed96 1a00 	vldr	s2, [r6]
+  56267c:	b170      	cbz	r0, 0x56269c
+  56267e:	ee31 0a00 	vadd.f32	s0, s2, s0
+  562682:	1c64      	adds	r4, r4, #1
+  562684:	eb02 0284 	add.w	r2, r2, r4, lsl #2
+  562688:	ed8d 0a05 	vstr	s0, [sp, #20]
+  56268c:	9401      	str	r4, [sp, #4]
+  56268e:	ed92 0a00 	vldr	s0, [r2]
+  562692:	ee30 0a20 	vadd.f32	s0, s0, s1
+  562696:	ed8d 0a06 	vstr	s0, [sp, #24]
+  56269a:	e006      	b.n	0x5626aa
+  56269c:	1c64      	adds	r4, r4, #1
+  56269e:	ed8d 1a05 	vstr	s2, [sp, #20]
+  5626a2:	9401      	str	r4, [sp, #4]
+  5626a4:	f852 6024 	ldr.w	r6, [r2, r4, lsl #2]
+  5626a8:	9606      	str	r6, [sp, #24]
+  5626aa:	9a05      	ldr	r2, [sp, #20]
+  5626ac:	1c64      	adds	r4, r4, #1
+  5626ae:	9401      	str	r4, [sp, #4]
+  5626b0:	920b      	str	r2, [sp, #44]	@ 0x2c
+  5626b2:	9a06      	ldr	r2, [sp, #24]
+  5626b4:	eddd 1a05 	vldr	s3, [sp, #20]
+  5626b8:	920c      	str	r2, [sp, #48]	@ 0x30
+  5626ba:	ed95 1a04 	vldr	s2, [r5, #16]
+  5626be:	eef4 1a41 	vcmp.f32	s3, s2
+  5626c2:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5626c6:	bf48      	it	mi
+  5626c8:	eeb0 1a61 	vmovmi.f32	s2, s3
+  5626cc:	ed85 1a04 	vstr	s2, [r5, #16]
+  5626d0:	ed95 1a05 	vldr	s2, [r5, #20]
+  5626d4:	ed9d 2a06 	vldr	s4, [sp, #24]
+  5626d8:	eeb4 2a41 	vcmp.f32	s4, s2
+  5626dc:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5626e0:	bf48      	it	mi
+  5626e2:	eeb0 1a42 	vmovmi.f32	s2, s4
+  5626e6:	ed95 0a06 	vldr	s0, [r5, #24]
+  5626ea:	eeb4 0a61 	vcmp.f32	s0, s3
+  5626ee:	ed85 1a05 	vstr	s2, [r5, #20]
+  5626f2:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5626f6:	bf58      	it	pl
+  5626f8:	eef0 1a40 	vmovpl.f32	s3, s0
+  5626fc:	ed95 0a07 	vldr	s0, [r5, #28]
+  562700:	eeb4 0a42 	vcmp.f32	s0, s4
+  562704:	edc5 1a06 	vstr	s3, [r5, #24]
+  562708:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  56270c:	bf58      	it	pl
+  56270e:	eeb0 2a40 	vmovpl.f32	s4, s0
+  562712:	ac05      	add	r4, sp, #20
+  562714:	ed85 2a07 	vstr	s4, [r5, #28]
+  562718:	aa03      	add	r2, sp, #12
+  56271a:	ec94 0a02 	vldmia	r4, {s0-s1}
+  56271e:	ec82 0a02 	vstmia	r2, {s0-s1}
+  562722:	1e49      	subs	r1, r1, #1
+  562724:	f47f af41 	bne.w	0x5625aa
+  562728:	e01a      	b.n	0x562760
+  56272a:	f89d 0000 	ldrb.w	r0, [sp]
+  56272e:	2801      	cmp	r0, #1
+  562730:	d103      	bne.n	0x56273a
+  562732:	2100      	movs	r1, #0
+  562734:	9105      	str	r1, [sp, #20]
+  562736:	9106      	str	r1, [sp, #24]
+  562738:	e003      	b.n	0x562742
+  56273a:	980f      	ldr	r0, [sp, #60]	@ 0x3c
+  56273c:	9005      	str	r0, [sp, #20]
+  56273e:	9810      	ldr	r0, [sp, #64]	@ 0x40
+  562740:	9006      	str	r0, [sp, #24]
+  562742:	9805      	ldr	r0, [sp, #20]
+  562744:	9906      	ldr	r1, [sp, #24]
+  562746:	2200      	movs	r2, #0
+  562748:	900b      	str	r0, [sp, #44]	@ 0x2c
+  56274a:	910c      	str	r1, [sp, #48]	@ 0x30
+  56274c:	f88d 2002 	strb.w	r2, [sp, #2]
+  562750:	f88d 2001 	strb.w	r2, [sp, #1]
+  562754:	9805      	ldr	r0, [sp, #20]
+  562756:	9906      	ldr	r1, [sp, #24]
+  562758:	f88d 3044 	strb.w	r3, [sp, #68]	@ 0x44
+  56275c:	900b      	str	r0, [sp, #44]	@ 0x2c
+  56275e:	910c      	str	r1, [sp, #48]	@ 0x30
+  562760:	68a8      	ldr	r0, [r5, #8]
+  562762:	9918      	ldr	r1, [sp, #96]	@ 0x60
+  562764:	eddd 0a06 	vldr	s1, [sp, #24]
+  562768:	ed9d 1a05 	vldr	s2, [sp, #20]
+  56276c:	5c40      	ldrb	r0, [r0, r1]
+  56276e:	f000 006f 	and.w	r0, r0, #111	@ 0x6f
+  562772:	2806      	cmp	r0, #6
+  562774:	bf18      	it	ne
+  562776:	2808      	cmpne	r0, #8
+  562778:	f040 81f6 	bne.w	0x562b68
+  56277c:	a812      	add	r0, sp, #72	@ 0x48
+  56277e:	2100      	movs	r1, #0
+  562780:	e9c0 1100 	strd	r1, r1, [r0]
+  562784:	ed95 0a04 	vldr	s0, [r5, #16]
+  562788:	eeb4 0a41 	vcmp.f32	s0, s2
+  56278c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562790:	bf58      	it	pl
+  562792:	eeb0 0a41 	vmovpl.f32	s0, s2
+  562796:	ed85 0a04 	vstr	s0, [r5, #16]
+  56279a:	ed95 0a05 	vldr	s0, [r5, #20]
+  56279e:	eeb4 0a60 	vcmp.f32	s0, s1
+  5627a2:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5627a6:	bf58      	it	pl
+  5627a8:	eeb0 0a60 	vmovpl.f32	s0, s1
+  5627ac:	ed85 0a05 	vstr	s0, [r5, #20]
+  5627b0:	ed95 0a06 	vldr	s0, [r5, #24]
+  5627b4:	eeb4 1a40 	vcmp.f32	s2, s0
+  5627b8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5627bc:	bf58      	it	pl
+  5627be:	eeb0 0a41 	vmovpl.f32	s0, s2
+  5627c2:	ed85 0a06 	vstr	s0, [r5, #24]
+  5627c6:	ed95 0a07 	vldr	s0, [r5, #28]
+  5627ca:	eef4 0a40 	vcmp.f32	s1, s0
+  5627ce:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5627d2:	bf58      	it	pl
+  5627d4:	eeb0 0a60 	vmovpl.f32	s0, s1
+  5627d8:	6928      	ldr	r0, [r5, #16]
+  5627da:	ed85 0a07 	vstr	s0, [r5, #28]
+  5627de:	eddd 2a08 	vldr	s5, [sp, #32]
+  5627e2:	9014      	str	r0, [sp, #80]	@ 0x50
+  5627e4:	9807      	ldr	r0, [sp, #28]
+  5627e6:	ed95 0a05 	vldr	s0, [r5, #20]
+  5627ea:	ed8d 0a15 	vstr	s0, [sp, #84]	@ 0x54
+  5627ee:	edd5 1a06 	vldr	s3, [r5, #24]
+  5627f2:	edcd 1a16 	vstr	s3, [sp, #88]	@ 0x58
+  5627f6:	ed9d 4a14 	vldr	s8, [sp, #80]	@ 0x50
+  5627fa:	ed95 2a07 	vldr	s4, [r5, #28]
+  5627fe:	9019      	str	r0, [sp, #100]	@ 0x64
+  562800:	9809      	ldr	r0, [sp, #36]	@ 0x24
+  562802:	eddd 3a19 	vldr	s7, [sp, #100]	@ 0x64
+  562806:	ed9d 3a0a 	vldr	s6, [sp, #40]	@ 0x28
+  56280a:	eef4 3a44 	vcmp.f32	s7, s8
+  56280e:	ed8d 2a17 	vstr	s4, [sp, #92]	@ 0x5c
+  562812:	edcd 2a1a 	vstr	s5, [sp, #104]	@ 0x68
+  562816:	901b      	str	r0, [sp, #108]	@ 0x6c
+  562818:	ed8d 3a1c 	vstr	s6, [sp, #112]	@ 0x70
+  56281c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562820:	bfa4      	itt	ge
+  562822:	eef4 1a63 	vcmpge.f32	s3, s7
+  562826:	eef1 fa10 	vmrsge	APSR_nzcv, fpscr
+  56282a:	db22      	blt.n	0x562872
+  56282c:	eef4 2a40 	vcmp.f32	s5, s0
+  562830:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562834:	bfa4      	itt	ge
+  562836:	eeb4 2a62 	vcmpge.f32	s4, s5
+  56283a:	eef1 fa10 	vmrsge	APSR_nzcv, fpscr
+  56283e:	db18      	blt.n	0x562872
+  562840:	eddd 2a1b 	vldr	s5, [sp, #108]	@ 0x6c
+  562844:	eddd 3a14 	vldr	s7, [sp, #80]	@ 0x50
+  562848:	eef4 2a63 	vcmp.f32	s5, s7
+  56284c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562850:	bfa4      	itt	ge
+  562852:	eef4 1a62 	vcmpge.f32	s3, s5
+  562856:	eef1 fa10 	vmrsge	APSR_nzcv, fpscr
+  56285a:	db0a      	blt.n	0x562872
+  56285c:	eeb4 3a40 	vcmp.f32	s6, s0
+  562860:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562864:	bfa4      	itt	ge
+  562866:	eeb4 2a43 	vcmpge.f32	s4, s6
+  56286a:	eef1 fa10 	vmrsge	APSR_nzcv, fpscr
+  56286e:	f280 87f4 	bge.w	0x56385a
+  562872:	9803      	ldr	r0, [sp, #12]
+  562874:	ed8d 1a1f 	vstr	s2, [sp, #124]	@ 0x7c
+  562878:	edcd 0a20 	vstr	s1, [sp, #128]	@ 0x80
+  56287c:	901d      	str	r0, [sp, #116]	@ 0x74
+  56287e:	9804      	ldr	r0, [sp, #16]
+  562880:	ae1d      	add	r6, sp, #116	@ 0x74
+  562882:	f10d 0b64 	add.w	fp, sp, #100	@ 0x64
+  562886:	901e      	str	r0, [sp, #120]	@ 0x78
+  562888:	a812      	add	r0, sp, #72	@ 0x48
+  56288a:	f10d 086c 	add.w	r8, sp, #108	@ 0x6c
+  56288e:	f10d 097c 	add.w	r9, sp, #124	@ 0x7c
+  562892:	f10d 0a50 	add.w	sl, sp, #80	@ 0x50
+  562896:	2402      	movs	r4, #2
+  562898:	ed9f ba29 	vldr	s22, [pc, #164]	@ 0x562940
+  56289c:	eefa ba08 	vmov.f32	s23, #168	@ 0xc1400000 -12.0
+  5628a0:	eeb1 ca08 	vmov.f32	s24, #24	@ 0x40c00000  6.0
+  5628a4:	eefa ca02 	vmov.f32	s25, #162	@ 0xc1100000 -9.0
+  5628a8:	eeb2 da02 	vmov.f32	s26, #34	@ 0x41100000  9.0
+  5628ac:	f8cd 0084 	str.w	r0, [sp, #132]	@ 0x84
+  5628b0:	eddf da24 	vldr	s27, [pc, #144]	@ 0x562944
+  5628b4:	ed9f ea24 	vldr	s28, [pc, #144]	@ 0x562948
+  5628b8:	ed96 8a00 	vldr	s16, [r6]
+  5628bc:	eeb8 0a08 	vmov.f32	s0, #136	@ 0xc0400000 -3.0
+  5628c0:	ee68 0a00 	vmul.f32	s1, s16, s0
+  5628c4:	eddb 9a00 	vldr	s19, [fp]
+  5628c8:	eef0 aa60 	vmov.f32	s21, s1
+  5628cc:	ed98 9a00 	vldr	s18, [r8]
+  5628d0:	ee49 aa8d 	vmla.f32	s21, s19, s26
+  5628d4:	edd9 8a00 	vldr	s17, [r9]
+  5628d8:	ee49 aa2c 	vmla.f32	s21, s18, s25
+  5628dc:	eeb0 0a08 	vmov.f32	s0, #8	@ 0x40400000  3.0
+  5628e0:	ee48 aa80 	vmla.f32	s21, s17, s0
+  5628e4:	ee28 aa0c 	vmul.f32	s20, s16, s24
+  5628e8:	eeb0 0aea 	vabs.f32	s0, s21
+  5628ec:	ee09 aaab 	vmla.f32	s20, s19, s23
+  5628f0:	eeb0 1a08 	vmov.f32	s2, #8	@ 0x40400000  3.0
+  5628f4:	2700      	movs	r7, #0
+  5628f6:	eeb4 0a4b 	vcmp.f32	s0, s22
+  5628fa:	ee09 aa0c 	vmla.f32	s20, s18, s24
+  5628fe:	ee49 0a81 	vmla.f32	s1, s19, s2
+  562902:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562906:	d521      	bpl.n	0x56294c
+  562908:	eeb0 0aca 	vabs.f32	s0, s20
+  56290c:	eeb4 0a4e 	vcmp.f32	s0, s28
+  562910:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562914:	bfa1      	itttt	ge
+  562916:	ee80 0a8a 	vdivge.f32	s0, s1, s20
+  56291a:	eeb1 0a40 	vnegge.f32	s0, s0
+  56291e:	eeb4 0a4e 	vcmpge.f32	s0, s28
+  562922:	eef1 fa10 	vmrsge	APSR_nzcv, fpscr
+  562926:	f2c0 8108 	blt.w	0x562b3a
+  56292a:	eeb4 0a6d 	vcmp.f32	s0, s27
+  56292e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562932:	f140 8102 	bpl.w	0x562b3a
+  562936:	ed8d 0a12 	vstr	s0, [sp, #72]	@ 0x48
+  56293a:	2701      	movs	r7, #1
+  56293c:	2000      	movs	r0, #0
+  56293e:	e046      	b.n	0x5629ce
+  562940:	bf95      	itete	ls
+  562942:	33d6      	addls	r3, #214	@ 0xd6
+  562944:	fffe 3f7f 	vcvthi.u32.f32	<illegal reg q9.5>, <illegal reg q15.5>, #2
+  562948:	bf96      	itet	ls	@ unpredictable <IT:ls>
+  56294a:	33d6      	addls	r3, #214	@ 0xd6
+  56294c:	eeb1 1a00 	vmovhi.f32	s2, #16	@ 0x40800000  4.0
+  562950:	ee2a 0a0a 	vmulls.f32	s0, s20, s20
+  562954:	ee60 0a81 	vmul.f32	s1, s1, s2
+  562958:	ee00 0aea 	vmls.f32	s0, s1, s21
+  56295c:	eeb4 0a4e 	vcmp.f32	s0, s28
+  562960:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562964:	f2c0 80e9 	blt.w	0x562b3a
+  562968:	f6d6 ff1e 	bl	0x4397a8
+  56296c:	eef0 0a40 	vmov.f32	s1, s0
+  562970:	eeb0 0a00 	vmov.f32	s0, #0	@ 0x40000000  2.0
+  562974:	ee2a 1a80 	vmul.f32	s2, s21, s0
+  562978:	ee30 0aca 	vsub.f32	s0, s1, s20
+  56297c:	ee80 0a01 	vdiv.f32	s0, s0, s2
+  562980:	eeb4 0a4e 	vcmp.f32	s0, s28
+  562984:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562988:	db07      	blt.n	0x56299a
+  56298a:	eeb4 0a6d 	vcmp.f32	s0, s27
+  56298e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562992:	bf44      	itt	mi
+  562994:	ed8d 0a12 	vstrmi	s0, [sp, #72]	@ 0x48
+  562998:	2701      	movmi	r7, #1
+  56299a:	eeb1 0a4a 	vneg.f32	s0, s20
+  56299e:	ee30 0a60 	vsub.f32	s0, s0, s1
+  5629a2:	ee80 0a01 	vdiv.f32	s0, s0, s2
+  5629a6:	eeb4 0a4e 	vcmp.f32	s0, s28
+  5629aa:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5629ae:	db0a      	blt.n	0x5629c6
+  5629b0:	eeb4 0a6d 	vcmp.f32	s0, s27
+  5629b4:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5629b8:	d505      	bpl.n	0x5629c6
+  5629ba:	9821      	ldr	r0, [sp, #132]	@ 0x84
+  5629bc:	eb00 0187 	add.w	r1, r0, r7, lsl #2
+  5629c0:	1c7f      	adds	r7, r7, #1
+  5629c2:	ed81 0a00 	vstr	s0, [r1]
+  5629c6:	2000      	movs	r0, #0
+  5629c8:	2f00      	cmp	r7, #0
+  5629ca:	f000 80b6 	beq.w	0x562b3a
+  5629ce:	07f9      	lsls	r1, r7, #31
+  5629d0:	d538      	bpl.n	0x562a44
+  5629d2:	eddd 0a12 	vldr	s1, [sp, #72]	@ 0x48
+  5629d6:	eeb7 0a00 	vmov.f32	s0, #112	@ 0x3f800000  1.0
+  5629da:	ee30 1a60 	vsub.f32	s2, s0, s1
+  5629de:	eef0 1a08 	vmov.f32	s3, #8	@ 0x40400000  3.0
+  5629e2:	ee21 0a21 	vmul.f32	s0, s2, s3
+  5629e6:	ee61 1a01 	vmul.f32	s3, s2, s2
+  5629ea:	ee61 1a81 	vmul.f32	s3, s3, s2
+  5629ee:	ee20 1a01 	vmul.f32	s2, s0, s2
+  5629f2:	ee21 2a88 	vmul.f32	s4, s3, s16
+  5629f6:	ee21 1a20 	vmul.f32	s2, s2, s1
+  5629fa:	ee01 2a29 	vmla.f32	s4, s2, s19
+  5629fe:	ee20 1a20 	vmul.f32	s2, s0, s1
+  562a02:	ee21 1a20 	vmul.f32	s2, s2, s1
+  562a06:	ee01 2a09 	vmla.f32	s4, s2, s18
+  562a0a:	ee20 1aa0 	vmul.f32	s2, s1, s1
+  562a0e:	ee61 0a20 	vmul.f32	s1, s2, s1
+  562a12:	ee00 2aa8 	vmla.f32	s4, s1, s17
+  562a16:	ed9a 3a00 	vldr	s6, [sl]
+  562a1a:	eeb4 3a42 	vcmp.f32	s6, s4
+  562a1e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562a22:	bf58      	it	pl
+  562a24:	eeb0 3a42 	vmovpl.f32	s6, s4
+  562a28:	ed8a 3a00 	vstr	s6, [sl]
+  562a2c:	ed9a 0a02 	vldr	s0, [sl, #8]
+  562a30:	eeb4 2a40 	vcmp.f32	s4, s0
+  562a34:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562a38:	bfb8      	it	lt
+  562a3a:	eeb0 2a40 	vmovlt.f32	s4, s0
+  562a3e:	ed8a 2a02 	vstr	s4, [sl, #8]
+  562a42:	2001      	movs	r0, #1
+  562a44:	ea4f 0e57 	mov.w	lr, r7, lsr #1
+  562a48:	f04e c877 	wls	lr, lr, 0x562b3a
+  562a4c:	f10d 0148 	add.w	r1, sp, #72	@ 0x48
+  562a50:	eb01 0080 	add.w	r0, r1, r0, lsl #2
+  562a54:	edd0 1a00 	vldr	s3, [r0]
+  562a58:	eeb7 0a00 	vmov.f32	s0, #112	@ 0x3f800000  1.0
+  562a5c:	ee70 2a61 	vsub.f32	s5, s0, s3
+  562a60:	eef0 0a08 	vmov.f32	s1, #8	@ 0x40400000  3.0
+  562a64:	ee22 0aa0 	vmul.f32	s0, s5, s1
+  562a68:	ee62 0aa2 	vmul.f32	s1, s5, s5
+  562a6c:	ee60 0aa2 	vmul.f32	s1, s1, s5
+  562a70:	ee20 3a88 	vmul.f32	s6, s1, s16
+  562a74:	ee60 0a22 	vmul.f32	s1, s0, s5
+  562a78:	ee60 0aa1 	vmul.f32	s1, s1, s3
+  562a7c:	ee00 3aa9 	vmla.f32	s6, s1, s19
+  562a80:	ee60 0a21 	vmul.f32	s1, s0, s3
+  562a84:	ee60 0aa1 	vmul.f32	s1, s1, s3
+  562a88:	ee00 3a89 	vmla.f32	s6, s1, s18
+  562a8c:	ee61 0aa1 	vmul.f32	s1, s3, s3
+  562a90:	ee60 0aa1 	vmul.f32	s1, s1, s3
+  562a94:	ee00 3aa8 	vmla.f32	s6, s1, s17
+  562a98:	ed9a 0a00 	vldr	s0, [sl]
+  562a9c:	eeb4 0a43 	vcmp.f32	s0, s6
+  562aa0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562aa4:	bf58      	it	pl
+  562aa6:	eeb0 0a43 	vmovpl.f32	s0, s6
+  562aaa:	ed8a 0a00 	vstr	s0, [sl]
+  562aae:	ed9a 0a02 	vldr	s0, [sl, #8]
+  562ab2:	eeb4 3a40 	vcmp.f32	s6, s0
+  562ab6:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562aba:	bfb8      	it	lt
+  562abc:	eeb0 3a40 	vmovlt.f32	s6, s0
+  562ac0:	ed8a 3a02 	vstr	s6, [sl, #8]
+  562ac4:	edd0 0a01 	vldr	s1, [r0, #4]
+  562ac8:	eeb7 0a00 	vmov.f32	s0, #112	@ 0x3f800000  1.0
+  562acc:	ee30 1a60 	vsub.f32	s2, s0, s1
+  562ad0:	eef0 1a08 	vmov.f32	s3, #8	@ 0x40400000  3.0
+  562ad4:	ee61 1a21 	vmul.f32	s3, s2, s3
+  562ad8:	ee21 2a01 	vmul.f32	s4, s2, s2
+  562adc:	ee22 2a01 	vmul.f32	s4, s4, s2
+  562ae0:	ee21 1a81 	vmul.f32	s2, s3, s2
+  562ae4:	ee22 0a08 	vmul.f32	s0, s4, s16
+  562ae8:	ee21 1a20 	vmul.f32	s2, s2, s1
+  562aec:	ee01 0a29 	vmla.f32	s0, s2, s19
+  562af0:	ee21 1aa0 	vmul.f32	s2, s3, s1
+  562af4:	ee21 1a20 	vmul.f32	s2, s2, s1
+  562af8:	ee01 0a09 	vmla.f32	s0, s2, s18
+  562afc:	ee20 1aa0 	vmul.f32	s2, s1, s1
+  562b00:	ee61 0a20 	vmul.f32	s1, s2, s1
+  562b04:	ee00 0aa8 	vmla.f32	s0, s1, s17
+  562b08:	edda 1a00 	vldr	s3, [sl]
+  562b0c:	eef4 1a40 	vcmp.f32	s3, s0
+  562b10:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562b14:	bf58      	it	pl
+  562b16:	eef0 1a40 	vmovpl.f32	s3, s0
+  562b1a:	edca 1a00 	vstr	s3, [sl]
+  562b1e:	edda 1a02 	vldr	s3, [sl, #8]
+  562b22:	eeb4 0a61 	vcmp.f32	s0, s3
+  562b26:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562b2a:	bfa8      	it	ge
+  562b2c:	eef0 1a40 	vmovge.f32	s3, s0
+  562b30:	edca 1a02 	vstr	s3, [sl, #8]
+  562b34:	3008      	adds	r0, #8
+  562b36:	f00f c873 	le	lr, 0x562a54
+  562b3a:	1d36      	adds	r6, r6, #4
+  562b3c:	f10a 0a04 	add.w	sl, sl, #4
+  562b40:	f109 0904 	add.w	r9, r9, #4
+  562b44:	f108 0804 	add.w	r8, r8, #4
+  562b48:	f10b 0b04 	add.w	fp, fp, #4
+  562b4c:	1e64      	subs	r4, r4, #1
+  562b4e:	f47f aeb3 	bne.w	0x5628b8
+  562b52:	9814      	ldr	r0, [sp, #80]	@ 0x50
+  562b54:	6128      	str	r0, [r5, #16]
+  562b56:	a814      	add	r0, sp, #80	@ 0x50
+  562b58:	6841      	ldr	r1, [r0, #4]
+  562b5a:	6169      	str	r1, [r5, #20]
+  562b5c:	6882      	ldr	r2, [r0, #8]
+  562b5e:	61aa      	str	r2, [r5, #24]
+  562b60:	68c0      	ldr	r0, [r0, #12]
+  562b62:	61e8      	str	r0, [r5, #28]
+  562b64:	f000 be79 	b.w	0x56385a
+  562b68:	2801      	cmp	r0, #1
+  562b6a:	bf18      	it	ne
+  562b6c:	2802      	cmpne	r0, #2
+  562b6e:	f000 8648 	beq.w	0x563802
+  562b72:	2804      	cmp	r0, #4
+  562b74:	bf18      	it	ne
+  562b76:	2803      	cmpne	r0, #3
+  562b78:	f000 8643 	beq.w	0x563802
+  562b7c:	2805      	cmp	r0, #5
+  562b7e:	bf18      	it	ne
+  562b80:	2807      	cmpne	r0, #7
+  562b82:	f040 80f5 	bne.w	0x562d70
+  562b86:	ed95 0a04 	vldr	s0, [r5, #16]
+  562b8a:	eeb4 0a41 	vcmp.f32	s0, s2
+  562b8e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562b92:	bf58      	it	pl
+  562b94:	eeb0 0a41 	vmovpl.f32	s0, s2
+  562b98:	ed85 0a04 	vstr	s0, [r5, #16]
+  562b9c:	ed95 0a05 	vldr	s0, [r5, #20]
+  562ba0:	eeb4 0a60 	vcmp.f32	s0, s1
+  562ba4:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562ba8:	bf58      	it	pl
+  562baa:	eeb0 0a60 	vmovpl.f32	s0, s1
+  562bae:	ed85 0a05 	vstr	s0, [r5, #20]
+  562bb2:	ed95 0a06 	vldr	s0, [r5, #24]
+  562bb6:	eeb4 1a40 	vcmp.f32	s2, s0
+  562bba:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562bbe:	bf58      	it	pl
+  562bc0:	eeb0 0a41 	vmovpl.f32	s0, s2
+  562bc4:	ed85 0a06 	vstr	s0, [r5, #24]
+  562bc8:	ed95 0a07 	vldr	s0, [r5, #28]
+  562bcc:	eef4 0a40 	vcmp.f32	s1, s0
+  562bd0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562bd4:	bf58      	it	pl
+  562bd6:	eeb0 0a60 	vmovpl.f32	s0, s1
+  562bda:	edd5 1a04 	vldr	s3, [r5, #16]
+  562bde:	ed85 0a07 	vstr	s0, [r5, #28]
+  562be2:	eddd 5a07 	vldr	s11, [sp, #28]
+  562be6:	eef4 5a61 	vcmp.f32	s11, s3
+  562bea:	ed95 2a05 	vldr	s4, [r5, #20]
+  562bee:	edd5 2a06 	vldr	s5, [r5, #24]
+  562bf2:	ed95 3a07 	vldr	s6, [r5, #28]
+  562bf6:	eddd 3a08 	vldr	s7, [sp, #32]
+  562bfa:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562bfe:	bfa4      	itt	ge
+  562c00:	eef4 2a65 	vcmpge.f32	s5, s11
+  562c04:	eef1 fa10 	vmrsge	APSR_nzcv, fpscr
+  562c08:	db0a      	blt.n	0x562c20
+  562c0a:	eef4 3a42 	vcmp.f32	s7, s4
+  562c0e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562c12:	bfa4      	itt	ge
+  562c14:	eeb4 3a63 	vcmpge.f32	s6, s7
+  562c18:	eef1 fa10 	vmrsge	APSR_nzcv, fpscr
+  562c1c:	f280 861d 	bge.w	0x56385a
+  562c20:	eeb0 0a00 	vmov.f32	s0, #0	@ 0x40000000  2.0
+  562c24:	eeb0 7a00 	vmov.f32	s14, #0	@ 0x40000000  2.0
+  562c28:	ed9d 6a03 	vldr	s12, [sp, #12]
+  562c2c:	ee25 0a80 	vmul.f32	s0, s11, s0
+  562c30:	eef8 6a00 	vmov.f32	s13, #128	@ 0xc0000000 -2.0
+  562c34:	ee21 7a07 	vmul.f32	s14, s2, s14
+  562c38:	eef8 7a00 	vmov.f32	s15, #128	@ 0xc0000000 -2.0
+  562c3c:	ee06 0a26 	vmla.f32	s0, s12, s13
+  562c40:	ee05 7aa7 	vmla.f32	s14, s11, s15
+  562c44:	ee77 6a40 	vsub.f32	s13, s14, s0
+  562c48:	ed9f 5a47 	vldr	s10, [pc, #284]	@ 0x562d68
+  562c4c:	eeb0 7ae6 	vabs.f32	s14, s13
+  562c50:	eeb4 7a45 	vcmp.f32	s14, s10
+  562c54:	ed9d 4a04 	vldr	s8, [sp, #16]
+  562c58:	eddf 4a44 	vldr	s9, [pc, #272]	@ 0x562d6c
+  562c5c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562c60:	bfa1      	itttt	ge
+  562c62:	ee80 0a26 	vdivge.f32	s0, s0, s13
+  562c66:	eeb1 0a40 	vnegge.f32	s0, s0
+  562c6a:	eeb4 0a45 	vcmpge.f32	s0, s10
+  562c6e:	eef1 fa10 	vmrsge	APSR_nzcv, fpscr
+  562c72:	db26      	blt.n	0x562cc2
+  562c74:	eeb4 0a64 	vcmp.f32	s0, s9
+  562c78:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562c7c:	d521      	bpl.n	0x562cc2
+  562c7e:	eef7 6a00 	vmov.f32	s13, #112	@ 0x3f800000  1.0
+  562c82:	ee76 6ac0 	vsub.f32	s13, s13, s0
+  562c86:	eef0 7a00 	vmov.f32	s15, #0	@ 0x40000000  2.0
+  562c8a:	ee26 7aa6 	vmul.f32	s14, s13, s13
+  562c8e:	ee66 7aa7 	vmul.f32	s15, s13, s15
+  562c92:	ee27 6a06 	vmul.f32	s12, s14, s12
+  562c96:	ee67 7a80 	vmul.f32	s15, s15, s0
+  562c9a:	ee07 6aa5 	vmla.f32	s12, s15, s11
+  562c9e:	ee20 0a00 	vmul.f32	s0, s0, s0
+  562ca2:	ee00 6a01 	vmla.f32	s12, s0, s2
+  562ca6:	eef4 1a46 	vcmp.f32	s3, s12
+  562caa:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562cae:	bf58      	it	pl
+  562cb0:	eef0 1a46 	vmovpl.f32	s3, s12
+  562cb4:	eeb4 6a62 	vcmp.f32	s12, s5
+  562cb8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562cbc:	bf58      	it	pl
+  562cbe:	eef0 2a46 	vmovpl.f32	s5, s12
+  562cc2:	eeb0 1a00 	vmov.f32	s2, #0	@ 0x40000000  2.0
+  562cc6:	eeb0 0a00 	vmov.f32	s0, #0	@ 0x40000000  2.0
+  562cca:	ee23 1a81 	vmul.f32	s2, s7, s2
+  562cce:	eef8 5a00 	vmov.f32	s11, #128	@ 0xc0000000 -2.0
+  562cd2:	ee20 0a80 	vmul.f32	s0, s1, s0
+  562cd6:	eeb8 6a00 	vmov.f32	s12, #128	@ 0xc0000000 -2.0
+  562cda:	ee04 1a25 	vmla.f32	s2, s8, s11
+  562cde:	ee03 0a86 	vmla.f32	s0, s7, s12
+  562ce2:	ee70 5a41 	vsub.f32	s11, s0, s2
+  562ce6:	eef0 7ae5 	vabs.f32	s15, s11
+  562cea:	eef4 7a45 	vcmp.f32	s15, s10
+  562cee:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562cf2:	bfa1      	itttt	ge
+  562cf4:	ee81 0a25 	vdivge.f32	s0, s2, s11
+  562cf8:	eeb1 1a40 	vnegge.f32	s2, s0
+  562cfc:	eeb4 1a45 	vcmpge.f32	s2, s10
+  562d00:	eef1 fa10 	vmrsge	APSR_nzcv, fpscr
+  562d04:	db26      	blt.n	0x562d54
+  562d06:	eeb4 1a64 	vcmp.f32	s2, s9
+  562d0a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562d0e:	d521      	bpl.n	0x562d54
+  562d10:	eeb7 0a00 	vmov.f32	s0, #112	@ 0x3f800000  1.0
+  562d14:	ee70 4a41 	vsub.f32	s9, s0, s2
+  562d18:	eeb0 5a00 	vmov.f32	s10, #0	@ 0x40000000  2.0
+  562d1c:	ee24 0aa4 	vmul.f32	s0, s9, s9
+  562d20:	ee64 4a85 	vmul.f32	s9, s9, s10
+  562d24:	ee20 4a04 	vmul.f32	s8, s0, s8
+  562d28:	ee64 4a81 	vmul.f32	s9, s9, s2
+  562d2c:	ee04 4aa3 	vmla.f32	s8, s9, s7
+  562d30:	ee21 1a01 	vmul.f32	s2, s2, s2
+  562d34:	ee01 4a20 	vmla.f32	s8, s2, s1
+  562d38:	eeb4 2a44 	vcmp.f32	s4, s8
+  562d3c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562d40:	bf58      	it	pl
+  562d42:	eeb0 2a44 	vmovpl.f32	s4, s8
+  562d46:	eeb4 4a43 	vcmp.f32	s8, s6
+  562d4a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562d4e:	bf58      	it	pl
+  562d50:	eeb0 3a44 	vmovpl.f32	s6, s8
+  562d54:	edc5 1a04 	vstr	s3, [r5, #16]
+  562d58:	ed85 2a05 	vstr	s4, [r5, #20]
+  562d5c:	edc5 2a06 	vstr	s5, [r5, #24]
+  562d60:	ed85 3a07 	vstr	s6, [r5, #28]
+  562d64:	f000 bd79 	b.w	0x56385a
+  562d68:	bf96      	itet	ls
+  562d6a:	33d6      	addls	r3, #214	@ 0xd6
+  562d6c:	fffe 3f7f 	vcvthi.u32.f32	<illegal reg q9.5>, <illegal reg q15.5>, #2
+  562d70:	f000 000f 	andls.w	r0, r0, #15
+  562d74:	2809      	cmp	r0, #9
+  562d76:	f040 8570 	bne.w	0x56385a
+  562d7a:	ed9d 0a07 	vldr	s0, [sp, #28]
+  562d7e:	eef0 8ac0 	vabs.f32	s17, s0
+  562d82:	ed9f 0a94 	vldr	s0, [pc, #592]	@ 0x562fd4
+  562d86:	eef4 8a40 	vcmp.f32	s17, s0
+  562d8a:	eddd 1a08 	vldr	s3, [sp, #32]
+  562d8e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562d92:	bf5f      	itttt	pl
+  562d94:	eeb0 9ae1 	vabspl.f32	s18, s3
+  562d98:	eddf 1a8e 	vldrpl	s3, [pc, #568]	@ 0x562fd4
+  562d9c:	eeb4 9a61 	vcmppl.f32	s18, s3
+  562da0:	eef1 fa10 	vmrspl	APSR_nzcv, fpscr
+  562da4:	f100 852d 	bmi.w	0x563802
+  562da8:	9809      	ldr	r0, [sp, #36]	@ 0x24
+  562daa:	eddf 0a8b 	vldr	s1, [pc, #556]	@ 0x562fd8
+  562dae:	9017      	str	r0, [sp, #92]	@ 0x5c
+  562db0:	980d      	ldr	r0, [sp, #52]	@ 0x34
+  562db2:	ed9d 0a17 	vldr	s0, [sp, #92]	@ 0x5c
+  562db6:	ee20 8a20 	vmul.f32	s16, s0, s1
+  562dba:	9015      	str	r0, [sp, #84]	@ 0x54
+  562dbc:	980e      	ldr	r0, [sp, #56]	@ 0x38
+  562dbe:	eeb0 0a48 	vmov.f32	s0, s16
+  562dc2:	9014      	str	r0, [sp, #80]	@ 0x50
+  562dc4:	980b      	ldr	r0, [sp, #44]	@ 0x2c
+  562dc6:	9013      	str	r0, [sp, #76]	@ 0x4c
+  562dc8:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  562dca:	9012      	str	r0, [sp, #72]	@ 0x48
+  562dcc:	f7a6 fc5e 	bl	0x50968c
+  562dd0:	ed8d 0a16 	vstr	s0, [sp, #88]	@ 0x58
+  562dd4:	eeb0 0a48 	vmov.f32	s0, s16
+  562dd8:	f7a6 fc5a 	bl	0x509690
+  562ddc:	eef0 fa40 	vmov.f32	s31, s0
+  562de0:	ed9d 0a15 	vldr	s0, [sp, #84]	@ 0x54
+  562de4:	eddd 0a16 	vldr	s1, [sp, #88]	@ 0x58
+  562de8:	ee20 ca20 	vmul.f32	s24, s0, s1
+  562dec:	eddd 0a14 	vldr	s1, [sp, #80]	@ 0x50
+  562df0:	ed9d 0a14 	vldr	s0, [sp, #80]	@ 0x50
+  562df4:	eeb6 1a00 	vmov.f32	s2, #96	@ 0x3f000000  0.5
+  562df8:	ee00 ca2f 	vmla.f32	s24, s0, s31
+  562dfc:	ed9d 0a16 	vldr	s0, [sp, #88]	@ 0x58
+  562e00:	ee20 da80 	vmul.f32	s26, s1, s0
+  562e04:	ed9d 0a13 	vldr	s0, [sp, #76]	@ 0x4c
+  562e08:	eddd 0a15 	vldr	s1, [sp, #84]	@ 0x54
+  562e0c:	eecc ca28 	vdiv.f32	s25, s24, s17
+  562e10:	ee00 daef 	vmls.f32	s26, s1, s31
+  562e14:	eddd 0a16 	vldr	s1, [sp, #88]	@ 0x58
+  562e18:	ee60 da20 	vmul.f32	s27, s0, s1
+  562e1c:	eddd 0a12 	vldr	s1, [sp, #72]	@ 0x48
+  562e20:	ed9d 0a12 	vldr	s0, [sp, #72]	@ 0x48
+  562e24:	ee40 da2f 	vmla.f32	s27, s0, s31
+  562e28:	ed9d 0a16 	vldr	s0, [sp, #88]	@ 0x58
+  562e2c:	ee20 ea80 	vmul.f32	s28, s1, s0
+  562e30:	eddd 0a13 	vldr	s1, [sp, #76]	@ 0x4c
+  562e34:	ee8d aaa8 	vdiv.f32	s20, s27, s17
+  562e38:	ee00 eaef 	vmls.f32	s28, s1, s31
+  562e3c:	ee7c 0a8a 	vadd.f32	s1, s25, s20
+  562e40:	ee20 ba81 	vmul.f32	s22, s1, s2
+  562e44:	eeb6 0a00 	vmov.f32	s0, #96	@ 0x3f000000  0.5
+  562e48:	eecd 9a09 	vdiv.f32	s19, s26, s18
+  562e4c:	eece aa09 	vdiv.f32	s21, s28, s18
+  562e50:	ee39 1aaa 	vadd.f32	s2, s19, s21
+  562e54:	ee7c eaca 	vsub.f32	s29, s25, s20
+  562e58:	ee61 ba00 	vmul.f32	s23, s2, s0
+  562e5c:	ee39 faea 	vsub.f32	s30, s19, s21
+  562e60:	ee2e 0aae 	vmul.f32	s0, s29, s29
+  562e64:	ee0f 0a0f 	vmla.f32	s0, s30, s30
+  562e68:	eeb5 0a40 	vcmp.f32	s0, #0.0
+  562e6c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562e70:	f000 84f3 	beq.w	0x56385a
+  562e74:	eef7 0a00 	vmov.f32	s1, #112	@ 0x3f800000  1.0
+  562e78:	eec0 0a80 	vdiv.f32	s1, s1, s0
+  562e7c:	eebd 1a00 	vmov.f32	s2, #208	@ 0xbe800000 -0.250
+  562e80:	ee30 1a81 	vadd.f32	s2, s1, s2
+  562e84:	ed8d 1a19 	vstr	s2, [sp, #100]	@ 0x64
+  562e88:	eddd 0a19 	vldr	s1, [sp, #100]	@ 0x64
+  562e8c:	eef5 0a40 	vcmp.f32	s1, #0.0
+  562e90:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562e94:	d523      	bpl.n	0x562ede
+  562e96:	2000      	movs	r0, #0
+  562e98:	eef5 0a00 	vmov.f32	s1, #80	@ 0x3e800000  0.250
+  562e9c:	9019      	str	r0, [sp, #100]	@ 0x64
+  562e9e:	ee20 0a20 	vmul.f32	s0, s0, s1
+  562ea2:	f6d6 fc81 	bl	0x4397a8
+  562ea6:	eeb6 1a00 	vmov.f32	s2, #96	@ 0x3f000000  0.5
+  562eaa:	ee68 8a80 	vmul.f32	s17, s17, s0
+  562eae:	ee29 9a00 	vmul.f32	s18, s18, s0
+  562eb2:	eecc ca28 	vdiv.f32	s25, s24, s17
+  562eb6:	eecd 9a09 	vdiv.f32	s19, s26, s18
+  562eba:	ee8d aaa8 	vdiv.f32	s20, s27, s17
+  562ebe:	ee3c 0a8a 	vadd.f32	s0, s25, s20
+  562ec2:	ee20 ba01 	vmul.f32	s22, s0, s2
+  562ec6:	eece aa09 	vdiv.f32	s21, s28, s18
+  562eca:	ee39 0aaa 	vadd.f32	s0, s19, s21
+  562ece:	eef6 0a00 	vmov.f32	s1, #96	@ 0x3f000000  0.5
+  562ed2:	ee7c eaca 	vsub.f32	s29, s25, s20
+  562ed6:	ee39 faea 	vsub.f32	s30, s19, s21
+  562eda:	ee60 ba20 	vmul.f32	s23, s0, s1
+  562ede:	ed9d 0a19 	vldr	s0, [sp, #100]	@ 0x64
+  562ee2:	f6d6 fc61 	bl	0x4397a8
+  562ee6:	ee20 ca2e 	vmul.f32	s24, s0, s29
+  562eea:	ee20 da0f 	vmul.f32	s26, s0, s30
+  562eee:	ee7b da0d 	vadd.f32	s27, s22, s26
+  562ef2:	ee3b eacc 	vsub.f32	s28, s23, s24
+  562ef6:	ee7c 0aed 	vsub.f32	s1, s25, s27
+  562efa:	ee39 0ace 	vsub.f32	s0, s19, s28
+  562efe:	f7a6 fbcd 	bl	0x50969c
+  562f02:	eef0 9a40 	vmov.f32	s19, s0
+  562f06:	ee7a 0a6d 	vsub.f32	s1, s20, s27
+  562f0a:	ee3a 0ace 	vsub.f32	s0, s21, s28
+  562f0e:	f7a6 fbc5 	bl	0x50969c
+  562f12:	eddf 0a32 	vldr	s1, [pc, #200]	@ 0x562fdc
+  562f16:	ee20 0a20 	vmul.f32	s0, s0, s1
+  562f1a:	ed9f 1a30 	vldr	s2, [pc, #192]	@ 0x562fdc
+  562f1e:	ee09 0ac1 	vmls.f32	s0, s19, s2
+  562f22:	eeb5 0a40 	vcmp.f32	s0, #0.0
+  562f26:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562f2a:	bf44      	itt	mi
+  562f2c:	eddf 0a2c 	vldrmi	s1, [pc, #176]	@ 0x562fe0
+  562f30:	ee30 0a20 	vaddmi.f32	s0, s0, s1
+  562f34:	f89d 0003 	ldrb.w	r0, [sp, #3]
+  562f38:	0984      	lsrs	r4, r0, #6
+  562f3a:	f004 0401 	and.w	r4, r4, #1
+  562f3e:	0680      	lsls	r0, r0, #26
+  562f40:	bf4c      	ite	mi
+  562f42:	f084 0001 	eormi.w	r0, r4, #1
+  562f46:	4620      	movpl	r0, r4
+  562f48:	eddf 0a26 	vldr	s1, [pc, #152]	@ 0x562fe4
+  562f4c:	eeb4 0a60 	vcmp.f32	s0, s1
+  562f50:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562f54:	d500      	bpl.n	0x562f58
+  562f56:	b948      	cbnz	r0, 0x562f6c
+  562f58:	eeb4 0a60 	vcmp.f32	s0, s1
+  562f5c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562f60:	db00      	blt.n	0x562f64
+  562f62:	b118      	cbz	r0, 0x562f6c
+  562f64:	ee7b da4d 	vsub.f32	s27, s22, s26
+  562f68:	ee3b ea8c 	vadd.f32	s28, s23, s24
+  562f6c:	ee2d 0aa8 	vmul.f32	s0, s27, s17
+  562f70:	ee20 aa2f 	vmul.f32	s20, s0, s31
+  562f74:	ed9d 1a16 	vldr	s2, [sp, #88]	@ 0x58
+  562f78:	ee6e 0a09 	vmul.f32	s1, s28, s18
+  562f7c:	ee60 9a01 	vmul.f32	s19, s0, s2
+  562f80:	ed9d 0a16 	vldr	s0, [sp, #88]	@ 0x58
+  562f84:	ee00 aa80 	vmla.f32	s20, s1, s0
+  562f88:	ed9d 0a17 	vldr	s0, [sp, #92]	@ 0x5c
+  562f8c:	f8df 09c8 	ldr.w	r0, [pc, #2504]	@ 0x563958
+  562f90:	eeb5 0a40 	vcmp.f32	s0, #0.0
+  562f94:	ee40 9aef 	vmls.f32	s19, s1, s31
+  562f98:	9016      	str	r0, [sp, #88]	@ 0x58
+  562f9a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562f9e:	bf1e      	ittt	ne
+  562fa0:	eddf 0a10 	vldrne	s1, [pc, #64]	@ 0x562fe4
+  562fa4:	eeb4 0a60 	vcmpne.f32	s0, s1
+  562fa8:	eef1 fa10 	vmrsne	APSR_nzcv, fpscr
+  562fac:	f000 826c 	beq.w	0x563488
+  562fb0:	eddf 0a0d 	vldr	s1, [pc, #52]	@ 0x562fe8
+  562fb4:	eeb4 0a60 	vcmp.f32	s0, s1
+  562fb8:	eddf aa0c 	vldr	s21, [pc, #48]	@ 0x562fec
+  562fbc:	eebf ba00 	vmov.f32	s22, #240	@ 0xbf800000 -1.0
+  562fc0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  562fc4:	bf1e      	ittt	ne
+  562fc6:	eddf 0a0a 	vldrne	s1, [pc, #40]	@ 0x562ff0
+  562fca:	eeb4 0a60 	vcmpne.f32	s0, s1
+  562fce:	eef1 fa10 	vmrsne	APSR_nzcv, fpscr
+  562fd2:	e00f      	b.n	0x562ff4
+  562fd4:	c5ad      	stmia	r5!, {r0, r2, r3, r5, r7}
+  562fd6:	3727      	adds	r7, #39	@ 0x27
+  562fd8:	fa35 3c8e 			@ <UNDEFINED> instruction: 0xfa353c8e
+  562fdc:	2ee1      	cmp	r6, #225	@ 0xe1
+  562fde:	4265      	negs	r5, r4
+  562fe0:	0000      	movs	r0, r0
+  562fe2:	43b4      	bics	r4, r6
+  562fe4:	0000      	movs	r0, r0
+  562fe6:	4334      	orrs	r4, r6
+  562fe8:	0000      	movs	r0, r0
+  562fea:	42b4      	cmp	r4, r6
+  562fec:	0fdb      	lsrs	r3, r3, #31
+  562fee:	40c9      	lsrs	r1, r1
+  562ff0:	0000      	movs	r0, r0
+  562ff2:	4387      	bics	r7, r0
+  562ff4:	f000 81d8 	beq.w	0x5633a8
+  562ff8:	eeb0 0a48 	vmov.f32	s0, s16
+  562ffc:	f000 ffa0 	bl	0x563f40

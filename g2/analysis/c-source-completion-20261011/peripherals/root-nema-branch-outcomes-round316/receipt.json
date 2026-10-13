@@ -1,0 +1,39 @@
+{
+  "round": 316,
+  "status": "PASS_REACHABLE_BRANCH_OUTCOMES_AND_BOUNDED_FULL_BODY_QUALIFICATION_UNADMITTED",
+  "selected": false,
+  "candidate_sha256": "8346ae28054c8f804168fc8780ac13f101a8427dc854bfb6107e649131e810eb",
+  "local_full_body_complete_in_recorded_scope": true,
+  "native_branch_candidates": 96,
+  "native_branch_candidates_visited": 96,
+  "native_branch_candidates_both_successors": 95,
+  "remaining_single_outcome": "LE backedge statically unreachable under recovered root-count invariant",
+  "branch_receipt": "merged-branch-coverage-final.json",
+  "loop_invariant": "loop-invariant.json",
+  "joint_external_access_fixtures_matched": 44,
+  "current_source_targeted_abi_cases_passed": 8448,
+  "current_source_nonfinite_abi_cases_passed": 239616,
+  "current_source_degenerate_abi_cases_passed": 147456,
+  "warning_review": "Wall/Wextra clean review compile prior to final unsigned parity simplification; current normal probe compiles clean",
+  "repairs": [
+    "Explicit unsigned root-count parity preserves native LSL31 sign condition without signed-shift UB"
+  ],
+  "actual_selected_children": 10,
+  "controlled_children": 0,
+  "compiler_admission_requirement": "Explicit source selection; retain nonfused arithmetic via FP_CONTRACT OFF or compilation flag; requalify actual selected compilation flags/ABI; no new source glob",
+  "remaining": [
+    "Final selected-source/compiler contract review and source admission",
+    "Coherent Main build and current-source/artifact audit",
+    "Complete source/layout/runtime/hardware gates across all six images"
+  ],
+  "scope_exclusions": [
+    "Exception-enabled FP",
+    "Aliased path/input buffers",
+    "Concurrency/FPU ownership",
+    "Malformed unbounded counts",
+    "Physical hardware and byte-identical image proof"
+  ],
+  "production_unchanged_this_round": true,
+  "accepted_complete_images": 0,
+  "current_main_build": "round304:3193 definitions/776 imports"
+}

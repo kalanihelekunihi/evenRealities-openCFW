@@ -1,0 +1,20 @@
+{
+  "source_url": "https://github.com/qemu/qemu.git",
+  "tag": "v11.1.2",
+  "commit": "4fc49f46dc95d4a27de2509e7fceb2931e91faeb",
+  "downloaded_sparse_paths": [
+    "target/arm",
+    "docs/system/arm",
+    "tests/tcg/arm"
+  ],
+  "submodule_reference": "Prepared.gitmodulesentry;parentgitlink/indexnotstaged",
+  "installed_qemu_version": "11.1.2",
+  "exact_installed_binary_source_identity_verified": false,
+  "native_fault_cause": "HarnesswroteFPSCR=0,clearingLTPSIZE;trans_LE checksactiveFPU LTPSIZE!=4 ->INVSTATE",
+  "repair": "FPSCR=4<<16 preservedscalarloopstate; nativepayloadunchanged",
+  "source_hashes": {
+    "target/arm/tcg/translate.c": "891a7b06b222eb4c6e12fa4ecf72a015667fa5859f2e05aae07e6e5968a9a851",
+    "target/arm/vfp_fpscr.c": "0a7348ccd9d4f5bd236c7659139d3d1b31d8588765de1fbb70bfc51c32b05bfb",
+    "target/arm/cpu.h": "1bafa6cddb4bc46e35fedca33b92c4a258a5d7f231309f8744fd484ddad37fb4"
+  }
+}

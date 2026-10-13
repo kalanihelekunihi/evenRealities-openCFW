@@ -1,0 +1,14 @@
+{
+  "branch": "562b36 native LE backward edge",
+  "status": "UNREACHABLE_UNDER_NATIVE_ROOT_COUNT_INVARIANT",
+  "facts": [
+    "R7 reset0 for each coordinate",
+    "Linear fallback root accepts at most one and setsR7=1",
+    "Quadratic derivative root path accepts at most two, first setsR7=1 and second increments once",
+    "562a44 LR=R7>>1, hence LR<=1",
+    "WLS at562a48 skips zero count; entered loop hasLR=1",
+    "LE at562b36 exits whenLR<=1, so backwardedgecannotexecute"
+  ],
+  "source_equivalent": "loop_pairs=rootcount>>1; unsigned root-count parity replaces undefined signed LSL31 expression",
+  "limits": "This proves this loop outcome, not full firmware/hardware correctness"
+}

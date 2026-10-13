@@ -1,0 +1,32 @@
+{
+  "status": "PASS_ACTUAL_SELECTED_TU_M55_FIVE_LITTLEFS_PUBLIC_ENTRIES_AND_DIR_CLOSE_CORE",
+  "native_comparisons": 450,
+  "per_function": {
+    "close": 75,
+    "write": 75,
+    "dir_open": 75,
+    "dir_close": 75,
+    "dir_read": 75,
+    "dir_close_core": 75
+  },
+  "assertion_boundary_cases": 90,
+  "candidate_sha256": "257e4b942413924cc88962f89a4b1413365987f9029e275ff813d19408df0a7b",
+  "controlled_lower_backends": 7,
+  "actual_dir_close_core_executes": true,
+  "instruction_bytes_unchanged": true,
+  "ordinary_pointer_bindings": "oracle-bindings.json",
+  "checks": [
+    "Live mlist40 pointer/membership zero/nonzero branching",
+    "Exact assertion expression/source/line boundary before error helper execution",
+    "Core argument forwarding/full32bit return",
+    "Directory unlink delegation andconstant0 return",
+    "Entire4KiB fixture/mutating membership/core callbacks",
+    "SP/R4-R11/caller guard onreturning paths"
+  ],
+  "selected": false,
+  "limits": [
+    "Seven lower membership/error/core backends controlled; actual filesystem engine not qualified here",
+    "Assertions stopaterror-helper boundary; no fatal helper/hardware claim",
+    "No full-image/layout/source completeness claim"
+  ]
+}

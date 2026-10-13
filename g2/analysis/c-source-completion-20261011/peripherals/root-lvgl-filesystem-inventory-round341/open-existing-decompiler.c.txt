@@ -1,0 +1,42 @@
+/* FUN 0x004c8f58 FUN_004c8f58 bytes=128 sha256=3af9f298bf5b8e553502724701e09ec3b33ce436d79840f775b1a2b11654b898 */
+
+int FUN_004c8f58(int param_1,undefined4 param_2,char param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined4 uVar3;
+  undefined4 local_118;
+  undefined4 local_114;
+  undefined4 local_110;
+  undefined4 uStack_18;
+  
+  uVar3 = 0;
+  if (param_3 == '\x01') {
+    uVar3 = 2;
+  }
+  else if (param_3 == '\x02') {
+    uVar3 = 1;
+  }
+  else if (param_3 == '\x03') {
+    uVar3 = 3;
+  }
+  uStack_18 = param_4;
+  iVar1 = FUN_0044f718(0x54);
+  if (iVar1 != 0) {
+    FUN_00483fd0(&local_118,0x100,&DAT_004c9178,param_2);
+    iVar2 = FUN_004cfa94(*(undefined4 *)(param_1 + 0x30),iVar1,&local_118,uVar3);
+    if (iVar2 != 0) {
+      iVar1 = 0;
+    }
+    return iVar1;
+  }
+  local_110 = DAT_004c918c;
+  local_114 = DAT_004c9190;
+  local_118 = DAT_004c9194;
+  FUN_0044d25c(3,PTR_s_D__01_workspace_s200_ap510b_iar__004c919c,0x53,DAT_004c9198);
+  do {
+                    /* WARNING: Do nothing block with infinite loop */
+  } while( true );
+}
+

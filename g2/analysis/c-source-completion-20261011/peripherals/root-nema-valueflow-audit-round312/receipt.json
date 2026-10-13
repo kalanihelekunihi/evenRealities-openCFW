@@ -1,0 +1,37 @@
+{
+  "round": 312,
+  "status": "PROGRESS_D9_AND_PATH_FIELD_LOAD_AUDIT_UNADMITTED",
+  "selected": false,
+  "candidate_sha256": "b6a3209eb8c529646218fcaade3e09e704f37721fd9550b5bec4954511e86723",
+  "current_source_nonfinite_abi_cases_passed": 239616,
+  "repairs": [
+    "Remove initial inherited D9 capture and dead early arc low-half read",
+    "Reuse initial count load for conditional bounds seeding; preserve separate native loop count load",
+    "Tail bound rounding uses one loaded float per bound and native VCMP N comparator, preserving uint32 integer wrap"
+  ],
+  "d9_audit": {
+    "removed_read": "Former early arc low-half read is dead: valid radius path overwrites fVar17 with ABS(ry), invalid radius exits to point bounds before use",
+    "live_reads": [
+      "Arc high/low reads after CONCAT44(yprime,ry), or rescale override; assignment dominates all paths to two-input angle calls",
+      "Final interval low-half read after CONCAT44(deltaY,endAngle), optional low-half replacement by start angle; upper half unused thereafter"
+    ],
+    "cubic_assignment": "Writes aggregate but no subsequent live use before arc-local assignment",
+    "remaining": "Confirm all native branch edges and dead high-half preservation equivalence; do not claim whole function audit complete"
+  },
+  "path_field_read_trace": {
+    "empty_path_match": true,
+    "nonempty_paths_match": false,
+    "case1_native_reads": 30,
+    "case1_candidate_reads": 35,
+    "remaining": "Intermediate bounds blocks reread volatile path fields; normalize cached loads from native flow"
+  },
+  "remaining": [
+    "Intermediate path-field load order repair",
+    "Branch coverage and final native valueflow audit",
+    "Admission/coherent Main build if supported",
+    "Complete source/layout/runtime/hardware gates"
+  ],
+  "production_unchanged_this_round": true,
+  "accepted_complete_images": 0,
+  "current_main_build": "round304:3193 definitions/776 imports"
+}

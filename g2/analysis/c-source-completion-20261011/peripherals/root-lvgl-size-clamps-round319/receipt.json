@@ -1,0 +1,49 @@
+{
+  "round": 319,
+  "status": "PASS_FULL_CLAMP_SOURCE_ADMISSION_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+  "selected": true,
+  "selected_source": "g2/components/audio/uart_thread_source_candidate/display_lv_init_children.c",
+  "selected_source_sha256": "55263b92a81d1784aee9864f7af0d1a7b669db92c4dcee058edc3e9179ee18ca",
+  "original_prefix_preserved": true,
+  "bodies": {
+    "4408d6": "4408d6..440967 inclusive",
+    "440968": "440968..4409f9 inclusive"
+  },
+  "pinned_source": "third-party/upstream/ambiq-lvgl/src/core/lv_obj_pos.c:969-980",
+  "native_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_comparisons": 45056,
+  "cases_per_body": 22528,
+  "child_cuts": 0,
+  "checks": [
+    "R0 bits",
+    "R4-R11 against independent injected seeds",
+    "pre/post SP"
+  ],
+  "compiler_contract": "C11/O2/production Cortex-M55 settings; research function/data sections only",
+  "native_oracle_bytes_unchanged": true,
+  "literal_bindings": [],
+  "semantic_contract": [
+    "Native signed percentage detection and encoded negative-percent threshold",
+    "Low32bit product wrap before signed division100",
+    "Native clamp max(min,min(value,max)) including reversed bounds"
+  ],
+  "unicorn_limitation": "Unicorn rejects compiler-emitted M55 CSEL; failed harness retained and excluded. QEMU M55 validates actual architecture, not M4 substitute.",
+  "local_full_bodies_complete_in_recorded_scope": true,
+  "new_source_glob": false,
+  "builder_unchanged": true,
+  "main_build": "g2/build/c-firmware/20261013/peripherals-root-lvgl-clamps-round319",
+  "main_build_session": null,
+  "selected_main_sources_and_builder_frozen": false,
+  "remaining": [
+    "Size-refresh parent full body and18remaining child-target contracts",
+    "Main775imports plus all-image state/source/layout/runtime/hardware gates"
+  ],
+  "accepted_complete_images": 0,
+  "main_build_terminal_passed": true,
+  "definitions": 3196,
+  "imports": 775,
+  "stable_snapshots": 134,
+  "duplicate_strong_symbols": 0,
+  "artifact_hashes_checked": 6,
+  "builder_hash_checked": true
+}

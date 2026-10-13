@@ -1,0 +1,21 @@
+{
+  "status": "PASS_PRELIMINARY_INTEGER_LOGIC_NATIVE_ORACLE",
+  "native_comparisons": 1536,
+  "native_instruction_bytes_unchanged": true,
+  "candidate_compiler_target": "Cortex-M4 research comparison of portable integer logic; actual Cortex-M55 compiler execution pending",
+  "controlled_child_targets": 21,
+  "checks": [
+    "R0bits",
+    "ordered child call inputs/outputs and scroll snapshots",
+    "entire16KiB object/spec/child region",
+    "SP/callee-saved seeds/caller guard"
+  ],
+  "dynamic_margin_values": true,
+  "candidate_sha256": "12360a566f59d4c1f048db8115eba13afe4ab866c052f12db5ddb2c3f83d5f5e",
+  "selected": false,
+  "limits": [
+    "All direct callees controlled; not connected child engine proof",
+    "M55 production compilation/ISA execution still required",
+    "No hardware/image qualification"
+  ]
+}

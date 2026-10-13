@@ -1,0 +1,26 @@
+{
+  "status": "PASS_ACTUAL_SELECTED_TU_M55_AREA_SIZE_AND_SCROLLBAR_INVALIDATION",
+  "area_size_comparisons": 512,
+  "scrollbar_comparisons": 256,
+  "candidate_sha256": "def62cbd22fbbb3994844e4b946e16716a80b3c0e6abeacb1b76fbe7054e6999",
+  "native_payload_bytes_unchanged": true,
+  "controlled_child_targets": 2,
+  "actual_area_size_executes": true,
+  "invalidate_axis_trace_counts": {
+    "()": 48,
+    "('v',)": 48,
+    "('h',)": 68,
+    "('h', 'v')": 92
+  },
+  "checks": [
+    "Inclusive 32bit extents/product wrap",
+    "Ordered getareas/invalidate calls and area values",
+    "Post-horizontal-invalidation vertical buffer mutations",
+    "SP/R4-R11/caller guard/object preservation"
+  ],
+  "limits": [
+    "Getareas and invalidate bodies controlled, not qualified here",
+    "No invalid pointer/full-image/hardware claim"
+  ],
+  "selected": false
+}

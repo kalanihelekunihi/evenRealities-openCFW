@@ -1,0 +1,39 @@
+{
+  "status": "ENTIRE_SIZE_REFRESH_PARENT_ADMITTED_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+  "selected_sha256": "bab869b8726326e566affc2394a41efff39fd52a8c992d51b822884ee1e26d7d",
+  "prefix_sha256": "2403beca2928f5593c36315f322b50dfd0c7afca7548638a5022257d350da1f3",
+  "connected_positive_native_comparisons": 576,
+  "connected_null_pre_store_comparisons": 1,
+  "controlled_lower_backends": 20,
+  "padding_current_object_matches_qualified_object": true,
+  "padding_source_sha256": "286c44c4efdc0387772b340d61c076bb4522d0624f5445ecbf2a0fb157eaf2b4",
+  "canonical_caller_declaration_changes": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_lv_flex_update.c",
+      "before_sha256": "54e582ba56c8ba8013c428c7ebad983089d04f173c3c3e66169b6f35ae106371",
+      "after_sha256": "996af7ca680fc224c531c0b570e99ce8ef9b220538830d258077c767fe360eaf",
+      "only_change": "void return declaration to uint32_t; native result0/1; caller ignores result"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_lv_theme_basic_apply.c",
+      "before_sha256": "1ceba94b48c6984089016f6e7ed3202d3439c2c4ac49adcb5fef8837e8865377",
+      "after_sha256": "b4f33bed6936c578ea4945733252a430267203584c2aad300ad07d1b57a55787",
+      "only_change": "void return declaration to uint32_t; native result0/1; caller ignores result"
+    }
+  ],
+  "new_glob_source": false,
+  "builder_changed": false,
+  "accepted_complete_images": 0,
+  "audit": {
+    "status": "PASS_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+    "snapshots": 134,
+    "definitions": 3238,
+    "imports": 774,
+    "duplicate_strong_symbols": 0,
+    "artifact_hashes_checked": 6,
+    "builder_hash_checked": true,
+    "limits": [
+      "Full coverage/layout/byte equality/hardware unproven."
+    ]
+  }
+}

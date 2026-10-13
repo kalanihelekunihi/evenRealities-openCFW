@@ -1,0 +1,83 @@
+{
+  "status": "DRIVER_CALLBACK_IDENTITY_AND_FIVE_MISSING_FUNCTION_RECORDS_IDENTIFIED",
+  "source": "third-party/upstream/ambiq-lvgl/src/libs/fsdrv/lv_fs_littlefs.c",
+  "generic_lv_fs_api_is_wrong_source_binding": true,
+  "evidence": [
+    "Native registration4c8f0a assigns9 callback addresses atdriver+c..2c",
+    "drv+30 user_data passed to native backend methods",
+    "File allocation54hex/dir34hex/info-type2/name offset8",
+    "Native diagnostic filename literal4c919c identifies actual source"
+  ],
+  "ordinary_literals": "ordinary-literals.json",
+  "complete_existing_lift_records": [
+    "open",
+    "close",
+    "dir_open",
+    "dir_read"
+  ],
+  "missing_callback_function_records": [
+    {
+      "name": "read",
+      "native": "0x4c8ff0",
+      "next_registered_entry_bound": "0x4c900c",
+      "range_bytes": 28,
+      "existing_ghidra_function_record": false,
+      "direct_targets": [
+        "4cfb40"
+      ],
+      "full_boundary_instruction_review_pending": true
+    },
+    {
+      "name": "write",
+      "native": "0x4c900c",
+      "next_registered_entry_bound": "0x4c9028",
+      "range_bytes": 28,
+      "existing_ghidra_function_record": false,
+      "direct_targets": [
+        "4cfb7c"
+      ],
+      "full_boundary_instruction_review_pending": true
+    },
+    {
+      "name": "seek",
+      "native": "0x4c9028",
+      "next_registered_entry_bound": "0x4c9064",
+      "range_bytes": 60,
+      "existing_ghidra_function_record": false,
+      "direct_targets": [
+        "4cfbb2"
+      ],
+      "full_boundary_instruction_review_pending": true
+    },
+    {
+      "name": "tell",
+      "native": "0x4c9064",
+      "next_registered_entry_bound": "0x4c9080",
+      "range_bytes": 28,
+      "existing_ghidra_function_record": false,
+      "direct_targets": [
+        "4cfbe8"
+      ],
+      "full_boundary_instruction_review_pending": true
+    },
+    {
+      "name": "dir_close",
+      "native": "0x4c90e4",
+      "next_registered_entry_bound": "0x4c9104",
+      "range_bytes": 32,
+      "existing_ghidra_function_record": false,
+      "direct_targets": [
+        "44f758",
+        "4cfcf8"
+      ],
+      "full_boundary_instruction_review_pending": true
+    }
+  ],
+  "remaining": [
+    "Complete pinned LittleFS adapter/native callback boundary/ABI reconciliation",
+    "Complete callback instruction boundary/ABI reconciliation",
+    "Bind underlying LittleFS provider source/version/config anddriver-state ownership",
+    "Complete C/native qualification/admission/build"
+  ],
+  "production_modified": false
+}

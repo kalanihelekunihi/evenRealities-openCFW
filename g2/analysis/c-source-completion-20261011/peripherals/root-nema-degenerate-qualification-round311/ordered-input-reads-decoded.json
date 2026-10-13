@@ -1,0 +1,2301 @@
+{
+  "status": "BOUNDED_EXTERNAL_INPUT_READ_WATCHPOINT_TRACE",
+  "traces": [
+    {
+      "case": 0,
+      "native": [],
+      "candidate": [],
+      "match": true
+    },
+    {
+      "case": 1,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "02",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28229ee0",
+          "path": "00009840",
+          "width": 4,
+          "instruction": "ldr.w r4, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x2822a0a8",
+          "path": "000050c0",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "02",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "02",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x280011e2",
+          "path": "00009840",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x280011ee",
+          "path": "000050c0",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "02",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 2,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "03",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x2822a0c0",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "03",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "04",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x2822a0a8",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "04",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "03",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28001e66",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "03",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "04",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x280011ee",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "04",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 3,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "05",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28229eb8",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28229ec6",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s1, [r2]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x28229ee0",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "ldr.w r4, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x2822a0a8",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "05",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "05",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28001054",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s4, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28001066",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s6, [r2, #4]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x280011e2",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x280011ee",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "05",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 4,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "06",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28229e3a",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28229e48",
+          "path": "0000a0c0",
+          "width": 4,
+          "instruction": "vldr s1, [r4]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x28229e58",
+          "path": "000040c0",
+          "width": 4,
+          "instruction": "vldr s2, [r4]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x28229e68",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s3, [r2]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x28229ee0",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r4, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x2001201c",
+          "pc": "0x2822a0a8",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "06",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "06",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x280011ac",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s8, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x280011b4",
+          "path": "0000a0c0",
+          "width": 4,
+          "instruction": "vldr s10, [r2, #4]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x280011bc",
+          "path": "000040c0",
+          "width": 4,
+          "instruction": "vldr s4, [r2, #8]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x280011c4",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s6, [r2, #12]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x280011e2",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x2001201c",
+          "pc": "0x280011ee",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "06",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 5,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "05",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28229eb8",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28229ec6",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s1, [r2]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x28229ee0",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "ldr.w r4, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x2822a0a8",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "05",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "07",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x28229ee0",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "ldr.w r4, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x2001201c",
+          "pc": "0x2822a0a8",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "07",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "05",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28001054",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s4, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28001066",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s6, [r2, #4]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x280011e2",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x280011ee",
+          "path": "000000c0",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "05",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "07",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x280011e2",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x2001201c",
+          "pc": "0x280011ee",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "07",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 6,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "06",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28229e3a",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28229e48",
+          "path": "0000a0c0",
+          "width": 4,
+          "instruction": "vldr s1, [r4]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x28229e58",
+          "path": "000040c0",
+          "width": 4,
+          "instruction": "vldr s2, [r4]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x28229e68",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s3, [r2]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x28229ee0",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r4, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x2001201c",
+          "pc": "0x2822a0a8",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "06",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "08",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012020",
+          "pc": "0x28229ff8",
+          "path": "0000e040",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012024",
+          "pc": "0x2822a006",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s1, [r2]"
+        },
+        {
+          "address": "0x20012028",
+          "pc": "0x28229ee0",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "ldr.w r4, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x2001202c",
+          "pc": "0x2822a0a8",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "08",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "06",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x280011ac",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s8, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x280011b4",
+          "path": "0000a0c0",
+          "width": 4,
+          "instruction": "vldr s10, [r2, #4]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x280011bc",
+          "path": "000040c0",
+          "width": 4,
+          "instruction": "vldr s4, [r2, #8]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x280011c4",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s6, [r2, #12]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x280011e2",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x2001201c",
+          "pc": "0x280011ee",
+          "path": "0000803f",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "06",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "08",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012020",
+          "pc": "0x28001180",
+          "path": "0000e040",
+          "width": 4,
+          "instruction": "vldr s4, [r2]"
+        },
+        {
+          "address": "0x20012024",
+          "pc": "0x28001192",
+          "path": "00001041",
+          "width": 4,
+          "instruction": "vldr s6, [r2, #4]"
+        },
+        {
+          "address": "0x20012028",
+          "pc": "0x280011e2",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x2001202c",
+          "pc": "0x280011ee",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "08",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011003",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 7,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "09",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x2822a04c",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "ldr.w fp, [r6, r1, lsl #2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x2822a058",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "ldr.w fp, [r6, r1, lsl #2]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x2822a064",
+          "path": "00000000",
+          "width": 4,
+          "instruction": "ldr.w r6, [r6, r1, lsl #2]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x28229ee0",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r4, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x2822a0a8",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "09",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "09",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28001208",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "ldr.w r7, [r3, r1, lsl #2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28001214",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "ldr r7, [r3, #4]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x28001218",
+          "path": "00000000",
+          "width": 4,
+          "instruction": "ldr r3, [r3, #8]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x280011e2",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x280011ee",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "09",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 8,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "09",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x2822a04c",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "ldr.w fp, [r6, r1, lsl #2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x2822a058",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "ldr.w fp, [r6, r1, lsl #2]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x2822a064",
+          "path": "0000f041",
+          "width": 4,
+          "instruction": "ldr.w r6, [r6, r1, lsl #2]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x28229ee0",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r4, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x2822a0a8",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "ldr.w r1, [r1, r2, lsl #2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "09",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "09",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28001208",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "ldr.w r7, [r3, r1, lsl #2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28001214",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "ldr r7, [r3, #4]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x28001218",
+          "path": "0000f041",
+          "width": 4,
+          "instruction": "ldr r3, [r3, #8]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x280011e2",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x280011ee",
+          "path": "0000c040",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "09",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 9,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "0a",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x2822a0f0",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x2822a234",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r6]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x2822a268",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "ldr.w r6, [r2, r4, lsl #2]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x2822a2fa",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s2, [r6]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x2822a326",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r6, [r2, r4, lsl #2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "0a",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "0a",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28001da8",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28002460",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r3]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x2800246a",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s2, [r3, #4]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x2800250c",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r7, #8]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x28002510",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s2, [r7, #12]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "0a",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 10,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "0b",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x2822a46e",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x2822a5b2",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r6]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x2822a5e6",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "ldr.w r6, [r2, r4, lsl #2]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x2822a678",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s2, [r6]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x2822a6a4",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "ldr.w r6, [r2, r4, lsl #2]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "0b",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "0b",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28001e94",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s2, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28002822",
+          "path": "00008040",
+          "width": 4,
+          "instruction": "vldr s0, [r3]"
+        },
+        {
+          "address": "0x20012010",
+          "pc": "0x2800282c",
+          "path": "00004040",
+          "width": 4,
+          "instruction": "vldr s2, [r3, #4]"
+        },
+        {
+          "address": "0x20012014",
+          "pc": "0x280028d8",
+          "path": "00000041",
+          "width": 4,
+          "instruction": "vldr s0, [r7, #8]"
+        },
+        {
+          "address": "0x20012018",
+          "pc": "0x280028dc",
+          "path": "0000a040",
+          "width": 4,
+          "instruction": "vldr s2, [r7, #12]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "0b",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    },
+    {
+      "case": 11,
+      "native": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28229c98",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrbne r1, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28229d0a",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28229dbc",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r4]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28229df4",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "ldr.w r2, [r2, r1, lsl #2]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x2822a76c",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28229d0a",
+          "path": "12",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x28229f4c",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x28229f5e",
+          "path": "000040c0",
+          "width": 4,
+          "instruction": "vldr s0, [r0]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x2822a76c",
+          "path": "12",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28229d0a",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r3, [r0, r1]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x2822a76c",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, r1]"
+        }
+      ],
+      "candidate": [
+        {
+          "address": "0x20011000",
+          "pc": "0x28000e4e",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb r0, [r0, #0]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x28000f46",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012000",
+          "pc": "0x28000ffe",
+          "path": "0000a03f",
+          "width": 4,
+          "instruction": "vldr s0, [r2]"
+        },
+        {
+          "address": "0x20012004",
+          "pc": "0x28001008",
+          "path": "00002040",
+          "width": 4,
+          "instruction": "vldr s2, [r2, #4]"
+        },
+        {
+          "address": "0x20011000",
+          "pc": "0x280012d2",
+          "path": "01",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x28000f46",
+          "path": "12",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20012008",
+          "pc": "0x2800129a",
+          "path": "00000040",
+          "width": 4,
+          "instruction": "vldr s4, [r2]"
+        },
+        {
+          "address": "0x2001200c",
+          "pc": "0x280012ae",
+          "path": "000040c0",
+          "width": 4,
+          "instruction": "vldr s4, [r2, #4]"
+        },
+        {
+          "address": "0x20011001",
+          "pc": "0x280012d2",
+          "path": "12",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x28000f46",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        },
+        {
+          "address": "0x20011002",
+          "pc": "0x280012d2",
+          "path": "00",
+          "width": 1,
+          "instruction": "ldrb.w r0, [r0, r9]"
+        }
+      ],
+      "match": true
+    }
+  ],
+  "selected": false,
+  "scope": "QEMU read watchpoints cover segment bytes and coordinate input128bytes; effective address/width decoded from stopped instruction and register state, value sampled after one step. Twelve directed fixtures, roundnearest/defaultcontrols.",
+  "candidate_sha256": "76fb1edbee216bcfa90e0ee0c5e0d394ce4d0b43dc92ddae221d81e8974615b7",
+  "watchpoint_method": "QEMU reports watched region start, not effective access address. Decode actual stopped instruction; remove watchpoint, single step, record, reinstall to avoid repeated pre-access stops."
+}

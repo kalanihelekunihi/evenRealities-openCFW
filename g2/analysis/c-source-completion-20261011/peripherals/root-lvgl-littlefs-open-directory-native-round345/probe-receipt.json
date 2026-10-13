@@ -1,0 +1,53 @@
+{
+  "status": "PASS_ACTUAL_SELECTED_TU_M55_OPEN_DIRECTORY_CALLBACKS",
+  "positive_native_comparisons": 374,
+  "per_function": {
+    "open": 240,
+    "dir_open": 24,
+    "dir_read": 110
+  },
+  "oom_pre_store_comparisons": 2,
+  "candidate_sha256": "8d96802d2ea1705109df362180a913ca5db4ab5613fee33ad568f44d331afcc2",
+  "controlled_child_targets": 8,
+  "actual_native_and_source_string_compare_execute": true,
+  "instruction_bytes_unchanged": true,
+  "ordinary_pointer_bindings": "oracle-bindings.json",
+  "checks": [
+    "Allocation84/52 andmode UXTB mapping",
+    "Path truncation256/formatter andbackend argument order",
+    "Fileerrornofree/direrrorfree",
+    "Info264/type0/name8/filenameclear",
+    "Dot-entry short-circuit/shortbuffer truncation/errorafter skip/eof/length0",
+    "Cached dir-read filesystem vsopen userdata afterformat",
+    "Entire8KiB region/SP/R4-R11/caller guard",
+    "TwoOOM diagnostic/pre-store address/value/width"
+  ],
+  "oom_receipts": [
+    {
+      "kind": "open",
+      "line": 83,
+      "fault_context": [
+        "pre-store",
+        4294967295,
+        0,
+        4
+      ]
+    },
+    {
+      "kind": "dir_open",
+      "line": 204,
+      "fault_context": [
+        "pre-store",
+        4294967295,
+        0,
+        4
+      ]
+    }
+  ],
+  "selected": false,
+  "limits": [
+    "Eight backend bodies controlled includingformatter/copy/allocator/LittleFS",
+    "No actual heap/filesystem/invalid-pointer/fullimage/hardware proof",
+    "OOM faultstores stoppedbeforeexecution"
+  ]
+}

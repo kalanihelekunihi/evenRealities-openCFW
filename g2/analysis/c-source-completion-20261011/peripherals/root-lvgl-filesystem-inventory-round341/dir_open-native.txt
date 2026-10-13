@@ -1,0 +1,49 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004c9080 <.data+0x91080>:
+  4c9080:	b570      	push	{r4, r5, r6, lr}
+  4c9082:	b0c0      	sub	sp, #256	@ 0x100
+  4c9084:	0005      	movs	r5, r0
+  4c9086:	000e      	movs	r6, r1
+  4c9088:	2034      	movs	r0, #52	@ 0x34
+  4c908a:	f786 fb45 	bl	0x44f718
+  4c908e:	0004      	movs	r4, r0
+  4c9090:	2c00      	cmp	r4, #0
+  4c9092:	d110      	bne.n	0x4c90b6
+  4c9094:	483d      	ldr	r0, [pc, #244]	@ (0x4c918c)
+  4c9096:	9002      	str	r0, [sp, #8]
+  4c9098:	4841      	ldr	r0, [pc, #260]	@ (0x4c91a0)
+  4c909a:	9001      	str	r0, [sp, #4]
+  4c909c:	483d      	ldr	r0, [pc, #244]	@ (0x4c9194)
+  4c909e:	9000      	str	r0, [sp, #0]
+  4c90a0:	4b40      	ldr	r3, [pc, #256]	@ (0x4c91a4)
+  4c90a2:	22cc      	movs	r2, #204	@ 0xcc
+  4c90a4:	493d      	ldr	r1, [pc, #244]	@ (0x4c919c)
+  4c90a6:	2003      	movs	r0, #3
+  4c90a8:	f784 f8d8 	bl	0x44d25c
+  4c90ac:	2000      	movs	r0, #0
+  4c90ae:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  4c90b2:	6008      	str	r0, [r1, #0]
+  4c90b4:	e7fa      	b.n	0x4c90ac
+  4c90b6:	0033      	movs	r3, r6
+  4c90b8:	a22f      	add	r2, pc, #188	@ (adr r2, 0x4c9178)
+  4c90ba:	f44f 7180 	mov.w	r1, #256	@ 0x100
+  4c90be:	4668      	mov	r0, sp
+  4c90c0:	f7ba ff86 	bl	0x483fd0
+  4c90c4:	6b28      	ldr	r0, [r5, #48]	@ 0x30
+  4c90c6:	466a      	mov	r2, sp
+  4c90c8:	0021      	movs	r1, r4
+  4c90ca:	f006 fdcc 	bl	0x4cfc66
+  4c90ce:	2800      	cmp	r0, #0
+  4c90d0:	d004      	beq.n	0x4c90dc
+  4c90d2:	0020      	movs	r0, r4
+  4c90d4:	f786 fb40 	bl	0x44f758
+  4c90d8:	2000      	movs	r0, #0
+  4c90da:	e000      	b.n	0x4c90de
+  4c90dc:	0020      	movs	r0, r4
+  4c90de:	b040      	add	sp, #256	@ 0x100
+  4c90e0:	bd70      	pop	{r4, r5, r6, pc}

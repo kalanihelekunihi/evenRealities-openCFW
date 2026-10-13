@@ -1,0 +1,79 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0058ec74 <.data+0x156c74>:
+  58ec74:	ee10 1a10 	vmov	r1, s0
+  58ec78:	f3c1 52c7 	ubfx	r2, r1, #23, #8
+  58ec7c:	b1da      	cbz	r2, 0x58ecb6
+  58ec7e:	2a99      	cmp	r2, #153	@ 0x99
+  58ec80:	da0f      	bge.n	0x58eca2
+  58ec82:	0fc8      	lsrs	r0, r1, #31
+  58ec84:	f021 4100 	bic.w	r1, r1, #2147483648	@ 0x80000000
+  58ec88:	ee00 1a10 	vmov	s0, r1
+  58ec8c:	f1b1 5f7e 	cmp.w	r1, #1065353216	@ 0x3f800000
+  58ec90:	f74f ae84 	ble.w	0x55e99c
+  58ec94:	eef7 0a00 	vmov.f32	s1, #112	@ 0x3f800000  1.0
+  58ec98:	ee80 0a80 	vdiv.f32	s0, s1, s0
+  58ec9c:	1d00      	adds	r0, r0, #4
+  58ec9e:	f7cf be7d 	b.w	0x55e99c
+  58eca2:	2aff      	cmp	r2, #255	@ 0xff
+  58eca4:	d101      	bne.n	0x58ecaa
+  58eca6:	024a      	lsls	r2, r1, #9
+  58eca8:	d105      	bne.n	0x58ecb6
+  58ecaa:	4a03      	ldr	r2, [pc, #12]	@ (0x58ecb8)
+  58ecac:	0fc9      	lsrs	r1, r1, #31
+  58ecae:	ea42 71c1 	orr.w	r1, r2, r1, lsl #31
+  58ecb2:	ee00 1a10 	vmov	s0, r1
+  58ecb6:	4770      	bx	lr
+  58ecb8:	0fdb      	lsrs	r3, r3, #31
+  58ecba:	3fc9      	subs	r7, #201	@ 0xc9
+  58ecbc:	ee10 1a10 	vmov	r1, s0
+  58ecc0:	2004      	movs	r0, #4
+  58ecc2:	f04f 527e 	mov.w	r2, #1065353216	@ 0x3f800000
+  58ecc6:	ee01 2a90 	vmov	s3, r2
+  58ecca:	0049      	lsls	r1, r1, #1
+  58eccc:	bf88      	it	hi
+  58ecce:	2008      	movhi	r0, #8
+  58ecd0:	0849      	lsrs	r1, r1, #1
+  58ecd2:	ee00 1a10 	vmov	s0, r1
+  58ecd6:	4291      	cmp	r1, r2
+  58ecd8:	d814      	bhi.n	0x58ed04
+  58ecda:	ee71 0ac0 	vsub.f32	s1, s3, s0
+  58ecde:	4a0f      	ldr	r2, [pc, #60]	@ (0x58ed1c)
+  58ece0:	ee31 1a80 	vadd.f32	s2, s3, s0
+  58ece4:	4291      	cmp	r1, r2
+  58ece6:	ee61 0a20 	vmul.f32	s1, s2, s1
+  58ecea:	eef1 0ae0 	vsqrt.f32	s1, s1
+  58ecee:	d905      	bls.n	0x58ecfc
+  58ecf0:	f080 0004 	eor.w	r0, r0, #4
+  58ecf4:	ee80 0a80 	vdiv.f32	s0, s1, s0
+  58ecf8:	f7cf be50 	b.w	0x55e99c
+  58ecfc:	ee80 0a20 	vdiv.f32	s0, s0, s1
+  58ed00:	f7cf be4c 	b.w	0x55e99c
+  58ed04:	0049      	lsls	r1, r1, #1
+  58ed06:	f111 7f80 	cmn.w	r1, #16777216	@ 0x1000000
+  58ed0a:	bf9c      	itt	ls
+  58ed0c:	f06f 4100 	mvnls.w	r1, #2147483648	@ 0x80000000
+  58ed10:	ee00 1a10 	vmovls	s0, r1
+  58ed14:	f668 af8e 	bls.w	0x577c34
+  58ed18:	4770      	bx	lr
+  58ed1a:	0000      	movs	r0, r0
+  58ed1c:	04f4      	lsls	r4, r6, #19
+  58ed1e:	3f35      	subs	r7, #53	@ 0x35
+  58ed20:	b580      	push	{r7, lr}
+  58ed22:	2800      	cmp	r0, #0
+  58ed24:	d002      	beq.n	0x58ed2c
+  58ed26:	2118      	movs	r1, #24
+  58ed28:	f6fa fbb8 	bl	0x48949c
+  58ed2c:	bd01      	pop	{r0, pc}
+  58ed2e:	e92d 47ff 	stmdb	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+  58ed32:	000d      	movs	r5, r1
+  58ed34:	2100      	movs	r1, #0
+  58ed36:	9102      	str	r1, [sp, #8]
+  58ed38:	2800      	cmp	r0, #0
+  58ed3a:	d101      	bne.n	0x58ed40
+  58ed3c:	2021      	movs	r0, #33	@ 0x21
+  58ed3e:	e088      	b.n	0x58ee52

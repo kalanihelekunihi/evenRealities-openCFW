@@ -1,0 +1,50 @@
+{
+  "selected": false,
+  "providers": {
+    "53d87c..53d8fc": {
+      "role": "signed32 coordinate pair to floats",
+      "children": [
+        "488506 twice",
+        "44d25c failure log"
+      ],
+      "failure_lines": [
+        199,
+        202
+      ],
+      "note": "Both float conversions precede first append; FPSCR validation remains"
+    },
+    "53d6cc..53d6d0": {
+      "role": "count",
+      "native": "volatile word4 read"
+    },
+    "53d6d0..53d6da": {
+      "role": "front",
+      "children": [
+        "488578(array,0)"
+      ],
+      "note": "Cannot substitute raw word0 for empty-array behavior"
+    },
+    "488578..4885b8": {
+      "role": "indexed item",
+      "native": "Unsigned index/count gate; NULL data diag/failstop atline202; freshdata andstride reload then wrappedindex*stride"
+    },
+    "488506..488578": {
+      "role": "append",
+      "children": [
+        "48849c resize",
+        "454738 copy",
+        "4883f0 zero",
+        "44d25c logger"
+      ],
+      "note": "Equality count/capacity only; resize full32 nonzero gate; freshdata/count/stride; freshcount aftercopy"
+    },
+    "514f3c..514f60": {
+      "role": "pathshape",
+      "children": [
+        "51565c NULLerror",
+        "561c68 post-store processing"
+      ],
+      "note": "Stores8/12/0/4 then genuine561c68 child; not complete simple setter"
+    }
+  }
+}

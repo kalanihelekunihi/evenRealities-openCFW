@@ -1,0 +1,53 @@
+{
+  "status": "SIX_FULL_CALLBACK_ANALYSIS_SLICES_AUTHENTICATED_WITH_FUNCTION_SYMBOLS",
+  "native_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "elf_sha256": "bc1dea1b553671e2006bb44c520bf7a2301b1a7140cbbcc24c90ffccd07ecba6",
+  "ranges": [
+    {
+      "name": "read",
+      "start": "0x4c8ff0",
+      "end_inclusive": "0x4c900b",
+      "bytes": 28,
+      "sha256": "dfc2583e0fea8e7d83324b51de705b5ee2fe1dab9859cd3569a9482b57b6b7e3"
+    },
+    {
+      "name": "write",
+      "start": "0x4c900c",
+      "end_inclusive": "0x4c9027",
+      "bytes": 28,
+      "sha256": "234065ebcf4f69e9b29f14ace7e9c4b151bc581923a23298f9b3350eb18acf83"
+    },
+    {
+      "name": "seek",
+      "start": "0x4c9028",
+      "end_inclusive": "0x4c9061",
+      "bytes": 58,
+      "sha256": "ea9d456b01e84ad9c5a6f36a56693db412f8720188cfd3f0cdf0242c0a0ffe6e"
+    },
+    {
+      "name": "tell",
+      "start": "0x4c9064",
+      "end_inclusive": "0x4c907f",
+      "bytes": 28,
+      "sha256": "5df35250b618fce7b50853b3bc8468643ba5e7defe2f9e29774c3f22313f04c0"
+    },
+    {
+      "name": "close",
+      "start": "0x4c8fd8",
+      "end_inclusive": "0x4c8fed",
+      "bytes": 22,
+      "sha256": "0d625b5b4b0cc8869849582c6d9786b0b2831b5b765dc4e1cd80ace447f6f94d"
+    },
+    {
+      "name": "dir_close",
+      "start": "0x4c90e4",
+      "end_inclusive": "0x4c9101",
+      "bytes": 30,
+      "sha256": "35fc324246412d0cd85fe1ba7d0f7703b526ae12048fafccd3be8b8e201afc5e"
+    }
+  ],
+  "metadata_only_mapping_repairs": [],
+  "all_loadable_bytes_original_native": true,
+  "production_selected": false,
+  "previous_rea_target_was_size_refresh_only": "Old318 ELF contains no filesystem addresses; procedure-not-found was a target-scope error, not a callback decompilation failure."
+}

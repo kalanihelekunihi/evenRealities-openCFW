@@ -54,7 +54,7 @@ void audio_uart_lv_image_decoder_init_488f4c(uint32_t primary,uint32_t secondary
  * The configured native assert logs and faults atUINT32_MAX forever.
  * Its following allocation-error log is unreachable after that assert. */
 extern void *audio_uart_lv_malloc(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 void audio_uart_lv_span_stack_init_4c6d04(void)
 {
     static const char source[] = "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\widgets\\span\\lv_span.c";
@@ -187,7 +187,7 @@ extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern const char *audio_uart_lv_fs_extension_4c70e4(const char *);
 extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
 extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_t *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 uint32_t audio_uart_lv_bin_decoder_info_4c79d0(void *decoder,void *descriptor,void *header)
 {
     (void)decoder;
@@ -289,7 +289,7 @@ uint32_t audio_uart_lv_fs_file_read_4c6f46(void *file,void *buffer,uint32_t size
  * Qualified by2880 bounded compiled ARM/native comparisons. */
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern void *audio_uart_lv_malloc(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 #define CACHE ((volatile uint32_t *)(uintptr_t)f[2])
 #define DRIVER ((volatile uint32_t *)(uintptr_t)f[1])
 #define SEEK(pos) ((uint32_t (*)(void *,void *,uint32_t,uint32_t))(uintptr_t)DRIVER[7])((void *)(uintptr_t)f[1],(void *)(uintptr_t)f[0],(pos),0u)
@@ -356,7 +356,7 @@ uint32_t audio_uart_lv_fs_read_cached_4c713c(void *file,void *out,uint32_t reque
 /* Full native4c81a2..4c8204, literal pool excluded. get_decoder_data.
  * Qualified by16 bounded compiled ARM/native comparisons. */
 extern void *audio_uart_lv_heap_alloc(uint32_t); /* selected zeroed44f730 */
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 void *audio_uart_lv_bin_decoder_data_get_4c81a2(void *descriptor)
 {
     volatile uint32_t *dsc=descriptor;
@@ -398,7 +398,7 @@ extern void audio_uart_lv_draw_buf_set_flag_48b750(void *,uint32_t);
 extern void *audio_uart_lv_decoder_postprocess_489168(void *,void *);
 extern uint32_t audio_uart_lv_image_cache_enabled_4d4b24(void);
 extern void *audio_uart_lv_decoder_add_cache_48911a(void *,const void *,void *,void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 uint32_t audio_uart_lv_bin_decoder_open_4c7b24(void *decoder,void *descriptor)
 {
     volatile uint32_t *d=descriptor;
@@ -493,7 +493,7 @@ extern void *audio_uart_lv_malloc(uint32_t);
 extern void audio_uart_lv_heap_free(void *);
 extern uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *,uint32_t,void *,uint32_t,uint32_t *);
 extern uint32_t audio_uart_lv_bin_decode_indexed_line_4c8c94(uint32_t,void *,uint32_t,uint32_t,const void *,void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 uint32_t audio_uart_lv_bin_decoder_get_area_4c7e4c(void *decoder,void *descriptor,const void *full_area,void *decoded_area)
 {
     (void)decoder;
@@ -600,7 +600,7 @@ extern uint8_t audio_uart_display_lv_root[];
 extern void audio_uart_lv_draw_memzero_48aa54(void *,uint32_t);
 extern uint32_t audio_uart_font_bitmap_stride(uint32_t,uint8_t);
 extern void *audio_uart_lv_draw_align_48ab04(void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 uint32_t audio_uart_lv_draw_buf_init_48aef8(void *draw_buffer,uint32_t width,uint32_t height,uint32_t cf,uint32_t stride,void *data,uint32_t data_size)
 {
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\lv_draw_buf.c";
@@ -850,7 +850,7 @@ extern uint8_t audio_uart_display_lv_root[];
 extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *,uint32_t,void *,uint32_t,uint32_t *);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c8780..4c884a. Saved decoder data/file ownership survives children. */
 uint32_t audio_uart_lv_bin_decode_rgb_4c8780(void *decoder,void *descriptor)
 {
@@ -889,7 +889,7 @@ extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,ui
 extern uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *,uint32_t,void *,uint32_t,uint32_t *);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static uint32_t alpha_lsl(uint32_t value,uint32_t shift)
 {
     uint32_t amount=(uint8_t)shift;
@@ -994,7 +994,7 @@ extern uint32_t audio_uart_lv_fs_read_at_4c8d3c(void *,uint32_t,void *,uint32_t,
 extern uint32_t audio_uart_lv_fs_file_seek_4c6fba(void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_fs_file_tell_4c7018(void *,uint32_t *);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c8570..4c8778; saved data/file and fresh header loads retained. */
 uint32_t audio_uart_lv_bin_load_indexed_4c8570(void *decoder,void *descriptor)
 {
@@ -1065,7 +1065,7 @@ extern uint32_t audio_uart_lv_fs_file_seek_4c6fba(void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_fs_file_tell_4c7018(void *,uint32_t *);
 extern uint32_t audio_uart_lv_bin_decode_indexed_line_4c8c94(uint32_t,void *,uint32_t,uint32_t,const void *,void *);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c8256..4c8554; literal pool excluded. */
 uint32_t audio_uart_lv_bin_decode_indexed_4c8256(void *decoder,void *descriptor)
 {
@@ -1143,7 +1143,7 @@ extern uint8_t audio_uart_display_lv_root[];
 extern void *audio_uart_lv_bin_decoder_data_get_4c81a2(void *);
 extern void *audio_uart_lv_draw_buf_create_ex_48b010(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c8d8c..4c8e78. RLE/LZ4 are disabled in the locked native build;
  * these are native diagnostic/cleanup branches, not substitute codec stubs. */
 uint32_t audio_uart_lv_bin_decompress_image_4c8d8c(void *descriptor,void *compressed)
@@ -1184,7 +1184,7 @@ extern uint32_t audio_uart_lv_bin_decompress_image_4c8d8c(void *,void *);
 extern uint32_t audio_uart_lv_bin_load_indexed_4c8570(void *,void *);
 extern uint32_t audio_uart_lv_bin_decode_indexed_4c8256(void *,void *);
 extern uint32_t audio_uart_lv_bin_decode_alpha_4c887c(void *,void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4c7940..4c794c; R0 scratch is not a return contract. */
 void audio_uart_lv_bin_memzero_4c7940(void *object,uint32_t size)
 {
@@ -1290,7 +1290,7 @@ extern uint32_t audio_uart_lv_color_has_alpha_440fc4(uint32_t);
 extern uint32_t audio_uart_lv_draw_buf_has_flag_48b73c(const void *,uint32_t);
 extern uint32_t audio_uart_lv_draw_buf_premultiply_48b540(void *);
 extern void *audio_uart_lv_draw_buf_duplicate_ex_48b134(void *,const void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native489168..48925a; fresh header loads preserve child-call mutations. */
 void *audio_uart_lv_decoder_postprocess_489168(void *descriptor,void *decoded)
 {
@@ -1342,7 +1342,7 @@ extern uint32_t audio_uart_font_bitmap_stride(uint32_t,uint8_t);
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern uint32_t audio_uart_lv_draw_buf_size_48b86c(uint32_t,uint32_t,uint32_t,uint32_t);
 extern void *audio_uart_lv_grid_move_45475a(void *,const void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native48b34e..48b51e; assertions retain native repeated zero-store. */
 uint32_t audio_uart_lv_draw_buf_adjust_stride_48b34e(void *buffer,uint32_t stride)
 {
@@ -1447,7 +1447,7 @@ void *audio_uart_lv_grid_move_45475a(void *destination,const void *source,uint32
 
 #include <stdint.h>
 extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native440f38..440f44; return scratch is not a void API contract. */
 void audio_uart_lv_color_zero_440f38(void *color,uint32_t size)
 {
@@ -1537,7 +1537,7 @@ extern uint32_t audio_uart_lv_area_width_451598(const void *);
 extern void *audio_uart_lv_draw_buf_goto_xy_48b2aa(const void *,uint32_t,uint32_t);
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native48ad42..48aef8, including custom-copy dispatch and assertions. */
 void audio_uart_lv_draw_buf_copy_48ad42(void *destination,const void *destination_area,const void *source,const void *source_area)
 {
@@ -1584,7 +1584,7 @@ void audio_uart_lv_draw_buf_copy_48ad42(void *destination,const void *destinatio
 
 #include <stdint.h>
 extern uint32_t audio_uart_lv_color_bpp_440f44(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native48b2aa..48b34e; address arithmetic wraps in 32 bits. */
 void *audio_uart_lv_draw_buf_goto_xy_48b2aa(const void *buffer,uint32_t x,uint32_t y)
 {
@@ -1611,7 +1611,7 @@ extern uint32_t audio_uart_lv_lock_core(void *);
 extern uint32_t audio_uart_lv_unlock_core(void *);
 extern void *audio_uart_lv_cache_add_internal_4d51c0(void *,const void *,uint32_t);
 extern void *audio_uart_font_cache_acquire_data(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Full native4d4eea..4d4f90; no initializer callback in this cache-add API. */
 void *audio_uart_lv_cache_add_4d4eea(void *cache,const void *key,void *user_data)
 {
@@ -1802,7 +1802,7 @@ extern uint32_t audio_uart_lv_fs_file_read_4c6f46(void *,void *,uint32_t,uint32_
 extern uint32_t audio_uart_lv_fs_file_close_4c6ee0(void *);
 extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
 extern void *audio_uart_lv_malloc(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char bmp_open_reason[]="Out of memory";
 static const char bmp_open_expression[]="dsc->user_data != NULL";
 static const char bmp_open_format[]="Asserted at expression: %s (%s)";
@@ -1886,7 +1886,7 @@ uint32_t audio_uart_lv_bmp_get_area_4c93a0(void *decoder,void *descriptor,const 
 #include <stdint.h>
 extern void *audio_uart_lv_fs_driver_find_4c70b4(uint32_t);
 extern void *audio_uart_lv_heap_alloc(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char fs_open_null[]="Can't open file: path is NULL";
 static const char fs_open_function[]="lv_fs_open";
 static const char fs_open_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_fs.c";
@@ -1957,7 +1957,7 @@ extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
 /* Native hidden structure-return ABI: caller supplies60-byte result inR0. */
 extern void audio_uart_nema_cl_create_sized_514278(void *,uint32_t);
 extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern void audio_uart_ambiq_vector_font_init_53d6da(void *);
 extern uint32_t audio_uart_lv_thread_init_4d4610(void *,const char *,uint32_t,void (*)(void),uint32_t,void *);
 static const char ambiq_name[]="AMBIQ";
@@ -2007,7 +2007,7 @@ void audio_uart_lv_init_group_4c73d6(void) {
 #include <stdint.h>
 extern int32_t g2_thread_create_dynamic(void (*)(void *),const char *,uint16_t,void *,uint32_t,void **);
 extern void audio_task_delete(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char lv_thread_message[]="xTaskCreate failed!";
 static const char lv_thread_function[]="lv_thread_init";
 static const char lv_thread_path[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\osal\\lv_freertos.c";
@@ -2374,7 +2374,7 @@ void audio_uart_ambiq_area_move_450bb2(uint32_t *area,uint32_t x,uint32_t y) {
 }
 
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern void audio_uart_lv_draw_full_area_48b8d8(void *,void *);
 extern void audio_uart_lv_area_set_450b5c(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 static void cache_assert(uint32_t line,const char *name,const char *expression) {
@@ -2434,7 +2434,7 @@ extern uint32_t audio_uart_nema_get_error_4b128a(void);
 extern uint32_t audio_uart_nema_vg_get_error_51564c(void);
 extern const char *audio_uart_nema_error_interpret_4b0594(uint32_t);
 extern const char *audio_uart_nema_vg_error_interpret_4b0584(uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Native4c791a..4c7920; mutable default unit cell read once per invocation. */
 void *audio_uart_ambiq_default_unit_4c791a(void) {
     return (void *)(uintptr_t)audio_uart_ambiq_unit_cell[0];
@@ -2480,7 +2480,7 @@ uint32_t audio_uart_nema_get_error_4b128a(void) {
 
 #include <stdint.h>
 extern uint32_t audio_uart_lv_unlock_core(void *); /* native4d4696 selected */
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Native4b0886..4b092a. Decrement/assert BEFORE unlocking, unlike provider. */
 uint32_t audio_uart_ambiq_context_unlock_4b0886(void *unit) {
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
@@ -2519,7 +2519,7 @@ extern uint32_t audio_uart_ambiq_context_unlock_4b0886(void *);
 extern void audio_uart_nema_bind_tex_4b1298(uint32_t,uint32_t,uint32_t,uint32_t,int32_t,uint32_t,uint32_t);
 extern void audio_uart_checksum_copy(void *,const void *,uint32_t);
 extern void audio_uart_ambiq_clip_change_4b077e(void *,const void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Native4b092a..4b0b5a; unit cached once, all source/header reads volatile.
  * Null buffer is dereferenced before the later validation, as in native. */
 uint32_t audio_uart_ambiq_bind_buffer_4b092a(void *buffer,const void *raw_clip,uint32_t extend) {
@@ -2641,7 +2641,7 @@ void audio_uart_lv_memzero_48949c(void *destination,uint32_t size) {
 
 #include <stdint.h>
 extern uint32_t audio_uart_lv_lock_core(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 /* Native4b07de..4b0886. Only lowbyte success1 increments the lock count. */
 uint32_t audio_uart_ambiq_context_lock_4b07de(void *unit) {
     static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
@@ -3949,7 +3949,7 @@ extern void *audio_uart_ambiq_default_unit_4c791a(void);
 extern void *audio_uart_display_surface_alloc(uint32_t,uint32_t,uint32_t,uint32_t);
 extern void *audio_uart_lv_draw_buf_reshape_48b196(void *,uint32_t,uint32_t,uint32_t,uint32_t);
 extern void audio_uart_font_bitmap_release(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char stencil263_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
 static const char stencil263_message[]="Failed to create stencil buffer!";
 static const char stencil263_function[]="lv_draw_ambiq_stencil_buffer_adjust";
@@ -3983,7 +3983,7 @@ extern void audio_uart_nema_vg_state_reset_515676(void);
 extern void audio_uart_ambiq_blend_clear_4b075e(void *);
 extern uint32_t audio_uart_ambiq_stencil_adjust_4b0b5a(void *,uint32_t,uint32_t);
 extern void audio_uart_lv_memzero_48949c(void *,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 typedef struct {uint32_t words[4];} audio_uart_vg_framebuffer_264;
 extern void audio_uart_nema_vg_set_framebuffer_5223a2(uint32_t,uint32_t,audio_uart_vg_framebuffer_264);
 static const char resolution264_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_private.c";
@@ -4052,7 +4052,7 @@ extern void *audio_uart_font_outline_context(void);
 extern void audio_uart_ambiq_vector_font_push_53d8fc(void *);
 extern void audio_uart_ambiq_vector_font_allocate_53da54(void *);
 extern void audio_uart_ambiq_vector_font_release_53db3c(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char vector270_message[]="unknown event code: %d";
 static const char vector270_function[]="lv_draw_ambiq_vector_font_ft_cb";
 static const char vector270_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_vector_font.c";
@@ -4081,7 +4081,7 @@ void audio_uart_ambiq_vector_font_init_53d6da(void *unit) {
 extern void audio_uart_ambiq_get_path_buffers_5fa21c(void *,uint32_t *,uint32_t *,void **,void **);
 extern void audio_uart_nema_vg_path_destroy_514d98(void *);
 extern void audio_uart_lv_heap_free(void *);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char release272_null[]="NULL pointer";
 static const char release272_expression[]="outline != NULL";
 static const char release272_message[]="Asserted at expression: %s (%s)";
@@ -4144,7 +4144,7 @@ extern void *audio_uart_lv_malloc(uint32_t);
 extern void *audio_uart_nema_vg_path_create_514ebc(void);
 extern void audio_uart_lv_array_clear_488478(void *);
 extern void audio_uart_lv_array_init_external_488440(void *,void *,uint32_t,uint32_t);
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 extern volatile uint32_t audio_uart_ambiq_vector_current_path_200746c4;
 extern uint8_t audio_uart_ambiq_vector_path_data_20073cd4[];
 extern uint8_t audio_uart_ambiq_vector_path_segments_20073cc0[];
@@ -4181,7 +4181,7 @@ void audio_uart_ambiq_vector_font_allocate_53da54(void *parameter) {
 }
 
 #include <stdint.h>
-extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,...);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
 static const char array278_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_array.c";
 static const char array278_function[]="lv_array_init_from_buf";
 static const char array278_format[]="Asserted at expression: %s (%s)";
@@ -4197,3 +4197,2915 @@ void audio_uart_lv_array_init_external_488440(void *array,void *buffer,uint32_t 
  a[1]=0u;a[2]=count;a[3]=stride;a[0]=(uint32_t)(uintptr_t)buffer;
  ((volatile uint8_t *)array)[16]=0u;
 }
+
+#include <stdint.h>
+extern uint32_t audio_uart_lv_array_push_488506(void *,const void *);
+extern void audio_uart_ambiq_vector_data_pair_53d87c(uint32_t,uint32_t);
+extern void *audio_uart_ambiq_vector_array_front_53d6d0(void *);
+extern uint32_t audio_uart_ambiq_vector_array_count_53d6cc(void *);
+extern void audio_uart_nema_vg_path_shape_514f3c(void *,uint32_t,void *,uint32_t,void *);
+extern void *audio_uart_nema_vg_path_create_514ebc(void);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern volatile uint32_t audio_uart_ambiq_vector_current_path_200746c4;
+extern uint8_t audio_uart_ambiq_vector_path_data_20073cd4[];
+extern uint8_t audio_uart_ambiq_vector_path_segments_20073cc0[];
+static const char push281_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_vector_font.c";
+static const char push281_function[]="lv_ambiq_ft_outline_push";
+static const char push281_null[]="NULL pointer";
+static const char push281_outline[]="outline != NULL";
+static const char push281_assertfull[]="Asserted at expression: %s (%s)";
+static const char push281_result[]="res == LV_RESULT_OK";
+static const char push281_assert[]="Asserted at expression: %s";
+static const char push281_unknown[]="unknown point type: %d";
+/* Native53d8fc..53da50: command mapping and post-child segment reloads. */
+void audio_uart_ambiq_vector_font_push_53d8fc(void *parameter) {
+ volatile uint32_t *p=parameter;
+ volatile uint32_t *outline=(void *)(uintptr_t)p[0];
+ if(!outline) {
+  audio_uart_lvgl_log(3u,push281_file,209u,push281_function,push281_assertfull,push281_outline,push281_null);
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ volatile uint8_t segment=0u;
+ uint32_t type=((volatile uint8_t *)parameter)[4];
+ switch(type) {
+ case 0:segment=0;break;case 1:segment=1;break;case 2:segment=2;break;
+ case 3:segment=6;break;case 4:segment=5;break;case 5:segment=0;break;
+ default:audio_uart_lvgl_log(3u,push281_file,235u,push281_function,push281_unknown,type);break;
+ }
+ uint32_t result=audio_uart_lv_array_push_488506(audio_uart_ambiq_vector_path_segments_20073cc0,(const void *)&segment);
+ if((uint8_t)result!=1u) {
+  audio_uart_lvgl_log(3u,push281_file,240u,push281_function,push281_assert,push281_result);
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ if(segment==6u || segment==5u) {
+  uint32_t y=p[5];uint32_t x=p[4];audio_uart_ambiq_vector_data_pair_53d87c(x,y);
+ }
+ if(segment==6u) {
+  uint32_t y=p[7];uint32_t x=p[6];audio_uart_ambiq_vector_data_pair_53d87c(x,y);
+ }
+ if(segment!=0u) {
+  uint32_t y=p[3];uint32_t x=p[2];audio_uart_ambiq_vector_data_pair_53d87c(x,y);
+ }
+ if(type==0u || type==5u) {
+  void *data=audio_uart_ambiq_vector_array_front_53d6d0(audio_uart_ambiq_vector_path_data_20073cd4);
+  uint32_t data_count=audio_uart_ambiq_vector_array_count_53d6cc(audio_uart_ambiq_vector_path_data_20073cd4);
+  void *segments=audio_uart_ambiq_vector_array_front_53d6d0(audio_uart_ambiq_vector_path_segments_20073cc0);
+  uint32_t segment_count=audio_uart_ambiq_vector_array_count_53d6cc(audio_uart_ambiq_vector_path_segments_20073cc0);
+  audio_uart_nema_vg_path_shape_514f3c((void *)(uintptr_t)audio_uart_ambiq_vector_current_path_200746c4,segment_count,segments,data_count,data);
+ }
+ if(type==5u) {
+  outline[1]=(uint32_t)(uintptr_t)audio_uart_nema_vg_path_create_514ebc();
+  audio_uart_ambiq_vector_current_path_200746c4=outline[1];
+ }
+}
+
+#include <stdint.h>
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+static const char access282_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_array.c";
+static const char access282_function[]="lv_array_at";
+static const char access282_format[]="Asserted at expression: %s (%s)";
+static const char access282_expression[]="array->data != NULL";
+static const char access282_null[]="NULL pointer";
+/* Native488578..4885b8: count gate precedes data assertion and fresh pointer reload. */
+void *audio_uart_lv_array_item_488578(void *array,uint32_t index) {
+ const volatile uint32_t *a=array;
+ if(index>=a[1])return 0;
+ if(a[0]==0u) {
+  audio_uart_lvgl_log(3u,access282_file,202u,access282_function,access282_format,access282_expression,access282_null);
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ uint32_t data=a[0];uint32_t stride=a[3];
+ return (void *)(uintptr_t)(data+index*stride);
+}
+/* Native53d6cc..53d6d0: count only. */
+uint32_t audio_uart_ambiq_vector_array_count_53d6cc(void *array) {
+ return ((const volatile uint32_t *)array)[1];
+}
+/* Native53d6d0..53d6da: actual indexed-item contract at zero. */
+void *audio_uart_ambiq_vector_array_front_53d6d0(void *array) {
+ return audio_uart_lv_array_item_488578(array,0u);
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_lv_array_resize_48849c(void *,uint32_t);
+extern void *audio_uart_lv_grid_copy_454738(void *,const void *,uint32_t);
+extern void audio_uart_lv_basic_box_clear_454746(void *,uint32_t,uint32_t);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+static const char append284_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\misc\\lv_array.c";
+static const char append284_function[]="lv_array_push_back";
+static const char append284_format[]="Asserted at expression: %s (%s)";
+static const char append284_expression[]="array->data != NULL";
+static const char append284_null[]="NULL pointer";
+/* Native4883f0..4883fc: consumed void zero-fill wrapper. */
+void audio_uart_lv_array_zero_4883f0(void *destination,uint32_t size) {
+ audio_uart_lv_basic_box_clear_454746(destination,0u,size);
+}
+/* Native488506..488578: equality gate, full result, fresh descriptor loads. */
+uint32_t audio_uart_lv_array_push_488506(void *array,const void *source) {
+ volatile uint32_t *a=array;
+ if(a[0]==0u) {
+  audio_uart_lvgl_log(3u,append284_file,176u,append284_function,append284_format,append284_expression,append284_null);
+  for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+ }
+ uint32_t count=a[1];uint32_t capacity=a[2];
+ if(count==capacity) {
+  uint32_t wanted=a[2]+4u;
+  if(audio_uart_lv_array_resize_48849c(array,wanted)==0u)return 0u;
+ }
+ uint32_t data=a[0];count=a[1];uint32_t stride=a[3];
+ void *destination=(void *)(uintptr_t)(data+count*stride);
+ if(source)(void)audio_uart_lv_grid_copy_454738(destination,source,a[3]);
+ else audio_uart_lv_array_zero_4883f0(destination,a[3]);
+ a[1]=a[1]+1u;
+ return 1u;
+}
+
+#include <stdint.h>
+extern void audio_uart_nema_vg_set_error_51565c(uint32_t);
+extern void audio_uart_nema_vg_path_process_561c68(void *);
+/* Native514f3c..514f60: ordered shape stores precede genuine postprocessor. */
+void audio_uart_nema_vg_path_shape_514f3c(void *path,uint32_t segment_count,void *segments,uint32_t data_count,void *data) {
+ if(!path){audio_uart_nema_vg_set_error_51565c(1u);return;}
+ volatile uint32_t *p=path;
+ p[2]=(uint32_t)(uintptr_t)segments;p[3]=(uint32_t)(uintptr_t)data;
+ p[0]=segment_count;p[1]=data_count;
+ audio_uart_nema_vg_path_process_561c68(path);
+}
+
+#include <stdint.h>
+extern uint32_t audio_uart_lv_array_push_488506(void *,const void *);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern uint8_t audio_uart_ambiq_vector_path_data_20073cd4[];
+static const char pair288_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\draw\\ambiq\\lv_draw_ambiq_vector_font.c";
+static const char pair288_function[]="lv_ambiq_ft_data_array_push";
+static const char pair288_format[]="Asserted at expression: %s";
+static const char pair288_expression[]="res == LV_RESULT_OK";
+static void pair288_fail(uint32_t line) {
+ audio_uart_lvgl_log(3u,pair288_file,line,pair288_function,pair288_format,pair288_expression);
+ for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+}
+/* Native53d87c..53d8fc: both float conversions precede the first append. */
+void audio_uart_ambiq_vector_data_pair_53d87c(uint32_t x,uint32_t y) {
+ volatile float x_float=(float)(int32_t)x;
+ volatile float y_float=(float)(int32_t)y;
+ uint32_t result=audio_uart_lv_array_push_488506(audio_uart_ambiq_vector_path_data_20073cd4,(const void *)&x_float);
+ if((uint8_t)result!=1u)pair288_fail(199u);
+ result=audio_uart_lv_array_push_488506(audio_uart_ambiq_vector_path_data_20073cd4,(const void *)&y_float);
+ if((uint8_t)result!=1u)pair288_fail(202u);
+}
+
+#include <stdint.h>
+/* Native514e0c..514e50: sparse path bounds reset, no NULL guard in native. */
+void audio_uart_nema_vg_path_bounds_reset_514e0c(void *path) {
+ volatile uint32_t *p=path;
+ p[4]=0x477fff00u;p[5]=0x477fff00u;p[6]=0xc77fff00u;p[7]=0xc77fff00u;
+ p[20]=0u;p[21]=0u;p[9]=0u;p[8]=0u;p[11]=0u;p[10]=0u;
+ p[13]=0u;p[12]=0u;p[15]=0u;p[14]=0u;p[22]=0u;p[23]=0u;
+ p[16]=0x477fff00u;p[17]=0x477fff00u;p[18]=0xc77fff00u;p[19]=0xc77fff00u;
+}
+
+#include <stdint.h>
+/* Native math interface consumes angle inS0 and mode inR0; explicit VFP PCS. */
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_trig_core_5094c0(uint32_t,float);
+/* Native50968c..509690. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_trig_mode1_50968c(float angle) {
+ return audio_uart_float_trig_core_5094c0(1u,angle);
+}
+/* Native509690..509694. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_trig_mode0_509690(float angle) {
+ return audio_uart_float_trig_core_5094c0(0u,angle);
+}
+
+#include <stdint.h>
+extern volatile uint32_t audio_uart_float_math_error_cell_20074f14;
+/* Native439ca4..439cb2 andshared439cbe..439cc4: consumed void domain store. */
+__attribute__((used,noinline)) static void sqrt295_domain_store(void) {
+ audio_uart_float_math_error_cell_20074f14=33u;
+}
+/* Native handler preservesR0..R3; named architectural wrapper keeps that contract. */
+__attribute__((naked)) void audio_uart_float_domain_error_439ca4(void) {
+ __asm__ volatile("push {r0,r1,r2,r3,lr}\n\tsub sp, #4\n\tbl sqrt295_domain_store\n\tadd sp, #4\n\tpop {r0,r1,r2,r3,pc}");
+}
+/* Native4397a8..4397c4: explicit architectural FPU instructions, no opcode data. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_sqrt_4397a8(float value) {
+ uint32_t status;
+ __asm__ volatile("vcmpe.f32 %1, #0.0\n\tvmrs %0, fpscr" : "=r"(status) : "t"(value));
+ if(status&0x80000000u) {
+  union {uint32_t bits;float value;} result={.bits=0x7fffffffu};
+  audio_uart_float_domain_error_439ca4();
+  return result.value;
+ }
+ float result;
+ __asm__ volatile("vsqrt.f32 %0, %1" : "=t"(result) : "t"(value));
+ return result;
+}
+
+#include <stdint.h>
+extern void audio_uart_float_domain_error_439ca4(void);
+static uint32_t remainder296_lsr(uint32_t value,uint32_t amount) {
+ amount&=255u;return amount>=32u?0u:value>>amount;
+}
+/* Native577c4c..577d08: integer float-bit remainder, native exceptional policy. */
+uint32_t audio_uart_float_remainder_bits_577c4c(uint32_t x,uint32_t y) {
+ uint32_t sign=x&0x80000000u, twice_y=y<<1;
+ int32_t ex=(int32_t)((x>>23)&255u),ey=(int32_t)(twice_y>>24);
+ uint32_t mx,my;
+ if(ey!=0 && ex!=255 && ey!=255) {
+  if(twice_y>=(x<<1))return twice_y==(x<<1)?sign:x;
+  my=(0x80000000u|(twice_y<<7))>>8;
+  mx=0x80000000u|(x<<8);
+ } else if(twice_y!=0u && ex!=255 && ey!=255) {
+  if(twice_y>=(x<<1))return twice_y==(x<<1)?sign:x;
+  my=twice_y<<8;
+  uint32_t leading=(uint32_t)__builtin_clz(my);
+  my<<=leading;ey=-(int32_t)leading;my>>=8;
+  if(ex!=0)mx=0x80000000u|(x<<8);
+  else {
+   mx=x<<9;leading=(uint32_t)__builtin_clz(mx);
+   mx<<=leading;ex=-(int32_t)leading;
+  }
+ } else {
+  uint32_t result=x;
+  uint32_t carry=((uint64_t)(x<<1)+0x1000000u)>>32;
+  if(carry)result=0x7fffffffu;
+  else {
+   uint32_t sum=twice_y+0x1000000u;
+   carry=((uint64_t)twice_y+0x1000000u)>>32;
+   if(sum!=0u)result=0x7fffffffu;
+  }
+  if(!carry)audio_uart_float_domain_error_439ca4();
+  return result;
+ }
+ int32_t difference=ex-ey-8;
+ while(difference>0) {
+  mx=(mx%my)<<8;
+  if(mx==0u)return sign;
+  difference-=8;
+ }
+ mx=remainder296_lsr(mx,(uint32_t)(-difference));
+ mx%=my;
+ if(mx==0u)return sign;
+ uint32_t leading=(uint32_t)__builtin_clz(mx);
+ mx<<=leading;int32_t exponent=ey+7-(int32_t)leading;
+ if(exponent>=0)return (sign|(mx>>8))+((uint32_t)exponent<<23);
+ return sign|remainder296_lsr(mx,(uint32_t)(8-exponent));
+}
+/* Native577c3c..577c4c: S0/S1 inputs toR0/R1 bit core, R0result backtoS0. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_remainder_577c3c(float x,float y) {
+ union {float value;uint32_t bits;} a={.value=x},b={.value=y},result;
+ result.bits=audio_uart_float_remainder_bits_577c4c(a.bits,b.bits);
+ return result.value;
+}
+
+#include <stdint.h>
+static float trig298_float(uint32_t bits) {union {uint32_t bits;float value;} v={.bits=bits};return v.value;}
+static uint32_t trig298_bits(float value) {union {uint32_t bits;float value;} v={.value=value};return v.bits;}
+static float trig298_mul(float a,float b) {float v;__asm__ volatile("vmul.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float trig298_add(float a,float b) {float v;__asm__ volatile("vadd.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float trig298_mla(float a,float b,float c) {__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(a):"t"(b),"t"(c));return a;}
+static float trig298_neg(float a) {float v;__asm__ volatile("vneg.f32 %0,%1":"=t"(v):"t"(a));return v;}
+static uint32_t trig298_compare(float a,float b) {uint32_t flags;__asm__ volatile("vcmp.f32 %1,%2\n\tvmrs %0,fpscr":"=r"(flags):"t"(a),"t"(b));return flags;}
+static uint32_t trig298_integer(float a) {float v;__asm__ volatile("vcvt.s32.f32 %0,%1":"=t"(v):"t"(a));return trig298_bits(v);}
+static float trig298_fixed14(uint32_t bits) {float a=trig298_float(bits),v;__asm__ volatile("vcvt.f32.s32 %0,%1,#14":"=t"(v):"t"(a));return v;}
+/* Native5094c0..50964c plusauthenticatedordinaryconstantpool50964c..50968c.
+ * Named architectural float operations preserve native rounding/NaN/flags order. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_trig_core_5094c0(uint32_t mode,float angle) {
+ float scaled=trig298_mul(angle,trig298_float(0x3f22f983u));
+ uint32_t scaled_bits=trig298_bits(scaled),quadrant;
+ float absolute=trig298_float(scaled_bits&0x7fffffffu);
+ if(trig298_compare(absolute,trig298_float(0x4f000000u))&0x80000000u) {
+  float half=trig298_float((scaled_bits&0x80000000u)|0x3f000000u);
+  scaled=trig298_add(half,scaled);quadrant=trig298_integer(scaled);
+  if(quadrant!=0u) {
+   float fixed=trig298_fixed14(quadrant);
+   angle=trig298_mla(angle,fixed,trig298_float(0xc6c90000u));
+   angle=trig298_mla(angle,fixed,trig298_float(0xc0fda000u));
+   angle=trig298_mla(angle,fixed,trig298_float(0xbaa22000u));
+   angle=trig298_mla(angle,fixed,trig298_float(0xb3340000u));
+   angle=trig298_mla(angle,fixed,trig298_float(0xaec23000u));
+  }
+ } else {
+  uint32_t bits=trig298_bits(angle);
+  if(((bits>>23)&255u)==255u) {
+   if((bits&0x7fffffu)!=0u)return angle;
+   return trig298_float(0x7fffffffu);
+  }
+  if((bits<<1)==0u)return mode==0u?angle:trig298_float(0x3f800000u);
+  scaled=trig298_add(trig298_float((scaled_bits&0x80000000u)|0x3f000000u),scaled);
+  scaled_bits=trig298_bits(scaled);
+  if((scaled_bits<<1)!=0u) {
+   int32_t shift=150-(int32_t)((scaled_bits>>23)&255u);
+   if(shift>=24)scaled_bits&=0x80000000u;
+   else if(shift>0)scaled_bits=(scaled_bits>>(uint32_t)shift)<<(uint32_t)shift;
+   scaled=trig298_float(scaled_bits);
+  }
+  if((trig298_bits(scaled)<<1)!=0u) {
+   float fixed=trig298_mul(scaled,trig298_float(0x38800000u));
+   angle=trig298_mla(angle,fixed,trig298_float(0xc6c90000u));
+   angle=trig298_mla(angle,fixed,trig298_float(0xc0fda000u));
+   angle=trig298_mla(angle,fixed,trig298_float(0xbaa22000u));
+   angle=trig298_mla(angle,fixed,trig298_float(0xb3340000u));
+   angle=trig298_mla(angle,fixed,trig298_float(0xaec23000u));
+  }
+  quadrant=trig298_integer(scaled);
+ }
+ mode+=(quadrant&3u);
+ if(trig298_compare(trig298_float(trig298_bits(angle)&0x7fffffffu),trig298_float(0x39800000u))&0x80000000u) {
+  if(mode&1u)angle=trig298_float(0x3f800000u);
+ } else {
+  float square=trig298_mul(angle,angle);
+  if(mode&1u) {
+   float v=trig298_mla(trig298_float(0x3d2aa036u),square,trig298_float(0xbab24993u));
+   v=trig298_mla(trig298_float(0xbeffffdfu),v,square);
+   angle=trig298_mla(trig298_float(0x3f800000u),v,square);
+  } else {
+   float v=trig298_mla(trig298_float(0x3c088342u),square,trig298_float(0xb94c8c6eu));
+   float product=trig298_mul(angle,square);
+   v=trig298_mla(trig298_float(0xbe2aaaa1u),v,square);
+   angle=trig298_mla(angle,product,v);
+  }
+ }
+ if(mode&2u)angle=trig298_neg(angle);
+ return angle;
+}
+
+#include <stdint.h>
+extern void audio_uart_float_domain_error_439ca4(void);
+static float inv300_float(uint32_t b){union{uint32_t b;float f;}v={.b=b};return v.f;}
+static uint32_t inv300_bits(float f){union{uint32_t b;float f;}v={.f=f};return v.b;}
+static float inv300_add(float a,float b){float v;__asm__ volatile("vadd.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float inv300_sub(float a,float b){float v;__asm__ volatile("vsub.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float inv300_mul(float a,float b){float v;__asm__ volatile("vmul.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float inv300_div(float a,float b){float v;__asm__ volatile("vdiv.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float inv300_mla(float a,float b,float c){__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(a):"t"(b),"t"(c));return a;}
+static float inv300_neg(float a){float v;__asm__ volatile("vneg.f32 %0,%1":"=t"(v):"t"(a));return v;}
+static float inv300_sqrt(float a){float v;__asm__ volatile("vsqrt.f32 %0,%1":"=t"(v):"t"(a));return v;}
+static const uint32_t inv300_angles[8]={0x0u,0x3f060a92u,0x3fc90fdbu,0x3f860a92u,0x3fc90fdbu,0x40060a92u,0x40490fdbu,0x40278d36u};
+/* Native55e99c..55ea06 plusordinarycoefficient/anglepool55ea08..55ea40.
+ * Native callers' consumed mode domain0..15; larger table indices unqualified. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_core_55e99c(uint32_t mode,float x) {
+ uint32_t bits=inv300_bits(x);
+ if((int32_t)bits>=(int32_t)0x3e8930a4u) {
+  float numerator=inv300_mla(inv300_float(0xbf800000u),inv300_float(0x3fddb3d7u),x);
+  float denominator=inv300_add(inv300_float(0x3fddb3d7u),x);
+  x=inv300_div(numerator,denominator);mode|=2u;bits=inv300_bits(x);
+ }
+ if((bits<<1)>=0x73000000u) {
+  float square=inv300_mul(x,x);
+  float cube=inv300_mul(x,square);
+  x=inv300_mla(x,cube,inv300_float(0x3f03d56au));
+  float denominator=inv300_mla(inv300_float(0x3f592ab8u),inv300_float(0x3da9942bu),square);
+  denominator=inv300_mla(inv300_float(0x3f800000u),denominator,square);
+  x=inv300_div(x,denominator);
+ }
+ uint32_t index=mode>>1;
+ if(index&2u)x=inv300_neg(x);
+ x=inv300_add(x,inv300_float(inv300_angles[index]));
+ if(mode&1u)x=inv300_neg(x);
+ return x;
+}
+/* Native58ec74..58ecb8 withliteral58ecb8: unary inverse-ratio entry. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_ratio_58ec74(float x) {
+ uint32_t bits=inv300_bits(x),exponent=(bits>>23)&255u;
+ if(exponent==0u)return x;
+ if(exponent>=153u) {
+  if(exponent==255u && (bits&0x7fffffu)!=0u)return x;
+  return inv300_float(0x3fc90fdbu|(bits&0x80000000u));
+ }
+ uint32_t mode=bits>>31;bits&=0x7fffffffu;x=inv300_float(bits);
+ if(bits>0x3f800000u){x=inv300_div(inv300_float(0x3f800000u),x);mode+=4u;}
+ return audio_uart_float_inverse_core_55e99c(mode,x);
+}
+/* Native58ecbc..58ed1a withliteral58ed1c: unary inverse-magnitude entry. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_magnitude_58ecbc(float x) {
+ uint32_t original=inv300_bits(x),mode=((original>>31)!=0u && (original<<1)!=0u)?8u:4u;
+ uint32_t bits=original&0x7fffffffu;x=inv300_float(bits);
+ if(bits>0x3f800000u) {
+  if(bits<=0x7f800000u){audio_uart_float_domain_error_439ca4();return inv300_float(0x7fffffffu);}
+  return x;
+ }
+ float one=inv300_float(0x3f800000u);
+ float difference=inv300_sub(one,x);
+ float sum=inv300_add(one,x);
+ float root=inv300_sqrt(inv300_mul(sum,difference));
+ if(bits>0x3f3504f4u){mode^=4u;x=inv300_div(root,x);}
+ else x=inv300_div(x,root);
+ return audio_uart_float_inverse_core_55e99c(mode,x);
+}
+
+#include <stdint.h>
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_core_55e99c(uint32_t,float);
+extern void audio_uart_float_domain_error_439ca4(void);
+static float angle302_float(uint32_t b){union{uint32_t b;float f;}v={.b=b};return v.f;}
+static uint32_t angle302_bits(float f){union{uint32_t b;float f;}v={.f=f};return v.b;}
+static float angle302_abs(float a){float v;__asm__ volatile("vabs.f32 %0,%1":"=t"(v):"t"(a));return v;}
+static float angle302_add(float a,float b){float v;__asm__ volatile("vadd.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float angle302_sub(float a,float b){float v;__asm__ volatile("vsub.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float angle302_mul(float a,float b){float v;__asm__ volatile("vmul.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float angle302_div(float a,float b){float v;__asm__ volatile("vdiv.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float angle302_sqrt(float a){float v;__asm__ volatile("vsqrt.f32 %0,%1":"=t"(v):"t"(a));return v;}
+/* Native50969c..509706: mode/sign gates before magnitude ratio andspecialvalues. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_two_input_angle_50969c(float y,float x) {
+ uint32_t original_y=angle302_bits(y),original_x=angle302_bits(x);
+ y=angle302_abs(y);
+ uint32_t mode=original_y>>31;
+ uint32_t twice_y=original_y<<1,twice_x=original_x<<1;
+ x=angle302_abs(x);
+ if(original_x>>31)mode+=12u;
+ uint32_t abs_y=original_y&0x7fffffffu,abs_x=original_x&0x7fffffffu;
+ if(abs_y<0x7f800000u && abs_x<0x7f800000u) {
+  uint32_t reciprocal=twice_x<twice_y;
+  if(reciprocal)mode^=4u;
+  if(twice_x==0u)return audio_uart_float_inverse_core_55e99c(mode,angle302_float(0u));
+  float ratio=reciprocal?angle302_div(x,y):angle302_div(y,x);
+  return audio_uart_float_inverse_core_55e99c(mode,ratio);
+ }
+ if(abs_y==0x7f800000u)mode^=4u;
+ if(abs_y>0x7f800000u || abs_x>0x7f800000u)return angle302_float(0x7fffffffu);
+ return audio_uart_float_inverse_core_55e99c(mode,angle302_float(twice_x==twice_y?0x3f800000u:0u));
+}
+/* Native509708..509760 withordinarythreshold509760: signedunaryentry. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_signed_509708(float x) {
+ uint32_t original=angle302_bits(x),mode=original>>31,bits=original&0x7fffffffu;
+ if(bits==0u)return x;
+ x=angle302_float(bits);
+ if(bits>0x3f800000u) {
+  if(bits<=0x7f800000u){audio_uart_float_domain_error_439ca4();return angle302_float(0x7fffffffu);}
+  return x;
+ }
+ float one=angle302_float(0x3f800000u);
+ float difference=angle302_sub(one,x),sum=angle302_add(one,x);
+ float root=angle302_sqrt(angle302_mul(sum,difference));
+ if(bits>0x3f3504f4u){mode^=4u;x=angle302_div(root,x);}
+ else x=angle302_div(x,root);
+ return audio_uart_float_inverse_core_55e99c(mode,x);
+}
+
+#include <stdint.h>
+static float tan304_float(uint32_t bits) {union {uint32_t bits;float value;} v={.bits=bits};return v.value;}
+static uint32_t tan304_bits(float value) {union {uint32_t bits;float value;} v={.value=value};return v.bits;}
+static float tan304_mul(float a,float b) {float v;__asm__ volatile("vmul.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float tan304_add(float a,float b) {float v;__asm__ volatile("vadd.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+static float tan304_mla(float a,float b,float c) {__asm__ volatile("vmla.f32 %0,%1,%2":"+t"(a):"t"(b),"t"(c));return a;}
+static float tan304_neg(float a) {float v;__asm__ volatile("vneg.f32 %0,%1":"=t"(v):"t"(a));return v;}
+static uint32_t tan304_compare(float a,float b) {uint32_t flags;__asm__ volatile("vcmp.f32 %1,%2\n\tvmrs %0,fpscr":"=r"(flags):"t"(a),"t"(b));return flags;}
+static uint32_t tan304_integer(float a) {float v;__asm__ volatile("vcvt.s32.f32 %0,%1":"=t"(v):"t"(a));return tan304_bits(v);}
+static float tan304_fixed14(uint32_t bits) {float a=tan304_float(bits),v;__asm__ volatile("vcvt.f32.s32 %0,%1,#14":"=t"(v):"t"(a));return v;}
+static float tan304_div(float a,float b){float v;__asm__ volatile("vdiv.f32 %0,%1,%2":"=t"(v):"t"(a),"t"(b));return v;}
+/* Native563f40..5640ae plusordinaryliteralpool5640b0..5640e4. */
+__attribute__((pcs("aapcs-vfp"))) float audio_uart_float_tangent_563f40(float angle) {
+ float scaled=tan304_mul(angle,tan304_float(0x3f22f983u));
+ uint32_t scaled_bits=tan304_bits(scaled),quadrant;
+ float absolute=tan304_float(scaled_bits&0x7fffffffu);
+ if(tan304_compare(absolute,tan304_float(0x4f000000u))&0x80000000u) {
+  float half=tan304_float((scaled_bits&0x80000000u)|0x3f000000u);
+  scaled=tan304_add(half,scaled);quadrant=tan304_integer(scaled);
+  if(quadrant!=0u) {
+   float fixed=tan304_fixed14(quadrant);
+   angle=tan304_mla(angle,fixed,tan304_float(0xc6c90000u));
+   angle=tan304_mla(angle,fixed,tan304_float(0xc0fda000u));
+   angle=tan304_mla(angle,fixed,tan304_float(0xbaa22000u));
+   angle=tan304_mla(angle,fixed,tan304_float(0xb3340000u));
+   angle=tan304_mla(angle,fixed,tan304_float(0xaec23000u));
+  }
+ } else {
+  uint32_t bits=tan304_bits(angle);
+  if(((bits>>23)&255u)==255u) {
+   if((bits&0x7fffffu)!=0u)return angle;
+   return tan304_float(0x7fffffffu);
+  }
+  if((bits<<1)==0u)return angle;
+  scaled=tan304_add(tan304_float((scaled_bits&0x80000000u)|0x3f000000u),scaled);
+  scaled_bits=tan304_bits(scaled);
+  if((scaled_bits<<1)!=0u) {
+   int32_t shift=150-(int32_t)((scaled_bits>>23)&255u);
+   if(shift>=24)scaled_bits&=0x80000000u;
+   else if(shift>0)scaled_bits=(scaled_bits>>(uint32_t)shift)<<(uint32_t)shift;
+   scaled=tan304_float(scaled_bits);
+  }
+  if((tan304_bits(scaled)<<1)!=0u) {
+   float fixed=tan304_mul(scaled,tan304_float(0x38800000u));
+   angle=tan304_mla(angle,fixed,tan304_float(0xc6c90000u));
+   angle=tan304_mla(angle,fixed,tan304_float(0xc0fda000u));
+   angle=tan304_mla(angle,fixed,tan304_float(0xbaa22000u));
+   angle=tan304_mla(angle,fixed,tan304_float(0xb3340000u));
+   angle=tan304_mla(angle,fixed,tan304_float(0xaec23000u));
+  }
+  quadrant=tan304_integer(scaled);
+ }
+ if(tan304_compare(tan304_float(tan304_bits(angle)&0x7fffffffu),tan304_float(0x39800000u))&0x80000000u) {
+  if(quadrant&1u)return tan304_div(tan304_float(0xbf800000u),angle);
+  return angle;
+ }
+ float square=tan304_mul(angle,angle);
+ float denominator=tan304_mla(tan304_float(0xbedbb51eu),square,tan304_float(0x3c1f166du));
+ denominator=tan304_mla(tan304_float(0x3f800000u),denominator,square);
+ float product=tan304_mul(angle,square);
+ float numerator=tan304_mla(angle,product,tan304_float(0xbdc42983u));
+ if(quadrant&1u)return tan304_neg(tan304_div(denominator,numerator));
+ return tan304_div(numerator,denominator);
+}
+
+/* Full Nema path postprocessor 561c68..563954. Admission receipt round317.
+ * All ten child providers are source bodies above; no native code payload.
+ * FP contraction disabled for recovered nonfused operations. */
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+/* Full native geometry body; bounded native qualification in rounds306–316. */
+#pragma STDC FP_CONTRACT OFF
+struct pp306_state {uint8_t flag_start,flag_open,flag_point,arc_command;uint32_t coordinate_cursor,subpath_coordinate_start;float previous_x,previous_y,current_x,current_y,control1_x,control1_y,control2_x,control2_y,last_x,last_y,last_control_x,last_control_y,subpath_start_x,subpath_start_y;uint8_t previous_command,padding[3];};
+_Static_assert(sizeof(struct pp306_state)==72,"native72byte state");
+_Static_assert(offsetof(struct pp306_state,previous_command)==68,"nativecommandoffset");
+extern void audio_uart_nema_vg_path_bounds_reset_514e0c(void *);
+extern void audio_uart_lv_memzero_48949c(void *,uint32_t);
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_sqrt_4397a8(float);
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_trig_mode1_50968c(float);
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_trig_mode0_509690(float);
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_two_input_angle_50969c(float,float);
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_tangent_563f40(float);
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_remainder_577c3c(float,float);
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_ratio_58ec74(float);
+extern __attribute__((pcs("aapcs-vfp"))) float audio_uart_float_inverse_magnitude_58ecbc(float);
+static float pp306_float(uint32_t b){union{uint32_t b;float f;}v={.b=b};return v.f;}
+static uint32_t pp306_bits(float f){union{uint32_t b;float f;}v={.f=f};return v.b;}
+static uint32_t pp306_fpscr(void){uint32_t v;__asm__ volatile("vmrs %0,fpscr":"=r"(v));return v;}
+static int32_t pp306_i32(float f){float v;__asm__ volatile("vcvt.s32.f32 %0,%1":"=t"(v):"t"(f));return (int32_t)pp306_bits(v);}
+static uint32_t VectorSignedToFloat(int32_t i,uint32_t rounding){(void)rounding;float f=pp306_float((uint32_t)i),v;__asm__ volatile("vcvt.f32.s32 %0,%1":"=t"(v):"t"(f));return pp306_bits(v);}
+#define ABS(v) pp306_float(pp306_bits(v)&0x7fffffffu)
+#define NAN(v) ((pp306_bits(v)&0x7fffffffu)>0x7f800000u)
+#define SUB41(a,b) ((uint8_t)(((uint32_t)(a))>>((b)*8u)))
+#define CONCAT44(a,b) (((uint64_t)pp306_bits(a)<<32)|pp306_bits(b))
+
+/* 562c62..562c66 and 562cf4..562cf8 round division before negation. */
+static inline float pp309_divide_then_negate(float a, float b)
+{
+  float result;
+  __asm__ volatile("vdiv.f32 %0,%1,%2\n\tvneg.f32 %0,%0"
+                   : "=&t"(result) : "t"(a), "t"(b));
+  return result;
+}
+static inline float pp309_cubic_discriminant(float b, float c, float a)
+{
+  float result, product; float four = 4.0f;
+  __asm__ volatile("vmul.f32 %0,%2,%2\n\tvmul.f32 %1,%3,%5\n\tvmls.f32 %0,%1,%4"
+                   : "=&t"(result), "=&t"(product)
+                   : "t"(b), "t"(c), "t"(a), "t"(four));
+  return result;
+}
+static inline float pp309_cubic_second_root(float b, float root, float denominator)
+{
+  float result;
+  __asm__ volatile("vneg.f32 %0,%1\n\tvsub.f32 %0,%0,%2\n\tvdiv.f32 %0,%0,%3"
+                   : "=&t"(result) : "t"(b), "t"(root), "t"(denominator));
+  return result;
+}
+static inline float pp309_conditional_add(float a, float b)
+{
+  float result;
+  __asm__ volatile("vadd.f32 %0,%1,%2" : "=t"(result) : "t"(a), "t"(b));
+  return result;
+}
+/* Native VCMP N condition: unordered is PL, unlike C ordered >=. */
+static inline int pp308_negative_compare(float a, float b)
+{
+  uint32_t flags;
+  __asm__ volatile("vcmp.f32 %1,%2\n\tvmrs %0,fpscr"
+                   : "=r"(flags) : "t"(a), "t"(b) : "cc");
+  return (int)(flags >> 31);
+}
+static inline int pp308_arc_excludes(float angle, float low, float high)
+{
+  if (pp308_negative_compare(angle, low)) return 1;
+  return pp308_negative_compare(high, angle);
+}
+void audio_uart_nema_vg_path_process_561c68(void *path)
+
+{
+  typedef uint32_t uint;typedef uint8_t byte;typedef uint32_t undefined4;typedef uint64_t ulonglong;
+  volatile uint32_t *param_1=path;
+  struct pp306_state state;
+  undefined4 uVar1;
+  volatile float *pfVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  int iVar6;
+  volatile float *pfVar7;
+  int iVar8;
+  volatile float *pfVar9;
+  volatile float *pfVar10;
+  volatile float *pfVar11;
+  volatile float *pfVar12;
+  byte bVar13;
+  bool bVar14;
+  byte bVar15;
+  bool bVar16;
+  uint in_fpscr=pp306_fpscr();
+  float fVar17;
+  float fVar18;
+  float fVar19;
+  float fVar20;
+  float fVar21;
+  float fVar22;
+  ulonglong unaff_d9; /* Every live read is dominated by local arc assignments. */
+  float fVar23;
+  float fVar24;
+  float fVar25;
+  float fVar26;
+  float fVar27;
+  float fVar28;
+  float fVar29;
+  float fVar30;
+  float fVar31;
+  float fVar32;
+  float fVar33;
+  float local_a8 [6];
+  uint local_90;
+  float local_8c [8];
+  volatile float *local_6c;
+  
+  audio_uart_nema_vg_path_bounds_reset_514e0c(path);
+  audio_uart_lv_memzero_48949c(&state,72u);
+  state.flag_start = '\x01';
+  state.flag_open = '\x01';
+  state.flag_point = 1u;
+  uint32_t initial_count = *param_1;
+  if (initial_count != 0) {
+    uVar3 = *(byte *)param_1[2] & 0xffffff6f;
+  }
+  if (initial_count != 0 && uVar3 != 1) {
+    fVar17 = pp306_float(param_1[4]);
+    in_fpscr = in_fpscr & 0xfffffff;
+    if (0.0f < fVar17) {
+      fVar17 = 0.0f;
+    }
+    param_1[4] = pp306_bits(fVar17);
+    fVar17 = pp306_float(param_1[5]);
+    if (0.0f < fVar17) {
+      fVar17 = 0.0f;
+    }
+    param_1[5] = pp306_bits(fVar17);
+    fVar17 = pp306_float(param_1[6]);
+    if (fVar17 < 0.0f) {
+      fVar17 = 0.0f;
+    }
+    param_1[6] = pp306_bits(fVar17);
+    fVar17 = pp306_float(param_1[7]);
+    if (fVar17 < 0.0f) {
+      fVar17 = 0.0f;
+    }
+    param_1[7] = pp306_bits(fVar17);
+  }
+  if (*param_1 != 0) {
+    local_90 = 0;
+    do {
+      bVar13 = *(byte *)(param_1[2] + local_90);
+      uVar3 = (uint)bVar13;
+      state.previous_x = state.current_x;
+      state.previous_y = state.current_y;
+      bVar16 = (int)(uVar3 << 0x1b) < 0;
+      uVar5 = uVar3 & 0x6f;
+      bVar15 = state.previous_command & 0x6f;
+      if (uVar5 == 1) {
+        if ((state.flag_open == '\x01') && (state.coordinate_cursor != 0)) {
+          fVar17 = 0.0f;
+          fVar20 = 0.0f;
+          if (state.flag_start == '\0') {
+            fVar17 = state.subpath_start_x;
+            fVar20 = state.subpath_start_y;
+          }
+          in_fpscr = in_fpscr & 0xfffffff;
+          fVar21 = pp306_float(param_1[4]);
+          if (pp308_negative_compare(fVar17, fVar21)) fVar21 = fVar17;
+          param_1[4] = pp306_bits(fVar21);
+          fVar21 = pp306_float(param_1[5]);
+          if (pp308_negative_compare(fVar20, fVar21)) fVar21 = fVar20;
+          param_1[5] = pp306_bits(fVar21);
+          fVar21 = pp306_float(param_1[6]);
+          if (!pp308_negative_compare(fVar21, fVar17)) fVar17 = fVar21;
+          param_1[6] = pp306_bits(fVar17);
+          fVar21 = pp306_float(param_1[7]);
+          if (!pp308_negative_compare(fVar21, fVar20)) fVar20 = fVar21;
+          param_1[7] = pp306_bits(fVar20);
+        }
+        state.flag_start = '\0';
+        state.flag_point = 1;
+        state.subpath_coordinate_start = state.coordinate_cursor;
+        uVar3 = param_1[3];
+        state.current_x = *(volatile float *)(uVar3 + state.coordinate_cursor * 4);
+        if (bVar16) {
+          state.current_x = state.last_x + state.current_x;
+          state.current_y = state.last_y + *(volatile float *)(uVar3 + (state.coordinate_cursor + 1) * 4);
+        }
+        else {
+          state.current_y = *(volatile float *)(uVar3 + (state.coordinate_cursor + 1) * 4);
+        }
+        state.coordinate_cursor = state.coordinate_cursor + 2;
+        state.subpath_start_x = state.current_x;
+        state.subpath_start_y = state.current_y;
+LAB_00562754:
+        state.last_x = state.current_x;
+        state.last_y = state.current_y;
+        iVar6 = state.coordinate_cursor;
+        state.previous_command = bVar13;
+      }
+      else {
+        if (uVar3 == 0 || uVar3 == 0x80) {
+          if (state.flag_start == '\x01') {
+            state.current_x = 0.0f;
+            state.current_y = 0.0f;
+          }
+          else {
+            state.current_x = state.subpath_start_x;
+            state.current_y = state.subpath_start_y;
+          }
+          state.flag_point = 0;
+          state.flag_open = '\0';
+          goto LAB_00562754;
+        }
+        if (state.coordinate_cursor == 0) {
+          state.flag_start = '\x01';
+        }
+        state.flag_point = 0;
+        if (uVar5 == 6) {
+          uVar3 = param_1[3];
+          state.control1_x = *(volatile float *)(uVar3 + state.coordinate_cursor * 4);
+          state.control1_y = *(volatile float *)(uVar3 + (state.coordinate_cursor + 1) * 4);
+          state.control2_x = *(volatile float *)(uVar3 + (state.coordinate_cursor + 2) * 4);
+          state.control2_y = *(volatile float *)(uVar3 + (state.coordinate_cursor + 3) * 4);
+          state.coordinate_cursor = state.coordinate_cursor + 4;
+          if (bVar16) {
+            state.control1_x = state.control1_x + state.last_x;
+            state.control1_y = state.control1_y + state.last_y;
+            state.control2_x = state.control2_x + state.last_x;
+            state.control2_y = state.control2_y + state.last_y;
+            state.last_control_x = state.control2_x;
+            state.last_control_y = state.control2_y;
+            goto LAB_00561f3e;
+          }
+LAB_00562014:
+          state.last_control_x = state.control2_x;
+          state.last_control_y = state.control2_y;
+LAB_00561edc:
+          uVar3 = param_1[3];
+          state.current_x = *(volatile float *)(uVar3 + state.coordinate_cursor * 4);
+          state.coordinate_cursor = state.coordinate_cursor + 1;
+LAB_005620a8:
+          state.current_y = *(volatile float *)(uVar3 + state.coordinate_cursor * 4);
+          state.coordinate_cursor = state.coordinate_cursor + 1;
+          goto LAB_00562754;
+        }
+        if (uVar5 == 5) {
+          uVar3 = param_1[3];
+          state.control1_x = *(volatile float *)(uVar3 + state.coordinate_cursor * 4);
+          state.control1_y = *(volatile float *)(uVar3 + (state.coordinate_cursor + 1) * 4);
+          state.coordinate_cursor = state.coordinate_cursor + 2;
+          state.last_control_x = state.control1_x;
+          state.last_control_y = state.control1_y;
+          if (!bVar16) goto LAB_00561edc;
+          state.control1_x = state.control1_x + state.last_x;
+          state.control1_y = state.control1_y + state.last_y;
+          state.last_control_x = state.control1_x;
+          state.last_control_y = state.control1_y;
+LAB_00561f3e:
+          uVar3 = param_1[3];
+          state.current_x = *(volatile float *)(uVar3 + state.coordinate_cursor * 4) + state.last_x;
+          state.current_y = *(volatile float *)(uVar3 + (state.coordinate_cursor + 1) * 4) + state.last_y;
+          state.coordinate_cursor = state.coordinate_cursor + 2;
+          goto LAB_00562754;
+        }
+        if (uVar5 == 7) {
+          if ((bVar15 == 5 || bVar15 == 7) ||
+             (state.control1_x = state.last_x, state.control1_y = state.last_y, fVar17 = state.last_x, fVar20 = state.last_y,
+             bVar15 == 6 || bVar15 == 8)) {
+            state.control1_x = state.last_x * 2.0f - state.last_control_x;
+            state.control1_y = state.last_y * 2.0f - state.last_control_y;
+            fVar17 = state.control1_x;
+            fVar20 = state.control1_y;
+          }
+LAB_00561f3a:
+          state.last_control_y = fVar20;
+          state.last_control_x = fVar17;
+          if (!bVar16) goto LAB_00561edc;
+          goto LAB_00561f3e;
+        }
+        if (uVar5 == 8) {
+          if ((bVar15 == 5 || bVar15 == 7) || (bVar15 == 6 || bVar15 == 8)) {
+            state.control1_x = state.last_x * 2.0f - state.last_control_x;
+            state.control1_y = state.last_y * 2.0f - state.last_control_y;
+          }
+          else {
+            state.control1_x = state.last_x;
+            state.control1_y = state.last_y;
+          }
+          uVar3 = param_1[3];
+          state.control2_x = *(volatile float *)(uVar3 + state.coordinate_cursor * 4);
+          state.control2_y = *(volatile float *)(uVar3 + (state.coordinate_cursor + 1) * 4);
+          state.coordinate_cursor = state.coordinate_cursor + 2;
+          if (!bVar16) goto LAB_00562014;
+          state.control2_x = state.control2_x + state.last_x;
+          state.control2_y = state.control2_y + state.last_y;
+          state.last_control_x = state.control2_x;
+          state.last_control_y = state.control2_y;
+          goto LAB_00561f3e;
+        }
+        if ((uVar3 & 0xf) == 9) {
+          uVar3 = param_1[3];
+          state.control1_x = *(volatile float *)(uVar3 + state.coordinate_cursor * 4);
+          state.control1_y = *(volatile float *)(uVar3 + (state.coordinate_cursor + 1) * 4);
+          state.control2_x = *(volatile float *)(uVar3 + (state.coordinate_cursor + 2) * 4);
+          state.coordinate_cursor = state.coordinate_cursor + 3;
+          state.last_control_y = state.last_y;
+          state.last_control_x = state.last_x;
+          state.arc_command = bVar13;
+        }
+        if (uVar5 == 4) {
+          uVar3 = param_1[3];
+          state.current_x = state.last_x;
+          if (!bVar16) goto LAB_005620a8;
+          iVar6 = state.coordinate_cursor * 4;
+          state.coordinate_cursor = state.coordinate_cursor + 1;
+          state.current_y = state.last_y + *(volatile float *)(uVar3 + iVar6);
+          goto LAB_00562754;
+        }
+        if (uVar5 == 3) {
+          state.current_x = *(volatile float *)(param_1[3] + state.coordinate_cursor * 4);
+          if (bVar16) {
+            state.current_x = state.last_x + state.current_x;
+          }
+          state.coordinate_cursor = state.coordinate_cursor + 1;
+          state.current_y = state.last_y;
+          goto LAB_00562754;
+        }
+        if (uVar5 == 10) {
+          iVar6 = state.coordinate_cursor + 1;
+          fVar20 = *(volatile float *)(param_1[3] + state.coordinate_cursor * 4);
+          uVar3 = in_fpscr & 0xfffffff;
+          {
+            float pp313_bound = pp306_float(param_1[4]);
+            fVar17 = pp313_bound;
+            if (pp308_negative_compare(state.current_x, pp313_bound)) {
+              fVar17 = state.current_x;
+            }
+            param_1[4] = pp306_bits(fVar17);
+          }
+          {
+            float pp313_bound = pp306_float(param_1[5]);
+            fVar17 = pp313_bound;
+            if (pp308_negative_compare(state.current_y, pp313_bound)) {
+              fVar17 = state.current_y;
+            }
+            param_1[5] = pp306_bits(fVar17);
+          }
+          {
+            float pp313_bound = pp306_float(param_1[6]);
+            fVar17 = state.current_x;
+            if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+              fVar17 = pp313_bound;
+            }
+            uint32_t pp313_xmax = pp306_bits(fVar17);
+            pp313_bound = pp306_float(param_1[7]);
+            param_1[6] = pp313_xmax;
+            fVar17 = state.current_y;
+            if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+              fVar17 = pp313_bound;
+            }
+            param_1[7] = pp306_bits(fVar17);
+          }
+          uVar5 = pp306_i32(fVar20) / 2;
+          if (0 < (int)uVar5) {
+            if ((int)(uVar5 << 0x1f) < 0) {
+              uVar4 = param_1[3];
+              state.current_x = *(volatile float *)(uVar4 + iVar6 * 4);
+              if (bVar16) {
+                state.current_x = state.current_x + state.last_x;
+                state.current_y = *(volatile float *)(uVar4 + (state.coordinate_cursor + 2) * 4) + state.last_y;
+              }
+              else {
+                state.current_y = *(volatile float *)(uVar4 + (state.coordinate_cursor + 2) * 4);
+              }
+              state.last_x = state.current_x;
+              state.last_y = state.current_y;
+              {
+                float pp313_bound = pp306_float(param_1[4]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_x, pp313_bound)) {
+                  fVar17 = state.current_x;
+                }
+                param_1[4] = pp306_bits(fVar17);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[5]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_y, pp313_bound)) {
+                  fVar17 = state.current_y;
+                }
+                uint32_t pp315_ymin = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[6]);
+                param_1[5] = pp315_ymin;
+                fVar17 = state.current_x;
+                if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+                  fVar17 = pp313_bound;
+                }
+                uint32_t pp313_xmax = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[7]);
+                param_1[6] = pp313_xmax;
+                fVar17 = state.current_y;
+                if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+                  fVar17 = pp313_bound;
+                }
+                param_1[7] = pp306_bits(fVar17);
+              }
+              iVar6 = state.coordinate_cursor + 3;
+              state.previous_command = bVar13;
+            }
+            state.coordinate_cursor = iVar6;
+            for (uVar5 = uVar5 >> 1; iVar6 = state.coordinate_cursor, uVar5 != 0; uVar5 = uVar5 - 1) {
+              uVar4 = param_1[3];
+              state.current_x = *(volatile float *)(uVar4 + state.coordinate_cursor * 4);
+              if (bVar16) {
+                state.current_x = state.current_x + state.last_x;
+                state.current_y = *(volatile float *)(uVar4 + (state.coordinate_cursor + 1) * 4) + state.last_y;
+              }
+              else {
+                state.current_y = *(volatile float *)(uVar4 + (state.coordinate_cursor + 1) * 4);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[4]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_x, pp313_bound)) {
+                  fVar17 = state.current_x;
+                }
+                param_1[4] = pp306_bits(fVar17);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[5]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_y, pp313_bound)) {
+                  fVar17 = state.current_y;
+                }
+                param_1[5] = pp306_bits(fVar17);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[6]);
+                fVar17 = state.current_x;
+                if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+                  fVar17 = pp313_bound;
+                }
+                uint32_t pp313_xmax = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[7]);
+                param_1[6] = pp313_xmax;
+                fVar17 = state.current_y;
+                if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+                  fVar17 = pp313_bound;
+                }
+                param_1[7] = pp306_bits(fVar17);
+              }
+              uVar4 = param_1[3];
+              fVar17 = *(volatile float *)(uVar4 + (state.coordinate_cursor + 2) * 4);
+              if (bVar16) {
+                state.current_y = pp309_conditional_add(*(volatile float *)(uVar4 + (state.coordinate_cursor + 3) * 4), state.current_y);
+                state.current_x = pp309_conditional_add(fVar17, state.current_x);
+              }
+              else {
+                state.current_y = *(volatile float *)(uVar4 + (state.coordinate_cursor + 3) * 4);
+                state.current_x = fVar17;
+              }
+              state.coordinate_cursor = state.coordinate_cursor + 4;
+              {
+                float pp313_bound = pp306_float(param_1[4]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_x, pp313_bound)) {
+                  fVar17 = state.current_x;
+                }
+                param_1[4] = pp306_bits(fVar17);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[5]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_y, pp313_bound)) {
+                  fVar17 = state.current_y;
+                }
+                uint32_t pp314_ymin = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[6]);
+                param_1[5] = pp314_ymin;
+                fVar17 = state.current_x;
+                if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+                  fVar17 = pp313_bound;
+                }
+                uint32_t pp313_xmax = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[7]);
+                param_1[6] = pp313_xmax;
+                fVar17 = state.current_y;
+                if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+                  fVar17 = pp313_bound;
+                }
+                param_1[7] = pp306_bits(fVar17);
+              }
+              state.last_x = state.current_x;
+              state.last_y = state.current_y;
+              state.previous_command = bVar13;
+            }
+          }
+          state.coordinate_cursor = iVar6;
+          in_fpscr = uVar3 | (uint)(state.last_x - state.subpath_start_x == 0.0f) << 0x1e;
+          bVar13 = 0;
+          if ((byte)(in_fpscr >> 0x1e) != 0) {
+            in_fpscr = uVar3 | (uint)(state.last_y - state.subpath_start_y == 0.0f) << 0x1e;
+            bVar13 = (byte)(in_fpscr >> 0x1e);
+          }
+          state.previous_x = state.current_x;
+          state.previous_y = state.current_y;
+          if (bVar13 == 0) {
+            state.current_y = state.subpath_start_y;
+            state.current_x = state.subpath_start_x;
+            state.last_x = state.subpath_start_x;
+            state.last_y = state.subpath_start_y;
+            in_fpscr = in_fpscr & 0xfffffff;
+            {
+              float pp313_bound = pp306_float(param_1[4]);
+              fVar17 = pp313_bound;
+              if (pp308_negative_compare(state.subpath_start_x, pp313_bound)) {
+                fVar17 = state.subpath_start_x;
+              }
+              param_1[4] = pp306_bits(fVar17);
+            }
+            {
+              float pp313_bound = pp306_float(param_1[5]);
+              fVar17 = pp313_bound;
+              if (pp308_negative_compare(state.subpath_start_y, pp313_bound)) {
+                fVar17 = state.subpath_start_y;
+              }
+              param_1[5] = pp306_bits(fVar17);
+            }
+            {
+              float pp313_bound = pp306_float(param_1[6]);
+              fVar17 = state.subpath_start_x;
+              if (!pp308_negative_compare(pp313_bound, state.subpath_start_x)) {
+                fVar17 = pp313_bound;
+              }
+              uint32_t pp313_xmax = pp306_bits(fVar17);
+              pp313_bound = pp306_float(param_1[7]);
+              param_1[6] = pp313_xmax;
+              fVar17 = state.subpath_start_y;
+              if (!pp308_negative_compare(pp313_bound, state.subpath_start_y)) {
+                fVar17 = pp313_bound;
+              }
+              param_1[7] = pp306_bits(fVar17);
+            }
+          }
+          state.flag_open = '\0';
+          iVar6 = state.coordinate_cursor;
+        }
+        else {
+          fVar17 = state.last_control_x;
+          fVar20 = state.last_control_y;
+          if (uVar5 != 0xb) goto LAB_00561f3a;
+          iVar6 = state.coordinate_cursor + 1;
+          fVar20 = *(volatile float *)(param_1[3] + state.coordinate_cursor * 4);
+          in_fpscr = in_fpscr & 0xfffffff;
+          {
+            float pp313_bound = pp306_float(param_1[4]);
+            fVar17 = pp313_bound;
+            if (pp308_negative_compare(state.current_x, pp313_bound)) {
+              fVar17 = state.current_x;
+            }
+            param_1[4] = pp306_bits(fVar17);
+          }
+          {
+            float pp313_bound = pp306_float(param_1[5]);
+            fVar17 = pp313_bound;
+            if (pp308_negative_compare(state.current_y, pp313_bound)) {
+              fVar17 = state.current_y;
+            }
+            param_1[5] = pp306_bits(fVar17);
+          }
+          {
+            float pp313_bound = pp306_float(param_1[6]);
+            fVar17 = state.current_x;
+            if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+              fVar17 = pp313_bound;
+            }
+            uint32_t pp313_xmax = pp306_bits(fVar17);
+            pp313_bound = pp306_float(param_1[7]);
+            param_1[6] = pp313_xmax;
+            fVar17 = state.current_y;
+            if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+              fVar17 = pp313_bound;
+            }
+            param_1[7] = pp306_bits(fVar17);
+          }
+          uVar3 = pp306_i32(fVar20) / 2;
+          if (0 < (int)uVar3) {
+            if ((int)(uVar3 << 0x1f) < 0) {
+              uVar5 = param_1[3];
+              state.current_x = *(volatile float *)(uVar5 + iVar6 * 4);
+              if (bVar16) {
+                state.current_x = state.current_x + state.last_x;
+                state.current_y = *(volatile float *)(uVar5 + (state.coordinate_cursor + 2) * 4) + state.last_y;
+              }
+              else {
+                state.current_y = *(volatile float *)(uVar5 + (state.coordinate_cursor + 2) * 4);
+              }
+              state.last_x = state.current_x;
+              state.last_y = state.current_y;
+              {
+                float pp313_bound = pp306_float(param_1[4]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_x, pp313_bound)) {
+                  fVar17 = state.current_x;
+                }
+                param_1[4] = pp306_bits(fVar17);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[5]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_y, pp313_bound)) {
+                  fVar17 = state.current_y;
+                }
+                uint32_t pp315_ymin = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[6]);
+                param_1[5] = pp315_ymin;
+                fVar17 = state.current_x;
+                if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+                  fVar17 = pp313_bound;
+                }
+                uint32_t pp313_xmax = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[7]);
+                param_1[6] = pp313_xmax;
+                fVar17 = state.current_y;
+                if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+                  fVar17 = pp313_bound;
+                }
+                param_1[7] = pp306_bits(fVar17);
+              }
+              iVar6 = state.coordinate_cursor + 3;
+              state.previous_command = bVar13;
+            }
+            state.coordinate_cursor = iVar6;
+            state.previous_x = state.current_x;
+            state.previous_y = state.current_y;
+            for (uVar3 = uVar3 >> 1; iVar6 = state.coordinate_cursor, state.current_x = state.previous_x, state.current_y = state.previous_y,
+                uVar3 != 0; uVar3 = uVar3 - 1) {
+              uVar5 = param_1[3];
+              state.current_x = *(volatile float *)(uVar5 + state.coordinate_cursor * 4);
+              if (bVar16) {
+                state.current_x = state.current_x + state.last_x;
+                state.current_y = *(volatile float *)(uVar5 + (state.coordinate_cursor + 1) * 4) + state.last_y;
+              }
+              else {
+                state.current_y = *(volatile float *)(uVar5 + (state.coordinate_cursor + 1) * 4);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[4]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_x, pp313_bound)) {
+                  fVar17 = state.current_x;
+                }
+                param_1[4] = pp306_bits(fVar17);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[5]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_y, pp313_bound)) {
+                  fVar17 = state.current_y;
+                }
+                param_1[5] = pp306_bits(fVar17);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[6]);
+                fVar17 = state.current_x;
+                if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+                  fVar17 = pp313_bound;
+                }
+                uint32_t pp313_xmax = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[7]);
+                param_1[6] = pp313_xmax;
+                fVar17 = state.current_y;
+                if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+                  fVar17 = pp313_bound;
+                }
+                param_1[7] = pp306_bits(fVar17);
+              }
+              uVar5 = param_1[3];
+              fVar17 = *(volatile float *)(uVar5 + (state.coordinate_cursor + 2) * 4);
+              if (bVar16) {
+                state.current_y = *(volatile float *)(uVar5 + (state.coordinate_cursor + 3) * 4) + state.current_y;
+                state.current_x = pp309_conditional_add(fVar17, state.current_x);
+              }
+              else {
+                state.current_y = *(volatile float *)(uVar5 + (state.coordinate_cursor + 3) * 4);
+                state.current_x = fVar17;
+              }
+              state.coordinate_cursor = state.coordinate_cursor + 4;
+              {
+                float pp313_bound = pp306_float(param_1[4]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_x, pp313_bound)) {
+                  fVar17 = state.current_x;
+                }
+                param_1[4] = pp306_bits(fVar17);
+              }
+              {
+                float pp313_bound = pp306_float(param_1[5]);
+                fVar17 = pp313_bound;
+                if (pp308_negative_compare(state.current_y, pp313_bound)) {
+                  fVar17 = state.current_y;
+                }
+                uint32_t pp314_ymin = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[6]);
+                param_1[5] = pp314_ymin;
+                fVar17 = state.current_x;
+                if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+                  fVar17 = pp313_bound;
+                }
+                uint32_t pp313_xmax = pp306_bits(fVar17);
+                pp313_bound = pp306_float(param_1[7]);
+                param_1[6] = pp313_xmax;
+                fVar17 = state.current_y;
+                if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+                  fVar17 = pp313_bound;
+                }
+                param_1[7] = pp306_bits(fVar17);
+              }
+              state.previous_x = state.current_x;
+              state.previous_y = state.current_y;
+              state.last_x = state.current_x;
+              state.last_y = state.current_y;
+              state.previous_command = bVar13;
+            }
+          }
+        }
+      }
+      state.coordinate_cursor = iVar6;
+      bVar13 = *(byte *)(param_1[2] + local_90) & 0x6f;
+      if (bVar13 == 6 || bVar13 == 8) {
+        local_a8[0] = 0.0f;
+        local_a8[1] = 0.0f;
+        uVar3 = in_fpscr & 0xfffffff;
+        {
+          float pp313_bound = pp306_float(param_1[4]);
+          fVar17 = pp313_bound;
+          if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+            fVar17 = state.current_x;
+          }
+          param_1[4] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[5]);
+          fVar17 = pp313_bound;
+          if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+            fVar17 = state.current_y;
+          }
+          param_1[5] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[6]);
+          fVar17 = pp313_bound;
+          if (!pp308_negative_compare(state.current_x, pp313_bound)) {
+            fVar17 = state.current_x;
+          }
+          param_1[6] = pp306_bits(fVar17);
+        }
+        fVar17 = pp306_float(param_1[7]);
+        if (!pp308_negative_compare(state.current_y, fVar17)) {
+          fVar17 = state.current_y;
+        }
+        local_a8[2] = pp306_float(param_1[4]);
+        param_1[7] = pp306_bits(fVar17);
+        local_a8[3] = pp306_float(param_1[5]);
+        local_a8[4] = pp306_float(param_1[6]);
+        local_a8[5] = pp306_float(param_1[7]);
+        local_8c[0] = state.control1_x;
+        uVar5 = uVar3 | (uint)(state.control1_x < local_a8[2]) << 0x1f;
+        in_fpscr = uVar5 | (uint)(NAN(state.control1_x) || NAN(local_a8[2])) << 0x1c;
+        local_8c[1] = state.control1_y;
+        local_8c[2] = state.control2_x;
+        local_8c[3] = state.control2_y;
+        bVar13 = (byte)(uVar5 >> 0x1f);
+        bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+        if (bVar13 == bVar15) {
+          in_fpscr = uVar3 | (uint)(local_a8[4] < state.control1_x) << 0x1f |
+                     (uint)(NAN(local_a8[4]) || NAN(state.control1_x)) << 0x1c;
+          bVar15 = (byte)(in_fpscr >> 0x18);
+          bVar13 = bVar15 >> 7;
+          bVar15 = bVar15 >> 4 & 1;
+        }
+        if (bVar13 == bVar15) {
+          uVar3 = in_fpscr & 0xfffffff;
+          uVar5 = uVar3 | (uint)(state.control1_y < local_a8[3]) << 0x1f;
+          in_fpscr = uVar5 | (uint)(NAN(state.control1_y) || NAN(local_a8[3])) << 0x1c;
+          bVar13 = (byte)(uVar5 >> 0x1f);
+          bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+          if (bVar13 == bVar15) {
+            in_fpscr = uVar3 | (uint)(local_a8[5] < state.control1_y) << 0x1f |
+                       (uint)(NAN(local_a8[5]) || NAN(state.control1_y)) << 0x1c;
+            bVar15 = (byte)(in_fpscr >> 0x18);
+            bVar13 = bVar15 >> 7;
+            bVar15 = bVar15 >> 4 & 1;
+          }
+          if (bVar13 == bVar15) {
+            uVar3 = in_fpscr & 0xfffffff;
+            uVar5 = uVar3 | (uint)(state.control2_x < local_a8[2]) << 0x1f;
+            in_fpscr = uVar5 | (uint)(NAN(state.control2_x) || NAN(local_a8[2])) << 0x1c;
+            bVar13 = (byte)(uVar5 >> 0x1f);
+            bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+            if (bVar13 == bVar15) {
+              in_fpscr = uVar3 | (uint)(local_a8[4] < state.control2_x) << 0x1f |
+                         (uint)(NAN(local_a8[4]) || NAN(state.control2_x)) << 0x1c;
+              bVar15 = (byte)(in_fpscr >> 0x18);
+              bVar13 = bVar15 >> 7;
+              bVar15 = bVar15 >> 4 & 1;
+            }
+            if (bVar13 == bVar15) {
+              uVar3 = in_fpscr & 0xfffffff;
+              uVar5 = uVar3 | (uint)(state.control2_y < local_a8[3]) << 0x1f;
+              in_fpscr = uVar5 | (uint)(NAN(state.control2_y) || NAN(local_a8[3])) << 0x1c;
+              bVar13 = (byte)(uVar5 >> 0x1f);
+              bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+              if (bVar13 == bVar15) {
+                in_fpscr = uVar3 | (uint)(local_a8[5] < state.control2_y) << 0x1f |
+                           (uint)(NAN(local_a8[5]) || NAN(state.control2_y)) << 0x1c;
+                bVar15 = (byte)(in_fpscr >> 0x18);
+                bVar13 = bVar15 >> 7;
+                bVar15 = bVar15 >> 4 & 1;
+              }
+              if (bVar13 == bVar15) goto LAB_0056385a;
+            }
+          }
+        }
+        local_8c[6] = state.current_x;
+        local_8c[7] = state.current_y;
+        local_8c[4] = state.previous_x;
+        pfVar7 = local_8c + 4;
+        pfVar12 = local_8c;
+        local_8c[5] = state.previous_y;
+        pfVar2 = local_a8;
+        pfVar9 = local_8c + 2;
+        pfVar10 = local_8c + 6;
+        pfVar11 = local_a8 + 2;
+        iVar6 = 2;
+        local_6c = pfVar2;
+        do {
+          fVar20 = *pfVar7;
+          fVar23 = *pfVar12;
+          fVar22 = *pfVar9;
+          unaff_d9 = CONCAT44(fVar23,fVar22);
+          fVar21 = *pfVar10;
+          fVar26 = fVar20 * -3.0f + fVar23 * 9.0f + fVar22 * -9.0f + fVar21 * 3.0f;
+          iVar8 = 0;
+          uVar3 = in_fpscr & 0xfffffff;
+          fVar24 = fVar20 * 6.0f + fVar23 * -12.0f + fVar22 * 6.0f;
+          fVar17 = fVar20 * -3.0f + fVar23 * 3.0f;
+          if (1e-07f <= ABS(fVar26)) {
+            fVar17 = pp309_cubic_discriminant(fVar24, fVar17, fVar26);
+            uVar3 = uVar3 | (uint)(fVar17 < 1.0000001e-07f) << 0x1f;
+            in_fpscr = uVar3 | (uint)NAN(fVar17) << 0x1c;
+            if ((byte)(uVar3 >> 0x1f) == ((byte)(in_fpscr >> 0x1c) & 1)) {
+              fVar17 = audio_uart_float_sqrt_4397a8(fVar17);
+              fVar18 = (fVar17 - fVar24) / (fVar26 * 2.0f);
+              uVar3 = in_fpscr & 0xfffffff;
+              if ((1.0000001e-07f <= fVar18) && (fVar18 < 0.9999999f)) {
+                local_a8[0] = fVar18;
+                iVar8 = 1;
+              }
+              fVar17 = pp309_cubic_second_root(fVar24, fVar17, fVar26 * 2.0f);
+              uVar5 = uVar3 | (uint)(fVar17 < 1.0000001e-07f) << 0x1f;
+              in_fpscr = uVar5 | (uint)NAN(fVar17) << 0x1c;
+              if (((byte)(uVar5 >> 0x1f) == ((byte)(in_fpscr >> 0x1c) & 1)) &&
+                 (in_fpscr = uVar3, fVar17 < 0.9999999f)) {
+                pfVar2 = local_6c + iVar8;
+                iVar8 = iVar8 + 1;
+                *pfVar2 = fVar17;
+              }
+              pfVar2 = (volatile float *)0x0;
+              if (iVar8 != 0) goto LAB_005629ce;
+            }
+          }
+          else {
+            fVar26 = ABS(fVar24);
+            uVar5 = uVar3 | (uint)(fVar26 < 1.0000001e-07f) << 0x1f;
+            in_fpscr = uVar5 | (uint)NAN(fVar26) << 0x1c;
+            bVar13 = (byte)(uVar5 >> 0x1f);
+            bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+            if (bVar13 == bVar15) {
+              fVar26 = pp309_divide_then_negate(fVar17, fVar24);
+              in_fpscr = uVar3 | (uint)(fVar26 < 1.0000001e-07f) << 0x1f | (uint)NAN(fVar26) << 0x1c;
+              bVar15 = (byte)(in_fpscr >> 0x18);
+              bVar13 = bVar15 >> 7;
+              bVar15 = bVar15 >> 4 & 1;
+            }
+            if ((bVar13 == bVar15) && (in_fpscr = in_fpscr & 0xfffffff, fVar26 < 0.9999999f)) {
+              local_a8[0] = fVar26;
+              iVar8 = 1;
+LAB_005629ce:
+              uVar1 = 0;
+              if (((uint32_t)iVar8 & 1u) != 0) { /* Native LSL31 sign tests root-count parity. */
+                fVar17 = 1.0f - local_a8[0];
+                fVar17 = fVar17 * fVar17 * fVar17 * fVar20 +
+                         fVar17 * 3.0f * fVar17 * local_a8[0] * fVar23 +
+                         fVar17 * 3.0f * local_a8[0] * local_a8[0] * fVar22 +
+                         local_a8[0] * local_a8[0] * local_a8[0] * fVar21;
+                fVar24 = *pfVar11;
+                if (fVar17 <= *pfVar11) {
+                  fVar24 = fVar17;
+                }
+                *pfVar11 = fVar24;
+                fVar24 = pfVar11[2];
+                uVar3 = (in_fpscr & 0xfffffff) | (uint)(fVar17 < fVar24) << 0x1f;
+                in_fpscr = uVar3 | (uint)(NAN(fVar17) || NAN(fVar24)) << 0x1c;
+                if ((byte)(uVar3 >> 0x1f) != ((byte)(in_fpscr >> 0x1c) & 1)) {
+                  fVar17 = fVar24;
+                }
+                pfVar11[2] = fVar17;
+                uVar1 = 1;
+              }
+              /* Native562a44..562b3a: root count inR7, odd index inR0.
+                 Structural research draft; native/C geometry qualification pending. */
+              uint loop_pairs = ((uint)iVar8) >> 1;
+              iVar8 = (int)uVar1;
+              while(loop_pairs != 0) {
+              fVar17 = local_a8[iVar8];
+              fVar24 = 1.0f - fVar17;
+              fVar24 = fVar24 * fVar24 * fVar24 * fVar20 + fVar24 * 3.0f * fVar24 * fVar17 * fVar23 +
+                       fVar24 * 3.0f * fVar17 * fVar17 * fVar22 + fVar17 * fVar17 * fVar17 * fVar21;
+              fVar17 = *pfVar11;
+              if (fVar24 <= *pfVar11) {
+                fVar17 = fVar24;
+              }
+              *pfVar11 = fVar17;
+              if (fVar24 < pfVar11[2] || NAN(fVar24) || NAN(pfVar11[2])) {
+                fVar24 = pfVar11[2];
+              }
+              pfVar11[2] = fVar24;
+              fVar17 = local_a8[iVar8 + 1];
+              fVar24 = 1.0f - fVar17;
+              fVar20 = fVar24 * fVar24 * fVar24 * fVar20 + fVar24 * 3.0f * fVar24 * fVar17 * fVar23 +
+                       fVar24 * 3.0f * fVar17 * fVar17 * fVar22 + fVar17 * fVar17 * fVar17 * fVar21;
+              fVar17 = *pfVar11;
+              if (fVar20 <= *pfVar11) {
+                fVar17 = fVar20;
+              }
+              *pfVar11 = fVar17;
+              fVar17 = pfVar11[2];
+              uVar3 = (in_fpscr & 0xfffffff) | (uint)(fVar20 < fVar17) << 0x1f;
+              in_fpscr = uVar3 | (uint)(NAN(fVar20) || NAN(fVar17)) << 0x1c;
+              if ((byte)(uVar3 >> 0x1f) == ((byte)(in_fpscr >> 0x1c) & 1)) {
+                fVar17 = fVar20;
+              }
+              pfVar11[2] = fVar17;
+              iVar8 += 2;
+              --loop_pairs;
+              } /* Native LE decrements loop counter; no external call. */
+            }
+          }
+          pfVar7 = pfVar7 + 1;
+          pfVar11 = pfVar11 + 1;
+          pfVar10 = pfVar10 + 1;
+          pfVar9 = pfVar9 + 1;
+          pfVar12 = pfVar12 + 1;
+          iVar6 = iVar6 + -1;
+        } while (iVar6 != 0);
+        param_1[4] = pp306_bits(local_a8[2]);
+        param_1[5] = pp306_bits(local_a8[3]);
+        param_1[6] = pp306_bits(local_a8[4]);
+        param_1[7] = pp306_bits(local_a8[5]);
+      }
+      else if ((bVar13 == 1 || bVar13 == 2) || (bVar13 == 4 || bVar13 == 3)) {
+LAB_00563802:
+        in_fpscr = in_fpscr & 0xfffffff;
+        {
+          float pp313_bound = pp306_float(param_1[4]);
+          fVar17 = pp313_bound;
+          if (pp308_negative_compare(state.current_x, pp313_bound)) {
+            fVar17 = state.current_x;
+          }
+          param_1[4] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[5]);
+          fVar17 = pp313_bound;
+          if (pp308_negative_compare(state.current_y, pp313_bound)) {
+            fVar17 = state.current_y;
+          }
+          param_1[5] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[6]);
+          fVar17 = state.current_x;
+          if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+            fVar17 = pp313_bound;
+          }
+          uint32_t pp313_xmax = pp306_bits(fVar17);
+          pp313_bound = pp306_float(param_1[7]);
+          param_1[6] = pp313_xmax;
+          fVar17 = state.current_y;
+          if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+            fVar17 = pp313_bound;
+          }
+          param_1[7] = pp306_bits(fVar17);
+        }
+      }
+      else if (bVar13 == 5 || bVar13 == 7) {
+        uVar3 = in_fpscr & 0xfffffff;
+        {
+          float pp313_bound = pp306_float(param_1[4]);
+          fVar17 = pp313_bound;
+          if (!pp308_negative_compare(pp313_bound, state.current_x)) {
+            fVar17 = state.current_x;
+          }
+          param_1[4] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[5]);
+          fVar17 = pp313_bound;
+          if (!pp308_negative_compare(pp313_bound, state.current_y)) {
+            fVar17 = state.current_y;
+          }
+          param_1[5] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[6]);
+          fVar17 = pp313_bound;
+          if (!pp308_negative_compare(state.current_x, pp313_bound)) {
+            fVar17 = state.current_x;
+          }
+          param_1[6] = pp306_bits(fVar17);
+        }
+        fVar17 = pp306_float(param_1[7]);
+        if (!pp308_negative_compare(state.current_y, fVar17)) {
+          fVar17 = state.current_y;
+        }
+        fVar20 = pp306_float(param_1[4]);
+        param_1[7] = pp306_bits(fVar17);
+        uVar5 = uVar3 | (uint)(state.control1_x < fVar20) << 0x1f;
+        in_fpscr = uVar5 | (uint)(NAN(state.control1_x) || NAN(fVar20)) << 0x1c;
+        fVar17 = pp306_float(param_1[5]);
+        fVar21 = pp306_float(param_1[6]);
+        fVar22 = pp306_float(param_1[7]);
+        bVar13 = (byte)(uVar5 >> 0x1f);
+        bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+        if (bVar13 == bVar15) {
+          in_fpscr = uVar3 | (uint)(fVar21 < state.control1_x) << 0x1f |
+                     (uint)(NAN(fVar21) || NAN(state.control1_x)) << 0x1c;
+          bVar15 = (byte)(in_fpscr >> 0x18);
+          bVar13 = bVar15 >> 7;
+          bVar15 = bVar15 >> 4 & 1;
+        }
+        if (bVar13 == bVar15) {
+          uVar3 = in_fpscr & 0xfffffff;
+          uVar5 = uVar3 | (uint)(state.control1_y < fVar17) << 0x1f;
+          in_fpscr = uVar5 | (uint)(NAN(state.control1_y) || NAN(fVar17)) << 0x1c;
+          bVar13 = (byte)(uVar5 >> 0x1f);
+          bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+          if (bVar13 == bVar15) {
+            in_fpscr = uVar3 | (uint)(fVar22 < state.control1_y) << 0x1f |
+                       (uint)(NAN(fVar22) || NAN(state.control1_y)) << 0x1c;
+            bVar15 = (byte)(in_fpscr >> 0x18);
+            bVar13 = bVar15 >> 7;
+            bVar15 = bVar15 >> 4 & 1;
+          }
+          if (bVar13 == bVar15) goto LAB_0056385a;
+        }
+        fVar23 = state.control1_x * 2.0f + state.previous_x * -2.0f;
+        fVar24 = (state.current_x * 2.0f + state.control1_x * -2.0f) - fVar23;
+        fVar26 = ABS(fVar24);
+        bVar16 = NAN(fVar26);
+        uVar3 = (in_fpscr & 0xfffffff) | (uint)(fVar26 < 1.0000001e-07f) << 0x1f;
+        bVar14 = SUB41(uVar3 >> 0x1f,0);
+        if (bVar14 == bVar16) {
+          fVar23 = pp309_divide_then_negate(fVar23, fVar24);
+          bVar16 = NAN(fVar23);
+          uVar3 = (in_fpscr & 0xfffffff) | (uint)(fVar23 < 1.0000001e-07f) << 0x1f;
+          bVar14 = SUB41(uVar3 >> 0x1f,0);
+        }
+        if ((bVar14 == bVar16) && (uVar3 = uVar3 & 0xfffffff, fVar23 < 0.9999999f)) {
+          fVar24 = 1.0f - fVar23;
+          fVar23 = fVar24 * fVar24 * state.previous_x + fVar24 * 2.0f * fVar23 * state.control1_x +
+                   fVar23 * fVar23 * state.current_x;
+          if (!pp308_negative_compare(fVar20, fVar23)) {
+            fVar20 = fVar23;
+          }
+          if (!pp308_negative_compare(fVar23, fVar21)) {
+            fVar21 = fVar23;
+          }
+        }
+        fVar23 = state.control1_y * 2.0f + state.previous_y * -2.0f;
+        fVar24 = (state.current_y * 2.0f + state.control1_y * -2.0f) - fVar23;
+        fVar26 = ABS(fVar24);
+        uVar5 = (uVar3 & 0xfffffff) | (uint)(fVar26 < 1.0000001e-07f) << 0x1f;
+        in_fpscr = uVar5 | (uint)NAN(fVar26) << 0x1c;
+        bVar13 = (byte)(uVar5 >> 0x1f);
+        bVar15 = (byte)(in_fpscr >> 0x1c) & 1;
+        if (bVar13 == bVar15) {
+          fVar23 = pp309_divide_then_negate(fVar23, fVar24);
+          in_fpscr = (uVar3 & 0xfffffff) | (uint)(fVar23 < 1.0000001e-07f) << 0x1f |
+                     (uint)NAN(fVar23) << 0x1c;
+          bVar15 = (byte)(in_fpscr >> 0x18);
+          bVar13 = bVar15 >> 7;
+          bVar15 = bVar15 >> 4 & 1;
+        }
+        if ((bVar13 == bVar15) && (in_fpscr = in_fpscr & 0xfffffff, fVar23 < 0.9999999f)) {
+          fVar24 = 1.0f - fVar23;
+          fVar23 = fVar24 * fVar24 * state.previous_y + fVar24 * 2.0f * fVar23 * state.control1_y +
+                   fVar23 * fVar23 * state.current_y;
+          if (!pp308_negative_compare(fVar17, fVar23)) {
+            fVar17 = fVar23;
+          }
+          if (!pp308_negative_compare(fVar23, fVar22)) {
+            fVar22 = fVar23;
+          }
+        }
+        param_1[4] = pp306_bits(fVar20);
+        param_1[5] = pp306_bits(fVar17);
+        param_1[6] = pp306_bits(fVar21);
+        param_1[7] = pp306_bits(fVar22);
+      }
+      else if ((bVar13 & 0xf) == 9) {
+        fVar20 = ABS(state.control1_x);
+        uVar3 = in_fpscr & 0xfffffff;
+        in_fpscr = uVar3 | (uint)(fVar20 < 1.0000001e-05f) << 0x1f;
+        bVar13 = -(char)((int)in_fpscr >> 0x1f);
+        if (bVar13 == 0) {
+          fVar17 = ABS(state.control1_y);
+          unaff_d9 = (ulonglong)pp306_bits(fVar17);
+          in_fpscr = uVar3 | (uint)(fVar17 < 1.0000001e-05f) << 0x1f;
+          bVar13 = (byte)(in_fpscr >> 0x1f);
+        }
+        if (bVar13 != 0) goto LAB_00563802;
+        local_a8[5] = state.control2_x;
+        fVar26 = state.control2_x * 0.017453292f;
+        local_a8[3] = state.last_control_x;
+        local_a8[2] = state.last_control_y;
+        local_a8[1] = state.last_x;
+        local_a8[0] = state.last_y;
+        local_a8[4] = (float)audio_uart_float_trig_mode1_50968c(fVar26);
+        fVar23 = (float)audio_uart_float_trig_mode0_509690(fVar26);
+        fVar28 = local_a8[3] * local_a8[4] + local_a8[2] * fVar23;
+        fVar29 = fVar28 / fVar20;
+        fVar30 = local_a8[2] * local_a8[4] - local_a8[3] * fVar23;
+        fVar31 = local_a8[1] * local_a8[4] + local_a8[0] * fVar23;
+        fVar25 = fVar31 / fVar20;
+        fVar32 = local_a8[0] * local_a8[4] - local_a8[1] * fVar23;
+        fVar21 = fVar29 + fVar25;
+        fVar18 = fVar30 / fVar17;
+        unaff_d9 = CONCAT44(fVar18,fVar17);
+        fVar27 = fVar32 / fVar17;
+        fVar22 = fVar18 + fVar27;
+        fVar33 = fVar29 - fVar25;
+        fVar18 = fVar18 - fVar27;
+        fVar24 = fVar33 * fVar33 + fVar18 * fVar18;
+        uVar3 = in_fpscr & 0xfffffff;
+        in_fpscr = uVar3 | (uint)(fVar24 == 0.0f) << 0x1e;
+        if ((byte)(in_fpscr >> 0x1e) != 0) goto LAB_0056385a;
+        local_8c[0] = 1.0f / fVar24 + -0.25f;
+        if (local_8c[0] < 0.0f) {
+          local_8c[0] = 0.0f;
+          fVar21 = (float)audio_uart_float_sqrt_4397a8(fVar24 * 0.25f);
+          fVar20 = fVar20 * fVar21;
+          fVar17 = fVar17 * fVar21;
+          fVar29 = fVar28 / fVar20;
+          fVar30 = fVar30 / fVar17;
+          unaff_d9 = CONCAT44(fVar30,fVar17);
+          fVar25 = fVar31 / fVar20;
+          fVar21 = fVar29 + fVar25;
+          fVar27 = fVar32 / fVar17;
+          fVar22 = fVar30 + fVar27;
+          fVar33 = fVar29 - fVar25;
+          fVar18 = fVar30 - fVar27;
+        }
+        fVar17 = (float)audio_uart_float_sqrt_4397a8(local_8c[0]);
+        fVar31 = fVar21 * 0.5f + fVar17 * fVar18;
+        fVar32 = fVar22 * 0.5f - fVar17 * fVar33;
+        fVar24 = (float)audio_uart_float_two_input_angle_50969c(pp306_float((uint32_t)(unaff_d9>>32)) - fVar32,fVar29 - fVar31);
+        fVar28 = pp306_float((uint32_t)unaff_d9);
+        fVar30 = (float)audio_uart_float_two_input_angle_50969c(fVar27 - fVar32,fVar25 - fVar31);
+        fVar24 = fVar30 * 57.29578f - fVar24 * 57.29578f;
+        if (fVar24 < 0.0f) {
+          fVar24 = fVar24 + 360.0f;
+        }
+        bVar13 = state.arc_command >> 6;
+        bVar15 = bVar13 & 1;
+        if ((int)((uint)state.arc_command << 0x1a) < 0) {
+          bVar15 = bVar15 ^ 1;
+        }
+        if (((180.0f <= fVar24) || (bVar15 == 0)) && ((fVar24 < 180.0f || (bVar15 != 0)))) {
+          fVar31 = fVar21 * 0.5f - fVar17 * fVar18;
+          fVar32 = fVar22 * 0.5f + fVar17 * fVar33;
+        }
+        fVar17 = fVar31 * fVar20 * fVar23 + fVar32 * fVar28 * local_a8[4];
+        uVar5 = (uVar3 & 0xfffffff) | (uint)(local_a8[5] == 0.0f) << 0x1e;
+        fVar21 = fVar31 * fVar20 * local_a8[4] - fVar32 * fVar28 * fVar23;
+        local_a8[4] = -1.0f;
+        bVar15 = (byte)(uVar5 >> 0x1e);
+        if (bVar15 == 0) {
+          uVar5 = (uVar3 & 0xfffffff) | (uint)(local_a8[5] == 180.0f) << 0x1e;
+          bVar15 = (byte)(uVar5 >> 0x1e);
+        }
+        if (bVar15 == 0) {
+          uVar3 = (uVar5 & 0xfffffff) | (uint)(local_a8[5] == 90.0f) << 0x1e;
+          bVar15 = (byte)(uVar3 >> 0x1e);
+          if (bVar15 == 0) {
+            uVar3 = (uVar5 & 0xfffffff) | (uint)(local_a8[5] == 270.0f) << 0x1e;
+            bVar15 = (byte)(uVar3 >> 0x1e);
+          }
+          fVar29 = -1.0f;
+          if (bVar15 == 0) {
+            fVar22 = (float)audio_uart_float_tangent_563f40(fVar26);
+            fVar18 = (float)audio_uart_float_inverse_ratio_58ec74((fVar28 * fVar22) / fVar20);
+            fVar18 = -fVar18;
+            fVar22 = (float)audio_uart_float_tangent_563f40(fVar26);
+            fVar30 = (float)audio_uart_float_inverse_ratio_58ec74((fVar28 * fVar22) / fVar20);
+            fVar30 = 3.1415927f - fVar30;
+            fVar22 = (float)audio_uart_float_trig_mode1_50968c(fVar18);
+            fVar23 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
+            fVar24 = (float)audio_uart_float_trig_mode0_509690(fVar18);
+            fVar25 = (float)audio_uart_float_trig_mode0_509690(fVar26);
+            fVar23 = (fVar21 + fVar20 * fVar22 * fVar23) - fVar28 * fVar24 * fVar25;
+            fVar22 = (float)audio_uart_float_trig_mode1_50968c(fVar30);
+            fVar24 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
+            fVar25 = (float)audio_uart_float_trig_mode0_509690(fVar30);
+            fVar27 = (float)audio_uart_float_trig_mode0_509690(fVar26);
+            fVar25 = (fVar21 + fVar20 * fVar22 * fVar24) - fVar28 * fVar25 * fVar27;
+            uVar3 = uVar3 & 0xfffffff;
+            fVar22 = fVar25;
+            fVar24 = fVar18;
+            if (fVar25 < fVar23) {
+              fVar22 = fVar23;
+              fVar24 = fVar30;
+              fVar23 = fVar25;
+              fVar30 = fVar18;
+            }
+            fVar18 = (float)audio_uart_float_trig_mode1_50968c(fVar24);
+            fVar25 = (float)audio_uart_float_trig_mode0_509690(fVar26);
+            fVar24 = (float)audio_uart_float_trig_mode0_509690(fVar24);
+            fVar27 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
+            fVar18 = (fVar17 + fVar20 * fVar18 * fVar25 + fVar28 * fVar24 * fVar27) - fVar17;
+            uVar3 = (uVar3 & 0xfffffff) | (uint)(fVar18 < 0.0f) << 0x1f | (uint)(fVar18 == 0.0f) << 0x1e
+            ;
+            uVar5 = uVar3 | (uint)NAN(fVar18) << 0x1c;
+            fVar25 = fVar23 - fVar21;
+            bVar15 = (byte)(uVar3 >> 0x18);
+            fVar24 = fVar29;
+            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+              fVar24 = 1.0f;
+            }
+            fVar18 = (float)audio_uart_float_sqrt_4397a8(fVar25 * fVar25 + fVar18 * fVar18);
+            fVar18 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar25 / fVar18);
+            fVar18 = (float)audio_uart_float_remainder_577c3c(fVar24 * fVar18 + 6.2831855f,pp306_float(0x40c90fdbu));
+            fVar24 = (float)audio_uart_float_trig_mode1_50968c(fVar30);
+            fVar25 = (float)audio_uart_float_trig_mode0_509690(fVar26);
+            fVar30 = (float)audio_uart_float_trig_mode0_509690(fVar30);
+            fVar27 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
+            fVar30 = (fVar17 + fVar20 * fVar24 * fVar25 + fVar28 * fVar30 * fVar27) - fVar17;
+            uVar5 = (uVar5 & 0xfffffff) | (uint)(fVar30 < 0.0f) << 0x1f | (uint)(fVar30 == 0.0f) << 0x1e
+            ;
+            uVar3 = uVar5 | (uint)NAN(fVar30) << 0x1c;
+            fVar25 = fVar22 - fVar21;
+            bVar15 = (byte)(uVar5 >> 0x18);
+            fVar24 = fVar29;
+            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar3 >> 0x1c) & 1)) {
+              fVar24 = 1.0f;
+            }
+            fVar30 = (float)audio_uart_float_sqrt_4397a8(fVar25 * fVar25 + fVar30 * fVar30);
+            fVar30 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar25 / fVar30);
+            fVar30 = (float)audio_uart_float_remainder_577c3c(fVar24 * fVar30 + 6.2831855f,pp306_float(0x40c90fdbu));
+            fVar24 = (float)audio_uart_float_tangent_563f40(fVar26);
+            fVar32 = (float)audio_uart_float_inverse_ratio_58ec74(fVar28 / (fVar24 * fVar20));
+            fVar24 = (float)audio_uart_float_tangent_563f40(fVar26);
+            fVar31 = (float)audio_uart_float_inverse_ratio_58ec74(fVar28 / (fVar24 * fVar20));
+            fVar31 = fVar31 + 3.1415927f;
+            fVar24 = (float)audio_uart_float_trig_mode1_50968c(fVar32);
+            fVar25 = (float)audio_uart_float_trig_mode0_509690(fVar26);
+            fVar27 = (float)audio_uart_float_trig_mode0_509690(fVar32);
+            fVar33 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
+            fVar24 = fVar17 + fVar20 * fVar24 * fVar25 + fVar28 * fVar27 * fVar33;
+            fVar25 = (float)audio_uart_float_trig_mode1_50968c(fVar31);
+            fVar27 = (float)audio_uart_float_trig_mode0_509690(fVar26);
+            fVar33 = (float)audio_uart_float_trig_mode0_509690(fVar31);
+            fVar19 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
+            fVar33 = fVar17 + fVar20 * fVar25 * fVar27 + fVar28 * fVar33 * fVar19;
+            uVar3 = uVar3 & 0xfffffff;
+            fVar25 = fVar33;
+            fVar27 = fVar32;
+            if (fVar33 < fVar24) {
+              fVar25 = fVar24;
+              fVar27 = fVar31;
+              fVar24 = fVar33;
+              fVar31 = fVar32;
+            }
+            local_a8[4] = (float)audio_uart_float_trig_mode1_50968c(fVar27);
+            fVar32 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
+            fVar27 = (float)audio_uart_float_trig_mode0_509690(fVar27);
+            fVar33 = (float)audio_uart_float_trig_mode0_509690(fVar26);
+            fVar19 = fVar24 - fVar17;
+            uVar3 = (uVar3 & 0xfffffff) | (uint)(fVar19 < 0.0f) << 0x1f | (uint)(fVar19 == 0.0f) << 0x1e
+            ;
+            uVar5 = uVar3 | (uint)NAN(fVar19) << 0x1c;
+            fVar32 = ((fVar21 + fVar20 * local_a8[4] * fVar32) - fVar28 * fVar27 * fVar33) - fVar21;
+            bVar15 = (byte)(uVar3 >> 0x18);
+            fVar27 = fVar29;
+            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+              fVar27 = 1.0f;
+            }
+            fVar33 = (float)audio_uart_float_sqrt_4397a8(fVar32 * fVar32 + fVar19 * fVar19);
+            fVar32 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar32 / fVar33);
+            fVar27 = (float)audio_uart_float_remainder_577c3c(fVar27 * fVar32 + 6.2831855f,pp306_float(0x40c90fdbu));
+            fVar32 = (float)audio_uart_float_trig_mode1_50968c(fVar31);
+            fVar33 = (float)audio_uart_float_trig_mode1_50968c(fVar26);
+            fVar31 = (float)audio_uart_float_trig_mode0_509690(fVar31);
+            fVar26 = (float)audio_uart_float_trig_mode0_509690(fVar26);
+            fVar19 = fVar25 - fVar17;
+            uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar19 < 0.0f) << 0x1f | (uint)(fVar19 == 0.0f) << 0x1e
+            ;
+            uVar5 = uVar3 | (uint)NAN(fVar19) << 0x1c;
+            fVar20 = ((fVar21 + fVar32 * fVar20 * fVar33) - fVar31 * fVar28 * fVar26) - fVar21;
+            bVar15 = (byte)(uVar3 >> 0x18);
+            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+              fVar29 = 1.0f;
+            }
+            fVar26 = (float)audio_uart_float_sqrt_4397a8(fVar20 * fVar20 + fVar19 * fVar19);
+            fVar20 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar20 / fVar26);
+            fVar20 = fVar29 * fVar20 + 6.2831855f;
+          }
+          else {
+            fVar23 = -fVar28;
+            fVar22 = (float)audio_uart_float_sqrt_4397a8(fVar23 * fVar23);
+            fVar22 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar23 / fVar22);
+            fVar18 = (float)audio_uart_float_remainder_577c3c(fVar22 * -1.0f + 6.2831855f,pp306_float(0x40c90fdbu));
+            fVar22 = (float)audio_uart_float_sqrt_4397a8(fVar28 * fVar28);
+            fVar22 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar28 / fVar22);
+            fVar30 = (float)audio_uart_float_remainder_577c3c(fVar22 * -1.0f + 6.2831855f,pp306_float(0x40c90fdbu));
+            fVar25 = -fVar20;
+            uVar3 = (uVar3 & 0xfffffff) | (uint)(fVar25 < 0.0f) << 0x1f | (uint)(fVar25 == 0.0f) << 0x1e
+            ;
+            uVar5 = uVar3 | (uint)NAN(fVar25) << 0x1c;
+            fVar23 = fVar21 - fVar28;
+            fVar22 = fVar21 + fVar28;
+            fVar24 = fVar17 - fVar20;
+            bVar15 = (byte)(uVar3 >> 0x18);
+            fVar26 = fVar29;
+            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+              fVar26 = 1.0f;
+            }
+            fVar25 = (float)audio_uart_float_sqrt_4397a8(fVar25 * fVar25);
+            fVar25 = (float)audio_uart_float_inverse_magnitude_58ecbc(0.0f / fVar25);
+            fVar27 = (float)audio_uart_float_remainder_577c3c(fVar26 * fVar25 + 6.2831855f,pp306_float(0x40c90fdbu));
+            uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar20 < 0.0f) << 0x1f | (uint)(fVar20 == 0.0f) << 0x1e
+            ;
+            uVar5 = uVar3 | (uint)NAN(fVar20) << 0x1c;
+            fVar25 = fVar17 + fVar20;
+            bVar15 = (byte)(uVar3 >> 0x18);
+            if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+              fVar29 = 1.0f;
+            }
+            fVar20 = (float)audio_uart_float_sqrt_4397a8(fVar20 * fVar20);
+            fVar20 = (float)audio_uart_float_inverse_magnitude_58ecbc(0.0f / fVar20);
+            fVar20 = fVar29 * fVar20 + 6.2831855f;
+          }
+        }
+        else {
+          fVar23 = -fVar20;
+          fVar22 = (float)audio_uart_float_sqrt_4397a8(fVar23 * fVar23);
+          fVar22 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar23 / fVar22);
+          fVar18 = (float)audio_uart_float_remainder_577c3c(fVar22 * -1.0f + 6.2831855f,pp306_float(0x40c90fdbu));
+          fVar22 = (float)audio_uart_float_sqrt_4397a8(fVar20 * fVar20);
+          fVar22 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar20 / fVar22);
+          fVar30 = (float)audio_uart_float_remainder_577c3c(fVar22 * -1.0f + 6.2831855f,pp306_float(0x40c90fdbu));
+          fVar26 = -fVar28;
+          uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar26 < 0.0f) << 0x1f | (uint)(fVar26 == 0.0f) << 0x1e;
+          uVar5 = uVar3 | (uint)NAN(fVar26) << 0x1c;
+          fVar23 = fVar21 - fVar20;
+          fVar22 = fVar21 + fVar20;
+          fVar24 = fVar17 - fVar28;
+          bVar15 = (byte)(uVar3 >> 0x18);
+          if ((bool)(bVar15 >> 6 & 1) || bVar15 >> 7 != ((byte)(uVar5 >> 0x1c) & 1)) {
+            fVar20 = -1.0f;
+          }
+          else {
+            fVar20 = 1.0f;
+          }
+          fVar26 = (float)audio_uart_float_sqrt_4397a8(fVar26 * fVar26);
+          fVar26 = (float)audio_uart_float_inverse_magnitude_58ecbc(0.0f / fVar26);
+          fVar27 = (float)audio_uart_float_remainder_577c3c(fVar20 * fVar26 + 6.2831855f,pp306_float(0x40c90fdbu));
+          uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar28 < 0.0f) << 0x1f | (uint)(fVar28 == 0.0f) << 0x1e;
+          uVar5 = uVar3 | (uint)NAN(fVar28) << 0x1c;
+          fVar25 = fVar17 + fVar28;
+          bVar15 = (byte)(uVar3 >> 0x18);
+          if ((bool)(bVar15 >> 6 & 1) || bVar15 >> 7 != ((byte)(uVar5 >> 0x1c) & 1)) {
+            fVar20 = -1.0f;
+          }
+          else {
+            fVar20 = 1.0f;
+          }
+          fVar26 = (float)audio_uart_float_sqrt_4397a8(fVar28 * fVar28);
+          fVar26 = (float)audio_uart_float_inverse_magnitude_58ecbc(0.0f / fVar26);
+          fVar20 = fVar20 * fVar26 + 6.2831855f;
+        }
+        fVar31 = -1.0f;
+        fVar26 = (float)audio_uart_float_remainder_577c3c(fVar20,pp306_float(0x40c90fdbu));
+        fVar28 = local_a8[2] - fVar17;
+        uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar28 < 0.0f) << 0x1f | (uint)(fVar28 == 0.0f) << 0x1e;
+        uVar5 = uVar3 | (uint)NAN(fVar28) << 0x1c;
+        fVar29 = local_a8[3] - fVar21;
+        bVar15 = (byte)(uVar3 >> 0x18);
+        fVar20 = fVar31;
+        if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(uVar5 >> 0x1c) & 1)) {
+          fVar20 = 1.0f;
+        }
+        fVar28 = (float)audio_uart_float_sqrt_4397a8(fVar29 * fVar29 + fVar28 * fVar28);
+        fVar28 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar29 / fVar28);
+        fVar20 = (float)audio_uart_float_remainder_577c3c(fVar20 * fVar28 + 6.2831855f,pp306_float(0x40c90fdbu));
+        fVar17 = local_a8[0] - fVar17;
+        uVar3 = (uVar5 & 0xfffffff) | (uint)(fVar17 < 0.0f) << 0x1f | (uint)(fVar17 == 0.0f) << 0x1e;
+        in_fpscr = uVar3 | (uint)NAN(fVar17) << 0x1c;
+        fVar21 = local_a8[1] - fVar21;
+        unaff_d9 = CONCAT44(fVar21,fVar20);
+        bVar15 = (byte)(uVar3 >> 0x18);
+        if (!(bool)(bVar15 >> 6 & 1) && bVar15 >> 7 == ((byte)(in_fpscr >> 0x1c) & 1)) {
+          fVar31 = 1.0f;
+        }
+        fVar17 = (float)audio_uart_float_sqrt_4397a8(fVar21 * fVar21 + fVar17 * fVar17);
+        fVar17 = (float)audio_uart_float_inverse_magnitude_58ecbc(fVar21 / fVar17);
+        fVar17 = (float)audio_uart_float_remainder_577c3c(fVar31 * fVar17 + 6.2831855f,pp306_float(0x40c90fdbu));
+        if ((bVar13 & 1) == 0) {
+          unaff_d9 = (ulonglong)pp306_bits(fVar17);
+          fVar17 = fVar20;
+        }
+        bVar16 = false;
+        fVar20 = pp306_float((uint32_t)unaff_d9);
+        in_fpscr = in_fpscr & 0xfffffff;
+        /* 563620..56374e uses N/PL, including unordered outcomes. */
+        {
+          int wrapped = pp308_negative_compare(fVar17, fVar20);
+          float low = wrapped ? fVar17 : fVar20;
+          float high = wrapped ? fVar20 : fVar17;
+          if (pp308_arc_excludes(fVar18, low, high) != wrapped)
+            fVar23 = pp308_negative_compare(local_a8[3], local_a8[1])
+                       ? local_a8[3] : local_a8[1];
+          if (pp308_arc_excludes(fVar30, low, high) != wrapped)
+            fVar22 = pp308_negative_compare(local_a8[1], local_a8[3])
+                       ? local_a8[3] : local_a8[1];
+          if (pp308_arc_excludes(fVar27, low, high) != wrapped)
+            fVar24 = pp308_negative_compare(local_a8[2], local_a8[0])
+                       ? local_a8[2] : local_a8[0];
+          if (pp308_arc_excludes(fVar26, low, high) != wrapped)
+            fVar25 = pp308_negative_compare(local_a8[0], local_a8[2])
+                       ? local_a8[2] : local_a8[0];
+        }
+        {
+          float pp313_bound = pp306_float(param_1[4]);
+          fVar17 = pp313_bound;
+          if (fVar23 < pp313_bound) {
+            fVar17 = fVar23;
+          }
+          param_1[4] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[5]);
+          fVar17 = pp313_bound;
+          if (fVar24 < pp313_bound) {
+            fVar17 = fVar24;
+          }
+          param_1[5] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[6]);
+          fVar17 = pp313_bound;
+          if (pp313_bound < fVar23) {
+            fVar17 = fVar23;
+          }
+          param_1[6] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[7]);
+          fVar17 = pp313_bound;
+          if (pp313_bound < fVar24) {
+            fVar17 = fVar24;
+          }
+          param_1[7] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[4]);
+          fVar17 = pp313_bound;
+          if (fVar22 < pp313_bound) {
+            fVar17 = fVar22;
+          }
+          param_1[4] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[5]);
+          fVar17 = pp313_bound;
+          if (fVar25 < pp313_bound) {
+            fVar17 = fVar25;
+          }
+          param_1[5] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[6]);
+          fVar17 = pp313_bound;
+          if (pp313_bound < fVar22) {
+            fVar17 = fVar22;
+          }
+          param_1[6] = pp306_bits(fVar17);
+        }
+        {
+          float pp313_bound = pp306_float(param_1[7]);
+          fVar17 = pp313_bound;
+          if (pp313_bound < fVar25) {
+            fVar17 = fVar25;
+          }
+          param_1[7] = pp306_bits(fVar17);
+        }
+      }
+LAB_0056385a:
+      local_90 = local_90 + 1;
+    } while (local_90 < *param_1);
+  }
+  float bound_4 = pp306_float(param_1[4]);
+  iVar6 = pp306_i32(bound_4);
+  fVar17 = pp306_float(VectorSignedToFloat(iVar6,0));
+  uVar3 = VectorSignedToFloat((uint32_t)iVar6 - (uint32_t)pp308_negative_compare(bound_4, fVar17),0);
+  param_1[4] = uVar3;
+  float bound_5 = pp306_float(param_1[5]);
+  iVar6 = pp306_i32(bound_5);
+  fVar17 = pp306_float(VectorSignedToFloat(iVar6,0));
+  uVar3 = VectorSignedToFloat((uint32_t)iVar6 - (uint32_t)pp308_negative_compare(bound_5, fVar17),0);
+  param_1[5] = uVar3;
+  float bound_6 = pp306_float(param_1[6]);
+  iVar6 = pp306_i32(bound_6);
+  fVar17 = pp306_float(VectorSignedToFloat(iVar6,0));
+  uVar3 = VectorSignedToFloat((uint32_t)iVar6 + (uint32_t)pp308_negative_compare(fVar17, bound_6),0);
+  param_1[6] = uVar3;
+  float bound_7 = pp306_float(param_1[7]);
+  iVar6 = pp306_i32(bound_7);
+  fVar17 = pp306_float(VectorSignedToFloat(iVar6,0));
+  uVar3 = VectorSignedToFloat((uint32_t)iVar6 + (uint32_t)pp308_negative_compare(fVar17, bound_7),0);
+  param_1[7] = uVar3;
+  param_1[0x14] = pp306_bits(pp306_float(param_1[6]) - pp306_float(param_1[4]));
+  param_1[0x15] = pp306_bits(pp306_float(param_1[7]) - pp306_float(param_1[5]));
+  return;
+}
+
+
+#undef ABS
+#undef NAN
+#undef SUB41
+#undef CONCAT44
+
+/* Full native LVGL size clamps; native qualification receipt round319. */
+/* Native4408d6..440966/440968..4409f8; source-backed LVGL size clamps.
+ * LVGL lv_obj_pos.c969..980; native wrap and signed percentage boundaries retained. */
+#include <stdint.h>
+static int32_t lv319_resolve(int32_t bound,int32_t reference)
+{
+ uint32_t raw=(uint32_t)bound;
+ int32_t plain=(int32_t)(raw & 0x9fffffffu);
+ if((raw & 0x60000000u)==0x20000000u && plain<0x1fffffff){
+  int32_t percent=plain>=0x10000000 ? (int32_t)(0x0fffffffu-(uint32_t)plain) : plain;
+  int32_t product=(int32_t)((uint32_t)percent*(uint32_t)reference);
+  return product/100;
+ }
+ return bound;
+}
+static int32_t lv319_clamp(int32_t value,int32_t minimum,int32_t maximum,int32_t reference)
+{
+ minimum=lv319_resolve(minimum,reference);
+ maximum=lv319_resolve(maximum,reference);
+ int32_t limited=value<maximum?value:maximum;
+ return limited<minimum?minimum:limited;
+}
+int32_t audio_uart_lv_clamp_width_4408d6(int32_t v,int32_t lo,int32_t hi,int32_t ref)
+{return lv319_clamp(v,lo,hi,ref);}
+int32_t audio_uart_lv_clamp_height_440968(int32_t v,int32_t lo,int32_t hi,int32_t ref)
+{return lv319_clamp(v,lo,hi,ref);}
+
+/* Native LVGL size-refresh leaf contracts; qualification receipt round320. */
+/* Complete native style leaves: native selectors agree with pinned LVGL lv_style.h.
+ * Area copy43ee94..43eea4 intentionally retains interleaved load/store for overlap. */
+#include <stdint.h>
+extern uint32_t audio_uart_lv_style_property_44bdea(void *,uint32_t,uint32_t);
+int32_t audio_uart_lv_style_width_43eea6(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,1u);}
+int32_t audio_uart_lv_style_min_width_43eeb0(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,4u);}
+int32_t audio_uart_lv_style_max_width_43eeba(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,5u);}
+int32_t audio_uart_lv_style_height_43eec4(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,2u);}
+int32_t audio_uart_lv_style_min_height_43eece(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,6u);}
+int32_t audio_uart_lv_style_max_height_43eed8(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,7u);}
+int32_t audio_uart_lv_style_margin_top_43ef70(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,24u);}
+int32_t audio_uart_lv_style_margin_bottom_43ef7a(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,25u);}
+int32_t audio_uart_lv_style_margin_left_43ef84(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,26u);}
+int32_t audio_uart_lv_style_margin_right_43ef8e(void *object,uint32_t selector)
+{return (int32_t)audio_uart_lv_style_property_44bdea(object,selector,27u);}
+uint8_t audio_uart_lv_style_base_dir_43efba(void *object,uint32_t selector)
+{return (uint8_t)audio_uart_lv_style_property_44bdea(object,selector,39u);}
+void audio_uart_lv_area_copy_43ee94(void *destination,const void *source)
+{
+ volatile uint32_t *d=destination;
+ const volatile uint32_t *s=source;
+ d[0]=s[0]; d[1]=s[1]; d[2]=s[2]; d[3]=s[3];
+}
+
+/* Complete native coordinate getters; qualification receipt round321. */
+/* Complete native43fc2a..43fc63 and43feca..43ff43; pinned lv_obj_pos.c.
+ * Genuine native null assertion: diagnostic call then faulting volatile word write.
+ * No assertion-body placeholder or fabricated successful return. */
+#include <stdint.h>
+#include <stddef.h>
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void audio_uart_lv_area_copy_43ee94(void *,const void *);
+extern int32_t audio_uart_lv_style_pad_left_43efc6(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_style_pad_right_43eff4(void *,uint32_t);
+extern int32_t audio_uart_lv_style_pad_top_43f022(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_style_pad_bottom_43f050(void *,uint32_t);
+static const char lv321_format[]="Asserted at expression: %s (%s)";
+static const char lv321_expression[]="obj != NULL";
+static const char lv321_message[]="NULL pointer";
+static const char lv321_coords_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\core\\lv_obj_pos.c";
+static const char lv321_coords_function[]="lv_obj_get_coords";
+static const char lv321_content_file[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\core\\lv_obj_pos.c";
+static const char lv321_content_function[]="lv_obj_get_content_coords";
+static _Noreturn void lv321_assert_null(uint32_t line,const char *function,const char *file)
+{
+ audio_uart_lvgl_log(3u,file,line,function,lv321_format,lv321_expression,lv321_message);
+ for(;;) *(volatile uint32_t *)(uintptr_t)0xffffffffu=0u;
+}
+void audio_uart_lv_obj_coords_43fc2a(const void *object,void *area)
+{
+ if(object==NULL)lv321_assert_null(480u,lv321_coords_function,lv321_coords_file);
+ audio_uart_lv_area_copy_43ee94(area,(const uint8_t *)object+20u);
+}
+void audio_uart_lv_obj_content_coords_43feca(void *object,void *area)
+{
+ if(object==NULL)lv321_assert_null(579u,lv321_content_function,lv321_content_file);
+ audio_uart_lv_obj_coords_43fc2a(object,area);
+ volatile uint32_t *a=area;
+ uint32_t space=(uint32_t)audio_uart_lv_style_pad_left_43efc6(object,0u,0u,0u);a[0]=a[0]+space;
+ space=(uint32_t)audio_uart_lv_style_pad_right_43eff4(object,0u);a[2]=a[2]-space;
+ space=(uint32_t)audio_uart_lv_style_pad_top_43f022(object,0u,0u,0u);a[1]=a[1]+space;
+ space=(uint32_t)audio_uart_lv_style_pad_bottom_43f050(object,0u);a[3]=a[3]-space;
+}
+
+/* Complete native content-sizing helper bodies, source-backed lv_obj_pos.c/lv_style.h. */
+#include <stdint.h>
+#include <stddef.h>
+extern uint32_t audio_uart_lv_style_property_44bdea(void *,uint32_t,uint32_t);
+extern uint32_t audio_uart_lv_obj_has_flag_any_43e11c(void *,uint32_t);
+extern void *audio_uart_lv_obj_parent_44dca2(void *);
+extern uint32_t audio_uart_lv_obj_event_451670(void *,uint32_t,void *);
+int32_t audio_uart_lv_style_x_43eee2(void *o,uint32_t s){return (int32_t)audio_uart_lv_style_property_44bdea(o,s,8u);}
+int32_t audio_uart_lv_style_y_43eeec(void *o,uint32_t s){return (int32_t)audio_uart_lv_style_property_44bdea(o,s,9u);}
+uint8_t audio_uart_lv_style_align_43eef6(void *o,uint32_t s){return (uint8_t)audio_uart_lv_style_property_44bdea(o,s,10u);}
+uint32_t audio_uart_lv_layout_positioned_43f612(void *o)
+{
+ if(audio_uart_lv_obj_has_flag_any_43e11c(o,0x60001u))return 0u;
+ void *parent=audio_uart_lv_obj_parent_44dca2(o);
+ if(parent==NULL)return 0u;
+ return (uint16_t)audio_uart_lv_style_property_44bdea(parent,0u,22u)!=0u;
+}
+int32_t audio_uart_lv_self_width_43ff44(void *o)
+{
+ int32_t size[2]={0,(int32_t)0xe0000001u};
+ (void)audio_uart_lv_obj_event_451670(o,52u,size);
+ return size[0];
+}
+int32_t audio_uart_lv_self_height_43ff5e(void *o)
+{
+ int32_t size[2]={(int32_t)0xe0000001u,0};
+ (void)audio_uart_lv_obj_event_451670(o,52u,size);
+ return size[1];
+}
+
+/* Complete native area size450b80..450b97 and scrollbar invalidate44f2ca..44f315.
+ * Pinned Ambiq LVGL lv_area.c69-77 and lv_obj_scroll.c637-647.
+ * Inclusive extents and product wrap modulo2^32; preserve repeated size reads. */
+#include <stdint.h>
+extern void audio_uart_lv_get_scrollbar_areas_44eb28(void *,int32_t *,int32_t *);
+extern void audio_uart_display_invalidate_area(void *,const int32_t *);
+uint32_t audio_uart_lv_area_size_450b80(const void *area)
+{
+ const volatile uint32_t *p=(const volatile uint32_t *)area;
+ uint32_t x2=p[2];uint32_t x1=p[0];uint32_t width=x2-x1+1u;
+ uint32_t y2=p[3];uint32_t y1=p[1];uint32_t height=y2-y1+1u;
+ return height*width;
+}
+void audio_uart_lv_scrollbar_invalidate_44f2ca(void *object)
+{
+ int32_t horizontal[4],vertical[4];
+ audio_uart_lv_get_scrollbar_areas_44eb28(object,horizontal,vertical);
+ if(audio_uart_lv_area_size_450b80(horizontal)==0u && audio_uart_lv_area_size_450b80(vertical)==0u)return;
+ if(audio_uart_lv_area_size_450b80(horizontal)!=0u)audio_uart_display_invalidate_area(object,horizontal);
+ if(audio_uart_lv_area_size_450b80(vertical)!=0u)audio_uart_display_invalidate_area(object,vertical);
+}
+
+/* Full native440a3c..440c2d/440c2e..440d47, pinned lv_obj_pos.c1077..1230.
+ * Native wrap, repeated LV_MAX margin fetches, scroll mutation and child order retained. */
+#include <stdint.h>
+extern int32_t audio_uart_lv_obj_x_44e486(void *);
+extern int32_t audio_uart_lv_obj_y_44e498(void *);
+extern uint32_t audio_uart_lv_child_count_44ddea(void *);
+extern uint32_t audio_uart_lv_obj_has_flag_any_43e11c(void *,uint32_t);
+extern uint32_t audio_uart_lv_layout_positioned_43f612(void *);
+extern int32_t audio_uart_lv_self_width_43ff44(void *);
+extern int32_t audio_uart_lv_self_height_43ff5e(void *);
+extern int32_t audio_uart_lv_style_x_43eee2(void *,uint32_t);
+extern int32_t audio_uart_lv_style_y_43eeec(void *,uint32_t);
+extern uint8_t audio_uart_lv_style_align_43eef6(void *,uint32_t);
+extern uint8_t audio_uart_lv_style_base_dir_43efba(void *,uint32_t);
+extern int32_t audio_uart_lv_style_pad_left_43efc6(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_style_pad_right_43eff4(void *,uint32_t);
+extern int32_t audio_uart_lv_style_pad_top_43f022(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_style_pad_bottom_43f050(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_left_43ef84(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_right_43ef8e(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_top_43ef70(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_bottom_43ef7a(void *,uint32_t);
+extern uint32_t audio_uart_lv_area_width_451598(const void *);
+extern uint32_t audio_uart_lv_area_height_4515a4(const void *);
+static uint32_t lv322_read(const void *p,uint32_t offset){return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
+static void lv322_write(void *p,uint32_t offset,uint32_t value){*(volatile uint32_t *)((uint8_t *)p+offset)=value;}
+static int32_t lv322_add(int32_t a,int32_t b){return (int32_t)((uint32_t)a+(uint32_t)b);}
+static int32_t lv322_extent(uint32_t end,uint32_t start){return (int32_t)(end-start+1u);}
+static void *lv322_child(void *o,uint32_t i){uint32_t spec=lv322_read(o,8);uint32_t children=lv322_read((void *)(uintptr_t)spec,0);return (void *)(uintptr_t)lv322_read((void *)(uintptr_t)children,i*4u);}
+int32_t audio_uart_lv_calc_content_width_440a3c(void *object)
+{
+ int32_t old_scroll=audio_uart_lv_obj_x_44e486(object);
+ if(lv322_read(object,8))lv322_write((void *)(uintptr_t)lv322_read(object,8),32,0);
+ int32_t right=audio_uart_lv_style_pad_right_43eff4(object,0);
+ int32_t left=audio_uart_lv_style_pad_left_43efc6(object,0,0,0);
+ int32_t self=lv322_add(lv322_add(audio_uart_lv_self_width_43ff44(object),left),right);
+ int32_t result=(int32_t)0xe0000001u;uint32_t count=audio_uart_lv_child_count_44ddea(object);
+ uint8_t rtl=audio_uart_lv_style_base_dir_43efba(object,0)==1;
+ for(uint32_t i=0;i<count;i++){
+  int32_t tmp=(int32_t)0xe0000001u;void *child=lv322_child(object,i);
+  if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
+  uint32_t positioned=audio_uart_lv_layout_positioned_43f612(child);
+  uint8_t align=0;if(!positioned)align=audio_uart_lv_style_align_43eef6(child,0);
+  if(positioned || (rtl?(align==0 || align==3 || align==6 || align==8):(align==0 || align==1 || align==4 || align==7))){
+   tmp=rtl?lv322_extent(lv322_read(object,28),lv322_read(child,20)):lv322_extent(lv322_read(child,28),lv322_read(object,20));
+  }else if(audio_uart_lv_style_x_43eee2(child,0)==0){
+   tmp=lv322_add(audio_uart_lv_area_width_451598((uint8_t *)child+20),rtl?right:left);
+   tmp=lv322_add(tmp,rtl?audio_uart_lv_style_margin_left_43ef84(child,0):audio_uart_lv_style_margin_right_43ef8e(child,0));
+  }
+  int32_t margin=rtl?audio_uart_lv_style_margin_left_43ef84(child,0):audio_uart_lv_style_margin_right_43ef8e(child,0);
+  if(lv322_add(tmp,margin)>=result){
+   margin=rtl?audio_uart_lv_style_margin_left_43ef84(child,0):audio_uart_lv_style_margin_right_43ef8e(child,0);
+   result=lv322_add(tmp,margin);
+  }
+ }
+ if(result!=(int32_t)0xe0000001u)result=lv322_add(result,rtl?left:right);
+ if(lv322_read(object,8))lv322_write((void *)(uintptr_t)lv322_read(object,8),32,0u-(uint32_t)old_scroll);
+ if(result==(int32_t)0xe0000001u)return self;
+ return result>self?result:self;
+}
+int32_t audio_uart_lv_calc_content_height_440c2e(void *object)
+{
+ int32_t old_scroll=audio_uart_lv_obj_y_44e498(object);
+ if(lv322_read(object,8))lv322_write((void *)(uintptr_t)lv322_read(object,8),36,0);
+ int32_t top=audio_uart_lv_style_pad_top_43f022(object,0,0,0);
+ int32_t bottom=audio_uart_lv_style_pad_bottom_43f050(object,0);
+ int32_t self=lv322_add(lv322_add(audio_uart_lv_self_height_43ff5e(object),top),bottom);
+ int32_t result=(int32_t)0xe0000001u;uint32_t count=audio_uart_lv_child_count_44ddea(object);
+ for(uint32_t i=0;i<count;i++){
+  int32_t tmp=(int32_t)0xe0000001u;void *child=lv322_child(object,i);
+  if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
+  uint32_t positioned=audio_uart_lv_layout_positioned_43f612(child);
+  uint8_t align=0;if(!positioned)align=audio_uart_lv_style_align_43eef6(child,0);
+  if(positioned || align<=3){tmp=lv322_extent(lv322_read(child,32),lv322_read(object,24));}
+  else if(audio_uart_lv_style_y_43eeec(child,0)==0){
+   tmp=lv322_add(audio_uart_lv_area_height_4515a4((uint8_t *)child+20),top);
+   tmp=lv322_add(tmp,audio_uart_lv_style_margin_top_43ef70(child,0));
+  }
+  int32_t margin=audio_uart_lv_style_margin_bottom_43ef7a(child,0);
+  if(lv322_add(tmp,margin)>=result)result=lv322_add(tmp,audio_uart_lv_style_margin_bottom_43ef7a(child,0));
+ }
+ if(lv322_read(object,8))lv322_write((void *)(uintptr_t)lv322_read(object,8),36,0u-(uint32_t)old_scroll);
+ if(result==(int32_t)0xe0000001u)return self;
+ int32_t combined=lv322_add(result,bottom);return combined>=self?combined:self;
+}
+
+/* Entire native getters44e42c..44e441,44e442..44e459,44fbe6..44fbfb.
+ * Source lv_obj_scroll.c94-105 and lv_display.c430-436; native storage widths retained. */
+#include <stdint.h>
+extern void *audio_uart_display_default_get(void);
+uint32_t audio_uart_lv_get_scrollbar_mode_44e42c(const void *object)
+{
+ const volatile uint32_t *slot=(const volatile uint32_t *)((const uint8_t *)object+8);
+ if(*slot==0u)return 3u;
+ return *(const volatile uint8_t *)((uintptr_t)*slot+50u)&3u;
+}
+uint32_t audio_uart_lv_get_scroll_dir_44e442(const void *object)
+{
+ const volatile uint32_t *slot=(const volatile uint32_t *)((const uint8_t *)object+8);
+ if(*slot==0u)return 15u;
+ return (*(const volatile uint16_t *)((uintptr_t)*slot+50u)>>6)&15u;
+}
+int32_t audio_uart_lv_display_dpi_44fbe6(void *display)
+{
+ if(display==0)display=audio_uart_display_default_get();
+ if(display==0)return 130;
+ return *(const volatile int32_t *)((const uint8_t *)display+24u);
+}
+
+/* Entire scrollbar raw-property and input iterator/field getter bodies.
+ * Native property IDs/narrowing and root/list/node offsets retained.
+ * Pinned LVGL lv_obj_scroll.c, lv_indev.c167/507/514, and lv_ll.c head/next. */
+#include <stdint.h>
+extern uint32_t audio_uart_lv_style_property_44bdea(void *,uint32_t,uint32_t);
+extern uint8_t audio_uart_display_lv_root[];
+int32_t audio_uart_lv_style_length_44e226(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,3u);}
+int32_t audio_uart_lv_style_raw_pad_top_44e230(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,16u);}
+int32_t audio_uart_lv_style_raw_pad_bottom_44e23a(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,17u);}
+int32_t audio_uart_lv_style_raw_pad_left_44e244(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,18u);}
+int32_t audio_uart_lv_style_raw_pad_right_44e24e(void *o,uint32_t selector){return (int32_t)audio_uart_lv_style_property_44bdea(o,selector,19u);}
+uint8_t audio_uart_lv_style_background_opacity_44e276(void *o,uint32_t selector){return (uint8_t)audio_uart_lv_style_property_44bdea(o,selector,29u);}
+uint8_t audio_uart_lv_style_border_opacity_44e282(void *o,uint32_t selector){return (uint8_t)audio_uart_lv_style_property_44bdea(o,selector,50u);}
+void *audio_uart_lv_input_next_452edc(void *input)
+{
+ const volatile uint32_t *list=(const volatile uint32_t *)(audio_uart_display_lv_root+0x44u);
+ if(input==0)return (void *)(uintptr_t)list[1];
+ uint32_t node_size=list[0];
+ return (void *)(uintptr_t)*(const volatile uint32_t *)((uintptr_t)input+node_size+4u);
+}
+uint32_t audio_uart_lv_input_scroll_direction_452f8c(const void *input)
+{
+ if(input==0)return 0u;
+ const volatile uint8_t *p=(const volatile uint8_t *)input;
+ if(p[0]!=1u && p[0]!=3u)return 0u;
+ return p[168]&15u;
+}
+void *audio_uart_lv_input_scroll_object_452fae(const void *input)
+{
+ if(input==0)return 0;
+ const volatile uint8_t *p=(const volatile uint8_t *)input;
+ if(p[0]!=1u && p[0]!=3u)return 0;
+ return (void *)(uintptr_t)*(const volatile uint32_t *)(p+112);
+}
+
+/* Entire native 44eb28..44f2c9 scrollbar area calculator.
+ * Pinned Ambiq LVGL lv_obj_scroll.c461-635 reconciled with existing native lift.
+ * Unadmitted: native comparison and selected-TU binding gates remain.
+ * All signed arithmetic wraps explicitly; DPI reads retain native macro repeats. */
+#include <stdint.h>
+#include <limits.h>
+extern void audio_uart_lv_area_set_450b5c(void *,uint32_t,uint32_t,uint32_t,uint32_t);
+extern uint32_t audio_uart_lv_obj_has_flag_43e0e0(void *,uint32_t);
+extern uint32_t audio_uart_lv_get_scrollbar_mode_44e42c(const void *);
+extern void *audio_uart_lv_input_next_452edc(void *);
+extern void *audio_uart_lv_input_scroll_object_452fae(const void *);
+extern uint32_t audio_uart_lv_input_scroll_direction_452f8c(const void *);
+extern int32_t audio_uart_lv_obj_y_44e498(void *); /* native equivalent 44e4aa */
+extern int32_t audio_uart_lv_scroll_bottom_44e4bc(void *);
+extern int32_t audio_uart_lv_scroll_left_44e586(void *);
+extern int32_t audio_uart_lv_scroll_right_44e67a(void *);
+extern uint32_t audio_uart_lv_get_scroll_dir_44e442(const void *);
+extern uint8_t audio_uart_lv_style_base_dir_43efba(void *,uint32_t);
+extern int32_t audio_uart_lv_style_raw_pad_top_44e230(void *,uint32_t);
+extern int32_t audio_uart_lv_style_raw_pad_bottom_44e23a(void *,uint32_t);
+extern int32_t audio_uart_lv_style_raw_pad_left_44e244(void *,uint32_t);
+extern int32_t audio_uart_lv_style_raw_pad_right_44e24e(void *,uint32_t);
+extern int32_t audio_uart_lv_style_width_43eea6(void *,uint32_t);
+extern int32_t audio_uart_lv_style_length_44e226(void *,uint32_t);
+extern int32_t audio_uart_lv_obj_height_43fdda(void *);
+extern int32_t audio_uart_lv_obj_width_43fd9e(void *);
+extern uint8_t audio_uart_lv_style_background_opacity_44e276(void *,uint32_t);
+extern uint8_t audio_uart_lv_style_border_opacity_44e282(void *,uint32_t);
+extern int32_t audio_uart_lv_display_dpi_44fbe6(void *);
+
+static int32_t lv334_add(int32_t a,int32_t b){return (int32_t)((uint32_t)a+(uint32_t)b);}
+static int32_t lv334_sub(int32_t a,int32_t b){return (int32_t)((uint32_t)a-(uint32_t)b);}
+static int32_t lv334_mul(int32_t a,int32_t b){return (int32_t)((uint32_t)a*(uint32_t)b);}
+static int32_t lv334_div(int32_t a,int32_t b)
+{
+    if(b==0)return 0;
+    if(a==INT32_MIN && b==-1)return INT32_MIN;
+    return a/b;
+}
+static int32_t lv334_coord(const void *o,uint32_t offset)
+{return *(const volatile int32_t *)((const uint8_t *)o+offset);}
+static int32_t lv334_min_size(void)
+{
+    int32_t dpi=audio_uart_lv_display_dpi_44fbe6(0);
+    int32_t scaled=lv334_div(lv334_add(lv334_mul(dpi,10),80),160);
+    if(scaled<2)return 1;
+    dpi=audio_uart_lv_display_dpi_44fbe6(0);
+    return lv334_div(lv334_add(lv334_mul(dpi,10),80),160);
+}
+static int32_t lv334_length(int32_t calculated,int32_t style,int32_t extent)
+{
+    int32_t minimum=lv334_min_size();
+    int32_t candidate=style>0?style:calculated;
+    if(minimum<candidate){if(style>0)calculated=style;}
+    else calculated=lv334_min_size();
+    if(extent<=calculated)calculated=extent;
+    return calculated;
+}
+void audio_uart_lv_get_scrollbar_areas_44eb28(void *object,int32_t *horizontal,int32_t *vertical)
+{
+    volatile int32_t *h=horizontal,*v=vertical;
+    audio_uart_lv_area_set_450b5c(horizontal,0u,0u,UINT32_MAX,UINT32_MAX);
+    audio_uart_lv_area_set_450b5c(vertical,0u,0u,UINT32_MAX,UINT32_MAX);
+    if(audio_uart_lv_obj_has_flag_43e0e0(object,16u)==0u)return;
+    uint32_t mode=audio_uart_lv_get_scrollbar_mode_44e42c(object);
+    if(mode==0u)return;
+    void *input=audio_uart_lv_input_next_452edc(0);
+    if(mode==2u){
+        while(input!=0 && audio_uart_lv_input_scroll_object_452fae(input)!=object)
+            input=audio_uart_lv_input_next_452edc(input);
+        if(input==0)return;
+    }
+    int32_t st=audio_uart_lv_obj_y_44e498(object);
+    int32_t sb=audio_uart_lv_scroll_bottom_44e4bc(object);
+    int32_t sl=audio_uart_lv_scroll_left_44e586(object);
+    int32_t sr=audio_uart_lv_scroll_right_44e67a(object);
+    uint32_t dir=audio_uart_lv_get_scroll_dir_44e442(object);
+    uint32_t ver_draw=0u,hor_draw=0u;
+    if((dir&12u)!=0u && (mode==1u || (mode==3u && (st>0 || sb>0)) ||
+       (mode==2u && audio_uart_lv_input_scroll_direction_452f8c(input)==12u)))ver_draw=1u;
+    if((dir&3u)!=0u && (mode==1u || (mode==3u && (sl>0 || sr>0)) ||
+       (mode==2u && audio_uart_lv_input_scroll_direction_452f8c(input)==3u)))hor_draw=1u;
+    if(hor_draw==0u && ver_draw==0u)return;
+    uint32_t rtl=audio_uart_lv_style_base_dir_43efba(object,0x10000u)==1u;
+    int32_t top=audio_uart_lv_style_raw_pad_top_44e230(object,0x10000u);
+    int32_t bottom=audio_uart_lv_style_raw_pad_bottom_44e23a(object,0x10000u);
+    int32_t left=audio_uart_lv_style_raw_pad_left_44e244(object,0x10000u);
+    int32_t right=audio_uart_lv_style_raw_pad_right_44e24e(object,0x10000u);
+    int32_t thickness=audio_uart_lv_style_width_43eea6(object,0x10000u);
+    int32_t length=audio_uart_lv_style_length_44e226(object,0x10000u);
+    int32_t obj_h=audio_uart_lv_obj_height_43fdda(object);
+    int32_t obj_w=audio_uart_lv_obj_width_43fd9e(object);
+    int32_t ver_req=ver_draw?thickness:0,hor_req=hor_draw?thickness:0;
+    if(audio_uart_lv_style_background_opacity_44e276(object,0x10000u)<=1u &&
+       audio_uart_lv_style_border_opacity_44e282(object,0x10000u)<=1u)return;
+    int32_t content_h=lv334_add(lv334_add(sb,st),obj_h);
+    if(ver_draw && content_h!=0){
+        v[1]=lv334_coord(object,24);v[3]=lv334_coord(object,32);
+        if(rtl){v[0]=lv334_add(left,lv334_coord(object,20));v[2]=lv334_sub(lv334_add(thickness,v[0]),1);}
+        else{v[2]=lv334_sub(lv334_coord(object,28),right);v[0]=lv334_add(lv334_sub(v[2],thickness),1);}
+        int32_t track=lv334_sub(lv334_sub(lv334_sub(obj_h,top),bottom),hor_req);
+        int32_t sb_h=lv334_length(lv334_div(lv334_mul(obj_h,track),content_h),length,obj_h);
+        int32_t rem=lv334_sub(track,sb_h),scroll_h=lv334_sub(content_h,obj_h);
+        if(scroll_h<1){
+            v[1]=lv334_add(top,lv334_coord(object,24));
+            v[3]=lv334_sub(lv334_sub(lv334_sub(lv334_coord(object,32),bottom),hor_req),1);
+        }else{
+            int32_t y=lv334_sub(rem,lv334_div(lv334_mul(sb,rem),scroll_h));
+            v[1]=lv334_add(lv334_add(top,y),lv334_coord(object,24));v[3]=lv334_sub(lv334_add(sb_h,v[1]),1);
+            if(v[1]<lv334_add(top,lv334_coord(object,24))){
+                v[1]=lv334_add(top,lv334_coord(object,24));int32_t minimum=lv334_min_size();
+                if(v[3]<lv334_add(minimum,v[1])){minimum=lv334_min_size();v[3]=lv334_add(minimum,v[1]);}
+            }
+            if(lv334_sub(lv334_sub(lv334_coord(object,32),hor_req),bottom)<v[3]){
+                v[3]=lv334_sub(lv334_sub(lv334_coord(object,32),hor_req),bottom);int32_t minimum=lv334_min_size();
+                if(lv334_sub(v[3],minimum)<v[1]){minimum=lv334_min_size();v[1]=lv334_sub(v[3],minimum);}
+            }
+        }
+    }
+    int32_t content_w=lv334_add(lv334_add(sr,sl),obj_w);
+    if(hor_draw && content_w!=0){
+        h[3]=lv334_sub(lv334_coord(object,32),bottom);h[1]=lv334_add(lv334_sub(h[3],thickness),1);
+        h[0]=lv334_coord(object,20);h[2]=lv334_coord(object,28);
+        int32_t track=lv334_sub(lv334_sub(lv334_sub(obj_w,left),right),ver_req);
+        int32_t sb_w=lv334_length(lv334_div(lv334_mul(obj_w,track),content_w),length,obj_w);
+        int32_t rem=lv334_sub(track,sb_w),scroll_w=lv334_sub(content_w,obj_w);
+        if(scroll_w<1){
+            if(rtl){h[0]=lv334_sub(lv334_add(lv334_add(ver_req,left),lv334_coord(object,20)),1);h[2]=lv334_sub(lv334_coord(object,28),right);}
+            else{h[0]=lv334_add(left,lv334_coord(object,20));h[2]=lv334_sub(lv334_sub(lv334_sub(lv334_coord(object,28),right),ver_req),1);}
+        }else{
+            int32_t x=lv334_sub(rem,lv334_div(lv334_mul(sr,rem),scroll_w));
+            if(rtl){
+                h[0]=lv334_add(lv334_add(lv334_add(ver_req,left),x),lv334_coord(object,20));h[2]=lv334_sub(lv334_add(sb_w,h[0]),1);
+                if(h[0]<lv334_add(lv334_add(ver_req,left),lv334_coord(object,20))){
+                    h[0]=lv334_add(lv334_add(ver_req,left),lv334_coord(object,20));int32_t minimum=lv334_min_size();
+                    if(h[2]<lv334_add(minimum,h[0])){minimum=lv334_min_size();h[2]=lv334_add(minimum,h[0]);}
+                }
+                if(lv334_sub(lv334_coord(object,28),right)<h[2]){
+                    h[2]=lv334_sub(lv334_coord(object,28),right);int32_t minimum=lv334_min_size();
+                    if(lv334_sub(h[2],minimum)<h[0]){minimum=lv334_min_size();h[0]=lv334_sub(h[2],minimum);}
+                }
+            }else{
+                h[0]=lv334_add(lv334_add(left,x),lv334_coord(object,20));h[2]=lv334_sub(lv334_add(sb_w,h[0]),1);
+                if(h[0]<lv334_add(left,lv334_coord(object,20))){
+                    h[0]=lv334_add(left,lv334_coord(object,20));int32_t minimum=lv334_min_size();
+                    if(h[2]<lv334_add(minimum,h[0])){minimum=lv334_min_size();h[2]=lv334_add(minimum,h[0]);}
+                }
+                if(lv334_sub(lv334_sub(lv334_coord(object,28),ver_req),right)<h[2]){
+                    h[2]=lv334_sub(lv334_sub(lv334_coord(object,28),ver_req),right);int32_t minimum=lv334_min_size();
+                    if(lv334_sub(h[2],minimum)<h[0]){minimum=lv334_min_size();h[0]=lv334_sub(h[2],minimum);}
+                }
+            }
+        }
+    }
+}
+
+/* Entire native scroll-bottom44e4bc..44e585, left44e586..44e679,
+ * right44e67a..44e75d. Pinned Ambiq LVGL lv_obj_scroll.c136-242.
+ * Unadmitted: complete native/selected-TU/compiler qualification remains.
+ * Native null assertions retain genuine faulting stores, not substitute traps. */
+#include <stdint.h>
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern uint32_t audio_uart_lv_child_count_44ddea(void *);
+extern uint32_t audio_uart_lv_obj_has_flag_any_43e11c(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_bottom_43ef7a(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_left_43ef84(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_right_43ef8e(void *,uint32_t);
+extern int32_t audio_uart_lv_style_pad_top_43f022(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_style_pad_bottom_43f050(void *,uint32_t);
+extern int32_t audio_uart_lv_style_pad_left_43efc6(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_style_pad_right_43eff4(void *,uint32_t);
+extern uint8_t audio_uart_lv_style_base_dir_43efba(void *,uint32_t);
+extern int32_t audio_uart_lv_self_height_43ff5e(void *);
+extern int32_t audio_uart_lv_self_width_43ff44(void *);
+extern int32_t audio_uart_lv_obj_height_43fdda(void *);
+extern int32_t audio_uart_lv_obj_width_43fd9e(void *);
+extern int32_t audio_uart_lv_obj_y_44e498(void *);
+extern int32_t audio_uart_lv_obj_x_44e486(void *);
+static int32_t lv336_add(int32_t a,int32_t b){return (int32_t)((uint32_t)a+(uint32_t)b);}
+static int32_t lv336_sub(int32_t a,int32_t b){return (int32_t)((uint32_t)a-(uint32_t)b);}
+static uint32_t lv336_word(const void *p,uint32_t offset)
+{return *(const volatile uint32_t *)((const uint8_t *)p+offset);}
+static void *lv336_child(void *object,uint32_t index)
+{
+    void *spec=(void *)(uintptr_t)lv336_word(object,8u);
+    void *children=(void *)(uintptr_t)lv336_word(spec,0u);
+    return (void *)(uintptr_t)lv336_word(children,index*4u);
+}
+static _Noreturn void lv336_null(uint32_t line,const char *function)
+{
+    audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\core\\lv_obj_scroll.c",
+        line,function,"Asserted at expression: %s (%s)","obj != NULL","NULL pointer");
+    for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+}
+int32_t audio_uart_lv_scroll_bottom_44e4bc(void *object)
+{
+    if(object==0)lv336_null(138u,"lv_obj_get_scroll_bottom");
+    const int32_t minimum=(int32_t)0xe0000001u;
+    int32_t child_res=minimum;uint32_t count=audio_uart_lv_child_count_44ddea(object);
+    for(uint32_t i=0;i<count;i++){
+        void *child=lv336_child(object,i);
+        if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
+        int32_t margin=audio_uart_lv_style_margin_bottom_43ef7a(child,0u);
+        int32_t tmp=lv336_add(margin,(int32_t)lv336_word(child,32u));
+        if(child_res<=tmp)child_res=tmp;
+    }
+    int32_t top=audio_uart_lv_style_pad_top_43f022(object,0u,0u,0u);
+    int32_t bottom=audio_uart_lv_style_pad_bottom_43f050(object,0u);
+    if(child_res!=minimum)child_res=lv336_add(bottom,lv336_sub(child_res,(int32_t)lv336_word(object,32u)));
+    int32_t self=audio_uart_lv_self_height_43ff5e(object);
+    int32_t height=audio_uart_lv_obj_height_43fdda(object);
+    self=lv336_add(bottom,lv336_add(top,lv336_sub(self,height)));
+    int32_t scroll=audio_uart_lv_obj_y_44e498(object);self=lv336_sub(self,scroll);
+    return self>=child_res?self:child_res;
+}
+int32_t audio_uart_lv_scroll_left_44e586(void *object)
+{
+    if(object==0)lv336_null(166u,"lv_obj_get_scroll_left");
+    if(audio_uart_lv_style_base_dir_43efba(object,0u)!=1u){
+        void *spec=(void *)(uintptr_t)lv336_word(object,8u);
+        return spec==0?0:(int32_t)(0u-lv336_word(spec,32u));
+    }
+    int32_t right=audio_uart_lv_style_pad_right_43eff4(object,0u);
+    int32_t left=audio_uart_lv_style_pad_left_43efc6(object,0u,0u,0u);
+    int32_t x1=0x1fffffff;uint32_t count=audio_uart_lv_child_count_44ddea(object);
+    for(uint32_t i=0;i<count;i++){
+        void *child=lv336_child(object,i);
+        if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
+        int32_t margin=audio_uart_lv_style_margin_left_43ef84(child,0u);
+        int32_t tmp=lv336_sub((int32_t)lv336_word(child,20u),margin);
+        if(tmp<=x1)x1=tmp;
+    }
+    int32_t child_res=(int32_t)0xe0000001u;
+    if(x1!=0x1fffffff)child_res=lv336_sub(lv336_add(left,(int32_t)lv336_word(object,20u)),x1);
+    int32_t self=audio_uart_lv_self_width_43ff44(object);
+    int32_t width=audio_uart_lv_obj_width_43fd9e(object);
+    self=lv336_add(right,lv336_add(left,lv336_sub(self,width)));
+    int32_t scroll=audio_uart_lv_obj_x_44e486(object);self=lv336_add(scroll,self);
+    return self>=child_res?self:child_res;
+}
+int32_t audio_uart_lv_scroll_right_44e67a(void *object)
+{
+    if(object==0)lv336_null(209u,"lv_obj_get_scroll_right");
+    if(audio_uart_lv_style_base_dir_43efba(object,0u)==1u){
+        void *spec=(void *)(uintptr_t)lv336_word(object,8u);
+        return spec==0?0:(int32_t)lv336_word(spec,32u);
+    }
+    const int32_t minimum=(int32_t)0xe0000001u;
+    int32_t child_res=minimum;uint32_t count=audio_uart_lv_child_count_44ddea(object);
+    for(uint32_t i=0;i<count;i++){
+        void *child=lv336_child(object,i);
+        if(audio_uart_lv_obj_has_flag_any_43e11c(child,0x40001u))continue;
+        int32_t margin=audio_uart_lv_style_margin_right_43ef8e(child,0u);
+        int32_t tmp=lv336_add(margin,(int32_t)lv336_word(child,28u));
+        if(child_res<=tmp)child_res=tmp;
+    }
+    int32_t right=audio_uart_lv_style_pad_right_43eff4(object,0u);
+    int32_t left=audio_uart_lv_style_pad_left_43efc6(object,0u,0u,0u);
+    if(child_res!=minimum)child_res=lv336_add(right,lv336_sub(child_res,(int32_t)lv336_word(object,28u)));
+    int32_t self=audio_uart_lv_self_width_43ff44(object);
+    int32_t width=audio_uart_lv_obj_width_43fd9e(object);
+    self=lv336_add(left,lv336_add(right,lv336_sub(self,width)));
+    int32_t scroll=audio_uart_lv_obj_x_44e486(object);self=lv336_sub(self,scroll);
+    return self>=child_res?self:child_res;
+}
+
+/* Entire native lv_obj_refr_size43f1a4..43f4bf (796bytes).
+ * Source: pinned Ambiq LVGL lv_obj_pos.c87-209 and original native assembly/lift.
+ * Historical basic_invalidate symbol retained to resolve its existing callers.
+ * UNADMITTED: native comparison/selected-TU/API-declaration gates remain. */
+#include <stdint.h>
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern void *audio_uart_lv_obj_parent_44dca2(void *);
+extern int32_t audio_uart_lv_obj_width_43fd9e(void *);
+extern int32_t audio_uart_lv_obj_height_43fdda(void *);
+extern int32_t audio_uart_lv_style_width_43eea6(void *,uint32_t);
+extern int32_t audio_uart_lv_style_min_width_43eeb0(void *,uint32_t);
+extern int32_t audio_uart_lv_style_max_width_43eeba(void *,uint32_t);
+extern int32_t audio_uart_lv_style_height_43eec4(void *,uint32_t);
+extern int32_t audio_uart_lv_style_min_height_43eece(void *,uint32_t);
+extern int32_t audio_uart_lv_style_max_height_43eed8(void *,uint32_t);
+extern int32_t audio_uart_lv_obj_content_width_43fe16(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_obj_content_height_43fe70(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_calc_content_width_440a3c(void *);
+extern int32_t audio_uart_lv_calc_content_height_440c2e(void *);
+extern int32_t audio_uart_lv_style_pad_left_43efc6(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_style_pad_right_43eff4(void *,uint32_t);
+extern int32_t audio_uart_lv_style_pad_top_43f022(void *,uint32_t,uint32_t,uint32_t);
+extern int32_t audio_uart_lv_style_pad_bottom_43f050(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_left_43ef84(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_right_43ef8e(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_top_43ef70(void *,uint32_t);
+extern int32_t audio_uart_lv_style_margin_bottom_43ef7a(void *,uint32_t);
+extern int32_t audio_uart_lv_clamp_width_4408d6(int32_t,int32_t,int32_t,int32_t);
+extern int32_t audio_uart_lv_clamp_height_440968(int32_t,int32_t,int32_t,int32_t);
+extern void audio_uart_display_size_changed(void *); /* native440656 invalidate */
+extern void audio_uart_lv_obj_coords_43fc2a(const void *,void *);
+extern void audio_uart_lv_obj_content_coords_43feca(void *,void *);
+extern uint32_t audio_uart_lv_area_contains_450f28(const int32_t *,const int32_t *,uint32_t);
+extern void audio_uart_lv_scrollbar_invalidate_44f2ca(void *);
+extern uint8_t audio_uart_lv_style_base_dir_43efba(void *,uint32_t);
+extern uint32_t audio_uart_lv_obj_event_451670(void *,uint32_t,void *);
+extern void audio_uart_lv_refresh_draw_452d42(void *);
+
+static uint16_t lv338_flags(const void *object)
+{return *(const volatile uint16_t *)((const uint8_t *)object+42u);}
+static int32_t lv338_coord(const void *object,uint32_t offset)
+{return *(const volatile int32_t *)((const uint8_t *)object+offset);}
+static void lv338_coordinate(void *object,uint32_t offset,int32_t value)
+{*(volatile int32_t *)((uint8_t *)object+offset)=value;}
+static int32_t lv338_add(int32_t a,int32_t b){return (int32_t)((uint32_t)a+(uint32_t)b);}
+static int32_t lv338_sub(int32_t a,int32_t b){return (int32_t)((uint32_t)a-(uint32_t)b);}
+static uint32_t lv338_is_percentage(uint32_t encoded)
+{return (encoded&0x60000000u)==0x20000000u && (int32_t)(encoded&0x9fffffffu)<0x1fffffff;}
+static int32_t lv338_percentage_size(uint32_t encoded,int32_t reference)
+{
+    int32_t plain=(int32_t)(encoded&0x9fffffffu);
+    int32_t factor=plain<0x10000000?plain:(int32_t)(0x0fffffffu-(uint32_t)plain);
+    int32_t product=(int32_t)((uint32_t)reference*(uint32_t)factor);
+    return product/100;
+}
+static _Noreturn void lv338_null(void)
+{
+    audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\core\\lv_obj_pos.c",
+        89u,"lv_obj_refr_size","Asserted at expression: %s (%s)","obj != NULL","NULL pointer");
+    for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+}
+uint32_t audio_uart_lv_basic_invalidate_43f1a4(void *object)
+{
+    if(object==0)lv338_null();
+    if((lv338_flags(object)&0xc00u)==0xc00u)return 0u;
+    void *parent=audio_uart_lv_obj_parent_44dca2(object);
+    if(parent==0)return 0u;
+    int32_t width,height;
+    if((lv338_flags(object)&0x800u)!=0u)width=audio_uart_lv_obj_width_43fd9e(object);
+    else{
+        uint32_t encoded=(uint32_t)audio_uart_lv_style_width_43eea6(object,0u);
+        uint32_t percentage=lv338_is_percentage(encoded);
+        int32_t reference=audio_uart_lv_obj_content_width_43fe16(parent,0u,0u,0u);
+        width=(int32_t)encoded;
+        if(encoded==0x3fffffffu)width=audio_uart_lv_calc_content_width_440a3c(object);
+        else if(percentage){
+            if((lv338_flags(parent)&0x800u)==0u &&
+               (uint32_t)audio_uart_lv_style_width_43eea6(parent,0u)==0x3fffffffu){
+                int32_t left=audio_uart_lv_style_pad_left_43efc6(object,0u,0u,0u);
+                int32_t right=audio_uart_lv_style_pad_right_43eff4(object,0u);width=lv338_add(right,left);
+            }else{
+                int32_t size=lv338_percentage_size(encoded,reference);
+                int32_t left=audio_uart_lv_style_margin_left_43ef84(object,0u);
+                int32_t right=audio_uart_lv_style_margin_right_43ef8e(object,0u);
+                width=lv338_sub(lv338_sub(size,left),right);
+            }
+        }
+        int32_t minimum=audio_uart_lv_style_min_width_43eeb0(object,0u);
+        int32_t maximum=audio_uart_lv_style_max_width_43eeba(object,0u);
+        width=audio_uart_lv_clamp_width_4408d6(width,minimum,maximum,reference);
+    }
+    if((lv338_flags(object)&0x400u)!=0u)height=audio_uart_lv_obj_height_43fdda(object);
+    else{
+        uint32_t encoded=(uint32_t)audio_uart_lv_style_height_43eec4(object,0u);
+        uint32_t percentage=lv338_is_percentage(encoded);
+        int32_t reference=audio_uart_lv_obj_content_height_43fe70(parent,0u,0u,0u);
+        height=(int32_t)encoded;
+        if(encoded==0x3fffffffu)height=audio_uart_lv_calc_content_height_440c2e(object);
+        else if(percentage){
+            if((lv338_flags(parent)&0x400u)==0u &&
+               (uint32_t)audio_uart_lv_style_height_43eec4(parent,0u)==0x3fffffffu){
+                int32_t top=audio_uart_lv_style_pad_top_43f022(object,0u,0u,0u);
+                int32_t bottom=audio_uart_lv_style_pad_bottom_43f050(object,0u);height=lv338_add(bottom,top);
+            }else{
+                int32_t size=lv338_percentage_size(encoded,reference);
+                int32_t top=audio_uart_lv_style_margin_top_43ef70(object,0u);
+                int32_t bottom=audio_uart_lv_style_margin_bottom_43ef7a(object,0u);
+                height=lv338_sub(lv338_sub(size,top),bottom);
+            }
+        }
+        int32_t minimum=audio_uart_lv_style_min_height_43eece(object,0u);
+        int32_t maximum=audio_uart_lv_style_max_height_43eed8(object,0u);
+        height=audio_uart_lv_clamp_height_440968(height,minimum,maximum,reference);
+    }
+    if(audio_uart_lv_obj_width_43fd9e(object)==width &&
+       audio_uart_lv_obj_height_43fdda(object)==height)return 0u;
+    audio_uart_display_size_changed(object);
+    int32_t original[4],parent_fit[4];
+    audio_uart_lv_obj_coords_43fc2a(object,original);
+    audio_uart_lv_obj_content_coords_43feca(parent,parent_fit);
+    uint8_t on1=(uint8_t)audio_uart_lv_area_contains_450f28(original,parent_fit,0u);
+    if(on1==0u)audio_uart_lv_scrollbar_invalidate_44f2ca(parent);
+    lv338_coordinate(object,32u,lv338_sub(lv338_add(height,lv338_coord(object,24u)),1));
+    if(audio_uart_lv_style_base_dir_43efba(object,0u)==1u)
+        lv338_coordinate(object,20u,lv338_add(lv338_sub(lv338_coord(object,28u),width),1));
+    else lv338_coordinate(object,28u,lv338_sub(lv338_add(width,lv338_coord(object,20u)),1));
+    (void)audio_uart_lv_obj_event_451670(object,49u,original);
+    (void)audio_uart_lv_obj_event_451670(parent,42u,object);
+    audio_uart_display_size_changed(object);
+    *(volatile uint16_t *)((uint8_t *)object+42u)=(uint16_t)(lv338_flags(object)|2u);
+    uint8_t on2=(uint8_t)audio_uart_lv_area_contains_450f28((const int32_t *)((uint8_t *)object+20u),parent_fit,0u);
+    if(on1!=0u || on2!=0u)audio_uart_lv_scrollbar_invalidate_44f2ca(parent);
+    audio_uart_lv_refresh_draw_452d42(object);
+    return 1u;
+}
+
+/* Six complete native LittleFS LVGL callbacks, source-backed lv_fs_littlefs.c.
+ * drv userdata48; output store/reread; whence UXTB; status0/12 andcleanup ordering.
+ * Underlying native LittleFS entrypoints remain explicit providers. */
+#include <stdint.h>
+extern int32_t audio_file_lfs_read(void *,void *,void *,uint32_t);
+extern int32_t audio_file_lfs_seek(void *,void *,int32_t,uint32_t);
+extern int32_t audio_file_lfs_tell(void *,void *);
+extern int32_t audio_file_lfs_close_4cfad0(void *,void *);
+extern int32_t audio_file_lfs_write_4cfb7c(void *,void *,const void *,uint32_t);
+extern int32_t audio_file_lfs_dir_close_4cfcf8(void *,void *);
+extern void audio_uart_lv_heap_free(void *);
+static void *lv342_filesystem(const void *driver)
+{return (void *)(uintptr_t)*(const volatile uint32_t *)((const uint8_t *)driver+48u);}
+uint32_t audio_uart_lv_fs_read_4c8ff0(void *driver,void *file,void *buffer,uint32_t count,uint32_t *output)
+{
+ int32_t result=audio_file_lfs_read(lv342_filesystem(driver),file,buffer,count);
+ volatile uint32_t *p=output;*p=(uint32_t)result;
+ return (int32_t)*p<0?12u:0u;
+}
+uint32_t audio_uart_lv_fs_write_4c900c(void *driver,void *file,const void *buffer,uint32_t count,uint32_t *output)
+{
+ int32_t result=audio_file_lfs_write_4cfb7c(lv342_filesystem(driver),file,buffer,count);
+ volatile uint32_t *p=output;*p=(uint32_t)result;
+ return (int32_t)*p<0?12u:0u;
+}
+uint32_t audio_uart_lv_fs_seek_4c9028(void *driver,void *file,uint32_t position,uint32_t whence)
+{
+ uint8_t narrowed=(uint8_t)whence;uint32_t mode=0u;
+ if(narrowed==1u)mode=1u;else if(narrowed==2u)mode=2u;
+ int32_t result=audio_file_lfs_seek(lv342_filesystem(driver),file,(int32_t)position,mode);
+ return result<0?12u:0u;
+}
+uint32_t audio_uart_lv_fs_tell_4c9064(void *driver,void *file,uint32_t *output)
+{
+ int32_t result=audio_file_lfs_tell(lv342_filesystem(driver),file);
+ volatile uint32_t *p=output;*p=(uint32_t)result;
+ return (int32_t)*p<0?12u:0u;
+}
+uint32_t audio_uart_lv_fs_close_4c8fd8(void *driver,void *file)
+{
+ (void)audio_file_lfs_close_4cfad0(lv342_filesystem(driver),file);
+ audio_uart_lv_heap_free(file);return 0u;
+}
+uint32_t audio_uart_lv_fs_dir_close_4c90e4(void *driver,void *directory)
+{
+ int32_t result=audio_file_lfs_dir_close_4cfcf8(lv342_filesystem(driver),directory);
+ if(result<0)return 12u;
+ audio_uart_lv_heap_free(directory);return 0u;
+}
+
+/* Complete native open4c8f58..4c8fd7,dir-open4c9080..4c90e1,dir-read4c9104..4c9175.
+ * Pinned lv_fs_littlefs.c; native allocation84/52,info264/name8,path256 retained.
+ * Unadmitted pending native/source-ABI/compiler qualification. */
+#include <stdint.h>
+#include <stddef.h>
+extern void *audio_uart_lv_malloc(uint32_t);
+extern void audio_uart_lv_heap_free(void *);
+extern void audio_uart_lvgl_log(uint32_t,const char *,uint32_t,const char *,const char *,...);
+extern int32_t audio_uart_lv_snprintf_483fd0(char *,uint32_t,const char *,...);
+extern uint32_t audio_uart_lv_strlcpy_454778(char *,const char *,uint32_t);
+extern int32_t audio_uart_lv_string_compare_4547be(const char *,const char *);
+extern int32_t audio_file_lfs_open(void *,void *,const char *,uint32_t);
+extern int32_t audio_file_lfs_dir_open_4cfc66(void *,void *,const char *);
+extern int32_t audio_file_lfs_dir_read_4cfd02(void *,void *,void *);
+struct lv344_info {uint8_t type;uint8_t reserved[3];uint32_t size;char name[256];};
+_Static_assert(sizeof(struct lv344_info)==264,"native info size");
+_Static_assert(offsetof(struct lv344_info,name)==8,"native info name offset");
+static void *lv344_filesystem(const void *driver)
+{return (void *)(uintptr_t)*(const volatile uint32_t *)((const uint8_t *)driver+48u);}
+static _Noreturn void lv344_oom(uint32_t line,const char *function,const char *expression)
+{
+ audio_uart_lvgl_log(3u,"D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\lvgl_v9.3\\LVGL\\src\\libs\\fsdrv\\lv_fs_littlefs.c",
+  line,function,"Asserted at expression: %s (%s)",expression,"Out of memory");
+ for(;;)*(volatile uint32_t *)(uintptr_t)UINT32_MAX=0u;
+}
+void *audio_uart_lv_fs_open_4c8f58(void *driver,const char *path,uint32_t mode)
+{
+ uint8_t narrowed=(uint8_t)mode;uint32_t flags=0;
+ if(narrowed==1u)flags=2u;else if(narrowed==2u)flags=1u;else if(narrowed==3u)flags=3u;
+ void *file=audio_uart_lv_malloc(84u);
+ if(file==0)lv344_oom(83u,"fs_open","lf != NULL");
+ char buffer[256];(void)audio_uart_lv_snprintf_483fd0(buffer,256u,"%s",path);
+ int32_t result=audio_file_lfs_open(lv344_filesystem(driver),file,buffer,flags);
+ if(result!=0)return 0; /* Native open error doesnotfree thisallocation. */
+ return file;
+}
+void *audio_uart_lv_fs_dir_open_4c9080(void *driver,const char *path)
+{
+ void *directory=audio_uart_lv_malloc(52u);
+ if(directory==0)lv344_oom(204u,"fs_dir_open","ld != NULL");
+ char buffer[256];(void)audio_uart_lv_snprintf_483fd0(buffer,256u,"%s",path);
+ int32_t result=audio_file_lfs_dir_open_4cfc66(lv344_filesystem(driver),directory,buffer);
+ if(result!=0){audio_uart_lv_heap_free(directory);return 0;}
+ return directory;
+}
+uint32_t audio_uart_lv_fs_dir_read_4c9104(void *driver,void *directory,char *filename,uint32_t length)
+{
+ if(length==0u)return 11u;
+ void *filesystem=lv344_filesystem(driver);
+ *(volatile uint8_t *)filename=0u;
+ struct lv344_info info;
+ for(;;){
+  int32_t result=audio_file_lfs_dir_read_4cfd02(filesystem,directory,&info);
+  if(result<0)return 12u;
+  if(result==0){*(volatile uint8_t *)filename=0u;return 0u;}
+  if(*(const volatile uint8_t *)&info.type==2u)
+   (void)audio_uart_lv_snprintf_483fd0(filename,length,"/%s",info.name);
+  else (void)audio_uart_lv_strlcpy_454778(filename,info.name,length);
+  if(audio_uart_lv_string_compare_4547be(filename,"/.")==0)continue;
+  if(audio_uart_lv_string_compare_4547be(filename,"/..")==0)continue;
+  return 0u;
+ }
+}
+
+/* Complete native public LittleFS entries anddir-close core.
+ * Unadmitted; native/source/compiler/runtime qualification remains.
+ * Pinned lfs.c6155/6207/6318 etc; native mlist offset40 retained. */
+#include <stdint.h>
+extern int32_t g2_lfs_mlist_isopen(void *,void *);
+extern void g2_file_close_error(const char *,const char *,uint32_t);
+extern int32_t g2_lfs_file_close(void *,void *);
+extern int32_t audio_file_lfs_write_core_4ce308(void *,void *,const void *,uint32_t);
+extern int32_t audio_file_lfs_dir_open_core_4cd558(void *,void *,const char *);
+extern int32_t audio_file_lfs_dir_read_core_4cd60e(void *,void *,void *);
+extern void g2_lfs_mlist_remove(void *,void *);
+static void *lfs347_list(const void *filesystem)
+{return (void *)(uintptr_t)*(const volatile uint32_t *)((const uint8_t *)filesystem+40u);}
+static const char lfs347_source[]="D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\littlefs\\lfs.c";
+static const char lfs347_open[]="lfs_mlist_isopen(lfs->mlist, (struct lfs_mlist*)file)";
+static const char lfs347_closed_dir[]="!lfs_mlist_isopen(lfs->mlist, (struct lfs_mlist*)dir)";
+int32_t audio_file_lfs_close_4cfad0(void *filesystem,void *file)
+{
+ if(g2_lfs_mlist_isopen(lfs347_list(filesystem),file)==0)
+  g2_file_close_error(lfs347_open,lfs347_source,6155u);
+ return g2_lfs_file_close(filesystem,file);
+}
+int32_t audio_file_lfs_write_4cfb7c(void *filesystem,void *file,const void *buffer,uint32_t size)
+{
+ if(g2_lfs_mlist_isopen(lfs347_list(filesystem),file)==0)
+  g2_file_close_error(lfs347_open,lfs347_source,6207u);
+ return audio_file_lfs_write_core_4ce308(filesystem,file,buffer,size);
+}
+int32_t audio_file_lfs_dir_open_4cfc66(void *filesystem,void *directory,const char *path)
+{
+ if(g2_lfs_mlist_isopen(lfs347_list(filesystem),directory)!=0)
+  g2_file_close_error(lfs347_closed_dir,lfs347_source,6318u);
+ return audio_file_lfs_dir_open_core_4cd558(filesystem,directory,path);
+}
+int32_t audio_file_lfs_dir_close_core_4cd604(void *filesystem,void *directory)
+{
+ g2_lfs_mlist_remove(filesystem,directory);return 0;
+}
+int32_t audio_file_lfs_dir_close_4cfcf8(void *filesystem,void *directory)
+{return audio_file_lfs_dir_close_core_4cd604(filesystem,directory);}
+int32_t audio_file_lfs_dir_read_4cfd02(void *filesystem,void *directory,void *info)
+{return audio_file_lfs_dir_read_core_4cd60e(filesystem,directory,info);}

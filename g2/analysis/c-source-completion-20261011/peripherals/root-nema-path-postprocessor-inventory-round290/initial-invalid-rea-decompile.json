@@ -1,0 +1,134 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"evidence_id\":\"ev_503df23ba67da457bd5b4aecdf3dae499522d758e8fb2c782a522b71786be7ed\",\"subject\":{\"name\":\"native-analysis-only.elf\",\"digest\":{\"sha256\":\"6fcb90c5863a76c2ddafe1c7225e19f22dbf986d0a96f27e9d1a89ab2eca8992\"},\"format\":\"elf\",\"architecture\":\"arm\",\"local_path\":\"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-nema-path-postprocessor-inventory-round290/native-analysis-only.elf\"},\"provider\":{\"id\":\"rea-workflow\",\"name\":\"REA composed investigation workflow\",\"version\":\"1\"},\"analysis_profile\":{\"provider\":{\"id\":\"rea-workflow\",\"name\":\"REA composed investigation workflow\",\"version\":\"1\"},\"parameters\":{\"upstream_analysis_profile\":{\"provider\":{\"id\":\"ghidra\",\"name\":\"Ghidra\",\"version\":\"12.1.4\"},\"parameters\":{\"target_kind\":\"executable\",\"target_format\":\"elf\",\"architecture\":\"arm\",\"available_architectures\":[\"arm\"],\"import_mode\":\"ephemeral-source-immutable\",\"annotation_policy\":\"atomic-function-entry-metadata-v1\",\"load_image_observations\":\"source-mappings-entry-context-v2\",\"function_body_evidence\":\"complete-inclusive-ranges-v1\",\"function_references\":\"complete-body-and-entry-reference-manager-v2\",\"location_resolution\":\"explicit-address-exact-entry-symbol-first-v3\",\"instruction_flow_evidence\":\"decoded-return-pcode-v1\",\"process_launch\":\"inspected-jvm-launch-support-v1\",\"jump_table_evidence\":\"typed-case-default-blocks-v1\",\"decompiler_jump_loads\":true,\"loader\":\"auto-from-header\",\"language_id\":\"auto-from-header\",\"compiler_spec_id\":\"auto-default\",\"analyzer_preset\":\"ghidra-default\"},\"digest\":\"d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26\"},\"workflow_revision\":2},\"digest\":\"539ae87a089f8e9cc48d8dfe6045113a342d9c0b239d427d77365e4fe1d5cf26\"},\"predicate_type\":\"rea.analysis\",\"operation\":\"batch_decompile\",\"parameters\":{\"addresses\":[\"0x561c68\"]},\"raw_result\":null,\"normalized_result\":{\"items\":[{\"address\":\"0x561c68\",\"procedure\":{\"status\":\"unknown\",\"error\":{\"code\":\"invalid_request\",\"category\":\"invalid_input\",\"message\":\"Analysis input is invalid. Check the arguments and try again.\",\"retryable\":true,\"remediation\":{\"action\":\"Correct the listed arguments and retry.\"},\"details\":{\"operation\":\"procedure_address\",\"issues\":[{\"path\":[],\"reason\":\"invalid_value\",\"message\":\"No procedure exists at the requested address: 0x561c68\"}]}}},\"status\":\"error\",\"error\":{\"code\":\"invalid_request\",\"category\":\"invalid_input\",\"message\":\"Analysis input is invalid. Check the arguments and try again.\",\"retryable\":true,\"remediation\":{\"action\":\"Correct the listed arguments and retry.\"},\"details\":{\"operation\":\"procedure_pseudo_code\",\"issues\":[{\"path\":[],\"reason\":\"invalid_value\",\"message\":\"No procedure exists at the requested address: 0x561c68\"}]}}}],\"total\":1,\"succeeded\":0,\"failed\":1},\"confidence\":\"derived\",\"authority\":\"shipped-artifact\",\"environment\":null,\"limitations\":[\"Derived by an REA composed workflow.\"],\"locations\":[],\"evidence_links\":[]}"
+    }
+  ],
+  "structuredContent": {
+    "evidence_id": "ev_503df23ba67da457bd5b4aecdf3dae499522d758e8fb2c782a522b71786be7ed",
+    "subject": {
+      "name": "native-analysis-only.elf",
+      "digest": {
+        "sha256": "6fcb90c5863a76c2ddafe1c7225e19f22dbf986d0a96f27e9d1a89ab2eca8992"
+      },
+      "format": "elf",
+      "architecture": "arm",
+      "local_path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-nema-path-postprocessor-inventory-round290/native-analysis-only.elf"
+    },
+    "provider": {
+      "id": "rea-workflow",
+      "name": "REA composed investigation workflow",
+      "version": "1"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "rea-workflow",
+        "name": "REA composed investigation workflow",
+        "version": "1"
+      },
+      "parameters": {
+        "upstream_analysis_profile": {
+          "provider": {
+            "id": "ghidra",
+            "name": "Ghidra",
+            "version": "12.1.4"
+          },
+          "parameters": {
+            "target_kind": "executable",
+            "target_format": "elf",
+            "architecture": "arm",
+            "available_architectures": [
+              "arm"
+            ],
+            "import_mode": "ephemeral-source-immutable",
+            "annotation_policy": "atomic-function-entry-metadata-v1",
+            "load_image_observations": "source-mappings-entry-context-v2",
+            "function_body_evidence": "complete-inclusive-ranges-v1",
+            "function_references": "complete-body-and-entry-reference-manager-v2",
+            "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+            "instruction_flow_evidence": "decoded-return-pcode-v1",
+            "process_launch": "inspected-jvm-launch-support-v1",
+            "jump_table_evidence": "typed-case-default-blocks-v1",
+            "decompiler_jump_loads": true,
+            "loader": "auto-from-header",
+            "language_id": "auto-from-header",
+            "compiler_spec_id": "auto-default",
+            "analyzer_preset": "ghidra-default"
+          },
+          "digest": "d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26"
+        },
+        "workflow_revision": 2
+      },
+      "digest": "539ae87a089f8e9cc48d8dfe6045113a342d9c0b239d427d77365e4fe1d5cf26"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "batch_decompile",
+    "parameters": {
+      "addresses": [
+        "0x561c68"
+      ]
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "items": [
+        {
+          "address": "0x561c68",
+          "procedure": {
+            "status": "unknown",
+            "error": {
+              "code": "invalid_request",
+              "category": "invalid_input",
+              "message": "Analysis input is invalid. Check the arguments and try again.",
+              "retryable": true,
+              "remediation": {
+                "action": "Correct the listed arguments and retry."
+              },
+              "details": {
+                "operation": "procedure_address",
+                "issues": [
+                  {
+                    "path": [],
+                    "reason": "invalid_value",
+                    "message": "No procedure exists at the requested address: 0x561c68"
+                  }
+                ]
+              }
+            }
+          },
+          "status": "error",
+          "error": {
+            "code": "invalid_request",
+            "category": "invalid_input",
+            "message": "Analysis input is invalid. Check the arguments and try again.",
+            "retryable": true,
+            "remediation": {
+              "action": "Correct the listed arguments and retry."
+            },
+            "details": {
+              "operation": "procedure_pseudo_code",
+              "issues": [
+                {
+                  "path": [],
+                  "reason": "invalid_value",
+                  "message": "No procedure exists at the requested address: 0x561c68"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "total": 1,
+      "succeeded": 0,
+      "failed": 1
+    },
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Derived by an REA composed workflow."
+    ],
+    "locations": [],
+    "evidence_links": []
+  }
+}

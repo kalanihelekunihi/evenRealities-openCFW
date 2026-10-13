@@ -1,0 +1,156 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+005094c0 <.data+0xd14c0>:
+  5094c0:	eddf 0a62 	vldr	s1, [pc, #392]	@ 0x50964c
+  5094c4:	ee60 0a20 	vmul.f32	s1, s0, s1
+  5094c8:	ee10 2a90 	vmov	r2, s1
+  5094cc:	f022 4100 	bic.w	r1, r2, #2147483648	@ 0x80000000
+  5094d0:	ee01 1a10 	vmov	s2, r1
+  5094d4:	eddf 1a5e 	vldr	s3, [pc, #376]	@ 0x509650
+  5094d8:	eeb4 1a61 	vcmp.f32	s2, s3
+  5094dc:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5094e0:	d525      	bpl.n	0x50952e
+  5094e2:	f04f 517c 	mov.w	r1, #1056964608	@ 0x3f000000
+  5094e6:	f002 4200 	and.w	r2, r2, #2147483648	@ 0x80000000
+  5094ea:	430a      	orrs	r2, r1
+  5094ec:	ee01 2a10 	vmov	s2, r2
+  5094f0:	ee71 0a20 	vadd.f32	s1, s2, s1
+  5094f4:	eefd 0ae0 	vcvt.s32.f32	s1, s1
+  5094f8:	ee10 1a90 	vmov	r1, s1
+  5094fc:	2900      	cmp	r1, #0
+  5094fe:	d06a      	beq.n	0x5095d6
+  509500:	eefa 0ac9 	vcvt.f32.s32	s1, s1, #14
+  509504:	ed9f 1a53 	vldr	s2, [pc, #332]	@ 0x509654
+  509508:	ee00 0a81 	vmla.f32	s0, s1, s2
+  50950c:	eddf 1a52 	vldr	s3, [pc, #328]	@ 0x509658
+  509510:	ee00 0aa1 	vmla.f32	s0, s1, s3
+  509514:	ed9f 2a51 	vldr	s4, [pc, #324]	@ 0x50965c
+  509518:	ee00 0a82 	vmla.f32	s0, s1, s4
+  50951c:	eddf 2a50 	vldr	s5, [pc, #320]	@ 0x509660
+  509520:	ee00 0aa2 	vmla.f32	s0, s1, s5
+  509524:	ed9f 1a4f 	vldr	s2, [pc, #316]	@ 0x509664
+  509528:	ee00 0a81 	vmla.f32	s0, s1, s2
+  50952c:	e053      	b.n	0x5095d6
+  50952e:	ee10 1a10 	vmov	r1, s0
+  509532:	004b      	lsls	r3, r1, #1
+  509534:	161b      	asrs	r3, r3, #24
+  509536:	f113 0f01 	cmn.w	r3, #1
+  50953a:	d10a      	bne.n	0x509552
+  50953c:	0049      	lsls	r1, r1, #1
+  50953e:	1608      	asrs	r0, r1, #24
+  509540:	f110 0f01 	cmn.w	r0, #1
+  509544:	d102      	bne.n	0x50954c
+  509546:	0209      	lsls	r1, r1, #8
+  509548:	f040 807f 	bne.w	0x50964a
+  50954c:	ed9f 0a46 	vldr	s0, [pc, #280]	@ 0x509668
+  509550:	4770      	bx	lr
+  509552:	0049      	lsls	r1, r1, #1
+  509554:	d104      	bne.n	0x509560
+  509556:	2800      	cmp	r0, #0
+  509558:	d077      	beq.n	0x50964a
+  50955a:	eeb7 0a00 	vmov.f32	s0, #112	@ 0x3f800000  1.0
+  50955e:	4770      	bx	lr
+  509560:	f04f 517c 	mov.w	r1, #1056964608	@ 0x3f000000
+  509564:	f002 4200 	and.w	r2, r2, #2147483648	@ 0x80000000
+  509568:	430a      	orrs	r2, r1
+  50956a:	ee01 2a10 	vmov	s2, r2
+  50956e:	ee71 0a20 	vadd.f32	s1, s2, s1
+  509572:	ee10 2a90 	vmov	r2, s1
+  509576:	0051      	lsls	r1, r2, #1
+  509578:	d00d      	beq.n	0x509596
+  50957a:	0e09      	lsrs	r1, r1, #24
+  50957c:	f1c1 0196 	rsb	r1, r1, #150	@ 0x96
+  509580:	2918      	cmp	r1, #24
+  509582:	bfa8      	it	ge
+  509584:	f002 4200 	andge.w	r2, r2, #2147483648	@ 0x80000000
+  509588:	da03      	bge.n	0x509592
+  50958a:	2900      	cmp	r1, #0
+  50958c:	bfc4      	itt	gt
+  50958e:	40ca      	lsrgt	r2, r1
+  509590:	408a      	lslgt	r2, r1
+  509592:	ee00 2a90 	vmov	s1, r2
+  509596:	ee10 1a90 	vmov	r1, s1
+  50959a:	0049      	lsls	r1, r1, #1
+  50959c:	d017      	beq.n	0x5095ce
+  50959e:	ed9f 1a33 	vldr	s2, [pc, #204]	@ 0x50966c
+  5095a2:	ee20 1a81 	vmul.f32	s2, s1, s2
+  5095a6:	eddf 1a2b 	vldr	s3, [pc, #172]	@ 0x509654
+  5095aa:	ee01 0a21 	vmla.f32	s0, s2, s3
+  5095ae:	ed9f 2a2a 	vldr	s4, [pc, #168]	@ 0x509658
+  5095b2:	ee01 0a02 	vmla.f32	s0, s2, s4
+  5095b6:	eddf 2a29 	vldr	s5, [pc, #164]	@ 0x50965c
+  5095ba:	ee01 0a22 	vmla.f32	s0, s2, s5
+  5095be:	ed9f 3a28 	vldr	s6, [pc, #160]	@ 0x509660
+  5095c2:	ee01 0a03 	vmla.f32	s0, s2, s6
+  5095c6:	eddf 1a27 	vldr	s3, [pc, #156]	@ 0x509664
+  5095ca:	ee01 0a21 	vmla.f32	s0, s2, s3
+  5095ce:	eefd 0ae0 	vcvt.s32.f32	s1, s1
+  5095d2:	ee10 1a90 	vmov	r1, s1
+  5095d6:	f001 0103 	and.w	r1, r1, #3
+  5095da:	1808      	adds	r0, r1, r0
+  5095dc:	ee10 1a10 	vmov	r1, s0
+  5095e0:	f021 4100 	bic.w	r1, r1, #2147483648	@ 0x80000000
+  5095e4:	ee00 1a90 	vmov	s1, r1
+  5095e8:	ed9f 1a21 	vldr	s2, [pc, #132]	@ 0x509670
+  5095ec:	eef4 0a41 	vcmp.f32	s1, s2
+  5095f0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5095f4:	d504      	bpl.n	0x509600
+  5095f6:	07c1      	lsls	r1, r0, #31
+  5095f8:	d523      	bpl.n	0x509642
+  5095fa:	eeb7 0a00 	vmov.f32	s0, #112	@ 0x3f800000  1.0
+  5095fe:	e020      	b.n	0x509642
+  509600:	07c1      	lsls	r1, r0, #31
+  509602:	ee60 0a00 	vmul.f32	s1, s0, s0
+  509606:	d50e      	bpl.n	0x509626
+  509608:	ed9f 0a1a 	vldr	s0, [pc, #104]	@ 0x509674
+  50960c:	ed9f 1a1a 	vldr	s2, [pc, #104]	@ 0x509678
+  509610:	ee00 1a80 	vmla.f32	s2, s1, s0
+  509614:	eddf 1a19 	vldr	s3, [pc, #100]	@ 0x50967c
+  509618:	ee41 1a20 	vmla.f32	s3, s2, s1
+  50961c:	eeb7 0a00 	vmov.f32	s0, #112	@ 0x3f800000  1.0
+  509620:	ee01 0aa0 	vmla.f32	s0, s3, s1
+  509624:	e00d      	b.n	0x509642
+  509626:	ed9f 2a16 	vldr	s4, [pc, #88]	@ 0x509680
+  50962a:	eddf 1a16 	vldr	s3, [pc, #88]	@ 0x509684
+  50962e:	ee40 1a82 	vmla.f32	s3, s1, s4
+  509632:	eddf 2a15 	vldr	s5, [pc, #84]	@ 0x509688
+  509636:	ee20 1a20 	vmul.f32	s2, s0, s1
+  50963a:	ee41 2aa0 	vmla.f32	s5, s3, s1
+  50963e:	ee01 0a22 	vmla.f32	s0, s2, s5
+  509642:	0780      	lsls	r0, r0, #30
+  509644:	bf48      	it	mi
+  509646:	eeb1 0a40 	vnegmi.f32	s0, s0
+  50964a:	4770      	bx	lr
+  50964c:	f983 3f22 	vst4.<illegal width 64>	{d3[0],d4[0],d5[0],d6[0]}, [r3], r2
+  509650:	0000      	movs	r0, r0
+  509652:	4f00      	ldr	r7, [pc, #0]	@ (0x509654)
+  509654:	0000      	movs	r0, r0
+  509656:	c6c9      	stmia	r6!, {r0, r3, r6, r7}
+  509658:	a000      	add	r0, pc, #0	@ (adr r0, 0x50965c)
+  50965a:	c0fd      	stmia	r0!, {r0, r2, r3, r4, r5, r6, r7}
+  50965c:	2000      	movs	r0, #0
+  50965e:	baa2      	hlt	0x0022
+  509660:	0000      	movs	r0, r0
+  509662:	b334      	cbz	r4, 0x5096b2
+  509664:	3000      	adds	r0, #0
+  509666:	aec2      	add	r6, sp, #776	@ 0x308
+  509668:	ffff 7fff 			@ <UNDEFINED> instruction: 0xffff7fff
+  50966c:	0000      	movs	r0, r0
+  50966e:	3880      	subs	r0, #128	@ 0x80
+  509670:	0000      	movs	r0, r0
+  509672:	3980      	subs	r1, #128	@ 0x80
+  509674:	4993      	ldr	r1, [pc, #588]	@ (0x5098c4)
+  509676:	bab2      	hlt	0x0032
+  509678:	a036      	add	r0, pc, #216	@ (adr r0, 0x509754)
+  50967a:	3d2a      	subs	r5, #42	@ 0x2a
+  50967c:	ffdf beff 			@ <UNDEFINED> instruction: 0xffdfbeff
+  509680:	8c6e      	ldrh	r6, [r5, #34]	@ 0x22
+  509682:	b94c      	cbnz	r4, 0x509698
+  509684:	8342      	strh	r2, [r0, #26]
+  509686:	3c08      	subs	r4, #8
+  509688:	aaa1      	add	r2, sp, #644	@ 0x284
+  50968a:	be2a      	bkpt	0x002a

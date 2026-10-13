@@ -1,0 +1,304 @@
+
+/tmp/opencfw-main-native.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00561c68 <.data+0x129c68>:
+  561c68:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  561c6c:	b081      	sub	sp, #4
+  561c6e:	4605      	mov	r5, r0
+  561c70:	ed2d 8b10 	vpush	{d8-d15}
+  561c74:	b0a2      	sub	sp, #136	@ 0x88
+  561c76:	f7b3 f8c9 	bl	0x514e0c
+  561c7a:	4668      	mov	r0, sp
+  561c7c:	2148      	movs	r1, #72	@ 0x48
+  561c7e:	f727 fc0d 	bl	0x48949c
+  561c82:	2001      	movs	r0, #1
+  561c84:	f88d 0000 	strb.w	r0, [sp]
+  561c88:	f88d 0001 	strb.w	r0, [sp, #1]
+  561c8c:	f88d 0002 	strb.w	r0, [sp, #2]
+  561c90:	6828      	ldr	r0, [r5, #0]
+  561c92:	2800      	cmp	r0, #0
+  561c94:	bf1f      	itttt	ne
+  561c96:	68a8      	ldrne	r0, [r5, #8]
+  561c98:	7801      	ldrbne	r1, [r0, #0]
+  561c9a:	f021 0190 	bicne.w	r1, r1, #144	@ 0x90
+  561c9e:	2901      	cmpne	r1, #1
+  561ca0:	d02b      	beq.n	0x561cfa
+  561ca2:	ed95 0a04 	vldr	s0, [r5, #16]
+  561ca6:	eeb5 0a40 	vcmp.f32	s0, #0.0
+  561caa:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  561cae:	bfc8      	it	gt
+  561cb0:	ed9f 0a4d 	vldrgt	s0, [pc, #308]	@ 0x561de8
+  561cb4:	ed85 0a04 	vstr	s0, [r5, #16]
+  561cb8:	ed95 0a05 	vldr	s0, [r5, #20]
+  561cbc:	eeb5 0a40 	vcmp.f32	s0, #0.0
+  561cc0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  561cc4:	bfc8      	it	gt
+  561cc6:	ed9f 0a48 	vldrgt	s0, [pc, #288]	@ 0x561de8
+  561cca:	ed85 0a05 	vstr	s0, [r5, #20]
+  561cce:	ed95 0a06 	vldr	s0, [r5, #24]
+  561cd2:	eeb5 0a40 	vcmp.f32	s0, #0.0
+  561cd6:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  561cda:	bf48      	it	mi
+  561cdc:	ed9f 0a42 	vldrmi	s0, [pc, #264]	@ 0x561de8
+  561ce0:	ed85 0a06 	vstr	s0, [r5, #24]
+  561ce4:	ed95 0a07 	vldr	s0, [r5, #28]
+  561ce8:	eeb5 0a40 	vcmp.f32	s0, #0.0
+  561cec:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  561cf0:	bf48      	it	mi
+  561cf2:	ed9f 0a3d 	vldrmi	s0, [pc, #244]	@ 0x561de8
+  561cf6:	ed85 0a07 	vstr	s0, [r5, #28]
+  561cfa:	6828      	ldr	r0, [r5, #0]
+  561cfc:	2100      	movs	r1, #0
+  561cfe:	2800      	cmp	r0, #0
+  561d00:	f001 85b2 	beq.w	0x563868
+  561d04:	9118      	str	r1, [sp, #96]	@ 0x60
+  561d06:	68a8      	ldr	r0, [r5, #8]
+  561d08:	9918      	ldr	r1, [sp, #96]	@ 0x60
+  561d0a:	5c43      	ldrb	r3, [r0, r1]
+  561d0c:	a905      	add	r1, sp, #20
+  561d0e:	a803      	add	r0, sp, #12
+  561d10:	ec91 0a02 	vldmia	r1, {s0-s1}
+  561d14:	ec80 0a02 	vstmia	r0, {s0-s1}
+  561d18:	2000      	movs	r0, #0
+  561d1a:	06d9      	lsls	r1, r3, #27
+  561d1c:	bf48      	it	mi
+  561d1e:	2001      	movmi	r0, #1
+  561d20:	f89d 2044 	ldrb.w	r2, [sp, #68]	@ 0x44
+  561d24:	f003 046f 	and.w	r4, r3, #111	@ 0x6f
+  561d28:	2c01      	cmp	r4, #1
+  561d2a:	f002 026f 	and.w	r2, r2, #111	@ 0x6f
+  561d2e:	d170      	bne.n	0x561e12
+  561d30:	f89d 2001 	ldrb.w	r2, [sp, #1]
+  561d34:	9901      	ldr	r1, [sp, #4]
+  561d36:	2a01      	cmp	r2, #1
+  561d38:	d137      	bne.n	0x561daa
+  561d3a:	b3b1      	cbz	r1, 0x561daa
+  561d3c:	f89d 2000 	ldrb.w	r2, [sp]
+  561d40:	ed9f 0a29 	vldr	s0, [pc, #164]	@ 0x561de8
+  561d44:	eddf 0a28 	vldr	s1, [pc, #160]	@ 0x561de8
+  561d48:	b91a      	cbnz	r2, 0x561d52
+  561d4a:	ed9d 0a0f 	vldr	s0, [sp, #60]	@ 0x3c
+  561d4e:	eddd 0a10 	vldr	s1, [sp, #64]	@ 0x40
+  561d52:	ed95 1a04 	vldr	s2, [r5, #16]
+  561d56:	eeb4 0a41 	vcmp.f32	s0, s2
+  561d5a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  561d5e:	bf48      	it	mi
+  561d60:	eeb0 1a40 	vmovmi.f32	s2, s0
+  561d64:	ed85 1a04 	vstr	s2, [r5, #16]
+  561d68:	ed95 1a05 	vldr	s2, [r5, #20]
+  561d6c:	eef4 0a41 	vcmp.f32	s1, s2
+  561d70:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  561d74:	bf48      	it	mi
+  561d76:	eeb0 1a60 	vmovmi.f32	s2, s1
+  561d7a:	ed85 1a05 	vstr	s2, [r5, #20]
+  561d7e:	ed95 1a06 	vldr	s2, [r5, #24]
+  561d82:	eeb4 1a40 	vcmp.f32	s2, s0
+  561d86:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  561d8a:	bf58      	it	pl
+  561d8c:	eeb0 0a41 	vmovpl.f32	s0, s2
+  561d90:	ed85 0a06 	vstr	s0, [r5, #24]
+  561d94:	ed95 0a07 	vldr	s0, [r5, #28]
+  561d98:	eeb4 0a60 	vcmp.f32	s0, s1
+  561d9c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  561da0:	bf58      	it	pl
+  561da2:	eef0 0a40 	vmovpl.f32	s1, s0
+  561da6:	edc5 0a07 	vstr	s1, [r5, #28]
+  561daa:	2200      	movs	r2, #0
+  561dac:	f88d 2000 	strb.w	r2, [sp]
+  561db0:	f88d 4002 	strb.w	r4, [sp, #2]
+  561db4:	9102      	str	r1, [sp, #8]
+  561db6:	68ea      	ldr	r2, [r5, #12]
+  561db8:	eb02 0481 	add.w	r4, r2, r1, lsl #2
+  561dbc:	ed94 0a00 	vldr	s0, [r4]
+  561dc0:	b1a0      	cbz	r0, 0x561dec
+  561dc2:	eddd 0a0b 	vldr	s1, [sp, #44]	@ 0x2c
+  561dc6:	ee30 0a80 	vadd.f32	s0, s1, s0
+  561dca:	1c49      	adds	r1, r1, #1
+  561dcc:	eb02 0081 	add.w	r0, r2, r1, lsl #2
+  561dd0:	ed8d 0a05 	vstr	s0, [sp, #20]
+  561dd4:	9101      	str	r1, [sp, #4]
+  561dd6:	ed9d 0a0c 	vldr	s0, [sp, #48]	@ 0x30
+  561dda:	edd0 0a00 	vldr	s1, [r0]
+  561dde:	ee70 0a20 	vadd.f32	s1, s0, s1
+  561de2:	edcd 0a06 	vstr	s1, [sp, #24]
+  561de6:	e008      	b.n	0x561dfa
+  561de8:	0000      	movs	r0, r0
+  561dea:	0000      	movs	r0, r0
+  561dec:	1c49      	adds	r1, r1, #1
+  561dee:	ed8d 0a05 	vstr	s0, [sp, #20]
+  561df2:	9101      	str	r1, [sp, #4]
+  561df4:	f852 2021 	ldr.w	r2, [r2, r1, lsl #2]
+  561df8:	9206      	str	r2, [sp, #24]
+  561dfa:	9805      	ldr	r0, [sp, #20]
+  561dfc:	1c49      	adds	r1, r1, #1
+  561dfe:	9101      	str	r1, [sp, #4]
+  561e00:	900b      	str	r0, [sp, #44]	@ 0x2c
+  561e02:	9806      	ldr	r0, [sp, #24]
+  561e04:	900c      	str	r0, [sp, #48]	@ 0x30
+  561e06:	9805      	ldr	r0, [sp, #20]
+  561e08:	900f      	str	r0, [sp, #60]	@ 0x3c
+  561e0a:	9806      	ldr	r0, [sp, #24]
+  561e0c:	9010      	str	r0, [sp, #64]	@ 0x40
+  561e0e:	f000 bca1 	b.w	0x562754
+  561e12:	0019      	movs	r1, r3
+  561e14:	bf18      	it	ne
+  561e16:	2b80      	cmpne	r3, #128	@ 0x80
+  561e18:	f000 8487 	beq.w	0x56272a
+  561e1c:	9901      	ldr	r1, [sp, #4]
+  561e1e:	b911      	cbnz	r1, 0x561e26
+  561e20:	2601      	movs	r6, #1
+  561e22:	f88d 6000 	strb.w	r6, [sp]
+  561e26:	f04f 0b00 	mov.w	fp, #0
+  561e2a:	f88d b002 	strb.w	fp, [sp, #2]
+  561e2e:	2c06      	cmp	r4, #6
+  561e30:	d13c      	bne.n	0x561eac
+  561e32:	68ea      	ldr	r2, [r5, #12]
+  561e34:	eb02 0481 	add.w	r4, r2, r1, lsl #2
+  561e38:	1c49      	adds	r1, r1, #1
+  561e3a:	ed94 0a00 	vldr	s0, [r4]
+  561e3e:	eb02 0481 	add.w	r4, r2, r1, lsl #2
+  561e42:	ed8d 0a07 	vstr	s0, [sp, #28]
+  561e46:	9101      	str	r1, [sp, #4]
+  561e48:	edd4 0a00 	vldr	s1, [r4]
+  561e4c:	1c49      	adds	r1, r1, #1
+  561e4e:	eb02 0481 	add.w	r4, r2, r1, lsl #2
+  561e52:	edcd 0a08 	vstr	s1, [sp, #32]
+  561e56:	9101      	str	r1, [sp, #4]
+  561e58:	ed94 1a00 	vldr	s2, [r4]
+  561e5c:	1c49      	adds	r1, r1, #1
+  561e5e:	eb02 0281 	add.w	r2, r2, r1, lsl #2
+  561e62:	ed8d 1a09 	vstr	s2, [sp, #36]	@ 0x24
+  561e66:	9101      	str	r1, [sp, #4]
+  561e68:	edd2 1a00 	vldr	s3, [r2]
+  561e6c:	1c49      	adds	r1, r1, #1
+  561e6e:	edcd 1a0a 	vstr	s3, [sp, #40]	@ 0x28
+  561e72:	9101      	str	r1, [sp, #4]
+  561e74:	2800      	cmp	r0, #0
+  561e76:	f000 80cd 	beq.w	0x562014
+  561e7a:	ed9d 2a0b 	vldr	s4, [sp, #44]	@ 0x2c
+  561e7e:	ee30 0a02 	vadd.f32	s0, s0, s4
+  561e82:	ed8d 0a07 	vstr	s0, [sp, #28]
+  561e86:	ed9d 0a0c 	vldr	s0, [sp, #48]	@ 0x30
+  561e8a:	ee70 0a80 	vadd.f32	s1, s1, s0
+  561e8e:	edcd 0a08 	vstr	s1, [sp, #32]
+  561e92:	ee71 0a02 	vadd.f32	s1, s2, s4
+  561e96:	ee31 0a80 	vadd.f32	s0, s3, s0
+  561e9a:	edcd 0a09 	vstr	s1, [sp, #36]	@ 0x24
+  561e9e:	ed8d 0a0a 	vstr	s0, [sp, #40]	@ 0x28
+  561ea2:	edcd 0a0d 	vstr	s1, [sp, #52]	@ 0x34
+  561ea6:	ed8d 0a0e 	vstr	s0, [sp, #56]	@ 0x38
+  561eaa:	e048      	b.n	0x561f3e
+  561eac:	2c05      	cmp	r4, #5
+  561eae:	d12e      	bne.n	0x561f0e
+  561eb0:	68ea      	ldr	r2, [r5, #12]
+  561eb2:	eb02 0481 	add.w	r4, r2, r1, lsl #2
+  561eb6:	1c49      	adds	r1, r1, #1
+  561eb8:	ed94 0a00 	vldr	s0, [r4]
+  561ebc:	eb02 0281 	add.w	r2, r2, r1, lsl #2
+  561ec0:	ed8d 0a07 	vstr	s0, [sp, #28]
+  561ec4:	9101      	str	r1, [sp, #4]
+  561ec6:	edd2 0a00 	vldr	s1, [r2]
+  561eca:	1c49      	adds	r1, r1, #1
+  561ecc:	edcd 0a08 	vstr	s1, [sp, #32]
+  561ed0:	9101      	str	r1, [sp, #4]
+  561ed2:	b958      	cbnz	r0, 0x561eec
+  561ed4:	ed8d 0a0d 	vstr	s0, [sp, #52]	@ 0x34
+  561ed8:	edcd 0a0e 	vstr	s1, [sp, #56]	@ 0x38
+  561edc:	68e9      	ldr	r1, [r5, #12]
+  561ede:	9a01      	ldr	r2, [sp, #4]
+  561ee0:	f851 4022 	ldr.w	r4, [r1, r2, lsl #2]
+  561ee4:	1c52      	adds	r2, r2, #1
+  561ee6:	9201      	str	r2, [sp, #4]
+  561ee8:	9405      	str	r4, [sp, #20]
+  561eea:	e0dd      	b.n	0x5620a8
+  561eec:	ed9d 1a0b 	vldr	s2, [sp, #44]	@ 0x2c
+  561ef0:	ee30 0a01 	vadd.f32	s0, s0, s2
+  561ef4:	ed9d 1a0c 	vldr	s2, [sp, #48]	@ 0x30
+  561ef8:	ee70 0a81 	vadd.f32	s1, s1, s2
+  561efc:	ed8d 0a07 	vstr	s0, [sp, #28]
+  561f00:	edcd 0a08 	vstr	s1, [sp, #32]
+  561f04:	ed8d 0a0d 	vstr	s0, [sp, #52]	@ 0x34
+  561f08:	edcd 0a0e 	vstr	s1, [sp, #56]	@ 0x38
+  561f0c:	e017      	b.n	0x561f3e
+  561f0e:	2c07      	cmp	r4, #7
+  561f10:	d147      	bne.n	0x561fa2
+  561f12:	2a05      	cmp	r2, #5
+  561f14:	bf18      	it	ne
+  561f16:	2a07      	cmpne	r2, #7
+  561f18:	d02c      	beq.n	0x561f74
+  561f1a:	2a06      	cmp	r2, #6
+  561f1c:	bf18      	it	ne
+  561f1e:	2a08      	cmpne	r2, #8
+  561f20:	d028      	beq.n	0x561f74
+  561f22:	ed9d 0a0b 	vldr	s0, [sp, #44]	@ 0x2c
+  561f26:	ed8d 0a07 	vstr	s0, [sp, #28]
+  561f2a:	eddd 0a0c 	vldr	s1, [sp, #48]	@ 0x30
+  561f2e:	edcd 0a08 	vstr	s1, [sp, #32]
+  561f32:	ed8d 0a0d 	vstr	s0, [sp, #52]	@ 0x34
+  561f36:	edcd 0a0e 	vstr	s1, [sp, #56]	@ 0x38
+  561f3a:	2800      	cmp	r0, #0
+  561f3c:	d0ce      	beq.n	0x561edc
+  561f3e:	68e8      	ldr	r0, [r5, #12]
+  561f40:	9901      	ldr	r1, [sp, #4]
+  561f42:	eddd 0a0b 	vldr	s1, [sp, #44]	@ 0x2c
+  561f46:	eb00 0281 	add.w	r2, r0, r1, lsl #2
+  561f4a:	1c49      	adds	r1, r1, #1
+  561f4c:	ed92 0a00 	vldr	s0, [r2]
+  561f50:	ee70 0a20 	vadd.f32	s1, s0, s1
+  561f54:	eb00 0081 	add.w	r0, r0, r1, lsl #2
+  561f58:	edcd 0a05 	vstr	s1, [sp, #20]
+  561f5c:	9101      	str	r1, [sp, #4]
+  561f5e:	ed90 0a00 	vldr	s0, [r0]
+  561f62:	eddd 0a0c 	vldr	s1, [sp, #48]	@ 0x30
+  561f66:	ee70 0a20 	vadd.f32	s1, s0, s1
+  561f6a:	1c49      	adds	r1, r1, #1
+  561f6c:	edcd 0a06 	vstr	s1, [sp, #24]
+  561f70:	9101      	str	r1, [sp, #4]
+  561f72:	e3ef      	b.n	0x562754
+  561f74:	ed9d 0a0b 	vldr	s0, [sp, #44]	@ 0x2c
+  561f78:	eef0 0a00 	vmov.f32	s1, #0	@ 0x40000000  2.0
+  561f7c:	ee60 0a20 	vmul.f32	s1, s0, s1
+  561f80:	eeb0 1a00 	vmov.f32	s2, #0	@ 0x40000000  2.0
+  561f84:	ed9d 0a0d 	vldr	s0, [sp, #52]	@ 0x34
+  561f88:	ee30 0ac0 	vsub.f32	s0, s1, s0
+  561f8c:	eddd 0a0c 	vldr	s1, [sp, #48]	@ 0x30
+  561f90:	ee20 1a81 	vmul.f32	s2, s1, s2
+  561f94:	eddd 0a0e 	vldr	s1, [sp, #56]	@ 0x38
+  561f98:	ed8d 0a07 	vstr	s0, [sp, #28]
+  561f9c:	ee71 0a60 	vsub.f32	s1, s2, s1
+  561fa0:	e7c5      	b.n	0x561f2e
+  561fa2:	2c08      	cmp	r4, #8
+  561fa4:	d14c      	bne.n	0x562040
+  561fa6:	2a05      	cmp	r2, #5
+  561fa8:	bf18      	it	ne
+  561faa:	2a07      	cmpne	r2, #7
+  561fac:	d008      	beq.n	0x561fc0
+  561fae:	2a06      	cmp	r2, #6
+  561fb0:	bf18      	it	ne
+  561fb2:	2a08      	cmpne	r2, #8
+  561fb4:	d004      	beq.n	0x561fc0
+  561fb6:	9a0b      	ldr	r2, [sp, #44]	@ 0x2c
+  561fb8:	9207      	str	r2, [sp, #28]
+  561fba:	9a0c      	ldr	r2, [sp, #48]	@ 0x30
+  561fbc:	9208      	str	r2, [sp, #32]
+  561fbe:	e017      	b.n	0x561ff0
+  561fc0:	ed9d 0a0b 	vldr	s0, [sp, #44]	@ 0x2c
+  561fc4:	eef0 0a00 	vmov.f32	s1, #0	@ 0x40000000  2.0
+  561fc8:	ee60 0a20 	vmul.f32	s1, s0, s1
+  561fcc:	ed9d 0a0d 	vldr	s0, [sp, #52]	@ 0x34
+  561fd0:	ee30 0ac0 	vsub.f32	s0, s1, s0
+  561fd4:	ed8d 0a07 	vstr	s0, [sp, #28]
+  561fd8:	ed9d 0a0c 	vldr	s0, [sp, #48]	@ 0x30
+  561fdc:	eef0 0a00 	vmov.f32	s1, #0	@ 0x40000000  2.0
+  561fe0:	ee60 0a20 	vmul.f32	s1, s0, s1
+  561fe4:	ed9d 0a0e 	vldr	s0, [sp, #56]	@ 0x38
+  561fe8:	ee30 0ac0 	vsub.f32	s0, s1, s0
+  561fec:	ed8d 0a08 	vstr	s0, [sp, #32]
+  561ff0:	68ea      	ldr	r2, [r5, #12]
+  561ff2:	eb02 0481 	add.w	r4, r2, r1, lsl #2
+  561ff6:	1c49      	adds	r1, r1, #1
+  561ff8:	ed94 0a00 	vldr	s0, [r4]
+  561ffc:	eb02 0281 	add.w	r2, r2, r1, lsl #2

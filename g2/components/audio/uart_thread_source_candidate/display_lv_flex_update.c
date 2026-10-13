@@ -29,7 +29,7 @@ extern int32_t audio_uart_lv_find_track_end_48be22(void *,Flex *,int32_t,int32_t
 extern void audio_uart_lv_place_content_48c6d8(uint32_t,int32_t,int32_t,uint32_t,int32_t *,int32_t *);
 extern void audio_uart_lv_children_repos_48c14e(void *,Flex *,int32_t,int32_t,int32_t,int32_t,int32_t,int32_t,Track *);
 extern void audio_uart_lv_heap_free(void *);
-extern void audio_uart_lv_basic_invalidate_43f1a4(void *);
+extern uint32_t audio_uart_lv_basic_invalidate_43f1a4(void *);
 extern uint32_t audio_uart_lv_obj_event_451670(void *,uint32_t,void *);
 
 static int32_t count_children(void *object)

@@ -1,0 +1,45 @@
+{
+  "round": 318,
+  "status": "COMPLETE_PROVIDER_IDENTITY_AND_CHILD_FRONTIER_INVENTORY_C_BODY_PENDING",
+  "selected": false,
+  "native_address": "43f1a4",
+  "native_body_bytes": 796,
+  "native_body_range": "43f1a4..43f4bf inclusive",
+  "confirmed_provider": "lv_obj_refr_size",
+  "historical_mislabel": "audio_uart_lv_basic_invalidate_43f1a4",
+  "identity_evidence": [
+    "Native function-name literal at43fd8c points to lv_obj_refr_size",
+    "Native source-file literal at43fd90 names lvgl_v9.3/src/core/lv_obj_pos.c",
+    "Native assertion line89 equals pinned source assertion line",
+    "Both-layout bits and null-parent returns precede source-matching width/height computation"
+  ],
+  "pinned_source_commit": "5be8e0ae5077aa3880aba8a322b1487d6bc73c07",
+  "native_call_sites": 40,
+  "unique_child_targets": 32,
+  "child_targets_already_defined_in_main": 12,
+  "child_frontier": "child-frontier.json",
+  "validated_analysis_elf_sha256": "307fd798425cd2e53e54e4a44aa052973a7fb93dd8d3039215030f384966873f",
+  "tooling": {
+    "body_mapping_metadata_repaired_without_loadable_byte_changes": true,
+    "rea_retry_performed": true,
+    "ghidra_version": "12.1.4",
+    "doctor_configured_engine_available": true,
+    "remaining_decompiler_limitation": "Native null assertion writes a word at0xffffffff; Ghidra low-level memory-range construction fails beyond end of ram",
+    "native_assertion_not_removed": true,
+    "provider_health_distinction": "Initial bare CLI doctor lacked runtime env; explicitly configured doctor passes Ghidra engine checks but exits1 for unrelated client registrations"
+  },
+  "local_completed": [
+    "Native provider identity correction in evidence",
+    "Full body/ordinary literals authenticated inventory",
+    "32-child frontier mapped against current Main definitions"
+  ],
+  "remaining": [
+    "Manually reconcile whole body including native null assertion with pinned source",
+    "Verify32child ABI/property/coordinate contracts and implement remaining required providers",
+    "Full C implementation/native qualification/admission/build",
+    "All-image source/state/layout/runtime/hardware gates"
+  ],
+  "production_unchanged_this_round": true,
+  "current_main_build": "round317:3194 definitions/775 imports",
+  "accepted_complete_images": 0
+}

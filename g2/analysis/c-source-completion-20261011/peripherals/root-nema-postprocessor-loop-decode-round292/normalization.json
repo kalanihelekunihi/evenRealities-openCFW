@@ -1,0 +1,16 @@
+{
+  "selected": false,
+  "scope": "Research structural loop repair only; full float/ABI/FPSCR/geometry repair remains",
+  "native_evidence": [
+    "5629c6 initializesindex0",
+    "5629ce testsrootcountodd; optionalroot0 thenindex1 at562a42",
+    "562a44 LR=rootcount>>1",
+    "562a48 WLS skipszero pairs",
+    "562a54 loadsfirstroot andbodyloadsnextroot",
+    "562b34 advancespointer8bytes",
+    "562b36 LE decrement/branch;562b3a exit"
+  ],
+  "draft_sha256": "a8424d6c4013a1eed7d21bff52f969b82916ea463b75c8e9f8cb5f1d3aa6a0c8",
+  "pseudocode_fake_calls_remaining": 0,
+  "full_native_C_verified": false
+}

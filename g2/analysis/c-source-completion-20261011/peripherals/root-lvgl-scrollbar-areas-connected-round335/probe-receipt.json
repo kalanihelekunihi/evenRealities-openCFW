@@ -1,0 +1,53 @@
+{
+  "status": "PASS_ACTUAL_SELECTED_TU_M55_CONNECTED_SCROLLBAR_AREAS",
+  "native_comparisons": 384,
+  "candidate_sha256": "0d7d9315360984e06bfba12671a2d0a471489b9478035cea14105f7297fa05a7",
+  "native_payload_bytes_unchanged": true,
+  "controlled_child_targets": 9,
+  "actual_connected_helpers": [
+    "area-set",
+    "raw style getters/base direction/width/length/opacities",
+    "mode/direction fields",
+    "input-list/head/next/input-type fields",
+    "display DPI including changing default-display data"
+  ],
+  "alias_cases": {
+    "0": 96,
+    "1": 96,
+    "2": 96,
+    "3": 96
+  },
+  "dpi_call_counts": {
+    "0": 275,
+    "8": 12,
+    "5": 7,
+    "7": 10,
+    "12": 11,
+    "1": 3,
+    "3": 6,
+    "2": 12,
+    "4": 23,
+    "20": 3,
+    "9": 2,
+    "6": 7,
+    "24": 2,
+    "10": 8,
+    "16": 1,
+    "18": 1,
+    "15": 1
+  },
+  "checks": [
+    "Ordered9lower backend inputs/outputs",
+    "Per-call horizontal/vertical/object-coordinate snapshots",
+    "Entire9KiB fixture region including output aliases",
+    "DPI word24/default-null resolution/repeated macro evaluation",
+    "32bit wrap and observed signed-division paths",
+    "SP/R4-R11/caller guard"
+  ],
+  "selected": false,
+  "limits": [
+    "Nine lower backends controlled: flag,scrollY,three extents,width,height,property engine,default display; full image/hardware remains unproven",
+    "No invalid-pointer/full-image/hardware claim",
+    "Directed division overflow operands and complete native branch/access qualification remain outside this fixture receipt"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "round": 313,
+  "status": "PROGRESS_LOAD_NORMALIZATION_AND_JOINT_ORDER_UNADMITTED",
+  "selected": false,
+  "candidate_sha256": "41b31f1c86ef94dafe67901be076d4b0344b3e2d86922aa89d566a3f8c20d786",
+  "repairs": [
+    "54 bound-selection blocks reuse loaded float rather than reread volatile field",
+    "Coordinate pointer reused within control/endpoint XY pairs",
+    "Quadratic/cubic maxY comparison uses loaded value while retaining later native bounds workspace reload",
+    "Point/curve/polygon maxX store deferral matches native maxY load order; arc selectors retain their native store-first order"
+  ],
+  "current_source_nonfinite_abi_cases_passed": 239616,
+  "current_source_degenerate_abi_cases_passed": 147456,
+  "separate_path_read_fixtures_matched_before_joint_refinement": 12,
+  "joint_external_access_fixtures_matched": 10,
+  "joint_remaining_cases": [
+    9,
+    10
+  ],
+  "remaining_polygon_order_diff": "Native minY store and maxX read positions differ from C in polygon handling; joint receipt retains exact PCs and values for next correction",
+  "actual_selected_children": 10,
+  "controlled_children": 0,
+  "remaining": [
+    "Resolve both polygon joint read/write order differences",
+    "Full branch and final valueflow audit",
+    "Admission and coherent Main build if supported",
+    "Complete source/runtime/layout/hardware gates"
+  ],
+  "production_unchanged_this_round": true,
+  "accepted_complete_images": 0,
+  "current_main_build": "round304:3193 definitions/776 imports"
+}

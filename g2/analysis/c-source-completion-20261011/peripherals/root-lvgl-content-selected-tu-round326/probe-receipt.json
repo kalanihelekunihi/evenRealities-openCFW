@@ -1,0 +1,20 @@
+{
+  "status": "PASS_ACTUAL_M55_SIX_CONTENT_HELPER_BODIES",
+  "native_comparisons": 154,
+  "controlled_child_targets": 4,
+  "helper_instruction_bytes_unchanged": true,
+  "data_pointer_bindings": "oracle-bindings.json",
+  "checks": [
+    "R0 bits/narrowing",
+    "ordered callee object/selector/property/flags",
+    "layout mask/parent/16bit narrowing/boolean branches",
+    "event52 initial two-word buffers and zero/one/both-axis mutations",
+    "SP/R4-R11/caller guard"
+  ],
+  "candidate_sha256": "b660debf19ee040d4feb34682592f687c6aef5d21129f81a3c1a1e6747d994f6",
+  "selected": false,
+  "limits": [
+    "Controlled child backends; no actual property/event engine qualification",
+    "No invalid-pointer/full-image/hardware claim"
+  ]
+}

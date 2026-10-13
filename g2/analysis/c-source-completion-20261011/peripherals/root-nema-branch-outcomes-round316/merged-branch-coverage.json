@@ -1,0 +1,774 @@
+{
+  "source_receipts": [
+    "g2/analysis/c-source-completion-20261011/peripherals/root-nema-branch-fixtures-round315/branch-coverage.json",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-nema-branch-outcomes-round316/branch-coverage-initial-constant-slice.json",
+    "g2/analysis/c-source-completion-20261011/peripherals/root-nema-branch-outcomes-round316/branch-coverage-degenerate.json"
+  ],
+  "branches": {
+    "0x561ca0": {
+      "instruction": "beq.n 0x561cfa",
+      "successors": {
+        "0x561cfa": 1832,
+        "0x561ca2": 24
+      },
+      "observations": 1856
+    },
+    "0x561d00": {
+      "instruction": "beq.w 0x563868",
+      "successors": {
+        "0x563868": 136,
+        "0x561d04": 1720
+      },
+      "observations": 1856
+    },
+    "0x561d2e": {
+      "instruction": "bne.n 0x561e12",
+      "successors": {
+        "0x561d30": 1728,
+        "0x561e12": 3904
+      },
+      "observations": 5632
+    },
+    "0x561d38": {
+      "instruction": "bne.n 0x561daa",
+      "successors": {
+        "0x561d3a": 1720,
+        "0x561daa": 8
+      },
+      "observations": 1728
+    },
+    "0x561d3a": {
+      "instruction": "cbz r1, 0x561daa",
+      "successors": {
+        "0x561daa": 1696,
+        "0x561d3c": 24
+      },
+      "observations": 1720
+    },
+    "0x561d48": {
+      "instruction": "cbnz r2, 0x561d52",
+      "successors": {
+        "0x561d4a": 16,
+        "0x561d52": 8
+      },
+      "observations": 24
+    },
+    "0x561dc0": {
+      "instruction": "cbz r0, 0x561dec",
+      "successors": {
+        "0x561dec": 1216,
+        "0x561dc2": 512
+      },
+      "observations": 1728
+    },
+    "0x561e18": {
+      "instruction": "beq.w 0x56272a",
+      "successors": {
+        "0x561e1c": 2160,
+        "0x56272a": 1744
+      },
+      "observations": 3904
+    },
+    "0x561e1e": {
+      "instruction": "cbnz r1, 0x561e26",
+      "successors": {
+        "0x561e26": 2136,
+        "0x561e20": 24
+      },
+      "observations": 2160
+    },
+    "0x561e30": {
+      "instruction": "bne.n 0x561eac",
+      "successors": {
+        "0x561eac": 1832,
+        "0x561e32": 328
+      },
+      "observations": 2160
+    },
+    "0x561e76": {
+      "instruction": "beq.w 0x562014",
+      "successors": {
+        "0x562014": 228,
+        "0x561e7a": 100
+      },
+      "observations": 328
+    },
+    "0x561eae": {
+      "instruction": "bne.n 0x561f0e",
+      "successors": {
+        "0x561f0e": 1552,
+        "0x561eb0": 280
+      },
+      "observations": 1832
+    },
+    "0x561ed2": {
+      "instruction": "cbnz r0, 0x561eec",
+      "successors": {
+        "0x561ed4": 204,
+        "0x561eec": 76
+      },
+      "observations": 280
+    },
+    "0x561f10": {
+      "instruction": "bne.n 0x561fa2",
+      "successors": {
+        "0x561fa2": 1400,
+        "0x561f12": 152
+      },
+      "observations": 1552
+    },
+    "0x561f18": {
+      "instruction": "beq.n 0x561f74",
+      "successors": {
+        "0x561f74": 136,
+        "0x561f1a": 16
+      },
+      "observations": 152
+    },
+    "0x561f20": {
+      "instruction": "beq.n 0x561f74",
+      "successors": {
+        "0x561f22": 8,
+        "0x561f74": 8
+      },
+      "observations": 16
+    },
+    "0x561f3c": {
+      "instruction": "beq.n 0x561edc",
+      "successors": {
+        "0x561edc": 456,
+        "0x561f3e": 336
+      },
+      "observations": 792
+    },
+    "0x561fa4": {
+      "instruction": "bne.n 0x562040",
+      "successors": {
+        "0x562040": 1248,
+        "0x561fa6": 152
+      },
+      "observations": 1400
+    },
+    "0x561fac": {
+      "instruction": "beq.n 0x561fc0",
+      "successors": {
+        "0x561fae": 144,
+        "0x561fc0": 8
+      },
+      "observations": 152
+    },
+    "0x561fb4": {
+      "instruction": "beq.n 0x561fc0",
+      "successors": {
+        "0x561fc0": 136,
+        "0x561fb6": 8
+      },
+      "observations": 144
+    },
+    "0x562012": {
+      "instruction": "cbnz r0, 0x56201e",
+      "successors": {
+        "0x562014": 108,
+        "0x56201e": 44
+      },
+      "observations": 152
+    },
+    "0x562046": {
+      "instruction": "bne.n 0x562078",
+      "successors": {
+        "0x562078": 952,
+        "0x562048": 296
+      },
+      "observations": 1248
+    },
+    "0x56207a": {
+      "instruction": "bne.n 0x5620b4",
+      "successors": {
+        "0x5620b4": 1112,
+        "0x56207c": 136
+      },
+      "observations": 1248
+    },
+    "0x562088": {
+      "instruction": "beq.n 0x5620a6",
+      "successors": {
+        "0x5620a6": 100,
+        "0x56208a": 36
+      },
+      "observations": 136
+    },
+    "0x5620b6": {
+      "instruction": "bne.n 0x5620dc",
+      "successors": {
+        "0x5620dc": 976,
+        "0x5620b8": 136
+      },
+      "observations": 1112
+    },
+    "0x5620c4": {
+      "instruction": "cbz r0, 0x5620ce",
+      "successors": {
+        "0x5620ce": 100,
+        "0x5620c6": 36
+      },
+      "observations": 136
+    },
+    "0x5620de": {
+      "instruction": "bne.w 0x56245a",
+      "successors": {
+        "0x56245a": 808,
+        "0x5620e2": 168
+      },
+      "observations": 976
+    },
+    "0x562162": {
+      "instruction": "ble.w 0x5623aa",
+      "successors": {
+        "0x562166": 160,
+        "0x5623aa": 8
+      },
+      "observations": 168
+    },
+    "0x562168": {
+      "instruction": "bpl.n 0x562226",
+      "successors": {
+        "0x562226": 136,
+        "0x56216a": 24
+      },
+      "observations": 160
+    },
+    "0x562174": {
+      "instruction": "cbz r0, 0x56219c",
+      "successors": {
+        "0x56219c": 12,
+        "0x562176": 12
+      },
+      "observations": 24
+    },
+    "0x562228": {
+      "instruction": "beq.w 0x5623aa",
+      "successors": {
+        "0x56222c": 152,
+        "0x5623aa": 8
+      },
+      "observations": 160
+    },
+    "0x562238": {
+      "instruction": "cbz r0, 0x562260",
+      "successors": {
+        "0x562260": 112,
+        "0x56223a": 48
+      },
+      "observations": 160
+    },
+    "0x5622fe": {
+      "instruction": "cbz r0, 0x56231e",
+      "successors": {
+        "0x56231e": 112,
+        "0x562300": 48
+      },
+      "observations": 160
+    },
+    "0x5623a6": {
+      "instruction": "bne.w 0x56222c",
+      "successors": {
+        "0x5623aa": 152,
+        "0x56222c": 8
+      },
+      "observations": 160
+    },
+    "0x5623d4": {
+      "instruction": "beq.n 0x562452",
+      "successors": {
+        "0x5623d6": 104,
+        "0x562452": 64
+      },
+      "observations": 168
+    },
+    "0x56245c": {
+      "instruction": "bne.w 0x561f3a",
+      "successors": {
+        "0x561f3a": 640,
+        "0x562460": 168
+      },
+      "observations": 808
+    },
+    "0x5624e0": {
+      "instruction": "ble.w 0x562760",
+      "successors": {
+        "0x5624e4": 160,
+        "0x562760": 8
+      },
+      "observations": 168
+    },
+    "0x5624e6": {
+      "instruction": "bpl.n 0x5625a4",
+      "successors": {
+        "0x5625a4": 136,
+        "0x5624e8": 24
+      },
+      "observations": 160
+    },
+    "0x5624f2": {
+      "instruction": "cbz r0, 0x56251a",
+      "successors": {
+        "0x56251a": 12,
+        "0x5624f4": 12
+      },
+      "observations": 24
+    },
+    "0x5625a6": {
+      "instruction": "beq.w 0x562760",
+      "successors": {
+        "0x5625aa": 152,
+        "0x562760": 8
+      },
+      "observations": 160
+    },
+    "0x5625b6": {
+      "instruction": "cbz r0, 0x5625de",
+      "successors": {
+        "0x5625de": 112,
+        "0x5625b8": 48
+      },
+      "observations": 160
+    },
+    "0x56267c": {
+      "instruction": "cbz r0, 0x56269c",
+      "successors": {
+        "0x56269c": 112,
+        "0x56267e": 48
+      },
+      "observations": 160
+    },
+    "0x562724": {
+      "instruction": "bne.w 0x5625aa",
+      "successors": {
+        "0x562728": 152,
+        "0x5625aa": 8
+      },
+      "observations": 160
+    },
+    "0x562730": {
+      "instruction": "bne.n 0x56273a",
+      "successors": {
+        "0x56273a": 1728,
+        "0x562732": 16
+      },
+      "observations": 1744
+    },
+    "0x562778": {
+      "instruction": "bne.w 0x562b68",
+      "successors": {
+        "0x562b68": 5152,
+        "0x56277c": 480
+      },
+      "observations": 5632
+    },
+    "0x56282a": {
+      "instruction": "blt.n 0x562872",
+      "successors": {
+        "0x562872": 135,
+        "0x56282c": 345
+      },
+      "observations": 480
+    },
+    "0x56283e": {
+      "instruction": "blt.n 0x562872",
+      "successors": {
+        "0x562840": 285,
+        "0x562872": 60
+      },
+      "observations": 345
+    },
+    "0x56285a": {
+      "instruction": "blt.n 0x562872",
+      "successors": {
+        "0x56285c": 281,
+        "0x562872": 4
+      },
+      "observations": 285
+    },
+    "0x56286e": {
+      "instruction": "bge.w 0x56385a",
+      "successors": {
+        "0x56385a": 274,
+        "0x562872": 7
+      },
+      "observations": 281
+    },
+    "0x562906": {
+      "instruction": "bpl.n 0x56294c",
+      "successors": {
+        "0x56294c": 364,
+        "0x562908": 48
+      },
+      "observations": 412
+    },
+    "0x562926": {
+      "instruction": "blt.w 0x562b3a",
+      "successors": {
+        "0x56292a": 40,
+        "0x562b3a": 8
+      },
+      "observations": 48
+    },
+    "0x562932": {
+      "instruction": "bpl.w 0x562b3a",
+      "successors": {
+        "0x562936": 32,
+        "0x562b3a": 8
+      },
+      "observations": 40
+    },
+    "0x562964": {
+      "instruction": "blt.w 0x562b3a",
+      "successors": {
+        "0x562968": 312,
+        "0x562b3a": 52
+      },
+      "observations": 364
+    },
+    "0x562988": {
+      "instruction": "blt.n 0x56299a",
+      "successors": {
+        "0x56298a": 286,
+        "0x56299a": 26
+      },
+      "observations": 312
+    },
+    "0x5629ae": {
+      "instruction": "blt.n 0x5629c6",
+      "successors": {
+        "0x5629b0": 287,
+        "0x5629c6": 25
+      },
+      "observations": 312
+    },
+    "0x5629b8": {
+      "instruction": "bpl.n 0x5629c6",
+      "successors": {
+        "0x5629ba": 235,
+        "0x5629c6": 52
+      },
+      "observations": 287
+    },
+    "0x5629ca": {
+      "instruction": "beq.w 0x562b3a",
+      "successors": {
+        "0x5629ce": 305,
+        "0x562b3a": 7
+      },
+      "observations": 312
+    },
+    "0x5629d0": {
+      "instruction": "bpl.n 0x562a44",
+      "successors": {
+        "0x562a44": 158,
+        "0x5629d2": 179
+      },
+      "observations": 337
+    },
+    "0x562b4e": {
+      "instruction": "bne.w 0x5628b8",
+      "successors": {
+        "0x5628b8": 206,
+        "0x562b52": 206
+      },
+      "observations": 412
+    },
+    "0x562b6e": {
+      "instruction": "beq.w 0x563802",
+      "successors": {
+        "0x563802": 2064,
+        "0x562b72": 3088
+      },
+      "observations": 5152
+    },
+    "0x562b78": {
+      "instruction": "beq.w 0x563802",
+      "successors": {
+        "0x562b7c": 2816,
+        "0x563802": 272
+      },
+      "observations": 3088
+    },
+    "0x562b82": {
+      "instruction": "bne.w 0x562d70",
+      "successors": {
+        "0x562d70": 2384,
+        "0x562b86": 432
+      },
+      "observations": 2816
+    },
+    "0x562c08": {
+      "instruction": "blt.n 0x562c20",
+      "successors": {
+        "0x562c0a": 312,
+        "0x562c20": 120
+      },
+      "observations": 432
+    },
+    "0x562c1c": {
+      "instruction": "bge.w 0x56385a",
+      "successors": {
+        "0x562c20": 59,
+        "0x56385a": 253
+      },
+      "observations": 312
+    },
+    "0x562c72": {
+      "instruction": "blt.n 0x562cc2",
+      "successors": {
+        "0x562cc2": 36,
+        "0x562c74": 143
+      },
+      "observations": 179
+    },
+    "0x562c7c": {
+      "instruction": "bpl.n 0x562cc2",
+      "successors": {
+        "0x562c7e": 123,
+        "0x562cc2": 20
+      },
+      "observations": 143
+    },
+    "0x562d04": {
+      "instruction": "blt.n 0x562d54",
+      "successors": {
+        "0x562d06": 169,
+        "0x562d54": 10
+      },
+      "observations": 179
+    },
+    "0x562d0e": {
+      "instruction": "bpl.n 0x562d54",
+      "successors": {
+        "0x562d10": 164,
+        "0x562d54": 5
+      },
+      "observations": 169
+    },
+    "0x562d76": {
+      "instruction": "bne.w 0x56385a",
+      "successors": {
+        "0x56385a": 2088,
+        "0x562d7a": 296
+      },
+      "observations": 2384
+    },
+    "0x562da4": {
+      "instruction": "bmi.w 0x563802",
+      "successors": {
+        "0x562da8": 246,
+        "0x563802": 50
+      },
+      "observations": 296
+    },
+    "0x562e70": {
+      "instruction": "beq.w 0x56385a",
+      "successors": {
+        "0x562e74": 166,
+        "0x56385a": 80
+      },
+      "observations": 246
+    },
+    "0x562e94": {
+      "instruction": "bpl.n 0x562ede",
+      "successors": {
+        "0x562ede": 108,
+        "0x562e96": 58
+      },
+      "observations": 166
+    },
+    "0x562f54": {
+      "instruction": "bpl.n 0x562f58",
+      "successors": {
+        "0x562f56": 118,
+        "0x562f58": 48
+      },
+      "observations": 166
+    },
+    "0x562f56": {
+      "instruction": "cbnz r0, 0x562f6c",
+      "successors": {
+        "0x562f58": 86,
+        "0x562f6c": 32
+      },
+      "observations": 118
+    },
+    "0x562f60": {
+      "instruction": "blt.n 0x562f64",
+      "successors": {
+        "0x562f64": 86,
+        "0x562f62": 48
+      },
+      "observations": 134
+    },
+    "0x562f62": {
+      "instruction": "cbz r0, 0x562f6c",
+      "successors": {
+        "0x562f6c": 42,
+        "0x562f64": 6
+      },
+      "observations": 48
+    },
+    "0x562fac": {
+      "instruction": "beq.w 0x563488",
+      "successors": {
+        "0x563488": 8,
+        "0x562fb0": 158
+      },
+      "observations": 166
+    },
+    "0x562ff4": {
+      "instruction": "beq.w 0x5633a8",
+      "successors": {
+        "0x562ff8": 158
+      },
+      "observations": 158
+    },
+    "0x5630ac": {
+      "instruction": "bpl.n 0x5630c6",
+      "successors": {
+        "0x5630ae": 158
+      },
+      "observations": 158
+    },
+    "0x56328a": {
+      "instruction": "bpl.n 0x5632a4",
+      "successors": {
+        "0x56328c": 82,
+        "0x5632a4": 76
+      },
+      "observations": 158
+    },
+    "0x563610": {
+      "instruction": "cbnz r4, 0x56361e",
+      "successors": {
+        "0x563612": 128,
+        "0x56361e": 38
+      },
+      "observations": 166
+    },
+    "0x563628": {
+      "instruction": "bpl.n 0x563668",
+      "successors": {
+        "0x563668": 100,
+        "0x56362a": 66
+      },
+      "observations": 166
+    },
+    "0x56364a": {
+      "instruction": "bmi.n 0x563696",
+      "successors": {
+        "0x56364c": 58,
+        "0x563696": 8
+      },
+      "observations": 66
+    },
+    "0x56367a": {
+      "instruction": "bmi.n 0x56364c",
+      "successors": {
+        "0x56367c": 64,
+        "0x56364c": 36
+      },
+      "observations": 100
+    },
+    "0x56367e": {
+      "instruction": "cbnz r0, 0x563696",
+      "successors": {
+        "0x563680": 36,
+        "0x563696": 58
+      },
+      "observations": 94
+    },
+    "0x563692": {
+      "instruction": "bmi.n 0x5636aa",
+      "successors": {
+        "0x5636aa": 84,
+        "0x563694": 16
+      },
+      "observations": 100
+    },
+    "0x5636a8": {
+      "instruction": "bmi.n 0x5636dc",
+      "successors": {
+        "0x5636dc": 48,
+        "0x5636aa": 18
+      },
+      "observations": 66
+    },
+    "0x5636c4": {
+      "instruction": "cbnz r0, 0x5636dc",
+      "successors": {
+        "0x5636c6": 100,
+        "0x5636dc": 18
+      },
+      "observations": 118
+    },
+    "0x5636d8": {
+      "instruction": "bmi.n 0x5636f0",
+      "successors": {
+        "0x5636f0": 63,
+        "0x5636da": 37
+      },
+      "observations": 100
+    },
+    "0x5636ee": {
+      "instruction": "bmi.n 0x563722",
+      "successors": {
+        "0x5636f0": 29,
+        "0x563722": 37
+      },
+      "observations": 66
+    },
+    "0x56370a": {
+      "instruction": "cbnz r0, 0x563722",
+      "successors": {
+        "0x56370c": 63,
+        "0x563722": 29
+      },
+      "observations": 92
+    },
+    "0x56371e": {
+      "instruction": "bmi.n 0x563736",
+      "successors": {
+        "0x563736": 49,
+        "0x563720": 51
+      },
+      "observations": 100
+    },
+    "0x563734": {
+      "instruction": "bmi.n 0x563750",
+      "successors": {
+        "0x563736": 51,
+        "0x563750": 15
+      },
+      "observations": 66
+    },
+    "0x563864": {
+      "instruction": "bcc.w 0x561d06",
+      "successors": {
+        "0x561d06": 3912,
+        "0x563868": 1720
+      },
+      "observations": 5632
+    },
+    "0x562a48": {
+      "instruction": "native WLS",
+      "successors": {
+        "0x562a4c": 158,
+        "0x562b3a": 179
+      },
+      "observations": 337
+    },
+    "0x562b36": {
+      "instruction": "native LE",
+      "successors": {
+        "0x562b3a": 158
+      },
+      "observations": 158
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "status": "PASS_ACTUAL_M55_CONTENT_CALCULATOR_EXECUTION",
+  "native_comparisons": 96,
+  "candidate_compiler_target": "Cortex-M55 C11 O2 production settings",
+  "native_payload_instruction_bytes_unchanged": true,
+  "controlled_child_targets": 21,
+  "checks": [
+    "R0bits",
+    "ordered child calls/outputs/scroll snapshots",
+    "entire16KiB fixture region",
+    "SP/R4-R11/caller guard"
+  ],
+  "candidate_sha256": "12360a566f59d4c1f048db8115eba13afe4ab866c052f12db5ddb2c3f83d5f5e",
+  "selected": false,
+  "limits": [
+    "Direct callees controlled; not their implementations or connected firmware",
+    "Only48deterministic fixtures here; broader M4 logic matrix separately recorded",
+    "Hardware/image unproven"
+  ]
+}

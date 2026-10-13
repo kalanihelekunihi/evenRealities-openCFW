@@ -1,0 +1,36 @@
+{
+  "round": 308,
+  "status": "PASS_BOUNDED_GEOMETRY_FLAGS_MATRIX_UNADMITTED",
+  "selected": false,
+  "candidate_sha256": "ba6d40a79afefdd5884a7fa67ccd6b2a83ee6d4a0cb352c2a3d9c97b5479b788",
+  "native_comparisons": 2304,
+  "compares": [
+    "entire 256 byte guarded path",
+    "final FPSCR",
+    "native errno cell"
+  ],
+  "actual_selected_child_providers": 10,
+  "controlled_children": 0,
+  "repairs": [
+    "Preserve byte arc_command cast before bit5 test; do not reinterpret as float",
+    "563620..56374e conditional VCMP N/PL including unordered: use named VCMP and VMRS, short circuit in native order"
+  ],
+  "diagnostic_trace": "capture-relative-round-down.json",
+  "strict_fp_experiment": "Unsupported Clang options; same mismatch before N/PL repair",
+  "oracle_binding": {
+    "address": "577c38",
+    "original_pointer": "439ca5",
+    "new_pointer": "0x28101ca5",
+    "native_instruction_bytes_unchanged": true,
+    "official_input_unchanged": true
+  },
+  "remaining": [
+    "Nonfinite and degenerate path variant qualification",
+    "Ordered memory accesses and callee saved state",
+    "D9 and all branch valueflow audit",
+    "Source admission and coherent Main build only after qualification",
+    "Complete image layout/runtime/hardware proof"
+  ],
+  "accepted_complete_images": 0,
+  "production_build_still_current": "peripherals-root-native-tangent-round304:3193 definitions/776 imports"
+}

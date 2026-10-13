@@ -1,0 +1,36 @@
+{
+  "status": "THREE_CALLBACKS_ADMITTED_BUILD_AND_CURRENT_SOURCE_AUDIT_PASS",
+  "selected_sha256": "8d96802d2ea1705109df362180a913ca5db4ab5613fee33ad568f44d331afcc2",
+  "prefix_sha256": "a9865ac28ed0ad3eb6d60de5b341879f17d7cb749076b9c06388c1b104d6b77b",
+  "positive_native_comparisons": 374,
+  "oom_pre_store_comparisons": 2,
+  "controlled_backends": 8,
+  "selected_compare_current_object_matches_qualified": true,
+  "compare_source_sha256": "efc8cfa5cd068a6ca2d6e8562e68d40445474bc21c100bd993c6a690fac25828",
+  "descriptor_all_nine_slots_now_typed": {
+    "path": "g2/components/audio/uart_thread_source_candidate/display_lv_fs_driver_init.c",
+    "before_sha256": "5e01d9f0bd52ffe59f1c83bee405baa094713296bd8402749192c4d90dc27d02",
+    "after_sha256": "4831e65834ec1a0ce581e14580710e87026bcf45c550293aa78c71f82e3bbe04"
+  },
+  "new_glob_source": false,
+  "builder_changed": false,
+  "new_dependencies": [
+    "audio_uart_lv_snprintf_483fd0",
+    "audio_uart_lv_strlcpy_454778",
+    "audio_file_lfs_dir_open_4cfc66",
+    "audio_file_lfs_dir_read_4cfd02"
+  ],
+  "accepted_complete_images": 0,
+  "audit": {
+    "status": "PASS_STABLE_CURRENT_SOURCE_AND_RELOCATABLE_LINK",
+    "snapshots": 134,
+    "definitions": 3247,
+    "imports": 772,
+    "duplicate_strong_symbols": 0,
+    "artifact_hashes_checked": 6,
+    "builder_hash_checked": true,
+    "limits": [
+      "Full coverage/layout/byte equality/hardware unproven."
+    ]
+  }
+}
