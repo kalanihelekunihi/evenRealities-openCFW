@@ -1,0 +1,24 @@
+{
+  "round": 620,
+  "component": "Apollo display-driver uLED power-down and brightness apply",
+  "status": "two additional C bodies compile; five-wrapper verifier passes 47 native/C bounded cases; combined candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "uled_source_sha256": "9660975769322236650af9940cc6f2b5299d8df8e365e05fdf1e0d7a8701e8a9",
+  "verifier_sha256": "1124607c59a920ebadf36c9142e8d29e9c30b894d8de9553fa8bf9ece4acad7d",
+  "event_loop_source_sha256": "ab229bc658cfa7be2de348d8353ef982a8927e9b9352233b5f77c2c9370fc70a",
+  "link_audit_sha256": "ec8bd5830c049aca036b944014e42934ffea30329670498237a935f852cedcf7",
+  "combined_object_sha256": "7eb2c1eff994754b82b83ff1c076a87f7c4e9f69d0dc4f996362767d34939735",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_WRAPPERS_NATIVE 47",
+    "PASS_DISPLAY_DRIVER_EVENT_LOOP_C_NATIVE 30",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 64 18 5",
+    "ARM Cortex-M55 C syntax compile warnings as errors",
+    "git diff --check"
+  ],
+  "gates": [
+    "5 display-driver helper bodies remain missing",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0
+}

@@ -1,0 +1,59 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 721,
+    "strong_unresolved_before": 721
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/queue_reset_candidates_20261013/reset.c",
+      "sha256": "f06f1a43afd930ae176b71d71fb43ebe0b12e95f375eb27ab97723734b4024fe"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "703283f3af6642fa6222e2b3695a54de08b5ee6888d58caba4c11531f4d9dcb2"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/0053916e.c",
+      "sha256": "dde2d6df6160f845f48934d61bb6538512d4498efb41a2f8b0ac04948a57942e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_queue_reset.py",
+      "sha256": "04fcc17d7ef0b511214e24cfaf7cb52644c4937976bdc46539c27fea6919b1b8"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-queue-reset-round519/oracle.json",
+      "sha256": "4eb7b7f1aaca7e54a01b6d3bb5d58d15aea07382c0a3e71c2c0bb8a797542231"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-reset-round519/isolated/reset.elf",
+      "sha256": "905563ff69db94743d416f8e77aa0dbb4951ed17e126afb541f61db0c90ef8f2"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-reset-round519/receipt.json",
+      "sha256": "96e192fce0995342e60b3f23dfc2b63f52397fb58acb2970db47d1ac4de29fee"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-reset-round519/apollo_main/candidate.o",
+      "sha256": "17167ceeab713d3a11f75d3601df2a0094a55f21488935326779f5c262421c2e"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Synthetic SRAM ops-row only; concurrent queue use unverified.",
+    "Transfer dispatcher selector 29 and full 0x4c0f78 remain unresolved.",
+    "0 of 6 images source-complete."
+  ],
+  "native_entrypoints": [
+    "0x53916e"
+  ],
+  "native_source_oracle_cases": 144,
+  "provenance": "Main Ghidra pseudocode, locked native blob and native/source queue and ops-row comparison",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_main_queue_reset_53916e"
+  ],
+  "status": "bounded_helper_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

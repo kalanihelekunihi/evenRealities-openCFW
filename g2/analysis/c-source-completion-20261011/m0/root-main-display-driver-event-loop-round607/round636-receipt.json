@@ -1,0 +1,25 @@
+{
+  "round": 636,
+  "component": "Apollo Ambiq GPU clear wrapper 0x4b1a78",
+  "status": "C body compiles; four bounded native/C call-and-context cases pass; NEMA lower calls open; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "cc4d6ee24c62fe6570fb46b0ebc6f1de01e0780270371c2f43e051a77277e527",
+  "verifier_sha256": "e4995070b76c5bc54c7ccbff16fdad3f03c5767ea4a2ea31374ca4b9d28bf9e7",
+  "link_audit_sha256": "46fd33fc2539b4b447482a734f7475bdfcee6902a93b6f607877f42e50c72762",
+  "combined_object_sha256": "e30a4c9529d34694a5d21dd90b42eeb98779214ef97b5d1ce37d903c38cf300f",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_GPU_CLEAR_NATIVE 4",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 111 30 11",
+    "Cortex-M55 C syntax warnings as errors",
+    "git diff --check"
+  ],
+  "gates": [
+    "NEMA mode 0x513924, select 0x522a16 and clear 0x522ae0 providers unresolved",
+    "GPU blit 0x4b1608 and position 0x4b1b48 bodies unresolved",
+    "uLED option objects, row callback, work buffer, dispatch gate, live settings config open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

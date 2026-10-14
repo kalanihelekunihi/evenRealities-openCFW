@@ -2,6 +2,9 @@
  * 0x4b511e, 0x5351dc, 0x533e40, 0x531b1c. */
 #include <stdint.h>
 uint8_t audio_ble_att_common_state[0x64u]; /* RAM 0x200610ac */
+/* ATT callback paths name this same native object as the runtime state. */
+extern uint8_t audio_ble_att_runtime[0x64u]
+    __attribute__((alias("audio_ble_att_common_state")));
 uint8_t audio_ble_atts_state[0x268u]; /* RAM 0x2006e5f0 */
 uint8_t audio_ble_attc_state[0x1b8u]; /* RAM 0x2006f904 */
 extern const uint8_t audio_ble_att_table_main[]; /* ROM 0x7851e0 */

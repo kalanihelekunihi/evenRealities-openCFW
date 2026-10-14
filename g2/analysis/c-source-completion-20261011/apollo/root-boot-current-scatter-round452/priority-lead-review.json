@@ -1,0 +1,46 @@
+{
+  "leads": [
+    {
+      "classification": "implemented_exact_helper_but_unretained",
+      "evidence": "Both flag-returning helpers compile byte-identically to the 104 authenticated stock bytes; selected link drops these helpers. Native/source caller topology is not qualified.",
+      "native_entries": [
+        "0x422698",
+        "0x4226cc"
+      ],
+      "source_path": "g2/components/bootloader/runtime_memory/double_compare_flags.S",
+      "symbols": [
+        "opencfw_boot_double_cmp_flags_lr",
+        "opencfw_boot_double_cmp_flags_rl"
+      ]
+    },
+    {
+      "classification": "implemented_wrapper_but_public_source_path_selected",
+      "evidence": "Native/source register oracle passes; selected link retains public lfs_unmount through boot mount but drops the separate internal ABI wrapper. Pinned lfs.c contains public unmount and internal deinit.",
+      "native_entries": [
+        "0x414948"
+      ],
+      "source_path": "g2/components/bootloader/filesystem/native_unmount_abi_wrapper.S",
+      "symbols": [
+        "opencfw_boot_lfs_unmount_internal_abi"
+      ]
+    },
+    {
+      "classification": "implemented_generic_branch_but_builtin_source_path_selected",
+      "evidence": "Native/source FFS oracle passes 167 cases; selected pinned TLSF build chooses the compiler builtin branch and drops the generic native helper.",
+      "native_entries": [
+        "0x4169e2"
+      ],
+      "source_path": "g2/components/bootloader/allocator/tlsf_fls_generic_native.c",
+      "symbols": [
+        "opencfw_boot_tlsf_ffs_native"
+      ]
+    }
+  ],
+  "limits": [
+    "Static source path classification and bounded oracles do not prove all native call edges are reproduced in the selected ELF.",
+    "These four selected/native topology differences remain final firmware fidelity work; they are not missing C provider bodies."
+  ],
+  "schema": "opencfw-boot-priority-gc-lead-review-v1",
+  "selected_elf_sha256": "00ccc3a7841051e022aecc5e1e7027835952daabad607d01fbc19f35fece9d81",
+  "status": "PASS_BOUNDED_SOURCE_PATH_CLASSIFICATION"
+}

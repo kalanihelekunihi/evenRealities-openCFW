@@ -71,4 +71,5 @@ NI uint32_t opencfw_boot_uart_log_send(uint32_t row,uint32_t borrowed,uint32_t l
  for(uint32_t i=0;i<1000&&B(r+25)!=1;i++)opencfw_boot_delay_raw(10);
  return status!=0;
 }
-NI void opencfw_boot_elog_uart_output(const char *buffer,size_t length,uint32_t level){(void)level;(void)opencfw_boot_uart_log_send(1,(uint32_t)(uintptr_t)buffer,length);}
+extern uint32_t opencfw_boot_uart_log_send_ambient_abi(uint32_t borrowed,uint32_t length);
+NI void opencfw_boot_elog_uart_output(const char *buffer,size_t length,uint32_t level){(void)level;(void)opencfw_boot_uart_log_send_ambient_abi((uint32_t)(uintptr_t)buffer,(uint32_t)length);}

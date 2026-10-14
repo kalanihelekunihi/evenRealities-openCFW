@@ -1,0 +1,78 @@
+{
+  "status": "PASS_RAW_PROLOGUE_STACK_ACCOUNTING",
+  "chain": [
+    {
+      "native_entry": "0x800a598",
+      "source_entry": "0x8008b60",
+      "source_symbol": "case_application_entry_a598",
+      "native_prologue_words": [
+        "0xb088"
+      ],
+      "source_prologue_words": [
+        "0xb088"
+      ],
+      "native_retained_bytes": 32,
+      "source_retained_bytes": 32
+    },
+    {
+      "native_entry": "0x800a900",
+      "source_entry": "0x8005ae8",
+      "source_symbol": "case_boot_scheduler_start",
+      "native_prologue_words": [
+        "0xb510"
+      ],
+      "source_prologue_words": [
+        "0xb580"
+      ],
+      "native_retained_bytes": 8,
+      "source_retained_bytes": 8
+    },
+    {
+      "native_entry": "0x800c284",
+      "source_entry": "0x80058e4",
+      "source_symbol": "case_boot_scheduler_activate",
+      "native_prologue_words": [
+        "0xb530",
+        "0xb087"
+      ],
+      "source_prologue_words": [
+        "0xb5bf"
+      ],
+      "native_retained_bytes": 40,
+      "source_retained_bytes": 32
+    },
+    {
+      "native_entry": "0x800c57c",
+      "source_entry": "0x8005ab8",
+      "source_symbol": "case_boot_scheduler_run",
+      "native_prologue_words": [
+        "0xb510"
+      ],
+      "source_prologue_words": [
+        "0xb580"
+      ],
+      "native_retained_bytes": 8,
+      "source_retained_bytes": 8
+    }
+  ],
+  "native_retained_bytes": 88,
+  "source_retained_bytes": 80,
+  "native_post_handoff_MSP_if_entry_initial": "0x20002c30",
+  "source_post_handoff_MSP_if_entry_initial": "0x20002c38",
+  "native_remaining_window_bytes": 936,
+  "source_remaining_window_bytes": 944,
+  "qualification_correction": "1024 is the initial arithmetic window, not the post-boot IRQ budget. Direct handoff fixtures omit retained boot frames.",
+  "scope": "Successful scheduler-start path from application entry; prior reset/CRT retained frames and dynamic IRQ nesting not bounded. Child calls which return do not remain in this baseline.",
+  "handoff": "CONTROL.SPSEL changes to PSP before POP; no MSP restoration. Preserve stock-compatible behavior; resetting MSP would be an intentional change.",
+  "limits": "392-byte synchronous logging sample is not an IRQ path/global stack bound. Do not subtract it as a proved post-boot IRQ margin.",
+  "inputs": [
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/case.elf",
+      "sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853"
+    }
+  ]
+}

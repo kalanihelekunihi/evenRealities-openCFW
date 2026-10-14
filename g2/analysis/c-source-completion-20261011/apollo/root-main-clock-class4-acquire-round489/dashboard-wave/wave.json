@@ -1,0 +1,103 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_payload_linked": false,
+    "strong_unresolved_symbols": 733
+  },
+  "completed_utc": "2026-10-14T01:00:31.211502+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "bounded_native_source_cases": 1659,
+    "source_owned_clock_class4_acquire_completed": 1,
+    "source_owned_clock_support_bodies_completed": 5
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Critical save, class 4 trigger failure, and timeout finish are intercepted in acquire comparisons; helpers have separate bounded native/source comparisons.",
+    "Undefined auxiliary return register of timeout finish is excluded from direct comparison.",
+    "Synthetic SRAM/MMIO does not establish physical clock behavior or a complete Main image."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Main clock class 5 acquire 0x4c4086",
+      "Remaining clock class providers",
+      "Main MSPI configure auxiliary 0x4bfed6 and transfer 0x4c0f78",
+      "Remaining Main graph and five other image graphs; 0/6 complete"
+    ],
+    "reason": "Recover class 5 acquire and remaining MSPI configuration/transfer graph"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/components/main/clock_class4_acquire_candidates_20261013/acquire.c",
+      "sha256": "3bede1c10d68cd890b3b61e6462b168cd0d334d00b0923d9aec7c4d4d3811d21"
+    },
+    {
+      "path": "g2/components/main/clock_class4_trigger_candidates_20261013/trigger.c",
+      "sha256": "5ecaaca6a3b811be2d98e65d6dbea394c2cdffc826456809cbe928ef3c718862"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c3f2a.c",
+      "sha256": "1fd77610b4d59a045fd9ecb27196eb13cdd461a6acf5f9288a0adfd0953358c7"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c3750.c",
+      "sha256": "8a98b82f8092e3294240c3a07bb673e117ba436b6649f0dcaddbfb0e04b03d40"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c37ca.c",
+      "sha256": "b489c3580a8ea16f1d929e9e76a3f9d15baa670e4b587ed1c37433ca70dfe599"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c387e.c",
+      "sha256": "66f9b43a0659957a056f888a18f0c25d378089dd3e54e9f766181897c6900ff2"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c3ef4.c",
+      "sha256": "7c6ff976feada911915ef04d04d3a986fd39527f73ccc703861ded27d0141e52"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004d3938.c",
+      "sha256": "251e8e36c26ab263fcd616d43842520165878380defb5166c30c4117151a6405"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "b7d5dfe36409ded438e78064b5259435e3f2cfbef5e826f382abcda05d42b061"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_class4_acquire.py",
+      "sha256": "28d26a668097c46895d1eece8fc6a7760781cad2ab69e8db603a96d4fd26509e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_class4_helpers.py",
+      "sha256": "89fdb3087cf2702c69223cd5370d3c04700a315a6035555786ac0043e8ebc102"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-class4-acquire-round489/acquire-oracle.json",
+      "sha256": "7994fc56f128521b11ad1688b1316f35ecbf0331f7ed38b675c15e159ee355ab"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-class4-acquire-round489/helpers-oracle.json",
+      "sha256": "fd88dfefd73f9e04e2abe17d3561fe806fe1bb7d2ba09eca74a8d77035111a5d"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-class4-acquire-round489/isolated/acquire.elf",
+      "sha256": "daacf5b2427b1a91ba7dc60df0eddf17822eae72718d89eccdcefe8d54f0803b"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-class4-acquire-round489/receipt.json",
+      "sha256": "7a5e5d5bf663dce94497a03721754b712ecb7fef7504a2b569deb190a3293264"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-class4-acquire-round489/apollo_main/candidate.o",
+      "sha256": "a988ea8edf5d33e75a67e8d94f5797a4168350a2c7bd3dfe31110aa18a2fa949"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-class4-acquire-round489/round489-receipt.json",
+      "sha256": "eb11c1ab32001fbd203f5bf06165284f66fd54fcc8512317b17f3d740c330890"
+    }
+  ],
+  "status": "completed"
+}

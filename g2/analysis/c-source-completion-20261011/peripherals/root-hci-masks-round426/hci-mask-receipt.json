@@ -1,0 +1,41 @@
+{
+  "added_imports": [],
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-hci-masks-round426/receipt.json",
+    "sha256": "332bd66f30b4d678ce1d70cd46556d72ede847851ce1f6ca977fa484ea8797f8"
+  },
+  "builder_object_match": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-masks-round426/builder-object-match.json",
+    "sha256": "3e36fda563c7b32db22d97b170ff81f2c391577a50ade23a922cc44c63b90739"
+  },
+  "definitions": 3996,
+  "duplicate_strong_symbols": 0,
+  "image": "apollo_main",
+  "imports": 733,
+  "limits": [
+    "Three eight-byte HCI masks match stock ROM as compiled data; final placement and controller runtime unproven",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "manifest": {
+    "path": "g2/firmware_c/experimental-sources.json",
+    "sha256": "e65c8beff119675c848af13b1758d31dfd02ddef4bafbb87a23c37054945fdc1"
+  },
+  "provenance": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-masks-round426/source-provenance.json",
+    "sha256": "1fdf2406249f4dde30261c5b463563ae8cc341dac72a00e243c661f3fe72a541"
+  },
+  "removed_imports": [
+    "audio_ble_hci_event_mask_78d6dc",
+    "audio_ble_hci_event_mask_page2_78d6ec",
+    "audio_ble_hci_le_event_mask_78d6e4"
+  ],
+  "source": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-masks-round426/hci_masks.c",
+    "sha256": "8acaee5ca1d6b46529dc268f83b8af4bcaeec803341596b180072c91cc80e582"
+  },
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-hci-masks-round426/root-source-audit.json",
+    "sha256": "2a6cccb2509c4d941257f2e248ba7fce2308b8204955fe250061e661efc4518c"
+  },
+  "status": "PASS_EXACT_HCI_MASK_SOURCE"
+}

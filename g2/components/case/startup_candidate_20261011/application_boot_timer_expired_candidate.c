@@ -20,7 +20,7 @@ void case_boot_timer_expired(void)
     while(case_boot_timer_command_receive(rd(0x20000164u),message,0u)!=0u){
         uint32_t command=message[0];
         if((int32_t)command<0){
-            ((void (*)(uint32_t,uint32_t))(uintptr_t)message[1])(message[2],message[3]);
+            ((void (*)(void *,uint32_t))(uintptr_t)message[1])((void *)(uintptr_t)message[2],message[3]);
             continue;
         }
         uint32_t timer=message[2];

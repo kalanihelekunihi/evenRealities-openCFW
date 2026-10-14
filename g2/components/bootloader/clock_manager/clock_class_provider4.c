@@ -3,6 +3,7 @@
  * and register memory. The final calibrated wait is the external ROM routine
  * at Thumb address 0x00000041 (raw BL target 0x40). */
 #include "clock_class_provider4.h"
+#include "clock_popcount_421584.h"
 #include "clock_wait_4216b2.h"
 
 enum {
@@ -43,17 +44,9 @@ static void clock_user_update(uint8_t user_id, uint32_t request)
 
 static uint32_t clock_user_count(void)
 {
-    uint32_t count = 0u;
     volatile uint32_t *const first = clock_user_word(0u);
-    uint32_t value = first[0];
-    value = value - ((value >> 1) & 0x55555555u);
-    uint32_t folded = ((value >> 2) & 0x33333333u) + (value & 0x33333333u);
-    count += (((folded + (folded >> 4)) & 0x0f0f0f0fu) * 0x01010101u) >> 24;
-    value = first[1];
-    value = value - ((value >> 1) & 0x55555555u);
-    folded = ((value >> 2) & 0x33333333u) + (value & 0x33333333u);
-    count += (((folded + (folded >> 4)) & 0x0f0f0f0fu) * 0x01010101u) >> 24;
-    return count;
+    return opencfw_boot_clock_popcount(first[0]) +
+           opencfw_boot_clock_popcount(first[1]);
 }
 
 static uint32_t critical_save_disable(void)

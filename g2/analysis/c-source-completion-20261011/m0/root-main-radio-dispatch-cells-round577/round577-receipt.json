@@ -1,0 +1,55 @@
+{
+  "round": 577,
+  "status": "PASS_MAIN_RADIO_DISPATCH_CELLS_BOUNDED",
+  "captured_utc": "2026-10-14T05:34:25.341629+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "native_comparisons": [
+    "PASS radio context 5 cases",
+    "PASS exchange receive 6 cases",
+    "PASS tx space 5 cases",
+    "PASS serial children 10 cases"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 660,
+  "unresolved_after": 657,
+  "removed_symbols": [
+    "audio_ble_hci_radio_dispatch_cell_20074f4f",
+    "audio_ble_hci_radio_dispatch_cell_20074f51",
+    "audio_ble_radio_mode_cell_20074f53"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Three one-byte dispatch/mode cells are source-owned. Native SRAM placement and adjacent bytes, broader radio hardware effects, full image code/data/assets/startup/linker coverage remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_hci_radio_dispatch_cells.c",
+      "sha256": "87c65e05badf8e07a6a3bc317b363fd3bebcc0ea4d8df5bd3cc1a21d9cd7f0d3"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_hci_radio_context.py",
+      "sha256": "5199eb6179843370cf298e20e965b7aae4780722f4d372c1dbf89ed1bc651b00"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_hci_radio_exchange_receive.py",
+      "sha256": "7af084fb9b68ebaee051791e24f52fe1e9a2ab84037c00a63deb50d7bc5775bd"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_hci_radio_tx_space.py",
+      "sha256": "c3bc5b4bb8fe43f957faa5c29508a43dc9c7f4b31ead0bd8221471c7ce28d328"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_hci_radio_serial_children.py",
+      "sha256": "d5b930787db2b4d7343b2d5b17d20f99cbfd2f2de81fd580e2ccd780f6c1e164"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round577/receipt.json",
+      "sha256": "e5f217f3f8601a8de7079bc37ea6e64ba56e3ed482391f10d7498c04770d480c"
+    }
+  ]
+}

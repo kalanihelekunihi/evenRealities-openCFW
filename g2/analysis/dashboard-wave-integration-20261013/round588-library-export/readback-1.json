@@ -1,0 +1,54 @@
+{
+  "round": 588,
+  "status": "PASS_MAIN_UART_ERROR_CELL_ALIAS_BOUNDED",
+  "captured_utc": "2026-10-14T06:11:14.428713+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "native_address": "0x20074f14",
+  "source_storage_bytes": 4,
+  "alias_symbols": [
+    "audio_uart_float_math_error_cell_20074f14",
+    "audio_uart_ring_errno_20074f14"
+  ],
+  "linked_candidate_address": "0x00001028 for both, size 0x4",
+  "native_comparison": "PASS native/C locale range error write 0x22 and linked alias equality",
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 643,
+  "unresolved_after": 641,
+  "removed_symbols": [
+    "audio_uart_float_math_error_cell_20074f14",
+    "audio_uart_ring_errno_20074f14"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "One four-byte mutable error cell is source-owned under two names. Locale callback table at 0x200044c0 remains gated pending callback initializer provenance; native SRAM placement, full image coverage and hardware behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_uart_error_cell.c",
+      "sha256": "b9641c7eb31b07c2810800154ef0c3d57ccd70976a32611bc0ed35cf1865075f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_uart_error_cell_alias.py",
+      "sha256": "ba3f817ec47e18650d9b27720a13bfc0c8b37cedc59a6143074b503dd90f3623"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ring_locale_dispatch.c",
+      "sha256": "931be72815f7e0c776225770a77f8c6b6643b909acdcfe9dd804d5822515b1a0"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round588/receipt.json",
+      "sha256": "27eecd1cd64e57c6b8e70c4ec2e7cb4ecb2cc111fdce2651db26b7e94ca76ae9"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-uart-error-cell-alias-round588/round588-receipt.json",
+    "sha256": "f4e75a9e6ff66adbaedcdea6f349ab1cfb65fbcefe598ca5d87bc624c521607c"
+  },
+  "publication_scope": "Body-receipt evidence only; two error names alias one four-byte C cell; locale callback initializer/placement/full image/hardware unqualified; percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

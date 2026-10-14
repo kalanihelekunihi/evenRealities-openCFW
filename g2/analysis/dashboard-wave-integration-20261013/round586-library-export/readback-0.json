@@ -1,0 +1,54 @@
+{
+  "round": 586,
+  "status": "PASS_MAIN_ATT_UUID_TEMPLATE_INITIALIZER_BOUNDED",
+  "captured_utc": "2026-10-14T06:04:28.918787+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "native_address": "0x2000044c",
+  "compressed_sram_record": "0x75d3f4",
+  "decoded_sram_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "initial_bytes_hex": "fb349b5f800000800010000000000000",
+  "source_storage_bytes": 16,
+  "native_comparisons": [
+    "PASS compiled initializer byte match",
+    "PASS discovery pair declaration 2 cases"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 645,
+  "unresolved_after": 644,
+  "removed_symbols": [
+    "audio_ble_att_uuid_base_2000044c"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Sixteen mutable ATT UUID template startup bytes are source-owned. Absolute SRAM placement, full scatter, complete image coverage and physical behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_att_uuid_template.c",
+      "sha256": "044cbc747d582f77360722fe211946e65fff8a9f6bbb406cbf1593cde805452d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_att_uuid_template_initializer.py",
+      "sha256": "5cc2a6de631f656dbd93792aee372acaf711e72303d73e8f0605926d260803a9"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_discovery_pair_decl_native.py",
+      "sha256": "0cba59cb954b09a00817503dae16648b3d97bf05255732cb2303d5bdbc4ad8cb"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round586/receipt.json",
+      "sha256": "95e7a23c23fac25dc706a9fe987c9c5755aebdbc952f605a4808f454425dba80"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-att-uuid-initializer-round586/round586-receipt.json",
+    "sha256": "eb6773b72d7680d50227d501e188a944c958ac49acf311becc90e46e774fa7d6"
+  },
+  "publication_scope": "Body-receipt evidence only; 16 mutable ATT UUID initializer bytes and selected declaration checks; placement/scatter/full image/hardware unqualified; percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

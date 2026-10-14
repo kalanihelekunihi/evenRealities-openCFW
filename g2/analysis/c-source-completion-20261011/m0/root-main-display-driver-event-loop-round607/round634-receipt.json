@@ -1,0 +1,24 @@
+{
+  "round": 634,
+  "component": "Apollo Ambiq GPU mode wrappers 0x4b0730 and 0x4b0748",
+  "status": "Two C bodies compile; eight bounded native/C call-boundary cases pass; shared lower function unresolved; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "92f7c823866ac49e17b3e3ad3e7e5a0c0c0a40aac0c7c46a82bb98d99a4abc72",
+  "verifier_sha256": "5a0aa96499b914ff2232cae107b592441e0cd215d19b944a15b592df342d9f1d",
+  "link_audit_sha256": "dab2de74e4ad6a09c33c583e0c2d4561e65ece376801c1dea04e8e9b01b1c44e",
+  "combined_object_sha256": "1db3d79522c3004bebbf2b8efeb475cb6f5f2d5a15c4ec78e9ac21fa491a3c3c",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_GPU_MODE_WRAPPERS_NATIVE 8",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 109 28 10",
+    "Cortex-M55 C syntax warnings as errors",
+    "git diff --check"
+  ],
+  "gates": [
+    "GPU mode lower 0x4b06c0, clear 0x4b1a78, blit 0x4b1608, position 0x4b1b48 C bodies unresolved",
+    "uLED option objects, row callback, work buffer, dispatch gate, live settings config open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

@@ -1,0 +1,791 @@
+{
+  "status": "CONTROLLER_CAPABILITY_PROBE_COMPLETE",
+  "QEMU_sha256": "121d02f5d368300139d1ae21dc75595b434d7b6318c221b23886fdb28aecd876",
+  "results": [
+    {
+      "machine": "microbit",
+      "command": [
+        "/opt/homebrew/bin/qemu-system-arm",
+        "-machine",
+        "microbit",
+        "-S",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-serial",
+        "none",
+        "-nodefaults",
+        "-qmp",
+        "stdio"
+      ],
+      "greeting": {
+        "QMP": {
+          "version": {
+            "qemu": {
+              "micro": 2,
+              "minor": 1,
+              "major": 11
+            },
+            "package": ""
+          },
+          "capabilities": [
+            "oob"
+          ]
+        }
+      },
+      "capabilities": {
+        "return": {}
+      },
+      "properties": [
+        {
+          "path": "/machine/nrf51",
+          "type": "child<nrf51-soc>"
+        },
+        {
+          "path": "/machine/nrf51",
+          "property": "sram-size",
+          "value": {
+            "return": 16384
+          }
+        },
+        {
+          "path": "/machine/nrf51",
+          "property": "flash-size",
+          "value": {
+            "return": 262144
+          }
+        },
+        {
+          "path": "/machine/nrf51/nvm",
+          "type": "child<nrf51_soc.nvm>"
+        },
+        {
+          "path": "/machine/nrf51/nvm",
+          "property": "flash-size",
+          "value": {
+            "return": 262144
+          }
+        },
+        {
+          "path": "/machine/nrf51/nvm/nrf51_soc.flash[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nvm/nrf51_soc.uicr[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nvm/nrf51_soc.ficr[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nvm/nrf51_soc.nvmc[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/rng",
+          "type": "child<nrf51_soc.rng>"
+        },
+        {
+          "path": "/machine/nrf51/rng/nrf51_soc.rng[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/gpio",
+          "type": "child<nrf51_soc.gpio>"
+        },
+        {
+          "path": "/machine/nrf51/gpio/nrf51_soc.gpio[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/timer[0]",
+          "type": "child<nrf51_soc.timer>"
+        },
+        {
+          "path": "/machine/nrf51/timer[0]/nrf51_soc.timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nrf51.sram[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/timer[1]",
+          "type": "child<nrf51_soc.timer>"
+        },
+        {
+          "path": "/machine/nrf51/timer[1]/nrf51_soc.timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/timer[2]",
+          "type": "child<nrf51_soc.timer>"
+        },
+        {
+          "path": "/machine/nrf51/timer[2]/nrf51_soc.timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/uart",
+          "type": "child<nrf51_soc.uart>"
+        },
+        {
+          "path": "/machine/nrf51/uart/nrf51_soc.uart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nrf51-container[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m",
+          "type": "child<armv7m>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m",
+          "property": "cpu-type",
+          "value": {
+            "return": "cortex-m0-arm-cpu"
+          }
+        },
+        {
+          "path": "/machine/nrf51/armv6m/armv7m-container[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/nvic",
+          "type": "child<armv7m_nvic>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/cpu",
+          "type": "child<cortex-m0-arm-cpu>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/systick-reg-ns",
+          "type": "child<armv7m_systick>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/systick-reg-ns/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/nrf51/nrf51_soc.clock[0]",
+          "type": "child<memory-region>"
+        }
+      ],
+      "status": "SUSPENDED_QMP_READ_COMPLETE",
+      "stderr": "qemu-system-arm: terminating on signal 15 from pid 24474 (<unknown process>)\n"
+    },
+    {
+      "machine": "netduino2",
+      "command": [
+        "/opt/homebrew/bin/qemu-system-arm",
+        "-machine",
+        "netduino2",
+        "-S",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-serial",
+        "none",
+        "-nodefaults",
+        "-qmp",
+        "stdio"
+      ],
+      "greeting": {
+        "QMP": {
+          "version": {
+            "qemu": {
+              "micro": 2,
+              "minor": 1,
+              "major": 11
+            },
+            "package": ""
+          },
+          "capabilities": [
+            "oob"
+          ]
+        }
+      },
+      "capabilities": {
+        "return": {}
+      },
+      "properties": [
+        {
+          "path": "/machine/soc",
+          "type": "child<stm32f205-soc>"
+        },
+        {
+          "path": "/machine/soc/usart[1]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[1]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/adc[2]",
+          "type": "child<stm32f2xx-adc>"
+        },
+        {
+          "path": "/machine/soc/adc[2]/stm32f2xx-adc[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/timer[3]",
+          "type": "child<stm32f2xx-timer>"
+        },
+        {
+          "path": "/machine/soc/timer[3]/stm32f2xx_timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[5]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[5]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/spi[0]",
+          "type": "child<stm32f2xx-spi>"
+        },
+        {
+          "path": "/machine/soc/spi[0]/stm32f2xx-spi[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/timer[0]",
+          "type": "child<stm32f2xx-timer>"
+        },
+        {
+          "path": "/machine/soc/timer[0]/stm32f2xx_timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[2]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[2]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/STM32F205.flash[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/spi[1]",
+          "type": "child<stm32f2xx-spi>"
+        },
+        {
+          "path": "/machine/soc/spi[1]/stm32f2xx-spi[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/STM32F205.flash.alias[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/adc[0]",
+          "type": "child<stm32f2xx-adc>"
+        },
+        {
+          "path": "/machine/soc/adc[0]/stm32f2xx-adc[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/syscfg",
+          "type": "child<stm32f2xx-syscfg>"
+        },
+        {
+          "path": "/machine/soc/syscfg/stm32f2xx-syscfg[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/timer[1]",
+          "type": "child<stm32f2xx-timer>"
+        },
+        {
+          "path": "/machine/soc/timer[1]/stm32f2xx_timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[3]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[3]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/spi[2]",
+          "type": "child<stm32f2xx-spi>"
+        },
+        {
+          "path": "/machine/soc/spi[2]/stm32f2xx-spi[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/armv7m",
+          "type": "child<armv7m>"
+        },
+        {
+          "path": "/machine/soc/armv7m",
+          "property": "cpu-type",
+          "value": {
+            "return": "cortex-m3-arm-cpu"
+          }
+        },
+        {
+          "path": "/machine/soc/armv7m/armv7m-container[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/armv7m/bitband[1]",
+          "type": "child<ARM-bitband-memory>"
+        },
+        {
+          "path": "/machine/soc/armv7m/cpu",
+          "type": "child<cortex-m3-arm-cpu>"
+        },
+        {
+          "path": "/machine/soc/armv7m/systick-reg-ns",
+          "type": "child<armv7m_systick>"
+        },
+        {
+          "path": "/machine/soc/armv7m/systick-reg-ns/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/soc/armv7m/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/soc/armv7m/nvic",
+          "type": "child<armv7m_nvic>"
+        },
+        {
+          "path": "/machine/soc/armv7m/bitband[0]",
+          "type": "child<ARM-bitband-memory>"
+        },
+        {
+          "path": "/machine/soc/usart[0]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[0]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/adc[1]",
+          "type": "child<stm32f2xx-adc>"
+        },
+        {
+          "path": "/machine/soc/adc[1]/stm32f2xx-adc[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/timer[2]",
+          "type": "child<stm32f2xx-timer>"
+        },
+        {
+          "path": "/machine/soc/timer[2]/stm32f2xx_timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[4]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[4]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        }
+      ],
+      "status": "SUSPENDED_QMP_READ_COMPLETE",
+      "stderr": "qemu-system-arm: terminating on signal 15 from pid 24474 (<unknown process>)\n"
+    },
+    {
+      "machine": "netduino2",
+      "command": [
+        "/opt/homebrew/bin/qemu-system-arm",
+        "-machine",
+        "netduino2",
+        "-S",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-serial",
+        "none",
+        "-nodefaults",
+        "-qmp",
+        "stdio",
+        "-global",
+        "armv7m.cpu-type=cortex-m0"
+      ],
+      "greeting": {
+        "QMP": {
+          "version": {
+            "qemu": {
+              "micro": 2,
+              "minor": 1,
+              "major": 11
+            },
+            "package": ""
+          },
+          "capabilities": [
+            "oob"
+          ]
+        }
+      },
+      "capabilities": {
+        "return": {}
+      },
+      "properties": [
+        {
+          "path": "/machine/soc",
+          "type": "child<stm32f205-soc>"
+        },
+        {
+          "path": "/machine/soc/usart[1]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[1]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/adc[2]",
+          "type": "child<stm32f2xx-adc>"
+        },
+        {
+          "path": "/machine/soc/adc[2]/stm32f2xx-adc[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/timer[3]",
+          "type": "child<stm32f2xx-timer>"
+        },
+        {
+          "path": "/machine/soc/timer[3]/stm32f2xx_timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[5]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[5]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/spi[0]",
+          "type": "child<stm32f2xx-spi>"
+        },
+        {
+          "path": "/machine/soc/spi[0]/stm32f2xx-spi[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/timer[0]",
+          "type": "child<stm32f2xx-timer>"
+        },
+        {
+          "path": "/machine/soc/timer[0]/stm32f2xx_timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[2]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[2]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/STM32F205.flash[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/spi[1]",
+          "type": "child<stm32f2xx-spi>"
+        },
+        {
+          "path": "/machine/soc/spi[1]/stm32f2xx-spi[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/STM32F205.flash.alias[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/adc[0]",
+          "type": "child<stm32f2xx-adc>"
+        },
+        {
+          "path": "/machine/soc/adc[0]/stm32f2xx-adc[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/syscfg",
+          "type": "child<stm32f2xx-syscfg>"
+        },
+        {
+          "path": "/machine/soc/syscfg/stm32f2xx-syscfg[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/timer[1]",
+          "type": "child<stm32f2xx-timer>"
+        },
+        {
+          "path": "/machine/soc/timer[1]/stm32f2xx_timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[3]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[3]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/spi[2]",
+          "type": "child<stm32f2xx-spi>"
+        },
+        {
+          "path": "/machine/soc/spi[2]/stm32f2xx-spi[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/armv7m",
+          "type": "child<armv7m>"
+        },
+        {
+          "path": "/machine/soc/armv7m",
+          "property": "cpu-type",
+          "value": {
+            "return": "cortex-m3-arm-cpu"
+          }
+        },
+        {
+          "path": "/machine/soc/armv7m/armv7m-container[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/armv7m/bitband[1]",
+          "type": "child<ARM-bitband-memory>"
+        },
+        {
+          "path": "/machine/soc/armv7m/cpu",
+          "type": "child<cortex-m3-arm-cpu>"
+        },
+        {
+          "path": "/machine/soc/armv7m/systick-reg-ns",
+          "type": "child<armv7m_systick>"
+        },
+        {
+          "path": "/machine/soc/armv7m/systick-reg-ns/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/soc/armv7m/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/soc/armv7m/nvic",
+          "type": "child<armv7m_nvic>"
+        },
+        {
+          "path": "/machine/soc/armv7m/bitband[0]",
+          "type": "child<ARM-bitband-memory>"
+        },
+        {
+          "path": "/machine/soc/usart[0]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[0]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/adc[1]",
+          "type": "child<stm32f2xx-adc>"
+        },
+        {
+          "path": "/machine/soc/adc[1]/stm32f2xx-adc[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/timer[2]",
+          "type": "child<stm32f2xx-timer>"
+        },
+        {
+          "path": "/machine/soc/timer[2]/stm32f2xx_timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[4]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[4]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        }
+      ],
+      "status": "SUSPENDED_QMP_READ_COMPLETE",
+      "stderr": "qemu-system-arm: terminating on signal 15 from pid 24474 (<unknown process>)\n"
+    },
+    {
+      "machine": "stm32vldiscovery",
+      "command": [
+        "/opt/homebrew/bin/qemu-system-arm",
+        "-machine",
+        "stm32vldiscovery",
+        "-S",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-serial",
+        "none",
+        "-nodefaults",
+        "-qmp",
+        "stdio",
+        "-global",
+        "armv7m.cpu-type=cortex-m0"
+      ],
+      "greeting": {
+        "QMP": {
+          "version": {
+            "qemu": {
+              "micro": 2,
+              "minor": 1,
+              "major": 11
+            },
+            "package": ""
+          },
+          "capabilities": [
+            "oob"
+          ]
+        }
+      },
+      "capabilities": {
+        "return": {}
+      },
+      "properties": [
+        {
+          "path": "/machine/soc",
+          "type": "child<stm32f100-soc>"
+        },
+        {
+          "path": "/machine/soc/STM32F100.flash[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/armv7m",
+          "type": "child<armv7m>"
+        },
+        {
+          "path": "/machine/soc/armv7m",
+          "property": "cpu-type",
+          "value": {
+            "return": "cortex-m3-arm-cpu"
+          }
+        },
+        {
+          "path": "/machine/soc/armv7m/armv7m-container[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/armv7m/bitband[1]",
+          "type": "child<ARM-bitband-memory>"
+        },
+        {
+          "path": "/machine/soc/armv7m/cpu",
+          "type": "child<cortex-m3-arm-cpu>"
+        },
+        {
+          "path": "/machine/soc/armv7m/systick-reg-ns",
+          "type": "child<armv7m_systick>"
+        },
+        {
+          "path": "/machine/soc/armv7m/systick-reg-ns/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/soc/armv7m/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/soc/armv7m/nvic",
+          "type": "child<armv7m_nvic>"
+        },
+        {
+          "path": "/machine/soc/armv7m/bitband[0]",
+          "type": "child<ARM-bitband-memory>"
+        },
+        {
+          "path": "/machine/soc/usart[0]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[0]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[1]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[1]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/usart[2]",
+          "type": "child<stm32f2xx-usart>"
+        },
+        {
+          "path": "/machine/soc/usart[2]/stm32f2xx-usart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/spi[0]",
+          "type": "child<stm32f2xx-spi>"
+        },
+        {
+          "path": "/machine/soc/spi[0]/stm32f2xx-spi[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/spi[1]",
+          "type": "child<stm32f2xx-spi>"
+        },
+        {
+          "path": "/machine/soc/spi[1]/stm32f2xx-spi[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/soc/STM32F100.flash.alias[0]",
+          "type": "child<memory-region>"
+        }
+      ],
+      "status": "SUSPENDED_QMP_READ_COMPLETE",
+      "stderr": "qemu-system-arm: terminating on signal 15 from pid 24474 (<unknown process>)\n"
+    }
+  ],
+  "limits": [
+    "Suspended empty machines only; no firmware/image/device access or hardware operation",
+    "Different board peripherals are not CASE hardware validation; CPU/memory compatibility must be established before execution"
+  ]
+}

@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+"""Compare all byte indices of Apollo's ratio-cell pointer selector."""
+from pathlib import Path
+import importlib.util
+import subprocess
+import tempfile
+from elftools.elf.elffile import ELFFile
+from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_MODE_MCLASS
+from unicorn.arm_const import UC_ARM_REG_SP, UC_ARM_REG_LR, UC_ARM_REG_R0
+
+source = Path(__file__).with_name('display_driver_ratio_cell.c')
+blob = (Path(__file__).resolve().parents[4] / 'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
+decoder = source.parents[2] / 'peripherals/verify_ble_hci_le_feature_initializer.py'
+spec = importlib.util.spec_from_file_location('apollo_sram_decoder', decoder)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+native_initial = bytes(module.decoded[0x3994:0x3a40])
+with tempfile.TemporaryDirectory() as d:
+    elf_path = Path(d) / 'ratio.elf'
+    subprocess.run(['/usr/bin/clang', '--target=arm-none-eabi', '-mcpu=cortex-m4',
+                    '-mthumb', '-O2', '-nostdlib', '-Wl,-Ttext=0x100000',
+                    '-Wl,-e,display_driver_brightness_ratio_cell_4af73a',
+                    str(source), '-o', str(elf_path)], check=True, capture_output=True)
+    with elf_path.open('rb') as f:
+        elf = ELFFile(f)
+        segments = [(s['p_vaddr'], s.data()) for s in elf.iter_segments() if s['p_type'] == 'PT_LOAD']
+        syms = {s.name: s['st_value'] for s in elf.get_section_by_name('.symtab').iter_symbols()}
+    base = syms['display_driver_ratio_cells_20003994']
+    assert base & 3 == 0
+    cases = list(range(256)) + [256, 0xffffffff]
+    for index in cases:
+        results = []
+        for compiled in (False, True):
+            cpu = Uc(UC_ARCH_ARM, UC_MODE_THUMB | UC_MODE_MCLASS)
+            cpu.mem_map(0x400000, 0x400000)
+            cpu.mem_write(0x438000, blob)
+            cpu.mem_map(0x100000, 0x200000)
+            cpu.mem_map(0x20000000, 0x100000)
+            cpu.mem_write(0x20003994, native_initial)
+            for address, data in segments:
+                cpu.mem_write(address, data)
+            cpu.reg_write(UC_ARM_REG_SP, 0x200ff000)
+            cpu.reg_write(UC_ARM_REG_LR, 0x600001)
+            cpu.reg_write(UC_ARM_REG_R0, index)
+            start = syms['display_driver_brightness_ratio_cell_4af73a'] if compiled else 0x4af73a
+            cpu.emu_start(start | 1, 0x600000, count=100)
+            ptr = cpu.reg_read(UC_ARM_REG_R0)
+            offset = ptr - (base if compiled else 0x20003994)
+            assert 0 <= offset < 0xac, (index, compiled, hex(ptr))
+            results.append((offset, bytes(cpu.mem_read(ptr, 1))))
+        assert results[0] == results[1], (index, results)
+print('PASS_DISPLAY_DRIVER_RATIO_CELL_NATIVE', len(cases))

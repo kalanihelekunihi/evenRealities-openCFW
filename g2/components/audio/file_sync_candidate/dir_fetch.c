@@ -5,6 +5,7 @@
 extern int32_t g2_lfs_bd_read(void *,const void *,void *,uint32_t,uint32_t,
                                uint32_t,void *,uint32_t);
 extern int32_t g2_log_transport_queue_failure(const char *,...);
+extern int32_t g2_lfs_gstate_hasmovehere(void *state,const void *pair);
 typedef struct {
     uint32_t pair[2],rev,off,etag;
     uint16_t count;
@@ -145,9 +146,7 @@ int32_t g2_lfs_dir_fetchmatch(void *filesystem,void *directory,
             dir->erased=(uint8_t)(fcrc_actual==fcrc[1]);
         }
         uint32_t *gdisk=word(fs,0x3cu);
-        if((gdisk[0]&0x70000000u) &&
-           (gdisk[1]==dir->pair[0] || gdisk[2]==dir->pair[1] ||
-            gdisk[1]==dir->pair[1] || gdisk[2]==dir->pair[0])) {
+        if(g2_lfs_gstate_hasmovehere(gdisk,dir->pair)) {
             if(tag_id(gdisk[0])==tag_id(besttag)) besttag|=0x80000000u;
             else if(besttag!=UINT32_MAX && tag_id(gdisk[0])<tag_id(besttag))
                 besttag-=0x400u;

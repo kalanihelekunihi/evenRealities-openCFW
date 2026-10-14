@@ -1,0 +1,70 @@
+{
+  "build": {
+    "definitions": 4021,
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false,
+    "imports": 724
+  },
+  "completed_utc": "2026-10-13T22:34:45.897696+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "abi_adapters": [],
+    "actual_c_bodies": [],
+    "experimental_symbol_joins": 7,
+    "fixtures_or_stubs": [],
+    "pinned_vendor_c_sources": 0,
+    "portable_upstream_c_sources": 0,
+    "pseudocode_only": [],
+    "typed_data": []
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Function ABI joins are supported by pinned prototypes and selected C call signatures; full runtime equivalence is not established.",
+    "hciCb remains a product RAM layout and allocation gate.",
+    "Vendor command completion remains unjoined pending provider behavior evidence.",
+    "Full payload layout, byte identity, and hardware operation remain unproven."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "724 unresolved Apollo Main imports",
+      "Cordio hciCb and vendor command completion remain",
+      "0/6 complete firmware images"
+    ],
+    "reason": "Continue C reduction and RAM layout qualification"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-joins-round435/hci-joins-receipt.json",
+      "sha256": "3a7d1110cf4b0edf765ff5c421dc254617e95b14ac06d18c90e12def9edef03f"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-hci-joins-round435/receipt.json",
+      "sha256": "0726530b2aeace5c7a66df62a37650c8a0177ea2d6ca0447ce3dffda8a48d0bd"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-hci-joins-round435/root-source-audit.json",
+      "sha256": "abfaea29e3e1ac9569a6678c21e1857d33325bbfb03f74c09a017ff2d763a50a"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-joins-round435/hci-joins-receipt.json",
+      "sha256": "3a7d1110cf4b0edf765ff5c421dc254617e95b14ac06d18c90e12def9edef03f"
+    }
+  ],
+  "tests": {
+    "expected_failures": [],
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-joins-round435/hci-joins-receipt.json",
+        "sha256": "3a7d1110cf4b0edf765ff5c421dc254617e95b14ac06d18c90e12def9edef03f"
+      }
+    ]
+  },
+  "wave_id": "root-apollo-main-round435-hci-joins"
+}

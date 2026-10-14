@@ -1,0 +1,65 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 721,
+    "strong_unresolved_before": 721
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_queue_flags_candidates_20261013/flags.c",
+      "sha256": "e72b8528017cfe91f424dad6fea1b59deca48c6fb84de2a8338cbb3a442d1988"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "f248542ec87477e5ff285727537f1459355258248f9473afddbb3b34ed9a4303"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004bfa10.c",
+      "sha256": "a144d7b484db56f1d69a83813348a7c01382451ec176cbdc00c49eed00dcfc47"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_queue_flags.py",
+      "sha256": "84e688eab8fc3d7081f57958be07d996f2bdbc0f8c3f303673711af31d455bd3"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-queue-flags-round521/oracle.json",
+      "sha256": "129c57d1c9fb3bc620178b56d4f91dc3b468fb35e22b86e2d17b3f2627bdfc64"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-queue-flags-round521/isolated/flags.elf",
+      "sha256": "5ae0f68266831cfbe886f17322e8b91d1c45457b214cdb8ecce91b8a3e9ff099"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-queue-flags-round521/receipt.json",
+      "sha256": "0d5cbc05ac3a7e2b783f33760ce8f44129d72eeb03fef9e280ddda49634a783f"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-queue-flags-round521/apollo_main/candidate.o",
+      "sha256": "6da6a0c69997404dd4594d9a661ed71e98a5c100bdd2ae41c9b49ff42591aa6b"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Selector 30 queue submission and error paths remain unresolved.",
+    "Full 0x4c0f78 dispatcher remains unresolved; 0 of 6 images source-complete.",
+    "Synthetic SRAM only; physical operation unverified."
+  ],
+  "native_entrypoints": [
+    "0x4bfa10"
+  ],
+  "native_source_oracle_cases": 105,
+  "provenance": "Main Ghidra pseudocode, locked native blob and native/source queue flag comparison",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_main_mspi_queue_flags_4bfa10"
+  ],
+  "status": "bounded_helper_verified",
+  "target_id": "official-s200-v2.2.6.10",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-queue-flags-round521/round521-receipt.json",
+    "sha256": "36331c0074cb96c6f5c0e4686d3f72adf3d59ba171ef5e12aa7818a2fd47e445"
+  },
+  "publication_scope": "Body-receipt evidence only; bounded queue flags helper; no canonical wave identity inferred; no map/image promotion"
+}

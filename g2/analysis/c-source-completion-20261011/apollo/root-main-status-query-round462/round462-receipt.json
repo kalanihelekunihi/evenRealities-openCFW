@@ -1,0 +1,39 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved": 730
+  },
+  "command_contract": "command 5, address 0, mode 0, five-byte zeroed response, count 1",
+  "evidence": [
+    {
+      "path": "g2/components/main/fal_norflash_status_query_candidates_20261013/status_query.c",
+      "sha256": "72180a6c34c96a611ba88db9fbc963ffbb1be2a869f04ecd7763b5efca197d12"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "5b867ba486ba8ab033915a4a11f3822f7f8437172075706304f6fb50b5d36a5f"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-status-query-round462/receipt.json",
+      "sha256": "47cb5f7489aea0c76880f8ed10c3312163b57ee9ac2f510663ebdc2d0578d5cd"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-status-query-round462/apollo_main/candidate.o",
+      "sha256": "9c5b295a611f1f429129d115f879eb726f989a8e36fd2ee17d95029f44f7bbad"
+    }
+  ],
+  "host_cases_checked": 128,
+  "image": "apollo_main",
+  "limitations": [
+    "The stock instruction control path and injected-command/logging cases are checked; command execution at 0x470168 remains unresolved.",
+    "No hardware flash effects or complete Main image were verified."
+  ],
+  "native_entrypoint": "0x4702d8",
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_body": "g2_norflash_status_busy_4702d8",
+  "status": "bounded_source_verified",
+  "stock_entry_bytes_sha256": "09eb540e4e33673c07adac9d1a4d254e34fd10fe7482abd9287d60ffdda26b32",
+  "stock_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "target_id": "official-s200-v2.2.6.10"
+}

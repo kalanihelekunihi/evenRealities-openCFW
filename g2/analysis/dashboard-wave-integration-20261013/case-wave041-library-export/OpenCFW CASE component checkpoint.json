@@ -1,0 +1,58 @@
+{
+  "wave_id": "component-goal-case-wave041-current-custom-artifact",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T22:22:47.249988+00:00",
+  "status": "PASS_SOURCE_CUSTOM_MEMORY_CONTRACT",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/wave.json",
+    "sha256": "0d863a2bc4203aaa4b119e839f2ecd991dd477d32e6200ae50d77cf159ef6d76"
+  },
+  "build": {
+    "path": "g2/analysis/component-goal-20261013/case-wave041-current-custom-artifact/build/receipt.json",
+    "sha256": "4414fc41f4de29e864e9c999c3ac575c1a2556cae06685bcf2892e1f4bca8915"
+  },
+  "rebuild": {
+    "path": "g2/analysis/component-goal-20261013/case-wave041-current-custom-artifact/rebuild/receipt.json",
+    "sha256": "f9030d2d61e8045125c3441e24e887616cbdd40e7463457160e4be1c8ce3b035"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave041-current-custom-artifact/verification.json",
+    "sha256": "9cee729a65eef32efb4ea3e40a96fa0729b9875bef81d35ac50176c5f23afe64"
+  },
+  "artifact": {
+    "path": "g2/analysis/component-goal-20261013/case-wave041-current-custom-artifact/build/case-custom.bin",
+    "sha256": "30ce4ef3f20e1ae8fd64f70aa217d2742d5ce43700fc9de179732fa47bcd2f05"
+  },
+  "raw_binary_bytes": 63200,
+  "qualified_code_data_span": 63194,
+  "erased_padding_bytes": 6,
+  "headroom": 194848,
+  "done_criteria": [
+    "Currentsource/objectjoin",
+    "Unchangedqualifiedcode/data/addresses",
+    "Protectedpages/8bytegranularity",
+    "Threenegativeguards",
+    "ReproducibleELF/raw"
+  ],
+  "component_acceptance_gates": {
+    "custom_bounds": "PASS",
+    "package_hardware_exactmatching": "unmet",
+    "accepted_images": "0/6"
+  },
+  "limits": [
+    "Linker confirms emittedsection boundaries, not every absoluteRAM/MMIO reference or complete computed-root/ambient-stack/provider behavior.",
+    "Factory-page exclusion in the image does not validate OTA erase/program preservation, bank-swap or flash hardware.",
+    "Rawdiagnostic image only; noEVEN envelope, flashing authorization or accepted replacement claim."
+  ],
+  "next_critical_path_task": "Scheduler/task-frame/PendSV software contracts before hardwareexceptionreturn validation",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave041-current-custom-artifact/wave.json",
+    "sha256": "5c068cdd3a31182e03251d31a1ddbbcb6ed86a7fa2bb4d16ef999cb4ea0d01dd"
+  },
+  "publication_scope": "Reproducible current custom artifact; no package/hardware/map/image acceptance"
+}

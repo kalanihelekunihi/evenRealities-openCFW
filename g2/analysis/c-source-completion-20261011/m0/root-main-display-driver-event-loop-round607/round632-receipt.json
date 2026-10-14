@@ -1,0 +1,28 @@
+{
+  "round": 632,
+  "component": "Apollo display setter to lock and queue-submit direct C call chain",
+  "status": "Nine bounded native/C end-to-end scenarios pass through four compiled C bodies; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": {
+    "display_driver_position_setters.c": "59ffc958bc5c0c0e5b7ab5b1a0a82cda2398506c5a0533c50a30b29b4e237376",
+    "display_driver_prepare_update.c": "73537b2d0ebadf59603d35b36c47c03dcf4b9d89803f22ec6666756c21f8eb29",
+    "display_driver_submit_window.c": "a6f9b5b735150bc1b275559430fc74b1ca74234f22f14580ffbf2ffca1094187"
+  },
+  "verifier_sha256": "2c698da0b360faa4d14bb7a7046122c179e603f1adb9ecbd5d101564d2c4b2be",
+  "link_audit_sha256": "ad1f9507a46ec43a6e4005ce655e0750c347fd57e5c88a9cc182d5baea8a2d24",
+  "combined_object_sha256": "245ce070ecf1e39be70c8cdcd9fadca17db8a9221de17426446b965b281cced8",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_SETTER_CHAIN_NATIVE 9",
+    "PASS_DISPLAY_DRIVER_POSITION_SETTERS_NATIVE 14",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 99 25 7",
+    "git diff --check"
+  ],
+  "gates": [
+    "frame routine 0x46c73c C body unresolved",
+    "uLED option objects, row callback, work buffer, dispatch gate, live settings config open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

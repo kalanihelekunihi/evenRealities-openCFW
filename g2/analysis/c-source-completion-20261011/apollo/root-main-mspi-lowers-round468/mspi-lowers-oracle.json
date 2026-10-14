@@ -1,0 +1,14 @@
+{
+  "cases": 496,
+  "limits": [
+    "MMIO registers are synthetic RAM and status polls/delays are injected for FIFO cases.",
+    "No physical FIFO, elapsed time, or complete Main image is verified."
+  ],
+  "source_elf_sha256": "5970067e66e8c7bae1ba4ea390568a32979bee4dd3baea054b59918db3ca6648",
+  "source_sha256": {
+    "g2/components/main/mspi_fifo_candidates_20261013/fifo.c": "e47bd83a23d6aee057a4f473f9cbd8115f542830deb133c60bde566d732bf2a7",
+    "g2/components/main/mspi_status_poll_candidates_20261013/poll.c": "957e42618f0c66d69e21611d0816b90c906b4da368add9659bfda9037eacfc89"
+  },
+  "status": "PASS_MAIN_MSPI_LOWERS_BOUNDED_NATIVE_SOURCE",
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+}

@@ -1,0 +1,27 @@
+{
+  "round": 627,
+  "component": "Apollo maximum-luminance to ratio-cell direct C call path",
+  "status": "50 bounded native/C scenarios pass through compiled getter without a getter stub; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": {
+    "display_driver_max_lum.c": "041672d4c779e34c10d1698ec828583b09d906f2e7fb32d7e8873e6186735d06",
+    "display_driver_ratio_cell.c": "96f174ac44df9b03c6017b92a8fce4f2d1368910b158833bba3cd94192b1ba85"
+  },
+  "verifier_sha256": "158a0f4678bbc3e9b67813744deefde978f3de8adba0996b9a185ea59ae3930b",
+  "link_audit_sha256": "d86100430281c21a042978e7eb16d115af1213e3c32f487e257b87785cbaafa6",
+  "combined_object_sha256": "908989b3dd490a1a2c5ec591e4d39372e3d9c460637dc0e53ed066c416613f82",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_MAX_LUM_NATIVE 50",
+    "PASS_DISPLAY_DRIVER_RATIO_CELL_NATIVE 258",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 89 22 7"
+  ],
+  "gates": [
+    "settings SRAM region placement/ownership and dynamic write lineage open",
+    "live settings RAM 0x20072da8 startup state missing",
+    "uLED option objects, row callback, work buffer, case3 prelude and dispatch gate open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

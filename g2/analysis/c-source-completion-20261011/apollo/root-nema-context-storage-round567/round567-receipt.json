@@ -1,0 +1,39 @@
+{
+  "round": 567,
+  "status": "PASS_NEMA_CONTEXT_STORAGE_SOURCE_OWNED",
+  "component": "Apollo Nema context and capability cells",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Three contiguous four-byte cells at native RAM 0x20074efc, 0x20074f00, and 0x20074f04 are source-owned zero-initialized C storage, adjacent to the previously owned framebuffer-context cell at 0x20074f08.",
+  "new_c_source": "g2/components/audio/uart_thread_source_candidate/display_nema_context_state.c",
+  "build": {
+    "candidate_compilation_passed": true,
+    "unresolved_symbols": 677,
+    "previous_unresolved_symbols": 680,
+    "duplicate_strong_symbols": [],
+    "source_complete": false
+  },
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_nema_context_storage.py",
+      "sha256": "a88c3f793ab182eb434fd41b10fe30517159b23f0f3cd965ed2540069707ae7f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/nema-context-storage-results.json",
+      "sha256": "fb10fb7afc135021ab04c458c15444a15ab591ccbf8d27b47434490ad671e0dd"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_nema_context_state.c",
+      "sha256": "6887a0c7e4009dcec93b6afe8792cba348df75959729846b068f83c08bdb1489"
+    },
+    {
+      "path": "g2/build/c-firmware/root-round567/receipt.json",
+      "sha256": "03b0cbd806a309c3f52daa7556ef6f8b8cabf95f70d53957f84ca1952fe6f6cd"
+    }
+  ],
+  "remaining_estimate": {
+    "nema_context_storage": "Initial zero ownership is complete for these three cells; final absolute placement, later initialization and lifetime, boot and hardware remain, roughly 40-55 percent of this component.",
+    "apollo_main": "677 unresolved symbols remain, plus linker/layout and whole-path behavior gates.",
+    "whole_g2_firmware": "0 of 6 image components source-complete."
+  },
+  "limits": "Relocatable C ownership and native startup zero callback only; no final placement, boot or hardware proof."
+}

@@ -1,0 +1,177 @@
+{
+  "status": "COLD_BOOT_PERIPHERAL_FRONTIER_OBSERVED",
+  "QEMU_sha256": "121d02f5d368300139d1ae21dc75595b434d7b6318c221b23886fdb28aecd876",
+  "source_ELF_sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853",
+  "results": [
+    {
+      "label": "native",
+      "command": [
+        "/opt/homebrew/bin/qemu-system-arm",
+        "-machine",
+        "microbit",
+        "-global",
+        "nrf51-soc.flash-size=134479872",
+        "-S",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-serial",
+        "none",
+        "-nodefaults",
+        "-kernel",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave051-coldboot-peripheral-frontier/reference-payload.bin",
+        "-gdb",
+        "unix:/tmp/case-coldboot-mrmnol6l/gdb.sock,server=on,wait=off",
+        "-device",
+        "loader,file=/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave051-coldboot-peripheral-frontier/reference-payload.bin,addr=0x08000000,force-raw=on"
+      ],
+      "reset": {
+        "pc": "0x8000144",
+        "sp": "0x20002c88",
+        "xpsr": "0x41000000"
+      },
+      "observations": [
+        {
+          "reply": "T02thread:01;",
+          "registers": {
+            "pc": "0x80056e4",
+            "sp": "0x20002bf8",
+            "xpsr": "0x81000000",
+            "r0": "0x0",
+            "r1": "0x1",
+            "r2": "0xff0000",
+            "r3": "0xe000e414"
+          },
+          "RCC_40021000": "00000000",
+          "RCC_40021008": "00000000",
+          "tick_20000120": "00000000"
+        },
+        {
+          "reply": "T02thread:01;",
+          "registers": {
+            "pc": "0x80056e4",
+            "sp": "0x20002bf8",
+            "xpsr": "0x81000000",
+            "r0": "0x0",
+            "r1": "0x1",
+            "r2": "0xff0000",
+            "r3": "0xe000e414"
+          },
+          "RCC_40021000": "00000000",
+          "RCC_40021008": "00000000",
+          "tick_20000120": "00000000"
+        },
+        {
+          "reply": "T02thread:01;",
+          "registers": {
+            "pc": "0x80056e4",
+            "sp": "0x20002bf8",
+            "xpsr": "0x81000000",
+            "r0": "0x0",
+            "r1": "0x1",
+            "r2": "0xff0000",
+            "r3": "0xe000e414"
+          },
+          "RCC_40021000": "00000000",
+          "RCC_40021008": "00000000",
+          "tick_20000120": "00000000"
+        }
+      ],
+      "status": "DIAGNOSTIC_COLD_BOOT_OBSERVED",
+      "stderr": "qemu-system-arm: terminating on signal 15 from pid 40864 (<unknown process>)\n"
+    },
+    {
+      "label": "source",
+      "command": [
+        "/opt/homebrew/bin/qemu-system-arm",
+        "-machine",
+        "microbit",
+        "-global",
+        "nrf51-soc.flash-size=134479872",
+        "-S",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-serial",
+        "none",
+        "-nodefaults",
+        "-kernel",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/case.elf",
+        "-gdb",
+        "unix:/tmp/case-coldboot-kp4ejahw/gdb.sock,server=on,wait=off",
+        "-device",
+        "loader,file=/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave050-qemu-m0-controller-context/source-vectors.bin,addr=0x0,force-raw=on"
+      ],
+      "reset": {
+        "pc": "0x8000144",
+        "sp": "0x20002c88",
+        "xpsr": "0x41000000"
+      },
+      "observations": [
+        {
+          "reply": "T02thread:01;",
+          "registers": {
+            "pc": "0x800c2bc",
+            "sp": "0x20002bc0",
+            "xpsr": "0x1000000",
+            "r0": "0x3e7",
+            "r1": "0x3e7",
+            "r2": "0x0",
+            "r3": "0x0"
+          },
+          "RCC_40021000": "00000000",
+          "RCC_40021008": "00000000",
+          "tick_20000120": "00000000",
+          "containing_source_symbols": [
+            "case_transfer_clock_config"
+          ]
+        },
+        {
+          "reply": "T02thread:01;",
+          "registers": {
+            "pc": "0x800c2e8",
+            "sp": "0x20002bc0",
+            "xpsr": "0x1000000",
+            "r0": "0x1",
+            "r1": "0x0",
+            "r2": "0x0",
+            "r3": "0x0"
+          },
+          "RCC_40021000": "00000000",
+          "RCC_40021008": "00000000",
+          "tick_20000120": "00000000",
+          "containing_source_symbols": [
+            "case_transfer_clock_config"
+          ]
+        },
+        {
+          "reply": "T02thread:01;",
+          "registers": {
+            "pc": "0x800c2c4",
+            "sp": "0x20002bc0",
+            "xpsr": "0x1000000",
+            "r0": "0xf",
+            "r1": "0xf",
+            "r2": "0x0",
+            "r3": "0x0"
+          },
+          "RCC_40021000": "00000000",
+          "RCC_40021008": "00000000",
+          "tick_20000120": "00000000",
+          "containing_source_symbols": [
+            "case_transfer_clock_config"
+          ]
+        }
+      ],
+      "status": "DIAGNOSTIC_COLD_BOOT_OBSERVED",
+      "stderr": "qemu-system-arm: terminating on signal 15 from pid 40864 (<unknown process>)\n"
+    }
+  ],
+  "limits": [
+    "DiagnosticNRF51/microbit board has no STM32G0 RCC/FLASH/PWR/ADC/UART/YHM2510 model; no fabricated readybits orfactoryvalues supplied",
+    "Coldboot observations on wrong peripheralboard are not firmware failure orCASE acceptance",
+    "Localdebug/CASEUSB unavailable in recordedaccesscheck; chipmodel orhardwaretrace is required for these peripheralgates"
+  ]
+}

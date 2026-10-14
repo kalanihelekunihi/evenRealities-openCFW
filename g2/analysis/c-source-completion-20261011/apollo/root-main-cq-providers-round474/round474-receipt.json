@@ -1,0 +1,76 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 728,
+    "strong_unresolved_before": 729
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_cq_disable_provider_candidates_20261013/disable.c",
+      "sha256": "d6d3b0dc07eb14849e5988b88ace0ca698b62da59601a672d8dd5b297bfdd74b"
+    },
+    {
+      "path": "g2/components/main/mspi_cq_term_provider_candidates_20261013/term.c",
+      "sha256": "805a6f8781eb5f5daa60f56c5eb8c7167dc724bae0201337865aac79cc451603"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "sha256": "9a2562c6389181d24163e55a2664dfdf7d602cbbfc96fed210fc2e4471e8819a"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "f9599771c4d23082db296b0259d2594a633a5e0425431fc0dab5cc9f2302f5c9"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_cq_disable.py",
+      "sha256": "2c2a314b69489dd0e7b8aaab57b125d48670c9bba29c4eeb672ca15606a71579"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_cq_term.py",
+      "sha256": "d6ce0ba7121a67d63425bc5f4d499f95c8c10c1d1aa0f065c6e5e6dda33ace7b"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-cq-disable-round474/disable-oracle.json",
+      "sha256": "0485edd053d0084a5a4924c990af3b48ec66fb10091976a610be2fccc136ae6f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-cq-term-round475/term-oracle.json",
+      "sha256": "0633a7ffb2376aa4963574f72063c7394b0dd5f49cc7c6a8638b37c88b81b46f"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-disable-round474/isolated/disable.elf",
+      "sha256": "af2af063497202aa4c328e9a1b8d65ea1b7dbae332cde0575694bdb63523c6e5"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-term-round475/isolated/term.elf",
+      "sha256": "b2903e3c50d7b5cad69193b9461eab8b225694efb5d1eea2f91cc344a4428433"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-disable-round474/receipt.json",
+      "sha256": "14c164eaf3445d9fb56e44538fd648c3396489997df83980aaa01e5c4404b47d"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-disable-round474/apollo_main/candidate.o",
+      "sha256": "ec3dff342f3b36580c8d9463e6e5d553e32a6a816f387d3e37bd327e15498f03"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Synthetic queue/register state bounds the comparisons; index refresh is intercepted in term tests.",
+    "Main CQ init and index refresh providers remain open; physical effects and complete image are unverified."
+  ],
+  "native_entrypoints": [
+    "0x538e8c",
+    "0x53909a"
+  ],
+  "native_source_oracle_cases": 352,
+  "provenance": "Main instruction trace and authenticated bootloader command queue providers",
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_bodies": [
+    "g2_main_cq_disable_538e8c",
+    "g2_main_cq_term_53909a"
+  ],
+  "status": "bounded_source_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

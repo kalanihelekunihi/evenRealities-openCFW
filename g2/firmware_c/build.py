@@ -139,6 +139,27 @@ def experimental_arm_sources(image: str, folder: Path) -> tuple[list[Path], list
                         "FT_Stream_Read", "FT_Stream_ReadAt",
                         "FT_Stream_ReadULong", "FT_Stream_ReadUShort",
                         "FT_Stream_Seek", "FT_Stream_Skip")]
+            if source.endswith("/gzip/ftgzip.c"):
+                # The bundled zlib sources support a freestanding build
+                # without a host errno.h; their errno symbol is not needed.
+                source_flags += ["-DNO_ERRNO_H"]
+            if source.endswith("/base/ftobjs.c"):
+                source_flags += [
+                    f"-D{name}=experimental_upstream_{name}" for name in (
+                        "FT_Get_Module", "FT_Lookup_Renderer", "FT_Stream_Free")]
+            if source.endswith("/base/ftutil.c"):
+                source_flags += [
+                    f"-D{name}=experimental_upstream_{name}" for name in (
+                        "FT_List_Add", "FT_List_Finalize", "FT_List_Find",
+                        "ft_mem_alloc", "ft_mem_free", "ft_mem_qalloc",
+                        "ft_mem_qrealloc", "ft_mem_realloc")]
+            if source.endswith("/base/ftrfork.c"):
+                # Native-derived resource-fork parsers already own these
+                # product entry points; retain the upstream VFS rule helper.
+                source_flags += [
+                    f"-D{name}=experimental_upstream_{name}" for name in (
+                        "FT_Raccess_Get_DataOffsets",
+                        "FT_Raccess_Get_HeaderInfo", "FT_Raccess_Guess")]
         if source.startswith("g2/analysis/c-source-completion-20261011/peripherals/smp_tables/candidate_"):
             cordio = ROOT / "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio"
             source_flags += ["-I" + str(cordio / subdir) for subdir in (
@@ -147,6 +168,43 @@ def experimental_arm_sources(image: str, folder: Path) -> tuple[list[Path], list
                 "wsf/sources/port/freertos", "ble-host/sources/stack/dm")]
             source_flags += ["-I" + str(ROOT / "g2/components/bootloader/filesystem/freestanding_include"),
                              "-Wno-unused-parameter"]
+        if source.endswith("/ble-host/sources/sec/uecc/sec_ecc.c") or source.endswith("/third_party/uecc/uECC.c"):
+            # Pinned Cordio security ECC plus its uECC implementation.
+            # The sec_ecc.c time.h include is unused in this configuration.
+            cordio = ROOT / "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio"
+            vendor = cordio.parent
+            source_flags += ["-I" + str(ROOT / "g2/analysis/c-source-completion-20261011/peripherals/root-cordio-ecc-round422/freestanding_include"),
+                             "-I" + str(ROOT / "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include")]
+            source_flags += ["-I" + str(path) for path in (
+                cordio / "ble-host/include", cordio / "ble-host/sources/sec/common",
+                cordio / "ble-host/sources/sec/uecc", cordio / "ble-host/sources/stack/smp",
+                cordio / "ble-host/sources/stack/cfg", cordio / "ble-host/sources/stack/dm",
+                cordio / "wsf/include", cordio / "wsf/sources",
+                cordio / "wsf/sources/util", cordio / "wsf/sources/port/freertos",
+                vendor / "uecc")]
+        if source.startswith("third-party/upstream/nationalchip-lvp-kws/utility/libc/"):
+            # Portable generic libc bodies reused experimentally for Main.
+            # Their stock Main implementation identity is not established.
+            if source.endswith(("/strtol.c", "/strntoumax.c")):
+                # This pair needs the pinned provider's strntoumax declaration
+                # and ASCII ctype contract. Zephyr supplies target stdint.h.
+                source_flags += ["-I" + str(ROOT / "third-party/upstream/nationalchip-lvp-kws/include/utility/libc"),
+                                 "-I" + str(ROOT / "third-party/reference/ambiq-zephyr/lib/libc/minimal/include"),
+                                 "-I" + str(ROOT / "third-party/upstream/nationalchip-lvp-kws/utility/libc/templates")]
+            else:
+                source_flags += ["-I" + str(ROOT / "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include")]
+        if source.endswith("/root-hci-decoders-round434/source_linked_decoders.c"):
+            # The wrapper includes pinned Cordio HCI C so its static parser
+            # functions can populate a relocatable, source-linked table.
+            cordio = ROOT / "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio"
+            source_flags += ["-I" + str(ROOT),
+                             "-I" + str(ROOT / "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include"),
+                             "-Wno-unused-parameter"]
+            source_flags += ["-I" + str(cordio / subdir) for subdir in (
+                "ble-host/include", "ble-host/sources/hci/ambiq",
+                "ble-host/sources/stack/hci", "ble-host/sources/stack/cfg",
+                "wsf/include", "wsf/sources", "wsf/sources/port/freertos",
+                "wsf/sources/util")]
         receipt = command(["clang", *flags, *source_flags, "-MD", "-MF", str(depfile),
                            "-c", str(path), "-o", str(obj)],
                           folder / f"experimental-{index:03d}.log")
@@ -227,13 +285,31 @@ def arm_image(image: str, out: Path, experimental: bool = False) -> dict:
         result["relocatable_link"] = compose(archives + extra, folder / "candidate.o",
                                              folder / "relocatable-link.log", aliases)
         result["candidate_compilation_passed"] &= result["relocatable_link"]["returncode"] == 0
+        if (experimental and image == "apollo_bootloader"
+                and result["relocatable_link"]["returncode"] == 0):
+            # Resolve the three external resident-ROM entries from the
+            # checked-in header. The binder verifies that executable section
+            # bytes remain unchanged; this is not a final placed image.
+            bound = folder / "resident-rom-bound.o"
+            binder = ROOT / "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-rom-bindings-round439/bind_resident_rom.py"
+            result["resident_rom_binding"] = command(
+                [sys.executable, str(binder), str(folder / "candidate.o"), str(bound)],
+                folder / "resident-rom-binding.log")
+            result["candidate_compilation_passed"] &= result["resident_rom_binding"]["returncode"] == 0
+            if result["resident_rom_binding"]["returncode"] == 0:
+                receipt = bound.with_suffix(bound.suffix + ".receipt.json")
+                result["resident_rom_binding"]["artifact"] = {
+                    "path": str(bound.relative_to(ROOT)), "sha256": digest(bound),
+                    "receipt_path": str(receipt.relative_to(ROOT)),
+                    "receipt_sha256": digest(receipt),
+                    "validation": "External resident-ROM symbols bound; final image layout unqualified"}
     if experimental and image == "case":
         candidate = folder / "libcase_command_candidate.a"
         build = command([sys.executable,
             "g2/analysis/c-source-completion-20261011/m0/build_case_candidate.py",
             "--output", str(candidate)], folder / "experimental-compile.log")
         result["experimental_case"] = {"build_command": build,
-            "validation": "Distinct full command graph; not a selected CASE provider replacement"}
+            "validation": "Independent command-graph compilation; selected-source ownership is checked below"}
         result["candidate_compilation_passed"] &= build["returncode"] == 0
         if build["returncode"] == 0:
             result["experimental_case"]["relocatable_link"] = compose(
@@ -243,9 +319,30 @@ def arm_image(image: str, out: Path, experimental: bool = False) -> dict:
             result["experimental_case"]["source_receipt"] = {
                 "path": str(receipt.relative_to(ROOT)), "sha256": digest(receipt)}
             result["candidate_compilation_passed"] &= result["experimental_case"]["relocatable_link"]["returncode"] == 0
-            result["experimental_case"]["combined_selected_link"] = compose(
-                archives + [candidate], folder / "experimental-case-combined.o",
-                folder / "experimental-combined-link.log")
+            selected_receipt = json.loads(receipt_paths[0].read_text())
+            command_receipt = json.loads(receipt.read_text())
+            selected_sources = {item["source"]: item["sha256"]
+                                for item in selected_receipt["sources"]}
+            command_sources = {item["path"]: item["sha256"]
+                               for item in command_receipt["sources"]}
+            same_sources = bool(command_sources) and all(
+                selected_sources.get(path) == sha
+                for path, sha in command_sources.items())
+            same_symbols = set(command_receipt["provided_symbols"]).issubset(
+                selected_receipt["provided_symbols"])
+            if same_sources and same_symbols:
+                result["experimental_case"]["combined_selected_link"] = {
+                    "status": "EXACT_SOURCE_SUBSET_ALREADY_SELECTED",
+                    "returncode": 0,
+                    "selected_receipt_sha256": digest(receipt_paths[0]),
+                    "command_receipt_sha256": digest(receipt),
+                    "matching_sources": len(command_sources),
+                    "provided_symbols": len(command_receipt["provided_symbols"]),
+                    "validation": "The selected archive already owns every command source and strong symbol; linking duplicate archive members would create false multiple definitions."}
+            else:
+                result["experimental_case"]["combined_selected_link"] = compose(
+                    archives + [candidate], folder / "experimental-case-combined.o",
+                    folder / "experimental-combined-link.log")
             result["candidate_compilation_passed"] &= result["experimental_case"]["combined_selected_link"]["returncode"] == 0
         startup_output = folder / "experimental-case-command-startup.o"
         startup_build = command([sys.executable,

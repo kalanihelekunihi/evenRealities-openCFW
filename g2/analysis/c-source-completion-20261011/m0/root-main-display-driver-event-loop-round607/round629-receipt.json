@@ -1,0 +1,25 @@
+{
+  "round": 629,
+  "component": "Apollo display brightness, profile, and offset setters",
+  "status": "Three C bodies compile; 14 bounded native/C scenarios pass; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "59ffc958bc5c0c0e5b7ab5b1a0a82cda2398506c5a0533c50a30b29b4e237376",
+  "verifier_sha256": "c1a9de5bb1c90e4aed66315d9e0ba5f9ff29ce12d21b62fa6ea3a2f09becc7ce",
+  "link_audit_sha256": "f46f4e194564f4d0b0b20fc0683f46ee869f1d9888519ce47219156159d323bc",
+  "combined_object_sha256": "8237b6dc512b82964a5911c413b386fbe9f0bddd08abb71776c2e197f416d4e8",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_POSITION_SETTERS_NATIVE 14",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 95 24 9",
+    "Cortex-M55 C syntax warnings as errors",
+    "git diff --check"
+  ],
+  "gates": [
+    "prepare-update 0x47381e and submit-window 0x474066 C bodies unresolved",
+    "frame routine 0x46c73c C body unresolved",
+    "uLED option objects, row callback, work buffer, dispatch gate, live settings config open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

@@ -1,0 +1,21 @@
+{
+  "round": 613,
+  "component": "Apollo display-driver timer initializer",
+  "status": "C source and attributes compile; 14 native/C bounded scenarios pass; unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "9381b62ee5d471e4ef98dc8dfe9125f5ea1107220cebce96fbd0eb1524ae194e",
+  "verifier_sha256": "c54d34d1cdb6b7305d3a6af2e0d121d37f615c552540597969a4da21d5837f50",
+  "native_range": "0x473ad0..0x473b33",
+  "timer_attribute": "name display_device_timer, flags 0, 44-byte BSS control block, native SRAM 0x200735cc",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_TIMER_INIT_NATIVE 14",
+    "ARM Thumb syntax compile warnings as errors",
+    "git diff --check"
+  ],
+  "gates": [
+    "callback body at 0x473b54 unresolved",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0
+}

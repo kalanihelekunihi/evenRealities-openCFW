@@ -1,0 +1,110 @@
+{
+  "wave_id": "component-goal-case-wave026-router-ram-access-joins",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T21:48:01.820984+00:00",
+  "status": "COMPLETED_BOUNDED_NATIVE_SOURCE_RAM_ACCESS_PROVENANCE_JOINS",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/wave.json",
+    "sha256": "bab7e049aecdbf06603eddf7a72c8fb51c9a9e0e265eebe2cb6af11c3e7d635e"
+  },
+  "provenance_frontier": {
+    "path": "g2/analysis/component-goal-20261013/case-wave025-ram-callback-provenance/wave.json",
+    "sha256": "a39e0ced0c8f786bfdcba7dfe37ba9fff31cfea53f91f5e6f9ac94a7e37fea65"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave026-router-ram-access-joins/verify.py",
+    "sha256": "7fd786c989c58141fc7f959eb8573a41de2a686859eb02233e3185865de5365a"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave026-router-ram-access-joins/verification.json",
+    "sha256": "50bf7d2b62db53177776170f24ff05d4ee65ce31e15a31272a1d6cf47ba4d4f7"
+  },
+  "done_criteria": [
+    "Replay48 full logged native/source router cases",
+    "Observe actual native/source RAM read/write accesses without provider cuts",
+    "Join prior derived address targets only when both bodies touch target byte",
+    "Retain PC/address/access-size examples and pending targets"
+  ],
+  "derived_targets_both_exercised": [
+    "0x200000f5",
+    "0x20000120",
+    "0x20000895",
+    "0x20000896",
+    "0x20000898",
+    "0x20000899",
+    "0x200008ae",
+    "0x200008b2",
+    "0x200008ca",
+    "0x200008ce"
+  ],
+  "derived_targets_unjoined": [
+    "0x20000029",
+    "0x200000bb",
+    "0x200000c4",
+    "0x200000c8",
+    "0x200000cc",
+    "0x200000d0",
+    "0x200000d4",
+    "0x200000d8",
+    "0x200000dc",
+    "0x200000f6",
+    "0x200000f7",
+    "0x200000fa",
+    "0x200000fb",
+    "0x200000fc",
+    "0x20000100",
+    "0x20000109",
+    "0x20000134",
+    "0x20000144",
+    "0x20000158",
+    "0x2000016c",
+    "0x20000170",
+    "0x20000180",
+    "0x20000184",
+    "0x20000190",
+    "0x20000198",
+    "0x200001b5",
+    "0x200001b6",
+    "0x200001b7",
+    "0x200001b8",
+    "0x2000087d",
+    "0x2000087e",
+    "0x2000087f",
+    "0x20000880",
+    "0x20000884",
+    "0x20000888",
+    "0x2000088c",
+    "0x2000088d",
+    "0x20000891",
+    "0x20000892",
+    "0x20000893",
+    "0x20000f9c"
+  ],
+  "joined_count": 10,
+  "unjoined_count": 41,
+  "component_acceptance_gates": {
+    "bounded_observed_RAM_targets": "PASS",
+    "whole_RAM_extents_lifetimes": "incomplete",
+    "all_computed_callbacks": "incomplete",
+    "physical_IRQ_stack": "unvalidated",
+    "accepted_images": "0/6"
+  },
+  "limits": [
+    "Actual native/source router/logger/formatter/callback/UART bodies execute; no child cuts or return injection",
+    "Synthetic static ready ISR; not physical UART/FIFO/timing proof",
+    "Bounded charging/version/default/bad-CRC cases; no global callback reachability claim",
+    "Access spanning a target byte is recorded with actual width/address; not proof it is an independent object or all source offsets are correct.",
+    "A PC-backed runtime access joins bounded address provenance only; not new native flash coverage."
+  ],
+  "next_critical_path_task": "Live log-disable qualification; remaining41derived targets require other source/native execution or base-offset evidence.",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave026-router-ram-access-joins/wave.json",
+    "sha256": "5873ff32ba7b3f5d065c739c611b0be0bb31e64748dd89a7152f891eb146a10e"
+  },
+  "publication_scope": "CASE bounded runtime provenance/test checkpoint; no map/acceptance promotion"
+}

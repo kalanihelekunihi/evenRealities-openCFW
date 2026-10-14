@@ -1,0 +1,66 @@
+{
+  "wave_id": "component-goal-case-wave030-timer-event-queue-success",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T21:53:58.559688+00:00",
+  "status": "PASS_FULL_TIMER_WRAP_EVENT_QUEUE_SUCCESS_GRAPH",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/wave.json",
+    "sha256": "bab7e049aecdbf06603eddf7a72c8fb51c9a9e0e265eebe2cb6af11c3e7d635e"
+  },
+  "source_object_build_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/final/receipt.json",
+    "sha256": "c3a70f8a4756aaab953de048362bf538864d3cb7b7bb48bf267048d34f0af4c9"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave030-timer-event-queue-success/verify.py",
+    "sha256": "36ea38a5f21186dabb53c430459202817ddee4c5de06d3c3988573c99782a1a8"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave030-timer-event-queue-success/verification.json",
+    "sha256": "1fe261b743e772d63a911ebaf0777b35c3869cbcab8e149acbfb0e700fd01b0a"
+  },
+  "fixture": {
+    "path": "g2/analysis/component-goal-20261013/case-wave030-timer-event-queue-success/fixture.elf",
+    "sha256": "8d303743d3738dd46cbfa751d767095bc9f9b13c054ca707b15b2d0cc6f8b58e"
+  },
+  "cases": 128,
+  "done_criteria": [
+    "Actual timerwrap/unlink/callback/eventsend/criticalsection/queuecopy execute",
+    "Empty queue capacities2/4 and normal/wrappedwritepositions",
+    "Independent12-byte record/queuecount/writepointer oracle",
+    "PRIMASK0 plus callee-saved/SP and observableRAM compare"
+  ],
+  "native_entries": [
+    "0x0800b284",
+    "0x0800b2b0",
+    "0x0800bf2c",
+    "0x0800bfb0",
+    "0x0800ca6c",
+    "0x0800cd80",
+    "0x0800c686",
+    "0x0800ad48",
+    "0x0800bffc",
+    "0x0800c014"
+  ],
+  "component_acceptance_gates": {
+    "bounded_synchronous_timer_event_graph": "PASS",
+    "queuefull_blockedwait_consumer": "incomplete",
+    "computedcallbacks_globalstack": "incomplete",
+    "hardware_IRQ_reentrancy": "unvalidated",
+    "accepted_images": "0/6",
+    "workflow": "P2_EXECUTING;G1passed;G2-G6notrun unchanged"
+  },
+  "limits": [
+    "Genuine counter reader retained as test-only synchronous callback, no production root promotion",
+    "One/two autoreload overflow timers; genuine event-send/critical sections/queue-copy with12-byte items, capacities2/4, normal/wrappedring positions; consumer/blockedwait/IRQconcurrency notcovered",
+    "Only immutable callback address word normalized between native/source namespaces; all other12288RAM bytes compare",
+    "No child stubs/cuts/return injection or peripheral fixtures"
+  ],
+  "ownership": "Own qualification outputs only; source/index unchanged. Genuine counter callback is test-only retained root, no production discovery promotion.",
+  "license_lineage": "Inherited recoveredMIT/compiler lineage and native pins unchanged",
+  "next_critical_path_task": "Autoreload sorted-list reinsertion then event queue",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

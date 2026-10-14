@@ -1,8 +1,7 @@
 /* FAL flash-device name lookup; product table and count are separate data. */
 #include <stdint.h>
+#include "../fal_product_config_candidates_20261013/product_tables.h"
 
-extern const uint32_t g2_fal_flash_device_table[];
-extern const uint32_t g2_fal_flash_device_count;
 
 static int name_equal_24(uint32_t a, uint32_t b)
 {
@@ -19,7 +18,7 @@ static int name_equal_24(uint32_t a, uint32_t b)
 uint32_t g2_fal_flash_device_find(uint32_t name)
 {
     for (uint32_t i = 0; i < g2_fal_flash_device_count; ++i) {
-        const uint32_t device = g2_fal_flash_device_table[i];
+        const uint32_t device = (uint32_t)(uintptr_t)g2_fal_flash_device_table[i];
         if (name_equal_24(name, device)) return device;
     }
     return 0u;

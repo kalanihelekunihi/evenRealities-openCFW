@@ -1,0 +1,75 @@
+{
+  "round": 590,
+  "status": "PASS_MAIN_MASTER_TARGET_INITIALIZER_BOUNDED",
+  "captured_utc": "2026-10-14T06:28:02.356107+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "compressed_sram_record": "0x75d3f4",
+  "decoded_sram_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "initializers": [
+    {
+      "symbol": "audio_ble_master_target_address",
+      "native_address": "0x200003c0",
+      "bytes_hex": "8720c359f8c4"
+    },
+    {
+      "symbol": "audio_ble_master_target_name",
+      "native_address": "0x200003c8",
+      "bytes_hex": "4556454e2052315f58585858585800"
+    },
+    {
+      "symbol": "audio_ble_master_security_address",
+      "native_address": "0x200003d8",
+      "bytes_hex": "000000000000ff"
+    }
+  ],
+  "native_comparisons": [
+    "PASS compiled initializer byte match",
+    "PASS master connect children 7 cases",
+    "PASS security clear 3 cases"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 640,
+  "unresolved_after": 637,
+  "removed_symbols": [
+    "audio_ble_master_security_address",
+    "audio_ble_master_target_address",
+    "audio_ble_master_target_name"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Twenty-eight startup bytes across three mutable cells are source-owned. Gaps between objects, full scatter/absolute RAM placement, complete image coverage and physical BLE behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_master_target_config.c",
+      "sha256": "f0a27974d8ceea8d8668cde60f1b02329df5329b674ef230b065f0254595dcda"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_master_target_initializer.py",
+      "sha256": "7dc7d50700a716642ef2fecacfcc5ae7225385d87992197ed84d74aa6a6513a4"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_master_connect_children.py",
+      "sha256": "ec0e6f9523b226a5a309bc6ae5b42d9162e97ea2b8f1a8aae3ca934bfd582b7f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ring_security_clear_native.py",
+      "sha256": "620922dbfb7c59309a3ddf1f3f6de26ffc7572807664c62e7d2de6a320689bd9"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round590/receipt.json",
+      "sha256": "2437c915a64120228e0e7aab58880a820da578ab4ba01c0e5e59de0d3f639c28"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-master-target-initializer-round590/round590-receipt.json",
+    "sha256": "2d0145b4cf49042e64e320ebc8627c774f93b6c3402e6a1f60df656df5f4070f"
+  },
+  "publication_scope": "Body-receipt evidence only; three master target/security startup objects and bounded comparisons; gaps/scatter/placement/full image/BLE hardware unqualified; percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

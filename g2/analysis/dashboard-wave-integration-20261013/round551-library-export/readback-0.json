@@ -1,0 +1,62 @@
+{
+  "round": 551,
+  "status": "PASS_BACKEND_CLOSE_DIR_SLICE_CONNECTED_BOUNDED",
+  "component": "Apollo audio LittleFS traversal over one entry and orphan pair",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Traversal, cycle detector, directory fetch, directory slice and global-state helper execute a valid metadata entry and orphan pair in 1,513 connected native-vs-C cases",
+  "case_count": 1513,
+  "joined_c_functions": 38,
+  "standalone_checks": [
+    "PASS_DIR_FETCH 9",
+    "PASS_DIR_FETCH_COMMIT 1",
+    "PASS_DIR_FETCHMATCH 4"
+  ],
+  "apollo_main_experimental_build": {
+    "candidate_compilation_passed": true,
+    "unresolved_symbols": 720,
+    "source_complete": false
+  },
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_dir_slice_connected.py",
+      "sha256": "f5d07f5f5eeca35608b1a19b4c144e71ababd5666079e30b23bf3893d714a752"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/backend-close-dir-slice-connected-results.json",
+      "sha256": "ffc4f70a6fd11e54a2b326f66d36ba56446fe1dff8b2038c6ecbaa3d529c1376"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_dir_fetch_connected.py",
+      "sha256": "fac72998d5bafacbd14f227f95959b436c73236d8f035b5d1c5377f895c0900c"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/dir_fetch.c",
+      "sha256": "dfc4522e0e6c590c8d12a3b8d08a55088ad89c65a1fbf9c06c0e2592bf61e637"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/dir_getslice.c",
+      "sha256": "1f8fff2be2c3b2b20cd62859c274e7d93b4f72dccd335fa3f2d5375e349ad4dc"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/gstate_hasmovehere.c",
+      "sha256": "13fb2ceb4be0523be411259905761f7626eff740b33e474c919f897870acdfbd"
+    },
+    {
+      "path": "g2/build/c-firmware/root-round551/receipt.json",
+      "sha256": "9a8ba57d8fe426dff8fc36ec2ac2eb7c5d4b98c26688667b6bd8bf53daa802f3"
+    }
+  ],
+  "prior_receipt_note": "Round 550 remains historical. dir_fetch.c changed afterward to call g2_lfs_gstate_hasmovehere; the round-550 verifier was refreshed and rerun with the current source, while round 550 receipt was not rewritten.",
+  "remaining_estimate": {
+    "filesystem_traversal": "CTZ traversal remains cut in connected fixture; multiple tags, orphan and open-file path combinations, child errors, disk effects, and real storage remain. Roughly 55-70 percent of traversal integration remains.",
+    "apollo_main": "720 unresolved symbols in fresh experimental build; source_complete false.",
+    "whole_g2_firmware": "0 of 6 image components source-complete."
+  },
+  "limits": "Synthetic 256-byte metadata block and flash read callback; no physical G2, boot or release proof.",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-audio-close-dir-slice-connected-round551/round551-receipt.json",
+    "sha256": "45c0109a6e2e3fcbe6781bb7f67a794873c07dd45b1dfc8a135b668e5bc3f08b"
+  },
+  "publication_scope": "Body-receipt evidence only; bounded directory slice/state-helper join and current source supersession of round550; historical export preserved; component incomplete; percentage is producer estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

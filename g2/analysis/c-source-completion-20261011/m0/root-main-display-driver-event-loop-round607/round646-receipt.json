@@ -1,0 +1,27 @@
+{
+  "round": 646,
+  "component": "Apollo NEMA mode lower routines 0x5226d6, 0x52294c and 0x4b1588",
+  "status": "Three lower C bodies compile; 18 native/C cases pass; full NEMA mode 0x513924 still open; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "rea_mode_pseudocode_evidence_id": "ev_fdaebd4e7e122503a710d032231e757b87f082b9408f05335eb337597f4accb0",
+  "rea_pseudocode_sha256": "b3f49f682a2e238f917488708ea41a30b90ae23f6bba6a1aacb3c0c938fca103",
+  "source_sha256": "2cc693f84768aa08c5e4105956db3bc24dc514756f308141caa95f8b21709a35",
+  "verifier_sha256": "1acf39751fa8ef89fa48d989ed1d25d231aaf63332fcc7e2b07df56ccb4d3b28",
+  "link_audit_sha256": "7d88823aa96a55a8d101cadf974e1550b6aa8fdacfdb2cc8b4581dc4b80f0145",
+  "combined_object_sha256": "16cbc84b4c132db7e031bc713cdfc0387da056dabc8417c746aa90ab8e388ca6",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_NEMA_MODE_HELPERS_NATIVE 18",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 135 34 2",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "gates": [
+    "NEMA mode 0x513924 and uLED row callback 0x4ca2ac bodies unresolved",
+    "NEMA mode recovered pseudocode has decompiler type/ABI ambiguities requiring instruction and native tests",
+    "uLED workspace size/placement provisional and option callback relocation open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

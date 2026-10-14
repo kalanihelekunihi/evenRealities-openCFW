@@ -1,0 +1,50 @@
+{
+  "wave_id": "component-goal-case-wave045-exception-return-probe",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T22:40:22.327056+00:00",
+  "status": "COMPLETED_PROBE_BLOCKED_AT_MANUALLY_SEEDED_EXCEPTION_FIXTURE",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/wave.json",
+    "sha256": "0d863a2bc4203aaa4b119e839f2ecd991dd477d32e6200ae50d77cf159ef6d76"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave045-exception-return-probe/verify.py",
+    "sha256": "998d9240119fdaff4c1d727f1450d42f15a6d7ef7aea5b868d7d5d1bd994012f"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave045-exception-return-probe/verification.json",
+    "sha256": "6b5ebfe72607c2c97e1a4762b96b4af2a952a409998d989eb7202fb74fa1ad45"
+  },
+  "access_check": {
+    "path": "g2/analysis/component-goal-20261013/case-wave045-exception-return-probe/access-check.json",
+    "sha256": "2ec7869b40d4def2cc627b16284576b49dea3d582762b0708983d2aca7445eea"
+  },
+  "qemu_capabilities": {
+    "path": "g2/analysis/component-goal-20261013/case-wave045-exception-return-probe/qemu-capabilities.json",
+    "sha256": "955cc4af4301ed3cf4363358beb88236fe790e67e3bd4d68938aff2e78be0749"
+  },
+  "cases": 5,
+  "blocker": "Native/sourceboth UC_ERR_EXCEPTION21 through genuineEXC_RETURN with manuallyseededIPSR but no activeNVICentrycontroller; doesnotprovefirmwarefault",
+  "component_acceptance_gates": {
+    "softwarepre_return": "Inherited044PASS",
+    "actualcontrollerreturn": "blocked in thisfixture; exploringexistingQEMU",
+    "physicalCASE": "unvalidated",
+    "accepted_images": "0/6"
+  },
+  "limits": [
+    "Actual source/native body runs through genuine exception-return instruction; no fabricatedreturn/providerstub",
+    "Manually seeded IPSR/PSP/MSP without active NVIC controller exception entry; failure here is an architectural fixture limit, not proof firmware is wrong",
+    "Physical exception delivery/return and complete controller state remain external validation dependencies"
+  ],
+  "next_critical_path_task": "ExistingQEMU controllercompatibility, with actualCPU/memorymap validation; no physicaldebugdevice detectedlocalinventory",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave045-exception-return-probe/wave.json",
+    "sha256": "ac3e175f2b75eb8ec07f096f57d551c398bd6639efffef7f89cfea94e79c8ccd"
+  },
+  "publication_scope": "Native/source fixture exception UC_ERR_EXCEPTION21; not firmware fault or successful exception return"
+}

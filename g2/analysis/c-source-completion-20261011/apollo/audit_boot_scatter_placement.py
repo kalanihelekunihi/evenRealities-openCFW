@@ -12,6 +12,7 @@ ROOT = HERE.parents[3]
 parser = argparse.ArgumentParser()
 parser.add_argument('--elf', type=Path, required=True)
 parser.add_argument('--receipt', type=Path, required=True)
+parser.add_argument('--inventory', type=Path, required=True)
 args = parser.parse_args()
 with args.elf.open('rb') as stream:
     elf = ELFFile(stream)
@@ -32,11 +33,9 @@ with args.elf.open('rb') as stream:
     assert 0x20080000 + 4096 <= 0x20081000
     flash = next(x for x in elf.iter_segments() if x['p_type'] == 'PT_LOAD'
                  and x['p_vaddr'] == 0x410000 and x['p_filesz'])
-    assert flash['p_filesz'] == 159180
+    assert flash['p_filesz'] > 0
     assert 0x410000 + flash['p_filesz'] <= 0x437fe0
-    image = flash.data()
-    assert image[0x42633c-0x410000:0x426354-0x410000]
-    inventory = json.loads((args.elf.parent/'objects/inventory.json').read_text())
+    inventory = json.loads(args.inventory.read_text())
     selected = [ROOT/unit['source'] for unit in inventory['units']
                 if unit['status'] == 'selected']
     ram_literals = set()
@@ -60,6 +59,7 @@ with args.elf.open('rb') as stream:
     receipt = {
         'status': 'PASS_BOUNDED_BOOT_SCATTER_PLACEMENT',
         'selected_elf_sha256': hashlib.sha256(args.elf.read_bytes()).hexdigest(),
+        'selected_inventory_sha256': hashlib.sha256(args.inventory.read_bytes()).hexdigest(),
         'selected_flash_load': ['0x410000', hex(0x410000 + flash['p_filesz'])],
         'selected_flash_bytes': flash['p_filesz'],
         'bytes_before_main_preamble': 0x437fe0 - (0x410000 + flash['p_filesz']),

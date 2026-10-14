@@ -19,6 +19,9 @@ static void clear_locked(uint32_t a,uint32_t bits)
 {uint32_t m=mask();setmask(1u);wr(a,rd(a)&~bits);setmask(m);}
 static void invoke(uint32_t callback,uint32_t descriptor)
 {((void (*)(uint32_t))(uintptr_t)callback)(descriptor);}
+/* DMA cancellation slot differs from the void-returning RxISR slots. */
+static void invoke_cancel(uint32_t callback,uint32_t peripheral)
+{(void)((uint32_t (*)(uint32_t))(uintptr_t)callback)(peripheral);}
 void case_irq_child_5f50(uint32_t descriptor)
 {
     uint32_t hw=rd(descriptor),status=rd(hw),control=rd(hw+8u),enable=rd(hw+28u);
@@ -52,7 +55,7 @@ void case_irq_child_5f50(uint32_t descriptor)
                     if(p==0u)return;
                     wr(p+56u,(uint32_t)(uintptr_t)case_boot_sensor_cancel_callback);
                     if(case_boot_sensor_irq_restart_ready(p)==0u)return;
-                    invoke(rd(rd(state)+56u),rd(state));
+                    invoke_cancel(rd(rd(state)+56u),rd(state));
                     return;
                 }
                 return;

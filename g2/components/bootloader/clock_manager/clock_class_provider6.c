@@ -5,6 +5,7 @@
 #include "clock_class_provider2.h"
 #include "clock_class_provider4.h"
 #include "clock_class_providers.h"
+#include "clock_popcount_421584.h"
 
 enum {
     CLOCK_USER_BITS_BASE = 0x20026e74u,
@@ -51,11 +52,7 @@ static uint32_t user_count(void)
     volatile uint32_t *const words = user_word(0u);
     uint32_t count = 0u;
     for (uint32_t i = 0u; i < 2u; ++i) {
-        uint32_t value = words[i];
-        value -= (value >> 1) & 0x55555555u;
-        value = (value & 0x33333333u) + ((value >> 2) & 0x33333333u);
-        value = (value + (value >> 4)) & 0x0f0f0f0fu;
-        count += (value * 0x01010101u) >> 24;
+        count += opencfw_boot_clock_popcount(words[i]);
     }
     return count;
 }

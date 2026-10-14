@@ -1,0 +1,75 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_payload_linked": false,
+    "strong_unresolved_symbols": 725
+  },
+  "completed_utc": "2026-10-14T00:07:22.997970+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "bounded_native_source_cases": 96,
+    "named_validator_exposed": 1,
+    "source_owned_entry_exit_bodies_completed": 2
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Mode validator, command-24 configuration transfer, mode selector, copy and logging are injected equally in the outer-wrapper oracle.",
+    "The command-24 stock branch consumes the first payload byte; hardware effects, SRAM ownership and complete Main image remain unverified."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Serial/quad mode validator at 0x470d7c",
+      "Configuration transfer at 0x4c0f78 and controller state",
+      "Physical NOR read/write, other Main and five image graphs; 0/6 complete"
+    ],
+    "reason": "Recover NOR serial-mode validator and configuration transfer"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/components/main/fal_norflash_entry_exit_candidates_20261013/entry_exit.c",
+      "sha256": "166834b41070019dba89c11e3295185642500f0bd8ec106a463cb99d08dfafe6"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "3d405ad8ca1939dec6fee9eedfee9a00881a6767c82435e12e66af7fedb0e954"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_entry_exit.py",
+      "sha256": "ce7996b0b9dfeb54fc49bd3102fe9bfd435b6ee0dcee2c018ea6cf7752cb80a1"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-entry-exit-round470/entry-exit-oracle.json",
+      "sha256": "e5bd601c73623fdf18b71e10c0945ce882cc44754783117a6a6a48659dca71ea"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-entry-exit-round470/isolated/entry-exit.elf",
+      "sha256": "8b5be6ad931785a931d0576ceb0555e8a083287c332a75a5f85db293a754fd54"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-entry-exit-round470/receipt.json",
+      "sha256": "31968bcc609ae4bdde2ee36a8fdad66d86164668f2cbbab66ae0b6d4cdcdcd8a"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-entry-exit-round470/apollo_main/candidate.o",
+      "sha256": "a72f227a9290ddbdb31aa2fbdcb71aee675735fdbb21fbe41b4d61ca7cd6e693"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-entry-exit-round470/round470-receipt.json",
+      "sha256": "57ac08aaf861033176d0dfa8fbaadf0b803d6fb5f99905c44075d7d36cf8430c"
+    }
+  ],
+  "wave_id": "root-main-round470-norflash-entry-exit",
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-entry-exit-round470/dashboard-wave/wave.json",
+    "sha256": "f3e8658d5c956539bca9cf5910712d9c4f60270e2d901915b7bfb9aee3c453df"
+  },
+  "publication_scope": "Bounded Apollo Main entry/exit paths; unresolved lower/hardware gates preserved; no map/image promotion"
+}

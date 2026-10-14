@@ -1,0 +1,54 @@
+{
+  "round": 587,
+  "status": "PASS_MAIN_BOND_FLASH_SIZE_INITIALIZER_BOUNDED",
+  "captured_utc": "2026-10-14T06:07:56.834457+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "native_address": "0x20004524",
+  "compressed_sram_record": "0x75d3f4",
+  "decoded_sram_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "initial_bytes_hex": "000a",
+  "initial_value_bytes": 2560,
+  "native_comparisons": [
+    "PASS compiled initializer byte match",
+    "PASS privacy erase all 40 cases"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 644,
+  "unresolved_after": 643,
+  "removed_symbols": [
+    "audio_ble_bond_flash_bytes_20004524"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Two initialized byte-count bytes are source-owned. External MRAM state/content, absolute RAM placement, full startup scatter, complete image coverage and physical flash behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_bond_flash_size.c",
+      "sha256": "6be01c6bce39768420d44b8e596cf96fb965da7f5424d470cea18a658078df23"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_bond_flash_size_initializer.py",
+      "sha256": "52f54c3ad9e6f21798cbd043d96041a7fbae2c3c50eafbb410a5bf641eb00f6f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_privacy_erase_all_native.py",
+      "sha256": "83874a3ba8088ebfe41f102a39264188f01411718e10fd51651d445ad3bfe18f"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round587/receipt.json",
+      "sha256": "d27dfb433ac07f744412c5602a575e18e830e60a1696a5fcc94dbc112d273bb0"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-bond-flash-size-round587/round587-receipt.json",
+    "sha256": "248090e724494c0ccf8fb48417601098b56fcaa0fb2545dcf9ff1ad53679d4a9"
+  },
+  "publication_scope": "Body-receipt evidence only; two-byte bond flash count initializer value2560 and bounded erase cases; external MRAM/placement/scatter/hardware unqualified; percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

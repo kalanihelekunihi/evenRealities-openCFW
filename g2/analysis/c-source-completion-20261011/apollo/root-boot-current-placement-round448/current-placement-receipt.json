@@ -1,0 +1,44 @@
+{
+  "component": "apollo_bootloader",
+  "evidence": [
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-current-placement-round448/apollo_bootloader/boot.elf",
+      "sha256": "abc32644dfc7d1468434f5cba83bcb17d9b0ba26cb7aced90e51cc813453baf8"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-current-placement-round448/apollo_bootloader/boot.map",
+      "sha256": "ac59f1d9f8e5d7e9928d91879c3ce9de4d511c6e85f35e6a91db9688d1a2119b"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-current-placement-round448/current-placement.json",
+      "sha256": "b61a45c93d6a09884832ddd5d485a61d9bf7db6a5cf0464484536da40c519da0"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-current-placement-round448/verify_current_placement.py",
+      "sha256": "abb18acdf3fd77c06a426cc8d8c6e70bb7510e3f18d01b732fa3359664c77e84"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-gate-refresh-round447-final/receipt.json",
+      "sha256": "4ca2f8bc123340bee7ea135d23ec023cb42589f241dc03ccc59271eb6530e111"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/boot_coplacement_experiment.ld",
+      "sha256": "38af7daeb6c59720a891eb40a4a9d6ff64a4f5dabf63c82908f167166440c729"
+    }
+  ],
+  "flash_end_exclusive": "0x436dcc",
+  "limits": [
+    "Exploratory --gc-sections link retains the reset-reachable source graph, not all 1012 selected definitions.",
+    "Vector entry structure and source symbol ownership pass; linked handler addresses intentionally differ from stock.",
+    "Flash fit does not prove load/run scatter placement, stock byte identity, original behavior, complete coverage, resident ROM behavior or hardware."
+  ],
+  "linked_flash_bytes": 159180,
+  "remaining_bytes_before_preamble": 4628,
+  "remaining_work_estimate": "Bootloader: classify 206 GC-unretained selected globals against native reachability; qualify startup/ROM and final scatter placement; whole-image code/data coverage and hardware. Complete images 0/6.",
+  "retained_selected_global_symbols": 806,
+  "schema": "opencfw-current-boot-coplacement-v1",
+  "status": "completed_bounded",
+  "undefined_linked_symbols": 0,
+  "unretained_selected_global_symbols": 206,
+  "vector_words_verified": 256
+}

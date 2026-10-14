@@ -1,0 +1,82 @@
+{
+  "build": {
+    "definitions": 3991,
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false,
+    "imports": 738
+  },
+  "completed_utc": "2026-10-13T22:01:33.844088+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "abi_adapters": [],
+    "actual_c_bodies": [],
+    "fixtures_or_stubs": [],
+    "pseudocode_only": [],
+    "typed_data": [
+      {
+        "compiled_object_stock_bytes_matched": 29,
+        "literal_count": 29,
+        "production_admitted": false,
+        "source": "g2/analysis/c-source-completion-20261011/peripherals/root-rom-radio-strings-round424/radio_strings.c"
+      }
+    ]
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Twenty-nine log/file literal bytes match stock ROM; original addresses and whole image placement not established",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "738 unresolved Apollo Main imports",
+      "ROM placement and initialized data ownership",
+      "0/6 complete firmware images"
+    ],
+    "reason": "Continue authenticated data and provider source closure"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-rom-radio-strings-round424/radio-source-receipt.json",
+      "sha256": "3c27ff4e4c470707d6b7617a9620a7ceb8aa2f5d7ad88dc3d918037a6a3bb689"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-rom-radio-strings-round424/receipt.json",
+      "sha256": "1d876237d9712c45a16816946133fec43fd086551ef0557c58f416041342f981"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-rom-radio-strings-round424/root-source-audit.json",
+      "sha256": "ab38d9c2cb937f1ea2b1c6757035a9d1aedb0ee63387072b969026fe4d576c7d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-rom-radio-strings-round424/radio-source-receipt.json",
+      "sha256": "3c27ff4e4c470707d6b7617a9620a7ceb8aa2f5d7ad88dc3d918037a6a3bb689"
+    }
+  ],
+  "tests": {
+    "expected_failures": [],
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-rom-radio-strings-round424/builder-object-match.json",
+        "sha256": "88f25405e0d192e31e55878feb17aef092203f63cf07f2a1a960ecf4d97ecde9"
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-rom-radio-strings-round424/radio-source-receipt.json",
+        "sha256": "3c27ff4e4c470707d6b7617a9620a7ceb8aa2f5d7ad88dc3d918037a6a3bb689"
+      }
+    ]
+  },
+  "wave_id": "root-apollo-main-round424-rom-radio-literals",
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-rom-radio-strings-round424/dashboard-wave/wave.json",
+    "sha256": "63fa71a0daf8b41b0a854007ccc235cf4ed675048f167657327f20dc52720f2c"
+  },
+  "publication_scope": "29 authenticated ROM literals; experimental placement only; no production/map promotion"
+}

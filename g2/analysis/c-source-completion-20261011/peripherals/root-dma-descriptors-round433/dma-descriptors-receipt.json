@@ -1,0 +1,51 @@
+{
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-dma-descriptors-round433/receipt.json",
+    "sha256": "89dfd8dc985697c178ed8095919c8b62c3cf66c732e598ea31842ebafd1bbf17"
+  },
+  "captured_utc": "2026-10-13T22:27:37.186935+00:00",
+  "component": "apollo_main",
+  "definitions": 4008,
+  "duplicate_strong_symbols": 0,
+  "import_delta": {
+    "added": [],
+    "removed": [
+      "audio_ble_dma_channels_rom_6c0f40"
+    ]
+  },
+  "imports": 723,
+  "limits": [
+    "Twelve indexed descriptor rows are exact bytes; allocation extent beyond these rows is not claimed.",
+    "Source and relocatable-link evidence do not establish final ROM placement or DMA hardware behavior."
+  ],
+  "native_evidence": {
+    "compiled_symbol_equals_stock": true,
+    "compiled_symbol_size": 480,
+    "first_eight_row_sha256": "6bcc9e18bc969901939a7e901c9475c8dea8cd033508aea9c879f267ec2a30a1",
+    "full_table_sha256": "1ed1fa3682f9c16c403ee0e6cee7761b70ca610656a2b6e56de3f0b05cee7fea",
+    "native_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "ota_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "row_bytes": 40,
+    "row_count": 12,
+    "runtime_base": "0x438000",
+    "table_end_exclusive": "0x6c1120",
+    "table_start": "0x6c0f40"
+  },
+  "schema": "opencfw-exact-data-source-receipt-v1",
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-dma-descriptors-round433/root-source-audit.json",
+    "sha256": "9baba4ea37f4fe87ded79fa82194068ea15112724598e8af972a4513b7e60117"
+  },
+  "source_unit": {
+    "header_inputs": {
+      "g2/analysis/c-source-completion-20261011/peripherals/root-dma-descriptors-round433/dma_descriptors.c": "fa5661ddfde6f61f899e0819188ba0b3834f38860cbcb5009f450fc85a0fdaa6"
+    },
+    "object": "g2/build/c-firmware/20261013/peripherals-root-dma-descriptors-round433/apollo_main/experimental-170.o",
+    "object_sha256": "ff2b65a7237e0514889e72db6283a855cce9443c61a8119f5874751ef1b46182",
+    "source": "g2/analysis/c-source-completion-20261011/peripherals/root-dma-descriptors-round433/dma_descriptors.c",
+    "source_sha256": "fa5661ddfde6f61f899e0819188ba0b3834f38860cbcb5009f450fc85a0fdaa6",
+    "validation": "experimental C reduction; not admitted stock-equivalent provider"
+  },
+  "status": "completed"
+}

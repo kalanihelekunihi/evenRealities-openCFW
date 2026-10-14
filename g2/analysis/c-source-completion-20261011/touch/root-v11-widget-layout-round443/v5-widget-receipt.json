@@ -1,0 +1,30 @@
+{
+  "completed_claim": "Official CapSense v5 LP typedef compiles to the observed 144-byte widget stride and its field offsets give coherent values in all three locked G2 ROM records.",
+  "component": "touch",
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/history-layout.json",
+      "sha256": "3a510e6cde5b6caef1094cab0c51db7426cfc238519a08f4d6760d8ec3bf3e90"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/v5-native-widget-audit.json",
+      "sha256": "3faa6efe5e2d1143d6d3c953e05c5812e83c273f3c48b845a1fa3e491eaf08ab"
+    }
+  ],
+  "implementation_delta": {
+    "actual_c_bodies": 0,
+    "field_layout_verified": 1,
+    "layout_variants_compiled": 16,
+    "native_widget_records_decoded": 3,
+    "typed_data": 0
+  },
+  "limits": [
+    "ABI correspondence is strong source inference, not proof of exact revision or product initializer source.",
+    "No Touch generated object was promoted into selected C sources."
+  ],
+  "remaining_work_estimate": "Touch: 2 strong generated-data imports, 4 product-generated object gates, reset and final image layout, runtime/hardware proof. Complete images 0/6.",
+  "schema": "opencfw-touch-v5-widget-audit-v1",
+  "source_commit": "a4aa9306f7e4323994902f0baf5b1570ffbbfe59",
+  "status": "completed_bounded",
+  "target_id": "official-s200-v2.2.6.10"
+}

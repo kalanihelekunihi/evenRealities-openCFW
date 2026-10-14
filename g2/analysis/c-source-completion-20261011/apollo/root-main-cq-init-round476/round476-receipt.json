@@ -1,0 +1,63 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 726,
+    "strong_unresolved_before": 727
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_cq_init_provider_candidates_20261013/init.c",
+      "sha256": "bc01a02212d3b315fb65c530019cf524aca54cd5bd6ccd1ddd917fb52737ca55"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/resources.c",
+      "sha256": "44f74d611d02dda5909983da1365d71d97d5fcfaab8dea7de7c4c7cf22afe544"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "sha256": "9a2562c6389181d24163e55a2664dfdf7d602cbbfc96fed210fc2e4471e8819a"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "842d0dd38ebbccfb12ea89e9b2e3af2f8855bbf5326ca042bd8598df7617fef5"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_cq_init.py",
+      "sha256": "df339dd9518d8fc891136afb780a87e07281ab3c2fa2d7d734a34cb93c7f3eea"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-cq-init-round476/init-oracle.json",
+      "sha256": "9a06e54e6eed85f050d508608cff04feacfc3adedda458101cef61f8969b5c36"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-init-round476/isolated/init.elf",
+      "sha256": "235b745bae354ad3fbc2800d4c24af6c6f543927ed672174976120dd6c83ba29"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-init-round476/receipt.json",
+      "sha256": "ea3c3e8fcbc93200c24911e7f1c396145f09a69a23de9fb5b1a6d1e9da176d4d"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-init-round476/apollo_main/candidate.o",
+      "sha256": "c54bc9f36b16957160f05e41062be0b5902892fc08c7e0e31267f1dec4f65671"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Synthetic SRAM and MMIO bound the comparison; source table addresses are normalized to stock placement.",
+    "No physical command queue operation or complete Main image is verified."
+  ],
+  "native_entrypoints": [
+    "0x538d58"
+  ],
+  "native_source_oracle_cases": 1536,
+  "provenance": "Main instruction trace with byte-identical authenticated 12-row bootloader/Main resource table",
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_bodies": [
+    "g2_main_cq_init_538d58",
+    "g2_main_cmdq_resources"
+  ],
+  "status": "bounded_source_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

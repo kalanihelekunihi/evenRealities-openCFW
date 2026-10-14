@@ -1,0 +1,65 @@
+{
+  "review_status": "COMPLETED_BOUNDED_AVAILABLE_EVIDENCE_REVIEW",
+  "input_manifest": "g2/analysis/component-goal-20261013/case-wave061-independent-review/input-manifest.json",
+  "input_manifest_validation": {
+    "pinned_files": 422,
+    "missing": 0,
+    "hash_mismatches": 0
+  },
+  "source_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/receipt.json",
+    "status": "PINNED_CLANG_LTO_PROFILE_LINKED",
+    "source_units": 401,
+    "elf_sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853"
+  },
+  "offline_reproduction": {
+    "execution_root": "/tmp/case-wave061-review-fixture",
+    "interpreter": "/tmp/iar-c-runtime-venv/bin/python",
+    "wave056": "PASS_25_REAL_TRAMPOLINE_ENTRY_CUT_PAIRS",
+    "wave057": "PASS 96",
+    "wave058": "PASS 24",
+    "wave059": "PASS_8_OMITTED_KNOWN_ROOT_CODE_DATA_REVIEWS",
+    "wave060": "COMPLETED_CONSERVATIVE_BACKWARD_CFG_REVIEW 51 / 51"
+  },
+  "wave060_site_counts": {
+    "target_keys": 51,
+    "sampled_operand_pcs": 366,
+    "all_predecessors_expected_constant": 260,
+    "unresolved_or_nonconstant": 106,
+    "interpretation": "51/51 is a target-key count with at least one confirmed example per target; it is not all-use closure"
+  },
+  "findings": [
+    {
+      "id": "callback-incompatible-function-type",
+      "severity": "source correctness blocker for bounded C callback contract",
+      "locations": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_trampoline_candidate.c:23-25",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_start_candidate.c:12-17",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_clock_callback_candidate.c:9",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_toggle_callback_candidate.c:6",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c:16",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c:13",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_bb90_candidate.c:17",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_idle_callback_candidate.c:7"
+      ]
+    },
+    {
+      "id": "wave060-target-aggregate-does-not-prove-every-use",
+      "severity": "reporting qualification",
+      "unresolved_examples_by_ram_target": {
+        "0x20000892": "11/12",
+        "0x2000087e": "6/12"
+      }
+    }
+  ],
+  "not_assessed_or_not_established": [
+    "physical hardware acceptance",
+    "accurate STM32G0 coldboot model",
+    "actual IRQ priority and nesting",
+    "asynchronous callback/delete/reuse interleavings",
+    "global stack bound",
+    "complete CASE code/data or dynamic callback inventory",
+    "formal G2/G6 and image acceptance"
+  ],
+  "mutations": []
+}

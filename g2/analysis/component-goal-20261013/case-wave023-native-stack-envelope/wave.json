@@ -1,0 +1,47 @@
+{
+  "wave_id": "component-goal-case-wave023-native-stack-envelope",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T21:44:10.401039+00:00",
+  "status": "COMPLETED_BOUNDED_NATIVE_SP_LOGGER_STACK_QUALIFICATION",
+  "done_criteria": [
+    "Run real logger formatter callback UART graph at native initial SP20002c88",
+    "Compare observable output/count/n writes, callee-saved registers and SP restoration",
+    "Measure actual observed SP low-water and state explicit scope limits"
+  ],
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/wave.json",
+    "sha256": "bab7e049aecdbf06603eddf7a72c8fb51c9a9e0e265eebe2cb6af11c3e7d635e"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave023-native-stack-envelope/verify.py",
+    "sha256": "cd73f0b2d502530fe219980be7356acdb0de0c221c21b7d4b04854af48a4693d"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave023-native-stack-envelope/verification.json",
+    "sha256": "a5e7d1ff23ea1ab5fd38b13bbe8351ee2f9bc1eb7568fb9cd1ab6bbeb1db3c51"
+  },
+  "cases": 34,
+  "native_max_stack_bytes": 272,
+  "source_max_stack_bytes": 392,
+  "native_low_water": "0x20002b78",
+  "source_low_water": "0x20002b00",
+  "RAM_comparison": "Below20001c88; upper4096 bytes reserved as test stack fixture, not proven firmware stack allocation",
+  "limits": [
+    "Synthetic static TXE/TC ready or BUSY input; not physical UART proof",
+    "Native initial SP 0x20002c88; compare RAM below 0x20001c88, reserving 4096-byte stack fixture; excludes interrupts/reentrancy/global worst case. Formats and argument strings remain mapped RAM fixtures, not recovered firmware assets.",
+    "Actual callbacks and providers execute; no child cuts/stubs/return injection"
+  ],
+  "component_acceptance_gates": {
+    "bounded_synchronous_callback_stack": "PASS",
+    "global_stack_IRQ_reentrancy": "unvalidated",
+    "absolute_RAM_providers": "incomplete",
+    "hardware": "unvalidated",
+    "accepted_images": "0/6"
+  },
+  "ownership": "Own test outputs only",
+  "next_critical_path_task": "Refresh custom artifact to current qualified source; inventory absolute RAM/callback evidence before further placement claims",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

@@ -7,8 +7,10 @@ from unicorn import Uc,UC_ARCH_ARM,UC_MODE_THUMB,UC_MODE_MCLASS,UC_HOOK_CODE
 from unicorn import arm_const as A
 R=Path(__file__).resolve().parents[4];D=Path(__file__).resolve().parent
 S=R/'g2/components/audio/file_sync_candidate/dir_fetch.c';O=D/'dir-fetch-m4.o';E=D/'dir-fetch-oracle.elf'
+G=R/'g2/components/audio/file_sync_candidate/gstate_hasmovehere.c';GO=D/'dir-fetch-gstate-m4.o'
 subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-c',str(S),'-o',str(O)],check=True)
-subprocess.run(['arm-none-eabi-ld','-Ttext=0x100000','--defsym=g2_lfs_bd_read=0x101011','--defsym=g2_log_transport_queue_failure=0x101021','-o',str(E),str(O)],check=True,stderr=subprocess.DEVNULL)
+subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-c',str(G),'-o',str(GO)],check=True)
+subprocess.run(['arm-none-eabi-ld','-Ttext=0x100000','--defsym=g2_lfs_bd_read=0x101011','--defsym=g2_log_transport_queue_failure=0x101021','-o',str(E),str(O),str(GO)],check=True,stderr=subprocess.DEVNULL)
 with E.open('rb') as f:
  e=ELFFile(f);segs=[(x['p_vaddr'],x.data()) for x in e.iter_segments() if x['p_type']=='PT_LOAD'];sy={x.name:x['st_value'] for x in e.get_section_by_name('.symtab').iter_symbols()}
 B=(R/'g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[0x20:]

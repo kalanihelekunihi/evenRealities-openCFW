@@ -36,8 +36,8 @@ def run(stock,isopen,result):
  assert done[0]
  return {'r0':u.reg_read(A.UC_ARM_REG_R0),'events':events,'sp':u.reg_read(A.UC_ARM_REG_SP)}
 rows=[]
-for isopen in (0,1):
- for result in (0,0xffffffff):
+for isopen in (0,1,2,0x80000000,0xffffffff):
+ for result in (0,1,0xfffffffb,0xffffffff):
   a=run(True,isopen,result);b=run(False,isopen,result)
   if a!=b:
    f={'isopen':isopen,'result':result};(OUT/'backend-close-failure.json').write_text(json.dumps({'fixture':f,'stock':a,'source':b},indent=2)+'\n');raise AssertionError(f)

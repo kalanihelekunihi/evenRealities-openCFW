@@ -1,0 +1,59 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 721,
+    "strong_unresolved_before": 721
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_queue_activate_candidates_20261013/activate.c",
+      "sha256": "f94452ae4498efe94ba438362a2d3092365912a6f2df2c98fc56f3f194262fb1"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "52dac5406d8d343b8523de925c42806e22072b1edc36152afab223a1b43ce7e4"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004bfe60.c",
+      "sha256": "0c4c0e76de1b813407fd3daa7000d3ef1c070d4c931c1aaa74c35f379e509faa"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_queue_activate.py",
+      "sha256": "6ad2d093ea6a6bf424726b93124608df81610b174cb5d255c587974c4c199a8c"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-queue-activate-round517/oracle.json",
+      "sha256": "f44b94c2662634b74abd68b2c68b11f63d60e57255aa0a025d7dfd14ac9fda73"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-queue-activate-round517/isolated/activate.elf",
+      "sha256": "a90fdb729fa6377068f637c78eebb468e8da55c994dc5404a004144ce0c26c24"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-queue-activate-round517/receipt.json",
+      "sha256": "125957e22bcd47ebba8d1a62ab0106694df77e9ed7231728c56ad5ca0e8a6b0a"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-queue-activate-round517/apollo_main/candidate.o",
+      "sha256": "8f0ef72296ba312f0384350d5a485256cab96600c90ce4fbe6d1c4dd59dfa7d9"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Critical save, queue termination, and descriptor loader provider effects intercepted; latter two independently source-checked in rounds 514 and 516.",
+    "Transfer dispatcher selector 33 still not source-owned; full 0x4c0f78 remains unresolved.",
+    "Synthetic SRAM/MMIO cannot prove physical operation; 0 of 6 images source-complete."
+  ],
+  "native_entrypoints": [
+    "0x4bfe60"
+  ],
+  "native_source_oracle_cases": 576,
+  "provenance": "Main Ghidra pseudocode, locked native Thumb instructions and native/source MMIO and handle comparison",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_main_mspi_queue_activate_4bfe60"
+  ],
+  "status": "bounded_helper_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

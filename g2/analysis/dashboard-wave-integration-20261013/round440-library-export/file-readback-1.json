@@ -1,0 +1,75 @@
+{
+  "build": {
+    "definitions": 1015,
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false,
+    "imports": 0
+  },
+  "completed_utc": "2026-10-13T22:44:12.163436+00:00",
+  "component": "apollo_bootloader",
+  "implementation_delta": {
+    "abi_adapters": [],
+    "actual_c_bodies": [],
+    "build_integration_changes": 1,
+    "experimental_symbol_joins": 0,
+    "external_rom_symbol_bindings": 3,
+    "fixtures_or_stubs": [],
+    "pseudocode_only": [],
+    "typed_data": []
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Integrated ROM binding produces a relocatable object, not a final placed bootloader image.",
+    "The three resident-ROM bodies are external hardware dependencies and are not compiled into the OTA.",
+    "Bootloader startup-power coverage, initialized data, final layout, byte identity, and hardware behavior remain open."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Startup-power path and initialized data",
+      "Final image placement and byte identity",
+      "0/6 complete firmware images"
+    ],
+    "reason": "Continue bootloader source completeness and final layout"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-integrated-rom-round440/integrated-rom-receipt.json",
+      "sha256": "5d62c95a5916ebf6f9a77b6dea3af3ebcce4052236462d62daa122a4abaedc3b"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/root-bootloader-integrated-rom-round440/receipt.json",
+      "sha256": "34466e94a538aeb3dc30b15601c25bb4a7533e3872cdfbcd434b7f9f6c1dc2f3"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-bootloader-integrated-rom-round440/apollo_bootloader/resident-rom-bound.o.receipt.json",
+      "sha256": "82c03ec71ec70367c139221a3d9ac4b63e329d80484181fd170d424f518d5735"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-integrated-rom-round440/integrated-rom-receipt.json",
+      "sha256": "5d62c95a5916ebf6f9a77b6dea3af3ebcce4052236462d62daa122a4abaedc3b"
+    }
+  ],
+  "tests": {
+    "expected_failures": [],
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-integrated-rom-round440/integrated-rom-receipt.json",
+        "sha256": "5d62c95a5916ebf6f9a77b6dea3af3ebcce4052236462d62daa122a4abaedc3b"
+      }
+    ]
+  },
+  "wave_id": "root-apollo-bootloader-round440-integrated-rom",
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-integrated-rom-round440/dashboard-wave/wave.json",
+    "sha256": "9bfd68d13279695a52c5cb4fe6b58e534999ebb8b2ea542429fa8e5fb8ad27a9"
+  },
+  "publication_scope": "Apollo bootloader integrated ROM bindings; owner qualification limits preserved; no map/image promotion"
+}

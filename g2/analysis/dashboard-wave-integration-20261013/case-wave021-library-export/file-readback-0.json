@@ -1,0 +1,169 @@
+{
+  "wave_id": "component-goal-case-wave021-uart-transitions",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T21:36:16.179956+00:00",
+  "status": "COMPLETED_BOUNDED_NATIVE_SOURCE_UART_TRANSITION_QUALIFICATION",
+  "done_criteria": [
+    "Real native/source write/wait/tick bodies execute without child cuts or return injection",
+    "Cover readiness delays, timeout sites, tick wrap, overrun cleanup, PRIMASK and rejection matrix",
+    "Compare return, SP restoration, complete UART/register/payload snapshots and actual register-write traces",
+    "Pin source/object/import/build inventory and explicitly separate synthetic inputs from hardware validation"
+  ],
+  "source_delta": "None; qualification wave",
+  "source_drift": [],
+  "source_object_build_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave016-battery-measurement-abi/qualified/receipt.json",
+    "sha256": "47dad132e5c2e0b4ff11fe6563c401e240c5f9512a0c1c1900556c593d8cfee9"
+  },
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave016-battery-measurement-abi/wave.json",
+    "sha256": "2871faa21ba64f9cf5f256a0f43da09069ca820ec5d773e776736a6fda08de1f"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave021-uart-transitions/verify.py",
+    "sha256": "8ee61c5dd138c187a1beb8926c43e603b01623f0a134d3a72129517e7a14e88e"
+  },
+  "test": {
+    "path": "g2/analysis/component-goal-20261013/case-wave021-uart-transitions/verification.json",
+    "sha256": "4bcbb8ed0b8c14cbb089a9944201e445f25eccf64c9c83a49f60ca8bba755f62"
+  },
+  "native_catalogue": {
+    "path": "g2/research/corpus/case/ghidra/open-2026-09-29/functions-000.jsonl",
+    "sha256": "5447649e214aaf10cbe916d3474dcdfbece16a0570d3d243dc9e34e64ed39ab7"
+  },
+  "native_functions": [
+    {
+      "entry": "08004eac",
+      "name": "case_tick_word2",
+      "body_start": "08004eac",
+      "body_end_inclusive": "08004eb1",
+      "body_bytes": 6,
+      "signature": "undefined4 case_tick_word2(void);",
+      "calling_convention": "unknown",
+      "thunk": false,
+      "external": false,
+      "body_sha256": "f9e9ed7deab97ba770020418c839a3824257d2e29c2f736e873b7a50a3efaeb8",
+      "ranges": [
+        [
+          "08004eac",
+          "08004eb1"
+        ]
+      ],
+      "callees": [],
+      "decompiled": true
+    },
+    {
+      "entry": "080066ac",
+      "name": "case_write_controller_blocking",
+      "body_start": "080066ac",
+      "body_end_inclusive": "08006775",
+      "body_bytes": 202,
+      "signature": "undefined4 case_write_controller_blocking(int *param_1,ushort *param_2,int param_3,undefined4 param_4);",
+      "calling_convention": "unknown",
+      "thunk": false,
+      "external": false,
+      "body_sha256": "699a3dd41d29724d9da4692d36641a196020431358c6ac71bc0044d586bbe325",
+      "ranges": [
+        [
+          "080066ac",
+          "08006775"
+        ]
+      ],
+      "callees": [
+        "08004eac",
+        "08008ec4"
+      ],
+      "decompiled": true
+    },
+    {
+      "entry": "08008ec4",
+      "name": "case_wait_condition",
+      "body_start": "08008ec4",
+      "body_end_inclusive": "08008f95",
+      "body_bytes": 210,
+      "signature": "undefined4 case_wait_condition(int *param_1,uint param_2,uint param_3,int param_4,uint param_5);",
+      "calling_convention": "unknown",
+      "thunk": false,
+      "external": false,
+      "body_sha256": "38ac4eba5fad385117e78c5b44741aa71cd197e0fe45cf7e08666fe9088473bd",
+      "ranges": [
+        [
+          "08008ec4",
+          "08008f95"
+        ]
+      ],
+      "callees": [
+        "08004eac"
+      ],
+      "decompiled": true
+    }
+  ],
+  "build": {
+    "ELF_sha256": "a23c019ada7fe636347dbd22806879bdcabb689e6e524ed09b711a9c0946f27a",
+    "load_span_bytes": 63122,
+    "undefined_symbols": "",
+    "C_units": 401
+  },
+  "tests": {
+    "cases": 678,
+    "scenario_counts": {
+      "immediate": 102,
+      "one_poll": 48,
+      "three_polls": 48,
+      "equal_deadline_then_ready": 48,
+      "zero_timeout": 48,
+      "tx0_timeout": 48,
+      "tx1_timeout": 48,
+      "tc_timeout": 48,
+      "infinite_release": 48,
+      "ore_rx_enabled": 48,
+      "ore_rx_disabled": 48,
+      "expired_before_ore": 48,
+      "infinite_ignores_ore": 48
+    },
+    "comparison_fields": [
+      "R0",
+      "SP restored",
+      "UART 160 bytes",
+      "registers 64 bytes",
+      "payload 512 bytes",
+      "PRIMASK",
+      "MMIO writes",
+      "tick reads",
+      "ISR read ordinals"
+    ],
+    "model": "Ordinal ISR reads supply readiness/error bits; actualtickgetter reads scriptedRAM tick progression. Actualsource/native write/wait/tick/cleanup bodies execute; nochildstubs/cuts/returninjection.",
+    "limits": [
+      "Syntheticordinal register/tick input model, notphysicalFIFOcapacity/latency/wire/IRQ proof.",
+      "Hardware W1C/ISR evolution otherthan specifiedinputs is not modeled; physicalclock/interruptarbitration notvalidated.",
+      "Infiniteunchangedwait excluded; infinite waitwithfinite scriptedrelease included."
+    ]
+  },
+  "ownership": "Own CASE test output only; concurrent source/index preserved. MAIN owner confirmed Apollo MAIN/FreeType scope, not a global writer lock.",
+  "license_lineage": "Locked stock native comparison; inherited recovered C/compiler provenance remains pinned in source checkpoint. No executable blob admitted as source replacement.",
+  "component_acceptance_gates": {
+    "bounded_uart_transitions": "PASS",
+    "physical_FIFO_IRQ_clock_wire": "notvalidated",
+    "logging_enabled_router": "notvalidated",
+    "absolute_RAM_callbacks_stack": "incomplete",
+    "exact_binary_matching": "notmet",
+    "custom_fit": "Separate wave018 passed",
+    "accepted_images": "0/6",
+    "workflow": "P2_EXECUTING; G1 passed; G2-G6 not_run unchanged"
+  },
+  "persistent_goal": {
+    "configured": false,
+    "id": null,
+    "reason": "No dedicated supported Goal control; previous heartbeat rejected for nonlocal thread. Parent authorized substantive continuation without scheduler substitution."
+  },
+  "next_critical_path_task": "Logging-enabled sink/router qualification, then absolute RAM/callback/stack audit. Hardware FIFO timing remains external validation dependency; no claim software options exhausted.",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave021-uart-transitions/wave.json",
+    "sha256": "e459135b51756a020492e0d9e115fe71a6df9141532d0c76b7bea9c0dbd45f49"
+  },
+  "publication_scope": "CASE synthetic transition qualification; no map/acceptance promotion"
+}

@@ -1,0 +1,246 @@
+{
+  "status": "PASS_INLINE_DIRECTORY_READ_EIGHT_CONNECTED_BOUNDED",
+  "cases": 6,
+  "rows": [
+    {
+      "start": 0,
+      "count": 1,
+      "error": 0,
+      "result": 1,
+      "events": [
+        [
+          "file"
+        ],
+        [
+          "dir"
+        ],
+        [
+          "slice"
+        ],
+        [
+          "state"
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          16,
+          8
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          0,
+          8
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          8,
+          8
+        ]
+      ]
+    },
+    {
+      "start": 0,
+      "count": 8,
+      "error": 0,
+      "result": 8,
+      "events": [
+        [
+          "file"
+        ],
+        [
+          "dir"
+        ],
+        [
+          "slice"
+        ],
+        [
+          "state"
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          16,
+          8
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          0,
+          8
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          8,
+          8
+        ]
+      ]
+    },
+    {
+      "start": 3,
+      "count": 4,
+      "error": 0,
+      "result": 4,
+      "events": [
+        [
+          "file"
+        ],
+        [
+          "dir"
+        ],
+        [
+          "slice"
+        ],
+        [
+          "state"
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          16,
+          8
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          0,
+          8
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          8,
+          8
+        ]
+      ]
+    },
+    {
+      "start": 6,
+      "count": 2,
+      "error": 0,
+      "result": 2,
+      "events": [
+        [
+          "file"
+        ],
+        [
+          "dir"
+        ],
+        [
+          "slice"
+        ],
+        [
+          "state"
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          16,
+          8
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          0,
+          8
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          8,
+          8
+        ]
+      ]
+    },
+    {
+      "start": 0,
+      "count": 8,
+      "error": -5,
+      "result": 4294967291,
+      "events": [
+        [
+          "file"
+        ],
+        [
+          "dir"
+        ],
+        [
+          "slice"
+        ],
+        [
+          "state"
+        ],
+        [
+          "bd"
+        ],
+        [
+          "read",
+          0,
+          16,
+          8
+        ]
+      ]
+    },
+    {
+      "start": 0,
+      "count": 0,
+      "error": 0,
+      "result": 0,
+      "events": [
+        [
+          "file"
+        ]
+      ]
+    }
+  ],
+  "source_sha256": {
+    "g2/components/audio/file_sync_candidate/file_flushedread.c": "5c0b1c9681413d56517d6fb614cdbbe7e1f4b598712db79c2b96cc28ef8f9fa2",
+    "g2/components/audio/file_sync_candidate/dir_getread.c": "ca0699127a2721f1a189ce1f242156e090352cc4cccbf7de798f4c9bdcebb6d5",
+    "g2/components/audio/file_sync_candidate/dir_getslice.c": "1f8fff2be2c3b2b20cd62859c274e7d93b4f72dccd335fa3f2d5375e349ad4dc",
+    "g2/components/audio/file_sync_candidate/gstate_hasmovehere.c": "13fb2ceb4be0523be411259905761f7626eff740b33e474c919f897870acdfbd",
+    "g2/components/audio/file_sync_candidate/bd_read.c": "a536efa8c960e415fbc715c2abedfec9cfe528f6d498636306aa70ef626d8c26",
+    "g2/components/audio/file_sync_candidate/cache_fill.c": "b07f22148c92185b892cb5270c7357d04d440ec283e5d63925c7c99d0d4954b2",
+    "g2/components/audio/file_sync_candidate/bd_flush_leaves.c": "a020c77cb325c14380698a179a732c9500a656014bba6c17435f2d491ecfaa60",
+    "g2/components/audio/file_sync_candidate/byte_copy.c": "11c269b40db7007424f435f6cab7d82a5fecf849da38c675847df90a835094ef"
+  },
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "limits": "Synthetic directory metadata and flash-read callback; no real storage, boot, or hardware proof."
+}

@@ -10,8 +10,10 @@ extern uint32_t case_policy_service_idle(void); /* 0xd154 */
 extern uint32_t case_legacy_logger(const char *,...);
 extern __attribute__((noreturn)) void case_init_display_reset(void); /* 0x502c */
 
-void case_boot_transport_cb_b7ec(void)
+void case_boot_transport_cb_b7ec(uint32_t argument)
 {
+    /* Native trampoline supplies pair[1] in R0; this callback ignores it. */
+    (void)argument;
     volatile uint8_t *device=(volatile uint8_t *)(uintptr_t)0x200000f4u;
     volatile uint8_t *shared=(volatile uint8_t *)(uintptr_t)0x200000b8u;
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x2000087cu;

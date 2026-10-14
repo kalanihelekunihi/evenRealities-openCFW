@@ -1,0 +1,50 @@
+{
+  "round": 559,
+  "status": "PASS_RING_QUEUE_STARTUP_STORAGE_SOURCE_OWNED",
+  "component": "Apollo audio ring persistence and timer queue RAM state",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Four distinct BSS words and two symbol names aliasing one BSS queue word have authenticated initial zero ownership and C definitions; 12 ring event native/C cases pass",
+  "new_c_sources": [
+    "g2/components/audio/uart_thread_source_candidate/display_ring_persist_state.c",
+    "g2/components/audio/timer_drain_full_source_candidate/queue_state.c"
+  ],
+  "build": {
+    "candidate_compilation_passed": true,
+    "unresolved_symbols": 705,
+    "previous_unresolved_symbols": 711,
+    "duplicate_strong_symbols": [],
+    "source_complete": false
+  },
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ring_persist_startup_storage.py",
+      "sha256": "ff0e8b39365790efe1c52984ee2892c511de8efdf3081b013edf61c458856363"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/ring-persist-startup-storage-results.json",
+      "sha256": "342ebb84c602645378f2ef74bcb64ee6e928384729990aee0597e1352f278b5b"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ring_persist_event_operation_native.py",
+      "sha256": "5b490d7e16708fbcf7c3f4e7302209cbeb5b447651dd5117b32bb9ca2e9bf950"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ring_persist_state.c",
+      "sha256": "4690f56cbce68ddf7928945d52c880ee6dd1a7534b32616bd0dd5b55135b6ee0"
+    },
+    {
+      "path": "g2/components/audio/timer_drain_full_source_candidate/queue_state.c",
+      "sha256": "81651b8e51b79ad75f9bf57ad9180598abe4ec3169474609bf7fb0d6e374410a"
+    },
+    {
+      "path": "g2/build/c-firmware/root-round559-alias/receipt.json",
+      "sha256": "a338e0d58653cbb122a4f71a27e0600a5e5a630bf2edf6e43da7cfff60105305"
+    }
+  ],
+  "remaining_estimate": {
+    "ring_queue_storage": "Startup-zero ownership and alias identity complete for these cells; final absolute placement and full runtime queue lifecycle remain, roughly 45-60 percent of this component.",
+    "apollo_main": "705 unresolved symbols remain, plus linker/layout and whole-path behavior gates.",
+    "whole_g2_firmware": "0 of 6 image components source-complete."
+  },
+  "limits": "C relocatable source owns startup values and aliases, but final linker placement, boot and hardware behavior are not established."
+}

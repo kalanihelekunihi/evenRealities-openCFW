@@ -1,0 +1,45 @@
+{
+  "round": 563,
+  "status": "PASS_DISPLAY_HARDWARE_CONSTANTS_SOURCE_OWNED",
+  "component": "Apollo display hardware configuration",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Seven ROM literal-backed register base, interrupt-controller base, and format-mask values are source-owned C constants, with authenticated OTA and ARM object equality.",
+  "new_c_source": "g2/components/audio/uart_thread_source_candidate/display_hardware_constants.c",
+  "build": {
+    "candidate_compilation_passed": true,
+    "unresolved_symbols": 683,
+    "previous_unresolved_symbols": 690,
+    "duplicate_strong_symbols": [],
+    "source_complete": false
+  },
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_display_hardware_constants.py",
+      "sha256": "19b314f617097af2d45ad5f95bc464ae86c3e1b8393d345ceed1430dab72ecb2"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/display-hardware-constants-results.json",
+      "sha256": "7fccb67690cfd18ff1687d41a379bb455b2acfa5fd991539d2999e0b861d2d37"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_hardware_constants.c",
+      "sha256": "3f9b098f6f26aeaa387bc27fdd9f34097d2fefe688bf7af1a6ab87fb70e332e5"
+    },
+    {
+      "path": "g2/build/c-firmware/root-round563/receipt.json",
+      "sha256": "2ae5cd68396cf1450698d63814bb1be2935ccea99fdf20564a77da5ac036d22c"
+    }
+  ],
+  "remaining_estimate": {
+    "display_hardware_configuration": "These seven literal values are complete as C constants; final linker placement, register operation semantics, startup, boot and hardware validation remain, roughly 50-65 percent of this component.",
+    "apollo_main": "683 unresolved symbols remain, plus linker/layout and whole-path behavior gates.",
+    "whole_g2_firmware": "0 of 6 image components source-complete."
+  },
+  "limits": "Authenticated literal and relocatable C-object equality only; no final linker placement, boot or hardware proof.",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-display-hardware-constants-round563/round563-receipt.json",
+    "sha256": "10c23ca1e04619fd070f508ecba7895ad6f2a3d325f153ae5697284ba4853690"
+  },
+  "publication_scope": "Body-receipt evidence only; seven authenticated display hardware C constants/relocatable object equality; final placement/register semantics/startup unqualified; percentage is producer estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

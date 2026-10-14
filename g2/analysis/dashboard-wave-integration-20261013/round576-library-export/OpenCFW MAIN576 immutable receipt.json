@@ -1,0 +1,55 @@
+{
+  "round": 576,
+  "status": "PASS_MAIN_HCI_RADIO_BOOT_CELLS_BOUNDED",
+  "captured_utc": "2026-10-14T05:31:39.223704+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "native_comparisons": [
+    "PASS radio boot 5 cases",
+    "PASS radio shutdown 3 cases"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 667,
+  "unresolved_after": 660,
+  "removed_symbols": [
+    "audio_ble_hci_radio_active",
+    "audio_ble_hci_radio_aux_ptr",
+    "audio_ble_hci_radio_boot_retry",
+    "audio_ble_hci_radio_command_cell",
+    "audio_ble_hci_radio_context_ptr",
+    "audio_ble_hci_radio_pending",
+    "audio_ble_hci_radio_revision_cell"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Seven scalar HCI radio boot cells are source-owned. ROM tables, scheduler buffers, native SRAM placement, complete source/data/assets/startup/linker coverage and hardware behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_hci_radio_boot_cells.c",
+      "sha256": "dadd93730bb4cd53e031a075ae40d109a3f798668cadb03587d33cd75b135cde"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_hci_radio_boot.py",
+      "sha256": "aaf912b965823d982dde04db89f3e1e0e5b6881f9a7f8a621d9bf6dd708d8f7e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_hci_radio_shutdown.py",
+      "sha256": "4f6c1b01faa9f38ecf0ef355e022a6a5e76bf1d13425d6ba3633bc88a56e44a0"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round576/receipt.json",
+      "sha256": "02b7f8edc1faf2dc297eb02c5a8f5547a31417455d27c1ca4ad83ffc9054c0cb"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-hci-radio-boot-cells-round576/round576-receipt.json",
+    "sha256": "32d9e050dcef8022b16f393148054a4bcff21b4e83cac7c5429b1f8a1a206d98"
+  },
+  "publication_scope": "Body-receipt evidence only; seven HCI radio boot scalar C cells/eight bounded comparisons; ROM tables/buffers/placement/full coverage/hardware unqualified; percentage is producer estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

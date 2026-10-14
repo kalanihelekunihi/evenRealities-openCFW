@@ -1,0 +1,24 @@
+{
+  "round": 628,
+  "component": "Apollo display case-3 frame prelude",
+  "status": "C body compiles; nine native/C cases agree on eight call arguments; deeper frame routine unresolved; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "feb79c89de5dca230ea1ffbc36aee56fb56154871b27326d946e7f3a5f506560",
+  "verifier_sha256": "c72dd9bd98fc20e96e57c7334d4ccc44b037c67dc282422db986cb3c1c75e7b7",
+  "link_audit_sha256": "090d1d9c061b5a1525f553603ac26ceecd0da0cae34594c340d81f7735980d02",
+  "combined_object_sha256": "14d4a467d28379dfe97fa7a968957c60c7a4ad7d384d7b1432359d80a280e42b",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_CASE3_PRELUDE_NATIVE 9",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 92 24 7",
+    "git diff --check"
+  ],
+  "gates": [
+    "frame routine 0x46c73c C body unresolved",
+    "offset cell 0x200744c8 dynamic write lineage and exact linker placement open",
+    "uLED option objects, row callback, work buffer, dispatch gate, live settings config open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

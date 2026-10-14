@@ -1,0 +1,97 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "flash_load_bytes": 158812,
+    "full_payload_linked": false,
+    "linked_direct_calls": 14
+  },
+  "completed_utc": "2026-10-13T23:08:17.899315+00:00",
+  "component": "apollo_bootloader",
+  "implementation_delta": {
+    "actual_c_bodies": 0,
+    "named_helper_retained": 1,
+    "selected_unretained_globals_after": 205,
+    "selected_unretained_globals_before": 206,
+    "source_provider_call_path_connections": 4
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Clock provider arithmetic now shares the selected source helper; no physical clock behavior is established.",
+    "The nine remaining directly reachable manual bindings without a reviewed selected path are an attribution queue, not automatically nine missing bodies.",
+    "Final scatter/linker composition and whole-image/hardware behavior remain unproven."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Nine priority discarded source path leads",
+      "Final scatter/load-run and startup/ROM behavior",
+      "Whole-image coverage; 0/6 complete images"
+    ],
+    "reason": "Classify remaining Bootloader GC paths and final layout"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_popcount_421584.c",
+      "sha256": "111c6893f2bd186b9ebed381d49c9c68d08c74903d00308f989c24ab6819973a"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_popcount_421584.h",
+      "sha256": "d5206aeae7d74ad8038fbd555058846482b83b80e71298653e2b2a2f179cc47e"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider2.c",
+      "sha256": "36f7b487597f64f85d12c463452a5a096771134a227a2299709da6f8ff09a1db"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
+      "sha256": "ba5071aa5ff462bfc1fe65024af8cce816a8b215b691aeee93adf6a100cd66d9"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
+      "sha256": "34c7beb507842cbf2519553ba38edba4b73d8dcd41abbfc125f2d73707824e9d"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "sha256": "2d671fcd8e0af4273eea7698624cf8ac01e38eb6e19434aa4a90af70c215251f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-gc-reachability-round449/verify_popcount_host.c",
+      "sha256": "ed0644f46b94f90670ab10043083001ff46f012ce2b456a6ddd9c80925866a0e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-gc-reachability-round449/popcount-source-receipt.json",
+      "sha256": "4900e022a1b0be5911659205d1598ded956c31f4cb20236e57eafda8aa590d4f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-gc-reachability-round449/current-placement.json",
+      "sha256": "a1ad0c5935a96578c01746b97295ba4b169eee1b1c901c7194dd199ff29281d9"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-gc-reachability-round449/gc-reachability-current.json",
+      "sha256": "bf78c42fa4560f8b7f5696e8b273c1107961ac798da17ca13d7fea85350065c8"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-popcount-round449/receipt.json",
+      "sha256": "68b41a32cca9aaf0740f1909de26e4d4a8b96814cf085627527d71cfcf24d2a4"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-popcount-round449/placed/boot.elf",
+      "sha256": "37363c86c1a81a7acc626f64a7f65a6007e433b0a98c4103d1ef82f4d49a48d3"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-gc-reachability-round449/round449-receipt.json",
+      "sha256": "c83f2ec93f7a123b9066188ca123648c0c225603bc11dc66c701a8b49f502669"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-gc-reachability-round449/popcount-source-receipt.json",
+      "sha256": "4900e022a1b0be5911659205d1598ded956c31f4cb20236e57eafda8aa590d4f"
+    }
+  ],
+  "wave_id": "root-boot-round449-popcount-connected"
+}

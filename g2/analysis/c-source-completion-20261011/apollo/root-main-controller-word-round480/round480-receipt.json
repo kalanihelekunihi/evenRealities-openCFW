@@ -1,0 +1,54 @@
+{
+  "absolute_address": "0x20074544",
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 724,
+    "strong_unresolved_before": 725
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/nor_controller_sram_candidates_20261013/controller_word.c",
+      "sha256": "0e3a543703fe5731189703cb3540c3b1d82bd13e501a510db35d421b7d560714"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "681235c3c27d714e439a999d94d1999f96e836ed510c665023e3d271d6149572"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_nor_controller_word.py",
+      "sha256": "b2fcc38b3dc690c2cf618e7e71780bee20c93ffc58fed289ff38486c4fec44d8"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-controller-word-round480/address-oracle.json",
+      "sha256": "8aa73b274d002d5346721ce18a39ec9682ec4d97544706dae92abd8460024160"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-controller-word-round480/isolated/controller_word.o",
+      "sha256": "fda5d003e2a0af7fccb78b9d457efc034613ed1407f32f13f74b34c7d5b48b8c"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-controller-word-round480/receipt.json",
+      "sha256": "03497fead579709ffb54c473d9d0ec04dfa4bab5e88db2be91d9b22bbe4c5735"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-controller-word-round480/apollo_main/candidate.o",
+      "sha256": "aac2dab32db33be9bf17dd176fd0514f7980fc8e37df7a96ee6a08d3793a5569"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "The absolute symbol binds the observed SRAM address; runtime initialization and ownership are not source complete.",
+    "A native initializer candidate at 0x4700b4 writes through a caller-supplied pointer; that lineage and physical NOR behavior remain unverified.",
+    "No complete Main image is verified."
+  ],
+  "native_literal_sites": [
+    "0x470d80",
+    "0x4709d0"
+  ],
+  "provenance": "Two locked Main literal loads and absolute symbol value in compiled object and candidate link",
+  "schema": "opencfw-source-binding-receipt-v1",
+  "source_symbol": "g2_norflash_controller_handle_20074544",
+  "status": "bounded_source_binding_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

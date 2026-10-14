@@ -1,0 +1,49 @@
+{
+  "round": 562,
+  "status": "PASS_AUTO_BRIGHTNESS_STORAGE_SOURCE_OWNED",
+  "component": "Apollo display auto-brightness",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Enable byte and profile word are source-owned zero-initialized C storage; 21 connected native-vs-C cases pass with the real cells.",
+  "new_c_source": "g2/components/audio/uart_thread_source_candidate/display_auto_brightness_state.c",
+  "build": {
+    "candidate_compilation_passed": true,
+    "unresolved_symbols": 690,
+    "previous_unresolved_symbols": 692,
+    "duplicate_strong_symbols": [],
+    "source_complete": false
+  },
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_auto_brightness_storage.py",
+      "sha256": "42cab3231659b57f121cb28cf60867002103c19e4da84af1fb77db3c13c4b052"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/auto-brightness-storage-results.json",
+      "sha256": "eedba1ff6a39ec46184f644ebe1a86f093ccfee12178697684ca43009b991944"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_auto_brightness.py",
+      "sha256": "0c6b30e2c1b6a19a09dcacb4b9fb790b1dc2006437385d94509b873ff4df5abb"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_auto_brightness_state.c",
+      "sha256": "48e76b41dc26cf9b5c3a41d85af3c609fe4567067e944cf900e5a8fe6cf298b2"
+    },
+    {
+      "path": "g2/build/c-firmware/root-round562/receipt.json",
+      "sha256": "98812000fcbfbca35514d8d347e75fcd936d4134113d52df0f003373fe245510"
+    }
+  ],
+  "remaining_estimate": {
+    "auto_brightness_storage": "Initial zero ownership complete for these two cells; final absolute placement, later state mutations, boot and hardware remain, roughly 40-55 percent of this component.",
+    "apollo_main": "690 unresolved symbols remain, plus linker/layout and whole-path behavior gates.",
+    "whole_g2_firmware": "0 of 6 image components source-complete."
+  },
+  "limits": "Relocatable C ownership and 21 connected native-vs-C cases only; no final RAM linker placement, boot or hardware proof.",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-auto-brightness-storage-round562/round562-receipt.json",
+    "sha256": "fb130b6fad8e2f908a1f0d6ae060fe98056b153e55582315cf1f55ec6838fb37"
+  },
+  "publication_scope": "Body-receipt evidence only; two auto-brightness zero-initialized C cells and 21 connected cases; final placement/runtime/component unqualified; percentage is producer estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

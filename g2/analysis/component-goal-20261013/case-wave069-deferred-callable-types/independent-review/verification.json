@@ -1,0 +1,51 @@
+{
+  "status": "PASS_INDEPENDENT_BOUNDED_SOURCE_TYPE_AND_GRAPH_REVIEW",
+  "temporary_copy": "/tmp/case-wave069-independent.YghzBa",
+  "verification": {
+    "verify_types": "PASS_DEFERRED_CONSUMER_C_TYPE_CONTRACTS",
+    "verify_types_saved_original_negative_controls": 2,
+    "verify_types_static_assertions": 4,
+    "verify_deferred_high": "PASS_STOCK_DEFERRED_EVENT_CALLBACK_CONSUMER_GRAPH",
+    "verify_deferred_high_cases": 108,
+    "verify_deferred_low": "PASS_REAL_NEGATIVE_ONLY_DEFERRED_CONSUMER_GRAPH",
+    "verify_deferred_low_cases": 108,
+    "generated_json_matches_producer": {
+      "type-verification.json": true,
+      "deferred-high-verification.json": true,
+      "deferred-low-verification.json": true
+    }
+  },
+  "inventory": {
+    "manifest_source_count": 401,
+    "source_hashes_matching_manifest": 401,
+    "receipt_object_count": 401,
+    "object_hashes_matching_receipt": 401,
+    "production_elf_sha256": "51e51425823ff690c5707bd881d7a67047ec51c079473a443a1741b496f342ac",
+    "wave065_production_elf_sha256": "51e51425823ff690c5707bd881d7a67047ec51c079473a443a1741b496f342ac",
+    "production_elfs_byte_identical": true,
+    "production_elf_size_bytes": 121152
+  },
+  "callable_contracts": {
+    "high_negative_message_consumer": "void (*)(void *, uint32_t); payload word 2 explicitly converted through uintptr_t to void *",
+    "low_negative_message_consumer": "void (*)(void *, uint32_t); payload arg1 explicitly converted through uintptr_t to void *",
+    "actual_event_clear_and_set_callbacks": "void(void *, uint32_t)",
+    "low_scheduler_state_declaration": "uint32_t (void), matches actual provider definition",
+    "deferred_packet_layout": {
+      "fields": ["int32_t command", "uint32_t callback", "uint32_t arg1", "uint32_t arg2"],
+      "size_bytes": 16,
+      "producer_tuple": ["0xfffffffe", "callback", "arg1", "arg2"],
+      "consumer_argument_order": ["arg1/event pointer in R0", "arg2/bits in R1"],
+      "serialized_tuple_asserted_in_each_emulated_run": true
+    },
+    "other_low_consumer_provider_signatures_checked": {
+      "critical_enter_exit": true,
+      "yield_request": true,
+      "remove_waiter": true
+    }
+  },
+  "scope_limits": [
+    "Known clear/set queued callback targets only; arbitrary external callback writers are not closed",
+    "Queue lifetime, waiting event tasks, scheduler/IRQ races, physical IRQ/reentrancy, and hardware are not validated",
+    "Byte-identical ELF confirms no machine-byte change, not source completeness or physical acceptance"
+  ]
+}

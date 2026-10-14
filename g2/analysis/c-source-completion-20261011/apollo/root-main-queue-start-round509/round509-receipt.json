@@ -1,0 +1,65 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "queue_lifecycle_provider_gates_remaining": 0,
+    "source_complete": false,
+    "strong_unresolved_after": 722,
+    "strong_unresolved_before": 723
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/queue_start_candidates_20261013/start.c",
+      "sha256": "7c5c4f8b80ab526e99d769d5b26e917548ed68e010d5138ae9904bd5422506c4"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/00539b56.c",
+      "sha256": "29a144d12ca68264d6df1ef689d0c8ada29c15ed0d4c78c0f8a9dd3ec9e7a83b"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/00480826.c",
+      "sha256": "4ed45ddef4aab041a406ddbb4ae3797375e7944a649ee5b11ec214bb9d36f6b6"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "58b1890b32d872a436e65be8bc2c31c458f6101368f157fcfd07b0fbd106b8ff"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_queue_start.py",
+      "sha256": "f3edc30557ead48869a7a426c2f85afb9a51d3fddc7f6a55f12b7cd75b06de39"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-queue-start-round509/oracle.json",
+      "sha256": "b6cb80a489b95d834e01b907d6de087698f2ccd46da6474c0bccf1448d177771"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-start-round509/isolated/start.elf",
+      "sha256": "0f1657aa5813b8883bae995cba5bf86ad487925b0316c0a9ad06b3fa31232e87"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-start-round509/receipt.json",
+      "sha256": "8a477052fe53fd15433e106b231883b0442c46dc4be94e1d7e43f6405c664531"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-start-round509/apollo_main/candidate.o",
+      "sha256": "7a010056004819bbc3de7efe6f277276f8564c14f4d02af6d5b2b5ea4a260bb0"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Microsecond delay intercepted; deterministic readiness changes tested against synthetic MMIO.",
+    "Physical queue timing and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x539b56",
+    "0x480826"
+  ],
+  "native_source_oracle_cases": 240,
+  "provenance": "Main Ghidra pseudocode, locked native blob and queue start plus register poll native/source comparison",
+  "schema": "opencfw-source-provider-receipt-v1",
+  "source_bodies": [
+    "g2_main_queue_start_539b56",
+    "g2_main_wait_bits_480826"
+  ],
+  "status": "provider_bodies_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

@@ -1,0 +1,103 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_payload_linked": false,
+    "strong_unresolved_symbols": 737
+  },
+  "completed_utc": "2026-10-14T00:53:54.805733+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "bounded_native_source_cases": 1228,
+    "source_owned_clock_bitmap_bodies_completed": 3,
+    "source_owned_clock_release_bodies_completed": 2
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Critical-section and peripheral power helpers are intercepted in release comparisons.",
+    "Three class 4/5 power-control helpers remain unresolved after this wave.",
+    "Synthetic SRAM checks do not establish physical clock operation or a complete Main image."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Main clock class 4/5 acquire providers and three power-control lowers",
+      "Remaining clock class providers",
+      "Main MSPI configure auxiliary 0x4bfed6 and transfer 0x4c0f78",
+      "Remaining Main graph and five other image graphs; 0/6 complete"
+    ],
+    "reason": "Recover class 4/5 acquire and power-control providers; continue MSPI configuration/transfer path"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/components/main/clock_request_bitmap_candidates_20261013/bitmap.c",
+      "sha256": "ead641233685f1aa84afe3e456196b014e12807973b28b3ad64a501c90950ad3"
+    },
+    {
+      "path": "g2/components/main/clock_release_45_candidates_20261013/release.c",
+      "sha256": "e6621edac5e035609519d7c5a766156ca4d4814d34989a96c6b6fab8653d1e5a"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c37a8.c",
+      "sha256": "b2a40489933fe594b1082fee9f6fda5de18773dfb5634d6ad25ba88090531b1a"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c37fe.c",
+      "sha256": "a12a2b55aeb04b9866cfebf4749e8dae6135b4dabcd311204fb5608eda170977"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c377a.c",
+      "sha256": "456a95464088b68d0d8f9c6abdfb596675edc8c4bc99f1c37a289f2823c686bf"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c4016.c",
+      "sha256": "435e96f807c20f76a88d19df33d85541b29e83a125546473e4a6f6bce7fdd304"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c420c.c",
+      "sha256": "8a77b5cf2c09615df633eed4777069913b594f4726e55773b1e113995309f4c3"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "de95d93bf1e99a5dde6712bd4b315b4bd8080bf80419c58b1d10f51433bc37ac"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_request_bitmap.py",
+      "sha256": "4450040ea243165fd72b770eff3f67db93f353259ddb7a8f843173936caa66c1"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_release_45.py",
+      "sha256": "6af4c8940b23da09bcdc00edaccff97178e35257defe2fde976e5e5a4ba2d8fe"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-bitmap-round487/bitmap-oracle.json",
+      "sha256": "b07d6be53bc12d9ef2f52e187aad1102952c80f648b60c701e3cb3e8d0f0d601"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-bitmap-round487/release-oracle.json",
+      "sha256": "e56bf8bf0897c44e3338aaab809219c930eb7cd6b27548935a7da0db0362c475"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-bitmap-round487/isolated/bitmap.elf",
+      "sha256": "140607a584230e2dc9d2bdb4d6c2dc8a40bb2131b7a0e4a9f31b1937943d58d1"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-bitmap-round487/isolated-release/release.elf",
+      "sha256": "0d66e739e3554235e69bb601542938bcba702bb7857e13ef69dfdada3798dd1a"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-bitmap-round487/receipt.json",
+      "sha256": "6ed43674a3c93ee4a9cd33a4d0177a88245a15399fd6645c1a071ce7a1001218"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-bitmap-round487/apollo_main/candidate.o",
+      "sha256": "4b384405da72c0ba01e0a47e31943f325c326dbed48b2a5959f14776fb588fec"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-bitmap-round487/round487-receipt.json",
+      "sha256": "ab0ae7ac8be5448587dbcc2990bd6610e193742669d162b71e6bcade506330b3"
+    }
+  ],
+  "status": "completed"
+}

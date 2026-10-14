@@ -1,0 +1,58 @@
+{
+  "wave_id": "component-goal-case-wave035-timer-send-consume",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T22:03:39.034474+00:00",
+  "status": "PASS_NATIVE16_TIMER_SEND_CONSUME_GRAPH",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave033-native-timer-message-width/wave.json",
+    "sha256": "88e8c9204f3d35a530ac9a9e9f89dfe5b7ee52ee701fe65d8065528c2eb5b2cd"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave035-timer-send-consume/verify.py",
+    "sha256": "31c8a310c1f959fc02642b577376ca49f30613a51701f9ae737c9f29b1b6a446"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave035-timer-send-consume/verification.json",
+    "sha256": "64815424b6e1ad7aafe46f720ea6f72924c8bef0aaa4f9323c3edbb7f5ac711d"
+  },
+  "fixture": {
+    "path": "g2/analysis/component-goal-20261013/case-wave035-timer-send-consume/fixture.elf",
+    "sha256": "143cefe4ac20a3162d9e70f021b1b53c6efa2ee62de2102b9986c725e75a31ee"
+  },
+  "cases": 132,
+  "done_criteria": [
+    "Native16-byte sender\u2192queue\u2192receiver\u2192timerconsumer graph",
+    "Commands0..10 with staticnonautoreload timer and causal postedtick4/currenttick5",
+    "Independent queueempty/flags/period/deadline/listcontainer oracle",
+    "Exact16bytequeuedrecords and all12288RAM except immutablecallbacknamespace pointer; callee-saved/SP/PRIMASK preserved"
+  ],
+  "native_entries": [
+    "0x0800bf94",
+    "0x0800cd80",
+    "0x0800c686",
+    "0x0800c7a8",
+    "0x0800ad48",
+    "0x0800c83a",
+    "0x0800b0fc",
+    "0x0800b284",
+    "0x0800b024",
+    "0x0800bfb0"
+  ],
+  "component_acceptance_gates": {
+    "bounded_sender_consumer": "PASS",
+    "dynamicfree_negativecallback_overdue_autoreload": "incomplete",
+    "IRQ_globalstack": "unvalidated",
+    "accepted_images": "0/6"
+  },
+  "limits": [
+    "Commands0..10 static nonautoreload timer, future deadlines, empty queues/no waiters; dynamic-free/negativecallbacks/overdue-autoreload/blocking/IRQ paths excluded",
+    "Real sender16-byte frame, queueproviders, timerconsumer and sortedlist helpers execute without cuts or injectedreturns",
+    "Only immutable callback namespace pointer normalized; all other12288RAM bytes and queued16byte records compare",
+    "Bounded synchronous stack use; no global IRQ/reentrancy budget proof"
+  ],
+  "next_critical_path_task": "Genuine heapallocate/free and dynamic timerdelete closure; no hardware/providerstubs",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

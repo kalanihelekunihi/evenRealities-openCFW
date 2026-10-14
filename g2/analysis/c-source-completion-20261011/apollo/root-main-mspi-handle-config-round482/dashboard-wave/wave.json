@@ -1,0 +1,73 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_payload_linked": false,
+    "strong_unresolved_symbols": 724
+  },
+  "completed_utc": "2026-10-14T00:35:56.802490+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "bounded_native_source_cases": 432,
+    "source_owned_mspi_handle_configuration_leaf_completed": 1
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Synthetic MMIO and SRAM bound comparison; both aliased and separate handle/state layouts are covered.",
+    "Native null handle/configuration behavior is outside tested domain due pre-validation dereferences.",
+    "No physical MSPI setup or complete Main image is verified."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Main NOR startup caller 0x46fb0c and MSPI power/configure lower paths",
+      "Main unresolved MSPI configure and transfer bodies",
+      "Remaining Main graph and five other image graphs; 0/6 complete"
+    ],
+    "reason": "Recover the caller-owned MSPI startup sequence"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/components/main/mspi_handle_config_candidates_20261013/config.c",
+      "sha256": "37f9758d1aff156b9eb61bf4efeb4368b0e491be34ca9e2dadcdd4a671752eb4"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c08a8.c",
+      "sha256": "a4dec6d64966a993dcaeb760080c716002acba3f48f38359397a8a87d0974343"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "912bb6d6c4c440921249ad7d528e3f74f1db1c2d7896f72ed3c0399bdf6aa565"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_handle_config.py",
+      "sha256": "e7c214726ca2ba10531e22b4378d4f39859082a88cc9636de2b6b88d57ba30e1"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-handle-config-round482/config-oracle.json",
+      "sha256": "134389af616922a630260b892d3522d0f9dfd896d0857cacc856addfaea8d122"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-handle-config-round482/isolated/config.elf",
+      "sha256": "89ba5c14cb45bc6815f372d2fef07da6fc93f739c974b182d2246f50fbc2cc7c"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-handle-config-round482/receipt.json",
+      "sha256": "f66ec442689c9c2817830c49e29e2a9062c2497ab6b4d3aa487c78d087a84890"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-handle-config-round482/apollo_main/candidate.o",
+      "sha256": "5fe06b85129cd471aa9ad6201228656096ba9cf47615b578b22cee9957e8cae4"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-handle-config-round482/round482-receipt.json",
+      "sha256": "918b6a6bf31e05a42843ab788ec25e31fa8039b817a2ab10e983c80cd9500c17"
+    }
+  ],
+  "wave_id": "root-main-round482-mspi-handle-config"
+}

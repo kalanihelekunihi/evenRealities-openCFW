@@ -1,0 +1,79 @@
+{
+  "wave_id": "component-goal-case-wave024-current-custom-artifact",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T21:45:29.031448+00:00",
+  "status": "COMPLETED_CURRENT_SOURCE_CUSTOM_IMAGE_CONTRACT",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/wave.json",
+    "sha256": "bab7e049aecdbf06603eddf7a72c8fb51c9a9e0e265eebe2cb6af11c3e7d635e"
+  },
+  "source_object_build_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/final/receipt.json",
+    "sha256": "c3a70f8a4756aaab953de048362bf538864d3cb7b7bb48bf267048d34f0af4c9"
+  },
+  "build": {
+    "path": "g2/analysis/component-goal-20261013/case-wave024-current-custom-artifact/build/receipt.json",
+    "sha256": "9ab2672e0b0a4b37e5836ee5aee114b61786fa6639d0e5590a45d5d8652a95b4"
+  },
+  "rebuild": {
+    "path": "g2/analysis/component-goal-20261013/case-wave024-current-custom-artifact/rebuild/receipt.json",
+    "sha256": "a0104a05008cd868f6e0b673f18583d2f8334dd54b05420422b35e8be8732b7a"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave024-current-custom-artifact/verification.json",
+    "sha256": "a19b4f45f9116234c61daffaedc665d6083203ac17ef2a97e819eea8f5571d0a"
+  },
+  "scripts": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave024-current-custom-artifact/build.py",
+      "sha256": "ad756ec0a37b62e8eeb9d3741cddb4253d48b6028c5958b8608cb32ed96df3c5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave024-current-custom-artifact/verify.py",
+      "sha256": "c444cd26a60d0fad47cd71a220411451b5a7c1d1664d87d56daf886d523a2f1e"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave024-current-custom-artifact/layout.ld",
+      "sha256": "7fa40a51c5bc75c092c42f98630c92740f1972c48080fccc5f686183d6fa3b34"
+    }
+  ],
+  "artifact": {
+    "path": "g2/analysis/component-goal-20261013/case-wave024-current-custom-artifact/build/case-custom.bin",
+    "sha256": "18c97b0d2704bc9a1dd910998b53536c8605d94fe79e31aef1fa672cb5511343"
+  },
+  "raw_binary_bytes": 63144,
+  "code_data_span_bytes": 63142,
+  "erased_padding_bytes": 2,
+  "flash_headroom_bytes": 194904,
+  "reproducibility": "ELF and raw image byte-identical on fresh relink",
+  "done_criteria": [
+    "All current401 source/object hashes match",
+    "Same qualified code/data and addresses under custom memory contract",
+    "8-byte granularity and protected final4KiB exclusion",
+    "Three negative guards reject undersizedflash/unqualifiedmutable/protectedoverlap",
+    "Fresh relink reproduces raw image and ELF"
+  ],
+  "component_acceptance_gates": {
+    "custom_image_bounds": "PASS",
+    "update_package_erase_bank_behavior": "unvalidated",
+    "exact_native_matching": "notmet",
+    "physical_hardware": "unvalidated",
+    "accepted_images": "0/6"
+  },
+  "limits": [
+    "Linker confirms emittedsection boundaries, not every absoluteRAM/MMIO reference or complete computed-root/ambient-stack/provider behavior.",
+    "Factory-page exclusion in the image does not validate OTA erase/program preservation, bank-swap or flash hardware.",
+    "Rawdiagnostic image only; noEVEN envelope, flashing authorization or accepted replacement claim."
+  ],
+  "next_critical_path_task": "Absolute RAM/callback evidence and logged-caller contract audit; physical stack/IRQ/FIFO validation remains external",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave024-current-custom-artifact/wave.json",
+    "sha256": "28845d7146a49fba25f7f77ad98e4c59d1b9b6baf33a392e5c251484e329b795"
+  },
+  "publication_scope": "CASE custom artifact checkpoint; no package/hardware/map promotion"
+}

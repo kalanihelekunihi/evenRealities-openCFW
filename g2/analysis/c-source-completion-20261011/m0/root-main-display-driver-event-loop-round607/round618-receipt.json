@@ -1,0 +1,25 @@
+{
+  "round": 618,
+  "component": "Apollo display-driver uLED mode helper",
+  "status": "C body compiles; 10 native/C bounded cases pass; combined candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "uled_source_sha256": "c9d5d5d70caa3749d5d39c5d080a711b14b8d266f8792b8a721946f36e973ae7",
+  "mode_verifier_sha256": "2b95ec67c23489d946667e9428cfbe98c284fd368cca837bc0033b7205a8a241",
+  "event_loop_source_sha256": "7233eb32b59daa47743ec553e043f8fac3936a7a41f284031bc37bf10aa6827f",
+  "link_audit_sha256": "51fe7db0e1f5872204fa637b887c8a6651c3af667865097c941b3472dab0c352",
+  "combined_object_sha256": "8b04de2b60125153acd965656946c7224fa969bfdba81706938d0171a09b7d19",
+  "finding": "native mode helper truncates incoming R0 to a byte before vtable callback at object+0x34; C uses uint32 entry and explicit uint8 cast",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_MODE_NATIVE 10",
+    "PASS_DISPLAY_DRIVER_ULED_STATUS_NATIVE 10",
+    "PASS_DISPLAY_DRIVER_EVENT_LOOP_C_NATIVE 30",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 52 18 10",
+    "git diff --check"
+  ],
+  "gates": [
+    "10 display-driver helper bodies remain missing",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0
+}

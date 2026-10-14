@@ -1,0 +1,75 @@
+{
+  "wave_id": "component-goal-case-wave060-ram-reaching-definitions",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T23:34:14.698588+00:00",
+  "status": "COMPLETED_CONSERVATIVE_BACKWARD_CFG_REVIEW",
+  "source_delta": "None; bounded analysis qualification",
+  "done_criteria": [
+    "Backward raw Thumb definition evaluation for51 RAM operands",
+    "Entry-to-operand syntactic paths and all-predecessor constant agreement",
+    "Four negative controls for BL/BLX clobber and conflicting branches"
+  ],
+  "evidence": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave060-ram-reaching-definitions/check.py",
+      "sha256": "914d88fad4006654f2d34d00c766ccee4114c78aca4ff86ab1d49de4ccb75491"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave060-ram-reaching-definitions/verification.json",
+      "sha256": "9183c939a8ae16e17aee97159018654cf03b1fd20fea3195f484bf4dcad9acfe"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave025-ram-callback-provenance/verification.json",
+      "sha256": "7a05e5f02a49ca055381bcfea72aef4a1810c2a8c0e0eab8fbe4364288e92b81"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave055-ram-stack-evidence-review/verification.json",
+      "sha256": "a53194f49bd25863ad7a8732b7dc4d6eb7d503b60e4faa5d3913a6c956623125"
+    },
+    {
+      "path": "g2/research/corpus/case/ghidra/open-2026-09-29/functions-000.jsonl",
+      "sha256": "5447649e214aaf10cbe916d3474dcdfbece16a0570d3d243dc9e34e64ed39ab7"
+    }
+  ],
+  "source_object_import_dependency_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/receipt.json",
+    "sha256": "81daab76f550b387574679532f05b56a43c41098536549eab97acc3311d3dabc"
+  },
+  "source_drift": {
+    "verified_source_units": 401,
+    "changed": []
+  },
+  "firmware": {
+    "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+  },
+  "functions_address_extents": "Exact PC/function/span/definition addresses and code hashes in verification.json; no native interval admission",
+  "component_acceptance_gates": {
+    "bounded_raw_base_definitions": "51/51 alternate backward check pass (wave060); producer review only",
+    "known_root_code_data_supplement": "8 omitted root entries reviewed,24 unique candidate sites including catalogue055+trampoline",
+    "full_dynamic_callback_inventory": "not closed; generic registration APIs accept caller-selected target pointers",
+    "global_stack_IRQ_and_runtime_lifetime": "unqualified; actual interrupt nesting/reentrancy and hardware-driven interleavings unavailable",
+    "full_coldboot": "blocked at missing accurate STM32G0 model/read-only CASE traces",
+    "formal_G2_G6": "not_run",
+    "accepted_images": "0/6"
+  },
+  "limits": [
+    "Backward raw Thumb evaluator retains all syntactic CFG predecessors; entry-to-operand syntactic path asserted, branch feasibility/flags unconstrained",
+    "Unsupported writes/loops become unknown; unresolved is not a firmware defect",
+    "Producer alternate-method review, not independent reviewer admission",
+    "Native function code/data boundaries remain inherited except authenticated strings filtered; object extent/lifetime not proved"
+  ],
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "next_critical_path_task": "Independent review/admission of bounded CFG evidence; actual CASE IRQ priority/nesting and runtime callback transcripts or validated STM32G0 model for physical/global gates",
+  "software_options_exhausted": false,
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave060-ram-reaching-definitions/wave.json",
+    "sha256": "e3edfd29987d6d0bb426ae75adfee0096760a0c76d9e8c25145f33affea0483a"
+  },
+  "publication_scope": "Mechanical CFG/base proof for51 examples; syntactic paths not runtime feasibility/object lifetime; independent review open"
+}

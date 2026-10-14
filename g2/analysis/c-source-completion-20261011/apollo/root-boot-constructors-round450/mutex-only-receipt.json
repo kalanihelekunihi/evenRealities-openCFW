@@ -1,0 +1,11 @@
+{
+  "cases": 61,
+  "limits": [
+    "Resource allocator, queue constructors and queue-put remain controlled providers.",
+    "Timer cases are excluded because the existing test fixture compares a callback pointer linked at a different source address; unchanged source fails there too.",
+    "No whole startup, scheduler or hardware behavior is proven."
+  ],
+  "source_elf_sha256": "40fb49a8362e60e2d4f54f5e3b9f4af9b1bfc5bfcf0828253c2f8a68d4d30169",
+  "status": "PASS_BOUNDED_MUTEX_CONSTRUCTOR_NATIVE_SOURCE",
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+}

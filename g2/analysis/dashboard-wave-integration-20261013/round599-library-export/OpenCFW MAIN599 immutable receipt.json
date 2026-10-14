@@ -1,0 +1,64 @@
+{
+  "round": 599,
+  "status": "PASS_MAIN_DEVICE_MANAGER_STATE_PREFIX_BOUNDED",
+  "captured_utc": "2026-10-14T07:04:56.937644+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "compressed_sram_record": "0x75d3f4",
+  "decoded_sram_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "native_address": "0x2000060c",
+  "startup_prefix_bytes": 16,
+  "startup_prefix_hex": "41624c00a5644c000000000000000000",
+  "aliases": [
+    "audio_device_manager_state",
+    "audio_ble_device_manager_state"
+  ],
+  "native_comparisons": [
+    "PASS compiled initializer byte match and alias address",
+    "PASS device send 5 cases",
+    "PASS device resource init 4 cases"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 627,
+  "unresolved_after": 625,
+  "removed_symbols": [
+    "audio_ble_device_manager_state",
+    "audio_device_manager_state"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Only the observed 16-byte prefix is source-owned; the complete native allocation extent, absolute code pointers, final RAM placement, whole-image source coverage and physical behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_device_manager_state_prefix.c",
+      "sha256": "f1f2c0729b6d38a185c07d7329ed6df4d857d7db2d0a4094bb3175939b28f883"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_device_manager_state_prefix.py",
+      "sha256": "b0a649f9d21510e113a199a4bf29989edd54ae763acce4a313163dc8499e06ba"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_device_manager_send.py",
+      "sha256": "3fe8b021959957e9a26f31d4b5ce5c51d85a6a99ccce6abf762b50ae414f0661"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_device_resource_init_native.py",
+      "sha256": "d15d7165c9c29bbfac1d8af441d4c7eae38709864cd79b4b818761bb0439afa6"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round599/receipt.json",
+      "sha256": "3ea0e548c3b61979337e9421f15731ab8471d17546f0498f30b144d811ba2eb4"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-device-manager-prefix-round599/round599-receipt.json",
+    "sha256": "15227284b97c478aa60fb50ff34933f5cbb4b0c8c56ee8cafaa725e9cda4191f"
+  },
+  "publication_scope": "Body-receipt evidence only; observed 16-byte device-manager prefix/two aliases/nine bounded cases; full allocation/code-pointer targets/placement/image/hardware unqualified; percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

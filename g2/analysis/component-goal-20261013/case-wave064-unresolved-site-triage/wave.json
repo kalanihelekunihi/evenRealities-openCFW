@@ -1,0 +1,57 @@
+{
+  "wave_id": "component-goal-case-wave064-unresolved-site-triage",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T23:50:25.833595+00:00",
+  "status": "PASS_106_UNRESOLVED_SAMPLES_EXACT_BASELINE_PRESERVATION",
+  "source_delta": "None in this review/triage wave; two confirmed callback type consumer repairs handled separately065",
+  "evidence": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave064-unresolved-site-triage/triage.py",
+      "sha256": "d704325155c45ad319f58fe4b15fa3bd09aa491871fc1049c4ea97b98b7b2495"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave064-unresolved-site-triage/verification.json",
+      "sha256": "550e9e63263628c60a75a6f91215bbc4899ac2d49d76a6bf263ec619fd119743"
+    }
+  ],
+  "source_object_dependency_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/final/receipt.json",
+    "sha256": "0be91b9f484413603d70050578471dace7101aa5b48364124662b93b31fc2e6d"
+  },
+  "baseline": {
+    "path": "g2/analysis/component-goal-20261013/case-wave060-ram-reaching-definitions/wave.json",
+    "sha256": "e3edfd29987d6d0bb426ae75adfee0096760a0c76d9e8c25145f33affea0483a"
+  },
+  "native_firmware": {
+    "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+  },
+  "done_criteria": [
+    "Instrumentfrozen060 model without changing results",
+    "Classify106unresolvedsamples/70uniquePCs with overlapping failure causes",
+    "Keep model limitation separate from source error"
+  ],
+  "component_acceptance_gates": {
+    "callback_C_type": "two defects confirmed063;065repair inprogress",
+    "sample_use_site_CFG": "106unresolved/70uniquePCs; categories overlap",
+    "independentreview": "63 boundedreviewcompleted;64triage isproducer mechanical evidence",
+    "IRQ_async_lifetime_coldboot": "unqualified physical/modelgates",
+    "formalG2_G6": "not_run",
+    "accepted_images": "0/6"
+  },
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "software_options_exhausted": false,
+  "next_critical_path_task": "Complete three consumer repairs andindependentlytest065 beforeanalysiscount expansion; then support raw transfer/loop/switch-table models withnegativecontrols",
+  "triage_counts": {
+    "sampled_unresolved": 106,
+    "unique_operand_PCs": 70,
+    "unsupported_transfer": 82,
+    "backward_cycle": 36,
+    "entry_or_disconnected_node_register_undefined": 9,
+    "non_ROM_or_unknown_memory_load": 2,
+    "counts_overlap": true,
+    "entry_category_note": "Leaf withno CFG predecessors neednot beactualfunctionentry; disconnected decodednodes/tableblocks requireclassificationbefore runtime-input inference"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 725,
+    "strong_unresolved_before": 726
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/clock_request_candidates_20261013/clock_request.c",
+      "sha256": "232b1580e43190993586b51ed4760bd473e71e6cb9775f96f1bbb0b9ff761e68"
+    },
+    {
+      "path": "g2/components/main/mspi_cq_index_refresh_candidates_20261013/refresh.c",
+      "sha256": "7f8aa5bea1843c088dbebb62d2fc38f9f174b63e42bcf8cc1b3b9341f508ae9b"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "c08cee58353ff27a07a3ebfa1e9b078368104c416fc6720c7318dd50fb324a13"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_request.py",
+      "sha256": "c9fd16a8285749f0bb68e17e2ce797b70f9e809f75802d21490d52160143eea9"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-request-round479/request-oracle.json",
+      "sha256": "d0d9830a2960801dfbbe9b3d67959036285e98bed1c2be167f8cf8c5977d61ff"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-request-round479/isolated/clock_request.elf",
+      "sha256": "04ed7410a00a85181c7d64d0da919080f6bbd6f9cbc651ff2a2ec6f864d6e00d"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-request-round479/receipt.json",
+      "sha256": "f41e25f547d3945896e98a34dc62e89fb236c31d33d3be1efeb274110d3a6074"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-request-round479/apollo_main/candidate.o",
+      "sha256": "bfc6e1192edce84c1dcd25693bd7d366aa094cb81a89a9831ed21ee360a7ad67"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Critical-save is intercepted with synthetic PRIMASK; source/native MMIO write order and final state are compared.",
+    "Physical clock effects and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x480f0c"
+  ],
+  "native_source_oracle_cases": 3632,
+  "provenance": "Main instruction trace with byte-identical source-owned clock validation masks",
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_bodies": [
+    "g2_main_clock_request_480f0c",
+    "g2_main_clock_type_mask",
+    "g2_main_clock_secondary_mask"
+  ],
+  "status": "bounded_source_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

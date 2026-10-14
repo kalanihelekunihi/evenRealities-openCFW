@@ -1,0 +1,107 @@
+{
+  "wave_id": "component-goal-case-wave039-list-cursor-contract",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T22:18:01.876920+00:00",
+  "status": "COMPLETED_STOCK_COMPATIBLE_SHARED_LIST_CURSOR_REPAIR",
+  "source_delta": {
+    "path": "g2/components/case/scheduler_list_candidate_20261010/waiter.c",
+    "before": {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/before.c",
+      "sha256": "9b365f7f05efc2dbc6f5b87ec8e959f5cfc0aeed57f51ecfdc817f56dbd0c0f0"
+    },
+    "after": {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/after.c",
+      "sha256": "b19a706c5380f7f810b436317c63b7a5107c8542b23f92279a1cb9481d0a0fe0"
+    },
+    "change": "When removing indexed item, restore cursor to item.previous, as nativeuxListRemoveBF2C, rather than item.next",
+    "intent": "Stock-compatible sharedRTOS contract repair; no upstreamfix"
+  },
+  "done_criteria": [
+    "Retain validtwo-item counterexample",
+    "Native/source fullbody listcursor matrix50cases",
+    "Current401source compile and appropriate6509contract/4750quiet/48logged/765memory/3reset/544battery/8busy regressions",
+    "Fresh401rebuild byte-identical"
+  ],
+  "counterexample": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/before-failure.json",
+    "sha256": "49071f7a017f3ee3da582f087b122a192649a7258d627dc9d3723d1f1ac66536"
+  },
+  "native_evidence": {
+    "path": "g2/research/corpus/case/ghidra/open-2026-09-29/decomp/0800bf2c.c",
+    "sha256": "3eac7e1c302e1152694ad027a457b29628e8a25d71513193eb906b9249d37aa7"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/verify.py",
+    "sha256": "f917579e90e7662185e7dfe51638e641a56f599ea4722474e2f5d05688927b49"
+  },
+  "source_object_build_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/receipt.json",
+    "sha256": "81daab76f550b387574679532f05b56a43c41098536549eab97acc3311d3dabc"
+  },
+  "rebuild_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final-rebuild/receipt.json",
+    "sha256": "9575174237a7f6d298ae9a4b65289d3777fc40c40e72706f143048cf701349b5"
+  },
+  "ELF_sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853",
+  "load_span_bytes": 63194,
+  "delta_bytes": 0,
+  "tests": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/after-verification.json",
+      "sha256": "ea7d33b3373c85962578f9c0f9478a54ddbdf978673b4edb267b6d0dd2b98427"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/qualified/verification.json",
+      "sha256": "c621c31aacd1df9bc8730adac810dca67a980abf7dea0e455b0ea462b9ab7549"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/clang-frame-regression.json",
+      "sha256": "9d6594b1644a67f77549ca354cb6b30eb6dec16a8b97bd484d6a695ba23ca4d8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/clang-flash-provider-verification.json",
+      "sha256": "9cac2c25081e3f0ec55e728a024f25f7367bf00eadf1ac04c7f2432257b10a1a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/clang-contracts.json",
+      "sha256": "fb1977c3f6e60db015a8fd5ba2a5697dd22b41bd2b9b1cd3cd4a5bcc79fb5b06"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/compiler-memory-verification.json",
+      "sha256": "5fc948ca66f1a83d97ebae4a0d48b05e26a184563e3ac9c173d5f3a2a9d473c7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/reset-verification.json",
+      "sha256": "5045410e4aed9febf2ec6ecae62e295f1a91dc59339205dc7739a9f899b3291f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/measurement-verification.json",
+      "sha256": "ce56057bcef084e8d4d56786f0ccea3aa0c5eaca6eadc746a75b6803072b58fa"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/busy-query-verification.json",
+      "sha256": "7ac6f3f03f62a42adb3df60bd2eb0a64a19aef56d2d1fc91df66e82301326515"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/router-verification.json",
+      "sha256": "655023e5fa0061a92642b9fad573591e084c8f03a85c753d9725653c1cd0f070"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/verification.json",
+      "sha256": "7a1bf05840faeb7dae49cd9dac8250ce1d9db75aa08ea25ce27323ba4e188a1b"
+    }
+  ],
+  "source_drift": [],
+  "ownership": "OwnCASEsharedlisthelper only; no index/MAIN/Touch edits; priorABI fixes preserved",
+  "component_acceptance_gates": {
+    "bounded_listcursor": "PASS",
+    "actual_waiter_graph": "followingwave040",
+    "global_IRQstack_callbackcompleteness": "incomplete",
+    "accepted_images": "0/6",
+    "workflow": "P2_EXECUTING;G1passed;G2-G6notrun unchanged"
+  },
+  "next_critical_path_task": "Seal actual deferredwaitergraph and qualify preemptionrequest separately",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

@@ -33,6 +33,32 @@ SOURCES=[
  'source_candidate_20261010/tx_complete_provider.c',
  'uart_receive_offline/receive.c',
  'uart_start_offline/start.c']
+SOURCES += [
+ 'startup_candidate_20261011/application_boot_sensor_simple_callbacks_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_stream_callbacks_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_bind_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_bind_core_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_finish_guard_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_finish_probe_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_finish_reset_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_finish_signal_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_finish_signal_isr_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_finish_signal_task_candidate.c',
+ 'startup_candidate_20261011/application_boot_sensor_open_ready_candidate.c',
+ 'startup_candidate_20261011/application_policy_adc_register_candidate.c',
+ 'startup_candidate_20261011/application_policy_event_scheduler_helpers_candidate.c',
+ 'startup_candidate_20261011/application_policy_sleep_exit_candidate.c',
+ 'startup_candidate_20261011/application_policy_scheduler_primitives_candidate.c',
+ 'startup_candidate_20261011/application_policy_task_message_special_candidate.c',
+ 'startup_candidate_20261011/application_policy_task_queue_candidate.c',
+ 'startup_candidate_20261011/application_boot_pool_wake_waiter_candidate.c',
+ 'startup_candidate_20261011/application_policy_wake_cleanup_candidate.c',
+ 'startup_candidate_20261011/application_policy_tick_candidate.c',
+ 'startup_candidate_20261011/application_policy_message_copy_candidate.c',
+ 'startup_candidate_20261011/application_policy_task_notify_resume_candidate.c',
+ 'startup_candidate_20261011/event_set_callback_candidate.c',
+]
 # The native-backed public command and formatter graph is now selected as C
 # source. The full graph is compiled here so archive/member provenance and
 # unresolved-symbol accounting cover the actual public providers.

@@ -1,0 +1,49 @@
+{
+  "captured_utc": "2026-10-13T22:49:44.130027+00:00",
+  "component": "touch",
+  "git_index": {
+    "after_sha256": "ad9610e8df0092ae14e1c6ae81b60e7a7ad42eb5134c567197d6f584b07a6976",
+    "before_sha256": "ad9610e8df0092ae14e1c6ae81b60e7a7ad42eb5134c567197d6f584b07a6976",
+    "gitlink_prepared_in_temporary_index": true,
+    "unchanged": true
+  },
+  "layout_probe": {
+    "matching_tested_variant": false,
+    "matrix_path": "g2/analysis/c-source-completion-20261011/touch/root-widget-layout-matrix-round442/layout-matrix.json",
+    "matrix_sha256": "1b4d186745bb03695890618e700d6e53adf5d6ea7c4b4de254c782b5eb488408",
+    "observed_g2_record_stride_bytes": 144,
+    "pinned_v6_tested_sizes_bytes": [
+      124,
+      140,
+      148
+    ],
+    "script_path": "g2/analysis/c-source-completion-20261011/touch/root-widget-layout-matrix-round442/probe_widget_layout.py",
+    "script_sha256": "bebfe5223cea746e61d4342d673a59d8641bbf9de35f3cf788b4e002b308867d"
+  },
+  "limits": [
+    "The pinned v6.10 typedef under four tested feature combinations does not match the observed 144-byte G2 widget record stride.",
+    "The new reference design is for an Infineon board and does not supply G2-generated product initializers.",
+    "The submodule gitlink is prepared in a temporary index; the real index was preserved for user review.",
+    "Touch generated objects, reset layout, final image, and hardware behavior remain unresolved."
+  ],
+  "new_reference": {
+    "commit": "603dfe65cfa382991f1fa880e0bde762ffc31016",
+    "generated_cycfg_capsense_source_present": false,
+    "gitmodules_sha256": "5a59a4385f9da8ffe9c08b3c9faa9f77e1b775c0fb429e6bcc45f366ad783c84",
+    "product_identity": "Infineon evaluation-board reference, not G2 product configuration",
+    "reference_source_hashes": {
+      "third-party/reference/infineon-smart-glass-touchpad/source/capsense_custom.c": "17405fb7b0e993b4f8936cf5f017ae570095a04b7c29e3bc16d7dbcb6ed20edc",
+      "third-party/reference/infineon-smart-glass-touchpad/templates/TARGET_CY8CPROTO-040T-AUTO/config/design.cycapsense": "d2cf1d4eb2a8e562d2639df50487908caf14f0ad832ad13e9062fe797664d85d",
+      "third-party/reference/infineon-smart-glass-touchpad/templates/TARGET_CY8CPROTO-040T/config/design.cycapsense": "b4eb79d1de5ff8eb8854f25521bcd1c73377aa953cffcc0f175c27b8d71dc7d7"
+    },
+    "repository": "https://github.com/Infineon/mtb-example-psoc4-msclp-smart-glass-touchpad.git",
+    "submodule_path": "third-party/reference/infineon-smart-glass-touchpad"
+  },
+  "schema": "opencfw-touch-reference-layout-receipt-v1",
+  "status": "completed",
+  "touch_build_frontier": {
+    "path": "g2/build/c-firmware/20261013/root-touch-frontier-round441/receipt.json",
+    "sha256": "c0bde41d21fc097bdd82588f6106b7b53cc33041b3d1c94df846c2ff7080b000",
+    "strong_imports": 2
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 724,
+    "strong_unresolved_before": 724
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_handle_init_candidates_20261013/init.c",
+      "sha256": "b62f660b1c4e8c4697624e9259d2f233a4efcf3a5e2673f2ce9caa8e3c3c8346"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c0812.c",
+      "sha256": "f13a7970b90d9c0e0a64dc82fed0bfee53f3c785ffe431d2fd3b63c285ee0076"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/0046fb0c.c",
+      "sha256": "5f2c7b521ff248fe6cb7af6cb2c50d2c233bb39fea3be9bd1bd43a40ad54acc7"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "d1b459f03b0d54267007a3976790f50e91e177528af4d1f6ace5ac548abe4216"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_handle_init.py",
+      "sha256": "fec25a7a0711725f4040cf5ea8c4a1b6ab387d3bd2402e3640df41f379e74c94"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-handle-init-round481/init-oracle.json",
+      "sha256": "855551fd872a5b6a551432a9aee18411ca81087e1464d46ba93d481ede20a9fc"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-handle-init-round481/isolated/init.elf",
+      "sha256": "e20be581e632845cdd6a91ab3a21ea49e6ec28e46d0696df610b0067c14dbe41"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-handle-init-round481/receipt.json",
+      "sha256": "23ddbebf753f682d5fba965df988a433414a79991abe6a70bbfe6f413e27efd2"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-handle-init-round481/apollo_main/candidate.o",
+      "sha256": "d3f3fc91a3e2211fecfef53d69a05d019c25364810f243a91ee42b6a3fa3f003"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Synthetic SRAM and output slot bound the comparison; the fixed NOR controller word is one tested slot.",
+    "The caller at 0x46fb0c and subsequent hardware setup are not source complete; no physical Main image is verified."
+  ],
+  "native_entrypoints": [
+    "0x4c0812"
+  ],
+  "native_source_oracle_cases": 90,
+  "provenance": "Main instruction trace, Ghidra caller lineage and locked native/source state comparison",
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_bodies": [
+    "g2_main_mspi_handle_init_4c0812"
+  ],
+  "status": "bounded_source_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

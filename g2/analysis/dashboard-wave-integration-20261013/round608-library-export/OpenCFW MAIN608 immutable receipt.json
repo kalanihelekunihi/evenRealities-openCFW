@@ -1,0 +1,24 @@
+{
+  "round": 608,
+  "component": "Apollo main display-driver event loop native oracle",
+  "status": "native bounded oracle pass; C candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "verifier_sha256": "85b845f05a0f1f9fc14c5828ccf41bc21a7a03c356d94cc0c3fedb7963fbaf78",
+  "source_sha256": "48461dbebfe33baac12965f02a3213703f761a04a3612d92861cdd43f9b1b4dd",
+  "scenarios": 16,
+  "result": "PASS_DISPLAY_DRIVER_EVENT_LOOP_NATIVE 16",
+  "gates": [
+    "native versus compiled C event-loop comparison missing",
+    "helper semantic bodies unresolved",
+    "logging adapters placeholder",
+    "whole-image layout and G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-event-loop-round607/round608-receipt.json",
+    "sha256": "7665fea2331bcae01fce8e167b96738e4abfeceefdbef3dc1b30770ed9faab68"
+  },
+  "publication_scope": "Body-receipt evidence only; native-only bounded oracle16 scenarios, no compiled-C comparison; C unselected/helper/log/layout gates open; official image hash producer-supplied not reauthenticated here; no canonical wave identity inferred; no map/image promotion"
+}

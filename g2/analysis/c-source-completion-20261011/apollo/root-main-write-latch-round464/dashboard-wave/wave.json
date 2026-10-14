@@ -1,0 +1,55 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_payload_linked": false,
+    "strong_unresolved_symbols": 728
+  },
+  "completed_utc": "2026-10-13T23:55:25.249460+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "source_owned_write_latch_bodies_completed": 2
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "The stock command and logging control paths and injected-helper cases are checked; command execution at 0x47021c remains unresolved.",
+    "No hardware flash effects or complete Main image were verified."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Write/erase command executor at 0x47021c",
+      "MSPI hardware transfer at 0x4c2098 and live controller state",
+      "Other Main and five remaining image graphs; 0/6 complete"
+    ],
+    "reason": "Recover NOR command executor and hardware transfer"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/components/main/fal_norflash_write_latch_candidates_20261013/write_latch.c",
+      "sha256": "c6a9bab789de7485d34ec84694463db74468a106323b6a03979e7e5048f15cac"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "44113d50513c46e8078bbd827ada60d8446b6c7c58df43faa7cfe0e53439efcf"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-write-latch-round464/receipt.json",
+      "sha256": "c8cfe40be9d1beac69a655698a7da075c3672cc5464a3935a921dad82d12350b"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-write-latch-round464/apollo_main/candidate.o",
+      "sha256": "0013e22cdddec3f2add31c6955d9debc72c63267ac7a70cb41f9f7831adc3cb9"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-write-latch-round464/round464-receipt.json",
+      "sha256": "a07fa7d6c037e8a67ed7db14f2d38ec84254afe9f4b2808b8f3c8617012ad518"
+    }
+  ],
+  "wave_id": "root-main-round464-norflash-write-latch"
+}

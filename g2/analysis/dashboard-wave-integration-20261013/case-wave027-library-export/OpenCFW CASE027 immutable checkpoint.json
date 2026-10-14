@@ -1,0 +1,54 @@
+{
+  "wave_id": "component-goal-case-wave027-live-hex-log-disable",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T21:48:21.029531+00:00",
+  "status": "COMPLETED_BOUNDED_LIVE_LOG_DISABLE_QUALIFICATION",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/wave.json",
+    "sha256": "bab7e049aecdbf06603eddf7a72c8fb51c9a9e0e265eebe2cb6af11c3e7d635e"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave027-live-hex-log-disable/verify.py",
+    "sha256": "6ba5a8da2b1d1bcfb240d130ee1ab4cf2fe789e0447b6f03cdbee91e02f16fe7"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave027-live-hex-log-disable/verification.json",
+    "sha256": "6a3bc0a71273f4c47f91f2104e775e9270cb999cd567b9995ff8b622e010e8b6"
+  },
+  "native_evidence": {
+    "path": "g2/research/corpus/case/ghidra/open-2026-09-29/decomp/080067c8.c",
+    "sha256": "9d875902223a9487d31b981d4ac04afb3e51b805e67a484890b1f6d14f0dbb25"
+  },
+  "done_criteria": [
+    "Full actual hex logger formatter callback and UART graph executes",
+    "Compare enabled/disabled READY/BUSY and mid-character external disable input cases",
+    "Preserve register/SP and observable RAM/output behavior",
+    "Separate intentional stock nontermination risk from upstream improvement"
+  ],
+  "cases": 70,
+  "behavior": "Lengths0/1/2/5/16 with disable after actual TDR writes1/2/3/5/8 or no toggle, READY/BUSY; initially disabled oversized lengths65535/65536/FFFFFFFF return without buffer reads",
+  "stock_compatibility": "Enabled uint32length>=65536 with uint16loopcounter can run indefinitely; unchanged. No enabled oversized run claimed. Any repair would be intentional upstream fix and require separate scope.",
+  "component_acceptance_gates": {
+    "bounded_live_log_disable": "PASS",
+    "physical_async_IRQ_wire": "unvalidated",
+    "global_stack_callback_lifetime": "incomplete",
+    "exact_matching": "notmet",
+    "accepted_images": "0/6"
+  },
+  "limits": [
+    "Synthetic READY/BUSY and explicitly injected external RAM disable change after chosen actual TDR write; no provider interception",
+    "Only initially disabled paths test oversized lengths; native/source16bit loop counter would not terminate for enabled length>=65536; retained stock behavior",
+    "Valid enabled buffers cover0/1/2/5/16bytes; physical asynchronous timing and wire not validated"
+  ],
+  "next_critical_path_task": "Join remaining41derived RAM targets and inspect other native logged-caller register contracts using existing corpus. Supported work not exhausted.",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-wave027-live-hex-log-disable/wave.json",
+    "sha256": "eb738e7d806c80b5a3a6781cb92e75bdddff6bbd9844d55b85abe20c07458174"
+  },
+  "publication_scope": "CASE bounded runtime provenance/test checkpoint; no map/acceptance promotion"
+}

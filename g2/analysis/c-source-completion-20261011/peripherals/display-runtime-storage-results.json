@@ -1,0 +1,22 @@
+{
+  "status": "PASS_DISPLAY_RUNTIME_STORAGE_BOUNDED",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "1283fa694377dc6270f96383acfee82defa6bf4d67cfcc4fc92a8320a76556eb",
+  "object_sha256": "c904f3d1a1ce4c014bc2912181b45380f3fd06a29c9316673d8c956ae5c08f14",
+  "zero_range": [
+    "0x20004558",
+    "0x20075048"
+  ],
+  "cells": {
+    "audio_uart_display_driver_interface": "0x200744cc",
+    "audio_uart_display_audio_handle": "0x200744d0",
+    "audio_uart_user_registry_count": "0x200744d4",
+    "audio_uart_display_active": "0x200744d8",
+    "audio_uart_display_mode": "0x200744dc",
+    "audio_uart_display_background": "0x200744e0"
+  },
+  "alias": {
+    "g2_display_state_cell": "audio_uart_display_driver_interface"
+  },
+  "limits": "Initial zero ownership and C alias verified; absolute placement, later mutations, boot and hardware remain unproven."
+}

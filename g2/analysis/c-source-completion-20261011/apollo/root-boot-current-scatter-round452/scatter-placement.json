@@ -1,0 +1,63 @@
+{
+  "status": "PASS_BOUNDED_BOOT_SCATTER_PLACEMENT",
+  "selected_elf_sha256": "00ccc3a7841051e022aecc5e1e7027835952daabad607d01fbc19f35fece9d81",
+  "selected_inventory_sha256": "e61cca8df03ed75bcdd4f82e4bf8cc9ade39bbea6d021bba40efe587df2fa6fc",
+  "selected_flash_load": [
+    "0x410000",
+    "0x436cac"
+  ],
+  "selected_flash_bytes": 158892,
+  "bytes_before_main_preamble": 4916,
+  "native_and_selected_iom_pool": [
+    "0x2001455c",
+    "0x20018a9c"
+  ],
+  "iom_pool_bytes": 17728,
+  "allocated_ram_sections": [
+    {
+      "name": ".bss.boot_iom_context_pool",
+      "start": "0x2001455c",
+      "bytes": 17728
+    }
+  ],
+  "selected_source_units": 374,
+  "distinct_direct_ram_hex_literals": 197,
+  "direct_ram_hex_literals_by_range": {
+    "initialized_1371": 35,
+    "first_zero": 156,
+    "iom_pool": 0,
+    "source_zero_stream_4096": 1,
+    "second_zero": 3
+  },
+  "direct_ram_hex_literals_outside_scatter": [
+    "0x2007d000",
+    "0x2007fb00"
+  ],
+  "initialized_sram": [
+    "0x20000000",
+    "0x2000055b"
+  ],
+  "zero_scatter_sram": [
+    "0x2000055c",
+    "0x200271c8"
+  ],
+  "second_zero_scatter_sram": [
+    "0x20081000",
+    "0x200f5100"
+  ],
+  "source_zero_stream_sram": [
+    "0x20080000",
+    "0x20081000"
+  ],
+  "source_sha256": {
+    "g2/analysis/c-source-completion-20261011/apollo/boot_coplacement_experiment.ld": "38af7daeb6c59720a891eb40a4a9d6ff64a4f5dabf63c82908f167166440c729",
+    "g2/components/bootloader/initializer_callbacks/context_claim.c": "a9bf1993c0fa379c4a65ec65329931477035eac83cc68bb3ee1692b74f25000a",
+    "g2/components/bootloader/startup/init_records.S": "2835e4d3a16a8db4cf37cbdef39fa3bc9b73fec423ec3cf3df7bd9df371962c4"
+  },
+  "limits": [
+    "IOM pool VMA and size now match the authenticated native address; the startup zero record covers it and the initialized copy does not overlap it.",
+    "This checks linked placement and source descriptors, not execution of the selected Cortex-M55 ELF or physical startup memory.",
+    "The selected ELF has 34 live callback relocations and 29 other initialized-data pointer relocations; exact runtime target equivalence and complete source image remain open.",
+    "The direct RAM literal scan is lexical over selected source files; computed addresses and external or ROM writes require separate review."
+  ]
+}

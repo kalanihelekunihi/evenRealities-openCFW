@@ -1,0 +1,65 @@
+{
+  "bounded_mutex_native_source_cases": 61,
+  "component": "apollo_bootloader",
+  "current_unretained_selected_globals": 201,
+  "evidence": [
+    {
+      "path": "g2/components/bootloader/thread_creation/resource_creators.c",
+      "sha256": "086c74859550c0a395d18f47d3e6d26a0b482bee67b161062e780613842d0325"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/scheduler_bootstrap.c",
+      "sha256": "a20b06ae0b1a96a883610920518543519a6a1bc629b36fd3a18aa76b6ef0b811"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-constructors-round450/verify_mutex_only.py",
+      "sha256": "ba33d07f79c2b5271a5f240de49ba038189ffcdfe4faf2c0fa7f2c9e0d2dd884"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-constructors-round450/mutex-only-receipt.json",
+      "sha256": "3e0d98f52d14e66bcb9131c316fc892b75de2fdf5e84e171faaa22caa7390aa8"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-constructors-round450/resource-oracle-baseline.json",
+      "sha256": "cb838ee8071b7c6c09efe28c7cfdcbdbd4511151a2b643206b076be9ed24b870"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-constructors-round450/current-placement.json",
+      "sha256": "6fe77c22a4935c25eea822cd92c6e45da66ab67b349230495436678a00f04054"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-constructors-round450/gc-reachability-current.json",
+      "sha256": "ca2a1c60ceccdbcc1e3b4eabb5319184fa4c65414cfa6d20c9d97fabd40e4887"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-constructors-round450/receipt.json",
+      "sha256": "869fa61153c05bdcaff2e2ba92c1cc3e0cd4f16ab62d190de935ecaf98851c23"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-constructors-round450/placed/boot.elf",
+      "sha256": "8c845e6b58cb96896654014b98566ddc207284c887ba623885fc7a003bfbc8b1"
+    }
+  ],
+  "flash_margin_bytes": 4932,
+  "limits": [
+    "Noinline retains named constructor and idle-memory source bodies; whole scheduler lifecycle and hardware are not proven.",
+    "The existing full resource-creator oracle fails a timer callback pointer comparison on unchanged source; 61 mutex-only cases pass under its controlled lower providers.",
+    "Five remaining priority discarded symbols require source-path classification; final scatter/load-run and whole-image behavior remain open."
+  ],
+  "linked_call_counts": {
+    "opencfw_boot_idle_memory": 1,
+    "opencfw_boot_mutex_create_dynamic": 1,
+    "opencfw_boot_mutex_create_static": 1,
+    "opencfw_boot_mutex_object_initialize": 2
+  },
+  "remaining_priority_manual_direct_leads": 5,
+  "remaining_work_estimate": "Bootloader: 5 priority discarded source path leads, final scatter/load-run and startup/ROM behavior, whole-image code/data coverage and hardware. Complete images 0/6.",
+  "retained_source_functions": [
+    "opencfw_boot_idle_memory",
+    "opencfw_boot_mutex_create_dynamic",
+    "opencfw_boot_mutex_create_static",
+    "opencfw_boot_mutex_object_initialize"
+  ],
+  "schema": "opencfw-boot-constructor-paths-v1",
+  "status": "completed_bounded"
+}

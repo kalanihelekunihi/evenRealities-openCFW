@@ -1,0 +1,44 @@
+{
+  "round": 589,
+  "status": "PASS_MAIN_RADIO_PIN_ROM_MODE_BOUNDED",
+  "captured_utc": "2026-10-14T06:14:34.115074+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "rom_literal_pointer": "0x52e93c",
+  "rom_constant_address": "0x78ee48",
+  "rom_constant_value": 3,
+  "native_comparison": "PASS radio child reset 5, disable 2, pin setup 1; pin call receives mode 3",
+  "verifier_repair": "radio stack option shim renamed to current source provider audio_ble_radio_stack_option_55c7e8 before new pin case",
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 641,
+  "unresolved_after": 640,
+  "removed_symbols": [
+    "audio_ble_hci_radio_pin_mode"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "A four-byte ROM mode value is source-owned. Original ROM placement, broader pin configuration and physical radio behavior, full image coverage remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_hci_radio_children.c",
+      "sha256": "e33ba598e290522e9665e40929e6178a3c3679b48c6ed31099131a433ac19ce0"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_hci_radio_pin_mode.c",
+      "sha256": "d4d3b4a222cf967110cab6dbc2ba3b27e6be7623338fc82b6a061591f272f59e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_hci_radio_children.py",
+      "sha256": "e54ed9ad943fd1c7af80a8ad264b0a79485c58330af286096bd75ac60f22f28e"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round589/receipt.json",
+      "sha256": "9485f808a7c163879b5fd2ebacb244f38bebc8960d3321c61aae6473635dca03"
+    }
+  ]
+}

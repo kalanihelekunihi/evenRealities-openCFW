@@ -1,0 +1,66 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 721,
+    "strong_unresolved_before": 721
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_queue_descriptor_candidates_20261013/descriptor.c",
+      "sha256": "d86549ef9fb36f74283527c11e7881f1812b3a4370ac3bca1c1da9ec3b12dee4"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "d11d7ca5ee8d831f1bb11f8579f74186448cfef1004c878be585eb44f062a2ae"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004bfdf4.c",
+      "sha256": "57531631100ddcb13bea1a5071f3276a1e2ebd11f94bc70db1d69ab2e846ce39"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_queue_descriptor.py",
+      "sha256": "6768aceaaab637e963cc71115a187c230a60dec1ad15ca6b15b5d2b3a4cd924a"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-queue-descriptor-round516/oracle.json",
+      "sha256": "e3a50285c1b00f2fc82f84fd8a004ebf085aea516f357f43328e8733afe0289f"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-queue-descriptor-round516/isolated/descriptor.elf",
+      "sha256": "fda2d18ccc4a055d656911cfdfc2b7808767360c2b9b04d4f66edd3147bee997"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-queue-descriptor-round516/receipt.json",
+      "sha256": "a86a9729ba48c75e0053b725b034dfb534cf69ea3f3470afe9fcc06485f81293"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-queue-descriptor-round516/apollo_main/candidate.o",
+      "sha256": "bf0527c898a791bb1d3f37d71b774711b1cdb8eb7ef5717c9658d71d6f0fcb1f"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Clock acquire provider intercepted; independently source-owned in earlier rounds.",
+    "Divisor zero excluded; native path would fault on division by zero.",
+    "Queue-state caller 0x4bfe60 and full transfer dispatcher remain unresolved.",
+    "Synthetic SRAM/MMIO cannot prove physical operation; 0 of 6 images source-complete."
+  ],
+  "native_entrypoints": [
+    "0x4bfdf4"
+  ],
+  "native_source_oracle_cases": 640,
+  "provenance": "Main Ghidra pseudocode, locked native blob and native/source MMIO comparison",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_main_mspi_queue_descriptor_4bfdf4"
+  ],
+  "status": "bounded_helper_verified",
+  "target_id": "official-s200-v2.2.6.10",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-queue-descriptor-round516/round516-receipt.json",
+    "sha256": "df24fc923913c8eb9f1958d8fbad964cb6fc405556fe6c29702c27703f7cbeff"
+  },
+  "publication_scope": "Body-receipt evidence only; bounded descriptor helper; no canonical wave identity inferred; no map/image promotion"
+}

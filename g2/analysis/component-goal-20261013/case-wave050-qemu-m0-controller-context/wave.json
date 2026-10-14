@@ -1,0 +1,59 @@
+{
+  "wave_id": "component-goal-case-wave050-qemu-m0-controller-context",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T22:56:34.636076+00:00",
+  "status": "COMPLETED_ACTUAL_M0_NVIC_CONTEXT_DIAGNOSTIC",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/wave.json",
+    "sha256": "0d863a2bc4203aaa4b119e839f2ecd991dd477d32e6200ae50d77cf159ef6d76"
+  },
+  "source_object_build_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/receipt.json",
+    "sha256": "81daab76f550b387574679532f05b56a43c41098536549eab97acc3311d3dabc"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave050-qemu-m0-controller-context/controller-verification.json",
+    "sha256": "aaeb75fcd136baa70e35bfea94694ec90b383ad351e85fb828dcf73214df1be1"
+  },
+  "done_criteria": [
+    "Unchanged native/source images atoriginal0800addresses",
+    "ActualCortexM0/NVICPendSV entry/IPSR14",
+    "Realdispatcher and genuineEXC_RETURN into ThreadMode/IPSR0",
+    "PSP/MSP/currentTCB/R4-R11/R0/LR independentlychecked across5scheduling scenarios"
+  ],
+  "limits": [
+    "Diagnosticmicrobit model with enlargedflash andbootvectorcopy, notCASEboard/peripheral/timing/capacityvalidation",
+    "No physicaldeviceaccess orflashing; no wholefirmwarebyteequality ormapintervalpromotion"
+  ],
+  "QEMU_sha256": "121d02f5d368300139d1ae21dc75595b434d7b6318c221b23886fdb28aecd876",
+  "component_acceptance_gates": {
+    "bounded_diagnostic": "PASS",
+    "CASEphysical_peripherals_timing_boot": "unvalidated",
+    "exactmatching": "notmet",
+    "globalstack_reentrancy": "incomplete",
+    "accepted_images": "0/6"
+  },
+  "license_lineage": "Inherited recoveredsource/asset/compiler provenance; QEMU toolusedonly, no toolbinary embedded ornativecode admitted as source replacement",
+  "ownership": "Ownlocaltestoutputs only; source/index/othercomponents unchanged",
+  "next_critical_path_task": "Coldboot/clock/peripheral source contracts and remainingRAM provenance, retaining concretehardware dependencies",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "scripts": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave050-qemu-m0-controller-context/controller.py",
+      "sha256": "0b7acb459538c3953ec7233cd1a2ccffce3595e12af97f120f6d281eefa19272"
+    }
+  ],
+  "inputs_from": {
+    "path": "g2/analysis/component-goal-20261013/case-wave048-qemu-controller-context/wave.json",
+    "sha256": "4002d780dc745f6d0375a90152775d54aee38e9bc9ddfb35d01b04f396c473d1"
+  },
+  "boot_vectors": {
+    "path": "g2/analysis/component-goal-20261013/case-wave050-qemu-m0-controller-context/source-vectors.bin",
+    "sha256": "c4b33bfdfbc6c9919e0f036714ec73a05d85a9e6ef73e55957d641c8ce099db7"
+  },
+  "scenarios": 5,
+  "executions": 10
+}

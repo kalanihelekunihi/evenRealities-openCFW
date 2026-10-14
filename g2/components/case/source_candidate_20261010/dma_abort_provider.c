@@ -50,7 +50,7 @@ uint32_t case_dma_abort_it(void *opaque)
     }
     dma[0x25]=1u;
     dma[0x24]=0u;
-    void (*callback)(void *)=*(void (**)(void *))(void *)(dma+0x38);
+    void (*callback)(uint8_t *)=*(void (**)(uint8_t *))(void *)(dma+0x38);
     if (callback)callback(dma);
     return 0u;
 }

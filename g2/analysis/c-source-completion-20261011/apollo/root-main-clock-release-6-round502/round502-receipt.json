@@ -1,0 +1,68 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "new_downstream_unresolved": [
+      "g2_main_queue_uninit_539944"
+    ],
+    "source_complete": false,
+    "strong_unresolved_after": 724,
+    "strong_unresolved_before": 724
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/clock_release_6_candidates_20261013/release.c",
+      "sha256": "a97bf9f6c7b308467b6f52b32f5ac2d5b914fa09331acb51b9ebe91fd664207d"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c43ec.c",
+      "sha256": "265e159b118db824c1fbbdc200bae643b2b963aeabe7e2fbf744916263576c7d"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/00539a10.c",
+      "sha256": "e07611e8bd01ecca574c6983ee78728163c34a12129a2272d847f963f40b9201"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "d18086e8cc7be196e0308f3274f9c72d455be1354ae29e34ccad7a7d1bcf61b9"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_release_6.py",
+      "sha256": "1214585d9c116fcd64d0d813615ed8919087207154684f068b574f2136fb334b"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-release-6-round502/oracle.json",
+      "sha256": "c0591db55b86b31389c748d611606eb0878ed06cb5d27f3874c1ea7edee7c1ad"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-release-6-round502/isolated/release.elf",
+      "sha256": "63bbcffd01cc47ca13bd709b0c7e58263e95c88192b981a680b92db439702f09"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-release-6-round502/receipt.json",
+      "sha256": "9793712d97532044981a9376cd071b451efe94f353573af4a09f7a186e2b13b6"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-release-6-round502/apollo_main/candidate.o",
+      "sha256": "aae78c9b767ad6da0195d03f33909a6b61ebe01feb64dabaa9803119111d4779"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Critical save, queue uninitialization and downstream class 2/3 releases intercepted; queue disable executed against synthetic MMIO/SRAM.",
+    "Queue uninitialization at 0x539944 remains unresolved.",
+    "Physical queue/clock operation and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x4c43ec",
+    "0x539a10"
+  ],
+  "native_source_oracle_cases": 132,
+  "provenance": "Main Ghidra pseudocode, locked native blob and class 6 plus queue disable native/source comparison",
+  "schema": "opencfw-source-provider-receipt-v1",
+  "source_bodies": [
+    "g2_main_clock_release_6_4c43ec",
+    "g2_main_queue_disable_539a10"
+  ],
+  "status": "provider_bodies_verified_with_downstream_gate",
+  "target_id": "official-s200-v2.2.6.10"
+}

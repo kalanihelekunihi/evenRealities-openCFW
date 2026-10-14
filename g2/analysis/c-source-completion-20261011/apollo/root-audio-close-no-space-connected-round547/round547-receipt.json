@@ -1,0 +1,30 @@
+{
+  "round": 547,
+  "status": "PASS_CONNECTED_THIRTY_THREE_FUNCTION_NO_SPACE_BOUNDARY_NO_SOURCE_ADMISSION",
+  "component": "audio littlefs backend close through full lookahead and no-space",
+  "component_completed": false,
+  "bounded_no_space_branch_completed": true,
+  "native_entry": "0x4cfad0",
+  "joint_native_c_cases": 1513,
+  "joined_executed_c_function_count": 33,
+  "special_case": "16 native/source lookahead callbacks mark all blocks; bitmap ffff; checkpoint 0; return -28; matching no-space diagnostic; no erase attempted",
+  "remaining_estimate": "Filesystem traversal body, device erase/program/read callbacks, cross-block CTZ, directory commit, heap release and fatal logger transport remain cut or unverified; full audio image incomplete.",
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_no_space_connected.py",
+      "sha256": "e4dfdf09d80cc1cfeba407908a7fc7ad67ca20870c8a09a2d68bc537a039c639"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/backend-close-no-space-connected-results.json",
+      "sha256": "24d745c9c6aa7d3503b8487aefdffb89ba9ff227e80703fb60f9164c9bc0b980"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/no_space_log.c",
+      "sha256": "e7bbd4f97c22dbbdea73b4c81b43f90b638608442ed7e5c7b8b912a24945c3bb"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/alloc_scan.c",
+      "sha256": "1ff6b3dd8ada3ae647fc7cf5fd65419ceb114188aaf3dddf5649fd5d8ab1d0ff"
+    }
+  ]
+}

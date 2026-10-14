@@ -1,0 +1,21 @@
+{
+  "round": 607,
+  "component": "Apollo main display-driver event loop",
+  "status": "C syntax-compiled candidate, unselected",
+  "source_sha256": "48461dbebfe33baac12965f02a3213703f761a04a3612d92861cdd43f9b1b4dd",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "native_range": "0x473c44..0x473e2d",
+  "validation": [
+    "ARM Thumb clang -std=c11 -Wall -Wextra -Werror -fsyntax-only pass",
+    "git diff --check pass"
+  ],
+  "gates": [
+    "helper semantics not independently reconciled",
+    "log adapters are placeholders for native varargs interface",
+    "no native-versus-C execution oracle",
+    "not in selected Apollo build",
+    "whole-image linker and G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0
+}

@@ -1,0 +1,101 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_transfer_symbol_unresolved": false,
+    "source_complete": false,
+    "strong_unresolved_after": 720,
+    "strong_unresolved_before": 721
+  },
+  "component_completion": {
+    "complete": true,
+    "component": "MSPI transfer dispatcher C link and selector routing",
+    "remaining_c_link_work_estimate": 0
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_transfer_dispatch_candidates_20261013/dispatch.c",
+      "sha256": "59806d574f27e3a41b94fb81ebcacde0b246800d56bc80e87e63ee2501f3de33"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "877f4834c2ca953bfd3564746d41adbe42f9ffd6d7cd651a95c1748897816b4c"
+    },
+    {
+      "path": "g2/components/main/mspi_transfer_mode26_candidates_20261013/mode26.c",
+      "sha256": "7fc26fa7a8b9acbb1ef117d1f25e088d4d23cd07b85aac82e2cf31f712ac0556"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c0f78.c",
+      "sha256": "d8e0107aba4402bb7d24dc123bbbf28a102d9e3d3d64a387b29f5d0ff04882d3"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_transfer_clock_mode.py",
+      "sha256": "05a25614f918421df22043ee8619302ee69774726b5ecff64b9d42a6922893c2"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-dispatch-round527/oracle.json",
+      "sha256": "7cee14109b7588271da24309c7bc0ef542e168dca34a3ac5cfbbb87527db983f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-dispatch-round527/aux-refresh-oracle.json",
+      "sha256": "84edb9703a98d041882157dda4ec207e6f73c36894d4e122354fe93dc7506255"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-dispatch-round527/queue-state-refresh-oracle.json",
+      "sha256": "d0d8c408973428cc2534701ad7235b9990af02aef53665f4c11ac8da982ea50d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-dispatch-round527/selector-coverage.json",
+      "sha256": "c04eadfe346775330393bd1d10bd6f4c7910dbbc835136bcf5f64da574a63bf3"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_transfer_dispatch.py",
+      "sha256": "3705a52376a5afc81be7f8823bfa8140a4044d442fdc6960335f130b292a503b"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-dispatch-round527/isolated/dispatch.elf",
+      "sha256": "d5f4cab1b46e00b19d8cd2517256a7f1195101b2e9b9953191f00451c892bec8"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-clock-mode-round527/isolated/mode26.elf",
+      "sha256": "3eba901667f00d95926446abcae24331a63654e733bb212081ca0dfacb223316"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-dispatch-round527/receipt.json",
+      "sha256": "20e33a782d7ce0c8da31de3c6ff2272af2c926ea628c44ea68cd099478f9c45b"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-dispatch-round527/apollo_main/candidate.o",
+      "sha256": "fb3c87c24f881c57aee0614f506a4eb8b0df70afbff21b6f1bd604613b3eca83"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Dispatcher oracle intercepts selector bodies; each selector has a bounded native/source branch oracle in selector-coverage.json.",
+    "Composite concurrent hardware operation and whole-image semantic equivalence unverified.",
+    "Main still has 720 strong unresolved symbols; 0 of 6 images source-complete."
+  ],
+  "native_entrypoints": [
+    "0x4c0f78 selectors 0..40"
+  ],
+  "native_source_oracle_cases": {
+    "aux_refresh": 1536,
+    "dispatcher_routing": 297,
+    "native_shared_gates": 66,
+    "queue_state_refresh": 224,
+    "selector26_deep": 2302
+  },
+  "provenance": "Locked Main native dispatcher, 40 selector branch source files and bounded native/source oracle map",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_norflash_config_transfer_4c0f78"
+  ],
+  "status": "complete_c_dispatcher_linked_bounded_oracles",
+  "target_id": "official-s200-v2.2.6.10",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-dispatch-round527/round527-receipt.json",
+    "sha256": "968b1779fb79129e4f8331be19ffc98e15a1eaa786188c0cd6ce1b9572669863"
+  },
+  "publication_scope": "Body-receipt evidence only; complete dispatcher C link and bounded selector routing; composite hardware/whole-image equivalence unverified; no canonical wave identity inferred; no map/image promotion"
+}

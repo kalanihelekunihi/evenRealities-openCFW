@@ -1,0 +1,66 @@
+{
+  "build": {
+    "definitions": 236,
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false,
+    "imports": 2
+  },
+  "completed_utc": "2026-10-13T22:46:48.384498+00:00",
+  "component": "touch",
+  "implementation_delta": {
+    "abi_adapters": [],
+    "actual_c_bodies": [],
+    "experimental_symbol_joins": 0,
+    "fixtures_or_stubs": [],
+    "pseudocode_only": [],
+    "selected_source_deconflicts": 0,
+    "source_frontier_audits": 1,
+    "typed_data": []
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Selected C link passes but two generated objects remain external.",
+    "Two additional generated product objects retain layout/initializer gates even though they are not strong imports in this link.",
+    "Observed ROM spans and RAM gaps do not establish generated declaration sizes or conditional field layout.",
+    "Reset scatter, final absolute image, byte identity, and physical Touch behavior remain unproven."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Two strong generated data imports",
+      "Four generated product object initializer/allocation gates",
+      "Final Touch image composition; 0/6 complete firmware images"
+    ],
+    "reason": "Qualify generated Touch product configuration and reset layout"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-touch-frontier-round441/touch-frontier-receipt.json",
+      "sha256": "bd71f17bac93713a50925db747d7577c89fe6a4ecdfe838ffdd8317f15cd9241"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/root-touch-frontier-round441/receipt.json",
+      "sha256": "c0bde41d21fc097bdd82588f6106b7b53cc33041b3d1c94df846c2ff7080b000"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-touch-frontier-round441/touch-frontier-receipt.json",
+      "sha256": "bd71f17bac93713a50925db747d7577c89fe6a4ecdfe838ffdd8317f15cd9241"
+    }
+  ],
+  "tests": {
+    "expected_failures": [],
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/touch/root-touch-frontier-round441/touch-frontier-receipt.json",
+        "sha256": "bd71f17bac93713a50925db747d7577c89fe6a4ecdfe838ffdd8317f15cd9241"
+      }
+    ]
+  },
+  "wave_id": "root-touch-round441-current-frontier"
+}

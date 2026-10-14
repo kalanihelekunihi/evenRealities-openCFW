@@ -1,0 +1,1000 @@
+{
+  "wave_id": "component-goal-case-wave069-deferred-callable-types",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "CASE",
+  "completed_utc": "2026-10-14T00:19:05.262764+00:00",
+  "status": "COMPLETED_INDEPENDENTLY_REVIEWED_BOUNDED_STOCK_COMPATIBLE_C_TYPE_REPAIR",
+  "source_changes": [
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c",
+      "before_sha256": "138a19ca8ab3849724f2e37413bf3d1e9c32f9e538b013fa5cb68492d2b7a883",
+      "after_sha256": "aaf0291cdc5aa6fba2919334ba2d83d50db3dea0976ff4bb65ffa54fdd450d67"
+    },
+    {
+      "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+      "before_sha256": "1ef0c0ca1ef4062e605e364f9b64b502ded363820721f389b0f803225fad36cf",
+      "after_sha256": "d185a305ed51c37df38d5db260a2382e6aa1d2a820034e52ad7dbd3a3e8d42b2"
+    }
+  ],
+  "source_object_import_dependency_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/receipt.json",
+    "sha256": "dc3e28a4d1fc6afcf96d859cb15228eebfcec81c304b2051cafbcff7ed034e37"
+  },
+  "evidence": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/before/application_boot_timer_expired_candidate.c",
+      "sha256": "138a19ca8ab3849724f2e37413bf3d1e9c32f9e538b013fa5cb68492d2b7a883"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/before/consumer.c",
+      "sha256": "1ef0c0ca1ef4062e605e364f9b64b502ded363820721f389b0f803225fad36cf"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/build.py",
+      "sha256": "52601a94a048c4479013817ef30340cc791675dbaf791e3abd8b19e4f72d9f48"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/deferred-high-verification.json",
+      "sha256": "69f87af30b874a02f254d622b9bb0880c20aea72d5f3da4ac65cb505a7c3cda5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/deferred-low-fixture.elf",
+      "sha256": "f4f623e46c4fba8cc61abb278d5d06294effaa63de40a984c105c86776d55131"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/deferred-low-verification.json",
+      "sha256": "661fe6cce9d240c677ad4097be7adf4791d95b795de11d2ff68a22f7596b26b5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/deferred-type-contract.c",
+      "sha256": "22e32c6c4ca0178ed7aa36ecd07c315342a63c890d092af7526f93424ea80ff2"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/000-evidenced_providers.bc",
+      "sha256": "f7367ee75c994661a06a472eec046aa2951f4126b871367704f09c77b5b9dafb"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/000-evidenced_providers.bc.d",
+      "sha256": "18dccefa23665da4a2904faff72493c8705b539ff3987ad7d0e22f9ce1ae1c96"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/001-control_providers.bc",
+      "sha256": "f4c30cf622dc9bf27bd6b4c0c018a9a0b2c418069c52ad66c85416c2b8fce056"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/001-control_providers.bc.d",
+      "sha256": "6114aed35c236bb1daf3747beb75b9f59cba40b806ed6275fe719c186bde37f0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/002-ack_provider.bc",
+      "sha256": "12c3ba22749cf6bf3131223b0671f9585e4f0579e41ddcddb35f20730b7c02cc"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/002-ack_provider.bc.d",
+      "sha256": "6ee40368b1cbed8a788f70f18b708b4e08996bd2ec507ee51255b2815f7caebc"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/003-mask_providers.bc",
+      "sha256": "75398f76e0316333e6e2fc8cbda7ef6866d3282c1e7c3a56a767eca60413a1a4"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/003-mask_providers.bc.d",
+      "sha256": "cfc3a593c3e8ec1d33084cb1b6147c1d05185831da4bc5ca30f5ad021e428670"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/004-scheduler_state.bc",
+      "sha256": "7b5c78a5e7de569262963bc89fa6b647ffbee25534897a2a7a4b56f654183f84"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/004-scheduler_state.bc.d",
+      "sha256": "259bae69986aaa05514e4da8912d06a50e479ffd86535f574638876563a2bb4a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/005-yield_request.bc",
+      "sha256": "909ecf31960e84037628e47a182c755eeb973bb6cfc0142b2c59fedba7d69830"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/005-yield_request.bc.d",
+      "sha256": "cbc1a3c01be15b7ad5dbca26ffde5cef366cce39219ec8823916ee5d63803feb"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/006-critical_providers.bc",
+      "sha256": "dd95f980f26c56c64447867d32abb227378f9696b8a20cc418e813c4e7ac8662"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/006-critical_providers.bc.d",
+      "sha256": "d090dc6b8d4e91a06473ddfdb495371950818aab9c02d90c3edb57dcf89b7c2d"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/007-suspend_scheduler.bc",
+      "sha256": "22b69e255438725413445c3ad5a48c2ffe746df77ccf8c4db0a1f6960c98e9ec"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/007-suspend_scheduler.bc.d",
+      "sha256": "97c9563d60bd5341235ca87dcd42e90bca04644e0787d79d77cad2ccee4cb4c5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/008-event_get_isr.bc",
+      "sha256": "fff8e9a52762f8ba6fcfc123bafeb159a06b7180cac7b934d87c5a50fa4a4897"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/008-event_get_isr.bc.d",
+      "sha256": "40cf19e4e5245339da39a6d7ed5638679ae4be9cdac05b49f346523e830c539e"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/009-event_clear_isr.bc",
+      "sha256": "8e71f476e2d7c11b9a3f1c38cf06e276458f4e226d7011e90dbccb550c769898"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/009-event_clear_isr.bc.d",
+      "sha256": "438a6a91e76199478514db07a52047379225e542de6a11907b614b075a5b8d93"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/010-event_clear_callback.bc",
+      "sha256": "43ef457e294b48b68ff1d0b05d0618a1457516c1c71f5eef6d10755eb6f149e9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/010-event_clear_callback.bc.d",
+      "sha256": "5cf408156c2041dbc8eb68b254748ae9a001c798db4c07de57ca05283a41d3b4"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/011-event_clear_task.bc",
+      "sha256": "34da77ca71f1809550d94e8879f55aac59e69186a0f4701c539c3e4529449207"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/011-event_clear_task.bc.d",
+      "sha256": "288879bfbe2d5e050dc51f02640c32ca605410ccf473ff6530c2e3c797b71c07"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/012-forward.bc",
+      "sha256": "fbda98063d69177f633551a2b2fa63a4dbfeca170c1b70b77c1209f1bd185630"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/012-forward.bc.d",
+      "sha256": "480e52a4152438b9fffb80ddfbee0203ca8eb48752e4b6668c06f0602e2e4d52"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/013-consumer.bc",
+      "sha256": "660e29500b018402831690178649fa1c75bfa42bc50a573a55c367821529032d"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/013-consumer.bc.d",
+      "sha256": "942aa9d1b2bc2d09c8e291d847c63bd28d20f78c3ed1a7a445c773c5dc168aa4"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/014-waiter.bc",
+      "sha256": "68fd601a0c53c60fe81679c34bc5259b0a937a865a4b3b2690ad798cda86e664"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/014-waiter.bc.d",
+      "sha256": "35782b2415842d36dae2be805556aac96049404d4a3ac36b165c9f8f98d54fa6"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/015-resume.bc",
+      "sha256": "e2e7226703ec593e12c78048435c26d079c63fe509f9f3b18c99a759fd43df73"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/015-resume.bc.d",
+      "sha256": "8c31baa866859c947d91fac3f7b2b723b01b962983a11c1968e784ce45d5f493"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/016-tick.bc",
+      "sha256": "bb50b6e6dd4743a46af8cec08bb0ee75bec5b62cd29c9974f08ca365ed52122a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/016-tick.bc.d",
+      "sha256": "e687d145420a38b35b61a8c436dbd37a966d2bf175fb8a3a2889921e5b39b644"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/017-disinherit.bc",
+      "sha256": "26d29337c24b1867cb877fe559245b29b971e6b9480deeedc1fde7666115c287"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/017-disinherit.bc.d",
+      "sha256": "215709e4450a647aa08c71ba045ce9fbcfc4a4e97d8e96c775964961f18ff133"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/018-unblock.bc",
+      "sha256": "d6f5dde4ee309db368647fbac4e5a02fcef32cadb1c7b224677a27561eeeed2f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/018-unblock.bc.d",
+      "sha256": "ce7af0677aae573fa8cc4eeb624c8d041761ffeb40e0066f5d559060b82e14bf"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/019-send_provider.bc",
+      "sha256": "5f535ffe252844bb7ba065c2451ffa1b94621930d03ca6b25dbc8db1407024e8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/019-send_provider.bc.d",
+      "sha256": "abe0f5f119a675ba8da9bf16185dd16ab97abae8c145dec2101f10da32890293"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/020-hex_log_provider.bc",
+      "sha256": "dc245546f3a27f95e48bfd20bfe08f27298eb01214daf41ee272bacdcb0da054"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/020-hex_log_provider.bc.d",
+      "sha256": "af2cc4f6d2778f95dfbbf51b246e887469fb6064974ab5838f6ef13d0f9bfcc1"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/021-log_wrapper_provider.bc",
+      "sha256": "9318b8f447c416d006e58c7d80f464e11407356e031946f2141c62677cc680ff"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/021-log_wrapper_provider.bc.d",
+      "sha256": "990a9cec89e19705522932c87d36dbbf236fa0cf354c1ffaba3183fab5b814e8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/022-uart_write_provider.bc",
+      "sha256": "581bb67b16cf4f3cd3a474f608b064a1a57e3c53033fd036657e966b7e4c330e"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/022-uart_write_provider.bc.d",
+      "sha256": "ad6f07a55361493686fc5b1c62df5905aff134af14e3d7d67c702b4f621c2be1"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/023-tick_word_provider.bc",
+      "sha256": "b62ec84b197e335198b72fbc8b9ce52cc9f916a3ce6892628cf3c7a131ce7294"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/023-tick_word_provider.bc.d",
+      "sha256": "ff049fa66ad3ada08e3d6609ff0bc2f2b8f3ad9138028fecf5cb3c6f6df45d68"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/024-uart_wait_provider.bc",
+      "sha256": "8183ed4f7108c83a711688842bd5e7888c0cd570b6b8d28972e32a417441d70f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/024-uart_wait_provider.bc.d",
+      "sha256": "20f1a9aeb69ccd9903a7a5c4d5404fa7060e9f077e563d539affab87d12b1055"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/025-uart_read_provider.bc",
+      "sha256": "fa2021376c3e2a63d7e9d531c2b5ba2738f031bc8037840ed29704275cb47a38"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/025-uart_read_provider.bc.d",
+      "sha256": "de8e7d3f0c514c01d4383559a8a66b6b503ac2c0f240f0e88efe96e2926e4cc5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/026-uart_event_callback.bc",
+      "sha256": "697d8cdb008197e7dc2046b48d4d9779cb9011de2c3dacbfd32b47d48fca4f79"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/026-uart_event_callback.bc.d",
+      "sha256": "06d5e8ecaca2e467d87f7ff725808acecf91884269009a1c7b4750a10c9e0505"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/027-uart_rx_complete_callback.bc",
+      "sha256": "2043eb1fa3af0aa07dbe157cac4bfce53df3b03610237bf6276cce3838158e09"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/027-uart_rx_complete_callback.bc.d",
+      "sha256": "afdb8061912862a2e848fa9f43ffd8b0219174f18d5f7128a05100efbf6a6823"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/028-timer_pend_export.bc",
+      "sha256": "6b3a2e82dadbc7d06f98716570448dba093e835cea2833d5dbded1d2737be5f7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/028-timer_pend_export.bc.d",
+      "sha256": "5958af761aba6a67c3efebfcb90d126e5bcf3a5c524d9aa89f1bab0676976c74"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/029-events.bc",
+      "sha256": "ac17fd5be52a7255902df3d2b1c5574b718289d016f658289c8d7abeaa35ba42"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/029-events.bc.d",
+      "sha256": "64d5c13d6d565fb00efdc46769cbf7d18e5cfef394cbed6ffc2e466ff0635ce4"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/030-event_set_task.bc",
+      "sha256": "27eadbc6d93debaa09cdb243abf4082da486308c73cd191f7f02616cde330460"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/030-event_set_task.bc.d",
+      "sha256": "564b9c0b20bdfa74ab79cfc58d40550b828e47ee0976284c7cdd9d0f39b9fdb2"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/031-frame.bc",
+      "sha256": "cf66e757f5590dc9998cae2474204d9afcb00cab63d2b360d2ba5adc67dd3ed5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/031-frame.bc.d",
+      "sha256": "f026dc79f8bfaa1883e1488cc180ca5252dc17999778d297d83ca8c5ab028f05"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/032-dispatch.bc",
+      "sha256": "1da8c42649d3b72107e0ff685bd443946db018010e3014cafd6f5f2caadef8c0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/032-dispatch.bc.d",
+      "sha256": "dfe1df0f48a2fba6eecfcdc73cfe986bce4312c379a8a3b5c261ba5004bdecd5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/033-local.bc",
+      "sha256": "7604d7a2318ea6f63099c02e2b46ebc643fe23a2542c013f4774198623839072"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/033-local.bc.d",
+      "sha256": "864ef50f11ae8dcd1e3032e222d1a94576cfb6af3cfe2852f4ce2698da7062dc"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/034-uart.bc",
+      "sha256": "6b05083bbdf422a4cd1a2e641956f3c8441d9bf4809293047ea4e404bf092444"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/034-uart.bc.d",
+      "sha256": "0b7462998cf37e7947b3031c82db30e54c87e832d69cb8ce3c81580dc76f1096"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/035-uart_irq_continuations.bc",
+      "sha256": "79538fc17b53bce174db8362f93b489dc48cbe1cbae28f304c02ca22ac483b82"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/035-uart_irq_continuations.bc.d",
+      "sha256": "c4e9e487903ad3f3e14c2f12e4dd44baf02c0318f39050942336bdc062860f58"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/036-uart_irq_toidle_dma.bc",
+      "sha256": "dade501e384a11ef998ea21f339ee43bb01d238a291690cf9e3114cb530d6bb1"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/036-uart_irq_toidle_dma.bc.d",
+      "sha256": "b57e3fc66645d213a968ce30b66e007d8cdc1d608b8c4254717e9e22236775c6"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/037-uart_irq_toidle_no_dma.bc",
+      "sha256": "36651f933572d711f8b76b15132177766778f3fe97e11380185aa733055d0f75"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/037-uart_irq_toidle_no_dma.bc.d",
+      "sha256": "ee3ed083879f7bfc716210921a890d7c4f0f61937e0e25ec7644cc6e3723df4c"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/038-uart_irq_mixed_tail.bc",
+      "sha256": "fa57a4433fcdaa69fd9e080d5a474a7fa8bf2484b2ce1f3bb3d5f3ef7897ccf9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/038-uart_irq_mixed_tail.bc.d",
+      "sha256": "4aa83d3714d3643a7894f4e25fb929ed83c68bd2e5dc8c4cbb161e604b7365d1"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/039-dma_abort_provider.bc",
+      "sha256": "0676cba44e892df7b639a06106ee9f568dc54a4cb34ee52e59fd72d15814a54f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/039-dma_abort_provider.bc.d",
+      "sha256": "7d28beaf28ab9ba03727fc0d5b2b0719ebdc4188b94f75700da93a3735d67dbb"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/040-tx_complete_provider.bc",
+      "sha256": "53aa19285d941c77fd7188f0ed6be2552865b6c81bb1c9c99b2efa5b78cf5d3b"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/040-tx_complete_provider.bc.d",
+      "sha256": "b1f2c7e42ff6e8c01d16943caa1fce1939be08f7b2ebc028cf4ea87a48ba8abb"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/041-receive.bc",
+      "sha256": "b39e618b486f56b467bb941978ec35bbae99e34477641d0b88994ac562ee0b4d"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/041-receive.bc.d",
+      "sha256": "9c1ecdc5fbbd3278f6a2a05c63a9056beb66398f7662938ce8df44c68cb89dff"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/042-start.bc",
+      "sha256": "423392dd148990546cdd899039a88cf339346d3bd90383ae73ded22e51f04859"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/042-start.bc.d",
+      "sha256": "da7e1bef952fadb8429f008ea17e39d733ca1932a6ef083bf4c1660d05256d72"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/043-aa_reader_candidate.bc",
+      "sha256": "38773b721292780609460d753dac9fb28497d0291a7b5946cea9706c1aeebbbd"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/043-aa_reader_candidate.bc.d",
+      "sha256": "ba169f052184e430180f9eaa24c38db0c352fcdb28c2e8eae8628414c38a2281"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/044-aeabi_memcpy_candidate.bc",
+      "sha256": "d5b5783e2440f2c0d8e1bba1c95625d8efc1d15c8672e71ac575e519d193ef5a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/044-aeabi_memcpy_candidate.bc.d",
+      "sha256": "16d6d4be200fdeefdb69a156a45c2390bd9bad51c6491b64d62e434c01cd9bb8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/045-binary_06_41_candidate.bc",
+      "sha256": "27b16cae1e591e66715e833805d4c2c441a172a43b527332d0c1b2ad34f67679"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/045-binary_06_41_candidate.bc.d",
+      "sha256": "ff148a579a63d231bb23b78fb21dc7802a3bcd393a6cbe40014af3de116a5b76"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/046-binary_14_candidate.bc",
+      "sha256": "a4ba4bde2b152a5192bc917a21fb19b35eacb1bb39c3382040b98606bf91c726"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/046-binary_14_candidate.bc.d",
+      "sha256": "d435c8ce4b9bae3358126e408e2b7016093ced71d7e13c155f7a03a7cceacfee"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/047-binary_14_read_b_candidate.bc",
+      "sha256": "81f56f3f958d436e0aacf70d771f04a948c3d2c2262fd21610608b2e9acd73e8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/047-binary_14_read_b_candidate.bc.d",
+      "sha256": "7067ea1fffb2d39bf0ca53509c0cb7e03f4eac9748cb04a5bffeb10d8fbabbb9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/048-binary_14_scale_candidate.o",
+      "sha256": "c5b4d17f18d1d8a8122656626ef307e55457b3a94a96ce88a5810bf62b5f6b92"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/048-binary_14_scale_candidate.o.d",
+      "sha256": "8590059e42002a45dd911eff2b9a5a8cb31b3a8d9f7f75803cb0da812fe356b0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/049-binary_3d_candidate.bc",
+      "sha256": "d3ffc20f6f6bd767aee80dd807db448a63a6910cabc63cd99473f315ad4403e2"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/049-binary_3d_candidate.bc.d",
+      "sha256": "f73673acac119eb29d04cac6d3cafa2650b80c70c3e4e5540a43597e3c59a7c7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/050-binary_3e_candidate.bc",
+      "sha256": "4e1667b90daef4fba60d479adf978348300b117edb15d43ff9590b22a901be40"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/050-binary_3e_candidate.bc.d",
+      "sha256": "5cad9d7d6469bb044d7b4bce38d56bda1eebc90ecf2301b16b2bf89a68cf50b9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/051-binary_3f_bus_candidate.bc",
+      "sha256": "6bcf013a1d6dabc914536e32b691ccedefd5054371ecb3fa91e2f82ea44f50ee"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/051-binary_3f_bus_candidate.bc.d",
+      "sha256": "f5f937964ab7ad01091518956691a39f741d625f5368a8b231548bd06f7dea50"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/052-binary_3f_candidate.bc",
+      "sha256": "94da652486f6c2e2e1d8287152068c2602bb47fc187ebd590466637f1c5aa366"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/052-binary_3f_candidate.bc.d",
+      "sha256": "93bf17379bc4df57640a857f28906467fbd4456b9f760935151b9b187fc67465"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/053-binary_3f_enable_candidate.bc",
+      "sha256": "6d2522e096ebd03256af3a1336f51062be866c1fef90a1efe3b7b10de9d2f282"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/053-binary_3f_enable_candidate.bc.d",
+      "sha256": "1808cb708753feff4d6bcfcb719e69ef32a815515adb1f78fe9ec54a59731c49"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/054-binary_3f_program_candidate.bc",
+      "sha256": "8b1b89e2de72b66845f90af976b6c2f2d2369f0f75cd722cf5d8923ee9ddc744"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/054-binary_3f_program_candidate.bc.d",
+      "sha256": "52dcdbf052eaf58b44035e282b99993f525cea2684af765d92ec9914d7d26477"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/055-binary_3f_set_candidate.bc",
+      "sha256": "7e85701dc159688d0165dce34bef94d28e3b3b937a0e2cb581280a5dcf5f42ae"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/055-binary_3f_set_candidate.bc.d",
+      "sha256": "7fba3f38a059eb446b84c6c39fce0987f889fd8a926e0c6a83552d9e2bad16e0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/056-binary_51_candidate.bc",
+      "sha256": "de2fae0b485d03b1751931e9cb063f3a4881d42d2ef9116a57c14b6bb6f4d00b"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/056-binary_51_candidate.bc.d",
+      "sha256": "a81c1ee818217014c0f45e1cfb301da8faf09bdbda776a16fc215facc54b8181"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/057-binary_56_candidate.bc",
+      "sha256": "064c3537a4156de96ed772b2b403954334a23162640065bbf17dc927309b667c"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/057-binary_56_candidate.bc.d",
+      "sha256": "11a27c2f7d47fd43eb527d99dcbe32be15bbed92aae9ec58efa0a6e16f28af37"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/058-binary_56_exit_candidate.bc",
+      "sha256": "98303ab3fbde4d2ca0f2946c74a509abbca3ad5358fb4c17136177cd8e4962c1"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/058-binary_56_exit_candidate.bc.d",
+      "sha256": "f262c89ae117112c6a301c75642d244ac9cc8fe1d9e8f21ce27a6740c31456c4"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/059-binary_5e_candidate.bc",
+      "sha256": "b42822b4341657956d10687346e19ff38c7cdda5ef5bea48bbb7bae264edcaa9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/059-binary_5e_candidate.bc.d",
+      "sha256": "dff4dceca1646702b140f3e32ee4fb8acd45bf36bb21c925f86b53a101ba20f8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/060-binary_5e_retry_failure_candidate.bc",
+      "sha256": "004da58e9b44e41d1f5ac167347f513c24a2e380c194846ac181ea96bb546f59"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/060-binary_5e_retry_failure_candidate.bc.d",
+      "sha256": "a49567cb23caca75a7d16e1992f7e94e4ab18174434722f2a789959cc632e67f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/061-binary_5f_candidate.bc",
+      "sha256": "c43bd465529a1348217d1eadb70c7efb7cb7099581a7882139ab7a9756ac764e"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/061-binary_5f_candidate.bc.d",
+      "sha256": "ecdade984623573d773e3397ebf29ececc9966d268e53bae3aa5b19312e8789c"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/062-binary_dispatch_copy_candidate.bc",
+      "sha256": "26d07ab37c6924dfaf2810b011e6e81c8194d2ed2a9cbd691166e6f681aef416"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/062-binary_dispatch_copy_candidate.bc.d",
+      "sha256": "7cd9cf773de8f75703b4910579275c2c0d3e3850a29d4268c0302013813aa968"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/063-binary_event_aliases_candidate.bc",
+      "sha256": "c3eaeb9c364dd6950fb072e9823ee8579f500f9e4bffabdd2c4e5b50d8fb7a94"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/063-binary_event_aliases_candidate.bc.d",
+      "sha256": "635d0840b094b79264f925dff3dce2355aa3eab5751924792855b3ce6ffbb7c3"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/064-binary_flash_fill_candidate.bc",
+      "sha256": "3cfaaf707e30ecb608b40147a702ab9f5dc7eca40e5277c40db97289396c58bc"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/064-binary_flash_fill_candidate.bc.d",
+      "sha256": "67be7d0036e4d7471a18009b0e0ac5a80cdb2e75402249c38410ae27910a29b8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/065-binary_forward_candidate.bc",
+      "sha256": "5cb122da64a088b8c6bcc61f510411915d4b073554ef11a2b20b9a020f8898e1"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/065-binary_forward_candidate.bc.d",
+      "sha256": "fc4f13e2973cf491af8d12b8a041e5a950b723be582472e1a74274536fa5e7a4"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/066-binary_gpio_aliases_candidate.bc",
+      "sha256": "139f4ec8350875df9a3b89281b98952e149b366f6871fefba75c8d38212c2e8f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/066-binary_gpio_aliases_candidate.bc.d",
+      "sha256": "5c1b062ce19fcd2995b0aa6f2bdcb50093d0342f04eea156eaa3081619f65e77"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/067-binary_guarded_sensor_candidate.bc",
+      "sha256": "6ad36cd00cd17ef3f5590cbe1916e3f57922f32b77bbf43558a880ae71591e30"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/067-binary_guarded_sensor_candidate.bc.d",
+      "sha256": "1e4ba130e080a8955881b3594f1b77e46355ab75b02ad5243531b1959748940a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/068-binary_known_dispatch.bc",
+      "sha256": "89a04bf88653eec905be80607d5fe243dae8f431b10dcf710d2324afd55b7ea8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/068-binary_known_dispatch.bc.d",
+      "sha256": "81b392e14e49b5450a718b2fbe8efbf5b13e105cdd840378d859e4c122bfb9ce"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/069-binary_linked_entry.bc",
+      "sha256": "319712eff2f9e72a1a1d0bcd239d31729039b6c183872483992089c23c2f6d9b"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/069-binary_linked_entry.bc.d",
+      "sha256": "6ae46b9fc0c4e0bb296230c6dc559406658a18ff43bef8df2ccace2acf5a6fb2"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/070-binary_local_four_candidate.bc",
+      "sha256": "ede4d5e5fab37c1f1ed4844f3c58171d84c42437f58869dace29888103eda9c3"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/070-binary_local_four_candidate.bc.d",
+      "sha256": "c1c41e371e72652ddf8b14d4e60573eae323fd32f494df76307130c3c7d2419f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/071-binary_sensor_read_lower_candidate.bc",
+      "sha256": "847ed82720884d2e27a3538285d6a49c419e7e704fd890f9afc635999ae3d4bd"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/071-binary_sensor_read_lower_candidate.bc.d",
+      "sha256": "07e8eb9c88ffb05ed35677809114577e65ecf1ab4a56d04bc86b9522259ce2ee"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/072-binary_sensor_start_candidate.bc",
+      "sha256": "208570b6d9940900cc5cc4ba700ea0514f4cbd8b2d95ae218b9dede75bffc69e"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/072-binary_sensor_start_candidate.bc.d",
+      "sha256": "a08c62d3eb0a813c5fef1b8d7f8d80bf8debd096a2cd10a44b2d1df2f1e4a9be"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/073-binary_sensor_word_lower_candidate.bc",
+      "sha256": "911b207644eed814d69e3b74a8a08a95d7cd3bbe076b4cb2a1d5d6df88e3058f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/073-binary_sensor_word_lower_candidate.bc.d",
+      "sha256": "88a75bff9ad53918cdbdfb4b613d3018d9e23f8b1084ce18203b1068ecc39b53"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/074-binary_unknown_candidate.bc",
+      "sha256": "bcea60ab2edad4dd11532d31e1237ab3830d96c5c5501f7c0703daeec575dd4e"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/074-binary_unknown_candidate.bc.d",
+      "sha256": "653d769c069e18806a70098d485d8c00f487af529f61b68446571e73ab0bfcef"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/075-binary_value_readers_candidate.bc",
+      "sha256": "9498cd08d447ff695259f60cf2c8ffddf6d37b73a2d31a8413fe79e37d9c471b"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/075-binary_value_readers_candidate.bc.d",
+      "sha256": "706a06536c7f4b314219107f0045b85b59a8412ad171bbd572b856b3369b365b"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/076-bus_gpio_config_candidate.bc",
+      "sha256": "6b4f06fc63f3a270f445d3fe3ce0874ded1b043e90720e7d137472463c3d9d6a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/076-bus_gpio_config_candidate.bc.d",
+      "sha256": "268f384d5bcbd6f83bc2031250ca30c62ea287942c562826de40583d5a092c29"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/077-bus_input_transaction_candidate.bc",
+      "sha256": "194e9f06f8a8434a03d47d2739602e1384ce82034730a9c3825db23c0cf85e81"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/077-bus_input_transaction_candidate.bc.d",
+      "sha256": "ef2f7655b283bcb3b4a36cd7296300e4d205afa0efeae768c252446104895444"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/078-bus_output_prepare_candidate.bc",
+      "sha256": "8e6728d5a3ba90d6f459e2ff212613cc8ebcbdff8366ae2d8697262bfae86d01"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/078-bus_output_prepare_candidate.bc.d",
+      "sha256": "4ea5cf26275bbe69dc56d689069c55b7e3ae63483654d740bd16992b94852af2"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/079-bus_parity_candidate.bc",
+      "sha256": "9f48e5754592662fd2d301dbfb257c12545e6d9be3221d1e5a9cac46fac7224a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/079-bus_parity_candidate.bc.d",
+      "sha256": "5486e8745a6274b2e638eff869800ce83c75e00dcd4d8822b42b06daa31f4a2d"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/080-bus_pin_leaves_candidate.bc",
+      "sha256": "2662f71d9872091e0aeb623d30169720bb5b6e234abd5c93ae1199bf3f6740e8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/080-bus_pin_leaves_candidate.bc.d",
+      "sha256": "30661a97fa872a027647b6a6c03556967e5ccc36980b1f48ecb76d466eda1eba"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/081-bus_poll_candidate.bc",
+      "sha256": "578b1f6f4bff042fcd86fc01be6521c3cd5c0e23028d2a1de2d8ab9bb9030acb"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/081-bus_poll_candidate.bc.d",
+      "sha256": "13c6a8d227e1b76bd64a9c6aa55c7b2e420affa0f307e2a514308b6fe770dcf7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/082-bus_positive_sample_candidate.bc",
+      "sha256": "ba5e9c4abc3b031c08bf075c92409cac21fca6abffcccd0a7e3785e665da118a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/082-bus_positive_sample_candidate.bc.d",
+      "sha256": "d963ad3499df9195e549d1e7f82c64f7a8cef3bda37c5a993e14f7a4d35fd646"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/083-bus_positive_waveform_candidate.bc",
+      "sha256": "4823b8641ad507ec0ceb3018c0a14b3b28f14d9f0ca9827da805339f88fe43e9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/083-bus_positive_waveform_candidate.bc.d",
+      "sha256": "a4b12250cc2476aa3cd65a583db14c94840739b11e94155c6cd4738421cb827f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/084-bus_response_sample_candidate.bc",
+      "sha256": "b343af43d950e32d437c4b624ef75b4c0962a20b414b7752b79239a345dab3ed"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/084-bus_response_sample_candidate.bc.d",
+      "sha256": "148fae782862aa8a648128b675f66d72e327ea652cb6faef770d63c277bc8ef5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/085-bus_sample_byte_candidate.bc",
+      "sha256": "ae5b08ebe40bd2909dd97653847d9cd47193f61f24b048483580ed100b004ee0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/085-bus_sample_byte_candidate.bc.d",
+      "sha256": "ff079785c2b255320fbefea753312a0d6ec0197fa038b8c749427294b051c1e0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/086-bus_send_candidate.bc",
+      "sha256": "9fcca408002b7b38662ee1777a95fcf087e710a25134f1e61f2005725a23075d"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/086-bus_send_candidate.bc.d",
+      "sha256": "b066135e9a2d7698df384ba1253701b2907353a0f0731da5fe2bd52cffaea275"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/087-bus_waveform_candidate.bc",
+      "sha256": "6fa48af2f8269c5875705d3878e7fec05a61acc3d5f0d7a7f48b8d2479497621"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/087-bus_waveform_candidate.bc.d",
+      "sha256": "f743bd6edc1e7a529dfc78dc741ed40f0e053304f86561acb37873c56d81e1f4"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/088-bus_write_transaction_candidate.bc",
+      "sha256": "8bf1cb21aadd1c41027c0934178b1612eb5235a48ae7b72ab165056adcea76dc"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/088-bus_write_transaction_candidate.bc.d",
+      "sha256": "483e5650e207d5edc6a685b3a60791fa673502dd863cfcd431a8145967dc45f0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/089-charging_d2.bc",
+      "sha256": "d7965c764be3ba659bcd772c93a1944d5adbc2a406612945893392f0cc6a8bda"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/089-charging_d2.bc.d",
+      "sha256": "44e634873efb60984dd2a96363139a69a7b3c413ed4db233bd2e62abe16267bd"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/090-charging_status_d3.bc",
+      "sha256": "2330efbd4273f87c449146315364309a655abd5ee787864415c9c12c38be6027"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/090-charging_status_d3.bc.d",
+      "sha256": "75342a4b7bd329d24d8ca3d64d73ac361116401ec611a95b78a6928d481999ee"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/091-control_aa_ab.bc",
+      "sha256": "e23c3f14f9c8cfaea2e6266150bf89179682e4701965efdb40b42c25f3b494dd"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/091-control_aa_ab.bc.d",
+      "sha256": "fb8cdcb0b8c9c061b27b009219fe6f7fb7d289642c3e57570485beeeeda81e20"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/092-control_b0.bc",
+      "sha256": "70c28a68e1db340c62c39ae195ddb5c56d500037aa4aed78aca9a07a5ad51d77"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/092-control_b0.bc.d",
+      "sha256": "afd6dd194a9f35a9b0601cdc52055819ca400ebe916937b9f79361e7bf9a0a64"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/093-control_dump_candidates.bc",
+      "sha256": "67c29167e223262c5fefd23e3cf52683ffd63c5e0a7944af4fc66d56d2eec234"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/093-control_dump_candidates.bc.d",
+      "sha256": "90f1b89c648344bf180ba7308883aafde049a5a24a60378d2321ada0a1de6d99"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/094-default.bc",
+      "sha256": "d421912a83c4fa6767c10aa19786c455c33a5461fda5fc4f80ec705b34f9701b"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/094-default.bc.d",
+      "sha256": "e29c00b6f462c8e37a04c1a8432bd82175e8ebb2a5a24764bb239145c0db19c5"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/095-dogfeed_df.bc",
+      "sha256": "75ab32b7a8601afae907308c4bce045fc1440201beed94b32d3fc1ec3e37342d"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/095-dogfeed_df.bc.d",
+      "sha256": "3b02b89e65eee274d0c6aa83f2915e8f98e8d4f1b92eecf92eccbd260cd61f21"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/096-flash_apply_candidate.bc",
+      "sha256": "cf3f0ebb8f614dd68b3adccffe288637ad85be89e0fa8e16e5c523acc0e6c2b0"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/096-flash_apply_candidate.bc.d",
+      "sha256": "e43fbf5201fd9d8df3333ac370e8305f83733fe6a424a7732d4c1fdbc849de8c"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/097-flash_copy_candidate.bc",
+      "sha256": "b05d4ac3bc618452b63e1117383e227875cd2b6fa1633e94fbb2cbc269f0d9cb"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/097-flash_copy_candidate.bc.d",
+      "sha256": "a354d6e97cf999d2032893b59ecdd57f60a5bdcbb6989757f0977e3bc8228b6a"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/098-flash_lock_helpers_candidate.bc",
+      "sha256": "3f25e4a46019d0cb2b44b28d41cc4772b9ace97c559f8ee7737b9607d37011d7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/098-flash_lock_helpers_candidate.bc.d",
+      "sha256": "4ba4811607e7c85c2deafeb0c14aeae84fa9cd1cdac9f958df916f23477c464d"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/099-flash_mode_candidate.bc",
+      "sha256": "14add1ce9a67beb8436eb0fb285750db5173e41d4163c7accf53b641170e953c"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/099-flash_mode_candidate.bc.d",
+      "sha256": "508ad885cf90d3c4d8d06c14488ba6b87fc378adc5f660418fb7846e26611fa3"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/100-flash_operations_candidate.bc",
+      "sha256": "3bc108cf82dde91fa849b3d1c5363ccb2773207a6b4833d7e8e019ad83b48141"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/100-flash_operations_candidate.bc.d",
+      "sha256": "c644ba592d1a9add32cdea711b770f3e4c5de01c95dfa1b1c35e10d7c6151329"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/101-flash_register_leaves_candidate.o",
+      "sha256": "b05e36527f236f4c7a349f1e7d77972c8f36d8988e275ff84c923ff503c3d7b8"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/101-flash_register_leaves_candidate.o.d",
+      "sha256": "c85218a45b57fdf729360a681a21a4105e92dd025078bd38e852f2e045a614da"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/102-flash_snapshot_candidate.bc",
+      "sha256": "3da6809cacf198dfe0521af384a5628559a33b5194dfb280ad1b82b7afe39a1e"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/102-flash_snapshot_candidate.bc.d",
+      "sha256": "e0623354c51eb9e477610be6943a75619a9ece9de8ee676cdf96d76579aa6fd7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/103-flash_wait_candidate.bc",
+      "sha256": "4d1ba0937c430b87c70800a3bf9c00b819fe8066ad850b50dfa7bdf025e57eb1"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/103-flash_wait_candidate.bc.d",
+      "sha256": "9bdaf7c60ba302c051ac96e80281754fbc460f756c27638ab6941295ed349fe6"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/104-frame_pack_candidate.bc",
+      "sha256": "3deae799a44edf1f9bd1dcf4b6a48f1f87bcda3e3bbd9416055928d3335fd16f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/104-frame_pack_candidate.bc.d",
+      "sha256": "7226ebb47dd6bbfd854912f2188de803a57a846243bc663ae061e4c0ce359acd"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/105-full_command_candidate.bc",
+      "sha256": "2a2af4ef1bc4521cc2888b40434acfe42e23b00225a334b0da386709878b7acd"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/105-full_command_candidate.bc.d",
+      "sha256": "718c577dba8cb99f3de56c31e005e666b53df9af444a9432114045fe748fc979"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/106-gpio_a1.bc",
+      "sha256": "2fe301aa09ccc8f41702a23882c9db5ef38d5f79076e61e39f7d18e9f022c906"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/106-gpio_a1.bc.d",
+      "sha256": "d7429155ea013bc8a50e1d2b76469b7638299514171e8759f9250a78fedc006f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/107-guarded_frame_candidates.bc",
+      "sha256": "fbde30060f4737d89dbc3f51f8c5186f9776eb4bf275b7211272dbfbb307488c"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/107-guarded_frame_candidates.bc.d",
+      "sha256": "08c53300460169e847614eb1fc2c7a69404d3767107bc7218780578d2f8db954"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/108-ignored_return_aliases_candidate.bc",
+      "sha256": "3b3338c83847c779c1622820b87610344b30cf921a83ad5769c757879f641d00"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/108-ignored_return_aliases_candidate.bc.d",
+      "sha256": "3a41857a284205f17d25824fd9a99ecbcd566dbd984ed61dcf1f01f7eff1da4d"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/109-kernel_fault_policy_candidate.bc",
+      "sha256": "f64ec9cfa4f9443b9bf75cabb64c80906b4568be4bbf7d252b45c2c7ff575176"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/109-kernel_fault_policy_candidate.bc.d",
+      "sha256": "aee96bd27064523a818aa1416bedee5fae568ee2189696b6a7f195b175d32518"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/110-kernel_irq_yield_candidate.bc",
+      "sha256": "da255b022da2ef3e93e32c80a3776a4b5e33beb918a946202ab69bbc44ee8b3e"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/110-kernel_irq_yield_candidate.bc.d",
+      "sha256": "04d927a4ff27dbae32331674bacca621511721d5e2c392ffb5c98fc66cf63a9b"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/111-kernel_list_primitives_candidate.bc",
+      "sha256": "73ee465832268ea3bac5b77ec2afa0189f5195539243abbe64b7ea47894e3e04"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/111-kernel_list_primitives_candidate.bc.d",
+      "sha256": "64d5905d9d672c944815584218bb526a330793cab46ac6b90257bc3406d5b5f4"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/112-kernel_queue_candidates.bc",
+      "sha256": "71b39d934cf25e10c1d6a2261d2202f15317b36196b9e2c480904ae5c01e58de"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/112-kernel_queue_candidates.bc.d",
+      "sha256": "16d1a70cbdc087cd675e6a73b65d4c0c519be6196bd64bedd35fbaa5d5363874"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/113-kernel_queue_copy_candidate.bc",
+      "sha256": "82a5220101aedd43332d7e4771708c63c1134f05dd6b908d1c1de01d8313d20b"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/113-kernel_queue_copy_candidate.bc.d",
+      "sha256": "4cc1b6e3d2d6c053422c230d8877fd548cdccf1512da18693c4499239acf9c98"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/114-kernel_queue_small_state_candidate.bc",
+      "sha256": "c44fcdd1be18f4c192a45cf9e2b4fcfdb6fb96ec90c5eef134e8e6ab4cc78a12"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/114-kernel_queue_small_state_candidate.bc.d",
+      "sha256": "cc2dc409f570dcb8d5ec7b982b4a9abc490a4034160be0e50cbc5b18f6ec0e44"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/115-kernel_queue_unlock_candidate.bc",
+      "sha256": "12d98fb5acc5e1919728b37fbac1230c18980b444a59737bb1ffae74bfb8d725"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/115-kernel_queue_unlock_candidate.bc.d",
+      "sha256": "42a69fc6d885df978ef48e8d6cd3c5962d25f7274ef066e58bb6380f6cf3029f"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/116-kernel_resume_candidate.bc",
+      "sha256": "4d2d4972827d671bc39077953326c75ad36cef208cb12fe0bccc1f231c572db7"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/116-kernel_resume_candidate.bc.d",
+      "sha256": "f81d1f78796c7c3dff081bd2b4db1b5007e56866ecbfef0d7582b063b5195f84"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/117-kernel_small_leaves_candidate.bc",
+      "sha256": "439f212be12ad2649f47499281a9f1f48858517fcd97f424e747631c4c6713c9"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/117-kernel_small_leaves_candidate.bc.d",
+      "sha256": "ad3abc1a87b98080b2aab0b2f4e948d4e666030b043f5d5820142767dc227051"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave069-deferred-callable-types/final/118-kernel_task_delay_candidate.bc",
+      "sha256": "b0ca302d97b5e78c1de0e7de4cdd102a114740329e613e3e4643d1cde2ffe09b"
+    },
+    {

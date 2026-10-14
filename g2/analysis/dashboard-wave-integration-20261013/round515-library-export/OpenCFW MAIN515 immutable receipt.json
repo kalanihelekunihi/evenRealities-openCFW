@@ -1,0 +1,70 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_transfer_symbol_unresolved": true,
+    "source_complete": false,
+    "strong_unresolved_after": 721,
+    "strong_unresolved_before": 721
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_transfer_aux_candidates_20261013/aux_transfer.c",
+      "sha256": "562767c4a7541a6efe99b5798c38028b147f6b0f7bee668d2b1be480fc3688ad"
+    },
+    {
+      "path": "g2/components/main/mspi_queue_terminate_candidates_20261013/terminate.c",
+      "sha256": "495bc0a2c4c5145f8a4001943d32ac9b1f05c9b7634487ee4ec8a40c63f437eb"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c0f78.c",
+      "sha256": "d8e0107aba4402bb7d24dc123bbbf28a102d9e3d3d64a387b29f5d0ff04882d3"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004bfd6e.c",
+      "sha256": "3e1da8304c33c584f475602892ce649de957cb0aed841df9a402f6d6dfa6ad10"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_transfer_terminate.py",
+      "sha256": "3f7da572b66e835fd9c9c0936cba6d566f5f7c070b69ed5ae6148c4c87060ec7"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-terminate-round515/oracle.json",
+      "sha256": "355aeb9d636ba8888ba8ae1b35f90012af918ca785043fbc15e3e6579cac8f71"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-terminate-round515/isolated/transfer.elf",
+      "sha256": "91ea08c20d8e68642cae4bdba5912b25be9dc147297f7d40657e2dcb15294e27"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-terminate-round515/receipt.json",
+      "sha256": "c02ffb27de0e3e53d81ac73c0a8b85c3568b0d1980980156d11a16c0f00eab6d"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-terminate-round515/apollo_main/candidate.o",
+      "sha256": "05a7abd347e3f916b7764e6b8919f8fafb03684dc5840ed848f1ed3595bac26f"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Queue termination provider intercepted; independently checked in round 514.",
+    "Full 0x4c0f78 dispatcher remains unresolved.",
+    "Synthetic SRAM/MMIO cannot prove physical operation; 0 of 6 images source-complete."
+  ],
+  "native_entrypoints": [
+    "0x4c0f78 selector 27"
+  ],
+  "native_source_oracle_cases": 1536,
+  "provenance": "Main Ghidra pseudocode, locked native blob and selector-specific native/source MMIO and handle comparison",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_main_mspi_transfer_aux_candidate selector 27"
+  ],
+  "status": "bounded_branch_verified",
+  "target_id": "official-s200-v2.2.6.10",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-terminate-round515/round515-receipt.json",
+    "sha256": "e0a761f3f54ad6c77655ee44a9c8aad03025c3ab5204225cf41a211463f39816"
+  },
+  "publication_scope": "Body-receipt evidence only; bounded MSPI transfer terminate branch; full transfer unresolved; no canonical identity inferred; no map/image promotion"
+}

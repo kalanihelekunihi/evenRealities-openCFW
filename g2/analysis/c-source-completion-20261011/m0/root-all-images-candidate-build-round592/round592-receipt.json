@@ -1,0 +1,55 @@
+{
+  "round": 592,
+  "status": "PASS_SIX_IMAGE_CANDIDATE_BUILD_SOURCE_GATES_OPEN",
+  "captured_utc": "2026-10-14T06:40:02.103554+00:00",
+  "build_command": "python3 g2/firmware_c/build.py --include-experimental --output g2/build/c-firmware/root-all-round589",
+  "images": {
+    "codec": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "unresolved_symbols": 0
+    },
+    "ble_em9305": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "unresolved_symbols": 12
+    },
+    "touch": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "unresolved_symbols": 1
+    },
+    "case": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "unresolved_symbols": 0
+    },
+    "apollo_bootloader": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "unresolved_symbols": 3
+    },
+    "apollo_main": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "unresolved_symbols": 636
+    }
+  },
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "remaining_work_estimate": {
+    "apollo_main": "80\u201395%",
+    "case": "45\u201360%",
+    "codec": "not yet reliably quantifiable from a passing candidate build",
+    "ble_em9305": "not yet reliably quantifiable from a passing candidate build",
+    "touch": "not yet reliably quantifiable from a passing candidate build",
+    "apollo_bootloader": "not yet reliably quantifiable from a passing candidate build"
+  },
+  "limits": "Candidate compilation and unresolved symbol counts are not semantic completeness, exact native layout, full source coverage, or hardware execution. No complete source payloads were produced.",
+  "evidence": [
+    {
+      "path": "g2/build/c-firmware/root-all-round589/receipt.json",
+      "sha256": "ce8e4c3b12aee75a61f92d3acf98271e2a51dbb7bc72a437f520539107f1a6d6"
+    }
+  ]
+}

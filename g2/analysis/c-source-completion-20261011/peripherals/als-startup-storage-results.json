@@ -1,0 +1,34 @@
+{
+  "status": "PASS_ALS_STARTUP_STORAGE_BOUNDED",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "decoded_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "source_sha256": "89fdcfc114a28c04336fccf663765971c1e88ef4629d71a32ca7ff08d6a21065",
+  "object_sha256": "933c12843983d7de352738931b82ce5771275a132bc59a05308f322a13e15807",
+  "zero_range": [
+    "0x20004558",
+    "0x20075048"
+  ],
+  "initialized": {
+    "audio_als_scale_clamped": {
+      "address": "0x20000060",
+      "value": 1024
+    },
+    "audio_als_scale_active": {
+      "address": "0x20000064",
+      "value": 1024
+    },
+    "audio_als_scale_shadow": {
+      "address": "0x20000068",
+      "value": 1024
+    }
+  },
+  "zero": {
+    "audio_als_active_previous": "0x200741e0",
+    "audio_als_default_previous": "0x200741dc",
+    "audio_als_recompute_pending": "0x20074200",
+    "audio_als_curve_index": "0x200741e4",
+    "audio_als_curve_nominal": "0x200741e8",
+    "audio_als_curve_adjusted": "0x200741ec"
+  },
+  "limits": "Original zero callback observed for first range only; final candidate linker placement, later runtime writes, boot and hardware remain unproven."
+}

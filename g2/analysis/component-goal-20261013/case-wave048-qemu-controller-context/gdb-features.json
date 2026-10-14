@@ -1,0 +1,101 @@
+{
+  "features": {
+    "arm-m-profile.xml": "<?xml version=\"1.0\"?>\n<!-- Copyright (C) 2010-2020 Free Software Foundation, Inc.\n\n     Copying and distribution of this file, with or without modification,\n     are permitted in any medium without royalty provided the copyright\n     notice and this notice are preserved.  -->\n\n<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">\n<feature name=\"org.gnu.gdb.arm.m-profile\">\n  <reg name=\"r0\" bitsize=\"32\"/>\n  <reg name=\"r1\" bitsize=\"32\"/>\n  <reg name=\"r2\" bitsize=\"32\"/>\n  <reg name=\"r3\" bitsize=\"32\"/>\n  <reg name=\"r4\" bitsize=\"32\"/>\n  <reg name=\"r5\" bitsize=\"32\"/>\n  <reg name=\"r6\" bitsize=\"32\"/>\n  <reg name=\"r7\" bitsize=\"32\"/>\n  <reg name=\"r8\" bitsize=\"32\"/>\n  <reg name=\"r9\" bitsize=\"32\"/>\n  <reg name=\"r10\" bitsize=\"32\"/>\n  <reg name=\"r11\" bitsize=\"32\"/>\n  <reg name=\"r12\" bitsize=\"32\"/>\n  <reg name=\"sp\" bitsize=\"32\" type=\"data_ptr\"/>\n  <reg name=\"lr\" bitsize=\"32\"/>\n  <reg name=\"pc\" bitsize=\"32\" type=\"code_ptr\"/>\n  <reg name=\"xpsr\" bitsize=\"32\" regnum=\"25\"/>\n</feature>\n",
+    "system-registers.xml": "<?xml version=\"1.0\"?><!DOCTYPE feature SYSTEM \"gdb-target.dtd\"><feature name=\"org.qemu.gdb.arm.sys.regs\"></feature>",
+    "arm-m-system.xml": "<?xml version=\"1.0\"?><!DOCTYPE feature SYSTEM \"gdb-target.dtd\"><feature name=\"org.gnu.gdb.arm.m-system\"><reg name=\"msp\" bitsize=\"32\" regnum=\"26\" type=\"int\"/><reg name=\"psp\" bitsize=\"32\" regnum=\"27\" type=\"int\"/><reg name=\"primask\" bitsize=\"32\" regnum=\"28\" type=\"int\"/><reg name=\"control\" bitsize=\"32\" regnum=\"29\" type=\"int\"/><reg name=\"basepri\" bitsize=\"32\" regnum=\"30\" type=\"int\"/><reg name=\"faultmask\" bitsize=\"32\" regnum=\"31\" type=\"int\"/></feature>"
+  },
+  "registers": {
+    "r0": {
+      "num": 0,
+      "bits": 32
+    },
+    "r1": {
+      "num": 1,
+      "bits": 32
+    },
+    "r2": {
+      "num": 2,
+      "bits": 32
+    },
+    "r3": {
+      "num": 3,
+      "bits": 32
+    },
+    "r4": {
+      "num": 4,
+      "bits": 32
+    },
+    "r5": {
+      "num": 5,
+      "bits": 32
+    },
+    "r6": {
+      "num": 6,
+      "bits": 32
+    },
+    "r7": {
+      "num": 7,
+      "bits": 32
+    },
+    "r8": {
+      "num": 8,
+      "bits": 32
+    },
+    "r9": {
+      "num": 9,
+      "bits": 32
+    },
+    "r10": {
+      "num": 10,
+      "bits": 32
+    },
+    "r11": {
+      "num": 11,
+      "bits": 32
+    },
+    "r12": {
+      "num": 12,
+      "bits": 32
+    },
+    "sp": {
+      "num": 13,
+      "bits": 32
+    },
+    "lr": {
+      "num": 14,
+      "bits": 32
+    },
+    "pc": {
+      "num": 15,
+      "bits": 32
+    },
+    "xpsr": {
+      "num": 25,
+      "bits": 32
+    },
+    "msp": {
+      "num": 26,
+      "bits": 32
+    },
+    "psp": {
+      "num": 27,
+      "bits": 32
+    },
+    "primask": {
+      "num": 28,
+      "bits": 32
+    },
+    "control": {
+      "num": 29,
+      "bits": 32
+    },
+    "basepri": {
+      "num": 30,
+      "bits": 32
+    },
+    "faultmask": {
+      "num": 31,
+      "bits": 32
+    }
+  }
+}

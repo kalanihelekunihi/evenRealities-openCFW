@@ -1,0 +1,54 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 728,
+    "strong_unresolved_before": 730
+  },
+  "command_contracts": {
+    "disable": 4,
+    "enable": 6,
+    "remaining_arguments": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/fal_norflash_write_latch_candidates_20261013/write_latch.c",
+      "sha256": "c6a9bab789de7485d34ec84694463db74468a106323b6a03979e7e5048f15cac"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "44113d50513c46e8078bbd827ada60d8446b6c7c58df43faa7cfe0e53439efcf"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-write-latch-round464/receipt.json",
+      "sha256": "c8cfe40be9d1beac69a655698a7da075c3672cc5464a3935a921dad82d12350b"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-write-latch-round464/apollo_main/candidate.o",
+      "sha256": "0013e22cdddec3f2add31c6955d9debc72c63267ac7a70cb41f9f7831adc3cb9"
+    }
+  ],
+  "host_cases_checked": 64,
+  "image": "apollo_main",
+  "limitations": [
+    "The stock command and logging control paths and injected-helper cases are checked; command execution at 0x47021c remains unresolved.",
+    "No hardware flash effects or complete Main image were verified."
+  ],
+  "native_entrypoints": [
+    "0x470670",
+    "0x4706e0"
+  ],
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_bodies": [
+    "g2_norflash_write_enable_470670",
+    "g2_norflash_write_disable_4706e0"
+  ],
+  "status": "bounded_source_verified",
+  "stock_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "target_id": "official-s200-v2.2.6.10"
+}

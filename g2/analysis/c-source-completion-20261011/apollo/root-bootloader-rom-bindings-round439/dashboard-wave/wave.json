@@ -1,0 +1,69 @@
+{
+  "build": {
+    "definitions": 1015,
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false,
+    "imports": 0
+  },
+  "completed_utc": "2026-10-13T22:43:07.456336+00:00",
+  "component": "apollo_bootloader",
+  "implementation_delta": {
+    "abi_adapters": [],
+    "actual_c_bodies": [],
+    "experimental_symbol_joins": 0,
+    "external_rom_symbol_bindings": 3,
+    "fixtures_or_stubs": [],
+    "pseudocode_only": [],
+    "selected_source_deconflicts": 0,
+    "typed_data": []
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Resident ROM entry addresses are externally bound; no ROM implementation was compiled into this artifact.",
+    "Relocatable object is not a final placed bootloader image.",
+    "Startup-power composition, initialized data, full body coverage, byte identity, and hardware behavior remain unproven."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Startup-power path and initialized data",
+      "Final image placement and byte identity",
+      "0/6 complete firmware images"
+    ],
+    "reason": "Continue bootloader source completeness and final layout"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-rom-bindings-round439/rom-bindings-receipt.json",
+      "sha256": "bd71db020ff6938ba54d026613bab7ce7c6efdfc92ae5614151c550d86a1c6d2"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/root-bootloader-dedup-round438/receipt.json",
+      "sha256": "31d8a56664635e2bd133ff393695a558b1522be844a6b7f7f3eaee17f69595ec"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-rom-bindings-round439/bootloader-rom-bound.o.receipt.json",
+      "sha256": "ddd795b6969be59d853175ccb761b8b3b55be147f995c0cb257f9056e52867d3"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-rom-bindings-round439/rom-bindings-receipt.json",
+      "sha256": "bd71db020ff6938ba54d026613bab7ce7c6efdfc92ae5614151c550d86a1c6d2"
+    }
+  ],
+  "tests": {
+    "expected_failures": [],
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-rom-bindings-round439/rom-bindings-receipt.json",
+        "sha256": "bd71db020ff6938ba54d026613bab7ce7c6efdfc92ae5614151c550d86a1c6d2"
+      }
+    ]
+  },
+  "wave_id": "root-apollo-bootloader-round439-rom-bindings"
+}

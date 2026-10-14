@@ -1,0 +1,65 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "new_downstream_unresolved": [
+      "g2_main_queue_init_5398e0",
+      "g2_main_queue_config_539a40",
+      "g2_main_queue_enable_539994",
+      "g2_main_queue_start_539b56"
+    ],
+    "source_complete": false,
+    "strong_unresolved_after": 726,
+    "strong_unresolved_before": 723
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/clock_acquire_6_candidates_20261013/acquire.c",
+      "sha256": "f7f5cf98e6a7c8484708b1e5ae7e741359097bfb7d5c0f3188f9d08f45393bf6"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c427e.c",
+      "sha256": "fe7d1b58a801ba1d67a36899ca66fcfcc92c4aa5d2f4406407547805e5decadf"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "6a09679152a877d8be461daa8e7b9fa5c60fb3c524237dccaa4b40c56683ee6e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_acquire_6.py",
+      "sha256": "ef21ddef51c8550bfd35a9af7ba42a16db96356195aa88b38a2fd52887c5930b"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-acquire-6-round505/oracle.json",
+      "sha256": "811625cb2ce7d9d49b6da894c7709e3c4f9ebbd2e7c2a14adf47c1b4922468ff"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-acquire-6-round505/isolated/acquire.elf",
+      "sha256": "2a49d2ed62cd85a3e56003d6f124dc3f8472e3995c35095c78e53dec13515a0d"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-acquire-6-round505/receipt.json",
+      "sha256": "2f9481ae54b88bbbc6a81f6c085df9cf4d8680e5452bbc95953cdc7fa8bfccb2"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-acquire-6-round505/apollo_main/candidate.o",
+      "sha256": "8fee2319cb837b6a798b6ef3496e67cdf2ccfbddad9346292cbe9d1262d56b9e"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Critical save, count and clock/queue lifecycle providers intercepted; bitmap and state transitions executed in synthetic SRAM.",
+    "Four queue lifecycle provider bodies remain unresolved.",
+    "Physical queue/clock operation and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x4c427e"
+  ],
+  "native_source_oracle_cases": 1792,
+  "provenance": "Main Ghidra pseudocode, locked native blob and class 6 orchestration native/source comparison",
+  "schema": "opencfw-source-provider-receipt-v1",
+  "source_bodies": [
+    "g2_main_clock_acquire_6_4c427e"
+  ],
+  "status": "provider_body_verified_with_downstream_gates",
+  "target_id": "official-s200-v2.2.6.10"
+}

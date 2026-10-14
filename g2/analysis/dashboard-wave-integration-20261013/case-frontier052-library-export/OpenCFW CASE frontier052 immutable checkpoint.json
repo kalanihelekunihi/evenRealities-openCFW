@@ -1,0 +1,384 @@
+{
+  "frontier_id": "component-goal-case-current-frontier-052",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "recorded_utc": "2026-10-13T23:07:00.538232+00:00",
+  "status": "CASE_CORE_IMPLEMENTATION_QUALIFIED_FULL_COLD_BOOT_HARDWARE_DEPENDENCY_OPEN",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/wave.json",
+    "sha256": "0d863a2bc4203aaa4b119e839f2ecd991dd477d32e6200ae50d77cf159ef6d76"
+  },
+  "source_object_build_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/receipt.json",
+    "sha256": "81daab76f550b387574679532f05b56a43c41098536549eab97acc3311d3dabc"
+  },
+  "current_artifact_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave041-current-custom-artifact/wave.json",
+    "sha256": "5c068cdd3a31182e03251d31a1ddbbcb6ed86a7fa2bb4d16ef999cb4ea0d01dd"
+  },
+  "artifact": {
+    "path": "g2/analysis/component-goal-20261013/case-wave041-current-custom-artifact/build/case-custom.bin",
+    "sha256": "30ce4ef3f20e1ae8fd64f70aa217d2742d5ce43700fc9de179732fa47bcd2f05"
+  },
+  "source_units": 401,
+  "qualified_load_span_bytes": 63194,
+  "raw_binary_bytes": 63200,
+  "stock_payload_bytes": 55752,
+  "stock_span_difference": 7442,
+  "capacity_headroom_bytes": 194848,
+  "source_drift": [],
+  "stock_compatible_implementation_repairs": [
+    {
+      "wave": "022",
+      "change": "Router three interior string offsets plus consumed OTA-length R1 argument"
+    },
+    {
+      "wave": "033",
+      "change": "Native16-byte timer-message sender frame with real untouched fourthword; no threeword C overread or fabricatedpadding"
+    },
+    {
+      "wave": "039",
+      "change": "Shared list cursor restores predecessor on removal, matching nativeBF2C"
+    }
+  ],
+  "completed_software_paths": [
+    "UART readiness/timeout/overrun/tickwrap",
+    "Real logger/formatter/callback and logged router",
+    "Timer wrap/unlink/autoreload/eventqueue/receive/consumer/dynamicdelete",
+    "Heap allocate/exhaustion/free/coalesce",
+    "Deferred event clear/set and waiterready transitions/preemptionrequest",
+    "Static task metadata/stack frame and actual CortexM0 NVIC entry/dispatch/EXC_RETURN diagnostic"
+  ],
+  "dependencies": [
+    {
+      "id": "HW-CASE-STM32G0-COLDBOOT",
+      "status": "OPEN",
+      "evidence": {
+        "path": "g2/analysis/component-goal-20261013/case-wave051-coldboot-peripheral-frontier/wave.json",
+        "sha256": "b423189536c628a55f5d4d9c8d5864721f577a99dab29de6839dd76b7891556d"
+      },
+      "detail": "Available diagnostic board lacks STM32G0 RCC/timebase/FLASH/PWR/ADC/UART/YHM2510 behavior. Both unchanged images stop in clock polling; no matching local CASE/debugUSB orUSBserial. Need accurate chipmodel or actual read-only trace/access."
+    },
+    {
+      "id": "TC-ARMCLANG6",
+      "status": "OPEN_EXACT_MATCH_ONLY",
+      "detail": "Original producer armclang/armlink unavailable; not used as global blocker for completed software work."
+    },
+    {
+      "id": "RAM-ROOT-GLOBAL-QUALIFICATION",
+      "status": "OPEN_AUDIT",
+      "detail": "33 derived RAM target joins remain after recorded runtime union; known39 roots are not full computedcallback discovery. Bounded tests do not prove globalstack/IRQreentrancy or all objectlifetimes."
+    },
+    {
+      "id": "G2-FORMAL-GATES",
+      "status": "UNPROMOTED",
+      "detail": "P2 executing; G1 passed; G2-G6 not_run. Wholecorpus review/freeze and exactbundle/equality remain separate."
+    }
+  ],
+  "accepted_images": "0/6",
+  "hardware_validation": "unperformed",
+  "physical_device_or_flashing": "none",
+  "commits_pushes": "none",
+  "branch": "main",
+  "ownership": "CASE only; source/index work of concurrent owners preserved; MAIN Apollo/FreeType agreement retained without claiming global lock",
+  "goal_control": {
+    "configured": false,
+    "id": null,
+    "detail": "No dedicated supported Goal control; previous heartbeat rejected for nonlocal thread. Parent explicitly authorized continuation without scheduling. This is a local audit frontier, not a fabricated nativeGoal record."
+  },
+  "software_options_exhausted": false,
+  "next_critical_path_task": "Resolve coldboot chipmodel/hardware evidence; independent remaining RAM/callback provenance can continue as bounded audits without imageacceptance or intervalclaims. Do not substitute broad testpass for firmware readiness.",
+  "wave_history": [
+    {
+      "canonical_wave_id": "component-goal-case-wave003-source-profile-qualification",
+      "path": "g2/analysis/component-goal-20261013/case-wave001-source-fit/wave.json",
+      "sha256": "00cf366fb6a4c75ab426cd204732ca39f60c2cb5acc9f9bd20c8deabcdcd1e1d",
+      "status": "COMPLETED_BOUNDED_SOURCE_PROFILE_QUALIFICATION_WAVE"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave002-call-contracts",
+      "path": "g2/analysis/component-goal-20261013/case-wave002-call-contracts/wave.json",
+      "sha256": "76625ec34369d4fb3e2d4b1783237ef137f0b104c5adc718d18a4b52d277cdf3",
+      "status": "COMPLETED_INTEGRATED_CALL_CONTRACT_FIX_WAVE"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave004-clang-lto-qualification",
+      "path": "g2/analysis/component-goal-20261013/case-wave004-clang-lto/wave.json",
+      "sha256": "a689efec1032c80f958665f23f1922b3dea7fbf7decabc81dac8cb3070598b7c",
+      "status": "COMPLETED_REPRODUCIBLE_OPTIMIZATION_EXPERIMENT_NO_ACCEPTED_PROFILE_IMPROVEMENT"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave005-reset-chain",
+      "path": "g2/analysis/component-goal-20261013/case-wave005-reset-chain/wave.json",
+      "sha256": "81391a454522cf789c6674a8b8fe90a1cb3d0df71ed233fc5774b96a0c68c3e1",
+      "status": "COMPLETED_BOUNDED_RESET_CHAIN_QUALIFICATION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave006-merged-module-sections",
+      "path": "g2/analysis/component-goal-20261013/case-wave006-lto-sections/wave.json",
+      "sha256": "96f93e4d5693f013113569b009c73ad6fa4a2241f279686cde78fd637a9f2089",
+      "status": "COMPLETED_QUALIFIED_SOURCE_PROFILE_REDUCTION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave007-machine-outlining",
+      "path": "g2/analysis/component-goal-20261013/case-wave007-machine-outlining/wave.json",
+      "sha256": "1bca0abe2e1d5367dc9a7c94b1a89810e75cc84776b379a6e1f82d7788afc6b3",
+      "status": "COMPLETED_NEGATIVE_OPTIMIZATION_EXPERIMENT"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave008-function-merging",
+      "path": "g2/analysis/component-goal-20261013/case-wave008-function-merging/wave.json",
+      "sha256": "531082edb6308637bfc61172d2a0b9fd4777a9e7736457a9259a2344b5232db6",
+      "status": "COMPLETED_NEGATIVE_OPTIMIZATION_EXPERIMENT"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave009-shared-gpio-provider",
+      "path": "g2/analysis/component-goal-20261013/case-wave009-gpio-provider/wave.json",
+      "sha256": "c49a74b62b0a2522142128df43ae7b497d946fd52db7bf71170d8940486d097a",
+      "status": "COMPLETED_SOURCE_GPIO_MODULE_AND_QUALIFIED_PROFILE_REDUCTION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave010-extended-asm-lto",
+      "path": "g2/analysis/component-goal-20261013/case-wave010-extended-asm-lto/wave.json",
+      "sha256": "42c8336d2c6302e367991873d845c0baebea4a2f336454d55dab1d673bfcae30",
+      "status": "COMPLETED_QUALIFIED_SOURCE_PROFILE_REDUCTION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave011-shared-side-state-provider",
+      "path": "g2/analysis/component-goal-20261013/case-wave011-side-state-provider/wave.json",
+      "sha256": "296b399c6748af9be4451b0676a629c22b6a3252bab85766ebd5a910e4b7fb91",
+      "status": "COMPLETED_SHARED_SOURCE_MODULE_QUALIFICATION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave014-record-router-stock-return",
+      "path": "g2/analysis/component-goal-20261013/case-wave014-record-router/wave.json",
+      "sha256": "4cd8dc50f1cf2a6daa4fc911c88c54cce7ac349d86e2c9ccce76e31ab54d32a5",
+      "status": "COMPLETED_STOCK_COMPATIBILITY_FIX_AND_FULL_GRAPH_RAM_ROUTER_QUALIFICATION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave015-custom-image-contract",
+      "path": "g2/analysis/component-goal-20261013/case-wave015-custom-image-contract/wave.json",
+      "sha256": "a2cee87873df5aec580e791d0e3a1c807698b5a5f03926e91128601f78913556",
+      "status": "COMPLETED_REPRODUCIBLE_CUSTOM_SOURCE_IMAGE_LINK_CONTRACT"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave016-battery-client-abi",
+      "path": "g2/analysis/component-goal-20261013/case-wave016-battery-measurement-abi/wave.json",
+      "sha256": "2871faa21ba64f9cf5f256a0f43da09069ca820ec5d773e776736a6fda08de1f",
+      "status": "COMPLETED_SHARED_SIGNED_RETURN_ABI_AND_CLIENT_CONVERSION_QUALIFICATION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave017-router-busy-forwarding",
+      "path": "g2/analysis/component-goal-20261013/case-wave017-router-busy-forwarding/wave.json",
+      "sha256": "906c8f51052133575f3b6b10df1e19bc0fb5a7d205f2fd3b1e35f5299657d115",
+      "status": "COMPLETED_FULL_LINKED_ROUTER_BUSY_UART_FORWARDING_QUALIFICATION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave018-current-custom-artifact",
+      "path": "g2/analysis/component-goal-20261013/case-wave018-current-custom-artifact/wave.json",
+      "sha256": "77edb449cb726bb29d6b72d6c043f550a2891a4efb88c08332b9f405f72b7e36",
+      "status": "COMPLETED_CURRENT_SOURCE_CUSTOM_ARTIFACT_REFRESH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave019-router-ready-registers",
+      "path": "g2/analysis/component-goal-20261013/case-wave019-router-ready-registers/wave.json",
+      "sha256": "5f1ef5a287dcafb55d3c524f0e07b18fdccf830f1fe09f259e587a90cb2eb71d",
+      "status": "COMPLETED_FULL_LINKED_ROUTER_UART_READY_REGISTER_QUALIFICATION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave021-uart-transitions",
+      "path": "g2/analysis/component-goal-20261013/case-wave021-uart-transitions/wave.json",
+      "sha256": "e459135b51756a020492e0d9e115fe71a6df9141532d0c76b7bea9c0dbd45f49",
+      "status": "COMPLETED_BOUNDED_NATIVE_SOURCE_UART_TRANSITION_QUALIFICATION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave022-logging-contract-repair",
+      "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/wave.json",
+      "sha256": "bab7e049aecdbf06603eddf7a72c8fb51c9a9e0e265eebe2cb6af11c3e7d635e",
+      "status": "COMPLETED_STOCK_COMPATIBLE_ROUTER_LOG_CONTRACT_REPAIR"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave023-native-stack-envelope",
+      "path": "g2/analysis/component-goal-20261013/case-wave023-native-stack-envelope/wave.json",
+      "sha256": "42f60f05593418e328950aa6b9a81023d36e40566eadcc59360421430d8781ec",
+      "status": "COMPLETED_BOUNDED_NATIVE_SP_LOGGER_STACK_QUALIFICATION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave024-current-custom-artifact",
+      "path": "g2/analysis/component-goal-20261013/case-wave024-current-custom-artifact/wave.json",
+      "sha256": "28845d7146a49fba25f7f77ad98e4c59d1b9b6baf33a392e5c251484e329b795",
+      "status": "COMPLETED_CURRENT_SOURCE_CUSTOM_IMAGE_CONTRACT"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave025-ram-callback-provenance",
+      "path": "g2/analysis/component-goal-20261013/case-wave025-ram-callback-provenance/wave.json",
+      "sha256": "a39e0ced0c8f786bfdcba7dfe37ba9fff31cfea53f91f5e6f9ac94a7e37fea65",
+      "status": "COMPLETED_BOUNDED_RAM_ROOT_STRING_PROVENANCE_AUDIT"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave026-router-ram-access-joins",
+      "path": "g2/analysis/component-goal-20261013/case-wave026-router-ram-access-joins/wave.json",
+      "sha256": "5873ff32ba7b3f5d065c739c611b0be0bb31e64748dd89a7152f891eb146a10e",
+      "status": "COMPLETED_BOUNDED_NATIVE_SOURCE_RAM_ACCESS_PROVENANCE_JOINS"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave027-live-hex-log-disable",
+      "path": "g2/analysis/component-goal-20261013/case-wave027-live-hex-log-disable/wave.json",
+      "sha256": "eb738e7d806c80b5a3a6781cb92e75bdddff6bbd9844d55b85abe20c07458174",
+      "status": "COMPLETED_BOUNDED_LIVE_LOG_DISABLE_QUALIFICATION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave028-timer-callback-ram",
+      "path": "g2/analysis/component-goal-20261013/case-wave028-timer-callback-ram/wave.json",
+      "sha256": "a648df807d24ffe1149cafa13039d6966cb83ffc29d9fd36f304d3d5ceb78656",
+      "status": "COMPLETED_FULL_ONE_SHOT_TIMER_CALLBACK_RAM_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave029-timer-overflow-fault",
+      "path": "g2/analysis/component-goal-20261013/case-wave029-timer-overflow-fault/wave.json",
+      "sha256": "d60b1dd63d29983bc59b48c00f035c9f1973e53f4fa7edd41e6ca71fbc020149",
+      "status": "COMPLETED_FULL_AUTORELOAD_OVERFLOW_EVENT_FAILURE_FAULT_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave030-timer-event-queue-success",
+      "path": "g2/analysis/component-goal-20261013/case-wave030-timer-event-queue-success/wave.json",
+      "sha256": "e42ba7848968744026b58d28b5fe08f6abd397643d35c9986e21d2971030e9a0",
+      "status": "PASS_FULL_TIMER_WRAP_EVENT_QUEUE_SUCCESS_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave031-autoreload-reinsert-queue",
+      "path": "g2/analysis/component-goal-20261013/case-wave031-autoreload-reinsert-queue/wave.json",
+      "sha256": "2fb39e945bcbe6b4db33269adf63f04a814ede00b9b1c482f3ede61c3911ee95",
+      "status": "PASS_FULL_AUTORELOAD_REINSERT_EVENT_QUEUE_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave032-timer-queue-full-fault",
+      "path": "g2/analysis/component-goal-20261013/case-wave032-timer-queue-full-fault/wave.json",
+      "sha256": "aaa4fe1e3fd0723afb6f67bf221293f4499310eddc5a7606beb50f0c69afe8f5",
+      "status": "PASS_FULL_TIMER_QUEUE_FULL_FAILURE_FAULT_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave033-native-timer-message-width",
+      "path": "g2/analysis/component-goal-20261013/case-wave033-native-timer-message-width/wave.json",
+      "sha256": "88e8c9204f3d35a530ac9a9e9f89dfe5b7ee52ee701fe65d8065528c2eb5b2cd",
+      "status": "COMPLETED_STOCK16_BYTE_TIMER_MESSAGE_AMBIENT_STACK_ABI_REPAIR"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave034-current-custom-artifact",
+      "path": "g2/analysis/component-goal-20261013/case-wave034-current-custom-artifact/wave.json",
+      "sha256": "ba198c4b89d46661ac0b9b92756940b6f5ec817562076422ff2ff88b68f6c8d9",
+      "status": "PASS_SOURCE_CUSTOM_MEMORY_CONTRACT"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave035-timer-send-consume",
+      "path": "g2/analysis/component-goal-20261013/case-wave035-timer-send-consume/wave.json",
+      "sha256": "3dc7c2548ef0cb6eb10ef4550ee794f99f75a751f75223e826965428beba23ed",
+      "status": "PASS_NATIVE16_TIMER_SEND_CONSUME_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave036-heap-provider",
+      "path": "g2/analysis/component-goal-20261013/case-wave036-heap-provider/wave.json",
+      "sha256": "dc2163e854ce0c11eff48289f1c96020c0b2d90caede249311f4095b51caa1c8",
+      "status": "PASS_FULL_HEAP_ALLOCATE_FREE_COALESCE_NATIVE_SP"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave037-stock-queue-dynamic-delete",
+      "path": "g2/analysis/component-goal-20261013/case-wave037-stock-queue-dynamic-delete/wave.json",
+      "sha256": "10c823df70be7b97a15f5ce1e94b8442d0a2d556c933c444f076f18a17a05688",
+      "status": "PASS_STOCK_QUEUE_DYNAMIC_TIMER_DELETE_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave038-deferred-event-callbacks",
+      "path": "g2/analysis/component-goal-20261013/case-wave038-deferred-event-callbacks/wave.json",
+      "sha256": "bbf9d8cc0b3f8a62227b5ee2c76aca0cea3d1c55d938c3c31c8fa7c6f32d4909",
+      "status": "PASS_STOCK_DEFERRED_EVENT_CALLBACK_CONSUMER_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave039-list-cursor-contract",
+      "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/wave.json",
+      "sha256": "0d863a2bc4203aaa4b119e839f2ecd991dd477d32e6200ae50d77cf159ef6d76",
+      "status": "COMPLETED_STOCK_COMPATIBLE_SHARED_LIST_CURSOR_REPAIR"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave040-event-waiter-wakeup",
+      "path": "g2/analysis/component-goal-20261013/case-wave040-event-waiter-wakeup/wave.json",
+      "sha256": "bb956b6a6f9b5550904ff0f70be8b5b2bcbeed4c8fbe62b684554e1ab95179b5",
+      "status": "PASS_STOCK_DEFERRED_EVENT_WAITER_WAKEUP_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave041-current-custom-artifact",
+      "path": "g2/analysis/component-goal-20261013/case-wave041-current-custom-artifact/wave.json",
+      "sha256": "5c068cdd3a31182e03251d31a1ddbbcb6ed86a7fa2bb4d16ef999cb4ea0d01dd",
+      "status": "PASS_SOURCE_CUSTOM_MEMORY_CONTRACT"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave042-waiter-preemption-request",
+      "path": "g2/analysis/component-goal-20261013/case-wave042-waiter-preemption-request/wave.json",
+      "sha256": "957a19a57f720801fb57de93f7f3db98790d821ab7134ef4eefb0cc275107774",
+      "status": "PASS_STOCK_WAITER_SOFTWARE_PREEMPTION_REQUEST"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave043-task-frame-init",
+      "path": "g2/analysis/component-goal-20261013/case-wave043-task-frame-init/wave.json",
+      "sha256": "a19fa97cbb6dcfaa1fadb7c1319fa34f042e163b401685a725d1135422e4d08c",
+      "status": "PASS_STATIC_TCB_STACK_PORT_FRAME_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave044-pendsv-context-boundary",
+      "path": "g2/analysis/component-goal-20261013/case-wave044-pendsv-context-boundary/wave.json",
+      "sha256": "4ee9a9f0a6e74f3074cd418e606b336e0a3be0d658141c3d232fd3b54f525691",
+      "status": "PASS_PENDSV_PRE_EXCEPTION_RETURN_CONTEXT_GRAPH"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave045-exception-return-probe",
+      "path": "g2/analysis/component-goal-20261013/case-wave045-exception-return-probe/wave.json",
+      "sha256": "ac3e175f2b75eb8ec07f096f57d551c398bd6639efffef7f89cfea94e79c8ccd",
+      "status": "COMPLETED_PROBE_BLOCKED_AT_MANUALLY_SEEDED_EXCEPTION_FIXTURE"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave046-controller-capability",
+      "path": "g2/analysis/component-goal-20261013/case-wave046-controller-capability/wave.json",
+      "sha256": "2421f94c24aa9ed41dc2b91563fd3fd0f9b1776d630697bb51d22d1e9e86efa6",
+      "status": "COMPLETED_EXISTING_QEMU_CONTROLLER_CAPABILITY_INSPECTION"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave047-qemu-rsp-capability",
+      "path": "g2/analysis/component-goal-20261013/case-wave047-qemu-rsp-capability/wave.json",
+      "sha256": "17d2df19c765c3f69ef415ea4fdabf4da3e38c800f6d80956ee780f5cd750f70",
+      "status": "COMPLETED_REFERENCE_M3_LOADER_RSP_CAPABILITY"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave048-qemu-controller-context",
+      "path": "g2/analysis/component-goal-20261013/case-wave048-qemu-controller-context/wave.json",
+      "sha256": "4002d780dc745f6d0375a90152775d54aee38e9bc9ddfb35d01b04f396c473d1",
+      "status": "COMPLETED_REFERENCE_M3_NVIC_CONTEXT_DIAGNOSTIC"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave049-m0-memory-capability",
+      "path": "g2/analysis/component-goal-20261013/case-wave049-m0-memory-capability/wave.json",
+      "sha256": "1bbeefa8573a640ccb8439a89d6d92ab1f5ef44cf7b283446f84de1fd645bf4c",
+      "status": "COMPLETED_M0_DIAGNOSTIC_MEMORY_CAPABILITY"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave050-qemu-m0-controller-context",
+      "path": "g2/analysis/component-goal-20261013/case-wave050-qemu-m0-controller-context/wave.json",
+      "sha256": "e955e8905a962606ba05c05ed109de303f6d764e7196d978e18846e904fad18f",
+      "status": "COMPLETED_ACTUAL_M0_NVIC_CONTEXT_DIAGNOSTIC"
+    },
+    {
+      "canonical_wave_id": "component-goal-case-wave051-coldboot-peripheral-frontier",
+      "path": "g2/analysis/component-goal-20261013/case-wave051-coldboot-peripheral-frontier/wave.json",
+      "sha256": "b423189536c628a55f5d4d9c8d5864721f577a99dab29de6839dd76b7891556d",
+      "status": "COMPLETED_OBSERVATION_BLOCKED_AT_CASE_PERIPHERAL_MODEL"
+    }
+  ],
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "report_route": "Sealed receipts sent to coordinator01a1228e-2121-71b9-a9df-9eede6787020; parentsolePagepublisher; newestpublication acknowledgments not yet received here.",
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/component-goal-20261013/case-current-frontier-052/receipt.json",
+    "sha256": "4deb10a4a21d7979ec34ef29f210e64e11c74961e7b0f51e1bb95ff2d751b46d"
+  },
+  "publication_scope": "Historical CASE frontier052; superseded by frontier054; separate from completed source waves; no map/image promotion"
+}

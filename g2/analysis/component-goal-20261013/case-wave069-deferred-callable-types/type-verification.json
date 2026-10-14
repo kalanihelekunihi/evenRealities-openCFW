@@ -1,0 +1,22 @@
+{
+  "status": "PASS_DEFERRED_CONSUMER_C_TYPE_CONTRACTS",
+  "actual_source_AST": [
+    {
+      "source": "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c",
+      "callback_type": "void (*)(void *, uint32_t)",
+      "saved_original_rejected_by_contract": true
+    },
+    {
+      "source": "g2/components/case/deferred_consumer_offline/consumer.c",
+      "callback_type": "void (*)(void *, uint32_t)",
+      "saved_original_rejected_by_contract": true
+    }
+  ],
+  "original_source_negative_controls": 2,
+  "static_assertions": 4,
+  "low_consumer_scheduler_return_decl_matches_actual_provider": true,
+  "limits": [
+    "Known queued event callbacks; arbitrary external callback targets notclosed",
+    "Source originals compile syntactically butfail callable-type compatibility contract"
+  ]
+}

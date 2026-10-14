@@ -1,0 +1,39 @@
+{
+  "binder_script": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-rom-bindings-round439/bind_resident_rom.py",
+    "sha256": "7ee9cb7703bf5dfa3634404343bceb8517f3d8dc48d1671fcff0621c12ecdd34"
+  },
+  "binding_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-rom-bindings-round439/bootloader-rom-bound.o.receipt.json",
+    "sha256": "ddd795b6969be59d853175ccb761b8b3b55be147f995c0cb257f9056e52867d3"
+  },
+  "bound_object": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-bootloader-rom-bindings-round439/bootloader-rom-bound.o",
+    "sha256": "1877c49161fc68faee13084deafa77738b76d5b72841f519183d8e26e7566b8e"
+  },
+  "captured_utc": "2026-10-13T22:43:07.456336+00:00",
+  "component": "apollo_bootloader",
+  "executable_section_bytes_unchanged": true,
+  "input_unresolved": [
+    "opencfw_boot_rom48",
+    "opencfw_boot_rom_delay_cycles",
+    "opencfw_boot_rom_mram_program"
+  ],
+  "limits": [
+    "Resident ROM entry addresses are externally bound; no ROM implementation was compiled into this artifact.",
+    "Relocatable object is not a final placed bootloader image.",
+    "Startup-power composition, initialized data, full body coverage, byte identity, and hardware behavior remain unproven."
+  ],
+  "output_unresolved": [],
+  "rom_bindings": {
+    "opencfw_boot_rom48": "0x00000049",
+    "opencfw_boot_rom_delay_cycles": "0x00000041",
+    "opencfw_boot_rom_mram_program": "0x0200ff21"
+  },
+  "schema": "opencfw-resident-rom-link-contract-receipt-v1",
+  "source_build": {
+    "path": "g2/build/c-firmware/20261013/root-bootloader-dedup-round438/receipt.json",
+    "sha256": "31d8a56664635e2bd133ff393695a558b1522be844a6b7f7f3eaee17f69595ec"
+  },
+  "status": "completed"
+}

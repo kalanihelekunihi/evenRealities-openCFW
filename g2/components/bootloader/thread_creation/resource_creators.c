@@ -89,16 +89,16 @@ uintptr_t opencfw_provider_4163b2(uintptr_t callback,uint32_t type,
     if (!result && allocated)opencfw_bl_rtos_free(tagged&~(uintptr_t)1);
     return result;
 }
-void opencfw_boot_mutex_object_initialize(uint32_t *queue) {
+__attribute__((noinline)) void opencfw_boot_mutex_object_initialize(uint32_t *queue) {
     if (!queue)return;
     queue[2]=0;queue[0]=0;queue[3]=0;
     (void)opencfw_bl_kernel_queue_put_blocking(queue,0,0,0);
 }
-uintptr_t opencfw_boot_mutex_create_dynamic(uint32_t type) {
+__attribute__((noinline)) uintptr_t opencfw_boot_mutex_create_dynamic(uint32_t type) {
     uintptr_t queue=opencfw_bl_kernel_queue_create_dynamic(1,0,(uint8_t)type);
     opencfw_boot_mutex_object_initialize((uint32_t *)queue);return queue;
 }
-uintptr_t opencfw_boot_mutex_create_static(uint32_t type,uint32_t *storage) {
+__attribute__((noinline)) uintptr_t opencfw_boot_mutex_create_static(uint32_t type,uint32_t *storage) {
     uintptr_t queue=opencfw_boot_timer_queue_fresh(1,0,0,(uintptr_t)storage,(uint8_t)type);
     opencfw_boot_mutex_object_initialize((uint32_t *)queue);return queue;
 }

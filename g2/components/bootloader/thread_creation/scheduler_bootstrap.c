@@ -11,7 +11,7 @@ extern void opencfw_bl_port_start(void);
 #define WORD(a) (*(volatile uint32_t *)(uintptr_t)(a))
 __attribute__((section(".boot_idle_name"),used))
 const char opencfw_boot_idle_name[]="IDLE";
-void opencfw_boot_idle_memory(uint32_t *cb,uint32_t *stack,uint32_t *words) {
+__attribute__((noinline)) void opencfw_boot_idle_memory(uint32_t *cb,uint32_t *stack,uint32_t *words) {
     *cb=0x20026970;*stack=0x200250d0;*words=256;
 }
 uint32_t opencfw_bl_kernel_start(void) {

@@ -8,15 +8,15 @@ from unicorn.arm_const import *
 R=Path(__file__).resolve().parents[3]
 B=(R/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 S=R/'components/audio/uart_thread_source_candidate/display_ring_persist_event_operation.c'
+Q=R/'components/audio/timer_drain_full_source_candidate/queue_state.c'
 STUB='''#include <stdint.h>
-volatile uintptr_t audio_uart_ring_persist_queue_handle_20074ab0;
 uint32_t audio_scheduler_state(void){return 0;} uint32_t audio_wsf_interrupt_mask_set(void){return 0;}
 int32_t xQueueGenericSend(void*q,const void*p,uint32_t t,int32_t w){(void)q;(void)p;(void)t;(void)w;return 0;}
 int32_t xQueueGenericSendFromISR(void*q,const void*p,int32_t*t,int32_t w){(void)q;(void)p;(void)t;(void)w;return 0;}
 '''
 with tempfile.TemporaryDirectory() as td:
  t=Path(td);stub=t/'stub.c';stub.write_text(STUB);elf=t/'c.elf'
- subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,audio_uart_ring_persist_wait_event_47e7b0',str(S),str(stub),'-o',str(elf)],check=True)
+ subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,audio_uart_ring_persist_wait_event_47e7b0',str(S),str(Q),str(stub),'-o',str(elf)],check=True)
  with elf.open('rb') as f:
   e=ELFFile(f);seg=[(v['p_vaddr'],v.data()) for v in e.iter_segments() if v['p_type']=='PT_LOAD'];sym={v.name:v['st_value'] for v in e.get_section_by_name('.symtab').iter_symbols()}
  for queue in (0,0x20070000):

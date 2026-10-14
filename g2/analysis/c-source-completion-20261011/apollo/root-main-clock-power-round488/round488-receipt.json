@@ -1,0 +1,71 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 734,
+    "strong_unresolved_before": 737
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/clock_power_leaf_candidates_20261013/power.c",
+      "sha256": "2c5d7b337dddcb3a1d25a39541f98f79e7708a71931a28e90c67e4794b048a25"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004d391e.c",
+      "sha256": "dd85f1aaff3fd08a933efb25d77adbf07eebeb4dd77a917905390bce4ed431f6"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004d3952.c",
+      "sha256": "4c426ed8608ec818a1574429c1a75eb9a5b1f5745effc4cb3c9b8f9628198a26"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004d39e4.c",
+      "sha256": "4803fd7715ca95650abd0932f23cc9ade837e2ba2d44e891cf24db08085199e1"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "fc9a2e84b9676bf31a5993873a201f2788dabec028fe43339be2d54cec534f65"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_power_leaf.py",
+      "sha256": "663231aa37df256f741a1edbacd104b05d32a42908ee2444dd92220ff5b530d9"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-power-round488/power-oracle.json",
+      "sha256": "00871e4adb09753af072e77c5452e6c469c435c880c794e9054e12a7b77b16e7"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-power-round488/isolated/power.elf",
+      "sha256": "afc36ac120ff8337214b704ccaf1f945fccdcb14643350eb558e28eac3441b48"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-power-round488/receipt.json",
+      "sha256": "4b22b89ec83cc27e5d950ccdfc3deca62e0251ab72be33b7fcad7992e70f53ac"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-power-round488/apollo_main/candidate.o",
+      "sha256": "bb049fafb63a2271005260ad881285eabfe82615b87f9824fd8d0eeb48d877d1"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "MSPI status polling is intercepted; register state is compared only in synthetic MMIO.",
+    "Class 4/5 acquire providers and physical clock operation remain unverified.",
+    "No complete Main image is verified."
+  ],
+  "native_entrypoints": [
+    "0x4d391e",
+    "0x4d3952",
+    "0x4d39e4"
+  ],
+  "native_source_oracle_cases": 864,
+  "provenance": "Main Ghidra pseudocode, locked native blob and synthetic native/source MMIO comparison",
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_bodies": [
+    "g2_main_clock_class4_off_4d391e",
+    "g2_main_clock_class5_off_4d3952",
+    "g2_main_clock_class5_prepare_off_4d39e4"
+  ],
+  "status": "bounded_source_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

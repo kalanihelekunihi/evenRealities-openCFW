@@ -1,0 +1,24 @@
+{
+  "round": 615,
+  "component": "Apollo display-driver combined source object",
+  "status": "six C translation units form one ARM Cortex-M55 relocatable object; unselected",
+  "build_script_sha256": "aa6755baad5c8315c7f19ce4124c3ee0266593389fb7d11cac09732dd8b08518",
+  "link_audit_sha256": "d9f0bedce82c8b90739a7334bab26320672f177b806a2d1dcc383b6ef868d993",
+  "object_sha256": "cce0c67bb32d09b4fc0ecaf0862d300cf881dcd61117a9a42630735643cecf39",
+  "defined_symbols": 45,
+  "selected_provider_imports": 13,
+  "missing_display_driver_helper_imports": 15,
+  "validation": [
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 45 13 15",
+    "PASS_DISPLAY_DRIVER_EVENT_LOOP_C_NATIVE 30",
+    "PASS_DISPLAY_DRIVER_TIMER_INIT_NATIVE 14",
+    "PASS_DISPLAY_DRIVER_TIMER_CALLBACK_NATIVE 14",
+    "git diff --check"
+  ],
+  "gates": [
+    "15 missing helper bodies from combined object",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0
+}

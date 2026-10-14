@@ -1,0 +1,66 @@
+{
+  "wave_id": "component-goal-case-wave031-autoreload-reinsert-queue",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T21:53:58.565229+00:00",
+  "status": "PASS_FULL_AUTORELOAD_REINSERT_EVENT_QUEUE_GRAPH",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/wave.json",
+    "sha256": "bab7e049aecdbf06603eddf7a72c8fb51c9a9e0e265eebe2cb6af11c3e7d635e"
+  },
+  "source_object_build_import_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/final/receipt.json",
+    "sha256": "c3a70f8a4756aaab953de048362bf538864d3cb7b7bb48bf267048d34f0af4c9"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave031-autoreload-reinsert-queue/verify.py",
+    "sha256": "035b2135d7adbef50ef1258b318c0469a76c159269bc75ed63c148032b5cc67f"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave031-autoreload-reinsert-queue/verification.json",
+    "sha256": "ec4c48c1665ba5b9177e8e30d6ca4e519d440af2ccc0d2ced8915d222a056353"
+  },
+  "fixture": {
+    "path": "g2/analysis/component-goal-20261013/case-wave031-autoreload-reinsert-queue/fixture.elf",
+    "sha256": "8d303743d3738dd46cbfa751d767095bc9f9b13c054ca707b15b2d0cc6f8b58e"
+  },
+  "cases": 192,
+  "done_criteria": [
+    "Actual repeatedautoreload/sortedlistinsert/callback/eventqueue graph executes",
+    "Independent unsignedarithmetic oracle for callbackcount and eventtick",
+    "Exact12-byte queue records across ringpositions/capacities",
+    "PRIMASK0/callee-saved/SP and RAM compare"
+  ],
+  "native_entries": [
+    "0x0800b284",
+    "0x0800b2b0",
+    "0x0800bf2c",
+    "0x0800bfb0",
+    "0x0800ca6c",
+    "0x0800cd80",
+    "0x0800c686",
+    "0x0800ad48",
+    "0x0800bffc",
+    "0x0800c014"
+  ],
+  "component_acceptance_gates": {
+    "bounded_synchronous_timer_event_graph": "PASS",
+    "queuefull_blockedwait_consumer": "incomplete",
+    "computedcallbacks_globalstack": "incomplete",
+    "hardware_IRQ_reentrancy": "unvalidated",
+    "accepted_images": "0/6",
+    "workflow": "P2_EXECUTING;G1passed;G2-G6notrun unchanged"
+  },
+  "limits": [
+    "Genuine counter reader retained as test-only synchronous callback, no production root promotion",
+    "One autoreload timer with repeated sorted-list reinsertion until unsigned addition wraps, then genuine event-send/criticalsections/queuecopy. Callback count and queued event tick use independent arithmetic oracle; consumer/blockedwait/IRQconcurrency notcovered",
+    "Only immutable callback address word normalized between native/source namespaces; all other12288RAM bytes compare",
+    "No child stubs/cuts/return injection or peripheral fixtures"
+  ],
+  "ownership": "Own qualification outputs only; source/index unchanged. Genuine counter callback is test-only retained root, no production discovery promotion.",
+  "license_lineage": "Inherited recoveredMIT/compiler lineage and native pins unchanged",
+  "next_critical_path_task": "Queue-full overflow fault and remaining38 derivedRAM targets",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

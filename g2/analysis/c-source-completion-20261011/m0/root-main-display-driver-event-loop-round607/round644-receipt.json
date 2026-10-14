@@ -1,0 +1,28 @@
+{
+  "round": 644,
+  "component": "Apollo uLED work buffer provisional source allocation",
+  "status": "0x400-byte 32-byte-aligned BSS candidate compiled and native init pointer contract verified in 16 cases; exact allocation extent and linker placement unproven; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "a68f7ccab55edc652d3f316f02508cc1e58d99ac8b67977ed2bfe6e05a857a1d",
+  "verifier_sha256": "91feb2d5718128516c10a84f50784f43912b66dfe0fd80a131e772f0ef56dd6c",
+  "link_audit_sha256": "df1723a1f7cd13149cc51af15893fe51506f181760d3b8e0f26584343da9eb09",
+  "combined_object_sha256": "6e4b459782925cedd64ae7f005c08cba3363cc71ad82cad6d4e2cf6438cd8168",
+  "evidence": [
+    "Native uLED init passes 0x203795a0 as workspace pointer",
+    "Next decoded absolute SRAM pointer 0x203799a0, 0x400 bytes later; adjacency is a candidate bound, not exact size proof"
+  ],
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_INIT_NATIVE 16",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 131 34 3",
+    "git diff --check"
+  ],
+  "gates": [
+    "Prove source-owned uLED work buffer extent and linker placement; provisional 0x400 is not accepted as exact",
+    "Option records hold native absolute Thumb addresses requiring relocated C driver bodies",
+    "NEMA mode 0x513924, GPU blit 0x4b1608 and uLED row callback bodies unresolved",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

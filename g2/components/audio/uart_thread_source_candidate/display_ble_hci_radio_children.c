@@ -4,7 +4,7 @@
 
 extern int32_t g2_gpio_hal_write(uint32_t pin, uint32_t mode); /* 0x480fd6 */
 extern uint32_t g2_codec_pin_function(uint32_t pin, uint32_t mode); /* 0x480f0c */
-extern volatile uint32_t audio_ble_hci_radio_pin_mode; /* *DAT_0052e93c */
+extern const volatile uint32_t audio_ble_hci_radio_pin_mode; /* ROM 0x78ee48 via 0x52e93c */
 
 extern uint32_t audio_ble_hci_radio_pin_mask_4810b0(uint32_t, uint32_t, uint32_t *);
 uint32_t audio_ble_hci_radio_disable_52dd6a(void) {

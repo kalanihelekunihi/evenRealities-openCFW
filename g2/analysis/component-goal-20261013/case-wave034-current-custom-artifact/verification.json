@@ -1,0 +1,38 @@
+{
+  "status": "PASS_SOURCE_CUSTOM_MEMORY_CONTRACT",
+  "ELF_sha256": "04cb925f87297c49c8a9902b61ecad9047749388208349aaf90863a2eee60879",
+  "raw_binary_sha256": "6b41212ce9cdcc889898d5924c0278818fc6da8009fb35a0a4dd3be70b5d3bb1",
+  "raw_binary_bytes": 63200,
+  "source_code_data_and_addresses_identical_to_qualified_wave033": true,
+  "additional_erased_flash_tail_bytes": 6,
+  "inherited_qualification_ELF_sha256": "ef6faa318437bb17651f44d01fc6a5a955c7788e69faf44f55fbc14e9eaeefca",
+  "entry": "0x8000145",
+  "initial_SP": "0x20002c88",
+  "flash_limit": "0x0803f000",
+  "first_reserved_page": "0x0803f000",
+  "flash_headroom_bytes": 194848,
+  "LOAD_flags": "RX",
+  "unknown_mutable_sections": "rejected",
+  "negative_tests": [
+    {
+      "test": "actual_image_flash_budget",
+      "result": "EXPECTED_REJECTION",
+      "diagnostic": "arm-none-eabi-ld: address 0x800f6da of /tmp/case-contract-5fd3tkst/small.elf section `.text' is not within region `FLASH_APP'\narm-none-eabi-ld: /tmp/case-contract-5fd3tkst/small.elf section `.image_tail' will not fit in region `FLASH_APP'\narm-none-eabi-ld: address 0x800f6da of /tmp/case-contract-5fd3tkst/small.elf section `.text' is not within region `FLASH_APP'\narm-none-eabi-ld: region `FLASH_APP' overflowed by 1760 bytes\n"
+    },
+    {
+      "test": "unqualified_mutable_object",
+      "result": "EXPECTED_REJECTION",
+      "diagnostic": "arm-none-eabi-ld: Unqualified allocated mutable.bss\n"
+    },
+    {
+      "test": "protected_page_overlap",
+      "result": "EXPECTED_REJECTION",
+      "diagnostic": "arm-none-eabi-ld: Factory pages overlap\n"
+    }
+  ],
+  "limits": [
+    "Linker confirms emittedsection boundaries, not every absoluteRAM/MMIO reference or complete computed-root/ambient-stack/provider behavior.",
+    "Factory-page exclusion in the image does not validate OTA erase/program preservation, bank-swap or flash hardware.",
+    "Rawdiagnostic image only; noEVEN envelope, flashing authorization or accepted replacement claim."
+  ]
+}

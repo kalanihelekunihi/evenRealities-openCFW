@@ -1,0 +1,72 @@
+{
+  "build": {
+    "definitions": 4022,
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false,
+    "imports": 723
+  },
+  "completed_utc": "2026-10-13T22:39:22.733434+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "abi_adapters": [
+      "hciCb_t target ABI static assertions"
+    ],
+    "actual_c_bodies": [],
+    "experimental_symbol_joins": 0,
+    "fixtures_or_stubs": [],
+    "pinned_vendor_c_sources": 0,
+    "portable_upstream_c_sources": 0,
+    "pseudocode_only": [],
+    "typed_data": []
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Target compilation proves pinned hciCb_t member offsets; it does not prove the full native RAM allocation boundary.",
+    "Selected Main uses offsets beyond hciCb_t, so a 36-byte stand-alone alias is insufficient.",
+    "No product RAM object was synthesized and hciCb remains unresolved.",
+    "Full image layout, byte identity, and hardware operation remain unproven."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "723 unresolved Apollo Main imports",
+      "hciCb and adjacent Main RAM allocation/address binding",
+      "0/6 complete firmware images"
+    ],
+    "reason": "Resolve product RAM allocation and continue C reduction"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-control-layout-round437/hci-control-layout-receipt.json",
+      "sha256": "db59d455674f56cb258ea60414fd5e10daa2b3840d9a2ccfcaca2b54d5d57b90"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-hci-control-layout-round437/receipt.json",
+      "sha256": "445bdf5146c0576eaac33821872a0bb65ff0941243bbde9f02ab31e9b29f8c46"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-hci-control-layout-round437/root-source-audit.json",
+      "sha256": "f76c8fa1c34bb251183e10b5e5b9509da4807f6d0ad7e9f48134f7888693f89d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-control-layout-round437/hci-control-layout-receipt.json",
+      "sha256": "db59d455674f56cb258ea60414fd5e10daa2b3840d9a2ccfcaca2b54d5d57b90"
+    }
+  ],
+  "tests": {
+    "expected_failures": [],
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-control-layout-round437/hci-control-layout-receipt.json",
+        "sha256": "db59d455674f56cb258ea60414fd5e10daa2b3840d9a2ccfcaca2b54d5d57b90"
+      }
+    ]
+  },
+  "wave_id": "root-apollo-main-round437-hci-control-layout"
+}

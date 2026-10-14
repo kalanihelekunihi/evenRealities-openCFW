@@ -1,0 +1,75 @@
+{
+  "added_imports": [
+    "FT_Get_Font_Format",
+    "FT_Raccess_Get_DataOffsets",
+    "FT_Raccess_Get_HeaderInfo",
+    "FT_Raccess_Guess",
+    "FT_Stream_Open",
+    "ft_lcd_padding",
+    "ft_raccess_rule_by_darwin_vfs"
+  ],
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-objs-util-round417/receipt.json",
+    "sha256": "1013cc88ebbee5f61572ae288c2cbed171cfa7b13fd306a6d21a56da50878e5f"
+  },
+  "builder": {
+    "path": "g2/firmware_c/build.py",
+    "sha256": "a2ae91499f844d9b68562a39c3aef4e0a440dd0d464d7a5fb7908e16060c2f32"
+  },
+  "definitions": 3928,
+  "duplicate_strong_symbols": 0,
+  "image": "apollo_main",
+  "imports": 778,
+  "limits": [
+    "Upstream object/utility sources remain experimental; native ABI and runtime for new bodies not proved",
+    "Eleven colliding exports renamed inside experiment to preserve selected C providers",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "manifest": {
+    "path": "g2/firmware_c/experimental-sources.json",
+    "sha256": "e26b7807f72dc0e1a548941e00a63093b9ab5b4830aba5b3594b9f33924d9f08"
+  },
+  "removed_imports": [
+    "FT_CMap_New",
+    "FT_Get_Char_Index",
+    "FT_Get_Glyph_Name",
+    "FT_Get_Module_Interface",
+    "FT_Get_Next_Char",
+    "FT_List_Iterate",
+    "FT_Load_Glyph",
+    "FT_Match_Size",
+    "FT_Request_Metrics",
+    "FT_Select_Charmap",
+    "FT_Select_Metrics",
+    "FT_Set_Charmap",
+    "ft_glyphslot_alloc_bitmap",
+    "ft_glyphslot_preset_bitmap",
+    "ft_glyphslot_set_bitmap",
+    "ft_mem_strcpyn",
+    "ft_mem_strdup",
+    "ft_module_get_service",
+    "ft_service_list_lookup",
+    "ft_synthesize_vertical_metrics",
+    "ft_validator_error",
+    "ft_validator_init"
+  ],
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-objs-util-round417/root-source-audit.json",
+    "sha256": "1965533e168e74d2f730200d499606c093aef35673f5fd47247e2fa15e82fe4f"
+  },
+  "source_probe": {
+    "path": "g2/build/c-firmware/20261013/freetype-base-probe-round413/probe.json",
+    "sha256": "5c1203ac7d3ce5972b6fa8ed2f699264cfe184000e481fda1d4c4e864bad84dd"
+  },
+  "sources": [
+    {
+      "path": "third-party/upstream/freetype/src/base/ftobjs.c",
+      "sha256": "9f5533b64c0e1926346bbabb1107a319801ca677b19b6f236ffd379456a6e24e"
+    },
+    {
+      "path": "third-party/upstream/freetype/src/base/ftutil.c",
+      "sha256": "17c2e9b087ddb7969a98d734eb6306efc0217dd2831b249b59e4f37bcb115ad9"
+    }
+  ],
+  "status": "PASS_EXPERIMENTAL_UPSTREAM_OBJS_UTIL"
+}

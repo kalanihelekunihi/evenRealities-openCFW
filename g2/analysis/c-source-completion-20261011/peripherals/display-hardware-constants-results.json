@@ -1,0 +1,37 @@
+{
+  "status": "PASS_DISPLAY_HARDWARE_CONSTANTS_BOUNDED",
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "3f9b098f6f26aeaa387bc27fdd9f34097d2fefe688bf7af1a6ab87fb70e332e5",
+  "object_sha256": "7f921685047ac2c1cdcbce206da990f16cee4989df22f6b75952c13e48ea17e7",
+  "cells": {
+    "audio_uart_display_board_mmio": {
+      "rom_word": "0x44d320",
+      "value": "0x2006f548"
+    },
+    "audio_uart_display_engine_mmio": {
+      "rom_word": "0x471ed0",
+      "value": "0x40008000"
+    },
+    "audio_uart_display_format_mask": {
+      "rom_word": "0x471ecc",
+      "value": "0x1ff00"
+    },
+    "audio_uart_display_enable_word": {
+      "rom_word": "0x471edc",
+      "value": "0x40008060"
+    },
+    "audio_uart_display_pin_low": {
+      "rom_word": "0x442cd0",
+      "value": "0xe000ed18"
+    },
+    "audio_uart_display_pin_high": {
+      "rom_word": "0x442ccc",
+      "value": "0xe000e400"
+    },
+    "audio_uart_display_pin_set": {
+      "rom_word": "0x442cc8",
+      "value": "0xe000e100"
+    }
+  },
+  "limits": "Literal equivalence in relocatable C; final linker placement and device register behavior unproven."
+}

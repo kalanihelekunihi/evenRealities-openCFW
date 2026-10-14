@@ -9,12 +9,12 @@ extern uint32_t case_boot_transport_register(uint32_t callback,uint32_t mode,
 extern uint32_t case_boot_transport_worker(uint32_t callback,uint32_t mode,
                                            uint32_t storage); /* 0xa93c */
 extern uint32_t case_boot_transport_event(uint32_t storage); /* 0xa836 */
-extern void case_boot_transport_cb_9d70(void);
-extern void case_boot_transport_cb_bb4c(void);
-extern void case_boot_transport_cb_9684(void);
-extern void case_boot_transport_cb_b7ec(void);
-extern void case_boot_transport_cb_bb90(void);
-extern void case_boot_transport_cb_ab70(void);
+extern void case_boot_transport_cb_9d70(uint32_t argument);
+extern void case_boot_transport_cb_bb4c(uint32_t argument);
+extern void case_boot_transport_cb_9684(uint32_t argument);
+extern void case_boot_transport_cb_b7ec(uint32_t argument);
+extern void case_boot_transport_cb_bb90(uint32_t argument);
+extern void case_boot_transport_cb_ab70(uint32_t argument);
 extern void case_boot_transport_cb_6e1c(void);
 extern void case_boot_transport_cb_7f2c(void);
 extern void case_policy_task_7200(void);

@@ -1,0 +1,59 @@
+{
+  "added_imports": [],
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-stream-round415/receipt.json",
+    "sha256": "be01caaf0d6ad6b873d637698aed9dd6bec7a5309421c0f4364196b8fd8ee6bb"
+  },
+  "builder": {
+    "path": "g2/firmware_c/build.py",
+    "sha256": "930ba3aad61f33234f9c58f7a0617d60ed138f4d8b3e113385ae8fc5c4f062f5"
+  },
+  "definitions": 3832,
+  "duplicate_strong_symbols": 0,
+  "exports_renamed": [
+    "FT_Stream_Close",
+    "FT_Stream_OpenMemory",
+    "FT_Stream_Read",
+    "FT_Stream_ReadAt",
+    "FT_Stream_ReadULong",
+    "FT_Stream_ReadUShort",
+    "FT_Stream_Seek",
+    "FT_Stream_Skip"
+  ],
+  "image": "apollo_main",
+  "imports": 794,
+  "limits": [
+    "Upstream stream source remains experimental; native ABI and runtime for ten new bodies not proved",
+    "Eight upstream copies of selected stream bodies have renamed symbols in this experiment",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "manifest": {
+    "path": "g2/firmware_c/experimental-sources.json",
+    "sha256": "fbd0cc9e4a3bc147d21b2315b19726d896a4814ec36939b6ccb6747b708ddac0"
+  },
+  "removed_imports": [
+    "FT_Stream_EnterFrame",
+    "FT_Stream_ExitFrame",
+    "FT_Stream_ExtractFrame",
+    "FT_Stream_GetChar",
+    "FT_Stream_GetULong",
+    "FT_Stream_GetUShort",
+    "FT_Stream_Pos",
+    "FT_Stream_ReadChar",
+    "FT_Stream_ReadFields",
+    "FT_Stream_ReleaseFrame"
+  ],
+  "source": {
+    "path": "third-party/upstream/freetype/src/base/ftstream.c",
+    "sha256": "45d3fa82ba502cdb7917a18ca9d26a46d5d6604ad56c691b4b7fd3e973b5cd43"
+  },
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-stream-round415/root-source-audit.json",
+    "sha256": "61cdd64930b27cfc3bca1a08803a285a23cc5820372b2a62fe10a3187c5aeaa4"
+  },
+  "source_probe": {
+    "path": "g2/build/c-firmware/20261013/freetype-base-probe-round413/probe.json",
+    "sha256": "5c1203ac7d3ce5972b6fa8ed2f699264cfe184000e481fda1d4c4e864bad84dd"
+  },
+  "status": "PASS_EXPERIMENTAL_UPSTREAM_STREAM"
+}

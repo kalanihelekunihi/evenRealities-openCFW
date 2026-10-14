@@ -1,0 +1,59 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "clock_provider_gates_remaining": 0,
+    "source_complete": false,
+    "strong_unresolved_after": 721,
+    "strong_unresolved_before": 722
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/clock_acquire_2_candidates_20261013/acquire.c",
+      "sha256": "fd482fb1c1e7bb32046eb70c99a5dcde8c0ce96af8e6f13deb38c421f6f2e5cd"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c3d9e.c",
+      "sha256": "a59c3642a47c8b402819a6c480df040e623feb4d88318982381ba82eaec52be4"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "0d7f87961d4dfeee419f2e1cf51a6e76b2c668530327356b2523f9e9ed7e3aa8"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_acquire_2.py",
+      "sha256": "b9778ec98ee203d81101a760f895bca924809597a6c6bfa80e24c4e227394e33"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-acquire-2-round512/oracle.json",
+      "sha256": "cd6ba57fc5d6b99de4515a1d394dcd72318eef4c5bc7e5410fa45a2953cf8a9c"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-acquire-2-round512/isolated/acquire.elf",
+      "sha256": "b0466435c2926c595ecf174c8b1d3f5154032fbbb6a1f065a1c159d86eaba58f"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-acquire-2-round512/receipt.json",
+      "sha256": "0d4069f45f2ef5668ff5ce54317bc06872626a61cc3a23122d6ebfbb47121b58"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-acquire-2-round512/apollo_main/candidate.o",
+      "sha256": "bd83fe2d6cf5c648b90126197954e84309e628ede1c6710efbc8320680becce4"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Critical save, mode read/set and timeout cleanup intercepted; bitmap and state transitions executed in synthetic SRAM.",
+    "Physical clock transitions and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x4c3d9e"
+  ],
+  "native_source_oracle_cases": 864,
+  "provenance": "Main Ghidra pseudocode, locked native blob and class 2 acquire native/source orchestration comparison",
+  "schema": "opencfw-source-provider-receipt-v1",
+  "source_bodies": [
+    "g2_main_clock_acquire_2_4c3d9e"
+  ],
+  "status": "provider_body_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

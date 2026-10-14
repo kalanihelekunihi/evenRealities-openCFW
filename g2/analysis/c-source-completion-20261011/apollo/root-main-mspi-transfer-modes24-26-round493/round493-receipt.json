@@ -1,0 +1,88 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_transfer_symbol_unresolved": true,
+    "source_complete": false,
+    "strong_unresolved_after": 731,
+    "strong_unresolved_before": 731
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_transfer_mode24_candidates_20261013/mode24.c",
+      "sha256": "b2b24247208565d17c9b9a2be9d08566f694cddb71aa11a14b12f825218ff049"
+    },
+    {
+      "path": "g2/components/main/mspi_mode_update_candidates_20261013/update.c",
+      "sha256": "a7538a96364c0d7099320ecf885bedab2bd79d336fc232e953e53f6029c3d275"
+    },
+    {
+      "path": "g2/components/main/mspi_transfer_mode26_candidates_20261013/mode26.c",
+      "sha256": "7fc26fa7a8b9acbb1ef117d1f25e088d4d23cd07b85aac82e2cf31f712ac0556"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c0f78.c",
+      "sha256": "d8e0107aba4402bb7d24dc123bbbf28a102d9e3d3d64a387b29f5d0ff04882d3"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c0644.c",
+      "sha256": "e2465cf35d4c64265279cc8c6ff2c353ba744bc5d74ef6486bffbde2431ae01e"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "1ff0d927e217009a8d3580632041bef6eb139eba623ce7c4594eedbcaf1c1efa"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_transfer_mode24.py",
+      "sha256": "1e7689232d549de3c5c53772bfec4378c140e41abf362393b7f6b159b726c97d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_transfer_mode26.py",
+      "sha256": "9d25f0aa16d69a4d7471cf252e26b45e969f946dd0e7c13f8a7d2a5d7f751e6f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-modes24-26-round493/mode24-oracle.json",
+      "sha256": "ea179a58840170a6e6ca65258a2fb8dc33899e412dcd633c9683754e9aabbc91"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-modes24-26-round493/mode26-oracle.json",
+      "sha256": "5efd6c0525dba15b3cecb112d1db242f78d3b6911ec206a1414c17ce4864b92f"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-modes24-26-round493/isolated/mode24.elf",
+      "sha256": "5fcce3fbd9bffa3199ca6fa3d45bc28826ab3e68950a69afb29048bc130a6ecc"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-modes24-26-round493/isolated/mode26.elf",
+      "sha256": "1c292480e048d8f936f8721a78c4fb66fe87854b6e5a31330493bbfe1ca3b328"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-modes24-26-round493/receipt.json",
+      "sha256": "9da435a85a590c429a6bfc01dc00c3e868fcb862e7a5971f755269db0b5a7437"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-modes24-26-round493/apollo_main/candidate.o",
+      "sha256": "1305c829f72e71feb08a58ef948c441974cf9442d28634c3e8dceebdaaa7d596"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Selectors 24 and 26 plus lower 0x4c0644 are source-owned; the full 0x4c0f78 selector function remains unresolved.",
+    "Selector 26 clock-route and class provider helpers are intercepted in bounded comparisons.",
+    "Synthetic SRAM/MMIO cannot establish physical transfer behavior or a complete Main image."
+  ],
+  "native_entrypoints": [
+    "0x4c0f78 selector 24",
+    "0x4c0644",
+    "0x4c0f78 selector 26"
+  ],
+  "native_source_oracle_cases": 7189,
+  "provenance": "Main Ghidra pseudocode outer control-flow corrected against locked native blob; selector-specific native/source MMIO comparisons",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_main_mspi_transfer_mode24_candidate",
+    "g2_main_mspi_mode_update_4c0644",
+    "g2_main_mspi_transfer_mode26_candidate"
+  ],
+  "status": "bounded_branches_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

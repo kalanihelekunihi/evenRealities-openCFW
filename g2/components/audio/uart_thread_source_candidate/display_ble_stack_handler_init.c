@@ -2,6 +2,9 @@
  * _bleExactleStackInit. All callback targets come from native literals. */
 #include <stdint.h>
 uint8_t audio_ble_dm_handler_state[0x18u]; /* RAM 0x20073b78 */
+/* DM privacy paths address the same bounded handler object. */
+extern uint8_t audio_ble_dm_privacy_state[0x18u]
+    __attribute__((alias("audio_ble_dm_handler_state")));
 uint8_t audio_ble_l2c_slave_state[0x18u]; /* RAM 0x20073bd8, init writes through +0x16 */
 uint8_t audio_ble_smp_handler_state[0xfcu]; /* RAM 0x20070aec; SC writes through +0xf8 */
 /* HciCoreInit 0x52ac02 writes the final word at +0xa0, proving at least

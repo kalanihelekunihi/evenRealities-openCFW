@@ -1,0 +1,40 @@
+{
+  "round": 536,
+  "status": "PASS_CONNECTED_NINETEEN_FUNCTION_BDCMP_BOUNDARY_NO_SOURCE_ADMISSION",
+  "component": "audio littlefs backend close through block compare",
+  "component_completed": false,
+  "native_entry": "0x4cfad0",
+  "joint_native_c_cases": 576,
+  "joined_executed_c_function_count": 19,
+  "new_connected_evidence": [
+    "block compare chunking",
+    "C byte comparison",
+    "readback mismatch to -84 bad-block relocation",
+    "retry success after mismatch"
+  ],
+  "remaining_estimate": "Block read, flash program, configuration sync, file read-write, relocate, directory commit, heap release and fatal logging effects remain cut; physical storage behavior unverified.",
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_bdcmp_connected.py",
+      "sha256": "f17e499408e058a08582d248834a5a6455b3edd37e3420cc75b07f4532267fb0"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/backend-close-bdcmp-connected-results.json",
+      "sha256": "bd37d1b90dab67cdecd5c1943ff4b396ee14fe6fbdacf16e413a366ef0230ac9"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/bd_cmp.c",
+      "sha256": "94fe70b229d15068d3a4dd61c0ecb753066624235f91a94ee0c0da62566523c9"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/byte_compare.c",
+      "sha256": "c5f741bedd4143df26aee1dab48d5018aa4d492860f9257c6fef1817b1b22888"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-audio-close-bdcmp-connected-round536/round536-receipt.json",
+    "sha256": "891318dc201d62bf5c7100cc1848998411a0d2484d5dbd25942a0e46d4f0220d"
+  },
+  "publication_scope": "Body-receipt evidence only; connected nineteen-function block-compare boundary; no source admission or component completion; no canonical wave identity inferred; no map/image promotion"
+}

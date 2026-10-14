@@ -1,0 +1,40 @@
+{
+  "added_imports": [],
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-rom-radio-tail-round425/receipt.json",
+    "sha256": "eb4c0c3ce4251d471dfaf22e4cb226829c93c5d501fcc750e4701af44d37daf4"
+  },
+  "builder_object_match": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-rom-radio-tail-round425/builder-object-match.json",
+    "sha256": "b71ffc15bd0aad0b654df2834f554003615aa70cca75d8923fe0c55c735416ba"
+  },
+  "definitions": 3993,
+  "duplicate_strong_symbols": 0,
+  "image": "apollo_main",
+  "imports": 736,
+  "limits": [
+    "Two compiled literal byte arrays match stock ROM; final address placement unproven",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "manifest": {
+    "path": "g2/firmware_c/experimental-sources.json",
+    "sha256": "91b0a5b160ccc70b6db637f940c3c46ecc432e2b05c543855a406ca3870f333e"
+  },
+  "provenance": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-rom-radio-tail-round425/source-provenance.json",
+    "sha256": "89e28fa50e14b72aeda19cd0f670b19c89f3172d22c970c1a00689e8d9903ddf"
+  },
+  "removed_imports": [
+    "audio_ble_hci_radio_command_error_75d590",
+    "audio_ble_hci_radio_resource_log5_77d90c"
+  ],
+  "source": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-rom-radio-tail-round425/radio_tail.c",
+    "sha256": "67383d9e3f567d3da6f399d4e8e81ad8985b25a7cc94ac1af4cb6f8089796241"
+  },
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-rom-radio-tail-round425/root-source-audit.json",
+    "sha256": "e519b50d5662e0af1c7507be5dedf77623e9a1e2fc4af91c15d2addb525a9f54"
+  },
+  "status": "PASS_EXACT_ROM_RADIO_TAIL"
+}

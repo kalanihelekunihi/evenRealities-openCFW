@@ -1,0 +1,24 @@
+{
+  "round": 638,
+  "component": "Apollo NEMA clear command link to selected get-space provider",
+  "status": "Existing selected Apollo source at native 0x514aec now satisfies allocator import; 20 native/C cases pass; candidate still unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "9b86edcf48ff44e6e7d066d4c1afa1e5ba4e89aaa3342fbd6bf7bbc5c53d9898",
+  "verifier_sha256": "cf6c0452eaf29153c9c0969009511d2b401ce2f18b0cd74cd74d02fb33543167",
+  "link_audit_sha256": "f7f8464a721d22fe226e94b0ab2ca319aad9755dbaf084bcbe4e8e43b668e9f2",
+  "combined_object_sha256": "caa584085f4aa60aafffb4d2e32d888569593cb5ab055322e21426ecb6925df7",
+  "selected_provider": "audio_uart_nema_cl_get_space_514aec",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_NEMA_SELECT_CLEAR_NATIVE 20",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 113 32 9",
+    "git diff --check"
+  ],
+  "gates": [
+    "NEMA mode 0x513924, GPU blit 0x4b1608 and position 0x4b1b48 bodies unresolved",
+    "uLED option objects, row callback, work buffer, dispatch gate, live settings config open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

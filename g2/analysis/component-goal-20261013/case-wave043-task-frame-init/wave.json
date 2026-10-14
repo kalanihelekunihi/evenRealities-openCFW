@@ -1,0 +1,42 @@
+{
+  "wave_id": "component-goal-case-wave043-task-frame-init",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T22:40:22.323353+00:00",
+  "status": "PASS_STATIC_TCB_STACK_PORT_FRAME_GRAPH",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/wave.json",
+    "sha256": "0d863a2bc4203aaa4b119e839f2ecd991dd477d32e6200ae50d77cf159ef6d76"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave043-task-frame-init/verify.py",
+    "sha256": "bdda1930270503e41dacf75b0963e17b5378a0467f33a94e2bc6e556338b89ec"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave043-task-frame-init/verification.json",
+    "sha256": "35a11d8864dcd0fc50028809f6706762a1b9cfacbb0d73da065cb1c529d61657"
+  },
+  "cases": 135,
+  "done_criteria": [
+    "ActualAE96 taskinit/stackfill/linkreset/B4C0portframe",
+    "64/128/256words, priorityclamp and namebounds",
+    "Exact initialPSR/R0/softwareframe and knownPC/LRpointer identity",
+    "RAM/callee-saved/SP compare"
+  ],
+  "component_acceptance_gates": {
+    "bounded_software_architecture": "PASS",
+    "physicalIRQ_exceptiondelivery_return": "unvalidated",
+    "globalstack": "incomplete",
+    "accepted_images": "0/6"
+  },
+  "limits": [
+    "Real taskinit/stackfill/linkreset/portframe providers without cuts or injectedreturns",
+    "Known entry/returnfunction pointer namespaces normalized after exact identity checks; allotherRAM belowfooter compare",
+    "StaticTCB/stack storage layout and typed argument stream; no actual exceptionreturn/task execution/IRQdelivery proof",
+    "Bounded1024byte nativeMSPwindow, not global IRQ/reentrancy budget"
+  ],
+  "next_critical_path_task": "PendSV actualdispatcher save/restore boundary",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

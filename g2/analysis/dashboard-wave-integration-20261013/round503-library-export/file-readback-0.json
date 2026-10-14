@@ -1,0 +1,74 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "new_downstream_unresolved": [
+      "g2_main_irq_enable_48009e"
+    ],
+    "source_complete": false,
+    "strong_unresolved_after": 724,
+    "strong_unresolved_before": 724
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/queue_uninit_candidates_20261013/uninit.c",
+      "sha256": "d7e3705e9ecf060fb2e58175a01595d0188b6149fea46cdae846e6787dae790b"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/00539944.c",
+      "sha256": "1e0a0f4fc9b34a95004a8f91a1cbbb4f31d1ffe8264efac0d0b02808c82a9bc2"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004800e4.c",
+      "sha256": "557600f1fc4f454dcf770634b1efd9b021322d84c6a7ce6aa268004830730661"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "78e0c75197d6dc576cfa3ed9fcfde5a2b0fba9cfe7931e1730c5b29e8cd78a43"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_queue_uninit.py",
+      "sha256": "a00cf38cfa6098511e14f83bc842c1a78fff345b9cdb5228f3d21967810b673f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-queue-uninit-round503/oracle.json",
+      "sha256": "225f737b1c924e3f6d205360313566943249aebc50cd087b904b7da660690733"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-uninit-round503/isolated/uninit.elf",
+      "sha256": "15c892e38d4e4ee28ebe23c2d3a64448eeafb00e6551a67e3da3efcbd76178e5"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-uninit-round503/receipt.json",
+      "sha256": "6be63910ce5e644dfe6628273df3a5a067441981b79d8d039c6f3520f488c413"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-uninit-round503/apollo_main/candidate.o",
+      "sha256": "aeff77923ba5760b1a99666731edc6a0f2cbee995d6ffee8d4ee1e41f3a61fab"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "IRQ enable at 0x48009e intercepted; queue disable and IRQ state read executed against synthetic MMIO/SRAM.",
+    "IRQ enable remains unresolved.",
+    "Physical operation and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x539944",
+    "0x4800e4"
+  ],
+  "native_source_oracle_cases": 68,
+  "provenance": "Main Ghidra pseudocode, locked native blob and queue uninitialization plus IRQ-state native/source comparison",
+  "schema": "opencfw-source-provider-receipt-v1",
+  "source_bodies": [
+    "g2_main_queue_uninit_539944",
+    "g2_main_irq_enabled_4800e4"
+  ],
+  "status": "provider_bodies_verified_with_downstream_gate",
+  "target_id": "official-s200-v2.2.6.10",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-queue-uninit-round503/round503-receipt.json",
+    "sha256": "d0c216065d9a25968ccfed8d1df95071a5e7a9e7883c38329dcf5ba3d30911a1"
+  },
+  "publication_scope": "Body-receipt evidence only; bounded queue uninit/IRQ-state read; IRQ-enable gate open; no completed-wave canonical identity inferred; no map/image promotion"
+}

@@ -1,0 +1,3299 @@
+{
+  "status": "PASS_BOUNDED_LITERAL_ROOT_STRING_PROVENANCE_AUDIT",
+  "input_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/final/receipt.json",
+    "sha256": "c3a70f8a4756aaab953de048362bf538864d3cb7b7bb48bf267048d34f0af4c9"
+  },
+  "ELF": {
+    "path": "g2/analysis/component-goal-20261013/case-wave022-logging-stack/final/case.elf",
+    "sha256": "af3e6d17dba6058c831053ec241f1f6f6c2c2d646d1c43cbcd5fea77da923760"
+  },
+  "firmware": {
+    "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+  },
+  "source_units": 401,
+  "RAM_literal_count": 118,
+  "RAM_literals": [
+    {
+      "address": "0x20000000",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_sample_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_write_transaction_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/frame_pack_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_bind_core_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_retry_reads_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_input_system_config_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_crt_known_defaults.c",
+        "g2/components/case/uart_start_offline/start.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x80004bc",
+        "0x800060c",
+        "0x8008ffc",
+        "0x800903c",
+        "0x800b534",
+        "0x800d940"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000014",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_output_prepare_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_sample_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_positive_waveform_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_gpio_compat_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_periodic_power_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_gpio_defaults_config.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800ba5c",
+        "0x800ba9c",
+        "0x800bb24"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000028",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_periodic_power_update_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8002afc",
+        "0x80035d0",
+        "0x80035ec",
+        "0x80039e0",
+        "0x80039fc"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000029",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_guarded_sensor_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/guarded_frame_candidates.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_write_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_timer_query_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x2000002a",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_battery_profile_config.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8009eb8",
+        "0x8009fec"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000007c",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/aa_reader_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_bus_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_program_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_input_transaction_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_response_sample_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_bus_transactions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_retry_reads_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_bus_write_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800041c",
+        "0x8000568",
+        "0x80006c0",
+        "0x80090a0",
+        "0x8009100",
+        "0x8009160",
+        "0x800b5a4",
+        "0x800d0f8"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000090",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_set_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/control_dump_candidates.c",
+        "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_prepare_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8003554",
+        "0x8009a10",
+        "0x800d24c",
+        "0x800d268"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000a0",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/bus_pin_leaves_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/bus_response_sample_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_gpio_compat_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_gpio_defaults_config.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800ba80",
+        "0x800bac0",
+        "0x800bb48"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000b4",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/record_dispatch_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x80022bc"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000b8",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_button_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_bb90_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_clock_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_monitor_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_sample_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_start_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_toggle_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_idle_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_idle_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_full_battery_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_stable_service_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_status_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_tail_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8001314",
+        "0x80013f0",
+        "0x8002a64",
+        "0x8003b34",
+        "0x80067fc",
+        "0x80068c0",
+        "0x8006a18",
+        "0x8007138",
+        "0x80075ec",
+        "0x8007b88",
+        "0x8008194",
+        "0x80083b8",
+        "0x8009b34",
+        "0x8009d2c",
+        "0x8009db8",
+        "0x800abac",
+        "0x800bb70",
+        "0x800bb8c",
+        "0x800bd0c"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000bb",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_hall_lowers_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000bc",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_status_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8001514",
+        "0x8001770",
+        "0x8001e18",
+        "0x8002464",
+        "0x8002530"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000bd",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/toggle_dd.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000d04"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000be",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/dogfeed_df.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_policy_flag_defaults_config.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000e0c"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000bf",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/aa_reader_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3d_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3e_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_program_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_56_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_56_exit_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_5e_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_5e_retry_failure_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_local_four_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_unknown_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/charging_d2.c",
+        "g2/components/case/legacy_default_candidate_20261010/charging_status_d3.c",
+        "g2/components/case/legacy_default_candidate_20261010/control_aa_ab.c",
+        "g2/components/case/legacy_default_candidate_20261010/control_dump_candidates.c",
+        "g2/components/case/legacy_default_candidate_20261010/default.c",
+        "g2/components/case/legacy_default_candidate_20261010/dogfeed_df.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_apply_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/gpio_a1.c",
+        "g2/components/case/legacy_default_candidate_20261010/log_toggle_af.c",
+        "g2/components/case/legacy_default_candidate_20261010/pmic_d4.c",
+        "g2/components/case/legacy_default_candidate_20261010/reset_ff_prefix.c",
+        "g2/components/case/legacy_default_candidate_20261010/reset_toggle_ae.c",
+        "g2/components/case/legacy_default_candidate_20261010/scan_a2.c",
+        "g2/components/case/legacy_default_candidate_20261010/set_sn_a5.c",
+        "g2/components/case/legacy_default_candidate_20261010/set_sn_flash_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/shipmode_ee_prefix.c",
+        "g2/components/case/legacy_default_candidate_20261010/simulate_d1.c",
+        "g2/components/case/legacy_default_candidate_20261010/status_a3.c",
+        "g2/components/case/legacy_default_candidate_20261010/version_a0.c",
+        "g2/components/case/legacy_default_candidate_20261010/watchdog_d0.c",
+        "g2/components/case/legacy_default_candidate_20261010/word_a4.c",
+        "g2/components/case/local_commands_offline/local.c",
+        "g2/components/case/source_candidate_20261010/hex_log_provider.c",
+        "g2/components/case/source_candidate_20261010/send_provider.c",
+        "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_aging_begin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3bc8_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3d24_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_periodic_power_update_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_action_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_status_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_entry_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_apply_file_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_begin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_copy_sn_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_failure_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_write_chunk_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_standby_candidate.c",
+        "g2/components/case/startup_candidate_20261011/record_dispatch_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000c68",
+        "0x8001188",
+        "0x8001510",
+        "0x8001774",
+        "0x8001ad8",
+        "0x8001d10",
+        "0x8001e1c",
+        "0x8002258",
+        "0x8002460",
+        "0x800252c",
+        "0x80026c4",
+        "0x8002834",
+        "0x8002b00",
+        "0x8002c0c",
+        "0x8002d18",
+        "0x8002dc4",
+        "0x8002eb0",
+        "0x8003344",
+        "0x800359c",
+        "0x8003704",
+        "0x8003810",
+        "0x8003960",
+        "0x8003c18",
+        "0x8003ce8",
+        "0x8003e30",
+        "0x80090a4",
+        "0x8009164",
+        "0x800a6d8",
+        "0x800d0fc",
+        "0x800d200",
+        "0x800d234"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000c0",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/reset_toggle_ae.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000c90"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000c1",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/simulate_d1.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000d74"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000c2",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/simulate_d1.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000d78"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000c3",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/simulate_d1.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000d7c"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000c4",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000c8",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_idle_callback_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000cc",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_policy_refresh_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000d0",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_56_exit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_failure_reset_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000d4",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_aging_begin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000d8",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_aging_begin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000dc",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000f0",
+      "source_files": [
+        "g2/components/case/binary_forward_offline/forward.c",
+        "g2/components/case/frame_callback_offline/frame.c",
+        "g2/components/case/frame_dispatch_offline/dispatch.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3d_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3e_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_forward_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/control_b0.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3d24_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000d00",
+        "0x8001184",
+        "0x8003d04",
+        "0x8003e4c",
+        "0x80066a4"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000f4",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3e_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_aging_begin_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_sample_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/record_dispatch_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8001180",
+        "0x8001378",
+        "0x80022e8",
+        "0x80024bc",
+        "0x8002588",
+        "0x8009834",
+        "0x8009c44",
+        "0x800b944"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200000f5",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3d_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3e_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000f6",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000f7",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000fa",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000fb",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/case_transport_defaults_config.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200000fc",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3e_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000100",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_aging_begin_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000104",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_policy_flag_defaults_config.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8003ce4"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000105",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/charging_d2.c",
+        "g2/components/case/legacy_default_candidate_20261010/charging_status_d3.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_policy_flag_defaults_config.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000c78",
+        "0x8001ad4",
+        "0x8009a98",
+        "0x800d0f0"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000106",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800347c",
+        "0x800d0f4"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000108",
+      "source_files": [
+        "g2/components/case/frame_callback_offline/frame.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_rx_restart_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8003ba8",
+        "0x800669c",
+        "0x8006c7c",
+        "0x800a378"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000109",
+      "source_files": [
+        "g2/components/case/frame_callback_offline/frame.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x2000010a",
+      "source_files": [
+        "g2/components/case/frame_callback_offline/frame.c",
+        "g2/components/case/frame_dispatch_offline/dispatch.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800091c",
+        "0x8007140"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000010c",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3d24_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8003e50"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000114",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/sensor_line_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/sensor_sample_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/sensor_secondary_transport_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/sensor_transaction_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pmic_read_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_init_pmic_write_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_pmic_bus_primitives_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8002928",
+        "0x80029a0",
+        "0x80029fc",
+        "0x8002a58",
+        "0x800a548",
+        "0x800a56c",
+        "0x800a590"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000118",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_snapshot_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_child_5c90_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_clock_scheduler_defaults_config.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8004978",
+        "0x8004eb4",
+        "0x8004ee8"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000011c",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_device_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_clock_scheduler_defaults_config.c",
+        "g2/components/case/startup_candidate_20261011/clock_plan_candidate.c",
+        "g2/components/case/startup_candidate_20261011/transfer_control_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8004fac",
+        "0x8005438",
+        "0x80058f8"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000120",
+      "source_files": [
+        "g2/components/case/source_candidate_20261010/tick_word_provider.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_snapshot_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_register_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000124",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_device_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_clock_gate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_console_apply_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_console_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_clock_sources_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_systick_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_adc_config_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_clock_scheduler_defaults_config.c",
+        "g2/components/case/startup_candidate_20261011/clock_plan_candidate.c",
+        "g2/components/case/startup_candidate_20261011/transfer_control_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000858",
+        "0x8004318",
+        "0x800468c",
+        "0x800508c",
+        "0x8005434",
+        "0x8005490",
+        "0x80058f4",
+        "0x800c09c"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000128",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_small_state_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_resume_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_small_leaves_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_delay_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_list_candidates.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_tick_candidate.c",
+        "g2/components/case/scheduler_list_candidate_20261010/disinherit.c",
+        "g2/components/case/scheduler_list_candidate_20261010/resume.c",
+        "g2/components/case/scheduler_list_candidate_20261010/tick.c",
+        "g2/components/case/scheduler_list_candidate_20261010/unblock.c",
+        "g2/components/case/scheduler_list_candidate_20261010/waiter.c",
+        "g2/components/case/source_candidate_20261010/scheduler_state.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_context_switch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_idle_maintenance_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pendsv_vector_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pool_wake_waiter_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_activate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_task_register_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_event_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_scheduler_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_notify_core_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_cleanup_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_queue_wait_helpers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sleep_exit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_notify_resume_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_queue_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_tick_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_wake_cleanup_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_wake_dispatch_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x80000f0",
+        "0x8000140",
+        "0x800ac00",
+        "0x800ac7c",
+        "0x800ad1c",
+        "0x800afc8",
+        "0x800b280",
+        "0x800c158",
+        "0x800c168",
+        "0x800c174",
+        "0x800c198",
+        "0x800c1c8",
+        "0x800c220",
+        "0x800c27c",
+        "0x800c2f4",
+        "0x800c378",
+        "0x800c38c",
+        "0x800c3f0",
+        "0x800c9a4",
+        "0x800ca68",
+        "0x800ca74",
+        "0x800cb30",
+        "0x800cb98",
+        "0x800cc00",
+        "0x800ccb4"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000134",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_counter_read_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_now_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000144",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_queue_unlock_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000158",
+      "source_files": [
+        "g2/components/case/source_candidate_20261010/suspend_scheduler.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_scheduler_primitives_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000164",
+      "source_files": [
+        "g2/components/case/deferred_consumer_offline/consumer.c",
+        "g2/components/case/legacy_default_candidate_20261010/task_kernel_candidates.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_ready_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_due_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_expired_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_process_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_wrap_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_dispatch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_event_scheduler_helpers_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800acc8",
+        "0x800ae08",
+        "0x800b060",
+        "0x800b0f8",
+        "0x800b1f8",
+        "0x800b25c",
+        "0x800b2ac",
+        "0x800b318",
+        "0x800cd70",
+        "0x800cde0",
+        "0x800ce30"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000016c",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_now_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000170",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_timer_wait_next_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000178",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_start_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_service_start_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800a8fc",
+        "0x800a934"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000017c",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_free_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_insert_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800ae58",
+        "0x800b020",
+        "0x800b49c",
+        "0x800c074"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000180",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000184",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000190",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000194",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_insert_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800ae54",
+        "0x800b01c",
+        "0x800b4a0"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000198",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x2000019c",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_small_leaves_candidate.c",
+        "g2/components/case/source_candidate_20261010/critical_providers.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_run_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_task_frame_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_scheduler_primitives_candidate.c",
+        "g2/components/case/startup_candidate_20261011/case_clock_scheduler_defaults_config.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800b32c",
+        "0x800c010",
+        "0x800c02c",
+        "0x800c5a8"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200001a0",
+      "source_files": [
+        "g2/components/case/source_candidate_20261010/log_wrapper_provider.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800918c"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200001a4",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_5e_retry_failure_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/flash_apply_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/set_sn_flash_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c",
+        "g2/components/case/startup_candidate_20261011/startup_vector_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8002dbc",
+        "0x8003700",
+        "0x800380c",
+        "0x800d950"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200001b4",
+      "source_files": [
+        "g2/components/case/binary_forward_offline/forward.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_3d_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/binary_forward_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x80012e0",
+        "0x8007144"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200001b5",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200001b6",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200001b7",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200001b8",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000664",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c",
+        "g2/components/case/startup_candidate_20261011/record_dispatch_candidate.c",
+        "g2/components/case/startup_candidate_20261011/record_scan_prefix_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8002254",
+        "0x80026c0",
+        "0x8002830"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000077c",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/record_dispatch_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x80023f0"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000087c",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/status_a3.c",
+        "g2/components/case/startup_candidate_20261011/app_initialization_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_button_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_hall_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3c2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_irq_vector_3d24_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_periodic_power_update_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_action_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_control_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_aging_status_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_bb90_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_clock_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_idle_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_monitor_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_sample_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_toggle_callback_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_entry_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_apply_file_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_erase_bank_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_file_open_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_fake_standby_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_idle_clear_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_refresh_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_maintenance_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_service_update_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000920",
+        "0x8000c6c",
+        "0x800118c",
+        "0x8001318",
+        "0x80013ec",
+        "0x800150c",
+        "0x80017d8",
+        "0x8001ad0",
+        "0x8001d0c",
+        "0x8001e58",
+        "0x800245c",
+        "0x8002528",
+        "0x8002af8",
+        "0x8002d14",
+        "0x8002dc0",
+        "0x8003378",
+        "0x800389c",
+        "0x8003a2c",
+        "0x8003b30",
+        "0x8003ce0",
+        "0x8003e2c",
+        "0x80068bc",
+        "0x800713c",
+        "0x80075e8",
+        "0x8008198",
+        "0x80083b4",
+        "0x8009838",
+        "0x8009a94",
+        "0x8009c9c",
+        "0x8009d28",
+        "0x8009db4",
+        "0x800a740",
+        "0x800aba4",
+        "0x800b9e0",
+        "0x800bb6c",
+        "0x800bd08",
+        "0x800d0ec"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000087d",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_14_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x2000087e",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_56_exit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_box_failure_reset_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x2000087f",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/shipmode_ee_prefix.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000880",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_local_four_candidate.c",
+        "g2/components/case/local_commands_offline/local.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000884",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/version_a0.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000888",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/word_a4.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x2000088c",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x2000088d",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000891",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_3f_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000892",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000893",
+      "source_files": [
+        "g2/components/case/frame_dispatch_offline/dispatch.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000895",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_56_candidate.c",
+        "g2/components/case/source_candidate_20261010/send_provider.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000896",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/binary_56_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_6e1c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000898",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000899",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_set_mode_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x2000089c",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/owned_lower_aliases_candidate.c",
+        "g2/components/case/startup_candidate_20261011/record_dispatch_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x80022b8",
+        "0x8003a5c"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200008ae",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200008b2",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200008bc",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/owned_lower_aliases_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8003a80"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200008ca",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200008ce",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_7f2c_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x200008e4",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_console_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sensor_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/startup_handler_forward_candidates.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x80006d0",
+        "0x8002f24",
+        "0x8006960"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000948",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_full_battery_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_tail_candidate.c",
+        "g2/components/case/startup_candidate_20261011/startup_handler_forward_candidates.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8006bfc",
+        "0x8006e14",
+        "0x8007618",
+        "0x8007f28"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000974",
+      "source_files": [
+        "g2/components/case/frame_callback_offline/frame.c",
+        "g2/components/case/frame_dispatch_offline/dispatch.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_finish_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_event_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000924",
+        "0x80066a0",
+        "0x800a37c"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000e24",
+      "source_files": [
+        "g2/components/case/frame_callback_offline/frame.c",
+        "g2/components/case/source_candidate_20261010/log_wrapper_provider.c",
+        "g2/components/case/source_candidate_20261010/send_provider.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_bus_sensor_initialize_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_callback_finish_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_transport_rx_restart_candidate.c",
+        "g2/components/case/startup_candidate_20261011/startup_handler_forward_candidates.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8003bac",
+        "0x80066a8",
+        "0x80068b8",
+        "0x8006c74",
+        "0x8008fa4",
+        "0x800a398"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000eb8",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_probe_reconfigure_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_send_packet_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_no_reply_reset_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_ota_transmit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_send_probe_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x80026bc",
+        "0x800282c",
+        "0x8003bc4",
+        "0x8006cec",
+        "0x8006d64",
+        "0x8009b64"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000f4c",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/clock_plan_candidate.c",
+        "g2/components/case/startup_candidate_20261011/startup_handler_forward_candidates.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8004fa4",
+        "0x80084bc"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000f98",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_operations_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_erase_execute_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_write_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8003fcc",
+        "0x80049f8",
+        "0x8004b18",
+        "0x8004bec"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000f9c",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/flash_operations_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_erase_execute_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_wait_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_option_write_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [],
+      "evidence_status": "derived_address_requires_native_base_plus_offset_join"
+    },
+    {
+      "address": "0x20000fb4",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800c0dc"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20000ff4",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_resume_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_list_candidates.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_tick_candidate.c",
+        "g2/components/case/scheduler_list_candidate_20261010/disinherit.c",
+        "g2/components/case/scheduler_list_candidate_20261010/resume.c",
+        "g2/components/case/scheduler_list_candidate_20261010/tick.c",
+        "g2/components/case/scheduler_list_candidate_20261010/unblock.c",
+        "g2/components/case/scheduler_list_candidate_20261010/waiter.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_idle_task_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pool_wake_waiter_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_task_register_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sleep_exit_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_lowers_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_notify_resume_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_tick_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_wake_dispatch_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800ac80",
+        "0x800ae70",
+        "0x800afb0",
+        "0x800c224",
+        "0x800c280",
+        "0x800c3f4",
+        "0x800cb34",
+        "0x800cb9c",
+        "0x800cc08",
+        "0x800ccbc"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20001454",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800afb4"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20001468",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800afb8"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000147c",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_resume_candidate.c",
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_list_candidates.c",
+        "g2/components/case/scheduler_list_candidate_20261010/resume.c",
+        "g2/components/case/scheduler_list_candidate_20261010/waiter.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_pool_wake_waiter_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_sleep_exit_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800afbc",
+        "0x800b35c",
+        "0x800cc04",
+        "0x800ccb8"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20001490",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_idle_maintenance_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800ad20",
+        "0x800afc0"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200014a4",
+      "source_files": [
+        "g2/components/case/legacy_default_candidate_20261010/kernel_task_delay_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_lists_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_notify_core_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_policy_task_queue_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800ac04",
+        "0x800afc4",
+        "0x800b358",
+        "0x800c37c"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200014b8",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_initialize_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800acd4"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20001508",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_initialize_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800acd8"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200015a8",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_initialize_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800accc"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200015bc",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_initialize_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800acd0"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x200015d0",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_regions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_activate_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800bf64"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000162c",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_regions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_activate_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800bf68"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x2000182c",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_regions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_ready_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800bf7c"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20001888",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_regions_candidate.c",
+        "g2/components/case/startup_candidate_20261011/application_boot_scheduler_ready_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800bf80"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20001c88",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/application_boot_heap_allocate_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x800ae50"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    },
+    {
+      "address": "0x20002c88",
+      "source_files": [
+        "g2/components/case/startup_candidate_20261011/startup_vector_candidate.c"
+      ],
+      "aligned_native_literal_word_locations": [
+        "0x8000000",
+        "0x80000c8"
+      ],
+      "evidence_status": "native_literal_word_present_not_object_extent_proof"
+    }
+  ],
+  "native_literal_word_present_count": 67,
+  "derived_address_join_pending_count": 51,
+  "known_root_count": 39,
+  "known_roots": [
+    {
+      "native": "0x080000b8",
+      "source_symbol": "case_startup_entry_00b8",
+      "current_linked_address": "0x800d4dd",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800015c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08000102",
+      "source_symbol": "case_vector_pendsv_0102",
+      "current_linked_address": "0x800d0f5",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000038"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08000144",
+      "source_symbol": "case_reset_entry_0144",
+      "current_linked_address": "0x8000145",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000004"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08000156",
+      "source_symbol": "case_vector_default_0156",
+      "current_linked_address": "0x800d49d",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000040",
+        "0x800004c",
+        "0x8000050",
+        "0x8000060",
+        "0x8000064",
+        "0x8000068",
+        "0x800006c",
+        "0x8000074",
+        "0x8000078",
+        "0x8000080",
+        "0x8000084",
+        "0x8000088",
+        "0x800008c",
+        "0x8000090",
+        "0x8000094",
+        "0x800009c",
+        "0x80000a0",
+        "0x80000a4",
+        "0x80000a8",
+        "0x80000b0",
+        "0x80000b4"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x080006c4",
+      "source_symbol": "case_vector_irq_06c4",
+      "current_linked_address": "0x800ca19",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000070"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08003bc8",
+      "source_symbol": "case_vector_irq_3bc8",
+      "current_linked_address": "0x8004e7d",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000054"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08003c2c",
+      "source_symbol": "case_vector_irq_3c2c",
+      "current_linked_address": "0x8004edd",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000058"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08003d24",
+      "source_symbol": "case_vector_irq_3d24",
+      "current_linked_address": "0x8004fc1",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800005c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08006778",
+      "source_symbol": "case_vector_hardfault_6778",
+      "current_linked_address": "0x800d4a3",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800000c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08006d70",
+      "source_symbol": "case_vector_nmi_6d70",
+      "current_linked_address": "0x800d4a1",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000008"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08006e08",
+      "source_symbol": "case_vector_irq_6e08",
+      "current_linked_address": "0x800ca29",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000048"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08006e18",
+      "source_symbol": "case_vector_svc_6e18",
+      "current_linked_address": "0x800d49f",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800002c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08006e1c",
+      "source_symbol": "case_boot_transport_cb_6e1c",
+      "current_linked_address": "0x80078e5",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a30"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08007200",
+      "source_symbol": "case_policy_task_7200",
+      "current_linked_address": "0x800bb71",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a38"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08007f2c",
+      "source_symbol": "case_boot_transport_cb_7f2c",
+      "current_linked_address": "0x8007bf5",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a34"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x080082ec",
+      "source_symbol": "case_boot_transport_cb_82ec",
+      "current_linked_address": "0x80085e9",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a3c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08008420",
+      "source_symbol": "case_vector_systick_8420",
+      "current_linked_address": "0x8006f45",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800003c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x080084ae",
+      "source_symbol": "case_early_hook_84ae",
+      "current_linked_address": "0x800014d",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000158"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x080084b0",
+      "source_symbol": "case_vector_irq_84b0",
+      "current_linked_address": "0x800ca39",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8000098"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08008558",
+      "source_symbol": "case_boot_transport_entry_8558",
+      "current_linked_address": "0x8008a41",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800aaec"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x080086e0",
+      "source_symbol": "case_boot_sensor_cancel_callback",
+      "current_linked_address": "0x8005de1",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800623c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08008758",
+      "source_symbol": "case_boot_sensor_callback_8758",
+      "current_linked_address": "0x8006b8d",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8008994",
+        "0x8008ec0"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08008808",
+      "source_symbol": "case_boot_sensor_callback_8808",
+      "current_linked_address": "0x8006c3d",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8008eb8"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08008998",
+      "source_symbol": "case_boot_sensor_callback_8998",
+      "current_linked_address": "0x8006c33",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8008bd4",
+        "0x8008ebc"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08008a48",
+      "source_symbol": "case_boot_sensor_callback_8a48",
+      "current_linked_address": "0x8006de1",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8008eb4"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08008f98",
+      "source_symbol": "case_vector_irq_8f98",
+      "current_linked_address": "0x800ca49",
+      "aligned_native_thumb_pointer_locations": [
+        "0x80000ac"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08009684",
+      "source_symbol": "case_boot_transport_cb_9684",
+      "current_linked_address": "0x8007ead",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a20"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x08009d70",
+      "source_symbol": "case_boot_transport_cb_9d70",
+      "current_linked_address": "0x80083e9",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a14"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800a380",
+      "source_symbol": "case_log_output_char",
+      "current_linked_address": "0x800060d",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8009188"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800a598",
+      "source_symbol": "case_application_entry_a598",
+      "current_linked_address": "0x8008b61",
+      "aligned_native_thumb_pointer_locations": [
+        "0x80000c4"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800ab70",
+      "source_symbol": "case_boot_transport_cb_ab70",
+      "current_linked_address": "0x80085a9",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a2c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800ae5c",
+      "source_symbol": "case_boot_idle_task_entry",
+      "current_linked_address": "0x8004b81",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800c2f0"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800b31c",
+      "source_symbol": "case_boot_task_return",
+      "current_linked_address": "0x8006fa1",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800b4dc"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800b360",
+      "source_symbol": "case_boot_service_task_entry",
+      "current_linked_address": "0x8006ed5",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800cd7c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800b7ec",
+      "source_symbol": "case_boot_transport_cb_b7ec",
+      "current_linked_address": "0x80080a1",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a24"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800bb90",
+      "source_symbol": "case_boot_transport_cb_bb90",
+      "current_linked_address": "0x8008235",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a28"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800bb4c",
+      "source_symbol": "case_boot_transport_cb_bb4c",
+      "current_linked_address": "0x80089f1",
+      "aligned_native_thumb_pointer_locations": [
+        "0x8006a1c"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800bf84",
+      "source_symbol": "vEventGroupClearBitsCallback",
+      "current_linked_address": "0x80001c1",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800c488"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    },
+    {
+      "native": "0x0800bf8c",
+      "source_symbol": "vEventGroupSetBitsCallback",
+      "current_linked_address": "0x800c441",
+      "aligned_native_thumb_pointer_locations": [
+        "0x800c578"
+      ],
+      "limits": "Known target identity joined only; computed pointers, registration lifetime and all callbacks not proven"
+    }
+  ],
+  "root_inventory": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/case_semantic_corrected_optimized.indirect-roots.json",
+    "sha256": "30c971f15746a2262d0713d9d33d7ff643bcbaf0856f7cb6bfef4c871267840d"
+  },
+  "exact_native_string_count": 203,
+  "strings": [
+    {
+      "native_address": "0x800131c",
+      "source_symbol": "case_string_0800131c",
+      "bytes_including_NUL": 18,
+      "sha256": "4a9e3f0f88145d359c06aab4dfceffbd576bea16579c3fbe76d1631b75a11096"
+    },
+    {
+      "native_address": "0x8001330",
+      "source_symbol": "case_string_08001330",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800137c",
+      "source_symbol": "case_string_0800137c",
+      "bytes_including_NUL": 51,
+      "sha256": "12e5d0663d49c453b611fcabab45436ee509e2fe3927815de837196ce66f4174"
+    },
+    {
+      "native_address": "0x80013b0",
+      "source_symbol": "case_string_080013b0",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x80013f4",
+      "source_symbol": "case_string_080013f4",
+      "bytes_including_NUL": 15,
+      "sha256": "d976a0e57f5bed505a6216ee0437d84770b5472b393cde0c7492b07de41031ba"
+    },
+    {
+      "native_address": "0x8001404",
+      "source_symbol": "case_string_08001404",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8001518",
+      "source_symbol": "case_string_08001518",
+      "bytes_including_NUL": 31,
+      "sha256": "5d28fbca44c87905dcd1e990f20659df075a272de506ab4f9115d93039bf51b4"
+    },
+    {
+      "native_address": "0x8001538",
+      "source_symbol": "case_string_08001538",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800153c",
+      "source_symbol": "case_string_0800153c",
+      "bytes_including_NUL": 37,
+      "sha256": "243c5a69842d0b3528d1e9b2b749dfbbd60139aa2e4401169ec6b97bbe71b7c2"
+    },
+    {
+      "native_address": "0x8001778",
+      "source_symbol": "case_string_08001778",
+      "bytes_including_NUL": 27,
+      "sha256": "84dee7fca53ad0ecbc5aeaf5fed9a51d2edcf47b5397eeacb1c89d6eba20f8a1"
+    },
+    {
+      "native_address": "0x8001794",
+      "source_symbol": "case_string_08001794",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x80017a0",
+      "source_symbol": "case_string_080017a0",
+      "bytes_including_NUL": 26,
+      "sha256": "b9e7e376791329d1dd42eea936638e374052dca701a4f762f4bc6df51346a813"
+    },
+    {
+      "native_address": "0x80017bc",
+      "source_symbol": "case_string_080017bc",
+      "bytes_including_NUL": 28,
+      "sha256": "c3a199b5330b0e0b49e0904c590cc1c29aefa00a101c9194f2f06a06c2f7cd8b"
+    },
+    {
+      "native_address": "0x80017dc",
+      "source_symbol": "case_string_080017dc",
+      "bytes_including_NUL": 34,
+      "sha256": "e88b0c11de98ee9b90220d481b8d293c8d2b0d0f2e844e995e723736e40f81b4"
+    },
+    {
+      "native_address": "0x8001800",
+      "source_symbol": "case_string_08001800",
+      "bytes_including_NUL": 28,
+      "sha256": "b7e4d2c42139cde2aa63e6161fe51335523851dcc102d4cd7e3190c9968c33b6"
+    },
+    {
+      "native_address": "0x800181c",
+      "source_symbol": "case_string_0800181c",
+      "bytes_including_NUL": 28,
+      "sha256": "381477fb7162bab94bf95bd65eae547e378153841ffe840c1b59cade88512e98"
+    },
+    {
+      "native_address": "0x8001838",
+      "source_symbol": "case_string_08001838",
+      "bytes_including_NUL": 20,
+      "sha256": "7af049553bba8479949969b0a3ef1bf5a42c36acd9a94db555db6fa7a3c9fcfa"
+    },
+    {
+      "native_address": "0x800184c",
+      "source_symbol": "case_string_0800184c",
+      "bytes_including_NUL": 25,
+      "sha256": "b86177cea29393a886ff6369f1a9fb914fce52ab55570760a26ea806fd397888"
+    },
+    {
+      "native_address": "0x8001868",
+      "source_symbol": "case_string_08001868",
+      "bytes_including_NUL": 25,
+      "sha256": "e377dae8184b9dc7724c4058d22734a89cec9901b02396b74c66d44ab496f36d"
+    },
+    {
+      "native_address": "0x8001884",
+      "source_symbol": "case_string_08001884",
+      "bytes_including_NUL": 24,
+      "sha256": "87e873305d8df7b189c4f9123f8113ac7609a0945cb05bcde701d4d61e83a78e"
+    },
+    {
+      "native_address": "0x80018a8",
+      "source_symbol": "case_string_080018a8",
+      "bytes_including_NUL": 2,
+      "sha256": "24ea1ebd0bafd39482db46ec2d8959e61353a90efc072719e1308f86c3a106ba"
+    },
+    {
+      "native_address": "0x80018ac",
+      "source_symbol": "case_string_080018ac",
+      "bytes_including_NUL": 2,
+      "sha256": "14f825b2bbc32dd8d196367fa8776873069c12a8954d8da7513aa7704ddd09eb"
+    },
+    {
+      "native_address": "0x80018b0",
+      "source_symbol": "case_string_080018b0",
+      "bytes_including_NUL": 50,
+      "sha256": "786c5b47eefd585d6ed473d2229d9822f171c0a32ff5fe82257794dd7d9c5cbd"
+    },
+    {
+      "native_address": "0x8001adc",
+      "source_symbol": "case_string_08001adc",
+      "bytes_including_NUL": 42,
+      "sha256": "dad5e45cd659e76e7e0a333b4ac63995be7985898258a256ff0279856b1b526e"
+    },
+    {
+      "native_address": "0x8001b08",
+      "source_symbol": "case_string_08001b08",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8001b0c",
+      "source_symbol": "case_string_08001b0c",
+      "bytes_including_NUL": 41,
+      "sha256": "5ff349ebe5489bbc78e3031727d27c5ae8d8f8d9d6beb2b8686c72f2b0c8063a"
+    },
+    {
+      "native_address": "0x8001b38",
+      "source_symbol": "case_string_08001b38",
+      "bytes_including_NUL": 50,
+      "sha256": "6c8b304d5dbcfb87258f3f78c58059a027e794b60d6e34491acb906993ca17be"
+    },
+    {
+      "native_address": "0x8001b6c",
+      "source_symbol": "case_string_08001b6c",
+      "bytes_including_NUL": 41,
+      "sha256": "7af49fe2d7710197f1c168ac5c773f8e86d3dab07cdc7c4fb308d3218c7fdbd5"
+    },
+    {
+      "native_address": "0x8001b98",
+      "source_symbol": "case_string_08001b98",
+      "bytes_including_NUL": 51,
+      "sha256": "c24b5fc892808a8e44675a59db50951a5de8f7c91adfcb11701ad9291fb10c9a"
+    },
+    {
+      "native_address": "0x8001bd4",
+      "source_symbol": "case_string_08001bd4",
+      "bytes_including_NUL": 33,
+      "sha256": "b4faafe7f966a73779ec448d50b7fae98f5b1a73f1978c279740774c5a96ec7d"
+    },
+    {
+      "native_address": "0x8001bf8",
+      "source_symbol": "case_string_08001bf8",
+      "bytes_including_NUL": 33,
+      "sha256": "67f7f5c0a4c96ee99bff40535325407ea6f774736aab505e277e22979c5c4836"
+    },
+    {
+      "native_address": "0x8001d14",
+      "source_symbol": "case_string_08001d14",
+      "bytes_including_NUL": 40,
+      "sha256": "645dfee2453f906588f257dc8fdfb6e960f2bdf85a61b3b759b00d69194c1757"
+    },
+    {
+      "native_address": "0x8001d3c",
+      "source_symbol": "case_string_08001d3c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8001d40",
+      "source_symbol": "case_string_08001d40",
+      "bytes_including_NUL": 40,
+      "sha256": "8c422bb7d46e4fcca0498a9a842e9ac04e43fce85620b9910af74918b41d0eb0"
+    },
+    {
+      "native_address": "0x8001e20",
+      "source_symbol": "case_string_08001e20",
+      "bytes_including_NUL": 37,
+      "sha256": "d832fa9a36626cbe35662ac84d2a27c2d7c9481eda67a25c97527fcbbb1ba613"
+    },
+    {
+      "native_address": "0x8001e48",
+      "source_symbol": "case_string_08001e48",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8001e5c",
+      "source_symbol": "case_string_08001e5c",
+      "bytes_including_NUL": 28,
+      "sha256": "e88edc4ce95554cff6b7cf1775530c65882fcdf2547a5f127670c719a2fec83d"
+    },
+    {
+      "native_address": "0x8001e78",
+      "source_symbol": "case_string_08001e78",
+      "bytes_including_NUL": 28,
+      "sha256": "e7b30aca761edb472475a9fe2b749687b060e411617bed42988def5c2f498ad1"
+    },
+    {
+      "native_address": "0x800225b",
+      "source_symbol": "case_string_0800225b",
+      "bytes_including_NUL": 26,
+      "sha256": "32d27a63f650e67af8219caeeddd99daaf9e99ba38ea6df159cd7e7cc72f9613"
+    },
+    {
+      "native_address": "0x8002278",
+      "source_symbol": "case_string_08002278",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800227c",
+      "source_symbol": "case_string_0800227c",
+      "bytes_including_NUL": 59,
+      "sha256": "9afffa62c9f255fa955fdd9735eecc87efc6b509f6f9a4c243da1005f5a5c28e"
+    },
+    {
+      "native_address": "0x80022bf",
+      "source_symbol": "case_string_080022bf",
+      "bytes_including_NUL": 38,
+      "sha256": "44a95bf027a1636fc3109345f54418791ebc477a27ddba25c58b04669834e8da"
+    },
+    {
+      "native_address": "0x80022eb",
+      "source_symbol": "case_string_080022eb",
+      "bytes_including_NUL": 53,
+      "sha256": "1bef5017ea50134be41ea2aee46324ee2d734171038070f60ea0f26065037556"
+    },
+    {
+      "native_address": "0x8002320",
+      "source_symbol": "case_string_08002320",
+      "bytes_including_NUL": 52,
+      "sha256": "8f257250e1a93ef483997fe5d2c69182b5512f26b81b09d1087cd410ccaf60fd"
+    },
+    {
+      "native_address": "0x8002354",
+      "source_symbol": "case_string_08002354",
+      "bytes_including_NUL": 36,
+      "sha256": "d6719e77fa04d01f3f35de764250ea795639f3ec370d34d82fc65c55f60591ff"
+    },
+    {
+      "native_address": "0x8002378",
+      "source_symbol": "case_string_08002378",
+      "bytes_including_NUL": 36,
+      "sha256": "9795a6b8c1c1392bfcf45646aa4817cf7f0cde17d53eaf7209c81a65c8e1c28c"
+    },
+    {
+      "native_address": "0x800239c",
+      "source_symbol": "case_string_0800239c",
+      "bytes_including_NUL": 25,
+      "sha256": "43452c321b39f55a651b289a71faec6186b4b89d4568606ad228234f4d65e1b5"
+    },
+    {
+      "native_address": "0x80023bc",
+      "source_symbol": "case_string_080023bc",
+      "bytes_including_NUL": 52,
+      "sha256": "668431b4f38e4fbe925f34ea88db6b7f28a0fd60dcbcf7c5aaa01754669a5b47"
+    },
+    {
+      "native_address": "0x8002468",
+      "source_symbol": "case_string_08002468",
+      "bytes_including_NUL": 38,
+      "sha256": "aee2bddf9fc31b81992001dbd142a9d51a5e9168fe49be662a78340921b1ec1b"
+    },
+    {
+      "native_address": "0x8002490",
+      "source_symbol": "case_string_08002490",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8002494",
+      "source_symbol": "case_string_08002494",
+      "bytes_including_NUL": 32,
+      "sha256": "a807d0c083525276da2042666bd82550814918b20899ff21b42ef9385f7be424"
+    },
+    {
+      "native_address": "0x8002534",
+      "source_symbol": "case_string_08002534",
+      "bytes_including_NUL": 38,
+      "sha256": "57231be1d84e15554782614523e2a4d95862782614b2fcdecb35122d530dcfce"
+    },
+    {
+      "native_address": "0x800255c",
+      "source_symbol": "case_string_0800255c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8002560",
+      "source_symbol": "case_string_08002560",
+      "bytes_including_NUL": 32,
+      "sha256": "0dce293a7d0a3c6f63b9d6312e7f955760dcb6f18f6e95d4ee7c8910f56d5de6"
+    },
+    {
+      "native_address": "0x80026c8",
+      "source_symbol": "case_string_080026c8",
+      "bytes_including_NUL": 23,
+      "sha256": "b1970cbe52ad77669be41b4f55b5885b4fc7255b7d9d2c0b9fced1414e3539d1"
+    },
+    {
+      "native_address": "0x80026e0",
+      "source_symbol": "case_string_080026e0",
+      "bytes_including_NUL": 31,
+      "sha256": "37176cfe9ca8a24b38e2d8362e46b66671d23cf0c2eaa8fdf7ac731c7a2381be"
+    },
+    {
+      "native_address": "0x8002700",
+      "source_symbol": "case_string_08002700",
+      "bytes_including_NUL": 25,
+      "sha256": "b62f1a07b69d83b11308e9897560acbe1a4b53c0cdfdea2fa68603872bcaa9e2"
+    },
+    {
+      "native_address": "0x800271c",
+      "source_symbol": "case_string_0800271c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8002720",
+      "source_symbol": "case_string_08002720",
+      "bytes_including_NUL": 33,
+      "sha256": "3c551be8eb44942d6de23ba4a458018420c73ed492fa28a5538e70f70cbf6620"
+    },
+    {
+      "native_address": "0x8002838",
+      "source_symbol": "case_string_08002838",
+      "bytes_including_NUL": 39,
+      "sha256": "468a276b2e73ce1cc2503ce6e5a637bcf50f7b8a71a7d15384437caf750255e6"
+    },
+    {
+      "native_address": "0x8002860",
+      "source_symbol": "case_string_08002860",
+      "bytes_including_NUL": 33,
+      "sha256": "e4d64f0d770c3b274064652171291616df5e507359c62f3736f53c333b86bd72"
+    },
+    {
+      "native_address": "0x8002884",
+      "source_symbol": "case_string_08002884",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8002b04",
+      "source_symbol": "case_string_08002b04",
+      "bytes_including_NUL": 53,
+      "sha256": "1bf3b690e5b7d5e4cd1efca1102acf0b88ffb8767cc499125c116b385f37caaa"
+    },
+    {
+      "native_address": "0x8002b3c",
+      "source_symbol": "case_string_08002b3c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8002c10",
+      "source_symbol": "case_string_08002c10",
+      "bytes_including_NUL": 28,
+      "sha256": "e4815988769a6392e265bcee13627e32228ae1e96914c099ff540fff5ac1d899"
+    },
+    {
+      "native_address": "0x8002c2c",
+      "source_symbol": "case_string_08002c2c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8002d1c",
+      "source_symbol": "case_string_08002d1c",
+      "bytes_including_NUL": 38,
+      "sha256": "13d769040a0e0285a3f778bb84ec5a567ddc2437d058cb1fa3c219773e182fcb"
+    },
+    {
+      "native_address": "0x8002d44",
+      "source_symbol": "case_string_08002d44",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8002dc8",
+      "source_symbol": "case_string_08002dc8",
+      "bytes_including_NUL": 53,
+      "sha256": "f5411b9acbe6bdb49cd48370fbf6b04c74dc4f9cc867b6304b425c2088a17b7c"
+    },
+    {
+      "native_address": "0x8002e00",
+      "source_symbol": "case_string_08002e00",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8002eb4",
+      "source_symbol": "case_string_08002eb4",
+      "bytes_including_NUL": 2,
+      "sha256": "075d3ddf5a3a826e13a92288e853bc4b2cb17fb05367ae865f401a4bb11f05ce"
+    },
+    {
+      "native_address": "0x8002ebc",
+      "source_symbol": "case_string_08002ebc",
+      "bytes_including_NUL": 27,
+      "sha256": "a3552ae400da9be89d380bebf8fe0d63e9c7dbbcdfcc55c8ed46880cb3dd05a1"
+    },
+    {
+      "native_address": "0x8002ed8",
+      "source_symbol": "case_string_08002ed8",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8003350",
+      "source_symbol": "case_string_08003350",
+      "bytes_including_NUL": 34,
+      "sha256": "3f0c99107405d9e96a95e3bdea7ec38d4d5e7b7f19948a1faa573eae376cc157"
+    },
+    {
+      "native_address": "0x8003374",
+      "source_symbol": "case_string_08003374",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800337f",
+      "source_symbol": "case_string_0800337f",
+      "bytes_including_NUL": 51,
+      "sha256": "66dc3ce31c6b05e08b9d2406513860aeb2e31cb573b55913fda7faac623edef6"
+    },
+    {
+      "native_address": "0x80033b4",
+      "source_symbol": "case_string_080033b4",
+      "bytes_including_NUL": 22,
+      "sha256": "6b7010562aa5608de8155600c980dbcefcfd76b9e59a40003c043f50f28094c3"
+    },
+    {
+      "native_address": "0x80033cc",
+      "source_symbol": "case_string_080033cc",
+      "bytes_including_NUL": 26,
+      "sha256": "db17bc1e31b09c0e566edceb267441e8457c895c414f8f762f31b7ec8173a078"
+    },
+    {
+      "native_address": "0x80033e8",
+      "source_symbol": "case_string_080033e8",
+      "bytes_including_NUL": 23,
+      "sha256": "d680237ff9af796b07bf959655bcf91b8ddf92787caee0dd8ab2fa5af16ef8f9"
+    },
+    {
+      "native_address": "0x8003400",
+      "source_symbol": "case_string_08003400",
+      "bytes_including_NUL": 43,
+      "sha256": "621a50953071075523f20ccf8993a0b92f3ec3f8b60a7359f87b1e53ddc68795"
+    },
+    {
+      "native_address": "0x8003437",
+      "source_symbol": "case_string_08003437",
+      "bytes_including_NUL": 23,
+      "sha256": "9174d0bcee51f3a067546ba3534084920faea1e94d78141fc94a61dde12f3032"
+    },
+    {
+      "native_address": "0x8003450",
+      "source_symbol": "case_string_08003450",
+      "bytes_including_NUL": 20,
+      "sha256": "aa3c3eaf70fe2bd6966d6a54fbc11cfb064ca6ce9a0f4bd40f57e44cf93fec86"
+    },
+    {
+      "native_address": "0x8003464",
+      "source_symbol": "case_string_08003464",
+      "bytes_including_NUL": 22,
+      "sha256": "4307e8646c0be68514f67c44efcdd473c48c5e79746cfab797781c14bdfa250b"
+    },
+    {
+      "native_address": "0x800347f",
+      "source_symbol": "case_string_0800347f",
+      "bytes_including_NUL": 33,
+      "sha256": "1733ca285f35c223cd61a3c69e684a420c12c1bab35295e9ca7c73e31f21357f"
+    },
+    {
+      "native_address": "0x80034a0",
+      "source_symbol": "case_string_080034a0",
+      "bytes_including_NUL": 50,
+      "sha256": "f2840f5baddef998ad693f602ec5dc6b95dcf214ef3e1277c5c13f834e3e4bb5"
+    },
+    {
+      "native_address": "0x80034d4",
+      "source_symbol": "case_string_080034d4",
+      "bytes_including_NUL": 22,
+      "sha256": "5a27633350d33122fdae46127c52dbb9fab3cbe965186d5dbabe3af0cbb9f95c"
+    },
+    {
+      "native_address": "0x80034ec",
+      "source_symbol": "case_string_080034ec",
+      "bytes_including_NUL": 50,
+      "sha256": "4fab0266c986e7dc009ee235c14eaedda18e988a16986d54ad7eb99ab48b1ef0"
+    },
+    {
+      "native_address": "0x8003520",
+      "source_symbol": "case_string_08003520",
+      "bytes_including_NUL": 27,
+      "sha256": "8a3aab49aae68485af2b038f0912b75d1a3eef61b01ac8b7c95d76579109af44"
+    },
+    {
+      "native_address": "0x800353c",
+      "source_symbol": "case_string_0800353c",
+      "bytes_including_NUL": 24,
+      "sha256": "4f5a301a4da07b12c68186cf8620f22b3be3ef23b011c710d0e8bb956669ecd7"
+    },
+    {
+      "native_address": "0x8003964",
+      "source_symbol": "case_string_08003964",
+      "bytes_including_NUL": 39,
+      "sha256": "417ecdf1b948889f0953b3eeb30344d3e7afb020b3e48ff1fa7f05d21489552e"
+    },
+    {
+      "native_address": "0x800398c",
+      "source_symbol": "case_string_0800398c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8003990",
+      "source_symbol": "case_string_08003990",
+      "bytes_including_NUL": 39,
+      "sha256": "6533ca0ebfa0919564a1871079bf86471817e9ab00c3d02b7c1aca5c0f82e5a0"
+    },
+    {
+      "native_address": "0x80039b8",
+      "source_symbol": "case_string_080039b8",
+      "bytes_including_NUL": 15,
+      "sha256": "182cf849feb75b43657a7fde9961b839a6f20f17420706641ae5cc05a9ea70a2"
+    },
+    {
+      "native_address": "0x8007148",
+      "source_symbol": "case_string_08007148",
+      "bytes_including_NUL": 20,
+      "sha256": "f1ebb544e9a76a5ac84e02524c850f7f5188b11557066b346356efd19ae271c3"
+    },
+    {
+      "native_address": "0x800715c",
+      "source_symbol": "case_string_0800715c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8007160",
+      "source_symbol": "case_string_08007160",
+      "bytes_including_NUL": 29,
+      "sha256": "9e8d2e021410b901a466dda99e8390d905c940ede6ca7f58eb5b2d9a919fdd30"
+    },
+    {
+      "native_address": "0x8007180",
+      "source_symbol": "case_string_08007180",
+      "bytes_including_NUL": 19,
+      "sha256": "4bd7988bf9bc672520cb94e30584f5941c664282867fd7bdc1b50fa2999a9d30"
+    },
+    {
+      "native_address": "0x8007194",
+      "source_symbol": "case_string_08007194",
+      "bytes_including_NUL": 31,
+      "sha256": "92a67e0376a3e0dfaa83ad5bcbb8a7d56402234bb2a3f1cd6bf9242d09e44d0e"
+    },
+    {
+      "native_address": "0x80071b4",
+      "source_symbol": "case_string_080071b4",
+      "bytes_including_NUL": 31,
+      "sha256": "074e779be2b17657af242ec2185db6367d4549401f20d3f0cdbca4dfe956c6d4"
+    },
+    {
+      "native_address": "0x80071d4",
+      "source_symbol": "case_string_080071d4",
+      "bytes_including_NUL": 44,
+      "sha256": "5b48b83a22ba78d740fc567a35b7c98384594fbdb8334a509ff83422dceadcf5"
+    },
+    {
+      "native_address": "0x80075f0",
+      "source_symbol": "case_string_080075f0",
+      "bytes_including_NUL": 23,
+      "sha256": "9671d4145010e73a6c13eb9148a87c1e119b4796fd30f655012e6a7d6881083e"
+    },
+    {
+      "native_address": "0x8007608",
+      "source_symbol": "case_string_08007608",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800761c",
+      "source_symbol": "case_string_0800761c",
+      "bytes_including_NUL": 31,
+      "sha256": "809f9063910b2c9c3ab9d4316cb1007b89017b77d1e68e4367be8b315a954f92"
+    },
+    {
+      "native_address": "0x800763c",
+      "source_symbol": "case_string_0800763c",
+      "bytes_including_NUL": 38,
+      "sha256": "9073758c72841ac9c6bf63d0ced9ba5c71b015644540a16a9849482d4157147c"
+    },
+    {
+      "native_address": "0x8007664",
+      "source_symbol": "case_string_08007664",
+      "bytes_including_NUL": 46,
+      "sha256": "e841ce09f8974766c8c3a80ea97d8609235154cc4a107224f40c0470d2f1f6f1"
+    },
+    {
+      "native_address": "0x8007694",
+      "source_symbol": "case_string_08007694",
+      "bytes_including_NUL": 38,
+      "sha256": "c8216b9f13d6928b72c600a96c453ea4eb7162cc8b738deb125b704c72673fea"
+    },
+    {
+      "native_address": "0x80076bc",
+      "source_symbol": "case_string_080076bc",
+      "bytes_including_NUL": 46,
+      "sha256": "f5e8c5e505435eadb32614190b81193ab8f815b6e4b3b1617f3a907dd1276252"
+    },
+    {
+      "native_address": "0x80076ec",
+      "source_symbol": "case_string_080076ec",
+      "bytes_including_NUL": 30,
+      "sha256": "d2efe1a45c82d7053699b1f88e541b58aaaca4e45eefaaf29916eaf1b0268aa9"
+    },
+    {
+      "native_address": "0x800770c",
+      "source_symbol": "case_string_0800770c",
+      "bytes_including_NUL": 33,
+      "sha256": "a72791681f095d8e7e9a3516288d64902de47d77bf8025d44becba380af107a9"
+    },
+    {
+      "native_address": "0x8007730",
+      "source_symbol": "case_string_08007730",
+      "bytes_including_NUL": 16,
+      "sha256": "5a2ad20f4080485a87439d01d13973d908df64c821c634bd1b1f6b3b15613265"
+    },
+    {
+      "native_address": "0x8007740",
+      "source_symbol": "case_string_08007740",
+      "bytes_including_NUL": 16,
+      "sha256": "9d0357be21f3958058765702217f6c9fdcf741dbe9094c99dbbb537da5de9d7f"
+    },
+    {
+      "native_address": "0x8007750",
+      "source_symbol": "case_string_08007750",
+      "bytes_including_NUL": 14,
+      "sha256": "d776df9b175c0eaf57bf8799adcc9bbb4f40a001dee48b5d462eabe8cecb138a"
+    },
+    {
+      "native_address": "0x8007760",
+      "source_symbol": "case_string_08007760",
+      "bytes_including_NUL": 32,
+      "sha256": "2da3fccaeff9e32da0dce4f178cffb00cc01a5ab5c7503b9b9ef3d1fbb95f526"
+    },
+    {
+      "native_address": "0x8007b50",
+      "source_symbol": "case_string_08007b50",
+      "bytes_including_NUL": 51,
+      "sha256": "dbb8d31a5a5ea243c12c563c41b0d1d3ef98ce781a6216d0fc0d0b3cd1b3959f"
+    },
+    {
+      "native_address": "0x8007b84",
+      "source_symbol": "case_string_08007b84",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8007b8c",
+      "source_symbol": "case_string_08007b8c",
+      "bytes_including_NUL": 36,
+      "sha256": "0087e22e856baf27826c25ae25eb4203ddf005c176d18197ee1666e52b792190"
+    },
+    {
+      "native_address": "0x8007bb0",
+      "source_symbol": "case_string_08007bb0",
+      "bytes_including_NUL": 64,
+      "sha256": "8c6b9324d66cb5cdb270c70e33c6da1d1a4c6d1fd287bab28a0d0ae68b08231a"
+    },
+    {
+      "native_address": "0x8007bf0",
+      "source_symbol": "case_string_08007bf0",
+      "bytes_including_NUL": 58,
+      "sha256": "286fb8bdc5bb520f20e3ab231d25d08851bdbbcbfc0a20e454212f8623934f38"
+    },
+    {
+      "native_address": "0x8007c2c",
+      "source_symbol": "case_string_08007c2c",
+      "bytes_including_NUL": 34,
+      "sha256": "6fbd985d2740c4911a8cbf84007f26714fcebe124f4467be529af86308996a23"
+    },
+    {
+      "native_address": "0x8007c50",
+      "source_symbol": "case_string_08007c50",
+      "bytes_including_NUL": 33,
+      "sha256": "bb74fd2a76c99df20b2072118f66d4dd5bcc05c79f068b9e3b2da8cdbcbdce61"
+    },
+    {
+      "native_address": "0x8007c74",
+      "source_symbol": "case_string_08007c74",
+      "bytes_including_NUL": 33,
+      "sha256": "ef0e15262a106d1e6265680013c719047e8f003ec3c78b85549aa4778fe36c67"
+    },
+    {
+      "native_address": "0x8007c98",
+      "source_symbol": "case_string_08007c98",
+      "bytes_including_NUL": 38,
+      "sha256": "9fb79dd759d1067cf2ddfaa9f585bc7937c8b00723b8f254b79fd102d654cd92"
+    },
+    {
+      "native_address": "0x8007cc0",
+      "source_symbol": "case_string_08007cc0",
+      "bytes_including_NUL": 38,
+      "sha256": "ffafde2d6d38f162c604dbdaa76b713ea7a7056e488e693587d7f18f8ed840c5"
+    },
+    {
+      "native_address": "0x8007ce8",
+      "source_symbol": "case_string_08007ce8",
+      "bytes_including_NUL": 34,
+      "sha256": "01d2caa03a3f1b0053feda64afd5b772598dea83643d921b9d05d3e159816ede"
+    },
+    {
+      "native_address": "0x8007d0c",
+      "source_symbol": "case_string_08007d0c",
+      "bytes_including_NUL": 34,
+      "sha256": "29de62eccb01d6a9338d65815a2329b9e533cfd666538e0e989cb778c16064a6"
+    },
+    {
+      "native_address": "0x8007d30",
+      "source_symbol": "case_string_08007d30",
+      "bytes_including_NUL": 43,
+      "sha256": "703063a600b76508fcfb2fcae7ec3e6fd22589160559d7ba0046ccaa37536955"
+    },
+    {
+      "native_address": "0x8007d5c",
+      "source_symbol": "case_string_08007d5c",
+      "bytes_including_NUL": 41,
+      "sha256": "3e73c56cd6712e49f1676780f265de4360b1f2f0fa8be8e1099f40e40194b9f6"
+    },
+    {
+      "native_address": "0x8007d88",
+      "source_symbol": "case_string_08007d88",
+      "bytes_including_NUL": 43,
+      "sha256": "edf225a5c0dc43ab01819c27add0502a139147e91d070cc905fe2543baafcf2e"
+    },
+    {
+      "native_address": "0x8007db4",
+      "source_symbol": "case_string_08007db4",
+      "bytes_including_NUL": 41,
+      "sha256": "d5928a2c0f76473bbd70c7df7a803461e796098039b425867885c216ffa66a75"
+    },
+    {
+      "native_address": "0x8007de0",
+      "source_symbol": "case_string_08007de0",
+      "bytes_including_NUL": 35,
+      "sha256": "cc980907e58fec4b8430113c0e0583059bb2f5c8cda0738bd0910dc3a39ef73e"
+    },
+    {
+      "native_address": "0x8007eec",
+      "source_symbol": "case_string_08007eec",
+      "bytes_including_NUL": 41,
+      "sha256": "4b5d09674fdcfe9b8cafa4cb25346482a993ff208dfdc98200f5e0b6930e1d39"
+    },
+    {
+      "native_address": "0x8007f18",
+      "source_symbol": "case_string_08007f18",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x80081a0",
+      "source_symbol": "case_string_080081a0",
+      "bytes_including_NUL": 31,
+      "sha256": "ab7495200128a9e04ec87205114451f890a044bd77c8ff6c5a0e6205b6ae16d2"
+    },
+    {
+      "native_address": "0x80081c0",
+      "source_symbol": "case_string_080081c0",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x80081cc",
+      "source_symbol": "case_string_080081cc",
+      "bytes_including_NUL": 40,
+      "sha256": "7e370f06e6ee949b832f6c839a745b72a9e190a43c3d69b5910c311942eaca54"
+    },
+    {
+      "native_address": "0x80081f4",
+      "source_symbol": "case_string_080081f4",
+      "bytes_including_NUL": 49,
+      "sha256": "2e7a74a9eb33f18fc06e4faf932de7cd667b14ecab14f369135d77cb16899221"
+    },
+    {
+      "native_address": "0x800822c",
+      "source_symbol": "case_string_0800822c",
+      "bytes_including_NUL": 26,
+      "sha256": "b56f1a7504fe34909523c1af6c7aad8e17c88d6da33ed487a3204f15a417a5ed"
+    },
+    {
+      "native_address": "0x8008254",
+      "source_symbol": "case_string_08008254",
+      "bytes_including_NUL": 29,
+      "sha256": "f2a29acdfb3261b044dd00df96f2355ad9a499c25ef8659e28d1e25919accd2d"
+    },
+    {
+      "native_address": "0x8008274",
+      "source_symbol": "case_string_08008274",
+      "bytes_including_NUL": 62,
+      "sha256": "ddc7126f84941fd59c6c985066060a0e199c75e5734a3311212065fb8c3928af"
+    },
+    {
+      "native_address": "0x80082b4",
+      "source_symbol": "case_string_080082b4",
+      "bytes_including_NUL": 55,
+      "sha256": "f6d922220dc564675fb4d727a05be5b4284e1acd54932b68c0d53ff06b623405"
+    },
+    {
+      "native_address": "0x80083bc",
+      "source_symbol": "case_string_080083bc",
+      "bytes_including_NUL": 47,
+      "sha256": "bb41ed3605f4c18beb9ab67a5f6106cc5787930b654874632cf8f3db35ccc006"
+    },
+    {
+      "native_address": "0x80083ec",
+      "source_symbol": "case_string_080083ec",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x80083f0",
+      "source_symbol": "case_string_080083f0",
+      "bytes_including_NUL": 45,
+      "sha256": "046ee77aed16675d4226f4479dc8c3fb57617be529b12a6ab9d7816a1753fdf0"
+    },
+    {
+      "native_address": "0x800916c",
+      "source_symbol": "case_string_0800916c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800983c",
+      "source_symbol": "case_string_0800983c",
+      "bytes_including_NUL": 64,
+      "sha256": "bd361f3fab125d1a1e201867b60f7fc3935c6b46002f44c647c4a1e06a98668f"
+    },
+    {
+      "native_address": "0x800987c",
+      "source_symbol": "case_string_0800987c",
+      "bytes_including_NUL": 55,
+      "sha256": "bce703920efc3418f56b77e60c4735374ff05d22575c044bb61a292b8266740d"
+    },
+    {
+      "native_address": "0x80098b8",
+      "source_symbol": "case_string_080098b8",
+      "bytes_including_NUL": 64,
+      "sha256": "281990f735e1dc357cd55f98a2d1af90b34f5fa773cebe2093ee51a7e0d18b56"
+    },
+    {
+      "native_address": "0x80098f8",
+      "source_symbol": "case_string_080098f8",
+      "bytes_including_NUL": 52,
+      "sha256": "254681305a8f324bdd8bbba49a804c5a8774431acbaef0a4edbd49b1a8c87cd3"
+    },
+    {
+      "native_address": "0x800992c",
+      "source_symbol": "case_string_0800992c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8009930",
+      "source_symbol": "case_string_08009930",
+      "bytes_including_NUL": 37,
+      "sha256": "299c5bfca995f6ee8d9092edbde29a39e644894926ad84fff94c12291e1a751d"
+    },
+    {
+      "native_address": "0x8009958",
+      "source_symbol": "case_string_08009958",
+      "bytes_including_NUL": 52,
+      "sha256": "0e61a147f4811add4f68ce95b788a39e050ed9baeb097b2ab6711241ab9da9c9"
+    },
+    {
+      "native_address": "0x800998c",
+      "source_symbol": "case_string_0800998c",
+      "bytes_including_NUL": 41,
+      "sha256": "3fffe0bb055df0887a79f2d8c3c945ccd74c3d80284a6d2886cb557028f0aa6b"
+    },
+    {
+      "native_address": "0x80099b8",
+      "source_symbol": "case_string_080099b8",
+      "bytes_including_NUL": 43,
+      "sha256": "c89835948d75beeb4df082cf74b310784466413870a9af7c454bda96e2bd2b8f"
+    },
+    {
+      "native_address": "0x8009b38",
+      "source_symbol": "case_string_08009b38",
+      "bytes_including_NUL": 37,
+      "sha256": "2e9d7f9fe6c1a4a860493a351b25709fd94c3a941dd5284a17d024e6fd76c8af"
+    },
+    {
+      "native_address": "0x8009b60",
+      "source_symbol": "case_string_08009b60",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8009c48",
+      "source_symbol": "case_string_08009c48",
+      "bytes_including_NUL": 38,
+      "sha256": "7507a68d61aeef239dcccef4418b710aed8a302d75b91e4c74164557f8cc070b"
+    },
+    {
+      "native_address": "0x8009c70",
+      "source_symbol": "case_string_08009c70",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8009c74",
+      "source_symbol": "case_string_08009c74",
+      "bytes_including_NUL": 37,
+      "sha256": "00ab1caa9f4f01cc17e01987258e47e9c1efcca3fcfed84ab5a0f23deca4ab32"
+    },
+    {
+      "native_address": "0x8009ca0",
+      "source_symbol": "case_string_08009ca0",
+      "bytes_including_NUL": 37,
+      "sha256": "4b86971993d44b86991c801d0eb1458014baf86d1db01ad8add0055d3da74ae6"
+    },
+    {
+      "native_address": "0x8009d30",
+      "source_symbol": "case_string_08009d30",
+      "bytes_including_NUL": 27,
+      "sha256": "6dcfb34896becf72bf570a1282ac4a92287ef31b4bb62d06b942ec0dfa31dd2b"
+    },
+    {
+      "native_address": "0x8009d4c",
+      "source_symbol": "case_string_08009d4c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8009d50",
+      "source_symbol": "case_string_08009d50",
+      "bytes_including_NUL": 30,
+      "sha256": "d1440a962e28bdedca6e8f599b74c3b2ed30f9f2030c8249eb46b16fae70c5ca"
+    },
+    {
+      "native_address": "0x8009dbc",
+      "source_symbol": "case_string_08009dbc",
+      "bytes_including_NUL": 10,
+      "sha256": "c9a93d18fd0399e21d9f65ad21911e0ef1f4bfbcd7ce628b1bcc39b04047e2b8"
+    },
+    {
+      "native_address": "0x8009dc8",
+      "source_symbol": "case_string_08009dc8",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x8009dcc",
+      "source_symbol": "case_string_08009dcc",
+      "bytes_including_NUL": 39,
+      "sha256": "0c8ed4ed7aa52d74ed5f898ae2e9641f0b58941f1bcb6ad120695912c3e558f4"
+    },
+    {
+      "native_address": "0x800a6dc",
+      "source_symbol": "case_string_0800a6dc",
+      "bytes_including_NUL": 46,
+      "sha256": "dbf10b77a2d5f8380ee08c7c2fd390c775795c1910833976b43d46a6753096b2"
+    },
+    {
+      "native_address": "0x800a70c",
+      "source_symbol": "case_string_0800a70c",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800a710",
+      "source_symbol": "case_string_0800a710",
+      "bytes_including_NUL": 42,
+      "sha256": "10e110826d7299f5ce5cf9ce87acde326036a38f0e04a4cb06372f04b59276ed"
+    },
+    {
+      "native_address": "0x800a74c",
+      "source_symbol": "case_string_0800a74c",
+      "bytes_including_NUL": 18,
+      "sha256": "e30760a8a38905994db3b97a1401171a018487a344a4d09b3de211098cee4a87"
+    },
+    {
+      "native_address": "0x800a760",
+      "source_symbol": "case_string_0800a760",
+      "bytes_including_NUL": 17,
+      "sha256": "87c2677dc368e22a27fbf7502c8e483f5354d0e7d6fb0d977a19b9e8113d53b1"
+    },
+    {
+      "native_address": "0x800a774",
+      "source_symbol": "case_string_0800a774",
+      "bytes_including_NUL": 17,
+      "sha256": "4c1cc713d600a98a64bd4068d911c3ec767fadacd7eacc90b2a91ad8ce687382"
+    },
+    {
+      "native_address": "0x800a788",
+      "source_symbol": "case_string_0800a788",
+      "bytes_including_NUL": 12,
+      "sha256": "b6f4bfc8259f2378ef8789d40d54aff0a45bb4210a4f308e2c698983de902903"
+    },
+    {
+      "native_address": "0x800b948",
+      "source_symbol": "case_string_0800b948",
+      "bytes_including_NUL": 61,
+      "sha256": "8a6df9fbe037eb98ad7c021fedcddb5a9fd0cdcfcdf613ec508c9af5cdb2a2f3"
+    },
+    {
+      "native_address": "0x800b988",
+      "source_symbol": "case_string_0800b988",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800b994",
+      "source_symbol": "case_string_0800b994",
+      "bytes_including_NUL": 11,
+      "sha256": "7ee6153594c91df7578a12a9ee9914e049c8376d6c83823d19e5549a7c52891a"
+    },
+    {
+      "native_address": "0x800b9a0",
+      "source_symbol": "case_string_0800b9a0",
+      "bytes_including_NUL": 5,
+      "sha256": "5651c7a11cdd58d46a8ee21029bf815332e3831bf0f081c2a9bc684b30e2927e"
+    },
+    {
+      "native_address": "0x800b9a8",
+      "source_symbol": "case_string_0800b9a8",
+      "bytes_including_NUL": 12,
+      "sha256": "819c509f4f494ff2c206e20a46d323d206bea71e935cc4f3f0666c22f403cca4"
+    },
+    {
+      "native_address": "0x800b9b4",
+      "source_symbol": "case_string_0800b9b4",
+      "bytes_including_NUL": 43,
+      "sha256": "df8614c4cdf2ab372b30ba9ec51c8af1cfc64fd8c819825744000d14ad440ac2"
+    },
+    {
+      "native_address": "0x800b9e4",
+      "source_symbol": "case_string_0800b9e4",
+      "bytes_including_NUL": 32,
+      "sha256": "3acd7a53b6a67eb3eb3634f47b579d71bce0bad66eeb6885c05a1a62c4124079"
+    },
+    {
+      "native_address": "0x800ba04",
+      "source_symbol": "case_string_0800ba04",
+      "bytes_including_NUL": 62,
+      "sha256": "6aa53d18be75515cd175e26af9496f43ab0877e5435fdb6334ab3ea91bd7fe13"
+    },
+    {
+      "native_address": "0x800bd10",
+      "source_symbol": "case_string_0800bd10",
+      "bytes_including_NUL": 45,
+      "sha256": "52889b701f2578afd94e7f365ed124f16f57e762bcac2e6cb9c42467e5fb6be7"
+    },
+    {
+      "native_address": "0x800bd40",
+      "source_symbol": "case_string_0800bd40",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800bd44",
+      "source_symbol": "case_string_0800bd44",
+      "bytes_including_NUL": 45,
+      "sha256": "e095ad32642999bb82a8141b31db4b56a65d90138d9229bd94cf1ba414e46d54"
+    },
+    {
+      "native_address": "0x800bd74",
+      "source_symbol": "case_string_0800bd74",
+      "bytes_including_NUL": 40,
+      "sha256": "543d70fbe4c39e1cd6978fd21a903b4cfdd7614bd34515164a0e25c88853cfbd"
+    },
+    {
+      "native_address": "0x800bda0",
+      "source_symbol": "case_string_0800bda0",
+      "bytes_including_NUL": 41,
+      "sha256": "89d6fe4fcced9c272a80e2fa60156165c3302eff26cdb657f28e121f1107012a"
+    },
+    {
+      "native_address": "0x800bdcc",
+      "source_symbol": "case_string_0800bdcc",
+      "bytes_including_NUL": 41,
+      "sha256": "9f9c8995546bf83862e279d3a0a04e22d236453721893991f1a385b54bb87ede"
+    },
+    {
+      "native_address": "0x800bdf8",
+      "source_symbol": "case_string_0800bdf8",
+      "bytes_including_NUL": 40,
+      "sha256": "5cce721b43b7472e04ea5bb81b6f650ce6e2d2819b10f51346cda15df9185696"
+    },
+    {
+      "native_address": "0x800be24",
+      "source_symbol": "case_string_0800be24",
+      "bytes_including_NUL": 39,
+      "sha256": "335eefc59c2fdc6ba7f4825868c5e1e968af8780f3675eddfddf17af7ed2997a"
+    },
+    {
+      "native_address": "0x800be4c",
+      "source_symbol": "case_string_0800be4c",
+      "bytes_including_NUL": 39,
+      "sha256": "48ba076e6f2a801942d2d460bb2400e576bd9c7d8243c15667ceb920f6f0c955"
+    },
+    {
+      "native_address": "0x800d100",
+      "source_symbol": "case_string_0800d100",
+      "bytes_including_NUL": 37,
+      "sha256": "d49a1c138c7171edd94f38ceb011d92a2669d717646865e8ca021f3b773e5f47"
+    },
+    {
+      "native_address": "0x800d128",
+      "source_symbol": "case_string_0800d128",
+      "bytes_including_NUL": 3,
+      "sha256": "426520180ee94ef36224225e32706bc9f2be242acf51bb23d69fea7e6d92a20a"
+    },
+    {
+      "native_address": "0x800d12c",
+      "source_symbol": "case_string_0800d12c",
+      "bytes_including_NUL": 37,
+      "sha256": "5f62a463efdfe4e9201b463fac9a37bfafd8bb0b151c2a89e59cf76d73d192a6"
+    },
+    {
+      "native_address": "0x800d1ac",
+      "source_symbol": "case_string_0800d1ac",
+      "bytes_including_NUL": 15,
+      "sha256": "4e6125d7a03ed9b4036d6dd6459643afb0a666b3c2290573166470ef09b75c05"
+    },
+    {
+      "native_address": "0x800d408",
+      "source_symbol": "case_string_0800d408",
+      "bytes_including_NUL": 76,
+      "sha256": "52d7a47bb6da9ad21a71ea5723db27471ff79f7d4cffd6be706dba501a3b5148"
+    },
+    {
+      "native_address": "0x800d4c0",
+      "source_symbol": "case_string_0800d4c0",
+      "bytes_including_NUL": 117,
+      "sha256": "2dcbf104cff42874b5b1abaa07bdc3eda92a893744e07b3bd7b87ef42013a563"
+    },
+    {
+      "native_address": "0x800d538",
+      "source_symbol": "case_string_0800d538",
+      "bytes_including_NUL": 109,
+      "sha256": "66159de3d659e59d5bb9fde72b7771027b58a717a6d38d07a9d2906a534222b1"
+    },
+    {
+      "native_address": "0x800d648",
+      "source_symbol": "case_string_0800d648",
+      "bytes_including_NUL": 70,
+      "sha256": "4c97095b77b35364153d6f3401e24831fa2b9cb6713d54582b1204feb7b89ed2"
+    },
+    {
+      "native_address": "0x800d690",
+      "source_symbol": "case_string_0800d690",
+      "bytes_including_NUL": 70,
+      "sha256": "e8b7b9d1190010416fb8afaf3b8f16375e7c6224593f6944793752627fcca5f3"
+    },
+    {
+      "native_address": "0x800d6d8",
+      "source_symbol": "case_string_0800d6d8",
+      "bytes_including_NUL": 83,
+      "sha256": "580a84b5c0bbc171f9b821d9b147a94d105bb55d1cc76ab2e69cde86534a36cd"
+    },
+    {
+      "native_address": "0x800d72c",
+      "source_symbol": "case_string_0800d72c",
+      "bytes_including_NUL": 66,
+      "sha256": "1278cfc338b702fbcc5b01f738ad6022b0ec5f0146f4933b3880c854418f2845"
+    },
+    {
+      "native_address": "0x800d770",
+      "source_symbol": "case_string_0800d770",
+      "bytes_including_NUL": 71,
+      "sha256": "61ec2a57373d26bcf9bfdf2413012547174b3f5f41e7a5c9d8ff0114a3c12f5f"
+    },
+    {
+      "native_address": "0x800d7b8",
+      "source_symbol": "case_string_0800d7b8",
+      "bytes_including_NUL": 109,
+      "sha256": "71dd767bb7e50b0fdf0f26ca5a22e3e7d1c6bafd3f0b361e7b57e0d13a905c51"
+    },
+    {
+      "native_address": "0x800d828",
+      "source_symbol": "case_string_0800d828",
+      "bytes_including_NUL": 109,
+      "sha256": "0dad16cef2b077d6242f144f167879cc2900a75745f8a8e1a2952304c15129b0"
+    }
+  ],
+  "string_source": {
+    "path": "g2/components/case/semantic_strings_candidate_20261011/case_semantic_strings.c",
+    "sha256": "884f4aea76299612e2695986ecbf2b91aad2fd23454396405d9db127dc0a56a9"
+  },
+  "limits": [
+    "Lexical literals within authenticated initialized RAM/SP envelope do not prove computed offsets, access widths, object extents, memory lifetime or physical SRAM capacity.",
+    "Native word occurrence is provenance evidence only; no code/data classification or coverage interval promotion.",
+    "Known39 root set is inherited, not a complete callback discovery proof.",
+    "String bytes agree with native addresses; caller interior offsets and argument contracts still require per-call evidence."
+  ]
+}

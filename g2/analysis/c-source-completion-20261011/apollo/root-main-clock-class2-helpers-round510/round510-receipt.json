@@ -1,0 +1,65 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 722,
+    "strong_unresolved_before": 722
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/clock_class2_helpers_candidates_20261013/helpers.c",
+      "sha256": "b507215ed2366e3f542cd04e909930d8d2b308846dbb1926596a57c4a81df24e"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/00480c56.c",
+      "sha256": "95f2cd0b519f006ed5f24bc7cf6d5a242ae072ee7db9dfd0528bcfd4aef0fe14"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c3d70.c",
+      "sha256": "84769780db1727b3e4c3a0db2ff58d9f44a8db3b72918eb4123fc95bf622ee02"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "05298191306c516cea4e6cf90a8a6d3e33e4e5aedb2e189e48dc39b5e9376990"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_class2_helpers.py",
+      "sha256": "c57819cae077b9d2d6c6d33bac395813d8edfe7263c4c609ff33f6235dade58b"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-class2-helpers-round510/oracle.json",
+      "sha256": "a8c5241e1f0f6540196d32cd0d40dbbe5a1b7d0d55ec67c5184117ed8218fa01"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-class2-helpers-round510/isolated/helpers.elf",
+      "sha256": "c9418edee219ba6e43a7f6dedfcb28c676d4bd555f20b700dad9bf757455ea35"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-class2-helpers-round510/receipt.json",
+      "sha256": "e1107ad2205aba1aa3e7987d1e3dd38d6abbe852278c451f124dcd50229915cd"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-class2-helpers-round510/apollo_main/candidate.o",
+      "sha256": "426864654f0b36d5c4c344cf5f9073a1d9e51e851930405446a18d2e9cd0ae53"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Critical-save and timeout wait intercepted; mode and state cleanup executed against synthetic SRAM/MMIO.",
+    "Class 2 acquire and mode-transition provider remain unresolved.",
+    "Physical clock transition and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x480c56",
+    "0x4c3d70"
+  ],
+  "native_source_oracle_cases": 245,
+  "provenance": "Main Ghidra pseudocode, locked native blob and mode-read plus timeout-cleanup native/source comparison",
+  "schema": "opencfw-source-provider-receipt-v1",
+  "source_bodies": [
+    "g2_main_clock_mode_read_480c56",
+    "g2_main_clock_timeout_cleanup_4c3d70"
+  ],
+  "status": "provider_bodies_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

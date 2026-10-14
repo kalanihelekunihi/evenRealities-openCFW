@@ -1,0 +1,55 @@
+{
+  "archive_compiled_count": 61,
+  "archive_duplicate_strong_globals": {},
+  "archive_source_count": 61,
+  "archive_strong_imports": [
+    "touch_generated_lp_history"
+  ],
+  "candidate_compilation_passed": true,
+  "component": "touch",
+  "evidence": [
+    {
+      "path": "g2/components/touch/reset_layout_candidate_20261010/reset_generated_widget_config.c",
+      "sha256": "42d35aeb87ec575f3f1199f08fa517e818c868af852c4758794102b14a184ea8"
+    },
+    {
+      "path": "g2/components/touch/source_candidate_20261010/build.py",
+      "sha256": "254630e25b1a5861104ea290e52b00ba0459865c172db17fd23b698f128565b1"
+    },
+    {
+      "path": "g2/components/touch/source_candidate_20261010/build/touch-source-candidate.a",
+      "sha256": "83023794c33a2040bfaae96bd48d612035dde1fe0f61a47a30d04714b1252e59"
+    },
+    {
+      "path": "g2/components/touch/source_candidate_20261010/build/receipt.json",
+      "sha256": "f45718b3921402e2d4d5917cef23e91979aab6e0ef16978dad27bc390d1c5af3"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-touch-widget-round445-final/receipt.json",
+      "sha256": "ffa25aa156fd5377488f2c35b654452a7a27a5d688249aff4ea10dd27d0b4e68"
+    },
+    {
+      "path": "g2/firmware_c/source-gates.json",
+      "sha256": "bfebd35ebddfc2d70ad59fa8efbe67cc0741b57e6db736be1fb2db1b5b264254"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/generate_product_widget_c.py",
+      "sha256": "687c7ec209fe2b283573a49af6cdedab32532965a42f81a6055a73f96a7f9a97"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/v5_typed_widget_candidate.bin",
+      "sha256": "27ef6582ee031179cdfb25d6e091b0be3f869c1ac1e73eb7f58ebaf2ef8022ce"
+    }
+  ],
+  "full_image_source_complete": false,
+  "limits": [
+    "Authored widget table reproduces stock bytes at fixed addresses; final linker placement and product generator provenance remain unproven.",
+    "LP history array allocation extent is not inferred from adjacent RAM gap.",
+    "No hardware validation or full Touch image exists."
+  ],
+  "locked_widget_span_sha256": "27ef6582ee031179cdfb25d6e091b0be3f869c1ac1e73eb7f58ebaf2ef8022ce",
+  "remaining_work_estimate": "Touch: one strong LP history import plus product generator/layout and final image composition. Complete images 0/6.",
+  "schema": "opencfw-touch-widget-source-round445-v1",
+  "source_commit_reference": "a4aa9306f7e4323994902f0baf5b1570ffbbfe59",
+  "status": "completed_bounded"
+}

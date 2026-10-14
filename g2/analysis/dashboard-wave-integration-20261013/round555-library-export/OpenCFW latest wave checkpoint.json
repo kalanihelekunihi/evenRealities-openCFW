@@ -1,0 +1,46 @@
+{
+  "round": 555,
+  "status": "PASS_BACKEND_CLOSE_REAL_NO_SPACE_CONNECTED_BOUNDED",
+  "component": "Apollo audio LittleFS metadata traversal driving allocator no-space result",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "One synthetic valid directory with 16 CTZ entries causes real native and C traversal to mark blocks 7 through 22 used and return -28 with no erase in connected backend close",
+  "case_count": 1515,
+  "joined_c_functions": 39,
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_real_no_space_connected.py",
+      "sha256": "38870283fe810e029cc86285ff2528dd79fb8b816508647d2a78b34e94386f8e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/backend-close-real-no-space-connected-results.json",
+      "sha256": "01b61aa28b2014e12f3667a54ba44353b64c4d3589efa4ad4e8055da887d8f0b"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/fs_traverse.c",
+      "sha256": "605868dcc278cff426e64f65eb83a24b1021908c5d2c04f687ebf444e287bc7a"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/dir_fetch.c",
+      "sha256": "dfc4522e0e6c590c8d12a3b8d08a55088ad89c65a1fbf9c06c0e2592bf61e637"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/dir_getslice.c",
+      "sha256": "1f8fff2be2c3b2b20cd62859c274e7d93b4f72dccd335fa3f2d5375e349ad4dc"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/ctz_traverse.c",
+      "sha256": "776bac762ee5e6dbe786a96ada52725fe71c027a38a3b676aa974df408e5e929"
+    }
+  ],
+  "remaining_estimate": {
+    "filesystem_traversal": "Mixed metadata, longer CTZ links, open-file traversal, child error propagation and real storage callbacks remain. Roughly 35-50 percent of traversal integration remains.",
+    "whole_g2_firmware": "0 of 6 image components source-complete; latest Main experimental build had 720 unresolved symbols. No source manifest change this round."
+  },
+  "limits": "Directory block and flash callback are synthetic; no physical storage, boot or G2 hardware proof.",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-audio-close-real-no-space-connected-round555/round555-receipt.json",
+    "sha256": "e9889302c2eeaca1ffa79dc54d27a8d87d525b7a75a83798b39313987d8ea78c"
+  },
+  "publication_scope": "Body-receipt evidence only; native/C metadata traversal drives bounded no-space result using synthetic directory/flash; component incomplete; percentage is producer estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

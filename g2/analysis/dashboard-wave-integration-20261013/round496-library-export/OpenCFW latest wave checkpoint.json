@@ -1,0 +1,65 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_transfer_symbol_unresolved": true,
+    "source_complete": false,
+    "strong_unresolved_after": 731,
+    "strong_unresolved_before": 731
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_transfer_control_candidates_20261013/control.c",
+      "sha256": "4b5048d689b8ceab02a5afb3800420496681f7a36756c0c3c7a6389f786077a8"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c0f78.c",
+      "sha256": "d8e0107aba4402bb7d24dc123bbbf28a102d9e3d3d64a387b29f5d0ff04882d3"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "81c2f42538013b6da6d9534ea32f078bb7f1f78a492c7f342f7e602b69880d6e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_transfer_control.py",
+      "sha256": "18eba5f6763ec137c10a1a876874f3188eb0532e17f679d2c844ea4936a35c0d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-control-round496/oracle.json",
+      "sha256": "b8389e597156aa81c3bb31204f32a5661152c709fb87666c226e6260c818fd62"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-control-round496/isolated/control.elf",
+      "sha256": "1750c92c80fc5d629b2d1c1010dd3df327c955bddfb2994af1f7ef39f28b71f1"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-control-round496/receipt.json",
+      "sha256": "575c65f1153e23c198d28a41fa4e562d3348214b01beedad784b670d2d0b820b"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-control-round496/apollo_main/candidate.o",
+      "sha256": "d6620bc443328bf5b3257c22c5f9692eedcb7b9f1560ca6a5d4c439fb7cdd976"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Selectors 21 through 23 and 35 through 39 are source-owned; full 0x4c0f78 remains unresolved.",
+    "Synthetic SRAM/MMIO cannot establish physical MSPI operation or a complete Main image."
+  ],
+  "native_entrypoints": [
+    "0x4c0f78 selectors 21-23 and 35-39"
+  ],
+  "native_source_oracle_cases": 512,
+  "provenance": "Main Ghidra pseudocode, locked native blob and selector-specific native/source MMIO and handle comparison",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_main_mspi_transfer_control_candidate"
+  ],
+  "status": "bounded_branches_verified",
+  "target_id": "official-s200-v2.2.6.10",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-control-round496/round496-receipt.json",
+    "sha256": "a6ad40f43046ee604e4b067855b246cce7a94c9d932942ede9a6c2293706f89a"
+  },
+  "publication_scope": "Body-receipt evidence only; bounded selectors21-23/35-39; no completed-wave canonical identity inferred; no map/image promotion"
+}

@@ -1,0 +1,236 @@
+{
+  "added_imports": [],
+  "alias_manifest": {
+    "path": "g2/firmware_c/experimental-link-aliases.json",
+    "sha256": "6e99d6b4b48948c5512f5a4936ea6100d9ac2ecba6fabc8d690e6896093c8f7c"
+  },
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/receipt.json",
+    "sha256": "4e52436336b18f3885fa03e7026ec658f925f25987d2504d991442c06463ea29"
+  },
+  "builder": {
+    "path": "g2/firmware_c/build.py",
+    "sha256": "d4581289d2b97b9bac81cc922d992180f0f87240bf5a89fb69bf8a40515df226"
+  },
+  "definitions": 4003,
+  "duplicate_strong_symbols": 0,
+  "generic_sources": [
+    {
+      "path": "third-party/upstream/nationalchip-lvp-kws/utility/libc/memchr.c",
+      "sha256": "c9a729586fe7526765e383b4809321e46ecd4fa21df933b96e4d2b1edeade444"
+    },
+    {
+      "path": "third-party/upstream/nationalchip-lvp-kws/utility/libc/memmove.c",
+      "sha256": "f543804ab1354d0ec5725c215fdcd7b71c0acfdadf19806a6d9422802723e873"
+    },
+    {
+      "path": "third-party/upstream/nationalchip-lvp-kws/utility/libc/strcmp.c",
+      "sha256": "bae09fdd3fd9309f6a270b54cab6ec204993cadac887403774d845dfbea789c1"
+    },
+    {
+      "path": "third-party/upstream/nationalchip-lvp-kws/utility/libc/strcpy.c",
+      "sha256": "d9fafbaca61c43cc3755238f5914cbe8a5b2417dd93e31a74bf1812978d2531f"
+    }
+  ],
+  "image": "apollo_main",
+  "imports": 726,
+  "limits": [
+    "Portable pinned C bodies are generic provider semantics, not verified stock Main implementations",
+    "Bounded comparison join is selected native-derived C; full runtime integration remains unproven",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "manifest": {
+    "path": "g2/firmware_c/experimental-sources.json",
+    "sha256": "54cd5bd94d6b9e6f7f2515bb0a7b10cc0f949ceb7f4c1b991144906907084dad"
+  },
+  "removed_imports": [
+    "memchr",
+    "memmove",
+    "strcmp",
+    "strcpy",
+    "strncmp"
+  ],
+  "selected_strncmp_source": {
+    "path": "g2/components/audio/uart_thread_source_candidate/l2c_log_helpers.c",
+    "sha256": "7d28c2e880931a94fe4e3f10ece91c27452563931c04008b376f51e989cd651f"
+  },
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/root-source-audit.json",
+    "sha256": "b035f7bb908da91bfb01a422dede036713bb4c745b61ac8367c67458ea3c0f38"
+  },
+  "source_compile_receipts": [
+    {
+      "argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m55",
+        "-mthumb",
+        "-mfpu=fpv5-sp-d16",
+        "-mfloat-abi=softfp",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-162.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libc/memchr.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-162.o"
+      ],
+      "compile_source_snapshot": {
+        "path": "third-party/upstream/nationalchip-lvp-kws/utility/libc/memchr.c",
+        "sha256_after": "c9a729586fe7526765e383b4809321e46ecd4fa21df933b96e4d2b1edeade444",
+        "sha256_before": "c9a729586fe7526765e383b4809321e46ecd4fa21df933b96e4d2b1edeade444",
+        "stable_during_command": true
+      },
+      "header_inputs": {
+        "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include/string.h": "61160adf922713218cf8b826dabd8f33995ade46befc0bfc068c23fe42419513",
+        "third-party/upstream/nationalchip-lvp-kws/utility/libc/memchr.c": "c9a729586fe7526765e383b4809321e46ecd4fa21df933b96e4d2b1edeade444"
+      },
+      "log": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-162.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "object": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-162.o",
+      "object_sha256": "fea33ecaa917deded227eb91f112b109c0db97764265e92f0a24a2f23b8fdeff",
+      "process_returncode": 0,
+      "returncode": 0,
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libc/memchr.c",
+      "source_sha256": "c9a729586fe7526765e383b4809321e46ecd4fa21df933b96e4d2b1edeade444",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    },
+    {
+      "argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m55",
+        "-mthumb",
+        "-mfpu=fpv5-sp-d16",
+        "-mfloat-abi=softfp",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-163.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libc/memmove.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-163.o"
+      ],
+      "compile_source_snapshot": {
+        "path": "third-party/upstream/nationalchip-lvp-kws/utility/libc/memmove.c",
+        "sha256_after": "f543804ab1354d0ec5725c215fdcd7b71c0acfdadf19806a6d9422802723e873",
+        "sha256_before": "f543804ab1354d0ec5725c215fdcd7b71c0acfdadf19806a6d9422802723e873",
+        "stable_during_command": true
+      },
+      "header_inputs": {
+        "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include/string.h": "61160adf922713218cf8b826dabd8f33995ade46befc0bfc068c23fe42419513",
+        "third-party/upstream/nationalchip-lvp-kws/utility/libc/memmove.c": "f543804ab1354d0ec5725c215fdcd7b71c0acfdadf19806a6d9422802723e873"
+      },
+      "log": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-163.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "object": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-163.o",
+      "object_sha256": "139a37f84124c759420b8bdaf69cb30c8e9bac6a4edfd356fbaf5f31a212adce",
+      "process_returncode": 0,
+      "returncode": 0,
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libc/memmove.c",
+      "source_sha256": "f543804ab1354d0ec5725c215fdcd7b71c0acfdadf19806a6d9422802723e873",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    },
+    {
+      "argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m55",
+        "-mthumb",
+        "-mfpu=fpv5-sp-d16",
+        "-mfloat-abi=softfp",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-164.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libc/strcmp.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-164.o"
+      ],
+      "compile_source_snapshot": {
+        "path": "third-party/upstream/nationalchip-lvp-kws/utility/libc/strcmp.c",
+        "sha256_after": "bae09fdd3fd9309f6a270b54cab6ec204993cadac887403774d845dfbea789c1",
+        "sha256_before": "bae09fdd3fd9309f6a270b54cab6ec204993cadac887403774d845dfbea789c1",
+        "stable_during_command": true
+      },
+      "header_inputs": {
+        "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include/string.h": "61160adf922713218cf8b826dabd8f33995ade46befc0bfc068c23fe42419513",
+        "third-party/upstream/nationalchip-lvp-kws/utility/libc/strcmp.c": "bae09fdd3fd9309f6a270b54cab6ec204993cadac887403774d845dfbea789c1"
+      },
+      "log": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-164.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "object": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-164.o",
+      "object_sha256": "ac062732f41a6294dc0977b5357cfbd6281af4e2a7f3d4e530f89a447bbb6871",
+      "process_returncode": 0,
+      "returncode": 0,
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libc/strcmp.c",
+      "source_sha256": "bae09fdd3fd9309f6a270b54cab6ec204993cadac887403774d845dfbea789c1",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    },
+    {
+      "argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m55",
+        "-mthumb",
+        "-mfpu=fpv5-sp-d16",
+        "-mfloat-abi=softfp",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-165.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libc/strcpy.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-165.o"
+      ],
+      "compile_source_snapshot": {
+        "path": "third-party/upstream/nationalchip-lvp-kws/utility/libc/strcpy.c",
+        "sha256_after": "d9fafbaca61c43cc3755238f5914cbe8a5b2417dd93e31a74bf1812978d2531f",
+        "sha256_before": "d9fafbaca61c43cc3755238f5914cbe8a5b2417dd93e31a74bf1812978d2531f",
+        "stable_during_command": true
+      },
+      "header_inputs": {
+        "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include/string.h": "61160adf922713218cf8b826dabd8f33995ade46befc0bfc068c23fe42419513",
+        "third-party/upstream/nationalchip-lvp-kws/utility/libc/strcpy.c": "d9fafbaca61c43cc3755238f5914cbe8a5b2417dd93e31a74bf1812978d2531f"
+      },
+      "log": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-165.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "object": "g2/build/c-firmware/20261013/peripherals-root-generic-libc-round430/apollo_main/experimental-165.o",
+      "object_sha256": "520653883e135a62d8c73d23e174c5789dea878f618bef9dae30aaca0a8e7551",
+      "process_returncode": 0,
+      "returncode": 0,
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libc/strcpy.c",
+      "source_sha256": "d9fafbaca61c43cc3755238f5914cbe8a5b2417dd93e31a74bf1812978d2531f",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    }
+  ],
+  "status": "PASS_EXPERIMENTAL_GENERIC_LIBC_CLOSURE"
+}

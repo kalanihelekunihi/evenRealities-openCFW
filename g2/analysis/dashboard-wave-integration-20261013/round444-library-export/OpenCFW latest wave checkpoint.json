@@ -1,0 +1,68 @@
+{
+  "build": {
+    "candidate_c_compiled": true,
+    "compiled_rodata_matches_locked_span": true,
+    "full_payload_linked": false
+  },
+  "completed_utc": "2026-10-13T22:55:06.657828+00:00",
+  "component": "touch",
+  "implementation_delta": {
+    "experimental_c_data_objects": 1,
+    "native_records_byte_identical": 3,
+    "selected_source_changes": 0,
+    "source_submodule_checkouts": 1
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Candidate remains experimental and uses fixed stock address values.",
+    "Exact source version, product generated configuration, final placement and hardware behavior are not proven."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Typed widget selected-source integration",
+      "LP history import",
+      "Final Touch image; 0/6 complete images"
+    ],
+    "reason": "Integrate product-owned widget source with evidence and resolve LP history"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/build_v5_typed_widget_candidate.py",
+      "sha256": "26938dfda1d3c14279cf91057c1b60e66e7c08e62f130ec75adca3af44a7276e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/v5_typed_widget_candidate.c",
+      "sha256": "d59551acf86a4e8297ff5d8706251068de1922d91d90a4683743e1804f1cd9eb"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/v5_typed_widget_candidate.o",
+      "sha256": "62acc2bced7bd27049741ec6043d9511ad289ec196f064714907b8101b5c7ae3"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/v5_typed_widget_candidate.bin",
+      "sha256": "27ef6582ee031179cdfb25d6e091b0be3f869c1ac1e73eb7f58ebaf2ef8022ce"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/v5-typed-widget-candidate-receipt.json",
+      "sha256": "be6d0e9c9b17b3976929830777aa3f7519246a98fb16c125f8cdba9fd62087a3"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/v5-typed-widget-wave-receipt.json",
+      "sha256": "ea6da1679831cbbac7e12fe4451c4908daa6dc009f07a7ef6c7e4e99e16d8b9c"
+    }
+  ],
+  "wave_id": "root-touch-round444-typed-widget-candidate",
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/touch/root-v11-widget-layout-round443/dashboard-wave-round444/wave.json",
+    "sha256": "61965fbc6ceb3338486357570211b81872142f092d702c039069c3d6eb816e50"
+  },
+  "publication_scope": "Experimental bounded Touch typed-widget candidate; full image incomplete; round441 seal remains blocked; no map/image promotion"
+}

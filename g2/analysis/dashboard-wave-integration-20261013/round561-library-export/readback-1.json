@@ -1,0 +1,45 @@
+{
+  "round": 561,
+  "status": "PASS_DISPLAY_RUNTIME_STORAGE_SOURCE_OWNED",
+  "component": "Apollo display runtime state",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Six contiguous zero-initialized display runtime words at native RAM 0x200744cc..0x200744e0 are source-owned; seven names resolve through one verified alias.",
+  "new_c_source": "g2/components/audio/uart_thread_source_candidate/display_runtime_state.c",
+  "build": {
+    "candidate_compilation_passed": true,
+    "unresolved_symbols": 692,
+    "previous_unresolved_symbols": 699,
+    "duplicate_strong_symbols": [],
+    "source_complete": false
+  },
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_display_runtime_storage.py",
+      "sha256": "25a8cbc58265e1398dbe3b649b8d678e948cff4387043549319feb9929b04692"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/display-runtime-storage-results.json",
+      "sha256": "88329cb653276e722b52771e4c47205c929bb4299b0ad7ea1fef0b600e94b7bc"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_runtime_state.c",
+      "sha256": "1283fa694377dc6270f96383acfee82defa6bf4d67cfcc4fc92a8320a76556eb"
+    },
+    {
+      "path": "g2/build/c-firmware/root-round561/receipt.json",
+      "sha256": "5040766af23cc9d8b99fc9c040aed0203c4fe8155cb274fa529ee920ab89aa38"
+    }
+  ],
+  "remaining_estimate": {
+    "display_runtime_storage": "Initial zero ownership and C alias complete for these six words; final absolute placement and later initialization/runtime paths remain, roughly 45-60 percent of this component.",
+    "apollo_main": "692 unresolved symbols remain, plus linker/layout and whole-path behavior gates.",
+    "whole_g2_firmware": "0 of 6 image components source-complete."
+  },
+  "limits": "Relocatable C ownership only; no final RAM linker placement, boot or hardware proof.",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-display-runtime-storage-round561/round561-receipt.json",
+    "sha256": "1f032f13575c5ca3fa2958d31a64f586f244c8df5993ffe1dd8d735c560f2857"
+  },
+  "publication_scope": "Body-receipt evidence only; six display runtime BSS words/seven names with alias; final placement/runtime/component unqualified; percentage is producer estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

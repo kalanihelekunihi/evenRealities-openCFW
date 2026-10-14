@@ -1,0 +1,90 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_payload_linked": false,
+    "strong_unresolved_symbols": 725
+  },
+  "completed_utc": "2026-10-14T00:47:16.759535+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "bounded_native_source_cases": 841,
+    "source_owned_mspi_configure_completed": 1,
+    "source_owned_mspi_finish_completed": 1
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Clock route, release/acquire and auxiliary hardware helpers remain unresolved and were intercepted in synthetic comparisons.",
+    "Synthetic MMIO/SRAM checks do not establish physical MSPI operation or a complete Main image."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Main MSPI clock route and clock release/acquire providers",
+      "Main MSPI configure auxiliary 0x4bfed6",
+      "Main MSPI transfer 0x4c0f78",
+      "Remaining Main graph and five other image graphs; 0/6 complete"
+    ],
+    "reason": "Close the newly exposed MSPI hardware helper graph and remaining transfer path"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/components/main/mspi_configure_candidates_20261013/configure.c",
+      "sha256": "90b41fc71f5d2bd6c398e3418f9f21e3227a604c99825348c9a65c41905f0051"
+    },
+    {
+      "path": "g2/components/main/mspi_configure_finish_candidates_20261013/finish.c",
+      "sha256": "80d98831000a6b3a4b8d16bbef8780eb0a16a884a725b7b0ffa7db4c739f6cee"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c099c.c",
+      "sha256": "728605c99027350a33c65d292071964cdae009de8c2a667e764952efe1870339"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c07d0.c",
+      "sha256": "00dfa44ad484c125513ec92bc804c270701adc663aa75628f8c6d0213d5a1ca5"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "8dee43ca060044a922c8d572e11bca31389fd40fdff13c9fed133c5cd2b81a5b"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_configure.py",
+      "sha256": "4a2daf5da790c95f601841194325bb736b040fcb4eabd7d8e6497cc85ce541a1"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_configure_finish.py",
+      "sha256": "39dee1d005e38b69583b67dfdf215f7a78422c7b4d4d31440ef2efd687577d9b"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-configure-round485/configure-oracle.json",
+      "sha256": "d36332c823785bc7bcda5aa36b6fa820343b81408a07ce0fc09b332bfd81a766"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-configure-round485/finish-oracle.json",
+      "sha256": "3c0eab4defa5c8cf2db642c6b46731901b9053727376f2c07449037da4aa5ae0"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-configure-round485/isolated/configure.elf",
+      "sha256": "66572e2946f59efa131bd6744af5dd6db408abfa5fae1fc686af28b2d4d1bff1"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-configure-round485/isolated-finish/finish.elf",
+      "sha256": "2641dee1cd50252356e42e60daf2ba7e77810ef72aa7d40098f88a8eb58d0d57"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-configure-finish-round485/receipt.json",
+      "sha256": "54179fe15db235a78e4890a3db57f3a153c359afcf44ea76a258683e858e7f16"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-configure-finish-round485/apollo_main/candidate.o",
+      "sha256": "4c38ec4ed4ad11d3310cb0de055abcd390d23ec4a46c3195b56ae33c6835ba21"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-configure-round485/round485-receipt.json",
+      "sha256": "9959ffbc2dfa686227b4e4fc387525423a7f98d273dd09f13e11de17bfe2b91d"
+    }
+  ],
+  "status": "completed"
+}

@@ -1,0 +1,192 @@
+{
+  "status": "CONTROLLER_CAPABILITY_PROBE_COMPLETE",
+  "QEMU_sha256": "121d02f5d368300139d1ae21dc75595b434d7b6318c221b23886fdb28aecd876",
+  "results": [
+    {
+      "machine": "microbit",
+      "command": [
+        "/opt/homebrew/bin/qemu-system-arm",
+        "-machine",
+        "microbit",
+        "-S",
+        "-display",
+        "none",
+        "-monitor",
+        "none",
+        "-serial",
+        "none",
+        "-nodefaults",
+        "-qmp",
+        "stdio",
+        "-global",
+        "nrf51-soc.flash-size=134479872"
+      ],
+      "greeting": {
+        "QMP": {
+          "version": {
+            "qemu": {
+              "micro": 2,
+              "minor": 1,
+              "major": 11
+            },
+            "package": ""
+          },
+          "capabilities": [
+            "oob"
+          ]
+        }
+      },
+      "capabilities": {
+        "return": {}
+      },
+      "properties": [
+        {
+          "path": "/machine/nrf51",
+          "type": "child<nrf51-soc>"
+        },
+        {
+          "path": "/machine/nrf51",
+          "property": "sram-size",
+          "value": {
+            "return": 16384
+          }
+        },
+        {
+          "path": "/machine/nrf51",
+          "property": "flash-size",
+          "value": {
+            "return": 134479872
+          }
+        },
+        {
+          "path": "/machine/nrf51/nvm",
+          "type": "child<nrf51_soc.nvm>"
+        },
+        {
+          "path": "/machine/nrf51/nvm",
+          "property": "flash-size",
+          "value": {
+            "return": 134479872
+          }
+        },
+        {
+          "path": "/machine/nrf51/nvm/nrf51_soc.flash[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nvm/nrf51_soc.uicr[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nvm/nrf51_soc.ficr[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nvm/nrf51_soc.nvmc[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/rng",
+          "type": "child<nrf51_soc.rng>"
+        },
+        {
+          "path": "/machine/nrf51/rng/nrf51_soc.rng[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/gpio",
+          "type": "child<nrf51_soc.gpio>"
+        },
+        {
+          "path": "/machine/nrf51/gpio/nrf51_soc.gpio[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/timer[0]",
+          "type": "child<nrf51_soc.timer>"
+        },
+        {
+          "path": "/machine/nrf51/timer[0]/nrf51_soc.timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nrf51.sram[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/timer[1]",
+          "type": "child<nrf51_soc.timer>"
+        },
+        {
+          "path": "/machine/nrf51/timer[1]/nrf51_soc.timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/timer[2]",
+          "type": "child<nrf51_soc.timer>"
+        },
+        {
+          "path": "/machine/nrf51/timer[2]/nrf51_soc.timer[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/uart",
+          "type": "child<nrf51_soc.uart>"
+        },
+        {
+          "path": "/machine/nrf51/uart/nrf51_soc.uart[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/nrf51-container[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m",
+          "type": "child<armv7m>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m",
+          "property": "cpu-type",
+          "value": {
+            "return": "cortex-m0-arm-cpu"
+          }
+        },
+        {
+          "path": "/machine/nrf51/armv6m/armv7m-container[0]",
+          "type": "child<memory-region>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/nvic",
+          "type": "child<armv7m_nvic>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/cpu",
+          "type": "child<cortex-m0-arm-cpu>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/systick-reg-ns",
+          "type": "child<armv7m_systick>"
+        },
+        {
+          "path": "/machine/nrf51/armv6m/systick-reg-ns/cpuclk",
+          "type": "child<clock>"
+        },
+        {
+          "path": "/machine/nrf51/nrf51_soc.clock[0]",
+          "type": "child<memory-region>"
+        }
+      ],
+      "status": "SUSPENDED_QMP_READ_COMPLETE",
+      "stderr": "qemu-system-arm: terminating on signal 15 from pid 38097 (<unknown process>)\n"
+    }
+  ],
+  "limits": [
+    "Suspended empty machines only; no firmware/image/device access or hardware operation",
+    "Different board peripherals are not CASE hardware validation; CPU/memory compatibility must be established before execution"
+  ]
+}

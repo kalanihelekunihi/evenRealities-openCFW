@@ -1,0 +1,455 @@
+{
+  "status": "PASS_8_OMITTED_KNOWN_ROOT_CODE_DATA_REVIEWS",
+  "known_roots": 39,
+  "omitted_root_entries": 8,
+  "reviewed_roots": [
+    {
+      "native_entry": "0x80000b8",
+      "source_symbol": "case_startup_entry_00b8",
+      "code_span": [
+        "0x80000b8",
+        "0x80000c4"
+      ],
+      "code_sha256": "99bad947bdf008a9edb996c8d5791c48f5cd17a9e8eceb5fb4ebf2594fdc9256",
+      "literal_spans": [
+        [
+          "0x80000c4",
+          "0x80000cc"
+        ]
+      ],
+      "literal_loads": [
+        {
+          "PC": "0x80000b8",
+          "literal_address": "0x80000c8",
+          "value": "0x20002c88"
+        },
+        {
+          "PC": "0x80000c0",
+          "literal_address": "0x80000c4",
+          "value": "0x800a599"
+        }
+      ],
+      "instructions": [
+        {
+          "PC": "0x80000b8",
+          "width": 2,
+          "bytes": "0348"
+        },
+        {
+          "PC": "0x80000ba",
+          "width": 2,
+          "bytes": "8546"
+        },
+        {
+          "PC": "0x80000bc",
+          "width": 4,
+          "bytes": "00f0d8f8"
+        },
+        {
+          "PC": "0x80000c0",
+          "width": 2,
+          "bytes": "0048"
+        },
+        {
+          "PC": "0x80000c2",
+          "width": 2,
+          "bytes": "0047"
+        }
+      ],
+      "indirect_sites": [
+        {
+          "PC": "0x80000c2",
+          "opcode": "0x4700",
+          "kind": "BX",
+          "register": 0,
+          "previously_catalogue_scanned": true
+        }
+      ]
+    },
+    {
+      "native_entry": "0x8008558",
+      "source_symbol": "case_boot_transport_entry_8558",
+      "code_span": [
+        "0x8008558",
+        "0x800856c"
+      ],
+      "code_sha256": "dd0885282ed03a1bc6aeda377fb159c7a9747127315963f671d9a43ed62eac6a",
+      "literal_spans": [],
+      "literal_loads": [],
+      "instructions": [
+        {
+          "PC": "0x8008558",
+          "width": 2,
+          "bytes": "10b5"
+        },
+        {
+          "PC": "0x800855a",
+          "width": 4,
+          "bytes": "02f0a3ff"
+        },
+        {
+          "PC": "0x800855e",
+          "width": 2,
+          "bytes": "0028"
+        },
+        {
+          "PC": "0x8008560",
+          "width": 2,
+          "bytes": "03d0"
+        },
+        {
+          "PC": "0x8008562",
+          "width": 2,
+          "bytes": "4268"
+        },
+        {
+          "PC": "0x8008564",
+          "width": 2,
+          "bytes": "0168"
+        },
+        {
+          "PC": "0x8008566",
+          "width": 2,
+          "bytes": "1046"
+        },
+        {
+          "PC": "0x8008568",
+          "width": 2,
+          "bytes": "8847"
+        },
+        {
+          "PC": "0x800856a",
+          "width": 2,
+          "bytes": "10bd"
+        }
+      ],
+      "indirect_sites": [
+        {
+          "PC": "0x8008568",
+          "opcode": "0x4788",
+          "kind": "BLX",
+          "register": 1,
+          "previously_catalogue_scanned": false
+        }
+      ]
+    },
+    {
+      "native_entry": "0x800a380",
+      "source_symbol": "case_log_output_char",
+      "code_span": [
+        "0x800a380",
+        "0x800a392"
+      ],
+      "code_sha256": "0c76734c017dc3fc940ee6766a27ee396321f04291b7a647c2e4f0d83966533a",
+      "literal_spans": [
+        [
+          "0x800a394",
+          "0x800a39c"
+        ]
+      ],
+      "literal_loads": [
+        {
+          "PC": "0x800a382",
+          "literal_address": "0x800a394",
+          "value": "0xffff"
+        },
+        {
+          "PC": "0x800a388",
+          "literal_address": "0x800a398",
+          "value": "0x20000e24"
+        }
+      ],
+      "instructions": [
+        {
+          "PC": "0x800a380",
+          "width": 2,
+          "bytes": "13b5"
+        },
+        {
+          "PC": "0x800a382",
+          "width": 2,
+          "bytes": "044b"
+        },
+        {
+          "PC": "0x800a384",
+          "width": 2,
+          "bytes": "0122"
+        },
+        {
+          "PC": "0x800a386",
+          "width": 2,
+          "bytes": "6946"
+        },
+        {
+          "PC": "0x800a388",
+          "width": 2,
+          "bytes": "0348"
+        },
+        {
+          "PC": "0x800a38a",
+          "width": 4,
+          "bytes": "fcf78ff9"
+        },
+        {
+          "PC": "0x800a38e",
+          "width": 2,
+          "bytes": "0098"
+        },
+        {
+          "PC": "0x800a390",
+          "width": 2,
+          "bytes": "1cbd"
+        }
+      ],
+      "indirect_sites": []
+    },
+    {
+      "native_entry": "0x800ae5c",
+      "source_symbol": "case_boot_idle_task_entry",
+      "code_span": [
+        "0x800ae5c",
+        "0x800ae6e"
+      ],
+      "code_sha256": "ccc0f9d866609428d8168d62c40f47c87e237948d257b32f071fc1004bb419ac",
+      "literal_spans": [
+        [
+          "0x800ae70",
+          "0x800ae74"
+        ]
+      ],
+      "literal_loads": [
+        {
+          "PC": "0x800ae5c",
+          "literal_address": "0x800ae70",
+          "value": "0x20000ff4"
+        }
+      ],
+      "instructions": [
+        {
+          "PC": "0x800ae5c",
+          "width": 2,
+          "bytes": "044c"
+        },
+        {
+          "PC": "0x800ae5e",
+          "width": 4,
+          "bytes": "fff741ff"
+        },
+        {
+          "PC": "0x800ae62",
+          "width": 2,
+          "bytes": "2068"
+        },
+        {
+          "PC": "0x800ae64",
+          "width": 2,
+          "bytes": "0128"
+        },
+        {
+          "PC": "0x800ae66",
+          "width": 2,
+          "bytes": "fad9"
+        },
+        {
+          "PC": "0x800ae68",
+          "width": 4,
+          "bytes": "01f01af9"
+        },
+        {
+          "PC": "0x800ae6c",
+          "width": 2,
+          "bytes": "f7e7"
+        }
+      ],
+      "indirect_sites": []
+    },
+    {
+      "native_entry": "0x800b31c",
+      "source_symbol": "case_boot_task_return",
+      "code_span": [
+        "0x800b31c",
+        "0x800b32c"
+      ],
+      "code_sha256": "c6f2dc43f5859a55a680ef35cbef5e78e1e0fbfb82ea33566912ba6ee7680cea",
+      "literal_spans": [
+        [
+          "0x800b32c",
+          "0x800b330"
+        ]
+      ],
+      "literal_loads": [
+        {
+          "PC": "0x800b31c",
+          "literal_address": "0x800b32c",
+          "value": "0x2000019c"
+        }
+      ],
+      "instructions": [
+        {
+          "PC": "0x800b31c",
+          "width": 2,
+          "bytes": "0348"
+        },
+        {
+          "PC": "0x800b31e",
+          "width": 2,
+          "bytes": "0068"
+        },
+        {
+          "PC": "0x800b320",
+          "width": 2,
+          "bytes": "401c"
+        },
+        {
+          "PC": "0x800b322",
+          "width": 2,
+          "bytes": "01d0"
+        },
+        {
+          "PC": "0x800b324",
+          "width": 2,
+          "bytes": "72b6"
+        },
+        {
+          "PC": "0x800b326",
+          "width": 2,
+          "bytes": "fee7"
+        },
+        {
+          "PC": "0x800b328",
+          "width": 2,
+          "bytes": "72b6"
+        },
+        {
+          "PC": "0x800b32a",
+          "width": 2,
+          "bytes": "fee7"
+        }
+      ],
+      "indirect_sites": []
+    },
+    {
+      "native_entry": "0x800b360",
+      "source_symbol": "case_boot_service_task_entry",
+      "code_span": [
+        "0x800b360",
+        "0x800b374"
+      ],
+      "code_sha256": "4b209db84783edeedfede4f42f3d2b9410d7eac3db8d4dc766cae9cebc44f131",
+      "literal_spans": [],
+      "literal_loads": [],
+      "instructions": [
+        {
+          "PC": "0x800b360",
+          "width": 2,
+          "bytes": "82b0"
+        },
+        {
+          "PC": "0x800b362",
+          "width": 2,
+          "bytes": "01a8"
+        },
+        {
+          "PC": "0x800b364",
+          "width": 4,
+          "bytes": "fff740fd"
+        },
+        {
+          "PC": "0x800b368",
+          "width": 2,
+          "bytes": "0199"
+        },
+        {
+          "PC": "0x800b36a",
+          "width": 4,
+          "bytes": "fff747ff"
+        },
+        {
+          "PC": "0x800b36e",
+          "width": 4,
+          "bytes": "fff7c5fe"
+        },
+        {
+          "PC": "0x800b372",
+          "width": 2,
+          "bytes": "f6e7"
+        }
+      ],
+      "indirect_sites": []
+    },
+    {
+      "native_entry": "0x800bf84",
+      "source_symbol": "vEventGroupClearBitsCallback",
+      "code_span": [
+        "0x800bf84",
+        "0x800bf8c"
+      ],
+      "code_sha256": "38baa74ce2a5a44e6bc4a7a27965487b6688f357aa20c988a1478ead5081d511",
+      "literal_spans": [],
+      "literal_loads": [],
+      "instructions": [
+        {
+          "PC": "0x800bf84",
+          "width": 2,
+          "bytes": "10b5"
+        },
+        {
+          "PC": "0x800bf86",
+          "width": 4,
+          "bytes": "00f061fa"
+        },
+        {
+          "PC": "0x800bf8a",
+          "width": 2,
+          "bytes": "10bd"
+        }
+      ],
+      "indirect_sites": []
+    },
+    {
+      "native_entry": "0x800bf8c",
+      "source_symbol": "vEventGroupSetBitsCallback",
+      "code_span": [
+        "0x800bf8c",
+        "0x800bf94"
+      ],
+      "code_sha256": "06aa7c9d61770d1d5178b852307a42d0779e30cb82c2cbc8dea77581ffe72dea",
+      "literal_spans": [],
+      "literal_loads": [],
+      "instructions": [
+        {
+          "PC": "0x800bf8c",
+          "width": 2,
+          "bytes": "10b5"
+        },
+        {
+          "PC": "0x800bf8e",
+          "width": 4,
+          "bytes": "00f0a6fa"
+        },
+        {
+          "PC": "0x800bf92",
+          "width": 2,
+          "bytes": "10bd"
+        }
+      ],
+      "indirect_sites": []
+    }
+  ],
+  "new_indirect_sites": [
+    {
+      "PC": "0x8008568",
+      "opcode": "0x4788",
+      "kind": "BLX",
+      "register": 1,
+      "previously_catalogue_scanned": false
+    }
+  ],
+  "corrected_candidate_count": 24,
+  "limits": [
+    "Known39 roots supplemented only, not all possible indirect targets or full corpus CFG closure",
+    "Byte width and literal-pool references checked mechanically; extents reviewed by producer, independent reviewer acceptance not claimed",
+    "Startup BX080000c2 already present under overlapping catalogue veneer; only timer BLX08008568 adds a unique site",
+    "No execution stack or physical hardware inference from static boundaries"
+  ]
+}

@@ -14,8 +14,10 @@ static uint32_t rd32(volatile uint8_t *p)
 static void logline(uint32_t message)
 {(void)case_policy_log(message);(void)case_policy_log(CASE_STRING_ADDR(0800bd40));}
 
-void case_boot_transport_cb_bb90(void)
+void case_boot_transport_cb_bb90(uint32_t argument)
 {
+    /* Native trampoline supplies pair[1] in R0; this callback ignores it. */
+    (void)argument;
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x2000087cu;
     volatile uint8_t *shared=(volatile uint8_t *)(uintptr_t)0x200000b8u;
     uint8_t quiet=shared[7u];

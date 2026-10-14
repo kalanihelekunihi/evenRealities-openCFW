@@ -1,0 +1,32 @@
+{
+  "target_id": "official-s200-v2.2.6.10",
+  "native_blob_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "native_base": "0x438000",
+  "rows": [
+    {
+      "symbol": "audio_ble_hci_event_mask_78d6dc",
+      "native_address": "0x78d6dc",
+      "size": 8,
+      "hex": "9088000200800020",
+      "sha256": "f00986538011007573721897f7c3b79ccee1c5ac157337b3c228baf96b40df5f"
+    },
+    {
+      "symbol": "audio_ble_hci_le_event_mask_78d6e4",
+      "native_address": "0x78d6e4",
+      "size": 8,
+      "hex": "ffff7f0000000000",
+      "sha256": "cf38821e33e762aaef6d641dc393b5e320c03802497386f179ab19cbdcf8627c"
+    },
+    {
+      "symbol": "audio_ble_hci_event_mask_page2_78d6ec",
+      "native_address": "0x78d6ec",
+      "size": 8,
+      "hex": "0000800000000000",
+      "sha256": "4513a1a516fbf1cb042bc78f9e9c4861a91aa218294f81230d0dcd0abdc84648"
+    }
+  ],
+  "size_basis": "Three adjacent eight-byte ROM arrays and HCI mask-command call sites",
+  "limits": [
+    "Original placement and runtime behavior unproven"
+  ]
+}

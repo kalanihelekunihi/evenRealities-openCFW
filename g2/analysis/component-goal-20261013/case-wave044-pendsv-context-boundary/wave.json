@@ -1,0 +1,42 @@
+{
+  "wave_id": "component-goal-case-wave044-pendsv-context-boundary",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T22:40:22.325804+00:00",
+  "status": "PASS_PENDSV_PRE_EXCEPTION_RETURN_CONTEXT_GRAPH",
+  "source_delta": "None",
+  "source_checkpoint": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/wave.json",
+    "sha256": "0d863a2bc4203aaa4b119e839f2ecd991dd477d32e6200ae50d77cf159ef6d76"
+  },
+  "harness": {
+    "path": "g2/analysis/component-goal-20261013/case-wave044-pendsv-context-boundary/verify.py",
+    "sha256": "6402b1b0d3c48c534436760e300befb96ad70129f47d2c018634b6c196a2fdac"
+  },
+  "tests": {
+    "path": "g2/analysis/component-goal-20261013/case-wave044-pendsv-context-boundary/verification.json",
+    "sha256": "5bd33abb2e4db79710d210c9c73e58111f977a4e8f6a8e6d388277aa79f07112"
+  },
+  "cases": 80,
+  "done_criteria": [
+    "Actualheap/taskinit/readylist/PendSV/wakedispatch",
+    "Same/higher/suspended/fallback/onlycurrent scheduling",
+    "Exact8registersave/restore, PSP/MSP/EXC_RETURN andcurrentTCB",
+    "StopbeforegenuineBX R3, no injectedreturn"
+  ],
+  "component_acceptance_gates": {
+    "bounded_software_architecture": "PASS",
+    "physicalIRQ_exceptiondelivery_return": "unvalidated",
+    "globalstack": "incomplete",
+    "accepted_images": "0/6"
+  },
+  "limits": [
+    "Actualheap/taskinit/list/PendSV/wake-dispatch bodies execute without provider cuts or injectedreturns",
+    "Observation stops before genuine BX R3 EXC_RETURN; no hardwareexceptionentry/return/NVICarbitration/taskexecution claim",
+    "Valid initialized softwarecontexts and architecturalPSP/MSP/IPSR fixture; only known initialframe codepointer namespaces normalized",
+    "Bounded observedMSP usage, no whole IRQ/reentrancy budget"
+  ],
+  "next_critical_path_task": "ActualNVIC exception-entry/return capability probe",
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false
+}

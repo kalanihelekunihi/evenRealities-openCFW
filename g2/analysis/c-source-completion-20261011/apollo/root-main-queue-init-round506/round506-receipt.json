@@ -1,0 +1,64 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 725,
+    "strong_unresolved_before": 726
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/queue_init_candidates_20261013/init.c",
+      "sha256": "4948c6e1398680924732f60a838ff7669b84788cf16375376bfa68a2571380f5"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/005398e0.c",
+      "sha256": "4668ab2ac4926130f2a952867d889b3557de8a157c36834ca958087abfe3e2a9"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/00480058.c",
+      "sha256": "2f669a7577251dee49d75991a43a5a28301d8410dbfc4d421a4ca95850e038bb"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "11389de4fd13ad18a1218d2189f418af83eca2d47237edd2e83db27979c5bd1d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_queue_init.py",
+      "sha256": "c5c043146c8fe66fead43df4802354c330e77511963d8064b2e73d1e48766ec2"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-queue-init-round506/oracle.json",
+      "sha256": "d42dc74b164eff6a09ce73a468bebef764bc5732246c5ecb3f8be401d27db783"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-init-round506/isolated/init.elf",
+      "sha256": "ddf701295045ca8146737c25eefa763bd52137672d8d10a3d6f69eaa42e297f7"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-init-round506/receipt.json",
+      "sha256": "16f204f2d9c45f439c8026fd5ad88a6d0849589bfb575ae80456cc90c78e33cf"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-queue-init-round506/apollo_main/candidate.o",
+      "sha256": "431e9cdedcd0c002f16e9a360ce7e3fc966ff64a28a1825e0e9c8fbde49f2684"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Critical save and microsecond delays intercepted; queue and IRQ MMIO changes executed in synthetic SRAM/MMIO.",
+    "Physical queue/IRQ operation and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x5398e0",
+    "0x480058"
+  ],
+  "native_source_oracle_cases": 108,
+  "provenance": "Main Ghidra pseudocode, locked native blob and queue initialization plus IRQ reset native/source comparison",
+  "schema": "opencfw-source-provider-receipt-v1",
+  "source_bodies": [
+    "g2_main_queue_init_5398e0",
+    "g2_main_irq_disable_480058"
+  ],
+  "status": "provider_bodies_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

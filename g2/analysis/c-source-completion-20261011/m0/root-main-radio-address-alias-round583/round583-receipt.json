@@ -1,0 +1,51 @@
+{
+  "round": 583,
+  "status": "PASS_MAIN_RADIO_ADDRESS_STATE_ALIAS_BOUNDED",
+  "captured_utc": "2026-10-14T05:55:52.450777+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "native_address": "0x20074148",
+  "source_storage_bytes": 6,
+  "alias_symbols": [
+    "audio_ble_custom_bd_address",
+    "audio_ble_hci_radio_driver_state"
+  ],
+  "linked_candidate_address": "0x00000568 for both, size 0x6",
+  "native_comparisons": [
+    "PASS custom BD address 3 cases",
+    "PASS radio boot 5 cases"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 650,
+  "unresolved_after": 648,
+  "removed_symbols": [
+    "audio_ble_custom_bd_address",
+    "audio_ble_hci_radio_driver_state"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Six observed address/identifier bytes share one source object. Full native allocation extent, boot initialization, absolute placement, full image coverage and hardware behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_hci_radio_address_state.c",
+      "sha256": "8e4209f6347fffe8a1a7e877786c96fe01d4d734818a9debdeed88310d98e29e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_custom_bd_address.py",
+      "sha256": "e742fd15f5635c3c630c2a49eafb610fcd09f98688f9e75be1290d199ed35dcc"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_hci_radio_boot.py",
+      "sha256": "aaf912b965823d982dde04db89f3e1e0e5b6881f9a7f8a621d9bf6dd708d8f7e"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round583/receipt.json",
+      "sha256": "a64a10c6799f4d86cf62079493d17e57c0a88f71eee95d504433579b54df5b49"
+    }
+  ]
+}

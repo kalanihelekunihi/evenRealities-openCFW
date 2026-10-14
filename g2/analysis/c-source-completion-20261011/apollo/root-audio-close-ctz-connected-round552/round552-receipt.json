@@ -1,0 +1,28 @@
+{
+  "round": 552,
+  "status": "PASS_BACKEND_CLOSE_CTZ_CONNECTED_BOUNDED",
+  "component": "Apollo audio LittleFS CTZ traversal joined to connected close and allocation",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Single-block CTZ entry executes native and C traversal with index 0 in 1,513 connected cases",
+  "case_count": 1513,
+  "joined_c_functions": 39,
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_ctz_connected.py",
+      "sha256": "34f4dd3faeed3b23b3c221b50f0033bc95e72f987eb5845ec6b8c13ea862be4e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/backend-close-ctz-connected-results.json",
+      "sha256": "fb89cf13b3281803b53b68adff5e431a08295344ed95da56f6d36ed48bf35c4d"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/ctz_traverse.c",
+      "sha256": "776bac762ee5e6dbe786a96ada52725fe71c027a38a3b676aa974df408e5e929"
+    }
+  ],
+  "remaining_estimate": {
+    "filesystem_traversal": "Multi-block CTZ chain, metadata variants, child errors, real device reads and writes, and open-file paths remain. Roughly 50-65 percent of traversal integration remains.",
+    "whole_g2_firmware": "0 of 6 image components source-complete; latest Main build has 720 unresolved symbols."
+  },
+  "limits": "Synthetic metadata and flash callback; no physical storage or boot proof."
+}

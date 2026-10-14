@@ -1,0 +1,78 @@
+{
+  "status": "PASS_SOURCE_CALLBACK_C_TYPE_REPAIR_AND145_AFFECTED_PAIRS",
+  "source_type_checks": [
+    {
+      "source": "g2/components/case/startup_candidate_20261011/application_boot_transport_clock_callback_candidate.c",
+      "corrected_pass": true,
+      "original_rejected_incompatible_callback_type": true,
+      "original_diagnostic": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_clock_callback_candidate.c:9:6: error: conflicting types for 'case_boot_transport_cb_9d70'\n    9 | void case_boot_transport_cb_9d70(void)\n      |      ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:3:13: note: previous declaration is here\n    3 | extern void case_boot_transport_cb_9d70(uint32_t);\n      |             ^\n1 error generated.\n"
+    },
+    {
+      "source": "g2/components/case/startup_candidate_20261011/application_boot_transport_toggle_callback_candidate.c",
+      "corrected_pass": true,
+      "original_rejected_incompatible_callback_type": true,
+      "original_diagnostic": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_toggle_callback_candidate.c:6:6: error: conflicting types for 'case_boot_transport_cb_bb4c'\n    6 | void case_boot_transport_cb_bb4c(void)\n      |      ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:5:13: note: previous declaration is here\n    5 | extern void case_boot_transport_cb_bb4c(uint32_t);\n      |             ^\n1 error generated.\n"
+    },
+    {
+      "source": "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_9684_candidate.c",
+      "corrected_pass": true,
+      "original_rejected_incompatible_callback_type": true,
+      "original_diagnostic": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_cb_9684_candidate.c:16:6: error: conflicting types for 'case_boot_transport_cb_9684'\n   16 | void case_boot_transport_cb_9684(void)\n      |      ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:7:13: note: previous declaration is here\n    7 | extern void case_boot_transport_cb_9684(uint32_t);\n      |             ^\n1 error generated.\n"
+    },
+    {
+      "source": "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_b7ec_candidate.c",
+      "corrected_pass": true,
+      "original_rejected_incompatible_callback_type": true,
+      "original_diagnostic": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_cb_b7ec_candidate.c:13:6: error: conflicting types for 'case_boot_transport_cb_b7ec'\n   13 | void case_boot_transport_cb_b7ec(void)\n      |      ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:9:13: note: previous declaration is here\n    9 | extern void case_boot_transport_cb_b7ec(uint32_t);\n      |             ^\n1 error generated.\n"
+    },
+    {
+      "source": "g2/components/case/startup_candidate_20261011/application_boot_transport_cb_bb90_candidate.c",
+      "corrected_pass": true,
+      "original_rejected_incompatible_callback_type": true,
+      "original_diagnostic": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_cb_bb90_candidate.c:17:6: error: conflicting types for 'case_boot_transport_cb_bb90'\n   17 | void case_boot_transport_cb_bb90(void)\n      |      ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:11:13: note: previous declaration is here\n   11 | extern void case_boot_transport_cb_bb90(uint32_t);\n      |             ^\n1 error generated.\n"
+    },
+    {
+      "source": "g2/components/case/startup_candidate_20261011/application_boot_transport_idle_callback_candidate.c",
+      "corrected_pass": true,
+      "original_rejected_incompatible_callback_type": true,
+      "original_diagnostic": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_idle_callback_candidate.c:7:6: error: conflicting types for 'case_boot_transport_cb_ab70'\n    7 | void case_boot_transport_cb_ab70(void)\n      |      ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:13:13: note: previous declaration is here\n   13 | extern void case_boot_transport_cb_ab70(uint32_t);\n      |             ^\n1 error generated.\n"
+    },
+    {
+      "source": "g2/components/case/startup_candidate_20261011/application_boot_transport_start_candidate.c",
+      "corrected_pass": true,
+      "original_rejected_incompatible_callback_type": true,
+      "original_diagnostic": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_start_candidate.c:12:13: error: conflicting types for 'case_boot_transport_cb_9d70'\n   12 | extern void case_boot_transport_cb_9d70(void);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:3:13: note: previous declaration is here\n    3 | extern void case_boot_transport_cb_9d70(uint32_t);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_start_candidate.c:13:13: error: conflicting types for 'case_boot_transport_cb_bb4c'\n   13 | extern void case_boot_transport_cb_bb4c(void);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:5:13: note: previous declaration is here\n    5 | extern void case_boot_transport_cb_bb4c(uint32_t);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_start_candidate.c:14:13: error: conflicting types for 'case_boot_transport_cb_9684'\n   14 | extern void case_boot_transport_cb_9684(void);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:7:13: note: previous declaration is here\n    7 | extern void case_boot_transport_cb_9684(uint32_t);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_start_candidate.c:15:13: error: conflicting types for 'case_boot_transport_cb_b7ec'\n   15 | extern void case_boot_transport_cb_b7ec(void);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:9:13: note: previous declaration is here\n    9 | extern void case_boot_transport_cb_b7ec(uint32_t);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_start_candidate.c:16:13: error: conflicting types for 'case_boot_transport_cb_bb90'\n   16 | extern void case_boot_transport_cb_bb90(void);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:11:13: note: previous declaration is here\n   11 | extern void case_boot_transport_cb_bb90(uint32_t);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/before/application_boot_transport_start_candidate.c:17:13: error: conflicting types for 'case_boot_transport_cb_ab70'\n   17 | extern void case_boot_transport_cb_ab70(void);\n      |             ^\n/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/component-goal-20261013/case-wave062-timer-callback-c-type/callback-contract.h:13:13: note: previous declaration is here\n   13 | extern void case_boot_transport_cb_ab70(uint32_t);\n      |             ^\n6 errors generated.\n"
+    }
+  ],
+  "affected_tests": [
+    {
+      "wave": 56,
+      "status": "PASS_25_REAL_TRAMPOLINE_ENTRY_CUT_PAIRS {'0x800aa48': ['0x8006972', '0x8006984', '0x8006994', '0x80069a4', '0x80069b4', '0x80069c4'], '0x800ccc0': ['0x800aad6'], '0x800ccf2': ['0x800aac6'], '0x800af30': ['0x800cce8', '0x800cd10']}",
+      "test_script_sha256": "7aabf5b7433ca48637bb409f15524ec8a469f726a7c6ed7513f8aa87e7125bbe",
+      "result_sha256": "f3ca8df99d4dd3861e044159273b1ed6d88a0fe759c9cf43157655fca3b8ed4c",
+      "fixture_ELF_sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853"
+    },
+    {
+      "wave": 57,
+      "status": "PASS 96 176",
+      "test_script_sha256": "51bef300ded07ed50b845359fd4de9e8cf10b2870f75f1a46930fedcbd735350",
+      "result_sha256": "2c1b5406455b3765690ae72abaa53580f1da64a11ea75fdc931270ef4d61337f",
+      "fixture_ELF_sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853"
+    },
+    {
+      "wave": 58,
+      "status": "PASS 24",
+      "test_script_sha256": "5ee128e3656487336e397329940624dff7e9a740f179636276fed3a42335b566",
+      "result_sha256": "093682e944450f0ee5efacdae38b3b73ece93c400dc369fe58e548af8b0fd1ae",
+      "fixture_ELF_sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853"
+    }
+  ],
+  "source_ELF_sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853",
+  "whole_ELF_byte_identical_to_CASE039": true,
+  "build_source_units": 401,
+  "limits": [
+    "Corrected compatible C type; ignored argument preserves native ABI and behavior",
+    "Whole source ELF identical to039, not equal to locked native firmware; no native coverage/physical acceptance promotion",
+    "Entry-cut comparisons do not prove callback bodies or asynchronous lifetime"
+  ]
+}

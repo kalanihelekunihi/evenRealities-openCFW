@@ -1,0 +1,53 @@
+{
+  "round": 601,
+  "status": "PASS_MAIN_BLE_MSGRX_MANAGER_BOUNDED",
+  "captured_utc": "2026-10-14T07:12:09.204169+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "compressed_sram_record": "0x75d3f4",
+  "decoded_sram_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "native_address": "0x20003ffc",
+  "startup_bytes": 16,
+  "startup_hex": "69ee480095ee48000000000000000000",
+  "native_comparisons": [
+    "PASS compiled initializer bytes",
+    "PASS BLE queue clear 12 cases",
+    "PASS BLE receive transport 5 cases"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 623,
+  "unresolved_after": 622,
+  "removed_symbols": [
+    "audio_ble_rx_thread_state"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Observed 16-byte receive manager startup span is source-owned. Native code pointers, final RAM placement, possible wider allocation, whole-image source coverage and physical BLE behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_msgrx_manager_state.c",
+      "sha256": "306bd01f0954e91b6c45ab84b2e16616ca094ba7d70cbae2d5fd03d136298721"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_msgrx_manager_initializer.py",
+      "sha256": "cd19c7d024199d588239e36080718ca83457ebb4ce9f00b30b8955eebef4bed6"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_queue_clear_native.py",
+      "sha256": "ca31ded851671b35df5748af214f13e9517c74d61245a4da7a0bd4b708b3d8c9"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_display_thread_msg_rx_ble.py",
+      "sha256": "1247b9f20389ba47fca7f178537594dbf1116dcd4228d36a3a6c920f07ad3f5d"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round601/receipt.json",
+      "sha256": "2c8bc64babb2ec04fb7b38c9fc15968db5f57d65a27115216b77e1a644a3fd64"
+    }
+  ]
+}

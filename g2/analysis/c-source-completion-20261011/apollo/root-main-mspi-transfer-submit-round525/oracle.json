@@ -1,0 +1,29 @@
+{
+  "cases": 1027,
+  "limits": [
+    "Queue reserve/commit/rollback, flags, start and critical providers intercepted; each source-owned and individually checked.",
+    "Synthetic SRAM/MMIO; concurrent and physical operation unverified.",
+    "Selector 30 only; full transfer dispatcher remains unresolved."
+  ],
+  "provider_event_paths": {
+    "reserve": 273,
+    "reserve>critical>commit>reserve": 7,
+    "reserve>critical>commit>reserve>flags>critical>marker": 4,
+    "reserve>critical>commit>reserve>flags>critical>marker>rollback": 5,
+    "reserve>critical>commit>rollback": 30,
+    "reserve>critical>commit>start": 9,
+    "reserve>critical>commit>start>reserve": 3,
+    "reserve>critical>commit>start>reserve>flags>critical>marker": 1,
+    "reserve>critical>commit>start>reserve>flags>critical>marker>rollback": 2,
+    "reserve>flags>critical>commit": 34,
+    "reserve>flags>critical>commit>rollback": 57,
+    "reserve>flags>critical>commit>start": 45,
+    "reserve>flags>critical>marker": 9,
+    "reserve>flags>critical>marker>rollback": 34,
+    "reserve>flags>critical>marker>start": 13,
+    "validation_only": 501
+  },
+  "source_elf_sha256": "033d02fbf1c453ef43c8e3442265c94a7754aed31218557db46ee5d8651d8f4b",
+  "status": "PASS_MAIN_MSPI_TRANSFER_SELECTOR30_NATIVE_SOURCE",
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+}

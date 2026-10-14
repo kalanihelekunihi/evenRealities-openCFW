@@ -1,0 +1,61 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_payload_linked": false,
+    "strong_unresolved_symbols": 730
+  },
+  "completed_utc": "2026-10-13T23:49:42.729030+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "source_owned_delay_wrappers_completed": 1
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "The wrapper argument-forwarding path is checked; native incidental R0 on return is outside the NOR polling caller contract.",
+    "Status query, other physical NOR paths and complete Main image remain open."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Status query at 0x4702d8",
+      "NOR controller/command and physical read/write helpers",
+      "Other Main and five remaining image graphs; 0/6 complete"
+    ],
+    "reason": "Recover NOR status query and command helpers"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/components/main/fal_norflash_delay_candidates_20261013/delay.c",
+      "sha256": "21c2c10f5db1c909eb52e88b9f521560947257eed13fe508e10a1a8b7b611435"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "3ec3837df210284e88d6f0a198ce42b2878ac4ff4320cbc6d840d45bf92f5a82"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-delay-round461/receipt.json",
+      "sha256": "1740407f74a445549def5a7e050db1ba3f1d661ee56e769ab18ff26c73edff65"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-delay-round461/apollo_main/candidate.o",
+      "sha256": "cc0d7578a47d591ca68d6893b633a6fe19867717744d64a437082ea98dff31aa"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-delay-round461/round461-receipt.json",
+      "sha256": "3a08c1ad0414472c79e0cb5c54cd8cc729525d0d49b1f4542cb9e400336fdd79"
+    }
+  ],
+  "wave_id": "root-main-round461-norflash-delay",
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-delay-round461/dashboard-wave/wave.json",
+    "sha256": "29378227fbf9dd7cabc23a77fd8f3a8e756e5f7404a39e82b871ec35ffd40507"
+  },
+  "publication_scope": "Bounded Apollo Main delay source; timing/hardware limits preserved; no map/image promotion"
+}

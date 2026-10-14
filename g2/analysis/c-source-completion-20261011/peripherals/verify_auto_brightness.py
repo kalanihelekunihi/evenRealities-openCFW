@@ -26,12 +26,11 @@ CASES=[('open_mode_gate','open',1,1,1,0),('open_disabled','open',0,0,1,0),
 with tempfile.TemporaryDirectory() as td:
  shim=Path(td)/'shim.c'
  shim.write_text('''#include <stdint.h>
-volatile uint8_t audio_uart_auto_brightness_enabled_cell;
-volatile uint32_t audio_uart_auto_brightness_profile_cell;
 volatile uint16_t audio_uart_hub_role_cell;
 void *audio_hub_send_queue;
 int32_t g_queue_result;
 uint32_t g_wear;
+uint32_t audio_log_wake_allowed(void){return g_wear;}
 uint32_t audio_uart_command_pending(void){return *(volatile uint8_t *)0x200038f1u;}
 uint8_t audio_uart_device_role_get(void){return *(volatile uint8_t *)0x20075024u;}
 uint32_t audio_uart_wear_status(void){return g_wear;}
@@ -41,7 +40,7 @@ uint32_t compressed_log_output(uint32_t a,const char *b,const char *c,...){(void
 int32_t audio_cmsis_queue_put(void *q,const void *p,uint8_t priority,uint32_t timeout){(void)q;(void)priority;(void)timeout;const uint8_t *s=p;volatile uint8_t *d=(volatile uint8_t *)0x20090000u;for(unsigned i=0;i<8;i++)d[i]=s[i];return g_queue_result;}
 ''')
  elf=Path(td)/'test.elf'
- subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,SVC_Settings_AutoBrightnessOpen',str(ROOT/'components/audio/uart_thread_source_candidate/display_auto_brightness.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_hub_channel.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_hub_send.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_hub_role_init.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_auto_brightness_configure.c'),str(shim),'-o',str(elf)],check=True)
+ subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,SVC_Settings_AutoBrightnessOpen',str(ROOT/'components/audio/uart_thread_source_candidate/display_auto_brightness.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_hub_channel.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_hub_send.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_hub_role_init.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_auto_brightness_configure.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_auto_brightness_state.c'),str(shim),'-o',str(elf)],check=True)
  symbols=dict((p[2],int(p[0],16)) for line in subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True).splitlines() if len(p:=line.split())==3)
  with elf.open('rb') as f:segments=[(s['p_vaddr'],s.data()) for s in ELFFile(f).iter_segments() if s['p_type']=='PT_LOAD']
  def run(candidate,case):

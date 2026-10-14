@@ -1,0 +1,58 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 723,
+    "strong_unresolved_before": 724
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/nor_read_lower_candidates_20261013/read_lower.c",
+      "sha256": "e37dff6ebf26f77fd9e655deb667a9cf8a09c1219604bc74551298060ef98844"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004709c8.c",
+      "sha256": "d41f6040b6c3238e5ee9ad97fceb7e5e665260cc11cac81ab161b88ae7c53dbe"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "24c07d379dc459a9de197c8be808bd47d9eb3f98e2842e514ec183d4cabd5c5e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_nor_read_lower.py",
+      "sha256": "38ebb3957cd034fbd997c1a52975a7b059b47a238f940d66851b6beab5a2f023"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-nor-read-lower-round483/read-oracle.json",
+      "sha256": "9be373ec78e335ab2db8fe70c592e578a15e15c092ade866bada59930138c53e"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-nor-read-lower-round483/isolated/read_lower.elf",
+      "sha256": "4be366e69e1c18ae6c2f40f75bdb0c803ae76ad31425d3b1d8d92e1eba6a54ef"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-nor-read-lower-round483/receipt.json",
+      "sha256": "cb563915eb7358a20be608504881573c69b9bcf796fe3b7b3fa43642c513d0e8"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-nor-read-lower-round483/apollo_main/candidate.o",
+      "sha256": "041e92512397b9000a507615c3169eb68fa512f92c882f21ca7abad2ee1ddb3d"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Lock, mode entry/exit, wait, command transfer and logging helpers are intercepted in synthetic comparisons.",
+    "Actual physical NOR reads and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x4709c8"
+  ],
+  "native_source_oracle_cases": 144,
+  "provenance": "Main instruction trace, Ghidra pseudocode and locked native/source control-flow comparison",
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_bodies": [
+    "g2_norflash_read_lower_4709c8"
+  ],
+  "status": "bounded_source_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

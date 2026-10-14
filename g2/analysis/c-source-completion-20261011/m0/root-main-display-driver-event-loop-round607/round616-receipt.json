@@ -1,0 +1,22 @@
+{
+  "round": 616,
+  "component": "Apollo display-buffer unlock helper",
+  "status": "C source compiles; four native/C bounded cases pass; combined object remains unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "4b49b2df1e45e38f9033e902e797b0ef68778cd38c4585b0a2fa7d18db1b624e",
+  "verifier_sha256": "e6c8a4348bddeb6f4079d0cc813b77ca57bbbdffcbf1fb06bf4083b6edb39845",
+  "link_audit_sha256": "28649c69c21ae157447a37a0c92941d63165aac1fb387bb77ab7a891ce911e37",
+  "combined_object_sha256": "87b40127dc22fe4d55e586c7d34674dbfc9bc677516290934c6eeee471ecb647",
+  "validation": [
+    "PASS_DISPLAY_BUFFER_UNLOCK_NATIVE 4",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 48 16 14",
+    "ARM Cortex-M55 C syntax compile warnings as errors",
+    "git diff --check"
+  ],
+  "gates": [
+    "14 display-driver helper bodies remain missing",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0
+}

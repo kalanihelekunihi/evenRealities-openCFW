@@ -1,0 +1,49 @@
+{
+  "round": 570,
+  "status": "PASS_NEMA_RING_STORAGE_SOURCE_OWNED",
+  "component": "Apollo Nema ring descriptor",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Five-word ring descriptor at native RAM 0x20073db0..0x20073dc3 is source-owned zero-initialized C storage ending at the next identified object. Selected ring initialize/reset verifier passes 648 native-vs-C cases. No audio_uart_nema_-prefixed symbol remains unresolved in the Apollo Main link.",
+  "new_c_source": "g2/components/audio/uart_thread_source_candidate/display_nema_ring_state.c",
+  "build": {
+    "candidate_compilation_passed": true,
+    "unresolved_symbols": 673,
+    "previous_unresolved_symbols": 674,
+    "duplicate_strong_symbols": [],
+    "source_complete": false,
+    "remaining_audio_uart_nema_prefixed_symbols": []
+  },
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_nema_ring_storage.py",
+      "sha256": "15649142708b50bd6564064d1f7f422f503079a75cecf749d8c9edfeeae71d8f"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/nema-ring-storage-results.json",
+      "sha256": "9a8ef9a057376eb0d21bf435416720036a861817ee5e25f2b2f36b17dff7892e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_nema_ring_init_reset_round230.py",
+      "sha256": "f82466d30995ff5d83f4c7d53db4fccab948de68675d6b661cfe4c9d15b16933"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-nema-ring-init-reset-round230/receipt.json",
+      "sha256": "e67eef25baf70aee8b215eb1767725e53ccb5b75a8201cd9818f350946700c2f"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_nema_ring_state.c",
+      "sha256": "8146077be6bad2f3227d5142540f93e71fd79ecef3786fca4f69edb8730622a2"
+    },
+    {
+      "path": "g2/build/c-firmware/root-round570/receipt.json",
+      "sha256": "db70827c191cdc0df578eb04f579959770766615fa3892ce5d444e0cea8df70b"
+    }
+  ],
+  "remaining_estimate": {
+    "nema_ring_descriptor": "Initial storage extent and zero ownership complete; final absolute placement, ring lifetime, integration, boot and hardware remain, roughly 40-55 percent of this component.",
+    "nema_provider_family": "The audio_uart_nema_-prefixed link surface is closed, but lower imports, memory layout and integrated behavior remain; roughly 45-65 percent of the wider Nema family.",
+    "apollo_main": "673 unresolved symbols remain, plus linker/layout and whole-path behavior gates.",
+    "whole_g2_firmware": "0 of 6 image components source-complete."
+  },
+  "limits": "Prefix-specific symbol closure is not Nema subsystem completeness; no final address placement, boot or hardware proof."
+}

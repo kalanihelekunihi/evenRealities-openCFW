@@ -1,0 +1,62 @@
+{
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-strstr-round432/receipt.json",
+    "sha256": "8da55773ab289ab87deb42ae778dabc81030b262f02c65c79f7eca0a73e9f692"
+  },
+  "captured_utc": "2026-10-13T22:25:09.432101+00:00",
+  "component": "apollo_main",
+  "definitions": 4007,
+  "duplicate_strong_symbols": 0,
+  "host_edge_test": {
+    "cases": 8,
+    "command": "clang -std=c11 -fno-builtin -fsanitize=address,undefined candidate_strstr.c memmem.c test.c && test",
+    "result": "pass"
+  },
+  "import_delta": {
+    "added": [],
+    "removed": [
+      "strstr"
+    ]
+  },
+  "imports": 724,
+  "limits": [
+    "Main candidate combines a bootloader native-attributed string predicate with pinned generic memmem; stock Main implementation identity is unverified.",
+    "Host edge tests are semantic checks, not target runtime or hardware proof.",
+    "Full payload layout and byte equality remain unproven."
+  ],
+  "provenance": {
+    "native_attributed_bootloader_body": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+    "native_attributed_bootloader_body_sha256": "23a32217daa3d416572796eca003b367291bf29b7f454126f00cf254c469416f",
+    "pinned_nonempty_search": "third-party/upstream/nationalchip-lvp-kws/utility/libc/memmem.c",
+    "pinned_nonempty_search_sha256": "6eb68b58ee1de2b4438ead4feed47661a04392b4e4f81a7b64a24342fb4a295a"
+  },
+  "schema": "opencfw-experimental-source-receipt-v1",
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-strstr-round432/root-source-audit.json",
+    "sha256": "116e99934dce0ca3adbd316b338bc614282608f7e6d22aa47350ff879dad3ced"
+  },
+  "source_units": [
+    {
+      "header_inputs": {
+        "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include/string.h": "61160adf922713218cf8b826dabd8f33995ade46befc0bfc068c23fe42419513",
+        "third-party/upstream/nationalchip-lvp-kws/utility/libc/memmem.c": "6eb68b58ee1de2b4438ead4feed47661a04392b4e4f81a7b64a24342fb4a295a"
+      },
+      "object": "g2/build/c-firmware/20261013/peripherals-root-strstr-round432/apollo_main/experimental-168.o",
+      "object_sha256": "ed63d61baeaeafe5531c4fc729990f5f0d29596213ec6dc7b041834a55740727",
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libc/memmem.c",
+      "source_sha256": "6eb68b58ee1de2b4438ead4feed47661a04392b4e4f81a7b64a24342fb4a295a",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    },
+    {
+      "header_inputs": {
+        "g2/analysis/c-source-completion-20261011/peripherals/root-strstr-round432/candidate_strstr.c": "bfe9b696b03242fbc9fed0c47e5a8ff32b2711c1b8a162bcfe9d6bbb91b8b1d2"
+      },
+      "object": "g2/build/c-firmware/20261013/peripherals-root-strstr-round432/apollo_main/experimental-169.o",
+      "object_sha256": "b551385f61c848286de5211a15f23bc67233c9c359514799e933fc1526f25330",
+      "source": "g2/analysis/c-source-completion-20261011/peripherals/root-strstr-round432/candidate_strstr.c",
+      "source_sha256": "bfe9b696b03242fbc9fed0c47e5a8ff32b2711c1b8a162bcfe9d6bbb91b8b1d2",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    }
+  ],
+  "status": "completed"
+}

@@ -3,6 +3,7 @@
  * bitmap word. This is a source-owned scalar helper independent of MMIO.
  */
 #include <stdint.h>
+#include "clock_popcount_421584.h"
 
 uint32_t opencfw_boot_clock_popcount(uint32_t bits)
 {

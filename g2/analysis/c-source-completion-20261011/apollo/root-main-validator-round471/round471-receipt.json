@@ -1,0 +1,49 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 728,
+    "strong_unresolved_before": 725
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/fal_norflash_serial_validator_candidates_20261013/validator.c",
+      "sha256": "e443d6bf0a790c3a7e0dc9eff5b7e6753becc84a7406e379c5876c60c810b747"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "df063b229db970e1b3100a3d02f23e9ab4aa449a8ce65e93deca36b725763637"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_serial_validator.py",
+      "sha256": "e206e3d977b592812cb107cc1c7ce249cf553ffa197c32200f9e4f8feccebf79"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-validator-round471/serial-validator-oracle.json",
+      "sha256": "c850f392ca62d8e5f3b4c19d49351e3897c10acee4099d5b0c6c5e6a200eed76"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-validator-round471/isolated/serial-validator.elf",
+      "sha256": "a3db7128130355ae5e54d0d02034cf4fa2a1563c80ef6ac2fc25a0c711bbcc6d"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-validator-round471/receipt.json",
+      "sha256": "1c2cd041a8b5afcbe7c6f12727e183ce3b04e7f5772601be33aeab3523adc831"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-validator-round471/apollo_main/candidate.o",
+      "sha256": "af620d43a80820eeaf8c3c8f1df59a787d3f63e57d7803154c0c4285fe59cb93"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Hardware disable/configure/enable, clock selection and logging are injected equally in the bounded oracle.",
+    "Four named hardware lowers, configuration transfer, controller state, physical read/write and complete Main image remain open."
+  ],
+  "native_entrypoint": "0x470d7c",
+  "native_source_oracle_cases": 48,
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_body": "g2_norflash_set_serial_470d7c",
+  "status": "bounded_source_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

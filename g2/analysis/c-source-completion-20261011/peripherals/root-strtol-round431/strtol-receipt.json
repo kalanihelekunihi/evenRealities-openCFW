@@ -1,0 +1,62 @@
+{
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-strtol-round431/receipt.json",
+    "sha256": "f5ce764bb8923cc95b54d57826c1647c779395500e61cea077995e32a9db0852"
+  },
+  "captured_utc": "2026-10-13T22:23:09.432717+00:00",
+  "component": "apollo_main",
+  "definitions": 4005,
+  "duplicate_strong_symbols": 0,
+  "import_delta": {
+    "added": [],
+    "removed": [
+      "strtol"
+    ]
+  },
+  "imports": 725,
+  "limits": [
+    "Pinned portable conversion semantics only; stock Main strtol implementation identity is not established.",
+    "Provider has no overflow detection and uses its own end-pointer/base behavior; no stock runtime equivalence claim.",
+    "Full payload layout, byte equality, and hardware operation remain unproven."
+  ],
+  "schema": "opencfw-experimental-source-receipt-v1",
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-strtol-round431/root-source-audit.json",
+    "sha256": "caf939b71d8afee828bb123242f6da3720e40d23901dacbf8256152ab768b6c3"
+  },
+  "source_units": [
+    {
+      "header_inputs": {
+        "third-party/reference/ambiq-zephyr/lib/libc/minimal/include/stdbool.h": "a51e3fff61781920787ece637771f3c37d72a78a2fdf4d4e44863a8fa98d8bcc",
+        "third-party/reference/ambiq-zephyr/lib/libc/minimal/include/stdint.h": "f392eeb652385c6e055c229c482b7221ea9d6198afca7fbc72292f82b2d6414d",
+        "third-party/upstream/nationalchip-lvp-kws/include/utility/libc/inttypes.h": "74d13b881da343350993fcb926cbd11701cbb514411555747e381016cdc0f921",
+        "third-party/upstream/nationalchip-lvp-kws/include/utility/libc/klibc/extern.h": "addf134407ecf22a5bced6c998d30660dae0846528ad934eaa49742a9a7daf49",
+        "third-party/upstream/nationalchip-lvp-kws/include/utility/libc/klibc/inline.h": "1456ca9eb1444031e51a9424859da5340844e7be166ff7ab68f25159329be9e1",
+        "third-party/upstream/nationalchip-lvp-kws/include/utility/libc/stdlib.h": "d2549da080238fe93ed114e2d7e83b7889390faa631a37d87f324f63698ea29d",
+        "third-party/upstream/nationalchip-lvp-kws/utility/libc/strtol.c": "48d3db95f130c2c985e6180938bfd700548e76e8fb1eddbbf91b966b46092fe3",
+        "third-party/upstream/nationalchip-lvp-kws/utility/libc/templates/strtox.c": "0746ee8f7159454c95d6cf655596c7f9431756128f58ad3e8445a8c87e85d17d"
+      },
+      "object": "g2/build/c-firmware/20261013/peripherals-root-strtol-round431/apollo_main/experimental-166.o",
+      "object_sha256": "c97008e12b81b8a6e341904b43ce88575d00eed67ab6772aa2f521be9afbf059",
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libc/strtol.c",
+      "source_sha256": "48d3db95f130c2c985e6180938bfd700548e76e8fb1eddbbf91b966b46092fe3",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    },
+    {
+      "header_inputs": {
+        "third-party/reference/ambiq-zephyr/lib/libc/minimal/include/stdint.h": "f392eeb652385c6e055c229c482b7221ea9d6198afca7fbc72292f82b2d6414d",
+        "third-party/upstream/nationalchip-lvp-kws/include/utility/libc/ctype.h": "fb24e5ce7d7eb1ae33315179e7662be51b6db8f537dfdbf8034403b6e3b1c57f",
+        "third-party/upstream/nationalchip-lvp-kws/include/utility/libc/inttypes.h": "74d13b881da343350993fcb926cbd11701cbb514411555747e381016cdc0f921",
+        "third-party/upstream/nationalchip-lvp-kws/include/utility/libc/klibc/extern.h": "addf134407ecf22a5bced6c998d30660dae0846528ad934eaa49742a9a7daf49",
+        "third-party/upstream/nationalchip-lvp-kws/include/utility/libc/klibc/inline.h": "1456ca9eb1444031e51a9424859da5340844e7be166ff7ab68f25159329be9e1",
+        "third-party/upstream/nationalchip-lvp-kws/utility/libc/strntoumax.c": "574f41b773b299db38f57e14f1dc3bf87b55599fa0a1983e1ccdb9aef2d4a368"
+      },
+      "object": "g2/build/c-firmware/20261013/peripherals-root-strtol-round431/apollo_main/experimental-167.o",
+      "object_sha256": "ae3955180f208df322dcfd778a4601b4b83a3392565ed0dceb6a2e61d1882023",
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libc/strntoumax.c",
+      "source_sha256": "574f41b773b299db38f57e14f1dc3bf87b55599fa0a1983e1ccdb9aef2d4a368",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    }
+  ],
+  "status": "completed"
+}

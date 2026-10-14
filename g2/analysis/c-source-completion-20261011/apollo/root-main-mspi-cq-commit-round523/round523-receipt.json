@@ -1,0 +1,71 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 721,
+    "strong_unresolved_before": 721
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_cq_commit_candidates_20261013/commit.c",
+      "sha256": "278de682fa259c48bb47c0b144571bfc88dcdd7e1ff8d1fc9db4c6fc9260142d"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "724d72845b3221e632dfba37cbab9ec53b88fcd9422d70b816f58ad1b6ea764a"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/00538fb4.c",
+      "sha256": "bf0ba1f7d8febb094c82f6c99be7b76ac527bccab10d509d40dae3c64e932ae7"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/005391d6.c",
+      "sha256": "e0419b5212ff3654aa3f5acb9cb8996622914305e4c2cea3a1b155d402c68a7f"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/00538f82.c",
+      "sha256": "3ae8e37158c3cf65f51d874b907170dc5e1a0dfe82173e39765fd842edf0b408"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_cq_commit.py",
+      "sha256": "a86053d6006be38f1e8709d59ea19e3928d8e6bc6aa88cb408749467e062485a"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-cq-commit-round523/oracle.json",
+      "sha256": "7a483593c36de2b0f45e5a6d14e6fe3eb76e491348b25af67d2032a7e68f843e"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-cq-commit-round523/isolated/commit.elf",
+      "sha256": "b88e8ac98ecaf96941a30d175080eee7b495b664d4fed0d3001cce4199d5d1e4"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-cq-commit-round523/receipt.json",
+      "sha256": "bf74a65228b1f8c2e993b5e8c7d0cc315e381552a4a7f10a7d334000afdb10a8"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-cq-commit-round523/apollo_main/candidate.o",
+      "sha256": "6a6c93a6c10f981166e8791db5b77c0291a73a284a30e8099a1d1b2175804186"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Synthetic queue and index-register state; concurrent and physical operation unverified.",
+    "Queue reservation provider and selector 30 remain unresolved; full transfer dispatcher unresolved.",
+    "0 of 6 images source-complete."
+  ],
+  "native_entrypoints": [
+    "0x538fb4",
+    "0x5391d6",
+    "0x538f82"
+  ],
+  "native_source_oracle_cases": 432,
+  "provenance": "Main Ghidra pseudocode, locked native blob and native/source queue and descriptor comparison",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_main_cq_commit_538fb4",
+    "g2_main_cq_commit_marker_5391d6",
+    "g2_main_cq_rollback_538f82"
+  ],
+  "status": "bounded_helpers_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

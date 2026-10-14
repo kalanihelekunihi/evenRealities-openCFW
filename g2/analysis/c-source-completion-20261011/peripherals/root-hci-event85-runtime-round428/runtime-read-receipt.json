@@ -1,0 +1,39 @@
+{
+  "limits": [
+    "Stock type 85 indexes a zero byte and passes size zero to allocator; original table object allocation extent remains unknown",
+    "Allocator outcome, callbacks, hardware, final layout and byte identity unproven"
+  ],
+  "observed": {
+    "event_bytes": [
+      62,
+      1,
+      34,
+      0
+    ],
+    "limit": "Allocator call observed; original table allocation extent and later runtime unproven",
+    "observation": {
+      "allocator_pc": "0x530446",
+      "allocator_size": 0,
+      "callback_type": 85
+    },
+    "status": "PASS_NATIVE_HCI_EVENT_85_ALLOCATION",
+    "stock_blob_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+  },
+  "prior_build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-hci-event-sizes-round427/receipt.json",
+    "sha256": "aed2c900abb562b6591ca09cd30b20d6beaba187d1b04860474aa2ccdd14147b"
+  },
+  "prior_builder_object_match": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-event-sizes-round427/builder-object-match.json",
+    "sha256": "a642d19495402745f71aa757e8575f37bb317aa97edcbc3bd5a525120d299f49"
+  },
+  "prior_source_candidate": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-event-sizes-round427/event_sizes.c",
+    "sha256": "1921fbc1e81d3f0bd58a9c05f6af2a056f5fd9d4c4ffba3954e36e489ea5caec"
+  },
+  "script": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-event85-runtime-round428/verify_native.py",
+    "sha256": "72c0f5824d3689248a3af7848304fa50fcddc093e1675d266797cfc47b107256"
+  },
+  "status": "PASS_NATIVE_EVENT85_ZERO_SIZE_READ"
+}

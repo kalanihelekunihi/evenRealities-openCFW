@@ -1,0 +1,411 @@
+{
+  "status": "PASS_LOGGER_AT_NATIVE_INITIAL_SP",
+  "cases": 34,
+  "ELF_sha256": "af3e6d17dba6058c831053ec241f1f6f6c2c2d646d1c43cbcd5fea77da923760",
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "comparisons": [
+    {
+      "format": "literal\r\n",
+      "args": [],
+      "busy": false,
+      "return": 9,
+      "output_hex": "6c69746572616c0d0a",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 224
+    },
+    {
+      "format": "literal\r\n",
+      "args": [],
+      "busy": true,
+      "return": 9,
+      "output_hex": "6c69746572616c0d0a",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 184
+    },
+    {
+      "format": "%u",
+      "args": [
+        0
+      ],
+      "busy": false,
+      "return": 1,
+      "output_hex": "30",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 368
+    },
+    {
+      "format": "%u",
+      "args": [
+        0
+      ],
+      "busy": true,
+      "return": 1,
+      "output_hex": "30",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 328
+    },
+    {
+      "format": "%d",
+      "args": [
+        2147483648
+      ],
+      "busy": false,
+      "return": 11,
+      "output_hex": "2d32313437343833363438",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 368
+    },
+    {
+      "format": "%d",
+      "args": [
+        2147483648
+      ],
+      "busy": true,
+      "return": 11,
+      "output_hex": "2d32313437343833363438",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 328
+    },
+    {
+      "format": "%08x",
+      "args": [
+        3735928559
+      ],
+      "busy": false,
+      "return": 8,
+      "output_hex": "6465616462656566",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 368
+    },
+    {
+      "format": "%08x",
+      "args": [
+        3735928559
+      ],
+      "busy": true,
+      "return": 8,
+      "output_hex": "6465616462656566",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 328
+    },
+    {
+      "format": "%+8d",
+      "args": [
+        4294967289
+      ],
+      "busy": false,
+      "return": 8,
+      "output_hex": "2020202020202d37",
+      "native_stack_bytes": 272,
+      "source_stack_bytes": 392
+    },
+    {
+      "format": "%+8d",
+      "args": [
+        4294967289
+      ],
+      "busy": true,
+      "return": 8,
+      "output_hex": "2020202020202d37",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 352
+    },
+    {
+      "format": "%#x %#o",
+      "args": [
+        291,
+        9
+      ],
+      "busy": false,
+      "return": 9,
+      "output_hex": "307831323320303131",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 368
+    },
+    {
+      "format": "%#x %#o",
+      "args": [
+        291,
+        9
+      ],
+      "busy": true,
+      "return": 9,
+      "output_hex": "307831323320303131",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 328
+    },
+    {
+      "format": "%-8.3s",
+      "args": [
+        536891904
+      ],
+      "busy": false,
+      "return": 8,
+      "output_hex": "6162632020202020",
+      "native_stack_bytes": 256,
+      "source_stack_bytes": 248
+    },
+    {
+      "format": "%-8.3s",
+      "args": [
+        536891904
+      ],
+      "busy": true,
+      "return": 8,
+      "output_hex": "6162632020202020",
+      "native_stack_bytes": 216,
+      "source_stack_bytes": 208
+    },
+    {
+      "format": "%c %%",
+      "args": [
+        65
+      ],
+      "busy": false,
+      "return": 3,
+      "output_hex": "412025",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 224
+    },
+    {
+      "format": "%c %%",
+      "args": [
+        65
+      ],
+      "busy": true,
+      "return": 3,
+      "output_hex": "412025",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 184
+    },
+    {
+      "format": "%u %u %u %u %u %u",
+      "args": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "busy": false,
+      "return": 11,
+      "output_hex": "3120322033203420352036",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 368
+    },
+    {
+      "format": "%u %u %u %u %u %u",
+      "args": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "busy": true,
+      "return": 11,
+      "output_hex": "3120322033203420352036",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 328
+    },
+    {
+      "format": "%*.*x",
+      "args": [
+        10,
+        4,
+        291
+      ],
+      "busy": false,
+      "return": 10,
+      "output_hex": "20202020202030313233",
+      "native_stack_bytes": 272,
+      "source_stack_bytes": 392
+    },
+    {
+      "format": "%*.*x",
+      "args": [
+        10,
+        4,
+        291
+      ],
+      "busy": true,
+      "return": 10,
+      "output_hex": "20202020202030313233",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 352
+    },
+    {
+      "format": "abc%nZ",
+      "args": [
+        536892160
+      ],
+      "busy": false,
+      "return": 4,
+      "output_hex": "6162635a",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 224
+    },
+    {
+      "format": "abc%nZ",
+      "args": [
+        536892160
+      ],
+      "busy": true,
+      "return": 4,
+      "output_hex": "6162635a",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 184
+    },
+    {
+      "format": "abc%hhnZ",
+      "args": [
+        536892160
+      ],
+      "busy": false,
+      "return": 4,
+      "output_hex": "6162635a",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 224
+    },
+    {
+      "format": "abc%hhnZ",
+      "args": [
+        536892160
+      ],
+      "busy": true,
+      "return": 4,
+      "output_hex": "6162635a",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 184
+    },
+    {
+      "format": "abc%hnZ",
+      "args": [
+        536892160
+      ],
+      "busy": false,
+      "return": 4,
+      "output_hex": "6162635a",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 224
+    },
+    {
+      "format": "abc%hnZ",
+      "args": [
+        536892160
+      ],
+      "busy": true,
+      "return": 4,
+      "output_hex": "6162635a",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 184
+    },
+    {
+      "format": "%hhu %hd",
+      "args": [
+        4294967211,
+        4294934528
+      ],
+      "busy": false,
+      "return": 10,
+      "output_hex": "313731202d3332373638",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 368
+    },
+    {
+      "format": "%hhu %hd",
+      "args": [
+        4294967211,
+        4294934528
+      ],
+      "busy": true,
+      "return": 10,
+      "output_hex": "313731202d3332373638",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 328
+    },
+    {
+      "format": "%p",
+      "args": [
+        536875572
+      ],
+      "busy": false,
+      "return": 8,
+      "output_hex": "3230303031323334",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 368
+    },
+    {
+      "format": "%p",
+      "args": [
+        536875572
+      ],
+      "busy": true,
+      "return": 8,
+      "output_hex": "3230303031323334",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 328
+    },
+    {
+      "format": "%llu",
+      "args": [
+        0,
+        4294967295,
+        1
+      ],
+      "busy": false,
+      "return": 10,
+      "output_hex": "38353839393334353931",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 368
+    },
+    {
+      "format": "%llu",
+      "args": [
+        0,
+        4294967295,
+        1
+      ],
+      "busy": true,
+      "return": 10,
+      "output_hex": "38353839393334353931",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 328
+    },
+    {
+      "format": "%llx",
+      "args": [
+        0,
+        2882400001,
+        305419896
+      ],
+      "busy": false,
+      "return": 16,
+      "output_hex": "31323334353637386162636465663031",
+      "native_stack_bytes": 232,
+      "source_stack_bytes": 368
+    },
+    {
+      "format": "%llx",
+      "args": [
+        0,
+        2882400001,
+        305419896
+      ],
+      "busy": true,
+      "return": 16,
+      "output_hex": "31323334353637386162636465663031",
+      "native_stack_bytes": 192,
+      "source_stack_bytes": 328
+    }
+  ],
+  "native_max_stack_bytes": 272,
+  "source_max_stack_bytes": 392,
+  "limits": [
+    "Synthetic static TXE/TC ready or BUSY input; not physical UART proof",
+    "Native initial SP 0x20002c88; compare RAM below 0x20001c88, reserving 4096-byte stack fixture; excludes interrupts/reentrancy/global worst case. Formats and argument strings remain mapped RAM fixtures, not recovered firmware assets.",
+    "Actual callbacks and providers execute; no child cuts/stubs/return injection"
+  ]
+}

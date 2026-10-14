@@ -1,0 +1,28 @@
+{
+  "round": 549,
+  "status": "PASS_BACKEND_CLOSE_CYCLE_CONNECTED_BOUNDED",
+  "component": "Apollo audio LittleFS traversal cycle detection joined to close and allocation",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "First metadata-pair cycle-detector state transition executes from native and C in 1,513 connected cases",
+  "case_count": 1513,
+  "joined_c_functions": 35,
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_cycle_connected.py",
+      "sha256": "085ebc159d80acd4fdefcc0904389aaf3bf61ac1ceb88dc64ab78b5625febead"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/backend-close-cycle-connected-results.json",
+      "sha256": "127d05153e72d98bbf26839c4a102ae855e57156b935f019876628c8c1b1e28d"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/tortoise_detectcycles.c",
+      "sha256": "cbf74127286ab07b02de5f6c30e5ef5f64e09d9df80a63e31310f68dc54005fd"
+    }
+  ],
+  "remaining_estimate": {
+    "filesystem_traversal": "Three direct providers still cut in connected fixture (directory fetch, directory slice, CTZ traversal), plus real metadata contents, orphan and open-file paths. Roughly 75-85 percent of traversal integration remains.",
+    "whole_g2_firmware": "0 of 6 image components source-complete; latest Main full build had 720 unresolved symbols. Source manifest unchanged, so no new full build."
+  },
+  "limits": "Directory fetch is synthetic; visited-block cases still synthesize callback delivery. No physical storage, boot, or hardware proof."
+}

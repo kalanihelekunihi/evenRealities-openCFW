@@ -1,0 +1,45 @@
+{
+  "added_imports": [],
+  "alias_address_matches": 32,
+  "alias_manifest": {
+    "path": "g2/firmware_c/experimental-link-aliases.json",
+    "sha256": "760bb4888f5399c7b1b9b6df2f4a2a23cf80d3a3ad195bd27619566dab28574c"
+  },
+  "bounded_copy_native_probe": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_dashboard_copy_native.py",
+    "sha256": "fe08a283ff15d24687a239d51b8d1a7968a310335aba2c46979e460345a9f872"
+  },
+  "bounded_copy_source": {
+    "path": "g2/components/audio/uart_thread_source_candidate/display_settings_copy_text.c",
+    "sha256": "c16d335ab961583f324bc58583acbfe6d0ec17809b29e9dc61974369d41e55d9"
+  },
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-string-joins-round421/receipt.json",
+    "sha256": "b952b3a672d87e142b8446918e9785c1984e4b75c6a1aa997c435550d26650ab"
+  },
+  "definitions": 3945,
+  "duplicate_strong_symbols": 0,
+  "image": "apollo_main",
+  "imports": 769,
+  "length_source": {
+    "path": "g2/components/main/extended_log_memory_candidates_20261010/memory.c",
+    "sha256": "8a213d35d4060056be917aff2f7223f4bfceff46b4447ead00cecd009a1431f9"
+  },
+  "limits": [
+    "Selected string C bodies and alias addresses are compile/link checked; full runtime integration remains unproven",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "new_joins": {
+    "strlen": "g2_log_module_length",
+    "strncpy": "audio_settings_copy_text"
+  },
+  "removed_imports": [
+    "strlen",
+    "strncpy"
+  ],
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-string-joins-round421/root-source-audit.json",
+    "sha256": "1db2d36a166efbc346394889f430d108d7319f63fdc744dcf65807bd97e88567"
+  },
+  "status": "PASS_EXPERIMENTAL_NATIVE_STRING_JOINS"
+}

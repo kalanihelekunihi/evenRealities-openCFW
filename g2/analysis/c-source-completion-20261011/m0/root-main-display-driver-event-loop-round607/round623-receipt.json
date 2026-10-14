@@ -1,0 +1,25 @@
+{
+  "round": 623,
+  "component": "Apollo uLED two-option identifier",
+  "status": "C scanner compiles and passes 35 native/C bounded cases; option objects remain source contracts; combined candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "195d4690d8d7f7f102a094cc4f2cb4f11f607d73f65b078de8be0971e0f59ba3",
+  "verifier_sha256": "51546a78e8f7c5abe0c00d89c27f549b12096a2e7c1aa86b3691b3ece8c5bd77",
+  "link_audit_sha256": "647730cff47c0f5c76927393d397b342d39453b0bf5578e7de594e6f68ad861b",
+  "combined_object_sha256": "64f457930b1d15735d0e7b2c6a6f6580fd8c77699f3f25d3d7dd161262b9d591",
+  "rom_section": "0x78ee24..0x78ee2c contains two pointers 0x70afe4(type 1), 0x70b024(type 0)",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_IDENTIFY_NATIVE 35",
+    "PASS_DISPLAY_DRIVER_ULED_INIT_NATIVE 16",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 73 20 7",
+    "ARM Cortex-M55 syntax compile warnings as errors",
+    "git diff --check"
+  ],
+  "gates": [
+    "two uLED option objects and their method bodies are not source-owned",
+    "row callback 0x4ca2ac, work buffer layout, and three other display-driver helpers open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0
+}

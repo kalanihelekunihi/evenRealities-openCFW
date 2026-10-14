@@ -1,0 +1,62 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 727,
+    "strong_unresolved_before": 728
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/clock_release_2_candidates_20261013/release.c",
+      "sha256": "4d6f8fe40598eebe18c7d741568e8f7c5a8b300cd423e5dfda4f780b6903bd01"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c3e9a.c",
+      "sha256": "937faf300c96b6ae8c22df2c8a1c250f542b0b88590d0de5fa1f6cbdf1d9b044"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004809c4.c",
+      "sha256": "398c734e9d10104f1fc2780e7fd02003e66747937a729eb730c6d58c97867b6c"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "b828905d6e9bf305eeaff61c0d569fe8764ea5e67edda87ff2c9c1ec05296c14"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_release_2.py",
+      "sha256": "9d8aa8415892ea39d863909c27b315212efeea2760ce265538dd28cfc18f9ad7"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-release-2-round500/oracle.json",
+      "sha256": "deb3560b2983275c8551f97ee69be76be5653ac0c77a7faefb50078f6e9b28d8"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-release-2-round500/isolated/release.elf",
+      "sha256": "1d9407c3aa364dcede0600d86cd6b6aec00a05cfe601ef17f22a7898661af3a9"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-release-2-round500/receipt.json",
+      "sha256": "c957af0732a37ab6c6de6340d5082a072b90f217a5cf4c71ea1b6ad2d077eb47"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-release-2-round500/apollo_main/candidate.o",
+      "sha256": "22b2115ac69fafb6edd966604e1db680df7d4bed06ec7739dcc107664eb0ef24"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Critical-save helper intercepted; native mode-4 shutdown executed and compared with source register sequence.",
+    "Physical clock operation and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x4c3e9a"
+  ],
+  "native_source_oracle_cases": 896,
+  "provenance": "Main Ghidra pseudocode, locked native blob and class 2 native/source SRAM/MMIO comparison",
+  "schema": "opencfw-source-provider-receipt-v1",
+  "source_bodies": [
+    "g2_main_clock_release_2_4c3e9a"
+  ],
+  "status": "provider_body_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

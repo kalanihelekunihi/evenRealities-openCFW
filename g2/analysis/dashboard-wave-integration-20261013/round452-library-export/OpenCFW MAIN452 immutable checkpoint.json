@@ -1,0 +1,80 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "flash_load_bytes": 158892,
+    "full_payload_linked": false
+  },
+  "completed_utc": "2026-10-13T23:16:14.225553+00:00",
+  "component": "apollo_bootloader",
+  "implementation_delta": {
+    "new_provider_bodies": 0,
+    "priority_source_path_leads_classified": 4,
+    "selected_current_scatter_and_pointer_audit": true
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "All 63 initialized pointer relocations and 34 callback relocations are verified in the current experimental link, not in a final image scatter map.",
+    "The four previously priority GC leads have implemented source bodies but alternate selected call paths; native/source whole-path equivalence remains open.",
+    "Runtime startup, ROM lower behavior, whole-image coverage, and hardware remain unverified."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Four selected/native topology differences",
+      "Final scatter/load-run and startup/ROM behavior",
+      "Whole-image coverage; 0/6 complete images"
+    ],
+    "reason": "Review final load/run and whole-path fidelity"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/audit_boot_scatter_placement.py",
+      "sha256": "3366f4a74e3e56339fe73202373cc1dec69eae10c3d38e44fb82db33e80eb045"
+    },
+    {
+      "path": "g2/firmware_c/source-gates.json",
+      "sha256": "55c818bea551b935cf2fc131536dbfa82d948a9e1f03346e9a4328d89a1251fa"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-current-scatter-round452/verify_double_compare_bytes.py",
+      "sha256": "bab846a6726cd99e2bd945ce011e8f864b8253ad50460d27b77fbd3edc013d90"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-current-scatter-round452/initialized-pointer-objects.json",
+      "sha256": "6af4026b498a01cdf89424f1557766bdec3dc7b87f1542bf8c54a4155779cb0e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-current-scatter-round452/scatter-traversal.json",
+      "sha256": "0ccc073af7b665b4f458ec484f0e53e2e58f069b531cb6ebf3635d972afc463d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-current-scatter-round452/scatter-placement.json",
+      "sha256": "f1999b21471a420ced1ead5d01de536a4afb04a08e15b60141c48c7ba87d2d20"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-current-scatter-round452/priority-lead-review.json",
+      "sha256": "d26b5b4939d690b582fed3de780c4af2d0bbe87e40f1a90799963b0bd2b7db0a"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-uart-ambient-round451/placed/boot.elf",
+      "sha256": "00ccc3a7841051e022aecc5e1e7027835952daabad607d01fbc19f35fece9d81"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-current-scatter-round452/round452-receipt.json",
+      "sha256": "d447fbb87ec088d67bc59742ef1e320274052ad798c990f7c08186b3a8ccf36d"
+    }
+  ],
+  "wave_id": "root-boot-round452-current-scatter-and-leads",
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-current-scatter-round452/dashboard-wave/wave.json",
+    "sha256": "5cb8d87b13755e81287b31e372231360e39bc7b117ea2282a416d321f3005325"
+  },
+  "publication_scope": "Bounded Apollo bootloader current scatter/GC review; full image incomplete; no map/image promotion"
+}

@@ -1,10 +1,18 @@
 {
   "status": "PASS_FILE_BACKEND_CLOSE_BOUNDED",
-  "cases": 4,
+  "cases": 20,
   "rows": [
     {
       "isopen": 0,
       "result": 0
+    },
+    {
+      "isopen": 0,
+      "result": 1
+    },
+    {
+      "isopen": 0,
+      "result": 4294967291
     },
     {
       "isopen": 0,
@@ -16,6 +24,62 @@
     },
     {
       "isopen": 1,
+      "result": 1
+    },
+    {
+      "isopen": 1,
+      "result": 4294967291
+    },
+    {
+      "isopen": 1,
+      "result": 4294967295
+    },
+    {
+      "isopen": 2,
+      "result": 0
+    },
+    {
+      "isopen": 2,
+      "result": 1
+    },
+    {
+      "isopen": 2,
+      "result": 4294967291
+    },
+    {
+      "isopen": 2,
+      "result": 4294967295
+    },
+    {
+      "isopen": 2147483648,
+      "result": 0
+    },
+    {
+      "isopen": 2147483648,
+      "result": 1
+    },
+    {
+      "isopen": 2147483648,
+      "result": 4294967291
+    },
+    {
+      "isopen": 2147483648,
+      "result": 4294967295
+    },
+    {
+      "isopen": 4294967295,
+      "result": 0
+    },
+    {
+      "isopen": 4294967295,
+      "result": 1
+    },
+    {
+      "isopen": 4294967295,
+      "result": 4294967291
+    },
+    {
+      "isopen": 4294967295,
       "result": 4294967295
     }
   ],

@@ -1,0 +1,72 @@
+{
+  "build": {
+    "definitions": 3945,
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false,
+    "imports": 769
+  },
+  "completed_utc": "2026-10-13T21:52:28.931646+00:00",
+  "component": "apollo_main",
+  "implementation_delta": {
+    "abi_adapters": [],
+    "actual_c_bodies": [],
+    "experimental_symbol_joins": 2,
+    "fixtures_or_stubs": [],
+    "pseudocode_only": [],
+    "typed_data": []
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "Selected string C bodies and alias addresses are compile/link checked; full runtime integration remains unproven",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "769 unresolved Apollo Main imports",
+      "Experimental FreeType callback/runtime admission",
+      "0/6 complete firmware images"
+    ],
+    "reason": "Qualify remaining upstream source and runtime imports"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-string-joins-round421/string-provider-receipt.json",
+      "sha256": "6946c6cbb31a31827ea226796f76262f8c344e58e4e68d08c852bbef2a702275"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-string-joins-round421/receipt.json",
+      "sha256": "b952b3a672d87e142b8446918e9785c1984e4b75c6a1aa997c435550d26650ab"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-string-joins-round421/root-source-audit.json",
+      "sha256": "1db2d36a166efbc346394889f430d108d7319f63fdc744dcf65807bd97e88567"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-string-joins-round421/string-provider-receipt.json",
+      "sha256": "6946c6cbb31a31827ea226796f76262f8c344e58e4e68d08c852bbef2a702275"
+    }
+  ],
+  "tests": {
+    "expected_failures": [],
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-string-joins-round421/string-provider-receipt.json",
+        "sha256": "6946c6cbb31a31827ea226796f76262f8c344e58e4e68d08c852bbef2a702275"
+      }
+    ]
+  },
+  "wave_id": "root-apollo-main-round421-native-string-joins",
+  "checkpoint_schema": "opencfw-per-component-checkpoint-v1",
+  "wave_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-string-joins-round421/dashboard-wave/wave.json",
+    "sha256": "0a224f484901b327dbf1da71e2b5da9cb162b755b7f1ceee3854ac001d946efe"
+  },
+  "publication_scope": "experimental native string joins only; no production/map promotion"
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "apollo-display-driver-callback-correction-v1",
+  "captured_utc": "2026-10-14T07:30:58.520883+00:00",
+  "supersedes_path": "g2/analysis/c-source-completion-20261011/m0/root-main-uart-callback-obligation-round604/uart-callback-obligation.json",
+  "supersedes_sha256": "67b815a4dd9e5f8e33dfe0dd6cab4c6c2f37e63090ad917113f6e7665c939868",
+  "corrections": [
+    {
+      "field": "pointer_startup_hex",
+      "old": "220e97ed801e9ced803e03f1200702f1",
+      "correct": "53394700a53a47000000000000000000",
+      "reason": "The prior field sliced the raw firmware payload by SRAM offset. Authenticated compressed SRAM decoding gives the corrected record."
+    },
+    {
+      "field": "function_identity",
+      "old": "UART callback",
+      "correct": "display-driver manager thread and queue initialization",
+      "reason": "ROM function/module/source strings identify Disp_ThreadInit, DISP_MessageQueueInit, and displaydrv_manager.c."
+    }
+  ],
+  "native_record_address": "0x20000658",
+  "native_record_words": [
+    "0x00473953",
+    "0x00473aa5",
+    "0x00000000",
+    "0x00000000"
+  ],
+  "body_ranges": [
+    {
+      "entry": "0x473952",
+      "end_exclusive": "0x4739fc",
+      "sha256": "b19b9503ab5a6d1198759601df7eb669479a20dd180da12d19144f274146aa48"
+    },
+    {
+      "entry": "0x4739fc",
+      "end_exclusive": "0x473aa4",
+      "sha256": "21db44eae1bd22a7bb43dff81d73d07a56196d8878605fed8d7af55989b7a453"
+    }
+  ],
+  "selection_gate": "C bodies compare for 28 bounded cases and compile, but thread entry, attribute objects, full caller composition, final RAM placement, and hardware behavior remain open."
+}

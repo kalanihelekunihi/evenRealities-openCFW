@@ -1,0 +1,45 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved": 730
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/fal_norflash_command_candidates_20261013/command.c",
+      "sha256": "5b1872c70651c782c9138f492e60083017554617ee7cac0312bb169afa50dbf6"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "d16c5b979421af461aaccdc334ba24daeae989b92bc61287abc759b47e96cf17"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-command-round463/receipt.json",
+      "sha256": "7394baee1e835b9d1b323be53bce45c63c139cf45086595e4c2e1297b3b042a2"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-command-round463/apollo_main/candidate.o",
+      "sha256": "59c8ed0a3be7680cf80f46bbb54e193aa8cffe8e6ae58b64e18c1f339b4b952e"
+    }
+  ],
+  "host_checks": [
+    "controller/buffer/count/address validation",
+    "request field offsets and values",
+    "mode byte reduction and address selection",
+    "transfer result and failure diagnostic"
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "The stock instruction control path and injected-transfer request layout are checked; physical MSPI transfer at 0x4c2098 and live controller state remain unresolved.",
+    "No hardware flash effects or complete Main image were verified."
+  ],
+  "native_entrypoint": "0x470168",
+  "request_bytes": 24,
+  "request_transfer_timeout": 1000000,
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_body": "g2_norflash_command_470168",
+  "status": "bounded_source_verified",
+  "stock_entry_bytes_sha256": "9a9b9db47d8e826f3a31f506538822d8df44eac5e9593c2d6e2d45f66bcc0429",
+  "stock_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "target_id": "official-s200-v2.2.6.10"
+}

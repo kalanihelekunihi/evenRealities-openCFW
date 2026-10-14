@@ -6,13 +6,9 @@ from unicorn import Uc,UC_ARCH_ARM,UC_MODE_THUMB,UC_HOOK_CODE
 from unicorn.arm_const import UC_ARM_REG_R0,UC_ARM_REG_LR,UC_ARM_REG_SP,UC_ARM_REG_PC
 ROOT=Path(__file__).resolve().parents[3];BLOB=(ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 with tempfile.TemporaryDirectory() as td:
-    shim=Path(td)/'shim.c';shim.write_text('''#include <stdint.h>
-uint32_t audio_als_active_previous,audio_als_default_previous,audio_als_scale_clamped;
-uint32_t audio_als_scale_active,audio_als_scale_shadow,audio_als_recompute_pending;
-uint32_t audio_als_curve_index,audio_als_curve_nominal,audio_als_curve_adjusted;
-''')
+    state=ROOT/'components/audio/uart_thread_source_candidate/display_als_state.c'
     elf=Path(td)/'test.elf'
-    subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,audio_settings_apply_als',str(ROOT/'components/audio/uart_thread_source_candidate/display_settings_als_apply.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_als_calculation.c'),str(shim),'-o',str(elf)],check=True)
+    subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,audio_settings_apply_als',str(ROOT/'components/audio/uart_thread_source_candidate/display_settings_als_apply.c'),str(ROOT/'components/audio/uart_thread_source_candidate/display_als_calculation.c'),str(state),'-o',str(elf)],check=True)
     symbols=dict((p[2],int(p[0],16)) for line in subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True).splitlines() if len(p:=line.split())==3)
     with elf.open('rb') as f:segments=[(s['p_vaddr'],s.data()) for s in ELFFile(f).iter_segments() if s['p_type']=='PT_LOAD']
     cells=[('audio_als_active_previous',0x200741e0),('audio_als_default_previous',0x200741dc),('audio_als_scale_clamped',0x20000060),('audio_als_scale_active',0x20000064),('audio_als_scale_shadow',0x20000068),('audio_als_recompute_pending',0x20074200),('audio_als_curve_index',0x200741e4),('audio_als_curve_nominal',0x200741e8),('audio_als_curve_adjusted',0x200741ec)]

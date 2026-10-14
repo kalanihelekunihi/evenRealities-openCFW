@@ -7,24 +7,24 @@ from unicorn.arm_const import *
 ROOT=Path(__file__).resolve().parents[3]
 BLOB=(ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 SRC=ROOT/'components/audio/uart_thread_source_candidate/display_ble_hci_radio_children.c'
+PIN_MODE=ROOT/'components/audio/uart_thread_source_candidate/display_ble_hci_radio_pin_mode.c'
 SHIM='''#include <stdint.h>
-volatile uint32_t audio_ble_hci_radio_pin_mode;
 uint32_t audio_ble_hci_radio_pin_mask_4810b0(uint32_t a,uint32_t b,uint32_t *p){(void)a;(void)b;(void)p;return 0;}
 int32_t g2_gpio_hal_write(uint32_t a,uint32_t b){(void)a;(void)b;return 0;}
 uint32_t g2_codec_pin_function(uint32_t a,uint32_t b){(void)a;(void)b;return 0;}
 void audio_ble_hci_radio_mask_4c2e30(uint32_t a,uint32_t b){(void)a;(void)b;}
 void audio_ble_hci_radio_stack_stop_55c430(uint32_t a){(void)a;}
-void audio_ble_hci_radio_stack_option_55c7e8(uint32_t a,uint32_t b,uint32_t c){(void)a;(void)b;(void)c;}
+void audio_ble_radio_stack_option_55c7e8(uint32_t a,uint32_t b,uint32_t c){(void)a;(void)b;(void)c;}
 void audio_ble_hci_radio_stack_reset_55c286(uint32_t a){(void)a;}
 '''
 with tempfile.TemporaryDirectory() as td:
  p=Path(td)/'shim.c';p.write_text(SHIM);elf=Path(td)/'a.elf'
- subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,audio_ble_hci_radio_reset_52df12',str(SRC),str(p),'-o',str(elf)],check=True)
+ subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,audio_ble_hci_radio_reset_52df12',str(SRC),str(PIN_MODE),str(p),'-o',str(elf)],check=True)
  syms={v[2]:int(v[0],16) for line in subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True).splitlines() if len(v:=line.split())==3}
  with elf.open('rb') as f:segs=[(s['p_vaddr'],s.data()) for s in ELFFile(f).iter_segments() if s['p_type']=='PT_LOAD']
  native={0x4c2e30:'mask',0x55c430:'stop',0x55c7e8:'option',0x55c286:'reset'}
  compiled={syms['audio_ble_hci_radio_'+n+'_x']:'?' for n in ()}
- compiled={syms['audio_ble_hci_radio_mask_4c2e30']&~1:'mask',syms['audio_ble_hci_radio_stack_stop_55c430']&~1:'stop',syms['audio_ble_hci_radio_stack_option_55c7e8']&~1:'option',syms['audio_ble_hci_radio_stack_reset_55c286']&~1:'reset'}
+ compiled={syms['audio_ble_hci_radio_mask_4c2e30']&~1:'mask',syms['audio_ble_hci_radio_stack_stop_55c430']&~1:'stop',syms['audio_ble_radio_stack_option_55c7e8']&~1:'option',syms['audio_ble_hci_radio_stack_reset_55c286']&~1:'reset'}
  for selector,flag in ((0,0),(4,1),(8,255),(9,1),(0xffffffff,1)):
   results=[]
   for is_c in (False,True):
@@ -58,3 +58,22 @@ with tempfile.TemporaryDirectory() as td:
    results.append((u.reg_read(UC_ARM_REG_R0),calls))
   assert results[0]==results[1],(replacement,results)
   print('PASS disable',replacement,results[0])
+ assert struct.unpack_from('<I',BLOB,0x78ee48-0x438000)[0]==3
+ pin_calls=[]
+ for is_c in (False,True):
+  u=Uc(UC_ARCH_ARM,UC_MODE_THUMB);u.mem_map(0x400000,0x400000);u.mem_write(0x438000,BLOB)
+  u.mem_map(0x100000,0x100000);u.mem_map(0x20000000,0x100000)
+  for a,d in segs:u.mem_write(a,d)
+  if is_c:assert struct.unpack('<I',u.mem_read(syms['audio_ble_hci_radio_pin_mode'],4))[0]==3
+  cuts={syms['g2_gpio_hal_write']&~1:'gpio',syms['g2_codec_pin_function']&~1:'pin'} if is_c else {0x480fd6:'gpio',0x480f0c:'pin'}
+  calls=[]
+  def hook(uc,a,size,_):
+   if a not in cuts:return
+   calls.append((cuts[a],uc.reg_read(UC_ARM_REG_R0),uc.reg_read(UC_ARM_REG_R1)))
+   uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
+  u.hook_add(UC_HOOK_CODE,hook)
+  u.reg_write(UC_ARM_REG_SP,0x200ff000);u.reg_write(UC_ARM_REG_LR,0x600001)
+  u.emu_start((syms['audio_ble_hci_radio_pins_52dd7c'] if is_c else 0x52dd7c)|1,0x600000,count=100)
+  pin_calls.append(calls)
+ assert pin_calls[0]==pin_calls[1]==[('gpio',0x5d,0),('pin',0x8a,3)],pin_calls
+ print('PASS radio pins ROM mode',pin_calls[0])

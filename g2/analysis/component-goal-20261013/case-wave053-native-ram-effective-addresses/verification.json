@@ -1,0 +1,5347 @@
+{
+  "status": "NATIVE_STATIC_RAM_EFFECTIVE_ADDRESS_AUDIT",
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "catalogue_sha256": "5447649e214aaf10cbe916d3474dcdfbece16a0570d3d243dc9e34e64ed39ab7",
+  "disassembly_sha256": "2000b534fbbe4ca93089b14630f70194f471f6902f0e885d95b6270dead4d33b",
+  "functions": 435,
+  "abstract_states": 27996,
+  "target_count": 118,
+  "static_address_join_count": 101,
+  "joins": {
+    "0x20000000": [
+      {
+        "function_entry": "0x8008fa8",
+        "PC": "0x8008fde",
+        "effective_address": "0x20000000",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8008fde:\t6820      \tldr\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8008fa8",
+        "PC": "0x8008fe2",
+        "effective_address": "0x20000000",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8008fe2:\t6020      \tstr\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8008fa8",
+        "PC": "0x8008fde",
+        "effective_address": "0x20000000",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8008fde:\t6820      \tldr\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8008fa8",
+        "PC": "0x8008fe2",
+        "effective_address": "0x20000000",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8008fe2:\t6020      \tstr\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009004",
+        "PC": "0x800902c",
+        "effective_address": "0x20000000",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800902c:\t6828      \tldr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x8009004",
+        "PC": "0x8009032",
+        "effective_address": "0x20000000",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8009032:\t6028      \tstr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x8009004",
+        "PC": "0x800902c",
+        "effective_address": "0x20000000",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800902c:\t6828      \tldr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x8009004",
+        "PC": "0x8009032",
+        "effective_address": "0x20000000",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8009032:\t6028      \tstr\tr0, [r5, #0]"
+      }
+    ],
+    "0x20000028": [
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002abc",
+        "effective_address": "0x20000028",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002abc:\t7821      \tldrb\tr1, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002abc",
+        "effective_address": "0x20000028",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002abc:\t7821      \tldrb\tr1, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002ac0",
+        "effective_address": "0x20000028",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002ac0:\t7021      \tstrb\tr1, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002ac0",
+        "effective_address": "0x20000028",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002ac0:\t7021      \tstrb\tr1, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002aec",
+        "effective_address": "0x20000028",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002aec:\t7026      \tstrb\tr6, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002aec",
+        "effective_address": "0x20000028",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002aec:\t7026      \tstrb\tr6, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002ad6",
+        "effective_address": "0x20000028",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002ad6:\t7026      \tstrb\tr6, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002ad6",
+        "effective_address": "0x20000028",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002ad6:\t7026      \tstrb\tr6, [r4, #0]"
+      }
+    ],
+    "0x20000029": [
+      {
+        "function_entry": "0x80035b8",
+        "PC": "0x80035bc",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80035bc:\t7863      \tldrb\tr3, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80035b8",
+        "PC": "0x80035c4",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80035c4:\t7063      \tstrb\tr3, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80035b8",
+        "PC": "0x80035cc",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80035cc:\t7060      \tstrb\tr0, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80035d4",
+        "PC": "0x80035d8",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80035d8:\t7863      \tldrb\tr3, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80035d4",
+        "PC": "0x80035e0",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80035e0:\t7063      \tstrb\tr3, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80035d4",
+        "PC": "0x80035e8",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80035e8:\t7060      \tstrb\tr0, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80039c8",
+        "PC": "0x80039cc",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80039cc:\t7862      \tldrb\tr2, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80039c8",
+        "PC": "0x80039d4",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80039d4:\t7062      \tstrb\tr2, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80039c8",
+        "PC": "0x80039dc",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80039dc:\t7060      \tstrb\tr0, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80039e4",
+        "PC": "0x80039e8",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80039e8:\t7862      \tldrb\tr2, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80039e4",
+        "PC": "0x80039f0",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80039f0:\t7062      \tstrb\tr2, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80039e4",
+        "PC": "0x80039f8",
+        "effective_address": "0x20000029",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80039f8:\t7060      \tstrb\tr0, [r4, #1]"
+      }
+    ],
+    "0x2000002a": [
+      {
+        "function_entry": "0x8009f80",
+        "PC": "0x8009fd0",
+        "effective_address": "0x2000002a",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009fd0:\t5d30      \tldrb\tr0, [r6, r4]"
+      }
+    ],
+    "0x2000007c": [
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800cea0",
+        "effective_address": "0x2000007c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800cea0:\t700f      \tstrb\tr7, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800cfaa",
+        "effective_address": "0x2000007c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800cfaa:\t7801      \tldrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800cfd6",
+        "effective_address": "0x2000007c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800cfd6:\t7008      \tstrb\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800cfb2",
+        "effective_address": "0x2000007c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800cfb2:\t7001      \tstrb\tr1, [r0, #0]"
+      }
+    ],
+    "0x20000090": [
+      {
+        "function_entry": "0x800d250",
+        "PC": "0x800d258",
+        "effective_address": "0x20000090",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800d258:\t5c13      \tldrb\tr3, [r2, r0]"
+      }
+    ],
+    "0x200000b4": [
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8001fbe",
+        "effective_address": "0x200000b4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001fbe:\t7801      \tldrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8001fc4",
+        "effective_address": "0x200000b4",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001fc4:\t7001      \tstrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8001fd6",
+        "effective_address": "0x200000b4",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001fd6:\t7001      \tstrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8001fda",
+        "effective_address": "0x200000b4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001fda:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8001fbe",
+        "effective_address": "0x200000b4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001fbe:\t7801      \tldrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8001fc4",
+        "effective_address": "0x200000b4",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001fc4:\t7001      \tstrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8001fd6",
+        "effective_address": "0x200000b4",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001fd6:\t7001      \tstrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8001fda",
+        "effective_address": "0x200000b4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001fda:\t7800      \tldrb\tr0, [r0, #0]"
+      }
+    ],
+    "0x200000b8": [
+      {
+        "function_entry": "0x8009bc0",
+        "PC": "0x8009bfc",
+        "effective_address": "0x200000b8",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009bfc:\t7820      \tldrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009bc0",
+        "PC": "0x8009bd2",
+        "effective_address": "0x200000b8",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009bd2:\t7020      \tstrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009bc0",
+        "PC": "0x8009c02",
+        "effective_address": "0x200000b8",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009c02:\t7021      \tstrb\tr1, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009bc0",
+        "PC": "0x8009c16",
+        "effective_address": "0x200000b8",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009c16:\t7820      \tldrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009bc0",
+        "PC": "0x8009bf8",
+        "effective_address": "0x200000b8",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009bf8:\t7020      \tstrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009cc8",
+        "PC": "0x8009ce0",
+        "effective_address": "0x200000b8",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009ce0:\t7820      \tldrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009cc8",
+        "PC": "0x8009ce6",
+        "effective_address": "0x200000b8",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009ce6:\t7021      \tstrb\tr1, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009cc8",
+        "PC": "0x8009cdc",
+        "effective_address": "0x200000b8",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009cdc:\t7020      \tstrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009cc8",
+        "PC": "0x8009cfa",
+        "effective_address": "0x200000b8",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009cfa:\t7820      \tldrb\tr0, [r4, #0]"
+      }
+    ],
+    "0x200000bb": [
+      {
+        "function_entry": "0x80013b8",
+        "PC": "0x80013d4",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80013d4:\t70e5      \tstrb\tr5, [r4, #3]"
+      },
+      {
+        "function_entry": "0x8002a5c",
+        "PC": "0x8002a5e",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002a5e:\t78c0      \tldrb\tr0, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007422",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007422:\t78e8      \tldrb\tr0, [r5, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007808",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007808:\t78f8      \tldrb\tr0, [r7, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007808",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007808:\t78f8      \tldrb\tr0, [r7, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007422",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007422:\t78e8      \tldrb\tr0, [r5, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007808",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007808:\t78f8      \tldrb\tr0, [r7, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007b30",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007b30:\t78f8      \tldrb\tr0, [r7, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007e96",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007e96:\t78f8      \tldrb\tr0, [r7, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007b30",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007b30:\t78f8      \tldrb\tr0, [r7, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007e96",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007e96:\t78f8      \tldrb\tr0, [r7, #3]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007eb0",
+        "effective_address": "0x200000bb",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8007eb0:\t70f8      \tstrb\tr0, [r7, #3]"
+      }
+    ],
+    "0x200000bc": [
+      {
+        "function_entry": "0x8001408",
+        "PC": "0x8001420",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001420:\t7839      \tldrb\tr1, [r7, #0]"
+      },
+      {
+        "function_entry": "0x8001408",
+        "PC": "0x8001454",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001454:\t703e      \tstrb\tr6, [r7, #0]"
+      },
+      {
+        "function_entry": "0x8001408",
+        "PC": "0x8001504",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001504:\t703c      \tstrb\tr4, [r7, #0]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x8001584",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001584:\t7820      \tldrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x800158e",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800158e:\t7027      \tstrb\tr7, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x80015c0",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80015c0:\t7020      \tstrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x8001686",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001686:\t7027      \tstrb\tr7, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x8001768",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001768:\t7020      \tstrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x8001754",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001754:\t7020      \tstrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x8001754",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001754:\t7020      \tstrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x8001768",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001768:\t7020      \tstrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x8001768",
+        "effective_address": "0x200000bc",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001768:\t7020      \tstrb\tr0, [r4, #0]"
+      }
+    ],
+    "0x200000bd": [
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000b46",
+        "effective_address": "0x200000bd",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000b46:\t7008      \tstrb\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x800710a",
+        "effective_address": "0x200000bd",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800710a:\t7960      \tldrb\tr0, [r4, #5]"
+      }
+    ],
+    "0x200000be": [
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000c40",
+        "effective_address": "0x200000be",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000c40:\t7011      \tstrb\tr1, [r2, #0]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x800722e",
+        "effective_address": "0x200000be",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800722e:\t7980      \tldrb\tr0, [r0, #6]"
+      }
+    ],
+    "0x200000bf": [
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000930",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000930:\t7830      \tldrb\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x80009c8",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80009c8:\t7030      \tstrb\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x80009c8",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80009c8:\t7030      \tstrb\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x800097a",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800097a:\t7830      \tldrb\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000e44",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000e44:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8001116",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001116:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8001096",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001096:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x80010fe",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80010fe:\t7001      \tstrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x80010b2",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80010b2:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000f88",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000f88:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x80012e4",
+        "PC": "0x8001300",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001300:\t79e0      \tldrb\tr0, [r4, #7]"
+      },
+      {
+        "function_entry": "0x8001334",
+        "PC": "0x8001352",
+        "effective_address": "0x200000bf",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001352:\t79e0      \tldrb\tr0, [r4, #7]"
+      }
+    ],
+    "0x200000c0": [
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007a2c",
+        "effective_address": "0x200000c0",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007a2c:\t7a00      \tldrb\tr0, [r0, #8]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007a72",
+        "effective_address": "0x200000c0",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007a72:\t7a38      \tldrb\tr0, [r7, #8]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007a2c",
+        "effective_address": "0x200000c0",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007a2c:\t7a00      \tldrb\tr0, [r0, #8]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007a72",
+        "effective_address": "0x200000c0",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007a72:\t7a38      \tldrb\tr0, [r7, #8]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007a2c",
+        "effective_address": "0x200000c0",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007a2c:\t7a00      \tldrb\tr0, [r0, #8]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007a72",
+        "effective_address": "0x200000c0",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007a72:\t7a38      \tldrb\tr0, [r7, #8]"
+      }
+    ],
+    "0x200000c1": [
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000946",
+        "effective_address": "0x200000c1",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "8000946:\t8070      \tstrh\tr0, [r6, #2]"
+      },
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000bca",
+        "effective_address": "0x200000c1",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000bca:\t7011      \tstrb\tr1, [r2, #0]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009786",
+        "effective_address": "0x200000c1",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009786:\t7a68      \tldrb\tr0, [r5, #9]"
+      }
+    ],
+    "0x200000c2": [
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000946",
+        "effective_address": "0x200000c1",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "8000946:\t8070      \tstrh\tr0, [r6, #2]"
+      },
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000bd6",
+        "effective_address": "0x200000c2",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000bd6:\t701a      \tstrb\tr2, [r3, #0]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009718",
+        "effective_address": "0x200000c2",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009718:\t7aa8      \tldrb\tr0, [r5, #10]"
+      }
+    ],
+    "0x200000c3": [
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000be4",
+        "effective_address": "0x200000c3",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000be4:\t7023      \tstrb\tr3, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097d8",
+        "effective_address": "0x200000c3",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80097d8:\t7aea      \tldrb\tr2, [r5, #11]"
+      }
+    ],
+    "0x200000c4": [
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006e6e",
+        "effective_address": "0x200000c4",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8006e6e:\t7320      \tstrb\tr0, [r4, #12]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006e76",
+        "effective_address": "0x200000c4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006e76:\t7b20      \tldrb\tr0, [r4, #12]"
+      },
+      {
+        "function_entry": "0x800bb4c",
+        "PC": "0x800bb5e",
+        "effective_address": "0x200000c4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800bb5e:\t7b08      \tldrb\tr0, [r1, #12]"
+      },
+      {
+        "function_entry": "0x800bb4c",
+        "PC": "0x800bb62",
+        "effective_address": "0x200000c4",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800bb62:\t7308      \tstrb\tr0, [r1, #12]"
+      }
+    ],
+    "0x200000c8": [
+      {
+        "function_entry": "0x8006968",
+        "PC": "0x800697a",
+        "effective_address": "0x200000c8",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800697a:\t6120      \tstr\tr0, [r4, #16]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006e20",
+        "effective_address": "0x200000c8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8006e20:\t6920      \tldr\tr0, [r4, #16]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006e4a",
+        "effective_address": "0x200000c8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8006e4a:\t6920      \tldr\tr0, [r4, #16]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007e12",
+        "effective_address": "0x200000c8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8007e12:\t6938      \tldr\tr0, [r7, #16]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007e12",
+        "effective_address": "0x200000c8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8007e12:\t6938      \tldr\tr0, [r7, #16]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x8007e12",
+        "effective_address": "0x200000c8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8007e12:\t6938      \tldr\tr0, [r7, #16]"
+      },
+      {
+        "function_entry": "0x800ab70",
+        "PC": "0x800ab9a",
+        "effective_address": "0x200000c8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ab9a:\t6900      \tldr\tr0, [r0, #16]"
+      },
+      {
+        "function_entry": "0x800bb90",
+        "PC": "0x800bcdc",
+        "effective_address": "0x200000c8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800bcdc:\t6928      \tldr\tr0, [r5, #16]"
+      },
+      {
+        "function_entry": "0x800bb90",
+        "PC": "0x800bcdc",
+        "effective_address": "0x200000c8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800bcdc:\t6928      \tldr\tr0, [r5, #16]"
+      }
+    ],
+    "0x200000cc": [
+      {
+        "function_entry": "0x8006968",
+        "PC": "0x80069bc",
+        "effective_address": "0x200000cc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "80069bc:\t6160      \tstr\tr0, [r4, #20]"
+      },
+      {
+        "function_entry": "0x800bb74",
+        "PC": "0x800bb78",
+        "effective_address": "0x200000cc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800bb78:\t6960      \tldr\tr0, [r4, #20]"
+      },
+      {
+        "function_entry": "0x800bb74",
+        "PC": "0x800bb82",
+        "effective_address": "0x200000cc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800bb82:\t6960      \tldr\tr0, [r4, #20]"
+      }
+    ],
+    "0x200000d0": [
+      {
+        "function_entry": "0x80012e4",
+        "PC": "0x80012e8",
+        "effective_address": "0x200000d0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80012e8:\t69a0      \tldr\tr0, [r4, #24]"
+      },
+      {
+        "function_entry": "0x8006968",
+        "PC": "0x800698a",
+        "effective_address": "0x200000d0",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800698a:\t61a0      \tstr\tr0, [r4, #24]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006e80",
+        "effective_address": "0x200000d0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8006e80:\t69a0      \tldr\tr0, [r4, #24]"
+      },
+      {
+        "function_entry": "0x800bb90",
+        "PC": "0x800bcca",
+        "effective_address": "0x200000d0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800bcca:\t69a8      \tldr\tr0, [r5, #24]"
+      }
+    ],
+    "0x200000d4": [
+      {
+        "function_entry": "0x8001334",
+        "PC": "0x8001366",
+        "effective_address": "0x200000d4",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8001366:\t69e0      \tldr\tr0, [r4, #28]"
+      },
+      {
+        "function_entry": "0x8006968",
+        "PC": "0x800699a",
+        "effective_address": "0x200000d4",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800699a:\t61e0      \tstr\tr0, [r4, #28]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070ea",
+        "effective_address": "0x200000d4",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80070ea:\t69e0      \tldr\tr0, [r4, #28]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070ea",
+        "effective_address": "0x200000d4",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80070ea:\t69e0      \tldr\tr0, [r4, #28]"
+      }
+    ],
+    "0x200000d8": [
+      {
+        "function_entry": "0x8001334",
+        "PC": "0x8001370",
+        "effective_address": "0x200000d8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8001370:\t6a20      \tldr\tr0, [r4, #32]"
+      },
+      {
+        "function_entry": "0x8006968",
+        "PC": "0x80069ac",
+        "effective_address": "0x200000d8",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "80069ac:\t6220      \tstr\tr0, [r4, #32]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070f0",
+        "effective_address": "0x200000d8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80070f0:\t6a20      \tldr\tr0, [r4, #32]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070f0",
+        "effective_address": "0x200000d8",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80070f0:\t6a20      \tldr\tr0, [r4, #32]"
+      }
+    ],
+    "0x200000dc": [
+      {
+        "function_entry": "0x8006968",
+        "PC": "0x80069ca",
+        "effective_address": "0x200000dc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "80069ca:\t6260      \tstr\tr0, [r4, #36]\t@ 0x24"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006e2a",
+        "effective_address": "0x200000dc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8006e2a:\t6a60      \tldr\tr0, [r4, #36]\t@ 0x24"
+      }
+    ],
+    "0x200000f0": [
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000b34",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8000b34:\t6800      \tldr\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000e32",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8000e32:\t682a      \tldr\tr2, [r5, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x800116c",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800116c:\t6828      \tldr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x800116c",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800116c:\t6828      \tldr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x8003c2c",
+        "PC": "0x8003c64",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8003c64:\t6838      \tldr\tr0, [r7, #0]"
+      },
+      {
+        "function_entry": "0x8003c2c",
+        "PC": "0x8003c78",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8003c78:\t6838      \tldr\tr0, [r7, #0]"
+      },
+      {
+        "function_entry": "0x8003d24",
+        "PC": "0x8003d58",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8003d58:\t6830      \tldr\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8003d24",
+        "PC": "0x8003d6c",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8003d6c:\t6830      \tldr\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8003d24",
+        "PC": "0x8003dac",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8003dac:\t6830      \tldr\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x8006676",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8006676:\t6830      \tldr\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x8006590",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8006590:\t6830      \tldr\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8006968",
+        "PC": "0x8006a0a",
+        "effective_address": "0x200000f0",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8006a0a:\t63a0      \tstr\tr0, [r4, #56]\t@ 0x38"
+      }
+    ],
+    "0x200000f4": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000f66",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000f66:\t7805      \tldrb\tr5, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000f72",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000f72:\t7003      \tstrb\tr3, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800202e",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800202e:\t7801      \tldrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80020ce",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80020ce:\t7802      \tldrb\tr2, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800202e",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800202e:\t7801      \tldrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800202e",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800202e:\t7801      \tldrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80020ce",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80020ce:\t7802      \tldrb\tr2, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x800702a",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800702a:\t7007      \tstrb\tr7, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x80074dc",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80074dc:\t7838      \tldrb\tr0, [r7, #0]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x80074b8",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80074b8:\t7838      \tldrb\tr0, [r7, #0]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x80074dc",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80074dc:\t7838      \tldrb\tr0, [r7, #0]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x80074b8",
+        "effective_address": "0x200000f4",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80074b8:\t7838      \tldrb\tr0, [r7, #0]"
+      }
+    ],
+    "0x200000f5": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000e30",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000e30:\t7849      \tldrb\tr1, [r1, #1]"
+      },
+      {
+        "function_entry": "0x8001334",
+        "PC": "0x800133a",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800133a:\t7041      \tstrb\tr1, [r0, #1]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8002034",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002034:\t7840      \tldrb\tr0, [r0, #1]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80020d4",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80020d4:\t7840      \tldrb\tr0, [r0, #1]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8002034",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002034:\t7840      \tldrb\tr0, [r0, #1]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8002034",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002034:\t7840      \tldrb\tr0, [r0, #1]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80020d4",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80020d4:\t7840      \tldrb\tr0, [r0, #1]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x800702e",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800702e:\t7047      \tstrb\tr7, [r0, #1]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x80072c0",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80072c0:\t7840      \tldrb\tr0, [r0, #1]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x800736e",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800736e:\t7878      \tldrb\tr0, [r7, #1]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x80072c0",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80072c0:\t7840      \tldrb\tr0, [r0, #1]"
+      },
+      {
+        "function_entry": "0x8007214",
+        "PC": "0x800753c",
+        "effective_address": "0x200000f5",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800753c:\t7840      \tldrb\tr0, [r0, #1]"
+      }
+    ],
+    "0x200000f6": [
+      {
+        "function_entry": "0x8001334",
+        "PC": "0x8001340",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001340:\t7081      \tstrb\tr1, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800214c",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800214c:\t7081      \tstrb\tr1, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800214c",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800214c:\t7081      \tstrb\tr1, [r0, #2]"
+      },
+      {
+        "function_entry": "0x80023f4",
+        "PC": "0x8002454",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002454:\t7085      \tstrb\tr5, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x800703c",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800703c:\t7888      \tldrb\tr0, [r1, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070b0",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80070b0:\t7881      \tldrb\tr1, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x800704e",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800704e:\t7880      \tldrb\tr0, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070b0",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80070b0:\t7881      \tldrb\tr1, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x800704e",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800704e:\t7880      \tldrb\tr0, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8009bc0",
+        "PC": "0x8009bea",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009bea:\t78a8      \tldrb\tr0, [r5, #2]"
+      },
+      {
+        "function_entry": "0x8009bc0",
+        "PC": "0x8009bdc",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009bdc:\t78a9      \tldrb\tr1, [r5, #2]"
+      },
+      {
+        "function_entry": "0x800b7ec",
+        "PC": "0x800b868",
+        "effective_address": "0x200000f6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800b868:\t78a1      \tldrb\tr1, [r4, #2]"
+      }
+    ],
+    "0x200000f7": [
+      {
+        "function_entry": "0x8001334",
+        "PC": "0x8001342",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001342:\t70c1      \tstrb\tr1, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800215c",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800215c:\t70c1      \tstrb\tr1, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800215c",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800215c:\t70c1      \tstrb\tr1, [r0, #3]"
+      },
+      {
+        "function_entry": "0x80024c0",
+        "PC": "0x8002520",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002520:\t70c5      \tstrb\tr5, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8007070",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007070:\t78c8      \tldrb\tr0, [r1, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070cc",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80070cc:\t78c2      \tldrb\tr2, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070d8",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80070d8:\t78c2      \tldrb\tr2, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8007096",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007096:\t78c0      \tldrb\tr0, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070cc",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80070cc:\t78c2      \tldrb\tr2, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x80070d8",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80070d8:\t78c2      \tldrb\tr2, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8007096",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007096:\t78c0      \tldrb\tr0, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8009bc0",
+        "PC": "0x8009bda",
+        "effective_address": "0x200000f7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009bda:\t78ea      \tldrb\tr2, [r5, #3]"
+      }
+    ],
+    "0x200000fa": [
+      {
+        "function_entry": "0x8001334",
+        "PC": "0x800133c",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800133c:\t7181      \tstrb\tr1, [r0, #6]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8007030",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8007030:\t7187      \tstrb\tr7, [r0, #6]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009688",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009688:\t79b0      \tldrb\tr0, [r6, #6]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097f2",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80097f2:\t71b0      \tstrb\tr0, [r6, #6]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097f2",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80097f2:\t71b0      \tstrb\tr0, [r6, #6]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009812",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009812:\t71b0      \tstrb\tr0, [r6, #6]"
+      },
+      {
+        "function_entry": "0x8009bc0",
+        "PC": "0x8009c1e",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009c1e:\t71a8      \tstrb\tr0, [r5, #6]"
+      },
+      {
+        "function_entry": "0x8009cc8",
+        "PC": "0x8009d06",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009d06:\t7188      \tstrb\tr0, [r1, #6]"
+      },
+      {
+        "function_entry": "0x800b7ec",
+        "PC": "0x800b85e",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800b85e:\t79a0      \tldrb\tr0, [r4, #6]"
+      },
+      {
+        "function_entry": "0x800b7ec",
+        "PC": "0x800b8d8",
+        "effective_address": "0x200000fa",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800b8d8:\t79a0      \tldrb\tr0, [r4, #6]"
+      }
+    ],
+    "0x200000fb": [
+      {
+        "function_entry": "0x8001334",
+        "PC": "0x800134e",
+        "effective_address": "0x200000fb",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800134e:\t71c1      \tstrb\tr1, [r0, #7]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009698",
+        "effective_address": "0x200000fb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009698:\t79f1      \tldrb\tr1, [r6, #7]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x800978e",
+        "effective_address": "0x200000fb",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800978e:\t71f0      \tstrb\tr0, [r6, #7]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x800973e",
+        "effective_address": "0x200000fb",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800973e:\t71f0      \tstrb\tr0, [r6, #7]"
+      },
+      {
+        "function_entry": "0x800b7ec",
+        "PC": "0x800b7f2",
+        "effective_address": "0x200000fb",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800b7f2:\t79e0      \tldrb\tr0, [r4, #7]"
+      },
+      {
+        "function_entry": "0x800b7ec",
+        "PC": "0x800b84a",
+        "effective_address": "0x200000fb",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800b84a:\t71e7      \tstrb\tr7, [r4, #7]"
+      },
+      {
+        "function_entry": "0x800b7ec",
+        "PC": "0x800b870",
+        "effective_address": "0x200000fb",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800b870:\t71e7      \tstrb\tr7, [r4, #7]"
+      }
+    ],
+    "0x200000fc": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000f74",
+        "effective_address": "0x200000fc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8000f74:\t6087      \tstr\tr7, [r0, #8]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x800702c",
+        "effective_address": "0x200000fc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800702c:\t6087      \tstr\tr7, [r0, #8]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x800814a",
+        "effective_address": "0x200000fc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800814a:\t6898      \tldr\tr0, [r3, #8]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008168",
+        "effective_address": "0x200000fc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8008168:\t6098      \tstr\tr0, [r3, #8]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x800814a",
+        "effective_address": "0x200000fc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800814a:\t6898      \tldr\tr0, [r3, #8]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008168",
+        "effective_address": "0x200000fc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8008168:\t6098      \tstr\tr0, [r3, #8]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097ca",
+        "effective_address": "0x200000fc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80097ca:\t68b0      \tldr\tr0, [r6, #8]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097ca",
+        "effective_address": "0x200000fc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80097ca:\t68b0      \tldr\tr0, [r6, #8]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097ca",
+        "effective_address": "0x200000fc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80097ca:\t68b0      \tldr\tr0, [r6, #8]"
+      }
+    ],
+    "0x20000100": [
+      {
+        "function_entry": "0x8001334",
+        "PC": "0x8001346",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8001346:\t60c1      \tstr\tr1, [r0, #12]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x800968e",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800968e:\t68f0      \tldr\tr0, [r6, #12]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009694",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8009694:\t60f0      \tstr\tr0, [r6, #12]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097c8",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80097c8:\t68f1      \tldr\tr1, [r6, #12]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097c8",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80097c8:\t68f1      \tldr\tr1, [r6, #12]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097bc",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80097bc:\t68f1      \tldr\tr1, [r6, #12]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097c8",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80097c8:\t68f1      \tldr\tr1, [r6, #12]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009770",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8009770:\t68f1      \tldr\tr1, [r6, #12]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097bc",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80097bc:\t68f1      \tldr\tr1, [r6, #12]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009770",
+        "effective_address": "0x20000100",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8009770:\t68f1      \tldr\tr1, [r6, #12]"
+      }
+    ],
+    "0x20000104": [
+      {
+        "function_entry": "0x8003c2c",
+        "PC": "0x8003c40",
+        "effective_address": "0x20000104",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003c40:\t7005      \tstrb\tr5, [r0, #0]"
+      }
+    ],
+    "0x20000105": [
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000998",
+        "effective_address": "0x20000105",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000998:\t7818      \tldrb\tr0, [r3, #0]"
+      },
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000bfc",
+        "effective_address": "0x20000105",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000bfc:\t7019      \tstrb\tr1, [r3, #0]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001900",
+        "effective_address": "0x20000105",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001900:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8009a14",
+        "PC": "0x8009a48",
+        "effective_address": "0x20000105",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009a48:\t7828      \tldrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x8009a14",
+        "PC": "0x8009a78",
+        "effective_address": "0x20000105",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009a78:\t7828      \tldrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800ce58",
+        "effective_address": "0x20000105",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800ce58:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800ceba",
+        "effective_address": "0x20000105",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800ceba:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800ceba",
+        "effective_address": "0x20000105",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800ceba:\t7800      \tldrb\tr0, [r0, #0]"
+      }
+    ],
+    "0x20000106": [
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003228",
+        "effective_address": "0x20000106",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003228:\t7801      \tldrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800323c",
+        "effective_address": "0x20000106",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800323c:\t7001      \tstrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003244",
+        "effective_address": "0x20000106",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003244:\t7801      \tldrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800ce8e",
+        "effective_address": "0x20000106",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800ce8e:\t7809      \tldrb\tr1, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800cef0",
+        "effective_address": "0x20000106",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800cef0:\t7809      \tldrb\tr1, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800ce34",
+        "PC": "0x800cef0",
+        "effective_address": "0x20000106",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800cef0:\t7809      \tldrb\tr1, [r1, #0]"
+      }
+    ],
+    "0x20000108": [
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x8006558",
+        "effective_address": "0x20000108",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006558:\t7800      \tldrb\tr0, [r0, #0]"
+      }
+    ],
+    "0x20000109": [
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x800656c",
+        "effective_address": "0x20000109",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800656c:\t7068      \tstrb\tr0, [r5, #1]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x8006652",
+        "effective_address": "0x20000109",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8006652:\t7068      \tstrb\tr0, [r5, #1]"
+      },
+      {
+        "function_entry": "0x800a358",
+        "PC": "0x800a360",
+        "effective_address": "0x20000109",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800a360:\t7841      \tldrb\tr1, [r0, #1]"
+      }
+    ],
+    "0x2000010a": [
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x8000860",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "8000860:\t8830      \tldrh\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x800089c",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "800089c:\t8831      \tldrh\tr1, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x80008fc",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "80008fc:\t8830      \tldrh\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x8000904",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "8000904:\t8830      \tldrh\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x80008fc",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "80008fc:\t8830      \tldrh\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x8000904",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "8000904:\t8830      \tldrh\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x8006552",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "8006552:\t8869      \tldrh\tr1, [r5, #2]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x800656a",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "800656a:\t8069      \tstrh\tr1, [r5, #2]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x80065a6",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "80065a6:\t8868      \tldrh\tr0, [r5, #2]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x80065a6",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "80065a6:\t8868      \tldrh\tr0, [r5, #2]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x80065b8",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "80065b8:\t8868      \tldrh\tr0, [r5, #2]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x8006686",
+        "effective_address": "0x2000010a",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "8006686:\t8869      \tldrh\tr1, [r5, #2]"
+      }
+    ],
+    "0x2000010c": [
+      {
+        "function_entry": "0x8003d24",
+        "PC": "0x8003d80",
+        "effective_address": "0x2000010c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8003d80:\t6802      \tldr\tr2, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8003d24",
+        "PC": "0x8003db6",
+        "effective_address": "0x2000010c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8003db6:\t6002      \tstr\tr2, [r0, #0]"
+      }
+    ],
+    "0x20000114": [
+      {
+        "function_entry": "0x80028b4",
+        "PC": "0x80028c0",
+        "effective_address": "0x20000114",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80028c0:\t7008      \tstrb\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800292c",
+        "PC": "0x8002938",
+        "effective_address": "0x20000114",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002938:\t7008      \tstrb\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x80029a4",
+        "PC": "0x80029b0",
+        "effective_address": "0x20000114",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80029b0:\t7008      \tstrb\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x8002a00",
+        "PC": "0x8002a0c",
+        "effective_address": "0x20000114",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002a0c:\t7008      \tstrb\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800a528",
+        "PC": "0x800a52c",
+        "effective_address": "0x20000114",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800a52c:\t7801      \tldrb\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800a550",
+        "PC": "0x800a556",
+        "effective_address": "0x20000114",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800a556:\t7809      \tldrb\tr1, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800a574",
+        "PC": "0x800a57a",
+        "effective_address": "0x20000114",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800a57a:\t7809      \tldrb\tr1, [r1, #0]"
+      }
+    ],
+    "0x20000118": [
+      {
+        "function_entry": "0x8004958",
+        "PC": "0x8004968",
+        "effective_address": "0x20000118",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8004968:\t7800      \tldrb\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8004edc",
+        "PC": "0x8004ee0",
+        "effective_address": "0x20000118",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8004ee0:\t7802      \tldrb\tr2, [r0, #0]"
+      }
+    ],
+    "0x2000011c": [
+      {
+        "function_entry": "0x8004f14",
+        "PC": "0x8004f8c",
+        "effective_address": "0x2000011c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8004f8c:\t6005      \tstr\tr5, [r0, #0]"
+      },
+      {
+        "function_entry": "0x80052e4",
+        "PC": "0x800541a",
+        "effective_address": "0x2000011c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800541a:\t6800      \tldr\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x80052e4",
+        "PC": "0x800541a",
+        "effective_address": "0x2000011c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800541a:\t6800      \tldr\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8005528",
+        "PC": "0x8005650",
+        "effective_address": "0x2000011c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8005650:\t6800      \tldr\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8005528",
+        "PC": "0x8005650",
+        "effective_address": "0x2000011c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8005650:\t6800      \tldr\tr0, [r0, #0]"
+      }
+    ],
+    "0x20000120": [
+      {
+        "function_entry": "0x8004eac",
+        "PC": "0x8004eae",
+        "effective_address": "0x20000120",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8004eae:\t6880      \tldr\tr0, [r0, #8]"
+      },
+      {
+        "function_entry": "0x8004edc",
+        "PC": "0x8004ede",
+        "effective_address": "0x20000120",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8004ede:\t6881      \tldr\tr1, [r0, #8]"
+      },
+      {
+        "function_entry": "0x8004edc",
+        "PC": "0x8004ee4",
+        "effective_address": "0x20000120",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8004ee4:\t6081      \tstr\tr1, [r0, #8]"
+      }
+    ],
+    "0x20000124": [
+      {
+        "function_entry": "0x80007a8",
+        "PC": "0x80007e4",
+        "effective_address": "0x20000124",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80007e4:\t6800      \tldr\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8004100",
+        "PC": "0x8004280",
+        "effective_address": "0x20000124",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8004280:\t6800      \tldr\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8004480",
+        "PC": "0x80044ca",
+        "effective_address": "0x20000124",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80044ca:\t6800      \tldr\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8005048",
+        "PC": "0x8005064",
+        "effective_address": "0x20000124",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8005064:\t6800      \tldr\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x80052e4",
+        "PC": "0x8005416",
+        "effective_address": "0x20000124",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8005416:\t6008      \tstr\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x80052e4",
+        "PC": "0x8005416",
+        "effective_address": "0x20000124",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8005416:\t6008      \tstr\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x8005474",
+        "PC": "0x8005478",
+        "effective_address": "0x20000124",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8005478:\t6800      \tldr\tr0, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8005528",
+        "PC": "0x800564c",
+        "effective_address": "0x20000124",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800564c:\t6008      \tstr\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800c078",
+        "PC": "0x800c088",
+        "effective_address": "0x20000124",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c088:\t6800      \tldr\tr0, [r0, #0]"
+      }
+    ],
+    "0x20000128": [
+      {
+        "function_entry": "0x80000cc",
+        "PC": "0x80000ce",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "80000ce:\t6819      \tldr\tr1, [r3, #0]"
+      },
+      {
+        "function_entry": "0x8000102",
+        "PC": "0x8000108",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8000108:\t681a      \tldr\tr2, [r3, #0]"
+      },
+      {
+        "function_entry": "0x800abb0",
+        "PC": "0x800abba",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800abba:\t6830      \tldr\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800abb0",
+        "PC": "0x800abd8",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800abd8:\t6830      \tldr\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800abb0",
+        "PC": "0x800abca",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800abca:\t6831      \tldr\tr1, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800abb0",
+        "PC": "0x800abe0",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800abe0:\t6831      \tldr\tr1, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800abb0",
+        "PC": "0x800abec",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800abec:\t6831      \tldr\tr1, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800ac08",
+        "PC": "0x800ac18",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ac18:\t6828      \tldr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800ac08",
+        "PC": "0x800ac26",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ac26:\t602c      \tstr\tr4, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800ac08",
+        "PC": "0x800ac34",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ac34:\t6828      \tldr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800ac08",
+        "PC": "0x800ac3e",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ac3e:\t602c      \tstr\tr4, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800ac08",
+        "PC": "0x800ac6a",
+        "effective_address": "0x20000128",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ac6a:\t6828      \tldr\tr0, [r5, #0]"
+      }
+    ],
+    "0x20000134": [
+      {
+        "function_entry": "0x800abb0",
+        "PC": "0x800abb8",
+        "effective_address": "0x20000134",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800abb8:\t68f5      \tldr\tr5, [r6, #12]"
+      },
+      {
+        "function_entry": "0x800c15c",
+        "PC": "0x800c162",
+        "effective_address": "0x20000134",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c162:\t68c9      \tldr\tr1, [r1, #12]"
+      },
+      {
+        "function_entry": "0x800c284",
+        "PC": "0x800c2dc",
+        "effective_address": "0x20000134",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c2dc:\t60e5      \tstr\tr5, [r4, #12]"
+      },
+      {
+        "function_entry": "0x800c948",
+        "PC": "0x800c95c",
+        "effective_address": "0x20000134",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c95c:\t68f0      \tldr\tr0, [r6, #12]"
+      },
+      {
+        "function_entry": "0x800ca6c",
+        "PC": "0x800ca6e",
+        "effective_address": "0x20000134",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ca6e:\t68c0      \tldr\tr0, [r0, #12]"
+      },
+      {
+        "function_entry": "0x800ca78",
+        "PC": "0x800ca8e",
+        "effective_address": "0x20000134",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ca8e:\t68fd      \tldr\tr5, [r7, #12]"
+      },
+      {
+        "function_entry": "0x800ca78",
+        "PC": "0x800ca92",
+        "effective_address": "0x20000134",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ca92:\t60fd      \tstr\tr5, [r7, #12]"
+      }
+    ],
+    "0x20000144": [
+      {
+        "function_entry": "0x800c16c",
+        "PC": "0x800c170",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c170:\t61c8      \tstr\tr0, [r1, #28]"
+      },
+      {
+        "function_entry": "0x800c1cc",
+        "PC": "0x800c212",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c212:\t61e8      \tstr\tr0, [r5, #28]"
+      },
+      {
+        "function_entry": "0x800c390",
+        "PC": "0x800c39c",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c39c:\t61d8      \tstr\tr0, [r3, #28]"
+      },
+      {
+        "function_entry": "0x800c390",
+        "PC": "0x800c3a4",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c3a4:\t61d8      \tstr\tr0, [r3, #28]"
+      },
+      {
+        "function_entry": "0x800ca78",
+        "PC": "0x800caec",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800caec:\t69f8      \tldr\tr0, [r7, #28]"
+      },
+      {
+        "function_entry": "0x800ca78",
+        "PC": "0x800caec",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800caec:\t69f8      \tldr\tr0, [r7, #28]"
+      },
+      {
+        "function_entry": "0x800cba0",
+        "PC": "0x800cbd2",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800cbd2:\t61e9      \tstr\tr1, [r5, #28]"
+      },
+      {
+        "function_entry": "0x800cc0c",
+        "PC": "0x800cca0",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cca0:\t69e8      \tldr\tr0, [r5, #28]"
+      },
+      {
+        "function_entry": "0x800cc0c",
+        "PC": "0x800cc94",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800cc94:\t61ee      \tstr\tr6, [r5, #28]"
+      },
+      {
+        "function_entry": "0x800cc0c",
+        "PC": "0x800cca0",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cca0:\t69e8      \tldr\tr0, [r5, #28]"
+      },
+      {
+        "function_entry": "0x800cc0c",
+        "PC": "0x800cc74",
+        "effective_address": "0x20000144",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800cc74:\t61e8      \tstr\tr0, [r5, #28]"
+      }
+    ],
+    "0x20000158": [
+      {
+        "function_entry": "0x800c128",
+        "PC": "0x800c134",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c134:\t6b00      \tldr\tr0, [r0, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800c1cc",
+        "PC": "0x800c1d0",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c1d0:\t6b2a      \tldr\tr2, [r5, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800c2f8",
+        "PC": "0x800c354",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c354:\t6b28      \tldr\tr0, [r5, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800c380",
+        "PC": "0x800c382",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c382:\t6b01      \tldr\tr1, [r0, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800c380",
+        "PC": "0x800c386",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c386:\t6301      \tstr\tr1, [r0, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800c390",
+        "PC": "0x800c394",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c394:\t6b18      \tldr\tr0, [r3, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800ca4c",
+        "PC": "0x800ca54",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ca54:\t6b00      \tldr\tr0, [r0, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800ca78",
+        "PC": "0x800ca7e",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ca7e:\t6b38      \tldr\tr0, [r7, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800cba0",
+        "PC": "0x800cbb6",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cbb6:\t6b28      \tldr\tr0, [r5, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800cc0c",
+        "PC": "0x800cc14",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cc14:\t6b28      \tldr\tr0, [r5, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800cc0c",
+        "PC": "0x800cc1e",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cc1e:\t6b28      \tldr\tr0, [r5, #48]\t@ 0x30"
+      },
+      {
+        "function_entry": "0x800cc0c",
+        "PC": "0x800cc22",
+        "effective_address": "0x20000158",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800cc22:\t6328      \tstr\tr0, [r5, #48]\t@ 0x30"
+      }
+    ],
+    "0x20000164": [
+      {
+        "function_entry": "0x800ac84",
+        "PC": "0x800ac8c",
+        "effective_address": "0x20000164",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ac8c:\t6820      \tldr\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800ac84",
+        "PC": "0x800acb6",
+        "effective_address": "0x20000164",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800acb6:\t6020      \tstr\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800b0fc",
+        "PC": "0x800b106",
+        "effective_address": "0x20000164",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b106:\t6828      \tldr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800b0fc",
+        "PC": "0x800b1ea",
+        "effective_address": "0x20000164",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b1ea:\t6828      \tldr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800cd20",
+        "PC": "0x800cd2c",
+        "effective_address": "0x20000164",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cd2c:\t6828      \tldr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800cd80",
+        "PC": "0x800cd90",
+        "effective_address": "0x20000164",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cd90:\t6826      \tldr\tr6, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800cd80",
+        "PC": "0x800cdae",
+        "effective_address": "0x20000164",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cdae:\t6820      \tldr\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800cd80",
+        "PC": "0x800cdc2",
+        "effective_address": "0x20000164",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cdc2:\t6820      \tldr\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800ce0c",
+        "PC": "0x800ce26",
+        "effective_address": "0x20000164",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800ce26:\t6800      \tldr\tr0, [r0, #0]"
+      }
+    ],
+    "0x2000016c": [
+      {
+        "function_entry": "0x800b284",
+        "PC": "0x800b290",
+        "effective_address": "0x2000016c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b290:\t68b0      \tldr\tr0, [r6, #8]"
+      },
+      {
+        "function_entry": "0x800b284",
+        "PC": "0x800b2a4",
+        "effective_address": "0x2000016c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800b2a4:\t60b5      \tstr\tr5, [r6, #8]"
+      },
+      {
+        "function_entry": "0x800b284",
+        "PC": "0x800b2a4",
+        "effective_address": "0x2000016c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800b2a4:\t60b5      \tstr\tr5, [r6, #8]"
+      }
+    ],
+    "0x20000170": [
+      {
+        "function_entry": "0x800ac84",
+        "PC": "0x800aca0",
+        "effective_address": "0x20000170",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800aca0:\t60e0      \tstr\tr0, [r4, #12]"
+      },
+      {
+        "function_entry": "0x800b024",
+        "PC": "0x800b056",
+        "effective_address": "0x20000170",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b056:\t68e8      \tldr\tr0, [r5, #12]"
+      },
+      {
+        "function_entry": "0x800b0a0",
+        "PC": "0x800b0a8",
+        "effective_address": "0x20000170",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b0a8:\t68c0      \tldr\tr0, [r0, #12]"
+      },
+      {
+        "function_entry": "0x800b2b0",
+        "PC": "0x800b2b4",
+        "effective_address": "0x20000170",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b2b4:\t68f0      \tldr\tr0, [r6, #12]"
+      },
+      {
+        "function_entry": "0x800b2b0",
+        "PC": "0x800b30a",
+        "effective_address": "0x20000170",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b30a:\t68f0      \tldr\tr0, [r6, #12]"
+      },
+      {
+        "function_entry": "0x800b2b0",
+        "PC": "0x800b2be",
+        "effective_address": "0x20000170",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b2be:\t68f0      \tldr\tr0, [r6, #12]"
+      },
+      {
+        "function_entry": "0x800b2b0",
+        "PC": "0x800b30e",
+        "effective_address": "0x20000170",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800b30e:\t60f1      \tstr\tr1, [r6, #12]"
+      },
+      {
+        "function_entry": "0x800b2b0",
+        "PC": "0x800b302",
+        "effective_address": "0x20000170",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b302:\t68f0      \tldr\tr0, [r6, #12]"
+      },
+      {
+        "function_entry": "0x800b2b0",
+        "PC": "0x800b2e8",
+        "effective_address": "0x20000170",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b2e8:\t68f0      \tldr\tr0, [r6, #12]"
+      }
+    ],
+    "0x20000178": [
+      {
+        "function_entry": "0x800a8d8",
+        "PC": "0x800a8e8",
+        "effective_address": "0x20000178",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800a8e8:\t6801      \tldr\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800a8d8",
+        "PC": "0x800a8f6",
+        "effective_address": "0x20000178",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800a8f6:\t6001      \tstr\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800a900",
+        "PC": "0x800a912",
+        "effective_address": "0x20000178",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800a912:\t6801      \tldr\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800a900",
+        "PC": "0x800a92a",
+        "effective_address": "0x20000178",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800a92a:\t6001      \tstr\tr1, [r0, #0]"
+      }
+    ],
+    "0x2000017c": [
+      {
+        "function_entry": "0x800ae0c",
+        "PC": "0x800ae34",
+        "effective_address": "0x2000017c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ae34:\t6019      \tstr\tr1, [r3, #0]"
+      },
+      {
+        "function_entry": "0x800afcc",
+        "PC": "0x800aff6",
+        "effective_address": "0x2000017c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800aff6:\t6824      \tldr\tr4, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800afcc",
+        "PC": "0x800aff6",
+        "effective_address": "0x2000017c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800aff6:\t6824      \tldr\tr4, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b3f4",
+        "effective_address": "0x2000017c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b3f4:\t6838      \tldr\tr0, [r7, #0]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b442",
+        "effective_address": "0x2000017c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b442:\t6838      \tldr\tr0, [r7, #0]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b442",
+        "effective_address": "0x2000017c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b442:\t6838      \tldr\tr0, [r7, #0]"
+      }
+    ],
+    "0x20000180": [
+      {
+        "function_entry": "0x800ae0c",
+        "PC": "0x800ae44",
+        "effective_address": "0x20000180",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ae44:\t6058      \tstr\tr0, [r3, #4]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b424",
+        "effective_address": "0x20000180",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b424:\t6878      \tldr\tr0, [r7, #4]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b46c",
+        "effective_address": "0x20000180",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b46c:\t6878      \tldr\tr0, [r7, #4]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b470",
+        "effective_address": "0x20000180",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800b470:\t6078      \tstr\tr0, [r7, #4]"
+      },
+      {
+        "function_entry": "0x800c030",
+        "PC": "0x800c05c",
+        "effective_address": "0x20000180",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c05c:\t6869      \tldr\tr1, [r5, #4]"
+      },
+      {
+        "function_entry": "0x800c030",
+        "PC": "0x800c060",
+        "effective_address": "0x20000180",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c060:\t6068      \tstr\tr0, [r5, #4]"
+      }
+    ],
+    "0x20000184": [
+      {
+        "function_entry": "0x800ae0c",
+        "PC": "0x800ae42",
+        "effective_address": "0x20000184",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ae42:\t6098      \tstr\tr0, [r3, #8]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b472",
+        "effective_address": "0x20000184",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b472:\t68ba      \tldr\tr2, [r7, #8]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b478",
+        "effective_address": "0x20000184",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800b478:\t60b8      \tstr\tr0, [r7, #8]"
+      }
+    ],
+    "0x20000190": [
+      {
+        "function_entry": "0x800ae0c",
+        "PC": "0x800ae4a",
+        "effective_address": "0x20000190",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ae4a:\t6158      \tstr\tr0, [r3, #20]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b3fe",
+        "effective_address": "0x20000190",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b3fe:\t6978      \tldr\tr0, [r7, #20]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b47a",
+        "effective_address": "0x20000190",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b47a:\t6978      \tldr\tr0, [r7, #20]"
+      },
+      {
+        "function_entry": "0x800c030",
+        "PC": "0x800c03e",
+        "effective_address": "0x20000190",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c03e:\t6969      \tldr\tr1, [r5, #20]"
+      }
+    ],
+    "0x20000194": [
+      {
+        "function_entry": "0x800ae0c",
+        "PC": "0x800ae24",
+        "effective_address": "0x20000194",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ae24:\t6018      \tstr\tr0, [r3, #0]"
+      },
+      {
+        "function_entry": "0x800afcc",
+        "PC": "0x800afd4",
+        "effective_address": "0x20000194",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800afd4:\t680a      \tldr\tr2, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800afcc",
+        "PC": "0x800afec",
+        "effective_address": "0x20000194",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800afec:\t680d      \tldr\tr5, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800afcc",
+        "PC": "0x800b014",
+        "effective_address": "0x20000194",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800b014:\t6008      \tstr\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800afcc",
+        "PC": "0x800b002",
+        "effective_address": "0x20000194",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b002:\t680a      \tldr\tr2, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b42e",
+        "effective_address": "0x20000194",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b42e:\t6804      \tldr\tr4, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b448",
+        "effective_address": "0x20000194",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800b448:\t680e      \tldr\tr6, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800b3e8",
+        "PC": "0x800b44e",
+        "effective_address": "0x20000194",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800b44e:\t6008      \tstr\tr0, [r1, #0]"
+      }
+    ],
+    "0x20000198": [
+      {
+        "function_entry": "0x800ae0c",
+        "PC": "0x800ae28",
+        "effective_address": "0x20000198",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ae28:\t605a      \tstr\tr2, [r3, #4]"
+      },
+      {
+        "function_entry": "0x800afcc",
+        "PC": "0x800afda",
+        "effective_address": "0x20000198",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800afda:\t684b      \tldr\tr3, [r1, #4]"
+      },
+      {
+        "function_entry": "0x800afcc",
+        "PC": "0x800afe6",
+        "effective_address": "0x20000198",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800afe6:\t6048      \tstr\tr0, [r1, #4]"
+      }
+    ],
+    "0x2000019c": [
+      {
+        "function_entry": "0x800bffc",
+        "PC": "0x800c000",
+        "effective_address": "0x2000019c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c000:\t6801      \tldr\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800bffc",
+        "PC": "0x800c004",
+        "effective_address": "0x2000019c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c004:\t6001      \tstr\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x800c014",
+        "PC": "0x800c016",
+        "effective_address": "0x2000019c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c016:\t6808      \tldr\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800c014",
+        "PC": "0x800c01e",
+        "effective_address": "0x2000019c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c01e:\t6008      \tstr\tr0, [r1, #0]"
+      },
+      {
+        "function_entry": "0x800c57c",
+        "PC": "0x800c59a",
+        "effective_address": "0x2000019c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c59a:\t6008      \tstr\tr0, [r1, #0]"
+      }
+    ],
+    "0x200001a4": [
+      {
+        "function_entry": "0x8002d48",
+        "PC": "0x8002d56",
+        "effective_address": "0x200001a4",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8002d56:\t6002      \tstr\tr2, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8003664",
+        "PC": "0x800366c",
+        "effective_address": "0x200001a4",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800366c:\t6028      \tstr\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800373c",
+        "PC": "0x8003744",
+        "effective_address": "0x200001a4",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8003744:\t6028      \tstr\tr0, [r5, #0]"
+      }
+    ],
+    "0x200001b4": [
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x800711c",
+        "effective_address": "0x200001b4",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800711c:\t7001      \tstrb\tr1, [r0, #0]"
+      }
+    ],
+    "0x200001b5": [
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x800711e",
+        "effective_address": "0x200001b5",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800711e:\t7047      \tstrb\tr7, [r0, #1]"
+      }
+    ],
+    "0x200001b6": [
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006ea6",
+        "effective_address": "0x200001b6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006ea6:\t7880      \tldrb\tr0, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f2c",
+        "effective_address": "0x200001b6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f2c:\t7880      \tldrb\tr0, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8007122",
+        "effective_address": "0x200001b6",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8007122:\t7081      \tstrb\tr1, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f00",
+        "effective_address": "0x200001b6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f00:\t7880      \tldrb\tr0, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006ee4",
+        "effective_address": "0x200001b6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006ee4:\t7880      \tldrb\tr0, [r0, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f88",
+        "effective_address": "0x200001b6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f88:\t7898      \tldrb\tr0, [r3, #2]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f60",
+        "effective_address": "0x200001b6",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f60:\t7898      \tldrb\tr0, [r3, #2]"
+      }
+    ],
+    "0x200001b7": [
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006ec8",
+        "effective_address": "0x200001b7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006ec8:\t78c1      \tldrb\tr1, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8007124",
+        "effective_address": "0x200001b7",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8007124:\t70c7      \tstrb\tr7, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006efe",
+        "effective_address": "0x200001b7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006efe:\t78c2      \tldrb\tr2, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f7e",
+        "effective_address": "0x200001b7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f7e:\t78d9      \tldrb\tr1, [r3, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006ee2",
+        "effective_address": "0x200001b7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006ee2:\t78c2      \tldrb\tr2, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f56",
+        "effective_address": "0x200001b7",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f56:\t78d9      \tldrb\tr1, [r3, #3]"
+      }
+    ],
+    "0x200001b8": [
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f7c",
+        "effective_address": "0x200001b8",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f7c:\t7918      \tldrb\tr0, [r3, #4]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8007128",
+        "effective_address": "0x200001b8",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8007128:\t7101      \tstrb\tr1, [r0, #4]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f54",
+        "effective_address": "0x200001b8",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f54:\t7918      \tldrb\tr0, [r3, #4]"
+      }
+    ],
+    "0x20000664": [
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8001ea6",
+        "effective_address": "0x20000664",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001ea6:\t5c13      \tldrb\tr3, [r2, r0]"
+      },
+      {
+        "function_entry": "0x800258c",
+        "PC": "0x80025f2",
+        "effective_address": "0x20000664",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80025f2:\t5c29      \tldrb\tr1, [r5, r0]"
+      },
+      {
+        "function_entry": "0x800258c",
+        "PC": "0x8002638",
+        "effective_address": "0x20000664",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002638:\t5caa      \tldrb\tr2, [r5, r2]"
+      },
+      {
+        "function_entry": "0x800258c",
+        "PC": "0x800263a",
+        "effective_address": "0x20000664",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800263a:\t546a      \tstrb\tr2, [r5, r1]"
+      },
+      {
+        "function_entry": "0x800258c",
+        "PC": "0x800263a",
+        "effective_address": "0x20000664",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800263a:\t546a      \tstrb\tr2, [r5, r1]"
+      },
+      {
+        "function_entry": "0x8002744",
+        "PC": "0x800278e",
+        "effective_address": "0x20000664",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800278e:\t5c21      \tldrb\tr1, [r4, r0]"
+      },
+      {
+        "function_entry": "0x8002744",
+        "PC": "0x80027c6",
+        "effective_address": "0x20000664",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80027c6:\t5ca2      \tldrb\tr2, [r4, r2]"
+      },
+      {
+        "function_entry": "0x8002744",
+        "PC": "0x80027c8",
+        "effective_address": "0x20000664",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80027c8:\t5462      \tstrb\tr2, [r4, r1]"
+      },
+      {
+        "function_entry": "0x8002744",
+        "PC": "0x80027c8",
+        "effective_address": "0x20000664",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80027c8:\t5462      \tstrb\tr2, [r4, r1]"
+      }
+    ],
+    "0x2000087c": [
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003026",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003026:\t7830      \tldrb\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800a598",
+        "PC": "0x800a63c",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800a63c:\t7028      \tstrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800a598",
+        "PC": "0x800a65a",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800a65a:\t7028      \tstrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800a598",
+        "PC": "0x800a692",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800a692:\t7828      \tldrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800a598",
+        "PC": "0x800a67e",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800a67e:\t7028      \tstrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800a598",
+        "PC": "0x800a69a",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800a69a:\t7028      \tstrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800a598",
+        "PC": "0x800a692",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800a692:\t7828      \tldrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800a598",
+        "PC": "0x800a6ae",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800a6ae:\t7828      \tldrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800a598",
+        "PC": "0x800a67e",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800a67e:\t7028      \tstrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800a598",
+        "PC": "0x800a69a",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800a69a:\t7028      \tstrb\tr0, [r5, #0]"
+      },
+      {
+        "function_entry": "0x800ab70",
+        "PC": "0x800ab86",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800ab86:\t7820      \tldrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800bb90",
+        "PC": "0x800bc2a",
+        "effective_address": "0x2000087c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800bc2a:\t7822      \tldrb\tr2, [r4, #0]"
+      }
+    ],
+    "0x2000087d": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000ee8",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000ee8:\t7868      \tldrb\tr0, [r5, #1]"
+      },
+      {
+        "function_entry": "0x8001408",
+        "PC": "0x800148a",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800148a:\t7861      \tldrb\tr1, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80019e0",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80019e0:\t7861      \tldrb\tr1, [r4, #1]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80019e0",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80019e0:\t7861      \tldrb\tr1, [r4, #1]"
+      },
+      {
+        "function_entry": "0x8001c1c",
+        "PC": "0x8001c32",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001c32:\t7862      \tldrb\tr2, [r4, #1]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003000",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003000:\t7074      \tstrb\tr4, [r6, #1]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800331e",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800331e:\t7070      \tstrb\tr0, [r6, #1]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800331e",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800331e:\t7070      \tstrb\tr0, [r6, #1]"
+      },
+      {
+        "function_entry": "0x8003848",
+        "PC": "0x8003888",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003888:\t7848      \tldrb\tr0, [r1, #1]"
+      },
+      {
+        "function_entry": "0x8003a84",
+        "PC": "0x8003a9a",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003a9a:\t7861      \tldrb\tr1, [r4, #1]"
+      },
+      {
+        "function_entry": "0x8003a84",
+        "PC": "0x8003aa8",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003aa8:\t7861      \tldrb\tr1, [r4, #1]"
+      },
+      {
+        "function_entry": "0x8003a84",
+        "PC": "0x8003aba",
+        "effective_address": "0x2000087d",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003aba:\t7060      \tstrb\tr0, [r4, #1]"
+      }
+    ],
+    "0x2000087e": [
+      {
+        "function_entry": "0x80012e4",
+        "PC": "0x80012fe",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80012fe:\t7088      \tstrb\tr0, [r1, #2]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003002",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003002:\t70b4      \tstrb\tr4, [r6, #2]"
+      },
+      {
+        "function_entry": "0x8003c2c",
+        "PC": "0x8003c54",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003c54:\t78a0      \tldrb\tr0, [r4, #2]"
+      },
+      {
+        "function_entry": "0x8003c2c",
+        "PC": "0x8003c60",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003c60:\t70a5      \tstrb\tr5, [r4, #2]"
+      },
+      {
+        "function_entry": "0x8003d24",
+        "PC": "0x8003d46",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003d46:\t78a0      \tldrb\tr0, [r4, #2]"
+      },
+      {
+        "function_entry": "0x8003d24",
+        "PC": "0x8003d54",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003d54:\t70a0      \tstrb\tr0, [r4, #2]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008108",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8008108:\t78a0      \tldrb\tr0, [r4, #2]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008108",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8008108:\t78a0      \tldrb\tr0, [r4, #2]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x800811a",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800811a:\t70a0      \tstrb\tr0, [r4, #2]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x800811a",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800811a:\t70a0      \tstrb\tr0, [r4, #2]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097f4",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80097f4:\t70a7      \tstrb\tr7, [r4, #2]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80097f4",
+        "effective_address": "0x2000087e",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80097f4:\t70a7      \tstrb\tr7, [r4, #2]"
+      }
+    ],
+    "0x2000087f": [
+      {
+        "function_entry": "0x8000928",
+        "PC": "0x8000b4a",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000b4a:\t78e1      \tldrb\tr1, [r4, #3]"
+      },
+      {
+        "function_entry": "0x8001408",
+        "PC": "0x8001488",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001488:\t78e0      \tldrb\tr0, [r4, #3]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80019de",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80019de:\t78e0      \tldrb\tr0, [r4, #3]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80019de",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80019de:\t78e0      \tldrb\tr0, [r4, #3]"
+      },
+      {
+        "function_entry": "0x8001c1c",
+        "PC": "0x8001c30",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001c30:\t78e1      \tldrb\tr1, [r4, #3]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002aae",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002aae:\t78c1      \tldrb\tr1, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002aae",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002aae:\t78c1      \tldrb\tr1, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002ab6",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002ab6:\t78c1      \tldrb\tr1, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002ab6",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8002ab6:\t78c1      \tldrb\tr1, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002ac8",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002ac8:\t70c5      \tstrb\tr5, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8002a68",
+        "PC": "0x8002ac8",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002ac8:\t70c5      \tstrb\tr5, [r0, #3]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003012",
+        "effective_address": "0x2000087f",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003012:\t70f0      \tstrb\tr0, [r6, #3]"
+      }
+    ],
+    "0x20000880": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x800103c",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800103c:\t7928      \tldrb\tr0, [r5, #4]"
+      },
+      {
+        "function_entry": "0x8001408",
+        "PC": "0x8001494",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001494:\t7920      \tldrb\tr0, [r4, #4]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80019ea",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80019ea:\t7920      \tldrb\tr0, [r4, #4]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80019ea",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80019ea:\t7920      \tldrb\tr0, [r4, #4]"
+      },
+      {
+        "function_entry": "0x8001c1c",
+        "PC": "0x8001c3c",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001c3c:\t7921      \tldrb\tr1, [r4, #4]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003024",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003024:\t7130      \tstrb\tr0, [r6, #4]"
+      },
+      {
+        "function_entry": "0x8003c2c",
+        "PC": "0x8003c3a",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003c3a:\t7121      \tstrb\tr1, [r4, #4]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007ff4",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007ff4:\t7923      \tldrb\tr3, [r4, #4]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008022",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8008022:\t7923      \tldrb\tr3, [r4, #4]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007ff4",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007ff4:\t7923      \tldrb\tr3, [r4, #4]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008022",
+        "effective_address": "0x20000880",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8008022:\t7923      \tldrb\tr3, [r4, #4]"
+      }
+    ],
+    "0x20000884": [
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8002ffc",
+        "effective_address": "0x20000884",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8002ffc:\t60b4      \tstr\tr4, [r6, #8]"
+      },
+      {
+        "function_entry": "0x8003d24",
+        "PC": "0x8003d7e",
+        "effective_address": "0x20000884",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8003d7e:\t68a1      \tldr\tr1, [r4, #8]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007f46",
+        "effective_address": "0x20000884",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8007f46:\t68a0      \tldr\tr0, [r4, #8]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007f46",
+        "effective_address": "0x20000884",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8007f46:\t68a0      \tldr\tr0, [r4, #8]"
+      }
+    ],
+    "0x20000888": [
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001916",
+        "effective_address": "0x20000888",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8001916:\t68e0      \tldr\tr0, [r4, #12]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8002ffe",
+        "effective_address": "0x20000888",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8002ffe:\t60f4      \tstr\tr4, [r6, #12]"
+      }
+    ],
+    "0x2000088c": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000fd2",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000fd2:\t742f      \tstrb\tr7, [r5, #16]"
+      },
+      {
+        "function_entry": "0x8001408",
+        "PC": "0x800140e",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800140e:\t7c21      \tldrb\tr1, [r4, #16]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80018ea",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80018ea:\t7c20      \tldrb\tr0, [r4, #16]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x800193e",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800193e:\t7c20      \tldrb\tr0, [r4, #16]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x800193e",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800193e:\t7c20      \tldrb\tr0, [r4, #16]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80019fa",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80019fa:\t7c20      \tldrb\tr0, [r4, #16]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80019fa",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80019fa:\t7c20      \tldrb\tr0, [r4, #16]"
+      },
+      {
+        "function_entry": "0x8001c1c",
+        "PC": "0x8001c52",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001c52:\t7c20      \tldrb\tr0, [r4, #16]"
+      },
+      {
+        "function_entry": "0x80023f4",
+        "PC": "0x80023fa",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80023fa:\t7c01      \tldrb\tr1, [r0, #16]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800303a",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800303a:\t7404      \tstrb\tr4, [r0, #16]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800303a",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800303a:\t7404      \tstrb\tr4, [r0, #16]"
+      },
+      {
+        "function_entry": "0x8003848",
+        "PC": "0x8003850",
+        "effective_address": "0x2000088c",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003850:\t7c12      \tldrb\tr2, [r2, #16]"
+      }
+    ],
+    "0x2000088d": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000fd4",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000fd4:\t746f      \tstrb\tr7, [r5, #17]"
+      },
+      {
+        "function_entry": "0x8001408",
+        "PC": "0x8001418",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001418:\t7c61      \tldrb\tr1, [r4, #17]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x80018f0",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80018f0:\t7c49      \tldrb\tr1, [r1, #17]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x800198c",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800198c:\t7c40      \tldrb\tr0, [r0, #17]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x800198c",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800198c:\t7c40      \tldrb\tr0, [r0, #17]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001a62",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001a62:\t7c60      \tldrb\tr0, [r4, #17]"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001a62",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001a62:\t7c60      \tldrb\tr0, [r4, #17]"
+      },
+      {
+        "function_entry": "0x8001c1c",
+        "PC": "0x8001caa",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001caa:\t7c60      \tldrb\tr0, [r4, #17]"
+      },
+      {
+        "function_entry": "0x80024c0",
+        "PC": "0x80024c6",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80024c6:\t7c41      \tldrb\tr1, [r0, #17]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800303c",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800303c:\t7444      \tstrb\tr4, [r0, #17]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800303c",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800303c:\t7444      \tstrb\tr4, [r0, #17]"
+      },
+      {
+        "function_entry": "0x8003848",
+        "PC": "0x800384c",
+        "effective_address": "0x2000088d",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800384c:\t7c4b      \tldrb\tr3, [r1, #17]"
+      }
+    ],
+    "0x20000891": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000faa",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000faa:\t7569      \tstrb\tr1, [r5, #21]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8000fc8",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000fc8:\t7d68      \tldrb\tr0, [r5, #21]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003042",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003042:\t7541      \tstrb\tr1, [r0, #21]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8007100",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8007100:\t7570      \tstrb\tr0, [r6, #21]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8007100",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8007100:\t7570      \tstrb\tr0, [r6, #21]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007fc8",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007fc8:\t7d61      \tldrb\tr1, [r4, #21]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007fc8",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007fc8:\t7d61      \tldrb\tr1, [r4, #21]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007fc8",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007fc8:\t7d61      \tldrb\tr1, [r4, #21]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009742",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009742:\t7560      \tstrb\tr0, [r4, #21]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009794",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8009794:\t7567      \tstrb\tr7, [r4, #21]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80096ca",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80096ca:\t7567      \tstrb\tr7, [r4, #21]"
+      },
+      {
+        "function_entry": "0x8009a14",
+        "PC": "0x8009a38",
+        "effective_address": "0x20000891",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009a38:\t7d60      \tldrb\tr0, [r4, #21]"
+      }
+    ],
+    "0x20000892": [
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800305e",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800305e:\t7581      \tstrb\tr1, [r0, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x800803e",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800803e:\t7da1      \tldrb\tr1, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007fd6",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007fd6:\t7da2      \tldrb\tr2, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008004",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8008004:\t7da2      \tldrb\tr2, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008070",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8008070:\t7da0      \tldrb\tr0, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x800803e",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "800803e:\t7da1      \tldrb\tr1, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007fd6",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007fd6:\t7da2      \tldrb\tr2, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008004",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8008004:\t7da2      \tldrb\tr2, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008062",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8008062:\t75a7      \tstrb\tr7, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008070",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8008070:\t7da0      \tldrb\tr0, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008062",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8008062:\t75a7      \tstrb\tr7, [r4, #22]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8008092",
+        "effective_address": "0x20000892",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8008092:\t75a0      \tstrb\tr0, [r4, #22]"
+      }
+    ],
+    "0x20000893": [
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x8000868",
+        "effective_address": "0x20000893",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000868:\t7dca      \tldrb\tr2, [r1, #23]"
+      },
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x8000870",
+        "effective_address": "0x20000893",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8000870:\t75ca      \tstrb\tr2, [r1, #23]"
+      },
+      {
+        "function_entry": "0x80013b8",
+        "PC": "0x80013c0",
+        "effective_address": "0x20000893",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80013c0:\t75c5      \tstrb\tr5, [r0, #23]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003044",
+        "effective_address": "0x20000893",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003044:\t75c4      \tstrb\tr4, [r0, #23]"
+      },
+      {
+        "function_entry": "0x8003c2c",
+        "PC": "0x8003c80",
+        "effective_address": "0x20000893",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003c80:\t75e5      \tstrb\tr5, [r4, #23]"
+      },
+      {
+        "function_entry": "0x8003d24",
+        "PC": "0x8003d74",
+        "effective_address": "0x20000893",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003d74:\t75e7      \tstrb\tr7, [r4, #23]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006e5e",
+        "effective_address": "0x20000893",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8006e5e:\t75f7      \tstrb\tr7, [r6, #23]"
+      }
+    ],
+    "0x20000895": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x800102a",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800102a:\t766f      \tstrb\tr7, [r5, #25]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8001018",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001018:\t7668      \tstrb\tr0, [r5, #25]"
+      },
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x8001018",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8001018:\t7668      \tstrb\tr0, [r5, #25]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80021bc",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80021bc:\t7669      \tstrb\tr1, [r5, #25]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80021bc",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80021bc:\t7669      \tstrb\tr1, [r5, #25]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800304c",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800304c:\t7644      \tstrb\tr4, [r0, #25]"
+      },
+      {
+        "function_entry": "0x800680c",
+        "PC": "0x8006892",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006892:\t7e40      \tldrb\tr0, [r0, #25]"
+      },
+      {
+        "function_entry": "0x800680c",
+        "PC": "0x8006892",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006892:\t7e40      \tldrb\tr0, [r0, #25]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006eba",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006eba:\t7e70      \tldrb\tr0, [r6, #25]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f46",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f46:\t7e70      \tldrb\tr0, [r6, #25]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006ed4",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006ed4:\t7e70      \tldrb\tr0, [r6, #25]"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x8007fc2",
+        "effective_address": "0x20000895",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8007fc2:\t7e60      \tldrb\tr0, [r4, #25]"
+      }
+    ],
+    "0x20000896": [
+      {
+        "function_entry": "0x8000e1c",
+        "PC": "0x800101a",
+        "effective_address": "0x20000896",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800101a:\t76af      \tstrb\tr7, [r5, #26]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80021c0",
+        "effective_address": "0x20000896",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80021c0:\t76a9      \tstrb\tr1, [r5, #26]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80021c0",
+        "effective_address": "0x20000896",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80021c0:\t76a9      \tstrb\tr1, [r5, #26]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x800304e",
+        "effective_address": "0x20000896",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800304e:\t7684      \tstrb\tr4, [r0, #26]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006f4c",
+        "effective_address": "0x20000896",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006f4c:\t7eb0      \tldrb\tr0, [r6, #26]"
+      },
+      {
+        "function_entry": "0x8006e1c",
+        "PC": "0x8006eda",
+        "effective_address": "0x20000896",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8006eda:\t7eb0      \tldrb\tr0, [r6, #26]"
+      }
+    ],
+    "0x20000898": [
+      {
+        "function_entry": "0x8001d68",
+        "PC": "0x8001daa",
+        "effective_address": "0x20000898",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001daa:\t7f0a      \tldrb\tr2, [r1, #28]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800218a",
+        "effective_address": "0x20000898",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800218a:\t772b      \tstrb\tr3, [r5, #28]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800218a",
+        "effective_address": "0x20000898",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800218a:\t772b      \tstrb\tr3, [r5, #28]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003046",
+        "effective_address": "0x20000898",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003046:\t7704      \tstrb\tr4, [r0, #28]"
+      }
+    ],
+    "0x20000899": [
+      {
+        "function_entry": "0x8001d68",
+        "PC": "0x8001dae",
+        "effective_address": "0x20000899",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8001dae:\t7f49      \tldrb\tr1, [r1, #29]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800218e",
+        "effective_address": "0x20000899",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800218e:\t7768      \tstrb\tr0, [r5, #29]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800218e",
+        "effective_address": "0x20000899",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800218e:\t7768      \tstrb\tr0, [r5, #29]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003048",
+        "effective_address": "0x20000899",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003048:\t7744      \tstrb\tr4, [r0, #29]"
+      }
+    ],
+    "0x2000089c": [
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x800172a",
+        "effective_address": "0x2000089c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800172a:\t6a01      \tldr\tr1, [r0, #32]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x800172a",
+        "effective_address": "0x2000089c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800172a:\t6a01      \tldr\tr1, [r0, #32]"
+      },
+      {
+        "function_entry": "0x8001574",
+        "PC": "0x800172a",
+        "effective_address": "0x2000089c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800172a:\t6a01      \tldr\tr1, [r0, #32]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80021a2",
+        "effective_address": "0x2000089c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "80021a2:\t6228      \tstr\tr0, [r5, #32]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80021a2",
+        "effective_address": "0x2000089c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "80021a2:\t6228      \tstr\tr0, [r5, #32]"
+      },
+      {
+        "function_entry": "0x8002cc0",
+        "PC": "0x8002cc6",
+        "effective_address": "0x2000089c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8002cc6:\t6a29      \tldr\tr1, [r5, #32]"
+      },
+      {
+        "function_entry": "0x8002fc8",
+        "PC": "0x8003054",
+        "effective_address": "0x2000089c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8003054:\t6204      \tstr\tr4, [r0, #32]"
+      }
+    ],
+    "0x200008ae": [
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8002056",
+        "effective_address": "0x200008ae",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002056:\t74a9      \tstrb\tr1, [r5, #18]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8002056",
+        "effective_address": "0x200008ae",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002056:\t74a9      \tstrb\tr1, [r5, #18]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x8002056",
+        "effective_address": "0x200008ae",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8002056:\t74a9      \tstrb\tr1, [r5, #18]"
+      },
+      {
+        "function_entry": "0x8003848",
+        "PC": "0x8003866",
+        "effective_address": "0x200008ae",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003866:\t7c80      \tldrb\tr0, [r0, #18]"
+      },
+      {
+        "function_entry": "0x8003a3c",
+        "PC": "0x8003a4a",
+        "effective_address": "0x200008ae",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003a4a:\t7490      \tstrb\tr0, [r2, #18]"
+      }
+    ],
+    "0x200008b2": [
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800205a",
+        "effective_address": "0x200008b2",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "800205a:\t86c1      \tstrh\tr1, [r0, #54]\t@ 0x36"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800205a",
+        "effective_address": "0x200008b2",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "800205a:\t86c1      \tstrh\tr1, [r0, #54]\t@ 0x36"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x800205a",
+        "effective_address": "0x200008b2",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "800205a:\t86c1      \tstrh\tr1, [r0, #54]\t@ 0x36"
+      },
+      {
+        "function_entry": "0x8003a3c",
+        "PC": "0x8003a4e",
+        "effective_address": "0x200008b2",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "8003a4e:\t86c8      \tstrh\tr0, [r1, #54]\t@ 0x36"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x800817a",
+        "effective_address": "0x200008b2",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "800817a:\t8ee1      \tldrh\tr1, [r4, #54]\t@ 0x36"
+      },
+      {
+        "function_entry": "0x8007f2c",
+        "PC": "0x800817a",
+        "effective_address": "0x200008b2",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "800817a:\t8ee1      \tldrh\tr1, [r4, #54]\t@ 0x36"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x80096fc",
+        "effective_address": "0x200008b2",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "80096fc:\t8ee1      \tldrh\tr1, [r4, #54]\t@ 0x36"
+      }
+    ],
+    "0x200008bc": [
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001a3a",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8001a3a:\t6c21      \tldr\tr1, [r4, #64]\t@ 0x40"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001a4a",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8001a4a:\t6426      \tstr\tr6, [r4, #64]\t@ 0x40"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001a40",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8001a40:\t6421      \tstr\tr1, [r4, #64]\t@ 0x40"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001a3a",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8001a3a:\t6c21      \tldr\tr1, [r4, #64]\t@ 0x40"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001a4a",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8001a4a:\t6426      \tstr\tr6, [r4, #64]\t@ 0x40"
+      },
+      {
+        "function_entry": "0x80018e4",
+        "PC": "0x8001a40",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8001a40:\t6421      \tstr\tr1, [r4, #64]\t@ 0x40"
+      },
+      {
+        "function_entry": "0x8001c1c",
+        "PC": "0x8001c7e",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "8001c7e:\t6c21      \tldr\tr1, [r4, #64]\t@ 0x40"
+      },
+      {
+        "function_entry": "0x8001c1c",
+        "PC": "0x8001c8e",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8001c8e:\t6425      \tstr\tr5, [r4, #64]\t@ 0x40"
+      },
+      {
+        "function_entry": "0x8001c1c",
+        "PC": "0x8001c84",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8001c84:\t6421      \tstr\tr1, [r4, #64]\t@ 0x40"
+      },
+      {
+        "function_entry": "0x8003a3c",
+        "PC": "0x8003a52",
+        "effective_address": "0x200008bc",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8003a52:\t6408      \tstr\tr0, [r1, #64]\t@ 0x40"
+      }
+    ],
+    "0x200008ca": [
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80020ee",
+        "effective_address": "0x200008ca",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80020ee:\t7388      \tstrb\tr0, [r1, #14]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80020ee",
+        "effective_address": "0x200008ca",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80020ee:\t7388      \tstrb\tr0, [r1, #14]"
+      },
+      {
+        "function_entry": "0x8003848",
+        "PC": "0x8003862",
+        "effective_address": "0x200008ca",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8003862:\t7b81      \tldrb\tr1, [r0, #14]"
+      },
+      {
+        "function_entry": "0x8003a60",
+        "PC": "0x8003a6a",
+        "effective_address": "0x200008ca",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8003a6a:\t7388      \tstrb\tr0, [r1, #14]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x8009712",
+        "effective_address": "0x200008ca",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8009712:\t7bb8      \tldrb\tr0, [r7, #14]"
+      }
+    ],
+    "0x200008ce": [
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80020f2",
+        "effective_address": "0x200008ce",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "80020f2:\t8248      \tstrh\tr0, [r1, #18]"
+      },
+      {
+        "function_entry": "0x8001e94",
+        "PC": "0x80020f2",
+        "effective_address": "0x200008ce",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "80020f2:\t8248      \tstrh\tr0, [r1, #18]"
+      },
+      {
+        "function_entry": "0x8003a60",
+        "PC": "0x8003a6e",
+        "effective_address": "0x200008ce",
+        "access_bytes": 2,
+        "kind": "write",
+        "instruction": "8003a6e:\t8248      \tstrh\tr0, [r1, #18]"
+      },
+      {
+        "function_entry": "0x8009684",
+        "PC": "0x800970c",
+        "effective_address": "0x200008ce",
+        "access_bytes": 2,
+        "kind": "read",
+        "instruction": "800970c:\t8a79      \tldrh\tr1, [r7, #18]"
+      }
+    ],
+    "0x200008e4": [
+      {
+        "function_entry": "0x80068f0",
+        "PC": "0x80068fe",
+        "effective_address": "0x200008e4",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "80068fe:\t6001      \tstr\tr1, [r0, #0]"
+      }
+    ],
+    "0x20000948": [
+      {
+        "function_entry": "0x8006bb0",
+        "PC": "0x8006bb6",
+        "effective_address": "0x20000948",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8006bb6:\t6001      \tstr\tr1, [r0, #0]"
+      }
+    ],
+    "0x20000974": [
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x8000874",
+        "effective_address": "0x20000974",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8000874:\t7821      \tldrb\tr1, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800085c",
+        "PC": "0x80008a2",
+        "effective_address": "0x20000974",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80008a2:\t7820      \tldrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x80065a2",
+        "effective_address": "0x20000974",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80065a2:\t7820      \tldrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8006544",
+        "PC": "0x80065a2",
+        "effective_address": "0x20000974",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "80065a2:\t7820      \tldrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x800a358",
+        "PC": "0x800a370",
+        "effective_address": "0x20000974",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800a370:\t7011      \tstrb\tr1, [r2, #0]"
+      }
+    ],
+    "0x20000e24": [
+      {
+        "function_entry": "0x8006c00",
+        "PC": "0x8006c06",
+        "effective_address": "0x20000e24",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8006c06:\t6001      \tstr\tr1, [r0, #0]"
+      }
+    ],
+    "0x20000eb8": [
+      {
+        "function_entry": "0x8006c80",
+        "PC": "0x8006c8c",
+        "effective_address": "0x20000eb8",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8006c8c:\t6001      \tstr\tr1, [r0, #0]"
+      },
+      {
+        "function_entry": "0x8006cf8",
+        "PC": "0x8006d04",
+        "effective_address": "0x20000eb8",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8006d04:\t6001      \tstr\tr1, [r0, #0]"
+      }
+    ],
+    "0x20000f4c": [
+      {
+        "function_entry": "0x8004f14",
+        "PC": "0x8004f4c",
+        "effective_address": "0x20000f4c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8004f4c:\t6002      \tstr\tr2, [r0, #0]"
+      }
+    ],
+    "0x20000f98": [
+      {
+        "function_entry": "0x800497c",
+        "PC": "0x8004982",
+        "effective_address": "0x20000f98",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8004982:\t7830      \tldrb\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800497c",
+        "PC": "0x800498c",
+        "effective_address": "0x20000f98",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "800498c:\t7030      \tstrb\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800497c",
+        "PC": "0x80049f4",
+        "effective_address": "0x20000f98",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "80049f4:\t7031      \tstrb\tr1, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8004a6c",
+        "PC": "0x8004a72",
+        "effective_address": "0x20000f98",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8004a72:\t7830      \tldrb\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8004a6c",
+        "PC": "0x8004a7a",
+        "effective_address": "0x20000f98",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8004a7a:\t7030      \tstrb\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8004a6c",
+        "PC": "0x8004b12",
+        "effective_address": "0x20000f98",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8004b12:\t7037      \tstrb\tr7, [r6, #0]"
+      },
+      {
+        "function_entry": "0x8004b94",
+        "PC": "0x8004b9c",
+        "effective_address": "0x20000f98",
+        "access_bytes": 1,
+        "kind": "read",
+        "instruction": "8004b9c:\t7820      \tldrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8004b94",
+        "PC": "0x8004ba6",
+        "effective_address": "0x20000f98",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8004ba6:\t7020      \tstrb\tr0, [r4, #0]"
+      },
+      {
+        "function_entry": "0x8004b94",
+        "PC": "0x8004bdc",
+        "effective_address": "0x20000f98",
+        "access_bytes": 1,
+        "kind": "write",
+        "instruction": "8004bdc:\t7027      \tstrb\tr7, [r4, #0]"
+      }
+    ],
+    "0x20000f9c": [
+      {
+        "function_entry": "0x8003f6c",
+        "PC": "0x8003f9a",
+        "effective_address": "0x20000f9c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8003f9a:\t6041      \tstr\tr1, [r0, #4]"
+      },
+      {
+        "function_entry": "0x800497c",
+        "PC": "0x8004990",
+        "effective_address": "0x20000f9c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8004990:\t6070      \tstr\tr0, [r6, #4]"
+      },
+      {
+        "function_entry": "0x8004a6c",
+        "PC": "0x8004a7e",
+        "effective_address": "0x20000f9c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8004a7e:\t6077      \tstr\tr7, [r6, #4]"
+      },
+      {
+        "function_entry": "0x8004b94",
+        "PC": "0x8004bae",
+        "effective_address": "0x20000f9c",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "8004bae:\t6067      \tstr\tr7, [r4, #4]"
+      }
+    ],
+    "0x20000fb4": [
+      {
+        "function_entry": "0x800c0b8",
+        "PC": "0x800c0c0",
+        "effective_address": "0x20000fb4",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c0c0:\t591c      \tldr\tr4, [r3, r4]"
+      },
+      {
+        "function_entry": "0x800c0b8",
+        "PC": "0x800c0d2",
+        "effective_address": "0x20000fb4",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800c0d2:\t5099      \tstr\tr1, [r3, r2]"
+      }
+    ],
+    "0x2000147c": [
+      {
+        "function_entry": "0x800cc0c",
+        "PC": "0x800cc38",
+        "effective_address": "0x2000147c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cc38:\t6830      \tldr\tr0, [r6, #0]"
+      },
+      {
+        "function_entry": "0x800cc0c",
+        "PC": "0x800cc76",
+        "effective_address": "0x2000147c",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800cc76:\t6830      \tldr\tr0, [r6, #0]"
+      }
+    ],
+    "0x200014a4": [
+      {
+        "function_entry": "0x800c2f8",
+        "PC": "0x800c366",
+        "effective_address": "0x200014a4",
+        "access_bytes": 4,
+        "kind": "read",
+        "instruction": "800c366:\t6800      \tldr\tr0, [r0, #0]"
+      }
+    ],
+    "0x20001c88": [
+      {
+        "function_entry": "0x800ae0c",
+        "PC": "0x800ae3e",
+        "effective_address": "0x20001c88",
+        "access_bytes": 4,
+        "kind": "write",
+        "instruction": "800ae3e:\t6001      \tstr\tr1, [r0, #0]"
+      }
+    ]
+  },
+  "targets_without_static_join": [
+    "0x20000014",
+    "0x200000a0",
+    "0x200001a0",
+    "0x2000077c",
+    "0x20000ff4",
+    "0x20001454",
+    "0x20001468",
+    "0x20001490",
+    "0x200014b8",
+    "0x20001508",
+    "0x200015a8",
+    "0x200015bc",
+    "0x200015d0",
+    "0x2000162c",
+    "0x2000182c",
+    "0x20001888",
+    "0x20002c88"
+  ],
+  "unsupported_instruction_counts": {
+    "msr": 84,
+    "mrs": 57,
+    "negs": 17,
+    "sbcs": 9,
+    "adcs": 3,
+    "rev16": 2,
+    "rev": 4,
+    "muls": 35,
+    "wfi": 2,
+    "sev": 1,
+    "wfe": 2,
+    "sxtb": 9,
+    "sxth": 3,
+    "pushhi": 1,
+    "movls": 1,
+    "pushls": 1,
+    "ldrls": 1,
+    "ldrhi": 1
+  },
+  "limits": [
+    "Conservative instructionCFG constant propagation; branchconditions unconstrained, not actualruntime path or objectextent proof",
+    "Literal values read only from lockedimage; no RAM/factory/peripheral values fabricated",
+    "Unknowninstructions and callclobbers drop constants; computedbranch paths mayremainunjoined",
+    "No source change or code/data intervalpromotion; independently review joins before formaladdressadmission"
+  ]
+}

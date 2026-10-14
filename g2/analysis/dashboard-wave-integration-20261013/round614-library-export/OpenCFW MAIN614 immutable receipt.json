@@ -1,0 +1,28 @@
+{
+  "round": 614,
+  "component": "Apollo display-driver timer callback and manager symbol integration",
+  "status": "callback C source compiles, 14 native/C bounded scenarios pass; event loop manager symbol aligned and 30 scenarios still pass; candidates unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "9835dd25edd5a62de19f3e97e645acffa1183abf1dace6d716edbd3237856d14",
+  "event_loop_source_sha256": "b133258057e7acc83bf082e1ce6164c59e7b946b9ca4a90b5b0c7240588c23dd",
+  "callback_verifier_sha256": "3bd1a070d7b12b52f752b5891ac5983a10dfeaa974260d8e14b2fb788e3e9c79",
+  "event_loop_verifier_sha256": "811195c436da4a67085c29556c86fba0815f5738c68189712de0ed8fee721f6f",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_TIMER_CALLBACK_NATIVE 14",
+    "PASS_DISPLAY_DRIVER_EVENT_LOOP_C_NATIVE 30",
+    "ARM Thumb syntax compilation warnings as errors",
+    "git diff --check"
+  ],
+  "gates": [
+    "combined callback, initializer, entry and helper link not yet verified",
+    "remaining helper semantics and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-event-loop-round607/round614-receipt.json",
+    "sha256": "66bddec8d32fbd652c278282051136cb781ffda9a0e33ac55842145457a9803c"
+  },
+  "publication_scope": "Body-receipt evidence only; unselected timer callback14cases/event-loop30cases/shared manager symbol; combined link/helper/layout gates open; current event-loop hashes supersede610, prior seals preserved; official image hash not reauthenticated here; no canonical wave identity inferred; no map/image promotion"
+}

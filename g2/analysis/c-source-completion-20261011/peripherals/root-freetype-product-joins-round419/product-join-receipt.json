@@ -1,0 +1,49 @@
+{
+  "added_imports": [],
+  "alias_address_matches": 27,
+  "alias_manifest": {
+    "path": "g2/firmware_c/experimental-link-aliases.json",
+    "sha256": "ecf8d991f1d8c4ac0528ebd313a9388e5a673ca605ab0f30e1577c5581cc6e2c"
+  },
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-product-joins-repair-round419/receipt.json",
+    "sha256": "9300ed668969ed1d192d35e9c1c9c6237bb4b9b9b8ba5b5a1b624532135113a4"
+  },
+  "builder": {
+    "path": "g2/firmware_c/build.py",
+    "sha256": "039d12e57f5097006db81edfccc20114c0f5bfad2f73424b6736881e72edf329"
+  },
+  "correction": "Removed mismatched upstream host-stdio ftsystem.c and redundant ftfntfmt.c; used selected native-derived C providers for FT_Stream_Open and FT_Get_Font_Format, and selected resource-fork parsers",
+  "definitions": 3940,
+  "duplicate_strong_symbols": 0,
+  "image": "apollo_main",
+  "imports": 774,
+  "intermediate_failed_link": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-product-joins-round419/apollo_main/relocatable-link.log",
+    "sha256": "8bbcc43a90f62a689a67a8453112a9c360ba4994aed4611d20beafceb818621a"
+  },
+  "limits": [
+    "Resource-fork VFS helper still uses three unresolved string library imports",
+    "Native runtime and callback ABI for experimental upstream bodies remain unproven",
+    "Full payload layout, byte identity, and hardware operation unproven"
+  ],
+  "manifest": {
+    "path": "g2/firmware_c/experimental-sources.json",
+    "sha256": "e1bdf048ff0f0478c7b2182a36b19f7d15a4098a8a1d27015408c0e299373df7"
+  },
+  "removed_imports": [
+    "fclose",
+    "fopen",
+    "fread",
+    "free",
+    "fseek",
+    "ftell",
+    "malloc",
+    "realloc"
+  ],
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-freetype-product-joins-repair-round419/root-source-audit.json",
+    "sha256": "5e1545cfb9f99bd2af7e6d0c41c38a92c0c70fe405783708e0f111cdeb6fcc55"
+  },
+  "status": "PASS_PRODUCT_PROVIDER_CORRECTION"
+}

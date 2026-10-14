@@ -1,0 +1,41 @@
+{
+  "flash_device_callback_relocations": [
+    {
+      "native_pointer": "0x540ed1",
+      "offset": 36,
+      "source_symbol": "g2_norflash_init_540ed0"
+    },
+    {
+      "native_pointer": "0x540ed5",
+      "offset": 40,
+      "source_symbol": "g2_norflash_read_540ed4"
+    },
+    {
+      "native_pointer": "0x540f2d",
+      "offset": 44,
+      "source_symbol": "g2_norflash_write_540f2c"
+    },
+    {
+      "native_pointer": "0x540f85",
+      "offset": 48,
+      "source_symbol": "g2_norflash_erase_540f84"
+    }
+  ],
+  "flash_device_count": 1,
+  "flash_device_native_start": "0x722b30",
+  "flash_device_noncallback_bytes_compared": 40,
+  "flash_device_table_relocations": 1,
+  "limits": [
+    "The flash device record and table are source-owned with five relocations; its four lower callback bodies remain unresolved.",
+    "The upstream FAL layout is pinned at v1.0.0; this byte comparison does not prove the original vendor commit.",
+    "Main image layout, FAL physical reads/writes and hardware remain unverified."
+  ],
+  "partition_bytes": 128,
+  "partition_native_start": "0x6d5358",
+  "partition_rows": 2,
+  "partition_sha256": "e02b51d53719be34d95fa474ebda33c47981611b1f90fb6694e6b8cfafa5aa3d",
+  "source_object_sha256": "fdf9f375ffebe6da6e0d9a588898e988775f2ea01fd6f4c3738610b46a1b70d1",
+  "status": "PASS_MAIN_FAL_PRODUCT_CONFIG_RELOCATIONS",
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "upstream_header_sha256": "4a2a8303a09afc20c6a0726c32dc4add34155c55c3101783e593ef0ae6af3c5e"
+}

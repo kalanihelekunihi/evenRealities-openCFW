@@ -1,0 +1,74 @@
+{
+  "native_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "span_start": "0x56b310",
+  "span_end_exclusive": "0x56b32a",
+  "span_sha256": "19fbd565a95c1378737a548f5a51a98cf4d52ce8ed4deabfb39218473fcca2a0",
+  "instructions": [
+    {
+      "address": "0x56b310",
+      "mnemonic": "movs",
+      "operands": "r1, r0"
+    },
+    {
+      "address": "0x56b312",
+      "mnemonic": "uxth",
+      "operands": "r1, r1"
+    },
+    {
+      "address": "0x56b314",
+      "mnemonic": "lsrs",
+      "operands": "r1, r1, #0xa"
+    },
+    {
+      "address": "0x56b316",
+      "mnemonic": "uxth",
+      "operands": "r1, r1"
+    },
+    {
+      "address": "0x56b318",
+      "mnemonic": "cmp",
+      "operands": "r1, #0x3f"
+    },
+    {
+      "address": "0x56b31a",
+      "mnemonic": "bne",
+      "operands": "#0x56b32a"
+    },
+    {
+      "address": "0x56b31c",
+      "mnemonic": "movs",
+      "operands": "r2, r5"
+    },
+    {
+      "address": "0x56b31e",
+      "mnemonic": "uxtb",
+      "operands": "r2, r2"
+    },
+    {
+      "address": "0x56b320",
+      "mnemonic": "mov",
+      "operands": "r1, sb"
+    },
+    {
+      "address": "0x56b322",
+      "mnemonic": "uxth",
+      "operands": "r0, r0"
+    },
+    {
+      "address": "0x56b324",
+      "mnemonic": "movs",
+      "operands": "r0, #0x12"
+    },
+    {
+      "address": "0x56b326",
+      "mnemonic": "mov",
+      "operands": "r8, r8"
+    },
+    {
+      "address": "0x56b328",
+      "mnemonic": "movs",
+      "operands": "r6, r0"
+    }
+  ],
+  "interpretation": "Vendor OGF 0x3f path selects internal callback event 0x12; static instruction evidence only."
+}

@@ -1,0 +1,28 @@
+{
+  "round": 550,
+  "status": "PASS_BACKEND_CLOSE_DIR_FETCH_CONNECTED_BOUNDED",
+  "component": "Apollo audio LittleFS directory fetch joined to close and allocation",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Valid single-commit empty directory fetch executes as native and C within 1,513 connected cases",
+  "case_count": 1513,
+  "joined_c_functions": 36,
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_dir_fetch_connected.py",
+      "sha256": "706ddd28e6e3e9238c088bff9194f6867db86161db26a8d87fdbcb73748c8d65"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/backend-close-dir-fetch-connected-results.json",
+      "sha256": "08570fc11b1c5e762bae35963fb4f3bc400a47640a657e1d4c982ba83f5eee84"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/dir_fetch.c",
+      "sha256": "0b0f914ed98b2d7481b96f5b62e77d4c55c56577e342c4dc9656d65d95aab91c"
+    }
+  ],
+  "remaining_estimate": {
+    "filesystem_traversal": "Directory slice and CTZ traversal remain cut in connected fixture; real entry tags, orphan and open-file variants remain. Roughly 65-80 percent of traversal integration remains.",
+    "whole_g2_firmware": "0 of 6 image components source-complete; latest Main build had 720 unresolved symbols. Source manifest unchanged, so no new full build."
+  },
+  "limits": "Synthetic valid 256-byte LittleFS block; flash read callback remains cut. Not physical storage or boot proof."
+}

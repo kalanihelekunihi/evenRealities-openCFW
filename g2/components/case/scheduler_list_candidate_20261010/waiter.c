@@ -7,7 +7,7 @@ uint32_t case_source_list_remove(case_item *item)
     case_list *list=item->container;
     item->previous->next=item->next;
     item->next->previous=item->previous;
-    if(list->index==item)list->index=item->next;
+    if(list->index==item)list->index=item->previous;
     item->container=0;
     return --list->count;
 }

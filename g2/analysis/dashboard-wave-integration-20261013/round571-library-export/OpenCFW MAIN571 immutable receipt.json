@@ -1,0 +1,66 @@
+{
+  "round": 571,
+  "status": "PASS_CASE_EXPERIMENTAL_BUILD_RECONCILED",
+  "component": "CASE Cortex-M0+ source candidate and build composition",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "CASE startup candidate compiles after removing an unused duplicate fault helper. The experimental command archive is verified as an exact 110-source SHA subset of the selected archive with all 192 strong symbols already selected, so the coordinator skips duplicate linkage. Targeted CASE experimental candidate compilation, startup build and absolute C ELF link pass.",
+  "build": {
+    "full_six_image_pre_fix": {
+      "codec": true,
+      "ble_em9305": true,
+      "touch": true,
+      "case": false,
+      "apollo_bootloader": true,
+      "apollo_main": true
+    },
+    "case_after_fix": {
+      "candidate_compilation_passed": true,
+      "source_complete": false,
+      "unresolved_symbols": [
+        "case_boot_sensor_callback_8758",
+        "case_boot_sensor_callback_8808",
+        "case_boot_sensor_callback_8998",
+        "case_boot_sensor_callback_8a48",
+        "vEventGroupSetBitsCallback"
+      ],
+      "startup_returncode": 0,
+      "absolute_returncode": 0,
+      "duplicate_source_subset_count": 110,
+      "duplicate_strong_symbols_owned_by_selected": 192
+    }
+  },
+  "evidence": [
+    {
+      "path": "g2/components/case/startup_candidate_20261011/application_policy_event_dispatch_candidate.c",
+      "sha256": "c2ed952595cf8030377eaf8582c957261f13d8df1ccf483fbb0d06b5f02cfc0b"
+    },
+    {
+      "path": "g2/firmware_c/build.py",
+      "sha256": "0be6f5a5134ac3086411ccf3d1575109d0f364dfd907509501ec621895e03df8"
+    },
+    {
+      "path": "g2/build/c-firmware/root-all-round571/receipt.json",
+      "sha256": "44f7d8bf33834ddb021590197f3e37f2342a780d999947f4b197034626812b27"
+    },
+    {
+      "path": "g2/build/c-firmware/root-case-round571-fixed/receipt.json",
+      "sha256": "3fc6edd1817ad37232a626f20384a48b332fbee2702f4efaec080888c7f7ff28"
+    },
+    {
+      "path": "g2/build/c-firmware/root-case-round571-fixed/case/experimental-case-command-startup.o.receipt.json",
+      "sha256": "b665e7b68c80ba6a4cd1e36a1415e4e14dfcfcc72108650e8994e949317f2bd2"
+    }
+  ],
+  "remaining_estimate": {
+    "case_build_composition": "Duplicate archive ownership and startup compiler failure are resolved for this candidate path; final layout and source selection remain, roughly 35-50 percent of build-composition work.",
+    "case_firmware": "Five unresolved imports, exact placement, startup/runtime and physical behavior remain; roughly 55-70 percent of full CASE firmware work.",
+    "whole_g2_firmware": "0 of 6 image components source-complete."
+  },
+  "limits": "Candidate compilation and standalone experimental C ELF are not final native-layout or hardware proof; the six-image receipt predates the CASE-only fix.",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-case-build-reconciliation-round571/round571-receipt.json",
+    "sha256": "d7363255037301eda7a15dce0d291e4d6847cdd1f40023b6ce1ffad2025e65b4"
+  },
+  "publication_scope": "Implementation-producer body-receipt evidence only; experimental CASE build reconciliation; separate CASE producer checkpoint unchanged; six-image receipt predates targeted fix; percentage is estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

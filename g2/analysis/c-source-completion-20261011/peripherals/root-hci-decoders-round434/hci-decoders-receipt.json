@@ -1,0 +1,89 @@
+{
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-hci-decoders-sentinel-round434/receipt.json",
+    "sha256": "c6094496f1c56e98121231efff6cd7a56f769ebb5b5d7e6809fa07c359959bea"
+  },
+  "captured_utc": "2026-10-13T22:32:20.847674+00:00",
+  "component": "apollo_main",
+  "definitions": 4014,
+  "duplicate_strong_symbols": 0,
+  "import_delta": {
+    "added": [
+      "hciCb",
+      "hciCmdRecvCmpl",
+      "hciCoreCisByHandle",
+      "hciCoreCisClose",
+      "hciCoreCisOpen",
+      "hciCoreConnClose",
+      "hciCoreConnOpen",
+      "hciCoreNumCmplPkts",
+      "hciCoreVsCmdCmplRcvd"
+    ],
+    "removed": [
+      "audio_ble_hci_event_decoders_6c910c"
+    ]
+  },
+  "imports": 731,
+  "limits": [
+    "Pinned Cordio parser bodies are source-linked, but native per-function body and ABI equivalence are not established.",
+    "Index 85 zero is observed in ROM and modeled as a C sentinel; original allocation extent is not established.",
+    "New Cordio C bodies introduce nine unresolved runtime dependencies.",
+    "Zero-size allocation and index-85 callback runtime behavior remain unverified.",
+    "Full payload placement, byte identity, and hardware operation remain unproven."
+  ],
+  "native_evidence": {
+    "native_86_word_span_sha256": "34cb260f0712275c9d51f057135bd71e78feacb91a3cc44f7772a2e79d49d2ab",
+    "native_distinct_nonzero_pointers": 69,
+    "native_index_85_word": "0x00000000",
+    "null_and_pointer_equivalence_mismatches": 0,
+    "payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "source_distinct_decoder_functions": 69,
+    "source_entries": 85,
+    "source_null_entries": 11,
+    "table_address": "0x6c910c"
+  },
+  "object_evidence": {
+    "function_pointer_relocations": 74,
+    "index_85_zero": true,
+    "table_bytes": 344
+  },
+  "pinned_decoder_source": {
+    "path": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/hci/ambiq/hci_evt.c",
+    "sha256": "5ae371d4aa123986e4020706098efc930a1a97cd5022b2265c88c7c0a61b5efc"
+  },
+  "schema": "opencfw-source-linked-dispatch-receipt-v1",
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-hci-decoders-sentinel-round434/root-source-audit.json",
+    "sha256": "73c74eda878b7cee174768de7c72ccaa7bfab372903a32e4d9f97bedd07a4eb0"
+  },
+  "source_unit": {
+    "header_inputs": {
+      "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include/string.h": "61160adf922713218cf8b826dabd8f33995ade46befc0bfc068c23fe42419513",
+      "g2/analysis/c-source-completion-20261011/peripherals/root-hci-decoders-round434/source_linked_decoders.c": "4ceb1e2d2ea5f3f7d8a6eda5ba4cd27a39958bf4fbfb11718340a252d001beda",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include/hci_api.h": "69430f9b5cee67d46667d6134a3c27cb4986de06002ed0c01868d126135e729d",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include/hci_cmd.h": "b4632ae8675dc6ca31ff945ab0dfc9da1185d2f522d192e6a4f093c12d215b61",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include/hci_core.h": "9fa8bd2164b845458b5ba71cfba140f20c22ebcfbc9c05468ceb409e9e882fa2",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include/hci_evt.h": "cbd9a4377471268eb8dd24956fa0513b2f3f6c48ad9953a9c9007d120bd693f2",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/hci/ambiq/hci_core_ps.h": "3ab0a57236cf84fc261e47a1dc54b680064894bf790823b65dbda036519655dc",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/hci/ambiq/hci_evt.c": "5ae371d4aa123986e4020706098efc930a1a97cd5022b2265c88c7c0a61b5efc",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/stack/cfg/cfg_stack.h": "22aff058d2eb6dc69a157a82b65018bc857923fa960054171461cd3ee0ab79ea",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/stack/hci/hci_main.h": "aa33af034bf7b48b326fc85d3f2747c8bd12be9c5983fb8d18c2323b166ea940",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/hci_defs.h": "7730646d455eac589522d4c3cb57bef2e3bc6a1cf0130d23d59cd751fb9ca369",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/wsf_buf.h": "e6940c2c2369b162465d622a9f7b3e1cc1b92edb5cb75bf1caba014ea838158c",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/wsf_math.h": "3885218391b789eee878b75597e558709c0af2943d2f91b99dfcf3f4136be0b2",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/wsf_os.h": "8ea50e3b084ea103ed505e5dd328c89d751df4958f45f447fd083e1bea8d20c9",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/wsf_queue.h": "3657f2e5bc8c9e9c77ba766ddb5b9488947464fc8077eee0d89cd3f08d6025cd",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_os_int.h": "24d06d04a64f5d1b3f7efa0a1be74ce5bae24e1cfb695cb2c865ec03caa0b3a4",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_trace.h": "5b570e50f62c9b50920283b2fb6489cbe01fe7f61320ee749c6df073f1bfdd60",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_types.h": "69c8b5382a397284b9c9ac686e2345503a396f1c5eb305064720feb83bed91b1",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/util/bda.h": "67468c7aa1471a462e2b8959c8c0eab597610fe608a1e9dcafbf4b65f7062397",
+      "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/util/bstream.h": "fe0c9740fce2887e9d5f78f4ba4610456d7f809d311c126ae42d1efb33ee88db"
+    },
+    "object": "g2/build/c-firmware/20261013/peripherals-root-hci-decoders-sentinel-round434/apollo_main/experimental-171.o",
+    "object_sha256": "3d3fc17a9e970f4bec9cac7c3b90e52dbda5c98942349d5746e6de19fd252db2",
+    "source": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-decoders-round434/source_linked_decoders.c",
+    "source_sha256": "4ceb1e2d2ea5f3f7d8a6eda5ba4cd27a39958bf4fbfb11718340a252d001beda",
+    "validation": "experimental C reduction; not admitted stock-equivalent provider"
+  },
+  "status": "completed"
+}

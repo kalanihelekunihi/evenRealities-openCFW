@@ -1,0 +1,61 @@
+{
+  "status": "PASS_FULL_NATIVE_C_BUSY_QUERY_AND_CONVERSION",
+  "cases": 8,
+  "ELF_sha256": "1c8c1bd21ff8e7050f571920538e59c094585476daacd27a6fda3933b09f070b",
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "comparisons": [
+    {
+      "symbol": "case_boot_battery_percent",
+      "initial_output": 0,
+      "status": 0,
+      "percentage": 0
+    },
+    {
+      "symbol": "case_boot_battery_percent",
+      "initial_output": 19,
+      "status": 0,
+      "percentage": 0
+    },
+    {
+      "symbol": "case_boot_battery_percent",
+      "initial_output": 3735928559,
+      "status": 0,
+      "percentage": 0
+    },
+    {
+      "symbol": "case_boot_battery_percent",
+      "initial_output": 4294967295,
+      "status": 0,
+      "percentage": 0
+    },
+    {
+      "symbol": "case_init_read_product_byte",
+      "initial_output": 0,
+      "status": 0,
+      "percentage": 0
+    },
+    {
+      "symbol": "case_init_read_product_byte",
+      "initial_output": 19,
+      "status": 0,
+      "percentage": 0
+    },
+    {
+      "symbol": "case_init_read_product_byte",
+      "initial_output": 3735928559,
+      "status": 0,
+      "percentage": 0
+    },
+    {
+      "symbol": "case_init_read_product_byte",
+      "initial_output": 4294967295,
+      "status": 0,
+      "percentage": 0
+    }
+  ],
+  "child_stubs_or_cuts": false,
+  "limits": [
+    "Actual guarded query/status wrapper, realdelay loops and actual divide/conversion execute. Busy guard stays1 in a coherent single-thread fixture; no sensorbus/MMIO model orphysicaltiming claim.",
+    "Does not validate guard release races, device data transfers or sensorfailure effects."
+  ]
+}

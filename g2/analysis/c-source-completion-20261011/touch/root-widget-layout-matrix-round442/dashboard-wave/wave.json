@@ -1,0 +1,66 @@
+{
+  "build": {
+    "definitions": 236,
+    "duplicate_strong_symbols": 0,
+    "full_payload_linked": false,
+    "imports": 2
+  },
+  "completed_utc": "2026-10-13T22:49:44.130027+00:00",
+  "component": "touch",
+  "implementation_delta": {
+    "abi_adapters": [],
+    "actual_c_bodies": [],
+    "experimental_symbol_joins": 0,
+    "fixtures_or_stubs": [],
+    "layout_variants_compiled": 4,
+    "pinned_reference_submodules": 1,
+    "pseudocode_only": [],
+    "typed_data": []
+  },
+  "implementation_thread_id": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "limitations": [
+    "The pinned v6.10 typedef under four tested feature combinations does not match the observed 144-byte G2 widget record stride.",
+    "The new reference design is for an Infineon board and does not supply G2-generated product initializers.",
+    "The submodule gitlink is prepared in a temporary index; the real index was preserved for user review.",
+    "Touch generated objects, reset layout, final image, and hardware behavior remain unresolved."
+  ],
+  "next_goal": {
+    "missing_input_or_authorization": null,
+    "owner": "existing implementation goal",
+    "ranked_gaps": [
+      "Two strong generated Touch data imports",
+      "Four generated product layout/initializer gates",
+      "Final Touch image composition; 0/6 complete firmware images"
+    ],
+    "reason": "Resolve exact generated Touch type/version and product initializer"
+  },
+  "schema": "opencfw-completed-wave-v1",
+  "source_object_dependency_hash_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-widget-layout-matrix-round442/widget-layout-reference-receipt.json",
+      "sha256": "f786a0422a89c6af3ac9860d9eff3fb7c1f670b48661ef2f3696d25dab81394a"
+    }
+  ],
+  "status": "completed",
+  "target_id": "official-s200-v2.2.6.10",
+  "terminal_receipts": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-widget-layout-matrix-round442/layout-matrix.json",
+      "sha256": "1b4d186745bb03695890618e700d6e53adf5d6ea7c4b4de254c782b5eb488408"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/touch/root-widget-layout-matrix-round442/widget-layout-reference-receipt.json",
+      "sha256": "f786a0422a89c6af3ac9860d9eff3fb7c1f670b48661ef2f3696d25dab81394a"
+    }
+  ],
+  "tests": {
+    "expected_failures": [],
+    "receipt_paths": [
+      {
+        "path": "g2/analysis/c-source-completion-20261011/touch/root-widget-layout-matrix-round442/widget-layout-reference-receipt.json",
+        "sha256": "f786a0422a89c6af3ac9860d9eff3fb7c1f670b48661ef2f3696d25dab81394a"
+      }
+    ]
+  },
+  "wave_id": "root-touch-round442-widget-layout-reference"
+}

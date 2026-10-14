@@ -1,0 +1,65 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 722,
+    "strong_unresolved_before": 722
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/clock_mode_set_candidates_20261013/mode.c",
+      "sha256": "1d484f9ffd16c60be6e9498bfacb71318d943d37c9ea548ba3aa67269cb79eef"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004809c4.c",
+      "sha256": "398c734e9d10104f1fc2780e7fd02003e66747937a729eb730c6d58c97867b6c"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "c385bba291b852fbb2390b94e8cf557c1911dd4f9bcbf4ab15d51f026b5fa64c"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_clock_mode_set.py",
+      "sha256": "4bf1ef997e392a4edd12dfc956a78fa40879143abb04ad464dc5c7b9ac2b70e5"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-mode-set-round511/oracle.json",
+      "sha256": "7934e531d31cd9976a0ad9f1ae1d4f73edb3fbdfa595ee521ed78b7df19fed73"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-mode-set-round511/isolated/mode.elf",
+      "sha256": "aec4301b51cb0f67440d9d00a2d9206b2e2e987740ded3bbf66ec06477e801ba"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-mode-set-round511/receipt.json",
+      "sha256": "958e668d516921a6bb3786f6ccb4752da7f0598024ce61a0eb104a78ae23560d"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-clock-mode-set-round511/apollo_main/candidate.o",
+      "sha256": "d2853bd1f07bbb1131819d11d891eeddcd9750787df5e43732f7d0b7d68d79cf"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "MSPI clock acquire/release and microsecond delay intercepted; register writes executed against synthetic SRAM/MMIO.",
+    "Class 2 acquire remains unresolved and will consume this provider.",
+    "Physical clock transitions and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x4809c4 operations 0-7"
+  ],
+  "native_source_oracle_cases": 3584,
+  "provenance": "Main Ghidra pseudocode, locked native blob and clock-mode native/source register comparison",
+  "schema": "opencfw-source-provider-receipt-v1",
+  "source_bodies": [
+    "g2_main_clock_mode_set_4809c4"
+  ],
+  "status": "provider_body_verified",
+  "target_id": "official-s200-v2.2.6.10",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-clock-mode-set-round511/round511-receipt.json",
+    "sha256": "7250ad1ec83baaf372bd123f5917e590596dd29db89b97d45fe35ec6f08dc77f"
+  },
+  "publication_scope": "Body-receipt evidence only; bounded shared clock-mode transition; class2 acquire/physical clocks open; no canonical identity inferred; no map/image promotion"
+}

@@ -1,0 +1,152 @@
+{
+  "status": "PASS_20_RAW_MODEL_CONTROLS",
+  "cases": [
+    {
+      "label": "Transparent loop preserves R4 without invented flags",
+      "inferred": [
+        "0x20001234"
+      ],
+      "Unicorn_M0_value": null
+    },
+    {
+      "label": "Changing-register loop remains uncertain",
+      "inferred": [
+        null,
+        "0x20001235"
+      ],
+      "Unicorn_M0_value": null
+    },
+    {
+      "label": "Unknown entry-register loop stays unknown",
+      "inferred": [
+        null
+      ],
+      "Unicorn_M0_value": null
+    },
+    {
+      "label": "UXTB R0 does not clobber R4",
+      "inferred": [
+        "0x20001234"
+      ],
+      "Unicorn_M0_value": "0x20001234"
+    },
+    {
+      "label": "SP ADR R0 does not clobber R4",
+      "inferred": [
+        "0x20001234"
+      ],
+      "Unicorn_M0_value": "0x20001234"
+    },
+    {
+      "label": "SP ADR R4 changes R4 to unknown",
+      "inferred": [
+        null
+      ],
+      "Unicorn_M0_value": null
+    },
+    {
+      "label": "STM R3 writeback advances its base",
+      "inferred": [
+        "0x20001240"
+      ],
+      "Unicorn_M0_value": "0x20001240"
+    },
+    {
+      "label": "Unpredictable STM base-in-list rejected",
+      "inferred": [
+        null
+      ],
+      "Unicorn_M0_value": null
+    },
+    {
+      "label": "Empty LDM list rejected",
+      "inferred": [
+        null
+      ],
+      "Unicorn_M0_value": null
+    },
+    {
+      "label": "Reserved REV encoding rejected",
+      "inferred": [
+        null
+      ],
+      "Unicorn_M0_value": null
+    },
+    {
+      "label": "SXTH raw semantic",
+      "inferred": [
+        "0xffffabcd"
+      ],
+      "Unicorn_M0_value": "0xffffabcd"
+    },
+    {
+      "label": "SXTB raw semantic",
+      "inferred": [
+        "0xffffffcd"
+      ],
+      "Unicorn_M0_value": "0xffffffcd"
+    },
+    {
+      "label": "UXTH raw semantic",
+      "inferred": [
+        "0xabcd"
+      ],
+      "Unicorn_M0_value": "0xabcd"
+    },
+    {
+      "label": "UXTB raw semantic",
+      "inferred": [
+        "0xcd"
+      ],
+      "Unicorn_M0_value": "0xcd"
+    },
+    {
+      "label": "REV raw semantic",
+      "inferred": [
+        "0xcdab3412"
+      ],
+      "Unicorn_M0_value": "0xcdab3412"
+    },
+    {
+      "label": "REV16 raw semantic",
+      "inferred": [
+        "0x3412cdab"
+      ],
+      "Unicorn_M0_value": "0x3412cdab"
+    },
+    {
+      "label": "REVSH raw semantic",
+      "inferred": [
+        "0xffffcdab"
+      ],
+      "Unicorn_M0_value": "0xffffcdab"
+    },
+    {
+      "label": "ROM LDM base-in-list loads R1",
+      "inferred": [
+        "0x20004321"
+      ],
+      "Unicorn_M0_value": "0x20004321"
+    },
+    {
+      "label": "Transparent SCC cache must retain both definitions",
+      "inferred": [
+        "0x1",
+        "0x3"
+      ],
+      "Unicorn_M0_value": "0x1"
+    },
+    {
+      "label": "Same SCC counterexample takes alternative entry",
+      "inferred": [
+        "0x1",
+        "0x3"
+      ],
+      "Unicorn_M0_value": "0x3"
+    }
+  ],
+  "limits": [
+    "Loop checks remain flag-unconstrained abstract controls, not hardware feasibility tests",
+    "Unpredictable/reserved instruction controls require conservative unknown; do not execute these as valid native behavior"
+  ]
+}

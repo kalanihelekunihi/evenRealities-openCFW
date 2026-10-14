@@ -1,0 +1,71 @@
+{
+  "round": 606,
+  "status": "PASS_DISPLAY_DRIVER_ATTRIBUTES_CANDIDATE_BOUNDED",
+  "captured_utc": "2026-10-14T07:36:02.046921+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "native_thread_attrs": "ROM 0x75381c, 36 bytes",
+  "native_queue_attrs": "decoded SRAM 0x2000067c, 24 bytes",
+  "source_backing_arrays": [
+    {
+      "symbol": "audio_display_driver_queue_control_block",
+      "size": 80,
+      "native_address": "0x20072a38"
+    },
+    {
+      "symbol": "audio_display_driver_queue_storage",
+      "size": 3456,
+      "native_address": "0x20371e40"
+    }
+  ],
+  "candidate_compilation_passed": true,
+  "selected_source": false,
+  "native_comparisons": [
+    "PASS typed attribute scalar fields and native names",
+    "PASS relocatable pointer fields and BSS allocation sizes",
+    "PASS native/C display-driver callbacks 28 cases"
+  ],
+  "last_selected_build": "g2/build/c-firmware/root-main-round604/receipt.json",
+  "unresolved_before": 619,
+  "unresolved_after": 619,
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "next_obligation": "Reconstruct the display-driver event loop at 0x473c44 and its dependencies, then qualify full callback/entry composition and final scatter placement.",
+  "limits": "This updates the round605 candidate source and verifier; their current hashes supersede the round605 source-file hashes. The C attribute records and callbacks remain unselected. ROM/RAM exact addresses, CMSIS producer configuration, event-loop completeness and physical behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-callbacks-round605/display_driver_attributes.h",
+      "sha256": "7fcfcbf1d8d0b275e3dbf3cc357178444e6672632aa3ad7a84af83d45f623155"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-callbacks-round605/display_driver_attributes.c",
+      "sha256": "3da4760e9f7de7e127ace2a43ccc6be4be7e44464dac8a7287f8b2789b77d11c"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-callbacks-round605/display_driver_callbacks.c",
+      "sha256": "116543c9c5b3c30db1694e35c0103237dc3eae9ff622d3b1a3a6d204f24051db"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-callbacks-round605/verify_display_driver_attributes.py",
+      "sha256": "24d5a45c0088d6dc0bb8373453a40b9b97e00e8993f89b814d6767397718e0bf"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-callbacks-round605/verify_display_driver_callbacks_native.py",
+      "sha256": "450acc56ac2064b0d325fdb230ae17ee7876c906b70925b01a3b49db21d21165"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round604/receipt.json",
+      "sha256": "ba50bb43eaf33ae90773411d21415ee971f53d2d727d1ab9a43c356e07d624ff"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-attributes-round606/round606-receipt.json",
+    "sha256": "f40167e86390c3a856bd8f2cb78b4e10bebc34654c929ed9a23f64b90b7a01c1"
+  },
+  "publication_scope": "Body-receipt evidence only; unselected typed display-driver attributes/backing arrays/28 callback comparisons; current source hashes supersede605, historical seal preserved; event-loop/composition/CMSIS config/scatter/hardware open; percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

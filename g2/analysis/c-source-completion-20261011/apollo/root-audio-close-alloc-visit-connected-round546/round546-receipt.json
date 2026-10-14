@@ -1,0 +1,30 @@
+{
+  "round": 546,
+  "status": "PASS_CONNECTED_THIRTY_TWO_FUNCTION_ALLOC_VISIT_BOUNDARY_NO_SOURCE_ADMISSION",
+  "component": "audio littlefs backend close through marked-block allocation",
+  "component_completed": false,
+  "native_entry": "0x4cfad0",
+  "joint_native_c_cases": 1512,
+  "joined_executed_c_function_count": 32,
+  "new_connected_evidence": [
+    "traverser invokes original/source lookahead callback once",
+    "bitmap marks block 7 used",
+    "allocator selects block 8 instead of block 7",
+    "erase callback receives selected block"
+  ],
+  "remaining_estimate": "Filesystem traversal body and no-space path, device erase/program/read callbacks, cross-block CTZ, directory commit, heap release and fatal logging remain cut or unverified; full audio image incomplete.",
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_alloc_visit_connected.py",
+      "sha256": "c3f83747dd66d5255433e9ec1e6dd79a242533e7820058ebd89822511fc8525d"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/backend-close-alloc-visit-connected-results.json",
+      "sha256": "bb70fe933593a02144c58919dd4d0fb06e8bb92c807ee46e09d63a003062ea83"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/alloc_scan.c",
+      "sha256": "1ff6b3dd8ada3ae647fc7cf5fd65419ceb114188aaf3dddf5649fd5d8ab1d0ff"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "round": 556,
+  "status": "PASS_INLINE_DIRECTORY_READ_CONNECTED_BOUNDED",
+  "component": "Apollo audio inline LittleFS file read through directory metadata",
+  "component_completed": false,
+  "bounded_subcomponent_completed": "Eight linked C providers match native return, output bytes, cache state, file position and child trace on five bounded cases including four-byte inline read and -5 read failure",
+  "case_count": 5,
+  "joined_c_functions": 8,
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_inline_directory_read_connected.py",
+      "sha256": "c39a40a2fb9147092ca533d994ea76cab82489e9fac601c5a0eb66a470bcf5ae"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/inline-directory-read-connected-results.json",
+      "sha256": "c53e674f0ec955f097daf21bee99bd29eca30145dfaeb6dda7bde677add48f40"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/file_flushedread.c",
+      "sha256": "5c0b1c9681413d56517d6fb614cdbbe7e1f4b598712db79c2b96cc28ef8f9fa2"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/dir_getread.c",
+      "sha256": "ca0699127a2721f1a189ce1f242156e090352cc4cccbf7de798f4c9bdcebb6d5"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/dir_getslice.c",
+      "sha256": "1f8fff2be2c3b2b20cd62859c274e7d93b4f72dccd335fa3f2d5375e349ad4dc"
+    }
+  ],
+  "remaining_estimate": {
+    "inline_directory_read": "Cache-overlap, larger/multi-entry reads, delete/move metadata, additional error propagation and storage callback variants remain. Roughly 65-80 percent of full inline read integration remains.",
+    "whole_g2_firmware": "0 of 6 image components source-complete; latest Main experimental build had 720 unresolved symbols. Source manifest unchanged this round."
+  },
+  "limits": "Synthetic directory metadata and flash read callback, no real storage, boot or hardware proof.",
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-inline-directory-read-connected-round556/round556-receipt.json",
+    "sha256": "7e343ed000c297e3dc1b6021ac3b5cde838edf618b9ad20fda582d82ce5c7915"
+  },
+  "publication_scope": "Body-receipt evidence only; five bounded inline-directory read cases/eight linked providers; synthetic metadata/flash; component incomplete; percentage is producer estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

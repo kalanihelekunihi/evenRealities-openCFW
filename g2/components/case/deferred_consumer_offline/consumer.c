@@ -1,7 +1,7 @@
 /* Independent selected nonblocking/negative-callback reconstruction.
  * Original scheduler query/critical providers and callback bodies remain peers. */
 #include "consumer.h"
-extern int32_t case_scheduler_state(void);
+extern uint32_t case_scheduler_state(void);
 extern void case_enter_critical(void),case_exit_critical(void);
 extern uint32_t case_yield_request(void);
 extern int32_t case_remove_waiter(case_list *);
@@ -17,6 +17,6 @@ void case_drain_negative_callbacks(void){
  case_deferred_message m;case_queue *q=*(case_queue **)0x20000164u;
  while(case_receive_nowait(q,&m)){
   if(m.command>=0)return; /* Outside this helper's declared contract, not timer semantics. */
-  ((void(*)(uint32_t,uint32_t))(uintptr_t)m.callback)(m.arg1,m.arg2);
+  ((void(*)(void *,uint32_t))(uintptr_t)m.callback)((void *)(uintptr_t)m.arg1,m.arg2);
  }
 }

@@ -1,0 +1,62 @@
+{
+  "round": 605,
+  "status": "PASS_DISPLAY_DRIVER_CALLBACK_CANDIDATES_BOUNDED_CORRECTION",
+  "captured_utc": "2026-10-14T07:31:36.570977+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "corrected_native_record": "0x20000658",
+  "corrected_startup_hex": "53394700a53a47000000000000000000",
+  "native_bodies": [
+    "0x473952..0x4739fb",
+    "0x4739fc..0x473aa3"
+  ],
+  "candidate_c_bodies": [
+    "audio_display_driver_thread_init",
+    "audio_display_driver_queue_init"
+  ],
+  "candidate_compilation_passed": true,
+  "selected_source": false,
+  "native_comparisons": [
+    "PASS corrected callback record and two body hashes",
+    "PASS compiled manager record with relocatable C callback pointers",
+    "PASS native/C thread and queue creation, success/failure and diagnostic flags: 28 cases"
+  ],
+  "last_selected_build": "g2/build/c-firmware/root-main-round604/receipt.json",
+  "unresolved_before": 619,
+  "unresolved_after": 619,
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Prior round604 pointer_startup_hex was wrong and its UART function label was provisional; correction is explicit and does not alter the sealed prior receipt. Candidate C functions are unselected pending source-owned thread entry and attribute objects, full caller composition, final RAM/code placement, and physical execution. Bounded comparisons do not qualify the whole image.",
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_uart_callback_record.py",
+      "sha256": "f8d34de3e53cd79551dfb8471ce91620c3b1f13e91509c49ae17434f863f5723"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-callbacks-round605/callback-record-correction.json",
+      "sha256": "74aeac16fb958b5433ae2bfbae025f14070256f469e4b7380d4f69245526d504"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-callbacks-round605/display_driver_callbacks.c",
+      "sha256": "0fc06e2710e62b328b1290f32902adcdc1e5884bd4542d70787cd9e420b5cf04"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-callbacks-round605/verify_display_driver_callbacks_native.py",
+      "sha256": "d87f38fb091767a49a9fed1f874e80f5f8fbe7750ea129fc6e5750abc5be1b0f"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round604/receipt.json",
+      "sha256": "ba50bb43eaf33ae90773411d21415ee971f53d2d727d1ab9a43c356e07d624ff"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-callbacks-round605/round605-receipt.json",
+    "sha256": "a140a8ae622ae3914b30856142ba16992db5e752b1a24ccde49083e6c169fbe4"
+  },
+  "publication_scope": "Body-receipt evidence only; explicit round604 callback bytes/label correction, prior seal preserved; two unselected C bodies/28 bounded cases; entry/attributes/caller composition/layout/hardware unqualified; percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

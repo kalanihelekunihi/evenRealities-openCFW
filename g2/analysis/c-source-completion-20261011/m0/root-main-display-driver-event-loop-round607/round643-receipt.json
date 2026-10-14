@@ -1,0 +1,24 @@
+{
+  "round": 643,
+  "component": "Apollo uLED option records 0x70afe4 and 0x70b024",
+  "status": "Two 64-byte option records compile to image-exact C data; absolute callback address relocation remains open; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "57d8f7d40325dce90baa30f65abfd86021b061c1d53dbee67658ae9f4aa0f20d",
+  "verifier_sha256": "5d86b4722b78a28b30bd5048c70907dba6fe8677c9ad14c499e9eda8f04f5a7d",
+  "link_audit_sha256": "9dab3aaee5652e456b49730a671b8700b26576da31bcece9247432a47b6c6ed1",
+  "combined_object_sha256": "714a46f591c04dc994ab0e4b4a43d43ba793ba4c48d2c7c483add091d3480089",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_OPTIONS_EXACT 2 128",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 130 34 4",
+    "git diff --check"
+  ],
+  "gates": [
+    "Option records hold native absolute Thumb addresses; map to relocated C driver bodies before whole-image build",
+    "NEMA mode 0x513924 and GPU blit 0x4b1608 bodies unresolved",
+    "uLED row callback and work buffer extent unresolved",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

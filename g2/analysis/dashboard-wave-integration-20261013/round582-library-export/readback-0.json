@@ -1,0 +1,48 @@
+{
+  "round": 582,
+  "status": "PASS_MAIN_HCI_RESET_RAND_COUNTER_BOUNDED",
+  "captured_utc": "2026-10-14T05:53:22.244372+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "native_address": "0x20074fd0",
+  "source_storage_bytes": 1,
+  "native_comparison": "PASS reset sequence 9 cases including random counter branches",
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 651,
+  "unresolved_after": 650,
+  "removed_symbols": [
+    "audio_ble_hci_reset_rand_count"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "One-byte reset random retry counter source-owned. Boot initialization, absolute SRAM placement, complete image coverage and hardware behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_hci_reset_rand_counter.c",
+      "sha256": "f2fdc774b7309a7622abe257d2b1032f946caefe1f3858ee420f9d0413c89276"
+    },
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_ble_hci_reset_sequence.c",
+      "sha256": "44e679c07665a0ba429086a6c11cbee1d3a32e0c7a2b489bb441ba5611e94891"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_ble_hci_reset_sequence.py",
+      "sha256": "203387c393c2ee48254d56ddad16025d46fc6bdca8123c8b06530c557c04be22"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round582/receipt.json",
+      "sha256": "1a473a6a2d66c385bc6e16280c115ee60737e7d749b715d4ada97e3b528bedfd"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-hci-reset-counter-round582/round582-receipt.json",
+    "sha256": "8bd6af7826de0731f8156c110b0a130588897a7d6b16de902864ec3170302e29"
+  },
+  "publication_scope": "Body-receipt evidence only; one-byte reset random counter/nine bounded cases; boot initialization/placement/full coverage/hardware unqualified; percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

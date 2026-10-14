@@ -1,0 +1,175 @@
+{
+  "added_imports": [],
+  "analysis_only_time_header": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-cordio-ecc-round422/freestanding_include/time.h",
+    "sha256": "35376a834be87625de91bb70090623c82dc6b7218424f089ac230b641bd36df2"
+  },
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/receipt.json",
+    "sha256": "b3ad4e789480ef0df5d02b3fd1eeb0d4f058b435ca882942f5d70cac5d37dbdc"
+  },
+  "builder": {
+    "path": "g2/firmware_c/build.py",
+    "sha256": "0a911629380248de29fe7b5c452ccf273c45beba4966b4d3317817f55a9ed5ba"
+  },
+  "definitions": 3961,
+  "duplicate_strong_symbols": 0,
+  "image": "apollo_main",
+  "imports": 768,
+  "limits": [
+    "Pinned Cordio uECC source compiled and linked; stock ECC variant, callbacks, key generation and hardware runtime unverified",
+    "Full payload layout and byte identity unproven"
+  ],
+  "manifest": {
+    "path": "g2/firmware_c/experimental-sources.json",
+    "sha256": "84e13c3479d29a341af4fbd7c2a672418829e16b41cb809274e4a9b4036af47b"
+  },
+  "removed_imports": [
+    "SecEccGenSharedSecret"
+  ],
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/root-source-audit.json",
+    "sha256": "b926089f6679431a16ddb7cfb534cd1f710d013b788311d194a1ee5424bad63e"
+  },
+  "source_compile_receipts": [
+    {
+      "argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m55",
+        "-mthumb",
+        "-mfpu=fpv5-sp-d16",
+        "-mfloat-abi=softfp",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-cordio-ecc-round422/freestanding_include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/common",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/uecc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/stack/smp",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/stack/cfg",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/stack/dm",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/util",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/apollo_main/experimental-155.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/uecc/sec_ecc.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/apollo_main/experimental-155.o"
+      ],
+      "compile_source_snapshot": {
+        "path": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/uecc/sec_ecc.c",
+        "sha256_after": "650a003b2b06d5a928b7fb7ae90fa1aff15beab30110d85cec8c659fb5cb85c8",
+        "sha256_before": "650a003b2b06d5a928b7fb7ae90fa1aff15beab30110d85cec8c659fb5cb85c8",
+        "stable_during_command": true
+      },
+      "header_inputs": {
+        "g2/analysis/c-source-completion-20261011/peripherals/root-cordio-ecc-round422/freestanding_include/time.h": "35376a834be87625de91bb70090623c82dc6b7218424f089ac230b641bd36df2",
+        "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include/stdlib.h": "bb542530484bb4151a7b5b7af5c75c14e132a389d345d591886dca284858d503",
+        "g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include/string.h": "61160adf922713218cf8b826dabd8f33995ade46befc0bfc068c23fe42419513",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include/hci_api.h": "69430f9b5cee67d46667d6134a3c27cb4986de06002ed0c01868d126135e729d",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include/sec_api.h": "89953cf8aff93ccbb412644f8ee75180b969a1318ff1cf220d7e394e8980acc5",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/common/sec_main.h": "543a3a7800633ceba1ce92f20c117266cd00768bff92b011f9637833bad035bb",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/uecc/sec_ecc.c": "650a003b2b06d5a928b7fb7ae90fa1aff15beab30110d85cec8c659fb5cb85c8",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/hci_defs.h": "7730646d455eac589522d4c3cb57bef2e3bc6a1cf0130d23d59cd751fb9ca369",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/wsf_buf.h": "e6940c2c2369b162465d622a9f7b3e1cc1b92edb5cb75bf1caba014ea838158c",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/wsf_msg.h": "2f426160efed014a23c7f7275377002a6b350370efbe7d9e28cff30842ae0243",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/wsf_os.h": "8ea50e3b084ea103ed505e5dd328c89d751df4958f45f447fd083e1bea8d20c9",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include/wsf_queue.h": "3657f2e5bc8c9e9c77ba766ddb5b9488947464fc8077eee0d89cd3f08d6025cd",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_os_int.h": "24d06d04a64f5d1b3f7efa0a1be74ce5bae24e1cfb695cb2c865ec03caa0b3a4",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_trace.h": "5b570e50f62c9b50920283b2fb6489cbe01fe7f61320ee749c6df073f1bfdd60",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_types.h": "69c8b5382a397284b9c9ac686e2345503a396f1c5eb305064720feb83bed91b1",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/util/bda.h": "67468c7aa1471a462e2b8959c8c0eab597610fe608a1e9dcafbf4b65f7062397",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/util/calc128.h": "1d05041240f6b9a564e4e8f50794f36350e23bda39de099ab42e1949be937174",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc/uECC.h": "da01ff34af05e4655fe6389c777f0629cdbcd7593e6994c9520d55eb020e21fa"
+      },
+      "log": "g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/apollo_main/experimental-155.log",
+      "log_sha256": "57b95f070e49d05d8e593d424a6e308e57ca26c0835052cf60531d5942ed8713",
+      "object": "g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/apollo_main/experimental-155.o",
+      "object_sha256": "d85f108ab43ab1c44eb068995fd93e77ca1d29b2894f2e2954e2618bdfd22b12",
+      "process_returncode": 0,
+      "returncode": 0,
+      "source": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/uecc/sec_ecc.c",
+      "source_sha256": "650a003b2b06d5a928b7fb7ae90fa1aff15beab30110d85cec8c659fb5cb85c8",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    },
+    {
+      "argv": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m55",
+        "-mthumb",
+        "-mfpu=fpv5-sp-d16",
+        "-mfloat-abi=softfp",
+        "-std=c11",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-cordio-ecc-round422/freestanding_include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/peripherals/root-freetype-class-build-round406/freestanding_include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/common",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/uecc",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/stack/smp",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/stack/cfg",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/stack/dm",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/include",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/util",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/apollo_main/experimental-156.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc/uECC.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/apollo_main/experimental-156.o"
+      ],
+      "compile_source_snapshot": {
+        "path": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc/uECC.c",
+        "sha256_after": "937626c5d117b068491ca623e2fff140efefca97be8679256c420dc63f5886f7",
+        "sha256_before": "937626c5d117b068491ca623e2fff140efefca97be8679256c420dc63f5886f7",
+        "stable_during_command": true
+      },
+      "header_inputs": {
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/wsf/sources/port/freertos/wsf_types.h": "69c8b5382a397284b9c9ac686e2345503a396f1c5eb305064720feb83bed91b1",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc/asm_arm.inc": "4a7891334fa2fd56fcc40e2999e3afaeeda798babc01c738cf6da43ba60aa122",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc/uECC.c": "937626c5d117b068491ca623e2fff140efefca97be8679256c420dc63f5886f7",
+        "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc/uECC.h": "da01ff34af05e4655fe6389c777f0629cdbcd7593e6994c9520d55eb020e21fa"
+      },
+      "log": "g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/apollo_main/experimental-156.log",
+      "log_sha256": "3c99c0dd6b8b6540fdf894f65f2047ab4ea3e2769649198f3a6f5c68e16873d8",
+      "object": "g2/build/c-firmware/20261013/peripherals-root-cordio-ecc-round422/apollo_main/experimental-156.o",
+      "object_sha256": "7a71b37d26780329c736ef5c30b3591e9a8e9fa567e8ac5de8520a604fa0758c",
+      "process_returncode": 0,
+      "returncode": 0,
+      "source": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc/uECC.c",
+      "source_sha256": "937626c5d117b068491ca623e2fff140efefca97be8679256c420dc63f5886f7",
+      "validation": "experimental C reduction; not admitted stock-equivalent provider"
+    }
+  ],
+  "source_refs": [
+    {
+      "path": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/sec/uecc/sec_ecc.c",
+      "sha256": "650a003b2b06d5a928b7fb7ae90fa1aff15beab30110d85cec8c659fb5cb85c8"
+    },
+    {
+      "path": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/uecc/uECC.c",
+      "sha256": "937626c5d117b068491ca623e2fff140efefca97be8679256c420dc63f5886f7"
+    }
+  ],
+  "status": "PASS_EXPERIMENTAL_CORDIO_ECC_SOURCE"
+}

@@ -3,12 +3,14 @@
 from pathlib import Path
 import argparse,hashlib,json,subprocess,sys
 HERE=Path(__file__).resolve().parent
+SELECTED_RECEIPT=Path(__file__).resolve().parents[4]/'g2/analysis/case-source-candidate-round2-20261010/receipt.json'
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 parser=argparse.ArgumentParser();parser.add_argument('--output',required=True)
 args=parser.parse_args();output=Path(args.output).resolve();output.parent.mkdir(parents=True,exist_ok=True)
 command=output.with_name(output.stem+'.command.o');startup=output.with_name(output.stem+'.startup.o')
 subprocess.run([sys.executable,str(HERE/'build_full_experiment.py'),'--output',str(command)],check=True,capture_output=True)
-subprocess.run([sys.executable,str(HERE/'build_startup_candidate.py'),'--output',str(startup)],check=True,capture_output=True)
+subprocess.run([sys.executable,str(HERE/'build_startup_candidate.py'),'--output',str(startup),
+                '--exclude-selected-receipt',str(SELECTED_RECEIPT)],check=True,capture_output=True)
 linker='/opt/homebrew/bin/arm-none-eabi-ld'
 subprocess.run([linker,'-r',str(command),str(startup),'-o',str(output)],check=True)
 nm=subprocess.run(['/opt/homebrew/bin/arm-none-eabi-nm','-u',str(output)],capture_output=True,text=True,check=True)

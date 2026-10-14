@@ -1,0 +1,42 @@
+{
+  "component": "apollo_bootloader",
+  "current_unretained_selected_globals": 200,
+  "evidence": [
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "sha256": "6c4f1d436bb29956428f7c9d80c05503ccc68eaeaa7e86a20dc69312ce2b6501"
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/native_uart_log_abi_wrapper.S",
+      "sha256": "5f442a097e4787ba31c3a7f44d99aa0c6e02e6f632ce26b774eadc932f1e1702"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-uart-ambient-round451/current-placement.json",
+      "sha256": "a38ba73882747675e8ec3ad37ad246c1327f0ca73112a6e2510ee522ee7065d1"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-boot-uart-ambient-round451/gc-reachability.json",
+      "sha256": "3851389f0e54b9e9cbcc3df16ce49bc5bc075d0946b67597f8df1e55b0dd4335"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-uart-ambient-round451/receipt.json",
+      "sha256": "f14b0dbb9f01b452a9b1f6fc8b857206e42b39a7445b0b514668c3ef47fc48df"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-boot-uart-ambient-round451/placed/boot.elf",
+      "sha256": "00ccc3a7841051e022aecc5e1e7027835952daabad607d01fbc19f35fece9d81"
+    }
+  ],
+  "flash_margin_bytes": 4916,
+  "limits": [
+    "The log-output oracle cannot load this exploratory placed ELF because its ELF reader enforces a smaller segment bound; no new dynamic UART equivalence claim.",
+    "UART ambient ABI wrapper is native-derived source; its linked call path and module 1 forwarding are statically verified, not hardware-tested.",
+    "Four priority discarded source paths and final scatter/startup/ROM/whole-image coverage remain open."
+  ],
+  "native_wrapper_entry": "0x41b854",
+  "remaining_priority_manual_direct_leads": 4,
+  "remaining_work_estimate": "Bootloader: 4 priority discarded source path leads, final scatter/load-run and startup/ROM behavior, whole-image code/data coverage and hardware. Complete images 0/6.",
+  "retained_source_function": "opencfw_boot_uart_log_send_ambient_abi",
+  "schema": "opencfw-boot-uart-ambient-path-v1",
+  "status": "completed_bounded"
+}

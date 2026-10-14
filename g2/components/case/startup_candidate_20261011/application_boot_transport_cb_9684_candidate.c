@@ -13,8 +13,10 @@ extern int32_t case_boot_sensor_finish_signal(uint32_t,uint32_t); /* 0xa888 */
 extern void case_boot_transport_stop_clock(uint32_t); /* 0x6b80 */
 extern void case_boot_transport_stop_link(uint32_t); /* 0x6b98 */
 
-void case_boot_transport_cb_9684(void)
+void case_boot_transport_cb_9684(uint32_t argument)
 {
+    /* Native trampoline supplies pair[1] in R0; this callback ignores it. */
+    (void)argument;
     volatile uint8_t *device=(volatile uint8_t *)(uintptr_t)0x200000f4u;
     volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x2000087cu;
     volatile uint8_t *shared=(volatile uint8_t *)(uintptr_t)0x200000b8u;

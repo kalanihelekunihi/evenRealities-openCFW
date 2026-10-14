@@ -1,0 +1,25 @@
+{
+  "round": 645,
+  "component": "Apollo NEMA GPU blit descriptor 0x4b1608",
+  "status": "Full bounded C body compiled; 471 native/C context and command comparisons pass; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "rea_pseudocode_evidence_id": "ev_93d61c0f8ddd94095529074ecf7a14f8f0fa02e47ee4536713dfd4cfbc713d1b",
+  "source_sha256": "5010838e1d2495dfceade7da6b463dbea44a0fdacdf15825daaabca23461e0cb",
+  "verifier_sha256": "91603358082fc1ccb5c83e093c5fdd270b84fcc594fadfef55f0d80d583a932e",
+  "link_audit_sha256": "4c539e4086ffc6c18cfc713b6ef4bb7b545bac7f9825c39f7a608ae13b3c2048",
+  "combined_object_sha256": "68241c1e08bcdc647fd6c195c862b4b064fb6600dbd2d431f83393b56ab7cb12",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_GPU_BLIT_NATIVE 471",
+    "PASS_DISPLAY_DRIVER_COMBINED_LINK 132 34 2",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "gates": [
+    "NEMA mode 0x513924 and uLED row callback 0x4ca2ac bodies unresolved",
+    "uLED workspace size/placement provisional and option callback relocation open",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0,
+  "estimated_apollo_remaining": "80-95%"
+}

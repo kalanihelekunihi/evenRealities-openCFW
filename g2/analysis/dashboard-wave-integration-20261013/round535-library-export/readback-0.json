@@ -1,0 +1,46 @@
+{
+  "round": 535,
+  "status": "PASS_CONNECTED_SEVENTEEN_FUNCTION_BDFLUSH_BOUNDARY_NO_SOURCE_ADMISSION",
+  "component": "audio littlefs backend close through block flush",
+  "component_completed": false,
+  "native_entry": "0x4cfad0",
+  "joint_native_c_cases": 504,
+  "joined_c_function_count": 17,
+  "new_connected_evidence": [
+    "block-flush composition",
+    "alignment and geometry",
+    "cache reset and buffer fill",
+    "flash-program callback ABI and return",
+    "cache compare callback ABI",
+    "native/C memory state after close"
+  ],
+  "remaining_estimate": "Flash program, cache compare, configuration sync, file read-write, relocate, directory commit, heap release, and diagnostic effects remain cut; no hardware storage proof.",
+  "evidence": [
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_backend_close_bdflush_connected.py",
+      "sha256": "8c1d37746108cc3fc59df54ab3aafcb8588143a4383106ee59513352d33fa1d5"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/backend-close-bdflush-connected-results.json",
+      "sha256": "5c93a9a251f69715d2046b8b68eb9f4a9f25f56c57d99bdf2cd257a769b14ab2"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/bd_flush.c",
+      "sha256": "faccb9e555cbdda22527012d51cdb07211cb43ad0a8c1c5efba44651b2e0afa0"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/bd_flush_leaves.c",
+      "sha256": "a020c77cb325c14380698a179a732c9500a656014bba6c17435f2d491ecfaa60"
+    },
+    {
+      "path": "g2/components/audio/file_sync_candidate/cache_fill.c",
+      "sha256": "b07f22148c92185b892cb5270c7357d04d440ec283e5d63925c7c99d0d4954b2"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/apollo/root-audio-close-bdflush-connected-round535/round535-receipt.json",
+    "sha256": "43d3a37d3dee1ad91a8ae297cd9e6576095136ad36caa90a91be42eb978de0a9"
+  },
+  "publication_scope": "Body-receipt evidence only; connected seventeen-function block-flush boundary; no source admission or component completion; no canonical wave identity inferred; no map/image promotion"
+}

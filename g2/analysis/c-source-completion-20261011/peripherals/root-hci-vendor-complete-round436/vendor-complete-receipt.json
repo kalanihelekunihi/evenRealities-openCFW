@@ -1,0 +1,46 @@
+{
+  "build_receipt": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-hci-vendor-complete-round436/receipt.json",
+    "sha256": "58b072619ef0693beb2739fe64c1f55c34d27ea47fc5c30b426fac186af5b20c"
+  },
+  "captured_utc": "2026-10-13T22:36:57.487535+00:00",
+  "component": "apollo_main",
+  "definitions": 4022,
+  "duplicate_strong_symbols": 0,
+  "import_delta": {
+    "added": [],
+    "removed": [
+      "hciCoreVsCmdCmplRcvd"
+    ]
+  },
+  "imports": 723,
+  "limits": [
+    "The native selected Main path inlines event type 0x12; this C dependency provider models that behavior, not a separate stock function body.",
+    "The hciCb product RAM object remains unresolved.",
+    "Full image layout, byte identity, and hardware operation remain unproven."
+  ],
+  "native_branch_evidence": {
+    "path": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-vendor-complete-round436/native-vendor-case.json",
+    "sha256": "4a8aa9dc5a5b8b78e50f591acf9105f42533c7153b1b23b2615d45287892393f"
+  },
+  "pinned_source_hashes": {
+    "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include/hci_api.h": "69430f9b5cee67d46667d6134a3c27cb4986de06002ed0c01868d126135e729d",
+    "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/sources/hci/ambiq/apollo3/hci_vs_apollo3.c": "9f63cea7f74a0bf8fbe8840b69b2b127036961a92933ddd72ac5ba4c5a1f9af4"
+  },
+  "schema": "opencfw-experimental-provider-receipt-v1",
+  "source_audit": {
+    "path": "g2/build/c-firmware/20261013/peripherals-root-hci-vendor-complete-round436/root-source-audit.json",
+    "sha256": "f76c8fa1c34bb251183e10b5e5b9509da4807f6d0ad7e9f48134f7888693f89d"
+  },
+  "source_unit": {
+    "header_inputs": {
+      "g2/analysis/c-source-completion-20261011/peripherals/root-hci-vendor-complete-round436/vendor_complete.c": "cfb10c3104c9ac863b67015e4e17b77a5ccb189bc74dbbd4ae8430d1ad8b581a"
+    },
+    "object": "g2/build/c-firmware/20261013/peripherals-root-hci-vendor-complete-round436/apollo_main/experimental-172.o",
+    "object_sha256": "1e5cf176d7b5b2ac903b43c4286d3c81a457daa00741be05cfe5b64e0c6aa3a8",
+    "source": "g2/analysis/c-source-completion-20261011/peripherals/root-hci-vendor-complete-round436/vendor_complete.c",
+    "source_sha256": "cfb10c3104c9ac863b67015e4e17b77a5ccb189bc74dbbd4ae8430d1ad8b581a",
+    "validation": "experimental C reduction; not admitted stock-equivalent provider"
+  },
+  "status": "completed"
+}

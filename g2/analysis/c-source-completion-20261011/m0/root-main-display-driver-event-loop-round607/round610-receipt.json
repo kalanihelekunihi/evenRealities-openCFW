@@ -1,0 +1,24 @@
+{
+  "round": 610,
+  "component": "Apollo main display-driver event loop logging ABI and C/native equivalence",
+  "status": "30 bounded C/native scenarios pass; C candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "b0c26bb2d7242342fcee29dcda8b918d141622603eb3d31da0772b78033d5ace",
+  "native_oracle_sha256": "95fb133e6755d963befdac520057fe1a2a877e1651d0227c724f929f55c614b0",
+  "c_native_verifier_sha256": "5071249d1960d643513a5dea2e121dd5e35d8fd1386462df1b3f2be8091d2e3a",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_EVENT_LOOP_NATIVE 16",
+    "PASS_DISPLAY_DRIVER_EVENT_LOOP_C_NATIVE 30",
+    "ARM Thumb C syntax compilation with warnings as errors",
+    "git diff --check"
+  ],
+  "coverage": "one message per scenario; helper call order, enable word, nonzero logging flags 1/2/4/5/6/7, text/compact log argument strings, level, line, message ID",
+  "correction": "case 6 compact log uses [task.displaydrvmgr]uled recovery and reflash ok, not task tag",
+  "gates": [
+    "helper semantic bodies unresolved",
+    "bounded scenario coverage only",
+    "selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "whole_images_complete": 0
+}

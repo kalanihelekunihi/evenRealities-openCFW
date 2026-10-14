@@ -1,0 +1,74 @@
+{
+  "wave_id": "component-goal-case-wave058-registered-timer-delete",
+  "producer_id": "01a136a4-be4b-720b-b550-403b5a57a029",
+  "component": "case",
+  "completed_utc": "2026-10-13T23:31:07.653390+00:00",
+  "status": "PASS_24_REAL_REGISTER_SEND_DELETE_PAIRS",
+  "source_delta": "None",
+  "done_criteria": [
+    "24 actual registered timer send/delete pairs",
+    "Verify native dynamic/static freeing and retained pair lifetime",
+    "Keep native resource-retention behavior separate from an upstream fix"
+  ],
+  "evidence": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave058-registered-timer-delete/check.py",
+      "sha256": "5ee128e3656487336e397329940624dff7e9a740f179636276fed3a42335b566"
+    },
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave058-registered-timer-delete/verification.json",
+      "sha256": "093682e944450f0ee5efacdae38b3b73ece93c400dc369fe58e548af8b0fd1ae"
+    }
+  ],
+  "source_object_import_dependency_inventory": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/receipt.json",
+    "sha256": "81daab76f550b387574679532f05b56a43c41098536549eab97acc3311d3dabc"
+  },
+  "source_drift": {
+    "verified_source_units": 401,
+    "changed": []
+  },
+  "firmware": {
+    "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+  },
+  "build": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/case.elf",
+    "sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853"
+  },
+  "lineage": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-timer-callback-provenance-024/002/result.json",
+    "sha256": "29126da33dc207a10197f0e89f9db6e229024cd997ae378164118df4a5b5228b"
+  },
+  "license": "Existing MIT source headers retained; native oracle provenance unchanged",
+  "functions_address_extents": [
+    "08008558..0800856b trampoline (omitted from400-function catalogue)",
+    "0800aa48 wrapper with dynamic0800ccc0/static0800ccf2 constructors",
+    "0800af30 object initialization",
+    "0800b0fc command consumer (wave058 only)"
+  ],
+  "test_dependencies": [
+    {
+      "path": "g2/analysis/component-goal-20261013/case-wave056-timer-trampoline-binding/check.py",
+      "sha256": "7aabf5b7433ca48637bb409f15524ec8a469f726a7c6ed7513f8aa87e7125bbe"
+    }
+  ],
+  "component_acceptance_gates": {
+    "bounded_callback_construction_transfer_delete": "qualified only stated cases",
+    "callback_body_semantics_and_all_CFG_roots": "not closed",
+    "asynchronous_callback_delete_reuse_interleavings": "unqualified",
+    "global_stack_and_IRQ": "unqualified; use wave055 retained-MSP correction",
+    "full_coldboot": "blocked accurate STM32G0 model/read-only hardware evidence",
+    "formal_G2_G6": "not_run",
+    "accepted_images": "0/6"
+  },
+  "historical_map_cutoff": "2026-10-13T17:02:21.929738Z",
+  "map_promotion": false,
+  "next_critical_path_task": "Review remaining omitted known-root indirect sites and callback-body dependencies; hardware/runtime timing evidence required for asynchronous lifetime acceptance",
+  "limits": [
+    "Real scheduler queue, allocator, constructors, sender, receiver, consumer and free providers; no fabricated callbacks or helper returns",
+    "Synchronous valid delete; asynchronous reuse/race and running callback interleavings not proven",
+    "Retained callback pair is native behavior, not a recovered-C mismatch",
+    "No global stack bound or physical peripheral acceptance"
+  ]
+}

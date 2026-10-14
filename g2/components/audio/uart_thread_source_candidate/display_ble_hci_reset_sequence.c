@@ -4,8 +4,7 @@
 extern uint8_t audio_ble_hci_controller_state_20071478[]; /* native live state */
 extern uint8_t audio_ble_hci_stack_state_20073870[]; /* native live state */
 extern volatile uint8_t audio_ble_hci_reset_rand_count; /* 0x20074fd0 */
-extern uint8_t audio_ble_hci_local_address[]; /* 0x200714e0, live RAM */
-extern uint8_t audio_ble_hci_white_list_size[]; /* 0x200714d8, live RAM */
+/* BD address +0x68 and white-list size +0x60 are fields of controller state. */
 extern const uint8_t audio_ble_hci_event_mask_78d6dc[];
 extern const uint8_t audio_ble_hci_le_event_mask_78d6e4[];
 extern const uint8_t audio_ble_hci_event_mask_page2_78d6ec[];
@@ -46,7 +45,7 @@ uint32_t audio_ble_hci_reset_sequence_body(const void *message,uint32_t unused1,
     case 0x0c03u: audio_ble_hci_reset_rand_count=0u; HciVscUpdateNvdsParam(); break;
     case 0x0c63u: HciReadBdAddrCmd(); break;
     case 0x1009u:
-        __builtin_memcpy(audio_ble_hci_local_address,parameters,6u);
+        __builtin_memcpy(state+0x68u,parameters,6u);
         HciLeReadBufSizeCmd(); break;
     case 0x2001u: HciSetEventMaskPage2Cmd(audio_ble_hci_event_mask_page2_78d6ec); break;
     case 0x2002u:
@@ -70,7 +69,7 @@ uint32_t audio_ble_hci_reset_sequence_body(const void *message,uint32_t unused1,
         }
         break;
     case 0x201cu:
-        __builtin_memcpy(audio_ble_hci_white_list_size,parameters,8u);
+        __builtin_memcpy(state+0x60u,parameters,8u);
         HciLeReadWhiteListSizeCmd();break;
     case 0x2024u:
         if(pointer(state+0xa0u)!=0u)dispatch_option(state,parameters,opcode);

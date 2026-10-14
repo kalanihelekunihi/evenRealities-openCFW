@@ -1,0 +1,56 @@
+{
+  "round": 604,
+  "status": "PASS_MAIN_DISPLAY_WAIT_AND_UART_CALLBACK_OBLIGATION",
+  "captured_utc": "2026-10-14T07:24:14.834726+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "compressed_sram_record": "0x75d3f4",
+  "decoded_sram_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "initializer": {
+    "symbol": "audio_uart_display_wait",
+    "native_address": "0x20000654",
+    "value_hex": "ffffffff"
+  },
+  "native_comparisons": [
+    "PASS compiled initializer byte match"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 620,
+  "unresolved_after": 619,
+  "removed_symbols": [
+    "audio_uart_display_wait"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "next_obligation": "Reconstruct 0x473952 thread creation function and 0x20000658 callback record with relocatable C pointers, then compare branches; do not source-own an absolute stock address as if it were a final custom-image pointer.",
+  "limits": "Display wait startup byte match does not qualify whole display-thread behavior. Callback disassembly dossier is a bounded next-action finding, not a C body. Absolute RAM placement, full image coverage and hardware behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_wait_startup_cell.c",
+      "sha256": "0e137b7e05101dc64e85651751707ba04f95948656f278e08f02574f0f88caac"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_display_wait_initializer.py",
+      "sha256": "e1a412caff5bd6f18bbb8708d67a56e19206256a2f18e94de2513527232b66b9"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-uart-callback-obligation-round604/uart-callback-obligation.json",
+      "sha256": "67b815a4dd9e5f8e33dfe0dd6cab4c6c2f37e63090ad917113f6e7665c939868"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round604/receipt.json",
+      "sha256": "ba50bb43eaf33ae90773411d21415ee971f53d2d727d1ab9a43c356e07d624ff"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-uart-callback-obligation-round604/round604-receipt.json",
+    "sha256": "cb058d5cbc1ea7b2813fab6d020ec24c31067084f1ba95d316aeb687dc17caac"
+  },
+  "publication_scope": "Body-receipt evidence only; display-wait initializer and hash-bound UART callback reconstruction obligation, not completed callback C; final placement/thread behavior/image/hardware unqualified; percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

@@ -1,0 +1,55 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 725,
+    "strong_unresolved_before": 726
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/fal_norflash_entry_exit_candidates_20261013/entry_exit.c",
+      "sha256": "166834b41070019dba89c11e3295185642500f0bd8ec106a463cb99d08dfafe6"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "3d405ad8ca1939dec6fee9eedfee9a00881a6767c82435e12e66af7fedb0e954"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_entry_exit.py",
+      "sha256": "ce7996b0b9dfeb54fc49bd3102fe9bfd435b6ee0dcee2c018ea6cf7752cb80a1"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-entry-exit-round470/entry-exit-oracle.json",
+      "sha256": "e5bd601c73623fdf18b71e10c0945ce882cc44754783117a6a6a48659dca71ea"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-entry-exit-round470/isolated/entry-exit.elf",
+      "sha256": "8b5be6ad931785a931d0576ceb0555e8a083287c332a75a5f85db293a754fd54"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-entry-exit-round470/receipt.json",
+      "sha256": "31968bcc609ae4bdde2ee36a8fdad66d86164668f2cbbab66ae0b6d4cdcdcd8a"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-entry-exit-round470/apollo_main/candidate.o",
+      "sha256": "a72f227a9290ddbdb31aa2fbdcb71aee675735fdbb21fbe41b4d61ca7cd6e693"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Mode validator, command-24 configuration transfer, mode selector, copy and logging are injected equally in the outer-wrapper oracle.",
+    "The command-24 stock branch consumes the first payload byte; hardware effects, SRAM ownership and complete Main image remain unverified."
+  ],
+  "native_entrypoints": [
+    "0x470f68",
+    "0x470e90"
+  ],
+  "native_source_oracle_cases": 96,
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_bodies": [
+    "g2_norflash_enter_470f68",
+    "g2_norflash_exit_470e90"
+  ],
+  "status": "bounded_source_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

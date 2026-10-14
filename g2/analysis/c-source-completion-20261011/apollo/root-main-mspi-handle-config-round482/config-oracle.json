@@ -1,0 +1,11 @@
+{
+  "cases": 432,
+  "limits": [
+    "Synthetic MMIO and SRAM; both aliased and separate handle/state addresses are compared.",
+    "Null handle/configuration is excluded because the native body dereferences them before validation.",
+    "No physical MSPI setup or complete Main image is verified."
+  ],
+  "source_elf_sha256": "89ba5c14cb45bc6815f372d2fef07da6fc93f739c974b182d2246f50fbc2cc7c",
+  "status": "PASS_MAIN_MSPI_HANDLE_CONFIG_BOUNDED_NATIVE_SOURCE",
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+}

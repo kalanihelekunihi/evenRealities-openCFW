@@ -1,0 +1,82 @@
+{
+  "status": "INDEPENDENT_REVIEW_TWO_INCOMPATIBLE_CALLBACK_TYPES_CONFIRMED",
+  "scope": "CASE source/native evidence only; no source modifications, emulation, or hardware acceptance",
+  "locked_native": {
+    "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+    "length": 55784,
+    "extraction": "payload bytes after 32-byte outer header, disassembled at VMA 0x08000000 with arm-none-eabi-objdump Thumb mode"
+  },
+  "case_elf_reference": {
+    "path": "g2/analysis/component-goal-20261013/case-wave039-list-cursor-contract/final/case.elf",
+    "sha256": "13c64ed72bcd95f07a5a34b2315fd249bd80e96c9981d000b6e6570908428853",
+    "length": 121148,
+    "role": "pinned source ELF identity only; this review does not claim these source-level mismatches are represented by this ELF"
+  },
+  "findings": [
+    {
+      "id": "DMA_ABORT_SLOT_PARAMETER_TYPE",
+      "slot": "dma + 0x38",
+      "consumer": "g2/components/case/source_candidate_20261010/dma_abort_provider.c:53-54",
+      "consumer_type": "void(void *)",
+      "producer": "g2/components/case/source_candidate_20261010/uart_irq_continuations.c:30",
+      "target": "g2/components/case/source_candidate_20261010/uart_irq_continuations.c:15",
+      "target_type": "void(uint8_t *)",
+      "native_load_pc": "0x0800494a",
+      "native_call_pc": "0x08004950",
+      "native_argument": "R0 remains DMA pointer through BLX",
+      "assessment": "confirmed incompatible C function type; recommend consumer load/call as void (*)(uint8_t *)"
+    },
+    {
+      "id": "SENSOR_CANCEL_SLOT_RETURN_TYPE",
+      "slot": "p + 56",
+      "producer": "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_5f50_candidate.c:53",
+      "target": "g2/components/case/startup_candidate_20261011/application_boot_sensor_cancel_callback_candidate.c:9-15",
+      "target_type": "uint32_t(uint32_t)",
+      "consumers": [
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_5f50_candidate.c:55 via lines 20-21 helper void(uint32_t)",
+        "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_restart_candidate.c:42 via line 9 helper void(uint32_t)"
+      ],
+      "native_target_entry": "0x080086e0",
+      "native_assessment": "confirmed incompatible C function return type; use cancellation-only uint32_t (*)(uint32_t) invocation and discard result at caller"
+    }
+  ],
+  "negative_control": {
+    "branch_pc": "0x08006050",
+    "opcode": "0xe00d",
+    "computed_target": "0x0800606e",
+    "skipped_instruction": "0x0800606c: mov r0, r4",
+    "result": "fallback R0 remains p from load at 0x0800604c; source line 55 passes rd(state), also p; no argument mismatch"
+  },
+  "source_inventory": {
+    "method": "ripgrep CASE .c/.h sources for dma+0x38, p+56, callback names and function-pointer forms",
+    "dma_slot_matches": [
+      "g2/components/case/source_candidate_20261010/dma_abort_provider.c:53-54",
+      "g2/components/case/source_candidate_20261010/uart_irq_continuations.c:15,30,32"
+    ],
+    "sensor_slot_matches": [
+      "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_5f50_candidate.c:11,53,55",
+      "g2/components/case/startup_candidate_20261011/application_boot_sensor_irq_restart_candidate.c:42",
+      "g2/components/case/startup_candidate_20261011/application_boot_sensor_cancel_callback_candidate.c:9-15"
+    ],
+    "caveat": "source-tree search does not prove absence of external or assembly slot writers"
+  },
+  "wave060_unresolved_qualification": {
+    "source": "case-wave064-unresolved-site-triage/verification.json",
+    "unresolved_samples": 106,
+    "unique_operand_pcs": 70,
+    "overlapping_reason_counts": {
+      "UNSUPPORTED_TRANSFER": 82,
+      "BACKWARD_LOOP_CYCLE": 36,
+      "ENTRY_REGISTER_UNDEFINED": 9,
+      "NON_ROM_MEMORY_LOAD_OR_UNKNOWN_ADDRESS": 2
+    },
+    "qualification": "analysis limitations; overlapping categories, not defects or physical behavior"
+  },
+  "limits": [
+    "No source edits or firmware rebuild performed by reviewer",
+    "No emulator or physical hardware run",
+    "No claim of callback lifetime, ownership, IRQ behavior, behavioral completeness, or global admission",
+    "Recommendations preserve native argument values and callback return type; return is discarded only at call sites where native flow discards it"
+  ]
+}

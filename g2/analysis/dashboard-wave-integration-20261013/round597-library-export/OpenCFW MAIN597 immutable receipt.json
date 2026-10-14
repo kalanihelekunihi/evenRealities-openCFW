@@ -1,0 +1,69 @@
+{
+  "round": 597,
+  "status": "PASS_MAIN_PAGE_HUB_STARTUP_CELLS_BOUNDED",
+  "captured_utc": "2026-10-14T06:58:29.413042+00:00",
+  "component": "apollo_main",
+  "component_completed": false,
+  "whole_image_components_completed": 0,
+  "whole_image_component_count": 6,
+  "compressed_sram_record": "0x75d3f4",
+  "decoded_sram_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "initializers": [
+    {
+      "symbol": "audio_uart_display_page_size_cell",
+      "native_address": "0x20000064",
+      "value_hex": "00040000"
+    },
+    {
+      "symbol": "audio_uart_hub_role_cell",
+      "native_address": "0x20004526",
+      "value_hex": "0300"
+    }
+  ],
+  "native_comparisons": [
+    "PASS two compiled initializer byte matches",
+    "PASS hub role init 4 native/C cases",
+    "PASS display page manager 35 success child calls and fatal callback failure"
+  ],
+  "comparable_build": "--image apollo_main --include-experimental",
+  "unresolved_before": 631,
+  "unresolved_after": 629,
+  "removed_symbols": [
+    "audio_uart_display_page_size_cell",
+    "audio_uart_hub_role_cell"
+  ],
+  "added_symbols": [],
+  "apollo_main_remaining_estimate_percent_range": [
+    80,
+    95
+  ],
+  "limits": "Six startup bytes in two cells are source-owned. Adjacent data, absolute RAM placement, whole-image source coverage and physical behavior remain open.",
+  "evidence": [
+    {
+      "path": "g2/components/audio/uart_thread_source_candidate/display_page_hub_startup_cells.c",
+      "sha256": "70e078cd59904c2ae3c8089131d6be351a8b7cd39e1aee3246d2a73531277a0a"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_page_hub_startup_initializer.py",
+      "sha256": "6add084495bb0cb3e43d76fa246a8ad307afbd86ff2be91e45234b7166f2071e"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_hub_role_init_native.py",
+      "sha256": "b46f94a1bad6b03d31f9864aea1c4321add7c236b9e61cdc2c5ec2130032a46a"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_display_page_manager_new_native.py",
+      "sha256": "6051a0faf5c7569883747dad416ec76e54fba4f572f2e4987684dfd2b954e6d4"
+    },
+    {
+      "path": "g2/build/c-firmware/root-main-round597/receipt.json",
+      "sha256": "71b44eb0b127d7e61cdc70dcfbea264c06493c02684f0655a5467a3016098f3b"
+    }
+  ],
+  "checkpoint_schema": "opencfw-bounded-receipt-evidence-v1",
+  "authoritative_receipt": {
+    "path": "g2/analysis/c-source-completion-20261011/m0/root-main-page-hub-startup-round597/round597-receipt.json",
+    "sha256": "e8137f592e7223396809fe9de1db87dbc5642bb2e03907b5d88a4f3d5ee23061"
+  },
+  "publication_scope": "Body-receipt evidence only; six page-size/hub-role startup bytes and bounded comparisons; adjacent data/placement/full image/hardware unqualified; remaining percentage estimate not coverage; no canonical wave identity inferred; no map/image promotion"
+}

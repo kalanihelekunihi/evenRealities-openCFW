@@ -1,0 +1,62 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "source_complete": false,
+    "strong_unresolved_after": 729,
+    "strong_unresolved_before": 729
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_cq_wrappers_candidates_20261013/wrappers.c",
+      "sha256": "27e4cc3a5a9f570e6d486c5a43f00e1978d562efe2ac07c5a3136e3dcfce02f5"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "sha256": "9a2562c6389181d24163e55a2664dfdf7d602cbbfc96fed210fc2e4471e8819a"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "dd71b8b5ff90a127ce33e1f928f4623374ddc19bb162ed6c13be0e9f69e88eca"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_cq_wrappers.py",
+      "sha256": "810766ea1453456beaf17039740de3c79bb4c8e784e4fc94fbd2f28e964636e4"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-cq-wrappers-round473/cq-oracle.json",
+      "sha256": "7ca3fb9b7752072fda6848b4eeba010604d4562397c9f433dd472482127f07f6"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-wrappers-round473/isolated/wrappers.elf",
+      "sha256": "e298d464ae30a5c9290b11a1d8820b8b81528194793ba25878b6c15a2f781221"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-wrappers-round473/apollo_main/receipt.json",
+      "sha256": "91778d639483864cdc35c7141e083b27cb7a4dac75bbee046b47318d772408db"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-cq-wrappers-round473/apollo_main/apollo_main/candidate.o",
+      "sha256": "b99d2e6a98dfd056b10af334604a15be6707c18233d1a9bbbf8278eb6b2e1fff"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Provider calls are intercepted; only wrapper arguments and SRAM effects are compared.",
+    "Three Main CQ providers and complete image remain open; physical effects are unverified."
+  ],
+  "native_entrypoints": [
+    "0x4bfc5a",
+    "0x4bfd62",
+    "0x4bfc86"
+  ],
+  "native_source_oracle_cases": 216,
+  "provenance": "Main instruction trace and authenticated bootloader MSPI CQ adapters",
+  "schema": "opencfw-source-body-receipt-v1",
+  "source_bodies": [
+    "g2_main_mspi_cq_init_4bfc5a",
+    "g2_main_mspi_cq_disable_4bfd62",
+    "g2_main_mspi_cq_term_4bfc86"
+  ],
+  "status": "bounded_source_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}

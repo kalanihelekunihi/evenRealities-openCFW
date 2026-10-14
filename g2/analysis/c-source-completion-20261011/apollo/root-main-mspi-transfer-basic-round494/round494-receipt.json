@@ -1,0 +1,59 @@
+{
+  "build": {
+    "candidate_compilation_passed": true,
+    "full_transfer_symbol_unresolved": true,
+    "source_complete": false,
+    "strong_unresolved_after": 731,
+    "strong_unresolved_before": 731
+  },
+  "evidence": [
+    {
+      "path": "g2/components/main/mspi_transfer_basic_candidates_20261013/basic.c",
+      "sha256": "c01829daa30fd081f491fe1f76e32d47283aa5e9aa1da25ae8283f392032b9fa"
+    },
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/decomp/004c0f78.c",
+      "sha256": "d8e0107aba4402bb7d24dc123bbbf28a102d9e3d3d64a387b29f5d0ff04882d3"
+    },
+    {
+      "path": "g2/components/main/source_candidate_20261010/build.py",
+      "sha256": "a8934d7138777d02a8dd71e4e9658cc03da867a965897c3707b4e3672b25f813"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/verify_main_mspi_transfer_basic.py",
+      "sha256": "959314440adb96052dd9f9d82da0ea8f64ac6dddee9272ad4812248fc963a807"
+    },
+    {
+      "path": "g2/analysis/c-source-completion-20261011/apollo/root-main-mspi-transfer-basic-round494/basic-oracle.json",
+      "sha256": "260e11dfeb2f783b4d05e39bc8b4449b5954431537dc01b25d24ec756a830179"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-basic-round494/isolated/basic.elf",
+      "sha256": "09f5259799caab15e0f5f8fc6fe4a3d51fa5e9a9301e6057ee6639a1694272f7"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-basic-round494/receipt.json",
+      "sha256": "4ea025f892e13a95c749ff4700cc0efb39a84d98390a57d5038926ed984bd790"
+    },
+    {
+      "path": "g2/build/c-firmware/20261013/root-main-mspi-transfer-basic-round494/apollo_main/candidate.o",
+      "sha256": "98314095abb15b2055884e6f0e99ef4f2b9f5e9aa2cb471c874d4af5236b8042"
+    }
+  ],
+  "image": "apollo_main",
+  "limitations": [
+    "Selectors 0 through 13 are source-owned; the full 0x4c0f78 symbol remains unresolved.",
+    "Synthetic SRAM/MMIO cannot establish physical MSPI operation or a complete Main image."
+  ],
+  "native_entrypoints": [
+    "0x4c0f78 selectors 0-13"
+  ],
+  "native_source_oracle_cases": 4480,
+  "provenance": "Main Ghidra pseudocode, locked native blob and selector-specific native/source MMIO comparison",
+  "schema": "opencfw-source-branch-receipt-v1",
+  "source_bodies": [
+    "g2_main_mspi_transfer_basic_candidate"
+  ],
+  "status": "bounded_branches_verified",
+  "target_id": "official-s200-v2.2.6.10"
+}
