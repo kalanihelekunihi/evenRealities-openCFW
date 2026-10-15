@@ -133,17 +133,17 @@ def main():
     }
     main_path = BUILD / "main-post-tail-c-replay/receipt.json"
     main, main_ref = receipt(main_path)
-    if main["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or main["unresolved_after"] != 232:
+    if main["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or main["unresolved_after"] != 231:
         raise RuntimeError("Apollo Main current replay changed")
     main_obj = file_checked(main["linked_object"], main["linked_object_sha256"])
     actual = undefined(ROOT / main_obj["path"])
-    if len(actual) != 232:
+    if len(actual) != 231:
         raise RuntimeError("Apollo Main unresolved set changed")
     images["apollo_main"] = {
         "receipt": main_ref, "candidate": main_obj,
         "unresolved_count": len(actual), "unresolved_symbols": actual,
         "source_complete": False, "full_payload_linked": False,
-        "remaining_gate": ["232 current imports need source ownership or attributed external contracts.",
+        "remaining_gate": ["231 current imports need source ownership or attributed external contracts.",
                            "Complete data/startup/layout and physical execution remain unproved."],
     }
     if set(images) != {"codec", "ble_em9305", "touch", "case", "apollo_bootloader", "apollo_main"}:
