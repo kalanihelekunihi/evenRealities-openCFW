@@ -7,13 +7,14 @@ from unicorn.arm_const import *
 ROOT=Path(__file__).resolve().parents[3]
 BLOB=(ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 SRC=ROOT/'components/audio/uart_thread_source_candidate/display_ble_hci_radio_boot.c'
-DATA='audio_ble_hci_radio_boot_config audio_ble_hci_radio_context_ptr audio_ble_hci_radio_aux_ptr audio_ble_hci_radio_boot_retry audio_ble_hci_radio_revision_cell audio_ble_hci_radio_active audio_ble_hci_radio_pending audio_ble_hci_radio_command_cell audio_ble_hci_radio_driver_state audio_ble_hci_radio_scheduler_state audio_ble_hci_radio_scheduler_config audio_ble_hci_boot_log_first audio_ble_hci_boot_log_retry audio_ble_hci_boot_register_source'.split()
+DATA='audio_ble_hci_radio_boot_config audio_ble_hci_radio_context_ptr audio_ble_hci_radio_aux_ptr audio_ble_hci_radio_boot_retry audio_ble_hci_radio_revision_cell audio_ble_hci_radio_active audio_ble_hci_radio_pending audio_ble_hci_radio_command_cell audio_ble_hci_radio_driver_state audio_ble_hci_radio_scheduler_state audio_ble_hci_radio_scheduler_config audio_ble_hci_boot_log_first audio_ble_hci_boot_log_retry'.split()
 FUNS={'audio_ble_hci_radio_acquire_52dd94':0x52dd94,'audio_ble_hci_radio_detect_52deee':0x52deee,'audio_ble_hci_boot_log_4733ee':0x4733ee,'audio_ble_hci_boot_delay_491102':0x491102,'audio_ble_hci_radio_prepare_52f38c':0x52f38c,'audio_ble_hci_radio_validate_52fcfc':0x52fcfc,'audio_ble_hci_radio_revision_52dee6':0x52dee6,'audio_ble_hci_radio_revision_mismatch_4b47cc':0x4b47cc,'audio_ble_hci_radio_recover_52fb58':0x52fb58,'audio_ble_hci_radio_reconfigure_4b480a':0x4b480a,'audio_ble_hci_radio_finalize_52fc04':0x52fc04,'audio_ble_hci_radio_scheduler_53006c':0x53006c,'audio_ble_hci_radio_identifier_480d72':0x480d72,'audio_ble_hci_radio_register_48162c':0x48162c,'audio_ble_hci_radio_enable_52dd58':0x52dd58,'audio_ble_hci_radio_mux_on_4b4786':0x4b4786,'audio_ble_hci_radio_mux_request_4b4768':0x4b4768}
 SHIM='''#include <stdint.h>
 uint8_t audio_ble_hci_radio_boot_config[8],audio_ble_hci_radio_driver_state[16],audio_ble_hci_radio_scheduler_state[16],audio_ble_hci_radio_scheduler_config[16];
 uint32_t audio_ble_hci_radio_context_ptr,audio_ble_hci_radio_aux_ptr,audio_ble_hci_radio_revision_cell,audio_ble_hci_radio_active,audio_ble_hci_radio_pending,audio_ble_hci_radio_command_cell;
 uint8_t audio_ble_hci_radio_boot_retry;
-const uint8_t audio_ble_hci_boot_log_first[8]={0},audio_ble_hci_boot_log_retry[8]={0},audio_ble_hci_boot_register_source[8]={0};
+const uint8_t audio_ble_hci_boot_log_first[8]={0},audio_ble_hci_boot_log_retry[8]={0};
+void opencfw_radio_gpio_callback(void *argument){(void)argument;}
 void __aeabi_memcpy(void*d,const void*s,unsigned n){uint8_t*a=d;const uint8_t*b=s;for(unsigned i=0;i<n;i++)a[i]=b[i];}
 ''' + '\n'.join('void '+n+'(){ }' for n in FUNS)+'\n'
 with tempfile.TemporaryDirectory() as td:
@@ -45,6 +46,10 @@ with tempfile.TemporaryDirectory() as td:
     elif name.endswith('revision_mismatch_4b47cc'):val=mismatch
     elif name.endswith('identifier_480d72'):
      uc.mem_write(uc.reg_read(UC_ARM_REG_R1),bytes(range(16)))
+    elif name.endswith('register_48162c'):
+     observed=uc.reg_read(UC_ARM_REG_R2)
+     expected=(syms['opencfw_radio_gpio_callback']|1) if is_c else 0x4b4a99
+     assert observed==expected,(is_c,hex(observed),hex(expected))
     uc.reg_write(UC_ARM_REG_R0,val);uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR))
    u.hook_add(UC_HOOK_CODE,hook)
    u.emu_start((syms['audio_ble_hci_driver_radio_boot'] if is_c else 0x4b48a6)|1,0x600000,count=1100)

@@ -1,5 +1,13 @@
 # YHM2710 and shared i2c_5 resource boundary
 
+> Reconstruction correction (2026-10-15): the earlier low/high descriptions
+> of P1.10 were reversed. Authenticated code at `0x79434` is
+> `nrf_gpio_pin_set`, writing GPIO `+0x508` (OUTSET). Resource acquire writes
+> OUTSET, delays, writes OUTCLR, delays, then opens the registry device;
+> release closes the device and writes OUTSET. Integrated stock comparisons
+> and REA/Ghidra evidence are saved under `r1/research/source-build/i2c5/`.
+> These register actions do not establish the pin's downstream electrical role.
+
 ## Decision
 
 The unavailable YHM2710 vendor package remains unlicensed, but the repository owner authorized
@@ -19,9 +27,9 @@ resource adapters.
 
 | R1 entry | Size | SHA-256 | Disposition |
 | --- | ---: | --- | --- |
-| `0x00050464` | 66 | `15fcba3427ed758f3e6040449531392b360c046d2b8f27f23f7c7ebc6dd06509` | register NFC GPO/`i2c_5`, configure P1.10, drive it low |
-| `0x000504C0` | 20 | `2a985eaced1ffba181347e060a1aa38cd3167807051d6ca7082ee42a28bfe318` | release `i2c_5`, drive P1.10 low |
-| `0x000504D8` | 52 | `672d16c18e2add902d1916583a3b6e4cc974ef445782a7046fa0bd10e4605a27` | low, delay 10, high, delay 10, acquire `i2c_5` |
+| `0x00050464` | 66 | `15fcba3427ed758f3e6040449531392b360c046d2b8f27f23f7c7ebc6dd06509` | register NFC GPO/`i2c_5`, configure P1.10, write OUTSET |
+| `0x000504C0` | 20 | `2a985eaced1ffba181347e060a1aa38cd3167807051d6ca7082ee42a28bfe318` | release `i2c_5`, write P1.10 OUTSET |
+| `0x000504D8` | 52 | `672d16c18e2add902d1916583a3b6e4cc974ef445782a7046fa0bd10e4605a27` | P1.10 OUTSET, delay 10 ms, OUTCLR, delay 10 ms, acquire `i2c_5` |
 | `0x00050758` | 48 | `4b22fb4a06a2d023856499add6354c49714db435df0e5244ad0d097d5ceb8582` | release one of three product clients; act only at the one-to-zero boundary |
 | `0x00050778` | 32 | `dc1383f7285121c71e7525dcd20e3e4f272bc069eef3aeedabbe47a82cb03dc6` | acquire one of three product clients; act only at the zero-to-one boundary |
 

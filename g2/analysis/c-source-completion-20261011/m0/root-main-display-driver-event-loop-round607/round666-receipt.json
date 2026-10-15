@@ -1,0 +1,47 @@
+{
+  "round": 666,
+  "component": "Apollo uLED power controls 0x4d391e/0x4d3938 and composed type-4 pin chain",
+  "status": "Two C power bodies compile and pass 40 native/C MMIO cases; type-4 prepare chain with real bitmap, power, finalize, IRQ C bodies passes 256 native/C cases under controlled delay; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "dde9dc2fec97b0977f6cff25797a138a1c25b5a9dac00171ae75950f11397328",
+  "verifiers_sha256": {
+    "verify_display_driver_uled_power_control_native.py": "e0d7761ec925195f34de044accb4ee1b7c26642bbb89f601e371af17cb56f1f4",
+    "verify_display_driver_uled_pin_prepare_type4_real_chain_native.py": "10cabe91106f53669f9bb10f83921ab238b011139729c9163a66131f6a9f86f9"
+  },
+  "builder_sha256": "adc2092a69ec34881fb76c0a7ad126ec6b69765069d6e57948a4767137e84773",
+  "link_audit_sha256": "3c483e2c08c54b05552493ee3384da9cd685661e5ba8d8ca35d8ee7aa5770e74",
+  "object_sha256": "ef4a48e1a5bf4efdd57c710045a693f12e6f3d83af3f71c54e6cf798a63d9e94",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_POWER_CONTROL_NATIVE 40",
+    "PASS_DISPLAY_DRIVER_ULED_PIN_PREPARE_TYPE4_REAL_CHAIN_NATIVE 256",
+    "PASS_ULED_VENDOR_CANDIDATE_LINK 29 0 13",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "unresolved": [
+    "display_driver_uled_delay_4807a0",
+    "display_driver_uled_pin_control_type0_4c3c2e",
+    "display_driver_uled_pin_control_type1_4c3ca2",
+    "display_driver_uled_pin_control_type2_4c3e9a",
+    "display_driver_uled_pin_control_type3_4c3d28",
+    "display_driver_uled_pin_control_type5_4c420c",
+    "display_driver_uled_pin_control_type6_4c43ec",
+    "display_driver_uled_pin_prepare_type0_4c3bfc",
+    "display_driver_uled_pin_prepare_type1_4c3c60",
+    "display_driver_uled_pin_prepare_type2_4c3d9e",
+    "display_driver_uled_pin_prepare_type3_4c3cd4",
+    "display_driver_uled_pin_prepare_type5_4c4086",
+    "display_driver_uled_pin_prepare_type6_4c427e"
+  ],
+  "gates": [
+    "Delay provider 0x4807a0 depends on floating timing and ROM 0x40; remains unresolved",
+    "Other type-specific pin providers remain unresolved",
+    "Full MSPI destroy with real lower callees and asynchronous callbacks unproven",
+    "Other 27 vendor option callbacks, relocation, handle placement, workspace extent and whole-image gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "whole_images_complete": 0,
+  "estimated_uled_vendor_remaining": "70-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

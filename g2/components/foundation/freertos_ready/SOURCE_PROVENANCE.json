@@ -19,5 +19,12 @@
     "vListInsertEnd": "799e47099120d704b2afeb54d059e9db3738aa841d9a9e925e4cc287703fb19d",
     "uxListRemove": "e5d778834634d2297532a464dbc255d46cb0e49c1b979527daf7153f7108918b"
   },
-  "adaptations": "Sparse TCB prefix, recovered global cells and non-optimized ready-priority/list macros. Upstream xTaskRemoveFromEventList symbol renamed by preprocessor to owned opencfw_ready_remove_event_list; unchanged function text, thin existing ABI adapter. Complete TCB/scheduler not supplied."
+  "adaptations": "Sparse TCB prefix, recovered global cells and non-optimized ready-priority/list macros. Upstream xTaskRemoveFromEventList symbol renamed by preprocessor to owned opencfw_ready_remove_event_list; unchanged function text, thin existing ABI adapter. Complete TCB/scheduler not supplied.",
+  "projected_functions": {
+    "vTaskRemoveFromUnorderedEventList": {
+      "source": "tasks.c",
+      "projection": "unordered_unblock.c",
+      "adaptations": "Uses the recovered 32-bit TCB/list prefix and scheduler RAM cells. The upstream private unblock-time helper is expanded inline. Source compile and link are established; native behavior, complete TCB allocation and scheduling interleavings are not."
+    }
+  }
 }

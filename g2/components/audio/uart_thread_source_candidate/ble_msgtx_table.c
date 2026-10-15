@@ -1,0 +1,10 @@
+#include <stdint.h>
+
+/* First 16-byte native message transport table block at 0x784eb0. */
+const uint8_t audio_ble_msgtx_table[16]
+    __attribute__((section(".g2_rom_00784eb0"))) = {
+        0x00, 0x00, 0x00, 0x00,
+        0x0c, 0x00, 0x18, 0x00,
+        0x00, 0x00, 0x58, 0x02,
+        0x05, 0x00, 0x00, 0x00
+    };

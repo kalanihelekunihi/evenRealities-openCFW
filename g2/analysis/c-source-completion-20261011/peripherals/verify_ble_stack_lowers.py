@@ -7,7 +7,7 @@ from unicorn.arm_const import UC_ARM_REG_R0,UC_ARM_REG_LR,UC_ARM_REG_PC,UC_ARM_R
 ROOT=Path(__file__).resolve().parents[3];BLOB=(ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 with tempfile.TemporaryDirectory() as td:
  shim=Path(td)/'shim.c';shim.write_text('''#include <stdint.h>
-uint8_t audio_ble_stack_state_20072cb8[0x50],audio_ble_hci_stack_state_20073870[0x100],audio_ble_hci_controller_state_20071478[0xb0],audio_ble_hci_cmd_state_20073a90[0x20];
+uint8_t audio_ble_stack_state_20072cb8[0x50],audio_ble_hci_stack_state_20073870[0x24],audio_ble_dm_stack_rows_200738dc[0x19],audio_ble_hci_controller_state_20071478[0xb0],audio_ble_hci_cmd_state_20073a90[0x20];
 uint8_t audio_ble_dm_config[0x50],audio_ble_dm_privacy_state[0x20],audio_ble_other_handler_id;
 uint8_t audio_ble_dm_stack_table_78a88c[1];
 void audio_ble_stack_callback_536234(void){} void audio_ble_stack_callback_536470(void){}
@@ -17,7 +17,7 @@ void WsfTaskLock(void){} void WsfTaskUnlock(void){} void audio_ble_other_handler
  elf=Path(td)/'a.elf';subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-O2','-nostdlib','-Wl,-Ttext=0x100000','-Wl,-e,audio_ble_stack_lower_536324',str(ROOT/'components/audio/uart_thread_source_candidate/display_ble_stack_lowers.c'),str(shim),'-o',str(elf)],check=True)
  syms={p[2]:int(p[0],16) for line in subprocess.check_output(['arm-none-eabi-nm',str(elf)],text=True).splitlines() if len(p:=line.split())==3}
  with elf.open('rb') as f:segs=[(s['p_vaddr'],s.data()) for s in ELFFile(f).iter_segments() if s['p_type']=='PT_LOAD']
- state={'audio_ble_stack_state_20072cb8':(0x20072cb8,0x50),'audio_ble_hci_stack_state_20073870':(0x20073870,0x100),'audio_ble_hci_controller_state_20071478':(0x20071478,0xb0),'audio_ble_hci_cmd_state_20073a90':(0x20073a90,0x20),'audio_ble_dm_config':(0x20000694,0x50),'audio_ble_dm_privacy_state':(0x20073b78,0x20),'audio_ble_other_handler_id':(0x20074f92,1)}
+ state={'audio_ble_stack_state_20072cb8':(0x20072cb8,0x50),'audio_ble_hci_stack_state_20073870':(0x20073870,0x24),'audio_ble_dm_stack_rows_200738dc':(0x200738dc,0x19),'audio_ble_hci_controller_state_20071478':(0x20071478,0xb0),'audio_ble_hci_cmd_state_20073a90':(0x20073a90,0x20),'audio_ble_dm_config':(0x20000694,0x50),'audio_ble_dm_privacy_state':(0x20073b78,0x20),'audio_ble_other_handler_id':(0x20074f92,1)}
  callbacks={'audio_ble_stack_callback_536234':0x536235,'audio_ble_stack_callback_536470':0x536471,'audio_ble_stack_callback_536620':0x536621,'audio_ble_stack_callback_5366dc':0x5366dd,'audio_ble_dm_stack_table_78a88c':0x78a88c}
  cases=[('audio_ble_stack_lower_536324',0x536324,0),('audio_ble_stack_lower_53648e',0x53648e,0),('audio_ble_stack_lower_5366cc',0x5366cc,0),('audio_ble_stack_lower_5367ca',0x5367ca,0),('audio_ble_stack_lower_5367f8',0x5367f8,7),('audio_ble_stack_lower_5369ea',0x5369ea,0),('audio_ble_stack_lower_4bae6c',0x4bae6c,7)]
  for name,native,arg in cases:

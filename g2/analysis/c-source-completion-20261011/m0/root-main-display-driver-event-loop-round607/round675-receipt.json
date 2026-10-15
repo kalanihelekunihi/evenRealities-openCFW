@@ -1,0 +1,33 @@
+{
+  "round": 675,
+  "component": "uLED type-5 pin prepare and wait/finalize/power configuration helpers",
+  "status": "C candidates compile and 32 composed native cases match; separate vendor subset links; type-6 prepare and ROM delay boundary open",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": {
+    "display_driver_uled_pin_prepare_type5.c": "48780ea29ff8aea957a5e5c3a8c8197eb08dc678d980061fd88f678f655de7df",
+    "display_driver_uled_pin_type5_support.c": "584343c57cffc95a7ee03686f2d269e0a0a01b8ff564c8d98371c7f62f54c480"
+  },
+  "verifier_sha256": "915e676314964c689f4cba9593b18a632d21c14a31ea2e567214ee9c60b8cfe9",
+  "builder_sha256": "264142c9b9a542ee3e301e657be68f1c399196ab369e8eeb783b96fecd5ad96f",
+  "link_audit_sha256": "359803281c974fc2248b6f1c804236c10f0971e1b8e4cc78a7eb3b180b7a572d",
+  "object_sha256": "31c78d143a26400479e22241f104d8b3c73d1ef0c9a6650dd3d2e27023b4fb51",
+  "validation": {
+    "native_type5_prepare_cases": 32,
+    "defined_symbols": 55,
+    "selected_provider_imports": 0,
+    "missing_helper_imports": [
+      "display_driver_uled_pin_prepare_type6_4c427e",
+      "display_driver_uled_rom_delay_00000040"
+    ]
+  },
+  "gates": {
+    "source_complete": false,
+    "byte_equal": false,
+    "hardware_proven": false,
+    "whole_images_complete": 0
+  },
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "estimated_uled_vendor_remaining": "30-80%",
+  "estimated_apollo_remaining": "80-95%"
+}

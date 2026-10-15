@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 typedef void (*uart_timeout_dispatch)(uint32_t,void *,uint32_t,uint32_t);
-extern volatile uint8_t audio_uart_timeout_running; /* *DAT_00491630 */
+extern volatile uint8_t audio_uart_timeout_running_state; /* *DAT_00491630 */
 extern void *audio_uart_timeout_queue; /* *DAT_00491618 */
 extern void *audio_uart_timeout_mutex; /* *DAT_00491650 */
 extern int32_t audio_file_mutex_acquire(void *,uint32_t); /* selected 0x4497b6 */
@@ -46,7 +46,7 @@ uint32_t audio_uart_timeout_submit(uart_timeout_dispatch dispatch,
                                     uint32_t target,
                                     void *payload,
                                     uint32_t argument,uint32_t flags) {
-    if(audio_uart_timeout_running==0u || audio_uart_timeout_queue==0) {
+    if(audio_uart_timeout_running_state==0u || audio_uart_timeout_queue==0) {
         log0(1u,0x45u,0x4000000u,audio_uart_work_e_unready,
              audio_uart_work_c_unready);
         return UINT32_MAX;

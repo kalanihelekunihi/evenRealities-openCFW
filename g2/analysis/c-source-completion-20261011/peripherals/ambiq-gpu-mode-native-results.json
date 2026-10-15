@@ -1,0 +1,28 @@
+{
+  "status": "PASS_AMBIQ_GPU_MODE_NATIVE",
+  "cases": 408,
+  "source_sha256": "6dcc6c9653fa2f71de0eab75490c2970f87c470e791539457bd63063adf539f5",
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "native_bodies": {
+    "display_driver_gpu_mode_lower_4b06c0": {
+      "start": "0x4b06c0",
+      "end_inclusive": "0x4b072f",
+      "sha256": "d72f574e58f121fb5c037329bfe9950215ddad450b695df5bf1a6ce198b71e63"
+    },
+    "display_driver_gpu_mode_4b0730": {
+      "start": "0x4b0730",
+      "end_inclusive": "0x4b0747",
+      "sha256": "5f211dcd49f186c30c33e774346f84d60c886fe51cdca6c1ee2585169fff3279"
+    },
+    "display_driver_gpu_enable_4b0748": {
+      "start": "0x4b0748",
+      "end_inclusive": "0x4b075d",
+      "sha256": "17fdd4917e398584467f4014119b0f9dc5728245c6f524abc66a90a6dcb3c3ce"
+    }
+  },
+  "limits": [
+    "Default-unit and Nema-mode children are entry-cut; cache bytes and ordered ABI calls compare",
+    "Wrapper return registers are unspecified by their C callers and excluded",
+    "Synthetic state excludes concurrency and hardware GPU behavior"
+  ]
+}

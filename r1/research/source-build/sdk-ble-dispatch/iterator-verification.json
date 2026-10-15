@@ -1,0 +1,15 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "798d03b820cf73d2cba287b53433078429587f34e4010875f229face12c7507c",
+  "object_sha256": "43343e6e120d81c90940cb94214edef15c21628fd9b47315887848def4f073ba",
+  "comparisons": 16257,
+  "range_cases": 1819,
+  "cursor_bytes": 12,
+  "scope": "Unchanged SDK non-GNU multi-range branch under localized Clang compiler-abstraction compatibility; full cursor/guards, empty priority skips, boundaries, terminal cursor, strides/mutation/wrapping and saved registers/stack",
+  "limitations": [
+    "Mapped descriptor/cursor fixtures are used; invalid pointers and partial-record faults are outside this contract.",
+    "Zero/mismatched strides and wide arithmetic are bounded pinned-target observations, not guarantees of termination or portable pointer arithmetic.",
+    "Original instructions, live dispatcher ownership and physical BLE delivery remain unproven."
+  ],
+  "instruction_identity_proven": false
+}

@@ -1,0 +1,48 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "stock_initialization_sha256": "ee3d99f835cfb80ff1390c540734c9dc95f485059bd2300e4b88e20ba27f5f2a",
+  "source_report_sha256": "1d6299e66cdf7095d40c8aec9749b567933c6ad972dd261d1e06fc03f2dbacbc",
+  "source_sha256": "6c389286b7b41a9b6d7393b2812a3a04fe542b0a20be81dcf1b26fa3cae78b89",
+  "object_sha256": "89c63196bc1bcc5a86220840203866ddfa63a32aa209e06d461eb8d0358fc904",
+  "records": [
+    {
+      "name": "i2c_2",
+      "opened": 0,
+      "delay_context": 1,
+      "scl_pin": 28,
+      "sda_pin": 45,
+      "input_pull": 3
+    },
+    {
+      "name": "i2c_3",
+      "opened": 0,
+      "delay_context": 5,
+      "scl_pin": 12,
+      "sda_pin": 11,
+      "input_pull": 3
+    },
+    {
+      "name": "i2c_4",
+      "opened": 0,
+      "delay_context": 1,
+      "scl_pin": 31,
+      "sda_pin": 41,
+      "input_pull": 3
+    },
+    {
+      "name": "i2c_5",
+      "opened": 0,
+      "delay_context": 1,
+      "scl_pin": 43,
+      "sda_pin": 46,
+      "input_pull": 3
+    }
+  ],
+  "scalar_checks": 24,
+  "provider_binding_checks": 24,
+  "limitations": [
+    "Contextual initializer is not a native stock entry.",
+    "Callback references are injected test providers; actual provider bodies and native scatter relocation remain open.",
+    "Pull=3 is supplied explicitly by the caller and matches the stock seed."
+  ]
+}

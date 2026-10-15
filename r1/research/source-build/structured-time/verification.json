@@ -1,0 +1,21 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "fc30664e31ddc60296d385364c024aadb68e41467531368ebd47f93bb68add7c",
+  "object_sha256": "5d6c0a26dd76e9ec05ed36fe9be2d3764860c0ae0d0a3d2ca1384fc44650de5c",
+  "registry_report_sha256": "75095a0b5f83c870c839fec7734a5965765182ace6e03e20d1aeca7ed0ba6a40",
+  "runtime_report_sha256": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+  "comparisons": 185,
+  "comparisons_by_entry": {
+    "r1_structured_log_timestamp_adapter": 45,
+    "r1_time_backend_timestamp": 70,
+    "r1_structured_log_local_timestamp": 70
+  },
+  "unbound_fault_comparisons": 70,
+  "scope": "Actual native registry dispatch, zeroed 64-byte RTC request, ignored status, backend NULL context, signed offsets and wraparound versus stock",
+  "limitations": [
+    "Final RTC/backend operations are intercepted. Actual clock/calendar providers and RTC registration remain open.",
+    "Unmapped reads establish emulated fault address/width, not physical exception state.",
+    "Initial native roots are unbound; callers must install the actual providers."
+  ],
+  "instruction_identity_proven": false
+}

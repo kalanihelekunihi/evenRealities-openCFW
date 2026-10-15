@@ -1,0 +1,40 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "e1dcb594a3aaceffff3901ce8a69a0b84039fe4f3d8077691f5691f36b712104",
+  "object_sha256": "42c84007e1776e6e5797d587f22d67b983354970a3ee9dba720e47fd2b756376",
+  "provider_reports": {
+    "connection-handle/report.json": "bb6d085e1b4e3a19499ececcb8bd7bcb3c83910f9069e64473be448fef9d8da9",
+    "watchdog-logging/report.json": "a2721853f1a021099829c69ac93a2b9c9be701b4cc93865c9e97bf3ed6f564d3",
+    "native-ble-send/report.json": "f764157cbd85f9a974f5c6371d69ccaeef932037ef24badfb3ef738f178e95dc",
+    "native-bae8-send/report.json": "447ed19fadb0d62176968e30758d5af1f154d02358371bddc5dce5760bbfbfaa",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+    "sdk-link-context/report.json": "103a6e4fd6495809959e2aef4f98911bbb26e6b56e80b9876448ce77f9c2d1ad"
+  },
+  "actual_sender_executed": true,
+  "actual_bae8_executed": true,
+  "actual_link_context_executed": true,
+  "actual_connection_index_executed": false,
+  "svc174_calls": 608,
+  "sender_execution_counts": {
+    "sender_entries": 3512,
+    "bae8_calls": 1645
+  },
+  "selected_getter_sha256": "4c8ebd96a25616b730da7fd987b66baf09b5a34ef05572b6793c1e2fa2e239a4",
+  "comparisons": 5346,
+  "comparisons_by_kind": {
+    "worker": 3984,
+    "veneer": 288,
+    "mode_transitions": 512,
+    "multi_record": 512,
+    "mutations": 48,
+    "faults": 4
+  },
+  "descriptor_bytes_compared": 68,
+  "scope": "Stock worker and two veneers; actual C connection/mode getters, pointer queue drain/stop/null records, 16-bit consumed fields, unknown types, invalid handles, all mode bytes, mode transitions, reloaded pointers/queue after provider mutation, ownership/free order and full-word veneer returns",
+  "limitations": [
+    "Actual output/serialized/BAE8 send, SDK link-context lookup and memory execute; connection index, logs, semaphore, queue/free and SVC174 responses remain intercepted; service/storage configuration is a fixture.",
+    "Fault addresses are compared without access-width/granularity identity; source byte reads avoid alignment assumptions.",
+    "Original instructions, cycle timing, physical-device and whole-image behavior remain unproven."
+  ],
+  "instruction_identity_proven": false
+}

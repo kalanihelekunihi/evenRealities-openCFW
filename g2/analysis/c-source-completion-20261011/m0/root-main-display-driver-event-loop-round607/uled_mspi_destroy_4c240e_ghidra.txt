@@ -1,0 +1,129 @@
+Ghidra 12.1.4 decompiler output for Apollo 0x4c240e; evidence ev_52690d8d94f77a9eafa5f3222c209df55e261524b8279c340bf25f0d587fbfce.
+Non-source inference; native instruction oracle required for C behavior.
+
+int FUN_004c240e(uint *param_1,uint param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  uint *puVar2;
+  uint uVar3;
+  int *piVar4;
+  uint uVar5;
+  bool bVar6;
+  uint *local_28;
+  uint uStack_24;
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  
+  if ((param_1 == (uint *)0x0) || ((*param_1 & 0x1ffffff) != 0x1bebebe)) {
+    iVar1 = 2;
+  }
+  else {
+    uVar3 = param_1[1];
+    local_28 = param_1;
+    uStack_24 = param_2;
+    uStack_20 = param_3;
+    uStack_1c = param_4;
+    if ((char)param_1[0x20f] == '\0') {
+      if (param_1[8] != 0) {
+        piVar4 = (int *)(uVar3 * 0x8d0 + 0x20052c00);
+        param_1[9] = param_1[9] | param_2;
+        if ((*piVar4 != 0) && (iVar1 = FUN_0053901a(*piVar4,&local_28), iVar1 == 0)) {
+          *(undefined1 *)(param_1 + 0x20d) = 0;
+          while (((char)param_1[0x20d] == '\0' && ((uint *)param_1[7] != local_28))) {
+            param_1[7] = param_1[7] + 1;
+            param_1[8] = param_1[8] - 1;
+            uVar5 = (uint)(byte)param_1[7];
+            if ((param_1[uVar5 + 10] != 0) &&
+               ((*(code *)param_1[uVar5 + 10])(param_1[uVar5 + 0x10a],0),
+               (char)param_1[0x20b] != '\x02')) {
+              param_1[uVar5 + 10] = 0;
+            }
+          }
+          if ((char)param_1[0x20d] == '\0') {
+            if (((param_2 & 0x1880) != 0) || (uStack_1c._2_1_ != '\0')) {
+              param_1[7] = param_1[7] + 1;
+              param_1[8] = param_1[8] - 1;
+              uVar5 = (uint)(byte)param_1[7];
+              if ((param_1[uVar5 + 10] != 0) &&
+                 ((*(code *)param_1[uVar5 + 10])(param_1[uVar5 + 0x10a],1),
+                 (char)param_1[0x20b] != '\x02')) {
+                param_1[uVar5 + 10] = 0;
+              }
+              iVar1 = FUN_004bfd62(param_1);
+              if (iVar1 != 0) {
+                return iVar1;
+              }
+              puVar2 = (uint *)(uVar3 * 0x1000 + 0x40060100);
+              *puVar2 = *puVar2 & 0xfffffffc;
+              puVar2 = (uint *)(uVar3 * 0x1000 + 0x40060030);
+              *puVar2 = *puVar2 & 0xbfffffff;
+              puVar2 = (uint *)(uVar3 * 0x1000 + 0x40060030);
+              *puVar2 = *puVar2 | 0x40000000;
+              *(undefined4 *)(uVar3 * 0x1000 + 0x400602ac) =
+                   *(undefined4 *)(uVar3 * 0x1000 + 0x400602ac);
+              FUN_005390fc(*piVar4);
+              if ((param_1[8] != 0) && (iVar1 = FUN_004bfd44(param_1), iVar1 != 0)) {
+                return iVar1;
+              }
+            }
+            if ((param_1[8] == 0) && (iVar1 = FUN_004bfd62(param_1), iVar1 != 0)) {
+              return iVar1;
+            }
+          }
+        }
+        if (((param_1[8] == 0) &&
+            (puVar2 = (uint *)(uVar3 * 0x1000 + 0x40060100), *puVar2 = *puVar2 & 0xfffffffc,
+            *(char *)((int)param_1 + 0x8c9) != '\x04')) &&
+           (iVar1 = FUN_004c4530(4,param_1[1] + 0x10 & 0xff), iVar1 != 0)) {
+          return iVar1;
+        }
+      }
+      iVar1 = 0;
+    }
+    else {
+      param_1[9] = param_2 | param_1[9];
+      if ((param_1[9] & 0x18c0) != 0) {
+        do {
+        } while (*(int *)(param_1[1] * 0x1000 + 0x40060104) << 0x1f < 0);
+        param_1[9] = param_1[9] | *(uint *)(uVar3 * 0x1000 + 0x40060204);
+        *(undefined4 *)(uVar3 * 0x1000 + 0x40060208) = 0xffffffff;
+        bVar6 = (param_1[9] & 0x1880) != 0;
+        if (bVar6) {
+          puVar2 = (uint *)(uVar3 * 0x1000 + 0x40060100);
+          *puVar2 = *puVar2 & 0xfffffffc;
+          puVar2 = (uint *)(uVar3 * 0x1000 + 0x40060030);
+          *puVar2 = *puVar2 & 0xbfffffff;
+          puVar2 = (uint *)(uVar3 * 0x1000 + 0x40060030);
+          *puVar2 = *puVar2 | 0x40000000;
+        }
+        param_1[0x214] = param_1[0x214] + 1;
+        param_1[0x210] = param_1[0x210] - 1;
+        iVar1 = param_1[0x215] +
+                (param_1[0x214] - param_1[0x212] * (param_1[0x214] / param_1[0x212])) * 0x18;
+        if (*(int *)(iVar1 + 0x10) != 0) {
+          (**(code **)(iVar1 + 0x10))(*(undefined4 *)(iVar1 + 0x14),bVar6);
+          *(undefined4 *)(iVar1 + 0x10) = 0;
+        }
+        if (param_1[0x210] == 0) {
+          *(undefined1 *)(param_1 + 0x20f) = 0;
+          *(undefined4 *)(uVar3 * 0x1000 + 0x40060100) = 0;
+          *(uint *)(uVar3 * 0x1000 + 0x40060200) =
+               *(uint *)(uVar3 * 0x1000 + 0x40060200) & 0xffffffbf;
+          *(undefined4 *)(uVar3 * 0x1000 + 0x400602b4) = 0x80;
+          if (((param_1[8] == 0) && (*(char *)((int)param_1 + 0x8c9) != '\x04')) &&
+             (iVar1 = FUN_004c4530(4,param_1[1] + 0x10 & 0xff), iVar1 != 0)) {
+            return iVar1;
+          }
+        }
+        else {
+          param_1[9] = 0;
+          FUN_004bfdf4(param_1);
+        }
+      }
+      iVar1 = 0;
+    }
+  }
+  return iVar1;
+}
+

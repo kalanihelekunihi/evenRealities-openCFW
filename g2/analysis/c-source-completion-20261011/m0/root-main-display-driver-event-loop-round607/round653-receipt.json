@@ -1,0 +1,38 @@
+{
+  "round": 653,
+  "component": "Apollo uLED MSPI destroy helper 0x4c240e",
+  "status": "Full control-flow C draft compiles; 45 bounded native/C cases pass; six direct callees and indirect callback paths remain unresolved or unverified; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "2684135db015d957c2588c9944b8538f475f06ebe7632ab451855fc57fb16bd4",
+  "verifier_sha256": "7e0923b9719a44b6f21287c6769aa3b049e81405585fc7b36bb0bba7acf14447",
+  "builder_sha256": "4f87a381ec462212972d1be5b1dac145d93869b3bcfee2129cd9a571f0f5d4c8",
+  "link_audit_sha256": "b4ade09ae010411e15ed9c3248a18c00ca1301d380d3acc8a83ee3dd72dda491",
+  "object_sha256": "e97473ce4dd6b7b5adb787c9c85bba402b64d721e3e7fc5e7e90a4e73f5318f9",
+  "ghidra_pseudocode_sha256": "cc8c01256849f63ae8439b8aac5ea9b1dca291246b22ed224b085711baf54919",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_MSPI_DESTROY_BOUNDED_NATIVE 45",
+    "PASS_ULED_VENDOR_CANDIDATE_LINK 7 0 6",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "unresolved": [
+    "display_driver_uled_mspi_dma_next_4bfdf4",
+    "display_driver_uled_mspi_dma_start_4bfd44",
+    "display_driver_uled_mspi_dma_stop_4bfd62",
+    "display_driver_uled_mspi_pin_control_4c4530",
+    "display_driver_uled_mspi_queue_release_5390fc",
+    "display_driver_uled_mspi_queue_snapshot_53901a"
+  ],
+  "gates": [
+    "Full destroy helper behavior unproven: queue callbacks and six direct callee paths lack native/C comparison",
+    "Other 27 uLED vendor option callbacks lack C bodies",
+    "Option records hold native absolute callback addresses; symbolic relocation pending",
+    "Vendor handle cell placement and uLED workspace extent open",
+    "Apollo selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "whole_images_complete": 0,
+  "estimated_uled_vendor_remaining": "85-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

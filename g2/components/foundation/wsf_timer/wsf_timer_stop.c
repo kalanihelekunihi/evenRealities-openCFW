@@ -85,6 +85,7 @@ static void wsfTimerRemove(wsfTimer_t *pTimer)
   }
 }
 
+#ifndef OPENCFW_WSF_TIMER_EXTERNAL_STOP
 void WsfTimerStop(wsfTimer_t *pTimer)
 {
   WSF_TRACE_INFO1("WsfTimerStop pTimer:0x%x", pTimer);
@@ -103,6 +104,7 @@ void WsfTimerStop(wsfTimer_t *pTimer)
  */
 void WsfTaskLock(void) { opencfw_wsf_cs_enter(); }
 void WsfTaskUnlock(void) { opencfw_wsf_cs_exit(); }
+#endif
 void opencfw_wsf_timer_remove_raw(wsfTimer_t *timer) { wsfTimerRemove(timer); }
 void opencfw_radio_timer_gpio_shutdown_phase(void)
 {

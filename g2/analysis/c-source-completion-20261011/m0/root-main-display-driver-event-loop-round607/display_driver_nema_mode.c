@@ -50,7 +50,8 @@ void display_driver_nema_mode_513924(uint32_t mode,uint32_t target,
     if(target>3u)target=0u;
     if(surface>3u)surface=UINT32_MAX;
     uint32_t selected=alternate;
-    if(selected>3u)selected=target;
+    uint32_t selected_byte=alternate;
+    if(selected>3u){selected=target;selected_byte=2u;}
     if(boot->mode_flag!=0u) {
         uint32_t moved=0u;
         if(sign!=0u){moved=0x80000000u;sign=0u;mode&=0x7fffffffu;}
@@ -82,7 +83,7 @@ void display_driver_nema_mode_513924(uint32_t mode,uint32_t target,
     uint32_t bit30=(mode>>30)&1u,bit29=(mode>>29)&1u;
     uint32_t bit27=(mode>>27)&1u,bit26=(mode>>26)&1u;
     uint32_t bit28=(mode>>28)&1u;
-    uint32_t mode_bytes=bit26|(bit29<<8)|((alternate&0xffu)<<16)|(bit22<<24);
+    uint32_t mode_bytes=bit26|(bit29<<8)|((selected_byte&0xffu)<<16)|(bit22<<24);
     uint32_t special=low<6u&&effect==0u&&high==0u?0u:3u;
     uint32_t special_flag=special!=0u;
     uint32_t blend=bit30;
@@ -163,21 +164,25 @@ void display_driver_nema_mode_513924(uint32_t mode,uint32_t target,
             append(words,&count,(target<<7)|0x80c0002u,
                    instruction_kind|(precision<<5)|(format<<14)|(op<<11)|
                    0x80000004u);
-        } else if(active!=0u||format!=0x1du||precision!=0xeu||blend!=0u||special!=0u) {
+        } else if(format!=0x1du||precision!=0xeu||blend!=0u||special!=0u) {
             append(words,&count,special|(selected<<7)|(blend<<20)|0x80c0000u,
-                   instruction_kind|(precision<<5)|(format<<14)|(op<<11)|4u);
-        } else {
-            append(words,&count,(blend<<20)|(target<<7)|0x80c0002u,
                    instruction_kind|(precision<<5)|(format<<14)|(op<<11)|4u);
         }
         if(!(active==0u&&low==1u&&blend==0u)) {
+            special_flag=0u;
+            special=0u;
+            blend=0u;
             if(high==0u&&effect==0u) {
                 append(words,&count,(target<<7)|0x80c0002u,
                        0x80000000u|(format_a(low)<<14)|(format_b(low)<<5)|
                        0xa002007u);
             } else {
                 uint32_t flag_a=0x1000u,flag_b=0x400000u;
-                if(special_flag==0u&&bit30==0u) {
+                if(!(special_flag==0u&&blend==0u&&low<2u)) {
+                    append(words,&count,(blend<<20)|special|(selected<<7)|0x80c0000u,
+                           (format_a(low)<<14)|(format_b(low)<<5)|0xa002007u);
+                }
+                if(special_flag==0u&&blend==0u) {
                     if(low==0u){flag_a=0x2000u;flag_b=0x800000u;}
                     else if(low==1u){flag_a=0u;flag_b=0u;}
                 }

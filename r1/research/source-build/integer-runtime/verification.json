@@ -1,0 +1,18 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "runtime_report_sha256": "11f725f9bc6429f44be34d2666b9d72c7d8d04ad3ba4461df0f92bc75b0d6faf",
+  "relocatable_sha256": "d767fcfe4e4d501f0eb4fccd1cf5a65b702d1948f4e9ec5525180bbeff6b508f",
+  "comparisons": 50822,
+  "comparisons_by_entry": {
+    "__aeabi_uldivmod": 11792,
+    "__aeabi_ldivmod": 11792,
+    "__aeabi_llsl": 13619,
+    "__aeabi_llsr": 13619
+  },
+  "scope": "Stock differential and independent integer model; quotient/remainder registers, signed overflow and zero divisors, all count-byte patterns and wide count words, callee-saved registers and stack; unsigned IP preservation and signed IP/LR side effects",
+  "limitations": [
+    "Attributable replacement source, not original Arm runtime source or instruction identity.",
+    "No cycle timing, interrupt interaction or physical-device execution proof."
+  ],
+  "instruction_identity_proven": false
+}

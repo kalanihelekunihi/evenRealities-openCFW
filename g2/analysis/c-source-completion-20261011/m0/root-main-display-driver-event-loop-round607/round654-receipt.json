@@ -1,0 +1,47 @@
+{
+  "round": 654,
+  "component": "Apollo uLED MSPI destroy queue correction and DMA wrappers 0x4bfd44/0x4bfd62",
+  "status": "Corrected queue handle address using authenticated literal; destroy C draft passes 45 bounded plus 18 queue-path native/C cases; two DMA wrapper C bodies pass 32 native/C cases; combined candidate unselected",
+  "supersedes_round653_source_sha256": "2684135db015d957c2588c9944b8538f475f06ebe7632ab451855fc57fb16bd4",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "sources_sha256": {
+    "display_driver_uled_mspi_destroy.c": "4b325bbaf840fe4b4fef7ea7094026b1adf032437d2df043e04dc30411adf3ea",
+    "display_driver_uled_mspi_dma_wrappers.c": "7635b2a3d8a424eb0bdd0c3cd45b9658764f65e41781f1334da73d61f628b194"
+  },
+  "verifiers_sha256": {
+    "verify_display_driver_uled_mspi_destroy_native.py": "7e0923b9719a44b6f21287c6769aa3b049e81405585fc7b36bb0bba7acf14447",
+    "verify_display_driver_uled_mspi_destroy_queue_native.py": "7a581453e46525a8ed1c069b232ec92f2ff8afdbc5494c30c1e2f9b15709951a",
+    "verify_display_driver_uled_mspi_dma_wrappers_native.py": "bce3793b0d0afd5d4d6d9868f871bb651de78d8158e00cf257949dbe05d9dcb3"
+  },
+  "builder_sha256": "0922f47a1a40624c26cdb85cca3991214ac0f3923324d89977b03b8f306fc8bb",
+  "link_audit_sha256": "fb932cd1eaac28bc5a86501f26e4a7e047964ceb4b0b3135115d8b51b09eaca3",
+  "object_sha256": "d0156fef975ef47b223cc5f510252cae7b2512ec71b0165c507576c75ba6e100",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_MSPI_DESTROY_BOUNDED_NATIVE 45",
+    "PASS_DISPLAY_DRIVER_ULED_MSPI_DESTROY_QUEUE_NATIVE 18",
+    "PASS_DISPLAY_DRIVER_ULED_MSPI_DMA_WRAPPERS_NATIVE 32",
+    "PASS_ULED_VENDOR_CANDIDATE_LINK 9 0 7",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "unresolved": [
+    "display_driver_uled_mspi_dma_next_4bfdf4",
+    "display_driver_uled_mspi_dma_pin_prepare_4c44bc",
+    "display_driver_uled_mspi_dma_queue_start_538e3c",
+    "display_driver_uled_mspi_dma_queue_stop_538e8c",
+    "display_driver_uled_mspi_pin_control_4c4530",
+    "display_driver_uled_mspi_queue_release_5390fc",
+    "display_driver_uled_mspi_queue_snapshot_53901a"
+  ],
+  "gates": [
+    "DMA wrapper callees, queue helpers, pin control and DMA next remain unresolved",
+    "Destroy caller paths with real callee semantics and asynchronous callbacks remain unproven",
+    "Other 27 uLED vendor option callbacks lack C bodies",
+    "Option callback address relocation, handle cell placement, workspace extent, selected Apollo integration, whole-image G3/G4/layout gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "whole_images_complete": 0,
+  "estimated_uled_vendor_remaining": "80-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

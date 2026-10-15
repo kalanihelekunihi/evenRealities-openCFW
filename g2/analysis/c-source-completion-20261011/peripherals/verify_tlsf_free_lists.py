@@ -2,6 +2,8 @@
 """Bounded original/source TLSF free-list transition oracle."""
 from pathlib import Path
 import subprocess
+import hashlib
+import json
 from elftools.elf.elffile import ELFFile
 from unicorn import Uc,UC_ARCH_ARM,UC_MODE_THUMB,UC_MODE_MCLASS,UC_HOOK_CODE
 from unicorn import arm_const as A
@@ -10,10 +12,16 @@ R=Path(__file__).resolve().parents[4]
 D=Path(__file__).resolve().parent
 S=R/'g2/components/audio/file_pool_free_candidate'
 E=D/'tlsf-free-lists-oracle.elf'
+objects=[]
+for stem in ('tlsf_free_lists','tlsf_align'):
+    obj=D/f'{stem}-free-lists-m4.o'
+    subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb',
+                    '-std=c11','-ffreestanding','-O2','-Wall','-Wextra','-Werror',
+                    '-c',str(S/f'{stem}.c'),'-o',str(obj)],check=True)
+    objects.append(obj)
 subprocess.run(['arm-none-eabi-ld','-Ttext=0x100000',
                 '--defsym=g2_file_close_error=0x101001','-o',str(E),
-                '/tmp/g2logtransport-check/tlsf_free_lists.o',
-                '/tmp/g2logtransport-check/tlsf_align.o'],check=True)
+                *map(str,objects)],check=True)
 with E.open('rb') as f:
     e=ELFFile(f)
     seg=[(x['p_vaddr'],x.data()) for x in e.iter_segments() if x['p_type']=='PT_LOAD']
@@ -64,4 +72,9 @@ for op in ('insert','remove'):
                 a=run(True,op,hc,empty,fl,sl);b=run(False,op,hc,empty,fl,sl)
                 assert a==b,(op,hc,empty,fl,sl,a,b)
                 rows.append((op,hc,empty,fl,sl))
-print('PASS_TLSF_FREE_LISTS',len(rows))
+receipt={'status':'PASS_TLSF_FREE_LISTS','cases':len(rows),
+         'source_sha256':{stem:hashlib.sha256((S/f'{stem}.c').read_bytes()).hexdigest()
+                          for stem in ('tlsf_free_lists','tlsf_align')},
+         'limits':'Bounded valid insert/remove transitions; malformed allocator states excluded.'}
+(D/'tlsf-free-lists-results.json').write_text(json.dumps(receipt,indent=2)+'\n')
+print(receipt['status'],len(rows))

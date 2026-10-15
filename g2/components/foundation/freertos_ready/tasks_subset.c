@@ -112,9 +112,11 @@ static void prvResetNextTaskUnblockTime( void )
         xNextTaskUnblockTime = listGET_ITEM_VALUE_OF_HEAD_ENTRY( pxDelayedTaskList );
     }
 }
+#ifndef OPENCFW_READY_EXTERNAL_TASK_COUNT
 UBaseType_t uxTaskGetNumberOfTasks( void )
 {
     /* A critical section is not required because the variables are of type
      * BaseType_t. */
     return uxCurrentNumberOfTasks;
 }
+#endif

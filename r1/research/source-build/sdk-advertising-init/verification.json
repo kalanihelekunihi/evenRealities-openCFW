@@ -1,0 +1,27 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "352123082c47bcb16f16986cfb496155a2899c04359ea5a27ab1e2e574332e5b",
+  "selected_object_sha256": "8d50c8ce01b58f48baa48f87cdfd3fafa7440e308fb1f3200dca39017a710f23",
+  "memory_report_sha256": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+  "comparisons": 4993,
+  "comparisons_by_entry": {
+    "ble_advertising_init": 110,
+    "ble_advdata_encode": 4365,
+    "r1_sdk_adv_device_addr_encode": 60,
+    "r1_sdk_adv_conn_int_encode": 60,
+    "r1_sdk_adv_manuf_encode": 60,
+    "r1_sdk_adv_service_encode": 60,
+    "r1_sdk_adv_name_encode": 60,
+    "r1_sdk_adv_uuid_list_sized_encode": 216,
+    "r1_sdk_adv_data_size_max_get": 2
+  },
+  "svc_calls": 4020,
+  "native_capacity_overrun_cases": 130,
+  "scope": "Unchanged SDK advertising init and every encode family, actual source memory, guarded outputs/contexts, short/full names, UUID-size queries/writes, manufacturer/service/connection records, size/error propagation and init-to-start sequences",
+  "limitations": [
+    "Controller/identity/appearance/name/UUID replies are deterministic SVC fixtures, not actual SoftDevice execution.",
+    "Only mapped valid pointers and bounded output spans are covered. Any source-observed writes beyond a supplied capacity are preserved, not a safety or protocol-conformance claim.",
+    "Canonical bool values are used. Product-owned initializer values/callbacks, all application writers, original allocation identity, byte identity, full-image linking and hardware remain open."
+  ],
+  "instruction_identity_proven": false
+}

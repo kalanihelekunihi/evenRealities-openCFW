@@ -1,0 +1,64 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "upstream_pin": "2c0034a23b675a5f9a29e4a47e8b504c7a88e321",
+  "configurations": [
+    {
+      "source": "third-party/upstream/goodix-gh3x2x/gh3x2x/algo_lib/algo_params/HR/04_EXCLUSIVE/goodix_hba_config.c",
+      "original_source": "third-party/upstream/goodix-gh3x2x/gh3x2x/algo_lib/algo_params/HR/04_EXCLUSIVE/goodix_hba_config.c",
+      "symbol": "external_hba_cfg",
+      "stock_address": "0xad13c",
+      "bytes": 36,
+      "sha256": "9c1f99d4a578e6a23b6309b25f6bbfc568c9b7dafad7a32ba3e7fe44c61fea99"
+    },
+    {
+      "source": "third-party/upstream/goodix-gh3x2x/gh3x2x/algo_lib/algo_params/goodix_hrv_config.c",
+      "original_source": "third-party/upstream/goodix-gh3x2x/gh3x2x/algo_lib/algo_params/goodix_hrv_config.c",
+      "symbol": "external_hrv_cfg",
+      "stock_address": "0x9d5ec",
+      "bytes": 24,
+      "sha256": "dd781ff9a54c08a086d2d5dd3c8d2ca574345fbaa07c3969171650557b841087"
+    },
+    {
+      "source": "r1/research/source-build/goodix/stock_spo2_config.c",
+      "original_source": "third-party/upstream/goodix-gh3x2x/gh3x2x/algo_lib/algo_params/SPO2/goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c",
+      "symbol": "external_cfg",
+      "stock_address": "0xad160",
+      "bytes": 76,
+      "sha256": "afa9429b02ee229c0363000ebc02be13b51ec6ac0e5b9c06d621947d65eb7fe5"
+    }
+  ],
+  "getter_checks": 6,
+  "unicorn_version": "2.1.4",
+  "public_spo2_sha256": "fda048b3907d7531a0b3a0bc83957f35ca656904097e9b604e7f2e8cbc3a64dd",
+  "stock_spo2_sha256": "afa9429b02ee229c0363000ebc02be13b51ec6ac0e5b9c06d621947d65eb7fe5",
+  "calibration_patch": {
+    "fields": [
+      "cali_coef_a2",
+      "cali_coef_a1",
+      "cali_coef_a0"
+    ],
+    "offsets": [
+      16,
+      20,
+      24
+    ],
+    "public": [
+      -124026,
+      -59505,
+      1043941
+    ],
+    "stock": [
+      -156022,
+      -42041,
+      1066184
+    ]
+  },
+  "scope": "136 compiled configuration bytes equal authenticated stock; six linked getter/size results checked",
+  "limitations": [
+    "Getter code location and instruction bytes are not matched to stock.",
+    "No algorithm output, calibration suitability or physical sensor behavior is established.",
+    "Full Goodix component and application links remain unresolved."
+  ],
+  "application_linked": false,
+  "instruction_identity_proven": false
+}

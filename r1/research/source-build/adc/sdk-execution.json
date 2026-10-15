@@ -1,0 +1,43 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "stock_differential_calls": 10,
+  "integration_report_sha256": "f4d9866cb7c33938a48319c6e95465f2bc7b0bac4300dbba34fc195854b00e3c",
+  "relocatable_sha256": "baff6a5ef31535243ddba1111e896c5a294f9d55a0dc5471160c677f7077d133",
+  "runtime_archive_sha256": "c9a996915868c6c720aa505fa0c241da7ea01f96b901cd09ebb6960b8608762c",
+  "executable_sha256": "85e2bf84e050f7be9acbca6b04fdb195f8553897505f86e54fde46fd1235c4af",
+  "undefined_symbols": [],
+  "test_only_bindings": [
+    "r1_adc_error: trap if reached"
+  ],
+  "open_records": 3,
+  "close_records": 3,
+  "open_states": [
+    {
+      "index": 0,
+      "input": 6,
+      "active_channels": 1
+    },
+    {
+      "index": 1,
+      "input": 4,
+      "active_channels": 2
+    },
+    {
+      "index": 2,
+      "input": 3,
+      "active_channels": 3
+    }
+  ],
+  "peripheral_writes": 53,
+  "nrfx_callbacks_intercepted": false,
+  "scope": "Actual compiled SAADC init/channel-init/channel-uninit/uninit and native adapters execute against stock; statuses, ordered MMIO/core writes and 48-byte control block match",
+  "limitations": [
+    "Only successful initialization/channel setup and bounded STOP-event timeout are exercised.",
+    "No analog samples, DMA buffers or asynchronous interrupts are simulated.",
+    "Fatal error seam traps if reached; its production body remains unresolved.",
+    "Newlib strcmp is a binary test dependency.",
+    "Settling cycles and physical timing remain unproven."
+  ],
+  "application_linked": false,
+  "instruction_identity_proven": false
+}

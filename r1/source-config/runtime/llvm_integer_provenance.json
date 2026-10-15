@@ -1,0 +1,39 @@
+{
+  "upstream": "https://github.com/llvm/llvm-project",
+  "ref": "llvmorg-20.1.8",
+  "commit": "87f0227cb60147a26a1eeb4fb06e3b505e9c7261",
+  "tag_object": "023ec9011c9a92cfa8922030eb266d66a10f78f8",
+  "files": [
+    {
+      "path": "third-party/upstream/llvm-compiler-rt-format-20.1.8/udivmoddi4.c",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/87f0227cb60147a26a1eeb4fb06e3b505e9c7261/compiler-rt/lib/builtins/udivmoddi4.c",
+      "sha256": "e963fd1418909bb0f43603a7846edf568d4c8bae0670bd3b13a3e754a104e2fe"
+    },
+    {
+      "path": "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_lib.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/87f0227cb60147a26a1eeb4fb06e3b505e9c7261/compiler-rt/lib/builtins/int_lib.h",
+      "sha256": "b31130f10484636895daa13b91b63d47ea82b45547f29e4dd136b48a67854d30"
+    },
+    {
+      "path": "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_types.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/87f0227cb60147a26a1eeb4fb06e3b505e9c7261/compiler-rt/lib/builtins/int_types.h",
+      "sha256": "b4b768e1b2251df4c0161b4c1f120417500ff4883b7008120104d042eeb2151f"
+    },
+    {
+      "path": "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_util.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/87f0227cb60147a26a1eeb4fb06e3b505e9c7261/compiler-rt/lib/builtins/int_util.h",
+      "sha256": "63d06198ab720a75c20bfd84be895c2746581b129168bae6201e7384bbb0473b"
+    },
+    {
+      "path": "third-party/upstream/llvm-compiler-rt-format-20.1.8/int_endianness.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/87f0227cb60147a26a1eeb4fb06e3b505e9c7261/compiler-rt/lib/builtins/int_endianness.h",
+      "sha256": "ec5175561075845b7b16a92ad5ecdfd42a284de2736dd07e4ca7011b75c37709"
+    },
+    {
+      "path": "r1/source-config/runtime/LLVM-COMPILER-RT-LICENSE.TXT",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/87f0227cb60147a26a1eeb4fb06e3b505e9c7261/compiler-rt/LICENSE.TXT",
+      "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d"
+    }
+  ],
+  "purpose": "Unchanged nonzero unsigned division provider; R1 EABI and zero-divisor behavior supplied separately; original instruction identity unproven"
+}

@@ -1,0 +1,26 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "cf21abc89545786df7560064f6c0ebb8aa4d7e41d825ca88dc06217327fadae6",
+  "selected_object_sha256": "56175c8cb1a2413463725ba6b2e8208ccf9ffff08d07c0a42b88d8a1854a9018",
+  "events_provider": true,
+  "memory_report_sha256": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+  "comparisons": 157596,
+  "authenticated_native_reset_bytes": 124,
+  "comparisons_by_entry": {
+    "ble_conn_state_conn_idx": 70346,
+    "ble_conn_state_valid": 70346,
+    "nrf_atflags_get": 16392,
+    "bcs_internal_state_reset": 256,
+    "ble_conn_state_init": 256
+  },
+  "unmapped_read_faults": 8,
+  "candidate_state_initial_zero_bytes_compared": 124,
+  "valid_flags_address": "0x2002bdb4",
+  "scope": "No provider interceptions: actual unchanged Nordic index/validity/bit-read/reset/init bodies and source memory; all uint16 handles, walking/complement/random validity flags, wide register arguments, 4096-bit mapped arrays, state/array immutability and preserved registers/stack",
+  "limitations": [
+    "The native reset independently authenticates a 124-byte clear span and state base; this matches SDK size but does not establish every field meaning, all writers or live registry ownership.",
+    "Unaligned/raw register/out-of-object cases describe this pinned compiled target, not portable C or public API guarantees.",
+    "Other connection registry operations, live event ownership, concurrency, original instructions, whole-image and physical behavior remain open."
+  ],
+  "instruction_identity_proven": false
+}

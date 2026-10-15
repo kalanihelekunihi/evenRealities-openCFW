@@ -1,0 +1,127 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "433fa88789a5e4b977700826df385d2b3dc471e2604e9f91aaeda739a3be885a",
+  "selected_object_sha256": "2fcea1392789acdd3ab33c2430a43b9af7659be8769542aa211f3d8ab6135f3e",
+  "comparisons": 5376,
+  "comparisons_by_entry": {
+    "nrf_ble_gatt_init": 2688,
+    "r1_sdk_gatt_link_init": 2688
+  },
+  "context_initial_zero_bytes_compared": 36,
+  "native_startup_init_args": [
+    "0x20007e1c",
+    "0x0"
+  ],
+  "observer_counterexamples": [
+    {
+      "desired": 0,
+      "effective": 27,
+      "stock_svc_calls": [
+        [
+          144,
+          1,
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "upstream_svc_calls": [],
+      "equivalent": false
+    },
+    {
+      "desired": 27,
+      "effective": 27,
+      "stock_svc_calls": [
+        [
+          144,
+          1,
+          [
+            27,
+            27,
+            0,
+            0
+          ]
+        ]
+      ],
+      "upstream_svc_calls": [],
+      "equivalent": false
+    },
+    {
+      "desired": 27,
+      "effective": 251,
+      "stock_svc_calls": [
+        [
+          144,
+          1,
+          [
+            27,
+            27,
+            0,
+            0
+          ]
+        ]
+      ],
+      "upstream_svc_calls": [],
+      "equivalent": false
+    },
+    {
+      "desired": 251,
+      "effective": 251,
+      "stock_svc_calls": [
+        [
+          144,
+          1,
+          [
+            251,
+            251,
+            0,
+            0
+          ]
+        ]
+      ],
+      "upstream_svc_calls": [],
+      "equivalent": false
+    },
+    {
+      "desired": 251,
+      "effective": 27,
+      "stock_svc_calls": [
+        [
+          144,
+          1,
+          [
+            251,
+            251,
+            0,
+            0
+          ]
+        ]
+      ],
+      "upstream_svc_calls": [
+        [
+          144,
+          1,
+          [
+            251,
+            251,
+            0,
+            0
+          ]
+        ]
+      ],
+      "equivalent": true
+    }
+  ],
+  "observer_contract_proven": false,
+  "scope": "Unchanged pinned SDK init/link-init: all fill bytes and random padded contexts, arbitrary callback bits, nulls, mapped aligned link offsets, exact writes/guards and preserved registers/stack",
+  "limitations": [
+    "Three-link aggregate is proven; inherited peripheral/central split is not established by this contract.",
+    "Full SDK observer is used only as an unselected diagnostic candidate: product connected path unconditionally sends SVC144 while SDK is conditional.",
+    "Observer counterexamples use successful controlled SVC replies and do not validate logging, all event branches, live SoftDevice or hardware behavior.",
+    "No original compiler identity, instruction identity, complete startup or whole-image linking is claimed."
+  ],
+  "instruction_identity_proven": false
+}

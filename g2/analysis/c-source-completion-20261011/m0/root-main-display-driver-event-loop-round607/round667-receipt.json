@@ -1,0 +1,43 @@
+{
+  "round": 667,
+  "component": "Apollo uLED timing delay 0x4807a0",
+  "status": "C body with native VFP conversion sequence compiles and passes 52 native/C clock-mode and ROM-call cases; ROM 0x40 remains symbolic external boundary; vendor candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "a446136eab4c5fa29f0117b8979286b1bf13fd23d1d8520cd9bea53e32a85089",
+  "verifier_sha256": "0186a3ea1526666059307dae50e0fb03e29e78709c5a304dedb6955b668c4add",
+  "builder_sha256": "58676e7c2f34d861a487e4cf72b2e2d791cd28b08a2621ec499eb61ab62805db",
+  "link_audit_sha256": "b3a73264f41afba1ea6de8d71027544d436498e54a389b8bdd3805c6bbfe8340",
+  "object_sha256": "f03512639433dc6de54c77a8d985b7da643f233bfefc0cb8b5ff8179c6db3dec",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_DELAY_NATIVE 52",
+    "PASS_ULED_VENDOR_CANDIDATE_LINK 30 0 13",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "unresolved": [
+    "display_driver_uled_pin_control_type0_4c3c2e",
+    "display_driver_uled_pin_control_type1_4c3ca2",
+    "display_driver_uled_pin_control_type2_4c3e9a",
+    "display_driver_uled_pin_control_type3_4c3d28",
+    "display_driver_uled_pin_control_type5_4c420c",
+    "display_driver_uled_pin_control_type6_4c43ec",
+    "display_driver_uled_pin_prepare_type0_4c3bfc",
+    "display_driver_uled_pin_prepare_type1_4c3c60",
+    "display_driver_uled_pin_prepare_type2_4c3d9e",
+    "display_driver_uled_pin_prepare_type3_4c3cd4",
+    "display_driver_uled_pin_prepare_type5_4c4086",
+    "display_driver_uled_pin_prepare_type6_4c427e",
+    "display_driver_uled_rom_delay_00000040"
+  ],
+  "gates": [
+    "ROM 0x00000040 call target and source-owned link placement require independent device/ROM evidence",
+    "Other type-specific pin providers remain unresolved",
+    "Full MSPI destroy real-callee behavior and asynchronous callbacks unproven",
+    "Other 27 vendor option callbacks, relocation, handle placement, workspace extent and whole-image gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "whole_images_complete": 0,
+  "estimated_uled_vendor_remaining": "70-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

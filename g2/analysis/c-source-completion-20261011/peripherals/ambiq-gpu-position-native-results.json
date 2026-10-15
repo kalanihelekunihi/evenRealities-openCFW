@@ -1,0 +1,26 @@
+{
+  "status": "PASS_AMBIQ_GPU_POSITION_NATIVE",
+  "cases": 198,
+  "source_sha256": {
+    "position.c": "3133caf4b0cb71b5fa2cf4f5326bd40f63ce9e526ed7a97c2e8cd31aebffe6a6",
+    "nema_select.c": "4a8b9fdb08e98246f3d6b278aaf911cb5f287ee03d28475b05b22a73cb268d34"
+  },
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "native_bodies": {
+    "display_driver_gpu_position_4b1b48": {
+      "start": "0x4b1b48",
+      "end_inclusive": "0x4b1b83",
+      "sha256": "f44d693135d0c61d7ab77c74dc50a1aeb918fdfb52c3b0e9b1b825779d036287"
+    },
+    "display_driver_nema_select_522a16": {
+      "start": "0x522a16",
+      "end_inclusive": "0x522a1f",
+      "sha256": "1fa2df446335cccdbc67f68d7b33ca7095bf3226532b07fbba739948114a44eb"
+    }
+  },
+  "limits": [
+    "Float translation, rectangle, and Nema register children are entry-cut",
+    "Synthetic unit dimensions and integer coordinates cover conversion boundaries",
+    "Product-state initialization, final placement, and hardware GPU behavior remain unqualified"
+  ]
+}

@@ -1,5 +1,23 @@
 # R1 private event-bus correlation
 
+## Native source reconstruction update
+
+The actual consumer dispatcher now compiles in `native_event_dispatch.c`. It
+passes 196,608 exhaustive-ID/length-class cases and 468 boundaries. Only low
+halfwords of ID and length are used; callbacks receive the payload word. The
+three table roots are authenticated, but complete initial callback configuration
+and actual handler bodies remain gates. Lookups span beyond known prefixes; no
+unsupported array extent or bounds guard is introduced.
+
+The native campaign now compiles the original publisher and queue adapter in
+`r1/components/board/native_events.c`. Its 25,349 publisher comparisons and 48
+adapter comparisons use actual source memory operations and intercept heap,
+CMSIS queue/flags and logging providers. The leading record word remains
+uninitialized and excluded from byte comparison. The portable module and SDK
+application below retain their separate 12-byte representation and local bounds;
+those are not native record-layout or whole-image source evidence. See
+`r1/research/source-build/native-events/verification.json` for current limits.
+
 ## Decision
 
 The R1 private event bus is R1 product code with no attributable third-party provider: the
@@ -57,9 +75,10 @@ initialization keep their separately admitted typed boundaries.
   (storage; the third compare accepts any id below `0x3000`). Id zero and ids at or above
   `0x3000` match no window and are dropped with return 0. Each window selects its own queue;
   a NULL queue handle also returns 0.
-- **Payloads and queue handoff.** The publisher builds a 12-byte record `{UInt32 event id,
-  UInt32 payload length, 4-byte inline payload or heap pointer}`. Payloads up to 4 bytes are
-  copied inline; larger payloads take a bounded heap copy that is freed when the queue send
+- **Payloads and queue handoff.** The native publisher passes a 16-byte record `{uninitialized UInt32, UInt32 event id,
+  UInt32 payload length, 4-byte inline payload or heap pointer}`. The leading word is not
+  initialized by this function; its downstream meaning remains an evidence gate. Payloads up to 4 bytes are
+  copied inline; larger payloads request an unbounded length-sized heap copy that is freed when the queue send
   fails. Publish returns 1 on handoff, 0 otherwise; several pinned callers ignore the result.
   Observed pinned payloads range from 0 to 65 bytes (event `0x2004`), and the multicast
   republish wrapper adds an 8-byte header, so no pinned flow exceeds 73 bytes.

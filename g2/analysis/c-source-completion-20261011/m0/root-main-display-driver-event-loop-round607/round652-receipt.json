@@ -1,0 +1,32 @@
+{
+  "round": 652,
+  "component": "Apollo uLED MSPI status helpers 0x4c2392 and 0x4c23de",
+  "status": "Two C bodies compile and pass 90 native/C MMIO cases; combined vendor candidate has one missing lower helper; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "3533d48dbabed1a6da5c140273d57d1f5741f67077203dc82fe1c7b4be22899c",
+  "verifier_sha256": "ae7836d9daf3e52bdea0dd0e5179996787676dcb184fdc221bfe9a96f26f2d27",
+  "builder_sha256": "36db796683ad0c93663ab6b5b2885228c6cb5f5d3ea6af5d5c29fd78cc118d00",
+  "link_audit_sha256": "3d281f0dca1a5087eb54852ec52b642e842ae3b1a38536f9739e3493f245585a",
+  "object_sha256": "cbfb77bacab20c3fc7d8101a6d5ade3ffa3cd52bddc9382a299405a584d6f1c0",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_MSPI_STATUS_NATIVE 90",
+    "PASS_ULED_VENDOR_CANDIDATE_LINK 6 0 1",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "unresolved": [
+    "display_driver_uled_mspi_child_4c240e"
+  ],
+  "gates": [
+    "MSPI destroy helper 0x4c240e unresolved",
+    "Other 27 uLED vendor option callbacks lack C bodies",
+    "Option records still hold native absolute callback addresses; symbolic relocation pending",
+    "Vendor handle cell placement and uLED workspace extent open",
+    "Apollo selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "whole_images_complete": 0,
+  "estimated_uled_vendor_remaining": "85-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

@@ -1,0 +1,25 @@
+--- a/gh3x2x/algo_lib/algo_params/SPO2/goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c
++++ b/gh3x2x/algo_lib/algo_params/SPO2/goodix_spo2_config_for_gh3x2x-v2.23_7ecd2a.c
+@@ -9,9 +9,9 @@
+ 	//校准参数
+ 	.cali_coef_a4 = 0,			//校准参数4次项
+ 	.cali_coef_a3 = 0,			//校准参数3次项
+-	.cali_coef_a2 = -124026,		    //校准参数2次项
+-	.cali_coef_a1 = -59505,    //校准参数1次项
+-	.cali_coef_a0 = 1043941,	//校准参数常数项
++	.cali_coef_a2 = -156022,		    //校准参数2次项
++	.cali_coef_a1 = -42041,    //校准参数1次项
++	.cali_coef_a0 = 1066184,	//校准参数常数项
+ 	//hb使能标志
+ 	.hb_en_flg = 1,			    //hb使能标志
+ 	//佩戴状态
+@@ -59,3 +59,9 @@
+ 	ver[copy_num - 1] = '\0'; //如果NET_VERSION的长度大于size，需要添加结束符
+ }
+ #endif
++
++#include <stddef.h>
++_Static_assert(sizeof(goodix_spo2_config)==76,"stock SpO2 config size");
++_Static_assert(offsetof(goodix_spo2_config,cali_coef_a2)==16,"stock cali_coef_a2 offset");
++_Static_assert(offsetof(goodix_spo2_config,cali_coef_a1)==20,"stock cali_coef_a1 offset");
++_Static_assert(offsetof(goodix_spo2_config,cali_coef_a0)==24,"stock cali_coef_a0 offset");

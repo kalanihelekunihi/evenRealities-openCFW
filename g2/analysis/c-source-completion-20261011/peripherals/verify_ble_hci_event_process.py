@@ -7,7 +7,7 @@ from unicorn.arm_const import *
 ROOT=Path(__file__).resolve().parents[3]
 BLOB=(ROOT/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 SRC=ROOT/'components/audio/uart_thread_source_candidate/display_ble_hci_event_process.c'
-NATIVE={'audio_ble_hci_event_cmd_status':0x56b150,'audio_ble_hci_event_cmd_complete':0x56b182,'audio_ble_hci_num_complete_packets':0x530c08,'audio_ble_hci_conn_open':0x52a758,'audio_ble_hci_le_adv_report':0x56a398,'audio_ble_hci_cis_by_handle':0x52adec,'audio_wsf_buffer_alloc':0x530446,'g2_wsf_candidate_buffer_free_word':0x5304d4,'audio_ble_hci_conn_close':0x52a762,'audio_ble_hci_cis_close':0x52ae2e,'audio_ble_hci_vendor_log_enabled_4c9c50':0x4c9c50,'audio_ble_hci_vendor_compare_44b610':0x44b610,'audio_log_flags':0x43d0ce,'audio_ble_hci_vendor_log_43d574':0x43d574,'audio_ble_hci_wsf_trace':0x52a63c}
+NATIVE={'audio_ble_hci_event_cmd_status':0x56b150,'audio_ble_hci_event_cmd_complete':0x56b182,'audio_ble_hci_num_complete_packets':0x530c08,'audio_ble_hci_conn_open':0x52a758,'audio_ble_hci_le_adv_report':0x56a398,'audio_ble_hci_cis_by_handle':0x52adec,'audio_wsf_buffer_alloc':0x530446,'g2_wsf_candidate_buffer_free_word':0x5304d4,'audio_ble_hci_conn_close':0x52a762,'audio_ble_hci_cis_close':0x52ae2e,'audio_ble_hci_vendor_log_enabled_4c9c50':0x4c9c50,'audio_ble_hci_vendor_compare_44b610':0x44b610,'audio_log_flags':0x43d0ce,'audio_log_extended':0x43d574,'audio_ble_hci_wsf_trace':0x52a63c}
 OTHER='audio_ble_hci_cis_open audio_ble_hci_le_direct_adv_report audio_ble_hci_le_ext_adv_report audio_ble_hci_le_per_adv_report audio_ble_hci_le_conless_iq_report audio_ble_hci_le_conn_iq_report'.split()
 DATA='audio_ble_hci_vendor_tag_78d6f4 audio_ble_hci_vendor_tag2_78d6fc audio_ble_hci_vendor_ere audio_ble_hci_vendor_app audio_ble_hci_vendor_hci audio_ble_hci_vendor_message_77f720 audio_ble_hci_vendor_file_77f70c audio_ble_hci_vendor_file_6e0518'.split()
 SHIM='''#include <stdint.h>
@@ -48,7 +48,12 @@ with tempfile.TemporaryDirectory() as td:
      calls.append('callback' if a==0x100700 else 'decoder')
      uc.reg_write(UC_ARM_REG_PC,uc.reg_read(UC_ARM_REG_LR));return
     if a not in cuts:return
-    name=cuts[a];calls.append(name)
+    name=cuts[a]
+    if name=='audio_log_extended':
+     line,fmt=struct.unpack('<II',u.mem_read(u.reg_read(UC_ARM_REG_SP),8))
+     expected=syms['audio_ble_hci_vendor_message_77f720'] if is_c else 0x77f720
+     calls.append((name,u.reg_read(UC_ARM_REG_R0),line,fmt==expected))
+    else:calls.append(name)
     val=0x20006000 if name=='audio_wsf_buffer_alloc' else 0
     if label=='vendor_log' and name=='audio_ble_hci_vendor_log_enabled_4c9c50':val=1
     if label=='vendor_log' and name=='audio_log_flags':val=2

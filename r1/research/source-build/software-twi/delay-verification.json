@@ -1,0 +1,26 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "gpio_report_sha256": "9f0b6245d230e92d3698b52e5d1a4e441395759b59d4a7d5776a8adec367123e",
+  "object_sha256": "ee6283d370a80504682cafa0987785e0c1eae1972ee4d48dee37012e2f4666c2",
+  "comparisons": 32,
+  "comparisons_by_entry": {
+    "0x7a6dc": 12,
+    "0x7a6ec": 12,
+    "0x7081c": 4,
+    "0x54af0": 4
+  },
+  "entry_symbols": {
+    "0x7a6dc": "r1_twi_delay_busy",
+    "0x7a6ec": "r1_twi_delay_busy",
+    "0x7081c": "r1_twi_delay_noop",
+    "0x54af0": "r1_twi_delay_noop"
+  },
+  "scope": "Two busy-delay wrappers preserve every subtract-three counter result and unsigned termination; two no-op callbacks do no work; includes shift-overflow cases",
+  "limitations": [
+    "Volatile C loop introduces stack accesses and does not establish instruction or cycle identity.",
+    "Physical elapsed time and interrupt effects remain unverified.",
+    "Large effective nonzero delays beyond tested work counts are not executed."
+  ],
+  "cycle_identity_proven": false,
+  "instruction_identity_proven": false
+}

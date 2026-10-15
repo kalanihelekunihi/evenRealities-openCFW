@@ -4,7 +4,7 @@
 
 extern uint8_t audio_ble_stack_state_20072cb8[];
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
-extern void WStrReverse(uint8_t *,uint16_t);
+extern void WStrReverse(uint8_t *,uint8_t);
 extern void WsfMsgFree(void *);
 extern void WsfCsEnter(void);
 extern void WsfCsExit(void);

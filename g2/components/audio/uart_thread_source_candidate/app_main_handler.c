@@ -6,8 +6,8 @@ extern int32_t audio_l2c_strncmp(const char *,const char *,uint32_t);
 extern uint32_t audio_log_level(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,uint32_t,const char *,...);
 extern void audio_ble_wsf_trace(const char *,const char *,...);
-extern void (*audio_ble_subsystem_primary_callback_slot)(void *); /* live 0x200740fc */
-extern void (*audio_ble_subsystem_callback_slot)(void *); /* live 0x20074100 */
+extern uint32_t (*audio_ble_subsystem_primary_callback_slot)(const uint8_t *); /* live 0x200740fc */
+extern uint32_t (*audio_ble_subsystem_callback_slot)(const uint8_t *); /* live 0x20074100 */
 extern uintptr_t audio_ble_ui_callback_cells[]; /* live 0x20073f60, reset callback at +8 */
 extern void DmReadRemoteFeatures(uint8_t); /* native 0x4b6cb0 */
 static const char info[]="INFO",warn[]="WARN",err[]="ERR",hci[]="HCI",module[]="APP";
@@ -59,8 +59,8 @@ uint32_t audio_ble_app_handler_4bae84(uint32_t events,const uint8_t *event){
             events=0xdbu;
             audio_log_extended(level,module,path,function_name,0xdbu,message,event[2]);
         }
-        if(event[2]>=0x20u)audio_ble_subsystem_callback_slot((void *)event);
-        else if(event[2]>=0x10u)audio_ble_subsystem_primary_callback_slot((void *)event);
+        if(event[2]>=0x20u)(void)audio_ble_subsystem_callback_slot(event);
+        else if(event[2]>=0x10u)(void)audio_ble_subsystem_primary_callback_slot(event);
         else (void)audio_ble_app_link_event_4bacc8(event);
     }
     return events;

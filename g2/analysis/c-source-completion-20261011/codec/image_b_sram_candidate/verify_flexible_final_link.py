@@ -257,6 +257,8 @@ def main() -> None:
         "result": "PASS_LAYOUT_ONLY",
         "source_complete": False,
         "bootable": False,
+        "sample_app_experiment": selected.get("sample_app_experiment", False),
+        "sample_app_callbacks_qualified": selected.get("sample_app_callbacks_qualified", False),
         "selected_receipt_sha256": sha(args.selected_receipt),
         "partial_receipt_sha256": sha(args.partial_receipt),
         "linker_script_sha256": sha(script),

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compare Apollo NEMA mode calls and generated instruction words."""
 from pathlib import Path
-import json,subprocess,tempfile
+import json,random,subprocess,tempfile
 from elftools.elf.elffile import ELFFile
 from unicorn import Uc,UC_ARCH_ARM,UC_MODE_THUMB,UC_MODE_MCLASS,UC_HOOK_CODE
 from unicorn.arm_const import (UC_ARM_REG_LR,UC_ARM_REG_PC,UC_ARM_REG_R0,
@@ -46,6 +46,14 @@ with tempfile.TemporaryDirectory() as directory:
    for flag in (0,1<<20,1<<21,1<<22,1<<23,1<<25,
                 1<<26,1<<27,1<<28,1<<29,1<<30,1<<31):
     cases.append((flag|(high<<8)|low,0,0xffffffff,0xffffffff,0,0,0))
+ rng=random.Random(0x513924)
+ for _ in range(512):
+  mode=(rng.getrandbits(12)<<20)|(rng.randrange(16)<<8)|rng.randrange(16)
+  target=rng.randrange(5)
+  surface=rng.choice((0xffffffff,0,1,2,3,4))
+  alternate=rng.choice((0xffffffff,0,1,2,3,4))
+  cases.append((mode,target,surface,alternate,rng.randrange(2),
+                rng.randrange(2),rng.randrange(2)))
  failures=[]
  for mode,target,surface,alternate,boot_flag,override,context_bit in cases:
   observations=[]

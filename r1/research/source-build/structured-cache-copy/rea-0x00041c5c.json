@@ -1,0 +1,69 @@
+{
+  "evidence_id": "ev_f4aa943a065441c8a1eba1f850332d4553f189610a6060b0e7b536b04ec74c9a",
+  "subject": {
+    "name": "stock-analysis-exec.elf",
+    "digest": {
+      "sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8"
+    },
+    "format": "elf",
+    "architecture": "arm",
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf"
+  },
+  "provider": {
+    "id": "ghidra",
+    "name": "Ghidra",
+    "version": "12.1.4"
+  },
+  "analysis_profile": {
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "parameters": {
+      "target_kind": "executable",
+      "target_format": "elf",
+      "architecture": "arm",
+      "available_architectures": [
+        "arm"
+      ],
+      "import_mode": "ephemeral-source-immutable",
+      "annotation_policy": "atomic-function-entry-metadata-v1",
+      "load_image_observations": "source-mappings-entry-context-v2",
+      "function_body_evidence": "complete-inclusive-ranges-v1",
+      "function_references": "complete-body-and-entry-reference-manager-v2",
+      "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+      "instruction_flow_evidence": "decoded-return-pcode-v1",
+      "process_launch": "inspected-jvm-launch-support-v1",
+      "jump_table_evidence": "typed-case-default-blocks-v1",
+      "decompiler_jump_loads": true,
+      "loader": "auto-from-header",
+      "language_id": "auto-from-header",
+      "compiler_spec_id": "auto-default",
+      "analyzer_preset": "ghidra-default"
+    },
+    "digest": "d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26"
+  },
+  "predicate_type": "rea.analysis",
+  "operation": "procedure_pseudo_code",
+  "parameters": {
+    "procedure": "0x00041c5c",
+    "document": "target-92c47a5cca2d.elf"
+  },
+  "raw_result": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined4 FUN_00041c5c(int param_1,int param_2,uint param_3)\n\n{\n  bool bVar1;\n  int iVar2;\n  uint uVar3;\n  uint uVar4;\n  int iVar5;\n  uint uVar6;\n  uint unaff_r8;\n  \n  uVar4 = _DAT_200068fc;\n  uVar6 = _DAT_200068f8;\n  iVar2 = _DAT_200068f4;\n  if ((_DAT_200068fc <= _DAT_200068f8) && (_DAT_20006900 <= _DAT_200068f8)) {\n    if (_DAT_20006900 < _DAT_200068fc) {\n      uVar3 = _DAT_200068f8 - (_DAT_200068fc - _DAT_20006900);\n    }\n    else {\n      uVar3 = _DAT_20006900 - _DAT_200068fc;\n    }\n    if (param_3 <= uVar3) {\n      uVar3 = 0;\n      bVar1 = (bool)isCurrentModePrivileged();\n      if (bVar1) {\n        uVar3 = getCurrentExceptionNumber();\n        uVar3 = uVar3 & 0x1ff;\n      }\n      if (uVar3 == 0) {\n        FUN_00095cf4();\n      }\n      else {\n        unaff_r8 = 0;\n        bVar1 = (bool)isCurrentModePrivileged();\n        if (bVar1) {\n          unaff_r8 = getBasePriority();\n        }\n        bVar1 = (bool)isCurrentModePrivileged();\n        if (bVar1) {\n          setBasePriority(0x40);\n        }\n      }\n      uVar6 = uVar6 - uVar4;\n      iVar5 = iVar2 + uVar4;\n      uVar3 = param_3;\n      if (uVar6 < param_3) {\n        FUN_0002775c(param_2,iVar5,uVar6);\n        param_2 = param_2 + uVar6;\n        iVar5 = iVar2;\n        uVar3 = param_3 - uVar6;\n      }\n      FUN_0002775c(param_2,iVar5,uVar3);\n      if (param_1 == 0) {\n        if (uVar6 <= param_3) {\n          uVar4 = -uVar6;\n        }\n        _DAT_200068fc = param_3 + uVar4;\n      }\n      uVar4 = 0;\n      bVar1 = (bool)isCurrentModePrivileged();\n      if (bVar1) {\n        uVar4 = getCurrentExceptionNumber();\n        uVar4 = uVar4 & 0x1ff;\n      }\n      if (uVar4 == 0) {\n        FUN_00095d24();\n      }\n      else {\n        bVar1 = (bool)isCurrentModePrivileged();\n        if (bVar1) {\n          setBasePriority(unaff_r8 & 0xff);\n        }\n      }\n      return 1;\n    }\n  }\n  return 0;\n}\n\n",
+  "normalized_result": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nundefined4 FUN_00041c5c(int param_1,int param_2,uint param_3)\n\n{\n  bool bVar1;\n  int iVar2;\n  uint uVar3;\n  uint uVar4;\n  int iVar5;\n  uint uVar6;\n  uint unaff_r8;\n  \n  uVar4 = _DAT_200068fc;\n  uVar6 = _DAT_200068f8;\n  iVar2 = _DAT_200068f4;\n  if ((_DAT_200068fc <= _DAT_200068f8) && (_DAT_20006900 <= _DAT_200068f8)) {\n    if (_DAT_20006900 < _DAT_200068fc) {\n      uVar3 = _DAT_200068f8 - (_DAT_200068fc - _DAT_20006900);\n    }\n    else {\n      uVar3 = _DAT_20006900 - _DAT_200068fc;\n    }\n    if (param_3 <= uVar3) {\n      uVar3 = 0;\n      bVar1 = (bool)isCurrentModePrivileged();\n      if (bVar1) {\n        uVar3 = getCurrentExceptionNumber();\n        uVar3 = uVar3 & 0x1ff;\n      }\n      if (uVar3 == 0) {\n        FUN_00095cf4();\n      }\n      else {\n        unaff_r8 = 0;\n        bVar1 = (bool)isCurrentModePrivileged();\n        if (bVar1) {\n          unaff_r8 = getBasePriority();\n        }\n        bVar1 = (bool)isCurrentModePrivileged();\n        if (bVar1) {\n          setBasePriority(0x40);\n        }\n      }\n      uVar6 = uVar6 - uVar4;\n      iVar5 = iVar2 + uVar4;\n      uVar3 = param_3;\n      if (uVar6 < param_3) {\n        FUN_0002775c(param_2,iVar5,uVar6);\n        param_2 = param_2 + uVar6;\n        iVar5 = iVar2;\n        uVar3 = param_3 - uVar6;\n      }\n      FUN_0002775c(param_2,iVar5,uVar3);\n      if (param_1 == 0) {\n        if (uVar6 <= param_3) {\n          uVar4 = -uVar6;\n        }\n        _DAT_200068fc = param_3 + uVar4;\n      }\n      uVar4 = 0;\n      bVar1 = (bool)isCurrentModePrivileged();\n      if (bVar1) {\n        uVar4 = getCurrentExceptionNumber();\n        uVar4 = uVar4 & 0x1ff;\n      }\n      if (uVar4 == 0) {\n        FUN_00095d24();\n      }\n      else {\n        bVar1 = (bool)isCurrentModePrivileged();\n        if (bVar1) {\n          setBasePriority(unaff_r8 & 0xff);\n        }\n      }\n      return 1;\n    }\n  }\n  return 0;\n}\n\n",
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Pseudocode is Ghidra decompiler output, not original source and not text-equivalent to Hopper output.",
+    "External functions and functions without an analyzable body return null; other decompiler failures remain explicit.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "locations": [],
+  "evidence_links": []
+}

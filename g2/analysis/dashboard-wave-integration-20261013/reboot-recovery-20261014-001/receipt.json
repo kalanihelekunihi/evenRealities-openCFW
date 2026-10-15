@@ -1,0 +1,61 @@
+{
+  "status": "LOCAL_RECOVERY_OWNER_CONTINUATION_SENT_AND_ROUND788_HASH_CHECKED",
+  "utc": "2026-10-14T15:20:25.877554+00:00",
+  "producer": "01a1274a-b92b-7aa1-8cbb-186993f21387",
+  "producer_read_route": "local read succeeded; prior unsupported region14 not reproduced",
+  "owner_status_before": "notLoaded; last two turns interrupted",
+  "case_owner_status": "idle; latest completed069; no restart sent",
+  "continuation_send": "tool success returned exact producer thread ID; new producer recovery relay788 received",
+  "cwd_warning": "producer listing SybilSight; recovery prompt specifies OpenCFW explicitly",
+  "round788_receipt_sha256": "3fbf6f3a70d672fb80541a97808f2efbf1c7b2ab36ef84eb0951e1c161acfa17",
+  "round788_artifacts": [
+    {
+      "role": "source",
+      "path": "g2/components/main/ambiq_buffer_handlers_candidate_20261014/matrix_upload.c",
+      "expected": "1bde2d3c2b037b74b1880bb9bd482d1154409d95e66d6b9f178ac9e0a1972ab2",
+      "observed": "1bde2d3c2b037b74b1880bb9bd482d1154409d95e66d6b9f178ac9e0a1972ab2",
+      "matches": true
+    },
+    {
+      "role": "native_verifier",
+      "path": "g2/analysis/c-source-completion-20261011/peripherals/verify_nema_matrix_upload_native_20261014.py",
+      "expected": "ac5eabd34a2c01eb15d98f985c7573ffa061696c3cf17d460e83978021cc2d43",
+      "observed": "ac5eabd34a2c01eb15d98f985c7573ffa061696c3cf17d460e83978021cc2d43",
+      "matches": true
+    },
+    {
+      "role": "integration_builder",
+      "path": "g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-event-loop-round607/integrate_uled_option_fifteen_matrix_upload_candidate.py",
+      "expected": "9b731c67d4b68a8b1d7f2d8977748c68721daf26963406f8f97cbcf5e101bd1d",
+      "observed": "9b731c67d4b68a8b1d7f2d8977748c68721daf26963406f8f97cbcf5e101bd1d",
+      "matches": true
+    },
+    {
+      "role": "integrated_object",
+      "path": "g2/build/c-firmware/root-main-uled-option-fifteen-matrix-upload-integration-round788/candidate.o",
+      "expected": "525eb3fa048012f0ff8adfb013f512651ef22d6d1eba2cb3678ebf7578e4fcfe",
+      "observed": "525eb3fa048012f0ff8adfb013f512651ef22d6d1eba2cb3678ebf7578e4fcfe",
+      "matches": true
+    },
+    {
+      "role": "link_audit",
+      "path": "g2/build/c-firmware/root-main-uled-option-fifteen-matrix-upload-integration-round788/link-audit.json",
+      "expected": "23e3a453a59e9e990320316269ea362c8ea6a298d647087d4435b55651bde231",
+      "observed": "23e3a453a59e9e990320316269ea362c8ea6a298d647087d4435b55651bde231",
+      "matches": true
+    }
+  ],
+  "round788_raw_json_note": "ordinary JSON",
+  "bounded_cases_producer_reported": 142,
+  "candidate_unresolved": 619,
+  "admission": "local hash recovery only; no tests rerun, no source/map/formal/image acceptance",
+  "verified_baseline": "export651 stable267 / Page218 preserved",
+  "index_sha256_observed": "5ecf6a74e42f8315e797d21d61951b5240d3b07e5637951d9d07dbbe367e4c8c",
+  "dirty_status_sha256": "0788e898034f7cd37e58efa0d09f58c59a69916709883da8556e1c794d86c434",
+  "gitlinks_sha256": "22d91c33c068698885799a069d7b453a95cb2b9250ede423c062e842386ef004",
+  "limitations": [
+    "ps process listing denied by sandbox; no process clearance claimed",
+    "git submodule status fails missing .gitmodules mapping for g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/arm-gnu14-release-metadata; registered gitlinks recorded read-only"
+  ],
+  "mutations": "analysis-only receipt/snapshots and authorized existing-owner continuation; no firmware/index/pin/commit/push/device changes"
+}

@@ -5,10 +5,10 @@ extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
                                uint32_t,const char *,...);
 extern uint32_t compressed_log_output(uint32_t,const char *,const char *,...);
 extern void audio_uart_frame_respond(void *,void *); /* native 0x49225a */
-extern void audio_uart_slave_display_start(uint32_t,const void *,uint16_t); /* 0x4441ec */
-extern void audio_uart_slave_display_refresh(uint32_t,const void *,uint16_t); /* 0x4442d0 */
-extern void audio_uart_slave_display_stop(uint32_t,const void *,uint16_t); /* 0x4443cc */
-extern void audio_uart_slave_display_control(const void *,uint16_t); /* 0x4444b8 */
+extern int32_t audio_uart_slave_display_start(uint32_t,const void *,uint32_t); /* 0x4441ec */
+extern int32_t audio_uart_slave_display_refresh(uint32_t,const void *,uint32_t); /* 0x4442d0 */
+extern int32_t audio_uart_slave_display_stop(uint32_t,const void *,uint32_t); /* 0x4443cc */
+extern int32_t audio_uart_slave_display_control(const void *,uint32_t); /* 0x4444b8 */
 static const char module[]="sync.module.framework";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\framework\\sync\\sync_framework.c";
 static const char fn[]="SlaveDispalyCommandReplyListener";

@@ -1,0 +1,70 @@
+{
+  "evidence_id": "ev_ec8adb1bdf10d306ce9c9b800b22b72126c55c13e0b34411d6adc9ef3e50c835",
+  "subject": {
+    "name": "stock-analysis-exec.elf",
+    "digest": {
+      "sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8"
+    },
+    "format": "elf",
+    "architecture": "arm",
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf"
+  },
+  "provider": {
+    "id": "ghidra",
+    "name": "Ghidra",
+    "version": "12.1.4"
+  },
+  "analysis_profile": {
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "parameters": {
+      "target_kind": "executable",
+      "target_format": "elf",
+      "architecture": "arm",
+      "available_architectures": [
+        "arm"
+      ],
+      "import_mode": "ephemeral-source-immutable",
+      "annotation_policy": "atomic-function-entry-metadata-v1",
+      "load_image_observations": "source-mappings-entry-context-v2",
+      "function_body_evidence": "complete-inclusive-ranges-v1",
+      "function_references": "complete-body-and-entry-reference-manager-v2",
+      "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+      "instruction_flow_evidence": "decoded-return-pcode-v1",
+      "process_launch": "inspected-jvm-launch-support-v1",
+      "jump_table_evidence": "typed-case-default-blocks-v1",
+      "decompiler_jump_loads": true,
+      "loader": "auto-from-header",
+      "language_id": "auto-from-header",
+      "compiler_spec_id": "auto-default",
+      "analyzer_preset": "ghidra-default"
+    },
+    "digest": "d6dcc035b9648ba2aa59ab7f114beeb9f76c9c94e5566de048b8c0495492de26"
+  },
+  "predicate_type": "rea.analysis",
+  "operation": "procedure_pseudo_code",
+  "parameters": {
+    "procedure": "0x00041e80",
+    "document": "target-92c47a5cca2d.elf"
+  },
+  "raw_result": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_00041e80(int param_1,uint param_2)\n\n{\n  uint uVar1;\n  int iVar2;\n  uint uVar3;\n  int iVar4;\n  undefined4 uVar5;\n  uint uVar6;\n  uint uVar7;\n  uint uVar8;\n  \n  uVar1 = _DAT_20006900;\n  uVar3 = _DAT_200068f8;\n  iVar2 = _DAT_200068f4;\n  if ((_DAT_200068fc <= _DAT_200068f8) && (_DAT_20006900 <= _DAT_200068f8)) {\n    if (_DAT_20006900 < _DAT_200068fc) {\n      iVar4 = _DAT_200068fc - _DAT_20006900;\n    }\n    else {\n      iVar4 = _DAT_200068f8 - (_DAT_20006900 - _DAT_200068fc);\n    }\n    uVar8 = iVar4 - 1;\n    if (param_2 < uVar8) {\n      uVar7 = _DAT_200068f8 - _DAT_20006900;\n      iVar4 = _DAT_200068f4 + _DAT_20006900;\n      uVar6 = param_2;\n      if (uVar7 < param_2) {\n        FUN_0002775c(iVar4,param_1,uVar7);\n        param_1 = param_1 + uVar7;\n        iVar4 = iVar2;\n        uVar6 = param_2 - uVar7;\n      }\n      FUN_0002775c(iVar4,param_1,uVar6);\n      if (uVar7 <= param_2) {\n        uVar1 = -uVar7;\n      }\n      _DAT_20006900 = param_2 + uVar1;\n      if ((int)((uint)DAT_200068ec << 0x1d) < 0) {\n        if (0xeb < uVar3 - uVar8) goto LAB_00041f02;\n      }\n      else if (((DAT_200068ec & 1) != 0) && (0xfff < uVar3 - uVar8)) goto LAB_00041f32;\n    }\n    else {\n      if ((int)((uint)DAT_200068ec << 0x1d) < 0) {\nLAB_00041f02:\n        FUN_00041c5c(0,0x20018bc8,0xec);\n        uVar5 = FUN_0004cb28();\n        FUN_00034070(uVar5,0x20018bc8,0xec);\n        return;\n      }\n      if ((DAT_200068ec & 1) != 0) {\nLAB_00041f32:\n        FUN_0008d8fc(0x2003,0);\n        return;\n      }\n    }\n  }\n  return;\n}\n\n",
+  "normalized_result": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_00041e80(int param_1,uint param_2)\n\n{\n  uint uVar1;\n  int iVar2;\n  uint uVar3;\n  int iVar4;\n  undefined4 uVar5;\n  uint uVar6;\n  uint uVar7;\n  uint uVar8;\n  \n  uVar1 = _DAT_20006900;\n  uVar3 = _DAT_200068f8;\n  iVar2 = _DAT_200068f4;\n  if ((_DAT_200068fc <= _DAT_200068f8) && (_DAT_20006900 <= _DAT_200068f8)) {\n    if (_DAT_20006900 < _DAT_200068fc) {\n      iVar4 = _DAT_200068fc - _DAT_20006900;\n    }\n    else {\n      iVar4 = _DAT_200068f8 - (_DAT_20006900 - _DAT_200068fc);\n    }\n    uVar8 = iVar4 - 1;\n    if (param_2 < uVar8) {\n      uVar7 = _DAT_200068f8 - _DAT_20006900;\n      iVar4 = _DAT_200068f4 + _DAT_20006900;\n      uVar6 = param_2;\n      if (uVar7 < param_2) {\n        FUN_0002775c(iVar4,param_1,uVar7);\n        param_1 = param_1 + uVar7;\n        iVar4 = iVar2;\n        uVar6 = param_2 - uVar7;\n      }\n      FUN_0002775c(iVar4,param_1,uVar6);\n      if (uVar7 <= param_2) {\n        uVar1 = -uVar7;\n      }\n      _DAT_20006900 = param_2 + uVar1;\n      if ((int)((uint)DAT_200068ec << 0x1d) < 0) {\n        if (0xeb < uVar3 - uVar8) goto LAB_00041f02;\n      }\n      else if (((DAT_200068ec & 1) != 0) && (0xfff < uVar3 - uVar8)) goto LAB_00041f32;\n    }\n    else {\n      if ((int)((uint)DAT_200068ec << 0x1d) < 0) {\nLAB_00041f02:\n        FUN_00041c5c(0,0x20018bc8,0xec);\n        uVar5 = FUN_0004cb28();\n        FUN_00034070(uVar5,0x20018bc8,0xec);\n        return;\n      }\n      if ((DAT_200068ec & 1) != 0) {\nLAB_00041f32:\n        FUN_0008d8fc(0x2003,0);\n        return;\n      }\n    }\n  }\n  return;\n}\n\n",
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Pseudocode is Ghidra decompiler output, not original source and not text-equivalent to Hopper output.",
+    "External functions and functions without an analyzable body return null; other decompiler failures remain explicit.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state.",
+    "Loaded from a local REA analysis snapshot; this call did not re-run the provider."
+  ],
+  "locations": [],
+  "evidence_links": []
+}

@@ -18,24 +18,26 @@ extern volatile uint32_t audio_uart_user_registry_count; /* *DAT_00442cd4 */
 extern uint8_t audio_uart_user_registry_rows[]; /* RAM0x20066230, DAT_00442cd8 */
 extern const char audio_uart_user_module[],audio_uart_user_source[],
                   audio_uart_user_function[];
+extern const char audio_uart_user_missing_module[],audio_uart_user_missing_source[],
+                  audio_uart_user_missing_function[],audio_uart_user_dispatch_function[];
 extern const char audio_uart_user_e_alloc[],audio_uart_user_c_alloc[];
 extern const char audio_uart_user_e_enqueue[],audio_uart_user_c_enqueue[];
 extern const char audio_uart_user_e_null[],audio_uart_user_c_null[];
 extern const char audio_uart_user_e_missing[],audio_uart_user_c_missing[];
 
 static void log0(uint8_t level,uint32_t line,uint32_t compact,
+                 const char *module,const char *source,const char *function,
                  const char *extended,const char *short_text) {
     if(audio_log_flags()&2u)
-        audio_log_extended(level,audio_uart_user_module,audio_uart_user_source,
-                           audio_uart_user_function,line,extended);
+        audio_log_extended(level,module,source,function,line,extended);
     if((audio_log_flags()&1u)||(audio_log_flags()&4u))
         (void)compressed_log_output(compact,short_text,short_text);
 }
 static void log1(uint8_t level,uint32_t line,uint32_t compact,
+                 const char *module,const char *source,const char *function,
                  const char *extended,const char *short_text,uint32_t word) {
     if(audio_log_flags()&2u)
-        audio_log_extended(level,audio_uart_user_module,audio_uart_user_source,
-                           audio_uart_user_function,line,extended,word);
+        audio_log_extended(level,module,source,function,line,extended,word);
     if((audio_log_flags()&1u)||(audio_log_flags()&4u))
         (void)compressed_log_output(compact,short_text,short_text,word);
 }
@@ -53,14 +55,18 @@ void audio_uart_user_broadcast(uint32_t id,const void *payload,
             }
         }
     }
-    log1(2u,0x97u,0x8400000u,audio_uart_user_e_missing,
+    log1(2u,0x97u,0x8400000u,audio_uart_user_missing_module,
+         audio_uart_user_missing_source,audio_uart_user_missing_function,
+         audio_uart_user_e_missing,
          audio_uart_user_c_missing,id);
 }
 
 void audio_uart_user_dispatch(uint32_t id,void *payload,uint32_t length,
                                uint32_t flags) {
     if(payload==0) {
-        log0(2u,0xa7u,0x8000000u,audio_uart_user_e_null,
+        log0(2u,0xa7u,0x8000000u,audio_uart_user_module,
+             audio_uart_user_source,audio_uart_user_dispatch_function,
+             audio_uart_user_e_null,
              audio_uart_user_c_null);
         return;
     }
@@ -72,7 +78,9 @@ uint32_t audio_uart_user_response(uint32_t id,const void *bytes,
                                    uint32_t length,uint32_t flags) {
     void *owned=codec_allocate(length);
     if(owned==0) {
-        log1(2u,0xb1u,0x8400000u,audio_uart_user_e_alloc,
+        log1(2u,0xb1u,0x8400000u,audio_uart_user_module,
+             audio_uart_user_source,audio_uart_user_function,
+             audio_uart_user_e_alloc,
              audio_uart_user_c_alloc,length);
         return UINT32_MAX;
     }
@@ -80,7 +88,9 @@ uint32_t audio_uart_user_response(uint32_t id,const void *bytes,
     if(audio_uart_timeout_submit(audio_uart_user_dispatch,id,owned,length,
                                   flags&0xffffu)==0u)
         return 0u;
-    log0(2u,0xb7u,0x8000000u,audio_uart_user_e_enqueue,
+    log0(2u,0xb7u,0x8000000u,audio_uart_user_module,
+         audio_uart_user_source,audio_uart_user_function,
+         audio_uart_user_e_enqueue,
          audio_uart_user_c_enqueue);
     audio_file_heap_free(owned);
     return UINT32_MAX;

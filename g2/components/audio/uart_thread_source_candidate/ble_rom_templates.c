@@ -1,0 +1,12 @@
+#include <stdint.h>
+
+/* Stock Apollo Main ROM templates copied into selected C message builders. */
+const uint8_t audio_ble_ota_flag_seed[16]
+    __attribute__((section(".g2_rom_00784ed0"))) = {
+        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+    };
+const uint8_t audio_ble_status_message_template[8]
+    __attribute__((section(".g2_rom_0078edf4"))) = {
+        0x04, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
+    };

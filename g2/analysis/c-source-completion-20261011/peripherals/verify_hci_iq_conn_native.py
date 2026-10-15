@@ -9,7 +9,7 @@ R=Path(__file__).resolve().parents[3]
 B=(R/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 S=R/'components/audio/uart_thread_source_candidate/display_ble_hci_iq_conn.c'
 T=R/'components/audio/uart_thread_source_candidate/display_ble_hci_iq_conless.c'
-N=['audio_wsf_buffer_alloc','audio_ble_hci_vendor_log_enabled_4c9c50','audio_ble_hci_vendor_compare_44b610','audio_ble_hci_vendor_log_flags_43d0ce','audio_ble_hci_vendor_log_43d574','audio_ble_hci_wsf_trace','audio_queue_copy_bytes','g2_wsf_candidate_buffer_free_word']
+N=['audio_wsf_buffer_alloc','audio_ble_hci_vendor_log_enabled_4c9c50','audio_ble_hci_vendor_compare_44b610','audio_log_flags','audio_log_extended','audio_ble_hci_wsf_trace','audio_queue_copy_bytes','g2_wsf_candidate_buffer_free_word']
 A=[0x530446,0x4c9c50,0x44b610,0x43d0ce,0x43d574,0x52a63c,0x439be4,0x5304d4]
 STUB='''#include <stdint.h>
 uint8_t audio_ble_hci_stack_state_20073870[16];
@@ -18,8 +18,8 @@ void g2_wsf_candidate_buffer_free_word(uint32_t p){(void)p;}
 void *audio_queue_copy_bytes(void *d,const void *s,uint32_t n){(void)s;(void)n;return d;}
 uint32_t audio_ble_hci_vendor_log_enabled_4c9c50(void){return 0;}
 uint32_t audio_ble_hci_vendor_compare_44b610(const void *a,const void *b,uint32_t n){(void)a;(void)b;(void)n;return 0;}
-uint32_t audio_ble_hci_vendor_log_flags_43d0ce(void){return 0;}
-void audio_ble_hci_vendor_log_43d574(uint32_t a,const void *b,const void *c,const void *d,...){(void)a;(void)b;(void)c;(void)d;}
+uint32_t audio_log_flags(void){return 0;}
+void audio_log_extended(uint32_t a,const void *b,const void *c,const void *d,...){(void)a;(void)b;(void)c;(void)d;}
 void audio_ble_hci_wsf_trace(const void *a,const void *b){(void)a;(void)b;}
 '''
 with tempfile.TemporaryDirectory() as td:

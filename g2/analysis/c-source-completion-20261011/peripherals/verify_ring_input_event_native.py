@@ -9,7 +9,7 @@ R=Path(__file__).resolve().parents[3]
 B=(R/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 S=R/'components/audio/uart_thread_source_candidate/display_input_event_send.c'
 STUB='''#include <stdint.h>
-void *audio_uart_input_queue;void *audio_uart_input_event_flags;
+void *audio_uart_sync_schedule_queue;void *audio_uart_input_event_flags;
 void *audio_uart_alloc_retry(uint32_t n){(void)n;return 0;}
 void audio_file_heap_free(void*p){(void)p;}
 void audio_uart_buffer_zero(void*p,uint32_t n,uint32_t x){(void)p;(void)n;(void)x;}
@@ -31,7 +31,7 @@ with tempfile.TemporaryDirectory() as td:
    u=Uc(UC_ARCH_ARM,UC_MODE_THUMB|UC_MODE_MCLASS);u.ctl_set_cpu_model(UC_CPU_ARM_CORTEX_M4)
    u.mem_map(0x400000,0x400000);u.mem_write(0x438000,B);u.mem_map(0x100000,0x100000);u.mem_map(0x20000000,0x100000)
    for a,d in seg:u.mem_write(a,d)
-   queue=sym['audio_uart_input_queue'] if is_c else 0x200749cc
+   queue=sym['audio_uart_sync_schedule_queue'] if is_c else 0x200749cc
    flags=sym['audio_uart_input_event_flags'] if is_c else 0x20074b10
    u.mem_write(queue,(0x20070000 if queue_present else 0).to_bytes(4,'little'))
    u.mem_write(flags,(0x20070004).to_bytes(4,'little'))

@@ -48,3 +48,30 @@ more specific component or file statement controls.
 
 The openCFW name does not grant rights to third-party trademarks, product
 names, firmware signing keys, or proprietary services.
+
+R1 attributable memory/string provider candidate
+------------------------------------------------
+The unchanged musl v1.2.5 memory/string subset under
+third-party/upstream/musl-memory-1.2.5 retains musl's MIT license and attribution
+in COPYRIGHT. Its provenance.json records the upstream pin and file hashes.
+This candidate is not represented as the original firmware's Arm runtime.
+
+R1 attributable integer runtime provider candidate
+-------------------------------------------------
+The unchanged LLVM compiler-rt 20.1.8 unsigned division source is reused from
+third-party/upstream/llvm-compiler-rt-format-20.1.8. The applicable compiler-rt
+license (Apache 2.0 with LLVM exceptions and retained legacy notices) is in
+r1/source-config/runtime/LLVM-COMPILER-RT-LICENSE.TXT; the immutable upstream
+commit and authenticated file hashes are in llvm_integer_provenance.json in
+that directory. R1-specific EABI glue and stock zero-divisor/shift behavior
+are separate project source. This is not original Arm runtime source identity.
+
+R1 BAE8 service-send adaptation
+------------------------------
+r1/components/board/native_bae8_send.c retains Nordic's SDK NUS copyright and
+license notice. It adapts the NUS-shaped path to authenticated R1 dual
+notification, logging and return-policy contracts. SDK HVX structures and SVC
+identifiers remain attributable to the pinned nRF5 SDK 17.1.0. The build report
+pins its SDK headers and NUS reference source against the SDK archive. Neither
+the full proprietary service object nor SoftDevice source is supplied by this
+adaptation; those remain separate reconstruction gates.

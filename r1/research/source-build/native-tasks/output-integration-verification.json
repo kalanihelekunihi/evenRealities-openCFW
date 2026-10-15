@@ -1,0 +1,35 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "a04fd258c451f974c8b18ab4be26be111c80e123db22aaf2612d28e0ba2316c7",
+  "object_sha256": "2aed59bd98afe3b540510cd773bf1509e233d9e48fa7852d76c31aa36fba4331",
+  "provider_reports": {
+    "native-events/report.json": "ef79521d6a92aee5b4c994a25f606976db6ff7c1b1eb8c47aacde79aab579703",
+    "native-tx/report.json": "7681106ab5f584bdead003c37fec01ffaa076ed7afe29efb87cd77578caf67de",
+    "native-sync/report.json": "5219e0cc4b55c2326f89775eb801ded5e39666571a6d090061f081398c341091",
+    "native-watchdog/report.json": "390557eb923e44fe1ff500e8f2146ff1325269066f3436b423a3b8fd3920527e",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+    "native-output/report.json": "e1dcb594a3aaceffff3901ce8a69a0b84039fe4f3d8077691f5691f36b712104",
+    "connection-handle/report.json": "bb6d085e1b4e3a19499ececcb8bd7bcb3c83910f9069e64473be448fef9d8da9"
+  },
+  "actual_sync_bodies": true,
+  "actual_watchdog_bodies": true,
+  "actual_output_bodies": true,
+  "actual_sender_executed": false,
+  "output_execution_counts": {
+    "worker_entries": 444,
+    "sends": 588,
+    "frees": 588
+  },
+  "comparisons": 3120,
+  "assertion_fault_comparisons": 30,
+  "callback_comparisons": 4,
+  "initial_watchdog_bytes_compared": 20,
+  "scope": "Five actual task entries: ordered startup, queue creation, watchdog state, bounded repeated loop traces, signed-range flag selection, queue drain/record zeroing, motion, suspend, failure faults and storage callback",
+  "limitations": [
+    "Actual output worker/veneers/connection getter, synchronization, watchdog/list, current-task getter and memory execute; queue, allocator, generic BLE sender, mutex, sample and startup/dispatch providers remain intercepted.",
+    "Loops are observed for two waits, up to three queued records or three indefinite-delay attempts; this does not prove scheduler concurrency or actual hardware.",
+    "Actual creators/stoppers are not executed in this oracle; their context references are test-only initial-data bindings.",
+    "Original instruction identity and whole-image source completeness remain open."
+  ],
+  "instruction_identity_proven": false
+}

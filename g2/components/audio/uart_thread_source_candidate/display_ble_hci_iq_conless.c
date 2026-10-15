@@ -7,7 +7,8 @@ extern void *audio_queue_copy_bytes(void *,const void *,uint32_t);
 extern uint32_t audio_ble_hci_vendor_log_enabled_4c9c50(void);
 extern uint32_t audio_ble_hci_vendor_compare_44b610(const void *,const void *,uint32_t);
 extern uint32_t audio_log_flags(void);
-extern void audio_ble_hci_vendor_log_43d574(uint32_t,const void *,const void *,const void *,...);
+extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
+                               uint32_t,const char *,...);
 extern void audio_ble_hci_wsf_trace(const void *,const void *);
 extern uint8_t audio_ble_hci_stack_state_20073870[]; /* live state callback slot +8 */
 const uint8_t audio_ble_hci_vendor_tag_78d6f4[]="INFO"; /* ROM 0x78d6f4 */
@@ -39,7 +40,8 @@ static void diagnostic(void)
         return;
     }
     if ((audio_log_flags()&2u)!=0u)
-        audio_ble_hci_vendor_log_43d574(level,app,file,function,0x690u,message);
+        audio_log_extended((uint8_t)level,(const char *)app,file,function,
+                           0x690u,message);
 }
 void audio_ble_hci_le_conless_iq_report(const void *event,uint32_t length)
 {

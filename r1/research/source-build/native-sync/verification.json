@@ -1,0 +1,14 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "5219e0cc4b55c2326f89775eb801ded5e39666571a6d090061f081398c341091",
+  "object_sha256": "3b4fe2bc18fcf560a29a68b7cbbc79c227eca48f49c9266f613bd0ddc14f57a2",
+  "comparisons": 66024,
+  "initial_event_field_bytes_compared": 4,
+  "scope": "Actual four barrier/park bodies; all low-byte ARM shift counts, upper group bits, repeated startup waits including high-bit errors, dynamic mode/handle logging, event flags and three indefinite-delay attempts",
+  "limitations": [
+    "CMSIS flag/wait/delay, log backends and watchdog arm are intercepted.",
+    "Only the manager event-handle field is source-owned; complete manager startup/object allocation and physical synchronization remain open.",
+    "Original instruction identity and whole-image source completeness remain open."
+  ],
+  "instruction_identity_proven": false
+}

@@ -5,10 +5,10 @@ typedef void (*uart_timeout_dispatch)(uint32_t,void *,uint32_t,uint32_t);
 extern void audio_uart_timeout_dispatch(uint32_t,void *,uint32_t,uint32_t); /* 0x45ade8 */
 extern uint32_t audio_uart_timeout_submit(uart_timeout_dispatch,uint32_t,
                                            void *,uint32_t,uint32_t); /* 0x491184 */
-extern void audio_uart_slave_display_start(uint32_t,const void *,uint16_t); /* 0x4441ec */
-extern void audio_uart_slave_display_refresh(uint32_t,const void *,uint16_t); /* 0x4442d0 */
-extern void audio_uart_slave_display_stop(uint32_t,const void *,uint16_t); /* 0x4443cc */
-extern void audio_uart_slave_display_control(const void *,uint16_t); /* 0x4444b8 */
+extern int32_t audio_uart_slave_display_start(uint32_t,const void *,uint32_t); /* 0x4441ec */
+extern int32_t audio_uart_slave_display_refresh(uint32_t,const void *,uint32_t); /* 0x4442d0 */
+extern int32_t audio_uart_slave_display_stop(uint32_t,const void *,uint32_t); /* 0x4443cc */
+extern int32_t audio_uart_slave_display_control(const void *,uint32_t); /* 0x4444b8 */
 extern void audio_file_heap_free(void *);
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t,const char *,const char *,const char *,

@@ -12,7 +12,7 @@ extern uint32_t gx8002_image_b_audio_out_push_frame_10006b60(
     uint32_t, uint32_t);
 
 __attribute__((naked, used))
-int gx8002_image_b_sample_app_event_1000c1c8(const void *event)
+int gx8002_image_b_sample_app_event_1000c1c8(void *event)
 {
     (void)event;
     __asm__ volatile (

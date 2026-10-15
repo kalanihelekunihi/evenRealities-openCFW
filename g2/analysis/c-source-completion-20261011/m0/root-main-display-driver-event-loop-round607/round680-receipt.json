@@ -1,0 +1,32 @@
+{
+  "round": 680,
+  "component": "uLED type-0/type-1 option IRQ callback pair using pinned Ambiq status/clear source",
+  "status": "two C callback bodies compile and pass 36 native cases with controlled service boundary; service body and option pointer relocation remain open",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "7483eee0c83d43f7ae66a0a3eeda83f4f915a05ad3f29ba268f50255a088060f",
+  "verifier_sha256": "075a11d2f198fa2a45b797655be74cf2fba66bc235b8f0bf1ad885e62404c4cd",
+  "builder_sha256": "a162cd28a882a014de28f3b95d1ddc4e3049cd09317b334e790ea7f6a663f537",
+  "link_audit_sha256": "7260e495d461455a8cb3e0ac6cb26de52a2a46038c653439e8dfeadd35d76d8c",
+  "object_sha256": "70f4d9524fd56c0c3a18435b0f61bd59680e4846c89ec5ecee751c8f15dc405d",
+  "foundation_provenance_sha256": "0c632810ccf3032389ff1f0fe9e021ec03ce8df8ff2a32e7c1d8a3b0c4c906b7",
+  "validation": {
+    "native_cases": 36,
+    "candidate_defined_symbols": 6,
+    "candidate_undefined": [
+      "am_hal_mspi_interrupt_service"
+    ],
+    "option_callback_C_bodies": 2,
+    "option_callback_unique_total": 29
+  },
+  "gates": {
+    "service_body_complete": false,
+    "callback_pointer_relocation_complete": false,
+    "source_complete": false,
+    "byte_equal": false,
+    "hardware_proven": false,
+    "whole_images_complete": 0
+  },
+  "integrated_candidate_unresolved": 617,
+  "estimated_uled_vendor_remaining": "45-90%",
+  "estimated_apollo_remaining": "80-95%"
+}

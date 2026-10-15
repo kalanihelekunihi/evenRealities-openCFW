@@ -1,0 +1,20 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "slices": [
+    {
+      "entry": "0x34064",
+      "length": 36,
+      "slice_sha256": "5811822674a8b3ee4f73fa7d99e20104ad72a689ad08717c9044d3b38497f1ef"
+    },
+    {
+      "entry": "0x3e274",
+      "length": 536,
+      "slice_sha256": "38a373af49513e2bfece972176e1b1c52ea00edaed1780ef26d882bb59eb60ea"
+    }
+  ],
+  "mcp_program": "stock-r1-native-analysis.elf",
+  "mcp_readbacks_match_locked_artifact": true,
+  "limitations": [
+    "REA and Ghidra-MCP share the Ghidra backend; byte readback is not independent semantics or source-completeness proof."
+  ]
+}

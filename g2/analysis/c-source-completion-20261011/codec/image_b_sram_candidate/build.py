@@ -204,6 +204,8 @@ def main():
     parser.add_argument("--output", type=Path, default=HERE / "build")
     parser.add_argument("--reuse-receipt", type=Path,
                         help="reuse hash-verified unchanged objects from this target receipt")
+    parser.add_argument("--include-sample-app-experiment", action="store_true",
+                        help="include the unqualified sample-app record and callback cohort")
     parser.add_argument("--size-experiment", action="store_true",
                         help="compile a separate all-source -Os layout experiment")
     parser.add_argument("--size-plan", action="store_true",
@@ -213,6 +215,16 @@ def main():
     parser.add_argument("--size-imcra-init-o2", action="store_true",
                         help="also compile measured smaller IMCRA state initializer at -O2")
     args = parser.parse_args()
+    if args.include_sample_app_experiment:
+        SOURCES.extend([
+            "backup_sample_app_initialized_record.c",
+            "backup_sample_app_leaf_callbacks.c",
+            "backup_sample_app_init.c",
+            "backup_sample_app_event_ambient.c",
+            "backup_sample_app_audio_callback.c",
+            "backup_sample_app_begin.c",
+            "backup_sample_app_command.c",
+        ])
     if args.size_experiment and args.size_plan:
         raise RuntimeError("choose one size experiment")
     if args.size_fft_o2 and not args.size_experiment:
@@ -266,7 +278,8 @@ def main():
             old_object = Path(cached["object"])
             if sha(old_object) != cached["object_sha256"]:
                 raise RuntimeError(f"reuse object hash differs: {old_object}")
-            shutil.copyfile(old_object, obj)
+            if old_object.resolve() != obj.resolve():
+                shutil.copyfile(old_object, obj)
             units.append({"source": source_name, "source_sha256": source_before,
                           "object": str(obj), "object_sha256": sha(obj),
                           "dependency_sha256": dependency_sha,
@@ -321,6 +334,8 @@ def main():
     undefined = sorted(line.split()[-1] for line in nm_output.splitlines() if line.strip())
     receipt = {"image_sha256": IMAGE_SHA, "separate_loaded_image_b": True,
                "selected_firmware_image": False, "target": "CSKY CK804EF hard-float ELF32",
+               "sample_app_experiment": args.include_sample_app_experiment,
+               "sample_app_callbacks_qualified": False,
                "units": units, "linked_object": str(linked),
                "linked_object_sha256": sha(linked),
                "undefined_symbols": undefined,

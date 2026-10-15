@@ -1,0 +1,30 @@
+{
+  "round": 679,
+  "component": "Apollo-main display plus uLED vendor relocatable integration and option callback ownership audit",
+  "status": "candidate integrates selected Apollo, display and 63 uLED vendor symbols without duplicates; unresolved remains 617; official option tables contain 29 distinct native callback addresses with zero C relocations in this candidate",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "builder_sha256": "4dcca882996a157cddc003ea83221d2293f2a96b3ccccba88699dc37f557cd0f",
+  "link_audit_sha256": "a4d11781d5b4c949b740932e0e9a7403cb937e905d4d58bd8ba587da0030efa7",
+  "integrated_object_sha256": "99cfc69bfefd75a69c7c12264b96f19e33492508da1b2d866681ba390fa440bd",
+  "validation": {
+    "vendor_defined_symbols": 63,
+    "integrated_unresolved_after": 617,
+    "option_callback_entries": {
+      "type1": 15,
+      "type0": 14
+    },
+    "option_callback_unique": 29,
+    "option_callback_source_owned_in_candidate": 0
+  },
+  "gates": {
+    "callback_pointer_relocation_complete": false,
+    "resident_rom_behavior_proven": false,
+    "source_complete": false,
+    "byte_equal": false,
+    "hardware_proven": false,
+    "whole_images_complete": 0
+  },
+  "selected_apollo_unresolved": 619,
+  "estimated_uled_vendor_remaining": "50-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

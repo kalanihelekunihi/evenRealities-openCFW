@@ -1,0 +1,21 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "7612004a197c8f718aab40024f0fc83228c7b9d9ca321d41586cccdea66ce9c9",
+  "selected_object_sha256": "0e02e7b1a6f01f353a80b04e462102adf7fffd51e2f390dc5f2d465b0b814a86",
+  "comparisons": 52464,
+  "comparisons_by_kind": {
+    "enter": 2752,
+    "exit": 49152,
+    "nested_sequence_calls": 544
+  },
+  "null_or_unmapped_pointer_faults": 16,
+  "state_address": "0x2002c2fc",
+  "initial_zero_bytes_compared": 12,
+  "scope": "Actual pinned Nordic critical-region C bodies; raw NVIC write order/value, masks, nested byte, PRIMASK, preserved registers/stack, repeated nesting and unmapped writes; no provider interceptions",
+  "limitations": [
+    "NVIC registers are a deterministic mapped register model; real interrupt delivery and hardware alias semantics are not exercised.",
+    "Void return scratch registers and original instruction identity are outside this contract.",
+    "No physical-device, whole-image or cycle-timing proof."
+  ],
+  "instruction_identity_proven": false
+}

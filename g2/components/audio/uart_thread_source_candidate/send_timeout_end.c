@@ -18,7 +18,7 @@ extern const char audio_uart_timeout_module_display[],audio_uart_timeout_source_
 extern const char audio_uart_timeout_name_peer[],audio_uart_timeout_name_user[];
 extern const char audio_uart_timeout_name_slave[],audio_uart_timeout_name_input[];
 extern const char audio_uart_timeout_name_display[];
-extern const char audio_uart_timeout_running[],audio_uart_timeout_compact[];
+extern const char audio_uart_timeout_running_text[],audio_uart_timeout_compact[];
 extern const char audio_uart_timeout_compact_peer[],audio_uart_timeout_compact_display[];
 extern const char audio_uart_timeout_submit_failed[],audio_uart_timeout_submit_compact[];
 extern const char audio_uart_timeout_submit_compact_peer[];
@@ -39,7 +39,7 @@ static uint32_t timeout_end(const char *module,const char *source,
                             uint32_t line,uart_timeout_callback callback) {
     if(audio_log_flags()&2u)
         audio_log_extended((uint8_t)level,module,source,name,line,
-                           audio_uart_timeout_running,name);
+                           audio_uart_timeout_running_text,name);
     if((audio_log_flags()&1u)||(audio_log_flags()&4u))
         (void)compressed_log_output(level==3u?0xc400000u:0x10400000u,
                                     compact,compact,name);

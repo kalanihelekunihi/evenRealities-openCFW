@@ -3,6 +3,7 @@
 from pathlib import Path
 import ast
 import hashlib
+import json
 import random
 import re
 import struct
@@ -105,6 +106,14 @@ for match in re.finditer(r'FUN_08009170\(([^,)]+)', retained):
         native_caller_formats.add(value)
 for fmt in sorted(native_caller_formats - actual_formats):
     cases.append((fmt, [0x20006000]*16))
+dynamic_receipt = json.loads((ROOT / 'g2/build/c-firmware/20261014/case-vformat-current/dynamic-assignment-census.json').read_text())
+assert dynamic_receipt['status'] == 'PASS_BOUNDED_CASE_DYNAMIC_ASSIGNMENT_CENSUS'
+dynamic_formats = {bytes.fromhex(item['format_hex'])
+                   for call in dynamic_receipt['calls']
+                   for item in call['observed_prior_assignments']
+                   if item['classification'] == 'printable_rom_assignment'}
+for fmt in sorted(dynamic_formats - actual_formats - native_caller_formats):
+    cases.append((fmt, [0x20006000]*16))
 rng = random.Random(0x9210)
 for _ in range(512):
     conversion = rng.choice('diuoxXcsp')
@@ -168,4 +177,5 @@ for fmt, words in cases:
                              bytes(u.mem_read(0x20007080, 8)) if b'%n' in fmt or b'%hn' in fmt or b'%hhn' in fmt else b''))
     assert observations[0] == observations[1], (fmt, observations)
 print('PASS_VFORMAT_BASIC', len(cases), 'actual_source_formats', len(actual_formats),
-      'retained_native_caller_formats', len(native_caller_formats))
+      'retained_native_caller_formats', len(native_caller_formats),
+      'dynamic_assignment_formats', len(dynamic_formats))

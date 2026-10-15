@@ -14,7 +14,7 @@ extern uint8_t audio_ble_hci_radio_scheduler_state[]; /* live 0x20073ba8 */
 extern uint8_t audio_ble_hci_radio_scheduler_config[]; /* live 0x20065a10 */
 extern const uint8_t audio_ble_hci_boot_log_first[]; /* ROM 0x71f5d0 */
 extern const uint8_t audio_ble_hci_boot_log_retry[]; /* ROM 0x754ad0 */
-extern const uint8_t audio_ble_hci_boot_register_source[]; /* ROM 0x4b4a99 */
+extern void opencfw_radio_gpio_callback(void *); /* Thumb entry 0x4b4a99 */
 
 extern uint32_t audio_ble_hci_radio_acquire_52dd94(uint32_t,const void *,void *,void *);
 extern uint32_t audio_ble_hci_radio_detect_52deee(void);
@@ -71,7 +71,8 @@ uint32_t audio_ble_hci_driver_radio_boot(uint8_t with_identifier) {
         audio_ble_hci_radio_driver_state[4u]=identifier[5u];
         audio_ble_hci_radio_driver_state[5u]=identifier[6u]&0xfcu;
     }
-    audio_ble_hci_radio_register_48162c(0u,0x75u,audio_ble_hci_boot_register_source,0u);
+    audio_ble_hci_radio_register_48162c(0u,0x75u,
+        (const void *)opencfw_radio_gpio_callback,0u);
     audio_ble_hci_radio_enable_52dd58();
     audio_ble_hci_radio_mux_on_4b4786(0x3bu,4u);
     audio_ble_hci_radio_mux_request_4b4768(0x3bu);

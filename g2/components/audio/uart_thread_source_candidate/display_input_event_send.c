@@ -1,6 +1,6 @@
 /* Native SendDataToBoth 0x464d1c, reached from INPM_EventSend 0x4c5916. */
 #include <stdint.h>
-extern void *audio_uart_input_queue; /* pointer cell RAM 0x200749cc */
+extern void *audio_uart_sync_schedule_queue; /* pointer cell RAM 0x200749cc */
 extern void *audio_uart_input_event_flags; /* pointer cell RAM 0x20074b10 */
 extern void *audio_uart_alloc_retry(uint32_t); /* selected 0x4646f0 */
 extern void audio_file_heap_free(void *); /* selected 0x474d16 */
@@ -20,7 +20,7 @@ static const char function[]="SendDataToBoth";
   (void)compressed_log_output(mask,compact,compact,##__VA_ARGS__); \
 } while(0)
 int32_t audio_uart_input_event_send_464d1c(uint16_t type,const void *payload,uint32_t length,uint32_t context) {
-    if(audio_uart_input_queue==0) {
+    if(audio_uart_sync_schedule_queue==0) {
         LOG(1u,0x8du,0x04000000u,"uart send queue is NULL !!!",
             "[sync.module.api]uart send queue is NULL !!!");
         return -1;
@@ -51,7 +51,7 @@ int32_t audio_uart_input_event_send_464d1c(uint16_t type,const void *payload,uin
     *(uint16_t *)(void *)(node+4u)=1u;
     LOG(4u,0xaeu,0x10400000u,"_pSyncPacketStruct = %p",
         "[sync.module.api]_pSyncPacketStruct = %p",node);
-    int32_t status=audio_cmsis_queue_put(audio_uart_input_queue,&node,0u,2000u);
+    int32_t status=audio_cmsis_queue_put(audio_uart_sync_schedule_queue,&node,0u,2000u);
     if(status==0) {
         (void)osEventFlagsSet(audio_uart_input_event_flags,2u);
         return 0;

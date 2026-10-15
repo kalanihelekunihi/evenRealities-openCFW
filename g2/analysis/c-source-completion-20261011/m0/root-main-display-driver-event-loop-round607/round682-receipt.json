@@ -1,0 +1,37 @@
+{
+  "round": 682,
+  "component": "Apollo-main MSPI service full instruction coverage under controlled lower calls and two source-owned uLED option relocations",
+  "status": "51 controlled native cases execute and match 712/712 service bytes; two Thumb C callback relocations verified; 27 native option callbacks and whole-image gates remain open",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "dd67f994780a5065aaa159b6692b041b25820c544357f3326503c15f5c3bc204",
+  "verifier_sha256": {
+    "verify_display_driver_uled_mspi_interrupt_service_native.py": "f14b201aca82b3a86bf7fe946754e6e0d32f334d1415f5f519a37510f463f4b5",
+    "verify_display_driver_uled_option_pair_relocations.py": "fbb4134aa9a5e70f4cfd78139c22bda1417f970079f7eb6553a7f490a37ae36e"
+  },
+  "builder_sha256": {
+    "build_display_driver_relocated_pair_candidate.py": "731870f0e41ff487a1083bcd05b512a22e479bf3c4764a697367f9559cabceff",
+    "integrate_uled_option_pair_candidate.py": "5ded53089b095a91dae427ca140128b48c806989783148732efe34f04070fe9d"
+  },
+  "link_audit_sha256": "7daac6b7e687e3f387ccfb3eea18b4b743500bb790781b759ca2a4fdd13037b9",
+  "integrated_object_sha256": "e943acbf26329a543ab83af633be60f31f618de4a9dd67e14bbd765528ee8faf",
+  "validation": {
+    "native_service_cases": 51,
+    "native_service_bytes_covered": 712,
+    "native_service_total_bytes": 712,
+    "option_callback_relocation_entries": 2,
+    "native_option_words_preserved": 30,
+    "option_callback_native_addresses_remaining": 27,
+    "integrated_unresolved_after": 617
+  },
+  "gates": {
+    "service_real_lower_composition_complete": false,
+    "callback_pointer_relocation_complete": false,
+    "resident_rom_behavior_proven": false,
+    "source_complete": false,
+    "byte_equal": false,
+    "hardware_proven": false,
+    "whole_images_complete": 0
+  },
+  "estimated_uled_vendor_remaining": "35-85%",
+  "estimated_apollo_remaining": "80-95%"
+}

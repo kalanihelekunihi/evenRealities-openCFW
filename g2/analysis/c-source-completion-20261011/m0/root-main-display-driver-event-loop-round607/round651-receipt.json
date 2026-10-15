@@ -1,0 +1,32 @@
+{
+  "round": 651,
+  "component": "Apollo uLED vendor shutdown callbacks 0x5bbd48 and 0x592658",
+  "status": "Two C bodies compile and pass 36 native/C call/return cases; three lower MSPI providers unresolved; option-table relocation and vendor component open; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "c9459c24a40b30d5d9b9c3bb7cc048610177d08ed4516a35db8364031801b907",
+  "verifier_sha256": "39150141d9e4d1ea1f679de290f2ac4bb467f94413d59525eda61a1433224a93",
+  "object_sha256": "abbc6ee4cba39540888fb2c383f4d33d849ec84e663a11ae06e4808b1aeefcee",
+  "unresolved": [
+    "display_driver_uled_mspi_child_4c2392",
+    "display_driver_uled_mspi_child_4c23de",
+    "display_driver_uled_mspi_child_4c240e"
+  ],
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_VENDOR_SHUTDOWN_NATIVE 36",
+    "Cortex-M55 warnings-as-errors compile",
+    "arm-none-eabi-nm -u: 3 lower MSPI imports",
+    "git diff --check"
+  ],
+  "gates": [
+    "Other 27 uLED vendor option callbacks lack C bodies",
+    "Three lower MSPI providers unresolved",
+    "Option records still hold native absolute callback addresses; symbolic relocation pending",
+    "Vendor handle cell placement and uLED workspace extent open",
+    "Apollo selected build integration and whole-image layout/G3/G4 gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "whole_images_complete": 0,
+  "estimated_uled_vendor_remaining": "90-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

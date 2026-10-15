@@ -1,0 +1,24 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "runtime_report_sha256": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+  "relocatable_sha256": "eeb53b969da4bf3ca24292a6fe219bada1c8de12ffcf5aa92ca1a538e0617e8d",
+  "comparisons": 3320,
+  "comparisons_by_entry": {
+    "memcpy": 816,
+    "memset": 1088,
+    "__aeabi_memcpy4": 204,
+    "__aeabi_memclr": 816,
+    "__aeabi_memclr4": 204,
+    "__aeabi_memclr8": 102,
+    "strcmp": 81,
+    "strlen": 9
+  },
+  "stock_differential_comparisons": 1994,
+  "scope": "Compiled upstream C bodies and EABI wrappers; guarded memory snapshots, return contracts, unaligned/general and aligned EABI cases; stock memset/strcmp/clear differential",
+  "limitations": [
+    "memcpy overlap is excluded by its C contract.",
+    "Invalid pointers, fault granularity, cycle timing and original instruction identity remain unproven.",
+    "These are attributable provider candidates, not original Arm runtime source."
+  ],
+  "instruction_identity_proven": false
+}

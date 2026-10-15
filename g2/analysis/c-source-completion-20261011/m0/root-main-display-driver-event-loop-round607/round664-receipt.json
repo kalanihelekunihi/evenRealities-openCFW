@@ -1,0 +1,56 @@
+{
+  "round": 664,
+  "component": "Apollo type-4 pin prepare 0x4c3f2a, finalize 0x4c3ef4, wait 0x4c387e",
+  "status": "Three C bodies compile; type-4 prepare passes 512 native/C controlled-callee cases; finalize and wait pass 160 bounded native/C side-effect cases; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "sources_sha256": {
+    "display_driver_uled_pin_prepare_type4.c": "d601fa67f96f1a6c48c57dd9a3d31373d4b48b77bc5f3b4f459afc814b7656d4",
+    "display_driver_uled_pin_prepare_finalize.c": "accc55eb8d54d90258f4a0f3282e9e590d8b126a2b4062857f7f3efd294cf4d1"
+  },
+  "verifiers_sha256": {
+    "verify_display_driver_uled_pin_prepare_type4_native.py": "258c1d7feb883ab7c0db340775447d871e3205155562f0669eac8c15181fe168",
+    "verify_display_driver_uled_pin_prepare_finalize_native.py": "1a7f12a74292a719f6466d8fffd88b21af1a5bf5e608e6b3e9abeb0c3a958cce"
+  },
+  "builder_sha256": "a9b9d68d3f960e2f11aab8b6e0b3ff99e38e5bbf5a6542bbd5ba962c5d502f55",
+  "link_audit_sha256": "38a5880dff7f04938ad764702c1495fabc8d962551760a5909285fb8a9e52f4c",
+  "object_sha256": "f6c90f7b0b30d752c984ba02af69a2d37e5369e5e13fc1cd509b1397589269e3",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_PIN_PREPARE_TYPE4_NATIVE 512",
+    "PASS_DISPLAY_DRIVER_ULED_PIN_PREPARE_FINALIZE_NATIVE 160",
+    "PASS_ULED_VENDOR_CANDIDATE_LINK 22 0 19",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "unresolved": [
+    "display_driver_uled_delay_4807a0",
+    "display_driver_uled_pin_apply_4c37fe",
+    "display_driver_uled_pin_control_type0_4c3c2e",
+    "display_driver_uled_pin_control_type1_4c3ca2",
+    "display_driver_uled_pin_control_type2_4c3e9a",
+    "display_driver_uled_pin_control_type3_4c3d28",
+    "display_driver_uled_pin_control_type5_4c420c",
+    "display_driver_uled_pin_control_type6_4c43ec",
+    "display_driver_uled_pin_group_check_4c37ca",
+    "display_driver_uled_pin_group_query_4c377a",
+    "display_driver_uled_pin_prepare_type0_4c3bfc",
+    "display_driver_uled_pin_prepare_type1_4c3c60",
+    "display_driver_uled_pin_prepare_type2_4c3d9e",
+    "display_driver_uled_pin_prepare_type3_4c3cd4",
+    "display_driver_uled_pin_prepare_type5_4c4086",
+    "display_driver_uled_pin_prepare_type6_4c427e",
+    "display_driver_uled_pin_query_4c37a8",
+    "display_driver_uled_power_apply_4d3938",
+    "display_driver_uled_power_set_4d391e"
+  ],
+  "gates": [
+    "Type-4 prepare and finalizer not yet compared as one composed native chain with actual lower functions",
+    "Delay and lower pin query/apply/group/power providers unresolved; other type providers open",
+    "Full MSPI destroy real-callee behavior and asynchronous callbacks unproven",
+    "Other 27 vendor option callbacks, relocation, handle placement, workspace extent and whole-image gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "whole_images_complete": 0,
+  "estimated_uled_vendor_remaining": "75-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

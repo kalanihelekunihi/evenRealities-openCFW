@@ -34,7 +34,13 @@ Sources:
 - `i2c_2` to `i2c_5`: `r1/docs/boundaries/SOFTWARE-TWI-PROVIDER-BOUNDARY.md:44-49`; `r1/docs/boundaries/NAMED-PERIPHERAL-BOUNDARIES.md:13`.
 - `i2c_5`: `r1/docs/correlation/ST25DVXXKC-CORRELATION.md:40-42`; `r1/docs/correlation/I2C5-DELAY-CALLBACK-CORRELATION.md`.
 
-`i2c_5` pin-order conflict (Unverified which is right):
+The stock scatter initializer was executed on 2026-10-15 and resolves the
+software-bus field order: `i2c_2` SCL P0.28/SDA P1.13; `i2c_3` SCL P0.12/SDA
+P0.11; `i2c_4` SCL P0.31/SDA P1.09; `i2c_5` SCL P1.11/SDA P1.14. This is
+firmware configuration evidence, not physical routing proof. Receipt:
+`r1/research/source-build/software-twi/stock-initialization.json`.
+
+Historical `i2c_5` pin-order conflict (resolved by the stock field observation above):
 - `r1-capability-matrix.csv:87` (R1-086) says "clock GPIO43/P1.11 and data GPIO46/P1.14".
   `YHM2710-I2C5-RESOURCE-BOUNDARY.md:65`, `ST25DVXXKC-CORRELATION.md:168` and
   `NORDIC-SDK-CORRELATION.md:844` agree with it.
@@ -87,7 +93,7 @@ appears twice (`r1/docs/correlation/GPIO-INPUT-IRQ-DISPATCH-CORRELATION.md:9-20`
 | Pin | Function | Tag | Source |
 |---|---|---|---|
 | P1.01 | YHM2710 single-wire STACMD (`device_stacmd`, ops `0x20007614`) | Proven | `r1/docs/correlation/YHM2710-REDUCTION-CORRELATION.md:63`; `r1/docs/PROVENANCE.md:77` |
-| P1.10 | NFC dock / ST25 board enable. `PIN_CNF` word `0x0000030F` (output, input disconnected, …). Activation: low, 10 ticks, high, 10 ticks, then acquire `i2c_5` (`0x000504D8`) | Proven | `r1/docs/boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md:24,28,105` |
+| P1.10 | NFC dock / ST25 board enable. `PIN_CNF` word `0x0000030F` (output, input disconnected, …). Acquire sequence: OUTSET, delay 10 ms, OUTCLR, delay 10 ms, then acquire `i2c_5`; downstream electrical effect unverified (`0x000504D8`) | Proven | `r1/docs/boundaries/YHM2710-I2C5-RESOURCE-BOUNDARY.md:24,28,105` |
 | P0.18 | nRESET (`CONFIG_GPIO_AS_PINRESET` → UICR PSELRESET) | Proven | `r1/docs/correlation/NORDIC-SYSTEM-INIT-CORRELATION.md:49-53` |
 | NFC pins P0.09/P0.10 | used as GPIO (`CONFIG_NFCT_PINS_AS_GPIOS`); they carry ship mode and the PPG emitter | Proven (flag) / Inferred (link) | same |
 

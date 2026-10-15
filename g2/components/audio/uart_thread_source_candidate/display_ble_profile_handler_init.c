@@ -2,7 +2,7 @@
 #include <stdint.h>
 extern uint8_t audio_ble_profile_handler_id; /* RAM 0x20074f8a */
 extern const uint8_t audio_ble_profile_handler_entry_5fa056[]; /* exact even ROM pointer 0x5fa056 */
-extern const uint8_t audio_ble_profile_table_78f530[]; /* ROM 0x78f530 */
+extern const uint16_t audio_ble_profile_table_78f530[20]; /* ROM 0x78f530 */
 extern const void *audio_ble_profile_dispatch_slot; /* RAM 0x20074360 */
 extern const void *audio_ble_profile_table_slot; /* RAM 0x20074364 */
 extern uint32_t audio_ble_profile_runtime_rows[6]; /* RAM 0x20074310..0x20074327 */

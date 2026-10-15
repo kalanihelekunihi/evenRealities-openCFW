@@ -1,0 +1,27 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "integration_report_sha256": "75095a0b5f83c870c839fec7734a5965765182ace6e03e20d1aeca7ed0ba6a40",
+  "relocatable_sha256": "59fd0cf8cc9531115ecce6657d2c27ede819ab1960d6bf5dddfc98b92c9dce35",
+  "unicorn_version": "2.1.4",
+  "comparisons": 782,
+  "comparisons_by_entry": {
+    "r1_st25dvxxkc_bus_read": 192,
+    "r1_st25dvxxkc_bus_write": 192,
+    "r1_i2c5_read_transfer": 192,
+    "r1_i2c5_write_transfer": 192,
+    "r1_i2c5_nfc_resource_acquire": 6,
+    "r1_i2c5_nfc_resource_release": 6
+  },
+  "shared_state_address": "0x20006838",
+  "shared_request_address": "0x20006840",
+  "linker_test_seam_diagnostics": "arm-none-eabi-ld: warning: (r1_st25_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/st25-i2c5-registry.o\narm-none-eabi-ld: warning: (r1_st25_delay_ms): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/st25-i2c5-registry.o\n",
+  "scope": "Actual compiled ST25 veneers, shared transport and registry dispatch compared with stock; only final bus operations and delays are intercepted",
+  "limitations": [
+    "Bus electrical behavior and real elapsed delay remain unverified.",
+    "NULL operation-table pointers are covered separately by registry-dispatch-verification.json.",
+    "Resource functions have void contracts; incidental R0 values are not compared.",
+    "This receipt does not test boot discovery; see registry-bootstrap-verification.json. Actual board record population and a complete application link remain open."
+  ],
+  "application_linked": false,
+  "instruction_identity_proven": false
+}

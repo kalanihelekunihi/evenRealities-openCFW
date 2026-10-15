@@ -23,9 +23,9 @@ extern void *audio_uart_display_application_init(void); /* 0x44ff38 */
 extern uint32_t audio_uart_display_audio_new(void *); /* 0x45f15a */
 extern void audio_uart_display_audio_release(uint32_t); /* 0x45f7be */
 extern void audio_uart_display_audio_stop(uint32_t,uint32_t,uint32_t); /* 0x45faa8 */
-extern void audio_uart_display_context_set(const void *); /* 0x60090 */
-extern void audio_uart_display_context_commit(void); /* 0x600b4 */
-extern void audio_uart_display_layer_init(void); /* 0x71164 */
+extern int32_t audio_uart_display_context_set(const void *); /* 0x60090 */
+extern int32_t audio_uart_display_context_commit(const char *); /* 0x600b4 */
+extern const char *audio_uart_display_layer_init(void); /* 0x71164 */
 extern void audio_uart_display_layer_prepare(uint32_t); /* 0x71cd6 */
 extern uint32_t audio_uart_display_start(uint32_t); /* 0x471d58 */
 extern void audio_uart_display_service_sync(void); /* 0x4228a */
@@ -47,12 +47,12 @@ extern uint32_t audio_uart_display_wait; /* RAM0x20000654 */
 extern void *g2_display_queue; /* RAM0x200744e4 */
 extern void *audio_uart_display_mutex; /* RAM0x200744e8 */
 extern uint8_t audio_uart_display_framebuffer[0x2800]; /* RAM0x2034dc30 */
-extern void *audio_uart_display_ring; /* RAM0x20073b60 */
+extern uint32_t g2_display_ring[5]; /* direct RAM0x20073b60 */
 extern uint32_t audio_uart_display_active; /* RAM0x200744d8 */
 extern uint32_t audio_uart_display_mode; /* RAM0x200744dc */
 extern uint32_t audio_uart_display_background; /* RAM0x200744e0 */
 extern uint32_t audio_uart_display_audio_handle; /* RAM0x200744d0 */
-extern const void *audio_uart_display_context; /* DAT_004444b4 */
+extern const void *const audio_uart_display_context[]; /* DAT_004444b4 */
 
 static const char module[]="display_thread";
 static const char source[]="D:\\01_workspace\\s200_ap510b_iar_git\\framework\\sync\\display_thread.c";
@@ -121,9 +121,9 @@ static void handle_start(void) {
     audio_uart_display_service_prepare();
     void *active_screen=audio_uart_display_application_init();
     audio_uart_display_audio_handle=audio_uart_display_audio_new(active_screen);
-    audio_uart_display_context_set(audio_uart_display_context);
-    audio_uart_display_layer_init();
-    audio_uart_display_context_commit();
+    (void)audio_uart_display_context_set(audio_uart_display_context);
+    const char *locale=audio_uart_display_layer_init();
+    (void)audio_uart_display_context_commit(locale);
     audio_uart_display_notify(message_id(),2u,audio_uart_display_framebuffer,
                               message_length());
     audio_uart_display_active=message_id();
@@ -297,7 +297,7 @@ void audio_uart_display_thread(void *argument) {
         if(received==0) {
             clear(audio_uart_display_framebuffer,0x2800u);
             (void)audio_file_mutex_acquire(audio_uart_display_mutex,UINT32_MAX);
-            (void)audio_uart_display_ring_read(audio_uart_display_ring,
+            (void)audio_uart_display_ring_read(g2_display_ring,
                        audio_uart_display_framebuffer,message_length());
             (void)audio_file_mutex_release(audio_uart_display_mutex);
         }

@@ -4,8 +4,8 @@
 
 extern void *audio_uart_input_mutex; /* *DAT_004448a0 */
 extern void *audio_uart_input_queue; /* *DAT_004448a4 */
-extern void *audio_uart_input_ring; /* DAT_004448b0 */
-extern const void *audio_uart_input_queue_failure_context; /* DAT_004448b4 */
+extern uint32_t g2_display_ring[5]; /* direct RAM 0x20073b60, DAT_004448b0 */
+extern const char audio_uart_input_queue_failure_context[]; /* ROM 0x7536fc */
 extern int32_t audio_file_mutex_acquire(void *,uint32_t); /* selected 0x4497b6 */
 extern int32_t audio_file_mutex_release(void *); /* selected 0x44981c */
 extern int32_t audio_cmsis_queue_put(void *,const void *,uint8_t,uint32_t); /* selected 0x449abe */
@@ -21,7 +21,7 @@ uint32_t audio_uart_input_event(uint32_t id,uint32_t field4,uint32_t field8) {
         bytes[6u+i]=(uint8_t)(field8>>(8u*i));
     }
     (void)audio_file_mutex_acquire(audio_uart_input_mutex,UINT32_MAX);
-    (void)audio_uart_input_ring_write(audio_uart_input_ring,bytes,10u);
+    (void)audio_uart_input_ring_write(g2_display_ring,bytes,10u);
     (void)audio_file_mutex_release(audio_uart_input_mutex);
     uint32_t notice[3]={7u,0u,10u};
     if(audio_cmsis_queue_put(audio_uart_input_queue,notice,0u,1000u)!=0) {

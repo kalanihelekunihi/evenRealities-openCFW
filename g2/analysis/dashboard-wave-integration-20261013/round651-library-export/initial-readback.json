@@ -1,0 +1,57 @@
+{
+  "api_tool_source": "files/read",
+  "results": [
+    {
+      "ref_id": "file_00000000bd3c81f593841f78063173a9",
+      "warnings": [
+        "File is not visible in the requested files surface. Use a visible files.search/files.list/files.find/files.read citation reference such as turn2file0, or pass a file_id that appeared in one of those results."
+      ],
+      "api_tool_source": "files/read",
+      "read_index": 0,
+      "mode": "full",
+      "content": [
+        "The requested file reference is not currently visible. Use files.search or files.list to rediscover the file, then retry with a returned ref_id or file_id."
+      ]
+    },
+    {
+      "version_id": "267",
+      "name": "OpenCFW latest wave checkpoint.json",
+      "mime_type": "application/json",
+      "size_bytes": 3045,
+      "created_at": "2026-10-13T18:36:19.421855Z",
+      "modified_at": "2026-10-14T09:49:01.667309Z",
+      "file_provider": "native",
+      "library_file_id": "libfile_7532794e94488191abea79956be5c2b3",
+      "library_artifact_type": "other",
+      "ref_id": "file_000000008c8481f78487b72a34db0f8f",
+      "file_id": "file_000000008c8481f78487b72a34db0f8f",
+      "surface": "library",
+      "requested_file_id": "file_000000008c8481f78487b72a34db0f8f",
+      "start_line": 1,
+      "end_line": 45,
+      "total_lines": 45,
+      "has_more": false,
+      "pages": [],
+      "num_pages": 0,
+      "warnings": [],
+      "api_tool_source": "files/read",
+      "read_index": 1,
+      "mode": "full",
+      "include_text": true,
+      "include_images": false,
+      "requested_start_page": null,
+      "requested_end_page": null,
+      "next_start_line": null,
+      "next_start_page": null,
+      "next_read": null,
+      "next_image_read": null,
+      "content": [
+        "{\n  \"round\": 651,\n  \"component\": \"Apollo uLED vendor shutdown callbacks 0x5bbd48 and 0x592658\",\n  \"status\": \"Two C bodies compile and pass 36 native/C call/return cases; three lower MSPI providers unresolved; option-table relocation and vendor component open; candidate unselected\",\n  \"official_image_sha256\": \"36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863\",\n  \"source_sha256\": \"c9459c24a40b30d5d9b9c3bb7cc048610177d08ed4516a35db8364031801b907\",\n  \"verifier_sha256\": \"39150141d9e4d1ea1f679de290f2ac4bb467f94413d59525eda61a1433224a93\",\n  \"object_sha256\": \"abbc6ee4cba39540888fb2c383f4d33d849ec84e663a11ae06e4808b1aeefcee\",\n  \"unresolved\": [\n    \"display_driver_uled_mspi_child_4c2392\",\n    \"display_driver_uled_mspi_child_4c23de\",\n    \"display_driver_uled_mspi_child_4c240e\"\n  ],\n  \"validation\": [\n    \"PASS_DISPLAY_DRIVER_ULED_VENDOR_SHUTDOWN_NATIVE 36\",\n    \"Cortex-M55 warnings-as-errors compile\",\n    \"arm-none-eabi-nm -u: 3 lower MSPI imports\",\n    \"git diff --check\"\n  ],\n  \"gates\": [\n    \"Other 27 uLED vendor option callbacks lack C bodies\",\n    \"Three lower MSPI providers unresolved\",\n    \"Option records still hold native absolute callback addresses; symbolic relocation pending\",\n    \"Vendor handle cell placement and uLED workspace extent open\",\n    \"Apollo selected build integration and whole-image layout/G3/G4 gates open\"\n  ],\n  \"selected_apollo_unresolved\": 619,\n  \"integrated_candidate_unresolved\": 617,\n  \"whole_images_complete\": 0,\n  \"estimated_uled_vendor_remaining\": \"90-95%\",\n  \"estimated_apollo_remaining\": \"80-95%\",\n  \"checkpoint_schema\": \"opencfw-bounded-receipt-evidence-v1\",\n  \"authoritative_receipt\": {\n    \"path\": \"g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-event-loop-round607/round651-receipt.json\",\n    \"sha256\": \"936532d6ef2b395fb8588f688647af93fc03ffe9fc4ee135123e114d7c97b187\"\n  },\n  \"verified_local_hashes\": {\n    \"g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-event-loop-round607/round651-receipt.json\": \"936532d6ef2b395fb8588f688647af93fc03ffe9fc4ee135123e114d7c97b187\",\n    \"g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-event-loop-round607/display_driver_uled_vendor_shutdown.c\": \"c9459c24a40b30d5d9b9c3bb7cc048610177d08ed4516a35db8364031801b907\",\n    \"g2/analysis/c-source-completion-20261011/m0/root-main-display-driver-event-loop-round607/verify_display_driver_uled_vendor_shutdown_native.py\": \"39150141d9e4d1ea1f679de290f2ac4bb467f94413d59525eda61a1433224a93\",\n    \"g2/build/c-firmware/root-main-display-driver-round615/display_driver_uled_vendor_shutdown.o\": \"abbc6ee4cba39540888fb2c383f4d33d849ec84e663a11ae06e4808b1aeefcee\"\n  },\n  \"publication_scope\": \"Unselected bounded two shutdown call/return bodies only; three lower providers and27 other callbacks open. Producer tests not rerun; stock image not independently reauthenticated here. Estimates are producer estimates, not measured coverage. Canonical wave identity not inferred; no whole-image or hardware acceptance.\",\n  \"interval_promotion\": false\n}"
+      ]
+    }
+  ],
+  "warnings": [
+    "read[0] could not resolve the file reference: File is not visible in the requested files surface. Use a visible files.search/files.list/files.find/files.read citation reference such as turn2file0, or pass a file_id that appeared in one of those results."
+  ],
+  "external_connectors_accessed": false
+}

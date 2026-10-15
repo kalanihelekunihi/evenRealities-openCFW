@@ -1,0 +1,17 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "e27305e34089de2483e01274234fd71610811f34a46ca0ea1bdb16885435df6a",
+  "object_sha256": "d14c0f21ed6b576b2136e8c6360bb3e9acb79e1de4f73d0d9b8b84881f264a52",
+  "provider_reports": {
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+    "rtos-critical/report.json": "9ae1c4134463e13f97ce7dab7b1d6627447604bf25c5460bda572f06be1cf2fc",
+    "structured-cache/report.json": "a3a7b0b1afd3e3617ba815054c041a19e424abccd80612ed017085e2d67b35a5"
+  },
+  "comparisons": 33696,
+  "scope": "Exact copied bytes, consume/peek cursor, success result, invalid indexes, wrapping and task/ISR critical state with real compiled memcpy and critical bodies; no provider interception",
+  "limitations": [
+    "Ring initialization, concurrent mutation, physical exceptions and original compiler output remain open.",
+    "Aliasing and invalid data pointers are not exercised."
+  ],
+  "instruction_identity_proven": false
+}

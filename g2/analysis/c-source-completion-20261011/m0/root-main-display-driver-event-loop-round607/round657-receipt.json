@@ -1,0 +1,39 @@
+{
+  "round": 657,
+  "component": "Apollo uLED MSPI DMA queue start/stop 0x538e3c and 0x538e8c",
+  "status": "Two C bodies compile and pass 108 native/C cases; combined vendor candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "f79df57c33498833362252003300452da11d29c9522e74fa0dc5fa6210d7ef7b",
+  "verifier_sha256": "c182690162b99faa91380b01f95008e769aba6a2f2a4fad0af24ad816e50e350",
+  "builder_sha256": "0942702350e7916fe19bc1b66d00454bc08384c7589d03ff1eaa4d13b08a325d",
+  "link_audit_sha256": "110b657ea835d45dd28ae2e094fdd2d75947a56d27eac513737e0fbc417932a2",
+  "object_sha256": "7c66cf2bca449a24a90d8ef8bea78a635064b6123197165f9857a1bbbfadc9f9",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_MSPI_DMA_QUEUE_CONTROL_NATIVE 108",
+    "PASS_ULED_VENDOR_CANDIDATE_LINK 13 0 10",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "unresolved": [
+    "display_driver_uled_mspi_pin_control_4c4530",
+    "display_driver_uled_mspi_queue_release_5390fc",
+    "display_driver_uled_mspi_queue_snapshot_53901a",
+    "display_driver_uled_pin_prepare_type0_4c3bfc",
+    "display_driver_uled_pin_prepare_type1_4c3c60",
+    "display_driver_uled_pin_prepare_type2_4c3d9e",
+    "display_driver_uled_pin_prepare_type3_4c3cd4",
+    "display_driver_uled_pin_prepare_type4_4c3f2a",
+    "display_driver_uled_pin_prepare_type5_4c4086",
+    "display_driver_uled_pin_prepare_type6_4c427e"
+  ],
+  "gates": [
+    "Seven lower pin providers, queue snapshot/release and pin control remain unresolved",
+    "Full MSPI destroy real-callee and asynchronous callback behavior open",
+    "Other 27 uLED vendor callbacks, option relocation, handle placement, workspace extent and whole-image gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "whole_images_complete": 0,
+  "estimated_uled_vendor_remaining": "80-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

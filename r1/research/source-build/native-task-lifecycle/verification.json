@@ -1,0 +1,21 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "e0e4b84b2225736def365eda0eb1e497bd86ab0f21c43336f805a41973446aff",
+  "object_sha256": "79ec5a699d1deb3d2def2460fa984842203223a994ad4784238df084df770b88",
+  "provider_reports": {
+    "native-events/report.json": "ef79521d6a92aee5b4c994a25f606976db6ff7c1b1eb8c47aacde79aab579703",
+    "native-tx/report.json": "7681106ab5f584bdead003c37fec01ffaa076ed7afe29efb87cd77578caf67de"
+  },
+  "configuration_sha256": "4778e4c307ea940b862523ec20b4b95e2dfd0473b706f1be335811ff0b09e5f9",
+  "comparisons": 1080,
+  "assertion_fault_comparisons": 180,
+  "source_owned_zero_bytes_compared": 28208,
+  "attribute_records": 5,
+  "scope": "Ten creator/stopper bodies, all five native CMSIS attribute records, zeroed TCB/stack reservations, repeated creation, failed termination and exact creation assertion faults",
+  "limitations": [
+    "CMSIS create/terminate are intercepted and task-entry symbols are reference-only test bindings.",
+    "112-byte TCB reservations do not prove the complete kernel TCB configuration.",
+    "Actual task execution, scheduling, physical faults and original compiler output remain open."
+  ],
+  "instruction_identity_proven": false
+}

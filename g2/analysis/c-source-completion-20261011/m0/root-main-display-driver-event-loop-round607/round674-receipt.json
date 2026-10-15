@@ -1,0 +1,38 @@
+{
+  "round": 674,
+  "component": "uLED type-5 and type-6 control composed native verification; type-6 object helpers",
+  "status": "C candidates type-5/6 control validated against composed native cases; vendor subset links relocatably; type-5/6 prepare and ROM delay remain open",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": {
+    "display_driver_uled_pin_control_type6.c": "4e7b0061949924de0a20a2faffee1f3ac76f94b8b8167ff2c725970964d97243",
+    "display_driver_uled_type6_object_helpers.c": "dd1f6663aabe8c941460dc94aa11d80bb4705cd5f513e47a5fcd297b70434656"
+  },
+  "verifier_sha256": {
+    "verify_display_driver_uled_pin_control_type5_native.py": "a8bdb17f3afdc60530a082accb9143932a5fa9b6cc74bb32fc4890036894f7b3",
+    "verify_display_driver_uled_pin_control_type6_native.py": "2a1bc0f15d93b281598c4095b789127753c33158286049e6122540c19927a0b7"
+  },
+  "builder_sha256": "6fc64543081d21ca014a4f9b0806a2bb4a906bd757032e6bc10f610e42aee3e9",
+  "link_audit_sha256": "d33cfd9f3c2e67df99b993c585f48101107471318e62c29456a99b870fa24f8b",
+  "object_sha256": "9dcda46ee0df523d981e76e46023cb5855800cac4f4a0ceed7c744588c063104",
+  "validation": {
+    "native_type5_control_cases": 32,
+    "native_type6_control_cases": 32,
+    "defined_symbols": 51,
+    "selected_provider_imports": 0,
+    "missing_helper_imports": [
+      "display_driver_uled_pin_prepare_type5_4c4086",
+      "display_driver_uled_pin_prepare_type6_4c427e",
+      "display_driver_uled_rom_delay_00000040"
+    ]
+  },
+  "gates": {
+    "source_complete": false,
+    "byte_equal": false,
+    "hardware_proven": false,
+    "whole_images_complete": 0
+  },
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "estimated_uled_vendor_remaining": "40-85%",
+  "estimated_apollo_remaining": "80-95%"
+}

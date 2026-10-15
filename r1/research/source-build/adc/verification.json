@@ -1,0 +1,18 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "adc_report_sha256": "384c3f80ba82a016313006869153c97570bfc72a97eec52f8ec0ecd7b378468e",
+  "integration_report_sha256": "75095a0b5f83c870c839fec7734a5965765182ace6e03e20d1aeca7ed0ba6a40",
+  "object_sha256": "d6bc7ba12935ed4ac4278b1b06306a8e15c6281b03e91cf8fa483dbfdcc1d684",
+  "comparisons": 354,
+  "initialized_state_bytes": 124,
+  "runtime_archive_sha256": "c9a996915868c6c720aa505fa0c241da7ea01f96b901cd09ebb6960b8608762c",
+  "scope": "Three typed ADC records, registration, open/config/error/settling order, named sampling and all-channel close transitions versus stock",
+  "limitations": [
+    "Final nrfx ADC and error-handler seams are intercepted; this does not establish physical sampling or fatal-error runtime behavior.",
+    "Sample tests write a result even on injected provider failure; untouched/uninitialized result behavior remains unproven.",
+    "Settling compares work arguments, not cycles.",
+    "Newlib strcmp is a binary test dependency."
+  ],
+  "application_linked": false,
+  "instruction_identity_proven": false
+}

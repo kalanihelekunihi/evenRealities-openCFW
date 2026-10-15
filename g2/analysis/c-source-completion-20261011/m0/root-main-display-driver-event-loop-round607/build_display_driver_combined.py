@@ -26,7 +26,9 @@ sources=[callbacks/n for n in ('display_driver_callbacks.c','display_driver_attr
                      'display_driver_uled_work_buffer.c',
                      'display_driver_gpu_blit.c',
                      'display_driver_nema_mode_helpers.c',
-                     'display_driver_nema_mode_tables.c')]
+                     'display_driver_nema_mode_tables.c',
+                     'display_driver_nema_mode.c',
+                     'display_driver_uled_row_callback.c')]
 objects=[]
 for source in sources:
  obj=out/(source.stem+'.o')

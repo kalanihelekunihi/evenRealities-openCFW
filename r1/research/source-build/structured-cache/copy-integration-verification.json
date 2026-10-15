@@ -1,0 +1,18 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "a3a7b0b1afd3e3617ba815054c041a19e424abccd80612ed017085e2d67b35a5",
+  "object_sha256": "b2708d1c928784ea0ce9715e1c39024aba52e583546e4eb2c1b2fb49cc05c3b7",
+  "runtime_report_sha256": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+  "provider_reports": {
+    "structured-cache-copy/report.json": "e27305e34089de2483e01274234fd71610811f34a46ca0ea1bdb16885435df6a",
+    "rtos-critical/report.json": "9ae1c4134463e13f97ce7dab7b1d6627447604bf25c5460bda572f06be1cf2fc"
+  },
+  "actual_cache_copy": true,
+  "comparisons": 15680,
+  "scope": "Exact ring bytes, write index, strict free-space checks, wrapping, invalid indexes, zero-sized rings and pre-copy transport thresholds with actual source memcpy",
+  "limitations": [
+    "Connection getter, BLE transmit and event publish are intercepted; actual cache-copy, critical and memory providers execute.",
+    "Ring initialization, concurrency, physical transport and original compiler output remain open."
+  ],
+  "instruction_identity_proven": false
+}

@@ -1,5 +1,17 @@
 # R1 BLE transmit-queue dispatch correlation
 
+## Native source reconstruction update
+
+`r1/components/board/native_tx.c` now compiles all three veneers and their
+common producer, with 26,931 comparisons against original Thumb execution.
+The guarded paths use actual source connection getters. Native task creators
+and stoppers in `native_task_lifecycle.c` separately preserve their five
+CMSIS attribute records and zero-initialized TCB/stack reservations. Heap,
+queue/flags and logging remain intercepted in the transmit oracle; actual BLE
+workers, exact allocator extensions, scheduler configuration and original
+instruction identity remain gates. These native providers are distinct from
+the portable typed-envelope/planning implementations described below.
+
 ## Disposition
 
 Three functions / 572 executable bytes are admitted as R1 product-specific message-envelope and

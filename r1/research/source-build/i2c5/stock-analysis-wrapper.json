@@ -1,0 +1,62 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "analysis_elf_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "elf_type": "ET_EXEC",
+  "text_load_address": "0x27000",
+  "text_roundtrip_exact": true,
+  "labels": {
+    "r1_stock_gpio_pin_set": "0x79434",
+    "r1_stock_i2c5_acquire": "0x504d8",
+    "r1_stock_i2c5_release": "0x504c0"
+  },
+  "commands": [
+    [
+      "arm-none-eabi-objcopy",
+      "-I",
+      "binary",
+      "-O",
+      "elf32-littlearm",
+      "-B",
+      "arm",
+      "--rename-section",
+      ".data=.text,alloc,load,readonly,code,contents",
+      "r1/blobs/official/r1-2.2.6.0009/application.bin",
+      "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/r1-stock-analysis-d88os22t/unbased.elf"
+    ],
+    [
+      "arm-none-eabi-objcopy",
+      "--change-section-address",
+      ".text=0x27000",
+      "--set-start",
+      "0x504d9",
+      "--add-symbol",
+      "$t=.text:0,local",
+      "--add-symbol",
+      "r1_stock_gpio_pin_set=.text:0x52435,global,function",
+      "--add-symbol",
+      "r1_stock_i2c5_acquire=.text:0x294d9,global,function",
+      "--add-symbol",
+      "r1_stock_i2c5_release=.text:0x294c1,global,function",
+      "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/r1-stock-analysis-d88os22t/unbased.elf",
+      "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/r1-stock-analysis-d88os22t/stock-analysis.elf"
+    ],
+    [
+      "arm-none-eabi-ld",
+      "-Ttext=0x27000",
+      "--entry=r1_stock_i2c5_acquire",
+      "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/r1-stock-analysis-d88os22t/stock-analysis.elf",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-r1-native-analysis.elf"
+    ],
+    [
+      "arm-none-eabi-objcopy",
+      "-O",
+      "binary",
+      "--only-section=.text",
+      "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-r1-native-analysis.elf",
+      "/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/r1-stock-analysis-d88os22t/roundtrip.bin"
+    ]
+  ],
+  "scope": "Analysis wrapper only. Retained executable bytes are never source-build or source-completeness inputs.",
+  "loader_requirements": "Import the ELF using automatic format detection. Explicit language invokes Ghidra-MCP raw import; ET_REL also causes a default rebase. Neither is suitable for these absolute stock addresses."
+}

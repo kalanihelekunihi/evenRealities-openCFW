@@ -5,7 +5,8 @@ _Static_assert(sizeof(struct pb_ostream_candidate)==20u,"nanopb ostream ABI");
 extern uint8_t audio_settings_notify_staging[104]; /* RAM 0x200725a0 */
 extern uint8_t audio_settings_notify_encode_buffer[256]; /* RAM 0x200706ec */
 extern uint32_t audio_settings_notify_magic; /* RAM 0x2007486c */
-extern const uint8_t audio_settings_status_pb_descriptor[]; /* ROM 0x77772c */
+struct pb_msgdesc_candidate;
+extern const struct pb_msgdesc_candidate audio_settings_status_pb_descriptor; /* ROM 0x77772c */
 extern uint8_t audio_uart_device_role_get(void); /* selected 0x45a568 */
 extern void audio_uart_buffer_zero(void *,uint32_t,uint32_t); /* selected 0x43c0e4 */
 extern void audio_uart_checksum_copy(void *,const void *,uint32_t); /* selected 0x439c04 */
@@ -57,7 +58,7 @@ uint32_t audio_settings_notify_common(uint8_t *packet) {
                                     audio_settings_notify_staging[0],audio_settings_notify_magic);
     struct pb_ostream_candidate stream;
     audio_pb_ostream_from_buffer(&stream,audio_settings_notify_encode_buffer,256u);
-    if(audio_pb_encode(&stream,audio_settings_status_pb_descriptor,audio_settings_notify_staging)==0u) {
+    if(audio_pb_encode(&stream,&audio_settings_status_pb_descriptor,audio_settings_notify_staging)==0u) {
         const char *why=stream.errmsg!=0?stream.errmsg:none;
         if((audio_log_flags()&2u)!=0u)
             audio_log_extended(1u,module,path,function,381u,encode_message,why);

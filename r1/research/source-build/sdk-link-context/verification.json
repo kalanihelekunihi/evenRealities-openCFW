@@ -1,0 +1,23 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "103a6e4fd6495809959e2aef4f98911bbb26e6b56e80b9876448ce77f9c2d1ad",
+  "object_sha256": "9110a29699e217d2e4275889ec6c85d194eb69cdc1130e8f1b8c09df81db18ee",
+  "actual_connection_index_executed": false,
+  "index_report_sha256": null,
+  "comparisons": 37154,
+  "comparisons_by_kind": {
+    "core": 36864,
+    "nulls": 16,
+    "aliases": 144,
+    "mutations": 128,
+    "faults": 2
+  },
+  "scope": "Unchanged pinned Nordic lookup; output clearing/null order, descriptor field offsets, word alignment, 20-index sentinel, low-byte index truncation, capacity, 32-bit address arithmetic, output/descriptor aliasing, callback mutation and full register arguments, saved registers/stack",
+  "limitations": [
+    "ble_conn_state_conn_idx is intercepted; actual connection registry/configuration and concurrency remain open.",
+    "Descriptor fixtures are fully mapped eight-byte records. Original byte-versus-halfword alignment-check fault granularity is not established for partially mapped records.",
+    "Pointer arithmetic outside allocated C objects is observed for this pinned compiled target only; this is not a portable-C guarantee.",
+    "Physical BLE behavior, exact compiler output and whole-image linking remain unproven."
+  ],
+  "instruction_identity_proven": false
+}

@@ -1,0 +1,49 @@
+{
+  "round": 665,
+  "component": "Apollo shared uLED pin bitmap providers 0x4c3750, 0x4c377a, 0x4c37a8, 0x4c37ca, 0x4c37fe; composed type-4 prepare/finalize",
+  "status": "Five C bodies compile and pass 347 native/C bitmap cases; composed type-4 prepare/finalize/wait chain passes 512 native/C cases with controlled lower pin/power/delay calls; candidate unselected",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "72f3d34d942461f6772f16c98d70f69ebf26b5008dba645ffadf52181819e176",
+  "verifiers_sha256": {
+    "verify_display_driver_uled_pin_bitmap_native.py": "c4282eb913ab0efe85fde9836afc25b0a043c48f5be53ebcf6d6ebb1d05c65c8",
+    "verify_display_driver_uled_pin_prepare_type4_composed_native.py": "6ee471a04cef55222fba1b55d5d884aacdc102c6edc74b61ee0b16232ac95e0a"
+  },
+  "builder_sha256": "4e3e6901827f2ade8f4b62a3f975039223234c7f1a1893d960f2e3249996bdfe",
+  "link_audit_sha256": "ec31fd08f415be78967e1bf7cf3329e72859ad0498b1c88d1706298770f18fed",
+  "object_sha256": "8d6fbff2a253bd1f00cd21ca81d358bd5c7ade2730a885b9d72fbc96e2dcef69",
+  "validation": [
+    "PASS_DISPLAY_DRIVER_ULED_PIN_BITMAP_NATIVE 347",
+    "PASS_DISPLAY_DRIVER_ULED_PIN_PREPARE_TYPE4_COMPOSED_NATIVE 512",
+    "PASS_ULED_VENDOR_CANDIDATE_LINK 27 0 15",
+    "Cortex-M55 warnings-as-errors compile",
+    "git diff --check"
+  ],
+  "unresolved": [
+    "display_driver_uled_delay_4807a0",
+    "display_driver_uled_pin_control_type0_4c3c2e",
+    "display_driver_uled_pin_control_type1_4c3ca2",
+    "display_driver_uled_pin_control_type2_4c3e9a",
+    "display_driver_uled_pin_control_type3_4c3d28",
+    "display_driver_uled_pin_control_type5_4c420c",
+    "display_driver_uled_pin_control_type6_4c43ec",
+    "display_driver_uled_pin_prepare_type0_4c3bfc",
+    "display_driver_uled_pin_prepare_type1_4c3c60",
+    "display_driver_uled_pin_prepare_type2_4c3d9e",
+    "display_driver_uled_pin_prepare_type3_4c3cd4",
+    "display_driver_uled_pin_prepare_type5_4c4086",
+    "display_driver_uled_pin_prepare_type6_4c427e",
+    "display_driver_uled_power_apply_4d3938",
+    "display_driver_uled_power_set_4d391e"
+  ],
+  "gates": [
+    "Pin bitmap table fixed at native SRAM 0x20073324; source-owned placement/relocation open",
+    "Power, delay and other type-specific pin providers remain unresolved",
+    "Full MSPI destroy real-callee behavior and asynchronous callbacks unproven",
+    "Other 27 vendor callbacks, option relocation, handle placement, workspace extent and whole-image gates open"
+  ],
+  "selected_apollo_unresolved": 619,
+  "integrated_candidate_unresolved": 617,
+  "whole_images_complete": 0,
+  "estimated_uled_vendor_remaining": "70-95%",
+  "estimated_apollo_remaining": "80-95%"
+}

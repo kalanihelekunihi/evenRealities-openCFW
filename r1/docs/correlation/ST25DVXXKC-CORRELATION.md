@@ -63,10 +63,12 @@ Their body SHA-256 values are respectively
 
 ## Authenticated R1 bus-IO callback table
 
-The literal table at `0x00044C34` contains the six odd Thumb pointers in the exact
-`ST25DVxxKC_IO_t` field order from the pinned upstream header: `Init`, `DeInit`,
-`IsReady`, `Read`, `Write`, and `GetTick`. The registration function at
-`0x00044BEC` installs that complete table. Independent disassembly of the rebuilt
+The literal pool at `0x00044C34` contains six odd Thumb pointers in the order
+`Init`, `DeInit`, `IsReady`, `Read`, `Write`, and `GetTick`. This is not the
+upstream `ST25DVxxKC_IO_t` structure order: its `Write` field is at +12 and
+`Read` at +16. The registration function at `0x00044BEC` loads the pool values
+into their named stack fields, swapping the read/write pool positions. The
+source-owned binding uses designated fields and verifies those offsets. Independent disassembly of the rebuilt
 application authenticates each callback as a contiguous function:
 
 | IO field | Stock extent | Bytes | Body SHA-256 | Transparent C symbol |
@@ -79,7 +81,7 @@ application authenticates each callback as a contiguous function:
 | `GetTick` | `0x00044C58..<0x00044C5E` | 6 | `579f66b93cd2bbcb53693929db18e36025cdc6e5d94aa3e7590989e1d8a117b1` | `r1_st25dvxxkc_bus_tick_get` |
 
 The read/write veneers truncate the device address to eight bits, as the stock
-`uxtb` instructions do. `IsReady` delays for ten ticks and returns success; init
+`uxtb` instructions do. `IsReady` calls the stock `nrf_delay_ms(10)` routine at `0x000784F0` and returns success; init
 and deinit acquire/release the recovered `i2c_5` resource. The clean-room API
 fails closed when one of those typed providers is absent rather than dereferencing
 an unbound stock callback.
@@ -111,7 +113,7 @@ invalid state/length pointers; this is deliberate memory-safety hardening.
 | `0x00044C58` | `ST25DVxxKC_IO_t.GetTick` board tick callback |
 | `0x00044C64` | `ST25DVxxKC_IO_t.DeInit` / `i2c_5` resource release |
 | `0x00044C6E` | `ST25DVxxKC_IO_t.Init` / `i2c_5` resource acquire |
-| `0x00044C78` | `ST25DVxxKC_IO_t.IsReady` ten-tick readiness delay |
+| `0x00044C78` | `ST25DVxxKC_IO_t.IsReady` ten-millisecond readiness delay |
 | `0x00044C84` | `ST25DVxxKC_IO_t.Read` address-truncating bus veneer |
 | `0x00044C8A` | `ST25DVxxKC_IO_t.Write` address-truncating bus veneer |
 | `0x00044BEC` | nRF52 bus registration and provider initialization |

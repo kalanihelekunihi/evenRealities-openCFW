@@ -1,0 +1,438 @@
+{
+  "status": "PASS_EXPERIMENTAL_SIX_CURRENT_C_EVIDENCE_AUDIT",
+  "target_id": "official-s200-v2.2.6.10",
+  "target_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+  "images": {
+    "codec": {
+      "receipt": {
+        "path": "g2/build/c-firmware/20261014/codec-source-refresh/receipt.json",
+        "sha256": "8cf8d83a5dff5acc35d3e0d5c3ec02fd60d1dc90909ecc260dc0c99703c7ca8f"
+      },
+      "candidate": {
+        "path": "g2/build/c-firmware/20261014/codec-source-refresh/codec/candidate.o",
+        "sha256": "55bf4a968f108d2abcafb526412686c56cc01e0e94b5b72fbd9ecea0388113f9"
+      },
+      "candidate_compilation_passed": true,
+      "recorded_unresolved": [],
+      "source_complete": false,
+      "full_payload_linked": false,
+      "remaining_gate": [
+        "product configuration and private driver/speech/application source",
+        "startup, initialized data and final linker layout",
+        "qualified C-SKY execution for reconstructed numerical behavior",
+        "DSP subset compilation does not cover the complete codec image"
+      ]
+    },
+    "ble_em9305": {
+      "receipt": {
+        "path": "g2/build/c-firmware/20261014/em9305-source-refresh/receipt.json",
+        "sha256": "0ca651816ad97080bb87595ac7c70e5c914e368f77d0eb9977d374c351811282"
+      },
+      "candidate": {
+        "path": "g2/build/c-firmware/20261014/em9305-source-refresh/ble_em9305/candidate.o",
+        "sha256": "28d2425d1659b99e4c2ef5391962455887f851689f961919b20811a41d4e44ca"
+      },
+      "candidate_compilation_passed": true,
+      "recorded_unresolved": [
+        "opencfw_em9305_rom_allocator_capacity_1030e8",
+        "opencfw_em9305_rom_cipher_block_10090c",
+        "opencfw_em9305_rom_cipher_key_1009c0",
+        "opencfw_em9305_rom_curve_base_108178",
+        "opencfw_em9305_rom_curve_multiply_1081e8",
+        "opencfw_em9305_rom_curve_validate_108260",
+        "opencfw_em9305_rom_radio_100dd4",
+        "opencfw_em9305_rom_radio_100ddc",
+        "opencfw_em9305_rom_radio_100fc0",
+        "opencfw_em9305_rom_radio_101038",
+        "opencfw_em9305_rom_radio_101054",
+        "opencfw_em9305_rom_random_10a7f8"
+      ],
+      "source_complete": false,
+      "full_payload_linked": false,
+      "remaining_gate": [
+        "ARC EM7D producing configuration and original/controller execution qualification",
+        "producing QP/C port and EM-Core/controller source",
+        "product configuration and all four record source/layout ownership"
+      ],
+      "resident_rom_binding": {
+        "receipt": {
+          "path": "g2/build/c-firmware/20261014/em9305-source-refresh/resident-rom-bindings-receipt.json",
+          "sha256": "5740fe7591f7bed897695bdf923632b7d2536e1692bdb054a61d0003b219d624"
+        },
+        "object": {
+          "path": "g2/build/c-firmware/20261014/em9305-source-refresh/ble_em9305/candidate-resident-rom-bound.o",
+          "sha256": "f39c44e375ae568d9a968a0994fc6553f90971556d8e1208d7a2ea7cf8572123"
+        },
+        "external_entries": 12,
+        "unresolved_after_external_binding": 0
+      }
+    },
+    "apollo_bootloader": {
+      "receipt": {
+        "path": "g2/build/c-firmware/20261014/bootloader-root-refresh/receipt.json",
+        "sha256": "7ebc94e2a56ce03a889eccd3b5d50d8d5cb1f848c7495ec4d6ec6c3e067c9825"
+      },
+      "candidate": {
+        "path": "g2/build/c-firmware/20261014/bootloader-root-refresh/apollo_bootloader/candidate.o",
+        "sha256": "9c60e5f73472484d58946c7ef850dadbdcc3154f3a306fce10e6b27e50960634"
+      },
+      "candidate_compilation_passed": true,
+      "recorded_unresolved": [
+        "opencfw_boot_rom48",
+        "opencfw_boot_rom_delay_cycles",
+        "opencfw_boot_rom_mram_program"
+      ],
+      "source_complete": false,
+      "full_payload_linked": false,
+      "remaining_gate": [
+        "whole-path startup-power root/clock child composition beyond the bounded native query/critical oracle",
+        "resident-ROM addresses bind externally and selected symbols link, but ROM timing and logger/runtime behavior remain unqualified",
+        "current exploratory link verifies 256 vectors, 63 initialized pointer relocations and bounded scatter destinations; final load/run placement and startup execution remain unproven",
+        "whole-image body and code/data coverage have not been established"
+      ]
+    },
+    "touch": {
+      "receipt": {
+        "path": "g2/build/c-firmware/20261014/touch-default-enum-providers/receipt.json",
+        "sha256": "ff5bbc45a97f04eaf66795c9e7120b52228ab8c41c054a4939534dd8af161310"
+      },
+      "candidate": {
+        "path": "g2/build/c-firmware/20261014/touch-default-enum-providers/touch-default-enum-candidate.o",
+        "sha256": "e92112b21571e199a2e4417ca3c7cab1c6a8301b88466fe0f6b38ffb4ba7283f"
+      },
+      "strong_unresolved": [],
+      "optional_weak_unresolved": [
+        "_ITM_deregisterTMCloneTable",
+        "_ITM_registerTMCloneTable",
+        "__deregister_frame_info",
+        "__register_frame_info"
+      ],
+      "lp_history_capacity_proven": false,
+      "source_complete": false,
+      "full_payload_linked": false,
+      "remaining_gate": [
+        "Seven rebuilt providers use the pinned GCC 14.2 container but are new local objects, not the originally pinned bytes.",
+        "The current clang binary differs from the pinned compiler hash, although all 61 selected C object bytes match the pinned outputs.",
+        "LP history allocation extent, final RAM layout, whole-image and hardware behavior remain open."
+      ]
+    },
+    "case": {
+      "receipt": {
+        "path": "g2/analysis/c-source-completion-20261011/m0/case_current_20261014.elf.receipt.json",
+        "sha256": "bc9b6637ab710b5ac07e54d10be891ef050b9d4e055afc8597f073f4917a581f"
+      },
+      "experimental_elf": {
+        "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/c-source-completion-20261011/m0/case_current_20261014.elf",
+        "sha256": "3336c755e68ba071ed1c70ce05867c2c0d24b8483eadbe2045014a4eed5d4aaa"
+      },
+      "experimental_undefined": [],
+      "source_complete": false,
+      "full_payload_linked": false,
+      "remaining_gate": [
+        "Source graph and relocations link at an experimental placement only.",
+        "The text extent exceeds the official CASE payload; section order, native entry addresses, checksums and packaging are not stock-equal.",
+        "No device, flash, peripheral timing or physical policy proof."
+      ],
+      "gc_size_frontier": {
+        "receipt": {
+          "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/receipt.json",
+          "sha256": "2855ba249eec5f496b7da419d1b4798fab604e15c871af38933bfc2e63c49738"
+        },
+        "experimental_elf": {
+          "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/case-current-gc-experimental.elf",
+          "sha256": "1252f32b770b8fc3427ac2a04f0e55b790f724c91c62704769d8f3e87a432162"
+        },
+        "stock_payload_bytes": 55752,
+        "gc_load_bytes": 66432,
+        "overflow_bytes": 10680,
+        "native_reset_entry": "0x08000145",
+        "gc_reset_entry": "0x800dbc9"
+      },
+      "fixed_reset_size_frontier": {
+        "receipt": {
+          "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/reset-size-receipt.json",
+          "sha256": "da97a928000f7c0e0df26f9b636c894c820877d0c54a2568c5ff15eb646e0d52"
+        },
+        "experimental_elf": {
+          "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/case-current-gc-fixed-reset-sort.elf",
+          "sha256": "540950ec6e4a7c673e435410df74a3cbab1a284ef5102575c117da4450ef2b9f"
+        },
+        "entry": "0x8000145",
+        "matching_vector_words": 13,
+        "vector_words": 46,
+        "overflow_bytes": 10719
+      },
+      "mixed_oz_size_frontier": {
+        "receipt": {
+          "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/mixed-oz-receipt.json",
+          "sha256": "9d300b54bcd202b7c26753ef207f43e6f997c870d51e444a771e2a45dd393810"
+        },
+        "experimental_elf": {
+          "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/case-current-oz-mixed-fixed-reset.elf",
+          "sha256": "9489a89667341b63dd53a907715a1229938cd967cc038577710f8a1d99493cb7"
+        },
+        "load_bytes": 63603,
+        "overflow_bytes": 7851,
+        "entry": "0x8000145",
+        "matching_vector_words": 13,
+        "native_pointer_leads_present": 39
+      }
+    },
+    "apollo_main": {
+      "receipt": {
+        "path": "g2/build/c-firmware/20261014/main-post-tail-c-replay/receipt.json",
+        "sha256": "ecadb7be81ff56eef4821050fdc97fcee4e54d78624db8d0e00b343e6a36a4f0"
+      },
+      "candidate": {
+        "path": "g2/build/c-firmware/20261015/main-lv-scroll-view-step-44f40c/apollo-main-lv-scroll-view-step-44f40c.o",
+        "sha256": "4edce81e4f925fca53ecf95a730cc035b6e85043dd57d243dc27a3f887528959"
+      },
+      "unresolved_count": 232,
+      "unresolved_symbols": [
+        "audio_ble_att_table_main",
+        "audio_ble_att_table_secondary",
+        "audio_ble_attc_table",
+        "audio_ble_atts_ind_table",
+        "audio_ble_atts_table",
+        "audio_ble_bootloader_flag",
+        "audio_ble_comm_slave_dispatch",
+        "audio_ble_dm_adv_table",
+        "audio_ble_dm_conn_state_table_a",
+        "audio_ble_dm_conn_table_a",
+        "audio_ble_dm_conn_table_b",
+        "audio_ble_dm_conn_table_c",
+        "audio_ble_dm_conn_update_invalid_action",
+        "audio_ble_dm_conn_update_invalid_event_action",
+        "audio_ble_dm_conn_update_trace_entry",
+        "audio_ble_dm_connection_registry",
+        "audio_ble_dm_lesc_table",
+        "audio_ble_dm_master_table_a",
+        "audio_ble_dm_master_table_b",
+        "audio_ble_dm_phy_table",
+        "audio_ble_dm_priv_table_a",
+        "audio_ble_dm_priv_table_b",
+        "audio_ble_dm_security_table",
+        "audio_ble_dm_slave_table_a",
+        "audio_ble_dm_slave_table_b",
+        "audio_ble_dm_stack_table_78a88c",
+        "audio_ble_flash_callbacks",
+        "audio_ble_flash_staging_200636a0",
+        "audio_ble_hci_radio_boot_config",
+        "audio_ble_hci_radio_dispatch_contexts_20068928",
+        "audio_ble_hci_radio_dispatch_handlers_20068228",
+        "audio_ble_hci_radio_scheduler_config",
+        "audio_ble_master_message",
+        "audio_ble_master_message_preprocess",
+        "audio_ble_master_registration_table",
+        "audio_ble_mram_records_7ff000",
+        "audio_ble_msgtx_message",
+        "audio_ble_ota_route_context",
+        "audio_ble_privacy_nvm_records",
+        "audio_ble_profile_handler_entry_5fa056",
+        "audio_ble_registration_records",
+        "audio_ble_scan_core_full",
+        "audio_ble_slave_connection_info",
+        "audio_ble_slave_profile_table",
+        "audio_ble_vendor_cycle_delay_rom_00000040",
+        "audio_ble_vendor_stack_rows_2003b558",
+        "audio_ble_whitelist_info",
+        "audio_charge_callback_manager",
+        "audio_dashboard_layout_current",
+        "audio_efs_transfer_state",
+        "audio_fault_unmapped_code_message_509b48",
+        "audio_file_lfs_context",
+        "audio_registry_ring_connect_buffer",
+        "audio_registry_ring_connect_parse_5ce990",
+        "audio_ring_battery_callback_manager",
+        "audio_terminal_event_names",
+        "audio_tpl_response_buffer",
+        "audio_tpl_service_table",
+        "audio_tpl_timeout_ids",
+        "audio_uart_ambiq_draw_arc_53f09c",
+        "audio_uart_ambiq_draw_border_53df00",
+        "audio_uart_ambiq_draw_box_shadow_540036",
+        "audio_uart_ambiq_draw_fill_53dc38",
+        "audio_uart_ambiq_draw_line_53ecfc",
+        "audio_uart_ambiq_draw_mask_5409f0",
+        "audio_uart_ambiq_draw_triangle_53e728",
+        "audio_uart_ambiq_vector_shape_draw_5202ec",
+        "audio_uart_display_current_set",
+        "audio_uart_display_draw_buffer",
+        "audio_uart_display_graphics_blend_513924",
+        "audio_uart_display_input_check",
+        "audio_uart_display_layer_prepare",
+        "audio_uart_display_notify",
+        "audio_uart_display_platform_bind",
+        "audio_uart_display_sync_info",
+        "audio_uart_display_upgrade",
+        "audio_uart_locale_data_de",
+        "audio_uart_locale_data_en",
+        "audio_uart_locale_data_es",
+        "audio_uart_locale_data_fr",
+        "audio_uart_locale_data_it",
+        "audio_uart_locale_data_ja",
+        "audio_uart_locale_data_zh_cn",
+        "audio_uart_locale_data_zh_hk",
+        "audio_uart_logger_ble_handler_5bf972",
+        "audio_uart_lv_heap_pool",
+        "audio_uart_lv_level_names",
+        "audio_uart_lv_transition_timer_callback_450758",
+        "audio_uart_master_scheduler_thread",
+        "audio_uart_notify_take_455afc",
+        "audio_uart_page_43ded4",
+        "audio_uart_page_43dfa4",
+        "audio_uart_page_43f0e0",
+        "audio_uart_page_43f142",
+        "audio_uart_page_43f4c0",
+        "audio_uart_page_43f506",
+        "audio_uart_page_43f568",
+        "audio_uart_page_43f66c",
+        "audio_uart_page_43f6b8",
+        "audio_uart_page_44104c",
+        "audio_uart_page_44127e",
+        "audio_uart_page_4412ec",
+        "audio_uart_page_44140e",
+        "audio_uart_page_451740",
+        "audio_uart_page_487022",
+        "audio_uart_page_498680",
+        "audio_uart_page_49942e",
+        "audio_uart_page_event_45f914",
+        "audio_uart_page_event_dispatch_49a31c",
+        "audio_uart_page_layout_update_49a602",
+        "audio_uart_registry_callback_43c496",
+        "audio_uart_registry_callback_4592dc",
+        "audio_uart_registry_callback_460638",
+        "audio_uart_registry_callback_46327e",
+        "audio_uart_registry_callback_4668ae",
+        "audio_uart_registry_callback_467e68",
+        "audio_uart_registry_callback_468484",
+        "audio_uart_registry_callback_468f24",
+        "audio_uart_registry_callback_469580",
+        "audio_uart_registry_callback_469d48",
+        "audio_uart_registry_callback_46aeea",
+        "audio_uart_registry_callback_4716ba",
+        "audio_uart_registry_callback_472102",
+        "audio_uart_registry_callback_47cf60",
+        "audio_uart_registry_callback_492f8c",
+        "audio_uart_registry_callback_492fdc",
+        "audio_uart_registry_callback_49ddb8",
+        "audio_uart_registry_callback_49e68c",
+        "audio_uart_registry_callback_49ed04",
+        "audio_uart_registry_callback_4acb40",
+        "audio_uart_registry_callback_4ae73c",
+        "audio_uart_registry_callback_4c5dbc",
+        "audio_uart_registry_callback_4e1192",
+        "audio_uart_registry_callback_4e1490",
+        "audio_uart_registry_callback_4e1b30",
+        "audio_uart_registry_callback_4e1dd4",
+        "audio_uart_registry_callback_4e2976",
+        "audio_uart_registry_callback_4e2c40",
+        "audio_uart_registry_callback_4ffca2",
+        "audio_uart_registry_callback_501820",
+        "audio_uart_registry_callback_584ee4",
+        "audio_uart_registry_callback_58607a",
+        "audio_uart_registry_callback_589fe6",
+        "audio_uart_registry_callback_58a130",
+        "audio_uart_registry_callback_59f0ea",
+        "audio_uart_registry_callback_59f236",
+        "audio_uart_registry_callback_5b0476",
+        "audio_uart_registry_callback_5b06aa",
+        "audio_uart_registry_callback_5bf7b8",
+        "audio_uart_registry_callback_5cf330",
+        "audio_uart_registry_callback_5cf67e",
+        "audio_uart_registry_callback_5cf7f2",
+        "audio_uart_registry_callback_5e44f6",
+        "audio_uart_registry_callback_5eeec4",
+        "audio_uart_registry_callback_5f958c",
+        "audio_uart_registry_callback_5f9924",
+        "audio_uart_registry_callback_5f9ce0",
+        "audio_uart_registry_child_497960",
+        "audio_uart_registry_child_5872f4",
+        "audio_uart_registry_context_20000044",
+        "audio_uart_registry_context_200004d8",
+        "audio_uart_registry_context_200005bc",
+        "audio_uart_registry_context_200009a4",
+        "audio_uart_registry_context_20000b1c",
+        "audio_uart_registry_context_20000b38",
+        "audio_uart_registry_context_200014cc",
+        "audio_uart_registry_context_20002ca8",
+        "audio_uart_registry_context_20002cc4",
+        "audio_uart_registry_context_20002ce0",
+        "audio_uart_registry_context_20002e34",
+        "audio_uart_registry_context_20003064",
+        "audio_uart_registry_context_20003080",
+        "audio_uart_registry_context_200030a0",
+        "audio_uart_registry_context_20003a40",
+        "audio_uart_registry_context_20003a5c",
+        "audio_uart_registry_context_20003bd0",
+        "audio_uart_registry_context_20003bf0",
+        "audio_uart_registry_context_20003da4",
+        "audio_uart_registry_context_20003e50",
+        "audio_uart_registry_context_2000418c",
+        "audio_uart_ring_config_primary",
+        "audio_uart_ring_config_secondary",
+        "audio_uart_ring_locale_dispatch_200044c0",
+        "audio_uart_ring_primary_descriptors",
+        "audio_uart_ring_secondary_active",
+        "audio_uart_ring_secondary_descriptors",
+        "g2_audio_codec_check_timer",
+        "g2_audio_dispatch_state",
+        "g2_audio_transaction_transport",
+        "g2_audio_tx_packet",
+        "g2_audio_voltage_routes",
+        "g2_codec_clock_pin_0a",
+        "g2_codec_clock_pin_0b",
+        "g2_codec_clock_pin_0c",
+        "g2_codec_clock_pin_0d",
+        "g2_codec_clock_pin_1a",
+        "g2_codec_clock_pin_1b",
+        "g2_codec_clock_pin_1c",
+        "g2_codec_clock_pin_1d",
+        "g2_codec_clock_pin_1e",
+        "g2_codec_heap_mutex",
+        "g2_codec_heap_pool",
+        "g2_codec_i2s_config_base",
+        "g2_codec_i2s_dma_descriptor",
+        "g2_codec_i2s_handle",
+        "g2_codec_i2s_handle_pool",
+        "g2_codec_power_state",
+        "g2_codec_shared_enable_mask",
+        "g2_display_state_table",
+        "g2_extended_log_fatal_callback",
+        "g2_extended_log_product",
+        "g2_flashdb_db_rows",
+        "g2_flashdb_print_buffer",
+        "g2_flashdb_print_sink",
+        "g2_log_process_string",
+        "g2_log_thread_string",
+        "g2_log_time_string",
+        "g2_pcm_registration_rows",
+        "g2_pdm_alternate_config",
+        "g2_pdm_alternate_descriptor",
+        "g2_pdm_alternate_handle",
+        "g2_pdm_clock_pin_50",
+        "g2_pdm_clock_pin_51",
+        "g2_pdm_handle_rows",
+        "g2_pdm_production_config",
+        "g2_pdm_production_descriptor",
+        "g2_pdm_production_handle",
+        "g2_uart_sync_buffer",
+        "offline_assert",
+        "platform_log_error",
+        "stock_clock_mux_reset",
+        "stock_register_callbacks"
+      ],
+      "source_complete": false,
+      "full_payload_linked": false,
+      "remaining_gate": [
+        "232 current imports need source ownership or attributed external contracts.",
+        "Complete data/startup/layout and physical execution remain unproved."
+      ]
+    }
+  },
+  "complete_source_payloads": 0,
+  "limits": [
+    "Each row is a separately qualified candidate or experimental object, not one unified final build.",
+    "Zero imports or an experimental ELF does not prove source coverage, stock layout, or hardware operation."
+  ]
+}

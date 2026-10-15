@@ -1,0 +1,64 @@
+{
+  "units": [
+    {
+      "source": "r1/components/board/structured_log.c",
+      "source_sha256": "e49f7bc55f529f02c91f5dde2f78330d439a7114fd86ffd87517d1b0aebc3166",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/structured-log/structured_log.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/board/structured_log.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/structured-log/structured_log.o"
+      ],
+      "compiled": true,
+      "object_sha256": "dd2a009bd46e24c89db0b4555cd0ba3d6e7db63d34432c679178d1f4d57a5221",
+      "undefined": [
+        "r1_structured_log_encode_format",
+        "r1_structured_log_mode",
+        "vPortEnterCritical",
+        "vPortExitCritical"
+      ],
+      "defined": [
+        "r1_structured_log_clock_available",
+        "r1_structured_log_clock_state",
+        "r1_structured_log_export_active",
+        "r1_structured_log_export_state",
+        "r1_structured_log_format"
+      ],
+      "emitted_function_count": 3
+    }
+  ],
+  "inputs": {
+    "r1/components/board/structured_log.c": "e49f7bc55f529f02c91f5dde2f78330d439a7114fd86ffd87517d1b0aebc3166",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdarg.h": "ce6e43d79dc89b50208ecf259b1ffd519f5a78cd3a2c7fcaac6386f376b89fef",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_header_macro.h": "7b3fbcc442af2508f36bb2dc98d9ad2b8a1f5c0f5333394fb2159c8bd5ecd5b8",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___gnuc_va_list.h": "feca975bfdfb254d17458a8e3d51f8ad6d9bdc9fd6287727f0f8b2fb81fcb0b0",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_list.h": "81c3055f7033e26e7f53705653bc9d69b5202f25c2692e03b3a4f77ff44a7d76",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_arg.h": "274c75a1db86f649439aa3bcc1dead4170725e6f803925c3fc38a2e93307afdc",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___va_copy.h": "f0a8d3c963338173f2d57b2cbc209dde38c90536107b15eb0cf78166d4caee1f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_copy.h": "bb195f56cb08d4cee6a60bd9f62f34466e8ac4f89f6fed043b044cb2f7ead010",
+    "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/toolchain/cmsis/include/cmsis_gcc.h": "0837f98e834d6a529854c8c86336e9d99eb8e379bf1deb964858d7863950f862"
+  },
+  "application_linked": false,
+  "instruction_identity_proven": false
+}

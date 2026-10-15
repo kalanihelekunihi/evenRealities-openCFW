@@ -1,0 +1,31 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "slices": [
+    {
+      "entry": "0x923a4",
+      "length": 12,
+      "slice_sha256": "09eac463364de063225c7dce1278880dfb97c8ca1a2e54581fdbee4007cc5556"
+    },
+    {
+      "entry": "0x923b4",
+      "length": 92,
+      "slice_sha256": "0458434e40289a408453b64141838f6caa655d821d6aa5c35e7e4eab09c3e707"
+    },
+    {
+      "entry": "0x92440",
+      "length": 80,
+      "slice_sha256": "25872037723d0cad6e48924a971975aecbf199465bf62a88a401c8f490cb802e"
+    },
+    {
+      "entry": "0x45c20",
+      "length": 26,
+      "slice_sha256": "f2adef76ae45b3177f0c0aa7557869666eb717046d8127c070445b515993c1d7"
+    }
+  ],
+  "mcp_program": "stock-r1-native-analysis.elf",
+  "mcp_readbacks_match_locked_artifact": true,
+  "limitations": [
+    "REA current automatic analysis reports no procedure at requested task/synchronization entries; recovery uses accumulated corpus, exact instructions and actual original-code differential execution.",
+    "REA and Ghidra-MCP share the Ghidra backend; byte readbacks are not independent semantic proof."
+  ]
+}

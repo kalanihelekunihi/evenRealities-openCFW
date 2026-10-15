@@ -61,10 +61,14 @@ sub-record (blocked family; opaque here).  Engine state (`record + 0x08`):
 `+0x24` read-pin(pin).  The reconstruction static-asserts these offsets for
 the 32-bit target ABI.
 
-Recovered board bindings: `i2c_2` SCL P1.13 / SDA P0.28 / delay 1, `i2c_3`
-SCL P0.11 / SDA P0.12 / delay 5, `i2c_4` SCL P1.09 / SDA P0.31 / delay 1,
-`i2c_5` SCL P1.14 / SDA P1.11 / delay 1 (boundary-doc table; pins are stored
-as absolute nRF52840 GPIO numbers, P1.n = 32 + n).
+Recovered board bindings, corrected by authenticated scatter execution on
+2026-10-15: `i2c_2` SCL P0.28 / SDA P1.13 / delay 1, `i2c_3` SCL P0.12 /
+SDA P0.11 / delay 5, `i2c_4` SCL P0.31 / SDA P1.09 / delay 1, `i2c_5`
+SCL P1.11 / SDA P1.14 / delay 1. Input pull is 3 in all four initial records.
+Earlier text reversed the pin fields and incorrectly called the pull value
+unrecoverable. GPIO/delay callbacks are already present in the scatter-loaded
+records before product initialization; source-owned callback installation is
+still required for the native C build.
 
 Request blocks: read `+0x00` u8 address, `+0x02` register (u8 on i2c_2/3,
 u16 on i2c_4/5), `+0x0C` buffer pointer, `+0x10` length (u8 on i2c_2/3/5,
@@ -85,7 +89,7 @@ the blocks with 16-bit fields and truncates exactly where stock truncates.
 | `0x000554B0..<0x000554DE` | 46 | `software_twi_i2c_3_read` | same shape, own record |
 | `0x000554E4..<0x00055512` | 46 | `software_twi_i2c_4_read` | u16 register/count |
 | `0x00055518..<0x00055542` | 42 | `software_twi_i2c_5_read` | u16 register, u8 count; merges NULL-request and not-open into 4 |
-| `0x00055548..<0x000555F4` (+3 copies) | 172×4 | `software_twi_read_byte` | MSB-first sample; ACK (drive SDA low) or NACK (leave released) trailing pulse selected by flag; both tails converge on release_high(SDA) |
+| `0x00055548..<0x000555F4` (+3 copies) | 172×4 | `software_twi_read_byte` | MSB-first sample; ACK (drive SDA low) or NACK (leave released) trailing pulse selected by flag; ACK ends with release_high(SDA); NACK returns from the last delay without another SDA release |
 | `0x000557F8..<0x00055878` | 128 | `software_twi_read_transaction_reg8` | start / addr(W) / reg8 / repeated-start / addr\|1 / count-1 ACKed bytes + 1 NACKed byte / stop; NACK aborts with 11, no stop; count 0 still reads one byte |
 | `0x00055878..<0x000558F8` | 128 | `software_twi_read_transaction_reg8` | second copy (i2c_3) |
 | `0x000558F8..<0x00055988` | 144 | `software_twi_read_transaction_reg16` | reg16 MSB-first; u16 count (i2c_4) |
@@ -145,7 +149,7 @@ i2c_5 read adapter's merged 4; the operation order and udelay placement of
 every primitive (start has three udelays, stop one, wait-ACK three,
 write-byte three per bit, read-byte 21 total); the NACK error polarity of
 wait-ACK; NACK aborts returning 11 without a STOP; the in-loop SDA release
-after write-byte bit 7; the shared release_high(SDA) tail of read-byte;
+after write-byte bit 7; the ACK-only release_high(SDA) tail of read-byte;
 16-bit register bytes MSB-first; per-bus request field widths and
 truncations; the i2c_4 open's fixed `(pin, 1, 1, 0, 0, 0)` gpio-configure
 arguments; and the recovered pin/delay board bindings.
@@ -164,7 +168,7 @@ arguments; and the recovered pin/delay board bindings.
 - `test_write_byte`: wire-decoded bit patterns for 0xA5/0x00/0xFF, per-bit
   op counts, the bit-7 SDA release, NULL engine.
 - `test_read_byte`: sampled-byte recovery, ACK vs NACK trailing drives, the
-  exact shared tail, udelay count, NULL engine.
+  ACK/NACK tail distinction, udelay count, NULL engine.
 - `test_read_transaction`: happy-path byte recovery and wire bytes
   (including repeated start and addr|1), NACK aborts at address and
   register with no STOP, the count-0 single-byte quirk, count-1, the
@@ -210,3 +214,76 @@ does not touch them):
   forty-function / 3,524-byte census with per-extent SHA-256 pins — these
   continue to pin the stock bytes and need no change for the reconstruction
   itself.
+
+## Authenticated primitive comparison (2026-10-15)
+
+`r1/tools/verify_software_twi_primitives.py` links the actual compiled C bodies
+and executes all twenty original primitive bodies from the hash-locked
+application. All 4,144 comparisons pass, including all 256 write/read values,
+both read ACK choices, two pin/delay/pull configurations and ordered callback
+traces. This found and corrected an extra SDA-release call in the reconstructed
+NACK tail: stock returns from its last delay callback, whereas ACK additionally
+releases SDA. Earlier descriptions of a shared tail were incorrect.
+
+Only fully bound valid engine states are compared. GPIO/delay callbacks are
+intercepted; this does not establish physical wire behavior or elapsed time.
+The existing invalid-state guards, folded copies, native record population,
+upstream attribution and exact instruction identity remain separate gates.
+The historical host test file mentioned above is absent from the current tree;
+its description is not a current test receipt.
+
+The transaction mode (`--transactions`) now compares all eight original read/
+write transaction bodies with the compiled C and its actual primitive calls.
+All 1,575 comparisons pass: three address values, low/high register bytes,
+lengths 0/1/2/7/255, successful transfers and NACK aborts at every short-transfer
+phase (first three phases for long transfers). Return statuses, full ordered
+GPIO/delay traces and 512-byte buffer snapshots match. Zero-length reads still
+read one byte; zero-length writes send the address/register without payload.
+This does not test adapter count truncation, counts above 255 for the wide
+read path, invalid provider states, native record installation or physical wire
+behavior. Those are explicit remaining contracts.
+
+## Native binding integration (2026-10-15)
+
+The four board-binding wrappers are now compiled in
+`r1/components/software-twi/stock_records.c` alongside the native registry.
+Their 112-byte layout is asserted at compile time and fixed-address execution
+passes 48 stock comparisons, including duplicate registration and preserved
+record fields. The earlier statement that these wrappers are not reconstructed
+is historical. Actual scatter seeds and runtime GPIO/operation installation
+remain unresolved; this does not connect the reconstructed contextual engine
+state to native records yet.
+
+## Startup configuration recovery (2026-10-15)
+
+`inspect_stock_twi_initialization.py` executes original scatter loading from
+`0x283A0` and stops before runtime entry `0x27208`. It records the initial four
+records, callback pointers, operation tables and record hashes. This is an
+analysis execution of original code, never a source-build input.
+`verify_twi_board_configuration.py` then executes the compiled contextual
+initializer/accessors and passes 24 scalar and 24 provider-reference checks.
+That check corrected all four reversed SCL/SDA assignments in source. It does
+not establish native initial-data relocation or callback-body closure.
+
+Native lifecycle bodies are now implemented in the typed record module:
+four opens at `0x55330/60/90/E4` and closes at `0x551E8/5520C/230/254`.
+They use installed callbacks without the contextual reconstruction's extra
+provider guards. A 512-case original-code oracle executes the actual stock
+and compiled Nordic GPIO bodies, comparing flags, untouched bytes, statuses
+and ordered peripheral writes. Source-owned table installation and invalid
+callback behavior remain separate gates.
+
+## Native fault-contract build (2026-10-15)
+
+The native integration compiles the existing engine with
+`SOFTWARE_TWI_NATIVE_CONTRACT=1`, omitting its contextual provider and transaction
+buffer guards, and `-fno-delete-null-pointer-checks` so the compiler preserves
+address-zero accesses. The contextual build retains its documented guards.
+No reference image or hash is changed.
+
+`verify_twi_adapters.py --null-buffers` passes 570 comparisons, including 76
+actual matching unmapped accesses. The oracle checks access type/address/width,
+all preceding GPIO/delay callbacks, statuses of early returns (for example a
+NACK before the payload access), and buffer/state effects. This closes the
+tested NULL-payload divergence for native adapters. Invalid callback states,
+physical exception registers, exact instructions and delay cycles remain gates.

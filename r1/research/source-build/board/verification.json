@@ -1,0 +1,51 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "board_report_sha256": "20516536eb98cfe0d219f693772bec377931bb1eb7d9528688e045499632c935",
+  "relocatable_sha256": "e78f1aa967004574417526baacae0d2d755a2e2a32519f6b2787f2858c5fda8c",
+  "binary_runtime_linked": false,
+  "cache_initialization_bytes_compared": 8444,
+  "event_context_prefix_initial_bytes_compared": 48,
+  "tx_context_prefix_initial_bytes_compared": 32,
+  "task_zero_initial_bytes_compared": 28208,
+  "connection_initial_bytes_compared": 6,
+  "sync_watchdog_initial_bytes_compared": 24,
+  "watchdog_registry_current_task_initial_bytes_compared": 25,
+  "watchdog_startup_initial_zero_bytes_compared": 88,
+  "wdt_sdk_initial_control_bytes_compared": 8,
+  "nvic_initial_zero_bytes_compared": 12,
+  "watchdog_log_descriptor_bytes_compared": 87,
+  "output_descriptor_bytes_compared": 68,
+  "ble_semaphore_initial_zero_bytes_compared": 8,
+  "connection_state_candidate_initial_zero_bytes_compared": 124,
+  "registry_observer_record_bytes_pointer_normalized": 8,
+  "ble_observer_table_bytes_pointer_normalized": 96,
+  "ble_observer_range_set_bytes_compared": 44,
+  "gatt_log_descriptor_bytes_compared": 668,
+  "advertising_compatible_context_zero_bytes_compared": 2152,
+  "gatt_context_initial_zero_bytes_compared": 36,
+  "qwr_context_initial_zero_bytes_compared": 36,
+  "ble_stack_initial_zero_bytes_compared": 1,
+  "bae8_descriptor_bytes_compared": 806,
+  "rtos_tick_critical_initial_zero_bytes_compared": 21,
+  "watchdog_device_state_bytes_compared": 80,
+  "watchdog_port_table_bytes_compared": 12,
+  "comparisons": 240,
+  "registry_records": 15,
+  "registration_group_orders": 24,
+  "resolved_handles": {
+    "nfc_gpo_irq": "0x200071ac",
+    "i2c_5": "0x20007584",
+    "vnfc_rect_adc": "0x20006f58"
+  },
+  "scope": "Actual source-owned WDT/ADC/GPIO/TWI records populate one registry; original versus compiled registration/discovery match across all group orders without prebound handles",
+  "test_only_bindings": [
+    "Unresolved function providers are test-only traps; dispatch tables, BAE8 service and opaque observer contexts are address-only bindings without initial content/extent proof"
+  ],
+  "limitations": [
+    "Structured/Nordic logging backends remain explicit production requirements.",
+    "All memory/string code in this executable comes from compiled, attributable C providers; original Arm runtime identity remains unproven.",
+    "This does not establish complete application startup, hardware behavior or instruction identity."
+  ],
+  "application_linked": false,
+  "instruction_identity_proven": false
+}

@@ -1,0 +1,43 @@
+{
+  "upstream": "https://git.musl-libc.org/git/musl",
+  "mirror": "https://github.com/ifduyue/musl",
+  "ref": "v1.2.5",
+  "commit": "0784374d561435f7c787a555aeab8ede699ed298",
+  "ref_verified_against": [
+    "primary Git remote",
+    "GitHub mirror Git remote"
+  ],
+  "purpose": "Attributable C memory/string provider candidate; not original Arm runtime source or instruction identity",
+  "files": [
+    {
+      "path": "memcpy.c",
+      "upstream_path": "src/string/memcpy.c",
+      "url": "https://raw.githubusercontent.com/ifduyue/musl/0784374d561435f7c787a555aeab8ede699ed298/src/string/memcpy.c",
+      "sha256": "1664d565f968b053ac33c5ac615c057a255a5821c8fa510fba61d4f63dee08e9"
+    },
+    {
+      "path": "memset.c",
+      "upstream_path": "src/string/memset.c",
+      "url": "https://raw.githubusercontent.com/ifduyue/musl/0784374d561435f7c787a555aeab8ede699ed298/src/string/memset.c",
+      "sha256": "2a74d9e7f988945e0d691d480b78d77a228da0d2be401c1000637cc879b2c0be"
+    },
+    {
+      "path": "strcmp.c",
+      "upstream_path": "src/string/strcmp.c",
+      "url": "https://raw.githubusercontent.com/ifduyue/musl/0784374d561435f7c787a555aeab8ede699ed298/src/string/strcmp.c",
+      "sha256": "3e1793ea2dd358e5c884c4dd232083605d0f6775f7ebe19d03d64fe97068a78f"
+    },
+    {
+      "path": "COPYRIGHT",
+      "upstream_path": "COPYRIGHT",
+      "url": "https://raw.githubusercontent.com/ifduyue/musl/0784374d561435f7c787a555aeab8ede699ed298/COPYRIGHT",
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+    },
+    {
+      "path": "strlen.c",
+      "upstream_path": "src/string/strlen.c",
+      "url": "https://raw.githubusercontent.com/ifduyue/musl/0784374d561435f7c787a555aeab8ede699ed298/src/string/strlen.c",
+      "sha256": "cf9359c1bcee96df1f3a7ef0fb969339b7ed87b202d80dc7e7fcd6d1239b7484"
+    }
+  ]
+}

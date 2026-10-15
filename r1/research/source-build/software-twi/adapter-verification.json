@@ -1,0 +1,35 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "integration_report_sha256": "75095a0b5f83c870c839fec7734a5965765182ace6e03e20d1aeca7ed0ba6a40",
+  "relocatable_sha256": "59fd0cf8cc9531115ecce6657d2c27ede819ab1960d6bf5dddfc98b92c9dce35",
+  "comparisons": 570,
+  "fault_comparisons": 0,
+  "comparisons_by_entry": {
+    "0x5547c": 72,
+    "0x554b0": 72,
+    "0x554e4": 72,
+    "0x55518": 72,
+    "0x55dbc": 72,
+    "0x55e40": 72,
+    "0x55ec4": 66,
+    "0x55f5c": 72
+  },
+  "entry_symbols": {
+    "0x5547c": "r1_stock_i2c2_read",
+    "0x554b0": "r1_stock_i2c3_read",
+    "0x554e4": "r1_stock_i2c4_read",
+    "0x55518": "r1_stock_i2c5_read",
+    "0x55dbc": "r1_stock_i2c2_write",
+    "0x55e40": "r1_stock_i2c3_write",
+    "0x55ec4": "r1_stock_i2c4_write",
+    "0x55f5c": "r1_stock_i2c5_write"
+  },
+  "scope": "Eight native request adapters executing actual compiled transactions/primitives; null requests, closed/nonzero flags, NACK exits and 8/16-bit count behavior",
+  "limitations": [
+    "GPIO/delay callbacks are intercepted; electrical behavior remains unverified.",
+    "Null payloads are tested separately with --null-buffers. Invalid callback states remain a separate gate.",
+    "Native initial-table installation and complete application link remain open."
+  ],
+  "instruction_identity_proven": false,
+  "application_linked": false
+}

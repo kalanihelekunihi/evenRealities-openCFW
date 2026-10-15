@@ -33,7 +33,8 @@ extern void g2_wsf_candidate_buffer_free_word(uint32_t); /* selected WsfBufFree 
 extern uint32_t audio_ble_hci_vendor_log_enabled_4c9c50(void);
 extern uint32_t audio_ble_hci_vendor_compare_44b610(const void *,const void *,uint32_t);
 extern uint32_t audio_log_flags(void);
-extern void audio_ble_hci_vendor_log_43d574(uint32_t,const void *,const void *,const void *);
+extern void audio_log_extended(uint8_t,const char *,const char *,const char *,
+                               uint32_t,const char *,...);
 extern void audio_ble_hci_wsf_trace(const void *,const void *);
 
 static uint16_t word(const uint8_t *p) { return (uint16_t)((uint16_t)p[0]|((uint16_t)p[1]<<8)); }
@@ -62,7 +63,10 @@ static void deliver_vendor_diagnostic(uint32_t *low,uint32_t *high) {
     if(category!=0u && (audio_log_flags()&2u)!=0u) {
         *low=0xb0fu;
         *high=(uint32_t)(uintptr_t)audio_ble_hci_vendor_message_77f720;
-        audio_ble_hci_vendor_log_43d574(category,audio_ble_hci_vendor_app,file,detail);
+        audio_log_extended((uint8_t)category,
+                           (const char *)audio_ble_hci_vendor_app,
+                           (const char *)file,(const char *)detail,
+                           *low,(const char *)(uintptr_t)*high);
     }
 }
 

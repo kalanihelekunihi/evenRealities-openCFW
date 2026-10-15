@@ -119,10 +119,10 @@ typedef struct {
 } software_twi_board_config;
 
 static const software_twi_board_config board_configs[SOFTWARE_TWI_BUS_COUNT] = {
-    {"i2c_2", 32u + 13u, 28u, 1u}, /* SCL P1.13, SDA P0.28 (GXT310) */
-    {"i2c_3", 11u, 12u, 5u},       /* SCL P0.11, SDA P0.12 (dormant) */
-    {"i2c_4", 32u + 9u, 31u, 1u},  /* SCL P1.09, SDA P0.31 (Goodix) */
-    {"i2c_5", 32u + 14u, 32u + 11u, 1u}, /* SCL P1.14, SDA P1.11 (ST25DV/YHM2710) */
+    {"i2c_2", 28u, 32u + 13u, 1u}, /* SCL P0.28, SDA P1.13 */
+    {"i2c_3", 12u, 11u, 5u},       /* SCL P0.12, SDA P0.11 */
+    {"i2c_4", 31u, 32u + 9u, 1u},  /* SCL P0.31, SDA P1.09 */
+    {"i2c_5", 32u + 11u, 32u + 14u, 1u}, /* SCL P1.11, SDA P1.14 */
 };
 
 /* Recovered fixed arguments of the two gpio_configure calls in the i2c_4
@@ -137,10 +137,16 @@ static software_twi_record bus_records[SOFTWARE_TWI_BUS_COUNT];
 static software_twi_gpio_configure_fn gpio_configure_provider;
 
 static bool engine_operational(const software_twi_engine *engine) {
+#ifdef SOFTWARE_TWI_NATIVE_CONTRACT
+    /* Native stock dispatch dereferences installed callbacks without guards. */
+    (void)engine;
+    return true;
+#else
     return engine != NULL && engine->drive_low != NULL &&
            engine->release_high != NULL && engine->set_output != NULL &&
            engine->set_input != NULL && engine->udelay != NULL &&
            engine->read_pin != NULL;
+#endif
 }
 
 void software_twi_initialize(const software_twi_providers *providers) {
@@ -246,8 +252,8 @@ uint8_t software_twi_read_byte(uint32_t send_ack, software_twi_engine *engine) {
     }
     engine->set_output(engine->sda_pin);
     engine->udelay(engine->delay_context);
-    /* ACK and NACK paths differ only in the first SDA drive; both converge on
-     * the shared trailing release_high(SDA). */
+    /* Stock ACK releases SDA after the trailing delay. NACK returns directly
+     * from that delay callback without another SDA release. */
     if (send_ack != 0u) {
         engine->drive_low(engine->sda_pin);
     } else {
@@ -258,7 +264,8 @@ uint8_t software_twi_read_byte(uint32_t send_ack, software_twi_engine *engine) {
     engine->udelay(engine->delay_context);
     engine->drive_low(engine->scl_pin);
     engine->udelay(engine->delay_context);
-    engine->release_high(engine->sda_pin);
+    if (send_ack != 0u)
+        engine->release_high(engine->sda_pin);
     return value;
 }
 
@@ -292,9 +299,11 @@ static uint32_t read_transaction(uint8_t address, uint16_t reg,
                                  bool wide_register, uint8_t *buffer,
                                  uint32_t count,
                                  software_twi_engine *engine) {
+#ifndef SOFTWARE_TWI_NATIVE_CONTRACT
     if (!engine_operational(engine) || buffer == NULL) {
         return SOFTWARE_TWI_STATUS_BAD_ARGUMENT;
     }
+#endif
     software_twi_start(engine);
     software_twi_write_byte(address, engine);
     if (software_twi_wait_ack(engine) != 0u) {
@@ -374,9 +383,11 @@ static uint32_t write_transaction(uint8_t address, uint16_t reg,
                                   bool wide_register, const uint8_t *buffer,
                                   uint32_t count,
                                   software_twi_engine *engine) {
+#ifndef SOFTWARE_TWI_NATIVE_CONTRACT
     if (!engine_operational(engine) || (count != 0u && buffer == NULL)) {
         return SOFTWARE_TWI_STATUS_BAD_ARGUMENT;
     }
+#endif
     software_twi_start(engine);
     software_twi_write_byte(address, engine);
     if (software_twi_wait_ack(engine) != 0u) {

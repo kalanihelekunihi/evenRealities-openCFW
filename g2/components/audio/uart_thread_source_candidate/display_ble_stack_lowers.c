@@ -2,6 +2,7 @@
 #include <stdint.h>
 extern uint8_t audio_ble_stack_state_20072cb8[]; /* live RAM 0x20072cb8 */
 extern uint8_t audio_ble_hci_stack_state_20073870[]; /* live RAM 0x20073870 */
+extern uint8_t audio_ble_dm_stack_rows_200738dc[]; /* live RAM 0x200738dc */
 extern uint8_t audio_ble_hci_controller_state_20071478[]; /* live RAM 0x20071478 */
 extern uint8_t audio_ble_hci_cmd_state_20073a90[]; /* live RAM 0x20073a90 */
 extern uint8_t audio_ble_dm_config[]; /* selected live RAM 0x20000694 */
@@ -49,7 +50,7 @@ void audio_ble_stack_lower_4bae6c(uint8_t handler) {
     audio_ble_other_handler_start();
 }
 void audio_ble_dm_stack_state_init(void) { /* 0x55ba70 */
-    uint8_t *rows=audio_ble_hci_stack_state_20073870+0x6cu;
+    uint8_t *rows=audio_ble_dm_stack_rows_200738dc;
     for(uint32_t i=0;i<2u;i++) {
         *(uint16_t *)(void *)(rows+0x10u+2u*i)=0x60u;
         *(uint16_t *)(void *)(rows+0x14u+2u*i)=0x30u;

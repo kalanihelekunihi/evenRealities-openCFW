@@ -1,0 +1,32 @@
+{
+  "round": 681,
+  "component": "Apollo-main uLED MSPI interrupt service 0x4c240e with pinned Ambiq callback pair",
+  "status": "C candidate compiles and links locally with 70 defined/0 undefined; 27 controlled native cases cover 468/712 service bytes; remaining branches, callback relocation and whole-image gates open",
+  "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_sha256": "f159ead20520aaaa1de725226bd804c42237bdd7026914d1cf93484fbdb89c37",
+  "verifier_sha256": "04c6f297aa01249a124aac6ba1411114068f3d5a93136a02333edf39d04ce596",
+  "builder_sha256": "ac6ade4b46a2f85fc298a598cdb120f860abf62329d17768572190d44a4cc2fb",
+  "link_audit_sha256": "41e33ee4cd7ed54f8d194332c4d31e9d620789d8e4788b16defd0504c8400227",
+  "object_sha256": "20dc460079d93b0ce1bc1d181dd04827309b9512f4d722cd6c9e7713deb78c8d",
+  "validation": {
+    "native_cases": 27,
+    "native_service_bytes_covered": 468,
+    "native_service_total_bytes": 712,
+    "candidate_defined_symbols": 70,
+    "candidate_undefined": [],
+    "option_callback_C_bodies": 2,
+    "option_callback_unique_total": 29
+  },
+  "gates": {
+    "service_body_complete": false,
+    "callback_pointer_relocation_complete": false,
+    "resident_rom_behavior_proven": false,
+    "source_complete": false,
+    "byte_equal": false,
+    "hardware_proven": false,
+    "whole_images_complete": 0
+  },
+  "integrated_candidate_unresolved": 617,
+  "estimated_uled_vendor_remaining": "40-90%",
+  "estimated_apollo_remaining": "80-95%"
+}

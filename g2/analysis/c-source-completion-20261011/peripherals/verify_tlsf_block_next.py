@@ -7,7 +7,13 @@ from unicorn import Uc,UC_ARCH_ARM,UC_MODE_THUMB,UC_MODE_MCLASS,UC_HOOK_CODE
 from unicorn import arm_const as A
 R=Path(__file__).resolve().parents[4];D=Path(__file__).resolve().parent;S=R/'g2/components/audio/file_pool_free_candidate/tlsf_block_next.c';O=D/'tlsf-block-next-m4.o';E=D/'tlsf-block-next-m4.elf'
 subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-std=c11','-ffreestanding','-O2','-Wall','-Wextra','-Werror','-c',str(S),'-o',str(O)],check=True)
-subprocess.run(['arm-none-eabi-ld','-Ttext=0x100000','--defsym=g2_file_close_error=0x101001','-o',str(E),str(O)],check=True)
+children=[]
+for stem in ('tlsf_absorb_leaves','tlsf_align'):
+ source=R/'g2/components/audio/file_pool_free_candidate'/f'{stem}.c'
+ obj=D/f'{stem}-block-next-m4.o'
+ subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m4','-mthumb','-std=c11','-ffreestanding','-O2','-Wall','-Wextra','-Werror','-c',str(source),'-o',str(obj)],check=True)
+ children.append(obj)
+subprocess.run(['arm-none-eabi-ld','-Ttext=0x100000','--defsym=g2_file_close_error=0x101001','-o',str(E),str(O),*map(str,children)],check=True)
 with E.open('rb') as f:
  e=ELFFile(f);seg=[(x['p_vaddr'],x.data()) for x in e.iter_segments() if x['p_type']=='PT_LOAD'];sy={x.name:x['st_value'] for x in e.get_section_by_name('.symtab').iter_symbols()}
 B=(R/'g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[0x20:]

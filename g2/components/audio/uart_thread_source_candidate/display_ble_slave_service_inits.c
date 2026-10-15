@@ -4,7 +4,7 @@ extern volatile uint8_t audio_ble_msgtx_handler_id; /* RAM 0x20074f8e */
 extern uint8_t *audio_ble_msgtx_state; /* pointer cell 0x20074338 */
 extern uint8_t *audio_ble_msgtx_mode; /* pointer cell 0x2007433c */
 extern const uint8_t *audio_ble_msgtx_table_slot; /* pointer cell 0x2007435c */
-extern const uint8_t audio_ble_msgtx_table[]; /* ROM 0x784eb0 */
+extern const uint8_t audio_ble_msgtx_table[16]; /* ROM 0x784eb0 */
 extern uint8_t audio_ble_ota_handler_state[4]; /* RAM 0x200748b4 */
 extern uint8_t audio_ble_eus_handler_state[4]; /* RAM 0x200748ac */
 extern uint8_t audio_ble_ess_handler_state[4]; /* RAM 0x200748a8 */

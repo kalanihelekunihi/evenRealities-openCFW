@@ -1,0 +1,114 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_poll": "0x0007a38c",
+  "enabled_address": "0x20007a1b",
+  "set_address": "0x0009ca94",
+  "sections_address": "0x0009ca70",
+  "ranges": [
+    [
+      "0x000c4568",
+      "0x000c4570"
+    ],
+    [
+      "0x000c4570",
+      "0x000c4598"
+    ],
+    [
+      "0x000c4598",
+      "0x000c45c0"
+    ],
+    [
+      "0x000c45c0",
+      "0x000c45c8"
+    ]
+  ],
+  "item_bytes": 8,
+  "event_buffer_bytes": 500,
+  "handlers": {
+    "r1_sdk_connection_event": "0x0005380c",
+    "nrf_ble_gatt_on_ble_evt": "0x000781b4",
+    "ble_advertising_on_ble_evt": "0x00051806",
+    "r1_connection_parameter_ble_observer": "0x00051aa0",
+    "r1_sdk_peer_manager_event": "0x00053924",
+    "nrf_ble_qwr_on_ble_evt": "0x000783da",
+    "r1_bae8_raw_observer": "0x00052b20",
+    "ble_dfu_buttonless_on_ble_evt": "0x00052154",
+    "r1_gap_event_plan_build": "0x00052b9c"
+  },
+  "contexts": {
+    "r1_ble_gatt_context": "0x20007e1c",
+    "r1_ble_advertising_context_a": "0x20007e64",
+    "r1_ble_advertising_context_b": "0x200082b0",
+    "r1_ble_qwr_context_a": "0x20007e40",
+    "r1_ble_qwr_context_b": "0x20007e4c",
+    "r1_ble_qwr_context_c": "0x20007e58",
+    "r1_native_bae8_service": "0x20006504",
+    "r1_ble_dfu_context": "0x2002c110"
+  },
+  "records": [
+    {
+      "address": "0xc4568",
+      "handler": "r1_sdk_connection_event",
+      "context": null
+    },
+    {
+      "address": "0xc4570",
+      "handler": "nrf_ble_gatt_on_ble_evt",
+      "context": "r1_ble_gatt_context"
+    },
+    {
+      "address": "0xc4578",
+      "handler": "ble_advertising_on_ble_evt",
+      "context": "r1_ble_advertising_context_a"
+    },
+    {
+      "address": "0xc4580",
+      "handler": "r1_connection_parameter_ble_observer",
+      "context": null
+    },
+    {
+      "address": "0xc4588",
+      "handler": "ble_advertising_on_ble_evt",
+      "context": "r1_ble_advertising_context_b"
+    },
+    {
+      "address": "0xc4590",
+      "handler": "r1_sdk_peer_manager_event",
+      "context": null
+    },
+    {
+      "address": "0xc4598",
+      "handler": "nrf_ble_qwr_on_ble_evt",
+      "context": "r1_ble_qwr_context_a"
+    },
+    {
+      "address": "0xc45a0",
+      "handler": "nrf_ble_qwr_on_ble_evt",
+      "context": "r1_ble_qwr_context_b"
+    },
+    {
+      "address": "0xc45a8",
+      "handler": "nrf_ble_qwr_on_ble_evt",
+      "context": "r1_ble_qwr_context_c"
+    },
+    {
+      "address": "0xc45b0",
+      "handler": "r1_bae8_raw_observer",
+      "context": "r1_native_bae8_service"
+    },
+    {
+      "address": "0xc45b8",
+      "handler": "ble_dfu_buttonless_on_ble_evt",
+      "context": "r1_ble_dfu_context"
+    },
+    {
+      "address": "0xc45c0",
+      "handler": "r1_gap_event_plan_build",
+      "context": null
+    }
+  ],
+  "limitations": [
+    "Callback addresses and context anchors authenticate ABI bindings, not provider bodies or opaque context extents/initialization.",
+    "These four ranges establish this poller priority order; live stack event delivery remains unproven."
+  ]
+}

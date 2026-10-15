@@ -1,5 +1,12 @@
 # Goodix GH3X2X democode integration correlation
 
+> Reconstruction update (2026-10-15): the public SpO2 version tag matches, but its
+> full configuration object differs from stock in three calibration words. The
+> R1-owned patch and complete 136-byte HR/HRV/SpO2 verification are documented in
+> `r1/source-config/goodix/README.md`. The expanded reconstruction also compiles
+> the source-correlated public algorithm-configuration unit; historical exclusions
+> below describe the retired clean-room build, not a blanket source-build gate.
+
 This note documents how the pinned Goodix GH3X2X democode is compiled into the openR1 host,
 Nordic SDK, and source-built Zephyr images, which parts of the vendor tree are admitted, and how every external symbol
 the admitted subset needs is satisfied. Evidence: the per-entry mapping

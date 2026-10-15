@@ -1,0 +1,29 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "3f8f03fe81d0eef480dfa60fb5f8cf999c5c29ee3243e0e77be83140352f5bce",
+  "relocatable_sha256": "2e48f762f6ac95261c2fb9e2c0fc2128ac460cd03f4cbb81985a58c1773c00ce",
+  "registry_report_sha256": "75095a0b5f83c870c839fec7734a5965765182ace6e03e20d1aeca7ed0ba6a40",
+  "runtime_report_sha256": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+  "comparisons": 319,
+  "actual_sdk_executed": true,
+  "actual_integer_runtime_executed": true,
+  "actual_critical_regions_executed": true,
+  "actual_tick_getter_executed": true,
+  "native_sdk_logging_executed": false,
+  "mode_values_tested": 1,
+  "mode_transition_sequences_tested": 0,
+  "descriptor_initial_bytes_compared": 0,
+  "ticks_report_sha256": "0a4c5f239d3d8e208b0b92b0c0e9aeb1c8fb71a084c3a38744012b1d58e82702",
+  "critical_report_sha256": "7612004a197c8f718aab40024f0fc83228c7b9d9ca321d41586cccdea66ce9c9",
+  "integer_runtime_report_sha256": "11f725f9bc6429f44be34d2666b9d72c7d8d04ad3ba4461df0f92bc75b0d6faf",
+  "state_initializer_bytes_compared": 80,
+  "port_table_bytes_compared": 12,
+  "scope": "Native port and cached device clients, actual registry/memory, repeated start/open/feed, typed 10-second priority-6 config and SDK adapter error handling; actual Nordic WDT state and MMIO/core writes execute",
+  "limitations": [
+    "ADC error logger is intercepted; Nordic WDT, integer division, critical-region and tick C bodies execute.",
+    "SDK MMIO cases use R1 logging mode zero; original gated SDK log routing remains outside this contract.",
+    "Handler pointer relocation is normalized; no original executable providers are linked into the candidate.",
+    "Physical watchdog expiry/reset, live timing, whole-image source completeness and original instruction identity remain open."
+  ],
+  "instruction_identity_proven": false
+}

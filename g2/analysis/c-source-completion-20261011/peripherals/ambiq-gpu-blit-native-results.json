@@ -1,0 +1,26 @@
+{
+  "status": "PASS_AMBIQ_GPU_BLIT_NATIVE",
+  "cases": 3611,
+  "source_sha256": "af6548ec706f60b94fdb7da1d81d4ea85980c92c1c8aabb49d3afad5ec23c356",
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "native_body_ranges": [
+    [
+      "0x4b1608",
+      "0x4b166f"
+    ],
+    [
+      "0x4b16b4",
+      "0x4b16f1"
+    ],
+    [
+      "0x4b173e",
+      "0x4b178b"
+    ]
+  ],
+  "native_body_sha256": "139f76548aff1c99c5cd47e2cfb875e46a1f7519d34b253d6b227ed56c029755",
+  "limits": [
+    "Allocator is entry-cut; state and command bytes compare against native execution",
+    "Synthetic format, width, stride and allocation cases include all low-seven-bit format values",
+    "Live GPU ownership, concurrent state changes, final placement and hardware remain unqualified"
+  ]
+}
