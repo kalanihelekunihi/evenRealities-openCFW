@@ -3049,3 +3049,2265 @@ unresolved routes across3326 rows. REA recovers the four sized getter/header
 bodies but misses serial's manual entry; Ghidra reads authenticate its observed
 span. Prior GXT pointer alias/NULL-reuse, shared DIF/ctype literal, reaper placement,
 original compiler, private history and byte-identical image gates remain open.
+
+
+Protocol control source checkpoint (2026-10-16): `native-protocol-control`
+and `native-protocol-control-runtime` compile the health-report setter,
+connection-control and pair-role handlers, plus supplemental command 83e2c
+and service-thread flag helper 33ae4. Three locked rows cover 284 native bytes;
+the supplemental 52 bytes add no inventory rows. Source owns 172 bytes of
+exact log text and five cold zero bytes (report flag and thread handle).
+REA headless Ghidra authenticated 13 byte ranges against the locked image.
+Direct Ghidra-MCP reported no running GUI instance after restart; this is an
+explicit tooling limitation, not a fresh direct-MCP verification claim.
+
+The receipt records 8,344 comparisons and 18,842 observations per side using
+actual source accessor, flag, checked-send and phone helpers, including the
+existing health-setting plan calling the new setter. Logging, BLE encoding,
+role assignment and OS callbacks remain fixtures. Logging captures the full
+setter word before storing its low byte; phone field8 and packet sequence are
+fresh reads. The command delays and signals worker flag4; no physical reset,
+advertising or pairing behavior is inferred. Private response-pointer identity,
+full raw ABI, instruction identity and complete image reconstruction remain gated.
+The initial field6 harness failure is preserved and superseded by the corrected
+field8 receipt. The combined object closes four imports and exposes BLE message
+encoding and phone-role assignment, leaving 72 unresolved imports.
+
+No new third-party attribution is inferred for these product-specific bodies.
+The existing pinned upstream runtime and RTOS providers remain attributable;
+future upstream changes require renewed contract validation. All previous serial
+private-history/canonical-getter, GXT pointer-alias/NULL-reuse, DIF/ctype literal,
+reaper placement, legacy interface and compiler/full-image gates remain open.
+
+
+BLE message encoder source checkpoint (2026-10-16): `native-ble-message`
+compiles 33850 (306 native bytes) and owns 330 bytes of exact log text plus
+the four-byte cold-zero queue cell at 20006574. The service-thread cell is
+reused from protocol control, without double counting. REA headless Ghidra
+procedure and ten byte receipts bind the body, literals and strings to the
+locked application. Product-specific encoder ancestry remains unattributed.
+The existing pinned musl memory implementation executes through the native
+memory ABI adapter; it is reused rather than duplicated.
+
+14,112 native/source comparisons (56,526 observations per side) cover null
+payload/queue, zero and unaligned lengths, allocation/queue failures, all log
+mode branches, callback register clobbers, queue/thread reloads and local
+message-pointer changes before free. Wrapping allocation sizes are tested
+with failing allocation fixtures; no huge copy or overflow safety is claimed.
+Allocator, queue, thread flags and logging are fixtures in this receipt.
+Their source bodies are linked in the larger 71-import object, but the full
+allocator/queue/RTOS graph is not executed by this verification. The private
+queue-item address, all raw registers/flags, instruction identity and byte-
+identical image remain gated. One parent import closes with none exposed.
+All prior reconstruction gates remain in force.
+
+
+BLE control composition additionally passed 8,344 comparisons (29,647
+observations per side) with actual accessor, control handlers, encoder and
+source memory copy. Allocation, queue, logging, role and OS effects remain
+fixtures. The larger graph is not claimed as fully executed.
+
+The locked ledger assigns `r1_ble_thread_message_encode` to both 33850 and
+33dbc. Frozen pseudocode shows distinct ABIs: 33dbc takes payload then length,
+zeroes its message buffer and queries the queue. The 33850 object cannot prove
+33dbc, so its symbol-only match is explicitly excluded from the frontier.
+The original ledger remains intact; 33dbc stays unresolved.
+
+
+Phone-role source checkpoint (2026-10-16): `native-phone-role` compiles the
+430-byte 4da28 contract and owns 667 bytes of exact text. It reuses both existing
+connection halfwords without claiming new cold data ownership. REA headless
+Ghidra procedure metadata and 25 byte receipts authenticate body, literal words,
+text and the 18-byte status-publication veneer. Ghidra's terminal-tail-call
+limitations are retained; those logger calls are returning in the comparison
+fixtures. No new upstream ancestry is inferred for this product-specific code.
+Existing pinned source providers remain reused in the larger link.
+
+4,800 comparisons with 36,558 observations per side include 472 assertion
+boundaries, full-word handles (including 1000ffff/ffffffff), low-halfword writes,
+fresh mode/connection reads, callback mutations and returning raw R0/callee/SP.
+The native successful path traverses the 5e1dc veneer to status publisher 5e118;
+source calls that same typed provider. Logging, delay, status publication and
+the fatal transfer boundary are fixtures; their full graph is not proved here.
+
+The native conflict assertion logs, stores e7f00000 in a stack word and BLXes
+the even stack address. Source leaves `r1_phone_role_assertion_stack_transfer`
+unresolved. Tests stop before that native transfer and at the source provider;
+no substitute trap or executable opcode array is supplied. Exception behavior,
+private stack identity, full raw ABI and byte-identical rebuild remain gated.
+Closing role assignment exposes this narrower gate, retaining 71 main imports.
+The pair handler's prior role callback fixture remains separate evidence; this
+unit receipt does not claim an executed pair/role/status graph. All earlier
+serial history, GXT alias, shared literal, placement and configuration gates
+remain in force.
+
+
+Status-ring source checkpoint (2026-10-16): `native-status-ring` preserves the
+older `native-status-record` source/receipt and builds a raw event-return variant
+with source-owned ring state: read/write bytes, dropped halfword, sixteen 8-byte
+records and device-state bytes2c/2d (134 total bytes). Cold initialized-data and
+zero-scatter evidence bind those cells; adjacent state padding remains unowned.
+The existing four tested ownership rows are not counted again. Five fresh REA
+headless Ghidra byte receipts authenticate publisher, getters and ring literals.
+
+33,578 comparisons (165,088 observations per side) use actual source device,
+peer and charge getters, compare raw R0/callee/SP/nonstack RAM, and cover full-word
+configuration checks, callback changes, ring/drop wrap and observed out-of-range
+write indices. These observations are not bounds-safety or hardware proof.
+Configuration, battery update, timestamp, critical entry/exit and event effects
+remain fixtures. The source keeps the event publisher's raw return word.
+
+A further 4,800 role/status graph comparisons (41,284 observations per side,
+472 fatal-boundary cases) execute the actual source role body and publisher.
+The exact assertion stack transfer remains unresolved. Main linkage closes
+status publication and charge lookup, exposes the existing battery updater,
+and has 70 unresolved imports. Full battery/event/RTOS/logging execution, private
+frames, raw ABI completeness, placement and image identity remain gates.
+
+Device bytes at20016bb0/1 must alias the eventual battery context base20016b84
+at44/45. No independent full battery context is allocated here; that future
+composition requires one storage owner and verified aliases. Older void status
+publisher declarations still need shared interface migration. No new upstream
+attribution is inferred; existing pinned runtime/RTOS providers remain reused.
+All prior source, history, pointer alias, literal and image gates remain open.
+
+
+Battery shared-context composition checkpoint (2026-10-16):
+`native-battery-context-runtime` source owns the missing device/runtime slices,
+thread cells and power-client word (166 new bytes). It reuses the two status
+bytes at device44/45 and four-byte ADC cache at runtime16 (six existing bytes).
+The source linker configuration joins those owners into 68-byte device and
+92-byte runtime views, with asserted aliases. The runtime cadence words are
+explicit source constants; the initial device zero region and initialized RAM
+receipt bind all cold bytes. This closes the earlier battery/status/ADC storage
+alias gate for this composition, without claiming whole-scatter ownership.
+
+The partial main link includes registered battery algorithms, control,
+statistics, voltage, configuration, reporting, frame, YHM and KV-field source.
+An unchanged CMSIS-FreeRTOS `osKernelGetTickFreq` body is selected from the
+hash-bound RTOS provider object, keeping its upstream provenance. Future
+upstream updates require renewed contract and image validation. No new product
+code ancestry is inferred from algorithm similarity.
+
+2,920 native/source comparisons include 24 cold-context cases, 336 explicit
+numeric cases across four FPSCR modes, and matching executions of three
+statistics plus four control entrypoints. The smaller tested graph executes
+updater/statistics/control source; lower algorithms, hardware and reporting
+remain fixtures there. The larger linked graph is not claimed fully executed.
+Fresh REA headless Ghidra reads bind the406-byte updater and16-byte literal
+range. Earlier77- and74-import compositions/receipts remain manifest-bound.
+
+The broader main object has73 imports: it closes the prior updater and charger
+state imports and exposes delay, battery/device-info KV handles, YHM readiness
+and timestamp-thunk requirements. This expands source coverage rather than
+using import count as a completeness metric. No new inventory rows are added.
+Full battery hardware/event/RTOS behavior, fatal stack transfer, raw/private
+ABI, final linker placement, remaining source configuration and byte-identical
+firmware remain gated. All other earlier gates retain their existing scope.
+
+
+Battery KV/source binding checkpoint (2026-10-16): `native-battery-kv-runtime`
+adds source-owned cold `power` class28 and `dev_info` class76 plus symbolic
+four-byte handles at20007df8/20007de8 (112 new bytes). Class values, key bytes,
+flags, sizes, tag1 and opaque payload words match authenticated initialized
+RAM. ABS32 relocations bind handles to their source classes; no cold NULL
+handle or invented failed-read record is substituted. Existing inventory rows
+and prior typed provider receipts remain unchanged, with zero new rows.
+
+1,200 native/source workflows (640 critical callback observations per side)
+execute the actual configuration getters, external-frame device-field setter,
+cached-class reads/writes and pinned musl copy. Tests cover size rejection,
+callback payload/size changes, fresh handle reload, input aliasing and getter
+R0/R3 restoration. Setter raw return and cross-call private stack history remain
+unproved; these single-call cases do not close the earlier private-history gate.
+Only critical callbacks are fixtures in this smaller cached graph. Full flash,
+KV initialization/commit service and concurrent access remain separate gates.
+
+The main link also selects the already-tested YHM readiness body and aliases
+`time_backend_timestamp_thunk` directly to the existing zero-argument
+`r1_time_backend_timestamp` body. No duplicated code or new function row is
+claimed for that alias. Four imports close without exposing new ones, leaving
+69 imports. Fresh REA headless Ghidra reads authenticate readiness and timestamp
+body/literal bytes. Direct Ghidra-MCP reports no running GUI instance; no fresh
+direct-MCP byte-read claim is made. Existing pinned musl/RTOS provenance stays
+bound; no additional third-party ancestry is inferred for product records.
+
+Remaining delay/provider bodies, source configuration, exact fatal transfer,
+private/raw ABI, final layout, full-image and physical behavior gates remain.
+The battery/status/ADC alias resolution from the preceding composition is
+preserved through this link; this checkpoint does not re-open or broaden it.
+
+
+Nordic millisecond delay source checkpoint (2026-10-16):
+`native-nordic-delay-runtime` compiles unchanged authenticated SDK17.1.0
+`nrf_delay.h` through a narrow `nrfx.h` adapter. It preserves the SDK zero check
+and decrementing millisecond loop, binding microseconds to64 cycles and reusing
+the already source-compiled three-mnemonic delay primitive. The SDK ZIP/header
+and nrfx contract hashes retain attribution/license provenance. The adapter is
+source-owned configuration; no opaque executable array is added.
+
+The locked inventory contains nine millisecond entries, totaling246 bytes:
+eight direct-cycle copies and one22-byte copy through the microsecond helper.
+117 direct comparisons include72 fixture request paths,27 real cycle paths
+and18 three-request prefixes for very large inputs. Real cycle paths execute
+1,152,063 primitive instructions per side; combined observed count including
+fixture entries is1,165,833. Raw void-return scratch/APSR state is not compared.
+Bounded request sequences, callee/SP/RAM and six-byte primitive body matches
+are proven; elapsed hardware time, interrupt effects and complete large-count
+execution are not. Ten fresh REA headless Ghidra reads bind outer bodies,
+cycle-target literals and the microsecond helper. The helper/previous cycle
+clones are not counted as additional new rows.
+
+7,104 actual battery-filter/SDK-loop comparisons include35,520 ADC reads,
+15,984 busy-delay calls and19,536 RTOS-delay calls. Registry, OS delay and cycle
+primitive endpoints remain fixtures in that consumer tier; the direct tier
+separately executes the primitive. Full ADC/RTOS/hardware execution is gated.
+The main link closes `nrf_delay_ms`, leaves68 imports and adds no data bytes.
+Nine existing delay entries are authenticated; eight gain new tested status.
+The784f0 row retains its earlier board-seam tested contract. Original duplicate code
+placement, compiler identity, full raw ABI, fatal transfer, remaining source
+configuration and byte-identical firmware remain open gates.
+
+
+Response graph composition checkpoint (2026-10-16):
+`native-response-graph-runtime` links the registered response sender, header
+wrapper and phone-operation bodies with real connection gates, encoder, CRC16,
+source memory copy and send-hook dispatch. The encoder/hook variants change
+only their data definitions to external declarations. Their compiled function
+bytes and normalized relocations equal the original compiled source units.
+Sequence and hook cells retain their prior storage owners; the existing four-
+byte version map is selected from its original compiled owner. No new inventory
+rows or data ownership is counted, and no duplicate storage is introduced.
+
+3,240 comparisons (1,080 per sender/header/phone entry;8,875 observations per
+side) execute that actual source graph. They cover failed allocation, null
+inputs, connection gates, wrapped-zero capacity, version rejection, callback
+failure, log mode and callback/header/buffer mutations. Allocator, logging and
+lower callback effects remain fixtures. Raw R0/callee/SP and nonstack RAM match;
+private header-pointer identity, complete scratch/APSR/private history and
+physical allocation/transport behavior remain gates. The bounded case set does
+not establish all length/mode cross-products or memory safety for tiny wrapped
+allocations. Existing direct-unit receipts keep their broader boundary scope.
+
+Fresh REA headless Ghidra reads authenticate the three entry bodies plus encoder
+and hook bodies. Source-used checksum, musl and upstream runtime provenance
+remain inherited through hash-bound provider reports; no new product ancestry
+is inferred. Three main imports close without exposing new ones, leaving65.
+The full allocator/BLE/RTOS/startup graph, final storage/duplicate placement,
+remaining source configuration, fatal transfer and byte-identical image remain
+open gates. Earlier battery/status/ADC aliases and private-history gates are
+preserved with their established scope.
+
+
+System event command source checkpoint (2026-10-16):
+`native-system-event-commands` compiles supplemental native bodies844ec (54B),
+84860 (20B) and84b24 (120B), plus locked health-mode getter4c5b8 (8B) and phone
+operation3 wrapper83c62 (36B). Only the latter two add tested ledger rows;
+the194 supplemental bytes are not new inventory rows. Source owns two exact
+wear-status log strings (100B) and a cold-zero mode byte at2001e478 (1B).
+That byte must alias the eventual health-context root2001e454+36; ownership of
+that larger context remains gated. No physical wear-state interpretation is
+claimed from the log label or byte mapping.
+
+7,560 comparisons (1,512 each across event/ack/query/getter/op3;28,505
+observations per side) execute the actual accessor, flag helper, new bodies,
+response/header, encoder, gates, CRC, memory copy and hook. The event reads its
+length byte after acknowledgement, accepts byte255 as length256, and does not
+invent a packet-length check or response-error early abort. The query preserves
+fresh second getter and packet sequence reads. Post-getter/accessor mutations
+are explicit memory fixtures. Allocator, logging, event and lower send callback
+effects remain fixtures; the whole event/BLE/RTOS graph is not executed.
+
+Nine REA headless Ghidra byte receipts authenticate body/literal/text ranges.
+REA recognizes the getter body but reports no procedure for the other four
+entries; those metadata gaps remain preserved alongside native disassembly,
+supplemental pseudocode observations and byte-bound execution evidence. The
+frozen corpus and locked ownership ledger are not rewritten or inflated.
+Private payload/header pointer identity, complete raw scratch/APSR and stack
+history remain gated. Returning R0/callee/SP/nonstack memory match, and the
+standalone op3 cases additionally compare its restored R2/R3 values.
+
+Main linkage closes three command imports without exposing new ones, leaving62.
+No third-party attribution is inferred for the product handlers; inherited
+pinned runtime/memory provider receipts remain bound. Original image identity,
+final placement and health-context aliasing, exact fatal transfer, remaining
+provider/configuration bodies and all prior scoped gates remain unresolved.
+
+
+NV update bounded-source checkpoint (2026-10-16): `native-nv-update` compiles
+bit2 update73834, peer-address record update738a8, dirty-class scan734e8 and its
+XOR1 wrapper73688 (four locked rows/272 native bytes). The supplemental844b0
+command is60 bytes without a locked row; its byte contract/pseudocode do not
+inflate inventory. Record helpers use external raw52-byte stack views rather
+than invented uninitialized C records or failed-read defaults. The command
+fills exactly six bytes of its saved frame and preserves the other bytes.
+
+The canonical7-handle table reuses the existing dev_info/power/nv_r1 cells and
+owns the four missing class/handle definitions. Source class extents include
+observed zero padding; opaque health words retain numeric values. New ownership
+is324 bytes (228 class bytes+16 handles+80 exact log text). Existing12 handle
+bytes remain their prior owners. All7 symbolic pointers resolve to the observed
+cold class addresses in verification. No actual device provisioning is inferred.
+
+3,660 comparisons (64,576 observations per side) exercise actual raw record
+frames, cached read/write, pinned musl copy/fill and dirty scanning. Once any
+class is dirty, the scan invokes the lower writer for all7 fresh table entries;
+errors log but do not abort the final fresh port callback(1,0). Its return1 and
+wrapper return0 do not prove storage success or idle state. Response, class
+writer, logging, critical callbacks and final port request are fixtures. Source
+cold data and larger linked code are not proof of a fully executed flash graph.
+
+A separate authenticated probe FAILED: when a rejected read is followed by a
+fresh writable handle in the command path, different compiler-private frame
+residue reaches the cached record. Raw R0 matches, store traces and nonstack RAM
+do not. `failed-read-frame-probe.json` retains both results. This is an explicit
+unresolved command-frame compatibility gate, not a passing contract or a
+normalizable pointer difference. Cross-call private history/full raw ABI and
+final image proof remain open. Fixing it requires renewed frame evidence and
+probe/audit updates; do not invent a default record or suppress the write.
+
+Eleven fresh REA headless Ghidra byte receipts authenticate code/literals/text.
+REA observes scan/wrapper/bit2 extents; peer and command procedure gaps remain
+recorded. The original scan row name `device_registry_module_enabled_scan` is
+retained in the locked ledger; the tested source symbol describes its observed
+KV dirty-scan behavior, without new upstream attribution. Main linkage closes
+the command and hsync handle, exposes `r1_store_class_record_write`, and has61
+imports. Existing pinned memory/RTOS provider provenance remains bound. Physical
+flash/BLE, final configuration/placement, exact fatal transfer and all other
+scoped history/alias/raw/image gates remain in force.
+
+
+NV class writer source checkpoint (2026-10-16): `native-nv-class-writer`
+implements91780 (118 native bytes), with94 bytes of exact failure log text
+including the original `calss` spelling. It executes the existing source CRC16,
+stores it at class offset22, packs index&3fff into flags2..15 while preserving
+only flags bit1, and clears dirty bit0 before the current port write callback.
+The callback receives offset=index14<<8, node, fresh size+24 and its loaded
+address in the fourth argument word. Return1 denotes zero callback status;
+return0 denotes nonzero callback status. Dirty flags are not rolled back on
+failure. Offset22's old `reserved` field label remains a legacy interface name;
+its observed CRC use is now explicit without editing hash-bound older units.
+
+1,696 direct comparisons (9,186 observations per side) use real CRC, including
+size65535, unaligned records, full-word indices, flag masks and explicit
+post-CRC changes to flags/size/port/payload. Fresh port/size reads, captured CRC,
+write bytes, callback R3 and failure logging match. Port writes and logs are
+fixtures; this does not establish successful flash persistence or recovery.
+Five fresh REA headless Ghidra byte receipts plus118-byte procedure metadata
+bind code/literals/text to the authenticated application.
+
+3,660 further caller comparisons (104,532 observations per side) execute actual
+record helpers, cached copy/fill, dirty scan, serializer and CRC. Response,
+logging, critical/port callbacks and final request remain fixtures. The scan's
+observed return convention/log behavior is preserved rather than reinterpreted
+as storage success. The main link closes the class-writer import with none
+exposed, leaving60. One locked row gains a bounded tested contract.
+
+The failed-read/fresh-valid-handle probe was repeated with the ACTUAL serializer
+and CRC. It still FAILS: R0 matches, serialized port-write traces and nonstack
+RAM differ because private frame residue enters the record. The new
+`failed-read-caller-graph-probe.json` preserves current-graph results alongside
+the earlier fixture counterexample. No default record, dirty rollback or
+pointer normalization masks it. This remains an unresolved frame-compatibility
+gate; the passing bounded cases do not prove that path. Full raw ABI, private
+history, complete flash/commit execution, physical persistence, final placement
+and byte-identical firmware remain gated. Existing runtime/checksum provenance
+and all earlier source/configuration/alias/fatal-transfer gates remain bound.
+
+
+Build-only native recovery envelope checkpoint (2026-10-16):
+`native-nv-recovery-envelope` implements the176-byte84150 boundary under the
+separate symbol `r1_native_nv_recovery_envelope_handler`, plus32-byte83c86 phone
+query. It owns190 bytes of exact log text. The image-composition-only legacy
+handler alias resolves to this native boundary; it does not modify or establish
+runtime admission for the separately documented bounded planner. The lower
+`r1_native_nv_recovery_command_dispatch` remains unresolved. Existing recovery
+admission, authorized provisioning, identity handling and persistence gates in
+the two NV correlation documents remain in force; no identity table is copied.
+
+3,556 comparisons (3,472 envelope/84 query;15,722 observations per side) execute
+actual payload accessor, phone getter and inverse-header helper. Native lower
+dispatch, response and logs are fixtures. The boundary reads the three fields
+fresh after logging and forwards the captured body pointer. Stock short-backing
+reads are exercised only in mapped synthetic emulator memory; this does not
+admit those packets to a live recovery interface or prove bounds safety. Null
+payload returns preserve the observed log-mode/raw-log-return behavior.
+
+The query wrapper zeros its saved R1/R2/R3 words, and returns the lower response
+word's nonzero test in R0. The selected cases compare all four return registers;
+this is not proof of connection readiness or BLE delivery. Post-accessor memory
+changes are explicit fixtures, not observed physical interrupts. Seven fresh
+REA headless Ghidra byte receipts authenticate code/literals/text; both procedure
+metadata gaps are retained. The frozen corpus and locked rows stay unchanged.
+
+Two rows gain bounded tested candidate contracts, totaling208 native bytes.
+Main linkage closes the legacy handler alias and exposes the unresolved lower
+native dispatcher, retaining60 imports. No hardware write or live recovery send
+is executed. This is source/build evidence only. Existing failed-read frame
+counterexamples remain bound; complete raw/private ABI, provisioning/rollback,
+physical persistence, final layout and byte-identical image remain gated.
+Product recovery ancestry remains unattributed; inherited SDK/memory/RTOS
+provider provenance is preserved without new third-party inference.
+
+
+Build-only recovery command-dispatch checkpoint (2026-10-16):
+`native-nv-recovery-dispatch` compiles108-byte7c450 control behavior and102 bytes
+of exact diagnostic text. Commands other than the full-word value2 return the
+input command word without effects. Command2 selects the merge boundary only
+for full-word length116 and nonzero full-word CRC; all other command2 cases
+log then select the report boundary. Captured length/CRC values survive logger
+clobbers, and selected target return words propagate unchanged.
+
+6,496 comparisons (2,940 direct dispatcher,3,472 actual envelope/dispatcher,
+84 query;22,696 observations per side) execute the actual native source control
+graph. Lower merge, identity-report, response and logging effects are emulated
+fixtures. The merge boundary observes body/length/CRC; the report boundary has
+no semantic arguments. Native lower prologues are separately byte-authenticated;
+complete incoming scratch-register and private-frame state is not claimed.
+Short-backing envelope reads remain confined to mapped synthetic emulator data.
+No identity table, report generation, merge application or hardware write is
+implemented or executed. Bounded-planner/runtime admission policies remain
+unchanged and independently gated by the existing correlation documents.
+
+Six fresh REA headless Ghidra byte receipts bind dispatcher, literals/text and
+bounded lower prologue observations. Procedure metadata for7c450 is missing and
+remains explicit, despite the existing locked manual extent. The dispatcher has
+a separate native symbol from the documented bounded planner API. Main linkage
+closes the prior native-dispatch import and exposes two named effect boundaries,
+leaving61 imports. This is expanded source coverage, not an import-count
+completeness claim. One locked row gains a bounded tested candidate contract.
+
+The actual-serialization failed-read frame counterexample remains open and
+hash-bound. Provisioning/rollback, identity/report admission, flash effects,
+full raw/private ABI, final layout and byte-identical firmware remain gates.
+No new upstream ancestry is inferred for the product-specific dispatcher;
+existing SDK/runtime/memory attribution remains inherited through pinned inputs.
+
+
+Build-only time synchronization command checkpoint (2026-10-16):
+`native-time-sync-command` compiles supplemental 846dc control flow (224 native
+code bytes). It cancels timeout84c82 before packet lookup, captures timezone and
+current timestamp before reading the six payload bytes, publishes a fully filled
+12-byte event3, then sends flagC5 and ACK4 with the native arguments. Sequence is
+read freshly after event publication. The recovery-needed provider selects the
+phone query for nonzero results or the independently gated report effect for zero.
+Fresh mode calls, log arguments and final raw return words are preserved.
+
+8,192 native/source comparisons (1,920 null payload,4,704 query,1,568 report;
+74,832 observations per side) execute the actual packet accessor. All lower
+clock/event/ack/cancel/query/report/log effects are explicit emulator fixtures.
+Mutations after cancellation, clock reads, event publication, acknowledgement
+and logging verify capture versus fresh reads. Native advertised lengths13/17
+can still read six payload bytes from mapped synthetic backing; this does not
+establish real packet bounds or runtime admission. Callee registers, SP, rawR0,
+event bytes, call order and nonstack RAM match. Complete scratch/private ABI,
+cross-call stack history, timing, effects and physical behavior remain unproven.
+
+Six REA headless Ghidra byte receipts authenticate code, literals and diagnostic
+text; procedure metadata is explicitly missing. Direct Ghidra-MCP reports no
+running instance. Main linkage closes846dc and exposes two source providers:
+`r1_protocol_time_timeout_callback` at84c82 and the ignored-read-status7bb20
+`r1_nv_recovery_needed_query_boundary`. The latter can consume private-frame
+history, so no default record or guessed validity policy is substituted. Existing
+UTC/timestamp, cancellation, event, ACK and phone-query sources are reused. The
+report effect remains the same separate unresolved boundary. There are62 imports;
+no new locked ownership row is claimed. Whole-image counts remain839 tested
+candidates,1,117 unresolved routes and1,370 compiled hints across3,326 rows.
+
+The actual-serialization failed-read frame counterexample, recovery/provisioning
+admission, identity/report/merge effects, callback source, final placement and
+byte-identical image remain explicit gates. No recovery admission or identity
+table changed, and no hardware write ran. This product-specific command has no
+new upstream ancestry evidence. It reuses pinned provider sources through the
+existing dependency manifests; upstream update candidates must retain their
+licenses, exact revisions and differential contracts before replacement.
+
+
+Time synchronization query/timeout provider checkpoint (2026-10-16):
+`native-time-sync-providers` compiles the32-byte supplemental7bb20 query plus
+22-byte locked84c82 timeout callback. The query's external frame saves incoming
+r3 exactly. It requests one byte from the canonical r_size cached class, ignores
+read status, tests the resulting byte for0 or255, and restores the saved word
+into r3. A failed read therefore tests the incoming r3 low byte; it does not
+acquire a guessed default. The callback replaces that saved word's low byte with
+the low byte of its argument, obtains the phone handle from field8, and enqueues
+event8/length1 with the saved-byte pointer. Native lower rawR0 and restoredr3 are
+preserved, while its public callback signature retains void semantics.
+
+22,368 native/source comparisons comprise20,736 explicit cached-read boundary
+fixtures,480 actual cached-read/musl workflows, and1,152 timeout/phone-accessor
+cases, with23,760 observations per side. These compare rawR0/r3, callee registers,
+SP, read/enqueue arguments, payload bytes and nonstack RAM. Fixture coverage
+includes every incoming seed low byte, upper-word patterns, success/failure
+return words, unchanged/byte/word reads, all predicate classes, size mismatches,
+critical-callback changes to captured payload/handle/port and explicit byte
+mutation after read/getter boundaries. BLE enqueue and critical callbacks remain
+emulated effects. Source-owned cold classes and canonical handle table match the
+authenticated scatter observations; no duplicate data owner is introduced.
+
+REA headless Ghidra authenticates both byte spans. Metadata observes84c82's
+complete22-byte extent, while7bb20 metadata remains explicitly unavailable.
+Locked ownership therefore gains exactly one tested candidate, not two. The
+partial application now has60 unresolved imports,840 tested candidates,1,116
+unresolved routes and1,370 compiled hints across3,326 rows. Both provider imports
+exposed by the prior time-command checkpoint are now source-linked. The boundary
+suffix on the query symbol records its earlier interface; it is no longer an
+undefined provider in this composition.
+
+This does not prove the actual time-command caller's full incoming scratch or
+cross-call private-stack history. The existing failed-read serialization
+counterexample is retained, and native recovery admission/report/merge effects,
+final placement and byte-identical whole firmware remain open. No runtime
+admission, identity table or hardware writes changed. No upstream product-code
+ancestry is inferred: these bodies are evidence-derived C with small ABI bridges.
+Existing attributed musl and cached-class provider sources are reused through
+hash-bound manifests rather than copied into new implementations.
+
+
+Power-control protocol command checkpoint (2026-10-16):
+`native-power-command` compiles supplemental843c8 (210 native code bytes) and
+144 exact diagnostic text bytes. It uses the existing packet accessor and
+canonical low-battery thread cell at20006548. Null payload returns0. Initial
+command bytes outside1..3 send command18/version1/flag1 and return its raw result.
+Accepted bytes send flag0 and delay100, ignoring both results, then reread the
+payload byte. A changed byte outside1..3 returns that byte directly. Command1
+writes reboot-caller marker1 then posts thread flag2. Command2 retains the seed
+word's upper16 bits, ORs its kind bits with3, inserts the low14 voltage bits into
+bits2..15, writes the timestamp word, invokes the existing KV field setter and
+posts flag1. Command3 performs fresh-mode recovery logging then posts flag256.
+The thread handle is loaded freshly after the preceding effects/logging.
+
+The ABI bridge retains the native savedr2/r3 words. Paths1/3 restore the frame
+before tail-calling flags; path2 calls flags first then restores the event words.
+This preserves returnedr2/r3 even when lower calls clobber scratch registers.
+There is no invented zero initialization of the seed upper bits. The ordinary C
+kernel has additional private stack use, so full raw ABI and private history are
+not implied by the bridge's external frame contract.
+
+39,168 native/source comparisons (2,304 null,9,108 rejected,13,848 changed after
+delay,4,636 each reset/off/resume;113,876 observations per side) execute the
+actual packet accessor. Lower ACK, delay, reset marker, voltage/time, KV field
+setter, flags and logging are explicit fixtures. Cases include all256 initial
+command bytes, boundary advertised lengths, mutated commands after accessor/ACK/
+delay, seed patterns, full-word voltage truncation, event mutation after reads,
+fresh thread handles after marker/KV/logger effects, mode sequences and raw lower
+return words. RawR0/r2/r3, callee registers, SP, ordered observations and nonstack
+RAM match. This is not hardware timing, reset, persistence or delivery proof.
+
+REA headless Ghidra byte receipts authenticate code, literals and complete text;
+shorter initial text-prefix receipts are retained alongside full reads. Procedure
+metadata is explicitly unavailable. No locked ownership row is added for this
+supplemental table target. Main linkage closes843c8 without new imports, leaving
+59. Whole-image counts remain840 tested candidates,1,116 unresolved source routes
+and1,370 compiled hints across3,326 rows. Existing reset/battery/time/KV/RTOS
+providers are source-linked through hash-bound parent manifests. No new storage
+owner or product-specific upstream ancestry is inferred. The existing attributed
+SDK/FreeRTOS/CMSIS and memory/runtime dependencies retain their pinned provenance;
+this command does not replace them with another implementation.
+
+Recovery/provisioning admission, identity/report/merge effects, the retained
+failed-read serialization counterexample, caller/private history, final placement
+and byte-identical image remain explicit gates. No runtime admission, identity
+table, flash operation or hardware state was changed.
+
+
+Device-ID command checkpoint (2026-10-16):
+`native-device-id-command` compiles supplemental83e50 (156 native bytes), status
+get/clear6abd8/6aadc (6+8 native code bytes) and locked operation11 wrapper838ba
+(36 bytes). It owns an exact28-byte default record,40 diagnostic text bytes and
+one cold status byte at20006da5. That byte must alias offset5 of the eventual
+20006da0 context owner. No complete context or identity state is claimed.
+
+The command copies the default response, reports status1 and clears the source
+byte only when it equals exactly1, otherwise reports0, clears a28-byte temporary
+ID view, invokes the unresolved native ID provider, and copies the first24 ID
+bytes into response bytes1..24. Logging reads fresh modes/status and the temporary
+ID; the sequence is read after logging. Operation11 sends exactly25 bytes with
+first argument0 and fresh sequence through the existing phone getter/response
+provider. Its external saved words become payload pointer/25 on nonnull input;
+null input retains incomingr2/r3 and returns0.
+
+2,192 native/source cases comprise960 command,576 two-call workflow,144 direct
+operation11 and256 each status getter/clear. There are14,136 observations per
+side. Actual source status accessors, operation11, phone getter and attributed
+musl/EABI memory helpers execute. Identity read, response and logging effects are
+fixtures. Fixture ID writes are bounded to mapped28-byte backing; native cached
+length safety is not inferred. Cases compare rawR0/r2/r3, callee registers, SP,
+response bytes, call order and nonstack RAM, including logger mutations, fresh
+sequence/handle loads, all status-byte values and repeated one-shot consumption.
+
+The first compiled clear helper clobberedr2 while native preserved it. Its source,
+object, reports, driver and counterexample remain hash-bound under
+`native-device-id-command-runtime/pre-clear-scratch-fix/`. An explicit ABI bridge
+now preservesr2/r3 around the ordinary C store; the complete comparison passes.
+Other raw scratch registers/private-frame history and compiler/global placement
+remain unproven rather than being normalized away.
+
+REA headless Ghidra byte receipts bind the command, wrapper, status bodies,
+literals, default/text data and unresolved6ab88 provider. Initial shorter text
+prefix reads are preserved alongside complete reads. Procedure metadata observes
+the complete36-byte wrapper and explicitly lacks83e50. One locked row gains a
+tested candidate; supplemental entries do not inflate ownership totals. The
+partial application closes83e50 and exposes `r1_native_device_id_read_boundary`,
+leaving59 imports,841 tested candidates,1,115 unresolved routes and1,370 compiled
+hints across3,326 rows.
+
+The existing frozen GoMore key-or-cache helper takes capacity, explicit cache
+state and device/address words. Native6ab88 instead preserves incoming words,
+selects an unchecked cached pointer/byte-length or SVC109 plus FICR and formatter.
+The bounded helper is therefore not substituted as the raw native provider, nor
+is third-party GoMore ancestry inferred from this product-specific call. Pinned
+musl/EABI helpers are reused through parent manifests. Exact identity provider,
+SVC/hardware behavior, cache length/ownership, eventual context alias, private
+history and byte-identical whole-image gates remain open. No identity table,
+provisioning/runtime admission, flash operation or hardware state changed.
+
+
+Native device-ID reader checkpoint (2026-10-16):
+`native-device-id-reader` compiles the58-byte6ab88 native provider as a distinct
+raw-frame interface. Cached mode copies the fresh byte length from the cache
+pointer without inventing a capacity check. Uncached mode invokes the existing
+advertising controller-address SVC wrapper, reads the unaligned address word at
+saved-frame+9, reads FICR words10000060/64, overwrites savedr0/r1 with those words,
+and formats three eight-digit hexadecimal values into destination capacity25.
+The external push/pop view retains actual savedr0/r1/r2/r3 contents, including
+partial SVC address writes and seed bytes. The source does not substitute the
+older bounded GoMore helper or claim third-party ancestry for the product body.
+
+44 newly owned bytes comprise the exact25-byte cold cache text, one cache-valid
+byte, symbolic4-byte cache pointer, one byte length24 and13-byte format text.
+Cache fields at20006da4/20006e38/20006e3c match authenticated scatter bytes; the
+pointer relocates to source text atc0648. These remain fields of an eventual
+context owner, alongside the previous status byte. The static cold cache is
+source build configuration, not authenticated provisioning or runtime identity
+admission. No native recovery identity table or merge/report effect is copied.
+
+The existing Nordic advertising SVC wrapper uses the pinned SDK17.1.0
+SD_BLE_GAP_ADDR_GET enum/header and is reused unchanged. Complete source formatter
+and musl copy providers execute. Main composition reuses the parent's existing
+integer-runtime definitions and links seven formatter leaf objects, avoiding
+duplicate integer owners. The standalone verification graph has zero imports;
+the partial application closes reader and snprintf imports, leaving57.
+
+3,616 native/source cases (3,072 cached,288 partial/full SVC,256 deterministic
+random word/address cases;1,088 observations per side) compare rawR0/r1/r2/r3,
+callee registers, SP, complete output and nonstack RAM. All256 cached byte lengths
+execute in mapped backing, including unaligned destinations. SVC writes of0/1/4/7
+bytes retain saved seed words; status values do not invent an error abort. Actual
+formatter entry arguments and stacked values match native. SVC execution and
+FICR contents are controlled fixtures, not physical SoftDevice/FICR evidence.
+No cache capacity or overlapping-copy safety is inferred from mapped tests.
+
+The first uncached verification omitted custom formatter tables from its source
+emulator map. Arguments and restored registers matched but text differed. The
+failed driver/layout/object/report/counterexample are hash-bound under
+`native-device-id-reader-runtime/pre-formatter-table-map-fix/`. Loading the actual
+formatter table sections resolves that harness error without changing the reader
+or formatter bodies. REA headless Ghidra separately authenticates native body,
+literals/cache text and the complete58-byte procedure extent.
+
+One existing compiled symbol hint gains a tested contract:842 tested candidates,
+1,115 unresolved routes and1,369 hints across3,326 rows. Native SVC success,
+hardware identity, unchecked cache capacities/aliases, eventual context ownership,
+private caller history, the retained NV serialization counterexample, final
+placement and byte-identical firmware remain explicit gates. No hardware write,
+provisioning or runtime-admission policy was changed.
+
+
+Native touch-switch checkpoint (2026-10-16):
+`native-touch-switch` compiles the184-byte manual84874 handler and212 exact log
+text bytes. It is a separate `r1_native_touch_switch_handler` interface. Only the
+research partial composition aliases the module-table import name to this body;
+portable bounded-planner policy and its admission contract remain unchanged.
+The documented exactly-two-backing-byte planner is not weakened to emulate native
+reads. Native packet lookup accepts advertised length>12; short backing reads are
+exercised only in mapped synthetic emulator memory and are not runtime approval.
+
+Native control sends a one-byte zero response through actual checked-send/ACK
+header code before inspecting payload selector. Selector1 is phone diagnostic
+only. Selector2 performs diagnostics, rereads the switch byte after logs, and
+selects source0 open for nonzero or close for zero. Other selectors are acknowledged
+no-ops returning the selector byte. A failed response does not suppress subsequent
+behavior. Logging mode reads, argument bytes and raw return words retain native
+ordering; the phone branch returns the last mode shift or SDK logger result.
+
+The external savedr1/r2/r3 view becomes response pointer/length1/zero word after
+nonnull lookup. Lower response fixtures may mutate that response word and the
+actual pop restores it. Null payload preserves the incoming saved words. The
+ordinary C kernel uses additional private stack space; full raw scratch/APSR and
+caller/private history remain separate requirements.
+
+16,128 native/source cases comprise3,584 null,5,984 unknown-selector,3,286 phone
+and3,274 glasses cases, with37,801 observations per side. Actual accessor,
+checked-send and ACK-header providers execute; lower response, touch services and
+logging are fixtures. Cases include all256 selector bytes, advertised boundary
+lengths, full-word handle guards, switch0/1/2/255, logger modes/return words,
+response-word mutation and payload changes after accessor/response/logging.
+RawR0/r1/r2/r3, callee registers, SP, ordered observations and nonstack RAM match.
+No touch hardware, task delivery, lease or shared-power behavior is established.
+
+Six fresh REA headless Ghidra byte receipts bind code/literals/text. Procedure
+metadata is explicitly missing, while the existing locked manual184-byte extent
+remains authenticated. This body gains one tested candidate. Main linkage closes
+the touch command import and exposes `r1_service_touch_open` and
+`r1_service_touch_close`, leaving58 imports. No new storage owner or upstream
+ancestry is inferred for this product command. Existing provider manifests retain
+memory/protocol provenance instead of replacing their source bodies.
+
+The native touch-service bodies and transitive task/hardware providers remain
+source gates. Portable identity/wear/factory lease/shared-power admission,
+recovery/provisioning effects, the retained NV failed-read counterexample,
+private history, final layout and byte-identical firmware remain open. No
+hardware write, portable policy or runtime admission changed.
+
+
+Touch client-services checkpoint (2026-10-16):
+`native-touch-services` compiles close8e6a0(100 bytes), open8e7d0(94) and task-event
+post93504(10). It owns134 exact log-text bytes and two cold4-byte fields: clients
+at200067d8 (eventual context200067c4+20) and thread handle2000666c (20006664+8).
+Future context owners must alias these fields rather than allocate duplicates.
+No complete service/task context initialization is claimed.
+
+Source masks preserve native register LSLS semantics: only the low8 source bits
+form the shift count, and counts>=32 yield zero. Thus source256 aliases bit0;
+source32 yields no bit and may still exercise native open logging/post behavior.
+No portable lease/range policy is substituted. Open returns initial clients when
+its bit is already present. Otherwise it logs with fresh mode reads, posts2 only
+if fresh clients are zero, rereads clients after posting, stores clients|mask and
+returns that loaded pre-OR word. Close returns initial clients for an absent bit,
+otherwise logs, freshly clears its bit and returns the nonzero remainder. A zero
+remainder selects the still-unresolved synthetic-release dispatcher then posts4,
+returning the event-post result. Task posting freshly loads its source-owned
+thread cell and forwards the full flag word to the existing CMSIS provider.
+
+42,408 native/source cases comprise20,304 each open/close,120 event posts and1,680
+actual touch-command workflows;86,021 observations per side. The actual services,
+task-post wrapper, command/accessor/checked/ACK-header graph execute. Synthetic
+release, CMSIS flags, lower response and logging are explicit fixtures. Every
+low8 shift count plus full-word aliases, client masks, logger modes, return words,
+client/thread changes after logging/post/release, and saved-response mutations
+are covered. RawR0, callee registers, SP and nonstack RAM match; the actual command
+also checks its restoredr1/r2/r3. This does not prove the direct services' complete
+scratch/APSR or private-history ABI, physical leases, task delivery or hardware.
+
+Eleven REA headless Ghidra byte receipts authenticate code/literals/text; three
+procedure receipts observe complete extents. Three locked rows gain tested
+contracts:846 tested candidates,1,111 unresolved source routes and1,369 compiled
+hints across3,326 rows. Main composition closes the two service imports and
+exposes `r1_touch_synthetic_release_boundary`, leaving57 imports. Source-owned
+client and thread fields match authenticated initialized-data observations.
+
+No new upstream ancestry is inferred for product-specific client policy; the
+existing CMSIS/FreeRTOS provider and protocol source are reused through pinned
+manifests. Synthetic release and transitive effects, eventual context ownership,
+portable policy/admission, retained failed-read NV counterexample, private history,
+final layout and byte-identical image remain explicit gates. No hardware write,
+portable planner, identity/provisioning policy or runtime admission changed.
+
+
+Synthetic touch-release checkpoint (2026-10-16):
+`native-touch-release` compiles93424(180 native bytes) and its934e4 timer callback
+(30). It owns the complete100-byte cleared contact span at20016a60 and two cold
+service-context flags at200067c4/67c6. The flags must alias offsets0/2 of the eventual
+200067c4 context owner; prior client bits at+20 remain separate canonical storage.
+Only authenticated contact offsets are interpreted, and all100 bytes are cleared.
+
+When active byte+36 differs from1, native returns that byte without effects. When
+active, a nonzero pending timer flag selects cancel(callback934e5,argument0) then
+clears the flag regardless of cancel result. Fresh contact mode+8 selects ordinary
+release or slide release. Ordinary release emits record02000000 with synthetic
+flag1. Slide release computes byte-coordinate delta(+37 minus+60), direction32
+for negative or64 for positive; ties use the signed last-direction byte+96. It
+emits direction|release plus absolute delta(minimum1) and velocity+95(minimum1),
+then emits02000000 with synthetic flag1. The flag is cleared after the final
+dispatch, followed by clearing the full contact span. Native final clear returns
+its advanced end pointer; the selected source preserves that rawR0 explicitly
+around the existing attributed void EABI clear API. Complete clear scratch ABI
+is not inferred. The timer callback zeroes44 external-frame bytes, writes word1=5
+and word2=0, and forwards the message, preserving its lower raw return word.
+
+70,656 native/source cases comprise2,160 release-state cases,all65,536 coordinate
+byte pairs,80 timer,1,440 actual-close and1,440 command workflows. There are222,244
+observations per side. Actual release/callback, attributed clear, client services,
+command/accessor/checked/header bodies execute. Cancel, gesture dispatch, task
+message, flags, lower response and logging remain explicit fixtures. Pending flag,
+active/mode mutation after cancel, callback context/record mutation, signed ties,
+zero velocity, all coordinate directions and clearing/order behavior are checked.
+RawR0, callee registers, SP and nonstack RAM match; command restoresr1/r2/r3 too.
+Private gesture-pointer values from larger caller frames are not compared.
+
+The14-byte source callback bridge is placed at934e4 only in the verification
+layout to compare cancellation pointers exactly. It executes compiled source,
+not retained native instructions; this is not final-image placement proof. REA
+headless Ghidra byte/procedure receipts observe both complete native extents and
+literals. The literal address934d8 correctly has no procedure metadata. The locked
+934e4 ledger's historical NFC/charge-oriented name is retained; the observed
+44-byte message/field5 behavior does not establish that broader classification.
+
+Two locked rows gain tested contracts:848 tested candidates,1,109 unresolved
+routes and1,369 hints across3,326 rows. Main linkage closes synthetic release and
+exposes `r1_touch_gesture_dispatch_boundary` and `r1_touch_task_message_boundary`,
+leaving58 imports. The new control body is product-derived C with narrow ABI
+bridges; existing attributed memory and CMSIS/protocol providers remain reused
+through pinned manifests. No new upstream ancestry is inferred from the legacy
+ledger label or event-field value.
+
+Gesture/task effects, delayed callback delivery, eventual service-context owner,
+physical touch/lease policy, retained NV failed-read counterexample, private/raw
+ABI, provisioning/recovery admission, global placement and byte-identical firmware
+remain explicit gates. No hardware write or portable/runtime admission changed.
+
+
+Shared native task-message sender checkpoint (2026-10-16):
+`native-touch-task-message` compiles93514(150 native bytes),106 exact diagnostic
+text bytes and the cold4-byte queue field20006670 (context20006664+12). It reuses
+the earlier thread cell at+8. Diagnostics explicitly name nfc_charge_task_msg_send;
+these are shared task fields reached by touch release, not proof of an exclusively
+touch task. Existing symbol names remain stable to preserve prior hash-bound
+receipts; the eventual shared context owner must alias both canonical fields.
+
+The native sender snapshots the queue pointer. A null queue logs queue-null and
+returns0. Otherwise it calls the existing CMSIS queue-put with message pointer,
+priority0/timeout0. Nonzero insertion status logs msg-missed and returns0. Status0
+loads the thread freshly, posts0x400000, ignores that result and returns1. No
+message validation, allocation, capacity, delivery guarantee or retry is invented.
+Logger mode calls are fresh and logger return words cannot change the boolean.
+
+12,672 native/source cases comprise9,216 direct sender,3,072 actual timer-callback
+and384 two-call queue-state workflows, with52,665 observations per side. The
+actual sender/timer/attributed clear execute; queue-put, flags and logging are
+fixtures. Null message inputs are controlled lower-boundary fixtures rather than
+proof that live CMSIS accepts them. Cases include null/nonnull queues and threads,
+unaligned records, full-word lower statuses, logger mode sequences, thread changes
+after put, queue/message mutations and repeated calls after changed queue state.
+RawR0, callee registers, SP and nonstack RAM match. Timer source still uses its
+14-byte verification-only bridge at934e4; full placement/private ABI is unproven.
+
+Six fresh REA headless Ghidra byte receipts and the complete150-byte procedure
+extent authenticate the body/literals/text. Main linkage closes the task-message
+import with no new imports, leaving57. The existing CMSIS/FreeRTOS provider source
+is reused through parent manifests; standalone RTOS calls are emulated here and
+physical delivery/scheduling is not inferred. No new upstream ancestry is claimed
+for this product wrapper or its diagnostic strings.
+
+Gesture dispatch, shared context initialization/item sizing, RTOS delivery,
+portable policy and recovery/provisioning admission, retained failed-read NV
+counterexample, full raw/private history, final layout and byte-identical image
+remain explicit gates. No hardware write or portable/runtime admission changed.
+
+
+Native touch-gesture dispatcher checkpoint (2026-10-16):
+`native-touch-gesture` compiles the complete690-byte3e938 dispatcher,1,236 exact
+log-text bytes and15 cold state bytes (direction,count and three timestamps).
+Existing contact100-byte storage, clients, pending/synthetic flags and low-battery
+thread cell are reused. New fields alias offsets1/8/24/28/32 of the eventual
+200067c4 service context; its other canonical source owners are not duplicated.
+
+The body retains initial direction/timestamp capture, reset of direction tracking
+for bits1..4 or unsigned inactivity>400, host-reset diagnostics/marker2/flag2,
+reversal suppression after two same-direction events, 16-bit count wrap, release
+timer arming(callback934e5,0,307), fresh post-effect event precedence and slide
+log throttles at>1000. Tap/double/long/negative/positive/synthetic-release select
+native event IDs1/2/0/4/5/8. Fresh input distance/velocity precede the tick call.
+Packet fields use the external savedr1/r2/r3 view, including unaligned tick at+7.
+Configuration exactly85 selects length5, otherwise11. The first full-word handle
+check rejects onlyffff; the second getter is fresh and is forwarded without a
+second guard. Native early-return words, including context pointer on reversal
+and shifted event word on unmatched paths, are preserved.
+
+59,328 native/source cases produce546,563 observations per side. They cover every
+event byte, precedence, direction/count edges, unsigned timestamp thresholds and
+wrap values, pending/contact modes, reset and logging effects, raw lower returns,
+config lengths and both handle reads. Lower boundaries are explicit fixtures;
+all are exercised, including5,061 schedules,20,088 each marker/flag calls,54,264
+each tick/config calls,99,366 handle reads and45,102 sends. Mutations after logging,
+marker/flag/schedule, tick, configuration and sending test captures/fresh reads
+and the saved packet words. RawR0/r1/r2/r3, callee registers, SP and nonstack RAM
+match. No native instruction executes on the source side.
+
+The initial passing matrix correlated pending and contact-mode bits and therefore
+did not exercise schedule. Its driver/report/receipt are retained hash-bound in
+`native-touch-gesture-runtime/pre-independent-pending-fixture/`. Independent bits,
+wrap timestamps and nonzero lower-observation assertions close that coverage gap
+without changing the compiled dispatcher. This is a superseded limited proof,
+not an erased counterexample or a claim about timer delivery.
+
+Seventeen REA headless Ghidra byte receipts and a complete690-byte procedure
+receipt bind code,literals and all diagnostic text. Direct Ghidra-MCP was checked
+and reports no running instance; no fresh direct-GUI analysis is claimed. Main
+linkage closes the gesture import with no new imports, leaving56. All needed
+existing reset,CMSIS,delayed,configuration,getter and BLE providers are source-linked
+through parent manifests. Tests here emulate their effects and do not upgrade
+prior ABI/private-frame limits. No new third-party ancestry is inferred for the
+product dispatcher; pinned Nordic/FreeRTOS/CMSIS/provider provenance is retained.
+
+The full shared context, retained NV failed-read serialization counterexample,
+advertising configuration getter's private-read history, physical timer/BLE/reset
+behavior, portable policy and recovery/provisioning admission, full raw/private
+ABI, global placement and byte-identical firmware remain explicit gates. No
+hardware write or portable/runtime admission changed.
+
+
+Native system-settings checkpoint (2026-10-16):
+`native-system-settings` compiles84524(260 native bytes),73750 bit getter(36) and
+73800 bit1 setter(48), plus164 exact diagnostic text bytes. All existing class,
+handle, memory and protocol owners are reused; no new RAM owner is introduced.
+The research partial module aliases its import to a separate native handler;
+the documented exact-twelve-byte portable planner/admission is unchanged.
+
+Get ignores cached-read status, obtains the persisted bit via an external52-byte
+raw record view, emits twelve initialized response bytes with normalized state
+at byte5, logs fresh output-byte reads and reads the sequence after logging.
+The direct getter still reads the class for NULL destination and returns that
+read status; nonnull destination receives bit1 and returns it. The setter ignores
+read/write status, updates only bit1 from input low bit, uses a fresh write handle
+and forwards the idle/flush helper result. No failed-read default is invented.
+
+Set acknowledges command15/version1 before payload lookup, handles NULL payload
+as raw0, logs fresh type/status fields, returns nonzero type unchanged, and
+compares the raw requested status with the normalized stored Boolean. A changed
+status is normalized for the bit setter, then reread and normalized again for
+regulator SVC. Thus a provider mutation during persistence affects the requested
+SVC mode exactly as native. No packet-backing guard is silently added to native
+control; declared short backing is exercised only in mapped emulator memory.
+
+S140 SD_POWER_DCDC_MODE_SET is taken from the actual pinned Nordic SDK17.1.0
+nrf_soc.h and statically asserted63. A narrow source SVC/BX bridge preserves the
+native regulator call contract; emulator code hooks intercept it before hardware
+execution. The builder authenticates every consumed SDK header against sdk.zip
+SHA5bfe38e744c39fd7f30e10077ba12df306ef91f368894795d6a3e7a62dc68061.
+This reuses the upstream API/enum and existing CMSIS/KV/memory providers while
+retaining attributable revisions; it does not infer a vendor implementation for
+the product-specific settings logic or prove regulator configuration.
+
+21,056 primary comparisons (10,304 handler,9,216 getter,1,536 setter) produce119,136
+observations per side. Actual bit helpers, cached read/write,musl and packet
+accessor execute; idle/transport/logging/critical callbacks and SVC effects are
+fixtures. Cases cover all stored-byte patterns,direct helper size/read failures,
+NULL/aliased outputs, bit masking,fresh handle/port callbacks, get/set flags,
+raw requested values, logger mutations, fresh sequence and post-setter status.
+There are4,019 SVC observations. RawR0,callee registers,SP and nonstack RAM match.
+
+A separate192-case failed-read handler probe across six initial stack-byte seeds
+also matches (78 SVC samples). Its receipt binds the same compiled graph and is
+explicitly limited to those mapped samples. It does not establish cross-call
+private history or close the retained NV serialization frame counterexample.
+Normal handler matrix reads use complete cached records; direct failed-read
+contracts and the additional caller probe are reported separately.
+
+Eight REA headless Ghidra byte receipts and three complete procedure extents bind
+native bodies,literals and text. Main linkage closes the settings import without
+new imports, leaving55. Source data ownership remains canonical. The exact native
+SVC wrapper instruction, complete getter/setter raw scratch, private histories,
+physical persistence/flush/regulator behavior, bounded portable admission,
+provisioning/recovery, final global placement and byte-identical firmware remain
+separate gates. No hardware write or runtime-admission policy changed.
+
+
+Native health-settings checkpoint (2026-10-16):
+`native-health-settings` compiles83f24(300 native bytes),73798 flag/word getter(44)
+and73868 flag0/word setter(60), plus208 exact diagnostic text bytes. Existing
+class,handle and memory owners are reused, with no new RAM ownership. The research
+partial module aliases its import to a distinct native handler; bounded portable
+planner/backing/admission policies are not changed.
+
+Getter output order is flag byte then word32, with rawR0 determined by the last
+present output (or cached-read status when both outputs are NULL). External52-byte
+views retain failed-read seed data. Setter compares the stored low bit with the
+full supplied value before inserting its low bit. Equal values skip both the
+word32 update and flush, returning the original flags byte. Unequal values update
+only bit0 and word32, freshly load the write handle and forward idle/flush result.
+No default record, pre-comparison Boolean coercion or time-only update is added.
+
+Read commands construct twelve initialized response bytes: word32 at0..3, enable
+at4, trailing zeroes. Logs read fresh scalar outputs, while sequence is read after
+logging. Set commands locate payload before acknowledgement, snapshot current
+flag/word, log exact requested/current values, compare raw requested enable, and
+only on difference call the normalized setter then publish event100d over the
+live one-byte payload status. Provider mutation after persistence therefore
+changes the published byte. Timestamp-only changes can remain suppressed even
+when another raw-status comparison reaches the setter, as native controls it.
+
+21,056 primary native/source comparisons (10,304 handler,9,216 getter,1,536 setter)
+produce119,496 observations per side, including4,879 event samples. Actual cached
+read/write,musl,packet accessor and new helpers execute. Event,idle,transport,
+logging and critical callbacks are fixtures. Normal handler workflows use full
+cached records; direct helper tests include size failures, raw seed retention,
+NULL/aliased outputs, all stored-byte patterns, full-word setter values, fresh
+handles/port callbacks, logger mutations and conditional word writes. RawR0,
+callee registers,SP and nonstack RAM match within that explicitly bounded scope.
+
+OPEN FAILED-READ CALLER GATE:
+`native-health-settings-runtime/failed-read-frame-probe.json` is a retained
+counterexample, not a passing receipt. In mapped synthetic seed0/set-mode state
+with initial requested byte0 and rejected size0 reads, a logger fixture changes requested state and word.
+After the second failed read, an explicit fixture changes the global handle to a
+valid52-byte alternate class. Both implementations return0 and select that same
+write, but retained private-frame bytes0..7 differ and actual cached-write RAM
+therefore differs. The first probe, where rejected writes left RAM unchanged but
+write-payload traces already differed, is archived under `initial-failed-read-probe/`.
+Both drivers/receipts are hash-bound. This demonstrates conditional emulated frame
+propagation, not an observed physical-device defect. No zeroing, normalization,
+record truncation or rejected-result concealment is used to claim closure.
+
+The handler and helpers remain source-compiled bounded contract candidates; full
+failed-read caller/private ABI is unverified. The prior NV serializer's separate
+failed-read counterexample remains retained too. The new standalone audit expects
+this mismatch as an open gate and does not treat it as a green behavioral proof.
+
+Eight REA headless Ghidra byte receipts bind complete code/literals/text. Fresh
+metadata observes73798, while83f24 and73868 metadata are explicitly unavailable;
+the locked300/60-byte extents and authenticated bytes remain the manual evidence.
+Main linkage closes the health-settings import without new imports, leaving54.
+No new upstream ancestry is inferred for product logic; pinned memory/protocol/
+CMSIS provider provenance remains inherited through manifests.
+
+Persistence,event delivery,private caller history,portable admission,provisioning/
+recovery policy,global placement and byte-identical firmware remain open. No
+hardware write or portable/runtime-admission policy changed.
+
+
+Native user-profile command checkpoint (2026-10-16):
+`native-user-profile-command` compiles84a10(202 native bytes) and62 exact log-text
+bytes. It reuses the actual packet accessor and flag-C acknowledgement body, with
+no new RAM owner. A separate native handler is aliased only by the research
+partial module; portable profile validation/event-consumer policies are unchanged.
+
+Null payload sends command4/version1/flag1 with a fresh sequence and returns that
+lower raw result. Nonnull payload logs four fields with native ordered byte and
+halfword reads; logger mode and later field reads remain fresh. It then sends
+flag0, ignores that return, and constructs a profile event after acknowledgement.
+Event100a is published over12 bytes: input byte1, sex1 for byte0==0 or2 otherwise,
+low bytes of the two halfword fields, then sixff bytes. Native writes only these
+ten bytes. The external frame's remaining two bytes are retained verbatim, not
+zeroed or replaced by defaults. The event publisher's raw result is returned.
+Declared short backing is only exercised in mapped synthetic memory; native's
+advertised length>12 lookup is not promoted to a safe six-byte backing contract.
+
+76,384 native/source cases comprise50,176 first-byte/length/seed/mutation matrix,
+18,144 field-edge and8,064 two-call workflows. There are417,004 observations per
+side, including84,448 lower responses and71,904 events. All256 byte0 values, byte1
+edges, halfword boundaries, four stack seeds, logger sequences/return words,
+fresh sequence/payload fields after logging and acknowledgements, and last-two-
+byte mutations are covered. Actual accessor and flag-C header construction
+execute; lower response,event and logging are explicit fixtures. RawR0,callee
+registers,SP and nonstack RAM match, and every published12-byte record is compared.
+Source-side native instruction execution is forbidden by the verifier.
+
+Six REA headless Ghidra byte receipts authenticate body,literals and text, with
+initial shorter text-prefix reads retained alongside complete reads. Procedure
+metadata is explicitly unavailable; the locked202-byte extent and native bytes
+remain the manual evidence. Main linkage closes the profile-handler import with
+no new imports, leaving53. Existing protocol/memory/SDK provider provenance is
+inherited through hash-bound manifests; no new upstream ancestry is inferred for
+this product handler or its profile semantics.
+
+The external event-tail view and these two-call fixtures do not prove all real
+callers' private history, full scratch/APSR ABI or final instruction placement.
+The health-settings failed-read/fresh-valid-handle RAM counterexample and earlier
+NV frame counterexample remain unchanged open gates. Actual profile consumer and
+event delivery, portable policy/admission, provisioning/recovery, whole context
+ownership and byte-identical firmware remain unproven. No hardware write or
+portable/runtime-admission policy changed.
+
+
+### Output GPIO five-adapter source checkpoint
+
+Five product table adapters now compile from `native_output_gpio_drivers.c`:
+0x54d8c,0x54d92,0x54f3c,0x54f42 and0x54f8a. Each loads the pin word at
+record+8 and tail-transfers to an existing Nordic GPIO HAL/GPIOTE provider.
+REA headless Ghidra12.1.4 supplied three fresh authenticated byte receipts;
+Ghidra-MCP reported no running instance. No procedure metadata or whole-function
+coverage is inferred from these byte reads. No frozen ownership row was added.
+
+A separate explicit-section verification link reproduces all30 adapter bytes
+exactly at their native addresses. Its absolute lower-provider symbols are
+verification boundaries only. The partial runtime instead links actual existing
+source providers, closing five parent imports and leaving48. The primitive
+implementations retain existing pinned Nordic SDK17.1.0 provenance; no copied
+native executable body or newly inferred upstream ancestry was introduced.
+An initial verification link used the default linker script, which consumed the
+input sections into generic.text and produced empty requested extractions. The
+failed driver and ELF remain in `pre-explicit-section-layout/`; explicit output
+sections fix the verification layout without changing the C candidate.
+
+The registrar metadata callback declarations have not been migrated to proven
+body signatures. Driver14, open/close/slot operations, init-selector table,
+negative command indexing, callback side effects and timing remain evidence
+gates. This adapter identity does not prove lower-provider instruction identity,
+whole-image placement, peripheral behavior or a flashable firmware image. The
+health-settings and NV failed-read private-frame counterexamples remain open.
+No hardware writes, policy/admission changes or authenticated corpus edits.
+
+
+### Output GPIO callback configuration, read and direct-toggle bodies
+
+Source bodies now cover supplemental native entries0x54cd0(callback setup),
+0x54e20(input-bit read) and0x54ea8(direct port toggle). Four fresh REA Ghidra
+byte receipts authenticate their spans/literals and0x79288 port decoder. These
+are supplemental functions without newly invented ownership rows. The callback
+setter takes its pointer inr1, checks NULL before device lookup(return10),
+returns1 for an unknown name, and writes byte20/word24/word28 sequentially.
+Read returns1 for unknown/unopened records and otherwise stores one live IN bit;
+it retains the saved incomingr3 on failure and normalized pin inr3 on success.
+Toggle retains normalized pin inr3, returns the raw port pointer inr0, and writes
+OUTSET=mask&~OUT thenOUTCLR=mask&OUT. No pointer/pin guard was introduced.
+
+The actual pinned Nordic SDK17.1.0 inline port decoder is consumed unchanged;
+every consumed SDK header is checked against the authenticated SDK ZIP. Product
+operation logic is recovered independently and is not represented as upstream
+Nordic source. Existing actualstrcmp and canonical five-record configuration are
+selected from the parent source composition. No new RAM owner, opcode array,
+policy/admission change or hardware write is involved. The registrar's metadata
+function declarations remain explicitly unmigrated body-ABI gates.
+
+The differential verifier passed11936 cases(config864/read6912/toggle4160),
+including29256 actualstrcmp calls per side, all256 byte pin values plus fullword
+edges, both decoded ports, output/pin/open-state aliasing, configuration read/write
+overlap, fresh device-name mutation after a comparison, four stack/RAM poisons,
+rawr0, read/toggle savedr3, callee registers/SP and nonstack RAM. Canonical code
+pointers alone are normalized before RAM comparison. The comparison trace SHA is
+b5a4225db7b06adf28ac55f97dbe6eca5858717a9889a73d7dbe9c2bd99c357a.
+MMIO checks compare register bytes; write-one physical semantics and electrical
+behavior are not simulated or claimed. NULL output faults, arbitrary malformed
+backing, unaligned callback configuration, full scratch/APSR and real cross-call
+private stack history remain unproven. The three unresolved operation pointers
+in the verification graph are not executed and the verifier rejects entry into
+their fixture addresses. Main source linkage closes three imports, leaving45.
+Open/close/command dispatch and pre-record initialization/release tables remain;
+health-settings/NV failed-read counterexamples and final image gates remain open.
+
+
+### Output GPIO signed-command dispatcher
+
+Supplemental native0x54d20 now compiles as `r1_output_gpio_slot18` from product C.
+A fresh REA Ghidra byte receipt covers its108-byte body/padding/literal span.
+The signed comparison rejects commands>=3 but admits negative fullwords; native
+32-bit shifted/wrapping address arithmetic is preserved through integer table
+addresses. There is no invented negative-command guard. Names are freshly read
+at every actualstrcmp call; unknown names return1, unopened records return27.
+Zero config0d selects the first three canonical drivers without delay; nonzero
+selects the next three drivers then calls the existing subtract-three cycle
+primitive with64000, ignoring both lower returns. The branch is selected before
+the driver call and stays selected if that driver mutates config0d/open/pin.
+
+The verifier passed11232 cases, with30960 actualstrcmp calls,5040 driver-boundary
+calls and3360 delay-boundary calls per side. Tests cover all five names/unknown,
+opened0/1/255, config0d0/1/255, signed positive rejection, negative mapped indices,
+INT_MIN wrapping aliases, fresh name mutation, driver mutation and four RAM/stack
+poisons. Trace SHA3790e3b765016f172404c4e79de5fbc4f263cbbf0eb27a33ccec5570d909a0e1.
+Only driver/delay observations are fixtures; actualstrcmp and command control
+flow execute. Patched valid targets make selected negative table locations
+observable, not admitted real-world targets. Arbitrary negative targets/faults,
+lower register residue, full scratch/APSR, timing and cross-call private history
+remain gates. Actual SDK/HAL/driver/cycle source remains linked in the main
+composition using existing authenticated provenance; no new upstream ancestry
+is attributed to this product dispatcher. No new RAM owner or hardware writes.
+Main imports fall45->44; open/close and their sixteen-byte pre-record table remain.
+Existing failed-read counterexamples, metadata ABI and full-image gates remain.
+
+
+### Output GPIO lifecycle and source-owned predecessor table
+
+Six source bodies now cover native close0x54c58, open0x54d98, direct release0x54cbc,
+direct initialize0x54df0, task release0x54f28 and task initialize0x54f48. The
+94-byte close entry retains its frozen legacy `r1_named_gpio_output_set` label;
+the C symbol is explicitly `r1_output_gpio_close`. No ledger label or extent was
+rewritten; the other five entries are supplemental. Six fresh REA headless
+Ghidra byte receipts authenticate their body/padding/literal spans. Existing
+canonical GPIO records remain unchanged. A new mutable sixteen-byte source table
+owns four symbolic function pointers at native0x20007218, immediately before
+records0x20007228. Verification placement and pointer-normalized cold bytes match
+all16 bytes. Final whole-image adjacency/relocation remains a linker gate.
+
+Open looks up five names, returns1 if unknown and0 if already open; enabled
+nonnull open callbacks receive their own address inr0 before a fresh selector
+read and initialization dispatch. Open sets opened1 after dispatch, ignoring
+lower returns. Close returns1 if unknown,0 if closed; it snapshots enabled/nonnull
+close-callback presence, dispatches release, then freshly rereads the callback
+address without rechecking enable, calls with that address inr0, and stores0.
+Raw selectors are not clamped. Selector0 uses GPIOTE, selector1 direct GPIO.
+The table-access arithmetic retains native wrapping behavior; arbitrary selector
+pointees/faults and full callback scratch-register residue remain unproven.
+
+Task helpers reuse the actual pinned Nordic SDK17.1.0 source interfaces and
+short-enum3-byte output configuration at record+14. Nonzero init/out-init status
+calls the existing returning `r1_adc_error` provider and continues; the logger
+neither resets nor halts. Task enable, level set/clear, disable and uninit retain
+fresh pin/level reads at native call boundaries. Direct helpers consume upstream
+nrf_gpio_cfg/set/clear inline HAL unchanged. All newly consumed SDK headers are
+checked against the authenticated SDK archive. Product lifecycle/table logic is
+not attributed to Nordic. Existing error logger ownership is reused.
+
+31104 differential cases passed(open10368/close10368/workflow10368), with221184
+actualstrcmp calls per side, four stack/RAM poisons, all five/unknown names,
+opened0/1/255, enable0/1/255, both selectors, callback presence combinations,
+returning initialization failures and repeated open-close-open-close histories.
+The actual lifecycle, all four helper bodies, strcmp and inline HAL execute;
+SDK calls and returning error logging are explicit test boundaries. Tests cover
+callback selfr0, fresh selector/pin/level after callbacks, changed close target
+and enable after release, raw lifecycle r0, callee registers/SP, nonstack RAM and
+MMIO register bytes. Trace478afff84d38597631079eb373cb2d4b013f859e6296d335d8d04ed3bc78e0b8.
+Helper raw return/scratch values, callback private frames, arbitrary selector
+targets, MMIO physical semantics, electrical behavior, full boot and timing are
+not proved. The main partial runtime uses actual existing SDK/error providers;
+the focused verification graph exposes those lower calls as fixtures. All eleven
+output-GPIO operation/driver imports are now source-resolved across checkpoints,
+leaving42 main imports. Native metadata prototypes remain explicitly unmigrated.
+Existing health/NV failed-read private-frame counterexamples and whole-image
+configuration/toolchain/byte-identity gates remain open. No hardware write,
+portable-policy/admission change or firmware/corpus replacement occurred.
+
+
+### Peripheral handle-binding bodies and source-owned cells
+
+The locked24/32/48/44-byte functions0x50128(motion IRQ),0x502c4(LED/LDO),
+0x50944(PPG) and0x51310(touch) now compile from product C, with the supplemental
+20-byte motion-bus binder0x50150. Ten fresh REA Ghidra receipts authenticate all
+five bodies and their literal/name spans. Ten individual zero-initialized handle
+cells own40 bytes at authenticated addresses, with100 exact name bytes; no whole
+motion/PPG/touch context or intervening fields are claimed. Actual canonical
+registry/head, strcmp and slot08 dispatcher are reused from source providers.
+The focused verification graph has zero unresolved imports. Main partial source
+linkage closes four peripheral-module imports without new imports, leaving38.
+
+Native PPG behavior caches i2c_4/ppg_int/ppg_reset_en then passes the last-loaded
+reset handle to slot08, even if that handle isNULL. It does not substitute the
+bus handle. Motion first caches i2c_1 then acc_int_1. Touch caches i2c_0, then
+**touch_rdy_out at0x20006800**, then**touch_rdy_in at0x20006804**. LED/LDO caches
+ppg_led_en then touch_ldo_en. Every nonzero cache is retained and every zero
+cache is retried; later cells are freshly read after preceding lookups. Rawr0 is
+the last cache/lookup value, except PPG returns the actual slot08 result.
+
+6560 differential cases passed: LED640/motion-bus160/motion-IRQ640/PPG2560/
+touch2560, with14240 actual find calls,5120 actual dispatch calls and1728 open
+operation fixtures per side. All local registry-presence/cache masks, missing
+operation callbacks, four result/stack/RAM patterns, repeated calls and cache/
+registry mutation during lookup/open are covered. Actual registry/strcmp and
+slot08 execute; only the target open operation is a fixture. Rawr0, callee
+registers/SP and nonstack RAM match. Traceba718da8b0b15f4141d40017f61e89544ceb20abe5db569b186409bd723b0502.
+
+The first candidate guessed the opposite touch input/output name order; the
+exact-string check rejected it before behavior validation. Its source/object,
+reports/test driver and failure log remain underpre-authenticated-touch-name-fix.
+A subsequent verifier link omitted the standalone motion-bus root after inlining
+removed it; that builder/report/failure remain underpre-motion-bus-root-fix.
+The current link explicitly retains all five functions. Archive hashes are bound
+in superseded-evidence.json. These are corrected candidate/test-link errors,
+not evidence to normalize away. Product binders have no inferred third-party
+ancestry; existing registry/provider provenance is inherited without claiming
+hardware/provider identity, licensed sensor implementation or successful boot.
+Full scratch/APSR/private-frame ABI, whole context ownership, malformed cached
+pointers, peripheral behavior, existing failed-read counterexamples and complete
+configuration/toolchain/byte-identical firmware remain gates. No hardware writes,
+policy/admission changes or frozen corpus/ownership edits were made.
+
+
+### Hardware-TWI completion callbacks with upstream CMSIS kernel-state query
+
+Product callback0x70778(78 locked bytes) and supplemental0x707cc(74 bytes) now
+compile from C. Three fresh REA Ghidra receipts authenticate both callback spans
+and the native CMSIS kernel-state query0x7d26c(28 code bytes plus literal).
+Existing216-byte hardware-TWI clusters remain the sole source owners. Event0
+stores done1/result0; event1 result5; event2 result7; unknown bytes retain the
+previous result. Bus0 sets error byte1 for every nonzero event and reads ready
+byte2. Bus1 never writes byte1 and uses that byte as ready. A successful event
+does not invent an error-flag clear. No event/handle guard was added.
+
+Nonzero ready and semaphore invoke the existing pinned CMSIS-FreeRTOS
+`osKernelGetState` source, selected unchanged from the authenticated compiled
+CMSIS unit. CMSIS-FreeRTOS pin d213f261b5be6bb29a7cce8b84071706b72f4d53 and
+FreeRTOS pin def7d2df2b0506d3d249334974f51e427c17a41c remain inherited from
+existing provenance. The selected38-byte pre-relocation getter matches its
+original source object. Its single4-byte zero-initialized KernelState cell is
+placed at native0x20007870 for verification; consolidation with future CMSIS
+initialization/setters and final global placement are explicit gates. The main
+partial composition contains one KernelState and actual existing scheduler and
+semaphore providers, closing both IRQ imports without new imports, leaving36.
+
+66624 cases passed(matrix61440/mutation5184), with43840 scheduler observations,
+18304 release observations and384 freshlyNULL release arguments per side. Both
+actual product callbacks and unchanged CMSIS state-query control flow execute;
+only xTaskGetSchedulerState and osSemaphoreRelease are explicit fixtures. All256
+event bytes, ready0/1/255, missing/present semaphores, scheduler/kernel-state
+branches, four result/stack/RAM patterns, repeated events and mutations during
+state query are covered. Release occurs only for running2/locked3 and rereads
+the semaphore afterward without rechecking ready. Rawr0, callee registers/SP
+and nonstack RAM match. Tracec64bb7740f08b18aefb3d588b62dcd79a7f7f8ac4e7ac52dffa91fa3fe302008.
+Canonical configuration code pointers alone are normalized. No physical IRQ or
+semaphore delivery, callback scratch/APSR/private-frame ABI, metadata prototype
+migration, native compiler equivalence or whole-image identity is claimed.
+
+The first audit attempt used the common relocation-free section reader on this
+relocation-bearing CMSIS function and was rejected. Explicit section extraction
+compares its pre-relocation bytes correctly; no provider source or differential
+receipt changed for this audit repair. Hardware TWI open/close/read/write and
+full transfer-driver/configuration evidence remain. Existing failed-read/private
+frame counterexamples and complete firmware configuration/toolchain/link gates
+remain open. No hardware write, policy/admission change or corpus replacement.
+
+
+### Hardware-TWI native completion-wait policy
+
+Both locked100-byte wait bodies0x70820/0x7088c now compile from product C. Two
+fresh REA Ghidra byte receipts cover each body and its two literals(108 bytes).
+The source references the existing canonical hardware-TWI clusters, CMSIS
+kernel-state/tick-frequency/semaphore-acquire providers and the existing Nordic
+subtract-three cycle primitive. No new RAM/configuration or local RTOS/driver
+implementation is introduced. Their source-linked runtime keeps36 imports: these
+new bodies do not yet close a parent import, because transfer adapters remain.
+
+Primary ready is byte2, secondary byte1. With ready and a nonnull semaphore,
+kernel state2/3 selects CMSIS acquisition. Ticks use wrapping32-bit frequency*
+milliseconds, then unsigned /1000, with a minimum of1. The semaphore is freshly
+loaded after the frequency call. Any nonzero acquire status returns13; zero
+returns the fresh full32-bit result word without checking done. Other states
+fall back to polling: wrapping milliseconds*1000 limit, done checked first,
+postincrement counter compared against the limit, and delay64 cycle-units per
+permitted iteration. Poll success returns fresh result; timeout returns13.
+No recheck switches a busy wait into the semaphore path midway through polling.
+
+21984 differential cases passed(matrix16800/mutation5184), with10784 state,
+5696 frequency,5696 acquire and531168 cycle-delay observations per side, including
+864 freshlyNULL acquire arguments. Both actual wait bodies execute; CMSIS/delay
+calls are explicit observation fixtures in the focused graph, while actual source
+providers remain linked in the main composition. Both buses, ready0/1/255,
+semaphore presence, all state branch classes, frequency/timeout wrap edges,
+minimum ticks, completion before/after delays, bounded never-complete timeout,
+four RAM/stack/result patterns and semaphore/result mutation during lower calls
+are covered. Rawr0, callee registers/SP and nonstack RAM match. Trace
+ d52ce5fe50dea40c9ad5358efd6cc3400bb0103e9496478432921a1d542305d8.
+Polling timeout exhaustion was bounded to limits<=1000; larger limits include
+immediate/early completion. All32-bit timeout/frequency combinations and elapsed
+physical timing are not claimed. Canonical code pointers alone are normalized.
+
+Full scratch/APSR and private-frame ABI, physical semaphore/IRQ/timing behavior,
+TWI lifecycle/register/packet transfer bodies and final firmware identity remain
+open. Inspection of the next transfer layer records real width differences:
+primary register/read paths use halfwords where secondary paths use bytes; the
+upstream nrfx_twim length is size_t while legacy nrf_drv_twi wrappers expose
+uint8 lengths. These are evidence to preserve in subsequent source reduction,
+not justification to coerce all transfers through one narrowed API. No hardware
+write, portable-policy/admission change or corpus/ownership edit occurred.
+
+
+### Four TWI register adapters and unchanged Nordic TWIM dependency
+
+Locked native register read/write bodies0x54ff8(96),0x5505c(94),0x550c0(90) and
+0x55120(90) now compile from product C, with four fresh REA Ghidra span/literal
+receipts. The unchanged Nordic SDK17.1.0 `nrfx_twim.c` and every consumed SDK
+header are independently checked against the authenticated SDK ZIP. Its compiled
+TX/RX/xfer graph has zero unresolved providers and is source-linked with the
+product adapters and existing source wait/error providers. This provides an
+attributable upstream maintenance path instead of copying the TWIM engine.
+Product adapters are separately attributed native recovery, not Nordic source.
+The SDK control-block native identity/configuration/placement and hardware
+transfer behavior remain unverified. The selected SDK object has104 bytes of
+candidate m_cb BSS; these are not admitted as a proven native RAM replacement.
+Main imports remain36: top-level operation/lifecycle wrappers still need bodies.
+
+Read sends the low register byte with no-stop, clears bus0 done/error or bus1
+done only, waits500(primary)/100(secondary), clears done again and receives.
+Primary RX length is narrowed to8 bits; secondary retains the full size_t word.
+The final timeout tests the original full length against50, selecting200/500.
+Every nonzero lower result returns its low byte, including errors whose low byte
+is0. The40-byte external frame preserves the register byte inside savedr3 and
+returns savedr2=1; source bridges retain those exact external words/addresses.
+
+Write rejects length>80 with9. It copies register+payload once, clears flags
+once, sends with stop and retries every nonzero TX error except17, logging the
+full error word each retry. Retry does not recopy input or clear flags. TX17
+returns17 without waiting/logging; successful TX waits500(primary)/200(secondary)
+and returns low-byte wait result. The native104-byte write frame allocates84
+local bytes then savedr4: buffer starts at+4, so length80 copies its last byte
+to+84, overwriting savedr4's low byte. This observable overrun is preserved, not
+replaced with an invented79-byte limit. Raw callee checks explicitly expect that
+changedr4; physical callers and full downstream consequences remain a gate.
+
+30720 differential cases passed(7680 for each adapter), observing32640 TX,
+1536 RX,11264 waits,7680 error logs and1920 length80 savedr4 cases per side.
+Actual four product bodies execute; nrfx TX/RX, wait and returning error logger
+are fixtures in the focused verification graph. The main partial graph instead
+links actual pinned SDK and existing source providers. Tests cover byte/halfword/
+fullword length edges, address bytes, full register values narrowed at use,
+retry sequences/full error words, TX17, length rejection, read-frame raw words,
+mutations during TX/wait/log, four RAM/stack patterns, rawr0, saved readr2/r3,
+callee registers/SP and nonstack RAM. Trace
+5937663fe1609f3ce3d697106ae3f0852b08b72e845749f9139769eeffe3c86a.
+Only canonical configuration code pointers are normalized. SDK electrical/DMA
+behavior, invalid backing/full address words, endless error retries, complete
+scratch/APSR/private stack history, all real callers and final byte identity
+remain unproven. Existing failed-read counterexamples stay open. No hardware
+writes, policy/admission changes or corpus/ownership edits occurred.
+
+
+### Hardware-TWI packet operations and native-call-frame repair
+
+Supplemental device read0x55414/read0x55448 and write0x55ce0/write0x55d50 now
+compile from C preparation/status kernels plus source assembly ABI bridges.
+Four fresh REA Ghidra span/literal receipts bind all bodies. Existing cluster,
+register/wait, SDK and error providers are reused; no new data owner or claimed
+upstream ancestry for product policy is introduced. Main partial source linkage
+closes all four read/write imports without new imports, leaving32. Open/close
+operations remain. No new ownership row was invented for these extra entries.
+
+Read checks NULL before opened, returning9/8; valid requests load primary
+halfword register/length versus secondary bytes, use output pointer+12, and map
+any fullword nonzero register-adapter result to12. The native savedr3 slot becomes
+the legacy instance pointer only on the valid-open path; early returns retain
+incomingr3. Write checks NULL/open returning4/10, reads a full halfword length
+at+8 for the single-byte branch, and otherwise uses primary halfword register/
+length versus secondary byte register/narrowed length. Register-helper failures
+map to11 without truncation. The single-byte branch copies register/data into
+the savedr3 word's low16 bits, clears done(and primary error), sets savedr2=0,
+sends two bytes then waits500/100 only after fullword TX0. TX/wait results are
+truncated before mapping to11; e.g.0x100 maps to0 and a nonzero TX does not wait.
+The valid multibyte path restores savedr2 as the legacy instance pointer; early
+write paths retain the incoming request pointer. Frame bytes are not zero-filled.
+
+The initial C-kernel-call version passed46080 isolated cases but the actual
+register graph exposed a raw TX-buffer-address mismatch: native0x2003efd4 versus
+source0x2003efbc, with matching payload/r0/nonstack RAM. This was retained without
+normalization underpre-native-call-frame-fix. Source/object, drivers/reports and
+failed probe remain hash-bound. The three old tested graphs were reproduced
+byte-for-byte from the preserved candidate object and checked against their
+original report hashes. The repair uses a temporary32-byte preparation plan
+below the native saved-word frame, returns all compiler preparation frames, then
+restores nativeSP before calling actual providers. Status mapping remains C.
+Write bridges also preserve the native packet pointer inr4 across the provider
+call; outer savedr4 restoration retains the native80-byte inner overwrite's
+bounded caller behavior. The temporary plan is never a firmware opcode blob.
+
+The repaired candidate passed the same46080 isolated cases(11520 per wrapper),
+plus5760 cases with actual register adapters, including SDK buffer addresses and
+payload bytes without pointer normalization. Isolated trace remains
+4da29bc35cb22586f1c9c801dccc81bcee3af9587dcbf6f9722e901bcc369996;
+composed traceb65a80927d4163bb43fcf7edcb6c39e33acc4c7c11ca1bbc04b81ab605ec62a3.
+The focused graph fixtures register/TX/wait calls; the composed graph executes
+actual register bodies with SDK/wait/error boundaries. Cases include early paths,
+width/length edges, fullword errors, one-byte versus257-byte branch selection,
+four RAM/stack patterns, lower-call mutation, savedr2/r3, callee registers/SP and
+nonstack RAM. Only canonical metadata code pointers are normalized. The SDK and
+CMSIS providers are actual source in the main composition, not fixture aliases.
+
+The earlier pointer counterexample is closed for the tested native call-frame
+addresses; complete private-frame histories/full scratch/APSR and metadata ABI
+migration remain open. Malformed/aliased arbitrary request backing, real
+callbacks/RTOS/DMA/electrical behavior, SDK control-block identity/configuration,
+unbounded register retries, existing health/NV failed-read counterexamples and
+complete image/toolchain/placement/byte identity remain gates. No hardware write,
+portable-policy/admission change or corpus/ownership edit occurred.
+
+
+### Hardware-TWI lifecycle and consolidated legacy/TWIM source family
+
+The four locked product bodies0x55180/0x551b4(close44 bytes each),0x55278(open100)
+and0x552e4(open66) now compile from C kernels and explicit native config-frame
+bridges. Six fresh REA Ghidra byte receipts authenticate bodies/literals and two
+8-byte config tails. Source-owned readonly tails at0x9a600/0x9a620 match all16
+bytes:400kbps, priority2, clear-bus0, hold-uninit1(primary)/0(secondary), padding0.
+The sixteen-byte legacy instance/config layouts are statically checked against
+unchanged SDK headers. No new product RAM/context owner is claimed.
+
+Open returns0 if already opened. Both buses snapshot pin words into config at
+native0x2003efe0; only primary configures both GPIO outputs first, with a fresh
+second-pin read after the first GPIO call. Legacy init receives instance at
+record+16, the full native16-byte config, a freshly loaded IRQ pointer andNULL
+context. Nonzero status logs through the existing returning error provider and
+continues. The embedded TWIM instance at record+20 is enabled and opened1 stored
+unconditionally after enable. Close returns0 if closed; otherwise disable/uninit
+receive record+20, then native power word0x40003ffc/0x40004ffc is written0, read
+through a volatile pointer, written1, and opened0 stored. Those register operations execute only
+inside the verifier emulator; no physical write was issued.
+
+Unchanged Nordic SDK17.1.0 `nrf_drv_twi.c` now compiles beside unchanged
+`nrfx_twim.c`, with all consumed source/header bytes checked against the SDK ZIP.
+The runtime is recomposed from the pre-TWIM source parent and unchanged product
+leaves, selecting legacy init plus TWIM init/TX/RX/enable/disable/uninit together.
+This avoids appending another m_cb beside the historical TX/RX-only selected
+object. Old objects/reports remain intact. The consolidated selected graph has
+zero unresolved providers, exactly one104-byte TWIM m_cb and one8-byte handlers
+plus one8-byte contexts array. These are candidate SDK state, not proven native
+control-block address/layout replacements; native state identity/configuration,
+callback/event delivery and physical initialization remain gates. This retains
+the upstream implementation/license and maintenance path instead of rebuilding
+the legacy driver engine locally. Product lifecycle policy is independently
+recovered and is not attributed as Nordic source.
+
+7200 differential cases passed(open2400/close2400/workflow2400), observing4000
+GPIO,4000 init,3000 returning error,4000 enable,6400 disable/uninit and6400 each
+power0/power1 transitions per side. The actual lifecycle/config/frame/power-word
+logic executes; SDK/GPIO/error providers are explicit focused-graph fixtures.
+Main linkage uses actual source providers. Both buses, early opened states,
+pin/port/fullword edges, fullword init errors, four RAM/stack patterns, repeated
+open-close-open-close, mutations of second pin/IRQ/config/opened during lower
+calls, rawr0, callee registers/SP, nonstack RAM and MMIO bytes are checked.
+Native config pointers and all16 config bytes match. Trace
+22ecbf380072e9b238742b93b0d47ff85c6bdec6a61eef4052cca51d2b16fd7b.
+Only authenticated configuration code pointers are normalized.
+
+The first focused graph dropped the two unreferenced template arrays after the
+compiler folded their values into code. Its builder/report/failure log remain
+underpre-template-root-fix with bound hashes. Explicit verification roots retain
+the data for direct byte checks; product C did not change for that repair.
+All ten hardware-TWI operation/IRQ imports now resolve to source across these
+checkpoints. The main partial runtime closes four lifecycle imports without new
+imports, leaving28. Full metadata ABI/scratch/APSR/private-frame histories,
+physical initialization/power-cycle semantics/timing, SDK state/configuration
+identity, arbitrary backing/retry behavior, existing health/NV failed-read
+counterexamples and complete firmware/toolchain/placement/byte identity remain
+open. No physical write, portable-policy/admission change or frozen corpus/
+ownership edit occurred.
+
+
+### Native DFU BLE observer/auth: SDK divergence retained
+
+Native0x52154(128 code bytes) and0x7cdc8(100 code bytes) now compile as separate
+native observer and authorization bodies. Three fresh REA Ghidra receipts bind
+body/literal spans and the four-byte value seed0x9c65c. The pinned SDK context
+type is statically checked at28 bytes with native field offsets; a source-owned
+zero context at0x2002c110 lies inside the authenticated scatter zero interval.
+The source-owned4-byte seed is len2/offset0. Existing actual glasses-handle getter
+and an unchanged SDK ble_srv_is_indication_enabled selection are linked, with
+all consumed SDK source/headers checked against the authenticated SDK ZIP.
+SVC173/176 mnemonic bridges use official SDK enum numbers; no executable bytes
+or default-filled private CCCD buffers are retained.
+
+The frozen ownership ledger's SDK-family correlation is not sufficient to
+substitute the complete stock ble_dfu.c observer. Native disconnect compares the
+glasses-handle getter with stored DFU conn, clearing toffff only when different;
+stock compares the disconnected event handle. Native authorization stores the
+new event conn before any request checks; stock rejects a different existing
+conn. Native HVC also stores event conn on matching value-handle before checking
+waiting/preparation, unlike stock. These three superseding bounded correlations
+are explicit innative-sdk-correlation.json; the frozen ledger/corpus is preserved.
+Reuse is the SDK type/SVC constants and unchanged indication helper, while event
+control flow is independently recovered native C. No new upstream ancestry is
+inferred for the product differences.
+
+NULL returns0. Connect stores/returns event conn. Unknown events return their
+pointer; rejected authorization returns event+6, and all those rejected writes
+still retain the native conn update. Valid write authorization tail-calls the
+native-frame helper. It initializes a16-byte reply and8-byte value descriptor,
+retains raw CCCD backing at frame+28, executes value-get then actual SDK bit test
+only on success, and sets update/status0 or status01fd. Reply retries only full
+status17, freshly loading conn each iteration. After any other reply return it
+reads the current reply status, not the API result: status0 forwards the original
+write pointer, any nonzero status is returned raw. Matching HVC reads the full
+waiting byte, calls the real boot-preparation boundary, then invokes a freshly
+loaded event callback with2 if preparation returns nonzero. No callback-NULL or
+packet-backing guard was invented.
+
+34560 comparisons passed(event16128/direct-auth18432), with18624 value-get,
+37248 reply,756 prepare,6214 control-write,567 event callbacks,2016 actual glasses
+getters and9312 actual indication-helper calls per side. Only SVC/backend/event
+callbacks are fixtures. Cases include all256 CCCD bytes, zero/partial/full value
+writes, busy retries/nonzero final API returns, raw retained buffer seeds,
+mutated reply status/conn/callback, event/request/handle/opcode branches,
+noncanonical waiting bytes2/255, four RAM/stack patterns, exact authorization
+frame addresses/reply bytes, rawr0, callee registers/SP and nonstack RAM. Trace
+ ea7f9ba4a3ee1783923fad44bc69b37cbd483ab4a1e23e182f67a6786f5691e4.
+The first verifier resumed past emulated SVC with an even PC and lost Thumb
+state; its native-PC7cdf2 invalid-instruction diagnostic, driver and log are
+retained underpre-thumb-svc-resume-fix. Resuming with Thumb bit fixes the harness;
+no C candidate was changed for this repair.
+
+Main partial linkage closes ble_dfu_buttonless_on_ble_evt/context and exposes two
+honest backend imports:r1_dfu_bootloader_prepare_boundary(native5207c) and
+r1_dfu_control_point_write_boundary(native521d8). Total imports remain28.
+Backend execution, complete service initialization/shared backend pointer/SVCI
+state, all raw scratch/APSR/private frame histories, callback metadata ABI,
+arbitrary backing, real GATTS/DFU hardware behavior, existing health/NV failed-read
+counterexamples and whole-image configuration/toolchain/byte identity remain
+open. Source compilation does not admit DFU/provisioning/device writes. No
+physical write or portable-policy/runtime-admission change occurred.
+
+
+### DFU backend, response and SoC-event source closure
+
+Six bodies now compile: native52050 finalization,5207c preparation,521d8 control
+write,522d8 response,8ed5c advertising-name glue and52278 SoC event. Eight fresh
+REA Ghidra receipts authenticate code/literal spans and418 exact dual-log text
+bytes. The frozen preparation row reports60 bytes because its20-byte local body
+shares the40-byte finalizer closure; that ledger extent/label was not rewritten
+or counted as sixty new local bytes. SDK SVC IDs/types for GPREGRET/HVX/power and
+the28-byte advertisement structure are statically checked. New source data owns
+only the4-byte backend pointer at20007934(cold zero),28-byte adv-name object at
+2002c138(cold zero) and418 readonly log bytes. The canonical28-byte service
+context remains its existing owner, distinct from the backend pointer target.
+
+The existing SDK startup-owned12-byte nrf_dfu_set_adv_name_svci_async_def at
+native2002c12c is reused. A copied parent object globalizes that unique symbol;
+all allocated code/data section bytes/flags/sizes/alignments, all other nm entries
+and the state symbol's value/size remain identical. Only local-to-global binding
+changes. The original source object/report remains intact; no duplicate SVCI
+state or executable blob is introduced. A header-typed view accesses command,
+SoC handler and state+8. Main linkage closes both backend boundaries and the SoC
+observer without new imports, leaving25. The historical boundary names now have
+actual source bodies, not runtime fixtures.
+
+Preparation calls the current backend context's event0 then finalizes. Finalize
+executes SVC61(0,ffffffff), returns any failure, then SVC60(0,b1), returns any
+failure, calls event1 through the canonical service context and invokes existing
+power management with2, returning0. Backend callbacks and canonical callbacks
+must not be merged. Control writes retain full-byte waiting flags, reset state,
+response status17 mapping and fresh backend-pointer/callback/opcode reads.
+Unknown opcodes respond2 and ultimately event2; advertising lengths0/>20 respond5;
+valid names copy once, then reread length after memcpy. SVCI command success sets
+waiting on the fresh backend pointer. Busy returns6; forbidden15 emits native
+fresh-mode dual logs and retains raw15. SoC event requires both async pointers,
+returns the input event if missing, preserves pending on handler8, otherwise
+clears pending and uses success/error response paths with fresh callbacks.
+
+The response preserves the native24-byte frame: length16=3, sixteen initialized
+HVX parameter bytes and three data bytes20/opcode/response. The high halfword at
+frame+2 and byte23 are deliberately untouched. Successful HVX with returned
+length!=3 maps to12; other statuses remain fullword. C response kernels receive
+explicit external frames so API buffer addresses match native across control,
+SoC and direct-response calls. No zero fill masks caller history.
+
+74160 cases passed: control30720/sys30720/response5040/prepare512/finalize512/
+adv4608/composed-HVC2048. Actual six bodies, memcpy and the prior native HVC
+observer execute; SVC/SVCI targets, event callbacks, shutdown/logging are explicit
+fixtures. Observations per side:41935 HVX,2560 clear,640 set,1168 command,7680
+handler,72660 callbacks,160 power,524 mode,130 ring,98 SDK log and48 actual copy
+calls. Coverage includes all256 control opcodes, name limits and post-copy length
+mutation, separate/retargeted backend/canonical contexts, pending/busy/missing
+state, raw SVC errors/returned lengths, four RAM/stack patterns, exact API-visible
+HVX pointers/fields/data, direct response's entire raw frame, rawr0, callee
+registers/SP and nonstack RAM. Trace
+cbecbfb051392a274a9884dd39f0644680a2156f175f4d4dabbd48177eb8360e.
+
+**OPEN raw caller-history gate:**22 composed cases have different unused HVX
+frame padding, despite identical declared API-visible payload/parameters and
+nonstack RAM. raw-frame-history-probe.json preserves the first counterexample:
+a one-byte name operation with failed command and seedaa leaves native byte23=00
+and source byte23=aa. The three API payload bytes are20/02/04 in both. No padding
+normalization or invented zero store was added. API/RAM verification is bounded
+and does not close full private-frame/ABI/image identity. Real service/backend
+initialization, SVCI/SoftDevice/DFU/power execution, arbitrary packet backing,
+callback scratch/APSR/caller histories, original placement/toolchain and existing
+health/NV failed-read counterexamples remain gates. No physical device write,
+portable-policy/admission change, corpus/ledger rewrite or complete-image claim.
+
+### Existing printf provider composition
+
+`build_native_printf_runtime.py` selects the already compiled native printf/stdout
+wrappers and native RTT write wrapper into the DFU backend partial runtime.
+The selected object imports only the existing formatter core, SEGGER RTT Init,
+WriteNoLock and shared control block; the parent resolves all four. The unchanged
+upstream SEGGER RTT provider and source-owned initializer/state are reused once.
+The main partial graph now has24 unresolved imports, closing printf without
+new bodies or state. Existing formatter-stream and RTT leaf verification receipts
+are hash-bound by the composition report and audit. No composed execution,
+private-frame/interrupt/debugger equivalence, original placement/instruction
+identity or complete firmware build is claimed. The retained-log sink is still
+a separate unresolved provider; historical health/NV/DFU frame counterexamples
+remain open. No firmware/device write was executed.
+
+### Retained-log sink from authenticated native evidence
+
+Native7f030 (146 bytes) now has a compiled C sink with an explicit32-byte
+variadic entry frame. REA's Ghidra dossier is retained in
+`native-retained-log-rea.json`; authenticated disassembly confirms the branch,
+clear order, fresh context loads,16-bit cursor wrap, newline and RTT pointer
+calculation. It shares the existing reset-trace context and introduces no
+retained-state initialization beyond the native stores. Oversized formatter
+returns can produce an output pointer before the text buffer; this behavior
+is preserved without invented guards.
+
+2016 native/source comparisons passed with explicit clear, crash-initializer,
+formatter and RTT fixtures: NULL formats, flag0/1/255, seven cursor boundaries,
+negative/zero/positive/wrapping formatter results, two RAM patterns and callback
+mutations of context/cursor. Observed native calls:672 clears,336 initializers,
+636 formatters and424 outputs. Rawr0, callee registers/SP, external32-byte frame,
+varargs pointer, context and output RAM match. Trace
+2a30ec25e111a39e79a50f3d0b2feaa351f9ad676a55b697831cdd2fba866de0.
+
+The new main partial graph closes the retained sink and exposes the actual
+`r1_health_crash_record_initializer` provider, leaving24 imports. Existing
+formatter/RTT providers and reset context resolve its other dependencies.
+The initializer is not stubbed. Product-specific sink logic has no identified
+upstream replacement; existing attributed SEGGER RTT remains reused. Actual
+composed formatter/RTT/crash execution, full private-frame/alias histories,
+original toolchain/placement/instruction identity and complete firmware remain
+open. No physical device write or admission-policy change occurred.
+
+### Crash initializer and shared time-status accessor
+
+Native5a2b8 (104 bytes) and8ad98 (6 bytes) compile from C in
+`native_crash_initialize.c`. The initializer shares the existing reset context;
+the status accessor reads byte11 of the existing time state. Its24-byte entry
+frame preserves the savedr3 upper half while the lower half carries payload
+length. The record pointer is captured before callbacks; fresh record timestamp
+and offset feed snapshot construction, followed by CRC over964 bytes and a
+16-bit checksum store. The native copy gate remains896 bytes.
+
+1440 initializer and256 status native/source comparisons passed, with explicit
+time, payload, memcpy, snapshot and CRC fixtures. Tests include NULL payloads,
+length0/736/895/896/897/65535, four status values, signed offset extrema, two
+RAM patterns, and five callback mutation modes. Actual initializer/status
+bodies execute; rawr0, restoredr3, callee registers/SP, external24-byte frame,
+record RAM and ordered API observations match.120 copy paths are exercised
+by the896-byte fixture. Trace
+c8984a76fc6f18766d736f343abae3469595fb687b82331006c533cf7c2c480b.
+
+REA bytes for6abe4 confirm that the actual getter writes736 (0x2e0), then
+returns2001e054. This differs from the initializer's896-byte gate. Neither
+constant was changed to make the path reachable. The payload's complete state
+ownership and producer lifecycle remain unresolved; no opaque payload data was
+copied into source. Snapshot construction is also an explicit provider.
+The new partial runtime closes the initializer, exposing these two imports,
+for25 unresolved imports. It reuses existing time, memcpy and stock CRC source
+providers; this receipt does not establish their composed execution. Full
+private-frame/alias histories, original compiler/placement/image equality and
+hardware behavior remain gates. No physical firmware write occurred.
+
+### Crash snapshot across both native ranges
+
+`native_crash_snapshot.c` covers native5a324..5a3cd and its shared tail
+3f47c..3f52f (350 total bytes, confirmed by REA). The C preserves52-byte
+clear, signed16 offset clamp to[-720,720], wrapping timestamp adjustment,
+unsigned day/hour calculation, six activity bitfield packs, HR hourly query,
+SpO2 and unaligned HRV fields. Native query output pointers remain entrySP-24
+and entrySP-20, with only their declared4-byte and2-byte fields initialized.
+No provider payload, opaque executable data or invented upstream attribution
+was added. Product cache/query providers remain explicit boundaries.
+
+23328 comparisons passed using actual snapshot body and explicit clear/cache/
+query fixtures: all24 local-hour inputs plus timestamp extrema/day wrap, nine
+offset boundaries, all16 provider-presence masks, two patterns and three
+mutation/alias modes. Tests cover query mutations of record and later caches,
+and activity cache aliased to output. Each side observes23328 clear/activity/
+HR/SpO2/HRV calls and11304 queries. Rawr0, callee registers/SP, ordered calls,
+declared query bytes and exact pointer coordinates, record and cache RAM match.
+Trace c6cbed58aacbd0731e6e18b7817954c5faa54ea617649f78037aa9b49808853d.
+
+**OPEN ABI/frame counterexample:** all23328 cases differ in restoredr2/r3
+and/or external24-byte history. First case timestamp0/offset-32768/mask0/
+mode0/seed0 returns native r2/r3=22222222/33333333 and source=ffff8000/abcdef01.
+`raw-frame-probe.json` retains both raw frames, without normalization. This
+receipt proves bounded output/state behavior, not full native ABI/history.
+The earlier passing driver/receipt are retained in pre-raw-probe.
+
+The new main partial graph closes snapshot construction and exposes five
+actual health-provider imports, increasing the explicit total25->29. It
+reuses existing memory clear. Provider/cache state ownership, full raw ABI,
+actual health-provider composition, arbitrary pointer histories, original
+toolchain/placement/instruction identity and full firmware remain gates.
+Existing NV/health/DFU counterexamples are unchanged; no physical write occurred.
+
+### Native hourly accumulator snapshot and composed crash query
+
+`native_hourly_snapshot.c` implements native5ab6c (48 bytes), with six8-byte
+source-zero records (hour8/pad8/count16/sum32) at canonical20016648. The48-byte
+extent lies within the authenticated cold-zero range; no opaque initialized
+provider data was copied. Both output pointers must be non-NULL before either
+zero store; selectors above5 return after clearing outputs. Valid records
+require nonzero count and exact full-width requested-hour match. The sum store
+precedes a fresh count load, preserving output/record alias behavior. Native
+rawr0 is retained for NULL/invalid/empty/mismatch/success paths. REA function
+and exact52-byte code/literal receipts are retained.
+
+13824 direct native/source cases pass without provider fixtures: all six valid
+selectors plus6/ffffffff, hour0/1/23/255/256/ffffffff, four stored hours, three
+counts, three sums and eight output/record alias modes. Rawr0, callee registers/
+SP and exact record/output RAM match. Direct trace
+5ca9bcdd659bdb73d0dd821af95d50a879d73b1135471088c5f1e2023de3a776.
+A further23328 cases execute actual C snapshot and hourly query together, with
+cache getters and memory clear fixtures.11304 actual queries use the native
+output coordinates; outputs, rawr0, callee registers/SP, record and cache RAM
+match. Graph trace4c3a33338966cf3ebbcca3198b9503a0d9a4778e46ac6374f06d44f5c0eb9716.
+
+The graph raw probe retains23328 scratch/frame differences, including the
+previous snapshot counterexample. Declared outputs are not full ABI proof.
+The main partial runtime closes r1_hr_hour_query with no new imports, reducing
+29->28. Source-zero accumulator ownership does not establish producer/service
+initialization; those bodies, remaining cache providers, arbitrary stack aliases,
+full private histories and original toolchain/instruction/image identity remain
+gates. This product-specific body has no authenticated upstream replacement;
+existing dependency attribution is unchanged. No physical write occurred.
+
+### Four health-cache accessors and exact-range resets
+
+`native_health_cache.c` compiles four native accessors (5a9f0/5ace0/5baec/
+5af18) and four resets (48288/7062c/90dd4/706be). REA bytes authenticate
+all eight. Native clear lengths are576/72/72/144; the reset stores offset16
+at those boundaries and timestamp32 at580/80/80/156. Activity/HR/SpO2/HRV
+cache extents are584/84/84/160 bytes. The existing offset and timestamp cells
+are reused by `native_health_cache.ld`, consolidating payload, metadata and
+reserved gaps into one contiguous cache each.888 new source-zero bytes plus
+24 existing metadata bytes make912 total; there is no second metadata state.
+All native extents lie in cold-zero RAM. Final whole-image scatter/placement
+is still a separate gate; relocatable sections include existing zero-valued
+PROGBITS metadata and are not a proven final BSS image layout.
+
+960 paired sequences execute actual eight C bodies and existing memory-clear
+source, with no provider fixtures.480 sequences first reset all four caches;
+2880 actual clears execute per side. Timestamp/offset extrema, truncation,
+four patterns, repeated resets, getter addresses, rawr0, callee registers/SP,
+full surrounding cache RAM and reserved/neighbor preservation match native.
+Trace c74beaba0c5aba473ee1435a826fa79eb53e0f8134c7605c339c830ac68953f8.
+
+The first composed test exposed a raw-return mismatch: native byte-clear
+postincrementsr0 to base+length; existing C memory-clear returns base. The reset
+bodies expose that native raw word despite void-style public semantics. The
+failed source/object/graph/reports/driver/log remain in pre-clear-return-fix.
+C resets now explicitly return base+length after actual source clearing and
+the two metadata stores. No shared memory provider behavior was changed.
+
+The main partial graph closes four cache imports with no new imports,28->24.
+Source-owned cache state/reset bodies do not prove health producer/service
+initialization, full private/alias histories or original toolchain/instruction/
+image identity. Snapshot raw ABI/frame counterexamples remain unchanged. These
+product cache bodies have no authenticated upstream replacement; no vendor
+payload or firmware bytes were embedded as source. No physical write occurred.
+
+### Crash payload getter and native-stack initializer composition
+
+`native_crash_payload.c` implements6abe4: NULL length returns0; otherwise
+write736 (16 bits), then return the source-owned736-byte extent at native
+2001e054. The extent is within authenticated cold-zero RAM; no opaque payload
+was copied. Producer lifecycle remains unresolved. The initializer's distinct
+896-byte copy admission remains unchanged. The partial graph closes this
+getter with no new imports,24->23.
+
+**Composed call-frame repair:** the first actual initializer/snapshot/query
+run returned identical record/checksum but different query pointers. Native
+query outputs were2003cfd0/2003cfd4; the old single C kernel placed them16 bytes
+lower,2003cfc0/2003cfc4. Exact failed driver, graphs, reports, builder and log
+are preserved in pre-snapshot-frame-fix. The new C/ABI bridge completes all
+preparation frames before calling snapshot construction at nativeSP. It then
+calls actual CRC and stores the checksum while preserving the native24-byte
+initializer frame and restoredr3 length word. The parent is cloned with only
+the earlier initializer symbol weakened; all allocated bytes/sections and
+all other symbol bindings match. Original source/objects and earlier receipts
+remain untouched. The new strong bridge resolves all calls in the new graph.
+
+2160 composed native/source initializer cases and24 direct getter cases pass.
+Actual initializer, time offset/status getters, timestamp dispatcher, payload
+getter, snapshot, four cache getters, hourly query, clear and stock CRC execute;
+only the timestamp backend callback is a fixture. Tests cover timezone extrema/
+clamp boundaries, wrapping timestamps, all status-byte low-bit modes, three RAM
+patterns, callback mutations of context/time/record/caches, and getter NULL/
+unaligned/payload/stack destinations. Observations:2160 timestamp callbacks,
+2184 getter entries,2160 snapshots,1440 actual hourly queries,2160 CRC calls,
+zero payload copies. Rawr0/restoredr3, callee registers/SP, exact API pointers
+and record/cache/payload RAM match. Trace
+adb73ee0f376bd0bc3b3cb12017998e6c0d86a6395b1a51e924301ec39279c8d.
+
+The repaired bridge separately passes the earlier1440 fixture cases plus256
+status values, including120 synthetic896-byte copy paths. Those fixtures are
+not evidence that the actual736-byte getter admits a copy. Earlier snapshot
+scratch-register/private-frame counterexamples, arbitrary alias histories,
+producer/service/clock hardware initialization, original compiler/placement/
+instruction and whole-image equality remain open. Product payload/getter logic
+has no authenticated upstream replacement; existing memory/checksum source
+providers are reused. No physical write occurred.
+
+### Native stream bootstrap using existing list and CMSIS providers
+
+`native_stream_bootstrap.c` implements native8a55c initializer,8a310 timer
+front creation,8a3f0 enable,8a540 wake,8a1d0 tick selection and supplemental
+8a558 keepalive. The initializer invokes existing source list initialize and
+prepends a1000-tick timer, preserving the native outer frame/tail-call boundary.
+Enable stores only the low byte but branches on the full input word;0x100
+therefore clears enabled while still waking. Wake clears next_wakeup before
+fresh callback/context reads and returns the native raw word. Tick selection
+uses the configured raw callback or existing CMSIS osKernelGetTickCount.
+Timer creation preserves pre-allocation arguments, fresh flag reads around
+tick callbacks, context/timestamp store order, created-byte store and wake.
+Allocation failure masks BASEPRI to64 and attempts a zero word store at
+ffffffff before the fail-stop loop, rather than returning a fabricated error.
+
+Existing list providers and attributed CMSIS/FreeRTOS source are reused; no
+duplicate list/clock implementations were introduced. The52 new source-zero
+bytes own housekeeping48 at2001a2bc and only the tick callback cell4 at
+2001a2b4. Surrounding registration fields remain separate evidence gates.
+The earlier high-level sensor-stream reconstruction remains useful behavior
+evidence but its explicit framework/context and callback ABI are not silently
+substituted for these native public entries. No attributable upstream body
+for the product-specific stream framework was established.
+
+2880 comparisons passed,480 per entry, executing actual six bodies, existing
+list providers and CMSIS dispatch; allocation, clock leaves and wake callbacks
+are explicit fixtures. Coverage includes raw enable values0/1/255/256/ffffffff,
+configured/default tick paths, present/absent wake, failed/successful allocation,
+empty/existing lists, two RAM patterns and three callback mutation modes.
+Observations per side:960 allocations,960 tick leaves and832 wakes.480 fatal
+cases match invalid store address/size/value and BASEPRI. On normal returns,
+rawr0, callee registers/SP, housekeeping/list RAM and ordered API observations
+match. Keepalive's2-byte body equals native within the verification placement.
+Trace12cacf2e50662b9a2cf75fd6c8adadaed903caf550ad555cf7c817f31e4b7cd8.
+
+The partial graph closes r1_native_stream_initialize with no new imports,
+23->22. Polling, stream/sensor registration and provider bodies, real allocator/
+clock/scheduler/wake execution, full private scratch/frame history, original
+toolchain/placement/instruction and complete image identity remain gates.
+REA's headless Ghidra bytes authenticate the native spans; Ghidra-MCP reports
+no running GUI instance. No physical device write occurred.
+
+### Native timer polling, expiry, release and shared-list removal
+
+`native_stream_poll.c` compiles native8a45c poll,8a404 expiry,8a5e4 remaining,
+8a584 stop,8a3c0 release and8a1c4 elapsed, with the5d998 unlink body. It
+reuses the existing source-owned housekeeping, tick selector, list helpers
+and FreeRTOS heap provider. No new state or replacement upstream library is
+introduced. Product-specific timer dispatch remains reconstructed native C.
+
+The poller preserves nonzero reentry guard, disabled exit, zero-tick counter
+wrapping, pre-dispatch next-node snapshot, traversal restart only after a fired
+callback plus fresh created/released byte, stopped-node filtering, unsigned
+minimum and wrapping drift arithmetic. Expiry uses signed-positive repeat
+decrement and saved pre-callback repeat for dispatch; fresh released/count/
+flags choose stop versus unlink/free. Stop/release NULL paths preserve the
+BASEPRI64/invalid-word-store fatal behavior. Freed nodes may be overwritten
+by the free fixture; the graph matches without reading them afterward.
+
+**Native correlation correction:** disassembly compares drift span with500
+and branches below it, so correction runs at span>=500. The older high-level
+`reconstructed/sensor_stream/sensor_stream.c` candidate uses span>500. This
+receipt supersedes that boundary for native polling; it does not certify the
+earlier entire high-level family or change the frozen pseudocode/ledger.
+
+23328 paired comparisons pass:10368 polls and2592 each expiry/remaining/stop/
+release/elapsed. Actual C dispatch, shared lists, unlink and tick selection
+execute; only clock callback, timer callback and free are fixtures. Cases
+include NULL/one/three-node lists,0/499/500/ffffffff ticks, zero/advancing
+clocks, periods0/5/ffffffff, repeats0/1/ffffffff, four flag combinations,
+normal/disabled/reentrant states, two RAM patterns, and three callback mutation
+modes. Tests exercise actual release/free list updates and created-byte
+restarts with stop mutation, without normalizing API pointers or RAM. Native
+observations:19008 ticks,1216 timer callbacks,2520 frees.3456 faults match
+address/size/value and BASEPRI; normal rawr0, callee registers/SP, housekeeping/
+list RAM and ordered observations match. Trace
+04861be03a49e214c3136b43cfa982dd35d4fbc1104d7115176838bb48e3ff9d.
+
+Six frozen ownership entries become bounded tested candidates. The unlink
+body is exercised transitively for state; its unused raw return/scratch ABI
+is not promoted as a separate tested row. The main partial graph closes poll
+with no new imports,22->21. Actual clock/allocator/scheduler execution, arbitrary
+callback/cyclic-list histories, full private-frame/raw ABI, original toolchain/
+placement/instruction and whole-image equality remain open. No hardware write
+occurred; existing NV/health/DFU/snapshot counterexamples remain explicit.
+
+### Native stream object construction, registry insertion/lookup and flag setter
+
+`native_stream_objects.c` compiles native896f0 constructor,89d9c insertion,
+89d54 lookup and8a5c0 flag setter. The constructor validates full-width nonzero
+sample size but stores only16 bits. It truncates strlen to8 bits before clamping
+the name copy to8 bytes (length256 copies0,257 copies1), zeroes56 object bytes,
+initializes its24-byte-payload listener descriptor, and leaves context0 zero.
+It returns the object even if registry-node allocation fails; no invented
+rollback/free is added. Insertion initializes the shared12-byte registry at
+2001a1b0 only when stride0, preserves the unused node word, and appends the
+object pointer. Lookup uses actual strcmp over registry objects and rereads
+the object field for return. Flag setting preserves other byte40 bits and
+returns native pointer+40. NULL constructor arguments follow the native
+BASEPRI64/invalid-store fatal behavior. Failure logging preserves separate
+fresh mode reads and both native ring and SDK marker/text contracts.
+
+40960 paired comparisons pass,10240 per entry. Actual C bodies, memory clear/
+copy, strlen/strcmp and shared lists execute; allocation and mode/logging are
+explicit fixtures. Cases include name lengths0/1/7/8/9/255/256/257/511/512,
+full-width sample-size edges including10000->stored0, all two-allocation outcome
+masks, initialized/uninitialized registry, empty/two-node lists, all8 log modes
+and mutating mode reads, two RAM patterns, NULL guards and create-then-lookup
+workflows. Observations:19312 allocations,24464 mode reads,7080 ring logs,
+4504 SDK logs.4192 fatal faults match address/size/value/BASEPRI; normal rawr0,
+callee registers/SP, full registry/object RAM and ordered observations match.
+Trace a73b8b8faf140ec1cbf0c681d1ce86e3a427eb086b5e9cac9f7505a8fd13436f.
+
+The registry adds12 source-zero bytes in authenticated cold-zero RAM. This
+core prepares the remaining singleton and registration providers; it does not
+close their imports yet, so the main partial graph remains21 imports. The
+selected object graph still reaches existing unresolved logging/error consumers;
+the verifier overrides only explicit allocator/logging ports and garbage-collects
+unused consumers. No such fixture replacements enter the main graph. Product
+framework logic has no authenticated upstream replacement; existing source
+memory/string/list and attributed heap/logging providers are reused. Real heap/
+logging/sensor execution, arbitrary aliases/private histories, full raw ABI,
+original compiler/placement/instruction and whole-image identity remain gates.
+No physical write occurred.
+
+### Native accelerometer/temperature factories and provider tables
+
+`native_stream_singletons.c` implements native89d88 and8a1ac factories,
+918fc temperature open,918f8 close and91900 read. The factories call the
+actual shared constructor with acc/188/acc_ops/0 and temp/2/temp_ops/0. They
+allocate on every call; no unproven singleton caching is invented. Two typed
+12-byte source-owned vtables correspond to9a590 and9a5a8. Motion entries remain
+real external source providers for native6f400/6f300/6f4a0. Temperature open/
+close return1; read requires non-NULL destination and exact full-width length2,
+then calls the real calibrated-temperature provider boundary50e4c, writes the
+low16 sample bits and returns2. No sample value or hardware action is invented.
+
+1932 native/source cases pass:384 acc,384 temp,384 paired factory/lookup
+workflows,30 each open/close and720 reads. Actual factories, object core,
+memory, strings and list providers execute; allocation/logging and calibrated
+temperature are explicit fixtures. Three motion provider addresses are bound
+only as table contracts and are never executed in candidate tests. Coverage
+includes six allocation masks, existing/empty registry, all8 log modes with
+fresh-read mutation, two patterns, repeated factories and lookups, NULL and
+unaligned read destinations, exact/wrong/full-width lengths, sample extremes
+and sample-provider RAM mutations. Observations:2688 allocations,2192 mode
+reads,696 ring logs,448 SDK logs and90 calibrated reads. Rawr0, callee registers/
+SP, registry/object/read RAM and ordered observations match. Both typed tables
+match all native pointer bytes in the explicit verification placement. The
+4-byte open/close code sections match native locally; final image placement
+and complete instruction identity remain unproven. Trace
+8e53763ac48c761e96b92b4f9b7fa97368cd9b2b4c587e2c72ea80b85af198d0.
+
+Two frozen ownership rows become bounded tested candidates; the three
+additional temperature entries are supplemental, with no frozen-row inflation.
+The main partial graph closes two factory imports and exposes four real
+hardware-provider imports,21->23. Typed provider tables contain source symbol
+references, not retained executable blobs or fabricated stub bodies. Existing
+ST/Bosch/Goodix or temperature dependency attribution must be resolved by their
+actual providers; factory/table correlation does not admit those implementations
+or prove hardware behavior. Source/private alias histories, full ABI, real
+heap/logging/sensor execution, original compiler/placement/image identity and
+existing NV/health/DFU/snapshot gates remain open. No physical write occurred.
+
+### Native motion selection dispatch and calibrated batch adapter
+
+`native_motion_stream.c` implements selected-provider init50270, IRQ50294,
+FIFO502ac, initialize wrapper6f400, close6f300, calibration bypass72b90,
+calibration reader7b9c8 and batch producer6f4a0. Only the selected-pointer
+cell200076ac and bypass byte20006c35 are added; both zero cold values are
+bound to the authenticated initialized-data image. Surrounding records remain
+separate owners. Initialize probes only when the pointer is absent, rereads it,
+and tail-dispatches the open callback or returns0. IRQ and FIFO preserve native
+raw tail-call arguments and NULL results (0/ffffffff). Probe is a real unresolved
+provider, not a fabricated successful selector.
+
+The batch adapter validates destination/exact full-width188 length, requests30
+samples, rejects signed-negative results, then truncates nonnegative counts to
+16 bits without a clamp. It reads three offsets from native KV record bytes
+68..73 through the existing shared serial handle and124-byte API, retaining
+failed/partial-read scratch contents. Its128-byte reader frame and8-byte
+producer calibration slot retain native API pointer coordinates. Three ffff
+offsets become zero only when all three match. Every sample freshly reads
+the bypass byte and each component offset in native order, wraps additions
+to16 bits, then stores count at180 and timestamp at184. The outer24-byte
+producer frame restoresr2/r3 from the actual calibration slot.
+
+6425 paired comparisons pass:768 each selected init/wrapper/IRQ/FIFO,5 close,
+256 bypass-byte values,180 calibration reads and2912 batches. Actual eight
+entries, calibration/sample kernels and existing tick selector execute; selected
+sensor callbacks, probe, NV read and clock are explicit fixtures. Coverage
+includes missing/alternate tables and callbacks, probe rebinding, raw callback
+registers, NULL/unaligned destinations and full length checks, negative/count
+truncation boundaries, counts31/32, all-zero/erased/mixed offsets, bypass0/255/
+alternation and per-sample offset mutation, full/partial/failed NV reads, handle
+mutation, two stack/RAM patterns and post-count clock mutation.32-sample returns
+exercise calibration writes beyond nominal188 bytes within explicitly backed
+RAM; no invented count30 clamp or buffer validation hides them.
+Observations:512 probes,640 opens,256 IRQs,3137 FIFOs,2581 NV reads,30270 policy
+reads and2401 ticks. Rawr0, batch restoredr2/r3, callee registers/SP, exact NV
+scratch/offset pointers, sample/metadata/cell RAM and ordered observations
+match. Trace ef7aef8e535acbf11469c5c1be3055a35fa71e43efd74c736581e58b5de89a70.
+
+The initial candidate inlined the policy getter, so its source-side mutation
+hook was absent. pre-policy-call-boundary preserves source/objects/reports/
+driver/log and structured counterexample: native/source outputs match for the
+first constant-zero case, but native has one policy entry and source none.
+The getter is now explicitly noinline, preserving the native call boundary
+for actual per-sample mutation checks. No RAM/trace normalization was used.
+
+Six frozen rows become bounded tested candidates; close/bypass are supplemental.
+Four main imports close and one probe provider is exposed,23->20. These are
+owner-authorized motion/data adapters; they do not replace or admit licensed
+ST/Bosch/QMA/algorithm provider bodies. Actual sensor/probe/NV/clock execution,
+failed-read cross-call/private histories, arbitrary backing/counts/aliases, full
+raw ABI and original compiler/placement/instruction/whole-image identity remain
+gates. Existing NV/health/DFU/snapshot counterexamples are unchanged. No physical
+write or provisioning-policy change occurred.
+
+### Native motion selection, locked wrappers and three provider tables
+
+`native_motion_selection.c` compiles selector50208, refresh5025c, acquire5017c/
+release50170, and nine LIS2DW12/BMA456W/QMA wrappers at6f380/6f394/6f3b2,
+6f1a8/6f1bc/6f1da and6f404/6f418/6f436. It reuses the existing selected-pointer
+cell and motion bus handle. Three source-owned6-slot operation tables (72 bytes)
+match native9a718/9a730/9a748. Tables hold source function references, not opaque
+executable bytes. Two LIS auxiliary entries are pointer contracts only; their
+call ABI remains unresolved and they are never invoked by these tests.
+
+Selection acquires the current bus, probes LIS first (full-word0x44), then BMA
+(0x16), then QMA(0x90), stores the chosen table orNULL before rereading the bus
+for release, and returns the captured matching ID or0. Low-byte-only matches
+are rejected; QMA0xfa/0x9f are not silently normalized to0x90. Refresh dispatches
+the selected probe slot when present, otherwise reruns selection. Probe wrappers
+preserve raw IDs across release; config wrappers pass25 and return the full
+result's nonzero predicate; QMA IRQ returns the release result, while LIS/BMA
+IRQs are native no-ops. ABI-only wrapper bridges retain native saved-ID and
+tail-release sequencing around independently compiled registry dispatch.
+
+27650 comparisons pass, including8640 each select/refresh/composed initialize,
+90 per lock/probe/config/QMA-IRQ wrapper,10 per IRQ no-op and450 each composed
+IRQ/FIFO. Actual thirteen bodies plus shared registry and selected dispatch
+execute; only bus operations and sensor leaf providers are explicit fixtures.
+Coverage includes all three priority paths and no match, full-width IDs,
+missing/already-selected/empty tables, NULL device/missing/present callbacks,
+raw result extrema, probe/config rebinding of the bus and release mutation
+of selection, and two RAM patterns. Rawr0, callee registers/SP, selected/bus/
+record RAM and ordered observations match. The72 table bytes match native
+in the explicit verification layout, and the2-byte no-op sections match locally.
+Trace3e755ba52288ed2c552f2221070a9805b6809988b200b79204f7811da5b44513.
+
+The main graph closes selection and exposes12 actual provider leaves,20->31.
+These leaves are three ID/configure/FIFO families, QMA IRQ and two LIS auxiliary
+functions. Repository correlation confirms the owner-authorized QMA reduction
+already exists; it is not a new external licensing blocker. Its documented
+hardening, and the portable motion layer's over-report rejection, must not be
+substituted silently for native behavior. ST/Bosch pinned upstream sources and
+QMA reconstructed sources remain usable evidence/dependencies after native
+ABI/configuration correlation. No new vendor source was downloaded or admitted.
+Real sensor/bus execution, full private scratch/frame/ABI histories, native
+provider adaptation, original compiler/placement/instruction and whole-image
+identity remain open. Existing NV/health/DFU/snapshot gates are unchanged.
+No physical write occurred.
+
+### Three native FIFO normalization adapters
+
+`native_motion_fifo.c` implements native6f1dc BMA456W,6f3b4 LIS2DW12 and
+6f448 QMA normalization. Each snapshots destination/request, acquires the
+current bus, invokes the real raw-FIFO provider boundary, releases the fresh
+bus, then normalizes every signed-positive reported sample and returns the
+unchanged raw count. It introduces no sample31 clamp, over-report rejection,
+NULL guard or substituted error. Signed16 arithmetic right shift by2 is
+expressed with defined unsigned operations, preserving negative rounding.
+QMA reads all XYZ halves before stores; ST/BMA read/store one axis at a time.
+The code owns no new state and reuses shared bus wrappers and registry dispatch.
+
+19104 comparisons pass,6368 per provider.6144 packed exhaustive blocks cover
+all65536 signed16 values on each axis for each family against both native
+execution and an independent mathematical floor-division oracle. The remaining
+cases cover signed return extremes, zero/positive counts through127, requested
+counts0/1/30/31/ffffffff, over-reporting, NULL/unaligned/end-of-mapped-RAM
+destinations, NULL/missing/present bus callbacks, provider bus rebinding and
+release-time sample mutation, with two RAM patterns. Mixed-axis vectors detect
+axis swaps that same-axis exhaustive vectors alone would miss.
+
+Actual normalizers, bus wrappers and registry dispatch execute; raw FIFO and
+bus operations are explicit fixtures. Observations:10464 acquire callbacks,
+10464 release callbacks,19104 raw reads.4860 faults match address/size/value
+and RAM.2430 partial-triple cases show ST/BMA storing normalized X before
+faulting on Y, while QMA leaves X unmodified because it preloads the triple.
+On normal returns rawr0, callee registers/SP and buffer/bus RAM match. These
+are mapped-memory emulator observations, not hardware fault/recovery proof.
+Trace76fc53281b5e02fe13009d4c409136753abf489d23e38c91d1dc3338b8effdf1.
+
+Three imports close and three actual raw FIFO imports are exposed, leaving31.
+The portable motion layer's documented over-report rejection is retained as a
+separate hardened product path; it is not promoted to native ABI equivalence
+or silently changed by this reduction. Existing pinned ST/Bosch sources and
+owner-authorized QMA reduction remain dependencies/evidence for raw providers.
+The ST FIFO-level function inspected in the pinned source writes its masked
+register byte even on read failure, matching the observed native control flow;
+private scratch coordinates and context/read-wrapper differences still require
+correlation before source reuse is admitted as native behavior. Real FIFO/bus
+execution, unbounded provider counts/backing/aliases, full private frame/raw ABI
+and original compiler/placement/instruction/whole-image identity remain open.
+No physical device write occurred.
+
+### Native LIS FIFO with attributed ST kernel
+
+`native_lis_fifo.c` closes the raw LIS FIFO provider and supplies native register
+proxy, burst and FIFO-level entry contracts. The level algorithm comes from
+ST's BSD-3-Clause lis2dw12-pid commit
+`8d4bd522015004a9646102702901ba5a15ec6d39`; its exact source slice and full license
+are retained. Three explicit adaptations place the register temporary in the
+native saved-r3 slot. This is attributed upstream reuse, with future upstream
+changes requiring renewed correlation; the original vendor checkout is unproven.
+The native proxy deliberately preserves its unguarded callback contract, while
+the modern upstream wrapper has a NULL guard.
+
+12652 native/source comparisons pass, including1254 matching faults. Actual
+proxy, burst, attributed level kernel, raw FIFO, normalizer and bus dispatch
+execute; register and bus callbacks are fixtures. Tests cover every register
+byte, failed/unwritten reads, raw status propagation, saved r3, exact scratch
+pointers, context rebinding, NULL/unaligned pointers and count wrapping. The raw
+FIFO still performs a zero-length burst when a nonzero level is clamped by a
+zero request, and ignores transport status as observed. Trace
+`c24624b34d55085ea5250d1e58e61071ea228d9b081c89aca80c264a864c22ae`.
+
+The main partial link now has30 unresolved imports. Only the observed16-byte
+context prefix at2001e4d8 is source-owned and zero-initialized; the full SDK
+context size and native initialization remain gates. Exact API scratch pointers
+do not establish full callback stack/private history. Real sensor/bus execution,
+full raw ABI, instruction identity, original compiler/placement and complete
+byte-identical firmware remain unproven. Existing NV/health/DFU/snapshot gates
+remain open. No physical write occurred.
+
+### LIS identity and default bus request providers
+
+`native_lis_identity.c` supplies native754dc identity,7517c device-ID read,
+50188/501c8 motion bus request builders and supplemental7f17c/7f188 default
+callbacks. Identity fills only missing read/write callbacks, clears only its
+saved-r3 low byte, ignores read status and returns the resulting byte. Defaults
+use address0x18 and return zero regardless of bus status. Read requests store
+payload/length at12/16; write requests at4/8. Both fully clear20 bytes, truncate
+address/register/length to8/16/16 bits and pass their native SP-40 record pointer
+to existing actual registry dispatch. The direct request result is the boolean
+inverse of the raw dispatch status. No new context or bus singleton is created.
+
+2592 native/source comparisons pass,432 per entry. Actual identity, device-ID,
+defaults, requests, memory clear, read proxy and registry dispatch execute;
+only bus operations and explicitly selected custom register callbacks are
+fixtures. Cases cover absent/present independent context callbacks, absent bus,
+missing operation slots, success/error statuses, unwritten/read-byte values and
+two incoming saved-r3 histories. Request pointers and all20 record bytes, rawr0,
+callee registers/SP, context and data RAM match; relocated callback identities
+are compared symbolically. Trace
+`4cb5489e5433a99974ede3eb56bc0dc66918077e7541ab6b790ca24d899d261b`.
+REA authenticated body/byte receipts and headless Ghidra analysis are retained;
+Ghidra-MCP discovery returned no running GUI instance. Main imports fall30 to29,
+with zero unresolved symbols in the selected identity graph. The prior receipt
+before frontier report schema enrichment remains under`pre-frontier-schema`.
+
+The configured transport and reset/ODR/interrupt bodies still require reduction.
+This proves neither live sensor execution nor full callback/private stack
+histories, arbitrary alias behavior, full raw ABI, original compiler/placement
+or whole-image byte identity. Existing unresolved gates remain in force. No
+physical device write occurred.
+
+### Attributed LIS single-register configuration bodies
+
+`native-lis-registers` compiles17 ST BSD-3-Clause bodies from pinned
+lis2dw12-pid commit`8d4bd522015004a9646102702901ba5a15ec6d39` plus the native
+unguarded write proxy759e6. Source slices and the full license are retained.
+Three explicit adaptations rename each internal kernel, externalize its local
+register byte to the native16-byte saved-r3 frame, and redirect its pointer and
+member accesses. ST bitfield/status algorithms remain intact. Entries cover
+BDU750b8, FIFO mode753c6/watermark753f4, bandwidth75422, scale754ac,
+reset set757ec/get757d2, tap X7581a/Y75848/Z75876, duration758a4, mode758d2,
+quiet75900, shock7592e and thresholds X7595c/Y7598a/Z759b8.
+
+55767 native/source comparisons pass:3276 per body and75 write-proxy cases.
+Actual attributed kernels and native read/write proxies execute; transport
+callbacks are fixtures. All256 parameter bytes and256 old-register bytes are
+covered with adversarial companion values, plus failures/unwritten reads,
+write failures, incoming saved-r3 histories, full-word scratch writes and
+read-time rebinding of the following write callback/handle. Rawr0, savedr3,
+callee registers/SP, exact callback data pointer/length, payload, context and
+data RAM match. Observations:55692 reads,42123 writes. Trace
+`8eaf8ead8309d76e4348105b2b5587c298a34f63d43ca84b8ea3e122e6313763`.
+
+Comparisons rejected two initial upstream assignments, retained with source,
+objects, reports, drivers and concrete failures. At750b8 old55/val0 native
+writes55 while auto-increment writes51: native is BDU bit3, not increment bit2.
+At7581a oldaa/val0 native writes2a while tap Z writes8a: native is X bit7;
+75876 is Z bit5. These are attribution corrections, not altered native behavior.
+The selected register graph has zero imports; the main partial stays at29
+because these bodies prepare the still-unresolved configuration provider.
+
+REA byte receipts and reset dossier authenticate native contracts. Further REA
+inspection identifies multi-register ODR/filter/power bodies and a native7518a
+operation on register17 bit6; pinned ST CTRL_REG7 is3f, so treating that operation
+as the modern data-ready-mode body would be unsupported. Configuration remains
+open. Full callback/private stack histories, arbitrary aliases/faults, full raw
+ABI, live sensor/bus, original compiler/placement, instruction and whole-image
+identity are unproven. Original vendor checkout is unproven. No physical write
+occurred; prior unresolved evidence gates remain in force.

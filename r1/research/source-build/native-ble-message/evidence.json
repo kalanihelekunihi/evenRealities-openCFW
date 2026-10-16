@@ -1,0 +1,64 @@
+{
+  "inputs": {
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/research/source-build/native-scatter-data/observed-initialized-data.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317"
+  },
+  "tool_receipts": {
+    "rea-bytes-339e4.json": "f4b12a1b387c1d77fd196e29d220a4b3a9ff21764736b62b77184cd5c9d0785a",
+    "rea-33850.json": "9c704f224f587ee196db64ed3304b755266194d3afdb0c1b03f5fafc98a3cf32",
+    "rea-bytes-33984.json": "005f7118f3a3c257618a597971009b1d78196bec0313baae4ab77f0ba9e4e633",
+    "rea-bytes-33ab8.json": "2e5d2fee7c603d363082ce72a7c556f28506a455a641705f165008f47339c046",
+    "rea-bytes-33a88.json": "6b87c673a582f5a2c92698211123ee34575af68d6577427f9fa3f11a690efa4f",
+    "rea-bytes-339bc.json": "d2fa66b98fd453355434314a8f37e4876fe59b27d1b518273f31915e84adc18e",
+    "rea-bytes-33850.json": "603371dd98c877a4fa299a0813b9043672457f1e267688fa7af1baf7c3b42f57",
+    "rea-bytes-33a64.json": "4854a1ad882458b2b955b5d410577a1a7447d48119ceb3fcac7099d2863a3a5c",
+    "rea-bytes-33a3c.json": "df5c743e572f4dc13e7e0ead4f5411c9e437c16d6fe8c3dcac073e5327aaaa95",
+    "rea-bytes-33a14.json": "6a787e3f4d7bc170482d1380af3a660ce82fde8f3742aa0ac3eaaff5d51a75dd",
+    "rea-bytes-33990.json": "3999ad3759358d15a32bc107d9ff1a77893dc3120af2b204f726ac98d72ca6e7"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00033850",
+      "end": "0x00033981",
+      "size": "306",
+      "recovered_name": "FUN_00033850",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_ble_thread_message_encode",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "native_bytes": 306,
+  "new_owned_data_bytes": 334,
+  "byte_read_sizes": {
+    "33850": 306,
+    "33984": 12,
+    "33990": 43,
+    "339bc": 37,
+    "339e4": 46,
+    "33a14": 40,
+    "33a3c": 40,
+    "33a64": 34,
+    "33a88": 48,
+    "33ab8": 42
+  },
+  "upstream_source_memory": "Existing pinned musl memmove through r1_native_memory_move; product encoder has no inferred third-party attribution.",
+  "queue_cell_address": "0x20006574",
+  "queue_cell_cold_bytes": "00000000",
+  "service_thread_cell_reused_not_new": true,
+  "private_queue_item_pointer_identity_verified": false,
+  "whole_allocator_queue_graph_executed": false,
+  "whole_image_identity": false,
+  "same_name_distinct_body_gate": {
+    "unresolved_entry": "0x00033dbc",
+    "shared_ledger_name": "r1_ble_thread_message_encode",
+    "compiled_body_entry": "0x00033850",
+    "different_abi": "33dbc argument3 is payload pointer and argument4 length;33850 argument3 is length and argument4 pointer",
+    "extra_operations": "33dbc zeroes payload and queries queue before putting; not covered by33850 tests",
+    "exclude_symbol_only_match": true
+  }
+}

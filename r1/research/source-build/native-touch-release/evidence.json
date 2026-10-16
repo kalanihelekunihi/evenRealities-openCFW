@@ -1,0 +1,58 @@
+{
+  "inputs": {
+    "r1/components/runtime/native_touch_release.c": "71cfab6113135347c532ba15f2e8740f2144e56a3295940a743b49bc5bdd5505",
+    "r1/tools/build_native_touch_release.py": "e9c859b0a7e4f82bb17a8e12000511a793473de07fc8fc425ebf4fa26ecb83b7",
+    "r1/tools/build_native_touch_release_runtime.py": "52ac188803aeb20f6a1c8d03bdacfb530e22f8483ebdbef6f46703f339bebfc4",
+    "r1/source-config/runtime/native_touch_release_verification.ld": "04165210dc48b8e9e0eda7c6e1e27806260aee92c26b36ebabaef6a2625125d1",
+    "r1/research/source-build/i2c5/stock-analysis-exec.elf": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+    "r1/docs/correlation/TOUCH-SLIDER-CORRELATION.md": "44417701633e0f1dcacf7db860c255eb5c38c100e8fafad62498c62f89caca64"
+  },
+  "tool_receipts": {
+    "rea-procedure-934e4.json": "8bfb9085db860d268285b6a5d5a60dc4d993e362e1be4197552f47932eded902",
+    "rea-bytes-93424.json": "09610c3be9a92931dcebb243476ac8f8a33607741809d3b1b7a9006c515c76df",
+    "rea-procedure-934d8.json": "2a9fb04b0ca2039bd1d9b6f6c826e0f9b2922ca89fad927104c9e27ef0686798",
+    "rea-bytes-934e4.json": "d9417829cc3ca1600ac6979b6e2558ae209271323890eb92adae8cf926d4cfc2",
+    "rea-bytes-934d8.json": "1a4138f0d169d2914ffe8ea7affdbc59e489019e972b6e7c6c2a3bf30e23c8ad",
+    "rea-procedure-93424.json": "f45e9f045098a1ade8fcae302d48e030dd5a770ef997abbc75b2d2a10a629738"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00093424",
+      "end": "0x000934d7",
+      "size": "180",
+      "recovered_name": "FUN_00093424",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_touch_synthetic_release_dispatch",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x000934e4",
+      "end": "0x00093501",
+      "size": "30",
+      "recovered_name": "FUN_000934e4",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_nfc_charge_message_type5_send",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "native_code_bytes": 210,
+  "new_owned_ram_bytes": 102,
+  "complete_cleared_contact_span_owned": true,
+  "service_context_flags_need_eventual_alias": true,
+  "callback_fixed_vma_verification_only": true,
+  "portable_planner_modified": false,
+  "runtime_admission_changed": false,
+  "gesture_and_task_message_effects_implemented": false,
+  "hardware_write_executed": false,
+  "whole_image_identity": false
+}

@@ -5275,5 +5275,1033 @@
       "Frame bridges bind selected compiler/ABI; general aliases/private addresses/APSR/original compiler/image identity remain open.",
       "Prior GXT pointer alias/NULL-reuse, shared DIF/ctype literal and reaper placement gates remain open."
     ]
+  },
+  "protocol_control_20261016": {
+    "verification": "native-protocol-control/verification.json",
+    "comparisons": 8344,
+    "new_rows": 3,
+    "native_bytes": 284,
+    "supplemental_bytes_not_rows": 52,
+    "owned_data_bytes": 177,
+    "combined_undefined_imports": 72,
+    "new_provider_frontier": [
+      "r1_ble_thread_message_encode",
+      "r1_phone_connection_role_assign"
+    ],
+    "direct_ghidra_mcp_available": false,
+    "rea_headless_ghidra_bytes_authenticated": true,
+    "whole_image_complete": false,
+    "physical_behavior_verified": false,
+    "full_raw_abi_verified": false,
+    "prior_gates_preserved": true
+  },
+  "ble_message_20261016": {
+    "verification": "native-ble-message/verification.json",
+    "comparisons": 14112,
+    "native_bytes": 306,
+    "new_rows": 1,
+    "owned_data_bytes": 334,
+    "combined_undefined_imports": 71,
+    "whole_allocator_queue_graph_executed": false,
+    "private_queue_item_address_verified": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false,
+    "control_graph_comparisons": 8344,
+    "same_name_33dbc_distinct_abi_unresolved": true
+  },
+  "phone_role_20261016": {
+    "verification": "native-phone-role/verification.json",
+    "comparisons": 4800,
+    "fatal_boundary_cases": 472,
+    "new_rows": 1,
+    "native_bytes": 430,
+    "new_owned_text_bytes": 667,
+    "combined_undefined_imports": 71,
+    "closed_import": "r1_phone_connection_role_assign",
+    "unresolved_fatal_provider": "r1_phone_role_assertion_stack_transfer",
+    "fatal_transfer_implemented": false,
+    "native_stack_word": "0xe7f00000",
+    "whole_pair_role_status_graph_executed": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "status_ring_20261016": {
+    "verification": "native-status-ring/verification.json",
+    "comparisons": 33578,
+    "role_graph_comparisons": 4800,
+    "fatal_boundary_cases": 472,
+    "new_rows": 0,
+    "new_owned_bytes": 134,
+    "combined_undefined_imports": 70,
+    "closed_imports": [
+      "r1_status_record_ring_publish",
+      "r1_charge_state_byte_get"
+    ],
+    "exposed_import": "r1_battery_runtime_update_service",
+    "device_cells_must_alias_battery_context": true,
+    "legacy_void_interfaces_unmigrated": true,
+    "whole_battery_event_rtos_graph_executed": false,
+    "private_stack_identity_verified": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "battery_context_20261016": {
+    "verification": "native-battery-context-runtime/verification.json",
+    "comparisons": 2920,
+    "cold_context_cases": 24,
+    "explicit_rounding_cases": 336,
+    "new_rows": 0,
+    "new_owned_bytes": 166,
+    "reused_bytes": 6,
+    "combined_undefined_imports": 73,
+    "status_battery_adc_aliases_verified_for_this_composition": true,
+    "whole_scatter_source_owned": false,
+    "whole_battery_hardware_graph_executed": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "battery_kv_20261016": {
+    "verification": "native-battery-kv-runtime/verification.json",
+    "comparisons": 1200,
+    "new_rows": 0,
+    "new_owned_bytes": 112,
+    "combined_undefined_imports": 69,
+    "closed_imports": [
+      "r1_batcfg_record_kv_handle",
+      "r1_device_info_record_kv_handle",
+      "r1_yhm_ready_native",
+      "time_backend_timestamp_thunk"
+    ],
+    "cross_call_private_stack_history_verified": false,
+    "whole_storage_graph_executed": false,
+    "direct_ghidra_mcp_available": false,
+    "rea_headless_ghidra_bytes_authenticated": true,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "nordic_delay_20261016": {
+    "verification": "native-nordic-delay-runtime/verification.json",
+    "direct_comparisons": 117,
+    "filter_comparisons": 7104,
+    "new_rows": 8,
+    "native_outer_bytes": 246,
+    "new_owned_data_bytes": 0,
+    "combined_undefined_imports": 68,
+    "sdk_header_unchanged": true,
+    "large_values_only_prefix_verified": true,
+    "hardware_elapsed_time_verified": false,
+    "duplicate_final_placement_verified": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false,
+    "authenticated_existing_entries": 9,
+    "existing_784f0_board_seam_contract_preserved": true
+  },
+  "response_graph_20261016": {
+    "verification": "native-response-graph-runtime/verification.json",
+    "comparisons": 3240,
+    "new_rows": 0,
+    "new_owned_data_bytes": 0,
+    "combined_undefined_imports": 65,
+    "compiled_body_and_relocation_identity_for_variants": true,
+    "single_storage_owners_preserved": true,
+    "whole_allocator_ble_graph_executed": false,
+    "private_header_pointer_identity_verified": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "system_event_commands_20261016": {
+    "verification": "native-system-event-runtime/verification.json",
+    "comparisons": 7560,
+    "new_rows": 2,
+    "locked_native_bytes": 44,
+    "supplemental_bytes_not_rows": 194,
+    "new_owned_data_bytes": 101,
+    "combined_undefined_imports": 62,
+    "health_context_alias_unresolved": true,
+    "procedure_metadata_gaps": [
+      "844ec",
+      "84860",
+      "84b24",
+      "83c62"
+    ],
+    "whole_event_ble_or_rtos_graph_executed": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "nv_update_20261016": {
+    "verification": "native-nv-update-runtime/verification.json",
+    "comparisons": 3660,
+    "new_rows": 4,
+    "locked_native_bytes": 272,
+    "supplemental_handler_bytes_not_row": 60,
+    "new_owned_bytes": 324,
+    "reused_handle_bytes": 12,
+    "combined_undefined_imports": 61,
+    "failed_read_fresh_valid_handle_frame_probe": "native-nv-update-runtime/failed-read-frame-probe.json",
+    "private_frame_probe_matches": false,
+    "cross_call_private_stack_history_verified": false,
+    "whole_flash_commit_graph_executed": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "nv_class_writer_20261016": {
+    "verification": "native-nv-class-writer-runtime/verification.json",
+    "direct_comparisons": 1696,
+    "caller_comparisons": 3660,
+    "new_rows": 1,
+    "native_bytes": 118,
+    "new_owned_text_bytes": 94,
+    "combined_undefined_imports": 60,
+    "failed_read_actual_writer_probe": "native-nv-class-writer-runtime/failed-read-caller-graph-probe.json",
+    "private_frame_probe_matches": false,
+    "whole_flash_commit_graph_executed": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "nv_recovery_envelope_20261016": {
+    "verification": "native-nv-recovery-envelope-runtime/verification.json",
+    "comparisons": 3556,
+    "new_rows": 2,
+    "native_bytes": 208,
+    "new_owned_text_bytes": 190,
+    "combined_undefined_imports": 60,
+    "build_only_native_boundary": true,
+    "native_persistent_dispatch_implemented": false,
+    "runtime_admission_changed": false,
+    "identity_table_copied": false,
+    "hardware_write_executed": false,
+    "short_backing_only_mapped_fixture": true,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "nv_recovery_dispatch_20261016": {
+    "verification": "native-nv-recovery-dispatch-runtime/verification.json",
+    "comparisons": 6496,
+    "new_rows": 1,
+    "native_bytes": 108,
+    "new_owned_text_bytes": 102,
+    "combined_undefined_imports": 61,
+    "build_only_control_flow": true,
+    "merge_and_identity_report_effects_implemented": false,
+    "runtime_admission_changed": false,
+    "identity_table_copied": false,
+    "hardware_write_executed": false,
+    "incoming_lower_scratch_abi_verified": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "time_sync_command_20261016": {
+    "verification": "native-time-sync-runtime/verification.json",
+    "comparisons": 8192,
+    "native_bytes": 224,
+    "new_rows": 0,
+    "combined_undefined_imports": 62,
+    "build_only_control_flow": true,
+    "callback_source_implemented": false,
+    "record_validity_provider_implemented": false,
+    "all_lower_effects_are_fixtures": true,
+    "runtime_admission_changed": false,
+    "identity_table_copied": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "time_sync_providers_20261016": {
+    "verification": "native-time-sync-providers-runtime/verification.json",
+    "comparisons": 22368,
+    "native_bytes": 54,
+    "new_rows": 1,
+    "combined_undefined_imports": 60,
+    "actual_cached_read_musl_and_phone_accessor": true,
+    "query_failure_retains_incoming_r3_byte": true,
+    "no_new_data_owners": true,
+    "ble_enqueue_and_critical_callbacks_are_fixtures": true,
+    "cross_call_private_frame_history_verified": false,
+    "runtime_admission_changed": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "power_command_20261016": {
+    "verification": "native-power-command-runtime/verification.json",
+    "comparisons": 39168,
+    "native_bytes": 210,
+    "new_rows": 0,
+    "new_owned_text_bytes": 144,
+    "combined_undefined_imports": 59,
+    "actual_packet_accessor": true,
+    "all_lower_effects_are_fixtures": true,
+    "command_reread_after_delay_checked": true,
+    "seed_upper16_preserved": true,
+    "tail_flags_restore_before_call": true,
+    "event_flags_restore_after_call": true,
+    "runtime_admission_changed": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "device_id_command_20261016": {
+    "verification": "native-device-id-command-runtime/verification.json",
+    "comparisons": 2192,
+    "native_bytes": 206,
+    "new_rows": 1,
+    "new_owned_bytes": 69,
+    "combined_undefined_imports": 59,
+    "actual_status_op11_phone_and_memory": true,
+    "identity_response_logging_are_fixtures": true,
+    "one_shot_two_call_workflow_checked": true,
+    "raw_identity_provider_implemented": false,
+    "bounded_helper_substituted": false,
+    "status_context_alias_required": true,
+    "superseded_clear_r2_counterexample_retained": true,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "device_id_reader_20261016": {
+    "verification": "native-device-id-reader-runtime/verification.json",
+    "comparisons": 3616,
+    "native_bytes": 58,
+    "new_rows": 1,
+    "new_owned_bytes": 44,
+    "combined_undefined_imports": 57,
+    "actual_copy_complete_formatter_existing_sdk_svc_wrapper": true,
+    "svc_and_ficr_controlled_fixtures": true,
+    "all_cached_byte_lengths_in_mapped_backing": true,
+    "parent_integer_owner_reused": true,
+    "context_alias_required": true,
+    "formatter_map_counterexample_retained": true,
+    "runtime_admission_changed": false,
+    "hardware_write_executed": false,
+    "hardware_identity_proven": false,
+    "cache_capacity_or_overlap_safety_proven": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "native_touch_switch_20261016": {
+    "verification": "native-touch-switch-runtime/verification.json",
+    "comparisons": 16128,
+    "native_bytes": 184,
+    "new_rows": 1,
+    "new_owned_text_bytes": 212,
+    "combined_undefined_imports": 58,
+    "actual_accessor_checked_send_ack_header": true,
+    "separate_native_symbol": true,
+    "main_partial_alias_only": true,
+    "touch_service_effects_implemented": false,
+    "portable_planner_modified": false,
+    "runtime_admission_changed": false,
+    "short_backing_only_mapped_fixture": true,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "native_touch_services_20261016": {
+    "verification": "native-touch-services-runtime/verification.json",
+    "comparisons": 42408,
+    "native_bytes": 204,
+    "new_rows": 3,
+    "new_owned_text_bytes": 134,
+    "new_owned_ram_bytes": 8,
+    "combined_undefined_imports": 57,
+    "actual_services_task_post_command_graph": true,
+    "synthetic_release_effect_implemented": false,
+    "low8_register_shift_semantics": true,
+    "open_returns_pre_or_word": true,
+    "context_alias_required": true,
+    "portable_planner_modified": false,
+    "runtime_admission_changed": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "native_touch_release_20261016": {
+    "verification": "native-touch-release-runtime/verification.json",
+    "comparisons": 70656,
+    "native_bytes": 210,
+    "new_rows": 2,
+    "new_owned_ram_bytes": 102,
+    "combined_undefined_imports": 58,
+    "actual_release_callback_clear_services_command": true,
+    "all_coordinate_byte_pairs_checked": true,
+    "gesture_and_task_message_effects_implemented": false,
+    "native_clear_end_pointer_preserved": true,
+    "source_callback_fixed_vma_verification_only": true,
+    "caller_private_pointer_values_not_compared": true,
+    "context_alias_required": true,
+    "portable_planner_modified": false,
+    "runtime_admission_changed": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "native_touch_task_message_20261016": {
+    "verification": "native-touch-task-message-runtime/verification.json",
+    "comparisons": 12672,
+    "native_bytes": 150,
+    "new_rows": 1,
+    "new_owned_text_bytes": 106,
+    "new_owned_ram_bytes": 4,
+    "combined_undefined_imports": 57,
+    "actual_sender_timer_clear": true,
+    "queue_flags_logging_are_fixtures": true,
+    "shared_context_alias_required": true,
+    "reuses_existing_thread_cell": true,
+    "portable_planner_modified": false,
+    "runtime_admission_changed": false,
+    "rtos_delivery_proven": false,
+    "shared_task_context_complete": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "native_touch_gesture_20261016": {
+    "verification": "native-touch-gesture-runtime/verification.json",
+    "comparisons": 59328,
+    "native_bytes": 690,
+    "new_rows": 1,
+    "new_owned_text_bytes": 1236,
+    "new_owned_ram_bytes": 15,
+    "combined_undefined_imports": 56,
+    "canonical_state_aliases_reused": true,
+    "all_lower_effects_are_fixtures": true,
+    "lower_schedule_observations": 5061,
+    "independent_pending_contact_mode_fixtures": true,
+    "superseded_limited_matrix_retained": true,
+    "fullword_handle_and_fresh_second_read": true,
+    "portable_planner_modified": false,
+    "runtime_admission_changed": false,
+    "ble_delivery_or_reset_proven": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "native_system_settings_20261016": {
+    "verification": "native-system-settings-runtime/verification.json",
+    "comparisons": 21056,
+    "failed_read_probe": "native-system-settings-runtime/failed-read-frame-probe.json",
+    "failed_read_probe_comparisons": 192,
+    "native_bytes": 344,
+    "new_rows": 3,
+    "new_owned_text_bytes": 164,
+    "combined_undefined_imports": 55,
+    "actual_bit_helpers_kv_musl_accessor": true,
+    "sdk_header_archive_authenticated": true,
+    "svc_enum63": true,
+    "separate_native_handler": true,
+    "portable_planner_modified": false,
+    "runtime_admission_changed": false,
+    "regulator_or_persistence_proven": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "native_health_settings_20261016": {
+    "verification": "native-health-settings-runtime/verification.json",
+    "comparisons": 21056,
+    "native_bytes": 404,
+    "new_rows": 3,
+    "new_owned_text_bytes": 208,
+    "combined_undefined_imports": 54,
+    "actual_flag_word_helpers_kv_musl_accessor": true,
+    "handler_matrix_full_cached_records_only": true,
+    "failed_read_probe": "native-health-settings-runtime/failed-read-frame-probe.json",
+    "failed_read_probe_matched": false,
+    "failed_read_fresh_valid_handle_ram_matches": false,
+    "failed_read_raw_r0_matches": true,
+    "private_frame_counterexample_retained": true,
+    "separate_native_handler": true,
+    "portable_planner_modified": false,
+    "runtime_admission_changed": false,
+    "health_event_or_persistence_proven": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "native_user_profile_command_20261016": {
+    "verification": "native-user-profile-runtime/verification.json",
+    "comparisons": 76384,
+    "native_bytes": 202,
+    "new_rows": 1,
+    "new_owned_text_bytes": 62,
+    "combined_undefined_imports": 53,
+    "actual_accessor_flag_ack": true,
+    "event_initializes10_publishes12": true,
+    "event_tail_seed_and_mutations_checked": true,
+    "two_call_workflows": 8064,
+    "separate_native_handler": true,
+    "portable_policy_modified": false,
+    "runtime_admission_changed": false,
+    "profile_event_delivery_proven": false,
+    "hardware_write_executed": false,
+    "full_raw_abi_verified": false,
+    "cross_call_private_frame_history_verified": false,
+    "instruction_identity": false,
+    "whole_image_complete": false
+  },
+  "native_output_gpio_adapter_checkpoint": {
+    "status": "five_adapters_exact_source_partial_runtime",
+    "native_code_bytes": 30,
+    "remaining_imports": 48,
+    "report": "native-output-gpio-runtime/report.json",
+    "audit": "r1/tools/audit_native_output_gpio_drivers.py",
+    "local_adapter_instruction_identity": true,
+    "whole_image_complete": false,
+    "gates": [
+      "remaining GPIO operations and initialization selector table",
+      "registrar metadata callback ABI migration",
+      "provider and whole-image instruction placement",
+      "health-settings and NV failed-read private-frame counterexamples"
+    ]
+  },
+  "native_output_gpio_operations_checkpoint": {
+    "status": "bounded_tested_source_operations",
+    "supplemental_native_entries": [
+      "0x54cd0",
+      "0x54e20",
+      "0x54ea8"
+    ],
+    "remaining_imports": 45,
+    "comparisons": 11936,
+    "report": "native-output-gpio-operations-runtime/report.json",
+    "verification": "native-output-gpio-operations-runtime/verification.json",
+    "audit": "r1/tools/audit_native_output_gpio_operations.py",
+    "whole_image_complete": false,
+    "gates": [
+      "open/close/slot18 and pre-record init/release table",
+      "metadata callback ABI migration",
+      "unaligned configuration and malformed backing/fault behavior",
+      "MMIO write-one physical semantics and hardware behavior",
+      "cross-call private frame history and existing failed-read counterexamples",
+      "whole-image configuration/toolchain/byte identity"
+    ]
+  },
+  "native_output_gpio_command_checkpoint": {
+    "status": "bounded_tested_source_command",
+    "supplemental_native_entry": "0x54d20",
+    "remaining_imports": 44,
+    "comparisons": 11232,
+    "report": "native-output-gpio-command-runtime/report.json",
+    "verification": "native-output-gpio-command-runtime/verification.json",
+    "whole_image_complete": false,
+    "gates": [
+      "open/close and16-byte init/release table",
+      "arbitrary negative-index targets and faults",
+      "lower raw register residue and metadata callback ABI",
+      "timing and cross-call private frame history",
+      "existing failed-read counterexamples and whole-image byte identity"
+    ]
+  },
+  "native_output_gpio_lifecycle_checkpoint": {
+    "status": "six_bodies_and16_source_owned_table_bytes_bounded_tested",
+    "remaining_imports": 42,
+    "comparisons": 31104,
+    "output_gpio_imports_remaining": [],
+    "report": "native-output-gpio-lifecycle-runtime/report.json",
+    "verification": "native-output-gpio-lifecycle-runtime/verification.json",
+    "whole_image_complete": false,
+    "gates": [
+      "arbitrary selector targets/fault behavior",
+      "callback scratch registers and metadata ABI migration",
+      "helper raw returns and private frame history",
+      "final predecessor-table adjacency and global placement",
+      "MMIO physical semantics/boot/timing",
+      "existing failed-read counterexamples and whole-image byte identity"
+    ]
+  },
+  "native_peripheral_bindings_checkpoint": {
+    "status": "five_bodies_and40_handle100_name_bytes_bounded_tested",
+    "remaining_imports": 38,
+    "comparisons": 6560,
+    "report": "native-peripheral-bindings-runtime/report.json",
+    "verification": "native-peripheral-bindings-runtime/verification.json",
+    "whole_image_complete": false,
+    "gates": [
+      "whole motion/PPG/touch contexts remain partially owned",
+      "malformed cached pointers and full scratch/private-frame ABI",
+      "actual peripheral/sensor/provider implementation and hardware behavior",
+      "existing failed-read counterexamples",
+      "whole-image placement/configuration/toolchain/byte identity"
+    ]
+  },
+  "native_hw_twi_completion_checkpoint": {
+    "status": "two_callbacks_and_pinned_cmsis_state_query_bounded_tested",
+    "remaining_imports": 36,
+    "comparisons": 66624,
+    "report": "native-hw-twi-completion-runtime/report.json",
+    "verification": "native-hw-twi-completion-runtime/verification.json",
+    "whole_image_complete": false,
+    "gates": [
+      "TWI open/close/read/write and complete transfer driver/configuration",
+      "canonical CMSIS KernelState initialization/setter consolidation and placement",
+      "callback metadata/full scratch/private-frame ABI",
+      "physical IRQ and semaphore delivery",
+      "existing failed-read counterexamples and whole-image byte identity"
+    ]
+  },
+  "native_hw_twi_wait_checkpoint": {
+    "status": "two_wait_bodies_bounded_tested_source_linked",
+    "remaining_imports": 36,
+    "closed_parent_imports": [],
+    "comparisons": 21984,
+    "report": "native-hw-twi-wait-runtime/report.json",
+    "verification": "native-hw-twi-wait-runtime/verification.json",
+    "whole_image_complete": false,
+    "gates": [
+      "TWI lifecycle and register/packet transfers with native width/frame/retry behavior",
+      "unbounded poll exhaustion and physical elapsed timing",
+      "CMSIS kernel-state initialization/consolidation",
+      "scratch/private-frame ABI and existing failed-read counterexamples",
+      "whole-image configuration/toolchain/byte identity"
+    ]
+  },
+  "native_hw_twi_register_checkpoint": {
+    "status": "four_register_bodies_bounded_tested_and_pinned_twim_source_compiled",
+    "remaining_imports": 36,
+    "closed_parent_imports": [],
+    "comparisons": 30720,
+    "report": "native-hw-twi-register-runtime/report.json",
+    "verification": "native-hw-twi-register-runtime/verification.json",
+    "sdk_report": "sdk-twim/report.json",
+    "native_write80_saved_r4_overwrite": "preserved_in_source_and_tested",
+    "whole_image_complete": false,
+    "gates": [
+      "top-level TWI operation/lifecycle bodies",
+      "SDK control-block/configuration/placement identity and DMA/electrical behavior",
+      "full address/backing contracts and unbounded retries",
+      "write80 caller consequences and full scratch/private-frame ABI",
+      "existing failed-read counterexamples and whole-image byte identity"
+    ]
+  },
+  "native_hw_twi_operations_checkpoint": {
+    "status": "four_packet_bodies_bounded_tested_with_native_call_frame_repair",
+    "remaining_imports": 32,
+    "comparisons": 46080,
+    "composed_comparisons": 5760,
+    "report": "native-hw-twi-operations-runtime/report.json",
+    "verification": "native-hw-twi-operations-runtime/verification.json",
+    "superseded_pointer_counterexample": "preserved_pre-native-call-frame-fix_and_closed_for_tested_call_frames",
+    "whole_image_complete": false,
+    "gates": [
+      "remaining TWI open/close operations",
+      "complete scratch/private-frame history and metadata ABI",
+      "arbitrary request backing/aliasing and SDK/DMA/electrical behavior",
+      "SDK control-block/configuration identity and unbounded retry termination",
+      "existing failed-read counterexamples and whole-image byte identity"
+    ]
+  },
+  "native_hw_twi_lifecycle_checkpoint": {
+    "status": "four_lifecycle_bodies16_template_bytes_bounded_tested_single_sdk_family",
+    "remaining_imports": 28,
+    "comparisons": 7200,
+    "hardware_twi_imports_remaining": [],
+    "report": "native-hw-twi-lifecycle-runtime/report.json",
+    "verification": "native-hw-twi-lifecycle-runtime/verification.json",
+    "sdk_report": "sdk-legacy-twi/report.json",
+    "whole_image_complete": false,
+    "gates": [
+      "SDK control-block/legacy callback state native identity and configuration",
+      "metadata ABI and complete scratch/private-frame histories",
+      "physical initialization/power semantics/IRQ/timing",
+      "arbitrary transfer backing/retry behavior and existing failed-read counterexamples",
+      "whole-image configuration/toolchain/placement/byte identity"
+    ]
+  },
+  "native_dfu_ble_checkpoint": {
+    "status": "native_observer_authorization_and28_context4_seed_bytes_bounded_tested",
+    "remaining_imports": 28,
+    "comparisons": 34560,
+    "report": "native-dfu-ble-runtime/report.json",
+    "verification": "native-dfu-ble-runtime/verification.json",
+    "sdk_correlation": "native-dfu-ble-runtime/native-sdk-correlation.json",
+    "whole_sdk_observer_substitution_rejected": true,
+    "new_backend_boundaries": [
+      "r1_dfu_bootloader_prepare_boundary",
+      "r1_dfu_control_point_write_boundary"
+    ],
+    "whole_image_complete": false,
+    "gates": [
+      "native5207c boot preparation and521d8 control-point backend",
+      "DFU service initialization/shared pointer/SVCI state ownership",
+      "full scratch/private-frame/callback metadata ABI and malformed backing",
+      "real GATTS/DFU behavior and existing failed-read counterexamples",
+      "whole-image configuration/toolchain/byte identity"
+    ]
+  },
+  "native_dfu_backend_checkpoint": {
+    "status": "six_backend_bodies_api_ram_tested_with_open_raw_padding_counterexample",
+    "remaining_imports": 25,
+    "comparisons": 74160,
+    "report": "native-dfu-backend-runtime/report.json",
+    "verification": "native-dfu-backend-runtime/verification.json",
+    "raw_frame_probe": "native-dfu-backend-runtime/raw-frame-history-probe.json",
+    "raw_frame_difference_cases": 22,
+    "existing_svci_state_reused": true,
+    "whole_image_complete": false,
+    "gates": [
+      "22 unused HVX padding caller-history counterexamples; no normalization",
+      "complete callback scratch/APSR/private-frame ABI and metadata",
+      "service/backend initialization and real SVCI/SoftDevice/DFU/power behavior",
+      "arbitrary packet backing and existing failed-read counterexamples",
+      "whole-image placement/toolchain/configuration/byte identity"
+    ]
+  },
+  "native_printf_runtime_checkpoint": {
+    "report": "native-printf-runtime/report.json",
+    "unresolved_imports": 24,
+    "closed_parent_imports": [
+      "printf"
+    ],
+    "existing_provider_bodies_reused": true,
+    "new_runtime_execution_proof": false,
+    "whole_image_complete": false,
+    "gates": [
+      "Retained-log printf sink remains unresolved.",
+      "Existing leaf behavior receipts do not establish composed application execution or original image identity."
+    ]
+  },
+  "native_retained_log_checkpoint": {
+    "report": "native-retained-log-runtime/report.json",
+    "verification": "native-retained-log/verification.json",
+    "comparisons": 2016,
+    "unresolved_imports": 24,
+    "closed_parent_imports": [
+      "r1_retained_log_printf_sink"
+    ],
+    "newly_exposed_imports": [
+      "r1_health_crash_record_initializer"
+    ],
+    "whole_image_complete": false,
+    "gates": [
+      "Initializer and formatter/RTT callees are fixtures in the sink comparison.",
+      "Full private frame history, composed execution and original instruction/image identity remain unproven."
+    ]
+  },
+  "native_crash_initialize_checkpoint": {
+    "report": "native-crash-initialize-runtime/report.json",
+    "verification": "native-crash-initialize/verification.json",
+    "initializer_comparisons": 1440,
+    "status_comparisons": 256,
+    "unresolved_imports": 25,
+    "closed_parent_imports": [
+      "r1_health_crash_record_initializer"
+    ],
+    "newly_exposed_imports": [
+      "r1_crash_record_marker_set",
+      "r1_health_crash_snapshot_builder"
+    ],
+    "whole_image_complete": false,
+    "gates": [
+      "Native getter reports736; initializer copies only896. Payload state ownership remains unresolved.",
+      "Time callbacks, payload, snapshot, memcpy and CRC are fixtures in this receipt. Actual composition and private histories remain unproven."
+    ]
+  },
+  "native_crash_snapshot_checkpoint": {
+    "report": "native-crash-snapshot-runtime/report.json",
+    "verification": "native-crash-snapshot/verification.json",
+    "raw_probe": "native-crash-snapshot/raw-frame-probe.json",
+    "comparisons": 23328,
+    "raw_frame_difference_cases": 23328,
+    "unresolved_imports": 29,
+    "closed_parent_imports": [
+      "r1_health_crash_snapshot_builder"
+    ],
+    "newly_exposed_imports": [
+      "r1_activity_daily_cache_accessor",
+      "r1_hr_daily_cache_accessor",
+      "r1_hr_hour_query",
+      "r1_hrv_daily_cache_accessor",
+      "r1_spo2_daily_cache_accessor"
+    ],
+    "whole_image_complete": false,
+    "gates": [
+      "Declared query outputs and RAM match; restoredr2/r3 and frame24 differ. Counterexample retained without normalization.",
+      "Actual cache/query providers, composed runtime execution, arbitrary aliases, instruction and image identity remain unresolved."
+    ]
+  },
+  "native_hourly_snapshot_checkpoint": {
+    "report": "native-hourly-snapshot-runtime/report.json",
+    "verification": "native-hourly-snapshot/verification.json",
+    "graph_verification": "native-hourly-snapshot-runtime/verification.json",
+    "direct_comparisons": 13824,
+    "composed_comparisons": 23328,
+    "unresolved_imports": 28,
+    "closed_parent_imports": [
+      "r1_hr_hour_query"
+    ],
+    "newly_exposed_imports": [],
+    "source_zero_record_bytes": 48,
+    "whole_image_complete": false,
+    "gates": [
+      "Accumulator producers and health-service initialization remain unresolved.",
+      "Actual snapshot/query composition passes declared outputs; raw scratch/frame differences persist in all23328 cases.",
+      "Other health-cache providers, full raw ABI, instruction and image identity remain unproven."
+    ]
+  },
+  "native_health_cache_checkpoint": {
+    "report": "native-health-cache-runtime/report.json",
+    "verification": "native-health-cache-runtime/verification.json",
+    "comparisons": 960,
+    "native_clear_calls": 2880,
+    "unresolved_imports": 24,
+    "closed_parent_imports": [
+      "r1_activity_daily_cache_accessor",
+      "r1_hr_daily_cache_accessor",
+      "r1_hrv_daily_cache_accessor",
+      "r1_spo2_daily_cache_accessor"
+    ],
+    "new_source_zero_bytes": 888,
+    "metadata_bytes_reused": 24,
+    "superseded_candidate": "native-health-cache-runtime/pre-clear-return-fix",
+    "whole_image_complete": false,
+    "gates": [
+      "Cache reset and source ownership do not prove producer/service initialization.",
+      "Source cache metadata sections are consolidated; original scatter placement and full firmware identity remain unresolved.",
+      "Existing snapshot scratch/frame counterexample remains open."
+    ]
+  },
+  "native_crash_payload_checkpoint": {
+    "report": "native-crash-payload-runtime/report.json",
+    "verification": "native-crash-payload-runtime/verification.json",
+    "bridge_verification": "native-crash-initialize-bridge/verification.json",
+    "composed_initializer_comparisons": 2160,
+    "getter_comparisons": 24,
+    "bridge_fixture_comparisons": 1440,
+    "unresolved_imports": 23,
+    "closed_parent_imports": [
+      "r1_crash_record_marker_set"
+    ],
+    "source_zero_payload_bytes": 736,
+    "native_copy_gate_bytes": 896,
+    "superseded_candidate": "native-crash-payload-runtime/pre-snapshot-frame-fix",
+    "whole_image_complete": false,
+    "gates": [
+      "Payload producers and real health/clock initialization remain unresolved.",
+      "The initializer snapshot pointer mismatch was repaired without normalization; full snapshot scratch/private frame gate remains open.",
+      "Actual736-byte getter leaves896-byte copy gate unreached;120 copy cases are checked separately with explicit fixtures."
+    ]
+  },
+  "native_stream_bootstrap_checkpoint": {
+    "report": "native-stream-bootstrap-runtime/report.json",
+    "verification": "native-stream-bootstrap-runtime/verification.json",
+    "comparisons": 2880,
+    "matching_fatal_faults": 480,
+    "unresolved_imports": 22,
+    "closed_parent_imports": [
+      "r1_native_stream_initialize"
+    ],
+    "source_zero_bytes": 52,
+    "whole_image_complete": false,
+    "gates": [
+      "Timer polling, registration and sensor providers remain unresolved.",
+      "List and CMSIS dispatch execute, but allocator, RTOS clock leaves and wake callbacks are fixtures.",
+      "Native private history, original toolchain/placement, scheduler/hardware and whole image remain unproven."
+    ]
+  },
+  "native_stream_poll_checkpoint": {
+    "report": "native-stream-poll-runtime/report.json",
+    "verification": "native-stream-poll-runtime/verification.json",
+    "comparisons": 23328,
+    "matching_faults": 3456,
+    "unresolved_imports": 21,
+    "closed_parent_imports": [
+      "r1_native_sensor_timer_poll"
+    ],
+    "native_drift_threshold": "span >=500",
+    "whole_image_complete": false,
+    "gates": [
+      "Earlier high-level sensor_stream_timer_poll uses >500; this native contract supersedes that boundary only.",
+      "Unlink list state is exercised transitively; its unused raw return/scratch ABI is not promoted as a tested ownership row.",
+      "Clock, timer callbacks and free are fixtures; real scheduling, private histories, full ABI and whole image remain unproven."
+    ]
+  },
+  "native_stream_objects_checkpoint": {
+    "report": "native-stream-objects-runtime/report.json",
+    "verification": "native-stream-objects-runtime/verification.json",
+    "comparisons": 40960,
+    "matching_fatal_faults": 4192,
+    "unresolved_imports": 21,
+    "closed_parent_imports": [],
+    "source_zero_registry_bytes": 12,
+    "whole_image_complete": false,
+    "gates": [
+      "Object core is compiled/tested preparation; singleton and registration imports remain unresolved.",
+      "Main graph retains21 imports; selected graph still reaches existing unresolved logging/error consumers. Test fixtures are explicit and separate.",
+      "Real heap/logging/sensor execution, arbitrary alias histories, full ABI and whole-image identity remain unproven."
+    ]
+  },
+  "native_stream_singletons_checkpoint": {
+    "report": "native-stream-singletons-runtime/report.json",
+    "verification": "native-stream-singletons-runtime/verification.json",
+    "comparisons": 1932,
+    "unresolved_imports": 23,
+    "closed_parent_imports": [
+      "r1_native_accelerometer_singleton",
+      "r1_native_temperature_singleton"
+    ],
+    "newly_exposed_imports": [
+      "r1_motion_initialize_entry",
+      "r1_motion_stream_close_boundary",
+      "r1_motion_thirty_sample_batch_producer",
+      "r1_temperature_pair_read_calibrated"
+    ],
+    "source_owned_provider_table_bytes": 24,
+    "whole_image_complete": false,
+    "gates": [
+      "Typed provider tables match native pointers in verification layout; three motion bodies and calibrated temperature remain real unresolved source providers.",
+      "Factory/core executes with allocation/logging fixtures; direct read uses a calibrated-temperature fixture. No motion hardware provider executes.",
+      "Full ABI/private histories, real sensors, original toolchain/placement and whole-image identity remain unproven."
+    ]
+  },
+  "native_motion_stream_checkpoint": {
+    "report": "native-motion-stream-runtime/report.json",
+    "verification": "native-motion-stream-runtime/verification.json",
+    "comparisons": 6425,
+    "unresolved_imports": 20,
+    "closed_parent_imports": [
+      "r1_motion_initialize_entry",
+      "r1_motion_stream_close_boundary",
+      "r1_motion_thirty_sample_batch_producer",
+      "r1_native_motion_interrupt"
+    ],
+    "newly_exposed_imports": [
+      "r1_motion_probe_and_select_provider"
+    ],
+    "cold_source_owned_bytes": 5,
+    "superseded_candidate": "native-motion-stream-runtime/pre-policy-call-boundary",
+    "whole_image_complete": false,
+    "gates": [
+      "Probe/selection and licensed sensor implementations remain unresolved; no vendor provider code is replaced by invented behavior.",
+      "NV reads, selected-provider callbacks, probing and clock are fixtures; failed NV scratch tests use fresh explicit histories, not full private-stack equivalence.",
+      "No count clamp is invented;32-sample return writes beyond nominal188-byte output in bounded backing RAM. Arbitrary backing/counts remain gated.",
+      "Full ABI, real hardware, original toolchain/placement and whole-image identity remain unproven."
+    ]
+  },
+  "native_motion_selection_checkpoint": {
+    "report": "native-motion-selection-runtime/report.json",
+    "verification": "native-motion-selection-runtime/verification.json",
+    "comparisons": 27650,
+    "unresolved_imports": 31,
+    "closed_parent_imports": [
+      "r1_motion_probe_and_select_provider"
+    ],
+    "newly_exposed_provider_leaves": 12,
+    "source_owned_table_bytes": 72,
+    "whole_image_complete": false,
+    "gates": [
+      "Existing owner-authorized QMA reconstruction is evidence, not an external licensing blocker; native adaptation still must resolve its documented hardening differences.",
+      "Sensor ID/configuration/FIFO/IRQ leaves and two LIS auxiliary call contracts remain unresolved.",
+      "Only bus callbacks and sensor leaves are fixtures; full ABI/private histories, actual sensors/bus, original compiler/placement and whole-image identity remain unproven."
+    ]
+  },
+  "native_motion_fifo_checkpoint": {
+    "report": "native-motion-fifo-runtime/report.json",
+    "verification": "native-motion-fifo-runtime/verification.json",
+    "comparisons": 19104,
+    "exhaustive_values_per_axis_per_family": 65536,
+    "matching_faults": 4860,
+    "partial_triple_fault_cases": 2430,
+    "unresolved_imports": 31,
+    "closed_parent_imports": [
+      "r1_bma456w_fifo_normalized",
+      "r1_lis2dw12_fifo_normalized",
+      "r1_qma6100_fifo_normalized"
+    ],
+    "newly_exposed_imports": [
+      "r1_bma456w_fifo_read",
+      "r1_lis2dw12_fifo_read",
+      "r1_qma6100_bounded_fifo_read"
+    ],
+    "whole_image_complete": false,
+    "gates": [
+      "Raw FIFO and bus operations are fixtures; native adapters preserve over-reporting, not the portable hardened count policy.",
+      "QMA preloads XYZ; ST/BMA load/store sequentially. Unmapped-memory evidence is emulator evidence only.",
+      "Real sensor/FIFO/bus execution, arbitrary counts/backing, full ABI and original image identity remain unproven."
+    ]
+  },
+  "native_lis_fifo_checkpoint": {
+    "report": "native-lis-fifo-runtime/report.json",
+    "verification": "native-lis-fifo-runtime/verification.json",
+    "comparisons": 12652,
+    "matching_faults": 1254,
+    "unresolved_imports": 30,
+    "closed_parent_imports": [
+      "r1_lis2dw12_fifo_read"
+    ],
+    "source_zero_context_prefix_bytes": 16,
+    "attributed_dependency": "ST lis2dw12-pid 8d4bd522015004a9646102702901ba5a15ec6d39 BSD-3-Clause",
+    "whole_image_complete": false,
+    "gates": [
+      "Only register and bus callbacks are fixtures; real sensor/bus execution remains unproven.",
+      "The ST FIFO-level body has three explicit frame adaptations; exact original vendor checkout and instruction identity are unproven.",
+      "Only the observed16-byte context prefix is owned; full context size and configuration/initialization remain unresolved.",
+      "Full callback stack/private histories, full raw ABI, original compiler/placement and whole-image identity remain unproven."
+    ]
+  },
+  "native_lis_identity_checkpoint": {
+    "report": "native-lis-identity/report.json",
+    "verification": "native-lis-identity/verification.json",
+    "comparisons": 2592,
+    "unresolved_imports": 29,
+    "closed_parent_imports": [
+      "r1_lis2dw12_identity_probe"
+    ],
+    "newly_exposed_imports": [],
+    "whole_image_complete": false,
+    "gates": [
+      "Sensor configure/reset/ODR/interrupt leaves remain unresolved.",
+      "Only bus and custom register callbacks are fixtures; real sensor/bus execution remains unproven.",
+      "Default callbacks return zero regardless of transport failure; identity preserves unmodified high saved-r3 bytes.",
+      "Full callback/private stack histories, arbitrary aliases, full raw ABI, compiler/placement and whole-image identity remain unproven."
+    ]
+  },
+  "native_lis_registers_checkpoint": {
+    "report": "native-lis-registers/report.json",
+    "verification": "native-lis-registers/verification.json",
+    "comparisons": 55767,
+    "attributed_upstream_body_count": 17,
+    "native_proxy_count": 1,
+    "unresolved_imports": 29,
+    "whole_image_complete": false,
+    "gates": [
+      "LIS configure and multi-register ODR/filter/power/interrupt operations remain unresolved.",
+      "Native7518a sets bit6 of register0x17; it must not be silently mapped to pinned ST CTRL_REG7 at0x3f.",
+      "17 ST bodies explicitly externalize their local byte to native saved-r3 scratch; original vendor checkout remains unproven.",
+      "Only transport callbacks are fixtures; full private callback frames, arbitrary faults/aliases, full raw ABI, actual sensor/bus, instruction and image identity remain unproven."
+    ]
   }
 }

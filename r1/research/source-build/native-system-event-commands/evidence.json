@@ -1,0 +1,75 @@
+{
+  "inputs": {
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/research/source-build/native-scatter-data/verification.json": "c2b61bfad032e0496b346d2f299a7f5aacbde97d516edccf67999f4c624537c1"
+  },
+  "tool_receipts": {
+    "rea-bytes-844ec.json": "1fe9aeec1d23f2b64d6189d49c94d787518d3c77cee14bfd36d06b50508ca4d2",
+    "rea-bytes-4c5b8.json": "61378dce8a8df71c290bd488751484e4354efe40105ebd2d98549d53b0795155",
+    "rea-84b24.json": "10d2a7fc10837fa3a82966146b43180f783146bc9f4cfff55f846ebbc5c0a2df",
+    "rea-bytes-84bdc.json": "b0ab5db2814545f3e91a8870e5c0cf882e8ea810e96e88805bd8d1b49e89f642",
+    "rea-bytes-84bd4.json": "09dcdb502a27c063e0969037fafa6affbb5c77bcc47dcc9a5a102fef2262404e",
+    "rea-bytes-84b9c.json": "5fbde7362b49df7affad9cd97a243443210140c431f1cc23cd4b541c929b1117",
+    "rea-bytes-84860.json": "2a306cef570be60343fc60e7a51ce00cebde06bc68fac89aa5b62542288879b7",
+    "rea-83c62.json": "732d9ccfa641a9273d737b8aa0cb42d87d4358c0e3cd560bc195a42a4ecaa823",
+    "rea-bytes-84b24.json": "a474484525c7f434f1b4e983956ab29edd5b0f27c294f4c8555af9cc6f2f6be7",
+    "rea-844ec.json": "d22f009762c218d87f2cadbe82d70e771d1d6cb53e0392dd2149b53f2aceee24",
+    "rea-4c5b8.json": "f9a8be1c90dd8c34b9d233feb9c38af9f0a910436b84e8243df533636b86db74",
+    "rea-84860.json": "5ab91cae1744201b21d1a9a0e0d479710839791de2d337fb0104a467d285a714",
+    "rea-bytes-83c62.json": "3a95f142ecd604914c195113cafef4ea0af7d9108929e68f91860a0aabb73ae0",
+    "rea-bytes-4c5c0.json": "bd23bf46b170cc737f33b2385707b5e0f6ec58c29d4e5fd67eb547d59b4e9331"
+  },
+  "supplemental_evidence": {
+    "supplemental-pseudocode.txt": "67848f66b4bb89b3e8fa3d438d525885f6f10d54e74ed0f113d502255196a1cb",
+    "native-ack-disassembly.txt": "5f044ce5048ce757696c9d027f2b55d861ea7c1cc6d82303598f071d614a87a2",
+    "native-query-disassembly.txt": "b41eb6eb9c5c5bfb79dc8a38acefc1114d46d06264096e2fab1e18ff202ec5c7",
+    "native-event-disassembly.txt": "d4703e8b75dc0f559497c0de28992ac753eea6d3b87bc733235691b38e139080"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0004c5b8",
+      "end": "0x0004c5bf",
+      "size": "8",
+      "recovered_name": "FUN_0004c5b8",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_health_mode_get",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00083c62",
+      "end": "0x00083c85",
+      "size": "36",
+      "recovered_name": "FUN_00083c62",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_phone_cmd_send_op3",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "locked_native_bytes": 44,
+  "supplemental_body_ranges": {
+    "844ec": 54,
+    "84860": 20,
+    "84b24": 120
+  },
+  "supplemental_bytes_not_rows": 194,
+  "new_owned_data_bytes": 101,
+  "mode_byte_address": "0x2001e478",
+  "mode_byte_cold_zero_scatter": true,
+  "health_context_alias_gate": "Must alias eventual health context2001e454+36; no full context allocation inferred",
+  "rea_procedure_gaps": [
+    "844ec",
+    "84860",
+    "84b24",
+    "83c62"
+  ],
+  "whole_image_identity": false
+}

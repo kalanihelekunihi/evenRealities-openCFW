@@ -1,0 +1,93 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00083e50 <r1_stock_gpio_pin_set+0xaa1c>:
+   83e50:	b510      	push	{r4, lr}
+   83e52:	b090      	sub	sp, #64	@ 0x40
+   83e54:	460c      	mov	r4, r1
+   83e56:	221c      	movs	r2, #28
+   83e58:	4924      	ldr	r1, [pc, #144]	@ (83eec <_stack+0x3eec>)
+   83e5a:	a801      	add	r0, sp, #4
+   83e5c:	f7a3 fc7e 	bl	2775c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x75c>
+   83e60:	f7e6 feba 	bl	6abd8 <r1_stock_i2c5_acquire+0x1a700>
+   83e64:	2801      	cmp	r0, #1
+   83e66:	d014      	beq.n	83e92 <_stack+0x3e92>
+   83e68:	2000      	movs	r0, #0
+   83e6a:	f88d 0004 	strb.w	r0, [sp, #4]
+   83e6e:	211c      	movs	r1, #28
+   83e70:	a808      	add	r0, sp, #32
+   83e72:	f7a3 fc9a 	bl	277aa <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x7aa>
+   83e76:	a808      	add	r0, sp, #32
+   83e78:	f7e6 fe86 	bl	6ab88 <r1_stock_i2c5_acquire+0x1a6b0>
+   83e7c:	2218      	movs	r2, #24
+   83e7e:	a908      	add	r1, sp, #32
+   83e80:	f10d 0005 	add.w	r0, sp, #5
+   83e84:	f7a3 fc6a 	bl	2775c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x75c>
+   83e88:	f00d fb30 	bl	914ec <_stack+0x114ec>
+   83e8c:	07c0      	lsls	r0, r0, #31
+   83e8e:	d10a      	bne.n	83ea6 <_stack+0x3ea6>
+   83e90:	e005      	b.n	83e9e <_stack+0x3e9e>
+   83e92:	2001      	movs	r0, #1
+   83e94:	f88d 0004 	strb.w	r0, [sp, #4]
+   83e98:	f7e6 fe20 	bl	6aadc <r1_stock_i2c5_acquire+0x1a604>
+   83e9c:	e7e7      	b.n	83e6e <_stack+0x3e6e>
+   83e9e:	f00d fb25 	bl	914ec <_stack+0x114ec>
+   83ea2:	0740      	lsls	r0, r0, #29
+   83ea4:	d509      	bpl.n	83eba <_stack+0x3eba>
+   83ea6:	a808      	add	r0, sp, #32
+   83ea8:	9000      	str	r0, [sp, #0]
+   83eaa:	f89d 3004 	ldrb.w	r3, [sp, #4]
+   83eae:	a210      	add	r2, pc, #64	@ (adr r2, 83ef0 <_stack+0x3ef0>)
+   83eb0:	a10f      	add	r1, pc, #60	@ (adr r1, 83ef0 <_stack+0x3ef0>)
+   83eb2:	f04f 6048 	mov.w	r0, #209715200	@ 0xc800000
+   83eb6:	f00d fbbf 	bl	91638 <_stack+0x11638>
+   83eba:	f00d fb17 	bl	914ec <_stack+0x114ec>
+   83ebe:	0780      	lsls	r0, r0, #30
+   83ec0:	d50c      	bpl.n	83edc <_stack+0x3edc>
+   83ec2:	4811      	ldr	r0, [pc, #68]	@ (83f08 <_stack+0x3f08>)
+   83ec4:	4911      	ldr	r1, [pc, #68]	@ (83f0c <_stack+0x3f0c>)
+   83ec6:	f89d 2004 	ldrb.w	r2, [sp, #4]
+   83eca:	1a40      	subs	r0, r0, r1
+   83ecc:	08c0      	lsrs	r0, r0, #3
+   83ece:	2103      	movs	r1, #3
+   83ed0:	eb01 4000 	add.w	r0, r1, r0, lsl #16
+   83ed4:	ab08      	add	r3, sp, #32
+   83ed6:	a10e      	add	r1, pc, #56	@ (adr r1, 83f10 <_stack+0x3f10>)
+   83ed8:	f7f5 fd7d 	bl	799d6 <r1_stock_gpio_pin_set+0x5a2>
+   83edc:	f8b4 2003 	ldrh.w	r2, [r4, #3]
+   83ee0:	2100      	movs	r1, #0
+   83ee2:	a801      	add	r0, sp, #4
+   83ee4:	f7ff fce9 	bl	838ba <_stack+0x38ba>
+   83ee8:	b010      	add	sp, #64	@ 0x40
+   83eea:	bd10      	pop	{r4, pc}
+   83eec:	a56c      	add	r5, pc, #432	@ (adr r5, 840a0 <_stack+0x40a0>)
+   83eee:	0009      	movs	r1, r1
+   83ef0:	525b      	strh	r3, [r3, r1]
+   83ef2:	4e49      	ldr	r6, [pc, #292]	@ (84018 <_stack+0x4018>)
+   83ef4:	5d47      	ldrb	r7, [r0, r5]
+   83ef6:	7473      	strb	r3, [r6, #17]
+   83ef8:	3a61      	subs	r2, #97	@ 0x61
+   83efa:	6425      	str	r5, [r4, #64]	@ 0x40
+   83efc:	202c      	movs	r0, #44	@ 0x2c
+   83efe:	6564      	str	r4, [r4, #84]	@ 0x54
+   83f00:	6976      	ldr	r6, [r6, #20]
+   83f02:	3a64      	subs	r2, #100	@ 0x64
+   83f04:	7325      	strb	r5, [r4, #12]
+   83f06:	0000      	movs	r0, r0
+   83f08:	44fc      	add	ip, pc
+   83f0a:	000c      	movs	r4, r1
+   83f0c:	441c      	add	r4, r3
+   83f0e:	000c      	movs	r4, r1
+   83f10:	7473      	strb	r3, [r6, #17]
+   83f12:	3a61      	subs	r2, #97	@ 0x61
+   83f14:	6425      	str	r5, [r4, #64]	@ 0x40
+   83f16:	202c      	movs	r0, #44	@ 0x2c
+   83f18:	6564      	str	r4, [r4, #84]	@ 0x54
+   83f1a:	6976      	ldr	r6, [r6, #20]
+   83f1c:	3a64      	subs	r2, #100	@ 0x64
+   83f1e:	7325      	strb	r5, [r4, #12]
+   83f20:	0000      	movs	r0, r0
+	...

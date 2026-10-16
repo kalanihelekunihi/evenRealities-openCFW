@@ -1,0 +1,66 @@
+{
+  "units": [
+    {
+      "source": "r1/components/runtime/native_user_profile_command.c",
+      "source_sha256": "346c2130109d7169541a04e2de516cca0b0e1bafa9d77b7f9adce08f1d604dcb",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-user-profile-command/native_user_profile_command.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/runtime/native_user_profile_command.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-user-profile-command/native_user_profile_command.o"
+      ],
+      "compiled": true,
+      "object_sha256": "eaed7746452f3b4600833f3f8643fb198bfac3642ead250bd753a73846e02023",
+      "undefined": [
+        "nrf_log_frontend_std_4",
+        "r1_event_publish",
+        "r1_packet_field12_get",
+        "r1_protocol_send_flag_set_c",
+        "r1_structured_log_format",
+        "r1_structured_log_mode_get"
+      ],
+      "defined": [
+        "r1_native_user_profile_handler",
+        "r1_profile_command_ring",
+        "r1_profile_command_sdk"
+      ],
+      "emitted_function_count": 2
+    }
+  ],
+  "inputs": {
+    "r1/components/runtime/native_user_profile_command.c": "346c2130109d7169541a04e2de516cca0b0e1bafa9d77b7f9adce08f1d604dcb",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7",
+    "r1/components/runtime/../board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

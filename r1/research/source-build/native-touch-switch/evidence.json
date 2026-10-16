@@ -1,0 +1,46 @@
+{
+  "inputs": {
+    "r1/components/runtime/native_touch_switch.c": "49343a000a572e229c0fea2b76437599057fecb4c88cd3dbc2abe086ca123eb8",
+    "r1/tools/build_native_touch_switch.py": "fddd1c11cfaaa26ce5328dc84eff59e3fe27f30d106d4554c37480a59a7a05d3",
+    "r1/tools/build_native_touch_switch_runtime.py": "6a6dac99311737f35905c2d3ad3809f2c292e94bf202559c4dcb45fb78cb023d",
+    "r1/source-config/runtime/native_touch_switch_verification.ld": "1dbb9dd39b32697e8085fc6159b210a0a28da06248d0c7397e6e153766696b62",
+    "r1/research/source-build/i2c5/stock-analysis-exec.elf": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+    "r1/docs/correlation/ADV-START-TOUCH-SWITCH-HANDLERS-CORRELATION.md": "59d001f8a6fe34d4e557120b0dcc4a560a34564cc9eaece0681df1a9ea432b7d"
+  },
+  "tool_receipts": {
+    "rea-bytes-84934.json": "7c3b74457741f6bbc4d12e5da48f77f62bd27e0b386300a99701a9a6949647ef",
+    "rea-bytes-849a0.json": "a19211f59dd23f5e49a92132320af7466498ef813f73428e1f13d1dcb21bff9e",
+    "rea-bytes-8492c.json": "d6eefebf7ac971dbbd8854ab37c8acd918cfe870224b3417f7a763899bdaea55",
+    "rea-bytes-8496c.json": "6600c2fb464ff356fe1c21e0ee43b12c0cc52d78618455359f9c18554c3a2c78",
+    "rea-procedure.json": "009ecf1d582b1d52fca90e5b901e7ed4ffa153d219ece51229335f05a79068cc",
+    "rea-bytes-84874.json": "52fbef6e03d565ee660b909a566e99e963fbcf741c76c11e967237bf1848393d",
+    "rea-bytes-849dc.json": "05b9f23117d81461c162797a2c2b8fcc95945a129fb03c6c93fe6400146f54bd"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x00084874",
+      "end": "0x0008492b",
+      "size": "184",
+      "recovered_name": "r1_touch_switch_handler_plan_decode",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_touch_switch_handler_plan_decode",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "native_code_bytes": 184,
+  "new_owned_text_bytes": 212,
+  "procedure_metadata_missing": true,
+  "separate_native_handler_symbol": true,
+  "main_partial_alias_only": true,
+  "portable_planner_modified": false,
+  "runtime_admission_changed": false,
+  "touch_service_effects_implemented": false,
+  "hardware_write_executed": false,
+  "whole_image_identity": false
+}

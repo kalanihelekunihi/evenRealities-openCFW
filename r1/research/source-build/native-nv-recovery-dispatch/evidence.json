@@ -1,0 +1,49 @@
+{
+  "inputs": {
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/docs/correlation/NV-RECOVERY-CORRELATION.md": "fb9a09c3c23a2cfb6aa9951f07e7a0243e9526762cb2d20d020838d206c1503d",
+    "r1/docs/correlation/NV-COMPILED-RESTORE-CORRELATION.md": "68f3e5124abb61248be1206a6eb50a067a2c0c71f47fe093cc9ae161de8d4334",
+    "r1/research/source-build/native-nv-class-writer-runtime/failed-read-caller-graph-probe.json": "c43538c0db7e24facdd921a1288672dd471b9f7877f321e174d4bbee15cbd2a4"
+  },
+  "tool_receipts": {
+    "rea-bytes-7c4f4.json": "7375abc1c1edb78675c1804bcad2b1915387246c2ff19a27ff8505e9a64aa428",
+    "rea-bytes-7bbe8.json": "8f2ce12c51652b96a2c0ac67b26c6a41ae08265a6487991b1dec771fcf9de844",
+    "rea-bytes-7c4fc.json": "9cf8b2ef5929992c2ccedc063d9852c4324f593ccb6373f3b11a5b7f1d6af1e4",
+    "rea-bytes-7c4bc.json": "887503d6511d96b0f5ca37c1b2b723d74cb5bf85d335a87839d5c55b6cb9d573",
+    "rea-bytes-7c450.json": "e5301482b6a6cf913be87102ab707daaec58779c810da359f6941360afe9e589",
+    "rea-bytes-7bd68.json": "54ff4165e3d56a0483e231897c8bfabe782aea0b75b1cbc54ea700231884a4e7",
+    "rea-7c450.json": "f7b12c9e88a50d92f296aa97d27e6a79c0f10a9c71042365bc2bd4c2cfb5f25d"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x0007c450",
+      "end": "0x0007c4bb",
+      "size": "108",
+      "recovered_name": "r1_nv_recovery_command_dispatch",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only_security_preserving",
+      "upstream_symbol": "r1_nv_recovery_command_dispatch",
+      "confidence": "high",
+      "evidence": "SHA-pinned R1 nonvolatile recovery/report/merge behavior. Only bounded internal planning is admitted; the identity-bearing BLE restore sender and persistent mutation surface remain disabled."
+    }
+  ],
+  "native_bytes": 108,
+  "new_owned_text_bytes": 102,
+  "build_only_control_flow": true,
+  "merge_boundary": "r1_native_nv_recovery_merge_boundary",
+  "report_boundary": "r1_native_nv_recovery_report_boundary",
+  "merge_semantic_arguments": [
+    "body",
+    "length",
+    "crc"
+  ],
+  "report_semantic_arguments": [],
+  "incoming_lower_scratch_abi_verified": false,
+  "planner_or_runtime_admission_changed": false,
+  "identity_table_copied": false,
+  "rea_procedure_gap": true,
+  "whole_image_identity": false
+}

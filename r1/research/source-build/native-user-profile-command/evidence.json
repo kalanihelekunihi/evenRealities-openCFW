@@ -1,0 +1,45 @@
+{
+  "inputs": {
+    "r1/components/runtime/native_user_profile_command.c": "346c2130109d7169541a04e2de516cca0b0e1bafa9d77b7f9adce08f1d604dcb",
+    "r1/tools/build_native_user_profile_command.py": "0821e165ca02ca288138f75617748b811c054d3adc93966f83b27360d21ac72c",
+    "r1/tools/build_native_user_profile_runtime.py": "edc153f73e216c6934116f03c3227dea888d66c3801e206cbf0db69e890e90f0",
+    "r1/source-config/runtime/native_user_profile_verification.ld": "419c085ffd2a1b24cff38925b46f7335b1a2a742f3ad958d0bf12eab50be3c23",
+    "r1/research/source-build/i2c5/stock-analysis-exec.elf": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13"
+  },
+  "tool_receipts": {
+    "rea-bytes-84b00.json": "79f0fdb2a29fa0ceacb8717e963d651cb56d38226d7afcec9ff67ac288f8dbdf",
+    "rea-bytes-84b08-full.json": "63af3b895a050b8437143fa0bdb1a50651f148d0228ae65d8953685c56a1dffc",
+    "rea-bytes-84adc-full.json": "fcefca79330356befb7c6a9e4b19e75ce7ec7df74cdda6b8e1ccf2356aa56441",
+    "rea-bytes-84adc.json": "c89cc00d6e4394bb13905560eaa3a0abaf64af288584afdfcb31e1c69906454c",
+    "rea-procedure.json": "60b8283d0fd50458ffdf777e9dfd9d2c66df58674b1d15c36afd9c8cd3a107a4",
+    "rea-bytes-84b08.json": "ea2abe1b4a8ca163ee44c5e1555a77a94c50486cf7a5a57c5b1e45575a04185b",
+    "rea-bytes-84a10.json": "c4f4bb02e93dcc3e1ced1a6befe7f9b2d1cd916c47638ab36ce10a6996a51cb7"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00084a10",
+      "end": "0x00084ad9",
+      "size": "202",
+      "recovered_name": "FUN_00084a10",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_user_profile_handler",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "native_code_bytes": 202,
+  "new_owned_text_bytes": 62,
+  "separate_native_handler": true,
+  "event_initializes10_publishes12": true,
+  "external_event_tail_no_defaults": true,
+  "procedure_metadata_missing": true,
+  "portable_policy_modified": false,
+  "runtime_admission_changed": false,
+  "hardware_write_executed": false,
+  "whole_image_identity": false
+}

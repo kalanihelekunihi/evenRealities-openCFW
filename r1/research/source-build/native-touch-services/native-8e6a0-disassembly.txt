@@ -1,0 +1,47 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0008e6a0 <r1_stock_gpio_pin_set+0x1526c>:
+   8e6a0:	b570      	push	{r4, r5, r6, lr}
+   8e6a2:	4d18      	ldr	r5, [pc, #96]	@ (8e704 <_stack+0xe704>)
+   8e6a4:	4606      	mov	r6, r0
+   8e6a6:	2401      	movs	r4, #1
+   8e6a8:	6968      	ldr	r0, [r5, #20]
+   8e6aa:	40b4      	lsls	r4, r6
+   8e6ac:	4204      	tst	r4, r0
+   8e6ae:	d028      	beq.n	8e702 <_stack+0xe702>
+   8e6b0:	f002 ff1c 	bl	914ec <_stack+0x114ec>
+   8e6b4:	07c0      	lsls	r0, r0, #31
+   8e6b6:	d103      	bne.n	8e6c0 <_stack+0xe6c0>
+   8e6b8:	f002 ff18 	bl	914ec <_stack+0x114ec>
+   8e6bc:	0740      	lsls	r0, r0, #29
+   8e6be:	d506      	bpl.n	8e6ce <_stack+0xe6ce>
+   8e6c0:	4633      	mov	r3, r6
+   8e6c2:	a211      	add	r2, pc, #68	@ (adr r2, 8e708 <_stack+0xe708>)
+   8e6c4:	a110      	add	r1, pc, #64	@ (adr r1, 8e708 <_stack+0xe708>)
+   8e6c6:	f04f 6044 	mov.w	r0, #205520896	@ 0xc400000
+   8e6ca:	f002 ffb5 	bl	91638 <_stack+0x11638>
+   8e6ce:	f002 ff0d 	bl	914ec <_stack+0x114ec>
+   8e6d2:	0780      	lsls	r0, r0, #30
+   8e6d4:	d50a      	bpl.n	8e6ec <_stack+0xe6ec>
+   8e6d6:	4816      	ldr	r0, [pc, #88]	@ (8e730 <_stack+0xe730>)
+   8e6d8:	4916      	ldr	r1, [pc, #88]	@ (8e734 <_stack+0xe734>)
+   8e6da:	4632      	mov	r2, r6
+   8e6dc:	1a40      	subs	r0, r0, r1
+   8e6de:	08c0      	lsrs	r0, r0, #3
+   8e6e0:	2103      	movs	r1, #3
+   8e6e2:	eb01 4000 	add.w	r0, r1, r0, lsl #16
+   8e6e6:	a114      	add	r1, pc, #80	@ (adr r1, 8e738 <_stack+0xe738>)
+   8e6e8:	f7eb f96e 	bl	799c8 <r1_stock_gpio_pin_set+0x594>
+   8e6ec:	6968      	ldr	r0, [r5, #20]
+   8e6ee:	43a0      	bics	r0, r4
+   8e6f0:	6168      	str	r0, [r5, #20]
+   8e6f2:	d106      	bne.n	8e702 <_stack+0xe702>
+   8e6f4:	f004 fe96 	bl	93424 <_stack+0x13424>
+   8e6f8:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+   8e6fc:	2004      	movs	r0, #4
+   8e6fe:	f004 bf01 	b.w	93504 <_stack+0x13504>
+   8e702:	bd70      	pop	{r4, r5, r6, pc}

@@ -1,0 +1,100 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+000843c8 <r1_stock_gpio_pin_set+0xaf94>:
+   843c8:	b57c      	push	{r2, r3, r4, r5, r6, lr}
+   843ca:	4606      	mov	r6, r0
+   843cc:	460d      	mov	r5, r1
+   843ce:	4608      	mov	r0, r1
+   843d0:	f7fe fc00 	bl	82bd4 <_stack+0x2bd4>
+   843d4:	0004      	movs	r4, r0
+   843d6:	d00c      	beq.n	843f2 <_stack+0x43f2>
+   843d8:	7820      	ldrb	r0, [r4, #0]
+   843da:	b108      	cbz	r0, 843e0 <_stack+0x43e0>
+   843dc:	2803      	cmp	r0, #3
+   843de:	d909      	bls.n	843f4 <_stack+0x43f4>
+   843e0:	2001      	movs	r0, #1
+   843e2:	9000      	str	r0, [sp, #0]
+   843e4:	4602      	mov	r2, r0
+   843e6:	f8b5 3003 	ldrh.w	r3, [r5, #3]
+   843ea:	2112      	movs	r1, #18
+   843ec:	4630      	mov	r0, r6
+   843ee:	f7fe fa45 	bl	8287c <_stack+0x287c>
+   843f2:	bd7c      	pop	{r2, r3, r4, r5, r6, pc}
+   843f4:	2000      	movs	r0, #0
+   843f6:	9000      	str	r0, [sp, #0]
+   843f8:	f8b5 3003 	ldrh.w	r3, [r5, #3]
+   843fc:	2201      	movs	r2, #1
+   843fe:	2112      	movs	r1, #18
+   84400:	4630      	mov	r0, r6
+   84402:	f7fe fa3b 	bl	8287c <_stack+0x287c>
+   84406:	2064      	movs	r0, #100	@ 0x64
+   84408:	f7f8 fea4 	bl	7d154 <r1_stock_gpio_pin_set+0x3d20>
+   8440c:	7820      	ldrb	r0, [r4, #0]
+   8440e:	4c23      	ldr	r4, [pc, #140]	@ (8449c <_stack+0x449c>)
+   84410:	2801      	cmp	r0, #1
+   84412:	d008      	beq.n	84426 <_stack+0x4426>
+   84414:	2802      	cmp	r0, #2
+   84416:	d00c      	beq.n	84432 <_stack+0x4432>
+   84418:	2803      	cmp	r0, #3
+   8441a:	d1ea      	bne.n	843f2 <_stack+0x43f2>
+   8441c:	f00d f866 	bl	914ec <_stack+0x114ec>
+   84420:	07c0      	lsls	r0, r0, #31
+   84422:	d11f      	bne.n	84464 <_stack+0x4464>
+   84424:	e01a      	b.n	8445c <_stack+0x445c>
+   84426:	2001      	movs	r0, #1
+   84428:	f7fa fdd5 	bl	7efd6 <r1_stock_gpio_pin_set+0x5ba2>
+   8442c:	2102      	movs	r1, #2
+   8442e:	68a0      	ldr	r0, [r4, #8]
+   84430:	e02f      	b.n	84492 <_stack+0x4492>
+   84432:	9801      	ldr	r0, [sp, #4]
+   84434:	f040 0003 	orr.w	r0, r0, #3
+   84438:	9001      	str	r0, [sp, #4]
+   8443a:	f00c ff29 	bl	91290 <_stack+0x11290>
+   8443e:	9901      	ldr	r1, [sp, #4]
+   84440:	f360 018f 	bfi	r1, r0, #2, #14
+   84444:	9101      	str	r1, [sp, #4]
+   84446:	f006 fcad 	bl	8ada4 <_stack+0xada4>
+   8444a:	9000      	str	r0, [sp, #0]
+   8444c:	4668      	mov	r0, sp
+   8444e:	f7ef f95f 	bl	73710 <r1_stock_i2c5_acquire+0x23238>
+   84452:	2101      	movs	r1, #1
+   84454:	68a0      	ldr	r0, [r4, #8]
+   84456:	f7f9 f94d 	bl	7d6f4 <r1_stock_gpio_pin_set+0x42c0>
+   8445a:	bd7c      	pop	{r2, r3, r4, r5, r6, pc}
+   8445c:	f00d f846 	bl	914ec <_stack+0x114ec>
+   84460:	0740      	lsls	r0, r0, #29
+   84462:	d505      	bpl.n	84470 <_stack+0x4470>
+   84464:	4a0e      	ldr	r2, [pc, #56]	@ (844a0 <_stack+0x44a0>)
+   84466:	f04f 6040 	mov.w	r0, #201326592	@ 0xc000000
+   8446a:	4611      	mov	r1, r2
+   8446c:	f00d f8e4 	bl	91638 <_stack+0x11638>
+   84470:	f00d f83c 	bl	914ec <_stack+0x114ec>
+   84474:	0780      	lsls	r0, r0, #30
+   84476:	d509      	bpl.n	8448c <_stack+0x448c>
+   84478:	480a      	ldr	r0, [pc, #40]	@ (844a4 <_stack+0x44a4>)
+   8447a:	490b      	ldr	r1, [pc, #44]	@ (844a8 <_stack+0x44a8>)
+   8447c:	1a40      	subs	r0, r0, r1
+   8447e:	08c0      	lsrs	r0, r0, #3
+   84480:	2103      	movs	r1, #3
+   84482:	eb01 4000 	add.w	r0, r1, r0, lsl #16
+   84486:	4909      	ldr	r1, [pc, #36]	@ (844ac <_stack+0x44ac>)
+   84488:	f7f5 fa9a 	bl	799c0 <r1_stock_gpio_pin_set+0x58c>
+   8448c:	68a0      	ldr	r0, [r4, #8]
+   8448e:	f44f 7180 	mov.w	r1, #256	@ 0x100
+   84492:	e8bd 407c 	ldmia.w	sp!, {r2, r3, r4, r5, r6, lr}
+   84496:	f7f9 b92d 	b.w	7d6f4 <r1_stock_gpio_pin_set+0x42c0>
+   8449a:	0000      	movs	r0, r0
+   8449c:	6540      	str	r0, [r0, #84]	@ 0x54
+   8449e:	2000      	movs	r0, #0
+   844a0:	0278      	lsls	r0, r7, #9
+   844a2:	000c      	movs	r4, r1
+   844a4:	44fc      	add	ip, pc
+   844a6:	000c      	movs	r4, r1
+   844a8:	441c      	add	r4, r3
+   844aa:	000c      	movs	r4, r1
+   844ac:	02c4      	lsls	r4, r0, #11
+   844ae:	000c      	movs	r4, r1

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_hw_twi_lifecycle.py", line 78, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_hw_twi_lifecycle.py", line 19, in main
+    for section,a in [('r1.hw_twi.template0',0x9a600),('r1.hw_twi.template1',0x9a620)]:assert sections[section]==raw[a-0x27000:a-0x27000+8]
+                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

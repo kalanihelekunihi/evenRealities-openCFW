@@ -1,0 +1,76 @@
+{
+  "units": [
+    {
+      "source": "r1/components/runtime/native_health_settings.c",
+      "source_sha256": "2a4d0ca139a8732a213b0e4989381e4a34f7565d6118e9c195e6268993e282f5",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-health-settings/native_health_settings.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/runtime/native_health_settings.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-health-settings/native_health_settings.o"
+      ],
+      "compiled": true,
+      "object_sha256": "f96593c429908c2abc05d48a7e25afbe18254c95eeda67b76e897405354a9e26",
+      "undefined": [
+        "nrf_log_frontend_std_2",
+        "nrf_log_frontend_std_4",
+        "r1_device_info_record_kv_handle",
+        "r1_event_publish",
+        "r1_kv_class_read",
+        "r1_kv_class_write",
+        "r1_nv_modules_idle_check",
+        "r1_packet_field12_get",
+        "r1_protocol_send_checked",
+        "r1_protocol_send_flag_set_c",
+        "r1_structured_log_format",
+        "r1_structured_log_mode_get"
+      ],
+      "defined": [
+        "r1_health_settings_get_ring",
+        "r1_health_settings_get_sdk",
+        "r1_health_settings_set_ring",
+        "r1_health_settings_set_sdk",
+        "r1_kv_dev_info_flag0_word_set",
+        "r1_kv_dev_info_flag_word_get",
+        "r1_native_health_settings_handler"
+      ],
+      "emitted_function_count": 6
+    }
+  ],
+  "inputs": {
+    "r1/components/runtime/native_health_settings.c": "2a4d0ca139a8732a213b0e4989381e4a34f7565d6118e9c195e6268993e282f5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7",
+    "r1/components/runtime/../board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

@@ -1,0 +1,85 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00084874 <r1_stock_gpio_pin_set+0xb440>:
+   84874:	b5fe      	push	{r1, r2, r3, r4, r5, r6, r7, lr}
+   84876:	4605      	mov	r5, r0
+   84878:	4608      	mov	r0, r1
+   8487a:	f7fe f9ab 	bl	82bd4 <_stack+0x2bd4>
+   8487e:	0004      	movs	r4, r0
+   84880:	d035      	beq.n	848ee <_stack+0x48ee>
+   84882:	2000      	movs	r0, #0
+   84884:	9002      	str	r0, [sp, #8]
+   84886:	2101      	movs	r1, #1
+   84888:	a802      	add	r0, sp, #8
+   8488a:	e9cd 0100 	strd	r0, r1, [sp]
+   8488e:	2300      	movs	r3, #0
+   84890:	461a      	mov	r2, r3
+   84892:	2107      	movs	r1, #7
+   84894:	4628      	mov	r0, r5
+   84896:	f000 f9e2 	bl	84c5e <_stack+0x4c5e>
+   8489a:	4924      	ldr	r1, [pc, #144]	@ (8492c <_stack+0x492c>)
+   8489c:	4a24      	ldr	r2, [pc, #144]	@ (84930 <_stack+0x4930>)
+   8489e:	7820      	ldrb	r0, [r4, #0]
+   848a0:	1a89      	subs	r1, r1, r2
+   848a2:	08c9      	lsrs	r1, r1, #3
+   848a4:	2203      	movs	r2, #3
+   848a6:	f04f 6644 	mov.w	r6, #205520896	@ 0xc400000
+   848aa:	eb02 4501 	add.w	r5, r2, r1, lsl #16
+   848ae:	2801      	cmp	r0, #1
+   848b0:	d006      	beq.n	848c0 <_stack+0x48c0>
+   848b2:	2802      	cmp	r0, #2
+   848b4:	d11b      	bne.n	848ee <_stack+0x48ee>
+   848b6:	f00c fe19 	bl	914ec <_stack+0x114ec>
+   848ba:	07c0      	lsls	r0, r0, #31
+   848bc:	d11c      	bne.n	848f8 <_stack+0x48f8>
+   848be:	e017      	b.n	848f0 <_stack+0x48f0>
+   848c0:	f00c fe14 	bl	914ec <_stack+0x114ec>
+   848c4:	07c0      	lsls	r0, r0, #31
+   848c6:	d103      	bne.n	848d0 <_stack+0x48d0>
+   848c8:	f00c fe10 	bl	914ec <_stack+0x114ec>
+   848cc:	0740      	lsls	r0, r0, #29
+   848ce:	d505      	bpl.n	848dc <_stack+0x48dc>
+   848d0:	7863      	ldrb	r3, [r4, #1]
+   848d2:	a218      	add	r2, pc, #96	@ (adr r2, 84934 <_stack+0x4934>)
+   848d4:	a117      	add	r1, pc, #92	@ (adr r1, 84934 <_stack+0x4934>)
+   848d6:	4630      	mov	r0, r6
+   848d8:	f00c feae 	bl	91638 <_stack+0x11638>
+   848dc:	f00c fe06 	bl	914ec <_stack+0x114ec>
+   848e0:	0780      	lsls	r0, r0, #30
+   848e2:	d504      	bpl.n	848ee <_stack+0x48ee>
+   848e4:	7862      	ldrb	r2, [r4, #1]
+   848e6:	4628      	mov	r0, r5
+   848e8:	a120      	add	r1, pc, #128	@ (adr r1, 8496c <_stack+0x496c>)
+   848ea:	f7f5 f86d 	bl	799c8 <r1_stock_gpio_pin_set+0x594>
+   848ee:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+   848f0:	f00c fdfc 	bl	914ec <_stack+0x114ec>
+   848f4:	0740      	lsls	r0, r0, #29
+   848f6:	d505      	bpl.n	84904 <_stack+0x4904>
+   848f8:	7863      	ldrb	r3, [r4, #1]
+   848fa:	a229      	add	r2, pc, #164	@ (adr r2, 849a0 <_stack+0x49a0>)
+   848fc:	a128      	add	r1, pc, #160	@ (adr r1, 849a0 <_stack+0x49a0>)
+   848fe:	4630      	mov	r0, r6
+   84900:	f00c fe9a 	bl	91638 <_stack+0x11638>
+   84904:	f00c fdf2 	bl	914ec <_stack+0x114ec>
+   84908:	0780      	lsls	r0, r0, #30
+   8490a:	d504      	bpl.n	84916 <_stack+0x4916>
+   8490c:	7862      	ldrb	r2, [r4, #1]
+   8490e:	4628      	mov	r0, r5
+   84910:	a132      	add	r1, pc, #200	@ (adr r1, 849dc <_stack+0x49dc>)
+   84912:	f7f5 f859 	bl	799c8 <r1_stock_gpio_pin_set+0x594>
+   84916:	7860      	ldrb	r0, [r4, #1]
+   84918:	2800      	cmp	r0, #0
+   8491a:	f04f 0000 	mov.w	r0, #0
+   8491e:	d002      	beq.n	84926 <_stack+0x4926>
+   84920:	f009 ff56 	bl	8e7d0 <_stack+0xe7d0>
+   84924:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+   84926:	f009 febb 	bl	8e6a0 <_stack+0xe6a0>
+   8492a:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+   8492c:	44fc      	add	ip, pc
+   8492e:	000c      	movs	r4, r1
+   84930:	441c      	add	r4, r3
+   84932:	000c      	movs	r4, r1

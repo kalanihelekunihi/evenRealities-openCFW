@@ -1,0 +1,73 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00093514 <r1_stock_gpio_pin_set+0x1a0e0>:
+   93514:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   93518:	4e24      	ldr	r6, [pc, #144]	@ (935ac <_stack+0x135ac>)
+   9351a:	4a25      	ldr	r2, [pc, #148]	@ (935b0 <_stack+0x135b0>)
+   9351c:	4c25      	ldr	r4, [pc, #148]	@ (935b4 <_stack+0x135b4>)
+   9351e:	2501      	movs	r5, #1
+   93520:	4601      	mov	r1, r0
+   93522:	06af      	lsls	r7, r5, #26
+   93524:	1b12      	subs	r2, r2, r4
+   93526:	08d2      	lsrs	r2, r2, #3
+   93528:	68f0      	ldr	r0, [r6, #12]
+   9352a:	eb05 4402 	add.w	r4, r5, r2, lsl #16
+   9352e:	b150      	cbz	r0, 93546 <_stack+0x13546>
+   93530:	2300      	movs	r3, #0
+   93532:	461a      	mov	r2, r3
+   93534:	f7e9 ff6a 	bl	7d40c <r1_stock_gpio_pin_set+0x3fd8>
+   93538:	2800      	cmp	r0, #0
+   9353a:	d02f      	beq.n	9359c <_stack+0x1359c>
+   9353c:	f7fd ffd6 	bl	914ec <_stack+0x114ec>
+   93540:	07c0      	lsls	r0, r0, #31
+   93542:	d11c      	bne.n	9357e <_stack+0x1357e>
+   93544:	e017      	b.n	93576 <_stack+0x13576>
+   93546:	f7fd ffd1 	bl	914ec <_stack+0x114ec>
+   9354a:	07c0      	lsls	r0, r0, #31
+   9354c:	d103      	bne.n	93556 <_stack+0x13556>
+   9354e:	f7fd ffcd 	bl	914ec <_stack+0x114ec>
+   93552:	0740      	lsls	r0, r0, #29
+   93554:	d504      	bpl.n	93560 <_stack+0x13560>
+   93556:	a218      	add	r2, pc, #96	@ (adr r2, 935b8 <_stack+0x135b8>)
+   93558:	a117      	add	r1, pc, #92	@ (adr r1, 935b8 <_stack+0x135b8>)
+   9355a:	4638      	mov	r0, r7
+   9355c:	f7fe f86c 	bl	91638 <_stack+0x11638>
+   93560:	f7fd ffc4 	bl	914ec <_stack+0x114ec>
+   93564:	0780      	lsls	r0, r0, #30
+   93566:	d503      	bpl.n	93570 <_stack+0x13570>
+   93568:	4620      	mov	r0, r4
+   9356a:	a11e      	add	r1, pc, #120	@ (adr r1, 935e4 <_stack+0x135e4>)
+   9356c:	f7e6 fa28 	bl	799c0 <r1_stock_gpio_pin_set+0x58c>
+   93570:	2000      	movs	r0, #0
+   93572:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+   93576:	f7fd ffb9 	bl	914ec <_stack+0x114ec>
+   9357a:	0740      	lsls	r0, r0, #29
+   9357c:	d504      	bpl.n	93588 <_stack+0x13588>
+   9357e:	a222      	add	r2, pc, #136	@ (adr r2, 93608 <_stack+0x13608>)
+   93580:	a121      	add	r1, pc, #132	@ (adr r1, 93608 <_stack+0x13608>)
+   93582:	4638      	mov	r0, r7
+   93584:	f7fe f858 	bl	91638 <_stack+0x11638>
+   93588:	f7fd ffb0 	bl	914ec <_stack+0x114ec>
+   9358c:	0780      	lsls	r0, r0, #30
+   9358e:	d503      	bpl.n	93598 <_stack+0x13598>
+   93590:	4620      	mov	r0, r4
+   93592:	a122      	add	r1, pc, #136	@ (adr r1, 9361c <_stack+0x1361c>)
+   93594:	f7e6 fa14 	bl	799c0 <r1_stock_gpio_pin_set+0x58c>
+   93598:	2500      	movs	r5, #0
+   9359a:	e004      	b.n	935a6 <_stack+0x135a6>
+   9359c:	f44f 0180 	mov.w	r1, #4194304	@ 0x400000
+   935a0:	68b0      	ldr	r0, [r6, #8]
+   935a2:	f7ea f8a7 	bl	7d6f4 <r1_stock_gpio_pin_set+0x42c0>
+   935a6:	4628      	mov	r0, r5
+   935a8:	e7e3      	b.n	93572 <_stack+0x13572>
+   935aa:	0000      	movs	r0, r0
+   935ac:	6664      	str	r4, [r4, #100]	@ 0x64
+   935ae:	2000      	movs	r0, #0
+   935b0:	44fc      	add	ip, pc
+   935b2:	000c      	movs	r4, r1
+   935b4:	441c      	add	r4, r3
+   935b6:	000c      	movs	r4, r1

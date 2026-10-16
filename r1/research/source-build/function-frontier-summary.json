@@ -46,6 +46,60 @@
     "rtos-unordered-event/evidence.json": "a74514dc2d4e4fd40d68a8327b9208ed859a487019fba3471729f51fafd2d2e8"
   },
   "input_reports": {
+    "native-lis-registers/report.json": "3976eed5127fa91da8756ffcfae96a8555cfe8d5b9252a6de1af91fea8eb3ddc",
+    "native-lis-identity/report.json": "dab3ced169e8f77a65c482b35920cd96504ae2090bc39c55d4192280a240815a",
+    "native-lis-fifo/report.json": "4428f7f94e153f96892f55d713dbd60b0f8f5b3a90d0c6049034488f521f4564",
+    "native-motion-fifo/report.json": "1888af16eafdc93bf54b1fbc396fc06bce57998ac12bd0712dd98f8cfe825c40",
+    "native-motion-selection/report.json": "348484a4552464cf6792c2d5474c01f7b018f70e420f2332443fcb4e4513a1fc",
+    "native-motion-stream/report.json": "d6682a2dbe7240ac2cb7a04fc32f2a2bde85c7faa64d86fc7e28dc1b888b03c7",
+    "native-stream-singletons/report.json": "c32d015f0a853127c80140871b83ccb7aa582e1e5639afaba5183e604dd8ff28",
+    "native-stream-objects/report.json": "98f8465857f8062ecd30491f5646869f17757105c6e37600a0bd396b840a10be",
+    "native-stream-poll/report.json": "70af3fc5bb389756de6200a989e1bf311dae410aba39720f85fdf9690f814c56",
+    "native-stream-bootstrap/report.json": "35bf7a6e8fe3c999fc43e4d776b19f917fa6454faa5a8ed885a5dfd2a5886621",
+    "native-crash-payload/report.json": "cc82a692addb4e2277fc70f30a9de0b9f1c2eee5bab714fccbbe5e9ec82a471f",
+    "native-crash-initialize-bridge/report.json": "97ebfe7b576f3d4c1dfbcc807969fb0722d019ab688e3affcda0825fafeec0f6",
+    "native-health-cache/report.json": "7b93d01de5a2253de4d19bfab39de9a9761b61759a9bbb36f97149cd06ab0c23",
+    "native-hourly-snapshot/report.json": "703fe759a61d2375132c2c0f94cf632f6c9bf2af040bef7fa49694bba612c768",
+    "native-crash-snapshot/report.json": "bc5cd75cb46420037c379c0abd08ad74d05b53856f116aa4588ebd82064029b9",
+    "native-crash-initialize/report.json": "a6bd8451ec8308568c71307b15f97173fd944512bd087be0f2c2cdfaf1fdc5c1",
+    "native-retained-log/report.json": "39955eb0c081021e1e41f1e9bd780740d5505fa2502ccb8c0e43cd15a3941575",
+    "native-dfu-backend/report.json": "5976a112bcad16f8fb01215e2920aa8209ca573d7075e8772d1e937d5711e334",
+    "native-dfu-ble-event/report.json": "444ec7075449e63f90adbf939c4cd7dab9d6c4732bbdbdb4b958c35451e08bac",
+    "sdk-ble-service-common/report.json": "ed589995aeb28bd8df3ec53a758c0ae6050590e240493ff6c4eaf0072a13b6c1",
+    "native-hw-twi-lifecycle/report.json": "5fb5aae3bdcf35b675cb2942a7b31c43a5c8b3377ea365bc481e8696774a0854",
+    "sdk-legacy-twi/report.json": "5b466fa701526abad682f2cdd3c3eae375877e14a720c6bf79cc531e90597522",
+    "native-hw-twi-operations/report.json": "09fb810e618f89af160fc292f6a2c15650aee29dcdc90dd1692e05c41e94cc8d",
+    "native-hw-twi-register/report.json": "9aa0ae68487b02210400121d8113049f3219b00e9d81c4435fb49e9d1a7aae5a",
+    "sdk-twim/report.json": "80325c0a12b1e0e8a428c6b7d653f9bbe97dd9af3182a8a1fe8f33e1fb4dbc88",
+    "native-hw-twi-wait/report.json": "1e0d22660612375f12b6b04d24222020a335059a075af1fd5276ac83ad6fe5b1",
+    "native-hw-twi-completion/report.json": "3f9f51ff62a070f41bdbd662f28fcd55a248fe14e77bba76ad2b67afa93ee8b3",
+    "native-peripheral-bindings/report.json": "f766749a88d27c1115a9b766785aabbf4e89555f274a8c650b83cf23693433a8",
+    "native-output-gpio-lifecycle/report.json": "9d91e1e1d471183f19d5d1d72c1e60b21645d1e9e1b988fb85608df66b906e34",
+    "native-output-gpio-command/report.json": "6516dbb5053fe9bc3e1b9a14f0c8f3299128f2b599c5d6d7d167bde88483d9b9",
+    "native-output-gpio-operations/report.json": "c951ad49b3d7be156cf9b016f664fc010f3a1981c079aa5319c7e3908b6d9cee",
+    "native-output-gpio-drivers/report.json": "dfe51142bb558522ae4218e8fd1899926c72870f58217049618c6bf3ba667e57",
+    "native-user-profile-command/report.json": "cdba5fb46ddc3c126c8810835f48a6d2b2db96013e7e8f84a447383dceadc015",
+    "native-health-settings/report.json": "8661a78a7066d5dc652a34771dce371f05bf4e778fcae7c49fd7fec089f32008",
+    "native-system-settings/report.json": "83c8155e0b13b698c38029d1df1fe0d69b0126df4cf5599294088e2dada2f863",
+    "native-touch-gesture/report.json": "67b8da6d406e9e064e07373d8f55bf3a452016e8bdc282b11e0c12bb5fdbe070",
+    "native-touch-task-message/report.json": "9afa7a9e67f551a8abb3ba318b8c3b7192c8223367f5364fb9da6015f8309028",
+    "native-touch-release/report.json": "8f62dd7e6d0fcba8896dc88ed2ece826778e01521271a02066db8e4aded75634",
+    "native-touch-services/report.json": "871732a7d03ade7e0e4853262c58e2a9ef473be55a1d144b5854ba91e319aeaf",
+    "native-touch-switch/report.json": "b78ef30ef469439546cdf896076a8eef5608f87756315181e1221eaddc24a5ba",
+    "native-device-id-reader/report.json": "c33562c0d2e87179e4d3c95358e6ea5abf3546711b019decafded85f180d3eb8",
+    "native-device-id-command/report.json": "44055d2a5ddc782c035f2aeeeca543536dbfdab0ef799f00167f941ace198e8c",
+    "native-power-command/report.json": "e56549334d735dc6463cc8ad339dd205369b7c0f7e934a6cd5d2e0d777c7aa06",
+    "native-time-sync-providers/report.json": "937056dc4f51d83f25b15456321cfc6ee121b7683629483e7692c0dce5fd72c7",
+    "native-time-sync-command/report.json": "411d9746aa5d6c1189b17c049ccfcc5fe8312ad79cfbc6f8096a5fec868d789c",
+    "native-nv-recovery-dispatch/report.json": "8a9204c7f242292a3acbd349c14e600683b8bb9adff5f5f8a61a17c24bca5c97",
+    "native-nv-recovery-envelope/report.json": "0dcd74332f905b4e9b87a7e77f9a66e20f212deca5a52d33554b28ee5c11c457",
+    "native-nv-class-writer/report.json": "417cf164fdf22d15bfd2cbff419a591204b4ea36dee6952cbda94c30b4ced4ba",
+    "native-nv-update/report.json": "88c075e33505954c6d8b71daca9c081663df2a5f04865d8f2370c9ac712af9dd",
+    "native-system-event-commands/report.json": "501229e25fbe1f9090efb199c60ccae89d294db01824db76ebbe820e046e42c7",
+    "native-nordic-delay-runtime/report.json": "5e0460f97f1b53fc618ea59ec6100db6ee2508443fb2f88b0add40aac47d7dd8",
+    "native-phone-role/report.json": "22ebed74a67852a1dbb9b27256100a945f663363bde96a32869063b7dface65e",
+    "native-ble-message/report.json": "397bcbd238d3043df9227ebd1fdb703bc46871b14e834aedf2b9e9338cecde6b",
+    "native-protocol-control/report.json": "38e80b823e982b6108351e6ef3b0d9c86be7f82baf6fdb1495908c6bc84741b0",
     "native-protocol-serial/report.json": "89eb6967125cca23d41d36e7da14b8e2a84f216bab6c110f56ee90e9ceeaa3cc",
     "native-protocol-ack/report.json": "04bfce026ad4579622a8b100fd5921493ce6bf7eddb23c90f303d39a255ff5c4",
     "native-health-commands/report.json": "0916878bfe4e226f066a47d871078e046bb5e34319802fe44bade7c8c91e9ef7",
@@ -299,14 +353,14 @@
   },
   "ownership_entries": 3326,
   "counts": {
-    "tested_contract_candidate": 816,
-    "unresolved_source_route": 1140,
-    "compiled_symbol_hint": 1370
+    "tested_contract_candidate": 963,
+    "unresolved_source_route": 1023,
+    "compiled_symbol_hint": 1340
   },
   "providers": {
     "arm_cmsis_freertos_10_5_1": {
-      "compiled_symbol_hint": 7,
-      "tested_contract_candidate": 22
+      "compiled_symbol_hint": 6,
+      "tested_contract_candidate": 23
     },
     "arm_cryptocell_cc310": {
       "unresolved_source_route": 32,
@@ -341,7 +395,8 @@
       "compiled_symbol_hint": 15
     },
     "gomore_health_algorithm_candidate": {
-      "compiled_symbol_hint": 362
+      "compiled_symbol_hint": 361,
+      "tested_contract_candidate": 1
     },
     "goodix_gh3x2x_candidate": {
       "compiled_symbol_hint": 320
@@ -363,9 +418,9 @@
       "compiled_symbol_hint": 27
     },
     "nordic_nrf5_sdk_17_1_0": {
-      "tested_contract_candidate": 195,
-      "unresolved_source_route": 226,
-      "compiled_symbol_hint": 362
+      "tested_contract_candidate": 210,
+      "unresolved_source_route": 217,
+      "compiled_symbol_hint": 356
     },
     "qst_qma6100_v1_0_lineage_unlicensed": {
       "compiled_symbol_hint": 3
@@ -404,10 +459,12 @@
       "unresolved_source_route": 18
     },
     "r1_motion_provider_adapter": {
-      "unresolved_source_route": 28
+      "tested_contract_candidate": 22,
+      "unresolved_source_route": 6
     },
     "r1_nordic_cmsis_provider_adapter": {
-      "unresolved_source_route": 12
+      "tested_contract_candidate": 11,
+      "unresolved_source_route": 1
     },
     "r1_nordic_sdk_provider_adapter": {
       "tested_contract_candidate": 8,
@@ -417,8 +474,8 @@
       "tested_contract_candidate": 2
     },
     "r1_product_specific": {
-      "tested_contract_candidate": 200,
-      "unresolved_source_route": 559,
+      "tested_contract_candidate": 250,
+      "unresolved_source_route": 509,
       "compiled_symbol_hint": 5
     },
     "r1_provider_configuration_glue": {
@@ -426,14 +483,16 @@
       "unresolved_source_route": 6
     },
     "r1_qst_qma6100_provider_adapter": {
-      "unresolved_source_route": 14
+      "tested_contract_candidate": 4,
+      "unresolved_source_route": 10
     },
     "r1_st25dvxxkc_provider_adapter": {
       "unresolved_source_route": 17,
       "tested_contract_candidate": 6
     },
     "r1_st_lis2dw12_provider_adapter": {
-      "unresolved_source_route": 7
+      "tested_contract_candidate": 3,
+      "unresolved_source_route": 4
     },
     "segger_fprintf_6_14d_sdk_bundled": {
       "tested_contract_candidate": 4
@@ -444,23 +503,23 @@
       "unresolved_source_route": 1
     },
     "stmicro_lis2dw12_pid_v2_1_0_compatible": {
-      "compiled_symbol_hint": 26
+      "tested_contract_candidate": 21,
+      "compiled_symbol_hint": 5
     },
     "stmicro_st25dvxxkc_bsd_compatible": {
       "compiled_symbol_hint": 29
     },
     "unknown_generic_device_registry_candidate": {
       "compiled_symbol_hint": 1,
-      "tested_contract_candidate": 30,
-      "unresolved_source_route": 12
+      "tested_contract_candidate": 31,
+      "unresolved_source_route": 11
     },
     "unknown_rtc_device_provider_candidate": {
       "tested_contract_candidate": 10
     },
     "unknown_sensor_stream_framework_candidate": {
-      "tested_contract_candidate": 3,
-      "unresolved_source_route": 28,
-      "compiled_symbol_hint": 1
+      "tested_contract_candidate": 20,
+      "unresolved_source_route": 12
     },
     "unknown_shared_quantized_neural_runtime_candidate": {
       "unresolved_source_route": 26,
@@ -471,8 +530,8 @@
     },
     "unknown_time_calendar_provider_candidate": {
       "compiled_symbol_hint": 1,
-      "tested_contract_candidate": 9,
-      "unresolved_source_route": 6
+      "tested_contract_candidate": 10,
+      "unresolved_source_route": 5
     },
     "yhmicros_yhm2710_candidate": {
       "tested_contract_candidate": 31,

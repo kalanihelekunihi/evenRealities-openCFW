@@ -98,7 +98,7 @@
         "Device-mode selector 0x421548 passes 520 direct cases with 38/38 stock bytes and 1420 composed fixtures reaching 34/38 bytes. Its downstream read dispatcher remains controlled.",
         "All eleven root child entries execute in a 1420-case stock/C startup replay. Mode-enter reaches 188/314 and mode-leave 230/350 stock bytes; their other branches and lower provider/ROM timing contracts, production M55 execution and whole-image gates remain open.",
         "Direct MSPI enter/leave comparisons visit 314/314 and 350/350 stock bytes across 3590 and 7234 cases. Descriptor, clock, power, poll, delay and callback lower contracts are controlled; production M55 and whole-image gates remain open.",
-        "INFO dispatcher 0x4213e6 passes 7200 direct cases visiting 350/354 stock bytes; the four unvisited bytes are two fallback branches after the invalid-space gate. A 1420-case composed replay reaches 224/354 dispatcher and 788/810 root bytes with resident ROM read controlled. Production M55 and whole-image behavior remain open."
+        "INFO dispatcher 0x4213e6 passes 7200 direct cases visiting 350/354 stock bytes; pinned control-flow proof establishes that the four unvisited bytes are unreachable fallback instructions after the invalid-space gate. A 1420-case composed replay reaches 224/354 dispatcher and 788/810 root bytes with resident ROM read controlled. Production M55 and whole-image behavior remain open."
       ],
       "shutdown_debug_release_42252e": {
         "path": "g2/build/c-firmware/20261016/boot-shutdown-debug-release-42252e/oracle-receipt.json",
@@ -168,6 +168,10 @@
         "path": "g2/build/c-firmware/20261016/boot-info-dispatch-4213e6/receipt.json",
         "sha256": "2b49ad45eb35f188a478eafabd38587f1688543e4e6e53cfda12d0d91ba8b814"
       },
+      "info_dispatch_unreachable_fallback": {
+        "path": "g2/build/c-firmware/20261016/boot-info-dispatch-fallback/receipt.json",
+        "sha256": "72efd3846729a8ef834abd0d3c300dc5866a16438a6ed11d5e8c5f21a9a3b046"
+      },
       "root_with_info_dispatch": {
         "path": "g2/build/c-firmware/20261016/boot-root-with-info-dispatch/receipt.json",
         "sha256": "b5d09ce108cf2ad90741efd94b83d078928b4db9170ae909f8fd3db77bdb92c6"
@@ -213,7 +217,8 @@
       "remaining_gate": [
         "Source graph and relocations link at an experimental placement only.",
         "The text extent exceeds the official CASE payload; section order, native entry addresses, checksums and packaging are not stock-equal.",
-        "No device, flash, peripheral timing or physical policy proof."
+        "No device, flash, peripheral timing or physical policy proof.",
+        "The 38 C symbols with explicit stock address suffixes total 4,898 bytes less than their Ghidra function envelopes, while the mixed -Oz CASE load exceeds stock by 7,851 bytes. The candidate .text has 54,320 unique function bytes and 8,951 bytes outside function symbols; the 428-entry native catalogue has 40,664 envelope bytes but may be incomplete. Unmatched code and linker placement require review before assigning the overflow to specific bodies."
       ],
       "gc_size_frontier": {
         "receipt": {
@@ -258,6 +263,10 @@
         "entry": "0x8000145",
         "matching_vector_words": 13,
         "native_pointer_leads_present": 39
+      },
+      "named_function_size_triage": {
+        "path": "g2/build/c-firmware/20261016/case-named-function-size/receipt.json",
+        "sha256": "a35aefbd2914143015f65949c6dc7d5eaf0b8e300f42b9dbc28f23e8ca008c24"
       }
     },
     "apollo_main": {
@@ -266,8 +275,8 @@
         "sha256": "cff35b99fc8d6cbebe10ba1359384ea6a19ede7196620c05997e6547b849eb56"
       },
       "candidate": {
-        "path": "g2/build/c-firmware/20261016/main-text-stream-decision-helpers/apollo-main-text-stream-decision-helpers-bound.o",
-        "sha256": "6b7d44e5e44ec4968ae4a3de0b4f0b3aa355f18093ebc4f0ca22049d94649cbf"
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-agent-done-5e6268/apollo-main-terminal-agent-done-bound.o",
+        "sha256": "58118ab923c6c4b55083d6a8c3e97a6d477e9b994ab4d09e24e269eb3dc13aaa"
       },
       "prior_dm_registry_extent_gate": {
         "path": "g2/build/c-firmware/20261015/main-dm-registry-extent-gate/receipt.json",
@@ -1086,8 +1095,8 @@
         "sha256": "a8250ac1157ac7f17efa1e9694874f5656c4eed165985f870d013a5a685ef262"
       },
       "even_ai_common_timer_start_bound": {
-        "path": "g2/build/c-firmware/20261016/main-even-ai-common-timer/receipt.json",
-        "sha256": "55887b0d282f964a2cd5e03a03ad62f73e1aa67f1ef2f90a932f8dbeab180831"
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-stop-timer-5e7ec4/receipt.json",
+        "sha256": "3da5a1efe30ea70e010346d5d450a9b7a6fef378808935b40b86380bc9116d5a"
       },
       "even_ai_common_timer_stop_bound": {
         "path": "g2/build/c-firmware/20261016/main-even-ai-common-timer-stop/receipt.json",
@@ -1145,6 +1154,702 @@
         "path": "g2/build/c-firmware/20261016/main-text-stream-decision-helpers/receipt.json",
         "sha256": "2001c28ee538a180b0ac312542562201a70924731d8f8563348758fd4eb381d9"
       },
+      "text_stream_restart_bound": {
+        "path": "g2/build/c-firmware/20261016/main-text-stream-restart/receipt.json",
+        "sha256": "bc3d93ebb032c37b23bc2fc76343e302eb2ec6535dfd789fab6a230cdb62728e"
+      },
+      "text_stream_dispatch_bound": {
+        "path": "g2/build/c-firmware/20261016/main-text-stream-dispatch/receipt.json",
+        "sha256": "ed9a6d60652acd0e2a8ba3acaf4bca21263c1363d6bd6f4ef258eac0b7ae0264"
+      },
+      "text_stream_begin_bound": {
+        "path": "g2/build/c-firmware/20261016/main-text-stream-begin/receipt.json",
+        "sha256": "d33a69806a2d460a32fc373d8fcb87611ee3cdcbf8c5742be98dda96ecedab65"
+      },
+      "text_stream_finish_bound": {
+        "path": "g2/build/c-firmware/20261016/main-text-stream-finish/receipt.json",
+        "sha256": "37f0ae99436f58afb00565bf9eac9cd3f75c2ed5514037e1722d5a797ae3dda8"
+      },
+      "text_stream_schedule_bound": {
+        "path": "g2/build/c-firmware/20261016/main-text-stream-schedule/receipt.json",
+        "sha256": "20f36645b8c8e9f83915b2d8eeb0241447eeba52455468c3aff6de4528f866c3"
+      },
+      "text_stream_tick_bound": {
+        "path": "g2/build/c-firmware/20261016/main-text-stream-tick/receipt.json",
+        "sha256": "c3bdb3cbd79c41eb3ba7da47c1c8159359c6e9309b0c77f87fab7e7e644ee0a9"
+      },
+      "even_ai_app_acquire_bound": {
+        "path": "g2/build/c-firmware/20261016/main-even-ai-app-acquire/receipt.json",
+        "sha256": "aeb0b7fbc2dfacbabd5977b53c5f686203f457cf67b932e814549575668d6018"
+      },
+      "audio_app_setup_children_bound": {
+        "path": "g2/build/c-firmware/20261016/main-audio-app-setup-children/receipt.json",
+        "sha256": "3517c6ede7da46def14ad5a1c87e411a8914f9e52f0603e8f3b2412253aec4f2"
+      },
+      "audio_app_control_and_open_bound": {
+        "path": "g2/build/c-firmware/20261016/main-audio-app-control-and-open/receipt.json",
+        "sha256": "ebb38b9a498014875bb5ae127c1c4b5d2aae0c9be57d75780b2b09f458683bac"
+      },
+      "audio_app_hardware_core_bound": {
+        "path": "g2/build/c-firmware/20261016/main-audio-app-hardware-core/receipt.json",
+        "sha256": "4110531cf9b0290748665ca87c9ccb59bc4342019c5615e37434e4d96c534733"
+      },
+      "audio_app_hardware_indices_bound": {
+        "path": "g2/build/c-firmware/20261016/main-audio-app-hardware-indices/receipt.json",
+        "sha256": "fa055dfe76437dbaa52904a644111c19b0dc309908300f5c5c560a5207bec501"
+      },
+      "even_ai_sync_remote_bound": {
+        "path": "g2/build/c-firmware/20261016/main-even-ai-sync-remote/receipt.json",
+        "sha256": "96cd3366d5fc679866115c571e2e549320b9cd86d85a5426e6167e904295a20d"
+      },
+      "even_ai_ancc_display_clear_bound": {
+        "path": "g2/build/c-firmware/20261016/main-even-ai-ancc-display-clear/receipt.json",
+        "sha256": "7a855fc69a699258fe4bbe1f4c10800242dc242158bf5a94f2291ba7a3969385"
+      },
+      "even_ai_ancc_display_send_bound": {
+        "path": "g2/build/c-firmware/20261016/main-even-ai-ancc-display-send/receipt.json",
+        "sha256": "35abaab071797a291e1bebba5712d4baf5b7b34db6c847297878b7a6a1aa4d43"
+      },
+      "even_ai_ancc_state_sync_bound": {
+        "path": "g2/build/c-firmware/20261016/main-even-ai-ancc-state-sync/receipt.json",
+        "sha256": "c6a5af8aa9a7a1a34ad51469355aa0931ae3812df0796c416267d8f133de9f04"
+      },
+      "even_ai_display_ctrl_bound": {
+        "path": "g2/build/c-firmware/20261016/main-even-ai-display-ctrl/receipt.json",
+        "sha256": "16bedbf7a0552db727ffeff75058033d2173ca6f2eb06c9ab6520215dfc326ed"
+      },
+      "message_notify_common_bound": {
+        "path": "g2/build/c-firmware/20261016/main-message-notify-common/receipt.json",
+        "sha256": "d2fa6463aea823812edffc1cca8118d8a514e519c631c8010d843f435cdc25e7"
+      },
+      "message_notify_frame_bound": {
+        "path": "g2/build/c-firmware/20261016/main-message-notify-frame/receipt.json",
+        "sha256": "2e2b27a5af2858bf556ade4016db22132cccda35001097721ff6ee6b266f7ef0"
+      },
+      "message_notify_whitelist_check_bound": {
+        "path": "g2/build/c-firmware/20261016/main-message-notify-whitelist-check/receipt.json",
+        "sha256": "fd29689b1e0a0a7a6d9d46bffd3db231f409b8effc26ee81d01f1b2448cdeb76"
+      },
+      "message_notify_whitelist_ctrl_bound": {
+        "path": "g2/build/c-firmware/20261016/main-message-notify-whitelist-ctrl/receipt.json",
+        "sha256": "20eaf48e79d7ee2bc2c9c49c66ad14c78bdfbd42f4056ebc24e70785803cfb0f"
+      },
+      "message_notify_ctrl_bound": {
+        "path": "g2/build/c-firmware/20261016/main-message-notify-ctrl/receipt.json",
+        "sha256": "18b946802a10fc89d4760c0ab759b60f77f50ddfcf99ac7d78820db110613f84"
+      },
+      "message_notify_tx_common_bound": {
+        "path": "g2/build/c-firmware/20261016/main-message-notify-tx-common/receipt.json",
+        "sha256": "5e449f73052908d40a7413f58b4aec349cce704620bd5ad8399611f5273c4d71"
+      },
+      "message_notify_tx_ctrl_bound": {
+        "path": "g2/build/c-firmware/20261016/main-message-notify-tx-ctrl/receipt.json",
+        "sha256": "4f4497bcf7f0dd6129b98c71174a06b12e9fbdb0463574f9ff6aeb4ddfb40460"
+      },
+      "message_notify_tx_whitelist_ctrl_bound": {
+        "path": "g2/build/c-firmware/20261016/main-message-notify-tx-whitelist-ctrl/receipt.json",
+        "sha256": "55ece62fcb018bd82bbe5136ea2bae0238d6174d3b7a27d0012a49a47aa7878a"
+      },
+      "message_notify_tx_whitelist_check_bound": {
+        "path": "g2/build/c-firmware/20261016/main-message-notify-tx-whitelist-check/receipt.json",
+        "sha256": "afa6e54c1ce1fe6a15f14dc5d7b5d012fbc26987c4d283b0f0861a4ee5a7dff2"
+      },
+      "tracepoint_ready_word_extent_bound": {
+        "path": "g2/build/c-firmware/20261016/main-tracepoint-ready-word/receipt.json",
+        "sha256": "81093c5f3478d2c549ddec875a1d579b3d2f202374a1afdb35a94eb0c5ea9e2c"
+      },
+      "tracepoint_slave_file_list_bound": {
+        "path": "g2/build/c-firmware/20261016/main-tracepoint-slave-file-list/receipt.json",
+        "sha256": "afeaed156947c8b0f3341398149588d0060588c9c71905034d67974f9de0097b"
+      },
+      "fault_lookup_overrun_bound": {
+        "path": "g2/build/c-firmware/20261016/main-fault-lookup-overrun/receipt.json",
+        "sha256": "a2b74a05391f844a5edcde19ad48aefae799faa75d5c49a2642b360d6d3e6c5c"
+      },
+      "terminal_event_names_ram_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-names-ram/receipt.json",
+        "sha256": "acbec287c3a9e039387d2d1f9873f73eaad27ff4390f98f7a1e05c02260e64fa"
+      },
+      "terminal_ui_event_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-event-5e44f6/receipt.json",
+        "sha256": "559c3c571162033b811bf03fb0f06090d3b04ae053c3cca97d64361614ca93b1"
+      },
+      "terminal_ui_exit_sync_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-exit-sync-5e42ec/receipt.json",
+        "sha256": "972ceb4874228d8fc4f8a2786fb6c383b268e4ddd78e35827260164dd457370b"
+      },
+      "terminal_ui_stop_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-stop-5e720c/receipt.json",
+        "sha256": "b1e93bb76d85cdcba933d4b621d8e8f15154f85f2b007b66a1b44b62b7bcb753"
+      },
+      "terminal_ui_stop_result_cleanup_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-stop-e-5ec9c0/receipt.json",
+        "sha256": "6795c1d83db164c3496ffd5260272b8b9913a8700dd41c02e95ce8cfd446fe49"
+      },
+      "terminal_ui_stop_timer_cleanup_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-stop-a-5eceb2/receipt.json",
+        "sha256": "db87f88c059c9235f78c6e9c848ae702f0f976da63f3610ac0a31d621195270e"
+      },
+      "terminal_ui_object_valid_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-object-valid-43e2ea/receipt.json",
+        "sha256": "36a5d0df2b0eb526edc311244b818f5576846deaeeeec0a1f98c1e72aa96889e"
+      },
+      "terminal_ui_object_descendant_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-object-descendant-43ee54/receipt.json",
+        "sha256": "53f06b3a16537696e415c03b25dee2ac794351936cce064cb82e6280e92fafc8"
+      },
+      "terminal_list_anim_stop_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-list-anim-stop-5896b4/receipt.json",
+        "sha256": "ef6dad268e53de63e72ead7eb6c687b54a0c29479c9da2b5e06e58763deb77c4"
+      },
+      "terminal_ui_stop_timer_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-stop-timer-5e7ec4/receipt.json",
+        "sha256": "3da5a1efe30ea70e010346d5d450a9b7a6fef378808935b40b86380bc9116d5a"
+      },
+      "terminal_ui_stop_services_bcd_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-stop-services-bcd/receipt.json",
+        "sha256": "7b62f03eaa504e690680dbdfb60876cb028ccb9276b88d7cfd63befd94753eca"
+      },
+      "terminal_display_state_notify_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-display-state-notify/receipt.json",
+        "sha256": "b0a6bf9d826e59fa30b5debe8e33a15465b8a244222c4a3ab0addf1a50d3779d"
+      },
+      "terminal_ui_start_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-start-5e716c/receipt.json",
+        "sha256": "503b8c34023764ab8cb64cf7d4a955cbc2c3a20dbedf90c5d073cfdae74f3730"
+      },
+      "terminal_list_anim_init_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-list-anim-init-58966c/receipt.json",
+        "sha256": "0b441a33edf68bb58b7efddd7efa1e4a3f2f55d59c49b88047b0c5cdfc5acc91"
+      },
+      "terminal_ui_theme_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-theme-5e47cc/receipt.json",
+        "sha256": "336a3c5fffd1ee9be6d44be872988b7e27737e03c61a37703ed5f0b5b30b6588"
+      },
+      "terminal_ui_tick_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-tick-5e8008/receipt.json",
+        "sha256": "647a7894830e1847bc2f71194c7c0fb686112f8d8742e9ef4509bf6ef6402beb"
+      },
+      "terminal_ui_fsm_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-status-5e7b74/receipt.json",
+        "sha256": "6b3b9100d3a82c2f013c9b0db575a43dbacaa37b619ca43f5cdf718096e40a94"
+      },
+      "terminal_ui_fsm_names_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-fsm-names-5e7b10/receipt.json",
+        "sha256": "da5dd6f003b69e375b30e10608418f61a9f1d735a71caad9ad2e22291e332ef2"
+      },
+      "terminal_ui_asr_actions_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-asr-start-5e5a7e/receipt.json",
+        "sha256": "02d098a4a4d70ebcf4f76ef6fe7a8a6edbaa1ad2e94e714f3e76dc7a7a421380"
+      },
+      "terminal_ui_notification_restore_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-notification-restore-5ebfae/receipt.json",
+        "sha256": "6e4d4251a604727684b0b9d65f11211f8885c04bf7cc9266bc06a470c7c98eca"
+      },
+      "terminal_ui_notification_exit_actions_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-notification-exit-5e5442/receipt.json",
+        "sha256": "6d43b84856a6c31edee93685b230e962d0352d7ce9e58d3cc11fc8ea5dc1cc71"
+      },
+      "terminal_ui_payload_actions_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-payload-5e6400/receipt.json",
+        "sha256": "c6c9c8e95865583eed3bacf73b68b52a1acb81d7e6ae243e7beb5d809075fc15"
+      },
+      "terminal_elapsed_text_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-elapsed-text-5e48b8/receipt.json",
+        "sha256": "1f09147578ab1b57a68fdf4fa6f924b79e95eb79b98f93d4cfe99d696add0fef"
+      },
+      "terminal_control_flags_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-control-flags-5e4a6e/receipt.json",
+        "sha256": "020076eb4d2f279a89df42f0f6c217dc548d194f0db9dbb97dedc8fea83927bb"
+      },
+      "terminal_output_start_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-output-start-5e4920/receipt.json",
+        "sha256": "52293c21274a11a8e12861498c8673d2338bb77714cadc8edd5c6380a5ec9b93"
+      },
+      "terminal_processing_hide_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-processing-hide-5e4878/receipt.json",
+        "sha256": "aca54591c7e4e578db37c7ceacf47ccaea94cf764d5272eba1c610d518e5afb6"
+      },
+      "terminal_processing_prepare_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-processing-prepare-5ea30c/receipt.json",
+        "sha256": "635db08180407f3b059360f47043ffcd8c72d85fcf4de2f3fddbd38bd04a8851"
+      },
+      "terminal_elapsed_refresh_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-elapsed-refresh-5e4902/receipt.json",
+        "sha256": "ad4d37202022138e74961f9f457fe682ffa002ddc5921caa8654832c9927a772"
+      },
+      "terminal_elapsed_clear_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-elapsed-clear-5e4894/receipt.json",
+        "sha256": "9245740da4ce864f991c88c7164d0745ee99d11ee1f1d6f5f8d49f01736731ae"
+      },
+      "terminal_set_output_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-set-output-5e49b0/receipt.json",
+        "sha256": "3bce597af43b1fccaf63ef72bb584c403a4d6ce4f475a59c28607a567b8f1677"
+      },
+      "terminal_output_ram_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-output-ram-cells/receipt.json",
+        "sha256": "463552edecb2f58d88cfcb674eff1a5945c57934798f45ebb8a17cd625d88fe8"
+      },
+      "terminal_label_style_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-set-label-style-5e482a/receipt.json",
+        "sha256": "8815388294822a99e8bbe2144c365d72da2dfcf8a12893ddc14c8a7ffafa2dc2"
+      },
+      "terminal_output_mode_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-select-output-mode-5ea2a8/receipt.json",
+        "sha256": "531d61e1ed04d741166777abf1cc3e30dfca8e8609710db298ada9ed440a9225"
+      },
+      "terminal_query_dismiss_action_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-dismiss-query-5e68b4/receipt.json",
+        "sha256": "8cd10b6317a18b6dca1d3b022dd29f0afcf378e4beb7f0a6d24896508c8a2358"
+      },
+      "terminal_status_action_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-status-5e7022/receipt.json",
+        "sha256": "d4e004ded5ac0fbc761bfe4f83784c0031a90c400de136e14ed5fb58189bad29"
+      },
+      "terminal_reset_pair_actions_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-reset-pair-5e5290/receipt.json",
+        "sha256": "adbd1ad15f141e97e78d42a90f24308111b5e5a3e293b120804fd328d1a93643"
+      },
+      "terminal_reset_mode_display_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-reset-mode-display/receipt.json",
+        "sha256": "14aec3d26477e4141d31768af7c8af159c5d71880b326541784b4c04b1a24ef8"
+      },
+      "terminal_mode_set_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-mode-set-5eae1e/receipt.json",
+        "sha256": "a6cf7def9f67b738bcc799e4bd648fa008855c3285d780568293a97eda408d75"
+      },
+      "terminal_event_emit_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-emit-5eadd4/receipt.json",
+        "sha256": "b4d8d3fc9570971941871e76ce6c5e30a3759258c90c5841977e7659febdcf2a"
+      },
+      "terminal_event_type4_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-type4-5ea9f6/receipt.json",
+        "sha256": "4fb9c2705f229248e3ad3ab0adaa4b7badd87caf021e70d300aba06ae631f6d6"
+      },
+      "terminal_event_reset_list_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-reset-list-5ea7dc/receipt.json",
+        "sha256": "eed805543cb5dcd10979364104cc6a9de1161a4bc8c73d74d7de4c44a8a2671c"
+      },
+      "terminal_event_refresh_view_staged": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-refresh-view-5ea992/oracle-receipt.json",
+        "sha256": "5144a60d11f584795072d0e4b44b1763e521d9ade0e6140b888c0b7e15c20156"
+      },
+      "terminal_event_select_input_staged": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-select-input-5eaa54/oracle-receipt.json",
+        "sha256": "47b0ba505ec6e544b9cc9e8f3b9c16946f77f579017e91f368bbc8cf8f178291"
+      },
+      "terminal_event_apply_input_staged": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-apply-input-5eaa96/oracle-receipt.json",
+        "sha256": "699b6c270de76980d62f9a0bfb79e130ca81658f80afefb16c080701178a1b53"
+      },
+      "terminal_event_default_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-default-5eaad4/receipt.json",
+        "sha256": "ff142bbc5d0260bb6d84f298b6f1b25c4a74d49b28483d2f34fef8862dffc407"
+      },
+      "terminal_event_select_input_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-select-input-5eaa54/receipt.json",
+        "sha256": "54bc41ec0aaab4996e95e5c4c6183efb26b483bed1ab275d7a853363f1c66c28"
+      },
+      "terminal_event_apply_input_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-apply-input-5eaa96/receipt.json",
+        "sha256": "cf24750b7365b256063352a87caff1d53d4a82e4fc31bcff40ef3a27866eb102"
+      },
+      "terminal_event_refresh_view_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-refresh-view-5ea992/receipt.json",
+        "sha256": "bb228fcc23f58b2d1d7dbfcd92a81aed07f88e2ec0439aaa486f4feb079301b0"
+      },
+      "terminal_recompute_offsets_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-recompute-offsets-5ea6da/receipt.json",
+        "sha256": "610b9a21f83b972997bdf7958d9e2ce574b3f3e64abdcb4a093b338747d75f81"
+      },
+      "terminal_resource_items_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-resource-items-597324/receipt.json",
+        "sha256": "ebde9fa541bb09a8367a2bcd2735a04ba3cfff92837d9af18fb08b3ada291556"
+      },
+      "terminal_view_position_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-view-position-5ea926/receipt.json",
+        "sha256": "189625bc0fabecfddb6fbabc4284eef7c06f4f2b975023f59ccb69c92d59f326"
+      },
+      "terminal_view_index_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-view-index-5ea8ce/receipt.json",
+        "sha256": "bae0faec88cbf76c0b454652c82261b041ffefba2b8f1947ea0fd798d636e813"
+      },
+      "terminal_position_index_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-position-index-5ea868/receipt.json",
+        "sha256": "549ba9483406d0b9711bd4297d73dd3906efe7d2651687482207ac9c74565328"
+      },
+      "terminal_view_select_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-view-select-5ea810/receipt.json",
+        "sha256": "95ee57acdc86155d403b686f3fdd625967fd1c71592d8880b2f7016ef21d0d14"
+      },
+      "terminal_view_row_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-view-row-5ea768/receipt.json",
+        "sha256": "122819577990ac4a2c747ade31985bbe962e02deeaec2066ff83dfdc6523f092"
+      },
+      "terminal_lv_existing_aliases_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-lv-existing-aliases/receipt.json",
+        "sha256": "6cbc0056dd58f9e85824fd6adfc683faf9d34bde4f318bda8fa478195eea2762"
+      },
+      "terminal_item_height_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-item-height-5ea67a/receipt.json",
+        "sha256": "4456fb27acd6f1e1a4d00b9f002c9f8f5ee990549d4788a8a8636a07d47205b1"
+      },
+      "terminal_item_spacing_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-item-spacing-5ea2c2/receipt.json",
+        "sha256": "66199a9a23bfcbd613615bfc5bd1087de8e389ff28d5d0e8673fbc78e1c48c8d"
+      },
+      "terminal_row_bind_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-row-bind-5ea564/receipt.json",
+        "sha256": "f6376207754c901cf63b96d03c6947a47cc7c36889bb6c0f921727a145b46111"
+      },
+      "terminal_row_existing_aliases_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-row-existing-aliases/receipt.json",
+        "sha256": "ff6f5df6d4df1701ff71091e1537e3934221121662bbc1a44384f905be4a4916"
+      },
+      "terminal_row_children_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-row-children-5ea2b0/receipt.json",
+        "sha256": "194c8fd4ef436f04435adaa98f7d071ccc92c3d1a54a8a494732671247b61e0b"
+      },
+      "terminal_row_image_hint_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-row-image-hint-5ea4f0/receipt.json",
+        "sha256": "795867ec44e394823b3e0e5a6ed1823b5ce2cd93b888008b2f61de03eb1a0353"
+      },
+      "terminal_event_type2_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-type2-5eabde/receipt.json",
+        "sha256": "a4a09b75cc65dfce5fc86f0aced8adddff6e88ada6c2ff282f1791a8193fb691"
+      },
+      "terminal_type2_children_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-type2-children/receipt.json",
+        "sha256": "186cfb04054ddcc5884ded18fd283dbfbe727ac49e9db486d3791877cd09bf63"
+      },
+      "terminal_event_type3_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-event-type3-mask-5eaca0/receipt.json",
+        "sha256": "ce446fbe5f33ca075047b9d9048261aa38106e73765a5bef07bf0f92f95ed990"
+      },
+      "terminal_reset_first_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-reset-first-5e51ba/receipt.json",
+        "sha256": "1a12e99006d7adcdfdad7cef7f1e3ba3d873712e883a4d7bbcb6c2ffdc4e1788"
+      },
+      "terminal_reset_ancillary_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-reset-ancillary-5e65f8/receipt.json",
+        "sha256": "fddc795631f53702068110b768555b56245fc72feef0271d20ce98394bf1bb36"
+      },
+      "terminal_reset_preclear_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-reset-preclear-5e7f26/receipt.json",
+        "sha256": "607c7d6160e9355b90e11cc44c5c7dc4925749edb55ca77509ea88d6839272d0"
+      },
+      "even_ai_app_release_bound": {
+        "path": "g2/build/c-firmware/20261016/main-even-ai-app-release/receipt.json",
+        "sha256": "dccc2fb6e4259b29b94db28b1ee020cb8ec2c8d338335839c59b4715169716d8"
+      },
+      "terminal_reset_subtree_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-reset-subtree-5ea342/receipt.json",
+        "sha256": "b40c06c0904090580e6383e457e3689e908ec636e4163d573550429a5fa89d74"
+      },
+      "terminal_reset_subtree_children_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-reset-subtree-children/receipt.json",
+        "sha256": "f598cd2ffb70748a6bbb8db544c0826664a665d38106501a53ea0fc399628ebe"
+      },
+      "terminal_ui_restore_query_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-restore-query-5e6620/receipt.json",
+        "sha256": "a95ff5369ea84e054d8f62e3811be6600fff393465ff7dab3b1c41e492aff47a"
+      },
+      "terminal_ui_action_5e57c6_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-5e57c6/receipt.json",
+        "sha256": "3aae8aeb7de6a59c7806a153614f60fe306b07891450cb484927c566cb63f0cd"
+      },
+      "terminal_image_set_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-image-set-5e47fe/receipt.json",
+        "sha256": "18c86f002d977be21fed379220932b566bf383a90670adbcada4f5244f7b4859"
+      },
+      "terminal_display_status_alias_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-display-status-alias-44ea04/receipt.json",
+        "sha256": "97f3e66e3857185665d594f7afdde74a14f12004eb586c2ef6852ecf80496f52"
+      },
+      "terminal_ui_disconnect_actions_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-disconnect-actions/receipt.json",
+        "sha256": "3f4c7a3bad295e2263b1656f2f3dafb480ffe8e6ed1f3483dfdac5994ed98f9e"
+      },
+      "terminal_ui_action_5e583c_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-5e583c/receipt.json",
+        "sha256": "52e389d25eadb2ee4b7ad0b9a3fa7cd14f1ff7008ea479b299e2daee58caf98c"
+      },
+      "terminal_output_style_assets_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-output-style-assets/receipt.json",
+        "sha256": "d6bdf3129719da9a95551cd89be1e0c26c5440aac40e84b39279cdae196cb598"
+      },
+      "terminal_ui_action_5e54a2_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-5e54a2/receipt.json",
+        "sha256": "40977f3944d102c1c0a07db4775f11ac60f2ee5e0e65717fa3cf0537a9944310"
+      },
+      "terminal_ui_action_5e576c_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-5e576c/receipt.json",
+        "sha256": "cddf55d4f057bd7bc9fd67362409ce4b434bc646213827dfb813b8d6a8bbe4d1"
+      },
+      "terminal_display_fallback_adapter_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-display-fallback-adapter-5ecafa/receipt.json",
+        "sha256": "a560ca4a7876277f5036c25ef74c0c114262fe96faaa8cb183cd1e4b5797e81e"
+      },
+      "terminal_ui_action_5e63b4_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-5e63b4/receipt.json",
+        "sha256": "d5095ebbb5188b74019312ba8a7c22787e336044c6bd6c4101627d2e551107bc"
+      },
+      "terminal_ui_scroll_actions_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-scroll-actions-5e6dd0-5e6e30/receipt.json",
+        "sha256": "6bf60f33a452886598c4fe8cacb6e80cc8dfb41df8691e338671e53987cfe632"
+      },
+      "terminal_ui_action_defer_query_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-defer-query-5e6d58/receipt.json",
+        "sha256": "f9b8cd46f62bce7baaa7fbac7b5de43163dd339f54239b3a828078b8b1cb7d74"
+      },
+      "terminal_notify_status_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-notify-status-5ec190/receipt.json",
+        "sha256": "8d8d0274761421e457696df4ec79d02cc6139fd0bf42f774356578f0cbbb2ea7"
+      },
+      "terminal_status_layout_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-status-apply-layout-5ebc9e/receipt.json",
+        "sha256": "5eb4e824b49dfceb9d6c54ce81e6f7bb572de18546923210f09fa5984dfd8be8"
+      },
+      "terminal_status_publish_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-status-publish-5e5498-5cf134/receipt.json",
+        "sha256": "20dff1c318b38fab19cc4e5c21503bc49b37f58c6d1ed58da1b0948976a35aef"
+      },
+      "terminal_interrupt_confirm_scroll_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-interrupt-confirm-scroll-5e6cb8/receipt.json",
+        "sha256": "a7eae61171162f91570094f47cb7fdf40e79635084f425ae6609686ce680acbc"
+      },
+      "terminal_status_list_layout_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-status-apply-list-5ec3c0/receipt.json",
+        "sha256": "fdd5294289fa4b6bf4f190755f88a3e70957f3298ec83081307745b01cec3871"
+      },
+      "terminal_interrupt_confirm_show_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-interrupt-confirm-show-5e6b18/receipt.json",
+        "sha256": "579cf20b4aed34a1abd0d2751d777b3fe5d05b0e2d6b7a2371ec4907c4d48880"
+      },
+      "terminal_interrupt_confirm_cancel_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-interrupt-confirm-cancel-5e6ba0/receipt.json",
+        "sha256": "37db3b6197f2597a23a5c5ca0a78a44517e05e58e7d09137105feca1b6667c1f"
+      },
+      "terminal_new_session_success_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-new-session-success-5ed870/receipt.json",
+        "sha256": "07d965393094c6c950960afcf935e9dda12ab38408fc14ce3309e9e72ea7308b"
+      },
+      "terminal_query_notification_switch_result_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-query-notification-switch-result-5e68dc/receipt.json",
+        "sha256": "88a6f247c764b3ef719863e42840d039d48e8da42af6dfb3532e255f741dbc32"
+      },
+      "terminal_query_scroll_actions_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-query-scroll-actions-5e6e88-5e6f60/receipt.json",
+        "sha256": "3ab1c41976c00ba33acc1acf82630797677799a30d93ae9ea1f2227ea5375275"
+      },
+      "terminal_query_layout_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-layout-5ebb96/receipt.json",
+        "sha256": "80e4646187d70b985156dce79ea607a6e690f6bb42bf8f70ffade288ad370ea0"
+      },
+      "terminal_query_items_style_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-items-style-5eb3c6/receipt.json",
+        "sha256": "45f73c785bf32721b315007f847a3d363ab9662c457268e6b86b4eeb80059706"
+      },
+      "terminal_query_indicator_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-indicator-5eb322/receipt.json",
+        "sha256": "f9b8af743205d52a675b3c0f20ef188325d63ad63ce48e8dff0346454eedd527"
+      },
+      "terminal_session_list_scroll_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-session-list-scroll-5ed492/receipt.json",
+        "sha256": "3bf9d08fbe411688c348a7772ca6eb8848c1c5cac8d559be6642dc473807be73"
+      },
+      "terminal_session_select_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-select-5ecc1a/receipt.json",
+        "sha256": "f2990552d26e2424f14eb2b6f95695baac7b12c23f08841d65488697b181db71"
+      },
+      "terminal_session_focus_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-focus-5ecbea/receipt.json",
+        "sha256": "39356693b1805492545b3a973d3e03c57dfb8bc580b2bfe6842c65d21842df54"
+      },
+      "terminal_session_apply_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-apply-5ecb88/receipt.json",
+        "sha256": "f28731f3e0cdc6d69952fd407e34f431d2dffb6eca35ea574cf04df73673d88a"
+      },
+      "terminal_session_row_style_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-row-style-5ecb08/receipt.json",
+        "sha256": "a14b0248e216cfc73c46866f4c551ec35dc2c8800a3361aa759dce684a0d13f2"
+      },
+      "terminal_list_anim_add_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-list-anim-add-5896fc/receipt.json",
+        "sha256": "92e7f196416ef77ef74a3ac2f3eafdf4d6e014a45985a5eb3c300dbf6489e2d3"
+      },
+      "terminal_list_anim_process_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-list-anim-process-58956e/receipt.json",
+        "sha256": "62027f1d7e92499455e9d9e64e5bbebc362cd6a519bd773fbea84955d8eb83da"
+      },
+      "terminal_list_anim_new_prepare_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-list-anim-new-prepare-5894d6/receipt.json",
+        "sha256": "e85375da18284dca1b1d94daf2d87653d2046efb4da6a3079012df8ed386c69b"
+      },
+      "terminal_list_anim_fade_start_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-list-anim-fade-start-58c622/receipt.json",
+        "sha256": "3bae0e04b5c75dee4abaee72a01c25601d32ab32d04474f2332b3d528fa8c76d"
+      },
+      "terminal_list_anim_path_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-list-anim-path-450688/receipt.json",
+        "sha256": "e7e13eee66b848d8858fdd45498345e213c0cc849cf3f3feba999572ecee455e"
+      },
+      "terminal_session_row_visibility_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-session-row-visibility-5897ee/receipt.json",
+        "sha256": "b115de6525de214f938e44a018b4f0cd44a90933fd2a6969d0450ad9cda79111"
+      },
+      "lv_image_class_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-image-class-756108/receipt.json",
+        "sha256": "e14f520161edaa04ae18d0343155b9acfe1d03ccc31ee1909e8db464e9625384"
+      },
+      "lv_image_lifecycle_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-image-lifecycle-498bd0/receipt.json",
+        "sha256": "454d3cbdb1e2d7e07610b46deea568878ba8cc626092155a99be3a9ab53c2249"
+      },
+      "terminal_button_fade_callback_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-button-fade-callback-58c138/receipt.json",
+        "sha256": "18a24ded8232468020ca079596e6187e9d527213ad539fb38df94a1f29c22c77"
+      },
+      "lv_image_event_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-image-event-498c9c/receipt.json",
+        "sha256": "da56e2da4dc9eaec206fc36a6c98a7fe1980842bb00bdf18bc12d8f344b64bd9"
+      },
+      "lv_click_area_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-click-area-4408b0/receipt.json",
+        "sha256": "0e77cfdbb48d0f8805ae873061f9a5414dcdfd1e35f15bf5ac7a81b2b2ed7eb2"
+      },
+      "lv_image_draw_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-image-draw-498ec0/receipt.json",
+        "sha256": "791e0b270ccebc5b15e84e83349cd5710102be76cf2076b63d8541b9994ecee5"
+      },
+      "lv_image_style_accessors_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-image-style-accessors-498634/receipt.json",
+        "sha256": "256f33e257022158fb1185842a2da607e58636820c0412775b574b06ac318c09"
+      },
+      "lv_image_dsc_init_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-image-dsc-init-452a34/receipt.json",
+        "sha256": "544a78a97ce5815cc1324f7cb672434fa691d5b85c5caa02880a367fa15685d6"
+      },
+      "lv_image_style_fields_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-image-style-fields-4524a4/receipt.json",
+        "sha256": "ba73d4a6546bd5ea25be07c93a56b5665331391e07172dc6253fb6f992405e4e"
+      },
+      "lv_draw_image_scheduler_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-draw-image-488a38/receipt.json",
+        "sha256": "3fa4fa9c9022214925f41c50ace81fc2ffc0e39c1c859a84144f50f465fb6e7c"
+      },
+      "terminal_label_text_alias_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-label-text-alias-49942e/receipt.json",
+        "sha256": "e444faa9dd673a02b0e479ad552aae1cd2e466f9184bdb693895d9b2a6af6f32"
+      },
+      "terminal_label_text_fmt_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-label-text-fmt-49954c/receipt.json",
+        "sha256": "a450f4ad1cf13f73e40fd87a2c810be803556865ff4b3399d71e7bc34d223dd0"
+      },
+      "lv_label_vprintf_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-label-vprintf-489ad2/receipt.json",
+        "sha256": "756ddb0e773df7b90065b00db30e89a0e17a9ce3fb902dd344b30031f689b810"
+      },
+      "label_fatal_paths_oracle": {
+        "path": "g2/build/c-firmware/20261016/main-label-fatal-paths/oracle-receipt.json",
+        "sha256": "a2c63b1a9140999b5bbb56c830bbb08fc23c92a588e54ca56123b3dd49b6d186"
+      },
+      "terminal_clear_flag_alias_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-clear-flag-alias-43dfa4/receipt.json",
+        "sha256": "35f9af68716c700e14c9fd08da285b841638a5bb8a775d725e0f737fbfb58625"
+      },
+      "terminal_object_abi_aliases_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-object-abi-aliases/receipt.json",
+        "sha256": "b8f68fa8c7336f8c99f98a1190d26af97a6df92da909abe9fd02fb44e275378c"
+      },
+      "lv_animimage_bound": {
+        "path": "g2/build/c-firmware/20261016/main-lv-animimage-597ea6/receipt.json",
+        "sha256": "613ff0f420f4906acbf3350221a684b00c19b7a3045e579162aebbef6c38d4d9"
+      },
+      "terminal_query_notification_show_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-notification-show-5e6548/receipt.json",
+        "sha256": "b0e515618dc901a002be454fc5c59c7ebeb78494c510b979da98367667fd274f"
+      },
+      "terminal_counter_b_alias_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-counter-b-alias-5973dc/receipt.json",
+        "sha256": "2feaaf2ca0883497fb647bc6587ca933f20c1bce1f51147eec8d066b5b531b7d"
+      },
+      "terminal_query_session_name_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-session-name-5ec7f0/receipt.json",
+        "sha256": "a7d86267efbbf659dad56912e7f16fa3b9cf431c5967c3b6bf29ea06044639ba"
+      },
+      "terminal_query_visibility_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-visibility-5ec82a/receipt.json",
+        "sha256": "98064e1b9c5254f7b5558b207b937800bd9a839678dacc770e23fdc5d983861c"
+      },
+      "terminal_query_style_setters_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-style-setters/receipt.json",
+        "sha256": "d63f90481e40858f3c1e70539dc913f610f596a0e83a9409ccfc6a15ec95d01a"
+      },
+      "terminal_query_root_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-query-root-5e4f54/receipt.json",
+        "sha256": "d76e17988e474cb8784bf548ad441b5f7b8f5e796f7174c73b1ed03cdb8a510d"
+      },
+      "terminal_voice_start_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-voice-start-5e58ba/receipt.json",
+        "sha256": "648224879a060db53c924189c53f3aadc48ef62876ce40680721b55ec25ad043"
+      },
+      "terminal_voice_prepare_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-voice-prepare-5ebd0e/receipt.json",
+        "sha256": "8949b24e1e874f2fe8d1871bf7b73ded8ea97f4a684949e5fc227d1b8f6bbcc4"
+      },
+      "terminal_voice_anim_factory_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-voice-anim-factory-597e90/receipt.json",
+        "sha256": "e80f63e7b5f9d2a3b0c57b0e8443db2f479f8dd324b33f595b71bb56cb2e5af8"
+      },
+      "terminal_voice_anim_children_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-voice-anim-children/receipt.json",
+        "sha256": "e8dede7a0b721599cc2050dacde629dd338539c860d495d102fd2aaa9cde3611"
+      },
+      "terminal_voice_frames_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-voice-frames-200014e8/receipt.json",
+        "sha256": "fbd859d7f4e275f394a4d8fd65809bdf1be94dec7eeb0a501212a8aaa3e83edc"
+      },
+      "terminal_voice_stop_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-voice-stop-5e598a/receipt.json",
+        "sha256": "2a51542d0641ae59ea707713fc499d68eb5cf98f89b2ed20caccb861fcb914da"
+      },
+      "terminal_asr_final_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-asr-final-5e5aae/receipt.json",
+        "sha256": "2c279737e39918d7e398ce1c90ea8a5058f475ca5d224f8097f6e0d93c1dc51b"
+      },
+      "terminal_result_area_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-result-area-5ebff8/receipt.json",
+        "sha256": "8b44aa0272e2b99ed160c94de6201483d20d4641df463af7721d30f8517e2e79"
+      },
+      "terminal_input_confirm_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-input-confirm-5e5bc6/receipt.json",
+        "sha256": "47484320fc83c458b9c8a1dc7855ca32329088290dca9f15c3fbf6aadbc7fafc"
+      },
+      "terminal_input_cancel_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-input-cancel-5e5cb0/receipt.json",
+        "sha256": "5b1f67fa54078032d84fabfb2e06087608c0c041469d3a0cb482c5de5998a56b"
+      },
+      "terminal_asr_fail_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-asr-fail-5e5de0/receipt.json",
+        "sha256": "f84666c4a69ce3735c3b6f427dab06b70425026f0d3c87cb1530e4c80bde3e57"
+      },
+      "terminal_agent_reset_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-agent-reset-5e5ed4/receipt.json",
+        "sha256": "1390efeaa22b9f2dca67fec58e442bd946905861f8a5d80b9360632735db78cc"
+      },
+      "terminal_agent_interrupt_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-agent-interrupt-5e7068/receipt.json",
+        "sha256": "62f866f6fcc627d2cec8be1d713b7b09ec8656d3cbcbce1a3bb164fdf8aa9760"
+      },
+      "terminal_session_status_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-session-status-5e6018/receipt.json",
+        "sha256": "538b168a292ea0c92a8ca08e159b0f80c4cc45adf3d7fba3eae9cabe59eb5bec"
+      },
+      "terminal_agent_done_bound": {
+        "path": "g2/build/c-firmware/20261016/main-terminal-ui-action-agent-done-5e6268/receipt.json",
+        "sha256": "4f5abdc413358d189ac71c4399b257e5c3d46c940fbd39da86c423a422676acf"
+      },
       "settings_last_message_ram_extent": {
         "current_source_receipt": {
           "path": "g2/build/c-firmware/settings-live-buffers-round1007/receipt.json",
@@ -1154,7 +1859,7 @@
         "required_minimum_bytes": 104,
         "integrated": true
       },
-      "unresolved_count": 175,
+      "unresolved_count": 176,
       "unresolved_symbols": [
         "audio_ble_att_table_main",
         "audio_ble_att_table_secondary",
@@ -1183,19 +1888,22 @@
         "audio_ble_vendor_cycle_delay_rom_00000040",
         "audio_ble_vendor_stack_rows_2003b558",
         "audio_ble_whitelist_info",
-        "audio_even_ai_ancc_state_sync_497cf0",
-        "audio_even_ai_app_acquire_54f380",
-        "audio_even_ai_display_ctrl_4e1fd2",
-        "audio_even_ai_sync_remote_4973f4",
-        "audio_fault_unmapped_code_message_509b48",
         "audio_file_lfs_context",
         "audio_registry_ring_connect_buffer",
         "audio_registry_ring_connect_parse_5ce990",
         "audio_setting_handle_command5_46bbb4",
-        "audio_terminal_event_names",
-        "audio_text_stream_dispatch_552df0",
-        "audio_text_stream_restart_552db2",
-        "audio_tracepoint_handle_slave_file_list_5eeb98",
+        "audio_terminal_fsm_prepare_5eae94",
+        "audio_terminal_interrupt_confirm_prepare_5ec446",
+        "audio_terminal_ui_action_5e5580",
+        "audio_terminal_ui_action_5e641c",
+        "audio_terminal_ui_action_5e66d8",
+        "audio_terminal_ui_action_5e69a0",
+        "audio_terminal_ui_action_5ed208",
+        "audio_terminal_ui_action_5ed318",
+        "audio_terminal_ui_action_5ed4f8",
+        "audio_terminal_ui_action_5ed758",
+        "audio_terminal_ui_action_5ed8e0",
+        "audio_terminal_ui_state_base",
         "audio_uart_ambiq_draw_arc_53f09c",
         "audio_uart_ambiq_draw_border_53df00",
         "audio_uart_ambiq_draw_box_shadow_540036",
@@ -1244,7 +1952,6 @@
         "audio_uart_registry_callback_4c5dbc",
         "audio_uart_registry_callback_4e1192",
         "audio_uart_registry_callback_4e1490",
-        "audio_uart_registry_callback_4e1b30",
         "audio_uart_registry_callback_4e1dd4",
         "audio_uart_registry_callback_4e2c40",
         "audio_uart_registry_callback_4ffca2",
@@ -1257,7 +1964,6 @@
         "audio_uart_registry_callback_59f236",
         "audio_uart_registry_callback_5b0476",
         "audio_uart_registry_callback_5b06aa",
-        "audio_uart_registry_callback_5e44f6",
         "audio_uart_registry_callback_5f958c",
         "audio_uart_registry_callback_5f9924",
         "audio_uart_registry_callback_5f9ce0",
@@ -1335,7 +2041,7 @@
       "source_complete": false,
       "full_payload_linked": false,
       "remaining_gate": [
-        "175 current imports; the dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
+        "176 current imports; agent-done FSM action is C-bound after 75 controlled stock comparisons. Session-status FSM action is C-bound after 1920 controlled stock comparisons. Agent-interrupt FSM action and its one-byte packet encoder are C-bound after 25 and 15 controlled stock comparisons. Agent-reset FSM action is C-bound after 75 controlled stock comparisons. ASR-failure FSM action is C-bound after 75 controlled stock comparisons. Input-cancel FSM action is C-bound after 150 controlled stock comparisons. Input-confirm FSM action and its two TD children are C-bound after 25, 216 and 60 controlled stock comparisons. Terminal result-area constructor 0x5ebff8 is C-bound after 48 controlled cases, with exact source-owned 16x16 icon bytes. Terminal voice-stop action and processing-label helper are C-bound after 100 and four controlled stock comparisons. ASR-final action and timeout-stop helper are C-bound after 150 and 15 controlled comparisons; Terminal query session-name lookup, visibility constructor, two LVGL style wrappers and root constructor are C-bound after 120, 32, 48 and 30 controlled cases, with exact source-owned icon bytes. Terminal voice-start action and timeout child are C-bound after 25 and 24 controlled cases with exact source-owned voice icon. Voice-prepare constructor, five style wrappers, animimage class/factory, constructor and frame callback are C-bound after 16, 80, 3, 12 and 36 controlled cases. The stock scatter-executed 19-frame voice style table at RAM 0x200014e8 and its exact 4864 pixel bytes are C-owned with a bounded placement fragment; complete main scatter/linker integration remains open. LVGL effects and final object graph remain open. Terminal UI callback, exit-sync, teardown, result-area cleanup and timer/object cleanup are C-bound after 224, 16, 9, 12 and 27 controlled stock comparisons. LVGL object membership 0x43e2ea and recursive descendant 0x43ee54 are C-bound after 144 and 60 controlled cases. List animation deinit 0x5896b4 is C-bound after four controlled cases with its 0xd0-byte state at observed RAM 0x20070ea8. Terminal timer clear 0x5e7ec4 is C-bound after four controlled cases with its 0x18-byte state at observed RAM 0x20073c38. Terminal UI start 0x5e716c, its list animation initializer 0x58966c and theme wrapper 0x5e47cc are C-bound after 9, 4 and 4 controlled cases. Terminal tick 0x5e8008 and its deadline, voice-input and elapsed-record children are C-bound after 96, 252, 24 and 160 controlled cases. Terminal status FSM 0x5e7b74 and its exact 4160-byte dispatch table at 0x650430 are C-bound after 775 controlled cases. This exposes 50 distinct action callback targets, of which ten actions are now C-bound: two ASR actions after 54 controlled cases, two exit actions after 108 controlled cases, two payload actions after 48 controlled cases query-dismiss action after 160 controlled cases status action with its two payload helpers after 72 controlled cases and two reset actions after 32 controlled cases, with notification-restore, LVGL scroll and fade-out children C-bound after 24, 18 and 300 controlled cases; the two FSM name lookups are C-bound after 2048 controlled cases with source-owned RAM pointer slots at 0x20003ea4 and 0x20003edc, while the other 21 callback bodies and name RAM initialization remain open. Reset mode 0x5eae2c and display 0x5e4c84 are C-bound after 31 controlled cases; mode-set wrapper 0x5eae1e and event emitter 0x5eadd4 are C-bound after 25 and 144 controlled cases. Event type 4 child 0x5ea9f6 and its list-reset child 0x5ea7dc are C-bound after 12 and 48 controlled cases. Default event child 0x5eaad4 and its input selector, input application and view refresh children are C-bound after 96, 36, 36 and 48 controlled cases; its offset recomputation child is C-bound after 128 controlled cases; resource pointer and ring item lookup are C-bound after 120 controlled cases using the existing Terminal-data RAM owner; view-position child 0x5ea926, view-index child 0x5ea8ce and position-index search 0x5ea868 are C-bound after 144, 84 and 330 controlled cases; view-select child 0x5ea810 and row-update child 0x5ea768 are C-bound after 240 and 320 controlled cases; row LVGL flag, clear-flag and position calls reuse existing C-bound providers through three ABI adapters; item-height child 0x5ea67a is C-bound after 96 controlled cases using the existing 0x200746dc font-pointer cell; spacing child 0x5ea2c2 and row text/image binding 0x5ea564 are C-bound after 8 and 128 controlled cases; sixteen of the nineteen row-binding child imports reuse existing C-bound stock-address providers through ABI adapters; Terminal image-y 0x5ea2b0, row-color 0x5ea2f2 and row-image 0x5ea524 children are C-bound after 600 controlled cases; image-hint 0x5ea4f0 is C-bound after 216 controlled cases; event type-two 0x5eabde and its last-record 0x597350 and rollover 0x5eab8e children are C-bound after 288 and 48 controlled cases; type-three indexed event 0x5eaca0 is C-bound after 2048 controlled cases; reset prelude 0x5e51ba, ancillary reset 0x5e65f8 and voice-timeout preclear 0x5e7f26 are C-bound after 156, 32 and 96 controlled cases, with audio-manager app release 0x54f50e C-bound after 560 controlled cases; reset subtree 0x5ea342 and its style/image-Y children are C-bound after 48 and 23 controlled cases, with both stock image descriptors, 1341 image bytes and the 68-byte welcome text source-owned; query restore 0x5e6620, its return-to-input action 0x5e57c6 and image-set child 0x5e47fe are C-bound after 320, 96 and 12 controlled cases; display-status 0x44ea04 reuses the existing C-bound scroll-to-Y provider after a fresh 80-case stock oracle; four Terminal disconnect FSM actions 0x5e522e, 0x5e52c2, 0x5e5320 and 0x5e53b8 are C-bound after 512 stock comparisons with their 256-byte icon and texts source-owned; processing-response action 0x5e583c and event-34 routing action 0x5e54a2 are C-bound after 96 and 336 stock comparisons; BLE display-request action 0x5e576c is C-bound after 336 comparisons while its prepare child remains open and fallback reuses the C-bound current-session index; packed event-word action 0x5e63b4 is C-bound after 48 stock comparisons; paired scroll/status actions 0x5e6dd0 and 0x5e6e30 are C-bound after 320 stock comparisons, with notification parent 0x5ec190 C-bound after 120 stock comparisons and its layout child 0x5ebc9e and overlay-focus publication 0x5e5498/0x5cf134 C-bound after 480 comparisons each; interrupt-confirm scroll 0x5e6cb8 and its toggle child 0x5ec73c are C-bound after 1920 cases, with the list-style and indicator-layout child 0x5ec3c0/0x5ec34e C-bound after 1536 cases; interrupt-confirm-show action 0x5e6b18 is C-bound after 192 cases while its UI constructor 0x5ec446 remains open; interrupt-confirm-cancel action 0x5e6ba0 is C-bound after 192 cases with its cleanup child already source-owned; new-session success action 0x5ed870 is C-bound after 192 cases through its existing event, reset, cleanup and input-return providers; query-notification switch-result action 0x5e68dc is C-bound after 384 cases through its existing restore-query provider; paired query-scroll actions 0x5e6e88/0x5e6f60 are C-bound after 960 cases, with their query-layout child 0x5ebb96 C-bound after 64 cases; item-style child 0x5eb3c6 and its count provider 0x5eb30c are C-bound after 444 cases, with indicator child 0x5eb322 and font offset 0x5eb2ee C-bound after 487 cases; session-list scroll action 0x5ed492 is C-bound after 384 cases and its selection, count, validity and object-lookup subtree 0x5ecc1a/0x5eca48/0x5eca64/0x5ecb52 after 626 cases; session focus 0x5ecbea, ListFocus wrapper 0x5e5490 and protobuf encoder 0x5cf0ba are C-bound after 360 cases, direct-apply 0x5ecb88 after 192 cases and row-style 0x5ecb08 after 42 cases; list-animation elapsed 0x5893f0, timeout poll 0x5893fe and queue add 0x5896fc are C-bound after 304 cases; queue processor 0x58956e and completion callback 0x58949e are C-bound after 312 controlled cases; new-object preparation 0x5894d6 is C-bound after 384 controlled cases; old/new button fade start children 0x58c6c4/0x58c622 are C-bound after 600 controlled cases; their Bezier path 0x450688 is C-bound after 15 controlled cases; row show/hide walkers 0x5897ee/0x589892 and LVGL class ancestry 0x43e2d4 are C-bound after 140 and 30 controlled cases; image class record 0x756108 is source-owned with exact fixed words and five relocations; image constructor/destroyer 0x498bd0/0x498c6c are C-bound after 84 cases; button fade callback 0x58c230 and recursive body 0x58c138 are C-bound after 168 cases; image event 0x498c9c and click-area 0x4408b0 are C-bound after 432 and 36 stock comparisons; image draw 0x498ec0 is C-bound after 220 stock comparisons; image opacity/radius accessors 0x498634/0x49865e are C-bound after 90 cases; descriptor initializer 0x452a34 is C-bound after 216 stock comparisons; its four exposed style getters are C-bound after 180 stock comparisons; draw scheduler 0x488a38 is C-bound after 168 controlled stock comparisons; it reuses five existing C lower providers; allocation-failure trap, real decoder/renderer effects and final placement remain open; decoder-info helper 0x488f6a and source-type/zero children were already C-bound in the prior image-header chain; Terminal label-text alias for 0x49942e is C-bound after 48 forwarding cases using the existing stock-compared label provider; formatted label 0x49954c is C-bound after 36 variadic stock comparisons and exposes lower formatter 0x489ad2 while real formatter effects remain open; null fatal branches are independently stock-compared in the five-case label fatal-path oracle; lower two-pass formatted text allocator 0x489ad2 is C-bound after 60 stock comparisons through the existing C-owned vsnprintf provider, with allocation-failure trap stock-compared by the five-case label fatal-path oracle and real formatter effects remaining open; Terminal clear-flag alias for stock 0x43dfa4 is C-bound after 48 forwarding cases using the existing C provider; five more Terminal LVGL object ABI aliases are C-bound after 135 forwarding cases through existing stock-address providers; four LVGL animimage setters/start 0x597ea6/0x597ee0/0x597f10/0x597f52 are C-bound after 68 controlled stock cases including null-object assertions, with animation lower effects and final placement open; query-notification-show FSM action 0x5e6548 is C-bound after 200 stock comparisons including enabled logging, exposing counter getter 0x5973dc and query visibility 0x5ec82a; counter getter 0x5973dc is C-bound after 7 direct stock comparisons through the existing source-owned TD-state provider, while query visibility remains open; 0x20000032 is the confirmed encoded 50 percent image pivot; interrupt-confirm defer-query action 0x5e6d58 is C-bound after 192 stock comparisons including enabled logging, with its output-style 24-byte startup pointer table and six image descriptors/1536 pixel bytes now C-owned; final source-resource linker relocation remains open; row resource placement and lower effects remain open; selector and refresh reuse existing C-bound LVGL object-y and object-height providers. Payload control-flags child 0x5e4a6e is C-bound after 240 controlled cases, and elapsed-text child 0x5e48b8 is C-bound after 36 cases; output-start child 0x5e4920 is C-bound after 25 controlled cases; processing-object child 0x5e4878 and processing-state clear child 0x5ea30c are C-bound after 5 and 12 controlled cases; elapsed-refresh child 0x5e4902 and its fallback clear 0x5e4894 are C-bound after 48 and 4 controlled cases; the elapsed counter uses an existing C-owned provider. Set-output child 0x5e49b0 is C-bound after 100 controlled cases; three of its four exposed RAM cells are source-owned at 0x20074a94 and 0x2007502c-0x2007502d; label-style child 0x5e482a is C-bound after 16 controlled cases; output-mode selector/hash and exact ten-phrase table are C-bound after 240 controlled cases; style runtime writes, animation and LVGL lower-call effects remain. The three exposed teardown service children are C-bound after 24 controlled cases; the event call 0x5e5484 and its display-state protobuf encoder are C-bound after 48 controlled cases, while a 0x2a0-byte state-base import remains; exact RAM ownership, lower effects and final placement are open. Cyclic or malformed LVGL trees and concurrent mutation remain open. Enabled callback logging remains open. The thirteen terminal event-name pointer slots are C-owned at the observed RAM address, but runtime initialization and strings remain open. The fault lookup provider covers all 195 matchable stock codes, but 152 overrun matches use absolute stock pointer values whose relocation and validity as strings remain open. The tracepoint slave file-list handler is C-bound after 6480 logging-disabled stock comparisons. Its nanopb, copy and send lower-call effects and enabled logging remain open. Tracepoint file-list-ready has the stock four-byte section extent in the relocatable chain, while its original one-byte provider declaration still needs a from-stage rebuild. The exposed MessageNotify callback, startup state writer, frame decoder, three validators and four encoders are C-bound, with no audio_message_notify_* imports remaining. Frame enabled logging, real nanopb/BLE child effects, CRC cache initialization and source-owned packet/state final RAM placement remain open. The exposed EvenAI display-control, ANCC clear/sync, callback-list display and state packet branches are C-bound. The app-acquire path through state, count, setup, queue facade, hardware descriptor and index helpers is C-bound. The bounded app, first-hardware, audio-thread and ANCC contexts still need final RAM placement, and lower-call side effects plus callback-list concurrency remain open. The text-stream dispatch, begin, finish, schedule and timer callback have C-bound decisions, while lower-call side effects and concurrency remain open. The dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
         "All eight DM dispatch entries and the exposed security children now have C bodies; whole-image source and placement remain open.",
         "DM storage is a 196-byte bounded C-owned block with a registry alias; full allocation extent and final RAM placement remain open.",
         "Gray and production-test UI registry contexts each have only an observed eight-byte C reservation; full allocation extent, initialization and final RAM placement remain open.",
@@ -1367,6 +2073,7 @@
         "EvenAI ready set-text calls now declare and pass the stock fifth stack argument zero, observed at 0x4e24cc and 0x4e269c. The 84-case ready oracle records that argument at intercepted set-text calls; downstream Apollo bindings were rebuilt.",
         "Text-stream set-text 0x552c20 matches stock in 288 controlled five-argument validation, append/replace, capacity, dispatch and return cases. It is C-bound; four helper routines are now explicit imports. Helper effects and malformed inputs remain open.",
         "Text-stream validation 0x5533cc and next-interval 0x5532f8 match stock in 120 controlled mode/string and signed-arithmetic cases. They are C-bound; restart and dispatch remain unresolved.",
+        "Text-stream restart 0x552db2 matches stock in 64 signed-length, mutex, timer and state-byte cases and is C-bound. Dispatch remains unresolved; timer and mutex effects remain external.",
         "Complete data/startup/layout and physical execution remain unproved."
       ]
     }

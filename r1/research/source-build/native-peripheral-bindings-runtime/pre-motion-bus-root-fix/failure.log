@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_peripheral_bindings.py", line 71, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_peripheral_bindings.py", line 60, in main
+    u.emu_start((syms[name] if source else native)|1,0x20000100,count=20000)
+                 ~~~~^^^^^^
+KeyError: 'r1_motion_bus_device_bind'

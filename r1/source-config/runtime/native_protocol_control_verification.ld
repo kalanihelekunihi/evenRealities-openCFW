@@ -14,6 +14,6 @@ SECTIONS {
  .pair_sdk 0x843a0 : { *(.r1.control.pair_sdk) }
  .report 0x200067a0 (NOLOAD) : { *(.r1.control.report.enabled) }
  .thread 0x20006570 (NOLOAD) : { *(.r1.control.service.thread) }
- .phone 0x200064b8 (NOLOAD) : { *(.r1.connection.field6) }
+ .phone 0x200064ba (NOLOAD) : { *(.r1.connection.field8) }
  /DISCARD/ : { *(.ARM.exidx*) *(.ARM.extab*) *(.comment) *(.note*) }
 }

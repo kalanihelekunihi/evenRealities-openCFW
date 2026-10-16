@@ -322,6 +322,15 @@ def main():
             info_dispatch["stock_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5":
         raise RuntimeError("Bootloader INFO dispatcher comparison changed")
     images["apollo_bootloader"]["info_dispatch_4213e6"] = info_dispatch_ref
+    info_fallback_path = G2 / "build/c-firmware/20261016/boot-info-dispatch-fallback/receipt.json"
+    info_fallback, info_fallback_ref = receipt(info_fallback_path)
+    if info_fallback["status"] != "PASS_STOCK_BOOT_INFO_DISPATCH_FALLBACK_UNREACHABLE" or \
+            info_fallback["prior_oracle_sha256"] != sha(info_dispatch_path) or \
+            info_fallback["stock_sha256"] != info_dispatch["stock_sha256"] or \
+            info_fallback["selector_domain_after_first_gate"] != [0, 1, 2, 3, 4, 5] or \
+            info_fallback["unvisited_instruction_addresses"] != ["0x42149c", "0x421532"]:
+        raise RuntimeError("Bootloader INFO fallback control-flow proof changed")
+    images["apollo_bootloader"]["info_dispatch_unreachable_fallback"] = info_fallback_ref
     root_info_path = G2 / "build/c-firmware/20261016/boot-root-with-info-dispatch/receipt.json"
     root_info, root_info_ref = receipt(root_info_path)
     root_info_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_root_with_info_dispatch_20261016.py"
@@ -342,7 +351,7 @@ def main():
         raise RuntimeError("Bootloader composed INFO dispatcher comparison changed")
     images["apollo_bootloader"]["root_with_info_dispatch"] = root_info_ref
     images["apollo_bootloader"]["remaining_gate"].append(
-        "INFO dispatcher 0x4213e6 passes 7200 direct cases visiting 350/354 stock bytes; the four unvisited bytes are two fallback branches after the invalid-space gate. A 1420-case composed replay reaches 224/354 dispatcher and 788/810 root bytes with resident ROM read controlled. Production M55 and whole-image behavior remain open.")
+        "INFO dispatcher 0x4213e6 passes 7200 direct cases visiting 350/354 stock bytes; pinned control-flow proof establishes that the four unvisited bytes are unreachable fallback instructions after the invalid-space gate. A 1420-case composed replay reaches 224/354 dispatcher and 788/810 root bytes with resident ROM read controlled. Production M55 and whole-image behavior remain open.")
     em_path = BUILD / "em9305-source-refresh/resident-rom-bindings-receipt.json"
     em, em_ref = receipt(em_path)
     if em["unresolved_before"] != 12 or em["unresolved_after"] != 0 or em["whole_image_complete"]:
@@ -417,6 +426,22 @@ def main():
         "entry": case_oz["entry"], "matching_vector_words": len(case_oz["matching_vector_words"]),
         "native_pointer_leads_present": case_oz["native_pointer_leads_present"],
     }
+    case_named_path = G2 / "build/c-firmware/20261016/case-named-function-size/receipt.json"
+    case_named, case_named_ref = receipt(case_named_path)
+    if case_named["status"] != "PASS_EXPERIMENTAL_CASE_NAMED_FUNCTION_SIZE_TRIAGE" or \
+            case_named["baseline_receipt_sha256"] != case_oz_ref["sha256"] or \
+            case_named["experimental_elf_sha256"] != case_oz["elf_sha256"] or \
+            case_named["matched_function_count"] != 38 or \
+            case_named["matched_net_delta_bytes"] != -4898 or \
+            case_named["native_catalogue_functions"] != 428 or \
+            case_named["candidate_function_union_bytes"] != 54320 or \
+            case_named["candidate_text_bytes_outside_function_symbols"] != 8951 or \
+            case_named["experimental_payload_overflow_bytes"] != 7851:
+        raise RuntimeError("CASE named function size triage changed")
+    file_checked(case_named["catalogue"], case_named["catalogue_sha256"])
+    images["case"]["named_function_size_triage"] = case_named_ref
+    images["case"]["remaining_gate"].append(
+        "The 38 C symbols with explicit stock address suffixes total 4,898 bytes less than their Ghidra function envelopes, while the mixed -Oz CASE load exceeds stock by 7,851 bytes. The candidate .text has 54,320 unique function bytes and 8,951 bytes outside function symbols; the 428-entry native catalogue has 40,664 envelope bytes but may be incomplete. Unmatched code and linker placement require review before assigning the overflow to specific bodies.")
     main_path = BUILD / "main-post-tail-c-replay/receipt.json"
     main, main_ref = receipt(main_path)
     if main["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or main["unresolved_after"] != 183:
@@ -2553,6 +2578,2453 @@ def main():
     actual = undefined(ROOT / main_obj["path"])
     if len(actual) != 175 or any(x in actual for x in decision["imports_resolved"]):
         raise RuntimeError("Apollo Main text-stream decision frontier changed")
+    restart_path = G2 / "build/c-firmware/20261016/main-text-stream-restart/receipt.json"
+    restart, restart_ref = receipt(restart_path)
+    if restart["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_RESTART_C" or \
+            restart["base_sha256"] != main_obj["sha256"] or \
+            restart["unresolved_before"] != 175 or restart["unresolved_after"] != 174 or \
+            restart["imports_resolved"] != ["audio_text_stream_restart_552db2"] or \
+            restart["imports_added"]:
+        raise RuntimeError("Apollo Main text-stream restart binding changed")
+    main_obj = file_checked(restart["linked_object"], restart["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_text_stream_restart_552db2" in actual:
+        raise RuntimeError("Apollo Main text-stream restart frontier changed")
+    dispatch_path = G2 / "build/c-firmware/20261016/main-text-stream-dispatch/receipt.json"
+    dispatch, dispatch_ref = receipt(dispatch_path)
+    if dispatch["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_DISPATCH_C" or \
+            dispatch["base_sha256"] != main_obj["sha256"] or \
+            dispatch["unresolved_before"] != 174 or dispatch["unresolved_after"] != 175 or \
+            dispatch["imports_resolved"] != ["audio_text_stream_dispatch_552df0"] or \
+            dispatch["imports_added"] != ["audio_text_stream_begin_552f0a", "audio_text_stream_finish_552f14"]:
+        raise RuntimeError("Apollo Main text-stream dispatch binding changed")
+    main_obj = file_checked(dispatch["linked_object"], dispatch["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or "audio_text_stream_dispatch_552df0" in actual or \
+            "audio_text_stream_begin_552f0a" not in actual or "audio_text_stream_finish_552f14" not in actual:
+        raise RuntimeError("Apollo Main text-stream dispatch frontier changed")
+    begin_path = G2 / "build/c-firmware/20261016/main-text-stream-begin/receipt.json"
+    begin, begin_ref = receipt(begin_path)
+    if begin["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_BEGIN_C" or \
+            begin["base_sha256"] != main_obj["sha256"] or \
+            begin["unresolved_before"] != 175 or begin["unresolved_after"] != 175 or \
+            begin["imports_resolved"] != ["audio_text_stream_begin_552f0a"] or \
+            begin["imports_added"] != ["audio_text_stream_schedule_552f6a"]:
+        raise RuntimeError("Apollo Main text-stream begin binding changed")
+    main_obj = file_checked(begin["linked_object"], begin["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or "audio_text_stream_begin_552f0a" in actual or \
+            "audio_text_stream_schedule_552f6a" not in actual:
+        raise RuntimeError("Apollo Main text-stream begin frontier changed")
+    finish_path = G2 / "build/c-firmware/20261016/main-text-stream-finish/receipt.json"
+    finish, finish_ref = receipt(finish_path)
+    if finish["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_FINISH_C" or \
+            finish["base_sha256"] != main_obj["sha256"] or \
+            finish["unresolved_before"] != 175 or finish["unresolved_after"] != 174 or \
+            finish["imports_resolved"] != ["audio_text_stream_finish_552f14"] or \
+            finish["imports_added"]:
+        raise RuntimeError("Apollo Main text-stream finish binding changed")
+    main_obj = file_checked(finish["linked_object"], finish["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_text_stream_finish_552f14" in actual:
+        raise RuntimeError("Apollo Main text-stream finish frontier changed")
+    schedule_path = G2 / "build/c-firmware/20261016/main-text-stream-schedule/receipt.json"
+    schedule, schedule_ref = receipt(schedule_path)
+    if schedule["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_SCHEDULE_C" or \
+            schedule["base_sha256"] != main_obj["sha256"] or \
+            schedule["unresolved_before"] != 174 or schedule["unresolved_after"] != 174 or \
+            schedule["imports_resolved"] != ["audio_text_stream_schedule_552f6a"] or \
+            schedule["imports_added"] != ["audio_text_stream_tick_553054"]:
+        raise RuntimeError("Apollo Main text-stream schedule binding changed")
+    main_obj = file_checked(schedule["linked_object"], schedule["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_text_stream_schedule_552f6a" in actual or \
+            "audio_text_stream_tick_553054" not in actual:
+        raise RuntimeError("Apollo Main text-stream schedule frontier changed")
+    tick_path = G2 / "build/c-firmware/20261016/main-text-stream-tick/receipt.json"
+    tick, tick_ref = receipt(tick_path)
+    if tick["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_TICK_C" or \
+            tick["base_sha256"] != main_obj["sha256"] or \
+            tick["unresolved_before"] != 174 or tick["unresolved_after"] != 173 or \
+            tick["imports_resolved"] != ["audio_text_stream_tick_553054"] or \
+            tick["imports_added"]:
+        raise RuntimeError("Apollo Main text-stream tick binding changed")
+    main_obj = file_checked(tick["linked_object"], tick["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 173 or "audio_text_stream_tick_553054" in actual:
+        raise RuntimeError("Apollo Main text-stream tick frontier changed")
+    app_acquire_path = G2 / "build/c-firmware/20261016/main-even-ai-app-acquire/receipt.json"
+    app_acquire, app_acquire_ref = receipt(app_acquire_path)
+    if app_acquire["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_APP_ACQUIRE_C" or \
+            app_acquire["base_sha256"] != main_obj["sha256"] or \
+            app_acquire["unresolved_before"] != 173 or app_acquire["unresolved_after"] != 176 or \
+            app_acquire["imports_resolved"] != ["audio_even_ai_app_acquire_54f380"] or \
+            app_acquire["imports_added"] != ["audio_app_codec_enable_53ca32",
+                                             "audio_app_first_hardware_prepare_57a926",
+                                             "audio_app_stream_enable_53ca10",
+                                             "g2_audio_first_hardware_context_20108948"]:
+        raise RuntimeError("Apollo Main EvenAI app acquire binding changed")
+    main_obj = file_checked(app_acquire["linked_object"], app_acquire["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 176 or "audio_even_ai_app_acquire_54f380" in actual or \
+            not set(app_acquire["imports_added"]).issubset(actual):
+        raise RuntimeError("Apollo Main EvenAI app acquire frontier changed")
+    app_setup_path = G2 / "build/c-firmware/20261016/main-audio-app-setup-children/receipt.json"
+    app_setup, app_setup_ref = receipt(app_setup_path)
+    if app_setup["status"] != "PASS_EXPERIMENTAL_MAIN_AUDIO_APP_SETUP_CHILDREN_C" or \
+            app_setup["base_sha256"] != main_obj["sha256"] or \
+            app_setup["unresolved_before"] != 176 or app_setup["unresolved_after"] != 174 or \
+            app_setup["imports_resolved"] != app_acquire["imports_added"] or \
+            app_setup["imports_added"] != ["audio_app_control_packet_53c638",
+                                           "audio_app_hardware_open_591374"]:
+        raise RuntimeError("Apollo Main audio app setup binding changed")
+    main_obj = file_checked(app_setup["linked_object"], app_setup["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or set(app_setup["imports_resolved"]) & set(actual) or \
+            not set(app_setup["imports_added"]).issubset(actual):
+        raise RuntimeError("Apollo Main audio app setup frontier changed")
+    app_control_path = G2 / "build/c-firmware/20261016/main-audio-app-control-and-open/receipt.json"
+    app_control, app_control_ref = receipt(app_control_path)
+    if app_control["status"] != "PASS_EXPERIMENTAL_MAIN_AUDIO_APP_CONTROL_AND_OPEN_C" or \
+            app_control["base_sha256"] != main_obj["sha256"] or \
+            app_control["unresolved_before"] != 174 or app_control["unresolved_after"] != 173 or \
+            app_control["imports_resolved"] != app_setup["imports_added"] or \
+            app_control["imports_added"] != ["audio_app_hardware_core_59123a"]:
+        raise RuntimeError("Apollo Main audio app control binding changed")
+    main_obj = file_checked(app_control["linked_object"], app_control["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 173 or set(app_control["imports_resolved"]) & set(actual) or \
+            "audio_app_hardware_core_59123a" not in actual:
+        raise RuntimeError("Apollo Main audio app control frontier changed")
+    hardware_core_path = G2 / "build/c-firmware/20261016/main-audio-app-hardware-core/receipt.json"
+    hardware_core, hardware_core_ref = receipt(hardware_core_path)
+    if hardware_core["status"] != "PASS_EXPERIMENTAL_MAIN_AUDIO_APP_HARDWARE_CORE_C" or \
+            hardware_core["base_sha256"] != main_obj["sha256"] or \
+            hardware_core["unresolved_before"] != 173 or hardware_core["unresolved_after"] != 175 or \
+            hardware_core["imports_resolved"] != ["audio_app_hardware_core_59123a"] or \
+            hardware_core["imports_added"] != ["audio_app_format_index_590d74",
+                                               "audio_app_rate_index_590d3c",
+                                               "audio_app_zero_tail_4d4ccc"]:
+        raise RuntimeError("Apollo Main audio hardware core binding changed")
+    main_obj = file_checked(hardware_core["linked_object"], hardware_core["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or "audio_app_hardware_core_59123a" in actual or \
+            not set(hardware_core["imports_added"]).issubset(actual):
+        raise RuntimeError("Apollo Main audio hardware core frontier changed")
+    hardware_indices_path = G2 / "build/c-firmware/20261016/main-audio-app-hardware-indices/receipt.json"
+    hardware_indices, hardware_indices_ref = receipt(hardware_indices_path)
+    if hardware_indices["status"] != "PASS_EXPERIMENTAL_MAIN_AUDIO_APP_HARDWARE_INDICES_C" or \
+            hardware_indices["base_sha256"] != main_obj["sha256"] or \
+            hardware_indices["unresolved_before"] != 175 or hardware_indices["unresolved_after"] != 172 or \
+            hardware_indices["imports_resolved"] != hardware_core["imports_added"] or \
+            hardware_indices["imports_added"]:
+        raise RuntimeError("Apollo Main audio hardware indices binding changed")
+    main_obj = file_checked(hardware_indices["linked_object"], hardware_indices["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 172 or set(hardware_indices["imports_resolved"]) & set(actual):
+        raise RuntimeError("Apollo Main audio hardware indices frontier changed")
+    sync_remote_path = G2 / "build/c-firmware/20261016/main-even-ai-sync-remote/receipt.json"
+    sync_remote, sync_remote_ref = receipt(sync_remote_path)
+    if sync_remote["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_SYNC_REMOTE_C" or \
+            sync_remote["base_sha256"] != main_obj["sha256"] or \
+            sync_remote["unresolved_before"] != 172 or sync_remote["unresolved_after"] != 172 or \
+            sync_remote["imports_resolved"] != ["audio_even_ai_sync_remote_4973f4"] or \
+            sync_remote["imports_added"] != ["audio_even_ai_ancc_display_clear_4e1af8"]:
+        raise RuntimeError("Apollo Main EvenAI sync remote binding changed")
+    main_obj = file_checked(sync_remote["linked_object"], sync_remote["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 172 or "audio_even_ai_sync_remote_4973f4" in actual or \
+            "audio_even_ai_ancc_display_clear_4e1af8" not in actual:
+        raise RuntimeError("Apollo Main EvenAI sync remote frontier changed")
+    ancc_display_path = G2 / "build/c-firmware/20261016/main-even-ai-ancc-display-clear/receipt.json"
+    ancc_display, ancc_display_ref = receipt(ancc_display_path)
+    if ancc_display["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_ANCC_DISPLAY_CLEAR_C" or \
+            ancc_display["base_sha256"] != main_obj["sha256"] or \
+            ancc_display["unresolved_before"] != 172 or ancc_display["unresolved_after"] != 173 or \
+            ancc_display["imports_resolved"] != ["audio_even_ai_ancc_display_clear_4e1af8"] or \
+            ancc_display["imports_added"] != ["audio_even_ai_ancc_display_send_5105bc",
+                                              "g2_audio_ancc_display_context_20073f84"]:
+        raise RuntimeError("Apollo Main ANCC display wrapper binding changed")
+    main_obj = file_checked(ancc_display["linked_object"], ancc_display["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 173 or "audio_even_ai_ancc_display_clear_4e1af8" in actual or \
+            not set(ancc_display["imports_added"]).issubset(actual):
+        raise RuntimeError("Apollo Main ANCC display wrapper frontier changed")
+    ancc_send_path = G2 / "build/c-firmware/20261016/main-even-ai-ancc-display-send/receipt.json"
+    ancc_send, ancc_send_ref = receipt(ancc_send_path)
+    if ancc_send["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_ANCC_DISPLAY_SEND_C" or \
+            ancc_send["base_sha256"] != main_obj["sha256"] or \
+            ancc_send["unresolved_before"] != 173 or ancc_send["unresolved_after"] != 171 or \
+            ancc_send["imports_resolved"] != ancc_display["imports_added"] or \
+            ancc_send["imports_added"]:
+        raise RuntimeError("Apollo Main ANCC display send binding changed")
+    main_obj = file_checked(ancc_send["linked_object"], ancc_send["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 171 or set(ancc_send["imports_resolved"]) & set(actual):
+        raise RuntimeError("Apollo Main ANCC display send frontier changed")
+    ancc_state_path = G2 / "build/c-firmware/20261016/main-even-ai-ancc-state-sync/receipt.json"
+    ancc_state, ancc_state_ref = receipt(ancc_state_path)
+    if ancc_state["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_ANCC_STATE_SYNC_C" or \
+            ancc_state["base_sha256"] != main_obj["sha256"] or \
+            ancc_state["unresolved_before"] != 171 or ancc_state["unresolved_after"] != 170 or \
+            ancc_state["imports_resolved"] != ["audio_even_ai_ancc_state_sync_497cf0"] or \
+            ancc_state["imports_added"]:
+        raise RuntimeError("Apollo Main ANCC state sync binding changed")
+    main_obj = file_checked(ancc_state["linked_object"], ancc_state["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 170 or "audio_even_ai_ancc_state_sync_497cf0" in actual:
+        raise RuntimeError("Apollo Main ANCC state sync frontier changed")
+    display_ctrl_path = G2 / "build/c-firmware/20261016/main-even-ai-display-ctrl/receipt.json"
+    display_ctrl, display_ctrl_ref = receipt(display_ctrl_path)
+    if display_ctrl["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_DISPLAY_CTRL_C" or \
+            display_ctrl["base_sha256"] != main_obj["sha256"] or \
+            display_ctrl["unresolved_before"] != 170 or display_ctrl["unresolved_after"] != 169 or \
+            display_ctrl["imports_resolved"] != ["audio_even_ai_display_ctrl_4e1fd2"] or \
+            display_ctrl["imports_added"]:
+        raise RuntimeError("Apollo Main EvenAI display control binding changed")
+    main_obj = file_checked(display_ctrl["linked_object"], display_ctrl["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 169 or "audio_even_ai_display_ctrl_4e1fd2" in actual:
+        raise RuntimeError("Apollo Main EvenAI display control frontier changed")
+    message_notify_path = G2 / "build/c-firmware/20261016/main-message-notify-common/receipt.json"
+    message_notify, message_notify_ref = receipt(message_notify_path)
+    if message_notify["status"] != "PASS_EXPERIMENTAL_MAIN_MESSAGE_NOTIFY_COMMON_C" or \
+            message_notify["base_sha256"] != main_obj["sha256"] or \
+            message_notify["unresolved_before"] != 169 or message_notify["unresolved_after"] != 169 or \
+            message_notify["imports_resolved"] != ["audio_uart_registry_callback_4e1b30"] or \
+            message_notify["imports_added"] != ["audio_message_notify_frame_process_4d6ba8"]:
+        raise RuntimeError("Apollo Main MessageNotify callback binding changed")
+    main_obj = file_checked(message_notify["linked_object"], message_notify["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 169 or "audio_uart_registry_callback_4e1b30" in actual or \
+            "audio_message_notify_frame_process_4d6ba8" not in actual:
+        raise RuntimeError("Apollo Main MessageNotify frontier changed")
+    message_frame_path = G2 / "build/c-firmware/20261016/main-message-notify-frame/receipt.json"
+    message_frame, message_frame_ref = receipt(message_frame_path)
+    if message_frame["status"] != "PASS_EXPERIMENTAL_MAIN_MESSAGE_NOTIFY_FRAME_C" or \
+            message_frame["base_sha256"] != main_obj["sha256"] or \
+            message_frame["unresolved_before"] != 169 or message_frame["unresolved_after"] != 175 or \
+            message_frame["imports_resolved"] != ["audio_message_notify_frame_process_4d6ba8"] or \
+            len(message_frame["imports_added"]) != 7:
+        raise RuntimeError("Apollo Main MessageNotify frame binding changed")
+    main_obj = file_checked(message_frame["linked_object"], message_frame["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or "audio_message_notify_frame_process_4d6ba8" in actual or \
+            not set(message_frame["imports_added"]).issubset(actual):
+        raise RuntimeError("Apollo Main MessageNotify frame frontier changed")
+    whitelist_check_path = G2 / "build/c-firmware/20261016/main-message-notify-whitelist-check/receipt.json"
+    whitelist_check, whitelist_check_ref = receipt(whitelist_check_path)
+    if whitelist_check["status"] != "PASS_EXPERIMENTAL_MAIN_MESSAGE_NOTIFY_WHITELIST_CHECK_C" or \
+            whitelist_check["base_sha256"] != main_obj["sha256"] or \
+            whitelist_check["unresolved_before"] != 175 or whitelist_check["unresolved_after"] != 174 or \
+            whitelist_check["imports_resolved"] != ["audio_message_notify_rx_whitelist_check_4d7624"] or \
+            whitelist_check["imports_added"]:
+        raise RuntimeError("Apollo Main MessageNotify whitelist-check binding changed")
+    main_obj = file_checked(whitelist_check["linked_object"], whitelist_check["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_message_notify_rx_whitelist_check_4d7624" in actual:
+        raise RuntimeError("Apollo Main MessageNotify whitelist-check frontier changed")
+    whitelist_ctrl_path = G2 / "build/c-firmware/20261016/main-message-notify-whitelist-ctrl/receipt.json"
+    whitelist_ctrl, whitelist_ctrl_ref = receipt(whitelist_ctrl_path)
+    if whitelist_ctrl["status"] != "PASS_EXPERIMENTAL_MAIN_MESSAGE_NOTIFY_WHITELIST_CTRL_C" or \
+            whitelist_ctrl["base_sha256"] != main_obj["sha256"] or \
+            whitelist_ctrl["unresolved_before"] != 174 or whitelist_ctrl["unresolved_after"] != 173 or \
+            whitelist_ctrl["imports_resolved"] != ["audio_message_notify_rx_whitelist_ctrl_4d73d6"] or \
+            whitelist_ctrl["imports_added"]:
+        raise RuntimeError("Apollo Main MessageNotify whitelist-control binding changed")
+    main_obj = file_checked(whitelist_ctrl["linked_object"], whitelist_ctrl["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 173 or "audio_message_notify_rx_whitelist_ctrl_4d73d6" in actual:
+        raise RuntimeError("Apollo Main MessageNotify whitelist-control frontier changed")
+    notify_ctrl_path = G2 / "build/c-firmware/20261016/main-message-notify-ctrl/receipt.json"
+    notify_ctrl, notify_ctrl_ref = receipt(notify_ctrl_path)
+    if notify_ctrl["status"] != "PASS_EXPERIMENTAL_MAIN_MESSAGE_NOTIFY_CTRL_C" or \
+            notify_ctrl["base_sha256"] != main_obj["sha256"] or \
+            notify_ctrl["unresolved_before"] != 173 or notify_ctrl["unresolved_after"] != 172 or \
+            notify_ctrl["imports_resolved"] != ["audio_message_notify_rx_ctrl_4d6db0"] or \
+            notify_ctrl["imports_added"]:
+        raise RuntimeError("Apollo Main MessageNotify notification-control binding changed")
+    main_obj = file_checked(notify_ctrl["linked_object"], notify_ctrl["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 172 or "audio_message_notify_rx_ctrl_4d6db0" in actual:
+        raise RuntimeError("Apollo Main MessageNotify notification-control frontier changed")
+    notify_tx_common_path = G2 / "build/c-firmware/20261016/main-message-notify-tx-common/receipt.json"
+    notify_tx_common, notify_tx_common_ref = receipt(notify_tx_common_path)
+    if notify_tx_common["status"] != "PASS_EXPERIMENTAL_MAIN_MESSAGE_NOTIFY_TX_COMMON_C" or \
+            notify_tx_common["base_sha256"] != main_obj["sha256"] or \
+            notify_tx_common["unresolved_before"] != 172 or notify_tx_common["unresolved_after"] != 171 or \
+            notify_tx_common["imports_resolved"] != ["audio_message_notify_tx_common_response_4d7038"] or \
+            notify_tx_common["imports_added"]:
+        raise RuntimeError("Apollo Main MessageNotify common response binding changed")
+    main_obj = file_checked(notify_tx_common["linked_object"], notify_tx_common["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 171 or "audio_message_notify_tx_common_response_4d7038" in actual:
+        raise RuntimeError("Apollo Main MessageNotify common response frontier changed")
+    notify_tx_ctrl_path = G2 / "build/c-firmware/20261016/main-message-notify-tx-ctrl/receipt.json"
+    notify_tx_ctrl, notify_tx_ctrl_ref = receipt(notify_tx_ctrl_path)
+    if notify_tx_ctrl["status"] != "PASS_EXPERIMENTAL_MAIN_MESSAGE_NOTIFY_TX_CTRL_C" or \
+            notify_tx_ctrl["base_sha256"] != main_obj["sha256"] or \
+            notify_tx_ctrl["unresolved_before"] != 171 or notify_tx_ctrl["unresolved_after"] != 170 or \
+            notify_tx_ctrl["imports_resolved"] != ["audio_message_notify_tx_ctrl_4d6ea2"] or \
+            notify_tx_ctrl["imports_added"]:
+        raise RuntimeError("Apollo Main MessageNotify control response binding changed")
+    main_obj = file_checked(notify_tx_ctrl["linked_object"], notify_tx_ctrl["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 170 or "audio_message_notify_tx_ctrl_4d6ea2" in actual:
+        raise RuntimeError("Apollo Main MessageNotify control response frontier changed")
+    notify_tx_whitelist_path = G2 / "build/c-firmware/20261016/main-message-notify-tx-whitelist-ctrl/receipt.json"
+    notify_tx_whitelist, notify_tx_whitelist_ref = receipt(notify_tx_whitelist_path)
+    if notify_tx_whitelist["status"] != "PASS_EXPERIMENTAL_MAIN_MESSAGE_NOTIFY_TX_WHITELIST_CTRL_C" or \
+            notify_tx_whitelist["base_sha256"] != main_obj["sha256"] or \
+            notify_tx_whitelist["unresolved_before"] != 170 or notify_tx_whitelist["unresolved_after"] != 169 or \
+            notify_tx_whitelist["imports_resolved"] != ["audio_message_notify_tx_whitelist_ctrl_4d749a"] or \
+            notify_tx_whitelist["imports_added"]:
+        raise RuntimeError("Apollo Main MessageNotify whitelist-control response binding changed")
+    main_obj = file_checked(notify_tx_whitelist["linked_object"], notify_tx_whitelist["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 169 or "audio_message_notify_tx_whitelist_ctrl_4d749a" in actual:
+        raise RuntimeError("Apollo Main MessageNotify whitelist-control response frontier changed")
+    notify_tx_check_path = G2 / "build/c-firmware/20261016/main-message-notify-tx-whitelist-check/receipt.json"
+    notify_tx_check, notify_tx_check_ref = receipt(notify_tx_check_path)
+    if notify_tx_check["status"] != "PASS_EXPERIMENTAL_MAIN_MESSAGE_NOTIFY_TX_WHITELIST_CHECK_C" or \
+            notify_tx_check["base_sha256"] != main_obj["sha256"] or \
+            notify_tx_check["unresolved_before"] != 169 or notify_tx_check["unresolved_after"] != 168 or \
+            notify_tx_check["imports_resolved"] != ["audio_message_notify_tx_whitelist_check_4d76cc"] or \
+            notify_tx_check["imports_added"]:
+        raise RuntimeError("Apollo Main MessageNotify whitelist-check response binding changed")
+    main_obj = file_checked(notify_tx_check["linked_object"], notify_tx_check["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 168 or any(name.startswith("audio_message_notify_") for name in actual):
+        raise RuntimeError("Apollo Main MessageNotify encoder frontier changed")
+    ready_word_path = G2 / "build/c-firmware/20261016/main-tracepoint-ready-word/receipt.json"
+    ready_word, ready_word_ref = receipt(ready_word_path)
+    if ready_word["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_READY_WORD_EXTENT_C" or \
+            ready_word["base_sha256"] != main_obj["sha256"] or \
+            ready_word["unresolved_before"] != 168 or ready_word["unresolved_after"] != 168 or \
+            ready_word["section_bytes"] != 4 or ready_word["imports_resolved"] or \
+            ready_word["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint ready-word extent binding changed")
+    main_obj = file_checked(ready_word["linked_object"], ready_word["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 168:
+        raise RuntimeError("Apollo Main tracepoint ready-word frontier changed")
+    slave_file_list_path = G2 / "build/c-firmware/20261016/main-tracepoint-slave-file-list/receipt.json"
+    slave_file_list, slave_file_list_ref = receipt(slave_file_list_path)
+    if slave_file_list["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_SLAVE_FILE_LIST_C" or \
+            slave_file_list["base_sha256"] != main_obj["sha256"] or \
+            slave_file_list["unresolved_before"] != 168 or \
+            slave_file_list["unresolved_after"] != 167 or \
+            slave_file_list["imports_resolved"] != ["audio_tracepoint_handle_slave_file_list_5eeb98"] or \
+            slave_file_list["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint slave file-list binding changed")
+    main_obj = file_checked(slave_file_list["linked_object"], slave_file_list["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 167 or "audio_tracepoint_handle_slave_file_list_5eeb98" in actual:
+        raise RuntimeError("Apollo Main tracepoint slave file-list frontier changed")
+    fault_lookup_path = G2 / "build/c-firmware/20261016/main-fault-lookup-overrun/receipt.json"
+    fault_lookup, fault_lookup_ref = receipt(fault_lookup_path)
+    if fault_lookup["status"] != "PASS_EXPERIMENTAL_MAIN_FAULT_LOOKUP_OVERRUN_C" or \
+            fault_lookup["base_sha256"] != main_obj["sha256"] or \
+            fault_lookup["unresolved_before"] != 167 or \
+            fault_lookup["unresolved_after"] != 166 or \
+            fault_lookup["imports_resolved"] != ["audio_fault_unmapped_code_message_509b48"] or \
+            fault_lookup["imports_added"]:
+        raise RuntimeError("Apollo Main fault lookup binding changed")
+    main_obj = file_checked(fault_lookup["linked_object"], fault_lookup["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 166 or "audio_fault_unmapped_code_message_509b48" in actual:
+        raise RuntimeError("Apollo Main fault lookup frontier changed")
+    terminal_names_path = G2 / "build/c-firmware/20261016/main-terminal-event-names-ram/receipt.json"
+    terminal_names, terminal_names_ref = receipt(terminal_names_path)
+    if terminal_names["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_NAMES_RAM_C" or \
+            terminal_names["base_sha256"] != main_obj["sha256"] or \
+            terminal_names["unresolved_before"] != 166 or \
+            terminal_names["unresolved_after"] != 165 or \
+            terminal_names["section_bytes"] != 52 or \
+            terminal_names["placement_address"] != "0x20003e6c" or \
+            terminal_names["imports_resolved"] != ["audio_terminal_event_names"] or \
+            terminal_names["imports_added"]:
+        raise RuntimeError("Apollo Main terminal event-name RAM binding changed")
+    main_obj = file_checked(terminal_names["linked_object"], terminal_names["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 165 or "audio_terminal_event_names" in actual:
+        raise RuntimeError("Apollo Main terminal event-name frontier changed")
+    terminal_ui_path = G2 / "build/c-firmware/20261016/main-terminal-ui-event-5e44f6/receipt.json"
+    terminal_ui, terminal_ui_ref = receipt(terminal_ui_path)
+    terminal_children = {"audio_terminal_ui_status_5e7b74", "audio_terminal_ui_tick_5e8008",
+                         "audio_terminal_ui_stop_5e720c", "audio_terminal_ui_start_5e716c",
+                         "audio_terminal_ui_exit_sync_5e42ec"}
+    if terminal_ui["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_EVENT_C" or \
+            terminal_ui["base_sha256"] != main_obj["sha256"] or \
+            terminal_ui["unresolved_before"] != 165 or terminal_ui["unresolved_after"] != 169 or \
+            terminal_ui["imports_resolved"] != ["audio_uart_registry_callback_5e44f6"] or \
+            set(terminal_ui["imports_added"]) != terminal_children:
+        raise RuntimeError("Apollo Main terminal UI callback binding changed")
+    main_obj = file_checked(terminal_ui["linked_object"], terminal_ui["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 169 or "audio_uart_registry_callback_5e44f6" in actual:
+        raise RuntimeError("Apollo Main terminal UI callback frontier changed")
+    terminal_exit_path = G2 / "build/c-firmware/20261016/main-terminal-ui-exit-sync-5e42ec/receipt.json"
+    terminal_exit, terminal_exit_ref = receipt(terminal_exit_path)
+    if terminal_exit["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_EXIT_SYNC_C" or \
+            terminal_exit["base_sha256"] != main_obj["sha256"] or \
+            terminal_exit["unresolved_before"] != 169 or terminal_exit["unresolved_after"] != 168 or \
+            terminal_exit["imports_resolved"] != ["audio_terminal_ui_exit_sync_5e42ec"] or \
+            terminal_exit["imports_added"]:
+        raise RuntimeError("Apollo Main terminal exit-sync binding changed")
+    main_obj = file_checked(terminal_exit["linked_object"], terminal_exit["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 168 or "audio_terminal_ui_exit_sync_5e42ec" in actual:
+        raise RuntimeError("Apollo Main terminal exit-sync frontier changed")
+    terminal_stop_path = G2 / "build/c-firmware/20261016/main-terminal-ui-stop-5e720c/receipt.json"
+    terminal_stop, terminal_stop_ref = receipt(terminal_stop_path)
+    terminal_stop_children = {"audio_terminal_ui_stop_voice_5896b4",
+                              "audio_terminal_ui_stop_timer_5e7ec4",
+                              "audio_terminal_ui_stop_service_a_5eceb2",
+                              "audio_terminal_ui_stop_service_b_5ec268",
+                              "audio_terminal_ui_stop_service_c_5ebbc6",
+                              "audio_terminal_ui_stop_service_d_5ec770",
+                              "audio_terminal_ui_stop_service_e_5ec9c0",
+                              "audio_terminal_ui_state_base"}
+    if terminal_stop["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_STOP_C" or \
+            terminal_stop["base_sha256"] != main_obj["sha256"] or \
+            terminal_stop["unresolved_before"] != 168 or terminal_stop["unresolved_after"] != 175 or \
+            terminal_stop["imports_resolved"] != ["audio_terminal_ui_stop_5e720c"] or \
+            set(terminal_stop["imports_added"]) != terminal_stop_children:
+        raise RuntimeError("Apollo Main terminal stop binding changed")
+    main_obj = file_checked(terminal_stop["linked_object"], terminal_stop["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or "audio_terminal_ui_stop_5e720c" in actual:
+        raise RuntimeError("Apollo Main terminal stop frontier changed")
+    terminal_stop_e_path = G2 / "build/c-firmware/20261016/main-terminal-ui-stop-e-5ec9c0/receipt.json"
+    terminal_stop_e, terminal_stop_e_ref = receipt(terminal_stop_e_path)
+    if terminal_stop_e["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_STOP_E_C" or \
+            terminal_stop_e["base_sha256"] != main_obj["sha256"] or \
+            terminal_stop_e["unresolved_before"] != 175 or \
+            terminal_stop_e["unresolved_after"] != 174 or \
+            terminal_stop_e["imports_resolved"] != ["audio_terminal_ui_stop_service_e_5ec9c0"] or \
+            terminal_stop_e["imports_added"]:
+        raise RuntimeError("Apollo Main terminal result cleanup binding changed")
+    main_obj = file_checked(terminal_stop_e["linked_object"], terminal_stop_e["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_terminal_ui_stop_service_e_5ec9c0" in actual:
+        raise RuntimeError("Apollo Main terminal result cleanup frontier changed")
+    terminal_stop_a_path = G2 / "build/c-firmware/20261016/main-terminal-ui-stop-a-5eceb2/receipt.json"
+    terminal_stop_a, terminal_stop_a_ref = receipt(terminal_stop_a_path)
+    if terminal_stop_a["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_STOP_A_C" or \
+            terminal_stop_a["base_sha256"] != main_obj["sha256"] or \
+            terminal_stop_a["unresolved_before"] != 174 or \
+            terminal_stop_a["unresolved_after"] != 174 or \
+            terminal_stop_a["imports_resolved"] != ["audio_terminal_ui_stop_service_a_5eceb2"] or \
+            terminal_stop_a["imports_added"] != ["audio_terminal_ui_object_valid_43e2ea"]:
+        raise RuntimeError("Apollo Main terminal timer cleanup binding changed")
+    main_obj = file_checked(terminal_stop_a["linked_object"], terminal_stop_a["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_terminal_ui_stop_service_a_5eceb2" in actual:
+        raise RuntimeError("Apollo Main terminal timer cleanup frontier changed")
+    object_valid_path = G2 / "build/c-firmware/20261016/main-terminal-ui-object-valid-43e2ea/receipt.json"
+    object_valid, object_valid_ref = receipt(object_valid_path)
+    if object_valid["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_OBJECT_VALID_C" or \
+            object_valid["base_sha256"] != main_obj["sha256"] or \
+            object_valid["unresolved_before"] != 174 or \
+            object_valid["unresolved_after"] != 174 or \
+            object_valid["imports_resolved"] != ["audio_terminal_ui_object_valid_43e2ea"] or \
+            object_valid["imports_added"] != ["audio_terminal_ui_object_descendant_43ee54"]:
+        raise RuntimeError("Apollo Main terminal object membership binding changed")
+    main_obj = file_checked(object_valid["linked_object"], object_valid["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_terminal_ui_object_valid_43e2ea" in actual:
+        raise RuntimeError("Apollo Main terminal object membership frontier changed")
+    descendant_path = G2 / "build/c-firmware/20261016/main-terminal-ui-object-descendant-43ee54/receipt.json"
+    descendant, descendant_ref = receipt(descendant_path)
+    if descendant["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_OBJECT_DESCENDANT_C" or \
+            descendant["base_sha256"] != main_obj["sha256"] or \
+            descendant["unresolved_before"] != 174 or descendant["unresolved_after"] != 173 or \
+            descendant["imports_resolved"] != ["audio_terminal_ui_object_descendant_43ee54"] or \
+            descendant["imports_added"]:
+        raise RuntimeError("Apollo Main terminal descendant binding changed")
+    main_obj = file_checked(descendant["linked_object"], descendant["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 173 or "audio_terminal_ui_object_descendant_43ee54" in actual:
+        raise RuntimeError("Apollo Main terminal descendant frontier changed")
+    list_anim_path = G2 / "build/c-firmware/20261016/main-terminal-list-anim-stop-5896b4/receipt.json"
+    list_anim, list_anim_ref = receipt(list_anim_path)
+    if list_anim["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LIST_ANIM_STOP_C" or \
+            list_anim["base_sha256"] != main_obj["sha256"] or \
+            list_anim["unresolved_before"] != 173 or list_anim["unresolved_after"] != 172 or \
+            list_anim["imports_resolved"] != ["audio_terminal_ui_stop_voice_5896b4"] or \
+            list_anim["imports_added"] or list_anim["ram_base"] != "0x20070ea8" or \
+            list_anim["ram_extent"] != "0xd0":
+        raise RuntimeError("Apollo Main list animation stop binding changed")
+    main_obj = file_checked(list_anim["linked_object"], list_anim["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 172 or "audio_terminal_ui_stop_voice_5896b4" in actual:
+        raise RuntimeError("Apollo Main list animation stop frontier changed")
+    timer_path = G2 / "build/c-firmware/20261016/main-terminal-ui-stop-timer-5e7ec4/receipt.json"
+    timer, timer_ref = receipt(timer_path)
+    if timer["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_STOP_TIMER_C" or \
+            timer["base_sha256"] != main_obj["sha256"] or \
+            timer["unresolved_before"] != 172 or timer["unresolved_after"] != 171 or \
+            timer["imports_resolved"] != ["audio_terminal_ui_stop_timer_5e7ec4"] or \
+            timer["imports_added"] or timer["ram_base"] != "0x20073c38" or \
+            timer["ram_extent"] != "0x18":
+        raise RuntimeError("Apollo Main terminal timer stop binding changed")
+    main_obj = file_checked(timer["linked_object"], timer["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 171 or "audio_terminal_ui_stop_timer_5e7ec4" in actual:
+        raise RuntimeError("Apollo Main terminal timer stop frontier changed")
+    services_bcd_path = G2 / "build/c-firmware/20261016/main-terminal-ui-stop-services-bcd/receipt.json"
+    services_bcd, services_bcd_ref = receipt(services_bcd_path)
+    if services_bcd["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_STOP_SERVICES_BCD_C" or \
+            services_bcd["base_sha256"] != main_obj["sha256"] or \
+            services_bcd["unresolved_before"] != 171 or services_bcd["unresolved_after"] != 169 or \
+            set(services_bcd["imports_resolved"]) != {
+                "audio_terminal_ui_stop_service_b_5ec268",
+                "audio_terminal_ui_stop_service_c_5ebbc6",
+                "audio_terminal_ui_stop_service_d_5ec770"} or \
+            services_bcd["imports_added"] != ["audio_terminal_ui_event_5e5484"]:
+        raise RuntimeError("Apollo Main terminal cleanup children binding changed")
+    main_obj = file_checked(services_bcd["linked_object"], services_bcd["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 169 or "audio_terminal_ui_event_5e5484" not in actual:
+        raise RuntimeError("Apollo Main terminal cleanup children frontier changed")
+    display_notify_path = G2 / "build/c-firmware/20261016/main-terminal-display-state-notify/receipt.json"
+    display_notify, display_notify_ref = receipt(display_notify_path)
+    if display_notify["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_DISPLAY_STATE_NOTIFY_C" or \
+            display_notify["base_sha256"] != main_obj["sha256"] or \
+            display_notify["unresolved_before"] != 169 or display_notify["unresolved_after"] != 168 or \
+            display_notify["imports_resolved"] != ["audio_terminal_ui_event_5e5484"] or \
+            display_notify["imports_added"]:
+        raise RuntimeError("Apollo Main Terminal display-state notify binding changed")
+    main_obj = file_checked(display_notify["linked_object"], display_notify["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 168 or "audio_terminal_ui_event_5e5484" in actual:
+        raise RuntimeError("Apollo Main Terminal display-state notify frontier changed")
+    terminal_start_path = G2 / "build/c-firmware/20261016/main-terminal-ui-start-5e716c/receipt.json"
+    terminal_start, terminal_start_ref = receipt(terminal_start_path)
+    if terminal_start["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_START_C" or \
+            terminal_start["base_sha256"] != main_obj["sha256"] or \
+            terminal_start["unresolved_before"] != 168 or terminal_start["unresolved_after"] != 169 or \
+            terminal_start["imports_resolved"] != ["audio_terminal_ui_start_5e716c"] or \
+            set(terminal_start["imports_added"]) != {
+                "audio_terminal_ui_theme_5e47cc", "audio_terminal_list_anim_init_58966c"}:
+        raise RuntimeError("Apollo Main Terminal UI start binding changed")
+    main_obj = file_checked(terminal_start["linked_object"], terminal_start["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 169 or "audio_terminal_ui_start_5e716c" in actual:
+        raise RuntimeError("Apollo Main Terminal UI start frontier changed")
+    list_anim_init_path = G2 / "build/c-firmware/20261016/main-terminal-list-anim-init-58966c/receipt.json"
+    list_anim_init, list_anim_init_ref = receipt(list_anim_init_path)
+    if list_anim_init["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LIST_ANIM_INIT_C" or \
+            list_anim_init["base_sha256"] != main_obj["sha256"] or \
+            list_anim_init["unresolved_before"] != 169 or list_anim_init["unresolved_after"] != 168 or \
+            list_anim_init["imports_resolved"] != ["audio_terminal_list_anim_init_58966c"] or \
+            list_anim_init["imports_added"]:
+        raise RuntimeError("Apollo Main list animation init binding changed")
+    main_obj = file_checked(list_anim_init["linked_object"], list_anim_init["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 168 or "audio_terminal_list_anim_init_58966c" in actual:
+        raise RuntimeError("Apollo Main list animation init frontier changed")
+    theme_path = G2 / "build/c-firmware/20261016/main-terminal-ui-theme-5e47cc/receipt.json"
+    theme, theme_ref = receipt(theme_path)
+    if theme["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_THEME_C" or \
+            theme["base_sha256"] != main_obj["sha256"] or \
+            theme["unresolved_before"] != 168 or theme["unresolved_after"] != 167 or \
+            theme["imports_resolved"] != ["audio_terminal_ui_theme_5e47cc"] or theme["imports_added"]:
+        raise RuntimeError("Apollo Main Terminal theme binding changed")
+    main_obj = file_checked(theme["linked_object"], theme["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 167 or "audio_terminal_ui_theme_5e47cc" in actual:
+        raise RuntimeError("Apollo Main Terminal theme frontier changed")
+    terminal_tick_path = G2 / "build/c-firmware/20261016/main-terminal-ui-tick-5e8008/receipt.json"
+    terminal_tick, terminal_tick_ref = receipt(terminal_tick_path)
+    if terminal_tick["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_TICK_C" or \
+            terminal_tick["base_sha256"] != main_obj["sha256"] or \
+            terminal_tick["unresolved_before"] != 167 or terminal_tick["unresolved_after"] != 166 or \
+            terminal_tick["imports_resolved"] != ["audio_terminal_ui_tick_5e8008"] or \
+            terminal_tick["imports_added"] or len(terminal_tick["sources"]) != 4:
+        raise RuntimeError("Apollo Main Terminal tick binding changed")
+    main_obj = file_checked(terminal_tick["linked_object"], terminal_tick["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 166 or "audio_terminal_ui_tick_5e8008" in actual:
+        raise RuntimeError("Apollo Main Terminal tick frontier changed")
+    terminal_fsm_path = G2 / "build/c-firmware/20261016/main-terminal-ui-status-5e7b74/receipt.json"
+    terminal_fsm, terminal_fsm_ref = receipt(terminal_fsm_path)
+    fsm_added = set(terminal_fsm["imports_added"])
+    if terminal_fsm["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_STATUS_C" or \
+            terminal_fsm["base_sha256"] != main_obj["sha256"] or \
+            terminal_fsm["unresolved_before"] != 166 or terminal_fsm["unresolved_after"] != 217 or \
+            terminal_fsm["imports_resolved"] != ["audio_terminal_ui_status_5e7b74"] or \
+            len({name for name in fsm_added if name.startswith("audio_terminal_ui_action_")}) != 50 or \
+            terminal_fsm["table_base"] != "0x650430" or terminal_fsm["table_extent"] != "0x1040":
+        raise RuntimeError("Apollo Main Terminal FSM binding changed")
+    main_obj = file_checked(terminal_fsm["linked_object"], terminal_fsm["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 217 or "audio_terminal_ui_status_5e7b74" in actual or \
+            not fsm_added <= set(actual):
+        raise RuntimeError("Apollo Main Terminal FSM frontier changed")
+    fsm_names_path = G2 / "build/c-firmware/20261016/main-terminal-ui-fsm-names-5e7b10/receipt.json"
+    fsm_names, fsm_names_ref = receipt(fsm_names_path)
+    if fsm_names["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_FSM_NAMES_C" or \
+            fsm_names["base_sha256"] != main_obj["sha256"] or \
+            fsm_names["unresolved_before"] != 217 or fsm_names["unresolved_after"] != 215 or \
+            set(fsm_names["imports_resolved"]) != {
+                "audio_terminal_ui_state_name_5e7b10", "audio_terminal_ui_event_name_5e7b2a"} or \
+            fsm_names["imports_added"] or fsm_names["state_names_ram"] != "0x20003ea4" or \
+            fsm_names["event_names_ram"] != "0x20003edc":
+        raise RuntimeError("Apollo Main Terminal FSM name binding changed")
+    main_obj = file_checked(fsm_names["linked_object"], fsm_names["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 215 or "audio_terminal_ui_state_name_5e7b10" in actual or \
+            "audio_terminal_ui_event_name_5e7b2a" in actual:
+        raise RuntimeError("Apollo Main Terminal FSM name frontier changed")
+    asr_actions_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-asr-start-5e5a7e/receipt.json"
+    asr_actions, asr_actions_ref = receipt(asr_actions_path)
+    if asr_actions["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_ASR_START_C" or \
+            asr_actions["base_sha256"] != main_obj["sha256"] or \
+            asr_actions["unresolved_before"] != 215 or asr_actions["unresolved_after"] != 214 or \
+            set(asr_actions["imports_resolved"]) != {
+                "audio_terminal_ui_action_5e5a7e", "audio_terminal_ui_action_5e5a94"} or \
+            asr_actions["imports_added"] != ["audio_terminal_ui_notification_restore_5ebfae"]:
+        raise RuntimeError("Apollo Main Terminal ASR actions binding changed")
+    main_obj = file_checked(asr_actions["linked_object"], asr_actions["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 214 or "audio_terminal_ui_notification_restore_5ebfae" not in actual:
+        raise RuntimeError("Apollo Main Terminal ASR actions frontier changed")
+    notification_restore_path = G2 / "build/c-firmware/20261016/main-terminal-ui-notification-restore-5ebfae/receipt.json"
+    notification_restore, notification_restore_ref = receipt(notification_restore_path)
+    if notification_restore["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_NOTIFICATION_RESTORE_C" or \
+            notification_restore["base_sha256"] != main_obj["sha256"] or \
+            notification_restore["unresolved_before"] != 214 or \
+            notification_restore["unresolved_after"] != 213 or \
+            notification_restore["imports_resolved"] != ["audio_terminal_ui_notification_restore_5ebfae"] or \
+            notification_restore["imports_added"] or len(notification_restore["sources"]) != 2:
+        raise RuntimeError("Apollo Main Terminal notification restore binding changed")
+    main_obj = file_checked(notification_restore["linked_object"], notification_restore["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 213 or "audio_terminal_ui_notification_restore_5ebfae" in actual:
+        raise RuntimeError("Apollo Main Terminal notification restore frontier changed")
+    exit_actions_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-notification-exit-5e5442/receipt.json"
+    exit_actions, exit_actions_ref = receipt(exit_actions_path)
+    if exit_actions["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_NOTIFICATION_EXIT_C" or \
+            exit_actions["base_sha256"] != main_obj["sha256"] or \
+            exit_actions["unresolved_before"] != 213 or exit_actions["unresolved_after"] != 211 or \
+            set(exit_actions["imports_resolved"]) != {
+                "audio_terminal_ui_action_5e5442", "audio_terminal_ui_action_5ed748"} or \
+            exit_actions["imports_added"] or len(exit_actions["sources"]) != 2:
+        raise RuntimeError("Apollo Main Terminal notification exit actions binding changed")
+    main_obj = file_checked(exit_actions["linked_object"], exit_actions["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 211 or "audio_terminal_ui_action_5e5442" in actual or \
+            "audio_terminal_ui_action_5ed748" in actual:
+        raise RuntimeError("Apollo Main Terminal notification exit actions frontier changed")
+    payload_actions_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-payload-5e6400/receipt.json"
+    payload_actions, payload_actions_ref = receipt(payload_actions_path)
+    if payload_actions["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_PAYLOAD_C" or \
+            payload_actions["base_sha256"] != main_obj["sha256"] or \
+            payload_actions["unresolved_before"] != 211 or payload_actions["unresolved_after"] != 211 or \
+            set(payload_actions["imports_resolved"]) != {
+                "audio_terminal_ui_action_5e6400", "audio_terminal_ui_action_5e6410"} or \
+            set(payload_actions["imports_added"]) != {
+                "audio_terminal_control_flags_5e4a6e", "audio_terminal_elapsed_text_5e48b8"}:
+        raise RuntimeError("Apollo Main Terminal payload actions binding changed")
+    main_obj = file_checked(payload_actions["linked_object"], payload_actions["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 211 or any(name in actual for name in payload_actions["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal payload actions frontier changed")
+    elapsed_text_path = G2 / "build/c-firmware/20261016/main-terminal-elapsed-text-5e48b8/receipt.json"
+    elapsed_text, elapsed_text_ref = receipt(elapsed_text_path)
+    if elapsed_text["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ELAPSED_TEXT_C" or \
+            elapsed_text["base_sha256"] != main_obj["sha256"] or \
+            elapsed_text["unresolved_before"] != 211 or elapsed_text["unresolved_after"] != 212 or \
+            elapsed_text["imports_resolved"] != ["audio_terminal_elapsed_text_5e48b8"] or \
+            set(elapsed_text["imports_added"]) != {
+                "audio_lv_label_set_text_fmt_49954c", "audio_lv_obj_invalidate_43dfa4"}:
+        raise RuntimeError("Apollo Main Terminal elapsed-text binding changed")
+    main_obj = file_checked(elapsed_text["linked_object"], elapsed_text["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 212 or "audio_terminal_elapsed_text_5e48b8" in actual:
+        raise RuntimeError("Apollo Main Terminal elapsed-text frontier changed")
+    control_flags_path = G2 / "build/c-firmware/20261016/main-terminal-control-flags-5e4a6e/receipt.json"
+    control_flags, control_flags_ref = receipt(control_flags_path)
+    if control_flags["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_CONTROL_FLAGS_C" or \
+            control_flags["base_sha256"] != main_obj["sha256"] or \
+            control_flags["unresolved_before"] != 212 or control_flags["unresolved_after"] != 213 or \
+            control_flags["imports_resolved"] != ["audio_terminal_control_flags_5e4a6e"] or \
+            set(control_flags["imports_added"]) != {
+                "audio_terminal_output_start_5e4920", "audio_terminal_set_output_5e49b0"}:
+        raise RuntimeError("Apollo Main Terminal control-flags binding changed")
+    main_obj = file_checked(control_flags["linked_object"], control_flags["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 213 or "audio_terminal_control_flags_5e4a6e" in actual:
+        raise RuntimeError("Apollo Main Terminal control-flags frontier changed")
+    output_start_path = G2 / "build/c-firmware/20261016/main-terminal-output-start-5e4920/receipt.json"
+    output_start, output_start_ref = receipt(output_start_path)
+    if output_start["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_OUTPUT_START_C" or \
+            output_start["base_sha256"] != main_obj["sha256"] or \
+            output_start["unresolved_before"] != 213 or output_start["unresolved_after"] != 216 or \
+            output_start["imports_resolved"] != ["audio_terminal_output_start_5e4920"] or \
+            set(output_start["imports_added"]) != {
+                "audio_terminal_processing_prepare_5ea30c", "audio_terminal_processing_hide_5e4878",
+                "audio_lv_anim_start_49942e", "audio_terminal_elapsed_refresh_5e4902"}:
+        raise RuntimeError("Apollo Main Terminal output-start binding changed")
+    main_obj = file_checked(output_start["linked_object"], output_start["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 216 or "audio_terminal_output_start_5e4920" in actual:
+        raise RuntimeError("Apollo Main Terminal output-start frontier changed")
+    processing_hide_path = G2 / "build/c-firmware/20261016/main-terminal-processing-hide-5e4878/receipt.json"
+    processing_hide, processing_hide_ref = receipt(processing_hide_path)
+    if processing_hide["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_PROCESSING_HIDE_C" or \
+            processing_hide["base_sha256"] != main_obj["sha256"] or \
+            processing_hide["unresolved_before"] != 216 or processing_hide["unresolved_after"] != 217 or \
+            processing_hide["imports_resolved"] != ["audio_terminal_processing_hide_5e4878"] or \
+            set(processing_hide["imports_added"]) != {
+                "audio_lv_object_call_450500", "audio_lv_object_call_441488"}:
+        raise RuntimeError("Apollo Main Terminal processing wrapper binding changed")
+    main_obj = file_checked(processing_hide["linked_object"], processing_hide["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 217 or "audio_terminal_processing_hide_5e4878" in actual:
+        raise RuntimeError("Apollo Main Terminal processing wrapper frontier changed")
+    processing_prepare_path = G2 / "build/c-firmware/20261016/main-terminal-processing-prepare-5ea30c/receipt.json"
+    processing_prepare, processing_prepare_ref = receipt(processing_prepare_path)
+    if processing_prepare["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_PROCESSING_PREPARE_C" or \
+            processing_prepare["base_sha256"] != main_obj["sha256"] or \
+            processing_prepare["unresolved_before"] != 217 or processing_prepare["unresolved_after"] != 217 or \
+            processing_prepare["imports_resolved"] != ["audio_terminal_processing_prepare_5ea30c"] or \
+            processing_prepare["imports_added"] != ["audio_lv_object_release_44d7b8"]:
+        raise RuntimeError("Apollo Main Terminal processing clear binding changed")
+    main_obj = file_checked(processing_prepare["linked_object"], processing_prepare["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 217 or "audio_terminal_processing_prepare_5ea30c" in actual:
+        raise RuntimeError("Apollo Main Terminal processing clear frontier changed")
+    elapsed_refresh_path = G2 / "build/c-firmware/20261016/main-terminal-elapsed-refresh-5e4902/receipt.json"
+    elapsed_refresh, elapsed_refresh_ref = receipt(elapsed_refresh_path)
+    if elapsed_refresh["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ELAPSED_REFRESH_C" or \
+            elapsed_refresh["base_sha256"] != main_obj["sha256"] or \
+            elapsed_refresh["unresolved_before"] != 217 or elapsed_refresh["unresolved_after"] != 217 or \
+            elapsed_refresh["imports_resolved"] != ["audio_terminal_elapsed_refresh_5e4902"] or \
+            elapsed_refresh["imports_added"] != ["audio_terminal_elapsed_clear_5e4894"]:
+        raise RuntimeError("Apollo Main Terminal elapsed-refresh binding changed")
+    main_obj = file_checked(elapsed_refresh["linked_object"], elapsed_refresh["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 217 or "audio_terminal_elapsed_refresh_5e4902" in actual:
+        raise RuntimeError("Apollo Main Terminal elapsed-refresh frontier changed")
+    elapsed_clear_path = G2 / "build/c-firmware/20261016/main-terminal-elapsed-clear-5e4894/receipt.json"
+    elapsed_clear, elapsed_clear_ref = receipt(elapsed_clear_path)
+    if elapsed_clear["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ELAPSED_CLEAR_C" or \
+            elapsed_clear["base_sha256"] != main_obj["sha256"] or \
+            elapsed_clear["unresolved_before"] != 217 or elapsed_clear["unresolved_after"] != 217 or \
+            elapsed_clear["imports_resolved"] != ["audio_terminal_elapsed_clear_5e4894"] or \
+            elapsed_clear["imports_added"] != ["audio_lv_object_call_43ded4"]:
+        raise RuntimeError("Apollo Main Terminal elapsed-clear binding changed")
+    main_obj = file_checked(elapsed_clear["linked_object"], elapsed_clear["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 217 or "audio_terminal_elapsed_clear_5e4894" in actual:
+        raise RuntimeError("Apollo Main Terminal elapsed-clear frontier changed")
+    set_output_path = G2 / "build/c-firmware/20261016/main-terminal-set-output-5e49b0/receipt.json"
+    set_output, set_output_ref = receipt(set_output_path)
+    if set_output["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SET_OUTPUT_C" or \
+            set_output["base_sha256"] != main_obj["sha256"] or \
+            set_output["unresolved_before"] != 217 or set_output["unresolved_after"] != 222 or \
+            set_output["imports_resolved"] != ["audio_terminal_set_output_5e49b0"] or \
+            set(set_output["imports_added"]) != {
+                "audio_terminal_output_style_20003f80", "audio_terminal_output_payload_20074a94",
+                "audio_terminal_output_mode_2007502d", "audio_terminal_output_active_2007502c",
+                "audio_terminal_set_label_style_5e482a", "audio_terminal_select_output_mode_5ea2a8"}:
+        raise RuntimeError("Apollo Main Terminal set-output binding changed")
+    main_obj = file_checked(set_output["linked_object"], set_output["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 222 or "audio_terminal_set_output_5e49b0" in actual:
+        raise RuntimeError("Apollo Main Terminal set-output frontier changed")
+    output_ram_path = G2 / "build/c-firmware/20261016/main-terminal-output-ram-cells/receipt.json"
+    output_ram, output_ram_ref = receipt(output_ram_path)
+    if output_ram["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_OUTPUT_RAM_CELLS" or \
+            output_ram["base_sha256"] != main_obj["sha256"] or \
+            output_ram["unresolved_before"] != 222 or output_ram["unresolved_after"] != 219 or \
+            set(output_ram["imports_resolved"]) != {
+                "audio_terminal_output_payload_20074a94", "audio_terminal_output_active_2007502c",
+                "audio_terminal_output_mode_2007502d"} or output_ram["imports_added"]:
+        raise RuntimeError("Apollo Main Terminal output RAM binding changed")
+    main_obj = file_checked(output_ram["linked_object"], output_ram["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 219 or any(name in actual for name in output_ram["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal output RAM frontier changed")
+    label_style_path = G2 / "build/c-firmware/20261016/main-terminal-set-label-style-5e482a/receipt.json"
+    label_style, label_style_ref = receipt(label_style_path)
+    if label_style["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SET_LABEL_STYLE_C" or \
+            label_style["base_sha256"] != main_obj["sha256"] or \
+            label_style["unresolved_before"] != 219 or label_style["unresolved_after"] != 222 or \
+            label_style["imports_resolved"] != ["audio_terminal_set_label_style_5e482a"] or \
+            set(label_style["imports_added"]) != {
+                "audio_lv_label_style_call_597ea6", "audio_lv_label_style_call_597f10",
+                "audio_lv_label_style_call_597f52", "audio_lv_label_style_call_597ee0"}:
+        raise RuntimeError("Apollo Main Terminal label style binding changed")
+    main_obj = file_checked(label_style["linked_object"], label_style["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 222 or "audio_terminal_set_label_style_5e482a" in actual:
+        raise RuntimeError("Apollo Main Terminal label style frontier changed")
+    output_mode_path = G2 / "build/c-firmware/20261016/main-terminal-select-output-mode-5ea2a8/receipt.json"
+    output_mode, output_mode_ref = receipt(output_mode_path)
+    if output_mode["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SELECT_OUTPUT_MODE_C" or \
+            output_mode["base_sha256"] != main_obj["sha256"] or \
+            output_mode["unresolved_before"] != 222 or output_mode["unresolved_after"] != 221 or \
+            output_mode["imports_resolved"] != ["audio_terminal_select_output_mode_5ea2a8"] or \
+            output_mode["imports_added"] or set(output_mode["additional_providers"]) != {
+                "audio_terminal_select_output_mode_core_5ea270", "audio_terminal_output_hash_5ea256"}:
+        raise RuntimeError("Apollo Main Terminal output-mode binding changed")
+    main_obj = file_checked(output_mode["linked_object"], output_mode["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 221 or "audio_terminal_select_output_mode_5ea2a8" in actual:
+        raise RuntimeError("Apollo Main Terminal output-mode frontier changed")
+    dismiss_action_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-dismiss-query-5e68b4/receipt.json"
+    dismiss_action, dismiss_action_ref = receipt(dismiss_action_path)
+    if dismiss_action["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_DISMISS_QUERY_C" or \
+            dismiss_action["base_sha256"] != main_obj["sha256"] or \
+            dismiss_action["unresolved_before"] != 221 or dismiss_action["unresolved_after"] != 221 or \
+            dismiss_action["imports_resolved"] != ["audio_terminal_ui_action_5e68b4"] or \
+            dismiss_action["imports_added"] != ["audio_terminal_ui_restore_query_5e6620"]:
+        raise RuntimeError("Apollo Main Terminal query-dismiss action binding changed")
+    main_obj = file_checked(dismiss_action["linked_object"], dismiss_action["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 221 or "audio_terminal_ui_action_5e68b4" in actual:
+        raise RuntimeError("Apollo Main Terminal query-dismiss action frontier changed")
+    status_action_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-status-5e7022/receipt.json"
+    status_action, status_action_ref = receipt(status_action_path)
+    if status_action["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_STATUS_C" or \
+            status_action["base_sha256"] != main_obj["sha256"] or \
+            status_action["unresolved_before"] != 221 or status_action["unresolved_after"] != 221 or \
+            status_action["imports_resolved"] != ["audio_terminal_ui_action_5e7022"] or \
+            status_action["imports_added"] != ["audio_terminal_display_status_44ea04"] or \
+            set(status_action["additional_providers"]) != {
+                "audio_terminal_status_low_5e4f10", "audio_terminal_status_high_5e4f14"}:
+        raise RuntimeError("Apollo Main Terminal status action binding changed")
+    main_obj = file_checked(status_action["linked_object"], status_action["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 221 or "audio_terminal_ui_action_5e7022" in actual:
+        raise RuntimeError("Apollo Main Terminal status action frontier changed")
+    reset_pair_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-reset-pair-5e5290/receipt.json"
+    reset_pair, reset_pair_ref = receipt(reset_pair_path)
+    if reset_pair["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_RESET_PAIR_C" or \
+            reset_pair["base_sha256"] != main_obj["sha256"] or \
+            reset_pair["unresolved_before"] != 221 or reset_pair["unresolved_after"] != 223 or \
+            set(reset_pair["imports_resolved"]) != {
+                "audio_terminal_ui_action_5e5290", "audio_terminal_ui_action_5e5386"} or \
+            set(reset_pair["imports_added"]) != {
+                "audio_terminal_reset_first_5e51ba", "audio_terminal_reset_mode_5eae2c",
+                "audio_terminal_reset_display_5e4c84", "audio_terminal_reset_subtree_5ea342"}:
+        raise RuntimeError("Apollo Main Terminal reset-pair binding changed")
+    main_obj = file_checked(reset_pair["linked_object"], reset_pair["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 223 or any(name in actual for name in reset_pair["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal reset-pair frontier changed")
+    reset_children_path = G2 / "build/c-firmware/20261016/main-terminal-reset-mode-display/receipt.json"
+    reset_children, reset_children_ref = receipt(reset_children_path)
+    if reset_children["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RESET_MODE_DISPLAY_C" or \
+            reset_children["base_sha256"] != main_obj["sha256"] or \
+            reset_children["unresolved_before"] != 223 or reset_children["unresolved_after"] != 222 or \
+            set(reset_children["imports_resolved"]) != {
+                "audio_terminal_reset_mode_5eae2c", "audio_terminal_reset_display_5e4c84"} or \
+            reset_children["imports_added"] != ["audio_terminal_mode_set_5eae1e"]:
+        raise RuntimeError("Apollo Main Terminal reset children binding changed")
+    main_obj = file_checked(reset_children["linked_object"], reset_children["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 222 or any(name in actual for name in reset_children["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal reset children frontier changed")
+    mode_set_path = G2 / "build/c-firmware/20261016/main-terminal-mode-set-5eae1e/receipt.json"
+    mode_set, mode_set_ref = receipt(mode_set_path)
+    if mode_set["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_MODE_SET_C" or \
+            mode_set["base_sha256"] != main_obj["sha256"] or \
+            mode_set["unresolved_before"] != 222 or mode_set["unresolved_after"] != 222 or \
+            mode_set["imports_resolved"] != ["audio_terminal_mode_set_5eae1e"] or \
+            mode_set["imports_added"] != ["audio_terminal_event_emit_5eadd4"]:
+        raise RuntimeError("Apollo Main Terminal mode-set binding changed")
+    main_obj = file_checked(mode_set["linked_object"], mode_set["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 222 or "audio_terminal_mode_set_5eae1e" in actual:
+        raise RuntimeError("Apollo Main Terminal mode-set frontier changed")
+    event_emit_path = G2 / "build/c-firmware/20261016/main-terminal-event-emit-5eadd4/receipt.json"
+    event_emit, event_emit_ref = receipt(event_emit_path)
+    if event_emit["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_EMIT_C" or \
+            event_emit["base_sha256"] != main_obj["sha256"] or \
+            event_emit["unresolved_before"] != 222 or event_emit["unresolved_after"] != 225 or \
+            event_emit["imports_resolved"] != ["audio_terminal_event_emit_5eadd4"] or \
+            set(event_emit["imports_added"]) != {
+                "audio_terminal_event_type2_5eabde", "audio_terminal_event_type4_5ea9f6",
+                "audio_terminal_event_default_5eaad4", "audio_terminal_event_type3_mask_5eaca0"}:
+        raise RuntimeError("Apollo Main Terminal event-emitter binding changed")
+    main_obj = file_checked(event_emit["linked_object"], event_emit["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 225 or "audio_terminal_event_emit_5eadd4" in actual:
+        raise RuntimeError("Apollo Main Terminal event-emitter frontier changed")
+    event_type4_path = G2 / "build/c-firmware/20261016/main-terminal-event-type4-5ea9f6/receipt.json"
+    event_type4, event_type4_ref = receipt(event_type4_path)
+    if event_type4["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_TYPE4_C" or \
+            event_type4["base_sha256"] != main_obj["sha256"] or \
+            event_type4["unresolved_before"] != 225 or event_type4["unresolved_after"] != 226 or \
+            event_type4["imports_resolved"] != ["audio_terminal_event_type4_5ea9f6"] or \
+            set(event_type4["imports_added"]) != {
+                "audio_lv_object_size_call_43f4c0", "audio_terminal_event_reset_list_5ea7dc"}:
+        raise RuntimeError("Apollo Main Terminal event type 4 binding changed")
+    main_obj = file_checked(event_type4["linked_object"], event_type4["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 226 or "audio_terminal_event_type4_5ea9f6" in actual:
+        raise RuntimeError("Apollo Main Terminal event type 4 frontier changed")
+    reset_list_path = G2 / "build/c-firmware/20261016/main-terminal-event-reset-list-5ea7dc/receipt.json"
+    reset_list, reset_list_ref = receipt(reset_list_path)
+    if reset_list["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_RESET_LIST_C" or \
+            reset_list["base_sha256"] != main_obj["sha256"] or \
+            reset_list["unresolved_before"] != 226 or reset_list["unresolved_after"] != 226 or \
+            reset_list["imports_resolved"] != ["audio_terminal_event_reset_list_5ea7dc"] or \
+            reset_list["imports_added"] != ["audio_lv_object_flag_43ded4"]:
+        raise RuntimeError("Apollo Main Terminal event list-reset binding changed")
+    main_obj = file_checked(reset_list["linked_object"], reset_list["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 226 or "audio_terminal_event_reset_list_5ea7dc" in actual:
+        raise RuntimeError("Apollo Main Terminal event list-reset frontier changed")
+    refresh_view_path = G2 / "build/c-firmware/20261016/main-terminal-event-refresh-view-5ea992/oracle-receipt.json"
+    refresh_view, refresh_view_ref = receipt(refresh_view_path)
+    refresh_source = G2 / "components/audio/uart_thread_source_candidate/terminal_event_refresh_view_5ea992.c"
+    if refresh_view["status"] != "PASS_EXPERIMENTAL_TERMINAL_EVENT_REFRESH_VIEW_C_ORACLE" or \
+            refresh_view["cases"] != 48 or \
+            refresh_view["source_sha256"] != hashlib.sha256(refresh_source.read_bytes()).hexdigest():
+        raise RuntimeError("Apollo Main Terminal view-refresh source evidence changed")
+    for staged_name, staged_status, staged_cases, staged_source in (
+            ("select-input-5eaa54", "PASS_EXPERIMENTAL_TERMINAL_EVENT_SELECT_INPUT_C_ORACLE", 36,
+             "terminal_event_select_input_5eaa54.c"),
+            ("apply-input-5eaa96", "PASS_EXPERIMENTAL_TERMINAL_EVENT_APPLY_INPUT_C_ORACLE", 36,
+             "terminal_event_apply_input_5eaa96.c")):
+        staged_path = G2 / f"build/c-firmware/20261016/main-terminal-event-{staged_name}/oracle-receipt.json"
+        staged, staged_ref = receipt(staged_path)
+        source_path = G2 / "components/audio/uart_thread_source_candidate" / staged_source
+        if staged["status"] != staged_status or staged["cases"] != staged_cases or \
+                staged["source_sha256"] != hashlib.sha256(source_path.read_bytes()).hexdigest():
+            raise RuntimeError(f"Apollo Main Terminal {staged_name} source evidence changed")
+        if staged_name.startswith("select"):
+            select_input_ref = staged_ref
+        else:
+            apply_input_ref = staged_ref
+    for bound_dir, status, before_count, after_count, resolved, added in (
+            ("main-terminal-event-default-5eaad4", "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_DEFAULT_C",
+             226, 233, "audio_terminal_event_default_5eaad4",
+             {"audio_terminal_event_select_input_5eaa54", "audio_terminal_resource_597324",
+              "audio_terminal_item_59737c", "audio_terminal_item_height_5ea67a",
+              "audio_terminal_recompute_offsets_5ea6da", "audio_terminal_event_apply_input_5eaa96",
+              "audio_terminal_event_refresh_view_5ea992", "audio_terminal_view_position_5ea926"}),
+            ("main-terminal-event-select-input-5eaa54", "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_SELECT_INPUT_C",
+             233, 232, "audio_terminal_event_select_input_5eaa54", set()),
+            ("main-terminal-event-apply-input-5eaa96", "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_APPLY_INPUT_C",
+             232, 231, "audio_terminal_event_apply_input_5eaa96", set()),
+            ("main-terminal-event-refresh-view-5ea992", "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_REFRESH_VIEW_C",
+             231, 230, "audio_terminal_event_refresh_view_5ea992", set())):
+        bound_path = G2 / "build/c-firmware/20261016" / bound_dir / "receipt.json"
+        bound, bound_ref = receipt(bound_path)
+        if bound["status"] != status or bound["base_sha256"] != main_obj["sha256"] or \
+                bound["unresolved_before"] != before_count or \
+                bound["unresolved_after"] != after_count or \
+                bound["imports_resolved"] != [resolved] or \
+                set(bound["imports_added"]) != added:
+            raise RuntimeError(f"Apollo Main Terminal {bound_dir} binding changed")
+        main_obj = file_checked(bound["linked_object"], bound["linked_sha256"])
+        actual = undefined(ROOT / main_obj["path"])
+        if len(actual) != after_count or resolved in actual:
+            raise RuntimeError(f"Apollo Main Terminal {bound_dir} frontier changed")
+        if bound_dir.endswith("default-5eaad4"):
+            event_default_ref = bound_ref
+        elif bound_dir.endswith("select-input-5eaa54"):
+            select_input_bound_ref = bound_ref
+        elif bound_dir.endswith("apply-input-5eaa96"):
+            apply_input_bound_ref = bound_ref
+        else:
+            refresh_view_bound_ref = bound_ref
+    offsets_path = G2 / "build/c-firmware/20261016/main-terminal-recompute-offsets-5ea6da/receipt.json"
+    offsets, offsets_ref = receipt(offsets_path)
+    if offsets["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RECOMPUTE_OFFSETS_C" or \
+            offsets["base_sha256"] != main_obj["sha256"] or \
+            offsets["unresolved_before"] != 230 or offsets["unresolved_after"] != 229 or \
+            offsets["imports_resolved"] != ["audio_terminal_recompute_offsets_5ea6da"] or \
+            offsets["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal offset-recompute binding changed")
+    main_obj = file_checked(offsets["linked_object"], offsets["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 229 or "audio_terminal_recompute_offsets_5ea6da" in actual:
+        raise RuntimeError("Apollo Main Terminal offset-recompute frontier changed")
+    items_path = G2 / "build/c-firmware/20261016/main-terminal-resource-items-597324/receipt.json"
+    items, items_ref = receipt(items_path)
+    if items["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RESOURCE_ITEMS_C" or \
+            items["base_sha256"] != main_obj["sha256"] or \
+            items["unresolved_before"] != 229 or items["unresolved_after"] != 227 or \
+            items["imports_resolved"] != ["audio_terminal_item_59737c", "audio_terminal_resource_597324"] or \
+            items["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal resource/item binding changed")
+    main_obj = file_checked(items["linked_object"], items["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 227 or any(s in actual for s in items["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal resource/item frontier changed")
+    view_pos_path = G2 / "build/c-firmware/20261016/main-terminal-view-position-5ea926/receipt.json"
+    view_pos, view_pos_ref = receipt(view_pos_path)
+    if view_pos["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VIEW_POSITION_C" or \
+            view_pos["base_sha256"] != main_obj["sha256"] or \
+            view_pos["unresolved_before"] != 227 or view_pos["unresolved_after"] != 228 or \
+            view_pos["imports_resolved"] != ["audio_terminal_view_position_5ea926"] or \
+            view_pos["imports_added"] != ["audio_terminal_view_index_5ea8ce",
+                                          "audio_terminal_view_select_5ea810"]:
+        raise RuntimeError("Apollo Main Terminal view-position binding changed")
+    main_obj = file_checked(view_pos["linked_object"], view_pos["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 228 or "audio_terminal_view_position_5ea926" in actual:
+        raise RuntimeError("Apollo Main Terminal view-position frontier changed")
+    view_index_path = G2 / "build/c-firmware/20261016/main-terminal-view-index-5ea8ce/receipt.json"
+    view_index, view_index_ref = receipt(view_index_path)
+    if view_index["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VIEW_INDEX_C" or \
+            view_index["base_sha256"] != main_obj["sha256"] or \
+            view_index["unresolved_before"] != 228 or view_index["unresolved_after"] != 228 or \
+            view_index["imports_resolved"] != ["audio_terminal_view_index_5ea8ce"] or \
+            view_index["imports_added"] != ["audio_terminal_position_index_5ea868"]:
+        raise RuntimeError("Apollo Main Terminal view-index binding changed")
+    main_obj = file_checked(view_index["linked_object"], view_index["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 228 or "audio_terminal_view_index_5ea8ce" in actual:
+        raise RuntimeError("Apollo Main Terminal view-index frontier changed")
+    position_index_path = G2 / "build/c-firmware/20261016/main-terminal-position-index-5ea868/receipt.json"
+    position_index, position_index_ref = receipt(position_index_path)
+    if position_index["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_POSITION_INDEX_C" or \
+            position_index["base_sha256"] != main_obj["sha256"] or \
+            position_index["unresolved_before"] != 228 or position_index["unresolved_after"] != 227 or \
+            position_index["imports_resolved"] != ["audio_terminal_position_index_5ea868"] or \
+            position_index["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal position-index binding changed")
+    main_obj = file_checked(position_index["linked_object"], position_index["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 227 or "audio_terminal_position_index_5ea868" in actual:
+        raise RuntimeError("Apollo Main Terminal position-index frontier changed")
+    view_select_path = G2 / "build/c-firmware/20261016/main-terminal-view-select-5ea810/receipt.json"
+    view_select, view_select_ref = receipt(view_select_path)
+    if view_select["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VIEW_SELECT_C" or \
+            view_select["base_sha256"] != main_obj["sha256"] or \
+            view_select["unresolved_before"] != 227 or view_select["unresolved_after"] != 227 or \
+            view_select["imports_resolved"] != ["audio_terminal_view_select_5ea810"] or \
+            view_select["imports_added"] != ["audio_terminal_view_row_5ea768"]:
+        raise RuntimeError("Apollo Main Terminal view-select binding changed")
+    main_obj = file_checked(view_select["linked_object"], view_select["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 227 or "audio_terminal_view_select_5ea810" in actual:
+        raise RuntimeError("Apollo Main Terminal view-select frontier changed")
+    view_row_path = G2 / "build/c-firmware/20261016/main-terminal-view-row-5ea768/receipt.json"
+    view_row, view_row_ref = receipt(view_row_path)
+    if view_row["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VIEW_ROW_C" or \
+            view_row["base_sha256"] != main_obj["sha256"] or \
+            view_row["unresolved_before"] != 227 or view_row["unresolved_after"] != 229 or \
+            view_row["imports_resolved"] != ["audio_terminal_view_row_5ea768"] or \
+            view_row["imports_added"] != ["audio_lv_object_clear_flag_43dfa4",
+                                       "audio_lv_object_position_43f09a",
+                                       "audio_terminal_row_bind_5ea564"]:
+        raise RuntimeError("Apollo Main Terminal view-row binding changed")
+    main_obj = file_checked(view_row["linked_object"], view_row["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 229 or "audio_terminal_view_row_5ea768" in actual:
+        raise RuntimeError("Apollo Main Terminal view-row frontier changed")
+    lv_alias_path = G2 / "build/c-firmware/20261016/main-terminal-lv-existing-aliases/receipt.json"
+    lv_alias, lv_alias_ref = receipt(lv_alias_path)
+    if lv_alias["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LV_EXISTING_ALIASES_C" or \
+            lv_alias["base_sha256"] != main_obj["sha256"] or \
+            lv_alias["unresolved_before"] != 229 or lv_alias["unresolved_after"] != 226 or \
+            lv_alias["imports_resolved"] != ["audio_lv_object_clear_flag_43dfa4",
+                                           "audio_lv_object_flag_43ded4",
+                                           "audio_lv_object_position_43f09a"] or \
+            lv_alias["imports_added"] != [] or \
+            lv_alias["provider_symbols"] != ["audio_uart_page_43ded4",
+                                             "audio_uart_page_43dfa4",
+                                             "audio_uart_page_43f09a"]:
+        raise RuntimeError("Apollo Main Terminal existing LVGL alias binding changed")
+    main_obj = file_checked(lv_alias["linked_object"], lv_alias["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 226 or any(s in actual for s in lv_alias["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal existing LVGL alias frontier changed")
+    item_height_path = G2 / "build/c-firmware/20261016/main-terminal-item-height-5ea67a/receipt.json"
+    item_height, item_height_ref = receipt(item_height_path)
+    if item_height["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ITEM_HEIGHT_C" or \
+            item_height["base_sha256"] != main_obj["sha256"] or \
+            item_height["unresolved_before"] != 226 or item_height["unresolved_after"] != 226 or \
+            item_height["imports_resolved"] != ["audio_terminal_item_height_5ea67a"] or \
+            item_height["imports_added"] != ["audio_terminal_item_spacing_5ea2c2"]:
+        raise RuntimeError("Apollo Main Terminal item-height binding changed")
+    main_obj = file_checked(item_height["linked_object"], item_height["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 226 or "audio_terminal_item_height_5ea67a" in actual:
+        raise RuntimeError("Apollo Main Terminal item-height frontier changed")
+    item_spacing_path = G2 / "build/c-firmware/20261016/main-terminal-item-spacing-5ea2c2/receipt.json"
+    item_spacing, item_spacing_ref = receipt(item_spacing_path)
+    if item_spacing["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ITEM_SPACING_C" or \
+            item_spacing["base_sha256"] != main_obj["sha256"] or \
+            item_spacing["unresolved_before"] != 226 or item_spacing["unresolved_after"] != 225 or \
+            item_spacing["imports_resolved"] != ["audio_terminal_item_spacing_5ea2c2"] or \
+            item_spacing["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal item-spacing binding changed")
+    main_obj = file_checked(item_spacing["linked_object"], item_spacing["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 225 or "audio_terminal_item_spacing_5ea2c2" in actual:
+        raise RuntimeError("Apollo Main Terminal item-spacing frontier changed")
+    row_bind_path = G2 / "build/c-firmware/20261016/main-terminal-row-bind-5ea564/receipt.json"
+    row_bind, row_bind_ref = receipt(row_bind_path)
+    if row_bind["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ROW_BIND_C" or \
+            row_bind["base_sha256"] != main_obj["sha256"] or \
+            row_bind["unresolved_before"] != 225 or row_bind["unresolved_after"] != 243 or \
+            row_bind["imports_resolved"] != ["audio_terminal_row_bind_5ea564"] or \
+            set(row_bind["imports_added"]) != {
+                "audio_lv_child_44dce2", "audio_lv_child_count_44ddea", "audio_lv_color_44104c",
+                "audio_lv_delete_44d7b8", "audio_lv_image_create_498668", "audio_lv_image_source_498680",
+                "audio_lv_label_create_499416", "audio_lv_label_mode_499678", "audio_lv_label_text_49942e",
+                "audio_lv_style_a_44145a", "audio_lv_style_alpha_44142e", "audio_lv_style_color_44140e",
+                "audio_lv_style_font_44143e", "audio_lv_style_opa_441488", "audio_lv_style_spacing_44144c",
+                "audio_lv_width_43f506", "audio_terminal_image_y_5ea2b0",
+                "audio_terminal_row_color_5ea2f2", "audio_terminal_row_image_5ea524"}:
+        raise RuntimeError("Apollo Main Terminal row-bind binding changed")
+    main_obj = file_checked(row_bind["linked_object"], row_bind["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 243 or "audio_terminal_row_bind_5ea564" in actual:
+        raise RuntimeError("Apollo Main Terminal row-bind frontier changed")
+    row_alias_path = G2 / "build/c-firmware/20261016/main-terminal-row-existing-aliases/receipt.json"
+    row_alias, row_alias_ref = receipt(row_alias_path)
+    expected_row_aliases = {
+        "audio_lv_child_44dce2", "audio_lv_child_count_44ddea", "audio_lv_color_44104c",
+        "audio_lv_delete_44d7b8", "audio_lv_image_create_498668", "audio_lv_image_source_498680",
+        "audio_lv_label_create_499416", "audio_lv_label_mode_499678", "audio_lv_label_text_49942e",
+        "audio_lv_style_a_44145a", "audio_lv_style_alpha_44142e", "audio_lv_style_color_44140e",
+        "audio_lv_style_font_44143e", "audio_lv_style_opa_441488", "audio_lv_style_spacing_44144c",
+        "audio_lv_width_43f506"}
+    if row_alias["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ROW_EXISTING_ALIASES_C" or \
+            row_alias["base_sha256"] != main_obj["sha256"] or \
+            row_alias["unresolved_before"] != 243 or row_alias["unresolved_after"] != 227 or \
+            set(row_alias["imports_resolved"]) != expected_row_aliases or \
+            row_alias["imports_added"] != [] or \
+            set(row_alias["provider_pairs"]) != expected_row_aliases:
+        raise RuntimeError("Apollo Main Terminal row existing-alias binding changed")
+    main_obj = file_checked(row_alias["linked_object"], row_alias["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 227 or expected_row_aliases.intersection(actual):
+        raise RuntimeError("Apollo Main Terminal row existing-alias frontier changed")
+    row_children_path = G2 / "build/c-firmware/20261016/main-terminal-row-children-5ea2b0/receipt.json"
+    row_children, row_children_ref = receipt(row_children_path)
+    if row_children["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ROW_CHILDREN_C" or \
+            row_children["base_sha256"] != main_obj["sha256"] or \
+            row_children["unresolved_before"] != 227 or row_children["unresolved_after"] != 225 or \
+            row_children["imports_resolved"] != ["audio_terminal_image_y_5ea2b0",
+                                                 "audio_terminal_row_color_5ea2f2",
+                                                 "audio_terminal_row_image_5ea524"] or \
+            row_children["imports_added"] != ["audio_terminal_row_image_hint_5ea4f0"]:
+        raise RuntimeError("Apollo Main Terminal row-children binding changed")
+    main_obj = file_checked(row_children["linked_object"], row_children["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 225 or any(s in actual for s in row_children["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal row-children frontier changed")
+    row_hint_path = G2 / "build/c-firmware/20261016/main-terminal-row-image-hint-5ea4f0/receipt.json"
+    row_hint, row_hint_ref = receipt(row_hint_path)
+    if row_hint["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ROW_IMAGE_HINT_C" or \
+            row_hint["base_sha256"] != main_obj["sha256"] or \
+            row_hint["unresolved_before"] != 225 or row_hint["unresolved_after"] != 224 or \
+            row_hint["imports_resolved"] != ["audio_terminal_row_image_hint_5ea4f0"] or \
+            row_hint["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal row-image-hint binding changed")
+    main_obj = file_checked(row_hint["linked_object"], row_hint["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 224 or "audio_terminal_row_image_hint_5ea4f0" in actual:
+        raise RuntimeError("Apollo Main Terminal row-image-hint frontier changed")
+    event_type2_path = G2 / "build/c-firmware/20261016/main-terminal-event-type2-5eabde/receipt.json"
+    event_type2, event_type2_ref = receipt(event_type2_path)
+    if event_type2["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_TYPE2_C" or \
+            event_type2["base_sha256"] != main_obj["sha256"] or \
+            event_type2["unresolved_before"] != 224 or event_type2["unresolved_after"] != 225 or \
+            event_type2["imports_resolved"] != ["audio_terminal_event_type2_5eabde"] or \
+            event_type2["imports_added"] != ["audio_terminal_last_record_597350",
+                                            "audio_terminal_list_rollover_5eab8e"]:
+        raise RuntimeError("Apollo Main Terminal type-two event binding changed")
+    main_obj = file_checked(event_type2["linked_object"], event_type2["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 225 or "audio_terminal_event_type2_5eabde" in actual:
+        raise RuntimeError("Apollo Main Terminal type-two event frontier changed")
+    type2_children_path = G2 / "build/c-firmware/20261016/main-terminal-type2-children/receipt.json"
+    type2_children, type2_children_ref = receipt(type2_children_path)
+    if type2_children["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_TYPE2_CHILDREN_C" or \
+            type2_children["base_sha256"] != main_obj["sha256"] or \
+            type2_children["unresolved_before"] != 225 or type2_children["unresolved_after"] != 223 or \
+            type2_children["imports_resolved"] != ["audio_terminal_last_record_597350",
+                                                   "audio_terminal_list_rollover_5eab8e"] or \
+            type2_children["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal type-two children binding changed")
+    main_obj = file_checked(type2_children["linked_object"], type2_children["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 223 or any(s in actual for s in type2_children["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal type-two children frontier changed")
+    type3_path = G2 / "build/c-firmware/20261016/main-terminal-event-type3-mask-5eaca0/receipt.json"
+    type3, type3_ref = receipt(type3_path)
+    if type3["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_EVENT_TYPE3_MASK_C" or \
+            type3["base_sha256"] != main_obj["sha256"] or \
+            type3["unresolved_before"] != 223 or type3["unresolved_after"] != 222 or \
+            type3["imports_resolved"] != ["audio_terminal_event_type3_mask_5eaca0"] or \
+            type3["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal type-three event binding changed")
+    main_obj = file_checked(type3["linked_object"], type3["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 222 or "audio_terminal_event_type3_mask_5eaca0" in actual:
+        raise RuntimeError("Apollo Main Terminal type-three event frontier changed")
+    reset_first_path = G2 / "build/c-firmware/20261016/main-terminal-reset-first-5e51ba/receipt.json"
+    reset_first, reset_first_ref = receipt(reset_first_path)
+    if reset_first["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RESET_FIRST_C" or \
+            reset_first["base_sha256"] != main_obj["sha256"] or \
+            reset_first["unresolved_before"] != 222 or reset_first["unresolved_after"] != 224 or \
+            reset_first["imports_resolved"] != ["audio_terminal_reset_first_5e51ba"] or \
+            reset_first["imports_added"] != ["audio_terminal_reset_ancillary_5e65f8",
+                                             "audio_terminal_reset_mode_notice_54f50e",
+                                             "audio_terminal_reset_preclear_5e7f26"]:
+        raise RuntimeError("Apollo Main Terminal reset prelude binding changed")
+    main_obj = file_checked(reset_first["linked_object"], reset_first["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 224 or "audio_terminal_reset_first_5e51ba" in actual:
+        raise RuntimeError("Apollo Main Terminal reset prelude frontier changed")
+    reset_ancillary_path = G2 / "build/c-firmware/20261016/main-terminal-reset-ancillary-5e65f8/receipt.json"
+    reset_ancillary, reset_ancillary_ref = receipt(reset_ancillary_path)
+    if reset_ancillary["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RESET_ANCILLARY_C" or \
+            reset_ancillary["base_sha256"] != main_obj["sha256"] or \
+            reset_ancillary["unresolved_before"] != 224 or reset_ancillary["unresolved_after"] != 223 or \
+            reset_ancillary["imports_resolved"] != ["audio_terminal_reset_ancillary_5e65f8"] or \
+            reset_ancillary["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal ancillary reset binding changed")
+    main_obj = file_checked(reset_ancillary["linked_object"], reset_ancillary["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 223 or "audio_terminal_reset_ancillary_5e65f8" in actual:
+        raise RuntimeError("Apollo Main Terminal ancillary reset frontier changed")
+    reset_preclear_path = G2 / "build/c-firmware/20261016/main-terminal-reset-preclear-5e7f26/receipt.json"
+    reset_preclear, reset_preclear_ref = receipt(reset_preclear_path)
+    if reset_preclear["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RESET_PRECLEAR_C" or \
+            reset_preclear["base_sha256"] != main_obj["sha256"] or \
+            reset_preclear["unresolved_before"] != 223 or reset_preclear["unresolved_after"] != 222 or \
+            reset_preclear["imports_resolved"] != ["audio_terminal_reset_preclear_5e7f26"] or \
+            reset_preclear["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal preclear binding changed")
+    main_obj = file_checked(reset_preclear["linked_object"], reset_preclear["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 222 or "audio_terminal_reset_preclear_5e7f26" in actual:
+        raise RuntimeError("Apollo Main Terminal preclear frontier changed")
+    app_release_path = G2 / "build/c-firmware/20261016/main-even-ai-app-release/receipt.json"
+    app_release, app_release_ref = receipt(app_release_path)
+    if app_release["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_APP_RELEASE_C" or \
+            app_release["base_sha256"] != main_obj["sha256"] or \
+            app_release["unresolved_before"] != 222 or app_release["unresolved_after"] != 221 or \
+            app_release["imports_resolved"] != ["audio_terminal_reset_mode_notice_54f50e"] or \
+            app_release["imports_added"] != []:
+        raise RuntimeError("Apollo Main audio-manager app release binding changed")
+    main_obj = file_checked(app_release["linked_object"], app_release["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 221 or "audio_terminal_reset_mode_notice_54f50e" in actual:
+        raise RuntimeError("Apollo Main audio-manager app release frontier changed")
+    reset_subtree_path = G2 / "build/c-firmware/20261016/main-terminal-reset-subtree-5ea342/receipt.json"
+    reset_subtree, reset_subtree_ref = receipt(reset_subtree_path)
+    if reset_subtree["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RESET_SUBTREE_C" or \
+            reset_subtree["base_sha256"] != main_obj["sha256"] or \
+            reset_subtree["unresolved_before"] != 221 or reset_subtree["unresolved_after"] != 222 or \
+            reset_subtree["imports_resolved"] != ["audio_terminal_reset_subtree_5ea342"] or \
+            reset_subtree["imports_added"] != ["audio_terminal_initial_image_y_5ea2d4",
+                                               "audio_terminal_lv_style_four_5ea224"]:
+        raise RuntimeError("Apollo Main Terminal reset subtree binding changed")
+    file_checked(reset_subtree["assets"], reset_subtree["assets_sha256"])
+    file_checked(reset_subtree["assets_object"], reset_subtree["assets_object_sha256"])
+    main_obj = file_checked(reset_subtree["linked_object"], reset_subtree["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 222 or "audio_terminal_reset_subtree_5ea342" in actual:
+        raise RuntimeError("Apollo Main Terminal reset subtree frontier changed")
+    subtree_children_path = G2 / "build/c-firmware/20261016/main-terminal-reset-subtree-children/receipt.json"
+    subtree_children, subtree_children_ref = receipt(subtree_children_path)
+    if subtree_children["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RESET_SUBTREE_CHILDREN_C" or \
+            subtree_children["base_sha256"] != main_obj["sha256"] or \
+            subtree_children["unresolved_before"] != 222 or subtree_children["unresolved_after"] != 220 or \
+            subtree_children["imports_resolved"] != ["audio_terminal_initial_image_y_5ea2d4",
+                                                     "audio_terminal_lv_style_four_5ea224"] or \
+            subtree_children["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal reset subtree children binding changed")
+    main_obj = file_checked(subtree_children["linked_object"], subtree_children["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 220 or any(s in actual for s in subtree_children["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal reset subtree children frontier changed")
+    restore_query_path = G2 / "build/c-firmware/20261016/main-terminal-ui-restore-query-5e6620/receipt.json"
+    restore_query, restore_query_ref = receipt(restore_query_path)
+    if restore_query["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_RESTORE_QUERY_C" or \
+            restore_query["base_sha256"] != main_obj["sha256"] or \
+            restore_query["unresolved_before"] != 220 or restore_query["unresolved_after"] != 219 or \
+            restore_query["imports_resolved"] != ["audio_terminal_ui_restore_query_5e6620"] or \
+            restore_query["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query restore binding changed")
+    main_obj = file_checked(restore_query["linked_object"], restore_query["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 219 or "audio_terminal_ui_restore_query_5e6620" in actual:
+        raise RuntimeError("Apollo Main Terminal query restore frontier changed")
+    action_57c6_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-5e57c6/receipt.json"
+    action_57c6, action_57c6_ref = receipt(action_57c6_path)
+    if action_57c6["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_5E57C6_C" or \
+            action_57c6["base_sha256"] != main_obj["sha256"] or \
+            action_57c6["unresolved_before"] != 219 or action_57c6["unresolved_after"] != 219 or \
+            action_57c6["imports_resolved"] != ["audio_terminal_ui_action_5e57c6"] or \
+            action_57c6["imports_added"] != ["audio_terminal_image_set_5e47fe"]:
+        raise RuntimeError("Apollo Main Terminal return-to-input action binding changed")
+    main_obj = file_checked(action_57c6["linked_object"], action_57c6["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 219 or "audio_terminal_ui_action_5e57c6" in actual:
+        raise RuntimeError("Apollo Main Terminal return-to-input action frontier changed")
+    image_set_path = G2 / "build/c-firmware/20261016/main-terminal-image-set-5e47fe/receipt.json"
+    image_set, image_set_ref = receipt(image_set_path)
+    if image_set["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_IMAGE_SET_C" or \
+            image_set["base_sha256"] != main_obj["sha256"] or \
+            image_set["unresolved_before"] != 219 or image_set["unresolved_after"] != 218 or \
+            image_set["imports_resolved"] != ["audio_terminal_image_set_5e47fe"] or \
+            image_set["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal image-set binding changed")
+    main_obj = file_checked(image_set["linked_object"], image_set["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 218 or "audio_terminal_image_set_5e47fe" in actual:
+        raise RuntimeError("Apollo Main Terminal image-set frontier changed")
+    display_status_path = G2 / "build/c-firmware/20261016/main-terminal-display-status-alias-44ea04/receipt.json"
+    display_status, display_status_ref = receipt(display_status_path)
+    if display_status["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_DISPLAY_STATUS_ALIAS_C" or \
+            display_status["base_sha256"] != main_obj["sha256"] or \
+            display_status["unresolved_before"] != 218 or display_status["unresolved_after"] != 217 or \
+            display_status["imports_resolved"] != ["audio_terminal_display_status_44ea04"] or \
+            display_status["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal display-status alias binding changed")
+    main_obj = file_checked(display_status["linked_object"], display_status["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 217 or "audio_terminal_display_status_44ea04" in actual:
+        raise RuntimeError("Apollo Main Terminal display-status alias frontier changed")
+    disconnect_actions_path = G2 / "build/c-firmware/20261016/main-terminal-ui-disconnect-actions/receipt.json"
+    disconnect_actions, disconnect_actions_ref = receipt(disconnect_actions_path)
+    if disconnect_actions["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_DISCONNECT_ACTIONS_C" or \
+            disconnect_actions["base_sha256"] != main_obj["sha256"] or \
+            disconnect_actions["unresolved_before"] != 217 or disconnect_actions["unresolved_after"] != 213 or \
+            disconnect_actions["imports_resolved"] != ["audio_terminal_ui_action_5e522e",
+                                                       "audio_terminal_ui_action_5e52c2",
+                                                       "audio_terminal_ui_action_5e5320",
+                                                       "audio_terminal_ui_action_5e53b8"] or \
+            disconnect_actions["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal disconnect actions binding changed")
+    file_checked(disconnect_actions["assets"], disconnect_actions["assets_sha256"])
+    file_checked(disconnect_actions["assets_object"], disconnect_actions["assets_object_sha256"])
+    main_obj = file_checked(disconnect_actions["linked_object"], disconnect_actions["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 213 or any(s in actual for s in disconnect_actions["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal disconnect actions frontier changed")
+    action_583c_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-5e583c/receipt.json"
+    action_583c, action_583c_ref = receipt(action_583c_path)
+    if action_583c["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_5E583C_C" or \
+            action_583c["base_sha256"] != main_obj["sha256"] or \
+            action_583c["unresolved_before"] != 213 or action_583c["unresolved_after"] != 212 or \
+            action_583c["imports_resolved"] != ["audio_terminal_ui_action_5e583c"] or \
+            action_583c["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal processing-response action binding changed")
+    main_obj = file_checked(action_583c["linked_object"], action_583c["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 212 or "audio_terminal_ui_action_5e583c" in actual:
+        raise RuntimeError("Apollo Main Terminal processing-response action frontier changed")
+    style_assets_path = G2 / "build/c-firmware/20261016/main-terminal-output-style-assets/receipt.json"
+    style_assets, style_assets_ref = receipt(style_assets_path)
+    if style_assets["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_OUTPUT_STYLE_ASSETS_C" or \
+            style_assets["base_sha256"] != main_obj["sha256"] or \
+            style_assets["unresolved_before"] != 212 or style_assets["unresolved_after"] != 211 or \
+            style_assets["imports_resolved"] != ["audio_terminal_output_style_20003f80"] or \
+            style_assets["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal output style assets binding changed")
+    oracle = ROOT / style_assets["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != style_assets["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal output style oracle changed")
+    file_checked(style_assets["source"], style_assets["source_sha256"])
+    main_obj = file_checked(style_assets["linked_object"], style_assets["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 211 or "audio_terminal_output_style_20003f80" in actual:
+        raise RuntimeError("Apollo Main Terminal output style frontier changed")
+    action_54a2_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-5e54a2/receipt.json"
+    action_54a2, action_54a2_ref = receipt(action_54a2_path)
+    if action_54a2["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_5E54A2_C" or \
+            action_54a2["base_sha256"] != main_obj["sha256"] or \
+            action_54a2["unresolved_before"] != 211 or action_54a2["unresolved_after"] != 210 or \
+            action_54a2["imports_resolved"] != ["audio_terminal_ui_action_5e54a2"] or \
+            action_54a2["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal event-34 action binding changed")
+    oracle = ROOT / action_54a2["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != action_54a2["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal event-34 oracle changed")
+    file_checked(action_54a2["source"], action_54a2["source_sha256"])
+    main_obj = file_checked(action_54a2["linked_object"], action_54a2["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 210 or "audio_terminal_ui_action_5e54a2" in actual:
+        raise RuntimeError("Apollo Main Terminal event-34 frontier changed")
+    action_576c_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-5e576c/receipt.json"
+    action_576c, action_576c_ref = receipt(action_576c_path)
+    if action_576c["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_5E576C_C" or \
+            action_576c["base_sha256"] != main_obj["sha256"] or \
+            action_576c["unresolved_before"] != 210 or action_576c["unresolved_after"] != 211 or \
+            action_576c["imports_resolved"] != ["audio_terminal_ui_action_5e576c"] or \
+            action_576c["imports_added"] != ["audio_terminal_display_fallback_5ecafa", "audio_terminal_fsm_prepare_5eae94"]:
+        raise RuntimeError("Apollo Main Terminal BLE display-request binding changed")
+    oracle = ROOT / action_576c["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != action_576c["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal BLE display-request oracle changed")
+    file_checked(action_576c["source"], action_576c["source_sha256"])
+    main_obj = file_checked(action_576c["linked_object"], action_576c["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 211 or "audio_terminal_ui_action_5e576c" in actual:
+        raise RuntimeError("Apollo Main Terminal BLE display-request frontier changed")
+    fallback_adapter_path = G2 / "build/c-firmware/20261016/main-terminal-display-fallback-adapter-5ecafa/receipt.json"
+    fallback_adapter, fallback_adapter_ref = receipt(fallback_adapter_path)
+    if fallback_adapter["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_DISPLAY_FALLBACK_ADAPTER_C" or \
+            fallback_adapter["base_sha256"] != main_obj["sha256"] or \
+            fallback_adapter["unresolved_before"] != 211 or fallback_adapter["unresolved_after"] != 210 or \
+            fallback_adapter["imports_resolved"] != ["audio_terminal_display_fallback_5ecafa"] or \
+            fallback_adapter["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal fallback adapter binding changed")
+    file_checked(fallback_adapter["source"], fallback_adapter["source_sha256"])
+    file_checked(fallback_adapter["provider"], fallback_adapter["provider_sha256"])
+    provider_receipt = ROOT / fallback_adapter["provider_receipt"]
+    if hashlib.sha256(provider_receipt.read_bytes()).hexdigest() != fallback_adapter["provider_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal fallback provider evidence changed")
+    main_obj = file_checked(fallback_adapter["linked_object"], fallback_adapter["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 210 or "audio_terminal_display_fallback_5ecafa" in actual:
+        raise RuntimeError("Apollo Main Terminal fallback adapter frontier changed")
+    action_63b4_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-5e63b4/receipt.json"
+    action_63b4, action_63b4_ref = receipt(action_63b4_path)
+    if action_63b4["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_5E63B4_C" or \
+            action_63b4["base_sha256"] != main_obj["sha256"] or \
+            action_63b4["unresolved_before"] != 210 or action_63b4["unresolved_after"] != 209 or \
+            action_63b4["imports_resolved"] != ["audio_terminal_ui_action_5e63b4"] or \
+            action_63b4["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal event-word action binding changed")
+    oracle = ROOT / action_63b4["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != action_63b4["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal event-word oracle changed")
+    file_checked(action_63b4["source"], action_63b4["source_sha256"])
+    main_obj = file_checked(action_63b4["linked_object"], action_63b4["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 209 or "audio_terminal_ui_action_5e63b4" in actual:
+        raise RuntimeError("Apollo Main Terminal event-word frontier changed")
+    scroll_actions_path = G2 / "build/c-firmware/20261016/main-terminal-ui-scroll-actions-5e6dd0-5e6e30/receipt.json"
+    scroll_actions, scroll_actions_ref = receipt(scroll_actions_path)
+    if scroll_actions["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_SCROLL_ACTIONS_C" or \
+            scroll_actions["base_sha256"] != main_obj["sha256"] or \
+            scroll_actions["unresolved_before"] != 209 or scroll_actions["unresolved_after"] != 208 or \
+            scroll_actions["imports_resolved"] != ["audio_terminal_ui_action_5e6dd0", "audio_terminal_ui_action_5e6e30"] or \
+            scroll_actions["imports_added"] != ["audio_terminal_notify_status_5ec190"]:
+        raise RuntimeError("Apollo Main Terminal scroll actions binding changed")
+    oracle = ROOT / scroll_actions["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != scroll_actions["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal scroll actions oracle changed")
+    file_checked(scroll_actions["source"], scroll_actions["source_sha256"])
+    main_obj = file_checked(scroll_actions["linked_object"], scroll_actions["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 208 or any(s in actual for s in scroll_actions["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal scroll actions frontier changed")
+    defer_query_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-defer-query-5e6d58/receipt.json"
+    defer_query, defer_query_ref = receipt(defer_query_path)
+    if defer_query["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_UI_ACTION_DEFER_QUERY_C" or \
+            defer_query["base_sha256"] != main_obj["sha256"] or \
+            defer_query["unresolved_before"] != 208 or defer_query["unresolved_after"] != 207 or \
+            defer_query["imports_resolved"] != ["audio_terminal_ui_action_5e6d58"] or \
+            defer_query["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal defer-query action binding changed")
+    oracle = ROOT / defer_query["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != defer_query["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal defer-query oracle changed")
+    file_checked(defer_query["source"], defer_query["source_sha256"])
+    main_obj = file_checked(defer_query["linked_object"], defer_query["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 207 or "audio_terminal_ui_action_5e6d58" in actual:
+        raise RuntimeError("Apollo Main Terminal defer-query frontier changed")
+    notify_status_path = G2 / "build/c-firmware/20261016/main-terminal-notify-status-5ec190/receipt.json"
+    notify_status, notify_status_ref = receipt(notify_status_path)
+    if notify_status["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_NOTIFY_STATUS_C" or \
+            notify_status["base_sha256"] != main_obj["sha256"] or \
+            notify_status["unresolved_before"] != 207 or notify_status["unresolved_after"] != 208 or \
+            notify_status["imports_resolved"] != ["audio_terminal_notify_status_5ec190"] or \
+            notify_status["imports_added"] != ["audio_terminal_status_apply_layout_5ebc9e", "audio_terminal_status_publish_5e5498"]:
+        raise RuntimeError("Apollo Main Terminal notify-status binding changed")
+    oracle = ROOT / notify_status["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != notify_status["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal notify-status oracle changed")
+    file_checked(notify_status["source"], notify_status["source_sha256"])
+    main_obj = file_checked(notify_status["linked_object"], notify_status["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 208 or "audio_terminal_notify_status_5ec190" in actual:
+        raise RuntimeError("Apollo Main Terminal notify-status frontier changed")
+    status_layout_path = G2 / "build/c-firmware/20261016/main-terminal-status-apply-layout-5ebc9e/receipt.json"
+    status_layout, status_layout_ref = receipt(status_layout_path)
+    if status_layout["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_STATUS_APPLY_LAYOUT_C" or \
+            status_layout["base_sha256"] != main_obj["sha256"] or \
+            status_layout["unresolved_before"] != 208 or status_layout["unresolved_after"] != 207 or \
+            status_layout["imports_resolved"] != ["audio_terminal_status_apply_layout_5ebc9e"] or \
+            status_layout["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal status layout binding changed")
+    oracle = ROOT / status_layout["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != status_layout["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal status layout oracle changed")
+    file_checked(status_layout["source"], status_layout["source_sha256"])
+    main_obj = file_checked(status_layout["linked_object"], status_layout["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 207 or "audio_terminal_status_apply_layout_5ebc9e" in actual:
+        raise RuntimeError("Apollo Main Terminal status layout frontier changed")
+    status_publish_path = G2 / "build/c-firmware/20261016/main-terminal-status-publish-5e5498-5cf134/receipt.json"
+    status_publish, status_publish_ref = receipt(status_publish_path)
+    if status_publish["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_STATUS_PUBLISH_C" or \
+            status_publish["base_sha256"] != main_obj["sha256"] or \
+            status_publish["unresolved_before"] != 207 or status_publish["unresolved_after"] != 206 or \
+            status_publish["imports_resolved"] != ["audio_terminal_status_publish_5e5498"] or \
+            status_publish["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal status publish binding changed")
+    oracle = ROOT / status_publish["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != status_publish["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal status publish oracle changed")
+    file_checked(status_publish["source"], status_publish["source_sha256"])
+    main_obj = file_checked(status_publish["linked_object"], status_publish["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 206 or "audio_terminal_status_publish_5e5498" in actual:
+        raise RuntimeError("Apollo Main Terminal status publish frontier changed")
+    confirm_scroll_path = G2 / "build/c-firmware/20261016/main-terminal-ui-interrupt-confirm-scroll-5e6cb8/receipt.json"
+    confirm_scroll, confirm_scroll_ref = receipt(confirm_scroll_path)
+    if confirm_scroll["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_INTERRUPT_CONFIRM_SCROLL_C" or \
+            confirm_scroll["base_sha256"] != main_obj["sha256"] or \
+            confirm_scroll["unresolved_before"] != 206 or confirm_scroll["unresolved_after"] != 206 or \
+            confirm_scroll["imports_resolved"] != ["audio_terminal_ui_action_5e6cb8"] or \
+            confirm_scroll["imports_added"] != ["audio_terminal_status_apply_list_5ec3c0"]:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm scroll binding changed")
+    oracle = ROOT / confirm_scroll["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != confirm_scroll["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm scroll oracle changed")
+    file_checked(confirm_scroll["source"], confirm_scroll["source_sha256"])
+    main_obj = file_checked(confirm_scroll["linked_object"], confirm_scroll["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 206 or "audio_terminal_ui_action_5e6cb8" in actual:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm scroll frontier changed")
+    list_layout_path = G2 / "build/c-firmware/20261016/main-terminal-status-apply-list-5ec3c0/receipt.json"
+    list_layout, list_layout_ref = receipt(list_layout_path)
+    if list_layout["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_STATUS_APPLY_LIST_C" or \
+            list_layout["base_sha256"] != main_obj["sha256"] or \
+            list_layout["unresolved_before"] != 206 or list_layout["unresolved_after"] != 205 or \
+            list_layout["imports_resolved"] != ["audio_terminal_status_apply_list_5ec3c0"] or \
+            list_layout["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm list layout binding changed")
+    oracle = ROOT / list_layout["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != list_layout["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm list layout oracle changed")
+    file_checked(list_layout["source"], list_layout["source_sha256"])
+    main_obj = file_checked(list_layout["linked_object"], list_layout["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 205 or "audio_terminal_status_apply_list_5ec3c0" in actual:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm list layout frontier changed")
+    confirm_show_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-interrupt-confirm-show-5e6b18/receipt.json"
+    confirm_show, confirm_show_ref = receipt(confirm_show_path)
+    if confirm_show["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_INTERRUPT_CONFIRM_SHOW_C" or \
+            confirm_show["base_sha256"] != main_obj["sha256"] or \
+            confirm_show["unresolved_before"] != 205 or confirm_show["unresolved_after"] != 205 or \
+            confirm_show["imports_resolved"] != ["audio_terminal_ui_action_5e6b18"] or \
+            confirm_show["imports_added"] != ["audio_terminal_interrupt_confirm_prepare_5ec446"]:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm-show binding changed")
+    oracle = ROOT / confirm_show["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != confirm_show["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm-show oracle changed")
+    file_checked(confirm_show["source"], confirm_show["source_sha256"])
+    main_obj = file_checked(confirm_show["linked_object"], confirm_show["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 205 or "audio_terminal_ui_action_5e6b18" in actual:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm-show frontier changed")
+    confirm_cancel_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-interrupt-confirm-cancel-5e6ba0/receipt.json"
+    confirm_cancel, confirm_cancel_ref = receipt(confirm_cancel_path)
+    if confirm_cancel["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_INTERRUPT_CONFIRM_CANCEL_C" or \
+            confirm_cancel["base_sha256"] != main_obj["sha256"] or \
+            confirm_cancel["unresolved_before"] != 205 or confirm_cancel["unresolved_after"] != 204 or \
+            confirm_cancel["imports_resolved"] != ["audio_terminal_ui_action_5e6ba0"] or \
+            confirm_cancel["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm-cancel binding changed")
+    oracle = ROOT / confirm_cancel["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != confirm_cancel["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm-cancel oracle changed")
+    file_checked(confirm_cancel["source"], confirm_cancel["source_sha256"])
+    main_obj = file_checked(confirm_cancel["linked_object"], confirm_cancel["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 204 or "audio_terminal_ui_action_5e6ba0" in actual:
+        raise RuntimeError("Apollo Main Terminal interrupt-confirm-cancel frontier changed")
+    new_session_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-new-session-success-5ed870/receipt.json"
+    new_session, new_session_ref = receipt(new_session_path)
+    if new_session["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_NEW_SESSION_SUCCESS_C" or \
+            new_session["base_sha256"] != main_obj["sha256"] or \
+            new_session["unresolved_before"] != 204 or new_session["unresolved_after"] != 203 or \
+            new_session["imports_resolved"] != ["audio_terminal_ui_action_5ed870"] or \
+            new_session["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal new-session success binding changed")
+    oracle = ROOT / new_session["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != new_session["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal new-session success oracle changed")
+    file_checked(new_session["source"], new_session["source_sha256"])
+    main_obj = file_checked(new_session["linked_object"], new_session["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 203 or "audio_terminal_ui_action_5ed870" in actual:
+        raise RuntimeError("Apollo Main Terminal new-session success frontier changed")
+    query_switch_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-query-notification-switch-result-5e68dc/receipt.json"
+    query_switch, query_switch_ref = receipt(query_switch_path)
+    if query_switch["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_NOTIFICATION_SWITCH_RESULT_C" or \
+            query_switch["base_sha256"] != main_obj["sha256"] or \
+            query_switch["unresolved_before"] != 203 or query_switch["unresolved_after"] != 202 or \
+            query_switch["imports_resolved"] != ["audio_terminal_ui_action_5e68dc"] or \
+            query_switch["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query-notification switch-result binding changed")
+    oracle = ROOT / query_switch["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_switch["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query-notification switch-result oracle changed")
+    file_checked(query_switch["source"], query_switch["source_sha256"])
+    main_obj = file_checked(query_switch["linked_object"], query_switch["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 202 or "audio_terminal_ui_action_5e68dc" in actual:
+        raise RuntimeError("Apollo Main Terminal query-notification switch-result frontier changed")
+    query_scroll_path = G2 / "build/c-firmware/20261016/main-terminal-ui-query-scroll-actions-5e6e88-5e6f60/receipt.json"
+    query_scroll, query_scroll_ref = receipt(query_scroll_path)
+    if query_scroll["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_SCROLL_ACTIONS_C" or \
+            query_scroll["base_sha256"] != main_obj["sha256"] or \
+            query_scroll["unresolved_before"] != 202 or query_scroll["unresolved_after"] != 201 or \
+            query_scroll["imports_resolved"] != ["audio_terminal_ui_action_5e6e88", "audio_terminal_ui_action_5e6f60"] or \
+            query_scroll["imports_added"] != ["audio_terminal_query_layout_5ebb96"]:
+        raise RuntimeError("Apollo Main Terminal query-scroll actions binding changed")
+    oracle = ROOT / query_scroll["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_scroll["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query-scroll actions oracle changed")
+    file_checked(query_scroll["source"], query_scroll["source_sha256"])
+    main_obj = file_checked(query_scroll["linked_object"], query_scroll["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 201 or any(s in actual for s in query_scroll["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal query-scroll actions frontier changed")
+    query_layout_path = G2 / "build/c-firmware/20261016/main-terminal-query-layout-5ebb96/receipt.json"
+    query_layout, query_layout_ref = receipt(query_layout_path)
+    if query_layout["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_LAYOUT_C" or \
+            query_layout["base_sha256"] != main_obj["sha256"] or \
+            query_layout["unresolved_before"] != 201 or query_layout["unresolved_after"] != 201 or \
+            query_layout["imports_resolved"] != ["audio_terminal_query_layout_5ebb96"] or \
+            query_layout["imports_added"] != ["audio_terminal_query_items_style_5eb3c6"]:
+        raise RuntimeError("Apollo Main Terminal query-layout binding changed")
+    oracle = ROOT / query_layout["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_layout["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query-layout oracle changed")
+    file_checked(query_layout["source"], query_layout["source_sha256"])
+    main_obj = file_checked(query_layout["linked_object"], query_layout["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 201 or "audio_terminal_query_layout_5ebb96" in actual:
+        raise RuntimeError("Apollo Main Terminal query-layout frontier changed")
+    query_items_path = G2 / "build/c-firmware/20261016/main-terminal-query-items-style-5eb3c6/receipt.json"
+    query_items, query_items_ref = receipt(query_items_path)
+    if query_items["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_ITEMS_STYLE_C" or \
+            query_items["base_sha256"] != main_obj["sha256"] or \
+            query_items["unresolved_before"] != 201 or query_items["unresolved_after"] != 201 or \
+            query_items["imports_resolved"] != ["audio_terminal_query_items_style_5eb3c6"] or \
+            query_items["imports_added"] != ["audio_terminal_query_indicator_5eb322"]:
+        raise RuntimeError("Apollo Main Terminal query-items style binding changed")
+    oracle = ROOT / query_items["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_items["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query-items style oracle changed")
+    file_checked(query_items["source"], query_items["source_sha256"])
+    main_obj = file_checked(query_items["linked_object"], query_items["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 201 or "audio_terminal_query_items_style_5eb3c6" in actual:
+        raise RuntimeError("Apollo Main Terminal query-items style frontier changed")
+    query_indicator_path = G2 / "build/c-firmware/20261016/main-terminal-query-indicator-5eb322/receipt.json"
+    query_indicator, query_indicator_ref = receipt(query_indicator_path)
+    if query_indicator["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_INDICATOR_C" or \
+            query_indicator["base_sha256"] != main_obj["sha256"] or \
+            query_indicator["unresolved_before"] != 201 or query_indicator["unresolved_after"] != 200 or \
+            query_indicator["imports_resolved"] != ["audio_terminal_query_indicator_5eb322"] or \
+            query_indicator["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query-indicator binding changed")
+    oracle = ROOT / query_indicator["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_indicator["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query-indicator oracle changed")
+    file_checked(query_indicator["source"], query_indicator["source_sha256"])
+    main_obj = file_checked(query_indicator["linked_object"], query_indicator["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 200 or "audio_terminal_query_indicator_5eb322" in actual:
+        raise RuntimeError("Apollo Main Terminal query-indicator frontier changed")
+    session_scroll_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-session-list-scroll-5ed492/receipt.json"
+    session_scroll, session_scroll_ref = receipt(session_scroll_path)
+    if session_scroll["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_LIST_SCROLL_C" or \
+            session_scroll["base_sha256"] != main_obj["sha256"] or \
+            session_scroll["unresolved_before"] != 200 or session_scroll["unresolved_after"] != 200 or \
+            session_scroll["imports_resolved"] != ["audio_terminal_ui_action_5ed492"] or \
+            session_scroll["imports_added"] != ["audio_terminal_session_select_5ecc1a"]:
+        raise RuntimeError("Apollo Main Terminal session-list scroll binding changed")
+    oracle = ROOT / session_scroll["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != session_scroll["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal session-list scroll oracle changed")
+    file_checked(session_scroll["source"], session_scroll["source_sha256"])
+    main_obj = file_checked(session_scroll["linked_object"], session_scroll["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 200 or "audio_terminal_ui_action_5ed492" in actual:
+        raise RuntimeError("Apollo Main Terminal session-list scroll frontier changed")
+    session_select_path = G2 / "build/c-firmware/20261016/main-terminal-session-select-5ecc1a/receipt.json"
+    session_select, session_select_ref = receipt(session_select_path)
+    if session_select["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_SELECT_C" or \
+            session_select["base_sha256"] != main_obj["sha256"] or \
+            session_select["unresolved_before"] != 200 or session_select["unresolved_after"] != 202 or \
+            session_select["imports_resolved"] != ["audio_terminal_session_select_5ecc1a"] or \
+            session_select["imports_added"] != ["audio_terminal_session_animate_5896fc", "audio_terminal_session_apply_5ecb88", "audio_terminal_session_focus_5ecbea"]:
+        raise RuntimeError("Apollo Main Terminal session selection binding changed")
+    oracle = ROOT / session_select["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != session_select["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal session selection oracle changed")
+    file_checked(session_select["source"], session_select["source_sha256"])
+    main_obj = file_checked(session_select["linked_object"], session_select["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 202 or "audio_terminal_session_select_5ecc1a" in actual:
+        raise RuntimeError("Apollo Main Terminal session selection frontier changed")
+    session_focus_path = G2 / "build/c-firmware/20261016/main-terminal-session-focus-5ecbea/receipt.json"
+    session_focus, session_focus_ref = receipt(session_focus_path)
+    if session_focus["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_FOCUS_C" or \
+            session_focus["base_sha256"] != main_obj["sha256"] or \
+            session_focus["unresolved_before"] != 202 or session_focus["unresolved_after"] != 201 or \
+            session_focus["imports_resolved"] != ["audio_terminal_session_focus_5ecbea"] or \
+            session_focus["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal session-focus binding changed")
+    oracle = ROOT / session_focus["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != session_focus["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal session-focus oracle changed")
+    file_checked(session_focus["source"], session_focus["source_sha256"])
+    main_obj = file_checked(session_focus["linked_object"], session_focus["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 201 or "audio_terminal_session_focus_5ecbea" in actual:
+        raise RuntimeError("Apollo Main Terminal session-focus frontier changed")
+    session_apply_path = G2 / "build/c-firmware/20261016/main-terminal-session-apply-5ecb88/receipt.json"
+    session_apply, session_apply_ref = receipt(session_apply_path)
+    if session_apply["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_APPLY_C" or \
+            session_apply["base_sha256"] != main_obj["sha256"] or \
+            session_apply["unresolved_before"] != 201 or session_apply["unresolved_after"] != 201 or \
+            session_apply["imports_resolved"] != ["audio_terminal_session_apply_5ecb88"] or \
+            session_apply["imports_added"] != ["audio_terminal_session_row_style_5ecb08"]:
+        raise RuntimeError("Apollo Main Terminal session-apply binding changed")
+    oracle = ROOT / session_apply["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != session_apply["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal session-apply oracle changed")
+    file_checked(session_apply["source"], session_apply["source_sha256"])
+    main_obj = file_checked(session_apply["linked_object"], session_apply["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 201 or "audio_terminal_session_apply_5ecb88" in actual:
+        raise RuntimeError("Apollo Main Terminal session-apply frontier changed")
+    session_row_path = G2 / "build/c-firmware/20261016/main-terminal-session-row-style-5ecb08/receipt.json"
+    session_row, session_row_ref = receipt(session_row_path)
+    if session_row["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_ROW_STYLE_C" or \
+            session_row["base_sha256"] != main_obj["sha256"] or \
+            session_row["unresolved_before"] != 201 or session_row["unresolved_after"] != 202 or \
+            session_row["imports_resolved"] != ["audio_terminal_session_row_style_5ecb08"] or \
+            session_row["imports_added"] != ["audio_terminal_session_row_hide_589892", "audio_terminal_session_row_show_5897ee"]:
+        raise RuntimeError("Apollo Main Terminal session-row binding changed")
+    oracle = ROOT / session_row["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != session_row["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal session-row oracle changed")
+    file_checked(session_row["source"], session_row["source_sha256"])
+    main_obj = file_checked(session_row["linked_object"], session_row["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 202 or "audio_terminal_session_row_style_5ecb08" in actual:
+        raise RuntimeError("Apollo Main Terminal session-row frontier changed")
+    anim_add_path = G2 / "build/c-firmware/20261016/main-terminal-list-anim-add-5896fc/receipt.json"
+    anim_add, anim_add_ref = receipt(anim_add_path)
+    if anim_add["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LIST_ANIM_ADD_C" or \
+            anim_add["base_sha256"] != main_obj["sha256"] or \
+            anim_add["unresolved_before"] != 202 or anim_add["unresolved_after"] != 202 or \
+            anim_add["imports_resolved"] != ["audio_terminal_session_animate_5896fc"] or \
+            anim_add["imports_added"] != ["audio_terminal_list_anim_process_58956e"]:
+        raise RuntimeError("Apollo Main Terminal list-animation add binding changed")
+    oracle = ROOT / anim_add["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != anim_add["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal list-animation add oracle changed")
+    file_checked(anim_add["source"], anim_add["source_sha256"])
+    main_obj = file_checked(anim_add["linked_object"], anim_add["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 202 or "audio_terminal_session_animate_5896fc" in actual:
+        raise RuntimeError("Apollo Main Terminal list-animation add frontier changed")
+    anim_process_path = G2 / "build/c-firmware/20261016/main-terminal-list-anim-process-58956e/receipt.json"
+    anim_process, anim_process_ref = receipt(anim_process_path)
+    if anim_process["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LIST_ANIM_PROCESS_C" or \
+            anim_process["base_sha256"] != main_obj["sha256"] or \
+            anim_process["unresolved_before"] != 202 or anim_process["unresolved_after"] != 204 or \
+            anim_process["imports_resolved"] != ["audio_terminal_list_anim_process_58956e"] or \
+            anim_process["imports_added"] != ["audio_terminal_list_anim_new_prepare_5894d6", "audio_terminal_list_anim_new_start_58c622", "audio_terminal_list_anim_old_start_58c6c4"]:
+        raise RuntimeError("Apollo Main Terminal list-animation process binding changed")
+    oracle = ROOT / anim_process["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != anim_process["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal list-animation process oracle changed")
+    file_checked(anim_process["source"], anim_process["source_sha256"])
+    main_obj = file_checked(anim_process["linked_object"], anim_process["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 204 or "audio_terminal_list_anim_process_58956e" in actual:
+        raise RuntimeError("Apollo Main Terminal list-animation process frontier changed")
+    anim_prepare_path = G2 / "build/c-firmware/20261016/main-terminal-list-anim-new-prepare-5894d6/receipt.json"
+    anim_prepare, anim_prepare_ref = receipt(anim_prepare_path)
+    if anim_prepare["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LIST_ANIM_NEW_PREPARE_C" or \
+            anim_prepare["base_sha256"] != main_obj["sha256"] or \
+            anim_prepare["unresolved_before"] != 204 or anim_prepare["unresolved_after"] != 203 or \
+            anim_prepare["imports_resolved"] != ["audio_terminal_list_anim_new_prepare_5894d6"] or \
+            anim_prepare["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal list-animation new-prepare binding changed")
+    oracle = ROOT / anim_prepare["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != anim_prepare["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal list-animation new-prepare oracle changed")
+    file_checked(anim_prepare["source"], anim_prepare["source_sha256"])
+    main_obj = file_checked(anim_prepare["linked_object"], anim_prepare["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 203 or "audio_terminal_list_anim_new_prepare_5894d6" in actual:
+        raise RuntimeError("Apollo Main Terminal list-animation new-prepare frontier changed")
+    anim_fade_path = G2 / "build/c-firmware/20261016/main-terminal-list-anim-fade-start-58c622/receipt.json"
+    anim_fade, anim_fade_ref = receipt(anim_fade_path)
+    if anim_fade["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LIST_ANIM_FADE_START_C" or \
+            anim_fade["base_sha256"] != main_obj["sha256"] or \
+            anim_fade["unresolved_before"] != 203 or anim_fade["unresolved_after"] != 203 or \
+            anim_fade["imports_resolved"] != ["audio_terminal_list_anim_new_start_58c622", "audio_terminal_list_anim_old_start_58c6c4"] or \
+            anim_fade["imports_added"] != ["audio_terminal_button_fade_callback_58c230", "audio_uart_lv_anim_path_450688"]:
+        raise RuntimeError("Apollo Main Terminal list-animation fade-start binding changed")
+    oracle = ROOT / anim_fade["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != anim_fade["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal list-animation fade-start oracle changed")
+    file_checked(anim_fade["source"], anim_fade["source_sha256"])
+    main_obj = file_checked(anim_fade["linked_object"], anim_fade["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 203 or any(name in actual for name in anim_fade["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal list-animation fade-start frontier changed")
+    anim_path_path = G2 / "build/c-firmware/20261016/main-terminal-list-anim-path-450688/receipt.json"
+    anim_path, anim_path_ref = receipt(anim_path_path)
+    if anim_path["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LIST_ANIM_PATH_C" or \
+            anim_path["base_sha256"] != main_obj["sha256"] or \
+            anim_path["unresolved_before"] != 203 or anim_path["unresolved_after"] != 202 or \
+            anim_path["imports_resolved"] != ["audio_uart_lv_anim_path_450688"] or \
+            anim_path["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal list-animation path binding changed")
+    oracle = ROOT / anim_path["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != anim_path["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal list-animation path oracle changed")
+    file_checked(anim_path["source"], anim_path["source_sha256"])
+    main_obj = file_checked(anim_path["linked_object"], anim_path["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 202 or "audio_uart_lv_anim_path_450688" in actual:
+        raise RuntimeError("Apollo Main Terminal list-animation path frontier changed")
+    row_visibility_path = G2 / "build/c-firmware/20261016/main-terminal-session-row-visibility-5897ee/receipt.json"
+    row_visibility, row_visibility_ref = receipt(row_visibility_path)
+    if row_visibility["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_ROW_VISIBILITY_C" or \
+            row_visibility["base_sha256"] != main_obj["sha256"] or \
+            row_visibility["unresolved_before"] != 202 or row_visibility["unresolved_after"] != 201 or \
+            row_visibility["imports_resolved"] != ["audio_terminal_session_row_hide_589892", "audio_terminal_session_row_show_5897ee"] or \
+            row_visibility["imports_added"] != ["audio_uart_image_class_756108"]:
+        raise RuntimeError("Apollo Main Terminal session-row visibility binding changed")
+    for path, digest in zip(row_visibility["oracle_receipts"], row_visibility["oracle_receipt_sha256"]):
+        if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != digest:
+            raise RuntimeError("Apollo Main Terminal session-row visibility oracle changed")
+    for source, digest in zip(row_visibility["sources"], row_visibility["source_sha256"]):
+        file_checked(source, digest)
+    main_obj = file_checked(row_visibility["linked_object"], row_visibility["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 201 or any(name in actual for name in row_visibility["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal session-row visibility frontier changed")
+    image_class_path = G2 / "build/c-firmware/20261016/main-lv-image-class-756108/receipt.json"
+    image_class, image_class_ref = receipt(image_class_path)
+    if image_class["status"] != "PASS_EXPERIMENTAL_MAIN_LV_IMAGE_CLASS_C" or \
+            image_class["base_sha256"] != main_obj["sha256"] or \
+            image_class["unresolved_before"] != 201 or image_class["unresolved_after"] != 203 or \
+            image_class["imports_resolved"] != ["audio_uart_image_class_756108"] or \
+            image_class["imports_added"] != ["audio_uart_lv_image_ctor_498bd0", "audio_uart_lv_image_dtor_498c6c", "audio_uart_lv_image_event_498c9c"]:
+        raise RuntimeError("Apollo Main LVGL image class binding changed")
+    oracle = ROOT / image_class["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != image_class["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL image class oracle changed")
+    file_checked(image_class["source"], image_class["source_sha256"])
+    main_obj = file_checked(image_class["linked_object"], image_class["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 203 or "audio_uart_image_class_756108" in actual:
+        raise RuntimeError("Apollo Main LVGL image class frontier changed")
+    image_lifecycle_path = G2 / "build/c-firmware/20261016/main-lv-image-lifecycle-498bd0/receipt.json"
+    image_lifecycle, image_lifecycle_ref = receipt(image_lifecycle_path)
+    if image_lifecycle["status"] != "PASS_EXPERIMENTAL_MAIN_LV_IMAGE_LIFECYCLE_C" or \
+            image_lifecycle["base_sha256"] != main_obj["sha256"] or \
+            image_lifecycle["unresolved_before"] != 203 or image_lifecycle["unresolved_after"] != 201 or \
+            image_lifecycle["imports_resolved"] != ["audio_uart_lv_image_ctor_498bd0", "audio_uart_lv_image_dtor_498c6c"] or \
+            image_lifecycle["imports_added"] != []:
+        raise RuntimeError("Apollo Main LVGL image lifecycle binding changed")
+    oracle = ROOT / image_lifecycle["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != image_lifecycle["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL image lifecycle oracle changed")
+    file_checked(image_lifecycle["source"], image_lifecycle["source_sha256"])
+    main_obj = file_checked(image_lifecycle["linked_object"], image_lifecycle["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 201 or any(name in actual for name in image_lifecycle["imports_resolved"]):
+        raise RuntimeError("Apollo Main LVGL image lifecycle frontier changed")
+    button_fade_path = G2 / "build/c-firmware/20261016/main-terminal-button-fade-callback-58c138/receipt.json"
+    button_fade, button_fade_ref = receipt(button_fade_path)
+    if button_fade["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_BUTTON_FADE_CALLBACK_C" or \
+            button_fade["base_sha256"] != main_obj["sha256"] or \
+            button_fade["unresolved_before"] != 201 or button_fade["unresolved_after"] != 200 or \
+            button_fade["imports_resolved"] != ["audio_terminal_button_fade_callback_58c230"] or \
+            button_fade["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal button fade callback binding changed")
+    oracle = ROOT / button_fade["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != button_fade["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal button fade callback oracle changed")
+    file_checked(button_fade["source"], button_fade["source_sha256"])
+    main_obj = file_checked(button_fade["linked_object"], button_fade["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 200 or "audio_terminal_button_fade_callback_58c230" in actual:
+        raise RuntimeError("Apollo Main Terminal button fade callback frontier changed")
+    image_event_path = G2 / "build/c-firmware/20261016/main-lv-image-event-498c9c/receipt.json"
+    image_event, image_event_ref = receipt(image_event_path)
+    if image_event["status"] != "PASS_EXPERIMENTAL_MAIN_LV_IMAGE_EVENT_C" or \
+            image_event["base_sha256"] != main_obj["sha256"] or \
+            image_event["unresolved_before"] != 200 or image_event["unresolved_after"] != 201 or \
+            image_event["imports_resolved"] != ["audio_uart_lv_image_event_498c9c"] or \
+            image_event["imports_added"] != ["audio_uart_lv_get_click_area_4408b0", "audio_uart_lv_image_draw_498ec0"]:
+        raise RuntimeError("Apollo Main LVGL image event binding changed")
+    oracle = ROOT / image_event["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != image_event["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL image event oracle changed")
+    file_checked(image_event["source"], image_event["source_sha256"])
+    main_obj = file_checked(image_event["linked_object"], image_event["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 201 or "audio_uart_lv_image_event_498c9c" in actual:
+        raise RuntimeError("Apollo Main LVGL image event frontier changed")
+    click_area_path = G2 / "build/c-firmware/20261016/main-lv-click-area-4408b0/receipt.json"
+    click_area, click_area_ref = receipt(click_area_path)
+    if click_area["status"] != "PASS_EXPERIMENTAL_MAIN_LV_CLICK_AREA_C" or \
+            click_area["base_sha256"] != main_obj["sha256"] or \
+            click_area["unresolved_before"] != 201 or click_area["unresolved_after"] != 200 or \
+            click_area["imports_resolved"] != ["audio_uart_lv_get_click_area_4408b0"] or \
+            click_area["imports_added"] != []:
+        raise RuntimeError("Apollo Main LVGL click area binding changed")
+    oracle = ROOT / click_area["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != click_area["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL click area oracle changed")
+    file_checked(click_area["source"], click_area["source_sha256"])
+    main_obj = file_checked(click_area["linked_object"], click_area["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 200 or "audio_uart_lv_get_click_area_4408b0" in actual:
+        raise RuntimeError("Apollo Main LVGL click area frontier changed")
+    image_draw_path = G2 / "build/c-firmware/20261016/main-lv-image-draw-498ec0/receipt.json"
+    image_draw, image_draw_ref = receipt(image_draw_path)
+    if image_draw["status"] != "PASS_EXPERIMENTAL_MAIN_LV_IMAGE_DRAW_C" or \
+            image_draw["base_sha256"] != main_obj["sha256"] or \
+            image_draw["unresolved_before"] != 200 or image_draw["unresolved_after"] != 203 or \
+            image_draw["imports_resolved"] != ["audio_uart_lv_image_draw_498ec0"] or \
+            image_draw["imports_added"] != ["audio_uart_lv_draw_image_488a38", "audio_uart_lv_image_style_opa_498634", "audio_uart_lv_image_style_radius_49865e", "audio_uart_lv_obj_init_draw_image_452a34"]:
+        raise RuntimeError("Apollo Main LVGL image draw binding changed")
+    oracle = ROOT / image_draw["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != image_draw["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL image draw oracle changed")
+    file_checked(image_draw["source"], image_draw["source_sha256"])
+    main_obj = file_checked(image_draw["linked_object"], image_draw["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 203 or "audio_uart_lv_image_draw_498ec0" in actual:
+        raise RuntimeError("Apollo Main LVGL image draw frontier changed")
+    image_style_path = G2 / "build/c-firmware/20261016/main-lv-image-style-accessors-498634/receipt.json"
+    image_style, image_style_ref = receipt(image_style_path)
+    if image_style["status"] != "PASS_EXPERIMENTAL_MAIN_LV_IMAGE_STYLE_ACCESSORS_C" or \
+            image_style["base_sha256"] != main_obj["sha256"] or \
+            image_style["unresolved_before"] != 203 or image_style["unresolved_after"] != 201 or \
+            image_style["imports_resolved"] != ["audio_uart_lv_image_style_opa_498634", "audio_uart_lv_image_style_radius_49865e"] or \
+            image_style["imports_added"] != []:
+        raise RuntimeError("Apollo Main LVGL image style accessors binding changed")
+    oracle = ROOT / image_style["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != image_style["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL image style accessors oracle changed")
+    file_checked(image_style["source"], image_style["source_sha256"])
+    main_obj = file_checked(image_style["linked_object"], image_style["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 201 or any(name in actual for name in image_style["imports_resolved"]):
+        raise RuntimeError("Apollo Main LVGL image style accessors frontier changed")
+    image_dsc_path = G2 / "build/c-firmware/20261016/main-lv-image-dsc-init-452a34/receipt.json"
+    image_dsc, image_dsc_ref = receipt(image_dsc_path)
+    if image_dsc["status"] != "PASS_EXPERIMENTAL_MAIN_LV_IMAGE_DSC_INIT_C" or \
+            image_dsc["base_sha256"] != main_obj["sha256"] or \
+            image_dsc["unresolved_before"] != 201 or image_dsc["unresolved_after"] != 204 or \
+            image_dsc["imports_resolved"] != ["audio_uart_lv_obj_init_draw_image_452a34"] or \
+            image_dsc["imports_added"] != ["audio_uart_lv_style_image_blend_45260a", "audio_uart_lv_style_image_opa_4524a4", "audio_uart_lv_style_image_recolor_4524b0", "audio_uart_lv_style_image_recolor_opa_4524d0"]:
+        raise RuntimeError("Apollo Main LVGL image descriptor initializer binding changed")
+    oracle = ROOT / image_dsc["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != image_dsc["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL image descriptor initializer oracle changed")
+    file_checked(image_dsc["source"], image_dsc["source_sha256"])
+    main_obj = file_checked(image_dsc["linked_object"], image_dsc["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 204 or any(name in actual for name in image_dsc["imports_resolved"]):
+        raise RuntimeError("Apollo Main LVGL image descriptor initializer frontier changed")
+    image_fields_path = G2 / "build/c-firmware/20261016/main-lv-image-style-fields-4524a4/receipt.json"
+    image_fields, image_fields_ref = receipt(image_fields_path)
+    if image_fields["status"] != "PASS_EXPERIMENTAL_MAIN_LV_IMAGE_STYLE_FIELDS_C" or \
+            image_fields["base_sha256"] != main_obj["sha256"] or \
+            image_fields["unresolved_before"] != 204 or image_fields["unresolved_after"] != 200 or \
+            image_fields["imports_resolved"] != ["audio_uart_lv_style_image_blend_45260a", "audio_uart_lv_style_image_opa_4524a4", "audio_uart_lv_style_image_recolor_4524b0", "audio_uart_lv_style_image_recolor_opa_4524d0"] or \
+            image_fields["imports_added"] != []:
+        raise RuntimeError("Apollo Main LVGL image style fields binding changed")
+    oracle = ROOT / image_fields["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != image_fields["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL image style fields oracle changed")
+    file_checked(image_fields["source"], image_fields["source_sha256"])
+    main_obj = file_checked(image_fields["linked_object"], image_fields["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 200 or any(name in actual for name in image_fields["imports_resolved"]):
+        raise RuntimeError("Apollo Main LVGL image style fields frontier changed")
+    draw_scheduler_path = G2 / "build/c-firmware/20261016/main-lv-draw-image-488a38/receipt.json"
+    draw_scheduler, draw_scheduler_ref = receipt(draw_scheduler_path)
+    if draw_scheduler["status"] != "PASS_EXPERIMENTAL_MAIN_LV_DRAW_IMAGE_C" or \
+            draw_scheduler["base_sha256"] != main_obj["sha256"] or \
+            draw_scheduler["unresolved_before"] != 200 or draw_scheduler["unresolved_after"] != 199 or \
+            draw_scheduler["imports_resolved"] != ["audio_uart_lv_draw_image_488a38"] or \
+            draw_scheduler["imports_added"] != []:
+        raise RuntimeError("Apollo Main LVGL draw-image scheduler binding changed")
+    oracle = ROOT / draw_scheduler["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != draw_scheduler["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL draw-image scheduler oracle changed")
+    file_checked(draw_scheduler["source"], draw_scheduler["source_sha256"])
+    main_obj = file_checked(draw_scheduler["linked_object"], draw_scheduler["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 199 or any(name in actual for name in draw_scheduler["imports_resolved"]):
+        raise RuntimeError("Apollo Main LVGL draw-image scheduler frontier changed")
+    label_alias_path = G2 / "build/c-firmware/20261016/main-terminal-label-text-alias-49942e/receipt.json"
+    label_alias, label_alias_ref = receipt(label_alias_path)
+    if label_alias["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LABEL_TEXT_ALIAS_C" or \
+            label_alias["base_sha256"] != main_obj["sha256"] or \
+            label_alias["unresolved_before"] != 199 or label_alias["unresolved_after"] != 198 or \
+            label_alias["imports_resolved"] != ["audio_lv_anim_start_49942e"] or \
+            label_alias["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal label-text alias binding changed")
+    oracle = ROOT / label_alias["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != label_alias["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal label-text alias oracle changed")
+    file_checked(label_alias["source"], label_alias["source_sha256"])
+    main_obj = file_checked(label_alias["linked_object"], label_alias["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 198 or any(name in actual for name in label_alias["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal label-text alias frontier changed")
+    label_fmt_path = G2 / "build/c-firmware/20261016/main-terminal-label-text-fmt-49954c/receipt.json"
+    label_fmt, label_fmt_ref = receipt(label_fmt_path)
+    if label_fmt["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_LABEL_TEXT_FMT_C" or \
+            label_fmt["base_sha256"] != main_obj["sha256"] or \
+            label_fmt["unresolved_before"] != 198 or label_fmt["unresolved_after"] != 198 or \
+            label_fmt["imports_resolved"] != ["audio_lv_label_set_text_fmt_49954c"] or \
+            label_fmt["imports_added"] != ["audio_uart_lv_label_vprintf_489ad2"]:
+        raise RuntimeError("Apollo Main Terminal formatted label binding changed")
+    oracle = ROOT / label_fmt["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != label_fmt["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal formatted label oracle changed")
+    file_checked(label_fmt["source"], label_fmt["source_sha256"])
+    main_obj = file_checked(label_fmt["linked_object"], label_fmt["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 198 or any(name in actual for name in label_fmt["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal formatted label frontier changed")
+    label_vprintf_path = G2 / "build/c-firmware/20261016/main-lv-label-vprintf-489ad2/receipt.json"
+    label_vprintf, label_vprintf_ref = receipt(label_vprintf_path)
+    if label_vprintf["status"] != "PASS_EXPERIMENTAL_MAIN_LV_LABEL_VPRINTF_C" or \
+            label_vprintf["base_sha256"] != main_obj["sha256"] or \
+            label_vprintf["unresolved_before"] != 198 or label_vprintf["unresolved_after"] != 197 or \
+            label_vprintf["imports_resolved"] != ["audio_uart_lv_label_vprintf_489ad2"] or \
+            label_vprintf["imports_added"] != []:
+        raise RuntimeError("Apollo Main LVGL formatted text allocator binding changed")
+    oracle = ROOT / label_vprintf["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != label_vprintf["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL formatted text allocator oracle changed")
+    file_checked(label_vprintf["source"], label_vprintf["source_sha256"])
+    main_obj = file_checked(label_vprintf["linked_object"], label_vprintf["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 197 or any(name in actual for name in label_vprintf["imports_resolved"]):
+        raise RuntimeError("Apollo Main LVGL formatted text allocator frontier changed")
+    label_fatal_path = G2 / "build/c-firmware/20261016/main-label-fatal-paths/oracle-receipt.json"
+    label_fatal, label_fatal_ref = receipt(label_fatal_path)
+    if label_fatal["status"] != "PASS_EXPERIMENTAL_MAIN_LABEL_FATAL_PATHS_ORACLE" or \
+            label_fatal["cases"] != 5 or \
+            [item["path"] for item in label_fatal["sources"]] != [label_fmt["source"], label_vprintf["source"]]:
+        raise RuntimeError("Apollo Main label fatal-path oracle changed")
+    for item in label_fatal["sources"]:
+        file_checked(item["path"], item["sha256"])
+    clear_flag_alias_path = G2 / "build/c-firmware/20261016/main-terminal-clear-flag-alias-43dfa4/receipt.json"
+    clear_flag_alias, clear_flag_alias_ref = receipt(clear_flag_alias_path)
+    if clear_flag_alias["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_CLEAR_FLAG_ALIAS_C" or \
+            clear_flag_alias["base_sha256"] != main_obj["sha256"] or \
+            clear_flag_alias["unresolved_before"] != 197 or clear_flag_alias["unresolved_after"] != 196 or \
+            clear_flag_alias["imports_resolved"] != ["audio_lv_obj_invalidate_43dfa4"] or \
+            clear_flag_alias["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal clear-flag alias binding changed")
+    oracle = ROOT / clear_flag_alias["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != clear_flag_alias["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal clear-flag alias oracle changed")
+    file_checked(clear_flag_alias["source"], clear_flag_alias["source_sha256"])
+    main_obj = file_checked(clear_flag_alias["linked_object"], clear_flag_alias["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 196 or any(name in actual for name in clear_flag_alias["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal clear-flag alias frontier changed")
+    object_alias_path = G2 / "build/c-firmware/20261016/main-terminal-object-abi-aliases/receipt.json"
+    object_alias, object_alias_ref = receipt(object_alias_path)
+    if object_alias["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_OBJECT_ABI_ALIASES_C" or \
+            object_alias["base_sha256"] != main_obj["sha256"] or \
+            object_alias["unresolved_before"] != 196 or object_alias["unresolved_after"] != 191 or \
+            object_alias["imports_resolved"] != ["audio_lv_object_call_43ded4", "audio_lv_object_call_441488", "audio_lv_object_call_450500", "audio_lv_object_release_44d7b8", "audio_lv_object_size_call_43f4c0"] or \
+            object_alias["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal object ABI aliases binding changed")
+    oracle = ROOT / object_alias["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != object_alias["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal object ABI aliases oracle changed")
+    file_checked(object_alias["source"], object_alias["source_sha256"])
+    main_obj = file_checked(object_alias["linked_object"], object_alias["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 191 or any(name in actual for name in object_alias["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal object ABI aliases frontier changed")
+    animimage_path = G2 / "build/c-firmware/20261016/main-lv-animimage-597ea6/receipt.json"
+    animimage, animimage_ref = receipt(animimage_path)
+    if animimage["status"] != "PASS_EXPERIMENTAL_MAIN_LV_ANIMIMAGE_C" or \
+            animimage["base_sha256"] != main_obj["sha256"] or \
+            animimage["unresolved_before"] != 191 or animimage["unresolved_after"] != 187 or \
+            animimage["imports_resolved"] != ["audio_lv_label_style_call_597ea6", "audio_lv_label_style_call_597ee0", "audio_lv_label_style_call_597f10", "audio_lv_label_style_call_597f52"] or \
+            animimage["imports_added"] != []:
+        raise RuntimeError("Apollo Main LVGL animimage binding changed")
+    oracle = ROOT / animimage["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != animimage["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main LVGL animimage oracle changed")
+    file_checked(animimage["source"], animimage["source_sha256"])
+    main_obj = file_checked(animimage["linked_object"], animimage["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 187 or any(name in actual for name in animimage["imports_resolved"]):
+        raise RuntimeError("Apollo Main LVGL animimage frontier changed")
+    query_show_path = G2 / "build/c-firmware/20261016/main-terminal-query-notification-show-5e6548/receipt.json"
+    query_show, query_show_ref = receipt(query_show_path)
+    if query_show["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_NOTIFICATION_SHOW_C" or \
+            query_show["base_sha256"] != main_obj["sha256"] or \
+            query_show["unresolved_before"] != 187 or query_show["unresolved_after"] != 188 or \
+            query_show["imports_resolved"] != ["audio_terminal_ui_action_5e6548"] or \
+            query_show["imports_added"] != ["audio_terminal_counter_b_get_5973dc", "audio_terminal_query_visibility_5ec82a"]:
+        raise RuntimeError("Apollo Main Terminal query-notification-show binding changed")
+    oracle = ROOT / query_show["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_show["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query-notification-show oracle changed")
+    file_checked(query_show["source"], query_show["source_sha256"])
+    main_obj = file_checked(query_show["linked_object"], query_show["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 188 or any(name in actual for name in query_show["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal query-notification-show frontier changed")
+    counter_alias_path = G2 / "build/c-firmware/20261016/main-terminal-counter-b-alias-5973dc/receipt.json"
+    counter_alias, counter_alias_ref = receipt(counter_alias_path)
+    if counter_alias["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_COUNTER_B_ALIAS_C" or \
+            counter_alias["base_sha256"] != main_obj["sha256"] or \
+            counter_alias["unresolved_before"] != 188 or counter_alias["unresolved_after"] != 187 or \
+            counter_alias["imports_resolved"] != ["audio_terminal_counter_b_get_5973dc"] or \
+            counter_alias["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal counter-B alias binding changed")
+    oracle = ROOT / counter_alias["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != counter_alias["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal counter-B alias oracle changed")
+    file_checked(counter_alias["source"], counter_alias["source_sha256"])
+    main_obj = file_checked(counter_alias["linked_object"], counter_alias["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 187 or any(name in actual for name in counter_alias["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal counter-B alias frontier changed")
+    query_name_path = G2 / "build/c-firmware/20261016/main-terminal-query-session-name-5ec7f0/receipt.json"
+    query_name, query_name_ref = receipt(query_name_path)
+    if query_name["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_SESSION_NAME_C" or \
+            query_name["base_sha256"] != main_obj["sha256"] or \
+            query_name["unresolved_before"] != 187 or query_name["unresolved_after"] != 187 or \
+            query_name["imports_resolved"] != [] or query_name["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query session-name binding changed")
+    oracle = ROOT / query_name["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_name["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query session-name oracle changed")
+    file_checked(query_name["source"], query_name["source_sha256"])
+    main_obj = file_checked(query_name["linked_object"], query_name["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 187 or "audio_terminal_query_visibility_5ec82a" not in actual:
+        raise RuntimeError("Apollo Main Terminal query session-name frontier changed")
+    query_visibility_path = G2 / "build/c-firmware/20261016/main-terminal-query-visibility-5ec82a/receipt.json"
+    query_visibility, query_visibility_ref = receipt(query_visibility_path)
+    if query_visibility["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_VISIBILITY_C" or \
+            query_visibility["base_sha256"] != main_obj["sha256"] or \
+            query_visibility["unresolved_before"] != 187 or query_visibility["unresolved_after"] != 189 or \
+            query_visibility["imports_resolved"] != ["audio_terminal_query_visibility_5ec82a"] or \
+            query_visibility["imports_added"] != ["audio_terminal_query_root_5e4f54", "audio_uart_page_441180", "audio_uart_page_44119c"] or \
+            not query_visibility["image_exact_bytes"]:
+        raise RuntimeError("Apollo Main Terminal query visibility binding changed")
+    oracle = ROOT / query_visibility["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_visibility["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query visibility oracle changed")
+    file_checked(query_visibility["source"], query_visibility["source_sha256"])
+    file_checked(query_visibility["image_source"], query_visibility["image_source_sha256"])
+    file_checked(query_visibility["image_object"], query_visibility["image_object_sha256"])
+    main_obj = file_checked(query_visibility["linked_object"], query_visibility["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 189 or any(name in actual for name in query_visibility["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal query visibility frontier changed")
+    query_style_path = G2 / "build/c-firmware/20261016/main-terminal-query-style-setters/receipt.json"
+    query_style, query_style_ref = receipt(query_style_path)
+    if query_style["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_STYLE_SETTERS_C" or \
+            query_style["base_sha256"] != main_obj["sha256"] or \
+            query_style["unresolved_before"] != 189 or query_style["unresolved_after"] != 187 or \
+            query_style["imports_resolved"] != ["audio_uart_page_441180", "audio_uart_page_44119c"] or \
+            query_style["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query style binding changed")
+    oracle = ROOT / query_style["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_style["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query style oracle changed")
+    file_checked(query_style["source"], query_style["source_sha256"])
+    main_obj = file_checked(query_style["linked_object"], query_style["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 187 or any(name in actual for name in query_style["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal query style frontier changed")
+    query_root_path = G2 / "build/c-firmware/20261016/main-terminal-query-root-5e4f54/receipt.json"
+    query_root, query_root_ref = receipt(query_root_path)
+    if query_root["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_QUERY_ROOT_C" or \
+            query_root["base_sha256"] != main_obj["sha256"] or \
+            query_root["unresolved_before"] != 187 or query_root["unresolved_after"] != 186 or \
+            query_root["imports_resolved"] != ["audio_terminal_query_root_5e4f54"] or \
+            query_root["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal query root binding changed")
+    oracle = ROOT / query_root["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != query_root["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal query root oracle changed")
+    file_checked(query_root["source"], query_root["source_sha256"])
+    main_obj = file_checked(query_root["linked_object"], query_root["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 186 or any(name in actual for name in query_root["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal query root frontier changed")
+    voice_start_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-voice-start-5e58ba/receipt.json"
+    voice_start, voice_start_ref = receipt(voice_start_path)
+    if voice_start["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VOICE_START_C" or \
+            voice_start["base_sha256"] != main_obj["sha256"] or \
+            voice_start["unresolved_before"] != 186 or voice_start["unresolved_after"] != 186 or \
+            voice_start["imports_resolved"] != ["audio_terminal_ui_action_5e58ba"] or \
+            voice_start["imports_added"] != ["audio_terminal_ui_voice_prepare_5ebd0e"] or \
+            not voice_start["image_exact_bytes"]:
+        raise RuntimeError("Apollo Main Terminal voice-start binding changed")
+    for key in ("oracle_receipt", "timer_oracle_receipt"):
+        oracle = ROOT / voice_start[key]
+        if hashlib.sha256(oracle.read_bytes()).hexdigest() != voice_start[key + "_sha256"]:
+            raise RuntimeError("Apollo Main Terminal voice-start oracle changed")
+    for key in ("source", "timer_source", "image_source", "action_object", "timer_object", "image_object"):
+        file_checked(voice_start[key], voice_start[key + "_sha256"])
+    main_obj = file_checked(voice_start["linked_object"], voice_start["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 186 or any(name in actual for name in voice_start["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal voice-start frontier changed")
+    voice_prepare_path = G2 / "build/c-firmware/20261016/main-terminal-ui-voice-prepare-5ebd0e/receipt.json"
+    voice_prepare, voice_prepare_ref = receipt(voice_prepare_path)
+    if voice_prepare["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VOICE_PREPARE_C" or \
+            voice_prepare["base_sha256"] != main_obj["sha256"] or \
+            voice_prepare["unresolved_before"] != 186 or voice_prepare["unresolved_after"] != 187 or \
+            voice_prepare["imports_resolved"] != ["audio_terminal_ui_voice_prepare_5ebd0e"] or \
+            voice_prepare["imports_added"] != ["audio_terminal_voice_anim_create_597e90", "audio_terminal_voice_style_200014e8"]:
+        raise RuntimeError("Apollo Main Terminal voice-prepare binding changed")
+    for key in ("oracle_receipt", "wrapper_oracle_receipt"):
+        oracle = ROOT / voice_prepare[key]
+        if hashlib.sha256(oracle.read_bytes()).hexdigest() != voice_prepare[key + "_sha256"]:
+            raise RuntimeError("Apollo Main Terminal voice-prepare oracle changed")
+    for key in ("source", "wrapper_source", "object", "wrapper_object"):
+        file_checked(voice_prepare[key], voice_prepare[key + "_sha256"])
+    main_obj = file_checked(voice_prepare["linked_object"], voice_prepare["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 187 or any(name in actual for name in voice_prepare["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal voice-prepare frontier changed")
+    voice_factory_path = G2 / "build/c-firmware/20261016/main-terminal-voice-anim-factory-597e90/receipt.json"
+    voice_factory, voice_factory_ref = receipt(voice_factory_path)
+    if voice_factory["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VOICE_ANIM_FACTORY_C" or \
+            voice_factory["base_sha256"] != main_obj["sha256"] or \
+            voice_factory["unresolved_before"] != 187 or voice_factory["unresolved_after"] != 187 or \
+            voice_factory["imports_resolved"] != ["audio_terminal_voice_anim_create_597e90"] or \
+            voice_factory["imports_added"] != ["audio_terminal_voice_anim_ctor_597fae"]:
+        raise RuntimeError("Apollo Main Terminal voice animation factory binding changed")
+    oracle = ROOT / voice_factory["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != voice_factory["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal voice animation factory oracle changed")
+    file_checked(voice_factory["source"], voice_factory["source_sha256"])
+    main_obj = file_checked(voice_factory["linked_object"], voice_factory["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 187 or any(name in actual for name in voice_factory["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal voice animation factory frontier changed")
+    voice_anim_path = G2 / "build/c-firmware/20261016/main-terminal-voice-anim-children/receipt.json"
+    voice_anim, voice_anim_ref = receipt(voice_anim_path)
+    if voice_anim["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VOICE_ANIM_CHILDREN_C" or \
+            voice_anim["base_sha256"] != main_obj["sha256"] or \
+            voice_anim["unresolved_before"] != 187 or voice_anim["unresolved_after"] != 186 or \
+            voice_anim["imports_resolved"] != ["audio_terminal_voice_anim_ctor_597fae"] or \
+            voice_anim["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal voice animation children binding changed")
+    for key in ("constructor_oracle_receipt", "callback_oracle_receipt"):
+        oracle = ROOT / voice_anim[key]
+        if hashlib.sha256(oracle.read_bytes()).hexdigest() != voice_anim[key + "_sha256"]:
+            raise RuntimeError("Apollo Main Terminal voice animation child oracle changed")
+    for key in ("constructor_source", "callback_source", "constructor_object", "callback_object"):
+        file_checked(voice_anim[key], voice_anim[key + "_sha256"])
+    main_obj = file_checked(voice_anim["linked_object"], voice_anim["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 186 or any(name in actual for name in voice_anim["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal voice animation children frontier changed")
+    voice_frames_path = G2 / "build/c-firmware/20261016/main-terminal-voice-frames-200014e8/receipt.json"
+    voice_frames, voice_frames_ref = receipt(voice_frames_path)
+    if voice_frames["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VOICE_FRAMES_C" or \
+            voice_frames["base_sha256"] != main_obj["sha256"] or \
+            voice_frames["unresolved_before"] != 186 or voice_frames["unresolved_after"] != 185 or \
+            voice_frames["imports_resolved"] != ["audio_terminal_voice_style_200014e8"] or \
+            voice_frames["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal voice frame binding changed")
+    oracle = ROOT / voice_frames["oracle_receipt"]
+    if hashlib.sha256(oracle.read_bytes()).hexdigest() != voice_frames["oracle_receipt_sha256"]:
+        raise RuntimeError("Apollo Main Terminal voice frame oracle changed")
+    for key in ("source", "linker", "object"):
+        file_checked(voice_frames[key], voice_frames[key + "_sha256"])
+    main_obj = file_checked(voice_frames["linked_object"], voice_frames["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 185 or any(name in actual for name in voice_frames["imports_resolved"]):
+        raise RuntimeError("Apollo Main Terminal voice frame frontier changed")
+    voice_stop_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-voice-stop-5e598a/receipt.json"
+    voice_stop, voice_stop_ref = receipt(voice_stop_path)
+    if voice_stop["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_VOICE_STOP_C" or \
+            voice_stop["base_sha256"] != main_obj["sha256"] or \
+            voice_stop["unresolved_before"] != 185 or voice_stop["unresolved_after"] != 184 or \
+            voice_stop["imports_resolved"] != ["audio_terminal_ui_action_5e598a"] or \
+            voice_stop["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal voice-stop binding changed")
+    for source, digest in zip(voice_stop["sources"], voice_stop["source_sha256"]):
+        file_checked(source, digest)
+    for oracle_path, digest in zip(voice_stop["oracle_receipts"], voice_stop["oracle_receipt_sha256"]):
+        file_checked(oracle_path, digest)
+    main_obj = file_checked(voice_stop["linked_object"], voice_stop["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 184 or "audio_terminal_ui_action_5e598a" in actual:
+        raise RuntimeError("Apollo Main Terminal voice-stop frontier changed")
+    asr_final_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-asr-final-5e5aae/receipt.json"
+    asr_final, asr_final_ref = receipt(asr_final_path)
+    if asr_final["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ASR_FINAL_C" or \
+            asr_final["base_sha256"] != main_obj["sha256"] or \
+            asr_final["unresolved_before"] != 184 or asr_final["unresolved_after"] != 184 or \
+            asr_final["imports_resolved"] != ["audio_terminal_ui_action_5e5aae"] or \
+            asr_final["imports_added"] != ["audio_terminal_ui_result_area_prepare_5ebff8"]:
+        raise RuntimeError("Apollo Main Terminal ASR-final binding changed")
+    for source, digest in zip(asr_final["sources"], asr_final["source_sha256"]):
+        file_checked(source, digest)
+    for oracle_path, digest in zip(asr_final["oracle_receipts"], asr_final["oracle_receipt_sha256"]):
+        file_checked(oracle_path, digest)
+    main_obj = file_checked(asr_final["linked_object"], asr_final["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 184 or "audio_terminal_ui_action_5e5aae" in actual or \
+            "audio_terminal_ui_result_area_prepare_5ebff8" not in actual:
+        raise RuntimeError("Apollo Main Terminal ASR-final frontier changed")
+    result_area_path = G2 / "build/c-firmware/20261016/main-terminal-result-area-5ebff8/receipt.json"
+    result_area, result_area_ref = receipt(result_area_path)
+    if result_area["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_RESULT_AREA_C" or \
+            result_area["base_sha256"] != main_obj["sha256"] or \
+            result_area["unresolved_before"] != 184 or result_area["unresolved_after"] != 183 or \
+            result_area["imports_resolved"] != ["audio_terminal_ui_result_area_prepare_5ebff8"] or \
+            result_area["imports_added"] != [] or not result_area["icon_exact_bytes"]:
+        raise RuntimeError("Apollo Main Terminal result-area binding changed")
+    for key in ("source", "icon_source", "source_object", "icon_object"):
+        file_checked(result_area[key], result_area[key + "_sha256"])
+    file_checked(result_area["oracle_receipt"], result_area["oracle_receipt_sha256"])
+    main_obj = file_checked(result_area["linked_object"], result_area["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 183 or "audio_terminal_ui_result_area_prepare_5ebff8" in actual:
+        raise RuntimeError("Apollo Main Terminal result-area frontier changed")
+    input_confirm_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-input-confirm-5e5bc6/receipt.json"
+    input_confirm, input_confirm_ref = receipt(input_confirm_path)
+    if input_confirm["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_INPUT_CONFIRM_C" or \
+            input_confirm["base_sha256"] != main_obj["sha256"] or \
+            input_confirm["unresolved_before"] != 183 or input_confirm["unresolved_after"] != 182 or \
+            input_confirm["imports_resolved"] != ["audio_terminal_ui_action_5e5bc6"] or \
+            input_confirm["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal input-confirm binding changed")
+    for source, digest in zip(input_confirm["sources"], input_confirm["source_sha256"]):
+        file_checked(source, digest)
+    for oracle_path, digest in zip(input_confirm["oracle_receipts"], input_confirm["oracle_receipt_sha256"]):
+        file_checked(oracle_path, digest)
+    main_obj = file_checked(input_confirm["linked_object"], input_confirm["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 182 or "audio_terminal_ui_action_5e5bc6" in actual:
+        raise RuntimeError("Apollo Main Terminal input-confirm frontier changed")
+    input_cancel_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-input-cancel-5e5cb0/receipt.json"
+    input_cancel, input_cancel_ref = receipt(input_cancel_path)
+    if input_cancel["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_INPUT_CANCEL_C" or \
+            input_cancel["base_sha256"] != main_obj["sha256"] or \
+            input_cancel["unresolved_before"] != 182 or input_cancel["unresolved_after"] != 181 or \
+            input_cancel["imports_resolved"] != ["audio_terminal_ui_action_5e5cb0"] or \
+            input_cancel["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal input-cancel binding changed")
+    file_checked(input_cancel["source"], input_cancel["source_sha256"])
+    file_checked(input_cancel["oracle_receipt"], input_cancel["oracle_receipt_sha256"])
+    file_checked(input_cancel["object"], input_cancel["object_sha256"])
+    main_obj = file_checked(input_cancel["linked_object"], input_cancel["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 181 or "audio_terminal_ui_action_5e5cb0" in actual:
+        raise RuntimeError("Apollo Main Terminal input-cancel frontier changed")
+    asr_fail_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-asr-fail-5e5de0/receipt.json"
+    asr_fail, asr_fail_ref = receipt(asr_fail_path)
+    if asr_fail["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_ASR_FAIL_C" or \
+            asr_fail["base_sha256"] != main_obj["sha256"] or \
+            asr_fail["unresolved_before"] != 181 or asr_fail["unresolved_after"] != 180 or \
+            asr_fail["imports_resolved"] != ["audio_terminal_ui_action_5e5de0"] or \
+            asr_fail["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal ASR-fail binding changed")
+    file_checked(asr_fail["source"], asr_fail["source_sha256"])
+    file_checked(asr_fail["oracle_receipt"], asr_fail["oracle_receipt_sha256"])
+    file_checked(asr_fail["object"], asr_fail["object_sha256"])
+    main_obj = file_checked(asr_fail["linked_object"], asr_fail["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 180 or "audio_terminal_ui_action_5e5de0" in actual:
+        raise RuntimeError("Apollo Main Terminal ASR-fail frontier changed")
+    agent_reset_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-agent-reset-5e5ed4/receipt.json"
+    agent_reset, agent_reset_ref = receipt(agent_reset_path)
+    if agent_reset["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_AGENT_RESET_C" or \
+            agent_reset["base_sha256"] != main_obj["sha256"] or \
+            agent_reset["unresolved_before"] != 180 or agent_reset["unresolved_after"] != 179 or \
+            agent_reset["imports_resolved"] != ["audio_terminal_ui_action_5e5ed4"] or \
+            agent_reset["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal agent-reset binding changed")
+    file_checked(agent_reset["source"], agent_reset["source_sha256"])
+    file_checked(agent_reset["oracle_receipt"], agent_reset["oracle_receipt_sha256"])
+    file_checked(agent_reset["object"], agent_reset["object_sha256"])
+    main_obj = file_checked(agent_reset["linked_object"], agent_reset["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 179 or "audio_terminal_ui_action_5e5ed4" in actual:
+        raise RuntimeError("Apollo Main Terminal agent-reset frontier changed")
+    agent_interrupt_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-agent-interrupt-5e7068/receipt.json"
+    agent_interrupt, agent_interrupt_ref = receipt(agent_interrupt_path)
+    if agent_interrupt["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_AGENT_INTERRUPT_C" or \
+            agent_interrupt["base_sha256"] != main_obj["sha256"] or \
+            agent_interrupt["unresolved_before"] != 179 or agent_interrupt["unresolved_after"] != 178 or \
+            agent_interrupt["imports_resolved"] != ["audio_terminal_ui_action_5e7068"] or \
+            agent_interrupt["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal agent-interrupt binding changed")
+    for source, digest in zip(agent_interrupt["sources"], agent_interrupt["source_sha256"]):
+        file_checked(source, digest)
+    for oracle_path, digest in zip(agent_interrupt["oracle_receipts"], agent_interrupt["oracle_receipt_sha256"]):
+        file_checked(oracle_path, digest)
+    main_obj = file_checked(agent_interrupt["linked_object"], agent_interrupt["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 178 or "audio_terminal_ui_action_5e7068" in actual:
+        raise RuntimeError("Apollo Main Terminal agent-interrupt frontier changed")
+    session_status_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-session-status-5e6018/receipt.json"
+    session_status, session_status_ref = receipt(session_status_path)
+    if session_status["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_SESSION_STATUS_C" or \
+            session_status["base_sha256"] != main_obj["sha256"] or \
+            session_status["unresolved_before"] != 178 or session_status["unresolved_after"] != 177 or \
+            session_status["imports_resolved"] != ["audio_terminal_ui_action_5e6018"] or \
+            session_status["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal session-status binding changed")
+    file_checked(session_status["source"], session_status["source_sha256"])
+    file_checked(session_status["oracle_receipt"], session_status["oracle_receipt_sha256"])
+    file_checked(session_status["object"], session_status["object_sha256"])
+    main_obj = file_checked(session_status["linked_object"], session_status["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 177 or "audio_terminal_ui_action_5e6018" in actual:
+        raise RuntimeError("Apollo Main Terminal session-status frontier changed")
+    agent_done_path = G2 / "build/c-firmware/20261016/main-terminal-ui-action-agent-done-5e6268/receipt.json"
+    agent_done, agent_done_ref = receipt(agent_done_path)
+    if agent_done["status"] != "PASS_EXPERIMENTAL_MAIN_TERMINAL_AGENT_DONE_C" or \
+            agent_done["base_sha256"] != main_obj["sha256"] or \
+            agent_done["unresolved_before"] != 177 or agent_done["unresolved_after"] != 176 or \
+            agent_done["imports_resolved"] != ["audio_terminal_ui_action_5e6268"] or \
+            agent_done["imports_added"] != []:
+        raise RuntimeError("Apollo Main Terminal agent-done binding changed")
+    file_checked(agent_done["source"], agent_done["source_sha256"])
+    file_checked(agent_done["oracle_receipt"], agent_done["oracle_receipt_sha256"])
+    file_checked(agent_done["object"], agent_done["object_sha256"])
+    main_obj = file_checked(agent_done["linked_object"], agent_done["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 176 or "audio_terminal_ui_action_5e6268" in actual:
+        raise RuntimeError("Apollo Main Terminal agent-done frontier changed")
     images["apollo_main"] = {
         "receipt": main_ref, "candidate": main_obj,
         "prior_dm_registry_extent_gate": registry_ref,
@@ -2774,10 +5246,184 @@ def main():
         "text_stream_copy_bytes_bound": text_copy_ref,
         "text_stream_set_text_bound": set_text_ref,
         "text_stream_decision_helpers_bound": decision_ref,
+        "text_stream_restart_bound": restart_ref,
+        "text_stream_dispatch_bound": dispatch_ref,
+        "text_stream_begin_bound": begin_ref,
+        "text_stream_finish_bound": finish_ref,
+        "text_stream_schedule_bound": schedule_ref,
+        "text_stream_tick_bound": tick_ref,
+        "even_ai_app_acquire_bound": app_acquire_ref,
+        "audio_app_setup_children_bound": app_setup_ref,
+        "audio_app_control_and_open_bound": app_control_ref,
+        "audio_app_hardware_core_bound": hardware_core_ref,
+        "audio_app_hardware_indices_bound": hardware_indices_ref,
+        "even_ai_sync_remote_bound": sync_remote_ref,
+        "even_ai_ancc_display_clear_bound": ancc_display_ref,
+        "even_ai_ancc_display_send_bound": ancc_send_ref,
+        "even_ai_ancc_state_sync_bound": ancc_state_ref,
+        "even_ai_display_ctrl_bound": display_ctrl_ref,
+        "message_notify_common_bound": message_notify_ref,
+        "message_notify_frame_bound": message_frame_ref,
+        "message_notify_whitelist_check_bound": whitelist_check_ref,
+        "message_notify_whitelist_ctrl_bound": whitelist_ctrl_ref,
+        "message_notify_ctrl_bound": notify_ctrl_ref,
+        "message_notify_tx_common_bound": notify_tx_common_ref,
+        "message_notify_tx_ctrl_bound": notify_tx_ctrl_ref,
+        "message_notify_tx_whitelist_ctrl_bound": notify_tx_whitelist_ref,
+        "message_notify_tx_whitelist_check_bound": notify_tx_check_ref,
+        "tracepoint_ready_word_extent_bound": ready_word_ref,
+        "tracepoint_slave_file_list_bound": slave_file_list_ref,
+        "fault_lookup_overrun_bound": fault_lookup_ref,
+        "terminal_event_names_ram_bound": terminal_names_ref,
+        "terminal_ui_event_bound": terminal_ui_ref,
+        "terminal_ui_exit_sync_bound": terminal_exit_ref,
+        "terminal_ui_stop_bound": terminal_stop_ref,
+        "terminal_ui_stop_result_cleanup_bound": terminal_stop_e_ref,
+        "terminal_ui_stop_timer_cleanup_bound": terminal_stop_a_ref,
+        "terminal_ui_object_valid_bound": object_valid_ref,
+        "terminal_ui_object_descendant_bound": descendant_ref,
+        "terminal_list_anim_stop_bound": list_anim_ref,
+        "terminal_ui_stop_timer_bound": timer_ref,
+        "terminal_ui_stop_services_bcd_bound": services_bcd_ref,
+        "terminal_display_state_notify_bound": display_notify_ref,
+        "terminal_ui_start_bound": terminal_start_ref,
+        "terminal_list_anim_init_bound": list_anim_init_ref,
+        "terminal_ui_theme_bound": theme_ref,
+        "terminal_ui_tick_bound": terminal_tick_ref,
+        "terminal_ui_fsm_bound": terminal_fsm_ref,
+        "terminal_ui_fsm_names_bound": fsm_names_ref,
+        "terminal_ui_asr_actions_bound": asr_actions_ref,
+        "terminal_ui_notification_restore_bound": notification_restore_ref,
+        "terminal_ui_notification_exit_actions_bound": exit_actions_ref,
+        "terminal_ui_payload_actions_bound": payload_actions_ref,
+        "terminal_elapsed_text_bound": elapsed_text_ref,
+        "terminal_control_flags_bound": control_flags_ref,
+        "terminal_output_start_bound": output_start_ref,
+        "terminal_processing_hide_bound": processing_hide_ref,
+        "terminal_processing_prepare_bound": processing_prepare_ref,
+        "terminal_elapsed_refresh_bound": elapsed_refresh_ref,
+        "terminal_elapsed_clear_bound": elapsed_clear_ref,
+        "terminal_set_output_bound": set_output_ref,
+        "terminal_output_ram_bound": output_ram_ref,
+        "terminal_label_style_bound": label_style_ref,
+        "terminal_output_mode_bound": output_mode_ref,
+        "terminal_query_dismiss_action_bound": dismiss_action_ref,
+        "terminal_status_action_bound": status_action_ref,
+        "terminal_reset_pair_actions_bound": reset_pair_ref,
+        "terminal_reset_mode_display_bound": reset_children_ref,
+        "terminal_mode_set_bound": mode_set_ref,
+        "terminal_event_emit_bound": event_emit_ref,
+        "terminal_event_type4_bound": event_type4_ref,
+        "terminal_event_reset_list_bound": reset_list_ref,
+        "terminal_event_refresh_view_staged": refresh_view_ref,
+        "terminal_event_select_input_staged": select_input_ref,
+        "terminal_event_apply_input_staged": apply_input_ref,
+        "terminal_event_default_bound": event_default_ref,
+        "terminal_event_select_input_bound": select_input_bound_ref,
+        "terminal_event_apply_input_bound": apply_input_bound_ref,
+        "terminal_event_refresh_view_bound": refresh_view_bound_ref,
+        "terminal_recompute_offsets_bound": offsets_ref,
+        "terminal_resource_items_bound": items_ref,
+        "terminal_view_position_bound": view_pos_ref,
+        "terminal_view_index_bound": view_index_ref,
+        "terminal_position_index_bound": position_index_ref,
+        "terminal_view_select_bound": view_select_ref,
+        "terminal_view_row_bound": view_row_ref,
+        "terminal_lv_existing_aliases_bound": lv_alias_ref,
+        "terminal_item_height_bound": item_height_ref,
+        "terminal_item_spacing_bound": item_spacing_ref,
+        "terminal_row_bind_bound": row_bind_ref,
+        "terminal_row_existing_aliases_bound": row_alias_ref,
+        "terminal_row_children_bound": row_children_ref,
+        "terminal_row_image_hint_bound": row_hint_ref,
+        "terminal_event_type2_bound": event_type2_ref,
+        "terminal_type2_children_bound": type2_children_ref,
+        "terminal_event_type3_bound": type3_ref,
+        "terminal_reset_first_bound": reset_first_ref,
+        "terminal_reset_ancillary_bound": reset_ancillary_ref,
+        "terminal_reset_preclear_bound": reset_preclear_ref,
+        "even_ai_app_release_bound": app_release_ref,
+        "terminal_reset_subtree_bound": reset_subtree_ref,
+        "terminal_reset_subtree_children_bound": subtree_children_ref,
+        "terminal_ui_restore_query_bound": restore_query_ref,
+        "terminal_ui_action_5e57c6_bound": action_57c6_ref,
+        "terminal_image_set_bound": image_set_ref,
+        "terminal_display_status_alias_bound": display_status_ref,
+        "terminal_ui_disconnect_actions_bound": disconnect_actions_ref,
+        "terminal_ui_action_5e583c_bound": action_583c_ref,
+        "terminal_output_style_assets_bound": style_assets_ref,
+        "terminal_ui_action_5e54a2_bound": action_54a2_ref,
+        "terminal_ui_action_5e576c_bound": action_576c_ref,
+        "terminal_display_fallback_adapter_bound": fallback_adapter_ref,
+        "terminal_ui_action_5e63b4_bound": action_63b4_ref,
+        "terminal_ui_scroll_actions_bound": scroll_actions_ref,
+        "terminal_ui_action_defer_query_bound": defer_query_ref,
+        "terminal_notify_status_bound": notify_status_ref,
+        "terminal_status_layout_bound": status_layout_ref,
+        "terminal_status_publish_bound": status_publish_ref,
+        "terminal_interrupt_confirm_scroll_bound": confirm_scroll_ref,
+        "terminal_status_list_layout_bound": list_layout_ref,
+        "terminal_interrupt_confirm_show_bound": confirm_show_ref,
+        "terminal_interrupt_confirm_cancel_bound": confirm_cancel_ref,
+        "terminal_new_session_success_bound": new_session_ref,
+        "terminal_query_notification_switch_result_bound": query_switch_ref,
+        "terminal_query_scroll_actions_bound": query_scroll_ref,
+        "terminal_query_layout_bound": query_layout_ref,
+        "terminal_query_items_style_bound": query_items_ref,
+        "terminal_query_indicator_bound": query_indicator_ref,
+        "terminal_session_list_scroll_bound": session_scroll_ref,
+        "terminal_session_select_bound": session_select_ref,
+        "terminal_session_focus_bound": session_focus_ref,
+        "terminal_session_apply_bound": session_apply_ref,
+        "terminal_session_row_style_bound": session_row_ref,
+        "terminal_list_anim_add_bound": anim_add_ref,
+        "terminal_list_anim_process_bound": anim_process_ref,
+        "terminal_list_anim_new_prepare_bound": anim_prepare_ref,
+        "terminal_list_anim_fade_start_bound": anim_fade_ref,
+        "terminal_list_anim_path_bound": anim_path_ref,
+        "terminal_session_row_visibility_bound": row_visibility_ref,
+        "lv_image_class_bound": image_class_ref,
+        "lv_image_lifecycle_bound": image_lifecycle_ref,
+        "terminal_button_fade_callback_bound": button_fade_ref,
+        "lv_image_event_bound": image_event_ref,
+        "lv_click_area_bound": click_area_ref,
+        "lv_image_draw_bound": image_draw_ref,
+        "lv_image_style_accessors_bound": image_style_ref,
+        "lv_image_dsc_init_bound": image_dsc_ref,
+        "lv_image_style_fields_bound": image_fields_ref,
+        "lv_draw_image_scheduler_bound": draw_scheduler_ref,
+        "terminal_label_text_alias_bound": label_alias_ref,
+        "terminal_label_text_fmt_bound": label_fmt_ref,
+        "lv_label_vprintf_bound": label_vprintf_ref,
+        "label_fatal_paths_oracle": label_fatal_ref,
+        "terminal_clear_flag_alias_bound": clear_flag_alias_ref,
+        "terminal_object_abi_aliases_bound": object_alias_ref,
+        "lv_animimage_bound": animimage_ref,
+        "terminal_query_notification_show_bound": query_show_ref,
+        "terminal_counter_b_alias_bound": counter_alias_ref,
+        "terminal_query_session_name_bound": query_name_ref,
+        "terminal_query_visibility_bound": query_visibility_ref,
+        "terminal_query_style_setters_bound": query_style_ref,
+        "terminal_query_root_bound": query_root_ref,
+        "terminal_voice_start_bound": voice_start_ref,
+        "terminal_voice_prepare_bound": voice_prepare_ref,
+        "terminal_voice_anim_factory_bound": voice_factory_ref,
+        "terminal_voice_anim_children_bound": voice_anim_ref,
+        "terminal_voice_frames_bound": voice_frames_ref,
+        "terminal_voice_stop_bound": voice_stop_ref,
+        "terminal_asr_final_bound": asr_final_ref,
+        "terminal_result_area_bound": result_area_ref,
+        "terminal_input_confirm_bound": input_confirm_ref,
+        "terminal_input_cancel_bound": input_cancel_ref,
+        "terminal_asr_fail_bound": asr_fail_ref,
+        "terminal_agent_reset_bound": agent_reset_ref,
+        "terminal_agent_interrupt_bound": agent_interrupt_ref,
+        "terminal_session_status_bound": session_status_ref,
+        "terminal_agent_done_bound": agent_done_ref,
         "settings_last_message_ram_extent": {"current_source_receipt": ram_ref, "selected_object_bytes": selected_ram_bytes, "required_minimum_bytes": 104, "integrated": selected_ram_bytes == 104},
         "unresolved_count": len(actual), "unresolved_symbols": actual,
         "source_complete": False, "full_payload_linked": False,
-        "remaining_gate": ["175 current imports; the dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
+        "remaining_gate": ["176 current imports; agent-done FSM action is C-bound after 75 controlled stock comparisons. Session-status FSM action is C-bound after 1920 controlled stock comparisons. Agent-interrupt FSM action and its one-byte packet encoder are C-bound after 25 and 15 controlled stock comparisons. Agent-reset FSM action is C-bound after 75 controlled stock comparisons. ASR-failure FSM action is C-bound after 75 controlled stock comparisons. Input-cancel FSM action is C-bound after 150 controlled stock comparisons. Input-confirm FSM action and its two TD children are C-bound after 25, 216 and 60 controlled stock comparisons. Terminal result-area constructor 0x5ebff8 is C-bound after 48 controlled cases, with exact source-owned 16x16 icon bytes. Terminal voice-stop action and processing-label helper are C-bound after 100 and four controlled stock comparisons. ASR-final action and timeout-stop helper are C-bound after 150 and 15 controlled comparisons; Terminal query session-name lookup, visibility constructor, two LVGL style wrappers and root constructor are C-bound after 120, 32, 48 and 30 controlled cases, with exact source-owned icon bytes. Terminal voice-start action and timeout child are C-bound after 25 and 24 controlled cases with exact source-owned voice icon. Voice-prepare constructor, five style wrappers, animimage class/factory, constructor and frame callback are C-bound after 16, 80, 3, 12 and 36 controlled cases. The stock scatter-executed 19-frame voice style table at RAM 0x200014e8 and its exact 4864 pixel bytes are C-owned with a bounded placement fragment; complete main scatter/linker integration remains open. LVGL effects and final object graph remain open. Terminal UI callback, exit-sync, teardown, result-area cleanup and timer/object cleanup are C-bound after 224, 16, 9, 12 and 27 controlled stock comparisons. LVGL object membership 0x43e2ea and recursive descendant 0x43ee54 are C-bound after 144 and 60 controlled cases. List animation deinit 0x5896b4 is C-bound after four controlled cases with its 0xd0-byte state at observed RAM 0x20070ea8. Terminal timer clear 0x5e7ec4 is C-bound after four controlled cases with its 0x18-byte state at observed RAM 0x20073c38. Terminal UI start 0x5e716c, its list animation initializer 0x58966c and theme wrapper 0x5e47cc are C-bound after 9, 4 and 4 controlled cases. Terminal tick 0x5e8008 and its deadline, voice-input and elapsed-record children are C-bound after 96, 252, 24 and 160 controlled cases. Terminal status FSM 0x5e7b74 and its exact 4160-byte dispatch table at 0x650430 are C-bound after 775 controlled cases. This exposes 50 distinct action callback targets, of which ten actions are now C-bound: two ASR actions after 54 controlled cases, two exit actions after 108 controlled cases, two payload actions after 48 controlled cases query-dismiss action after 160 controlled cases status action with its two payload helpers after 72 controlled cases and two reset actions after 32 controlled cases, with notification-restore, LVGL scroll and fade-out children C-bound after 24, 18 and 300 controlled cases; the two FSM name lookups are C-bound after 2048 controlled cases with source-owned RAM pointer slots at 0x20003ea4 and 0x20003edc, while the other 21 callback bodies and name RAM initialization remain open. Reset mode 0x5eae2c and display 0x5e4c84 are C-bound after 31 controlled cases; mode-set wrapper 0x5eae1e and event emitter 0x5eadd4 are C-bound after 25 and 144 controlled cases. Event type 4 child 0x5ea9f6 and its list-reset child 0x5ea7dc are C-bound after 12 and 48 controlled cases. Default event child 0x5eaad4 and its input selector, input application and view refresh children are C-bound after 96, 36, 36 and 48 controlled cases; its offset recomputation child is C-bound after 128 controlled cases; resource pointer and ring item lookup are C-bound after 120 controlled cases using the existing Terminal-data RAM owner; view-position child 0x5ea926, view-index child 0x5ea8ce and position-index search 0x5ea868 are C-bound after 144, 84 and 330 controlled cases; view-select child 0x5ea810 and row-update child 0x5ea768 are C-bound after 240 and 320 controlled cases; row LVGL flag, clear-flag and position calls reuse existing C-bound providers through three ABI adapters; item-height child 0x5ea67a is C-bound after 96 controlled cases using the existing 0x200746dc font-pointer cell; spacing child 0x5ea2c2 and row text/image binding 0x5ea564 are C-bound after 8 and 128 controlled cases; sixteen of the nineteen row-binding child imports reuse existing C-bound stock-address providers through ABI adapters; Terminal image-y 0x5ea2b0, row-color 0x5ea2f2 and row-image 0x5ea524 children are C-bound after 600 controlled cases; image-hint 0x5ea4f0 is C-bound after 216 controlled cases; event type-two 0x5eabde and its last-record 0x597350 and rollover 0x5eab8e children are C-bound after 288 and 48 controlled cases; type-three indexed event 0x5eaca0 is C-bound after 2048 controlled cases; reset prelude 0x5e51ba, ancillary reset 0x5e65f8 and voice-timeout preclear 0x5e7f26 are C-bound after 156, 32 and 96 controlled cases, with audio-manager app release 0x54f50e C-bound after 560 controlled cases; reset subtree 0x5ea342 and its style/image-Y children are C-bound after 48 and 23 controlled cases, with both stock image descriptors, 1341 image bytes and the 68-byte welcome text source-owned; query restore 0x5e6620, its return-to-input action 0x5e57c6 and image-set child 0x5e47fe are C-bound after 320, 96 and 12 controlled cases; display-status 0x44ea04 reuses the existing C-bound scroll-to-Y provider after a fresh 80-case stock oracle; four Terminal disconnect FSM actions 0x5e522e, 0x5e52c2, 0x5e5320 and 0x5e53b8 are C-bound after 512 stock comparisons with their 256-byte icon and texts source-owned; processing-response action 0x5e583c and event-34 routing action 0x5e54a2 are C-bound after 96 and 336 stock comparisons; BLE display-request action 0x5e576c is C-bound after 336 comparisons while its prepare child remains open and fallback reuses the C-bound current-session index; packed event-word action 0x5e63b4 is C-bound after 48 stock comparisons; paired scroll/status actions 0x5e6dd0 and 0x5e6e30 are C-bound after 320 stock comparisons, with notification parent 0x5ec190 C-bound after 120 stock comparisons and its layout child 0x5ebc9e and overlay-focus publication 0x5e5498/0x5cf134 C-bound after 480 comparisons each; interrupt-confirm scroll 0x5e6cb8 and its toggle child 0x5ec73c are C-bound after 1920 cases, with the list-style and indicator-layout child 0x5ec3c0/0x5ec34e C-bound after 1536 cases; interrupt-confirm-show action 0x5e6b18 is C-bound after 192 cases while its UI constructor 0x5ec446 remains open; interrupt-confirm-cancel action 0x5e6ba0 is C-bound after 192 cases with its cleanup child already source-owned; new-session success action 0x5ed870 is C-bound after 192 cases through its existing event, reset, cleanup and input-return providers; query-notification switch-result action 0x5e68dc is C-bound after 384 cases through its existing restore-query provider; paired query-scroll actions 0x5e6e88/0x5e6f60 are C-bound after 960 cases, with their query-layout child 0x5ebb96 C-bound after 64 cases; item-style child 0x5eb3c6 and its count provider 0x5eb30c are C-bound after 444 cases, with indicator child 0x5eb322 and font offset 0x5eb2ee C-bound after 487 cases; session-list scroll action 0x5ed492 is C-bound after 384 cases and its selection, count, validity and object-lookup subtree 0x5ecc1a/0x5eca48/0x5eca64/0x5ecb52 after 626 cases; session focus 0x5ecbea, ListFocus wrapper 0x5e5490 and protobuf encoder 0x5cf0ba are C-bound after 360 cases, direct-apply 0x5ecb88 after 192 cases and row-style 0x5ecb08 after 42 cases; list-animation elapsed 0x5893f0, timeout poll 0x5893fe and queue add 0x5896fc are C-bound after 304 cases; queue processor 0x58956e and completion callback 0x58949e are C-bound after 312 controlled cases; new-object preparation 0x5894d6 is C-bound after 384 controlled cases; old/new button fade start children 0x58c6c4/0x58c622 are C-bound after 600 controlled cases; their Bezier path 0x450688 is C-bound after 15 controlled cases; row show/hide walkers 0x5897ee/0x589892 and LVGL class ancestry 0x43e2d4 are C-bound after 140 and 30 controlled cases; image class record 0x756108 is source-owned with exact fixed words and five relocations; image constructor/destroyer 0x498bd0/0x498c6c are C-bound after 84 cases; button fade callback 0x58c230 and recursive body 0x58c138 are C-bound after 168 cases; image event 0x498c9c and click-area 0x4408b0 are C-bound after 432 and 36 stock comparisons; image draw 0x498ec0 is C-bound after 220 stock comparisons; image opacity/radius accessors 0x498634/0x49865e are C-bound after 90 cases; descriptor initializer 0x452a34 is C-bound after 216 stock comparisons; its four exposed style getters are C-bound after 180 stock comparisons; draw scheduler 0x488a38 is C-bound after 168 controlled stock comparisons; it reuses five existing C lower providers; allocation-failure trap, real decoder/renderer effects and final placement remain open; decoder-info helper 0x488f6a and source-type/zero children were already C-bound in the prior image-header chain; Terminal label-text alias for 0x49942e is C-bound after 48 forwarding cases using the existing stock-compared label provider; formatted label 0x49954c is C-bound after 36 variadic stock comparisons and exposes lower formatter 0x489ad2 while real formatter effects remain open; null fatal branches are independently stock-compared in the five-case label fatal-path oracle; lower two-pass formatted text allocator 0x489ad2 is C-bound after 60 stock comparisons through the existing C-owned vsnprintf provider, with allocation-failure trap stock-compared by the five-case label fatal-path oracle and real formatter effects remaining open; Terminal clear-flag alias for stock 0x43dfa4 is C-bound after 48 forwarding cases using the existing C provider; five more Terminal LVGL object ABI aliases are C-bound after 135 forwarding cases through existing stock-address providers; four LVGL animimage setters/start 0x597ea6/0x597ee0/0x597f10/0x597f52 are C-bound after 68 controlled stock cases including null-object assertions, with animation lower effects and final placement open; query-notification-show FSM action 0x5e6548 is C-bound after 200 stock comparisons including enabled logging, exposing counter getter 0x5973dc and query visibility 0x5ec82a; counter getter 0x5973dc is C-bound after 7 direct stock comparisons through the existing source-owned TD-state provider, while query visibility remains open; 0x20000032 is the confirmed encoded 50 percent image pivot; interrupt-confirm defer-query action 0x5e6d58 is C-bound after 192 stock comparisons including enabled logging, with its output-style 24-byte startup pointer table and six image descriptors/1536 pixel bytes now C-owned; final source-resource linker relocation remains open; row resource placement and lower effects remain open; selector and refresh reuse existing C-bound LVGL object-y and object-height providers. Payload control-flags child 0x5e4a6e is C-bound after 240 controlled cases, and elapsed-text child 0x5e48b8 is C-bound after 36 cases; output-start child 0x5e4920 is C-bound after 25 controlled cases; processing-object child 0x5e4878 and processing-state clear child 0x5ea30c are C-bound after 5 and 12 controlled cases; elapsed-refresh child 0x5e4902 and its fallback clear 0x5e4894 are C-bound after 48 and 4 controlled cases; the elapsed counter uses an existing C-owned provider. Set-output child 0x5e49b0 is C-bound after 100 controlled cases; three of its four exposed RAM cells are source-owned at 0x20074a94 and 0x2007502c-0x2007502d; label-style child 0x5e482a is C-bound after 16 controlled cases; output-mode selector/hash and exact ten-phrase table are C-bound after 240 controlled cases; style runtime writes, animation and LVGL lower-call effects remain. The three exposed teardown service children are C-bound after 24 controlled cases; the event call 0x5e5484 and its display-state protobuf encoder are C-bound after 48 controlled cases, while a 0x2a0-byte state-base import remains; exact RAM ownership, lower effects and final placement are open. Cyclic or malformed LVGL trees and concurrent mutation remain open. Enabled callback logging remains open. The thirteen terminal event-name pointer slots are C-owned at the observed RAM address, but runtime initialization and strings remain open. The fault lookup provider covers all 195 matchable stock codes, but 152 overrun matches use absolute stock pointer values whose relocation and validity as strings remain open. The tracepoint slave file-list handler is C-bound after 6480 logging-disabled stock comparisons. Its nanopb, copy and send lower-call effects and enabled logging remain open. Tracepoint file-list-ready has the stock four-byte section extent in the relocatable chain, while its original one-byte provider declaration still needs a from-stage rebuild. The exposed MessageNotify callback, startup state writer, frame decoder, three validators and four encoders are C-bound, with no audio_message_notify_* imports remaining. Frame enabled logging, real nanopb/BLE child effects, CRC cache initialization and source-owned packet/state final RAM placement remain open. The exposed EvenAI display-control, ANCC clear/sync, callback-list display and state packet branches are C-bound. The app-acquire path through state, count, setup, queue facade, hardware descriptor and index helpers is C-bound. The bounded app, first-hardware, audio-thread and ANCC contexts still need final RAM placement, and lower-call side effects plus callback-list concurrency remain open. The text-stream dispatch, begin, finish, schedule and timer callback have C-bound decisions, while lower-call side effects and concurrency remain open. The dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
                            "All eight DM dispatch entries and the exposed security children now have C bodies; whole-image source and placement remain open.",
                            "DM storage is a 196-byte bounded C-owned block with a registry alias; full allocation extent and final RAM placement remain open.",
                            "Gray and production-test UI registry contexts each have only an observed eight-byte C reservation; full allocation extent, initialization and final RAM placement remain open.",
@@ -2809,6 +5455,7 @@ def main():
                            "EvenAI ready set-text calls now declare and pass the stock fifth stack argument zero, observed at 0x4e24cc and 0x4e269c. The 84-case ready oracle records that argument at intercepted set-text calls; downstream Apollo bindings were rebuilt.",
                            "Text-stream set-text 0x552c20 matches stock in 288 controlled five-argument validation, append/replace, capacity, dispatch and return cases. It is C-bound; four helper routines are now explicit imports. Helper effects and malformed inputs remain open.",
                            "Text-stream validation 0x5533cc and next-interval 0x5532f8 match stock in 120 controlled mode/string and signed-arithmetic cases. They are C-bound; restart and dispatch remain unresolved.",
+                           "Text-stream restart 0x552db2 matches stock in 64 signed-length, mutex, timer and state-byte cases and is C-bound. Dispatch remains unresolved; timer and mutex effects remain external.",
                            "Complete data/startup/layout and physical execution remain unproved."],
     }
     if set(images) != {"codec", "ble_em9305", "touch", "case", "apollo_bootloader", "apollo_main"}:

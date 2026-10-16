@@ -1,0 +1,39 @@
+{
+  "inputs": {
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/research/source-build/checksum-verification.json": "88671b319d0c3fcb65d471e6e1de4e8c41dea06e15f07aff7f605a948770b688",
+    "r1/research/source-build/native-nv-update-runtime/failed-read-frame-probe.json": "80af7b33358af96fd43bc5a88526b4f3f36b103cd639d03dbb4dcff6e2f06fc1"
+  },
+  "tool_receipts": {
+    "rea-bytes-917f8.json": "44b49b3fe410039b6d8850ec992bf35ac31aac9453fd08feb76b27620e925bce",
+    "rea-bytes-917fc.json": "9ea335b1873695d9b097819d8eb9e71dd1def372137c596e73d4936053bd7101",
+    "rea-bytes-91838.json": "8001fd6c71f9a43e77b32a5604e09f9e66165e68f65c30b17147a10d94c5c584",
+    "rea-91780.json": "4e5a5e483a50c5204ba1c6ab202c50110ee35e1e40135c56c1b9a2618292797c",
+    "rea-bytes-91780.json": "29184d59290566f6cc55c7b3645f0085c667406844b4b23953d4a46105bb5ea9",
+    "rea-bytes-91830.json": "a6a17bd9ef5891e601bb18427a4a882e4a018882522ac73138055d24e6cfe59f"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00091780",
+      "end": "0x000917f5",
+      "size": "118",
+      "recovered_name": "FUN_00091780",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_store_class_record_write",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "native_bytes": 118,
+  "new_owned_text_bytes": 94,
+  "offset22_is_crc_not_legacy_reserved_label": true,
+  "dirty_cleared_before_write_failure_not_rolled_back": true,
+  "callback_slot": 20,
+  "callback_fourth_register_loaded_address": true,
+  "failed_read_frame_mismatch_reproduced_with_actual_writer": true,
+  "whole_image_identity": false
+}

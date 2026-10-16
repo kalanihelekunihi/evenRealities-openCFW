@@ -1,0 +1,79 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00091184 <r1_stock_gpio_pin_set+0x17d50>:
+   91184:	e92d 47ff 	stmdb	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+   91188:	2700      	movs	r7, #0
+   9118a:	f8df 90b0 	ldr.w	r9, [pc, #176]	@ 9123c <_stack+0x1123c>
+   9118e:	f8ad 7000 	strh.w	r7, [sp]
+   91192:	9701      	str	r7, [sp, #4]
+   91194:	9702      	str	r7, [sp, #8]
+   91196:	f64f 74ff 	movw	r4, #65535	@ 0xffff
+   9119a:	9703      	str	r7, [sp, #12]
+   9119c:	46b8      	mov	r8, r7
+   9119e:	4625      	mov	r5, r4
+   911a0:	f8d9 0010 	ldr.w	r0, [r9, #16]
+   911a4:	f7f4 fdb9 	bl	85d1a <_stack+0x5d1a>
+   911a8:	46c2      	mov	sl, r8
+   911aa:	46c8      	mov	r8, r9
+   911ac:	2600      	movs	r6, #0
+   911ae:	f10d 0904 	add.w	r9, sp, #4
+   911b2:	2301      	movs	r3, #1
+   911b4:	466a      	mov	r2, sp
+   911b6:	2100      	movs	r1, #0
+   911b8:	f8d8 0010 	ldr.w	r0, [r8, #16]
+   911bc:	f7f4 fdb6 	bl	85d2c <_stack+0x5d2c>
+   911c0:	f8bd 0000 	ldrh.w	r0, [sp]
+   911c4:	f829 0016 	strh.w	r0, [r9, r6, lsl #1]
+   911c8:	4407      	add	r7, r0
+   911ca:	f8ad a000 	strh.w	sl, [sp]
+   911ce:	f898 0001 	ldrb.w	r0, [r8, #1]
+   911d2:	2800      	cmp	r0, #0
+   911d4:	f04f 0002 	mov.w	r0, #2
+   911d8:	d002      	beq.n	911e0 <_stack+0x111e0>
+   911da:	f7eb ffbb 	bl	7d154 <r1_stock_gpio_pin_set+0x3d20>
+   911de:	e001      	b.n	911e4 <_stack+0x111e4>
+   911e0:	f7e7 f9b6 	bl	78550 <r1_stock_i2c5_acquire+0x28078>
+   911e4:	1c76      	adds	r6, r6, #1
+   911e6:	b2f6      	uxtb	r6, r6
+   911e8:	2e05      	cmp	r6, #5
+   911ea:	d3e2      	bcc.n	911b2 <_stack+0x111b2>
+   911ec:	f8d8 0010 	ldr.w	r0, [r8, #16]
+   911f0:	f7f4 fd63 	bl	85cba <_stack+0x5cba>
+   911f4:	2000      	movs	r0, #0
+   911f6:	464a      	mov	r2, r9
+   911f8:	f832 1010 	ldrh.w	r1, [r2, r0, lsl #1]
+   911fc:	42a1      	cmp	r1, r4
+   911fe:	d202      	bcs.n	91206 <_stack+0x11206>
+   91200:	4625      	mov	r5, r4
+   91202:	460c      	mov	r4, r1
+   91204:	e002      	b.n	9120c <_stack+0x1120c>
+   91206:	42a9      	cmp	r1, r5
+   91208:	d200      	bcs.n	9120c <_stack+0x1120c>
+   9120a:	460d      	mov	r5, r1
+   9120c:	1c40      	adds	r0, r0, #1
+   9120e:	b2c0      	uxtb	r0, r0
+   91210:	2805      	cmp	r0, #5
+   91212:	d3f1      	bcc.n	911f8 <_stack+0x111f8>
+   91214:	1b38      	subs	r0, r7, r4
+   91216:	1b40      	subs	r0, r0, r5
+   91218:	2103      	movs	r1, #3
+   9121a:	fbb0 f0f1 	udiv	r0, r0, r1
+   9121e:	b280      	uxth	r0, r0
+   91220:	f44f 7192 	mov.w	r1, #292	@ 0x124
+   91224:	4348      	muls	r0, r1
+   91226:	f640 31ad 	movw	r1, #2989	@ 0xbad
+   9122a:	4348      	muls	r0, r1
+   9122c:	4904      	ldr	r1, [pc, #16]	@ (91240 <_stack+0x11240>)
+   9122e:	b004      	add	sp, #16
+   91230:	fbb0 f0f1 	udiv	r0, r0, r1
+   91234:	b280      	uxth	r0, r0
+   91236:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+   9123a:	0000      	movs	r0, r0
+   9123c:	6890      	ldr	r0, [r2, #8]
+   9123e:	2000      	movs	r0, #0
+   91240:	9d38      	ldr	r5, [sp, #224]	@ 0xe0
+   91242:	0007      	movs	r7, r0

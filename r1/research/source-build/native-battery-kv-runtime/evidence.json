@@ -1,0 +1,52 @@
+{
+  "inputs": {
+    "r1/research/source-build/native-scatter-data/observed-initialized-data.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "r1/research/source-build/native-scatter-data/verification.json": "c2b61bfad032e0496b346d2f299a7f5aacbde97d516edccf67999f4c624537c1",
+    "r1/research/source-build/native-yhm-frontend/verification.json": "ce4e929286d84c06a1762bfbb0b40d19bc7f3eb732a5f563f57cb8baa72c319a",
+    "r1/research/source-build/structured-time/verification.json": "66db63332e8e566e41f70deba1aee2866369998b1bd1806eec84f0fccae7268a",
+    "r1/research/source-build/native-battery-configuration/kv-integration-verification.json": "65d149a5e8c860771e035fc7575b9e5ea74f34d872d0d6a168e8b1fe3885a482",
+    "r1/research/source-build/native-kv-device-fields/verification.json": "437a75eda3775aae5e069ded20b404696a86b0f8fb75d92870b39e8c9c7428ca"
+  },
+  "tool_receipts": {
+    "rea-bytes-8adb0.json": "63fa892cb8a8eb43916bd593b97bc6f074fd3939a0ae52acd78526397bd95919",
+    "rea-bytes-3541c.json": "54a50dc456edbc3b348b65c35aea6990b7f48d5a82e112a10766148066303de9",
+    "ghidra-mcp-instance-status.json": "cbea9496a0ace0f9349b7b96553c5c632e6ecb26fa4dcb764f58deef2405da79",
+    "rea-bytes-8ada4.json": "6fff4ce429032a07c8c369e0c89264f5aa4f097e2f1c103c5c54aa3570a02c18"
+  },
+  "new_rows": 0,
+  "new_owned_bytes": 112,
+  "classes": {
+    "power": [
+      536898236,
+      28,
+      "r1_power_kv_class"
+    ],
+    "devinfo": [
+      536897960,
+      76,
+      "r1_dev_info_kv_class"
+    ]
+  },
+  "handles": {
+    "power": [
+      536903160,
+      "r1_batcfg_record_kv_handle",
+      "r1_power_kv_class"
+    ],
+    "devinfo": [
+      536903144,
+      "r1_device_info_record_kv_handle",
+      "r1_dev_info_kv_class"
+    ]
+  },
+  "timestamp_alias": [
+    "time_backend_timestamp_thunk",
+    "r1_time_backend_timestamp"
+  ],
+  "timestamp_alias_not_new_body_or_row": true,
+  "ghidra_mcp_gui_available": false,
+  "rea_headless_ghidra_bytes_authenticated": true,
+  "cross_call_private_stack_history_verified": false,
+  "whole_storage_graph_executed": false,
+  "whole_image_identity": false
+}

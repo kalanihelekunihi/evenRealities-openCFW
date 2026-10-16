@@ -1,0 +1,67 @@
+{
+  "inputs": {
+    "r1/components/runtime/native_device_id_command.c": "3f9a402a4f245373c03472c8af3a709a2da938a5e5bd9536725505ec19607906",
+    "r1/tools/build_native_device_id_command.py": "bb5ee24a7f6ba26b9bce041302b85e32e15f5305b04af936b281c982a5cc9b64",
+    "r1/tools/build_native_device_id_command_runtime.py": "d5882817c185e7e8814cd9748c4b6b46161385e19dd1b70df397d4ee44169cee",
+    "r1/source-config/runtime/native_device_id_command_verification.ld": "ca53f47c5b4bd793c421ed4cb31c2ab547870b393f8276a62328a4a42ec4abf2",
+    "r1/research/source-build/i2c5/stock-analysis-exec.elf": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+    "r1/reconstructed/gomore_primitives/gomore_primitives.c": "3efadce086e0298fee3421c45a6f1b51cb75d22f0343e34c111c51efa4507bf8"
+  },
+  "tool_receipts": {
+    "rea-bytes-83e50.json": "ec239a2356f23f6dedc119bd44129f7acc9c542588a910e2639752d38bcfced2",
+    "rea-bytes-6abd8.json": "25cbf7ae1e95967e35263e908192c7e3e9a5375aed5af5e7f753869c2bedf3d3",
+    "rea-bytes-83ef0-full.json": "14583b9f2c1b39c5fcd0415768fa3f57450d0064ea54b56f0cb6b97ebfccfd3c",
+    "rea-bytes-838ba.json": "a4c099cd59b547e5a45326e84548aec062dca7193f3af6821c572f0478adde6a",
+    "rea-bytes-83eec.json": "5aef2466131a8acac681e2163d3475a6c3e3813d5ff253777e12a965a8b6e47a",
+    "rea-bytes-6ab88.json": "79593fcf23626a5b5527ad4af2a16dc553d98cc047e112b3fbc849c7a7ae0a6f",
+    "rea-bytes-83f08.json": "edc1e24a564b77b4ae549a2a43da7f0bb2066dc463dae7b4978b8affdc74e7e2",
+    "rea-bytes-83f10.json": "4f6ab0e3debc3e6e117114815a52cc473ff6cf1233347d428e4e2dbd4b32bb02",
+    "rea-procedure-838ba.json": "ddbc12197b9ea3ffe29a42cf074d5bdbe004ec58e436489b4db1ba5fb26ae927",
+    "rea-bytes-9a56c.json": "5faaeeeb11ef290a5cc144a05e9ffe6563c1660ece92dd31610984cda9baaeca",
+    "rea-procedure-83e50.json": "14768091c0fbb61622b32041429e2c38345b3ddf030868dcef5e104bc8f49c10",
+    "rea-bytes-6aadc.json": "d103135a96ee1a9a15e3afa7542712d184d72fb4569f5d80cf377c180f6b11c9",
+    "rea-bytes-83f10-full.json": "7084c59951a7e1f49fe09cb60c46c0bcc3390d7d78537ffdafdde4e20e5f3479",
+    "rea-bytes-83ef0.json": "f0eb597838c62756e9b0cd079e2fe30a2e64eef3c43a6124ca09f900426cd273"
+  },
+  "superseded_failed_candidate": {
+    "report.json": "642085047645676f514d8837e6621e29253348c3bfe36d6a410258af24a182a7",
+    "native-device-id-command-runtime.o": "86ef5a67873c74aee78e0df181884021906f40aa33a185ade25f067d0c286be2",
+    "native_device_id_command.c": "6f69338097bd8f3e82869e23947ebca27f498d1f5f54364d5fc75d703ed31f01",
+    "counterexample.json": "272a45018aa74e8d50fbc3538dffc4977f3bf1ce21b2296453b03f81ef55304e",
+    "device-id-command-source.o": "fd6302a328a3f0a4399c18017ffc4ad4a4e5d8d97b191698395072be616e09b5",
+    "native_device_id_command.o": "76f82e4844bbebb27a6e92e731c4828aed9a5ba4a164c8aacf4b8d0be7c0644c",
+    "verify_native_device_id_command.py": "4b2f739126b6f81692eea7d2a9126c5ec95b4cace92ad37b010d0267c43db5a3",
+    "unit-report.json": "5c53cc2a9ba9e8234ac36f159ccfedc82c72f78cd2003b35ac4ae1a855c1232e"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x000838ba",
+      "end": "0x000838dd",
+      "size": "36",
+      "recovered_name": "FUN_000838ba",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_phone_cmd_send_op11",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "supplemental_entries": [
+    "0x83e50",
+    "0x6aadc",
+    "0x6abd8"
+  ],
+  "native_code_bytes": 206,
+  "new_owned_bytes": 69,
+  "metadata_gap_for_command": true,
+  "raw_id_provider_unresolved": true,
+  "bounded_frozen_helper_not_substituted": true,
+  "status_byte_requires_eventual_context_alias": true,
+  "hardware_write_executed": false,
+  "private_frame_history_verified": false,
+  "whole_image_identity": false
+}

@@ -1,0 +1,62 @@
+{
+  "inputs": {
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/docs/correlation/NV-RECOVERY-CORRELATION.md": "fb9a09c3c23a2cfb6aa9951f07e7a0243e9526762cb2d20d020838d206c1503d",
+    "r1/docs/correlation/NV-COMPILED-RESTORE-CORRELATION.md": "68f3e5124abb61248be1206a6eb50a067a2c0c71f47fe093cc9ae161de8d4334",
+    "r1/research/source-build/native-nv-class-writer-runtime/failed-read-caller-graph-probe.json": "c43538c0db7e24facdd921a1288672dd471b9f7877f321e174d4bbee15cbd2a4"
+  },
+  "tool_receipts": {
+    "rea-83c86.json": "369a74ae2c5a9e71f57a22c1dd19b6dcca57b26a1c40470e48dc93d813104206",
+    "rea-bytes-84200.json": "1ea099b5729374ad16ecac3c3b7c5d16e739e8378ae4b60c20205e9b1840b9e5",
+    "rea-bytes-8429c.json": "ca39970886d4a448ee94aa54c4e90082f8044311b9fff45338721c4b80cf3c85",
+    "rea-84150.json": "97d6c14cddf3a1eb0920621fe25793bc16c56fecc55b4464ca406e02c831215d",
+    "rea-bytes-84208.json": "36d2891d204626d53f743ae226a230a6fe60e1eb66bb8fae1ff39b8dde51d078",
+    "rea-bytes-83c86.json": "db0e512598ee3ad8c7626ceeb23169e44947999de6d5339ef22dcb403f5c674d",
+    "rea-bytes-84264.json": "9ba6bffc3e5291dda0fe3b535fd7f09067832f529db7b0d548773ad073a2908e",
+    "rea-bytes-84238.json": "552ece78a5c46a8e1c115ed3e33dab5b2bfc73d97563136cef2b6bd1c01df632",
+    "rea-bytes-84150.json": "92f70e38b84f6ae962d196272431dbbbb7ccfaf4e33f3ec38ce502a30de1b819"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00083c86",
+      "end": "0x00083ca5",
+      "size": "32",
+      "recovered_name": "FUN_00083c86",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_phone_link_ready_query",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x00084150",
+      "end": "0x000841ff",
+      "size": "176",
+      "recovered_name": "r1_nv_recovery_command_handler_plan_decode",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only_security_preserving",
+      "upstream_symbol": "r1_nv_recovery_command_handler_plan_decode",
+      "confidence": "high",
+      "evidence": "SHA-pinned R1 nonvolatile recovery/report/merge behavior. Only bounded internal planning is admitted; the identity-bearing BLE restore sender and persistent mutation surface remain disabled."
+    }
+  ],
+  "native_bytes": 208,
+  "new_owned_text_bytes": 190,
+  "native_name": "r1_native_nv_recovery_envelope_handler",
+  "legacy_build_alias": "r1_nv_recovery_command_handler_plan_decode",
+  "persistent_dispatch_unresolved": "r1_native_nv_recovery_command_dispatch",
+  "build_only_native_boundary": true,
+  "planner_or_runtime_admission_changed": false,
+  "identity_table_copied": false,
+  "short_backing_native_reads_only_emulated": true,
+  "rea_procedure_gaps": [
+    "84150",
+    "83c86"
+  ],
+  "whole_image_identity": false
+}

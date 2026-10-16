@@ -1,0 +1,81 @@
+{
+  "inputs": {
+    "r1/components/runtime/native_health_settings.c": "2a4d0ca139a8732a213b0e4989381e4a34f7565d6118e9c195e6268993e282f5",
+    "r1/tools/build_native_health_settings.py": "8aa9c63e4e78dc2ee88a96d67dfe12106e1ba74f5c08db16e35d75bf8a32a231",
+    "r1/tools/build_native_health_settings_runtime.py": "4140b5346f0312bf3a3646a358ee7a12d78b41ab15d0d2d221f4c80431e4fbd1",
+    "r1/source-config/runtime/native_health_settings_verification.ld": "2d376533b762f8a8ca4688ed90d58e7678f497fb805f4f59bdc0ae6902ed6370",
+    "r1/research/source-build/i2c5/stock-analysis-exec.elf": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13"
+  },
+  "tool_receipts": {
+    "rea-procedure-73868.json": "3ce1ebf68e9001ac684ceca6561c8ed395849f622532bd55827b3b7009a02360",
+    "rea-procedure-73798.json": "2e6a7937a789ab32b4b7e5faeec3a525896a048275d6761b847fb7b0ff9742f2",
+    "rea-bytes-84098.json": "20dc90dff5cded3cac89ea0946a5e90a65681dfbfa634ce00ba8b85509be61d9",
+    "rea-bytes-84104.json": "8e38dcb891f981e26311b302aef905dde2d1b5932762ea3af85bca024df06a62",
+    "rea-bytes-83f24.json": "314bfa8398ad68b18254367bf00a9cde52cc7c0da4e9c2535bd89fe85b5d4568",
+    "rea-bytes-84050.json": "d9e1e8dba22a8a3b634d41cbab44387993e75d4be0d62babb602865cd50e9585",
+    "rea-bytes-73868.json": "fd1438ce9506add083a94294bb02c06bbbcbf5d75ebdbe573403cec1cebd2275",
+    "rea-bytes-840d0.json": "a5eb6d05c65ecf48a1cc2013b15bb2150ea8d096e7211d9bc405635350052c89",
+    "rea-bytes-73798.json": "88e7393bb990e7337537293c62945185517157bee15ba74b23b8afc92f125718",
+    "rea-bytes-84058.json": "971c15a1cd9e13fdffdacc129e01d67b561ce8ac2d68d6334541c20cb13952ba",
+    "rea-procedure-83f24.json": "11c17bf23b34901758334580cbc61fba415086c7deeac51dfa30d522dffaf657"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00083f24",
+      "end": "0x0008404f",
+      "size": "300",
+      "recovered_name": "FUN_00083f24",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_health_settings_plan_command",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00073798",
+      "end": "0x000737c3",
+      "size": "44",
+      "recovered_name": "FUN_00073798",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_kv_dev_info_flag_word_get",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00073868",
+      "end": "0x000738a3",
+      "size": "60",
+      "recovered_name": "FUN_00073868",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_kv_dev_info_flag0_word_set",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "native_code_bytes": 404,
+  "new_owned_text_bytes": 208,
+  "separate_native_handler": true,
+  "raw_record_frames_no_defaults": true,
+  "conditional_timestamp_write_preserved": true,
+  "handler_and_setter_procedure_metadata_missing": true,
+  "portable_planner_modified": false,
+  "runtime_admission_changed": false,
+  "health_event_or_persistence_proven": false,
+  "hardware_write_executed": false,
+  "whole_image_identity": false,
+  "initial_failed_read_probe": {
+    "failed-read-frame-probe.json": "e468a7c1af479bd1b57ca39cbbc8c163f88913fa75aa1281d3b8efe9e303a9e1",
+    "probe_native_health_settings_frame.py": "77a00f617eac609f698b3adef6ae8bc83abf5b5ac97efac136f0947b7d1e9e61"
+  },
+  "failed_read_fresh_handle_private_frame_gate": true
+}

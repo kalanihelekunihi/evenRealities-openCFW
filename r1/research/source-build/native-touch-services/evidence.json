@@ -1,0 +1,79 @@
+{
+  "inputs": {
+    "r1/components/runtime/native_touch_services.c": "838ff73a88388d0d4b079204b2df6acea4dbf7f9a894e226a4cb17da5135bcd8",
+    "r1/tools/build_native_touch_services.py": "6efdedb0c08a9d3cca926de53f4a89059170984006d49fc3d9d5ed69b0391017",
+    "r1/tools/build_native_touch_services_runtime.py": "be99acd648eda227de5b020846009c753ae1f966ba5a0efa87ca7b0d477e7513",
+    "r1/source-config/runtime/native_touch_services_verification.ld": "93e1c1beae4310294191d7a2212c3e578263ec2568f6cb0ee79dae5b342716b9",
+    "r1/research/source-build/i2c5/stock-analysis-exec.elf": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13"
+  },
+  "tool_receipts": {
+    "rea-bytes-8e738.json": "7aae31ca5da4ec75e39179b225b9b2d019b893a993e98cf14e4b3aaaef76b829",
+    "rea-procedure-8e6a0.json": "fe788c87a32c6abc0a2734068e599e6094d2067f4bdf93f7c74dbb1e9cfeab60",
+    "rea-bytes-8e830.json": "0a7ea1bdf39347712a1e11a9031442a426a265db4b0ff021522d0a29a1f5f4bb",
+    "rea-bytes-8e708.json": "a8fe4a576a7eff9100a2a178ced8d89a0f3f82c155904935be6430612dd73fbe",
+    "rea-bytes-8e860.json": "3a553a1ae882ebe2c76e33b996ec48302155c232d8ff3ed1b06af38319e811cd",
+    "rea-bytes-8e7d0.json": "e16fa915301f43d9b9bcda7d8e05db1b3927efea17536bac780bf2c1f526d4be",
+    "rea-bytes-8e704.json": "ba30f97923ca85160605a5a657815d7a381d6ef37c8389ce849ea3d03bee84a6",
+    "rea-procedure-93504.json": "67648e4ac85ed4fa358f90c037f1df401cf2204c4e87399f07c9226bcd629916",
+    "rea-bytes-8e730.json": "a7f4f0bce4c4153611024edf1a12f330b59d6263fde25ba82711c9f1d5b77d7b",
+    "rea-bytes-8e858.json": "0e4df21b1881715106526d76fe6525c78c887ee4c61aee8dd154819e0df9553e",
+    "rea-bytes-8e834.json": "45a76e0ed9a73ab984c8b3ea244b93d04fcaa3d3efe434678b51901f1083785e",
+    "rea-bytes-8e6a0.json": "e5a0617b0a21f77a29e79c64c591f5cb34314adb43b01e79d20e33e98cbe3a7a",
+    "rea-bytes-93504.json": "9cece0e3b30a155f5895465e93f179b463901e2be547d16444ac7c642a00f74c",
+    "rea-procedure-8e7d0.json": "d1a117b5bfc7eb7f69e197fc0b7c02cdb62b5d2906c40fe0da3b87e4e16386a6"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0008e6a0",
+      "end": "0x0008e703",
+      "size": "100",
+      "recovered_name": "FUN_0008e6a0",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_service_touch_close",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0008e7d0",
+      "end": "0x0008e82d",
+      "size": "94",
+      "recovered_name": "FUN_0008e7d0",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_service_touch_open",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00093504",
+      "end": "0x0009350d",
+      "size": "10",
+      "recovered_name": "FUN_00093504",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_touch_task_event_post",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "native_code_bytes": 204,
+  "new_owned_text_bytes": 134,
+  "new_owned_ram_bytes": 8,
+  "context_fields_need_eventual_alias": true,
+  "register_shift_low8_semantics_preserved": true,
+  "open_returns_pre_or_word": true,
+  "portable_planner_modified": false,
+  "runtime_admission_changed": false,
+  "synthetic_release_effect_implemented": false,
+  "hardware_write_executed": false,
+  "whole_image_identity": false
+}

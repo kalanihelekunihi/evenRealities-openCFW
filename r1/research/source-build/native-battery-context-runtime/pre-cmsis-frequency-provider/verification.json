@@ -1,0 +1,51 @@
+{
+  "comparisons": 2920,
+  "cold_context_cases": 24,
+  "real_statistics": true,
+  "real_control": true,
+  "executed_control_entry_counts": {
+    "native": {
+      "r1_shared_power_client_acquire": 1841,
+      "r1_battery_charging_progress_reset": 2020,
+      "r1_shared_power_client_release": 1841,
+      "r1_battery_task_flags_set": 528
+    },
+    "source": {
+      "r1_shared_power_client_acquire": 1841,
+      "r1_battery_charging_progress_reset": 2020,
+      "r1_shared_power_client_release": 1841,
+      "r1_battery_task_flags_set": 528
+    }
+  },
+  "executed_statistics_entry_counts": {
+    "native": {
+      "r1_battery_charged_state_refresh": 2920,
+      "r1_battery_voltage_average": 2920,
+      "r1_battery_level_average": 2920
+    },
+    "source": {
+      "r1_battery_charged_state_refresh": 2920,
+      "r1_battery_voltage_average": 2920,
+      "r1_battery_level_average": 2920
+    }
+  },
+  "explicit_numeric_rounding_cases": 336,
+  "trace_sha256": "a807add726944a347ef36415b876ce2efddefb242bf797b4fdfd8d36eef982e5",
+  "report_sha256": "90c4cb2331b4279d176a98de97af528527dbb9d84f6fba749c7a0cb30006a767",
+  "object_sha256": "4da87bdc7f91d042840d4419b92e8fb99afed69f763df0e1abf5eadd6e9a8135",
+  "driver_sha256": "91ddd1094d202b41982e2ad8763fcaa42a4d23af55bf8a2c73893a70717e3838",
+  "layout_sha256": "38b5b026b6e482607717348da22b9529a1088d1aa1182a6962c3a8aca7e7c9bf",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "source_owned_cold_contexts_match": true,
+  "existing_status_and_adc_aliases_preserved": true,
+  "no_native_candidate_execution": true,
+  "full_raw_abi_verified": false,
+  "whole_battery_hardware_graph_executed": false,
+  "instruction_identity": false,
+  "whole_image_complete": false,
+  "limitations": [
+    "Updater/statistics/control source execute; other lower algorithm/hardware/reporting providers remain fixtures",
+    "Alias and cold-byte evidence do not establish concurrency or hardware behavior",
+    "All four FPSCR modes/final FPSCR compared; private frame and complete raw ABI remain gates"
+  ]
+}
