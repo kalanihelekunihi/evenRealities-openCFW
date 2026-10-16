@@ -1,0 +1,66 @@
+{
+  "units": [
+    {
+      "source": "r1/components/runtime/native_gxt310_id.c",
+      "source_sha256": "f10b62b9b1cca0b930e0806472473c35b9dde0cba5dd888a82d614c3469ed9f6",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-gxt310-id/native_gxt310_id.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/runtime/native_gxt310_id.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-gxt310-id/native_gxt310_id.o"
+      ],
+      "compiled": true,
+      "object_sha256": "51b239895c805b083112487613d4b3c43803b1e450352ccf3dd6c4ee87ef3f5d",
+      "undefined": [
+        "nrf_log_frontend_std_2",
+        "r1_gxt310_register_read_native",
+        "r1_structured_log_format",
+        "r1_structured_log_mode_get"
+      ],
+      "defined": [
+        "r1_gxt310_chip_id_channel0",
+        "r1_gxt310_chip_id_channel2",
+        "r1_gxt310_chip_id_native",
+        "r1_gxt_id_bounds",
+        "r1_gxt_id_ring",
+        "r1_gxt_id_sdk"
+      ],
+      "emitted_function_count": 3
+    }
+  ],
+  "inputs": {
+    "r1/components/runtime/native_gxt310_id.c": "f10b62b9b1cca0b930e0806472473c35b9dde0cba5dd888a82d614c3469ed9f6",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

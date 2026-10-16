@@ -57,6 +57,292 @@ def main():
             "source_complete": False, "full_payload_linked": False,
             "remaining_gate": item["source_gates"],
         }
+    debug_release_path = G2 / "build/c-firmware/20261016/boot-shutdown-debug-release-42252e/oracle-receipt.json"
+    debug_release, debug_release_ref = receipt(debug_release_path)
+    debug_release_source = ROOT / debug_release["source"]
+    if debug_release["status"] != "PASS_NATIVE_BOOT_SHUTDOWN_DEBUG_RELEASE_42252E" or \
+            debug_release["cases"] != 90 or \
+            debug_release["source_sha256"] != sha(debug_release_source) or \
+            debug_release["official_bootloader_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5":
+        raise RuntimeError("Bootloader shutdown debug-release oracle changed")
+    images["apollo_bootloader"]["shutdown_debug_release_42252e"] = debug_release_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "Shutdown debug-release 0x42252e passes 90 bounded native/C cases; its critical-save and delay children are controlled in that isolated receipt.")
+    info_cache_path = G2 / "build/c-firmware/20261016/boot-startup-info-cache-41c320/oracle-receipt.json"
+    info_cache, info_cache_ref = receipt(info_cache_path)
+    info_cache_source = ROOT / info_cache["source"]
+    if info_cache["status"] != "PASS_NATIVE_BOOT_STARTUP_INFO_CACHE_41C320" or \
+            info_cache["cases"] != 180 or \
+            info_cache["source_sha256"] != sha(info_cache_source) or \
+            info_cache["official_bootloader_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5":
+        raise RuntimeError("Bootloader startup information-cache oracle changed")
+    images["apollo_bootloader"]["startup_info_cache_41c320"] = info_cache_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "Startup information-cache 0x41c320 passes 180 bounded native/C guard, read-chain, failure and record cases; its downstream device read remains controlled.")
+    root_composed_path = G2 / "build/c-firmware/20261016/boot-root-with-debug-info/receipt.json"
+    root_composed, root_composed_ref = receipt(root_composed_path)
+    root_composed_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_root_with_debug_info_20261016.py"
+    root_composed_elf = G2 / "build/c-source-completion-20261011/apollo/bootloader_m33_query_oracle.elf"
+    coverage = root_composed["composed_child_coverage"]
+    if root_composed["status"] != "PASS_NATIVE_BOOT_ROOT_DEBUG_INFO_COMPOSED" or \
+            root_composed["cases"] != 1388 or \
+            root_composed["runner_sha256"] != sha(root_composed_runner) or \
+            root_composed["elf_sha256"] != sha(root_composed_elf) or \
+            root_composed["original_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5" or \
+            root_composed["visited_body_bytes"]["init"] != 810 or \
+            coverage["debug_release_native_bytes_70"] != 60 or \
+            coverage["info_cache_native_bytes_352"] != 352 or \
+            coverage["fixtures_with_info_reads"] != 6 or \
+            coverage["controlled_info_read_calls"] != 40 or \
+            coverage["fixtures_with_debug_delay"] != 1374:
+        raise RuntimeError("Bootloader composed root/debug/info comparison changed")
+    images["apollo_bootloader"]["root_debug_info_composed"] = root_composed_ref
+    root_trim_path = G2 / "build/c-firmware/20261016/boot-root-with-debug-info-trim/receipt.json"
+    root_trim, root_trim_ref = receipt(root_trim_path)
+    root_trim_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_root_with_debug_info_trim_20261016.py"
+    trim_coverage = root_trim["composed_child_coverage"]
+    if root_trim["status"] != "PASS_NATIVE_BOOT_ROOT_DEBUG_INFO_TRIM_COMPOSED" or \
+            root_trim["cases"] != 1396 or \
+            root_trim["runner_sha256"] != sha(root_trim_runner) or \
+            root_trim["elf_sha256"] != sha(root_composed_elf) or \
+            root_trim["original_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5" or \
+            root_trim["visited_body_bytes"]["init"] != 810 or \
+            trim_coverage["trim_version_native_bytes_60"] != 58 or \
+            trim_coverage["info_cache_native_bytes_352"] != 352 or \
+            trim_coverage["fixtures_with_trim_provider_read"] != 8 or \
+            trim_coverage["controlled_info_read_calls"] != 76:
+        raise RuntimeError("Bootloader composed root/debug/info/trim comparison changed")
+    images["apollo_bootloader"]["root_debug_info_trim_composed"] = root_trim_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "The earlier root/debug/info/trim comparison passes 1396 cases; its device reads and clock lower contracts are controlled, and two trim bytes were not visited in that replay.")
+    root_spot_path = G2 / "build/c-firmware/20261016/boot-root-with-debug-info-trim-spot-m4/receipt.json"
+    root_spot, root_spot_ref = receipt(root_spot_path)
+    root_spot_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_root_with_debug_info_trim_spot_m4_20261016.py"
+    root_spot_elf = G2 / "analysis/c-source-completion-20261011/apollo/spot-m4-oracle/startup_runtime.elf"
+    root_spot_source = G2 / "components/bootloader/initializer_callbacks/startup_runtime.c"
+    spot_coverage = root_spot["composed_child_coverage"]
+    if root_spot["status"] != "PASS_NATIVE_BOOT_ROOT_DEBUG_INFO_TRIM_SPOT_M4_COMPOSED" or \
+            root_spot["cases"] != 1396 or \
+            root_spot["runner_sha256"] != sha(root_spot_runner) or \
+            root_spot["elf_sha256"] != sha(root_composed_elf) or \
+            root_spot["isolated_spot_elf_sha256"] != sha(root_spot_elf) or \
+            root_spot["spot_source_sha256"] != sha(root_spot_source) or \
+            root_spot["original_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5" or \
+            root_spot["visited_body_bytes"]["init"] != 810 or \
+            spot_coverage["spot_dispatch_native_bytes"] != 668 or \
+            spot_coverage["fixtures_with_spot_installed"] != 1056 or \
+            spot_coverage["info_cache_native_bytes_352"] != 352 or \
+            spot_coverage["trim_version_native_bytes_60"] != 58:
+        raise RuntimeError("Bootloader composed root/debug/info/trim/SPOT comparison changed")
+    images["apollo_bootloader"]["root_debug_info_trim_spot_composed"] = root_spot_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "The earlier root/debug/info/trim/SPOT comparison passes 1396 cases, covering all 668 stock SPOT bytes and 1056 installed-slot fixtures. Its SPOT source is an isolated Cortex-M4 build with stock-bound named callbacks.")
+    shared_path = G2 / "build/c-firmware/20261016/boot-shared-memory-41be36/receipt.json"
+    shared, shared_ref = receipt(shared_path)
+    shared_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_shared_memory_41be36_20261016.py"
+    shared_source = G2 / "components/bootloader/initializer_callbacks/startup_memory_config.c"
+    memory_overlay_path = G2 / "build/c-firmware/20261016/boot-memory-m33-overlay/build-receipt.json"
+    memory_overlay, memory_overlay_ref = receipt(memory_overlay_path)
+    memory_overlay_runner = G2 / "analysis/c-source-completion-20261011/apollo/build_boot_memory_m33_overlay_20261016.py"
+    memory_overlay_elf = G2 / "build/c-firmware/20261016/boot-memory-m33-overlay/memory.elf"
+    memory_m55_object = G2 / "build/c-firmware/20261016/boot-memory-m33-overlay/startup_memory_config_m55.o"
+    if memory_overlay["status"] != "PASS_M33_MEMORY_SOURCE_OVERLAY_LINKED" or \
+            memory_overlay["source_sha256"] != sha(shared_source) or \
+            memory_overlay["elf_sha256"] != sha(memory_overlay_elf) or \
+            memory_overlay["m55_object_sha256"] != sha(memory_m55_object) or \
+            memory_overlay["builder_sha256"] != sha(memory_overlay_runner):
+        raise RuntimeError("Bootloader M33 memory overlay changed")
+    images["apollo_bootloader"]["memory_m33_overlay"] = memory_overlay_ref
+    if shared["status"] != "PASS_NATIVE_BOOT_SHARED_MEMORY_41BE36" or \
+            shared["cases"] != 576 or shared["stock_body_bytes_260"] != 260 or \
+            shared["runner_sha256"] != sha(shared_runner) or \
+            shared["source_sha256"] != sha(shared_source) or \
+            shared["selected_elf_sha256"] != sha(root_composed_elf) or \
+            shared["overlay_elf_sha256"] != sha(memory_overlay_elf) or \
+            shared["stock_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5":
+        raise RuntimeError("Bootloader shared-memory body comparison changed")
+    images["apollo_bootloader"]["shared_memory_41be36"] = shared_ref
+    root_shared_path = G2 / "build/c-firmware/20261016/boot-root-with-spot-shared-m4/receipt.json"
+    root_shared, root_shared_ref = receipt(root_shared_path)
+    root_shared_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_root_with_debug_info_trim_spot_shared_m4_20261016.py"
+    shared_coverage = root_shared["composed_child_coverage"]
+    if root_shared["status"] != "PASS_NATIVE_BOOT_ROOT_DEBUG_INFO_TRIM_SPOT_SHARED_M4_COMPOSED" or \
+            root_shared["cases"] != 1420 or \
+            root_shared["runner_sha256"] != sha(root_shared_runner) or \
+            root_shared["elf_sha256"] != sha(root_composed_elf) or \
+            root_shared["isolated_spot_elf_sha256"] != sha(root_spot_elf) or \
+            root_shared["memory_overlay_elf_sha256"] != sha(memory_overlay_elf) or \
+            root_shared["spot_source_sha256"] != sha(root_spot_source) or \
+            root_shared["shared_source_sha256"] != sha(shared_source) or \
+            root_shared["original_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5" or \
+            shared_coverage["shared_memory_native_bytes"] != 210 or \
+            shared_coverage["spot_dispatch_native_bytes"] != 668 or \
+            shared_coverage["fixtures_with_shared_match"] != 16 or \
+            shared_coverage["fixtures_with_shared_poll_mirror"] != 8:
+        raise RuntimeError("Bootloader composed shared-memory comparison changed")
+    images["apollo_bootloader"]["root_with_shared_memory_composed"] = root_shared_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "Shared-memory 0x41be36 passes 576 direct cases with 260/260 stock bytes visited, and 1420 composed startup fixtures reach 210/260 bytes. Its power callback and status poll remain controlled.")
+    mcu_path = G2 / "build/c-firmware/20261016/boot-mcu-memory-41bbd0/receipt.json"
+    mcu, mcu_ref = receipt(mcu_path)
+    mcu_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_mcu_memory_41bbd0_20261016.py"
+    if mcu["status"] != "PASS_NATIVE_BOOT_MCU_MEMORY_41BBD0" or \
+            mcu["cases"] != 2304 or mcu["stock_body_bytes_450"] != 450 or \
+            mcu["unvisited_stock_bytes"] or \
+            mcu["runner_sha256"] != sha(mcu_runner) or \
+            mcu["source_sha256"] != sha(shared_source) or \
+            mcu["selected_elf_sha256"] != sha(root_composed_elf) or \
+            mcu["overlay_elf_sha256"] != sha(memory_overlay_elf) or \
+            mcu["stock_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5":
+        raise RuntimeError("Bootloader MCU-memory body comparison changed")
+    images["apollo_bootloader"]["mcu_memory_41bbd0"] = mcu_ref
+    root_mcu_path = G2 / "build/c-firmware/20261016/boot-root-with-spot-shared-mcu-m4/receipt.json"
+    root_mcu, root_mcu_ref = receipt(root_mcu_path)
+    root_mcu_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_root_with_spot_shared_mcu_m4_20261016.py"
+    mcu_coverage = root_mcu["composed_child_coverage"]
+    if root_mcu["status"] != "PASS_NATIVE_BOOT_ROOT_DEBUG_INFO_TRIM_SPOT_SHARED_MCU_M4_COMPOSED" or \
+            root_mcu["cases"] != 1420 or \
+            root_mcu["runner_sha256"] != sha(root_mcu_runner) or \
+            root_mcu["elf_sha256"] != sha(root_composed_elf) or \
+            root_mcu["isolated_spot_elf_sha256"] != sha(root_spot_elf) or \
+            root_mcu["memory_overlay_elf_sha256"] != sha(memory_overlay_elf) or \
+            root_mcu["shared_source_sha256"] != sha(shared_source) or \
+            root_mcu["original_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5" or \
+            mcu_coverage["mcu_memory_native_bytes"] != 318 or \
+            mcu_coverage["shared_memory_native_bytes"] != 210 or \
+            mcu_coverage["spot_dispatch_native_bytes"] != 668:
+        raise RuntimeError("Bootloader composed MCU-memory comparison changed")
+    images["apollo_bootloader"]["root_with_mcu_memory_composed"] = root_mcu_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "MCU-memory 0x41bbd0 passes 2304 direct cases with 450/450 stock bytes visited, after fixing its high return word. The 1420-case composed startup replay reaches 318/450 bytes; its lower calls remain controlled.")
+    device_gate_path = G2 / "build/c-firmware/20261016/boot-device-mode-421548/receipt.json"
+    device_gate, device_gate_ref = receipt(device_gate_path)
+    device_gate_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_device_mode_421548_20261016.py"
+    device_gate_source = G2 / "components/bootloader/application_storage/device_mode_wait.c"
+    if device_gate["status"] != "PASS_NATIVE_BOOT_DEVICE_MODE_421548" or \
+            device_gate["cases"] != 520 or device_gate["stock_body_bytes_38"] != 38 or \
+            device_gate["unvisited_stock_bytes"] or \
+            device_gate["runner_sha256"] != sha(device_gate_runner) or \
+            device_gate["source_sha256"] != sha(device_gate_source) or \
+            device_gate["selected_elf_sha256"] != sha(root_composed_elf) or \
+            device_gate["stock_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5":
+        raise RuntimeError("Bootloader device-mode selector comparison changed")
+    images["apollo_bootloader"]["device_mode_gate_421548"] = device_gate_ref
+    root_device_path = G2 / "build/c-firmware/20261016/boot-root-with-device-gate/receipt.json"
+    root_device, root_device_ref = receipt(root_device_path)
+    root_device_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_root_with_device_gate_20261016.py"
+    device_coverage = root_device["composed_child_coverage"]
+    if root_device["status"] != "PASS_NATIVE_BOOT_ROOT_WITH_DEVICE_GATE_COMPOSED" or \
+            root_device["cases"] != 1420 or \
+            root_device["runner_sha256"] != sha(root_device_runner) or \
+            root_device["elf_sha256"] != sha(root_composed_elf) or \
+            root_device["memory_overlay_elf_sha256"] != sha(memory_overlay_elf) or \
+            root_device["device_mode_source_sha256"] != sha(device_gate_source) or \
+            root_device["original_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5" or \
+            device_coverage["device_mode_native_bytes"] != 34 or \
+            device_coverage["controlled_device_dispatch_calls"] < 1000 or \
+            device_coverage["mcu_memory_native_bytes"] != 318 or \
+            device_coverage["shared_memory_native_bytes"] != 210:
+        raise RuntimeError("Bootloader composed device-mode selector comparison changed")
+    images["apollo_bootloader"]["root_with_device_mode_gate"] = root_device_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "Device-mode selector 0x421548 passes 520 direct cases with 38/38 stock bytes and 1420 composed fixtures reaching 34/38 bytes. Its downstream read dispatcher remains controlled.")
+    mspi_overlay_path = G2 / "build/c-firmware/20261016/boot-mspi-m33-overlay/build-receipt.json"
+    mspi_overlay, mspi_overlay_ref = receipt(mspi_overlay_path)
+    mspi_builder = G2 / "analysis/c-source-completion-20261011/apollo/build_boot_mspi_m33_overlay_20261016.py"
+    mspi_source = G2 / "components/bootloader/platform_control/power_domains.c"
+    mspi_elf = G2 / "build/c-firmware/20261016/boot-mspi-m33-overlay/mspi.elf"
+    mspi_m55_object = G2 / "build/c-firmware/20261016/boot-mspi-m33-overlay/power_domains_m55.o"
+    if mspi_overlay["status"] != "PASS_M33_MSPI_SOURCE_OVERLAY_LINKED" or \
+            mspi_overlay["builder_sha256"] != sha(mspi_builder) or \
+            mspi_overlay["source_sha256"] != sha(mspi_source) or \
+            mspi_overlay["elf_sha256"] != sha(mspi_elf) or \
+            mspi_overlay["m55_object_sha256"] != sha(mspi_m55_object):
+        raise RuntimeError("Bootloader MSPI comparison overlay changed")
+    images["apollo_bootloader"]["mspi_m33_overlay"] = mspi_overlay_ref
+    root_mspi_path = G2 / "build/c-firmware/20261016/boot-root-with-both-mspi-modes/receipt.json"
+    root_mspi, root_mspi_ref = receipt(root_mspi_path)
+    root_mspi_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_root_with_both_mspi_modes_20261016.py"
+    mspi_coverage = root_mspi["composed_child_coverage"]
+    if root_mspi["status"] != "PASS_NATIVE_BOOT_ROOT_WITH_BOTH_MSPI_MODES_COMPOSED" or \
+            root_mspi["cases"] != 1420 or \
+            root_mspi["runner_sha256"] != sha(root_mspi_runner) or \
+            root_mspi["elf_sha256"] != sha(root_composed_elf) or \
+            root_mspi["memory_overlay_elf_sha256"] != sha(memory_overlay_elf) or \
+            root_mspi["mspi_overlay_elf_sha256"] != sha(mspi_elf) or \
+            root_mspi["mspi_source_sha256"] != sha(mspi_source) or \
+            root_mspi["original_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5" or \
+            root_mspi["visited_body_bytes"]["init"] != 810 or \
+            mspi_coverage["mode_enter_native_bytes"] != 188 or \
+            mspi_coverage["mode_leave_native_bytes"] != 230 or \
+            mspi_coverage["device_mode_native_bytes"] != 34 or \
+            mspi_coverage["mcu_memory_native_bytes"] != 318:
+        raise RuntimeError("Bootloader composed MSPI mode comparison changed")
+    images["apollo_bootloader"]["root_with_both_mspi_modes"] = root_mspi_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "All eleven root child entries execute in a 1420-case stock/C startup replay. Mode-enter reaches 188/314 and mode-leave 230/350 stock bytes; their other branches and lower provider/ROM timing contracts, production M55 execution and whole-image gates remain open.")
+    mspi_enter_path = G2 / "build/c-firmware/20261016/boot-mspi-enter-41bf84/receipt.json"
+    mspi_enter, mspi_enter_ref = receipt(mspi_enter_path)
+    mspi_enter_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_mspi_enter_41bf84_20261016.py"
+    if mspi_enter["status"] != "PASS_NATIVE_BOOT_MSPI_ENTER_41BF84" or \
+            mspi_enter["cases"] != 3590 or mspi_enter["stock_body_bytes_314"] != 314 or \
+            mspi_enter["unvisited_stock_bytes"] or \
+            mspi_enter["runner_sha256"] != sha(mspi_enter_runner) or \
+            mspi_enter["source_sha256"] != sha(mspi_source) or \
+            mspi_enter["base_elf_sha256"] != sha(root_composed_elf) or \
+            mspi_enter["overlay_elf_sha256"] != sha(mspi_elf) or \
+            mspi_enter["stock_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5":
+        raise RuntimeError("Bootloader MSPI mode-enter comparison changed")
+    images["apollo_bootloader"]["mspi_mode_enter_41bf84"] = mspi_enter_ref
+    mspi_leave_path = G2 / "build/c-firmware/20261016/boot-mspi-leave-41c17a/receipt.json"
+    mspi_leave, mspi_leave_ref = receipt(mspi_leave_path)
+    mspi_leave_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_mspi_leave_41c17a_20261016.py"
+    if mspi_leave["status"] != "PASS_NATIVE_BOOT_MSPI_LEAVE_41C17A" or \
+            mspi_leave["cases"] != 7234 or mspi_leave["stock_body_bytes_350"] != 350 or \
+            mspi_leave["unvisited_stock_bytes"] or \
+            mspi_leave["runner_sha256"] != sha(mspi_leave_runner) or \
+            mspi_leave["source_sha256"] != sha(mspi_source) or \
+            mspi_leave["base_elf_sha256"] != sha(root_composed_elf) or \
+            mspi_leave["overlay_elf_sha256"] != sha(mspi_elf) or \
+            mspi_leave["stock_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5":
+        raise RuntimeError("Bootloader MSPI mode-leave comparison changed")
+    images["apollo_bootloader"]["mspi_mode_leave_41c17a"] = mspi_leave_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "Direct MSPI enter/leave comparisons visit 314/314 and 350/350 stock bytes across 3590 and 7234 cases. Descriptor, clock, power, poll, delay and callback lower contracts are controlled; production M55 and whole-image gates remain open.")
+    info_dispatch_path = G2 / "build/c-firmware/20261016/boot-info-dispatch-4213e6/receipt.json"
+    info_dispatch, info_dispatch_ref = receipt(info_dispatch_path)
+    info_dispatch_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_info_dispatch_4213e6_20261016.py"
+    info_dispatch_source = G2 / "components/bootloader/application_storage/device_wait_service.c"
+    if info_dispatch["status"] != "PASS_NATIVE_BOOT_INFO_DISPATCH_4213E6" or \
+            info_dispatch["cases"] != 7200 or info_dispatch["stock_body_bytes_354"] != 350 or \
+            info_dispatch["unvisited_stock_bytes"] != ["0x42149c", "0x42149d", "0x421532", "0x421533"] or \
+            info_dispatch["runner_sha256"] != sha(info_dispatch_runner) or \
+            info_dispatch["source_sha256"] != sha(info_dispatch_source) or \
+            info_dispatch["selected_elf_sha256"] != sha(root_composed_elf) or \
+            info_dispatch["stock_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5":
+        raise RuntimeError("Bootloader INFO dispatcher comparison changed")
+    images["apollo_bootloader"]["info_dispatch_4213e6"] = info_dispatch_ref
+    root_info_path = G2 / "build/c-firmware/20261016/boot-root-with-info-dispatch/receipt.json"
+    root_info, root_info_ref = receipt(root_info_path)
+    root_info_runner = G2 / "analysis/c-source-completion-20261011/apollo/verify_boot_root_with_info_dispatch_20261016.py"
+    info_coverage = root_info["composed_child_coverage"]
+    if root_info["status"] != "PASS_NATIVE_BOOT_ROOT_WITH_INFO_DISPATCH_COMPOSED" or \
+            root_info["cases"] != 1420 or \
+            root_info["runner_sha256"] != sha(root_info_runner) or \
+            root_info["elf_sha256"] != sha(root_composed_elf) or \
+            root_info["memory_overlay_elf_sha256"] != sha(memory_overlay_elf) or \
+            root_info["mspi_overlay_elf_sha256"] != sha(mspi_elf) or \
+            root_info["info_dispatch_source_sha256"] != sha(info_dispatch_source) or \
+            root_info["original_sha256"] != "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5" or \
+            root_info["visited_body_bytes"]["init"] != 788 or \
+            info_coverage["info_dispatch_native_bytes"] != 224 or \
+            info_coverage["controlled_info_rom_calls"] != 1762 or \
+            info_coverage["mode_enter_native_bytes"] != 188 or \
+            info_coverage["mode_leave_native_bytes"] != 190:
+        raise RuntimeError("Bootloader composed INFO dispatcher comparison changed")
+    images["apollo_bootloader"]["root_with_info_dispatch"] = root_info_ref
+    images["apollo_bootloader"]["remaining_gate"].append(
+        "INFO dispatcher 0x4213e6 passes 7200 direct cases visiting 350/354 stock bytes; the four unvisited bytes are two fallback branches after the invalid-space gate. A 1420-case composed replay reaches 224/354 dispatcher and 788/810 root bytes with resident ROM read controlled. Production M55 and whole-image behavior remain open.")
     em_path = BUILD / "em9305-source-refresh/resident-rom-bindings-receipt.json"
     em, em_ref = receipt(em_path)
     if em["unresolved_before"] != 12 or em["unresolved_after"] != 0 or em["whole_image_complete"]:
@@ -133,11 +419,11 @@ def main():
     }
     main_path = BUILD / "main-post-tail-c-replay/receipt.json"
     main, main_ref = receipt(main_path)
-    if main["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or main["unresolved_after"] != 187:
+    if main["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or main["unresolved_after"] != 183:
         raise RuntimeError("Apollo Main current replay changed")
     main_obj = file_checked(main["linked_object"], main["linked_object_sha256"])
     actual = undefined(ROOT / main_obj["path"])
-    if len(actual) != 187:
+    if len(actual) != 183:
         raise RuntimeError("Apollo Main unresolved set changed")
     ram_path = G2 / "build/c-firmware/settings-live-buffers-round1007/receipt.json"
     ram, ram_ref = receipt(ram_path)
@@ -1400,12 +1686,116 @@ def main():
     active_app, active_app_ref = receipt(active_app_path)
     if active_app["status"] != "PASS_EXPERIMENTAL_MAIN_SYSTEM_CLOSE_ACTIVE_APP_GET_C" or \
             active_app["base_sha256"] != system_close["linked_sha256"] or \
-            active_app["linked_sha256"] != main_obj["sha256"] or \
             active_app["oracle_cases"] != 192 or \
             active_app["unresolved_before"] != 188 or active_app["unresolved_after"] != 187 or \
             active_app["imports_resolved"] != ["audio_system_close_active_app_get_443504"] or \
             active_app["imports_added"]:
         raise RuntimeError("Apollo Main system-close active-app getter changed")
+    production_path = G2 / "build/c-firmware/20261015/main-production-test-screen-event-5cf7f2/receipt.json"
+    production, production_ref = receipt(production_path)
+    if production["status"] != "PASS_EXPERIMENTAL_MAIN_PRODUCTION_TEST_SCREEN_EVENT_C" or \
+            production["base_sha256"] != active_app["linked_sha256"] or \
+            production["oracle_cases"] != 28 or \
+            production["unresolved_before"] != 187 or production["unresolved_after"] != 187 or \
+            production["imports_resolved"] != ["audio_uart_registry_callback_5cf7f2"] or \
+            production["imports_added"] != ["audio_uart_page_441068"]:
+        raise RuntimeError("Apollo Main production-test screen event changed")
+    color_path = G2 / "build/c-firmware/20261015/main-lv-color-make-441068/receipt.json"
+    color, color_ref = receipt(color_path)
+    if color["status"] != "PASS_EXPERIMENTAL_MAIN_LV_COLOR_MAKE_C" or \
+            color["base_sha256"] != production["linked_sha256"] or \
+            color["oracle_cases"] != 216 or \
+            color["unresolved_before"] != 187 or color["unresolved_after"] != 186 or \
+            color["imports_resolved"] != ["audio_uart_page_441068"] or color["imports_added"]:
+        raise RuntimeError("Apollo Main LV RGB888 constructor changed")
+    gray_path = G2 / "build/c-firmware/20261015/main-gray-screen-event-5cf67e/receipt.json"
+    gray, gray_ref = receipt(gray_path)
+    if gray["status"] != "PASS_EXPERIMENTAL_MAIN_GRAY_SCREEN_EVENT_C" or \
+            gray["base_sha256"] != color["linked_sha256"] or \
+            gray["oracle_cases"] != 28 or \
+            gray["unresolved_before"] != 186 or gray["unresolved_after"] != 185 or \
+            gray["imports_resolved"] != ["audio_uart_registry_callback_5cf67e"] or gray["imports_added"]:
+        raise RuntimeError("Apollo Main gray-screen event changed")
+    test_context_path = G2 / "build/c-firmware/20261015/main-test-screen-registry-context-min/receipt.json"
+    test_context, test_context_ref = receipt(test_context_path)
+    if test_context["status"] != "PASS_EXPERIMENTAL_MAIN_TEST_SCREEN_REGISTRY_CONTEXT_MIN_C" or \
+            test_context["base_sha256"] != gray["linked_sha256"] or \
+            test_context["linked_sha256"] != main_obj["sha256"] or \
+            test_context["observed_minimum_bytes_per_context"] != 8 or \
+            test_context["unresolved_before"] != 185 or test_context["unresolved_after"] != 183 or \
+            test_context["imports_resolved"] != ["audio_uart_registry_context_20003080", "audio_uart_registry_context_200030a0"] or \
+            test_context["imports_added"]:
+        raise RuntimeError("Apollo Main UI test context minima changed")
+    distortion_path = G2 / "build/c-firmware/20261016/main-distortion-screen-event-5cf330/oracle-receipt.json"
+    distortion, distortion_ref = receipt(distortion_path)
+    distortion_source = ROOT / distortion["source"]
+    if distortion["status"] != "PASS_NATIVE_MAIN_DISTORTION_SCREEN_EVENT_5CF330" or \
+            distortion["cases"] != 28 or distortion["visited_stock_instruction_addresses"] != 276 or \
+            distortion["official_payload_sha256"] != "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701" or \
+            distortion["source_sha256"] != sha(distortion_source):
+        raise RuntimeError("Apollo Main distortion-screen callback oracle changed")
+    distortion_style_path = G2 / "build/c-firmware/20261016/main-distortion-style-wrappers/oracle-receipt.json"
+    distortion_style, distortion_style_ref = receipt(distortion_style_path)
+    if distortion_style["status"] != "PASS_NATIVE_MAIN_DISTORTION_STYLE_WRAPPERS" or \
+            distortion_style["cases"] != 48 or distortion_style["controlled_style_apply_calls"] != 80 or \
+            distortion_style["source_sha256"] != sha(ROOT / distortion_style["source"]):
+        raise RuntimeError("Apollo Main distortion style oracle changed")
+    distortion_closure_path = G2 / "build/c-firmware/20261016/main-distortion-screen-closure/receipt.json"
+    distortion_closure, distortion_closure_ref = receipt(distortion_closure_path)
+    if distortion_closure["status"] != "PASS_EXPERIMENTAL_MAIN_DISTORTION_SCREEN_C_CLOSURE" or \
+            distortion_closure["base_sha256"] != main_obj["sha256"] or \
+            distortion_closure["callback_oracle_sha256"] != distortion_ref["sha256"] or \
+            distortion_closure["style_oracle_sha256"] != distortion_style_ref["sha256"] or \
+            distortion_closure["unresolved_before"] != 183 or \
+            distortion_closure["unresolved_after"] != 182 or \
+            distortion_closure["imports_resolved"] != ["audio_uart_registry_callback_5cf330"] or \
+            distortion_closure["imports_added"] or \
+            distortion_closure["asset"]["pixel_bytes"] != 576:
+        raise RuntimeError("Apollo Main distortion closure changed")
+    main_obj = file_checked(distortion_closure["linked_object"], distortion_closure["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 182:
+        raise RuntimeError("Apollo Main distortion closure import count changed")
+    legal_path = G2 / "build/c-firmware/20261016/main-legal-regulatory-event-5bf7b8/oracle-receipt.json"
+    legal, legal_ref = receipt(legal_path)
+    if legal["status"] != "PASS_NATIVE_MAIN_LEGAL_REGULATORY_EVENT_5BF7B8" or \
+            legal["cases"] != 140 or legal["visited_stock_instruction_addresses"] != 98 or \
+            legal["source_sha256"] != sha(ROOT / legal["source"]) or \
+            legal["official_payload_sha256"] != "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701":
+        raise RuntimeError("Apollo Main legal-regulatory callback oracle changed")
+    legal_fade_path = G2 / "build/c-firmware/20261016/main-legal-fade-in-58c238/oracle-receipt.json"
+    legal_fade, legal_fade_ref = receipt(legal_fade_path)
+    if legal_fade["status"] != "PASS_NATIVE_MAIN_LEGAL_FADE_IN_58C238" or \
+            legal_fade["cases"] != 300 or legal_fade["visited_stock_instruction_addresses"] != 92 or \
+            legal_fade["source_sha256"] != sha(ROOT / legal_fade["source"]):
+        raise RuntimeError("Apollo Main legal fade-in oracle changed")
+    legal_helpers_path = G2 / "build/c-firmware/20261016/main-legal-fade-helpers/oracle-receipt.json"
+    legal_helpers, legal_helpers_ref = receipt(legal_helpers_path)
+    if legal_helpers["status"] != "PASS_NATIVE_MAIN_LEGAL_FADE_HELPERS" or \
+            legal_helpers["cases"] != 64 or \
+            legal_helpers["source_sha256"] != sha(ROOT / legal_helpers["source"]):
+        raise RuntimeError("Apollo Main legal fade helper oracle changed")
+    legal_chain_path = G2 / "build/c-firmware/20261016/main-legal-regulatory-chain/receipt.json"
+    legal_chain, legal_chain_ref = receipt(legal_chain_path)
+    if legal_chain["status"] != "PASS_EXPERIMENTAL_MAIN_LEGAL_REGULATORY_CHAIN_C" or \
+            legal_chain["base_sha256"] != main_obj["sha256"] or \
+            legal_chain["unresolved_before"] != 182 or legal_chain["unresolved_after"] != 182 or \
+            legal_chain["imports_resolved"] != ["audio_uart_registry_callback_5bf7b8"] or \
+            legal_chain["imports_added"] != ["audio_legal_regulatory_build_5bf332"] or \
+            [x["sha256"] for x in legal_chain["oracles"]] != \
+                [legal_ref["sha256"], legal_fade_ref["sha256"], legal_helpers_ref["sha256"]]:
+        raise RuntimeError("Apollo Main legal-regulatory chain changed")
+    main_obj = file_checked(legal_chain["linked_object"], legal_chain["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 182 or "audio_legal_regulatory_build_5bf332" not in actual:
+        raise RuntimeError("Apollo Main legal-regulatory chain import count changed")
+    legal_page_helpers_path = G2 / "build/c-firmware/20261016/main-legal-page-helpers/oracle-receipt.json"
+    legal_page_helpers, legal_page_helpers_ref = receipt(legal_page_helpers_path)
+    if legal_page_helpers["status"] != "PASS_NATIVE_MAIN_LEGAL_PAGE_HELPERS" or \
+            legal_page_helpers["cases"] != 112 or \
+            legal_page_helpers["controlled_lower_calls"] != 496 or \
+            legal_page_helpers["source_sha256"] != sha(ROOT / legal_page_helpers["source"]):
+        raise RuntimeError("Apollo Main legal page helper oracle changed")
     images["apollo_main"] = {
         "receipt": main_ref, "candidate": main_obj,
         "prior_dm_registry_extent_gate": registry_ref,
@@ -1553,12 +1943,27 @@ def main():
         "ring_policy_schedule_timeouts_49f4a8_49f552": schedule_timeouts_ref,
         "system_close_common_data_469d48": system_close_ref,
         "system_close_active_app_get_443504": active_app_ref,
+        "production_test_screen_event_5cf7f2": production_ref,
+        "lv_color_make_441068": color_ref,
+        "gray_screen_event_5cf67e": gray_ref,
+        "test_screen_registry_context_min": test_context_ref,
+        "distortion_screen_event_5cf330": distortion_ref,
+        "distortion_style_wrappers": distortion_style_ref,
+        "distortion_screen_closure": distortion_closure_ref,
+        "legal_regulatory_event_5bf7b8": legal_ref,
+        "legal_fade_in_58c238": legal_fade_ref,
+        "legal_fade_helpers": legal_helpers_ref,
+        "legal_regulatory_chain": legal_chain_ref,
+        "legal_page_helpers": legal_page_helpers_ref,
         "settings_last_message_ram_extent": {"current_source_receipt": ram_ref, "selected_object_bytes": selected_ram_bytes, "required_minimum_bytes": 104, "integrated": selected_ram_bytes == 104},
         "unresolved_count": len(actual), "unresolved_symbols": actual,
         "source_complete": False, "full_payload_linked": False,
-        "remaining_gate": ["187 current imports; the dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
+        "remaining_gate": ["182 current imports; the dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
                            "All eight DM dispatch entries and the exposed security children now have C bodies; whole-image source and placement remain open.",
                            "DM storage is a 196-byte bounded C-owned block with a registry alias; full allocation extent and final RAM placement remain open.",
+                           "Gray and production-test UI registry contexts each have only an observed eight-byte C reservation; full allocation extent, initialization and final RAM placement remain open.",
+                           "Distortion-screen 0x5cf330 and six style wrappers are C-bound with 28 callback and 48 wrapper stock comparisons. The 24x24 pixel resource and two text strings match stock bytes; final RAM and image placement remain open.",
+                           "Legal-regulatory UI callback 0x5bf7b8, fade action 0x58c238 and two fade helpers are C-bound with 140, 300 and 64 controlled native comparisons; seven page-helper/style entries have 112 direct cases. The page builder 0x5bf332 remains an import; its text and bitmap assets, root-cell allocation extent and final RAM placement remain open.",
                            "Complete data/startup/layout and physical execution remain unproved."],
     }
     if set(images) != {"codec", "ble_em9305", "touch", "case", "apollo_bootloader", "apollo_main"}:

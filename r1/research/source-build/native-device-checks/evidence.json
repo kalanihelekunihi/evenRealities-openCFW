@@ -1,0 +1,67 @@
+{
+  "ghidra": {
+    "ghidra-3510c.json": "03f1ad216efea6422f895a33df3f5cc98b5723b6deff14f605378bfb6e64fc86",
+    "ghidra-351ec.json": "49479f45507635156269f9264642bf60264fa046be0ef4332eca1a0eccf8d70d",
+    "ghidra-351f4.json": "b256365d64e7cf578adb2d04984ab19f6fe87a31c83a93a0452ae7ee8be0b443",
+    "ghidra-35214.json": "38675d71f17e58d5999abe76e92d3ba712d67cd0216d301c4145ae8b89014558",
+    "ghidra-3522c.json": "0519ea328573b85758ac4a140287ce58f78a5270a6ec79446aaf22e9360a4e08",
+    "ghidra-3524c.json": "1c82f4d23f841180cf2d79b0e0b63cbb7ba002f999716ea153e5d23852a698be",
+    "ghidra-35264.json": "359ed974b9a0bf02d55a9c0c72de7a02ccd119e034e75fba95eccef6c9f834ab",
+    "ghidra-50ecc.json": "22543995401d1d9b82b64fef5449aaa971cca70652078b312c7ce562db7be5e4"
+  },
+  "rea": {
+    "rea-3510c.json": "59ca4f540967cff942a4382486075471fadcbcefe61d3a7a9f608400b4dcc19d",
+    "rea-50ecc.json": "93d87a58a98a12c731d1a8ba05e8d95f7873dfa02f691a78eb2ebc58e594c002"
+  },
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "frozen_corpus_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0003510c",
+      "end": "0x000351eb",
+      "size": "224",
+      "recovered_name": "FUN_0003510c",
+      "provider_family": "yhmicros_yhm2710_candidate",
+      "source_disposition": "clean_room_reimplementation_owner_authorized",
+      "upstream_symbol": "",
+      "confidence": "candidate",
+      "evidence": "Function references YHMICROS YHM2710-specific identification, configuration, or diagnostics. The exact vendor source remains unlicensed; the complete 44-entry closure is independently reconstructed in reconstructed/yhm2710 under the owner-authorized full-reduction policy."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00050ecc",
+      "end": "0x00050ef9",
+      "size": "46",
+      "recovered_name": "FUN_00050ecc",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_gxt310_self_check",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "native_yhm_bytes": 224,
+  "native_gxt_bytes": 46,
+  "source_data_bytes": 120,
+  "source_delay_pointer_relocation_bytes": 4,
+  "old_generic_configure_source": "r1/reconstructed/yhm2710/yhm2710.c",
+  "old_generic_configure_sha256": "d201181594aa5a08483df1d1dd75799fdb379f9b038bc01f54477683a48a8f0a",
+  "old_generic_write_failure_return_mismatch": "Generic helper returns5 when any write returns failure; native ignores all five write results and returns0 after a matching chip ID.",
+  "old_generic_not_used_for_native_provider": true,
+  "upstream_vendor_implementation_claim": false,
+  "leaf_providers_are_fixtures": true,
+  "whole_source_startup_graph_executed": false,
+  "physical_sensor_or_delay_verified": false,
+  "locked_ownership_changed": false,
+  "whole_image_identity": false,
+  "gates": [
+    "No exact licensed YHM/GXT upstream implementation is inferred; current code is recovered R1 source.",
+    "REA has no analyzed records for these entries; frozen control flow and Ghidra-MCP bytes are the positive evidence.",
+    "Write byte arguments are normalized across private stack frames.",
+    "Existing source write/discovery/state/delay link into the larger graph; this per-body receipt uses named leaf fixtures.",
+    "Physical sensor/bus/delay behavior, full raw ABI/private frames, source initialization/link placement and whole-image identity remain open."
+  ]
+}

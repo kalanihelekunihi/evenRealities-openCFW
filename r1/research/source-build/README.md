@@ -6194,3 +6194,290 @@ R1 configuration/adapters rather than copied into another local implementation;
 future updates still require native initialization, stack/frame and unwinding
 contract checks. Integration, full startup, remaining bodies, raw ABI/hardware,
 original compiler/shared-data placement and byte-identical image remain open.
+
+Startup constructor reuse now resolves the held40-byte native route without
+changing the locked ledger or adding another local implementation. Its frozen
+end/size describe18 wrapper bytes at0x4e1e4 plus the22-byte shared post-init
+tail at0x5cb4c, not a contiguous40-byte span. Fresh Ghidra-MCP bytes, REA's
+post-tail and neighboring-function records, existing frozen pseudocode and
+54 returned/12 null-fault comparisons support that accounting. The original
+receipt/boundary hold is retained as historical evidence. The same existing
+C wrapper and walkers are reused, with540 callback observations per side;
+real registrars, raw argument residue and physical interrupts remain gated.
+
+The46-byte peripheral module dispatcher now compiles as C. Its270 controlled
+cases and2,700 callback observations per side preserve ten-call order, sampled
+last raw R0, stack/callee state, PRIMASK changes and non-stack RAM. All leaf
+provider bodies in that test remain explicit typed fixtures. Linking the
+application/scatter candidate with this dispatcher and existing board sources,
+plus a source-owned constructor alias, resolves nine direct application
+imports. Four direct imports and67 total linked imports remain visible. The
+aggregate is not claimed as an executed or complete application image.
+Initialized data/callback ownership, full linked-provider ABI, raw startup
+register/frame behavior, physical hardware, historical observer review and
+original instruction/byte-identical image integration remain open.
+
+Device-module and reset startup now compile from C with 248 bytes of recovered
+strings, bounds and state/register configuration. The device ownership row's
+158 bytes comprise its 74-byte entry plus an 84-byte shared hardware-check tail.
+The RTC open/bind body, its supplemental empty callback, the pre-initialization
+thunk and the reset adapter are also source. All 16,377 selected cases and
+85,473 callback observations per side pass for raw R0, stack/callee state,
+call order, state writes and full non-stack RAM. Tests demonstrate RTC handle
+reload after open, byte flag updates after self-check mutation, and preservation
+of the original reset snapshot across provider MMIO mutation. The broader raw
+R0 comparison was added without changing the compiled firmware object.
+
+The empty RTC callback uses the existing void(uint32_t) clock contract. Its
+compiled two-byte BX LR matches the native bytes at the verification address;
+this supplemental body is not another locked route or a whole-image identity
+claim. REA identifies the reset adapter but lacks records for the other entries;
+frozen ownership/control flow and Ghidra-MCP bytes remain explicit evidence.
+All leaf provider bodies in the new behavior tests are named fixtures. Physical
+RESETREAS write-one-to-clear behavior, arbitrary callbacks/raw argument residue,
+private frames and actual linked-provider execution remain unproven.
+
+The expanded source startup bundle resolves eleven direct application imports.
+Only DFU SVC initialization and CmBacktrace initialization remain direct imports,
+with 68 total unresolved imports including device pre-initialization, sensor
+self-check and reset decode/report. That larger transitive graph is kept visible.
+Source-owned initialized data/callbacks, full startup, historical observer
+review, original compiler/shared-data placement and byte-identical firmware
+integration remain open; no new upstream attribution is inferred for these
+product-specific adapters.
+
+
+Pinned MIT CmBacktrace now builds as an unmodified upstream translation unit
+(commit73714489f9d8af130aacb515586b397b604a5768). Initialization alone is
+selected into the startup bundle, using a thin pointer-type port to the already
+source-tested R1 strncpy provider. The recovered FreeRTOS/Cortex-M4/FPU config
+and stack/code linker symbols are source-owned. O0/fno-inline retains the four
+range-field stores observed in native code; it does not establish original
+compiler settings or instruction equality. Other compiled upstream fault/unwind
+bodies are hints pending their own R1 adapter and native contracts.
+
+The initializer passes10,240 native/source cases with30,720 actual source copy
+calls per side and2,048 named logger-fixture calls per side. Full non-stack RAM,
+store order, copy arguments and callee/SP state match. Tests distinguish zero
+stack from zero code, retain the previous init flag on error, preserve the21st
+name-array bytes and exercise wrapped range arithmetic. Noncanonical bounds
+are explicit fixtures; authenticated files remain unchanged. Raw void-return R0
+differs and remains an ABI gate. Ghidra-MCP authenticates84 code bytes,28 literal
+bytes, the error pointer and98-byte string; REA has no procedure record there.
+
+The new source bundle resolves twelve of thirteen direct application imports;
+DFU SVC initialization remains direct and68 total transitive imports remain,
+including the retained logger. Whole linked-provider execution, fault/unwind
+adaptation, complete source data placement, raw ABI and byte-identical firmware
+remain open. The locked frontier is now741 tested contract candidates,
+1,376 compiled hints and1,209 unresolved routes across3,326 rows; these are
+source evidence categories, not image completion.
+
+
+DFU SVC initialization now reuses the authenticated Nordic17.1.0 unbonded DFU
+source entry, its actual SVC0/R12=3 bridge and12-byte source async-state object.
+The shared vector-restore tail is recovered R1 C: it preserves the native
+short-circuit mode reads, ring/Nordic logging order and original supervisor
+return across logging. Its SVC19 bridge remains an architectural call to an
+external supervisor provider.216 bytes of source constants/strings match the
+locked image at the verification addresses. This is selective upstream reuse;
+the R1 logging adaptation is not attributed as unchanged Nordic source.
+
+REA independently confirms the ownership row comprises32 bytes at0x52018 and
+130 shared bytes at0x7876c, rather than a contiguous span. Ghidra-MCP reads match
+those162 bytes, the4-byte async pointer and all216 source data bytes. The new
+10,896-case differential receipt includes3,216 upstream-entry workflows and
+7,680 direct restore cases,79,988 callback observations per side,2,136 SVC0 and
+9,636 SVC19 observations per side. Raw R0, callee registers/SP, full non-stack
+RAM and typed call order/args match, including early errors and async-state
+mutation. All triples of mode values0..7 are exercised per logging group,
+plus independent seeded six-read queues. Supervisor, vector-set and logger
+bodies are explicit fixtures; physical SVC and full raw ABI remain unproven.
+
+All thirteen direct application imports now resolve to compiled source in
+native-dfu-startup-runtime.68 transitive unresolved imports remain visible,
+including vector-to-bootloader setup, retained logging, device initialization,
+sensor providers and event/database state. This aggregate has not executed as
+a full provider graph. The locked frontier now contains742 tested contract
+candidates,1,375 compiled hints and1,209 unresolved routes across3,326 rows.
+Full source/data closure, original compiler and placement, all supervisor and
+hardware contracts, and byte-identical whole-image rebuilding remain open.
+
+
+The vector-to-bootloader setter now compiles from the unchanged registered
+Nordic SDK 17.1.0 nrf_dfu_svci.c. An isolated logging macro header generates
+padded ring/Nordic string pairs and forwards to small recovered R1 C logging
+ports. The upstream MBR/UICR fallback, missing-address result and SVC19 return
+algorithm remain unchanged. REA reports the exact contiguous 202-byte native
+body; Ghidra-MCP reads match that body and 272 constant bytes. Of these, 264
+string bytes survive selection; the raw source port's 8-byte bounds pair folds
+into the log tag and is not claimed as selected linker placement.
+
+The setter and actual linked source DFU graph pass 77,568 comparisons: 61,440
+setter calls and 16,128 complete initialization workflows. This includes
+703,230 callback/read observations per side, 5,352 SVC0 calls and 70,764 SVC19
+calls per side. The native and source graphs agree on MBR precedence, UICR
+fallback, both-addresses-missing result 4, zero/one/unaligned/high-bit address
+values, boot-read order, short-circuit logging, early errors, async-state
+mutation, raw R0, callee/SP preservation and full non-stack RAM. Low flash and
+UICR values, supervisor handlers and logger bodies are explicit fixtures;
+this establishes no physical boot transition or device provisioning state.
+
+The source DFU subgraph has four logging imports, with vector setup no longer
+a fixture. The larger startup bundle retains all thirteen direct application
+imports resolved and now has 67 transitive unresolved imports. Its full
+provider graph has not executed. The frontier contains 743 tested contract
+candidates, 1,374 compiled hints and 1,209 unresolved routes across 3,326 rows.
+Source/data closure, physical supervisor implementation, raw ABI/private
+frames, final state/link placement, original compiler and whole-image byte
+identity remain explicit gates.
+
+
+Native YHM pre-initialization and the paired GXT310 self-check now compile from
+recovered R1 C. The YHM implementation preserves a material distinction from
+the older generic yhm2710_configure helper: native code ignores all five write
+results and returns zero after chip ID 0xa0, whereas the generic helper returns
+5 when a write fails. The generic helper remains historical and is not linked
+as this native provider. No exact licensed vendor YHM/GXT source is inferred.
+The new void adapter serves the previously compiled startup thunk while keeping
+the native uint32 result body explicit; its sampled raw R0 is also tested.
+
+The new receipt covers 110,424 comparisons: 40,448 YHM configuration cases,
+3,840 void-adapter cases and 66,136 GXT self-check cases. It includes all 256
+8-bit YHM chip IDs, all 65,536 8-bit GXT ID pairs, selected high-word values,
+logging mode queues, failed write returns and callback mutation of the reused
+write byte. The native and source calls agree on arguments/order, raw R0,
+callee registers/SP and full non-stack RAM. There are 1,099,978 callback
+observations per side, 44,840 write calls and 448,400 delay calls per side.
+Success makes exactly 50 delay calls with 64000; chip mismatch writes nothing
+and delays nothing. GXT always acquires/enables, reads both IDs, disables and
+releases before returning its two-ID comparison. Providers are named fixtures
+in these tests; private write-buffer addresses are normalized to byte contents.
+
+Ghidra-MCP authenticates 224 YHM code bytes, 46 GXT code bytes and 124 data bytes.
+REA has no procedure records for these entries, retained explicitly. Source
+strings/bounds comprise 120 bytes, plus a four-byte source delay-function
+relocation; no executable address fallback is introduced.
+
+The larger startup candidate links existing source YHM write, handle discovery,
+initialized context/request state and delay providers. Full execution of this
+larger graph remains unverified. It resolves three old imports (pre-init,
+self-check and handle discovery) and exposes seven deeper chip/GXT providers,
+so total transitive unresolved imports rise from 67 to 71. All thirteen direct
+application imports remain source-linked. The frontier now has 745 tested
+contract candidates, 1,374 compiled hints and 1,207 unresolved routes across
+3,326 rows. Leaf provider execution, physical bus/sensor/timing behavior,
+complete raw ABI/private frames, source initialization and final placement,
+original compiler and byte-identical whole-image reconstruction remain open.
+
+
+The native YHM chip-ID provider at 0x3530c now compiles as recovered R1 C with
+120 bytes of source-owned strings and log bounds. It initializes the read byte
+to zero, requests register 8/length 1, ignores the read result, selects success
+or failure messages from the initial byte and returns a reload of that live
+byte after logging. No licensed vendor-source attribution is inferred.
+Ghidra-MCP reads match all 134 code bytes and 120 data bytes; REA lacks a
+procedure record at this entry and that absence is retained.
+
+The new 98,304-case receipt compares 466,560 callback observations per side.
+All byte IDs are covered with four fixed logging-mode queues; selected byte
+values and an unwritten read cover all mode triples 0..7 plus seeded full-width
+modes, three read-status values, scoped callback byte mutations and two RAM
+fills. Return values, typed arguments, call order, callee/SP state and the full
+observed non-stack RAM region match. The read pointer's private stack address
+is normalized. The tests distinguish message selection from the later returned
+byte and confirm that a read provider leaving the buffer unchanged returns
+zero regardless of status. All read/logger bodies remain fixtures here.
+
+The larger source startup bundle now links this provider and the existing
+native YHM read frontend/transport together with source write, discovery,
+initialized context/request state and delay. This graph has not executed as a
+whole. All thirteen direct application imports remain resolved; transitive
+unresolved imports fall from 71 to 70. The locked frontier is 746 tested
+contract candidates, 1,374 compiled hints and 1,206 unresolved source routes
+across 3,326 rows. Actual bus/sensor/timing behavior, provider graph execution,
+full raw ABI/private frames, source state/data ownership and final placement,
+original compiler and byte-identical image integration remain open.
+
+
+The GXT310 shared chip-ID reader and channel 0x90/0x94 veneers now compile from
+recovered R1 C. Ghidra-MCP bytes match the 96-byte shared reader, both six-byte
+veneers and 100 data bytes. REA identifies the shared body and lacks records
+for the veneers; both results remain explicit. A separate REA boundary inquiry
+confirms that the power-down ownership row contains an 18-byte wrapper plus a
+106-byte shared mode body. That row is not promoted by this ID-reader work.
+No licensed vendor implementation or new upstream attribution is inferred.
+
+The reader matches the entire native four-byte zero-initialized word, requests
+register 3/length 2, ignores the read result, logs a big-endian 16-bit snapshot
+and reloads the first byte after callbacks for its return. The source veneers
+retain explicit tail relocations to the shared source reader. The first
+candidate used a two-byte local array; it was strengthened before admission,
+and its source, drivers, objects, reports and receipts are retained under
+initial-two-byte-candidate with a hash manifest. Final receipts bind the
+four-byte-word source and strengthened initial-zero assertions.
+
+Direct verification passes 137,536 cases and 650,968 callback observations per
+side: 123,136 shared-reader cases and 7,200 per veneer. Every 16-bit read word
+is exercised, with additional ignored-error, unwritten-buffer, full-width
+address/mode and scoped callback-mutation cases. The ring logger's fifth
+argument is checked on the stack. The packed log snapshot stays fixed while
+the late first-byte return reflects valid in-scope callback changes.
+
+Another 44,096 workflows and 591,498 callback observations per side execute the
+actual source self-check, both veneers and shared reader together. They verify
+both reads, late-byte success decisions and acquire/enable/read/read/disable/
+release order. Bus, enable/disable, lower register-read and logging providers
+remain fixtures in this subgraph. Source strings occupy verification addresses;
+the raw source object's eight-byte bounds pair folds into the log header and
+is not selected graph data, leaving 92 selected data bytes. Full private-frame
+addresses, saved-register placement and padding outside the word remain open.
+
+All thirteen direct application imports remain source-linked. Replacing both
+ID leaves with source and exposing one lower register-read import reduces
+transitive startup imports from 70 to 69. The frontier now has 749 tested
+contract candidates, 1,374 compiled hints and 1,203 unresolved source routes
+across 3,326 rows. Full startup execution, lower provider bodies, physical bus/
+sensor behavior, raw ABI, source initialization/link placement, original
+compiler and byte-identical whole-image rebuilding remain explicit gates.
+
+
+Seven native GXT/I2C2 bus entries now compile from recovered C: cached handle
+lookup, lock/unlock, read/write request construction and the two forwarding
+veneers. REA identifies all seven exact body ranges, totaling 118 code bytes;
+Ghidra-MCP matches those bytes, five pointer literals (20 bytes) and the
+8-byte i2c_2 name. No new vendor-source attribution is inferred. The existing
+recovered registry header supplies the shared device/dispatch interfaces.
+
+The source state uses checked C field offsets: address at request+0, register
+at+2, write pointer/length at+4/+8 and read pointer/length at+12/+16. Its C
+initializer reproduces 24 authenticated cold RAM bytes: zero device pointer,
+address 0x12, both lengths 1, and all other observed bytes zero. This slice is
+bound to the previous verified scatter/decompression observation; it does not
+promote the whole initialized-data image to source-owned data or establish
+final symbol boundaries/link placement. The source name adds eight bytes.
+
+All 69,340 comparisons pass, including 69,644 registry callback observations
+per side. The receipt covers scalar truncation, exact field store order,
+unconditional read-pointer replacement, NULL write-pointer preservation,
+zero-status success inversion, repeated cache lookup/reuse, callback mutation
+of the handle and untouched padding, and persistent multi-call sequences.
+Raw R0, callee registers/SP, callback arguments and full observed non-stack RAM
+match, with executed-store observation reconciled against independent readback.
+Registry lookup/dispatch are named fixtures in these body tests.
+
+An initial passing build inlined the two veneers. The audit detected the lost
+four-byte forwarding structure; core noinline declarations restore explicit
+R_ARM_THM_JUMP24 tail relocations. Source, objects, report and passing receipt
+from the superseded build remain hash-bound under initial-inlined-candidate.
+The final build passes the same 69,340-case suite and tail-relocation audit.
+This is source call-structure evidence, not final native instruction equality.
+
+The larger startup candidate links these bodies with the existing source
+registry. Cache, lock/unlock and the lower GXT read import now resolve, reducing
+transitive imports from 69 to 65. All thirteen direct application imports remain
+source-linked. The frontier is 756 tested contract candidates, 1,374 compiled
+hints and 1,196 unresolved routes across 3,326 rows. GXT mode enable/disable,
+other provider bodies, physical I2C/sensors, actual full startup execution,
+raw private ABI, source state/link ownership, original compiler and byte-identical
+whole-image rebuilding remain explicit gates.

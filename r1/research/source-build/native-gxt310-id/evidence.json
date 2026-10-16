@@ -1,0 +1,86 @@
+{
+  "ghidra": {
+    "ghidra-6f53c.json": "9ba7ca9835dd3f27d0c097d1ee50dc188cb236fec12db68190a319e1bb095cf2",
+    "ghidra-6f59c.json": "c9e7e8361fbc0883a8d9909948f3c6289ff36fde8be5b89ed9271efa51afe3ab",
+    "ghidra-6f5cc.json": "6606313f56644f02d943ae9fc4f301a34c31008ea893a346ecf8eba61bdc9ba2",
+    "ghidra-6f5d4.json": "d00be131dc9038c63eb6d88e07b27eceabe3f462f3b11bd56b342dfcd95b2de3",
+    "ghidra-6f812.json": "02f05aec99535f3f480600c2002a017a778b7a74c23e8c08fb31bcb29f20dc40",
+    "ghidra-6f82c.json": "97b9b8e5aa8785fd53feda5add792c849b75da791d6ba29e33c5c7d14eadcef6"
+  },
+  "rea": {
+    "rea-6f53c.json": "a5b3fda958af4926cc7679b33d1cb3fd9e94c79505d348b57a2f133f046d583d",
+    "rea-6f812.json": "68ec50d6ea25e0f9b448675d52e8f9d56dd16023e5f147712b951255685139c2",
+    "rea-6f82c.json": "dab3eae7cbb5f81e82f93d12c7edaa53671ea8474635aaacedd095715b00cbea"
+  },
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "frozen_corpus_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0006f53c",
+      "end": "0x0006f59b",
+      "size": "96",
+      "recovered_name": "FUN_0006f53c",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_temperature_id_log",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0006f812",
+      "end": "0x0006f817",
+      "size": "6",
+      "recovered_name": "FUN_0006f812",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_temp_reg90_read",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0006f82c",
+      "end": "0x0006f831",
+      "size": "6",
+      "recovered_name": "FUN_0006f82c",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_temp_reg94_read",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "shared_native_bytes": 96,
+  "veneer_bytes_each": 6,
+  "total_native_bytes": 108,
+  "source_data_bytes": 100,
+  "selected_selfcheck_graph_data_bytes": 92,
+  "folded_bounds_not_selected_graph_data": true,
+  "native_private_zero_word_bytes": 4,
+  "typed_source_requested_buffer_bytes": 2,
+  "log_snapshot": "Big-endian16-bit value captured before logging; ring5th argument on stack and Nordic std2 R3.",
+  "late_return": "Reload first buffer byte after callbacks; read status ignored.",
+  "read_pointer_normalized": true,
+  "upstream_vendor_implementation_claim": false,
+  "power_down_row_not_promoted": true,
+  "locked_ownership_changed": false,
+  "whole_image_identity": false,
+  "gates": [
+    "Lower register-read, bus/enable/disable and logger bodies remain fixtures in the source self-check graph receipt.",
+    "Source and native initialize the entire four-byte private word; full private frame, saved-register placement and unrelated padding remain open.",
+    "The8-byte bounds pair exists in raw source object but folds out of selected graph data.",
+    "Full startup, source state/placement, physical sensors, original compiler and byte-identical image remain open."
+  ],
+  "source_private_zero_word_bytes": 4,
+  "initial_two_byte_candidate_manifest": "initial-two-byte-candidate/manifest.json",
+  "initial_two_byte_candidate_manifest_sha256": "8424ef9ee5d25f44af170288fa40fcb0920020a3538e0eef7b15da2e25811ac0",
+  "boundary_observations": {
+    "rea-boundary-50f88.json": "8cd864c03e09c1692de379a03023b9688457de4148b71cd156775cc90b09b944",
+    "rea-boundary-6f648.json": "db4b13d34266352bb4e2f9e2070416caff4032e93cef684a1b559d2f17370dcd"
+  }
+}

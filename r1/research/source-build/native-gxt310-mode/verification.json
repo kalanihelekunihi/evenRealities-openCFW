@@ -1,0 +1,42 @@
+{
+  "comparisons": 113032,
+  "counts": {
+    "shared": 56320,
+    "channel0": 5280,
+    "channel2": 5280,
+    "enable": 46080,
+    "disable": 72
+  },
+  "callback_observations_per_side": 341482,
+  "write_calls_per_side": 66880,
+  "trace_sha256": "09aa4afb6d99fabad31c7a091d8e439fd9d2c89eb00b7d049722a46fde85c03a",
+  "full_four_byte_config_word_checked": true,
+  "zero_enabled_sets_low_byte_bit0_only": true,
+  "any_nonzero_write_result_is_success": true,
+  "write_buffer_mutated_by_fixture": true,
+  "pair_always_calls_both_channels_before_logging": true,
+  "pair_result_is_raw_bitwise_and": true,
+  "disable_raw_r0_matches_last_channel_fixture": true,
+  "full_width_statuses_and_modes_and_all_byte_addresses": true,
+  "raw_r0_callee_integer_stack_full_observed_nonstack_ram_and_typed_callback_args_order_checked": true,
+  "private_config_pointer_normalized": true,
+  "write_logging_and_pair_channel_providers_are_fixtures": true,
+  "source_data_bytes": 308,
+  "candidate_native_body_execution_forbidden": true,
+  "unicorn_memory_write_hooks_disabled": true,
+  "whole_startup_graph_executed": false,
+  "physical_sensor_verified": false,
+  "instruction_identity": false,
+  "full_raw_abi_verified": false,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "driver_sha256": "0d178c4241ee20992298c6df4dd393930d028eda5e952f0f2bf45bf7532b6992",
+  "report_sha256": "a2c6c8c605bf2ced4555a5f4f0d558521538a44fc09f3faa91d780d4c914323a",
+  "object_sha256": "da6f79f5f5a154f0a565d29854132a7447ba8bdc4e5b158fd0516979e0f91654",
+  "layout": "r1/source-config/runtime/native_gxt310_mode_verification.ld",
+  "layout_sha256": "84c66c01404936a1e9a54f77e47b642ce54ce993dea66d50edc7d07668d941d3",
+  "limitations": [
+    "Shared/channel tests use a named write fixture; pair tests use named channel fixtures so arbitrary uint32 return/bitwise behavior remains visible.",
+    "Source/native initialize the full four-byte configuration word; private frame addresses and other raw scratch/stack details remain gated.",
+    "Physical sensor/bus, actual full source startup, final data/link placement, original compiler and byte-identical image remain open."
+  ]
+}

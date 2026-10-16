@@ -1,0 +1,51 @@
+{
+  "ghidra": {
+    "ghidra-4e1e4.json": "85d1fb993a94cfbc61e54639a5679be00eaf647418a4d7260331bed585951853",
+    "ghidra-5cb4c.json": "2613a5b389a670905e28b61bb4c529bb9f56f19d9abb0807220170f23c0412a0",
+    "ghidra-4e1f8.json": "f6ad2f37bc91ccedf841f0e196c5bcf236697047a4baf33185cd698bf641e60e"
+  },
+  "rea": {
+    "rea-4e1e4.json": "d601c4dfe7332e3567a9dbd61343617bc243d5df45247559b463b0688cea63c1",
+    "rea-4e1f8.json": "4070a740e3dd6270635b18bfcef57372fb09c9852e5b1506870d81c1c44aa0e3",
+    "rea-5cb4c.json": "2542a6c7229eece4a3dd271cfbf3295827c9dd92df1c75184aec04f5a3ad6534"
+  },
+  "locked_ownership_changed": false,
+  "frozen_corpus_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "provider_bodies_are_fixtures": true,
+  "full_linked_graph_execution_verified": false,
+  "instruction_identity": false,
+  "reused_source": "r1/components/board/native_initcalls.c",
+  "source_sha256": "ac9c7bd74ae383ecce783659acdf5371478a9f39a8b0de99af61512dd0fd082e",
+  "prior_evidence_sha256": "1ec8b16b83fa6d51d12eb1fb821cd6787ebda85cc06bc9d976f0c681bbac8386",
+  "prior_verification_sha256": "20e5267253f6e4c4152cf08e95a952521ca2bd8c3d8986bf395030e569ad6ba7",
+  "locked_row": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x0004e1e4",
+    "end": "0x0005cb61",
+    "size": "40",
+    "recovered_name": "FUN_0004e1e4",
+    "provider_family": "r1_product_specific",
+    "source_disposition": "clean_room_behavior_only",
+    "upstream_symbol": "r1_boot_ctor_run",
+    "confidence": "high",
+    "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+  },
+  "body_ranges": [
+    {
+      "start": "0x4e1e4",
+      "end": "0x4e1f5",
+      "bytes": 18
+    },
+    {
+      "start": "0x5cb4c",
+      "end": "0x5cb61",
+      "bytes": 22
+    }
+  ],
+  "combined_body_bytes": 40,
+  "noncontiguous_shared_tail": true,
+  "boundary_gate_resolved_for_source_route": true,
+  "raw_abi_and_instruction_gate_closed": false
+}

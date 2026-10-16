@@ -1,0 +1,30 @@
+{
+  "comparisons": 44096,
+  "callback_observations_per_side": 591498,
+  "trace_sha256": "cd73aa0ccc79d82eb371fd801f3bb80d986342587d481716ac9bc34419a99c11",
+  "actual_source_selfcheck_both_veneers_and_shared_reader": true,
+  "id_providers_are_source_not_fixtures": true,
+  "folded_log_bounds_not_selected_graph_data": true,
+  "selected_graph_constant_data_bytes": 92,
+  "bus_enable_disable_read_and_logging_are_fixtures": true,
+  "initial_id_log_snapshot_and_late_return_mutations": true,
+  "cleanup_order_and_both_reads_checked": true,
+  "raw_r0_stack_callee_integer_full_observed_nonstack_ram_and_typed_callback_args_checked": true,
+  "read_pointers_private_frame_normalized": true,
+  "candidate_native_body_execution_forbidden": true,
+  "unicorn_memory_write_hooks_disabled": true,
+  "whole_startup_graph_executed": false,
+  "physical_sensor_verified": false,
+  "instruction_identity": false,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "driver_sha256": "7d0083899ecfc934bc074d59e137956b2b165b116db4005f7a050b25dd7329cb",
+  "imported_driver_sha256": "b5919be932894bccc4443d9075edc7e174ce69ff32eba57032d03dfc3fc77f80",
+  "runtime_report_sha256": "e50a1af922ae0f903dfa13ec8fb07e1085becdd5c936675877c7542eb616ef0b",
+  "object_sha256": "1d3638f08d9c6c02bbeb1727c787dbea29f19a32feebca7c64098b5a79732491",
+  "layout": "r1/source-config/runtime/native_gxt310_id_graph_verification.ld",
+  "layout_sha256": "f730f85e324c6372f906421e91229f36e8fa27f0b7246a3a60531a5cd62306dc",
+  "limitations": [
+    "Source self-check and ID providers execute together; other leaves are named fixtures.",
+    "No physical read, power sequencing, full startup, private frame or whole-image identity proof."
+  ]
+}

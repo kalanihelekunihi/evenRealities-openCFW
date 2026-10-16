@@ -1,0 +1,46 @@
+{
+  "comparisons": 77568,
+  "counts": {
+    "entry": 16128,
+    "set": 61440
+  },
+  "callback_observations_per_side": 703230,
+  "supervisor_calls_per_side": {
+    "0": 5352,
+    "19": 70764
+  },
+  "trace_sha256": "17e1775e86398b6bdf111a6fdf9b2598af6d807b1016d4f61d1ac3c90377492c",
+  "upstream_setter_entry_and_source_restore_executed": true,
+  "actual_svc0_and_svc19_bridges_executed": true,
+  "supervisor_behavior_is_fixture": true,
+  "logging_bodies_are_named_fixtures": true,
+  "vector_set_provider_is_source_not_fixture": true,
+  "all_entry_raw_r0_compared": true,
+  "callee_integer_stack_and_full_nonstack_ram_checked": true,
+  "mode_queues_and_early_errors_exercised": true,
+  "boot_mbr_precedence_uicr_fallback_and_both_missing": true,
+  "boot_zero_one_unaligned_and_high_bit_values": true,
+  "boot_read_order_and_inputs_unchanged": true,
+  "source_selected_constant_data_bytes": 480,
+  "setter_source_data_bytes": 272,
+  "setter_selected_source_data_bytes": 264,
+  "source_data_at_native_verification_addresses": true,
+  "candidate_native_body_execution_forbidden": true,
+  "unicorn_memory_write_hooks_disabled": true,
+  "instruction_identity": false,
+  "full_raw_abi_verified": false,
+  "physical_svc_verified": false,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "driver_sha256": "e19c33779060caa4fc3b2955c9e48690f247dcac4ec0802a9147bac4f15b1aea",
+  "report_sha256": "9653d226d2fc664b14ce989eb4ff5941be7269465e38e0a5392958985473e115",
+  "runtime_report_sha256": "d27abb5b411d14eba723e876186582aee4ae88309e6bc71438e6100ddce0e802",
+  "object_sha256": "a7a5b016680c405a681ff50dde61b006ebce1257c18a5032f1e918726bad8233",
+  "layout": "r1/source-config/runtime/native_dfu_vector_set_verification.ld",
+  "layout_sha256": "a1c02d6666ef69475618ffe2e99292dba25b7350dc60bd17701e36645cce9811",
+  "limitations": [
+    "SVC0/SVC19 handlers and logging are explicit fixtures, not source or physical provider proof.",
+    "Low flash MBR and UICR values are explicit test fixtures, not authenticated readings from a device.",
+    "Selected strings occupy native verification addresses; the8-byte source log bounds compile to a folded tag and are retained only in the raw source object, not selected layout.",
+    "Typed boot reads/supervisor args/log calls, raw R0/callee/SP and full RAM match; raw scratch/APSR/private frame, physical transitions and original image remain open."
+  ]
+}

@@ -46,6 +46,15 @@
     "rtos-unordered-event/evidence.json": "a74514dc2d4e4fd40d68a8327b9208ed859a487019fba3471729f51fafd2d2e8"
   },
   "input_reports": {
+    "native-gxt310-bus/report.json": "3d44f168387d63578e586ba7fddc2da6fec63087634c0c037034dcaae258f75b",
+    "native-gxt310-id/report.json": "07c75e3aa013b240b501d24d6d5db25de467914467775029f30728f1c0081fdf",
+    "native-yhm-chip-id/report.json": "9dbb1d9790bc30d3e75b1aa043f3c0e8475d088364ef7d4384dc9288079d003c",
+    "native-device-checks/report.json": "79ecc0474ce1583c8be7921a2f651a857490495e5be0c5a2695aa9e96d59374a",
+    "native-dfu-vector-set/report.json": "9653d226d2fc664b14ce989eb4ff5941be7269465e38e0a5392958985473e115",
+    "native-dfu-svci-init/report.json": "c9082dee0a58bb920f2889dac5bce09db8bf741db062502333c06e0541830d4a",
+    "native-cmbacktrace-init/report.json": "6692d944b9392b54c6d7295a51613a3bdeb06e8382c37a7d5e96edecdf692ac5",
+    "native-device-reset-startup/report.json": "c2a88f4ecfcdaf54adf1afae0913e6b7119b7d3f0da1e25b0fe850c7f22b170c",
+    "native-peripheral-module/report.json": "8a6edef454df9f1de0fbfa02bb48a40a5da916183e539f6610ef1ce151a45eb2",
     "native-application-entry/report.json": "114cfb4576faefc1072d9b8f8f90e4c365c4a2221a09ee8b001fb825da2dde2f",
     "native-scatter-dispatch/report.json": "76c01523295e5ee383d227aeb13f2d6638ba9f99591b37be3f91f0eadf51a48b",
     "native-scatter-data/report.json": "74dcc9d8ab7f2a74363d8513059cf8af623125feb304ee06c42f5e1842ef1890",
@@ -280,9 +289,9 @@
   },
   "ownership_entries": 3326,
   "counts": {
-    "tested_contract_candidate": 734,
-    "unresolved_source_route": 1220,
-    "compiled_symbol_hint": 1372
+    "tested_contract_candidate": 756,
+    "unresolved_source_route": 1196,
+    "compiled_symbol_hint": 1374
   },
   "providers": {
     "arm_cmsis_freertos_10_5_1": {
@@ -299,7 +308,9 @@
       "compiled_symbol_hint": 5
     },
     "armink_cmbacktrace_1_4_2_compatible": {
-      "unresolved_source_route": 7
+      "unresolved_source_route": 2,
+      "compiled_symbol_hint": 4,
+      "tested_contract_candidate": 1
     },
     "bosch_bma456_sensorapi_2_29_0": {
       "compiled_symbol_hint": 14,
@@ -341,9 +352,9 @@
       "compiled_symbol_hint": 27
     },
     "nordic_nrf5_sdk_17_1_0": {
-      "tested_contract_candidate": 193,
+      "tested_contract_candidate": 195,
       "unresolved_source_route": 226,
-      "compiled_symbol_hint": 364
+      "compiled_symbol_hint": 362
     },
     "qst_qma6100_v1_0_lineage_unlicensed": {
       "compiled_symbol_hint": 3
@@ -388,15 +399,15 @@
       "unresolved_source_route": 12
     },
     "r1_nordic_sdk_provider_adapter": {
-      "tested_contract_candidate": 7,
-      "unresolved_source_route": 4
+      "tested_contract_candidate": 8,
+      "unresolved_source_route": 3
     },
     "r1_nordic_wdt_provider_adapter": {
       "tested_contract_candidate": 2
     },
     "r1_product_specific": {
-      "tested_contract_candidate": 133,
-      "unresolved_source_route": 626,
+      "tested_contract_candidate": 146,
+      "unresolved_source_route": 613,
       "compiled_symbol_hint": 5
     },
     "r1_provider_configuration_glue": {
@@ -429,8 +440,8 @@
     },
     "unknown_generic_device_registry_candidate": {
       "compiled_symbol_hint": 1,
-      "tested_contract_candidate": 28,
-      "unresolved_source_route": 14
+      "tested_contract_candidate": 30,
+      "unresolved_source_route": 12
     },
     "unknown_rtc_device_provider_candidate": {
       "tested_contract_candidate": 10
@@ -453,9 +464,9 @@
       "unresolved_source_route": 8
     },
     "yhmicros_yhm2710_candidate": {
-      "tested_contract_candidate": 28,
+      "tested_contract_candidate": 31,
       "compiled_symbol_hint": 7,
-      "unresolved_source_route": 9
+      "unresolved_source_route": 6
     }
   },
   "exact_instruction_matches_proven": 0,

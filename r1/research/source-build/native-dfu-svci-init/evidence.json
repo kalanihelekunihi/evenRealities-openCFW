@@ -1,0 +1,56 @@
+{
+  "ghidra": {
+    "ghidra-52018.json": "e081b2413716e51e01617179940744dee6c70059372b9af8e4aac4d6122f7f21",
+    "ghidra-52038.json": "4adf7ab1d64d93b1b682a76fedc98205affee4ffa4046d2da85c30d3a7912140",
+    "ghidra-7876c.json": "3abc068842b627e68e7fd6c212f348e8f4b60919c621cf6d7636cc8cad69c0cc",
+    "ghidra-787f0.json": "220fd08fd899f9945d42b199c6ca83ce17269807d2e4abc9879375ffdded6d50",
+    "ghidra-787f4.json": "15f5fb107e2fcdcc609faa58c57c4451c9a84672a822d8a5ca09de9bb82d33aa",
+    "ghidra-78824.json": "3ba388278e9ffa170b4e49445ed11e6dd8674e444c96ba0faa7402c2fb3947d4",
+    "ghidra-7882c.json": "29ff18331522f9c2ef80b5b9669cf7d2c63f135d1d86419b39424011d70b5926",
+    "ghidra-78858.json": "9012dc26da7149d06c38a794bdcf4079dd473ce3a73b68cf1ca1b2f063d5c891",
+    "ghidra-78894.json": "fc7bce0e04240d8f2de7ba2eb8c22903e1757c45b3c5d784bb3a9e14265d3c81"
+  },
+  "rea": {
+    "rea-52018.json": "ab570fd9efa58b1a96b20ccd35057e749606c69dc484a02c3e5dd57fe6086f5b",
+    "rea-7876c.json": "80928073ceca0402bd1a0e1b68eee7fddc788da54f81275bcdd3d4b8290aeb9a"
+  },
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "frozen_corpus_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "ownership_row": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x00052018",
+    "end": "0x000787ed",
+    "size": "162",
+    "recovered_name": "FUN_00052018",
+    "provider_family": "nordic_nrf5_sdk_17_1_0",
+    "source_disposition": "use_nordic_sdk",
+    "upstream_symbol": "ble_dfu_buttonless_async_svci_init",
+    "confidence": "high",
+    "evidence": "Exact function-local SDK evidence and semantic control flow correlate to Nordic SDK 17.1.0 components/ble/ble_services/ble_dfu/ble_dfu_unbonded.c::ble_dfu_buttonless_async_svci_init."
+  },
+  "native_body_ranges": [
+    {
+      "start": "0x52018",
+      "bytes": 32
+    },
+    {
+      "start": "0x7876c",
+      "bytes": 130
+    }
+  ],
+  "native_body_bytes": 162,
+  "native_async_pointer": 537051436,
+  "source_async_state_bytes": 12,
+  "source_data_bytes": 216,
+  "upstream_source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/components/ble/ble_services/ble_dfu/ble_dfu_unbonded.c",
+  "upstream_unmodified_entry": true,
+  "shared_tail_is_recovered_r1_logging_adaptation": true,
+  "locked_ownership_changed": false,
+  "whole_image_identity": false,
+  "gates": [
+    "Source selected Nordic context has12 bytes; final initialization/placement and actual SVC state semantics remain gated.",
+    "Recovered SVC bridges and logging callbacks are tested against fixture providers only.",
+    "No full source startup graph, physical supervisor behavior, raw private ABI or original instruction-image equality is established."
+  ]
+}

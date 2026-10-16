@@ -4652,5 +4652,271 @@
       "Registered MIT CmBacktrace source and commit are available for direct reuse with recovered R1 configuration/adapters; exact vendor checkout and application integration remain unproven.",
       "Raw call/handoff registers, LR/APSR/private stack, physical SCR behavior, reset/startup, historical observer review and byte-identical whole-image integration remain open."
     ]
+  },
+  "native_startup_modules_checkpoint": {
+    "status": "source-compiled-bounded-constructor-and-peripheral-dispatch",
+    "constructor_verification": "native-boot-ctors/verification.json",
+    "constructor_evidence": "native-boot-ctors/evidence.json",
+    "reused_constructor_report": "native-initcalls/report.json",
+    "peripheral_report": "native-peripheral-module/report.json",
+    "peripheral_verification": "native-peripheral-module/verification.json",
+    "peripheral_evidence": "native-peripheral-module/evidence.json",
+    "integrated_source_report": "native-startup-providers/report.json",
+    "source_alias_configuration": "r1/source-config/startup/native-provider-aliases.json",
+    "constructor_body_ranges": [
+      [
+        "0x4e1e4",
+        "0x4e1f5",
+        18
+      ],
+      [
+        "0x5cb4c",
+        "0x5cb61",
+        22
+      ]
+    ],
+    "constructor_combined_body_bytes": 40,
+    "constructor_comparisons": 54,
+    "constructor_null_fault_comparisons": 12,
+    "constructor_callback_observations_per_side": 540,
+    "peripheral_native_bytes": 46,
+    "peripheral_comparisons": 270,
+    "peripheral_callback_observations_per_side": 2700,
+    "direct_application_imports_resolved": 9,
+    "remaining_direct_application_imports": [
+      "ble_dfu_buttonless_async_svci_init",
+      "cm_backtrace_init",
+      "r1_device_module_init",
+      "r1_reset_reason_nordic_adapter"
+    ],
+    "remaining_linked_import_count": 67,
+    "full_linked_graph_execution_verified": false,
+    "external_blocker": false,
+    "open_gates": [
+      "Constructor size40 is a noncontiguous18-byte wrapper plus22-byte shared post-init tail; historical boundary hold is superseded for source routing only.",
+      "Constructor registrars and peripheral leaf providers remain typed callback fixtures in the new behavior receipts.",
+      "Nine direct imports source-link through existing providers and one constructor alias; actual full linked graph/ABI execution remains unverified.",
+      "Four direct application imports, transitive board/peripheral imports, callback and initialized-data ownership remain open.",
+      "Raw argument residue, scratch/APSR/private frames, physical IRQ behavior, historical observer review, original instructions/placement and byte-identical whole-image integration remain open."
+    ]
+  },
+  "native_device_reset_startup_checkpoint": {
+    "status": "source-compiled-bounded-leaf-fixture-verified",
+    "report": "native-device-reset-startup/report.json",
+    "verification": "native-device-reset-startup/verification.json",
+    "evidence": "native-device-reset-startup/evidence.json",
+    "runtime_report": "native-device-reset-runtime/report.json",
+    "data_configuration": "r1/source-config/startup/device-reset-data-regions.json",
+    "device_module_body_ranges": [
+      [
+        "0x5c4c8",
+        74
+      ],
+      [
+        "0x4e914",
+        84
+      ]
+    ],
+    "device_module_native_bytes": 158,
+    "rtc_native_bytes": 26,
+    "thunk_native_bytes": 4,
+    "reset_native_bytes": 80,
+    "supplemental_noop_native_bytes": 2,
+    "supplemental_noop_compiled_instruction_bytes_equal": 2,
+    "source_data_bytes": 248,
+    "comparisons": 16377,
+    "callback_observations_per_side": 85473,
+    "all_entry_raw_r0_compared": true,
+    "rtc_callback_signature": "void(uint32_t)",
+    "leaf_provider_fixtures": true,
+    "full_linked_provider_execution_verified": false,
+    "direct_application_imports_source_linked": 11,
+    "remaining_direct_application_imports": [
+      "ble_dfu_buttonless_async_svci_init",
+      "cm_backtrace_init"
+    ],
+    "remaining_total_linked_import_count": 68,
+    "external_blocker": false,
+    "open_gates": [
+      "Device module size158 includes74 entry bytes and84 shared-tail bytes; supplemental two-byte callback is not another locked route.",
+      "Pre-initialization at0x3510c, GXT310 self-check and reset decode/report remain unresolved source providers, alongside transitive imports.",
+      "Leaf fixtures do not prove actual provider execution or full raw argument residue/APSR/private frames.",
+      "RTC callback uses the existing canonical void(uint32_t) contract; only its two compiled instruction bytes and verification placement match.",
+      "Emulated MMIO read/write values do not establish physical RESETREAS write-one-to-clear or interrupt/bus behavior.",
+      "Initialized-data/callback ownership, full startup execution, historical observer review, original instructions/shared-data placement and byte-identical image integration remain open."
+    ]
+  },
+  "cmbacktrace_init_source_checkpoint": {
+    "report": "native-cmbacktrace-init/report.json",
+    "verification": "native-cmbacktrace-init/verification.json",
+    "evidence": "native-cmbacktrace-init/evidence.json",
+    "runtime": "native-cmbacktrace-runtime/report.json",
+    "comparisons": 10240,
+    "direct_application_imports_resolved": 12,
+    "total_unresolved_imports": 68,
+    "remaining_direct_imports": [
+      "ble_dfu_buttonless_async_svci_init"
+    ],
+    "upstream_unmodified": true,
+    "only_initialization_native_admitted": true,
+    "raw_void_return_r0_equal": false,
+    "full_provider_graph_executed": false,
+    "original_instruction_identity": false,
+    "whole_image_complete": false,
+    "gates": [
+      "Retained logger and DFU providers remain unresolved.",
+      "Other upstream fault/unwind bodies need R1 native contracts and adapters.",
+      "Full raw ABI, state/data/link placement, original compiler and whole-image byte identity remain open."
+    ]
+  },
+  "dfu_svci_source_checkpoint": {
+    "report": "native-dfu-svci-init/report.json",
+    "verification": "native-dfu-svci-init/verification.json",
+    "evidence": "native-dfu-svci-init/evidence.json",
+    "runtime": "native-dfu-startup-runtime/report.json",
+    "comparisons": 10896,
+    "direct_application_imports_resolved": 13,
+    "total_unresolved_imports": 68,
+    "remaining_direct_imports": [],
+    "upstream_entry_source_unmodified": true,
+    "native_shared_tail_recovered_product_source": true,
+    "supervisor_handler_is_fixture": true,
+    "full_provider_graph_executed": false,
+    "original_instruction_identity": false,
+    "whole_image_complete": false,
+    "gates": [
+      "Vector-to-bootloader setter and other68 transitive imports remain unresolved.",
+      "Actual SVC handler implementations, async state semantics and physical transitions remain open.",
+      "Linked graph execution, full raw ABI, source state/data ownership, original compiler and byte-identical firmware remain open."
+    ]
+  },
+  "dfu_vector_set_source_checkpoint": {
+    "report": "native-dfu-vector-set/report.json",
+    "verification": "native-dfu-vector-set/verification.json",
+    "evidence": "native-dfu-vector-set/evidence.json",
+    "runtime": "native-dfu-vector-runtime/report.json",
+    "comparisons": 77568,
+    "linked_dfu_workflows": 16128,
+    "upstream_setter_source_unmodified": true,
+    "vector_set_provider_is_source": true,
+    "supervisor_and_logger_bodies_are_fixtures": true,
+    "direct_application_imports_resolved": 13,
+    "total_unresolved_startup_imports": 67,
+    "dfu_subgraph_unresolved_imports": 4,
+    "whole_startup_graph_executed": false,
+    "original_instruction_identity": false,
+    "whole_image_complete": false,
+    "gates": [
+      "Boot-address values and supervisor behavior are test fixtures; physical MBR/UICR/SVC behavior remains unverified.",
+      "Retained logging, device/sensor/event/database providers and other67 transitive imports remain source work.",
+      "Full startup execution, raw ABI, state/data ownership, original compiler and byte-identical image remain open."
+    ]
+  },
+  "device_checks_source_checkpoint": {
+    "report": "native-device-checks/report.json",
+    "verification": "native-device-checks/verification.json",
+    "evidence": "native-device-checks/evidence.json",
+    "runtime": "native-device-checks-runtime/report.json",
+    "comparisons": 110424,
+    "native_yhm_ignores_write_results": true,
+    "old_generic_configure_is_not_native_provider": true,
+    "source_delay_pointer_relocation": true,
+    "leaf_providers_are_fixtures_in_new_receipt": true,
+    "existing_yhm_write_discovery_state_delay_source_linked": true,
+    "remaining_direct_application_imports": [],
+    "total_transitive_startup_imports": 71,
+    "whole_startup_graph_executed": false,
+    "physical_sensors_and_timing_verified": false,
+    "original_instruction_identity": false,
+    "whole_image_complete": false,
+    "gates": [
+      "YHM chip ID and GXT bus/enable/ID/disable leaves remain source work; expanded graph exposes seven deeper imports.",
+      "New per-body receipt uses named write/delay/logging/sensor fixtures, despite existing source write/delay integration.",
+      "Old generic configure write-error return differs from native and remains excluded as this provider.",
+      "Write-pointer normalization excludes private frames; source state/layout, all raw ABI, physical behavior and byte-identical image remain open."
+    ]
+  },
+  "yhm_chip_id_source_checkpoint": {
+    "report": "native-yhm-chip-id/report.json",
+    "verification": "native-yhm-chip-id/verification.json",
+    "evidence": "native-yhm-chip-id/evidence.json",
+    "runtime": "native-yhm-chip-runtime/report.json",
+    "comparisons": 98304,
+    "source_register8_initial_zero": true,
+    "read_status_ignored": true,
+    "initial_byte_selects_messages": true,
+    "late_byte_reloaded_after_callbacks": true,
+    "read_pointer_private_frame_normalized": true,
+    "source_yhm_read_write_discovery_state_delay_linked": true,
+    "read_and_log_bodies_are_fixtures_in_new_receipt": true,
+    "total_transitive_startup_imports": 70,
+    "remaining_direct_application_imports": [],
+    "whole_source_graph_executed": false,
+    "physical_bus_verified": false,
+    "original_instruction_identity": false,
+    "whole_image_complete": false,
+    "gates": [
+      "Actual source transport execution and physical bus/register state remain open.",
+      "Read pointer is normalized to typed byte effects; raw frame/padding behavior is unproven.",
+      "Full startup graph, all raw ABI, source initialization/link placement, original compiler and byte-identical image remain open."
+    ]
+  },
+  "gxt310_id_source_checkpoint": {
+    "report": "native-gxt310-id/report.json",
+    "verification": "native-gxt310-id/verification.json",
+    "graph_verification": "native-gxt310-id/graph-verification.json",
+    "evidence": "native-gxt310-id/evidence.json",
+    "runtime": "native-gxt310-id-runtime/report.json",
+    "direct_comparisons": 137536,
+    "source_selfcheck_workflows": 44096,
+    "native_private_word_four_bytes_matched": true,
+    "initial_two_byte_candidate_superseded_before_admission": true,
+    "actual_source_selfcheck_both_veneers_and_shared_reader": true,
+    "lower_bus_power_read_and_logging_providers_are_fixtures": true,
+    "log_snapshot_and_late_return_verified": true,
+    "raw_source_bounds_folded_out_of_selected_graph": true,
+    "total_transitive_startup_imports": 69,
+    "remaining_direct_application_imports": [],
+    "power_down_row_not_promoted": true,
+    "whole_startup_graph_executed": false,
+    "physical_sensor_verified": false,
+    "original_instruction_identity": false,
+    "whole_image_complete": false,
+    "gates": [
+      "GXT bus lock/unlock, pair enable/disable and lower register read remain source work.",
+      "Raw private frames and unrelated padding, full startup graph and physical sensors remain open.",
+      "Final source state/data/link ownership, original compiler and byte-identical image remain open."
+    ]
+  },
+  "gxt310_bus_source_checkpoint": {
+    "report": "native-gxt310-bus/report.json",
+    "verification": "native-gxt310-bus/verification.json",
+    "evidence": "native-gxt310-bus/evidence.json",
+    "runtime": "native-gxt310-bus-runtime/report.json",
+    "comparisons": 69340,
+    "native_entries": 7,
+    "native_unique_code_bytes": 118,
+    "source_cold_state_bytes": 24,
+    "source_name_bytes": 8,
+    "cold_state_matches_authenticated_scatter_observation": true,
+    "whole_initialized_data_source_owned": false,
+    "write_null_preserves_prior_pointer": true,
+    "request_store_order_and_truncation_verified": true,
+    "registry_dispatch_and_lookup_are_fixtures_in_body_receipt": true,
+    "existing_source_registry_linked": true,
+    "source_veneer_tail_structure_verified": true,
+    "initial_inlined_candidate_superseded_before_admission": true,
+    "total_transitive_startup_imports": 65,
+    "remaining_direct_application_imports": [],
+    "whole_startup_graph_executed": false,
+    "physical_i2c_verified": false,
+    "original_instruction_identity": false,
+    "whole_image_complete": false,
+    "gates": [
+      "GXT mode enable/disable remains source work, together with other transitive providers.",
+      "Only24 bytes of cold state and8 name bytes are source-admitted here; whole initialization/link ownership remains open.",
+      "Existing registry source links separately; new body tests use named registry/dispatch fixtures.",
+      "Full raw ABI/private frames, physical bus, actual whole startup, original compiler and byte-identical image remain open."
+    ]
   }
 }

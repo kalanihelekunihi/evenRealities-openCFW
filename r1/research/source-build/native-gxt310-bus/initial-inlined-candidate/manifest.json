@@ -1,0 +1,22 @@
+{
+  "status": "superseded-before-admission",
+  "reason": "Audit found Clang inlined both native four-byte veneers. Core functions now use noinline to retain source tail-call structure.",
+  "files": {
+    "r1/research/source-build/native-gxt310-bus/report.json": {
+      "snapshot": "report.json",
+      "sha256": "a5a5433a1cafb2ddaa15f1a6c4ee8e0a6c52a2ff9a11aef7dd1802b4ec6c9fff"
+    },
+    "r1/research/source-build/native-gxt310-bus/verification.json": {
+      "snapshot": "verification.json",
+      "sha256": "c3e707b6d4b969458c375d8095f66ad97d5950650645e4104ac5c3e00d2979ed"
+    },
+    "r1/research/source-build/native-gxt310-bus/native_gxt310_bus.o": {
+      "snapshot": "native_gxt310_bus.o",
+      "sha256": "53c023fb61568809d902aca180d1631827edd1be2e919a5e6aa1f1be0ed59f1e"
+    },
+    "r1/components/runtime/native_gxt310_bus.c": {
+      "snapshot": "native_gxt310_bus.c",
+      "sha256": "daceb047ecc3c901bc15d6bec5fd722c38dac88be774ac284b19ee8fb001ef64"
+    }
+  }
+}

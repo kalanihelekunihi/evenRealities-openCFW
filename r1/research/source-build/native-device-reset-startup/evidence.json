@@ -1,0 +1,75 @@
+{
+  "ghidra": {
+    "ghidra-5c4c8.json": "ef2d90f584eb414c840eab3ede234072f1ea851472214c5632b6898dd1f6a0dc",
+    "ghidra-4e914.json": "1dfba91a76bd48b8e209352561e3bc696c39e42997b5eca2b6234295ef7f798b",
+    "ghidra-4e9ec.json": "bfa78d79149be36396aacf6ee605178eba16d240442b9a010e228b7cf23f5de2",
+    "ghidra-4e9e8.json": "36fc44552f43e16c43f75b02295c6cfd1d323804ed40cbef07b0c764aec4fcb7",
+    "ghidra-77e98.json": "7404829b0d586c465246754f847b1480984d85da4e8bfa83ae235b66bdf8e12f",
+    "ghidra-5c514.json": "4e611f764a3cadcf4277ccdca574eeff245f4e63562d9d27d7b61703337b20bc",
+    "ghidra-5c544.json": "7a66c45286bcf2b5341c05c2e3905a7e50edebd555a0883ebe10613c56fa32c1",
+    "ghidra-4e96c.json": "4c39992c2c94797be47a304865c16f3a56b17482fcfae009e438fdb3c7551506",
+    "ghidra-4e99c.json": "77f1494e9f928979111ec0f6c739313acc5c1eade3f53ff1d8f9a7dd82f9fe4d",
+    "ghidra-77eec.json": "306a0263d4cca084a47078cc8c19cc9dea685a525e6c654a850ad86e78f184cb",
+    "ghidra-77f14.json": "33ac84ee7be358b78ade54cbb7f11d6564be3c925ac6e3519278f12ecbbf7e99",
+    "ghidra-5c53c.json": "93e5290b9ad60d583b3b63d4283ea3d37c0e91e498dbed8e94076f9c1a84b9af",
+    "ghidra-4e968.json": "ee9025610a7a61875a259e0156ad1bd1b28696b0cf13eaa8ef68fa2d4dcf5128",
+    "ghidra-4e994.json": "3ccc1be50950278787687a7f97b8e89f7f4ec8ef2d6feea281d71cccb253dac3",
+    "ghidra-4ea0c.json": "d2ff4c21571da6ad75e1c768ff5424cc4cf72df974c3199184adf62a1d567373",
+    "ghidra-77ee8.json": "9edd7c89bc731c0e95ca1a45a320a9e406cdc32f66181c99ccc638799e7671fd",
+    "ghidra-77f0c.json": "de6665fee3e2355ca1095f4253dd229c04d2804b48ac041857552c818a38142e",
+    "ghidra-77f2c.json": "06b312771c5dafe24241833874667dfcba3cde0babd30ba132a5d9c5f302aecd",
+    "ghidra-4ea08.json": "16e6f092a41a1365bbbf8f1671cfaee7c4466333f67c1b9a2da5465620f94af8",
+    "ghidra-4ea10.json": "568c7eb5a0873da2aab72f86cf86cfe882769deaab5742a2b926a644bbd8456f"
+  },
+  "rea": {
+    "rea-4ea10.json": "3e141dc9f67aa9b3fafa78835e452b9e91fe1bdcf59b2c6a7115a4f9cb29d7b0",
+    "rea-4e9e8.json": "79634e8d607d15066097047b53be97ed9ab639f570e4cf1804914e7e2f82cd3d",
+    "rea-4e9ec.json": "47811ba5fa5b26c8edb81a368108a29a5377ffea06b70ff2908b5b0ee91ea88b",
+    "rea-5c4c8.json": "f2dc53cc99ad6db1822c16839a142624e53694bc7f1fce77792bbbcd389eb93b",
+    "rea-77e98.json": "4269636626b01609bc746fe5f7338a74c61b1bc1c1e2c3e7bb85867e7a9bcd55",
+    "rea-4e914.json": "064dd2dd79460e18747ef954bb21e622764d327ac3508e96edd84ca5c806839f"
+  },
+  "device_module_original_row": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x0005c4c8",
+    "end": "0x0005c511",
+    "size": "158",
+    "recovered_name": "FUN_0005c4c8",
+    "provider_family": "r1_product_specific",
+    "source_disposition": "clean_room_behavior_only",
+    "upstream_symbol": "r1_device_module_init",
+    "confidence": "high",
+    "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+  },
+  "device_module_body_ranges": [
+    {
+      "start": "0x5c4c8",
+      "bytes": 74
+    },
+    {
+      "start": "0x4e914",
+      "bytes": 84
+    }
+  ],
+  "device_module_total_bytes": 158,
+  "native_rtc_bytes": 26,
+  "native_thunk_bytes": 4,
+  "native_reset_adapter_bytes": 80,
+  "supplemental_noop_bytes": 2,
+  "supplemental_noop_not_locked_route": true,
+  "source_data_bytes": 248,
+  "rtc_noop_source_instruction_bytes_equal": 2,
+  "leaf_provider_fixtures": true,
+  "full_linked_graph_execution_verified": false,
+  "physical_reset_w1c_semantics_verified": false,
+  "locked_ownership_changed": false,
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "frozen_corpus_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "instruction_identity": false,
+  "initial_typed_return_receipt_sha256": "7ac5e12c67a3c564f0c4635ad4382f2ecdac54a41ef4366728347d3717f6a26d",
+  "rtc_callback_signature_header": "r1/components/board/native_clock_bootstrap.h",
+  "rtc_callback_signature_header_sha256": "cf88dfb45982d919e17cd1e85846d64e6494128b9df5b77da5f364b16fd9de4e",
+  "rtc_callback_signature": "void(uint32_t)",
+  "raw_r0_checks_strengthened_without_firmware_object_change": true
+}

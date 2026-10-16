@@ -88,8 +88,90 @@
         "whole-path startup-power root/clock child composition beyond the bounded native query/critical oracle",
         "resident-ROM addresses bind externally and selected symbols link, but ROM timing and logger/runtime behavior remain unqualified",
         "current exploratory link verifies 256 vectors, 63 initialized pointer relocations and bounded scatter destinations; final load/run placement and startup execution remain unproven",
-        "whole-image body and code/data coverage have not been established"
-      ]
+        "whole-image body and code/data coverage have not been established",
+        "Shutdown debug-release 0x42252e passes 90 bounded native/C cases; its critical-save and delay children are controlled in that isolated receipt.",
+        "Startup information-cache 0x41c320 passes 180 bounded native/C guard, read-chain, failure and record cases; its downstream device read remains controlled.",
+        "The earlier root/debug/info/trim comparison passes 1396 cases; its device reads and clock lower contracts are controlled, and two trim bytes were not visited in that replay.",
+        "The earlier root/debug/info/trim/SPOT comparison passes 1396 cases, covering all 668 stock SPOT bytes and 1056 installed-slot fixtures. Its SPOT source is an isolated Cortex-M4 build with stock-bound named callbacks.",
+        "Shared-memory 0x41be36 passes 576 direct cases with 260/260 stock bytes visited, and 1420 composed startup fixtures reach 210/260 bytes. Its power callback and status poll remain controlled.",
+        "MCU-memory 0x41bbd0 passes 2304 direct cases with 450/450 stock bytes visited, after fixing its high return word. The 1420-case composed startup replay reaches 318/450 bytes; its lower calls remain controlled.",
+        "Device-mode selector 0x421548 passes 520 direct cases with 38/38 stock bytes and 1420 composed fixtures reaching 34/38 bytes. Its downstream read dispatcher remains controlled.",
+        "All eleven root child entries execute in a 1420-case stock/C startup replay. Mode-enter reaches 188/314 and mode-leave 230/350 stock bytes; their other branches and lower provider/ROM timing contracts, production M55 execution and whole-image gates remain open.",
+        "Direct MSPI enter/leave comparisons visit 314/314 and 350/350 stock bytes across 3590 and 7234 cases. Descriptor, clock, power, poll, delay and callback lower contracts are controlled; production M55 and whole-image gates remain open.",
+        "INFO dispatcher 0x4213e6 passes 7200 direct cases visiting 350/354 stock bytes; the four unvisited bytes are two fallback branches after the invalid-space gate. A 1420-case composed replay reaches 224/354 dispatcher and 788/810 root bytes with resident ROM read controlled. Production M55 and whole-image behavior remain open."
+      ],
+      "shutdown_debug_release_42252e": {
+        "path": "g2/build/c-firmware/20261016/boot-shutdown-debug-release-42252e/oracle-receipt.json",
+        "sha256": "5554b79954eeea37813bf19fae785baf8a3eb1097acf400c67dbf841a3b96b11"
+      },
+      "startup_info_cache_41c320": {
+        "path": "g2/build/c-firmware/20261016/boot-startup-info-cache-41c320/oracle-receipt.json",
+        "sha256": "2c72e39328240a7f9e30a23d3d1141cedaec64362e425e98353a7ef647e3d496"
+      },
+      "root_debug_info_composed": {
+        "path": "g2/build/c-firmware/20261016/boot-root-with-debug-info/receipt.json",
+        "sha256": "3962aaf84191cd956bceda225ebfe5816ca5f0cbb6de8ab848f4894cb91ea477"
+      },
+      "root_debug_info_trim_composed": {
+        "path": "g2/build/c-firmware/20261016/boot-root-with-debug-info-trim/receipt.json",
+        "sha256": "7225936830962da0e13ff7c0b45d38ddc66f93a8c90971b8795496ae409daa5d"
+      },
+      "root_debug_info_trim_spot_composed": {
+        "path": "g2/build/c-firmware/20261016/boot-root-with-debug-info-trim-spot-m4/receipt.json",
+        "sha256": "feec1bf0dd134eee6f0a716db16bb5f98180b5142300690322887f263da99568"
+      },
+      "memory_m33_overlay": {
+        "path": "g2/build/c-firmware/20261016/boot-memory-m33-overlay/build-receipt.json",
+        "sha256": "715880e1d69709c08b2e763ee536c25f86e4152cea18ba93aa7a46440853b207"
+      },
+      "shared_memory_41be36": {
+        "path": "g2/build/c-firmware/20261016/boot-shared-memory-41be36/receipt.json",
+        "sha256": "23b4220046e4f692fa5b003c38802cb81d9b000a808eb15405f577001c10dda5"
+      },
+      "root_with_shared_memory_composed": {
+        "path": "g2/build/c-firmware/20261016/boot-root-with-spot-shared-m4/receipt.json",
+        "sha256": "9549ad3aec6690e696e271f4040d57f0691be66c46dd0e9b4744dfd5a11a44c9"
+      },
+      "mcu_memory_41bbd0": {
+        "path": "g2/build/c-firmware/20261016/boot-mcu-memory-41bbd0/receipt.json",
+        "sha256": "03fe4973cca5e0e707dd240a3f62777a87cb27aa20c4499fdc01b97c828c02f6"
+      },
+      "root_with_mcu_memory_composed": {
+        "path": "g2/build/c-firmware/20261016/boot-root-with-spot-shared-mcu-m4/receipt.json",
+        "sha256": "3e47e957ea1cbd4740a09f90fcc05007f7aee7bca38b2d06d96379794c3bf2e0"
+      },
+      "device_mode_gate_421548": {
+        "path": "g2/build/c-firmware/20261016/boot-device-mode-421548/receipt.json",
+        "sha256": "c3c4c36e807c120804d355e49680d8da8c93f5fd7f5dd2eefc87897857b56a95"
+      },
+      "root_with_device_mode_gate": {
+        "path": "g2/build/c-firmware/20261016/boot-root-with-device-gate/receipt.json",
+        "sha256": "eededdd038b1f434bc0047b04281885cb0a461de7f6d1607e36fdc3173b0c92e"
+      },
+      "mspi_m33_overlay": {
+        "path": "g2/build/c-firmware/20261016/boot-mspi-m33-overlay/build-receipt.json",
+        "sha256": "05622f518eda98a0759d7036512ad0b1212dc921038ed3ce8d88e1de52aef1fb"
+      },
+      "root_with_both_mspi_modes": {
+        "path": "g2/build/c-firmware/20261016/boot-root-with-both-mspi-modes/receipt.json",
+        "sha256": "4de72f4674f64363d81dc84fa7f0b0ef53bb0dd7f08e797c873f7fefd43064b7"
+      },
+      "mspi_mode_enter_41bf84": {
+        "path": "g2/build/c-firmware/20261016/boot-mspi-enter-41bf84/receipt.json",
+        "sha256": "78cba20bc0e456eb32f4909290a1cd89f53e23ed7b4bee8ce22a05cf8bc7c7c2"
+      },
+      "mspi_mode_leave_41c17a": {
+        "path": "g2/build/c-firmware/20261016/boot-mspi-leave-41c17a/receipt.json",
+        "sha256": "f7651ff46d904965fbeddfae717ebb1259e081438ab4d77dca57cf60f04353fb"
+      },
+      "info_dispatch_4213e6": {
+        "path": "g2/build/c-firmware/20261016/boot-info-dispatch-4213e6/receipt.json",
+        "sha256": "2b49ad45eb35f188a478eafabd38587f1688543e4e6e53cfda12d0d91ba8b814"
+      },
+      "root_with_info_dispatch": {
+        "path": "g2/build/c-firmware/20261016/boot-root-with-info-dispatch/receipt.json",
+        "sha256": "b5d09ce108cf2ad90741efd94b83d078928b4db9170ae909f8fd3db77bdb92c6"
+      }
     },
     "touch": {
       "receipt": {
@@ -181,11 +263,11 @@
     "apollo_main": {
       "receipt": {
         "path": "g2/build/c-firmware/20261014/main-post-tail-c-replay/receipt.json",
-        "sha256": "e2138d2b4cce9bd9d7a26dbcee664129af045d7b3d601ead04445ca156345b02"
+        "sha256": "cff35b99fc8d6cbebe10ba1359384ea6a19ede7196620c05997e6547b849eb56"
       },
       "candidate": {
-        "path": "g2/build/c-firmware/20261015/main-system-close-active-app-get-443504/apollo-main-system-close-active-app-get-443504.o",
-        "sha256": "b16ae170c23233bbf3da1cd1f5428fe6fe0e7043240488ab71e22167ba40741d"
+        "path": "g2/build/c-firmware/20261016/main-legal-regulatory-chain/apollo-main-legal-regulatory-chain.o",
+        "sha256": "e34fc231a2bb7c8168ac3b3cfedd95cb9ba0d7639d983a2cba4a788a28a5f3fb"
       },
       "prior_dm_registry_extent_gate": {
         "path": "g2/build/c-firmware/20261015/main-dm-registry-extent-gate/receipt.json",
@@ -767,6 +849,54 @@
         "path": "g2/build/c-firmware/20261015/main-system-close-active-app-get-443504/receipt.json",
         "sha256": "2064be7bc463e881ce6990ca5fb49f813cd2c56539f5f55e20fb7b1fef02a4e9"
       },
+      "production_test_screen_event_5cf7f2": {
+        "path": "g2/build/c-firmware/20261015/main-production-test-screen-event-5cf7f2/receipt.json",
+        "sha256": "62f548dc9c0dde29ed194467b1acd3dad38d2eefb435f79302a2c3f82e42f416"
+      },
+      "lv_color_make_441068": {
+        "path": "g2/build/c-firmware/20261015/main-lv-color-make-441068/receipt.json",
+        "sha256": "6ca91dd8dde37820d302b8ad3862ebdf10fd2f56000a408bee90a0ce4a393a8e"
+      },
+      "gray_screen_event_5cf67e": {
+        "path": "g2/build/c-firmware/20261015/main-gray-screen-event-5cf67e/receipt.json",
+        "sha256": "685b87167f7174483f8acf3d84f3f93f54390d58121fb8f434dfe536d2894866"
+      },
+      "test_screen_registry_context_min": {
+        "path": "g2/build/c-firmware/20261015/main-test-screen-registry-context-min/receipt.json",
+        "sha256": "00ec86f5b21c2f4cc3557b509e949cef48340a4d3e0102a90f316636ecc7ea5c"
+      },
+      "distortion_screen_event_5cf330": {
+        "path": "g2/build/c-firmware/20261016/main-distortion-screen-event-5cf330/oracle-receipt.json",
+        "sha256": "50872c950ca9fe8c40e486d532dd306eef1d645ffdd83bf74e64596c3b7a7170"
+      },
+      "distortion_style_wrappers": {
+        "path": "g2/build/c-firmware/20261016/main-distortion-style-wrappers/oracle-receipt.json",
+        "sha256": "28be1bf95f011b1f45874c55e9c4661bc8f071b442417ded7c4fd66e1add2258"
+      },
+      "distortion_screen_closure": {
+        "path": "g2/build/c-firmware/20261016/main-distortion-screen-closure/receipt.json",
+        "sha256": "9aedaf5c61fc943e9a710bc6908791a3cc8eeea5680755af22d044b721836439"
+      },
+      "legal_regulatory_event_5bf7b8": {
+        "path": "g2/build/c-firmware/20261016/main-legal-regulatory-event-5bf7b8/oracle-receipt.json",
+        "sha256": "488cbff923ebcb875db09378cdab934ce4cb09324530e874d54933f1fd3c1ed9"
+      },
+      "legal_fade_in_58c238": {
+        "path": "g2/build/c-firmware/20261016/main-legal-fade-in-58c238/oracle-receipt.json",
+        "sha256": "704691ee50b83a223f133c3e53a3ad380651bb42054b754533f09aca684465b2"
+      },
+      "legal_fade_helpers": {
+        "path": "g2/build/c-firmware/20261016/main-legal-fade-helpers/oracle-receipt.json",
+        "sha256": "2a011c5210a4f8412ee0638b79671cbd75818f90d79dbb2c9319d8ca1518c7b4"
+      },
+      "legal_regulatory_chain": {
+        "path": "g2/build/c-firmware/20261016/main-legal-regulatory-chain/receipt.json",
+        "sha256": "06977e9bbbb59e9e078346edf140338e6aba8efa6c32207b17abbf309b0cbb20"
+      },
+      "legal_page_helpers": {
+        "path": "g2/build/c-firmware/20261016/main-legal-page-helpers/oracle-receipt.json",
+        "sha256": "7bc0fa2b577bc5e2d4b1363520a558e884cdba0fc1807fd749dd01e313dac8e9"
+      },
       "settings_last_message_ram_extent": {
         "current_source_receipt": {
           "path": "g2/build/c-firmware/settings-live-buffers-round1007/receipt.json",
@@ -776,7 +906,7 @@
         "required_minimum_bytes": 104,
         "integrated": true
       },
-      "unresolved_count": 187,
+      "unresolved_count": 182,
       "unresolved_symbols": [
         "audio_ble_att_table_main",
         "audio_ble_att_table_secondary",
@@ -812,6 +942,7 @@
         "audio_efs_transfer_state",
         "audio_fault_unmapped_code_message_509b48",
         "audio_file_lfs_context",
+        "audio_legal_regulatory_build_5bf332",
         "audio_registry_ring_connect_buffer",
         "audio_registry_ring_connect_parse_5ce990",
         "audio_ring_battery_callback_manager",
@@ -883,10 +1014,6 @@
         "audio_uart_registry_callback_59f236",
         "audio_uart_registry_callback_5b0476",
         "audio_uart_registry_callback_5b06aa",
-        "audio_uart_registry_callback_5bf7b8",
-        "audio_uart_registry_callback_5cf330",
-        "audio_uart_registry_callback_5cf67e",
-        "audio_uart_registry_callback_5cf7f2",
         "audio_uart_registry_callback_5e44f6",
         "audio_uart_registry_callback_5f958c",
         "audio_uart_registry_callback_5f9924",
@@ -905,8 +1032,6 @@
         "audio_uart_registry_context_20002ce0",
         "audio_uart_registry_context_20002e34",
         "audio_uart_registry_context_20003064",
-        "audio_uart_registry_context_20003080",
-        "audio_uart_registry_context_200030a0",
         "audio_uart_registry_context_20003a40",
         "audio_uart_registry_context_20003a5c",
         "audio_uart_registry_context_20003bd0",
@@ -969,9 +1094,12 @@
       "source_complete": false,
       "full_payload_linked": false,
       "remaining_gate": [
-        "187 current imports; the dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
+        "182 current imports; the dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
         "All eight DM dispatch entries and the exposed security children now have C bodies; whole-image source and placement remain open.",
         "DM storage is a 196-byte bounded C-owned block with a registry alias; full allocation extent and final RAM placement remain open.",
+        "Gray and production-test UI registry contexts each have only an observed eight-byte C reservation; full allocation extent, initialization and final RAM placement remain open.",
+        "Distortion-screen 0x5cf330 and six style wrappers are C-bound with 28 callback and 48 wrapper stock comparisons. The 24x24 pixel resource and two text strings match stock bytes; final RAM and image placement remain open.",
+        "Legal-regulatory UI callback 0x5bf7b8, fade action 0x58c238 and two fade helpers are C-bound with 140, 300 and 64 controlled native comparisons; seven page-helper/style entries have 112 direct cases. The page builder 0x5bf332 remains an import; its text and bitmap assets, root-cell allocation extent and final RAM placement remain open.",
         "Complete data/startup/layout and physical execution remain unproved."
       ]
     }

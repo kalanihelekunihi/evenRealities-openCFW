@@ -1,0 +1,40 @@
+{
+  "comparisons": 10896,
+  "counts": {
+    "entry": 3216,
+    "restore": 7680
+  },
+  "callback_observations_per_side": 79988,
+  "supervisor_calls_per_side": {
+    "0": 2136,
+    "19": 9636
+  },
+  "trace_sha256": "c723d5d428a5b2a001e7085d69733216bbdd1718245fe45d4871fd6042315f07",
+  "upstream_entry_and_source_restore_executed": true,
+  "actual_svc0_bridge_executed": true,
+  "supervisor_behavior_is_fixture": true,
+  "vector_set_and_logging_bodies_are_named_fixtures": true,
+  "all_entry_raw_r0_compared": true,
+  "callee_integer_stack_and_full_nonstack_ram_checked": true,
+  "all_three_mode_values_exhaustive_per_log_group": true,
+  "independent_seeded_six_mode_queues": true,
+  "early_error_and_state_mutation_paths": true,
+  "source_constant_data_bytes": 216,
+  "source_data_at_native_verification_addresses": true,
+  "candidate_native_body_execution_forbidden": true,
+  "unicorn_memory_write_hooks_disabled": true,
+  "instruction_identity": false,
+  "full_raw_abi_verified": false,
+  "physical_svc_verified": false,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "driver_sha256": "0f29494ed0ced3fb1c273ffa341b846926316e6bb94e56de3847ec7ed76c6cd6",
+  "report_sha256": "c9082dee0a58bb920f2889dac5bce09db8bf741db062502333c06e0541830d4a",
+  "object_sha256": "fcdf0ace435f63cd1f8c1fa835497d3fb708f661fd1e920f2bb05f8bf7120e38",
+  "layout": "r1/source-config/runtime/native_dfu_svci_verification.ld",
+  "layout_sha256": "eebcf08147978b988501dc06f3bdee00690d11d3ca3268a4767a382fc23c5806",
+  "limitations": [
+    "SVC0/SVC19 handlers, bootloader vector setter and logging are explicit fixtures, not source or physical provider proof.",
+    "Native verification data/state addresses do not establish whole-image linker placement or startup ownership.",
+    "Typed supervisor args, log calls, raw R0/callee/SP and full RAM match; other raw scratch/APSR/private frame and original instructions remain open."
+  ]
+}

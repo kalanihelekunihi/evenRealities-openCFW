@@ -1,0 +1,50 @@
+{
+  "ghidra": {
+    "ghidra-78590.json": "9d4b69c6c93c8b19040b8105e4c616f5447713e1fe3bb9ab596112cf4a424afe",
+    "ghidra-7865c.json": "9e92f724d89fb0162321306efcfc685e6c897af09a1b61b47a9fb853b7d0a81c",
+    "ghidra-78664.json": "920ae96c76ce963d8e0cf96064457493be8b9f29da21481274015223af304543",
+    "ghidra-78698.json": "4e248316feaa3671688824b0af70982e4868cdf29a347486392f1d72a58b0e7c",
+    "ghidra-786c4.json": "dd3557d08b18d7bc9a360fb45c96609e8395521d309b077a3c7dfd0f5e3e7dd1",
+    "ghidra-78700.json": "3b9d02620bcdb50492a215f4f1e7576794a0914b9d6f2729e02b7c7025ff2382",
+    "ghidra-78734.json": "4a9cd9afd103c9674136769c601ec7dffcdecdfef985c452fd9065cbe48a3790",
+    "ghidra-78754.json": "672d8399631f2f077f3a3edb1c05c5a0b465e0d224b1f1cdc4aff7c792003ee1"
+  },
+  "rea": {
+    "rea-78590.json": "492f81f100f00612754e334cdd22266031e1f66c3b1aaaf644ed2284bcbfb7fd"
+  },
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "frozen_corpus_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "ownership_row": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x00078590",
+    "end": "0x00078659",
+    "size": "202",
+    "recovered_name": "FUN_00078590",
+    "provider_family": "nordic_nrf5_sdk_17_1_0",
+    "source_disposition": "use_nordic_sdk",
+    "upstream_symbol": "nrf_dfu_svci_vector_table_set",
+    "confidence": "high",
+    "evidence": "Exact function-local SDK evidence and semantic control flow correlate to Nordic SDK 17.1.0 components/libraries/bootloader/dfu/nrf_dfu_svci.c::nrf_dfu_svci_vector_table_set."
+  },
+  "native_body_bytes": 202,
+  "source_data_bytes": 272,
+  "selected_source_data_bytes": 264,
+  "source_log_bounds_folded_not_selected_layout": true,
+  "boot_mbr_pointer": "0x00000ff8",
+  "boot_uicr_fallback_pointer": "0x10001014",
+  "missing_boot_result": 4,
+  "upstream_setter_source_unmodified": true,
+  "macro_adapter": "Isolated nrf_log.h for original nrf_dfu_svci.c; generates padded prefix/original string pairs and forwards to source dual logging",
+  "graph_setter_provider_is_actual_source": true,
+  "physical_supervisor_is_fixture": true,
+  "whole_startup_graph_executed": false,
+  "locked_ownership_changed": false,
+  "whole_image_identity": false,
+  "gates": [
+    "Fixtures supply low flash/UICR values, SVC0/SVC19 behavior and logging bodies; no physical transition or provisioning claim.",
+    "Source async state is used by the linked graph; final source startup state/layout ownership remains open.",
+    "Eight-byte raw source log bounds fold into the header constant and are not selected layout bytes.",
+    "Full linked startup execution, raw ABI/private frames, instruction identity and whole image remain open."
+  ]
+}

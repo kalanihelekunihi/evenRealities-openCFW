@@ -1,0 +1,25 @@
+{
+  "ghidra": {
+    "ghidra-588a4.json": "56db70f184e10d8d0382a25fb205675a52160382a07b87b588715c9aab04fbdc",
+    "ghidra-588f8.json": "445eca041053caae7e219cf06e571469912ac4fc6b2f793d9564d2ffcf4667bf",
+    "ghidra-9cabc.json": "c00451a51b32aed3cee68a26f9dd266b4f406c68aeaa20b5c6b53fd01040cc1b",
+    "ghidra-c37f4.json": "1b8d925e7c67dc23a424ef5c3fc04aedad12703095bdcdb180bc5027de91fe68"
+  },
+  "rea": {
+    "rea-588a4.json": "5570f01977a46218394b58ddaa322cb71c225e1765dd99214b24fafabc77ade6"
+  },
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "frozen_corpus_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "native_body_bytes": 84,
+  "native_literal_bytes": 28,
+  "whole_image_identity": false,
+  "compiler_configuration": "O0/fno-inline preserves all four native range field stores; upstream source unchanged",
+  "native_zero_stack_branch": "BEQ preserves flags from stack-size SUBS across non-flag-setting code-size SUB.W; zero code alone does not log",
+  "upstream_admission": "Initialization only; compiled fault/unwind bodies remain untested hints",
+  "gates": [
+    "Native R0 scratch differs for void return; full raw ABI/private frames open.",
+    "Logger remains fixture in behavior tests and unresolved in integrated source graph.",
+    "Native state placement used by verifier is not complete image linker ownership.",
+    "Pinned compatible upstream interval is attributable MIT reuse, not proof of exact vendor checkout."
+  ]
+}

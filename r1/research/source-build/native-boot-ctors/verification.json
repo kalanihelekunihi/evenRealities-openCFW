@@ -1,0 +1,24 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "c00d0b8aa569bd64cc9b26ac44d40529bec07abed728b59bde689e453195a1ee",
+  "object_sha256": "700909b067ec10922ab046c382711f1dcd096e148cf4bfdaae9634b33c876ad7",
+  "driver_sha256": "e9db87107944915e16270492fa8f543a605e69bba2f7c50eeeb6e03288c3d0bc",
+  "independent_calls_reset_xpsr": true,
+  "boot_combined_noncontiguous_body_bytes": 40,
+  "boot_wrapper_bytes": 18,
+  "post_init_shared_tail_bytes": 22,
+  "registrar_bodies_are_fixtures": true,
+  "instruction_identity": false,
+  "trace_sha256": "02025b598cc8a845009a75fc3afc85c56c5f39ff9288b91a1b38b120599c8344",
+  "comparisons": 54,
+  "null_target_fault_comparisons": 12,
+  "callbacks_per_implementation": 540,
+  "device_table_bytes_pointer_normalized": 52,
+  "device_entries": 13,
+  "empty_ranges": 3,
+  "scope": "Actual native/source init walkers and boot critical wrapper, exact ranges/order, discarded statuses and callback PRIMASK changes; all registrar bodies are fixtures",
+  "limitations": [
+    "Frozen size40 is accounted as18 wrapper bytes plus22 shared post-init tail bytes; exact original instruction/frame/physical interrupt behavior remains separate.",
+    "Callback argument-register residue, actual registrar bodies and physical interrupt behavior remain unproven; injected null targets only establish emulated faults, not physical exception state. Original linker symbol identities are unknown; recovered range values are explicit source-owned boundaries."
+  ]
+}

@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "../registry/stock_registry.h"
 extern void r1_led_ldo_device_bind(void);
 extern void r1_i2c5_nfc_resource_registration(void);
 extern void r1_yhm_device_handles_initialize(void);
-extern struct generic_device_registry_device *r1_native_rtc_cached_device(void);
+extern generic_device_registry_device *r1_native_rtc_cached_device(void);
 extern uint32_t r1_native_watchdog_hw_handle_init(void);
 /* The remaining numeric routes retain their recovered caller role. Actual
  * callee bodies/argument-register liveness remain explicit integration gates. */
