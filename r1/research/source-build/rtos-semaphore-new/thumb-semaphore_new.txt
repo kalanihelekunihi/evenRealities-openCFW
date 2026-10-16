@@ -1,0 +1,69 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0007d60c <r1_stock_gpio_pin_set+0x41d8>:
+   7d60c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+   7d60e:	4615      	mov	r5, r2
+   7d610:	460f      	mov	r7, r1
+   7d612:	4606      	mov	r6, r0
+   7d614:	2400      	movs	r4, #0
+   7d616:	f7b2 fc51 	bl	2febc <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x8ebc>
+   7d61a:	bba0      	cbnz	r0, 7d686 <r1_stock_gpio_pin_set+0x4252>
+   7d61c:	b39e      	cbz	r6, 7d686 <r1_stock_gpio_pin_set+0x4252>
+   7d61e:	42b7      	cmp	r7, r6
+   7d620:	d837      	bhi.n	7d692 <r1_stock_gpio_pin_set+0x425e>
+   7d622:	b14d      	cbz	r5, 7d638 <r1_stock_gpio_pin_set+0x4204>
+   7d624:	68a8      	ldr	r0, [r5, #8]
+   7d626:	2800      	cmp	r0, #0
+   7d628:	68e8      	ldr	r0, [r5, #12]
+   7d62a:	d003      	beq.n	7d634 <r1_stock_gpio_pin_set+0x4200>
+   7d62c:	2850      	cmp	r0, #80	@ 0x50
+   7d62e:	d330      	bcc.n	7d692 <r1_stock_gpio_pin_set+0x425e>
+   7d630:	2001      	movs	r0, #1
+   7d632:	e002      	b.n	7d63a <r1_stock_gpio_pin_set+0x4206>
+   7d634:	b108      	cbz	r0, 7d63a <r1_stock_gpio_pin_set+0x4206>
+   7d636:	e02c      	b.n	7d692 <r1_stock_gpio_pin_set+0x425e>
+   7d638:	2000      	movs	r0, #0
+   7d63a:	2e01      	cmp	r6, #1
+   7d63c:	d006      	beq.n	7d64c <r1_stock_gpio_pin_set+0x4218>
+   7d63e:	b318      	cbz	r0, 7d688 <r1_stock_gpio_pin_set+0x4254>
+   7d640:	4639      	mov	r1, r7
+   7d642:	4630      	mov	r0, r6
+   7d644:	68aa      	ldr	r2, [r5, #8]
+   7d646:	f01a fa33 	bl	97ab0 <_stack+0x17ab0>
+   7d64a:	e021      	b.n	7d690 <r1_stock_gpio_pin_set+0x425c>
+   7d64c:	b140      	cbz	r0, 7d660 <r1_stock_gpio_pin_set+0x422c>
+   7d64e:	2003      	movs	r0, #3
+   7d650:	9000      	str	r0, [sp, #0]
+   7d652:	2200      	movs	r2, #0
+   7d654:	4611      	mov	r1, r2
+   7d656:	2001      	movs	r0, #1
+   7d658:	68ab      	ldr	r3, [r5, #8]
+   7d65a:	f01a fa82 	bl	97b62 <_stack+0x17b62>
+   7d65e:	e004      	b.n	7d66a <r1_stock_gpio_pin_set+0x4236>
+   7d660:	2203      	movs	r2, #3
+   7d662:	2100      	movs	r1, #0
+   7d664:	2001      	movs	r0, #1
+   7d666:	f01a fa52 	bl	97b0e <_stack+0x17b0e>
+   7d66a:	0004      	movs	r4, r0
+   7d66c:	d011      	beq.n	7d692 <r1_stock_gpio_pin_set+0x425e>
+   7d66e:	b157      	cbz	r7, 7d686 <r1_stock_gpio_pin_set+0x4252>
+   7d670:	2300      	movs	r3, #0
+   7d672:	461a      	mov	r2, r3
+   7d674:	4619      	mov	r1, r3
+   7d676:	f01a faeb 	bl	97c50 <_stack+0x17c50>
+   7d67a:	2801      	cmp	r0, #1
+   7d67c:	d009      	beq.n	7d692 <r1_stock_gpio_pin_set+0x425e>
+   7d67e:	4620      	mov	r0, r4
+   7d680:	f018 fc76 	bl	95f70 <_stack+0x15f70>
+   7d684:	2400      	movs	r4, #0
+   7d686:	e004      	b.n	7d692 <r1_stock_gpio_pin_set+0x425e>
+   7d688:	4639      	mov	r1, r7
+   7d68a:	4630      	mov	r0, r6
+   7d68c:	f01a f9fc 	bl	97a88 <_stack+0x17a88>
+   7d690:	4604      	mov	r4, r0
+   7d692:	4620      	mov	r0, r4
+   7d694:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}

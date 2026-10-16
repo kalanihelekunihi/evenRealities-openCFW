@@ -1,0 +1,77 @@
+{
+  "comparisons": 3072,
+  "initialization_sequences": 1536,
+  "provider_reports": {
+    "native-delayed-initialize/report.json": "990c4377894bad1b2072941d0844761fa517cfafcd940eb3cae0159e7c9905b9",
+    "native-delayed-state/report.json": "f9cb6b674364579eed3b13bc2fbfd47aee9f630873084cc3247c8889f0a4d1c8"
+  },
+  "verifier_sha256": "bf3ebb16e1116808c2ab627f4e5fdde4a0387ce5fca1d745dd3798a5f1b843e0",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-initializer.json": {
+      "sha256": "ce6851daf2abe730590a8b4ace23c130ee8c7117a1042ce0025573d41c2a6a32",
+      "address": 415552,
+      "length": 296
+    },
+    "ghidra-attributes.json": {
+      "sha256": "a792f3efd381ce59663c532130d4f3a06cec965fe02c672a51342cedf51a3536",
+      "address": 627556,
+      "length": 92
+    }
+  },
+  "zero_state_ranges": {
+    "context": [
+      536897304,
+      24
+    ],
+    "callbacks": [
+      536957188,
+      256
+    ],
+    "arguments": [
+      536957444,
+      256
+    ],
+    "deadlines": [
+      536957700,
+      256
+    ],
+    "queue_cb": [
+      536953680,
+      80
+    ],
+    "queue_storage": [
+      536953760,
+      120
+    ],
+    "thread_cb": [
+      536953880,
+      112
+    ],
+    "thread_stack": [
+      536953992,
+      3072
+    ],
+    "mutex_cb": [
+      536957064,
+      80
+    ],
+    "timer_cb": [
+      536957144,
+      44
+    ]
+  },
+  "supplemental_entry": "0x65740",
+  "locked_ownership_row": false,
+  "source_state_compiled": true,
+  "source_attributes_compiled": true,
+  "provider_interception": true,
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Factory and thread-terminate bodies remain controlled fixtures",
+    "Native callback tokens normalized only after exact address validation; ARM32 callback argument ABI retained",
+    "No worker invocation, lifecycle/kernel composition or canonical integration",
+    "Cold startup authenticates zero storage; complete source startup not established"
+  ]
+}

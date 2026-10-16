@@ -1,0 +1,213 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "functions": [
+    {
+      "entry": "0x000710a0",
+      "native_body_bytes": 42,
+      "symbol": "r1_sdk_fstorage_sd_init",
+      "ghidra_file": "ghidra-init-body.json",
+      "ghidra_sha256": "f01c30ee16f59827ecca3fef87b4b32e55fb7308a27f33278826ef6cc17f3ea8",
+      "pseudocode_file": "init-pseudocode.c.txt",
+      "pseudocode_sha256": "6f8d4f9335315fb5bb04155cb8fba2b4752d1688e377c456942356d0562d3a73",
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00093ec4",
+      "native_body_bytes": 22,
+      "symbol": "r1_sdk_fstorage_sd_uninit",
+      "ghidra_file": "ghidra-uninit-body.json",
+      "ghidra_sha256": "f8ad4d1e2dd744062445478d4b07e8a59f3fa71375ea92b4b0f47c212685e5dc",
+      "pseudocode_file": "uninit-pseudocode.c.txt",
+      "pseudocode_sha256": "c55907170b038167d30889ba4be9ffef54410d59591dbce697321bef057b146e",
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00087b20",
+      "native_body_bytes": 14,
+      "symbol": "r1_sdk_fstorage_sd_read",
+      "ghidra_file": "ghidra-read-body.json",
+      "ghidra_sha256": "93d7c973d31513bf71725c7026b3d66aeb5f0de37d81eb4931cdcb61cda0a5fb",
+      "pseudocode_file": "read-pseudocode.c.txt",
+      "pseudocode_sha256": "cd844b0bf9f3c266d656a3235fcee2ab793c7ad25852e11732a1297ce261d69a",
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00096fe0",
+      "native_body_bytes": 74,
+      "symbol": "r1_sdk_fstorage_sd_write",
+      "ghidra_file": "ghidra-write-body.json",
+      "ghidra_sha256": "671abed9641ded84596396b2917921608c4fb6cd02a0f4d5f04ce1d94bcba7ca",
+      "pseudocode_file": "write-pseudocode.c.txt",
+      "pseudocode_sha256": "f443bc81f5e973da28a8ab11e2ddc3a64f497c104abae02ccb49271970afef80",
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x0005d514",
+      "native_body_bytes": 72,
+      "symbol": "r1_sdk_fstorage_sd_erase",
+      "ghidra_file": "ghidra-erase-body.json",
+      "ghidra_sha256": "4050ba1a3af6f3136493e4a4cc1de231fc74d0c97f3d160b008fcf9ef2c66858",
+      "pseudocode_file": null,
+      "pseudocode_sha256": null,
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x000883f8",
+      "native_body_bytes": 4,
+      "symbol": "r1_sdk_fstorage_sd_rmap",
+      "ghidra_file": "ghidra-rmap-body.json",
+      "ghidra_sha256": "7f21e526b2efd42ee3fb78f4ea9f246e55319f7bd862bfe6c20641c4f0597984",
+      "pseudocode_file": null,
+      "pseudocode_sha256": null,
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00096e08",
+      "native_body_bytes": 4,
+      "symbol": "r1_sdk_fstorage_sd_wmap",
+      "ghidra_file": "ghidra-wmap-body.json",
+      "ghidra_sha256": "dfcd49e6a876f8d7b3612a8c86c378522e2d6d83af6baeede0815d57437c9e1e",
+      "pseudocode_file": null,
+      "pseudocode_sha256": null,
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00072b70",
+      "native_body_bytes": 12,
+      "symbol": "r1_sdk_fstorage_sd_is_busy",
+      "ghidra_file": "ghidra-busy-body.json",
+      "ghidra_sha256": "07d2b69c9c0714b819032d7e7eddaf398c8cb89cf544158782c248ce7cae5fa6",
+      "pseudocode_file": null,
+      "pseudocode_sha256": null,
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x0005e644",
+      "native_body_bytes": 84,
+      "symbol": "r1_sdk_fstorage_sd_event_send",
+      "ghidra_file": "ghidra-event-body.json",
+      "ghidra_sha256": "0432d4cb676c2d4477a71a3bb735046270c978c3aa41ff1d5d5ba3f34542e910",
+      "pseudocode_file": "event-pseudocode.c.txt",
+      "pseudocode_sha256": "a80234ecdd8a855c31e51194d44e4c05c0c0eed5161d8bddeb34cc8ead0372b2",
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x000875dc",
+      "native_body_bytes": 30,
+      "symbol": "r1_sdk_fstorage_sd_queue_start",
+      "ghidra_file": "ghidra-queue-start-body.json",
+      "ghidra_sha256": "374b22a97e146e54be89954fb55bf8bd3111e2bb570aaf7c446f4bdc14fec889",
+      "pseudocode_file": "queue-start-pseudocode.c.txt",
+      "pseudocode_sha256": "5fd7f272ce09979803f18e88c67c205714176fcef5e5504b558971fc80da7c98",
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00087468",
+      "native_body_bytes": 10,
+      "symbol": "r1_sdk_fstorage_sd_queue_free",
+      "ghidra_file": "ghidra-queue-free-body.json",
+      "ghidra_sha256": "845285414929d07fc4be65c8105d76045206f30c135f2638205e552e89c8c2e0",
+      "pseudocode_file": "queue-free-pseudocode.c.txt",
+      "pseudocode_sha256": "9e568f3e6f78e77d0d00f25f42aab559dbd64966f4e0ffdca10a17db990349d1",
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00078d08",
+      "native_body_bytes": 154,
+      "symbol": "nrf_fstorage_sys_evt_handler",
+      "ghidra_file": "ghidra-soc-body.json",
+      "ghidra_sha256": "9d18874598b9758ac63c712b2e221565ffeb02934b7518e71c9bab35e9f19009",
+      "pseudocode_file": null,
+      "pseudocode_sha256": null,
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00078cd0",
+      "native_body_bytes": 18,
+      "symbol": "nrf_fstorage_sdh_req_handler",
+      "ghidra_file": "ghidra-request-body.json",
+      "ghidra_sha256": "d9728199330744e415c2bde21badcde7ee6a6e1d1c294f2ab168bc1efa74cefc",
+      "pseudocode_file": null,
+      "pseudocode_sha256": null,
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00078ce8",
+      "native_body_bytes": 28,
+      "symbol": "nrf_fstorage_sdh_state_handler",
+      "ghidra_file": "ghidra-state-body.json",
+      "ghidra_sha256": "3c07108cf22a6b05b72f82733f53cbdbc2a5465f272befc2df224dc8e8037610",
+      "pseudocode_file": null,
+      "pseudocode_sha256": null,
+      "frontier_admitted": true
+    },
+    {
+      "entry": "0x00087520",
+      "native_body_bytes": 148,
+      "symbol": "r1_sdk_fstorage_sd_queue_process",
+      "ghidra_file": "ghidra-queue-process-body.json",
+      "ghidra_sha256": "795be4c5206036d6d23e6a7fc959729daefc15d2af2eab1e089e9e67e776a837",
+      "pseudocode_file": "queue-process-pseudocode.c.txt",
+      "pseudocode_sha256": "10749543ed86690c1aa67d53d7c76099abbc6123bb5ab958970fc4a4a541a5a6",
+      "frontier_admitted": false
+    }
+  ],
+  "api_table": {
+    "address": "0x9c86c",
+    "bytes": 32
+  },
+  "flash_info": {
+    "address": "0x9c860",
+    "bytes": 12
+  },
+  "fifo_pointer": {
+    "address": "0x9c85c",
+    "bytes": 4
+  },
+  "observer_records": {
+    "soc": "0xc45d8",
+    "request": "0xc45c8",
+    "state": "0xc4608"
+  },
+  "native_extent_gate": {
+    "entry": "0x00087520",
+    "legacy_inventory_size": 404,
+    "observed_contiguous_span": 148,
+    "frontier_upgrade": false,
+    "note": "REA confirms Ghidra merges four non-contiguous ranges. Local148-byte block is tested; source SDH continuation remains an external provider, so full404-byte inventory scope is not upgraded.",
+    "resolved_size_classification": "Accurate non-contiguous Ghidra total, not a simple erroneous size"
+  },
+  "instruction_identity_proven": false,
+  "rea_queue_function": {
+    "file": "rea-queue-function.json",
+    "sha256": "cbf9c9b1d336401fb9d1b7dcce3f25c45763e874a813ff3315eb3eb0f28ddd1a",
+    "evidence_id": "ev_b60dc1c5fbd8a655c823799b0ae19d5684b9be6c3084d0eb04d95ba16520164d",
+    "body": {
+      "available": true,
+      "provenance": "ghidra-function-body-address-set",
+      "ranges": [
+        {
+          "start": "0x78d08",
+          "end": "0x78da1"
+        },
+        {
+          "start": "0x7a3ec",
+          "end": "0x7a43b"
+        },
+        {
+          "start": "0x7a4e4",
+          "end": "0x7a4f9"
+        },
+        {
+          "start": "0x87520",
+          "end": "0x875b3"
+        }
+      ],
+      "total_bytes": 404,
+      "span_bytes": 59564,
+      "non_contiguous": true,
+      "contains_entry": true
+    }
+  }
+}

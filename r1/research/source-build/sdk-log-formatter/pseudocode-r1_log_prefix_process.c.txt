@@ -1,0 +1,36 @@
+/* ================================================================
+ * entry: 0x0008185c
+ * end:   0x000818c9
+ * size:  110 bytes
+ * name:  FUN_0008185c
+ * ================================================================ */
+
+void FUN_0008185c(int param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  undefined1 auStack_18 [2];
+  undefined1 local_16;
+  undefined1 local_15;
+  undefined1 local_14;
+  undefined1 local_13;
+  undefined1 local_12;
+
+  if (*(short *)(param_1 + 6) != 0) {
+    FUN_00078a40(param_2,s__sLogs_dropped___d__s_000818dc,&DAT_000818d4,*(short *)(param_1 + 6),
+                 &DAT_000818cc);
+  }
+  if (*(char *)(param_1 + 8) != '\x05') {
+    if (*(char *)(param_1 + 9) != '\0') {
+      iVar1 = FUN_0007965c(*(undefined2 *)(param_1 + 4),*(undefined1 *)(param_1 + 8));
+      FUN_00078a40(param_2,&DAT_000818f8,*(undefined4 *)(DAT_000818f4 + iVar1 * 4));
+    }
+    FUN_0008ac28(auStack_18);
+    FUN_00078a40(param_2,s__s__d__d__02d__02d__02d__000818fc,
+                 *(undefined4 *)(DAT_000818f4 + -0x14 + (uint)*(byte *)(param_1 + 8) * 4),local_16,
+                 local_15,local_14,local_13,local_12);
+  }
+  return;
+}
+
+

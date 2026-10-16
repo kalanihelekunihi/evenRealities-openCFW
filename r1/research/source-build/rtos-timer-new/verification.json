@@ -1,0 +1,48 @@
+{
+  "comparisons": 4778,
+  "counts": {
+    "osTimerNew": 4752,
+    "TimerCallback": 16,
+    "pvTimerGetTimerID": 10
+  },
+  "assertion_or_null_callback_faults": 15,
+  "user_callbacks_per_implementation": 2,
+  "provider_reports": {
+    "rtos-timer-new/report.json": "6abc92e2a392f7d24000a2a8963f76868f0d96d6462c3dfb6b8cff32267deea7",
+    "rtos-timer-id/report.json": "ade3af5052cd4c32da6f43416935e781a8bc5cbfdccbca2e3ae18892d7809638"
+  },
+  "driver_sha256": "6ffcc280127ebfc136db7d18489e9289aae5dad0c9d2ca2030c25e2a0cf15856",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-osTimerNew.json": "1e6321a3b6a53f9674ea07b0759c5714872ba6d2bedeefe966699e9a267a1491",
+    "ghidra-TimerCallback.json": "36da66a95d3e67e3b2063336c59889c942f70d94a2a16dbf9b7ea16e08f77aa1",
+    "ghidra-pvTimerGetTimerID.json": "a81ca6067453d79f2d90a4c86aba0164746fa94a18d6294cdb8a46b7d73dfed4"
+  },
+  "rea_evidence": {
+    "rea-creation.json": "b8fca5c8a43a317ca81b29f47b9b9a1221de2f994a81551d0b92b71581abe08d",
+    "rea-callback.json": "4fe76b0bc564218e4798bafb271e6072ac6633e15282533aed9244c61790226a"
+  },
+  "attribution_correction_sha256": "b6ad454bdf2ce7415221895eee976e8cd927098674947fb94fb7f5a598a9f9e2",
+  "entries": {
+    "osTimerNew": [
+      514316,
+      158
+    ],
+    "TimerCallback": [
+      213128,
+      24
+    ],
+    "pvTimerGetTimerID": [
+      546460,
+      34
+    ]
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Malloc/free, timer factories, critical boundaries and scheduler-state getter are controlled fixtures",
+    "Callback trampoline executes actual timer-ID getter; user callback is a fixture",
+    "Only licensed pinned bodies admitted; locked ownership correction retained separately",
+    "REA ID getter query failed; independent native bytes, caller and source contract support that entry"
+  ]
+}

@@ -1,0 +1,42 @@
+/* ================================================================
+ * entry: 0x00079d50
+ * end:   0x00079da7
+ * size:  88 bytes
+ * name:  FUN_00079d50
+ * ================================================================ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_00079d50(int param_1)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  uint uVar3;
+
+  iVar2 = FUN_000780b0(_DAT_00079da8,1);
+  puVar1 = _DAT_00079da8;
+  DataMemoryBarrier(0x1f);
+  if (iVar2 != 0) {
+    return;
+  }
+  if (param_1 != 4) {
+    if (*(char *)((int)_DAT_00079da8 + -3) != '\0') goto LAB_00079d74;
+    *(char *)(_DAT_00079da8 + -1) = (char)param_1;
+    *(undefined1 *)((int)puVar1 + -3) = 1;
+  }
+  uVar3 = FUN_000914ec();
+  if (((uVar3 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {
+    FUN_00091638(0xc400000,s__RING_Shutdown_request__d_00079dab + 1,
+                 s__RING_Shutdown_request__d_00079dab + 1,param_1);
+  }
+  FUN_000914ec();
+  FUN_0008f234();
+LAB_00079d74:
+  DataMemoryBarrier(0x1f);
+  *puVar1 = 0;
+  return;
+}
+
+
+

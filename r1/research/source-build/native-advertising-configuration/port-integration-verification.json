@@ -1,0 +1,37 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "4067b4537c914036f76b3653392c958158b5045b6ea6c6aecd13b1e6e37608b3",
+  "object_sha256": "842cdd5f38cabe660411adab96e153aea5af83b49530ae29d08aca20ba420eae",
+  "provider_reports": {
+    "sdk-advertising-init/report.json": "352123082c47bcb16f16986cfb496155a2899c04359ea5a27ab1e2e574332e5b",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+    "watchdog-logging/report.json": "a2721853f1a021099829c69ac93a2b9c9be701b4cc93865c9e97bf3ed6f564d3",
+    "native-kv-class/report.json": "74fd498a1d8857e4ab698d41ec981441fd04337fe338c6fcb12364f2e6b4b1e8",
+    "native-kv-port/report.json": "92d8532ef98bc798cb216e4c675096245fe4e42536bae83ee46513360bc8ea60"
+  },
+  "selected_getter_sha256": "4c8ebd96a25616b730da7fd987b66baf09b5a34ef05572b6793c1e2fa2e239a4",
+  "comparisons": 70050,
+  "comparisons_by_entry": {
+    "r1_nordic_advertising_configuration": 651,
+    "r1_advertising_params_init": 65539,
+    "r1_advertising_configuration_byte_get": 768,
+    "r1_advertising_product_sn_read": 1024,
+    "r1_advertising_event_plan_build": 2048,
+    "r1_advertising_status_publish": 20
+  },
+  "actual_port_mutex_adapters_executed": true,
+  "os_mutex_calls": 269646,
+  "actual_cached_kv_read_executed": true,
+  "svc_calls": 2388,
+  "actual_product_config_start_callback_cases": 72,
+  "descriptor_and_interval_bytes_compared": 88,
+  "product_payload_initial_zero_bytes_compared": 21,
+  "scope": "Actual product configuration plus pinned SDK init/encode/tag setter, source memory/getter, two independent configuration reads, bounded persistent SN extraction, exact typed initializer/manufacturer/interval records, native callback logging/status mapping and error continuation",
+  "limitations": [
+    "Persistent KV read fully fills124 fixture bytes on every call even on error; partial/unfilled reads and uninitialized failure bytes are outside this C contract.",
+    "Controller address fixture fully writes7 bytes even on errors; missing/partial controller writes and stale-stack behavior remain unresolved.",
+    "Persistent handles, KV contents, controller identity/name/appearance, final log/status publisher and error callbacks remain controlled boundaries.",
+    "Ephemeral input pointers and stored callback are normalized by typed content/function identity; original stack/padding/allocation identity, complete startup, exact bytes and physical behavior remain open."
+  ],
+  "instruction_identity_proven": false
+}

@@ -1,0 +1,43 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "functions": [
+    {
+      "symbol": "nrf_pwr_mgmt_shutdown",
+      "entry": "0x79d50",
+      "body_bytes": 88,
+      "ghidra_file": "ghidra-nrf_pwr_mgmt_shutdown.json",
+      "ghidra_sha256": "25c925ec05dcf53d1c717ffb396c5321de68e38935991e1883d46cf6e90ed437",
+      "pseudocode_file": "nrf_pwr_mgmt_shutdown-pseudocode.c.txt",
+      "pseudocode_sha256": "066b061a893ea6c7e995d5ad69a4f0733577768471cda40fb99b80f8e6ad5472"
+    },
+    {
+      "symbol": "r1_sdk_power_shutdown_process",
+      "entry": "0x8f234",
+      "body_bytes": 244,
+      "ghidra_file": "ghidra-r1_sdk_power_shutdown_process.json",
+      "ghidra_sha256": "a5b19135c6da7cca7d9e839150df4cab1c19e64be1f001d567ae9b131c50f808",
+      "pseudocode_file": "r1_sdk_power_shutdown_process-pseudocode.c.txt",
+      "pseudocode_sha256": "164f46530027739945c5342a607b02ebd255b59ff6da66299102f96364cf1eb0"
+    },
+    {
+      "symbol": "nrf_atomic_u32_fetch_store",
+      "entry": "0x780b0",
+      "body_bytes": 10,
+      "ghidra_file": "ghidra-nrf_atomic_u32_fetch_store.json",
+      "ghidra_sha256": "0768e5334d421a029eb61c49ccf67d69831286bd73cb4acded56d86da680d996",
+      "pseudocode_file": "nrf_atomic_u32_fetch_store-pseudocode.c.txt",
+      "pseudocode_sha256": "1db6ccce95eae1cbea025c9a4937e78fd30b46d1881efb1bedc5ba8f54ceca5d"
+    },
+    {
+      "symbol": "atomic_store_helper",
+      "entry": "0x27380",
+      "body_bytes": 24,
+      "ghidra_file": "ghidra-atomic_store_helper.json",
+      "ghidra_sha256": "7ab259d7abbe993d33b39f7fed317412f543042fca845abbd385363d72dbac34",
+      "pseudocode_file": "atomic_store_helper-pseudocode.c.txt",
+      "pseudocode_sha256": "440c10e769e47540dc196e24025729f7318a2b8a926fe1bec1ee44c879a119cd"
+    }
+  ],
+  "scope": "Bounded native spans and available accumulated pseudocode; SDK example extraction and reset/log contracts remain separate attributable inputs"
+}

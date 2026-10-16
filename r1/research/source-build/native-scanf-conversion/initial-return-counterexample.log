@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_scanf_conversion.py", line 60, in main
+    assert u.reg_read(UC_ARM_REG_PC)==0x20000100 and u.reg_read(UC_ARM_REG_SP)==0x2003f000 and [u.reg_read(reg) for reg in saved]==[0x12345600+i for i in range(8)],(kind,data,width,radix,flags,candidate)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/r1-source-venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py", line 766, in emu_start
+    raise UcError(status)
+unicorn.unicorn_py3.unicorn.UcError: Invalid memory fetch (UC_ERR_FETCH_UNMAPPED)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/tmp/debug_scanf.py", line 5, in <module>
+    exec(compile(s,str(p),'exec'),{'__name__':'__main__','__file__':str(p)})
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_scanf_conversion.py", line 69, in <module>
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_scanf_conversion.py", line 61, in main
+    st=states[id(u)];results.append([u.reg_read(UC_ARM_REG_R0),st['writes'],st['callbacks'],bytes(u.mem_read(0x20001000,8192)).hex()])
+                              ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: ('integer', '090a343221', 1, 0, 0, 0, 0, 1, '0x12345604', {'source': 1, 'writes': [[536875008, 4, 536879105], [536875012, 4, 4294967294], [536875008, 4, 536879106], [536875012, 4, 4294967293], [536875008, 4, 536879107], [536875012, 4, 4294967292], [536875008, 4, 536879108], [536875012, 4, 4294967291], [536875008, 4, 536879107], [536875012, 4, 4294967292], [536875264, 4, 536875524], [536875776, 4, 4]], 'callbacks': [['getc', 536875008, None], ['space', 9, 1], ['getc', 536875008, None], ['space', 10, 1], ['getc', 536875008, None], ['space', 52, 0], ['digit', 52, 10], ['getc', 536875008, None], ['ungetc', 536875008, None]], 'trace': [['0x1000036', '0x2003efd0', '0x10000e5', '0x81000000'], ['0x1000038', '0x2003efd0', '0x10000e5', '0x21000000'], ['0x100003a', '0x2003efd0', '0x10000e5', '0x81000000'], ['0x100003c', '0x2003efd0', '0x10000e5', '0x81000000'], ['0x100003e', '0x2003efd0', '0x10000e5', '0x81000000'], ['0x1000040', '0x2003efd0', '0x10000e5', '0x41000000'], ['0x10000e4', '0x2003efd0', '0x10000e5', '0x41000000'], ['0x10000e8', '0x2003efd0', '0x10000e5', '0x81000000'], ['0x10000f0', '0x2003efd0', '0x10000e5', '0x81000000'], ['0x10000f4', '0x2003efd0', '0x10000e5', '0x41000000'], ['0x10000f6', '0x2003efd0', '0x10000e5', '0x41000000'], ['0x10000fa', '0x2003efd0', '0x10000e5', '0x41000000'], ['0x10000fe', '0x2003efd0', '0x10000e5', '0x1000000'], ['0x1000100', '0x2003efd0', '0x10000e5', '0x1000000'], ['0x1000104', '0x2003efd0', '0x10000e5', '0x1000000'], ['0x1000106', '0x2003efd0', '0x10000e5', '0x1000000'], ['0x1000108', '0x2003efd0', '0x10000e5', '0x1000000'], ['0x100010a', '0x2003efd0', '0x10000e5', '0x1000000'], ['0x100010e', '0x2003efd0', '0x10000e5', '0x1000000'], ['0x1000110', '0x2003efd0', '0x10000e5', '0x1000000'], ['0x1000114', '0x2003efd0', '0x10000e5', '0x41000000'], ['0x1000116', '0x2003efd0', '0x10000e5', '0x41000000'], ['0x100011a', '0x2003efd0', '0x10000e5', '0x41005400'], ['0x100011e', '0x2003efd0', '0x10000e5', '0x41000000'], ['0x1000122', '0x2003efd0', '0x10000e5', '0x41000000']]})

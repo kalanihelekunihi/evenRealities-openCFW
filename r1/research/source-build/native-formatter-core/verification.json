@@ -1,0 +1,59 @@
+{
+  "comparisons": 39002,
+  "counts": {
+    "integer": 36288,
+    "stars": 756,
+    "float": 1536,
+    "string": 96,
+    "literal": 255,
+    "count": 36,
+    "null-count": 9,
+    "unknown": 10,
+    "edge": 4,
+    "mutation": 12
+  },
+  "callback_calls_per_side": 303233,
+  "matching_faults": 10,
+  "all_flag_subsets": true,
+  "length_modifiers": [
+    "",
+    "h",
+    "hh",
+    "l",
+    "ll",
+    "j",
+    "t",
+    "z",
+    "L"
+  ],
+  "negative_dynamic_precision": true,
+  "varargs_64bit_alignment": true,
+  "callback_unsigned_byte_arguments_checked": true,
+  "callback_scratch_clobbers_and_returns_ignored": true,
+  "callback_mutation_modes": 4,
+  "actual_source_math_and_padding": true,
+  "r0_stack_and_callee_saved_checked": true,
+  "trace_sha256": "f782870b45d9aa9f3e64237a47c5a6e05f906a5e8025b5a34e4d6e4776888577",
+  "report_sha256": "29585d40a61cb518a4dea5b07cfd889fc3b5396a2bb9fbc6b4bb1737c53e3886",
+  "object_sha256": "9d2c57f591bb65fe238e271dc7a240ce16ba08bd92b3787d59a521c2c04dbef9",
+  "provider_reports": {
+    "native-formatter-math/report.json": "8fe5e6f2f41d7080f190a58ec7cfe14c2850d0f15ad91288ba947036e1e1bcab",
+    "native-formatter-output/report.json": "e16f16a97dfd09437d91ad6aa5ab054255479e21fc53f1b87c0b598c7bd2cd2f"
+  },
+  "driver_sha256": "692bb1bea081069b3904bd20a104a75c57cd6eae897ed04fd38f0623afb12584",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "ghidra-43480.json": "26164ddaaa2c814a39c01ba2ef76f83087b35499c0e928c0819ba8b51d34ef57",
+    "ghidra-43080.json": "5c2e042097e95c4556263ca873dca4c2eca42d3cc252c08d920759f84e0b9c47",
+    "ghidra-434ac.json": "a1d1997364b980bf8b27461f7b08584692c3a38ed63c4856170c05f820a02529",
+    "ghidra-43266.json": "a013b445f34ac1766b7799aa75e49bc2da0d239cb8b29ec5c766779f6e554dce",
+    "ghidra-43728.json": "b81defbdc4716e55e440e7d5130d71dbd31ccd948401012e017c54b1f02b39ed",
+    "rea-43080.json": "7ade88f5f7316e771bea7f6ee430a47ffc67d939f6fd80eaeaf0f28cadce11d9"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Output callback is an explicit boundary fixture; complete callback/private native136-byte frame alias identity remains gated.",
+    "Bounded widths/precisions and input corpus do not exhaust arbitrary u32 overflow/long-running formats or all callback mutations.",
+    "Caller-saved r1/r2/r3, APSR and original instruction identity remain unproven."
+  ]
+}

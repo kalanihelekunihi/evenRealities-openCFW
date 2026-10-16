@@ -1,0 +1,29 @@
+{
+  "candidate_unchanged": true,
+  "selected_native_provider": false,
+  "comparisons": 139456,
+  "counts": {
+    "signed_to32": 139456
+  },
+  "both_signs": true,
+  "all_positive_negative_low16_integer_words": true,
+  "seeded_random_patterns": true,
+  "return_values_stack_callee_saved_and_fpscr_checked": true,
+  "trace_sha256": "5269ab65bdebe4f802ddd778ea749a2e83fc236268490a3de90a32c42c6baee9",
+  "report_sha256": "737c15312c32c2de1361003d736add987029912d7218e888505056e0fda9df11",
+  "object_sha256": "58f3292c8a8be2acb3a61a9d9994c70a79b99d7f687289bc488d663cb7ad8221",
+  "math_report_sha256": "8fe5e6f2f41d7080f190a58ec7cfe14c2850d0f15ad91288ba947036e1e1bcab",
+  "math_object_sha256": "5c0b3fb25df838e1c02affef2949753122f33de8dea4425b0affa338b3d6fb9a",
+  "driver_sha256": "9918209889acbc26cf270723cfe219d83918d1a2e0ca63d8d50cfff6cc5a5761",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "native-float-rounding/rea-27e0c.json": "fca7f551f78cac9c7f2dcf3bafc63a72647aaace3c12f6c9cc5bc96cdd90b19b",
+    "native-float-rounding/ghidra-27e0c.json": "1f30498c7bde2e596841b3cdc93ec3227c8cd6b8a2a5aaedfc2aab8a888d865e",
+    "native-float-rounding/ghidra-2808a.json": "106c29c2b73003ff30b533879c835f7e62eab38e99fe40b2ade217b96b4de83b"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Signed integer samples establish bounded typed-return agreement only; raw caller-saved/APSR, private frame, instruction and whole-image identity remain open.",
+    "Candidate not selected into the native runtime bundle. Existing native conversion/packer source remains selected."
+  ]
+}

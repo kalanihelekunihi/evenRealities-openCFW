@@ -1,0 +1,38 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "functions": [
+    {
+      "entry": "0x63150",
+      "body_bytes": 62,
+      "ghidra_file": "ghidra-find-body.json",
+      "ghidra_sha256": "3ee3ee442120555b089913aa2d7a4e38ce7b371bb4ebb4df84c4492c18a62ffa",
+      "pseudocode_file": "find-pseudocode.c.txt",
+      "pseudocode_sha256": "1aa5bbaa74c136c3d3fb4db30ac1bc6db9f0d5923a03ede36c72aae866f8329d"
+    },
+    {
+      "entry": "0x631c0",
+      "body_bytes": 30,
+      "ghidra_file": "ghidra-init-body.json",
+      "ghidra_sha256": "286b8f4ca989b88bee77e6c8b6cd85609020e6584dd95be75ff7f5e86ab73459",
+      "pseudocode_file": "init-pseudocode.c.txt",
+      "pseudocode_sha256": "f65c1e873cd1231327c17388ce8c25885c923991be21f50e4cc2faba46b4cac5"
+    },
+    {
+      "entry": "0x57e1c",
+      "body_bytes": 98,
+      "ghidra_file": "ghidra-cache-body.json",
+      "ghidra_sha256": "917067f7d11a038e0743e3df13475e115459ea10170f758e3358d0a71151f139",
+      "pseudocode_file": "cache-pseudocode.c.txt",
+      "pseudocode_sha256": "cccd599294592835103748fd44afe3f7f5f96ebd2b52a391e4357288f5fd3f43"
+    }
+  ],
+  "upstream_body_unchanged": true,
+  "diagnostic_line_mapping": "Clang multiline log invocation145 maps to native opening line144 in partition-only header",
+  "full_byte_state": "-O0 preserves noncanonical nonzero initialization bytes observed by native code",
+  "counterexamples": {
+    "diagnostic-counterexample.json": "59b0f4fe82446091a0ea099ced9ddfd4fd62f9c5ce066c3dd9f3f9589f943a3d",
+    "noncanonical-byte-counterexample.json": "553f87affe4b80227d0343249ac7ea85382acdac8c4805695ee4e1b4d854cc26"
+  },
+  "instruction_identity_proven": false
+}

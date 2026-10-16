@@ -1,0 +1,25 @@
+{
+  "ownership_row": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x0005cc8c",
+    "end": "0x0005ccc5",
+    "size": "58",
+    "recovered_name": "FUN_0005cc8c",
+    "provider_family": "yhmicros_yhm2710_candidate",
+    "source_disposition": "clean_room_reimplementation_owner_authorized",
+    "upstream_symbol": "yhm2710_stacmd_bus_recovery_candidate",
+    "confidence": "high",
+    "evidence": "Exact executable closure of the scatter-loaded device_stacmd operation table and P1.01 wire callback record used by the YHM2710 power path. The exact vendor source remains unlicensed; the owner-authorized independent reconstruction is compiled from reconstructed/yhm2710."
+  },
+  "locked_ownership_changed": false,
+  "rea_structured_metadata_obtained": false,
+  "scope": "REA procedure_info did not yield structured metadata; native bytes and locked row authenticate recovery",
+  "callback_offsets": {
+    "low": 16,
+    "high": 20,
+    "output": 24
+  },
+  "delay_entry": "0x5c0fa",
+  "delay_calls": 5
+}

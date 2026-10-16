@@ -100,9 +100,21 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     current = BASE
     records = []
+    previous_historical_link = None
     for index, (receipt_path, row) in enumerate(chain(), 1):
         label = receipt_path.parent.name
-        checked(row["base_object"], row.get("base_sha256", row.get("base_object_sha256")))
+        historical_base = ROOT / row["base_object"]
+        recorded_base_sha = row.get("base_sha256", row.get("base_object_sha256"))
+        if not historical_base.is_file() or not recorded_base_sha:
+            raise RuntimeError(f"missing historical base: {label}")
+        actual_base_sha = sha(historical_base)
+        base_drift = None
+        if actual_base_sha != recorded_base_sha:
+            if previous_historical_link != row["base_object"]:
+                raise RuntimeError(f"unattributed historical base drift: {label}")
+            base_drift = {"recorded_sha256": recorded_base_sha,
+                          "current_sha256": actual_base_sha,
+                          "reason": "verified predecessor was regenerated from its current source object"}
         old = checked(row["linked_object"], row["linked_object_sha256"])
         objects = []
         if "object" in row:
@@ -153,10 +165,12 @@ def main():
                         "new_object": str(target.relative_to(ROOT)), "new_sha256": sha(target),
                         "inputs": {str(p.relative_to(ROOT)): sha(p) for p in objects},
                         "direct_archive_dm_row": label == "main-dm-row-relink",
-                        "aliases": aliases, "source_text_drift_with_identical_object": drift,
+                        "aliases": aliases, "historical_base_hash_drift": base_drift,
+                        "source_text_drift_with_identical_object": drift,
                         "old_unresolved": len(old_u),
                         "new_unresolved": len(new_u)})
         current = target
+        previous_historical_link = row["linked_object"]
     receipt = {
         "status": "PASS_EXPERIMENTAL_MAIN_CORRECTED_ARCHIVE_RUNTIME_REPLAY_C",
         "base_object": str(BASE.relative_to(ROOT)), "base_sha256": sha(BASE),

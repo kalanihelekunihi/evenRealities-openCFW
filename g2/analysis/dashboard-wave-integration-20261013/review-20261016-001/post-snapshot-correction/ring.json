@@ -1,0 +1,23 @@
+{
+  "status": "PASS_EXPERIMENTAL_MAIN_RING_SYNC_INTEGRATED_C",
+  "native_oracle": "g2/build/c-firmware/20261014/ring-sync-correction/receipt.json",
+  "native_oracle_sha256": "f89cf57b0bdf8341b9ca3c2fc7c0df07e80b9ab9143779c06a7de90a05b09d98",
+  "replay": "g2/build/c-firmware/20261014/main-post-tail-c-replay/receipt.json",
+  "replay_sha256": "a603f32d509c1223ff5a25ee3a95fe564ab3791da58f8a77dd884fe6d6de798f",
+  "source": "g2/components/audio/uart_thread_source_candidate/ring_sync.c",
+  "source_sha256": "d37d6e78d62f104ba55c971b7ea88bbc231ea5c0e85dcdc36e6f36dcb0bd7bd0",
+  "input_object": "g2/build/c-firmware/20261014/main-input-archive-member-refresh/candidate-input-corrected.o",
+  "input_sha256": "7a49abdccfdbe73fe97c1f5593eede94a8b1d7b00dd30fe4930c85f941010b3b",
+  "final_object": "g2/build/c-firmware/20261015/main-ring-policy-schedule-timeouts-49f4a8-49f552/apollo-main-ring-policy-schedule-timeouts-49f4a8-49f552.o",
+  "final_sha256": "279a428494b3672e142ed29776646aadf5b50a4badc41f28fa7cee090d313219",
+  "functions": {
+    "audio_uart_ring_sync_active": "2c309155ede8bd9c6d55481be65524939aa57ccf51c69bf948a70d75923c9f87",
+    "audio_uart_ring_sync_idle": "857399d2dcef496baf1466a72898ce6120391fe9fa34c94fe699c6d44ca0bd95"
+  },
+  "unresolved_after": 188,
+  "source_complete": false,
+  "full_payload_linked": false,
+  "limits": [
+    "Whole Main has 188 imports; the dominant-hand subtree has C-bound descendants, and requires layout, startup, and device validation."
+  ]
+}

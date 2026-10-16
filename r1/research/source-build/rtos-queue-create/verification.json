@@ -1,0 +1,11 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "74f02e5927083726b3ba70b921eb34a8d9aa91014fb329ba8095cdd13797a12a",
+  "driver_sha256": "d41e15da46020665300f2145cf62f92683956b57560c3322bd44e45261ed46d0",
+  "comparisons": 372,
+  "assertion_comparisons": 10,
+  "scope": "Actual unchanged pinned FreeRTOS queue constructors, initializer, reset and list initialization; full dirty 80-byte queue/storage canaries, allocation failure, counting values, static storage, reset wait-list/yield and fatal assertion paths",
+  "limitations": [
+    "Allocator, critical entry/exit and task removal are bounded fixtures. Actual task removal/scheduler, allocation, whole-image identity and physical behavior remain gates."
+  ]
+}

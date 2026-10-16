@@ -1,0 +1,21 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "74fd498a1d8857e4ab698d41ec981441fd04337fe338c6fcb12364f2e6b4b1e8",
+  "object_sha256": "a5bb465de089d9f041801c39add875d91645d33873df5dd8950475483de73171",
+  "memory_report_sha256": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+  "comparisons": 140156,
+  "comparisons_by_entry": {
+    "r1_kv_class_read": 69751,
+    "r1_kv_class_write": 69751,
+    "r1_health_record_read": 327,
+    "r1_health_record_write": 327
+  },
+  "port_callback_calls": 16984,
+  "scope": "Actual C cached-class copy and dirty-bit operations, all uint16 requested lengths against124, matched mapped sizes0..1024, full-word mismatches, no-copy errors, port/record mutation and pointer reload, ignored callback returns, health wrappers and guarded state/registers/stack",
+  "limitations": [
+    "Port tables, callbacks and class records are controlled fixtures; complete allocation, global port/handle initialization, actual locking, concurrency and flash persistence remain unresolved.",
+    "Only mapped nonoverlapping copy ranges and bounded zero-length null-pointer observations are covered; no portable invalid-pointer or overlapping-memcpy guarantee is claimed.",
+    "Original compiler/link identity, exact instructions, complete image linking and physical behavior remain unproven."
+  ],
+  "instruction_identity_proven": false
+}

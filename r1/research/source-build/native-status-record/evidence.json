@@ -1,0 +1,28 @@
+{
+  "entry": "0x5e118",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "pseudocode_discrepancy": "Decompiler writes _DAT_2000693c as32-bit; native instructions access a16-bit drop counter.",
+  "native_load": "0x5e192 LDRH r1,[r0,#4]",
+  "native_store": "0x5e196 STRH r1,[r0,#4]",
+  "effective_counter_bits": 16,
+  "adjacent_state_bytes_preserved": true,
+  "locked_corpus_modified": false,
+  "event_tail_call": {
+    "target": "0x8d8fc",
+    "arguments": [
+      "0x2003",
+      "0",
+      "0"
+    ]
+  },
+  "configuration_accessor_reused": {
+    "entry": "0x7ba24",
+    "symbol": "r1_advertising_configuration_byte_get",
+    "source": "r1/components/board/native_advertising_configuration.c"
+  },
+  "remaining_gates": [
+    "Battery runtime updater0x31fd0",
+    "Device-state/ring root ownership and initialization",
+    "Actual timestamp/critical/event graph composition and canonical board admission"
+  ]
+}

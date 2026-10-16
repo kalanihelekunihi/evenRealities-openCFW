@@ -1,0 +1,41 @@
+{
+  "comparisons": 1580,
+  "counts": {
+    "r1_stacmd_close": 256,
+    "r1_stacmd_open": 256,
+    "r1_stacmd_read": 960,
+    "r1_stacmd_write": 108
+  },
+  "real_retry": false,
+  "retry_provider_interception": true,
+  "provider_reports": {},
+  "executed_retry_entry_counts": {
+    "native": 0,
+    "source": 0
+  },
+  "executed_write_frame_counts": {
+    "native": 0,
+    "source": 0
+  },
+  "report_sha256": "45ad82e09ce2bd6843c3f18703cdc7b9d1c28592dfab104baab3ee95e991f138",
+  "object_sha256": "31848863e05793e5df9742fdbfc00fe1471c1118ab35d0854bb0300e63a932c5",
+  "driver_sha256": "7e4736234da0ba9ec510541163960781eb02b8fef776f60b33502cc1eb90b36a",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-r1_stacmd_close.json": "2f3cb13ad6a3aff246fd11dfadc9f04fb01173186c759f490b5677e44748a2e0",
+    "ghidra-r1_stacmd_open.json": "04ba91624856999f3fbdbbba6a71293e083facb2c6601a4d53a3c2f9c0d09d17",
+    "ghidra-r1_stacmd_read.json": "1b48571d73b84125bbd38074aec8aa95c4a630b0e99c80eda25e50a2b1dc3a96",
+    "ghidra-r1_stacmd_write.json": "e22d50518589f7d1f4c9d0386d745d664e739c70d608be8a1c8aee7ad2c67c6c"
+  },
+  "body_evidence_sha256": "0da83484e692045e0625f47f447651b3b315e907c54f468fc3aca073b38cb960",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Retry executes in integration mode; recovery and frame/logger providers remain fixtures",
+    "REA function metadata unavailable for manual-provenance entries; native bytes and locked ownership rows authenticated",
+    "Bus recovery/read-frame/write-retry providers remain fixtures",
+    "Fixed configuration/counter are test bindings; registration ABI and state ownership integration remain open",
+    "Nonzero-length null output fault behavior is not claimed; no production null fallback added",
+    "Physical timing/concurrency and whole-image byte identity unproven"
+  ]
+}

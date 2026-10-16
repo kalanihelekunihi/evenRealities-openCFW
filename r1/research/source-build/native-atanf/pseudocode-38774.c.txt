@@ -1,0 +1,66 @@
+/* ================================================================
+ * entry: 0x00038774
+ * end:   0x0003889b
+ * size:  296 bytes
+ * name:  FUN_00038774
+ * ================================================================ */
+
+float FUN_00038774(float param_1)
+
+{
+  int iVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+
+  if ((int)param_1 * 2 + 0x8e000000U < 0x25000000) {
+    fVar2 = DAT_0003889c;
+    fVar3 = DAT_0003889c;
+    if (0x7f000000 < (uint)((int)param_1 << 1)) {
+      fVar2 = DAT_000388a4;
+      fVar3 = DAT_000388a0;
+      if (((uint)param_1 & 0x80000000) == 0) {
+        fVar2 = DAT_000388ac;
+        fVar3 = DAT_000388a8;
+      }
+      param_1 = -1.0 / param_1;
+    }
+    if (0x7e000000 < (uint)((int)param_1 << 1)) {
+      if (((uint)param_1 & 0x80000000) == 0) {
+        fVar4 = 0.5;
+        fVar3 = fVar3 + DAT_000388b0;
+        fVar2 = fVar2 + DAT_000388b4;
+      }
+      else {
+        fVar4 = -0.5;
+        fVar3 = fVar3 - DAT_000388b0;
+        fVar2 = fVar2 - DAT_000388b4;
+      }
+      param_1 = (param_1 - fVar4) / (param_1 * fVar4 + 1.0);
+    }
+    fVar4 = param_1 * param_1;
+    return fVar2 + param_1 * fVar4 *
+                   (DAT_000388c8 +
+                   fVar4 * (DAT_000388c4 +
+                           fVar4 * (DAT_000388c0 + fVar4 * (DAT_000388bc + fVar4 * DAT_000388b8))))
+           + param_1 + fVar3;
+  }
+  if ((uint)((int)param_1 * 2) < 0x72000000) {
+    iVar1 = FUN_00038140(param_1);
+    if (iVar1 == 4) {
+      FUN_0003baf4();
+    }
+    return param_1;
+  }
+  if (0xff000000 < (uint)((int)param_1 << 1)) {
+    return param_1 + param_1;
+  }
+  fVar3 = DAT_000388cc;
+  if (((uint)param_1 & 0x80000000) == 0) {
+    fVar3 = DAT_000388d0;
+  }
+  return fVar3;
+}
+
+
+

@@ -1,0 +1,24 @@
+{
+  "comparisons": 15360,
+  "counts": {
+    "r1_stacmd_read_frame_native": 7680,
+    "r1_stacmd_write_frame_native": 7680
+  },
+  "report_sha256": "470c103a0231780bab73e864377663e60cb0c751a6fefcb6cdd1e2b836a3dc2a",
+  "object_sha256": "92b9c6dc29830d19a23080ccde1f017a6e815230db71132618f4d1101145c7c8",
+  "driver_sha256": "1e0ef2cec52fffeb9ed70e6c586baa3de50016f978b9303c8a01a081510aaeec",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-r1_stacmd_read_frame_native.json": "edccad453ecb66573a13c27b5cb4c9485a4b8b2fc5e81e5acf8cffa70bef2321",
+    "ghidra-r1_stacmd_write_frame_native.json": "cc8ab0c923787dcd8af1ea9e43f934fa6570a8bdd1a18c6ed22017de0151f047"
+  },
+  "body_evidence_sha256": "7709c29993490c71d6ef2764f06524f009a954ebfdffb7f7566f1f09e82ea3d4",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Idle/bit/write-bits/parity and release callbacks are fixtures; actual wire composition remains open",
+    "Configuration is a test binding; no added device/null-buffer validation",
+    "High-bit lengths follow native signed comparison; unbounded large positive lengths not exercised",
+    "Physical timing/concurrency, shared registration and whole-image identity unproven"
+  ]
+}

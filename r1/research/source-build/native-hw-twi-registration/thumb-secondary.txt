@@ -1,0 +1,30 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00054fc4 <r1_stock_i2c5_acquire+0x4aec>:
+   54fc4:	480b      	ldr	r0, [pc, #44]	@ (54ff4 <r1_stock_i2c5_acquire+0x4b1c>)
+   54fc6:	b510      	push	{r4, lr}
+   54fc8:	6801      	ldr	r1, [r0, #0]
+   54fca:	6241      	str	r1, [r0, #36]	@ 0x24
+   54fcc:	f100 013c 	add.w	r1, r0, #60	@ 0x3c
+   54fd0:	6281      	str	r1, [r0, #40]	@ 0x28
+   54fd2:	3024      	adds	r0, #36	@ 0x24
+   54fd4:	f030 fec0 	bl	85d58 <_stack+0x5d58>
+   54fd8:	2200      	movs	r2, #0
+   54fda:	4611      	mov	r1, r2
+   54fdc:	2001      	movs	r0, #1
+   54fde:	f028 fb15 	bl	7d60c <r1_stock_gpio_pin_set+0x41d8>
+   54fe2:	4904      	ldr	r1, [pc, #16]	@ (54ff4 <r1_stock_i2c5_acquire+0x4b1c>)
+   54fe4:	390c      	subs	r1, #12
+   54fe6:	2800      	cmp	r0, #0
+   54fe8:	6048      	str	r0, [r1, #4]
+   54fea:	d001      	beq.n	54ff0 <r1_stock_i2c5_acquire+0x4b18>
+   54fec:	2001      	movs	r0, #1
+   54fee:	7048      	strb	r0, [r1, #1]
+   54ff0:	bd10      	pop	{r4, pc}
+   54ff2:	0000      	movs	r0, r0
+   54ff4:	7060      	strb	r0, [r4, #1]
+   54ff6:	2000      	movs	r0, #0

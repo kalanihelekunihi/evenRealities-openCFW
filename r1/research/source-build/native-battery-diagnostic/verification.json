@@ -1,0 +1,66 @@
+{
+  "comparisons": 39936,
+  "all_counter_bytes": true,
+  "mode_sequences": 13,
+  "provider_calls_per_side": {
+    "r1_structured_log_mode_get": 196182,
+    "r1_batcfg_byte0_get": 9984,
+    "r1_batcfg_word1_signed_get": 44466,
+    "r1_structured_log_format": 60366,
+    "nrf_log_frontend_std_1": 18978,
+    "nrf_log_frontend_std_4": 22800
+  },
+  "counter_aliases": [
+    536879104,
+    536964016
+  ],
+  "source_descriptor_sections": {
+    "period_ring": {
+      "address": 252624,
+      "bytes": 49,
+      "sha256": "dc582f6297719ad7cd39ef1480f32c7fde025a1d022d6bd72cfdd7971eaf8c19"
+    },
+    "period_sdk": {
+      "address": 252676,
+      "bytes": 43,
+      "sha256": "19e7e0ff10a4838eaf204f9a40ec053c160015071f2b26554f77a363fea59bb6"
+    },
+    "offset_ring": {
+      "address": 252720,
+      "bytes": 30,
+      "sha256": "aa1dbe551eeb3fb4d9fab1eeb0f800ff40b60098b74b494bed381c625649ff00"
+    },
+    "offset_sdk": {
+      "address": 252752,
+      "bytes": 24,
+      "sha256": "ab42d7ef7a674e6877338c82eb4f7e782dd9e4f563b3fd8b13191b76be789ba0"
+    },
+    "charge_ring": {
+      "address": 786620,
+      "bytes": 73,
+      "sha256": "44be5bce05f2347f52dcd5fd812f735e6bd89250a830758afb60139cc2d825b3"
+    },
+    "charge_sdk": {
+      "address": 786696,
+      "bytes": 67,
+      "sha256": "e60a6f8bef93c3d1d8da7b4efb18ca944a5c8b5e0df4e2006f919559307209ad"
+    }
+  },
+  "report_sha256": "98aa115904e0cc8aacaf67fbdbb73d7d2bfd882e38589badc8c3b60b70a71741",
+  "object_sha256": "96178993543bd4e41f6194ca86e4289816cdb07c1d9cd0043819fefd985e4362",
+  "driver_sha256": "2765157f7ec768e1b616e0ca06ee094fc471623cd1b9a25871907e5b9ef0b14c",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-3d9b8.json": "f706fba038044087db301169948d25630e1988969139f1e9d511edcba64e5519",
+    "ghidra-body.json": "47a045ac34fe7b76c7724a6381431992574c4e4a4348747c1ef426a180b3e0fe",
+    "ghidra-charge_ring.json": "b058b287eb644241c95dd29bf9b57973fb6cb4e12c222813dd539b0ff104a548",
+    "ghidra-charge_sdk.json": "daae1cce0869d8d526dfbc95e5b5d3d1e5debf5265ee8505fd5965d7ffbf36a3"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Mode/config/log providers are fixtures; actual updater/logger composition remains open",
+    "Callback mutation and a counter aliasing device level are compared; physical interrupts/concurrency unproven",
+    "Runtime state/handle initialization, canonical admission, full startup and original image identity remain gates"
+  ]
+}

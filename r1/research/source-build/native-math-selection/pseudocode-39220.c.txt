@@ -1,0 +1,46 @@
+/* ================================================================
+ * entry: 0x00039220
+ * end:   0x00039281
+ * size:  98 bytes
+ * name:  FUN_00039220
+ * ================================================================ */
+
+float FUN_00039220(float param_1)
+
+{
+  uint uVar1;
+  uint uVar2;
+
+  uVar1 = ((uint)ABS(param_1) >> 0x17) - 0x7f;
+  if (0x16 < (int)uVar1) {
+    return param_1;
+  }
+  if ((int)uVar1 < 0) {
+    if (0.0 < param_1 + DAT_00039284) {
+      if ((int)param_1 < 0) {
+        if (param_1 != -0.0) {
+          param_1 = DAT_00039288;
+        }
+      }
+      else {
+        param_1 = 0.0;
+      }
+    }
+  }
+  else {
+    uVar2 = DAT_0003928c >> (uVar1 & 0xff);
+    if (((uint)param_1 & uVar2) == 0) {
+      return param_1;
+    }
+    if (0.0 < param_1 + DAT_00039284) {
+      if ((int)param_1 < 0) {
+        param_1 = (float)((int)param_1 + (0x800000U >> (uVar1 & 0xff)));
+      }
+      param_1 = (float)((uint)param_1 & ~uVar2);
+    }
+  }
+  return param_1;
+}
+
+
+

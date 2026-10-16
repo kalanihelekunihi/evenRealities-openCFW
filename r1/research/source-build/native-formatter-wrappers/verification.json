@@ -1,0 +1,42 @@
+{
+  "comparisons": 2532,
+  "counts": {
+    "snprintf": 1266,
+    "vsnprintf": 1266
+  },
+  "matching_faults": 1096,
+  "alias_cases": 36,
+  "r1_scratch_differences": 24,
+  "r1_zero_for_nonzero_capacity": true,
+  "r0_r2_r3_and_callee_saved_checked": true,
+  "native_outer_frames_checked": {
+    "snprintf": 40,
+    "vsnprintf": 24
+  },
+  "native_argument_stream_and_context_checked": true,
+  "actual_source_engine": true,
+  "actual_source_provider_calls_per_side": {
+    "core": 2532,
+    "output": 16492
+  },
+  "trace_sha256": "e80beb6fc5873fc891d5b6c71e653fc1225c3ef81b4884514e796b935ccfe24c",
+  "report_sha256": "d6084ffd26fd1fc497d084269821b9fa765733c32c79392706cbb1367cee9da5",
+  "object_sha256": "825f255407ca344e4abc94c0d95b24f53765ea30eeee645b5759fd17d543e1c7",
+  "engine_report_sha256": "bbbd1f100347e8083fca51a56696a1284b5cefbcf74480fb69bc06a8029fab2b",
+  "engine_object_sha256": "d453e5a80cb0518c035c2f0429018cfa20247b0ad72819165ca4826505a8e987",
+  "driver_sha256": "66303191ea2664bb04f67d1c0d481db837550128a546a8c861b7e1bcfcbce65e",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "ghidra-38080.json": "ed01831fce2aea4e387344c037e19bac0d5d3b8abbd8d69ce8555b9fe2377f78",
+    "ghidra-380dc.json": "e2a9635374ee3450f4866ade00cc221b29aba1da981c3f3829c750c375a6bf32",
+    "rea-380dc.json": "3736f58d8efa52030edddf1df4a88f2e3a618d529e47ebc41664cd1b002abdfa",
+    "rea-38080.json": "06edd8a14ff614155afcd86018dfe20c3a9357edd4b6d0822a70efc268206a13"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "r1 on zero-capacity calls is observed separately; source core scratch register identity remains unresolved.",
+    "Exact native wrapper outer frame is compared; worker/parser private stack below it and arbitrary aliases remain gated.",
+    "Bounded formats and selected capacities/aliases do not exhaust all u32 inputs, callback effects or return-address corruption.",
+    "Original instruction, full image integration and hardware behavior remain unproven."
+  ]
+}

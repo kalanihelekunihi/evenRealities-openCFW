@@ -1,0 +1,15 @@
+{
+  "operation": "procedure_info",
+  "procedure": "0x32408",
+  "error": {
+    "code": "invalid_request",
+    "category": "invalid_input",
+    "issues": [
+      {
+        "path": [],
+        "reason": "invalid_value",
+        "message": "No procedure exists at the requested address: 0x32408; Ghidra image base: 0x27000. Choose an observed analysis address. CLI: rea search <path> . --kind procedures --mode regex --provider ghidra --json; MCP: list_procedures. Inspect the loaded base and source mappings with CLI rea analyze <path> --provider ghidra --json and rea inspect-native-load-image <path> --provider ghidra --json, or MCP binary_overview and inspect_native_load_image. Repeat the original target options. For decompile, select source coordinates explicitly with --file-offset=0x... or MCP procedure file-offset:0x...."
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "literal_word_occurrences": {
+    "0x2002c4a8": [
+      "0x8f34c"
+    ],
+    "0x200079b4": [
+      "0x79da8"
+    ]
+  },
+  "ghidra_xref_receipts": [
+    {
+      "file": "ghidra-xrefs-0x2002c4a8.json",
+      "sha256": "edee5b2a34f04ce63b1810cf98933f0507bd1fea6c42aa92c897aee3c66f3d2a"
+    },
+    {
+      "file": "ghidra-xrefs-0x8f34c.json",
+      "sha256": "bfef04f26e12ce64132c0f73073c1114214e4ec6c3a1c024b0f78d2e635139b7"
+    }
+  ],
+  "aligned_legacy_item4_descriptor_candidates": 0,
+  "method": "Static aligned {range-array-start,range-array-end,item-size4}, 1..8 valid bounded ranges inside app image; no candidate admitted",
+  "limitations": [
+    "A heuristic scan and existing Ghidra reference index do not prove absence of an initializer or handler table. Inlined, unindexed, empty, computed or RAM-built configuration remains possible.",
+    "No source-owned shutdown table or power init body is admitted from this search."
+  ]
+}

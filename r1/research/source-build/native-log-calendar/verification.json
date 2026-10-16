@@ -1,0 +1,21 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "8551c125826eebd0d886870f9d3f9f38eb3754c123bf53c230c48ac0835321cb",
+  "provider_reports": {
+    "native-log-calendar/report.json": "8551c125826eebd0d886870f9d3f9f38eb3754c123bf53c230c48ac0835321cb",
+    "structured-time/report.json": "fc30664e31ddc60296d385364c024aadb68e41467531368ebd47f93bb68add7c",
+    "integer-runtime/report.json": "11f725f9bc6429f44be34d2666b9d72c7d8d04ad3ba4461df0f92bc75b0d6faf",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016"
+  },
+  "comparisons": 2257,
+  "timestamp_callbacks_per_implementation": 3441,
+  "source_shared_cold_zero_bytes": 52,
+  "output_bytes": 8,
+  "scope": "Native cached date/time ABI with actual timestamp thunk, recovered Gregorian conversion, compiled signed64 division/copy; signed timezone edges, cache hits/misses, rollover, null/unregistered behavior and callback offset mutation",
+  "limitations": [
+    "Timestamp backend getter remains a fixture; no real RTC/clock registration or full logging-pipeline proof.",
+    "Only bounded aligned/nonoverlapping outputs and valid registered backend descriptors are tested.",
+    "The recovered converter is called through its contextual C ABI internally; native standalone converter ABI is not independently admitted here. Whole-image linking, physical behavior and byte identity remain unresolved."
+  ],
+  "instruction_identity_proven": false
+}

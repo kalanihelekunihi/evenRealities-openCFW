@@ -1,0 +1,50 @@
+{
+  "comparisons": 52778,
+  "counts": {
+    "add": 34752,
+    "shift": 7420,
+    "round": 174,
+    "normalize": 10432
+  },
+  "addition_exponent_distance_boundaries": [
+    0,
+    1,
+    2,
+    31,
+    32,
+    52,
+    53,
+    63,
+    64,
+    65
+  ],
+  "signed_shift_all_low_byte_counts": true,
+  "normalization_all_leading_bit_positions": true,
+  "normalization_random_sign_exponent_words": true,
+  "rounding_halfway_neighbors": true,
+  "actual_source_shift_providers": true,
+  "r0_r1_stack_and_callee_saved_checked": true,
+  "trace_sha256": "df3188067933213e3499f41036d5d8e5535360ccadc87f2ec7c1be5f29596fe3",
+  "report_sha256": "31c872efb89c46ec192da4a7eaf94659ed14389a6c1c03ecb4e57f257347c326",
+  "object_sha256": "af857655ec439a31541154632f02eb8e8ebbc256b19bd4c96aeb97588f931eac",
+  "integer_report_sha256": "11f725f9bc6429f44be34d2666b9d72c7d8d04ad3ba4461df0f92bc75b0d6faf",
+  "integer_object_sha256": "d767fcfe4e4d501f0eb4fccd1cf5a65b702d1948f4e9ec5525180bbeff6b508f",
+  "driver_sha256": "92feafea1598449637f2093735be542c618683aafcce1844c1e06b7757375c12",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-27afc.json": "a4f2bf7279d5bb4362da40a92b0c8ad97c99ca34712fe71d90dc24fdf7077a84",
+    "ghidra-27afc.json": "ee51ce406de9a788e516897195d8b885f276698d3422763034e69eaa612e85e9",
+    "rea-27fd0.json": "16f89362328cd88c8fe7ea6cc89d3dae28af0b17e596b2c085a98000865a3269",
+    "ghidra-27fd0.json": "498f467de74e4f28152842c9138916b47aa2b5d204dfcd2217a18b404d97f201",
+    "rea-28122.json": "2d3d0acb29e0f32a425d2345004ac4bf106d400f7168f91285012ae89e1c701a",
+    "ghidra-28122.json": "39c5ab6b65a017407485ef960575aedbf8965a36e39dd7e539c0231c13bddbe1",
+    "rea-28140.json": "7e6a0c26bf7c0826ad50d5f0f296c872cd9ff25832e68788e08f595e76f113ee",
+    "ghidra-28140.json": "878ceddf6e40fc260a3b15e2f0736d3d43739b6b7961a89ae7ec3889dd25509f"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Native bit arithmetic is the reference; this is not a generic IEEE compliance claim.",
+    "Selected edges and random pairs do not exhaust all input combinations.",
+    "Caller-saved scratch registers, APSR/private frame identity and whole-image instruction identity remain gated."
+  ]
+}

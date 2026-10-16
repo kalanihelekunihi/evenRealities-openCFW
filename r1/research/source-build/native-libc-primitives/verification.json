@@ -1,0 +1,30 @@
+{
+  "comparisons": 25646,
+  "counts": {
+    "rand": 1284,
+    "srand": 1284,
+    "digit": 21798,
+    "getc": 1280
+  },
+  "trace_sha256": "d6c484c55230f4b1b4f66b7024d5b6fc2e48a036553b54121cfbe8d783688213",
+  "return_stack_callee_integer_and_nonstack_writes_checked": true,
+  "all_byte_digit_values": true,
+  "malformed_unsigned_digit_inputs": true,
+  "all_byte_getc_values": true,
+  "zero_negative_and_wrapping_cursor_advances": true,
+  "seeded_random_prng_states": true,
+  "source_complete_for_selected_bodies": true,
+  "runtime_no_unresolved": true,
+  "instruction_identity": false,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "driver_sha256": "b94806368df9dbec302ab41db8a7905f41ee7cdb94750e4ec74daa5cb3da4713",
+  "report_sha256": "2f6b00b952a20473798c153cbcbf27547aa1e96a0ffea57c69058cc1a7e93efb",
+  "object_sha256": "d43d0ef12ef2f7823dbf31a65afe8dbda6e821c9878c8e7a303534e19880f027",
+  "layout": "r1/source-config/runtime/native_libc_primitives_verification.ld",
+  "layout_sha256": "5bc4181c3427b053e8fd02115d91b530142e2943aa9913f281bc5908b5503bc2",
+  "limitations": [
+    "Individual seeded calls do not prove source startup or PRNG initialization.",
+    "Typed behavior does not prove caller scratch/APSR/private frames, invalid memory behavior, full domain or hardware behavior.",
+    "Full firmware and instruction/image identity remain separate gates."
+  ]
+}

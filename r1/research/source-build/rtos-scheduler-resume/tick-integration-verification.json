@@ -1,0 +1,15 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "f1103514488ef28bec0ab9be3e63ca82228ea885828f2336574287ca0b7a9b35",
+  "driver_sha256": "a3fb0af0e31ba3ae93208e5f4ef806f386cfffc64a28c90336361f2b44f61004",
+  "comparisons": 10770,
+  "assertion_comparisons": 2688,
+  "tick_calls_per_implementation": 3360,
+  "scope": "Actual pinned suspend/resume, pending-ready transfers and tick replay with a real delayed timeout; full TCB/state/list comparisons",
+  "limitations": [
+    "Critical entry/exit remain bounded fixtures. Full TCB allocation, scheduler startup/context switching, physical concurrency and whole-image equality remain gates."
+  ],
+  "tick_report_sha256": "133184d609eb91447b471a98c3d492cee34da77e04c6b0931d1549a5d6cdfa41",
+  "tick_object_sha256": "a5fc3510758f0f96b7d278adeaa4d3445a4ef91a3ee6a6fb0179e6cff73b589f",
+  "actual_tick_executed": true
+}

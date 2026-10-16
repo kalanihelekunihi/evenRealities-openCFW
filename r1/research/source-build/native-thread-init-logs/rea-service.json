@@ -1,0 +1,97 @@
+{
+  "evidence_id": "ev_cab097579bc22aa1f6bb7a1ab5fb1d5fdc1a527773806ef7eb3fcbbd3c87040d",
+  "subject": {
+    "name": "stock-analysis-exec.elf",
+    "digest": {
+      "sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "provider": {
+    "id": "ghidra",
+    "name": "Ghidra",
+    "version": "12.1.4"
+  },
+  "analysis_profile": {
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "parameters": {
+      "target_kind": "executable",
+      "target_format": "elf",
+      "architecture": "arm",
+      "available_architectures": [
+        "arm"
+      ],
+      "import_mode": "ephemeral-source-immutable",
+      "annotation_policy": "atomic-function-entry-metadata-v1",
+      "load_image_observations": "source-mappings-entry-context-v2",
+      "function_body_evidence": "complete-inclusive-ranges-v1",
+      "function_references": "complete-body-and-entry-reference-manager-v2",
+      "call_relationship_coverage": "function-body-call-coverage-v5",
+      "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+      "string_inventory_evidence": "defined-data-coverage-v1",
+      "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+      "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+      "instruction_flow_evidence": "decoded-return-pcode-v1",
+      "instruction_references": "exact-address-incoming-v1",
+      "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+      "no_return_repair": "returning-imports-decoded-return-v2",
+      "process_launch": "inspected-jvm-launch-support-v1",
+      "jump_table_evidence": "typed-case-default-blocks-v1",
+      "decompiler_jump_loads": true,
+      "loader": "auto-from-header",
+      "language_id": "auto-from-header",
+      "compiler_spec_id": "auto-default",
+      "analyzer_preset": "ghidra-default"
+    },
+    "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+  },
+  "predicate_type": "rea.analysis",
+  "operation": "procedure_pseudo_code",
+  "parameters": {
+    "procedure": "0x45c84"
+  },
+  "raw_result": {
+    "value": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_0006bbb0(int param_1,int param_2)\n\n{\n  uint uVar1;\n  int iVar2;\n  int iVar3;\n  uint uVar4;\n  uint uVar5;\n  char *pcVar6;\n  uint uVar7;\n  uint uVar8;\n  int local_50 [2];\n  int local_48 [7];\n  int local_2c;\n  int iStack_28;\n  \n  local_2c = param_1;\n  iStack_28 = param_2;\n  if (DAT_20006ee0 == '\\0') {\n    FUN_0006ba68();\n  }\n  if ((_DAT_20006ee4 == 0) || (_DAT_20006ee8 == 0)) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING]gomore store flash not init\",\"[RING]gomore store flash not init\"\n                  );\n    }\n    iVar2 = FUN_000914ec();\n    if (-1 < iVar2 << 0x1e) {\n      return;\n    }\n    pcVar6 = \"gomore store flash not init\";\n  }\n  else if ((local_2c == 0) || (param_2 == 0)) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING]gomore store previousData is null\",\n                   \"[RING]gomore store previousData is null\");\n    }\n    iVar2 = FUN_000914ec();\n    if (-1 < iVar2 << 0x1e) {\n      return;\n    }\n    pcVar6 = \"gomore store previousData is null\";\n  }\n  else {\n    (**(code **)(_DAT_20006ee8 + 0x28))(*(undefined4 *)(_DAT_20006ee4 + 0x34),local_50,8);\n    uVar7 = local_50[0] + 3U & 0xfffffffc;\n    uVar8 = param_2 + 3U & 0xfffffffc;\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0xc800000,\"[RING]gomore store data len:%d,pkey len:%d\",\n                   \"[RING]gomore store data len:%d,pkey len:%d\",uVar8,uVar7);\n    }\n    iVar2 = FUN_000914ec();\n    if (iVar2 << 0x1e < 0) {\n      FUN_000799d6(0x1c0003,\"gomore store data len:%d,pkey len:%d\",uVar8,uVar7);\n    }\n    if (uVar7 + uVar8 + 0x10 < 0x401) {\n      iVar2 = *(int *)(_DAT_20006ee4 + 0x34) + uVar7 + uVar8 * 2 + 0x18;\n      uVar1 = FUN_000914ec();\n      if (((uVar1 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n        FUN_00091638(0xc800000,\"[RING]gomore store start:%d, end:%d\",\n                     \"[RING]gomore store start:%d, end:%d\",*(undefined4 *)(_DAT_20006ee4 + 0x34),\n                     iVar2);\n      }\n      iVar3 = FUN_000914ec();\n      if (iVar3 << 0x1e < 0) {\n        FUN_000799d6(0x1c0003,\"gomore store start:%d, end:%d\",*(undefined4 *)(_DAT_20006ee4 + 0x34),\n                     iVar2);\n      }\n      (**(code **)(_DAT_20006ee8 + 0x28))(iVar2,local_50,8);\n      uVar1 = 0;\n      if (local_50[0] == -1) {\n        uVar4 = 0;\n        do {\n          iVar2 = (uVar8 + 8) * uVar4 + *(int *)(_DAT_20006ee4 + 0x34) + uVar7 + 8;\n          (**(code **)(_DAT_20006ee8 + 0x28))(iVar2,local_50,8);\n          uVar5 = FUN_000914ec();\n          if (((uVar5 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n            FUN_00091638(0xc800000,\"[RING]gomore store read_offset:%d, pKey_head.len:%d\",\n                         \"[RING]gomore store read_offset:%d, pKey_head.len:%d\",iVar2,local_50[0]);\n          }\n          iVar3 = FUN_000914ec();\n          if (iVar3 << 0x1e < 0) {\n            FUN_000799d6(0x1c0003,\"gomore store read_offset:%d, pKey_head.len:%d\",iVar2,local_50[0])\n            ;\n          }\n          if (local_50[0] == -1) {\n            uVar1 = FUN_000914ec();\n            if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n              FUN_00091638(0xc400000,\"[RING]gomore store write_pos:%d\",\n                           \"[RING]gomore store write_pos:%d\",uVar4);\n            }\n            iVar2 = FUN_000914ec();\n            uVar1 = uVar4;\n            if (iVar2 << 0x1e < 0) {\n              FUN_000799c8(0x1c0003,\"gomore store write_pos:%d\",uVar4);\n            }\n            break;\n          }\n          uVar4 = uVar4 + 1 & 0xff;\n        } while (uVar4 < 3);\n      }\n      else {\n        iVar2 = FUN_000855a0();\n        if (iVar2 == 0) {\n          uVar1 = FUN_000914ec();\n          if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n            FUN_00091638(0x4000000,\"[RING]gomore store malloc failed\",\n                         \"[RING]gomore store malloc failed\");\n          }\n          iVar2 = FUN_000914ec();\n          if (-1 < iVar2 << 0x1e) {\n            return;\n          }\n          pcVar6 = \"gomore store malloc failed\";\n          goto LAB_0006bd9e;\n        }\n        (**(code **)(_DAT_20006ee8 + 0x28))(*(undefined4 *)(_DAT_20006ee4 + 0x34),iVar2,uVar7 + 8);\n        (**(code **)(_DAT_20006ee8 + 0x30))(*(undefined4 *)(_DAT_20006ee4 + 0x34),0x1000);\n        uVar4 = FUN_000914ec();\n        if (((uVar4 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n          FUN_00091638(0xc000000,\"[RING]gomore store erase\",\"[RING]gomore store erase\");\n        }\n        iVar3 = FUN_000914ec();\n        if (iVar3 << 0x1e < 0) {\n          FUN_000799c0(0x1c0003,\"gomore store erase\");\n        }\n        (**(code **)(_DAT_20006ee8 + 0x2c))(*(undefined4 *)(_DAT_20006ee4 + 0x34),iVar2,uVar7 + 8);\n        FUN_00095d48(iVar2);\n      }\n      local_48[1] = 0;\n      iVar2 = uVar7 + 8 + (uVar8 + 8) * uVar1 + *(int *)(_DAT_20006ee4 + 0x34);\n      local_48[0] = param_2;\n      (**(code **)(_DAT_20006ee8 + 0x2c))(iVar2,local_48,8);\n      (**(code **)(_DAT_20006ee8 + 0x2c))(iVar2 + 8,local_2c,uVar8);\n      uVar1 = FUN_000914ec();\n      if (((uVar1 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n        FUN_00091638(0xc400000,\"[RING]gomore store write_offset:%d\",\n                     \"[RING]gomore store write_offset:%d\",iVar2);\n      }\n      iVar3 = FUN_000914ec();\n      if (-1 < iVar3 << 0x1e) {\n        return;\n      }\n      FUN_000799c8(0x1c0003,\"gomore store write_offset:%d\",iVar2);\n      return;\n    }\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING]gomore store previousData is too long\",\n                   \"[RING]gomore store previousData is too long\");\n    }\n    iVar2 = FUN_000914ec();\n    if (-1 < iVar2 << 0x1e) {\n      return;\n    }\n    pcVar6 = \"gomore store previousData is too long\";\n  }\nLAB_0006bd9e:\n  FUN_000799c0(0x1c0001,pcVar6);\n  return;\n}\n\n",
+    "limitations": [],
+    "selection": {
+      "file_offset": 285828,
+      "mapped_address": "0x6bc84",
+      "procedure_address": "0x6bbb0"
+    }
+  },
+  "normalized_result": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_0006bbb0(int param_1,int param_2)\n\n{\n  uint uVar1;\n  int iVar2;\n  int iVar3;\n  uint uVar4;\n  uint uVar5;\n  char *pcVar6;\n  uint uVar7;\n  uint uVar8;\n  int local_50 [2];\n  int local_48 [7];\n  int local_2c;\n  int iStack_28;\n  \n  local_2c = param_1;\n  iStack_28 = param_2;\n  if (DAT_20006ee0 == '\\0') {\n    FUN_0006ba68();\n  }\n  if ((_DAT_20006ee4 == 0) || (_DAT_20006ee8 == 0)) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING]gomore store flash not init\",\"[RING]gomore store flash not init\"\n                  );\n    }\n    iVar2 = FUN_000914ec();\n    if (-1 < iVar2 << 0x1e) {\n      return;\n    }\n    pcVar6 = \"gomore store flash not init\";\n  }\n  else if ((local_2c == 0) || (param_2 == 0)) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING]gomore store previousData is null\",\n                   \"[RING]gomore store previousData is null\");\n    }\n    iVar2 = FUN_000914ec();\n    if (-1 < iVar2 << 0x1e) {\n      return;\n    }\n    pcVar6 = \"gomore store previousData is null\";\n  }\n  else {\n    (**(code **)(_DAT_20006ee8 + 0x28))(*(undefined4 *)(_DAT_20006ee4 + 0x34),local_50,8);\n    uVar7 = local_50[0] + 3U & 0xfffffffc;\n    uVar8 = param_2 + 3U & 0xfffffffc;\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0xc800000,\"[RING]gomore store data len:%d,pkey len:%d\",\n                   \"[RING]gomore store data len:%d,pkey len:%d\",uVar8,uVar7);\n    }\n    iVar2 = FUN_000914ec();\n    if (iVar2 << 0x1e < 0) {\n      FUN_000799d6(0x1c0003,\"gomore store data len:%d,pkey len:%d\",uVar8,uVar7);\n    }\n    if (uVar7 + uVar8 + 0x10 < 0x401) {\n      iVar2 = *(int *)(_DAT_20006ee4 + 0x34) + uVar7 + uVar8 * 2 + 0x18;\n      uVar1 = FUN_000914ec();\n      if (((uVar1 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n        FUN_00091638(0xc800000,\"[RING]gomore store start:%d, end:%d\",\n                     \"[RING]gomore store start:%d, end:%d\",*(undefined4 *)(_DAT_20006ee4 + 0x34),\n                     iVar2);\n      }\n      iVar3 = FUN_000914ec();\n      if (iVar3 << 0x1e < 0) {\n        FUN_000799d6(0x1c0003,\"gomore store start:%d, end:%d\",*(undefined4 *)(_DAT_20006ee4 + 0x34),\n                     iVar2);\n      }\n      (**(code **)(_DAT_20006ee8 + 0x28))(iVar2,local_50,8);\n      uVar1 = 0;\n      if (local_50[0] == -1) {\n        uVar4 = 0;\n        do {\n          iVar2 = (uVar8 + 8) * uVar4 + *(int *)(_DAT_20006ee4 + 0x34) + uVar7 + 8;\n          (**(code **)(_DAT_20006ee8 + 0x28))(iVar2,local_50,8);\n          uVar5 = FUN_000914ec();\n          if (((uVar5 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n            FUN_00091638(0xc800000,\"[RING]gomore store read_offset:%d, pKey_head.len:%d\",\n                         \"[RING]gomore store read_offset:%d, pKey_head.len:%d\",iVar2,local_50[0]);\n          }\n          iVar3 = FUN_000914ec();\n          if (iVar3 << 0x1e < 0) {\n            FUN_000799d6(0x1c0003,\"gomore store read_offset:%d, pKey_head.len:%d\",iVar2,local_50[0])\n            ;\n          }\n          if (local_50[0] == -1) {\n            uVar1 = FUN_000914ec();\n            if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n              FUN_00091638(0xc400000,\"[RING]gomore store write_pos:%d\",\n                           \"[RING]gomore store write_pos:%d\",uVar4);\n            }\n            iVar2 = FUN_000914ec();\n            uVar1 = uVar4;\n            if (iVar2 << 0x1e < 0) {\n              FUN_000799c8(0x1c0003,\"gomore store write_pos:%d\",uVar4);\n            }\n            break;\n          }\n          uVar4 = uVar4 + 1 & 0xff;\n        } while (uVar4 < 3);\n      }\n      else {\n        iVar2 = FUN_000855a0();\n        if (iVar2 == 0) {\n          uVar1 = FUN_000914ec();\n          if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n            FUN_00091638(0x4000000,\"[RING]gomore store malloc failed\",\n                         \"[RING]gomore store malloc failed\");\n          }\n          iVar2 = FUN_000914ec();\n          if (-1 < iVar2 << 0x1e) {\n            return;\n          }\n          pcVar6 = \"gomore store malloc failed\";\n          goto LAB_0006bd9e;\n        }\n        (**(code **)(_DAT_20006ee8 + 0x28))(*(undefined4 *)(_DAT_20006ee4 + 0x34),iVar2,uVar7 + 8);\n        (**(code **)(_DAT_20006ee8 + 0x30))(*(undefined4 *)(_DAT_20006ee4 + 0x34),0x1000);\n        uVar4 = FUN_000914ec();\n        if (((uVar4 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n          FUN_00091638(0xc000000,\"[RING]gomore store erase\",\"[RING]gomore store erase\");\n        }\n        iVar3 = FUN_000914ec();\n        if (iVar3 << 0x1e < 0) {\n          FUN_000799c0(0x1c0003,\"gomore store erase\");\n        }\n        (**(code **)(_DAT_20006ee8 + 0x2c))(*(undefined4 *)(_DAT_20006ee4 + 0x34),iVar2,uVar7 + 8);\n        FUN_00095d48(iVar2);\n      }\n      local_48[1] = 0;\n      iVar2 = uVar7 + 8 + (uVar8 + 8) * uVar1 + *(int *)(_DAT_20006ee4 + 0x34);\n      local_48[0] = param_2;\n      (**(code **)(_DAT_20006ee8 + 0x2c))(iVar2,local_48,8);\n      (**(code **)(_DAT_20006ee8 + 0x2c))(iVar2 + 8,local_2c,uVar8);\n      uVar1 = FUN_000914ec();\n      if (((uVar1 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n        FUN_00091638(0xc400000,\"[RING]gomore store write_offset:%d\",\n                     \"[RING]gomore store write_offset:%d\",iVar2);\n      }\n      iVar3 = FUN_000914ec();\n      if (-1 < iVar3 << 0x1e) {\n        return;\n      }\n      FUN_000799c8(0x1c0003,\"gomore store write_offset:%d\",iVar2);\n      return;\n    }\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING]gomore store previousData is too long\",\n                   \"[RING]gomore store previousData is too long\");\n    }\n    iVar2 = FUN_000914ec();\n    if (-1 < iVar2 << 0x1e) {\n      return;\n    }\n    pcVar6 = \"gomore store previousData is too long\";\n  }\nLAB_0006bd9e:\n  FUN_000799c0(0x1c0001,pcVar6);\n  return;\n}\n\n",
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Pseudocode is Ghidra decompiler output, not original source and not text-equivalent to Hopper output.",
+    "External functions and functions without an analyzable body return null; other decompiler failures remain explicit.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "relationship_coverage": null,
+  "locations": [
+    {
+      "kind": "file-offset",
+      "offset": 285828
+    },
+    {
+      "kind": "address",
+      "address": "0x6bc84"
+    },
+    {
+      "kind": "address",
+      "address": "0x6bbb0"
+    }
+  ],
+  "evidence_links": []
+}

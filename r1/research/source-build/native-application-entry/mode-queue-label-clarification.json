@@ -1,0 +1,9 @@
+{
+  "previous_label": "all_three_mode_values_zero_to_seven=True",
+  "clarified_label": "mode_queue_triples_zero_to_seven=True",
+  "comparisons": 27648,
+  "actual_mode_get_calls": 69120,
+  "trace_sha256": "80002fa28a387751eb7de6b14839a4015618b40d9d636b8129dc5ca42b4c842e",
+  "initial_receipt_sha256": "da1d05c66e285daa2e21992c826fe08cbc3146953375a0b59cd9be6f45953c7a",
+  "reason": "All supplied mode triples span zero through seven; short circuiting means the native getter runs two or three times, not always three."
+}

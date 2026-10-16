@@ -1,0 +1,40 @@
+/* ================================================================
+ * entry: 0x000851a4
+ * end:   0x000851e9
+ * size:  70 bytes
+ * name:  FUN_000851a4
+ * ================================================================ */
+
+void FUN_000851a4(uint *param_1)
+
+{
+  uint *puVar1;
+  uint *puVar2;
+
+  puVar2 = DAT_000851ec;
+  do {
+    puVar1 = puVar2;
+    puVar2 = (uint *)*puVar1;
+  } while (puVar2 < param_1);
+  if ((uint *)(puVar1[1] + (int)puVar1) == param_1) {
+    puVar1[1] = param_1[1] + puVar1[1];
+    param_1 = puVar1;
+  }
+  if ((uint *)(param_1[1] + (int)param_1) == puVar2) {
+    if (puVar2 == (uint *)*DAT_000851f0) {
+      *param_1 = (uint)*DAT_000851f0;
+      goto LAB_000851de;
+    }
+    param_1[1] = puVar2[1] + param_1[1];
+    puVar2 = *(uint **)*puVar1;
+  }
+  *param_1 = (uint)puVar2;
+LAB_000851de:
+  if (puVar1 != param_1) {
+    *puVar1 = (uint)param_1;
+  }
+  return;
+}
+
+
+

@@ -1,0 +1,49 @@
+{
+  "comparisons": 376832,
+  "counts": {
+    "round": 81920,
+    "roundf": 294912
+  },
+  "all_binary32_and_binary64_exponents": true,
+  "both_signs": true,
+  "halfway_integer_range": [
+    -2048,
+    2047
+  ],
+  "halfway_and_adjacent_bits": true,
+  "all_four_rounding_modes": true,
+  "roundf_flush_to_zero_and_default_nan_modes": true,
+  "roundf_preexisting_inexact_flag": true,
+  "return_fpscr_stack_callee_integer_fp_and_nonstack_writes_checked": true,
+  "actual_source_integral_round_subtract_add_and_flags": true,
+  "source_owned_data_bytes": 24,
+  "source_owned_data_sha256": "dd18823c8c55f4fec61487c5296210b616e4736743be7b280f2bce5146878c8d",
+  "runtime_no_unresolved": true,
+  "trace_sha256": "5725cb9ef79dcfadcd9ee0ed69d14a5539f9f33974210b4e3c2fcf4679647726",
+  "report_sha256": "bd3e10ee6642539c8d9d535e69711b4c4a5261c44b295488c0b5268e54f998fa",
+  "object_sha256": "07a781e0983a27ce68322eebe182cc5ee3eaf06f8230ee01863da9ac35b31328",
+  "runtime_report_sha256": "ec25186a629d3a46b0d7cd868d83def98b27ffd093d7323a14ff0ea5bd56251a",
+  "runtime_object_sha256": "65a774952399bdf827802c581500387640af575d00dd0dc3609dbc2d8982abd9",
+  "layout": "r1/source-config/runtime/native_math_round_verification.ld",
+  "layout_sha256": "d95f5d803c86148896f2f74675eefc5f4aa1abdfaac8b28d8d0433f6ae313057",
+  "parent_layouts": {
+    "r1/source-config/runtime/native_double_directed_verification.ld": "095ca34ea3caddd78d99d92f63c4ab1367a50a83d930e235995937b84739b972",
+    "r1/source-config/runtime/native_math_selection_verification.ld": "e3e0326834a82345388e77a63de033c5a95b3499b39c6ff0a2361fbfdc081d31",
+    "r1/source-config/runtime/native_math_verification.ld": "eb559e9b8b67d97f666d288ccdb29a9190282e9725b98149195512b5a0dae4c4"
+  },
+  "driver_sha256": "53835506e245a23dd272a89503b3cf476a6c1dfd40ff64808e3f045ebe3e99e4",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-3ac88.json": "63a547b60f737cf484b2a6bc27352fff2735b6307e7acb7527a29474ca1a90b6",
+    "ghidra-3ac88.json": "e55d4d1b488aaa744f0795ead6a65164e48fa2ce4a367b3788af95f5f67523e1",
+    "rea-3ad68.json": "fe8b0423d3cb3042b477e8d7bdec88d72d89928bdc7bcc2e5d934789fd46a905",
+    "ghidra-3ad68.json": "70748083767e50d58924a5e75bb13015896bddbd925a3bbbb92f44d12c199729"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Native encoded/software arithmetic and VFP float operations retained; no generic libm replacement.",
+    "Typed FP return/FPSCR/callee/nonstack observations only; arbitrary caller scratch/APSR/private frame aliases remain open.",
+    "Selected exponent patterns,halfway integers and adjacent bits do not exhaust full input domain.",
+    "Source data/verification layout and emulated VFP observations are not final placement, instruction identity, whole-image or hardware proof."
+  ]
+}

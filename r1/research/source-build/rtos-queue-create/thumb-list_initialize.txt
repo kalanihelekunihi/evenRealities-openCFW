@@ -1,0 +1,15 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00095c90 <r1_stock_gpio_pin_set+0x1c85c>:
+   95c90:	f100 0108 	add.w	r1, r0, #8
+   95c94:	f04f 32ff 	mov.w	r2, #4294967295	@ 0xffffffff
+   95c98:	e9c0 1201 	strd	r1, r2, [r0, #4]
+   95c9c:	60c1      	str	r1, [r0, #12]
+   95c9e:	6101      	str	r1, [r0, #16]
+   95ca0:	2100      	movs	r1, #0
+   95ca2:	6001      	str	r1, [r0, #0]
+   95ca4:	4770      	bx	lr

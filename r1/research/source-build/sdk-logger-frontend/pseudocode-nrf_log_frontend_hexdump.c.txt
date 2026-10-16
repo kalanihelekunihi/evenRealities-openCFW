@@ -1,0 +1,53 @@
+/* ================================================================
+ * entry: 0x00079918
+ * end:   0x000799b7
+ * size:  160 bytes
+ * name:  FUN_00079918
+ * ================================================================ */
+
+void FUN_00079918(uint param_1,int param_2,uint param_3,uint param_4)
+
+{
+  uint *puVar1;
+  byte *pbVar2;
+  int iVar3;
+  byte *pbVar4;
+  uint uVar5;
+  uint uVar6;
+  uint uVar7;
+  uint uVar8;
+  uint local_28;
+
+  puVar1 = DAT_000799b8;
+  uVar7 = *DAT_000799b8;
+  local_28 = param_4;
+  iVar3 = FUN_000566ac(param_3 + 3 >> 2,&local_28,0);
+  uVar5 = local_28;
+  pbVar2 = DAT_000799bc;
+  if (iVar3 != 0) {
+    local_28 = local_28 + 2;
+    uVar8 = (*puVar1 - (local_28 & uVar7)) * 4 + 4;
+    pbVar4 = DAT_000799bc + (local_28 & uVar7) * 4;
+    uVar6 = param_3;
+    if (uVar8 < param_3) {
+      FUN_0002775c(pbVar4 + 0xc,param_2,uVar8);
+      param_2 = param_2 + uVar8;
+      pbVar4 = DAT_000799bc;
+      uVar6 = param_3 - uVar8;
+    }
+    FUN_0002775c(pbVar4 + 0xc,param_2,uVar6);
+    iVar3 = FUN_0005ccfc();
+    uVar6 = uVar5 & uVar7;
+    *(uint *)(pbVar2 + (uVar5 + 1 & uVar7) * 4 + 0xc) = param_1 >> 0x10 | iVar3 << 0x10;
+    *(uint *)(pbVar2 + uVar6 * 4 + 0xc) =
+         (*(uint *)(pbVar2 + uVar6 * 4 + 0xc) & 0x3f0004 | (param_1 & 7) << 3 | param_3 << 0x16) + 2
+         & 0xfffffffb;
+  }
+  uVar5 = (uint)*pbVar2;
+  while (uVar5 != 0) {
+    uVar5 = FUN_000796a8();
+  }
+  return;
+}
+
+

@@ -1,0 +1,31 @@
+{
+  "comparisons": 4616,
+  "counts": {
+    "r1_yhm_charge_state_native": 2308,
+    "r1_native_charger_state_get": 2308
+  },
+  "report_sha256": "3ee05a2fb38bb5937de35a3910a50e587482fb240559ff463f63e3e077fd636d",
+  "object_sha256": "d887661c44ea6248b9c232c4f1c5333d126c5a883d63e213c129442d9cc6c6bf",
+  "driver_sha256": "654c4bf0999521f1b17660346befacf95a60caf14e29c472561110f0052c687e",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-r1_yhm_charge_state_native.json": "1dcd7c3b1f917a1ead593fcaf6f4e5ebc7bccc20c10e8d50b79d93f17d0550cb",
+    "ghidra-r1_native_charger_state_get.json": "8ff561b01d5b6d58085bdc251e19a5b6233e93a498c0961271030a7334a9bff9"
+  },
+  "rea_evidence": {
+    "rea-adapter-body.json": "6f1c608aeda6207a48fae46e9843c3cad88c4a6bff624a2e6b70156d488ab4d2",
+    "rea-classifier-body.json": "11287d4c35cedb9935153dce86029fd6a4945ba37811156a9a96d4de7612e863",
+    "rea-raw-status.json": "4f4e66521ccfcafce59f417aa4d3b2f71dc218a8cc0d0c145f29f09182c5e5ff",
+    "rea-adapter.json": "92fe87f68356dc92046dfcdb7562450c55bdf2bf827ea37b35399903ef46d3fb"
+  },
+  "classifier_body_bytes": 26,
+  "classifier_span_bytes": 40,
+  "table_bytes": 14,
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Raw status is a fixture; native read failure may retain an incoming stack byte",
+    "Existing contextual YHM model checks transport result; no silent substitution",
+    "Whole battery provider graph, canonical admission and source state initialization remain gates"
+  ]
+}

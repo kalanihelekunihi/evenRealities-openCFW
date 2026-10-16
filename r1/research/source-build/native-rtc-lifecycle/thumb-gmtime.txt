@@ -1,0 +1,65 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+000276c8 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x6c8>:
+   276c8:	4601      	mov	r1, r0
+   276ca:	b510      	push	{r4, lr}
+   276cc:	6809      	ldr	r1, [r1, #0]
+   276ce:	223c      	movs	r2, #60	@ 0x3c
+   276d0:	fbb1 f3f2 	udiv	r3, r1, r2
+   276d4:	fb02 1313 	mls	r3, r2, r3, r1
+   276d8:	fbb1 f1f2 	udiv	r1, r1, r2
+   276dc:	481d      	ldr	r0, [pc, #116]	@ (27754 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x754>)
+   276de:	6003      	str	r3, [r0, #0]
+   276e0:	fbb1 f3f2 	udiv	r3, r1, r2
+   276e4:	fb02 1313 	mls	r3, r2, r3, r1
+   276e8:	fbb1 f1f2 	udiv	r1, r1, r2
+   276ec:	2218      	movs	r2, #24
+   276ee:	6043      	str	r3, [r0, #4]
+   276f0:	fbb1 f3f2 	udiv	r3, r1, r2
+   276f4:	fb02 1313 	mls	r3, r2, r3, r1
+   276f8:	fbb1 f1f2 	udiv	r1, r1, r2
+   276fc:	6083      	str	r3, [r0, #8]
+   276fe:	1d0a      	adds	r2, r1, #4
+   27700:	2307      	movs	r3, #7
+   27702:	fbb2 f4f3 	udiv	r4, r2, r3
+   27706:	fb03 2214 	mls	r2, r3, r4, r2
+   2770a:	6182      	str	r2, [r0, #24]
+   2770c:	008a      	lsls	r2, r1, #2
+   2770e:	f240 51b5 	movw	r1, #1461	@ 0x5b5
+   27712:	f602 326c 	addw	r2, r2, #2924	@ 0xb6c
+   27716:	fbb2 f3f1 	udiv	r3, r2, r1
+   2771a:	3344      	adds	r3, #68	@ 0x44
+   2771c:	6143      	str	r3, [r0, #20]
+   2771e:	fbb2 f3f1 	udiv	r3, r2, r1
+   27722:	fb01 2113 	mls	r1, r1, r3, r2
+   27726:	0889      	lsrs	r1, r1, #2
+   27728:	61c1      	str	r1, [r0, #28]
+   2772a:	293b      	cmp	r1, #59	@ 0x3b
+   2772c:	d303      	bcc.n	27736 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x736>
+   2772e:	7d02      	ldrb	r2, [r0, #20]
+   27730:	0792      	lsls	r2, r2, #30
+   27732:	d000      	beq.n	27736 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x736>
+   27734:	1c49      	adds	r1, r1, #1
+   27736:	2200      	movs	r2, #0
+   27738:	4c07      	ldr	r4, [pc, #28]	@ (27758 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x758>)
+   2773a:	4613      	mov	r3, r2
+   2773c:	6102      	str	r2, [r0, #16]
+   2773e:	5ce2      	ldrb	r2, [r4, r3]
+   27740:	428a      	cmp	r2, r1
+   27742:	d803      	bhi.n	2774c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x74c>
+   27744:	1a89      	subs	r1, r1, r2
+   27746:	1c5b      	adds	r3, r3, #1
+   27748:	6103      	str	r3, [r0, #16]
+   2774a:	e7f8      	b.n	2773e <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x73e>
+   2774c:	1c49      	adds	r1, r1, #1
+   2774e:	60c1      	str	r1, [r0, #12]
+   27750:	bd10      	pop	{r4, pc}
+   27752:	0000      	movs	r0, r0
+   27754:	7e88      	ldrb	r0, [r1, #26]
+   27756:	2003      	movs	r0, #3
+   27758:	db18      	blt.n	2778c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x78c>
+   2775a:	000b      	movs	r3, r1

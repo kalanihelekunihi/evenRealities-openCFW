@@ -1,0 +1,23 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "e240b64ac26d8dcb7790a8295f6317c6aaba4539b74be8d3aa160da3cada20f5",
+  "driver_sha256": "32be7acdc7d8076e88be7ee02b3ee481eb4667deed30ce0aec242c824b6383b2",
+  "comparisons": 18675,
+  "assertion_comparisons": 323,
+  "comparisons_by_function": {
+    "vTaskInternalSetTimeOutState": 20,
+    "vTaskMissedYield": 20,
+    "vTaskPlaceOnEventList": 5041,
+    "xTaskCheckForTimeOut": 2702,
+    "xTaskPriorityDisinherit": 768,
+    "prvAddCurrentTaskToDelayedList": 10080,
+    "uxListRemove": 8,
+    "vListInsert": 36
+  },
+  "accessed_tcb_prefix_bytes": 104,
+  "top_used_priority_bytes_compared": 4,
+  "scope": "Actual pinned timeout snapshots/checks, missed yield, ordered event/delayed/suspended placement, mutex disinherit and list insert/remove; full TCB canaries and shared state/list memory",
+  "limitations": [
+    "Critical entry/exit are bounded fixtures. The104-byte accessed TCB prefix preserves the native stack-depth word; full112-byte construction/tail fields remain gated. No scheduler startup/context switching, physical concurrency or whole-image identity proof."
+  ]
+}

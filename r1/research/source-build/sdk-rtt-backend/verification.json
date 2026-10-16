@@ -1,0 +1,23 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "27201824b70bd336faba035064b3860b94e21a2e87377591be8fe6f7b31077e6",
+  "frontend_report_sha256": "fe2f7a255d0bdc3bd80a64a3d731677e3a3e314ea0a1535e34a7e869cebda390",
+  "comparisons": 141,
+  "actual_delay": false,
+  "delay_report_sha256": null,
+  "actual_segger": false,
+  "segger_report_sha256": null,
+  "memory_report_sha256": null,
+  "initial_zero_bytes": 4097,
+  "backend_control_initial_bytes": 8,
+  "backend_record_bytes": 16,
+  "backend_name_bytes": 16,
+  "api_bytes_pointer_normalized": 12,
+  "scope": "Unchanged SDK RTT/default initialization and actual frontend backend-add; typed record/API, staging, retry/host state and wrapper callback contract",
+  "limitations": [
+    "Serial formatter is a fixture; delay executes only in actual_delay mode. SEGGER init/write execute only in actual_segger mode, using fixed initial ring availability instead of scripted host consumption; physical debugger transport and elapsed delay are unproven.",
+    "Private backend callbacks lack ownership rows; serial_tx has a product-specific ownership attribution held pending correction. Neither inflates tested ledger counts.",
+    "Whole-image linking/startup, original compiler/link identity and byte equality remain unresolved."
+  ],
+  "instruction_identity_proven": false
+}

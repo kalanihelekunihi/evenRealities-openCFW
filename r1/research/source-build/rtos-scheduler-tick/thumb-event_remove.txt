@@ -1,0 +1,101 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00098a4c <r1_stock_gpio_pin_set+0x1f618>:
+   98a4c:	b570      	push	{r4, r5, r6, lr}
+   98a4e:	68c0      	ldr	r0, [r0, #12]
+   98a50:	68c4      	ldr	r4, [r0, #12]
+   98a52:	2000      	movs	r0, #0
+   98a54:	b344      	cbz	r4, 98aa8 <_stack+0x18aa8>
+   98a56:	e9d4 3107 	ldrd	r3, r1, [r4, #28]
+   98a5a:	6aa2      	ldr	r2, [r4, #40]	@ 0x28
+   98a5c:	6099      	str	r1, [r3, #8]
+   98a5e:	e9d4 1307 	ldrd	r1, r3, [r4, #28]
+   98a62:	6059      	str	r1, [r3, #4]
+   98a64:	6853      	ldr	r3, [r2, #4]
+   98a66:	f104 0118 	add.w	r1, r4, #24
+   98a6a:	428b      	cmp	r3, r1
+   98a6c:	d101      	bne.n	98a72 <_stack+0x18a72>
+   98a6e:	6a23      	ldr	r3, [r4, #32]
+   98a70:	6053      	str	r3, [r2, #4]
+   98a72:	62a0      	str	r0, [r4, #40]	@ 0x28
+   98a74:	6813      	ldr	r3, [r2, #0]
+   98a76:	1e5b      	subs	r3, r3, #1
+   98a78:	6013      	str	r3, [r2, #0]
+   98a7a:	4d27      	ldr	r5, [pc, #156]	@ (98b18 <_stack+0x18b18>)
+   98a7c:	6b6a      	ldr	r2, [r5, #52]	@ 0x34
+   98a7e:	b1ca      	cbz	r2, 98ab4 <_stack+0x18ab4>
+   98a80:	4a26      	ldr	r2, [pc, #152]	@ (98b1c <_stack+0x18b1c>)
+   98a82:	6850      	ldr	r0, [r2, #4]
+   98a84:	61e0      	str	r0, [r4, #28]
+   98a86:	6883      	ldr	r3, [r0, #8]
+   98a88:	6223      	str	r3, [r4, #32]
+   98a8a:	6883      	ldr	r3, [r0, #8]
+   98a8c:	6059      	str	r1, [r3, #4]
+   98a8e:	6081      	str	r1, [r0, #8]
+   98a90:	62a2      	str	r2, [r4, #40]	@ 0x28
+   98a92:	6810      	ldr	r0, [r2, #0]
+   98a94:	1c40      	adds	r0, r0, #1
+   98a96:	6010      	str	r0, [r2, #0]
+   98a98:	6ae0      	ldr	r0, [r4, #44]	@ 0x2c
+   98a9a:	6829      	ldr	r1, [r5, #0]
+   98a9c:	6ac9      	ldr	r1, [r1, #44]	@ 0x2c
+   98a9e:	4288      	cmp	r0, r1
+   98aa0:	d938      	bls.n	98b14 <_stack+0x18b14>
+   98aa2:	2001      	movs	r0, #1
+   98aa4:	61e8      	str	r0, [r5, #28]
+   98aa6:	bd70      	pop	{r4, r5, r6, pc}
+   98aa8:	2140      	movs	r1, #64	@ 0x40
+   98aaa:	f381 8811 	msr	BASEPRI, r1
+   98aae:	f840 0c01 	str.w	r0, [r0, #-1]
+   98ab2:	e7fe      	b.n	98ab2 <_stack+0x18ab2>
+   98ab4:	e9d4 3102 	ldrd	r3, r1, [r4, #8]
+   98ab8:	6962      	ldr	r2, [r4, #20]
+   98aba:	6099      	str	r1, [r3, #8]
+   98abc:	e9d4 1302 	ldrd	r1, r3, [r4, #8]
+   98ac0:	6059      	str	r1, [r3, #4]
+   98ac2:	6853      	ldr	r3, [r2, #4]
+   98ac4:	1d21      	adds	r1, r4, #4
+   98ac6:	428b      	cmp	r3, r1
+   98ac8:	d101      	bne.n	98ace <_stack+0x18ace>
+   98aca:	68e3      	ldr	r3, [r4, #12]
+   98acc:	6053      	str	r3, [r2, #4]
+   98ace:	6160      	str	r0, [r4, #20]
+   98ad0:	6810      	ldr	r0, [r2, #0]
+   98ad2:	1e40      	subs	r0, r0, #1
+   98ad4:	6010      	str	r0, [r2, #0]
+   98ad6:	6ae0      	ldr	r0, [r4, #44]	@ 0x2c
+   98ad8:	692a      	ldr	r2, [r5, #16]
+   98ada:	4290      	cmp	r0, r2
+   98adc:	d900      	bls.n	98ae0 <_stack+0x18ae0>
+   98ade:	6128      	str	r0, [r5, #16]
+   98ae0:	4a0f      	ldr	r2, [pc, #60]	@ (98b20 <_stack+0x18b20>)
+   98ae2:	eb00 0080 	add.w	r0, r0, r0, lsl #2
+   98ae6:	eb02 0080 	add.w	r0, r2, r0, lsl #2
+   98aea:	6840      	ldr	r0, [r0, #4]
+   98aec:	60a0      	str	r0, [r4, #8]
+   98aee:	6883      	ldr	r3, [r0, #8]
+   98af0:	60e3      	str	r3, [r4, #12]
+   98af2:	6883      	ldr	r3, [r0, #8]
+   98af4:	6059      	str	r1, [r3, #4]
+   98af6:	6081      	str	r1, [r0, #8]
+   98af8:	6ae0      	ldr	r0, [r4, #44]	@ 0x2c
+   98afa:	eb00 0080 	add.w	r0, r0, r0, lsl #2
+   98afe:	eb02 0180 	add.w	r1, r2, r0, lsl #2
+   98b02:	6161      	str	r1, [r4, #20]
+   98b04:	f852 1020 	ldr.w	r1, [r2, r0, lsl #2]
+   98b08:	1c49      	adds	r1, r1, #1
+   98b0a:	f842 1020 	str.w	r1, [r2, r0, lsl #2]
+   98b0e:	f7ec fcab 	bl	85468 <_stack+0x5468>
+   98b12:	e7c1      	b.n	98a98 <_stack+0x18a98>
+   98b14:	2000      	movs	r0, #0
+   98b16:	bd70      	pop	{r4, r5, r6, pc}
+   98b18:	781c      	ldrb	r4, [r3, #0]
+   98b1a:	2000      	movs	r0, #0
+   98b1c:	b21c      	sxth	r4, r3
+   98b1e:	2002      	movs	r0, #2
+   98b20:	ad94      	add	r5, sp, #592	@ 0x250
+   98b22:	2002      	movs	r0, #2

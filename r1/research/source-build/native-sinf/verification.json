@@ -1,0 +1,53 @@
+{
+  "comparisons": 470752,
+  "counts": {
+    "sinf": 470752
+  },
+  "errno_writes_per_side": {
+    "sinf": 64
+  },
+  "all_binary32_exponents": true,
+  "both_signs": true,
+  "all_rounding_flush_to_zero_default_nan_modes": true,
+  "initial_inexact_flag_zero_and_one": true,
+  "threshold_adjacent_bits": true,
+  "dense_numeric_grid": true,
+  "return_fpscr_stack_callee_integer_fp_errno_and_nonstack_writes_checked": true,
+  "actual_source_sinf_and_dependencies": true,
+  "independent_calls_reset_xpsr": true,
+  "source_owned_numeric_bytes": 56,
+  "source_owned_data_sha256": "f2aa6266b1554993dd28934f63f7ead9984dd0a41979837af1e0c5d1961b9bdd",
+  "runtime_no_unresolved": true,
+  "trace_sha256": "640d848263d694e0941b0efb9897a852ac33a39b5a451f5dcc47140c6257a1c3",
+  "report_sha256": "137abc792554f0c306aab4424ecab89a96fcf0e834796c61551491e19a95f08b",
+  "object_sha256": "0611e1a51ce90faf8feae621972a093fda3b9a000e73fb537de0cb839019681b",
+  "runtime_report_sha256": "11082406d1221335cca7783f2becbf2246b3dadb5c7f645b4f2f2681e8637bd3",
+  "runtime_object_sha256": "0e071845975a5c559ccc487b33741a9c37d88d928668a13b551a140497a33eaa",
+  "layout": "r1/source-config/runtime/native_sinf_verification.ld",
+  "layout_sha256": "1f22b031e81c7ae12b9837cf9c61aeb4bdfedf9af35d99ab2e83aee248e16a11",
+  "parent_layouts": {
+    "r1/source-config/runtime/native_cosf_verification.ld": "336ab32c74047bfc0113dfe74c0efd61a343d941225fb6f64bb43808c4ce559c",
+    "r1/source-config/runtime/native_trig_reduce_consumers.ld": "29a17be3d50dfda8e501ccc1b8704358e715b183497af46cd245daab45d66a8e",
+    "r1/source-config/runtime/native_atan2f_verification.ld": "33349fbd0aeeba445dc58f74d0cb25d7c1d3e1c11fbc71edc1cbf75b896bbc0b",
+    "r1/source-config/runtime/native_atanf_verification.ld": "8fb66a414f9608ef6ff2a35442e28bb0368ff6bd8562678e075e44b632ccf66c",
+    "r1/source-config/runtime/native_float_logs_verification.ld": "4337c0a17fe487740fc2e43b8b1f9d868b59279aa61a586ffa2f6032d5cad13a",
+    "r1/source-config/runtime/native_expf_tanhf_verification.ld": "b14d24f5c54350c6418ad2f14d058e32e9b4eb812ed21dd003f4a2c7bc126eb1",
+    "r1/source-config/runtime/native_math_special_verification.ld": "4a59c6299c19c3be674df032907be18b3a340ba63031a30994d56d0b3fcaf459",
+    "r1/source-config/runtime/native_math_round_verification.ld": "d95f5d803c86148896f2f74675eefc5f4aa1abdfaac8b28d8d0433f6ae313057",
+    "r1/source-config/runtime/native_double_directed_verification.ld": "095ca34ea3caddd78d99d92f63c4ab1367a50a83d930e235995937b84739b972",
+    "r1/source-config/runtime/native_math_selection_verification.ld": "e3e0326834a82345388e77a63de033c5a95b3499b39c6ff0a2361fbfdc081d31",
+    "r1/source-config/runtime/native_math_verification.ld": "eb559e9b8b67d97f666d288ccdb29a9190282e9725b98149195512b5a0dae4c4"
+  },
+  "driver_sha256": "1240ec17af6c3df4ca0db644f104823cbc504940eb80319415b433fefdbd4475",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-3ae04.json": "072e80f53d73ed3bd3fe6e72cf6e0eb27b39f1d79c4963bbebf3f574c4b360ca",
+    "ghidra-3ae04.json": "67d8f336d313cac1db676168b3ec855e60e6f579a6d63263ef37683a8c22ce75"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Typed S0/FPSCR/errno/callee/nonstack checks do not establish remaining caller scratch/APSR/private frames.",
+    "Selected exponent/mantissa/threshold/grid/control cases do not exhaust input domain or physical FPU behavior.",
+    "Recovered numeric constants and verification placement are separate from original instruction/image identity."
+  ]
+}

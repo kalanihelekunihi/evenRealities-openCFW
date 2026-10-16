@@ -1,0 +1,91 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "kernel_pin": "def7d2df2b0506d3d249334974f51e427c17a41c",
+  "spans": [
+    {
+      "entry": "0x95bb8",
+      "bytes": 24,
+      "ghidra_file": "ghidra-idle-memory.json",
+      "ghidra_sha256": "afa93fa008b51578ddd4504b997c20ac47dc69ccf61fe48ad75604e5ba9f2751",
+      "thumb_file": "thumb-idle-memory.txt",
+      "thumb_sha256": "ccd2047d2f91beb13b7f540c43887ab029f4017c2e6b873e6716ed466042a3cc"
+    },
+    {
+      "entry": "0x95bd0",
+      "bytes": 24,
+      "ghidra_file": "ghidra-timer-memory.json",
+      "ghidra_sha256": "c290ed8df9b6768fb38f222cb1bb87863194d1fd439f6b3d8dad6e262f0d5e29",
+      "thumb_file": "thumb-timer-memory.txt",
+      "thumb_sha256": "112d50cd6665ec2953aaba5592fe78b02d15a90d317b10d65fdf102765a1bfdb"
+    },
+    {
+      "entry": "0x964c8",
+      "bytes": 116,
+      "ghidra_file": "ghidra-scheduler-start.json",
+      "ghidra_sha256": "f1deb887fca65f5196dab30e838cd763644ee535816b83b583f2963712a8051b",
+      "thumb_file": "thumb-scheduler-start.txt",
+      "thumb_sha256": "1b22ffa2764e1b094ff4ee753b56f21aadc38cb05e32ad2338991938a166a47a"
+    },
+    {
+      "entry": "0x98ca8",
+      "bytes": 92,
+      "ghidra_file": "ghidra-timer-create.json",
+      "ghidra_sha256": "cf8229293d928244836f782c3cebf35c3945e7ad33f6fba25777223e94973d52",
+      "thumb_file": "thumb-timer-create.txt",
+      "thumb_sha256": "150e16fea2527918951d85e03c3d472c5ddafb44edb72eebc6671db97b7ac2fe"
+    },
+    {
+      "entry": "0x84e58",
+      "bytes": 76,
+      "ghidra_file": "ghidra-timer-infrastructure.json",
+      "ghidra_sha256": "f721f1d41afde4043f52d7cec80329bc3c132fe9fe94937bf57a3a2627e061fd",
+      "thumb_file": "thumb-timer-infrastructure.txt",
+      "thumb_sha256": "f9cdb473e147997bad54e09d97ef7fe8825a84c14eeb133fdbf5f972c5849e9a"
+    }
+  ],
+  "source_configuration": {
+    "static_tcb_bytes": 112,
+    "stack_words": 256,
+    "timer_priority": 53,
+    "timer_queue_length": 32,
+    "timer_message_bytes": 16,
+    "queue_registry_size": 0
+  },
+  "native_addresses": {
+    "idle_memory": "0x2002b4d0",
+    "timer_memory": "0x2002b940",
+    "idle_handle": "0x20007848",
+    "timer_queue_handle": "0x2000785c",
+    "timer_task_handle": "0x20007860",
+    "current_timer_list": "0x20007868",
+    "overflow_timer_list": "0x2000786c",
+    "timer_list1": "0x2002b4a8",
+    "timer_list2": "0x2002b4bc",
+    "timer_queue": "0x2002b258",
+    "timer_queue_storage": "0x2002b2a8"
+  },
+  "rea_inventory": "r1/research/source-build/sdk-clock/rea-procedure-inventory.json",
+  "rea_inventory_sha256": "fbdbc0c467b87b6c991baa6e398adae6fa42e47812b981a59221a122c37974ce",
+  "rea_registered_rows": [
+    {
+      "address": "0x84e58",
+      "value": "FUN_00084e58"
+    },
+    {
+      "address": "0x95bd0",
+      "value": "FUN_00095bd0"
+    },
+    {
+      "address": "0x98ca8",
+      "value": "FUN_00098ca8"
+    }
+  ],
+  "open_gates": [
+    "Port-start body and native first-context transfer",
+    "Timer task runtime body at0x85510 remains an unexecuted source provider",
+    "RTC timer setup and physical scheduling",
+    "Whole-image source completeness and instruction identity"
+  ]
+}

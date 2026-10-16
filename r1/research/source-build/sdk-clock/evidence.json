@@ -1,0 +1,82 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "functions": [
+    {
+      "symbol": "r1_soc_observer_907fc",
+      "entry": "0x907fc",
+      "body_bytes": 18,
+      "ghidra_file": "ghidra-r1_soc_observer_907fc-body.json",
+      "ghidra_sha256": "7f6c4e2fb531daf815e75f9feb983afbe51afb347890eea4ea6592bbfe379dc8"
+    },
+    {
+      "symbol": "r1_sdh_state_observer_890f0",
+      "entry": "0x890f0",
+      "body_bytes": 84,
+      "ghidra_file": "ghidra-r1_sdh_state_observer_890f0-body.json",
+      "ghidra_sha256": "0d90ab54ba007e31de94be87e3189ac2d43957eed3f1986317c4587767b3b0e5"
+    },
+    {
+      "symbol": "r1_sdk_clock_notify",
+      "entry": "0x584ac",
+      "body_bytes": 34,
+      "ghidra_file": "ghidra-r1_sdk_clock_notify-body.json",
+      "ghidra_sha256": "ff68c6a874a1ebda2f2fa062a89c5435ea4311b18cab4680fa1402590b690bd3"
+    },
+    {
+      "symbol": "r1_sdk_clock_irq_handler",
+      "entry": "0x584d4",
+      "body_bytes": 24,
+      "ghidra_file": "ghidra-r1_sdk_clock_irq_handler-body.json",
+      "ghidra_sha256": "32bee9ec3b7319c64d3d60f0d98ee139e89263159f9f0d2fcbebf0cb2ebf25e1"
+    },
+    {
+      "symbol": "r1_sdk_clock_item_enqueue",
+      "entry": "0x72bca",
+      "body_bytes": 22,
+      "ghidra_file": "ghidra-r1_sdk_clock_item_enqueue-body.json",
+      "ghidra_sha256": "3d66b838868327c220c8b6530004b5bad495f185d86112e82f4dd62161c23cae",
+      "pseudocode_file": "r1_sdk_clock_item_enqueue-pseudocode.c.txt",
+      "pseudocode_sha256": "464b24dce00fd8f76d017f6edc98b5c98cf6f8c28c4026dba58514bffb0450d8"
+    },
+    {
+      "symbol": "nrf_drv_clock_init",
+      "entry": "0x788c8",
+      "body_bytes": 98,
+      "ghidra_file": "ghidra-nrf_drv_clock_init-body.json",
+      "ghidra_sha256": "86d74535d6500a316612b604e48c471c703e3c4492533823b9387f19e41bdde4",
+      "pseudocode_file": "nrf_drv_clock_init-pseudocode.c.txt",
+      "pseudocode_sha256": "b60774934afd0681ca732e05d4665fcd9b44ba79355bc71321fffbad7da4b484"
+    },
+    {
+      "symbol": "nrf_drv_clock_lfclk_request",
+      "entry": "0x78990",
+      "body_bytes": 78,
+      "ghidra_file": "ghidra-nrf_drv_clock_lfclk_request-body.json",
+      "ghidra_sha256": "d066658f2d69f52cc93ba903d39dfe04db016aae15f1b020e5691226ff90211c",
+      "pseudocode_file": "nrf_drv_clock_lfclk_request-pseudocode.c.txt",
+      "pseudocode_sha256": "3648d353cbf694728485b4183a34a399eeaeba019bd37272d7c93e3e5dfaf2ea"
+    },
+    {
+      "symbol": "nrf_drv_clock_lfclk_release",
+      "entry": "0x7895c",
+      "body_bytes": 48,
+      "ghidra_file": "ghidra-nrf_drv_clock_lfclk_release-body.json",
+      "ghidra_sha256": "e13d3b23ebc8035e49156ecb031fb48c0181688654c7bebf75e05e4daa701b33"
+    }
+  ],
+  "boundary_discrepancy": {
+    "entry": "0x584ac",
+    "recorded_manual_bytes": 32,
+    "tested_native_bytes": 34,
+    "extra_instruction": "pop {r4,r5,r6,pc} at0x584cc",
+    "ownership_ledger_changed": false,
+    "inventory_row_promoted": false
+  },
+  "rea_notify_receipt": {
+    "file": "rea-notify-function.json",
+    "sha256": "f5e90fc86670ccc0f1341c7d897247f70226593676e60a97e2f23aa5b67facdf",
+    "evidence_id": "ev_717e883cc24df862748b9256e5ff83a623736a3e0323710765f6b950f6b36757",
+    "observed_total_bytes": 34
+  }
+}

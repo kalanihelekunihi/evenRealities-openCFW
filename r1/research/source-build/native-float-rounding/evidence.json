@@ -1,0 +1,129 @@
+{
+  "body_entries": 5,
+  "unique_native_body_bytes": 346,
+  "shared_entry": "0x0002808a",
+  "shared_entry_bytes": 92,
+  "shared_entry_owner": "0x00027e0c",
+  "native_ranges": [
+    [
+      "0x00027e0c",
+      44
+    ],
+    [
+      "0x00028078",
+      18
+    ],
+    [
+      "0x0002808a",
+      92
+    ],
+    [
+      "0x000280e6",
+      60
+    ],
+    [
+      "0x000282ac",
+      132
+    ]
+  ],
+  "source_owned_literals": [
+    [
+      "0x00028330",
+      4,
+      "0x3ff00000"
+    ]
+  ],
+  "locked_ownership_changed": false,
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027e0c",
+      "end": "0x000280e5",
+      "size": "136",
+      "recovered_name": "FUN_00027e0c",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_l2f",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00028078",
+      "end": "0x00028089",
+      "size": "18",
+      "recovered_name": "FUN_00028078",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "internal:binary32_round_to_even",
+      "confidence": "high",
+      "evidence": "Complete runtime-only control flow identifies an Arm C-library internal; the descriptive role is not an asserted private symbol name. Use the selected toolchain runtime rather than implementing it locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x0002808a",
+      "end": "",
+      "size": "",
+      "recovered_name": "internal:binary32_pack_from_u64",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "internal:binary32_pack_from_u64",
+      "confidence": "high",
+      "evidence": "Complete runtime-only control flow identifies an Arm C-library internal; the descriptive role is not an asserted private symbol name. Use the selected toolchain runtime rather than implementing it locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x000280e6",
+      "end": "0x00028121",
+      "size": "60",
+      "recovered_name": "FUN_000280e6",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "internal:binary32_round_to_integral_even",
+      "confidence": "high",
+      "evidence": "Complete runtime-only control flow identifies an Arm C-library internal; the descriptive role is not an asserted private symbol name. Use the selected toolchain runtime rather than implementing it locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x000282ac",
+      "end": "0x0002832f",
+      "size": "132",
+      "recovered_name": "FUN_000282ac",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "internal:binary64_round_to_integral_even",
+      "confidence": "high",
+      "evidence": "Complete runtime-only control flow identifies an Arm C-library internal; the descriptive role is not an asserted private symbol name. Use the selected toolchain runtime rather than implementing it locally."
+    }
+  ],
+  "pseudocode_source": "r1/research/decompilation/application/decompiler-output.c",
+  "pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "pseudocode_slices": {
+    "pseudocode-27e0c.c.txt": "bad4ab69845ea8ae7639a53d8f604ff91d6a6378e7a16642f6f4d91126310e6d",
+    "pseudocode-280e6.c.txt": "893ef94df168076bc5a17acfcf7d8f50cfa4bff6a52f0440ccfa36785c9cebe8",
+    "pseudocode-28078.c.txt": "605350a87a3204c26d35f2708c8bea135703659fffc9d4bb2c2192d6f2f09d2e",
+    "pseudocode-282ac.c.txt": "6cad559f06c0f88af82b1debcf8431f366e88131d2d8fe9991a60c5b5f08dbe0"
+  },
+  "interior_packer_pseudocode": "Contained in pseudocode-27e0c.c.txt; manually registered interior entry, not an additional disjoint function body.",
+  "instrumentation_regression_sha256": "2f28452e62fffe4a354a4e3873d57c06b5a5010a92d437babe79a3fbe5848635",
+  "abi": "Core registers: signed64 R0/R1 to binary32 R0; packer high R0/low R1/sign R2/exponent R3 to R0; remainder32 and integral32 returnR0; integral64 returnsR0/R1.",
+  "gates": [
+    "Typed results/callee registers/FPSCR tested only; other raw registers/flags/private frames and full input domain remain open.",
+    "Literal source available; original instructions, final placement, whole image and hardware remain open."
+  ],
+  "new_source_routes": 4,
+  "reused_source_routes": 1,
+  "unique_new_native_body_bytes": 328,
+  "reused_primitive": {
+    "address": "0x00028078",
+    "report": "structured-float/report.json",
+    "symbol": "r1_log_round_float_bits",
+    "bytes": 18
+  }
+}

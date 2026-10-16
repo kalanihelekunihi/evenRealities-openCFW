@@ -1,0 +1,19 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "d63e23a5c7877e30bbbdf391c651a5a808970017f4a1e1afa31aeb51b9e5e3eb",
+  "object_sha256": "5d322dc6e2be9bb22c518d014a139b94e9eeca0b5bb21b52e5f73c8761e824fd",
+  "comparisons": 10512,
+  "actual_fal_device_initializer_executed": true,
+  "device_report_sha256": "a29804114a607b81d3e971d8c5d40eff9ea03e1b0d65df2f879a10d98b625868",
+  "strncmp_report_sha256": "59fbb45cdab22d7e2c795940f5c774f9b54861727726396e0a645a685b13ff09",
+  "printf_calls_per_implementation": 15768,
+  "shared_readiness_checks": 10512,
+  "cold_zero_bytes_compared": 1,
+  "scope": "Unchanged pinned FAL core init: signed flash/partition replies, all initial readiness bytes, shared getter after every call, callback state mutation, exact printf formats/arguments/order, ignored printf results, guards/registers/stack",
+  "limitations": [
+    "Partition initialization, device record/callbacks and printf are controlled fixtures; flash initialization executes actual upstream C only in device integration mode. Runtime output remains unresolved.",
+    "Shared readiness is proven within this module; duplicate upstream fal.c objects must not be linked beside it.",
+    "Instruction identity, complete image linking and hardware remain unresolved."
+  ],
+  "instruction_identity_proven": false
+}

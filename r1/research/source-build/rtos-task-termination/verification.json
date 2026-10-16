@@ -1,0 +1,26 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "85eaec8af664f45cc0000e5216499f051f162ac7d23a790fd07abd69e54cc205",
+  "driver_sha256": "06085b94d9c322e3218eee5ec21120ae399c4b4f497889a17f21b1cb407f89e1",
+  "comparisons": 2953,
+  "assertion_comparisons": 584,
+  "comparisons_by_function": {
+    "vTaskDelete": 1260,
+    "eTaskGetState": 129,
+    "r1_native_task_reclaim": 256,
+    "osThreadTerminate": 240,
+    "vListInsertEnd": 18,
+    "r1_native_task_idle_cleanup": 150,
+    "r1_native_expected_idle_time": 900
+  },
+  "tcb_bytes_compared": 112,
+  "scope": "Actual pinned termination/state/reclamation/list bodies; complete fixture TCB, shared scheduler words, ready/delayed/termination/event lists and PendSV write compared",
+  "idle_cleanup_native_region": [
+    "0x84fe8",
+    "0x8501a"
+  ],
+  "idle_cleanup_native_function_abi_claimed": false,
+  "limitations": [
+    "Critical entry/exit, vPortFree and scheduler-state reads are bounded fixtures. Idle cleanup is a bounded inlined region, not a standalone native function. Complete idle loop and native PendSV transfer remain separate gates. No physical concurrency or image byte equality proof."
+  ]
+}

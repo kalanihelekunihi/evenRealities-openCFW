@@ -1,0 +1,44 @@
+{
+  "comparisons": 5536,
+  "counts": {
+    "r1_battery_charged_state_refresh": 1440,
+    "r1_battery_voltage_average": 2048,
+    "r1_battery_level_average": 2048
+  },
+  "report_sha256": "2ac72de6b804b7b8fd6376a2624add0f6d0453bcbfe7b4307e8b711a77a718a4",
+  "object_sha256": "3f90288f2e9dfb06f01991ab80a171d4cdaa32bb70b877c8dbbb31b203faae4a",
+  "driver_sha256": "5884c71febb77c1bf224911f02b1f6c7523fa735ee33ef2c8bc51c9645039f4c",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-r1_battery_charged_state_refresh.json": "991076163058699b87663070ad167c7f5cc2796f32b4724716f0607f7b90434f",
+    "ghidra-r1_battery_voltage_average.json": "c2488040a7c2da9d4bf701f6a5319c70518153d85ede3dbb40e5090d593487ec",
+    "ghidra-r1_battery_level_average.json": "ec28194462624f6d467dae6c58bf17e844ff9e193c4750960a963c2f02a521ba"
+  },
+  "rea_evidence": {
+    "rea-level.json": "bebfe13302024cce4a6cfc2e247534b70a2ef73768be7ae51d0ef096526ea7b3",
+    "rea-refresh.json": "c5cceac7a6883d3a4bee5293de89f7ae486e59b20c23be9740e655131be7f896",
+    "rea-voltage.json": "4c0df810cc4fb2457d7edd2a82b554bb4a6c2b174a950cfce280492c85fd546e"
+  },
+  "entries": {
+    "r1_battery_charged_state_refresh": [
+      253196,
+      144
+    ],
+    "r1_battery_voltage_average": [
+      253344,
+      80
+    ],
+    "r1_battery_level_average": [
+      251956,
+      82
+    ]
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Tick, shared-resource acquire and charging-progress reset are fixtures",
+    "Raw device/runtime addresses are fixture storage; initialization and atomicity remain gates",
+    "Level trimmed mean rounds with+3 before divide6; voltage trimmed mean truncates; all-zero voltage leaves prior value",
+    "Actual updater/statistics composition is a separate receipt"
+  ]
+}

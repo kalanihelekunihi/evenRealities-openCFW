@@ -1,7 +1,236 @@
 {
   "schema": 1,
+  "supplemental_native_contract_candidates": {
+    "0x84cc0": {
+      "symbol": "r1_protocol_command_00084cc0",
+      "receipt": "native-protocol-event-handlers/verification.json",
+      "receipt_sha256": "20aa43a90ba6009cc2cc735531c0e679e4ce9ddc93a49629fcc18711760e30b9",
+      "comparisons": 65633,
+      "locked_ownership_row": false,
+      "attribution": "native-protocol-event-handlers/target-attribution.json",
+      "attribution_sha256": "3d85bcd654c7fc98236119f73ddca23328bbe056852ef57ee445d8d5b57c77c1",
+      "graph_receipt": "native-battery-runtime/event-handlers-integration-verification.json",
+      "scope": "Registered24-byte special event target; actual event provider remains a fixture"
+    },
+    "0x65740": {
+      "symbol": "r1_native_delayed_initialize",
+      "receipt": "native-delayed-initialize/verification.json",
+      "receipt_sha256": "429c8edba1981ba4ea310fb5536d0e6f3a6a23bef9d0dd702eed429202917e4f",
+      "comparisons": 3072,
+      "locked_ownership_row": false,
+      "scope": "Instruction-backed supplemental initializer; factory providers remain fixtures"
+    },
+    "0x65ea8": {
+      "symbol": "r1_native_delayed_worker",
+      "receipt": "native-delayed-worker/verification.json",
+      "receipt_sha256": "b05c2242bff297eeb9db6afeb4d9e700d277c1501b0d56ffb61389910a39456e",
+      "comparisons": 1512,
+      "locked_ownership_row": false,
+      "graph_receipt": "native-delayed-reschedule/graph-verification.json",
+      "scope": "Bounded queue worker and12 actual queue dispatch workflows; physical blocking remains gated"
+    }
+  },
   "ownership_ledger_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "ownership_attribution_corrections": {
+    "native-battery-runtime/frame-tx-attribution.json": "9f53d8d0382d429d002e140533070183e7ed9dba6bf0859596124dc77ad19699",
+    "native-battery-control/evidence.json": "14b5bd06820ba12346e1ba60c1774970f81693c224ed90ad084b5605eb48cb9d",
+    "native-battery-runtime/evidence.json": "bea57a38919073bfbeddd7fdc4e9874fb2a48588088ea374d650e740efda9ee7",
+    "native-status-record/evidence.json": "315be0c971caf94533936f8936220c6481cb18a94dc38f54b65a99495defe8df",
+    "rtos-timer-new/attribution-correction.json": "b6ad454bdf2ce7415221895eee976e8cd927098674947fb94fb7f5a598a9f9e2",
+    "sdk-nrfx-clock/irq-evidence.json": "47d89459234aa4278b4c34c2ae07a1f6f7afbe6cb25d2e3992db0f0c11b82593",
+    "rtos-queue-create/evidence.json": "bf81bbda9886e579f480703c85f11ed02ba5b1bb944d503e6730b37cda00b37e",
+    "rtos-task-wait/evidence.json": "d58c5e64e3f934b5be9ff719f11313ff88263b4c7ff142b895efdf1444411aa5",
+    "rtos-timer-runtime/evidence.json": "58c84aab34e492c6aa29a913d20c3f10f7b37372bc383dbc5a9e697a29d30db1",
+    "rtos-notification-tasks/evidence.json": "6adf5bdd6f4cde4be7374a88b258dcf6dbb6381ffbda6e493fcae8133735723b",
+    "rtos-event-groups/evidence.json": "f8e2b419ab707baa711c1d426b486a6b3956d537d377d6713ecce08e87193e27",
+    "rtos-unordered-event/evidence.json": "a74514dc2d4e4fd40d68a8327b9208ed859a487019fba3471729f51fafd2d2e8"
+  },
   "input_reports": {
+    "native-application-entry/report.json": "114cfb4576faefc1072d9b8f8f90e4c365c4a2221a09ee8b001fb825da2dde2f",
+    "native-scatter-dispatch/report.json": "76c01523295e5ee383d227aeb13f2d6638ba9f99591b37be3f91f0eadf51a48b",
+    "native-scatter-data/report.json": "74dcc9d8ab7f2a74363d8513059cf8af623125feb304ee06c42f5e1842ef1890",
+    "native-scanf-core/report.json": "e34bb4c0e39b3ad7f187a5b952421fe764530541202d2e522ac5b7e920e8288b",
+    "native-sscanf-frontend/report.json": "eb1b92492bbf6b252d75e273c3e8b8fe7622deb0944432295eb59fdd1b8a117a",
+    "native-ctype/report.json": "96fb328ee6af0685562bfc8544b2daf66320279c0b680b3a1b0fd6c6688f5835",
+    "native-scanf-conversion/report.json": "ed0d0013cad1b589b3e0d703f5acb1174ca9979d2ea3d4f2c90763a8968c30c6",
+    "native-libc-sequences/report.json": "369fee1e5a58ad23224e0ffb0ca9228945cb20e97d8e2ef0d46d1b91bdbc8517",
+    "native-libc-primitives/report.json": "2f6b00b952a20473798c153cbcbf27547aa1e96a0ffea57c69058cc1a7e93efb",
+    "native-pow-core/report.json": "c173a941c669cc41a4e744bb2ca689336ecab846f1d5ed1cad2d5043d505fce8",
+    "native-pow-dispatch/report.json": "1110144b31e28698e3605af55f665684966cbc2f4ca372829084946604596c15",
+    "native-sqrt-core-abi/report.json": "5f0408152eff0445c9a9e52deb959d98ef5992d1495f7cefb6afed8615ebdf06",
+    "native-powf-core/report.json": "2fba8ae20711184dda2a2c9a66e45af904b720b86566b4d68374c668336b1ce7",
+    "native-powf-dispatch/report.json": "71a36a8503510050fb8de42eb98320bba879c2b15f64a62e785bc145b4f5d810",
+    "native-log/report.json": "69b76356ae5fbbe8504a5a683080845e65bdc6024bfe96ed8cc6b55c058eb100",
+    "native-exp/report.json": "ca9a2ccc02fefc6618b80197a60221c96f96b4f39469e55b44ff145e433b931c",
+    "native-expm1/report.json": "d94e9d9f9a33f32b751a0f6ef5303019a35ff5d2950a0ccc0c28893236e5d432",
+    "native-tanh/report.json": "f547529f4567e3c97b71dd0a270b4016f482e0482da8ee81be8b96784555688f",
+    "native-atan/report.json": "220bbecebcedc1ad93e57d571000a05ba56affe054e5e3c80f0d5cce4f850d2d",
+    "native-tanf/report.json": "ab8f3f947eb412fe080e6c69f970942ec05d2119c3876f5054583f4c252f89a6",
+    "native-sinf/report.json": "137abc792554f0c306aab4424ecab89a96fcf0e834796c61551491e19a95f08b",
+    "native-cosf/report.json": "7c9b31b7eb1895dbe257a4f4296659a18439b74bf1be0f5177f623cda30f0f79",
+    "native-trig-reduce/report.json": "9a08074078eacfaf34371191877280300ae7a9274c7bc3bc3af7f87ac530875a",
+    "native-atan2f/report.json": "78135f6ccb3eaabf902c999ab9cbaf193fc71ade29ba7266a2c40c5319be010a",
+    "native-atanf/report.json": "066f0bd013b349e577feace409e7654d132a8ebff490d7b9b6810db79ab900b1",
+    "native-float-logs/report.json": "fa64312dbaac10ec9d76f111d9257d0611a8f26bc816157470c1988b01654491",
+    "native-expf-tanhf/report.json": "c76f39df6c78465af5b9d3df700e5ff1a9c7b4309052e47f27d3cdfa1b80bc23",
+    "native-math-special/report.json": "084c0fdba9182e33ec9c8e05a4b6316015536a6be348f51bbde953861221cdc7",
+    "native-math-round/report.json": "bd3e10ee6642539c8d9d535e69711b4c4a5261c44b295488c0b5268e54f998fa",
+    "native-double-directed/report.json": "8406dab2f5918f247138e9cf4e18e65d6c9c4682a2b84f0083ab9d556efed350",
+    "native-double-flags/report.json": "b233d48c1a32f6f577d450d9fba27b8297f2d63141b053ad735a5c2ded43d87b",
+    "native-math-selection/report.json": "c0f62d50efdab55f569c24b6334f3d099fe7de8a205e22cef7b3739ea9020156",
+    "native-math-sqrt/report.json": "c2b5aafb1e504156fb19d9356e4aaba59899822d751c1d8f7e6268c72bc37dcb",
+    "native-float-sqrt/report.json": "7725dfbdcd8b673597c6136991f7877880a13c4498adf41e678002ede95d2821",
+    "native-float-rounding/report.json": "2e99fb0c522a6bc58b6d6cbf67e29c4a4b55dd97da9db86ea5c98ce24d58fb07",
+    "native-polynomial/report.json": "104d810d1117885aaca5829c2631c251b895106052b7b8314ad054f591920c94",
+    "native-float-bits/report.json": "a0a2d689070626a7086f02778bf921c2b1f6ca7bf21e2c11886b5e900de8a1e0",
+    "native-formatter-stream/report.json": "0bc284ede661155dea5654c7d81e1f93947aae116c0f534ad95e37db05fcc7cf",
+    "native-rtt-write/report.json": "f4a185f23cf9a5538bd39733209361cab4394456ddd96b6022694c6dde3536bc",
+    "native-formatter-wrappers/report.json": "d6084ffd26fd1fc497d084269821b9fa765733c32c79392706cbb1367cee9da5",
+    "native-formatter-core/report.json": "29585d40a61cb518a4dea5b07cfd889fc3b5396a2bb9fbc6b4bb1737c53e3886",
+    "native-formatter-product/report.json": "7fdbfa1d48417fc2d1b595db7a0e613ef31992d02be1540cb22f55e3b7e4e323",
+    "native-formatter-add/report.json": "31c872efb89c46ec192da4a7eaf94659ed14389a6c1c03ecb4e57f257347c326",
+    "native-formatter-unsigned/report.json": "d53af269c84f018ab279a3d33f91b96c5a9462f2448e5ab8a749aefd93d947a0",
+    "native-formatter-decimal/report.json": "fa25c7529d6ce82043a460cb69f1d8af25ce7a8b13020a4f8fbc632e141a5970",
+    "native-formatter-output/report.json": "e16f16a97dfd09437d91ad6aa5ab054255479e21fc53f1b87c0b598c7bd2cd2f",
+    "native-protocol-device-info/report.json": "f32fb88e9637e3fd1c9d166dcbcf06c534c6482648d8098a11958fa22d8537aa",
+    "native-protocol-device-status/report.json": "db0c0d501fe9351ae88d5e36096620ca79018af3c6994e4996b3cf10b36ae102",
+    "native-protocol-event-handlers/report.json": "c658d5df971a22e6f369088ea432a70524b9cd741e3530438a89e5f6ad47dd70",
+    "native-protocol-modules/report.json": "bd80d725656215a81981859e3d1bc67f81c771a5601942035cc3a62e590846b6",
+    "native-protocol-ingress/report.json": "edefa9546986c4877a67b5791a7fd1664d186182588dc083a85bca5f5e3e6346",
+    "native-protocol-receive/report.json": "67407bbc0a5aacd0f12aba81f3887431071bfced7e179807fe2f89312f8e159b",
+    "native-protocol-port/report.json": "1cde7b8d618b451bf3a6fac5011c7c9f674963b533bbf3175c605f2fb55250a4",
+    "native-protocol-fragment/report.json": "c39abfc9ebad49bb1952ed1a89e87acd69c073bb1ee61c896ddfbbb350184136",
+    "native-protocol-fragment-state/report.json": "238fac778044a8df1f2847178eed8cacf27d02df39df7f04b572415d32e8c75c",
+    "native-protocol-send-registration/report.json": "9ec1ac29edd8373f4e68489c007725bca9dba682386d00d1322112e406dfd370",
+    "native-protocol-send-hook/report.json": "9493dcb10c76870e08e0689f40aa7dc4dc8cc657ec55cb90fa01105144d3475b",
+    "native-protocol-connection-gates/report.json": "8f4f56ddbc68ca26cad3fac012a00bd58f1c0036f3a7a5a69e5483683dd72718",
+    "native-protocol-encoder/report.json": "efd6be2b045392e7a6143f097333ac9ad456d4f2f8f1b2c22ddb444d54b7fdbd",
+    "native-protocol-response/report.json": "9dafbdf3aa8c9606d0d976242925b45eb47e150064cae612763ab6ac7bbf8f74",
+    "native-phone-operation/report.json": "34eeb40f59ef7897ea85dc09c2036b02d51a87896b0d2547191b81864cdc3c98",
+    "native-protocol-response-header/report.json": "4c22142e65d5fe974343756d11174146c571174a5aed5ee742f74c764f50fc0f",
+    "native-battery-protocol/report.json": "b09ddcdae2b6c4c044d4dbe6fef6218e1faea6c6af8fcce3698e67b930870091",
+    "native-battery-frame/report.json": "553e15d9af079c70d4eed50c3ed3d82d667d1323588672f11510f0f6c67641c0",
+    "native-battery-voltage/report.json": "c6650b4cdbeb9f7f2e17e68f3cfedb3582e675389811912e22e58aac960820b0",
+    "native-kv-device-fields/report.json": "2812dec42e33724841ff9a3e1adc0fb43161f36a5387e300e6da313aedcc1013",
+    "native-battery-low/report.json": "527f7b9f8dbf990571d8d54e5d0a3a5a7468ee91338bd0d7d9feb03c2566bf78",
+    "native-battery-diagnostic/report.json": "98aa115904e0cc8aacaf67fbdbb73d7d2bfd882e38589badc8c3b60b70a71741",
+    "native-battery-initial-curve/report.json": "932136ebe479056e161aad447b8c9fb2319aca8c3cce164028b66abf7ddeeb51",
+    "native-battery-recovery/report.json": "47f14484f03b6276e92d5d19afa2c031ceefcefbedc8046a019d6e52dc9b4de8",
+    "native-battery-cadence/report.json": "5bf95c310e7e8657aa80c096fec30a03bf948b3b66c07959c1304e62977ac69e",
+    "native-battery-configuration/report.json": "ed1a997cdf376890717318ad3491e4b3e817860715d2cfa1efdbe7fe84ce1a0d",
+    "native-battery-discharge/report.json": "977b04c6e16313a6c6a1197b9d7f27077d783fe022772a968e61287f8f09ac08",
+    "native-battery-filter/report.json": "68cc5389fc3ce6bf5331d17e085d80e60960b7e0dada447e28e30c9ccaa351f7",
+    "native-yhm-system-track/report.json": "5a6bc7f88a2b87b5ffa4cc30037a4ac2040a458fdb1cc0411293d7517f66b95c",
+    "native-yhm-status/report.json": "34f3c6eb1ab9c55a1109f8f8a467e6d6175ce715eb03165f6469e9c3d5c56d20",
+    "native-yhm-state/report.json": "17eb58281096b9b30d8ce8abd31afcbcbbb3f61469d3dd267861c8f1039805a6",
+    "native-stacmd-state/report.json": "92424951c001dcfd79ac2572ce8768093458c566ad0e19a4c2c4e1508cd3e70a",
+    "native-stacmd-receive/report.json": "790583d8bed1206a707912c9daf9ad32b4242917aae8fb04689148dc6906f337",
+    "native-stacmd-transmit/report.json": "3f3fde7d9c1738d7efe72551472e996f59e52fdce32bbaed6ee12dd089ad644f",
+    "native-stacmd-frames/report.json": "470c103a0231780bab73e864377663e60cb0c751a6fefcb6cdd1e2b836a3dc2a",
+    "native-stacmd-write-retry/report.json": "af76e7b71ae8edab890aafe280d3fc1c18359785cc8d52160a49d673470aa959",
+    "native-stacmd-delay/report.json": "43a524bc001c14c912e7bdc411d0fd736b879a64c17b46066628c0ceca603708",
+    "native-stacmd-recovery/report.json": "379fa9b38d3110d96249380813368ed424d3762f15f1cda2c9a9b894b209afc6",
+    "native-stacmd-operations/report.json": "45ad82e09ce2bd6843c3f18703cdc7b9d1c28592dfab104baab3ee95e991f138",
+    "native-yhm-initialize/report.json": "221ae15e3d483d324c6de26db9613f3f740d0dd0f856e0bd01227c5251943b8e",
+    "native-yhm-transport/report.json": "ae198fc50cab96259e6f767377744ade1a4b6d2a6c23019713b21b1a75141eca",
+    "native-yhm-frontend/report.json": "60716ae625b2672d97a7050ec360630a4cc64eb456c6e852eaa36d738506e2fa",
+    "native-charger-state/report.json": "3ee05a2fb38bb5937de35a3910a50e587482fb240559ff463f63e3e077fd636d",
+    "native-battery-control/report.json": "c2071eff46a7d7d2e89c743125ab026d03298959390231f3053ae2eff028ce6c",
+    "native-battery-statistics/report.json": "2ac72de6b804b7b8fd6376a2624add0f6d0453bcbfe7b4307e8b711a77a718a4",
+    "native-battery-runtime/report.json": "da2e287793e8bff34991082d37ba73fca163d690a3d96f2837a1fe7a2ba008ee",
+    "native-status-record/report.json": "482217dd46fe37567fa7c97162a92602cd0e1d50d90ac3166051100e31e025b8",
+    "native-thread-init-logs/report.json": "37c2787b83f43c25dbae860501e986076efe209c31f6c8dd8b556f8e3fc8811a",
+    "native-delayed-cancel/report.json": "b01dcc70206581e1c0eb469b61274cdc1c8c0f91bd6d21be3286b9a8699d8819",
+    "rtos-timer-new/report.json": "6abc92e2a392f7d24000a2a8963f76868f0d96d6462c3dfb6b8cff32267deea7",
+    "rtos-timer-id/report.json": "ade3af5052cd4c32da6f43416935e781a8bc5cbfdccbca2e3ae18892d7809638",
+    "native-delayed-worker/report.json": "24fe5e6a004ff9ae3a2562869a995561092edcd28e6871ab93f59d9694116aee",
+    "native-delayed-initialize/report.json": "990c4377894bad1b2072941d0844761fa517cfafcd940eb3cae0159e7c9905b9",
+    "native-delayed-state/report.json": "f9cb6b674364579eed3b13bc2fbfd47aee9f630873084cc3247c8889f0a4d1c8",
+    "native-delayed-reschedule/report.json": "f3c2def3afdf59b0e47a1295ac0535ef485e2064f23f7f48e654284d2b6e12af",
+    "rtos-timer-controls/report.json": "58396bb0093399c8fb30e5eb278a5355a0673f6d7808293286d8846febcf0db4",
+    "rtos-timer-active/report.json": "a2a675e76cbbc1904a478f31e5ef673c90235e28d530ae4ae68cbcb6508485c2",
+    "native-delayed-push/report.json": "644dfafc67b03cd0411428b1b810b95ba6b0f9db870982112bcaf06f4e4cfea1",
+    "native-delayed-schedule/report.json": "29dd6351da25442913befe9817f670b549b90bf9d489769d6671bbedfb161320",
+    "rtos-notification-wrappers/report.json": "38631a9fb61cf5265fc2b6649ace42a379c44e0cb019dc6c14b33d6a089f7f23",
+    "rtos-notification-tasks/report.json": "43fe7c13f23fffd36a3a1380f91f4fa9bfd5b7747353294db4926a61a4e1b3fd",
+    "rtos-event-groups/report.json": "9d28412fd122ff660399d019eef764443023298dc9b7171d6c8afd9a82a8ec36",
+    "rtos-timer-pend/report.json": "54f8f8ffd6f2480ceff4a788f2ca7bcc98036b9a2f9f79ac7a85881ce3b16070",
+    "rtos-unordered-event/report.json": "78b5adc1cbb29be3dbf96da46b427fe5659be5d90b1c1543d9e68591887e62ca",
+    "rtos-synchronization/report.json": "07f6b01018882c168add672f41f89ee785de6e8b613e1192495f9ca7d5b098c0",
+    "rtos-mutex-kernel/report.json": "2405e3229fabf70040441d3b36e87ecffd3ef78af74108fccf646e5a51f0d474",
+    "rtos-mutex-tasks/report.json": "ca356e2b485624bcb77c3328cf6c3dff40b93779c6a2d15aa441e2ecd3a0553b",
+    "rtos-message-queue/report.json": "d350551e816733ce1207b779677cf0477012094d71d452b7bd63e232518383ed",
+    "rtos-queue-receive-isr/report.json": "83e45c91ac28bfbfbccadac48c7d331e21e45a299d253a951be69ace70e5f45e",
+    "rtos-timer-runtime/report.json": "226c8a5cd26d1e7ef28d15df294474eb3a5f72c045179a890a2b2a3bc5d6d087",
+    "rtos-timer-queue/report.json": "cb0c3176392a72262b1ccad1c17b80773880419e3dacbb2bcba68c52ee94456d",
+    "rtos-timer-task-wait/report.json": "2c62f0e3c3f3bec9777596d69b9ed0d4a71058ba6a4d5f6693a63dab5b3d9bb0",
+    "rtos-timer-api/report.json": "0b076ba6dd4c5808a7476f32fbd82646a5a8a1aa16a1a858856542d94dadf023",
+    "rtos-timer-isr-queue/report.json": "cfb3f490cd96da12f411f51a24e1c8f3ceb084ee90bed4e385b6a410e2bbc8f8",
+    "rtos-task-count/report.json": "5de37e1af54a1cc0b30c5b6b51acedda775b7af3872df972d0dd69586d5749dc",
+    "native-stack-overflow/report.json": "8790f69f3dbbbeb85df852c258b085525799f2aa0b286c4b1ff90ab6e7c724db",
+    "rtos-context-port/report.json": "1a8c591c24fa053308c4ebd6e7751023dc40aee1c87e9b3d2dfc01351bf8bd07",
+    "rtos-port-start/report.json": "4913b5ebbfe39da2e0c7447f19c40d5bf22dfb6dbe185d26623df327eb56961e",
+    "rtos-scheduler-start/report.json": "fe22f75bca037ee490f4eb0ad071d17d55d86b9e358680f94b048e38cf6fc7dc",
+    "rtos-sleep-kernel/report.json": "888b1ba6acc5b874453aaffcf964e72bfcad0448384c686d756620a3a994c2df",
+    "rtos-tickless-port/report.json": "7e956cc0984b077c0c14b048b2bad05f1a2516053d35d114ba03e986bb473fb5",
+    "rtos-idle/report.json": "0990ce35874f0d0264ace4c159c784623eb789c51fc4b172031d88dfc2ca9a86",
+    "rtos-task-termination/report.json": "85eaec8af664f45cc0000e5216499f051f162ac7d23a790fd07abd69e54cc205",
+    "rtos-thread-new/report.json": "ee19ffc0a30c3d1bee77c8b7f9da13e17c578605e57508a6ef2e93d5f9ce6d8d",
+    "native-task-construction/report.json": "9b876ae30cad1a23371d1a40eda352f87f9d5997ac22e212b808625ec5a1f2e8",
+    "rtos-task-wait/report.json": "e240b64ac26d8dcb7790a8295f6317c6aaba4539b74be8d3aa160da3cada20f5",
+    "rtos-queue-operations/report.json": "37303cdb54aecc5892705f787fdf5d6ab6e55937335edea0322e9ca167135aa1",
+    "rtos-scheduler-tick/report.json": "133184d609eb91447b471a98c3d492cee34da77e04c6b0931d1549a5d6cdfa41",
+    "rtos-scheduler-resume/report.json": "f1103514488ef28bec0ab9be3e63ca82228ea885828f2336574287ca0b7a9b35",
+    "native-heap/report.json": "ffb4dd1437f14e74d4225b68870e39366ffe51f5943b08184837a99f0bb3d251",
+    "rtos-queue-create/report.json": "74f02e5927083726b3ba70b921eb34a8d9aa91014fb329ba8095cdd13797a12a",
+    "rtos-semaphore-new/report.json": "dbf78b8f26ddc3305282a381736d172de86c0f965c871943e5c7b70aa3f6e804",
+    "native-output-gpio-registration/report.json": "842aa42695cd0dd4d8f84772ddedf30d9fc3e2af5971052ca5094e2b410bd272",
+    "native-stacmd-registration/report.json": "e2f6c9ad98d9be5eb8ded7a6571a2d5a867d1de22005f38dc6ffa47f6b0a180e",
+    "native-hw-twi-registration/report.json": "bb0d6e1b2e7dee1d20eefafce0f094ca4e295df597dd469cb8c0a3927afff040",
+    "native-initcalls/report.json": "c00d0b8aa569bd64cc9b26ac44d40529bec07abed728b59bde689e453195a1ee",
+    "native-rtc-discovery/report.json": "6cdd86283b00882082241ef7f6ecfe091a7bbd9d4ee92c61bfdaadf14d979e50",
+    "native-rtc-error/report.json": "ba746bb6287cd488ff1a071ff1e43847cb3a839becbf94ad13d8a5657928dc8e",
+    "sdk-nrfx-rtc/report.json": "d1502553be81d3631bf883b52f1d63dec688eb82748da99d5b66e4de5db02175",
+    "native-rtc-lifecycle/report.json": "7e58fb366e0d5016d361238d42d7d1a8c786cef2870237c9f562a4a3140f4099",
+    "native-rtc-device/report.json": "5bd17def16ee2015c39c93b8b5c0b5126ad6059d6a4d81ccaf31c716bf614a56",
+    "runtime-memmove/report.json": "1fe07a7a774baa81db1642319bc5d24e4f547e38c7ad2e94402731c8059f0217",
+    "native-clock-calendar/report.json": "7d718360bdd664105d0d1a25d684125ecf9db135e89a110b975d2a889f52a74b",
+    "native-clock-port/report.json": "785f0734ebde1e18f20454281596be9674489b85ba797861751d84b98c8b79c9",
+    "native-clock-bootstrap/report.json": "5dc82888cc371fb597365a044200e0ddbfb28eca37d5f4cafd93655b5d6f9892",
+    "native-rtt-delay/report.json": "b53103f7bd4dd8fc25aa3badba13cecebb0b492a597123e7b331d39a68367131",
+    "native-log-calendar/report.json": "8551c125826eebd0d886870f9d3f9f38eb3754c123bf53c230c48ac0835321cb",
+    "sdk-log-modules/report.json": "65a23a4db18d1173ed826b56a9885b715c9942870bea517f6af2913ec25ff35e",
+    "sdk-fprintf/report.json": "e9af0e8369ec793cf66bbec9d312da023e42bd3e03418316fec4e11d8a7a2604",
+    "sdk-log-formatter/report.json": "4a42d78389558cd05deb1ebb837db5d18d3778a11f4b4763d4f3a193c10e5d83",
+    "sdk-log-serial/report.json": "32c9ac9fca18498321b5ab4d0cff5ce6b33e527cbeb0a4452edbd94060b3f280",
+    "sdk-segger-rtt/report.json": "46556a13a617288ea957a90c5593442112467f832fd79eab1cdd46dc1c3679b9",
+    "sdk-rtt-backend/report.json": "27201824b70bd336faba035064b3860b94e21a2e87377591be8fe6f7b31077e6",
+    "sdk-memobj/report.json": "c3294a4c11981551313cc6619f88c2f452c852045d079d08af34f0566a412aba",
+    "sdk-logger-frontend/report.json": "fe2f7a255d0bdc3bd80a64a3d731677e3a3e314ea0a1535e34a7e869cebda390",
+    "sdk-dfu-state/report.json": "1d1031489f9d1de7fdca014b5de62a0066a510ea1e538ab414bf14a9223310ba",
+    "sdk-power-management/report.json": "34d73ce72d927f665c50047f3760be71a20d1a9b47a564772fb594314085eecc",
+    "sdk-nrfx-clock/report.json": "4831d90ef0c444e1e4dfed7daa47df7be38981bdb528a117cb0f80ef15eb7c8e",
+    "sdk-clock/report.json": "6bdee00d89a9d4fb55d1516617a8c5f18a89a50c118aadde62d614d7b79a7ee7",
+    "sdk-soc/report.json": "15f1b031d2dc1bb4c2e0da9db591057809be972891ab774b6ab8702ffde09eee",
+    "sdk-sdh/report.json": "87ca3fd9073a2f5d939b08a614a0ca5817769f9457d093b8f9f8572159a51f13",
+    "sdk-atfifo/report.json": "200bc7b96e51aaf869fadce71f2de5dd5d857a94372e2a065ba77643a29fca99",
+    "sdk-fstorage-sd/report.json": "b8a8a316a9ee5ae05443627ddeadb507b7fcd995fab3ba497a633a45791dfc1b",
+    "sdk-fstorage/report.json": "6bede1f87b5b26a9c18a77b91f890d4db5b262aa588f3c456610040d55cc5307",
+    "native-internal-flash-operations/report.json": "2ee8938e3bb9e1e4bfd03ae6802b946839734fbc426ef063b9ba66a7dd6df66a",
+    "native-internal-flash/report.json": "e27827c2114b2c9a157efe1e666e4ea2d89bea58ccd3dcf9d88a4607344fde43",
+    "native-fal-device/report.json": "be20f950653e01c0b0cfaf415d3bd87f988c15fa83b690e465d8274414dc2735",
+    "sdk-fal-partition/report.json": "b2a8156690c8b5e1e996da85c0ca3941067688496b86d32ab7b6ff5d43af19bd",
+    "sdk-fal-device/report.json": "a29804114a607b81d3e971d8c5d40eff9ea03e1b0d65df2f879a10d98b625868",
+    "runtime-strncmp/report.json": "59fbb45cdab22d7e2c795940f5c774f9b54861727726396e0a645a685b13ff09",
+    "sdk-fal-core/report.json": "d63e23a5c7877e30bbbdf391c651a5a808970017f4a1e1afa31aeb51b9e5e3eb",
+    "native-kv-scans/report.json": "22f0597862892800794eefc72e307d0e8f7473c4d2f79bc9ca9a503b9d0df038",
+    "sdk-fal-readiness/report.json": "f653e4f49486e8256b4e5934239d575702d8667c6f5ddd10eb34b3b9f50a9fd4",
+    "native-kv-initialize/report.json": "59bcfb29ca0c70b35284efbbee0056526d18e2d9b51336b7f1e74f7ce3ac076f",
+    "native-kv-store-put/report.json": "f08b023401980b3f2e0b72c0361db7d2badc4c2f01def03adbcdbfc177371c37",
+    "native-kv-store-get/report.json": "f6c4a754fcd0f3eb2433e6d691f52dc87515f5d76e91502b6e1aeed871234df1",
+    "native-kv-port/report.json": "92d8532ef98bc798cb216e4c675096245fe4e42536bae83ee46513360bc8ea60",
+    "native-kv-class/report.json": "74fd498a1d8857e4ab698d41ec981441fd04337fe338c6fcb12364f2e6b4b1e8",
+    "native-advertising-configuration/report.json": "4067b4537c914036f76b3653392c958158b5045b6ea6c6aecd13b1e6e37608b3",
     "sdk-advertising-init/report.json": "352123082c47bcb16f16986cfb496155a2899c04359ea5a27ab1e2e574332e5b",
     "sdk-advertising/report.json": "9f0b94f5a5f13ba8e8ad539835e37a53bced59268ba5dcc1be0daeb61d833582",
     "native-gatt/report.json": "1b6fb40f0ec87281226edf0ef18cef933803d82fc1410f2041da6f2d6a732313",
@@ -51,24 +280,23 @@
   },
   "ownership_entries": 3326,
   "counts": {
-    "unresolved_source_route": 1530,
-    "compiled_symbol_hint": 1543,
-    "tested_contract_candidate": 253
+    "tested_contract_candidate": 734,
+    "unresolved_source_route": 1220,
+    "compiled_symbol_hint": 1372
   },
   "providers": {
     "arm_cmsis_freertos_10_5_1": {
-      "unresolved_source_route": 1,
-      "compiled_symbol_hint": 27,
-      "tested_contract_candidate": 1
+      "compiled_symbol_hint": 7,
+      "tested_contract_candidate": 22
     },
     "arm_cryptocell_cc310": {
       "unresolved_source_route": 32,
       "compiled_symbol_hint": 9
     },
     "arm_toolchain_runtime": {
-      "tested_contract_candidate": 10,
-      "unresolved_source_route": 117,
-      "compiled_symbol_hint": 2
+      "tested_contract_candidate": 114,
+      "unresolved_source_route": 10,
+      "compiled_symbol_hint": 5
     },
     "armink_cmbacktrace_1_4_2_compatible": {
       "unresolved_source_route": 7
@@ -78,7 +306,8 @@
       "unresolved_source_route": 4
     },
     "fal_0_5_99_flashdb_bundled": {
-      "compiled_symbol_hint": 9,
+      "tested_contract_candidate": 6,
+      "compiled_symbol_hint": 3,
       "unresolved_source_route": 1
     },
     "flashdb_2_0_0": {
@@ -86,9 +315,9 @@
       "unresolved_source_route": 6
     },
     "freertos_10_5_1_nordic_nrf52_port": {
-      "unresolved_source_route": 20,
-      "compiled_symbol_hint": 85,
-      "tested_contract_candidate": 6
+      "tested_contract_candidate": 94,
+      "unresolved_source_route": 2,
+      "compiled_symbol_hint": 15
     },
     "gomore_health_algorithm_candidate": {
       "compiled_symbol_hint": 362
@@ -112,16 +341,15 @@
       "compiled_symbol_hint": 27
     },
     "nordic_nrf5_sdk_17_1_0": {
-      "unresolved_source_route": 275,
-      "compiled_symbol_hint": 432,
-      "tested_contract_candidate": 75
+      "tested_contract_candidate": 193,
+      "unresolved_source_route": 226,
+      "compiled_symbol_hint": 364
     },
     "qst_qma6100_v1_0_lineage_unlicensed": {
       "compiled_symbol_hint": 3
     },
     "r1_analog_provider_adapter": {
-      "tested_contract_candidate": 4,
-      "unresolved_source_route": 1
+      "tested_contract_candidate": 5
     },
     "r1_bosch_bma456_provider_adapter": {
       "unresolved_source_route": 8
@@ -130,8 +358,8 @@
       "unresolved_source_route": 15
     },
     "r1_device_registry_configuration_adapter": {
-      "unresolved_source_route": 4,
-      "tested_contract_candidate": 5
+      "tested_contract_candidate": 8,
+      "unresolved_source_route": 1
     },
     "r1_gomore_provider_adapter": {
       "unresolved_source_route": 3,
@@ -145,11 +373,10 @@
       "unresolved_source_route": 6
     },
     "r1_i2c5_resource_adapter": {
-      "tested_contract_candidate": 3,
-      "unresolved_source_route": 2
+      "tested_contract_candidate": 5
     },
     "r1_internal_flash_provider_adapter": {
-      "unresolved_source_route": 11
+      "tested_contract_candidate": 11
     },
     "r1_iqs7211e_provider_adapter": {
       "unresolved_source_route": 18
@@ -161,20 +388,20 @@
       "unresolved_source_route": 12
     },
     "r1_nordic_sdk_provider_adapter": {
-      "tested_contract_candidate": 6,
-      "unresolved_source_route": 5
+      "tested_contract_candidate": 7,
+      "unresolved_source_route": 4
     },
     "r1_nordic_wdt_provider_adapter": {
       "tested_contract_candidate": 2
     },
     "r1_product_specific": {
-      "unresolved_source_route": 697,
-      "tested_contract_candidate": 63,
+      "tested_contract_candidate": 133,
+      "unresolved_source_route": 626,
       "compiled_symbol_hint": 5
     },
     "r1_provider_configuration_glue": {
-      "unresolved_source_route": 8,
-      "tested_contract_candidate": 2
+      "tested_contract_candidate": 4,
+      "unresolved_source_route": 6
     },
     "r1_qst_qma6100_provider_adapter": {
       "unresolved_source_route": 14
@@ -187,11 +414,11 @@
       "unresolved_source_route": 7
     },
     "segger_fprintf_6_14d_sdk_bundled": {
-      "compiled_symbol_hint": 3,
-      "unresolved_source_route": 1
+      "tested_contract_candidate": 4
     },
     "segger_rtt_6_18a_sdk_bundled": {
-      "compiled_symbol_hint": 8,
+      "tested_contract_candidate": 4,
+      "compiled_symbol_hint": 4,
       "unresolved_source_route": 1
     },
     "stmicro_lis2dw12_pid_v2_1_0_compatible": {
@@ -202,11 +429,11 @@
     },
     "unknown_generic_device_registry_candidate": {
       "compiled_symbol_hint": 1,
-      "tested_contract_candidate": 25,
-      "unresolved_source_route": 17
+      "tested_contract_candidate": 28,
+      "unresolved_source_route": 14
     },
     "unknown_rtc_device_provider_candidate": {
-      "unresolved_source_route": 10
+      "tested_contract_candidate": 10
     },
     "unknown_sensor_stream_framework_candidate": {
       "tested_contract_candidate": 3,
@@ -221,21 +448,61 @@
       "tested_contract_candidate": 40
     },
     "unknown_time_calendar_provider_candidate": {
-      "compiled_symbol_hint": 3,
-      "unresolved_source_route": 11,
-      "tested_contract_candidate": 2
+      "compiled_symbol_hint": 1,
+      "tested_contract_candidate": 7,
+      "unresolved_source_route": 8
     },
     "yhmicros_yhm2710_candidate": {
-      "unresolved_source_route": 36,
-      "compiled_symbol_hint": 8
+      "tested_contract_candidate": 28,
+      "compiled_symbol_hint": 7,
+      "unresolved_source_route": 9
     }
   },
   "exact_instruction_matches_proven": 0,
+  "compiled_instruction_byte_spans": [
+    {
+      "entry": "0x00044a6c",
+      "bytes": 10,
+      "object": "native-formatter-stream/native_formatter_stream.o",
+      "section": ".text.r1_format_unbounded_putc",
+      "sha256": "b912c7eaa8c5681214454c4ed558609e9c943358cf5a15f44f97bb061232fcd7",
+      "relocations": false,
+      "image_placement_proven": false
+    },
+    {
+      "entry": "0x0002839a",
+      "bytes": 4,
+      "object": "native-float-bits/native_float_bits.o",
+      "section": ".text.r1_native_floating_environment_control",
+      "sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+      "relocations": false,
+      "image_placement_proven": false
+    },
+    {
+      "entry": "0x0003bac8",
+      "bytes": 6,
+      "object": "native-math-special/native_math_special.o",
+      "section": ".text.r1_math_self_add32",
+      "sha256": "f9eab617bc9a82ea9fe3a5e4a5b0f3b9bee4d8d4ebd271074ab8ebca954b71a9",
+      "relocations": false,
+      "image_placement_proven": false
+    },
+    {
+      "entry": "0x0003bace",
+      "bytes": 6,
+      "object": "native-math-special/native_math_special.o",
+      "section": ".text.r1_math_add32",
+      "sha256": "8f8fe57ae09b74be4d9432839ced1dac7baa02c4300dacbf4f1427ab7cd22586",
+      "relocations": false,
+      "image_placement_proven": false
+    }
+  ],
   "image_integration_proven": false,
   "limitations": [
     "Ownership ledger has 3326 entries from multiple inventories; the structural Ghidra corpus has 2972 functions. These are different scopes.",
     "Name matches include local symbols and are routing hints, not ABI/body matches or source admission.",
     "Tested contract candidates cover bounded inputs in cited receipts; they do not prove all input behavior or exact compiler output.",
+    "Compiled instruction-byte spans are section-local matches; original image placement and complete instruction identity remain separate gates.",
     "This audit verifies recorded source/object hashes; report-specific header/configuration authentication remains owned by each build target."
   ]
 }

@@ -1,0 +1,42 @@
+{
+  "comparisons": 11460,
+  "provider_calls_per_side": {
+    "osKernelGetTickCount": 3684,
+    "osKernelGetTickFreq": 3684,
+    "r1_battery_charging_progress_reset": 1108,
+    "r1_battery_charging_initial_curve": 1108,
+    "r1_structured_log_mode_get": 2820,
+    "r1_structured_log_format": 756,
+    "nrf_log_frontend_std_4": 588
+  },
+  "mode_sequences": 13,
+  "full_r1_r2_r3_checked": true,
+  "source_descriptor_sections": {
+    "ring": {
+      "address": 253064,
+      "bytes": 64,
+      "sha256": "03e7e3f78a752339ebefb651df6db66f58a3f6313a9557c9b87f094cc0e777f8"
+    },
+    "sdk": {
+      "address": 253136,
+      "bytes": 58,
+      "sha256": "589d8ca1680984591d1ef6452bdf879cd759aa44dafa2341e6b38f6ffc7a7263"
+    }
+  },
+  "report_sha256": "47f14484f03b6276e92d5d19afa2c031ceefcefbedc8046a019d6e52dc9b4de8",
+  "object_sha256": "cf595a275287b6bbdf4354220800f5806de6d6a324ae027c582ee3b90840e81e",
+  "driver_sha256": "f7a227642188a2058ec29fc7015e3ddcbe3ec82f0cb8aa38b6642f4298733001",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-3db70-body.json": "3574975ada158d4b0dd6ca03139fa5bf8fc3d046de0eb606ebab39a7c24a13a6",
+    "rea-3db70-pseudocode.json": "82169883d54917d38b3c2f0d0c4263a6f44c94f0e6cab7e1cd2e57d5cf95eb9b",
+    "ghidra-body-data.json": "646182d0e06afdb6eea4af22573094c0190616cc76f0c84625e5aec1ac9b34b2"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Tick/reset/initial-curve/log providers are fixtures; actual updater and provider composition remains open",
+    "Native saved argument words and logger overwrites preserved for selected compiler; other compilers/LTO require revalidation",
+    "Runtime state/handle initialization, physical atomicity/timing/concurrency and original image identity remain gates"
+  ]
+}

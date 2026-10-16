@@ -1,0 +1,20 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "87ca3fd9073a2f5d939b08a614a0ca5817769f9457d093b8f9f8572159a51f13",
+  "native_evidence_sha256": "02ffd68aef463242605fa6e7415e564ec8cbd2cdd37a666db216d6a3b5f4f8ae",
+  "iterator_report_sha256": "798d03b820cf73d2cba287b53433078429587f34e4010875f229face12c7507c",
+  "comparisons": 4704,
+  "svc_calls_per_implementation": 784,
+  "section_table_bytes_compared": 84,
+  "typed_observer_record_bytes_pointer_normalized": 32,
+  "source_state_cold_zero_bytes_compared": 3,
+  "critical_report_sha256": "7612004a197c8f718aab40024f0fc83228c7b9d9ca321d41586cccdea66ce9c9",
+  "real_irq_and_critical": true,
+  "scope": "Five public SDH APIs with actual legacy section iterator and native-matching range sets; canonical three bool bytes, empty ranges, observer allow/block and SVC success/errors",
+  "limitations": [
+    "Observer handler bodies and SVC replies are fixtures; actual SDK critical/NVIC instructions execute with emulated MMIO.",
+    "Typed stack/state observer records are source-owned; unresolved callback bodies and final production allocation remain gates.",
+    "No real asynchronous scheduling, flash persistence, original instructions or full-image linkage proof."
+  ],
+  "instruction_identity_proven": false
+}

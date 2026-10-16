@@ -1,0 +1,40 @@
+{
+  "status": "Implemented and admitted as bounded native contracts in rtos-tickless-port and rtos-sleep-kernel; physical/context gates remain",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "native_entry": "0x95de4",
+  "native_code_end": "0x95f02",
+  "native_literals": [
+    "0x95f04",
+    "0x95f18"
+  ],
+  "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/CMSIS/nrf52/port_cmsis_systick.c",
+  "source_sha256": "c402e2b3bca0e63c14299e673f18c4f992ed5f9c075061d0e765548d651560cd",
+  "source_symbol": "vPortSuppressTicksAndSleep",
+  "source_variant": "RTC branch, SoftDevice present, simple debug clamp enabled",
+  "native_constants": {
+    "max_expected_idle": "0x00fffffd",
+    "rtc_base": "0x40011000",
+    "nvic_state": "0x2002c2fc",
+    "nvic_mask_word": "0xbdff06fc"
+  },
+  "kernel_dependencies": {
+    "eTaskConfirmSleepModeStatus": "0x5cf78",
+    "vTaskStepTick": "0x9653c"
+  },
+  "pre_sleep": "Native checks pending FPU IRQ38, clears FPSCR bits0x9f, reads FPSCR again and clears pending IRQ38; scoped configuration evidence required",
+  "post_sleep": "No callback observed before re-enabling tick",
+  "rea_inventory": "r1/research/source-build/sdk-clock/rea-procedure-inventory.json",
+  "rea_inventory_sha256": "fbdbc0c467b87b6c991baa6e398adae6fa42e47812b981a59221a122c37974ce",
+  "rea_registered_rows": [],
+  "open_gates": [
+    "Physical RTC/wake and SoftDevice execution",
+    "Scheduler start and native context transfer",
+    "Whole-image source and byte identity"
+  ],
+  "implemented_reports": [
+    "rtos-tickless-port/report.json",
+    "rtos-sleep-kernel/report.json"
+  ],
+  "actual_graph": "board/idle-real-sleep-verification.json"
+}

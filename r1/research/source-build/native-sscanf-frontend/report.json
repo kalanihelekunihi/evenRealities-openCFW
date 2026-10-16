@@ -1,0 +1,70 @@
+{
+  "units": [
+    {
+      "source": "r1/components/runtime/native_sscanf_frontend.c",
+      "source_sha256": "86c78622a796d662a70b167c37d64ce3992936dcb78586cdd72bf1a230920631",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-sscanf-frontend/native_sscanf_frontend.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/runtime/native_sscanf_frontend.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-sscanf-frontend/native_sscanf_frontend.o"
+      ],
+      "compiled": true,
+      "object_sha256": "2f9aadf4924ad6edb4d58925929267a90850d5c677eb693284d3a806c5033262",
+      "undefined": [
+        "r1_native_isspace",
+        "r1_native_scanf_core",
+        "r1_native_scanf_format_getc",
+        "r1_native_scanf_input_getc",
+        "r1_native_scanf_input_ungetc"
+      ],
+      "defined": [
+        "r1_native_scanf_descriptor_init",
+        "r1_native_sscanf"
+      ],
+      "emitted_function_count": 2
+    }
+  ],
+  "inputs": {
+    "r1/components/runtime/native_sscanf_frontend.c": "86c78622a796d662a70b167c37d64ce3992936dcb78586cdd72bf1a230920631",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdarg.h": "ce6e43d79dc89b50208ecf259b1ffd519f5a78cd3a2c7fcaac6386f376b89fef",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_header_macro.h": "7b3fbcc442af2508f36bb2dc98d9ad2b8a1f5c0f5333394fb2159c8bd5ecd5b8",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___gnuc_va_list.h": "feca975bfdfb254d17458a8e3d51f8ad6d9bdc9fd6287727f0f8b2fb81fcb0b0",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_list.h": "81c3055f7033e26e7f53705653bc9d69b5202f25c2692e03b3a4f77ff44a7d76",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_arg.h": "274c75a1db86f649439aa3bcc1dead4170725e6f803925c3fc38a2e93307afdc",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___va_copy.h": "f0a8d3c963338173f2d57b2cbc209dde38c90536107b15eb0cf78166d4caee1f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_copy.h": "bb195f56cb08d4cee6a60bd9f62f34466e8ac4f89f6fed043b044cb2f7ead010"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

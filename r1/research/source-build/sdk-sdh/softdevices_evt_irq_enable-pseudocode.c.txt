@@ -1,0 +1,38 @@
+/* ================================================================
+ * entry: 0x00090854
+ * end:   0x000908a3
+ * size:  80 bytes
+ * name:  FUN_00090854
+ * ================================================================ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_00090854(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  undefined4 uVar3;
+
+  iVar1 = FUN_0003bc78(0x16);
+  if (iVar1 == 0) {
+    uVar3 = 0x2001;
+  }
+  else {
+    uVar2 = (uint)(*(byte *)(DAT_000908a4 + 0x400) >> 5);
+    if ((uVar2 < 8) && ((1 << uVar2 & 0xecU) != 0)) {
+      if (DAT_000908a8[2] != 0) {
+        *DAT_000908a8 = *DAT_000908a8 | 0x400000;
+        return;
+      }
+      _DAT_e000e100 = 0x400000;
+      return;
+    }
+    uVar3 = 0x2002;
+  }
+  FUN_0004e5bc(uVar3);
+  return;
+}
+
+
+

@@ -94,7 +94,8 @@ uint32_t compressed_log_output(uint32_t a,const char*b,const char*c,...)
                0x600000,count=20000)
   return calls
  cases=[]
- for kind,detail in ((0,0),(0,2),(0,0x80),(1,0),(2,0)):
+ for kind,detail in ((0,0),(0,2),(0,0x80),(1,0),(2,0),
+                     (0x100,2),(0x101,0),(0x102,0)):
   for flags_value in (0,2,1,4):
    n=run(False,kind,detail,flags_value);c=run(True,kind,detail,flags_value)
    assert n==c,(kind,detail,flags_value,n,c)

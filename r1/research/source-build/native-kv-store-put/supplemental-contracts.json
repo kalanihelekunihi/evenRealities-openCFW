@@ -1,0 +1,25 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entry": "0x00095304",
+  "end": "0x00095427",
+  "native_body_bytes": 292,
+  "symbol": "r1_kv_store_put",
+  "absent_from_ownership_ledger": true,
+  "absent_from_accumulated_pseudocode": true,
+  "ghidra_memory_sha256": "88fe174e20f23b7d6bd00f29cc0ab226ac9306e3bc6e478bf080e70ead3cb45b",
+  "ghidra_bytes_equal_locked_body": true,
+  "layout": {
+    "block_count_byte": "0x20019e48",
+    "erase_threshold_byte": "0x20019e4a",
+    "driver_write_callback_offset": 44,
+    "driver_erase_callback_offset": 48
+  },
+  "evidence": "Native instructions and fixed literals are authoritative for this supplemental entry; no invented accumulated pseudocode receipt.",
+  "instruction_identity_proven": false,
+  "rea_query": {
+    "report": "rea-function-unrecognized.json",
+    "sha256": "f6215f18383a8b1aaf5db54963ca6db94813574f22c354d9da57ba663bdb247d",
+    "result": "No procedure exists at 0x95304 in the fresh REA/Ghidra analysis; native body is authenticated separately. This is a procedure-discovery gap, not evidence that the callback is absent.",
+    "analysis_success": false
+  }
+}

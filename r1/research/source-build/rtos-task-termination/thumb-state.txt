@@ -1,0 +1,56 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0005cfac <r1_stock_i2c5_acquire+0xcad4>:
+   5cfac:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   5cfb0:	0004      	movs	r4, r0
+   5cfb2:	d006      	beq.n	5cfc2 <r1_stock_i2c5_acquire+0xcaea>
+   5cfb4:	4e17      	ldr	r6, [pc, #92]	@ (5d014 <r1_stock_i2c5_acquire+0xcb3c>)
+   5cfb6:	6830      	ldr	r0, [r6, #0]
+   5cfb8:	4284      	cmp	r4, r0
+   5cfba:	d109      	bne.n	5cfd0 <r1_stock_i2c5_acquire+0xcaf8>
+   5cfbc:	2000      	movs	r0, #0
+   5cfbe:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+   5cfc2:	2040      	movs	r0, #64	@ 0x40
+   5cfc4:	f380 8811 	msr	BASEPRI, r0
+   5cfc8:	2000      	movs	r0, #0
+   5cfca:	f840 0c01 	str.w	r0, [r0, #-1]
+   5cfce:	e7fe      	b.n	5cfce <r1_stock_i2c5_acquire+0xcaf6>
+   5cfd0:	f038 fe90 	bl	95cf4 <_stack+0x15cf4>
+   5cfd4:	6965      	ldr	r5, [r4, #20]
+   5cfd6:	6bb7      	ldr	r7, [r6, #56]	@ 0x38
+   5cfd8:	6bf6      	ldr	r6, [r6, #60]	@ 0x3c
+   5cfda:	f038 fea3 	bl	95d24 <_stack+0x15d24>
+   5cfde:	42bd      	cmp	r5, r7
+   5cfe0:	d001      	beq.n	5cfe6 <r1_stock_i2c5_acquire+0xcb0e>
+   5cfe2:	42b5      	cmp	r5, r6
+   5cfe4:	d101      	bne.n	5cfea <r1_stock_i2c5_acquire+0xcb12>
+   5cfe6:	2002      	movs	r0, #2
+   5cfe8:	e7e9      	b.n	5cfbe <r1_stock_i2c5_acquire+0xcae6>
+   5cfea:	480b      	ldr	r0, [pc, #44]	@ (5d018 <r1_stock_i2c5_acquire+0xcb40>)
+   5cfec:	4285      	cmp	r5, r0
+   5cfee:	d108      	bne.n	5d002 <r1_stock_i2c5_acquire+0xcb2a>
+   5cff0:	6aa0      	ldr	r0, [r4, #40]	@ 0x28
+   5cff2:	2800      	cmp	r0, #0
+   5cff4:	d1f7      	bne.n	5cfe6 <r1_stock_i2c5_acquire+0xcb0e>
+   5cff6:	f894 106c 	ldrb.w	r1, [r4, #108]	@ 0x6c
+   5cffa:	2003      	movs	r0, #3
+   5cffc:	2901      	cmp	r1, #1
+   5cffe:	d0f2      	beq.n	5cfe6 <r1_stock_i2c5_acquire+0xcb0e>
+   5d000:	e7dd      	b.n	5cfbe <r1_stock_i2c5_acquire+0xcae6>
+   5d002:	4805      	ldr	r0, [pc, #20]	@ (5d018 <r1_stock_i2c5_acquire+0xcb40>)
+   5d004:	3814      	subs	r0, #20
+   5d006:	4285      	cmp	r5, r0
+   5d008:	d002      	beq.n	5d010 <r1_stock_i2c5_acquire+0xcb38>
+   5d00a:	b10d      	cbz	r5, 5d010 <r1_stock_i2c5_acquire+0xcb38>
+   5d00c:	2001      	movs	r0, #1
+   5d00e:	e7d6      	b.n	5cfbe <r1_stock_i2c5_acquire+0xcae6>
+   5d010:	2004      	movs	r0, #4
+   5d012:	e7d4      	b.n	5cfbe <r1_stock_i2c5_acquire+0xcae6>
+   5d014:	781c      	ldrb	r4, [r3, #0]
+   5d016:	2000      	movs	r0, #0
+   5d018:	b244      	sxtb	r4, r0
+   5d01a:	2002      	movs	r0, #2

@@ -1,0 +1,15 @@
+0x1000000 0x2003f000 0x1000000
+0x1000002 0x2003efec 0x1000000
+0x1000004 0x2003efe0 0x1000000
+0x1000006 0x2003efe0 0x61000000
+0x1000008 0x2003efe0 0x61000000
+0x100000c 0x2003efe0 0x61005400
+0x100000e 0x2003efe0 0x61000000
+0x1000012 0x2003efe0 0x61000000
+Traceback (most recent call last):
+  File "/tmp/replay_it_mem.py", line 6, in <module>
+    u.emu_start(0x1000001,0x20000100,count=100)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/r1-source-venv/lib/python3.14/site-packages/unicorn/unicorn_py3/unicorn.py", line 766, in emu_start
+    raise UcError(status)
+unicorn.unicorn_py3.unicorn.UcError: Invalid memory fetch (UC_ERR_FETCH_UNMAPPED)

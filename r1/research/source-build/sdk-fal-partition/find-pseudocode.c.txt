@@ -1,0 +1,35 @@
+/* ================================================================
+ * entry: 0x00063150
+ * end:   0x0006318d
+ * size:  62 bytes
+ * name:  FUN_00063150
+ * ================================================================ */
+
+int FUN_00063150(undefined4 param_1)
+
+{
+  char *pcVar1;
+  int iVar2;
+  uint uVar3;
+
+  pcVar1 = DAT_00063190;
+  if (*DAT_00063190 == '\0') {
+    FUN_00038060(s___s__has_assert_failed_at__s__000631a0,s_init_ok_00063198,DAT_00063194);
+    do {
+                    /* WARNING: Do nothing block with infinite loop */
+    } while( true );
+  }
+  uVar3 = 0;
+  while( true ) {
+    if (*(uint *)(pcVar1 + 8) <= uVar3) {
+      return 0;
+    }
+    iVar2 = FUN_000277fe(param_1,*(int *)(pcVar1 + 4) + uVar3 * 0x40 + 4);
+    if (iVar2 == 0) break;
+    uVar3 = uVar3 + 1;
+  }
+  return *(int *)(pcVar1 + 4) + uVar3 * 0x40;
+}
+
+
+

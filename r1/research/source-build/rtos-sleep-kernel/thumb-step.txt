@@ -1,0 +1,47 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0009653c <r1_stock_gpio_pin_set+0x1d108>:
+   9653c:	b570      	push	{r4, r5, r6, lr}
+   9653e:	4c16      	ldr	r4, [pc, #88]	@ (96598 <_stack+0x16598>)
+   96540:	4605      	mov	r5, r0
+   96542:	68e0      	ldr	r0, [r4, #12]
+   96544:	6aa3      	ldr	r3, [r4, #40]	@ 0x28
+   96546:	1942      	adds	r2, r0, r5
+   96548:	2100      	movs	r1, #0
+   9654a:	2040      	movs	r0, #64	@ 0x40
+   9654c:	429a      	cmp	r2, r3
+   9654e:	d904      	bls.n	9655a <_stack+0x1655a>
+   96550:	f380 8811 	msr	BASEPRI, r0
+   96554:	f841 1c01 	str.w	r1, [r1, #-1]
+   96558:	e7fe      	b.n	96558 <_stack+0x16558>
+   9655a:	68e2      	ldr	r2, [r4, #12]
+   9655c:	6aa3      	ldr	r3, [r4, #40]	@ 0x28
+   9655e:	442a      	add	r2, r5
+   96560:	429a      	cmp	r2, r3
+   96562:	d10a      	bne.n	9657a <_stack+0x1657a>
+   96564:	6b62      	ldr	r2, [r4, #52]	@ 0x34
+   96566:	b162      	cbz	r2, 96582 <_stack+0x16582>
+   96568:	b185      	cbz	r5, 9658c <_stack+0x1658c>
+   9656a:	f7ff fbc3 	bl	95cf4 <_stack+0x15cf4>
+   9656e:	69a0      	ldr	r0, [r4, #24]
+   96570:	1c40      	adds	r0, r0, #1
+   96572:	61a0      	str	r0, [r4, #24]
+   96574:	f7ff fbd6 	bl	95d24 <_stack+0x15d24>
+   96578:	1e6d      	subs	r5, r5, #1
+   9657a:	68e0      	ldr	r0, [r4, #12]
+   9657c:	4428      	add	r0, r5
+   9657e:	60e0      	str	r0, [r4, #12]
+   96580:	bd70      	pop	{r4, r5, r6, pc}
+   96582:	f380 8811 	msr	BASEPRI, r0
+   96586:	f841 1c01 	str.w	r1, [r1, #-1]
+   9658a:	e7fe      	b.n	9658a <_stack+0x1658a>
+   9658c:	f380 8811 	msr	BASEPRI, r0
+   96590:	f841 1c01 	str.w	r1, [r1, #-1]
+   96594:	e7fe      	b.n	96594 <_stack+0x16594>
+   96596:	0000      	movs	r0, r0
+   96598:	781c      	ldrb	r4, [r3, #0]
+   9659a:	2000      	movs	r0, #0

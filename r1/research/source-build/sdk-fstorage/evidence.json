@@ -1,0 +1,59 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "functions": [
+    {
+      "entry": "0x78c78",
+      "body_bytes": 8,
+      "ghidra_file": "ghidra-init-body.json",
+      "ghidra_sha256": "ec7866f7fc717251ccfb5a76eaa240d8281380f45ba41618b2e6aa4b4cae51cf",
+      "pseudocode_file": "init-pseudocode.c.txt",
+      "pseudocode_sha256": "417e8f4f670d284f3b6d7a461ffc9a3c62ad602cf9544ffe43ca59ad5c193f15"
+    },
+    {
+      "entry": "0x78c4c",
+      "body_bytes": 44,
+      "ghidra_file": "ghidra-erase-body.json",
+      "ghidra_sha256": "3eb66f6ec1b767f4a92cbaf98e3a2b76b117453c92041ba3280b3cbbb33bf774",
+      "pseudocode_file": "erase-pseudocode.c.txt",
+      "pseudocode_sha256": "46e5feff5febadef598293e3d7b8097407d48b31c410570816e30d8acbcc8595"
+    },
+    {
+      "entry": "0x78dac",
+      "body_bytes": 62,
+      "ghidra_file": "ghidra-write-body.json",
+      "ghidra_sha256": "6a7cb61afba5fa76fb4f797507a9fcdc97c3452e5a883cba66d12d175ac5b872",
+      "pseudocode_file": "write-pseudocode.c.txt",
+      "pseudocode_sha256": "658fdb65a9c92c9333c0c05dada0318dff6ece1d52947a5eddf40aa9394309dd"
+    },
+    {
+      "entry": "0x78c80",
+      "body_bytes": 70,
+      "ghidra_file": "ghidra-busy-body.json",
+      "ghidra_sha256": "71baa0cd7b4d96aa32b4a783668f4117f0c977a90c442af30e90a4ac4bacba58",
+      "pseudocode_file": null,
+      "pseudocode_sha256": null
+    }
+  ],
+  "configuration": {
+    "NRF_FSTORAGE_PARAM_CHECK_DISABLED": 1,
+    "NRF_ASSERT_PRESENT": 0
+  },
+  "instance_range": [
+    "0x20007dc0",
+    "0x20007de8"
+  ],
+  "second_instance_gate": "Only first instance is source-owned by the native flash module; secondary instance and final section linkage remain unresolved.",
+  "instruction_identity_proven": false,
+  "rea_write_function": {
+    "file": "rea-write-function.json",
+    "sha256": "415b346b1ad2349932aafe1c89422674f2b97c423f646dfec1e2d8241d3fa896",
+    "evidence_id": "ev_1876e2f4eefe6f6bc90263f382ce1212c8d922bd06931a2c60f884aef5df10e8",
+    "operation": "analyze_function",
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+/* ================================================================
+ * entry: 0x000788c8
+ * end:   0x00078929
+ * size:  98 bytes
+ * name:  FUN_000788c8
+ * ================================================================ */
+
+undefined4 FUN_000788c8(void)
+
+{
+  char *pcVar1;
+  int iVar2;
+  uint uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+
+  pcVar1 = DAT_0007892c;
+  if (*DAT_0007892c == '\0') {
+    pcVar1[8] = '\0';
+    pcVar1[9] = '\0';
+    pcVar1[10] = '\0';
+    pcVar1[0xb] = '\0';
+    pcVar1[4] = '\0';
+    pcVar1[5] = '\0';
+    pcVar1[6] = '\0';
+    pcVar1[7] = '\0';
+    pcVar1[0x10] = '\0';
+    pcVar1[0x11] = '\0';
+    pcVar1[0x12] = '\0';
+    pcVar1[0x13] = '\0';
+    pcVar1[0xc] = '\0';
+    pcVar1[0xd] = '\0';
+    pcVar1[0xe] = '\0';
+    pcVar1[0xf] = '\0';
+    uVar5 = FUN_0007a66c(DAT_00078930);
+    iVar2 = FUN_0007a4d8();
+    if (iVar2 == 0) {
+      FUN_0007a640();
+    }
+    *pcVar1 = '\x01';
+  }
+  else {
+    uVar5 = 0x85;
+  }
+  iVar2 = FUN_0007a630();
+  if (iVar2 != 0) {
+    pcVar1[2] = '\x01';
+  }
+  uVar3 = FUN_000914ec();
+  if ((uVar3 & 1) == 0) {
+    iVar2 = FUN_000914ec();
+    if (-1 < iVar2 << 0x1d) goto LAB_00078922;
+  }
+  uVar4 = FUN_0007a5cc(uVar5);
+  FUN_00091638(0xc800000,s__RING_Function___s__error_code____00078938,
+               s__RING_Function___s__error_code____00078938,DAT_00078934,uVar4);
+LAB_00078922:
+  FUN_000914ec();
+  return uVar5;
+}
+
+
+

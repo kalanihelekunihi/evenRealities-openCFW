@@ -1,0 +1,45 @@
+{
+  "comparisons": 6784,
+  "counts": {
+    "osTimerStart": 2880,
+    "osTimerStop": 2880,
+    "xTimerIsTimerActive": 1024
+  },
+  "assertion_faults": 512,
+  "provider_reports": {
+    "rtos-timer-controls/report.json": "58396bb0093399c8fb30e5eb278a5355a0673f6d7808293286d8846febcf0db4",
+    "rtos-timer-active/report.json": "a2a675e76cbbc1904a478f31e5ef673c90235e28d530ae4ae68cbcb6508485c2"
+  },
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-osTimerStart.json": "ddad4e245530fac78c2f6210cb99bb52f6a454c1a34028eb39ff1826127f5d1f",
+    "ghidra-osTimerStop.json": "1ab1b9b642b1ffc5a1e8874d08825152291f6dd2861728e22b6f3ba8c3eb7d20",
+    "ghidra-xTimerIsTimerActive.json": "2645189db53b703fc8c705f09e7e6a81c25eb4e46748146ed08a0fd0be0ba87f"
+  },
+  "rea_evidence": {
+    "rea-timer-start.json": "c661f41288e7d80996d18d119d0e9001b9fc5e481e5cfc8279a0445d813fc776",
+    "rea-timer-stop.json": "52d2f25ca717de712ff48bdf410671540d20545cc43c224713d8a28405995001"
+  },
+  "verifier_sha256": "a52ece8d82848b5156faf5b4d46a6ddf19408ad5d49aad856498c4ef2d0170b1",
+  "entries": {
+    "osTimerStart": [
+      514480,
+      58
+    ],
+    "osTimerStop": [
+      514538,
+      68
+    ],
+    "xTimerIsTimerActive": [
+      626024,
+      46
+    ]
+  },
+  "lower_providers": "critical sections, scheduler-state getter and timer command are fixtures; timer-active body is real",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "REA timer-active decompilation failed; native instructions, corpus and independent Ghidra bytes authenticate that body",
+    "No physical concurrency/interrupt timing or canonical graph admission"
+  ]
+}

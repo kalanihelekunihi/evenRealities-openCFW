@@ -1,0 +1,50 @@
+{
+  "comparisons": 53248,
+  "all_counter_bytes": true,
+  "mode_sequences": 13,
+  "provider_calls_per_side": {
+    "r1_structured_log_mode_get": 67584,
+    "r1_structured_log_format": 18432,
+    "nrf_log_frontend_std_2": 14336,
+    "r1_battery_voltage_get": 25584,
+    "time_backend_timestamp_thunk": 25584,
+    "r1_kv_dev_info_fields_set": 25584,
+    "osThreadFlagsSet": 25584,
+    "r1_event_publish": 104
+  },
+  "outcomes": {
+    "reset": 26624,
+    "ordinary": 936,
+    "event": 104,
+    "record": 25584
+  },
+  "full_r2_r3_checked": true,
+  "event_tail_raw_return_checked": true,
+  "source_descriptor_sections": {
+    "ring": {
+      "address": 252224,
+      "bytes": 55,
+      "sha256": "708e9ed21363cdd014bc739bbdad7eaa86eeba5c99a0ae17d2e39237e844b20e"
+    },
+    "sdk": {
+      "address": 252288,
+      "bytes": 49,
+      "sha256": "dc061aaca5eac6d428c1475cb4ccb751c7f115d99d71139c83396d7b97b1d224"
+    }
+  },
+  "report_sha256": "527f7b9f8dbf990571d8d54e5d0a3a5a7468ee91338bd0d7d9feb03c2566bf78",
+  "object_sha256": "fcfbd5799cb2775d05a5f08368d9fc190888c3fef0df43a8b3b7c1b3dfcd4c55",
+  "driver_sha256": "183a0fd8d023d1a479fa1978ca5a2fb38d3a0b8c3c1af86697552e445abf2a85",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-3d88c.json": "2c0d07b064e3bf1ce401fc2222bfb89e27b1e8b79d3acac55a09362dbb4a6cc4",
+    "ghidra-body-data.json": "c00648e0286984f8093cb3097ae1ebaeddcfcc337dd229bdad3b23e47ce85974"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Log/voltage/time/KV/event/thread providers are fixtures; actual downstream composition remains open",
+    "Selected compiler saved-record registers and event tail boundary verified; other compilers/LTO require revalidation",
+    "Runtime/handle initialization, persistence, physical timing/concurrency, canonical admission and original image identity remain gates"
+  ]
+}

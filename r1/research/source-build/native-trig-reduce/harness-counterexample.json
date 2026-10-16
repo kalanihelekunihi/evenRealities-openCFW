@@ -1,0 +1,10 @@
+{
+  "stage": "pre-admission",
+  "case_index": 40960,
+  "input_bits": "80000000",
+  "native_pc": "3bb4a",
+  "native_r5": "fff7fffc",
+  "observation": "Unmapped native read after preceding invalid-input IT-block returns; no source mismatch was established.",
+  "candidate_harness_repair": "Reset XPSR to 0x01000000 at each independent call; rerun required.",
+  "repair_verified_by": "verification.json: 212992 independent calls pass after explicit XPSR initialization"
+}

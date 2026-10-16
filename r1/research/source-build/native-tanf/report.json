@@ -1,0 +1,64 @@
+{
+  "units": [
+    {
+      "source": "r1/components/runtime/native_tanf.c",
+      "source_sha256": "61c930ff0a414effe85d688226f224200354b26d6e5e9c8e1bf8839935cff582",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-tanf/native_tanf.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/runtime/native_tanf.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-tanf/native_tanf.o"
+      ],
+      "compiled": true,
+      "object_sha256": "f97f069be5855ffa99d0984dd8e3b72de9c0e7d9f9a7019daccadc1082dc78e2",
+      "undefined": [
+        "r1_binary32_classify_bits",
+        "r1_math_invalid32",
+        "r1_math_low_square32",
+        "r1_math_self_add32",
+        "r1_native_errno_set",
+        "r1_native_trig_reduce32"
+      ],
+      "defined": [
+        "r1_native_tanf",
+        "r1_tanf_data"
+      ],
+      "emitted_function_count": 1
+    }
+  ],
+  "inputs": {
+    "r1/components/runtime/native_tanf.c": "61c930ff0a414effe85d688226f224200354b26d6e5e9c8e1bf8839935cff582",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

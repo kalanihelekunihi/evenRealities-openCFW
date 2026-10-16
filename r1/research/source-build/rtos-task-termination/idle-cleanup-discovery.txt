@@ -1,0 +1,65 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00084fe8 <r1_stock_gpio_pin_set+0xbbb4>:
+   84fe8:	4c20      	ldr	r4, [pc, #128]	@ (8506c <_stack+0x506c>)
+   84fea:	4e21      	ldr	r6, [pc, #132]	@ (85070 <_stack+0x5070>)
+   84fec:	e012      	b.n	85014 <_stack+0x5014>
+   84fee:	bf00      	nop
+   84ff0:	f010 fe80 	bl	95cf4 <_stack+0x15cf4>
+   84ff4:	68f0      	ldr	r0, [r6, #12]
+   84ff6:	68c5      	ldr	r5, [r0, #12]
+   84ff8:	1d28      	adds	r0, r5, #4
+   84ffa:	f010 fb08 	bl	9560e <_stack+0x1560e>
+   84ffe:	68a0      	ldr	r0, [r4, #8]
+   85000:	1e40      	subs	r0, r0, #1
+   85002:	60a0      	str	r0, [r4, #8]
+   85004:	6860      	ldr	r0, [r4, #4]
+   85006:	1e40      	subs	r0, r0, #1
+   85008:	6060      	str	r0, [r4, #4]
+   8500a:	f010 fe8b 	bl	95d24 <_stack+0x15d24>
+   8500e:	4628      	mov	r0, r5
+   85010:	f7ff ff91 	bl	84f36 <_stack+0x4f36>
+   85014:	6860      	ldr	r0, [r4, #4]
+   85016:	2800      	cmp	r0, #0
+   85018:	d1ea      	bne.n	84ff0 <_stack+0x4ff0>
+   8501a:	4816      	ldr	r0, [pc, #88]	@ (85074 <_stack+0x5074>)
+   8501c:	6800      	ldr	r0, [r0, #0]
+   8501e:	2801      	cmp	r0, #1
+   85020:	d908      	bls.n	85034 <_stack+0x5034>
+   85022:	4915      	ldr	r1, [pc, #84]	@ (85078 <_stack+0x5078>)
+   85024:	f04f 5080 	mov.w	r0, #268435456	@ 0x10000000
+   85028:	6008      	str	r0, [r1, #0]
+   8502a:	bf40      	sev
+   8502c:	f3bf 8f4f 	dsb	sy
+   85030:	f3bf 8f6f 	isb	sy
+   85034:	f010 fdd8 	bl	95be8 <_stack+0x15be8>
+   85038:	f7ff ff96 	bl	84f68 <_stack+0x4f68>
+   8503c:	2802      	cmp	r0, #2
+   8503e:	d3d4      	bcc.n	84fea <_stack+0x4fea>
+   85040:	f011 faac 	bl	9659c <_stack+0x1659c>
+   85044:	6aa0      	ldr	r0, [r4, #40]	@ 0x28
+   85046:	68e1      	ldr	r1, [r4, #12]
+   85048:	4288      	cmp	r0, r1
+   8504a:	d206      	bcs.n	8505a <_stack+0x505a>
+   8504c:	2040      	movs	r0, #64	@ 0x40
+   8504e:	f380 8811 	msr	BASEPRI, r0
+   85052:	2000      	movs	r0, #0
+   85054:	f840 0c01 	str.w	r0, [r0, #-1]
+   85058:	e7fe      	b.n	85058 <_stack+0x5058>
+   8505a:	f7ff ff85 	bl	84f68 <_stack+0x4f68>
+   8505e:	2802      	cmp	r0, #2
+   85060:	d301      	bcc.n	85066 <_stack+0x5066>
+   85062:	f010 febf 	bl	95de4 <_stack+0x15de4>
+   85066:	f013 fd5d 	bl	98b24 <_stack+0x18b24>
+   8506a:	e7be      	b.n	84fea <_stack+0x4fea>
+   8506c:	781c      	ldrb	r4, [r3, #0]
+   8506e:	2000      	movs	r0, #0
+   85070:	b230      	sxth	r0, r6
+   85072:	2002      	movs	r0, #2
+   85074:	ad94      	add	r5, sp, #592	@ 0x250
+   85076:	2002      	movs	r0, #2
+   85078:	ed04 e000 	stc	0, cr14, [r4, #-0]

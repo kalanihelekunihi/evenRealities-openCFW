@@ -1,0 +1,59 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "functions": [
+    {
+      "symbol": "nrf_sdh_disable_request",
+      "entry": "0x7a3ec",
+      "body_bytes": 80,
+      "ghidra_sha256": "e8ef5ecdedaef31f689d4c0f51b4e4219659751b4a9518419ab11ffc52d2d5e4"
+    },
+    {
+      "symbol": "nrf_sdh_enable_request",
+      "entry": "0x7a440",
+      "body_bytes": 102,
+      "ghidra_sha256": "e9e0b623db73e8ac4dd94f4185d6184c91a25605e0772dc0606b60a27c0f4e07",
+      "pseudocode_file": "nrf_sdh_enable_request-pseudocode.c.txt",
+      "pseudocode_sha256": "4d6ac90cbe9808a04719c7256c683fb2732324c49efee5335f76e7f677f07637"
+    },
+    {
+      "symbol": "nrf_sdh_evts_poll",
+      "entry": "0x7a4b4",
+      "body_bytes": 32,
+      "ghidra_sha256": "a2382d98fc6173b07fd5faac5ae2fb30114158cfddc7b9bf733f4620f211398a",
+      "pseudocode_file": "nrf_sdh_evts_poll-pseudocode.c.txt",
+      "pseudocode_sha256": "498a44a2ae79530a6fd5696d24aca1eff4a35b045a363b4a6d60538064cc3555"
+    },
+    {
+      "symbol": "nrf_sdh_is_enabled",
+      "entry": "0x7a4d8",
+      "body_bytes": 6,
+      "ghidra_sha256": "5986b992de3e2fdd846a214bcd4f952483b2304466e733d36d0d43514cbe49d7",
+      "pseudocode_file": "nrf_sdh_is_enabled-pseudocode.c.txt",
+      "pseudocode_sha256": "03b91539ac6cfd3c76cea5fd89e6cc3ca1981a1fbba486df076fdd39f002a88a"
+    },
+    {
+      "symbol": "nrf_sdh_request_continue",
+      "entry": "0x7a4e4",
+      "body_bytes": 22,
+      "ghidra_sha256": "2b88a8c0be4d9edd37db7b2fc1ae8e14f59d96db0b02c734732b7d88bf8764f9"
+    },
+    {
+      "symbol": "softdevice_evt_irq_disable",
+      "entry": "0x90814",
+      "body_bytes": 60,
+      "ghidra_sha256": "d1e107ca04481ec2b586872321d4e599433ed659bf7ba2e97e6a7c851f705167",
+      "pseudocode_file": "softdevice_evt_irq_disable-pseudocode.c.txt",
+      "pseudocode_sha256": "27402595133a3271ea6934fc7b79534d728adc649f86bc204eb38f0760a49a45"
+    },
+    {
+      "symbol": "softdevices_evt_irq_enable",
+      "entry": "0x90854",
+      "body_bytes": 80,
+      "ghidra_sha256": "300b6e06de7d6acc7f28df41ad83cb4fd8e4650be79dbbfd66843337fdea9f04",
+      "pseudocode_file": "softdevices_evt_irq_enable-pseudocode.c.txt",
+      "pseudocode_sha256": "17c8913e3cbbd6d80c49c974258a54b45e4da9bdd8fcdd7e5be9c80a169cef04"
+    }
+  ],
+  "scope": "Five bounded native entry spans; continuation and disable overlap the larger non-contiguous queue inventory and do not independently prove that whole inventory row",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968"
+}

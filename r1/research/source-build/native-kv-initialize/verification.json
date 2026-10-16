@@ -1,0 +1,15 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "59bcfb29ca0c70b35284efbbee0056526d18e2d9b51336b7f1e74f7ce3ac076f",
+  "object_sha256": "744db6dd9f2dd5989986e0185e27c59de84ac8a7237904a7baefde9f7be93e81",
+  "comparisons": 7424,
+  "initial_zero_bytes_compared": 98,
+  "descriptor_bytes_compared": 378,
+  "scope": "Native initializer error precedence, cached mutex/null allocation, FAL readiness, partition/device outcomes, minimum length and byte truncation geometry, scan mutation, cursor truncation, descriptors and log mode/arguments, state and callee-saved registers",
+  "limitations": [
+    "FAL/CMSIS and flash scans are controlled providers; no physical allocation, flash persistence or real startup is proven.",
+    "Source-owned fields are partial backend state, not complete driver/partition allocations.",
+    "Instruction identity, complete image linking and hardware remain unresolved."
+  ],
+  "instruction_identity_proven": false
+}

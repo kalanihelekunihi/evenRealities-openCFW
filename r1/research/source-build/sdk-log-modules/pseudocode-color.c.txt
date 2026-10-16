@@ -1,0 +1,29 @@
+/* ================================================================
+ * entry: 0x0007965c
+ * end:   0x00079685
+ * size:  42 bytes
+ * name:  FUN_0007965c
+ * ================================================================ */
+
+undefined1 FUN_0007965c(int param_1,int param_2)
+
+{
+  int iVar1;
+
+  iVar1 = DAT_00079688 + param_1 * 8;
+  if (param_2 == 1) {
+    return 2;
+  }
+  if (param_2 == 2) {
+    return 4;
+  }
+  if (param_2 == 3) {
+    return *(undefined1 *)(iVar1 + 4);
+  }
+  if (param_2 != 4) {
+    return 0;
+  }
+  return *(undefined1 *)(iVar1 + 5);
+}
+
+

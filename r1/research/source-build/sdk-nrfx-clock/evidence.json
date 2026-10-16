@@ -1,0 +1,47 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "functions": [
+    {
+      "symbol": "nrfx_clock_init",
+      "entry": "0x7a66c",
+      "body_bytes": 28,
+      "ghidra_file": "ghidra-nrfx_clock_init-body.json",
+      "ghidra_sha256": "40ed499703a9d05c4393c9db57543c2b5983f19a18eacc4046509d67890e2e02",
+      "pseudocode_file": "nrfx_clock_init-pseudocode.c.txt",
+      "pseudocode_sha256": "35cd1b383a2c7dbe2e28a187a009b2ea4e99e95f4240bfdf0bcb54b138cc5e40"
+    },
+    {
+      "symbol": "nrfx_clock_enable",
+      "entry": "0x7a640",
+      "body_bytes": 34,
+      "ghidra_file": "ghidra-nrfx_clock_enable-body.json",
+      "ghidra_sha256": "8b7dad164d137912671fa7f85612109303e46cb5123895ccf17ae9a0c4b04f62",
+      "pseudocode_file": "nrfx_clock_enable-pseudocode.c.txt",
+      "pseudocode_sha256": "ae9c8f7235abf563bef881fa727ca1265ac91a1a5a1a802bf0713c385b58122d"
+    },
+    {
+      "symbol": "nrfx_clock_lfclk_start",
+      "entry": "0x7a68c",
+      "body_bytes": 26,
+      "ghidra_file": "ghidra-nrfx_clock_lfclk_start-body.json",
+      "ghidra_sha256": "cbf8f2ac021d466760e22ca4c424078a3163f72419d1c91df3e8e21e6055c615",
+      "pseudocode_file": "nrfx_clock_lfclk_start-pseudocode.c.txt",
+      "pseudocode_sha256": "4e80f2dc2f7ed3f67da8b9adb7313f328c3d54a70cb29cc6d9e251d0121a0ca5"
+    },
+    {
+      "symbol": "nrfx_clock_lfclk_stop",
+      "entry": "0x7a6ac",
+      "body_bytes": 38,
+      "ghidra_file": "ghidra-nrfx_clock_lfclk_stop-body.json",
+      "ghidra_sha256": "7b41f8989ade38896a76fe57d32cea32daae0ed1058d05537cd9905db9fcc25e"
+    }
+  ],
+  "configuration_evidence": {
+    "calibration_state_store": "native init strb0 at control+6",
+    "lf_source": "native enable writes0 at CLOCK+0x518",
+    "irq_priority": "native enable writes0xc0 to NVIC IPR IRQ0",
+    "assertions": "native unchecked entries lack assertion branches",
+    "original_gcc_defaults": "SDK legacy apply_old_config defaults had overridden recovered LF source; local header restores native0"
+  }
+}

@@ -1,0 +1,26 @@
+/* ================================================================
+ * entry: 0x00077f40
+ * end:   0x00077f65
+ * size:  38 bytes
+ * name:  FUN_00077f40
+ * ================================================================ */
+
+undefined4 FUN_00077f40(int *param_1,int param_2,uint param_3,uint param_4)
+
+{
+  if (param_2 == 0) {
+    return 0xe;
+  }
+  if (param_3 != param_4 * (param_3 / param_4)) {
+    return 9;
+  }
+  *param_1 = param_2;
+  param_1[1] = 0;
+  param_1[2] = 0;
+  *(short *)(param_1 + 3) = (short)param_3;
+  *(short *)((int)param_1 + 0xe) = (short)param_4;
+  return 0;
+}
+
+
+

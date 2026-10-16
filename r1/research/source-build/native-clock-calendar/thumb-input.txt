@@ -1,0 +1,20 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00050d8a <r1_stock_i2c5_acquire+0x8b2>:
+   50d8a:	b510      	push	{r4, lr}
+   50d8c:	0004      	movs	r4, r0
+   50d8e:	d00a      	beq.n	50da6 <r1_stock_i2c5_acquire+0x8ce>
+   50d90:	f03a f810 	bl	8adb4 <_stack+0xadb4>
+   50d94:	4601      	mov	r1, r0
+   50d96:	4620      	mov	r0, r4
+   50d98:	f03a f85e 	bl	8ae58 <_stack+0xae58>
+   50d9c:	2100      	movs	r1, #0
+   50d9e:	f000 f827 	bl	50df0 <r1_stock_i2c5_acquire+0x918>
+   50da2:	2001      	movs	r0, #1
+   50da4:	bd10      	pop	{r4, pc}
+   50da6:	2000      	movs	r0, #0
+   50da8:	bd10      	pop	{r4, pc}

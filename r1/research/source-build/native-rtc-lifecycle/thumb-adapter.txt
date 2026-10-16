@@ -1,0 +1,33 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+000562e0 <r1_stock_i2c5_acquire+0x5e08>:
+   562e0:	b538      	push	{r3, r4, r5, lr}
+   562e2:	460c      	mov	r4, r1
+   562e4:	9000      	str	r0, [sp, #0]
+   562e6:	4668      	mov	r0, sp
+   562e8:	f7d1 f9ee 	bl	276c8 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x6c8>
+   562ec:	6941      	ldr	r1, [r0, #20]
+   562ee:	f201 716c 	addw	r1, r1, #1900	@ 0x76c
+   562f2:	6161      	str	r1, [r4, #20]
+   562f4:	6901      	ldr	r1, [r0, #16]
+   562f6:	1c49      	adds	r1, r1, #1
+   562f8:	6121      	str	r1, [r4, #16]
+   562fa:	68c1      	ldr	r1, [r0, #12]
+   562fc:	60e1      	str	r1, [r4, #12]
+   562fe:	6881      	ldr	r1, [r0, #8]
+   56300:	60a1      	str	r1, [r4, #8]
+   56302:	6841      	ldr	r1, [r0, #4]
+   56304:	6061      	str	r1, [r4, #4]
+   56306:	6801      	ldr	r1, [r0, #0]
+   56308:	6021      	str	r1, [r4, #0]
+   5630a:	6981      	ldr	r1, [r0, #24]
+   5630c:	61a1      	str	r1, [r4, #24]
+   5630e:	69c0      	ldr	r0, [r0, #28]
+   56310:	1c40      	adds	r0, r0, #1
+   56312:	61e0      	str	r0, [r4, #28]
+   56314:	bd38      	pop	{r3, r4, r5, pc}
+	...

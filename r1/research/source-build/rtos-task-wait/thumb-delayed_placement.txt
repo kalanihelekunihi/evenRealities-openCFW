@@ -1,0 +1,61 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00084cf0 <r1_stock_gpio_pin_set+0xb8bc>:
+   84cf0:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   84cf4:	4c1a      	ldr	r4, [pc, #104]	@ (84d60 <_stack+0x4d60>)
+   84cf6:	460f      	mov	r7, r1
+   84cf8:	4605      	mov	r5, r0
+   84cfa:	68e6      	ldr	r6, [r4, #12]
+   84cfc:	6820      	ldr	r0, [r4, #0]
+   84cfe:	1d00      	adds	r0, r0, #4
+   84d00:	f010 fc85 	bl	9560e <_stack+0x1560e>
+   84d04:	1c68      	adds	r0, r5, #1
+   84d06:	d115      	bne.n	84d34 <_stack+0x4d34>
+   84d08:	b1a7      	cbz	r7, 84d34 <_stack+0x4d34>
+   84d0a:	4916      	ldr	r1, [pc, #88]	@ (84d64 <_stack+0x4d64>)
+   84d0c:	6822      	ldr	r2, [r4, #0]
+   84d0e:	6848      	ldr	r0, [r1, #4]
+   84d10:	6090      	str	r0, [r2, #8]
+   84d12:	6823      	ldr	r3, [r4, #0]
+   84d14:	6882      	ldr	r2, [r0, #8]
+   84d16:	60da      	str	r2, [r3, #12]
+   84d18:	6822      	ldr	r2, [r4, #0]
+   84d1a:	6883      	ldr	r3, [r0, #8]
+   84d1c:	1d12      	adds	r2, r2, #4
+   84d1e:	605a      	str	r2, [r3, #4]
+   84d20:	6822      	ldr	r2, [r4, #0]
+   84d22:	1d12      	adds	r2, r2, #4
+   84d24:	6082      	str	r2, [r0, #8]
+   84d26:	6820      	ldr	r0, [r4, #0]
+   84d28:	6141      	str	r1, [r0, #20]
+   84d2a:	6808      	ldr	r0, [r1, #0]
+   84d2c:	1c40      	adds	r0, r0, #1
+   84d2e:	6008      	str	r0, [r1, #0]
+   84d30:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+   84d34:	6820      	ldr	r0, [r4, #0]
+   84d36:	4435      	add	r5, r6
+   84d38:	42b5      	cmp	r5, r6
+   84d3a:	6045      	str	r5, [r0, #4]
+   84d3c:	6821      	ldr	r1, [r4, #0]
+   84d3e:	d205      	bcs.n	84d4c <_stack+0x4d4c>
+   84d40:	6be0      	ldr	r0, [r4, #60]	@ 0x3c
+   84d42:	e8bd 41f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, lr}
+   84d46:	1d09      	adds	r1, r1, #4
+   84d48:	f010 bfb0 	b.w	95cac <_stack+0x15cac>
+   84d4c:	6ba0      	ldr	r0, [r4, #56]	@ 0x38
+   84d4e:	1d09      	adds	r1, r1, #4
+   84d50:	f010 ffac 	bl	95cac <_stack+0x15cac>
+   84d54:	6aa0      	ldr	r0, [r4, #40]	@ 0x28
+   84d56:	4285      	cmp	r5, r0
+   84d58:	d2ea      	bcs.n	84d30 <_stack+0x4d30>
+   84d5a:	62a5      	str	r5, [r4, #40]	@ 0x28
+   84d5c:	e7e8      	b.n	84d30 <_stack+0x4d30>
+   84d5e:	0000      	movs	r0, r0
+   84d60:	781c      	ldrb	r4, [r3, #0]
+   84d62:	2000      	movs	r0, #0
+   84d64:	b244      	sxtb	r4, r0
+   84d66:	2002      	movs	r0, #2

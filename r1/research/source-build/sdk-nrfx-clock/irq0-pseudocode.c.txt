@@ -1,0 +1,53 @@
+/* ================================================================
+ * entry: 0x00030ac8
+ * end:   0x00030b61
+ * size:  154 bytes
+ * name:  FUN_00030ac8
+ * ================================================================ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_00030ac8(void)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+
+  iVar2 = FUN_00078490(0x100);
+  puVar1 = DAT_00030b64;
+  if (iVar2 != 0) {
+    FUN_0007849e(0x100);
+    _DAT_40000308 = 1;
+    if (*(char *)((int)puVar1 + 5) == '\0') {
+      *(undefined1 *)((int)puVar1 + 5) = 1;
+      (*(code *)*puVar1)(0);
+    }
+  }
+  iVar2 = FUN_00078490(0x104);
+  if (iVar2 != 0) {
+    FUN_0007849e(0x104);
+    _DAT_40000308 = 2;
+    (*(code *)*puVar1)(1);
+  }
+  iVar2 = FUN_00078490(0x110);
+  if (iVar2 != 0) {
+    FUN_0007849e(0x110);
+    _DAT_40000308 = 0x10;
+    (*(code *)*puVar1)(2);
+  }
+  iVar2 = FUN_00078490(0x10c);
+  if (iVar2 != 0) {
+    *DAT_00030b68 = 0;
+    FUN_0007849e(0x10c);
+    _DAT_40000308 = 8;
+    *(undefined1 *)((int)puVar1 + 6) = 0;
+                    /* WARNING: Could not recover jumptable at 0x00030b5c. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (*(code *)*puVar1)(3);
+    return;
+  }
+  return;
+}
+
+
+

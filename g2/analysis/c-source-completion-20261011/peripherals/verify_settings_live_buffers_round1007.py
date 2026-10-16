@@ -10,7 +10,9 @@ base=root/'build/c-firmware/settings-runtime-cells-round1006/apollo-main-setting
 blob=(root/'blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin').read_bytes()[32:]
 assert hashlib.sha256(blob).hexdigest()=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701'
 expected={'audio_settings_config_live':(0x20072da8,0x50,0x46bee8),
-          'audio_settings_last_message_state':(0x20072608,13,0x4672f8)}
+          'audio_settings_last_message_state':(0x20072608,0x68,0x4672f8)}
+assert struct.unpack_from('<I',blob,0x49bdf4-0x438000)[0]==0x20072608
+assert struct.unpack_from('<H',blob,0x49b404-0x438000)[0]==0x2268
 for name,(addr,_,literal) in expected.items():
     assert struct.unpack_from('<I',blob,literal-0x438000)[0]==addr,name
 obj=out/'settings_live_buffers.o';linked=out/'apollo-main-settings-live-buffers.o'
@@ -31,7 +33,7 @@ receipt={'round':1007,'status':'PASS_SETTINGS_LIVE_BUFFER_MINIMA_BINDING',
          'source':str(src.relative_to(root)),'source_sha256':hashlib.sha256(src.read_bytes()).hexdigest(),
          'official_image_sha256':hashlib.sha256(blob).hexdigest(),
          'native_minimum_spans':{name:{'address':hex(addr),'minimum_size':size,'literal':hex(literal)} for name,(addr,size,literal) in expected.items()},
-         'validation':'Authenticated native literal addresses, minimum callsite spans, strict M55 compile and selected import bindings',
+         'validation':'Authenticated native literal addresses, 0x68-byte stock copy callsite, strict M55 compile and selected import bindings',
          'linked_object':str(linked.relative_to(root)),'linked_sha256':hashlib.sha256(linked.read_bytes()).hexdigest(),
          'unresolved_before':len(before),'unresolved_after':len(after),
          'whole_image_complete':False,'hardware_proof':False,

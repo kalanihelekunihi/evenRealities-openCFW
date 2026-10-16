@@ -1,0 +1,16 @@
+__asm__(
+".text\n"
+".balign 4\n"
+".global opencfw_em9305_child_3163cc\n"
+".type opencfw_em9305_child_3163cc,@function\n"
+"opencfw_em9305_child_3163cc:\n"
+"L3163cc:\n"
+"ldb_s r1,[r0,0xd]\n"
+"L3163ce:\n"
+"bset_s r1,r1,0\n"
+"L3163d0:\n"
+"b.d opencfw_em9305_child_322f2c\n"
+"L3163d4:\n"
+"stb_s r1,[r0,0xd]\n"
+".size opencfw_em9305_child_3163cc,.-opencfw_em9305_child_3163cc\n"
+);

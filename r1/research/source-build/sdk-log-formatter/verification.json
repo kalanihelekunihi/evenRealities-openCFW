@@ -1,0 +1,24 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "4a42d78389558cd05deb1ebb837db5d18d3778a11f4b4763d4f3a193c10e5d83",
+  "actual_calendar": false,
+  "calendar_report_sha256": null,
+  "structured_time_report_sha256": null,
+  "integer_report_sha256": null,
+  "actual_modules": false,
+  "module_report_sha256": null,
+  "actual_printf": false,
+  "output_bytes_per_implementation": 0,
+  "output_callbacks_per_implementation": 0,
+  "printf_report_sha256": null,
+  "memory_report_sha256": null,
+  "comparisons": 1894,
+  "printf_calls_per_implementation": 17298,
+  "scope": "Pinned SDK std/hexdump/postfix with local native wall-clock prefix and ASCII classifier; formatting call order/arguments, auto-flush restoration, all256 hex byte values and color codes",
+  "limitations": [
+    "Printf/flush execute only in actual_printf mode, yielding byte-sink proof there. Calendar executes only in actual_calendar mode with a fixed timestamp-getter fixture; color lookup is actual only in actual_modules mode. No real-clock or physical-output proof.",
+    "Valid severity0..5 for call fixtures; byte-sink mode excludes severity0 prefixes because their null label is not a valid string. Bounded arguments/data and canonical bool states only.",
+    "Locale-specific printability is unproven; native ASCII classification is exercised through hexdump. Whole-image startup/linking and byte identity remain gates."
+  ],
+  "instruction_identity_proven": false
+}

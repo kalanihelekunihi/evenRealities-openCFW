@@ -1,0 +1,24 @@
+{
+  "comparisons": 66536,
+  "connection_reads": 132872,
+  "sends": 66336,
+  "sentinel": 200,
+  "all_payload_byte_pairs": true,
+  "full_r1_r2_r3_checked": true,
+  "raw_return_checked": true,
+  "report_sha256": "553e15d9af079c70d4eed50c3ed3d82d667d1323588672f11510f0f6c67641c0",
+  "object_sha256": "ef98646b70995f42d811acb2b14c4edb30ec03c05928eb02af481bc366834cd2",
+  "driver_sha256": "3e5a35c080f750c5db58cd2b87c50d1a2eebf0d123aeaf5d8af12c73e689957b",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-913fc.json": "3e40d778450c50e901e8f1304ca0ad6ef05c515c0eb4d5d77731306ba612927d",
+    "ghidra-body.json": "989e85dd624c5f52e67e3bb11f1e4ab5eeb3164337cbab66a1c1faa9c782b19b"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Connection and queue-dispatch endpoints are fixtures; actual lower queue/BLE composition remains open",
+    "Selected compiler three-word return-register restoration verified; other compilers/LTO require revalidation",
+    "Connection/state initialization, physical delivery and original image identity remain gates"
+  ]
+}

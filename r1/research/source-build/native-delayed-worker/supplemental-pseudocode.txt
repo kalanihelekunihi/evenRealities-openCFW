@@ -1,0 +1,25 @@
+Supplemental worker0x65ea8..0x65f07, absent from locked corpus/ownership rows.
+Instruction bytes are independently read through Ghidra-MCP and matched to the
+pinned application; this is instruction-backed pseudocode, not REA output.
+
+Ignore worker argument. Reserve an eight-byte record; do not initialize it.
+Loop forever:
+  status=osMessageQueueGet(context.queue,&record,NULL,UINT32_MAX).
+  If status==0:
+    Load record.argument then record.callback, invoke callback(argument).
+    There is no null-callback guard. Return to the receive loop.
+  Otherwise:
+    Log if repeated mode reads enable ring (bit0 OR subsequent bit2),
+    severity0x04400000, duplicated format token plus status bits.
+    Independently reread mode; if bit1 log SDK std1 severity0x001c0001.
+    Continue receiving. Queue handle is reloaded on every iteration.
+
+Ring format: [RING][fw_evt_loop_task]app treat event invalid status:%d
+SDK format: [fw_evt_loop_task]app treat event invalid status:%d
+
+Successful queue receives are required to supply all eight record bytes.
+Partial-success writes are outside the admitted queue contract. Native saves
+only part of its register set and never returns; bounded tests do not claim a
+worker return or restored SP/callee registers. Callback fixtures obey ARM ABI
+and may change the queue handle; the next receive observes that change.
+Physical blocked receive/resumption and real user callback bodies remain gates.

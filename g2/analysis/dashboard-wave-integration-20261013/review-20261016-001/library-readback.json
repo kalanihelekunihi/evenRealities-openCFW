@@ -1,0 +1,428 @@
+{
+  "title": "G2 OpenCFW independent evidence review \u2014 October 16, 2026",
+  "schema": "opencfw-private-progress-review-v1",
+  "as_of_utc": "2026-10-16T14:02:18.510017+00:00",
+  "decision": "0/6 complete source payloads; 0/6 exact source-built payload equality demonstrated; 0/6 hardware-qualified payloads. Experimental compiled subsets and bounded comparisons are substantial but are not full firmware recovery.",
+  "snapshot": {
+    "main_stage_records": 438,
+    "producer_prose_stage_count": 439,
+    "main_unresolved_independently_counted": 188,
+    "main_object_sha256": "279a428494b3672e142ed29776646aadf5b50a4badc41f28fa7cee090d313219",
+    "six_image_audit_main_stage": 432,
+    "six_image_audit_main_imports": 189,
+    "source_files_changed_during_capture": []
+  },
+  "verification": {
+    "hash_reference_checks": {
+      "match": 5422,
+      "mismatch": 1,
+      "missing": 1
+    },
+    "main_nm_exit": 0,
+    "main_nm_undefined_lines": 188,
+    "official_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "six_official_payload_hashes": "all match",
+    "outer_package_partition": "contiguous, exact, no gaps or overlaps; all segment slice hashes match",
+    "resource_revalidation": {
+      "pass": true,
+      "resourceAndFontSliceHashesVerified": 1190,
+      "baselinePartitionUnchanged": true,
+      "fontRootHashesAndCallbacksVerified": 11,
+      "newStrongFontCandidateUnionBytes": 204732,
+      "fontUnionPriorExclusiveClasses": {
+        "confirmed_data": 0,
+        "unknown": 204695,
+        "suspected": 37,
+        "confirmed_code": 0
+      },
+      "imagePGMSamplesVerified": 24,
+      "fontPNGSampleCount": 20,
+      "errors": []
+    },
+    "not_rerun": [
+      "C compilation/link commands",
+      "native/C execution oracles",
+      "firmware packaging",
+      "device tests"
+    ],
+    "inventory_validator_rerun": {
+      "exit_code": 1,
+      "result": "FAIL: evidence file missing or hash mismatch: docs/tooling.md",
+      "qualification": "Historical G1 receipt remains historical evidence; current full validator did not pass. Direct official hashes, contiguous partitions and resource checks passed separately."
+    }
+  },
+  "findings_requiring_correction": [
+    "Six-image audit pins the older 432-stage Main replay hash; current snapshotted replay differs. Report Main directly from verified final object; do not call audit fully current.",
+    "Current replay has 438 actual stage records while limits prose says four hundred thirty nine. Use explicit record count until reconciled.",
+    "Historical CASE receipt pins /opt/homebrew/bin/arm-none-eabi-ld, which is unavailable at that path. Its ELF hash is verified; exact historical tool reproduction is unverified.",
+    "Audit target_sha256 is the workflow target JSON lock hash, not the OTA bundle hash. Keep these identities separate.",
+    "Long replay limitations contain stale unresolved-child and orphan-overlay text even where later stages/source archive refresh resolved them. Use stage records and object symbol evidence over cumulative prose.",
+    "Full inventory validator rerun fails at docs/tooling.md evidence pin; preserve old evidence and resolve provenance via a new reviewed receipt, not a silent repin."
+  ],
+  "workflow": {
+    "phase": "P2_EXECUTING",
+    "gates": {
+      "G1_TARGET_AND_INVENTORY": {
+        "status": "passed",
+        "receipt": "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
+        "receipt_sha256": "fe17aa5a4e7456a81f342c3ca6d67233b065c42dd5c5a09917bb8e603e4d6610"
+      },
+      "G2_PSEUDOCODE_COMPLETE": {
+        "status": "not_run",
+        "receipt": null
+      },
+      "G3_CORPUS_FROZEN": {
+        "status": "not_run",
+        "receipt": null
+      },
+      "G4_IMPLEMENTATION_READY": {
+        "status": "not_run",
+        "receipt": null
+      },
+      "G5_SOURCE_COMPLETE": {
+        "status": "not_run",
+        "receipt": null
+      },
+      "G6_IDENTICAL_SOURCE_BUILD": {
+        "status": "not_run",
+        "receipt": null
+      }
+    },
+    "interpretation": "G1 is inventory/authentication only. Whole locked-artifact pseudocode, independent completeness review and frozen corpus remain required before the governing implementation gate. Historical experimental C is evidence, not automatic gate admission."
+  },
+  "flash_accounting": {
+    "meaning": "OTA artifact bytes, not total physical device flash contents",
+    "bundle_bytes": 4301227,
+    "six_payload_bytes": 4300283,
+    "outer_metadata_and_transport_headers": 944,
+    "payloads": [
+      {
+        "id": "codec",
+        "size": 326092,
+        "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+      },
+      {
+        "id": "ble_em9305",
+        "size": 211948,
+        "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+      },
+      {
+        "id": "touch",
+        "size": 34464,
+        "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+      },
+      {
+        "id": "case",
+        "size": 55784,
+        "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+      },
+      {
+        "id": "apollo_bootloader",
+        "size": 148599,
+        "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+      },
+      {
+        "id": "apollo_main",
+        "size": 3523396,
+        "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+      }
+    ],
+    "nested_images": 33,
+    "initial_coverage_rows": 70,
+    "inventory_reviews": 125,
+    "no_double_counting": "Nested/decoded images are separate coordinate domains, not additive OTA bytes. NOLOAD RAM/MRAM reservations do not add payload flash bytes.",
+    "formal_inventory_classification": "Container accounted; payload unknown code/data remains explicit. Inventory completeness is not pseudocode completeness.",
+    "historical_exclusive_classification": {
+      "as_of": "2026-10-13T17:02:21.929738+00:00",
+      "totals": {
+        "confirmed_data": 603459,
+        "unknown": 949285,
+        "suspected": 2743823,
+        "confirmed_code": 4660
+      },
+      "policy": "Historical classification only; not promoted to current pseudocode or C byte coverage"
+    },
+    "external_flash": {
+      "chipDomain": "Apollo external MSPI1 NOR",
+      "norOffsetRange": [
+        0,
+        33554432
+      ],
+      "xipBase": 2147483648,
+      "coordinate": "external chip offsets, not bundle bytes",
+      "partitionRanges": [
+        {
+          "range": [
+            0,
+            20971520
+          ],
+          "name": "uncharacterized20MiB",
+          "contentState": "not supplied in locked OTA"
+        },
+        {
+          "range": [
+            20971520,
+            33292288
+          ],
+          "name": "LittleFS",
+          "blockSize": 4096,
+          "blockCount": 3008,
+          "readSize": 16,
+          "programSize": 256,
+          "contentState": "configured geometry only; authenticated partition content unavailable"
+        },
+        {
+          "range": [
+            33292288,
+            33521664
+          ],
+          "name": "FlashDB sysenv kvdb",
+          "contentState": "partition config only"
+        },
+        {
+          "range": [
+            33521664,
+            33554432
+          ],
+          "name": "FlashDB factory NVdb",
+          "contentState": "partition config only"
+        }
+      ],
+      "evidence": "g2/docs/reference/memory-map.md",
+      "filesIdentified": 0,
+      "filesCountMeaning": "none parsable from supplied OTA; not assertion filesystem empty"
+    }
+  },
+  "non_executable_resources": {
+    "fresh_slice_checks": 1190,
+    "L8_descriptors": 428,
+    "custom_font_chains": 11,
+    "font_root_callback_joins": 11,
+    "font_union_bytes": 204732,
+    "font_union_previous_classes": {
+      "confirmed_data": 0,
+      "unknown": 204695,
+      "suspected": 37,
+      "confirmed_code": 0
+    },
+    "baseline_partition_unchanged": true,
+    "scope": "These are authenticated data overlays; do not add overlapping stores or fonts to baseline totals. No source-font identity, licensing, UI role or hardware rendering proof inferred.",
+    "external_files_identified": 0,
+    "external_files_qualification": "No authenticated external NOR filesystem dump is in the OTA; zero identified files does not mean empty filesystem."
+  },
+  "component_status": [
+    {
+      "id": "codec",
+      "source_complete": false,
+      "full_payload_linked": false,
+      "candidate_compilation_passed": true,
+      "remaining_gate": [
+        "product configuration and private driver/speech/application source",
+        "startup, initialized data and final linker layout",
+        "qualified C-SKY execution for reconstructed numerical behavior",
+        "DSP subset compilation does not cover the complete codec image"
+      ],
+      "recorded_unresolved_count": 0,
+      "qualifications": {}
+    },
+    {
+      "id": "ble_em9305",
+      "source_complete": false,
+      "full_payload_linked": false,
+      "candidate_compilation_passed": true,
+      "remaining_gate": [
+        "ARC EM7D producing configuration and original/controller execution qualification",
+        "producing QP/C port and EM-Core/controller source",
+        "product configuration and all four record source/layout ownership"
+      ],
+      "recorded_unresolved_count": 12,
+      "qualifications": {
+        "resident_rom_binding": {
+          "receipt": {
+            "path": "g2/build/c-firmware/20261014/em9305-source-refresh/resident-rom-bindings-receipt.json",
+            "sha256": "5740fe7591f7bed897695bdf923632b7d2536e1692bdb054a61d0003b219d624"
+          },
+          "object": {
+            "path": "g2/build/c-firmware/20261014/em9305-source-refresh/ble_em9305/candidate-resident-rom-bound.o",
+            "sha256": "f39c44e375ae568d9a968a0994fc6553f90971556d8e1208d7a2ea7cf8572123"
+          },
+          "external_entries": 12,
+          "unresolved_after_external_binding": 0
+        }
+      }
+    },
+    {
+      "id": "apollo_bootloader",
+      "source_complete": false,
+      "full_payload_linked": false,
+      "candidate_compilation_passed": true,
+      "remaining_gate": [
+        "whole-path startup-power root/clock child composition beyond the bounded native query/critical oracle",
+        "resident-ROM addresses bind externally and selected symbols link, but ROM timing and logger/runtime behavior remain unqualified",
+        "current exploratory link verifies 256 vectors, 63 initialized pointer relocations and bounded scatter destinations; final load/run placement and startup execution remain unproven",
+        "whole-image body and code/data coverage have not been established"
+      ],
+      "recorded_unresolved_count": 3,
+      "qualifications": {}
+    },
+    {
+      "id": "touch",
+      "source_complete": false,
+      "full_payload_linked": false,
+      "candidate_compilation_passed": null,
+      "remaining_gate": [
+        "Seven rebuilt providers use the pinned GCC 14.2 container but are new local objects, not the originally pinned bytes.",
+        "The current clang binary differs from the pinned compiler hash, although all 61 selected C object bytes match the pinned outputs.",
+        "LP history allocation extent, final RAM layout, whole-image and hardware behavior remain open."
+      ],
+      "recorded_unresolved_count": 0,
+      "qualifications": {
+        "lp_history_capacity_proven": false
+      }
+    },
+    {
+      "id": "case",
+      "source_complete": false,
+      "full_payload_linked": false,
+      "candidate_compilation_passed": null,
+      "remaining_gate": [
+        "Source graph and relocations link at an experimental placement only.",
+        "The text extent exceeds the official CASE payload; section order, native entry addresses, checksums and packaging are not stock-equal.",
+        "No device, flash, peripheral timing or physical policy proof."
+      ],
+      "recorded_unresolved_count": 0,
+      "qualifications": {
+        "gc_size_frontier": {
+          "receipt": {
+            "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/receipt.json",
+            "sha256": "2855ba249eec5f496b7da419d1b4798fab604e15c871af38933bfc2e63c49738"
+          },
+          "experimental_elf": {
+            "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/case-current-gc-experimental.elf",
+            "sha256": "1252f32b770b8fc3427ac2a04f0e55b790f724c91c62704769d8f3e87a432162"
+          },
+          "stock_payload_bytes": 55752,
+          "gc_load_bytes": 66432,
+          "overflow_bytes": 10680,
+          "native_reset_entry": "0x08000145",
+          "gc_reset_entry": "0x800dbc9"
+        },
+        "mixed_oz_size_frontier": {
+          "receipt": {
+            "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/mixed-oz-receipt.json",
+            "sha256": "9d300b54bcd202b7c26753ef207f43e6f997c870d51e444a771e2a45dd393810"
+          },
+          "experimental_elf": {
+            "path": "g2/build/c-firmware/20261015/case-gc-size-frontier/case-current-oz-mixed-fixed-reset.elf",
+            "sha256": "9489a89667341b63dd53a907715a1229938cd967cc038577710f8a1d99493cb7"
+          },
+          "load_bytes": 63603,
+          "overflow_bytes": 7851,
+          "entry": "0x8000145",
+          "matching_vector_words": 13,
+          "native_pointer_leads_present": 39
+        }
+      }
+    },
+    {
+      "id": "apollo_main",
+      "source_complete": false,
+      "full_payload_linked": false,
+      "candidate_compilation_passed": null,
+      "remaining_gate": [
+        "189 current imports, including one dominant-hand descendant, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
+        "All eight DM dispatch entries and the exposed security children now have C bodies; whole-image source and placement remain open.",
+        "DM storage is a 196-byte bounded C-owned block with a registry alias; full allocation extent and final RAM placement remain open.",
+        "Complete data/startup/layout and physical execution remain unproved."
+      ],
+      "recorded_unresolved_count": 189,
+      "qualifications": {},
+      "current_snapshot_independent_unresolved_count": 188,
+      "recorded_unresolved_count_scope": "older six-image audit; superseded for Main by independent final object count"
+    }
+  ],
+  "change_since_last_independently_verified_export": {
+    "baseline": "round651 stable checkpoint Library version267; parent Page218",
+    "baseline_main_selected_imports": 619,
+    "current_main_imports": 188,
+    "qualification": "Different source archives, manifest scope and provider expansion; arithmetic import delta is not a measured code-recovery percentage. No canonical byte-coverage promotion performed.",
+    "advances": [
+      "Corrected source archive and contiguous composition replay; settings storage 104 bytes, bounded DM CCB 196 bytes, advertising 0x34 bytes integrated in refreshed archive evidence.",
+      "Main C providers now include broad LVGL/page/text/font/animation chains, QuickList, FlashDB, Cordio connection/security/privacy/advertising, tracepoint filesystem paths, settings and wear/ALS/HUB routes.",
+      "Current final Main object independently has 188 undefined symbols; zero whole-image completion remains unchanged.",
+      "Touch/EM/CASE isolated zero-import outcomes remain qualified by allocation, external ROM and layout/overflow gates."
+    ]
+  },
+  "highest_value_next_steps": [
+    {
+      "priority": 1,
+      "scope": "All six / governing workflow",
+      "step": "Finish and independently review whole-artifact pseudocode/code-data coverage across all 33 nested images; freeze corpus. Keep unknown bytes and external ROM explicit."
+    },
+    {
+      "priority": 2,
+      "scope": "Evidence reporting",
+      "step": "Reseal six-image audit against current final Main object and reconcile 438 records versus 439 prose. Refresh stale cumulative limitations without changing historical evidence."
+    },
+    {
+      "priority": 3,
+      "scope": "Touch",
+      "step": "Prove LP history allocation extent and final startup/RAM placement, then perform a full stock-layout source build and byte comparison. Strong undefined=0 is only a local link result."
+    },
+    {
+      "priority": 4,
+      "scope": "CASE",
+      "step": "Resolve compiler/section/layout provenance and 7,851-byte mixed-Oz overflow versus 55,752-byte inner stock payload; 13/46 vector matches and fixed reset are insufficient for equality."
+    },
+    {
+      "priority": 5,
+      "scope": "Codec / EM9305",
+      "step": "Close full nested-image and private application/controller/port ownership, qualified ISA behavior and startup. EM 12 resident ROM bindings remain external; Codec DSP subset is not complete image."
+    },
+    {
+      "priority": 6,
+      "scope": "Apollo Boot / Main",
+      "step": "Close remaining Main imports, true allocation/initialization contracts and resident-ROM dependencies; after source gate, integrate complete linker layout/resources/packaging and compare each payload plus outer artifact byte-for-byte."
+    }
+  ],
+  "publication": {
+    "private": true,
+    "parent_page": "https://chatgpt.com/space/page_e5199b4adeb081918164ac6acd8e4b04",
+    "page_modified_by_this_review": false,
+    "parent_is_publisher": true
+  },
+  "provenance": {
+    "snapshot_manifest_sha256": "3135adae121111e11274b82e4975971165c68c494e1ad043dd6f0d6be494a9ed",
+    "detailed_dataset_sha256": "f6ce353d65c4f9fef3bc7740c9f2273b23caa65a1f116115ade23a6d5e5b1770",
+    "snapshot_root": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dashboard-wave-integration-20261013/review-20261016-001/snapshot",
+    "review_script": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dashboard-wave-integration-20261013/review-20261016-001/review.py",
+    "preservation": "Only new review output directory written; no firmware sources, index, active producer outputs, permission settings or devices modified."
+  },
+  "post_snapshot_correction": {
+    "checks": [
+      {
+        "path": "g2/build/c-firmware/20261014/main-post-tail-c-replay/receipt.json",
+        "expected_sha256": "a603f32d509c1223ff5a25ee3a95fe564ab3791da58f8a77dd884fe6d6de798f",
+        "actual_sha256": "a603f32d509c1223ff5a25ee3a95fe564ab3791da58f8a77dd884fe6d6de798f",
+        "match": true
+      },
+      {
+        "path": "g2/analysis/c-source-completion-20261011/six-current-20261014.json",
+        "expected_sha256": "f82e391092f141f12ac8245d98c101b668e02ccbb2a3ab50d08dc301e936248f",
+        "actual_sha256": "f82e391092f141f12ac8245d98c101b668e02ccbb2a3ab50d08dc301e936248f",
+        "match": true
+      },
+      {
+        "path": "g2/build/c-firmware/20261014/main-ring-sync-integrated/receipt.json",
+        "expected_sha256": "d34c7d60452764287fe731af81ee8aa246907554ac9aad8600781f67df002af2",
+        "actual_sha256": "d34c7d60452764287fe731af81ee8aa246907554ac9aad8600781f67df002af2",
+        "match": true
+      }
+    ],
+    "stage_count": 438,
+    "imports": 188,
+    "candidate_hash_unchanged": true,
+    "audit_replay_hash_matches": true,
+    "qualification": "Received after finite capture; independently hash-checked top-level corrections, not a second full dependency sweep. Original stale audit and prose findings preserved as observed snapshot state."
+  }
+}

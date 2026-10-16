@@ -1,0 +1,21 @@
+/* Complete two authenticated native leaf bodies. */
+__asm__(
+".text\n"
+".balign 4\n"
+".global opencfw_em9305_associated_child_31b7bc\n"
+".type opencfw_em9305_associated_child_31b7bc,@function\n"
+"opencfw_em9305_associated_child_31b7bc:\n"
+"add r0,r0,621\n"
+"ldb_s r0,[r0,0]\n"
+"j_s.d [blink]\n"
+"seteq r0,r0,0x3\n"
+".size opencfw_em9305_associated_child_31b7bc,.-opencfw_em9305_associated_child_31b7bc\n"
+".global opencfw_em9305_associated_child_3294fc\n"
+".type opencfw_em9305_associated_child_3294fc,@function\n"
+"opencfw_em9305_associated_child_3294fc:\n"
+"add r0,r0,623\n"
+"ldb_s r0,[r0,0]\n"
+"j_s.d [blink]\n"
+"seteq r0,r0,0x3\n"
+".size opencfw_em9305_associated_child_3294fc,.-opencfw_em9305_associated_child_3294fc\n"
+);

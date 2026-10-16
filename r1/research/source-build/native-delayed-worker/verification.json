@@ -1,0 +1,22 @@
+{
+  "comparisons": 1512,
+  "null_callback_faults": 12,
+  "callback_invocations_per_implementation": 912,
+  "queue_receives_per_implementation": 4536,
+  "report_sha256": "24fe5e6a004ff9ae3a2562869a995561092edcd28e6871ab93f59d9694116aee",
+  "object_sha256": "94267806d15dec46184d95dabd888fe66604b999b695cc4ba31567e879f23bc2",
+  "verifier_sha256": "8e42021ee86d1de8e78fb7ce69b71ac3574df7c47f1fdb9cb78d9e06ea151cd5",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_memory_sha256": "f23101c3fb8517305533b2ee8fe7f1f98820acccc7260d3ca21e90c1711ba1f9",
+  "supplemental_entry": "0x65ea8",
+  "native_size": 96,
+  "locked_ownership_row": false,
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Queue and callback execution are controlled fixtures; queue success supplies the full8-byte record",
+    "Stops at the next receive boundary or authenticated null callback fault; no worker return/SP-restoration claim",
+    "Source ignores worker argument; no physical scheduling or actual blocked receive/resume",
+    "Supplemental recovery is outside locked ownership/corpus rows"
+  ]
+}

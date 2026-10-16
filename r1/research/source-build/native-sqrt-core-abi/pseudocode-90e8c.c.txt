@@ -1,0 +1,22 @@
+/* ================================================================
+ * entry: 0x00090e8c
+ * end:   0x00090ef9
+ * size:  110 bytes
+ * name:  FUN_00090e8c
+ * ================================================================ */
+
+undefined8 FUN_00090e8c(int param_1,uint param_2)
+
+{
+  undefined8 uVar1;
+
+  uVar1 = FUN_0002820a();
+  if (((int)(0x7ff00000 - ((uint)((int)uVar1 != 0) | (uint)((ulonglong)uVar1 >> 0x20) & 0x7fffffff))
+       < 0) && (-1 < (int)(0x7ff00000 - (param_2 & 0x7fffffff | (uint)(param_1 != 0))))) {
+    FUN_0003bc9c(1);
+  }
+  return uVar1;
+}
+
+
+

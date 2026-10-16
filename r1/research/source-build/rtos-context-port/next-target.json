@@ -1,0 +1,23 @@
+{
+  "status": "Overflow callback implemented/admitted; timer runtime remains next source target",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "overflow_hook": "0x95bfc",
+  "overflow_thumb_file": "overflow-next-target.txt",
+  "overflow_thumb_sha256": "8d92777359ba30c99fb0de72ad2bdc07c7ba523a75946c54e35c0cd58753c23d",
+  "timer_runtime": "0x85510",
+  "timer_source": "third-party/upstream/freertos-kernel/timers.c",
+  "timer_source_sha256": "24962ef361f396aaa5e6e33776eeeddaf2fb251c87b6fe50602acc56c537b093",
+  "next_work": [
+    "Implement/authenticate native stack-overflow logging/fatal callback",
+    "Select pinned timer runtime/helper bodies using existing static timer state and native message layout",
+    "Implement native queue receive/wait providers required by timer task",
+    "Extend context evidence to actual exception return only if emulator/device semantics support it; preserve explicit fixtures otherwise"
+  ],
+  "open_gates": [
+    "No task code or hardware exception return has executed",
+    "Complete source-owned vector table still missing",
+    "Physical scheduling/wake and image byte equality remain unproven"
+  ],
+  "implemented_overflow_report": "native-stack-overflow/report.json",
+  "next_timer_target": "native-stack-overflow/timer-next-target.json"
+}

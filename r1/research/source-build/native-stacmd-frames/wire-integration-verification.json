@@ -1,0 +1,66 @@
+{
+  "comparisons": 480,
+  "counts": {
+    "read": 240,
+    "write": 240
+  },
+  "outcomes": {
+    "success": 96,
+    "failure": 384
+  },
+  "provider_reports": {
+    "native-stacmd-frames/report.json": "470c103a0231780bab73e864377663e60cb0c751a6fefcb6cdd1e2b836a3dc2a",
+    "native-stacmd-transmit/report.json": "3f3fde7d9c1738d7efe72551472e996f59e52fdce32bbaed6ee12dd089ad644f",
+    "native-stacmd-receive/report.json": "790583d8bed1206a707912c9daf9ad32b4242917aae8fb04689148dc6906f337",
+    "native-stacmd-delay/report.json": "43a524bc001c14c912e7bdc411d0fd736b879a64c17b46066628c0ceca603708"
+  },
+  "provider_objects": {
+    "native-stacmd-frames/native_stacmd_frames.o": "92b9c6dc29830d19a23080ccde1f017a6e815230db71132618f4d1101145c7c8",
+    "native-stacmd-transmit/native_stacmd_transmit.o": "af627d6155ee3519f2693d9f6c90ef35ce93dc9ad9666739acc075ef5c0ca67f",
+    "native-stacmd-receive/native_stacmd_receive.o": "ed5cdd5c300262233339783e32cfeecac9405b675fb28afdaa12a0bfe55f7f6d",
+    "native-stacmd-delay/native_stacmd_delay.o": "8003be178cf9bef954b1d7c765af462836896157aad5dda3fc2c0d55faf11e50"
+  },
+  "executed_provider_entry_counts": {
+    "native": {
+      "r1_stacmd_read_frame_native": 240,
+      "r1_stacmd_write_frame_native": 240,
+      "r1_stacmd_drive_bit_native": 2960,
+      "r1_stacmd_write_bits_native": 368,
+      "r1_stacmd_idle_native": 800,
+      "r1_stacmd_parity_native": 240,
+      "r1_stacmd_read_bit_native": 672,
+      "r1_stacmd_read_bit_adapter_native": 368,
+      "r1_stacmd_recovery_delay_native": 800
+    },
+    "source": {
+      "r1_stacmd_read_frame_native": 240,
+      "r1_stacmd_write_frame_native": 240,
+      "r1_stacmd_drive_bit_native": 2960,
+      "r1_stacmd_write_bits_native": 368,
+      "r1_stacmd_idle_native": 800,
+      "r1_stacmd_parity_native": 240,
+      "r1_stacmd_read_bit_native": 672,
+      "r1_stacmd_read_bit_adapter_native": 368,
+      "r1_stacmd_recovery_delay_native": 800
+    }
+  },
+  "total_nops": {
+    "native": 1132224,
+    "source": 1132224
+  },
+  "gpio_callback_counts": {
+    "native": 181424,
+    "source": 181424
+  },
+  "driver_sha256": "14ec8947c5a5137de44dec7f004926c6c3c59fa11398794f9c4d59e0b59e964f",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "provider_interception": false,
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Only GPIO callbacks are fixtures; controlled waveforms are not physical bus proof",
+    "Configuration is an address binding; shared typed registration/state ownership unresolved",
+    "Actual frame/wire graph does not establish adapter/retry/transport or canonical integration",
+    "NOP counts match; physical timing/cycle scheduling and whole-image byte identity remain open"
+  ]
+}

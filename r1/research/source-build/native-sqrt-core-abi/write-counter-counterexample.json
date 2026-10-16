@@ -1,0 +1,9 @@
+{
+  "incorrect_counter": {
+    "sqrt_core_abi": 299488
+  },
+  "cause": "Adding independent D0 shifted the write-list field from index3 to index4; the inherited counter measured the eight-character errno hex string.",
+  "comparisons": 37436,
+  "trace_sha256": "ebbf766b322434f0aa0887a4b06a0b88058435efe79ff46ecb42cb291a310078",
+  "repair": "Count the actual nonstack write list at index4, then rerun the full set."
+}

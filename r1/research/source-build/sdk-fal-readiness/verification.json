@@ -1,0 +1,19 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "f653e4f49486e8256b4e5934239d575702d8667c6f5ddd10eb34b3b9f50a9fd4",
+  "object_sha256": "6da89a4772b42299490918c8d0c0360ae1bb928f225207772446a6859eb49c4b",
+  "comparisons": 256,
+  "cold_zero_bytes_compared": 1,
+  "partition_record_bytes_decoded": 448,
+  "compiled_partition_record_bytes_compared": 448,
+  "public_report_sha256": "24525fe4b06b9496fbcdf5c8415face6793a394fc66280fe59872e96bfedc0df",
+  "partition_object_sha256": "84dca9ca225481b4f2c32d1cb9b711865aa702614be1e2547bd398fa7b2caafd",
+  "native_partition_decode_sha256": "f18d9cf5320800444b4b658edf51dd4876c5dba76d6ab2e16984db59363c178d",
+  "scope": "Unchanged upstream readiness byte getter, all 256 field values, source-owned cold byte, guards/registers; native partition decoding retained for subsequent configuration checks",
+  "limitations": [
+    "This does not select FAL initialization or lookup/assert/log paths.",
+    "All seven compiled constant partition records match stock, but live FAL registry initialization and assertion/log paths remain unresolved.",
+    "Complete image and instruction identity remain unresolved."
+  ],
+  "instruction_identity_proven": false
+}

@@ -1,0 +1,35 @@
+{
+  "original_row": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x00050758",
+    "end": "0x00050773",
+    "size": "48",
+    "recovered_name": "FUN_00050758",
+    "provider_family": "r1_i2c5_resource_adapter",
+    "source_disposition": "clean_room_adapter_only_vendor_io_abstract",
+    "upstream_symbol": "r1_shared_power_client_release",
+    "confidence": "high",
+    "evidence": "SHA-pinned R1-only board-enable, exclusive i2c_5 ownership, or battery/optical/touch client-mask policy. ST25DVxxKC operations come from the pinned ST provider; reconstructed YHM2710 electrical/register operations remain behind the abstract shared-resource seam."
+  },
+  "body_ranges": [
+    {
+      "start": "0x35594",
+      "end": "0x355a7"
+    },
+    {
+      "start": "0x50758",
+      "end": "0x50773"
+    }
+  ],
+  "total_body_bytes": 48,
+  "release_entry_span_bytes": 28,
+  "inactive_command_bytes": 20,
+  "locked_ownership_changed": false,
+  "transport_scope": "Original zero-context native register ABI; existing contextual YHM model is not assumed ABI-identical",
+  "data_roots": {
+    "device": "0x20016b84",
+    "mask": "0x20006878",
+    "thread_handle": "0x20006638"
+  }
+}

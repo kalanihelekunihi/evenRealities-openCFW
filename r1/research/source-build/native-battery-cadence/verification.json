@@ -1,0 +1,30 @@
+{
+  "comparisons": 6616,
+  "provider_calls_per_side": {
+    "osKernelGetTickCount": 4152,
+    "osKernelGetTickFreq": 2579,
+    "r1_batcfg_byte0_get": 2579
+  },
+  "native_division_helper_calls": 1992,
+  "semantic_arguments": [
+    "voltage",
+    "charge_start_timestamp"
+  ],
+  "threshold_bytes": 48,
+  "threshold_stride": 12,
+  "report_sha256": "5bf95c310e7e8657aa80c096fec30a03bf948b3b66c07959c1304e62977ac69e",
+  "object_sha256": "ec8e752c7d339023b3e2e03abb04b620b10f79bc3abe48bd06e05970a8078543",
+  "driver_sha256": "cf3f377199534260a2a590ce61430dae9fd796be0dc625e29b0f1fa2b12da74c",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-4fe70.json": "a559058f1636371ff4879124a0f206ccf0877190f167efd0c9cfb16ec1187d8a",
+    "ghidra-body.json": "c4226382f7b53e2b0eca1cfc83d8693dde5087c513ff8949b9833b80042626d1"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Tick/config endpoints and mutable threshold/state contents are fixtures; native division helper executes, source uses hardware unsigned division",
+    "Threshold/runtime state initialization and actual updater/provider composition remain gates",
+    "State ordering compared at provider boundaries; interrupt atomicity/timing, full startup and original image identity unproven"
+  ]
+}

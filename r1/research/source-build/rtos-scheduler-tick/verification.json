@@ -1,0 +1,16 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "133184d609eb91447b471a98c3d492cee34da77e04c6b0931d1549a5d6cdfa41",
+  "driver_sha256": "87dd802ed0065eb792fe60f66030667f7ea481d83bba47020fcdec50f2237660",
+  "comparisons": 40193,
+  "assertion_comparisons": 2049,
+  "comparisons_by_function": {
+    "xTaskIncrementTick": 38400,
+    "xTaskRemoveFromEventList": 1793
+  },
+  "provider_interception": false,
+  "scope": "Actual unchanged pinned tick/event-list bodies and inline list operations; timeouts, event cancellation, tick/list overflow, suspended tick wrap, priorities/time slicing/yield, deferred pending-ready moves and NULL-owner assertion; full TCB canaries/state/list memory",
+  "limitations": [
+    "Controlled scheduler/list states cover bounded inputs; complete scheduler startup/context switching, full TCB allocation, physical interrupt concurrency and whole-image identity remain gates."
+  ]
+}

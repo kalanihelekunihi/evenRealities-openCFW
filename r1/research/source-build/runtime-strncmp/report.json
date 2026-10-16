@@ -1,0 +1,90 @@
+{
+  "units": [
+    {
+      "source": "third-party/upstream/musl-strncmp-1.2.5/strncmp.c",
+      "source_sha256": "df801c43304b27dcda67f219a7a3ca34a8fb06f4e63d21e8a6bcb36b03c3c012",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fno-strict-aliasing",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/source-config/runtime",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/runtime-strncmp/strncmp.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/musl-strncmp-1.2.5/strncmp.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/runtime-strncmp/strncmp.o"
+      ],
+      "compiled": true,
+      "object_sha256": "df29762c3ca63599237d9428f9b230709b86d8ab9f909c38471118dbce10f852",
+      "defined": [
+        "strncmp"
+      ],
+      "undefined": []
+    }
+  ],
+  "inputs": {
+    "third-party/upstream/musl-strncmp-1.2.5/provenance.json": "1401150e8666c6ac00af7d1eb0a556bac5c144a0cda4ea6c3c7b04178402d0c1",
+    "third-party/upstream/musl-strncmp-1.2.5/COPYRIGHT": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+    "third-party/upstream/musl-strncmp-1.2.5/strncmp.c": "df801c43304b27dcda67f219a7a3ca34a8fb06f4e63d21e8a6bcb36b03c3c012",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/string.h": "3dfccecfe9a38d9cb6d32c371c8269ca5c20e8103ea7f4547c82d38347220634",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_ansi.h": "5c6403b471ee897c9a6c12e00a58617247804eb3ee72d7baeb7c08616090dd1d",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/newlib.h": "77e9532fe6a703cd539882ba84204b347a9db4044d13e5102805aef25d967d27",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/config.h": "04eb2740ca84bfc67686e0650fb6ff449dc6c752e5c256709b22e07d0f9c06e4",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/ieeefp.h": "92e2d8e284bf07456ffa9b38ed6628b57d4dd1d64a85d20e252144c1cc80b238",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/reent.h": "b2c7139f17213669456551b525f782427627d7e92cf18d6f1f6806e8d74e53b0",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_types.h": "1bf0428859ddd602938cd25864ba4ebcb7bac003893c1a89d6ff1f11cd04752f",
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wint_t.h": "f2ededa38c5454397242aceaefa65b42b292a1b3cc258e7ca6e216f146e51f0d",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_types.h": "44544ecbbc10c8aa58ca2da6d0617ffeee5af847af24515ab108c8218d6d92c8",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/lock.h": "f5cad9196ce745967fd2673e085b5c03df7887d4d11d7544aff05ff6679be6b8",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/cdefs.h": "d8db73988994274b0d28d8abddb8bc555a9687db55d1f54f680e0842e959d296",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/string.h": "b7164ee36ccb0a08bc27c7e381ea417c97d8c3fd3157de62b75d2a6bf7a0a589"
+  },
+  "upstream": {
+    "upstream": "https://git.musl-libc.org/git/musl",
+    "mirror": "https://github.com/ifduyue/musl",
+    "commit": "0784374d561435f7c787a555aeab8ede699ed298",
+    "ref": "v1.2.5",
+    "upstream_path": "src/string/strncmp.c",
+    "verified_against": [
+      "primary cgit pinned file",
+      "GitHub mirror pinned file"
+    ],
+    "purpose": "Attributable C provider; not original Arm runtime identity",
+    "files": {
+      "strncmp.c": "df801c43304b27dcda67f219a7a3ca34a8fb06f4e63d21e8a6bcb36b03c3c012",
+      "COPYRIGHT": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+    }
+  },
+  "runtime_report_sha256": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+  "scope": "Attributable bounded string comparison provider; original Arm runtime identity remains unproven",
+  "instruction_identity_proven": false
+}

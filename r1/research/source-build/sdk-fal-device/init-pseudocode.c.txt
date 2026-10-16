@@ -1,0 +1,45 @@
+/* ================================================================
+ * entry: 0x00062e68
+ * end:   0x00062ec1
+ * size:  90 bytes
+ * name:  FUN_00062e68
+ * ================================================================ */
+
+undefined4 FUN_00062e68(void)
+
+{
+  char *pcVar1;
+
+  pcVar1 = DAT_00062ec4;
+  if (*DAT_00062ec4 == '\0') {
+    if (*(int *)(*DAT_00062ec8 + 0x28) == 0) {
+      FUN_00038060(s___s__has_assert_failed_at__s__00062ee8,s_device_table_i__>ops_read_00062ecc,
+                   DAT_00062ec8 + 1);
+      do {
+                    /* WARNING: Do nothing block with infinite loop */
+      } while( true );
+    }
+    if (*(int *)(*DAT_00062ec8 + 0x2c) == 0) {
+      FUN_00038060(s___s__has_assert_failed_at__s__00062ee8,s_device_table_i__>ops_write_00062f08,
+                   DAT_00062ec8 + 1);
+      do {
+                    /* WARNING: Do nothing block with infinite loop */
+      } while( true );
+    }
+    if (*(int *)(*DAT_00062ec8 + 0x30) == 0) {
+      FUN_00038060(s___s__has_assert_failed_at__s__00062ee8,s_device_table_i__>ops_erase_00062f24,
+                   DAT_00062ec8 + 1);
+      do {
+                    /* WARNING: Do nothing block with infinite loop */
+      } while( true );
+    }
+    if (*(code **)(*DAT_00062ec8 + 0x24) != (code *)0x0) {
+      (**(code **)(*DAT_00062ec8 + 0x24))();
+    }
+    *pcVar1 = '\x01';
+  }
+  return 0;
+}
+
+
+

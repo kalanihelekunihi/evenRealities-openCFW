@@ -38,7 +38,7 @@ def main():
     replay = json.loads(REPLAY.read_text())
     if oracle["status"] != "PASS_RING_SYNC_NATIVE_C_SOURCE_CORRECTION" or oracle["cases"] != 40:
         raise RuntimeError("native ring oracle evidence changed")
-    if replay["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or replay["unresolved_after"] != 231:
+    if replay["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or replay["unresolved_after"] != 187:
         raise RuntimeError("Main replay changed")
     final_path = ROOT / replay["linked_object"]
     if sha(final_path) != replay["linked_object_sha256"]:
@@ -50,7 +50,7 @@ def main():
     if set(original) != set(SYMBOLS) or original != final:
         raise RuntimeError("corrected ring code changed or disappeared in Main replay")
     imports = subprocess.check_output(["arm-none-eabi-nm", "-u", str(final_path)], text=True)
-    if len(imports.splitlines()) != 231:
+    if len(imports.splitlines()) != 187:
         raise RuntimeError("Main import count changed")
     OUT.mkdir(parents=True, exist_ok=True)
     receipt = {
@@ -61,9 +61,9 @@ def main():
         "input_object": str(INPUT.relative_to(ROOT)), "input_sha256": sha(INPUT),
         "final_object": str(final_path.relative_to(ROOT)), "final_sha256": sha(final_path),
         "functions": {name: hashlib.sha256(final[name]).hexdigest() for name in SYMBOLS},
-        "unresolved_after": 231,
+        "unresolved_after": 187,
         "source_complete": False, "full_payload_linked": False,
-        "limits": ["Whole Main still has 234 imports and requires layout, startup, and device validation."],
+        "limits": ["Whole Main has 187 imports; the dominant-hand subtree has C-bound descendants, and requires layout, startup, and device validation."],
     }
     path = OUT / "receipt.json"
     path.write_text(json.dumps(receipt, indent=2) + "\n")

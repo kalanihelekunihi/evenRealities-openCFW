@@ -1,0 +1,29 @@
+/* ================================================================
+ * entry: 0x00062f40
+ * end:   0x00062f7d
+ * size:  62 bytes
+ * name:  FUN_00062f40
+ * ================================================================ */
+
+int FUN_00062f40(void)
+
+{
+  char *pcVar1;
+  int iVar2;
+
+  iVar2 = FUN_00062e68();
+  pcVar1 = DAT_00062f80;
+  if ((iVar2 < 0) || (iVar2 = FUN_000631c0(), iVar2 < 1)) {
+    *pcVar1 = '\0';
+    FUN_00038060(&DAT_00062f88,DAT_00062f84,0x30);
+    FUN_00038060(s_Flash_Abstraction_Layer__V_s__in_00062fac,s_0_5_99_00062fa4);
+    FUN_00038060(&LAB_00062fe0);
+  }
+  else if (*pcVar1 == '\0') {
+    *pcVar1 = '\x01';
+  }
+  return iVar2;
+}
+
+
+

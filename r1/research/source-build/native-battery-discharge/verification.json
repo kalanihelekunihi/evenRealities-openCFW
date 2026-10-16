@@ -1,0 +1,35 @@
+{
+  "comparisons": 262687,
+  "halfword_comparisons": 262144,
+  "getter_calls": 262687,
+  "table_bytes": 480,
+  "table_sha256": "fdd47849f270e0fcba16ef4464ffcba8d8307de7154d0ce48794bf8f2a0f87ac",
+  "table_maximum": 4310,
+  "unreachable_override_threshold": 4340,
+  "high_override_counts": {
+    "native": 0,
+    "source": 0
+  },
+  "device_context_reads": {
+    "native": 0,
+    "source": 0
+  },
+  "report_sha256": "977b04c6e16313a6c6a1197b9d7f27077d783fe022772a968e61287f8f09ac08",
+  "object_sha256": "a18a8a280183cd719eb4cda6562a6eec2c89792d1773d4975fdf758f07f6e002",
+  "driver_sha256": "ce7ea1d93cc7b0ae636c03e407c313a9d4369a347ecaab240b49c3539168a6d2",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-50004-body.json": "dc4460192c3f268867c2c30e952770a147446be151d25b494ae6a038de9b4ebf",
+    "rea-50004-pseudocode.json": "3b788dd005519ca0bf3c9cf394090608e76999227b68d77e87779f7156229dee",
+    "ghidra-body.json": "6161c4de1c4ba7f5f92d008deb337baf6def4d449e5a422bffb09e17498766b9",
+    "ghidra-tables.json": "334f1eb40581248b579387fd7798b7c4fa764eb04581b5c378e1246f540654ab"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Config getter is fixture; actual configuration/updater composition remains open",
+    "Tables source-owned and byte-equal to authenticated data; native code instruction identity unproven",
+    "Locked table clamp4310 makes4340 override unreachable; source retains policy branch, compiler removes unreachable dependency",
+    "Full startup, remaining policy/provider graph and hardware proof remain open"
+  ]
+}

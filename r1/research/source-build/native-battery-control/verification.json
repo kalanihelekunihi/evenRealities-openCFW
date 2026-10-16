@@ -1,0 +1,65 @@
+{
+  "comparisons": 4504,
+  "counts": {
+    "r1_battery_charging_progress_reset": 1024,
+    "r1_battery_task_flags_set": 96,
+    "r1_shared_power_client_acquire": 1680,
+    "r1_shared_power_client_release": 1680,
+    "r1_yhm_shared_power_active": 12,
+    "r1_yhm_shared_power_inactive": 12
+  },
+  "report_sha256": "c2071eff46a7d7d2e89c743125ab026d03298959390231f3053ae2eff028ce6c",
+  "object_sha256": "159a09f78a75417ead7acaa87e421e5c8c1964385686297ffeee29d5cebb5066",
+  "driver_sha256": "a48d9183ee9a0f54bd658858a08dfb49410a4fdd80202cedc5673448a6059db3",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-r1_battery_charging_progress_reset.json": "2101974ea88dd33130a664d3d386207ca316cfb31ce377ec4402f82b9662492b",
+    "ghidra-r1_battery_task_flags_set.json": "40f618d754ee7c3dfd2a0f2123a9ffb13472b8e03d49f52031333070919eb55d",
+    "ghidra-r1_shared_power_client_acquire.json": "6391e140087317f3cc30abbefe043e53b865eb724bd36e9fc6bff95abf4d0cb8",
+    "ghidra-r1_shared_power_client_release.json": "308399bb37f3539800facff6bfd9bba63c02374d46a0490c91c15feb1c84fd3f",
+    "ghidra-r1_yhm_shared_power_active.json": "5a6bc4c4afb65c850e85546c8b12b68460d981f332c580d3150ba56091000132",
+    "ghidra-r1_yhm_shared_power_inactive.json": "1899c55a21c0415f9b87ebc2ba638ef3a99daf821b1b2347f705b21672c32c77"
+  },
+  "rea_evidence": {
+    "rea-release.json": "ff578e8712e2c7e65c925978b9a64088e75c73562f6e0b21aab1beac609263f0",
+    "rea-acquire.json": "4c77c582d274669a7f8439ecc79f7a7767b44d19b019a6550b0d656b8cd1a3f5",
+    "rea-release-body.json": "b9b099e24d5bfbfe273512e863aa2dc1f6bbcdedbf8ac59ea1eada4a7ffd17bd",
+    "rea-flags.json": "c687be09eba7976de728c9c55edb24f39e6607411bd68c186fb6b9a66837eee7",
+    "rea-reset.json": "9ef8e949e455ad5b71730c603f9736055113826a1fc72ed19b6831b537bab97a"
+  },
+  "body_evidence_sha256": "14b5bd06820ba12346e1ba60c1774970f81693c224ed90ad084b5605eb48cb9d",
+  "entries": {
+    "r1_battery_charging_progress_reset": [
+      327260,
+      14
+    ],
+    "r1_battery_task_flags_set": [
+      488000,
+      10
+    ],
+    "r1_shared_power_client_acquire": [
+      329592,
+      32
+    ],
+    "r1_shared_power_client_release": [
+      329560,
+      28
+    ],
+    "r1_yhm_shared_power_active": [
+      218536,
+      20
+    ],
+    "r1_yhm_shared_power_inactive": [
+      218516,
+      20
+    ]
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Native register transport and CMSIS flag setter are fixtures",
+    "Void reset/client functions do not claim scratch returns; flag/command wrappers preserve raw returned status",
+    "Existing contextual YHM source API requires an authenticated context/ABI bridge; none is invented",
+    "Device context, client-mask and thread-handle initialization remain gated"
+  ]
+}

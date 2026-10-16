@@ -1,0 +1,47 @@
+{
+  "comparisons": 72017,
+  "read_calls": 72016,
+  "write_calls": 72016,
+  "null_inputs": 1,
+  "all_packed_halfwords": true,
+  "partial_read_widths": [
+    0,
+    1,
+    4,
+    36,
+    40,
+    41,
+    42,
+    44,
+    51,
+    52
+  ],
+  "native_frame_bytes": 52,
+  "native_frame_offset": -64,
+  "input_aliases": [
+    536879104,
+    537128896,
+    537128897,
+    537128928,
+    537128931,
+    537128932,
+    537128934,
+    537128936,
+    537128942
+  ],
+  "report_sha256": "2812dec42e33724841ff9a3e1adc0fb43161f36a5387e300e6da313aedcc1013",
+  "object_sha256": "1b92e7961bfcfb1c60b3cfab6204cded0007c9a6782e3bd04bdcf06fd9f12ab3",
+  "driver_sha256": "850e252e7edc3c6f212b93afb17cd818185f7bad031d4ab062b9259a5da8a1d3",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-73710.json": "f6b01c7bd745010589a7c3c15d8a04cf8581bc77ffa64791843fe1ba2e51b138",
+    "ghidra-body.json": "3bb58571e28a2fb5bc5864c548b4bdc2174d1323a3869138fb9a13d25b791c29"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Cached class read/write endpoints are fixtures; actual cached-class/updater composition remains open",
+    "Explicit native stack frame boundary preserves failed-read bytes for selected target; other compiler/LTO settings require revalidation",
+    "Record handle initialization, locking/persistence, physical stack/interrupt behavior and original image identity remain gates"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "32c9ac9fca18498321b5ab4d0cff5ce6b33e527cbeb0a4452edbd94060b3f280",
+  "provider_reports": {
+    "sdk-log-serial/report.json": "32c9ac9fca18498321b5ab4d0cff5ce6b33e527cbeb0a4452edbd94060b3f280",
+    "sdk-memobj/report.json": "c3294a4c11981551313cc6619f88c2f452c852045d079d08af34f0566a412aba",
+    "sdk-critical/report.json": "7612004a197c8f718aab40024f0fc83228c7b9d9ca321d41586cccdea66ce9c9",
+    "sdk-logger-frontend/report.json": "fe2f7a255d0bdc3bd80a64a3d731677e3a3e314ea0a1535e34a7e869cebda390",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016"
+  },
+  "actual_formatter": false,
+  "comparisons": 3312,
+  "formatter_callbacks_per_implementation": 7680,
+  "scope": "Actual serial dispatcher and SDK memory-object/pool/reference/copy/critical code; standard0..6, all severities, hex8-byte chunking, empty/unknown types and reference release",
+  "limitations": [
+    "Standard/hexdump formatters execute only in actual_formatter mode; printf/flush/calendar/color remain fixtures in that mode. No emitted byte stream or transport proof.",
+    "Timestamp is omitted by native two-word headers and disabled configuration; unused timestamp and structure padding are excluded from comparison.",
+    "Only valid bounded packets are tested; whole-image startup/linking, hardware and byte identity remain unresolved."
+  ],
+  "instruction_identity_proven": false
+}

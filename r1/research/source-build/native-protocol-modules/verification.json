@@ -1,0 +1,203 @@
+{
+  "helper_comparisons": 196818,
+  "helper_returned": 196560,
+  "helper_faulted": 258,
+  "all_command_halfwords_per_stock_table": true,
+  "full_word_command_inputs": true,
+  "helper_trace_sha256": "3647a59fbdb76328f508fc37e5646dded9e13242c4eaef209c263b1a63099ba0",
+  "fault_trace_sha256": "21d71ab17d5f43ff646a4168004ad208c3d1df33aef2890335db4509563d0900",
+  "underflow_mapped_predecessor": {
+    "input": [
+      536903688,
+      8,
+      0,
+      0
+    ],
+    "registers": [
+      305419897,
+      4294967295,
+      2147483647,
+      0
+    ],
+    "reads": [
+      [
+        536903712,
+        2
+      ],
+      [
+        536903696,
+        2
+      ],
+      [
+        536903688,
+        2
+      ],
+      [
+        536903680,
+        2
+      ],
+      [
+        536903684,
+        4
+      ]
+    ]
+  },
+  "wrapper_comparisons": 4104,
+  "wrapper_counts": {
+    "health": 1620,
+    "system": 2268,
+    "special": 216
+  },
+  "callback_calls_per_side": 1890,
+  "full_r0_r1_r2_r3": true,
+  "tail_stack_and_lr": true,
+  "actual_shared_search": true,
+  "source_owned_command_tables": {
+    "health": {
+      "address": 631892,
+      "bytes": 112,
+      "sha256_at_native_targets": "f5d3d72900c3f9ee8e4057af74198f50de2d86c14311b967aab222464fe39cd9",
+      "symbolic_targets": {
+        "257": "r1_heart_rate_daily_handler",
+        "258": "r1_heart_rate_point_handler",
+        "259": "r1_heart_rate_measurement_plan",
+        "513": "r1_spo2_daily_handler",
+        "514": "r1_spo2_point_handler",
+        "515": "r1_spo2_measurement_plan",
+        "1025": "r1_hrv_daily_handler",
+        "1026": "r1_hrv_point_handler",
+        "1027": "r1_health_history_noop_handler",
+        "1281": "r1_activity_daily_handler",
+        "1282": "r1_activity_refresh_handler",
+        "1537": "r1_sleep_daily_handler",
+        "1538": "r1_sleep_detail_plan",
+        "32513": "r1_health_report_setting_plan"
+      }
+    },
+    "system": {
+      "address": 632012,
+      "bytes": 160,
+      "sha256_at_native_targets": "57bebd7948fd9cddfdfc4e8069492fc7b2088204d77e143e61d2f727b414ec50",
+      "symbolic_targets": {
+        "1": "r1_device_status_handler",
+        "2": "r1_device_info_handler",
+        "3": "r1_protocol_command_00084b24",
+        "4": "r1_user_profile_handler",
+        "5": "r1_protocol_command_000846dc",
+        "7": "r1_touch_switch_handler_plan_decode",
+        "8": "r1_pair_role_handler",
+        "9": "r1_protocol_command_00083e2c",
+        "10": "r1_connection_control_adv_start_handler_plan_decode",
+        "11": "r1_protocol_command_00083e50",
+        "12": "r1_protocol_command_000844ec",
+        "14": "r1_health_settings_plan_command",
+        "15": "r1_system_settings_plan_command",
+        "16": "r1_device_serial_handler",
+        "17": "r1_nv_recovery_command_handler_plan_decode",
+        "18": "r1_protocol_command_000843c8",
+        "126": "r1_packet_ack_handler",
+        "127": "r1_delayed_event_restart",
+        "130": "r1_protocol_command_000844b0",
+        "131": "r1_protocol_command_00084860"
+      }
+    },
+    "special": {
+      "address": 632200,
+      "bytes": 8,
+      "sha256_at_native_targets": "2dcf96bdbd043cef38eb9eb5477e12403183e5ccdd138fcd6de9080dddbe6b22",
+      "symbolic_targets": {
+        "1": "r1_protocol_command_00084cc0"
+      }
+    }
+  },
+  "command_targets_sha256": "d353853715aa71ffcaaf91884bb6554b283299cf7cae3af81f7e5023170a218e",
+  "unowned_target_entries": [
+    "0x84b24",
+    "0x846dc",
+    "0x83e2c",
+    "0x83e50",
+    "0x844ec",
+    "0x843c8",
+    "0x844b0",
+    "0x84860",
+    "0x84cc0"
+  ],
+  "rea_boundary_available": false,
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x00082be8",
+      "end": "0x00082c0b",
+      "size": "36",
+      "recovered_name": "r1_health_registration_dispatcher",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_health_registration_dispatcher",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00083298",
+      "end": "0x000832d1",
+      "size": "58",
+      "recovered_name": "FUN_00083298",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_health_registration_binary_search",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x00083ca8",
+      "end": "0x00083ccb",
+      "size": "36",
+      "recovered_name": "r1_eus_system_dispatch_plan_build",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_eus_system_dispatch_plan_build",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00084c98",
+      "end": "0x00084cbb",
+      "size": "36",
+      "recovered_name": "FUN_00084c98",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_ble_event_dispatch",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "evidence": {
+    "rea-82be8.json": "31134cef3cea3391a113699e167bb4bcead6c14aea836696b17fa345f24e0321",
+    "ghidra-82be8.json": "fbb6b486d1825903dd6128ffdd8cf40033801e221a73c0b1a5f4142dc39b5798",
+    "rea-83ca8.json": "13da3126533fbf4c4f99596b3380d9dbfad65c234ce33a8c9a74ecd92e7a7319",
+    "ghidra-83ca8.json": "3f67369a66446cd18ecff7a50ddcdcd32505d60abb78bdea4c43ddb59bf9d033",
+    "rea-84c98.json": "ded02ea03dafef40ad229422b0d09cc85597c81a4368672e6ab1cb48c3191c03",
+    "ghidra-84c98.json": "f6704f393d42dfe16c8e1f5fffe57a9b0ef4692386eee04cc70396ca1c22f9f1",
+    "rea-83298.json": "b12f0d0a0d5c79eeca4379bf56def6fb73c236612f49eda24241986878b671ab",
+    "ghidra-83298.json": "6217cac0b1ffb832e927727dcff8b1e8514f28564d4dc5695213320cda104754"
+  },
+  "report_sha256": "bd80d725656215a81981859e3d1bc67f81c771a5601942035cc3a62e590846b6",
+  "object_sha256": "85da2fed46b84961ca9ac664770211af8d5b026d28dd8b800706bedda0f9ea07",
+  "driver_sha256": "f699319bff60eb32daa5757c1e55c7966ce3686b035f813e77914369ff561258",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "35 symbolic leaf references are callback fixtures, not source-complete leaf handlers; nine targets lack locked ownership entries",
+    "Unsigned below-minimum underflow and wrapped reads/fault addresses preserved; faults are emulated evidence, not physical exception proof",
+    "Symbolic command-table data matches native-target link; source-target/actual handler admission remains gated",
+    "Locked ownership/native calls/Ghidra-MCP attribute bodies; REA entries unavailable; no hardware/fullstartup/wholeimage proof"
+  ]
+}

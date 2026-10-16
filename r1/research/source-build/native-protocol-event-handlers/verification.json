@@ -1,0 +1,69 @@
+{
+  "comparisons": 154378,
+  "counts": {
+    "special": 65633,
+    "activity": 88745
+  },
+  "event_calls_per_side": {
+    "special": 65571,
+    "activity": 71336
+  },
+  "fault_boundaries": {
+    "special": [
+      19,
+      8,
+      2
+    ],
+    "activity": [
+      19,
+      5,
+      1
+    ]
+  },
+  "all_special_length_halfwords": true,
+  "all_activity_sequence_halfwords": true,
+  "all_activity_flag_bytes": true,
+  "full_r0_r1_r2_r3": true,
+  "activity_native_frame16": true,
+  "activity_incoming_r3_word_preserved": true,
+  "special_tail_stack_and_lr": true,
+  "wrapped_payload_pointer_zero_checked": true,
+  "record_mutation_and_header_aliases": true,
+  "trace_sha256": "48ccb429e45d255276ef1196e129cd7e49f475dc2654f7547515b0a76410b02c",
+  "target_attribution_sha256": "3d85bcd654c7fc98236119f73ddca23328bbe056852ef57ee445d8d5b57c77c1",
+  "activity_ownership_row": {
+    "image": "application",
+    "inventory_source": "manual_provenance_supplement",
+    "entry": "0x00082c10",
+    "end": "0x00082c43",
+    "size": "52",
+    "recovered_name": "r1_activity_refresh_handler",
+    "provider_family": "r1_product_specific",
+    "source_disposition": "clean_room_behavior_only",
+    "upstream_symbol": "r1_activity_refresh_handler",
+    "confidence": "high",
+    "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+  },
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "rea_boundary_available": false,
+  "evidence": {
+    "rea-84cc0.json": "cb2e181f5e6281ec28da60c8dbdf5b6661f50eab2d3ef59e523c0222edf5b08b",
+    "ghidra-84cc0.json": "e6d3c64b4bedb4d55932e3a433a224cfee0b54d2481e2315b21582ec2e88bd84",
+    "rea-82c10.json": "f3e86d19bdf4cf6ec1eed9c5e60da01221e54723038d549aeb4f26f12bf83e3b",
+    "ghidra-82c10.json": "b0eeaf52fdb0c40499b0fff991bff4cffb2c7490530264e2f1ee240444e847b0",
+    "ghidra-special-registration.json": "abdb04dc178e6633c876de05046bacf3eab12ee8a8e515efc410fcbabf3a2808"
+  },
+  "report_sha256": "c658d5df971a22e6f369088ea432a70524b9cd741e3530438a89e5f6ad47dd70",
+  "object_sha256": "79fcc3fa9b74a1c2ad54c6496ff24b4cc717f493e5fbd421da839e739b80ef8b",
+  "driver_sha256": "50d2eeef960bfc935ffd51baedcf3bca0f410d3dce9eb7a673f069e13e998359",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Special24-byte body is a supplemental registered target without a locked ownership row; original ledger unchanged",
+    "Event publisher is an explicit boundary fixture; actual queue/delivery and uninitialized downstream event record remain gated",
+    "Activity Cworker uses extra private callstack; its bytes outside the native16-byte saved frame are not compared, including packet aliases there; event writes beyond the passed8-byte record remain gated",
+    "Null header and wrapped payload boundary faults modeled; no physical exception/interrupt/concurrency proof",
+    "Other compiler/LTO, canonical fullstartup and instruction/wholeimage identity remain gated"
+  ]
+}

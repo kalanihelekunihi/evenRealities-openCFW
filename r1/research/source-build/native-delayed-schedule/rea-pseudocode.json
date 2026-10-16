@@ -1,0 +1,84 @@
+{
+  "evidence_id": "ev_43be5e3ba74d71fe2cc817e8253a3da8b96e43f843990e2b4562a0e8cda060e0",
+  "subject": {
+    "name": "stock-analysis-exec.elf",
+    "digest": {
+      "sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "provider": {
+    "id": "ghidra",
+    "name": "Ghidra",
+    "version": "12.1.4"
+  },
+  "analysis_profile": {
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "parameters": {
+      "target_kind": "executable",
+      "target_format": "elf",
+      "architecture": "arm",
+      "available_architectures": [
+        "arm"
+      ],
+      "import_mode": "ephemeral-source-immutable",
+      "annotation_policy": "atomic-function-entry-metadata-v1",
+      "load_image_observations": "source-mappings-entry-context-v2",
+      "function_body_evidence": "complete-inclusive-ranges-v1",
+      "function_references": "complete-body-and-entry-reference-manager-v2",
+      "call_relationship_coverage": "function-body-call-coverage-v5",
+      "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+      "string_inventory_evidence": "defined-data-coverage-v1",
+      "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+      "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+      "instruction_flow_evidence": "decoded-return-pcode-v1",
+      "instruction_references": "exact-address-incoming-v1",
+      "function_boundary_observations": "ghidra-function-boundary-limitations-v3",
+      "no_return_repair": "returning-imports-decoded-return-v2",
+      "process_launch": "inspected-jvm-launch-support-v1",
+      "jump_table_evidence": "typed-case-default-blocks-v1",
+      "decompiler_jump_loads": true,
+      "loader": "auto-from-header",
+      "language_id": "auto-from-header",
+      "compiler_spec_id": "auto-default",
+      "analyzer_preset": "ghidra-default"
+    },
+    "digest": "7e46711069eea041af1b9b99e34115c13332795e5cda76e584a722f529ec70de"
+  },
+  "predicate_type": "rea.analysis",
+  "operation": "procedure_pseudo_code",
+  "parameters": {
+    "procedure": "0x65b4c"
+  },
+  "raw_result": {
+    "value": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_00065b4c(uint param_1,undefined4 param_2,uint param_3)\n\n{\n  uint uVar1;\n  int iVar2;\n  int iVar3;\n  \n  if (_DAT_2000671c == 0) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\n                   \"[RING][fw_evt_loop_push_delayed]wating for fw_evt_loop_thread_id init ok\");\n    }\n    iVar2 = FUN_000914ec();\n    if (iVar2 << 0x1e < 0) {\n      FUN_000799c0(0x1c0001,\"[fw_evt_loop_push_delayed]wating for fw_evt_loop_thread_id init ok\");\n    }\n    do {\n      FUN_0007d154(10);\n    } while (_DAT_2000671c == 0);\n  }\n  if (param_3 < 2) {\n    FUN_000659e8(param_1,param_2,0xffffffff);\n    return;\n  }\n  iVar2 = FUN_0007d488(_DAT_20006720,1000);\n  if (iVar2 != 0) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING][fw_evt_loop_push_delayed]fw_event lock fail\",\n                   \"[RING][fw_evt_loop_push_delayed]fw_event lock fail\");\n    }\n    iVar2 = FUN_000914ec();\n    if (iVar2 << 0x1e < 0) {\n      FUN_000799c0(0x1c0001,\"[fw_evt_loop_push_delayed]fw_event lock fail\");\n    }\n  }\n  iVar2 = 0;\n  do {\n    if (*(int *)(iVar2 * 4 + 0x20015104) == 0) {\n      if (iVar2 < 0x40) {\n        *(uint *)(iVar2 * 4 + 0x20015104) = param_1;\n        *(undefined4 *)(iVar2 * 4 + 0x20015204) = param_2;\n        iVar3 = FUN_0007d28c();\n        param_1 = ((uint)(iVar3 * 1000) >> 10) - _DAT_20006728;\n        *(uint *)(iVar2 * 4 + 0x20015304) = param_3 + param_1;\n      }\n      break;\n    }\n    iVar2 = iVar2 + 1;\n  } while (iVar2 < 0x40);\n  iVar3 = FUN_0007d536(_DAT_20006720);\n  if (iVar3 != 0) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING][fw_evt_loop_push_delayed]fw_event unlock fail\",\n                   \"[RING][fw_evt_loop_push_delayed]fw_event unlock fail\");\n    }\n    iVar3 = FUN_000914ec();\n    if (iVar3 << 0x1e < 0) {\n      FUN_000799c0(0x1c0001,\"[fw_evt_loop_push_delayed]fw_event unlock fail\");\n    }\n  }\n  if (0x3f < iVar2) {\n    return;\n  }\n  FUN_0007d9ea(_DAT_20006724);\n  FUN_00065f84(param_1 | 0xff000000);\n  return;\n}\n\n",
+    "limitations": [
+      "Ghidra Listing reports a terminal call at 0x65bb6 to 0x659e8 FUN_000659e8 (external=false, thunk=false, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation.",
+      "Ghidra Listing reports a terminal call at 0x65c78 to 0x65f84 FUN_00065f84 (external=false, thunk=false, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation."
+    ]
+  },
+  "normalized_result": "\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\nvoid FUN_00065b4c(uint param_1,undefined4 param_2,uint param_3)\n\n{\n  uint uVar1;\n  int iVar2;\n  int iVar3;\n  \n  if (_DAT_2000671c == 0) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\n                   \"[RING][fw_evt_loop_push_delayed]wating for fw_evt_loop_thread_id init ok\");\n    }\n    iVar2 = FUN_000914ec();\n    if (iVar2 << 0x1e < 0) {\n      FUN_000799c0(0x1c0001,\"[fw_evt_loop_push_delayed]wating for fw_evt_loop_thread_id init ok\");\n    }\n    do {\n      FUN_0007d154(10);\n    } while (_DAT_2000671c == 0);\n  }\n  if (param_3 < 2) {\n    FUN_000659e8(param_1,param_2,0xffffffff);\n    return;\n  }\n  iVar2 = FUN_0007d488(_DAT_20006720,1000);\n  if (iVar2 != 0) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar2 = FUN_000914ec(), iVar2 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING][fw_evt_loop_push_delayed]fw_event lock fail\",\n                   \"[RING][fw_evt_loop_push_delayed]fw_event lock fail\");\n    }\n    iVar2 = FUN_000914ec();\n    if (iVar2 << 0x1e < 0) {\n      FUN_000799c0(0x1c0001,\"[fw_evt_loop_push_delayed]fw_event lock fail\");\n    }\n  }\n  iVar2 = 0;\n  do {\n    if (*(int *)(iVar2 * 4 + 0x20015104) == 0) {\n      if (iVar2 < 0x40) {\n        *(uint *)(iVar2 * 4 + 0x20015104) = param_1;\n        *(undefined4 *)(iVar2 * 4 + 0x20015204) = param_2;\n        iVar3 = FUN_0007d28c();\n        param_1 = ((uint)(iVar3 * 1000) >> 10) - _DAT_20006728;\n        *(uint *)(iVar2 * 4 + 0x20015304) = param_3 + param_1;\n      }\n      break;\n    }\n    iVar2 = iVar2 + 1;\n  } while (iVar2 < 0x40);\n  iVar3 = FUN_0007d536(_DAT_20006720);\n  if (iVar3 != 0) {\n    uVar1 = FUN_000914ec();\n    if (((uVar1 & 1) != 0) || (iVar3 = FUN_000914ec(), iVar3 << 0x1d < 0)) {\n      FUN_00091638(0x4000000,\"[RING][fw_evt_loop_push_delayed]fw_event unlock fail\",\n                   \"[RING][fw_evt_loop_push_delayed]fw_event unlock fail\");\n    }\n    iVar3 = FUN_000914ec();\n    if (iVar3 << 0x1e < 0) {\n      FUN_000799c0(0x1c0001,\"[fw_evt_loop_push_delayed]fw_event unlock fail\");\n    }\n  }\n  if (0x3f < iVar2) {\n    return;\n  }\n  FUN_0007d9ea(_DAT_20006724);\n  FUN_00065f84(param_1 | 0xff000000);\n  return;\n}\n\n",
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+    "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+    "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+    "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+    "Pseudocode is Ghidra decompiler output, not original source and not text-equivalent to Hopper output.",
+    "External functions and functions without an analyzable body return null; other decompiler failures remain explicit.",
+    "Ghidra Listing reports a terminal call at 0x65bb6 to 0x659e8 FUN_000659e8 (external=false, thunk=false, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation.",
+    "Ghidra Listing reports a terminal call at 0x65c78 to 0x65f84 FUN_00065f84 (external=false, thunk=false, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation.",
+    "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

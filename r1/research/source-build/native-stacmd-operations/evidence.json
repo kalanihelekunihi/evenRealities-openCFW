@@ -1,0 +1,64 @@
+{
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x00056568",
+      "end": "0x00056575",
+      "size": "14",
+      "recovered_name": "yhm2710_stacmd_close_candidate",
+      "provider_family": "yhmicros_yhm2710_candidate",
+      "source_disposition": "clean_room_reimplementation_owner_authorized",
+      "upstream_symbol": "yhm2710_stacmd_close_candidate",
+      "confidence": "high",
+      "evidence": "Exact executable closure of the scatter-loaded device_stacmd operation table and P1.01 wire callback record used by the YHM2710 power path. The exact vendor source remains unlicensed; the owner-authorized independent reconstruction is compiled from reconstructed/yhm2710."
+    },
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x0005657c",
+      "end": "0x0005658b",
+      "size": "16",
+      "recovered_name": "yhm2710_stacmd_open_candidate",
+      "provider_family": "yhmicros_yhm2710_candidate",
+      "source_disposition": "clean_room_reimplementation_owner_authorized",
+      "upstream_symbol": "yhm2710_stacmd_open_candidate",
+      "confidence": "high",
+      "evidence": "Exact executable closure of the scatter-loaded device_stacmd operation table and P1.01 wire callback record used by the YHM2710 power path. The exact vendor source remains unlicensed; the owner-authorized independent reconstruction is compiled from reconstructed/yhm2710."
+    },
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x00056590",
+      "end": "0x000565ed",
+      "size": "94",
+      "recovered_name": "yhm2710_stacmd_read_adapter_candidate",
+      "provider_family": "yhmicros_yhm2710_candidate",
+      "source_disposition": "clean_room_reimplementation_owner_authorized",
+      "upstream_symbol": "yhm2710_stacmd_read_adapter_candidate",
+      "confidence": "high",
+      "evidence": "Exact executable closure of the scatter-loaded device_stacmd operation table and P1.01 wire callback record used by the YHM2710 power path. The exact vendor source remains unlicensed; the owner-authorized independent reconstruction is compiled from reconstructed/yhm2710."
+    },
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x0005660c",
+      "end": "0x00056633",
+      "size": "40",
+      "recovered_name": "yhm2710_stacmd_write_adapter_candidate",
+      "provider_family": "yhmicros_yhm2710_candidate",
+      "source_disposition": "clean_room_reimplementation_owner_authorized",
+      "upstream_symbol": "yhm2710_stacmd_write_adapter_candidate",
+      "confidence": "high",
+      "evidence": "Exact executable closure of the scatter-loaded device_stacmd operation table and P1.01 wire callback record used by the YHM2710 power path. The exact vendor source remains unlicensed; the owner-authorized independent reconstruction is compiled from reconstructed/yhm2710."
+    }
+  ],
+  "rea_function_metadata_available": false,
+  "rea_limitation": "REA procedure_info returned no structured function metadata for these four manual-provenance entries; native Ghidra-MCP bytes and locked manual rows are used",
+  "locked_ownership_changed": false,
+  "state": {
+    "configuration": "0x200075c4",
+    "failed_counter": "0x200075c0"
+  },
+  "abi": "Read/write preserve registry four-word ABI with request in r2; open/close ignore passed device and use fixed state"
+}

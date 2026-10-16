@@ -1,0 +1,105 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00084d68 <r1_stock_gpio_pin_set+0xb934>:
+   84d68:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   84d6c:	4605      	mov	r5, r0
+   84d6e:	f010 ffc1 	bl	95cf4 <_stack+0x15cf4>
+   84d72:	4c35      	ldr	r4, [pc, #212]	@ (84e48 <_stack+0x4e48>)
+   84d74:	68a0      	ldr	r0, [r4, #8]
+   84d76:	1c40      	adds	r0, r0, #1
+   84d78:	60a0      	str	r0, [r4, #8]
+   84d7a:	6820      	ldr	r0, [r4, #0]
+   84d7c:	4f33      	ldr	r7, [pc, #204]	@ (84e4c <_stack+0x4e4c>)
+   84d7e:	b110      	cbz	r0, 84d86 <_stack+0x4d86>
+   84d80:	6960      	ldr	r0, [r4, #20]
+   84d82:	b330      	cbz	r0, 84dd2 <_stack+0x4dd2>
+   84d84:	e02b      	b.n	84dde <_stack+0x4dde>
+   84d86:	6025      	str	r5, [r4, #0]
+   84d88:	68a0      	ldr	r0, [r4, #8]
+   84d8a:	2801      	cmp	r0, #1
+   84d8c:	d127      	bne.n	84dde <_stack+0x4dde>
+   84d8e:	2600      	movs	r6, #0
+   84d90:	eb06 0086 	add.w	r0, r6, r6, lsl #2
+   84d94:	eb07 0080 	add.w	r0, r7, r0, lsl #2
+   84d98:	f010 ff7a 	bl	95c90 <_stack+0x15c90>
+   84d9c:	1c76      	adds	r6, r6, #1
+   84d9e:	2e38      	cmp	r6, #56	@ 0x38
+   84da0:	d3f6      	bcc.n	84d90 <_stack+0x4d90>
+   84da2:	482b      	ldr	r0, [pc, #172]	@ (84e50 <_stack+0x4e50>)
+   84da4:	f010 ff74 	bl	95c90 <_stack+0x15c90>
+   84da8:	4829      	ldr	r0, [pc, #164]	@ (84e50 <_stack+0x4e50>)
+   84daa:	3014      	adds	r0, #20
+   84dac:	f010 ff70 	bl	95c90 <_stack+0x15c90>
+   84db0:	4827      	ldr	r0, [pc, #156]	@ (84e50 <_stack+0x4e50>)
+   84db2:	3028      	adds	r0, #40	@ 0x28
+   84db4:	f010 ff6c 	bl	95c90 <_stack+0x15c90>
+   84db8:	4825      	ldr	r0, [pc, #148]	@ (84e50 <_stack+0x4e50>)
+   84dba:	303c      	adds	r0, #60	@ 0x3c
+   84dbc:	f010 ff68 	bl	95c90 <_stack+0x15c90>
+   84dc0:	4823      	ldr	r0, [pc, #140]	@ (84e50 <_stack+0x4e50>)
+   84dc2:	3050      	adds	r0, #80	@ 0x50
+   84dc4:	f010 ff64 	bl	95c90 <_stack+0x15c90>
+   84dc8:	4821      	ldr	r0, [pc, #132]	@ (84e50 <_stack+0x4e50>)
+   84dca:	63a0      	str	r0, [r4, #56]	@ 0x38
+   84dcc:	3014      	adds	r0, #20
+   84dce:	63e0      	str	r0, [r4, #60]	@ 0x3c
+   84dd0:	e005      	b.n	84dde <_stack+0x4dde>
+   84dd2:	6820      	ldr	r0, [r4, #0]
+   84dd4:	6ae9      	ldr	r1, [r5, #44]	@ 0x2c
+   84dd6:	6ac0      	ldr	r0, [r0, #44]	@ 0x2c
+   84dd8:	4288      	cmp	r0, r1
+   84dda:	d800      	bhi.n	84dde <_stack+0x4dde>
+   84ddc:	6025      	str	r5, [r4, #0]
+   84dde:	6a60      	ldr	r0, [r4, #36]	@ 0x24
+   84de0:	1c40      	adds	r0, r0, #1
+   84de2:	6260      	str	r0, [r4, #36]	@ 0x24
+   84de4:	65a8      	str	r0, [r5, #88]	@ 0x58
+   84de6:	6ae8      	ldr	r0, [r5, #44]	@ 0x2c
+   84de8:	6921      	ldr	r1, [r4, #16]
+   84dea:	4288      	cmp	r0, r1
+   84dec:	d900      	bls.n	84df0 <_stack+0x4df0>
+   84dee:	6120      	str	r0, [r4, #16]
+   84df0:	eb00 0080 	add.w	r0, r0, r0, lsl #2
+   84df4:	eb07 0080 	add.w	r0, r7, r0, lsl #2
+   84df8:	6840      	ldr	r0, [r0, #4]
+   84dfa:	60a8      	str	r0, [r5, #8]
+   84dfc:	6881      	ldr	r1, [r0, #8]
+   84dfe:	60e9      	str	r1, [r5, #12]
+   84e00:	6882      	ldr	r2, [r0, #8]
+   84e02:	1d29      	adds	r1, r5, #4
+   84e04:	6051      	str	r1, [r2, #4]
+   84e06:	6081      	str	r1, [r0, #8]
+   84e08:	6ae8      	ldr	r0, [r5, #44]	@ 0x2c
+   84e0a:	eb00 0080 	add.w	r0, r0, r0, lsl #2
+   84e0e:	eb07 0180 	add.w	r1, r7, r0, lsl #2
+   84e12:	6169      	str	r1, [r5, #20]
+   84e14:	f857 1020 	ldr.w	r1, [r7, r0, lsl #2]
+   84e18:	1c49      	adds	r1, r1, #1
+   84e1a:	f847 1020 	str.w	r1, [r7, r0, lsl #2]
+   84e1e:	f010 ff81 	bl	95d24 <_stack+0x15d24>
+   84e22:	6960      	ldr	r0, [r4, #20]
+   84e24:	2800      	cmp	r0, #0
+   84e26:	d00d      	beq.n	84e44 <_stack+0x4e44>
+   84e28:	6820      	ldr	r0, [r4, #0]
+   84e2a:	6ae9      	ldr	r1, [r5, #44]	@ 0x2c
+   84e2c:	6ac0      	ldr	r0, [r0, #44]	@ 0x2c
+   84e2e:	4288      	cmp	r0, r1
+   84e30:	d208      	bcs.n	84e44 <_stack+0x4e44>
+   84e32:	4908      	ldr	r1, [pc, #32]	@ (84e54 <_stack+0x4e54>)
+   84e34:	f04f 5080 	mov.w	r0, #268435456	@ 0x10000000
+   84e38:	6008      	str	r0, [r1, #0]
+   84e3a:	bf40      	sev
+   84e3c:	f3bf 8f4f 	dsb	sy
+   84e40:	f3bf 8f6f 	isb	sy
+   84e44:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+   84e48:	781c      	ldrb	r4, [r3, #0]
+   84e4a:	2000      	movs	r0, #0
+   84e4c:	ad94      	add	r5, sp, #592	@ 0x250
+   84e4e:	2002      	movs	r0, #2
+   84e50:	b1f4      	cbz	r4, 84e90 <_stack+0x4e90>
+   84e52:	2002      	movs	r0, #2
+   84e54:	ed04 e000 	stc	0, cr14, [r4, #-0]

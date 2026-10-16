@@ -1,0 +1,139 @@
+{
+  "cold_runs": [
+    {
+      "poison": 165,
+      "writes": [
+        {
+          "pc": 165652,
+          "address": 536897888,
+          "bytes": 1,
+          "value": 125
+        },
+        {
+          "pc": 165652,
+          "address": 536897889,
+          "bytes": 1,
+          "value": 64
+        },
+        {
+          "pc": 165690,
+          "address": 536897890,
+          "bytes": 1,
+          "value": 3
+        },
+        {
+          "pc": 165690,
+          "address": 536897891,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "poison": 90,
+      "writes": [
+        {
+          "pc": 165652,
+          "address": 536897888,
+          "bytes": 1,
+          "value": 125
+        },
+        {
+          "pc": 165652,
+          "address": 536897889,
+          "bytes": 1,
+          "value": 64
+        },
+        {
+          "pc": 165690,
+          "address": 536897890,
+          "bytes": 1,
+          "value": 3
+        },
+        {
+          "pc": 165690,
+          "address": 536897891,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "poison": 255,
+      "writes": [
+        {
+          "pc": 165652,
+          "address": 536897888,
+          "bytes": 1,
+          "value": 125
+        },
+        {
+          "pc": 165652,
+          "address": 536897889,
+          "bytes": 1,
+          "value": 64
+        },
+        {
+          "pc": 165690,
+          "address": 536897890,
+          "bytes": 1,
+          "value": 3
+        },
+        {
+          "pc": 165690,
+          "address": 536897891,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "poison": 60,
+      "writes": [
+        {
+          "pc": 165652,
+          "address": 536897888,
+          "bytes": 1,
+          "value": 125
+        },
+        {
+          "pc": 165652,
+          "address": 536897889,
+          "bytes": 1,
+          "value": 64
+        },
+        {
+          "pc": 165690,
+          "address": 536897890,
+          "bytes": 1,
+          "value": 3
+        },
+        {
+          "pc": 165690,
+          "address": 536897891,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "source_owned_section": {
+    "address": 536897888,
+    "bytes": 4,
+    "sha256_at_native_target": "5fa860b7dd0a76bc1df602dc7703a215e27161aeebbd9acfd9ffe6777a0aef3e",
+    "native_target": "0x3407c",
+    "source_target": "r1_ble_tx_queue_dispatch_type1",
+    "symbolic_relocation": "R_ARM_ABS32"
+  },
+  "report_sha256": "238fac778044a8df1f2847178eed8cacf27d02df39df7f04b572415d32e8c75c",
+  "object_sha256": "c9bfe6ed3e1c47ce15efa577b39ac9266712c31bf79c28f060c5018132107881",
+  "driver_sha256": "da9918207d12668b9f117a4174bce5e8ab1e65ac5aeaa82a8dca7a79cf42f418",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Native-target link proves callback data relocation, not original provider instruction identity",
+    "Actual source-target relocation/execution is checked separately in fragment-tx graph",
+    "Warm state, concurrency, product initialization and physical queue delivery remain gated"
+  ]
+}

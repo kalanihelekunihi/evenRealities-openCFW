@@ -1,0 +1,96 @@
+{
+  "comparisons": 65637,
+  "counts": {
+    "info": 65637,
+    "wrapper": 0
+  },
+  "provider_calls_per_side": {
+    "clear": 65637,
+    "format": 131274,
+    "lower": 65606
+  },
+  "all_info_sequence_halfwords": true,
+  "actual_source_formatting": true,
+  "formatting_boundary_fixture": false,
+  "actual_upstream_clear": true,
+  "actual_connection_getter_and_header": true,
+  "r0_r2_r3_checked": true,
+  "r1_scratch_differences": 65636,
+  "native_info_frame40": true,
+  "null_header_faults": 1,
+  "source_owned_metadata": {
+    "firmware": {
+      "address": 540052,
+      "bytes": 11,
+      "sha256": "8b3c5b7496fea506235a55035d316677887be68ba1cfb96d842b9e165a8f9269"
+    },
+    "format": {
+      "address": 540064,
+      "bytes": 3,
+      "sha256": "2f3a3f9b55f5df846abf81c7d13ff74998bdda8664df664173220675150020ff"
+    },
+    "hardware": {
+      "address": 540068,
+      "bytes": 11,
+      "sha256": "061148e7ab9bd5bee85c62bf02929e8835f7da206379841bf65b9418325b8afa"
+    }
+  },
+  "trace_sha256": "e87510cfd06a05ac8198f136f9059ee90a75d1dedb4f2a4667e16b7e08ce3da4",
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00083872",
+      "end": "0x00083895",
+      "size": "36",
+      "recovered_name": "FUN_00083872",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_system_response_wrapper",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x00083d5c",
+      "end": "",
+      "size": "",
+      "recovered_name": "r1_device_info_handler",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_device_info_handler",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "evidence": {
+    "rea-83d5c.json": "9eca815b58e59daf282dfbe0f19d8177e2dd5c45d255e788b9c995f8dbe34770",
+    "ghidra-83d5c.json": "da1528350efd8bd9ec5f6b9a013ff64f6e4208b23d6f9cc7375b8205a25b9aab",
+    "rea-83872.json": "55d5825c9d5469020c5ed82b3c2602556780a58924d17c420f2a34789d276192",
+    "ghidra-83872.json": "0717467b72232fa5faa38086b162b9272fb1418c3a4f8358b34f38b5061ebaee",
+    "rea-38080.json": "f0fdc8d23c4bc2ae520ec5092bd256e87236b2b04f9dc865484509b82de2cb44",
+    "ghidra-38080.json": "ed01831fce2aea4e387344c037e19bac0d5d3b8abbd8d69ce8555b9fe2377f78"
+  },
+  "provider_reports": {
+    "native-protocol-device-info/report.json": "f32fb88e9637e3fd1c9d166dcbcf06c534c6482648d8098a11958fa22d8537aa",
+    "native-protocol-response-header/report.json": "4c22142e65d5fe974343756d11174146c571174a5aed5ee742f74c764f50fc0f",
+    "connection-handle/report.json": "bb6d085e1b4e3a19499ececcb8bd7bcb3c83910f9069e64473be448fef9d8da9",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+    "native-protocol-device-info/verification.json": "5f66bb530e0ba6737eb7effe03634eb661e16a666880f9f0242177706d5962eb",
+    "native-formatter-engine/report.json": "bbbd1f100347e8083fca51a56696a1284b5cefbcf74480fb69bc06a8029fab2b",
+    "native-formatter-wrappers/report.json": "d6084ffd26fd1fc497d084269821b9fa765733c32c79392706cbb1367cee9da5"
+  },
+  "driver_sha256": "08923e018ddc239326702cf151dc86fc129ff7ad647b941c9d2c624791eaf7c6",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Actual source snprintf, parser, arithmetic and bounded callback execute; generic formatter proof is separately bound to its provider receipts",
+    "Device-info54-byte entry has locked manual row without extent; Ghidra-MCP native body/calls and return boundary supply extent; REA entry unavailable",
+    "Actual upstream memclear/memset and shared getter/header execute; lowerresponse remains a fixture",
+    "Caller-savedr1 is observed separately, not source-equivalence proof; private Cstack outside native40-byte buffer and othercompiler/LTO remain gated",
+    "Metadata is locked stock identity, not a released OpenCFW version; no fullstartup/hardware/delivery/imageidentity proof"
+  ]
+}

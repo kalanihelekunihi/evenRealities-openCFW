@@ -1,0 +1,42 @@
+{
+  "comparisons": 160992,
+  "all_percentage_bytes": true,
+  "full_word_percentage_logs": true,
+  "mode_sequences": 13,
+  "full_r1_r2_r3_checked": true,
+  "raw_return_checked": true,
+  "provider_calls_per_side": {
+    "r1_structured_log_mode_get": 408672,
+    "r1_structured_log_format": 111456,
+    "nrf_log_frontend_std_2": 86688,
+    "r1_phone_cmd_send_op1": 160992
+  },
+  "source_descriptor_sections": {
+    "ring": {
+      "address": 786996,
+      "bytes": 66,
+      "sha256": "b27f964cade771d59a11a0dede30df9ca8d7bc56be66c275a1709aa9bbc7575c"
+    },
+    "sdk": {
+      "address": 537812,
+      "bytes": 60,
+      "sha256": "8f54c6cb930a9b853abdff9b9666d027a7c621195be481d4dc32555b4ab5c4a0"
+    }
+  },
+  "report_sha256": "b09ddcdae2b6c4c044d4dbe6fef6218e1faea6c6af8fcce3698e67b930870091",
+  "object_sha256": "0dcd8ec351d8dcec6c917966e84ee7e04243e929600e49086f3026d8bf8bf4a8",
+  "driver_sha256": "152a651796e33599409efa3784946177aca849185b281d4c1f5c9a15217169dc",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-8345c.json": "dd65df56f8d3493a39749ae70d81a7663300205656d68ef59238497129bc0efb",
+    "ghidra-body.json": "b86d052c575925eccb32714bad5eb44f3b2627d6d2af7a28fdf2b281bfa369db",
+    "ghidra-ring.json": "9d6c8f03cfbbd2be8c86f0481b8c90e7a992c4c62e5affdbf763dc40920efe4d"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Mode/logger/operation1 endpoints are fixtures; actual lower protocol/updater composition remains open",
+    "Eight-byte packet, zero padding, nonzero state mapping and raw return/register words verified for selected compiler; other compiler/LTO settings need revalidation",
+    "Runtime/init, transport delivery, enabled full-graph logging and original image identity remain gates"
+  ]
+}

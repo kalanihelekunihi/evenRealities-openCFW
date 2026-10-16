@@ -1,0 +1,483 @@
+{
+  "comparisons": 72220,
+  "path_counts": {
+    "rejected": 2409,
+    "null_module": 1630,
+    "module": 66996,
+    "special": 1185
+  },
+  "provider_calls_per_side": {
+    "r1_structured_log_mode_get": 207489,
+    "r1_structured_log_format": 2916,
+    "nrf_log_frontend_std_4": 2592,
+    "r1_eus_system_dispatch_plan_build": 65967,
+    "r1_health_registration_dispatcher": 1029,
+    "r1_ble_event_dispatch": 1185
+  },
+  "all_length_halfwords": true,
+  "mode_sequences": 13,
+  "full_r0_r1_r2_r3": true,
+  "exact_saved_frame32": true,
+  "tail_stack_and_lr": true,
+  "header_and_table_mutation_modes": 6,
+  "preserving_mode_scratch_cases": 936,
+  "source_descriptor_sections": {
+    "ring": {
+      "address": 537116,
+      "bytes": 58,
+      "sha256": "537d3e7c37791cd3c76c5c200e0c801f070af1287cd03d79cd2d2f9a094b35f6"
+    },
+    "sdk": {
+      "address": 537184,
+      "bytes": 52,
+      "sha256": "c30506fc34054aca439bacf44d9e3da00ccff3e10ce2f5a1f5f0d59f110378a6"
+    }
+  },
+  "source_owned_module_section": {
+    "address": 536898448,
+    "bytes": 16,
+    "sha256_at_native_targets": "368332a0386c5ba30a310488de2894bdee978d5b916e592c5201804187a91be9",
+    "symbolic_targets": {
+      "1": "r1_eus_system_dispatch_plan_build",
+      "2": "r1_health_registration_dispatcher"
+    }
+  },
+  "cold_runs": [
+    {
+      "poison": 165,
+      "writes": [
+        {
+          "pc": 165670,
+          "address": 536898448,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898449,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898450,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898451,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165652,
+          "address": 536898452,
+          "bytes": 1,
+          "value": 169
+        },
+        {
+          "pc": 165652,
+          "address": 536898453,
+          "bytes": 1,
+          "value": 60
+        },
+        {
+          "pc": 165652,
+          "address": 536898454,
+          "bytes": 1,
+          "value": 8
+        },
+        {
+          "pc": 165670,
+          "address": 536898455,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165652,
+          "address": 536898456,
+          "bytes": 1,
+          "value": 233
+        },
+        {
+          "pc": 165652,
+          "address": 536898457,
+          "bytes": 1,
+          "value": 43
+        },
+        {
+          "pc": 165652,
+          "address": 536898458,
+          "bytes": 1,
+          "value": 8
+        },
+        {
+          "pc": 165670,
+          "address": 536898459,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898460,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898461,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898462,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898463,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "poison": 90,
+      "writes": [
+        {
+          "pc": 165670,
+          "address": 536898448,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898449,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898450,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898451,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165652,
+          "address": 536898452,
+          "bytes": 1,
+          "value": 169
+        },
+        {
+          "pc": 165652,
+          "address": 536898453,
+          "bytes": 1,
+          "value": 60
+        },
+        {
+          "pc": 165652,
+          "address": 536898454,
+          "bytes": 1,
+          "value": 8
+        },
+        {
+          "pc": 165670,
+          "address": 536898455,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165652,
+          "address": 536898456,
+          "bytes": 1,
+          "value": 233
+        },
+        {
+          "pc": 165652,
+          "address": 536898457,
+          "bytes": 1,
+          "value": 43
+        },
+        {
+          "pc": 165652,
+          "address": 536898458,
+          "bytes": 1,
+          "value": 8
+        },
+        {
+          "pc": 165670,
+          "address": 536898459,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898460,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898461,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898462,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898463,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "poison": 255,
+      "writes": [
+        {
+          "pc": 165670,
+          "address": 536898448,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898449,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898450,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898451,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165652,
+          "address": 536898452,
+          "bytes": 1,
+          "value": 169
+        },
+        {
+          "pc": 165652,
+          "address": 536898453,
+          "bytes": 1,
+          "value": 60
+        },
+        {
+          "pc": 165652,
+          "address": 536898454,
+          "bytes": 1,
+          "value": 8
+        },
+        {
+          "pc": 165670,
+          "address": 536898455,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165652,
+          "address": 536898456,
+          "bytes": 1,
+          "value": 233
+        },
+        {
+          "pc": 165652,
+          "address": 536898457,
+          "bytes": 1,
+          "value": 43
+        },
+        {
+          "pc": 165652,
+          "address": 536898458,
+          "bytes": 1,
+          "value": 8
+        },
+        {
+          "pc": 165670,
+          "address": 536898459,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898460,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898461,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898462,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898463,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "poison": 60,
+      "writes": [
+        {
+          "pc": 165670,
+          "address": 536898448,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898449,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898450,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898451,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165652,
+          "address": 536898452,
+          "bytes": 1,
+          "value": 169
+        },
+        {
+          "pc": 165652,
+          "address": 536898453,
+          "bytes": 1,
+          "value": 60
+        },
+        {
+          "pc": 165652,
+          "address": 536898454,
+          "bytes": 1,
+          "value": 8
+        },
+        {
+          "pc": 165670,
+          "address": 536898455,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165652,
+          "address": 536898456,
+          "bytes": 1,
+          "value": 233
+        },
+        {
+          "pc": 165652,
+          "address": 536898457,
+          "bytes": 1,
+          "value": 43
+        },
+        {
+          "pc": 165652,
+          "address": 536898458,
+          "bytes": 1,
+          "value": 8
+        },
+        {
+          "pc": 165670,
+          "address": 536898459,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898460,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898461,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898462,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165670,
+          "address": 536898463,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "rea_boundary_available": false,
+  "ownership_row": {
+    "image": "application",
+    "inventory_source": "manual_provenance_supplement",
+    "entry": "0x0008316c",
+    "end": "0x0008321b",
+    "size": "176",
+    "recovered_name": "r1_eus_ingress_plan_decode",
+    "provider_family": "r1_product_specific",
+    "source_disposition": "clean_room_behavior_only",
+    "upstream_symbol": "r1_eus_ingress_plan_decode",
+    "confidence": "high",
+    "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+  },
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "evidence": {
+    "rea-boundary-gap.json": "bbf3bfda812d6236e78601c54444bfbfdf617f279c7063d1fffd778a874e2b77",
+    "ghidra-body-data.json": "c53afd1bd9bdbab9534036447960fe3e50f544da904c9ffe8043328ba446f431"
+  },
+  "report_sha256": "edefa9546986c4877a67b5791a7fd1664d186182588dc083a85bca5f5e3e6346",
+  "object_sha256": "fa7f2c138efb5deadd66d6a7eb8daa07365aa10e7bc158e29f3ffb8932c21dfa",
+  "driver_sha256": "aecd2deaee5d0e76331041bff70f4eb21268ab56e86d80f7d9e925db0530244c",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Module/special handler bodies and logger endpoints are fixtures; no authentication/CRC/advertised-length validation claim",
+    "Saved32-byte ABI boundary modeled in C/assembly; other compilers/LTO and logger writes into its outgoing stack arguments remain gated",
+    "Post-log mutation to module200 is tested in mapped table backing; physical out-of-bounds/fault behavior is unproven",
+    "Native-target symbolic table relocation matches four cold starts; actual source-handler composition/canonical admission remains gated",
+    "Locked176-byte ownership and exact Ghidra-MCP bytes; REA entry unavailable; hardware/concurrency/fullstartup/imageidentity unproven"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "comparisons": 483940,
+  "counts": {
+    "compare": 1508,
+    "ceilf": 98304,
+    "floorf": 98304,
+    "fmaxf": 24128,
+    "fminf": 24128,
+    "fabs": 69632,
+    "fabs_core": 69632,
+    "compare_absf": 98304
+  },
+  "all_binary32_and_binary64_exponents": true,
+  "both_signs": true,
+  "all_rounding_flush_to_zero_default_nan_modes": true,
+  "preexisting_inexact_flag": true,
+  "compare_return_and_apsr_nzcvq_checked": true,
+  "compare_initial_q_zero_and_one": true,
+  "core_fabs_d0_side_result_checked": true,
+  "return_fpscr_stack_callee_integer_fp_and_nonstack_writes_checked": true,
+  "source_owned_data_spans": {
+    ".r1.math.ceilf_data": {
+      "address": "0x38a54",
+      "bytes": 8,
+      "sha256": "fc1e4c4cb862791e1f62c17d51c1139980fc1016ac637a439e73678b623c22b6"
+    },
+    ".r1.math.floorf_data": {
+      "address": "0x39284",
+      "bytes": 12,
+      "sha256": "71a91968325c9108db34fa7d4f2fb36057d016cc99501d2852aef276cfce7732"
+    }
+  },
+  "runtime_no_unresolved": true,
+  "trace_sha256": "8d5a0fa475e256f2d8efe1b5a6060c256ee145bf4565fea3fa8c6632a91d0502",
+  "report_sha256": "c0f62d50efdab55f569c24b6334f3d099fe7de8a205e22cef7b3739ea9020156",
+  "object_sha256": "825341ad994cedf480771c4b1d9ca96ab237613a3c7c81f1a4286e0cbcc3c2d2",
+  "runtime_report_sha256": "df9c3092cd91dbff8760b65011221d081b5a941e3a903ab49533a8117af8714e",
+  "runtime_object_sha256": "5f15ad69ef2c8bdc2f2e1eb16f015d28d5585550ff7e62ec2b971b2b296c2f83",
+  "layout": "r1/source-config/runtime/native_math_selection_verification.ld",
+  "layout_sha256": "e3e0326834a82345388e77a63de033c5a95b3499b39c6ff0a2361fbfdc081d31",
+  "parent_layout_sha256": "eb559e9b8b67d97f666d288ccdb29a9190282e9725b98149195512b5a0dae4c4",
+  "driver_sha256": "29c4f4f6f8dbb870279e52fe76cd4aec5d6af7d35fa34013ffb62fb603d24abb",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-28364.json": "67f149c582b8a1fe17883023580a6120b159dfbf703a54d950dbff060d235b67",
+    "ghidra-28364.json": "c2593d9d768e88f5fe6e03f772caed64a078014df643ab0b7a18cb1cb0fcbf41",
+    "rea-389f0.json": "47de95b11639df8f421d0682ad8a6a7c0931595e7bc6a9575d9f369fa680dbb7",
+    "ghidra-389f0.json": "30ac2335cfea892176d72b07a65dca61502fcb1e0c0938638d95c55317bd5d32",
+    "rea-39220.json": "6be722d2e59c8ef5727496e149fb676e70192797d7565d4399cda10702f61e32",
+    "ghidra-39220.json": "f0f5cc16beddba0ca415bef777a0b3a04db495cd4752a5e6b5114eef1f85cef4",
+    "rea-39290.json": "1ee8e3bb51bde562c1d3842854d280977d7d5aac77016a9aebaa9142258b90d6",
+    "ghidra-39290.json": "f25a0d255541d1dea8123c0f1a8a0b9aae50ea13d67facd0dcb6e8a724079c86",
+    "rea-392d8.json": "0c263868c08ed3fe4fbd8227e8c19c304dd033ab5bc3d5c233f345e8617c93c1",
+    "ghidra-392d8.json": "e5dd75807da3049abf1e6be5ed1e89699b988e793ef24bc913321325baa1f506",
+    "rea-390f0.json": "243bf0efb329336215d35a8260767dc13c5f7a88a8fac36a88b3b6bbb5060cfe",
+    "ghidra-390f0.json": "dbb4fcb80af33f092b985522fdb65e805f4752276502d1eee5d0ad032f93f8df",
+    "rea-620f4.json": "51a3b9ce11bf710306393a187c74c7a9f765bf3ec6bf02ce76740c0a106dad41",
+    "ghidra-620f4.json": "87509ad83015e2eb4b2eded08a9a081c9a477927025a69bf00e8a92a045dde4f",
+    "rea-98eca.json": "16aa73149ceb5dbd8b1da22b6f792122dc6a370069bb44148c4965c616d24ce2",
+    "ghidra-98eca.json": "e6a4d8ccb4660d05e942c6e98345e2e9a92b68b425dae59fbb274f3e5480601c"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Native raw ordering and comparison-based fabsf are not generic IEEE fmin/fmax/fabs behavior.",
+    "Only compare helper return and APSR NZCVQ are checked; other helpers caller scratch/APSR/private frames remain open.",
+    "Bounded exponent patterns/pairs/FPSCR controls do not exhaust inputs or hardware timing.",
+    "Data is source-owned and verification-placed; final image identity/integration remain gated."
+  ]
+}

@@ -1,0 +1,25 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0004e604 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x27604>:
+   4e604:	525b      	strh	r3, [r3, r1]
+   4e606:	4e49      	ldr	r6, [pc, #292]	@ (4e72c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x2772c>)
+   4e608:	5d47      	ldrb	r7, [r0, r5]
+   4e60a:	6146      	str	r6, [r0, #20]
+   4e60c:	6174      	str	r4, [r6, #20]
+   4e60e:	206c      	movs	r0, #108	@ 0x6c
+   4e610:	7265      	strb	r5, [r4, #9]
+   4e612:	6f72      	ldr	r2, [r6, #116]	@ 0x74
+   4e614:	2c72      	cmp	r4, #114	@ 0x72
+   4e616:	6520      	str	r0, [r4, #80]	@ 0x50
+   4e618:	7272      	strb	r2, [r6, #9]
+   4e61a:	726f      	strb	r7, [r5, #9]
+   4e61c:	635f      	str	r7, [r3, #52]	@ 0x34
+   4e61e:	646f      	str	r7, [r5, #68]	@ 0x44
+   4e620:	3a65      	subs	r2, #101	@ 0x65
+   4e622:	2520      	movs	r5, #32
+   4e624:	3830      	subs	r0, #48	@ 0x30
+   4e626:	0078      	lsls	r0, r7, #1

@@ -1,0 +1,76 @@
+/* ================================================================
+ * entry: 0x0003ae04
+ * end:   0x0003af5b
+ * size:  344 bytes
+ * name:  FUN_0003ae04
+ * ================================================================ */
+
+/* WARNING: Restarted to delay deadcode elimination for space: stack */
+
+float FUN_0003ae04(float param_1)
+
+{
+  int iVar1;
+  code *UNRECOVERED_JUMPTABLE;
+  float fVar2;
+  uint local_10;
+
+  if ((uint)((int)param_1 * 2) < DAT_0003af5c) {
+    if ((uint)((int)param_1 * 2) < 0x73000000) {
+      local_10 = 0xffffffff;
+    }
+    else {
+      local_10 = 0;
+    }
+  }
+  else if ((uint)ABS(param_1) < (uint)DAT_0003af6c) {
+    if (((uint)param_1 & 0x80000000) == 0) {
+      fVar2 = (param_1 * DAT_0003af70 + DAT_0003af74) - DAT_0003af74;
+    }
+    else {
+      fVar2 = (param_1 * DAT_0003af70 - DAT_0003af74) + DAT_0003af74;
+    }
+    local_10 = (int)fVar2 & 3;
+    param_1 = (((param_1 - fVar2 * DAT_0003af78) - fVar2 * DAT_0003af7c) - fVar2 * DAT_0003af80) -
+              fVar2 * DAT_0003af84;
+  }
+  else {
+    param_1 = (float)FUN_0003bb04(&local_10);
+  }
+  if (-1 < (int)local_10) {
+    if ((local_10 & 1) == 0) {
+      fVar2 = param_1 * param_1;
+      param_1 = param_1 + param_1 * (DAT_0003af90 + fVar2 * (DAT_0003af8c - fVar2 * DAT_0003af88)) *
+                                    fVar2;
+      if ((local_10 & 2) == 0) {
+        return param_1;
+      }
+    }
+    else {
+      param_1 = param_1 * param_1;
+      param_1 = param_1 * (DAT_0003af68 + param_1 * (DAT_0003af64 + param_1 * DAT_0003af60)) + 1.0;
+      if ((local_10 & 2) == 0) {
+                    /* WARNING: Could not recover jumptable at 0x0003ae68. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+        fVar2 = (float)(*UNRECOVERED_JUMPTABLE)();
+        return fVar2;
+      }
+    }
+    return -param_1;
+  }
+  if ((uint)((int)param_1 * 2) < 0xff000000) {
+    iVar1 = FUN_00038140(param_1);
+    if (iVar1 == 4) {
+      FUN_0003baf4();
+    }
+    return param_1;
+  }
+  if ((int)param_1 * 2 == 0xff000000) {
+    FUN_0003bc9c(1);
+    return DAT_0003bae0 / DAT_0003bae0;
+  }
+  return param_1 + param_1;
+}
+
+
+

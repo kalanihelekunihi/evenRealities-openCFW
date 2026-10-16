@@ -1,0 +1,25 @@
+{
+  "native_entry": "0x31fd0",
+  "native_bytes": 406,
+  "device_root": "0x20016b84",
+  "runtime_root": "0x20006890",
+  "literal_runtime_member_base": "0x2000689e",
+  "scale_bits": "0x3f86c8b4",
+  "scale_decimal_approximation": 1.053,
+  "float_contract": "Sign-extend input low16, reinterpret as uint32, native single-precision unsigned conversion/divide/truncating unsigned conversion; store low16. Do not convert as signed float.",
+  "conditional_float_flags": "No FP conversion on uncharged path; volatile input inside charged branch prevents compiler speculation across that condition. All four FPSCR rounding modes compared.",
+  "refresh_abi": {
+    "entry": "0x3dd0c",
+    "arguments": 5,
+    "proof": "Callee pushes40 bytes and reads only [sp,#40] as its fifth argument; caller explicitly writes one argument slot. Decompiler in_r3 sixth value is not semantic.",
+    "ghidra_file": "ghidra-refresh-abi.json",
+    "ghidra_sha256": "991076163058699b87663070ad167c7f5cc2796f32b4724716f0607f7b90434f"
+  },
+  "remaining_gates": [
+    "Remaining lower charger/algorithm/report provider bodies",
+    "State ownership/source initialization",
+    "Physical interrupt ordering, atomicity and concurrency",
+    "Actual full updater/status graph and canonical board admission"
+  ],
+  "source_memory_access": "Shared packed may_alias volatile16/32-bit SRAM views, with -munaligned-access scoped to battery runtime/statistics units"
+}

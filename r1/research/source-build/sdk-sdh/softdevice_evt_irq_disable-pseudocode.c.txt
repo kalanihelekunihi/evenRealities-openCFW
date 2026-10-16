@@ -1,0 +1,31 @@
+/* ================================================================
+ * entry: 0x00090814
+ * end:   0x0009084f
+ * size:  60 bytes
+ * name:  FUN_00090814
+ * ================================================================ */
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_00090814(void)
+
+{
+  int iVar1;
+
+  iVar1 = FUN_0003bc78(0x16);
+  if (iVar1 == 0) {
+    FUN_0004e5bc(0x2001);
+    return;
+  }
+  if (DAT_00090850[2] != 0) {
+    *DAT_00090850 = *DAT_00090850 & 0xffbfffff;
+    return;
+  }
+  _DAT_e000e180 = 0x400000;
+  DataSynchronizationBarrier(0xf);
+  InstructionSynchronizationBarrier(0xf);
+  return;
+}
+
+
+

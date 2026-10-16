@@ -1,0 +1,64 @@
+{
+  "executed_discharge_entry_counts": {
+    "native": 1783,
+    "source": 1783
+  },
+  "compiled_discharge_table_sha256": "fdd47849f270e0fcba16ef4464ffcba8d8307de7154d0ce48794bf8f2a0f87ac",
+  "executed_filter_entry_counts": {
+    "native": 2896,
+    "source": 2896
+  },
+  "comparisons": 2896,
+  "real_statistics": true,
+  "real_control": true,
+  "executed_control_entry_counts": {
+    "native": {
+      "r1_shared_power_client_acquire": 1825,
+      "r1_battery_charging_progress_reset": 2004,
+      "r1_shared_power_client_release": 1825,
+      "r1_battery_task_flags_set": 528
+    },
+    "source": {
+      "r1_shared_power_client_acquire": 1825,
+      "r1_battery_charging_progress_reset": 2004,
+      "r1_shared_power_client_release": 1825,
+      "r1_battery_task_flags_set": 528
+    }
+  },
+  "executed_statistics_entry_counts": {
+    "native": {
+      "r1_battery_charged_state_refresh": 2896,
+      "r1_battery_voltage_average": 2896,
+      "r1_battery_level_average": 2896
+    },
+    "source": {
+      "r1_battery_charged_state_refresh": 2896,
+      "r1_battery_voltage_average": 2896,
+      "r1_battery_level_average": 2896
+    }
+  },
+  "provider_reports": {
+    "native-battery-discharge/report.json": "977b04c6e16313a6c6a1197b9d7f27077d783fe022772a968e61287f8f09ac08",
+    "native-battery-filter/report.json": "68cc5389fc3ce6bf5331d17e085d80e60960b7e0dada447e28e30c9ccaa351f7",
+    "native-battery-statistics/report.json": "2ac72de6b804b7b8fd6376a2624add0f6d0453bcbfe7b4307e8b711a77a718a4",
+    "native-battery-control/report.json": "c2071eff46a7d7d2e89c743125ab026d03298959390231f3053ae2eff028ce6c"
+  },
+  "explicit_numeric_rounding_cases": 336,
+  "report_sha256": "da2e287793e8bff34991082d37ba73fca163d690a3d96f2837a1fe7a2ba008ee",
+  "object_sha256": "cec67d8bec2e6384c0783d8bf86c505df5ae666455045235fe35d3d19b3dd9d3",
+  "driver_sha256": "4c871824f572d00a95aa0219844d4929f23784cbd866f6b877cd30bc4d0ab73c",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_memory_sha256": "bdda5d7448bc7c0e49715b4c734613d8610e9e5d28dffad33068c0ebe73c052b",
+  "rea_sha256": "eaa572581924dbdfab512825a56411752204dcff30adde2ca9a1dc569eade3d8",
+  "native_entry": "0x31fd0",
+  "native_size": 406,
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Actual discharge policy, filter, refresh, averages and control execute; ADC registry/delay and remaining hardware/algorithm/reporting endpoints are fixtures; opaque read-word high halves are not compared in this graph, and direct filter verification covers them",
+    "Raw device/runtime roots are address bindings, not source-owned initialization",
+    "All four FPSCR rounding modes and final FPSCR are compared; physical FPU/concurrency not proven",
+    "Packed native-width SRAM views preserve unaligned values; physical interrupt ordering/atomicity/concurrency remain gates",
+    "Charged-state refresh consumes five semantic arguments; no decompiler scratch sixth argument"
+  ]
+}

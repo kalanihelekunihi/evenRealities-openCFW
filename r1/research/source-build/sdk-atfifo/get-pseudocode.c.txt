@@ -1,0 +1,23 @@
+/* ================================================================
+ * entry: 0x00077f92
+ * end:   0x00077fa7
+ * size:  22 bytes
+ * name:  FUN_00077f92
+ * ================================================================ */
+
+int FUN_00077f92(int *param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+
+  iVar1 = FUN_00027302();
+  iVar2 = 0;
+  if (iVar1 != 0) {
+    iVar2 = *param_1 + (uint)*(ushort *)(param_2 + 2);
+  }
+  return iVar2;
+}
+
+
+

@@ -1,0 +1,46 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "sdk_zip_sha256": "5bfe38e744c39fd7f30e10077ba12df306ef91f368894795d6a3e7a62dc68061",
+  "spans": [
+    {
+      "entry": "0x979dc",
+      "bytes": 172,
+      "ghidra_file": "ghidra-port-start.json",
+      "ghidra_sha256": "9e17c3d1c769bfaedd5bd3b94b9b236b966aeeeeee27d155a8c635052ba3c733",
+      "thumb_file": "thumb-port-start.txt",
+      "thumb_sha256": "cbffdc4a9f766a89700e4a07a794443c5c23faf7cfe473deabafae4c5a42c5e3"
+    },
+    {
+      "entry": "0x95da4",
+      "bytes": 64,
+      "ghidra_file": "ghidra-rtc-setup.json",
+      "ghidra_sha256": "9a26a888cc0fc835a330cea8d464a69cdfc029151e92b54e5738d2324286c226",
+      "thumb_file": "thumb-rtc-setup.txt",
+      "thumb_sha256": "da699d7c079cb9339aa5885c532bbc37c799747933cb852dadc978fc2fb44769"
+    }
+  ],
+  "source_configuration": {
+    "raw_max_syscall_priority": 2,
+    "kernel_priority": 15,
+    "rtc_prescaler": 31,
+    "rtc_irq": 17,
+    "cpuid": "0x410fc241"
+  },
+  "private_state": {
+    "ucMaxSysCallPriority": "0x20007810",
+    "uxCriticalNesting": "0x20007814",
+    "ulMaxPRIGROUPValue": "0x20007818"
+  },
+  "priority_probe": "Raw configured2 AND hardware byte readback; e0 fixture yields0 and priority group4. BASEPRI operations remain64.",
+  "rea_inventory": "r1/research/source-build/sdk-clock/rea-procedure-inventory.json",
+  "rea_inventory_sha256": "fbdbc0c467b87b6c991baa6e398adae6fa42e47812b981a59221a122c37974ce",
+  "rea_registered_rows": [],
+  "open_gates": [
+    "First task provider at0x27238 and native context transfer",
+    "Timer task runtime at0x85510",
+    "RTC IRQ and physical clock/timer progression",
+    "Complete image source and instruction identity"
+  ]
+}

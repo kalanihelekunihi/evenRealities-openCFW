@@ -1,0 +1,16 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "4831d90ef0c444e1e4dfed7daa47df7be38981bdb528a117cb0f80ef15eb7c8e",
+  "native_evidence_sha256": "c374101ae04d21f321d9fa2607254ce28ca1f4c1ca247b77e677736c8fa60578",
+  "selected_object_sha256": "ab2aad56c4a1fa571808bb0aa486e4ea725357178b8b53aec91ac8607a491bb3",
+  "comparisons": 858,
+  "lf_status_reads_per_implementation": 642,
+  "source_owned_cold_zero_bytes": 8,
+  "scope": "All four nrfx clock APIs execute pinned HAL/NVIC helpers without code/SVC fixtures; exact register read/write traces, control state, ABI, start/stop ordering and bounded LFSTAT transitions",
+  "limitations": [
+    "MMIO models register values and bounded LFSTAT transitions; this is not physical hardware timing or analog oscillator proof.",
+    "Canonical bool states only; nonterminating stop loops and interrupt races remain unproven.",
+    "O0 preserves native eight-byte state layout; original compiler instructions and full-image linking/byte equality remain open."
+  ],
+  "instruction_identity_proven": false
+}

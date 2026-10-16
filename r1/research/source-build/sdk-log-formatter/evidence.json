@@ -1,0 +1,43 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "functions": [
+    {
+      "symbol": "nrf_log_std_entry_process",
+      "entry": "0x79b48",
+      "body_bytes": 174,
+      "ghidra_file": "ghidra-nrf_log_std_entry_process.json",
+      "ghidra_sha256": "d7074c33516d77b486b54380af4abd0e825d365273eb84262924d3f2dce1868e",
+      "pseudocode_file": "pseudocode-nrf_log_std_entry_process.c.txt",
+      "pseudocode_sha256": "013a0bc71f30f22c7c3a44ef6d35cf84a4e669bec9e75fe47fdb29cef2c5181a"
+    },
+    {
+      "symbol": "nrf_log_hexdump_entry_process",
+      "entry": "0x79a44",
+      "body_bytes": 150,
+      "ghidra_file": "ghidra-nrf_log_hexdump_entry_process.json",
+      "ghidra_sha256": "71c8878324c6cade75bd08ee1425d64af40489aed55e79ac24d9ec35a9c2955a",
+      "pseudocode_file": "pseudocode-nrf_log_hexdump_entry_process.c.txt",
+      "pseudocode_sha256": "118211191da00b9a4fb105c9cfcde5651cef07de7428a25f8d9cf7123a435311"
+    },
+    {
+      "symbol": "postfix_process",
+      "entry": "0x813e0",
+      "body_bytes": 48,
+      "ghidra_file": "ghidra-postfix_process.json",
+      "ghidra_sha256": "c22dc7a26bf57287816d51c16dd8ca500c75f2370a976e6a8b82820908819fad",
+      "pseudocode_file": "pseudocode-postfix_process.c.txt",
+      "pseudocode_sha256": "2f9de16d3d046c052fd4ad0630cace1217dd1f00b532826e383a557548b8196f"
+    },
+    {
+      "symbol": "r1_log_prefix_process",
+      "entry": "0x8185c",
+      "body_bytes": 110,
+      "ghidra_file": "ghidra-r1_log_prefix_process.json",
+      "ghidra_sha256": "df0b1b34048e6649d3ae4735651e8e782d45cb1c103fc10d0bec583a23c9b313",
+      "pseudocode_file": "pseudocode-r1_log_prefix_process.c.txt",
+      "pseudocode_sha256": "c4e9160bd4659151896ac053d702e85b2c26d6bff08d535f15c101461cd57241"
+    }
+  ],
+  "scope": "Original SDK std/hexdump/postfix bodies, explicitly replaced native prefix, ASCII printability after native <=0x7e clamp; calendar/color/printf remain gates."
+}

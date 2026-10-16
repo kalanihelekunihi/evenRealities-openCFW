@@ -1,0 +1,52 @@
+{
+  "comparisons": 4394,
+  "counts": {
+    "r1_native_service_hardware_initialize": 2197,
+    "r1_native_storage_hardware_initialize": 2197
+  },
+  "report_sha256": "37c2787b83f43c25dbae860501e986076efe209c31f6c8dd8b556f8e3fc8811a",
+  "object_sha256": "9fe4c40b7f0517379e129ebb6ee21ad483ef489506750d73fb0f44074c3c5d93",
+  "driver_sha256": "dc433b84c84d045cffe01e25e9a5de10372129c70255653effd8b1df31e4da94",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-r1_native_service_hardware_initialize.json": "8ffb1b768bde3d1d61b60bfc9f137085d02e2224328f17500c1935763c1745c9",
+    "ghidra-r1_native_storage_hardware_initialize.json": "40c52b768cb4ed0c93e56e409d5aad902f932b598572e2b469a955c9f09f68c2"
+  },
+  "rea_evidence": {
+    "rea-service.json": "39baa38dc99908efac66072ee4c1db5c52c7ec48cf5c64a7187cfdf2bbb80240",
+    "rea-storage.json": "e59792712825e167e3766ed64a26e83000e67f774219cf3c3e77283349faa9a6"
+  },
+  "entries": {
+    "r1_native_service_hardware_initialize": 285828,
+    "r1_native_storage_hardware_initialize": 285952
+  },
+  "source_descriptor_data": {
+    "service_ring": {
+      "address": 285892,
+      "bytes": 27,
+      "sha256": "c55c90304bf864d1463afe9180ff98a6ee3d6b6ee6b43e5b43dc4871fb8263ff"
+    },
+    "service_sdk": {
+      "address": 285928,
+      "bytes": 21,
+      "sha256": "c30da9cf17780be864c3cd26a07dcd72cc8883b60acaf1670dae70d3541af733"
+    },
+    "storage_ring": {
+      "address": 286016,
+      "bytes": 27,
+      "sha256": "c55c90304bf864d1463afe9180ff98a6ee3d6b6ee6b43e5b43dc4871fb8263ff"
+    },
+    "storage_sdk": {
+      "address": 286052,
+      "bytes": 21,
+      "sha256": "c30da9cf17780be864c3cd26a07dcd72cc8883b60acaf1670dae70d3541af733"
+    }
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Lower logging providers are controlled fixtures",
+    "Void ABI; scratch return register not compared",
+    "Names are existing caller bindings; native wrappers emit logs only, not hardware initialization"
+  ]
+}

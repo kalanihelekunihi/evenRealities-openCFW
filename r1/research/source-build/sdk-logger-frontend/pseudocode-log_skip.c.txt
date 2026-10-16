@@ -1,0 +1,62 @@
+/* ================================================================
+ * entry: 0x00075ce4
+ * end:   0x00075d79
+ * size:  150 bytes
+ * name:  FUN_00075ce4
+ * ================================================================ */
+
+undefined2 FUN_00075ce4(uint param_1,uint param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  uint uVar6;
+  undefined2 uVar7;
+  uint local_28;
+  uint local_24;
+  undefined4 uStack_20;
+  undefined2 uStack_1e;
+  undefined4 uStack_1c;
+
+  local_28 = param_1;
+  local_24 = param_2;
+  uStack_20 = param_3;
+  uStack_1c = param_4;
+  FUN_0007806e(DAT_00075d7c);
+  iVar2 = DAT_00075d7c + -4;
+  FUN_0007806e();
+  iVar1 = DAT_00075d80;
+  local_28 = *(uint *)(DAT_00075d80 + 8);
+  uVar6 = *DAT_00075d84;
+  do {
+    iVar3 = FUN_00072848(iVar1 + (local_28 & uVar6) * 4 + 0xc,&local_28);
+  } while (iVar3 != 0);
+  uVar4 = 0;
+  do {
+    uVar5 = local_28 & uVar6;
+    local_28 = local_28 + 1;
+    (&local_24)[uVar4] = *(uint *)(iVar1 + uVar5 * 4 + 0xc);
+    uVar4 = uVar4 + 1;
+  } while (uVar4 < 2);
+  if ((local_24 & 3) == 1) {
+    uVar6 = (local_24 & 0x3ff) >> 6;
+  }
+  else {
+    uVar7 = 0;
+    if ((local_24 & 3) != 2) goto LAB_00075d66;
+    uVar6 = (local_24 >> 0x16) + 3 >> 2;
+  }
+  local_28 = local_28 + uVar6;
+  uVar7 = uStack_1e;
+LAB_00075d66:
+  iVar2 = FUN_00078068(iVar2);
+  if (iVar2 != 0) {
+    *(uint *)(iVar1 + 8) = local_28;
+  }
+  return uVar7;
+}
+
+

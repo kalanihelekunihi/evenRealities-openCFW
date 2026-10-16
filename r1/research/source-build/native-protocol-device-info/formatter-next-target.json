@@ -1,0 +1,18 @@
+{
+  "native_entry": "0x38080",
+  "locked_runtime_contract": "snprintf",
+  "upstream_candidate": "Newlib",
+  "toolchain_version": "3.3.0",
+  "version_header": "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h",
+  "version_header_sha256": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+  "toolchain_readme": "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/share/doc/gcc-arm-none-eabi/readme.txt",
+  "toolchain_readme_sha256": "1f54552c90fe5eac8fd9a28294602b927047ca2bff5c168629a579521ed1ded7",
+  "official_source": "https://sourceware.org/git/newlib-cygwin.git",
+  "official_source_availability": "https://sourceware.org/newlib/download.html",
+  "status": "Candidate source dependency only; not vendored/built or proven native-equivalent",
+  "gates": [
+    "Fixed %s caller verification does not close generic format semantics",
+    "Pin source revision/license and compile provider/dependency bodies before source admission",
+    "Instruction identity with original Arm runtime remains unproven"
+  ]
+}

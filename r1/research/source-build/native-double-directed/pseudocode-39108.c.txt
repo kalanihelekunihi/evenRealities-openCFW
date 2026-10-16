@@ -1,0 +1,78 @@
+/* ================================================================
+ * entry: 0x00039108
+ * end:   0x00039203
+ * size:  252 bytes
+ * name:  FUN_00039108
+ * ================================================================ */
+
+uint FUN_00039108(void)
+
+{
+  uint uVar1;
+  undefined4 uVar2;
+  uint uVar4;
+  char cVar5;
+  undefined4 uVar6;
+  ulonglong in_d0;
+  undefined4 uVar7;
+  undefined8 uVar8;
+  uint local_20;
+  uint uStack_1c;
+  undefined4 uVar3;
+
+  local_20 = (uint)in_d0;
+  uStack_1c = (uint)(in_d0 >> 0x20);
+  uVar1 = (uStack_1c & 0x7fffffff) >> 0x14;
+  uVar4 = uVar1 - 0x3ff;
+  uVar6 = (undefined4)DAT_00039208;
+  uVar2 = (undefined4)((ulonglong)DAT_00039208 >> 0x20);
+  uVar7 = (undefined4)DAT_00039210;
+  uVar3 = (undefined4)((ulonglong)DAT_00039210 >> 0x20);
+  if (0x13 < (int)uVar4) {
+    cVar5 = 0x32 < uVar4;
+    if (0x33 < (int)uVar4) {
+      return local_20;
+    }
+    uVar1 = 0xffffffff >> (uVar1 - 0x413 & 0xff);
+    if ((local_20 & uVar1) == 0) {
+      return local_20;
+    }
+    uVar8 = FUN_00027c44(local_20,uStack_1c,uVar6,uVar2);
+    FUN_00027f3c((int)uVar8,(int)((ulonglong)uVar8 >> 0x20),uVar7,uVar3);
+    if (cVar5 != '\0') {
+      return local_20;
+    }
+    if (((longlong)in_d0 < 0) && (uVar4 != 0x14)) {
+      local_20 = (1 << (0x34 - uVar4 & 0xff)) + local_20;
+    }
+    return local_20 & ~uVar1;
+  }
+  cVar5 = '\x01';
+  if ((int)uVar4 < 0) {
+    uVar8 = FUN_00027afc(local_20,uStack_1c,uVar6,uVar2);
+    FUN_00027f3c((int)uVar8,(int)((ulonglong)uVar8 >> 0x20),uVar7,uVar3);
+    if (cVar5 != '\0') {
+      return local_20;
+    }
+    if (-1 < (longlong)in_d0) {
+      return 0;
+    }
+    if ((in_d0 & 0x7fffffff00000000) == 0 && local_20 == 0) {
+      return local_20;
+    }
+  }
+  else {
+    if ((uStack_1c & DAT_0003921c >> (uVar4 & 0xff)) == 0 && local_20 == 0) {
+      return local_20;
+    }
+    uVar8 = FUN_00027afc(local_20,uStack_1c,uVar6,uVar2);
+    FUN_00027f3c((int)uVar8,(int)((ulonglong)uVar8 >> 0x20),uVar7,uVar3);
+    if (cVar5 != '\0') {
+      return local_20;
+    }
+  }
+  return 0;
+}
+
+
+

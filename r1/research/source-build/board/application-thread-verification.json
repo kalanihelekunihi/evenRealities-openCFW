@@ -1,0 +1,19 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "board_report_sha256": "b63330dac05e224ff65072bc4cb9c54d8a0a37a8d5d601e9eb99471f91d8f3dd",
+  "verification_driver_sha256": "f071eb9c38402535a5f04ddde0cca7fffbf7f4298de94dfa28df85eab2a12e9c",
+  "creation_driver_sha256": "71f312456445e632745418d7c9e00901c3cd88ac293f078940efb013bd2764c9",
+  "thread_report_sha256": "ee19ffc0a30c3d1bee77c8b7f9da13e17c578605e57508a6ef2e93d5f9ce6d8d",
+  "configuration_sha256": "4778e4c307ea940b862523ec20b4b95e2dfd0473b706f1be335811ff0b09e5f9",
+  "comparisons": 2400,
+  "workflows": 480,
+  "thread_creators": 5,
+  "creation_orders": 120,
+  "provider_interception": false,
+  "tcb_bytes_compared_per_snapshot": 560,
+  "stack_bytes_compared_per_snapshot": 27648,
+  "scope": "Actual five application creators/CMSIS wrapper/native static factories/ready lists/critical/port, all120 orders and mask/dirty-memory variants; handles, TCBs, full stacks, counters and prekernel highest-priority selection",
+  "limitations": [
+    "Task code is not executed. Only authenticated initial-frame task-PC and return-LR fields are normalized. This verifies five creation callbacks, not firmware boot order, complete task set, scheduler/context switching, task cleanup or hardware execution."
+  ]
+}

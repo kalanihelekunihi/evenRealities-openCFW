@@ -1,0 +1,778 @@
+{
+  "executed_device_info_counts": {
+    "native": {
+      "entry": 9,
+      "clear": 9,
+      "format": 18,
+      "operation": 9
+    },
+    "source": {
+      "entry": 9,
+      "clear": 9,
+      "format": 18,
+      "operation": 9
+    }
+  },
+  "executed_actual_clear_counts": {
+    "native": 2905,
+    "source": 2905
+  },
+  "source_owned_info_metadata": {
+    "firmware": {
+      "address": 540052,
+      "bytes": 11,
+      "sha256": "8b3c5b7496fea506235a55035d316677887be68ba1cfb96d842b9e165a8f9269"
+    },
+    "format": {
+      "address": 540064,
+      "bytes": 3,
+      "sha256": "2f3a3f9b55f5df846abf81c7d13ff74998bdda8664df664173220675150020ff"
+    },
+    "hardware": {
+      "address": 540068,
+      "bytes": 11,
+      "sha256": "061148e7ab9bd5bee85c62bf02929e8835f7da206379841bf65b9418325b8afa"
+    }
+  },
+  "executed_device_status_counts": {
+    "native": {
+      "entry": 9,
+      "byte_getter": 9,
+      "active": 9,
+      "full": 9,
+      "operation": 9
+    },
+    "source": {
+      "entry": 9,
+      "byte_getter": 9,
+      "active": 9,
+      "full": 9,
+      "operation": 9
+    }
+  },
+  "source_owned_status_default": {
+    "address": 632004,
+    "bytes": 8,
+    "sha256": "dbbe5d6e52fac8a7699e9331ff4962379c095603956f40334cf15c86fe8e0b10"
+  },
+  "reused_charge_byte_getter": "native-status-record/report.json; reachable source-compiled section retained with relocatable GC link",
+  "executed_event_leaf_calls": {
+    "native": {
+      "special": 181,
+      "activity": 3
+    },
+    "source": {
+      "special": 181,
+      "activity": 3
+    }
+  },
+  "command_targets_sha256": "d353853715aa71ffcaaf91884bb6554b283299cf7cae3af81f7e5023170a218e",
+  "executed_lookup_counts": {
+    "native": 528,
+    "source": 528
+  },
+  "executed_leaf_counts": {
+    "native": {
+      "r1_device_status_handler": 9,
+      "r1_heart_rate_daily_handler": 12,
+      "r1_protocol_command_00084cc0": 226,
+      "r1_device_info_handler": 9,
+      "r1_heart_rate_point_handler": 10,
+      "r1_protocol_command_00084b24": 9,
+      "r1_heart_rate_measurement_plan": 11,
+      "r1_user_profile_handler": 7,
+      "r1_spo2_daily_handler": 12,
+      "r1_protocol_command_000846dc": 8,
+      "r1_spo2_point_handler": 10,
+      "r1_touch_switch_handler_plan_decode": 7,
+      "r1_spo2_measurement_plan": 11,
+      "r1_pair_role_handler": 8,
+      "r1_hrv_daily_handler": 11,
+      "r1_protocol_command_00083e2c": 6,
+      "r1_hrv_point_handler": 10,
+      "r1_connection_control_adv_start_handler_plan_decode": 8,
+      "r1_health_history_noop_handler": 12,
+      "r1_protocol_command_00083e50": 7,
+      "r1_activity_daily_handler": 11,
+      "r1_protocol_command_000844ec": 8,
+      "r1_activity_refresh_handler": 10,
+      "r1_health_settings_plan_command": 7,
+      "r1_sleep_daily_handler": 12,
+      "r1_system_settings_plan_command": 7,
+      "r1_sleep_detail_plan": 10,
+      "r1_device_serial_handler": 7,
+      "r1_health_report_setting_plan": 9,
+      "r1_nv_recovery_command_handler_plan_decode": 7,
+      "r1_protocol_command_000843c8": 8,
+      "r1_packet_ack_handler": 7,
+      "r1_delayed_event_restart": 8,
+      "r1_protocol_command_000844b0": 6,
+      "r1_protocol_command_00084860": 8
+    },
+    "source": {
+      "r1_device_status_handler": 9,
+      "r1_heart_rate_daily_handler": 12,
+      "r1_protocol_command_00084cc0": 226,
+      "r1_device_info_handler": 9,
+      "r1_heart_rate_point_handler": 10,
+      "r1_protocol_command_00084b24": 9,
+      "r1_heart_rate_measurement_plan": 11,
+      "r1_user_profile_handler": 7,
+      "r1_spo2_daily_handler": 12,
+      "r1_protocol_command_000846dc": 8,
+      "r1_spo2_point_handler": 10,
+      "r1_touch_switch_handler_plan_decode": 7,
+      "r1_spo2_measurement_plan": 11,
+      "r1_pair_role_handler": 8,
+      "r1_hrv_daily_handler": 11,
+      "r1_protocol_command_00083e2c": 6,
+      "r1_hrv_point_handler": 10,
+      "r1_connection_control_adv_start_handler_plan_decode": 8,
+      "r1_health_history_noop_handler": 12,
+      "r1_protocol_command_00083e50": 7,
+      "r1_activity_daily_handler": 11,
+      "r1_protocol_command_000844ec": 8,
+      "r1_activity_refresh_handler": 10,
+      "r1_health_settings_plan_command": 7,
+      "r1_sleep_daily_handler": 12,
+      "r1_system_settings_plan_command": 7,
+      "r1_sleep_detail_plan": 10,
+      "r1_device_serial_handler": 7,
+      "r1_health_report_setting_plan": 9,
+      "r1_nv_recovery_command_handler_plan_decode": 7,
+      "r1_protocol_command_000843c8": 8,
+      "r1_packet_ack_handler": 7,
+      "r1_delayed_event_restart": 8,
+      "r1_protocol_command_000844b0": 6,
+      "r1_protocol_command_00084860": 8
+    }
+  },
+  "compiled_command_sections": {
+    "health": {
+      "address": 631892,
+      "bytes": 112,
+      "source_data_sha256": "bdcaf3741981709e262e4c3fe7102d464b6b4ba43a8a4c7e6d580e2ae7886579",
+      "pointer_normalized": true
+    },
+    "system": {
+      "address": 632012,
+      "bytes": 160,
+      "source_data_sha256": "cb39821d04eabe6a96b1598b55a2f77c4f4d7e3ccb5ba59d3d5ae130211f5d19",
+      "pointer_normalized": true
+    },
+    "special": {
+      "address": 632200,
+      "bytes": 8,
+      "source_data_sha256": "7f9b42dcd746f16cd0e85649129548a135effde559a4f76a98315074d3c8cc80",
+      "pointer_normalized": true
+    }
+  },
+  "executed_ingress_counts": {
+    "native": {
+      "entry": 1804,
+      "system": 151,
+      "health": 151,
+      "special": 226
+    },
+    "source": {
+      "entry": 1804,
+      "system": 151,
+      "health": 151,
+      "special": 226
+    }
+  },
+  "compiled_ingress_sections": {
+    "ring": {
+      "address": 537116,
+      "bytes": 58,
+      "sha256": "537d3e7c37791cd3c76c5c200e0c801f070af1287cd03d79cd2d2f9a094b35f6"
+    },
+    "sdk": {
+      "address": 537184,
+      "bytes": 52,
+      "sha256": "c30506fc34054aca439bacf44d9e3da00ccff3e10ce2f5a1f5f0d59f110378a6"
+    }
+  },
+  "source_owned_module_table": {
+    "address": 536898448,
+    "bytes": 16,
+    "symbolic_targets": {
+      "1": "r1_eus_system_dispatch_plan_build",
+      "2": "r1_health_registration_dispatcher"
+    },
+    "pointer_normalized": true
+  },
+  "executed_receive_counts": {
+    "native": {
+      "entry": 2896,
+      "callback": 1804,
+      "invalid": 911,
+      "missing": 181
+    },
+    "source": {
+      "entry": 2896,
+      "callback": 1804,
+      "invalid": 911,
+      "missing": 181
+    }
+  },
+  "compiled_receive_sections": {
+    "invalid_ring": {
+      "address": 534340,
+      "bytes": 41,
+      "sha256": "314a66c4a21def607d9f16f459ea8ede9f7aadffd07f275839eb46ef39ea619a"
+    },
+    "invalid_sdk": {
+      "address": 534384,
+      "bytes": 35,
+      "sha256": "edf69038dd488ece09e084c4c490aea9fac8ba6679932712aac31ad860fa9c49"
+    },
+    "missing_ring": {
+      "address": 534420,
+      "bytes": 51,
+      "sha256": "de979537f0bacd8fd746cce38dcef9a362763af8644ab4869b83c8fdda15f718"
+    },
+    "missing_sdk": {
+      "address": 534472,
+      "bytes": 45,
+      "sha256": "033b17c8d93423c376f23affa72712757a06c3eb4a72aac53dc005802b691630"
+    }
+  },
+  "executed_port_counts": {
+    "native": {
+      "init": 2896,
+      "receive_register": 2896
+    },
+    "source": {
+      "init": 2896,
+      "receive_register": 2896
+    }
+  },
+  "compiled_port_sections": {
+    "init_ring": {
+      "address": 536840,
+      "bytes": 48,
+      "sha256": "a35faee174e62285d23932c0e1c134cb69be8b54777dd850119ec86b73a7a938"
+    },
+    "init_sdk": {
+      "address": 536896,
+      "bytes": 42,
+      "sha256": "72e6d6868accd6d1066c507d31e842186087ef438c0a8c9b19bfada8aedacdd3"
+    },
+    "null_ring": {
+      "address": 537436,
+      "bytes": 57,
+      "sha256": "4ff0e6129f00630506fe9ac5e11f4156ad440b8c49eacfb95783f2eb46f0a121"
+    },
+    "null_sdk": {
+      "address": 537496,
+      "bytes": 51,
+      "sha256": "dfa9e33801c771f353014e51fdbaec51a057e328fedd8a621c1385515ec1538d"
+    },
+    "registered_ring": {
+      "address": 537548,
+      "bytes": 64,
+      "sha256": "6a12e185cd0ca26d47fc47fae541966e486516b94a5b4fa29fd4be0c4679844e"
+    },
+    "registered_sdk": {
+      "address": 537612,
+      "bytes": 58,
+      "sha256": "dd1cf711145fe68ebb847686ea8a4a2e1112dc9278486000a956893d1739bc92"
+    }
+  },
+  "compiled_fragment_sections": {
+    "large_ring": {
+      "address": 206116,
+      "bytes": 36,
+      "sha256": "f731931c5cb734dfad77b3e2a52a9e6c619a2ed0fb0a8d0abcbe4a3eb212d6c7"
+    },
+    "large_sdk": {
+      "address": 206152,
+      "bytes": 27,
+      "sha256": "25dd49cec6ab2026da452eb3a29dbc3d1c809c7ed5ad32bf2723e41283b868ec"
+    },
+    "remaining_ring": {
+      "address": 206184,
+      "bytes": 26,
+      "sha256": "07c9c208deb8f4c2da9e08381f6af18e905ce1521d68d7026dadaef137108dc5"
+    },
+    "remaining_sdk": {
+      "address": 206212,
+      "bytes": 17,
+      "sha256": "7e6bca57ee9b9e4b02fc31dccfda4a10e27f75eba7269a1cd5d49da429c527ea"
+    }
+  },
+  "executed_fragment_tx_entries": {
+    "native": 655,
+    "source": 655
+  },
+  "source_owned_fragment_callback": {
+    "address": 536897888,
+    "bytes": 4,
+    "native_target": "0x3407c",
+    "source_target": "r1_ble_tx_queue_dispatch_type1",
+    "pointer_normalized": true
+  },
+  "executed_fragment_counts": {
+    "native": {
+      "entry": 655,
+      "crc32": 655,
+      "memmove": 655
+    },
+    "source": {
+      "entry": 655,
+      "crc32": 655,
+      "memmove": 655
+    }
+  },
+  "executed_registration_counts": {
+    "native": 2896,
+    "source": 2896
+  },
+  "executed_send_hook_counts": {
+    "native": 655,
+    "source": 655
+  },
+  "executed_encoder_counts": {
+    "native": {
+      "entry": 655,
+      "memmove": 655,
+      "crc": 655
+    },
+    "source": {
+      "entry": 655,
+      "memmove": 655,
+      "crc": 655
+    }
+  },
+  "source_owned_encoder_sections": {
+    "protocol_receive_hook": {
+      "address": 536898596,
+      "bytes": 4,
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    "protocol_send_hook": {
+      "address": 536898592,
+      "bytes": 4,
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    "protocol_sequence": {
+      "address": 536898440,
+      "bytes": 2,
+      "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    "protocol_versions": {
+      "address": 536898464,
+      "bytes": 4,
+      "sha256": "e0251633f50147d0df5da0337d8ab2e2c1fd40a350d6750c63de53fefc8dff68"
+    }
+  },
+  "executed_response_counts": {
+    "native": {
+      "entry": 820,
+      "gate_a": 820,
+      "gate_b": 275,
+      "malloc": 726,
+      "allocated": 655,
+      "encode": 655,
+      "send": 655,
+      "free": 655
+    },
+    "source": {
+      "entry": 820,
+      "gate_a": 820,
+      "gate_b": 275,
+      "malloc": 726,
+      "allocated": 655,
+      "encode": 655,
+      "send": 655,
+      "free": 655
+    }
+  },
+  "response_status_counts": {
+    "native": {
+      "0": 655,
+      "3": 71,
+      "5": 94
+    },
+    "source": {
+      "0": 655,
+      "3": 71,
+      "5": 94
+    }
+  },
+  "compiled_response_sections": {
+    "alloc_ring": {
+      "address": 535080,
+      "bytes": 43,
+      "sha256": "b6761d74321f7ed936340c42cbbcf9c052b3041bea8f11d31a13be8e7d495813"
+    },
+    "alloc_sdk": {
+      "address": 535124,
+      "bytes": 37,
+      "sha256": "d061e8e46da07c586f178f17e712bcf8656d75c477531a028bc047ecc1e7f8e9"
+    },
+    "tx_ring": {
+      "address": 535164,
+      "bytes": 58,
+      "sha256": "4f3a8966c03477624901ad9f24b6f17b7ea50b794961f2607a869f6829e8ee48"
+    },
+    "tx_sdk": {
+      "address": 535224,
+      "bytes": 52,
+      "sha256": "7818a98efd5a5c79f00b89a1666a5b957f36f4c05f0c19baabe6806fadb79bc6"
+    },
+    "send_ring": {
+      "address": 535276,
+      "bytes": 53,
+      "sha256": "9f0aecd3b305d1a6d8558878ee2532bfb078c52be78c8c2f4dccfb02a024dd99"
+    },
+    "send_sdk": {
+      "address": 535332,
+      "bytes": 47,
+      "sha256": "6fa9e7bfa5d50c4bd5e60b7ccd2e26b8a09aea8271dcd6b59e7643d357b0ea91"
+    }
+  },
+  "executed_operation_header_counts": {
+    "native": {
+      "operation": 1089,
+      "header": 1089,
+      "phone_getter": 1613,
+      "lower": 820,
+      "lower_zero": 655,
+      "lower_nonzero": 165
+    },
+    "source": {
+      "operation": 1089,
+      "header": 1089,
+      "phone_getter": 1613,
+      "lower": 820,
+      "lower_zero": 655,
+      "lower_nonzero": 165
+    }
+  },
+  "executed_protocol_entry_counts": {
+    "native": 1071,
+    "source": 1071
+  },
+  "protocol_dispatch_counts": {
+    "native": 1089,
+    "source": 1089
+  },
+  "compiled_protocol_sections": {
+    "ring": {
+      "address": 786996,
+      "bytes": 66,
+      "sha256": "b27f964cade771d59a11a0dede30df9ca8d7bc56be66c275a1709aa9bbc7575c"
+    },
+    "sdk": {
+      "address": 537812,
+      "bytes": 60,
+      "sha256": "8f54c6cb930a9b853abdff9b9666d027a7c621195be481d4dc32555b4ab5c4a0"
+    }
+  },
+  "tx_evidence": {
+    "rea-frame-tx-34064.json": "846b1a3866e953ddc54e6ce5074dd7a696b94fbad1a8caeec79132f1512ae3d4",
+    "ghidra-frame-tx-34064.json": "8d229c792bb2d8e880ec7036524dfeb71692033c05b5c42ce8c6c6081ee4c687",
+    "rea-frame-tx-3e274.json": "f5b5b9be05f6d4ffa3c3b9eee59fbfa80943885e82b1141dd8ecd7e34312ecde",
+    "ghidra-frame-tx-3e274.json": "39dbc4305750ba8f74fb8938ac52cb2cd2c46988f7910f2f881df3261b7782c4"
+  },
+  "tx_cold_poison": 165,
+  "executed_tx_producer_counts": {
+    "native": {
+      "dispatch": 2583,
+      "malloc": 1551,
+      "put": 1328,
+      "accepted": 337,
+      "free": 991,
+      "allocation_failed": 223,
+      "queue_missing": 516,
+      "connection_rejected": 516
+    },
+    "source": {
+      "dispatch": 2583,
+      "malloc": 1551,
+      "put": 1328,
+      "accepted": 337,
+      "free": 991,
+      "allocation_failed": 223,
+      "queue_missing": 516,
+      "connection_rejected": 516
+    }
+  },
+  "source_owned_tx_sections": {
+    "tx_channel1": {
+      "address": 536896956,
+      "bytes": 16,
+      "sha256": "6b9e16ba8908ff916375ea9f34b024c1995f392090a19c9cf58a1b09d2eb905a"
+    },
+    "tx_shared": {
+      "address": 536896992,
+      "bytes": 16,
+      "sha256": "30e1e91b04a137506bf836bd3fdea254b1cda15dacc1736d67a46cfa0a5ffa46"
+    },
+    "connection6": {
+      "address": 536896696,
+      "bytes": 2,
+      "sha256": "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+    },
+    "connection8": {
+      "address": 536896698,
+      "bytes": 2,
+      "sha256": "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+    },
+    "connection10": {
+      "address": 536896700,
+      "bytes": 2,
+      "sha256": "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+    }
+  },
+  "executed_frame_entry_counts": {
+    "native": 2893,
+    "source": 2893
+  },
+  "frame_provider_counts": {
+    "native": {
+      "reads": 6364,
+      "dispatches": 1928,
+      "skipped": 965
+    },
+    "source": {
+      "reads": 6364,
+      "dispatches": 1928,
+      "skipped": 965
+    }
+  },
+  "executed_voltage_entry_counts": {
+    "native": 920,
+    "source": 920
+  },
+  "service_prefix_nops": {
+    "native": 2896,
+    "source": 2896
+  },
+  "native_service_entry": "0x31fcc",
+  "service_ownership_span_bytes": 412,
+  "executed_device_field_counts": {
+    "native": {
+      "setter": 920,
+      "read": 920,
+      "write": 920
+    },
+    "source": {
+      "setter": 920,
+      "read": 920,
+      "write": 920
+    }
+  },
+  "native_kv_consumer_evidence_sha256": "3bb58571e28a2fb5bc5864c548b4bdc2174d1323a3869138fb9a13d25b791c29",
+  "executed_low_entry_counts": {
+    "native": 2896,
+    "source": 2896
+  },
+  "low_downstream_counts": {
+    "native": {
+      "record": 920,
+      "event": 5
+    },
+    "source": {
+      "record": 920,
+      "event": 5
+    }
+  },
+  "record_high_half_observations": {
+    "native": {
+      "count": 920,
+      "distinct": [
+        0,
+        43707,
+        65535
+      ],
+      "sha256": "1b36d17db24eab8a24309f4aa3133488c225515bf06747d09355bdc1060d5ddb"
+    },
+    "source": {
+      "count": 920,
+      "distinct": [
+        0,
+        43707,
+        65535
+      ],
+      "sha256": "1b36d17db24eab8a24309f4aa3133488c225515bf06747d09355bdc1060d5ddb"
+    }
+  },
+  "compiled_low_sections": {
+    "ring": {
+      "address": 252224,
+      "bytes": 55,
+      "sha256": "708e9ed21363cdd014bc739bbdad7eaa86eeba5c99a0ae17d2e39237e844b20e"
+    },
+    "sdk": {
+      "address": 252288,
+      "bytes": 49,
+      "sha256": "dc061aaca5eac6d428c1475cb4ccb751c7f115d99d71139c83396d7b97b1d224"
+    }
+  },
+  "executed_diagnostic_entry_counts": {
+    "native": 2896,
+    "source": 2896
+  },
+  "compiled_diagnostic_sections": {
+    "period_ring": {
+      "address": 252624,
+      "bytes": 49,
+      "sha256": "dc582f6297719ad7cd39ef1480f32c7fde025a1d022d6bd72cfdd7971eaf8c19"
+    },
+    "period_sdk": {
+      "address": 252676,
+      "bytes": 43,
+      "sha256": "19e7e0ff10a4838eaf204f9a40ec053c160015071f2b26554f77a363fea59bb6"
+    },
+    "offset_ring": {
+      "address": 252720,
+      "bytes": 30,
+      "sha256": "aa1dbe551eeb3fb4d9fab1eeb0f800ff40b60098b74b494bed381c625649ff00"
+    },
+    "offset_sdk": {
+      "address": 252752,
+      "bytes": 24,
+      "sha256": "ab42d7ef7a674e6877338c82eb4f7e782dd9e4f563b3fd8b13191b76be789ba0"
+    },
+    "charge_ring": {
+      "address": 786620,
+      "bytes": 73,
+      "sha256": "44be5bce05f2347f52dcd5fd812f735e6bd89250a830758afb60139cc2d825b3"
+    },
+    "charge_sdk": {
+      "address": 786696,
+      "bytes": 67,
+      "sha256": "e60a6f8bef93c3d1d8da7b4efb18ca944a5c8b5e0df4e2006f919559307209ad"
+    }
+  },
+  "compiled_initial_charge_table_sha256": "fa7c8e78ea948cada194d4c8b4a770390ba98de001beaac5f63a67ad9371fa19",
+  "executed_initial_curve_entry_counts": {
+    "native": 312,
+    "source": 312
+  },
+  "executed_recovery_entry_counts": {
+    "native": 2896,
+    "source": 2896
+  },
+  "recovery_initial_curve_calls": {
+    "native": 312,
+    "source": 312
+  },
+  "executed_cadence_entry_counts": {
+    "native": 1113,
+    "source": 1113
+  },
+  "executed_configuration_entry_counts": {
+    "native": {
+      "r1_batcfg_word1_signed_get": 2896,
+      "r1_kv_class_read": 6806,
+      "r1_batcfg_byte0_get": 2990
+    },
+    "source": {
+      "r1_batcfg_word1_signed_get": 2896,
+      "r1_kv_class_read": 6806,
+      "r1_batcfg_byte0_get": 2990
+    }
+  },
+  "executed_discharge_entry_counts": {
+    "native": 1783,
+    "source": 1783
+  },
+  "compiled_discharge_table_sha256": "fdd47849f270e0fcba16ef4464ffcba8d8307de7154d0ce48794bf8f2a0f87ac",
+  "executed_filter_entry_counts": {
+    "native": 2896,
+    "source": 2896
+  },
+  "comparisons": 2896,
+  "real_statistics": true,
+  "real_control": true,
+  "executed_control_entry_counts": {
+    "native": {
+      "r1_shared_power_client_acquire": 1825,
+      "r1_battery_charging_progress_reset": 2316,
+      "r1_shared_power_client_release": 1825,
+      "r1_battery_task_flags_set": 528
+    },
+    "source": {
+      "r1_shared_power_client_acquire": 1825,
+      "r1_battery_charging_progress_reset": 2316,
+      "r1_shared_power_client_release": 1825,
+      "r1_battery_task_flags_set": 528
+    }
+  },
+  "executed_statistics_entry_counts": {
+    "native": {
+      "r1_battery_charged_state_refresh": 2896,
+      "r1_battery_voltage_average": 2896,
+      "r1_battery_level_average": 2896
+    },
+    "source": {
+      "r1_battery_charged_state_refresh": 2896,
+      "r1_battery_voltage_average": 2896,
+      "r1_battery_level_average": 2896
+    }
+  },
+  "provider_reports": {
+    "native-protocol-device-info/report.json": "f32fb88e9637e3fd1c9d166dcbcf06c534c6482648d8098a11958fa22d8537aa",
+    "native-protocol-device-status/report.json": "db0c0d501fe9351ae88d5e36096620ca79018af3c6994e4996b3cf10b36ae102",
+    "native-protocol-event-handlers/report.json": "c658d5df971a22e6f369088ea432a70524b9cd741e3530438a89e5f6ad47dd70",
+    "native-protocol-modules/report.json": "bd80d725656215a81981859e3d1bc67f81c771a5601942035cc3a62e590846b6",
+    "native-protocol-ingress/report.json": "edefa9546986c4877a67b5791a7fd1664d186182588dc083a85bca5f5e3e6346",
+    "native-protocol-receive/report.json": "67407bbc0a5aacd0f12aba81f3887431071bfced7e179807fe2f89312f8e159b",
+    "native-protocol-port/report.json": "1cde7b8d618b451bf3a6fac5011c7c9f674963b533bbf3175c605f2fb55250a4",
+    "native-protocol-fragment-state/report.json": "238fac778044a8df1f2847178eed8cacf27d02df39df7f04b572415d32e8c75c",
+    "native-protocol-fragment/report.json": "c39abfc9ebad49bb1952ed1a89e87acd69c073bb1ee61c896ddfbbb350184136",
+    "native-protocol-send-registration/report.json": "9ec1ac29edd8373f4e68489c007725bca9dba682386d00d1322112e406dfd370",
+    "native-protocol-connection-gates/report.json": "8f4f56ddbc68ca26cad3fac012a00bd58f1c0036f3a7a5a69e5483683dd72718",
+    "native-protocol-send-hook/report.json": "9493dcb10c76870e08e0689f40aa7dc4dc8cc657ec55cb90fa01105144d3475b",
+    "native-protocol-encoder/report.json": "efd6be2b045392e7a6143f097333ac9ad456d4f2f8f1b2c22ddb444d54b7fdbd",
+    "runtime-memmove/report.json": "1fe07a7a774baa81db1642319bc5d24e4f547e38c7ad2e94402731c8059f0217",
+    "native-protocol-response/report.json": "9dafbdf3aa8c9606d0d976242925b45eb47e150064cae612763ab6ac7bbf8f74",
+    "native-phone-operation/report.json": "34eeb40f59ef7897ea85dc09c2036b02d51a87896b0d2547191b81864cdc3c98",
+    "native-protocol-response-header/report.json": "4c22142e65d5fe974343756d11174146c571174a5aed5ee742f74c764f50fc0f",
+    "native-battery-protocol/report.json": "b09ddcdae2b6c4c044d4dbe6fef6218e1faea6c6af8fcce3698e67b930870091",
+    "native-tx/report.json": "7681106ab5f584bdead003c37fec01ffaa076ed7afe29efb87cd77578caf67de",
+    "connection-handle/report.json": "bb6d085e1b4e3a19499ececcb8bd7bcb3c83910f9069e64473be448fef9d8da9",
+    "native-battery-frame/report.json": "553e15d9af079c70d4eed50c3ed3d82d667d1323588672f11510f0f6c67641c0",
+    "native-battery-voltage/report.json": "c6650b4cdbeb9f7f2e17e68f3cfedb3582e675389811912e22e58aac960820b0",
+    "native-kv-device-fields/report.json": "2812dec42e33724841ff9a3e1adc0fb43161f36a5387e300e6da313aedcc1013",
+    "native-battery-low/report.json": "527f7b9f8dbf990571d8d54e5d0a3a5a7468ee91338bd0d7d9feb03c2566bf78",
+    "native-battery-diagnostic/report.json": "98aa115904e0cc8aacaf67fbdbb73d7d2bfd882e38589badc8c3b60b70a71741",
+    "native-battery-initial-curve/report.json": "932136ebe479056e161aad447b8c9fb2319aca8c3cce164028b66abf7ddeeb51",
+    "native-battery-recovery/report.json": "47f14484f03b6276e92d5d19afa2c031ceefcefbedc8046a019d6e52dc9b4de8",
+    "native-battery-cadence/report.json": "5bf95c310e7e8657aa80c096fec30a03bf948b3b66c07959c1304e62977ac69e",
+    "native-battery-configuration/report.json": "ed1a997cdf376890717318ad3491e4b3e817860715d2cfa1efdbe7fe84ce1a0d",
+    "native-kv-class/report.json": "74fd498a1d8857e4ab698d41ec981441fd04337fe338c6fcb12364f2e6b4b1e8",
+    "native-status-record/report.json": "482217dd46fe37567fa7c97162a92602cd0e1d50d90ac3166051100e31e025b8",
+    "report.json": "1d6299e66cdf7095d40c8aec9749b567933c6ad972dd261d1e06fc03f2dbacbc",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+    "native-battery-discharge/report.json": "977b04c6e16313a6c6a1197b9d7f27077d783fe022772a968e61287f8f09ac08",
+    "native-battery-filter/report.json": "68cc5389fc3ce6bf5331d17e085d80e60960b7e0dada447e28e30c9ccaa351f7",
+    "native-battery-statistics/report.json": "2ac72de6b804b7b8fd6376a2624add0f6d0453bcbfe7b4307e8b711a77a718a4",
+    "native-battery-control/report.json": "c2071eff46a7d7d2e89c743125ab026d03298959390231f3053ae2eff028ce6c"
+  },
+  "explicit_numeric_rounding_cases": 336,
+  "report_sha256": "da2e287793e8bff34991082d37ba73fca163d690a3d96f2837a1fe7a2ba008ee",
+  "object_sha256": "cec67d8bec2e6384c0783d8bf86c505df5ae666455045235fe35d3d19b3dd9d3",
+  "driver_sha256": "9bc609a3811f1b40e56227b52fedb92a2c99c291eb25897685b8d1451b01fd1d",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_memory_sha256": "bdda5d7448bc7c0e49715b4c734613d8610e9e5d28dffad33068c0ebe73c052b",
+  "rea_sha256": "eaa572581924dbdfab512825a56411752204dcff30adde2ca9a1dc569eade3d8",
+  "native_entry": "0x31fd0",
+  "native_size": 406,
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Actual low escalation, diagnostic cadence and recovery with disabled logging, cadence, cached-class/musl copy, configuration, discharge policy, filter, refresh, averages and control execute; cadence threshold rows are fixture RAM with source ownership gated; matched four-byte cached records and port callbacks are fixtures, rejected-size composition remains gated; ADC registry/delay and Connection getters, type0 wrapper and shared TX producer/musl copy execute; allocator/queue/notification endpoints and live connection/queue/thread transitions are modeled; advertising-config (zero), allocator and live connection transitions, low event/time/thread and remaining hardware endpoints are fixtures; actual device-info/operation2/upstreammemclear/device-status/shared-byte-getter/charge-predicates/shared command lookup/module wrappers/ingress/receive dispatcher/protocol port initialization/receive registration/type1 TX callback/fragmenter/CRC32/callback registration/connection presence predicates/send-hook dispatcher/encoder/musl movement/recovered CRC and lower response sender/phone operation1/header/getter and battery protocol report execute with disabled logging; actual service prefix/updater/getter execute; recursive refresh composition remains gated; actual device-info setter and cached read/write/musl copy execute with matched52-byte records; rejected-size caller composition remains open; full eight-byte KV input records compared, including upper halfword; native consumer reads six bytes; other compiler/caller identity remains gated; initial-charge curve and compiled calibration data execute; opaque read-word high halves are not compared in this graph, and direct filter verification covers them",
+    "Actual ingress/module wrappers/shared lookup execute with actual device-info/device-status and special/activity event leaves and31 remaining leaf command fixtures; special target is a supplemental attributed24-byte body and eight other targets lack locked ownership entries; full leaf/startup and CRC/advertised-length validation remain gated",
+    "snprintf0x38080 remains a named toolchain formatter boundary fixture; fixed%s calls do not close generic formatter source",
+    "Actual memclear executes with modeled pre-call concurrent D-byte mutation for main updater; private worker-stack bytes and fullr1 scratch remain gated",
+    "Raw device/runtime roots are address bindings, not source-owned initialization",
+    "All four FPSCR rounding modes and final FPSCR are compared; physical FPU/concurrency not proven",
+    "Packed native-width SRAM views preserve unaligned values; physical interrupt ordering/atomicity/concurrency remain gates",
+    "Charged-state refresh consumes five semantic arguments; no decompiler scratch sixth argument"
+  ]
+}

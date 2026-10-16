@@ -1,0 +1,37 @@
+{
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00087b30",
+      "end": "0x00087b9d",
+      "size": "110",
+      "recovered_name": "FUN_00087b30",
+      "provider_family": "yhmicros_yhm2710_candidate",
+      "source_disposition": "clean_room_reimplementation_owner_authorized",
+      "upstream_symbol": "yhm2710_stacmd_read_bit_candidate",
+      "confidence": "high",
+      "evidence": "Exact executable closure of the scatter-loaded device_stacmd operation table and P1.01 wire callback record used by the YHM2710 power path. The exact vendor source remains unlicensed; the owner-authorized independent reconstruction is compiled from reconstructed/yhm2710."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x000969ec",
+      "end": "0x000969fb",
+      "size": "16",
+      "recovered_name": "FUN_000969ec",
+      "provider_family": "yhmicros_yhm2710_candidate",
+      "source_disposition": "clean_room_reimplementation_owner_authorized",
+      "upstream_symbol": "yhm2710_stacmd_read_bit_adapter_candidate",
+      "confidence": "high",
+      "evidence": "Exact executable closure of the scatter-loaded device_stacmd operation table and P1.01 wire callback record used by the YHM2710 power path. The exact vendor source remains unlicensed; the owner-authorized independent reconstruction is compiled from reconstructed/yhm2710."
+    }
+  ],
+  "locked_ownership_changed": false,
+  "polls_per_edge": 1000,
+  "nop_iterations": 26,
+  "nops_per_iteration": 4,
+  "output": "Always stores uint32 (~sample)&1, including timeout",
+  "adapter": "Actual receive body; copies full word even on failure",
+  "scope": "Native Ghidra-MCP bytes and locked ownership rows; hardware timing unproven"
+}

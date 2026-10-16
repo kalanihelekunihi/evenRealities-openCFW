@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "target_id": "official-s200-v2.2.6.10",
+  "format": "EVENOTA",
+  "version": "s200_v2.2.6.10",
+  "bundle": {
+    "size": 4301227,
+    "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "recorded_origin": "firmware/ota/2026-07-22/g2-2.2.6.10-e28738432d7b612d625331b00383149b.bin",
+    "verified_local_path": "g2/build/reference/package/g2-openCFW-s200_v2.2.6.10.evenota.bin",
+    "preparation_verification": "size_and_sha256_match_existing_cached_reference_package; no_package_build_performed",
+    "local_copy_note": "Existing historical reference output matches the official identity pinned independently by the source manifest and provenance. Reauthenticate at campaign start; this build-cache path is not durable oracle storage."
+  },
+  "identity_sources": [
+    {
+      "path": "g2/manifests/g2-2.2.6.10.json",
+      "sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md",
+      "sha256": "53c3819fb9cf9cc819861787a14fa84f6e084cf03396a3a5636718f8539f6809"
+    }
+  ],
+  "components": [
+    {
+      "id": "codec",
+      "entry_id": 1,
+      "package_filename": "firmware/codec.bin",
+      "local_payload_path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "size": 326092,
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "preparation_verification": "size_and_sha256_match"
+    },
+    {
+      "id": "ble_em9305",
+      "entry_id": 2,
+      "package_filename": "firmware/ble_em9305.bin",
+      "local_payload_path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "size": 211948,
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "preparation_verification": "size_and_sha256_match"
+    },
+    {
+      "id": "touch",
+      "entry_id": 3,
+      "package_filename": "firmware/touch.bin",
+      "local_payload_path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "size": 34464,
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "preparation_verification": "size_and_sha256_match"
+    },
+    {
+      "id": "case",
+      "entry_id": 4,
+      "package_filename": "firmware/box.bin",
+      "local_payload_path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "size": 55784,
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "preparation_verification": "size_and_sha256_match"
+    },
+    {
+      "id": "apollo_bootloader",
+      "entry_id": 5,
+      "package_filename": "ota/s200_bootloader.bin",
+      "local_payload_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "size": 148599,
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "preparation_verification": "size_and_sha256_match"
+    },
+    {
+      "id": "apollo_main",
+      "entry_id": 6,
+      "package_filename": "ota/s200_firmware_ota.bin",
+      "local_payload_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "size": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "preparation_verification": "size_and_sha256_match"
+    }
+  ],
+  "scope": "Complete identified OTA artifact, all six payloads and all nested contents; absent resident firmware documented as external.",
+  "target_changes": "Never re-pin to generated output. A different user-selected artifact requires a new target and campaign."
+}

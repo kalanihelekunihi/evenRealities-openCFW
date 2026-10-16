@@ -1,0 +1,89 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "spans": [
+    {
+      "entry": "0x8507c",
+      "name": "prvInitialiseMutex",
+      "bytes": 22,
+      "ghidra_file": "ghidra-8507c.json",
+      "ghidra_sha256": "67a2711adda52147afa3f069f47ddfde9d50717cd4846a41650abc8668618981"
+    },
+    {
+      "entry": "0x97ade",
+      "name": "xQueueCreateMutex",
+      "bytes": 22,
+      "ghidra_file": "ghidra-97ade.json",
+      "ghidra_sha256": "8afc97f406473e607237b08ff3e307e39795e3b1a62b03b42f931e2761421111"
+    },
+    {
+      "entry": "0x97af4",
+      "name": "xQueueCreateMutexStatic",
+      "bytes": 26,
+      "ghidra_file": "ghidra-97af4.json",
+      "ghidra_sha256": "e57aeef635003d4e4667d516c4a587e604db7b57ff0d21df5e7050881cef4ef0"
+    },
+    {
+      "entry": "0x97e6c",
+      "name": "xQueueGiveFromISR",
+      "bytes": 168,
+      "ghidra_file": "ghidra-97e6c.json",
+      "ghidra_sha256": "6b96052689ed18d02f635573b68e68e5a6052256ab1cd1f7e4915c571e7629b3"
+    },
+    {
+      "entry": "0x97f14",
+      "name": "xQueueGiveMutexRecursive",
+      "bytes": 60,
+      "ghidra_file": "ghidra-97f14.json",
+      "ghidra_sha256": "5301d79baa99dad32b0dd264ab098bdd5f4818d5ce9c714f712df626d6c270d8"
+    },
+    {
+      "entry": "0x98120",
+      "name": "xQueueSemaphoreTake",
+      "bytes": 352,
+      "ghidra_file": "ghidra-98120.json",
+      "ghidra_sha256": "8e87401f669ed189e38862074c7162e5e8bfaa58258c0260043cf7fee5d4f487"
+    },
+    {
+      "entry": "0x98284",
+      "name": "xQueueTakeMutexRecursive",
+      "bytes": 62,
+      "ghidra_file": "ghidra-98284.json",
+      "ghidra_sha256": "a3fd707b85781a4654a3d63a5843b153b1898fb7c33548aaea8c543f7a813333"
+    }
+  ],
+  "rea_inventory": "r1/research/source-build/sdk-clock/rea-procedure-inventory.json",
+  "rea_inventory_sha256": "fbdbc0c467b87b6c991baa6e398adae6fa42e47812b981a59221a122c37974ce",
+  "rea_registered_rows": [
+    {
+      "address": "0x8507c",
+      "value": "FUN_0008507c"
+    },
+    {
+      "address": "0x97ade",
+      "value": "FUN_00097ade"
+    },
+    {
+      "address": "0x97af4",
+      "value": "FUN_00097af4"
+    },
+    {
+      "address": "0x97e6c",
+      "value": "FUN_00097e6c"
+    },
+    {
+      "address": "0x97f14",
+      "value": "FUN_00097f14"
+    },
+    {
+      "address": "0x98120",
+      "value": "FUN_00098120"
+    },
+    {
+      "address": "0x98284",
+      "value": "FUN_00098284"
+    }
+  ],
+  "scope": "Authenticated native mutex/semaphore provider spans and REA inventory cross-reference; source slices preserve pinned licensed bodies; differential/composed graph gates remain explicit"
+}

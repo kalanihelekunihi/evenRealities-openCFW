@@ -1,0 +1,27 @@
+{
+  "provider": {
+    "id": "cmbacktrace",
+    "provider": "Armink",
+    "version": "1.4.2-compatible interval",
+    "commit": "73714489f9d8af130aacb515586b397b604a5768",
+    "compatible_floor_commit": "4abadfa0c4f86f22352aa5ab9ebbb4f687125a1c",
+    "compatible_ceiling_commit": "73714489f9d8af130aacb515586b397b604a5768",
+    "first_incompatible_commit": "55e7b6990640c481e83ae8a3c0f3af2092b9f7a6",
+    "exact_vendor_checkout_proven": false,
+    "disposition": "pinned_upstream_submodule",
+    "path": "third-party/upstream/cmbacktrace",
+    "license": "MIT",
+    "source_sha256": "6e444224af3ef223067849b88f61281ec0661e3f38425e84758bf12be057e01c",
+    "evidence": "R1 dump_stack has the 16-word cap introduced at 4abadfa0, while cm_backtrace_fault lacks the stacked-xPSR alignment test first added at 55e7b699; exact core functions and recovered Cortex-M4/FreeRTOS configuration correlate within that interval",
+    "production_role": "authenticated upstream unwinder, register capture, stack scan, and fault diagnosis; openR1 supplies only recovered configuration, retained logging, task-stack accessors, and exception-entry glue"
+  },
+  "manifest_sha256": "b6daa1008bffd15e4b431cc33a973788ea398043922c826201537daec2116810",
+  "source": "third-party/upstream/cmbacktrace/cm_backtrace/cm_backtrace.c",
+  "source_sha256": "6e444224af3ef223067849b88f61281ec0661e3f38425e84758bf12be057e01c",
+  "license": "third-party/upstream/cmbacktrace/LICENSE",
+  "license_sha256": "e8ed0e84184d2130bd1fcf5a52ce8c16b5bf338c272cab6bbd7993a9d723934e",
+  "observed_checkout": "73714489f9d8af130aacb515586b397b604a5768",
+  "source_reuse_available": true,
+  "application_entry_integration_verified": false,
+  "update_contract": "Reuse this attributable upstream core with separately recovered R1 configuration and adapters; later changes require native stack/frame, initialization and unwinding contract checks. Exact vendor checkout is not proven."
+}

@@ -1,0 +1,68 @@
+{
+  "units": [
+    {
+      "source": "r1/components/board/native_delayed_cancel.c",
+      "source_sha256": "ea9f1f09a0e90f7c6f8e94ad25f6b7296ac9670c1d3a724268841d1798db50a2",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-delayed-cancel/native_delayed_cancel.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/board/native_delayed_cancel.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-delayed-cancel/native_delayed_cancel.o"
+      ],
+      "compiled": true,
+      "object_sha256": "ae17b8940245269e41fa5bcfdfa7eb784d9e7af1a2667c2f73d52f18994f8631",
+      "undefined": [
+        "nrf_log_frontend_std_0",
+        "osKernelGetTickCount",
+        "osMutexAcquire",
+        "osMutexRelease",
+        "osTimerStop",
+        "r1_delayed_arguments",
+        "r1_delayed_callbacks",
+        "r1_delayed_context",
+        "r1_native_delayed_reschedule",
+        "r1_structured_log_format",
+        "r1_structured_log_mode_get"
+      ],
+      "defined": [
+        "r1_native_delayed_cancel"
+      ],
+      "emitted_function_count": 2
+    }
+  ],
+  "inputs": {
+    "r1/components/board/native_delayed_cancel.c": "ea9f1f09a0e90f7c6f8e94ad25f6b7296ac9670c1d3a724268841d1798db50a2",
+    "r1/components/board/native_delayed_state.h": "9da18b222dbe331acd57a2d6f88f0fd2eac8367318632f3d0448fcab6f61b8bb",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

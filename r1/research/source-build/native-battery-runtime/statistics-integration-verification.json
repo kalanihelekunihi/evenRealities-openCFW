@@ -1,0 +1,42 @@
+{
+  "comparisons": 2896,
+  "real_statistics": true,
+  "real_control": false,
+  "executed_control_entry_counts": {
+    "native": {},
+    "source": {}
+  },
+  "executed_statistics_entry_counts": {
+    "native": {
+      "r1_battery_charged_state_refresh": 2896,
+      "r1_battery_voltage_average": 2896,
+      "r1_battery_level_average": 2896
+    },
+    "source": {
+      "r1_battery_charged_state_refresh": 2896,
+      "r1_battery_voltage_average": 2896,
+      "r1_battery_level_average": 2896
+    }
+  },
+  "provider_reports": {
+    "native-battery-statistics/report.json": "2ac72de6b804b7b8fd6376a2624add0f6d0453bcbfe7b4307e8b711a77a718a4"
+  },
+  "explicit_numeric_rounding_cases": 336,
+  "report_sha256": "da2e287793e8bff34991082d37ba73fca163d690a3d96f2837a1fe7a2ba008ee",
+  "object_sha256": "cec67d8bec2e6384c0783d8bf86c505df5ae666455045235fe35d3d19b3dd9d3",
+  "driver_sha256": "a61309c4f450e3cdaf03a97296052fd4560d7d4cdffcd94b840a4cfe493fc425",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_memory_sha256": "bdda5d7448bc7c0e49715b4c734613d8610e9e5d28dffad33068c0ebe73c052b",
+  "rea_sha256": "eaa572581924dbdfab512825a56411752204dcff30adde2ca9a1dc569eade3d8",
+  "native_entry": "0x31fd0",
+  "native_size": 406,
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Selected refresh/averaging and optional control providers execute real bodies; remaining transport/hardware/algorithm/reporting boundaries are fixtures",
+    "Raw device/runtime roots are address bindings, not source-owned initialization",
+    "All four FPSCR rounding modes and final FPSCR are compared; physical FPU/concurrency not proven",
+    "Packed native-width SRAM views preserve unaligned values; physical interrupt ordering/atomicity/concurrency remain gates",
+    "Charged-state refresh consumes five semantic arguments; no decompiler scratch sixth argument"
+  ]
+}

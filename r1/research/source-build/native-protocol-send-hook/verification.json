@@ -1,0 +1,144 @@
+{
+  "comparisons": 8232,
+  "callback_calls_per_side": 5488,
+  "full_r0_r1_r2_r3_checked": true,
+  "tail_stack_and_lr_checked": true,
+  "live_registration_mutation": true,
+  "source_owned_section": {
+    "address": 536898592,
+    "bytes": 4,
+    "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  "cold_runs": [
+    {
+      "poison": 165,
+      "writes": [
+        {
+          "pc": 165690,
+          "address": 536898592,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898593,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898594,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898595,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "poison": 90,
+      "writes": [
+        {
+          "pc": 165690,
+          "address": 536898592,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898593,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898594,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898595,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "poison": 255,
+      "writes": [
+        {
+          "pc": 165690,
+          "address": 536898592,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898593,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898594,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898595,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    },
+    {
+      "poison": 60,
+      "writes": [
+        {
+          "pc": 165690,
+          "address": 536898592,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898593,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898594,
+          "bytes": 1,
+          "value": 0
+        },
+        {
+          "pc": 165690,
+          "address": 536898595,
+          "bytes": 1,
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "report_sha256": "9493dcb10c76870e08e0689f40aa7dc4dc8cc657ec55cb90fa01105144d3475b",
+  "object_sha256": "9972a1eaae7abbcf0e9b2e921d81c152a2cd865305762f0be7bbb12922f5bbde",
+  "driver_sha256": "cb81c5fc830392a16943b32e040d6a270051d9988d396bcbf1d4e6732cabe7d1",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-827f8.json": "6643575dc59e10d2d390fa4bea2470e71897f03740616995e3743a05e9ca02a3",
+    "ghidra-body.json": "024b12b662a5c0e92062e89ca254cdf68783070257f80fbd33fafaa8929fecc0"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Callback targets and registration lifecycle remain external seams; no physical delivery or concurrency proof",
+    "Cold zero initialization is source-owned; warm initialization, full startup and exact image identity remain gated"
+  ]
+}

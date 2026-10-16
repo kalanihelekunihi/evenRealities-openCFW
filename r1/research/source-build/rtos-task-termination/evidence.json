@@ -1,0 +1,113 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "kernel_pin": "def7d2df2b0506d3d249334974f51e427c17a41c",
+  "cmsis_pin": "d213f261b5be6bb29a7cce8b84071706b72f4d53",
+  "spans": [
+    {
+      "name": "delete",
+      "entry": "0x96020",
+      "bytes": 148,
+      "ghidra_file": "ghidra-delete.json",
+      "ghidra_sha256": "7241a500b9f93e869eec507fc989cc02dbe1e1ff183f3021dc43d5796e8c711e",
+      "thumb_file": "thumb-delete.txt",
+      "thumb_sha256": "51d25c4c24a08dcc439d64c9c12527455d8eb73d426ea6c435f3fec6b69e52c2"
+    },
+    {
+      "name": "reclaim",
+      "entry": "0x84f36",
+      "bytes": 50,
+      "ghidra_file": "ghidra-reclaim.json",
+      "ghidra_sha256": "3d2706168dc967b856d085c68e2429e714fd7e0b2a39677fb366d9712a329bb2",
+      "thumb_file": "thumb-reclaim.txt",
+      "thumb_sha256": "da4afa1c8ab2a4089b8697e15df754f99afabf49e02679ab67e40a163a045746"
+    },
+    {
+      "name": "state",
+      "entry": "0x5cfac",
+      "bytes": 112,
+      "ghidra_file": "ghidra-state.json",
+      "ghidra_sha256": "0b198081eba0d7a708c6040fd8cdf109b2c292ce172e49d96d4ff258c747cd19",
+      "thumb_file": "thumb-state.txt",
+      "thumb_sha256": "01403603637f434d474a9a6f3d82b2934348cdb5bd26a172e7404114410275d5"
+    },
+    {
+      "name": "terminate",
+      "entry": "0x7d8d6",
+      "bytes": 52,
+      "ghidra_file": "ghidra-terminate.json",
+      "ghidra_sha256": "915840f01d6fc5d90e8679458ce79596cd85023c56526a30dc1b132fc1fa0e53",
+      "thumb_file": "thumb-terminate.txt",
+      "thumb_sha256": "906e380b433dd82f44d592ef2cb3f6ec8b4cf52afa7034d47ace9b4ff2205861"
+    },
+    {
+      "name": "list_end",
+      "entry": "0x95cdc",
+      "bytes": 24,
+      "ghidra_file": "ghidra-list_end.json",
+      "ghidra_sha256": "80e4d3f4d9514023c3a65c09c60735f0c10d6a7181ba005d64d69078b5035888",
+      "thumb_file": "thumb-list_end.txt",
+      "thumb_sha256": "48367de0ac57df8b64ff388659487380cd5e2fbc6c8beea1cdfc57eefd50dccb"
+    },
+    {
+      "name": "idle-loop",
+      "entry": "0x84fe8",
+      "bytes": 148,
+      "ghidra_file": "ghidra-idle-loop.json",
+      "ghidra_sha256": "d88ba4dd4c624250012121e0f042d53ec44d4650c133019b49d5e0c0302e228b",
+      "thumb_file": "thumb-idle-loop.txt",
+      "thumb_sha256": "f082e7d6d2cb6aba1088640098357b6f67d19d6c19412191bf72ee9c5fca3c87"
+    },
+    {
+      "name": "expected-idle",
+      "entry": "0x84f68",
+      "bytes": 48,
+      "ghidra_file": "ghidra-expected-idle.json",
+      "ghidra_sha256": "4e7f2fcd7bde0e72681297efc512d72895960a249a069515f1b11f3e95c5608f",
+      "thumb_file": "thumb-expected-idle.txt",
+      "thumb_sha256": "cb9cfe39f343e0c7cee0014b65057e1bc057c009284c160c2d24bd9bb0d6d858"
+    }
+  ],
+  "native_contract": {
+    "tcb_bytes": 112,
+    "allocation_mode_offset": 109,
+    "notification_state_offset": 108,
+    "deleted_pending_address": "0x20007820",
+    "modes": {
+      "0": "free stack then TCB",
+      "1": "free TCB only",
+      "2": "preserve static storage",
+      "other": "fatal assertion"
+    },
+    "self_delete": "list at2002b230, increment pending, defer free; PendSV if scheduler running; assert suspended==0",
+    "idle_cleanup_region": [
+      "0x84fe8",
+      "0x8501a"
+    ],
+    "expected_idle_time": "Return0 if current priority>0 or idle ready length>1 or highest ready priority>0; otherwise return uint32(nextUnblock-tick), including wrap"
+  },
+  "limitations": [
+    "Idle cleanup is authenticated at explicit inlined native boundaries0x84fe8..0x8501a; no standalone native function ABI or ownership promotion.",
+    "Complete idle task, watchdog idle hook, tickless port and native context transfer remain separate gates.",
+    "Native function code bytes and supplemental literals authenticated separately from ownership inventory sizes."
+  ],
+  "rea_function_request": {
+    "file": "rea-delete-function.json",
+    "sha256": "d86ee0ad4e00041fc6ca2f3093cbce22a739db88faedb3fe6fe11ca2b680e785",
+    "result": "execution_failure",
+    "retryable": false
+  },
+  "idle_cleanup_discovery": {
+    "thumb_file": "idle-cleanup-discovery.txt",
+    "thumb_sha256": "f082e7d6d2cb6aba1088640098357b6f67d19d6c19412191bf72ee9c5fca3c87",
+    "idle_loop_entry": "0x84fe8",
+    "cleanup_loop_start": "0x84fea",
+    "cleanup_loop_exit": "0x8501a",
+    "native_call_to_reclaim": "0x85010",
+    "literal_base_scheduler": "0x8506c",
+    "literal_termination_list": "0x85070",
+    "status": "Bounded cleanup contract verified and unchanged upstream C body compiled; no standalone native function attribution/ABI admitted",
+    "next_work": "Complete idle loop/hook/tickless/context provider gates remain open."
+  }
+}

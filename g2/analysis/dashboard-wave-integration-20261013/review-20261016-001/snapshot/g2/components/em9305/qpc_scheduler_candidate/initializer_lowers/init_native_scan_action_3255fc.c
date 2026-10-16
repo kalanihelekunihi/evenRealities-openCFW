@@ -1,0 +1,23 @@
+/* Native scan lifecycle action; child calls and delay slots preserved. */
+__asm__(
+".text\n"
+".balign 4\n"
+".global opencfw_em9305_scan_action_3255fc\n"
+".type opencfw_em9305_scan_action_3255fc,@function\n"
+"opencfw_em9305_scan_action_3255fc:\n"
+"L3255fc:\n"
+"mov_s r0,0x805a73\n"
+"L325602:\n"
+"ldb_s r0,[r0,0]\n"
+"L325604:\n"
+"cmp_s r0,0\n"
+"L325606:\n"
+"jeq_s [blink]\n"
+"L325608:\n"
+"mov_s r0,0x80506d\n"
+"L32560e:\n"
+"b.d opencfw_em9305_ll_schedule_notify_313354\n"
+"L325612:\n"
+"stb.ab 1,[r0,3]\n"
+".size opencfw_em9305_scan_action_3255fc,.-opencfw_em9305_scan_action_3255fc\n"
+);

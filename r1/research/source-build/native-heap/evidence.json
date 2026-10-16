@@ -1,0 +1,82 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "spans": [
+    {
+      "name": "initialize",
+      "entry": "0x84f98",
+      "bytes": 80,
+      "ghidra_file": "ghidra-initialize.json",
+      "ghidra_sha256": "6ae3daf68e2832da762e719513363ea9fb9cbf31cc376d47010fa7b3465cc45f",
+      "thumb_file": "thumb-initialize.txt",
+      "thumb_sha256": "3c26c62f9ca5bde5fe4710ef1f21847c0a17b76e638a4ef8390246e07b512ec5",
+      "pseudocode_file": "pseudocode-initialize.c.txt",
+      "pseudocode_sha256": "2315042940ca658edde4c4d1d88c5eb3e20bda7f4b368130527c7b89071d0eaa"
+    },
+    {
+      "name": "insert",
+      "entry": "0x851a4",
+      "bytes": 80,
+      "ghidra_file": "ghidra-insert.json",
+      "ghidra_sha256": "7534ed7c7fe64b7c0435aebac208f4da787e2a3a383130594ffbc9ed9034f86f",
+      "thumb_file": "thumb-insert.txt",
+      "thumb_sha256": "4263e1283bf3cc67e5d67f1f852041c5593ae5a3f44ec4f42c303bd2404c0976",
+      "pseudocode_file": "pseudocode-insert.c.txt",
+      "pseudocode_sha256": "b1638ae577ac4dfce6f2fdf1442abf20c364e60479395688a3a4fb2121200c11"
+    },
+    {
+      "name": "malloc",
+      "entry": "0x855a0",
+      "bytes": 228,
+      "ghidra_file": "ghidra-malloc.json",
+      "ghidra_sha256": "ea621c4f2f0ff642870476d85d496d268384adc71203615930970ff14aa41b1e",
+      "thumb_file": "thumb-malloc.txt",
+      "thumb_sha256": "7249b80a80126f96badf994f99868fcd14059c63f688d1d2d72cb3c099bec3f2",
+      "pseudocode_file": "pseudocode-malloc.c.txt",
+      "pseudocode_sha256": "c1f0a5ae5b4c6b41befade32adfb3b3d382d97a7891c6c485141bb968404ca55"
+    },
+    {
+      "name": "free",
+      "entry": "0x95d48",
+      "bytes": 92,
+      "ghidra_file": "ghidra-free.json",
+      "ghidra_sha256": "5c47064f680126e66287263223c183b0b1cb0ac1c6fde3bd86017018562f787f",
+      "thumb_file": "thumb-free.txt",
+      "thumb_sha256": "e5a4584c0ea447a140c9d11ed7aed9f6c5c8c86dc9831423ca11294e00c84e5a",
+      "pseudocode_file": "pseudocode-free.c.txt",
+      "pseudocode_sha256": "c2b6b282cbce07630708bd40aa94c2e69bb451ea95cf8fad7bf5fec7dd01d4fb"
+    },
+    {
+      "name": "failed",
+      "entry": "0x95bec",
+      "bytes": 14,
+      "ghidra_file": "ghidra-failed.json",
+      "ghidra_sha256": "cc8b955bbee8f6cf1464b60c0bac608769f962366063adb9dd33882425e368fa",
+      "thumb_file": "thumb-failed.txt",
+      "thumb_sha256": "392c97a740a59a9a9969dfbdd55075b21c7315ebf1f695cba2394db65a3940b4",
+      "pseudocode_file": "pseudocode-failed.c.txt",
+      "pseudocode_sha256": "0cf69c4047389ae964ee985a30acc0b6f15696db2a3f4dd57cf1b7ff4acae044"
+    }
+  ],
+  "upstream_lineage": {
+    "pin": "def7d2df2b0506d3d249334974f51e427c17a41c",
+    "path": "third-party/upstream/freertos-kernel/portable/MemMang/heap_4.c",
+    "sha256": "d48a51e34caed771e6650d95f6c2527e52fde2a6ebc6f83b49d003aef0135e05",
+    "scope": "Attributable algorithm lineage only; R1 body/header/rounding/failure extensions are source-owned native reconstruction, not unchanged upstream compatibility."
+  },
+  "layout": {
+    "storage": "0x2001e588",
+    "storage_bytes": 51200,
+    "start": "0x2002ad88",
+    "state": "0x200077fc",
+    "header_bytes": 16,
+    "caller_offset": 8,
+    "padding_offset": 12,
+    "free_initial": 51184,
+    "rounding": "request + 24 - (request & 7); zero/overflow/sign-bit/exhaustion fatal after resume",
+    "split_minimum_exclusive": 32,
+    "sentinel_bytes": 12,
+    "sentinel_boundary_evidence": "Native ready-list array begins at0x2002ad94 in scheduler literal pool0x98c40; sentinel has three words, while allocated headers reserve16 bytes."
+  }
+}

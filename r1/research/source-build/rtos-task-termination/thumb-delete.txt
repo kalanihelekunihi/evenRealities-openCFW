@@ -1,0 +1,67 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00096020 <r1_stock_gpio_pin_set+0x1cbec>:
+   96020:	b570      	push	{r4, r5, r6, lr}
+   96022:	4605      	mov	r5, r0
+   96024:	f7ff fe66 	bl	95cf4 <_stack+0x15cf4>
+   96028:	4c1f      	ldr	r4, [pc, #124]	@ (960a8 <_stack+0x160a8>)
+   9602a:	b905      	cbnz	r5, 9602e <_stack+0x1602e>
+   9602c:	6825      	ldr	r5, [r4, #0]
+   9602e:	1d28      	adds	r0, r5, #4
+   96030:	f7ff faed 	bl	9560e <_stack+0x1560e>
+   96034:	6aa8      	ldr	r0, [r5, #40]	@ 0x28
+   96036:	b118      	cbz	r0, 96040 <_stack+0x16040>
+   96038:	f105 0018 	add.w	r0, r5, #24
+   9603c:	f7ff fae7 	bl	9560e <_stack+0x1560e>
+   96040:	6a60      	ldr	r0, [r4, #36]	@ 0x24
+   96042:	1c40      	adds	r0, r0, #1
+   96044:	6260      	str	r0, [r4, #36]	@ 0x24
+   96046:	6820      	ldr	r0, [r4, #0]
+   96048:	4285      	cmp	r5, r0
+   9604a:	d107      	bne.n	9605c <_stack+0x1605c>
+   9604c:	1d29      	adds	r1, r5, #4
+   9604e:	4817      	ldr	r0, [pc, #92]	@ (960ac <_stack+0x160ac>)
+   96050:	f7ff fe44 	bl	95cdc <_stack+0x15cdc>
+   96054:	6860      	ldr	r0, [r4, #4]
+   96056:	1c40      	adds	r0, r0, #1
+   96058:	6060      	str	r0, [r4, #4]
+   9605a:	e004      	b.n	96066 <_stack+0x16066>
+   9605c:	68a0      	ldr	r0, [r4, #8]
+   9605e:	1e40      	subs	r0, r0, #1
+   96060:	60a0      	str	r0, [r4, #8]
+   96062:	f7ef fa01 	bl	85468 <_stack+0x5468>
+   96066:	f7ff fe5d 	bl	95d24 <_stack+0x15d24>
+   9606a:	6820      	ldr	r0, [r4, #0]
+   9606c:	4285      	cmp	r5, r0
+   9606e:	d002      	beq.n	96076 <_stack+0x16076>
+   96070:	4628      	mov	r0, r5
+   96072:	f7ee ff60 	bl	84f36 <_stack+0x4f36>
+   96076:	6960      	ldr	r0, [r4, #20]
+   96078:	2800      	cmp	r0, #0
+   9607a:	d014      	beq.n	960a6 <_stack+0x160a6>
+   9607c:	6820      	ldr	r0, [r4, #0]
+   9607e:	4285      	cmp	r5, r0
+   96080:	d111      	bne.n	960a6 <_stack+0x160a6>
+   96082:	6b60      	ldr	r0, [r4, #52]	@ 0x34
+   96084:	b130      	cbz	r0, 96094 <_stack+0x16094>
+   96086:	2040      	movs	r0, #64	@ 0x40
+   96088:	f380 8811 	msr	BASEPRI, r0
+   9608c:	2000      	movs	r0, #0
+   9608e:	f840 0c01 	str.w	r0, [r0, #-1]
+   96092:	e7fe      	b.n	96092 <_stack+0x16092>
+   96094:	4906      	ldr	r1, [pc, #24]	@ (960b0 <_stack+0x160b0>)
+   96096:	f04f 5080 	mov.w	r0, #268435456	@ 0x10000000
+   9609a:	6008      	str	r0, [r1, #0]
+   9609c:	bf40      	sev
+   9609e:	f3bf 8f4f 	dsb	sy
+   960a2:	f3bf 8f6f 	isb	sy
+   960a6:	bd70      	pop	{r4, r5, r6, pc}
+   960a8:	781c      	ldrb	r4, [r3, #0]
+   960aa:	2000      	movs	r0, #0
+   960ac:	b230      	sxth	r0, r6
+   960ae:	2002      	movs	r0, #2
+   960b0:	ed04 e000 	stc	0, cr14, [r4, #-0]

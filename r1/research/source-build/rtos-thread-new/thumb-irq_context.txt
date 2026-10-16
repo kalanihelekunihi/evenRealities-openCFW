@@ -1,0 +1,21 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0002febc <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x8ebc>:
+   2febc:	b510      	push	{r4, lr}
+   2febe:	f04f 0400 	mov.w	r4, #0
+   2fec2:	f3ef 8005 	mrs	r0, IPSR
+   2fec6:	b948      	cbnz	r0, 2fedc <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x8edc>
+   2fec8:	f068 fc6e 	bl	987a8 <_stack+0x187a8>
+   2fecc:	2801      	cmp	r0, #1
+   2fece:	d006      	beq.n	2fede <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x8ede>
+   2fed0:	f3ef 8010 	mrs	r0, PRIMASK
+   2fed4:	b910      	cbnz	r0, 2fedc <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x8edc>
+   2fed6:	f3ef 8011 	mrs	r0, BASEPRI
+   2feda:	b100      	cbz	r0, 2fede <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x8ede>
+   2fedc:	2401      	movs	r4, #1
+   2fede:	4620      	mov	r0, r4
+   2fee0:	bd10      	pop	{r4, pc}

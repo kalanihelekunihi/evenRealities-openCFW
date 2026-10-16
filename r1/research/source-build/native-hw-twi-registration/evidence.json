@@ -1,0 +1,63 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "spans": [
+    {
+      "name": "primary",
+      "entry": "0x54f90",
+      "bytes": 52,
+      "ghidra_file": "ghidra-primary.json",
+      "ghidra_sha256": "fc2a6677818e5254be128b91cc645195aa1a9ce3c63aeee8a017d623ae0bfe48",
+      "thumb_file": "thumb-primary.txt",
+      "thumb_sha256": "3c09842dd1462ec3a4d8c5aef60432188e8b7d0cf6e96e8441dd3f8d044a3e1e"
+    },
+    {
+      "name": "secondary",
+      "entry": "0x54fc4",
+      "bytes": 52,
+      "ghidra_file": "ghidra-secondary.json",
+      "ghidra_sha256": "77eb071d408b42a700982e8b3b6db1d012ffb3d9568002d0b64cff677ef75386",
+      "thumb_file": "thumb-secondary.txt",
+      "thumb_sha256": "9533b6c7b784c0485e4aaf73b69130c7bbc358b709abf7e7789cdc8feef21bf3"
+    },
+    {
+      "name": "name0",
+      "entry": "0xc06e4",
+      "bytes": 6,
+      "ghidra_file": "ghidra-name0.json",
+      "ghidra_sha256": "baf3ab6aacda176dc869909f0952ea1157aa49c8c3267022653393c582589930",
+      "thumb_file": "thumb-name0.txt",
+      "thumb_sha256": "069a59b32667202fa2082016b3dca2e3d8d536903f5dda29131068d07ff10004"
+    },
+    {
+      "name": "name1",
+      "entry": "0xc06ec",
+      "bytes": 6,
+      "ghidra_file": "ghidra-name1.json",
+      "ghidra_sha256": "fcc9ebceafd9d51b550c0a160688812a7f92e1d7358351a8a18453b00430a0b4",
+      "thumb_file": "thumb-name1.txt",
+      "thumb_sha256": "b9a97f5bedda858a22d0eec572e7376d98de45e1274a0a64e8185ed2e2f3f3e8"
+    },
+    {
+      "name": "gpio_registrar",
+      "entry": "0x54e78",
+      "bytes": 48,
+      "ghidra_file": "ghidra-gpio_registrar.json",
+      "ghidra_sha256": "6aa8698fea112c38f6d60a1d2f67b099cd7757ba041bac5c4cbf91d37c9b1aed",
+      "thumb_file": "thumb-gpio_registrar.txt",
+      "thumb_sha256": "8e7e850c25260557e69a0405ad9bfc65dbef2b39b15b2d8a311d32876abb2ef2"
+    },
+    {
+      "name": "gpio_output_wrappers",
+      "entry": "0x54f3c",
+      "bytes": 84,
+      "ghidra_file": "ghidra-gpio_output_wrappers.json",
+      "ghidra_sha256": "669fa77fe6f3804e0b98a27e8abda647b91b4ff8767981e4d15bc3a154b998e5",
+      "thumb_file": "thumb-gpio_output_wrappers.txt",
+      "thumb_sha256": "07a7cbc3c9616566b553eb08e78d91911f0b5ef8b4548111bfae6333d10bb9d1"
+    }
+  ],
+  "configuration_gate": "216 cold RAM bytes are reconstructed as typed C and compared after authenticated native reset;10 operation/IRQ pointer bindings are not body or ABI admission.",
+  "classification_correction": "Initcall0x54e78 is GPIO output control (GPIOTE output helpers and ppg/touch/ship control names), not PWM. Source-owned provider renamed r1_native_output_gpio_registration."
+}

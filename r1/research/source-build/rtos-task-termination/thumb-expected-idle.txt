@@ -1,0 +1,31 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00084f68 <r1_stock_gpio_pin_set+0xbb34>:
+   84f68:	4809      	ldr	r0, [pc, #36]	@ (84f90 <_stack+0x4f90>)
+   84f6a:	2100      	movs	r1, #0
+   84f6c:	6902      	ldr	r2, [r0, #16]
+   84f6e:	b102      	cbz	r2, 84f72 <_stack+0x4f72>
+   84f70:	2101      	movs	r1, #1
+   84f72:	6802      	ldr	r2, [r0, #0]
+   84f74:	6ad2      	ldr	r2, [r2, #44]	@ 0x2c
+   84f76:	b10a      	cbz	r2, 84f7c <_stack+0x4f7c>
+   84f78:	2000      	movs	r0, #0
+   84f7a:	4770      	bx	lr
+   84f7c:	4a05      	ldr	r2, [pc, #20]	@ (84f94 <_stack+0x4f94>)
+   84f7e:	6812      	ldr	r2, [r2, #0]
+   84f80:	2a01      	cmp	r2, #1
+   84f82:	d8f9      	bhi.n	84f78 <_stack+0x4f78>
+   84f84:	2900      	cmp	r1, #0
+   84f86:	d1f7      	bne.n	84f78 <_stack+0x4f78>
+   84f88:	6a81      	ldr	r1, [r0, #40]	@ 0x28
+   84f8a:	68c0      	ldr	r0, [r0, #12]
+   84f8c:	1a08      	subs	r0, r1, r0
+   84f8e:	4770      	bx	lr
+   84f90:	781c      	ldrb	r4, [r3, #0]
+   84f92:	2000      	movs	r0, #0
+   84f94:	ad94      	add	r5, sp, #592	@ 0x250
+   84f96:	2002      	movs	r0, #2

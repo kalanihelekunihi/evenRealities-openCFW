@@ -1,0 +1,17 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "d1502553be81d3631bf883b52f1d63dec688eb82748da99d5b66e4de5db02175",
+  "comparisons": 16384,
+  "actual_native_tick": true,
+  "provider_reports": {
+    "native-rtc-lifecycle/report.json": "7e58fb366e0d5016d361238d42d7d1a8c786cef2870237c9f562a4a3140f4099",
+    "native-rtc-device/report.json": "5bd17def16ee2015c39c93b8b5c0b5126ad6059d6a4d81ccaf31c716bf614a56"
+  },
+  "callbacks_per_implementation": 16245,
+  "vector_bytes_pointer_normalized": 4,
+  "scope": "Actual compiled native RTC tick/calendar and bounded alarm callbacks; Actual pinned SDK IRQ wrapper and common dispatcher, all enabled/pending six-event masks, channel bounds 0/1/4, ordered MMIO writes and callbacks; callback disabling/enabling pending events and replacing handler",
+  "limitations": [
+    "W1C event/interrupt behavior is a controlled MMIO model. IRQ callbacks are fixtures by default; --real-tick executes actual native tick/calendar with alarm and handler-replacement fixtures. Physical interrupt delivery, concurrency, timing and whole-image equality remain unproven.",
+    "Original wrapper ownership extent162 is held as a boundary discrepancy; native wrapper bytes16 are supplemental."
+  ]
+}

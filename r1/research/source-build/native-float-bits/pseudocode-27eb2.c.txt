@@ -1,0 +1,26 @@
+/* ================================================================
+ * entry: 0x00027eb2
+ * end:   0x00027ee3
+ * size:  50 bytes
+ * name:  FUN_00027eb2
+ * ================================================================ */
+
+int FUN_00027eb2(int param_1,uint param_2)
+
+{
+  int iVar1;
+  uint uVar2;
+
+  uVar2 = (param_2 & 0x7fffffff) >> 0x14;
+  if (uVar2 < 0x3ff) {
+    return 0;
+  }
+  if (uVar2 < 0x434) {
+    iVar1 = FUN_000275ca(param_1,param_2 & 0xfffff | 0x100000,-(uVar2 - 0x433));
+    return iVar1;
+  }
+  return param_1 << (uVar2 - 0x433 & 0xff);
+}
+
+
+

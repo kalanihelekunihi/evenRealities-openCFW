@@ -1,0 +1,101 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "spans": [
+    {
+      "name": "init",
+      "entry": "0x7ad6c",
+      "bytes": 188,
+      "ghidra_file": "ghidra-init.json",
+      "ghidra_sha256": "bf09dd47d25ea02c01f54304e42223a529eb398397ff7e0592c398c922e33a2b",
+      "thumb_file": "thumb-init.txt",
+      "thumb_sha256": "ac915db24a196a6d4231d52787ad8ddd18a2a6a5f9395ecabd28cd81d963900b"
+    },
+    {
+      "name": "enable",
+      "entry": "0x7ad20",
+      "bytes": 60,
+      "ghidra_file": "ghidra-enable.json",
+      "ghidra_sha256": "885220e69efd550974b014106050b870b2e8897989d5006afbe298f4a4adc7b9",
+      "thumb_file": "thumb-enable.txt",
+      "thumb_sha256": "5c1402739c0dc47404926580c436a972cd02e1ad1ee25438b256abc5a559f8c4"
+    },
+    {
+      "name": "tick_enable",
+      "entry": "0x7ae4c",
+      "bytes": 68,
+      "ghidra_file": "ghidra-tick_enable.json",
+      "ghidra_sha256": "e8e10f0c3675f281cbb061387f007144688967588f817886643768db9301f57e",
+      "thumb_file": "thumb-tick_enable.txt",
+      "thumb_sha256": "0df55071e73cb069cdf24f0a6f91f02d62642845d7cd4cf55992756c5f9de37d"
+    },
+    {
+      "name": "enabled_log",
+      "entry": "0x7ad5c",
+      "bytes": 15,
+      "ghidra_file": "ghidra-enabled_log.json",
+      "ghidra_sha256": "ca1fa0ebbadcb95effb6f876ae59417b0bf6ca9daa3a8987ad9be475d722871b",
+      "thumb_file": "thumb-enabled_log.txt",
+      "thumb_sha256": "1fd4386c1adc6b73a65e7c3c186799534a855f1f471ddc62a01db3795f214e5f"
+    },
+    {
+      "name": "function_log",
+      "entry": "0x7ae28",
+      "bytes": 36,
+      "ghidra_file": "ghidra-function_log.json",
+      "ghidra_sha256": "9f09930ac79414d68572854629ff871d47af68ac1d180404337fb04d3a363338",
+      "thumb_file": "thumb-function_log.txt",
+      "thumb_sha256": "2c5d7850ac7b9d8f0a707ab6b843389ee1f351971e4f91ae801889ce25ed29b8"
+    },
+    {
+      "name": "tick_log",
+      "entry": "0x7ae90",
+      "bytes": 27,
+      "ghidra_file": "ghidra-tick_log.json",
+      "ghidra_sha256": "aae8b0c3888629ecdd2817023c5db45c79ae370cb19df689d4a5886282ca5a59",
+      "thumb_file": "thumb-tick_log.txt",
+      "thumb_sha256": "a6eaa04b553e3b13f086b35cd21fb08e3e210ecc09de65fd08a8abbc1c1609ab"
+    },
+    {
+      "name": "irq_wrapper",
+      "entry": "0x31750",
+      "bytes": 16,
+      "ghidra_file": "ghidra-irq_wrapper.json",
+      "ghidra_sha256": "56084c4ae6d667eec516b8cca858b4f59dc323514e7aad24ddb12cbc5bdd38d5",
+      "thumb_file": "thumb-irq_wrapper.txt",
+      "thumb_sha256": "7af54cf9fa105f4d6eca503bd45dd8f63bc6315828652f2f1d84384f4a3fe559"
+    },
+    {
+      "name": "irq_dispatch",
+      "entry": "0x7294c",
+      "bytes": 160,
+      "ghidra_file": "ghidra-irq_dispatch.json",
+      "ghidra_sha256": "54e0227db36c156c0dd8465d0d71ee6f99bdf3048b6b58a36545a14511562259",
+      "thumb_file": "thumb-irq_dispatch.txt",
+      "thumb_sha256": "3084139b47a934ee7b49347132b918f03c7a59cea0caf417b2234f07b3c860d4"
+    },
+    {
+      "name": "irq_vector",
+      "entry": "0x270d0",
+      "bytes": 4,
+      "ghidra_file": "ghidra-irq_vector.json",
+      "ghidra_sha256": "189ddd8c5a3c19358904d50dec2999452891e2c7432bd71f6c63f4669d81b2e9",
+      "thumb_file": "thumb-irq_vector.txt",
+      "thumb_sha256": "3e215c82f3401d8cfb7c2aa16acb3861452ed7be856e49a354f87779a76cb651"
+    }
+  ],
+  "irq_wrapper_function_lookup": {
+    "file": "ghidra-irq-wrapper-function.json",
+    "sha256": "a16c3201f6f7f47e2ff6fed4351d324afeb7fd56b71d42ea87886d352aca2026"
+  },
+  "irq_wrapper_boundary_gate": "Original ownership row claims162 bytes; native wrapper executes10 code bytes plus2 padding and4 literal bytes (16-byte supplemental span). Do not promote that oversized ownership row.",
+  "irq_rea_inventory_gate": {
+    "file": "r1/research/source-build/sdk-clock/rea-procedure-inventory.json",
+    "sha256": "fbdbc0c467b87b6c991baa6e398adae6fa42e47812b981a59221a122c37974ce",
+    "absent_observed_addresses": [
+      "0x31750",
+      "0x7294c"
+    ]
+  }
+}

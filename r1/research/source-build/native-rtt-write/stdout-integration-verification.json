@@ -1,0 +1,46 @@
+{
+  "comparisons": 972,
+  "initializations_per_side": 162,
+  "no_lock_calls_per_side": 9900,
+  "control_mode_cases": {
+    "0": 486,
+    "1": 486
+  },
+  "basepri_values": [
+    0,
+    32,
+    255
+  ],
+  "actual_source_initializer": true,
+  "actual_pinned_segger_ring": true,
+  "actual_source_memory_copy": true,
+  "r0_basepri_control_and_callee_saved_checked": true,
+  "r1_scratch_differences": 108,
+  "actual_source_printf": true,
+  "stdout_backend_fixture": false,
+  "trace_sha256": "e5f0398eb2cd09680df004eee6f8e8ab7a59733f076047047ef34f578cc6f61b",
+  "stdio_report_sha256": "4f455b9d04f7e14dc57afa83364444c875a9b585c091f1c1a48ac5772cb4bfc1",
+  "stdio_object_sha256": "8d09b510192afdaac1671914a32f3a7a12e565ee04ac3ae2a695cb26ea269089",
+  "stdio_no_unresolved": true,
+  "report_sha256": "f4a185f23cf9a5538bd39733209361cab4394456ddd96b6022694c6dde3536bc",
+  "object_sha256": "6c8f043a3f870314f3f916c24626f4ef5f7c13b9cc9136a7913c206af3c636f9",
+  "provider_reports": {
+    "sdk-segger-rtt/report.json": "46556a13a617288ea957a90c5593442112467f832fd79eab1cdd46dc1c3679b9",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+    "native-formatter-engine/report.json": "bbbd1f100347e8083fca51a56696a1284b5cefbcf74480fb69bc06a8029fab2b",
+    "native-formatter-stream/report.json": "0bc284ede661155dea5654c7d81e1f93947aae116c0f534ad95e37db05fcc7cf",
+    "native-formatter-stdio/report.json": "4f455b9d04f7e14dc57afa83364444c875a9b585c091f1c1a48ac5772cb4bfc1"
+  },
+  "driver_sha256": "5dd69ad1b7545cb061d0b04462f4c250d21c0d246e1fdea9ef2f9d7cef1231bd",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-319e0.json": "fc8d841f45df37b2d6fc919e0397513d22d4327f8c7a46101be4ffc806ad3c0d",
+    "ghidra-319e0.json": "b287a75ec05b5ae97461f29544913d5e858685385e38d8524fcc01c545acdbe8"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Blocking mode is tested only with enough free space; live debugger drain and concurrent host/device updates remain gated.",
+    "Unicorn CONTROL/BASEPRI observations do not prove physical privilege/interrupt timing.",
+    "Printf caller-saved scratch, callback frame addresses and private frame identity remain gated; backend payloads, RTT data and BASEPRI are compared. Whole-image/hardware delivery remain unproven."
+  ]
+}

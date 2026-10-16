@@ -1,0 +1,37 @@
+/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/newlib-stdio/s_frexp.o: \
+  /Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/newlib-stdio-3.3.0/newlib/libm/math/s_frexp.c \
+  /Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/newlib-stdio-3.3.0/newlib/libm/common/fdlibm.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/math.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/reent.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_ansi.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/newlib.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/config.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/ieeefp.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_types.h \
+  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wint_t.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_types.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/lock.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/cdefs.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/types.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/endian.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_endian.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/select.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_sigset.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_timeval.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/timespec.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_timespec.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_pthreadtypes.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/sched.h \
+  /Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/types.h

@@ -1,0 +1,52 @@
+/* ================================================================
+ * entry: 0x00079a44
+ * end:   0x00079ad9
+ * size:  150 bytes
+ * name:  FUN_00079a44
+ * ================================================================ */
+
+void FUN_00079a44(int param_1,uint param_2,undefined4 param_3,int param_4)
+
+{
+  undefined1 uVar1;
+  int *piVar2;
+  uint uVar3;
+  uint uVar4;
+
+  if (param_2 < 9) {
+    uVar1 = *(undefined1 *)(param_4 + 0xc);
+    *(undefined1 *)(param_4 + 0xc) = 0;
+    FUN_0008185c(param_3,param_4);
+    uVar3 = 0;
+    do {
+      if (uVar3 < param_2) {
+        FUN_00078a40(param_4,s__02x_00079adc,*(undefined1 *)(param_1 + uVar3));
+      }
+      else {
+        FUN_00078a40(param_4,&DAT_00079ae4);
+      }
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < 8);
+    FUN_00078a40(param_4,&DAT_00079ae8);
+    uVar3 = 0;
+    do {
+      if (uVar3 < param_2) {
+        uVar4 = (uint)*(byte *)(param_1 + uVar3);
+        if ((0x7e < uVar4) ||
+           (piVar2 = (int *)FUN_000275ec(), (*(byte *)(*piVar2 + uVar4) & 0x3e) == 0)) {
+          uVar4 = 0x2e;
+        }
+        FUN_00078a40(param_4,&DAT_00079aec,uVar4);
+      }
+      else {
+        FUN_00078a40(param_4,&DAT_00079af0);
+      }
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < 8);
+    FUN_000813e0(param_3,param_4,1);
+    *(undefined1 *)(param_4 + 0xc) = uVar1;
+  }
+  return;
+}
+
+

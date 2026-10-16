@@ -1,0 +1,21 @@
+/* Complete native body with explicit extent and delayed effects. */
+__asm__(
+".text\n"
+".balign 4\n"
+".global opencfw_em9305_dispatch_child_32543c\n"
+".type opencfw_em9305_dispatch_child_32543c,@function\n"
+"opencfw_em9305_dispatch_child_32543c:\n"
+"L32543c:\n"
+"mov_s r0,0x805cac\n"
+"L325442:\n"
+"ld r0,[r0,0]\n"
+"L325444:\n"
+"ldh_s r0,[r0,0x2c]\n"
+"L325446:\n"
+"add r0,r0,0x10\n"
+"L325448:\n"
+"b.d opencfw_em9305_wsf_event_allocate\n"
+"L32544c:\n"
+"exth_s r0,r0\n"
+".size opencfw_em9305_dispatch_child_32543c,.-opencfw_em9305_dispatch_child_32543c\n"
+);

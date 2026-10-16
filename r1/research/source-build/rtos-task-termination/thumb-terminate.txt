@@ -1,0 +1,27 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0007d8d6 <r1_stock_gpio_pin_set+0x44a2>:
+   7d8d6:	b570      	push	{r4, r5, r6, lr}
+   7d8d8:	4605      	mov	r5, r0
+   7d8da:	f7b2 faef 	bl	2febc <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x8ebc>
+   7d8de:	b110      	cbz	r0, 7d8e6 <r1_stock_gpio_pin_set+0x44b2>
+   7d8e0:	f06f 0405 	mvn.w	r4, #5
+   7d8e4:	e00f      	b.n	7d906 <r1_stock_gpio_pin_set+0x44d2>
+   7d8e6:	b14d      	cbz	r5, 7d8fc <r1_stock_gpio_pin_set+0x44c8>
+   7d8e8:	4628      	mov	r0, r5
+   7d8ea:	f7df fb5f 	bl	5cfac <r1_stock_i2c5_acquire+0xcad4>
+   7d8ee:	2804      	cmp	r0, #4
+   7d8f0:	d007      	beq.n	7d902 <r1_stock_gpio_pin_set+0x44ce>
+   7d8f2:	2400      	movs	r4, #0
+   7d8f4:	4628      	mov	r0, r5
+   7d8f6:	f018 fb93 	bl	96020 <_stack+0x16020>
+   7d8fa:	e004      	b.n	7d906 <r1_stock_gpio_pin_set+0x44d2>
+   7d8fc:	f06f 0403 	mvn.w	r4, #3
+   7d900:	e001      	b.n	7d906 <r1_stock_gpio_pin_set+0x44d2>
+   7d902:	f06f 0402 	mvn.w	r4, #2
+   7d906:	4620      	mov	r0, r4
+   7d908:	bd70      	pop	{r4, r5, r6, pc}

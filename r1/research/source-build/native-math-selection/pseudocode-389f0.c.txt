@@ -1,0 +1,46 @@
+/* ================================================================
+ * entry: 0x000389f0
+ * end:   0x00038a51
+ * size:  98 bytes
+ * name:  FUN_000389f0
+ * ================================================================ */
+
+float FUN_000389f0(float param_1)
+
+{
+  uint uVar1;
+  uint uVar2;
+  bool bVar3;
+
+  uVar1 = ((uint)ABS(param_1) >> 0x17) - 0x7f;
+  if (0x16 < (int)uVar1) {
+    return param_1;
+  }
+  if ((int)uVar1 < 0) {
+    if (0.0 < param_1 + DAT_00038a54) {
+      bVar3 = (int)param_1 < 0;
+      if (0 < (int)param_1) {
+        param_1 = 1.0;
+      }
+      if (bVar3) {
+        param_1 = -0.0;
+      }
+    }
+  }
+  else {
+    uVar2 = DAT_00038a58 >> (uVar1 & 0xff);
+    if (((uint)param_1 & uVar2) == 0) {
+      return param_1;
+    }
+    if (0.0 < param_1 + DAT_00038a54) {
+      if (0 < (int)param_1) {
+        param_1 = (float)((int)param_1 + (0x800000U >> (uVar1 & 0xff)));
+      }
+      param_1 = (float)((uint)param_1 & ~uVar2);
+    }
+  }
+  return param_1;
+}
+
+
+

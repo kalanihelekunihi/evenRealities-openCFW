@@ -14,7 +14,7 @@ USER = G2 / "components/audio/uart_thread_source_candidate/display_ble_dm_adv_lo
 NATIVE = G2 / "analysis/shortcut-arm-tools-20261009-agent3/main-analysis-only.elf"
 BASE = G2 / "build/c-firmware/20261014/main-dm-conn-update-dispatch/apollo-main-dm-conn-update-dispatch.o"
 OUT = G2 / "build/c-firmware/20261014/main-dm-adv-control-state"
-NAME, RAM, LITERAL, SIZE = "audio_ble_dm_adv_control", 0x20073394, 0x4b32cc, 0x20
+NAME, RAM, LITERAL, SIZE = "audio_ble_dm_adv_control", 0x20073394, 0x4b32cc, 0x34
 
 
 def bytes_at(segments, address):
@@ -31,6 +31,12 @@ def main():
     user = USER.read_text()
     if "index<2u" not in user or "audio_ble_dm_adv_control[0x1du+index]" not in user:
         raise RuntimeError("DM advertising observed handle range changed")
+    payload = (G2 / "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin").read_bytes()[32:]
+    if payload[0x4ba0da-0x438000:0x4ba0de-0x438000] != bytes.fromhex("20890884"):
+        raise RuntimeError("native advertising duration write changed")
+    if payload[0x4b313e-0x438000:0x4b3158-0x438000] != bytes.fromhex(
+            "90f831008df80900e4b20620444301eb040010f125010df10a00"):
+        raise RuntimeError("native advertising peer completion span changed")
     OUT.mkdir(parents=True, exist_ok=True)
     obj = OUT / "dm_adv_control_state.o"
     subprocess.run(["clang", "--target=arm-none-eabi", "-mcpu=cortex-m4", "-mthumb",
@@ -53,7 +59,8 @@ def main():
     receipt = {"status": "PASS_EXPERIMENTAL_MAIN_DM_ADV_CONTROL_STATE_C",
                "native_elf": str(NATIVE.relative_to(ROOT)), "native_elf_sha256": sha(NATIVE),
                "native_ram": hex(RAM), "native_literal": hex(LITERAL),
-               "observed_source_bytes": SIZE,
+               "observed_source_bytes": SIZE, "duration_write_native": "0x4ba0da..0x4ba0de",
+               "peer_complete_read_native": "0x4b313e..0x4b3158",
                "source": str(SOURCE.relative_to(ROOT)), "source_sha256": sha(SOURCE),
                "user_source": str(USER.relative_to(ROOT)), "user_source_sha256": sha(USER),
                "object": str(obj.relative_to(ROOT)), "object_sha256": sha(obj),

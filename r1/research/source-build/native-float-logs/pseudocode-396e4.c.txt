@@ -1,0 +1,62 @@
+/* ================================================================
+ * entry: 0x000396e4
+ * end:   0x0003982f
+ * size:  332 bytes
+ * name:  FUN_000396e4
+ * ================================================================ */
+
+float FUN_000396e4(float param_1)
+
+{
+  float fVar1;
+  uint uVar2;
+  int iVar3;
+  int iVar4;
+  uint in_fpscr;
+  float fVar5;
+  float fVar6;
+
+  iVar4 = 0;
+  if (0x7effffff < (int)param_1 - 0x800000U) {
+    if (0xff000000 < (uint)((int)param_1 << 1)) {
+      return param_1 + param_1;
+    }
+    if (param_1 == INFINITY) {
+      return INFINITY;
+    }
+    if (param_1 < 0.0) {
+      FUN_0003bc9c(1);
+      return DAT_0003bae0 / DAT_0003bae0;
+    }
+    in_fpscr = in_fpscr & 0xfffffff | (uint)(param_1 == 0.0) << 0x1e;
+    if ((byte)(in_fpscr >> 0x1e) != 0) {
+      FUN_0003bc9c(2);
+      fVar1 = (float)FUN_0003bab4();
+      return -fVar1;
+    }
+    iVar4 = -0x17;
+    param_1 = param_1 * DAT_00039860;
+  }
+  iVar3 = ((int)((int)param_1 + 0x80000U) >> 0x17) + -0x7f;
+  uVar2 = ((int)param_1 + 0x80000U & 0x7fffff) >> 0x14;
+  fVar1 = (float)(uVar2 * 0x100000 + 0x3f800000);
+  param_1 = (float)((int)param_1 + iVar3 * -0x800000);
+  iVar4 = iVar4 + iVar3;
+  if (iVar4 != 0 || uVar2 != 0) {
+    fVar1 = (param_1 - fVar1) / (param_1 + fVar1);
+    fVar5 = (float)VectorSignedToFloat(iVar4,(byte)(in_fpscr >> 0x16) & 3);
+    fVar6 = (float)VectorSignedToFloat(iVar4,(byte)(in_fpscr >> 0x16) & 3);
+    return *(float *)(DAT_00039838 + 0x39750 + uVar2 * 4) + fVar5 * DAT_0003983c +
+           *(float *)(DAT_00039840 + 0x3976c + uVar2 * 4) + fVar6 * DAT_00039844 +
+           fVar1 * fVar1 * fVar1 * (DAT_00039834 + fVar1 * fVar1 * DAT_00039830) +
+           fVar1 * DAT_00039848;
+  }
+  param_1 = param_1 - 1.0;
+  return param_1 * param_1 *
+         (DAT_00039858 +
+         param_1 * (DAT_00039854 + param_1 * (DAT_00039850 + param_1 * DAT_0003984c))) +
+         param_1 * DAT_0003985c + param_1 * 0.421875;
+}
+
+
+

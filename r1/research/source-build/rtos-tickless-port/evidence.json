@@ -1,0 +1,53 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "upstream_pin": "nRF5_SDK_17.1.0_ddde560",
+  "spans": [
+    {
+      "entry": "0x95de4",
+      "bytes": 308,
+      "ghidra_file": "ghidra-sleep.json",
+      "ghidra_sha256": "3ce44f2fb13fd066135b5ce20780ab258fd0dc70e04cf868a701a61116ad22b7",
+      "thumb_file": "thumb-sleep.txt",
+      "thumb_sha256": "b6a4f48d135ee2ef0af9b72c44ce81a09514459bbb6435ce60db7403782d92d7"
+    },
+    {
+      "entry": "0x79de8",
+      "bytes": 12,
+      "ghidra_file": "ghidra-rtc-event-clear.json",
+      "ghidra_sha256": "64d77363891276cf1f47a3fce33ce7a16c08fdbc018514c5620f518096c92c8b",
+      "thumb_file": "thumb-rtc-event-clear.txt",
+      "thumb_sha256": "8eea970c54aa21769527fd8a2d9e551553476121f2b4857ff86ce8f4fe83a766"
+    },
+    {
+      "entry": "0x38166",
+      "bytes": 26,
+      "ghidra_file": "ghidra-nvic-clear-pending.json",
+      "ghidra_sha256": "525461371ddc17d4ef9beb11ebb36df983b6f3bd57e0eca828411410e6ab7ba3",
+      "thumb_file": "thumb-nvic-clear-pending.txt",
+      "thumb_sha256": "9975fe9aac9b33193f50c3b69505aba4511618403f7d3c10fc5f5074742ce6bf"
+    }
+  ],
+  "rea_inventory": "r1/research/source-build/sdk-clock/rea-procedure-inventory.json",
+  "rea_inventory_sha256": "fbdbc0c467b87b6c991baa6e398adae6fa42e47812b981a59221a122c37974ce",
+  "rea_registered_rows": [
+    {
+      "address": "0x79de8",
+      "value": "FUN_00079de8"
+    }
+  ],
+  "limitations": [
+    "Memory-backed MMIO/wake/SVC fixtures are not physical hardware proof. Native code spans include supplemental literal words beyond immutable ownership code sizes."
+  ],
+  "sdk_zip_sha256": "5bfe38e744c39fd7f30e10077ba12df306ef91f368894795d6a3e7a62dc68061",
+  "native_configuration": {
+    "rtc_base": "0x40011000",
+    "maximum_idle": "0x00fffffd",
+    "nvic_state": "0x2002c2fc",
+    "pre_sleep": "Only nonzero idle time checks pending FPU IRQ38; clear FPSCR0x9f, read FPSCR, clear IRQ38",
+    "post_sleep": "No callback; normal port cleanup executes",
+    "error": "Nonzero status calls existing returning r1_adc_error; native continues"
+  },
+  "scope": "Full unchanged Nordic RTC sleep body; scoped typed error and FPU configuration; SDK NVIC/event primitives execute actual C code"
+}

@@ -1,0 +1,24 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "provider_reports": {
+    "sdk-atfifo/report.json": "200bc7b96e51aaf869fadce71f2de5dd5d857a94372e2a065ba77643a29fca99",
+    "sdk-fstorage-sd/report.json": "b8a8a316a9ee5ae05443627ddeadb507b7fcd995fab3ba497a633a45791dfc1b",
+    "sdk-fstorage/report.json": "6bede1f87b5b26a9c18a77b91f890d4db5b262aa588f3c456610040d55cc5307",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+    "sdk-soc/report.json": "15f1b031d2dc1bb4c2e0da9db591057809be972891ab774b6ab8702ffde09eee",
+    "sdk-ble-dispatch/report.json": "798d03b820cf73d2cba287b53433078429587f34e4010875f229face12c7507c"
+  },
+  "workflows": 69,
+  "actions": 920,
+  "svc_calls_per_implementation": 290,
+  "soc_svc_calls_per_implementation": 748,
+  "via_actual_soc_poll": true,
+  "event_callbacks_per_implementation": 240,
+  "scope": "Via actual pinned SOC poll and legacy iterator. Actual pinned FIFO/exclusive/atomic/facade/SoftDevice fstorage code, queue-full status, repeated ring wrap/drain, chunking, busy retry, fatal/timeout event results, pause/resume, repeated init/uninit and FIFO state/event order after each action",
+  "limitations": [
+    "SDH enable/continue, clock/DFU SOC observers, application callback and flash/SOC SVC replies are fixtures.",
+    "Serialized valid bounded workflows; reentrant/multicore behavior and nonterminating huge/zero-page synchronous erases remain gates.",
+    "Full image, original compiler/link identity and hardware remain unproven."
+  ],
+  "instruction_identity_proven": false
+}

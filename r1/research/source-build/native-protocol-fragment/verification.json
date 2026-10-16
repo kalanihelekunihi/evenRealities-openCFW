@@ -1,0 +1,97 @@
+{
+  "comparisons": 4957,
+  "status_counts": {
+    "0": 4800,
+    "4294967295": 157
+  },
+  "provider_calls_per_side": {
+    "crc": 4957,
+    "memmove": 40593,
+    "callback": 40924,
+    "mode": 399,
+    "ring": 108,
+    "std1": 0,
+    "std2": 96
+  },
+  "all_lengths_0_through_4097": true,
+  "null_empty_input": true,
+  "native_body_ranges": [
+    {
+      "start": "0x32408",
+      "end": "0x32485",
+      "bytes": 126
+    },
+    {
+      "start": "0x32488",
+      "end": "0x32519",
+      "bytes": 146
+    }
+  ],
+  "native_body_bytes": 272,
+  "native_span_bytes": 274,
+  "excluded_nop_bytes": 2,
+  "mode_sequences": 13,
+  "actual_crc32_and_memmove": true,
+  "extra_empty_fragment_preserved": true,
+  "callback_returns_ignored": true,
+  "live_callback_and_input_mutation": true,
+  "source_descriptor_sections": {
+    "large_ring": {
+      "address": 206116,
+      "bytes": 36,
+      "sha256": "f731931c5cb734dfad77b3e2a52a9e6c619a2ed0fb0a8d0abcbe4a3eb212d6c7"
+    },
+    "large_sdk": {
+      "address": 206152,
+      "bytes": 27,
+      "sha256": "25dd49cec6ab2026da452eb3a29dbc3d1c809c7ed5ad32bf2723e41283b868ec"
+    },
+    "remaining_ring": {
+      "address": 206184,
+      "bytes": 26,
+      "sha256": "07c9c208deb8f4c2da9e08381f6af18e905ce1521d68d7026dadaef137108dc5"
+    },
+    "remaining_sdk": {
+      "address": 206212,
+      "bytes": 17,
+      "sha256": "7e6bca57ee9b9e4b02fc31dccfda4a10e27f75eba7269a1cd5d49da429c527ea"
+    }
+  },
+  "ownership_row": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x00032408",
+    "end": "0x00032519",
+    "size": "272",
+    "recovered_name": "FUN_00032408",
+    "provider_family": "r1_product_specific",
+    "source_disposition": "clean_room_behavior_only",
+    "upstream_symbol": "r1_fragment_message",
+    "confidence": "high",
+    "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+  },
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "rea_boundary_available": false,
+  "evidence": {
+    "rea-boundary-gap.json": "bea1138990fe26ca334f2b44d2dddecb2d9870673d7519fb52ca08b21e63f912",
+    "ghidra-body-data.json": "1fca18ddb2ac5fa3789747b1c7055e61f73e1ad334da68b536d31db2aebb2213",
+    "ghidra-registration-target.json": "24f058704a1d7440def1b3e35ff3a3b3fa7c032927c4a7728ac25e8e4f85364b"
+  },
+  "provider_reports": {
+    "native-protocol-fragment/report.json": "c39abfc9ebad49bb1952ed1a89e87acd69c073bb1ee61c896ddfbbb350184136",
+    "runtime-memmove/report.json": "1fe07a7a774baa81db1642319bc5d24e4f547e38c7ad2e94402731c8059f0217",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016",
+    "report.json": "1d6299e66cdf7095d40c8aec9749b567933c6ad972dd261d1e06fc03f2dbacbc"
+  },
+  "driver_sha256": "d614b235dc61d1bfa68a5fa5167baafe1c494f784e426b73533513ebbff004d3",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Locked272-byte ownership body, native registered pointer and exact Ghidra-MCP bytes; REA has no function entry",
+    "Callback slot is a live external binding; initialization, valid target registration and BLE delivery remain gated",
+    "Mapped valid input buffers tested; input alias to compiler-private stack or callback writes outside packet bounds remain gated",
+    "Full32-bit CRC length executes before rejection; mapped lengths only0..8192 covered; full-width address/fault behavior not proven",
+    "Returnr0 and callee-saved ABI checked; volatile scratch r1/r2/r3 and instruction identity remain open"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "0b076ba6dd4c5808a7476f32fbd82646a5a8a1aa16a1a858856542d94dadf023",
+  "driver_sha256": "2b6c776b9495365ad0d8956b5292524d39e66a9020c077d4471463a8a2089ec6",
+  "list_report_sha256": "e240b64ac26d8dcb7790a8295f6317c6aaba4539b74be8d3aa160da3cada20f5",
+  "list_object_sha256": "c784a67d09a198db490c09025552599ad553afc059d087473a69102fed308cf5",
+  "comparisons": 4813,
+  "assertion_comparisons": 853,
+  "comparisons_by_function": {
+    "xTimerCreate": 120,
+    "xTimerCreateStatic": 120,
+    "r1_timer_initialise_new": 2304,
+    "xTimerGenericCommand": 2269
+  },
+  "scope": "Unchanged pinned dynamic/static timer creation/private initializer/generic-command bodies and actual list-item initialization;44-byte timer fields/status, NULL/failure/zero-period assertions, task/ISR routing, scheduler-dependent wait and return values",
+  "limitations": [
+    "Heap allocation, timer infrastructure, scheduler-state and task/ISR queue sends are explicit fixtures. Queue message bytes12..15 are uninitialized padding and excluded from the call contract; first12 bytes are checked exactly. No combined timer graph, ISR behavior on hardware or instruction identity proof."
+  ]
+}

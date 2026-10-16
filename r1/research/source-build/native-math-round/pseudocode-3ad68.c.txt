@@ -1,0 +1,36 @@
+/* ================================================================
+ * entry: 0x0003ad68
+ * end:   0x0003ae01
+ * size:  154 bytes
+ * name:  FUN_0003ad68
+ * ================================================================ */
+
+uint FUN_0003ad68(float param_1)
+
+{
+  float fVar1;
+  float fVar2;
+
+  fVar1 = (float)FUN_000280e6(param_1);
+  fVar2 = param_1 - fVar1;
+  if (((uint)param_1 & 0x80000000) == 0) {
+    if ((0xbf000000 < (uint)fVar2) && ((uint)((int)fVar2 << 1) < 0xff000001)) goto LAB_0003adce;
+    if ((int)fVar2 < 0x3f000000) goto LAB_0003adec;
+  }
+  else {
+    if (0xbeffffff < (uint)fVar2 && (uint)((int)fVar2 << 1) < 0xff000001) {
+LAB_0003adce:
+      fVar1 = fVar1 - 1.0;
+      goto LAB_0003adec;
+    }
+    if ((int)fVar2 < 0x3f000001) goto LAB_0003adec;
+  }
+  if ((uint)((int)fVar2 << 1) < 0xff000001) {
+    fVar1 = fVar1 + 1.0;
+  }
+LAB_0003adec:
+  return (uint)param_1 & 0x80000000 | (uint)ABS(fVar1);
+}
+
+
+

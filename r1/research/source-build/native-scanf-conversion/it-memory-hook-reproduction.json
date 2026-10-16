@@ -1,0 +1,115 @@
+{
+  "unicorn_version": "2.1.4",
+  "driver_sha256": "fdd7553c61890d955525ee987513f326c9ac68462aca87d3405873d4ee9398fa",
+  "fixture": "r1/tools/fixtures/scanf_it_memory_hook_replay.s",
+  "fixture_sha256": "cf735d987fe822167dfa671c858b4d64f0903093abf78425a0a6fa405a589eb6",
+  "layout": "r1/source-config/runtime/native_scanf_conversion_verification.ld",
+  "layout_sha256": "5bc4181c3427b053e8fd02115d91b530142e2943aa9913f281bc5908b5503bc2",
+  "verification_only": true,
+  "results": [
+    {
+      "memory_write_hook": false,
+      "pc": 536871168,
+      "sp": 537128960,
+      "error": null,
+      "trace": [
+        [
+          16777216,
+          537128960,
+          16777216
+        ],
+        [
+          16777218,
+          537128940,
+          16777216
+        ],
+        [
+          16777220,
+          537128928,
+          16777216
+        ],
+        [
+          16777222,
+          537128928,
+          1627389952
+        ],
+        [
+          16777224,
+          537128928,
+          1627389952
+        ],
+        [
+          16777228,
+          537128928,
+          1627389952
+        ],
+        [
+          16777230,
+          537128928,
+          1627389952
+        ],
+        [
+          16777232,
+          537128928,
+          1627389952
+        ],
+        [
+          16777234,
+          537128940,
+          1627389952
+        ]
+      ],
+      "stored_bytes": "04000000"
+    },
+    {
+      "memory_write_hook": true,
+      "pc": 0,
+      "sp": 537128948,
+      "error": "Invalid memory fetch (UC_ERR_FETCH_UNMAPPED)",
+      "trace": [
+        [
+          16777216,
+          537128960,
+          16777216
+        ],
+        [
+          16777218,
+          537128940,
+          16777216
+        ],
+        [
+          16777220,
+          537128928,
+          16777216
+        ],
+        [
+          16777222,
+          537128928,
+          1627389952
+        ],
+        [
+          16777224,
+          537128928,
+          1627389952
+        ],
+        [
+          16777228,
+          537128928,
+          1627411456
+        ],
+        [
+          16777230,
+          537128928,
+          1627389952
+        ],
+        [
+          16777234,
+          537128928,
+          1627389952
+        ]
+      ],
+      "stored_bytes": "04000000"
+    }
+  ],
+  "conclusion": "This controlled replay returns correctly without the memory-write hook and faults with it; source parser behavior must not be inferred from that hooked fault."
+}

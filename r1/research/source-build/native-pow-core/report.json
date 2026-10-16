@@ -1,0 +1,83 @@
+{
+  "units": [
+    {
+      "source": "r1/components/runtime/native_pow_core.c",
+      "source_sha256": "2e40a1ca40eabca823f254b76b65b4f51460a26b51a817fd7c014aec29c70b73",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-pow-core/native_pow_core.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/runtime/native_pow_core.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-pow-core/native_pow_core.o"
+      ],
+      "compiled": true,
+      "object_sha256": "d38a4652bb0a6f9e1b4e98270c91d2b402bb84ebd03384dcc2c8149afd23df8d",
+      "undefined": [
+        "r1_binary64_classify_bits",
+        "r1_binary64_compare_flags",
+        "r1_binary64_reverse_subtract_bits",
+        "r1_binary64_scale_power2_bits",
+        "r1_binary64_subtract_bits",
+        "r1_format_double_add_bits",
+        "r1_format_double_divide_bits",
+        "r1_format_double_multiply_bits",
+        "r1_math_high_square64",
+        "r1_math_low_square64",
+        "r1_native_errno_set",
+        "r1_native_polynomial",
+        "r1_pow_dispatch_zero",
+        "r1_signed32_to_binary64_bits"
+      ],
+      "defined": [
+        "r1_pow_base",
+        "r1_pow_exp_poly",
+        "r1_pow_limits",
+        "r1_pow_log",
+        "r1_pow_log_high",
+        "r1_pow_log_low",
+        "r1_pow_log_poly",
+        "r1_pow_near",
+        "r1_pow_normal",
+        "r1_pow_reduced",
+        "r1_pow_scaling",
+        "r1_pow_tail"
+      ],
+      "emitted_function_count": 2
+    }
+  ],
+  "inputs": {
+    "r1/components/runtime/native_pow_core.c": "2e40a1ca40eabca823f254b76b65b4f51460a26b51a817fd7c014aec29c70b73",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7",
+    "r1/components/runtime/native_float_bits.h": "49ec26615e9a6a60ea3afbf4e2aa3cd8cfe9bab990766c50fde628b74348ee09"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

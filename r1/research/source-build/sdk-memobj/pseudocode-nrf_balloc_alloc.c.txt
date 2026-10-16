@@ -1,0 +1,32 @@
+/* ================================================================
+ * entry: 0x000780d2
+ * end:   0x00078115
+ * size:  68 bytes
+ * name:  FUN_000780d2
+ * ================================================================ */
+
+int FUN_000780d2(int *param_1,undefined4 param_2,undefined4 param_3,uint param_4)
+
+{
+  uint uVar1;
+  byte *pbVar2;
+  int iVar3;
+  uint local_10;
+
+  iVar3 = 0;
+  local_10 = param_4 & 0xffffff00;
+  FUN_0004ebec(&local_10);
+  uVar1 = *(uint *)*param_1;
+  if ((uint)param_1[1] < uVar1) {
+    pbVar2 = (byte *)(uVar1 - 1);
+    *(uint *)*param_1 = (uint)pbVar2;
+    iVar3 = (uint)*pbVar2 * (uint)*(ushort *)(param_1 + 4) + param_1[3];
+    if ((uint)*(byte *)(*param_1 + 4) < ((uint)*(byte *)(param_1 + 2) - (int)pbVar2 & 0xff)) {
+      *(char *)(*param_1 + 4) = (char)((uint)*(byte *)(param_1 + 2) - (int)pbVar2);
+    }
+  }
+  FUN_0004ec34(local_10 & 0xff);
+  return iVar3;
+}
+
+

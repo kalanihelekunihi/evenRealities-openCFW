@@ -133,17 +133,1432 @@ def main():
     }
     main_path = BUILD / "main-post-tail-c-replay/receipt.json"
     main, main_ref = receipt(main_path)
-    if main["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or main["unresolved_after"] != 231:
+    if main["status"] != "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY" or main["unresolved_after"] != 187:
         raise RuntimeError("Apollo Main current replay changed")
     main_obj = file_checked(main["linked_object"], main["linked_object_sha256"])
     actual = undefined(ROOT / main_obj["path"])
-    if len(actual) != 231:
+    if len(actual) != 187:
         raise RuntimeError("Apollo Main unresolved set changed")
+    ram_path = G2 / "build/c-firmware/settings-live-buffers-round1007/receipt.json"
+    ram, ram_ref = receipt(ram_path)
+    ram_source = ROOT / "g2/components/audio/uart_thread_source_candidate/settings_live_buffers.c"
+    if ram["status"] != "PASS_SETTINGS_LIVE_BUFFER_MINIMA_BINDING" or \
+            ram["source_sha256"] != sha(ram_source) or \
+            ram["native_minimum_spans"]["audio_settings_last_message_state"]["minimum_size"] != 104:
+        raise RuntimeError("Apollo Main settings RAM extent evidence changed")
+    ram_rows = [line.split() for line in subprocess.check_output(
+        ["arm-none-eabi-nm", "-S", str(ROOT / main_obj["path"])], text=True).splitlines()
+        if line.endswith(" audio_settings_last_message_state")]
+    if len(ram_rows) != 1:
+        raise RuntimeError("Apollo Main settings RAM symbol missing")
+    selected_ram_bytes = int(ram_rows[0][1], 16)
+    if selected_ram_bytes != 104:
+        raise RuntimeError("Apollo Main still lacks the stock-evidenced 104-byte settings RAM span")
+    for symbol, minimum in (("audio_dm_connection_records", 196),
+                            ("audio_ble_dm_adv_control", 0x34)):
+        rows = [line.split() for line in subprocess.check_output(
+            ["arm-none-eabi-nm", "-S", str(ROOT / main_obj["path"])], text=True).splitlines()
+            if line.endswith(" " + symbol)]
+        if len(rows) != 1 or int(rows[0][1], 16) != minimum:
+            raise RuntimeError("Apollo Main bounded RAM source size changed: " + symbol)
+    registry_path = G2 / "build/c-firmware/20261015/main-dm-registry-extent-gate/receipt.json"
+    registry, registry_ref = receipt(registry_path)
+    if registry["status"] != "PASS_BOUNDED_MAIN_DM_REGISTRY_EXTENT_GATE" or \
+            registry["defined_ccb_bytes"] != 144 or registry["alias_safe"]:
+        raise RuntimeError("Apollo Main prior DM registry extent gate changed")
+    storage_path = G2 / "build/c-firmware/20261015/main-dm-conn-cb-storage-200712a4/receipt.json"
+    storage, storage_ref = receipt(storage_path)
+    pair_path = G2 / "build/c-firmware/20261014/main-master-pair-runtime-state/receipt.json"
+    pair, pair_ref = receipt(pair_path)
+    if pair["status"] != "PASS_EXPERIMENTAL_MAIN_MASTER_PAIR_RUNTIME_STATE_C" or \
+            pair["dm_cb_storage_bytes"] != 196 or \
+            storage["status"] != "PASS_EXPERIMENTAL_MAIN_DM_CONN_CB_STORAGE_ALIAS_C" or \
+            storage["pair_receipt_sha256"] != pair_ref["sha256"] or \
+            storage["shared_bss_bytes"] != 196 or \
+            storage["alias_target"] != "audio_dm_connection_records" or \
+            storage["imports_resolved"] != ["audio_ble_dm_connection_registry"] or \
+            "audio_ble_dm_connection_registry" in actual:
+        raise RuntimeError("Apollo Main C-owned DM registry alias changed")
+    stack_path = G2 / "build/c-firmware/20261015/main-dm-stack-interface-78a88c/receipt.json"
+    stack, stack_ref = receipt(stack_path)
+    if stack["status"] != "PASS_EXPERIMENTAL_MAIN_DM_STACK_INTERFACE_C" or \
+            stack["base_sha256"] != storage["linked_sha256"] or \
+            len(stack["imports_added"]) != 8:
+        raise RuntimeError("Apollo Main DM dispatch table changed")
+    scan_path = G2 / "build/c-firmware/20261015/main-dm-dispatch-scan-stop-536896/receipt.json"
+    scan, scan_ref = receipt(scan_path)
+    if scan["status"] != "PASS_EXPERIMENTAL_MAIN_DM_DISPATCH_SCAN_STOP_C" or \
+            scan["base_sha256"] != stack["linked_sha256"] or \
+            scan["imports_resolved"] != ["audio_ble_dm_dispatch_536896"]:
+        raise RuntimeError("Apollo Main DM scan-stop dispatch changed")
+    wrapper_path = G2 / "build/c-firmware/20261015/main-dm-dispatch-scan-stop-wrapper-5368ae/receipt.json"
+    wrapper, wrapper_ref = receipt(wrapper_path)
+    if wrapper["status"] != "PASS_EXPERIMENTAL_MAIN_DM_DISPATCH_SCAN_STOP_WRAPPER_C" or \
+            wrapper["base_sha256"] != scan["linked_sha256"] or \
+            wrapper["imports_resolved"] != ["audio_ble_dm_dispatch_5368ae"]:
+        raise RuntimeError("Apollo Main DM scan-stop wrapper changed")
+    msg_path = G2 / "build/c-firmware/20261015/main-dm-stack-msg-handler-5369d8/receipt.json"
+    msg, msg_ref = receipt(msg_path)
+    if msg["status"] != "PASS_EXPERIMENTAL_MAIN_DM_STACK_MSG_HANDLER_C" or \
+            msg["base_sha256"] != wrapper["linked_sha256"] or \
+            msg["imports_resolved"] != ["audio_ble_dm_stack_msg_handler_5369d8"]:
+        raise RuntimeError("Apollo Main DM message dispatcher changed")
+    forward_path = G2 / "build/c-firmware/20261015/main-dm-dispatch-4d2544/receipt.json"
+    forward, forward_ref = receipt(forward_path)
+    if forward["status"] != "PASS_EXPERIMENTAL_MAIN_DM_DISPATCH_4D2544_C" or \
+            forward["base_sha256"] != msg["linked_sha256"] or \
+            forward["imports_resolved"] != ["audio_ble_dm_dispatch_4d2544"] or \
+            forward["imports_added"] != []:
+        raise RuntimeError("Apollo Main DM dispatch forwarder changed")
+    reset_path = G2 / "build/c-firmware/20261015/main-dm-stack-reset-536918/receipt.json"
+    reset, reset_ref = receipt(reset_path)
+    if reset["status"] != "PASS_EXPERIMENTAL_MAIN_DM_STACK_RESET_C" or \
+            reset["base_sha256"] != forward["linked_sha256"] or \
+            reset["imports_resolved"] != ["audio_ble_dm_stack_reset_536918"]:
+        raise RuntimeError("Apollo Main DM stack reset changed")
+    hci_path = G2 / "build/c-firmware/20261015/main-dm-stack-hci-handler-53694c/receipt.json"
+    hci, hci_ref = receipt(hci_path)
+    if hci["status"] != "PASS_EXPERIMENTAL_MAIN_DM_STACK_HCI_HANDLER_C" or \
+            hci["base_sha256"] != reset["linked_sha256"] or \
+            hci["imports_added"] != ["audio_ble_dm_stack_hci_scan_complete_5368b6"]:
+        raise RuntimeError("Apollo Main DM HCI dispatcher changed")
+    complete_path = G2 / "build/c-firmware/20261015/main-dm-stack-hci-scan-complete-5368b6/receipt.json"
+    complete, complete_ref = receipt(complete_path)
+    if complete["status"] != "PASS_EXPERIMENTAL_MAIN_DM_STACK_HCI_SCAN_COMPLETE_C" or \
+            complete["base_sha256"] != hci["linked_sha256"] or \
+            complete["imports_resolved"] != ["audio_ble_dm_stack_hci_scan_complete_5368b6"]:
+        raise RuntimeError("Apollo Main DM scan-complete child changed")
+    scan_start_path = G2 / "build/c-firmware/20261015/main-dm-dispatch-scan-start-536820/receipt.json"
+    scan_start, scan_start_ref = receipt(scan_start_path)
+    if scan_start["status"] != "PASS_EXPERIMENTAL_MAIN_DM_DISPATCH_SCAN_START_C" or \
+            scan_start["base_sha256"] != complete["linked_sha256"] or \
+            scan_start["imports_resolved"] != ["audio_ble_dm_dispatch_536820"]:
+        raise RuntimeError("Apollo Main DM scan-start dispatch changed")
+    sec_path = G2 / "build/c-firmware/20261015/main-dm-sec-hci-handler-4d2364/receipt.json"
+    sec, sec_ref = receipt(sec_path)
+    if sec["status"] != "PASS_EXPERIMENTAL_MAIN_DM_SEC_HCI_HANDLER_C" or \
+            sec["base_sha256"] != scan_start["linked_sha256"] or \
+            len(sec["imports_added"]) != 5:
+        raise RuntimeError("Apollo Main DM security HCI dispatch changed")
+    lesc_path = G2 / "build/c-firmware/20261015/main-dm-sec-lesc-neg-ltk/receipt.json"
+    lesc, lesc_ref = receipt(lesc_path)
+    if lesc["status"] != "PASS_EXPERIMENTAL_MAIN_DM_SEC_LESC_NEG_LTK_C" or \
+            lesc["base_sha256"] != sec["linked_sha256"] or \
+            len(lesc["imports_resolved"]) != 2:
+        raise RuntimeError("Apollo Main LESC/negative LTK children changed")
+    ltk_path = G2 / "build/c-firmware/20261015/main-hci-ltk-reply-52b2ce/receipt.json"
+    ltk, ltk_ref = receipt(ltk_path)
+    if ltk["status"] != "PASS_EXPERIMENTAL_MAIN_HCI_LTK_REPLY_C" or \
+            ltk["base_sha256"] != lesc["linked_sha256"] or \
+            ltk["imports_resolved"] != ["HciLeLtkReqReplCmd"]:
+        raise RuntimeError("Apollo Main positive LTK child changed")
+    encrypt_path = G2 / "build/c-firmware/20261015/main-smp-encrypt-ind-537be6/receipt.json"
+    encrypt, encrypt_ref = receipt(encrypt_path)
+    if encrypt["status"] != "PASS_EXPERIMENTAL_MAIN_SMP_ENCRYPT_IND_C" or \
+            encrypt["base_sha256"] != ltk["linked_sha256"] or \
+            encrypt["imports_resolved"] != ["audio_ble_smp_encrypt_ind_537be6"]:
+        raise RuntimeError("Apollo Main SMP encrypt-indication child changed")
+    stk_path = G2 / "build/c-firmware/20261015/main-smp-get-stk-537c4c/receipt.json"
+    stk, stk_ref = receipt(stk_path)
+    if stk["status"] != "PASS_EXPERIMENTAL_MAIN_SMP_GET_STK_C" or \
+            stk["base_sha256"] != encrypt["linked_sha256"] or \
+            stk["imports_resolved"] != ["audio_ble_smp_get_stk_537c4c"]:
+        raise RuntimeError("Apollo Main SMP STK getter changed")
+    sec_interface_path = G2 / "build/c-firmware/20261015/main-dm-sec-interface-78a898/receipt.json"
+    sec_interface, sec_interface_ref = receipt(sec_interface_path)
+    if sec_interface["status"] != "PASS_EXPERIMENTAL_MAIN_DM_SEC_INTERFACE_C" or \
+            sec_interface["base_sha256"] != stk["linked_sha256"] or \
+            sec_interface["imports_resolved"] != ["audio_ble_dm_security_table"]:
+        raise RuntimeError("Apollo Main DM security interface changed")
+    phy_interface_path = G2 / "build/c-firmware/20261015/main-dm-phy-interface-78a85c/receipt.json"
+    phy_interface, phy_interface_ref = receipt(phy_interface_path)
+    if phy_interface["status"] != "PASS_EXPERIMENTAL_MAIN_DM_PHY_INTERFACE_C" or \
+            phy_interface["base_sha256"] != sec_interface["linked_sha256"] or \
+            phy_interface["imports_resolved"] != ["audio_ble_dm_phy_table"]:
+        raise RuntimeError("Apollo Main DM PHY interface changed")
+    lesc_interface_path = G2 / "build/c-firmware/20261015/main-dm-lesc-interface-78a8a4/receipt.json"
+    lesc_interface, lesc_interface_ref = receipt(lesc_interface_path)
+    if lesc_interface["status"] != "PASS_EXPERIMENTAL_MAIN_DM_LESC_INTERFACE_C" or \
+            lesc_interface["base_sha256"] != phy_interface["linked_sha256"] or \
+            lesc_interface["imports_resolved"] != ["audio_ble_dm_lesc_table"]:
+        raise RuntimeError("Apollo Main DM LESC interface changed")
+    priv_aes_interface_path = G2 / "build/c-firmware/20261015/main-dm-priv-aes-interface-78a874/receipt.json"
+    priv_aes_interface, priv_aes_interface_ref = receipt(priv_aes_interface_path)
+    if priv_aes_interface["status"] != "PASS_EXPERIMENTAL_MAIN_DM_PRIV_AES_INTERFACE_C" or \
+            priv_aes_interface["base_sha256"] != lesc_interface["linked_sha256"] or \
+            priv_aes_interface["imports_resolved"] != ["audio_ble_dm_priv_table_b"]:
+        raise RuntimeError("Apollo Main DM privacy AES interface changed")
+    mram_path = G2 / "build/c-firmware/20261015/main-mram-records-7ff000/receipt.json"
+    mram, mram_ref = receipt(mram_path)
+    if mram["status"] != "PASS_EXPERIMENTAL_MAIN_MRAM_RECORDS_C" or \
+            mram["base_sha256"] != priv_aes_interface["linked_sha256"] or \
+            mram["imports_resolved"] != ["audio_ble_mram_records_7ff000", "audio_ble_privacy_nvm_records"] or \
+            mram["section_type"] != "NOBITS" or mram["section_bytes"] != 2560:
+        raise RuntimeError("Apollo Main MRAM record binding changed")
+    priv_interface_path = G2 / "build/c-firmware/20261015/main-dm-priv-interface-78a868/receipt.json"
+    priv_interface, priv_interface_ref = receipt(priv_interface_path)
+    if priv_interface["status"] != "PASS_EXPERIMENTAL_MAIN_DM_PRIV_INTERFACE_C" or \
+            priv_interface["base_sha256"] != mram["linked_sha256"] or \
+            priv_interface["imports_resolved"] != ["audio_ble_dm_priv_table_a"] or \
+            len(priv_interface["imports_added"]) != 6:
+        raise RuntimeError("Apollo Main primary privacy interface changed")
+    addr_enable_path = G2 / "build/c-firmware/20261015/main-hci-addr-resolution-enable-52b7f6/receipt.json"
+    addr_enable, addr_enable_ref = receipt(addr_enable_path)
+    if addr_enable["status"] != "PASS_EXPERIMENTAL_MAIN_HCI_ADDR_RES_ENABLE_C" or \
+            addr_enable["base_sha256"] != priv_interface["linked_sha256"] or \
+            addr_enable["imports_resolved"] != ["HciLeSetAddrResolutionEnable"]:
+        raise RuntimeError("Apollo Main address resolution command changed")
+    hci_priv_path = G2 / "build/c-firmware/20261015/main-hci-privacy-commands-52b744/receipt.json"
+    hci_priv, hci_priv_ref = receipt(hci_priv_path)
+    if hci_priv["status"] != "PASS_EXPERIMENTAL_MAIN_HCI_PRIVACY_COMMANDS_C" or \
+            hci_priv["base_sha256"] != addr_enable["linked_sha256"] or \
+            len(hci_priv["imports_resolved"]) != 4:
+        raise RuntimeError("Apollo Main privacy HCI commands changed")
+    dev_priv_path = G2 / "build/c-firmware/20261015/main-dm-dev-priv-forward-4b2ea6/receipt.json"
+    dev_priv, dev_priv_ref = receipt(dev_priv_path)
+    if dev_priv["status"] != "PASS_EXPERIMENTAL_MAIN_DM_DEV_PRIV_FORWARD_C" or \
+            dev_priv["base_sha256"] != hci_priv["linked_sha256"] or \
+            dev_priv["imports_resolved"] != ["dmDevPassEvtToDevPriv"]:
+        raise RuntimeError("Apollo Main device privacy forwarding changed")
+    adv_reset_path = G2 / "build/c-firmware/20261015/main-dm-adv-reset-4ba45c/receipt.json"
+    adv_reset, adv_reset_ref = receipt(adv_reset_path)
+    if adv_reset["status"] != "PASS_EXPERIMENTAL_MAIN_DM_ADV_RESET_C" or \
+            adv_reset["base_sha256"] != dev_priv["linked_sha256"] or \
+            adv_reset["source_owned_symbols"] != ["audio_ble_dm_adv_reset_4ba45c"] or \
+            adv_reset["imports_added"] or adv_reset["imports_resolved"]:
+        raise RuntimeError("Apollo Main advertising reset changed")
+    adv_msg_path = G2 / "build/c-firmware/20261015/main-dm-adv-msg-4ba6ac/receipt.json"
+    adv_msg, adv_msg_ref = receipt(adv_msg_path)
+    if adv_msg["status"] != "PASS_EXPERIMENTAL_MAIN_DM_ADV_MSG_C" or \
+            adv_msg["base_sha256"] != adv_reset["linked_sha256"] or \
+            adv_msg["unresolved_after"] != 196 or len(adv_msg["imports_added"]) != 4:
+        raise RuntimeError("Apollo Main advertising message stage changed")
+    hci_adv_path = G2 / "build/c-firmware/20261015/main-hci-adv-commands-52b3b0/receipt.json"
+    hci_adv, hci_adv_ref = receipt(hci_adv_path)
+    if hci_adv["status"] != "PASS_EXPERIMENTAL_MAIN_HCI_ADV_COMMANDS_C" or \
+            hci_adv["base_sha256"] != adv_msg["linked_sha256"] or \
+            hci_adv["unresolved_after"] != 193 or len(hci_adv["imports_resolved"]) != 3:
+        raise RuntimeError("Apollo Main advertising HCI commands changed")
+    adv_config_path = G2 / "build/c-firmware/20261015/main-dm-adv-config-lower-4b9a80/receipt.json"
+    adv_config, adv_config_ref = receipt(adv_config_path)
+    if adv_config["status"] != "PASS_EXPERIMENTAL_MAIN_DM_ADV_CONFIG_LOWER_C" or \
+            adv_config["base_sha256"] != hci_adv["linked_sha256"] or \
+            adv_config["unresolved_after"] != 192 or \
+            adv_config["imports_resolved"] != ["audio_ble_dm_adv_config_lower_4b9a80"]:
+        raise RuntimeError("Apollo Main advertising configuration changed")
+    adv_extent_path = G2 / "build/c-firmware/20261015/main-dm-adv-control-extent-34/receipt.json"
+    adv_extent, adv_extent_ref = receipt(adv_extent_path)
+    if adv_extent["status"] != "PASS_EXPERIMENTAL_MAIN_DM_ADV_CONTROL_ALREADY_C_OWNED" or \
+            adv_extent["base_sha256"] != adv_config["linked_sha256"] or \
+            adv_extent["old_size"] != 0x34 or adv_extent["new_size"] != 0x34 or \
+            adv_extent["relocations_verified"] != 24:
+        raise RuntimeError("Apollo Main advertising control extent changed")
+    adv_hci_path = G2 / "build/c-firmware/20261015/main-dm-adv-hci-4ba4b0/receipt.json"
+    adv_hci, adv_hci_ref = receipt(adv_hci_path)
+    if adv_hci["status"] != "PASS_EXPERIMENTAL_MAIN_DM_ADV_HCI_C" or \
+            adv_hci["base_sha256"] != adv_extent["linked_sha256"] or \
+            adv_hci["unresolved_after"] != 192 or \
+            adv_hci["imports_resolved"] != ["audio_ble_dm_adv_table"] or \
+            adv_hci["imports_added"] != ["audio_ble_dm_adv_gen_conn_complete_4b310a"]:
+        raise RuntimeError("Apollo Main advertising HCI handler changed")
+    adv_gen_path = G2 / "build/c-firmware/20261015/main-dm-adv-gen-conn-4b310a/receipt.json"
+    adv_gen, adv_gen_ref = receipt(adv_gen_path)
+    if adv_gen["status"] != "PASS_EXPERIMENTAL_MAIN_DM_ADV_GEN_CONN_C" or \
+            adv_gen["base_sha256"] != adv_hci["linked_sha256"] or \
+            adv_gen["unresolved_after"] != 192 or \
+            adv_gen["imports_resolved"] != ["audio_ble_dm_adv_gen_conn_complete_4b310a"] or \
+            adv_gen["imports_added"] != ["audio_ble_dm_dev_pass_hci_conn_4d29c2"]:
+        raise RuntimeError("Apollo Main synthetic advertising connection completion changed")
+    dev_conn_path = G2 / "build/c-firmware/20261015/main-dm-dev-pass-hci-conn-4d29c2/receipt.json"
+    dev_conn, dev_conn_ref = receipt(dev_conn_path)
+    if dev_conn["status"] != "PASS_EXPERIMENTAL_MAIN_DM_DEV_PASS_HCI_CONN_C" or \
+            dev_conn["base_sha256"] != adv_gen["linked_sha256"] or \
+            dev_conn["unresolved_after"] != 191 or \
+            dev_conn["imports_resolved"] != ["audio_ble_dm_dev_pass_hci_conn_4d29c2"]:
+        raise RuntimeError("Apollo Main connection callback bridge changed")
+    flag_path = G2 / "build/c-firmware/20261015/main-bootloader-flag-7fe000/receipt.json"
+    flag, flag_ref = receipt(flag_path)
+    if flag["status"] != "PASS_EXPERIMENTAL_MAIN_BOOTLOADER_FLAG_C" or \
+            flag["base_sha256"] != dev_conn["linked_sha256"] or \
+            flag["unresolved_before"] != 191 or flag["unresolved_after"] != 190 or \
+            flag["imports_resolved"] != ["audio_ble_bootloader_flag"] or \
+            flag["placement_address"] != "0x007fe000" or flag["section_bytes"] != 16:
+        raise RuntimeError("Apollo Main OTA bootloader flag reservation changed")
+    als_path = G2 / "build/c-firmware/20261015/main-als-sync-registry-4ae73c/receipt.json"
+    als, als_ref = receipt(als_path)
+    if als["status"] != "PASS_EXPERIMENTAL_MAIN_ALS_SYNC_REGISTRY_C" or \
+            als["base_sha256"] != flag["linked_sha256"] or \
+            als["native_c_cases"] != 100 or \
+            als["unresolved_before"] != 190 or als["unresolved_after"] != 189 or \
+            als["imports_resolved"] != ["audio_uart_registry_callback_4ae73c"]:
+        raise RuntimeError("Apollo Main ALS sync registry callback changed")
+    display_table_path = G2 / "build/c-firmware/20261015/main-display-manager-state-table-776a3c/receipt.json"
+    display_table, display_table_ref = receipt(display_table_path)
+    if display_table["status"] != "PASS_EXPERIMENTAL_MAIN_DISPLAY_MANAGER_TABLE_C" or \
+            display_table["base_sha256"] != als["linked_sha256"] or \
+            display_table["native_c_cases"] != 60 or \
+            display_table["interface_words"] != 6 or \
+            display_table["unresolved_before"] != 189 or \
+            display_table["unresolved_after"] != 188 or \
+            display_table["imports_resolved"] != ["g2_display_state_table"]:
+        raise RuntimeError("Apollo Main display manager interface changed")
+    tracepoint_path = G2 / "build/c-firmware/20261015/main-tracepoint-registry-5eeec4/receipt.json"
+    tracepoint, tracepoint_ref = receipt(tracepoint_path)
+    if tracepoint["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REGISTRY_C" or \
+            tracepoint["base_sha256"] != display_table["linked_sha256"] or \
+            tracepoint["native_c_cases"] != 160 or \
+            tracepoint["unresolved_before"] != 188 or \
+            tracepoint["unresolved_after"] != 189 or \
+            tracepoint["imports_resolved"] != ["audio_uart_registry_callback_5eeec4"] or \
+            tracepoint["imports_added"] != ["audio_tracepoint_handle_ble_data_5ee8bc", "audio_tracepoint_handle_slave_file_list_5eeb98"]:
+        raise RuntimeError("Apollo Main tracepoint registry callback changed")
+    trace_ble_path = G2 / "build/c-firmware/20261015/main-tracepoint-ble-data-5ee8bc/receipt.json"
+    trace_ble, trace_ble_ref = receipt(trace_ble_path)
+    if trace_ble["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_BLE_DATA_C" or \
+            trace_ble["base_sha256"] != tracepoint["linked_sha256"] or \
+            trace_ble["native_c_cases"] != 280 or \
+            trace_ble["unresolved_before"] != 189 or \
+            trace_ble["unresolved_after"] != 193 or \
+            trace_ble["imports_resolved"] != ["audio_tracepoint_handle_ble_data_5ee8bc"]:
+        raise RuntimeError("Apollo Main tracepoint BLE-data child changed")
+    trace_ram_path = G2 / "build/c-firmware/20261015/main-tracepoint-decode-buffer-2037b9c0/receipt.json"
+    trace_ram, trace_ram_ref = receipt(trace_ram_path)
+    if trace_ram["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DECODE_RAM_C" or \
+            trace_ram["base_sha256"] != trace_ble["linked_sha256"] or \
+            trace_ram["placement_address"] != "0x2037b9c0" or \
+            trace_ram["section_bytes"] != 0x206 or \
+            trace_ram["unresolved_before"] != 193 or \
+            trace_ram["unresolved_after"] != 192 or \
+            trace_ram["imports_resolved"] != ["audio_tracepoint_decode_buffer"]:
+        raise RuntimeError("Apollo Main tracepoint decode RAM reservation changed")
+    delete_all_path = G2 / "build/c-firmware/20261015/main-tracepoint-delete-all-5ee7b4/receipt.json"
+    delete_all, delete_all_ref = receipt(delete_all_path)
+    if delete_all["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DELETE_ALL_C" or \
+            delete_all["base_sha256"] != trace_ram["linked_sha256"] or \
+            delete_all["native_c_cases"] != 90 or \
+            delete_all["unresolved_before"] != 192 or \
+            delete_all["unresolved_after"] != 194 or \
+            delete_all["imports_resolved"] != ["audio_tracepoint_delete_all_5ee7b4"]:
+        raise RuntimeError("Apollo Main tracepoint delete-all handler changed")
+    reply_ram_path = G2 / "build/c-firmware/20261015/main-tracepoint-reply-buffer-2037bbc8/receipt.json"
+    reply_ram, reply_ram_ref = receipt(reply_ram_path)
+    if reply_ram["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REPLY_RAM_C" or \
+            reply_ram["base_sha256"] != delete_all["linked_sha256"] or \
+            reply_ram["placement_address"] != "0x2037bbc8" or \
+            reply_ram["section_bytes"] != 0x206 or \
+            reply_ram["unresolved_before"] != 194 or \
+            reply_ram["unresolved_after"] != 193 or \
+            reply_ram["imports_resolved"] != ["audio_tracepoint_reply_buffer"]:
+        raise RuntimeError("Apollo Main tracepoint reply RAM reservation changed")
+    reply_route_path = G2 / "build/c-firmware/20261015/main-tracepoint-reply-result-5ee134/receipt.json"
+    reply_route, reply_route_ref = receipt(reply_route_path)
+    if reply_route["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REPLY_ROUTING_C" or \
+            reply_route["base_sha256"] != reply_ram["linked_sha256"] or \
+            reply_route["native_c_cases"] != 240 or \
+            reply_route["unresolved_before"] != 193 or \
+            reply_route["unresolved_after"] != 194 or \
+            reply_route["imports_resolved"] != ["audio_tracepoint_reply_result_5ee134"] or \
+            set(reply_route["imports_added"]) != {"audio_tracepoint_send_to_master_5ee066", "audio_tracepoint_send_to_phone_5edfd8"}:
+        raise RuntimeError("Apollo Main tracepoint reply routing changed")
+    send_reply_path = G2 / "build/c-firmware/20261015/main-tracepoint-send-reply-5edfd8-5ee066/receipt.json"
+    send_reply, send_reply_ref = receipt(send_reply_path)
+    if send_reply["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_SEND_REPLY_C" or \
+            send_reply["base_sha256"] != reply_route["linked_sha256"] or \
+            send_reply["native_c_cases"] != 540 or \
+            send_reply["unresolved_before"] != 194 or \
+            send_reply["unresolved_after"] != 194 or \
+            set(send_reply["imports_resolved"]) != {"audio_tracepoint_send_to_master_5ee066", "audio_tracepoint_send_to_phone_5edfd8"} or \
+            set(send_reply["imports_added"]) != {"audio_tracepoint_encode_response_5eded0", "audio_tracepoint_encoded_buffer"}:
+        raise RuntimeError("Apollo Main tracepoint send-reply children changed")
+    encoder_path = G2 / "build/c-firmware/20261015/main-tracepoint-encode-response-5eded0/receipt.json"
+    encoder, encoder_ref = receipt(encoder_path)
+    if encoder["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_ENCODER_C" or \
+            encoder["base_sha256"] != send_reply["linked_sha256"] or \
+            encoder["native_c_cases"] != 180 or \
+            encoder["placement_address"] != "0x2037b6c0" or \
+            encoder["section_bytes"] != 0x300 or \
+            encoder["unresolved_before"] != 194 or \
+            encoder["unresolved_after"] != 192 or \
+            set(encoder["imports_resolved"]) != {"audio_tracepoint_encode_response_5eded0", "audio_tracepoint_encoded_buffer"} or \
+            encoder["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint response encoder changed")
+    trace_desc_path = G2 / "build/c-firmware/20261015/main-tracepoint-pb-descriptor-77cd84/receipt.json"
+    trace_desc, trace_desc_ref = receipt(trace_desc_path)
+    if trace_desc["status"] != "PASS_AUTHENTICATED_MAIN_TRACEPOINT_PB_DESCRIPTOR_C" or \
+            trace_desc["base_sha256"] != encoder["linked_sha256"] or \
+            trace_desc["authenticated_relocations"] != 11 or \
+            len(trace_desc["descriptors"]) != 4 or \
+            trace_desc["unresolved_before"] != 192 or \
+            trace_desc["unresolved_after"] != 191 or \
+            trace_desc["imports_resolved"] != ["audio_tracepoint_message_descriptor"] or \
+            trace_desc["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint nanopb descriptor changed")
+    trace_delete_path = G2 / "build/c-firmware/20261015/main-tracepoint-delete-file-5ee488/receipt.json"
+    trace_delete, trace_delete_ref = receipt(trace_delete_path)
+    if trace_delete["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DELETE_FILE_C" or \
+            trace_delete["base_sha256"] != trace_desc["linked_sha256"] or \
+            trace_delete["native_c_cases"] != 120 or \
+            trace_delete["unresolved_before"] != 191 or \
+            trace_delete["unresolved_after"] != 194 or \
+            trace_delete["imports_resolved"] != ["audio_tracepoint_delete_file_5ee488"] or \
+            set(trace_delete["imports_added"]) != {"audio_tracepoint_validate_file_name_5ede30", "audio_tracepoint_resolve_file_path_5eddf6", "audio_tracepoint_storage_lock_47e088", "audio_tracepoint_storage_unlink_47498c"}:
+        raise RuntimeError("Apollo Main tracepoint single-file deletion changed")
+    trace_resolve_path = G2 / "build/c-firmware/20261015/main-tracepoint-resolve-file-path-5eddf6/receipt.json"
+    trace_resolve, trace_resolve_ref = receipt(trace_resolve_path)
+    if trace_resolve["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PATH_RESOLVER_C" or \
+            trace_resolve["base_sha256"] != trace_delete["linked_sha256"] or \
+            trace_resolve["native_c_cases"] != 48 or \
+            trace_resolve["unresolved_before"] != 194 or \
+            trace_resolve["unresolved_after"] != 194 or \
+            trace_resolve["imports_resolved"] != ["audio_tracepoint_resolve_file_path_5eddf6"] or \
+            trace_resolve["imports_added"] != ["audio_tracepoint_parse_sequence_5edaf0"]:
+        raise RuntimeError("Apollo Main tracepoint pathname resolver changed")
+    trace_parse_path = G2 / "build/c-firmware/20261015/main-tracepoint-parse-sequence-5edaf0/receipt.json"
+    trace_parse, trace_parse_ref = receipt(trace_parse_path)
+    if trace_parse["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_SEQUENCE_PARSER_C" or \
+            trace_parse["base_sha256"] != trace_resolve["linked_sha256"] or \
+            trace_parse["native_c_cases"] != 45 or \
+            trace_parse["unresolved_before"] != 194 or \
+            trace_parse["unresolved_after"] != 193 or \
+            trace_parse["imports_resolved"] != ["audio_tracepoint_parse_sequence_5edaf0"] or \
+            trace_parse["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint sequence parser changed")
+    trace_validate_path = G2 / "build/c-firmware/20261015/main-tracepoint-validate-file-name-5ede30/receipt.json"
+    trace_validate, trace_validate_ref = receipt(trace_validate_path)
+    if trace_validate["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILENAME_VALIDATOR_C" or \
+            trace_validate["base_sha256"] != trace_parse["linked_sha256"] or \
+            trace_validate["native_c_cases"] != 264 or \
+            trace_validate["unresolved_before"] != 193 or \
+            trace_validate["unresolved_after"] != 193 or \
+            trace_validate["imports_resolved"] != ["audio_tracepoint_validate_file_name_5ede30"] or \
+            trace_validate["imports_added"] != ["audio_tracepoint_format_file_path_5edba2"]:
+        raise RuntimeError("Apollo Main tracepoint filename validator changed")
+    trace_format_path = G2 / "build/c-firmware/20261015/main-tracepoint-format-file-path-5edba2/receipt.json"
+    trace_format, trace_format_ref = receipt(trace_format_path)
+    if trace_format["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PATH_FORMAT_C" or \
+            trace_format["base_sha256"] != trace_validate["linked_sha256"] or \
+            trace_format["native_c_cases"] != 25 or \
+            trace_format["unresolved_before"] != 193 or \
+            trace_format["unresolved_after"] != 192 or \
+            trace_format["imports_resolved"] != ["audio_tracepoint_format_file_path_5edba2"] or \
+            trace_format["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint filename path formatter changed")
+    trace_active_path = G2 / "build/c-firmware/20261015/main-tracepoint-close-active-file-47e06a/receipt.json"
+    trace_active, trace_active_ref = receipt(trace_active_path)
+    if trace_active["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_ACTIVE_FILE_C" or \
+            trace_active["base_sha256"] != trace_format["linked_sha256"] or \
+            trace_active["native_c_cases"] != 8 or \
+            trace_active["placement_address"] != "0x20074ae0" or \
+            trace_active["section_bytes"] != 4 or \
+            trace_active["unresolved_before"] != 192 or \
+            trace_active["unresolved_after"] != 191 or \
+            trace_active["imports_resolved"] != ["audio_tracepoint_storage_lock_47e088"] or \
+            trace_active["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint active-file close path changed")
+    trace_unlink_path = G2 / "build/c-firmware/20261015/main-tracepoint-storage-unlink-47498c/receipt.json"
+    trace_unlink, trace_unlink_ref = receipt(trace_unlink_path)
+    if trace_unlink["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_UNLINK_FACADE_C" or \
+            trace_unlink["base_sha256"] != trace_active["linked_sha256"] or \
+            trace_unlink["native_c_cases"] != 72 or \
+            trace_unlink["placement_address"] != "0x200746a8" or \
+            trace_unlink["section_bytes"] != 4 or \
+            trace_unlink["unresolved_before"] != 191 or \
+            trace_unlink["unresolved_after"] != 192 or \
+            trace_unlink["imports_resolved"] != ["audio_tracepoint_storage_unlink_47498c"] or \
+            set(trace_unlink["imports_added"]) != {"audio_file_errno_location_439cc4", "audio_file_lfs_remove_4cfa76"}:
+        raise RuntimeError("Apollo Main unlink facade changed")
+    file_errno_path = G2 / "build/c-firmware/20261015/main-file-errno-location-439cc4/receipt.json"
+    file_errno, file_errno_ref = receipt(file_errno_path)
+    if file_errno["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_ERRNO_LOCATION_C" or \
+            file_errno["base_sha256"] != trace_unlink["linked_sha256"] or \
+            file_errno["native_c_cases"] != 4 or \
+            file_errno["unresolved_before"] != 192 or \
+            file_errno["unresolved_after"] != 191 or \
+            file_errno["imports_resolved"] != ["audio_file_errno_location_439cc4"] or \
+            file_errno["imports_added"]:
+        raise RuntimeError("Apollo Main errno location changed")
+    lfs_remove_path = G2 / "build/c-firmware/20261015/main-file-lfs-remove-wrapper-4cfa76/receipt.json"
+    lfs_remove, lfs_remove_ref = receipt(lfs_remove_path)
+    if lfs_remove["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_LFS_REMOVE_WRAPPER_C" or \
+            lfs_remove["base_sha256"] != file_errno["linked_sha256"] or \
+            lfs_remove["native_c_cases"] != 4 or \
+            lfs_remove["unresolved_before"] != 191 or \
+            lfs_remove["unresolved_after"] != 191 or \
+            lfs_remove["imports_resolved"] != ["audio_file_lfs_remove_4cfa76"] or \
+            lfs_remove["imports_added"] != ["audio_file_lfs_remove_core_4ce4dc"]:
+        raise RuntimeError("Apollo Main LittleFS remove wrapper changed")
+    lfs_remove_core_path = G2 / "build/c-firmware/20261015/main-file-lfs-remove-core-4ce4dc/receipt.json"
+    lfs_remove_core, lfs_remove_core_ref = receipt(lfs_remove_core_path)
+    if lfs_remove_core["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_LFS_REMOVE_CORE_C" or \
+            lfs_remove_core["base_sha256"] != lfs_remove["linked_sha256"] or \
+            lfs_remove_core["native_c_cases"] != 40 or \
+            lfs_remove_core["unresolved_before"] != 191 or \
+            lfs_remove_core["unresolved_after"] != 191 or \
+            lfs_remove_core["imports_resolved"] != ["audio_file_lfs_remove_core_4ce4dc"] or \
+            lfs_remove_core["imports_added"] != ["audio_file_lfs_dir_drop_4cc5a2"]:
+        raise RuntimeError("Apollo Main LittleFS remove core changed")
+    lfs_dir_drop_path = G2 / "build/c-firmware/20261015/main-file-lfs-dir-drop-4cc5a2/receipt.json"
+    lfs_dir_drop, lfs_dir_drop_ref = receipt(lfs_dir_drop_path)
+    if lfs_dir_drop["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_LFS_DIR_DROP_C" or \
+            lfs_dir_drop["base_sha256"] != lfs_remove_core["linked_sha256"] or \
+            lfs_dir_drop["native_c_cases"] != 8 or \
+            lfs_dir_drop["unresolved_before"] != 191 or \
+            lfs_dir_drop["unresolved_after"] != 190 or \
+            lfs_dir_drop["imports_resolved"] != ["audio_file_lfs_dir_drop_4cc5a2"] or \
+            lfs_dir_drop["imports_added"]:
+        raise RuntimeError("Apollo Main LittleFS directory drop changed")
+    trace_inventory_path = G2 / "build/c-firmware/20261015/main-tracepoint-insert-file-sorted-5edbb0/receipt.json"
+    trace_inventory, trace_inventory_ref = receipt(trace_inventory_path)
+    if trace_inventory["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_SORTED_INSERT_C" or \
+            trace_inventory["base_sha256"] != lfs_dir_drop["linked_sha256"] or \
+            trace_inventory["native_c_cases"] != 50 or \
+            trace_inventory["placement_address"] != "0x2037cd24" or \
+            trace_inventory["section_bytes"] != 0x88 or \
+            trace_inventory["unresolved_before"] != 190 or \
+            trace_inventory["unresolved_after"] != 190 or \
+            trace_inventory["imports_resolved"] or trace_inventory["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint sorted inventory changed")
+    for entry in trace_inventory["sources"]:
+        if sha(ROOT / entry["path"]) != entry["sha256"]:
+            raise RuntimeError("Apollo Main tracepoint inventory source changed")
+    request_path = G2 / "build/c-firmware/20261015/main-tracepoint-request-file-name-5ee1f8/receipt.json"
+    request, request_ref = receipt(request_path)
+    if request["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REQUEST_FILE_NAME_C" or \
+            request["base_sha256"] != trace_inventory["linked_sha256"] or \
+            request["native_c_cases"] != 64 or request["format_native_c_cases"] != 64 or \
+            request["placement_address"] != "0x20074ae4" or request["section_bytes"] != 1 or \
+            request["unresolved_before"] != 190 or request["unresolved_after"] != 192 or \
+            request["imports_resolved"] != ["audio_tracepoint_request_file_name_5ee1f8"] or \
+            set(request["imports_added"]) != {"audio_tracepoint_reset_pull_478110", "audio_tracepoint_prepare_pull_48ec9e", "audio_tracepoint_scan_files_5edc5a"}:
+        raise RuntimeError("Apollo Main tracepoint file-list request changed")
+    for entry in request["sources"]:
+        if sha(ROOT / entry["path"]) != entry["sha256"]:
+            raise RuntimeError("Apollo Main tracepoint request source changed")
+    scan_path = G2 / "build/c-firmware/20261015/main-tracepoint-scan-files-5edc5a/receipt.json"
+    scan, scan_ref = receipt(scan_path)
+    if scan["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_SCAN_FILES_C" or \
+            scan["base_sha256"] != request["linked_sha256"] or scan["native_c_cases"] != 32 or \
+            scan["unresolved_before"] != 192 or scan["unresolved_after"] != 195 or \
+            scan["imports_resolved"] != ["audio_tracepoint_scan_files_5edc5a"] or \
+            set(scan["imports_added"]) != {"audio_tracepoint_dir_open_474b02", "audio_tracepoint_dir_read_474bb8", "audio_tracepoint_dir_close_474c66", "audio_tracepoint_file_size_5edb68"}:
+        raise RuntimeError("Apollo Main tracepoint file scan changed")
+    file_size_path = G2 / "build/c-firmware/20261015/main-tracepoint-file-size-5edb68/receipt.json"
+    file_size, file_size_ref = receipt(file_size_path)
+    if file_size["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_SIZE_C" or \
+            file_size["base_sha256"] != scan["linked_sha256"] or \
+            file_size["native_c_cases"] != 30 or \
+            file_size["unresolved_before"] != 195 or file_size["unresolved_after"] != 194 or \
+            file_size["imports_resolved"] != ["audio_tracepoint_file_size_5edb68"] or \
+            file_size["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint file size changed")
+    prepare_path = G2 / "build/c-firmware/20261015/main-tracepoint-prepare-pull-48ec9e/receipt.json"
+    prepare, prepare_ref = receipt(prepare_path)
+    if prepare["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PREPARE_PULL_C" or \
+            prepare["base_sha256"] != file_size["linked_sha256"] or \
+            prepare["native_c_cases"] != 15 or \
+            prepare["unresolved_before"] != 194 or prepare["unresolved_after"] != 195 or \
+            prepare["imports_resolved"] != ["audio_tracepoint_prepare_pull_48ec9e"] or \
+            set(prepare["imports_added"]) != {"audio_tracepoint_pull_ready_48eb90", "audio_tracepoint_pull_initialize_47e1ec"}:
+        raise RuntimeError("Apollo Main tracepoint pull preparation changed")
+    reset_path = G2 / "build/c-firmware/20261015/main-tracepoint-reset-pull-478110/receipt.json"
+    reset, reset_ref = receipt(reset_path)
+    if reset["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_RESET_PULL_C" or \
+            reset["base_sha256"] != prepare["linked_sha256"] or \
+            reset["native_c_cases"] != 12 or \
+            reset["placement_address"] != "0x20074f8f" or reset["section_bytes"] != 1 or \
+            reset["unresolved_before"] != 195 or reset["unresolved_after"] != 194 or \
+            reset["imports_resolved"] != ["audio_tracepoint_reset_pull_478110"] or reset["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint pull reset changed")
+    dir_facade_path = G2 / "build/c-firmware/20261015/main-tracepoint-dir-facade-474b02/receipt.json"
+    dir_facade, dir_facade_ref = receipt(dir_facade_path)
+    if dir_facade["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DIR_FACADE_C" or \
+            dir_facade["base_sha256"] != reset["linked_sha256"] or \
+            dir_facade["native_c_cases"] != 162 or \
+            dir_facade["placement_address"] != "0x200701e8" or dir_facade["section_bytes"] != 0x101 or \
+            dir_facade["unresolved_before"] != 194 or dir_facade["unresolved_after"] != 191 or \
+            set(dir_facade["imports_resolved"]) != {"audio_tracepoint_dir_open_474b02", "audio_tracepoint_dir_read_474bb8", "audio_tracepoint_dir_close_474c66"} or \
+            dir_facade["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint directory facade changed")
+    pull_init_path = G2 / "build/c-firmware/20261015/main-tracepoint-pull-initialize-47e1ec/receipt.json"
+    pull_init, pull_init_ref = receipt(pull_init_path)
+    if pull_init["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_INITIALIZE_C" or \
+            pull_init["base_sha256"] != dir_facade["linked_sha256"] or \
+                        pull_init["native_c_cases"] != 36 or \
+            pull_init["placement_addresses"] != {"pending": "0x20074ad8", "enabled": "0x20075038"} or \
+            pull_init["section_bytes"] != {"pending": 8, "enabled": 1} or \
+            pull_init["unresolved_before"] != 191 or pull_init["unresolved_after"] != 190 or \
+            pull_init["imports_resolved"] != ["audio_tracepoint_pull_initialize_47e1ec"] or pull_init["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint pull initialization changed")
+    pull_ready_path = G2 / "build/c-firmware/20261015/main-tracepoint-pull-ready-48eb90/receipt.json"
+    pull_ready, pull_ready_ref = receipt(pull_ready_path)
+    if pull_ready["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_READY_C" or \
+            pull_ready["base_sha256"] != pull_init["linked_sha256"] or \
+                        pull_ready["native_c_cases"] != 256 or \
+            pull_ready["placement_addresses"] != {"failure_count": "0x20074ac0", "backend_ready": "0x20075035"} or \
+            pull_ready["section_bytes"] != {"failure_count": 4, "backend_ready": 1} or \
+            pull_ready["unresolved_before"] != 190 or pull_ready["unresolved_after"] != 192 or \
+            pull_ready["imports_resolved"] != ["audio_tracepoint_pull_ready_48eb90"] or \
+            set(pull_ready["imports_added"]) != {"audio_tracepoint_pull_backend_init_47dfec", "audio_tracepoint_pull_write_batch_47e178", "audio_tracepoint_pull_complete_47e220"}:
+        raise RuntimeError("Apollo Main tracepoint pull readiness changed")
+    pull_complete_path = G2 / "build/c-firmware/20261015/main-tracepoint-pull-complete-47e220/receipt.json"
+    pull_complete, pull_complete_ref = receipt(pull_complete_path)
+    if pull_complete["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_COMPLETE_C" or \
+            pull_complete["base_sha256"] != pull_ready["linked_sha256"] or \
+                        pull_complete["native_c_cases"] != 5 or \
+            pull_complete["unresolved_before"] != 192 or pull_complete["unresolved_after"] != 192 or \
+            pull_complete["imports_resolved"] != ["audio_tracepoint_pull_complete_47e220"] or \
+            pull_complete["imports_added"] != ["audio_tracepoint_file_close_474910"]:
+        raise RuntimeError("Apollo Main tracepoint pull completion changed")
+    pull_write_path = G2 / "build/c-firmware/20261015/main-tracepoint-pull-write-batch-47e178/receipt.json"
+    pull_write, pull_write_ref = receipt(pull_write_path)
+    if pull_write["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_WRITE_BATCH_C" or \
+            pull_write["base_sha256"] != pull_complete["linked_sha256"] or \
+                        pull_write["native_c_cases"] != 144 or \
+            pull_write["unresolved_before"] != 192 or pull_write["unresolved_after"] != 194 or \
+            pull_write["imports_resolved"] != ["audio_tracepoint_pull_write_batch_47e178"] or \
+            set(pull_write["imports_added"]) != {"audio_tracepoint_open_new_file_47e0c8", "audio_tracepoint_reopen_pending_file_47e144", "audio_tracepoint_file_write_474682"}:
+        raise RuntimeError("Apollo Main tracepoint batch writer changed")
+    reopen_path = G2 / "build/c-firmware/20261015/main-tracepoint-reopen-pending-file-47e144/receipt.json"
+    reopen, reopen_ref = receipt(reopen_path)
+    if reopen["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REOPEN_PENDING_C" or \
+            reopen["base_sha256"] != pull_write["linked_sha256"] or \
+                        reopen["native_c_cases"] != 8 or \
+            reopen["unresolved_before"] != 194 or reopen["unresolved_after"] != 195 or \
+            reopen["imports_resolved"] != ["audio_tracepoint_reopen_pending_file_47e144"] or \
+            set(reopen["imports_added"]) != {"audio_tracepoint_format_pull_path_47de0a", "audio_tracepoint_file_open_474550"}:
+        raise RuntimeError("Apollo Main tracepoint pending reopen changed")
+    pull_path_format_path = G2 / "build/c-firmware/20261015/main-tracepoint-format-pull-path-47de0a/receipt.json"
+    pull_path_format, pull_path_format_ref = receipt(pull_path_format_path)
+    if pull_path_format["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FORMAT_PULL_PATH_C" or \
+            pull_path_format["base_sha256"] != reopen["linked_sha256"] or \
+                        pull_path_format["native_c_cases"] != 16 or \
+            pull_path_format["unresolved_before"] != 195 or pull_path_format["unresolved_after"] != 194 or \
+            pull_path_format["imports_resolved"] != ["audio_tracepoint_format_pull_path_47de0a"] or pull_path_format["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint pull path formatter changed")
+    open_new_path = G2 / "build/c-firmware/20261015/main-tracepoint-open-new-file-47e0c8/receipt.json"
+    open_new, open_new_ref = receipt(open_new_path)
+    if open_new["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_OPEN_NEW_FILE_C" or \
+            open_new["base_sha256"] != pull_path_format["linked_sha256"] or \
+                        open_new["native_c_cases"] != 144 or \
+            open_new["placement_addresses"] != {"next_sequence": "0x20004188", "session_generation": "0x20074ad4"} or \
+            open_new["section_bytes"] != {"next_sequence": 4, "session_generation": 4} or \
+            open_new["unresolved_before"] != 194 or open_new["unresolved_after"] != 196 or \
+            open_new["imports_resolved"] != ["audio_tracepoint_open_new_file_47e0c8"] or \
+            set(open_new["imports_added"]) != {"audio_tracepoint_trim_old_files_47e090", "audio_tracepoint_write_state_47df28", "audio_tracepoint_build_header_48ed00"}:
+        raise RuntimeError("Apollo Main tracepoint new-file creation changed")
+    header_path = G2 / "build/c-firmware/20261015/main-tracepoint-build-header-48ed00/receipt.json"
+    header, header_ref = receipt(header_path)
+    if header["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_TPF1_HEADER_C" or \
+            header["base_sha256"] != open_new["linked_sha256"] or \
+            header["native_c_cases"] != 42 or \
+            header["unresolved_before"] != 196 or header["unresolved_after"] != 196 or \
+            header["imports_resolved"] != ["audio_tracepoint_build_header_48ed00"] or \
+            header["imports_added"] != ["audio_tracepoint_version_47dd08"]:
+        raise RuntimeError("Apollo Main TPF1 header changed")
+    version_path = G2 / "build/c-firmware/20261015/main-tracepoint-version-47dd08/receipt.json"
+    version, version_ref = receipt(version_path)
+    if version["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_VERSION_C" or \
+            version["base_sha256"] != header["linked_sha256"] or \
+                        version["native_c_cases"] != 9 or \
+            version["placement_address"] != "0x78c740" or version["section_bytes"] != 9 or \
+            version["unresolved_before"] != 196 or version["unresolved_after"] != 195 or \
+            version["imports_resolved"] != ["audio_tracepoint_version_47dd08"] or version["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint version changed")
+    trim_path = G2 / "build/c-firmware/20261015/main-tracepoint-trim-old-files-47e090/receipt.json"
+    trim, trim_ref = receipt(trim_path)
+    if trim["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_TRIM_OLD_FILES_C" or \
+            trim["base_sha256"] != version["linked_sha256"] or \
+                        trim["native_c_cases"] != 21 or \
+            trim["unresolved_before"] != 195 or trim["unresolved_after"] != 195 or \
+            trim["imports_resolved"] != ["audio_tracepoint_trim_old_files_47e090"] or \
+            set(trim["imports_added"]) != {"audio_tracepoint_list_files_47deb4"}:
+        raise RuntimeError("Apollo Main tracepoint retention changed")
+    listing_path = G2 / "build/c-firmware/20261015/main-tracepoint-list-files-47deb4/receipt.json"
+    listing, listing_ref = receipt(listing_path)
+    if listing["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_LIST_FILES_C" or \
+            listing["base_sha256"] != trim["linked_sha256"] or \
+                        listing["native_c_cases"] != 14 or \
+            listing["unresolved_before"] != 195 or listing["unresolved_after"] != 195 or \
+            listing["imports_resolved"] != ["audio_tracepoint_list_files_47deb4"] or \
+            listing["imports_added"] != ["audio_tracepoint_parse_file_entry_47de18"]:
+        raise RuntimeError("Apollo Main tracepoint listing changed")
+    entry_parser_path = G2 / "build/c-firmware/20261015/main-tracepoint-parse-file-entry-47de18/receipt.json"
+    entry_parser, entry_parser_ref = receipt(entry_parser_path)
+    if entry_parser["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PARSE_FILE_ENTRY_C" or \
+            entry_parser["base_sha256"] != listing["linked_sha256"] or \
+                        entry_parser["native_c_cases"] != 16 or \
+            entry_parser["unresolved_before"] != 195 or entry_parser["unresolved_after"] != 194 or \
+            entry_parser["imports_resolved"] != ["audio_tracepoint_parse_file_entry_47de18"] or entry_parser["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint file-entry parser changed")
+    state_write_path = G2 / "build/c-firmware/20261015/main-tracepoint-write-state-47df28/receipt.json"
+    state_write, state_write_ref = receipt(state_write_path)
+    if state_write["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_WRITE_STATE_C" or \
+            state_write["base_sha256"] != entry_parser["linked_sha256"] or \
+                        state_write["native_c_cases"] != 54 or \
+            state_write["unresolved_before"] != 194 or state_write["unresolved_after"] != 193 or \
+            state_write["imports_resolved"] != ["audio_tracepoint_write_state_47df28"] or state_write["imports_added"]:
+        raise RuntimeError("Apollo Main TPS1 state writer changed")
+    backend_init_path = G2 / "build/c-firmware/20261015/main-tracepoint-pull-backend-init-47dfec/receipt.json"
+    backend_init, backend_init_ref = receipt(backend_init_path)
+    if backend_init["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_BACKEND_INIT_C" or \
+            backend_init["base_sha256"] != state_write["linked_sha256"] or \
+                        backend_init["native_c_cases"] != 216 or \
+            backend_init["unresolved_before"] != 193 or backend_init["unresolved_after"] != 195 or \
+            backend_init["imports_resolved"] != ["audio_tracepoint_pull_backend_init_47dfec"] or \
+            set(backend_init["imports_added"]) != {"audio_tracepoint_storage_mkdir_474a76", "audio_tracepoint_read_state_47df8a", "audio_tracepoint_file_size_47de7a"}:
+        raise RuntimeError("Apollo Main tracepoint backend initialization changed")
+    pull_size_path = G2 / "build/c-firmware/20261015/main-tracepoint-file-size-47de7a/receipt.json"
+    pull_size, pull_size_ref = receipt(pull_size_path)
+    if pull_size["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_SIZE_C" or \
+            pull_size["base_sha256"] != backend_init["linked_sha256"] or \
+            pull_size["native_c_cases"] != 32 or \
+            pull_size["unresolved_before"] != 195 or pull_size["unresolved_after"] != 194 or \
+            pull_size["imports_resolved"] != ["audio_tracepoint_file_size_47de7a"] or pull_size["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint file size changed")
+    state_read_path = G2 / "build/c-firmware/20261015/main-tracepoint-read-state-47df8a/receipt.json"
+    state_read, state_read_ref = receipt(state_read_path)
+    if state_read["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_READ_STATE_C" or \
+            state_read["base_sha256"] != pull_size["linked_sha256"] or \
+                        state_read["native_c_cases"] != 60 or \
+            state_read["unresolved_before"] != 194 or state_read["unresolved_after"] != 193 or \
+            state_read["imports_resolved"] != ["audio_tracepoint_read_state_47df8a"] or state_read["imports_added"]:
+        raise RuntimeError("Apollo Main TPS1 state reader changed")
+    mkdir_path = G2 / "build/c-firmware/20261015/main-tracepoint-storage-mkdir-474a76/receipt.json"
+    mkdir, mkdir_ref = receipt(mkdir_path)
+    if mkdir["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_STORAGE_MKDIR_C" or \
+            mkdir["base_sha256"] != state_read["linked_sha256"] or \
+            mkdir["native_c_cases"] != 60 or \
+            mkdir["unresolved_before"] != 193 or mkdir["unresolved_after"] != 193 or \
+            mkdir["imports_resolved"] != ["audio_tracepoint_storage_mkdir_474a76"] or \
+            mkdir["imports_added"] != ["audio_file_lfs_mkdir_4cfc5c"]:
+        raise RuntimeError("Apollo Main tracepoint mkdir facade changed")
+    lfs_mkdir_path = G2 / "build/c-firmware/20261015/main-file-lfs-mkdir-4cfc5c/receipt.json"
+    lfs_mkdir, lfs_mkdir_ref = receipt(lfs_mkdir_path)
+    if lfs_mkdir["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_LFS_MKDIR_WRAPPER_C" or \
+            lfs_mkdir["base_sha256"] != mkdir["linked_sha256"] or \
+            lfs_mkdir["native_c_cases"] != 20 or \
+            lfs_mkdir["unresolved_before"] != 193 or lfs_mkdir["unresolved_after"] != 193 or \
+            lfs_mkdir["imports_resolved"] != ["audio_file_lfs_mkdir_4cfc5c"] or \
+            lfs_mkdir["imports_added"] != ["audio_file_lfs_mkdir_core_4cd3aa"]:
+        raise RuntimeError("Apollo Main LittleFS mkdir wrapper changed")
+    file_open_path = G2 / "build/c-firmware/20261015/main-tracepoint-file-open-474550/receipt.json"
+    file_open, file_open_ref = receipt(file_open_path)
+    if file_open["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_OPEN_C" or \
+            file_open["base_sha256"] != lfs_mkdir["linked_sha256"] or \
+            file_open["native_c_cases"] != 48 or \
+            file_open["unresolved_before"] != 193 or file_open["unresolved_after"] != 192 or \
+            file_open["imports_resolved"] != ["audio_tracepoint_file_open_474550"] or \
+            file_open["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint file-open facade changed")
+    file_sync_path = G2 / "build/c-firmware/20261015/main-tracepoint-file-sync-474910/receipt.json"
+    file_sync, file_sync_ref = receipt(file_sync_path)
+    if file_sync["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_SYNC_C" or \
+            file_sync["base_sha256"] != file_open["linked_sha256"] or \
+            file_sync["native_c_cases"] != 30 or \
+            file_sync["unresolved_before"] != 192 or file_sync["unresolved_after"] != 192 or \
+            file_sync["imports_resolved"] != ["audio_tracepoint_file_close_474910"] or \
+            file_sync["imports_added"] != ["audio_file_lfs_sync_4cfb08"]:
+        raise RuntimeError("Apollo Main tracepoint stream-sync facade changed")
+    lfs_sync_path = G2 / "build/c-firmware/20261015/main-file-lfs-sync-4cfb08/receipt.json"
+    lfs_sync, lfs_sync_ref = receipt(lfs_sync_path)
+    if lfs_sync["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_LFS_SYNC_C" or \
+            lfs_sync["base_sha256"] != file_sync["linked_sha256"] or \
+            lfs_sync["native_c_cases"] != 32 or \
+            lfs_sync["unresolved_before"] != 192 or lfs_sync["unresolved_after"] != 191 or \
+            lfs_sync["imports_resolved"] != ["audio_file_lfs_sync_4cfb08"] or \
+            lfs_sync["imports_added"]:
+        raise RuntimeError("Apollo Main LittleFS sync wrapper changed")
+    file_write_path = G2 / "build/c-firmware/20261015/main-tracepoint-file-write-474682/receipt.json"
+    file_write, file_write_ref = receipt(file_write_path)
+    if file_write["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_WRITE_C" or \
+            file_write["base_sha256"] != lfs_sync["linked_sha256"] or \
+            file_write["native_c_cases"] != 75 or \
+            file_write["unresolved_before"] != 191 or file_write["unresolved_after"] != 190 or \
+            file_write["imports_resolved"] != ["audio_tracepoint_file_write_474682"] or \
+            file_write["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint file-write facade changed")
+    mkdir_core_path = G2 / "build/c-firmware/20261015/main-file-lfs-mkdir-core-4cd3aa/receipt.json"
+    mkdir_core, mkdir_core_ref = receipt(mkdir_core_path)
+    if mkdir_core["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_LFS_MKDIR_CORE_C" or \
+            mkdir_core["base_sha256"] != file_write["linked_sha256"] or \
+            mkdir_core["native_c_cases"] != 16 or \
+            mkdir_core["unresolved_before"] != 190 or mkdir_core["unresolved_after"] != 189 or \
+            mkdir_core["imports_resolved"] != ["audio_file_lfs_mkdir_core_4cd3aa"] or \
+            mkdir_core["imports_added"]:
+        raise RuntimeError("Apollo Main LittleFS mkdir core changed")
+    delete_all_files_path = G2 / "build/c-firmware/20261015/main-tracepoint-delete-all-files-5ee650/receipt.json"
+    delete_all_files, delete_all_files_ref = receipt(delete_all_files_path)
+    if delete_all_files["status"] != "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DELETE_ALL_FILES_C" or \
+            delete_all_files["base_sha256"] != mkdir_core["linked_sha256"] or \
+            delete_all_files["native_c_cases"] != 70 or \
+            delete_all_files["unresolved_before"] != 189 or delete_all_files["unresolved_after"] != 188 or \
+            delete_all_files["imports_resolved"] != ["audio_tracepoint_delete_all_files_5ee650"] or \
+            delete_all_files["imports_added"]:
+        raise RuntimeError("Apollo Main tracepoint delete-all files changed")
+    setting_common_path = G2 / "build/c-firmware/20261015/main-setting-common-data-4668ae/receipt.json"
+    setting_common, setting_common_ref = receipt(setting_common_path)
+    if setting_common["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_COMMON_DATA_C" or \
+            setting_common["base_sha256"] != delete_all_files["linked_sha256"] or \
+            setting_common["oracle_cases"] != 360 or \
+            setting_common["unresolved_before"] != 188 or setting_common["unresolved_after"] != 190 or \
+            setting_common["imports_resolved"] != ["audio_uart_registry_callback_4668ae"] or \
+            len(setting_common["imports_added"]) != 3:
+        raise RuntimeError("Apollo Main Setting common-data callback changed")
+    setting_recv_path = G2 / "build/c-firmware/20261015/main-setting-data-recv-466976/receipt.json"
+    setting_recv, setting_recv_ref = receipt(setting_recv_path)
+    if setting_recv["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_DATA_RECV_C" or \
+            setting_recv["base_sha256"] != setting_common["linked_sha256"] or \
+            setting_recv["oracle_cases"] != 180 or \
+            setting_recv["unresolved_before"] != 190 or setting_recv["unresolved_after"] != 192 or \
+            setting_recv["imports_resolved"] != ["audio_setting_process_data_466976"] or \
+            len(setting_recv["imports_added"]) != 3:
+        raise RuntimeError("Apollo Main Setting data-receive handler changed")
+    setting_response_path = G2 / "build/c-firmware/20261015/main-setting-response-49b900/receipt.json"
+    setting_response, setting_response_ref = receipt(setting_response_path)
+    if setting_response["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_RESPONSE_C" or \
+            setting_response["base_sha256"] != setting_recv["linked_sha256"] or \
+            setting_response["oracle_cases"] != 180 or \
+            setting_response["unresolved_before"] != 192 or setting_response["unresolved_after"] != 192 or \
+            setting_response["imports_resolved"] != ["audio_setting_serialize_response_49b900"] or \
+            setting_response["imports_added"] != ["audio_setting_response_encode_49b3d4"]:
+        raise RuntimeError("Apollo Main Setting response serializer changed")
+    setting_encoder_path = G2 / "build/c-firmware/20261015/main-setting-response-encode-49b3d4/receipt.json"
+    setting_encoder, setting_encoder_ref = receipt(setting_encoder_path)
+    if setting_encoder["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_RESPONSE_ENCODER_C" or \
+            setting_encoder["base_sha256"] != setting_response["linked_sha256"] or \
+            setting_encoder["oracle_cases"] != 480 or \
+            setting_encoder["unresolved_before"] != 192 or setting_encoder["unresolved_after"] != 191 or \
+            setting_encoder["imports_resolved"] != ["audio_setting_response_encode_49b3d4"] or \
+            setting_encoder["imports_added"]:
+        raise RuntimeError("Apollo Main Setting response encoder changed")
+    setting_local_path = G2 / "build/c-firmware/20261015/main-setting-local-response-49ba58/receipt.json"
+    setting_local, setting_local_ref = receipt(setting_local_path)
+    if setting_local["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_LOCAL_RESPONSE_C" or \
+            setting_local["base_sha256"] != setting_encoder["linked_sha256"] or \
+            setting_local["oracle_cases"] != 180 or \
+            setting_local["unresolved_before"] != 191 or setting_local["unresolved_after"] != 191 or \
+            setting_local["imports_resolved"] != ["audio_setting_serialize_local_response_49ba58"] or \
+            setting_local["imports_added"] != ["audio_setting_local_response_encode_49b7c4"]:
+        raise RuntimeError("Apollo Main Setting local-data response changed")
+    setting_local_encoder_path = G2 / "build/c-firmware/20261015/main-setting-local-response-encode-49b7c4/receipt.json"
+    setting_local_encoder, setting_local_encoder_ref = receipt(setting_local_encoder_path)
+    if setting_local_encoder["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_LOCAL_RESPONSE_ENCODER_C" or \
+            setting_local_encoder["base_sha256"] != setting_local["linked_sha256"] or \
+            setting_local_encoder["oracle_cases"] != 960 or \
+            setting_local_encoder["unresolved_before"] != 191 or setting_local_encoder["unresolved_after"] != 190 or \
+            setting_local_encoder["imports_resolved"] != ["audio_setting_local_response_encode_49b7c4"] or \
+            setting_local_encoder["imports_added"]:
+        raise RuntimeError("Apollo Main Setting local-data encoder changed")
+    setting_parse_path = G2 / "build/c-firmware/20261015/main-setting-parse-49b1f8/receipt.json"
+    setting_parse, setting_parse_ref = receipt(setting_parse_path)
+    if setting_parse["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_PARSE_C" or \
+            setting_parse["base_sha256"] != setting_local_encoder["linked_sha256"] or \
+            [item["cases"] for item in setting_parse["oracles"]] != [320, 128] or \
+            setting_parse["unresolved_before"] != 190 or setting_parse["unresolved_after"] != 189 or \
+            setting_parse["imports_resolved"] != ["audio_setting_parse_data_package_49b1f8"] or \
+            setting_parse["imports_added"]:
+        raise RuntimeError("Apollo Main Setting parser changed")
+    setting_dispatch_path = G2 / "build/c-firmware/20261015/main-setting-dispatch-466abc/receipt.json"
+    setting_dispatch, setting_dispatch_ref = receipt(setting_dispatch_path)
+    if setting_dispatch["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_DISPATCH_C" or \
+            setting_dispatch["base_sha256"] != setting_parse["linked_sha256"] or \
+            setting_dispatch["oracle_cases"] != 150 or \
+            setting_dispatch["unresolved_before"] != 189 or setting_dispatch["unresolved_after"] != 199 or \
+            setting_dispatch["imports_resolved"] != ["audio_setting_dispatch_message_466abc"] or \
+            len(setting_dispatch["imports_added"]) != 11:
+        raise RuntimeError("Apollo Main Setting dispatch changed")
+    setting_type5_path = G2 / "build/c-firmware/20261015/main-setting-type5-467134/receipt.json"
+    setting_type5, setting_type5_ref = receipt(setting_type5_path)
+    if setting_type5["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE5_C" or \
+            setting_type5["base_sha256"] != setting_dispatch["linked_sha256"] or \
+            setting_type5["oracle_cases"] != 10 or \
+            setting_type5["unresolved_before"] != 199 or setting_type5["unresolved_after"] != 199 or \
+            setting_type5["imports_resolved"] != ["audio_setting_dispatch_type5_467134"] or \
+            setting_type5["imports_added"] != ["audio_wear_detect_set_enable_49eb1e"]:
+        raise RuntimeError("Apollo Main Setting type-5 handler changed")
+    wear_enable_path = G2 / "build/c-firmware/20261015/main-wear-detect-enable-49eb1e/receipt.json"
+    wear_enable, wear_enable_ref = receipt(wear_enable_path)
+    if wear_enable["status"] != "PASS_EXPERIMENTAL_MAIN_WEAR_DETECT_ENABLE_C" or \
+            wear_enable["base_sha256"] != setting_type5["linked_sha256"] or \
+            wear_enable["oracle_cases"] != 200 or \
+            wear_enable["unresolved_before"] != 199 or wear_enable["unresolved_after"] != 199 or \
+            wear_enable["imports_resolved"] != ["audio_wear_detect_set_enable_49eb1e"] or \
+            wear_enable["imports_added"] != ["audio_wear_detect_handle_status_change_49ebb6"]:
+        raise RuntimeError("Apollo Main wear-detect enable changed")
+    wear_status_path = G2 / "build/c-firmware/20261015/main-wear-detect-status-49ebb6/receipt.json"
+    wear_status, wear_status_ref = receipt(wear_status_path)
+    if wear_status["status"] != "PASS_EXPERIMENTAL_MAIN_WEAR_DETECT_STATUS_C" or \
+            wear_status["base_sha256"] != wear_enable["linked_sha256"] or \
+            wear_status["oracle_cases"] != 420 or \
+            wear_status["unresolved_before"] != 199 or wear_status["unresolved_after"] != 204 or \
+            wear_status["imports_resolved"] != ["audio_wear_detect_handle_status_change_49ebb6"] or \
+            len(wear_status["imports_added"]) != 6:
+        raise RuntimeError("Apollo Main wear-detect status changed")
+    onboarding_start_path = G2 / "build/c-firmware/20261015/main-onboarding-start-46805a/receipt.json"
+    onboarding_start, onboarding_start_ref = receipt(onboarding_start_path)
+    if onboarding_start["status"] != "PASS_EXPERIMENTAL_MAIN_ONBOARDING_START_C" or \
+            onboarding_start["base_sha256"] != wear_status["linked_sha256"] or \
+            onboarding_start["oracle_cases"] != 84 or \
+            onboarding_start["unresolved_before"] != 204 or onboarding_start["unresolved_after"] != 203 or \
+            onboarding_start["imports_resolved"] != ["audio_wear_child_46805a"] or \
+            onboarding_start["imports_added"]:
+        raise RuntimeError("Apollo Main onboarding startup changed")
+    wear_wrapper_path = G2 / "build/c-firmware/20261015/main-wear-child-502bf0/receipt.json"
+    wear_wrapper, wear_wrapper_ref = receipt(wear_wrapper_path)
+    if wear_wrapper["status"] != "PASS_EXPERIMENTAL_MAIN_WEAR_CHILD_502BF0_C" or \
+            wear_wrapper["base_sha256"] != onboarding_start["linked_sha256"] or \
+            wear_wrapper["oracle_cases"] != 10 or \
+            wear_wrapper["unresolved_before"] != 203 or wear_wrapper["unresolved_after"] != 203 or \
+            wear_wrapper["imports_resolved"] != ["audio_wear_child_502bf0"] or \
+            wear_wrapper["imports_added"] != ["audio_wear_child_51308a"]:
+        raise RuntimeError("Apollo Main wear forwarding wrapper changed")
+    wear_request_path = G2 / "build/c-firmware/20261015/main-wear-child-51308a/receipt.json"
+    wear_request, wear_request_ref = receipt(wear_request_path)
+    if wear_request["status"] != "PASS_EXPERIMENTAL_MAIN_WEAR_CHILD_51308A_C" or \
+            wear_request["base_sha256"] != wear_wrapper["linked_sha256"] or \
+            wear_request["oracle_cases"] != 10 or \
+            wear_request["unresolved_before"] != 203 or wear_request["unresolved_after"] != 202 or \
+            wear_request["imports_resolved"] != ["audio_wear_child_51308a"] or \
+            wear_request["imports_added"] or \
+            wear_request["provider_source_sha256"] != sha(ROOT / wear_request["provider_source"]):
+        raise RuntimeError("Apollo Main wear request wrapper changed")
+    settings_input_path = G2 / "build/c-firmware/20261015/main-settings-input-check-46b0ec/receipt.json"
+    settings_input, settings_input_ref = receipt(settings_input_path)
+    if settings_input["status"] != "PASS_EXPERIMENTAL_MAIN_SETTINGS_INPUT_CHECK_C" or \
+            settings_input["base_sha256"] != wear_request["linked_sha256"] or \
+            settings_input["oracle_cases"] != 252 or \
+            settings_input["unresolved_before"] != 202 or settings_input["unresolved_after"] != 201 or \
+            settings_input["imports_resolved"] != ["audio_wear_child_46b0ec"] or \
+            settings_input["imports_added"]:
+        raise RuntimeError("Apollo Main settings input check changed")
+    setting_type6_path = G2 / "build/c-firmware/20261015/main-setting-type6-46713e/receipt.json"
+    setting_type6, setting_type6_ref = receipt(setting_type6_path)
+    if setting_type6["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE6_C" or \
+            setting_type6["base_sha256"] != settings_input["linked_sha256"] or \
+            setting_type6["oracle_cases"] != 30 or \
+            setting_type6["unresolved_before"] != 201 or setting_type6["unresolved_after"] != 201 or \
+            setting_type6["imports_resolved"] != ["audio_setting_dispatch_type6_46713e"] or \
+            setting_type6["imports_added"] != ["audio_silent_mode_set_from_app_46921c"]:
+        raise RuntimeError("Apollo Main setting type-6 route changed")
+    setting_type8_path = G2 / "build/c-firmware/20261015/main-setting-type8-4671a2/receipt.json"
+    setting_type8, setting_type8_ref = receipt(setting_type8_path)
+    if setting_type8["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE8_C" or \
+            setting_type8["base_sha256"] != setting_type6["linked_sha256"] or \
+            setting_type8["oracle_cases"] != 120 or \
+            setting_type8["unresolved_before"] != 201 or setting_type8["unresolved_after"] != 200 or \
+            setting_type8["imports_resolved"] != ["audio_setting_dispatch_type8_4671a2"] or \
+            setting_type8["imports_added"]:
+        raise RuntimeError("Apollo Main setting type-8 route changed")
+    setting_type9_path = G2 / "build/c-firmware/20261015/main-setting-type9-467206/receipt.json"
+    setting_type9, setting_type9_ref = receipt(setting_type9_path)
+    if setting_type9["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE9_C" or \
+            setting_type9["base_sha256"] != setting_type8["linked_sha256"] or \
+            setting_type9["oracle_cases"] != 30 or \
+            setting_type9["unresolved_before"] != 200 or setting_type9["unresolved_after"] != 199 or \
+            setting_type9["imports_resolved"] != ["audio_setting_dispatch_type9_467206"] or \
+            setting_type9["imports_added"]:
+        raise RuntimeError("Apollo Main setting type-9 route changed")
+    setting_display_start_path = G2 / "build/c-firmware/20261015/main-setting-display-start-466890/receipt.json"
+    setting_display_start, setting_display_start_ref = receipt(setting_display_start_path)
+    if setting_display_start["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_DISPLAY_START_C" or \
+            setting_display_start["base_sha256"] != setting_type9["linked_sha256"] or \
+            setting_display_start["oracle_cases"] != 6 or \
+            setting_display_start["unresolved_before"] != 199 or setting_display_start["unresolved_after"] != 199 or \
+            setting_display_start["imports_resolved"] or setting_display_start["imports_added"]:
+        raise RuntimeError("Apollo Main setting display-start selector changed")
+    dashboard_reset_path = G2 / "build/c-firmware/20261015/main-dashboard-auto-close-reset-49c0dc/receipt.json"
+    dashboard_reset, dashboard_reset_ref = receipt(dashboard_reset_path)
+    if dashboard_reset["status"] != "PASS_EXPERIMENTAL_MAIN_DASHBOARD_AUTO_CLOSE_RESET_C" or \
+            dashboard_reset["base_sha256"] != setting_display_start["linked_sha256"] or \
+            dashboard_reset["oracle_cases"] != 90 or \
+            dashboard_reset["unresolved_before"] != 199 or dashboard_reset["unresolved_after"] != 199 or \
+            dashboard_reset["imports_resolved"] or dashboard_reset["imports_added"]:
+        raise RuntimeError("Apollo Main dashboard timeout reset changed")
+    setting_coordinates_path = G2 / "build/c-firmware/20261015/main-setting-coordinates-466e1c-466ea2/receipt.json"
+    setting_coordinates, setting_coordinates_ref = receipt(setting_coordinates_path)
+    if setting_coordinates["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_COORDINATES_C" or \
+            setting_coordinates["base_sha256"] != dashboard_reset["linked_sha256"] or \
+            setting_coordinates["oracle_cases"] != 480 or \
+            setting_coordinates["unresolved_before"] != 199 or setting_coordinates["unresolved_after"] != 197 or \
+            setting_coordinates["imports_resolved"] != ["audio_setting_dispatch_type2_466e1c", "audio_setting_dispatch_type3_466ea2"] or \
+            setting_coordinates["imports_added"]:
+        raise RuntimeError("Apollo Main setting coordinate routes changed")
+    setting_type12_path = G2 / "build/c-firmware/20261015/main-setting-type12-467c34/receipt.json"
+    setting_type12, setting_type12_ref = receipt(setting_type12_path)
+    if setting_type12["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE12_C" or \
+            setting_type12["base_sha256"] != setting_coordinates["linked_sha256"] or \
+            setting_type12["oracle_cases"] != 225 or \
+            setting_type12["unresolved_before"] != 197 or setting_type12["unresolved_after"] != 196 or \
+            setting_type12["imports_resolved"] != ["audio_setting_dispatch_type12_467c34"] or \
+            setting_type12["imports_added"]:
+        raise RuntimeError("Apollo Main setting type-12 route changed")
+    gesture_apptype_path = G2 / "build/c-firmware/20261015/main-setting-gesture-apptype-46658e/receipt.json"
+    gesture_apptype, gesture_apptype_ref = receipt(gesture_apptype_path)
+    if gesture_apptype["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_GESTURE_APPTYPE_C" or \
+            gesture_apptype["base_sha256"] != setting_type12["linked_sha256"] or \
+            gesture_apptype["oracle_cases"] != 270 or \
+            gesture_apptype["unresolved_before"] != 196 or gesture_apptype["unresolved_after"] != 196 or \
+            gesture_apptype["imports_resolved"] or gesture_apptype["imports_added"]:
+        raise RuntimeError("Apollo Main gesture application-type setter changed")
+    setting_type10_path = G2 / "build/c-firmware/20261015/main-setting-type10-467308/receipt.json"
+    setting_type10, setting_type10_ref = receipt(setting_type10_path)
+    if setting_type10["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE10_C" or \
+            setting_type10["base_sha256"] != gesture_apptype["linked_sha256"] or \
+            setting_type10["oracle_cases"] != 45 or \
+            setting_type10["unresolved_before"] != 196 or setting_type10["unresolved_after"] != 195 or \
+            setting_type10["imports_resolved"] != ["audio_setting_dispatch_type10_467308"] or \
+            setting_type10["imports_added"]:
+        raise RuntimeError("Apollo Main setting type-10 route changed")
+    brightness_refresh_path = G2 / "build/c-firmware/20261015/main-setting-brightness-refresh-46c18c/receipt.json"
+    brightness_refresh, brightness_refresh_ref = receipt(brightness_refresh_path)
+    if brightness_refresh["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_BRIGHTNESS_REFRESH_C" or \
+            brightness_refresh["base_sha256"] != setting_type10["linked_sha256"] or \
+            brightness_refresh["oracle_cases"] != 27 or \
+            brightness_refresh["unresolved_before"] != 195 or brightness_refresh["unresolved_after"] != 195 or \
+            brightness_refresh["imports_resolved"] or brightness_refresh["imports_added"]:
+        raise RuntimeError("Apollo Main setting brightness refresh changed")
+    manual_brightness_path = G2 / "build/c-firmware/20261015/main-setting-manual-brightness-46c1c8/receipt.json"
+    manual_brightness, manual_brightness_ref = receipt(manual_brightness_path)
+    if manual_brightness["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_MANUAL_BRIGHTNESS_C" or \
+            manual_brightness["base_sha256"] != brightness_refresh["linked_sha256"] or \
+            manual_brightness["oracle_cases"] != 147 or \
+            manual_brightness["unresolved_before"] != 195 or manual_brightness["unresolved_after"] != 196 or \
+            manual_brightness["imports_resolved"] or \
+            manual_brightness["imports_added"] != ["audio_als_manual_set_brightness_4ae81c"]:
+        raise RuntimeError("Apollo Main setting manual brightness changed")
+    als_manual_path = G2 / "build/c-firmware/20261015/main-als-manual-brightness-4ae81c/receipt.json"
+    als_manual, als_manual_ref = receipt(als_manual_path)
+    if als_manual["status"] != "PASS_EXPERIMENTAL_MAIN_ALS_MANUAL_BRIGHTNESS_C" or \
+            als_manual["base_sha256"] != manual_brightness["linked_sha256"] or \
+            als_manual["oracle_cases"] != 240 or \
+            als_manual["unresolved_before"] != 196 or als_manual["unresolved_after"] != 197 or \
+            als_manual["imports_resolved"] != ["audio_als_manual_set_brightness_4ae81c"] or \
+            als_manual["imports_added"] != ["audio_als_manual_recalculate_4adcd8", "audio_als_manual_set_target_4ade36"]:
+        raise RuntimeError("Apollo Main ALS manual brightness changed")
+    als_recalculate_path = G2 / "build/c-firmware/20261015/main-als-manual-recalculate-4adcd8/receipt.json"
+    als_recalculate, als_recalculate_ref = receipt(als_recalculate_path)
+    if als_recalculate["status"] != "PASS_EXPERIMENTAL_MAIN_ALS_MANUAL_RECALCULATE_C" or \
+            als_recalculate["base_sha256"] != als_manual["linked_sha256"] or \
+            als_recalculate["oracle_cases"] != 81 or \
+            als_recalculate["unresolved_before"] != 197 or als_recalculate["unresolved_after"] != 196 or \
+            als_recalculate["imports_resolved"] != ["audio_als_manual_recalculate_4adcd8"] or \
+            als_recalculate["imports_added"]:
+        raise RuntimeError("Apollo Main ALS manual recalculate changed")
+    als_target_path = G2 / "build/c-firmware/20261015/main-als-manual-target-4ade36/receipt.json"
+    als_target, als_target_ref = receipt(als_target_path)
+    if als_target["status"] != "PASS_EXPERIMENTAL_MAIN_ALS_MANUAL_TARGET_C" or \
+            als_target["base_sha256"] != als_recalculate["linked_sha256"] or \
+            als_target["oracle_cases"] != 625 or \
+            als_target["unresolved_before"] != 196 or als_target["unresolved_after"] != 197 or \
+            als_target["imports_resolved"] != ["audio_als_manual_set_target_4ade36"] or \
+            als_target["imports_added"] != ["audio_als_first_curve_percent_4ad9e2", "audio_als_manual_target_scale_4addb6"]:
+        raise RuntimeError("Apollo Main ALS manual target changed")
+    als_curve_path = G2 / "build/c-firmware/20261015/main-als-curve-first-percent-4ad9e2/receipt.json"
+    als_curve, als_curve_ref = receipt(als_curve_path)
+    if als_curve["status"] != "PASS_EXPERIMENTAL_MAIN_ALS_CURVE_FIRST_PERCENT_C" or \
+            als_curve["base_sha256"] != als_target["linked_sha256"] or \
+            als_curve["oracle_cases"] != 1 or \
+            als_curve["unresolved_before"] != 197 or als_curve["unresolved_after"] != 196 or \
+            als_curve["imports_resolved"] != ["audio_als_first_curve_percent_4ad9e2"] or \
+            als_curve["imports_added"]:
+        raise RuntimeError("Apollo Main ALS first curve getter changed")
+    als_target_scale_path = G2 / "build/c-firmware/20261015/main-als-manual-target-scale-4addb6/receipt.json"
+    als_target_scale, als_target_scale_ref = receipt(als_target_scale_path)
+    if als_target_scale["status"] != "PASS_EXPERIMENTAL_MAIN_ALS_MANUAL_TARGET_SCALE_C" or \
+            als_target_scale["base_sha256"] != als_curve["linked_sha256"] or \
+            als_target_scale["oracle_cases"] != 336 or \
+            als_target_scale["unresolved_before"] != 196 or als_target_scale["unresolved_after"] != 195 or \
+            als_target_scale["imports_resolved"] != ["audio_als_manual_target_scale_4addb6"] or \
+            als_target_scale["imports_added"]:
+        raise RuntimeError("Apollo Main ALS manual target scale changed")
+    setting_type1_path = G2 / "build/c-firmware/20261015/main-setting-type1-brightness-466bec/receipt.json"
+    setting_type1, setting_type1_ref = receipt(setting_type1_path)
+    if setting_type1["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE1_BRIGHTNESS_C" or \
+            setting_type1["base_sha256"] != als_target_scale["linked_sha256"] or \
+            setting_type1["oracle_cases"] != 200 or \
+            setting_type1["unresolved_before"] != 195 or setting_type1["unresolved_after"] != 194 or \
+            setting_type1["imports_resolved"] != ["audio_setting_dispatch_type1_466bec"] or \
+            setting_type1["imports_added"]:
+        raise RuntimeError("Apollo Main setting type-1 brightness changed")
+    setting_type4_path = G2 / "build/c-firmware/20261015/main-setting-type4-head-up-466f28/receipt.json"
+    setting_type4, setting_type4_ref = receipt(setting_type4_path)
+    if setting_type4["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE4_HEAD_UP_C" or \
+            setting_type4["base_sha256"] != setting_type1["linked_sha256"] or \
+            setting_type4["oracle_cases"] != 1260 or \
+            setting_type4["unresolved_before"] != 194 or setting_type4["unresolved_after"] != 194 or \
+            setting_type4["imports_resolved"] != ["audio_setting_dispatch_type4_466f28"] or \
+            setting_type4["imports_added"] != ["audio_setting_head_up_configure_46c524"]:
+        raise RuntimeError("Apollo Main setting type-4 head-up changed")
+    head_up_config_path = G2 / "build/c-firmware/20261015/main-setting-head-up-configure-46c524/receipt.json"
+    head_up_config, head_up_config_ref = receipt(head_up_config_path)
+    if head_up_config["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_HEAD_UP_CONFIGURE_C" or \
+            head_up_config["base_sha256"] != setting_type4["linked_sha256"] or \
+            head_up_config["oracle_cases"] != 1260 or \
+            head_up_config["unresolved_before"] != 194 or head_up_config["unresolved_after"] != 194 or \
+            head_up_config["imports_resolved"] != ["audio_setting_head_up_configure_46c524"] or \
+            head_up_config["imports_added"] != ["audio_hub_parameter_config_4a6e3c"]:
+        raise RuntimeError("Apollo Main head-up configuration changed")
+    hub_parameter_path = G2 / "build/c-firmware/20261015/main-hub-parameter-config-4a6e3c/receipt.json"
+    hub_parameter, hub_parameter_ref = receipt(hub_parameter_path)
+    if hub_parameter["status"] != "PASS_EXPERIMENTAL_MAIN_HUB_PARAMETER_CONFIG_C" or \
+            hub_parameter["base_sha256"] != head_up_config["linked_sha256"] or \
+            hub_parameter["oracle_cases"] != 405 or \
+            hub_parameter["unresolved_before"] != 194 or hub_parameter["unresolved_after"] != 196 or \
+            hub_parameter["imports_resolved"] != ["audio_hub_parameter_config_4a6e3c"] or \
+            hub_parameter["imports_added"] != ["audio_hub_imu_accel_config_4a52a2", "audio_hub_semantic_motion_period_4a4ec0", "audio_hub_semantic_motion_threshold_4a4e8c"]:
+        raise RuntimeError("Apollo Main HUB parameter configuration changed")
+    hub_period_path = G2 / "build/c-firmware/20261015/main-hub-semantic-motion-period-4a4ec0/receipt.json"
+    hub_period, hub_period_ref = receipt(hub_period_path)
+    if hub_period["status"] != "PASS_EXPERIMENTAL_MAIN_HUB_SEMANTIC_MOTION_PERIOD_C" or \
+            hub_period["base_sha256"] != hub_parameter["linked_sha256"] or \
+            hub_period["oracle_cases"] != 32 or \
+            hub_period["unresolved_before"] != 196 or hub_period["unresolved_after"] != 195 or \
+            hub_period["imports_resolved"] != ["audio_hub_semantic_motion_period_4a4ec0"] or \
+            hub_period["imports_added"]:
+        raise RuntimeError("Apollo Main HUB motion period changed")
+    hub_imu_path = G2 / "build/c-firmware/20261015/main-hub-imu-accel-config-4a52a2/receipt.json"
+    hub_imu, hub_imu_ref = receipt(hub_imu_path)
+    if hub_imu["status"] != "PASS_EXPERIMENTAL_MAIN_HUB_IMU_ACCEL_CONFIG_C" or \
+            hub_imu["base_sha256"] != hub_period["linked_sha256"] or \
+            hub_imu["oracle_cases"] != 80 or \
+            hub_imu["unresolved_before"] != 195 or hub_imu["unresolved_after"] != 194 or \
+            hub_imu["imports_resolved"] != ["audio_hub_imu_accel_config_4a52a2"] or \
+            hub_imu["imports_added"]:
+        raise RuntimeError("Apollo Main HUB IMU acceleration configuration changed")
+    hub_threshold_path = G2 / "build/c-firmware/20261015/main-hub-semantic-motion-threshold-4a4e8c/receipt.json"
+    hub_threshold, hub_threshold_ref = receipt(hub_threshold_path)
+    if hub_threshold["status"] != "PASS_EXPERIMENTAL_MAIN_HUB_SEMANTIC_MOTION_THRESHOLD_C" or \
+            hub_threshold["base_sha256"] != hub_imu["linked_sha256"] or \
+            hub_threshold["oracle_cases"] != 22 or \
+            hub_threshold["unresolved_before"] != 194 or hub_threshold["unresolved_after"] != 193 or \
+            hub_threshold["imports_resolved"] != ["audio_hub_semantic_motion_threshold_4a4e8c"] or \
+            hub_threshold["imports_added"]:
+        raise RuntimeError("Apollo Main HUB semantic motion threshold changed")
+    deinit_path = G2 / "build/c-firmware/20261015/main-display-deinit-force-47432c/receipt.json"
+    deinit, deinit_ref = receipt(deinit_path)
+    if deinit["status"] != "PASS_EXPERIMENTAL_MAIN_DISPLAY_DEINIT_FORCE_C" or \
+            deinit["base_sha256"] != hub_threshold["linked_sha256"] or \
+            deinit["oracle_cases"] != 40 or \
+            deinit["unresolved_before"] != 193 or deinit["unresolved_after"] != 192 or \
+            deinit["imports_resolved"] != ["audio_wear_child_47432c"] or \
+            deinit["imports_added"]:
+        raise RuntimeError("Apollo Main display force-deinit changed")
+    init_path = G2 / "build/c-firmware/20261015/main-display-init-force-474100/receipt.json"
+    init, init_ref = receipt(init_path)
+    if init["status"] != "PASS_EXPERIMENTAL_MAIN_DISPLAY_INIT_FORCE_C" or \
+            init["base_sha256"] != deinit["linked_sha256"] or \
+            init["oracle_cases"] != 160 or \
+            init["unresolved_before"] != 192 or init["unresolved_after"] != 191 or \
+            init["imports_resolved"] != ["audio_wear_child_474100"] or \
+            init["imports_added"]:
+        raise RuntimeError("Apollo Main display force-init changed")
+    wear_notify_path = G2 / "build/c-firmware/20261015/main-onboarding-wear-notify-47e320/receipt.json"
+    wear_notify, wear_notify_ref = receipt(wear_notify_path)
+    if wear_notify["status"] != "PASS_EXPERIMENTAL_MAIN_ONBOARDING_WEAR_NOTIFY_C" or \
+            wear_notify["base_sha256"] != init["linked_sha256"] or \
+            wear_notify["oracle_cases"] != 360 or \
+            wear_notify["unresolved_before"] != 191 or wear_notify["unresolved_after"] != 191 or \
+            wear_notify["imports_resolved"] != ["audio_wear_child_47e320"] or \
+            wear_notify["imports_added"] != ["audio_onboarding_event_encode_4a8368"]:
+        raise RuntimeError("Apollo Main onboarding wear notification changed")
+    event_encode_path = G2 / "build/c-firmware/20261015/main-onboarding-event-encode-4a8368/receipt.json"
+    event_encode, event_encode_ref = receipt(event_encode_path)
+    if event_encode["status"] != "PASS_EXPERIMENTAL_MAIN_ONBOARDING_EVENT_ENCODE_C" or \
+            event_encode["base_sha256"] != wear_notify["linked_sha256"] or \
+            event_encode["oracle_cases"] != 120 or \
+            event_encode["unresolved_before"] != 191 or event_encode["unresolved_after"] != 190 or \
+            event_encode["imports_resolved"] != ["audio_onboarding_event_encode_4a8368"] or \
+            event_encode["imports_added"]:
+        raise RuntimeError("Apollo Main onboarding event encoder changed")
+    silent_app_path = G2 / "build/c-firmware/20261015/main-silent-mode-set-from-app-46921c/receipt.json"
+    silent_app, silent_app_ref = receipt(silent_app_path)
+    if silent_app["status"] != "PASS_EXPERIMENTAL_MAIN_SILENT_MODE_SET_FROM_APP_C" or \
+            silent_app["base_sha256"] != event_encode["linked_sha256"] or \
+            silent_app["oracle_cases"] != 1920 or \
+            silent_app["unresolved_before"] != 190 or silent_app["unresolved_after"] != 190 or \
+            silent_app["imports_resolved"] != ["audio_silent_mode_set_from_app_46921c"] or \
+            silent_app["imports_added"] != ["audio_sync_send_to_both_ext_464f76"]:
+        raise RuntimeError("Apollo Main silent-mode app command changed")
+    send_both_path = G2 / "build/c-firmware/20261015/main-sync-send-to-both-ext-464f76/receipt.json"
+    send_both, send_both_ref = receipt(send_both_path)
+    if send_both["status"] != "PASS_EXPERIMENTAL_MAIN_SYNC_SEND_TO_BOTH_EXT_C" or \
+            send_both["base_sha256"] != silent_app["linked_sha256"] or \
+            send_both["oracle_cases"] != 500 or \
+            send_both["unresolved_before"] != 190 or send_both["unresolved_after"] != 189 or \
+            send_both["imports_resolved"] != ["audio_sync_send_to_both_ext_464f76"] or \
+            send_both["imports_added"]:
+        raise RuntimeError("Apollo Main sync send-to-both changed")
+    dominant_path = G2 / "build/c-firmware/20261015/main-setting-dominant-hand-467540/receipt.json"
+    dominant, dominant_ref = receipt(dominant_path)
+    if dominant["status"] != "PASS_EXPERIMENTAL_MAIN_SETTING_DOMINANT_HAND_C" or \
+            dominant["base_sha256"] != send_both["linked_sha256"] or \
+            dominant["oracle_cases"] != 960 or \
+            dominant["unresolved_before"] != 189 or dominant["unresolved_after"] != 192 or \
+            dominant["imports_resolved"] != ["audio_setting_dispatch_type11_467540"] or \
+            dominant["imports_added"] != ["audio_ble_master_hand_changed_4a2948", "audio_ble_master_set_target_hand_4a2068", "audio_ring_address_is_unset_4a26e8", "audio_ring_connect_policy_on_hand_49f15a"]:
+        raise RuntimeError("Apollo Main dominant-hand handler changed")
+    ring_unset_path = G2 / "build/c-firmware/20261015/main-ring-address-is-unset-4a26e8/receipt.json"
+    ring_unset, ring_unset_ref = receipt(ring_unset_path)
+    if ring_unset["status"] != "PASS_EXPERIMENTAL_MAIN_RING_ADDRESS_IS_UNSET_C" or \
+            ring_unset["base_sha256"] != dominant["linked_sha256"] or \
+            ring_unset["oracle_cases"] != 91 or \
+            ring_unset["unresolved_before"] != 192 or ring_unset["unresolved_after"] != 191 or \
+            ring_unset["imports_resolved"] != ["audio_ring_address_is_unset_4a26e8"] or \
+            ring_unset["imports_added"]:
+        raise RuntimeError("Apollo Main ring address sentinel changed")
+    ring_policy_path = G2 / "build/c-firmware/20261015/main-ring-connect-policy-on-hand-49f15a/receipt.json"
+    ring_policy, ring_policy_ref = receipt(ring_policy_path)
+    if ring_policy["status"] != "PASS_EXPERIMENTAL_MAIN_RING_CONNECT_POLICY_ON_HAND_C" or \
+            ring_policy["base_sha256"] != ring_unset["linked_sha256"] or \
+            ring_policy["oracle_cases"] != 270 or \
+            ring_policy["unresolved_before"] != 191 or ring_policy["unresolved_after"] != 191 or \
+            ring_policy["imports_resolved"] != ["audio_ring_connect_policy_on_hand_49f15a"] or \
+            ring_policy["imports_added"] != ["audio_ble_ring_policy_get_state_49f05c"]:
+        raise RuntimeError("Apollo Main dominant-hand ring policy changed")
+    ring_get_path = G2 / "build/c-firmware/20261015/main-ring-policy-get-state-49f05c/receipt.json"
+    ring_get, ring_get_ref = receipt(ring_get_path)
+    if ring_get["status"] != "PASS_EXPERIMENTAL_MAIN_RING_POLICY_GET_STATE_C" or \
+            ring_get["base_sha256"] != ring_policy["linked_sha256"] or \
+            ring_get["oracle_cases"] != 256 or \
+            ring_get["unresolved_before"] != 191 or ring_get["unresolved_after"] != 190 or \
+            ring_get["imports_resolved"] != ["audio_ble_ring_policy_get_state_49f05c"] or \
+            ring_get["imports_added"]:
+        raise RuntimeError("Apollo Main ring policy GetState changed")
+    master_target_path = G2 / "build/c-firmware/20261015/main-ble-master-set-target-hand-4a2068/receipt.json"
+    master_target, master_target_ref = receipt(master_target_path)
+    if master_target["status"] != "PASS_EXPERIMENTAL_MAIN_BLE_MASTER_SET_TARGET_HAND_C" or \
+            master_target["base_sha256"] != ring_get["linked_sha256"] or \
+            master_target["oracle_cases"] != 80 or \
+            master_target["unresolved_before"] != 190 or master_target["unresolved_after"] != 189 or \
+            master_target["imports_resolved"] != ["audio_ble_master_set_target_hand_4a2068"] or \
+            master_target["imports_added"]:
+        raise RuntimeError("Apollo Main dominant-hand target setter changed")
+    hand_changed_path = G2 / "build/c-firmware/20261015/main-ble-master-hand-changed-4a2948/receipt.json"
+    hand_changed, hand_changed_ref = receipt(hand_changed_path)
+    if hand_changed["status"] != "PASS_EXPERIMENTAL_MAIN_BLE_MASTER_HAND_CHANGED_C" or \
+            hand_changed["base_sha256"] != master_target["linked_sha256"] or \
+            hand_changed["oracle_cases"] != 280 or \
+            hand_changed["unresolved_before"] != 189 or hand_changed["unresolved_after"] != 194 or \
+            hand_changed["imports_resolved"] != ["audio_ble_master_hand_changed_4a2948"] or \
+            hand_changed["imports_added"] != ["audio_ble_master_begin_failure_notify_4a1546", "audio_ble_master_reset_scene_pending_4a2658", "audio_ble_peer_ring_status_47d8f0", "audio_ble_ring_policy_cancel_connect_timeout_49f5f8", "audio_ble_ring_policy_schedule_connect_timeout_49f4a8", "audio_ble_ring_policy_schedule_reconnect_timeout_49f552"]:
+        raise RuntimeError("Apollo Main dominant-hand master handler changed")
+    peer_ring_path = G2 / "build/c-firmware/20261015/main-ble-peer-ring-status-47d8f0/receipt.json"
+    peer_ring, peer_ring_ref = receipt(peer_ring_path)
+    if peer_ring["status"] != "PASS_EXPERIMENTAL_MAIN_BLE_PEER_RING_STATUS_C" or \
+            peer_ring["base_sha256"] != hand_changed["linked_sha256"] or \
+            peer_ring["oracle_cases"] != 256 or \
+            peer_ring["unresolved_before"] != 194 or peer_ring["unresolved_after"] != 193 or \
+            peer_ring["imports_resolved"] != ["audio_ble_peer_ring_status_47d8f0"] or \
+            peer_ring["imports_added"]:
+        raise RuntimeError("Apollo Main peer ring status changed")
+    scene_pending_path = G2 / "build/c-firmware/20261015/main-ble-master-reset-scene-pending-4a2658/receipt.json"
+    scene_pending, scene_pending_ref = receipt(scene_pending_path)
+    if scene_pending["status"] != "PASS_EXPERIMENTAL_MAIN_BLE_MASTER_RESET_SCENE_PENDING_C" or \
+            scene_pending["base_sha256"] != peer_ring["linked_sha256"] or \
+            scene_pending["oracle_cases"] != 24 or \
+            scene_pending["unresolved_before"] != 193 or scene_pending["unresolved_after"] != 192 or \
+            scene_pending["imports_resolved"] != ["audio_ble_master_reset_scene_pending_4a2658"] or \
+            scene_pending["imports_added"]:
+        raise RuntimeError("Apollo Main scene-pending reset changed")
+    begin_notify_path = G2 / "build/c-firmware/20261015/main-ble-master-begin-failure-notify-4a1546/receipt.json"
+    begin_notify, begin_notify_ref = receipt(begin_notify_path)
+    if begin_notify["status"] != "PASS_EXPERIMENTAL_MAIN_BLE_MASTER_BEGIN_FAILURE_NOTIFY_C" or \
+            begin_notify["base_sha256"] != scene_pending["linked_sha256"] or \
+            begin_notify["oracle_cases"] != 54 or \
+            begin_notify["unresolved_before"] != 192 or begin_notify["unresolved_after"] != 191 or \
+            begin_notify["imports_resolved"] != ["audio_ble_master_begin_failure_notify_4a1546"] or \
+            begin_notify["imports_added"]:
+        raise RuntimeError("Apollo Main failure-notify arming changed")
+    cancel_timeout_path = G2 / "build/c-firmware/20261015/main-ring-policy-cancel-connect-timeout-49f5f8/receipt.json"
+    cancel_timeout, cancel_timeout_ref = receipt(cancel_timeout_path)
+    if cancel_timeout["status"] != "PASS_EXPERIMENTAL_MAIN_RING_POLICY_CANCEL_CONNECT_TIMEOUT_C" or \
+            cancel_timeout["base_sha256"] != begin_notify["linked_sha256"] or \
+            cancel_timeout["oracle_cases"] != 18 or \
+            cancel_timeout["unresolved_before"] != 191 or cancel_timeout["unresolved_after"] != 190 or \
+            cancel_timeout["imports_resolved"] != ["audio_ble_ring_policy_cancel_connect_timeout_49f5f8"] or \
+            cancel_timeout["imports_added"]:
+        raise RuntimeError("Apollo Main ring timeout cancellation changed")
+    schedule_timeouts_path = G2 / "build/c-firmware/20261015/main-ring-policy-schedule-timeouts-49f4a8-49f552/receipt.json"
+    schedule_timeouts, schedule_timeouts_ref = receipt(schedule_timeouts_path)
+    if schedule_timeouts["status"] != "PASS_EXPERIMENTAL_MAIN_RING_POLICY_SCHEDULE_TIMEOUTS_C" or \
+            schedule_timeouts["base_sha256"] != cancel_timeout["linked_sha256"] or \
+            schedule_timeouts["oracle_cases"] != 36 or \
+            schedule_timeouts["unresolved_before"] != 190 or schedule_timeouts["unresolved_after"] != 188 or \
+            schedule_timeouts["imports_resolved"] != ["audio_ble_ring_policy_schedule_connect_timeout_49f4a8", "audio_ble_ring_policy_schedule_reconnect_timeout_49f552"] or \
+            schedule_timeouts["imports_added"]:
+        raise RuntimeError("Apollo Main ring timeout scheduling changed")
+    system_close_path = G2 / "build/c-firmware/20261015/main-system-close-common-data-469d48/receipt.json"
+    system_close, system_close_ref = receipt(system_close_path)
+    if system_close["status"] != "PASS_EXPERIMENTAL_MAIN_SYSTEM_CLOSE_COMMON_DATA_C" or \
+            system_close["base_sha256"] != schedule_timeouts["linked_sha256"] or \
+            system_close["oracle_cases"] != 768 or \
+            system_close["unresolved_before"] != 188 or system_close["unresolved_after"] != 188 or \
+            system_close["imports_resolved"] != ["audio_uart_registry_callback_469d48"] or \
+            system_close["imports_added"] != ["audio_system_close_active_app_get_443504"]:
+        raise RuntimeError("Apollo Main system-close common-data handler changed")
+    active_app_path = G2 / "build/c-firmware/20261015/main-system-close-active-app-get-443504/receipt.json"
+    active_app, active_app_ref = receipt(active_app_path)
+    if active_app["status"] != "PASS_EXPERIMENTAL_MAIN_SYSTEM_CLOSE_ACTIVE_APP_GET_C" or \
+            active_app["base_sha256"] != system_close["linked_sha256"] or \
+            active_app["linked_sha256"] != main_obj["sha256"] or \
+            active_app["oracle_cases"] != 192 or \
+            active_app["unresolved_before"] != 188 or active_app["unresolved_after"] != 187 or \
+            active_app["imports_resolved"] != ["audio_system_close_active_app_get_443504"] or \
+            active_app["imports_added"]:
+        raise RuntimeError("Apollo Main system-close active-app getter changed")
     images["apollo_main"] = {
         "receipt": main_ref, "candidate": main_obj,
+        "prior_dm_registry_extent_gate": registry_ref,
+        "dm_registry_storage": storage_ref,
+        "dm_connection_pair_storage": pair_ref,
+        "dm_stack_interface": stack_ref,
+        "dm_dispatch_scan_stop": scan_ref,
+        "dm_dispatch_scan_stop_wrapper": wrapper_ref,
+        "dm_stack_msg_handler": msg_ref,
+        "dm_dispatch_4d2544": forward_ref,
+        "dm_stack_reset_536918": reset_ref,
+        "dm_stack_hci_handler_53694c": hci_ref,
+        "dm_stack_hci_scan_complete_5368b6": complete_ref,
+        "dm_dispatch_scan_start_536820": scan_start_ref,
+        "dm_sec_hci_handler_4d2364": sec_ref,
+        "dm_sec_lesc_neg_ltk": lesc_ref,
+        "hci_ltk_reply_52b2ce": ltk_ref,
+        "smp_encrypt_ind_537be6": encrypt_ref,
+        "smp_get_stk_537c4c": stk_ref,
+        "dm_sec_interface_78a898": sec_interface_ref,
+        "dm_phy_interface_78a85c": phy_interface_ref,
+        "dm_lesc_interface_78a8a4": lesc_interface_ref,
+        "dm_priv_aes_interface_78a874": priv_aes_interface_ref,
+        "mapped_mram_records_7ff000": mram_ref,
+        "dm_priv_interface_78a868": priv_interface_ref,
+        "hci_addr_resolution_enable_52b7f6": addr_enable_ref,
+        "hci_privacy_commands_52b744": hci_priv_ref,
+        "dm_dev_priv_forward_4b2ea6": dev_priv_ref,
+        "dm_adv_reset_4ba45c": adv_reset_ref,
+        "dm_adv_msg_4ba6ac": adv_msg_ref,
+        "hci_adv_commands_52b3b0": hci_adv_ref,
+        "dm_adv_config_lower_4b9a80": adv_config_ref,
+        "dm_adv_control_extent_34": adv_extent_ref,
+        "dm_adv_hci_4ba4b0": adv_hci_ref,
+        "dm_adv_gen_conn_4b310a": adv_gen_ref,
+        "dm_dev_pass_hci_conn_4d29c2": dev_conn_ref,
+        "mapped_bootloader_flag_7fe000": flag_ref,
+        "als_sync_registry_4ae73c": als_ref,
+        "display_manager_state_table_776a3c": display_table_ref,
+        "tracepoint_registry_5eeec4": tracepoint_ref,
+        "tracepoint_ble_data_5ee8bc": trace_ble_ref,
+        "tracepoint_decode_ram_2037b9c0": trace_ram_ref,
+        "tracepoint_delete_all_5ee7b4": delete_all_ref,
+        "tracepoint_reply_ram_2037bbc8": reply_ram_ref,
+        "tracepoint_reply_routing_5ee134": reply_route_ref,
+        "tracepoint_send_reply_5edfd8_5ee066": send_reply_ref,
+        "tracepoint_encoder_5eded0": encoder_ref,
+        "tracepoint_pb_descriptor_77cd84": trace_desc_ref,
+        "tracepoint_delete_file_5ee488": trace_delete_ref,
+        "tracepoint_path_resolver_5eddf6": trace_resolve_ref,
+        "tracepoint_sequence_parser_5edaf0": trace_parse_ref,
+        "tracepoint_filename_validator_5ede30": trace_validate_ref,
+        "tracepoint_path_formatter_5edba2": trace_format_ref,
+        "tracepoint_active_file_47e06a": trace_active_ref,
+        "tracepoint_unlink_facade_47498c": trace_unlink_ref,
+        "file_errno_location_439cc4": file_errno_ref,
+        "file_lfs_remove_wrapper_4cfa76": lfs_remove_ref,
+        "file_lfs_remove_core_4ce4dc": lfs_remove_core_ref,
+        "file_lfs_dir_drop_4cc5a2": lfs_dir_drop_ref,
+        "tracepoint_sorted_file_inventory_5edbb0": trace_inventory_ref,
+        "tracepoint_request_file_name_5ee1f8": request_ref,
+        "tracepoint_scan_files_5edc5a": scan_ref,
+        "tracepoint_file_size_5edb68": file_size_ref,
+        "tracepoint_prepare_pull_48ec9e": prepare_ref,
+        "tracepoint_reset_pull_478110": reset_ref,
+        "tracepoint_dir_facade_474b02": dir_facade_ref,
+        "tracepoint_pull_initialize_47e1ec": pull_init_ref,
+        "tracepoint_pull_ready_48eb90": pull_ready_ref,
+        "tracepoint_pull_complete_47e220": pull_complete_ref,
+        "tracepoint_pull_write_batch_47e178": pull_write_ref,
+        "tracepoint_reopen_pending_file_47e144": reopen_ref,
+        "tracepoint_format_pull_path_47de0a": pull_path_format_ref,
+        "tracepoint_open_new_file_47e0c8": open_new_ref,
+        "tracepoint_tpf1_header_48ed00": header_ref,
+        "tracepoint_version_47dd08": version_ref,
+        "tracepoint_trim_old_files_47e090": trim_ref,
+        "tracepoint_list_files_47deb4": listing_ref,
+        "tracepoint_parse_file_entry_47de18": entry_parser_ref,
+        "tracepoint_write_state_47df28": state_write_ref,
+        "tracepoint_pull_backend_init_47dfec": backend_init_ref,
+        "tracepoint_file_size_47de7a": pull_size_ref,
+        "tracepoint_read_state_47df8a": state_read_ref,
+        "tracepoint_storage_mkdir_474a76": mkdir_ref,
+        "file_lfs_mkdir_4cfc5c": lfs_mkdir_ref,
+        "tracepoint_file_open_474550": file_open_ref,
+        "tracepoint_file_sync_474910": file_sync_ref,
+        "file_lfs_sync_4cfb08": lfs_sync_ref,
+        "tracepoint_file_write_474682": file_write_ref,
+        "file_lfs_mkdir_core_4cd3aa": mkdir_core_ref,
+        "tracepoint_delete_all_files_5ee650": delete_all_files_ref,
+        "setting_common_data_4668ae": setting_common_ref,
+        "setting_data_recv_466976": setting_recv_ref,
+        "setting_response_49b900": setting_response_ref,
+        "setting_response_encode_49b3d4": setting_encoder_ref,
+        "setting_local_response_49ba58": setting_local_ref,
+        "setting_local_response_encode_49b7c4": setting_local_encoder_ref,
+        "setting_parse_49b1f8": setting_parse_ref,
+        "setting_dispatch_466abc": setting_dispatch_ref,
+        "setting_type5_467134": setting_type5_ref,
+        "wear_detect_enable_49eb1e": wear_enable_ref,
+        "wear_detect_status_49ebb6": wear_status_ref,
+        "onboarding_start_46805a": onboarding_start_ref,
+        "wear_child_502bf0": wear_wrapper_ref,
+        "wear_child_51308a": wear_request_ref,
+        "settings_input_check_46b0ec": settings_input_ref,
+        "setting_type6_46713e": setting_type6_ref,
+        "setting_type8_4671a2": setting_type8_ref,
+        "setting_type9_467206": setting_type9_ref,
+        "setting_display_start_466890": setting_display_start_ref,
+        "dashboard_auto_close_reset_49c0dc": dashboard_reset_ref,
+        "setting_coordinates_466e1c_466ea2": setting_coordinates_ref,
+        "setting_type12_467c34": setting_type12_ref,
+        "gesture_apptype_46658e": gesture_apptype_ref,
+        "setting_type10_467308": setting_type10_ref,
+        "setting_brightness_refresh_46c18c": brightness_refresh_ref,
+        "setting_manual_brightness_46c1c8": manual_brightness_ref,
+        "als_manual_brightness_4ae81c": als_manual_ref,
+        "als_manual_recalculate_4adcd8": als_recalculate_ref,
+        "als_manual_target_4ade36": als_target_ref,
+        "als_curve_first_percent_4ad9e2": als_curve_ref,
+        "als_manual_target_scale_4addb6": als_target_scale_ref,
+        "setting_type1_brightness_466bec": setting_type1_ref,
+        "setting_type4_head_up_466f28": setting_type4_ref,
+        "setting_head_up_configure_46c524": head_up_config_ref,
+        "hub_parameter_config_4a6e3c": hub_parameter_ref,
+        "hub_semantic_motion_period_4a4ec0": hub_period_ref,
+        "hub_imu_accel_config_4a52a2": hub_imu_ref,
+        "hub_semantic_motion_threshold_4a4e8c": hub_threshold_ref,
+        "display_deinit_force_47432c": deinit_ref,
+        "display_init_force_474100": init_ref,
+        "onboarding_wear_notify_47e320": wear_notify_ref,
+        "onboarding_event_encode_4a8368": event_encode_ref,
+        "silent_mode_set_from_app_46921c": silent_app_ref,
+        "sync_send_to_both_ext_464f76": send_both_ref,
+        "setting_dominant_hand_467540": dominant_ref,
+        "ring_address_is_unset_4a26e8": ring_unset_ref,
+        "ring_connect_policy_on_hand_49f15a": ring_policy_ref,
+        "ring_policy_get_state_49f05c": ring_get_ref,
+        "ble_master_set_target_hand_4a2068": master_target_ref,
+        "ble_master_hand_changed_4a2948": hand_changed_ref,
+        "ble_peer_ring_status_47d8f0": peer_ring_ref,
+        "ble_master_reset_scene_pending_4a2658": scene_pending_ref,
+        "ble_master_begin_failure_notify_4a1546": begin_notify_ref,
+        "ring_policy_cancel_connect_timeout_49f5f8": cancel_timeout_ref,
+        "ring_policy_schedule_timeouts_49f4a8_49f552": schedule_timeouts_ref,
+        "system_close_common_data_469d48": system_close_ref,
+        "system_close_active_app_get_443504": active_app_ref,
+        "settings_last_message_ram_extent": {"current_source_receipt": ram_ref, "selected_object_bytes": selected_ram_bytes, "required_minimum_bytes": 104, "integrated": selected_ram_bytes == 104},
         "unresolved_count": len(actual), "unresolved_symbols": actual,
         "source_complete": False, "full_payload_linked": False,
-        "remaining_gate": ["231 current imports need source ownership or attributed external contracts.",
+        "remaining_gate": ["187 current imports; the dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
+                           "All eight DM dispatch entries and the exposed security children now have C bodies; whole-image source and placement remain open.",
+                           "DM storage is a 196-byte bounded C-owned block with a registry alias; full allocation extent and final RAM placement remain open.",
                            "Complete data/startup/layout and physical execution remain unproved."],
     }
     if set(images) != {"codec", "ble_em9305", "touch", "case", "apollo_bootloader", "apollo_main"}:

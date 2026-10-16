@@ -1,0 +1,38 @@
+{
+  "comparisons": 262384,
+  "counts": {
+    "r1_battery_voltage_get": 262264,
+    "r1_battery_runtime_service": 120
+  },
+  "all_voltage_halfwords": true,
+  "prefix_nops": {
+    "native": 131222,
+    "source": 131222
+  },
+  "provider_calls_per_side": {
+    "r1_advertising_configuration_byte_get": 262264,
+    "r1_battery_runtime_update_service": 131222
+  },
+  "native_service_declared_body_bytes": 4,
+  "overlapping_ownership_span_bytes": 412,
+  "updater_body_bytes": 406,
+  "trailing_padding_bytes": 2,
+  "report_sha256": "c6650b4cdbeb9f7f2e17e68f3cfedb3582e675389811912e22e58aac960820b0",
+  "object_sha256": "5ed4d9032b042bee76bc11bfb4280be3b11e93a06d16ba550c8957d7aebb2113",
+  "driver_sha256": "3cf5cf465a0d9afb327bd4011ef1330c9e6e6ce129c5a82d37367f2165b2d5f9",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-91290.json": "e94ca1558c830a2453afd72e07c792252be460f4be4b0b0fa2da694956b5aa4a",
+    "rea-31fcc.json": "29871bf99e036bb7bd558b08985208c1b3901e9be447c95fcaf2f3e366ba42a5",
+    "ghidra-getter.json": "609be2aba3fba6e171bd753e49107fefecf437318cdf0b72cd800f6087d30864",
+    "ghidra-service.json": "93f049e329bb08a25c7047b9d202665f6af8ff6eea09a4b74619beaa3998593c"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Config/updater endpoints are fixtures; actual updater composition required for overlapping service ownership span",
+    "Getter reloads voltage after optional refresh; raw configuration comparison is full-word",
+    "Service prefix4 bytes and updater406 bytes are separately evidenced; whole-span instruction/image identity remains open",
+    "Runtime/config initialization, recursion policy, hardware and physical timing/concurrency remain gates"
+  ]
+}

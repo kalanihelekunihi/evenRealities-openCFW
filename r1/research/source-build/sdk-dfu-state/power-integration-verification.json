@@ -1,0 +1,25 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "34d73ce72d927f665c50047f3760be71a20d1a9b47a564772fb594314085eecc",
+  "native_evidence_sha256": "b0972874940f66f36adfc432e5331444ad2e2444cbcc2cd34cf1cc303221ff20",
+  "dfu_report_sha256": "1d1031489f9d1de7fdca014b5de62a0066a510ea1e538ab414bf14a9223310ba",
+  "actual_sdk_dfu_callback_executed": true,
+  "dfu_callback_workflows": 432,
+  "forced_exclusive_failures_per_implementation": 12,
+  "iterator_report_sha256": "798d03b820cf73d2cba287b53433078429587f34e4010875f229face12c7507c",
+  "comparisons": 1864,
+  "callback_invocations_per_implementation": 1396,
+  "terminal_cases": {
+    "off": 540,
+    "reset": 520
+  },
+  "svc51_calls_per_implementation": 270,
+  "source_owned_cold_zero_bytes": 18,
+  "scope": "Actual pinned shutdown API/process, exclusive atomic swap and legacy iterator; locking, repeated/blocking handlers, continuation cursor, native logging modes, reset callsite and terminal register/SVC ordering",
+  "limitations": [
+    "Shutdown callbacks, logging backend/dequeue, SDH replies and reset capture are fixtures. Physical off/reset effects are stopped at the terminal register write.",
+    "Canonical bool/short-enum ABI, bounded logger queues and handlers only; exception races and physical power/retention behavior remain unproven.",
+    "Synthetic handler ranges do not establish production table/startup allocation. Original compiler/image identity and full linking remain open."
+  ],
+  "instruction_identity_proven": false
+}

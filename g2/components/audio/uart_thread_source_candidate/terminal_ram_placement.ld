@@ -83,7 +83,7 @@ ASSERT(SIZEOF(.g2.ram.terminal_agent_session_ptr) == 4, "terminal session pointe
 ASSERT(SIZEOF(.g2.ram.terminal_agent_special_flag) == 1, "terminal special flag size")
 ASSERT(SIZEOF(.g2.ram.settings_notify_encode_buffer) == 0x100, "settings encode buffer size")
 ASSERT(SIZEOF(.g2.ram.settings_notify_staging) == 0x68, "settings staging size")
-ASSERT(SIZEOF(.g2.ram.settings_last_message_state) == 13, "settings last-message minimum size")
+ASSERT(SIZEOF(.g2.ram.settings_last_message_state) == 0x68, "settings last-message minimum size")
 ASSERT(SIZEOF(.g2.ram.settings_config_live) == 0x50, "settings live config minimum size")
 ASSERT(SIZEOF(.g2.ram.settings_notify_magic) == 4, "settings sequence size")
 ASSERT(SIZEOF(.g2.ram.system_alert_font) == 4, "system alert font size")

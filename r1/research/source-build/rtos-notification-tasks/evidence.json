@@ -1,0 +1,73 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "wrapper_sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8",
+  "accumulated_pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "spans": [
+    {
+      "entry": "0x95fd4",
+      "name": "vTaskDelay",
+      "bytes": 66,
+      "ghidra_file": "ghidra-95fd4.json",
+      "ghidra_sha256": "97b72124db5bff4d44b8b786a46af3c5e28f2faffbeb637d2a381900c126b791"
+    },
+    {
+      "entry": "0x98484",
+      "name": "xTaskGenericNotify",
+      "bytes": 278,
+      "ghidra_file": "ghidra-98484.json",
+      "ghidra_sha256": "2ab7bacd9a8bbffd99bea5c4321c3e91d4b75928f539540a62d3806e8f3f81e3"
+    },
+    {
+      "entry": "0x985ac",
+      "name": "xTaskGenericNotifyFromISR",
+      "bytes": 320,
+      "ghidra_file": "ghidra-985ac.json",
+      "ghidra_sha256": "6842488d16ab309ee34cc017802eb4758479efa8f18f94daf4552baa2866547b"
+    },
+    {
+      "entry": "0x98700",
+      "name": "xTaskNotifyWait",
+      "bytes": 148,
+      "ghidra_file": "ghidra-98700.json",
+      "ghidra_sha256": "cb051ccf854f983c98525c3fbe96f5fba41a8ad3ad4b9fb7c6f4d03ef618a253"
+    }
+  ],
+  "rea_inventory": "r1/research/source-build/sdk-clock/rea-procedure-inventory.json",
+  "rea_inventory_sha256": "fbdbc0c467b87b6c991baa6e398adae6fa42e47812b981a59221a122c37974ce",
+  "rea_registered_rows": [
+    {
+      "address": "0x95fd4",
+      "value": "FUN_00095fd4"
+    },
+    {
+      "address": "0x98484",
+      "value": "FUN_00098484"
+    },
+    {
+      "address": "0x985ac",
+      "value": "FUN_000985ac"
+    },
+    {
+      "address": "0x98700",
+      "value": "FUN_00098700"
+    }
+  ],
+  "scope": "Authenticated notification/delay wrapper or task spans; indexed native argument contract at index0,112-byte TCB value104/state108; unchanged pinned source with explicit lower fixture/graph gates",
+  "ownership_mapping": {
+    "original_row": {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00098700",
+      "end": "0x00098793",
+      "size": "148",
+      "recovered_name": "FUN_00098700",
+      "provider_family": "freertos_10_5_1_nordic_nrf52_port",
+      "source_disposition": "use_authenticated_upstream_snapshot_and_nordic_port",
+      "upstream_symbol": "xTaskNotifyWait",
+      "confidence": "high",
+      "evidence": "Exact FreeRTOS-Kernel 10.5.1 core or Nordic nRF52 port function-local control flow; compile external/freertos/source/tasks.c from the authenticated core or pinned SDK port. The product-owned seam is limited to FreeRTOSConfig tick/tickless and pre-sleep-hook selection."
+    },
+    "effective_symbol": "xTaskGenericNotifyWait",
+    "scope": "Native CMSIS caller supplies index0 plus four wait arguments; pinned indexed body and one-slot assertions match native memory/control-flow contracts."
+  }
+}

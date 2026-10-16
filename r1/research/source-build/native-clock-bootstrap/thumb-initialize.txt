@@ -1,0 +1,67 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0008adc0 <r1_stock_gpio_pin_set+0x1198c>:
+   8adc0:	b53e      	push	{r1, r2, r3, r4, r5, lr}
+   8adc2:	4c21      	ldr	r4, [pc, #132]	@ (8ae48 <_stack+0xae48>)
+   8adc4:	7aa1      	ldrb	r1, [r4, #10]
+   8adc6:	b109      	cbz	r1, 8adcc <_stack+0xadcc>
+   8adc8:	2001      	movs	r0, #1
+   8adca:	bd3e      	pop	{r1, r2, r3, r4, r5, pc}
+   8adcc:	b120      	cbz	r0, 8add8 <_stack+0xadd8>
+   8adce:	e9d0 1000 	ldrd	r1, r0, [r0]
+   8add2:	e9c4 1000 	strd	r1, r0, [r4]
+   8add6:	e004      	b.n	8ade2 <_stack+0xade2>
+   8add8:	491c      	ldr	r1, [pc, #112]	@ (8ae4c <_stack+0xae4c>)
+   8adda:	e9d1 0100 	ldrd	r0, r1, [r1]
+   8adde:	e9c4 0100 	strd	r0, r1, [r4]
+   8ade2:	8820      	ldrh	r0, [r4, #0]
+   8ade4:	8120      	strh	r0, [r4, #8]
+   8ade6:	4669      	mov	r1, sp
+   8ade8:	a801      	add	r0, sp, #4
+   8adea:	f7cf fdd1 	bl	5a990 <r1_stock_i2c5_acquire+0xa4b8>
+   8adee:	b938      	cbnz	r0, 8ae00 <_stack+0xae00>
+   8adf0:	f7cf fdca 	bl	5a988 <r1_stock_i2c5_acquire+0xa4b0>
+   8adf4:	9001      	str	r0, [sp, #4]
+   8adf6:	2800      	cmp	r0, #0
+   8adf8:	d0e7      	beq.n	8adca <_stack+0xadca>
+   8adfa:	2100      	movs	r1, #0
+   8adfc:	f7cf fdda 	bl	5a9b4 <r1_stock_i2c5_acquire+0xa4dc>
+   8ae00:	9801      	ldr	r0, [sp, #4]
+   8ae02:	b1b0      	cbz	r0, 8ae32 <_stack+0xae32>
+   8ae04:	6801      	ldr	r1, [r0, #0]
+   8ae06:	b129      	cbz	r1, 8ae14 <_stack+0xae14>
+   8ae08:	9800      	ldr	r0, [sp, #0]
+   8ae0a:	4788      	blx	r1
+   8ae0c:	2800      	cmp	r0, #0
+   8ae0e:	d0dc      	beq.n	8adca <_stack+0xadca>
+   8ae10:	9801      	ldr	r0, [sp, #4]
+   8ae12:	b170      	cbz	r0, 8ae32 <_stack+0xae32>
+   8ae14:	6903      	ldr	r3, [r0, #16]
+   8ae16:	b12b      	cbz	r3, 8ae24 <_stack+0xae24>
+   8ae18:	8821      	ldrh	r1, [r4, #0]
+   8ae1a:	6860      	ldr	r0, [r4, #4]
+   8ae1c:	9a00      	ldr	r2, [sp, #0]
+   8ae1e:	4798      	blx	r3
+   8ae20:	9801      	ldr	r0, [sp, #4]
+   8ae22:	b130      	cbz	r0, 8ae32 <_stack+0xae32>
+   8ae24:	69c5      	ldr	r5, [r0, #28]
+   8ae26:	b125      	cbz	r5, 8ae32 <_stack+0xae32>
+   8ae28:	2200      	movs	r2, #0
+   8ae2a:	4b09      	ldr	r3, [pc, #36]	@ (8ae50 <_stack+0xae50>)
+   8ae2c:	4611      	mov	r1, r2
+   8ae2e:	4610      	mov	r0, r2
+   8ae30:	47a8      	blx	r5
+   8ae32:	4908      	ldr	r1, [pc, #32]	@ (8ae54 <_stack+0xae54>)
+   8ae34:	9801      	ldr	r0, [sp, #4]
+   8ae36:	6088      	str	r0, [r1, #8]
+   8ae38:	4803      	ldr	r0, [pc, #12]	@ (8ae48 <_stack+0xae48>)
+   8ae3a:	2114      	movs	r1, #20
+   8ae3c:	300c      	adds	r0, #12
+   8ae3e:	f79c fcb4 	bl	277aa <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x7aa>
+   8ae42:	2001      	movs	r0, #1
+   8ae44:	72a0      	strb	r0, [r4, #10]
+   8ae46:	e7bf      	b.n	8adc8 <_stack+0xadc8>

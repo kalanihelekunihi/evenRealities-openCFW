@@ -1,0 +1,40 @@
+/* ================================================================
+ * entry: 0x00079bfe
+ * end:   0x00079c5d
+ * size:  96 bytes
+ * name:  FUN_00079bfe
+ * ================================================================ */
+
+int * FUN_00079bfe(int param_1,int param_2)
+
+{
+  int *piVar1;
+  int *piVar2;
+  uint uVar3;
+  int *piVar4;
+  uint uVar5;
+
+  uVar3 = *(ushort *)(param_1 + 0x10) - 4;
+  piVar1 = (int *)FUN_000780d2(param_1);
+  if (piVar1 != (int *)0x0) {
+    *(undefined1 *)(piVar1 + 1) = 0;
+    *(undefined1 *)((int)piVar1 + 5) = 1;
+    *(short *)((int)piVar1 + 6) = (short)uVar3;
+    *piVar1 = param_1;
+    piVar4 = piVar1;
+    for (uVar5 = 0; uVar5 < ((param_2 + uVar3 + 3) / uVar3 & 0xff) - 1; uVar5 = uVar5 + 1) {
+      piVar2 = (int *)FUN_000780d2(param_1);
+      if (piVar2 == (int *)0x0) {
+        FUN_00079c5e(piVar1);
+        return (int *)0x0;
+      }
+      *(char *)((int)piVar1 + 5) = *(char *)((int)piVar1 + 5) + '\x01';
+      *piVar4 = (int)piVar2;
+      *piVar2 = param_1;
+      piVar4 = piVar2;
+    }
+  }
+  return piVar1;
+}
+
+

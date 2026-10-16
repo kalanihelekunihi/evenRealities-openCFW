@@ -19,6 +19,8 @@ assert native_word(0x49c030)==0x2007486c
 assert native_word(0x46c694)==0x200036fc
 assert native_word(0x46bee8)==0x20072da8
 assert native_word(0x4672f8)==0x20072608
+assert native_word(0x49bdf4)==0x20072608
+assert struct.unpack_from('<H',blob,0x49b404-0x438000)[0]==0x2268
 assert native_word(0x469b88)==0x2007501d
 assert native_word(0x469b54)==0x2007501e
 for literal,address in ((0x4d3444,0x20003bcc),(0x4d3478,0x200749ec),
@@ -79,7 +81,7 @@ expected={'audio_terminal_agent_session_ptr':(0x2006e0d4,4),
           'audio_terminal_message_sequence':(0x20074fff,1),
           'audio_settings_notify_encode_buffer':(0x200706ec,0x100),
           'audio_settings_notify_staging':(0x200725a0,0x68),
-          'audio_settings_last_message_state':(0x20072608,13),
+          'audio_settings_last_message_state':(0x20072608,0x68),
           'audio_settings_config_live':(0x20072da8,0x50),
           'audio_settings_notify_magic':(0x2007486c,4),
           'audio_settings_ancc_mutex':(0x2007491c,4),

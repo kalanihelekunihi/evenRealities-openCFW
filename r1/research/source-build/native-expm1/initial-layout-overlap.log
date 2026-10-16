@@ -1,0 +1,12 @@
+arm-none-eabi-ld: section .trig_reduce_table LMA [000bdb48,000bdb77] overlaps section .expm1_polynomial LMA [000bdb28,000bdb4f]
+Traceback (most recent call last):
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_expm1_consumers.py", line 91, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/kalani/Repo/evenRealities-openCFW/r1/tools/verify_native_expm1_consumers.py", line 47, in main
+    d=Path(tmp);ld=ROOT/'r1/source-config/runtime/native_expm1_verification.ld';elf=d/'test.elf';binary=d/'text.bin';subprocess.run(['arm-none-eabi-ld','-T',str(ld),'-e','r1_binary64_classify_bits',str(bo),'-o',str(elf)],check=True);subprocess.run(['arm-none-eabi-objcopy','-j','.text','-O','binary',str(elf),str(binary)],check=True)
+                                                                                                                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['arm-none-eabi-ld', '-T', '/Users/kalani/Repo/evenRealities-openCFW/r1/source-config/runtime/native_expm1_verification.ld', '-e', 'r1_binary64_classify_bits', '/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-expm1-runtime/native-expm1-runtime.o', '-o', '/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/r1-float-consumers-han82u9s/test.elf']' returned non-zero exit status 1.

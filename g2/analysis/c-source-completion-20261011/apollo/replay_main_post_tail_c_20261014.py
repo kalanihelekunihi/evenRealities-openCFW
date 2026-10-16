@@ -4718,6 +4718,786 @@ def main():
         "comparison_scope": "call-name forwarding to Nema encoder with 2420 native cases",
     })
     previous = linked
+    page_pair_script = HERE / "bind_main_page_pair_43f6b8_20261015.py"
+    page_pair_result = subprocess.run([sys.executable, str(page_pair_script)], check=True,
+                                      capture_output=True, text=True)
+    page_pair_path = G2 / "build/c-firmware/20261015/main-page-pair-43f6b8/receipt.json"
+    page_pair = json.loads(page_pair_path.read_text())
+    if page_pair["status"] != "PASS_EXPERIMENTAL_MAIN_PAGE_PAIR_C":
+        raise RuntimeError("Main page pair status changed")
+    base = file_from_receipt(page_pair, "base_object", "base_sha256")
+    linked = file_from_receipt(page_pair, "linked_object", "linked_sha256")
+    owned = {"audio_uart_page_4411d4", "audio_uart_page_43f6b8"}
+    resolved = {"audio_uart_page_43f6b8"}
+    added = {"audio_uart_page_43f09a"}
+    if base != previous or len(imports(base)) != 231 or len(imports(linked)) != 231 or \
+            imports(base) - imports(linked) != resolved or \
+            imports(linked) - imports(base) != added or \
+            set(page_pair["source_owned_symbols"]) != owned:
+        raise RuntimeError("Main page pair handoff changed")
+    if sha(ROOT / page_pair["source"]) != page_pair["source_sha256"]:
+        raise RuntimeError("stale Main page pair source")
+    records.append({
+        "stage": "main-page-pair-43f6b8",
+        "binder": str(page_pair_script.relative_to(ROOT)),
+        "binder_sha256": sha(page_pair_script), "status": page_pair["status"],
+        "binder_output": page_pair_result.stdout.strip(),
+        "receipt": str(page_pair_path.relative_to(ROOT)),
+        "receipt_sha256": sha(page_pair_path),
+        "source": page_pair["source"], "source_sha256": page_pair["source_sha256"],
+        "source_owned_symbols": page_pair["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 231, "unresolved_after": 231,
+        "imports_resolved": sorted(resolved), "imports_added": sorted(added),
+        "comparison_scope": "48 controlled native call-sequence and argument comparisons",
+    })
+    previous = linked
+    obj_set_pos_script = HERE / "bind_main_obj_set_pos_43f09a_20261015.py"
+    obj_set_pos_result = subprocess.run([sys.executable, str(obj_set_pos_script)], check=True,
+                                        capture_output=True, text=True)
+    obj_set_pos_path = G2 / "build/c-firmware/20261015/main-obj-set-pos-43f09a/receipt.json"
+    obj_set_pos = json.loads(obj_set_pos_path.read_text())
+    if obj_set_pos["status"] != "PASS_EXPERIMENTAL_MAIN_OBJ_SET_POS_C":
+        raise RuntimeError("Main lv_obj_set_pos status changed")
+    base = file_from_receipt(obj_set_pos, "base_object", "base_sha256")
+    linked = file_from_receipt(obj_set_pos, "linked_object", "linked_sha256")
+    owned = {"audio_uart_page_43f09a"}
+    if base != previous or len(imports(base)) != 231 or len(imports(linked)) != 230 or \
+            imports(base) - imports(linked) != owned or imports(linked) - imports(base) or \
+            set(obj_set_pos["source_owned_symbols"]) != owned:
+        raise RuntimeError("Main lv_obj_set_pos handoff changed")
+    if sha(ROOT / obj_set_pos["source"]) != obj_set_pos["source_sha256"]:
+        raise RuntimeError("stale Main lv_obj_set_pos source")
+    records.append({
+        "stage": "main-obj-set-pos-43f09a",
+        "binder": str(obj_set_pos_script.relative_to(ROOT)),
+        "binder_sha256": sha(obj_set_pos_script), "status": obj_set_pos["status"],
+        "binder_output": obj_set_pos_result.stdout.strip(),
+        "receipt": str(obj_set_pos_path.relative_to(ROOT)),
+        "receipt_sha256": sha(obj_set_pos_path),
+        "source": obj_set_pos["source"], "source_sha256": obj_set_pos["source_sha256"],
+        "source_owned_symbols": obj_set_pos["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 231, "unresolved_after": 230,
+        "imports_resolved": sorted(owned), "imports_added": [],
+        "comparison_scope": "48 native X/Y calls and null assertion logger comparisons",
+    })
+    previous = linked
+    obj_set_xy_script = HERE / "bind_main_obj_set_xy_43f0e0_20261015.py"
+    obj_set_xy_result = subprocess.run([sys.executable, str(obj_set_xy_script)], check=True,
+                                       capture_output=True, text=True)
+    obj_set_xy_path = G2 / "build/c-firmware/20261015/main-obj-set-xy-43f0e0/receipt.json"
+    obj_set_xy = json.loads(obj_set_xy_path.read_text())
+    if obj_set_xy["status"] != "PASS_EXPERIMENTAL_MAIN_OBJ_SET_XY_C":
+        raise RuntimeError("Main lv_obj_set_x/y status changed")
+    base = file_from_receipt(obj_set_xy, "base_object", "base_sha256")
+    linked = file_from_receipt(obj_set_xy, "linked_object", "linked_sha256")
+    owned = {"audio_uart_page_43f0e0", "audio_uart_page_43f142",
+             "audio_uart_page_4411b8", "audio_uart_page_4411c6"}
+    resolved = {"audio_uart_page_43f0e0", "audio_uart_page_43f142"}
+    added = {"audio_uart_page_style_get_44beaa"}
+    if base != previous or len(imports(base)) != 230 or len(imports(linked)) != 229 or \
+            imports(base) - imports(linked) != resolved or \
+            imports(linked) - imports(base) != added or \
+            set(obj_set_xy["source_owned_symbols"]) != owned:
+        raise RuntimeError("Main lv_obj_set_x/y handoff changed")
+    if sha(ROOT / obj_set_xy["source"]) != obj_set_xy["source_sha256"]:
+        raise RuntimeError("stale Main lv_obj_set_x/y source")
+    records.append({
+        "stage": "main-obj-set-xy-43f0e0",
+        "binder": str(obj_set_xy_script.relative_to(ROOT)),
+        "binder_sha256": sha(obj_set_xy_script), "status": obj_set_xy["status"],
+        "binder_output": obj_set_xy_result.stdout.strip(),
+        "receipt": str(obj_set_xy_path.relative_to(ROOT)),
+        "receipt_sha256": sha(obj_set_xy_path),
+        "source": obj_set_xy["source"], "source_sha256": obj_set_xy["source_sha256"],
+        "source_owned_symbols": obj_set_xy["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 230, "unresolved_after": 229,
+        "imports_resolved": sorted(resolved), "imports_added": sorted(added),
+        "comparison_scope": "32 native status/value, style setter, and null assertion comparisons",
+    })
+    previous = linked
+    page_style_get_script = HERE / "bind_main_page_style_get_44beaa_20261015.py"
+    page_style_get_result = subprocess.run([sys.executable, str(page_style_get_script)],
+                                           check=True, capture_output=True, text=True)
+    page_style_get_path = G2 / "build/c-firmware/20261015/main-page-style-get-44beaa/receipt.json"
+    page_style_get = json.loads(page_style_get_path.read_text())
+    if page_style_get["status"] != "PASS_EXPERIMENTAL_MAIN_PAGE_STYLE_GET_C":
+        raise RuntimeError("Main page style-get status changed")
+    base = file_from_receipt(page_style_get, "base_object", "base_sha256")
+    linked = file_from_receipt(page_style_get, "linked_object", "linked_sha256")
+    owned = {"audio_uart_page_style_get_44beaa", "audio_uart_lv_style_get_482946"}
+    resolved = {"audio_uart_page_style_get_44beaa"}
+    added = {"audio_uart_lv_style_lookup_482716"}
+    if base != previous or len(imports(base)) != 229 or len(imports(linked)) != 229 or \
+            imports(base) - imports(linked) != resolved or \
+            imports(linked) - imports(base) != added or \
+            set(page_style_get["source_owned_symbols"]) != owned:
+        raise RuntimeError("Main page style-get handoff changed")
+    if sha(ROOT / page_style_get["source"]) != page_style_get["source_sha256"]:
+        raise RuntimeError("stale Main page style-get source")
+    records.append({
+        "stage": "main-page-style-get-44beaa",
+        "binder": str(page_style_get_script.relative_to(ROOT)),
+        "binder_sha256": sha(page_style_get_script), "status": page_style_get["status"],
+        "binder_output": page_style_get_result.stdout.strip(),
+        "receipt": str(page_style_get_path.relative_to(ROOT)),
+        "receipt_sha256": sha(page_style_get_path),
+        "source": page_style_get["source"], "source_sha256": page_style_get["source_sha256"],
+        "source_owned_symbols": page_style_get["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 229, "unresolved_after": 229,
+        "imports_resolved": sorted(resolved), "imports_added": sorted(added),
+        "comparison_scope": "144 bounded native row-selector and property-adapter comparisons",
+    })
+    previous = linked
+    lv_style_lookup_script = HERE / "bind_main_lv_style_lookup_482716_20261015.py"
+    lv_style_lookup_result = subprocess.run([sys.executable, str(lv_style_lookup_script)],
+                                            check=True, capture_output=True, text=True)
+    lv_style_lookup_path = G2 / "build/c-firmware/20261015/main-lv-style-lookup-482716/receipt.json"
+    lv_style_lookup = json.loads(lv_style_lookup_path.read_text())
+    if lv_style_lookup["status"] != "PASS_EXPERIMENTAL_MAIN_LV_STYLE_LOOKUP_C":
+        raise RuntimeError("Main LV style lookup status changed")
+    base = file_from_receipt(lv_style_lookup, "base_object", "base_sha256")
+    linked = file_from_receipt(lv_style_lookup, "linked_object", "linked_sha256")
+    owned = {"audio_uart_lv_style_is_sparse_482708", "audio_uart_lv_style_lookup_482716"}
+    resolved = {"audio_uart_lv_style_lookup_482716"}
+    if base != previous or len(imports(base)) != 229 or len(imports(linked)) != 228 or \
+            imports(base) - imports(linked) != resolved or \
+            imports(linked) - imports(base) or \
+            set(lv_style_lookup["source_owned_symbols"]) != owned:
+        raise RuntimeError("Main LV style lookup handoff changed")
+    if sha(ROOT / lv_style_lookup["source"]) != lv_style_lookup["source_sha256"]:
+        raise RuntimeError("stale Main LV style lookup source")
+    records.append({
+        "stage": "main-lv-style-lookup-482716",
+        "binder": str(lv_style_lookup_script.relative_to(ROOT)),
+        "binder_sha256": sha(lv_style_lookup_script), "status": lv_style_lookup["status"],
+        "binder_output": lv_style_lookup_result.stdout.strip(),
+        "receipt": str(lv_style_lookup_path.relative_to(ROOT)),
+        "receipt_sha256": sha(lv_style_lookup_path),
+        "source": lv_style_lookup["source"], "source_sha256": lv_style_lookup["source_sha256"],
+        "source_owned_symbols": lv_style_lookup["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 229, "unresolved_after": 228,
+        "imports_resolved": sorted(resolved), "imports_added": [],
+        "comparison_scope": "62 direct native dense/sparse style lookup comparisons",
+    })
+    previous = linked
+    obj_set_size_script = HERE / "bind_main_obj_set_size_43f4c0_20261015.py"
+    obj_set_size_result = subprocess.run([sys.executable, str(obj_set_size_script)],
+                                         check=True, capture_output=True, text=True)
+    obj_set_size_path = G2 / "build/c-firmware/20261015/main-obj-set-size-43f4c0/receipt.json"
+    obj_set_size = json.loads(obj_set_size_path.read_text())
+    if obj_set_size["status"] != "PASS_EXPERIMENTAL_MAIN_OBJ_SET_SIZE_C":
+        raise RuntimeError("Main LV size status changed")
+    base = file_from_receipt(obj_set_size, "base_object", "base_sha256")
+    linked = file_from_receipt(obj_set_size, "linked_object", "linked_sha256")
+    owned = {"audio_uart_page_43f4c0", "audio_uart_page_43f506",
+             "audio_uart_page_43f568", "audio_uart_page_441164", "audio_uart_page_44118e"}
+    resolved = {"audio_uart_page_43f4c0", "audio_uart_page_43f506",
+                "audio_uart_page_43f568"}
+    if base != previous or len(imports(base)) != 228 or len(imports(linked)) != 225 or \
+            imports(base) - imports(linked) != resolved or imports(linked) - imports(base) or \
+            set(obj_set_size["source_owned_symbols"]) != owned:
+        raise RuntimeError("Main LV size handoff changed")
+    if sha(ROOT / obj_set_size["source"]) != obj_set_size["source_sha256"]:
+        raise RuntimeError("stale Main LV size source")
+    records.append({
+        "stage": "main-obj-set-size-43f4c0",
+        "binder": str(obj_set_size_script.relative_to(ROOT)),
+        "binder_sha256": sha(obj_set_size_script), "status": obj_set_size["status"],
+        "binder_output": obj_set_size_result.stdout.strip(),
+        "receipt": str(obj_set_size_path.relative_to(ROOT)),
+        "receipt_sha256": sha(obj_set_size_path),
+        "source": obj_set_size["source"], "source_sha256": obj_set_size["source_sha256"],
+        "source_owned_symbols": obj_set_size["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 228, "unresolved_after": 225,
+        "imports_resolved": sorted(resolved), "imports_added": [],
+        "comparison_scope": "62 native size, width, height, and null assertion comparisons",
+    })
+    previous = linked
+    lv_event_add_script = HERE / "bind_main_lv_event_add_451740_20261015.py"
+    lv_event_add_result = subprocess.run([sys.executable, str(lv_event_add_script)],
+                                         check=True, capture_output=True, text=True)
+    lv_event_add_path = G2 / "build/c-firmware/20261015/main-lv-event-add-451740/receipt.json"
+    lv_event_add = json.loads(lv_event_add_path.read_text())
+    if lv_event_add["status"] != "PASS_EXPERIMENTAL_MAIN_LV_EVENT_ADD_C":
+        raise RuntimeError("Main LV event-add status changed")
+    base = file_from_receipt(lv_event_add, "base_object", "base_sha256")
+    linked = file_from_receipt(lv_event_add, "linked_object", "linked_sha256")
+    owned = {"audio_uart_page_451740", "audio_uart_lv_event_add_4500e4",
+             "audio_uart_lv_array_init_4883fc"}
+    resolved = {"audio_uart_page_451740"}
+    if base != previous or len(imports(base)) != 225 or len(imports(linked)) != 224 or \
+            imports(base) - imports(linked) != resolved or imports(linked) - imports(base) or \
+            set(lv_event_add["source_owned_symbols"]) != owned:
+        raise RuntimeError("Main LV event-add handoff changed")
+    if sha(ROOT / lv_event_add["source"]) != lv_event_add["source_sha256"]:
+        raise RuntimeError("stale Main LV event-add source")
+    records.append({
+        "stage": "main-lv-event-add-451740",
+        "binder": str(lv_event_add_script.relative_to(ROOT)),
+        "binder_sha256": sha(lv_event_add_script), "status": lv_event_add["status"],
+        "binder_output": lv_event_add_result.stdout.strip(),
+        "receipt": str(lv_event_add_path.relative_to(ROOT)),
+        "receipt_sha256": sha(lv_event_add_path),
+        "source": lv_event_add["source"], "source_sha256": lv_event_add["source_sha256"],
+        "source_owned_symbols": lv_event_add["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 225, "unresolved_after": 224,
+        "imports_resolved": sorted(resolved), "imports_added": [],
+        "comparison_scope": "44 controlled callback descriptor, array-init, and fatal-log comparisons",
+    })
+    previous = linked
+    update_layout_script = HERE / "bind_main_update_layout_43f66c_20261015.py"
+    update_layout_result = subprocess.run([sys.executable, str(update_layout_script)],
+                                          check=True, capture_output=True, text=True)
+    update_layout_path = G2 / "build/c-firmware/20261015/main-update-layout-43f66c/receipt.json"
+    update_layout = json.loads(update_layout_path.read_text())
+    if update_layout["status"] != "PASS_EXPERIMENTAL_MAIN_UPDATE_LAYOUT_C":
+        raise RuntimeError("Main outer layout status changed")
+    base = file_from_receipt(update_layout, "base_object", "base_sha256")
+    linked = file_from_receipt(update_layout, "linked_object", "linked_sha256")
+    owned = {"audio_uart_page_43f66c"}
+    added = {"audio_uart_lv_obj_update_layout_440d70"}
+    if base != previous or len(imports(base)) != 224 or len(imports(linked)) != 224 or \
+            imports(base) - imports(linked) != owned or \
+            imports(linked) - imports(base) != added or \
+            set(update_layout["source_owned_symbols"]) != owned:
+        raise RuntimeError("Main outer layout handoff changed")
+    if sha(ROOT / update_layout["source"]) != update_layout["source_sha256"]:
+        raise RuntimeError("stale Main outer layout source")
+    records.append({
+        "stage": "main-update-layout-43f66c",
+        "binder": str(update_layout_script.relative_to(ROOT)),
+        "binder_sha256": sha(update_layout_script), "status": update_layout["status"],
+        "binder_output": update_layout_result.stdout.strip(),
+        "receipt": str(update_layout_path.relative_to(ROOT)),
+        "receipt_sha256": sha(update_layout_path),
+        "source": update_layout["source"], "source_sha256": update_layout["source_sha256"],
+        "source_owned_symbols": update_layout["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 224, "unresolved_after": 224,
+        "imports_resolved": sorted(owned), "imports_added": sorted(added),
+        "comparison_scope": "36 native dirty-screen, reentrancy, and recursive rearm cases",
+    })
+    previous = linked
+    recursive_layout_script = HERE / "bind_main_update_layout_recursive_440d70_20261015.py"
+    recursive_layout_result = subprocess.run([sys.executable, str(recursive_layout_script)],
+                                             check=True, capture_output=True, text=True)
+    recursive_layout_path = G2 / "build/c-firmware/20261015/main-update-layout-recursive-440d70/receipt.json"
+    recursive_layout = json.loads(recursive_layout_path.read_text())
+    if recursive_layout["status"] != "PASS_EXPERIMENTAL_MAIN_UPDATE_LAYOUT_RECURSIVE_C":
+        raise RuntimeError("Main recursive layout status changed")
+    base = file_from_receipt(recursive_layout, "base_object", "base_sha256")
+    linked = file_from_receipt(recursive_layout, "linked_object", "linked_sha256")
+    owned = {"audio_uart_lv_obj_update_layout_440d70"}
+    added = {"audio_uart_lv_obj_refr_pos_43ffd0",
+             "audio_uart_lv_obj_layout_apply_4546f4",
+             "audio_uart_lv_obj_scroll_reconcile_44f316"}
+    if base != previous or len(imports(base)) != 224 or len(imports(linked)) != 226 or \
+            imports(base) - imports(linked) != owned or \
+            imports(linked) - imports(base) != added or \
+            set(recursive_layout["source_owned_symbols"]) != owned:
+        raise RuntimeError("Main recursive layout handoff changed")
+    if sha(ROOT / recursive_layout["source"]) != recursive_layout["source_sha256"]:
+        raise RuntimeError("stale Main recursive layout source")
+    records.append({
+        "stage": "main-update-layout-recursive-440d70",
+        "binder": str(recursive_layout_script.relative_to(ROOT)),
+        "binder_sha256": sha(recursive_layout_script), "status": recursive_layout["status"],
+        "binder_output": recursive_layout_result.stdout.strip(),
+        "receipt": str(recursive_layout_path.relative_to(ROOT)),
+        "receipt_sha256": sha(recursive_layout_path),
+        "source": recursive_layout["source"], "source_sha256": recursive_layout["source_sha256"],
+        "source_owned_symbols": recursive_layout["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 224, "unresolved_after": 226,
+        "imports_resolved": sorted(owned), "imports_added": sorted(added),
+        "comparison_scope": "40 native child traversal and dirty-bit effect comparisons",
+    })
+    previous = linked
+    for stage, script_name, receipt_name, status, before_count, after_count, resolved, owned, scope in [
+        ("main-lv-layout-apply-4546f4", "bind_main_lv_layout_apply_4546f4_20261015.py", "main-lv-layout-apply-4546f4", "PASS_EXPERIMENTAL_MAIN_LV_LAYOUT_APPLY_C", 226, 225, {"audio_uart_lv_obj_layout_apply_4546f4"}, {"audio_uart_lv_layout_id_4546d0", "audio_uart_lv_obj_layout_apply_4546f4"}, "49 native layout registry dispatch comparisons"),
+        ("main-lv-scroll-reconcile-44f316", "bind_main_lv_scroll_reconcile_44f316_20261015.py", "main-lv-scroll-reconcile-44f316", "PASS_EXPERIMENTAL_MAIN_LV_SCROLL_RECONCILE_C", 225, 224, {"audio_uart_lv_obj_scroll_reconcile_44f316"}, {"audio_uart_lv_scroll_x_spec_mode_44e45a", "audio_uart_lv_scroll_y_spec_mode_44e470", "audio_uart_lv_obj_scroll_reconcile_44f316"}, "327 native scroll-mode and reconcile comparisons"),
+    ]:
+        stage_script = HERE / script_name
+        stage_result = subprocess.run([sys.executable, str(stage_script)],
+                                      check=True, capture_output=True, text=True)
+        stage_path = G2 / "build/c-firmware/20261015" / receipt_name / "receipt.json"
+        stage_receipt = json.loads(stage_path.read_text())
+        if stage_receipt["status"] != status:
+            raise RuntimeError(f"{stage} status changed")
+        base = file_from_receipt(stage_receipt, "base_object", "base_sha256")
+        linked = file_from_receipt(stage_receipt, "linked_object", "linked_sha256")
+        if base != previous or len(imports(base)) != before_count or \
+                len(imports(linked)) != after_count or \
+                imports(base) - imports(linked) != resolved or \
+                imports(linked) - imports(base) or \
+                set(stage_receipt["source_owned_symbols"]) != owned or \
+                sha(ROOT / stage_receipt["source"]) != stage_receipt["source_sha256"]:
+            raise RuntimeError(f"{stage} handoff changed")
+        records.append({
+            "stage": stage, "binder": str(stage_script.relative_to(ROOT)),
+            "binder_sha256": sha(stage_script), "status": status,
+            "binder_output": stage_result.stdout.strip(),
+            "receipt": str(stage_path.relative_to(ROOT)), "receipt_sha256": sha(stage_path),
+            "source": stage_receipt["source"],
+            "source_sha256": stage_receipt["source_sha256"],
+            "source_owned_symbols": stage_receipt["source_owned_symbols"],
+            "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+            "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+            "unresolved_before": before_count, "unresolved_after": after_count,
+            "imports_resolved": sorted(resolved), "imports_added": [],
+            "comparison_scope": scope,
+        })
+        previous = linked
+    refr_pos_script = HERE / "bind_main_lv_refr_pos_43ffd0_20261015.py"
+    refr_pos_result = subprocess.run([sys.executable, str(refr_pos_script)],
+                                     check=True, capture_output=True, text=True)
+    refr_pos_path = G2 / "build/c-firmware/20261015/main-lv-refr-pos-43ffd0/receipt.json"
+    refr_pos = json.loads(refr_pos_path.read_text())
+    if refr_pos["status"] != "PASS_EXPERIMENTAL_MAIN_LV_REFR_POS_C":
+        raise RuntimeError("Main LV position refresh status changed")
+    base = file_from_receipt(refr_pos, "base_object", "base_sha256")
+    linked = file_from_receipt(refr_pos, "linked_object", "linked_sha256")
+    owned = {"audio_uart_lv_obj_refr_pos_43ffd0",
+             "audio_uart_lv_style_translate_x_43ef02",
+             "audio_uart_lv_style_translate_y_43ef0c"}
+    resolved = {"audio_uart_lv_obj_refr_pos_43ffd0"}
+    added = {"audio_uart_lv_obj_position_440246"}
+    if base != previous or len(imports(base)) != 224 or len(imports(linked)) != 224 or \
+            imports(base) - imports(linked) != resolved or \
+            imports(linked) - imports(base) != added or \
+            set(refr_pos["source_owned_symbols"]) != owned or \
+            sha(ROOT / refr_pos["source"]) != refr_pos["source_sha256"]:
+        raise RuntimeError("Main LV position refresh handoff changed")
+    records.append({
+        "stage": "main-lv-refr-pos-43ffd0",
+        "binder": str(refr_pos_script.relative_to(ROOT)),
+        "binder_sha256": sha(refr_pos_script), "status": refr_pos["status"],
+        "binder_output": refr_pos_result.stdout.strip(),
+        "receipt": str(refr_pos_path.relative_to(ROOT)),
+        "receipt_sha256": sha(refr_pos_path),
+        "source": refr_pos["source"], "source_sha256": refr_pos["source_sha256"],
+        "source_owned_symbols": refr_pos["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 224, "unresolved_after": 224,
+        "imports_resolved": sorted(resolved), "imports_added": sorted(added),
+        "comparison_scope": "480 native percentage-coordinate and alignment comparisons",
+    })
+    previous = linked
+    obj_position_script = HERE / "bind_main_lv_obj_position_440246_20261015.py"
+    obj_position_result = subprocess.run([sys.executable, str(obj_position_script)],
+                                         check=True, capture_output=True, text=True)
+    obj_position_path = G2 / "build/c-firmware/20261015/main-lv-obj-position-440246/receipt.json"
+    obj_position = json.loads(obj_position_path.read_text())
+    if obj_position["status"] != "PASS_EXPERIMENTAL_MAIN_LV_OBJ_POSITION_C":
+        raise RuntimeError("Main LV position setter status changed")
+    base = file_from_receipt(obj_position, "base_object", "base_sha256")
+    linked = file_from_receipt(obj_position, "linked_object", "linked_sha256")
+    owned = {"audio_uart_lv_obj_position_440246"}
+    if base != previous or len(imports(base)) != 224 or len(imports(linked)) != 223 or \
+            imports(base) - imports(linked) != owned or \
+            imports(linked) - imports(base) or \
+            set(obj_position["source_owned_symbols"]) != owned or \
+            sha(ROOT / obj_position["source"]) != obj_position["source_sha256"]:
+        raise RuntimeError("Main LV position setter handoff changed")
+    records.append({
+        "stage": "main-lv-obj-position-440246",
+        "binder": str(obj_position_script.relative_to(ROOT)),
+        "binder_sha256": sha(obj_position_script), "status": obj_position["status"],
+        "binder_output": obj_position_result.stdout.strip(),
+        "receipt": str(obj_position_path.relative_to(ROOT)),
+        "receipt_sha256": sha(obj_position_path),
+        "source": obj_position["source"], "source_sha256": obj_position["source_sha256"],
+        "source_owned_symbols": obj_position["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 224, "unresolved_after": 223,
+        "imports_resolved": sorted(owned), "imports_added": [],
+        "comparison_scope": "64 native position, clipping, invalidation, and event comparisons",
+    })
+    previous = linked
+    for stage, script_name, receipt_name, status, before_count, after_count, resolved, added, scope in [
+        ("main-lv-transition-timer-450758", "bind_main_lv_transition_timer_450758_20261015.py", "main-lv-transition-timer-450758", "PASS_EXPERIMENTAL_MAIN_LV_TRANSITION_TIMER_C", 223, 223, {"audio_uart_lv_transition_timer_callback_450758"}, {"audio_uart_lv_anim_remove_450910"}, "144 native animation timer phase, delay, and callback comparisons"),
+        ("main-lv-anim-remove-450910", "bind_main_lv_anim_remove_450910_20261015.py", "main-lv-anim-remove-450910", "PASS_EXPERIMENTAL_MAIN_LV_ANIM_REMOVE_C", 223, 222, {"audio_uart_lv_anim_remove_450910"}, set(), "384 native animation removal, repeat, and reverse comparisons"),
+    ]:
+        stage_script = HERE / script_name
+        stage_result = subprocess.run([sys.executable, str(stage_script)],
+                                      check=True, capture_output=True, text=True)
+        stage_path = G2 / "build/c-firmware/20261015" / receipt_name / "receipt.json"
+        stage_receipt = json.loads(stage_path.read_text())
+        if stage_receipt["status"] != status:
+            raise RuntimeError(f"{stage} status changed")
+        base = file_from_receipt(stage_receipt, "base_object", "base_sha256")
+        linked = file_from_receipt(stage_receipt, "linked_object", "linked_sha256")
+        if base != previous or len(imports(base)) != before_count or \
+                len(imports(linked)) != after_count or \
+                imports(base) - imports(linked) != resolved or \
+                imports(linked) - imports(base) != added or \
+                set(stage_receipt["source_owned_symbols"]) != resolved or \
+                sha(ROOT / stage_receipt["source"]) != stage_receipt["source_sha256"]:
+            raise RuntimeError(f"{stage} handoff changed")
+        records.append({
+            "stage": stage, "binder": str(stage_script.relative_to(ROOT)),
+            "binder_sha256": sha(stage_script), "status": status,
+            "binder_output": stage_result.stdout.strip(),
+            "receipt": str(stage_path.relative_to(ROOT)), "receipt_sha256": sha(stage_path),
+            "source": stage_receipt["source"],
+            "source_sha256": stage_receipt["source_sha256"],
+            "source_owned_symbols": stage_receipt["source_owned_symbols"],
+            "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+            "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+            "unresolved_before": before_count, "unresolved_after": after_count,
+            "imports_resolved": sorted(resolved), "imports_added": sorted(added),
+            "comparison_scope": scope,
+        })
+        previous = linked
+    color_script = HERE / "bind_main_lv_color_setters_44104c_20261015.py"
+    color_result = subprocess.run([sys.executable, str(color_script)],
+                                  check=True, capture_output=True, text=True)
+    color_path = G2 / "build/c-firmware/20261015/main-lv-color-setters-44104c/receipt.json"
+    color = json.loads(color_path.read_text())
+    if color["status"] != "PASS_EXPERIMENTAL_MAIN_LV_COLOR_SETTERS_C":
+        raise RuntimeError("Main LV RGB888 wrapper status changed")
+    base = file_from_receipt(color, "base_object", "base_sha256")
+    linked = file_from_receipt(color, "linked_object", "linked_sha256")
+    owned = {"audio_uart_page_44104c", "audio_uart_page_44127e",
+             "audio_uart_page_4412ec", "audio_uart_page_44140e"}
+    if base != previous or len(imports(base)) != 222 or len(imports(linked)) != 218 or \
+            imports(base) - imports(linked) != owned or \
+            imports(linked) - imports(base) or \
+            set(color["source_owned_symbols"]) != owned or \
+            sha(ROOT / color["source"]) != color["source_sha256"]:
+        raise RuntimeError("Main LV RGB888 wrapper handoff changed")
+    records.append({
+        "stage": "main-lv-color-setters-44104c",
+        "binder": str(color_script.relative_to(ROOT)),
+        "binder_sha256": sha(color_script), "status": color["status"],
+        "binder_output": color_result.stdout.strip(),
+        "receipt": str(color_path.relative_to(ROOT)),
+        "receipt_sha256": sha(color_path),
+        "source": color["source"], "source_sha256": color["source_sha256"],
+        "source_owned_symbols": color["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 222, "unresolved_after": 218,
+        "imports_resolved": sorted(owned), "imports_added": [],
+        "comparison_scope": "144 native RGB888 lower-24-bit and style property call comparisons",
+    })
+    previous = linked
+    flags_script = HERE / "bind_main_lv_obj_flags_43ded4_20261015.py"
+    flags_result = subprocess.run([sys.executable, str(flags_script)],
+                                  check=True, capture_output=True, text=True)
+    flags_path = G2 / "build/c-firmware/20261015/main-lv-obj-flags-43ded4/receipt.json"
+    flags = json.loads(flags_path.read_text())
+    if flags["status"] != "PASS_EXPERIMENTAL_MAIN_LV_OBJ_FLAGS_C":
+        raise RuntimeError("Main LV object flag status changed")
+    base = file_from_receipt(flags, "base_object", "base_sha256")
+    linked = file_from_receipt(flags, "linked_object", "linked_sha256")
+    owned = {"audio_uart_page_43ded4", "audio_uart_page_43dfa4",
+             "audio_uart_lv_obj_has_state_43e184"}
+    resolved = {"audio_uart_page_43ded4", "audio_uart_page_43dfa4"}
+    if base != previous or len(imports(base)) != 218 or len(imports(linked)) != 216 or \
+            imports(base) - imports(linked) != resolved or \
+            imports(linked) - imports(base) or \
+            set(flags["source_owned_symbols"]) != owned or \
+            sha(ROOT / flags["source"]) != flags["source_sha256"]:
+        raise RuntimeError("Main LV object flag handoff changed")
+    records.append({
+        "stage": "main-lv-obj-flags-43ded4",
+        "binder": str(flags_script.relative_to(ROOT)),
+        "binder_sha256": sha(flags_script), "status": flags["status"],
+        "binder_output": flags_result.stdout.strip(),
+        "receipt": str(flags_path.relative_to(ROOT)),
+        "receipt_sha256": sha(flags_path),
+        "source": flags["source"], "source_sha256": flags["source_sha256"],
+        "source_owned_symbols": flags["source_owned_symbols"],
+        "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+        "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+        "unresolved_before": 218, "unresolved_after": 216,
+        "imports_resolved": sorted(resolved), "imports_added": [],
+        "comparison_scope": "193 native object flag, layout, scrollbar and state-bit comparisons",
+    })
+    previous = linked
+    for stage, script_name, receipt_name, status, before_count, after_count, resolved, added, owned, scope in [
+        ("main-lv-page-instance-487022", "bind_main_lv_page_instance_487022_20261015.py", "main-lv-page-instance-487022", "PASS_EXPERIMENTAL_MAIN_LV_PAGE_INSTANCE_C", 216, 218, {"audio_uart_page_487022"}, {"audio_uart_lv_page_build_484a98", "audio_uart_lv_page_callback_487188", "audio_uart_lv_theme_refresh_all_44bc48"}, {"audio_uart_page_487022", "audio_uart_page_instance_ready_48716c", "audio_uart_page_rgb_equal_44102e"}, "168 native page cache and rebuild comparisons"),
+        ("main-lv-theme-refresh-all-44bc48", "bind_main_lv_theme_refresh_all_44bc48_20261015.py", "main-lv-theme-refresh-all-44bc48", "PASS_EXPERIMENTAL_MAIN_LV_THEME_REFRESH_ALL_C", 218, 217, {"audio_uart_lv_theme_refresh_all_44bc48"}, set(), {"audio_uart_lv_theme_refresh_all_44bc48", "audio_uart_lv_theme_refresh_node_44c970"}, "144 native display and recursive theme refresh comparisons"),
+        ("main-logger-ble-handler-5bf972", "bind_main_logger_ble_handler_5bf972_20261015.py", "main-logger-ble-handler-5bf972", "PASS_EXPERIMENTAL_MAIN_LOGGER_BLE_HANDLER_C", 217, 217, {"audio_uart_logger_ble_handler_5bf972"}, {"audio_uart_ble_log_pb_descriptor_777da4"}, {"audio_uart_logger_ble_handler_5bf972", "audio_uart_ble_log_frame_20069b24", "audio_uart_ble_log_encoded_2037cba0"}, "16 native BLE logger frame, encode branch and transmit comparisons"),
+        ("main-logger-ble-pb-descriptor-777da4", "bind_main_logger_ble_pb_descriptor_777da4_20261015.py", "main-logger-ble-pb-descriptor-777da4", "PASS_EXPERIMENTAL_MAIN_LOGGER_BLE_PB_DESCRIPTOR_C", 217, 216, {"audio_uart_ble_log_pb_descriptor_777da4"}, set(), {"audio_uart_ble_log_pb_descriptor_777da4"}, "Four native nanopb descriptors, 23 field words and graph edges"),
+        ("main-setting-ui-event-467e68", "bind_main_setting_ui_event_467e68_20261015.py", "main-setting-ui-event-467e68", "PASS_EXPERIMENTAL_MAIN_SETTING_UI_EVENT_C", 216, 220, {"audio_uart_registry_callback_467e68"}, {"audio_settings_notify_recalibration_status_49beac", "audio_uart_calibration_snapshot_200749a8", "audio_uart_calibration_status_2007501c", "audio_uart_hub_calibration_display_update_4a7472", "audio_uart_hub_calibration_success_display_4a76e4"}, {"audio_uart_registry_callback_467e68"}, "80 native Setting UI event, log, status and return-register comparisons"),
+        ("main-setting-notify-recalibration-49beac", "bind_main_setting_notify_recalibration_49beac_20261015.py", "main-setting-notify-recalibration-49beac", "PASS_EXPERIMENTAL_MAIN_SETTING_NOTIFY_RECALIBRATION_C", 220, 219, {"audio_settings_notify_recalibration_status_49beac"}, set(), {"audio_settings_notify_recalibration_status_49beac"}, "25 native recalibration packet and logging comparisons"),
+        ("main-hub-calibration-success-display-4a76e4", "bind_main_hub_calibration_success_display_4a76e4_20261015.py", "main-hub-calibration-success-display-4a76e4", "PASS_EXPERIMENTAL_MAIN_HUB_CALIBRATION_SUCCESS_DISPLAY_C", 219, 220, {"audio_uart_hub_calibration_success_display_4a76e4"}, {"audio_uart_calibration_success_primary_200749ac", "audio_uart_calibration_success_secondary_200749b0"}, {"audio_uart_hub_calibration_success_display_4a76e4"}, "20 native calibration success display call-flow comparisons"),
+        ("main-hub-calibration-labels-update-4a7440", "bind_main_hub_calibration_labels_update_4a7440_20261015.py", "main-hub-calibration-labels-update-4a7440", "PASS_EXPERIMENTAL_MAIN_HUB_CALIBRATION_LABELS_UPDATE_C", 220, 220, set(), set(), {"audio_uart_hub_calibration_labels_update_4a7440"}, "Four native calibration label style-setter call-flow comparisons"),
+        ("main-lv-style-text-align-44145a", "bind_main_lv_style_text_align_44145a_20261015.py", "main-lv-style-text-align-44145a", "PASS_EXPERIMENTAL_MAIN_LV_STYLE_TEXT_ALIGN_C", 220, 220, set(), set(), {"audio_uart_page_44145a"}, "24 native style property 0x5e wrapper comparisons"),
+        ("main-hub-calibration-display-update-4a7472", "bind_main_hub_calibration_display_update_4a7472_20261015.py", "main-hub-calibration-display-update-4a7472", "PASS_EXPERIMENTAL_MAIN_HUB_CALIBRATION_DISPLAY_UPDATE_C", 220, 222, {"audio_uart_hub_calibration_display_update_4a7472"}, {"audio_uart_calibration_panel_left_200749b4", "audio_uart_calibration_panel_right_200749b8", "audio_uart_calibration_panel_mark_200749bc"}, {"audio_uart_hub_calibration_display_update_4a7472"}, "10 native calibration display construction and shared font-manager comparisons"),
+        ("main-lv-label-set-text-49942e", "bind_main_lv_label_set_text_49942e_20261015.py", "main-lv-label-set-text-49942e", "PASS_EXPERIMENTAL_MAIN_LV_LABEL_SET_TEXT_C", 222, 223, {"audio_uart_page_49942e"}, {"audio_uart_page_text_content_init_49abe0", "audio_uart_page_text_length_49abd4"}, {"audio_uart_page_49942e"}, "27 native label text ownership and fatal-path comparisons"),
+        ("main-lv-label-text-helpers-49abd4", "bind_main_lv_label_text_helpers_49abd4_20261015.py", "main-lv-label-text-helpers-49abd4", "PASS_EXPERIMENTAL_MAIN_LV_LABEL_TEXT_HELPERS_C", 223, 221, {"audio_uart_page_text_content_init_49abe0", "audio_uart_page_text_length_49abd4"}, set(), {"audio_uart_page_text_content_init_49abe0", "audio_uart_page_text_length_49abd4"}, "10 native label string-length and content-copy comparisons"),
+        ("main-hub-calibration-ram-slots", "bind_main_hub_calibration_ram_slots_20261015.py", "main-hub-calibration-ram-slots", "PASS_EXPERIMENTAL_MAIN_HUB_CALIBRATION_RAM_SLOTS_C", 221, 214, {"audio_uart_calibration_snapshot_200749a8", "audio_uart_calibration_success_primary_200749ac", "audio_uart_calibration_success_secondary_200749b0", "audio_uart_calibration_panel_left_200749b4", "audio_uart_calibration_panel_right_200749b8", "audio_uart_calibration_panel_mark_200749bc", "audio_uart_calibration_status_2007501c"}, set(), {"audio_uart_calibration_snapshot_200749a8", "audio_uart_calibration_success_primary_200749ac", "audio_uart_calibration_success_secondary_200749b0", "audio_uart_calibration_panel_left_200749b4", "audio_uart_calibration_panel_right_200749b8", "audio_uart_calibration_panel_mark_200749bc", "audio_uart_calibration_status_2007501c"}, "Seven bounded calibration RAM cells from stock literal and access sites"),
+        ("main-page-layout-update-49a602", "bind_main_page_layout_update_49a602_20261015.py", "main-page-layout-update-49a602", "PASS_EXPERIMENTAL_MAIN_PAGE_LAYOUT_UPDATE_C", 214, 214, {"audio_uart_page_layout_update_49a602"}, {"audio_uart_page_text_window_499a5c"}, {"audio_uart_page_layout_update_49a602"}, "1,080 native label layout branch and child-call comparisons"),
+        ("main-page-text-window-499a5c", "bind_main_page_text_window_499a5c_20261015.py", "main-page-text-window-499a5c", "PASS_EXPERIMENTAL_MAIN_PAGE_TEXT_WINDOW_C", 214, 214, {"audio_uart_page_text_window_499a5c"}, {"audio_uart_page_text_align_class_44c448"}, {"audio_uart_page_pad_left_499388", "audio_uart_page_pad_top_49937e", "audio_uart_page_text_window_499a5c"}, "50 controlled native LVGL letter-position and fatal-argument comparisons, aligned with pinned upstream source"),
+        ("main-page-text-align-class-44c448", "bind_main_page_text_align_class_44c448_20261015.py", "main-page-text-align-class-44c448", "PASS_EXPERIMENTAL_MAIN_PAGE_TEXT_ALIGN_CLASS_C", 214, 213, {"audio_uart_page_text_align_class_44c448"}, set(), {"audio_uart_lv_text_align_style_44b8ac", "audio_uart_lv_base_dir_style_44b8f6", "audio_uart_lv_bidi_calculate_align_44b7b4", "audio_uart_page_text_align_class_44c448"}, "25 native text alignment and style query comparisons"),
+        ("main-page-draw-main-49a31c", "bind_main_page_draw_main_49a31c_20261015.py", "main-page-draw-main-49a31c", "PASS_EXPERIMENTAL_MAIN_PAGE_DRAW_MAIN_C", 213, 214, {"audio_uart_page_event_dispatch_49a31c"}, {"audio_uart_lv_draw_label_489fe0", "audio_uart_lv_draw_label_dsc_init_452988"}, {"audio_uart_page_event_dispatch_49a31c"}, "480 native label drawing descriptor, clip, and child-call comparisons"),
+        ("main-lv-draw-label-489fe0", "bind_main_lv_draw_label_489fe0_20261015.py", "main-lv-draw-label-489fe0", "PASS_EXPERIMENTAL_MAIN_LV_DRAW_LABEL_C", 214, 213, {"audio_uart_lv_draw_label_489fe0"}, set(), {"audio_uart_lv_draw_label_489fe0", "audio_uart_lv_draw_task_strdup_4547f2"}, "48 native draw-task and local text-copy comparisons"),
+        ("main-lv-draw-label-dsc-init-452988", "bind_main_lv_draw_label_dsc_init_452988_20261015.py", "main-lv-draw-label-dsc-init-452988", "PASS_EXPERIMENTAL_MAIN_LV_DRAW_LABEL_DSC_INIT_C", 213, 212, {"audio_uart_lv_draw_label_dsc_init_452988"}, set(), {"audio_uart_lv_draw_label_dsc_init_452988"}, "120 native opacity, style, and descriptor comparisons"),
+        ("main-notify-take-455afc", "bind_main_notify_take_455afc_20261015.py", "main-notify-take-455afc", "PASS_EXPERIMENTAL_MAIN_NOTIFY_TAKE_C", 212, 211, {"audio_uart_notify_take_455afc"}, set(), {"audio_uart_notify_take_455afc"}, "24 native notification value, clear, and wait comparisons"),
+        ("main-image-set-src-498680", "bind_main_image_set_src_498680_20261015.py", "main-image-set-src-498680", "PASS_EXPERIMENTAL_MAIN_IMAGE_SET_SRC_C", 211, 214, {"audio_uart_page_498680"}, {"audio_uart_lv_image_text_font_498640", "audio_uart_lv_image_letter_space_49864a", "audio_uart_lv_image_line_space_498654", "audio_uart_lv_image_update_align_4992cc"}, {"audio_uart_page_498680"}, "512 native image source/type/header/rotation and failure-path comparisons"),
+        ("main-image-text-style-498640", "bind_main_image_text_style_498640_20261015.py", "main-image-text-style-498640", "PASS_EXPERIMENTAL_MAIN_IMAGE_TEXT_STYLE_C", 214, 211, {"audio_uart_lv_image_text_font_498640", "audio_uart_lv_image_letter_space_49864a", "audio_uart_lv_image_line_space_498654"}, set(), {"audio_uart_lv_image_text_font_498640", "audio_uart_lv_image_letter_space_49864a", "audio_uart_lv_image_line_space_498654"}, "36 native image text style property comparisons"),
+        ("main-image-update-align-4992cc", "bind_main_image_update_align_4992cc_20261015.py", "main-image-update-align-4992cc", "PASS_EXPERIMENTAL_MAIN_IMAGE_UPDATE_ALIGN_C", 211, 213, {"audio_uart_lv_image_update_align_4992cc"}, {"audio_uart_lv_image_set_rotation_4988dc", "audio_uart_lv_image_set_pivot_498a14", "audio_uart_lv_image_scale_update_4991e0"}, {"audio_uart_lv_image_update_align_4992cc"}, "180 native stretch/tile/default alignment comparisons"),
+        ("main-image-transform-setters-4988dc", "bind_main_image_transform_setters_4988dc_20261015.py", "main-image-transform-setters-4988dc", "PASS_EXPERIMENTAL_MAIN_IMAGE_TRANSFORM_SETTERS_C", 213, 212, {"audio_uart_lv_image_set_rotation_4988dc", "audio_uart_lv_image_set_pivot_498a14", "audio_uart_lv_image_scale_update_4991e0"}, {"audio_uart_lv_image_get_pivot_498b82", "audio_uart_lv_display_invalidation_44fe8e"}, {"audio_uart_lv_image_set_rotation_4988dc", "audio_uart_lv_image_set_pivot_498a14", "audio_uart_lv_image_scale_update_4991e0"}, "36 native image rotation/pivot/scale area comparisons"),
+        ("main-display-invalidation-44fe8e", "bind_main_display_invalidation_44fe8e_20261015.py", "main-display-invalidation-44fe8e", "PASS_EXPERIMENTAL_MAIN_DISPLAY_INVALIDATION_C", 212, 211, {"audio_uart_lv_display_invalidation_44fe8e"}, set(), {"audio_uart_lv_display_invalidation_44fe8e"}, "32 native display invalidation counter comparisons"),
+        ("main-image-pivot-498b82", "bind_main_image_pivot_498b82_20261015.py", "main-image-pivot-498b82", "PASS_EXPERIMENTAL_MAIN_IMAGE_PIVOT_C", 211, 210, {"audio_uart_lv_image_get_pivot_498b82"}, set(), {"audio_uart_lv_image_get_pivot_498b82", "audio_uart_lv_image_coord_px_451600"}, "120 native encoded coordinate and image pivot comparisons"),
+        ("main-audio-page-event-45f914", "bind_main_audio_page_event_45f914_20261015.py", "main-audio-page-event-45f914", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_EVENT_C", 210, 217, {"audio_uart_page_event_45f914"}, {"audio_uart_display_audio_activate_45f60e", "audio_uart_display_audio_complete_45f73a", "audio_uart_display_audio_current_45f8e6", "audio_uart_display_audio_gate_event_45fbe6", "audio_uart_display_audio_handler_a_45f6a8", "audio_uart_display_audio_handler_b_45f66a", "audio_uart_display_audio_is_active_45fcb2", "audio_uart_display_audio_queue_45f58c"}, {"audio_uart_page_event_45f914"}, "320 native audio page event comparisons"),
+        ("main-audio-page-selectors-45f66a", "bind_main_audio_page_selectors_45f66a_20261015.py", "main-audio-page-selectors-45f66a", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_SELECTORS_C", 217, 213, {"audio_uart_display_audio_current_45f8e6", "audio_uart_display_audio_handler_a_45f6a8", "audio_uart_display_audio_handler_b_45f66a", "audio_uart_display_audio_is_active_45fcb2"}, set(), {"audio_uart_display_audio_current_45f8e6", "audio_uart_display_audio_handler_a_45f6a8", "audio_uart_display_audio_handler_b_45f66a", "audio_uart_display_audio_is_active_45fcb2"}, "128 native audio pointer and active-list comparisons"),
+        ("main-audio-page-activate-45f60e", "bind_main_audio_page_activate_45f60e_20261015.py", "main-audio-page-activate-45f60e", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_ACTIVATE_C", 213, 214, {"audio_uart_display_audio_activate_45f60e"}, {"audio_uart_display_audio_remove_45f8ba", "audio_uart_display_audio_start_45ef24"}, {"audio_uart_display_audio_activate_45f60e"}, "192 native audio activation comparisons"),
+        ("main-audio-page-remove-45f8ba", "bind_main_audio_page_remove_45f8ba_20261015.py", "main-audio-page-remove-45f8ba", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_REMOVE_C", 214, 213, {"audio_uart_display_audio_remove_45f8ba"}, set(), {"audio_uart_display_audio_remove_45f8ba"}, "32 native audio page removal comparisons"),
+        ("main-audio-page-priority-45f706", "bind_main_audio_page_priority_45f706_20261015.py", "main-audio-page-priority-45f706", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_PRIORITY_C", 213, 213, set(), set(), {"audio_uart_display_audio_priority_45f706"}, "384 native audio page priority comparisons"),
+        ("main-audio-page-gate-event-45fbe6", "bind_main_audio_page_gate_event_45fbe6_20261015.py", "main-audio-page-gate-event-45fbe6", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_GATE_EVENT_C", 213, 212, {"audio_uart_display_audio_gate_event_45fbe6"}, set(), {"audio_uart_display_audio_gate_event_45fbe6"}, "192 native audio event ring comparisons"),
+        ("main-audio-page-complete-45f73a", "bind_main_audio_page_complete_45f73a_20261015.py", "main-audio-page-complete-45f73a", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_COMPLETE_C", 212, 211, {"audio_uart_display_audio_complete_45f73a"}, set(), {"audio_uart_display_audio_complete_45f73a"}, "768 native audio completion comparisons"),
+        ("main-audio-page-queue-45f58c", "bind_main_audio_page_queue_45f58c_20261015.py", "main-audio-page-queue-45f58c", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_QUEUE_C", 211, 212, {"audio_uart_display_audio_queue_45f58c"}, {"audio_uart_display_audio_ready_45f8a4", "audio_uart_display_audio_schedule_44228a"}, {"audio_uart_display_audio_queue_45f58c"}, "256 native audio queue transition comparisons"),
+        ("main-audio-page-ready-45f8a4", "bind_main_audio_page_ready_45f8a4_20261015.py", "main-audio-page-ready-45f8a4", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_READY_C", 212, 211, {"audio_uart_display_audio_ready_45f8a4"}, set(), {"audio_uart_display_audio_ready_45f8a4"}, "32 native audio ready comparisons"),
+        ("main-audio-find-owner-45fcd2", "bind_main_audio_find_owner_45fcd2_20261015.py", "main-audio-find-owner-45fcd2", "PASS_EXPERIMENTAL_MAIN_AUDIO_FIND_OWNER_C", 211, 211, set(), set(), {"audio_uart_display_audio_find_owner_45fcd2"}, "128 native audio owner-walk comparisons"),
+        ("main-audio-page-start-45ef24", "bind_main_audio_page_start_45ef24_20261015.py", "main-audio-page-start-45ef24", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_START_C", 211, 221, {"audio_uart_display_audio_start_45ef24"}, {"audio_uart_display_anim_alpha_45ecbf", "audio_uart_display_anim_finish_a_45ee35", "audio_uart_display_anim_finish_b_45ed4f", "audio_uart_display_anim_finish_c_45eccb", "audio_uart_display_anim_finish_d_45ed91", "audio_uart_display_anim_x_a_45ecaf", "audio_uart_display_anim_y_a_45ecb7", "audio_uart_display_audio_prepare_45bbb6", "audio_uart_display_audio_reset_441488", "audio_uart_lv_obj_x_43fc70", "audio_uart_lv_obj_y_43fce0"}, {"audio_uart_display_audio_start_45ef24"}, "144 native animation branch and descriptor comparisons"),
+        ("main-audio-anim-setters-45ecae", "bind_main_audio_anim_setters_45ecae_20261015.py", "main-audio-anim-setters-45ecae", "PASS_EXPERIMENTAL_MAIN_AUDIO_ANIM_SETTERS_C", 221, 218, {"audio_uart_display_anim_x_a_45ecaf", "audio_uart_display_anim_y_a_45ecb7", "audio_uart_display_anim_alpha_45ecbf"}, set(), {"audio_uart_display_anim_x_a_45ecaf", "audio_uart_display_anim_y_a_45ecb7", "audio_uart_display_anim_alpha_45ecbf"}, "30 native audio animation setter comparisons"),
+        ("main-audio-alpha-style-441488", "bind_main_audio_alpha_style_441488_20261015.py", "main-audio-alpha-style-441488", "PASS_EXPERIMENTAL_MAIN_AUDIO_ALPHA_STYLE_C", 218, 217, {"audio_uart_display_audio_reset_441488"}, set(), {"audio_uart_display_audio_reset_441488"}, "30 native audio opacity style comparisons"),
+        ("main-audio-page-geometry-43fc70", "bind_main_audio_page_geometry_43fc70_20261015.py", "main-audio-page-geometry-43fc70", "PASS_EXPERIMENTAL_MAIN_AUDIO_PAGE_GEOMETRY_C", 217, 215, {"audio_uart_lv_obj_x_43fc70", "audio_uart_lv_obj_y_43fce0"}, set(), {"audio_uart_lv_obj_x_43fc70", "audio_uart_lv_obj_y_43fce0"}, "96 native relative geometry comparisons"),
+        ("main-audio-prepare-45bbb6", "bind_main_audio_prepare_45bbb6_20261015.py", "main-audio-prepare-45bbb6", "PASS_EXPERIMENTAL_MAIN_AUDIO_PREPARE_C", 215, 214, {"audio_uart_display_audio_prepare_45bbb6"}, set(), {"audio_uart_display_audio_prepare_45bbb6"}, "four native display flag and lock-sequence comparisons"),
+        ("main-audio-anim-finish-b-45ed4e", "bind_main_audio_anim_finish_b_45ed4e_20261015.py", "main-audio-anim-finish-b-45ed4e", "PASS_EXPERIMENTAL_MAIN_AUDIO_ANIM_FINISH_B_C", 214, 214, {"audio_uart_display_anim_finish_b_45ed4f"}, {"audio_uart_display_audio_dispatch_45fd06"}, {"audio_uart_display_anim_finish_b_45ed4f"}, "16 native audio finish callback comparisons"),
+        ("main-audio-event-ring-45fbba", "bind_main_audio_event_ring_45fbba_20261015.py", "main-audio-event-ring-45fbba", "PASS_EXPERIMENTAL_MAIN_AUDIO_EVENT_RING_C", 214, 214, set(), set(), {"audio_uart_display_audio_ring_empty_45fbba", "audio_uart_display_audio_ring_full_45fbd0", "audio_uart_display_audio_dequeue_45fc5a"}, "192 native event ring predicate and dequeue comparisons"),
+        ("main-audio-dispatch-45fd06", "bind_main_audio_dispatch_45fd06_20261015.py", "main-audio-dispatch-45fd06", "PASS_EXPERIMENTAL_MAIN_AUDIO_DISPATCH_C", 214, 213, {"audio_uart_display_audio_dispatch_45fd06"}, set(), {"audio_uart_display_audio_dispatch_45fd06"}, "512 native event dispatch comparisons"),
+        ("main-audio-anim-finish-c-45ecca", "bind_main_audio_anim_finish_c_45ecca_20261015.py", "main-audio-anim-finish-c-45ecca", "PASS_EXPERIMENTAL_MAIN_AUDIO_ANIM_FINISH_C_C", 213, 212, {"audio_uart_display_anim_finish_c_45eccb"}, set(), {"audio_uart_display_anim_finish_c_45eccb"}, "80 native audio ready finish and logging comparisons"),
+        ("main-audio-anim-finish-d-45ed90", "bind_main_audio_anim_finish_d_45ed90_20261015.py", "main-audio-anim-finish-d-45ed90", "PASS_EXPERIMENTAL_MAIN_AUDIO_ANIM_FINISH_D_C", 212, 211, {"audio_uart_display_anim_finish_d_45ed91"}, set(), {"audio_uart_display_anim_finish_d_45ed91"}, "32 native audio completion and callback comparisons"),
+        ("main-audio-anim-finish-a-45ee34", "bind_main_audio_anim_finish_a_45ee34_20261015.py", "main-audio-anim-finish-a-45ee34", "PASS_EXPERIMENTAL_MAIN_AUDIO_ANIM_FINISH_A_C", 211, 210, {"audio_uart_display_anim_finish_a_45ee35"}, set(), {"audio_uart_display_anim_finish_a_45ee35"}, "192 native direction, owner and callback comparisons"),
+        ("main-audio-route-45f876", "bind_main_audio_route_45f876_20261015.py", "main-audio-route-45f876", "PASS_EXPERIMENTAL_MAIN_AUDIO_ROUTE_C", 210, 210, set(), set(), {"audio_uart_display_audio_route_45f876"}, "12 native audio route comparisons"),
+        ("main-audio-terminal-mode-45bbf4", "bind_main_audio_terminal_mode_45bbf4_20261015.py", "main-audio-terminal-mode-45bbf4", "PASS_EXPERIMENTAL_MAIN_AUDIO_TERMINAL_MODE_C", 210, 210, set(), set(), {"audio_uart_display_audio_terminal_mode_45bbf4"}, "4 native terminal-mode predicate comparisons"),
+        ("main-audio-scheduler-44228a", "bind_main_audio_scheduler_44228a_20261015.py", "main-audio-scheduler-44228a", "PASS_EXPERIMENTAL_MAIN_AUDIO_SCHEDULER_C", 210, 210, {"audio_uart_display_audio_schedule_44228a", "audio_uart_display_notify"}, {"audio_uart_display_audio_enqueue_45f3c8", "audio_uart_display_audio_set_mode_45fe32"}, {"audio_uart_display_audio_schedule_44228a", "audio_uart_display_notify"}, "720 native registration, callback and logging comparisons"),
+        ("main-audio-set-mode-45fe10", "bind_main_audio_set_mode_45fe10_20261015.py", "main-audio-set-mode-45fe10", "PASS_EXPERIMENTAL_MAIN_AUDIO_SET_MODE_C", 210, 209, {"audio_uart_display_audio_set_mode_45fe32"}, set(), {"audio_uart_display_audio_set_mode_child_45fe10", "audio_uart_display_audio_set_mode_45fe32"}, "360 native animation mode and logging comparisons"),
+        ("main-audio-unique-45fb44", "bind_main_audio_unique_45fb44_20261015.py", "main-audio-unique-45fb44", "PASS_EXPERIMENTAL_MAIN_AUDIO_UNIQUE_C", 209, 209, set(), set(), {"audio_uart_display_audio_unique_45fb44"}, "96 native two-list uniqueness comparisons"),
+        ("main-audio-enqueue-45f3c8", "bind_main_audio_enqueue_45f3c8_20261015.py", "main-audio-enqueue-45f3c8", "PASS_EXPERIMENTAL_MAIN_AUDIO_ENQUEUE_C", 209, 210, {"audio_uart_display_audio_enqueue_45f3c8"}, {"audio_uart_display_audio_allocation_fatal_45f402", "audio_uart_lv_obj_set_parent_44d94c"}, {"audio_uart_display_audio_enqueue_45f3c8"}, "192 native audio registration and list comparisons"),
+        ("main-lv-obj-set-parent-44d94c", "bind_main_lv_obj_set_parent_44d94c_20261015.py", "main-lv-obj-set-parent-44d94c", "PASS_EXPERIMENTAL_MAIN_LV_OBJ_SET_PARENT_C", 210, 209, {"audio_uart_lv_obj_set_parent_44d94c"}, set(), {"audio_uart_lv_obj_set_parent_44d94c"}, "21 native LV child-list, event and assertion comparisons"),
+        ("main-audio-enqueue-alloc-failure-45f402", "bind_main_audio_enqueue_alloc_failure_45f402_20261015.py", "main-audio-enqueue-alloc-failure-45f402", "PASS_EXPERIMENTAL_MAIN_AUDIO_ALLOC_FAILURE_C", 209, 209, {"audio_uart_display_audio_allocation_fatal_45f402"}, {"g2_audio_page_registration_template_45f678"}, {"audio_uart_display_audio_allocation_fatal_45f402"}, "10 native callback-present and callback-absent allocation-failure comparisons"),
+        ("main-audio-registration-assert-context-45f678", "bind_main_audio_registration_assert_context_45f678_20261015.py", "main-audio-registration-assert-context-45f678", "PASS_EXPERIMENTAL_MAIN_AUDIO_ASSERT_CONTEXT_C", 209, 208, {"g2_audio_page_registration_template_45f678"}, set(), {"g2_audio_page_registration_template_45f678"}, "4 pinned source-owned assertion-context bytes"),
+        ("main-dm-conn-update-invalid-event-78eff4", "bind_main_dm_conn_update_invalid_event_78eff4_20261015.py", "main-dm-conn-update-invalid-event-78eff4", "PASS_EXPERIMENTAL_MAIN_DM_CONN_INVALID_EVENT_C", 208, 207, {"audio_ble_dm_conn_update_invalid_event_action"}, set(), {"audio_ble_dm_conn_update_invalid_event_action"}, "256 compiled-C versus pinned native action-table byte comparisons"),
+        ("main-dm-conn-update-invalid-action-4b6532", "bind_main_dm_conn_update_invalid_action_4b6532_20261015.py", "main-dm-conn-update-invalid-action-4b6532", "PASS_EXPERIMENTAL_MAIN_DM_CONN_INVALID_ACTION_C", 207, 206, {"audio_ble_dm_conn_update_invalid_action"}, set(), {"audio_ble_dm_conn_update_invalid_action"}, "192 compiled-C versus stock invalid action-set diagnostic comparisons"),
+        ("main-dm-conn-update-trace-entry-4b6532", "bind_main_dm_conn_update_trace_entry_4b6532_20261015.py", "main-dm-conn-update-trace-entry-4b6532", "PASS_EXPERIMENTAL_MAIN_DM_CONN_TRACE_ENTRY_C", 206, 205, {"audio_ble_dm_conn_update_trace_entry"}, set(), {"audio_ble_dm_conn_update_trace_entry"}, "768 compiled-C versus stock connection-update entry-trace comparisons"),
+        ("main-dm-conn-main-actions-776a84", "bind_main_dm_conn_main_actions_776a84_20261015.py", "main-dm-conn-main-actions-776a84", "PASS_EXPERIMENTAL_MAIN_DM_CONN_MAIN_ACTIONS_C", 205, 210, {"audio_ble_dm_conn_state_table_a"}, {"audio_ble_dm_conn_sm_act_none_4b63ca", "audio_ble_dm_conn_sm_act_close_4b63cc", "audio_ble_dm_conn_sm_act_opened_4b63d8", "audio_ble_dm_conn_sm_act_failed_4b6488", "audio_ble_dm_conn_sm_act_closed_4b64ce", "audio_ble_dm_conn_sm_act_hci_updated_4b6508"}, {"audio_ble_dm_conn_state_table_a"}, "six stock Thumb pointer slots, matching bundled Cordio source order"),
+        ("main-dm-conn-main-action-leaves-4b63ca", "bind_main_dm_conn_main_action_leaves_4b63ca_20261015.py", "main-dm-conn-main-action-leaves-4b63ca", "PASS_EXPERIMENTAL_MAIN_DM_CONN_ACTION_LEAVES_C", 210, 209, {"audio_ble_dm_conn_sm_act_none_4b63ca", "audio_ble_dm_conn_sm_act_close_4b63cc"}, {"audio_ble_hci_disconnect_cmd_52af10"}, {"audio_ble_dm_conn_sm_act_none_4b63ca", "audio_ble_dm_conn_sm_act_close_4b63cc"}, "70 native no-op and close forwarding comparisons"),
+        ("main-ble-hci-disconnect-cmd-52af10", "bind_main_ble_hci_disconnect_cmd_52af10_20261015.py", "main-ble-hci-disconnect-cmd-52af10", "PASS_EXPERIMENTAL_MAIN_HCI_DISCONNECT_C", 209, 208, {"audio_ble_hci_disconnect_cmd_52af10"}, set(), {"audio_ble_hci_disconnect_cmd_52af10"}, "70 native HCI Disconnect allocation and payload comparisons"),
+        ("main-dm-conn-hci-updated-4b6508", "bind_main_dm_conn_hci_updated_4b6508_20261015.py", "main-dm-conn-hci-updated-4b6508", "PASS_EXPERIMENTAL_MAIN_DM_CONN_HCI_UPDATED_C", 208, 207, {"audio_ble_dm_conn_sm_act_hci_updated_4b6508"}, set(), {"audio_ble_dm_conn_sm_act_hci_updated_4b6508"}, "512 native HCI update event/callback comparisons"),
+        ("main-dm-conn-closed-4b64ce", "bind_main_dm_conn_closed_4b64ce_20261015.py", "main-dm-conn-closed-4b64ce", "PASS_EXPERIMENTAL_MAIN_DM_CONN_CLOSED_C", 207, 211, {"audio_ble_dm_conn_sm_act_closed_4b64ce"}, {"audio_ble_dm_dev_pass_conn_cte_4b3008", "audio_ble_dm_ccb_dealloc_4b5ef0", "audio_ble_dm_conn_num_4b62ca", "audio_ble_dm_dev_pass_priv_4b2ea6", "audio_ble_dm_conn_exec_callback_4b62ea"}, {"audio_ble_dm_conn_sm_act_closed_4b64ce"}, "72 native close-complete call-order, argument, and RAM comparisons"),
+        ("main-dm-conn-num-4b62ca", "bind_main_dm_conn_num_4b62ca_20261015.py", "main-dm-conn-num-4b62ca", "PASS_EXPERIMENTAL_MAIN_DM_CONN_NUM_C", 211, 210, {"audio_ble_dm_conn_num_4b62ca"}, set(), {"audio_ble_dm_conn_num_4b62ca"}, "48 native three-slot connection count comparisons"),
+        ("main-dm-conn-exec-callback-4b62ea", "bind_main_dm_conn_exec_callback_4b62ea_20261015.py", "main-dm-conn-exec-callback-4b62ea", "PASS_EXPERIMENTAL_MAIN_DM_CONN_EXEC_CALLBACK_C", 210, 209, {"audio_ble_dm_conn_exec_callback_4b62ea"}, set(), {"audio_ble_dm_conn_exec_callback_4b62ea"}, "96 native five-slot callback mask comparisons"),
+        ("main-dm-dev-pass-conn-cte-4b3008", "bind_main_dm_dev_pass_conn_cte_4b3008_20261015.py", "main-dm-dev-pass-conn-cte-4b3008", "PASS_EXPERIMENTAL_MAIN_DM_DEV_PASS_CTE_C", 209, 208, {"audio_ble_dm_dev_pass_conn_cte_4b3008"}, set(), {"audio_ble_dm_dev_pass_conn_cte_4b3008"}, "160 native four-byte CTE event record comparisons"),
+        ("main-dm-ccb-dealloc-4b5ef0", "bind_main_dm_ccb_dealloc_4b5ef0_20261015.py", "main-dm-ccb-dealloc-4b5ef0", "PASS_EXPERIMENTAL_MAIN_DM_CCB_DEALLOC_C", 208, 207, {"audio_ble_dm_ccb_dealloc_4b5ef0"}, set(), {"audio_ble_dm_ccb_dealloc_4b5ef0"}, "45 native FREE trace and CCB in-use-clear comparisons"),
+        ("main-dm-dev-pass-priv-4b2ea6", "bind_main_dm_dev_pass_priv_4b2ea6_20261015.py", "main-dm-dev-pass-priv-4b2ea6", "PASS_EXPERIMENTAL_MAIN_DM_DEV_PASS_PRIV_C", 207, 206, {"audio_ble_dm_dev_pass_priv_4b2ea6"}, set(), {"audio_ble_dm_dev_pass_priv_4b2ea6"}, "162 native privacy event record and callback comparisons, excluding unwritten status"),
+        ("main-dm-conn-failed-4b6488", "bind_main_dm_conn_failed_4b6488_20261015.py", "main-dm-conn-failed-4b6488", "PASS_EXPERIMENTAL_MAIN_DM_CONN_FAILED_C", 206, 205, {"audio_ble_dm_conn_sm_act_failed_4b6488"}, set(), {"audio_ble_dm_conn_sm_act_failed_4b6488"}, "72 native connection-failure call-order, argument, and message comparisons"),
+        ("main-dm-conn-opened-4b63d8", "bind_main_dm_conn_opened_4b63d8_20261015.py", "main-dm-conn-opened-4b63d8", "PASS_EXPERIMENTAL_MAIN_DM_CONN_OPENED_C", 205, 204, {"audio_ble_dm_conn_sm_act_opened_4b63d8"}, set(), {"audio_ble_dm_conn_sm_act_opened_4b63d8"}, "108 native connection-open address, CCB, message, and callback comparisons"),
+        ("main-dm-conn-interfaces-78a820", "bind_main_dm_conn_interfaces_78a820_20261015.py", "main-dm-conn-interfaces-78a820", "PASS_EXPERIMENTAL_MAIN_DM_CONN_INTERFACES_C", 204, 209, {"audio_ble_dm_conn_table_a", "audio_ble_dm_conn_table_b", "audio_ble_dm_conn_table_c"}, {"audio_ble_dm_conn_reset_4b67ec", "audio_ble_dm_conn_hci_handler_4b68a4", "audio_ble_dm_conn_msg_handler_4b6888", "audio_ble_dm_empty_reset_4d29be", "audio_ble_dm_conn2_hci_handler_4b6990", "audio_ble_dm_conn2_msg_handler_4b6914", "audio_ble_dm_empty_handler_4d29c0", "audio_ble_dm_conn_upd_msg_handler_4b6a16"}, {"audio_ble_dm_conn_table_a", "audio_ble_dm_conn_table_b", "audio_ble_dm_conn_table_c"}, "nine symbolic pointer relocations matched to three stock Cordio interface records"),
+        ("main-dm-empty-handlers-4d29be", "bind_main_dm_empty_handlers_4d29be_20261015.py", "main-dm-empty-handlers-4d29be", "PASS_EXPERIMENTAL_MAIN_DM_EMPTY_HANDLERS_C", 209, 207, {"audio_ble_dm_empty_reset_4d29be", "audio_ble_dm_empty_handler_4d29c0"}, set(), {"audio_ble_dm_empty_reset_4d29be", "audio_ble_dm_empty_handler_4d29c0"}, "two source-owned Thumb return bodies match stock bytes"),
+        ("main-dm-conn-message-interfaces-4b6888", "bind_main_dm_conn_message_interfaces_4b6888_20261015.py", "main-dm-conn-message-interfaces-4b6888", "PASS_EXPERIMENTAL_MAIN_DM_CONN_MESSAGE_INTERFACES_C", 207, 206, {"audio_ble_dm_conn_msg_handler_4b6888", "audio_ble_dm_conn_upd_msg_handler_4b6a16"}, {"audio_ble_dm_conn_sm_execute_533ef4"}, {"audio_ble_dm_conn_msg_handler_4b6888", "audio_ble_dm_conn_upd_msg_handler_4b6a16"}, "144 native CCB lookup, connected gate, and executor-call comparisons"),
+        ("main-dm-conn-reset-4b67ec", "bind_main_dm_conn_reset_4b67ec_20261015.py", "main-dm-conn-reset-4b67ec", "PASS_EXPERIMENTAL_MAIN_DM_CONN_RESET_C", 206, 205, {"audio_ble_dm_conn_reset_4b67ec"}, set(), {"audio_ble_dm_conn_reset_4b67ec", "audio_ble_dm_conn_spec_defaults_78a814"}, "72 native reset event, default copy, DM block, and global state comparisons"),
+        ("main-dm-conn-hci-handler-4b68a4", "bind_main_dm_conn_hci_handler_4b68a4_20261015.py", "main-dm-conn-hci-handler-4b68a4", "PASS_EXPERIMENTAL_MAIN_DM_CONN_HCI_HANDLER_C", 205, 207, {"audio_ble_dm_conn_hci_handler_4b68a4"}, {"audio_ble_dm_conn_ccb_by_address_4b6170", "audio_ble_dm_conn_complete_states_4b5b24", "audio_ble_dm_conn_ccb_alloc_4b5c78"}, {"audio_ble_dm_conn_hci_handler_4b68a4"}, "240 native connection-complete, handle-event, and child-routing comparisons"),
+        ("main-dm-conn-complete-states-4b5b24", "bind_main_dm_conn_complete_states_4b5b24_20261015.py", "main-dm-conn-complete-states-4b5b24", "PASS_EXPERIMENTAL_MAIN_DM_CONN_COMPLETE_STATES_C", 207, 206, {"audio_ble_dm_conn_complete_states_4b5b24"}, set(), {"audio_ble_dm_conn_complete_states_4b5b24"}, "96 native CCB first-match, INFO trace, and DM block comparisons"),
+        ("main-dm-conn-ccb-by-address-4b6170", "bind_main_dm_conn_ccb_by_address_4b6170_20261015.py", "main-dm-conn-ccb-by-address-4b6170", "PASS_EXPERIMENTAL_MAIN_DM_CONN_CCB_BY_ADDRESS_C", 206, 205, {"audio_ble_dm_conn_ccb_by_address_4b6170"}, set(), {"audio_ble_dm_conn_ccb_by_address_4b6170"}, "96 native six-byte match, first CCB, and miss trace comparisons"),
+        ("main-dm-conn-ccb-alloc-4b5c78", "bind_main_dm_conn_ccb_alloc_4b5c78_20261015.py", "main-dm-conn-ccb-alloc-4b5c78", "PASS_EXPERIMENTAL_MAIN_DM_CONN_CCB_ALLOC_C", 205, 204, {"audio_ble_dm_conn_ccb_alloc_4b5c78"}, set(), {"audio_ble_dm_conn_ccb_alloc_4b5c78"}, "48 native row clear/address copy, CCB allocation, and trace comparisons"),
+        ("main-dm-conn-sm-execute-533ef4", "bind_main_dm_conn_sm_execute_533ef4_20261015.py", "main-dm-conn-sm-execute-533ef4", "PASS_EXPERIMENTAL_MAIN_DM_CONN_SM_EXECUTE_C", 204, 203, {"audio_ble_dm_conn_sm_execute_533ef4"}, set(), {"audio_ble_dm_conn_sm_execute_533ef4", "audio_ble_dm_conn_sm_state_table_6ecc58"}, "480 native five-state/eight-event transition, trace, and dispatch comparisons"),
+        ("main-dm-conn2-msg-handler-4b6914", "bind_main_dm_conn2_msg_handler_4b6914_20261015.py", "main-dm-conn2-msg-handler-4b6914", "PASS_EXPERIMENTAL_MAIN_DM_CONN2_MSG_HANDLER_C", 203, 208, {"audio_ble_dm_conn2_msg_handler_4b6914"}, {"audio_ble_hci_read_rssi_cmd_52b63a", "audio_ble_hci_remote_conn_param_req_reply_52b0be", "audio_ble_hci_remote_conn_param_req_neg_reply_52b146", "audio_ble_hci_set_data_len_52b176", "audio_ble_hci_write_auth_payload_timeout_52b70c", "audio_ble_hci_request_peer_sca_52b87a"}, {"audio_ble_dm_conn2_msg_handler_4b6914"}, "54 native secondary connection message routing and HCI argument comparisons"),
+        ("main-ble-hci-read-rssi-cmd-52b63a", "bind_main_ble_hci_read_rssi_cmd_52b63a_20261015.py", "main-ble-hci-read-rssi-cmd-52b63a", "PASS_EXPERIMENTAL_MAIN_HCI_READ_RSSI_C", 208, 207, {"audio_ble_hci_read_rssi_cmd_52b63a"}, set(), {"audio_ble_hci_read_rssi_cmd_52b63a"}, "14 native HCI Read RSSI allocation, payload and send comparisons"),
+        ("main-ble-hci-request-peer-sca-52b87a", "bind_main_ble_hci_request_peer_sca_52b87a_20261015.py", "main-ble-hci-request-peer-sca-52b87a", "PASS_EXPERIMENTAL_MAIN_HCI_REQUEST_PEER_SCA_C", 207, 206, {"audio_ble_hci_request_peer_sca_52b87a"}, set(), {"audio_ble_hci_request_peer_sca_52b87a"}, "14 native HCI Request Peer SCA allocation, payload and send comparisons"),
+        ("main-ble-hci-conn2-payload-commands", "bind_main_ble_hci_conn2_payload_commands_20261015.py", "main-ble-hci-conn2-payload-commands", "PASS_EXPERIMENTAL_MAIN_HCI_CONN2_PAYLOAD_COMMANDS_C", 206, 202, {"audio_ble_hci_remote_conn_param_req_reply_52b0be", "audio_ble_hci_remote_conn_param_req_neg_reply_52b146", "audio_ble_hci_set_data_len_52b176", "audio_ble_hci_write_auth_payload_timeout_52b70c"}, set(), {"audio_ble_hci_remote_conn_param_req_reply_52b0be", "audio_ble_hci_remote_conn_param_req_neg_reply_52b146", "audio_ble_hci_set_data_len_52b176", "audio_ble_hci_write_auth_payload_timeout_52b70c"}, "32 native connection parameter, data length, and auth timeout payload comparisons"),
+        ("main-dm-conn2-hci-handler-4b6990", "bind_main_dm_conn2_hci_handler_4b6990_20261015.py", "main-dm-conn2-hci-handler-4b6990", "PASS_EXPERIMENTAL_MAIN_DM_CONN2_HCI_HANDLER_C", 202, 209, {"audio_ble_dm_conn2_hci_handler_4b6990"}, {"audio_ble_dm_conn2_act_rssi_read_4b6a38", "audio_ble_dm_conn2_act_remote_conn_param_req_4b6a6e", "audio_ble_dm_conn2_act_data_len_change_4b6ab8", "audio_ble_dm_conn2_act_write_auth_to_cmpl_4b6afa", "audio_ble_dm_conn2_act_auth_to_expired_4b6b28", "audio_ble_dm_conn2_act_read_remote_features_cmpl_4b6b50", "audio_ble_dm_conn2_act_read_remote_ver_info_cmpl_4b6bac", "audio_ble_dm_conn2_act_req_peer_sca_4b6bee"}, {"audio_ble_dm_conn2_hci_handler_4b6990"}, "60 native secondary HCI event routing, CCB lookup and child-call comparisons"),
+        ("main-dm-conn2-actions-rssi-param-4b6a38", "bind_main_dm_conn2_actions_rssi_param_20261015.py", "main-dm-conn2-actions-rssi-param-4b6a38", "PASS_EXPERIMENTAL_MAIN_DM_CONN2_ACTIONS_RSSI_PARAM_C", 209, 207, {"audio_ble_dm_conn2_act_rssi_read_4b6a38", "audio_ble_dm_conn2_act_remote_conn_param_req_4b6a6e"}, set(), {"audio_ble_dm_conn2_act_rssi_read_4b6a38", "audio_ble_dm_conn2_act_remote_conn_param_req_4b6a6e"}, "32 native RSSI and remote parameter callback-record comparisons"),
+        ("main-dm-conn2-action-data-len-4b6ab8", "bind_main_dm_conn2_action_data_len_4b6ab8_20261015.py", "main-dm-conn2-action-data-len-4b6ab8", "PASS_EXPERIMENTAL_MAIN_DM_CONN2_ACTION_DATA_LEN_C", 207, 206, {"audio_ble_dm_conn2_act_data_len_change_4b6ab8"}, set(), {"audio_ble_dm_conn2_act_data_len_change_4b6ab8"}, "16 native data-length callback-record comparisons"),
+        ("main-dm-conn2-actions-remaining-4b6afa", "bind_main_dm_conn2_actions_remaining_20261015.py", "main-dm-conn2-actions-remaining-4b6afa", "PASS_EXPERIMENTAL_MAIN_DM_CONN2_ACTIONS_REMAINING_C", 206, 201, {"audio_ble_dm_conn2_act_write_auth_to_cmpl_4b6afa", "audio_ble_dm_conn2_act_auth_to_expired_4b6b28", "audio_ble_dm_conn2_act_read_remote_features_cmpl_4b6b50", "audio_ble_dm_conn2_act_read_remote_ver_info_cmpl_4b6bac", "audio_ble_dm_conn2_act_req_peer_sca_4b6bee"}, set(), {"audio_ble_dm_conn2_act_write_auth_to_cmpl_4b6afa", "audio_ble_dm_conn2_act_auth_to_expired_4b6b28", "audio_ble_dm_conn2_act_read_remote_features_cmpl_4b6b50", "audio_ble_dm_conn2_act_read_remote_ver_info_cmpl_4b6bac", "audio_ble_dm_conn2_act_req_peer_sca_4b6bee"}, "80 native secondary HCI callback and feature-state comparisons"),
+        ("main-dm-conn-cb-storage-200712a4", "bind_main_dm_conn_cb_storage_200712a4_20261015.py", "main-dm-conn-cb-storage-200712a4", "PASS_EXPERIMENTAL_MAIN_DM_CONN_CB_STORAGE_ALIAS_C", 201, 200, {"audio_ble_dm_connection_registry"}, set(), {"audio_ble_dm_connection_registry"}, "alias to existing 196-byte C-owned DM block, bounded by native reset writes through offset 0xc3"),
+        ("main-dm-stack-interface-78a88c", "bind_main_dm_stack_interface_78a88c_20261015.py", "main-dm-stack-interface-78a88c", "PASS_EXPERIMENTAL_MAIN_DM_STACK_INTERFACE_C", 200, 207, {"audio_ble_dm_stack_table_78a88c"}, {"audio_ble_dm_dispatch_536820", "audio_ble_dm_dispatch_536896", "audio_ble_dm_dispatch_5368ae", "audio_ble_dm_stack_reset_536918", "audio_ble_dm_stack_hci_handler_53694c", "audio_ble_dm_stack_msg_handler_5369d8", "audio_ble_dm_dispatch_4d2544", "audio_ble_dm_dispatch_4d2364"}, {"audio_ble_dm_dispatch_table_78a880", "audio_ble_dm_stack_table_78a88c"}, "eight native Thumb pointer slots and C alias at dispatch slot three"),
+        ("main-dm-dispatch-scan-stop-536896", "bind_main_dm_dispatch_scan_stop_536896_20261015.py", "main-dm-dispatch-scan-stop-536896", "PASS_EXPERIMENTAL_MAIN_DM_DISPATCH_SCAN_STOP_C", 207, 206, {"audio_ble_dm_dispatch_536896"}, set(), {"audio_ble_dm_dispatch_536896", "audio_ble_hci_le_set_scan_enable_off_52b4e2"}, "24 native DM scan-state, HCI allocation, payload and send comparisons"),
+        ("main-dm-dispatch-scan-stop-wrapper-5368ae", "bind_main_dm_dispatch_scan_stop_wrapper_5368ae_20261015.py", "main-dm-dispatch-scan-stop-wrapper-5368ae", "PASS_EXPERIMENTAL_MAIN_DM_DISPATCH_SCAN_STOP_WRAPPER_C", 206, 205, {"audio_ble_dm_dispatch_5368ae"}, set(), {"audio_ble_dm_dispatch_5368ae"}, "pinned eight-byte native wrapper forwarding to separately compared scan-stop child"),
+        ("main-dm-stack-msg-handler-5369d8", "bind_main_dm_stack_msg_handler_5369d8_20261015.py", "main-dm-stack-msg-handler-5369d8", "PASS_EXPERIMENTAL_MAIN_DM_STACK_MSG_HANDLER_C", 205, 204, {"audio_ble_dm_stack_msg_handler_5369d8"}, set(), {"audio_ble_dm_stack_msg_handler_5369d8"}, "48 native eight-way dispatch target and forwarded-message comparisons"),
+        ("main-dm-dispatch-4d2544", "bind_main_dm_dispatch_4d2544_20261015.py", "main-dm-dispatch-4d2544", "PASS_EXPERIMENTAL_MAIN_DM_DISPATCH_4D2544_C", 204, 203, {"audio_ble_dm_dispatch_4d2544"}, set(), {"audio_ble_dm_dispatch_4d2544"}, "pinned eight-byte native forwarder to already compiled SmpDbInit at 0x542288"),
+        ("main-dm-stack-reset-536918", "bind_main_dm_stack_reset_536918_20261015.py", "main-dm-stack-reset-536918", "PASS_EXPERIMENTAL_MAIN_DM_STACK_RESET_C", 203, 202, {"audio_ble_dm_stack_reset_536918"}, set(), {"audio_ble_dm_stack_reset_536918"}, "21 native timer, callback event, state and init comparisons"),
+        ("main-dm-stack-hci-handler-53694c", "bind_main_dm_stack_hci_handler_53694c_20261015.py", "main-dm-stack-hci-handler-53694c", "PASS_EXPERIMENTAL_MAIN_DM_STACK_HCI_HANDLER_C", 202, 202, {"audio_ble_dm_stack_hci_handler_53694c"}, {"audio_ble_dm_stack_hci_scan_complete_5368b6"}, {"audio_ble_dm_stack_hci_handler_53694c"}, "80 native HCI state, timer, privacy and callback comparisons"),
+        ("main-dm-stack-hci-scan-complete-5368b6", "bind_main_dm_stack_hci_scan_complete_5368b6_20261015.py", "main-dm-stack-hci-scan-complete-5368b6", "PASS_EXPERIMENTAL_MAIN_DM_STACK_HCI_SCAN_COMPLETE_C", 202, 201, {"audio_ble_dm_stack_hci_scan_complete_5368b6"}, set(), {"audio_ble_dm_stack_hci_scan_complete_5368b6", "audio_ble_dm_find_ad_type_4d2a06"}, "144 native scan report filter, AD walker and callback comparisons"),
+        ("main-dm-dispatch-scan-start-536820", "bind_main_dm_dispatch_scan_start_536820_20261015.py", "main-dm-dispatch-scan-start-536820", "PASS_EXPERIMENTAL_MAIN_DM_DISPATCH_SCAN_START_C", 201, 200, {"audio_ble_dm_dispatch_536820"}, set(), {"audio_ble_dm_dispatch_536820", "audio_ble_hci_le_set_scan_params_52b50a"}, "192 native scan state, address mode, allocation and dual HCI payload comparisons"),
+        ("main-dm-sec-hci-handler-4d2364", "bind_main_dm_sec_hci_handler_4d2364_20261015.py", "main-dm-sec-hci-handler-4d2364", "PASS_EXPERIMENTAL_MAIN_DM_SEC_HCI_HANDLER_C", 200, 204, {"audio_ble_dm_dispatch_4d2364"}, {"HciLeLtkReqNegReplCmd", "HciLeLtkReqReplCmd", "audio_ble_smp_encrypt_ind_537be6", "audio_ble_smp_get_stk_537c4c", "audio_ble_smp_lesc_enabled_537c30"}, {"audio_ble_dm_dispatch_4d2364"}, "256 native Cordio security HCI branch, callback and CCB comparisons"),
+        ("main-dm-sec-lesc-neg-ltk", "bind_main_dm_sec_lesc_and_neg_ltk_20261015.py", "main-dm-sec-lesc-neg-ltk", "PASS_EXPERIMENTAL_MAIN_DM_SEC_LESC_NEG_LTK_C", 204, 202, {"HciLeLtkReqNegReplCmd", "audio_ble_smp_lesc_enabled_537c30"}, set(), {"HciLeLtkReqNegReplCmd", "audio_ble_smp_lesc_enabled_537c30"}, "18 native LESC lookup and negative LTK command comparisons"),
+        ("main-hci-ltk-reply-52b2ce", "bind_main_hci_ltk_reply_52b2ce_20261015.py", "main-hci-ltk-reply-52b2ce", "PASS_EXPERIMENTAL_MAIN_HCI_LTK_REPLY_C", 202, 201, {"HciLeLtkReqReplCmd"}, set(), {"HciLeLtkReqReplCmd"}, "12 native positive LTK command payload comparisons"),
+        ("main-smp-encrypt-ind-537be6", "bind_main_smp_encrypt_ind_537be6_20261015.py", "main-smp-encrypt-ind-537be6", "PASS_EXPERIMENTAL_MAIN_SMP_ENCRYPT_IND_C", 201, 200, {"audio_ble_smp_encrypt_ind_537be6"}, set(), {"audio_ble_smp_encrypt_ind_537be6"}, "9 native SMP encryption-indication forwarding comparisons"),
+        ("main-smp-get-stk-537c4c", "bind_main_smp_get_stk_537c4c_20261015.py", "main-smp-get-stk-537c4c", "PASS_EXPERIMENTAL_MAIN_SMP_GET_STK_C", 200, 199, {"audio_ble_smp_get_stk_537c4c"}, set(), {"audio_ble_smp_get_stk_537c4c"}, "384 native SMP SC/legacy STK selection and security level comparisons"),
+        ("main-dm-sec-interface-78a898", "bind_main_dm_sec_interface_78a898_20261015.py", "main-dm-sec-interface-78a898", "PASS_EXPERIMENTAL_MAIN_DM_SEC_INTERFACE_C", 199, 198, {"audio_ble_dm_security_table"}, set(), {"audio_ble_dm_security_table", "audio_ble_dm_sec_msg_handler_4d2440"}, "three native security interface pointers and 36 security message routing comparisons"),
+        ("main-dm-phy-interface-78a85c", "bind_main_dm_phy_interface_78a85c_20261015.py", "main-dm-phy-interface-78a85c", "PASS_EXPERIMENTAL_MAIN_DM_PHY_INTERFACE_C", 198, 197, {"audio_ble_dm_phy_table"}, set(), {"audio_ble_dm_phy_table", "audio_ble_dm_phy_hci_handler_4c5734"}, "three native PHY interface pointers and 48 PHY HCI indication comparisons"),
+        ("main-dm-lesc-interface-78a8a4", "bind_main_dm_lesc_interface_78a8a4_20261015.py", "main-dm-lesc-interface-78a8a4", "PASS_EXPERIMENTAL_MAIN_DM_LESC_INTERFACE_C", 197, 196, {"audio_ble_dm_lesc_table"}, set(), {"audio_ble_dm_lesc_table", "audio_ble_dm_lesc_msg_handler_534894", "audio_ble_dm_lesc_oob_rand"}, "three native LESC interface pointers and 12 ECC/OOB message comparisons"),
+        ("main-dm-priv-aes-interface-78a874", "bind_main_dm_priv_aes_interface_78a874_20261015.py", "main-dm-priv-aes-interface-78a874", "PASS_EXPERIMENTAL_MAIN_DM_PRIV_AES_INTERFACE_C", 196, 195, {"audio_ble_dm_priv_table_b"}, set(), {"audio_ble_dm_priv_table_b", "audio_ble_dm_priv_aes_actions", "audio_ble_dm_priv_aes_msg_handler_4d27ce", "audio_ble_dm_priv_cb_storage"}, "three privacy AES interface slots, two action slots and 12 state/callback comparisons"),
+        ("main-mram-records-7ff000", "bind_main_mram_records_7ff000_20261015.py", "main-mram-records-7ff000", "PASS_EXPERIMENTAL_MAIN_MRAM_RECORDS_C", 195, 193, {"audio_ble_mram_records_7ff000", "audio_ble_privacy_nvm_records"}, set(), {"audio_ble_mram_records_7ff000", "audio_ble_privacy_nvm_records"}, "two aliases share one 2560-byte NOBITS mapped-MRAM reservation at 0x007ff000"),
+        ("main-dm-priv-interface-78a868", "bind_main_dm_priv_interface_78a868_20261015.py", "main-dm-priv-interface-78a868", "PASS_EXPERIMENTAL_MAIN_DM_PRIV_INTERFACE_C", 193, 198, {"audio_ble_dm_priv_table_a"}, {"HciLeAddDeviceToResolvingListCmd", "HciLeRemoveDeviceFromResolvingList", "HciLeClearResolvingList", "HciLeSetAddrResolutionEnable", "HciLeSetPrivacyModeCmd", "dmDevPassEvtToDevPriv"}, {"audio_ble_dm_priv_table_a", "audio_ble_dm_priv_actions", "audio_ble_dm_priv_reset_4d27c0", "audio_ble_dm_priv_hci_handler_4d26e8", "audio_ble_dm_priv_msg_handler_4d27ae"}, "three primary privacy slots, seven action slots and 80 native reset/message/HCI comparisons"),
+        ("main-hci-addr-resolution-enable-52b7f6", "bind_main_hci_addr_resolution_enable_52b7f6_20261015.py", "main-hci-addr-resolution-enable-52b7f6", "PASS_EXPERIMENTAL_MAIN_HCI_ADDR_RES_ENABLE_C", 198, 197, {"HciLeSetAddrResolutionEnable"}, set(), {"HciLeSetAddrResolutionEnable"}, "12 native HCI command allocation, payload and send comparisons"),
+        ("main-hci-privacy-commands-52b744", "bind_main_hci_privacy_commands_52b744_20261015.py", "main-hci-privacy-commands-52b744", "PASS_EXPERIMENTAL_MAIN_HCI_PRIVACY_COMMANDS_C", 197, 193, {"HciLeAddDeviceToResolvingListCmd", "HciLeRemoveDeviceFromResolvingList", "HciLeClearResolvingList", "HciLeSetPrivacyModeCmd"}, set(), {"HciLeAddDeviceToResolvingListCmd", "HciLeRemoveDeviceFromResolvingList", "HciLeClearResolvingList", "HciLeSetPrivacyModeCmd"}, "24 native resolving-list command construction comparisons"),
+        ("main-dm-dev-priv-forward-4b2ea6", "bind_main_dm_dev_priv_forward_4b2ea6_20261015.py", "main-dm-dev-priv-forward-4b2ea6", "PASS_EXPERIMENTAL_MAIN_DM_DEV_PRIV_FORWARD_C", 193, 192, {"dmDevPassEvtToDevPriv"}, set(), {"dmDevPassEvtToDevPriv"}, "36 logging-disabled native device privacy event forwarding comparisons"),
+        ("main-dm-adv-reset-4ba45c", "bind_main_dm_adv_reset_4ba45c_20261015.py", "main-dm-adv-reset-4ba45c", "PASS_EXPERIMENTAL_MAIN_DM_ADV_RESET_C", 192, 192, set(), set(), {"audio_ble_dm_adv_reset_4ba45c"}, "24 native advertising reset state, timer, callback and lower-init comparisons"),
+        ("main-dm-adv-msg-4ba6ac", "bind_main_dm_adv_msg_4ba6ac_20261015.py", "main-dm-adv-msg-4ba6ac", "PASS_EXPERIMENTAL_MAIN_DM_ADV_MSG_C", 192, 196, set(), {"audio_ble_dm_adv_config_lower_4b9a80", "HciLeSetAdvDataCmd", "HciLeSetScanRespDataCmd", "HciLeSetAdvEnableCmd"}, {"audio_ble_dm_adv_config_4b9ac0", "audio_ble_dm_adv_set_data_4b9d24", "audio_ble_dm_adv_start_4b9e88", "audio_ble_dm_adv_stop_4ba0f4", "audio_ble_dm_adv_remove_set_4ba33c", "audio_ble_dm_adv_clear_sets_4ba33e", "audio_ble_dm_adv_set_rand_addr_4ba340", "audio_ble_dm_adv_timeout_4ba342", "audio_ble_dm_adv_actions_75f550", "audio_ble_dm_adv_msg_handler_4ba6ac"}, "256 C dispatch routes and 280 native logging-disabled action cases"),
+        ("main-hci-adv-commands-52b3b0", "bind_main_hci_adv_commands_52b3b0_20261015.py", "main-hci-adv-commands-52b3b0", "PASS_EXPERIMENTAL_MAIN_HCI_ADV_COMMANDS_C", 196, 193, {"HciLeSetAdvEnableCmd", "HciLeSetAdvDataCmd", "HciLeSetScanRespDataCmd"}, set(), {"HciLeSetAdvEnableCmd", "HciLeSetAdvDataCmd", "HciLeSetScanRespDataCmd"}, "22 native and 22 C advertising HCI command payload/allocation comparisons"),
+        ("main-dm-adv-config-lower-4b9a80", "bind_main_dm_adv_config_lower_4b9a80_20261015.py", "main-dm-adv-config-lower-4b9a80", "PASS_EXPERIMENTAL_MAIN_DM_ADV_CONFIG_LOWER_C", 193, 192, {"audio_ble_dm_adv_config_lower_4b9a80"}, set(), {"audio_ble_dm_adv_config_lower_4b9a80", "audio_ble_dm_ll_addr_type_4d2a84", "HciLeSetAdvParamCmd", "audio_ble_dm_leg_adv_type_20074fb3"}, "20 native and 20 C advertising configuration/address-mode/parameter comparisons"),
+        ("main-dm-adv-control-extent-34", "bind_main_dm_adv_control_extent_34_20261015.py", "main-dm-adv-control-extent-34", "PASS_EXPERIMENTAL_MAIN_DM_ADV_CONTROL_ALREADY_C_OWNED", 192, 192, set(), set(), set(), "24 advertising control relocations verified against upstream 0x34 C storage"),
+        ("main-dm-adv-hci-4ba4b0", "bind_main_dm_adv_hci_4ba4b0_20261015.py", "main-dm-adv-hci-4ba4b0", "PASS_EXPERIMENTAL_MAIN_DM_ADV_HCI_C", 192, 192, {"audio_ble_dm_adv_table"}, {"audio_ble_dm_adv_gen_conn_complete_4b310a"}, {"audio_ble_dm_adv_hci_handler_4ba4b0", "audio_ble_dm_adv_table"}, "128 native and 128 C advertising HCI transition comparisons and three exact interface pointers"),
+        ("main-dm-adv-gen-conn-4b310a", "bind_main_dm_adv_gen_conn_4b310a_20261015.py", "main-dm-adv-gen-conn-4b310a", "PASS_EXPERIMENTAL_MAIN_DM_ADV_GEN_CONN_C", 192, 192, {"audio_ble_dm_adv_gen_conn_complete_4b310a"}, {"audio_ble_dm_dev_pass_hci_conn_4d29c2"}, {"audio_ble_dm_adv_gen_conn_complete_4b310a"}, "eight native and eight C synthetic enhanced-connection record comparisons"),
+        ("main-dm-dev-pass-hci-conn-4d29c2", "bind_main_dm_dev_pass_hci_conn_4d29c2_20261015.py", "main-dm-dev-pass-hci-conn-4d29c2", "PASS_EXPERIMENTAL_MAIN_DM_DEV_PASS_HCI_CONN_C", 192, 191, {"audio_ble_dm_dev_pass_hci_conn_4d29c2"}, set(), {"audio_ble_dm_dev_pass_hci_conn_4d29c2"}, "16 native and 16 C dynamic connection callback forwarding comparisons"),
+        ("main-bootloader-flag-7fe000", "bind_main_bootloader_flag_7fe000_20261015.py", "main-bootloader-flag-7fe000", "PASS_EXPERIMENTAL_MAIN_BOOTLOADER_FLAG_C", 191, 190, {"audio_ble_bootloader_flag"}, set(), {"audio_ble_bootloader_flag"}, "16-byte NOLOAD mapped OTA flag reservation at 0x007fe000"),
+        ("main-als-sync-registry-4ae73c", "bind_main_als_sync_registry_4ae73c_20261015.py", "main-als-sync-registry-4ae73c", "PASS_EXPERIMENTAL_MAIN_ALS_SYNC_REGISTRY_C", 190, 189, {"audio_uart_registry_callback_4ae73c"}, set(), {"audio_uart_registry_callback_4ae73c", "audio_als_settings_set_auto_brightness_46bff4", "audio_als_callback_context_47394c"}, "100 native/C ALS sync cases across five log masks, settings byte and ROM display-context getter"),
+        ("main-display-manager-state-table-776a3c", "bind_main_display_manager_state_table_776a3c_20261015.py", "main-display-manager-state-table-776a3c", "PASS_EXPERIMENTAL_MAIN_DISPLAY_MANAGER_TABLE_C", 189, 188, {"g2_display_state_table"}, set(), {"g2_display_state_table", "audio_display_manager_clear_473e2e", "audio_display_manager_init_473ea0", "audio_display_manager_power_up_473f12", "audio_display_manager_power_down_473f84", "audio_display_manager_brightness_473ff6"}, "six authenticated ROM interface words and 60 native/C queue/log callback cases"),
+        ("main-tracepoint-registry-5eeec4", "bind_main_tracepoint_registry_5eeec4_20261015.py", "main-tracepoint-registry-5eeec4", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REGISTRY_C", 188, 189, {"audio_uart_registry_callback_5eeec4"}, {"audio_tracepoint_handle_ble_data_5ee8bc", "audio_tracepoint_handle_slave_file_list_5eeb98"}, {"audio_uart_registry_callback_5eeec4", "audio_tracepoint_role_char_5edadc"}, "160 native/C tracepoint dispatch, role, log and forwarding cases; two child imports exposed"),
+        ("main-tracepoint-ble-data-5ee8bc", "bind_main_tracepoint_ble_data_5ee8bc_20261015.py", "main-tracepoint-ble-data-5ee8bc", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_BLE_DATA_C", 189, 193, {"audio_tracepoint_handle_ble_data_5ee8bc"}, {"audio_tracepoint_decode_buffer", "audio_tracepoint_message_descriptor", "audio_tracepoint_request_file_name_5ee1f8", "audio_tracepoint_delete_file_5ee488", "audio_tracepoint_delete_all_5ee7b4"}, {"audio_tracepoint_handle_ble_data_5ee8bc"}, "280 native/C tracepoint BLE decode, log and command dispatch cases; five data/child imports exposed"),
+        ("main-tracepoint-decode-buffer-2037b9c0", "bind_main_tracepoint_decode_buffer_2037b9c0_20261015.py", "main-tracepoint-decode-buffer-2037b9c0", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DECODE_RAM_C", 193, 192, {"audio_tracepoint_decode_buffer"}, set(), {"audio_tracepoint_decode_buffer"}, "0x206-byte NOBITS bounded decode RAM reservation at 0x2037b9c0"),
+        ("main-tracepoint-delete-all-5ee7b4", "bind_main_tracepoint_delete_all_5ee7b4_20261015.py", "main-tracepoint-delete-all-5ee7b4", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DELETE_ALL_C", 192, 194, {"audio_tracepoint_delete_all_5ee7b4"}, {"audio_tracepoint_delete_all_files_5ee650", "audio_tracepoint_reply_result_5ee134", "audio_tracepoint_reply_buffer"}, {"audio_tracepoint_delete_all_5ee7b4", "audio_tracepoint_make_result_message_5ee10a"}, "90 native/C delete-all, logging and 0x206-byte result-constructor cases"),
+        ("main-tracepoint-reply-buffer-2037bbc8", "bind_main_tracepoint_reply_buffer_2037bbc8_20261015.py", "main-tracepoint-reply-buffer-2037bbc8", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REPLY_RAM_C", 194, 193, {"audio_tracepoint_reply_buffer"}, set(), {"audio_tracepoint_reply_buffer"}, "0x206-byte NOBITS bounded reply RAM reservation at 0x2037bbc8"),
+        ("main-tracepoint-reply-result-5ee134", "bind_main_tracepoint_reply_result_5ee134_20261015.py", "main-tracepoint-reply-result-5ee134", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REPLY_ROUTING_C", 193, 194, {"audio_tracepoint_reply_result_5ee134"}, {"audio_tracepoint_send_to_master_5ee066", "audio_tracepoint_send_to_phone_5edfd8"}, {"audio_tracepoint_reply_result_5ee134"}, "240 native/C role/log/send-dispatch cases; two transport children exposed"),
+        ("main-tracepoint-send-reply-5edfd8-5ee066", "bind_main_tracepoint_send_reply_20261015.py", "main-tracepoint-send-reply-5edfd8-5ee066", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_SEND_REPLY_C", 194, 194, {"audio_tracepoint_send_to_master_5ee066", "audio_tracepoint_send_to_phone_5edfd8"}, {"audio_tracepoint_encode_response_5eded0", "audio_tracepoint_encoded_buffer"}, {"audio_tracepoint_send_to_master_5ee066", "audio_tracepoint_send_to_phone_5edfd8"}, "540 native/C encode-failure, send-result, length, log and event cases; encoder and buffer exposed"),
+        ("main-tracepoint-encode-response-5eded0", "bind_main_tracepoint_encode_response_20261015.py", "main-tracepoint-encode-response-5eded0", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_ENCODER_C", 194, 192, {"audio_tracepoint_encode_response_5eded0", "audio_tracepoint_encoded_buffer"}, set(), {"audio_tracepoint_encode_response_5eded0", "audio_tracepoint_encoded_buffer"}, "180 native/C encoder cases; 0x300-byte bounded NOLOAD TX buffer at 0x2037b6c0"),
+        ("main-tracepoint-pb-descriptor-77cd84", "bind_main_tracepoint_pb_descriptor_77cd84_20261015.py", "main-tracepoint-pb-descriptor-77cd84", "PASS_AUTHENTICATED_MAIN_TRACEPOINT_PB_DESCRIPTOR_C", 192, 191, {"audio_tracepoint_message_descriptor"}, set(), {"audio_tracepoint_message_descriptor"}, "four-node nanopb graph with exact field tables, metadata and eleven native pointer edges"),
+        ("main-tracepoint-delete-file-5ee488", "bind_main_tracepoint_delete_file_5ee488_20261015.py", "main-tracepoint-delete-file-5ee488", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DELETE_FILE_C", 191, 194, {"audio_tracepoint_delete_file_5ee488"}, {"audio_tracepoint_validate_file_name_5ede30", "audio_tracepoint_resolve_file_path_5eddf6", "audio_tracepoint_storage_lock_47e088", "audio_tracepoint_storage_unlink_47498c"}, {"audio_tracepoint_delete_file_5ee488"}, "120 native/C file validation, mapping, delete-result and log cases; four children exposed"),
+        ("main-tracepoint-resolve-file-path-5eddf6", "bind_main_tracepoint_resolve_file_path_5eddf6_20261015.py", "main-tracepoint-resolve-file-path-5eddf6", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PATH_RESOLVER_C", 194, 194, {"audio_tracepoint_resolve_file_path_5eddf6"}, {"audio_tracepoint_parse_sequence_5edaf0"}, {"audio_tracepoint_resolve_file_path_5eddf6"}, "48 native/C prefix, null and parser dispatch cases; numeric parser exposed"),
+        ("main-tracepoint-parse-sequence-5edaf0", "bind_main_tracepoint_parse_sequence_5edaf0_20261015.py", "main-tracepoint-parse-sequence-5edaf0", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_SEQUENCE_PARSER_C", 194, 193, {"audio_tracepoint_parse_sequence_5edaf0"}, set(), {"audio_tracepoint_parse_sequence_5edaf0"}, "45 native/C tp_<decimal>.bin filename and output-write cases"),
+        ("main-tracepoint-validate-file-name-5ede30", "bind_main_tracepoint_validate_file_name_5ede30_20261015.py", "main-tracepoint-validate-file-name-5ede30", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILENAME_VALIDATOR_C", 193, 193, {"audio_tracepoint_validate_file_name_5ede30"}, {"audio_tracepoint_format_file_path_5edba2"}, {"audio_tracepoint_validate_file_name_5ede30"}, "264 native/C role-prefix, direct number, resolver and parser fallback cases"),
+        ("main-tracepoint-format-file-path-5edba2", "bind_main_tracepoint_format_file_path_5edba2_20261015.py", "main-tracepoint-format-file-path-5edba2", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PATH_FORMAT_C", 193, 192, {"audio_tracepoint_format_file_path_5edba2"}, set(), {"audio_tracepoint_format_file_path_5edba2"}, "25 native/C bounded path-format call cases using existing snprintf provider"),
+        ("main-tracepoint-close-active-file-47e06a", "bind_main_tracepoint_close_active_file_47e06a_20261015.py", "main-tracepoint-close-active-file-47e06a", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_ACTIVE_FILE_C", 192, 191, {"audio_tracepoint_storage_lock_47e088"}, set(), {"audio_tracepoint_storage_lock_47e088", "audio_tracepoint_close_active_file_47e06a", "audio_tracepoint_active_file_handle"}, "eight native/C zero/nonzero handle and close-call cases; four-byte NOLOAD slot at 0x20074ae0"),
+        ("main-tracepoint-storage-unlink-47498c", "bind_main_tracepoint_storage_unlink_47498c_20261015.py", "main-tracepoint-storage-unlink-47498c", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_UNLINK_FACADE_C", 191, 192, {"audio_tracepoint_storage_unlink_47498c"}, {"audio_file_errno_location_439cc4", "audio_file_lfs_remove_4cfa76"}, {"audio_tracepoint_storage_unlink_47498c", "audio_file_ready_200746a8"}, "72 native/C readiness, mutex, remove-result and errno cases; four-byte NOLOAD ready cell"),
+        ("main-file-errno-location-439cc4", "bind_main_file_errno_location_439cc4_20261015.py", "main-file-errno-location-439cc4", "PASS_EXPERIMENTAL_MAIN_FILE_ERRNO_LOCATION_C", 192, 191, {"audio_file_errno_location_439cc4"}, set(), {"audio_file_errno_location_439cc4"}, "four native/C errno-cell pointer cases using existing Main errno storage"),
+        ("main-file-lfs-remove-wrapper-4cfa76", "bind_main_file_lfs_remove_wrapper_4cfa76_20261015.py", "main-file-lfs-remove-wrapper-4cfa76", "PASS_EXPERIMENTAL_MAIN_FILE_LFS_REMOVE_WRAPPER_C", 191, 191, {"audio_file_lfs_remove_4cfa76"}, {"audio_file_lfs_remove_core_4ce4dc"}, {"audio_file_lfs_remove_4cfa76"}, "exact ten-byte stock remove wrapper and four C argument/return cases; deeper core remains open"),
+        ("main-file-lfs-remove-core-4ce4dc", "bind_main_file_lfs_remove_core_4ce4dc_20261015.py", "main-file-lfs-remove-core-4ce4dc", "PASS_EXPERIMENTAL_MAIN_FILE_LFS_REMOVE_CORE_C", 191, 191, {"audio_file_lfs_remove_core_4ce4dc"}, {"audio_file_lfs_dir_drop_4cc5a2"}, {"audio_file_lfs_remove_core_4ce4dc"}, "40 native/C remove-core cases across force-consistency, path lookup, file commit, empty-directory and orphan/drop branches"),
+        ("main-file-lfs-dir-drop-4cc5a2", "bind_main_file_lfs_dir_drop_4cc5a2_20261015.py", "main-file-lfs-dir-drop-4cc5a2", "PASS_EXPERIMENTAL_MAIN_FILE_LFS_DIR_DROP_C", 191, 190, {"audio_file_lfs_dir_drop_4cc5a2"}, set(), {"audio_file_lfs_dir_drop_4cc5a2"}, "eight native/C directory gstate, tail tag, pair and commit cases"),
+        ("main-tracepoint-insert-file-sorted-5edbb0", "bind_main_tracepoint_insert_file_sorted_5edbb0_20261015.py", "main-tracepoint-insert-file-sorted-5edbb0", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_SORTED_INSERT_C", 190, 190, set(), set(), {"audio_tracepoint_insert_file_sorted_5edbb0", "audio_tracepoint_file_inventory"}, "50 native/C sorted file inventory cases; 0x88-byte NOLOAD span at 0x2037cd24"),
+        ("main-tracepoint-request-file-name-5ee1f8", "bind_main_tracepoint_request_file_name_5ee1f8_20261015.py", "main-tracepoint-request-file-name-5ee1f8", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REQUEST_FILE_NAME_C", 190, 192, {"audio_tracepoint_request_file_name_5ee1f8"}, {"audio_tracepoint_reset_pull_478110", "audio_tracepoint_prepare_pull_48ec9e", "audio_tracepoint_scan_files_5edc5a"}, {"audio_tracepoint_request_file_name_5ee1f8", "audio_tracepoint_format_list_name_5eddc8", "audio_tracepoint_local_file_list_ready"}, "64 native/C request cases, 64 formatter cases and one-byte ready flag at 0x20074ae4"),
+        ("main-tracepoint-scan-files-5edc5a", "bind_main_tracepoint_scan_files_5edc5a_20261015.py", "main-tracepoint-scan-files-5edc5a", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_SCAN_FILES_C", 192, 195, {"audio_tracepoint_scan_files_5edc5a"}, {"audio_tracepoint_dir_open_474b02", "audio_tracepoint_dir_read_474bb8", "audio_tracepoint_dir_close_474c66", "audio_tracepoint_file_size_5edb68"}, {"audio_tracepoint_scan_files_5edc5a"}, "32 native/C inventory clear, directory walk, parse, format, size and insert cases"),
+        ("main-tracepoint-file-size-5edb68", "bind_main_tracepoint_file_size_5edb68_20261015.py", "main-tracepoint-file-size-5edb68", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_SIZE_C", 195, 194, {"audio_tracepoint_file_size_5edb68"}, set(), {"audio_tracepoint_file_size_5edb68"}, "30 native/C file open, seek, tell and close cases"),
+        ("main-tracepoint-prepare-pull-48ec9e", "bind_main_tracepoint_prepare_pull_48ec9e_20261015.py", "main-tracepoint-prepare-pull-48ec9e", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PREPARE_PULL_C", 194, 195, {"audio_tracepoint_prepare_pull_48ec9e"}, {"audio_tracepoint_pull_ready_48eb90", "audio_tracepoint_pull_initialize_47e1ec"}, {"audio_tracepoint_prepare_pull_48ec9e"}, "15 native/C readiness/init return-path cases"),
+        ("main-tracepoint-reset-pull-478110", "bind_main_tracepoint_reset_pull_478110_20261015.py", "main-tracepoint-reset-pull-478110", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_RESET_PULL_C", 195, 194, {"audio_tracepoint_reset_pull_478110"}, set(), {"audio_tracepoint_reset_pull_478110", "audio_tracepoint_pull_connection_flag_20074f8f"}, "12 native/C event-loop callback cases and one-byte NOLOAD connection flag"),
+        ("main-tracepoint-dir-facade-474b02", "bind_main_tracepoint_dir_facade_474b02_20261015.py", "main-tracepoint-dir-facade-474b02", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DIR_FACADE_C", 194, 191, {"audio_tracepoint_dir_open_474b02", "audio_tracepoint_dir_read_474bb8", "audio_tracepoint_dir_close_474c66"}, set(), {"audio_tracepoint_dir_open_474b02", "audio_tracepoint_dir_read_474bb8", "audio_tracepoint_dir_close_474c66", "audio_tracepoint_dir_result_200701e8"}, "162 native/C directory facade cases and 0x101-byte shared result at 0x200701e8"),
+        ("main-tracepoint-pull-initialize-47e1ec", "bind_main_tracepoint_pull_initialize_47e1ec_20261015.py", "main-tracepoint-pull-initialize-47e1ec", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_INITIALIZE_C", 191, 190, {"audio_tracepoint_pull_initialize_47e1ec"}, set(), {"audio_tracepoint_pull_initialize_47e1ec", "audio_tracepoint_pull_pending_20074ad8", "audio_tracepoint_pull_enabled_20075038"}, "36 native/C pending-file threshold and close cases; eight-byte pending slots and one-byte enable flag"),
+        ("main-tracepoint-pull-ready-48eb90", "bind_main_tracepoint_pull_ready_48eb90_20261015.py", "main-tracepoint-pull-ready-48eb90", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_READY_C", 190, 192, {"audio_tracepoint_pull_ready_48eb90"}, {"audio_tracepoint_pull_backend_init_47dfec", "audio_tracepoint_pull_write_batch_47e178", "audio_tracepoint_pull_complete_47e220"}, {"audio_tracepoint_pull_ready_48eb90", "audio_tracepoint_pull_backend_ready_20075035", "audio_tracepoint_pull_failure_count_20074ac0"}, "256 native/C critical-section, backend, pending submit, ring batch and failure cases; one-byte and four-byte NOLOAD cells"),
+        ("main-tracepoint-pull-complete-47e220", "bind_main_tracepoint_pull_complete_47e220_20261016.py", "main-tracepoint-pull-complete-47e220", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_COMPLETE_C", 192, 192, {"audio_tracepoint_pull_complete_47e220"}, {"audio_tracepoint_file_close_474910"}, {"audio_tracepoint_pull_complete_47e220"}, "five native/C zero/nonzero handle close-dispatch cases"),
+        ("main-tracepoint-pull-write-batch-47e178", "bind_main_tracepoint_pull_write_batch_47e178_20261016.py", "main-tracepoint-pull-write-batch-47e178", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_WRITE_BATCH_C", 192, 194, {"audio_tracepoint_pull_write_batch_47e178"}, {"audio_tracepoint_open_new_file_47e0c8", "audio_tracepoint_reopen_pending_file_47e144", "audio_tracepoint_file_write_474682"}, {"audio_tracepoint_pull_write_batch_47e178"}, "144 native/C enable, rollover, open, full/short/error write and pending-length cases"),
+        ("main-tracepoint-reopen-pending-file-47e144", "bind_main_tracepoint_reopen_pending_file_47e144_20261016.py", "main-tracepoint-reopen-pending-file-47e144", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_REOPEN_PENDING_C", 194, 195, {"audio_tracepoint_reopen_pending_file_47e144"}, {"audio_tracepoint_format_pull_path_47de0a", "audio_tracepoint_file_open_474550"}, {"audio_tracepoint_reopen_pending_file_47e144"}, "eight native/C pending sequence, append mode, handle and failure cases"),
+        ("main-tracepoint-format-pull-path-47de0a", "bind_main_tracepoint_format_pull_path_47de0a_20261016.py", "main-tracepoint-format-pull-path-47de0a", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FORMAT_PULL_PATH_C", 195, 194, {"audio_tracepoint_format_pull_path_47de0a"}, set(), {"audio_tracepoint_format_pull_path_47de0a"}, "16 native/C destination, capacity, literal and sequence-format cases"),
+        ("main-tracepoint-open-new-file-47e0c8", "bind_main_tracepoint_open_new_file_47e0c8_20261016.py", "main-tracepoint-open-new-file-47e0c8", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_OPEN_NEW_FILE_C", 194, 196, {"audio_tracepoint_open_new_file_47e0c8"}, {"audio_tracepoint_trim_old_files_47e090", "audio_tracepoint_write_state_47df28", "audio_tracepoint_build_header_48ed00"}, {"audio_tracepoint_open_new_file_47e0c8", "audio_tracepoint_next_sequence_20004188", "audio_tracepoint_session_generation_20074ad4"}, "144 native/C sequence, state, wb-open, header and write cases; two NOLOAD RAM words"),
+        ("main-tracepoint-build-header-48ed00", "bind_main_tracepoint_build_header_48ed00_20261016.py", "main-tracepoint-build-header-48ed00", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_TPF1_HEADER_C", 196, 196, {"audio_tracepoint_build_header_48ed00"}, {"audio_tracepoint_version_47dd08"}, {"audio_tracepoint_build_header_48ed00", "audio_tracepoint_put_le16_48ece2", "audio_tracepoint_put_le32_48ecec", "audio_tracepoint_crc32_48ecae"}, "42 native/C TPF1 header, little-endian and CRC cases"),
+        ("main-tracepoint-version-47dd08", "bind_main_tracepoint_version_47dd08_20261016.py", "main-tracepoint-version-47dd08", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_VERSION_C", 196, 195, {"audio_tracepoint_version_47dd08"}, set(), {"audio_tracepoint_version_47dd08", "audio_tracepoint_version_string_78c740"}, "nine native/C version-parser cases and nine-byte source-owned ROM string"),
+        ("main-tracepoint-trim-old-files-47e090", "bind_main_tracepoint_trim_old_files_47e090_20261016.py", "main-tracepoint-trim-old-files-47e090", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_TRIM_OLD_FILES_C", 195, 195, {"audio_tracepoint_trim_old_files_47e090"}, {"audio_tracepoint_list_files_47deb4"}, {"audio_tracepoint_trim_old_files_47e090"}, "21 native/C below-four, deletion and listing-error retention cases"),
+        ("main-tracepoint-list-files-47deb4", "bind_main_tracepoint_list_files_47deb4_20261016.py", "main-tracepoint-list-files-47deb4", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_LIST_FILES_C", 195, 195, {"audio_tracepoint_list_files_47deb4"}, {"audio_tracepoint_parse_file_entry_47de18"}, {"audio_tracepoint_list_files_47deb4"}, "14 native/C directory open, entry-filter, sequence-bound and close cases"),
+        ("main-tracepoint-parse-file-entry-47de18", "bind_main_tracepoint_parse_file_entry_47de18_20261016.py", "main-tracepoint-parse-file-entry-47de18", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PARSE_FILE_ENTRY_C", 195, 194, {"audio_tracepoint_parse_file_entry_47de18"}, set(), {"audio_tracepoint_parse_file_entry_47de18"}, "16 native/C tp_<decimal>.bin filename acceptance, parse and rejection cases"),
+        ("main-tracepoint-write-state-47df28", "bind_main_tracepoint_write_state_47df28_20261016.py", "main-tracepoint-write-state-47df28", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_WRITE_STATE_C", 194, 193, {"audio_tracepoint_write_state_47df28"}, set(), {"audio_tracepoint_write_state_47df28"}, "54 native/C TPS1 record, CRC, wb-open, exact-write and close cases"),
+        ("main-tracepoint-pull-backend-init-47dfec", "bind_main_tracepoint_pull_backend_init_47dfec_20261016.py", "main-tracepoint-pull-backend-init-47dfec", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_PULL_BACKEND_INIT_C", 193, 195, {"audio_tracepoint_pull_backend_init_47dfec"}, {"audio_tracepoint_storage_mkdir_474a76", "audio_tracepoint_read_state_47df8a", "audio_tracepoint_file_size_47de7a"}, {"audio_tracepoint_pull_backend_init_47dfec"}, "216 native/C generation, list, resume, state-write and failure cases"),
+        ("main-tracepoint-file-size-47de7a", "bind_main_tracepoint_file_size_47de7a_20261016.py", "main-tracepoint-file-size-47de7a", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_SIZE_C", 195, 194, {"audio_tracepoint_file_size_47de7a"}, set(), {"audio_tracepoint_file_size_47de7a"}, "32 native/C open, seek, tell, close and positive-size cases using existing facade"),
+        ("main-tracepoint-read-state-47df8a", "bind_main_tracepoint_read_state_47df8a_20261016.py", "main-tracepoint-read-state-47df8a", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_READ_STATE_C", 194, 193, {"audio_tracepoint_read_state_47df8a"}, set(), {"audio_tracepoint_read_state_47df8a"}, "60 native/C TPS1 magic, CRC, next-sequence floor and read-failure cases"),
+        ("main-tracepoint-storage-mkdir-474a76", "bind_main_tracepoint_storage_mkdir_474a76_20261016.py", "main-tracepoint-storage-mkdir-474a76", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_STORAGE_MKDIR_C", 193, 193, {"audio_tracepoint_storage_mkdir_474a76"}, {"audio_file_lfs_mkdir_4cfc5c"}, {"audio_tracepoint_storage_mkdir_474a76"}, "60 native/C ready, path, mutex, LittleFS and errno cases"),
+        ("main-file-lfs-mkdir-4cfc5c", "bind_main_file_lfs_mkdir_4cfc5c_20261016.py", "main-file-lfs-mkdir-4cfc5c", "PASS_EXPERIMENTAL_MAIN_FILE_LFS_MKDIR_WRAPPER_C", 193, 193, {"audio_file_lfs_mkdir_4cfc5c"}, {"audio_file_lfs_mkdir_core_4cd3aa"}, {"audio_file_lfs_mkdir_4cfc5c"}, "20 native/C pointer, zero-flags and return-forwarding cases"),
+        ("main-tracepoint-file-open-474550", "bind_main_tracepoint_file_open_474550_20261016.py", "main-tracepoint-file-open-474550", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_OPEN_C", 193, 192, {"audio_tracepoint_file_open_474550"}, set(), {"audio_tracepoint_file_open_474550"}, "48 native/C allocation, mode, mutex, LittleFS and result cases"),
+        ("main-tracepoint-file-sync-474910", "bind_main_tracepoint_file_sync_474910_20261016.py", "main-tracepoint-file-sync-474910", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_SYNC_C", 192, 192, {"audio_tracepoint_file_close_474910"}, {"audio_file_lfs_sync_4cfb08"}, {"audio_tracepoint_file_close_474910"}, "30 native/C special-stream, mutex, LittleFS sync, errno and return cases"),
+        ("main-file-lfs-sync-4cfb08", "bind_main_file_lfs_sync_4cfb08_20261016.py", "main-file-lfs-sync-4cfb08", "PASS_EXPERIMENTAL_MAIN_FILE_LFS_SYNC_C", 192, 191, {"audio_file_lfs_sync_4cfb08"}, set(), {"audio_file_lfs_sync_4cfb08"}, "32 native/C membership guard, diagnostic and sync-core cases"),
+        ("main-tracepoint-file-write-474682", "bind_main_tracepoint_file_write_474682_20261016.py", "main-tracepoint-file-write-474682", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_FILE_WRITE_C", 191, 190, {"audio_tracepoint_file_write_474682"}, set(), {"audio_tracepoint_file_write_474682"}, "75 native/C fwrite, LittleFS and five logging-mask cases"),
+        ("main-file-lfs-mkdir-core-4cd3aa", "bind_main_file_lfs_mkdir_core_4cd3aa_20261016.py", "main-file-lfs-mkdir-core-4cd3aa", "PASS_EXPERIMENTAL_MAIN_FILE_LFS_MKDIR_CORE_C", 190, 189, {"audio_file_lfs_mkdir_core_4cd3aa"}, set(), {"audio_file_lfs_mkdir_core_4cd3aa"}, "16 native/C force, path, split-list, commit and orphan cases"),
+        ("main-tracepoint-delete-all-files-5ee650", "bind_main_tracepoint_delete_all_files_5ee650_20261016.py", "main-tracepoint-delete-all-files-5ee650", "PASS_EXPERIMENTAL_MAIN_TRACEPOINT_DELETE_ALL_FILES_C", 189, 188, {"audio_tracepoint_delete_all_files_5ee650"}, set(), {"audio_tracepoint_delete_all_files_5ee650"}, "70 native/C open, directory entry, unlink, close and logging-mask cases"),
+        ("main-setting-common-data-4668ae", "bind_main_setting_common_data_4668ae_20261016.py", "main-setting-common-data-4668ae", "PASS_EXPERIMENTAL_MAIN_SETTING_COMMON_DATA_C", 188, 190, {"audio_uart_registry_callback_4668ae"}, {"audio_setting_parse_data_package_49b1f8", "audio_setting_process_data_466976", "audio_setting_handle_command5_46bbb4"}, {"audio_uart_registry_callback_4668ae"}, "360 native/C settings data, logging-mask, parse and command-5 cases"),
+        ("main-setting-data-recv-466976", "bind_main_setting_data_recv_466976_20261016.py", "main-setting-data-recv-466976", "PASS_EXPERIMENTAL_MAIN_SETTING_DATA_RECV_C", 190, 192, {"audio_setting_process_data_466976"}, {"audio_setting_dispatch_message_466abc", "audio_setting_serialize_response_49b900", "audio_setting_serialize_local_response_49ba58"}, {"audio_setting_process_data_466976"}, "180 native/C null, message-kind, logging and serializer-result cases"),
+        ("main-setting-response-49b900", "bind_main_setting_response_49b900_20261016.py", "main-setting-response-49b900", "PASS_EXPERIMENTAL_MAIN_SETTING_RESPONSE_C", 192, 192, {"audio_setting_serialize_response_49b900"}, {"audio_setting_response_encode_49b3d4"}, {"audio_setting_serialize_response_49b900", "audio_settings_response_command_id_20074860"}, "180 native/C role, command, encoder, BLE-send and logging cases; four-byte command RAM"),
+        ("main-setting-response-encode-49b3d4", "bind_main_setting_response_encode_49b3d4_20261016.py", "main-setting-response-encode-49b3d4", "PASS_EXPERIMENTAL_MAIN_SETTING_RESPONSE_ENCODER_C", 192, 191, {"audio_setting_response_encode_49b3d4"}, set(), {"audio_setting_response_encode_49b3d4", "audio_settings_response_magic_20074864"}, "480 native/C invalid-input, 104-byte staging, nanopb stream, logging and encode-result cases"),
+        ("main-setting-local-response-49ba58", "bind_main_setting_local_response_49ba58_20261016.py", "main-setting-local-response-49ba58", "PASS_EXPERIMENTAL_MAIN_SETTING_LOCAL_RESPONSE_C", 191, 191, {"audio_setting_serialize_local_response_49ba58"}, {"audio_setting_local_response_encode_49b7c4"}, {"audio_setting_serialize_local_response_49ba58"}, "180 native/C local-data role, command, encoder, BLE-send and logging cases"),
+        ("main-setting-local-response-encode-49b7c4", "bind_main_setting_local_response_encode_49b7c4_20261016.py", "main-setting-local-response-encode-49b7c4", "PASS_EXPERIMENTAL_MAIN_SETTING_LOCAL_RESPONSE_ENCODER_C", 191, 190, {"audio_setting_local_response_encode_49b7c4"}, set(), {"audio_setting_local_response_encode_49b7c4"}, "960 native/C status-build, nanopb, logging and invalid-input cases"),
+        ("main-setting-parse-49b1f8", "bind_main_setting_parse_49b1f8_20261016.py", "main-setting-parse-49b1f8", "PASS_EXPERIMENTAL_MAIN_SETTING_PARSE_C", 190, 189, {"audio_setting_parse_data_package_49b1f8"}, set(), {"audio_setting_parse_data_package_49b1f8", "audio_setting_is_duplicate_message_49b198", "audio_settings_last_received_magic_20074868"}, "320 native/C parser and 128 duplicate-suppression cases"),
+        ("main-setting-dispatch-466abc", "bind_main_setting_dispatch_466abc_20261016.py", "main-setting-dispatch-466abc", "PASS_EXPERIMENTAL_MAIN_SETTING_DISPATCH_C", 189, 199, {"audio_setting_dispatch_message_466abc"}, {"audio_setting_dispatch_type1_466bec", "audio_setting_dispatch_type2_466e1c", "audio_setting_dispatch_type3_466ea2", "audio_setting_dispatch_type4_466f28", "audio_setting_dispatch_type5_467134", "audio_setting_dispatch_type6_46713e", "audio_setting_dispatch_type8_4671a2", "audio_setting_dispatch_type9_467206", "audio_setting_dispatch_type10_467308", "audio_setting_dispatch_type11_467540", "audio_setting_dispatch_type12_467c34"}, {"audio_setting_dispatch_message_466abc"}, "150 native/C null, all twelve type arms, unknown-type and logging-mask cases"),
+        ("main-setting-type5-467134", "bind_main_setting_type5_467134_20261016.py", "main-setting-type5-467134", "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE5_C", 199, 199, {"audio_setting_dispatch_type5_467134"}, {"audio_wear_detect_set_enable_49eb1e"}, {"audio_setting_dispatch_type5_467134"}, "10 native/C low-byte forwarding cases"),
+        ("main-wear-detect-enable-49eb1e", "bind_main_wear_detect_enable_49eb1e_20261016.py", "main-wear-detect-enable-49eb1e", "PASS_EXPERIMENTAL_MAIN_WEAR_DETECT_ENABLE_C", 199, 199, {"audio_wear_detect_set_enable_49eb1e"}, {"audio_wear_detect_handle_status_change_49ebb6"}, {"audio_wear_detect_get_enable_49ead8", "audio_wear_detect_set_enable_49eb1e"}, "200 native/C wear-enable logging, config-change and status-forwarding cases"),
+        ("main-wear-detect-status-49ebb6", "bind_main_wear_detect_status_49ebb6_20261016.py", "main-wear-detect-status-49ebb6", "PASS_EXPERIMENTAL_MAIN_WEAR_DETECT_STATUS_C", 199, 204, {"audio_wear_detect_handle_status_change_49ebb6"}, {"audio_wear_child_46805a", "audio_wear_child_46b0ec", "audio_wear_child_474100", "audio_wear_child_47432c", "audio_wear_child_47e320", "audio_wear_child_502bf0"}, {"audio_wear_detect_handle_status_change_49ebb6"}, "420 native/C wear, unwear, invalid-state, role, link and logging cases"),
+        ("main-onboarding-start-46805a", "bind_main_onboarding_start_46805a_20261016.py", "main-onboarding-start-46805a", "PASS_EXPERIMENTAL_MAIN_ONBOARDING_START_C", 204, 203, {"audio_wear_child_46805a"}, set(), {"audio_onboarding_flag_get_4a7832", "audio_wear_child_46805a"}, "84 native/C onboarding flag, display membership, wake and logging cases"),
+        ("main-wear-child-502bf0", "bind_main_wear_child_502bf0_20261016.py", "main-wear-child-502bf0", "PASS_EXPERIMENTAL_MAIN_WEAR_CHILD_502BF0_C", 203, 203, {"audio_wear_child_502bf0"}, {"audio_wear_child_51308a"}, {"audio_wear_child_502bf0"}, "10 native/C full-word forwarding cases"),
+        ("main-wear-child-51308a", "bind_main_wear_child_51308a_20261016.py", "main-wear-child-51308a", "PASS_EXPERIMENTAL_MAIN_WEAR_CHILD_51308A_C", 203, 202, {"audio_wear_child_51308a"}, set(), {"audio_wear_child_51308a"}, "10 native/C exact four-word request cases; existing 24-case input-message C provider"),
+        ("main-settings-input-check-46b0ec", "bind_main_settings_input_check_46b0ec_20261016.py", "main-settings-input-check-46b0ec", "PASS_EXPERIMENTAL_MAIN_SETTINGS_INPUT_CHECK_C", 202, 201, {"audio_wear_child_46b0ec"}, set(), {"audio_wear_child_46b0ec", "audio_wear_input_enabled_49eb96"}, "252 native/C command, OTA, wear, box, silent and logging-mask cases"),
+        ("main-setting-type6-46713e", "bind_main_setting_type6_46713e_20261016.py", "main-setting-type6-46713e", "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE6_C", 201, 201, {"audio_setting_dispatch_type6_46713e"}, {"audio_silent_mode_set_from_app_46921c"}, {"audio_setting_dispatch_type6_46713e"}, "30 native/C silent-mode values and logging-mask cases"),
+        ("main-setting-type8-4671a2", "bind_main_setting_type8_4671a2_20261016.py", "main-setting-type8-4671a2", "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE8_C", 201, 200, {"audio_setting_dispatch_type8_4671a2"}, set(), {"audio_setting_dispatch_type8_4671a2"}, "120 native/C advanced-feature, service-mode, display-stop and logging-mask cases"),
+        ("main-setting-type9-467206", "bind_main_setting_type9_467206_20261016.py", "main-setting-type9-467206", "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE9_C", 200, 199, {"audio_setting_dispatch_type9_467206"}, set(), {"audio_setting_dispatch_type9_467206", "audio_setting_unit_record_get_466010"}, "30 native/C unit-setting, record-getter, record-write and logging-mask cases"),
+        ("main-setting-display-start-466890", "bind_main_setting_display_start_466890_20261016.py", "main-setting-display-start-466890", "PASS_EXPERIMENTAL_MAIN_SETTING_DISPLAY_START_C", 199, 199, set(), set(), {"audio_setting_display_start_466890"}, "6 native/C terminal-mode display-start selector cases"),
+        ("main-dashboard-auto-close-reset-49c0dc", "bind_main_dashboard_auto_close_reset_49c0dc_20261016.py", "main-dashboard-auto-close-reset-49c0dc", "PASS_EXPERIMENTAL_MAIN_DASHBOARD_AUTO_CLOSE_RESET_C", 199, 199, set(), set(), {"audio_dashboard_auto_close_current_200743d0", "audio_dashboard_auto_close_default_200743d4", "audio_dashboard_auto_close_reset_49c0dc"}, "90 native/C wake, membership, logging and bounded RAM-copy cases"),
+        ("main-setting-coordinates-466e1c-466ea2", "bind_main_setting_coordinates_466e1c_466ea2_20261016.py", "main-setting-coordinates-466e1c-466ea2", "PASS_EXPERIMENTAL_MAIN_SETTING_COORDINATES_C", 199, 197, {"audio_setting_dispatch_type2_466e1c", "audio_setting_dispatch_type3_466ea2"}, set(), {"audio_setting_dispatch_type2_466e1c", "audio_setting_dispatch_type3_466ea2"}, "480 native/C X/Y config-write, display and peer-event cases"),
+        ("main-setting-type12-467c34", "bind_main_setting_type12_467c34_20261016.py", "main-setting-type12-467c34", "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE12_C", 197, 196, {"audio_setting_dispatch_type12_467c34"}, set(), {"audio_setting_dispatch_type12_467c34"}, "225 native/C null, turn-on, wake, service-mode and logging-mask cases"),
+        ("main-setting-gesture-apptype-46658e", "bind_main_setting_gesture_apptype_46658e_20261016.py", "main-setting-gesture-apptype-46658e", "PASS_EXPERIMENTAL_MAIN_SETTING_GESTURE_APPTYPE_C", 196, 196, set(), set(), {"audio_setting_gesture_apptype_46658e"}, "270 native/C gesture record-write, invalid-operation and logging-mask cases"),
+        ("main-setting-type10-467308", "bind_main_setting_type10_467308_20261016.py", "main-setting-type10-467308", "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE10_C", 196, 195, {"audio_setting_dispatch_type10_467308"}, set(), {"audio_setting_dispatch_type10_467308"}, "45 native/C gesture-list null, empty, count 1-255 and logging-mask cases"),
+        ("main-setting-brightness-refresh-46c18c", "bind_main_setting_brightness_refresh_46c18c_20261016.py", "main-setting-brightness-refresh-46c18c", "PASS_EXPERIMENTAL_MAIN_SETTING_BRIGHTNESS_REFRESH_C", 195, 195, set(), set(), {"audio_setting_brightness_refresh_46c18c"}, "27 native/C wake, role and live-setting callback cases"),
+        ("main-setting-manual-brightness-46c1c8", "bind_main_setting_manual_brightness_46c1c8_20261016.py", "main-setting-manual-brightness-46c1c8", "PASS_EXPERIMENTAL_MAIN_SETTING_MANUAL_BRIGHTNESS_C", 195, 196, set(), {"audio_als_manual_set_brightness_4ae81c"}, {"audio_setting_als_scale_get_4ae946", "audio_setting_manual_brightness_46c1c8"}, "147 native/C clamp, live-settings, ALS-result and scale-getter cases"),
+        ("main-als-manual-brightness-4ae81c", "bind_main_als_manual_brightness_4ae81c_20261016.py", "main-als-manual-brightness-4ae81c", "PASS_EXPERIMENTAL_MAIN_ALS_MANUAL_BRIGHTNESS_C", 196, 197, {"audio_als_manual_set_brightness_4ae81c"}, {"audio_als_manual_set_target_4ade36", "audio_als_manual_recalculate_4adcd8"}, {"audio_als_manual_set_brightness_4ae81c", "audio_als_manual_ready", "audio_als_manual_level", "audio_als_manual_level_copy", "audio_als_manual_pending"}, "240 native/C readiness, clamp, helper, state and logging cases"),
+        ("main-als-manual-recalculate-4adcd8", "bind_main_als_manual_recalculate_4adcd8_20261016.py", "main-als-manual-recalculate-4adcd8", "PASS_EXPERIMENTAL_MAIN_ALS_MANUAL_RECALCULATE_C", 197, 196, {"audio_als_manual_recalculate_4adcd8"}, set(), {"audio_als_manual_recalculate_4adcd8", "audio_als_manual_accumulator", "audio_als_manual_sample", "audio_als_manual_window"}, "81 native/C ALS state clear and 20-byte buffer-fill cases"),
+        ("main-als-manual-target-4ade36", "bind_main_als_manual_target_4ade36_20261016.py", "main-als-manual-target-4ade36", "PASS_EXPERIMENTAL_MAIN_ALS_MANUAL_TARGET_C", 196, 197, {"audio_als_manual_set_target_4ade36"}, {"audio_als_first_curve_percent_4ad9e2", "audio_als_manual_target_scale_4addb6"}, {"audio_als_manual_set_target_4ade36", "audio_als_manual_target_count"}, "625 native/C ALS curve-branch, scale, arithmetic and counter cases"),
+        ("main-als-curve-first-percent-4ad9e2", "bind_main_als_curve_first_percent_4ad9e2_20261016.py", "main-als-curve-first-percent-4ad9e2", "PASS_EXPERIMENTAL_MAIN_ALS_CURVE_FIRST_PERCENT_C", 197, 196, {"audio_als_first_curve_percent_4ad9e2"}, set(), {"audio_als_first_curve_percent_4ad9e2"}, "stock first-curve entry and native/C getter case"),
+        ("main-als-manual-target-scale-4addb6", "bind_main_als_manual_target_scale_4addb6_20261016.py", "main-als-manual-target-scale-4addb6", "PASS_EXPERIMENTAL_MAIN_ALS_MANUAL_TARGET_SCALE_C", 196, 195, {"audio_als_manual_target_scale_4addb6"}, set(), {"audio_als_manual_target_scale_4addb6"}, "336 native/C request-clamp, 64-bit numerator and scale-bound cases"),
+        ("main-setting-type1-brightness-466bec", "bind_main_setting_type1_brightness_466bec_20261016.py", "main-setting-type1-brightness-466bec", "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE1_BRIGHTNESS_C", 195, 194, {"audio_setting_dispatch_type1_466bec"}, set(), {"audio_setting_dispatch_type1_466bec"}, "200 native/C null, unknown, auto, manual and calibration route cases"),
+        ("main-setting-type4-head-up-466f28", "bind_main_setting_type4_head_up_466f28_20261016.py", "main-setting-type4-head-up-466f28", "PASS_EXPERIMENTAL_MAIN_SETTING_TYPE4_HEAD_UP_C", 194, 194, {"audio_setting_dispatch_type4_466f28"}, {"audio_setting_head_up_configure_46c524"}, {"audio_setting_dispatch_type4_466f28"}, "1260 native/C head-up switch, angle, calibration UI, role and log cases"),
+        ("main-setting-head-up-configure-46c524", "bind_main_setting_head_up_configure_46c524_20261016.py", "main-setting-head-up-configure-46c524", "PASS_EXPERIMENTAL_MAIN_SETTING_HEAD_UP_CONFIGURE_C", 194, 194, {"audio_setting_head_up_configure_46c524"}, {"audio_hub_parameter_config_4a6e3c"}, {"audio_setting_head_up_configure_46c524"}, "1260 native/C live/previous settings, signed-angle, HUB and log cases"),
+        ("main-hub-parameter-config-4a6e3c", "bind_main_hub_parameter_config_4a6e3c_20261016.py", "main-hub-parameter-config-4a6e3c", "PASS_EXPERIMENTAL_MAIN_HUB_PARAMETER_CONFIG_C", 194, 196, {"audio_hub_parameter_config_4a6e3c"}, {"audio_hub_semantic_motion_threshold_4a4e8c", "audio_hub_semantic_motion_period_4a4ec0", "audio_hub_imu_accel_config_4a52a2"}, {"audio_hub_parameter_config_4a6e3c"}, "405 native/C HUB role, type-dispatch and logging cases"),
+        ("main-hub-semantic-motion-period-4a4ec0", "bind_main_hub_semantic_motion_period_4a4ec0_20261016.py", "main-hub-semantic-motion-period-4a4ec0", "PASS_EXPERIMENTAL_MAIN_HUB_SEMANTIC_MOTION_PERIOD_C", 196, 195, {"audio_hub_semantic_motion_period_4a4ec0"}, set(), {"audio_hub_semantic_motion_period_4a4ec0", "audio_hub_motion_period_cell", "audio_hub_motion_duration_cell"}, "32 native/C two-cell motion period and zero-return cases"),
+        ("main-hub-imu-accel-config-4a52a2", "bind_main_hub_imu_accel_config_4a52a2_20261016.py", "main-hub-imu-accel-config-4a52a2", "PASS_EXPERIMENTAL_MAIN_HUB_IMU_ACCEL_CONFIG_C", 195, 194, {"audio_hub_imu_accel_config_4a52a2"}, set(), {"audio_hub_imu_accel_config_4a52a2", "audio_hub_imu_report_interval_cell"}, "80 native/C IMU interval boundary and logging cases"),
+        ("main-hub-semantic-motion-threshold-4a4e8c", "bind_main_hub_semantic_motion_threshold_4a4e8c_20261016.py", "main-hub-semantic-motion-threshold-4a4e8c", "PASS_EXPERIMENTAL_MAIN_HUB_SEMANTIC_MOTION_THRESHOLD_C", 194, 193, {"audio_hub_semantic_motion_threshold_4a4e8c"}, set(), {"audio_hub_semantic_motion_threshold_4a4e8c", "audio_hub_motion_threshold_cell", "audio_hub_motion_threshold_sine_cell"}, "22 stock/C threshold, controlled double arithmetic and trig-call cases"),
+        ("main-display-deinit-force-47432c", "bind_main_display_deinit_force_47432c_20261016.py", "main-display-deinit-force-47432c", "PASS_EXPERIMENTAL_MAIN_DISPLAY_DEINIT_FORCE_C", 193, 192, {"audio_wear_child_47432c"}, set(), {"audio_wear_child_47432c", "audio_display_hw_initialized_200744ec"}, "40 native/C display force-deinit state, queue and logging cases"),
+        ("main-display-init-force-474100", "bind_main_display_init_force_474100_20261016.py", "main-display-init-force-474100", "PASS_EXPERIMENTAL_MAIN_DISPLAY_INIT_FORCE_C", 192, 191, {"audio_wear_child_474100"}, set(), {"audio_wear_child_474100"}, "160 native/C display force-init wake, queue and logging cases"),
+        ("main-onboarding-wear-notify-47e320", "bind_main_onboarding_wear_notify_47e320_20261016.py", "main-onboarding-wear-notify-47e320", "PASS_EXPERIMENTAL_MAIN_ONBOARDING_WEAR_NOTIFY_C", 191, 191, {"audio_wear_child_47e320"}, {"audio_onboarding_event_encode_4a8368"}, {"audio_wear_child_47e320"}, "360 native/C onboarding wear-gating, event and logging cases"),
+        ("main-onboarding-event-encode-4a8368", "bind_main_onboarding_event_encode_4a8368_20261016.py", "main-onboarding-event-encode-4a8368", "PASS_EXPERIMENTAL_MAIN_ONBOARDING_EVENT_ENCODE_C", 191, 190, {"audio_onboarding_event_encode_4a8368"}, set(), {"audio_onboarding_event_encode_4a8368", "audio_onboarding_event_descriptor_779c94", "audio_onboarding_event_packet_200f612c", "audio_onboarding_event_state_200f623c", "audio_onboarding_event_sequence_20074ffb"}, "120 native/C nanopb event, descriptor graph, sequence and BLE-dispatch cases"),
+        ("main-silent-mode-set-from-app-46921c", "bind_main_silent_mode_set_from_app_46921c_20261016.py", "main-silent-mode-set-from-app-46921c", "PASS_EXPERIMENTAL_MAIN_SILENT_MODE_SET_FROM_APP_C", 190, 190, {"audio_silent_mode_set_from_app_46921c"}, {"audio_sync_send_to_both_ext_464f76"}, {"audio_silent_mode_set_from_app_46921c", "audio_silent_mode_showing_ui_2007501f"}, "1920 native/C silent-mode state, display and send cases"),
+        ("main-sync-send-to-both-ext-464f76", "bind_main_sync_send_to_both_ext_464f76_20261016.py", "main-sync-send-to-both-ext-464f76", "PASS_EXPERIMENTAL_MAIN_SYNC_SEND_TO_BOTH_EXT_C", 190, 189, {"audio_sync_send_to_both_ext_464f76"}, set(), {"audio_sync_send_to_both_ext_464f76"}, "500 native/C sync packet, allocation, queue and logging cases"),
+        ("main-setting-dominant-hand-467540", "bind_main_setting_dominant_hand_467540_20261016.py", "main-setting-dominant-hand-467540", "PASS_EXPERIMENTAL_MAIN_SETTING_DOMINANT_HAND_C", 189, 192, {"audio_setting_dispatch_type11_467540"}, {"audio_ring_connect_policy_on_hand_49f15a", "audio_ring_address_is_unset_4a26e8", "audio_ble_master_set_target_hand_4a2068", "audio_ble_master_hand_changed_4a2948"}, {"audio_setting_dispatch_type11_467540"}, "960 native/C dominant-hand record, policy, reply and logging cases"),
+        ("main-ring-address-is-unset-4a26e8", "bind_main_ring_address_is_unset_4a26e8_20261016.py", "main-ring-address-is-unset-4a26e8", "PASS_EXPERIMENTAL_MAIN_RING_ADDRESS_IS_UNSET_C", 192, 191, {"audio_ring_address_is_unset_4a26e8"}, set(), {"audio_ring_address_is_unset_4a26e8"}, "91 native/C null, all-FF and byte-mutation cases"),
+        ("main-ring-connect-policy-on-hand-49f15a", "bind_main_ring_connect_policy_on_hand_49f15a_20261016.py", "main-ring-connect-policy-on-hand-49f15a", "PASS_EXPERIMENTAL_MAIN_RING_CONNECT_POLICY_ON_HAND_C", 191, 191, {"audio_ring_connect_policy_on_hand_49f15a"}, {"audio_ble_ring_policy_get_state_49f05c"}, {"audio_ring_connect_policy_on_hand_49f15a"}, "270 native/C dominant-hand ring policy state and logging cases"),
+        ("main-ring-policy-get-state-49f05c", "bind_main_ring_policy_get_state_49f05c_20261016.py", "main-ring-policy-get-state-49f05c", "PASS_EXPERIMENTAL_MAIN_RING_POLICY_GET_STATE_C", 191, 190, {"audio_ble_ring_policy_get_state_49f05c"}, set(), {"audio_ble_ring_policy_get_state_49f05c"}, "256 native/C ring state timeout, tick and RAM cases"),
+        ("main-ble-master-set-target-hand-4a2068", "bind_main_ble_master_set_target_hand_4a2068_20261016.py", "main-ble-master-set-target-hand-4a2068", "PASS_EXPERIMENTAL_MAIN_BLE_MASTER_SET_TARGET_HAND_C", 190, 189, {"audio_ble_master_set_target_hand_4a2068"}, set(), {"audio_ble_master_set_target_hand_4a2068"}, "80 native/C master target copy, zero and logging cases through existing provider"),
+        ("main-ble-master-hand-changed-4a2948", "bind_main_ble_master_hand_changed_4a2948_20261016.py", "main-ble-master-hand-changed-4a2948", "PASS_EXPERIMENTAL_MAIN_BLE_MASTER_HAND_CHANGED_C", 189, 194, {"audio_ble_master_hand_changed_4a2948"}, {"audio_ble_master_begin_failure_notify_4a1546", "audio_ble_master_reset_scene_pending_4a2658", "audio_ble_peer_ring_status_47d8f0", "audio_ble_ring_policy_cancel_connect_timeout_49f5f8", "audio_ble_ring_policy_schedule_connect_timeout_49f4a8", "audio_ble_ring_policy_schedule_reconnect_timeout_49f552"}, {"audio_ble_master_hand_changed_4a2948"}, "280 native/C owner, non-owner, connection, cleanup and logging cases"),
+        ("main-ble-peer-ring-status-47d8f0", "bind_main_ble_peer_ring_status_47d8f0_20261016.py", "main-ble-peer-ring-status-47d8f0", "PASS_EXPERIMENTAL_MAIN_BLE_PEER_RING_STATUS_C", 194, 193, {"audio_ble_peer_ring_status_47d8f0"}, set(), {"audio_ble_peer_ring_status_47d8f0"}, "256 native/C packed peer-ring status values"),
+        ("main-ble-master-reset-scene-pending-4a2658", "bind_main_ble_master_reset_scene_pending_4a2658_20261016.py", "main-ble-master-reset-scene-pending-4a2658", "PASS_EXPERIMENTAL_MAIN_BLE_MASTER_RESET_SCENE_PENDING_C", 193, 192, {"audio_ble_master_reset_scene_pending_4a2658"}, set(), {"audio_ble_master_reset_scene_pending_4a2658"}, "24 native/C scene-pending state, logging and delayed-callback cases"),
+        ("main-ble-master-begin-failure-notify-4a1546", "bind_main_ble_master_begin_failure_notify_4a1546_20261016.py", "main-ble-master-begin-failure-notify-4a1546", "PASS_EXPERIMENTAL_MAIN_BLE_MASTER_BEGIN_FAILURE_NOTIFY_C", 192, 191, {"audio_ble_master_begin_failure_notify_4a1546"}, set(), {"audio_ble_master_begin_failure_notify_4a1546"}, "54 native/C failure-notify status and logging cases"),
+        ("main-ring-policy-cancel-connect-timeout-49f5f8", "bind_main_ring_policy_cancel_connect_timeout_49f5f8_20261016.py", "main-ring-policy-cancel-connect-timeout-49f5f8", "PASS_EXPERIMENTAL_MAIN_RING_POLICY_CANCEL_CONNECT_TIMEOUT_C", 191, 190, {"audio_ble_ring_policy_cancel_connect_timeout_49f5f8"}, set(), {"audio_ble_ring_policy_cancel_connect_timeout_49f5f8"}, "18 native/C timeout-cancel pending state, callback and log cases"),
+        ("main-ring-policy-schedule-timeouts-49f4a8-49f552", "bind_main_ring_policy_schedule_timeouts_49f4a8_49f552_20261016.py", "main-ring-policy-schedule-timeouts-49f4a8-49f552", "PASS_EXPERIMENTAL_MAIN_RING_POLICY_SCHEDULE_TIMEOUTS_C", 190, 188, {"audio_ble_ring_policy_schedule_connect_timeout_49f4a8", "audio_ble_ring_policy_schedule_reconnect_timeout_49f552"}, set(), {"audio_ble_ring_policy_schedule_connect_timeout_49f4a8", "audio_ble_ring_policy_schedule_reconnect_timeout_49f552"}, "36 native/C connect and reconnect callback scheduling cases"),
+        ("main-system-close-common-data-469d48", "bind_main_system_close_common_data_469d48_20261016.py", "main-system-close-common-data-469d48", "PASS_EXPERIMENTAL_MAIN_SYSTEM_CLOSE_COMMON_DATA_C", 188, 188, {"audio_uart_registry_callback_469d48"}, {"audio_system_close_active_app_get_443504"}, {"audio_uart_registry_callback_469d48", "audio_system_close_selected_20075026", "audio_system_close_payload_20074a04"}, "768 native/C system-close command, app-gate, state and logging cases"),
+        ("main-system-close-active-app-get-443504", "bind_main_system_close_active_app_get_443504_20261016.py", "main-system-close-active-app-get-443504", "PASS_EXPERIMENTAL_MAIN_SYSTEM_CLOSE_ACTIVE_APP_GET_C", 188, 187, {"audio_system_close_active_app_get_443504"}, set(), {"audio_system_close_active_app_get_443504"}, "192 native/C running-app getter cases through existing display-state provider"),
+    ]:
+        stage_script = HERE / script_name
+        stage_result = subprocess.run([sys.executable, str(stage_script)],
+                                      check=True, capture_output=True, text=True)
+        stage_path = G2 / "build/c-firmware/20261015" / receipt_name / "receipt.json"
+        stage_receipt = json.loads(stage_path.read_text())
+        if stage_receipt["status"] != status:
+            raise RuntimeError(f"{stage} status changed")
+        base = file_from_receipt(stage_receipt, "base_object", "base_sha256")
+        linked = file_from_receipt(stage_receipt, "linked_object", "linked_sha256")
+        if base != previous or len(imports(base)) != before_count or \
+                len(imports(linked)) != after_count or \
+                imports(base) - imports(linked) != resolved or \
+                imports(linked) - imports(base) != added or \
+                set(stage_receipt["source_owned_symbols"]) != owned or \
+                sha(ROOT / stage_receipt["source"]) != stage_receipt["source_sha256"]:
+            raise RuntimeError(f"{stage} handoff changed")
+        records.append({
+            "stage": stage, "binder": str(stage_script.relative_to(ROOT)),
+            "binder_sha256": sha(stage_script), "status": status,
+            "binder_output": stage_result.stdout.strip(),
+            "receipt": str(stage_path.relative_to(ROOT)), "receipt_sha256": sha(stage_path),
+            "source": stage_receipt["source"],
+            "source_sha256": stage_receipt["source_sha256"],
+            "source_owned_symbols": stage_receipt["source_owned_symbols"],
+            "base_object": str(base.relative_to(ROOT)), "base_sha256": sha(base),
+            "linked_object": str(linked.relative_to(ROOT)), "linked_sha256": sha(linked),
+            "unresolved_before": before_count, "unresolved_after": after_count,
+            "imports_resolved": sorted(resolved), "imports_added": sorted(added),
+            "comparison_scope": scope,
+        })
+        previous = linked
     OUT.mkdir(parents=True, exist_ok=True)
     receipt = {
         "status": "PASS_EXPERIMENTAL_MAIN_POST_TAIL_C_REPLAY",
@@ -4726,10 +5506,10 @@ def main():
         "linked_object": str(previous.relative_to(ROOT)), "linked_object_sha256": sha(previous),
         "unresolved_before": 367, "unresolved_after": len(imports(previous)),
         "source_complete": False, "full_payload_linked": False,
-        "limits": ["This replays one hundred ninety-two bounded C source/data stages after the corrected Main archive; 231 imports remain. The LV renderer, all-mode area alignment, bounded object state application, packed/sparse style lookup, transition-kind priority scan, transition-style lookup and controlled insertion, per-property state refresh, all three transition callbacks, scroll-to-view step, and Nema graphics-mode call name are C-bound; the Nema encoder has 2420 native comparisons. Transition-style allocation failure remains open; live image decoder, display dispatch, allocation fatal loop, full page layout, final stock placement and hardware behavior remain open.",
+        "limits": ["This replays four hundred forty bounded C source/data stages after the corrected Main archive; 187 imports remain; the dominant-hand handler and all six descendants exposed by its parent are C-bound. Cordio connection action and interface tables, the 80-byte five-state/eight-event matrix and state-machine executor, no-op/close/closed/failed/opened/HCI-updated leaves, empty handlers, message/HCI handlers, secondary message and HCI handlers, all eight secondary HCI callback actions, reset/defaults, special-state and address CCB lookups, CCB allocation/deallocation, HCI connection commands and scan-stop command, three-slot connection count, five-slot callback fanout, CTE and privacy event forwarding, out-of-range update action lookup, invalid-set diagnostic, and update entry trace are C-bound under controlled comparisons. The eight-slot DM dispatch table at 0x78a880 is source-owned, with the stack interface alias at slot three; its message dispatcher forwards the message pointer. All eight DM dispatch table entries have C bodies: security HCI dispatch 0x4d2364, scan-start 0x536820, the 0x4d2544 forwarder to SmpDbInit at 0x542288, reset 0x536918, and HCI dispatch 0x53694c with scan-complete child 0x5368b6 are C-bound. The security dispatch, its exposed LTK, LESC, SMP indication and STK children, and three-slot security, PHY, LESC, privacy AES and primary privacy interfaces with message/HCI handlers are C-bound. All six newly exposed privacy HCI/DM child calls have C bodies, while native logging branches of the device-privacy forwarder remain open. The legacy advertising reset, message and HCI handlers, eight message actions, configuration child, address-mode conversion, LE parameter command and three data/enable HCI commands are C-bound; the three-slot advertising interface, synthetic directed connection-completion record and dynamic downstream connection callback dispatch are source-owned. All nonempty connection interface handlers in the three Cordio records are C-bound. The DM CCB and callback registry share a 196-byte C-owned block covering the reset's highest observed write; the old 144-byte weak BSS remains in the overlay and final RAM placement is open. The advertising control overlay rebinds 24 relocations to 0x34 bytes of C storage covering the duration and two-handle peer completion fields through +0x32; the archived 0x20 bytes remain orphaned and final RAM placement is open. The two persistent record names share one 2560-byte NOLOAD MRAM reservation, and the OTA flag has a 16-byte NOLOAD reservation at 0x007fe000; final Main linker integration remains open. The ALS sync callback, settings byte setter and ROM display-context getter are C-bound across five logging masks. The six-word display manager interface and five asynchronous queue callbacks are C-owned with 60 native queue/log comparisons. The tracepoint registry callback and role helper are C-owned with 160 native comparisons; its BLE-data child is C-bound across 280 native cases; the slave-list child, request-file-name handler, and file-system deletion children remain exposed imports; the nanopb descriptor and single-file handler are C-bound. The 0x206-byte tracepoint decode clear span has a bounded C-owned NOLOAD reservation; full allocation extent and final RAM layout remain open. The tracepoint delete-all handler and result constructor are C-bound for 90 native cases, with a separate 0x206-byte NOLOAD reply reservation at 0x2037bbc8; reply routing is C-bound for 240 native/C cases; both reply transport children are C-bound for 540 cases, the response encoder and bounded 0x300-byte TX buffer are C-bound, and the four-node nanopb descriptor graph is source-owned; the single-file deletion handler is C-bound for 120 native cases and exposes validator/storage children; the pathname prefix resolver is C-bound for 48 native cases its numeric parser is C-bound for 45 filename cases, its validator is C-bound for 264 cases, its bounded path formatter is C-bound for 25 cases, the active-file close/clear path is C-bound with a four-byte NOLOAD handle slot, the unlink facade is C-bound for 72 native cases with a four-byte readiness cell, errno location is C-bound, and the public LittleFS remove wrapper is C-bound; the LittleFS remove core is C-bound for 40 native cases and its directory drop child is C-bound for eight native cases; the tracepoint sorted file inventory is C-bound for 50 cases with a 0x88-byte NOLOAD span; the request handler and formatter are C-bound for 64 cases each, the scan for 32 cases and file size for 30 cases, with reset and directory API children C-bound; pull initialization is C-bound for 36 native cases and pull readiness is C-bound for 256 controlled native cases; tracepoint file open, stream sync and write, the LittleFS mkdir core, and tracepoint delete-all traversal now have C bodies; pull completion is C-bound for five controlled cases, batch write for 144, pending reopen for eight, pull-path formatting for sixteen, new-file creation for 144, TPF1 header/endian/CRC for 42, version packing for nine, four-file retention for 21, directory inventory for fourteen, filename parsing for sixteen, TPS1 state writing for 54, backend initialization for 216, file sizing for 32, TPS1 recovery for 60, and guarded mkdir for 60. The privacy event status byte is unwritten. Calibration RAM startup values, page build and callback, live image decoder, display dispatch, final stock placement and hardware behavior remain open. The Nema encoder has 2420 native comparisons.",
                    "Native RAM initializers, full-image layout and hardware behavior remain open."],
     }
-    if receipt["unresolved_after"] != 231:
+    if receipt["unresolved_after"] != 187:
         raise RuntimeError("Main post-tail C replay count changed")
     path = OUT / "receipt.json"
     path.write_text(json.dumps(receipt, indent=2) + "\n")

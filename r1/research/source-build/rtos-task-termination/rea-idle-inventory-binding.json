@@ -1,0 +1,41 @@
+{
+  "inventory": "r1/research/source-build/sdk-clock/rea-procedure-inventory.json",
+  "inventory_sha256": "fbdbc0c467b87b6c991baa6e398adae6fa42e47812b981a59221a122c37974ce",
+  "evidence_id": "ev_a0af4a88b00722bfc8695adab62978030a98e92850049a34715c2cade4e2b03f",
+  "subject": {
+    "name": "stock-analysis-exec.elf",
+    "digest": {
+      "sha256": "92c47a5cca2d71f9020e17693a0268c192677f00e3734c47e28f04d1f1b081e8"
+    },
+    "local_path": "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/i2c5/stock-analysis-exec.elf",
+    "format": "elf",
+    "architecture": "arm"
+  },
+  "rows": [
+    {
+      "address": "0x84f36",
+      "value": "FUN_00084f36"
+    },
+    {
+      "address": "0x84f98",
+      "value": "FUN_00084f98"
+    },
+    {
+      "address": "0x8507c",
+      "value": "FUN_0008507c"
+    },
+    {
+      "address": "0x85094",
+      "value": "FUN_00085094"
+    },
+    {
+      "address": "0x850b6",
+      "value": "FUN_000850b6"
+    }
+  ],
+  "queried_entries": [
+    "0x84f68",
+    "0x84fe8"
+  ],
+  "scope": "Existing authenticated REA procedure inventory routing only; absent entries do not negate code proven by native Ghidra-MCP bytes and disassembly"
+}

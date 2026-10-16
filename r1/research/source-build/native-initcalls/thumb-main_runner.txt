@@ -1,0 +1,42 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0005cb6c <r1_stock_i2c5_acquire+0xc694>:
+   5cb6c:	b570      	push	{r4, r5, r6, lr}
+   5cb6e:	4c0e      	ldr	r4, [pc, #56]	@ (5cba8 <r1_stock_i2c5_acquire+0xc6d0>)
+   5cb70:	4d0e      	ldr	r5, [pc, #56]	@ (5cbac <r1_stock_i2c5_acquire+0xc6d4>)
+   5cb72:	e003      	b.n	5cb7c <r1_stock_i2c5_acquire+0xc6a4>
+   5cb74:	b10c      	cbz	r4, 5cb7a <r1_stock_i2c5_acquire+0xc6a2>
+   5cb76:	6820      	ldr	r0, [r4, #0]
+   5cb78:	4780      	blx	r0
+   5cb7a:	1d24      	adds	r4, r4, #4
+   5cb7c:	42ac      	cmp	r4, r5
+   5cb7e:	d3f9      	bcc.n	5cb74 <r1_stock_i2c5_acquire+0xc69c>
+   5cb80:	4c0b      	ldr	r4, [pc, #44]	@ (5cbb0 <r1_stock_i2c5_acquire+0xc6d8>)
+   5cb82:	4d0c      	ldr	r5, [pc, #48]	@ (5cbb4 <r1_stock_i2c5_acquire+0xc6dc>)
+   5cb84:	e003      	b.n	5cb8e <r1_stock_i2c5_acquire+0xc6b6>
+   5cb86:	b10c      	cbz	r4, 5cb8c <r1_stock_i2c5_acquire+0xc6b4>
+   5cb88:	6820      	ldr	r0, [r4, #0]
+   5cb8a:	4780      	blx	r0
+   5cb8c:	1d24      	adds	r4, r4, #4
+   5cb8e:	42ac      	cmp	r4, r5
+   5cb90:	d3f9      	bcc.n	5cb86 <r1_stock_i2c5_acquire+0xc6ae>
+   5cb92:	4c09      	ldr	r4, [pc, #36]	@ (5cbb8 <r1_stock_i2c5_acquire+0xc6e0>)
+   5cb94:	4d09      	ldr	r5, [pc, #36]	@ (5cbbc <r1_stock_i2c5_acquire+0xc6e4>)
+   5cb96:	e003      	b.n	5cba0 <r1_stock_i2c5_acquire+0xc6c8>
+   5cb98:	b10c      	cbz	r4, 5cb9e <r1_stock_i2c5_acquire+0xc6c6>
+   5cb9a:	6820      	ldr	r0, [r4, #0]
+   5cb9c:	4780      	blx	r0
+   5cb9e:	1d24      	adds	r4, r4, #4
+   5cba0:	42ac      	cmp	r4, r5
+   5cba2:	d3f9      	bcc.n	5cb98 <r1_stock_i2c5_acquire+0xc6c0>
+   5cba4:	bd70      	pop	{r4, r5, r6, pc}
+	...
+   5cbb6:	0000      	movs	r0, r0
+   5cbb8:	4534      	cmp	r4, r6
+   5cbba:	000c      	movs	r4, r1
+   5cbbc:	4568      	cmp	r0, sp
+   5cbbe:	000c      	movs	r4, r1

@@ -1,0 +1,71 @@
+{
+  "units": [
+    {
+      "source": "r1/components/runtime/native_float_bits.c",
+      "source_sha256": "fd1440ba0bf0a769bffd34dff5c757b2e5b311d16ceba967cf79654af0af5559",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-float-bits/native_float_bits.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/runtime/native_float_bits.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-float-bits/native_float_bits.o"
+      ],
+      "compiled": true,
+      "object_sha256": "b00e7776dff412aa35a312811041a7a9e993ad6cf6090a5ff239946c82632bec",
+      "undefined": [
+        "__aeabi_llsr",
+        "r1_format_double_add_bits",
+        "r1_format_double_normalize_bits"
+      ],
+      "defined": [
+        "r1_binary32_classify_bits",
+        "r1_binary32_to_binary64_bits",
+        "r1_binary64_classify_bits",
+        "r1_binary64_reverse_subtract_bits",
+        "r1_binary64_scale_power2_bits",
+        "r1_binary64_subtract_bits",
+        "r1_binary64_to_signed32_bits",
+        "r1_binary64_to_unsigned32_bits",
+        "r1_native_floating_environment_control",
+        "r1_signed32_to_binary64_bits",
+        "r1_unsigned32_to_binary64_bits"
+      ],
+      "emitted_function_count": 12
+    }
+  ],
+  "inputs": {
+    "r1/components/runtime/native_float_bits.c": "fd1440ba0bf0a769bffd34dff5c757b2e5b311d16ceba967cf79654af0af5559",
+    "r1/components/runtime/native_float_bits.h": "49ec26615e9a6a60ea3afbf4e2aa3cd8cfe9bab990766c50fde628b74348ee09",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

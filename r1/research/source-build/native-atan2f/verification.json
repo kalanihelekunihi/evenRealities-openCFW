@@ -1,0 +1,51 @@
+{
+  "comparisons": 942112,
+  "counts": {
+    "atan2f": 942112
+  },
+  "all_binary32_exponents": true,
+  "both_signs": true,
+  "seeded_random_pairs": true,
+  "all_four_rounding_modes": true,
+  "float_flush_to_zero_and_default_nan_modes": true,
+  "initial_inexact_flag_zero_and_one": true,
+  "return_fpscr_stack_callee_integer_fp_and_nonstack_writes_checked": true,
+  "actual_source_atan2f_and_dependencies": true,
+  "source_float_vfp_arithmetic": true,
+  "source_owned_numeric_bytes": 88,
+  "source_owned_data_sha256": "b811b68b0a2301c22ce6fdd291e7eb7cec765b7b9f86921c3bc7f02911a0e6c9",
+  "all_quadrant_signs": true,
+  "exponent_gap_boundaries": true,
+  "signed_zero_and_infinity_pairs": true,
+  "runtime_no_unresolved": true,
+  "trace_sha256": "595b817cb220e0defd3e1bf926f7be6f4a18d7e9b8b8b21056512ed6a86a433a",
+  "report_sha256": "78135f6ccb3eaabf902c999ab9cbaf193fc71ade29ba7266a2c40c5319be010a",
+  "object_sha256": "176dc2214ccfc2c8d23aeb71c7eace6d2a6cd1f0bf154706ce648f69208931fe",
+  "runtime_report_sha256": "ed685f8aed1f94950f37ae1bd600f01f703212b98d2c5ffe175cf9a91e636360",
+  "runtime_object_sha256": "d0617b094feafea8dac691a4d5248772dfc0a89c6f1f232cb3460f082528b752",
+  "layout": "r1/source-config/runtime/native_atan2f_verification.ld",
+  "layout_sha256": "33349fbd0aeeba445dc58f74d0cb25d7c1d3e1c11fbc71edc1cbf75b896bbc0b",
+  "parent_layouts": {
+    "r1/source-config/runtime/native_atanf_verification.ld": "8fb66a414f9608ef6ff2a35442e28bb0368ff6bd8562678e075e44b632ccf66c",
+    "r1/source-config/runtime/native_float_logs_verification.ld": "4337c0a17fe487740fc2e43b8b1f9d868b59279aa61a586ffa2f6032d5cad13a",
+    "r1/source-config/runtime/native_expf_tanhf_verification.ld": "b14d24f5c54350c6418ad2f14d058e32e9b4eb812ed21dd003f4a2c7bc126eb1",
+    "r1/source-config/runtime/native_math_special_verification.ld": "4a59c6299c19c3be674df032907be18b3a340ba63031a30994d56d0b3fcaf459",
+    "r1/source-config/runtime/native_math_round_verification.ld": "d95f5d803c86148896f2f74675eefc5f4aa1abdfaac8b28d8d0433f6ae313057",
+    "r1/source-config/runtime/native_double_directed_verification.ld": "095ca34ea3caddd78d99d92f63c4ab1367a50a83d930e235995937b84739b972",
+    "r1/source-config/runtime/native_math_selection_verification.ld": "e3e0326834a82345388e77a63de033c5a95b3499b39c6ff0a2361fbfdc081d31",
+    "r1/source-config/runtime/native_math_verification.ld": "eb559e9b8b67d97f666d288ccdb29a9190282e9725b98149195512b5a0dae4c4"
+  },
+  "driver_sha256": "ee331039e053f9fac5c3c9d402003c8a5f6577a37301a697dbd699324d8b49c9",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-384c8.json": "5f679a37742ce6c91761825d3fe5a2b1fe1ca6b756a02580c726b5b01168baab",
+    "ghidra-384c8.json": "393de743ec1970d6e18f30ec0cdff6e37dd8a1bff6642ba21439cfd021aab7ba"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Native classification words and live FP operands remain distinct on exceptional paths; no generic atan2 substitution.",
+    "Typed S0/FPSCR/callee/nonstack checks do not establish remaining caller scratch/APSR/private-frame aliases.",
+    "Selected paired exponents/mantissas,quadrant boundaries,grid/random pairs and controls do not exhaust full pair domain or physical FPU behavior.",
+    "Source numeric constants/verification placement are separate from final instruction/whole-image identity."
+  ]
+}

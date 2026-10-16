@@ -1,0 +1,14 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "ffb4dd1437f14e74d4225b68870e39366ffe51f5943b08184837a99f0bb3d251",
+  "driver_sha256": "d517d61d5c2b29bc7d2f3e215f902728449d2cacd7989e748d855f4c3552f0ca",
+  "comparisons": 3165,
+  "assertion_comparisons": 561,
+  "backend_calls_per_implementation": 6316,
+  "heap_bytes_compared_per_call": 51232,
+  "state_bytes_compared_per_call": 20,
+  "scope": "Actual native heap initialize/insert/malloc/free/fatal policy; request alignment/overflow/exhaustion, all four-block free permutations, deterministic fragmented sequences, NULL/double/invalid frees, header caller LR/padding, whole heap/state and guards",
+  "limitations": [
+    "Scheduler suspend/resume are bounded fixtures. Caller LR is directly controlled; real call-site normalization, scheduler concurrency, complete image linking, hardware and instruction identity remain gates."
+  ]
+}

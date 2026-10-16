@@ -1,0 +1,53 @@
+/* ================================================================
+ * entry: 0x00072310
+ * end:   0x000723b5
+ * size:  164 bytes
+ * name:  FUN_00072310
+ * ================================================================ */
+
+void FUN_00072310(undefined4 param_1,int param_2,int param_3,uint param_4,uint param_5,uint param_6)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  uint uVar3;
+
+  iVar1 = -param_2;
+  if (-1 < param_2) {
+    iVar1 = param_2;
+  }
+  uVar3 = 1;
+  for (; param_3 <= iVar1; iVar1 = iVar1 / param_3) {
+    uVar3 = uVar3 + 1;
+  }
+  if (uVar3 < param_4) {
+    uVar3 = param_4;
+  }
+  if ((param_5 != 0) && ((param_2 < 0 || ((int)(param_6 << 0x1d) < 0)))) {
+    param_5 = param_5 - 1;
+  }
+  if (((-1 < (int)(param_6 << 0x1e)) || (param_4 != 0)) && ((param_6 & 1) == 0)) {
+    for (; (param_5 != 0 && (uVar3 < param_5)); param_5 = param_5 - 1) {
+      FUN_00056744(param_1,0x20);
+    }
+  }
+  if (param_2 < 0) {
+    uVar2 = 0x2d;
+    param_2 = -param_2;
+  }
+  else {
+    if (-1 < (int)(param_6 << 0x1d)) goto LAB_00072382;
+    uVar2 = 0x2b;
+  }
+  FUN_00056744(param_1,uVar2);
+LAB_00072382:
+  if (((param_6 & 3) == 2) && (param_4 == 0)) {
+    for (; (param_5 != 0 && (uVar3 < param_5)); param_5 = param_5 - 1) {
+      FUN_00056744(param_1,0x30);
+    }
+  }
+  FUN_00093ef8(param_1,param_2,param_3,param_4,param_5,param_6);
+  return;
+}
+
+

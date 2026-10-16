@@ -1,0 +1,35 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00054f3c <r1_stock_i2c5_acquire+0x4a64>:
+   54f3c:	6880      	ldr	r0, [r0, #8]
+   54f3e:	f025 bdfd 	b.w	7ab3c <r1_stock_gpio_pin_set+0x1708>
+   54f42:	6880      	ldr	r0, [r0, #8]
+   54f44:	f025 bd72 	b.w	7aa2c <r1_stock_gpio_pin_set+0x15f8>
+   54f48:	b510      	push	{r4, lr}
+   54f4a:	4604      	mov	r4, r0
+   54f4c:	f025 fd64 	bl	7aa18 <r1_stock_gpio_pin_set+0x15e4>
+   54f50:	b920      	cbnz	r0, 54f5c <r1_stock_i2c5_acquire+0x4a84>
+   54f52:	f025 fcfb 	bl	7a94c <r1_stock_gpio_pin_set+0x1518>
+   54f56:	b108      	cbz	r0, 54f5c <r1_stock_i2c5_acquire+0x4a84>
+   54f58:	f7f9 fb30 	bl	4e5bc <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x275bc>
+   54f5c:	f104 010e 	add.w	r1, r4, #14
+   54f60:	68a0      	ldr	r0, [r4, #8]
+   54f62:	f025 fd65 	bl	7aa30 <r1_stock_gpio_pin_set+0x15fc>
+   54f66:	b108      	cbz	r0, 54f6c <r1_stock_i2c5_acquire+0x4a94>
+   54f68:	f7f9 fb28 	bl	4e5bc <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x275bc>
+   54f6c:	68a0      	ldr	r0, [r4, #8]
+   54f6e:	f025 fdf9 	bl	7ab64 <r1_stock_gpio_pin_set+0x1730>
+   54f72:	7b20      	ldrb	r0, [r4, #12]
+   54f74:	2800      	cmp	r0, #0
+   54f76:	68a0      	ldr	r0, [r4, #8]
+   54f78:	d003      	beq.n	54f82 <r1_stock_i2c5_acquire+0x4aaa>
+   54f7a:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+   54f7e:	f025 bddd 	b.w	7ab3c <r1_stock_gpio_pin_set+0x1708>
+   54f82:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+   54f86:	f025 bd51 	b.w	7aa2c <r1_stock_gpio_pin_set+0x15f8>
+   54f8a:	6880      	ldr	r0, [r0, #8]
+   54f8c:	f025 bdfc 	b.w	7ab88 <r1_stock_gpio_pin_set+0x1754>

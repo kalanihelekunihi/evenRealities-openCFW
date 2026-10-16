@@ -1,0 +1,95 @@
+{
+  "status": "All four original arithmetic target entries have source-tested candidates; combined decimal arithmetic bundle has no unresolved symbols.",
+  "providers": [
+    {
+      "entry": "0x27c4a",
+      "role": "binary64 multiply",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x27c4a",
+            "end": "0x27d2d"
+          }
+        ],
+        "total_bytes": 228,
+        "span_bytes": 228,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "evidence_sha256": "71c508dfd39d9f1f010a957138bb8f577bd0ade438363467e9b221e557156cc0"
+    },
+    {
+      "entry": "0x27d2e",
+      "role": "binary64 divide",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x27d2e",
+            "end": "0x27e0b"
+          }
+        ],
+        "total_bytes": 222,
+        "span_bytes": 222,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "evidence_sha256": "5c89f04d1fb4065b8f0ee6147b0eac0bffefdcda708bbc517e954813844588b3"
+    },
+    {
+      "entry": "0x27afc",
+      "role": "binary64 add",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x27afc",
+            "end": "0x27c3d"
+          }
+        ],
+        "total_bytes": 322,
+        "span_bytes": 322,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "evidence_sha256": "a4f2bf7279d5bb4362da40a92b0c8ad97c99ca34712fe71d90dc24fdf7077a84"
+    },
+    {
+      "entry": "0x28334",
+      "role": "binary64 to unsigned64",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x28334",
+            "end": "0x28363"
+          }
+        ],
+        "total_bytes": 48,
+        "span_bytes": 48,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "evidence_sha256": "c33557f207fe662616437771349e8e6e89895c00422eff1e32da2da8b7bcaf8e"
+    }
+  ],
+  "gates": [
+    "Recover native arithmetic and exceptional/subnormal behavior, preserving known formatter counterexamples.",
+    "Compare pinned LLVM source candidates against these native bit contracts before reuse; source availability alone is insufficient.",
+    "Do not count body range spans or native execution as source closure or byte identity."
+  ],
+  "remaining_native_provider_entries": [],
+  "unsigned_source_candidate_receipt": "native-formatter-unsigned/verification.json",
+  "unsigned_decimal_integration_receipt": "native-formatter-unsigned/decimal-integration-verification.json",
+  "addition_source_candidate_receipt": "native-formatter-add/verification.json",
+  "addition_decimal_integration_receipt": "native-formatter-add/decimal-integration-verification.json",
+  "llvm_add_counterexamples": "native-formatter-add/llvm-add-experiment.json",
+  "product_source_candidate_receipt": "native-formatter-product/verification.json",
+  "product_decimal_integration_receipt": "native-formatter-product/decimal-integration-verification.json",
+  "source_arithmetic_bundle": "native-formatter-math/report.json"
+}

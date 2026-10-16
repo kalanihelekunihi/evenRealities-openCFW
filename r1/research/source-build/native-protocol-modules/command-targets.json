@@ -1,0 +1,316 @@
+{
+  "tables": [
+    {
+      "name": "health",
+      "address": 631892,
+      "count": 14
+    },
+    {
+      "name": "system",
+      "address": 632012,
+      "count": 20
+    },
+    {
+      "name": "special",
+      "address": 632200,
+      "count": 1
+    }
+  ],
+  "targets": [
+    {
+      "table": "health",
+      "key": 257,
+      "reserved": 0,
+      "native_target": "0x82c8a",
+      "symbol": "r1_heart_rate_daily_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 258,
+      "reserved": 0,
+      "native_target": "0x82e34",
+      "symbol": "r1_heart_rate_point_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 259,
+      "reserved": 0,
+      "native_target": "0x82dbe",
+      "symbol": "r1_heart_rate_measurement_plan",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 513,
+      "reserved": 0,
+      "native_target": "0x82d5a",
+      "symbol": "r1_spo2_daily_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 514,
+      "reserved": 0,
+      "native_target": "0x82e9a",
+      "symbol": "r1_spo2_point_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 515,
+      "reserved": 0,
+      "native_target": "0x82dfa",
+      "symbol": "r1_spo2_measurement_plan",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 1025,
+      "reserved": 0,
+      "native_target": "0x82cce",
+      "symbol": "r1_hrv_daily_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 1026,
+      "reserved": 0,
+      "native_target": "0x82e66",
+      "symbol": "r1_hrv_point_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 1027,
+      "reserved": 0,
+      "native_target": "0x82df8",
+      "symbol": "r1_health_history_noop_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 1281,
+      "reserved": 0,
+      "native_target": "0x82c44",
+      "symbol": "r1_activity_daily_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 1282,
+      "reserved": 0,
+      "native_target": "0x82c10",
+      "symbol": "r1_activity_refresh_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 1537,
+      "reserved": 0,
+      "native_target": "0x82d14",
+      "symbol": "r1_sleep_daily_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 1538,
+      "reserved": 0,
+      "native_target": "0x82d9e",
+      "symbol": "r1_sleep_detail_plan",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "health",
+      "key": 32513,
+      "reserved": 0,
+      "native_target": "0x82ece",
+      "symbol": "r1_health_report_setting_plan",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 1,
+      "reserved": 0,
+      "native_target": "0x83de4",
+      "symbol": "r1_device_status_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 2,
+      "reserved": 0,
+      "native_target": "0x83d5c",
+      "symbol": "r1_device_info_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 3,
+      "reserved": 0,
+      "native_target": "0x84b24",
+      "symbol": "r1_protocol_command_00084b24",
+      "locked_ownership_present": false
+    },
+    {
+      "table": "system",
+      "key": 4,
+      "reserved": 0,
+      "native_target": "0x84a10",
+      "symbol": "r1_user_profile_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 5,
+      "reserved": 0,
+      "native_target": "0x846dc",
+      "symbol": "r1_protocol_command_000846dc",
+      "locked_ownership_present": false
+    },
+    {
+      "table": "system",
+      "key": 7,
+      "reserved": 0,
+      "native_target": "0x84874",
+      "symbol": "r1_touch_switch_handler_plan_decode",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 8,
+      "reserved": 0,
+      "native_target": "0x842ec",
+      "symbol": "r1_pair_role_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 9,
+      "reserved": 0,
+      "native_target": "0x83e2c",
+      "symbol": "r1_protocol_command_00083e2c",
+      "locked_ownership_present": false
+    },
+    {
+      "table": "system",
+      "key": 10,
+      "reserved": 0,
+      "native_target": "0x83d04",
+      "symbol": "r1_connection_control_adv_start_handler_plan_decode",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 11,
+      "reserved": 0,
+      "native_target": "0x83e50",
+      "symbol": "r1_protocol_command_00083e50",
+      "locked_ownership_present": false
+    },
+    {
+      "table": "system",
+      "key": 12,
+      "reserved": 0,
+      "native_target": "0x844ec",
+      "symbol": "r1_protocol_command_000844ec",
+      "locked_ownership_present": false
+    },
+    {
+      "table": "system",
+      "key": 14,
+      "reserved": 0,
+      "native_target": "0x83f24",
+      "symbol": "r1_health_settings_plan_command",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 15,
+      "reserved": 0,
+      "native_target": "0x84524",
+      "symbol": "r1_system_settings_plan_command",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 16,
+      "reserved": 0,
+      "native_target": "0x83db0",
+      "symbol": "r1_device_serial_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 17,
+      "reserved": 0,
+      "native_target": "0x84150",
+      "symbol": "r1_nv_recovery_command_handler_plan_decode",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 18,
+      "reserved": 0,
+      "native_target": "0x843c8",
+      "symbol": "r1_protocol_command_000843c8",
+      "locked_ownership_present": false
+    },
+    {
+      "table": "system",
+      "key": 126,
+      "reserved": 0,
+      "native_target": "0x842cc",
+      "symbol": "r1_packet_ack_handler",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 127,
+      "reserved": 0,
+      "native_target": "0x84130",
+      "symbol": "r1_delayed_event_restart",
+      "locked_ownership_present": true
+    },
+    {
+      "table": "system",
+      "key": 130,
+      "reserved": 0,
+      "native_target": "0x844b0",
+      "symbol": "r1_protocol_command_000844b0",
+      "locked_ownership_present": false
+    },
+    {
+      "table": "system",
+      "key": 131,
+      "reserved": 0,
+      "native_target": "0x84860",
+      "symbol": "r1_protocol_command_00084860",
+      "locked_ownership_present": false
+    },
+    {
+      "table": "special",
+      "key": 1,
+      "reserved": 0,
+      "native_target": "0x84cc0",
+      "symbol": "r1_protocol_command_00084cc0",
+      "locked_ownership_present": false
+    }
+  ],
+  "unowned_target_entries": [
+    "0x84b24",
+    "0x846dc",
+    "0x83e2c",
+    "0x83e50",
+    "0x844ec",
+    "0x843c8",
+    "0x844b0",
+    "0x84860",
+    "0x84cc0"
+  ],
+  "limitations": [
+    "Symbolic target references only; no leaf source-completeness claim",
+    "Existing locked ownership ledger is unchanged; unowned targets require attribution"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "body_count": 2,
+  "native_body_bytes": 96,
+  "locked_ownership_changed": false,
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027f0c",
+      "end": "0x00027f3b",
+      "size": "48",
+      "recovered_name": "FUN_00027f0c",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_cdrcmple",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027f3c",
+      "end": "0x00027f6b",
+      "size": "48",
+      "recovered_name": "FUN_00027f3c",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_cdcmple",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    }
+  ],
+  "pseudocode_source": "r1/research/decompilation/application/decompiler-output.c",
+  "pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "pseudocode_slices": {
+    "pseudocode-27f0c.c.txt": "8953b07ea1e7bbaba7a9e10474e3925bad29d41793c2394073eb6b387e1479e7",
+    "pseudocode-27f3c.c.txt": "add75ae58fa8ec0aebc41d7492637cc07ca0f48ab599d7bbaf406f625f502cfe"
+  },
+  "native_entries": {
+    "0x00027f0c": 48,
+    "0x00027f3c": 48
+  },
+  "source_interface": "Core-register uint64 pairs; R0..R3 transformed keys and final APSR comparison flags; R12 and LR preserved by source-compilable ABI adapters.",
+  "gates": [
+    "C worker and ABI adapter private frames differ from native12-byte frame.",
+    "Full input-pair domain, remaining architectural state and stack-alias behavior remain open.",
+    "Original instructions, image placement/integration and physical hardware remain unproven."
+  ]
+}

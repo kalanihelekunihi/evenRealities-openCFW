@@ -1,0 +1,54 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00098340 <r1_stock_gpio_pin_set+0x1ef0c>:
+   98340:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   98344:	0006      	movs	r6, r0
+   98346:	460d      	mov	r5, r1
+   98348:	f04f 0400 	mov.w	r4, #0
+   9834c:	f04f 0040 	mov.w	r0, #64	@ 0x40
+   98350:	d014      	beq.n	9837c <_stack+0x1837c>
+   98352:	b1c5      	cbz	r5, 98386 <_stack+0x18386>
+   98354:	f7fd fcce 	bl	95cf4 <_stack+0x15cf4>
+   98358:	4f16      	ldr	r7, [pc, #88]	@ (983b4 <_stack+0x183b4>)
+   9835a:	68fa      	ldr	r2, [r7, #12]
+   9835c:	6873      	ldr	r3, [r6, #4]
+   9835e:	6828      	ldr	r0, [r5, #0]
+   98360:	1ad1      	subs	r1, r2, r3
+   98362:	f1b0 3fff 	cmp.w	r0, #4294967295	@ 0xffffffff
+   98366:	d013      	beq.n	98390 <_stack+0x18390>
+   98368:	f8d6 c000 	ldr.w	ip, [r6]
+   9836c:	6a3f      	ldr	r7, [r7, #32]
+   9836e:	45bc      	cmp	ip, r7
+   98370:	d010      	beq.n	98394 <_stack+0x18394>
+   98372:	4293      	cmp	r3, r2
+   98374:	d80e      	bhi.n	98394 <_stack+0x18394>
+   98376:	2601      	movs	r6, #1
+   98378:	602c      	str	r4, [r5, #0]
+   9837a:	e015      	b.n	983a8 <_stack+0x183a8>
+   9837c:	f380 8811 	msr	BASEPRI, r0
+   98380:	f844 4c01 	str.w	r4, [r4, #-1]
+   98384:	e7fe      	b.n	98384 <_stack+0x18384>
+   98386:	f380 8811 	msr	BASEPRI, r0
+   9838a:	f844 4c01 	str.w	r4, [r4, #-1]
+   9838e:	e7fe      	b.n	9838e <_stack+0x1838e>
+   98390:	2600      	movs	r6, #0
+   98392:	e009      	b.n	983a8 <_stack+0x183a8>
+   98394:	4288      	cmp	r0, r1
+   98396:	d905      	bls.n	983a4 <_stack+0x183a4>
+   98398:	1a40      	subs	r0, r0, r1
+   9839a:	6028      	str	r0, [r5, #0]
+   9839c:	4630      	mov	r0, r6
+   9839e:	f7fd fedf 	bl	96160 <_stack+0x16160>
+   983a2:	e7f5      	b.n	98390 <_stack+0x18390>
+   983a4:	2601      	movs	r6, #1
+   983a6:	602c      	str	r4, [r5, #0]
+   983a8:	f7fd fcbc 	bl	95d24 <_stack+0x15d24>
+   983ac:	4630      	mov	r0, r6
+   983ae:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+   983b2:	0000      	movs	r0, r0
+   983b4:	781c      	ldrb	r4, [r3, #0]
+   983b6:	2000      	movs	r0, #0

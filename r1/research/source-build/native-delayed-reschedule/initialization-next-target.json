@@ -1,0 +1,26 @@
+{
+  "entry": "0x65740",
+  "observed_return": "0x65864",
+  "authenticated_bytes": 296,
+  "ghidra_memory": "ghidra-initializer-memory.json",
+  "ghidra_sha256": "ce6851daf2abe730590a8b4ace23c130ee8c7117a1042ce0025573d41c2a6a32",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "status": "supplemental_initializer_compiled_and_native_verified_with_source_storage_attributes",
+  "coverage_gap": "No row for0x65740 in locked ownership ledger or accumulated corpus. Do not alter locked artifacts or count this as an existing-row frontier promotion. Supplemental recovery and independent validation are required.",
+  "rea_status": "Exact entry query returned not_found; address fallback interpreted it as file offset. This is not decompiler evidence.",
+  "observations": [
+    "Idempotent queue, timer and mutex creation stored in context words0,3,2",
+    "Queue creation uses15 records of8 bytes",
+    "Previous thread is terminated and cleared, then thread recreated in context word1",
+    "Failed creations log and continue",
+    "Context/table anchors remain unresolved in source stage"
+  ],
+  "next_steps": [
+    "Recover pinned osTimerNew and osThreadTerminate bodies",
+    "Recover supplemental worker0x65ea8",
+    "Compose actual initializer and lifecycle bodies with kernel providers",
+    "Canonical board admission without changing locked ledger/corpus"
+  ],
+  "receipt": "../native-delayed-initialize/verification.json",
+  "comparisons": 3072
+}

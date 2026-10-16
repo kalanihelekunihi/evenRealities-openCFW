@@ -1,0 +1,26 @@
+/* ================================================================
+ * entry: 0x000799f8
+ * end:   0x00079a0b
+ * size:  20 bytes
+ * name:  FUN_000799f8
+ * ================================================================ */
+
+undefined8
+FUN_000799f8(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+            undefined4 param_5,undefined4 param_6)
+
+{
+  undefined4 local_20;
+  undefined4 uStack_1c;
+  undefined4 uStack_18;
+  undefined4 uStack_14;
+
+  uStack_18 = param_5;
+  uStack_14 = param_6;
+  local_20 = param_3;
+  uStack_1c = param_4;
+  FUN_00090fec(param_1,param_2,&local_20,4);
+  return CONCAT44(uStack_1c,local_20);
+}
+
+

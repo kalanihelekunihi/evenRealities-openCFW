@@ -1,0 +1,18 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "d350551e816733ce1207b779677cf0477012094d71d452b7bd63e232518383ed",
+  "driver_sha256": "ad45e9bf6721e681a68bc19d720277859cce3f3d00acccaaa1bd9c2690d74a53",
+  "comparisons": 18240,
+  "comparisons_by_function": {
+    "osMessageQueueGet": 5184,
+    "osMessageQueueGetCapacity": 144,
+    "osMessageQueueGetCount": 144,
+    "osMessageQueueNew": 7584,
+    "osMessageQueuePut": 5184
+  },
+  "backend_calls_per_implementation": 14384,
+  "scope": "Actual unchanged CMSIS queue wrappers/IRQ predicate;24-byte attributes,80-byte static threshold,32-bit product wrap, ignored names/bits/priority, task/ISR routing, zero/nonzero timeout, status and wake-yield, capacity/count and NULLs",
+  "limitations": [
+    "Kernel queue constructors/send/receive/query and scheduler-state boundaries are fixtures. IRQ/mask registers and ICSR are emulator inputs. No composed queue/scheduler graph, physical interrupts or image instruction identity proof."
+  ]
+}

@@ -1,0 +1,75 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+000979dc <r1_stock_gpio_pin_set+0x1e5a8>:
+   979dc:	b51c      	push	{r2, r3, r4, lr}
+   979de:	4824      	ldr	r0, [pc, #144]	@ (97a70 <_stack+0x17a70>)
+   979e0:	6800      	ldr	r0, [r0, #0]
+   979e2:	4924      	ldr	r1, [pc, #144]	@ (97a74 <_stack+0x17a74>)
+   979e4:	2500      	movs	r5, #0
+   979e6:	4288      	cmp	r0, r1
+   979e8:	d005      	beq.n	979f6 <_stack+0x179f6>
+   979ea:	2040      	movs	r0, #64	@ 0x40
+   979ec:	f380 8811 	msr	BASEPRI, r0
+   979f0:	f845 5c01 	str.w	r5, [r5, #-1]
+   979f4:	e7fe      	b.n	979f4 <_stack+0x179f4>
+   979f6:	4920      	ldr	r1, [pc, #128]	@ (97a78 <_stack+0x17a78>)
+   979f8:	7808      	ldrb	r0, [r1, #0]
+   979fa:	9001      	str	r0, [sp, #4]
+   979fc:	20ff      	movs	r0, #255	@ 0xff
+   979fe:	7008      	strb	r0, [r1, #0]
+   97a00:	7808      	ldrb	r0, [r1, #0]
+   97a02:	f88d 0000 	strb.w	r0, [sp]
+   97a06:	f89d 0000 	ldrb.w	r0, [sp]
+   97a0a:	4c1c      	ldr	r4, [pc, #112]	@ (97a7c <_stack+0x17a7c>)
+   97a0c:	f000 0002 	and.w	r0, r0, #2
+   97a10:	7020      	strb	r0, [r4, #0]
+   97a12:	2007      	movs	r0, #7
+   97a14:	60a0      	str	r0, [r4, #8]
+   97a16:	e005      	b.n	97a24 <_stack+0x17a24>
+   97a18:	f89d 2000 	ldrb.w	r2, [sp]
+   97a1c:	0052      	lsls	r2, r2, #1
+   97a1e:	f88d 2000 	strb.w	r2, [sp]
+   97a22:	1e40      	subs	r0, r0, #1
+   97a24:	f89d 2000 	ldrb.w	r2, [sp]
+   97a28:	0612      	lsls	r2, r2, #24
+   97a2a:	d4f5      	bmi.n	97a18 <_stack+0x17a18>
+   97a2c:	f000 0007 	and.w	r0, r0, #7
+   97a30:	60a0      	str	r0, [r4, #8]
+   97a32:	9801      	ldr	r0, [sp, #4]
+   97a34:	7008      	strb	r0, [r1, #0]
+   97a36:	4912      	ldr	r1, [pc, #72]	@ (97a80 <_stack+0x17a80>)
+   97a38:	20e0      	movs	r0, #224	@ 0xe0
+   97a3a:	f881 0d14 	strb.w	r0, [r1, #3348]	@ 0xd14
+   97a3e:	f7fe f9b1 	bl	95da4 <_stack+0x15da4>
+   97a42:	480b      	ldr	r0, [pc, #44]	@ (97a70 <_stack+0x17a70>)
+   97a44:	6065      	str	r5, [r4, #4]
+   97a46:	3088      	adds	r0, #136	@ 0x88
+   97a48:	6801      	ldr	r1, [r0, #0]
+   97a4a:	f441 0170 	orr.w	r1, r1, #15728640	@ 0xf00000
+   97a4e:	6001      	str	r1, [r0, #0]
+   97a50:	480c      	ldr	r0, [pc, #48]	@ (97a84 <_stack+0x17a84>)
+   97a52:	6801      	ldr	r1, [r0, #0]
+   97a54:	f041 4140 	orr.w	r1, r1, #3221225472	@ 0xc0000000
+   97a58:	6001      	str	r1, [r0, #0]
+   97a5a:	4805      	ldr	r0, [pc, #20]	@ (97a70 <_stack+0x17a70>)
+   97a5c:	3010      	adds	r0, #16
+   97a5e:	6801      	ldr	r1, [r0, #0]
+   97a60:	f041 0110 	orr.w	r1, r1, #16
+   97a64:	6001      	str	r1, [r0, #0]
+   97a66:	f78f fbe7 	bl	27238 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x238>
+   97a6a:	f7ed fd39 	bl	854e0 <_stack+0x54e0>
+   97a6e:	0000      	movs	r0, r0
+   97a70:	ed00 e000 	stc	0, cr14, [r0, #-0]
+   97a74:	c241      	stmia	r2!, {r0, r6}
+   97a76:	410f      	asrs	r7, r1
+   97a78:	e400      	b.n	9727c <_stack+0x1727c>
+   97a7a:	e000      	b.n	97a7e <_stack+0x17a7e>
+   97a7c:	7810      	ldrb	r0, [r2, #0]
+   97a7e:	2000      	movs	r0, #0
+   97a80:	e00e      	b.n	97aa0 <_stack+0x17aa0>
+   97a82:	e000      	b.n	97a86 <_stack+0x17a86>
+   97a84:	ef34 e000 	vhadd.s<illegal width 64>	d14, d4, d0

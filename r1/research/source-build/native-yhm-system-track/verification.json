@@ -1,0 +1,44 @@
+{
+  "comparisons": 80184,
+  "counts": {
+    "r1_yhm_system_track_native": 40092,
+    "r1_native_charger_initialize": 40092
+  },
+  "mode_sequences": 13,
+  "all_read_bytes": true,
+  "no_write_case": true,
+  "full_r2_r3_return_checked": true,
+  "source_descriptor_sections": {
+    "ring": {
+      "address": 218664,
+      "bytes": 44,
+      "sha256": "e5d13d247d1b8d1c77d7982a414d9a73c2b672eadb1cbb9bfd7f2dc3ad382249"
+    },
+    "sdk": {
+      "address": 218716,
+      "bytes": 38,
+      "sha256": "85dd7822567a1e44988a2d21756f80d16e15acf8545ee29f9136994a0ca2ffb9"
+    }
+  },
+  "report_sha256": "5a6bc7f88a2b87b5ffa4cc30037a4ac2040a458fdb1cc0411293d7517f66b95c",
+  "object_sha256": "4e860a8e2a1ded03cd1153feb2cfc7185c26d74c76d61f8e6e85b0c0217a0d36",
+  "driver_sha256": "65bf15653c9d667a3fc5bcc18e86ff470295e6936447ca0d19f05badc25f4491",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-r1_yhm_system_track_native.json": "a5ca7edb8f9531426683be1f2bfbe88397f1dcf99a5b4511f7f8eab8af67dc1e",
+    "ghidra-r1_native_charger_initialize.json": "467fdd2edaae9978047ab0f9ef57fcff97302c0050229c7f916812d6aec18574"
+  },
+  "rea_evidence": {
+    "rea-355bc.json": "3405c7572a689d932c910c98d49a0f24cc48f915be3fbd1b1f4f17ded712ab83",
+    "rea-5079c.json": "dc16d49c233ffe9d6026c01383f1899de1b9f2675a3dd2986e58907ee7cabd3a"
+  },
+  "body_evidence_sha256": "041b264db234cfd7090d7c770cdc4f3e63f872414241c27f8660c46ba0422509",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Read/write/logger endpoints are fixtures; actual lower transport/updater composition remains open",
+    "Selected register transfers/noinline/prologue verified; other compiler/LTO settings need revalidation",
+    "No-read-write byte behavior preserved; raw write return not interpreted as bus success",
+    "Full startup, physical GPIO/timing/concurrency and original whole-image byte identity remain open"
+  ]
+}

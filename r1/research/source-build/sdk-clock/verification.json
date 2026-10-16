@@ -1,0 +1,17 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "6bdee00d89a9d4fb55d1516617a8c5f18a89a50c118aadde62d614d7b79a7ee7",
+  "native_evidence_sha256": "2e5be7b23d69c1814fba012ff10dde1df9e0a44164868e58b889d13ca6f56f8d",
+  "comparisons": 3444,
+  "callback_calls_per_implementation": 248,
+  "source_owned_cold_zero_bytes": 20,
+  "critical_report_sha256": null,
+  "real_critical": false,
+  "scope": "Clock SOC/SDH observers, notification/IRQ/enqueue helpers, init and LF request/release; canonical flags/enum states, wraparound counters, callback list mutation and dynamic native logging modes",
+  "limitations": [
+    "nrfx hardware calls, SDH-enabled replies, structured logging outputs and callback replies are fixtures. Actual WDT register reads execute against emulated MMIO.",
+    "Notify native span34 differs from manual ledger32; ledger is retained and that inventory row is not promoted.",
+    "Invalid/cyclic lists, noncanonical bool/enum inputs, physical IRQ timing, full startup/linking and byte identity remain unproven."
+  ],
+  "instruction_identity_proven": false
+}

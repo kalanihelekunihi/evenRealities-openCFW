@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 G2 = ROOT / "g2"
 OLD = G2 / "build/c-firmware/20261014/main-root-source-refresh2"
-INPUT = G2 / "build/c-firmware/20261014/main-input-archive-member-refresh/candidate-input-corrected.o"
+INPUT = G2 / "build/c-firmware/20261016/main-settings-ram-archive-refresh/candidate-input-settings-ram-corrected.o"
 RECEIPT = OLD / "main-source-refresh-receipt.json"
 OUT = G2 / "build/c-firmware/20261014/main-corrected-archive-early-replay"
 REMOVED = {"audio_uart_input_ring", "audio_uart_display_ring",

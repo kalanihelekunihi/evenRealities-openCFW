@@ -1,0 +1,21 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "provider_reports": {
+    "rtos-event-groups/report.json": "9d28412fd122ff660399d019eef764443023298dc9b7171d6c8afd9a82a8ec36",
+    "rtos-timer-pend/report.json": "54f8f8ffd6f2480ceff4a788f2ca7bcc98036b9a2f9f79ac7a85881ce3b16070"
+  },
+  "driver_sha256": "03f1eb32c1649b812c92dbac4547c408c571b4dc49583969b6eb42aed200c5f8",
+  "comparisons": 4568,
+  "fault_comparisons": 917,
+  "comparisons_by_function": {
+    "xEventGroupSetBits": 1801,
+    "xEventGroupGetBitsFromISR": 30,
+    "xEventGroupSetBitsFromISR": 288,
+    "vEventGroupSetBitsCallback": 1801,
+    "xTimerPendFunctionCallFromISR": 648
+  },
+  "scope": "Actual pinned event set/get-ISR/set-ISR/callback and shared timer-pend body; bit any/all matching, waiter ordering/clear-on-exit, assertions, mask restore and exact four-word command-2 payload",
+  "limitations": [
+    "Unordered task wake/removal and scheduler/ISR queue send are explicit fixtures. Callback code and event set execute together; no actual deferred timer queue drain or physical ISR/task resumption is established. Callback pointer normalized only after exact native/source symbol check. Not canonical admission or image identity proof."
+  ]
+}

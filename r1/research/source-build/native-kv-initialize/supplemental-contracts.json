@@ -1,0 +1,21 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "entry": "0x00094e3c",
+  "end": "0x00094f8d",
+  "symbol": "r1_kv_port_initialize",
+  "native_body_bytes": 338,
+  "ghidra_memory_sha256": "bf15c6696aac973e8bf9c49e7e53d455a042dd0d544471c4554565f8037bf88d",
+  "absent_from_ownership_ledger": true,
+  "absent_from_accumulated_pseudocode": true,
+  "source_owned_initial_zero_bytes": 98,
+  "dependencies": {
+    "fal_init": "0x62f40",
+    "fal_partition_find": "0x63150",
+    "fal_flash_device_find": "0x62df4",
+    "r1_fal_is_initialized": "0x62fe8",
+    "r1_kv_flash_erase_scan": "0x57d0c",
+    "r1_latest_valid_flash_slot_scan_adapter": "0x64b24"
+  },
+  "upstream": "FAL 0.5.99 bundled in pinned FlashDB 2.0.0 is already attributed in FUNCTION-OWNERSHIP.csv; native R1 initializer policy is separate.",
+  "instruction_identity_proven": false
+}

@@ -1,0 +1,86 @@
+{
+  "native_sram_reads_outside_arguments_output_and_stack": [],
+  "source_owned_sections": {
+    "flags": {
+      "address": 275584,
+      "bytes": 4,
+      "sha256": "aa7575869f591bdd67305caeb319051bdf4817aba804e02397ff41f59b4334f0"
+    },
+    "lower": {
+      "address": 275588,
+      "bytes": 20,
+      "sha256": "3453b940792df16f962c01f9a3ddc38e1d9e618277189d83ad677d917b648055"
+    },
+    "upper": {
+      "address": 275608,
+      "bytes": 20,
+      "sha256": "f0ba6a2825921e27a550f8797e9d3e3d2ce03d79dc7434b7a3ce4fa5077bd88a"
+    },
+    "minus": {
+      "address": 276264,
+      "bytes": 4,
+      "sha256": "28276425d45829d4e6f5e18aefbf1f62862f07260a904532fb6e2106dec973e6"
+    },
+    "plus": {
+      "address": 276268,
+      "bytes": 4,
+      "sha256": "7c9bf6a88aed1539a3276462bb9e977bede22cf2c89f96bf61f590da5504ccc7"
+    },
+    "space": {
+      "address": 276272,
+      "bytes": 4,
+      "sha256": "8d71b3faab8201459ad37ef499beb336ba88bdcfa0f51ee6f0a46ec3192d750a"
+    }
+  },
+  "callee_saved_registers_checked": true,
+  "link_diagnostics": "",
+  "cases": 225,
+  "matched": 225,
+  "differences": [],
+  "execution_errors": [],
+  "provider_calls": {
+    "r1_native_snprintf": 225,
+    "r1_format_core": 225,
+    "r1_format_bounded_putc": 1880,
+    "r1_format_double_multiply_bits": 1055,
+    "r1_format_double_add_bits": 100,
+    "r1_format_double_to_unsigned_bits": 100,
+    "r1_format_double_divide_bits": 80
+  },
+  "engine_report_sha256": "bbbd1f100347e8083fca51a56696a1284b5cefbcf74480fb69bc06a8029fab2b",
+  "engine_sha256": "d453e5a80cb0518c035c2f0429018cfa20247b0ad72819165ca4826505a8e987",
+  "engine_no_unresolved": true,
+  "math_bundle_report_sha256": "8fe5e6f2f41d7080f190a58ec7cfe14c2850d0f15ad91288ba947036e1e1bcab",
+  "math_bundle_sha256": "5c0b3fb25df838e1c02affef2949753122f33de8dea4425b0affa338b3d6fb9a",
+  "math_bundle_no_unresolved": true,
+  "provider_reports": {
+    "native-formatter-add/report.json": "31c872efb89c46ec192da4a7eaf94659ed14389a6c1c03ecb4e57f257347c326",
+    "native-formatter-unsigned/report.json": "d53af269c84f018ab279a3d33f91b96c5a9462f2448e5ab8a749aefd93d947a0",
+    "native-formatter-decimal/report.json": "fa25c7529d6ce82043a460cb69f1d8af25ce7a8b13020a4f8fbc632e141a5970",
+    "native-formatter-output/report.json": "e16f16a97dfd09437d91ad6aa5ab054255479e21fc53f1b87c0b598c7bd2cd2f",
+    "integer-runtime/report.json": "11f725f9bc6429f44be34d2666b9d72c7d8d04ad3ba4461df0f92bc75b0d6faf",
+    "native-formatter-math/report.json": "8fe5e6f2f41d7080f190a58ec7cfe14c2850d0f15ad91288ba947036e1e1bcab",
+    "native-formatter-engine/report.json": "bbbd1f100347e8083fca51a56696a1284b5cefbcf74480fb69bc06a8029fab2b"
+  },
+  "report_sha256": "d6084ffd26fd1fc497d084269821b9fa765733c32c79392706cbb1367cee9da5",
+  "object_sha256": "825f255407ca344e4abc94c0d95b24f53765ea30eeee645b5759fd17d543e1c7",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-38080.json": "06edd8a14ff614155afcd86018dfe20c3a9357edd4b6d0822a70efc268206a13",
+    "rea-380dc.json": "3736f58d8efa52030edddf1df4a88f2e3a618d529e47ebc41664cd1b002abdfa",
+    "ghidra-38080.json": "ed01831fce2aea4e387344c037e19bac0d5d3b8abbd8d69ce8555b9fe2377f78",
+    "ghidra-380dc.json": "e2a9635374ee3450f4866ade00cc221b29aba1da981c3f3829c750c375a6bf32"
+  },
+  "driver_sha256": "167c461b290a8184744549b84a13ceb61719e3de2df974e06ca7139bd69237db",
+  "trace_sha256": "5c2e57b38a08196c82c59cdfad6283e500ff618c103f9c16c437dce72f47f389",
+  "native_equivalence_proven": false,
+  "instruction_identity": false,
+  "actual_native_core": false,
+  "actual_C_core": true,
+  "actual_C_output_helpers": true,
+  "limitations": [
+    "Decimal conversion control flow, integer division and three output helpers execute source providers. Unsigned conversion and shift helpers are C providers. Addition, shared rounding/normalization and signed shifts are also C providers. Multiply/divide are now C providers as well. The complete core is C; snprintf wrapper now executes source C and recovered ABI adapters. No full image source closure follows.",
+    "Bounded format corpus, fresh zeroed SRAM and fixed output/context placements do not prove arbitrary callback/stack alias behavior.",
+    "Full caller-saved scratch-register identity and whole-image instruction identity remain gated."
+  ]
+}

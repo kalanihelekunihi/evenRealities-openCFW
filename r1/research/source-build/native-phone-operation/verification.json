@@ -1,0 +1,35 @@
+{
+  "comparisons": 98176,
+  "counts": {
+    "r1_phone_cmd_send_op1": 3840,
+    "r1_protocol_response_send_0x100": 94336
+  },
+  "all_operation_halfwords": true,
+  "lower_calls": 90976,
+  "null_wrapper_inputs": 1920,
+  "actual_connection_getter": true,
+  "actual_header_wrapper": true,
+  "incoming_stack_arguments_unchanged": true,
+  "full_r2_r3_checked": true,
+  "raw_lower_zero_maps_to_one": true,
+  "provider_reports": {
+    "native-phone-operation/report.json": "34eeb40f59ef7897ea85dc09c2036b02d51a87896b0d2547191b81864cdc3c98",
+    "native-protocol-response-header/report.json": "4c22142e65d5fe974343756d11174146c571174a5aed5ee742f74c764f50fc0f",
+    "connection-handle/report.json": "bb6d085e1b4e3a19499ececcb8bd7bcb3c83910f9069e64473be448fef9d8da9"
+  },
+  "driver_sha256": "a708ee26876fd8822ce5e19d90f830d2c1f63a3b7731d63129a2001b1afa0243",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-83896.json": "cb8e60673fb65a671d6ba4cdbbcda8808e54f58d3f03e5da3c578c31ee4db303",
+    "ghidra-83896.json": "fb0afe2827060772f9f2ed36e7fe1da4bc382b9c4aacb24722d4dd15fa8742b9",
+    "rea-84c0c.json": "f2d772e64d4696fb920150305fe8aab95dc3e475a590531daaee3f3f3b151103",
+    "ghidra-84c0c.json": "27d555f5eb05650efcce38026ab48ab9ace7d03f664672a19e11411bedea0acb"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Lower response sender is fixture; incoming stack argument slots are read-only under authenticated common wrapper",
+    "Source saved-word/register boundary verified for selected compiler; other compilers/LTO and wrapper-stack-overlapping payloads require revalidation",
+    "Connection/state initialization, lower transport delivery and original image identity remain gates"
+  ]
+}

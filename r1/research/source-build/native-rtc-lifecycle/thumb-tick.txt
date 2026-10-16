@@ -1,0 +1,52 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00056274 <r1_stock_i2c5_acquire+0x5d9c>:
+   56274:	b570      	push	{r4, r5, r6, lr}
+   56276:	4c19      	ldr	r4, [pc, #100]	@ (562dc <r1_stock_i2c5_acquire+0x5e04>)
+   56278:	b08c      	sub	sp, #48	@ 0x30
+   5627a:	8860      	ldrh	r0, [r4, #2]
+   5627c:	2807      	cmp	r0, #7
+   5627e:	d32a      	bcc.n	562d6 <r1_stock_i2c5_acquire+0x5dfe>
+   56280:	6860      	ldr	r0, [r4, #4]
+   56282:	1c40      	adds	r0, r0, #1
+   56284:	6060      	str	r0, [r4, #4]
+   56286:	f9b4 1000 	ldrsh.w	r1, [r4]
+   5628a:	ebc1 1101 	rsb	r1, r1, r1, lsl #4
+   5628e:	eb00 0081 	add.w	r0, r0, r1, lsl #2
+   56292:	4669      	mov	r1, sp
+   56294:	f000 f824 	bl	562e0 <r1_stock_i2c5_acquire+0x5e08>
+   56298:	2500      	movs	r5, #0
+   5629a:	f104 0608 	add.w	r6, r4, #8
+   5629e:	bf00      	nop
+   562a0:	eb05 0045 	add.w	r0, r5, r5, lsl #1
+   562a4:	eb00 00c5 	add.w	r0, r0, r5, lsl #3
+   562a8:	eb06 00c0 	add.w	r0, r6, r0, lsl #3
+   562ac:	9901      	ldr	r1, [sp, #4]
+   562ae:	68c2      	ldr	r2, [r0, #12]
+   562b0:	4291      	cmp	r1, r2
+   562b2:	d108      	bne.n	562c6 <r1_stock_i2c5_acquire+0x5dee>
+   562b4:	9900      	ldr	r1, [sp, #0]
+   562b6:	6882      	ldr	r2, [r0, #8]
+   562b8:	4291      	cmp	r1, r2
+   562ba:	d104      	bne.n	562c6 <r1_stock_i2c5_acquire+0x5dee>
+   562bc:	6bc1      	ldr	r1, [r0, #60]	@ 0x3c
+   562be:	b111      	cbz	r1, 562c6 <r1_stock_i2c5_acquire+0x5dee>
+   562c0:	9802      	ldr	r0, [sp, #8]
+   562c2:	b2c0      	uxtb	r0, r0
+   562c4:	4788      	blx	r1
+   562c6:	1c6d      	adds	r5, r5, #1
+   562c8:	f015 05ff 	ands.w	r5, r5, #255	@ 0xff
+   562cc:	d0e8      	beq.n	562a0 <r1_stock_i2c5_acquire+0x5dc8>
+   562ce:	2000      	movs	r0, #0
+   562d0:	8060      	strh	r0, [r4, #2]
+   562d2:	b00c      	add	sp, #48	@ 0x30
+   562d4:	bd70      	pop	{r4, r5, r6, pc}
+   562d6:	1c40      	adds	r0, r0, #1
+   562d8:	e7fa      	b.n	562d0 <r1_stock_i2c5_acquire+0x5df8>
+   562da:	0000      	movs	r0, r0
+   562dc:	737c      	strb	r4, [r7, #13]
+   562de:	2000      	movs	r0, #0

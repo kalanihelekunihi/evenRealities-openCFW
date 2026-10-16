@@ -1,0 +1,60 @@
+{
+  "source_interface": "double r1_pow_reduced(uint64_t absolute,uint64_t exponent,uint64_t sign)",
+  "native_entry": "0x39d04",
+  "native_private_frame_bytes": 192,
+  "native_frame": "push {r4-r8,r10,r11,lr}; vpush {d0-d1}; vpush {d8-d14}; sub sp,#88",
+  "native_slots": {
+    "r4": "signed exponent high word",
+    "r6": "absolute base high word",
+    "r8": "absolute exponent high word",
+    "r11": "0x3ff00000",
+    "d8": "encoded sign multiplier",
+    "d9": "encoded +1.0",
+    "d10": "encoded +infinity",
+    "stack56": "absolute base encoding",
+    "stack144": "base encoding (core does not load this slot)",
+    "stack152": "original exponent encoding"
+  },
+  "dispatcher_ranges": [
+    [
+      "0x399d0",
+      "0x39d03"
+    ],
+    [
+      "0x39d1e",
+      "0x39d33"
+    ],
+    [
+      "0x3a5c8",
+      "0x3a5cf"
+    ]
+  ],
+  "dispatcher_native_bytes": 850,
+  "pending_core_ranges": [
+    [
+      "0x39d04",
+      "0x39d1d"
+    ],
+    [
+      "0x39d34",
+      "0x39def"
+    ],
+    [
+      "0x39e68",
+      "0x3a287"
+    ],
+    [
+      "0x3a2e8",
+      "0x3a5c7"
+    ]
+  ],
+  "pending_core_native_bytes": 2006,
+  "shared_existing_tail_ranges": [
+    [
+      "0x3b54c",
+      "0x3b577"
+    ]
+  ],
+  "shared_existing_tail_bytes": 44,
+  "external_blocker": false
+}

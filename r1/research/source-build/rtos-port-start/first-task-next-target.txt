@@ -1,0 +1,69 @@
+
+r1/research/source-build/i2c5/stock-analysis-exec.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00027200 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x200>:
+   27200:	f8df d010 	ldr.w	sp, [pc, #16]	@ 27214 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x214>
+   27204:	f001 f8cc 	bl	283a0 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x13a0>
+   27208:	4800      	ldr	r0, [pc, #0]	@ (2720c <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x20c>)
+   2720a:	4700      	bx	r0
+   2720c:	5f65      	ldrsh	r5, [r4, r5]
+   2720e:	0007      	movs	r7, r0
+   27210:	f3af 8000 	nop.w
+   27214:	beb8      	bkpt	0x00b8
+   27216:	2003      	movs	r0, #3
+   27218:	4b26      	ldr	r3, [pc, #152]	@ (272b4 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x2b4>)
+   2721a:	6819      	ldr	r1, [r3, #0]
+   2721c:	6808      	ldr	r0, [r1, #0]
+   2721e:	e8b0 4ff0 	ldmia.w	r0!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   27222:	f380 8809 	msr	PSP, r0
+   27226:	f3bf 8f6f 	isb	sy
+   2722a:	f04f 0000 	mov.w	r0, #0
+   2722e:	f380 8811 	msr	BASEPRI, r0
+   27232:	4770      	bx	lr
+   27234:	0000      	movs	r0, r0
+   27236:	0000      	movs	r0, r0
+   27238:	4807      	ldr	r0, [pc, #28]	@ (27258 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x258>)
+   2723a:	6800      	ldr	r0, [r0, #0]
+   2723c:	f380 8808 	msr	MSP, r0
+   27240:	b662      	cpsie	i
+   27242:	b661      	cpsie	f
+   27244:	f3bf 8f4f 	dsb	sy
+   27248:	f3bf 8f6f 	isb	sy
+   2724c:	f44f 70f0 	mov.w	r0, #480	@ 0x1e0
+   27250:	f380 8811 	msr	BASEPRI, r0
+   27254:	df00      	svc	0
+   27256:	0000      	movs	r0, r0
+   27258:	7000      	strb	r0, [r0, #0]
+   2725a:	0002      	movs	r2, r0
+   2725c:	f3ef 8009 	mrs	r0, PSP
+   27260:	f3bf 8f6f 	isb	sy
+   27264:	4b13      	ldr	r3, [pc, #76]	@ (272b4 <_binary_r1_blobs_official_r1_2_2_6_0009_application_bin_start+0x2b4>)
+   27266:	681a      	ldr	r2, [r3, #0]
+   27268:	f01e 0f10 	tst.w	lr, #16
+   2726c:	bf08      	it	eq
+   2726e:	ed20 8a10 	vstmdbeq	r0!, {s16-s31}
+   27272:	e920 4ff0 	stmdb	r0!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   27276:	6010      	str	r0, [r2, #0]
+   27278:	b408      	push	{r3}
+   2727a:	f04f 0040 	mov.w	r0, #64	@ 0x40
+   2727e:	f380 8811 	msr	BASEPRI, r0
+   27282:	f3bf 8f4f 	dsb	sy
+   27286:	f3bf 8f6f 	isb	sy
+   2728a:	f06f f98f 	bl	965ac <_stack+0x165ac>
+   2728e:	f04f 0000 	mov.w	r0, #0
+   27292:	f380 8811 	msr	BASEPRI, r0
+   27296:	bc08      	pop	{r3}
+   27298:	6819      	ldr	r1, [r3, #0]
+   2729a:	6808      	ldr	r0, [r1, #0]
+   2729c:	e8b0 4ff0 	ldmia.w	r0!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   272a0:	f01e 0f10 	tst.w	lr, #16
+   272a4:	bf08      	it	eq
+   272a6:	ecb0 8a10 	vldmiaeq	r0!, {s16-s31}
+   272aa:	f380 8809 	msr	PSP, r0
+   272ae:	f3bf 8f6f 	isb	sy
+   272b2:	4770      	bx	lr
+   272b4:	781c      	ldrb	r4, [r3, #0]
+   272b6:	2000      	movs	r0, #0

@@ -1,0 +1,76 @@
+{
+  "comparisons": 100480,
+  "all_length_halfwords": true,
+  "allocation_wrap_bits": 16,
+  "full_length_forwarded": true,
+  "mode_sequences": 13,
+  "provider_calls_per_side": {
+    "r1_authenticated_phone_connection_gate": 83008,
+    "r1_peer_channel_b_valid": 8736,
+    "pvPortMalloc": 78640,
+    "vPortFree": 72088,
+    "r1_model_encode": 72088,
+    "r1_protocol_send_hook_call": 3276,
+    "r1_structured_log_mode_get": 30324,
+    "r1_structured_log_format": 8652,
+    "nrf_log_frontend_std_1": 1176,
+    "nrf_log_frontend_std_2": 3528,
+    "nrf_log_frontend_std_4": 1764
+  },
+  "status_counts": {
+    "7": 65536,
+    "2": 17472,
+    "5": 4368,
+    "3": 6552,
+    "0": 1092,
+    "4": 2184,
+    "2147483655": 3276
+  },
+  "source_descriptor_sections": {
+    "alloc_ring": {
+      "address": 535080,
+      "bytes": 43,
+      "sha256": "b6761d74321f7ed936340c42cbbcf9c052b3041bea8f11d31a13be8e7d495813"
+    },
+    "alloc_sdk": {
+      "address": 535124,
+      "bytes": 37,
+      "sha256": "d061e8e46da07c586f178f17e712bcf8656d75c477531a028bc047ecc1e7f8e9"
+    },
+    "tx_ring": {
+      "address": 535164,
+      "bytes": 58,
+      "sha256": "4f3a8966c03477624901ad9f24b6f17b7ea50b794961f2607a869f6829e8ee48"
+    },
+    "tx_sdk": {
+      "address": 535224,
+      "bytes": 52,
+      "sha256": "7818a98efd5a5c79f00b89a1666a5b957f36f4c05f0c19baabe6806fadb79bc6"
+    },
+    "send_ring": {
+      "address": 535276,
+      "bytes": 53,
+      "sha256": "9f0aecd3b305d1a6d8558878ee2532bfb078c52be78c8c2f4dccfb02a024dd99"
+    },
+    "send_sdk": {
+      "address": 535332,
+      "bytes": 47,
+      "sha256": "6fa9e7bfa5d50c4bd5e60b7ccd2e26b8a09aea8271dcd6b59e7643d357b0ea91"
+    }
+  },
+  "report_sha256": "9dafbdf3aa8c9606d0d976242925b45eb47e150064cae612763ab6ac7bbf8f74",
+  "object_sha256": "632d49b3567d372abe314c207ee654c497154b8974de4d6c05bc8d7f97e1b03f",
+  "driver_sha256": "e1c6cbee3f6a9a5d23b987f9a01ee5df030bb172342cfb9b73819fb3a9dbe9a2",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-828b4.json": "78f9d937a75fac099c30ef521512efef19baa4b4794533bbc253335182d4fc1e",
+    "ghidra-body-data.json": "6dbcb9f2b796e436ef58fae2b7f6a72cfed3d8e7f4f49ab8a18ef91e3871f6a1"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Gates/allocator/encoder/send/logger endpoints are fixtures; actual lower composition remains open",
+    "Mapped buffers remain accessible for wrapped lengths; real encoder allocation bounds and physical memory safety are not established",
+    "Header/packet mutation and unaligned field reloads checked; physical interrupts/concurrency, full startup and original image identity remain gates"
+  ]
+}

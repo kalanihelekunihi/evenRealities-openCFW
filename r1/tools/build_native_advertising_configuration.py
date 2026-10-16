@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build native GATT product policy with authenticated Nordic types."""
+"""Build product advertising configuration against authenticated Nordic types."""
 import hashlib,json,subprocess,zipfile
 from pathlib import Path
 from audit_source_frontier import functions

@@ -1,0 +1,119 @@
+{
+  "status": "internal-source-provider-work-remains",
+  "native_entry": "0x75f64",
+  "body_bytes": 146,
+  "source_body_implemented": false,
+  "observed_initialized_callback_address": "0x20006540",
+  "observed_initialized_callback_value": "0x45e65",
+  "dependencies": [
+    {
+      "entry": "0x00079af4",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "nrf_log_init",
+      "candidate_symbol": "nrf_log_init",
+      "status": "tested_contract_candidate",
+      "candidate_reports": "sdk-logger-frontend/report.json"
+    },
+    {
+      "entry": "0x0004e5bc",
+      "provider_family": "r1_product_specific",
+      "source_symbol": "r1_fatal_error_log",
+      "candidate_symbol": "r1_adc_error",
+      "status": "tested_contract_candidate",
+      "candidate_reports": "board-seams/report.json"
+    },
+    {
+      "entry": "0x0007968c",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "nrf_log_default_backends_init",
+      "candidate_symbol": "nrf_log_default_backends_init",
+      "status": "tested_contract_candidate",
+      "candidate_reports": "sdk-rtt-backend/report.json"
+    },
+    {
+      "entry": "0x000588a4",
+      "provider_family": "armink_cmbacktrace_1_4_2_compatible",
+      "source_symbol": "cm_backtrace_init",
+      "candidate_symbol": "cm_backtrace_init",
+      "status": "unresolved_source_route",
+      "candidate_reports": ""
+    },
+    {
+      "entry": "0x00052018",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "ble_dfu_buttonless_async_svci_init",
+      "candidate_symbol": "ble_dfu_buttonless_async_svci_init",
+      "status": "compiled_symbol_hint",
+      "candidate_reports": "application-sdk/report.json"
+    },
+    {
+      "entry": "0x000788c8",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "nrf_drv_clock_init",
+      "candidate_symbol": "nrf_drv_clock_init",
+      "status": "tested_contract_candidate",
+      "candidate_reports": "sdk-clock/report.json"
+    },
+    {
+      "entry": "0x0004e1e4",
+      "provider_family": "r1_product_specific",
+      "source_symbol": "r1_boot_ctor_run",
+      "candidate_symbol": "r1_boot_ctor_run",
+      "status": "unresolved_source_route",
+      "candidate_reports": ""
+    },
+    {
+      "entry": "0x00050384",
+      "provider_family": "r1_product_specific",
+      "source_symbol": "r1_peripheral_module_init",
+      "candidate_symbol": "r1_peripheral_module_init",
+      "status": "unresolved_source_route",
+      "candidate_reports": ""
+    },
+    {
+      "entry": "0x0005c4c8",
+      "provider_family": "r1_product_specific",
+      "source_symbol": "r1_device_module_init",
+      "candidate_symbol": "r1_device_module_init",
+      "status": "unresolved_source_route",
+      "candidate_reports": ""
+    },
+    {
+      "entry": "0x000914ec",
+      "provider_family": "r1_product_specific",
+      "source_symbol": "r1_structured_log_mode_get",
+      "candidate_symbol": "r1_structured_log_mode_get",
+      "status": "tested_contract_candidate",
+      "candidate_reports": "board-seams/report.json"
+    },
+    {
+      "entry": "0x00091638",
+      "provider_family": "r1_product_specific",
+      "source_symbol": "r1_structured_log_format",
+      "candidate_symbol": "r1_structured_log_format",
+      "status": "tested_contract_candidate",
+      "candidate_reports": "structured-log/report.json"
+    },
+    {
+      "entry": "0x000799c0",
+      "provider_family": "nordic_nrf5_sdk_17_1_0",
+      "source_symbol": "nrf_log_frontend_std_0",
+      "candidate_symbol": "nrf_log_frontend_std_0",
+      "status": "tested_contract_candidate",
+      "candidate_reports": "sdk-logger-frontend/report.json"
+    },
+    {
+      "entry": "0x00077e98",
+      "provider_family": "r1_nordic_sdk_provider_adapter",
+      "source_symbol": "r1_reset_reason_nordic_adapter",
+      "candidate_symbol": "r1_reset_reason_nordic_adapter",
+      "status": "unresolved_source_route",
+      "candidate_reports": ""
+    }
+  ],
+  "external_blocker": false,
+  "limitations": [
+    "Compiled hints and tested contracts do not establish exact native call ABI or whole application completion.",
+    "Read-only callback value derives from authenticated native decompression; source-owned initialization remains open."
+  ]
+}

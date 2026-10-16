@@ -40,7 +40,8 @@ def main():
         raise RuntimeError("runtime state definitions changed")
     table = symbols(obj)
     for base, group in GROUPS.items():
-        if any(table[name] != table[base] for name in group) or table[base][1] != 0x90:
+        expected_size = 0xc4 if base == DM else 0x90
+        if any(table[name] != table[base] for name in group) or table[base][1] != expected_size:
             raise RuntimeError(f"record table aliases or dimensions differ: {base}")
     if table[COUNTER][1] != 4:
         raise RuntimeError("pair timestamp is not a 32-bit cell")
@@ -63,11 +64,12 @@ def main():
                "base_object": str(BASE.relative_to(ROOT)), "base_sha256": sha(BASE),
                "linked_object": str(linked.relative_to(ROOT)),
                "linked_object_sha256": sha(linked),
-               "table_bytes_each": 0x90, "counter_bytes": 4,
+               "discovery_table_bytes": 0x90, "dm_cb_storage_bytes": 0xc4,
+               "dm_cb_record_bytes": 0x90, "counter_bytes": 4,
                "unresolved_before": len(before), "unresolved_after": len(after),
                "imports_resolved": sorted(before - after), "imports_added": sorted(after - before),
                "source_complete": False, "full_payload_linked": False,
-               "limits": ["Record row count follows the three-slot master dispatcher and appNumConns C contracts.",
+               "limits": ["Record row count follows the three-slot master dispatcher and appNumConns C contracts; the extended DM block reaches the stock reset's highest observed write at offset 0xc3, not a proven whole-structure size.",
                           "Native absolute RAM placement and startup initialization remain unverified.",
                           "C aliases share storage within each table; hardware behavior remains unqualified."]}
     path = OUT / "receipt.json"

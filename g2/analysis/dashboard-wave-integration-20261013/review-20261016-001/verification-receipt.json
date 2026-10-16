@@ -1,0 +1,24 @@
+{
+  "status": "PASS_INDEPENDENT_G2_EVIDENCE_REFRESH_WITH_EXPLICIT_BLOCKERS",
+  "report_sha256": "d99a0e728060b9af82da46cd35d74a23b7509efacd03255c69dbf2bd49567109",
+  "library_file_id": "libfile_b6775a151b58819196ea5a967c9664f7",
+  "library_version": 1,
+  "library_file_id_backing": "file_00000000b3688230ba4ae8fbaf6b24c2",
+  "library_readback_exact_after_standard_terminal_newline": true,
+  "snapshot_files": 3425,
+  "hash_references_match": 5422,
+  "snapshot_findings": [
+    "stale audit replay hash",
+    "one missing historical CASE linker",
+    "438 stage records vs 439 prose"
+  ],
+  "post_snapshot_correction": "three new receipt hashes match; corrected438 stages; same final object; audit replay pin agrees",
+  "main_undefined_independently_counted": 188,
+  "inventory_validator": "FAIL docs/tooling.md evidence pin; no repin attempted",
+  "resource_validator": "PASS1190 slices11 fontrootjoins",
+  "whole_source_complete": 0,
+  "exact_source_build_equal": 0,
+  "hardware_qualified": 0,
+  "firmware_sources_modified": false,
+  "page_modified": false
+}

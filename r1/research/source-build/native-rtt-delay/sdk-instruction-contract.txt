@@ -1,0 +1,9 @@
+    // Align the machine code, so that it can be cached properly and no extra
+    // wait states appear.
+    __ALIGN(16)
+    static const uint16_t delay_machine_code[] = {
+        0x3800 + NRFX_COREDEP_DELAY_US_LOOP_CYCLES, // SUBS r0, #loop_cycles
+        0xd8fd, // BHI .-2
+        0x4770  // BX LR
+    };
+

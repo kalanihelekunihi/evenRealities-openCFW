@@ -1,0 +1,207 @@
+{
+  "native_body_bytes": 358,
+  "body_count": 11,
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027c3e",
+      "end": "0x00027c43",
+      "size": "6",
+      "recovered_name": "FUN_00027c3e",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_dsub",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027c44",
+      "end": "0x00027c49",
+      "size": "6",
+      "recovered_name": "FUN_00027c44",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_drsub",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027e38",
+      "end": "0x00027e59",
+      "size": "34",
+      "recovered_name": "FUN_00027e38",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_i2d",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027e5a",
+      "end": "0x00027e73",
+      "size": "26",
+      "recovered_name": "FUN_00027e5a",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_ui2d",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027e74",
+      "end": "0x00027eb1",
+      "size": "62",
+      "recovered_name": "FUN_00027e74",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_d2iz",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027eb2",
+      "end": "0x00027ee3",
+      "size": "50",
+      "recovered_name": "FUN_00027eb2",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_d2uiz",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00027ee4",
+      "end": "0x00027f09",
+      "size": "38",
+      "recovered_name": "FUN_00027ee4",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "__aeabi_f2d",
+      "confidence": "high",
+      "evidence": "Exact standard C/Arm EABI helper semantics and calling convention; link the selected toolchain runtime rather than implementing locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x000281dc",
+      "end": "0x00028209",
+      "size": "46",
+      "recovered_name": "FUN_000281dc",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "internal:binary64_scale_pow2_flush_underflow",
+      "confidence": "high",
+      "evidence": "Complete runtime-only control flow identifies an Arm C-library internal; the descriptive role is not an asserted private symbol name. Use the selected toolchain runtime rather than implementing it locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0002839a",
+      "end": "0x0002839d",
+      "size": "4",
+      "recovered_name": "FUN_0002839a",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "internal:floating_environment_control_stub",
+      "confidence": "high",
+      "evidence": "Complete runtime-only control flow identifies an Arm C-library internal; the descriptive role is not an asserted private symbol name. Use the selected toolchain runtime rather than implementing it locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00038110",
+      "end": "0x0003813f",
+      "size": "48",
+      "recovered_name": "FUN_00038110",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "internal:binary64_classify",
+      "confidence": "high",
+      "evidence": "Complete runtime-only control flow identifies an Arm C-library internal; the descriptive role is not an asserted private symbol name. Use the selected toolchain runtime rather than implementing it locally."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00038140",
+      "end": "0x00038165",
+      "size": "38",
+      "recovered_name": "FUN_00038140",
+      "provider_family": "arm_toolchain_runtime",
+      "source_disposition": "use_toolchain_runtime",
+      "upstream_symbol": "internal:binary32_classify",
+      "confidence": "high",
+      "evidence": "Complete runtime-only control flow identifies an Arm C-library internal; the descriptive role is not an asserted private symbol name. Use the selected toolchain runtime rather than implementing it locally."
+    }
+  ],
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "locked_ownership_changed": false,
+  "pseudocode_source": "r1/research/decompilation/application/decompiler-output.c",
+  "pseudocode_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "pseudocode_slices": [
+    {
+      "entry": "0x27c3e",
+      "sha256": "537c6bc004d1b98cfb66dbc26545d339436847f21ee0093a2ff749875f2497ca"
+    },
+    {
+      "entry": "0x27c44",
+      "sha256": "a22fa0f6bc046d3c4a63ee6c66595a5aa5ee4937cd05f25570e345302680b470"
+    },
+    {
+      "entry": "0x27e38",
+      "sha256": "1d9fd6bcf8baa331b32a73814f3f09c1b00e7b02a49dfe5ed3f2d697ad2418df"
+    },
+    {
+      "entry": "0x27e5a",
+      "sha256": "ad2f0dd415f568c4299b7cff822b05d064c98f8b06c5901fbacee562f355f67a"
+    },
+    {
+      "entry": "0x27e74",
+      "sha256": "e61bf6ae4d23bc87fc2657037d2e5f56282cd8f43ee3aa7d4b150e00932d754f"
+    },
+    {
+      "entry": "0x27eb2",
+      "sha256": "f29c7adb8bf1b1856ec51053f377d9cc8285e440bbf45b5e01d27ea9027c63f5"
+    },
+    {
+      "entry": "0x27ee4",
+      "sha256": "17c87a66af5b493c6c5a28e42ce4e0e9306cac038b297a69ee0ae6591ae5b50d"
+    },
+    {
+      "entry": "0x281dc",
+      "sha256": "e7aef38bea6385672ef289b58b7210c7736394b3d826485588b5a07c7655b116"
+    },
+    {
+      "entry": "0x2839a",
+      "sha256": "62f46e9c0af54d8c861c0bd2a9aea2bc3f122c3af60fe561d69366f5e30d5fea"
+    },
+    {
+      "entry": "0x38110",
+      "sha256": "9fc31dcc6f5afd8218854f4f362a7e18a05b904d38fb4094046d39504a392e23"
+    },
+    {
+      "entry": "0x38140",
+      "sha256": "4292c39076b293647290457201678ae8cdf054f84fa9ccbf4910f794d221c797"
+    }
+  ],
+  "register_counterexample_sha256": "01b352382fb1cbd8ea12be9c955cb48fa7fa33ac3df38af7a2c95aa6e32d7964",
+  "interface_header": "r1/components/runtime/native_float_bits.h",
+  "interface_header_sha256": "49ec26615e9a6a60ea3afbf4e2aa3cd8cfe9bab990766c50fde628b74348ee09",
+  "scope": "Raw register/bit contracts; native standard-helper role labels do not establish generic C/IEEE behavior.",
+  "gates": [
+    "Native libm consumer bodies are not source-compiled by these helper tests.",
+    "Private frames, caller-saved fields outside checked classifier/control outputs, APSR, full image integration and hardware identity remain unproven."
+  ]
+}

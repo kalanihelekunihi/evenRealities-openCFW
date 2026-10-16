@@ -1,0 +1,18 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "fe22f75bca037ee490f4eb0ad071d17d55d86b9e358680f94b048e38cf6fc7dc",
+  "driver_sha256": "69f67d84298a5084ac2bda60e37815602dcacbe33e7550a56fcdab9eccb33681",
+  "comparisons": 312,
+  "fault_comparisons": 102,
+  "comparisons_by_function": {
+    "vTaskStartScheduler": 96,
+    "xTimerCreateTimerTask": 96,
+    "r1_native_timer_infrastructure": 96,
+    "vApplicationGetIdleTaskMemory": 12,
+    "vApplicationGetTimerTaskMemory": 12
+  },
+  "scope": "Actual pinned scheduler/timer startup and infrastructure plus112-byte static memory callbacks; ordered constructor/callback/list/queue/port traces, static extents, state and failure paths",
+  "limitations": [
+    "Task/queue constructors, list initialization, critical entry/exit and port start use explicit fixtures. Timer task code pointer remains an unexecuted provider. No scheduler/context transfer or physical boot proof."
+  ]
+}

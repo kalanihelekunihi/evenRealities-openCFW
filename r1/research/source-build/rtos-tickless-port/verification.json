@@ -1,0 +1,13 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "7e956cc0984b077c0c14b048b2bad05f1a2516053d35d114ba03e986bb473fb5",
+  "driver_sha256": "6bd50f7a5489a68134d26cee8949ff0c232fc94df3692dadbeee1526336fd6da",
+  "comparisons": 2640,
+  "svc65_fixture_calls_per_implementation": 672,
+  "wfe_fixture_calls_per_implementation": 672,
+  "pending_fpu_sleep_cases": 288,
+  "scope": "Pinned RTC sleep, native configuration/FPU/error binding, SoftDevice NVIC critical state, RTC24-bit compare/delta/debug clamp, abort/zero/sleep, SVC error continuation, WFE branch and pending FPU FPSCR clear; ordered MMIO writes and registers",
+  "limitations": [
+    "Sleep-status, tick-step, SD-enabled and error handlers are explicit lower fixtures. RTC two counter reads are controlled. SVC65 and WFE are explicit instruction fixtures, not physical wait/SoftDevice execution. Memory-backed MMIO write equality does not prove peripheral semantics or hardware wake."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "comparisons": 23040,
+  "counts": {
+    "r1_batcfg_byte0_get": 7680,
+    "r1_batcfg_flag1_get": 7680,
+    "r1_batcfg_word1_signed_get": 7680
+  },
+  "actual_kv_class_and_memory": true,
+  "kv_entry_counts": {
+    "native": 23040,
+    "source": 23040
+  },
+  "port_callback_counts": {
+    "native": 9216,
+    "source": 9216
+  },
+  "full_r3_checked": true,
+  "provider_reports": {
+    "native-kv-class/report.json": "74fd498a1d8857e4ab698d41ec981441fd04337fe338c6fcb12364f2e6b4b1e8",
+    "runtime/report.json": "c536ec9a18e2e56845bf132b750ac81ba6a9b8fc0d16ac4bca039e554e464016"
+  },
+  "report_sha256": "ed1a997cdf376890717318ad3491e4b3e817860715d2cfa1efdbe7fe84ce1a0d",
+  "object_sha256": "71f5ab355f3c96fca0309a6986fd36e0643875e1ae1ef6b4cf69473a3a238e03",
+  "driver_sha256": "6d46e2692f19bff8b85bb76b44e0bf9b7f89a8d6ac8100845fe14611346a7e14",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-7bb44.json": "bea1e0293b53d7a50e6a580ce4a8ac9157676ce008e415662fd3b31a33c05955",
+    "ghidra-7bb44.json": "8db259e557178d332906f8c0d8f263e80ab284c6651d183f95ab0c8452651b3d",
+    "rea-7bb5c.json": "4a2c3e12617780c05646a35b851f4a9454529aaba9ea83b8d4f8d50cbc9ad0a9",
+    "ghidra-7bb5c.json": "e40f5c9961855be1e6c641ca11c190a09bfbd28e19e47801d97b5ed45d456d5c",
+    "rea-7bb7c.json": "36d7b3bb24502378d385e43c688d9bae75704c165e10d777783b3d280a70b9ec",
+    "ghidra-7bb7c.json": "eadb532cc636aea6a3b606e9f23f7239a3659e3825e57b9b579a8ca3e8708f52"
+  },
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Selected incoming/return r3 transfer verified; other compiler/LTO settings require revalidation",
+    "KV handle/port records are fixtures; cached read and musl copy execute in real-KV mode, callbacks remain modeled",
+    "Handle/state initialization, persistence, full startup and original instruction/image identity remain open"
+  ]
+}

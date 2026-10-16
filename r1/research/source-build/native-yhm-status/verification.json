@@ -1,0 +1,39 @@
+{
+  "comparisons": 55296,
+  "counts": {
+    "r1_yhm_status_native": 18432,
+    "r1_yhm_charge_state_native": 18432,
+    "r1_native_charger_state_get": 18432
+  },
+  "read_callback_counts": {
+    "native": 36864,
+    "source": 36864
+  },
+  "full_r3_return_checked": true,
+  "all_low_bytes": true,
+  "high_word_patterns": 3,
+  "report_sha256": "34f3c6eb1ab9c55a1109f8f8a467e6d6175ce715eb03165f6469e9c3d5c56d20",
+  "object_sha256": "ecc72a2fa0863031d4cf929dbc65d0237e3586c60795fb55964c207cbd08306c",
+  "classifier_report_sha256": "3ee05a2fb38bb5937de35a3910a50e587482fb240559ff463f63e3e077fd636d",
+  "classifier_object_sha256": "d887661c44ea6248b9c232c4f1c5333d126c5a883d63e213c129442d9cc6c6bf",
+  "driver_sha256": "ce0249b9bd1892b3ddf8a3176554c15ff84921aa7cab196c9f399a8cd9939ef7",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_evidence": {
+    "ghidra-r1_yhm_status_native.json": "1c61a89e85438a4f2cc8cc367a2a4d9252d634b4929805e4385a9a3b5445d005",
+    "ghidra-r1_yhm_charge_state_native.json": "1dcd7c3b1f917a1ead593fcaf6f4e5ebc7bccc20c10e8d50b79d93f17d0550cb",
+    "ghidra-r1_native_charger_state_get.json": "8ff561b01d5b6d58085bdc251e19a5b6233e93a498c0961271030a7334a9bff9"
+  },
+  "rea_evidence": {
+    "rea-body.json": "f8483f23c307d3d6df058611e0dbe871620d1577d1160e6db55f09e9d9e4085d",
+    "rea-pseudocode.json": "4f4e66521ccfcafce59f417aa4d3b2f71dc218a8cc0d0c145f29f09182c5e5ff"
+  },
+  "body_evidence_sha256": "17e6d8dec479dd1605ff787d1101a87b6b4fe72a22e73503895aedf0272406fe",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Readiness/transport remain fixtures; raw body executes inside actual classifier and adapter",
+    "Explicit r3 capture/restore verified for selected compiler/prologue and noinline boundary; other toolchains/LTO need revalidation",
+    "No-write semantics retained; valid device binding/actual transport policy is a separate graph",
+    "Full startup, physical GPIO/transport behavior and whole-image original byte identity remain open"
+  ]
+}

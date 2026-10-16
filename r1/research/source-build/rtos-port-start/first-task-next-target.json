@@ -1,0 +1,29 @@
+{
+  "status": "Pinned context C routines and task selector implemented/admitted at explicit SVC/exception-return boundaries; hardware execution remains open",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "native_first_task": "0x27238",
+  "source": "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/external/freertos/portable/GCC/nrf52/port.c",
+  "source_sha256": "907413ddea63fa5fb0e4ff463288893060fb7909a3ae8e87134e0e81efb0fb82",
+  "source_functions": [
+    "vPortStartFirstTask",
+    "vPortSVCHandler",
+    "xPortPendSVHandler"
+  ],
+  "source_kind": "Pinned licensed C translation unit with explicit ARM inline assembly, not executable data",
+  "thumb_file": "first-task-next-target.txt",
+  "thumb_sha256": "73fa5d6726a0ed7bdd31f00307e348a944bf57bb035540054520880e0804a503",
+  "native_contract": {
+    "vector_word_address": "0x27000",
+    "state_sequence": "load vector initial stack, setMSP, enableIRQ/FAULT,DSB/ISB,writeBASEPRI480 lowbytee0,SVC0",
+    "next_boundary": "SVC0 instruction0x27254",
+    "timer_runtime": "0x85510 remains separate provider"
+  },
+  "open_gates": [
+    "Actual exception dispatch/return and task execution",
+    "Complete application vector table",
+    "Stack-overflow callback and timer runtime",
+    "Physical scheduling and whole-image identity"
+  ],
+  "implemented_report": "rtos-context-port/report.json",
+  "actual_graph": "board/context-start-verification.json"
+}

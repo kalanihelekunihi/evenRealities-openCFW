@@ -1,0 +1,61 @@
+{
+  "comparisons": 37696,
+  "counts": {
+    "expm1": 37696
+  },
+  "errno_writes_per_side": {
+    "expm1": 8648
+  },
+  "all_binary64_exponents": true,
+  "both_signs": true,
+  "all_four_rounding_modes": true,
+  "selected_values_all_fz_dn_initial_inexact_controls": true,
+  "initial_inexact_flag_zero_and_one_selected_values": true,
+  "threshold_adjacent_bits": true,
+  "dense_numeric_grid": true,
+  "return_fpscr_stack_callee_integer_fp_errno_and_nonstack_writes_checked": true,
+  "actual_source_expm1_and_dependencies": true,
+  "independent_calls_reset_xpsr": true,
+  "source_owned_numeric_bytes": 212,
+  "shared_existing_numeric_bytes": 8,
+  "unique_new_numeric_bytes": 204,
+  "runtime_no_unresolved": true,
+  "trace_sha256": "135629ef3b2fe832fe885d7e710826d4d8113763b1e66929328922b778e6213f",
+  "report_sha256": "d94e9d9f9a33f32b751a0f6ef5303019a35ff5d2950a0ccc0c28893236e5d432",
+  "object_sha256": "2248c17607d824b351f2d145882b631ff508c61740fae3e30af1404ece71357b",
+  "runtime_report_sha256": "bbd827974ff69817a6eb12141d125330be0d6e87cf2b9e024ad7e846cb6e59f6",
+  "runtime_object_sha256": "c02192e02a1ca53efa036c4953e2a1ae364533c5940a105c25f994ee2a352e9a",
+  "layout": "r1/source-config/runtime/native_expm1_verification.ld",
+  "layout_sha256": "cc3724423cb5aef4fdfb2609d7b969aae4420122772019436670fdfee61774ab",
+  "parent_layouts": {
+    "r1/source-config/runtime/native_atan_verification.ld": "ed6b9a2595f993b804ab91f935e1d53606633b450645bbc0f51d0f10cc89cb86",
+    "r1/source-config/runtime/native_tanf_verification.ld": "8347ccd172e4a624407f6f1203b868e14f2bf4d1262f9a867ba73aded237662d",
+    "r1/source-config/runtime/native_sinf_verification.ld": "1f22b031e81c7ae12b9837cf9c61aeb4bdfedf9af35d99ab2e83aee248e16a11",
+    "r1/source-config/runtime/native_cosf_verification.ld": "336ab32c74047bfc0113dfe74c0efd61a343d941225fb6f64bb43808c4ce559c",
+    "r1/source-config/runtime/native_trig_reduce_consumers.ld": "29a17be3d50dfda8e501ccc1b8704358e715b183497af46cd245daab45d66a8e",
+    "r1/source-config/runtime/native_atan2f_verification.ld": "33349fbd0aeeba445dc58f74d0cb25d7c1d3e1c11fbc71edc1cbf75b896bbc0b",
+    "r1/source-config/runtime/native_atanf_verification.ld": "8fb66a414f9608ef6ff2a35442e28bb0368ff6bd8562678e075e44b632ccf66c",
+    "r1/source-config/runtime/native_float_logs_verification.ld": "4337c0a17fe487740fc2e43b8b1f9d868b59279aa61a586ffa2f6032d5cad13a",
+    "r1/source-config/runtime/native_expf_tanhf_verification.ld": "b14d24f5c54350c6418ad2f14d058e32e9b4eb812ed21dd003f4a2c7bc126eb1",
+    "r1/source-config/runtime/native_math_special_verification.ld": "4a59c6299c19c3be674df032907be18b3a340ba63031a30994d56d0b3fcaf459",
+    "r1/source-config/runtime/native_math_round_verification.ld": "d95f5d803c86148896f2f74675eefc5f4aa1abdfaac8b28d8d0433f6ae313057",
+    "r1/source-config/runtime/native_double_directed_verification.ld": "095ca34ea3caddd78d99d92f63c4ab1367a50a83d930e235995937b84739b972",
+    "r1/source-config/runtime/native_math_selection_verification.ld": "e3e0326834a82345388e77a63de033c5a95b3499b39c6ff0a2361fbfdc081d31",
+    "r1/source-config/runtime/native_math_verification.ld": "eb559e9b8b67d97f666d288ccdb29a9190282e9725b98149195512b5a0dae4c4"
+  },
+  "driver_sha256": "58c11597cc384a3985a164728332156e6f5cd1b779bed23e62b1f444423c7ec7",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-3b5c0.json": "f9d8fc34db712aa457ad744492dbf1dbe188df2ccac3a44de0ce1e64f0a327e8",
+    "ghidra-3b5c0.json": "a65a81c97323c452190f34eefb788ba16e231e11a025eb66146687a4ad37828d",
+    "ghidra-3ba98.json": "668df63a208ca1e786987fe2b5054db0aa2b3e5524889ddd9f5d08dd83fb81e0",
+    "ghidra-3b9e8.json": "f67ebd2819dd8c37a4dbf68ab4d3fe26d1e8db488be562eba1db23bc4a8afab2",
+    "ghidra-bdb28.json": "fca65960a01d145fe55824d5390778169984e99e176fbc4a881ce3ccb9618c3a"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Typed D0/FPSCR/errno/callee/nonstack checks do not establish remaining caller scratch/APSR/private frames.",
+    "Selected exponent/mantissa/threshold/grid/control cases do not exhaust input domain or physical FPU behavior.",
+    "Recovered numeric constants and verification placement are separate from original instruction/image identity."
+  ]
+}

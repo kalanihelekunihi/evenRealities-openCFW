@@ -1,0 +1,22 @@
+{
+  "ownership_row": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x00035698",
+    "end": "0x0003570b",
+    "size": "116",
+    "recovered_name": "FUN_00035698",
+    "provider_family": "yhmicros_yhm2710_candidate",
+    "source_disposition": "clean_room_reimplementation_owner_authorized",
+    "upstream_symbol": "yhm2710_stacmd_write_retry_candidate",
+    "confidence": "high",
+    "evidence": "Exact executable closure of the scatter-loaded device_stacmd operation table and P1.01 wire callback record used by the YHM2710 power path. The exact vendor source remains unlicensed; the owner-authorized independent reconstruction is compiled from reconstructed/yhm2710."
+  },
+  "locked_ownership_changed": false,
+  "rea_structured_metadata_obtained": false,
+  "rea_limitation": "procedure_info invalid_request: No procedure exists at requested address0x35698 in current REA analysis; native Ghidra-MCP bytes and locked row used",
+  "attempts": 9,
+  "counter": "0x200075c0",
+  "ring_descriptor": "0x3570c",
+  "sdk_descriptor": "0x3573c"
+}

@@ -1,0 +1,64 @@
+{
+  "stage_sha256": "e3661fa0c4360500294dc02db7fb73f1a0dbcf3528a7e00f44d0174bda9a7cba",
+  "driver_sha256": "d70accf0aadd09f96efc8667a7f8256493acdf5db53a5cbdfed7359f0e72266c",
+  "input_helpers": {
+    "verify_rtos_scheduler_tick.py": "87dd802ed0065eb792fe60f66030667f7ea481d83bba47020fcdec50f2237660",
+    "verify_rtos_scheduler_start.py": "69f67d84298a5084ac2bda60e37815602dcacbe33e7550a56fcdab9eccb33681",
+    "verify_native_delayed_schedule.py": "6ee399f5d8a3033479828e710ea7a7815c45b8f1245545b6e145cbec60b20b15",
+    "build_source_candidates.py": "553347388bb9f14d830556b1bab509950af40353fd035fd3a42b371b50998796",
+    "verify_native_delayed_initialize.py": "bf3ebb16e1116808c2ab627f4e5fdde4a0387ce5fca1d745dd3798a5f1b843e0"
+  },
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "comparisons": 30,
+  "workflows": 12,
+  "worker_dispatches_per_implementation": 12,
+  "provider_counts": {
+    "native": {
+      "vPortEnterCritical": 348,
+      "vPortExitCritical": 348,
+      "xQueueGenericSend": 108,
+      "r1_native_delayed_schedule": 18,
+      "osMutexAcquire": 48,
+      "osMutexRelease": 48,
+      "osTimerStop": 18,
+      "xTimerIsTimerActive": 18,
+      "r1_native_delayed_reschedule": 30,
+      "osTimerStart": 30,
+      "xTimerGenericCommand": 36,
+      "xQueueReceive": 78,
+      "r1_native_delayed_push": 12,
+      "osMessageQueuePut": 12,
+      "r1_native_delayed_worker": 12,
+      "osMessageQueueGet": 24
+    },
+    "source": {
+      "vPortEnterCritical": 348,
+      "vPortExitCritical": 348,
+      "xQueueGenericSend": 108,
+      "r1_native_delayed_schedule": 18,
+      "osMutexAcquire": 48,
+      "osMutexRelease": 48,
+      "osTimerStop": 18,
+      "xTimerIsTimerActive": 18,
+      "r1_native_delayed_reschedule": 30,
+      "osTimerStart": 30,
+      "xTimerGenericCommand": 36,
+      "xQueueReceive": 78,
+      "r1_native_delayed_push": 12,
+      "osMessageQueuePut": 12,
+      "r1_native_delayed_worker": 12,
+      "osMessageQueueGet": 24
+    }
+  },
+  "provider_interception": false,
+  "source_text_bytes": 34856,
+  "canonical_board_integrated": true,
+  "instruction_identity": false,
+  "limitations": [
+    "Shared cold RAM and product context/table initialization are fixtures",
+    "Startup stops at actual port-start boundary; no physical scheduling or blocked-task resumption",
+    "Timer callback pointer normalized after identity checks; only 4 padding bytes per daemon command excluded",
+    "Source graph forbids stock instruction execution and unresolved-call guards",
+    "Worker stops at its next empty-queue receive boundary, before actual blocking; dispatched user callback is a controlled fixture"
+  ]
+}

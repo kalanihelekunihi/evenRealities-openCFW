@@ -1,0 +1,16 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "78b5adc1cbb29be3dbf96da46b427fe5659be5d90b1c1543d9e68591887e62ca",
+  "driver_sha256": "f14ffafb5ce6530e1d0305928d92e7a4debc69708299be99166e92fa3558a576",
+  "comparisons": 7290,
+  "assertion_comparisons": 4860,
+  "comparisons_by_function": {
+    "vTaskRemoveFromUnorderedEventList": 7290
+  },
+  "accessed_tcb_prefix_bytes": 104,
+  "top_used_priority_bytes_compared": 4,
+  "scope": "Actual pinned unordered event removal/wake and next-unblock reset; actual list manipulation, event owner/scheduler assertions, value control bit, index/neighbor updates, ready/delayed/suspended tasks, priority/yield and next-unblock state",
+  "limitations": [
+    "No provider interception occurs on this path. Lists and task records are controlled fixtures. Real event producer, deferred callback, blocking context transfer and whole-image identity remain separate gates."
+  ]
+}

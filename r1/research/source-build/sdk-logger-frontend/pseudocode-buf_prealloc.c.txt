@@ -1,0 +1,42 @@
+/* ================================================================
+ * entry: 0x000566ac
+ * end:   0x0005673b
+ * size:  144 bytes
+ * name:  FUN_000566ac
+ * ================================================================ */
+
+undefined4 FUN_000566ac(uint param_1,undefined4 *param_2,int param_3,uint param_4)
+
+{
+  int iVar1;
+  uint *puVar2;
+  int iVar3;
+  undefined4 uVar4;
+  uint uVar5;
+  uint local_28;
+
+  local_28 = param_4 & 0xffffff00;
+  FUN_0004ebec(&local_28);
+  iVar1 = DAT_0005673c;
+  *param_2 = *(undefined4 *)(DAT_0005673c + 4);
+  puVar2 = DAT_00056740;
+  iVar3 = *DAT_00056740 - (*(int *)(iVar1 + 4) - *(int *)(iVar1 + 8));
+  while (iVar3 + 1U < param_1 + 2) {
+    FUN_0007807a(iVar1 + 0x101c,1);
+    uVar4 = FUN_00075ce4();
+    FUN_0007807a(iVar1 + 0x101c,uVar4);
+    iVar3 = *puVar2 - (*(int *)(iVar1 + 4) - *(int *)(iVar1 + 8));
+  }
+  if (param_3 == 0) {
+    uVar5 = param_1 << 0x16 | 6;
+  }
+  else {
+    uVar5 = (param_1 & 0xf) << 6 | 5;
+  }
+  *(uint *)(iVar1 + (*(uint *)(iVar1 + 4) & *puVar2) * 4 + 0xc) = uVar5;
+  *(uint *)(iVar1 + 4) = *(int *)(iVar1 + 4) + param_1 + 2;
+  FUN_0004ec34(local_28 & 0xff);
+  return 1;
+}
+
+

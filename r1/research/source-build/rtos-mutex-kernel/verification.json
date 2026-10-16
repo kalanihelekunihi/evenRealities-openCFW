@@ -1,0 +1,30 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "2405e3229fabf70040441d3b36e87ecffd3ef78af74108fccf646e5a51f0d474",
+  "driver_sha256": "365db72cbde57d52f63957131b3be1dd3994581f997e1c2c52b292d3ad7ca3e3",
+  "actual_providers": {
+    "rtos-task-count": {
+      "report_sha256": "5de37e1af54a1cc0b30c5b6b51acedda775b7af3872df972d0dd69586d5749dc",
+      "object_sha256": "faec6b319c55c8263d5da9cf2c0103fbd98a46f2af3f005cef764f34a3224051"
+    },
+    "rtos-interrupt-priority": {
+      "report_sha256": "96325f036800aebd7aecb7ed0946eb5c9c514cabb568448782f2c75c3cd3abe4",
+      "object_sha256": "ca4a44125108ce37518bf9f22484eda7f18bcfd619ad1f675670a3b65b020cb5"
+    }
+  },
+  "comparisons": 5562,
+  "assertion_comparisons": 2444,
+  "comparisons_by_function": {
+    "prvInitialiseMutex": 2,
+    "xQueueCreateMutex": 16,
+    "xQueueCreateMutexStatic": 16,
+    "xQueueGiveFromISR": 3073,
+    "xQueueGiveMutexRecursive": 361,
+    "xQueueSemaphoreTake": 1733,
+    "xQueueTakeMutexRecursive": 361
+  },
+  "scope": "Actual pinned mutex creation/private init, recursive ownership/count wrap, semaphore take timeout/retry/inheritance paths, ISR give/locks/assertions; actual priority validator and task-count query",
+  "limitations": [
+    "Queue constructors/send, current-task/held-count, event operations, timeout/scheduler/inheritance boundaries are explicit fixtures. No combined synchronization graph, actual blocking resumption or physical concurrency/instruction identity proof."
+  ]
+}

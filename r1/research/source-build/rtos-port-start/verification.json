@@ -1,0 +1,16 @@
+{
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "report_sha256": "4913b5ebbfe39da2e0c7447f19c40d5bf22dfb6dbe185d26623df327eb56961e",
+  "driver_sha256": "bdea47e4ca5b552987b2cbe641ad1e365e7b062726114360020f457ca3017f39",
+  "comparisons": 5220,
+  "fault_comparisons": 4536,
+  "bounded_first_task_cases": 648,
+  "comparisons_by_function": {
+    "xPortStartScheduler": 5184,
+    "vPortSetupTimerInterrupt": 36
+  },
+  "scope": "Unchanged Nordic port/RTC setup: CPUID assertions, writable priority readback/raw2 mask, priority-group calculation, PendSV/RTC priority, LF-clock request, RTC31 prescaler/events/tasks/NVIC enable, critical reset, FPU and SEVONPEND setup; unexpected first-task return faults",
+  "limitations": [
+    "LF-clock request is a function fixture. First-task entry is bounded or returned as a fixture to test unexpected-return behavior. NVIC writable priority bits are a controlled hardware readback. No native context transfer, physical clock/RTC or whole-image identity proof."
+  ]
+}

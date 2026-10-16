@@ -30,7 +30,7 @@ static const char short_message[]="[assert]%s, %s %d, %s";
 void audio_ring_pb_assert_509b48(const struct audio_fault_record *record) {
     char formatted[512];
     audio_uart_buffer_zero(formatted,512u,0u);
-    if(record->type==0u) {
+    if((uint8_t)record->type==0u) {
         uint16_t code=(uint16_t)record->detail;
         const char *reason=0;
         for(uint32_t i=0;i<43u;i++)
@@ -41,7 +41,7 @@ void audio_ring_pb_assert_509b48(const struct audio_fault_record *record) {
         if(reason==0) reason=audio_fault_unmapped_code_message_509b48(code);
         (void)audio_ble_format_to_buffer(formatted,"Error code 0x%04X: %s",
                                          (uint32_t)code,reason);
-    } else if(record->type==1u) {
+    } else if((uint8_t)record->type==1u) {
         (void)audio_ble_format_to_buffer(formatted,"(%s) is not established.",
                                          (const char *)(uintptr_t)record->detail);
     }

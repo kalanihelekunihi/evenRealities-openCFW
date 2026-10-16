@@ -1,0 +1,25 @@
+{
+  "comparisons": 2304,
+  "schedule_composition_comparisons": 1536,
+  "report_sha256": "644dfafc67b03cd0411428b1b810b95ba6b0f9db870982112bcaf06f4e4cfea1",
+  "object_sha256": "c0135454053acf2add29a82700f14034d43fbedeaee5cb23eb754ec0788f0861",
+  "provider_reports": {
+    "native-delayed-push/report.json": "644dfafc67b03cd0411428b1b810b95ba6b0f9db870982112bcaf06f4e4cfea1",
+    "native-delayed-schedule/report.json": "29dd6351da25442913befe9817f670b549b90bf9d489769d6671bbedfb161320"
+  },
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_memory_sha256": "a3ea0ec392f12cf1994ec2333eab45257838979d2308e2ea777ce7b876b24d98",
+  "rea_sha256": "d1dcc353a0d3bce87aec790bc28f6c85f9bce6120b061bd2acb8f8a15da4c77b",
+  "verifier_sha256": "28ed143a4e6bffd9eef1278c10492989d64080a82b48adc3a839c2c3a6a22ed4",
+  "verifier_import_sha256": "6ee399f5d8a3033479828e710ea7a7815c45b8f1245545b6e145cbec60b20b15",
+  "native_entry": "0x659e8",
+  "native_size": 144,
+  "lower_providers": "controlled fixtures; real schedule and push compose",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Only immediate-delay scheduler paths composed",
+    "No actual queue/kernel graph or state initialization admission",
+    "Void ABI; caller-saved scratch/stack bytes not compared"
+  ]
+}

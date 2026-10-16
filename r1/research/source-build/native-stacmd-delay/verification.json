@@ -1,0 +1,21 @@
+{
+  "comparisons": 64,
+  "nops_per_call": 836,
+  "total_nops": {
+    "native": 53504,
+    "source": 53504
+  },
+  "report_sha256": "43a524bc001c14c912e7bdc411d0fd736b879a64c17b46066628c0ceca603708",
+  "object_sha256": "8003be178cf9bef954b1d7c765af462836896157aad5dda3fc2c0d55faf11e50",
+  "driver_sha256": "01ea54ad64e3fc183b1880145e43db278391deaf71a51efd89e91b7e35ed9cfd",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "ghidra_memory_sha256": "5d15ca0c62307f257a7349dbc3075c4acf89ad81655bcbd64a3400506ca99c6d",
+  "body_evidence_sha256": "fb5ebede70a27c33fe6821f03ae9ac15188bf8b6cb4b15e0a9fc874591e8135e",
+  "application_linked": false,
+  "instruction_identity": false,
+  "limitations": [
+    "Emitted NOP count and preserved return/register/stack tested; compiler scheduling/cycle count differ",
+    "Physical clock calibration/interrupt timing and GPIO behavior unproven",
+    "REA structured metadata unavailable; native bytes and locked ownership are positive evidence"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "comparisons": 73728,
+  "counts": {
+    "sqrt64": 73728
+  },
+  "positive_cases": 38928,
+  "nonpositive_return_zero_cases": 34800,
+  "perfect_integer_square_samples": 4096,
+  "all_binary64_exponents": true,
+  "both_signs": true,
+  "seeded_random_patterns": true,
+  "return_values_stack_callee_saved_and_fpscr_checked": true,
+  "source_round_and_shifts": true,
+  "runtime_no_unresolved": true,
+  "trace_sha256": "f18df3347df6e67e20b8739c39106b913e08599f0fa326f856338618ae7f3fce",
+  "report_sha256": "7725dfbdcd8b673597c6136991f7877880a13c4498adf41e678002ede95d2821",
+  "object_sha256": "0e432d6dc53cb2482d3bc0ab91c04e33aa986e589cdea477782bc85c7378bff4",
+  "runtime_report_sha256": "163c72571cb21d505a49d3f472c0c31dd7912f2ba25c7a4590d9f9e953697f7b",
+  "runtime_object_sha256": "a8a20e638bd802c3fe059bedbddc8a7502b01c638e49ba015c986403816853a9",
+  "driver_sha256": "d012d8e015116cacf1719a9f14984324467c6ed56b14a0c26d161a8d82a256bd",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-2820a.json": "27076c543ff43a781ec49a6cb7b8b4f1ff64e63829c069eb3bd9616856293137",
+    "ghidra-2820a.json": "9c63c7d5cd045af549b44e40ebc32704dce69500881d005d2a02ce6e8ca7dd46"
+  },
+  "instruction_identity": false,
+  "limitations": [
+    "Native integer recurrence is not generic IEEE sqrt: signed-nonpositive encodings return+0 and positive exceptional/subnormal encodings use a forced hidden bit.",
+    "Every exponent/sign with selected fractions,4096 integer squares and random patterns does not exhaust all input bits.",
+    "Typed result, stack/callee registers and FPSCR checked; scratch/APSR/private frame, full-domain and instruction/image/hardware identity remain open."
+  ]
+}

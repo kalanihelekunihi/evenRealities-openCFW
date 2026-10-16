@@ -1,0 +1,62 @@
+{
+  "status": "Synchronization canonical admission passed; notification/event/delay source routes next",
+  "rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0007d154",
+      "end": "0x0007d171",
+      "size": "30",
+      "recovered_name": "FUN_0007d154",
+      "provider_family": "arm_cmsis_freertos_10_5_1",
+      "source_disposition": "use_authenticated_upstream_snapshot",
+      "upstream_symbol": "osDelay",
+      "confidence": "high",
+      "evidence": "Exact CMSIS-FreeRTOS v10.5.1 control-flow correlation; the ISR event-flag read/OR behavior distinguishes this revision from v10.4.6."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0007d1a0",
+      "end": "0x0007d1f9",
+      "size": "90",
+      "recovered_name": "FUN_0007d1a0",
+      "provider_family": "arm_cmsis_freertos_10_5_1",
+      "source_disposition": "use_authenticated_upstream_snapshot",
+      "upstream_symbol": "osEventFlagsSet",
+      "confidence": "high",
+      "evidence": "Exact CMSIS-FreeRTOS v10.5.1 control-flow correlation; the ISR event-flag read/OR behavior distinguishes this revision from v10.4.6."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0007d6f4",
+      "end": "0x0007d779",
+      "size": "134",
+      "recovered_name": "FUN_0007d6f4",
+      "provider_family": "arm_cmsis_freertos_10_5_1",
+      "source_disposition": "use_authenticated_upstream_snapshot",
+      "upstream_symbol": "osThreadFlagsSet",
+      "confidence": "high",
+      "evidence": "Exact CMSIS-FreeRTOS v10.5.1 control-flow correlation; the ISR event-flag read/OR behavior distinguishes this revision from v10.4.6."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0007d780",
+      "end": "0x0007d813",
+      "size": "148",
+      "recovered_name": "FUN_0007d780",
+      "provider_family": "arm_cmsis_freertos_10_5_1",
+      "source_disposition": "use_authenticated_upstream_snapshot",
+      "upstream_symbol": "osThreadFlagsWait",
+      "confidence": "high",
+      "evidence": "Exact CMSIS-FreeRTOS v10.5.1 control-flow correlation; the ISR event-flag read/OR behavior distinguishes this revision from v10.4.6."
+    }
+  ],
+  "upstream_source": "third-party/upstream/cmsis-freertos/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c",
+  "gates": [
+    "Authenticate notification/event/tick interfaces and native112-byte TCB notification fields before selecting bodies.",
+    "Preserve original-byte and all-component scope; blocking resumption/hardware/whole-image gates stay open."
+  ]
+}

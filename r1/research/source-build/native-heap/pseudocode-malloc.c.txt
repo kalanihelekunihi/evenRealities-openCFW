@@ -1,0 +1,97 @@
+/* ================================================================
+ * entry: 0x000855a0
+ * end:   0x0008567b
+ * size:  220 bytes
+ * name:  FUN_000855a0
+ * ================================================================ */
+
+uint FUN_000855a0(uint param_1)
+
+{
+  bool bVar1;
+  int *piVar2;
+  int *piVar3;
+  int *piVar4;
+  uint uVar5;
+  int *piVar6;
+  uint uVar7;
+  int *piVar8;
+  uint uVar9;
+  int iVar10;
+  int unaff_lr;
+
+  uVar9 = 0;
+  FUN_0009659c();
+  piVar2 = DAT_0008567c;
+  if (*DAT_0008567c == 0) {
+    FUN_00084f98();
+  }
+  if (param_1 == 0) {
+LAB_0008565e:
+    FUN_00098b24();
+    if (uVar9 != 0) goto LAB_00085668;
+  }
+  else {
+    uVar5 = 0x18 - (param_1 & 7);
+    if (((param_1 <= ~uVar5) && (uVar5 = uVar5 + param_1, 0 < (int)uVar5)) &&
+       (uVar5 <= (uint)piVar2[1])) {
+      piVar3 = DAT_00085680;
+      piVar4 = (int *)*DAT_00085680;
+      do {
+        piVar8 = piVar4;
+        piVar6 = piVar3;
+        if (uVar5 <= (uint)piVar8[1]) break;
+        piVar3 = piVar8;
+        piVar4 = (int *)*piVar8;
+      } while ((int *)*piVar8 != (int *)0x0);
+      if (piVar8 != (int *)*piVar2) {
+        iVar10 = *piVar6;
+        *piVar6 = *piVar8;
+        uVar9 = iVar10 + 0x10;
+        if (0x20 < piVar8[1] - uVar5) {
+          uVar7 = (int)piVar8 + uVar5;
+          if ((uVar7 & 7) != 0) {
+            bVar1 = (bool)isCurrentModePrivileged();
+            if (bVar1) {
+              setBasePriority(0x40);
+            }
+            do {
+                    /* WARNING: Do nothing block with infinite loop */
+            } while( true );
+          }
+          *(uint *)(uVar7 + 4) = piVar8[1] - uVar5;
+          *(undefined4 *)(uVar7 + 8) = 0;
+          piVar8[1] = uVar5;
+          FUN_000851a4(uVar7);
+        }
+        uVar7 = piVar8[1];
+        uVar5 = piVar2[1] - uVar7;
+        piVar2[1] = uVar5;
+        if (uVar5 < (uint)piVar2[2]) {
+          piVar2[2] = uVar5;
+        }
+        piVar8[2] = unaff_lr;
+        *piVar8 = 0;
+        piVar8[1] = uVar7 | 0x80000000;
+        piVar2[3] = piVar2[3] + 1;
+        goto LAB_0008565e;
+      }
+    }
+    FUN_00098b24();
+  }
+  FUN_00095bec();
+LAB_00085668:
+  if ((uVar9 & 7) == 0) {
+    return uVar9;
+  }
+  bVar1 = (bool)isCurrentModePrivileged();
+  if (bVar1) {
+    setBasePriority(0x40);
+  }
+  do {
+                    /* WARNING: Do nothing block with infinite loop */
+  } while( true );
+}
+
+
+

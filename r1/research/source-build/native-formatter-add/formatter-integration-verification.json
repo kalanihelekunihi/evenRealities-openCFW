@@ -1,0 +1,49 @@
+{
+  "native_sram_reads_outside_arguments_output_and_stack": [],
+  "callee_saved_registers_checked": true,
+  "link_diagnostics": "arm-none-eabi-ld: warning: (r1_format_double_multiply_bits): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-formatter-decimal/native_formatter_decimal.o\narm-none-eabi-ld: warning: (r1_format_double_multiply_bits): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-formatter-decimal/native_formatter_decimal.o\narm-none-eabi-ld: warning: (r1_format_double_divide_bits): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-formatter-decimal/native_formatter_decimal.o\narm-none-eabi-ld: warning: (r1_format_double_divide_bits): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-formatter-decimal/native_formatter_decimal.o\narm-none-eabi-ld: warning: (r1_format_double_multiply_bits): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-formatter-decimal/native_formatter_decimal.o\narm-none-eabi-ld: warning: (r1_format_double_multiply_bits): Forcing branch to absolute symbol in Thumb mode (Thumb-only CPU) in /Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-formatter-decimal/native_formatter_decimal.o\n",
+  "cases": 225,
+  "matched": 225,
+  "differences": [],
+  "execution_errors": [],
+  "provider_calls": {
+    "r1_format_width_padding": 190,
+    "r1_format_bounded_putc": 1880,
+    "r1_format_left_padding": 190,
+    "r1_format_decimal_digits": 120,
+    "r1_format_double_normalize_bits": 1055,
+    "r1_format_double_add_bits": 100,
+    "r1_format_double_to_unsigned_bits": 100,
+    "r1_format_double_round_bits": 80
+  },
+  "provider_reports": {
+    "native-formatter-unsigned/report.json": "d53af269c84f018ab279a3d33f91b96c5a9462f2448e5ab8a749aefd93d947a0",
+    "native-formatter-decimal/report.json": "fa25c7529d6ce82043a460cb69f1d8af25ce7a8b13020a4f8fbc632e141a5970",
+    "native-formatter-output/report.json": "e16f16a97dfd09437d91ad6aa5ab054255479e21fc53f1b87c0b598c7bd2cd2f",
+    "integer-runtime/report.json": "11f725f9bc6429f44be34d2666b9d72c7d8d04ad3ba4461df0f92bc75b0d6faf"
+  },
+  "report_sha256": "31c872efb89c46ec192da4a7eaf94659ed14389a6c1c03ecb4e57f257347c326",
+  "object_sha256": "af857655ec439a31541154632f02eb8e8ebbc256b19bd4c96aeb97588f931eac",
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "evidence": {
+    "rea-27afc.json": "a4f2bf7279d5bb4362da40a92b0c8ad97c99ca34712fe71d90dc24fdf7077a84",
+    "rea-27fd0.json": "16f89362328cd88c8fe7ea6cc89d3dae28af0b17e596b2c085a98000865a3269",
+    "rea-28122.json": "2d3d0acb29e0f32a425d2345004ac4bf106d400f7168f91285012ae89e1c701a",
+    "rea-28140.json": "7e6a0c26bf7c0826ad50d5f0f296c872cd9ff25832e68788e08f595e76f113ee",
+    "ghidra-27afc.json": "ee51ce406de9a788e516897195d8b885f276698d3422763034e69eaa612e85e9",
+    "ghidra-27fd0.json": "498f467de74e4f28152842c9138916b47aa2b5d204dfcd2217a18b404d97f201",
+    "ghidra-28122.json": "39c5ab6b65a017407485ef960575aedbf8965a36e39dd7e539c0231c13bddbe1",
+    "ghidra-28140.json": "878ceddf6e40fc260a3b15e2f0736d3d43739b6b7961a89ae7ec3889dd25509f"
+  },
+  "driver_sha256": "9707974ab5dd4b8741167fc16d8b2d2f98db3405a074db2cfbe050b16b9ab964",
+  "trace_sha256": "5c2e57b38a08196c82c59cdfad6283e500ff618c103f9c16c437dce72f47f389",
+  "native_equivalence_proven": false,
+  "instruction_identity": false,
+  "actual_native_core": true,
+  "actual_C_output_helpers": true,
+  "limitations": [
+    "Decimal conversion control flow, integer division and three output helpers execute source providers. Unsigned conversion and shift helpers are C providers. Addition, shared rounding/normalization and signed shifts are also C providers. Only multiply/divide arithmetic, parser and snprintf wrapper remain native observations.",
+    "Bounded format corpus, fresh zeroed SRAM and fixed output/context placements do not prove arbitrary callback/stack alias behavior.",
+    "Full caller-saved scratch-register identity and whole-image instruction identity remain gated."
+  ]
+}
