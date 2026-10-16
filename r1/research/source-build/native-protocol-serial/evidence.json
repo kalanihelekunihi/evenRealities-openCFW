@@ -1,0 +1,104 @@
+{
+  "inputs": {
+    "r1/docs/reference/FUNCTION-OWNERSHIP.csv": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+    "r1/research/decompilation/application/decompiler-output.c": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+    "r1/research/source-build/native-scatter-data/verification.json": "c2b61bfad032e0496b346d2f299a7f5aacbde97d516edccf67999f4c624537c1",
+    "r1/research/source-build/native-scatter-data/observed-initialized-data.bin": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+    "r1/research/source-build/native-advertising-configuration/verification.json": "c61c6d7fde017c6be96b3c1bc4a5062413ea99b1b205300a64572adf46bdcf99"
+  },
+  "tool_receipts": {
+    "ghidra-82b54.json": "278f7da97a91a43fb63c992a45611c945bf0340387ef03eca843580b6e55bfec",
+    "ghidra-82b96.json": "f26f3bed879ea46610033f84c9e3b5740daee88ef844768e693cc4a63ea5845b",
+    "ghidra-83db0.json": "9f2d365b4844aa5165f1fa66a66964174a6e5bafd8ee2887b67341aacce8df9a",
+    "ghidra-7ba78.json": "9537c688d8846eb6d4019a6ab4aa7032c87bad9c6968b4fc5c144700ddf0ff76",
+    "ghidra-7bac0.json": "1c4fc65ffdafbd8c6d5a34c9b92e352227e242ce831defff296e74ee4305dc34",
+    "ghidra-84c5e.json": "b11d40286c04704038ec9ea4bb5adebbb40015088eb4fa0d39f08737286b679c",
+    "rea-7ba78.json": "4a562c20a45f5e015cfe4cd961a22e6b7b27dbf2d1e25d131fcb1d3546ebc61f",
+    "rea-84c5e.json": "00f48aa4bf454bf4f668b004cfb18c723b00eac941f4ca387da9addc09ecb153",
+    "rea-82b54.json": "b08879e9e004962eda9a64ca1ba057b2ec3c22213a7b45c48fc3fdf0ce48595f",
+    "rea-83db0.json": "e2dd77000e8fcddb05efa50d779e58f149eeb2413b7dc328dd1f0ca20f6178d9",
+    "rea-82b96.json": "505c3d0497aff7892cdddf7f11f4beb19e52c2b5470d62f1aff0f087ff1b1ce9"
+  },
+  "new_ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00082b54",
+      "end": "0x00082b95",
+      "size": "66",
+      "recovered_name": "FUN_00082b54",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_protocol_ack_header_send",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00082b96",
+      "end": "0x00082bd3",
+      "size": "62",
+      "recovered_name": "FUN_00082b96",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_protocol_send_flag_inv",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "manual_provenance_supplement",
+      "entry": "0x00083db0",
+      "end": "",
+      "size": "",
+      "recovered_name": "r1_device_serial_handler",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_device_serial_handler",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x00084c5e",
+      "end": "0x00084c81",
+      "size": "36",
+      "recovered_name": "FUN_00084c5e",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_protocol_send_checked",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "observed_serial_instruction_span_bytes": 52,
+  "existing_getter_not_new_row": {
+    "image": "application",
+    "inventory_source": "ghidra_functions_csv",
+    "entry": "0x0007ba78",
+    "end": "0x0007babd",
+    "size": "70",
+    "recovered_name": "FUN_0007ba78",
+    "provider_family": "r1_product_specific",
+    "source_disposition": "clean_room_data_model_only",
+    "upstream_symbol": "r1_legacy_device_info_sources::product_sn",
+    "confidence": "high",
+    "evidence": "SHA-pinned R1 fixed-record accessor already represented by a bounded clean-room data field. Persistent lookup, logging, live flash access, and transport remain outside the local model."
+  },
+  "cold_observation": "r1/research/source-build/native-scatter-data/observed-initialized-data.bin",
+  "source_owned_class_bytes": 148,
+  "source_owned_symbolic_handle_bytes": 4,
+  "single_canonical_getter_selected": false,
+  "private_stack_history_matches": false,
+  "whole_image_identity": false,
+  "limitations": [
+    "Serial manual ownership row has no frozen size;52-byte instruction span is supplemental observed extent and the ledger is unchanged.",
+    "Old advertising getter remains primary frontier provider; stronger raw-read alias is not a new row and canonical selection across callers remains open.",
+    "First-activation raw record/output views match. Repeat probes retain payload/R0/nonstack RAM equality, but private input record bytes72-123 differ.",
+    "KV/lower response are fixtures in18744 cases;432 further cached-class workflows execute source KV read with only critical callbacks/lower response fixtures. Flash/provisioning/delivery remain unproven.",
+    "Class148 bytes and symbolic handle4 match cold scatter including mixed zeros and0x5a; field16 tag semantics and full class lifecycle remain unknown.",
+    "ABI bridges bind selected compiler/frames; no whole private scratch/APSR/compiler/image identity claim."
+  ]
+}

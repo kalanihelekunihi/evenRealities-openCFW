@@ -1,0 +1,33 @@
+{
+  "comparisons": 36864,
+  "counts": {
+    "byte": 24576,
+    "lr": 1536,
+    "clear": 1536,
+    "pc": 1536,
+    "caller": 1536,
+    "tag": 1536,
+    "capture": 1536,
+    "current": 1536,
+    "probe": 1536
+  },
+  "events_per_side": 294840,
+  "trace_sha256": "3b622338ba6a4fc7233c6edbbc1fa1c21984eccd73ad7e5dc9f9dee5ad728366",
+  "actual_source_crc_and_attributable_clear": true,
+  "probe_source_bytes_match": true,
+  "candidate_native_execution_forbidden_except_source_probe": true,
+  "controlled_context_and_record_mutation_fixtures": true,
+  "raw_r0_callee_registers_stack_and_observed_ram_checked": true,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "driver_sha256": "b89d443092a2a3ead5df7b4bf00373d67f86739cd444269469bab66d9e4d63cf",
+  "report_sha256": "af3cdb812dd34360f5d0a9d7714e884f4659b03a01298d82826dad676e988e47",
+  "object_sha256": "9c21e031b31af8b68e763e31f8d7b0b7a68302969f250a1e930face5a49f574a",
+  "layout_sha256": "d90bfed1bf69c7a247de8bb5d0ce0f1e2eecc01f7261a014f64823012ecdb621",
+  "instruction_identity": false,
+  "full_image_complete": false,
+  "limitations": [
+    "Probe source is linked at recovered address for sampled PC equality.",
+    "Clear call order, arguments and RAM effects checked; provider internal store granularity is not required equal.",
+    "Private stack bytes excluded; physical concurrency, retention and full firmware placement remain gated."
+  ]
+}

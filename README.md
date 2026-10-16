@@ -78,9 +78,11 @@ Other local captures and reconstructed R1 images remain ignored. See
 checks its required inputs by SHA-256 before use.
 [`g2/blobs/official/g2-2.2.6.10/PROVENANCE.md`](g2/blobs/official/g2-2.2.6.10/PROVENANCE.md)
 and [`r1/research/decompilation/rebuild/PROVENANCE.md`](r1/research/decompilation/rebuild/PROVENANCE.md)
-record the canonical build inputs. `./make.sh g2-build`
-repacks the six official G2 payloads into the byte-identical reference
-EVENOTA. That confirms the container format, not source reconstruction.
+record the canonical build inputs. `./make.sh build` compiles the selected
+G2/R1 source providers and assembles hybrid firmware with per-region source,
+binary and resource provenance. The explicit `./make.sh g2-reference` target
+repacks the six official G2 payloads as a reference. See
+[`docs/build.md`](docs/build.md) for coverage and integration limits.
 
 > **History warning:** the Git history retains 52 `g2/.tmp-*` paths and
 > descendants (108,601,986 bytes), including official-derived firmware variants

@@ -45,6 +45,29 @@ directory is writable. No repo-wide mount, networking or credentials are used.
 
 ## Linux container path
 
+### Local Arm Compiler 6.24 probe (2026-10-16)
+
+The official Arm Compiler for Embedded 6.24 AArch64 Linux standalone archive is
+installed locally under ignored `third-party/local-vendor/toolchains/arm-compiler-6.24-linux-aarch64/`.
+The downloaded archive is under `third-party/local-vendor/artifacts/` with SHA-256
+`5054568401c250177dc15bd6de0246acd503cb2c614bd22c2652dc4b71a7ca4c`.
+Its archive paths and entry types were checked before extraction. It contains
+`armclang`, `armlink`, and runtime libraries and runs in an Ubuntu 24.04 arm64
+container on this Mac. A fresh Cortex-M0+ compile stopped before object creation
+because `ARMLMD_LICENSE_FILE` and other Arm license settings were unset. This
+establishes installation, not an activated compiler. The package reports Arm
+Compiler for Embedded 6.24 Professional; the case firmware's exact compiler
+release remains unidentified. Keep any license file outside the image and this
+repository's tracked files. Do not treat the IAR credential as an Arm license.
+
+The retained `MDK543a.exe` contains Windows `armclang.exe` and `armlink.exe`,
+but no `armcc.exe` was listed. No MetaWare `ccac` executable was found in the
+local EM9305 SDK v4.6 tree. Arm Compiler 5 and the stock-era MetaWare package
+still require their respective vendor download and license entitlement. The
+installed Arm Compiler 6.24 can run on Linux without Windows after an applicable
+Arm license is configured; it does not by itself clear source-completeness or
+byte-equality gates.
+
 This Mac is Apple Silicon. Existing Colima uses aarch64 Linux; IAR's current
 Linux package is amd64 and needs emulation, not a native ARM execution claim.
 The preflight script tests the existing Docker engine with an isolated official

@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "all_finished_source_integrated": false,
+  "binary_fallback_is_only_unfinished_source": false,
+  "explanation": "Retained regions include genuine missing implementations and source candidates with unresolved compiler, instruction, ABI, relocation or placement qualification. Compilation success or bounded behavior tests do not establish source completeness.",
+  "toolchain_evidence": {
+    "path": "tools/build/toolchain-probe.json",
+    "sha256": "6833a8cf83b8a69a57958307542ed41e1076d7b0076a54f99bf4375d76e20836",
+    "iar_container": "opencfw/iar-base:10.10.2-local",
+    "iar_compile_succeeded": false,
+    "iar_license_failure": true,
+    "production_mode": "license-free Clang/GNU GCC; IAR is diagnostic only"
+  },
+  "blockers": [
+    {
+      "payloads": [
+        "g2-apollo-main",
+        "g2-apollo-bootloader"
+      ],
+      "kind": "producing_compiler",
+      "detail": "IAR 10.10.2 is present in the local container but real compilation fails on licensing; exact stock compiler release/configuration remains a matching requirement."
+    },
+    {
+      "payloads": [
+        "r1-application"
+      ],
+      "kind": "producing_compiler_and_abi",
+      "detail": "Arm Compiler 5 is not available on PATH. Clang/GCC matches are admitted only after exact native linking and full byte equality."
+    },
+    {
+      "payloads": [
+        "g2-case"
+      ],
+      "kind": "producing_compiler",
+      "detail": "Arm Compiler 6 is not available on PATH. Near matches from Clang do not satisfy byte identity."
+    },
+    {
+      "payloads": [
+        "g2-em9305"
+      ],
+      "kind": "producing_compiler",
+      "detail": "MetaWare is not available on PATH; current ARM-only provider selector does not cover ARC code."
+    },
+    {
+      "payloads": [
+        "g2-codec"
+      ],
+      "kind": "configuration_and_placement",
+      "detail": "C-SKY toolchain exists separately; complete producing configuration, bank/load placement and selected exact source providers remain unqualified."
+    },
+    {
+      "payloads": [
+        "g2-touch"
+      ],
+      "kind": "remaining_source_and_matching",
+      "detail": "GCC 12.2 -Og reproduces selected upstream PDL routines; remaining source, aliases, relocations and generator configuration still require qualification."
+    }
+  ],
+  "classification": {
+    "complete_executable_non_executable_partition": false,
+    "policy": "Known instruction/data and source ELF mapping claims are reported separately from unclassified bytes. Function envelopes are estimates only.",
+    "compressed_initializer_storage_bytes": 20300,
+    "remaining_evidence_partition": "remaining-classification.json and CSV: decoder observations and candidate envelopes remain separate from confirmed execution"
+  },
+  "compiler_mode": "license-free",
+  "data_provider_integration": {
+    "regions": 54,
+    "bytes": 3233,
+    "scope": "R1 immutable calibration, character-classification and math lookup objects; distinct from executable C"
+  },
+  "license_free_qualification_runs": [
+    {
+      "path": "build/g2-gcc-license-free-20261016/scan/qualification.json",
+      "sha256": "fe146c023293ebdf2091e7c9b434fa527ae7d02d486f7d8a5e8d5f8c5717bf4c",
+      "summary": {
+        "candidate_units": 2171,
+        "compiled_units": 2112
+      }
+    },
+    {
+      "path": "build/g2-gcc-license-free-20261016/hard-float/qualification.json",
+      "sha256": "3a6d979ea95062d1f2bb98c7340c036a831497dee27dd2c4a994724ee6921420",
+      "summary": {
+        "candidate_units": 66,
+        "compiled_units": 60
+      }
+    },
+    {
+      "path": "build/g2-gcc-license-free-20261016/placements/qualification.json",
+      "sha256": "9fa436fc7a2d49e92307f418ecc832c74beacf063f7aa49c198fb975dc2b24a4",
+      "summary": {
+        "outcomes": {
+          "fixed_instructions_or_relocations_differ": 1484
+        }
+      }
+    },
+    {
+      "path": "build/anchored-placement-qualification-20261016-v2/qualification.json",
+      "sha256": "f9069d53d7c2b1c679a6d0cf4244331e271d60b01d7a75266308b3cb4eee79d7",
+      "summary": {
+        "fixed_instructions_or_relocations_differ": 4434,
+        "exact_selected": 2,
+        "link_not_closed": 19
+      }
+    }
+  ]
+}

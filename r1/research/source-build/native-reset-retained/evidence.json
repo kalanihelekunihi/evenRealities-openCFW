@@ -1,0 +1,110 @@
+{
+  "ghidra": {
+    "ghidra-5d87c.json": "e3203ba304dc06211bfe9e59e5d890c027465a636637e7d70eb42a0859029f0e",
+    "ghidra-7edfc.json": "a5c75d25b465f822479cf0b602044f6885c6f3630c23d8bf55e356d84e72825b",
+    "ghidra-7ee2c.json": "7c8ea79d5d949041ebbac35617f7725e2ae22b334a3b882df9e570e18b690f4a",
+    "ghidra-7ee7c.json": "9fb041c5b68623e61a598490d75736ca019df1791cdcb0c3f08eeb0706b8acf7",
+    "ghidra-7ef4c.json": "fd880c13a60057b1ad8f5f7302c250507cd20945f13d43e0814eb7208c517edf",
+    "ghidra-995a8.json": "ecb6a91efe738608903167446600a8051de79ab537ffa0e8b1239ff94e9d9aea"
+  },
+  "rea": {
+    "rea-5d87c.json": "defca1bddc785b073d138794daabf7a25036bc8d9a6b04c5d347a0823deed3c0",
+    "rea-7edfc.json": "230bbc5830fb1a47982c317d9984a580943837b699678bf7f7e60ecf858e63b6",
+    "rea-7ee7c.json": "1e1625e07956781c08f6dbcd49d7e203af5b7b4c0cfb284acdae4d5e45fe1713",
+    "rea-7ef4c.json": "48f49d47e829ff4bbed0cef93b74519823bb8895c50155a86b9b7875ed1aec73"
+  },
+  "ownership_sha256": "3ac7de261785d461c3af637fa3d6af46170917f4a9f329bf6aa6bae2ecc4ea13",
+  "frozen_corpus_sha256": "d7790642947403d713352d100e41a38c69b0619d6495aba3e1c47d6f02912968",
+  "ownership_rows": [
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0007edfc",
+      "end": "0x0007ee2b",
+      "size": "48",
+      "recovered_name": "FUN_0007edfc",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_reset_trace_byte_read",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0007ee7c",
+      "end": "0x0007eed9",
+      "size": "94",
+      "recovered_name": "FUN_0007ee7c",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_reset_trace_return_address_read",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    },
+    {
+      "image": "application",
+      "inventory_source": "ghidra_functions_csv",
+      "entry": "0x0007ef4c",
+      "end": "0x0007efa9",
+      "size": "94",
+      "recovered_name": "FUN_0007ef4c",
+      "provider_family": "r1_product_specific",
+      "source_disposition": "clean_room_behavior_only",
+      "upstream_symbol": "r1_reset_trace_program_counter_read",
+      "confidence": "high",
+      "evidence": "Accepted R1 decompilation/security-audit behavior address; no third-party implementation identified."
+    }
+  ],
+  "native_getter_bytes": 236,
+  "reused_crc_native_bytes": 36,
+  "reused_crc_not_new_native_entry": true,
+  "source_context_bytes": 24,
+  "context_address": "0x20007a34",
+  "record_pointer_word_offset": 20,
+  "canonical_record_address": "0x2003ffb0",
+  "record_bytes": 16,
+  "crc_prefix_bytes": 14,
+  "stored_crc_offset": 14,
+  "valid_byte_indexes": [
+    0,
+    12
+  ],
+  "lr_byte_indexes": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "pc_byte_indexes": [
+    6,
+    7,
+    8,
+    9
+  ],
+  "private_byte_slot_stride": 4,
+  "cold_observation": "r1/research/source-build/native-scatter-data/observed-initialized-data.bin",
+  "cold_observation_sha256": "87fdee392022fdbe23dd0daf3e859fb14f3ce26ba3e8403aab56dc9d9a913317",
+  "cold_observation_offset": 5516,
+  "cold_context_hex": "0000000000f0032010f00320f0f3032000000000b0ff0320",
+  "cold_scatter_receipt_sha256": "c2b61bfad032e0496b346d2f299a7f5aacbde97d516edccf67999f4c624537c1",
+  "initial_getter_receipt_sha256": "ca6b9f733f029089965ccc78ca57f13893f541709cdd26b6c81fdc05a841927c",
+  "initial_getter_driver_sha256": "f2cf25c20c41b3f21cfa8c7cfbbb12c1b849d39cd6f2d4006ace3485e2ee1096",
+  "retained_record_has_no_source_initializer": true,
+  "no_explicit_record_consumption_or_clear": true,
+  "caller_output_alias_can_modify_record": true,
+  "word_output_only_published_on_complete_success": true,
+  "upstream_vendor_implementation_claim": false,
+  "whole_startup_graph_executed": false,
+  "physical_retention_verified": false,
+  "locked_ownership_changed": false,
+  "whole_image_identity": false,
+  "gates": [
+    "Retained record bytes are explicit fixtures; only the minimum cold24-byte context view is source-initialized.",
+    "Actual source getters and checksum execute; controlled CRC/logger interleavings do not prove physical races or reset retention.",
+    "Private word-slot seed bytes/addresses, source context symbol extent/ownership and final linker placement remain open.",
+    "Writer/capture and existing GXT pointer/shared read-only gates remain open; no whole-image/physical proof is inferred."
+  ],
+  "source_selected_decoder_data_bytes": 1380,
+  "decoder_folded_bounds_and_pointer_cells_bytes": 16
+}

@@ -1,0 +1,70 @@
+{
+  "units": [
+    {
+      "source": "r1/components/runtime/native_reset_writer.c",
+      "source_sha256": "b3e58ac0425af62869abfb2bedb229c818d5e8d1292e3c2bebf7006b74bfca18",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-reset-writer/native_reset_writer.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/runtime/native_reset_writer.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-reset-writer/native_reset_writer.o"
+      ],
+      "compiled": true,
+      "object_sha256": "292c6301a8cbcaf4cb779a3bfa32023d283627e234f981058234e3ffce9fdce0",
+      "undefined": [
+        "__aeabi_memclr",
+        "r1_reset_trace_context",
+        "r1_stock_crc16_modbus"
+      ],
+      "defined": [
+        "r1_reset_trace_addresses_clear",
+        "r1_reset_trace_byte_write",
+        "r1_reset_trace_capture_site_adapter",
+        "r1_reset_trace_current_site_capture",
+        "r1_reset_trace_persist_tag_write",
+        "r1_reset_trace_program_counter_probe",
+        "r1_reset_trace_program_counter_write",
+        "r1_reset_trace_reboot_caller_write",
+        "r1_reset_trace_return_address_write"
+      ],
+      "emitted_function_count": 9
+    }
+  ],
+  "inputs": {
+    "r1/components/runtime/native_reset_writer.c": "b3e58ac0425af62869abfb2bedb229c818d5e8d1292e3c2bebf7006b74bfca18",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7",
+    "r1/components/runtime/../board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6",
+    "r1/components/runtime/../../source/include/r1_stock_checksums.h": "af730ecb8d2e2cc5656016b269678e7f1ac6c7e48fe32401fdfb9b7206886ef9"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

@@ -2587,3 +2587,465 @@ hints and 1,196 unresolved routes across 3,326 rows. GXT mode enable/disable,
 other provider bodies, physical I2C/sensors, actual full startup execution,
 raw private ABI, source state/link ownership, original compiler and byte-identical
 whole-image rebuilding remain explicit gates.
+
+
+GXT310 shared mode control, both channel veneers and pair enable/disable now
+compile from recovered R1 C. The five locked rows total 384 bytes because the
+124-byte power-down row includes the 106-byte shared mode body; there are
+278 unique native code bytes. REA confirms that noncontiguous ownership and
+both eight-byte channel bodies. Ghidra-MCP matches the unique code spans and
+308 constant bytes. The source channel veneers keep explicit tail relocations
+to the shared source mode routine. No vendor source attribution is inferred.
+
+The native mode contract initializes all four configuration bytes to 0x0000c200,
+sets low-byte bit zero only for enabled==0, writes two bytes to register 1 and
+normalizes any nonzero write result to success. Pair enable calls both channel
+providers before logging their failures, then returns raw bitwise AND. Pair
+disable calls both channels with zero and its sampled raw R0 equals the last
+channel result. The 113,032-case direct receipt passes 341,482 callback
+observations and 66,880 write observations per side. It covers all byte
+addresses, high-width statuses/enables/modes, callback buffer mutation, logger
+order, typed arguments, full observed non-stack RAM and raw R0/callee/SP.
+Writes, loggers and pair-channel providers are named fixtures in this receipt.
+
+A 16,572-workflow receipt then executes the actual source cache, bus/request
+records, shared/channel modes, pair control, both ID veneers/readers and
+self-check together. Only registry lookup/dispatch and logging remain fixtures.
+There are 495,412 callback observations per side. Every workflow checks four
+mode writes, both ID reads, cleanup order, full four-byte private words, cold C
+state, NULL-handle behavior and the final self-check result. Selected graph
+strings/name total 388 bytes and source state 24 bytes; folded constant words
+and bounds remain authenticated in the raw source objects.
+
+This graph comparison explicitly normalizes only the persistent write/read
+pointer words in the request record after their typed buffer effects are
+checked. Raw pointer equality fails: sampled native pointers are 0x2003efe0 and
+0x2003efdc, while source leaves both at 0x2003efdc. Thus native pointers are
+distinct and source pointers alias. Later NULL-write reuse after intervening
+stack reuse remains unverified; normalization does not close that behavior.
+Concrete cases are retained in graph-verification.json. An initial normalized
+receipt/driver is preserved, and the stronger receipt adds raw pointer samples
+without changing the compiled source object or comparison trace. O1/O2/Oz
+compiler probes preserve the four-byte placement gap and remain unadmitted
+code-generation observations, with their objects and hashes retained.
+
+All named GXT imports in this startup graph now resolve to source. The broader
+startup bundle has 63 transitive unresolved imports, with all thirteen direct
+application imports still resolved. The frontier is 761 tested contract
+candidates, 1,370 compiled hints and 1,195 unresolved routes across 3,326 rows.
+This does not establish all GXT functionality, actual registry/logger source
+execution in the selected graph, physical sensor/device health, full startup,
+raw private ABI/persistent pointer placement, final source state/link ownership,
+original compiler or byte-identical firmware. Those gates remain explicit.
+
+
+The reset-reason decoder now compiles as a C kernel with a naked forwarding
+bridge that preserves incoming raw register seeds. The public startup interface
+remains one typed reason word; the kernel receives the incoming scratch words
+explicitly so the caller diagnostic word retains its native upper R3 bytes.
+Its return mask is 0x0007000f. Zero reasons log power-on/brown-out, while nonzero
+unknown-only reasons return zero without that message. Recognized bits are
+processed in native order, with retained PC/LR and tag/caller queries only on
+software reset. Values reload after callback-capable logging and the tag is
+retested after logging before the conditional caller query.
+
+REA confirms 754 native code bytes in two ranges: 620 at 0x8198c and 134 at
+0x81fb8. Ghidra-MCP matches both spans and 1,396 constant bytes, including source
+pointer relocations for two shared format strings. The DIF string at 0xbdb78
+overlaps 25 bytes of the earlier 257-byte ctype view at 0xbda90. This new source
+view does not establish unique global image-data coverage; final shared literal
+ownership/link placement must coalesce the two views. No vendor attribution is
+inferred for this product-specific body.
+
+The 114,240-case receipt passes 1,965,056 callback observations, 314,992 retained
+diagnostic-provider calls and 124,400 byte-provider calls per side. It covers
+all 128 recognized-flag combinations, unknown bits, getter statuses/values,
+initial four-byte diagnostic words, raw incoming R3 seed bytes and in-scope
+callback mutations. Native/source typed argument order, fresh PC/LR/tag loads,
+conditional caller reads, return R0, callee/SP preservation and full observed
+non-stack RAM match. Diagnostic-pointer addresses are normalized; retained
+getters and logger bodies are named fixtures. The bridge branches only to the
+compiled C kernel, with no native executable fallback.
+
+The larger startup bundle now resolves the decoder and exposes its three
+retained getters, so transitive unresolved imports rise from 63 to 65. All
+thirteen direct application imports remain resolved. The frontier contains
+762 tested contract candidates, 1,370 compiled hints and 1,194 unresolved source
+routes across 3,326 rows. Retained provider bodies, real reset/retention and
+whole startup execution, raw private frames, shared literal ownership, original
+compiler and byte-identical firmware remain open. The prior GXT persistent
+pointer placement/alias difference and later NULL-reuse gate remain unchanged.
+
+
+Retained reset byte, return-address and program-counter getters now compile as
+recovered R1 C. Their 48/94/94-byte native bodies total 236 bytes. Each byte
+request rejects unsigned indexes above 12 and NULL outputs, captures the record
+pointer from context+20, rejects a nonzero busy byte and compares stored CRC16
+at+14 with a checksum of the first 14 bytes. PC/LR perform four separately
+validated byte reads (indexes 6..9 and 2..5), assembling little-endian output
+only after all succeed. They do not explicitly consume or clear the record;
+caller-selected output aliasing can of course modify record storage.
+
+The existing authenticated stock_checksums.c implementation supplies CRC16.
+It is recompiled unchanged with function/data sections and selected without
+CRC32/hash code. Getters plus CRC16 link with zero unresolved imports. REA and
+Ghidra-MCP authenticate the three getter bodies, the reused 36-byte CRC body,
+its 512-byte polynomial table and the four-byte context literal. The source
+24-byte minimum context view matches verified cold scatter bytes, including
+the retained record address 0x2003ffb0. The record itself has no source cold
+initializer and lies outside the observed cold scatter ranges. Full context
+symbol extent/ownership and writer/capture behavior remain separate gates.
+
+The 117,750-case receipt executes actual source getters and CRC16, with 33,944
+CRC calls and 125,482 byte-entry observations per side. It covers valid/corrupt
+and busy records, unsigned index boundaries, NULL/unaligned/aliased outputs,
+persistent alias sequences and the canonical high retained-RAM address. Explicit
+CRC-entry mutations verify captured record pointers, checksum reload after the
+call, no second busy check, mixed-record word reads, and early failures at every
+byte position. Failure does not publish a partial output word. The initial
+116,790-case receipt/driver are preserved; coverage expanded without changing
+the compiled object. Source private byte slots retain four-byte stride; their
+initial scratch bytes and exact frame addresses remain unproven.
+
+A further 59,904 workflows execute the actual source decoder, all getters and
+CRC16 together: 985,109 logging observations, 222,576 getter entries and 131,280
+CRC calls per side. Only logger bodies are fixtures. Busy/corrupt records,
+recognized flag combinations, tag cases and controlled logger/context changes
+match native behavior. Return R0, callee/SP state and the full observed low and
+high retained non-stack RAM match without persistent pointer normalization.
+Input record bytes are explicit fixtures, not proof of physical retention or
+concurrency. Selected decoder data drops 16 folded bounds/pointer-cell bytes:
+1,380 decoder bytes, the reused 512-byte CRC table and 24 context bytes remain.
+The raw decoder's 1,396-byte constant proof remains unchanged.
+
+The larger startup bundle resolves all three retained-getter imports and now
+has 62 transitive unresolved imports, with all thirteen direct application
+imports still source-linked. The frontier contains 765 tested contract
+candidates, 1,370 compiled hints and 1,191 unresolved routes across 3,326 rows.
+Writer/capture bodies, physical reset/retention, whole startup execution, source
+context/private-frame/final linker ownership, original compiler and byte-identical
+image integration remain open. The earlier GXT persistent pointer alias/NULL-
+reuse gate and shared DIF/ctype literal-placement gate remain explicit.
+
+### Retained reset writers and capture paths
+
+`native_reset_writer.c` adds source byte publication, address clearing, caller
+and tag writers, both capture paths and the architectural PC probe. REA confirms
+8 locked rows spanning 326 unique native bytes; the return-address writer is a
+44-byte shared tail of the capture adapter, not a ninth row. Ghidra-MCP reads
+match all spans and the context literal against the authenticated application.
+The source bundle reuses the existing CRC16 and attributable EABI/memory-clear
+providers and has no undefined imports. No new vendor implementation is claimed.
+
+36,864 native/source cases compare 294,840 call observations per side, raw R0,
+callee registers, SP and full observed low/high non-stack RAM. Controlled record
+and context changes cover capture-before-CRC versus reload-before-clear, header
+changes, stored CRC corruption/repair and context changes at clear entry. Each
+byte publishes a fresh CRC. Tag value 7 skips address clearing only when the
+full input word equals 7. The source PC probe compiles to the native four bytes
+and is linked at its recovered address for sampled stored-PC equality.
+
+The combined startup bundle now has 61 transitive imports remaining and all
+13 direct application imports resolved. The frontier is 773 tested candidates,
+1,370 compiled hints and 1,183 unresolved routes across 3,326 ownership rows.
+These are contract results, not a source-complete or byte-identical image.
+Private frames, source placement/compiler identity, physical reset/retention,
+concurrency and whole startup execution remain open. The prior GXT persistent
+pointer alias/NULL-reuse and shared DIF/ctype literal gates remain open. Clear
+call arguments/order and RAM effects match; internal provider store granularity
+is not claimed identical to the native clear loop.
+
+The selected clear provider is the existing pinned musl 1.2.5 `memset` plus
+the R1 EABI wrapper. Its upstream source/provenance hashes remain bound through
+the runtime provider report. Future upstream updates can reuse the same seam,
+but require a new differential receipt and retain the instruction-identity gate.
+
+### Battery ADC cache source checkpoint
+
+`native_vbat_cache.c` implements the locked 20-byte cache contract at 0x9143c.
+Only the four-byte pointer cell at 0x200068a0 is source-owned; its zero initializer
+matches authenticated cold scatter RAM. The nine-byte `vbat_adc` string matches
+Ghidra-MCP reads and the official image. No surrounding root layout is invented.
+Fresh REA analysis does not recover a procedure at this address; that tool gap
+is preserved in `rea-9143c.json`, while frozen pseudocode, locked ownership and
+native instruction bytes independently define the existing contract. The locked
+ledger is unchanged.
+
+1,792 three-call workflows execute actual source cache, registry and pinned
+musl string comparison against native: 3,275 registry entries and 6,048 string
+comparisons per side. Empty/missing/prefix/duplicate/exact name lists, nonzero
+cached words, cache reset/retry and controlled registry/cache mutation fixtures
+match raw R0, callee registers, SP and observed low/high non-stack RAM. A null
+lookup remains null and is retried; a nonzero cached value skips lookup even if
+the registry changes. Existing source registry and attributable musl providers
+are reused; this product-specific wrapper has no new upstream attribution.
+
+The zero-import cache graph links into the larger startup bundle, reducing
+transitive imports to 60. The frontier is 774 tested contract candidates, 1,370
+compiled hints and 1,182 unresolved routes across 3,326 rows. Physical ADC
+conversion, whole startup, private frames, original compiler and byte-identical
+image placement remain open, along with prior GXT pointer alias/NULL-reuse and
+shared DIF/ctype literal gates. The REA boundary gap is an evidence limitation,
+not a claim that source work is externally blocked.
+
+### Daily cache metadata and signed local-day source checkpoint
+
+`native_daily_metadata.c` adds six refreshers and six startup veneers, plus
+local-day start and signed timezone access. Fourteen locked rows cover 264
+unique native bytes. Individual timestamp/offset fields own only 36 bytes,
+inside the authenticated startup zero-fill region; complete cache layouts,
+record ownership and lifecycle remain open. HR logging owns 21-byte ring and
+15-byte SDK literals, independently matching Ghidra-MCP reads. All native body,
+veneer and literal spans match the authenticated application. Fresh REA recovers
+the day/offset helpers but misses twelve metadata/veneer entries; the frozen
+pseudocode and locked ledger remain authoritative for their existing extents.
+No boundary or ownership row is rewritten.
+
+57,344 comparisons execute source refreshers, veneers, day/offset accessors,
+existing clock backend and integer runtime. The external backend and three
+logging calls are named fixtures: 53,248 backend calls and 9,216 logger calls
+per side. Extreme signed offsets, epoch/day boundaries, source ABI returns,
+mode short-circuit/fresh reads and controlled backend/logger mutations match
+native observations, callee/SP state and observed low/high non-stack RAM.
+The local-day routine captures timezone before calling the backend; each
+refresher reloads timezone afterward. Stress stores backend time directly.
+HR logging reloads its timestamp field after callbacks and returns the native
+last mode/SDK result on sampled paths.
+
+The initial unsigned-day candidate was rejected at epoch0/offset-32768. Its
+source, objects, driver, reports and counterexample are preserved under
+`initial-unsigned-day-candidate/`; it was never admitted. Native 0x2754a uses
+signed64 division truncating toward zero. The corrected source uses existing
+signed EABI glue and unchanged LLVM compiler-rt20.1.8 unsigned magnitude division,
+pinned at 87f0227cb60147a26a1eeb4fb06e3b505e9c7261 with source/license provenance.
+This permits future upstream improvements through the same runtime seam after
+new native/source verification, while preserving the image-identity gate.
+The receipt's u64-division flag denotes this reused magnitude provider; it does
+not claim unsigned day arithmetic. Product-specific metadata is reconstructed
+source, not an attributed vendor implementation.
+
+The startup bundle now has54 transitive imports, resolving all six cache
+initializers and retaining all13 direct application imports as source-linked.
+The frontier is788 tested contract candidates,1370 compiled hints and1168
+unresolved routes across3326 rows. Logging/backend fixtures, complete startup,
+private scratch/APSR/R1-R3 ABI, physical clock/cache lifecycle, compiler and
+byte-identical image placement remain unproven. Prior GXT persistent pointer
+alias/NULL-reuse and shared DIF/ctype literal gates remain open.
+
+### Protocol reset and periodic reaper callback source checkpoint
+
+`native_protocol_reset.c` implements locked reset0x82f78 (28 bytes) and arm
+0x83cf4 (12 bytes), plus instruction-derived callback0x83cd0 (30 bytes). The
+callback is absent from the frozen function ledger and is supplemental source;
+no third row or corpus entry is invented. Ghidra-MCP reads authenticate bodies
+and literals; fresh REA misses these entries and that limitation is retained.
+Reset calls existing port init, clears640 workspace bytes, arms the callback,
+then resets the existing sequence halfword. The callback publishes event0x10
+with byte1, then schedules itself with argument0 and delay0x384000. Provider
+failures do not suppress its subsequent scheduling.
+
+4,608 comparisons cover reset, arm and callback:9,216 call observations per
+side, raw R0, callee/SP and observed low/high non-stack RAM. Actual source clear
+reuses pinned musl1.2.5 plus the existing EABI wrapper; sequence storage is
+selected unchanged from the encoder. Init/scheduler/event are explicit named
+fixtures, including workspace/sequence/payload mutations and arbitrary returns.
+Only the one-byte public payload is inspected. Private pointer, upper scratch
+bytes and native callback R3 behavior are unproven. The source callback section
+is64 bytes including linker veneers and exceeds the native30-byte body/literal
+placement. Its recovered verification address ensures pointer equality only;
+this is not proof of a valid global linker layout or instruction identity.
+
+640 zero-initialized workspace bytes lie within the previously verified scatter
+zero-fill region. Surrounding state and ACK record semantics remain unresolved.
+The startup bundle resolves the task's reset import but exposes port-init as a
+new link dependency, retaining54 transitive imports. Port-init source already
+exists; complete source port/scheduler/event integration remains separate work.
+The frontier is790 tested candidates,1370 compiled hints and1166 unresolved
+routes across3326 rows. Full protocol/startup execution, physical delivery,
+private ABI/compiler/final image, prior GXT pointer alias/NULL-reuse and shared
+DIF/ctype literal gates remain open.
+
+### Reset through actual source protocol-port initialization
+
+`build_native_protocol_reset_port_runtime.py` composes reset/reaper, existing
+port init/receive registration, send registration, source-owned hook cells,
+existing sequence and attributable source clear. A further36,864 comparisons
+execute this composition:162,816 call/log observations per side, raw R0,
+callee/SP and observed low/high non-stack RAM match native. Mode short-circuit,
+ring/SDK logging, hook mutations during logging, workspace/sequence mutations,
+clear-before-arm and final sequence reset are checked. Init and registration
+are actual source, replacing the prior init fixture. Only logging, scheduling
+and event providers are execution fixtures. In this bounded verification graph,
+fragment/ingress addresses are opaque registration targets and never execute.
+
+The larger startup bundle also links the actual source fragment/ingress bodies,
+fragment callback state and unchanged selected CRC32 source, retaining their
+source relocations. These bodies are not claimed executed by this reset-only
+graph. Port-init is closed; three dispatch seams are newly exposed:
+`r1_ble_event_dispatch`, `r1_eus_system_dispatch_plan_build`, and
+`r1_health_registration_dispatcher`. Thus56 imports remain, compared with54
+before callback expansion. The increase reflects a larger source-linked graph,
+not replacement of real providers with stubs. CRC32 is selected from the
+existing function-section checksum compilation; CRC16 is not duplicated.
+Existing pinned musl memory and checksum source/provenance are reused.
+
+No new ownership row is promoted by composition:790 tested candidates,1370
+compiled hints and1166 unresolved routes remain across3326 rows. Actual full
+callback dispatch, scheduler/event execution and whole startup remain open.
+The reaper source callback's64-byte verification placement still exceeds the
+native span; private pointer/scratch/R3, physical delivery, compiler and global
+byte-identical image integration remain gated. Prior GXT pointer alias/NULL-
+reuse and shared DIF/ctype literal gates remain explicit. Existing REA/Ghidra
+provider evidence is reused unchanged; no new boundary claim is made.
+
+### Health command group and complete bounded health dispatch
+
+`native_health_commands.c` adds13 health-command bodies and three shared response
+flag helpers:16 locked rows,844 native bytes. Daily requests send their response
+then publish an8-byte event; the second word retains incoming R3. Sequence is
+reloaded after the response callback without a flag recheck. Point requests
+publish the same retained-seed record with their native kind and mode. HR/SpO2
+measurement and sleep detail use distinct flag gates and event identifiers.
+The history no-op preserves incoming R0, matching its native BX LR body.
+
+46,080 direct/source-helper comparisons cover all256 flag bytes, full-word
+header inputs/truncation, unaligned packets, provider return words, packet
+sequence/flag changes during response and writable header/event fixtures.
+11,520 lower responses and8,448 events per side match. Only lower response,
+event and report-setting providers are fixtures; actual source flag helpers
+execute. The report-setting length12 path selects address0 and reads its byte,
+retained under an explicit mapped-zero fixture rather than a new guard/default.
+Private event/header addresses and private-stack packet aliases remain gated.
+
+A further43,008 workflows execute actual source health dispatcher, binary
+search, all14 health-table targets (including prior activity refresh) and the
+shared response helpers:5,376 responses and9,216 events per side. No handler
+body is replaced by a fixture. Callback-seed words passed through the search
+match native, as do R0/callee/SP and observed low/high non-stack RAM. These are
+bounded valid-key health routes with lower provider fixtures, not proof of all
+system commands, below-minimum search faults, physical delivery or full startup.
+
+Fresh REA recovers the three56-byte response helpers but misses13 locked health
+entries; frozen pseudocode/ownership and Ghidra-MCP spans retain their extents.
+New handler definitions use the module's four-word callback shape with const
+void packet and uintptr_t scratch. The earlier passing pointer-typed candidate
+is preserved; alignment produced the same object bytes and trace. Legacy module
+extern void declarations still require coordinated common-header migration;
+full cross-translation-unit type consistency is not claimed. Raw R1-R3/APSR,
+private frames/aliases and original compiler/image identity remain open.
+
+The larger startup bundle now links all three dispatchers, their command tables,
+new health bodies and available info/status/activity/special handlers. Three
+parent dispatch imports close and25 leaf/data imports become explicit, leaving
+78 transitive imports. All new dependencies are listed in the runtime report.
+The frontier is806 tested candidates,1370 compiled hints and1150 unresolved
+routes across3326 rows; graph composition adds no further row count. The source
+is product-specific reconstruction with no new upstream attribution; existing
+pinned SDK/runtime providers remain reused. Full lower response/event/setting
+composition, remaining system handlers, physical behavior, prior GXT pointer
+alias/NULL-reuse, shared DIF/ctype literal, reaper placement and byte-identical
+image gates remain open.
+
+### ACK table resolution, lazy mutex and delayed restart
+
+`native_protocol_ack.c` adds six locked contracts (242 native bytes): mutex
+lock/unlock, packet payload accessor, ACK resolver, packet ACK handler and
+cancel/rearm command. A separate two-byte delayed callback is instruction-
+derived supplemental source, not a new ledger row; its empty C body compiles
+to the authenticated native BX LR. Four REA procedures are recovered; packet
+ACK/restart and the supplemental callback remain absent in fresh analysis.
+Ghidra-MCP reads plus frozen ownership/pseudocode retain existing contracts.
+
+The resolver scans32 records of20 bytes in the existing640-byte reset workspace.
+Any nonzero active byte is occupied. Its four full input words are compared to
+three stored bytes and a halfword without truncating the caller's words. The
+first match wins. Callback argument and address are captured before the active
+byte/address/argument are cleared; unlock precedes any saved callback invocation.
+Keys, padding and timestamp remain untouched. Duplicate matches are consumed
+one per invocation. Mutex failure does not add an early-abort path.
+
+10,160 workflows compare47,312 observations per side, full observed non-stack
+RAM, R0/callee/SP: all32 positions, misses, duplicate records, full-word key
+rejection, arbitrary callback returns, two-call persistence, lazy mutex failure,
+null-created handles still passed to acquire, and controlled new/acquire/release
+mutations. The accessor uses modulo16 advertised-length subtraction; length12
+returnsNULL, every other length exposes byte12. ACK handling still reads all key
+bytes even for short nonzero payload lengths, matching native behavior without
+invented validation. Cancel/rearm always schedules callback4d2f0 with the original
+handle and delay0x7800 after cancellation, regardless of its return.
+
+New source-owned configuration is110 bytes:4 cache,80 static mutex control,
+16 attributes and10 name bytes. The cache initializer matches authenticated
+cold RAM, the control block lies inside verified startup zero fill, and linked
+attributes/name match native bytes. The640-byte workspace is reused, not
+allocated again. RTOS/delayed/arbitrary ACK callback bodies are named fixtures
+in these comparisons; actual source providers remain linked in the larger
+runtime, with RTOS/concurrency/physical behavior still unproven. Controlled
+provider interleavings do not establish interrupt safety. Private frames/raw
+R1-R3/APSR and complete callback declaration consistency remain open.
+
+Both packet ACK and delayed restart imports close without new imports, leaving
+76 transitive startup imports. The frontier is812 tested candidates,1370
+compiled hints and1144 unresolved routes across3326 rows. No extra row is
+counted for the supplemental callback. Existing pinned CMSIS/FreeRTOS and
+source delayed providers are reused; product ACK code has no new upstream
+implementation attribution. Prior GXT pointer alias/NULL-reuse, shared DIF/ctype
+literal, reaper placement, compiler and byte-identical image gates remain open.
+
+### Serial reporting, response headers and owned124-byte class
+
+`native_protocol_serial.c` implements ACK/inverse header send, checked send and
+serial reporting. Four new ownership rows are admitted as bounded contract
+candidates. Three sized rows total164 bytes; the manual serial row has no frozen
+size and keeps that blank. Its52-byte observed instruction span is separately
+authenticated without changing the ledger. A stronger raw-frame getter variant
+covers the already-counted70-byte serial accessor; it does not add another row
+or replace the older advertising candidate's receipt.
+
+18,744 comparisons cover2048 cases per header/checked helper,10,800 getter cases
+and1800 serial requests:32,272 observations per side. Shared header and checked
+helpers now retain native R0-R3, including provider register clobbers and header
+mutations. Native eager stack-argument reads occur before invalid-handle rejection.
+Protocol bit/header semantics remain C kernels; scoped frame bridges marshal
+arguments and restore native output words. Copy/fill execute existing source
+musl1.2.5 providers and the existing native movement-return adapter. KV read and
+lower response are explicit fixtures in this tier.
+
+The getter exposes the native124-byte raw stack view instead of inventing a
+C default record on failed reads. Zero/partial/full writes, sentinel bytes,
+unaligned destinations, overlapping raw-record destinations, aliased length
+outputs and ignored provider statuses match. Serial output is16 zeroed bytes,
+then15 copied/filled bytes sent after reloading the packet sequence. Incoming
+raw record/output pointers match native for first activations. Header private
+addresses, general stack aliases and full compiler/ABI identity remain open.
+
+Cold validation also owns the148-byte `nv_r1` class and its4-byte symbolic handle
+relocation, matching authenticated decoded initialization exactly. The payload
+is mostly erased bytes, with zeros at74-75 and bytes112-123 equal5a followed by
+11 zeros. Field16's tag is retained without inventing its semantics. This
+supersedes a provisional zero handle that was behavior-tested only under
+runtime fixtures and never admitted as cold source configuration. No full KV
+class lifecycle or persistent factory/provisioning content is claimed.
+
+432 further workflows execute actual source cached-class reader, getter/serial
+kernels, memory helpers and response headers. Only the critical-section callbacks
+and lower response are fixtures.432 cached reads and216 critical callbacks per
+side match, including size mismatch, class/packet/cache mutation and invalid
+send handle cases. This closes the KV-read fixture for that bounded composition,
+not flash loading, actual mutex behavior or physical serial/delivery proof.
+
+A retained four-poison two-call probe records a concrete private-history gate:
+second requests still match serial response bytes, R0 and observed non-stack RAM,
+but the incoming124-byte private view differs at offsets within72-123. Serial
+source bytes31-45 and sentinel61 match in these probes. Full prior-stack history
+is not claimed equivalent. Three superseded candidate snapshots preserve source,
+objects, reports and receipts; no earlier evidence is silently overwritten.
+Canonical selection between the old advertising getter and the stronger serial
+variant, common interfaces and final private-frame placement remain open.
+
+Serial handler and shared KV-handle imports close, leaving74 transitive startup
+imports. The frontier is816 tested candidates,1370 compiled hints and1140
+unresolved routes across3326 rows. REA recovers the four sized getter/header
+bodies but misses serial's manual entry; Ghidra reads authenticate its observed
+span. Prior GXT pointer alias/NULL-reuse, shared DIF/ctype literal, reaper placement,
+original compiler, private history and byte-identical image gates remain open.

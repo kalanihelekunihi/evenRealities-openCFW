@@ -1796,6 +1796,763 @@ def main():
             legal_page_helpers["controlled_lower_calls"] != 496 or \
             legal_page_helpers["source_sha256"] != sha(ROOT / legal_page_helpers["source"]):
         raise RuntimeError("Apollo Main legal page helper oracle changed")
+    legal_assets_path = G2 / "build/c-firmware/20261016/main-legal-assets/receipt.json"
+    legal_assets, legal_assets_ref = receipt(legal_assets_path)
+    if legal_assets["status"] != "PASS_SOURCE_OWNED_MAIN_LEGAL_ASSETS" or \
+            legal_assets["rows"] != 38 or legal_assets["images"] != 10 or \
+            legal_assets["texts"] != 28 or legal_assets["pixel_bytes"] != 40596 or \
+            legal_assets["relocations"] != 48 or \
+            legal_assets["source_sha256"] != sha(ROOT / legal_assets["source"]):
+        raise RuntimeError("Apollo Main legal resource object changed")
+    legal_assets_bound_path = G2 / "build/c-firmware/20261016/main-legal-assets-bound/receipt.json"
+    legal_assets_bound, legal_assets_bound_ref = receipt(legal_assets_bound_path)
+    if legal_assets_bound["status"] != "PASS_EXPERIMENTAL_MAIN_LEGAL_ASSETS_BOUND" or \
+            legal_assets_bound["base_sha256"] != main_obj["sha256"] or \
+            legal_assets_bound["asset_oracle_sha256"] != legal_assets_ref["sha256"] or \
+            legal_assets_bound["unresolved_before"] != 182 or \
+            legal_assets_bound["unresolved_after"] != 182 or \
+            legal_assets_bound["imports_resolved"] or legal_assets_bound["imports_added"]:
+        raise RuntimeError("Apollo Main legal asset binding changed")
+    main_obj = file_checked(legal_assets_bound["linked_object"], legal_assets_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 182 or "audio_legal_regulatory_build_5bf332" not in actual:
+        raise RuntimeError("Apollo Main legal asset link import count changed")
+    legal_builder_path = G2 / "build/c-firmware/20261016/main-legal-page-build-5bf332/oracle-receipt.json"
+    legal_builder, legal_builder_ref = receipt(legal_builder_path)
+    if legal_builder["status"] != "PASS_NATIVE_MAIN_LEGAL_PAGE_BUILD_5BF332" or \
+            legal_builder["cases"] != 3 or legal_builder["controlled_lower_calls"] != 333 or \
+            legal_builder["visited_stock_instruction_addresses"] != 446 or \
+            legal_builder["source_sha256"] != sha(ROOT / legal_builder["source"]):
+        raise RuntimeError("Apollo Main legal page builder oracle changed")
+    legal_builder_bound_path = G2 / "build/c-firmware/20261016/main-legal-page-builder-bound/receipt.json"
+    legal_builder_bound, legal_builder_bound_ref = receipt(legal_builder_bound_path)
+    if legal_builder_bound["status"] != "PASS_EXPERIMENTAL_MAIN_LEGAL_PAGE_BUILDER_C" or \
+            legal_builder_bound["base_sha256"] != main_obj["sha256"] or \
+            legal_builder_bound["helper_oracle_sha256"] != legal_page_helpers_ref["sha256"] or \
+            legal_builder_bound["builder_oracle_sha256"] != legal_builder_ref["sha256"] or \
+            legal_builder_bound["asset_receipt_sha256"] != legal_assets_ref["sha256"] or \
+            legal_builder_bound["unresolved_before"] != 182 or \
+            legal_builder_bound["unresolved_after"] != 182 or \
+            legal_builder_bound["imports_resolved"] != ["audio_legal_regulatory_build_5bf332"] or \
+            legal_builder_bound["imports_added"] != ["audio_uart_page_43f6d6"]:
+        raise RuntimeError("Apollo Main legal page builder closure changed")
+    main_obj = file_checked(legal_builder_bound["linked_object"], legal_builder_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 182 or "audio_uart_page_43f6d6" not in actual:
+        raise RuntimeError("Apollo Main legal page builder link import count changed")
+    align_oracle_path = G2 / "build/c-firmware/20261016/main-align-to-43f6d6/oracle-receipt.json"
+    align_oracle, align_oracle_ref = receipt(align_oracle_path)
+    if align_oracle["status"] != "PASS_NATIVE_MAIN_ALIGN_TO_43F6D6" or \
+            align_oracle["cases"] != 230 or \
+            align_oracle["source_sha256"] != sha(ROOT / align_oracle["source"]):
+        raise RuntimeError("Apollo Main alignment oracle changed")
+    align_bound_path = G2 / "build/c-firmware/20261016/main-align-to-bound/receipt.json"
+    align_bound, align_bound_ref = receipt(align_bound_path)
+    if align_bound["status"] != "PASS_EXPERIMENTAL_MAIN_ALIGN_TO_C" or \
+            align_bound["base_sha256"] != main_obj["sha256"] or \
+            align_bound["oracle_sha256"] != align_oracle_ref["sha256"] or \
+            align_bound["unresolved_before"] != 182 or \
+            align_bound["unresolved_after"] != 181 or \
+            align_bound["imports_resolved"] != ["audio_uart_page_43f6d6"] or \
+            align_bound["imports_added"]:
+        raise RuntimeError("Apollo Main alignment binding changed")
+    main_obj = file_checked(align_bound["linked_object"], align_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 181 or "audio_uart_page_43f6d6" in actual:
+        raise RuntimeError("Apollo Main alignment link import count changed")
+    even_ai_oracle_path = G2 / "build/c-firmware/20261016/main-even-ai-common-4e2976/oracle-receipt.json"
+    even_ai_oracle, even_ai_oracle_ref = receipt(even_ai_oracle_path)
+    if even_ai_oracle["status"] != "PASS_NATIVE_MAIN_EVEN_AI_COMMON_4E2976" or \
+            even_ai_oracle["cases"] != 90 or \
+            even_ai_oracle["source_sha256"] != sha(ROOT / even_ai_oracle["source"]):
+        raise RuntimeError("Apollo Main EvenAI common-data oracle changed")
+    even_ai_bound_path = G2 / "build/c-firmware/20261016/main-even-ai-common-bound/receipt.json"
+    even_ai_bound, even_ai_bound_ref = receipt(even_ai_bound_path)
+    if even_ai_bound["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_COMMON_C" or \
+            even_ai_bound["base_sha256"] != main_obj["sha256"] or \
+            even_ai_bound["oracle_sha256"] != even_ai_oracle_ref["sha256"] or \
+            even_ai_bound["unresolved_before"] != 181 or \
+            even_ai_bound["unresolved_after"] != 184 or \
+            even_ai_bound["imports_resolved"] != ["audio_uart_registry_callback_4e2976"] or \
+            len(even_ai_bound["imports_added"]) != 4:
+        raise RuntimeError("Apollo Main EvenAI common-data binding changed")
+    main_obj = file_checked(even_ai_bound["linked_object"], even_ai_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 184 or "audio_uart_registry_callback_4e2976" in actual:
+        raise RuntimeError("Apollo Main EvenAI common-data link import count changed")
+    even_ai_prepare_oracle_path = G2 / "build/c-firmware/20261016/main-even-ai-prepare-4e1f7c/oracle-receipt.json"
+    even_ai_prepare_oracle, even_ai_prepare_oracle_ref = receipt(even_ai_prepare_oracle_path)
+    if even_ai_prepare_oracle["status"] != "PASS_NATIVE_MAIN_EVEN_AI_PREPARE_4E1F7C" or \
+            even_ai_prepare_oracle["cases"] != 4 or \
+            even_ai_prepare_oracle["ram_cell"] != "0x20074580" or \
+            even_ai_prepare_oracle["source_sha256"] != sha(ROOT / even_ai_prepare_oracle["source"]):
+        raise RuntimeError("Apollo Main EvenAI prepare oracle changed")
+    even_ai_prepare_bound_path = G2 / "build/c-firmware/20261016/main-even-ai-prepare-bound/receipt.json"
+    even_ai_prepare_bound, even_ai_prepare_bound_ref = receipt(even_ai_prepare_bound_path)
+    if even_ai_prepare_bound["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_PREPARE_C" or \
+            even_ai_prepare_bound["base_sha256"] != main_obj["sha256"] or \
+            even_ai_prepare_bound["oracle_sha256"] != even_ai_prepare_oracle_ref["sha256"] or \
+            even_ai_prepare_bound["unresolved_before"] != 184 or \
+            even_ai_prepare_bound["unresolved_after"] != 186 or \
+            even_ai_prepare_bound["imports_resolved"] != ["audio_even_ai_prepare_4e1f7c"] or \
+            len(even_ai_prepare_bound["imports_added"]) != 3:
+        raise RuntimeError("Apollo Main EvenAI prepare binding changed")
+    main_obj = file_checked(even_ai_prepare_bound["linked_object"], even_ai_prepare_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 186 or "audio_even_ai_prepare_4e1f7c" in actual:
+        raise RuntimeError("Apollo Main EvenAI prepare link import count changed")
+    mutex_oracle_path = G2 / "build/c-firmware/20261016/main-os-mutex-new-44971c/oracle-receipt.json"
+    mutex_oracle, mutex_oracle_ref = receipt(mutex_oracle_path)
+    if mutex_oracle["status"] != "PASS_NATIVE_MAIN_OS_MUTEX_NEW_44971C" or \
+            mutex_oracle["cases"] != 128 or \
+            mutex_oracle["source_sha256"] != sha(ROOT / mutex_oracle["source"]) or \
+            mutex_oracle["attributed_upstream_sha256"] != sha(ROOT / mutex_oracle["attributed_upstream"]) or \
+            mutex_oracle["attributed_upstream_commit"] != "d213f261b5be6bb29a7cce8b84071706b72f4d53":
+        raise RuntimeError("Apollo Main osMutexNew oracle changed")
+    mutex_bound_path = G2 / "build/c-firmware/20261016/main-os-mutex-new-bound/receipt.json"
+    mutex_bound, mutex_bound_ref = receipt(mutex_bound_path)
+    if mutex_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_MUTEX_NEW_C" or \
+            mutex_bound["base_sha256"] != main_obj["sha256"] or \
+            mutex_bound["oracle_sha256"] != mutex_oracle_ref["sha256"] or \
+            mutex_bound["unresolved_before"] != 186 or \
+            mutex_bound["unresolved_after"] != 188 or \
+            mutex_bound["imports_resolved"] != ["audio_even_ai_mutex_create_44971c"] or \
+            len(mutex_bound["imports_added"]) != 3:
+        raise RuntimeError("Apollo Main osMutexNew binding changed")
+    main_obj = file_checked(mutex_bound["linked_object"], mutex_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 188 or "audio_even_ai_mutex_create_44971c" in actual:
+        raise RuntimeError("Apollo Main osMutexNew link import count changed")
+    alloc_wrappers_oracle_path = G2 / "build/c-firmware/20261016/main-os-mutex-alloc-wrappers-4416d6/oracle-receipt.json"
+    alloc_wrappers_oracle, alloc_wrappers_oracle_ref = receipt(alloc_wrappers_oracle_path)
+    if alloc_wrappers_oracle["status"] != "PASS_NATIVE_MAIN_OS_MUTEX_ALLOC_WRAPPERS_4416D6" or \
+            alloc_wrappers_oracle["cases"] != 40 or \
+            alloc_wrappers_oracle["source_sha256"] != sha(ROOT / alloc_wrappers_oracle["source"]):
+        raise RuntimeError("Apollo Main mutex allocation wrapper oracle changed")
+    alloc_wrappers_bound_path = G2 / "build/c-firmware/20261016/main-os-mutex-alloc-wrappers-bound/receipt.json"
+    alloc_wrappers_bound, alloc_wrappers_bound_ref = receipt(alloc_wrappers_bound_path)
+    if alloc_wrappers_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_MUTEX_ALLOC_WRAPPERS_C" or \
+            alloc_wrappers_bound["base_sha256"] != main_obj["sha256"] or \
+            alloc_wrappers_bound["oracle_sha256"] != alloc_wrappers_oracle_ref["sha256"] or \
+            alloc_wrappers_bound["unresolved_before"] != 188 or \
+            alloc_wrappers_bound["unresolved_after"] != 189 or \
+            len(alloc_wrappers_bound["imports_resolved"]) != 2 or \
+            len(alloc_wrappers_bound["imports_added"]) != 3:
+        raise RuntimeError("Apollo Main mutex allocation wrapper binding changed")
+    main_obj = file_checked(alloc_wrappers_bound["linked_object"], alloc_wrappers_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 189 or "audio_os_mutex_alloc_dynamic_4416d6" in actual or \
+            "audio_os_mutex_alloc_static_4416f0" in actual:
+        raise RuntimeError("Apollo Main mutex allocation wrapper link count changed")
+    mutex_register_oracle_path = G2 / "build/c-firmware/20261016/main-os-mutex-register-4416b8/oracle-receipt.json"
+    mutex_register_oracle, mutex_register_oracle_ref = receipt(mutex_register_oracle_path)
+    if mutex_register_oracle["status"] != "PASS_NATIVE_MAIN_OS_MUTEX_REGISTER_4416B8" or \
+            mutex_register_oracle["cases"] != 6 or \
+            mutex_register_oracle["source_sha256"] != sha(ROOT / mutex_register_oracle["source"]):
+        raise RuntimeError("Apollo Main mutex register oracle changed")
+    mutex_register_bound_path = G2 / "build/c-firmware/20261016/main-os-mutex-register-bound/receipt.json"
+    mutex_register_bound, mutex_register_bound_ref = receipt(mutex_register_bound_path)
+    if mutex_register_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_MUTEX_REGISTER_C" or \
+            mutex_register_bound["base_sha256"] != main_obj["sha256"] or \
+            mutex_register_bound["oracle_sha256"] != mutex_register_oracle_ref["sha256"] or \
+            mutex_register_bound["unresolved_before"] != 189 or \
+            mutex_register_bound["unresolved_after"] != 188 or \
+            mutex_register_bound["imports_resolved"] != ["audio_os_mutex_register_4416b8"] or \
+            mutex_register_bound["imports_added"]:
+        raise RuntimeError("Apollo Main mutex register binding changed")
+    main_obj = file_checked(mutex_register_bound["linked_object"], mutex_register_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 188 or "audio_os_mutex_register_4416b8" in actual:
+        raise RuntimeError("Apollo Main mutex register link import count changed")
+    irq_oracle_path = G2 / "build/c-firmware/20261016/main-os-irq-context-44900e/oracle-receipt.json"
+    irq_oracle, irq_oracle_ref = receipt(irq_oracle_path)
+    if irq_oracle["status"] != "PASS_NATIVE_MAIN_OS_IRQ_CONTEXT_44900E" or \
+            irq_oracle["cases"] != 36 or \
+            irq_oracle["source_sha256"] != sha(ROOT / irq_oracle["source"]) or \
+            irq_oracle["attributed_upstream_sha256"] != sha(ROOT / irq_oracle["attributed_upstream"]) or \
+            irq_oracle["attributed_upstream_commit"] != "d213f261b5be6bb29a7cce8b84071706b72f4d53":
+        raise RuntimeError("Apollo Main IRQ_Context oracle or upstream changed")
+    irq_bound_path = G2 / "build/c-firmware/20261016/main-os-irq-context-bound/receipt.json"
+    irq_bound, irq_bound_ref = receipt(irq_bound_path)
+    if irq_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_IRQ_CONTEXT_C" or \
+            irq_bound["base_sha256"] != main_obj["sha256"] or \
+            irq_bound["oracle_sha256"] != irq_oracle_ref["sha256"] or \
+            irq_bound["unresolved_before"] != 188 or \
+            irq_bound["unresolved_after"] != 188 or \
+            irq_bound["imports_resolved"] != ["audio_os_irq_context_44900e"] or \
+            irq_bound["imports_added"] != ["audio_os_scheduler_state_4558a4"]:
+        raise RuntimeError("Apollo Main IRQ_Context binding changed")
+    main_obj = file_checked(irq_bound["linked_object"], irq_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 188 or "audio_os_irq_context_44900e" in actual:
+        raise RuntimeError("Apollo Main IRQ_Context link import count changed")
+    scheduler_oracle_path = G2 / "build/c-firmware/20261016/main-os-scheduler-state-4558a4/oracle-receipt.json"
+    scheduler_oracle, scheduler_oracle_ref = receipt(scheduler_oracle_path)
+    if scheduler_oracle["status"] != "PASS_NATIVE_MAIN_OS_SCHEDULER_STATE_4558A4" or \
+            scheduler_oracle["cases"] != 9 or \
+            scheduler_oracle["source_sha256"] != sha(ROOT / scheduler_oracle["source"]) or \
+            scheduler_oracle["attributed_upstream_sha256"] != sha(ROOT / scheduler_oracle["attributed_upstream"]) or \
+            scheduler_oracle["attributed_upstream_commit"] != "d213f261b5be6bb29a7cce8b84071706b72f4d53":
+        raise RuntimeError("Apollo Main scheduler state oracle or upstream changed")
+    scheduler_bound_path = G2 / "build/c-firmware/20261016/main-os-scheduler-state-bound/receipt.json"
+    scheduler_bound, scheduler_bound_ref = receipt(scheduler_bound_path)
+    if scheduler_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_SCHEDULER_STATE_C" or \
+            scheduler_bound["base_sha256"] != main_obj["sha256"] or \
+            scheduler_bound["oracle_sha256"] != scheduler_oracle_ref["sha256"] or \
+            scheduler_bound["unresolved_before"] != 188 or \
+            scheduler_bound["unresolved_after"] != 189 or \
+            scheduler_bound["imports_resolved"] != ["audio_os_scheduler_state_4558a4"] or \
+            len(scheduler_bound["imports_added"]) != 2:
+        raise RuntimeError("Apollo Main scheduler state binding changed")
+    main_obj = file_checked(scheduler_bound["linked_object"], scheduler_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 189 or "audio_os_scheduler_state_4558a4" in actual:
+        raise RuntimeError("Apollo Main scheduler state link import count changed")
+    mask_oracle_path = G2 / "build/c-firmware/20261016/main-os-interrupt-mask-5fa0a4/oracle-receipt.json"
+    mask_oracle, mask_oracle_ref = receipt(mask_oracle_path)
+    if mask_oracle["status"] != "PASS_NATIVE_MAIN_OS_INTERRUPT_MASK_5FA0A4" or \
+            mask_oracle["cases"] != 6 or \
+            mask_oracle["source_sha256"] != sha(ROOT / mask_oracle["source"]):
+        raise RuntimeError("Apollo Main interrupt mask oracle changed")
+    mask_bound_path = G2 / "build/c-firmware/20261016/main-os-interrupt-mask-bound/receipt.json"
+    mask_bound, mask_bound_ref = receipt(mask_bound_path)
+    if mask_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_INTERRUPT_MASK_C" or \
+            mask_bound["base_sha256"] != main_obj["sha256"] or \
+            mask_bound["oracle_sha256"] != mask_oracle_ref["sha256"] or \
+            mask_bound["unresolved_before"] != 189 or \
+            mask_bound["unresolved_after"] != 188 or \
+            mask_bound["imports_resolved"] != ["audio_os_interrupt_mask_5fa0a4"] or \
+            mask_bound["imports_added"]:
+        raise RuntimeError("Apollo Main interrupt mask binding changed")
+    main_obj = file_checked(mask_bound["linked_object"], mask_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 188 or "audio_os_interrupt_mask_5fa0a4" in actual:
+        raise RuntimeError("Apollo Main interrupt mask link import count changed")
+    queue_cores_oracle_path = G2 / "build/c-firmware/20261016/main-os-queue-create-cores-4415ca/oracle-receipt.json"
+    queue_cores_oracle, queue_cores_oracle_ref = receipt(queue_cores_oracle_path)
+    if queue_cores_oracle["status"] != "PASS_NATIVE_MAIN_OS_QUEUE_CREATE_CORES_4415CA" or \
+            queue_cores_oracle["cases"] != 96 or \
+            queue_cores_oracle["source_sha256"] != sha(ROOT / queue_cores_oracle["source"]) or \
+            queue_cores_oracle["attributed_upstream_sha256"] != sha(ROOT / queue_cores_oracle["attributed_upstream"]) or \
+            queue_cores_oracle["attributed_upstream_commit"] != "d213f261b5be6bb29a7cce8b84071706b72f4d53":
+        raise RuntimeError("Apollo Main queue creation core oracle or upstream changed")
+    queue_cores_bound_path = G2 / "build/c-firmware/20261016/main-os-queue-create-cores-bound/receipt.json"
+    queue_cores_bound, queue_cores_bound_ref = receipt(queue_cores_bound_path)
+    if queue_cores_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_QUEUE_CREATE_CORES_C" or \
+            queue_cores_bound["base_sha256"] != main_obj["sha256"] or \
+            queue_cores_bound["oracle_sha256"] != queue_cores_oracle_ref["sha256"] or \
+            queue_cores_bound["unresolved_before"] != 188 or \
+            queue_cores_bound["unresolved_after"] != 187 or \
+            len(queue_cores_bound["imports_resolved"]) != 2 or \
+            queue_cores_bound["imports_added"] != ["audio_os_queue_initialize_441696"]:
+        raise RuntimeError("Apollo Main queue creation core binding changed")
+    main_obj = file_checked(queue_cores_bound["linked_object"], queue_cores_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 187 or "audio_os_mutex_static_core_4415ca" in actual or \
+            "audio_os_mutex_dynamic_core_441636" in actual:
+        raise RuntimeError("Apollo Main queue creation core link import count changed")
+    queue_init_oracle_path = G2 / "build/c-firmware/20261016/main-os-queue-initialize-441696/oracle-receipt.json"
+    queue_init_oracle, queue_init_oracle_ref = receipt(queue_init_oracle_path)
+    if queue_init_oracle["status"] != "PASS_NATIVE_MAIN_OS_QUEUE_INITIALIZE_441696" or \
+            queue_init_oracle["cases"] != 54 or \
+            queue_init_oracle["source_sha256"] != sha(ROOT / queue_init_oracle["source"]) or \
+            queue_init_oracle["attributed_upstream_sha256"] != sha(ROOT / queue_init_oracle["attributed_upstream"]) or \
+            queue_init_oracle["attributed_upstream_commit"] != "d213f261b5be6bb29a7cce8b84071706b72f4d53":
+        raise RuntimeError("Apollo Main queue initializer oracle or upstream changed")
+    queue_init_bound_path = G2 / "build/c-firmware/20261016/main-os-queue-initialize-bound/receipt.json"
+    queue_init_bound, queue_init_bound_ref = receipt(queue_init_bound_path)
+    if queue_init_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_QUEUE_INITIALIZE_C" or \
+            queue_init_bound["base_sha256"] != main_obj["sha256"] or \
+            queue_init_bound["oracle_sha256"] != queue_init_oracle_ref["sha256"] or \
+            queue_init_bound["unresolved_before"] != 187 or \
+            queue_init_bound["unresolved_after"] != 187 or \
+            queue_init_bound["imports_resolved"] != ["audio_os_queue_initialize_441696"] or \
+            queue_init_bound["imports_added"] != ["audio_os_queue_reset_441516"]:
+        raise RuntimeError("Apollo Main queue initializer binding changed")
+    main_obj = file_checked(queue_init_bound["linked_object"], queue_init_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 187 or "audio_os_queue_initialize_441696" in actual:
+        raise RuntimeError("Apollo Main queue initializer link import count changed")
+    queue_reset_oracle_path = G2 / "build/c-firmware/20261016/main-os-queue-reset-441516/oracle-receipt.json"
+    queue_reset_oracle, queue_reset_oracle_ref = receipt(queue_reset_oracle_path)
+    if queue_reset_oracle["status"] != "PASS_NATIVE_MAIN_OS_QUEUE_RESET_441516" or \
+            queue_reset_oracle["cases"] != 80 or \
+            queue_reset_oracle["source_sha256"] != sha(ROOT / queue_reset_oracle["source"]) or \
+            queue_reset_oracle["attributed_upstream_sha256"] != sha(ROOT / queue_reset_oracle["attributed_upstream"]) or \
+            queue_reset_oracle["attributed_upstream_commit"] != "d213f261b5be6bb29a7cce8b84071706b72f4d53":
+        raise RuntimeError("Apollo Main queue reset oracle or upstream changed")
+    queue_reset_bound_path = G2 / "build/c-firmware/20261016/main-os-queue-reset-bound/receipt.json"
+    queue_reset_bound, queue_reset_bound_ref = receipt(queue_reset_bound_path)
+    if queue_reset_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_QUEUE_RESET_C" or \
+            queue_reset_bound["base_sha256"] != main_obj["sha256"] or \
+            queue_reset_bound["oracle_sha256"] != queue_reset_oracle_ref["sha256"] or \
+            queue_reset_bound["unresolved_before"] != 187 or \
+            queue_reset_bound["unresolved_after"] != 187 or \
+            queue_reset_bound["imports_resolved"] != ["audio_os_queue_reset_441516"] or \
+            queue_reset_bound["imports_added"] != ["audio_os_list_initialize_45607c"] or \
+            queue_reset_bound["existing_event_removal_review_sha256"] != sha(ROOT / queue_reset_bound["existing_event_removal_review"]):
+        raise RuntimeError("Apollo Main queue reset binding changed")
+    main_obj = file_checked(queue_reset_bound["linked_object"], queue_reset_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 187 or "audio_os_queue_reset_441516" in actual:
+        raise RuntimeError("Apollo Main queue reset link import count changed")
+    list_init_oracle_path = G2 / "build/c-firmware/20261016/main-os-list-initialize-45607c/oracle-receipt.json"
+    list_init_oracle, list_init_oracle_ref = receipt(list_init_oracle_path)
+    if list_init_oracle["status"] != "PASS_NATIVE_MAIN_OS_LIST_INITIALIZE_45607C" or \
+            list_init_oracle["cases"] != 9 or \
+            list_init_oracle["source_sha256"] != sha(ROOT / list_init_oracle["source"]) or \
+            list_init_oracle["attributed_upstream_sha256"] != sha(ROOT / list_init_oracle["attributed_upstream"]) or \
+            list_init_oracle["attributed_upstream_commit"] != "d213f261b5be6bb29a7cce8b84071706b72f4d53":
+        raise RuntimeError("Apollo Main list initializer oracle or upstream changed")
+    list_init_bound_path = G2 / "build/c-firmware/20261016/main-os-list-initialize-bound/receipt.json"
+    list_init_bound, list_init_bound_ref = receipt(list_init_bound_path)
+    if list_init_bound["status"] != "PASS_EXPERIMENTAL_MAIN_OS_LIST_INITIALIZE_C" or \
+            list_init_bound["base_sha256"] != main_obj["sha256"] or \
+            list_init_bound["oracle_sha256"] != list_init_oracle_ref["sha256"] or \
+            list_init_bound["unresolved_before"] != 187 or \
+            list_init_bound["unresolved_after"] != 186 or \
+            list_init_bound["imports_resolved"] != ["audio_os_list_initialize_45607c"] or \
+            list_init_bound["imports_added"]:
+        raise RuntimeError("Apollo Main list initializer binding changed")
+    main_obj = file_checked(list_init_bound["linked_object"], list_init_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 186 or "audio_os_list_initialize_45607c" in actual:
+        raise RuntimeError("Apollo Main list initializer link import count changed")
+    even_ai_chain_path = G2 / "build/c-firmware/20261016/main-even-ai-frame-chain-bound/receipt.json"
+    even_ai_chain, even_ai_chain_ref = receipt(even_ai_chain_path)
+    if even_ai_chain["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_FRAME_CHAIN_C" or \
+            even_ai_chain["base_sha256"] != main_obj["sha256"] or \
+            even_ai_chain["unresolved_before"] != 186 or \
+            even_ai_chain["unresolved_after"] != 191 or \
+            even_ai_chain["imports_resolved"] != ["audio_even_ai_frame_process_4e31cc"] or \
+            len(even_ai_chain["imports_added"]) != 6:
+        raise RuntimeError("Apollo Main EvenAI frame chain binding changed")
+    main_obj = file_checked(even_ai_chain["linked_object"], even_ai_chain["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 191 or "audio_even_ai_frame_process_4e31cc" in actual:
+        raise RuntimeError("Apollo Main EvenAI frame chain frontier changed")
+    even_ai_ram_path = G2 / "build/c-firmware/20261016/main-even-ai-ram-state-bound/receipt.json"
+    even_ai_ram, even_ai_ram_ref = receipt(even_ai_ram_path)
+    if even_ai_ram["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_RAM_STATE_C" or \
+            even_ai_ram["base_sha256"] != main_obj["sha256"] or \
+            even_ai_ram["unresolved_before"] != 191 or \
+            even_ai_ram["unresolved_after"] != 184 or \
+            len(even_ai_ram["imports_resolved"]) != 7 or \
+            even_ai_ram["imports_added"] or \
+            even_ai_ram["other_fixed_ram_sections_checked"] != 149:
+        raise RuntimeError("Apollo Main EvenAI RAM binding changed")
+    main_obj = file_checked(even_ai_ram["linked_object"], even_ai_ram["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 184 or "audio_even_ai_mutex_20074580" in actual:
+        raise RuntimeError("Apollo Main EvenAI RAM frontier changed")
+    scheduler_ram_path = G2 / "build/c-firmware/20261016/main-os-scheduler-state-ram-bound/receipt.json"
+    scheduler_ram, scheduler_ram_ref = receipt(scheduler_ram_path)
+    if scheduler_ram["status"] != "PASS_EXPERIMENTAL_MAIN_OS_SCHEDULER_STATE_RAM_C" or \
+            scheduler_ram["base_sha256"] != main_obj["sha256"] or \
+            scheduler_ram["unresolved_before"] != 184 or \
+            scheduler_ram["unresolved_after"] != 182 or \
+            scheduler_ram["imports_resolved"] != ["audio_os_scheduler_running_20074a3c",
+                                                  "audio_os_scheduler_suspended_20074a58"] or \
+            scheduler_ram["imports_added"]:
+        raise RuntimeError("Apollo Main scheduler RAM binding changed")
+    main_obj = file_checked(scheduler_ram["linked_object"], scheduler_ram["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 182 or "audio_os_scheduler_running_20074a3c" in actual or \
+            "audio_os_scheduler_suspended_20074a58" in actual:
+        raise RuntimeError("Apollo Main scheduler RAM frontier changed")
+    dashboard_ram_path = G2 / "build/c-firmware/20261016/main-dashboard-layout-current-ram-bound/receipt.json"
+    dashboard_ram, dashboard_ram_ref = receipt(dashboard_ram_path)
+    if dashboard_ram["status"] != "PASS_EXPERIMENTAL_MAIN_DASHBOARD_LAYOUT_CURRENT_RAM_C" or \
+            dashboard_ram["base_sha256"] != main_obj["sha256"] or \
+            dashboard_ram["unresolved_before"] != 182 or \
+            dashboard_ram["unresolved_after"] != 181 or \
+            dashboard_ram["imports_resolved"] != ["audio_dashboard_layout_current"] or \
+            dashboard_ram["imports_added"] or \
+            dashboard_ram["address"] != "0x200e7934" or dashboard_ram["bytes"] != 128:
+        raise RuntimeError("Apollo Main dashboard layout RAM binding changed")
+    main_obj = file_checked(dashboard_ram["linked_object"], dashboard_ram["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 181 or "audio_dashboard_layout_current" in actual:
+        raise RuntimeError("Apollo Main dashboard layout RAM frontier changed")
+    efs_ram_path = G2 / "build/c-firmware/20261016/main-efs-transfer-state-ram-bound/receipt.json"
+    efs_ram, efs_ram_ref = receipt(efs_ram_path)
+    if efs_ram["status"] != "PASS_EXPERIMENTAL_MAIN_EFS_TRANSFER_STATE_RAM_C" or \
+            efs_ram["base_sha256"] != main_obj["sha256"] or \
+            efs_ram["unresolved_before"] != 181 or \
+            efs_ram["unresolved_after"] != 180 or \
+            efs_ram["imports_resolved"] != ["audio_efs_transfer_state"] or \
+            efs_ram["imports_added"] or \
+            efs_ram["address"] != "0x20071cc8" or efs_ram["bytes"] != 0x76:
+        raise RuntimeError("Apollo Main EFS transfer RAM binding changed")
+    main_obj = file_checked(efs_ram["linked_object"], efs_ram["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 180 or "audio_efs_transfer_state" in actual:
+        raise RuntimeError("Apollo Main EFS transfer RAM frontier changed")
+    flash_staging_path = G2 / "build/c-firmware/20261016/main-ble-flash-staging-ram-bound/receipt.json"
+    flash_staging, flash_staging_ref = receipt(flash_staging_path)
+    if flash_staging["status"] != "PASS_EXPERIMENTAL_MAIN_BLE_FLASH_STAGING_RAM_C" or \
+            flash_staging["base_sha256"] != main_obj["sha256"] or \
+            flash_staging["unresolved_before"] != 180 or \
+            flash_staging["unresolved_after"] != 179 or \
+            flash_staging["imports_resolved"] != ["audio_ble_flash_staging_200636a0"] or \
+            flash_staging["imports_added"] or \
+            flash_staging["address"] != "0x200636a0" or flash_staging["bytes"] != 0x0a00:
+        raise RuntimeError("Apollo Main BLE flash staging RAM binding changed")
+    main_obj = file_checked(flash_staging["linked_object"], flash_staging["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 179 or "audio_ble_flash_staging_200636a0" in actual:
+        raise RuntimeError("Apollo Main BLE flash staging RAM frontier changed")
+    battery_manager_path = G2 / "build/c-firmware/20261016/main-battery-callback-manager-ram-bound/receipt.json"
+    battery_manager, battery_manager_ref = receipt(battery_manager_path)
+    if battery_manager["status"] != "PASS_EXPERIMENTAL_MAIN_BATTERY_CALLBACK_MANAGER_RAM_C" or \
+            battery_manager["base_sha256"] != main_obj["sha256"] or \
+            battery_manager["unresolved_before"] != 179 or \
+            battery_manager["unresolved_after"] != 177 or \
+            battery_manager["imports_resolved"] != ["audio_charge_callback_manager",
+                                                    "audio_ring_battery_callback_manager"] or \
+            battery_manager["imports_added"] or len(battery_manager["spans"]) != 2:
+        raise RuntimeError("Apollo Main battery callback manager RAM binding changed")
+    main_obj = file_checked(battery_manager["linked_object"], battery_manager["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 177 or "audio_charge_callback_manager" in actual or \
+            "audio_ring_battery_callback_manager" in actual:
+        raise RuntimeError("Apollo Main battery callback manager RAM frontier changed")
+    ble_callbacks_path = G2 / "build/c-firmware/20261016/main-ble-flash-callbacks-ram-bound/receipt.json"
+    ble_callbacks, ble_callbacks_ref = receipt(ble_callbacks_path)
+    if ble_callbacks["status"] != "PASS_EXPERIMENTAL_MAIN_BLE_FLASH_CALLBACKS_RAM_C" or \
+            ble_callbacks["base_sha256"] != main_obj["sha256"] or \
+            ble_callbacks["unresolved_before"] != 177 or \
+            ble_callbacks["unresolved_after"] != 176 or \
+            ble_callbacks["imports_resolved"] != ["audio_ble_flash_callbacks"] or \
+            ble_callbacks["imports_added"] or \
+            ble_callbacks["address"] != "0x20073270" or ble_callbacks["bytes"] != 60:
+        raise RuntimeError("Apollo Main BLE flash callbacks RAM binding changed")
+    main_obj = file_checked(ble_callbacks["linked_object"], ble_callbacks["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 176 or "audio_ble_flash_callbacks" in actual:
+        raise RuntimeError("Apollo Main BLE flash callbacks RAM frontier changed")
+    tpl_buffer_path = G2 / "build/c-firmware/20261016/main-tpl-response-buffer-ram-bound/receipt.json"
+    tpl_buffer, tpl_buffer_ref = receipt(tpl_buffer_path)
+    if tpl_buffer["status"] != "PASS_EXPERIMENTAL_MAIN_TPL_RESPONSE_BUFFER_RAM_C" or \
+            tpl_buffer["base_sha256"] != main_obj["sha256"] or \
+            tpl_buffer["unresolved_before"] != 176 or \
+            tpl_buffer["unresolved_after"] != 175 or \
+            tpl_buffer["imports_resolved"] != ["audio_tpl_response_buffer"] or \
+            tpl_buffer["imports_added"] or \
+            tpl_buffer["address"] != "0x20004204" or tpl_buffer["bytes"] != 8:
+        raise RuntimeError("Apollo Main TPL response buffer RAM binding changed")
+    main_obj = file_checked(tpl_buffer["linked_object"], tpl_buffer["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or "audio_tpl_response_buffer" in actual:
+        raise RuntimeError("Apollo Main TPL response buffer RAM frontier changed")
+    tpl_timeout_path = G2 / "build/c-firmware/20261016/main-tpl-timeout-ids-ram-bound/receipt.json"
+    tpl_timeout, tpl_timeout_ref = receipt(tpl_timeout_path)
+    if tpl_timeout["status"] != "PASS_EXPERIMENTAL_MAIN_TPL_TIMEOUT_IDS_RAM_C" or \
+            tpl_timeout["base_sha256"] != main_obj["sha256"] or \
+            tpl_timeout["unresolved_before"] != 175 or \
+            tpl_timeout["unresolved_after"] != 174 or \
+            tpl_timeout["imports_resolved"] != ["audio_tpl_timeout_ids"] or \
+            tpl_timeout["imports_added"] or \
+            tpl_timeout["address"] != "0x20074b04" or tpl_timeout["bytes"] != 3:
+        raise RuntimeError("Apollo Main TPL timeout IDs RAM binding changed")
+    main_obj = file_checked(tpl_timeout["linked_object"], tpl_timeout["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_tpl_timeout_ids" in actual:
+        raise RuntimeError("Apollo Main TPL timeout IDs RAM frontier changed")
+    tpl_row_path = G2 / "build/c-firmware/20261016/main-tpl-service-row0-ram-bound/receipt.json"
+    tpl_row, tpl_row_ref = receipt(tpl_row_path)
+    if tpl_row["status"] != "PASS_EXPERIMENTAL_MAIN_TPL_SERVICE_ROW0_RAM_C" or \
+            tpl_row["base_sha256"] != main_obj["sha256"] or \
+            tpl_row["unresolved_before"] != 174 or \
+            tpl_row["unresolved_after"] != 173 or \
+            tpl_row["imports_resolved"] != ["audio_tpl_service_table"] or \
+            tpl_row["imports_added"] or \
+            tpl_row["address"] != "0x20071414" or tpl_row["bytes"] != 20:
+        raise RuntimeError("Apollo Main TPL service row RAM binding changed")
+    main_obj = file_checked(tpl_row["linked_object"], tpl_row["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 173 or "audio_tpl_service_table" in actual:
+        raise RuntimeError("Apollo Main TPL service row RAM frontier changed")
+    local_decode_path = G2 / "build/c-firmware/20261016/main-even-ai-local-decode/receipt.json"
+    local_decode, local_decode_ref = receipt(local_decode_path)
+    if local_decode["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_LOCAL_DECODE_C" or \
+            local_decode["base_sha256"] != main_obj["sha256"] or \
+            local_decode["unresolved_before"] != 173 or \
+            local_decode["unresolved_after"] != 174 or \
+            local_decode["imports_resolved"] != ["audio_even_ai_local_decode_498092"] or \
+            local_decode["imports_added"] != ["audio_even_ai_encode_ctrl_4e3788",
+                                               "audio_even_ai_encode_vad_4e3b80"]:
+        raise RuntimeError("Apollo Main EvenAI local decode binding changed")
+    main_obj = file_checked(local_decode["linked_object"], local_decode["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_even_ai_local_decode_498092" in actual or \
+            "audio_even_ai_encode_ctrl_4e3788" not in actual or \
+            "audio_even_ai_encode_vad_4e3b80" not in actual:
+        raise RuntimeError("Apollo Main EvenAI local decode frontier changed")
+    notify_path = G2 / "build/c-firmware/20261016/main-even-ai-notify-encoders-bound/receipt.json"
+    notify, notify_ref = receipt(notify_path)
+    if notify["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_NOTIFY_ENCODERS_C" or \
+            notify["base_sha256"] != main_obj["sha256"] or \
+            notify["unresolved_before"] != 174 or \
+            notify["unresolved_after"] != 172 or \
+            notify["imports_resolved"] != ["audio_even_ai_encode_ctrl_4e3788",
+                                           "audio_even_ai_encode_vad_4e3b80"] or \
+            notify["imports_added"] or \
+            notify["sequence_address"] != "0x20074ff9" or \
+            notify["sequence_bytes"] != 1:
+        raise RuntimeError("Apollo Main EvenAI notification encoders binding changed")
+    main_obj = file_checked(notify["linked_object"], notify["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 172 or "audio_even_ai_encode_ctrl_4e3788" in actual or \
+            "audio_even_ai_encode_vad_4e3b80" in actual:
+        raise RuntimeError("Apollo Main EvenAI notification encoder frontier changed")
+    ready_ram_path = G2 / "build/c-firmware/20261016/main-even-ai-ready-ram-bound/receipt.json"
+    ready_ram, ready_ram_ref = receipt(ready_ram_path)
+    if ready_ram["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_READY_RAM_C" or \
+            ready_ram["base_sha256"] != main_obj["sha256"] or \
+            ready_ram["unresolved_before"] != 172 or \
+            ready_ram["unresolved_after"] != 172 or \
+            ready_ram["imports_resolved"] or ready_ram["imports_added"] or \
+            [(span["address"], span["bytes"]) for span in ready_ram["spans"]] != [
+                ("0x2006f138", 0x218), ("0x20074c04", 4),
+                ("0x200f39b4", 0x400), ("0x200f3db4", 0x400)]:
+        raise RuntimeError("Apollo Main EvenAI ready RAM binding changed")
+    main_obj = file_checked(ready_ram["linked_object"], ready_ram["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 172 or "audio_even_ai_ready_4e20f2" not in actual:
+        raise RuntimeError("Apollo Main EvenAI ready RAM frontier changed")
+    ready_simple_path = G2 / "build/c-firmware/20261016/main-even-ai-ready-simple-oracle/oracle-receipt.json"
+    ready_simple, ready_simple_ref = receipt(ready_simple_path)
+    if ready_simple["status"] != "PASS_EXPERIMENTAL_EVEN_AI_READY_SIMPLE_C_ORACLE" or \
+            ready_simple["cases"] != 84 or \
+            ready_simple["source_sha256"] != sha(ROOT / ready_simple["source"]) or \
+            ready_simple["payload_sha256"] != ready_ram["payload_sha256"]:
+        raise RuntimeError("Apollo Main EvenAI ready simple candidate oracle changed")
+    ready_bound_path = G2 / "build/c-firmware/20261016/main-even-ai-ready-bound/receipt.json"
+    ready_bound, ready_bound_ref = receipt(ready_bound_path)
+    if ready_bound["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_READY_C" or \
+            ready_bound["base_sha256"] != main_obj["sha256"] or \
+            ready_bound["unresolved_before"] != 172 or \
+            ready_bound["unresolved_after"] != 183 or \
+            ready_bound["imports_resolved"] != ["audio_even_ai_ready_4e20f2"] or \
+            len(ready_bound["imports_added"]) != 12 or \
+            ready_bound["oracle_receipt_sha256"] != ready_simple_ref["sha256"]:
+        raise RuntimeError("Apollo Main EvenAI ready binding changed")
+    main_obj = file_checked(ready_bound["linked_object"], ready_bound["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 183 or "audio_even_ai_ready_4e20f2" in actual or \
+            not set(ready_bound["imports_added"]) <= set(actual):
+        raise RuntimeError("Apollo Main EvenAI ready frontier changed")
+    accessors_path = G2 / "build/c-firmware/20261016/main-even-ai-ready-accessors/receipt.json"
+    accessors, accessors_ref = receipt(accessors_path)
+    if accessors["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_READY_ACCESSORS_C" or \
+            accessors["base_sha256"] != main_obj["sha256"] or \
+            accessors["unresolved_before"] != 183 or \
+            accessors["unresolved_after"] != 181 or \
+            accessors["imports_resolved"] != ["audio_even_ai_stream_interval_get_4e550a",
+                                              "audio_text_stream_pending_text_552ce8"] or \
+            accessors["imports_added"] or \
+            accessors["empty_string_stock_address"] != "0x552cf4":
+        raise RuntimeError("Apollo Main EvenAI ready accessor binding changed")
+    main_obj = file_checked(accessors["linked_object"], accessors["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 181 or any(x in actual for x in accessors["imports_resolved"]):
+        raise RuntimeError("Apollo Main EvenAI ready accessor frontier changed")
+    timer_path = G2 / "build/c-firmware/20261016/main-even-ai-common-timer/receipt.json"
+    timer, timer_ref = receipt(timer_path)
+    if timer["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_COMMON_TIMER_START_C" or \
+            timer["base_sha256"] != main_obj["sha256"] or \
+            timer["unresolved_before"] != 181 or timer["unresolved_after"] != 180 or \
+            timer["imports_resolved"] != ["audio_even_ai_timer_start_all_4e31a0"] or \
+            timer["imports_added"]:
+        raise RuntimeError("Apollo Main EvenAI common timer binding changed")
+    main_obj = file_checked(timer["linked_object"], timer["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 180 or "audio_even_ai_timer_start_all_4e31a0" in actual:
+        raise RuntimeError("Apollo Main EvenAI common timer frontier changed")
+    timer_stop_path = G2 / "build/c-firmware/20261016/main-even-ai-common-timer-stop/receipt.json"
+    timer_stop, timer_stop_ref = receipt(timer_stop_path)
+    if timer_stop["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_COMMON_TIMER_STOP_C" or \
+            timer_stop["base_sha256"] != main_obj["sha256"] or \
+            timer_stop["unresolved_before"] != 180 or timer_stop["unresolved_after"] != 179 or \
+            timer_stop["imports_resolved"] != ["audio_even_ai_common_timer_stop_4e2e86"] or \
+            timer_stop["imports_added"]:
+        raise RuntimeError("Apollo Main EvenAI common timer stop binding changed")
+    main_obj = file_checked(timer_stop["linked_object"], timer_stop["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 179 or "audio_even_ai_common_timer_stop_4e2e86" in actual:
+        raise RuntimeError("Apollo Main EvenAI common timer stop frontier changed")
+    text_init_path = G2 / "build/c-firmware/20261016/main-even-ai-init-text-stream/receipt.json"
+    text_init, text_init_ref = receipt(text_init_path)
+    if text_init["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_INIT_TEXT_STREAM_C" or \
+            text_init["base_sha256"] != main_obj["sha256"] or \
+            text_init["unresolved_before"] != 179 or text_init["unresolved_after"] != 179 or \
+            text_init["imports_resolved"] != ["audio_even_ai_init_text_stream_4e551e"] or \
+            text_init["imports_added"] != ["audio_text_stream_create_552b30"]:
+        raise RuntimeError("Apollo Main EvenAI text initializer binding changed")
+    main_obj = file_checked(text_init["linked_object"], text_init["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 179 or "audio_even_ai_init_text_stream_4e551e" in actual or \
+            "audio_text_stream_create_552b30" not in actual:
+        raise RuntimeError("Apollo Main EvenAI text initializer frontier changed")
+    text_create_path = G2 / "build/c-firmware/20261016/main-text-stream-create/receipt.json"
+    text_create, text_create_ref = receipt(text_create_path)
+    if text_create["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_CREATE_C" or \
+            text_create["base_sha256"] != main_obj["sha256"] or \
+            text_create["unresolved_before"] != 179 or text_create["unresolved_after"] != 179 or \
+            text_create["imports_resolved"] != ["audio_text_stream_create_552b30"] or \
+            text_create["imports_added"] != ["audio_text_stream_buffer_create_553338"]:
+        raise RuntimeError("Apollo Main text-stream allocator binding changed")
+    main_obj = file_checked(text_create["linked_object"], text_create["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 179 or "audio_text_stream_create_552b30" in actual or \
+            "audio_text_stream_buffer_create_553338" not in actual:
+        raise RuntimeError("Apollo Main text-stream allocator frontier changed")
+    text_buffer_path = G2 / "build/c-firmware/20261016/main-text-stream-buffer-create/receipt.json"
+    text_buffer, text_buffer_ref = receipt(text_buffer_path)
+    if text_buffer["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_BUFFER_CREATE_C" or \
+            text_buffer["base_sha256"] != main_obj["sha256"] or \
+            text_buffer["unresolved_before"] != 179 or text_buffer["unresolved_after"] != 179 or \
+            text_buffer["imports_resolved"] != ["audio_text_stream_buffer_create_553338"] or \
+            text_buffer["imports_added"] != ["audio_file_heap_realloc"]:
+        raise RuntimeError("Apollo Main text-stream buffer binding changed")
+    main_obj = file_checked(text_buffer["linked_object"], text_buffer["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 179 or "audio_text_stream_buffer_create_553338" in actual or \
+            "audio_file_heap_realloc" not in actual:
+        raise RuntimeError("Apollo Main text-stream buffer frontier changed")
+    heap_realloc_path = G2 / "build/c-firmware/20261016/main-file-heap-realloc/receipt.json"
+    heap_realloc, heap_realloc_ref = receipt(heap_realloc_path)
+    if heap_realloc["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_HEAP_REALLOC_C" or \
+            heap_realloc["base_sha256"] != main_obj["sha256"] or \
+            heap_realloc["unresolved_before"] != 179 or heap_realloc["unresolved_after"] != 178 or \
+            heap_realloc["imports_resolved"] != ["audio_file_heap_realloc"] or \
+            heap_realloc["imports_added"]:
+        raise RuntimeError("Apollo Main file-heap realloc binding changed")
+    main_obj = file_checked(heap_realloc["linked_object"], heap_realloc["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 178 or "audio_file_heap_realloc" in actual:
+        raise RuntimeError("Apollo Main file-heap realloc frontier changed")
+    heap_ram_path = G2 / "build/c-firmware/20261016/main-file-heap-ram-cells/receipt.json"
+    heap_ram, heap_ram_ref = receipt(heap_ram_path)
+    if heap_ram["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_HEAP_RAM_CELLS" or \
+            heap_ram["base_sha256"] != main_obj["sha256"] or \
+            heap_ram["unresolved_before"] != 178 or heap_ram["unresolved_after"] != 176 or \
+            heap_ram["imports_resolved"] != ["g2_codec_heap_mutex", "g2_codec_heap_pool"] or \
+            heap_ram["imports_added"] or \
+            heap_ram["placements"] != {"g2_codec_heap_mutex": "0x200748f8",
+                                       "g2_codec_heap_pool": "0x20074abc"}:
+        raise RuntimeError("Apollo Main file-heap RAM binding changed")
+    main_obj = file_checked(heap_ram["linked_object"], heap_ram["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 176 or any(x in actual for x in heap_ram["imports_resolved"]):
+        raise RuntimeError("Apollo Main file-heap RAM frontier changed")
+    pool_init_path = G2 / "build/c-firmware/20261016/main-file-tlsf-pool-init/receipt.json"
+    pool_init, pool_init_ref = receipt(pool_init_path)
+    if pool_init["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_TLSF_POOL_INIT_C" or \
+            pool_init["base_sha256"] != main_obj["sha256"] or \
+            pool_init["unresolved_before"] != 176 or pool_init["unresolved_after"] != 176 or \
+            pool_init["provider_linked"] != "audio_file_tlsf_pool_init_5eda64" or \
+            pool_init["startup_wired"] or pool_init["imports_resolved"] or pool_init["imports_added"]:
+        raise RuntimeError("Apollo Main TLSF pool initializer binding changed")
+    main_obj = file_checked(pool_init["linked_object"], pool_init["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 176:
+        raise RuntimeError("Apollo Main TLSF pool initializer frontier changed")
+    backing_path = G2 / "build/c-firmware/20261016/main-file-tlsf-backing-ram/receipt.json"
+    backing, backing_ref = receipt(backing_path)
+    if backing["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_TLSF_BACKING_RAM" or \
+            backing["base_sha256"] != main_obj["sha256"] or \
+            backing["unresolved_before"] != 176 or backing["unresolved_after"] != 176 or \
+            backing["stock_address"] != "0x20208e70" or backing["size"] != "0x70800" or \
+            backing["end_exclusive"] != "0x20279670" or \
+            backing["startup_wired"] or backing["imports_resolved"] or backing["imports_added"]:
+        raise RuntimeError("Apollo Main TLSF backing RAM binding changed")
+    main_obj = file_checked(backing["linked_object"], backing["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 176:
+        raise RuntimeError("Apollo Main TLSF backing RAM frontier changed")
+    redirect_path = G2 / "build/c-firmware/20261016/main-file-redirect-init/receipt.json"
+    redirect, redirect_ref = receipt(redirect_path)
+    if redirect["status"] != "PASS_EXPERIMENTAL_MAIN_FILE_REDIRECT_INIT_C" or \
+            redirect["base_sha256"] != main_obj["sha256"] or \
+            redirect["unresolved_before"] != 176 or redirect["unresolved_after"] != 176 or \
+            redirect["provider_linked"] != "audio_file_redirect_init_474d9c" or \
+            redirect["ram_address"] != "0x200748f4" or redirect["startup_wired"] or \
+            redirect["imports_resolved"] or redirect["imports_added"]:
+        raise RuntimeError("Apollo Main redirect initializer binding changed")
+    main_obj = file_checked(redirect["linked_object"], redirect["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 176:
+        raise RuntimeError("Apollo Main redirect initializer frontier changed")
+    stream_stop_path = G2 / "build/c-firmware/20261016/main-even-ai-stop-streaming/receipt.json"
+    stream_stop, stream_stop_ref = receipt(stream_stop_path)
+    if stream_stop["status"] != "PASS_EXPERIMENTAL_MAIN_EVEN_AI_STOP_STREAMING_C" or \
+            stream_stop["base_sha256"] != main_obj["sha256"] or \
+            stream_stop["unresolved_before"] != 176 or stream_stop["unresolved_after"] != 177 or \
+            stream_stop["imports_resolved"] != ["audio_even_ai_stop_current_streaming_4e557c"] or \
+            stream_stop["imports_added"] != ["audio_text_stream_pause_552d40",
+                                              "audio_text_stream_stop_552d10"]:
+        raise RuntimeError("Apollo Main EvenAI stop-stream binding changed")
+    main_obj = file_checked(stream_stop["linked_object"], stream_stop["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 177 or "audio_even_ai_stop_current_streaming_4e557c" in actual or \
+            not set(stream_stop["imports_added"]) <= set(actual):
+        raise RuntimeError("Apollo Main EvenAI stop-stream frontier changed")
+    stop_pause_path = G2 / "build/c-firmware/20261016/main-text-stream-stop-pause/receipt.json"
+    stop_pause, stop_pause_ref = receipt(stop_pause_path)
+    if stop_pause["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_STOP_PAUSE_C" or \
+            stop_pause["base_sha256"] != main_obj["sha256"] or \
+            stop_pause["unresolved_before"] != 177 or stop_pause["unresolved_after"] != 175 or \
+            stop_pause["imports_resolved"] != ["audio_text_stream_pause_552d40",
+                                                "audio_text_stream_stop_552d10"] or \
+            stop_pause["imports_added"]:
+        raise RuntimeError("Apollo Main text-stream stop/pause binding changed")
+    main_obj = file_checked(stop_pause["linked_object"], stop_pause["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or any(x in actual for x in stop_pause["imports_resolved"]):
+        raise RuntimeError("Apollo Main text-stream stop/pause frontier changed")
+    text_copy_path = G2 / "build/c-firmware/20261016/main-text-stream-copy-bytes/receipt.json"
+    text_copy, text_copy_ref = receipt(text_copy_path)
+    if text_copy["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_COPY_BYTES_C" or \
+            text_copy["base_sha256"] != main_obj["sha256"] or \
+            text_copy["unresolved_before"] != 175 or text_copy["unresolved_after"] != 174 or \
+            text_copy["imports_resolved"] != ["audio_text_stream_copy_bytes_553274"] or \
+            text_copy["imports_added"]:
+        raise RuntimeError("Apollo Main text-stream copy binding changed")
+    main_obj = file_checked(text_copy["linked_object"], text_copy["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 174 or "audio_text_stream_copy_bytes_553274" in actual:
+        raise RuntimeError("Apollo Main text-stream copy frontier changed")
+    set_text_path = G2 / "build/c-firmware/20261016/main-text-stream-set-text/receipt.json"
+    set_text, set_text_ref = receipt(set_text_path)
+    if set_text["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_SET_TEXT_C" or \
+            set_text["base_sha256"] != main_obj["sha256"] or \
+            set_text["unresolved_before"] != 174 or set_text["unresolved_after"] != 177 or \
+            set_text["imports_resolved"] != ["audio_text_stream_set_text_552c20"] or \
+            set_text["imports_added"] != ["audio_text_stream_dispatch_552df0",
+                                          "audio_text_stream_next_interval_5532f8",
+                                          "audio_text_stream_restart_552db2",
+                                          "audio_text_stream_validate_5533cc"]:
+        raise RuntimeError("Apollo Main text-stream set-text binding changed")
+    main_obj = file_checked(set_text["linked_object"], set_text["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 177 or "audio_text_stream_set_text_552c20" in actual or \
+            not set(set_text["imports_added"]) <= set(actual):
+        raise RuntimeError("Apollo Main text-stream set-text frontier changed")
+    decision_path = G2 / "build/c-firmware/20261016/main-text-stream-decision-helpers/receipt.json"
+    decision, decision_ref = receipt(decision_path)
+    if decision["status"] != "PASS_EXPERIMENTAL_MAIN_TEXT_STREAM_DECISION_HELPERS_C" or \
+            decision["base_sha256"] != main_obj["sha256"] or \
+            decision["unresolved_before"] != 177 or decision["unresolved_after"] != 175 or \
+            decision["imports_resolved"] != ["audio_text_stream_next_interval_5532f8",
+                                              "audio_text_stream_validate_5533cc"] or \
+            decision["imports_added"]:
+        raise RuntimeError("Apollo Main text-stream decision binding changed")
+    main_obj = file_checked(decision["linked_object"], decision["linked_sha256"])
+    actual = undefined(ROOT / main_obj["path"])
+    if len(actual) != 175 or any(x in actual for x in decision["imports_resolved"]):
+        raise RuntimeError("Apollo Main text-stream decision frontier changed")
     images["apollo_main"] = {
         "receipt": main_ref, "candidate": main_obj,
         "prior_dm_registry_extent_gate": registry_ref,
@@ -1955,15 +2712,103 @@ def main():
         "legal_fade_helpers": legal_helpers_ref,
         "legal_regulatory_chain": legal_chain_ref,
         "legal_page_helpers": legal_page_helpers_ref,
+        "legal_assets": legal_assets_ref,
+        "legal_assets_bound": legal_assets_bound_ref,
+        "legal_page_builder_5bf332": legal_builder_ref,
+        "legal_page_builder_bound": legal_builder_bound_ref,
+        "align_to_43f6d6": align_oracle_ref,
+        "align_to_bound": align_bound_ref,
+        "even_ai_common_data_4e2976": even_ai_oracle_ref,
+        "even_ai_common_data_bound": even_ai_bound_ref,
+        "even_ai_prepare_4e1f7c": even_ai_prepare_oracle_ref,
+        "even_ai_prepare_bound": even_ai_prepare_bound_ref,
+        "os_mutex_new_44971c": mutex_oracle_ref,
+        "os_mutex_new_bound": mutex_bound_ref,
+        "os_mutex_alloc_wrappers_4416d6": alloc_wrappers_oracle_ref,
+        "os_mutex_alloc_wrappers_bound": alloc_wrappers_bound_ref,
+        "os_mutex_register_4416b8": mutex_register_oracle_ref,
+        "os_mutex_register_bound": mutex_register_bound_ref,
+        "os_irq_context_44900e": irq_oracle_ref,
+        "os_irq_context_bound": irq_bound_ref,
+        "os_scheduler_state_4558a4": scheduler_oracle_ref,
+        "os_scheduler_state_bound": scheduler_bound_ref,
+        "os_interrupt_mask_5fa0a4": mask_oracle_ref,
+        "os_interrupt_mask_bound": mask_bound_ref,
+        "os_queue_create_cores_4415ca": queue_cores_oracle_ref,
+        "os_queue_create_cores_bound": queue_cores_bound_ref,
+        "os_queue_initialize_441696": queue_init_oracle_ref,
+        "os_queue_initialize_bound": queue_init_bound_ref,
+        "os_queue_reset_441516": queue_reset_oracle_ref,
+        "os_queue_reset_bound": queue_reset_bound_ref,
+        "os_list_initialize_45607c": list_init_oracle_ref,
+        "os_list_initialize_bound": list_init_bound_ref,
+        "even_ai_frame_chain_bound": even_ai_chain_ref,
+        "even_ai_ram_state_bound": even_ai_ram_ref,
+        "os_scheduler_state_ram_bound": scheduler_ram_ref,
+        "dashboard_layout_current_ram_bound": dashboard_ram_ref,
+        "efs_transfer_state_ram_bound": efs_ram_ref,
+        "ble_flash_staging_ram_bound": flash_staging_ref,
+        "battery_callback_manager_ram_bound": battery_manager_ref,
+        "ble_flash_callbacks_ram_bound": ble_callbacks_ref,
+        "tpl_response_buffer_ram_bound": tpl_buffer_ref,
+        "tpl_timeout_ids_ram_bound": tpl_timeout_ref,
+        "tpl_service_row0_ram_bound": tpl_row_ref,
+        "even_ai_local_decode_bound": local_decode_ref,
+        "even_ai_notify_encoders_bound": notify_ref,
+        "even_ai_ready_ram_bound": ready_ram_ref,
+        "even_ai_ready_simple_candidate_oracle": ready_simple_ref,
+        "even_ai_ready_bound": ready_bound_ref,
+        "even_ai_ready_accessors_bound": accessors_ref,
+        "even_ai_common_timer_start_bound": timer_ref,
+        "even_ai_common_timer_stop_bound": timer_stop_ref,
+        "even_ai_init_text_stream_bound": text_init_ref,
+        "text_stream_create_bound": text_create_ref,
+        "text_stream_buffer_create_bound": text_buffer_ref,
+        "file_heap_realloc_bound": heap_realloc_ref,
+        "file_heap_ram_cells_bound": heap_ram_ref,
+        "file_tlsf_pool_init_bound": pool_init_ref,
+        "file_tlsf_backing_ram_bound": backing_ref,
+        "file_redirect_init_bound": redirect_ref,
+        "even_ai_stop_streaming_bound": stream_stop_ref,
+        "text_stream_stop_pause_bound": stop_pause_ref,
+        "text_stream_copy_bytes_bound": text_copy_ref,
+        "text_stream_set_text_bound": set_text_ref,
+        "text_stream_decision_helpers_bound": decision_ref,
         "settings_last_message_ram_extent": {"current_source_receipt": ram_ref, "selected_object_bytes": selected_ram_bytes, "required_minimum_bytes": 104, "integrated": selected_ram_bytes == 104},
         "unresolved_count": len(actual), "unresolved_symbols": actual,
         "source_complete": False, "full_payload_linked": False,
-        "remaining_gate": ["182 current imports; the dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
+        "remaining_gate": ["175 current imports; the dominant-hand subtree has C-bound handlers and descendants, need source ownership or attributed external contracts; advertising logging branches and final RAM placement remain outside their bounded oracles. Onboarding event packet, state and sequence RAM and silent-mode showing-UI RAM need final placement. HUB threshold double arithmetic remains controlled in the bounded oracle because Unicorn M-class rejects it.",
                            "All eight DM dispatch entries and the exposed security children now have C bodies; whole-image source and placement remain open.",
                            "DM storage is a 196-byte bounded C-owned block with a registry alias; full allocation extent and final RAM placement remain open.",
                            "Gray and production-test UI registry contexts each have only an observed eight-byte C reservation; full allocation extent, initialization and final RAM placement remain open.",
                            "Distortion-screen 0x5cf330 and six style wrappers are C-bound with 28 callback and 48 wrapper stock comparisons. The 24x24 pixel resource and two text strings match stock bytes; final RAM and image placement remain open.",
-                           "Legal-regulatory UI callback 0x5bf7b8, fade action 0x58c238 and two fade helpers are C-bound with 140, 300 and 64 controlled native comparisons; seven page-helper/style entries have 112 direct cases. The page builder 0x5bf332 remains an import; its text and bitmap assets, root-cell allocation extent and final RAM placement remain open.",
+                           "Legal-regulatory UI callback 0x5bf7b8, fade action 0x58c238 and two fade helpers are C-bound with 140, 300 and 64 controlled native comparisons; seven page-helper/style entries have 112 direct cases. All 38 legal text/image resource rows are source-owned with 48 pointer relocations. The page builder 0x5bf332 passes a 333-lower-call stock comparison. Its 0x43f6d6 alignment child is C-bound after 230 controlled stock comparisons, with all eleven lower calls resolving to previously bound C; root-cell allocation extent and final RAM placement remain open.",
+                           "EvenAI common-data handler 0x4e2976 and its lazy prepare/OS descendants are C-bound. The frame, ten receive handlers, ten transmit handlers, shared service, common response encoder, state mutex wrappers, heartbeat timer, descriptor, and pinned nanopb are bound in an experimental relocatable chain. Seven EvenAI and two scheduler RAM cells have bounded source-owned NOLOAD placement checks. Logging branch oracles cover the frame's extended and compressed formats and first value; handler logging, startup, final global RAM collision, and whole-image placement remain open. CMSIS/FreeRTOS decisions match the pinned CMSIS-FreeRTOS submodule source.",
+                           "Dashboard layout current RAM at 0x200e7934 has a bounded 128-byte source-owned NOLOAD reservation from the stock pointer and C copy extent; full allocation/startup and final image placement remain open.",
+                           "EFS transfer RAM at 0x20071cc8 has a bounded 0x76-byte source-owned NOLOAD reservation through the observed active flag at offset 0x75; the complete allocation extent, startup, and final image placement remain open.",
+                           "BLE bond erase staging RAM at 0x200636a0 has a source-owned 0x0a00-byte NOLOAD reservation matching the initialized live byte-count cell and stock pointer. Runtime size mutations, complete allocation extent, and final startup/layout remain open.",
+                           "Charge and ring-battery callback-manager RAM pointers now have source-owned 12-byte NOLOAD spans at 0x20073f78 and 0x20073f90. The manager source accesses only the first 12 bytes; full allocation extents and final startup/layout remain open.",
+                           "BLE flash callbacks RAM at 0x20073270 has a source-owned 0x3c-byte NOLOAD reservation matching the stock initializer clear extent. The current C caller accesses the first two words; final startup/layout and hardware behavior remain open.",
+                           "TPL response buffer RAM at 0x20004204 has a source-owned eight-byte NOLOAD reservation matching the current C caller's bounded access and transmit length. Stock initialization, complete allocation extent, final layout, and hardware behavior remain open.",
+                           "TPL delayed callback argument RAM at 0x20074b04 has a source-owned three-byte NOLOAD reservation matching the stock three-byte writer. Producer history, complete allocation extent, final layout, and hardware behavior remain open.",
+                           "TPL service table row zero at 0x20071414 has a source-owned 20-byte NOLOAD reservation matching the authenticated service-zero registration caller and response callback access. Dynamic service indices, full table extent, final layout, and hardware behavior remain open.",
+                           "EvenAI local decoder 0x498092 is C-bound after 32 native comparisons of returns, state, config, notification arguments, and enabled log metadata and first values. Its two notification encoder bodies are also C-bound after 136 controlled stock comparisons including enabled logger metadata and first formatted values, with a source-owned one-byte sequence cell at 0x20074ff9. Logger side effects and later variadic values, final layout/startup, and hardware execution remain open.",
+                           "EvenAI ready 0x4e20f2 is C-bound after 84 controlled native comparisons across startup alternatives, text carryover, reply, skill, 0/1/0x1ff/0x200 text lengths, and enabled log metadata and first values. Its RAM includes provisional state at 0x2006f138 (0x218 bytes), text-stream handle 0x20074c04, and two 0x400-byte text buffers. Twelve descendant providers became explicit imports. Known service-dispatch ingress caps text at 0x200; indirect or unseen writers, malformed inputs, logger side effects, later variadic values, final layout/startup, and hardware execution remain open.",
+                           "EvenAI ready interval and pending-text accessors are C-bound after seven stock comparisons, including the null-handle empty string at 0x552cf4. The final text-stream object lifetime and whole-image placement remain open.",
+                           "EvenAI common timer and start-all paths match stock in 36 controlled role/duration/tick cases, including callback order, RAM writes, and ABI returns. Common timer stop also matches stock in 16 RAM/logging cases. Logger side effects, final RAM placement, and whole-image integration remain open.",
+                           "EvenAI text-stream initializer 0x4e551e matches stock in 32 existing/new/failed allocation and logger-mode cases. It is C-bound; allocator 0x552b30 is now an explicit unresolved import. Logger side effects and text-stream object lifetime remain open.",
+                           "Text-stream allocator 0x552b30 matches stock in five allocation/mutex/first-buffer/second-buffer/success cases, including 0x30-byte object bytes and cleanup call order. Its buffer constructor 0x553338 is now an explicit unresolved import; full lifecycle remains open.",
+                           "Text-stream buffer capacity provider 0x553338 matches stock in 100 owner/capacity/growth/reallocation/log cases. It is C-bound; heap reallocator 0x474d54 is now an explicit unresolved import. Heap and logger effects remain open.",
+                           "File-heap realloc wrapper 0x474d54 matches stock in 16 mutex/TLSF/return/error-call cases and is C-bound against existing mutex and TLSF providers. Its two heap RAM cells and final placement remain open.",
+                           "File-heap mutex and pool pointer cells are C-owned as four-byte NOLOAD storage at stock addresses 0x200748f8 and 0x20074abc, with standalone placement verified. Startup values, final global layout, and hardware remain open.",
+                           "TLSF pool initializer 0x5eda64 is C-linked after 16 stock comparisons of the 0x70800-byte zeroing call, TLSF call, pool-handle write and log metadata. Its backing range 0x20208e70..0x20279670 is source-owned NOLOAD storage with standalone placement verified. Independent writers, global collision, and boot ordering remain open.",
+                           "Redirect initializer 0x474d9c is C-linked after 32 stock comparisons of both mutex cells, return, and log branches. Its companion mutex cell at 0x200748f4 is source-owned NOLOAD storage; boot wiring and final global placement remain open.",
+                           "EvenAI stop-current-streaming 0x4e557c is C-bound after 40 stock comparisons of handle/mode, stop/pause calls, bounded 0x20-byte display-state clear and logging. Its two text-stream descendants are explicit imports; complete display-state allocation and child side effects remain open.",
+                           "Text-stream stop 0x552d10 and pause 0x552d40 match stock in 64 controlled object/mutex/timer/buffer cases and are C-bound against existing mutex and timer-stop providers. Complete object lifetime and hardware behavior remain open.",
+                           "Text-stream copy-bytes 0x553274 matches stock in 96 controlled 16-bit clamp, mutex, capacity, copy, callback and object-byte cases and is C-bound. Callback effects, malformed objects, and full lifetime remain open.",
+                           "EvenAI ready set-text calls now declare and pass the stock fifth stack argument zero, observed at 0x4e24cc and 0x4e269c. The 84-case ready oracle records that argument at intercepted set-text calls; downstream Apollo bindings were rebuilt.",
+                           "Text-stream set-text 0x552c20 matches stock in 288 controlled five-argument validation, append/replace, capacity, dispatch and return cases. It is C-bound; four helper routines are now explicit imports. Helper effects and malformed inputs remain open.",
+                           "Text-stream validation 0x5533cc and next-interval 0x5532f8 match stock in 120 controlled mode/string and signed-arithmetic cases. They are C-bound; restart and dispatch remain unresolved.",
                            "Complete data/startup/layout and physical execution remain unproved."],
     }
     if set(images) != {"codec", "ble_em9305", "touch", "case", "apollo_bootloader", "apollo_main"}:

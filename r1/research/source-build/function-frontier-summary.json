@@ -46,6 +46,16 @@
     "rtos-unordered-event/evidence.json": "a74514dc2d4e4fd40d68a8327b9208ed859a487019fba3471729f51fafd2d2e8"
   },
   "input_reports": {
+    "native-protocol-serial/report.json": "89eb6967125cca23d41d36e7da14b8e2a84f216bab6c110f56ee90e9ceeaa3cc",
+    "native-protocol-ack/report.json": "04bfce026ad4579622a8b100fd5921493ce6bf7eddb23c90f303d39a255ff5c4",
+    "native-health-commands/report.json": "0916878bfe4e226f066a47d871078e046bb5e34319802fe44bade7c8c91e9ef7",
+    "native-protocol-reset/report.json": "b5434fd3b2077a4986d3a69eb3068bc60d35aeab0ba0df4f418ff62cc7d8e423",
+    "native-daily-metadata/report.json": "2a01c9ec7298f37c55f6406d6765ecb00d6df5dbd46fddff9c0c457d0f7cc810",
+    "native-vbat-cache/report.json": "5adfe5112dbc21cfb6a93455fd20ca6ab2d40eb73ca93fb84b4fc15d98bc87a1",
+    "native-reset-writer/report.json": "c3bd752ff5a26a980481d676364c45fe265a2b54311f4b80874afb13881b9dba",
+    "native-reset-retained/report.json": "debca6d0c33e993e10f287db3bcbb36ca2b9d1298c0ba6b2abcbdc1a41d45b0c",
+    "native-reset-decoder/report.json": "adfdafe9a6804faf136da29126c675c57e4fec4a5403031d4bdc3190d4b192a4",
+    "native-gxt310-mode/report.json": "a2c6c8c605bf2ced4555a5f4f0d558521538a44fc09f3faa91d780d4c914323a",
     "native-gxt310-bus/report.json": "3d44f168387d63578e586ba7fddc2da6fec63087634c0c037034dcaae258f75b",
     "native-gxt310-id/report.json": "07c75e3aa013b240b501d24d6d5db25de467914467775029f30728f1c0081fdf",
     "native-yhm-chip-id/report.json": "9dbb1d9790bc30d3e75b1aa043f3c0e8475d088364ef7d4384dc9288079d003c",
@@ -289,9 +299,9 @@
   },
   "ownership_entries": 3326,
   "counts": {
-    "tested_contract_candidate": 756,
-    "unresolved_source_route": 1196,
-    "compiled_symbol_hint": 1374
+    "tested_contract_candidate": 816,
+    "unresolved_source_route": 1140,
+    "compiled_symbol_hint": 1370
   },
   "providers": {
     "arm_cmsis_freertos_10_5_1": {
@@ -341,7 +351,8 @@
       "compiled_symbol_hint": 126
     },
     "gxcas_gxt310_candidate": {
-      "compiled_symbol_hint": 8
+      "tested_contract_candidate": 4,
+      "compiled_symbol_hint": 4
     },
     "kokke_tiny_aes_c_v1_0_0_compatible": {
       "unresolved_source_route": 7,
@@ -406,8 +417,8 @@
       "tested_contract_candidate": 2
     },
     "r1_product_specific": {
-      "tested_contract_candidate": 146,
-      "unresolved_source_route": 613,
+      "tested_contract_candidate": 200,
+      "unresolved_source_route": 559,
       "compiled_symbol_hint": 5
     },
     "r1_provider_configuration_glue": {
@@ -460,8 +471,8 @@
     },
     "unknown_time_calendar_provider_candidate": {
       "compiled_symbol_hint": 1,
-      "tested_contract_candidate": 7,
-      "unresolved_source_route": 8
+      "tested_contract_candidate": 9,
+      "unresolved_source_route": 6
     },
     "yhmicros_yhm2710_candidate": {
       "tested_contract_candidate": 31,

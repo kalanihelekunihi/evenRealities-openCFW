@@ -1,0 +1,37 @@
+{
+  "comparisons": 16572,
+  "callback_observations_per_side": 495412,
+  "trace_sha256": "6bf4c8718ba9efc38840e5b2d0b47168b25b46de0c294d8aa231f73fa956a847",
+  "actual_source_cache_selfcheck_bus_requests_mode_pair_controls_channel_veneers_and_ids": true,
+  "only_registry_and_logging_are_named_fixtures": true,
+  "all_four_mode_writes_both_reads_and_cleanup_order_checked": true,
+  "full_four_byte_mode_words_and_zero_read_words_checked": true,
+  "cold_c_state_used": true,
+  "registry_null_device_status_fixture_is_one": true,
+  "raw_r0_callee_integer_stack_and_typed_callback_args_checked": true,
+  "full_observed_nonstack_ram_compared_with_two_pointer_words_normalized": true,
+  "normalized_pointer_fields": [
+    "state+8 write_pointer",
+    "state+16 read_pointer"
+  ],
+  "raw_persistent_pointer_values_equal": false,
+  "source_selected_strings_and_name_bytes": 388,
+  "source_state_bytes": 24,
+  "candidate_native_body_execution_forbidden": true,
+  "unicorn_memory_write_hooks_disabled": true,
+  "whole_startup_graph_executed": false,
+  "physical_sensor_verified": false,
+  "instruction_identity": false,
+  "full_raw_abi_verified": false,
+  "application_sha256": "0e788d433ea50fd36edb8f21a9c18b6062211e4a36dbc5bd7695ea5827f3aa1a",
+  "driver_sha256": "9d5c3346373b1c6b8ed7ac71a4a1361e6f9886e7913ad7e979864b8a56e26228",
+  "runtime_report_sha256": "1566620cdc95940fc337fac3c280b222643f6afdf696373e0446c9ba3e0e6d23",
+  "object_sha256": "8d26982119b855da1118c095fe990f46f5fd307b1fc5dc78e6083340df58cb1a",
+  "layout": "r1/source-config/runtime/native_gxt310_control_graph_verification.ld",
+  "layout_sha256": "a727ee1d5a24f7c1bd19034be044482202baf1e104665b56a1034dcf0af941a1",
+  "limitations": [
+    "Registry lookup/dispatch and logger bodies are fixtures; all intervening GXT providers execute source.",
+    "Two persistent request-pointer words refer to native/source private stack frames and are explicitly normalized after their typed buffer effects are checked.",
+    "Raw persistent pointer equality, private stack frames, full startup, physical I2C/sensors and byte-identical firmware remain unproven."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "units": [
+    {
+      "source": "r1/components/runtime/native_health_commands.c",
+      "source_sha256": "6ce01d2e42fbb9ad7c54e0f017eb51a6e90b9a0300eb559178be7609547bf5dc",
+      "command": [
+        "clang",
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m4",
+        "-mthumb",
+        "-munaligned-access",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-std=c11",
+        "-Os",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-fshort-enums",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-delete-null-pointer-checks",
+        "-I/Users/kalani/Repo/evenRealities-openCFW/r1/reconstructed",
+        "-isystem",
+        "/Users/kalani/Repo/evenRealities-openCFW/vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include",
+        "-MD",
+        "-MF",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-health-commands/native_health_commands.d",
+        "-c",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/components/runtime/native_health_commands.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/r1/research/source-build/native-health-commands/native_health_commands.o"
+      ],
+      "compiled": true,
+      "object_sha256": "be2842b2cfd32ac6d6a84b1a7fe0deb521c7d0b9ca6a42658da9c42dee1156ce",
+      "undefined": [
+        "r1_event_publish",
+        "r1_protocol_send_response",
+        "r1_service_health_report_set"
+      ],
+      "defined": [
+        "r1_activity_daily_handler",
+        "r1_health_history_noop_handler",
+        "r1_health_report_setting_plan",
+        "r1_heart_rate_daily_handler",
+        "r1_heart_rate_measurement_plan",
+        "r1_heart_rate_point_handler",
+        "r1_hrv_daily_handler",
+        "r1_hrv_point_handler",
+        "r1_protocol_send_flag_set_a",
+        "r1_protocol_send_flag_set_b",
+        "r1_protocol_send_flag_set_c",
+        "r1_sleep_daily_handler",
+        "r1_sleep_detail_plan",
+        "r1_spo2_daily_handler",
+        "r1_spo2_measurement_plan",
+        "r1_spo2_point_handler"
+      ],
+      "emitted_function_count": 16
+    }
+  ],
+  "inputs": {
+    "r1/components/runtime/native_health_commands.c": "6ce01d2e42fbb9ad7c54e0f017eb51a6e90b9a0300eb559178be7609547bf5dc",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/stdint.h": "99fe201684856075ccd92704f63b702f6fa882b9dab61bd7a9bcce2588275861",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/features.h": "92eead7ab3bf7ecb315fd81d0f1eaec250f6d8d7d8574e3cd5d7f80dc779e771",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/_newlib_version.h": "93a397574a25b9c143cee7fcb86d8fc9a0c9ba418e4710a30d2d19ba1e4120db",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_intsup.h": "1af8abe244b43a3a5b5a85f6c834aa206930b6938e8109fbec430bc140b68df5",
+    "vendor-cache/r1/gcc-arm-none-eabi-9-2020-q2-update/arm-none-eabi/include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7",
+    "r1/components/runtime/../board/native_battery_memory.h": "e646c981681787c87d8088f663239c9006beb4e4c1827e95854093f0628528b6"
+  },
+  "application_linked": false,
+  "instruction_identity": false
+}

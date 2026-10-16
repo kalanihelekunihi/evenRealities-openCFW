@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "compiler": "IAR C/C++ Compiler V10.10.2.628/LNX",
+  "container": "opencfw/iar-base:10.10.2-local",
+  "argv": [
+    "/opt/iar/cxarm-10.10.2/arm/bin/iccarm",
+    "--cpu",
+    "Cortex-M55",
+    "--cpu_mode",
+    "thumb",
+    "-Oh",
+    "/probe/probe.c",
+    "-o",
+    "/probe/probe-corrected.o"
+  ],
+  "returncode": 2,
+  "compiled": false,
+  "license_error": true,
+  "log": "build/toolchain-probe-20261016/iar-corrected.log",
+  "log_sha256": "c788d9b9fbd912f8ad23f58a9c392ab6c038eff3b212c2af859fcaf923f8bc48",
+  "correction": "Previous probe used unsupported --c11; this probe uses accepted options and reaches the actual licensing failure. Banner text alone is not license-error evidence."
+}
